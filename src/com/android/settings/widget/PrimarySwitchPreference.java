@@ -59,7 +59,7 @@ public class PrimarySwitchPreference extends RestrictedPreference {
 
     @Override
     protected int getSecondTargetResId() {
-        return R.layout.restricted_preference_widget_master_switch;
+        return R.layout.restricted_preference_widget_primary_switch;
     }
 
     @Override

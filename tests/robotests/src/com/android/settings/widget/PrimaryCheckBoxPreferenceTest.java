@@ -39,28 +39,28 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class MasterCheckBoxPreferenceTest {
+public class PrimaryCheckBoxPreferenceTest {
 
     private Context mContext;
-    private MasterCheckBoxPreference mPreference;
+    private PrimaryCheckBoxPreference mPreference;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mPreference = new MasterCheckBoxPreference(mContext);
+        mPreference = new PrimaryCheckBoxPreference(mContext);
     }
 
     @Test
     public void createNewPreference_shouldSetLayout() {
         assertThat(mPreference.getWidgetLayoutResource())
-                .isEqualTo(R.layout.preference_widget_master_checkbox);
+                .isEqualTo(R.layout.preference_widget_primary_checkbox);
     }
 
     @Test
     public void setChecked_shouldUpdateCheckBoxCheckedState() {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext).inflate(
-                  R.layout.preference_widget_master_checkbox, null));
+                  R.layout.preference_widget_primary_checkbox, null));
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
         mPreference.onBindViewHolder(holder);
 
@@ -75,7 +75,7 @@ public class MasterCheckBoxPreferenceTest {
     public void setEnabled_shouldUpdateCheckBoxEnabledState() {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext).inflate(
-                  R.layout.preference_widget_master_checkbox, null));
+                  R.layout.preference_widget_primary_checkbox, null));
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
         mPreference.onBindViewHolder(holder);
 
@@ -90,7 +90,7 @@ public class MasterCheckBoxPreferenceTest {
     public void setCheckboxEnabled_shouldOnlyUpdateCheckBoxEnabledState() {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext).inflate(
-                        R.layout.preference_widget_master_checkbox, null));
+                        R.layout.preference_widget_primary_checkbox, null));
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
         mPreference.onBindViewHolder(holder);
 
@@ -107,7 +107,7 @@ public class MasterCheckBoxPreferenceTest {
     public void onBindViewHolder_shouldSetCheckboxEnabledState() {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext).inflate(
-                        R.layout.preference_widget_master_checkbox, null));
+                        R.layout.preference_widget_primary_checkbox, null));
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
 
         mPreference.setCheckBoxEnabled(false);
@@ -129,7 +129,7 @@ public class MasterCheckBoxPreferenceTest {
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
         assertThat(widgetView).isNotNull();
 
-        inflater.inflate(R.layout.preference_widget_master_checkbox, widgetView, true);
+        inflater.inflate(R.layout.preference_widget_primary_checkbox, widgetView, true);
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
         mPreference.onBindViewHolder(holder);
 
@@ -148,7 +148,7 @@ public class MasterCheckBoxPreferenceTest {
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
         assertThat(widgetView).isNotNull();
 
-        inflater.inflate(R.layout.preference_widget_master_checkbox, widgetView, true);
+        inflater.inflate(R.layout.preference_widget_primary_checkbox, widgetView, true);
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
         mPreference.onBindViewHolder(holder);
         mPreference.setEnabled(false);
@@ -178,8 +178,8 @@ public class MasterCheckBoxPreferenceTest {
     @Test
     public void onBindViewHolder_checkBoxShouldHaveContentDescription() {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-            LayoutInflater.from(mContext)
-                .inflate(R.layout.preference_widget_master_checkbox, null));
+                LayoutInflater.from(mContext).inflate(R.layout.preference_widget_primary_checkbox,
+                        null));
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
         final String label = "TestButton";
         mPreference.setTitle(label);

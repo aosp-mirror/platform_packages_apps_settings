@@ -22,9 +22,12 @@ import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 
-public class MasterMonoPreferenceController extends TogglePreferenceController {
+/**
+ * A toggle preference controller for Primary Mono
+ */
+public class PrimaryMonoPreferenceController extends TogglePreferenceController {
 
-    public MasterMonoPreferenceController(Context context, String preferenceKey) {
+    public PrimaryMonoPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 

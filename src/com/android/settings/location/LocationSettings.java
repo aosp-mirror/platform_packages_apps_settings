@@ -71,8 +71,8 @@ public class LocationSettings extends DashboardFragment {
         super.onActivityCreated(savedInstanceState);
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setSwitchBarText(R.string.location_settings_master_switch_title,
-                R.string.location_settings_master_switch_title);
+        switchBar.setSwitchBarText(R.string.location_settings_primary_switch_title,
+                R.string.location_settings_primary_switch_title);
         mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
                 getSettingsLifecycle());
         switchBar.show();

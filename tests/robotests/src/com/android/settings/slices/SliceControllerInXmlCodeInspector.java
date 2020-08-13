@@ -54,13 +54,13 @@ public class SliceControllerInXmlCodeInspector extends CodeInspector {
     );
 
     private final List<String> mXmlDeclaredControllers = new ArrayList<>();
-    private final List<String> mGrandfatheredClasses = new ArrayList<>();
+    private final List<String> mExemptedClasses = new ArrayList<>();
 
     private final String ERROR_MISSING_CONTROLLER =
             "The following controllers were expected to be declared by "
                     + "'settings:controller=Controller_Class_Name' in their corresponding Xml. "
                     + "If it should not appear in XML, add the controller's classname to "
-                    + "grandfather_slice_controller_not_in_xml. Controllers:\n";
+                    + "exempt_slice_controller_not_in_xml. Controllers:\n";
 
     private final Context mContext;
     private final SearchFeatureProvider mSearchProvider;
@@ -73,8 +73,8 @@ public class SliceControllerInXmlCodeInspector extends CodeInspector {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchProvider;
 
-        CodeInspector.initializeGrandfatherList(mGrandfatheredClasses,
-                "grandfather_slice_controller_not_in_xml");
+        CodeInspector.initializeExemptList(mExemptedClasses,
+                "exempt_slice_controller_not_in_xml");
         initDeclaredControllers();
     }
 
@@ -111,13 +111,13 @@ public class SliceControllerInXmlCodeInspector extends CodeInspector {
             }
 
             if (!mXmlDeclaredControllers.contains(clazz.getName())) {
-                // Class clazz should have been declared in XML (unless whitelisted).
+                // Class clazz should have been declared in XML (unless allowlisted).
                 missingControllersInXml.add(clazz.getName());
             }
         }
 
-        // Removed whitelisted classes
-        missingControllersInXml.removeAll(mGrandfatheredClasses);
+        // Removed allowlisted classes
+        missingControllersInXml.removeAll(mExemptedClasses);
 
         final String missingControllerError =
                 buildErrorMessage(ERROR_MISSING_CONTROLLER, missingControllersInXml);

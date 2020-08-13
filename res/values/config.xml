@@ -120,8 +120,8 @@
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>
-        <item>toggle_master_mono</item>
-        <item>seekbar_master_balance</item>
+        <item>toggle_primary_mono</item>
+        <item>seekbar_primary_balance</item>
         <item>...</item>
         -->
     </string-array>
@@ -152,8 +152,8 @@
         -->
     </string-array>
 
-    <!-- List of packages that should be whitelisted for slice uri access. Do not translate -->
-    <string-array name="slice_whitelist_package_names" translatable="false"/>
+    <!-- List of packages that should be allowlisted for slice uri access. Do not translate -->
+    <string-array name="slice_allowlist_package_names" translatable="false"/>
 
     <!-- Whether or not App & Notification screen should display recently used apps -->
     <bool name="config_display_recent_apps">true</bool>

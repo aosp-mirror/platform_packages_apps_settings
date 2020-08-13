@@ -158,16 +158,16 @@
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
 
         <SwitchPreference
-            android:key="toggle_master_mono"
+            android:key="toggle_primary_mono"
             android:persistent="false"
-            android:summary="@string/accessibility_toggle_master_mono_summary"
-            android:title="@string/accessibility_toggle_master_mono_title"
-            settings:controller="com.android.settings.accessibility.MasterMonoPreferenceController"/>
+            android:summary="@string/accessibility_toggle_primary_mono_summary"
+            android:title="@string/accessibility_toggle_primary_mono_title"
+            settings:controller="com.android.settings.accessibility.PrimaryMonoPreferenceController"/>
 
         <com.android.settings.accessibility.BalanceSeekBarPreference
-            android:key="seekbar_master_balance"
+            android:key="seekbar_primary_balance"
             android:persistent="false"
-            android:title="@string/accessibility_toggle_master_balance_title"/>
+            android:title="@string/accessibility_toggle_primary_balance_title"/>
 
         <Preference
             android:key="hearing_aid_preference"
