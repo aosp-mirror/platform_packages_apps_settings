@@ -76,6 +76,10 @@ public class WifiCallingPreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
 
+        mQueryImsState = new MockWifiCallingQueryImsState(mContext, SUB_ID);
+        mQueryImsState.setIsEnabledByUser(true);
+        mQueryImsState.setIsProvisionedOnDevice(true);
+
         mPreference = new Preference(mContext);
         mController = spy(new WifiCallingPreferenceController(mContext, "wifi_calling") {
             @Override
@@ -85,8 +89,8 @@ public class WifiCallingPreferenceControllerTest {
         });
         mController.mCarrierConfigManager = mCarrierConfigManager;
         mController.init(SUB_ID);
-        mController.mImsManager = mImsManager;
         mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
+        doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
         mPreference.setKey(mController.getPreferenceKey());
 
         when(mController.getTelephonyManager(mContext, SUB_ID)).thenReturn(mTelephonyManager);
