@@ -28,4 +28,9 @@
         app:controller="com.android.settings.sound.MediaControlsPreferenceController"
         app:allowDividerAbove="true" />
 
+    <PreferenceCategory
+        android:key="media_controls_resumable_apps"
+        android:title="@string/media_controls_apps_title"
+        app:controller="com.android.settings.sound.ResumableMediaAppsController" />
+
 </PreferenceScreen>
