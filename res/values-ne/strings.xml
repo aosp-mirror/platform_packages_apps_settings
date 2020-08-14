@@ -296,7 +296,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"लक स्क्रिनमा प्रोफाइलको जानकारी देखाउनुहोस्"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"खाताहरू"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"स्थान"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"स्थान प्रयोग गर्नुहोस्"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"निष्क्रिय"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">सक्रिय - <xliff:g id="COUNT_1">%1$d</xliff:g> अनुप्रयोगसँग स्थानमाथिको पहुँच छ</item>
@@ -622,7 +623,6 @@
       <item quantity="one">अनिवार्य रूपमा <xliff:g id="NUMBER_0">%d</xliff:g> अङ्क भन्दा कम हुनु पर्छ</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"यन्त्र प्रशासकले पछिल्लो PIN प्रयोग गर्न अनुमति दिँदैन"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"तपाईंकसे IT व्यवस्थापकले धेरै प्रयोग हुने PIN हरूमाथि रोक लगाउनु भएको छ। कुनै फरक PIN प्रयोग गरी हेर्नुहोस्।"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"यसमा अमान्य वर्ण समावेश गर्न सकिँदैन"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"कम्तीमा एउटा अक्षर हुन अनिवार्य छ"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"कम्तीमा एउटा अङ्क हुन अनिवार्य छ"</string>
@@ -656,7 +656,6 @@
       <item quantity="one">कम्तीमा पनि एउटा गैर-सङ्ख्यात्मक वर्ण हुनु अनिवार्य छ</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"यन्त्रको प्रशासकले पछिल्लो पासवर्ड प्रयोग गर्ने अनुमति दिँदैन"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"तपाईंकसे IT व्यवस्थापकले धेरै प्रयोग हुने पासवर्डहरूमाथि रोक लगाउनु भएको छ। कुनै फरक पासवर्ड प्रयोग गरी हेर्नुहोस्।"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"बढ्दो, घट्दो वा दोहोरिएका अङ्कहरूको अनुक्रमलाई निषेध गरिएको छ"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"पुष्टि गर्नुहोस्"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"रद्द गर्नुहोस्"</string>
@@ -1042,8 +1041,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"अनुप्रयोगले सामग्री आदान प्रदान गर्दैछ। इन्टरनेट जडान साझा गर्न हटस्पट निष्क्रिय पार्नुहोस् र त्यसपछि फेरि सक्रिय गर्नुहोस्‌"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"पासवर्ड सेट गरिएको छैन"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"हटस्पटको नाम"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> अन गरिँदै…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"अन्य यन्त्रहरू <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> मा जडान गर्न सक्छन्"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"हटस्पटको पासवर्ड"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP ब्यान्ड"</string>
@@ -1606,48 +1604,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"सञ्जाल सेटिङहरू रिसेट गरियो"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM हरू मेट्न सकिँदैन"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"कुनै त्रुटि भएका कारण डाउनलोड गरिएका SIM हरू मेटाउन सकिएन।\n\nआफ्नो यन्त्र पुनः सुरु गरी फेरि प्रयास गर्नुहोस्।"</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"सबै डेटा मेटाउनुहोस् (फ्याक्ट्री रिसेट गर्नुहोस्)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"सबै डेटा मेटाउनुहोस् (फ्याक्ट्री रिसेट गर्नुहोस्)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"यसो गर्नुभयो भने तपाईंको ट्याब्लेटको "<b>"आन्तरिक भण्डारण"</b>"मा भएका निम्नलगायतका सबै डेटा मेटाइने छ:\n\n"<li>"तपाईंको Google खाता"</li>\n<li>"प्रणाली र एपका डेटा तथा सेटिङ"</li>\n<li>"डाउनलोड गरिएका एपहरू"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"यसो गर्नुभयो भने तपाईंको फोनको "<b>"आन्तरिक भण्डारण"</b>"मा भएका निम्नलगायतका सबै डेटा मेटाइने छ:\n\n"<li>"तपाईंको Google खाता"</li>\n<li>"प्रणाली र एपका डेटा तथा सेटिङ"</li>\n<li>"डाउनलोड गरिएका एपहरू"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n" \nतपाईं हाल निम्न खाताहरूमा साइन इन हुनुहुन्छ:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"यो यन्त्रमा अन्य प्रयोगकर्ताहरू छन्।\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"सङ्गीत"</li>\n<li>"फोटोहरू"</li>\n<li>"प्रयोगकर्ताको अन्य डेटा"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM हरू"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"यसो गर्नुभयो भने तपाईंको मोबाइल सेवा योजना रद्द गरिने छ।"</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n" \n सङ्गीत, फोटो तथा प्रयोगकर्ताको अन्य डेटा मेटाउनका लागि "<b>"USB भण्डारण"</b>" मेटाउनु पर्ने हुन्छ।"</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n" \n सङ्गीत, फोटो र प्रयोगकर्ताको अन्य डेटा मेटाउनका लागि "<b>" SD कार्ड "</b>" मेटाउनु पर्ने हुन्छ।"</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USB भण्डारण मेटाउनुहोस्"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD कार्ड मेटाउनुहोस्"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"आन्तरिक USB भण्डारणमा सबै डेटा मेटाउनुहोस्, जस्तै सङ्गीत वा फोटोहरू"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"SD कार्डबाट सबै डाटाहरू जस्तै सङ्गीत वा फोटोहरू मेटाउनुहोस्"</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"सबै डेटा मेट्नुहोस्"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"सबै डेटा मेट्नुहोस्"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"तपाईंका सबै व्यक्तिगत जानकारी र डाउनलोड गरिएका एपहरू मेटाइने छन्। तपाईं यो कार्य अन्डू गर्न सक्नुहुन्न।"</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"तपाईंका डाउनलोड गरिएका एप तथा SIM लगायत सबै व्यक्तिगत जानकारी मेटाइने छन्। तपाईं यो कार्य अन्डू गर्न सक्नुहुन्न।"</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"सबै डेटा मेट्ने हो?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"यी प्रयोगकर्ताले फ्याक्ट्री रिसेट गर्न पाउँदैनन्"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"मेटाइँदै छ"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"कृपया पर्खनुहोस्…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"कल सेटिङहरू"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"भ्वाइस मेल, कल फर्वार्ड, कल प्रतीक्षा, र कलर ID सेटअप गर्नुहोस्"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB टेथर गर्दै"</string>
@@ -2195,11 +2174,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"पावर बटनले कल काट्छ"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"ठुलो माउस पोइन्टर"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"एनिमेसनहरू हटाउनुहोस्"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"मोनो अडियो"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"अडियो प्ले गर्दा च्यानलहरूलाई संयोजन गर्नुहोस्"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"अडियोको सन्तुलन"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"बायाँ"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"दायाँ"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"पूर्वनिर्धारित"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"१० सेकेन्ड"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"३० सेकेन्ड"</string>
@@ -2229,12 +2213,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"सूचना आएको जनाउने कम्पन"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"कम्पनसहितको घन्टी"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"छोएर दिइने प्रतिक्रिया"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> प्रयोग गर्नुहोस्"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> खोल्नुहोस्"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"रङ्ग सुधार गर्ने सुविधा प्रयोग गर्नुहोस्"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"क्याप्सनहरू देखाउनुहोस्"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"यो सुविधा चल्ने एपहरूमा मात्र"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"क्याप्सनको आकार र शैली"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> पाठको आकार"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"थप विकल्पहरू"</string>
@@ -2264,8 +2251,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ड्युटेरानोमेली"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"प्रोटानोमेली"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"ट्रिटानोमेली"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"ग्रेस्केल"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"रातो-हरियो"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"रातो-हरियो"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"निलो-पहेँलो"</string>
@@ -2395,7 +2381,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"पृष्ठभूमिको प्रतिबन्ध"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"एपलाई पृष्ठभूमिमा चल्न अनुमति दिनुहोस्"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"एपलाई पृष्ठभूमिमा चल्न दिइएको छैन"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"पृष्ठभूमिको प्रयोगमा प्रतिबन्ध लगाउन सकिँदैन"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"पृष्ठभूमिको गतिविधिलाई सीमित गर्ने हो?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"तपाईंले कुनै एपको पृष्ठभूमिको गतिविधिलाई सीमित गर्नुभयो भने यसले सही तरिकाले काम नगर्न सक्छ"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"यो एपलाई ब्याट्री अप्टिमाइज गर्न भनी सेट नगरिएको हुनाले तपाईं यसमा बन्देज लगाउन सक्नुहुन्न।\n\nअनुप्रयोगमा बन्देज लगाउन पहिले ब्याट्री अप्टिमाइजेसन सुविधा सक्रिय गर्नुहोस्।"</string>
@@ -3078,8 +3065,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"टर्मिनलमा भुक्तानी"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"एउटा भुक्तानी एप सेटअप गर्नुहोस्। त्यसपछि आफ्नो फोनको पछाडिको भाग कन्ट्याक्टलेस सङ्केतभएको कुनै टर्मिनलले पहिचान गर्ने गरी होल्ड गर्नुहोस्।"</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"बुझेँ"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"थप…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"पूर्वनिर्धारित भुक्तानी एप सेट गर्नुहोस्"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"पूर्वनिर्धारित भुक्तानी एप परिवर्तन गर्नु…"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"कन्ट्याक्टलेस टर्मिनलमा <xliff:g id="APP">%1$s</xliff:g> मार्फत भुक्तानी गर्नुहोस्"</string>
@@ -3163,8 +3149,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"सधैं यो कलको लागि प्रयोग गर्नुहोस्"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"डेटाको लागि सिम चयन गर्नुहोस्"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SMS गर्न कुनै SIM चयन गर्नुहोस्"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"डेटा प्रयोग गर्ने SIM परिवर्तन गरिँदै छ, यसो गर्न एक मिनेटसम्म लाग्न सक्छ…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"संग कल"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"SIM कार्ड चयन गर्नुहोस्"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3307,8 +3292,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"दिनचर्या, समयतालिका, ब्याट्री सेभर, पावर सेभर, ब्याट्री, स्वचालित, प्रतिशत"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, कल गर्ने उन्नत सुविधा, 4g मार्फत कल गर्ने सुविधा"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"भाषा थप्नुहोस्, कुनै भाषा थप्नुहोस्"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"पाठको आकार"</string>
     <string name="default_sound" msgid="6604374495015245195">"पूर्वनिर्धारित ध्वनि"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"घन्टी तथा सूचनाको भोल्युम <xliff:g id="PERCENTAGE">%1$s</xliff:g> मा सेट छ"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"भोल्युम, कम्पन, बाधा नपुर्‍याउनुहोस्"</string>
@@ -3665,8 +3649,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"बाधा नपुर्‍यानुहोस् पहुँच"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"बाधा नपुर्‍याउनुहोस् नामक सुविधा सक्रिय गर्ने अनुमति दिनुहोस्"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"कुनै पनि स्थापित एपहरू द्वारा बाधा नपुर्‍यानुहोस् पहुँच को माग गरेका छैनन्"</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"एपहरू लोड गरिँदै…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"तपाईंको अनुरोधबमोजिम Android ले यस अनुप्रयोगका सूचनाहरूलाई यो यन्त्रमा देखाउन दिइरहेको छैन"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"तपाईंको अनुरोधबमोजिम Android ले सूचनाहरूको यस कोटिलाई यो यन्त्रमा देखिन दिइरहेको छैन"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"तपाईंको अनुरोधबमोजिम Android ले सूचनाहरूको यस समूहलाई यो यन्त्रमा देखाउन दिइरहेको छैन"</string>
@@ -4065,8 +4048,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"निम्नमध्ये USB नियन्त्रण गर्ने चिज"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"जडान गरिएको यन्त्र"</string>
     <string name="usb_control_device" msgid="527916783743021577">"यो यन्त्र"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"बदलिँदै…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"बदल्न सकिएन"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"यो यन्त्रलाई चार्ज गर्दै"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"जडान गरिएको यन्त्र चार्ज गर्दै"</string>
@@ -4313,7 +4295,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"विवरणहरू हेर्नुहोस्"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"डेटा सेभर"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"असीमित डेटा"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"पृष्ठभूमिको डेटालाई निष्क्रिय पारियो"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"सक्रिय गर्नुहोस्"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"निष्क्रिय गर्नुहोस्"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"डेटा सेभर प्रयोग गर्नुहोस्"</string>
@@ -4336,7 +4319,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"यदि यन्त्रलाई लक गरिएको छ भने सूचनाहरूमा जवाफ वा अन्य पाठ टाइप गर्न रोक लगाउनुहोस्"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"पूर्वनिर्धारित हिज्जे परीक्षक"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"हिज्जे परीक्षक छनोट गर्नुहोस्"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"हिज्जे जाँचकर्ता प्रयोग गर्नुहोस्"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"चयन गरिएको छैन"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(कुनै पनि होइन)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4426,7 +4410,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"भण्डारण प्रबन्धकले भण्डारणको ठाउँ खाली गर्न मद्दतका लागि तपाईँको यन्त्रबाट ब्याक अप गरिएका तस्बिर र भिडियोहरू हटाउँदछ।"</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"तस्बिर र भिडियोहरूलाई मेट्नुहोस्"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"भण्डारण प्रबन्धक"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"भण्डारण प्रबन्धक प्रयोग गर्नुहोस्"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"स्वतः"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"म्यानुअल"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"अहिले नै ठाउँ खाली गर्नुहोस्"</string>
@@ -4464,10 +4449,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"फोनको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ट्याब्लेटको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"यन्त्रको जाँच गर्न डबल-ट्याप गर्नुहोस्"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"सूचनाहरू हेर्न स्वाइप गर्नुहोस्"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"सूचनाहरू हेर्न स्क्रिनको फेदबाट तलतिर स्वाइप गर्नुहोस्"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"एक हाते मोड"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"एक हाते मोड प्रयोग गर्नुहोस्"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"एउटा एपबाट अर्को एपमा जाँदा बाहिर निस्कनुहोस्"</string>
@@ -4954,10 +4937,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"सेटिङका स्क्रिनको माथिपट्टि देखिन दिनुहोस्"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"अन्य एपको माथिपट्टि देखिन सक्ने एपहरूलाई सेटिङका स्क्रिनको माथिपट्टि देखिन दिनुहोस्"</string>
     <string name="media_controls_title" msgid="403271085636252597">"मिडिया"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"मिडियाको सत्र सकिएपछि प्लेयर लुकाउनुहोस्"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"प्लेयरले तपाईंलाई विस्तृत गरिएको द्रुत सेटिङको प्यानलबाट कुनै सत्र सुचारु गर्न दिन्छ।"</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"प्लेयर लुकाउनुहोस्"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"प्लेयर देखाउनुहोस्"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"कुनै पनि प्लेयर उपलब्ध छैन"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"मिडिया"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>

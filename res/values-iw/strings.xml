@@ -300,7 +300,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"הצג פרטי פרופיל במסך הנעילה"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"חשבונות"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"מיקום"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"שימוש במיקום"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"כבוי"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="two">פועלת - ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
@@ -638,7 +639,6 @@
       <item quantity="one">צריכה להכיל פחות מספרה אחת (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"מנהל המכשיר לא מאפשר להשתמש בקוד גישה שנעשה בו שימוש לאחרונה"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"‏קודי גישה נפוצים חסומים בידי מנהל ה-IT. יש לנסות קוד גישה אחר."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"לא ניתן לכלול תו לא חוקי"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"חייבת להכיל אות אחת לפחות"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"צריכה להכיל ספרה אחת לפחות"</string>
@@ -686,7 +686,6 @@
       <item quantity="one">חייבת להכיל לפחות תו אחד שאינו מספר</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"מנהל המכשיר לא מאפשר להשתמש בסיסמה שנעשה בה שימוש לאחרונה"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"‏סיסמאות נפוצות חסומות בידי מנהל ה-IT. יש לנסות סיסמה אחרת."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"אין להגדיר רצף ספרות עולה, יורד או חוזר"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"אישור"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"ביטול"</string>
@@ -1082,8 +1081,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"מתבצע שיתוף תכנים באחת האפליקציות. כדי לשתף חיבור לאינטרנט, יש להשבית את הנקודה לשיתוף אינטרנט ולהפעיל אותה מחדש"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"לא הוגדרה סיסמה"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"שם הנקודה לשיתוף אינטרנט"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"מתבצעת הפעלה של <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"אפשר לחבר מכשירים נוספים לנקודה <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"הסיסמה לנקודה לשיתוף אינטרנט"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"‏תדר AP"</string>
@@ -1648,48 +1646,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"הגדרות הרשת אופסו"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"‏לא ניתן למחוק כרטיסי SIM"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"‏עקב שגיאה, לא ניתן למחוק כרטיסי SIM שהורדת.\n\nצריך להפעיל מחדש את המכשיר ולנסות שוב."</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"מחיקת כל הנתונים (איפוס להגדרות המקוריות)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"מחיקת כל הנתונים (איפוס להגדרות המקוריות)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"‏פעולה זו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטאבלט, כולל:\n\n"<li>"חשבון Google שלך"</li>\n<li>"הנתונים וההגדרות של המערכת והאפליקציות"</li>\n<li>"האפליקציות שהורדת"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"‏פעולה זו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטלפון, כולל:\n\n"<li>"חשבון Google שלך"</li>\n<li>"הנתונים וההגדרות של המערכת והאפליקציות"</li>\n<li>"אפליקציות שהורדת"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"החשבונות הבאים שלך פעילים כעת:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"קיימים משתמשים אחרים במכשיר זה.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"מוזיקה"</li>\n<li>"תמונות"</li>\n<li>"נתוני משתמש אחרים"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729">"‏"<li>"כרטיסי eSIM"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"מחיקת הנתונים לא תבטל את תוכנית השירות הסלולרי שלך."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">"‏\n\nכדי למחוק פריטי מוזיקה, תמונות ונתוני משתמש אחרים, יש למחוק את "<b>"אחסון ה-USB"</b>"."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">"‏\n\nכדי למחוק פריטי מוזיקה, תמונות ונתוני משתמש אחרים, יש למחוק את "<b>"כרטיס ה-SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"‏מחק אחסון USB"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"‏מחק כרטיס SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"‏מחיקת כל הנתונים באחסון ה-USB הפנימי, כגון פריטי מוזיקה או תמונות"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"‏מחיקת כל הנתונים שבכרטיס ה-SD, כגון מוזיקה או תמונות"</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"מחיקת כל הנתונים"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"מחיקת כל הנתונים"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"כל המידע האישי שלך והאפליקציות שהורדת יימחקו. לא ניתן לבטל את הפעולה הזו."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"‏כל המידע האישי שלך יימחק, כולל אפליקציות וכרטיסי SIM שהורדת. לא ניתן לבטל את הפעולה הזו."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"האם למחוק את כל הנתונים?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"איפוס להגדרות המקוריות אינו זמין עבור המשתמש הזה"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"מתבצעת מחיקה"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"יש להמתין…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"הגדרות שיחה"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"הגדרת דואר קולי, העברת שיחות, שיחה ממתינה, זיהוי מתקשר"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"‏שיתוף אינטרנט דרך USB"</string>
@@ -2243,11 +2222,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"לחצן ההפעלה מסיים שיחה"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"מצביע עכבר גדול"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"הסרת אנימציות"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"אודיו במונו"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"שילוב ערוצים כאשר מפעילים אודיו"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"איזון אודיו"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"שמאל"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"ימין"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"ברירת מחדל"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 שניות"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 שניות"</string>
@@ -2277,12 +2261,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"רטט ההתראה"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"רטט הצלצול"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"משוב מגע"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"שימוש באפליקציה <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"פתיחת <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"שימוש בתיקון צבע"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"הצגת הכתוביות"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"רק לאפליקציה נתמכת"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"גודל וסגנון הכתוביות"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"גודל טקסט: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"אפשרויות נוספות"</string>
@@ -2314,8 +2301,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"דוטרנומליה"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"פרוטנומליה"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"טריטנומליה"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"גווני אפור"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"אדום-ירוק"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"אדום-ירוק"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"כחול-צהוב"</string>
@@ -2457,7 +2443,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"הגבלת פעילות ברקע"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"התר לאפליקציה לפעול ברקע"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"האפליקציה לא מורשית לפעול ברקע"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"לא ניתן להגביל שימוש ברקע"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"להגביל את הפעילות ברקע?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"הגבלת הפעילות של אפליקציה ברקע עלולה לשבש את פעולתה"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"מכיוון שהאפליקציה לא מוגדרת לאופטימיזציה של הסוללה, לא ניתן להגבילה.\n\nכדי להגביל אותה, תחילה יש להפעיל אופטימיזציה של הסוללה."</string>
@@ -3164,8 +3151,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"תשלום במסוף"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"הגדר אפליקציית תשלום. לאחר מכן עליך רק להצמיד את גב הטלפון למסוף שעליו מופיע סמל התשלום ללא מגע."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"הבנתי"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"עוד…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"הגדרה של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"במסוף ללא מגע, יש לשלם באמצעות <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -3249,8 +3235,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"השתמש תמיד עבור שיחות"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"‏בחר SIM לנתונים"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"‏יש לבחור SIM ל-SMS"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"‏מתבצעת החלפה של כרטיס ה-SIM המשמש לתקשורת נתונים. הפעולה עשויה להימשך עד דקה…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"התקשר באמצעות"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"‏בחירת כרטיס SIM"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"‏SIM ‏<xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3395,8 +3380,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"תרחיש, לוח זמנים, מצב חיסכון בסוללה, חיסכון בחשמל, סוללה, אוטומטי, אחוז"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"‏volte, שיחות טלפון מתקדמות; שיחות 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"הוספת שפה, להוסיף שפה"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"גודל טקסט"</string>
     <string name="default_sound" msgid="6604374495015245195">"צליל ברירת מחדל"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"עוצמת הקול של צלצול והתראות ברמה של <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"עוצמת קול, רטט ומצב \'נא לא להפריע\'"</string>
@@ -3763,8 +3747,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"גישה אל \'נא לא להפריע\'"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"הפעלת ההרשאה \'נא לא להפריע\'"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"אין אפליקציות מותקנות שביקשו גישה אל \'נא לא להפריע\'"</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"מתבצעת טעינה של אפליקציות…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות מהאפליקציה הזו"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות ששייכות לקטגוריה הזו"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות מקבוצה זו"</string>
@@ -4189,8 +4172,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"‏USB נשלט על ידי"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"מכשיר מחובר"</string>
     <string name="usb_control_device" msgid="527916783743021577">"מכשיר זה"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"מתבצע מעבר…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"לא ניתן היה לעבור"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"הטענת המכשיר"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"טעינת המכשיר המחובר"</string>
@@ -4451,7 +4433,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"לפרטים"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"‏חוסך הנתונים (Data Saver)"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"גישה בלתי מוגבלת לנתונים"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"נתוני הרקע כבויים"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"פועל"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"כבוי"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"‏שימוש בחוסך הנתונים (Data Saver)"</string>
@@ -4474,7 +4457,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"כשהמכשיר נעול לא תתאפשר הקלדת תגובות או טקסט אחר בהתראות"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"ברירת מחדל לבודק איות"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"בחירת בודק איות"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"שימוש בבדיקת איות"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"לא נבחר"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(ללא)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4572,7 +4556,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"כדי לעזור בפינוי שטח אחסון, מנהל האחסון מסיר מהמכשיר שלך תמונות וסרטונים מגובים."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"הסרת תמונות וסרטונים"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"מנהל אחסון"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"שימוש במנהל אחסון"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"באופן אוטומטי"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"ידני"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"פינוי שטח אחסון עכשיו"</string>
@@ -4610,10 +4595,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"הקשה כפולה לבדיקת הטלפון"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"הקשה כפולה לבדיקת הטאבלט"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"הקשה כפולה לבדיקת המכשיר"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"החלקה לקריאת הודעות"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"כדי להציג הודעות יש להחליק כלפי מטה מתחתית המסך"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"מצב שימוש ביד אחת"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"שימוש במצב שימוש ביד אחת"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"יציאה מהמצב בזמן החלפת אפליקציות"</string>
@@ -5120,10 +5103,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"אפשרות של שכבות-על במסכי \'הגדרות\'"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"אפליקציות שיכולות להופיע מעל אפליקציות אחרות יוכלו ליצור שכבות-על במסכי ההגדרות"</string>
     <string name="media_controls_title" msgid="403271085636252597">"מדיה"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"הנגן יוסתר כשסשן המדיה יסתיים"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"הנגן מאפשר לך להמשיך סשן מחלונית מורחבת של הגדרות מהירות."</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"הסתרת הנגן"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"הצגת הנגן"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"אין נגנים זמינים"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"מדיה"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>

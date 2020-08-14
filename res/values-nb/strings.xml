@@ -296,7 +296,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Vis profilinformasjon på låseskjermen"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Kontoer"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Posisjon"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"Bruk posisjon"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Av"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">På – <xliff:g id="COUNT_1">%1$d</xliff:g> apper har tilgang til posisjon</item>
@@ -622,7 +623,6 @@
       <item quantity="one">Må inneholde færre enn <xliff:g id="NUMBER_0">%d</xliff:g> siffer</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Enhetsadministratoren forbyr nylig brukt PIN-kode"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"Vanlige PIN-koder er blokkert av IT-administratoren din. Prøv en annen PIN-kode."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Dette kan ikke inkludere et ugyldig tegn"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"Må inneholde minst én bokstav"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"Må inneholde minst ett siffer"</string>
@@ -656,7 +656,6 @@
       <item quantity="one">Må inneholde minst 1 tegn som ikke er et tall</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Enhetsadministratoren forbyr nylig brukte passord"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"Vanlige passord er blokkert av IT-administratoren din. Prøv et annet passord."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"En sekvens av stigende, synkende eller like sifre er ikke tillatt"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Bekreft"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"Avbryt"</string>
@@ -1042,8 +1041,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"Appen deler innhold. For å dele Internett-tilkoblingen, slå Wi-Fi-sonen av og deretter på"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Ingen passord er angitt"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Navn på Wi-Fi-sone"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"Slår på <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> …"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"Andre enheter kan koble til <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Passord for Wi-Fi-sone"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP-bånd"</string>
@@ -1606,48 +1604,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Nettverksinnstillingene er tilbakestilt"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Kan ikke slette SIM-kort"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Nedlastede SIM-kort kan ikke slettes på grunn av en feil.\n\nStart enheten din å nytt og prøv igjen."</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"Slett alle data (tilbakestill til fabrikkstandard)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"Slett alle data (tilbakestill)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Dette sletter alle data fra nettbrettets "<b>"internminne"</b>", inkludert\n\n"<li>"Google-kontoen din"</li>\n<li>"data og innstillinger for system og apper"</li>\n<li>"nedlastede apper"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Dette sletter alle data fra telefonens "<b>"internminne"</b>", inkludert\n\n"<li>"Google-kontoen din"</li>\n<li>"data og innstillinger for system og apper"</li>\n<li>"nedlastede apper"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Du er for øyeblikket pålogget følgende kontoer:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Det er andre brukere til stede på denne enheten.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"musikk"</li>\n<li>"bilder"</li>\n<li>"andre brukerdata"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"e-SIM-kort"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Dette sier ikke opp mobilabonnementet ditt."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"For å slette musikk, bilder og andre brukerdata må "<b>"USB-lagringen"</b>" tømmes."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"For å slette musikk, bilder og andre brukerdata må "<b>"SD-kortet"</b>" tømmes."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Slett USB-lagring"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Tøm SD-kort"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Slett alle data på intern USB-lagring, som for eksempel musikk eller bilder"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Slett alle data fra SD-kortet, som musikk og bilder"</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Slett alle data"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Slett alle data"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"Alle personopplysningene dine og appene du har lastet ned, blir slettet. Denne handlingen kan ikke angres."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Alle personopplysningene dine, inkludert nedlastede apper og SIM-kort, blir slettet. Denne handlingen kan ikke angres."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"Vil du slette alle dataene?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"Tilbakestilling til fabrikkstandard er ikke tilgjengelig for denne brukeren"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"Tømmer"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"Vent litt"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"Samtaleinnstillinger"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"Telefonsvarer, viderekobling, samtale venter, nummervisning"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB-internettdeling"</string>
@@ -2195,11 +2174,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Legg på med av/på-knappen"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Stor musepeker"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Fjern animasjoner"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"Monolyd"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"Kombiner kanaler når du spiller av lyd"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"Lydbalanse"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"Venstre"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"Høyre"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"Standard"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 sekunder"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 sekunder"</string>
@@ -2229,12 +2213,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Varselvibrering"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Ringevibrering"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Tilbakemelding ved berøring"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Bruk <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Åpne <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Bruk fargekorrigering"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Vis teksting"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Bare for apper som støttes"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Størrelse og stil for teksting"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"Tekststørrelse <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Flere alternativer"</string>
@@ -2264,8 +2251,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deuteranomali"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"Protanomali"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"Tritanomali"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Gråtoner"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Rød-grønn"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Rød-grønn"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Blå-gul"</string>
@@ -2395,7 +2381,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"Bakgrunnsbegrensning"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"La appen kjøre i bakgrunnen"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Appen har ikke tillatelse til å kjøre i bakgrunnen"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"Bruk i bakgrunnen kan ikke begrenses"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Vil du begrense bakgrunnsaktivitet?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Hvis du begrenser bakgrunnsaktivitet for en app, kan det oppstå problemer"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Du kan ikke begrense appen siden den ikke er satt til å optimalisere batteriet.\n\nFor å begrense appen, slå på batterioptimalisering."</string>
@@ -2768,7 +2755,7 @@
     <string name="work_mode_label" msgid="1001415270126064436">"Jobbprofil"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"Administreres av organisasjonen din"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"Apper og varsler er slått av"</string>
-    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Fjern arbeidsprofilen"</string>
+    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Fjern jobbprofilen"</string>
     <string name="background_data" msgid="321903213000101158">"Bakgrunnsdata"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Apper kan når som helst synkronisere, sende og motta data"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"Vil du deaktivere bakgrunnsdata?"</string>
@@ -3039,7 +3026,7 @@
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vil du slette deg selv?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vil du slette brukeren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Fjerne denne profilen?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Vil du fjerne arbeidsprofilen?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Fjern jobbprofilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Lagringsplassen og dataene dine blir fjernet fra dette nettbrettet. Denne handlingen kan ikke angres."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Lagringsplassen og dataene dine blir fjernet fra telefonen. Denne handlingen kan ikke angres."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Alle apper og data slettes."</string>
@@ -3078,8 +3065,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Betaling ved terminaler"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Konfigurer en betalingsapp. Deretter holder du baksiden av telefonen mot en terminal som har symbolet for kontaktløs betaling."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Skjønner"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"Mer"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Angi en standardapp for betaling"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Oppdater standardappen for betaling"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"I en kontaktløs terminal betaler du med <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -3163,8 +3149,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Bruk alltid dette for samtaler"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"Velg et SIM-kort for data"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Velg et SIM-kort for SMS"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"Bytter data-SIM-kort – dette kan ta opptil ett minutt …"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Ring med"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Velg et SIM-kort"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM-kort <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3307,8 +3292,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutine, tidsplan, batterisparing, strømsparing, batteri, automatisk, prosent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, avansert ringing, 4g-ringing"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Legg til språk, legg til et språk"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"tekststørrelse"</string>
     <string name="default_sound" msgid="6604374495015245195">"Standardlyd"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Ringe- og varselvolum er satt til <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibrasjon, ikke forstyrr"</string>
@@ -3665,8 +3649,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"«Ikke forstyrr»-tilgang"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Tillat «Ikke forstyrr»"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ingen installerte apper har bedt om «Ikke forstyrr»-tilgang"</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"Laster inn appene …"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"I tråd med det du har valgt, hindrer Android at varsler fra denne appen vises på denne enheten"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"I tråd med det du har valgt, blokkerer Android denne varselkategorien fra å vises på denne enheten"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"I tråd med det du har valgt, blokkerer Android denne varselgruppen fra å vises på denne enheten"</string>
@@ -4065,8 +4048,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"USB kontrolleres av"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"Tilkoblet enhet"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Denne enheten"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"Bytter …"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Kunne ikke bytte"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Lader denne enheten"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Lading av den tilkoblede enheten"</string>
@@ -4313,7 +4295,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"Se detaljer"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Datasparing"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Ubegrenset datatilgang"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"Bakgrunnsdata er slått av"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"På"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Av"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Bruk Datasparing"</string>
@@ -4336,7 +4319,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Når enheten er låst, kan man ikke skrive svar eller annen tekst i varsler"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Standard stavekontroll"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Velg stavekontroll"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Bruk stavekontroll"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"Ikke valgt"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(ingen)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4426,7 +4410,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"For å frigjøre lagringsplass fjernes sikkerhetskopierte bilder og videoer fra enheten din av lagringsadministratoren."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Fjern bilder og videoer"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Lagringsadministrator"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Bruk lagringsadministrator"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Automatisk"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"Manuelle innstillinger"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Frigjør lagringsplass nå"</string>
@@ -4464,10 +4449,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Dobbelttrykk for å sjekke telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Dobbelttrykk for å sjekke nettbrettet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Dobbelttrykk for å sjekke enheten"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Sveip for varsler"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"Sveip ned fra bunnen av skjermen for å se varslene"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"Enhåndsmodus"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Bruk enhåndsmodus"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Avslutt når du bytter app"</string>
@@ -4954,10 +4937,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Tillat skjermoverlegg over Innstillinger"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Tillat apper som kan vises over andre apper, å legge seg over Innstillinger-skjermer"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Medier"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Skjul spilleren når medieøkten er avsluttet"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Med spilleren kan du gjenoppta en økt fra det utvidede Hurtiginnstillinger-panelet."</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skjul spilleren"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Vis spilleren"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Det finnes ingen tilgjengelige spillere"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"medier"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>

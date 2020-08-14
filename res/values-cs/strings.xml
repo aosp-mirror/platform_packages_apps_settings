@@ -300,7 +300,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Zobrazit informace o profilu na zamčené obrazovce"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Účty"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Poloha"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"Používat polohu"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Vypnuto"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="few">Zapnuto – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikace mají přístup k poloze</item>
@@ -638,7 +639,6 @@
       <item quantity="one">Musí obsahovat méně než <xliff:g id="NUMBER_0">%d</xliff:g> číslici</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Administrátor zařízení nedovoluje použití nedávno použitého kódu PIN"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"Obvyklé kódy PIN jsou blokovány administrátorem IT. Použijte jiný PIN."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Heslo nesmí obsahovat neplatné znaky."</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"Heslo musí obsahovat alespoň jedno písmeno."</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"Heslo musí obsahovat alespoň jednu číslici."</string>
@@ -686,7 +686,6 @@
       <item quantity="one">Musí obsahovat alespoň 1 znak jiný než číslici</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Administrátor zařízení neumožňuje použít heslo, které jste použili nedávno"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"Obvyklá hesla jsou blokována administrátorem IT. Použijte jiné heslo."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Posloupnost rostoucích, klesajících nebo opakujících se číslic není povolena"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Potvrdit"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"Zrušit"</string>
@@ -1082,8 +1081,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"Aplikace sdílí obsah. Chcete-li sdílet připojení k internetu, vypněte hotspot a znovu jej zapněte"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Není nastaveno žádné heslo"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Název hotspotu"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"Zapínání hotspotu <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"Ostatní zařízení se mohou připojit k hostpotu <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Heslo hotspotu"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Pásmo přístupového bodu"</string>
@@ -1648,48 +1646,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Nastavení sítí bylo resetováno"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM karty nelze vymazat"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Staženou SIM kartu nelze vymazat z důvodu chyby.\n\nRestartujte zařízení a zkuste to znovu."</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"Vymazat data (tovární reset)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"Vymazat data (tovární reset)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" tabletu, např.:\n\n"<li>"váš účet Google"</li>\n<li>"nastavení a data systému a aplikací"</li>\n<li>"stažené aplikace"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" telefonu, např.:\n\n"<li>"váš účet Google"</li>\n<li>"nastavení a data systému a aplikací"</li>\n<li>"stažené aplikace"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Aktuálně jste přihlášeni k těmto účtům:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"V tomto zařízení jsou přítomni další uživatelé.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"hudba"</li>\n<li>"fotky"</li>\n<li>"další uživatelská data"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Tímto krokem nebude zrušen mobilní tarif."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Chcete-li smazat také hudbu, obrázky a další uživatelská data, je potřeba vymazat "<b>"úložiště USB"</b>"."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Chcete-li smazat také hudbu, obrázky a další uživatelská data, je potřeba vymazat "<b>"kartu SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Smazat úložiště USB"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Smazat kartu SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Smazat všechna data v interním úložišti USB, například hudbu a fotografie."</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Smazat všechna data na kartě SD, například hudbu a fotografie."</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Vymazat všechna data"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Vymazat všechna data"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"Všechny osobní údaje a stažené aplikace budou smazány. Tuto akci nelze vrátit zpět."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Budou smazány všechny vaše osobní údaje, včetně stažených aplikací a SIM karet. Tuto akci nelze vrátit zpět."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"Vymazat všechna data?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"Pro tohoto uživatele není resetování do továrního nastavení dostupné"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"Mazání"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"Čekejte prosím…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"Nastavení hovorů"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"Nastavení hlasové schránky, přesměrování a čekání hovorů a ID volajícího"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"Připojení přes USB"</string>
@@ -2243,11 +2222,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Vypínač ukončí hovor"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Velký kurzor myši"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Odstranit animace"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"Zvuk mono"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"Při přehrávání zvuku kombinovat kanály"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"Vyvážení zvuku"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"Vlevo"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"Vpravo"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"Výchozí"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 sekund"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 sekund"</string>
@@ -2277,12 +2261,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibrace při oznámení"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibrace při vyzvánění"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Odezva klepnutí"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Použít <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Otevřít aplikaci <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Používat korekci barev"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Zobrazit titulky"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Jen pro podporovanou aplikaci"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Velikost a styl titulků"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> velikost textu"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Více možností"</string>
@@ -2314,8 +2301,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deuteranomálie"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"Protanomálie"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"Tritanomálie"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Zešednutí obrazovky"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Červená a zelená"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Červená a zelená"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Modrá a žlutá"</string>
@@ -2457,7 +2443,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"Omezení na pozadí"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Povolit aplikaci spouštění na pozadí"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Aplikace nemá povoleno spouštění na pozadí"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"Využití na pozadí omezit nelze"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Omezit aktivitu na pozadí?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Pokud u aplikace omezíte aktivitu na pozadí, může dojít k nepředvídatelnému chování"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplikace není nastavena k optimalizaci baterie, nelze ji tedy omezit.\n\nChcete-li ji omezit, nejprve zapněte optimalizaci."</string>
@@ -3164,8 +3151,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Platba na terminálu"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Nastavte platební aplikaci. Poté jen přidržte telefon zadní stranou u terminálu se symbolem bezkontaktních plateb."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Rozumím"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"Více…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Nastavení výchozí platební aplikace"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Aktualizace výchozí platební aplikace"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"Na bezkontaktním terminálu zaplaťte pomocí aplikace <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -3249,8 +3235,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Vždy používat pro hovory"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"Vyberte SIM kartu pro data"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Vyberte SIM kartu pro SMS"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"Přepínání datových SIM karet, tato operace může chvíli trvat…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Volat pomocí"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Vyberte SIM kartu"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM karta <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3395,8 +3380,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"sled činností, plán, spořič baterie, úspora energie, baterie, automatické, procenta"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, rozšířené volání, volání 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"přidat jazyk, přidání jazyka"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"velikost textu"</string>
     <string name="default_sound" msgid="6604374495015245195">"Výchozí zvuk"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Hlasitost vyzvánění a oznámení je na <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hlasitost, vibrace, režim Nerušit"</string>
@@ -3763,8 +3747,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Přístup při nastavení Nerušit"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Povolit režim Nerušit"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"O přístup při nastavení Nerušit nepožádaly žádné nainstalované aplikace"</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"Načítání aplikací…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Oznámení této aplikace jsou v zařízení na vaši žádost blokována systémem Android"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tato kategorie oznámení je v zařízení na vaši žádost blokována systémem Android"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Tato skupina oznámení je v zařízení na vaši žádost blokována systémem Android"</string>
@@ -4189,8 +4172,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"USB ovládá:"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"Připojené zařízení"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Toto zařízení"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"Přepínání…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Nelze přepnout"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Nabíjení zařízení"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Nabíjení připojeného zařízení"</string>
@@ -4451,7 +4433,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"Zobrazit podrobnosti"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Spořič dat"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Neomezená data"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"Data na pozadí jsou vypnuta"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"Zapnuto"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Vypnuto"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Použít spořič dat"</string>
@@ -4474,7 +4457,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Pokud je zařízení zamknuté, zakázat psaní odpovědí a jiných textů do oznámení"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Výchozí kontrola pravopisu"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Výběr kontroly pravopisu"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Použít kontrolu pravopisu"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"Nevybráno"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(žádný)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4572,7 +4556,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Správce úložiště vám pomůže uvolnit místo v úložišti tím, že ze zařízení odstraní zálohované fotky a videa."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Odstranit fotky a videa"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Správce úložiště"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Používat správce úložiště"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Automaticky"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"Ruční"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Uvolnit místo"</string>
@@ -4610,10 +4595,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Kontrola telefonu dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Kontrola tabletu dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Kontrola zařízení dvojitým klepnutím"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Zobrazení oznámení přejetím prstem"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"Oznámení zobrazíte přejetím prstem z dolní části obrazovky dolů"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"Režim jedné ruky"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Použít režim jedné ruky"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Ukončit při přepnutí aplikací"</string>
@@ -5120,10 +5103,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Povolte překryvné vrstvy obrazovek v Nastavení"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Povolte aplikace, které se smí zobrazovat přes jiné aplikace a vytvářet vrstvy obrazovek Nastavení"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Média"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Skrýt přehrávač po ukončení relace média"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Přehrávač umožňuje obnovit relaci z rozbaleného panelu Rychlé nastavení."</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrýt přehrávač"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Zobrazit přehrávač"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nejsou k dispozici žádné přehrávače"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>

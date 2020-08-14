@@ -296,7 +296,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"லாக் ஸ்கிரீனில் சுயவிவரத் தகவலைக் காட்டு"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"கணக்குகள்"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"இருப்பிடம்"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"இருப்பிடத்தைப் பயன்படுத்து"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"ஆஃப்"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ஆப்ஸிற்கு இருப்பிட அனுமதி ஆன் செய்யப்பட்டுள்ளது</item>
@@ -622,7 +623,6 @@
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> இலக்கத்தை விடக் குறைவாக இருக்க வேண்டும்</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"சாதன நிர்வாகி சமீபத்திய பின்னை பயன்படுத்துவதை அனுமதிக்கவில்லை"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"IT நிர்வாகியால், பொதுவான பின்கள் தடை செய்யப்பட்டுள்ளன. வேறொரு பின்னை முயலவும்."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"இதில் தவறான எழுத்துக்குறி இருக்கக்கூடாது"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"குறைந்தது ஒரு எழுத்து இருக்க வேண்டும்"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"குறைந்தது ஒரு இலக்கம் இருக்க வேண்டும்"</string>
@@ -656,7 +656,6 @@
       <item quantity="one">எண் அல்லாத 1 எழுத்தாவது இருக்க வேண்டும்</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"சாதன நிர்வாகி சமீபத்திய கடவுச்சொல்லைப் பயன்படுத்துவதை அனுமதிக்கவில்லை"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"IT நிர்வாகியால், பொதுவான கடவுச்சொற்கள் தடை செய்யப்பட்டுள்ளன. வேறொரு கடவுச்சொல்லை முயலவும்."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"இலக்கங்கள் ஏறுவரிசையில், இறங்குவரிசையில் அல்லது ஒரே இலக்கத்தைப் பயன்படுத்துவது அனுமதிக்கப்படவில்லை"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"உறுதிப்படுத்து"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"ரத்துசெய்"</string>
@@ -1042,8 +1041,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"ஆப்ஸ், உள்ளடக்கத்தைப் பகிர்கிறது. இண்டர்நெட்டைப் பகிர, ஹாட்ஸ்பாட்டை ஆஃப் செய்து, ஆன் செய்யவும்"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"கடவுச்சொல் எதுவும் அமைக்கப்படவில்லை"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"ஹாட்ஸ்பாட் பெயர்"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ஐ ஆன் செய்கிறது…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> உடன் பிற சாதனங்களை இணைக்கலாம்"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"ஹாட்ஸ்பாட் கடவுச்சொல்"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP அலைவரிசை"</string>
@@ -1606,48 +1604,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"நெட்வொர்க் அமைப்புகள் மீட்டமைக்கப்பட்டன"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"சிம்களை அழிக்க இயலாது"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"பிழை ஏற்பட்டதால் பதிவிறக்கிய சிம்களை அழிக்க இயலாது.\n\nசாதனத்தை மீண்டும் தொடங்கி மறுபடியும் முயலவும்."</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"எல்லாத் தரவையும் அழி (ஆரம்பநிலை ரீசெட்)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"எல்லாத் தரவையும் அழி (ஆரம்பநிலை ரீசெட்)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"இது உங்கள் டேப்லெட்டின் "<b>"அகச் சேமிப்பகத்தில்"</b>" உள்ள எல்லாத் தரவையும் அழித்துவிடும். இவற்றில் \n\n"<li>"உங்களின் Google கணக்கு"</li>\n<li>"சிஸ்டம் மற்றும் ஆப்ஸ் தரவு அமைப்புகள்"</li>\n<li>"பதிவிறக்கப்பட்ட ஆப்ஸ்"</li>" ஆகியவை உள்ளடங்கும்"</string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"இது உங்கள் மொபைலின் "<b>"அகச் சேமிப்பகத்தில்"</b>" உள்ள எல்லாத் தரவையும் அழித்துவிடும். இவற்றில்\n\n"<li>"உங்களின் Google கணக்கு"</li>\n<li>"சிஸ்டம் மற்றும் ஆப்ஸ் தரவு அமைப்புகள்"</li>\n<li>"பதிவிறக்கப்பட்ட ஆப்ஸ்"</li>" ஆகியவை உள்ளடங்கும்"</string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"தற்போது பின்வரும் கணக்குகளில் உள்நுழைந்துள்ளீர்கள்:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"இந்தச் சாதனத்தில் பிற பயனர்கள் உள்ளனர்.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"இசை"</li>\n<li>"படங்கள்"</li>\n<li>"பிற பயனர் தரவு"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIMகள்"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"இதைச் செய்வதால் உங்கள் மொபைல் சேவைத் திட்டம் ரத்துசெய்யப்படாது."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"இசை, படங்கள் மற்றும் பிற பயனர் தரவை அழிக்க "<b>"USB சேமிப்பகத்தில்"</b>" உள்ளவை அழிக்கப்பட வேண்டும்."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"இசை, படங்கள் மற்றும் பிற பயனர் தரவை அழிக்க "<b>"SD கார்டில்"</b>" உள்ளவை அழிக்கப்பட வேண்டும்."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USB சேமிப்பிடத்தை அழி"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD கார்டை அழி"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"இசை அல்லது படங்கள் போன்று அக USB சேமிப்பிடத்தில் உள்ள எல்லா தரவையும் அழி"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"இசை அல்லது படங்கள் போன்று SD கார்டில் உள்ள எல்லா தரவையும் அழி"</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"எல்லாத் தரவையும் அழி"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"எல்லாத் தரவையும் அழி"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"உங்களின் அனைத்துத் தனிப்பட்ட தகவல்களும் பதிவிறக்கிய ஆப்ஸும் நீக்கப்படும். இதைச் செயல்தவிர்க்க இயலாது."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"பதிவிறக்கிய ஆப்ஸ், சிம்கள் ஆகியவை உட்பட உங்களின் அனைத்துத் தனிப்பட்ட தகவல்களும் நீக்கப்படும். இதைச் செயல்தவிர்க்க இயலாது."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"எல்லாத் தரவையும் அழிக்கவா?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"இவருக்கு ஆரம்பநிலை மீட்டமைவு இல்லை"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"அழிக்கிறது"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"காத்திருக்கவும்…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"அழைப்பு அமைப்பு"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"குரல் அஞ்சல், அழைப்புப் பகிர்வு, அழைப்பு காத்திருப்பு, அழைப்பாளர் ஐடி போன்றவற்றை அமைக்கவும்"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB டெதெரிங்"</string>
@@ -2195,11 +2174,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"பவர் பட்டன் அழைப்பை நிறுத்தும்"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"பெரிய மவுஸ் பாயிண்டர்"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"அனிமேஷன்களை அகற்று"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"மோனோ ஆடியோ"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"ஆடியோ இயக்கத்தில் இருக்கும் போது சேனல்களை ஒன்றிணைக்கலாம்"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"ஆடியோ பேலன்ஸ்"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"இடது"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"வலது"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"இயல்பு"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 விநாடிகள்"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 விநாடிகள்"</string>
@@ -2229,12 +2213,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"அறிவிப்பு அதிர்வுகள்"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"ரிங் அதிர்வுகள்"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"தொட்டு கருத்து தெரிவித்தல்"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>ஐப் பயன்படுத்து"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ஆப்ஸைத் திற"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"வண்ணத் திருத்தத்தைப் பயன்படுத்து"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"தலைப்புகளைக் காண்பி"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"ஆதரிக்கப்படும் ஆப்ஸுக்கு மட்டும்"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"தலைப்பின் அளவும் நடையும்"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> உரை அளவு"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"மேலும் விருப்பங்கள்"</string>
@@ -2264,8 +2251,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"டியூட்டரானோமலி"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"பிரோடனோமலி"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"ட்ரைடானோமலி"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"கிரே ஸ்கேல்"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"சிவப்பு-பச்சை"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"சிவப்பு-பச்சை"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"நீலம்-மஞ்சள்"</string>
@@ -2395,7 +2381,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"பின்னணி உபயோகத்தைக் கட்டுப்படுத்துதல்"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"பின்னணியில் இயங்குவதற்குப் ஆப்ஸை அனுமதிக்கும்"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"பின்னணியில் இயங்குவதற்குப் ஆப்ஸ் அனுமதிக்கப்படவில்லை"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"பின்னணி உபயோகத்தைக் கட்டுப்படுத்த முடியவில்லை"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"பின்னணி செயல்பாட்டைக் கட்டுப்படுத்தவா?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"ஆப்ஸின் பின்னணி செயல்பாட்டைக் கட்டுப்படுத்தினால், சரியாக வேலை செய்யாது."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"பேட்டரியை மேம்படுத்த அமைக்கப்படவில்லை, எனவே கட்டுப்படுத்த முடியாது.\n\nஆப்ஸை கட்டுப்படுத்த, பேட்டரி மேம்படுத்தலை ஆன் செய்க."</string>
@@ -3078,8 +3065,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"டெர்மினலில் பணம் செலுத்துதல்"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"பேமெண்ட் ஆப்ஸை அமைக்கவும். கான்டாக்ட்லெஸ் சின்னம் கொண்ட எந்த டெர்மினலிலும் உங்கள் மொபைலின் பின்பகுதியைக் காட்டவும்."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"சரி"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"மேலும்…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"இயல்புநிலை பேமெண்ட் ஆப்ஸாக அமைத்தல்"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"இயல்புநிலை பேமெண்ட் ஆப்ஸை மாற்றுதல்"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"காண்டாக்ட்லெஸ் டெர்மினலில் <xliff:g id="APP">%1$s</xliff:g> மூலம் பணம் செலுத்தவும்"</string>
@@ -3163,8 +3149,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"அழைப்புகளுக்கு எப்போதும் இதை பயன்படுத்து"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"தரவுக்கான SIMஐத் தேர்ந்தெடுக்கவும்"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"மெசேஜூக்கான சிம்மைத் தேர்வுசெய்க"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"டேட்டா சிம்மை மாற்றுகிறது, இதற்கு ஒரு நிமிடம் வரை ஆகலாம்…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"இந்த SIM வழியாக அழை"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"சிம் கார்டைத் தேர்வுசெய்யவும்"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"சிம் <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3307,8 +3292,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"வழக்கமான செயல்பாடு, கால அட்டவணை, பேட்டரி சேமிப்பான், மின்சக்தி சேமிப்பான், பேட்டரி, தானியங்கு, சதவீதம்"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, மேம்பட்ட அழைப்பு, 4g அழைப்பு"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"மொழியைச் சேர்க்கவும், ஒரு மொழியைச் சேர்க்கவும்"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"உரை அளவு"</string>
     <string name="default_sound" msgid="6604374495015245195">"இயல்பு ஒலி"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"ஒலி &amp; அறிவிப்பு ஒலியளவு: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ஒலியளவு, அதிர்வு, தொந்தரவு செய்யாதே"</string>
@@ -3665,8 +3649,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"\'தொந்தரவு செய்யாதே\' அணுகல்"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"’தொந்தரவு செய்ய வேண்டாம்’ அம்சத்தை அனுமதி"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"\'தொந்தரவு செய்யாதே\' அணுகலை நிறுவப்பட்ட ஆப்ஸ் எதுவும் கோரவில்லை"</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"ஆப்ஸை ஏற்றுகிறது…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"உங்கள் கோரிக்கையின் படி, சாதனத்தில் இந்த ஆப்ஸின் அறிவிப்புகள் தோன்றுவதை Android தடுக்கிறது"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"உங்கள் கோரிக்கையின் படி, இந்தச் சாதனத்தில், இந்த வகை அறிவிப்புகள் தோன்றுவதை Android தடுக்கிறது"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"உங்கள் கோரிக்கையின் படி, இந்தச் சாதனத்தில், இந்தக் குழு அறிவிப்புகள் தோன்றுவதை Android தடுக்கிறது"</string>
@@ -4065,8 +4048,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"USBயை இதன்மூலம் கட்டுப்படுத்து:"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"இணைக்கப்பட்ட சாதனம்"</string>
     <string name="usb_control_device" msgid="527916783743021577">"இந்தச் சாதனம்"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"மாற்றுகிறது…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"மாற முடியவில்லை"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"இந்தச் சாதனத்தைச் சார்ஜ் செய்வதற்கு"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"இணைக்கப்பட்ட சாதனத்தைச் சார்ஜ் செய்தல்"</string>
@@ -4313,7 +4295,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"விவரங்களைக் காட்டு"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"டேட்டா சேமிப்பான்"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"வரம்பற்ற டேட்டா"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"பின்புல டேட்டா உபயோகம் முடக்கப்பட்டது"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"ஆன்"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"ஆஃப்"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"டேட்டா சேமிப்பானைப் பயன்படுத்து"</string>
@@ -4336,7 +4319,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"சாதனம் பூட்டப்பட்டிருந்தால், அறிவிப்புகளில் பதில்கள் அல்லது பிற உரையை உள்ளிடுவதைத் தடு"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"இயல்பு பிழைத்திருத்தி"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"பிழைத்திருத்தியைத் தேர்வுசெய்க"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"பிழைதிருத்தியைப் பயன்படுத்துதல்"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"தேர்ந்தெடுக்கவில்லை"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(எதுவுமில்லை)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4426,7 +4410,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"சேமிப்பக இடத்தைக் காலியாக்க உதவ, காப்புப் பிரதி எடுக்கப்பட்ட படங்களையும் வீடியோக்களையும் உங்கள் சாதனத்திலிருந்து சேமிப்பக நிர்வாகி அகற்றும்."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"படங்கள் &amp; வீடியோக்களை அகற்று"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"சேமிப்பக நிர்வாகி"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"சேமிப்பக நிர்வாகியைப் பயன்படுத்து"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"தானியங்கு"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"கைமுறை"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"இப்போதே இடத்தைக் காலியாக்கு"</string>
@@ -4464,10 +4449,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"மொபைல் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"டேப்லெட் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"சாதனத் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"அறிவிப்புகளுக்கு ஸ்வைப் செய்க"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"உங்கள் அறிவிப்புகளைக் காட்ட, திரையின் கீழிருந்து கீழ்நோக்கி ஸ்வைப் செய்யவும்"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"ஒற்றைக் கைப் பயன்முறை"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"ஒற்றைக் கைப் பயன்முறையைப் பயன்படுத்து"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"ஆப்ஸிற்கிடையில் மாறும்போது இதிலிருந்து வெளியேறு"</string>
@@ -4954,10 +4937,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"அமைப்புகளில் திரை மேலடுக்கை அனுமதித்தல்"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"அமைப்புகள் திரைகளுக்கு மேலாகக் காட்டுவதற்கு மற்ற ஆப்ஸில் டிஸ்ப்ளே செய்யப்படக்கூடிய ஆப்ஸை அனுமதிக்கும்"</string>
     <string name="media_controls_title" msgid="403271085636252597">"மீடியா"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"மீடியா அமர்வு முடிந்தபிறகு பிளேயரை மறை"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"விரிவாக்கப்பட்ட விரைவு அமைப்புகள் பேனலிலிருந்து அமர்வு ஒன்றை மீண்டும் தொடங்க இந்தப் பிளேயர் அனுமதிக்கும்."</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"பிளேயர் மறை"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"பிளேயரைக் காட்டு"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"பிளேயர்கள் எதுவுமில்லை"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"மீடியா"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>

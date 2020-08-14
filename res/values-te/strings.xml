@@ -296,7 +296,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"లాక్ స్క్రీన్‌లో ప్రొఫైల్ సమాచారాన్ని చూపు"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"ఖాతాలు"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"లొకేషన్"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"లొకేషన్‌ను ఉపయోగించండి"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"ఆఫ్"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">లొకేషన్ ఆన్‌లో ఉన్నప్పుడు - <xliff:g id="COUNT_1">%1$d</xliff:g> యాప్‌లకు లొకేషన్ యాక్సెస్ ఉంటుంది</item>
@@ -622,7 +623,6 @@
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> కంటే తక్కువ అంకె తప్పక ఉండాలి</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"ఇటీవలి పిన్‌ని ఉపయోగించడానికి డివైజ్ నిర్వాహకులు అనుమతించరు"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"సాధారణ PINలను మా IT నిర్వాహకుడు బ్లాక్ చేసారు. వేరే PINని ప్రయత్నించండి."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"ఇందులో చెల్లని అక్షరం ఉండకూడదు"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"తప్పనిసరిగా కనీసం ఒక అక్షరాన్ని కలిగి ఉండాలి"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"తప్పనిసరిగా కనీసం ఒక అంకెను కలిగి ఉండాలి"</string>
@@ -656,7 +656,6 @@
       <item quantity="one">తప్పనిసరిగా కనీసం 1 అసంఖ్యాత్మక అక్షరాన్ని కలిగి ఉండాలి</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"ఇటీవలి పాస్‌వర్డ్‌ను ఉపయోగించడానికి పరికర నిర్వాహకులు అనుమతించరు"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"సాధారణ పాస్‌వర్డ్‌లను మా IT నిర్వాహకుడు బ్లాక్ చేసారు. వేరే పాస్‌వర్డ్‌ని ప్రయత్నించండి."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"అంకెలను ఆరోహణ, అవరోహణ క్రమంలో లేదా ఒకే అంకెను వరుసగా పునరావృతంగా ఉపయోగించకూడదు"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"నిర్ధారించండి"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"రద్దు చేయి"</string>
@@ -1042,8 +1041,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"యాప్ కంటెంట్‌ని షేర్ చేస్తోంది. ఇంటర్నెట్ కనెక్షన్‌ని షేర్ చేయాలంటే, హాట్‌స్పాట్‌ని ఆఫ్ చేసి, ఆన్ చేయండి"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"పాస్‌వర్డ్‌ సెట్ చేయలేదు"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"హాట్‌స్పాట్ పేరు"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>ను ఆన్ చేస్తోంది…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"ఇతర పరికరాలు <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>కు కనెక్ట్ కావచ్చు"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"హాట్‌స్పాట్ పాస్‌వర్డ్‌"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP బ్యాండ్"</string>
@@ -1152,7 +1150,7 @@
     <string name="accessibility_category_personal" msgid="2228088849803484780">"వ్యక్తిగత ప్రొఫైల్ ఖాతాలు"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"కార్యాలయ ఖాతా - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"వ్యక్తిగత ఖాతా - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
-    <string name="search_settings" msgid="7573686516434589771">"వెతుకు"</string>
+    <string name="search_settings" msgid="7573686516434589771">"సెర్చ్"</string>
     <string name="display_settings" msgid="7197750639709493852">"డిస్‌ప్లే"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"స్క్రీన్ ఆటో-రొటేట్‌"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"రంగులు"</string>
@@ -1606,48 +1604,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"నెట్‌వర్క్ సెట్టింగ్‌లు రీసెట్ చేయబడ్డాయి"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIMల డేటాను తొలగించలేకపోయింది"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"ఎర్రర్ కారణంగా డౌన్‌లోడ్ చేసిన SIMలను తొలగించలేకపోయింది.\n\nమీ పరికరాన్ని పునఃప్రారంభించి, ఆపై మళ్లీ ప్రయత్నించండి."</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"మొత్తం డేటాను తొలగించు (ఫ్యాక్టరీ రీసెట్)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"మొత్తం డేటాను తొలగించు (ఫ్యాక్టరీ రీసెట్)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"ఇది మీ టాబ్లెట్ యొక్క "<b>"అంతర్గత స్టోరేజ్"</b>" నుండి ఇక్కడున్న వాటితో సహా, మొత్తం డేటాను తొలగిస్తుంది:\n\n"<li>"మీ Google ఖాతా"</li>\n<li>"సిస్టమ్‌తో పాటు యాప్ డేటా, అలాగే సెట్టింగ్‌లు"</li>\n<li>"డౌన్‌లోడ్ చేయబడిన యాప్‌లు"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"ఇది మీ ఫోన్ యొక్క "<b>"అంతర్గత స్టోరేజ్"</b>" నుండి ఇక్కడున్న వాటితో సహా, మొత్తం డేటాను తొలగిస్తుంది:\n\n"<li>"మీ Google ఖాతా"</li>\n<li>"సిస్టమ్‌తో పాటు యాప్ డేటా, అలాగే సెట్టింగ్‌లు"</li>\n<li>"డౌన్‌లోడ్ చేయబడిన యాప్‌లు"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"మీరు ప్రస్తుతం కింది ఖాతాలకు సైన్ ఇన్ చేశారు:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"ఈ పరికరంలో ఇతర యూజర్‌లు ఉన్నారు.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"సంగీతం"</li>\n<li>"ఫోటోలు"</li>\n<li>"ఇతర యూజర్ డేటా"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIMలు"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"ఇది మీ మొబైల్ సర్వీస్ ప్లాన్‌ను రద్దు చేయదు."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"సంగీతం, ఫోటోలు, ఇతర యూజర్ డేటాను క్లియర్ చేయడానికి, "<b>"USB స్టోరేజ్"</b>"ను తొలగించాల్సి ఉంటుంది."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"సంగీతం, ఫోటోలు, ఇతర యూజర్ డేటాను క్లియర్ చేయడానికి, "<b>"SD కార్డు"</b>" డేటాను తొలగించాల్సి ఉంటుంది."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USB నిల్వను ఎరేజ్ చేయి"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD కార్డుని ఎరేజ్ చేయి"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"అంతర్గత USB నిల్వలోని డేటా అంతటినీ అనగా సంగీతం లేదా ఫోటోల వంటివి ఎరేజ్ చేయి"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"SD కార్డు‌లో సంగీతం లేదా ఫోటోల వంటి మొత్తం డేటాను ఎరేజ్ చేయి"</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"డేటా మొత్తాన్ని తొలగించు"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"డేటా మొత్తాన్ని తొలగించు"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"మీ మొత్తం వ్యక్తిగత సమాచారంతో పాటు డౌన్‌లోడ్ చేసిన యాప్‌లు అన్నీ సమూలంగా తొలగించబడతాయి. ఒక్కసారి డేటాను తొలగిస్తే మళ్లీ వెనక్కు తెచ్చుకోలేరు."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"మీ మొత్తం వ్యక్తిగత సమాచారంతో పాటు డౌన్‌లోడ్ చేసిన యాప్‌లు, SIMలు అన్నీ సమూలంగా తొలగించబడతాయి. ఒక్కసారి డేటాను తొలగిస్తే మళ్లీ వెనక్కు తెచ్చుకోలేరు."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"మొత్తం డేటాను తొలగించాలా?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"ఈ యూజర్‌కు ఫ్యాక్టరీ రీసెట్ అందుబాటులో లేదు"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"తొలగిస్తోంది"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"దయచేసి వేచి ఉండండి…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"కాల్ సెట్టింగ్‌లు"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"వాయిస్ మెయిల్‌ను, కాల్ ఫార్వార్డింగ్‌ను, కాల్ వెయిటింగ్‌ను, కాలర్ IDని సెటప్ చేయండి"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB టీథరింగ్"</string>
@@ -2195,11 +2174,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"పవర్ బటన్ కాల్‌ను ముగిస్తుంది"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"పెద్ద మౌస్ పాయింటర్"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"యానిమేషన్‌లను తీసివేయండి"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"మోనో ఆడియో"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"ఆడియో ప్లే చేసేటప్పుడు ఛానెల్‌లను మిళితం చేస్తుంది"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"ఆడియో బ్యాలెన్స్"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"ఎడమ"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"కుడి"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"డిఫాల్ట్"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 సెకన్లు"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 సెకన్లు"</string>
@@ -2229,12 +2213,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"నోటిఫికేషన్ వైబ్రేషన్"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"రింగ్ వైబ్రేషన్"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"స్పర్శ ప్రతిస్పందన"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>ను ఉపయోగించు"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>‌ను తెరువు"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"\'కలర్‌ను సరిచేయడం\' అనే ఫీచర్‌ను ఉపయోగించు"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"క్యాప్షన్‌లను చూపించు"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"మద్దతు ఉన్న యాప్ కోసం మాత్రమే"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"క్యాప్షన్ సైజు, శైలి"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> టెక్స్ట్ సైజ్"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"మరిన్ని ఎంపికలు"</string>
@@ -2264,8 +2251,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"డ్యూటెరానోమలీ"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"ప్రొటానోమలీ"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"ట్రైటనోమలీ"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"గ్రేస్కేల్"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"ఎరుపు-ఆకుపచ్చ రంగు"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"ఎరుపు-ఆకుపచ్చ రంగు"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"నీలం-పసుపు"</string>
@@ -2370,7 +2356,7 @@
     <string name="print_feature_state_off" msgid="1466195699995209446">"ఆఫ్"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"సేవను జోడించు"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"ప్రింటర్‌ను జోడించు"</string>
-    <string name="print_menu_item_search" msgid="5989979785203603169">"వెతుకు"</string>
+    <string name="print_menu_item_search" msgid="5989979785203603169">"సెర్చ్"</string>
     <string name="print_searching_for_printers" msgid="5401413178028348800">"ప్రింటర్‌ల కోసం వెతుకుతోంది"</string>
     <string name="print_service_disabled" msgid="9185935228930987786">"సేవ నిలిపివేయబడింది"</string>
     <string name="print_print_jobs" msgid="2605944855933091183">"ముద్రణ జాబ్‌లు"</string>
@@ -2395,7 +2381,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"బ్యాక్‌గ్రౌండ్ ప‌రిమితి"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"నేపథ్యంలో అమలు కావడానికి అనువర్తనాన్ని అనుమతించండి"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"నేపథ్యంలో అమలు కావడానికి యాప్ అనుమతించబడలేదు"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"నేపథ్య వినియోగం పరిమితం చేయబడదు"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"నేపథ్య కార్యకలాపాన్ని పరిమితం చేయాలా?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"మీరు యాప్ నేపథ్య కార్యకలాపాన్ని పరిమితం చేస్తే, అది సరిగ్గా పని చేయకపోవచ్చు."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"ఈ యాప్ బ్యాటరీని ఆప్టిమైజ్ చేయికి సెట్ చేయబడలేదు కనుక, దీన్ని మీరు పరిమితం చేయలేరు.\n\nయాప్‌ను పరిమితం చేయడానికి, మొదట బ్యాటరీ ఆప్టిమైజేషన్‌ను ఆన్ చేయండి."</string>
@@ -3078,8 +3065,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"టెర్మినల్ వద్ద చెల్లించడం"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"చెల్లింపు యాప్ సెటప్ చేయండి. ఆపై తాకకూడదనే చిహ్నం ఉండే ఏదైనా టెర్మినల్ వద్ద మీ ఫోన్ వెనుక భాగం పైకి ఉండేలా పట్టుకోండి."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"అర్థమైంది"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"మరిన్ని…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"డిఫాల్ట్ చెల్లింపు యాప్‌ను సెట్ చెయ్యండి"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"డిఫాల్ట్ చెల్లింపు యాప్‌ను అప్‌డేట్ చెయ్యండి"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"స్పర్శరహిత టెర్మినల్ వద్ద, <xliff:g id="APP">%1$s</xliff:g> ద్వారా చెల్లించండి"</string>
@@ -3163,8 +3149,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"కాల్‌ల కోసం దీన్ని ఎల్లప్పుడూ ఉపయోగించు"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"డేటా కోసం SIMను ఎంచుకోండి"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SMS కోసం SIM కార్డ్‌ను ఎంచుకోండి"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"డేటా SIMను మార్చుతోంది, ఇందుకు ఒక నిమిషం పట్టవచ్చు…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"దీనితో కాల్ చేయండి"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"సిమ్ కార్డును ఎంచుకోండి"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"సిమ్ <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3307,8 +3292,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"సాధారణ సమయం, షెడ్యూల్, బ్యాటరీ సేవర్, పవర్ సేవర్, బ్యాటరీ, ఆటోమేటిక్, శాతం"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, అధునాతన కాలింగ్, 4g కాలింగ్"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"భాషను జోడించు, ఒక భాషను జోడించు"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"టెక్స్ట్ సైజ్"</string>
     <string name="default_sound" msgid="6604374495015245195">"డిఫాల్ట్ ధ్వని"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"రింగ్ &amp; నోటిఫికేషన్ వాల్యూమ్ <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"వాల్యూమ్, వైబ్రేషన్, అంతరాయం కలిగించవద్దు"</string>
@@ -3665,8 +3649,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"అంతరాయం కలిగించవద్దు యాక్సెస్"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'అంతరాయం కలిగించవద్దు\' ఫీచర్‌ను అనుమతించు"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ఇన్‌స్టాల్ చేసిన యాప్‌లేవీ అంతరాయం కలిగించవద్దు యాక్సెస్ అభ్యర్థించలేదు"</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"అప్లికేషన్‌లను లోడ్ చేస్తోంది…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"మీ అభ్యర్ధన మేరకు Android, ఈ పరికరంలో ఈ యాప్ యొక్క నోటిఫికేషన్‌లను కనిపించకుండా బ్లాక్ చేస్తోంది"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"మీ అభ్యర్ధన మేరకు Android, ఈ పరికరంలో ఈ వర్గం యొక్క నోటిఫికేషన్‌లను కనిపించకుండా బ్లాక్ చేస్తోంది"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"మీ అభ్యర్ధన మేరకు Android, ఈ పరికరంలో ఈ సమూహం యొక్క నోటిఫికేషన్‌లను కనిపించకుండా బ్లాక్ చేస్తోంది"</string>
@@ -4067,8 +4050,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"USBని ఏది నియంత్రించాలి"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"కనెక్ట్ చేసిన పరికరం"</string>
     <string name="usb_control_device" msgid="527916783743021577">"ఈ పరికరం"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"స్విచ్ అవుతోంది…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"మార్చడం సాధ్యపడలేదు"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"ఈ పరికరాన్ని ఛార్జ్ చేస్తోంది"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"కనెక్ట్ చేయబడిన పరికరాన్ని ఛార్జ్ చేస్తోంది"</string>
@@ -4315,7 +4297,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"వివరాలను చూడండి"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"డేటా సేవర్"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"అనియంత్రిత డేటా"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"నేపథ్య డేటా ఆఫ్ చేయబడింది"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"ఆన్‌లో ఉంది"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"ఆఫ్‌లో ఉంది"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"డేటా సేవర్‌ని ఉపయోగించు"</string>
@@ -4338,7 +4321,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"పరికరం లాక్ చేయబడితే, నోటిఫికేషన్‌ల్లో ప్రత్యుత్తరాలు లేదా ఇతర వచనాన్ని టైప్ చేయకుండా నిరోధించు"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"డిఫాల్ట్ స్పెల్‌ చెక‌ర్‌"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"స్పెల్‌ చెక‌ర్‌ను ఎంచుకోండి"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"స్పెల్‌ చెక‌ర్‌ను ఉప‌యోగించు"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"ఎంచుకోబడలేదు"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(ఏదీ లేదు)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4428,7 +4412,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"నిల్వ స్థలాన్ని ఖాళీ చేయడంలో సహాయపడటానికి, నిల్వ నిర్వాహికి మీ పరికరం నుండి బ్యాకప్ చేసిన ఫోటోలు మరియు వీడియోలను తీసివేస్తుంది."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"ఫోటోలు &amp; వీడియోలను తీసివేయి"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"నిల్వ నిర్వాహికి"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"నిల్వ మేనేజర్‌ని ఉపయోగించండి"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"ఆటోమేటిక్‌"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"మాన్యువల్"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"ఇప్పుడు స్థలాన్ని ఖాళీ చేయి"</string>
@@ -4466,10 +4451,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ఫోన్ చెక్ చేయ‌డానికి 2 సార్లు నొక్కడం"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"టాబ్లెట్‌ను తరచి చూడటానికి రెండుసార్లు నొక్కండి"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"పరికరాన్ని తరచి చూడటానికి రెండుసార్లు నొక్కండి"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"నోటిఫికేషన్‌ల కోసం స్వైప్"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"మీ నోటిఫికేషన్‌లను చూపించడానికి స్క్రీన్ దిగువ భాగం నుండి కిందకి స్వైప్ చేయండి"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"వన్-హ్యాండెడ్ మోడ్"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"వన్-హ్యాండెడ్ మోడ్‌ను ఉపయోగించండి"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"యాప్‌ల మధ్య స్విచ్ అయినప్పుడు నిష్క్రమించండి"</string>
@@ -4956,10 +4939,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"సెట్టింగ్‌లలో స్క్రీన్ ఓవర్‌లేలను అనుమతించండి"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"సెట్టింగ్‌లలోకి వెళ్లి, ఇతర యాప్‌లపై స్క్రీన్ ఓవర్‌లే పద్ధతిలో కనిపించదగ్గ యాప్‌లకు అనుమతినివ్వండి"</string>
     <string name="media_controls_title" msgid="403271085636252597">"మీడియా"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"మీడియా సెషన్ ముగిసినప్పుడు, ప్లేయర్‌ను దాచు"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"విస్తరించిన త్వరిత సెట్టింగ్‌ల ప్యానెల్ నుండి సెషన్‌ను కొనసాగించడానికి ప్లేయర్ మిమ్మల్ని అనుమతిస్తుంది."</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"ప్లేయర్‌ను దాచు"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"ప్లేయర్‌ను చూపించు"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"ప్లేయర్‌లు ఏవీ అందుబాటులో లేవు"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"మీడియా"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>
