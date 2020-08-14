@@ -137,7 +137,7 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_channel_yesIfAppOff() {
+    public void isAvailable_channel_notIfAppOff() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.bubblePreference = BUBBLE_PREFERENCE_NONE;
@@ -145,7 +145,7 @@ public class BubblePreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null);
 
-        assertTrue(mController.isAvailable());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
