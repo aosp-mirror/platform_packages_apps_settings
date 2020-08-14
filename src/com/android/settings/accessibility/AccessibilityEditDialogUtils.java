@@ -185,7 +185,6 @@ public class AccessibilityEditDialogUtils {
         final View dialogView = view.findViewById(R.id.magnify_full_screen);
         final CharSequence title = context.getText(
                 R.string.accessibility_magnification_area_settings_full_screen);
-        // TODO(b/146019459): Use vector drawable instead of temporal png file to avoid distorted.
         setupShortcutWidget(dialogView, title, R.drawable.accessibility_magnification_full_screen);
     }
 
@@ -193,7 +192,6 @@ public class AccessibilityEditDialogUtils {
         final View dialogView = view.findViewById(R.id.magnify_window_screen);
         final CharSequence title = context.getText(
                 R.string.accessibility_magnification_area_settings_window_screen);
-        // TODO(b/146019459): Use vector drawable instead of temporal png file to avoid distorted.
         setupShortcutWidget(dialogView, title,
                 R.drawable.accessibility_magnification_window_screen);
     }

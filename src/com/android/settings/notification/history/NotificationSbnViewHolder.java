@@ -108,7 +108,7 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
                                 : NotificationHistoryActivity.NotificationHistoryEvent
                                 .NOTIFICATION_HISTORY_RECENT_ITEM_CLICK,
                         uid, pkg, instanceId, position);
-                if (pi != null) {
+                if (pi != null && isPendingIntentValid) {
                     try {
                         pi.send();
                     } catch (PendingIntent.CanceledException e) {
