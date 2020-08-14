@@ -296,7 +296,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Mostrar datos del perfil en pantalla bloqueada"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Cuentas"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Ubicación"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"Usar ubicación"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desactivado"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">Encendido: <xliff:g id="COUNT_1">%1$d</xliff:g> apps tienen acceso a la ubicación</item>
@@ -622,7 +623,6 @@
       <item quantity="one">Debe tener menos de <xliff:g id="NUMBER_0">%d</xliff:g> dígito</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"El administrador del dispositivo no permite el uso de un PIN reciente"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"Tu administrador de TI bloquea los PIN comunes. Prueba uno diferente."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"No puede incluir un carácter no válido"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"Debe tener al menos una letra"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"Debe tener al menos un dígito"</string>
@@ -656,7 +656,6 @@
       <item quantity="one">Debe tener al menos 1 carácter no numérico</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"El administrador del dispositivo no permite el uso de contraseñas recientes"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"Tu administrador de TI bloquea las contraseñas comunes. Prueba una diferente."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"No se permiten secuencias de dígitos ascendentes, descendentes ni repetidas"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Confirmar"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"Cancelar"</string>
@@ -1042,8 +1041,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"La app está compartiendo contenido. Para compartir la conexión a Internet, desactiva el hotspot y vuelve a activarlo"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"No se configuró una contraseña"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Nombre del hotspot"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"Activando <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"Otros dispositivos pueden conectarse a <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Contraseña del hotspot"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Banda AP"</string>
@@ -1606,48 +1604,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Se restableció la configuración de red."</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"No se pueden borrar las tarjetas SIM"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"No es posible borrar las tarjetas SIM descargadas debido a un error.\n\nReinicia el dispositivo y vuelve a intentarlo."</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"Borrar todos los datos (restablecer la configuración de fábrica)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"Borrar todo (restablecer configuración de fábrica)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Esta acción borrará todos los datos del "<b>"almacenamiento interno"</b>" de tu tablet, como\n\n"<li>"Tu Cuenta de Google"</li>\n<li>"Los datos y la configuración del sistema y de las apps"</li>\n<li>"Las apps descargadas"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Esta acción borrará todos los datos del "<b>"almacenamiento interno"</b>" de tu teléfono, como\n\n"<li>"Tu Cuenta de Google"</li>\n<li>"Los datos y la configuración del sistema y de las apps"</li>\n<li>"Las apps descargadas"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Accediste a las siguientes cuentas:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Hay otros usuarios presentes en este dispositivo.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Otros datos del usuario"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"No se cancelará tu plan de servicio móvil."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Para borrar la música, las imágenes y otros datos de usuario, debes borrar el "<b>"almacenamiento USB"</b>"."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Para borrar música, imágenes y otros datos del usuario, debes borrar la "<b>"tarjeta SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Eliminar almacenamiento USB"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Borrar tarjeta SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Borra todos los datos del almacenamiento USB, como la música o las fotos."</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Borra todos los datos de la tarjeta SD, como música o fotos."</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Borrar todos los datos"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Borrar todos los datos"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"Se borrarán las apps que hayas descargado y tu información personal. No podrás deshacer esta acción."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Se borrará toda tu información personal, incluidas las apps y las tarjetas SIM descargadas. No podrás deshacer esta acción."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"¿Quieres borrar todos los datos?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"El restablecimiento de la configuración de fábrica no está disponible para este usuario"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"Borrando"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"Espera…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"Configuración"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"Establecer correo de voz, desvío de llamadas, llamada en espera, identificador de llamadas"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"Conexión a red por USB"</string>
@@ -2195,11 +2174,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Cortar con el botón de encendido"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Puntero del mouse grande"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"Audio mono"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"Combinar canales cuando se reproduce audio"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"Balance de audio"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"Izquierda"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"Derecha"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"Predeterminado"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 segundos"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 segundos"</string>
@@ -2229,12 +2213,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibración de las notificaciones"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibración del tono"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respuesta táctil"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Usar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Usar la corrección de color"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Mostrar subtítulos"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Solo para apps compatibles"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Estilo y tamaño de los subtítulos"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"Tamaño del texto: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Más opciones"</string>
@@ -2264,8 +2251,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deuteronomalía"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"Protanomalía"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"Tritanomalía"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Escala de grises"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Rojo-verde"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Rojo-verde"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Azul-amarillo"</string>
@@ -2395,7 +2381,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"Restricción en segundo plano"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Permite que la app se ejecute en segundo plano"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"La app no puede ejecutarse en segundo plano"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"No se puede restringir el uso en segundo plano"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"¿Limitar actividad en segundo plano?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Si limitas la actividad en segundo plano de una app, es posible que no funcione correctamente"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Como no se configuró la app para optimizar la batería, no puedes restringirla.\n\nPrimero, activa optimización de batería."</string>
@@ -3078,8 +3065,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Cómo pagar en la terminal"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura una aplicación para efectuar pagos. A continuación, solo tienes que sostener la parte posterior del teléfono sobre cualquier terminal con el símbolo de pago sin contacto."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Entendido"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"Más…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Establecer app de pagos predeterminada"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Actualizar app de pagos predeterminada"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"En una terminal para pagar sin contacto, usar <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -3163,8 +3149,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Usar siempre para llamadas"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"Seleccionar SIM para datos"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Selecciona una SIM para los SMS"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"Cambiando SIM de datos. Este proceso puede demorar unos minutos…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Llamar con"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Seleccionar una tarjeta SIM"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3307,8 +3292,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, programa, ahorro de batería, ahorro de energía, batería, automático, porcentaje"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, llamadas avanzadas, llamadas mediante 4G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"agregar idioma, agregar un idioma"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"tamaño del texto"</string>
     <string name="default_sound" msgid="6604374495015245195">"Sonido predeterminado"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Volumen de tono y notificaciones al <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volumen, vibración, No interrumpir"</string>
@@ -3665,8 +3649,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acceso en No interrumpir"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir opción No interrumpir"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ninguna aplicación instalada solicitó acceso en No interrumpir."</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"Cargando apps…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Como lo solicitaste, Android bloquea las notificaciones de esta app para que no se muestren en el dispositivo"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Como lo solicitaste, Android bloquea esta categoría de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Como lo solicitaste, Android bloquea este grupo de notificaciones para que no se muestren en el dispositivo"</string>
@@ -4065,8 +4048,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"USB controlado por"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"Dispositivo conectado"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Este dispositivo"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"Cambiando…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"No se pudo cambiar"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Cargando este dispositivo"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Cargando dispositivo conectado"</string>
@@ -4313,7 +4295,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"Ver detalles"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Ahorro de datos"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Datos sin restricciones"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"Se desactivaron los datos en segundo plano"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"Activado"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Desactivado"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Usar Ahorro de datos"</string>
@@ -4336,7 +4319,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Si el dispositivo está bloqueado, evita la escritura de respuestas y otros textos en las notificaciones"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Corrector predeterminado"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Elegir corrector ortográfico"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Usar el corrector ortográfico"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"Sin seleccionar"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(ninguno)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4426,7 +4410,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"El administrador de almacenamiento quita de tu dispositivo las fotos y los videos con copia de seguridad para liberar espacio de almacenamiento."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Quitar fotos y videos"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Administrador de almacenamiento"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Usar el Administrador de almacenamiento"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Automático"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Liberar espacio ahora"</string>
@@ -4464,10 +4449,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Presionar la pantalla dos veces para revisar el teléfono"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Presionar dos veces la tablet para revisarla"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Presionar dos veces el dispositivo para revisarlo"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Desliza para ver notific."</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"Desliza abajo desde la parte superior de la pantalla para ver notificaciones"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"Modo de una mano"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Usar el modo de una mano"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Salir del modo cuando se cambia de app"</string>
@@ -4954,10 +4937,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir pantallas superpuestas en Configuración"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permite que las apps que pueden mostrar contenido sobre otras se superpongan a las pantallas de Configuración"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Contenido multimedia"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Ocultar reproductor al terminar sesión multimedia"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"El reproductor te permite reanudar una sesión desde el panel expandido de Configuración rápida."</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar reproductor"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar reproductor"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"No hay jugadores disponibles"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"contenido multimedia"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>

@@ -296,7 +296,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"लॉक स्क्रीन पर प्रोफ़ाइल की जानकारी दिखाएं"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"खाते"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"जगह"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"जगह की जानकारी की सुविधा का इस्तेमाल करें"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"बंद करें"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="one">चालू है - <xliff:g id="COUNT_1">%1$d</xliff:g> ऐप्लिकेशन के पास जगह की जानकारी का ऐक्सेस है</item>
@@ -622,7 +623,6 @@
       <item quantity="other">पिन में <xliff:g id="NUMBER_1">%d</xliff:g> से कम अंक होने चाहिए</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"डिवाइस व्यवस्थापक हाल ही के पिन का उपयोग करने की अनुमति नहीं देता"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"आपके आईटी एडमिन ने आम तौर पर इस्तेमाल होने वाले पिन पर रोक लगा रखी है. दूसरा पिन बनाएं."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"इसमें अमान्य वर्ण शामिल नहीं हो सकता"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"कम से कम एक अक्षर होना चाहिए"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"कम से कम एक अंक होना चाहिए"</string>
@@ -656,7 +656,6 @@
       <item quantity="other">पासवर्ड में कम से कम <xliff:g id="COUNT">%d</xliff:g> वर्ण ऐसे होने चाहिए जो संख्या न हों</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"डिवाइस व्यवस्थापक हाल ही के पासवर्ड का उपयोग करने की अनुमति नहीं देता"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"आपके आईटी एडमिन ने आम तौर पर इस्तेमाल होने वाले पासवर्ड पर रोक लगा रखी है. कोई दूसरा पासवर्ड बनाएं."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"अंकों के बढ़ते, घटते या दोहराए जाने वाले क्रम की अनुमति नहीं है"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"पुष्टि करें"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"रद्द करें"</string>
@@ -1042,8 +1041,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"ऐप सामग्री शेयर कर रहा है. इंटरनेट कनेक्शन शेयर करने के लिए, हॉटस्पॉट बंद करके फिर उसे चालू करें"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"काेई पासवर्ड सेट नहीं है"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"हॉटस्पॉट का नाम"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> चालू हो रहा है…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"दूसरे डिवाइस <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> से कनेक्ट हो सकते हैं"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"हॉटस्पॉट का पासवर्ड"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"एपी बैंड"</string>
@@ -1606,48 +1604,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"नेटवर्क सेटिंग रीसेट कर दी गई हैं"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"सिम नहीं मिटाए जा सकते"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"गड़बड़ी की वजह से डाउनलोड किए गए सिम मिटाए नहीं जा सकते.\n\nअपना डिवाइस रीस्टार्ट करें और फिर से कोशिश करें."</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"हमेशा के लिए पूरा डेटा मिटाएं (फ़ैक्ट्री रीसेट)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"हमेशा के लिए पूरा डेटा मिटाएं (फ़ैक्ट्री रीसेट)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"इससे आपके टैबलेट की "<b>"मेमोरी"</b>" से सारा डेटा हमेशा के लिए मिट जाएगा, जिसमें ये शामिल हैं:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्टम और ऐप्लिकेशन से जुड़ा डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए ऐप्लिकेशन"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"इससे आपके फ़ोन की "<b>"मेमोरी"</b>" से सारा डेटा हमेशा के लिए मिट जाएगा, जिसमें ये शामिल हैं:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्टम और ऐप्लिकेशन से जुड़ा डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए ऐप्लिकेशन"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"आपने फ़िलहाल इन खातों में साइन इन किया हुआ है:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"इस डिवाइस पर अन्य उपयोगकर्ता मौजूद हैं.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"संगीत"</li>\n<li>"फ़ोटो"</li>\n<li>"उपयोगकर्ता का अन्य डेटा"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"इससे आपका मोबाइल सेवा प्लान रद्द नहीं होगा."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"संगीत, तस्वीर, और उपयोगकर्ता का अन्य डेटा मिटाने के लिए "<b>"यूएसबी मेमोरी"</b>" के डेटा को हमेशा के लिए मिटाना होगा."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"संगीत, तस्वीर, और उपयोगकर्ता का अन्य डेटा मिटाने के लिए "<b>"एसडी कार्ड"</b>" के डेटा को हमेशा के लिए मिटाना होगा."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USB मेमोरी मिटाएं"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD कार्ड मिटाएं"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"आंतरिक USB मेमोरी का सभी डेटा, जैसे संगीत या फ़ोटो, मिटाएं"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"SD कार्ड पर मौजूद सभी डेटा, जैसे संगीत या फ़ोटो, मिटाएं"</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"हमेशा के लिए पूरा डेटा मिटाएं"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"हमेशा के लिए पूरा डेटा मिटाएं"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"आपकी सारी निजी जानकारी और डाउनलोड किए गए ऐप्लिकेशन मिटा दिए जाएंगे. आप मिटाया गया डेटा वापस नहीं पा सकते."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"डाउनलोड किए गए ऐप्लिकेशन और सिम के साथ ही आपकी सारी निजी जानकारी मिटा दी जाएगी. आप मिटाया गया डेटा वापस नहीं पा सकते."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"पूरा डेटा मिटाना चाहते हैं?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"इस उपयोगकर्ता के लिए फ़ैक्ट्री रीसेट उपलब्ध नहीं है"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"हमेशा के लिए मिटाया जा रहा है"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"कृपया इंतज़ार करें…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"कॉल सेटिंग"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"वॉइसमेल, कॉल को दूसरे नंबर पर भेजना, कॉल वेटिंग (कॉल के दौरान आ रहा दूसरा कॉल), कॉलर आईडी सेट करें"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"यूएसबी से टेदरिंग"</string>
@@ -2195,11 +2174,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"पावर बटन से कॉल काटना"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"बड़ा माउस पॉइंटर"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ऐनिमेशन हटाएं"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"मोनो ऑडियो"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"ऑडियो चलाते समय चैनलों को एक में जोड़ें"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"ऑडियो बैलेंस"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"बायां"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"दायां"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"डिफ़ॉल्ट"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 सेकंड"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 सेकंड"</string>
@@ -2229,12 +2213,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"सूचना के लिए वाइब्रेशन"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"घंटी के लिए वाइब्रेशन"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"टच फ़ीडबैक"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> का इस्तेमाल करें"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> खोलें"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"रंग में सुधार करने की सुविधा इस्तेमाल करें"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"कैप्शन दिखाएं"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"सिर्फ़ इस सुविधा के साथ काम करने वाले ऐप्लिकेशन के लिए"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"कैप्शन का साइज़ और शैली"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> टेक्स्ट का साइज़"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"ज़्यादा विकल्प"</string>
@@ -2264,8 +2251,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"लाल-हरे रंग की पहचान न कर पाने की समस्या"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"हरा-लाल रंग पहचान न पाने की समस्या"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"नीले-पीले रंग की पहचान न कर पाने की समस्या"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"ग्रेस्केल"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"लाल-हरा रंग पहचान न पाना"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"लाल-हरा रंग पहचान न पाना"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"नीला-पीला रंग पहचान न पाना"</string>
@@ -2395,7 +2381,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"बैकग्राउंड की गतिविधियों पर रोक लगाना"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"ऐप्लिकेशन को बैकग्राउंड में चलने दें"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"ऐप्लिकेशन को बैकग्राउंड में चलने की अनुमति नहीं है"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"बैकग्राउंड में हो रहे बैटरी खर्च पर रोक नहीं लगाई जा सकती"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"ऐप की बैकग्राउंड गतिविधि को सीमित करें?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"अगर आप ऐप की बैकग्राउंड गतिविधि को सीमित करते हैं, तो हो सकता है यह ठीक ढंग से काम न करे"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"ऐप्लिकेशन पर रोक नहीं लगेगी क्योंकि यह बैटरी ऑप्टिमाइज़ नहीं कर सकता.\n\nबैटरी ऑप्टिमाइज़ेशन चालू करके ही ऐसा हो सकता है."</string>
@@ -3078,8 +3065,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"पैसे चुकाने की मशीन का इस्तेमाल करना"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"पैसे चुकाने के लिए किसी ऐप्लिकेशन को चुनें. इसके बाद, टच किए बिना पैसे चुकाने के निशान वाले किसी टर्मिनल के ऊपर अपने फ़ोन का पिछला हिस्सा रखें."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"ठीक है"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"ज़्यादा…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"पैसे चुकाने के लिए डिफ़ॉल्ट ऐप्लिकेशन सेट करें"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"पैसे चुकाने के डिफ़ॉल्ट ऐप्लिकेशन को अपडेट करें"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"टच किए बिना पैसे चुकाने के टर्मिनल पर, <xliff:g id="APP">%1$s</xliff:g> से पैसे चुकाएं"</string>
@@ -3163,8 +3149,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"कॉल के लिए हमेशा इसका उपयोग करें"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"डेटा के लिए सिम चुनें"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"मैसेज (एसएमएस) के लिए सिम चुनें"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"डेटा सिम स्विच किया जा रहा है, इसमें एक मिनट तक लग सकता है…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"इस सिम से कॉल करें"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"सिम कार्ड चुनें"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"सिम <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3307,8 +3292,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"रूटीन, शेड्यूल, बैटरी सेवर, पावर सेवर, बैटरी, ऑटोमैटिक, प्रतिशत"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, बेहतर कॉलिंग, 4g कॉलिंग"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"भाषा जोड़ें, किसी भाषा को जोड़ें"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"टेक्स्ट का साइज़"</string>
     <string name="default_sound" msgid="6604374495015245195">"डिफ़ॉल्‍ट ध्‍वनि"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"घंटी और सूचना की आवाज़ <xliff:g id="PERCENTAGE">%1$s</xliff:g> है"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"आवाज़, वाइब्रेशन, परेशान न करें"</string>
@@ -3665,8 +3649,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"\'परेशान न करें\' सुविधा का ऐक्सेस"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'परेशान न करें\' सुविधा चालू करें"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"इंस्टॉल किए गए किसी भी ऐप ने परेशान ना करें सुविधा के इस्तेमाल का अनुरोध नहीं किया है"</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"ऐप्लिकेशन लोड हो रहे हैं…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"आपके अनुरोध पर, Android इस ऐप्लिकेशन की सूचनाओं को इस डिवाइस पर आने से रोक रहा है"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"आपके अनुरोध पर, Android इस श्रेणी की सूचनाओं को इस डिवाइस पर आने से रोक रहा है"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"आपके अनुरोध पर, Android इस तरह की सूचनाओं को इस डिवाइस पर आने से रोक रहा है"</string>
@@ -4065,8 +4048,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"यूएसबी का मोड"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"जोड़ा गया डिवाइस"</string>
     <string name="usb_control_device" msgid="527916783743021577">"यह डिवाइस"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"स्विच किया जा रहा है…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"स्विच नहीं किया जा सका"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"इस डिवाइस को चार्ज करना"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"जोड़े गए डिवाइस को चार्ज करना"</string>
@@ -4313,7 +4295,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"जानकारी देखें"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"डेटा बचाने की सेटिंग"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"पाबंदी के बिना डेटा इस्तेमाल"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"पृष्ठभूमि डेटा बंद है"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"चालू"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"बंद"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"डेटा बचाने की सेटिंग चालू करें"</string>
@@ -4336,7 +4319,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"अगर डिवाइस लॉक है, तो सूचनाओं का जवाब या अन्य लेख लिखने से रोकें"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"डिफ़ॉल्ट तौर पर स्पेलिंग जाँचने वाला"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"वर्तनी/स्पेलिंग जाँचकर्ता चुनें"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"स्पेलिंग जाँचने वाला टूल इस्तेमाल करें"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"नहीं चुना गया"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(कुछ नहीं)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4426,7 +4410,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"मेमोरी में जगह खाली करने में मदद करने के लिए, मेमोरी प्रबंधक आपके डिवाइस से बैकअप ली गई फ़ोटो और वीडियो निकाल देता है."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"फ़ोटो और वीडियो निकालें"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"मेमोरी प्रबंधक"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"मेमोरी मैनेजर इस्तेमाल करें"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"अपने-आप"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"मैन्युअल"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"अभी स्पेस खाली करें"</string>
@@ -4464,10 +4449,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"फ़ोन देखने के लिए दो बार टैप करें"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"टैबलेट देखने के लिए दो बार छूएं"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"डिवाइस देखने के लिए दो बार छूएं"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"सूचनाओं के लिए स्वाइप करें"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"अपनी सूचनाएं देखने के लिए, स्क्रीन के सबसे ऊपर से नीचे की तरफ़ स्वाइप करें"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"वन-हैंडेड मोड"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"वन-हैंडेड मोड का इस्तेमाल करें"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"एक ऐप्लिकेशन से दूसरे पर जाते समय बाहर निकलें"</string>
@@ -4954,10 +4937,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"\'सेटिंग\' पर स्क्रीन ओवरले करने की अनुमति दें"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"\'सेटिंग\' में जाकर उन ऐप्लिकेशन को स्क्रीन ओवरले करने की अनुमति दें जो दूसरे ऐप्लिकेशन के ऊपर दिख सकते हैं"</string>
     <string name="media_controls_title" msgid="403271085636252597">"मीडिया"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"मीडिया सेशन के खत्म होने पर, प्लेयर छिपाएं"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"आप मीडिया प्लेयर का इस्तेमाल करके, फटाफट सेटिंग के बड़े किए गए पैनल से सेशन फिर से शुरू कर सकते हैं."</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"मीडिया प्लेयर को छिपाएं"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"मीडिया प्लेयर दिखाएं"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"कोई मीडिया प्लेयर उपलब्ध नहीं है"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"मीडिया"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>

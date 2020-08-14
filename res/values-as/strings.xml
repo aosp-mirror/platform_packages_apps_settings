@@ -296,7 +296,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"লক স্ক্ৰীণত প্ৰ\'ফাইল-বিষয়ক তথ্য দেখুৱাওক"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"একাউণ্টসমূহ"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"অৱস্থান"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"অৱস্থান ব্যৱহাৰ কৰক"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"অফ আছে"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="one">অন আছে - <xliff:g id="COUNT_1">%1$d</xliff:g>টা এপে অৱস্থান এক্সেছ কৰিব পাৰে</item>
@@ -622,7 +623,6 @@
       <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>টা সংখ্যাতকৈ কম হ\'বই লাগিব</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"ডিভাইচ এডমিনে আপুনি ব্যৱহাৰ কৰা অন্তিমটো পিন আকৌ ব্যৱহাৰ কৰিবলৈ অনুমতি দিয়া নাই"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"আপোনাৰ আইটি প্ৰশাসকে বিশেষত্বহীন পিনবোৰ অৱৰোধ কৰি থৈছে৷ এটা পৃথক পিনেৰে চেষ্টা কৰক৷"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"কেৱল বৈধ বৰ্ণহে দিয়ক"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"কমেও এটা বৰ্ণ থাকিব লাগিব"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"কমেও এটা অংক থাকিব লাগিব"</string>
@@ -656,7 +656,6 @@
       <item quantity="other">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা এনেকুৱা বৰ্ণ থাকিবই লাগিব যিটো সংখ্যা নহয়</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"ডিভাইচৰ প্ৰশাসকে শেহতীয়া পাছৱৰ্ড ব্যৱহাৰ কৰিব নিদিয়ে"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"আইটি এডমিনে উমৈহতীয়া পাছৱৰ্ডসমূহ অৱৰোধ কৰি থৈছে। এটা পৃথক পাছৱৰ্ডেৰে চেষ্টা কৰক।"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"সংখ্যাবোৰৰ ঊৰ্দ্ধগামী, অধোগামী বা পুনৰাবৃত্তি ক্ৰম অনুমোদিত নহয়"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"নিশ্চিত কৰক"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"বাতিল কৰক"</string>
@@ -1042,8 +1041,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"এপে সমল শ্বেয়াৰ কৰি আছে৷ ইণ্টাৰনেট সংযোগ শ্বেয়াৰ কৰিবলৈ, হটস্পট অফ কৰি পিছত আকৌ অন কৰক"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"কোনো পাছৱৰ্ড ছেট কৰা হোৱা নাই"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"হটস্পটৰ নাম"</string>
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
-    <skip />
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> অন কৰি থকা হৈছে…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>ৰ সৈতে অইন ডিভাইচে সংযোগ কৰিব পাৰে"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"হটস্পটৰ পাছৱৰ্ড"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"এপি বেণ্ড"</string>
@@ -1152,7 +1150,7 @@
     <string name="accessibility_category_personal" msgid="2228088849803484780">"ব্যক্তিগত প্ৰ’ফাইলৰ একাউণ্টসমূহ"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"কৰ্মস্থানৰ একাউণ্ট - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"ব্যক্তিগত একাউণ্ট - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
-    <string name="search_settings" msgid="7573686516434589771">"অনুসন্ধান"</string>
+    <string name="search_settings" msgid="7573686516434589771">"Search"</string>
     <string name="display_settings" msgid="7197750639709493852">"ডিছপ্লে’"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"স্বয়ং-ঘূৰ্ণন স্ক্ৰীণ"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"ৰংবোৰ"</string>
@@ -1606,48 +1604,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"নেটৱৰ্ক ছেটিংসমূহ ৰিছেট কৰা হ’ল"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"ছিমবোৰ আঁতৰাব পৰা নগ’ল"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"ডাউনল’ড কৰা ছিমটো কোনো অজ্ঞাত আঁসোৱাহৰ বাবে মচিব পৰা নগ’ল।\n\nআপোনাৰ ডিভাইচটো ৰিষ্টাৰ্ট কৰি আকৌ চেষ্টা কৰক।"</string>
-    <!-- no translation found for main_clear_title (277664302144837723) -->
-    <skip />
-    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (1651178880680056849) -->
-    <skip />
-    <!-- no translation found for main_clear_desc (6984348811887162647) -->
-    <skip />
-    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
-    <skip />
-    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
-    <skip />
-    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
-    <skip />
+    <string name="main_clear_title" msgid="277664302144837723">"সকলো ডেটা মচক (ফেক্টৰী ৰিছেট)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"সকলো ডেটা মচক (ফেক্টৰী ৰিছেট)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"এই কাৰ্যই \n\n"<li>"আপোনাৰ Google একাউণ্ট"</li>\n<li>"ছিষ্টেম আৰু এপ্‌ ডেটা আৰু ছেটিংসমূহ"</li>\n<li>"ডাউনল’ড কৰা এপ্‌"</li>" আদিকে ধৰি আপোনাৰ টেবলেটটোৰ "<b>"অভ্যন্তৰীণ ষ্ট’ৰেজ"</b>"ত থকা সকলো ডেটা মচিব"</string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"এই কাৰ্যই \n\n"<li>"আপোনাৰ Google একাউণ্ট"</li>\n<li>"ছিষ্টেম আৰু এপ্‌ ডেটা আৰু ছেটিংসমূহ"</li>\n<li>"ডাউনল’ড কৰা এপ্‌"</li>" আদিকে ধৰি আপোনাৰ ফ’নটোৰ "<b>"অভ্যন্তৰীণ ষ্ট’ৰেজ"</b>"ত থকা সকলো ডেটা মচিব"</string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"আপুনি বৰ্তমান এই একাউণ্টসমূহত ছাইন ইন হৈ আছে:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"এই ডিভাইচত আৰু ব্যৱহাৰকাৰী আছে।\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"সংগীত"</li>\n<li>"ফট’"</li>\n<li>"অন্য ব্যৱহাৰকাৰীৰ ডেটা"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"ই-ছিমসমূহh"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"এইটোৱে আপোনাৰ ম’বাইল সেৱাৰ আঁচনি বাতিল নকৰে।"</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"সংগীত, চিত্ৰ আৰু অন্য ব্যৱহাৰকাৰীৰ ডেটা মচিবলৈ, "<b>"USB ষ্ট’ৰেজ"</b>" মচিব লাগিব।"</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"সংগীত, চিত্ৰ আৰু অন্য ব্যৱহাৰকাৰীৰ ডেটা মচিবলৈ, "<b>"এছডি কাৰ্ডখন"</b>" মচিব লাগিব।"</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"ইউএছবি সঞ্চয়াগাৰ মচক"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD কাৰ্ড মচক"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"সংগীত, ফট\' আদিকে ধৰি আভ্যন্তৰিণ USB সঞ্চয়াগাৰত থকা সকলো ডেটা মচক"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"সংগীত বা ফট\' আদিকে ধৰি এছডি কাৰ্ডত থকা সকলো ডেটা মচক"</string>
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
-    <skip />
-    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
-    <skip />
-    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
-    <skip />
-    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
-    <skip />
-    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
-    <skip />
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"সকলো ডেটা মচক"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"সকলো ডেটা মচক"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"আপোনাৰ সকলো ব্যক্তিগত তথ্য আৰু ডাউনল’ড কৰা এপ্‌ মচা হ’ব। আপুনি এই কাৰ্য আনডু কৰিব নোৱাৰে।"</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"ডাউনল’ড কৰা এপ্‌সমূহ আৰু ছিমকে ধৰি আপোনাৰ সকলো ব্যক্তিগত তথ্য মচা হ’ব। আপুনি এই কাৰ্য আনডু কৰিব নোৱাৰে।"</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"সকলো ডেটা মচিবনে?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"এই ব্যৱহাৰকাৰীগৰাকীৰ বাবে ফেক্টৰী ৰিছেট সুবিধাটো উপলব্ধ নহয়"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"মচি থকা হৈছে"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"অনুগ্ৰহ কৰি অপেক্ষা কৰক…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"কল ছেটিংসমূহ"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"ভইচমেইল, কল ফৰৱাৰ্ডিং, কল অপেক্ষা, কল কৰোঁতাৰ আইডি ছেটআপ কৰক"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"ইউএছবি টেডাৰিং"</string>
@@ -2195,11 +2174,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"পাৱাৰ বুটাম টিপিলে কল সমাপ্ত হ\'ব"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"মাউছৰ পইণ্টাৰ ডাঙৰ"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"এনিমেশ্বন আঁতৰাওক"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"ম\'ন\' ধ্বনি"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"অডিঅ\' প্লে কৰাৰ সময়ত চেনেলসমূহ একত্ৰ কৰক"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"অডিঅ\' বেলেঞ্চ"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"বাওঁফাল"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"সোঁফাল"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"ডিফ’ল্ট"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"১০ ছেকেণ্ড"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"৩০ ছেকেণ্ড"</string>
@@ -2229,12 +2213,15 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"জাননীৰ কম্পন"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"ৰিং কম্পন"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"স্পৰ্শৰ প্ৰতিক্ৰিয়া"</string>
-    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ব্যৱহাৰ কৰক"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
     <skip />
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> খোলক"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"ৰং শুধৰণি ব্যৱহাৰ কৰক"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"কেপশ্বনসমূহ দেখুৱাওক"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"কেৱল সমৰ্থিত এপৰ বাবে"</string>
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"কেপশ্বনৰ আকাৰ আৰু শৈলী"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> আকাৰৰ পাঠ"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"অধিক বিকল্প"</string>
@@ -2264,8 +2251,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ডিউটাৰএন’মেলী"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"প্ৰ’টান’মেলী"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"ট্ৰাইটান’মেলী"</string>
-    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
-    <skip />
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"গ্ৰে’স্কে’ল"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"ৰঙা-সেউজীয়া"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"ৰঙা-সেউজীয়া"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"নীলা-হালধীয়া"</string>
@@ -2370,7 +2356,7 @@
     <string name="print_feature_state_off" msgid="1466195699995209446">"অফ হৈ আছে"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"সেৱা যোগ কৰক"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"প্ৰিণ্টাৰ যোগ কৰক"</string>
-    <string name="print_menu_item_search" msgid="5989979785203603169">"সন্ধান কৰক"</string>
+    <string name="print_menu_item_search" msgid="5989979785203603169">"Search"</string>
     <string name="print_searching_for_printers" msgid="5401413178028348800">"সংযোগ কৰিবলৈ প্ৰিণ্টাৰ বিচাৰি থকা হৈছে"</string>
     <string name="print_service_disabled" msgid="9185935228930987786">"সেৱা নিষ্ক্ৰিয়হৈ আছে"</string>
     <string name="print_print_jobs" msgid="2605944855933091183">"প্ৰিণ্টিঙৰ কামবোৰ"</string>
@@ -2395,7 +2381,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"নেপথ্য়ৰ সীমিতকৰণ"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"এই এপটো নেপথ্যত চলিবলৈ অনুমতি দিয়ক"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"নেপথ্যত চলাবৰ বাবে এপক অনুমতি দিয়া হোৱা নাই"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"নেপথ্য়ত হোৱা ব্য়ৱহাৰ সীমিত কৰিব নোৱাৰি"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"নেপথ্যৰ কাৰ্যকলাপ সীমিত কৰিবনে?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"আপুনি এটা এপৰ নেপথ্য কাৰ্যকলাপ সীমিত কৰিলে ই অস্বাভাৱিক আচৰণ কৰিব পাৰে"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"যিহেতু এই এপটো বেটাৰি অপ্টিমাইজ কৰিবলৈ ছেট কৰি থোৱা হোৱা নাই, সেয়ে ইয়াক আপুনি সীমিত কৰিব নোৱাৰে।\n\nএপটো সীমিত কৰিবলৈ প্ৰথমে বেটাৰি অপ্টিমাইজেশ্বন অন কৰক।"</string>
@@ -3078,8 +3065,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"টাৰ্মিনেলত ধন পৰিশোধ কৰা"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"ধন পৰিশোধ কৰিবলৈ এটা এপ্ ছেট আপ কৰক। তাৰ পিছত পইচা পৰিশোধ কৰিবলৈ যিকোনো স্পৰ্শহীন প্ৰতীক অঁকা থকা টাৰ্মিনেলত ফ\'নটোৰ পিছফালটো ওচৰ চপাই ধৰক।"</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"বুজি পালোঁ"</string>
-    <!-- no translation found for nfc_more_title (1041094244767216498) -->
-    <skip />
+    <string name="nfc_more_title" msgid="1041094244767216498">"অধিক…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"ডিফ’ল্ট পৰিশোধ এপ্‌ ছেট কৰক"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"ডিফ’ল্ট পৰিশোধ এপ্‌ আপডে’ট কৰক"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"এটা স্পৰ্শবিহীন টাৰ্মিনেলত <xliff:g id="APP">%1$s</xliff:g>ৰ জৰিয়তে পৰিশোধ কৰক"</string>
@@ -3163,8 +3149,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"কল কৰিবলৈ সদায় ইয়াক ব্যৱহাৰ কৰক"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"ডেটাৰ বাবে এখন ছিম বাছনি কৰক"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"এছএমএছৰ বাবে এখন ছিম বাছনি কৰক"</string>
-    <!-- no translation found for data_switch_started (6292759843974720112) -->
-    <skip />
+    <string name="data_switch_started" msgid="6292759843974720112">"ডেটা ছিম সলনি কৰি থকা হৈছে, ইয়াৰ বাবে এক মিনিট পৰ্যন্ত সময় লাগিব পাৰে…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"এই ছিমৰ সহায়ত কল কৰক"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"এখন ছিম কাৰ্ড বাছনি কৰক"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"ছিম <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3307,8 +3292,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ৰুটিন, সময়সূচী, বেটাৰী সঞ্চয়কাৰী, পাৱাৰ ছেভাৰ, বেটাৰী, স্বয়ংক্ৰিয়, শতাংশ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, উচ্চখাপৰ কলিং, 4g কলিং"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ভাষা যোগ কৰক, এটা ভাষা যোগ কৰক"</string>
-    <!-- no translation found for keywords_font_size (336803136451166298) -->
-    <skip />
+    <string name="keywords_font_size" msgid="336803136451166298">"ফণ্টৰ আকাৰ"</string>
     <string name="default_sound" msgid="6604374495015245195">"ডিফ\'ল্ট ধ্বনি"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"ৰিং আৰু জাননীৰ ভলিউম <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ভলিউম, কম্পন, অসুবিধা নিদিব"</string>
@@ -3665,8 +3649,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"অসুবিধা নিদিবত অনুমতি"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"অসুবিধা নিদিব ম’ডক অনুমতি দিয়ক"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ইনষ্টল কৰি থোৱা কোনো এপে অসুবিধা নিদিবত প্ৰৱেশৰ অনুমতি বিচৰা নাই"</string>
-    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
-    <skip />
+    <string name="loading_notification_apps" msgid="5139471829295287945">"এপসমূহ ল’ড কৰি থকা হৈছে…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"আপোনাৰ অনুৰোধত, Android-এ এই ডিভাইচটোত এই এপৰ জাননীসমূহ দেখাবলৈ বাধা দি আছে"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"আপোনাৰ অনুৰোধমৰ্মে, Androidএ জাননীসমূহৰ এই শ্ৰেণীটোক এই ডিভাইচটোত দৃশ্যমান হ\'বলৈ দিয়া নাই"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"আপোনাৰ অনুৰোধমৰ্মে, Androidএ জাননীসমূহৰ এই গোটটোক এই ডিভাইচটোত দৃশ্যমান হ\'বলৈ দিয়া নাই"</string>
@@ -4065,8 +4048,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"নিম্ন বস্তুয়ে ইউএছবিক নিয়ন্ত্ৰিত কৰে"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"সংযোগ হৈ থকা ডিভাইচ"</string>
     <string name="usb_control_device" msgid="527916783743021577">"এইটো ডিভাইচ"</string>
-    <!-- no translation found for usb_switching (3654709188596609354) -->
-    <skip />
+    <string name="usb_switching" msgid="3654709188596609354">"সলনি কৰি থকা হৈছে…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"সলনি কৰিব পৰা নগ\'ল"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"ডিভাইচটো চ্চাৰ্জ কৰা হৈছে"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"সংযুক্ত ডিভাইচ চ্চাৰ্জ কৰিৰ বাবে"</string>
@@ -4313,7 +4295,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"সবিশেষ চাওক"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"ডেটা সঞ্চয়কাৰী"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"অপৰিমিত ডেটা"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"নেপথ্যৰ ডেটা অফ কৰা হৈছে"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"অন হৈ আছে"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"অফ"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"ডেটা সঞ্চয়কাৰী ব্যৱহাৰ কৰক"</string>
@@ -4336,7 +4319,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"ডিভাইচটো লক হৈ থাকোতে, টাইপিং উত্তৰ বা অইন পাঠ জাননীসমূহ নেদেখুৱাব"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"ডিফ\'ল্ট বানান পৰীক্ষক"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"বানান পৰীক্ষক বাছনি কৰক"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"বানান পৰীক্ষক ব্য়ৱহাৰ কৰক"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"বাছনি কৰা হোৱা নাই"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"পোৱা নগ\'ল"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4426,7 +4410,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"সঞ্চয়াগাৰত ঠাই খালী কৰিবৰ কাৰণে সহায় কৰিবলৈ সঞ্চয়াগাৰ মেনেজাৰে আপোনাৰ ডিভাইচৰ পৰা বেকআপ কৰা ফট\' আৰু ভিডিঅ\'বোৰ আঁতৰাই দিয়ে।"</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"ফট\' আৰু ভিডিঅ\'সমূহ আঁতৰাওক"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"সঞ্চয়াগাৰ পৰিচালক"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"সঞ্চয়াগাৰ পৰিচালক ব্যৱহাৰ কৰক"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"স্বয়ংক্ৰিয়"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"হস্তকৃত"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"এতিয়া খালী স্থান উলিয়াওক"</string>
@@ -4464,10 +4449,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ফ\'ন চাবলৈ দুবাৰ টুকুৰিয়াওক"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"টেবলেটো চাবলৈ দুবাৰ টুকুৰিয়াওক"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ডিভাইচ চাবলৈ দুবাৰ টুকুৰিয়াওক"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"জাননীবোৰৰ বাবে ছোৱাইপ কৰক"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"আপোনাৰ জাননীবোৰ দেখুৱাবলৈ স্ক্রীনখনৰ একেবাৰে তলৰ পৰা ছোৱাইপ কৰক"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"এখন হাতেৰে ব্যৱহাৰ কৰা ম’ড"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"এখন হাতেৰে ব্যৱহাৰ কৰা ম’ড ব্যৱহাৰ কৰক"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"এটা এপৰ পৰা অন্য এটা এপলৈ যাওঁতে বাহিৰ হওক"</string>
@@ -4954,10 +4937,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"ছেটিংসমূহত স্ক্ৰীন অ’ভাৰলে’ৰ অনুমতি দিয়ে"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"এনে এপ্‌সমূহক অনুমতি দিয়ে যি ছেটিংসমূহৰ স্ক্ৰীনসমূহ অ’ভাৰলে’ কৰিবলৈ অন্য এপ্‌সমূহৰ ওপৰত প্ৰদৰ্শিত হ’ব পাৰে"</string>
     <string name="media_controls_title" msgid="403271085636252597">"মিডিয়া"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"মিডিয়া ছেশ্বনটো সমাপ্ত হ’লে প্লে’য়াৰটো লুকুৱাওক"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"প্লে’য়াৰটোৱে আপোনাক বিস্তাৰ কৰা ক্ষিপ্ৰ ছেটিংসমূহৰ পেনেলটোৰ পৰা কোনো ছেশ্বন পুনৰ আৰম্ভ কৰিবলৈ দিয়ে।"</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"প্লে’য়াৰটো লুকুৱাওক"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"প্লে’য়াৰটো দেখুৱাওক"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"কোনো প্লে’য়াৰ উপলব্ধ নহয়"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"মিডিয়া"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>
