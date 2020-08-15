@@ -122,6 +122,10 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
             Log.w(TAG, "Legacy suggestion contextual card enabled, skipping contextual cards.");
             return;
         }
+        if (ContextualCardLoader.getCardCount(mContext) <= 0) {
+            Log.w(TAG, "Card count is zero, skipping contextual cards.");
+            return;
+        }
         mStartTime = System.currentTimeMillis();
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
