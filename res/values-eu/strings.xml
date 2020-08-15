@@ -296,7 +296,8 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Erakutsi profileko informazioa pantaila blokeatuan."</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Kontuak"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Kokapena"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"Erabili kokapena"</string>
+    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
+    <skip />
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desaktibatuta"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">Aktibatuta: <xliff:g id="COUNT_1">%1$d</xliff:g> aplikaziok kokapena atzi dezakete</item>
@@ -622,7 +623,6 @@
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> digitu baino gutxiago izan behar du</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Gailuaren administratzaileak ez du eman beste PIN kode bat erabiltzeko baimenik"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"IKT saileko administratzaileak blokeatu egiten ditu asmatzen errazak diren PIN kodeak. Erabili beste PIN bat."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Ezin da erabili onartzen ez den karaktererik"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"Hizki bat eduki behar du gutxienez"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"Zenbaki bat eduki behar du gutxienez"</string>
@@ -656,7 +656,6 @@
       <item quantity="one">Gutxienez, zenbakizkoa ez den 1 karaktere izan behar du</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Gailuaren administratzaileak ez du eman beste pasahitz bat erabiltzeko baimenik"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"IKT saileko administratzaileak blokeatu egiten ditu asmatzen errazak diren pasahitzak. Erabili beste pasahitz bat."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Ezin da erabili goranzko, beheranzko edo errepikatutako digitu-sekuentziarik"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Berretsi"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"Utzi"</string>
@@ -1614,8 +1613,8 @@
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musika"</li>\n<li>"Argazkiak"</li>\n<li>"Bestelako erabiltzaile-datuak"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM txartelak"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Ez da utziko bertan behera operadorearekin kontratatuta duzun zerbitzu-plana."</string>
-    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Musika, irudiak eta bestelako erabiltzaile-datuak garbitzeko, "<b>"USB bidezko memoria"</b>" ezabatu behar da."</string>
-    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Musika, irudiak eta bestelako erabiltzaile-datuak garbitzeko, "<b>"SD txartela"</b>" ezabatu behar da."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Musika, irudiak eta bestelako erabiltzaile-datuak garbitzeko, "<b>"USB bidezko memoriako"</b>" eduki guztia ezabatu behar da."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Musika, irudiak eta bestelako erabiltzaile-datuak garbitzeko, "<b>"SD txarteleko"</b>" eduki guztia ezabatu behar da."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Ezabatu USB bidezko memoria"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Ezabatu SD txartela"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Ezabatu USB bidezko barneko memoriako datu guztiak; adibidez, musika edo argazkiak"</string>
@@ -2175,11 +2174,16 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Amaitu deiak pizteko etengailuarekin"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Saguaren erakusle handia"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Kendu animazioak"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"Audio monofonikoa"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"Konbinatu kanalak audioa erreproduzitzean"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"Audioaren oreka"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"Ezkerrekoa"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"Eskuinekoa"</string>
+    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
+    <skip />
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"Lehenetsia"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 segundo"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 segundo"</string>
@@ -2210,10 +2214,14 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Tonuaren dardara"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Ukipen bidezko interakzioa"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Erabili <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Ireki <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Erabili koloreen zuzenketa"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Erakutsi azpitituluak"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Bateragarriak diren aplikazioetarako bakarrik"</string>
+    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
+    <skip />
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Azpitituluen tamaina eta estiloa"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"Testuaren tamaina: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Aukera gehiago"</string>
@@ -2373,7 +2381,8 @@
     <string name="background_activity_title" msgid="8214332017349791380">"Atzeko planoan erabiltzeko murriztapena"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Eman atzeko planoan exekutatzeko baimena aplikazioari"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Aplikazioak ez du baimenik atzeko planoan exekutatzeko"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"Ezin da mugatu atzeko planoko erabilera"</string>
+    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Atzeko planoko jarduerak mugatu nahi dituzu?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Aplikazio baten atzeko planoko jarduerak mugatzen badituzu, baliteke aplikazioak behar bezala ez funtzionatzea"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplikazio hau bateria optimizatzeko konfiguratuta ez dagoenez, ezin duzu mugatu.\n\nMugatzeko, aktibatu bateriaren optimizazioa."</string>
@@ -4286,7 +4295,8 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"Ikusi xehetasunak"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Datu-aurrezlea"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Datuen erabilera mugagabea"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"Atzeko planoko datuak desaktibatuta daude"</string>
+    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
+    <skip />
     <string name="data_saver_on" msgid="7848893946018448793">"Aktibatuta"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Desaktibatuta"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Erabili datu-aurrezlea"</string>
@@ -4309,7 +4319,8 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Gailua blokeatuta badago, eragotzi jakinarazpenetan erantzunak edo beste edozer idaztea"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Zuzentzaile lehenetsia"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Aukeratu zuzentzailea"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Erabili ortografia-zuzentzailea"</string>
+    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
+    <skip />
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"Hautatu gabe"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(bat ere ez)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4399,7 +4410,8 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Memorian tokia egiteko, babeskopiak dituzten argazkiak eta bideoak gailutik kentzen ditu memoria-kudeatzaileak."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Kendu argazkiak eta bideoak"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Memoria-kudeatzailea"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Erabili Memoria-kudeatzailea"</string>
+    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
+    <skip />
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Automatikoa"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"Eskuzko ezarpenak"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Egin tokia"</string>
@@ -4437,10 +4449,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Sakatu birritan telefonoa pantailako informazioa ikusteko"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Sakatu birritan tableta bertan dagoela ikusteko"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Sakatu birritan gailua bertan dagoela ikusteko"</string>
-    <!-- no translation found for swipe_bottom_to_notifications_title (7631744948948666524) -->
-    <skip />
-    <!-- no translation found for swipe_bottom_to_notifications_summary (4228774051699944123) -->
-    <skip />
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Pasatu hatza jakinarazpenak ikusteko"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="4228774051699944123">"Pasatu hatza pantailaren behealdetik gora jakinarazpenak ager daitezen"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"Esku bakarreko modua"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Erabili esku bakarreko modua"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Irten aplikazioa aldatzean"</string>
@@ -4927,10 +4937,16 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Eman pantailetan gainjartzeko baimena ezarpenetan"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Eman ezarpenenen pantailetan gainjartzeko baimena aplikazioen gainean bistara daitezkeen aplikazioei"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia-edukia"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Ezkutatu erreproduzigailua multimedia-saioa amaitzean"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Erreproduzigailuari esker, saioei berrekin diezaiekezu Ezarpen bizkorrak panel zabaldutik."</string>
+    <!-- no translation found for media_controls_summary (3573121049460596520) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
+    <skip />
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ezkutatu erreproduzigailua"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Erakutsi erreproduzigailua"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Ez dago erreproduzigailurik erabilgarri"</string>
+    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
+    <skip />
     <string name="keywords_media_controls" msgid="8345490568291778638">"multimedia-edukia"</string>
+    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
+    <skip />
 </resources>
