@@ -27,13 +27,13 @@ import com.android.settingslib.search.SearchIndexable;
  * Settings page for emergency sos gesture
  */
 @SearchIndexable
-public class EmergencySosGestureSettings extends DashboardFragment {
+public class PanicGestureSettings extends DashboardFragment {
 
     private static final String TAG = "PanicGestureSettings";
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.emergency_sos_gesture_settings;
+        return R.xml.panic_gesture_settings;
     }
 
     @Override
@@ -47,5 +47,5 @@ public class EmergencySosGestureSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.emergency_sos_gesture_settings);
+            new BaseSearchIndexProvider(R.xml.panic_gesture_settings);
 }

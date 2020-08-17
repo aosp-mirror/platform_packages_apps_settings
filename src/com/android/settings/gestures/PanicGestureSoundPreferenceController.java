@@ -18,33 +18,31 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller for emergency sos gesture setting
  */
-public class EmergencySosGesturePreferenceController extends GesturePreferenceController {
+public class PanicGestureSoundPreferenceController extends TogglePreferenceController {
 
     @VisibleForTesting
     static final int ON = 1;
     @VisibleForTesting
     static final int OFF = 0;
 
-    private static final String PREF_KEY_VIDEO = "gesture_emergency_sos_button_screen_video";
+    private static final String SECURE_KEY = Settings.Secure.PANIC_SOUND_ENABLED;
 
-    private static final String SECURE_KEY = Settings.Secure.PANIC_GESTURE_ENABLED;
-
-    public EmergencySosGesturePreferenceController(Context context, String key) {
+    public PanicGestureSoundPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     private static boolean isGestureAvailable(Context context) {
         return context.getResources()
-                .getBoolean(R.bool.config_show_emergency_sos_gesture_settings);
+                .getBoolean(R.bool.config_show_panic_gesture_settings);
     }
 
     @Override
@@ -54,17 +52,12 @@ public class EmergencySosGesturePreferenceController extends GesturePreferenceCo
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "gesture_emergency_sos_button");
-    }
-
-    @Override
-    protected String getVideoPrefKey() {
-        return PREF_KEY_VIDEO;
+        return false;
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY, OFF) == ON;
+        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY, ON) == ON;
     }
 
     @Override
