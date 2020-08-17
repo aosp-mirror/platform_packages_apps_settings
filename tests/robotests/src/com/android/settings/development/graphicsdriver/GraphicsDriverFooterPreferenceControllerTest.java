@@ -18,9 +18,9 @@ package com.android.settings.development.graphicsdriver;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_PRODUCTION_ALL_APPS;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -68,24 +68,26 @@ public class GraphicsDriverFooterPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_gameDriverOff_availableUnsearchable() {
-        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+    public void getAvailabilityStatus_updatableDriverOff_availableUnsearchable() {
+        Settings.Global.putInt(mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_OFF);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_gameDriverDefault_conditionallyUnavailable() {
+    public void getAvailabilityStatus_updatableDriverDefault_conditionallyUnavailable() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_gameDriverAllApps_conditionallyUnavailable() {
+    public void getAvailabilityStatus_updatableProductionDriverAllApps_conditionallyUnavailable() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_ALL_APPS);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_PRODUCTION_ALL_APPS);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }

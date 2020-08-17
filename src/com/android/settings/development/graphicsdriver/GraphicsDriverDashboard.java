@@ -30,7 +30,7 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
 
 /**
- * Dashboard for Game Driver preferences.
+ * Dashboard for Graphics Driver preferences.
  */
 @SearchIndexable
 public class GraphicsDriverDashboard extends DashboardFragment {
@@ -39,7 +39,7 @@ public class GraphicsDriverDashboard extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_GAME_DRIVER_DASHBOARD;
+        return SettingsEnums.SETTINGS_GRAPHICS_DRIVER_DASHBOARD;
     }
 
     @Override
