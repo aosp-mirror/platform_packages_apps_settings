@@ -16,8 +16,8 @@
 
 package com.android.settings.development.graphicsdriver;
 
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_OFF;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -58,8 +58,9 @@ public class GraphicsDriverFooterPreferenceController extends BasePreferenceCont
     @Override
     public int getAvailabilityStatus() {
         return Settings.Global.getInt(
-                mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
-                == GAME_DRIVER_OFF
+                mContentResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_DEFAULT)
+                == UPDATABLE_DRIVER_OFF
                 ? AVAILABLE_UNSEARCHABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
