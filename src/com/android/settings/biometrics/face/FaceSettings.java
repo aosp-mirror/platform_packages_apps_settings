@@ -244,7 +244,7 @@ public class FaceSettings extends DashboardFragment {
         if (requestCode == CONFIRM_REQUEST) {
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                 // The pin/pattern/password was set.
-                mFaceManager.generateChallenge(challenge -> {
+                mFaceManager.generateChallenge((sensorId, challenge) -> {
                     mToken = BiometricUtils.requestGatekeeperHat(getPrefContext(), data, mUserId,
                             challenge);
                     mAttentionController.setToken(mToken);

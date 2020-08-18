@@ -126,7 +126,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     public abstract void onClick(LinkSpan span);
 
     protected interface GenerateChallengeCallback {
-        void onChallengeGenerated(long challenge);
+        void onChallengeGenerated(int sensorId, long challenge);
     }
 
     @Override
@@ -276,7 +276,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 updatePasswordQuality();
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 getNextButton().setEnabled(false);
-                getChallenge((challenge -> {
+                getChallenge(((sensorId, challenge) -> {
                     mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
                     getNextButton().setEnabled(true);
                 }));
@@ -289,7 +289,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             if (resultCode == RESULT_OK && data != null) {
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 getNextButton().setEnabled(false);
-                getChallenge((challenge -> {
+                getChallenge(((sensorId, challenge) -> {
                     mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
                     getNextButton().setEnabled(true);
                 }));
