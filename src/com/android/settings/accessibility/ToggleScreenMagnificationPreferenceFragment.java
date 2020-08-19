@@ -39,6 +39,7 @@ import android.widget.CheckBox;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -60,7 +61,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment {
 
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
-    private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private int mUserShortcutType = UserShortcutType.EMPTY;
     private CheckBox mSoftwareTypeCheckBox;
@@ -96,18 +96,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        initShortcutPreference();
-
-        mSettingsPreference = new Preference(getPrefContext());
-        mSettingsPreference.setTitle(R.string.accessibility_menu_item_settings);
-        mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
-        mSettingsPreference.setPersistent(false);
-
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt(EXTRA_SHORTCUT_TYPE, mUserShortcutTypesCache);
         super.onSaveInstanceState(outState);
@@ -120,9 +108,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
-
-        updateShortcutPreferenceData();
-        updateShortcutPreference();
     }
 
     @Override
@@ -160,6 +145,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             checkBox.toggle();
             updateUserShortcutType(/* saveChanges= */ false);
         });
+    }
+
+    @Override
+    protected void initSettingsPreference() {
+        mSettingsPreference = new Preference(getPrefContext());
+        mSettingsPreference.setTitle(R.string.accessibility_menu_item_settings);
+        mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
+        mSettingsPreference.setPersistent(false);
     }
 
     private void initializeDialogCheckBox(AlertDialog dialog) {
@@ -374,15 +367,19 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
     }
 
-    private void initShortcutPreference() {
+    @Override
+    protected void initShortcutPreference(Bundle savedInstanceState) {
         mShortcutPreference = new ShortcutPreference(getPrefContext(), null);
         mShortcutPreference.setPersistent(false);
-        mShortcutPreference.setKey(KEY_SHORTCUT_PREFERENCE);
+        mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         mShortcutPreference.setOnClickCallback(this);
 
         final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
         mShortcutPreference.setTitle(title);
+
+        final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
+        generalCategory.addPreference(mShortcutPreference);
     }
 
     @Override
