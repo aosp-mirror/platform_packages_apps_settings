@@ -16,8 +16,8 @@
 
 package com.android.settings.gestures;
 
-import static com.android.settings.gestures.EmergencySosGesturePreferenceController.OFF;
-import static com.android.settings.gestures.EmergencySosGesturePreferenceController.ON;
+import static com.android.settings.gestures.PanicGesturePreferenceController.OFF;
+import static com.android.settings.gestures.PanicGesturePreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -39,19 +39,17 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
-public class EmergencySosGesturePreferenceControllerTest {
-
+public class PanicGestureSoundPreferenceControllerTest {
 
     private Context mContext;
     private ContentResolver mContentResolver;
-    private EmergencySosGesturePreferenceController mController;
-    private static final String PREF_KEY = "gesture_emergency_sos_button";
+    private PanicGestureSoundPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mContentResolver = mContext.getContentResolver();
-        mController = new EmergencySosGesturePreferenceController(mContext, PREF_KEY);
+        mController = new PanicGestureSoundPreferenceController(mContext, "test_key");
     }
 
     @After
@@ -62,7 +60,7 @@ public class EmergencySosGesturePreferenceControllerTest {
     @Test
     public void isAvailable_configIsTrue_shouldReturnTrue() {
         SettingsShadowResources.overrideResource(
-                R.bool.config_show_emergency_sos_gesture_settings,
+                R.bool.config_show_panic_gesture_settings,
                 Boolean.TRUE);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -71,42 +69,31 @@ public class EmergencySosGesturePreferenceControllerTest {
     @Test
     public void isAvailable_configIsTrue_shouldReturnFalse() {
         SettingsShadowResources.overrideResource(
-                R.bool.config_show_emergency_sos_gesture_settings,
+                R.bool.config_show_panic_gesture_settings,
                 Boolean.FALSE);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isChecked_configIsNotSet_shouldReturnTrue() {
+    public void isChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_GESTURE_ENABLED, ON);
-        mController = new EmergencySosGesturePreferenceController(mContext, PREF_KEY);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_SOUND_ENABLED, ON);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void isChecked_configIsSet_shouldReturnFalse() {
+    public void isChecked_configIsSetToFalse_shouldReturnFalse() {
         // Set the setting to be disabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_GESTURE_ENABLED, OFF);
-        mController = new EmergencySosGesturePreferenceController(mContext, PREF_KEY);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_SOUND_ENABLED, OFF);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
-        final EmergencySosGesturePreferenceController controller =
-                new EmergencySosGesturePreferenceController(mContext, PREF_KEY);
-        assertThat(controller.isSliceable()).isTrue();
-    }
-
-    @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
-        final DoubleTapPowerPreferenceController controller =
-                new DoubleTapPowerPreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
+    public void isSliceable_returnsFalse() {
+        assertThat(mController.isSliceable()).isFalse();
     }
 
 }
