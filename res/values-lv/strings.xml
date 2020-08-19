@@ -1697,7 +1697,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Nevar izveidot piesaisti vairāk nekā <xliff:g id="MAXCONNECTION">%1$d</xliff:g> ierīcēm."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Ierīce <xliff:g id="DEVICE_NAME">%1$s</xliff:g> tiks atsaistīta."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet piesaiste"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Koplietojiet tālruņa interneta savienojumu, izmantojot USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Koplietojiet tālruņa interneta savienojumu, izmantojot tīklu Ethernet."</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Izmantojiet tīklāju un piesaisti, lai varētu lietot internetu citās ierīcēs, izveidojot mobilo datu savienojumu. Lietotnes var arī izveidot tīklāju satura kopīgošanai ar tuvumā esošajām ierīcēm."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Izmantojot tīklāju un piesaisti, jūsu ierīces Wi-Fi vai mobilo datu savienojums var nodrošināt interneta savienojumu citām ierīcēm. Lietotnes var arī izveidot tīklāju satura kopīgošanai ar tuvumā esošajām ierīcēm."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Palīdzība"</string>
@@ -1881,6 +1881,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Administrators var palīdzēt atiestatīt PIN, kombināciju vai paroli."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Jūsu planšetdators un personīgie dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem planšetdatora bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Jūsu tālrunis un personīgie dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem tālruņa bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Dzēšot lejupielādētās SIM kartes, radās problēma"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Lūdzu, atkārtoti palaidiet ierīci un mēģiniet vēlreiz. Ja turpināsiet rūpnīcas datu atiestatīšanu, lejupielādētās SIM kartes var palikt ierīcē."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Atkārtoti palaist"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Vai turpināt datu atiestatīšanu?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Lejupielādētās SIM kartes paliks ierīcē."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Atiestatīt rūpnīcas datus"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Jūsu ierīce un personas dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem ierīces bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Papildu iestatījumi"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Iespējot papildu iestatījumu opcijas"</string>
@@ -5036,10 +5042,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Atļaut ekrānu pārklāšanu iestatījumos"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Atļaut lietotnēm, ko var rādīt pāri citām lietotnēm, pārklāt iestatījumu ekrānus"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multivide"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Paslēpiet atskaņotāju, multivides sesijai beidzoties"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Atskaņotāja sesiju varat atsākt izvērstajā ātro iestatījumu panelī."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Multivides atskaņotājs ātrajos iestatījumos"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Rādīt multivides atskaņotāju ilgāku laika periodu, lai varētu ērti atsākt atskaņošanu"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Paslēpt atskaņotāju"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Rādīt atskaņotāju"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nav pieejams neviens atskaņotājs"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"Atļautās lietotnes"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multivide"</string>
 </resources>

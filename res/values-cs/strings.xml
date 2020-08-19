@@ -1718,7 +1718,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Připojení lze sdílet s nejvýše <xliff:g id="MAXCONNECTION">%1$d</xliff:g> zařízeními."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"U zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude ukončeno sdílené připojení."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering ethernetu"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Sdílet připojení telefonu k internetu přes USB ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Sdílet připojení telefonu k internetu přes ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot a tethering umožňují poskytovat připojení k internetu přes mobilní datové připojení dalším zařízením. Aplikace také mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňují poskytovat připojení k internetu přes připojení Wi-Fi nebo mobilní datové připojení dalším zařízením. Aplikace také mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Nápověda"</string>
@@ -1904,6 +1904,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Mohou vám pomoci resetovat PIN, gesto či heslo"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tablet a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození tabletu nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefon a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození telefonu nebo ztrátu dat, které jejich používání může způsobit."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Při mazání stažených SIM karet došlo k problému"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Restartujte zařízení a zkuste to znovu. Pokud budete pokračovat v resetování do továrního nastavení, stažené SIM karty v zařízení zůstanou."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Restartovat"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Pokračovat v resetování?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Stažené SIM karty zůstanou v zařízení."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Tovární nastavení"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Zařízení a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození zařízení nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Upřesnit nastavení"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Povolit další možnosti nastavení"</string>
@@ -2103,7 +2109,7 @@
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Přidat"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Přidat do slovníku"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"Fráze"</string>
-    <string name="user_dict_settings_add_dialog_more_options" msgid="2642928746425808108">"Více možností"</string>
+    <string name="user_dict_settings_add_dialog_more_options" msgid="2642928746425808108">"Další možnosti"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="100432503633458156">"Méně možností"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="1866751313790655088">"OK"</string>
     <string name="user_dict_settings_add_word_option_name" msgid="2686051785623698231">"Slovo:"</string>
@@ -2266,7 +2272,7 @@
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Jen pro podporovanou aplikaci"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Velikost a styl titulků"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> velikost textu"</string>
-    <string name="captioning_more_options_title" msgid="3484496882942539652">"Více možností"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Další možnosti"</string>
     <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"Tyto předvolby titulků podporují jen některé aplikace"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Tlačítko Přístupnost"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Přejetí dvěma prsty zdola nahoru"</string>
@@ -5127,10 +5133,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Povolte překryvné vrstvy obrazovek v Nastavení"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Povolte aplikace, které se smí zobrazovat přes jiné aplikace a vytvářet vrstvy obrazovek Nastavení"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Média"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Skrýt přehrávač po ukončení relace média"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Přehrávač umožňuje obnovit relaci z rozbaleného panelu Rychlé nastavení."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Přehrávač médií v rychlém nastavení"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Zobrazit přehrávač médií delší dobu, aby bylo snadné obnovit přehrávání"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrýt přehrávač"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Zobrazit přehrávač"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nejsou k dispozici žádné přehrávače"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"Povolené aplikace"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
 </resources>
