@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"اتصال اینترنتی با تلفن همراه به بیش از <xliff:g id="MAXCONNECTION">%1$d</xliff:g> دستگاه امکان‌پذیر نیست."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> از اتصال اینترنتی با تلفن همراه قطع می‌شود."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"اشتراک‌گذاری اینترنت با اترنت"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"‏هم‌رسانی اتصال اینترنت تلفن ازطریق «اترنت USB»"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"هم‌رسانی اتصال اینترنت تلفن ازطریق اترنت"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"برای ارائه اینترنت به سایر دستگاه‌ها ازطریق اتصال داده تلفن همراهتان، از نقطه اتصال و اشتراک‌گذاری اینترنت استفاده کنید. همچنین برنامه‌ها می‌توانند نقطه اتصالی ایجاد کنند تا محتوا را با دستگاه‌های اطراف هم‌رسانی کند."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"‏برای ارائه اینترنت به سایر دستگاه‌ها ازطریق اتصال داده تلفن همراه یا Wi-Fi، از نقطه اتصال و اشتراک‌گذاری اینترنت استفاده کنید. برنامه‌ها همچنین می‌تواند نقطه اتصالی ایجاد کند تا محتوا را با دستگاه‌های اطراف هم‌رسانی کند."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"راهنمایی"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"او می‌تواند به شما کمک کند پین، الگو، یا گذرواژه را بازنشانی کنید"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"رایانه لوحی و داده‌های شخصی شما بیشتر درمعرض خطر حمله برنامه‌های ناشناس هستند. با نصب برنامه از این منبع، موافقت می‌کنید که درقبال هرگونه آسیب وارده به رایانه لوحی یا از دست دادن داده‌هایتان که در نتیجه استفاده از این برنامه‌ها روی دهد، خودتان مسئول هستید."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"تلفن و داده‌های شخصی شما بیشتر درمعرض خطر حمله برنامه‌های ناشناس هستند. با نصب برنامه از این منبع، موافقت می‌کنید که درقبال هرگونه آسیب وارده به تلفن یا از دست دادن داده‌هایتان که در نتیجه استفاده از این برنامه‌ها روی دهد، خودتان مسئول هستید."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"مشکلی در پاک کردن سیم‌کارت‌های بارگیری‌شده روی داد"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"لطفاً دستگاه را راه‌اندازی مجدد کنید و دوباره امتحان کنید. اگر بازنشانی کارخانه‌ای را ادامه دهید، ممکن است سیم‌کارت‌های بارگیری‌شده در دستگاه باقی بمانند."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"راه‌اندازی مجدد"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"بازنشانی کارخانه‌ای ادامه یابد؟"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"سیم‌کارت‌های بارگیری‌شده در دستگاه باقی خواهند ماند."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"بازنشانی کارخانه‌ای"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"دستگاه و داده‌های شخصی شما دربرابر حمله برنامه‌های ناشناس آسیب‌پذیری بیشتری دارند. با نصب برنامه از این منبع، موافقت می‌کنید خود شما مسئول هرگونه آسیب به دستگاه یا از دست رفتن داده‌ای هستید که ممکن است در اثر استفاده از این برنامه روی دهد."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"تنظیمات پیشرفته"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"گزینه‌های تنظیمات بیشتری فعال شود"</string>
@@ -4945,10 +4951,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"مجاز کردن هم‌پوشانی صفحه‌ها در «تنظیمات»"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"مجاز کردن برنامه‌هایی که برای همپوشانی صفحه‌های «تنظیمات» می‌توانند روی برنامه‌های دیگر نمایش داده شوند"</string>
     <string name="media_controls_title" msgid="403271085636252597">"رسانه"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"پس از اتمام جلسه رسانه، پخش‌کننده پنهان شود"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"پخش‌کننده به شما اجازه می‌دهد جلسه‌ای را از پانل «تنظیمات فوری» گسترده‌ ازسر بگیرید."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"پخش‌کننده رسانه در «تنظیمات فوری»"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"پخش‌کننده رسانه برای مدت‌زمان طولانی‌تری نشان داده می‌شود تا به‌آسانی بتوانید بازپخش را ازسر بگیرید."</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"پنهان کردن پخش‌کننده"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"نمایش دادن پخش‌کننده"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"پخش‌کننده‌ای دردسترس نیست"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"برنامه‌های مجاز"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"رسانه‌"</string>
 </resources>
