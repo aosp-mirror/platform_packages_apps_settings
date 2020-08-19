@@ -386,7 +386,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (mReturnGatekeeperPassword) {
                 if (isInternalActivity()) {
                     startVerifyPassword(credential, intent,
-                            LockPatternUtils.VERIFY_FLAG_RETURN_GK_PW);
+                            LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE);
                     return;
                 }
             } else if (mForceVerifyPath)  {
@@ -414,9 +414,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 mPendingLockCheck = null;
                 final boolean matched = response.isMatched();
                 if (matched && mReturnCredentials) {
-                    if ((flags & LockPatternUtils.VERIFY_FLAG_RETURN_GK_PW) != 0) {
-                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW,
-                                response.getGatekeeperPw());
+                    if ((flags & LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE) != 0) {
+                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                                response.getGatekeeperPasswordHandle());
                     } else {
                         intent.putExtra(
                                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
