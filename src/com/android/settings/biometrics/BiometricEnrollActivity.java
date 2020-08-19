@@ -104,13 +104,13 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                         .getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                 final int userId = getIntent()
                         .getIntExtra(Intent.EXTRA_USER_ID, UserHandle.USER_NULL);
-                final byte[] gkPw = getIntent().getByteArrayExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_GK_PW);
+                final long gkPwHandle = getIntent().getLongExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L);
 
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
                 intent.putExtra(Intent.EXTRA_USER_ID, userId);
-                if (gkPw != null) {
-                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW, gkPw);
+                if (gkPwHandle != 0L) {
+                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
                 }
             }
 

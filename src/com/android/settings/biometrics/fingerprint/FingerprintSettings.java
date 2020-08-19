@@ -574,6 +574,7 @@ public class FingerprintSettings extends SubSettings {
                         mFingerprintManager.generateChallenge((sensorId, challenge) -> {
                             mToken = BiometricUtils.requestGatekeeperHat(getActivity(), data,
                                     mUserId, challenge);
+                            BiometricUtils.removeGatekeeperPasswordHandle(getActivity(), data);
                             updateAddPreference();
                         });
                     } else {
@@ -643,7 +644,7 @@ public class FingerprintSettings extends SubSettings {
                     new ChooseLockSettingsHelper.Builder(getActivity(), this);
             final boolean launched = builder.setRequestCode(CONFIRM_REQUEST)
                     .setTitle(getString(R.string.security_settings_fingerprint_preference_title))
-                    .setRequestGatekeeperPassword(true)
+                    .setRequestGatekeeperPasswordHandle(true)
                     .setUserId(mUserId)
                     .setForegroundOnly(true)
                     .setReturnCredentials(true)
@@ -658,7 +659,7 @@ public class FingerprintSettings extends SubSettings {
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS,
                         true);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, true);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
             }

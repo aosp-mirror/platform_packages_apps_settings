@@ -190,7 +190,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         final ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(this);
         builder.setRequestCode(CONFIRM_REQUEST)
                 .setTitle(getString(titleResId))
-                .setRequestGatekeeperPassword(true)
+                .setRequestGatekeeperPasswordHandle(true)
                 .setForegroundOnly(true)
                 .setReturnCredentials(true);
 

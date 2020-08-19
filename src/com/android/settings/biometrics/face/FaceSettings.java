@@ -207,7 +207,7 @@ public class FaceSettings extends DashboardFragment {
                     new ChooseLockSettingsHelper.Builder(getActivity(), this);
             final boolean launched = builder.setRequestCode(CONFIRM_REQUEST)
                     .setTitle(getString(R.string.security_settings_face_preference_title))
-                    .setRequestGatekeeperPassword(true)
+                    .setRequestGatekeeperPasswordHandle(true)
                     .setUserId(mUserId)
                     .setForegroundOnly(true)
                     .setReturnCredentials(true)
@@ -247,6 +247,7 @@ public class FaceSettings extends DashboardFragment {
                 mFaceManager.generateChallenge((sensorId, challenge) -> {
                     mToken = BiometricUtils.requestGatekeeperHat(getPrefContext(), data, mUserId,
                             challenge);
+                    BiometricUtils.removeGatekeeperPasswordHandle(getPrefContext(), data);
                     mAttentionController.setToken(mToken);
                     mEnrollController.setToken(mToken);
                     mConfirmingPassword = false;
