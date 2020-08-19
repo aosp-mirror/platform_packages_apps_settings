@@ -296,8 +296,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Profielinfo weergeven op vergrendelscherm"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Accounts"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Locatie"</string>
-    <!-- no translation found for location_settings_primary_switch_title (8849081766644685127) -->
-    <skip />
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Locatie gebruiken"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Uit"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">Aan: <xliff:g id="COUNT_1">%1$d</xliff:g> apps hebben toegang tot de locatie</item>
@@ -1674,7 +1673,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Kan niet meer dan <xliff:g id="MAXCONNECTION">%1$d</xliff:g> apparaten tetheren."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Tethering van <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wordt opgeheven."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-tethering"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Internetverbinding van telefoon delen via USB-ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Internetverbinding van deze telefoon delen via ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Gebruik hotspot en tethering om internet aan andere apparaten te leveren via je mobiele dataverbinding. Apps kunnen ook hotspots maken om content te delen met apparaten in de buurt."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gebruik hotspot en tethering om internet aan andere apparaten te leveren via je wifi- of mobiele dataverbinding. Apps kunnen ook hotspots maken om content te delen met apparaten in de buurt."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hulp"</string>
@@ -2174,16 +2173,11 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Aan/uit-knop beëindigt gesprek"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Grote muisaanwijzer"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animaties verwijderen"</string>
-    <!-- no translation found for accessibility_toggle_primary_mono_title (7587152099472946571) -->
-    <skip />
-    <!-- no translation found for accessibility_toggle_primary_mono_summary (1935283927319407303) -->
-    <skip />
-    <!-- no translation found for accessibility_toggle_primary_balance_title (7332275200153366714) -->
-    <skip />
-    <!-- no translation found for accessibility_toggle_primary_balance_left_label (6415750010517682014) -->
-    <skip />
-    <!-- no translation found for accessibility_toggle_primary_balance_right_label (2987443495390104935) -->
-    <skip />
+    <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monogeluid"</string>
+    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Kanalen combineren bij het afspelen van geluid"</string>
+    <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Audiobalans"</string>
+    <string name="accessibility_toggle_primary_balance_left_label" msgid="6415750010517682014">"Links"</string>
+    <string name="accessibility_toggle_primary_balance_right_label" msgid="2987443495390104935">"Rechts"</string>
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"Standaard"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"10 seconden"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 seconden"</string>
@@ -2214,14 +2208,10 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Trilling bij bellen"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Tikfeedback"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> gebruiken"</string>
-    <!-- no translation found for accessibility_service_primary_open_title (8655108684769091154) -->
-    <skip />
-    <!-- no translation found for accessibility_daltonizer_primary_switch_title (32064721588910540) -->
-    <skip />
-    <!-- no translation found for accessibility_caption_primary_switch_title (8901149325574757370) -->
-    <skip />
-    <!-- no translation found for accessibility_caption_primary_switch_summary (2754071646412717674) -->
-    <skip />
+    <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> openen"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Kleurcorrectie gebruiken"</string>
+    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Ondertiteling weergeven"</string>
+    <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Alleen voor ondersteunde apps"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Grootte en stijl van ondertiteling"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"Tekstgrootte <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Meer opties"</string>
@@ -2231,14 +2221,14 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Volumetoetsen ingedrukt houden"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Drie keer op het scherm tikken"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Doorgaan"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Gehoorapparaten"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Geen gehoorapparaten verbonden"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Gehoorapparaten toevoegen"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"Als je je gehoorapparaten wilt koppelen, zoek je op het volgende scherm naar je apparaat en tik je erop. Controleer of je gehoorapparaat zich in de koppelingsmodus bevindt."</string>
+    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Hoortoestellen"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Geen hoortoestellen verbonden"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Hoortoestellen toevoegen"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"Als je je hoortoestellen wilt koppelen, zoek je op het volgende scherm naar je apparaat en tik je erop. Controleer of je hoortoestel zich in de koppelingsmodus bevindt."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> actief"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> opgeslagen gehoorapparaten</item>
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> opgeslagen gehoorapparaat</item>
+      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> opgeslagen hoortoestellen</item>
+      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> opgeslagen hoortoestel</item>
     </plurals>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Snelkoppeling aan"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Uit"</string>
@@ -2381,8 +2371,7 @@
     <string name="background_activity_title" msgid="8214332017349791380">"Achtergrondbeperking"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Toestaan dat de app wordt uitgevoerd op de achtergrond"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"App mag niet worden uitgevoerd op de achtergrond"</string>
-    <!-- no translation found for background_activity_summary_allowlisted (6240154358657454651) -->
-    <skip />
+    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Achtergrondgebruik kan niet worden beperkt"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Achtergrondactiviteit beperken?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Als je de achtergrondactiviteit voor een app beperkt, functioneert de app mogelijk niet meer correct"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Batterijoptimalisatie is niet ingesteld voor deze app. Je kunt de app dus niet beperken.\n\nSchakel eerst batterijoptimalisatie in als je de app wilt beperken."</string>
@@ -4295,8 +4284,7 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"Details bekijken"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Databesparing"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Onbeperkte data"</string>
-    <!-- no translation found for restrict_background_blocklisted (2308345280442438232) -->
-    <skip />
+    <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Achtergrondgegevens zijn uitgeschakeld"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Aan"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Uit"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Databesparing gebruiken"</string>
@@ -4319,8 +4307,7 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Het typen van reacties of andere tekst in meldingen blokkeren als het apparaat is vergrendeld"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Standaard spellingcontrole"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Spellingcontrole kiezen"</string>
-    <!-- no translation found for spell_checker_primary_switch_title (529240542284039243) -->
-    <skip />
+    <string name="spell_checker_primary_switch_title" msgid="529240542284039243">"Spellingcontrole gebruiken"</string>
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"Niet geselecteerd"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(geen)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4410,8 +4397,7 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Opslagbeheer verwijdert foto\'s en video\'s waarvan een back-up is gemaakt, van je apparaat om opslagruimte vrij te maken."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Foto\'s en video\'s verwijderen"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Opslagbeheer"</string>
-    <!-- no translation found for automatic_storage_manager_primary_switch_title (9131959126462101994) -->
-    <skip />
+    <string name="automatic_storage_manager_primary_switch_title" msgid="9131959126462101994">"Opslagbeheer gebruiken"</string>
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Automatisch"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"Handmatig"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Nu ruimte vrijmaken"</string>
@@ -4627,7 +4613,8 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Inschakelen voor alle apps"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Grafisch stuurprogramma selecteren"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Standaard"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Game Driver"</string>
+    <!-- no translation found for graphics_driver_app_preference_production_driver (1515874802568434915) -->
+    <skip />
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Stuurprogramma voor ontwikkelaars"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Grafisch stuurprogramma voor systeem"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4937,16 +4924,12 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Schermoverlays toestaan voor Instellingen"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Toestaan dat apps die vóór andere apps kunnen worden weergegeven, vóór instellingsschermen worden weergegeven"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
-    <!-- no translation found for media_controls_summary (3573121049460596520) -->
-    <skip />
-    <!-- no translation found for media_controls_resume_description (7702723104730495227) -->
-    <skip />
+    <string name="media_controls_summary" msgid="3573121049460596520">"Mediaspeler in Snelle instellingen"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Mediaspeler langer weergeven om afspelen makkelijker te hervatten"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Speler verbergen"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Speler weergeven"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Geen spelers beschikbaar"</string>
-    <!-- no translation found for media_controls_apps_title (9129092193224838008) -->
-    <skip />
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"Toegestane apps"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
-    <!-- no translation found for connected_device_see_all_summary (2056010318537268108) -->
-    <skip />
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth wordt ingeschakeld"</string>
 </resources>
