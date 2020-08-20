@@ -16,17 +16,21 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -35,6 +39,8 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import com.google.common.primitives.Ints;
+
+import java.util.StringJoiner;
 
 /** Settings page for magnification. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -45,12 +51,15 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     private static final String KEY_CAPABILITY =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY;
     private static final int DIALOG_MAGNIFICATION_CAPABILITY = 1;
+    private static final int DIALOG_MAGNIFICATION_SWITCH_SHORTCUT = 2;
     private static final String EXTRA_CAPABILITY = "capability";
     private static final int NONE = 0;
+    private static final char COMPONENT_NAME_SEPARATOR = ':';
     private Preference mModePreference;
     private int mCapabilities = NONE;
     private CheckBox mMagnifyFullScreenCheckBox;
     private CheckBox mMagnifyWindowCheckBox;
+    private Dialog mDialog;
 
     static String getMagnificationCapabilitiesSummary(Context context) {
         final String[] magnificationModeSummaries = context.getResources().getStringArray(
@@ -102,6 +111,8 @@ public class MagnificationSettingsFragment extends DashboardFragment {
         switch (dialogId) {
             case DIALOG_MAGNIFICATION_CAPABILITY:
                 return SettingsEnums.DIALOG_MAGNIFICATION_CAPABILITY;
+            case DIALOG_MAGNIFICATION_SWITCH_SHORTCUT:
+                return SettingsEnums.DIALOG_MAGNIFICATION_SWITCH_SHORTCUT;
             default:
                 return 0;
         }
@@ -130,15 +141,23 @@ public class MagnificationSettingsFragment extends DashboardFragment {
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        if (dialogId == DIALOG_MAGNIFICATION_CAPABILITY) {
-            final String title = getPrefContext().getString(
-                    R.string.accessibility_magnification_mode_title);
-            AlertDialog alertDialog = AccessibilityEditDialogUtils
-                    .showMagnificationModeDialog(getPrefContext(), title,
-                            this::callOnAlertDialogCheckboxClicked);
-            initializeDialogCheckBox(alertDialog);
-            return alertDialog;
+        final CharSequence title;
+        switch (dialogId) {
+            case DIALOG_MAGNIFICATION_CAPABILITY:
+                title = getPrefContext().getString(
+                        R.string.accessibility_magnification_mode_title);
+                mDialog = AccessibilityEditDialogUtils.showMagnificationModeDialog(getPrefContext(),
+                        title, this::callOnAlertDialogCheckboxClicked);
+                initializeDialogCheckBox(mDialog);
+                return mDialog;
+            case DIALOG_MAGNIFICATION_SWITCH_SHORTCUT:
+                title = getPrefContext().getString(
+                        R.string.accessibility_magnification_switch_shortcut_title);
+                mDialog = AccessibilityEditDialogUtils.showMagnificationSwitchShortcutDialog(
+                        getPrefContext(), title, this::onSwitchShortcutDialogPositiveButtonClicked);
+                return mDialog;
         }
+
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
 
@@ -148,7 +167,40 @@ public class MagnificationSettingsFragment extends DashboardFragment {
                 getMagnificationCapabilitiesSummary(getPrefContext()));
     }
 
-    private void initializeDialogCheckBox(AlertDialog dialog) {
+    private void onSwitchShortcutDialogPositiveButtonClicked(View view) {
+        //TODO(b/147990389): Merge this function into util until magnification change format to
+        // Component.
+        optOutMagnificationFromTripleTap();
+        optInMagnificationToAccessibilityButton();
+
+        mDialog.dismiss();
+    }
+
+    private void optOutMagnificationFromTripleTap() {
+        Settings.Secure.putInt(getPrefContext().getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF);
+    }
+
+    private void optInMagnificationToAccessibilityButton() {
+        final String targetKey = Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
+        final String targetString = Settings.Secure.getString(getPrefContext().getContentResolver(),
+                targetKey);
+        if (targetString.contains(MAGNIFICATION_CONTROLLER_NAME)) {
+            return;
+        }
+
+        final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
+
+        if (!TextUtils.isEmpty(targetString)) {
+            joiner.add(targetString);
+        }
+        joiner.add(MAGNIFICATION_CONTROLLER_NAME);
+
+        Settings.Secure.putString(getPrefContext().getContentResolver(), targetKey,
+                joiner.toString());
+    }
+
+    private void initializeDialogCheckBox(Dialog dialog) {
         final View dialogFullScreenView = dialog.findViewById(R.id.magnify_full_screen);
         final View dialogFullScreenTextArea = dialogFullScreenView.findViewById(R.id.container);
         mMagnifyFullScreenCheckBox = dialogFullScreenView.findViewById(R.id.checkbox);
@@ -176,6 +228,10 @@ public class MagnificationSettingsFragment extends DashboardFragment {
             windowCheckBox.toggle();
             updateCapabilities(false);
             updateAlertDialogEnableState(fullScreenTextArea, windowTextArea);
+
+            if (isTripleTapEnabled() && windowCheckBox.isChecked()) {
+                showDialog(DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
+            }
         });
     }
 
@@ -231,6 +287,11 @@ public class MagnificationSettingsFragment extends DashboardFragment {
         if (saveToDB) {
             setMagnificationCapabilities(capabilities);
         }
+    }
+
+    private boolean isTripleTapEnabled() {
+        return Settings.Secure.getInt(getPrefContext().getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF) == ON;
     }
 
     private void setSecureIntValue(String key, int value) {
