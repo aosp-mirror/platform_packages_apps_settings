@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.appcompat.app.AlertDialog;
@@ -149,13 +150,33 @@ public class MagnificationSettingsFragment extends DashboardFragment {
 
     private void initializeDialogCheckBox(AlertDialog dialog) {
         final View dialogFullScreenView = dialog.findViewById(R.id.magnify_full_screen);
+        final View dialogFullScreenTextArea = dialogFullScreenView.findViewById(R.id.container);
         mMagnifyFullScreenCheckBox = dialogFullScreenView.findViewById(R.id.checkbox);
 
         final View dialogWidowView = dialog.findViewById(R.id.magnify_window_screen);
+        final View dialogWindowTextArea = dialogWidowView.findViewById(R.id.container);
         mMagnifyWindowCheckBox = dialogWidowView.findViewById(R.id.checkbox);
 
+        setTextAreasClickListener(dialogFullScreenTextArea, mMagnifyFullScreenCheckBox,
+                dialogWindowTextArea, mMagnifyWindowCheckBox);
+
         updateAlertDialogCheckState();
-        updateAlertDialogEnableState();
+        updateAlertDialogEnableState(dialogFullScreenTextArea, dialogWindowTextArea);
+    }
+
+    private void setTextAreasClickListener(View fullScreenTextArea, CheckBox fullScreenCheckBox,
+            View windowTextArea, CheckBox windowCheckBox) {
+        fullScreenTextArea.setOnClickListener(v -> {
+            fullScreenCheckBox.toggle();
+            updateCapabilities(false);
+            updateAlertDialogEnableState(fullScreenTextArea, windowTextArea);
+        });
+
+        windowTextArea.setOnClickListener(v -> {
+            windowCheckBox.toggle();
+            updateCapabilities(false);
+            updateAlertDialogEnableState(fullScreenTextArea, windowTextArea);
+        });
     }
 
     private void updateAlertDialogCheckState() {
@@ -168,30 +189,34 @@ public class MagnificationSettingsFragment extends DashboardFragment {
 
     private void updateCheckStatus(CheckBox checkBox, int mode) {
         checkBox.setChecked((mode & mCapabilities) != 0);
-        checkBox.setOnClickListener(v -> {
-            updateCapabilities(false);
-            updateAlertDialogEnableState();
-        });
     }
 
-    private void updateAlertDialogEnableState() {
-        if (mCapabilities != Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_ALL) {
-            disableEnabledMagnificationModePreference();
-        } else {
-            enableAllPreference();
+    private void updateAlertDialogEnableState(View fullScreenTextArea, View windowTextArea) {
+        switch (mCapabilities) {
+            case Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN:
+                setViewAndChildrenEnabled(fullScreenTextArea, false);
+                break;
+            case Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW:
+                setViewAndChildrenEnabled(windowTextArea, false);
+                break;
+            case Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_ALL:
+                setViewAndChildrenEnabled(fullScreenTextArea, true);
+                setViewAndChildrenEnabled(windowTextArea, true);
+                break;
+            default:
+                throw new IllegalArgumentException(
+                        "Unsupported ACCESSIBILITY_MAGNIFICATION_CAPABILITY " + mCapabilities);
         }
     }
 
-    private void enableAllPreference() {
-        mMagnifyFullScreenCheckBox.setEnabled(true);
-        mMagnifyWindowCheckBox.setEnabled(true);
-    }
-
-    private void disableEnabledMagnificationModePreference() {
-        if (!mMagnifyFullScreenCheckBox.isChecked()) {
-            mMagnifyWindowCheckBox.setEnabled(false);
-        } else if (!mMagnifyWindowCheckBox.isChecked()) {
-            mMagnifyFullScreenCheckBox.setEnabled(false);
+    private void setViewAndChildrenEnabled(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            final ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                setViewAndChildrenEnabled(child, enabled);
+            }
         }
     }
 

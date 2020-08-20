@@ -74,12 +74,12 @@ public class ChooseLockPatternTest {
     @Test
     public void intentBuilder_setRequestGatekeeperPassword_shouldAddExtras() {
         Intent intent = new IntentBuilder(application)
-                .setRequestGatekeeperPassword(true)
+                .setRequestGatekeeperPasswordHandle(true)
                 .setUserId(123)
                 .build();
 
         assertThat(intent
-                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false))
+                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, false))
                 .named("EXTRA_KEY_REQUEST_GK_PW")
                 .isTrue();
         assertThat(intent

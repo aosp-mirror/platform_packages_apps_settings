@@ -74,7 +74,7 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
 
             // Copy the original extras into the new intent
             copyBooleanExtra(activityIntent, intent,
-                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false);
+                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, false);
             copyBooleanExtra(activityIntent, intent,
                     ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (activityIntent.hasExtra(

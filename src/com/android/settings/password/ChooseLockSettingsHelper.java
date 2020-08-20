@@ -31,9 +31,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.widget.ICheckCredentialProgressCallback;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
@@ -56,10 +54,10 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_FOR_FACE = "for_face";
     public static final String EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT = "for_cred_req_boot";
     public static final String EXTRA_KEY_FOREGROUND_ONLY = "foreground_only";
-    public static final String EXTRA_KEY_REQUEST_GK_PW = "request_gk_pw";
-    // Gatekeeper password, which can subsequently be used to generate Gatekeeper
-    // HardwareAuthToken(s) via LockSettingsService#verifyGatekeeperPassword
-    public static final String EXTRA_KEY_GK_PW = "gk_pw";
+    public static final String EXTRA_KEY_REQUEST_GK_PW_HANDLE = "request_gk_pw_handle";
+    // Gatekeeper password handle, which can subsequently be used to generate Gatekeeper
+    // HardwareAuthToken(s) via LockSettingsService#verifyGatekeeperPasswordHandle
+    public static final String EXTRA_KEY_GK_PW_HANDLE = "gk_pw_handle";
 
     /**
      * When EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL and EXTRA_KEY_UNIFICATION_PROFILE_ID are
@@ -126,7 +124,7 @@ public final class ChooseLockSettingsHelper {
         private int mUserId;
         private boolean mAllowAnyUserId;
         private boolean mForceVerifyPath;
-        boolean mRequestGatekeeperPassword;
+        boolean mRequestGatekeeperPasswordHandle;
 
         public Builder(@NonNull Activity activity) {
             mActivity = activity;
@@ -182,12 +180,12 @@ public final class ChooseLockSettingsHelper {
          * @param returnCredentials if true, puts the following credentials into intent for
          *                          onActivityResult with the following keys:
          *                          {@link #EXTRA_KEY_TYPE}, {@link #EXTRA_KEY_PASSWORD},
-         *                          {@link #EXTRA_KEY_CHALLENGE_TOKEN}, {@link #EXTRA_KEY_GK_PW}
+         *                          {@link #EXTRA_KEY_CHALLENGE_TOKEN},
+         *                          {@link #EXTRA_KEY_GK_PW_HANDLE}
          *                          Note that if this is true, this can only be called internally.
          *
          *                          This should also generally be set if
-         *                          {@link #setRequestGatekeeperPassword(boolean)} (boolean)} is
-         *                          set.
+         *                          {@link #setRequestGatekeeperPasswordHandle(boolean)} is set.
          */
         @NonNull public Builder setReturnCredentials(boolean returnCredentials) {
             mReturnCredentials = returnCredentials;
@@ -241,17 +239,18 @@ public final class ChooseLockSettingsHelper {
         }
 
         /**
-         * Requests that LockSettingsService return the Gatekeeper Password (instead of the
-         * Gatekeeper HAT). This allows us to use a single entry of the user's credential
+         * Requests that LockSettingsService return a handle to the Gatekeeper Password (instead of
+         * the Gatekeeper HAT). This allows us to use a single entry of the user's credential
          * to create multiple Gatekeeper HATs containing distinct challenges via
-         * {@link LockPatternUtils#verifyGatekeeperPassword(byte[], long, int)}.
+         * {@link LockPatternUtils#verifyGatekeeperPasswordHandle(long, long, int)}.
          *
-         * Upon confirmation of the user's password, the Gatekeeper Password will be returned via
-         * onActivityResult with the key being {@link #EXTRA_KEY_GK_PW}.
-         * @param requestGatekeeperPassword
+         * Upon confirmation of the user's password, the Gatekeeper Password Handle will be returned
+         * via onActivityResult with the key being {@link #EXTRA_KEY_GK_PW_HANDLE}.
+         * @param requestGatekeeperPasswordHandle
          */
-        @NonNull public Builder setRequestGatekeeperPassword(boolean requestGatekeeperPassword) {
-            mRequestGatekeeperPassword = requestGatekeeperPassword;
+        @NonNull public Builder setRequestGatekeeperPasswordHandle(
+                boolean requestGatekeeperPasswordHandle) {
+            mRequestGatekeeperPasswordHandle = requestGatekeeperPasswordHandle;
             return this;
         }
 
@@ -266,10 +265,10 @@ public final class ChooseLockSettingsHelper {
                         + " onActivityResult");
             }
 
-            if (mRequestGatekeeperPassword && !mReturnCredentials) {
+            if (mRequestGatekeeperPasswordHandle && !mReturnCredentials) {
                 // HAT containing the signed challenge will not be available to the caller.
-                Log.w(TAG, "Requested gatekeeper password but not requesting ReturnCredentials. Are"
-                        + " you sure this is what you want?");
+                Log.w(TAG, "Requested gatekeeper password handle but not requesting"
+                        + " ReturnCredentials. Are you sure this is what you want?");
             }
 
             return new ChooseLockSettingsHelper(this, mActivity, mFragment);
@@ -289,14 +288,14 @@ public final class ChooseLockSettingsHelper {
                 mBuilder.mDescription, mBuilder.mReturnCredentials, mBuilder.mExternal,
                 mBuilder.mForceVerifyPath, mBuilder.mUserId, mBuilder.mAlternateButton,
                 mBuilder.mAllowAnyUserId, mBuilder.mForegroundOnly,
-                mBuilder.mRequestGatekeeperPassword);
+                mBuilder.mRequestGatekeeperPasswordHandle);
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean forceVerifyPath,
             int userId, @Nullable CharSequence alternateButton, boolean allowAnyUser,
-            boolean foregroundOnly, boolean requestGatekeeperPassword) {
+            boolean foregroundOnly, boolean requestGatekeeperPasswordHandle) {
         final int effectiveUserId = UserManager.get(mActivity).getCredentialOwnerProfile(userId);
         boolean launched = false;
 
@@ -307,7 +306,7 @@ public final class ChooseLockSettingsHelper {
                                 ? ConfirmLockPattern.InternalActivity.class
                                 : ConfirmLockPattern.class, returnCredentials, external,
                                 forceVerifyPath, userId, alternateButton, allowAnyUser,
-                                foregroundOnly, requestGatekeeperPassword);
+                                foregroundOnly, requestGatekeeperPasswordHandle);
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
@@ -320,7 +319,7 @@ public final class ChooseLockSettingsHelper {
                                 ? ConfirmLockPassword.InternalActivity.class
                                 : ConfirmLockPassword.class, returnCredentials, external,
                                 forceVerifyPath, userId, alternateButton, allowAnyUser,
-                                foregroundOnly, requestGatekeeperPassword);
+                                foregroundOnly, requestGatekeeperPasswordHandle);
                 break;
         }
         return launched;
@@ -330,7 +329,7 @@ public final class ChooseLockSettingsHelper {
             CharSequence message, Class<?> activityClass, boolean returnCredentials,
             boolean external, boolean forceVerifyPath, int userId,
             @Nullable CharSequence alternateButton, boolean allowAnyUser,
-            boolean foregroundOnly, boolean requestGatekeeperPassword) {
+            boolean foregroundOnly, boolean requestGatekeeperPasswordHandle) {
         final Intent intent = new Intent();
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.TITLE_TEXT, title);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.HEADER_TEXT, header);
@@ -346,8 +345,8 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL, alternateButton);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOREGROUND_ONLY, foregroundOnly);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, allowAnyUser);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW,
-                requestGatekeeperPassword);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE,
+                requestGatekeeperPasswordHandle);
 
         intent.setClassName(SETTINGS_PACKAGE_NAME, activityClass.getName());
         if (external) {

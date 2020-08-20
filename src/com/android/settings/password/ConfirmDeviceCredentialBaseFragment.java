@@ -102,7 +102,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false);
 
         mReturnGatekeeperPassword = intent.getBooleanExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false);
+                ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, false);
         mForceVerifyPath = intent.getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_FORCE_VERIFY, false);
 

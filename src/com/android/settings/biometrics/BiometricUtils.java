@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -39,20 +38,42 @@ public class BiometricUtils {
      */
     public static byte[] requestGatekeeperHat(Context context, Intent result, int userId,
             long challenge) {
-        final byte[] gkPassword = result.getByteArrayExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_GK_PW);
-        if (gkPassword == null) {
-            throw new IllegalStateException("Gatekeeper Password is null!!");
+        final long gatekeeperPasswordHandle = result.getLongExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L);
+        if (gatekeeperPasswordHandle == 0L) {
+            throw new IllegalStateException("Gatekeeper Password is missing!!");
         }
 
         final LockPatternUtils utils = new LockPatternUtils(context);
-        return utils.verifyGatekeeperPassword(gkPassword, challenge, userId).getGatekeeperHAT();
+        return utils.verifyGatekeeperPasswordHandle(gatekeeperPasswordHandle, challenge, userId)
+                .getGatekeeperHAT();
     }
 
     public static boolean containsGatekeeperPassword(Intent data) {
         if (data == null) {
             return false;
         }
-        return data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW) != null;
+        return data.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L) != 0L;
+    }
+
+    /**
+     * Requests {@link com.android.server.locksettings.LockSettingsService} to remove the
+     * gatekeeper password associated with a previous
+     * {@link ChooseLockSettingsHelper.Builder#setRequestGatekeeperPasswordHandle(boolean)}
+     *
+     * @param context Caller's context
+     * @param data The onActivityResult intent from ChooseLock* or ConfirmLock*
+     */
+    public static void removeGatekeeperPasswordHandle(Context context, Intent data) {
+        if (data == null) {
+            return;
+        }
+        final long gatekeeperPasswordsHandle = data.getLongExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L);
+        if (gatekeeperPasswordsHandle == 0L) {
+            return;
+        }
+        final LockPatternUtils utils = new LockPatternUtils(context);
+        utils.removeGatekeeperPasswordHandle(gatekeeperPasswordsHandle);
     }
 }
