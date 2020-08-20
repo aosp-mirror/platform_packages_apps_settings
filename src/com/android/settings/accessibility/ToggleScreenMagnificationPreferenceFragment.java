@@ -153,6 +153,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mSettingsPreference.setTitle(R.string.accessibility_menu_item_settings);
         mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
         mSettingsPreference.setPersistent(false);
+
+        final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
+        generalCategory.addPreference(mSettingsPreference);
     }
 
     private void initializeDialogCheckBox(AlertDialog dialog) {
