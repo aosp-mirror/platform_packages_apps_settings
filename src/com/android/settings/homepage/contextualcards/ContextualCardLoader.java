@@ -50,7 +50,7 @@ import java.util.stream.Collectors;
 public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
     @VisibleForTesting
-    static final int DEFAULT_CARD_COUNT = 1;
+    static final int DEFAULT_CARD_COUNT = 3;
     @VisibleForTesting
     static final String CONTEXTUAL_CARD_COUNT = "contextual_card_count";
     static final int CARD_CONTENT_LOADER_ID = 1;
@@ -131,7 +131,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         final List<ContextualCard> visibleCards = new ArrayList<>();
         final List<ContextualCard> hiddenCards = new ArrayList<>();
 
-        final int maxCardCount = getCardCount(mContext);
+        final int maxCardCount = getCardCount();
         eligibleCards.forEach(card -> {
             if (card.getCategory() != STICKY_VALUE) {
                 return;
@@ -164,23 +164,14 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                     SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW,
                     ContextualCardLogUtils.buildCardListLog(hiddenCards));
         }
-
-        // Add a default card if no other visible cards
-        if (visibleCards.isEmpty() && maxCardCount == 1) {
-            final ContextualCard defaultCard = FeatureFactory.getFactory(mContext)
-                    .getContextualCardFeatureProvider(mContext).getDefaultContextualCard();
-            if (defaultCard != null) {
-                Log.i(TAG, "Default card: " + defaultCard.getSliceUri());
-                visibleCards.add(defaultCard);
-            }
-        }
         return visibleCards;
     }
 
-    static int getCardCount(Context context) {
+    @VisibleForTesting
+    int getCardCount() {
         // Return the card count if Settings.Global has KEY_CONTEXTUAL_CARD_COUNT key,
         // otherwise return the default one.
-        return Settings.Global.getInt(context.getContentResolver(),
+        return Settings.Global.getInt(mContext.getContentResolver(),
                 CONTEXTUAL_CARD_COUNT, DEFAULT_CARD_COUNT);
     }
 

@@ -126,8 +126,10 @@ public class NetworkOperatorPreference extends Preference {
         final CellSignalStrength signalStrength = getCellSignalStrength(mCellInfo);
         final int level = signalStrength != null ? signalStrength.getLevel() : LEVEL_NONE;
         if (DBG) Log.d(TAG, "refresh level: " + String.valueOf(level));
-        mLevel = level;
-        updateIcon(mLevel);
+        if (mLevel != level) {
+            mLevel = level;
+            updateIcon(mLevel);
+        }
     }
 
     /**
