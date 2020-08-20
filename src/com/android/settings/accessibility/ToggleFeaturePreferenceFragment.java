@@ -144,6 +144,21 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        // Need to be called as early as possible. Protected variables will be assigned here.
+        onProcessArguments(getArguments());
+
+        initAnimatedImagePreference();
+        initToggleServiceDividerSwitchPreference();
+        initGeneralCategory();
+        initShortcutPreference(savedInstanceState);
+        initSettingsPreference();
+        initHtmlTextPreference();
+        initFooterPreference();
+
+        installActionBarToggleSwitch();
+
+        updateToggleServiceTitle(mToggleServiceDividerSwitchPreference);
+
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             removeDialog(DialogEnums.EDIT_SHORTCUT);
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
@@ -158,84 +173,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SwitchBar switchBar = activity.getSwitchBar();
         switchBar.hide();
-
-        // Need to be called as early as possible. Protected variables will be assigned here.
-        onProcessArguments(getArguments());
-
-        PreferenceScreen preferenceScreen = getPreferenceScreen();
-        if (mImageUri != null) {
-            final int screenHalfHeight = getScreenHeightPixels(getPrefContext()) / /* half */ 2;
-            final AnimatedImagePreference animatedImagePreference = new AnimatedImagePreference(
-                    getPrefContext());
-            animatedImagePreference.setImageUri(mImageUri);
-            animatedImagePreference.setSelectable(false);
-            animatedImagePreference.setMaxHeight(screenHalfHeight);
-            preferenceScreen.addPreference(animatedImagePreference);
-        }
-
-        mToggleServiceDividerSwitchPreference = new DividerSwitchPreference(getPrefContext());
-        mToggleServiceDividerSwitchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
-        if (getArguments().containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
-            final boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED);
-            mToggleServiceDividerSwitchPreference.setChecked(enabled);
-        }
-
-        preferenceScreen.addPreference(mToggleServiceDividerSwitchPreference);
-
-        updateToggleServiceTitle(mToggleServiceDividerSwitchPreference);
-
-        final PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
-        groupCategory.setKey(KEY_GENERAL_CATEGORY);
-        groupCategory.setTitle(R.string.accessibility_screen_option);
-        preferenceScreen.addPreference(groupCategory);
-
-        initShortcutPreference(savedInstanceState);
-        groupCategory.addPreference(mShortcutPreference);
-
-        // Show the "Settings" menu as if it were a preference screen.
-        if (mSettingsTitle != null && mSettingsIntent != null) {
-            mSettingsPreference = new Preference(getPrefContext());
-            mSettingsPreference.setTitle(mSettingsTitle);
-            mSettingsPreference.setIconSpaceReserved(true);
-            mSettingsPreference.setIntent(mSettingsIntent);
-        }
-
-        // The downloaded app may not show Settings. The framework app has Settings.
-        if (mSettingsPreference != null) {
-            groupCategory.addPreference(mSettingsPreference);
-        }
-
-        if (!TextUtils.isEmpty(mHtmlDescription)) {
-            final PreferenceCategory introductionCategory = new PreferenceCategory(
-                    getPrefContext());
-            final CharSequence title = getString(R.string.accessibility_introduction_title,
-                    mPackageName);
-            introductionCategory.setKey(KEY_INTRODUCTION_CATEGORY);
-            introductionCategory.setTitle(title);
-            preferenceScreen.addPreference(introductionCategory);
-
-            final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(getPrefContext());
-            htmlTextPreference.setSummary(mHtmlDescription);
-            htmlTextPreference.setImageGetter(mImageGetter);
-            htmlTextPreference.setSelectable(false);
-            introductionCategory.addPreference(htmlTextPreference);
-        }
-
-        if (!TextUtils.isEmpty(mDescription)) {
-            createFooterPreference(mDescription);
-        }
-
-        if (TextUtils.isEmpty(mHtmlDescription) && TextUtils.isEmpty(mDescription)) {
-            final CharSequence defaultDescription = getText(
-                    R.string.accessibility_service_default_description);
-            createFooterPreference(defaultDescription);
-        }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        installActionBarToggleSwitch();
     }
 
     @Override
@@ -442,6 +379,93 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 drawable.getIntrinsicHeight());
 
         return drawable;
+    }
+
+    private void initAnimatedImagePreference() {
+        if (mImageUri == null) {
+            return;
+        }
+
+        final int screenHalfHeight = getScreenHeightPixels(getPrefContext()) / /* half */ 2;
+        final AnimatedImagePreference animatedImagePreference =
+                new AnimatedImagePreference(getPrefContext());
+        animatedImagePreference.setImageUri(mImageUri);
+        animatedImagePreference.setSelectable(false);
+        animatedImagePreference.setMaxHeight(screenHalfHeight);
+
+        getPreferenceScreen().addPreference(animatedImagePreference);
+    }
+
+    private void initToggleServiceDividerSwitchPreference() {
+        mToggleServiceDividerSwitchPreference = new DividerSwitchPreference(getPrefContext());
+        mToggleServiceDividerSwitchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
+        if (getArguments().containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
+            final boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED);
+            mToggleServiceDividerSwitchPreference.setChecked(enabled);
+        }
+
+        getPreferenceScreen().addPreference(mToggleServiceDividerSwitchPreference);
+    }
+
+    private void initGeneralCategory() {
+        final PreferenceCategory generalCategory = new PreferenceCategory(getPrefContext());
+        generalCategory.setKey(KEY_GENERAL_CATEGORY);
+        generalCategory.setTitle(R.string.accessibility_screen_option);
+
+        getPreferenceScreen().addPreference(generalCategory);
+    }
+
+    protected void initSettingsPreference() {
+        if (mSettingsTitle == null || mSettingsIntent == null) {
+            return;
+        }
+
+        // Show the "Settings" menu as if it were a preference screen.
+        mSettingsPreference = new Preference(getPrefContext());
+        mSettingsPreference.setTitle(mSettingsTitle);
+        mSettingsPreference.setIconSpaceReserved(true);
+        mSettingsPreference.setIntent(mSettingsIntent);
+
+        final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
+        generalCategory.addPreference(mSettingsPreference);
+    }
+
+    private void initIntroductionCategory() {
+        final PreferenceCategory introductionCategory = new PreferenceCategory(getPrefContext());
+        final CharSequence title =
+                getString(R.string.accessibility_introduction_title, mPackageName);
+        introductionCategory.setKey(KEY_INTRODUCTION_CATEGORY);
+        introductionCategory.setTitle(title);
+
+        getPreferenceScreen().addPreference(introductionCategory);
+    }
+
+    private void initHtmlTextPreference() {
+        if (TextUtils.isEmpty(mHtmlDescription)) {
+            return;
+        }
+
+        initIntroductionCategory();
+
+        final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(getPrefContext());
+        htmlTextPreference.setSummary(mHtmlDescription);
+        htmlTextPreference.setImageGetter(mImageGetter);
+        htmlTextPreference.setSelectable(false);
+
+        final PreferenceCategory introductionCategory = findPreference(KEY_INTRODUCTION_CATEGORY);
+        introductionCategory.addPreference(htmlTextPreference);
+    }
+
+    private void initFooterPreference() {
+        if (!TextUtils.isEmpty(mDescription)) {
+            createFooterPreference(mDescription);
+        }
+
+        if (TextUtils.isEmpty(mHtmlDescription) && TextUtils.isEmpty(mDescription)) {
+            final CharSequence defaultDescription =
+                    getText(R.string.accessibility_service_default_description);
+            createFooterPreference(defaultDescription);
+        }
     }
 
     static final class AccessibilityUserShortcutType {
@@ -653,7 +677,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
     }
 
-    private void initShortcutPreference(Bundle savedInstanceState) {
+    protected void initShortcutPreference(Bundle savedInstanceState) {
         // Restore the user shortcut type.
         if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
             mUserShortcutTypesCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
@@ -668,6 +692,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
         mShortcutPreference.setTitle(title);
+
+        final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
+        generalCategory.addPreference(mShortcutPreference);
     }
 
     protected void updateShortcutPreference() {
@@ -682,7 +709,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
-    private String getShortcutPreferenceKey() {
+    protected String getShortcutPreferenceKey() {
         return KEY_SHORTCUT_PREFERENCE;
     }
 
