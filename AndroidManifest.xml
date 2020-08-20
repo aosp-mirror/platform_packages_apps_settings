@@ -3416,6 +3416,11 @@
             android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
             android:exported="true" />
 
+        <receiver
+            android:name=".slices.VolumeSliceRelayReceiver"
+            android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
+            android:exported="true" />
+
         <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send
              PendingIntent to it-->
         <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"

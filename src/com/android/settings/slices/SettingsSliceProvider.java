@@ -47,6 +47,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.notification.VolumeSeekBarPreferenceController;
 import com.android.settings.notification.zen.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SliceBroadcastRelay;
@@ -184,7 +185,10 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
-        SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
+        final Context context = getContext();
+        if (!VolumeSliceHelper.unregisterUri(context, sliceUri)) {
+            SliceBroadcastRelay.unregisterReceivers(context, sliceUri);
+        }
         ThreadUtils.postOnMainThread(() -> stopBackgroundWorker(sliceUri));
     }
 
@@ -390,7 +394,13 @@ public class SettingsSliceProvider extends SliceProvider {
 
         final IntentFilter filter = controller.getIntentFilter();
         if (filter != null) {
-            registerIntentToUri(filter, uri);
+            if (controller instanceof VolumeSeekBarPreferenceController) {
+                // Register volume slices to a broadcast relay to reduce unnecessary UI updates
+                VolumeSliceHelper.registerIntentToUri(getContext(), filter, uri,
+                        ((VolumeSeekBarPreferenceController) controller).getAudioStream());
+            } else {
+                registerIntentToUri(filter, uri);
+            }
         }
 
         ThreadUtils.postOnMainThread(() -> startBackgroundWorker(controller, uri));
