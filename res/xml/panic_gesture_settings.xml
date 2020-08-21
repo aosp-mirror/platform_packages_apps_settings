@@ -23,22 +23,35 @@
     <com.android.settings.widget.VideoPreference
         android:key="panic_button_screen_video"
         app:animation="@raw/gesture_double_tap"
-        app:preview="@drawable/gesture_double_tap" />
+        app:preview="@drawable/gesture_double_tap"/>
 
     <SwitchPreference
         android:key="gesture_panic_button"
         android:title="@string/panic_gesture_screen_title"
         android:summary="@string/panic_gesture_screen_summary"
+        android:icon="@drawable/ic_hand_gesture"
         app:keywords="@string/keywords_gesture"
         app:controller="com.android.settings.gestures.PanicGesturePreferenceController"
-        app:allowDividerAbove="true" />
+        app:allowDividerAbove="true"/>
 
     <SwitchPreference
         android:key="panic_gesture_sound"
+        android:icon="@drawable/ic_hearing"
         android:title="@string/panic_gesture_sound_setting_title"
         android:summary="@string/panic_gesture_sound_setting_summary"
         app:keywords="@string/keywords_gesture"
         app:controller="com.android.settings.gestures.PanicGestureSoundPreferenceController"
-        app:allowDividerAbove="true" />
+        app:allowDividerAbove="true"/>
+
+    <Preference
+        android:key="panic_emergency_contacts"
+        android:icon="@drawable/ic_emergency_contact"
+        android:title="@string/panic_gesture_edit_emergency_contact_setting_title"
+        app:keywords="@sttring/keywords_gesture"
+        app:allowDividerAbove="true">
+        <intent
+            android:action="android.settings.EDIT_EMERGENCY_INFO"
+            android:targetPackage="@string/config_aosp_emergency_package_name"/>
+    </Preference>
 
 </PreferenceScreen>
