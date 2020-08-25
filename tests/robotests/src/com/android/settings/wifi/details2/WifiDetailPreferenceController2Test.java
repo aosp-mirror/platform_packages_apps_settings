@@ -299,7 +299,7 @@ public class WifiDetailPreferenceController2Test {
                 .thenReturn(mMockHeaderController);
         when(mMockHeaderController.setSecondSummary(nullable(String.class)))
                 .thenReturn(mMockHeaderController);
-        when(mMockIconInjector.getIcon(anyInt())).thenReturn(new ColorDrawable());
+        when(mMockIconInjector.getIcon(anyBoolean(), anyInt())).thenReturn(new ColorDrawable());
 
         setupMockedPreferenceScreen();
     }
@@ -500,7 +500,7 @@ public class WifiDetailPreferenceController2Test {
     public void entityHeader_shouldHaveIconSetForConnectedNetwork() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        Drawable expectedIcon = mMockIconInjector.getIcon(LEVEL);
+        Drawable expectedIcon = mMockIconInjector.getIcon(false /* showX */, LEVEL);
 
         displayAndResume();
 
@@ -510,7 +510,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void entityHeader_shouldHaveIconSetForDisconnectedNetwork() {
         setUpForDisconnectedNetwork();
-        Drawable expectedIcon = mMockIconInjector.getIcon(LEVEL);
+        Drawable expectedIcon = mMockIconInjector.getIcon(false /* showX */, LEVEL);
 
         displayAndResume();
 
@@ -615,6 +615,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref).setIcon(any(Drawable.class));
     }
 
@@ -624,6 +625,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref).setIcon(any(Drawable.class));
     }
 
@@ -633,6 +635,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref, never()).setIcon(any(Drawable.class));
     }
 
@@ -645,6 +648,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref).setSummary(expectedStrength);
     }
 
@@ -656,6 +660,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref).setSummary(expectedStrength);
     }
 
@@ -665,7 +670,22 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref, never()).setSummary(any(String.class));
+    }
+
+    @Test
+    public void signalStrengthPref_shouldShowXLevelIcon_showXTrue() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final String expectedStrength =
+                mContext.getResources().getStringArray(R.array.wifi_signal)[LEVEL];
+        when(mMockWifiEntry.shouldShowXLevelIcon()).thenReturn(true);
+
+        displayAndResume();
+
+        assertThat(mController.mShowX).isTrue();
+        verify(mMockSignalStrengthPref).setSummary(expectedStrength);
     }
 
     @Test
@@ -1529,7 +1549,7 @@ public class WifiDetailPreferenceController2Test {
         ArgumentCaptor<BitmapDrawable> drawableCaptor =
                 ArgumentCaptor.forClass(BitmapDrawable.class);
         Drawable original = mContext.getDrawable(Utils.getWifiIconResource(LEVEL)).mutate();
-        when(mMockIconInjector.getIcon(anyInt())).thenReturn(original);
+        when(mMockIconInjector.getIcon(anyBoolean(), anyInt())).thenReturn(original);
 
         displayAndResume();
 
@@ -1548,7 +1568,7 @@ public class WifiDetailPreferenceController2Test {
         ArgumentCaptor<BitmapDrawable> drawableCaptor =
                 ArgumentCaptor.forClass(BitmapDrawable.class);
         Drawable original = mContext.getDrawable(Utils.getWifiIconResource(LEVEL)).mutate();
-        when(mMockIconInjector.getIcon(anyInt())).thenReturn(original);
+        when(mMockIconInjector.getIcon(anyBoolean(), anyInt())).thenReturn(original);
 
         displayAndResume();
 
