@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -26,6 +27,7 @@ import android.text.TextUtils;
 import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,12 +58,14 @@ public class AccessibilityEditDialogUtils {
          DialogType.EDIT_SHORTCUT_GENERIC,
          DialogType.EDIT_SHORTCUT_MAGNIFICATION,
          DialogType.EDIT_MAGNIFICATION_MODE,
+         DialogType.EDIT_MAGNIFICATION_SWITCH_SHORTCUT,
     })
 
     private @interface DialogType {
         int EDIT_SHORTCUT_GENERIC = 0;
         int EDIT_SHORTCUT_MAGNIFICATION = 1;
         int EDIT_MAGNIFICATION_MODE = 2;
+        int EDIT_MAGNIFICATION_SWITCH_SHORTCUT = 3;
     }
 
     /**
@@ -115,6 +119,26 @@ public class AccessibilityEditDialogUtils {
         return alertDialog;
     }
 
+    /**
+     * Method to show the magnification edit shortcut dialog in Magnification.
+     *
+     * @param context A valid context
+     * @param dialogTitle The title of magnify edit shortcut dialog
+     * @param listener The listener to determine the action of magnify edit shortcut dialog
+     * @return A magnification edit shortcut dialog in Magnification
+     */
+    public static Dialog showMagnificationSwitchShortcutDialog(Context context,
+            CharSequence dialogTitle, View.OnClickListener listener) {
+        final AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setView(createSwitchShortcutDialogContentView(context))
+                .setTitle(dialogTitle)
+                .create();
+        alertDialog.show();
+        setEditShortcutButtonsListener(alertDialog, listener);
+        setScrollIndicators(alertDialog);
+        return alertDialog;
+    }
+
     private static AlertDialog createDialog(Context context, int dialogType,
             CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
 
@@ -138,6 +162,22 @@ public class AccessibilityEditDialogUtils {
         scrollView.setScrollIndicators(
                 View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM,
                 View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM);
+    }
+
+    private static void setEditShortcutButtonsListener(AlertDialog dialog,
+            View.OnClickListener listener) {
+        final View contentView = dialog.findViewById(R.id.container_layout);
+        final Button positiveButton = contentView.findViewById(
+                R.id.switch_shortcut_positive_button);
+        final Button negativeButton = contentView.findViewById(
+                R.id.switch_shortcut_negative_button);
+
+        positiveButton.setOnClickListener(listener);
+        negativeButton.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    private static View createSwitchShortcutDialogContentView(Context context) {
+        return createEditDialogContentView(context, DialogType.EDIT_MAGNIFICATION_SWITCH_SHORTCUT);
     }
 
     /**
@@ -173,6 +213,10 @@ public class AccessibilityEditDialogUtils {
                         R.layout.accessibility_edit_magnification_mode, null);
                 initMagnifyFullScreen(context, contentView);
                 initMagnifyWindowScreen(context, contentView);
+                break;
+            case DialogType.EDIT_MAGNIFICATION_SWITCH_SHORTCUT:
+                contentView = inflater.inflate(
+                        R.layout.accessibility_edit_magnification_shortcut, null);
                 break;
             default:
                 throw new IllegalArgumentException();
