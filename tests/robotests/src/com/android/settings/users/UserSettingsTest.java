@@ -23,7 +23,6 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
@@ -575,7 +574,7 @@ public class UserSettingsTest {
 
         verify(mUserManager, never()).getUserIcon(anyInt());
         // updateUserList should be called only once
-        verify(mUserManager).getUsers(true);
+        verify(mUserManager).getAliveUsers();
     }
 
     @Test
@@ -592,7 +591,7 @@ public class UserSettingsTest {
 
         verify(mUserManager).getUserIcon(ACTIVE_USER_ID);
         // updateUserList should be called another time after loading the icons
-        verify(mUserManager, times(2)).getUsers(true);
+        verify(mUserManager, times(2)).getAliveUsers();
     }
 
     @Test
@@ -672,7 +671,7 @@ public class UserSettingsTest {
     private void givenUsers(UserInfo... userInfo) {
         List<UserInfo> users = Arrays.asList(userInfo);
         doReturn(users).when(mUserManager).getUsers();
-        doReturn(users).when(mUserManager).getUsers(anyBoolean());
+        doReturn(users).when(mUserManager).getAliveUsers();
     }
 
     private static void removeFlag(UserInfo userInfo, int flag) {
