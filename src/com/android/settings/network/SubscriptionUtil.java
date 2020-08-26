@@ -27,12 +27,13 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
-import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SubscriptionUtil {
     private static final String TAG = "SubscriptionUtil";
@@ -79,41 +80,7 @@ public class SubscriptionUtil {
         if (sAvailableResultsForTesting != null) {
             return sAvailableResultsForTesting;
         }
-        final SubscriptionManager subMgr = context.getSystemService(SubscriptionManager.class);
-        final TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
-
-        final List<SubscriptionInfo> subscriptions =
-                new ArrayList<>(emptyIfNull(subMgr.getSelectableSubscriptionInfoList()));
-
-        // Look for inactive but present physical SIMs that are missing from the selectable list.
-        final List<UiccSlotInfo> missing = new ArrayList<>();
-        final UiccSlotInfo[] slotsInfo = telMgr.getUiccSlotsInfo();
-        for (int i = 0; slotsInfo != null && i < slotsInfo.length; i++) {
-            final UiccSlotInfo slotInfo = slotsInfo[i];
-            if (isInactiveInsertedPSim(slotInfo)) {
-                final int index = slotInfo.getLogicalSlotIdx();
-                final String cardId = slotInfo.getCardId();
-
-                final boolean found = subscriptions.stream().anyMatch(info ->
-                        index == info.getSimSlotIndex() && cardId.equals(info.getCardString()));
-                if (!found) {
-                    missing.add(slotInfo);
-                }
-            }
-        }
-        if (missing.isEmpty()) {
-            return subscriptions;
-        }
-        for (SubscriptionInfo info : subMgr.getAllSubscriptionInfoList()) {
-            for (UiccSlotInfo slotInfo : missing) {
-                if (info.getSimSlotIndex() == slotInfo.getLogicalSlotIdx()
-                        && info.getCardString().equals(slotInfo.getCardId())) {
-                    subscriptions.add(info);
-                    break;
-                }
-            }
-        }
-        return subscriptions;
+        return new ArrayList<>(emptyIfNull(getSelectableSubscriptionInfoList(context)));
     }
 
     /**
@@ -144,24 +111,7 @@ public class SubscriptionUtil {
             return null;
         }
 
-        if (subInfo.isEmbedded()) {
-            return subInfo;
-        }
-
-        // Look for physical SIM which presented in slots no mater active or not.
-        final UiccSlotInfo[] slotsInfo = getUiccSlotsInfo(context);
-        if (slotsInfo == null) {
-            return null;
-        }
-        for (UiccSlotInfo slotInfo : slotsInfo) {
-            if ((!slotInfo.getIsEuicc())
-                    && (slotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT)
-                    && (slotInfo.getLogicalSlotIdx() == subInfo.getSimSlotIndex())
-                    && TextUtils.equals(slotInfo.getCardId(), subInfo.getCardString())) {
-                return subInfo;
-            }
-        }
-        return null;
+        return subInfo;
     }
 
     private static UiccSlotInfo [] getUiccSlotsInfo(Context context) {
@@ -208,9 +158,7 @@ public class SubscriptionUtil {
             // verify if subscription is inserted within slot
             for (UiccSlotInfo slotInfo : slotsInfo) {
                 if ((slotInfo != null) && (!slotInfo.getIsEuicc())
-                        && (slotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT)
-                        && (slotInfo.getLogicalSlotIdx() == subInfo.getSimSlotIndex())
-                        && TextUtils.equals(slotInfo.getCardId(), subInfo.getCardString())) {
+                        && (slotInfo.getLogicalSlotIdx() == subInfo.getSimSlotIndex())) {
                     return true;
                 }
             }
@@ -287,5 +235,71 @@ public class SubscriptionUtil {
             return INVALID_SIM_SLOT_INDEX;
         }
         return info.getSimSlotIndex();
+    }
+
+    /**
+     * Return a list of subscriptions that are available and visible to the user.
+     *
+     * @return list of user selectable subscriptions.
+     */
+    public static List<SubscriptionInfo> getSelectableSubscriptionInfoList(Context context) {
+        SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
+        List<SubscriptionInfo> availableList = subManager.getAvailableSubscriptionInfoList();
+        if (availableList == null) {
+            return null;
+        } else {
+            // Multiple subscriptions in a group should only have one representative.
+            // It should be the current active primary subscription if any, or any
+            // primary subscription.
+            List<SubscriptionInfo> selectableList = new ArrayList<>();
+            Map<ParcelUuid, SubscriptionInfo> groupMap = new HashMap<>();
+
+            for (SubscriptionInfo info : availableList) {
+                // Opportunistic subscriptions are considered invisible
+                // to users so they should never be returned.
+                if (!isSubscriptionVisible(subManager, context, info)) continue;
+
+                ParcelUuid groupUuid = info.getGroupUuid();
+                if (groupUuid == null) {
+                    // Doesn't belong to any group. Add in the list.
+                    selectableList.add(info);
+                } else if (!groupMap.containsKey(groupUuid)
+                        || (groupMap.get(groupUuid).getSimSlotIndex() == INVALID_SIM_SLOT_INDEX
+                        && info.getSimSlotIndex() != INVALID_SIM_SLOT_INDEX)) {
+                    // If it belongs to a group that has never been recorded or it's the current
+                    // active subscription, add it in the list.
+                    selectableList.remove(groupMap.get(groupUuid));
+                    selectableList.add(info);
+                    groupMap.put(groupUuid, info);
+                }
+
+            }
+            return selectableList;
+        }
+    }
+
+
+    /**
+     * Whether a subscription is visible to API caller. If it's a bundled opportunistic
+     * subscription, it should be hidden anywhere in Settings, dialer, status bar etc.
+     * Exception is if caller owns carrier privilege, in which case they will
+     * want to see their own hidden subscriptions.
+     *
+     * @param info the subscriptionInfo to check against.
+     * @return true if this subscription should be visible to the API caller.
+     */
+    private static boolean isSubscriptionVisible(
+            SubscriptionManager subscriptionManager, Context context, SubscriptionInfo info) {
+        if (info == null) return false;
+        // If subscription is NOT grouped opportunistic subscription, it's visible.
+        if (info.getGroupUuid() == null || !info.isOpportunistic()) return true;
+
+        // If the caller is the carrier app and owns the subscription, it should be visible
+        // to the caller.
+        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(info.getSubscriptionId());
+        boolean hasCarrierPrivilegePermission = telephonyManager.hasCarrierPrivileges()
+                || subscriptionManager.canManageSubscription(info);
+        return hasCarrierPrivilegePermission;
     }
 }

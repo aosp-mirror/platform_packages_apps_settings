@@ -86,6 +86,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private static final String PIN_DIALOG = "sim_pin";
     private static final String PIN_TOGGLE = "sim_toggle";
     // Keys in icicle
+    private static final String DIALOG_SUB_ID = "dialogSubId";
     private static final String DIALOG_STATE = "dialogState";
     private static final String DIALOG_PIN = "dialogPin";
     private static final String DIALOG_ERROR = "dialogError";
@@ -126,7 +127,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     // @see android.widget.Toast$TN
     private static final long LONG_DURATION_TIMEOUT = 7000;
 
-    private int mSlotId;
+    private int mSlotId = -1;
     private int mSubId;
     private TelephonyManager mTelephonyManager;
 
@@ -154,7 +155,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
     // For top-level settings screen to query
     private boolean isIccLockEnabled() {
-        mTelephonyManager =  mTelephonyManager.createForSubscriptionId(mSubId);
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
         return mTelephonyManager.isIccLockEnabled();
     }
 
@@ -186,27 +187,13 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         mPinDialog = (EditPinPreference) findPreference(PIN_DIALOG);
         mPinToggle = (SwitchPreference) findPreference(PIN_TOGGLE);
-        if (savedInstanceState != null && savedInstanceState.containsKey(DIALOG_STATE)) {
-            mDialogState = savedInstanceState.getInt(DIALOG_STATE);
-            mPin = savedInstanceState.getString(DIALOG_PIN);
-            mError = savedInstanceState.getString(DIALOG_ERROR);
-            mToState = savedInstanceState.getBoolean(ENABLE_TO_STATE);
-
-            // Restore inputted PIN code
-            switch (mDialogState) {
-                case ICC_NEW_MODE:
-                    mOldPin = savedInstanceState.getString(OLD_PINCODE);
-                    break;
-
-                case ICC_REENTER_MODE:
-                    mOldPin = savedInstanceState.getString(OLD_PINCODE);
-                    mNewPin = savedInstanceState.getString(NEW_PINCODE);
-                    break;
-
-                case ICC_LOCK_MODE:
-                case ICC_OLD_MODE:
-                default:
-                    break;
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(DIALOG_STATE)
+                    && restoreDialogStates(savedInstanceState)) {
+                Log.d(TAG, "onCreate: restore dialog for slotId=" + mSlotId + ", subId=" + mSubId);
+            } else if (savedInstanceState.containsKey(CURRENT_TAB)
+                    && restoreTabFocus(savedInstanceState)) {
+                Log.d(TAG, "onCreate: restore focus on slotId=" + mSlotId + ", subId=" + mSubId);
             }
         }
 
@@ -218,35 +205,87 @@ public class IccLockSettings extends SettingsPreferenceFragment
         mRes = getResources();
     }
 
+    private boolean restoreDialogStates(Bundle savedInstanceState) {
+        final SubscriptionInfo subInfo = mProxySubscriptionMgr
+                .getActiveSubscriptionInfo(savedInstanceState.getInt(DIALOG_SUB_ID));
+        if (subInfo == null) {
+            return false;
+        }
+
+        final SubscriptionInfo visibleSubInfo = getVisibleSubscriptionInfoForSimSlotIndex(
+                subInfo.getSimSlotIndex());
+        if (visibleSubInfo == null) {
+            return false;
+        }
+        if (visibleSubInfo.getSubscriptionId() != subInfo.getSubscriptionId()) {
+            return false;
+        }
+
+        mSlotId = subInfo.getSimSlotIndex();
+        mSubId = subInfo.getSubscriptionId();
+        mDialogState = savedInstanceState.getInt(DIALOG_STATE);
+        mPin = savedInstanceState.getString(DIALOG_PIN);
+        mError = savedInstanceState.getString(DIALOG_ERROR);
+        mToState = savedInstanceState.getBoolean(ENABLE_TO_STATE);
+
+        // Restore inputted PIN code
+        switch (mDialogState) {
+            case ICC_NEW_MODE:
+                mOldPin = savedInstanceState.getString(OLD_PINCODE);
+                break;
+
+            case ICC_REENTER_MODE:
+                mOldPin = savedInstanceState.getString(OLD_PINCODE);
+                mNewPin = savedInstanceState.getString(NEW_PINCODE);
+                break;
+        }
+        return true;
+    }
+
+    private boolean restoreTabFocus(Bundle savedInstanceState) {
+        int slotId = 0;
+        try {
+            slotId = Integer.parseInt(savedInstanceState.getString(CURRENT_TAB));
+        } catch (NumberFormatException exception) {
+            return false;
+        }
+
+        final SubscriptionInfo subInfo = getVisibleSubscriptionInfoForSimSlotIndex(slotId);
+        if (subInfo == null) {
+            return false;
+        }
+
+        mSlotId = subInfo.getSimSlotIndex();
+        mSubId = subInfo.getSubscriptionId();
+        if (mTabHost != null) {
+            mTabHost.setCurrentTabByTag(getTagForSlotId(mSlotId));
+        }
+        return true;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
         final int numSims = mProxySubscriptionMgr.getActiveSubscriptionInfoCountMax();
-        final List<SubscriptionInfo> subInfoList =
-                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
-        mSlotId = 0;
         final List<SubscriptionInfo> componenterList = new ArrayList<>();
 
         for (int i = 0; i < numSims; ++i) {
-            final SubscriptionInfo subInfo =
-                    getActiveSubscriptionInfoForSimSlotIndex(subInfoList, i);
+            final SubscriptionInfo subInfo = getVisibleSubscriptionInfoForSimSlotIndex(i);
             if (subInfo != null) {
-                final CarrierConfigManager carrierConfigManager = getContext().getSystemService(
-                        CarrierConfigManager.class);
-                final PersistableBundle bundle = carrierConfigManager.getConfigForSubId(
-                        subInfo.getSubscriptionId());
-                if (bundle != null
-                        && !bundle.getBoolean(CarrierConfigManager
-                        .KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
-                    componenterList.add(subInfo);
-                }
+                componenterList.add(subInfo);
             }
         }
 
         if (componenterList.size() == 0) {
             Log.e(TAG, "onCreateView: no sim info");
             return super.onCreateView(inflater, container, savedInstanceState);
+        }
+
+        if (mSlotId < 0) {
+            mSlotId = componenterList.get(0).getSimSlotIndex();
+            mSubId = componenterList.get(0).getSubscriptionId();
+            Log.d(TAG, "onCreateView: default slotId=" + mSlotId + ", subId=" + mSubId);
         }
 
         if (componenterList.size() > 1) {
@@ -261,25 +300,21 @@ public class IccLockSettings extends SettingsPreferenceFragment
             mListView = (ListView) view.findViewById(android.R.id.list);
 
             mTabHost.setup();
-            mTabHost.setOnTabChangedListener(mTabListener);
             mTabHost.clearAllTabs();
 
             for (SubscriptionInfo subInfo : componenterList) {
-                int slot = subInfo.getSimSlotIndex();
-                mTabHost.addTab(buildTabSpec(String.valueOf(slot),
+                final int slot = subInfo.getSimSlotIndex();
+                final String tag = getTagForSlotId(slot);
+                mTabHost.addTab(buildTabSpec(tag,
                         String.valueOf(subInfo == null
                                 ? getContext().getString(R.string.sim_editor_title, slot + 1)
                                 : subInfo.getDisplayName())));
             }
 
-            mSubId = componenterList.get(0).getSubscriptionId();
-
-            if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_TAB)) {
-                mTabHost.setCurrentTabByTag(savedInstanceState.getString(CURRENT_TAB));
-            }
+            mTabHost.setCurrentTabByTag(getTagForSlotId(mSlotId));
+            mTabHost.setOnTabChangedListener(mTabListener);
             return view;
         } else {
-            mSlotId = componenterList.get(0).getSimSlotIndex();
             return super.onCreateView(inflater, container, savedInstanceState);
         }
     }
@@ -292,11 +327,17 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
     private void updatePreferences() {
 
-        final List<SubscriptionInfo> subInfoList =
-                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
-        final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, mSlotId);
-        mSubId = (sir == null) ? SubscriptionManager.INVALID_SUBSCRIPTION_ID
-            : sir.getSubscriptionId();
+        final SubscriptionInfo sir = getVisibleSubscriptionInfoForSimSlotIndex(mSlotId);
+        final int subId = (sir != null) ? sir.getSubscriptionId()
+                : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+
+        if (mSubId != subId) {
+            mSubId = subId;
+            resetDialogState();
+            if ((mPinDialog != null) && mPinDialog.isDialogOpen()) {
+                mPinDialog.getDialog().dismiss();
+            }
+        }
 
         if (mPinDialog != null) {
             mPinDialog.setEnabled(sir != null);
@@ -351,6 +392,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         // dialog state. In other cases, where this activity manually launches
         // the dialog, store the state of the dialog.
         if (mPinDialog.isDialogOpen()) {
+            out.putInt(DIALOG_SUB_ID, mSubId);
             out.putInt(DIALOG_STATE, mDialogState);
             out.putString(DIALOG_PIN, mPinDialog.getEditText().getText().toString());
             out.putString(DIALOG_ERROR, mError);
@@ -365,11 +407,6 @@ public class IccLockSettings extends SettingsPreferenceFragment
                 case ICC_REENTER_MODE:
                     out.putString(OLD_PINCODE, mOldPin);
                     out.putString(NEW_PINCODE, mNewPin);
-                    break;
-
-                case ICC_LOCK_MODE:
-                case ICC_OLD_MODE:
-                default:
                     break;
             }
         } else {
@@ -637,7 +674,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         if (attemptsRemaining == 0) {
             displayMessage = mRes.getString(R.string.wrong_pin_code_pukked);
-        } else if (attemptsRemaining > 0) {
+        } else if (attemptsRemaining == 1) {
+            displayMessage = mRes.getString(R.string.wrong_pin_code_one, attemptsRemaining);
+        } else if (attemptsRemaining > 1) {
             displayMessage = mRes
                     .getQuantityString(R.plurals.wrong_pin_code, attemptsRemaining,
                             attemptsRemaining);
@@ -665,23 +704,50 @@ public class IccLockSettings extends SettingsPreferenceFragment
         mDialogState = OFF_MODE;
     }
 
-    private static SubscriptionInfo getActiveSubscriptionInfoForSimSlotIndex(
-            List<SubscriptionInfo> subInfoList, int slotId) {
+    private String getTagForSlotId(int slotId) {
+        return String.valueOf(slotId);
+    }
+
+    private int getSlotIndexFromTag(String tag) {
+        int slotId = -1;
+        try {
+            slotId = Integer.parseInt(tag);
+        } catch (NumberFormatException exception) {
+        }
+        return slotId;
+    }
+
+    private SubscriptionInfo getVisibleSubscriptionInfoForSimSlotIndex(int slotId) {
+        final List<SubscriptionInfo> subInfoList =
+                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
         if (subInfoList == null) {
             return null;
         }
+        final CarrierConfigManager carrierConfigManager = getContext().getSystemService(
+                CarrierConfigManager.class);
         for (SubscriptionInfo subInfo : subInfoList) {
-            if (subInfo.getSimSlotIndex() == slotId) {
+            if ((isSubscriptionVisible(carrierConfigManager, subInfo)
+                    && (subInfo.getSimSlotIndex() == slotId))) {
                 return subInfo;
             }
         }
         return null;
     }
 
+    private boolean isSubscriptionVisible(CarrierConfigManager carrierConfigManager,
+            SubscriptionInfo subInfo) {
+        final PersistableBundle bundle = carrierConfigManager
+                .getConfigForSubId(subInfo.getSubscriptionId());
+        if (bundle == null) {
+            return false;
+        }
+        return !bundle.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL);
+    }
+
     private OnTabChangeListener mTabListener = new OnTabChangeListener() {
         @Override
         public void onTabChanged(String tabId) {
-            mSlotId = Integer.parseInt(tabId);
+            mSlotId = getSlotIndexFromTag(tabId);
 
             // The User has changed tab; update the body.
             updatePreferences();

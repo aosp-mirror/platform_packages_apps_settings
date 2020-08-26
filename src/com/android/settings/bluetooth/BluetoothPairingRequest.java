@@ -34,7 +34,7 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     String action = intent.getAction();
-    if (!action.equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
+    if (action == null || !action.equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
       return;
     }
     // convert broadcast intent into activity intent (same action string)

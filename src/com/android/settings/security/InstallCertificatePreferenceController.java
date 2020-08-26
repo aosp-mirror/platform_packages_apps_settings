@@ -18,32 +18,18 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.os.UserManager;
-import android.security.KeyStore;
 
-import androidx.preference.Preference;
-
-import com.android.settings.R;
-
-public class CredentialStoragePreferenceController extends
+public class InstallCertificatePreferenceController extends
         RestrictedEncryptionPreferenceController {
 
-    private static final String KEY_CREDENTIAL_STORAGE_TYPE = "credential_storage_type";
-    private final KeyStore mKeyStore;
+    private static final String KEY_INSTALL_CERTIFICATE = "install_certificate";
 
-    public CredentialStoragePreferenceController(Context context) {
+    public InstallCertificatePreferenceController(Context context) {
         super(context, UserManager.DISALLOW_CONFIG_CREDENTIALS);
-        mKeyStore = KeyStore.getInstance();
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_CREDENTIAL_STORAGE_TYPE;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(mKeyStore.isHardwareBacked()
-                ? R.string.credential_storage_type_hardware
-                : R.string.credential_storage_type_software);
+        return KEY_INSTALL_CERTIFICATE;
     }
 }

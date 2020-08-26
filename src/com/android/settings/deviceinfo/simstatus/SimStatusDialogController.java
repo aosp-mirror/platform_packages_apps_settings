@@ -23,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.PersistableBundle;
@@ -40,6 +42,7 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
+import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
 import android.telephony.euicc.EuiccManager;
@@ -59,15 +62,15 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
     private final static String TAG = "SimStatusDialogCtrl";
-
-    private static final String CELL_BROADCAST_SERVICE_PACKAGE = "com.android.cellbroadcastservice";
 
     @VisibleForTesting
     final static int NETWORK_PROVIDER_VALUE_ID = R.id.operator_name_value;
@@ -136,6 +139,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             };
 
     private SubscriptionInfo mSubscriptionInfo;
+    private TelephonyDisplayInfo mTelephonyDisplayInfo;
 
     private final int mSlotIndex;
     private TelephonyManager mTelephonyManager;
@@ -148,6 +152,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private final Context mContext;
 
     private boolean mShowLatestAreaInfo;
+    private boolean mIsRegisteredListener = false;
 
     private final BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -218,7 +223,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     public void initialize() {
-        updateEid();
+        requestForUpdateEid();
 
         if (mSubscriptionInfo == null) {
             return;
@@ -267,7 +272,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mTelephonyManager.listen(mPhoneStateListener,
                 PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
-                        | PhoneStateListener.LISTEN_SERVICE_STATE);
+                        | PhoneStateListener.LISTEN_SERVICE_STATE
+                        | PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED);
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
         registerImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
@@ -277,11 +283,22 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             mContext.registerReceiver(mAreaInfoReceiver,
                     new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED));
         }
+
+        mIsRegisteredListener = true;
     }
 
     @Override
     public void onPause() {
         if (mSubscriptionInfo == null) {
+            if (mIsRegisteredListener) {
+                mSubscriptionManager.removeOnSubscriptionsChangedListener(
+                        mOnSubscriptionsChangedListener);
+                mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+                if (mShowLatestAreaInfo) {
+                    mContext.unregisterReceiver(mAreaInfoReceiver);
+                }
+                mIsRegisteredListener = false;
+            }
             return;
         }
 
@@ -355,7 +372,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private void bindCellBroadcastService() {
         mCellBroadcastServiceConnection = new CellBroadcastServiceConnection();
         Intent intent = new Intent(CellBroadcastService.CELL_BROADCAST_SERVICE_INTERFACE);
-        intent.setPackage(CELL_BROADCAST_SERVICE_PACKAGE);
+        String cbsPackage = getCellBroadcastServicePackage();
+        if (TextUtils.isEmpty(cbsPackage)) return;
+        intent.setPackage(cbsPackage);
         if (mCellBroadcastServiceConnection != null
                 && mCellBroadcastServiceConnection.getService() == null) {
             if (!mContext.bindService(intent, mCellBroadcastServiceConnection,
@@ -365,6 +384,38 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         } else {
             Log.d(TAG, "skipping bindService because connection already exists");
         }
+    }
+
+    /** Returns the package name of the cell broadcast service, or null if there is none. */
+    private String getCellBroadcastServicePackage() {
+        PackageManager packageManager = mContext.getPackageManager();
+        List<ResolveInfo> cbsPackages = packageManager.queryIntentServices(
+                new Intent(CellBroadcastService.CELL_BROADCAST_SERVICE_INTERFACE),
+                PackageManager.MATCH_SYSTEM_ONLY);
+        if (cbsPackages.size() != 1) {
+            Log.e(TAG, "getCellBroadcastServicePackageName: found " + cbsPackages.size()
+                    + " CBS packages");
+        }
+        for (ResolveInfo info : cbsPackages) {
+            if (info.serviceInfo == null) continue;
+            String packageName = info.serviceInfo.packageName;
+            if (!TextUtils.isEmpty(packageName)) {
+                if (packageManager.checkPermission(
+                        android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE,
+                        packageName) == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "getCellBroadcastServicePackageName: " + packageName);
+                    return packageName;
+                } else {
+                    Log.e(TAG, "getCellBroadcastServicePackageName: " + packageName
+                            + " does not have READ_PRIVILEGED_PHONE_STATE permission");
+                }
+            } else {
+                Log.e(TAG, "getCellBroadcastServicePackageName: found a CBS package but "
+                        + "packageName is null/empty");
+            }
+        }
+        Log.e(TAG, "getCellBroadcastServicePackageName: package name not found");
+        return null;
     }
 
     private void updateLatestAreaInfo() {
@@ -457,6 +508,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateNetworkType() {
+        // TODO: all of this should be based on TelephonyDisplayInfo instead of just the 5G logic
         if (mSubscriptionInfo == null) {
             final String unknownNetworkType =
                     getNetworkTypeName(TelephonyManager.NETWORK_TYPE_UNKNOWN);
@@ -471,11 +523,20 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         final int subId = mSubscriptionInfo.getSubscriptionId();
         final int actualDataNetworkType = mTelephonyManager.getDataNetworkType();
         final int actualVoiceNetworkType = mTelephonyManager.getVoiceNetworkType();
+        final int overrideNetworkType = mTelephonyDisplayInfo == null
+                ? TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE
+                : mTelephonyDisplayInfo.getOverrideNetworkType();
+
         if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualDataNetworkType) {
             dataNetworkTypeName = getNetworkTypeName(actualDataNetworkType);
         }
         if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualVoiceNetworkType) {
             voiceNetworkTypeName = getNetworkTypeName(actualVoiceNetworkType);
+        }
+
+        if (overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE
+                || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA) {
+            dataNetworkTypeName = "NR NSA";
         }
 
         boolean show4GForLTE = false;
@@ -526,25 +587,33 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
     }
 
-    private void updateEid() {
+    @VisibleForTesting
+    void requestForUpdateEid() {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final AtomicReference<String> eid = getEid(mSlotIndex);
+            ThreadUtils.postOnMainThread(() -> updateEid(eid));
+        });
+    }
+
+    @VisibleForTesting
+    AtomicReference<String> getEid(int slotIndex) {
         boolean shouldHaveEid = false;
         String eid = null;
-
         if (mTelephonyManager.getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
             // Get EID per-SIM in multi-SIM mode
-            Map<Integer, Integer> mapping = mTelephonyManager.getLogicalToPhysicalSlotMapping();
-            int pSlotId = mapping.getOrDefault(mSlotIndex,
+            final Map<Integer, Integer> mapping = mTelephonyManager
+                    .getLogicalToPhysicalSlotMapping();
+            final int pSlotId = mapping.getOrDefault(slotIndex,
                     SubscriptionManager.INVALID_SIM_SLOT_INDEX);
 
             if (pSlotId != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
-                List<UiccCardInfo> infos = mTelephonyManager.getUiccCardsInfo();
+                final List<UiccCardInfo> infos = mTelephonyManager.getUiccCardsInfo();
 
                 for (UiccCardInfo info : infos) {
                     if (info.getSlotIndex() == pSlotId) {
                         if (info.isEuicc()) {
                             shouldHaveEid = true;
                             eid = info.getEid();
-
                             if (TextUtils.isEmpty(eid)) {
                                 eid = mEuiccManager.createForCardId(info.getCardId()).getEid();
                             }
@@ -558,12 +627,19 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             shouldHaveEid = true;
             eid = mEuiccManager.getEid();
         }
+        if ((!shouldHaveEid) && (eid == null)) {
+            return null;
+        }
+        return new AtomicReference<String>(eid);
+    }
 
-        if (!shouldHaveEid) {
+    @VisibleForTesting
+    void updateEid(AtomicReference<String> eid) {
+        if (eid == null) {
             mDialog.removeSettingFromScreen(EID_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
-        } else if (!TextUtils.isEmpty(eid)) {
-            mDialog.setText(EID_INFO_VALUE_ID, eid);
+        } else if (eid.get() != null) {
+            mDialog.setText(EID_INFO_VALUE_ID, eid.get());
         }
     }
 
@@ -692,6 +768,12 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 updateServiceState(serviceState);
                 updateRoamingStatus(serviceState);
             }
+
+            @Override
+            public void onDisplayInfoChanged(@NonNull TelephonyDisplayInfo displayInfo) {
+                mTelephonyDisplayInfo = displayInfo;
+                updateNetworkType();
+            }
         };
     }
 
@@ -737,7 +819,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 //          case TelephonyManager.NETWORK_TYPE_LTE_CA:
 //              return "LTE_CA";
             case TelephonyManager.NETWORK_TYPE_NR:
-                return "NR";
+                return "NR SA";
             default:
                 return "UNKNOWN";
         }

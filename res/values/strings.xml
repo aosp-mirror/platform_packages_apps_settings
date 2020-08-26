@@ -2955,6 +2955,10 @@
         <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</item>
         <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempts.</item>
     </plurals>
+
+    <!-- This is instruction text to inform the user that they have entered the wrong SIM PIN while trying to unlock the keyguard.
+         The variable will be replaced with a number. [CHAR LIMIT=NONE] -->
+    <string name="wrong_pin_code_one">Incorrect SIM PIN code, you have 1 remaining attempt before you must contact your carrier to unlock your device.</string>
     <!-- Instructions telling the user that the operation to unlock the keyguard with SIM PIN failed. Displayed in one line in a large font.  [CHAR LIMIT=40] -->
     <string name="pin_failed">SIM PIN operation failed!</string>
 
@@ -5887,10 +5891,8 @@
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
-    <!-- Title of preference to install certificates from SD card [CHAR LIMIT=30] -->
-    <string name="credentials_install" product="nosdcard">Install from storage</string>
-    <!-- Title of preference to install certificates from SD card [CHAR LIMIT=30] -->
-    <string name="credentials_install" product="default">Install from SD card</string>
+    <!-- Title of preference to install certificates [CHAR LIMIT=30] -->
+    <string name="credentials_install">Install a certificate</string>
     <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
     <string name="credentials_install_summary" product="nosdcard">Install certificates from storage</string>
     <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
@@ -5909,12 +5911,6 @@
     <string name="user_credentials_summary">View and modify stored credentials</string>
     <!-- Title of preference group for advance security settings [CHAR LIMIT=30] -->
     <string name="advanced_security_title">Advanced</string>
-    <!-- Title of preference of what type of credential storage this device has: hardware or software [CHAR LIMIT=30] -->
-    <string name="credential_storage_type">Storage type</string>
-    <!-- Summary text for preference showing what type of credential storage this device has when it is stored in a hardware-backed storage (as opposed to "software only") [CHAR LIMIT=NONE] -->
-    <string name="credential_storage_type_hardware">Hardware-backed</string>
-    <!-- Summary text for preference showing what type of credential storage this device has when it is stored in software only (as opposed to "hardware-backed") [CHAR LIMIT=NONE] -->
-    <string name="credential_storage_type_software">Software only</string>
     <!-- Error message for users that aren't allowed to see or modify credentials [CHAR LIMIT=none] -->
     <string name="credentials_settings_not_available">Credentials are not available for this user</string>
     <!-- Sub-heading for a user credential installed to be used by apps and as part of VPN configurations. [CHAR LIMIT=NONE] -->
@@ -5929,6 +5925,22 @@
     <string name="credentials_not_erased">Credential storage couldn\u2019t be erased.</string>
     <!-- Title of Usage Access preference item [CHAR LIMIT=30] -->
     <string name="usage_access_title">Apps with usage access</string>
+    <!-- Title of CA certificate [CHAR LIMIT=30] -->
+    <string name="ca_certificate">CA certificate</string>
+    <!-- Title of User certificate [CHAR LIMIT=30] -->
+    <string name="user_certificate">VPN &amp; app user certificate</string>
+    <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
+    <string name="wifi_certificate">Wi\u2011Fi certificate</string>
+    <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
+    <string name="ca_certificate_warning_title">Your data won\u2019t be private</string>
+    <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
+    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your data, such as passwords or credit card details, from websites you visit or apps you use – even if your data is encrypted.</string>
+    <!-- Label for button to not install a certificate [CHAR_LIMIT=50] -->
+    <string name="certificate_warning_dont_install">Don\u2019t install</string>
+    <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
+    <string name="certificate_warning_install_anyway">Install anyway</string>
+    <!-- Toast message that a certificate was not installed -->
+    <string name="cert_not_installed">Certificate not installed</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
@@ -6890,6 +6902,8 @@
     <string name="help_url_security" translatable="false"></string>
     <!-- Help URL, Encryption settings [DO NOT TRANSLATE] -->
     <string name="help_url_encryption" translatable="false"></string>
+    <!-- Help URL, Install certificate settings [DO NOT TRANSLATE] -->
+    <string name="help_url_install_certificate" translatable="false"></string>
     <!-- Help URL, Tap & pay [DO NOT TRANSLATE] -->
     <string name="help_url_nfc_payment" translatable="false"></string>
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
@@ -6980,7 +6994,7 @@
     <!-- Call Manager settings summary.  [CHAR LIMIT=50] -->
     <string name="call_manager_summary"><xliff:g id="app">%1$s</xliff:g></string>
     <!-- Cell Broadcast settings title.  [CHAR LIMIT=50] -->
-    <string name="cell_broadcast_settings">Emergency alerts</string>
+    <string name="cell_broadcast_settings">Wireless emergency alerts</string>
     <!-- Network operators settings title.  [CHAR LIMIT=50] -->
     <string name="network_operators_settings">Network operators</string>
     <!-- Access point names title.  [CHAR LIMIT=50] -->
@@ -11327,11 +11341,11 @@
     <string name="rtt_settings_always_visible"></string>
 
     <!-- Footer to show current limitation of 5G on DSDS mode. [CHAR LIMIT=NONE] -->
-    <string name="no_5g_in_dsds_text" product="default">When using 2 SIMs, this phone will be limited to 4G. <annotation id="url">Learn more</annotation>.</string>
+    <string name="no_5g_in_dsds_text" product="default">When using 2 SIMs, this phone will be limited to 4G. <annotation id="url">Learn more</annotation></string>
     <!-- Footer to show current limitation of 5G on DSDS mode for tablets. [CHAR LIMIT=NONE] -->
-    <string name="no_5g_in_dsds_text" product="tablet">When using 2 SIMs, this tablet will be limited to 4G. <annotation id="url">Learn more</annotation>.</string>
+    <string name="no_5g_in_dsds_text" product="tablet">When using 2 SIMs, this tablet will be limited to 4G. <annotation id="url">Learn more</annotation></string>
     <!-- Footer to show current limitation of 5G on DSDS mode for general devices. [CHAR LIMIT=NONE] -->
-    <string name="no_5g_in_dsds_text" product="device">When using 2 SIMs, this device will be limited to 4G. <annotation id="url">Learn more</annotation>.</string>
+    <string name="no_5g_in_dsds_text" product="device">When using 2 SIMs, this device will be limited to 4G. <annotation id="url">Learn more</annotation></string>
     <!-- Help URI, 5G limitation in DSDS condition. [DO NOT TRANSLATE] -->
     <string name="help_uri_5g_dsds" translatable="false"></string>
 </resources>

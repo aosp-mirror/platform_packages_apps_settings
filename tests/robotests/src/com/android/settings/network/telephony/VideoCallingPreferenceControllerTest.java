@@ -83,6 +83,8 @@ public class VideoCallingPreferenceControllerTest {
         doReturn(true).when(mImsManager).isVtProvisionedOnDevice();
         doReturn(ImsFeature.STATE_READY).when(mImsManager).getImsServiceState();
         doReturn(true).when(mTelephonyManager).isDataEnabled();
+
+        mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
     }
 
     @Test

@@ -53,7 +53,7 @@ public class SlicesDatabaseAccessor {
     };
 
     // Cursor value for boolean true
-    private final int TRUE = 1;
+    private static final int TRUE = 1;
 
     private final Context mContext;
     private final SlicesDatabaseHelper mHelper;
@@ -151,7 +151,7 @@ public class SlicesDatabaseAccessor {
                 .toString();
     }
 
-    private SliceData buildSliceData(Cursor cursor, Uri uri, boolean isIntentOnly) {
+    private static SliceData buildSliceData(Cursor cursor, Uri uri, boolean isIntentOnly) {
         final String key = cursor.getString(cursor.getColumnIndex(IndexColumns.KEY));
         final String title = cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE));
         final String summary = cursor.getString(cursor.getColumnIndex(IndexColumns.SUMMARY));

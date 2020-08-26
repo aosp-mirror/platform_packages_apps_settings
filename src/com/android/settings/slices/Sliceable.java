@@ -22,6 +22,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.widget.Toast;
 
 import com.android.settings.R;
@@ -52,6 +53,13 @@ public interface Sliceable {
      */
     default boolean isSliceable() {
         return false;
+    }
+
+    /**
+     * Returns uri for this slice (if it's a slice).
+     */
+    default Uri getSliceUri() {
+        return null;
     }
 
     /**

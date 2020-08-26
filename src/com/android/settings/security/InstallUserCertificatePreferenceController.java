@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,17 +19,24 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.UserManager;
 
-public class InstallCredentialsPreferenceController extends
-        RestrictedEncryptionPreferenceController {
+import com.android.settings.core.BasePreferenceController;
 
-    private static final String KEY_CREDENTIALS_INSTALL = "credentials_install";
+public class InstallUserCertificatePreferenceController extends
+        BasePreferenceController {
 
-    public InstallCredentialsPreferenceController(Context context) {
+    private static final String KEY_INSTALL_USER_CERTIFICATE = "install_user_certificate";
+
+    public InstallUserCertificatePreferenceController(Context context) {
         super(context, UserManager.DISALLOW_CONFIG_CREDENTIALS);
     }
 
     @Override
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
     public String getPreferenceKey() {
-        return KEY_CREDENTIALS_INSTALL;
+        return KEY_INSTALL_USER_CERTIFICATE;
     }
 }

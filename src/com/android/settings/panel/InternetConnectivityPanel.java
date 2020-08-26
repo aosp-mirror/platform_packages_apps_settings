@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.slices.CustomSliceRegistry;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class InternetConnectivityPanel implements PanelContent {
         final List<Uri> uris = new ArrayList<>();
         uris.add(CustomSliceRegistry.WIFI_SLICE_URI);
         uris.add(CustomSliceRegistry.MOBILE_DATA_SLICE_URI);
-        uris.add(CustomSliceRegistry.AIRPLANE_URI);
+        uris.add(AirplaneModePreferenceController.SLICE_URI);
         return uris;
     }
 

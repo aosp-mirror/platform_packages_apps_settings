@@ -38,6 +38,7 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -452,6 +453,8 @@ public class SimStatusDialogControllerTest {
         when(mEuiccManager.isEnabled()).thenReturn(true);
         when(mEuiccManager.getEid()).thenReturn(null);
 
+        doNothing().when(mController).requestForUpdateEid();
+        mController.updateEid(mController.getEid(0));
         mController.initialize();
 
         // Keep 'Not available' if neither the card nor the associated manager can provide EID.
@@ -489,7 +492,10 @@ public class SimStatusDialogControllerTest {
 
         when(mEuiccManager.isEnabled()).thenReturn(true);
         when(mEuiccManager.getEid()).thenReturn(TEST_EID_FROM_MANAGER);
+        when(mEuiccManager.createForCardId(0)).thenReturn(mEuiccManager);
 
+        doNothing().when(mController).requestForUpdateEid();
+        mController.updateEid(mController.getEid(0));
         mController.initialize();
 
         // Set EID retrieved from the card.
@@ -531,6 +537,8 @@ public class SimStatusDialogControllerTest {
                 new RuntimeException("Unexpected card ID was specified"));
         when(mEuiccManager.createForCardId(1)).thenReturn(mEuiccManager);
 
+        doNothing().when(mController).requestForUpdateEid();
+        mController.updateEid(mController.getEid(0));
         mController.initialize();
 
         // Set EID retrieved from the manager associated with the card which cannot provide EID.
@@ -569,6 +577,8 @@ public class SimStatusDialogControllerTest {
         when(mEuiccManager.isEnabled()).thenReturn(true);
         when(mEuiccManager.getEid()).thenReturn(TEST_EID_FROM_MANAGER);
 
+        doNothing().when(mController).requestForUpdateEid();
+        mController.updateEid(mController.getEid(0));
         mController.initialize();
 
         // Remove EID if the card is not eUICC.
@@ -599,6 +609,8 @@ public class SimStatusDialogControllerTest {
         when(mEuiccManager.isEnabled()).thenReturn(true);
         when(mEuiccManager.getEid()).thenReturn(null);
 
+        doNothing().when(mController).requestForUpdateEid();
+        mController.updateEid(mController.getEid(0));
         mController.initialize();
 
         // Keep 'Not available' if the default eUICC manager cannot provide EID in Single SIM mode.
@@ -630,6 +642,8 @@ public class SimStatusDialogControllerTest {
         when(mEuiccManager.createForCardId(anyInt())).thenThrow(
                 new RuntimeException("EID shall be retrieved from the default eUICC manager"));
 
+        doNothing().when(mController).requestForUpdateEid();
+        mController.updateEid(mController.getEid(0));
         mController.initialize();
 
         // Set EID retrieved from the default eUICC manager in Single SIM mode.
@@ -661,6 +675,8 @@ public class SimStatusDialogControllerTest {
         when(mEuiccManager.createForCardId(anyInt())).thenThrow(
                 new RuntimeException("EID shall be retrieved from the default eUICC manager"));
 
+        doNothing().when(mController).requestForUpdateEid();
+        mController.updateEid(mController.getEid(0));
         mController.initialize();
 
         // Set EID retrieved from the default eUICC manager in Single SIM mode.
@@ -690,6 +706,8 @@ public class SimStatusDialogControllerTest {
         when(mEuiccManager.isEnabled()).thenReturn(false);
         when(mEuiccManager.getEid()).thenReturn(null);
 
+        doNothing().when(mController).requestForUpdateEid();
+        mController.updateEid(mController.getEid(0));
         mController.initialize();
 
         // Remove EID if the default eUICC manager indicates that eSIM is not enabled.
