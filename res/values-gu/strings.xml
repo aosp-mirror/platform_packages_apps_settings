@@ -1150,7 +1150,7 @@
     <string name="accessibility_category_personal" msgid="2228088849803484780">"વ્યક્તિગત પ્રોફાઇલ એકાઉન્ટ્સ"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"કાર્ય એકાઉન્ટ - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"વ્યક્તિગત એકાઉન્ટ - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
-    <string name="search_settings" msgid="7573686516434589771">"શોધો"</string>
+    <string name="search_settings" msgid="7573686516434589771">"શોધ"</string>
     <string name="display_settings" msgid="7197750639709493852">"ડિસ્પ્લે"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"ઑટો રોટેટ સ્ક્રીન"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"રંગો"</string>
@@ -1191,8 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"અમુક કન્ટેન્ટ માટે રિફ્રેશ થવાનો રેટ ઑટોમૅટિક રીતે 60થી વધારીને 90 Hz કરે છે. બૅટરીનો વપરાશ વધારે છે."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (5861514655252832828) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90 Hz રિફ્રેશ રેટ ફરજિયાત બનાવો"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"સ્પર્શના પ્રતિભાવમાં સુધારણા અને ઍનિમેશનની ક્વૉલિટી માટે ઉચ્ચતમ રિફ્રેશ રેટ. આ સુવિધા બૅટરીનો વપરાશ વધારે છે."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"સ્ક્રીન અટેન્શન"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ચાલુ / જો તમે સ્ક્રીન તરફ જોતા હો, તો તમારી સ્ક્રીન બંધ થશે નહીં"</string>
@@ -1677,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> થી વધુ ઉપકરણો સાથે ટિથર કરી શકતાં નથી."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> અનટિથર થશે."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ઇથરનેટ ટિથરિંગ"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"USB ઇથરનેટ મારફતે ફોનનું ઇન્ટરનેટ કનેક્શન શેર કરો"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ઇથરનેટ મારફતે ફોનનું ઇન્ટરનેટ કનેક્શન શેર કરો"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"તમારા મોબાઇલ ડેટા કનેક્શન મારફતે અન્ય ઉપકરણોને ઇન્ટરનેટ પૂરું પાડવા માટે હૉટસ્પૉટ અને ટિથરિંગનો ઉપયોગ કરો. નજીકના ઉપકરણો સાથે કન્ટેન્ટ શેર કરવા માટે ઍપ પણ હૉટસ્પૉટ બનાવી શકે છે."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"તમારા વાઇ-ફાઇ અથવા મોબાઇલ ડેટા કનેક્શન મારફત અન્ય ડિવાઇસને ઇન્ટરનેટ પૂરું પાડવા માટે હૉટસ્પૉટ અને ઇન્ટરનેટ શેર કરવાની સુવિધાનો ઉપયોગ કરો. ઍપ નજીકનાં ડિવાઇસ સાથે કન્ટેન્ટ શેર કરવા માટે પણ હૉટસ્પૉટ બનાવી શકે છે."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"સહાય"</string>
@@ -1859,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"તેઓ તમારા પિન, પૅટર્ન અથવા પાસવર્ડને રીસેટ કરવામાં તમારી સહાય કરી શકે છે"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"તમારું ટૅબ્લેટ અને વ્યક્તિગત ડેટા અજાણી ઍપ્લિકેશનોના હુમલા પ્રતિ વધુ સંવેદનશીલ છે. આ સ્રોત પરથી ઍપ્લિકેશનો ઇન્સ્ટૉલ કરીને તમે સંમત થાઓ છો કે તેમનો ઉપયોગ કરવાના પરિણામે તમારા ટૅબ્લેટને થતી કોઈ પણ ક્ષતિ કે ડેટાના નુકસાન માટે તમે જવાબદાર છો."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"તમારો ફોન અને વ્યક્તિગત ડેટા અજાણી ઍપ્લિકેશનોના હુમલા પ્રતિ વધુ સંવેદનશીલ છે. આ સ્રોત પરથી ઍપ્લિકેશનો ઇન્સ્ટૉલ કરીને તમે સંમત થાઓ છો કે તેમનો ઉપયોગ કરવાના પરિણામે તમારા ફોનને થતી કોઈ પણ ક્ષતિ કે ડેટાના નુકસાન માટે તમે જવાબદાર છો."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ડાઉનલોડ કરેલા સિમ કાઢી નાખવામાં સમસ્યા આવી રહી છે"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"કૃપા કરીને ડિવાઇસને રીબૂટ કરો અને ફરી પ્રયાસ કરો. જો તમે ફેક્ટરી રીસેટ ચાલુ રાખશો, તો ડાઉનલોડ કરેલા સિમ કદાચ ડિવાઇસ પર રહી શકે છે."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"રીબૂટ કરો"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"ફેક્ટરી રીસેટ ચાલુ રાખીએ?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ડાઉનલોડ કરેલા સિમ ડિવાઇસ પર રહેશે."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"ફેક્ટરી રીસેટ"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"તમારું ઉપકરણ અને વ્યક્તિગત ડેટા અજાણી ઍપના હુમલા પ્રતિ વધુ સંવેદનશીલ છે. આ સ્રોત પરથી ઍપ ઇન્સ્ટૉલ કરીને, તમે સંમત થાઓ છો કે તેમનો ઉપયોગ કરવાના પરિણામે તમારા ઉપકરણને થતી કોઈ પણ ક્ષતિ કે ડેટાના નુકસાન માટે તમે જવાબદાર છો."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"વિગતવાર સેટિંગ"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"વધુ સેટિંગ્સ વિકલ્પો સક્ષમ કરો"</string>
@@ -2350,7 +2355,7 @@
     <string name="print_feature_state_off" msgid="1466195699995209446">"બંધ"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"સેવા ઉમેરો"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"પ્રિન્ટર ઉમેરો"</string>
-    <string name="print_menu_item_search" msgid="5989979785203603169">"શોધો"</string>
+    <string name="print_menu_item_search" msgid="5989979785203603169">"શોધ"</string>
     <string name="print_searching_for_printers" msgid="5401413178028348800">"પ્રિન્ટર્સ માટે શોધી રહ્યું છે"</string>
     <string name="print_service_disabled" msgid="9185935228930987786">"સેવા અક્ષમ કરેલ છે"</string>
     <string name="print_print_jobs" msgid="2605944855933091183">"પ્રિન્ટ જોબ્સ"</string>
@@ -2659,6 +2664,10 @@
     <string name="tts_reset" msgid="9047681050813970031">"ફરીથી સેટ કરો"</string>
     <string name="tts_play" msgid="2945513377250757221">"ચલાવો"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <!-- no translation found for adaptive_connectivity_title (7464959640138428192) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_summary (3648731530666326885) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"ઓળખપત્ર સ્ટોરેજ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"પ્રમાણપત્ર ઇન્સ્ટૉલ કરો"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"સંગ્રહમાંથી પ્રમાણપત્રો ઇન્સ્ટોલ કરો"</string>
@@ -4706,6 +4715,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"નેટવર્ક શોધી શક્યાં નથી. ફરી પ્રયાસ કરો."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(પ્રતિબંધિત)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"કોઈ સિમ કાર્ડ નથી"</string>
+    <string name="sim_card" msgid="6381158752066377709">"સિમ કાર્ડ"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"કોઈ સિમ કાર્ડ નથી"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"કોઈ માહિતી નથી"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"કનેક્ટ કરવા માટે સિમ કાર્ડ જરૂરી છે"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"કનેક્ટ કરવા માટે <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> સિમ કાર્ડ જરૂરી છે"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"પસંદગીનો નેટવર્ક મોડ: WCDMA પસંદ કરેલ છે"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"પસંદગીનો નેટવર્ક મોડ: માત્ર GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"પસંદગીનો નેટવર્ક મોડ: માત્ર WCDMA"</string>
@@ -4941,10 +4955,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"સેટિંગ પર સ્ક્રીન ઓવરલે થવાની મંજૂરી આપો"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"સેટિંગ સ્ક્રીનને ઓવરલે કરવા માટે અન્ય ઍપની ટોચે પ્રદર્શિત થઈ શકે તેવી ઍપને મંજૂરી આપો"</string>
     <string name="media_controls_title" msgid="403271085636252597">"મીડિયા"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"મીડિયાનું સત્ર સમાપ્ત થઈ જાય ત્યારે, પ્લેયર છુપાવો"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"આ પ્લેયર ઝડપી સેટિંગના મોટા કરેલા પૅનલમાંથી કોઈ સત્ર ફરીથી શરૂ કરવાની મંજૂરી આપે છે."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"ઝડપી સેટિંગમાં મીડિયા પ્લેયરના સેટિંગ"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"પ્લેબૅક સરળતાથી ફરી શરૂ કરવા, મીડિયા પ્લેયરને લાંબા સમયગાળા માટે બતાવો"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"પ્લેયર છુપાવો"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"પ્લેયર બતાવો"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"કોઈ પ્લેયર ઉપલબ્ધ નથી"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"મંજૂર કરેલી ઍપ"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"મીડિયા"</string>
 </resources>

@@ -37,6 +37,7 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 
+import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 
 import java.util.List;
@@ -125,10 +126,8 @@ public class NetworkOperatorPreference extends Preference {
         final CellSignalStrength signalStrength = getCellSignalStrength(mCellInfo);
         final int level = signalStrength != null ? signalStrength.getLevel() : LEVEL_NONE;
         if (DBG) Log.d(TAG, "refresh level: " + String.valueOf(level));
-        if (mLevel != level) {
-            mLevel = level;
-            updateIcon(mLevel);
-        }
+        mLevel = level;
+        updateIcon(mLevel);
     }
 
     /**
@@ -173,6 +172,15 @@ public class NetworkOperatorPreference extends Preference {
      */
     public String getOperatorName() {
         return CellInfoUtil.getNetworkTitle(mCellId, getOperatorNumeric());
+    }
+
+    /**
+     * Operator info of this cell
+     */
+    public OperatorInfo getOperatorInfo() {
+        return new OperatorInfo(Objects.toString(mCellId.getOperatorAlphaLong(), ""),
+                Objects.toString(mCellId.getOperatorAlphaShort(), ""),
+                getOperatorNumeric());
     }
 
     private int getIconIdForCell(CellInfo ci) {

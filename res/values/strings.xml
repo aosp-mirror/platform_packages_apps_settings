@@ -3870,7 +3870,7 @@
     <!-- Label for ethernet tether checkbox [CHAR LIMIT=NONE]-->
     <string name="ethernet_tether_checkbox_text">Ethernet tethering</string>
     <!-- Ethernet Tethering subtext [CHAR LIMIT=NONE]-->
-    <string name="ethernet_tethering_subtext" product="default">Share phone\u2019s internet connection via USB Ethernet</string>
+    <string name="ethernet_tethering_subtext" product="default">Share phone\u2019s internet connection via Ethernet</string>
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
     <string name="tethering_footer_info">Use hotspot and tethering to provide internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
@@ -4320,6 +4320,20 @@
         any damage to your phone or loss of data that may
         result from their use.
     </string>
+
+    <!-- eSIM erase warning dialog. -->
+    <!-- Factory data reset erase eSIM failure title [CHAR LIMIT=50] -->
+    <string name="fdr_esim_failure_title" >There is an issue erasing the downloaded SIMs</string>
+    <!-- Factory data reset erase eSIM failure text [CHAR LIMIT=none] -->
+    <string name="fdr_esim_failure_text">Please reboot the device and try again. If you continue factory reset, the downloaded SIMs may remain on the device.</string>
+    <!-- Factory data reset erase eSIM failure reboot button text [CHAR LIMIT=none] -->
+    <string name="fdr_esim_failure_reboot_btn">Reboot</string>
+    <!-- Factory data reset continue factory data reset title [CHAR LIMIT=35] -->
+    <string name="fdr_continue_title" >Continue factory reset?</string>
+    <!-- Factory data reset continue factory data reset text [CHAR LIMIT=none] -->
+    <string name="fdr_continue_text">Downloaded SIMs will remain on device.</string>
+    <!-- Factory data reset continue factory data reset button text [CHAR LIMIT=none] -->
+    <string name="fdr_continue_btn">Factory reset</string>
 
     <!-- Warning that appears below the unknown sources switch in settings -->
     <string name="install_all_warning" product="device">
@@ -6177,6 +6191,11 @@
 
     <!-- Title of preference to enter the VPN settings activity -->
     <string name="vpn_settings_title">VPN</string>
+
+    <!-- Title of Adaptive connectivity. Adaptive connectivity is a feature which automatically manages network connections for better battery life and performance. [CHAR LIMIT=60] -->
+    <string name="adaptive_connectivity_title">Adaptive connectivity</string>
+    <!-- Summary of Adaptive connectivity preference. [CHAR LIMIT=NONE] -->
+    <string name="adaptive_connectivity_summary">Extends battery life and improves device performance by automatically managing your network connections</string>
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
@@ -11481,6 +11500,17 @@
     <!-- Message informs the user that has no SIM card in personalized Settings [CHAR LIMIT=30] -->
     <string name="no_sim_card">No SIM card</string>
 
+    <!-- A title for a SIM card spinner UI component which users can choose a SIM card. [CHAR LIMIT=NONE] -->
+    <string name="sim_card">SIM</string>
+    <!-- A label when there is no SIM card to choose. [CHAR LIMIT=NONE] -->
+    <string name="wifi_no_sim_card">No SIM</string>
+    <!-- A label when there is no SIM card information of a Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_no_related_sim_card">None</string>
+    <!-- A label wen a user needs a SIM to connect to the Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_require_sim_card_to_connect">Requires SIM to connect</string>
+    <!-- A label wen a user needs a specific SIM to connect to the Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_require_specific_sim_card_to_connect">Requires <xliff:g id="wireless_carrier" example="Verizon">%s</xliff:g> SIM to connect</string>
+
     <!-- The following strings are summaries for preferred network modes in Mobile network settings,
      and have a character limit of 100 -->
     <!-- WCDMA preferred [CHAR LIMIT=NONE] -->
@@ -12135,16 +12165,18 @@
 
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>
-    <!-- Summary for media control settings [CHAR LIMIT=60]-->
-    <string name="media_controls_summary">Hide player when the media session has ended</string>
+    <!-- Summary for media control settings [CHAR LIMIT=NONE]-->
+    <string name="media_controls_summary">Media player in Quick Settings</string>
     <!-- Description of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=NONE]-->
-    <string name="media_controls_resume_description">The player allows you to resume a session from the expanded Quick Settings panel.</string>
+    <string name="media_controls_resume_description">Show media player for an extended period to easily resume playback</string>
     <!-- Subtext for media settings when the player will be hidden [CHAR LIMIT=50] -->
     <string name="media_controls_hide_player">Hide player</string>
     <!-- Subtext for media settings when the player will be shown [CHAR LIMIT=50] -->
     <string name="media_controls_show_player">Show player</string>
     <!-- Subtext for media settings when no players can be shown [CHAR LIMIT=50] -->
     <string name="media_controls_no_players">No players available</string>
+    <!-- Subtitle for section of media control settings that shows which apps are allowed [CHAR LIMIT=50] -->
+    <string name="media_controls_apps_title">Allowed apps</string>
     <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
     <string name="keywords_media_controls">media</string>
 </resources>

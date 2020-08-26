@@ -1677,7 +1677,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"不可與超過 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 部裝置分享網絡。"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 的網絡共享即將中斷。"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"以太網網絡共享"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"透過 USB 以太網分享手機的互聯網連線"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"透過以太網分享手機的互聯網連線"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"使用熱點和網絡共享功能，透過您的流動數據連線提供互聯網服務給其他裝置。應用程式可以建立熱點，與附近的裝置分享內容。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用熱點和網絡共享功能，讓其他裝置透過 Wi‑Fi 或流動數據連接到互聯網。應用程式亦可以建立熱點，與附近的裝置分享內容。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"說明"</string>
@@ -1859,6 +1859,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"他們可協助您重設 PIN、圖案或密碼"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"來源不明的應用程式可能會侵害您的平板電腦和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致平板電腦損壞或資料遺失的責任。"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"來源不明的應用程式可能會侵害您的手機和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致手機損壞或資料遺失的責任。"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"清除已下載的 SIM 卡時發生錯誤"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"請重新啟動裝置，然後再試一次。如繼續回復原廠設定，已下載的 SIM 卡可能會保留在裝置上。"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"重新啟動"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"要繼續回復原廠設定嗎？"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"已下載的 SIM 卡將會保留在裝置上。"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"回復原廠設定"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"來源不明的應用程式可能會侵害您的裝置和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致裝置損壞或資料遺失的責任。"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"進階設定"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"啟用更多設定選項"</string>
@@ -2659,6 +2665,10 @@
     <string name="tts_reset" msgid="9047681050813970031">"重設"</string>
     <string name="tts_play" msgid="2945513377250757221">"播放"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <!-- no translation found for adaptive_connectivity_title (7464959640138428192) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_summary (3648731530666326885) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"憑證儲存空間"</string>
     <string name="credentials_install" msgid="3933218407598415827">"安裝憑證"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"從儲存裝置安裝憑證"</string>
@@ -4706,6 +4716,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"找不到網絡，請再試一次。"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(禁止)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"沒有 SIM 卡"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM 卡"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"沒有 SIM 卡"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"無"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"需要 SIM 卡才能連接網絡"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"需要 <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> 的 SIM 卡才能連接網絡"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"首選網絡模式：首選 WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"首選網絡模式：僅限 GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"首選網絡模式：僅限 WCDMA"</string>
@@ -4941,10 +4956,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"允許在「設定」上顯示重疊式畫面"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"允許可以在其他應用程式上顯示内容的應用程式重疊「設定」畫面"</string>
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"媒體工作階段結束後隱藏播放器"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"播放器讓您在展開的「快速設定」面板中恢復工作階段。"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"「快速設定」中的媒體播放器"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"延長媒體播放器的顯示時間，讓您輕鬆繼續播放"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"顯示播放器"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"沒有可用的播放器"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"允許的應用程式"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒體"</string>
 </resources>

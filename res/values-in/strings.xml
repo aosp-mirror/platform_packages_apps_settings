@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Tidak dapat menambatkan ke lebih dari <xliff:g id="MAXCONNECTION">%1$d</xliff:g> perangkat."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> akan dilepas dari penambatan."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Bagikan koneksi internet ponsel melalui Ethernet USB"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Bagikan koneksi internet ponsel melalui Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Gunakan hotspot dan tethering untuk menyediakan koneksi internet bagi perangkat lain melalui koneksi kuota seluler Anda. Aplikasi juga dapat membuat hotspot untuk berbagi konten dengan perangkat sekitar."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gunakan hotspot dan tethering untuk menyediakan koneksi internet bagi perangkat lain melalui koneksi Wi‑Fi atau data seluler Anda. Aplikasi juga dapat membuat hotspot untuk membagikan konten ke perangkat di sekitar."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Bantuan"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Mereka dapat membantu Anda menyetel ulang PIN, pola, atau sandi"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tablet dan data pribadi lebih rentan terhadap serangan oleh aplikasi yang tidak dikenal. Dengan menginstal aplikasi dari sumber ini, Anda setuju bahwa Anda bertanggung jawab atas kerusakan tablet atau kehilangan data yang mungkin terjadi akibat penggunaannya."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Ponsel dan data pribadi lebih rentan terhadap serangan oleh aplikasi yang tidak dikenal. Dengan menginstal aplikasi dari sumber ini, Anda setuju bahwa Anda bertanggung jawab atas kerusakan ponsel atau kehilangan data yang mungkin terjadi akibat penggunaannya."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Ada masalah saat menghapus SIM yang didownload"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Mulai ulang perangkat dan coba lagi. Jika Anda melanjutkan reset ke setelan pabrik, SIM yang didownload dapat tetap ada di perangkat."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Mulai ulang"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Lanjutkan reset ke setelan pabrik?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"SIM yang didownload akan tetap ada di perangkat."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Reset ke setelan pabrik"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Perangkat dan data pribadi lebih rentan terhadap serangan oleh aplikasi yang tidak dikenal. Dengan menginstal aplikasi dari sumber ini, Anda setuju bahwa Anda bertanggung jawab atas kerusakan perangkat atau kehilangan data yang mungkin terjadi akibat penggunaannya."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Setelan lanjutan"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Aktifkan opsi setelan yang lain"</string>
@@ -2658,6 +2664,10 @@
     <string name="tts_reset" msgid="9047681050813970031">"Reset"</string>
     <string name="tts_play" msgid="2945513377250757221">"Putar"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <!-- no translation found for adaptive_connectivity_title (7464959640138428192) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_summary (3648731530666326885) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"Penyimpanan kredensial"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Menginstal sertifikat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instal sertifikat dari penyimpanan"</string>
@@ -4705,6 +4715,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Tidak dapat menemukan jaringan. Coba lagi."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(terlarang)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Tidak ada kartu SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Tidak ada SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Tidak ada"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Memerlukan SIM agar terhubung"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Memerlukan SIM <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> agar terhubung"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Mode jaringan pilihan: WCDMA dipilih"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Mode jaringan pilihan: hanya GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Mode jaringan pilihan: hanya WCDMA"</string>
@@ -4940,10 +4955,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Mengizinkan overlay layar pada Setelan"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Izinkan aplikasi yang dapat ditampilkan di atas aplikasi lain untuk menempatkan layar Setelan"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Menyembunyikan pemutar saat sesi media berakhir"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Pemutar memungkinkan Anda melanjutkan sesi dari panel Setelan Cepat yang diperluas."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Pemutar media di Setelan Cepat"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Tampilkan pemutar media dalam waktu lama untuk melanjutkan pemutaran dengan mudah"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Sembunyikan pemutar"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Menampilkan pemutar"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Tidak ada pemutar yang tersedia"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"Aplikasi yang diizinkan"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
 </resources>

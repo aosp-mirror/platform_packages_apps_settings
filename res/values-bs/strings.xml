@@ -1632,7 +1632,7 @@
     <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n\n"Trenutno ste prijavljeni u sljedeće račune:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="7492338002408466023">\n\n"Drugi korisnici su prisutni na ovom uređaju.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="4738661805356792736"><li>"muziku"</li>\n<li>"fotografije"</li>\n<li>"ostale korisničke podatke"</li></string>
-    <string name="master_clear_desc_also_erases_esim" msgid="6418163562288667727"><li>"eSIM kartice"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="6418163562288667727"><li>"eSIM-ove"</li></string>
     <string name="master_clear_desc_no_cancel_mobile_plan" msgid="3112614935795369143">\n\n"Ovim se neće otkazati vaš plan usluga mobilnog operatera."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7088655731755912201">\n\n"Da biste izbrisali muziku, slike i ostale korisničke podatke, "<b>"USB pohrana"</b>" treba biti izbrisana."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4145566517710675883">\n\n"Da biste izbrisali muziku, slike i ostale korisničke podatke, "<b>"SD kartica"</b>" treba biti izbrisana."</string>
@@ -1697,7 +1697,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Nije se moguće povezati sa više od <xliff:g id="MAXCONNECTION">%1$d</xliff:g> uređaja."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Prestat će se dijeliti veza s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Povez. putem mob. za eth."</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Dijeljenje internetske veze telefona putem USB etherneta"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Dijeljenje internetske veze telefona putem etherneta"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Koristite pristupnu tačku i povezivanje putem mobitela za pružanje interneta drugim uređajima putem veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Koristite pristupnu tačku i povezivanje putem mobitela za pružanje interneta drugim uređajima putem WiFi mreže ili veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoć"</string>
@@ -1881,6 +1881,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Može vam pomoći s poništavanjem PIN-a, uzorka ili lozinke"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Vaši podaci na tabletu i lični podaci su više izloženi napadima aplikacija iz nepoznatih izvora. Instaliranjem aplikacija iz takvih izvora, saglasni ste da ste vi odgovorni za bilo kakvu štetu na telefonu ili gubitak podataka koji mogu nastati korištenjem tih aplikacija."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Vaši podaci na telefonu i lični podaci više su izloženi napadima aplikacija iz nepoznatih izvora. Instaliranjem aplikacija iz takvih izvora, saglasni ste da ste vi odgovorni za bilo kakvu štetu na telefonu ili gubitak podataka koji mogu nastati korištenjem tih aplikacija."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Postoji problem s brisanjem preuzetih SIM-ova"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Ponovo pokrenite uređaj i pokušajte ponovo. Ako nastavite s vraćanjem na fabričke postavke, preuzete SIM kartice će možda ostati na uređaju."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Ponovo pokreni"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Nastaviti vraćanje na fabr. post.?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Preuzete SIM kartice će ostati na uređaju."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Vrati na fabričke postavke"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Podaci s vašeg uređaja i vaši lični podaci su izloženiji napadima nepoznatih aplikacija. Instaliranjem aplikacija iz ovog izvora prihvatate odgovornost za bilo kakvu štetu na uređaju ili gubitak podataka uzrokovan njihovim korištenjem."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Napredne postavke"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Omogućite više opcija postavki"</string>
@@ -2201,7 +2207,7 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Dugme uklj./isklj. prekida poziv"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Veliki pokazivač miša"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Ukloni animacije"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"Mono audio"</string>
+    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"Mono zvuk"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"Kombiniranje kanala prilikom reprodukcije zvuka"</string>
     <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"Balans zvuka"</string>
     <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"Lijevo"</string>
@@ -2696,6 +2702,10 @@
     <string name="tts_reset" msgid="9047681050813970031">"Vrati na zadano"</string>
     <string name="tts_play" msgid="2945513377250757221">"Pokreni"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <!-- no translation found for adaptive_connectivity_title (7464959640138428192) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_summary (3648731530666326885) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"Pohrana akreditiva"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instaliranje certifikata"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instaliranje certifikata iz pohrane"</string>
@@ -3183,11 +3193,11 @@
     <string name="sim_cards_changed_message" msgid="7726897488921853655">"SIM kartice su promijenjene"</string>
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Dodirnite za podešavanje aktivnosti"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Prijenos podataka na mobilnoj mreži je nedostupan"</string>
-    <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Dodirnite za odabir SIM kartice za prijenos podataka"</string>
+    <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Dodirnite za odabir SIM-a za prijenos podataka"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Uvijek koristi ovo za pozive"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"Odaberite SIM za podatke"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Odaberite SIM za SMS"</string>
-    <string name="data_switch_started" msgid="6205259094233452188">"Prebacuje se SIM kartica za prijenos podataka. Ovo može potrajati najviše jednu minutu..."</string>
+    <string name="data_switch_started" msgid="6205259094233452188">"Prebacuje se SIM za prijenos podataka. Ovo može potrajati najviše jednu minutu..."</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Poziv putem"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Odaberite SIM karticu"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -4793,6 +4803,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Nisu pronađene mreže. Pokušajte ponovo."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(zabranjeno)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Nema SIM kartice"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Nema SIM-a"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nema"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Potreban je SIM da se povežete"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Potreban je SIM operatera <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> da se povežete"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Preferirani način rada mreže: preferiraj WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Preferirani način rada mreže: samo GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Preferirani način rada mreže: samo WCDMA"</string>
@@ -5031,10 +5046,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Dozvolite preklapanja ekrana na Postavkama"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Dozvolite aplikacijama koje mogu prikazivati preko drugih aplikacija da preklapaju ekrane Postavki"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Mediji"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Sakrij plejer kada se sesija medija završi"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Ovaj plejer omogućava da nastavite sesiju iz proširene ploče Brze postavke."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Media plejer u Brzim postavkama"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Prikažite Medija plejer produženi period da s lakoćom nastavite reprodukciju"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Sakrij plejer"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Prikaži plejer"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nema dostupnih plejera"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"Odobrene aplikacije"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"mediji"</string>
 </resources>

@@ -1718,7 +1718,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Режим модема можливий для макс. стількох пристр.: <xliff:g id="MAXCONNECTION">%1$d</xliff:g>"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Прив\'язку <xliff:g id="DEVICE_NAME">%1$s</xliff:g> буде скасовано."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Телефон як модем Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Надавати доступ до Інтернету через телефон за допомогою USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Надавати доступ до Інтернету через телефон за допомогою Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Надавайте іншим пристроям доступ до Інтернету через мобільне передавання даних за допомогою точки доступу та телефона в режимі модема. Додатки також можуть створювати точку доступу, щоб ділитися вмістом із пристроями поруч."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Надавайте іншим пристроям доступ до Інтернету через Wi-Fi або мобільне передавання даних за допомогою точки доступу й режиму модема. Додатки також можуть створювати точку доступу, щоб ділитися контентом із пристроями поруч."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Довідка"</string>
@@ -1904,6 +1904,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Він може допомогти вам скинути PIN-код, ключ або пароль"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Ваш планшет і особисті дані більш уразливі до атак із боку додатків із невідомих джерел Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому планшету, чи втрату даних унаслідок використання таких додатків."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Ваш телефон і особисті дані більш уразливі до атак із боку додатків із невідомих джерел Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому телефону, чи втрату даних унаслідок використання таких додатків."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Виникла проблема з видаленням завантажених SIM-карт"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Перезапустіть пристрій і повторіть спробу. Якщо ви продовжите скидання налаштувань, завантажені SIM-карти можуть залишитися на пристрої."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Перезапустити"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Продовжити скидання налаштувань?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Завантажені SIM-карти залишаться на пристрої."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Скинути налаштування"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Ваш пристрій і особисті дані більш уразливі до атак невідомих додатків. Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому пристрою, чи втрату даних унаслідок використання таких додатків."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Розширені налаштування"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Увімкнути додаткові варіанти налаштувань"</string>
@@ -2734,6 +2740,10 @@
     <string name="tts_reset" msgid="9047681050813970031">"Скинути"</string>
     <string name="tts_play" msgid="2945513377250757221">"Відтворити"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <!-- no translation found for adaptive_connectivity_title (7464959640138428192) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_summary (3648731530666326885) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"Сховище облікових даних"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Установити сертифікат"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Установити сертифікати з носія"</string>
@@ -4881,6 +4891,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Не вдалося знайти мережу. Повторіть спробу."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(заборонено)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Немає SIM-карти"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM-карта"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Немає SIM-карти"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Не вказано"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Щоб підключитись, вставте SIM-карту"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Щоб підключитись, вставте SIM-карту <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Рекомендований режим мережі: бажано WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Рекомендований режим мережі: лише GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Рекомендований режим мережі: лише WCDMA"</string>
@@ -5122,10 +5137,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволити показ поверх інших вікон у налаштуваннях"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозволити додаткам, що можуть показуватися поверх інших додатків, накладатися на екрани налаштувань"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Медіа"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Приховати програвач після завершення медіасеансу"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Програвач дає змогу відновлювати сеанси з розгорнутої панелі Швидких налаштувань."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Медіапрогравач в \"Швидких налаштуваннях\""</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Показувати медіапрогравач протягом тривалого часу, щоб швидко відновлювати відтворення"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Приховати програвач"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Показати програвач"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Немає доступних програвачів"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"Дозволені додатки"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"медіа"</string>
 </resources>
