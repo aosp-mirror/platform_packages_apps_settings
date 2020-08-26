@@ -29,7 +29,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.EthernetManager;
@@ -431,25 +430,6 @@ public class TetherSettings extends RestrictedSettingsFragment
             mEthernetTether.setEnabled(false);
             mEthernetTether.setChecked(false);
         }
-    }
-
-    public static boolean isProvisioningNeededButUnavailable(Context context) {
-        return (TetherUtil.isProvisioningNeeded(context)
-                && !isIntentAvailable(context));
-    }
-
-    private static boolean isIntentAvailable(Context context) {
-        String[] provisionApp = context.getResources().getStringArray(
-                com.android.internal.R.array.config_mobile_hotspot_provision_app);
-        if (provisionApp.length < 2) {
-            return false;
-        }
-        final PackageManager packageManager = context.getPackageManager();
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClassName(provisionApp[0], provisionApp[1]);
-
-        return (packageManager.queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY).size() > 0);
     }
 
     private void startTethering(int choice) {

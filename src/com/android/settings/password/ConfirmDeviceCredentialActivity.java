@@ -318,7 +318,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         boolean launched = false;
         // The only difference between CREDENTIAL_MANAGED and CREDENTIAL_NORMAL is that for
         // CREDENTIAL_MANAGED, we launch the real confirm credential activity with an explicit
-        // but dummy challenge value (0L). This will result in ConfirmLockPassword calling
+        // but fake challenge value (0L). This will result in ConfirmLockPassword calling
         // verifyTiedProfileChallenge() (if it's a profile with unified challenge), due to the
         // difference between ConfirmLockPassword.startVerifyPassword() and
         // ConfirmLockPassword.startCheckPassword(). Calling verifyTiedProfileChallenge() here is

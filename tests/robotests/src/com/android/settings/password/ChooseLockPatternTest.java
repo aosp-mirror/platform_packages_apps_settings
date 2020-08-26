@@ -44,7 +44,7 @@ public class ChooseLockPatternTest {
 
     @Test
     public void activityCreationTest() {
-        // Basic sanity test for activity created without crashing
+        // Basic test for activity created without crashing
         Robolectric.buildActivity(ChooseLockPattern.class, new IntentBuilder(application).build())
                 .setup().get();
     }

@@ -18,6 +18,8 @@ package com.android.settings.network.telephony;
 
 import android.telephony.TelephonyManager;
 
+import android.telephony.TelephonyManager;
+
 /**
  * Contains hidden constants copied from the platform.
  */
@@ -209,12 +211,6 @@ public class TelephonyConstants {
      * Copied from {@link android.telephony.RadioAccessFamily}
      */
     public static class RadioAccessFamily {
-        /**
-         * TODO: get rid of RAF definition in RadioAccessFamily and
-         * use {@link TelephonyManager.NetworkTypeBitMask}
-         * TODO: public definition {@link TelephonyManager.NetworkTypeBitMask} is long.
-         * TODO: Convert from int * to long everywhere including HAL definitions.
-         */
         // 2G
         public static final int RAF_UNKNOWN = (int) TelephonyManager.NETWORK_TYPE_BITMASK_UNKNOWN;
         public static final int RAF_GSM = (int) TelephonyManager.NETWORK_TYPE_BITMASK_GSM;
@@ -250,7 +246,9 @@ public class TelephonyConstants {
         public static final int WCDMA = HS | RAF_UMTS;
         // 4G
         public static final int LTE = RAF_LTE | RAF_LTE_CA;
+
         // 5G
         public static final int NR = RAF_NR;
+
     }
 }
