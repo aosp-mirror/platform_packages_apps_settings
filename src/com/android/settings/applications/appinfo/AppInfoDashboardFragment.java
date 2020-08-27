@@ -526,7 +526,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     @VisibleForTesting
     int getNumberOfUserWithPackageInstalled(String packageName) {
-        final List<UserInfo> userInfos = mUserManager.getAliveUsers();
+        final List<UserInfo> userInfos = mUserManager.getUsers(true);
         int count = 0;
 
         for (final UserInfo userInfo : userInfos) {

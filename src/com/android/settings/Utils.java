@@ -525,7 +525,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @return UserInfo of the user or null for non-existent user.
      */
     public static UserInfo getExistingUser(UserManager userManager, UserHandle checkUser) {
-        final List<UserInfo> users = userManager.getAliveUsers();
+        final List<UserInfo> users = userManager.getUsers(true /* excludeDying */);
         final int checkUserId = checkUser.getIdentifier();
         for (UserInfo user : users) {
             if (user.id == checkUserId) {

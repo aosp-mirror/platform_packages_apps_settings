@@ -309,7 +309,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             // Update the guest's restrictions, if there is a guest
             // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
             // on any existing guest rather than do it here with multiple Binder calls.
-            List<UserInfo> users = mUserManager.getAliveUsers();
+            List<UserInfo> users = mUserManager.getUsers(true);
             for (UserInfo user : users) {
                 if (user.isGuest()) {
                     UserHandle userHandle = UserHandle.of(user.id);
