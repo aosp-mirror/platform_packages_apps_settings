@@ -16,11 +16,13 @@
 package com.android.settings.connecteddevice;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -28,6 +30,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
@@ -38,11 +41,19 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PreviouslyConnectedDevicePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback {
 
+    private static final String TAG = "PreviouslyDevicePreController";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
     private static final int MAX_DEVICE_NUM = 3;
     private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
+
+    private final List<Preference> mDevicesList = new ArrayList<>();
 
     private PreferenceGroup mPreferenceGroup;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -116,16 +127,56 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     @Override
     public void onDeviceAdded(Preference preference) {
         mPreferenceSize++;
+        final List<BluetoothDevice> bluetoothDevices =
+                mBluetoothAdapter.getMostRecentlyConnectedDevices();
+        final int index = bluetoothDevices.indexOf(((BluetoothDevicePreference) preference)
+                .getBluetoothDevice().getDevice());
+        if (DEBUG) {
+            Log.d(TAG, "onDeviceAdded() " + preference.getTitle() + ", index of : " + index);
+            for (BluetoothDevice device : bluetoothDevices) {
+                Log.d(TAG, "onDeviceAdded() most recently device : " + device.getName());
+            }
+        }
         if (mPreferenceSize <= MAX_DEVICE_NUM) {
-            mPreferenceGroup.addPreference(preference);
+            addPreference(mPreferenceSize, index, preference);
+        } else {
+            addPreference(MAX_DEVICE_NUM, index, preference);
         }
         updatePreferenceVisibility();
+    }
+
+    private void addPreference(int size, int index, Preference preference) {
+        if (mDevicesList.size() >= index) {
+            mDevicesList.add(index, preference);
+        } else {
+            mDevicesList.add(preference);
+        }
+        mPreferenceGroup.removeAll();
+        mPreferenceGroup.addPreference(mSeeAllPreference);
+        for (int i = 0; i < size; i++) {
+            if (DEBUG) {
+                Log.d(TAG, "addPreference() add device : " + mDevicesList.get(i).getTitle());
+            }
+            mDevicesList.get(i).setOrder(i);
+            mPreferenceGroup.addPreference(mDevicesList.get(i));
+        }
     }
 
     @Override
     public void onDeviceRemoved(Preference preference) {
         mPreferenceSize--;
-        mPreferenceGroup.removePreference(preference);
+        mDevicesList.remove(preference);
+        mPreferenceGroup.removeAll();
+        mPreferenceGroup.addPreference(mSeeAllPreference);
+        final int size = mDevicesList.size() >= MAX_DEVICE_NUM
+                ? MAX_DEVICE_NUM : mDevicesList.size();
+        for (int i = 0; i < size; i++) {
+            if (DEBUG) {
+                Log.d(TAG, "onDeviceRemoved() add device : " + mDevicesList.get(i).getTitle());
+            }
+            mDevicesList.get(i).setOrder(i);
+            mPreferenceGroup.addPreference(mDevicesList.get(i));
+        }
         updatePreferenceVisibility();
     }
 
