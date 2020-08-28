@@ -163,7 +163,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
         final ServiceState serviceState = mTelephonyManager.getServiceState();
-        operatorName.setText(serviceState.getOperatorAlphaLong());
+        operatorName.setText(serviceState == null ? "" : serviceState.getOperatorAlphaLong());
 
         final TextView phoneTitle = view.findViewById(R.id.number_label);
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
