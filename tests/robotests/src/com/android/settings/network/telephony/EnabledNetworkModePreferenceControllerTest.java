@@ -24,6 +24,7 @@ import static com.android.settings.network.telephony.MobileNetworkUtils.getRafFr
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -61,6 +62,9 @@ public class EnabledNetworkModePreferenceControllerTest {
     private static final int SUB_ID = 2;
     public static final String KEY = "enabled_network";
 
+    private static final long ALLOWED_ALL_NETWORK_TYPE = -1;
+    private static final long DISABLED_5G_NETWORK_TYPE = ~TelephonyManager.NETWORK_TYPE_BITMASK_NR;
+
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -92,19 +96,20 @@ public class EnabledNetworkModePreferenceControllerTest {
         doReturn(mContext).when(mContext).createPackageContext(anyString(), anyInt());
         doReturn(mServiceState).when(mTelephonyManager).getServiceState();
         mPersistableBundle = new PersistableBundle();
+        doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfig();
         doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
-
         mPreference = new ListPreference(mContext);
-        mPreference.setEntries(R.array.enabled_networks_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_values);
         mController = new EnabledNetworkModePreferenceController(mContext, KEY);
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
         mController.init(mLifecycle, SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
     }
 
     @Test
     public void getAvailabilityStatus_hideCarrierNetworkSettings_returnUnavailable() {
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
+        mPersistableBundle.putBoolean(
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
                 true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
@@ -140,40 +145,120 @@ public class EnabledNetworkModePreferenceControllerTest {
     }
 
     @Test
-    public void init_initShow4GForLTE() {
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL,
-                true);
+    public void updateState_LteWorldPhone_GlobalHasLte() {
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
 
-        mController.init(mLifecycle, SUB_ID);
+        mController.updateState(mPreference);
 
-        assertThat(mController.mShow4GForLTE).isTrue();
+        assertThat(mPreference.getEntryValues())
+                .asList()
+                .contains(String.valueOf(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
     }
 
     @Test
-    public void init_initDisplay5gList_returnTrue() {
-        long testBitmask = TelephonyManager.NETWORK_TYPE_BITMASK_NR
-                | TelephonyManager.NETWORK_TYPE_BITMASK_LTE;
-        long allowedNetworkTypes = -1;
-        doReturn(testBitmask).when(mTelephonyManager).getSupportedRadioAccessFamily();
-        doReturn(allowedNetworkTypes).when(mTelephonyManager).getAllowedNetworkTypes();
+    public void updateState_5gWorldPhone_GlobalHasNr() {
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_NR_ENABLED_BOOL, true);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
         mController.init(mLifecycle, SUB_ID);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
 
-        assertThat(mController.mDisplay5gList).isTrue();
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntryValues())
+                .asList()
+                .contains(String.valueOf(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA));
     }
 
     @Test
-    public void checkSupportedRadioBitmask_nrBitmask_returnTrue() {
-        long testBitmask = TelephonyManager.NETWORK_TYPE_BITMASK_NR
-                | TelephonyManager.NETWORK_TYPE_BITMASK_LTE;
+    public void updateState_selectedOn5gItem() {
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_NR_ENABLED_BOOL, true);
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mController.init(mLifecycle, SUB_ID);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
+                TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
 
-        assertThat(mController.checkSupportedRadioBitmask(testBitmask,
-                TelephonyManager.NETWORK_TYPE_BITMASK_NR)).isTrue();
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getValue()).isEqualTo(
+                String.valueOf(
+                        TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA));
+    }
+
+    @Test
+    public void updateState_disAllowed5g_5gOptionHidden() {
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
+        mController.init(mLifecycle, SUB_ID);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
+                TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntryValues())
+                .asList()
+                .doesNotContain(
+                        String.valueOf(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA));
+    }
+
+    @Test
+    public void updateState_disAllowed5g_selectOn4gOption() {
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
+        mController.init(mLifecycle, SUB_ID);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
+                TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getValue()).isEqualTo(
+                String.valueOf(
+                        TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA));
+    }
+
+    @Test
+    public void updateState_GlobalDisAllowed5g_GlobalWithoutNR() {
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
+        mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
+        mController.init(mLifecycle, SUB_ID);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
+                TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntryValues())
+                .asList()
+                .doesNotContain(
+                        String.valueOf(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA));
+    }
+
+    @Test
+    public void updateState_GlobalDisAllowed5g_SelectOnGlobal() {
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
+        mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
+        mController.init(mLifecycle, SUB_ID);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
+                TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getValue()).isEqualTo(
+                String.valueOf(
+                        TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
     }
 
     @Test
     public void updateState_updateByNetworkMode() {
-        long allowedNetworkTypes = -1;
-        doReturn(allowedNetworkTypes).when(mTelephonyManager).getAllowedNetworkTypes();
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
                 TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
@@ -187,8 +272,7 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void updateState_updateByNetworkMode_useDefaultValue() {
-        long allowedNetworkTypes = -1;
-        doReturn(allowedNetworkTypes).when(mTelephonyManager).getAllowedNetworkTypes();
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
                 TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
@@ -199,208 +283,13 @@ public class EnabledNetworkModePreferenceControllerTest {
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
     }
 
-    /**
-     * @string/enabled_networks_cdma_choices
-     *         Before            |        After
-     * @string/network_lte   , 8 |@string/network_5G + @string/network_recommended , 25
-     * @string/network_3G    , 4 |@string/network_lte_pure, 8
-     * @string/network_1x    , 5 |@string/network_3G      , 4
-     * @string/network_global, 10|@string/network_1x      , 5
-     *                           |@string/network_global  , 27
-     *
-     * @string/enabled_networks_cdma_only_lte_choices
-     *         Before            |        After
-     * @string/network_lte   , 8 |@string/network_5G + @string/network_recommended , 25
-     * @string/network_global, 10|@string/network_lte_pure, 8
-     *                           |@string/network_global  , 27
-     */
-    @Test
-    public void add5gListItem_lteCdma_5gLteCdma() {
-        //case#1
-        mPreference.setEntries(R.array.enabled_networks_cdma_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_cdma_values);
-        CharSequence[] testEntries = {mContext.getString(R.string.network_5G)
-                + mContext.getString(R.string.network_recommended)
-                , mContext.getString(R.string.network_lte_pure)
-                , mContext.getString(R.string.network_3G)
-                , mContext.getString(R.string.network_1x)
-                , mContext.getString(R.string.network_global)};
-        CharSequence[] testEntryValues = {"25", "8", "4", "5", "27"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
-
-        //case#2
-        mPreference.setEntries(R.array.enabled_networks_cdma_only_lte_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_cdma_only_lte_values);
-        CharSequence[] testEntries1 = {mContext.getString(R.string.network_5G)
-                + mContext.getString(R.string.network_recommended)
-                , mContext.getString(R.string.network_lte_pure)
-                , mContext.getString(R.string.network_global)};
-        CharSequence[] testEntryValues1 = {"25", "8", "27"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries1);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues1);
-    }
-
-    /**
-     * @string/enabled_networks_except_gsm_4g_choices
-     *         Before         |        After
-     * @string/network_4G , 9 |@string/network_5G + @string/network_recommended , 26
-     * @string/network_3G , 0 |@string/network_4G_pure , 9
-     *                        |@string/network_3G      , 0
-     *
-     * @string/enabled_networks_except_gsm_choices
-     *         Before         |        After
-     * @string/network_lte, 9 |@string/network_5G + @string/network_recommended , 26
-     * @string/network_3G , 0 |@string/network_lte_pure, 9
-     *                        |@string/network_3G      , 0
-     *
-     * @string/enabled_networks_4g_choices
-     *         Before         |        After
-     * @string/network_4G , 9 |@string/network_5G + @string/network_recommended , 26
-     * @string/network_3G , 0 |@string/network_4G_pure , 9
-     * @string/network_2G , 1 |@string/network_3G      , 0
-     *                        |@string/network_2G      , 1
-     *
-     * @string/enabled_networks_choices
-     *         Before         |        After
-     * @string/network_lte, 9 |@string/network_5G + @string/network_recommended , 26
-     * @string/network_3G , 0 |@string/network_lte_pure, 9
-     * @string/network_2G , 1 |@string/network_3G      , 0
-     *                        |@string/network_2G      , 1
-     */
-    @Test
-    public void add5gListItem_lteGsm_5gLteGsm() {
-        //csae#1
-        mPreference.setEntries(R.array.enabled_networks_except_gsm_4g_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_except_gsm_values);
-        CharSequence[] testEntries = {mContext.getString(R.string.network_5G)
-                + mContext.getString(R.string.network_recommended)
-                , mContext.getString(R.string.network_4G_pure)
-                , mContext.getString(R.string.network_3G)};
-        CharSequence[] testEntryValues = {"26", "9", "0"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
-
-        //case#2
-        mPreference.setEntries(R.array.enabled_networks_except_gsm_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_except_gsm_values);
-        CharSequence[] testEntries1 = {mContext.getString(R.string.network_5G)
-                + mContext.getString(R.string.network_recommended)
-                , mContext.getString(R.string.network_lte_pure)
-                , mContext.getString(R.string.network_3G)};
-        CharSequence[] testEntryValues1 = {"26", "9", "0"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries1);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues1);
-
-        //case#3
-        mPreference.setEntries(R.array.enabled_networks_4g_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_values);
-        CharSequence[] testEntries2 = {mContext.getString(R.string.network_5G)
-                + mContext.getString(R.string.network_recommended)
-                , mContext.getString(R.string.network_4G_pure)
-                , mContext.getString(R.string.network_3G)
-                , mContext.getString(R.string.network_2G)};
-        CharSequence[] testEntryValues2 = {"26", "9", "0", "1"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries2);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues2);
-
-        //case#4
-        mPreference.setEntries(R.array.enabled_networks_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_values);
-        CharSequence[] testEntries3 = {mContext.getString(R.string.network_5G)
-                + mContext.getString(R.string.network_recommended)
-                , mContext.getString(R.string.network_lte_pure)
-                , mContext.getString(R.string.network_3G)
-                , mContext.getString(R.string.network_2G)};
-        CharSequence[] testEntryValues3 = {"26", "9", "0", "1"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries3);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues3);
-    }
-
-    /**
-     * @string/preferred_network_mode_choices_world_mode
-     *         Before         |        After
-     * "Global"           , 10|@string/network_global  , 27
-     * "LTE / CDMA"       , 8 |"LTE / CDMA"            , 8
-     * "LTE / GSM / UMTS" , 9 |"LTE / GSM / UMTS"      , 9
-     */
-    @Test
-    public void add5gListItem_worldPhone_Global() {
-        mPreference.setEntries(R.array.preferred_network_mode_choices_world_mode);
-        mPreference.setEntryValues(R.array.preferred_network_mode_values_world_mode);
-        CharSequence[] testEntries = {mContext.getString(R.string.network_global)
-                , "LTE / CDMA"
-                , "LTE / GSM / UMTS"};
-        CharSequence[] testEntryValues = {"27", "8", "9"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
-    }
-
-    /**
-     * @string/enabled_networks_tdscdma_choices
-     *         Before         |        After
-     * @string/network_lte, 22|@string/network_5G + @string/network_recommended , 33
-     * @string/network_3G , 18|@string/network_lte_pure, 22
-     * @string/network_2G , 1 |@string/network_3G      , 18
-     *                        |@string/network_2G      , 1
-     */
-    @Test
-    public void add5gListItem_td_5gTd() {
-        mPreference.setEntries(R.array.enabled_networks_tdscdma_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_tdscdma_values);
-        CharSequence[] testEntries = {mContext.getString(R.string.network_5G)
-                + mContext.getString(R.string.network_recommended)
-                , mContext.getString(R.string.network_lte_pure)
-                , mContext.getString(R.string.network_3G)
-                , mContext.getString(R.string.network_2G)};
-        CharSequence[] testEntryValues = {"33", "22", "18", "1"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
-    }
-
-    @Test
-    public void add5gListItem_noLte_no5g() {
-        mPreference.setEntries(R.array.enabled_networks_except_lte_choices);
-        mPreference.setEntryValues(R.array.enabled_networks_except_lte_values);
-        CharSequence[] testEntries = {mContext.getString(R.string.network_3G)
-                , mContext.getString(R.string.network_2G)};
-        CharSequence[] testEntryValues = {"0", "1"};
-
-        mController.add5gListItem(mPreference);
-
-        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
-        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
-    }
-
     @Test
     public void onPreferenceChange_updateSuccess() {
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(true).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
                 getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
+        mController.updateState(mPreference);
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
@@ -410,9 +299,11 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_updateFail() {
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(false).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
                 getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
+        mController.updateState(mPreference);
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
@@ -423,8 +314,7 @@ public class EnabledNetworkModePreferenceControllerTest {
     @Test
     public void preferredNetworkModeNotification_preferenceUpdates() {
         PreferenceScreen screen = mock(PreferenceScreen.class);
-        long allowedNetworkTypes = -1;
-        doReturn(allowedNetworkTypes).when(mTelephonyManager).getAllowedNetworkTypes();
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
         doReturn(mPreference).when(screen).findPreference(KEY);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
@@ -447,5 +337,76 @@ public class EnabledNetworkModePreferenceControllerTest {
         assertThat(Integer.parseInt(mPreference.getValue())).isEqualTo(
                 TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY);
         assertThat(mPreference.getSummary()).isEqualTo("2G");
+    }
+
+    @Test
+    public void checkResource_stringArrayLength() {
+        String[] entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_cdma_values);
+        assertEquals(4, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_cdma_no_lte_values);
+        assertEquals(2, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_cdma_only_lte_values);
+        assertEquals(2, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_tdscdma_values);
+        assertEquals(3, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_except_gsm_lte_values);
+        assertEquals(1, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_except_gsm_values);
+        assertEquals(2, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_except_lte_values);
+        assertEquals(2, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_values);
+        assertEquals(3, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_values);
+        assertEquals(3, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.preferred_network_mode_values_world_mode);
+        assertEquals(3, entryValues.length);
+    }
+
+    private void mockEnabledNetworkMode(int networkMode) {
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA) {
+            mockPhoneType(TelephonyManager.PHONE_TYPE_GSM);
+            mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, true);
+        } else if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
+            mockPhoneType(TelephonyManager.PHONE_TYPE_GSM);
+            mPersistableBundle.putBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL, true);
+            mPersistableBundle.putBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL, true);
+        } else if (networkMode == TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA) {
+            mockPhoneType(TelephonyManager.PHONE_TYPE_GSM);
+            mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, true);
+        }
+    }
+
+    private void mockAllowedNetworkTypes(long allowedNetworkType) {
+        doReturn(allowedNetworkType).when(mTelephonyManager).getAllowedNetworkTypes();
+    }
+
+    private void mockAccessFamily(int networkMode) {
+        doReturn(MobileNetworkUtils.getRafFromNetworkType(networkMode))
+                .when(mTelephonyManager)
+                .getSupportedRadioAccessFamily();
+    }
+
+    private void mockPhoneType(int phoneType) {
+        doReturn(TelephonyManager.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
     }
 }

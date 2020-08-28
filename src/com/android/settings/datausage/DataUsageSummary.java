@@ -21,7 +21,6 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.SubscriptionPlan;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -34,11 +33,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.datausage.lib.DataUsageLib;
+import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.net.DataUsageController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +67,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     private DataUsageSummaryPreference mSummaryPreference;
     private DataUsageSummaryPreferenceController mSummaryController;
     private NetworkTemplate mDefaultTemplate;
+    private ProxySubscriptionManager mProxySubscriptionMgr;
 
     @Override
     public int getHelpResource() {
@@ -79,6 +78,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Context context = getContext();
+
+        enableProxySubscriptionManager(context);
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
 
@@ -95,8 +96,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
         if (hasMobileData) {
             addMobileSection(defaultSubId);
-            if (DataUsageUtils.hasSim(context) && hasWifiRadio) {
-                // If the device has a SIM installed, the data usage section shows usage for mobile,
+            if (hasActiveSubscription() && hasWifiRadio) {
+                // If the device has active SIM, the data usage section shows usage for mobile,
                 // and the WiFi section is added if there is a WiFi radio - legacy behavior.
                 addWifiSection();
             }
@@ -148,10 +149,25 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         addMobileSection(subId, null);
     }
 
+    @VisibleForTesting
+    void enableProxySubscriptionManager(Context context) {
+        // Enable ProxySubscriptionMgr with Lifecycle support for all controllers
+        // live within this fragment
+        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
+        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+    }
+
+    @VisibleForTesting
+    boolean hasActiveSubscription() {
+        final List<SubscriptionInfo> subInfoList =
+                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+        return ((subInfoList != null) && (subInfoList.size() > 0));
+    }
+
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_cellular);
-        category.setTemplate(DataUsageUtils.getMobileTemplate(getContext(), subId),
+        category.setTemplate(DataUsageLib.getMobileTemplate(getContext(), subId),
                 subId, services);
         category.pushTemplates(services);
         if (subInfo != null && !TextUtils.isEmpty(subInfo.getDisplayName())) {
@@ -250,77 +266,4 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         updateState();
         mSummaryController.updateState(mSummaryPreference);
     }
-
-    private static class SummaryProvider
-            implements SummaryLoader.SummaryProvider {
-
-        private final Activity mActivity;
-        private final SummaryLoader mSummaryLoader;
-        private final DataUsageController mDataController;
-
-        public SummaryProvider(Activity activity, SummaryLoader summaryLoader) {
-            mActivity = activity;
-            mSummaryLoader = summaryLoader;
-            mDataController = new DataUsageController(activity);
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                if (DataUsageUtils.hasSim(mActivity)) {
-                    mSummaryLoader.setSummary(this,
-                            mActivity.getString(R.string.data_usage_summary_format,
-                                    formatUsedData()));
-                } else {
-                    final DataUsageController.DataUsageInfo info =
-                            mDataController.getWifiDataUsageInfo();
-
-                    if (info == null) {
-                        mSummaryLoader.setSummary(this, null);
-                    } else {
-                        final CharSequence wifiFormat = mActivity
-                                .getText(R.string.data_usage_wifi_format);
-                        final CharSequence sizeText =
-                                DataUsageUtils.formatDataUsage(mActivity, info.usageLevel);
-                        mSummaryLoader.setSummary(this,
-                                TextUtils.expandTemplate(wifiFormat, sizeText));
-                    }
-                }
-            }
-        }
-
-        private CharSequence formatUsedData() {
-            SubscriptionManager subscriptionManager = (SubscriptionManager) mActivity
-                .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-            int defaultSubId = subscriptionManager.getDefaultSubscriptionId();
-            if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                return formatFallbackData();
-            }
-            SubscriptionPlan dfltPlan = DataUsageSummaryPreferenceController
-                    .getPrimaryPlan(subscriptionManager, defaultSubId);
-            if (dfltPlan == null) {
-                return formatFallbackData();
-            }
-            if (DataUsageSummaryPreferenceController.unlimited(dfltPlan.getDataLimitBytes())) {
-                return DataUsageUtils.formatDataUsage(mActivity, dfltPlan.getDataUsageBytes());
-            } else {
-                return Utils.formatPercentage(dfltPlan.getDataUsageBytes(),
-                    dfltPlan.getDataLimitBytes());
-            }
-        }
-
-        private CharSequence formatFallbackData() {
-            DataUsageController.DataUsageInfo info = mDataController.getDataUsageInfo();
-            if (info == null) {
-                return DataUsageUtils.formatDataUsage(mActivity, 0);
-            } else if (info.limitLevel <= 0) {
-                return DataUsageUtils.formatDataUsage(mActivity, info.usageLevel);
-            } else {
-                return Utils.formatPercentage(info.usageLevel, info.limitLevel);
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-        = SummaryProvider::new;
 }

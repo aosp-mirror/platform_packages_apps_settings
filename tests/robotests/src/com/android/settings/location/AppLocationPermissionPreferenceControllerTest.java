@@ -2,6 +2,9 @@ package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.location.LocationManager;
 import android.provider.Settings;
@@ -30,6 +33,7 @@ public class AppLocationPermissionPreferenceControllerTest {
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private LocationManager mLocationManager;
+    private LocationSettings mLocationSettings;
 
     @Before
     public void setUp() {
@@ -37,7 +41,10 @@ public class AppLocationPermissionPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new AppLocationPermissionPreferenceController(mContext, mLifecycle);
+        mLocationSettings = spy(new LocationSettings());
+        when(mLocationSettings.getSettingsLifecycle()).thenReturn(mLifecycle);
+        mController = new AppLocationPermissionPreferenceController(mContext, "key");
+        mController.init(mLocationSettings);
         mLocationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
     }
 

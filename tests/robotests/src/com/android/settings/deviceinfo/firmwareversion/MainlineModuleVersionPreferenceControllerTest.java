@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.firmwareversion;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_INTENT;
+import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_V2_INTENT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -97,7 +98,33 @@ public class MainlineModuleVersionPreferenceControllerTest {
     }
 
     @Test
-    public void updateStates_canHandleIntent_setIntentToPreference() throws Exception {
+    public void updateState_canHandleV2Intent_setIntentToPreference() throws Exception {
+        setupModulePackage("test version 123");
+        when(mPackageManager.resolveActivity(MODULE_UPDATE_V2_INTENT, 0))
+                .thenReturn(new ResolveInfo());
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.getIntent()).isEqualTo(MODULE_UPDATE_V2_INTENT);
+    }
+
+    @Test
+    public void updateState_canHandleV2Intent_preferenceShouldBeSelectable() throws Exception {
+        setupModulePackage("test version 123");
+        when(mPackageManager.resolveActivity(MODULE_UPDATE_V2_INTENT, 0))
+                .thenReturn(new ResolveInfo());
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.isSelectable()).isTrue();
+    }
+
+    @Test
+    public void updateState_canHandleIntent_setIntentToPreference() throws Exception {
         setupModulePackage("test version 123");
         when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))
                 .thenReturn(new ResolveInfo());
@@ -111,9 +138,25 @@ public class MainlineModuleVersionPreferenceControllerTest {
     }
 
     @Test
-    public void updateStates_cannotHandleIntent_setNullToPreference() throws Exception {
+    public void updateState_canHandleIntent_preferenceShouldBeSelectable() throws Exception {
         setupModulePackage("test version 123");
         when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))
+                .thenReturn(new ResolveInfo());
+
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.isSelectable()).isTrue();
+    }
+
+    @Test
+    public void updateState_cannotHandleIntent_setNullToPreference() throws Exception {
+        setupModulePackage("test version 123");
+        when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))
+                .thenReturn(null);
+        when(mPackageManager.resolveActivity(MODULE_UPDATE_V2_INTENT, 0))
                 .thenReturn(null);
 
         final MainlineModuleVersionPreferenceController controller =

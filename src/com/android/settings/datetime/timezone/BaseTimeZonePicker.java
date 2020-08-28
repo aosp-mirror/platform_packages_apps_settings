@@ -83,7 +83,7 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.time_zone_items_list, container, false);
+        final View view = inflater.inflate(R.layout.recycler_view, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, /* reverseLayout */ false));

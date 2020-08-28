@@ -30,14 +30,11 @@ import android.content.pm.PackageManager;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
 
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settings.bluetooth.AlwaysDiscoverable;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,6 +46,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,15 +54,11 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowBluetoothAdapter.class)
 public class DiscoverableFooterPreferenceControllerTest {
+
     private static final String DEVICE_NAME = "device name";
-    private static final String KEY = "discoverable_footer_preference";
 
     @Mock
     private PackageManager mPackageManager;
-    @Mock
-    private PreferenceScreen mScreen;
-    @Mock
-    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     @Mock
     private AlwaysDiscoverable mAlwaysDiscoverable;
 
@@ -82,10 +76,13 @@ public class DiscoverableFooterPreferenceControllerTest {
 
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mDiscoverableFooterPreferenceController =
-                new DiscoverableFooterPreferenceController(mContext);
-        mPreference = spy(new FooterPreference(mContext));
-        mDiscoverableFooterPreferenceController.init(mFooterPreferenceMixin, mPreference,
-                mAlwaysDiscoverable);
+                new DiscoverableFooterPreferenceController(mContext, "key");
+        mPreference = new FooterPreference(mContext);
+        ReflectionHelpers
+                .setField(mDiscoverableFooterPreferenceController, "mPreference", mPreference);
+        ReflectionHelpers
+                .setField(mDiscoverableFooterPreferenceController,
+                        "mAlwaysDiscoverable", mAlwaysDiscoverable);
         mBluetoothChangedReceiver = mDiscoverableFooterPreferenceController
                 .mBluetoothChangedReceiver;
     }
@@ -99,33 +96,25 @@ public class DiscoverableFooterPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_BluetoothFeature_returnAvailable() {
+    public void getAvailabilityStatus_BluetoothFeature_returnAvailableUnsearchable() {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)).thenReturn(true);
 
         assertThat(mDiscoverableFooterPreferenceController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void displayPreference() {
-        when(mFooterPreferenceMixin.createFooterPreference()).thenReturn(mPreference);
-        mDiscoverableFooterPreferenceController.displayPreference(mScreen);
+    public void onStart_shouldRegisterBluetoothChanged() {
+        mDiscoverableFooterPreferenceController.onStart();
 
-        verify(mPreference).setKey(KEY);
-        verify(mScreen).addPreference(mPreference);
-    }
-
-    @Test
-    public void onResume() {
-        mDiscoverableFooterPreferenceController.onResume();
         assertThat(getRegisteredBroadcastReceivers()).contains(mBluetoothChangedReceiver);
         verify(mAlwaysDiscoverable).start();
     }
 
     @Test
-    public void onPause() {
-        mDiscoverableFooterPreferenceController.onResume();
-        mDiscoverableFooterPreferenceController.onPause();
+    public void onStop_shouldUnregisterBluetoothChanged() {
+        mDiscoverableFooterPreferenceController.onStart();
+        mDiscoverableFooterPreferenceController.onStop();
 
         assertThat(getRegisteredBroadcastReceivers()).doesNotContain(mBluetoothChangedReceiver);
         verify(mAlwaysDiscoverable).stop();
@@ -145,6 +134,22 @@ public class DiscoverableFooterPreferenceControllerTest {
         sendBluetoothStateChangedIntent(BluetoothAdapter.STATE_OFF);
 
         assertThat(mPreference.getTitle()).isEqualTo(generateTitle(null));
+    }
+
+    @Test
+    public void onStart_localBluetoothManagerNull_shouldNotCrash() {
+        mDiscoverableFooterPreferenceController.mLocalManager = null;
+
+        // Shouldn't crash
+        mDiscoverableFooterPreferenceController.onStart();
+    }
+
+    @Test
+    public void onStop_localBluetoothManagerNull_shouldNotCrash() {
+        mDiscoverableFooterPreferenceController.mLocalManager = null;
+
+        // Shouldn't crash
+        mDiscoverableFooterPreferenceController.onStop();
     }
 
     private CharSequence generateTitle(String deviceName) {
@@ -175,23 +180,5 @@ public class DiscoverableFooterPreferenceControllerTest {
             registeredBroadcastReceivers.add(wrapper.getBroadcastReceiver());
         }
         return registeredBroadcastReceivers;
-    }
-
-    @Test
-    public void onResume_localBluetoothManagerNull_shouldNotCrash() {
-        mDiscoverableFooterPreferenceController.mLocalManager = null;
-        mDiscoverableFooterPreferenceController.init(mFooterPreferenceMixin, mPreference, null);
-
-        // Shouldn't crash
-        mDiscoverableFooterPreferenceController.onResume();
-    }
-
-    @Test
-    public void onPause_localBluetoothManagerNull_shouldNotCrash() {
-        mDiscoverableFooterPreferenceController.mLocalManager = null;
-        mDiscoverableFooterPreferenceController.init(mFooterPreferenceMixin, mPreference, null);
-
-        // Shouldn't crash
-        mDiscoverableFooterPreferenceController.onPause();
     }
 }

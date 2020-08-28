@@ -15,7 +15,6 @@
  */
 package com.android.settings.applications;
 
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.SummaryLoader;
 
 public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenceClickListener {
 
@@ -127,40 +125,4 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         }
         return false;
     }
-
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                ProcStatsData statsManager = new ProcStatsData(mContext, false);
-                statsManager.setDuration(sDurations[0]);
-                MemInfo memInfo = statsManager.getMemInfo();
-                String usedResult = Formatter.formatShortFileSize(mContext,
-                        (long) memInfo.realUsedRam);
-                String totalResult = Formatter.formatShortFileSize(mContext,
-                        (long) memInfo.realTotalRam);
-                mSummaryLoader.setSummary(this, mContext.getString(R.string.memory_summary,
-                        usedResult, totalResult));
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
-
 }

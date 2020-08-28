@@ -29,7 +29,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.widget.RadioButtonPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -114,16 +114,16 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
         if (function != previousFunction && !Utils.isMonkeyRunning()) {
             mPreviousFunction = previousFunction;
 
-            if (function == UsbManager.FUNCTION_RNDIS) {
-                //Update the UI in advance to make it looks smooth
-                final RadioButtonPreference prevPref =
-                        (RadioButtonPreference) mProfilesContainer.findPreference(
-                                UsbBackend.usbFunctionsToString(mPreviousFunction));
-                if (prevPref != null) {
-                    prevPref.setChecked(false);
-                    preference.setChecked(true);
-                }
+            //Update the UI in advance to make it looks smooth
+            final RadioButtonPreference prevPref =
+                    (RadioButtonPreference) mProfilesContainer.findPreference(
+                            UsbBackend.usbFunctionsToString(mPreviousFunction));
+            if (prevPref != null) {
+                prevPref.setChecked(false);
+                preference.setChecked(true);
+            }
 
+            if (function == UsbManager.FUNCTION_RNDIS) {
                 // We need to have entitlement check for usb tethering, so use API in
                 // ConnectivityManager.
                 mConnectivityManager.startTethering(TETHERING_USB, true /* showProvisioningUi */,

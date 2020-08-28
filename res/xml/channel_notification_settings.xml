@@ -38,7 +38,7 @@
         android:summary="@string/allow_interruption_summary" />
 
     <!-- Importance -->
-    <com.android.settings.notification.ImportancePreference
+    <com.android.settings.notification.app.ImportancePreference
         android:key="importance"
         android:order="4"
         android:title="@string/notification_importance_title"
@@ -58,13 +58,21 @@
         android:title="@string/notification_importance_high_title"
         android:summary="@string/notification_channel_summary_high"/>
 
+    <Preference
+        android:key="convo_promote"
+        android:order="7"
+        android:icon="@drawable/ic_promote_conversation"
+        android:title="@string/promote_conversation_title"
+        android:summary="@string/promote_conversation_summary"
+        settings:allowDividerAbove="true"/>
+
     <PreferenceCategory
         android:key="channel_advanced"
         android:order="50"
         settings:initialExpandedChildrenCount="0">
 
         <!-- Default ringtone -->
-        <com.android.settings.notification.NotificationSoundPreference
+        <com.android.settings.notification.app.NotificationSoundPreference
             android:key="ringtone"
             android:title="@string/notification_channel_sound_title"
             android:dialogTitle="@string/notification_channel_sound_title"
@@ -100,12 +108,6 @@
             settings:useAdditionalSummary="true"
             settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
 
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="bubble_pref"
-            android:title="@string/notification_bubbles_title"
-            android:order="16"
-            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-
         <!-- Bypass DND -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="bypass_dnd"
@@ -121,11 +123,11 @@
             settings:allowDividerAbove="true"/>
     </PreferenceCategory>
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="desc"
         android:order="100"/>
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="block_desc"
         android:order="110"
         settings:allowDividerAbove="false"/>

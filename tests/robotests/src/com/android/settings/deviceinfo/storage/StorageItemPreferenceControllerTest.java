@@ -16,15 +16,12 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ID;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .EXTRA_WORK_ONLY;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -51,9 +48,11 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
@@ -66,6 +65,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class StorageItemPreferenceControllerTest {
@@ -119,7 +119,7 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mActivity).startActivityForResultAsUser(argumentCaptor.capture(), anyInt(),
+        verify(mActivity).startActivityAsUser(argumentCaptor.capture(),
                 nullable(UserHandle.class));
 
         final Intent intent = argumentCaptor.getValue();
@@ -137,8 +137,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
         final Intent intent = argumentCaptor.getValue();
 
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -164,8 +164,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         final Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -183,8 +183,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -195,8 +195,8 @@ public class StorageItemPreferenceControllerTest {
                 .isEqualTo(R.string.apps_storage);
         assertThat(
                 intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                        .getBoolean(EXTRA_WORK_ONLY))
-                .isTrue();
+                        .getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB))
+                .isEqualTo(ProfileSelectFragment.WORK_TAB);
         assertThat(
                 intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
                         .getInt(EXTRA_WORK_ID))
@@ -220,8 +220,8 @@ public class StorageItemPreferenceControllerTest {
             .isTrue();
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         Intent browseIntent = mVolume.buildBrowseIntent();
@@ -237,8 +237,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -255,8 +255,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -277,6 +277,7 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
+    @Config(shadows = ShadowUserManager.class)
     public void testMeasurementCompletedUpdatesPreferences() {
         final StorageItemPreference audio = new StorageItemPreference(mContext);
         final StorageItemPreference image = new StorageItemPreference(mContext);

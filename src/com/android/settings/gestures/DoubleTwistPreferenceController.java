@@ -78,6 +78,11 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     protected String getVideoPrefKey() {
         return PREF_KEY_VIDEO;
     }

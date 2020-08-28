@@ -75,6 +75,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
             multiSimPreference.setOrder(phonePreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(KEY_PHONE_NUMBER + simSlotNumber);
+            multiSimPreference.setSelectable(false);
             screen.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
         }
@@ -87,16 +88,6 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
             simStatusPreference.setTitle(getPreferenceTitle(simSlotNumber));
             simStatusPreference.setSummary(getPhoneNumber(simSlotNumber));
         }
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public boolean isCopyableSlice() {
-        return true;
     }
 
     @Override

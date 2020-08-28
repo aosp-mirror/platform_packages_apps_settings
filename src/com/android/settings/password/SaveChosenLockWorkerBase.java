@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Pair;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 
 /**
@@ -44,6 +46,8 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
     protected long mChallenge;
     protected boolean mWasSecureBefore;
     protected int mUserId;
+    protected int mUnificationProfileId = UserHandle.USER_NULL;
+    protected LockscreenCredential mUnificationProfileCredential;
 
     private boolean mBlocking;
 
@@ -106,10 +110,25 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         if (mListener != null) {
             mListener.onChosenLockSaveFinished(mWasSecureBefore, mResultData);
         }
+        if (mUnificationProfileCredential != null) {
+            mUnificationProfileCredential.zeroize();
+        }
     }
 
     public void setBlocking(boolean blocking) {
         mBlocking = blocking;
+    }
+
+    public void setProfileToUnify(int profileId, LockscreenCredential credential) {
+        mUnificationProfileId = profileId;
+        mUnificationProfileCredential = credential.duplicate();
+    }
+
+    protected void unifyProfileCredentialIfRequested() {
+        if (mUnificationProfileId != UserHandle.USER_NULL) {
+            mUtils.setSeparateProfileChallengeEnabled(mUnificationProfileId, false,
+                    mUnificationProfileCredential);
+        }
     }
 
     private class Task extends AsyncTask<Void, Void, Pair<Boolean, Intent>> {

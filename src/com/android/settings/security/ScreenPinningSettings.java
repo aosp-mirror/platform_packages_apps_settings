@@ -18,16 +18,16 @@ package com.android.settings.security;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Switch;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
@@ -41,23 +41,28 @@ import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * Screen pinning settings.
  */
 @SearchIndexable
 public class ScreenPinningSettings extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener, DialogInterface.OnClickListener {
 
-    private static final CharSequence KEY_USE_SCREEN_LOCK = "use_screen_lock";
+    private static final String KEY_USE_SCREEN_LOCK = "use_screen_lock";
+    private static final String KEY_FOOTER = "screen_pinning_settings_screen_footer";
     private static final int CHANGE_LOCK_METHOD_REQUEST = 43;
 
     private SwitchBar mSwitchBar;
     private SwitchPreference mUseScreenLock;
+    private FooterPreference mFooterPreference;
     private LockPatternUtils mLockPatternUtils;
+    private UserManager mUserManager;
 
     @Override
     public int getMetricsCategory() {
@@ -71,27 +76,24 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         activity.setTitle(R.string.screen_pinning_title);
         mLockPatternUtils = new LockPatternUtils(activity);
+        mUserManager = activity.getSystemService(UserManager.class);
 
+        addPreferencesFromResource(R.xml.screen_pinning_settings);
+        final PreferenceScreen root = getPreferenceScreen();
+        mUseScreenLock = root.findPreference(KEY_USE_SCREEN_LOCK);
+        mFooterPreference = root.findPreference(KEY_FOOTER);
 
         mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
         mSwitchBar.setChecked(isLockToAppEnabled(getActivity()));
+        mSwitchBar.addOnSwitchChangeListener(this);
+
+        updateDisplay();
     }
 
     @Override
     public int getHelpResource() {
         return R.string.help_url_screen_pinning;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ViewGroup parent = (ViewGroup) view.findViewById(android.R.id.list_container);
-        View emptyView = LayoutInflater.from(getContext())
-                .inflate(R.layout.screen_pinning_instructions, parent, false);
-        parent.addView(emptyView);
-        setEmptyView(emptyView);
     }
 
     @Override
@@ -188,20 +190,32 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
      */
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        setLockToAppEnabled(isChecked);
+        if (isChecked) {
+            new AlertDialog.Builder(getContext())
+                    .setMessage(R.string.screen_pinning_dialog_message)
+                    .setPositiveButton(R.string.dlg_ok, this)
+                    .setNegativeButton(R.string.dlg_cancel, this)
+                    .setCancelable(false)
+                    .show();
+        } else {
+            setLockToAppEnabled(false);
+            updateDisplay();
+        }
+    }
+
+    @Override
+    public void onClick(DialogInterface dialogInterface, int which) {
+        if (which == DialogInterface.BUTTON_POSITIVE) {
+            setLockToAppEnabled(true);
+        } else {
+            mSwitchBar.setChecked(false);
+        }
         updateDisplay();
     }
 
-    public void updateDisplay() {
-        PreferenceScreen root = getPreferenceScreen();
-        if (root != null) {
-            root.removeAll();
-        }
+    private void updateDisplay() {
         if (isLockToAppEnabled(getActivity())) {
-            addPreferencesFromResource(R.xml.screen_pinning_settings);
-            root = getPreferenceScreen();
-
-            mUseScreenLock = (SwitchPreference) root.findPreference(KEY_USE_SCREEN_LOCK);
+            mUseScreenLock.setVisible(true);
             mUseScreenLock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -210,21 +224,35 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             });
             mUseScreenLock.setChecked(isScreenLockUsed());
             mUseScreenLock.setTitle(getCurrentSecurityTitle());
+        } else {
+            mFooterPreference.setSummary(getAppPinningContent());
+            mUseScreenLock.setVisible(false);
         }
+    }
+
+    private boolean isGuestModeSupported() {
+        return UserManager.supportsMultipleUsers()
+                && !mUserManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH);
+    }
+
+    private CharSequence getAppPinningContent() {
+        return isGuestModeSupported()
+                ? getActivity().getText(R.string.screen_pinning_guest_user_description)
+                : getActivity().getText(R.string.screen_pinning_description);
     }
 
     /**
      * For search
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
 
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                    boolean enabled) {
-                final SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.screen_pinning_settings;
-                return Arrays.asList(sir);
-            }
-        };
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.screen_pinning_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }

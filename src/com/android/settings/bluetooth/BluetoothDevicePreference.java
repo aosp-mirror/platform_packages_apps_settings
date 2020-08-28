@@ -32,6 +32,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -44,6 +45,9 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * BluetoothDevicePreference is the preference type used to display each remote
  * Bluetooth device in the Bluetooth Settings screen.
@@ -54,9 +58,21 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
     private static int sDimAlpha = Integer.MIN_VALUE;
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({SortType.TYPE_DEFAULT,
+            SortType.TYPE_FIFO,
+            SortType.TYPE_NO_SORT})
+    public @interface SortType {
+        int TYPE_DEFAULT = 1;
+        int TYPE_FIFO = 2;
+        int TYPE_NO_SORT = 3;
+    }
+
     private final CachedBluetoothDevice mCachedDevice;
     private final UserManager mUserManager;
     private final boolean mShowDevicesWithoutNames;
+    private final long mCurrentTime;
+    private final int mType;
 
     private AlertDialog mDisconnectDialog;
     private String contentDescription = null;
@@ -67,7 +83,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
     Resources mResources;
 
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
-            boolean showDeviceWithoutNames) {
+            boolean showDeviceWithoutNames, @SortType int type) {
         super(context, null);
         mResources = getContext().getResources();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
@@ -81,6 +97,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
         mCachedDevice = cachedDevice;
         mCachedDevice.registerCallback(this);
+        mCurrentTime = System.currentTimeMillis();
+        mType = type;
 
         onDeviceAttributesChanged();
     }
@@ -200,8 +218,15 @@ public final class BluetoothDevicePreference extends GearPreference implements
             return super.compareTo(another);
         }
 
-        return mCachedDevice
-                .compareTo(((BluetoothDevicePreference) another).mCachedDevice);
+        switch (mType) {
+            case SortType.TYPE_DEFAULT:
+                return mCachedDevice
+                        .compareTo(((BluetoothDevicePreference) another).mCachedDevice);
+            case SortType.TYPE_FIFO:
+                return mCurrentTime > ((BluetoothDevicePreference) another).mCurrentTime ? 1 : -1;
+            default:
+                return super.compareTo(another);
+        }
     }
 
     void onClicked() {

@@ -21,7 +21,6 @@ import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -32,15 +31,16 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
-import android.util.Log;
+import android.util.Slog;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.notification.app.AppNotificationSettings;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.TwoTargetPreference;
-import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
@@ -67,8 +67,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     private static final String TAG = "RecentNotisCtrl";
     private static final String KEY_PREF_CATEGORY = "recent_notifications_category";
-    @VisibleForTesting
-    static final String KEY_DIVIDER = "all_notifications_divider";
+
     @VisibleForTesting
     static final String KEY_SEE_ALL = "all_notifications";
     private static final int SHOW_RECENT_APP_COUNT = 3;
@@ -87,7 +86,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     private PreferenceCategory mCategory;
     private Preference mSeeAllPref;
-    private Preference mDivider;
     protected List<Integer> mUserIds;
 
     public RecentNotifyingAppsPreferenceController(Context context, NotificationBackend backend,
@@ -97,7 +95,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
                 app == null ? null : ApplicationsState.getInstance(app), host);
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     RecentNotifyingAppsPreferenceController(Context context, NotificationBackend backend,
             IUsageStatsManager usageStatsManager, UserManager userManager,
             ApplicationsState appState, Fragment host) {
@@ -118,7 +116,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mApplicationsState != null;
     }
 
     @Override
@@ -131,14 +129,12 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         PreferenceControllerMixin.super.updateNonIndexableKeys(keys);
         // Don't index category name into search. It's not actionable.
         keys.add(KEY_PREF_CATEGORY);
-        keys.add(KEY_DIVIDER);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mCategory = screen.findPreference(getPreferenceKey());
         mSeeAllPref = screen.findPreference(KEY_SEE_ALL);
-        mDivider = screen.findPreference(KEY_DIVIDER);
         super.displayPreference(screen);
         refreshUi(mCategory.getContext());
     }
@@ -209,7 +205,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     private void displayOnlyAllAppsLink() {
         mCategory.setTitle(null);
-        mDivider.setVisible(false);
         mSeeAllPref.setTitle(R.string.notifications_title);
         mSeeAllPref.setIcon(null);
         int prefCount = mCategory.getPreferenceCount();
@@ -223,19 +218,18 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     private void displayRecentApps(Context prefContext, List<NotifyingApp> recentApps) {
         mCategory.setTitle(R.string.recent_notifications);
-        mDivider.setVisible(true);
         mSeeAllPref.setSummary(null);
         mSeeAllPref.setIcon(R.drawable.ic_chevron_right_24dp);
 
         // Rebind prefs/avoid adding new prefs if possible. Adding/removing prefs causes jank.
         // Build a cached preference pool
-        final Map<String, NotificationAppPreference> appPreferences = new ArrayMap<>();
+        final Map<String, MasterSwitchPreference> appPreferences = new ArrayMap<>();
         int prefCount = mCategory.getPreferenceCount();
         for (int i = 0; i < prefCount; i++) {
             final Preference pref = mCategory.getPreference(i);
             final String key = pref.getKey();
             if (!TextUtils.equals(key, KEY_SEE_ALL)) {
-                appPreferences.put(key, (NotificationAppPreference) pref);
+                appPreferences.put(key, (MasterSwitchPreference) pref);
             }
         }
         final int recentAppsCount = recentApps.size();
@@ -250,10 +244,10 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             }
 
             boolean rebindPref = true;
-            NotificationAppPreference pref = appPreferences.remove(getKey(app.getUserId(),
+            MasterSwitchPreference pref = appPreferences.remove(getKey(app.getUserId(),
                     pkgName));
             if (pref == null) {
-                pref = new NotificationAppPreference(prefContext);
+                pref = new MasterSwitchPreference(prefContext);
                 rebindPref = false;
             }
             pref.setKey(getKey(app.getUserId(), pkgName));
@@ -279,9 +273,8 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             });
             pref.setSwitchEnabled(mNotificationBackend.isBlockable(mContext, appEntry.info));
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
-                boolean blocked = !(Boolean) newValue;
                 mNotificationBackend.setNotificationsEnabledForPackage(
-                        pkgName, appEntry.info.uid, !blocked);
+                        pkgName, appEntry.info.uid, (Boolean) newValue);
                 return true;
             });
             pref.setChecked(
@@ -302,40 +295,21 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         List<NotifyingApp> displayableApps = new ArrayList<>(SHOW_RECENT_APP_COUNT);
         int count = 0;
         for (NotifyingApp app : mApps) {
-            final ApplicationsState.AppEntry appEntry = mApplicationsState.getEntry(
-                    app.getPackage(), app.getUserId());
-            if (appEntry == null) {
-                continue;
-            }
-            if (!shouldIncludePkgInRecents(app.getPackage(), app.getUserId())) {
-                continue;
-            }
-            displayableApps.add(app);
-            count++;
-            if (count >= SHOW_RECENT_APP_COUNT) {
-                break;
+            try {
+                final ApplicationsState.AppEntry appEntry = mApplicationsState.getEntry(
+                        app.getPackage(), app.getUserId());
+                if (appEntry == null) {
+                    continue;
+                }
+                displayableApps.add(app);
+                count++;
+                if (count >= SHOW_RECENT_APP_COUNT) {
+                    break;
+                }
+            } catch (Exception e) {
+                Slog.e(TAG, "Failed to find app " + app.getPackage() + "/" + app.getUserId(), e);
             }
         }
         return displayableApps;
-    }
-
-
-    /**
-     * Whether or not the app should be included in recent list.
-     */
-    private boolean shouldIncludePkgInRecents(String pkgName, int userId) {
-        final Intent launchIntent = new Intent().addCategory(Intent.CATEGORY_LAUNCHER)
-                .setPackage(pkgName);
-
-        if (mPm.resolveActivity(launchIntent, 0) == null) {
-            // Not visible on launcher -> likely not a user visible app, skip if non-instant.
-            final ApplicationsState.AppEntry appEntry =
-                    mApplicationsState.getEntry(pkgName, userId);
-            if (appEntry == null || appEntry.info == null || !AppUtils.isInstant(appEntry.info)) {
-                Log.d(TAG, "Not a user visible or instant app, skipping " + pkgName);
-                return false;
-            }
-        }
-        return true;
     }
 }

@@ -15,8 +15,17 @@
  */
 package com.android.settings.accounts;
 
+import static android.os.UserManager.DISALLOW_REMOVE_MANAGED_PROFILE;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.annotation.UserIdInt;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -44,7 +53,12 @@ public class AccountRestrictionHelper {
             return;
         }
         if (hasBaseUserRestriction(userRestriction, userId)) {
-            preference.setEnabled(false);
+            if (userRestriction.equals(DISALLOW_REMOVE_MANAGED_PROFILE)
+                    && isOrganizationOwnedDevice()) {
+                preference.setDisabledByAdmin(getEnforcedAdmin(userRestriction, userId));
+            } else {
+                preference.setEnabled(false);
+            }
         } else {
             preference.checkRestrictionAndSetDisabled(userRestriction, userId);
         }
@@ -53,6 +67,41 @@ public class AccountRestrictionHelper {
     public boolean hasBaseUserRestriction(String userRestriction, @UserIdInt int userId) {
         return RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext, userRestriction,
                 userId);
+    }
+
+    private boolean isOrganizationOwnedDevice() {
+        final DevicePolicyManager dpm = (DevicePolicyManager) mContext.getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        if (dpm == null) {
+            return false;
+        }
+        return dpm.isOrganizationOwnedDeviceWithManagedProfile();
+    }
+
+    private EnforcedAdmin getEnforcedAdmin(String userRestriction, int userId) {
+        final DevicePolicyManager dpm = (DevicePolicyManager) mContext.getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        if (dpm == null) {
+            return null;
+        }
+        final int managedUsedId = getManagedUserId(userId);
+        ComponentName adminComponent = dpm.getProfileOwnerAsUser(managedUsedId);
+        if (adminComponent != null) {
+            return new EnforcedAdmin(adminComponent, userRestriction,
+                    UserHandle.of(managedUsedId));
+        }
+        return null;
+    }
+
+    private int getManagedUserId(int userId) {
+        final UserManager um = UserManager.get(mContext);
+        for (UserInfo ui : um.getProfiles(userId)) {
+            if (ui.id == userId || !ui.isManagedProfile()) {
+                continue;
+            }
+            return ui.id;
+        }
+        return -1;
     }
 
     public AccessiblePreferenceCategory createAccessiblePreferenceCategory(Context context) {

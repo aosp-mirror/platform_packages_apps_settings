@@ -22,11 +22,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -43,6 +45,9 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
 
     private static final String PREFERENCE_KEY = "oem_unlock_enable";
     private static final String TAG = "OemUnlockPreferenceController";
+    private static final String OEM_UNLOCK_SUPPORTED_KEY = "ro.oem_unlock_supported";
+    private static final String UNSUPPORTED = "-9999";
+    private static final String SUPPORTED = "1";
 
     private final OemLockManager mOemLockManager;
     private final UserManager mUserManager;
@@ -55,8 +60,10 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
             DevelopmentSettingsDashboardFragment fragment) {
         super(context);
 
-        if (Build.IS_EMULATOR && Build.IS_ENG) {
+        if (!TextUtils.equals(SystemProperties.get(OEM_UNLOCK_SUPPORTED_KEY, UNSUPPORTED),
+                SUPPORTED)) {
             mOemLockManager = null;
+            Log.w(TAG, "oem_unlock not supported.");
         } else {
             mOemLockManager = (OemLockManager) context.getSystemService(Context.OEM_LOCK_SERVICE);
         }

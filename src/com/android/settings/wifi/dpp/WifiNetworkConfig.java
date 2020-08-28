@@ -24,7 +24,6 @@ import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WPA_PSK;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
@@ -81,7 +80,7 @@ public class WifiNetworkConfig {
      * WifiNetworkConfig for configuration
      */
     public interface Retriever {
-        public WifiNetworkConfig getWifiNetworkConfig();
+        WifiNetworkConfig getWifiNetworkConfig();
     }
 
     /**
@@ -90,7 +89,7 @@ public class WifiNetworkConfig {
      * android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR
      * android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER
      */
-    public static WifiNetworkConfig getValidConfigOrNull(Intent intent) {
+    static WifiNetworkConfig getValidConfigOrNull(Intent intent) {
         final String security = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SECURITY);
         final String ssid = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID);
         final String preSharedKey = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY);
@@ -103,7 +102,7 @@ public class WifiNetworkConfig {
         return getValidConfigOrNull(security, ssid, preSharedKey, hiddenSsid, networkId, isHotspot);
     }
 
-    public static WifiNetworkConfig getValidConfigOrNull(String security, String ssid,
+    static WifiNetworkConfig getValidConfigOrNull(String security, String ssid,
             String preSharedKey, boolean hiddenSsid, int networkId, boolean isHotspot) {
         if (!isValidConfig(security, ssid, preSharedKey, hiddenSsid)) {
             return null;
@@ -113,7 +112,7 @@ public class WifiNetworkConfig {
                 isHotspot);
     }
 
-    public static boolean isValidConfig(WifiNetworkConfig config) {
+    static boolean isValidConfig(WifiNetworkConfig config) {
         if (config == null) {
             return false;
         } else {
@@ -122,7 +121,7 @@ public class WifiNetworkConfig {
         }
     }
 
-    public static boolean isValidConfig(String security, String ssid, String preSharedKey,
+    static boolean isValidConfig(String security, String ssid, String preSharedKey,
             boolean hiddenSsid) {
         if (!TextUtils.isEmpty(security) && !SECURITY_NO_PASSWORD.equals(security)) {
             if (TextUtils.isEmpty(preSharedKey)) {
@@ -162,9 +161,9 @@ public class WifiNetworkConfig {
      * Construct a barcode string for WiFi network login.
      * See https://en.wikipedia.org/wiki/QR_code#WiFi_network_login
      */
-    public String getQrCode() {
+    String getQrCode() {
         final String empty = "";
-        String barcode = new StringBuilder("WIFI:")
+        return new StringBuilder("WIFI:")
                 .append("S:")
                 .append(escapeSpecialCharacters(mSsid))
                 .append(";")
@@ -179,7 +178,6 @@ public class WifiNetworkConfig {
                 .append(mHiddenSsid)
                 .append(";;")
                 .toString();
-        return barcode;
     }
 
     public String getSecurity() {
@@ -233,9 +231,6 @@ public class WifiNetworkConfig {
     /**
      * This is a simplified method from {@code WifiConfigController.getConfig()}
      *
-     * TODO (b/129021867): WifiConfiguration is a deprecated class, should replace it with
-     *       {@code android.net.wifi.WifiNetworkSuggestion}
-     *
      * @return When it's a open network, returns 2 WifiConfiguration in the List, the 1st is
      *         open network and the 2nd is enhanced open network. Returns 1 WifiConfiguration in the
      *         List for all other supported Wi-Fi securities.
@@ -256,17 +251,15 @@ public class WifiNetworkConfig {
 
             final WifiConfiguration enhancedOpenNetworkWifiConfiguration =
                     getBasicWifiConfiguration();
-            enhancedOpenNetworkWifiConfiguration.allowedKeyManagement.set(KeyMgmt.OWE);
-            enhancedOpenNetworkWifiConfiguration.requirePMF = true;
+            enhancedOpenNetworkWifiConfiguration
+                    .setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
             wifiConfigurations.add(enhancedOpenNetworkWifiConfiguration);
             return wifiConfigurations;
         }
 
         final WifiConfiguration wifiConfiguration = getBasicWifiConfiguration();
         if (mSecurity.startsWith(SECURITY_WEP)) {
-            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.NONE);
-            wifiConfiguration.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
-            wifiConfiguration.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
+            wifiConfiguration.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
 
             // WEP-40, WEP-104, and 256-bit WEP (WEP-232?)
             final int length = mPreSharedKey.length();
@@ -277,7 +270,7 @@ public class WifiNetworkConfig {
                 wifiConfiguration.wepKeys[0] = addQuotationIfNeeded(mPreSharedKey);
             }
         } else if (mSecurity.startsWith(SECURITY_WPA_PSK)) {
-            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
+            wifiConfiguration.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
 
             if (mPreSharedKey.matches("[0-9A-Fa-f]{64}")) {
                 wifiConfiguration.preSharedKey = mPreSharedKey;
@@ -285,8 +278,7 @@ public class WifiNetworkConfig {
                 wifiConfiguration.preSharedKey = addQuotationIfNeeded(mPreSharedKey);
             }
         } else if (mSecurity.startsWith(SECURITY_SAE)) {
-            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.SAE);
-            wifiConfiguration.requirePMF = true;
+            wifiConfiguration.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
             if (mPreSharedKey.length() != 0) {
                 wifiConfiguration.preSharedKey = addQuotationIfNeeded(mPreSharedKey);
             }

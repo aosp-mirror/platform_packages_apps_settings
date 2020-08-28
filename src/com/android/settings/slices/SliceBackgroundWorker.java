@@ -20,6 +20,12 @@ import android.annotation.MainThread;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Process;
+import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -27,6 +33,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +53,8 @@ import java.util.Map;
 public abstract class SliceBackgroundWorker<E> implements Closeable {
 
     private static final String TAG = "SliceBackgroundWorker";
+
+    private static final long SLICE_UPDATE_THROTTLE_INTERVAL = 300L;
 
     private static final Map<Uri, SliceBackgroundWorker> LIVE_WORKERS = new ArrayMap<>();
 
@@ -164,6 +173,76 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
      * Notify that data was updated and attempt to sync changes to the Slice.
      */
     protected final void notifySliceChange() {
-        mContext.getContentResolver().notifyChange(mUri, null);
+        NotifySliceChangeHandler.getInstance().updateSlice(this);
     }
+
+    void pin() {
+        onSlicePinned();
+    }
+
+    void unpin() {
+        onSliceUnpinned();
+        NotifySliceChangeHandler.getInstance().cancelSliceUpdate(this);
+    }
+
+    private static class NotifySliceChangeHandler extends Handler {
+
+        private static final int MSG_UPDATE_SLICE = 1000;
+
+        private static NotifySliceChangeHandler sHandler;
+
+        private final Map<Uri, Long> mLastUpdateTimeLookup = Collections.synchronizedMap(
+                new ArrayMap<>());
+
+        private static NotifySliceChangeHandler getInstance() {
+            if (sHandler == null) {
+                final HandlerThread workerThread = new HandlerThread("NotifySliceChangeHandler",
+                        Process.THREAD_PRIORITY_BACKGROUND);
+                workerThread.start();
+                sHandler = new NotifySliceChangeHandler(workerThread.getLooper());
+            }
+            return sHandler;
+        }
+
+        private NotifySliceChangeHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what != MSG_UPDATE_SLICE) {
+                return;
+            }
+
+            final SliceBackgroundWorker worker = (SliceBackgroundWorker) msg.obj;
+            final Uri uri = worker.getUri();
+            final Context context = worker.getContext();
+            mLastUpdateTimeLookup.put(uri, SystemClock.uptimeMillis());
+            context.getContentResolver().notifyChange(uri, null);
+        }
+
+        private void updateSlice(SliceBackgroundWorker worker) {
+            if (hasMessages(MSG_UPDATE_SLICE, worker)) {
+                return;
+            }
+
+            final Message message = obtainMessage(MSG_UPDATE_SLICE, worker);
+            final long lastUpdateTime = mLastUpdateTimeLookup.getOrDefault(worker.getUri(), 0L);
+            if (lastUpdateTime == 0L) {
+                // Postpone the first update triggering by onSlicePinned() to avoid being too close
+                // to the first Slice bind.
+                sendMessageDelayed(message, SLICE_UPDATE_THROTTLE_INTERVAL);
+            } else if (SystemClock.uptimeMillis() - lastUpdateTime
+                    > SLICE_UPDATE_THROTTLE_INTERVAL) {
+                sendMessage(message);
+            } else {
+                sendMessageAtTime(message, lastUpdateTime + SLICE_UPDATE_THROTTLE_INTERVAL);
+            }
+        }
+
+        private void cancelSliceUpdate(SliceBackgroundWorker worker) {
+            removeMessages(MSG_UPDATE_SLICE, worker);
+            mLastUpdateTimeLookup.remove(worker.getUri());
+        }
+    };
 }

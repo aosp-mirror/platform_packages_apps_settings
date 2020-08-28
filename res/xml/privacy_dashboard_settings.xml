@@ -22,6 +22,7 @@
     android:title="@string/privacy_dashboard_title"
     settings:initialExpandedChildrenCount="4">
 
+
     <!-- Work Policy info -->
     <Preference
         android:key="work_policy_info"
@@ -29,6 +30,14 @@
         android:summary="@string/work_policy_privacy_settings_summary"
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.privacy.WorkPolicyInfoPreferenceController"/>
+
+    <!-- Connected work and personal apps -->
+    <Preference
+        android:key="interact_across_profiles_privacy"
+        android:title="@string/interact_across_profiles_title"
+        android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
+        settings:searchable="false"
+        settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
 
     <!-- Accessibility usage -->
     <Preference
@@ -43,9 +52,9 @@
     <Preference
         android:key="privacy_manage_perms"
         android:title="@string/app_permissions"
+        android:summary="@string/runtime_permissions_summary_control_app_access"
         settings:allowDividerAbove="true"
-        settings:keywords="@string/keywords_app_permissions"
-        settings:controller="com.android.settings.applications.AppPermissionsPreferenceController">
+        settings:searchable="false">
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 

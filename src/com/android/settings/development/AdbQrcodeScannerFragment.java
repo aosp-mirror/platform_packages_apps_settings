@@ -31,7 +31,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -40,15 +39,14 @@ import android.view.TextureView.SurfaceTextureListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.StringRes;
 
 import com.android.settings.R;
+import com.android.settings.wifi.dpp.AdbQrCode;
 import com.android.settings.wifi.dpp.WifiDppQrCodeBaseFragment;
 import com.android.settings.wifi.dpp.WifiNetworkConfig;
-import com.android.settings.wifi.dpp.WifiQrCode;
 import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
 
@@ -70,16 +68,16 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     private static final long SHOW_ERROR_MESSAGE_INTERVAL = 10000;
     private static final long SHOW_SUCCESS_SQUARE_INTERVAL = 1000;
 
-    private ProgressBar mProgressBar;
     private QrCamera mCamera;
     private TextureView mTextureView;
     private QrDecorateView mDecorateView;
     private View mQrCameraView;
     private View mVerifyingView;
+    private TextView mVerifyingTextView;
     private TextView mErrorMessage;
 
     /** QR code data scanned by camera */
-    private WifiQrCode mAdbQrCode;
+    private AdbQrCode mAdbQrCode;
     private WifiNetworkConfig mAdbConfig;
 
     private IAdbManager mAdbManager;
@@ -164,17 +162,16 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         mTextureView = (TextureView) view.findViewById(R.id.preview_view);
         mTextureView.setSurfaceTextureListener(this);
 
-        mDecorateView = (QrDecorateView) view.findViewById(R.id.decorate_view);
+        mDecorateView = view.findViewById(R.id.decorate_view);
+        setProgressBarShown(false);
 
         setHeaderIconImageResource(R.drawable.ic_scan_24dp);
 
-        mProgressBar = view.findViewById(R.id.indeterminate_bar);
-        mProgressBar.setVisibility(View.INVISIBLE);
-
         mQrCameraView = view.findViewById(R.id.camera_layout);
         mVerifyingView = view.findViewById(R.id.verifying_layout);
+        mVerifyingTextView = view.findViewById(R.id.verifying_textview);
 
-        mTitle.setText(R.string.wifi_dpp_scan_qr_code);
+        setHeaderTitle(R.string.wifi_dpp_scan_qr_code);
         mSummary.setText(R.string.adb_wireless_qrcode_pairing_description);
 
         mErrorMessage = view.findViewById(R.id.error_message);
@@ -198,6 +195,7 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to cancel pairing");
         }
+        getActivity().setResult(Activity.RESULT_CANCELED);
         getActivity().finish();
     }
 
@@ -209,6 +207,15 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        getActivity().getActionBar().hide();
+        // setTitle for TalkBack
+        getActivity().setTitle(R.string.wifi_dpp_scan_qr_code);
     }
 
     @Override
@@ -251,37 +258,13 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     public boolean isValid(String qrCode) {
         try {
             // WIFI:T:ADB;S:myname;P:mypass;;
-            mAdbQrCode = new WifiQrCode(qrCode);
+            mAdbQrCode = new AdbQrCode(qrCode);
         } catch (IllegalArgumentException e) {
-            showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
+            showErrorMessage(R.string.wifi_dpp_qr_code_is_not_valid_format);
             return false;
         }
 
-        // Only accept the zxing format.
-        if (!WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG.equals(mAdbQrCode.getScheme())) {
-            showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
-            Log.w(TAG, "DPP format not supported for ADB QR code");
-            return false;
-        }
-
-        mAdbConfig = mAdbQrCode.getWifiNetworkConfig();
-        if (!WifiQrCode.SECURITY_ADB.equals(mAdbConfig.getSecurity())) {
-            showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
-            Log.w(TAG, "Invalid security type");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(mAdbConfig.getSsid())) {
-            showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
-            Log.w(TAG, "Empty password");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(mAdbConfig.getPreSharedKey())) {
-            showErrorMessage(R.string.wifi_dpp_could_not_detect_valid_qr_code);
-            Log.w(TAG, "Empty password");
-            return false;
-        }
+        mAdbConfig = mAdbQrCode.getAdbNetworkConfig();
 
         return true;
     }
@@ -292,11 +275,14 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         mDecorateView.setFocused(true);
         mQrCameraView.setVisibility(View.GONE);
         mVerifyingView.setVisibility(View.VISIBLE);
+        AdbQrCode.triggerVibrationForQrCodeRecognition(getContext());
+        mVerifyingTextView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
         try {
             mAdbManager.enablePairingByQrCode(mAdbConfig.getSsid(),
                     mAdbConfig.getPreSharedKey());
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to enable QR code pairing");
+            getActivity().setResult(Activity.RESULT_CANCELED);
             getActivity().finish();
         }
     }
@@ -348,4 +334,8 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         message.sendToTarget();
     }
 
+    @Override
+    protected boolean isFooterAvailable() {
+        return false;
+    }
 }

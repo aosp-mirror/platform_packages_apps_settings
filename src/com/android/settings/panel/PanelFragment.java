@@ -32,16 +32,20 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
-import androidx.slice.Slice;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
 import androidx.slice.widget.SliceLiveData;
 
@@ -50,10 +54,14 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.panel.PanelLoggingContract.PanelClosedKeys;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.ThreadUtils;
+
 import com.google.android.setupdesign.DividerItemDecoration;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PanelFragment extends Fragment {
 
@@ -74,17 +82,23 @@ public class PanelFragment extends Fragment {
      */
     private static final int DURATION_SLICE_BINDING_TIMEOUT_MS = 250;
 
-    private View mLayoutView;
+    @VisibleForTesting
+    View mLayoutView;
     private TextView mTitleView;
     private Button mSeeMoreButton;
     private Button mDoneButton;
     private RecyclerView mPanelSlices;
-
     private PanelContent mPanel;
     private MetricsFeatureProvider mMetricsProvider;
     private String mPanelClosedKey;
+    private LinearLayout mPanelHeader;
+    private ImageView mTitleIcon;
+    private TextView mHeaderTitle;
+    private TextView mHeaderSubtitle;
+    private int mMaxHeight;
+    private View mFooterDivider;
 
-    private final List<LiveData<Slice>> mSliceLiveData = new ArrayList<>();
+    private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
     @VisibleForTesting
     PanelSlicesLoaderCountdownLatch mPanelSlicesLoaderCountdownLatch;
@@ -93,16 +107,28 @@ public class PanelFragment extends Fragment {
         return false;
     };
 
+    private final ViewTreeObserver.OnGlobalLayoutListener mPanelLayoutListener =
+            new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (mLayoutView.getHeight() > mMaxHeight) {
+                        final ViewGroup.LayoutParams params = mLayoutView.getLayoutParams();
+                        params.height = mMaxHeight;
+                        mLayoutView.setLayoutParams(params);
+                    }
+                }
+            };
+
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
             new ViewTreeObserver.OnGlobalLayoutListener() {
-        @Override
-        public void onGlobalLayout() {
-            animateIn();
-            if (mPanelSlices != null) {
-                mPanelSlices.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        }
-    };
+                @Override
+                public void onGlobalLayout() {
+                    animateIn();
+                    if (mPanelSlices != null) {
+                        mPanelSlices.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                }
+            };
 
     private PanelSlicesAdapter mAdapter;
 
@@ -111,6 +137,9 @@ public class PanelFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         mLayoutView = inflater.inflate(R.layout.panel_layout, container, false);
+        mLayoutView.getViewTreeObserver()
+                .addOnGlobalLayoutListener(mPanelLayoutListener);
+        mMaxHeight = getResources().getDimensionPixelSize(R.dimen.output_switcher_slice_max_height);
         createPanelContent();
         return mLayoutView;
     }
@@ -119,9 +148,9 @@ public class PanelFragment extends Fragment {
      * Animate the old panel out from the screen, then update the panel with new content once the
      * animation is done.
      * <p>
-     *     Takes the entire panel and animates out from behind the navigation bar.
+     * Takes the entire panel and animates out from behind the navigation bar.
      * <p>
-     *     Call createPanelContent() once animation end.
+     * Call createPanelContent() once animation end.
      */
     void updatePanelWithAnimation() {
         final View panelContent = mLayoutView.findViewById(R.id.panel_container);
@@ -152,50 +181,94 @@ public class PanelFragment extends Fragment {
             activity.finish();
             return;
         }
+        final ViewGroup.LayoutParams params = mLayoutView.getLayoutParams();
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        mLayoutView.setLayoutParams(params);
 
         mPanelSlices = mLayoutView.findViewById(R.id.panel_parent_layout);
         mSeeMoreButton = mLayoutView.findViewById(R.id.see_more);
         mDoneButton = mLayoutView.findViewById(R.id.done);
         mTitleView = mLayoutView.findViewById(R.id.panel_title);
+        mPanelHeader = mLayoutView.findViewById(R.id.panel_header);
+        mTitleIcon = mLayoutView.findViewById(R.id.title_icon);
+        mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
+        mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
+        mFooterDivider = mLayoutView.findViewById(R.id.footer_divider);
 
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
         mPanelSlices.setVisibility(View.GONE);
 
         final Bundle arguments = getArguments();
-        final String panelType =
-                arguments.getString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT);
         final String callingPackageName =
                 arguments.getString(SettingsPanelActivity.KEY_CALLING_PACKAGE_NAME);
-        final String mediaPackageName =
-                arguments.getString(SettingsPanelActivity.KEY_MEDIA_PACKAGE_NAME);
 
-        // TODO (b/124399577) transform interface to take a context and bundle.
         mPanel = FeatureFactory.getFactory(activity)
                 .getPanelFeatureProvider()
-                .getPanel(activity, panelType, mediaPackageName);
+                .getPanel(activity, arguments);
 
         if (mPanel == null) {
             activity.finish();
             return;
         }
 
+        mPanel.registerCallback(new LocalPanelCallback());
+        if (mPanel instanceof LifecycleObserver) {
+            getLifecycle().addObserver((LifecycleObserver) mPanel);
+        }
+
         mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
 
         mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));
-
         // Add predraw listener to remove the animation and while we wait for Slices to load.
         mLayoutView.getViewTreeObserver().addOnPreDrawListener(mOnPreDrawListener);
 
         // Start loading Slices. When finished, the Panel will animate in.
         loadAllSlices();
 
-        mTitleView.setText(mPanel.getTitle());
+        final IconCompat icon = mPanel.getIcon();
+        final CharSequence title = mPanel.getTitle();
+        if (icon == null) {
+            mTitleView.setVisibility(View.VISIBLE);
+            mPanelHeader.setVisibility(View.GONE);
+            mTitleView.setText(title);
+        } else {
+            mTitleView.setVisibility(View.GONE);
+            mPanelHeader.setVisibility(View.VISIBLE);
+            mPanelHeader.setAccessibilityPaneTitle(title);
+            mTitleIcon.setImageIcon(icon.toIcon(getContext()));
+            mHeaderTitle.setText(title);
+            mHeaderSubtitle.setText(mPanel.getSubTitle());
+            if (mPanel.getHeaderIconIntent() != null) {
+                mTitleIcon.setOnClickListener(getHeaderIconListener());
+                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            } else {
+                final int size = getResources().getDimensionPixelSize(
+                        R.dimen.output_switcher_panel_icon_size);
+                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(size, size));
+            }
+        }
+
+        if (mPanel.getViewType() == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
+            mFooterDivider.setVisibility(View.VISIBLE);
+        } else {
+            mFooterDivider.setVisibility(View.GONE);
+        }
+
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());
 
-        // If getSeeMoreIntent() is null, hide the mSeeMoreButton.
-        if (mPanel.getSeeMoreIntent() == null) {
+        if (mPanel.isCustomizedButtonUsed()) {
+            final CharSequence customTitle = mPanel.getCustomizedButtonTitle();
+            if (TextUtils.isEmpty(customTitle)) {
+                mSeeMoreButton.setVisibility(View.GONE);
+            } else {
+                mSeeMoreButton.setVisibility(View.VISIBLE);
+                mSeeMoreButton.setText(customTitle);
+            }
+        } else if (mPanel.getSeeMoreIntent() == null) {
+            // If getSeeMoreIntent() is null hide the mSeeMoreButton.
             mSeeMoreButton.setVisibility(View.GONE);
         }
 
@@ -214,10 +287,14 @@ public class PanelFragment extends Fragment {
         mPanelSlicesLoaderCountdownLatch = new PanelSlicesLoaderCountdownLatch(sliceUris.size());
 
         for (Uri uri : sliceUris) {
-            final LiveData<Slice> sliceLiveData = SliceLiveData.fromUri(getActivity(), uri);
+            final LiveData<Slice> sliceLiveData = SliceLiveData.fromUri(getActivity(), uri,
+                    (int type, Throwable source)-> {
+                            removeSliceLiveData(uri);
+                            mPanelSlicesLoaderCountdownLatch.markSliceLoaded(uri);
+                    });
 
             // Add slice first to make it in order.  Will remove it later if there's an error.
-            mSliceLiveData.add(sliceLiveData);
+            mSliceLiveData.put(uri, sliceLiveData);
 
             sliceLiveData.observe(getViewLifecycleOwner(), slice -> {
                 // If the Slice has already loaded, do nothing.
@@ -228,8 +305,9 @@ public class PanelFragment extends Fragment {
                 /**
                  * Watching for the {@link Slice} to load.
                  * <p>
-                 *     If the Slice comes back {@code null} or with the Error attribute, remove the
-                 *     Slice data from the list, and mark the Slice as loaded.
+                 *     If the Slice comes back {@code null} or with the Error attribute, if slice
+                 *     uri is not in the whitelist, remove the Slice data from the list, otherwise
+                 *     keep the Slice data.
                  * <p>
                  *     If the Slice has come back fully loaded, then mark the Slice as loaded.  No
                  *     other actions required since we already have the Slice data in the list.
@@ -241,7 +319,7 @@ public class PanelFragment extends Fragment {
                  */
                 final SliceMetadata metadata = SliceMetadata.from(getActivity(), slice);
                 if (slice == null || metadata.isErrorSlice()) {
-                    mSliceLiveData.remove(sliceLiveData);
+                    removeSliceLiveData(uri);
                     mPanelSlicesLoaderCountdownLatch.markSliceLoaded(uri);
                 } else if (metadata.getLoadingState() == SliceMetadata.LOADED_ALL) {
                     mPanelSlicesLoaderCountdownLatch.markSliceLoaded(uri);
@@ -258,12 +336,21 @@ public class PanelFragment extends Fragment {
         }
     }
 
+    private void removeSliceLiveData(Uri uri) {
+        final List<String> whiteList = Arrays.asList(
+                getResources().getStringArray(
+                        R.array.config_panel_keep_observe_uri));
+        if (!whiteList.contains(uri.toString())) {
+            mSliceLiveData.remove(uri);
+        }
+    }
+
     /**
      * When all of the Slices have loaded for the first time, then we can setup the
      * {@link RecyclerView}.
      * <p>
-     *     When the Recyclerview has been laid out, we can begin the animation with the
-     *     {@link mOnGlobalLayoutListener}, which calls {@link #animateIn()}.
+     * When the Recyclerview has been laid out, we can begin the animation with the
+     * {@link mOnGlobalLayoutListener}, which calls {@link #animateIn()}.
      */
     private void loadPanelWhenReady() {
         if (mPanelSlicesLoaderCountdownLatch.isPanelReadyToLoad()) {
@@ -274,19 +361,21 @@ public class PanelFragment extends Fragment {
                     .addOnGlobalLayoutListener(mOnGlobalLayoutListener);
             mPanelSlices.setVisibility(View.VISIBLE);
 
-            DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
+            final DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
             itemDecoration
                     .setDividerCondition(DividerItemDecoration.DIVIDER_CONDITION_BOTH);
-            mPanelSlices.addItemDecoration(itemDecoration);
+            if (mPanelSlices.getItemDecorationCount() == 0) {
+                mPanelSlices.addItemDecoration(itemDecoration);
+            }
         }
     }
 
     /**
      * Animate a Panel onto the screen.
      * <p>
-     *     Takes the entire panel and animates in from behind the navigation bar.
+     * Takes the entire panel and animates in from behind the navigation bar.
      * <p>
-     *     Relies on the Panel being having a fixed height to begin the animation.
+     * Relies on the Panel being having a fixed height to begin the animation.
      */
     private void animateIn() {
         final View panelContent = mLayoutView.findViewById(R.id.panel_container);
@@ -317,7 +406,7 @@ public class PanelFragment extends Fragment {
         animatorSet.setInterpolator(new DecelerateInterpolator());
         animatorSet.playTogether(
                 ObjectAnimator.ofFloat(sheet, View.TRANSLATION_Y, startY, endY),
-                ObjectAnimator.ofFloat(sheet, View.ALPHA, startAlpha,endAlpha));
+                ObjectAnimator.ofFloat(sheet, View.ALPHA, startAlpha, endAlpha));
         return animatorSet;
     }
 
@@ -329,6 +418,9 @@ public class PanelFragment extends Fragment {
             mPanelClosedKey = PanelClosedKeys.KEY_OTHERS;
         }
 
+        if (mLayoutView != null) {
+            mLayoutView.getViewTreeObserver().removeOnGlobalLayoutListener(mPanelLayoutListener);
+        }
         mMetricsProvider.action(
                 0 /* attribution */,
                 SettingsEnums.PAGE_HIDE,
@@ -341,9 +433,13 @@ public class PanelFragment extends Fragment {
     View.OnClickListener getSeeMoreListener() {
         return (v) -> {
             mPanelClosedKey = PanelClosedKeys.KEY_SEE_MORE;
-            final FragmentActivity activity = getActivity();
-            activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
-            activity.finish();
+            if (mPanel.isCustomizedButtonUsed()) {
+                mPanel.onClickCustomizedButton();
+            } else {
+                final FragmentActivity activity = getActivity();
+                activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
+                activity.finish();
+            }
         };
     }
 
@@ -353,5 +449,49 @@ public class PanelFragment extends Fragment {
             mPanelClosedKey = PanelClosedKeys.KEY_DONE;
             getActivity().finish();
         };
+    }
+
+    @VisibleForTesting
+    View.OnClickListener getHeaderIconListener() {
+        return (v) -> {
+            final FragmentActivity activity = getActivity();
+            activity.startActivity(mPanel.getHeaderIconIntent());
+        };
+    }
+
+    int getPanelViewType() {
+        return mPanel.getViewType();
+    }
+
+    class LocalPanelCallback implements PanelContentCallback {
+
+        @Override
+        public void onCustomizedButtonStateChanged() {
+            ThreadUtils.postOnMainThread(() -> {
+                mSeeMoreButton.setVisibility(
+                        mPanel.isCustomizedButtonUsed() ? View.VISIBLE : View.GONE);
+                mSeeMoreButton.setText(mPanel.getCustomizedButtonTitle());
+            });
+        }
+
+        @Override
+        public void onHeaderChanged() {
+            ThreadUtils.postOnMainThread(() -> {
+                mTitleIcon.setImageIcon(mPanel.getIcon().toIcon(getContext()));
+                mHeaderTitle.setText(mPanel.getTitle());
+                mHeaderSubtitle.setText(mPanel.getSubTitle());
+            });
+        }
+
+        @Override
+        public void forceClose() {
+            mPanelClosedKey = PanelClosedKeys.KEY_OTHERS;
+            getFragmentActivity().finish();
+        }
+
+        @VisibleForTesting
+        FragmentActivity getFragmentActivity() {
+            return getActivity();
+        }
     }
 }

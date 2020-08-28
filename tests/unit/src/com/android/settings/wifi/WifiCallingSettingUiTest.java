@@ -28,7 +28,6 @@ import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.junit.Assert.assertEquals;
 import static org.junit.matchers.JUnitMatchers.containsString;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
@@ -39,13 +38,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.test.uiautomator.UiDevice;
 import android.telephony.SubscriptionInfo;
+import android.telephony.ims.ImsMmTelManager;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.SubscriptionController;
 import com.android.settings.testutils.MockedServiceManager;
@@ -88,6 +87,10 @@ public class WifiCallingSettingUiTest {
     ImsManager mImsManager0;
     @Mock
     ImsManager mImsManager1;
+    @Mock
+    ImsMmTelManager mImsMmTelManager0;
+    @Mock
+    ImsMmTelManager mImsMmTelManager1;
 
     @Before
     public void setUp() throws Exception {
@@ -136,10 +139,10 @@ public class WifiCallingSettingUiTest {
     public void testSingleSimUi() throws InterruptedException {
         configureSingleSim();
         doReturn(true).when(mImsManager0).isWfcEnabledByUser();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED)
-                .when(mImsManager0).getWfcMode();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED)
-                .when(mImsManager0).getWfcMode(anyBoolean());
+        doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+                .when(mImsMmTelManager0).getVoWiFiModeSetting();
+        doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+                .when(mImsMmTelManager0).getVoWiFiRoamingModeSetting();
 
         mInstrumentation.startActivitySync(createActivityIntent());
 
@@ -181,10 +184,10 @@ public class WifiCallingSettingUiTest {
         doReturn(false).when(mImsManager1).isWfcEnabledByPlatform();
         doReturn(false).when(mImsManager1).isNonTtyOrTtyOnVolteEnabled();
         doReturn(false).when(mImsManager0).isWfcEnabledByUser();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED)
-                .when(mImsManager0).getWfcMode();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED)
-                .when(mImsManager0).getWfcMode(anyBoolean());
+        doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+                .when(mImsMmTelManager0).getVoWiFiModeSetting();
+        doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+                .when(mImsMmTelManager0).getVoWiFiRoamingModeSetting();
 
         Activity activity = mInstrumentation.startActivitySync(createActivityIntent());
 
@@ -200,10 +203,10 @@ public class WifiCallingSettingUiTest {
     public void testWfcDisabled() throws InterruptedException {
         configureSingleSim();
         doReturn(false).when(mImsManager0).isWfcEnabledByUser();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED)
-                .when(mImsManager0).getWfcMode();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED)
-                .when(mImsManager0).getWfcMode(anyBoolean());
+        doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+                .when(mImsMmTelManager0).getVoWiFiModeSetting();
+        doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+                .when(mImsMmTelManager0).getVoWiFiRoamingModeSetting();
 
         Activity activity = mInstrumentation.startActivitySync(createActivityIntent());
 
@@ -220,10 +223,10 @@ public class WifiCallingSettingUiTest {
         configureDualSim();
         doReturn(true).when(mImsManager0).isWfcEnabledByUser();
         doReturn(false).when(mImsManager1).isWfcEnabledByUser();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED)
-                .when(mImsManager0).getWfcMode();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED)
-                .when(mImsManager0).getWfcMode(anyBoolean());
+        doReturn(ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED)
+                .when(mImsMmTelManager0).getVoWiFiModeSetting();
+        doReturn(ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED)
+                .when(mImsMmTelManager0).getVoWiFiRoamingModeSetting();
 
         mInstrumentation.startActivitySync(createActivityIntent());
 
@@ -258,6 +261,7 @@ public class WifiCallingSettingUiTest {
                 com.android.settings.Settings.WifiCallingSettingsActivity.class);
         intent.setPackage("com.android.settings");
         intent.setAction("android.intent.action.MAIN");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
 

@@ -23,13 +23,16 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.res.Resources;
 
@@ -57,6 +60,7 @@ import org.robolectric.shadow.api.Shadow;
 @Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothPairingDetailTest {
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
+    private static final String TEST_DEVICE_ADDRESS_B = "00:B1:B1:B1:B1:B1";
 
     @Mock
     private Resources mResource;
@@ -82,6 +86,7 @@ public class BluetoothPairingDetailTest {
         mFragment = spy(new BluetoothPairingDetail());
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mResource).when(mFragment).getResources();
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
 
         mAvailableDevicesCategory = spy(new BluetoothProgressCategory(mContext));
         mFooterPreference = new FooterPreference(mContext);
@@ -218,13 +223,85 @@ public class BluetoothPairingDetailTest {
     }
 
     @Test
-    public void onConnectionStateChanged_connected_finish() {
-        mFragment.mSelectedDevice = mBluetoothDevice;
-        doReturn(mBluetoothDevice).when(mCachedBluetoothDevice).getDevice();
+    public void onProfileConnectionStateChanged_deviceInSelectedListAndConnected_finish() {
+        final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_B);
+        mFragment.mSelectedList.add(mBluetoothDevice);
+        mFragment.mSelectedList.add(device);
 
-        mFragment.onConnectionStateChanged(mCachedBluetoothDevice,
-                BluetoothAdapter.STATE_CONNECTED);
+        when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(device);
+
+        mFragment.onProfileConnectionStateChanged(mCachedBluetoothDevice,
+                BluetoothProfile.A2DP, BluetoothAdapter.STATE_CONNECTED);
 
         verify(mFragment).finish();
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_deviceNotInSelectedList_doNothing() {
+        final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_B);
+        mFragment.mSelectedList.add(device);
+
+        when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+
+        mFragment.onProfileConnectionStateChanged(mCachedBluetoothDevice,
+                BluetoothProfile.A2DP, BluetoothAdapter.STATE_CONNECTED);
+
+        // not crash
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_deviceDisconnected_doNothing() {
+        final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_B);
+        mFragment.mSelectedList.add(mBluetoothDevice);
+        mFragment.mSelectedList.add(device);
+
+        when(mCachedBluetoothDevice.isConnected()).thenReturn(false);
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(device);
+
+        mFragment.onProfileConnectionStateChanged(mCachedBluetoothDevice,
+                BluetoothProfile.A2DP, BluetoothAdapter.STATE_DISCONNECTED);
+
+        // not crash
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_deviceInPreferenceMapAndConnected_removed() {
+        final BluetoothDevicePreference preference =
+                new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                true, BluetoothDevicePreference.SortType.TYPE_FIFO);
+        final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
+        mFragment.mDevicePreferenceMap.put(mCachedBluetoothDevice, preference);
+
+        when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(device);
+
+        mFragment.onProfileConnectionStateChanged(mCachedBluetoothDevice,
+                BluetoothProfile.A2DP, BluetoothAdapter.STATE_CONNECTED);
+
+        assertThat(mFragment.mDevicePreferenceMap.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_deviceNotInPreferenceMap_doNothing() {
+        final CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
+        final BluetoothDevicePreference preference =
+                new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                        true, BluetoothDevicePreference.SortType.TYPE_FIFO);
+        final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
+        final BluetoothDevice device2 = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_B);
+        mFragment.mDevicePreferenceMap.put(mCachedBluetoothDevice, preference);
+
+        when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(device);
+        when(cachedDevice.isConnected()).thenReturn(true);
+        when(cachedDevice.getDevice()).thenReturn(device2);
+        when(cachedDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS_B);
+
+        mFragment.onProfileConnectionStateChanged(cachedDevice, BluetoothProfile.A2DP,
+                BluetoothAdapter.STATE_CONNECTED);
+
+        // not crash
     }
 }

@@ -119,8 +119,8 @@ public class TimeSpentInAppPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_shouldQueryAppFeatureProvider() {
-        mController.getSummary();
+    public void getSummaryTextInBackground_shouldQueryAppFeatureProvider() {
+        mController.getSummaryTextInBackground();
 
         verify(mFeatureFactory.applicationFeatureProvider).getTimeSpentInApp(
                 nullable(String.class));

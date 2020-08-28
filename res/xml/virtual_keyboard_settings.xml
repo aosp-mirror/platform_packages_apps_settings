@@ -16,12 +16,13 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="virtual_keyboard_category"
     android:title="@string/virtual_keyboard_category">
     <!-- Enabled input method list will be populated programmatically here. -->
     <Preference
+        android:icon="@drawable/ic_add_24dp"
         android:key="add_virtual_keyboard_screen"
         android:title="@string/add_virtual_keyboard"
+        android:order="1000"
         android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment"
-        settings:searchable="false"/>
+        settings:controller="com.android.settings.inputmethod.InputMethodPreferenceController" />
 </PreferenceScreen>

@@ -66,6 +66,7 @@ import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -572,6 +573,7 @@ public class BatteryUtilsTest {
         assertThat(mBatteryUtils.isPreOApp(new String[]{})).isFalse();
     }
 
+    @Ignore
     @Test
     public void testSetForceAppStandby_forcePreOApp_forceTwoRestrictions() {
         mBatteryUtils.setForceAppStandby(UID, LOW_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
@@ -583,6 +585,7 @@ public class BatteryUtilsTest {
                 AppOpsManager.MODE_IGNORED);
     }
 
+    @Ignore
     @Test
     public void testSetForceAppStandby_forceOApp_forceOneRestriction() {
         mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);

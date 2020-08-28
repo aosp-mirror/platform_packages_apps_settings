@@ -20,12 +20,13 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
-import android.provider.DeviceConfig;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.Utils;
+import androidx.preference.Preference;
+
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.After;
@@ -66,7 +67,7 @@ public class AccessibilityUsagePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_noEnabledServices_shouldReturnUnsupported() {
         mAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
-        AccessibilityUsagePreferenceController controller =
+        final AccessibilityUsagePreferenceController controller =
                 new AccessibilityUsagePreferenceController(mContext, "test_key");
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
@@ -76,9 +77,22 @@ public class AccessibilityUsagePreferenceControllerTest {
     public void getAvailabilityStatus_enabledServices_shouldReturnAvailable() {
         mAccessibilityManager.setEnabledAccessibilityServiceList(
                 new ArrayList<>(Arrays.asList(new AccessibilityServiceInfo())));
-        AccessibilityUsagePreferenceController controller =
+        final AccessibilityUsagePreferenceController controller =
                 new AccessibilityUsagePreferenceController(mContext, "test_key");
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void updateState_noEnabledServices_shouldHidePreference() {
+        mAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
+        final AccessibilityUsagePreferenceController controller =
+                new AccessibilityUsagePreferenceController(mContext, "test_key");
+        final Preference preference = new Preference(mContext);
+        preference.setVisible(true);
+
+        controller.updateState(preference);
+
+        assertThat(preference.isVisible()).isFalse();
     }
 }

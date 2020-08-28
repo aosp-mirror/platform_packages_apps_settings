@@ -18,8 +18,8 @@ package com.android.settings.core;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.List;
 
@@ -61,5 +61,13 @@ public interface PreferenceControllerMixin {
      * Called by SearchIndexProvider#getRawDataToIndex
      */
     default void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
+    }
+
+    /**
+     * Updates dynamic raw data for search provider.
+     *
+     * Called by SearchIndexProvider#getDynamicRawDataToIndex
+     */
+    default void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
     }
 }

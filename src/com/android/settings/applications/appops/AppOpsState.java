@@ -618,7 +618,7 @@ public class AppOpsState {
 
                         }
                         AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
-                                permOps.get(k), AppOpsManager.MODE_ALLOWED);
+                                permOps.get(k), AppOpsManager.MODE_ALLOWED, Collections.emptyMap());
                         dummyOps.add(opEntry);
                         addOp(entries, pkgOps, appEntry, opEntry, packageName == null,
                                 packageName == null ? 0 : opToOrder[opEntry.getOp()]);

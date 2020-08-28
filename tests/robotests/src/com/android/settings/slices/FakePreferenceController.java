@@ -42,6 +42,11 @@ public class FakePreferenceController extends BasePreferenceController {
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean useDynamicSliceSummary() {
         return true;
     }

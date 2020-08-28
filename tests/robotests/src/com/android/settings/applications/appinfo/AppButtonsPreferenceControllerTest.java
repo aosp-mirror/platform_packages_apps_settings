@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.applications.appinfo.AppButtonsPreferenceController.KEY_REMOVE_TASK_WHEN_FINISHING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,7 +36,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -117,6 +118,8 @@ public class AppButtonsPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock
     private PackageInfo mPackageInfo;
+    @Mock
+    private PreferenceScreen mScreen;
 
     private Context mContext;
     private Intent mUninstallIntent;
@@ -275,12 +278,45 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void updateUninstallButton_isProfileOrDeviceOwner_setButtonDisable() {
+    public void updateUninstallButton_isSystemAndIsProfileOrDeviceOwner_setButtonDisable() {
+        doReturn(true).when(mController).isSystemPackage(any(), any(), any());
         doReturn(true).when(mDpm).isDeviceOwnerAppOnAnyUser(anyString());
 
         mController.updateUninstallButton();
 
         verify(mButtonPrefs).setButton2Enabled(false);
+    }
+
+    @Test
+    public void updateUninstallButton_isSystemAndIsNotProfileOrDeviceOwner_setButtonEnabled() {
+        doReturn(true).when(mController).isSystemPackage(any(), any(), any());
+        doReturn(false).when(mDpm).isDeviceOwnerAppOnAnyUser(anyString());
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(true);
+    }
+
+    @Test
+    public void updateUninstallButton_isNotSystemAndIsProfileOrDeviceOwner_setButtonDisable() {
+        doReturn(false).when(mController).isSystemPackage(any(), any(), any());
+        doReturn(0).when(mDpm).getDeviceOwnerUserId();
+        doReturn(true).when(mDpm).isDeviceOwnerApp(anyString());
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(false);
+    }
+
+    @Test
+    public void updateUninstallButton_isNotSystemAndIsNotProfileOrDeviceOwner_setButtonEnabled() {
+        doReturn(false).when(mController).isSystemPackage(any(), any(), any());
+        doReturn(10).when(mDpm).getDeviceOwnerUserId();
+        doReturn(false).when(mDpm).isDeviceOwnerApp(anyString());
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(true);
     }
 
     @Test
@@ -440,6 +476,20 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
+    public void refreshUi_buttonPreferenceNull_shouldNotCrash()
+            throws PackageManager.NameNotFoundException {
+        doReturn(AppButtonsPreferenceController.AVAILABLE)
+                .when(mController).getAvailabilityStatus();
+        doReturn(mPackageInfo).when(mPackageManger).getPackageInfo(anyString(), anyInt());
+        doReturn(mButtonPrefs).when(mScreen).findPreference(anyString());
+        mController.displayPreference(mScreen);
+        mController.mButtonsPref = null;
+
+        // Should not crash in this method
+        assertThat(mController.refreshUi()).isTrue();
+    }
+
+    @Test
     public void onPackageListChanged_available_shouldRefreshUi() {
         doReturn(AppButtonsPreferenceController.AVAILABLE)
                 .when(mController).getAvailabilityStatus();
@@ -469,6 +519,43 @@ public class AppButtonsPreferenceControllerTest {
                 AppButtonsPreferenceController.DISABLED_FOR_USER);
     }
 
+    @Test
+    public void handleActivityResult_onAppUninstall_removeTask() {
+        mController.handleActivityResult(REQUEST_UNINSTALL, 0, new Intent());
+
+        ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mSettingsActivity).finishPreferencePanel(anyInt(), argumentCaptor.capture());
+
+        final Intent i = argumentCaptor.getValue();
+        assertThat(i).isNotNull();
+        assertThat(i.getBooleanExtra(KEY_REMOVE_TASK_WHEN_FINISHING, false)).isTrue();
+    }
+
+    @Test
+    public void handleActivityResult_onAppNotUninstall_persistTask() {
+        mController.handleActivityResult(REQUEST_UNINSTALL + 1, 0, new Intent());
+
+        ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mSettingsActivity).finishPreferencePanel(anyInt(), argumentCaptor.capture());
+
+        final Intent i = argumentCaptor.getValue();
+        assertThat(i).isNotNull();
+        assertThat(i.getBooleanExtra(KEY_REMOVE_TASK_WHEN_FINISHING, false)).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void isAvailable_nonMainlineModule_isTrue() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void isAvailable_mainlineModule_isFalse() {
+        ShadowAppUtils.addMainlineModule(mController.mPackageName);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
     /**
      * The test fragment which implements
      * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
@@ -489,11 +576,19 @@ public class AppButtonsPreferenceControllerTest {
 
     private ActionButtonsPreference createMock() {
         final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
+        when(pref.setButton1Text(anyInt())).thenReturn(pref);
+        when(pref.setButton1Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
         when(pref.setButton2Text(anyInt())).thenReturn(pref);
         when(pref.setButton2Icon(anyInt())).thenReturn(pref);
         when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
         when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
         when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+        when(pref.setButton3Text(anyInt())).thenReturn(pref);
+        when(pref.setButton3Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton3Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton3OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         return pref;
     }
@@ -515,14 +610,20 @@ public class AppButtonsPreferenceControllerTest {
     public static class ShadowAppUtils {
 
         public static Set<String> sSystemModules = new ArraySet<>();
+        public static Set<String> sMainlineModules = new ArraySet<>();
 
         @Resetter
         public static void reset() {
             sSystemModules.clear();
+            sMainlineModules.clear();
         }
 
         public static void addHiddenModule(String pkg) {
             sSystemModules.add(pkg);
+        }
+
+        public static void addMainlineModule(String pkg) {
+            sMainlineModules.add(pkg);
         }
 
         @Implementation
@@ -533,6 +634,11 @@ public class AppButtonsPreferenceControllerTest {
         @Implementation
         protected static boolean isSystemModule(Context context, String packageName) {
             return sSystemModules.contains(packageName);
+        }
+
+        @Implementation
+        protected static boolean isMainlineModule(PackageManager pm, String packageName) {
+            return sMainlineModules.contains(packageName);
         }
     }
 }

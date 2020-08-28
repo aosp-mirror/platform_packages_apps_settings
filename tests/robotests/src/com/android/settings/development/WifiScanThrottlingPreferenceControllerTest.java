@@ -16,16 +16,11 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.WifiScanThrottlingPreferenceController.SETTING_THROTTLING_ENABLE_VALUE_OFF;
-import static com.android.settings.development.WifiScanThrottlingPreferenceController.SETTING_THROTTLING_ENABLE_VALUE_ON;
-
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.net.wifi.WifiManager;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -36,7 +31,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiScanThrottlingPreferenceControllerTest {
@@ -45,14 +39,16 @@ public class WifiScanThrottlingPreferenceControllerTest {
     private SwitchPreference mPreference;
     @Mock
     private PreferenceScreen mPreferenceScreen;
-
+    @Mock
     private Context mContext;
+    @Mock
+    private WifiManager mWifiManager;
     private WifiScanThrottlingPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         mController = new WifiScanThrottlingPreferenceController(mContext);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
                 .thenReturn(mPreference);
@@ -63,27 +59,19 @@ public class WifiScanThrottlingPreferenceControllerTest {
     public void onPreferenceChanged_turnOnScanThrottling() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_THROTTLE_ENABLED, 1 /* default */);
-
-        assertThat(mode).isEqualTo(SETTING_THROTTLING_ENABLE_VALUE_ON);
+        verify(mWifiManager).setScanThrottleEnabled(true);
     }
 
     @Test
     public void onPreferenceChanged_turnOffScanThrottling() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_THROTTLE_ENABLED, 1 /* default */);
-
-        assertThat(mode).isEqualTo(SETTING_THROTTLING_ENABLE_VALUE_OFF);
+        verify(mWifiManager).setScanThrottleEnabled(false);
     }
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_THROTTLE_ENABLED,
-                SETTING_THROTTLING_ENABLE_VALUE_ON);
+        when(mWifiManager.isScanThrottleEnabled()).thenReturn(true);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -91,9 +79,7 @@ public class WifiScanThrottlingPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_THROTTLE_ENABLED,
-                SETTING_THROTTLING_ENABLE_VALUE_OFF);
+        when(mWifiManager.isScanThrottleEnabled()).thenReturn(false);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
@@ -102,10 +88,7 @@ public class WifiScanThrottlingPreferenceControllerTest {
     @Test
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_THROTTLE_ENABLED, 1 /* default */);
-
-        assertThat(mode).isEqualTo(SETTING_THROTTLING_ENABLE_VALUE_ON);
+        verify(mWifiManager).setScanThrottleEnabled(true);
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(true);
     }

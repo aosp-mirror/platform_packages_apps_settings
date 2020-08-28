@@ -27,8 +27,7 @@
         android:icon="@drawable/ic_android"
         android:summary="summary"
         settings:controller="com.android.settings.slices.FakePreferenceController"
-        settings:keywords="keyword"
-        settings:platform_slice="true"/>
+        settings:keywords="keyword"/>
 
     <Preference
         android:key="key2"
@@ -37,7 +36,6 @@
         android:summary="summary"
         settings:controller="com.android.settings.slices.FakePreferenceController"
         settings:keywords="keyword"
-        settings:platform_slice="true"
         settings:unavailableSliceSubtitle="subtitleOfUnavailable"/>
 
 </PreferenceScreen>

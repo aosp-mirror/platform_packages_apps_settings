@@ -73,6 +73,8 @@ public class BatteryFixSlice implements CustomSliceable {
         UNIMPORTANT_BATTERY_TIPS = new ArrayMap<>();
         UNIMPORTANT_BATTERY_TIPS.put(BatteryTip.TipType.SUMMARY,
                 Arrays.asList(BatteryTip.StateType.NEW, BatteryTip.StateType.HANDLED));
+        UNIMPORTANT_BATTERY_TIPS.put(BatteryTip.TipType.HIGH_DEVICE_USAGE,
+                Arrays.asList(BatteryTip.StateType.NEW, BatteryTip.StateType.HANDLED));
         UNIMPORTANT_BATTERY_TIPS.put(BatteryTip.TipType.BATTERY_SAVER,
                 Arrays.asList(BatteryTip.StateType.HANDLED));
     }
@@ -201,7 +203,8 @@ public class BatteryFixSlice implements CustomSliceable {
     }
 
     @WorkerThread
-    private static List<BatteryTip> refreshBatteryTips(Context context) {
+    @VisibleForTesting
+    static List<BatteryTip> refreshBatteryTips(Context context) {
         final BatteryStatsHelperLoader statsLoader = new BatteryStatsHelperLoader(context);
         final BatteryStatsHelper statsHelper = statsLoader.loadInBackground();
         final BatteryTipLoader loader = new BatteryTipLoader(context, statsHelper);

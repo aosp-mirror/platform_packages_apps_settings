@@ -17,25 +17,28 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="zen_mode_restrict_settings_page"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/zen_mode_restrict_notifications_title">
 
     <PreferenceCategory
         android:key="restrict_category"
-        android:title="@string/zen_mode_settings_category">
-        <com.android.settings.notification.ZenCustomRadioButtonPreference
+        android:title="@string/zen_mode_restrict_notifications_category">
+        <com.android.settings.notification.zen.ZenCustomRadioButtonPreference
             android:key="zen_mute_notifications"
             android:title="@string/zen_mode_restrict_notifications_mute"
-            android:summary="@string/zen_mode_restrict_notifications_mute_summary"/>
+            android:summary="@string/zen_mode_restrict_notifications_mute_summary"
+            settings:searchable="false"/>
 
-        <com.android.settings.notification.ZenCustomRadioButtonPreference
+        <com.android.settings.notification.zen.ZenCustomRadioButtonPreference
             android:key="zen_hide_notifications"
             android:title="@string/zen_mode_restrict_notifications_hide"
-            android:summary="@string/zen_mode_restrict_notifications_hide_summary"/>
+            android:summary="@string/zen_mode_restrict_notifications_hide_summary"
+            settings:searchable="false"/>
 
-        <com.android.settings.notification.ZenCustomRadioButtonPreference
+        <com.android.settings.notification.zen.ZenCustomRadioButtonPreference
             android:key="zen_custom"
-            android:title="@string/zen_mode_restrict_notifications_custom" />
+            android:title="@string/zen_mode_restrict_notifications_custom"
+            settings:searchable="false"/>
 
     </PreferenceCategory>
     <com.android.settingslib.widget.FooterPreference />

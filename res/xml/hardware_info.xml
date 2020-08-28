@@ -18,7 +18,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="hardware_info_screen"
     android:title="@string/hardware_info"
     settings:keywords="@string/keywords_model_and_hardware">
 
@@ -27,6 +26,7 @@
         android:key="hardware_info_device_model"
         android:title="@string/model_info"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:controller="com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController"
         settings:enableCopying="true"/>
 
@@ -35,6 +35,7 @@
         android:key="hardware_info_device_serial"
         android:title="@string/status_serial_number"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:controller="com.android.settings.deviceinfo.hardwareinfo.SerialNumberPreferenceController"
         settings:enableCopying="true"/>
 
@@ -43,6 +44,7 @@
         android:key="hardware_info_device_revision"
         android:title="@string/hardware_revision"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:controller="com.android.settings.deviceinfo.hardwareinfo.HardwareRevisionPreferenceController"
         settings:enableCopying="true"/>
 

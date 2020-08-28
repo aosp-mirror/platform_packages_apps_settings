@@ -15,85 +15,44 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
-    android:key="captioning_preference_screen"
-    android:title="@string/accessibility_captioning_title" >
+    android:persistent="false"
+    android:title="@string/accessibility_captioning_title">
 
     <com.android.settingslib.widget.LayoutPreference
-        android:key="caption_preview"
+        android:key="captions_preview"
+        android:layout="@layout/accessibility_captions_preview"
+        android:persistent="false"
+        android:selectable="false"
         android:title="@string/summary_placeholder"
-        android:layout="@layout/captioning_preview"
-        settings:searchable="false"/>
+        settings:allowDividerBelow="true"
+        settings:searchable="false" />
 
-    <PreferenceCategory
-        android:key="standard"
-        android:title="@string/captioning_standard_options_title" >
-        <SwitchPreference
-            android:key="captioning_preference_switch"
-            android:title="@string/accessibility_caption_master_switch_title" />
+    <SwitchPreference
+        android:key="captioning_preference_switch"
+        android:persistent="false"
+        android:summary="@string/accessibility_caption_master_switch_summary"
+        android:title="@string/accessibility_caption_master_switch_title"
+        settings:allowDividerAbove="true" />
 
-        <ListPreference
-            android:entries="@array/captioning_font_size_selector_titles"
-            android:entryValues="@array/captioning_font_size_selector_values"
-            android:key="captioning_font_size"
-            android:summary="%s"
-            android:title="@string/captioning_text_size" />
+    <Preference
+        android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment"
+        android:key="captioning_caption_appearance"
+        android:persistent="false"
+        android:title="@string/captioning_caption_appearance_title" />
 
-        <com.android.settings.accessibility.PresetPreference
-            android:key="captioning_preset"
-            android:title="@string/captioning_preset" />
-
-        <com.android.settings.accessibility.LocalePreference
-            android:key="captioning_locale"
-            android:summary="%s"
-            android:title="@string/captioning_locale" />
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:key="custom"
-        android:title="@string/captioning_custom_options_title" >
-        <ListPreference
-            android:entries="@array/captioning_typeface_selector_titles"
-            android:entryValues="@array/captioning_typeface_selector_values"
-            android:key="captioning_typeface"
-            android:summary="%s"
-            android:title="@string/captioning_typeface" />
-
-        <com.android.settings.accessibility.ColorPreference
-            android:key="captioning_foreground_color"
-            android:title="@string/captioning_foreground_color" />
-        <com.android.settings.accessibility.ColorPreference
-            android:dependency="captioning_foreground_color"
-            android:key="captioning_foreground_opacity"
-            android:title="@string/captioning_foreground_opacity" />
-
-        <com.android.settings.accessibility.EdgeTypePreference
-            android:key="captioning_edge_type"
-            android:title="@string/captioning_edge_type" />
-
-        <com.android.settings.accessibility.ColorPreference
-            android:dependency="captioning_edge_type"
-            android:key="captioning_edge_color"
-            android:title="@string/captioning_edge_color" />
-        <com.android.settings.accessibility.ColorPreference
-            android:key="captioning_background_color"
-            android:title="@string/captioning_background_color" />
-        <com.android.settings.accessibility.ColorPreference
-            android:dependency="captioning_background_color"
-            android:key="captioning_background_opacity"
-            android:title="@string/captioning_background_opacity" />
-        <com.android.settings.accessibility.ColorPreference
-            android:key="captioning_window_color"
-            android:title="@string/captioning_window_color" />
-        <com.android.settings.accessibility.ColorPreference
-            android:dependency="captioning_window_color"
-            android:key="captioning_window_opacity"
-            android:title="@string/captioning_window_opacity" />
-    </PreferenceCategory>
+    <Preference
+        android:fragment="com.android.settings.accessibility.CaptionMoreOptionsFragment"
+        android:key="captioning_more_options"
+        android:persistent="false"
+        android:title="@string/captioning_more_options_title" />
 
     <com.android.settingslib.widget.FooterPreference
+        android:persistent="false"
+        android:selectable="false"
         android:title="@string/accessibility_caption_preference_summary"
-        android:selectable="false" />
+        settings:searchable="false"/>
 
 </PreferenceScreen>

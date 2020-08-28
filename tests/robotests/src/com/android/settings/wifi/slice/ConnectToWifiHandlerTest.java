@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,7 +59,7 @@ public class ConnectToWifiHandlerTest {
 
         mContext = RuntimeEnvironment.application;
         mHandler = new ConnectToWifiHandler();
-        mWifiConfig = new WifiConfiguration();
+        mWifiConfig = spy(new WifiConfiguration());
         mWifiConfig.SSID = AP_SSID;
         doReturn(mWifiConfig).when(mAccessPoint).getConfig();
     }
@@ -97,9 +99,9 @@ public class ConnectToWifiHandlerTest {
     public void connect_shouldConnectToSavedSecuredNetwork() {
         when(mAccessPoint.isSaved()).thenReturn(true);
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_PSK);
-        final NetworkSelectionStatus status = new NetworkSelectionStatus();
-        status.setHasEverConnected(true);
-        mWifiConfig.setNetworkSelectionStatus(status);
+        final NetworkSelectionStatus status = mock(NetworkSelectionStatus.class);
+        when(status.hasEverConnected()).thenReturn(true);
+        when(mWifiConfig.getNetworkSelectionStatus()).thenReturn(status);
 
         mHandler.connect(mContext, mAccessPoint);
 

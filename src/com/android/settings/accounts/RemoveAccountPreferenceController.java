@@ -40,10 +40,12 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.io.IOException;
@@ -53,20 +55,23 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
 
     private static final String KEY_REMOVE_ACCOUNT = "remove_account";
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private Account mAccount;
     private Fragment mParentFragment;
     private UserHandle mUserHandle;
+    private LayoutPreference mRemoveAccountPreference;
 
     public RemoveAccountPreferenceController(Context context, Fragment parent) {
         super(context);
         mParentFragment = parent;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference removeAccountPreference = screen.findPreference(KEY_REMOVE_ACCOUNT);
-        Button removeAccountButton = (Button) removeAccountPreference.findViewById(R.id.button);
+        mRemoveAccountPreference = screen.findPreference(KEY_REMOVE_ACCOUNT);
+        final Button removeAccountButton = mRemoveAccountPreference.findViewById(R.id.button);
         removeAccountButton.setOnClickListener(this);
     }
 
@@ -82,6 +87,8 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
 
     @Override
     public void onClick(View v) {
+        mMetricsFeatureProvider.logClickedPreference(mRemoveAccountPreference,
+                mMetricsFeatureProvider.getMetricsCategory(mParentFragment));
         if (mUserHandle != null) {
             final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                     mContext, UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier());

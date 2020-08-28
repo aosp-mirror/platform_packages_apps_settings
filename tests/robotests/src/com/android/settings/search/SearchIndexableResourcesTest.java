@@ -21,7 +21,6 @@ import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXAB
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.fail;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -32,6 +31,7 @@ import android.text.TextUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.wifi.WifiSettings;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
 import org.junit.Before;
@@ -65,11 +65,11 @@ public class SearchIndexableResourcesTest {
                 .doesNotContain(String.class);
         final int beforeCount =
                 mSearchProvider.getSearchIndexableResources().getProviderValues().size();
-
-        mSearchProvider.getSearchIndexableResources().addIndex(String.class);
+        final SearchIndexableData testBundle = new SearchIndexableData(null, null);
+        mSearchProvider.getSearchIndexableResources().addIndex(testBundle);
 
         assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
-                .contains(String.class);
+                .contains(testBundle);
         final int afterCount =
                 mSearchProvider.getSearchIndexableResources().getProviderValues().size();
         assertThat(afterCount).isEqualTo(beforeCount + 1);
@@ -77,14 +77,22 @@ public class SearchIndexableResourcesTest {
 
     @Test
     public void testIndexHasWifiSettings() {
-        assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
-                .contains(WifiSettings.class);
+        boolean hasWifi = false;
+        for (SearchIndexableData bundle :
+                mSearchProvider.getSearchIndexableResources().getProviderValues()) {
+            if (bundle.getTargetClass().getName().equals(WifiSettings.class.getName())) {
+                hasWifi = true;
+                break;
+            }
+        }
+        assertThat(hasWifi).isTrue();
     }
 
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
         mSearchProvider.getSearchIndexableResources().getProviderValues().clear();
-        mSearchProvider.getSearchIndexableResources().addIndex(FakeIndexProvider.class);
+        mSearchProvider.getSearchIndexableResources().addIndex(
+                new SearchIndexableData(null, FakeIndexProvider.SEARCH_INDEX_DATA_PROVIDER));
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 
@@ -105,9 +113,10 @@ public class SearchIndexableResourcesTest {
 
     @Test
     public void testAllClassNamesHaveProviders() {
-        for (Class clazz : mSearchProvider.getSearchIndexableResources().getProviderValues()) {
-            if (DatabaseIndexingUtils.getSearchIndexProvider(clazz) == null) {
-                fail(clazz.getName() + "is not an index provider");
+        for (SearchIndexableData data :
+                mSearchProvider.getSearchIndexableResources().getProviderValues()) {
+            if (DatabaseIndexingUtils.getSearchIndexProvider(data.getTargetClass()) == null) {
+                fail(data.getTargetClass().getName() + "is not an index provider");
             }
         }
     }

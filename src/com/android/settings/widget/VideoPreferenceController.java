@@ -22,14 +22,13 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class VideoPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, OnResume, OnPause {
+        LifecycleObserver, OnStart, OnStop {
 
     private VideoPreference mVideoPreference;
-    private boolean mVideoPaused;
 
     public VideoPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -48,18 +47,16 @@ public class VideoPreferenceController extends BasePreferenceController implemen
     }
 
     @Override
-    public void onPause() {
+    public void onStart() {
         if (mVideoPreference != null) {
-            mVideoPaused = mVideoPreference.isVideoPaused();
-            mVideoPreference.onViewInvisible();
+            mVideoPreference.onViewVisible();
         }
     }
 
     @Override
-    public void onResume() {
+    public void onStop() {
         if (mVideoPreference != null) {
-            mVideoPreference.onViewVisible(mVideoPaused);
+            mVideoPreference.onViewInvisible();
         }
     }
-
 }

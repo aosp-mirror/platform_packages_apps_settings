@@ -26,14 +26,38 @@
         android:key="block"
         android:layout="@layout/styled_switch_bar" />
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="block_desc" />
+
+
+    <!-- Conversations added here -->
+    <PreferenceCategory
+        android:title="@string/conversations_category_title"
+        android:key="conversations"
+        android:visibility="gone"
+        settings:allowDividerAbove="false"
+        settings:allowDividerBelow="false">
+    </PreferenceCategory>
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="invalid_conversation_switch"
+        android:title="@string/conversation_section_switch_title" />
+    <Preference
+        android:key="invalid_conversation_info"/>
+
+    <!--Bubbles -->
+    <Preference
+        android:key="bubble_pref_link"
+        android:title="@string/notification_bubbles_title"
+        android:icon="@drawable/ic_create_bubble"
+        settings:allowDividerAbove="false"
+        settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
+    </Preference>
 
     <!-- Channels/Channel groups added here -->
     <PreferenceCategory
         android:key="channels"
         android:layout="@layout/empty_view"
-        settings:allowDividerAbove="false"
+        settings:allowDividerAbove="true"
         settings:allowDividerBelow="false" />
 
     <!-- Importance toggle -->
@@ -66,21 +90,17 @@
             android:order="1001"
             settings:restrictedSwitchSummary="@string/enabled_by_admin" />
         <Preference
-            android:key="bubble_link_pref"
-            android:title="@string/notification_bubbles_title"
-            android:order="1002" />
-        <Preference
             android:key="app_link"
             android:order="1003"
             android:title="@string/app_settings_link" />
 
     </PreferenceCategory>
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="desc"
         android:order="5000" />
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="deleted"
         android:order="8000" />
 

@@ -19,24 +19,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/ContextualCardStyle">
+    style="@style/ContextualCardStyle"
+    android:importantForAccessibility="no">
 
-    <FrameLayout
+    <include layout="@layout/dismissal_swipe_background"/>
+
+    <androidx.slice.widget.SliceView
+        android:id="@+id/slice_view"
+        android:theme="@style/Theme.Settings.ContextualCard"
+        style="@style/Widget.SliceView.ContextualCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"/>
 
-        <include layout="@layout/dismissal_swipe_background"/>
+    <!--dismissal view -->
+    <include layout="@layout/contextual_card_dismissal_view"/>
 
-        <androidx.slice.widget.SliceView
-            android:id="@+id/slice_view"
-            style="@style/ContextualCardSliceViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:importantForAccessibility="no"/>
-
-        <!--dismissal view-->
-        <include layout="@layout/contextual_card_dismissal_view"/>
-
-    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

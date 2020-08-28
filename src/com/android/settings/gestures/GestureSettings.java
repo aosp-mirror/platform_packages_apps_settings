@@ -19,15 +19,11 @@ package com.android.settings.gestures;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable
 public class GestureSettings extends DashboardFragment {
@@ -66,21 +62,6 @@ public class GestureSettings extends DashboardFragment {
         return mAmbientDisplayConfig;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.gestures;
-                    return Arrays.asList(sir);
-                }
-
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    // All rows in this screen can lead to a different page, so suppress everything
-                    // from this page to remove duplicates.
-                    return false;
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.gestures);
 }

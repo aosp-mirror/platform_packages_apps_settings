@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -47,6 +48,8 @@ public class BluetoothSwitchPreferenceControllerTest {
     private RestrictionUtils mRestrictionUtils;
     @Mock
     private SwitchWidgetController mSwitchController;
+    @Mock
+    private AlwaysDiscoverable mAlwaysDiscoverable;
 
     private FooterPreference mFooterPreference;
     private Context mContext;
@@ -62,6 +65,7 @@ public class BluetoothSwitchPreferenceControllerTest {
         mController =
             new BluetoothSwitchPreferenceController(mContext, mRestrictionUtils,
                     mSwitchController, mFooterPreference);
+        mController.mAlwaysDiscoverable = mAlwaysDiscoverable;
     }
 
     @Test
@@ -102,5 +106,19 @@ public class BluetoothSwitchPreferenceControllerTest {
         mController.updateText(true);
 
         assertThat(mFooterPreference.getTitle()).isEqualTo(BLUETOOTH_INFO_STRING);
+    }
+
+    @Test
+    public void onStart_shouldStartAlwaysDiscoverable() {
+        mController.onStart();
+
+        verify(mAlwaysDiscoverable).start();
+    }
+
+    @Test
+    public void onStop_shouldStopAlwaysDiscoverable() {
+        mController.onStop();
+
+        verify(mAlwaysDiscoverable).stop();
     }
 }

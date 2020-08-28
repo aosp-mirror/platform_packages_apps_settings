@@ -31,6 +31,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
@@ -65,7 +66,7 @@ public class SettingsPanelActivityTest {
         mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
         mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
         mFakePanelContent = new FakePanelContent();
-        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any(), any());
+        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
     }
 
     @Test
@@ -138,5 +139,13 @@ public class SettingsPanelActivityTest {
         verify(window).setAttributes(paramCaptor.capture());
         assertThat(paramCaptor.getValue().privateFlags
                 & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isEqualTo(0);
+    }
+
+    @Test
+    public void onConfigurationChanged_shouldForceUpdate() {
+        mSettingsPanelActivity.mForceCreation = false;
+        mSettingsPanelActivity.onConfigurationChanged(new Configuration());
+
+        assertThat(mSettingsPanelActivity.mForceCreation).isTrue();
     }
 }

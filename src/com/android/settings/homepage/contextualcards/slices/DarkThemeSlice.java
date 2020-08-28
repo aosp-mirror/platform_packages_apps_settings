@@ -15,19 +15,19 @@
  */
 package com.android.settings.homepage.contextualcards.slices;
 
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
-
 import static android.provider.Settings.Global.LOW_POWER_MODE;
+
+import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
@@ -47,10 +47,9 @@ import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 
-import java.io.IOException;
-
 public class DarkThemeSlice implements CustomSliceable {
     private static final String TAG = "DarkThemeSlice";
+    private static final boolean DEBUG = Build.IS_DEBUGGABLE;
     private static final int BATTERY_LEVEL_THRESHOLD = 50;
     private static final int DELAY_TIME_EXECUTING_DARK_THEME = 200;
 
@@ -59,6 +58,9 @@ public class DarkThemeSlice implements CustomSliceable {
     static boolean sKeepSliceShow;
     @VisibleForTesting
     static long sActiveUiSession = -1000;
+    @VisibleForTesting
+    static boolean sSliceClicked = false;
+    static boolean sPreChecked = false;
 
     private final Context mContext;
     private final UiModeManager mUiModeManager;
@@ -78,8 +80,21 @@ public class DarkThemeSlice implements CustomSliceable {
             sActiveUiSession = currentUiSession;
             sKeepSliceShow = false;
         }
-        // Dark theme slice will disappear when battery saver is ON.
-        if (mPowerManager.isPowerSaveMode() || (!sKeepSliceShow && !isAvailable(mContext))) {
+
+        // 1. Dark theme slice will disappear when battery saver is ON.
+        // 2. If the slice is shown and the user doesn't toggle it directly, but instead turns on
+        // Dark theme from Quick settings or display page, the card should no longer persist.
+        // This card will persist when user clicks its toggle directly.
+        // 3. If the slice is shown and the user toggles it on (switch to Dark theme) directly,
+        // then user returns to home (launcher), no matter by the Back key or Home gesture.
+        // Next time the Settings displays on screen again this card should no longer persist.
+        if (DEBUG) {
+            Log.d(TAG,
+                    "sKeepSliceShow = " + sKeepSliceShow + ", sSliceClicked = " + sSliceClicked
+                            + ", isAvailable = " + isAvailable(mContext));
+        }
+        if (mPowerManager.isPowerSaveMode()
+                || ((!sKeepSliceShow || !sSliceClicked) && !isAvailable(mContext))) {
             return new ListBuilder(mContext, CustomSliceRegistry.DARK_THEME_SLICE_URI,
                     ListBuilder.INFINITY)
                     .setIsError(true)
@@ -90,6 +105,12 @@ public class DarkThemeSlice implements CustomSliceable {
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         final IconCompat icon =
                 IconCompat.createWithResource(mContext, R.drawable.dark_theme);
+
+        final boolean isChecked = Utils.isNightMode(mContext);
+        if (sPreChecked != isChecked) {
+            // Dark(Night) mode changed and reset the sSliceClicked.
+            resetValue(isChecked, false);
+        }
         return new ListBuilder(mContext, CustomSliceRegistry.DARK_THEME_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
@@ -99,7 +120,7 @@ public class DarkThemeSlice implements CustomSliceable {
                         .setSubtitle(mContext.getText(R.string.dark_theme_slice_subtitle))
                         .setPrimaryAction(
                                 SliceAction.createToggle(toggleAction, null /* actionTitle */,
-                                        isDarkThemeMode(mContext))))
+                                        isChecked)))
                 .build();
     }
 
@@ -112,6 +133,10 @@ public class DarkThemeSlice implements CustomSliceable {
     public void onNotifyChange(Intent intent) {
         final boolean isChecked = intent.getBooleanExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE,
                 false);
+        // Dark(Night) mode changed by user clicked the toggle in the Dark theme slice.
+        if (isChecked) {
+            resetValue(isChecked, true);
+        }
         // make toggle transition more smooth before dark theme takes effect
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             mUiModeManager.setNightModeActivated(isChecked);
@@ -130,23 +155,32 @@ public class DarkThemeSlice implements CustomSliceable {
 
     @VisibleForTesting
     boolean isAvailable(Context context) {
-        // checking dark theme mode.
-        if (isDarkThemeMode(context)) {
+        // check if dark theme mode is enabled or if dark theme scheduling is on.
+        if (Utils.isNightMode(context) || isNightModeScheduled()) {
             return false;
         }
-
         // checking the current battery level
         final BatteryManager batteryManager = context.getSystemService(BatteryManager.class);
         final int level = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        Log.d(TAG, "battery level=" + level);
+        Log.d(TAG, "battery level = " + level);
         return level <= BATTERY_LEVEL_THRESHOLD;
     }
 
-    @VisibleForTesting
-    boolean isDarkThemeMode(Context context) {
-        final int currentNightMode =
-                context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    private void resetValue(boolean preChecked, boolean clicked) {
+        sPreChecked = preChecked;
+        sSliceClicked = clicked;
+    }
+
+    private boolean isNightModeScheduled() {
+        final int mode = mUiModeManager.getNightMode();
+        if (DEBUG) {
+            Log.d(TAG, "night mode = " + mode);
+        }
+        // Turn on from sunset to sunrise or turn on at custom time
+        if (mode == UiModeManager.MODE_NIGHT_AUTO || mode == UiModeManager.MODE_NIGHT_CUSTOM) {
+            return true;
+        }
+        return false;
     }
 
     public static class DarkThemeWorker extends SliceBackgroundWorker<Void> {
@@ -179,7 +213,7 @@ public class DarkThemeSlice implements CustomSliceable {
         }
 
         @Override
-        public void close() throws IOException {
+        public void close() {
         }
     }
 }

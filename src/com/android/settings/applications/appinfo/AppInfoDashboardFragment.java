@@ -46,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetailPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -137,7 +138,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         final String packageName = getPackageName();
-        use(TimeSpentInAppPreferenceController.class).setPackageName(packageName);
+        final TimeSpentInAppPreferenceController timeSpentInAppPreferenceController = use(
+                TimeSpentInAppPreferenceController.class);
+        timeSpentInAppPreferenceController.setPackageName(packageName);
+        timeSpentInAppPreferenceController.initLifeCycleOwner(this);
 
         use(AppDataUsagePreferenceController.class).setParentFragment(this);
         final AppInstallerInfoPreferenceController installer =
@@ -146,7 +150,11 @@ public class AppInfoDashboardFragment extends DashboardFragment
         installer.setParentFragment(this);
         use(AppInstallerPreferenceCategoryController.class).setChildren(Arrays.asList(installer));
         use(AppNotificationPreferenceController.class).setParentFragment(this);
-        use(AppOpenByDefaultPreferenceController.class).setParentFragment(this);
+
+        use(AppOpenByDefaultPreferenceController.class)
+                .setPackageName(packageName)
+                .setParentFragment(this);
+
         use(AppPermissionPreferenceController.class).setParentFragment(this);
         use(AppPermissionPreferenceController.class).setPackageName(packageName);
         use(AppSettingPreferenceController.class)
@@ -168,13 +176,19 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 use(PictureInPictureDetailPreferenceController.class);
         pip.setPackageName(packageName);
         pip.setParentFragment(this);
+
         final ExternalSourceDetailPreferenceController externalSource =
                 use(ExternalSourceDetailPreferenceController.class);
         externalSource.setPackageName(packageName);
         externalSource.setParentFragment(this);
 
+        final InteractAcrossProfilesDetailsPreferenceController acrossProfiles =
+                use(InteractAcrossProfilesDetailsPreferenceController.class);
+        acrossProfiles.setPackageName(packageName);
+        acrossProfiles.setParentFragment(this);
+
         use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
-                writeSystemSettings, drawOverlay, pip, externalSource));
+                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles));
     }
 
     @Override
@@ -276,6 +290,11 @@ public class AppInfoDashboardFragment extends DashboardFragment
         controllers.add(new DefaultSmsShortcutPreferenceController(context, packageName));
 
         return controllers;
+    }
+
+    @Override
+    protected boolean isParalleledControllers() {
+        return true;
     }
 
     void addToCallbackList(Callback callback) {

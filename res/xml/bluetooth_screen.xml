@@ -16,7 +16,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="bluetooth_switchbar_screen"
     android:title="@string/bluetooth_settings_title">
 
     <Preference
@@ -34,6 +33,11 @@
         settings:allowDividerAbove="true"
         settings:userRestriction="no_config_bluetooth"
         settings:useAdminDisabledSummary="true"
+        settings:searchable="false"
         settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="bluetooth_screen_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

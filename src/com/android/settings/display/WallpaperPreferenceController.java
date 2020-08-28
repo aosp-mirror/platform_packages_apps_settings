@@ -69,9 +69,7 @@ public class WallpaperPreferenceController extends BasePreferenceController {
     public String getKeywords() {
         StringBuilder sb = new StringBuilder(mContext.getString(R.string.keywords_wallpaper));
         if (areStylesAvailable()) {
-            // TODO(b/130759285): Create a new string keywords_styles_and_wallpaper
-            sb.append(", ").append(mContext.getString(R.string.theme_customization_category))
-                    .append(", ").append(mContext.getString(R.string.keywords_dark_ui_mode));
+            sb.append(", ").append(mContext.getString(R.string.keywords_styles));
         }
         return sb.toString();
     }

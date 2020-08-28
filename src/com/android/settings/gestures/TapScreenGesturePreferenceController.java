@@ -23,7 +23,6 @@ import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 public class TapScreenGesturePreferenceController extends GesturePreferenceController {
 
@@ -54,7 +53,7 @@ public class TapScreenGesturePreferenceController extends GesturePreferenceContr
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 

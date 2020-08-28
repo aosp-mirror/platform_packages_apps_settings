@@ -18,7 +18,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="accessibility_control_timeout_preference"
     android:title="@string/accessibility_control_timeout_preference_title"
     android:persistent="false" >
 
@@ -30,28 +29,28 @@
         settings:controller="com.android.settings.widget.VideoPreferenceController"
         android:persistent="false" />
 
-    <com.android.settings.widget.RadioButtonPreference
+    <com.android.settingslib.widget.RadioButtonPreference
         android:key="accessibility_control_timeout_default"
         android:title="@string/accessibility_timeout_default"
         settings:allowDividerAbove="true"
         android:persistent="false" />
 
-    <com.android.settings.widget.RadioButtonPreference
+    <com.android.settingslib.widget.RadioButtonPreference
         android:key="accessibility_control_timeout_10secs"
         android:title="@string/accessibility_timeout_10secs"
         android:persistent="false" />
 
-    <com.android.settings.widget.RadioButtonPreference
+    <com.android.settingslib.widget.RadioButtonPreference
         android:key="accessibility_control_timeout_30secs"
         android:title="@string/accessibility_timeout_30secs"
         android:persistent="false" />
 
-    <com.android.settings.widget.RadioButtonPreference
+    <com.android.settingslib.widget.RadioButtonPreference
         android:key="accessibility_control_timeout_1min"
         android:title="@string/accessibility_timeout_1min"
         android:persistent="false" />
 
-    <com.android.settings.widget.RadioButtonPreference
+    <com.android.settingslib.widget.RadioButtonPreference
         android:key="accessibility_control_timeout_2mins"
         android:title="@string/accessibility_timeout_2mins"
         android:persistent="false" />

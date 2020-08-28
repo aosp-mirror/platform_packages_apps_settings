@@ -29,6 +29,7 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
@@ -66,7 +67,7 @@ public class ProfileSelectDialogTest {
 
     @Test
     public void updateUserHandlesIfNeeded_Normal() {
-        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.userHandle.add(NORMAL_USER);
 
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
@@ -78,7 +79,7 @@ public class ProfileSelectDialogTest {
 
     @Test
     public void updateUserHandlesIfNeeded_Remove() {
-        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.userHandle.add(REMOVED_USER);
         tile.userHandle.add(NORMAL_USER);
         tile.userHandle.add(REMOVED_USER);

@@ -17,7 +17,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="data_saver_screen"
     android:title="@string/data_saver_title">
 
     <Preference
@@ -25,6 +24,13 @@
         android:title="@string/unrestricted_data_saver"
         android:summary="@string/summary_two_lines_placeholder"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
+        settings:searchable="false"
         settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="data_saver_footer"
+        android:title="@*android:string/data_saver_description"
+        android:selectable="false"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

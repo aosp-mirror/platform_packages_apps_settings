@@ -22,6 +22,9 @@ import android.widget.Button;
 
 /**
  * Foundation interface glues between Activities and UIs like {@link WifiDialog}.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in {@link WifiConfigUiBase2}.
  */
 public interface WifiConfigUiBase {
 

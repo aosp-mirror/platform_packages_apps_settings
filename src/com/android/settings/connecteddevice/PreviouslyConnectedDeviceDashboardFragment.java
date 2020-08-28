@@ -17,16 +17,11 @@ package com.android.settings.connecteddevice;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.res.Resources;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This fragment contains previously connected device
@@ -66,23 +61,6 @@ public class PreviouslyConnectedDeviceDashboardFragment extends DashboardFragmen
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableRaw> getRawDataToIndex(
-                Context context, boolean enabled) {
-            final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-            final Resources res = context.getResources();
-
-            // Add fragment title
-            SearchIndexableRaw data = new SearchIndexableRaw(context);
-            data.key = KEY_PREVIOUSLY_CONNECTED_DEVICES;
-            data.title = res.getString(
-                    R.string.connected_device_previously_connected_title);
-            data.screenTitle = res.getString(
-                    R.string.connected_device_previously_connected_title);
-            result.add(data);
-            return result;
-        }
-    };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.previously_connected_devices);
 }

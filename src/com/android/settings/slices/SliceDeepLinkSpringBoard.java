@@ -24,7 +24,7 @@ import android.util.EventLog;
 import android.util.Log;
 
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
-import com.android.settings.notification.ZenModeSliceBuilder;
+import com.android.settings.notification.zen.ZenModeSliceBuilder;
 
 public class SliceDeepLinkSpringBoard extends Activity {
 

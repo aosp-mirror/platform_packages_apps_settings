@@ -18,16 +18,17 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.view.View;
 
 public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
-        extends ToggleAccessibilityServicePreferenceFragment {
+        extends InvisibleToggleAccessibilityServicePreferenceFragment {
 
     private boolean mToggleSwitchWasInitiallyChecked;
 
     @Override
-    protected void onProcessArguments(Bundle arguments) {
-        super.onProcessArguments(arguments);
-        mToggleSwitchWasInitiallyChecked = mToggleSwitch.isChecked();
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mToggleSwitchWasInitiallyChecked = mToggleServiceDividerSwitchPreference.isChecked();
     }
 
     @Override
@@ -38,13 +39,12 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
-        if (mToggleSwitch.isChecked() != mToggleSwitchWasInitiallyChecked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
                     SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SELECT_TO_SPEAK,
-                    mToggleSwitch.isChecked());
+                    mToggleServiceDividerSwitchPreference.isChecked());
         }
 
         super.onStop();
     }
 }
-

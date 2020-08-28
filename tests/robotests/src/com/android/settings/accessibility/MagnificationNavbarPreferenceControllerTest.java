@@ -174,4 +174,9 @@ public class MagnificationNavbarPreferenceControllerTest {
                 new MagnificationNavbarPreferenceController(mContext, "bad_key");
         assertThat(controller.isSliceable()).isFalse();
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

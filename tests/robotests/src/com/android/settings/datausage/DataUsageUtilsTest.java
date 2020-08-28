@@ -54,7 +54,7 @@ public final class DataUsageUtilsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
+        final ShadowApplication shadowContext = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
         shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
         shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
@@ -64,29 +64,15 @@ public final class DataUsageUtilsTest {
     @Test
     public void mobileDataStatus_whenNetworkIsSupported() {
         when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
-        boolean hasMobileData = DataUsageUtils.hasMobileData(mContext);
+        final boolean hasMobileData = DataUsageUtils.hasMobileData(mContext);
         assertThat(hasMobileData).isTrue();
     }
 
     @Test
     public void mobileDataStatus_whenNetworkIsNotSupported() {
         when(mManager.isNetworkSupported(anyInt())).thenReturn(false);
-        boolean hasMobileData = DataUsageUtils.hasMobileData(mContext);
+        final boolean hasMobileData = DataUsageUtils.hasMobileData(mContext);
         assertThat(hasMobileData).isFalse();
-    }
-
-    @Test
-    public void hasSim_simStateReady() {
-        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_READY);
-        boolean hasSim = DataUsageUtils.hasSim(mContext);
-        assertThat(hasSim).isTrue();
-    }
-
-    @Test
-    public void hasSim_simStateMissing() {
-        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
-        boolean hasSim = DataUsageUtils.hasSim(mContext);
-        assertThat(hasSim).isFalse();
     }
 
     @Test

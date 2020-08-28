@@ -42,7 +42,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowThreadUtils.class)
 public class CardContentProviderTest {
 
     private Context mContext;
@@ -85,6 +84,25 @@ public class CardContentProviderTest {
         final int rowsAfterInsert = getRowCount();
 
         assertThat(rowsAfterInsert - rowsBeforeInsert).isEqualTo(2);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void bulkInsert_keepDismissalTimestamp_shouldHaveTimestamp() {
+        mResolver.bulkInsert(mUri, generateTwoRowsWithDismissTimestamp());
+
+        mResolver.bulkInsert(mUri, generateTwoRows());
+
+        assertThat(queryDismissedTimestamp()).isEqualTo(10001L);
+    }
+
+    @Test
+    public void bulkInsert_notKeepDismissalTimestamp_shouldNotHaveTimestamp() {
+        mResolver.bulkInsert(mUri, generateTwoRowsWithDismissTimestamp());
+
+        mResolver.bulkInsert(mUri, generateTwoRows());
+
+        assertThat(queryDismissedTimestamp()).isEqualTo(0L);
     }
 
     @Test
@@ -200,10 +218,40 @@ public class CardContentProviderTest {
         return twoRows;
     }
 
+    private ContentValues[] generateTwoRowsWithDismissTimestamp() {
+        final ContentValues[] twoRows = new ContentValues[2];
+        twoRows[0] = generateOneRow();
+
+        final ContentValues values = new ContentValues();
+        values.put(CardDatabaseHelper.CardColumns.NAME, "toggle_airplane");
+        values.put(CardDatabaseHelper.CardColumns.TYPE, 1);
+        values.put(CardDatabaseHelper.CardColumns.SCORE, 0.95);
+        values.put(CardDatabaseHelper.CardColumns.SLICE_URI,
+                "content://com.android.settings.slices/action/toggle_airplane");
+        values.put(CardDatabaseHelper.CardColumns.CATEGORY, 2);
+        values.put(CardDatabaseHelper.CardColumns.PACKAGE_NAME, "com.android.settings");
+        values.put(CardDatabaseHelper.CardColumns.APP_VERSION, 10001);
+        values.put(CardDatabaseHelper.CardColumns.DISMISSED_TIMESTAMP, 10001L);
+        twoRows[1] = values;
+
+        return twoRows;
+    }
+
     private int getRowCount() {
         final Cursor cr = mResolver.query(mUri, null, null, null);
         final int count = cr.getCount();
         cr.close();
         return count;
+    }
+
+    private long queryDismissedTimestamp() {
+        final String[] columns = {CardDatabaseHelper.CardColumns.DISMISSED_TIMESTAMP};
+        final String selection = CardDatabaseHelper.CardColumns.NAME + "=?";
+        final String[] selectionArgs = {"toggle_airplane"};
+        final Cursor cr = mResolver.query(mUri, columns, selection, selectionArgs, null);
+        cr.moveToFirst();
+        final long dismissedTimestamp = cr.getLong(0);
+        cr.close();
+        return  dismissedTimestamp;
     }
 }

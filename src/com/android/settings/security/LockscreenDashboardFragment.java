@@ -19,7 +19,6 @@ package com.android.settings.security;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
-import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -37,7 +36,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -109,8 +107,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
                         KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
         lifecycle.addObserver(notificationController);
         controllers.add(notificationController);
-        mOwnerInfoPreferenceController =
-                new OwnerInfoPreferenceController(context, this, lifecycle);
+        mOwnerInfoPreferenceController = new OwnerInfoPreferenceController(context, this);
         controllers.add(mOwnerInfoPreferenceController);
 
         return controllers;
@@ -130,15 +127,8 @@ public class LockscreenDashboardFragment extends DashboardFragment
         return mConfig;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.security_lockscreen_settings;
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.security_lockscreen_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
@@ -146,7 +136,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new LockScreenNotificationPreferenceController(context));
                     controllers.add(new OwnerInfoPreferenceController(
-                            context, null /* fragment */, null /* lifecycle */));
+                            context, null /* fragment */));
                     return controllers;
                 }
 

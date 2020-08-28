@@ -32,14 +32,22 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+
 import com.android.settings.R;
 import com.android.settings.Settings.TetherSettingsActivity;
+import com.android.settings.Settings.WifiSettings2Activity;
+import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -48,11 +56,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
 
 /**
  * {@link BasePreferenceController} that populates a list of widgets that Settings app support.
@@ -187,6 +190,15 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 Log.d(TAG, "Skipping non-system app: " + info.activityInfo);
                 continue;
             }
+            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+                if (info.activityInfo.name.endsWith(WifiSettingsActivity.class.getSimpleName())) {
+                    continue;
+                }
+            } else {
+                if (info.activityInfo.name.endsWith(WifiSettings2Activity.class.getSimpleName())) {
+                    continue;
+                }
+            }
             shortcuts.add(info);
         }
         Collections.sort(shortcuts, SHORTCUT_COMPARATOR);
@@ -245,7 +257,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
         Drawable iconDrawable;
         try {
             iconDrawable = context.getPackageManager().getResourcesForApplication(app)
-                    .getDrawable(resource);
+                    .getDrawable(resource, themedContext.getTheme());
             if (iconDrawable instanceof LayerDrawable) {
                 iconDrawable = ((LayerDrawable) iconDrawable).getDrawable(1);
             }

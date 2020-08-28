@@ -31,11 +31,11 @@ import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.robolectric.RuntimeEnvironment;
 import org.xmlpull.v1.XmlPullParserException;
@@ -146,13 +146,12 @@ public class SliceControllerInXmlCodeInspector extends CodeInspector {
     private List<Integer> getIndexableXml() {
         final List<Integer> xmlResSet = new ArrayList<>();
 
-        final Collection<Class> indexableClasses = FeatureFactory.getFactory(
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(
                 mContext).getSearchFeatureProvider().getSearchIndexableResources()
                 .getProviderValues();
 
-        for (Class clazz : indexableClasses) {
-            Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
-                    clazz);
+        for (SearchIndexableData bundle : bundles) {
+            Indexable.SearchIndexProvider provider = bundle.getSearchIndexProvider();
 
             if (provider == null) {
                 continue;

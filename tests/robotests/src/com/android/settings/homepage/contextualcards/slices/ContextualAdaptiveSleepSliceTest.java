@@ -66,7 +66,7 @@ public class ContextualAdaptiveSleepSliceTest {
         mContext = spy(RuntimeEnvironment.application);
         mContextualAdaptiveSleepSlice = spy(new ContextualAdaptiveSleepSlice(mContext));
 
-        Settings.System.putInt(mContext.getContentResolver(), Settings.System.ADAPTIVE_SLEEP, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.ADAPTIVE_SLEEP, 0);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mSharedPreferences).when(mContext).getSharedPreferences(eq(PREF), anyInt());
         doReturn(true).when(mContextualAdaptiveSleepSlice).isSettingsAvailable();
@@ -123,8 +123,8 @@ public class ContextualAdaptiveSleepSliceTest {
     }
 
     @Test
-    public void getSlice_DoNotShowIfTurnedOn() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.System.ADAPTIVE_SLEEP, 1);
+    public void getSlice_DoNotShowIFTurnedOn() {
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.ADAPTIVE_SLEEP, 1);
 
         final Slice slice = mContextualAdaptiveSleepSlice.getSlice();
 

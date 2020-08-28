@@ -55,9 +55,9 @@ public final class WifiNoInternetDialog extends AlertActivity implements
     private boolean mButtonClicked;
 
     private boolean isKnownAction(Intent intent) {
-        return intent.getAction().equals(ACTION_PROMPT_UNVALIDATED)
-                || intent.getAction().equals(ACTION_PROMPT_LOST_VALIDATION)
-                || intent.getAction().equals(ACTION_PROMPT_PARTIAL_CONNECTIVITY);
+        return ACTION_PROMPT_UNVALIDATED.equals(intent.getAction())
+                || ACTION_PROMPT_LOST_VALIDATION.equals(intent.getAction())
+                || ACTION_PROMPT_PARTIAL_CONNECTIVITY.equals(intent.getAction());
     }
 
     @Override
@@ -119,7 +119,7 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         }
         mNetworkName = nc.getSsid();
         if (mNetworkName != null) {
-            mNetworkName = WifiInfo.removeDoubleQuotes(mNetworkName);
+            mNetworkName = WifiInfo.sanitizeSsid(mNetworkName);
         }
 
         createDialog();

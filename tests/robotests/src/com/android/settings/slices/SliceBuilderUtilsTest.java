@@ -23,7 +23,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.settings.SettingsEnums;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -134,58 +133,6 @@ public class SliceBuilderUtilsTest {
                         dummyData.getKey(),
                         0);
         SliceTester.testSettingsCopyableSlice(mContext, slice, dummyData);
-    }
-
-    @Test
-    public void testUriBuilder_oemAuthority_intentPath_returnsValidSliceUri() {
-        final Uri expectedUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-                .appendPath(INTENT_PATH)
-                .build();
-
-        final Uri actualUri = SliceBuilderUtils.getUri(INTENT_PATH, false);
-
-        assertThat(actualUri).isEqualTo(expectedUri);
-    }
-
-    @Test
-    public void testUriBuilder_oemAuthority_actionPath_returnsValidSliceUri() {
-        final Uri expectedUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-                .appendPath(ACTION_PATH)
-                .build();
-
-        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, false);
-
-        assertThat(actualUri).isEqualTo(expectedUri);
-    }
-
-    @Test
-    public void testUriBuilder_platformAuthority_intentPath_returnsValidSliceUri() {
-        final Uri expectedUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsSlicesContract.AUTHORITY)
-                .appendPath(ACTION_PATH)
-                .build();
-
-        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, true);
-
-        assertThat(actualUri).isEqualTo(expectedUri);
-    }
-
-    @Test
-    public void testUriBuilder_platformAuthority_actionPath_returnsValidSliceUri() {
-        final Uri expectedUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsSlicesContract.AUTHORITY)
-                .appendPath(ACTION_PATH)
-                .build();
-
-        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, true);
-
-        assertThat(actualUri).isEqualTo(expectedUri);
     }
 
     @Test
@@ -505,37 +452,6 @@ public class SliceBuilderUtilsTest {
 
         final int actualIconResource = actualIcon.toIcon().getResId();
         assertThat(actualIconResource).isEqualTo(settingsIcon);
-    }
-
-    @Test
-    public void buildUnavailableSlice_customizeSubtitle_returnsSliceWithCustomizedSubtitle() {
-        final String subtitleOfUnavailableSlice = "subtitleOfUnavailableSlice";
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
-                SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE, 0 /* icon */,
-                subtitleOfUnavailableSlice);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
-                BasePreferenceController.DISABLED_DEPENDENT_SETTING);
-
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertThat(metadata.getSubtitle()).isEqualTo(subtitleOfUnavailableSlice);
-    }
-
-    @Test
-    public void buildUnavailableSlice_notCustomizeSubtitle_returnsSliceWithDefaultSubtitle() {
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
-                SliceData.SliceType.SWITCH);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
-                BasePreferenceController.DISABLED_DEPENDENT_SETTING);
-
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertThat(metadata.getSubtitle()).isEqualTo(
-                mContext.getString(R.string.disabled_dependent_setting_summary));
     }
 
     private SliceData getDummyData() {

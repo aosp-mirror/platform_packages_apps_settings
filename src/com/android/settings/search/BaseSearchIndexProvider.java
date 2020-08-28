@@ -36,11 +36,14 @@ import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,18 +52,50 @@ import java.util.List;
 public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
     private static final String TAG = "BaseSearchIndex";
+    private int mXmlRes = 0;
 
     public BaseSearchIndexProvider() {
     }
 
+    public BaseSearchIndexProvider(int xmlRes) {
+        mXmlRes = xmlRes;
+    }
+
     @Override
     public List<SearchIndexableResource> getXmlResourcesToIndex(Context context, boolean enabled) {
+        if (mXmlRes != 0) {
+            final SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = mXmlRes;
+            return Arrays.asList(sir);
+        }
         return null;
     }
 
     @Override
     public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
         return null;
+    }
+
+    @Override
+    @CallSuper
+    public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context, boolean enabled) {
+        final List<SearchIndexableRaw> dynamicRaws = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
+        if (controllers == null || controllers.isEmpty()) {
+            return dynamicRaws;
+        }
+        for (AbstractPreferenceController controller : controllers) {
+            if (controller instanceof PreferenceControllerMixin) {
+                ((PreferenceControllerMixin) controller).updateDynamicRawDataToIndex(dynamicRaws);
+            } else if (controller instanceof BasePreferenceController) {
+                ((BasePreferenceController) controller).updateDynamicRawDataToIndex(dynamicRaws);
+            } else {
+                Log.e(TAG, controller.getClass().getName()
+                        + " must implement " + PreferenceControllerMixin.class.getName()
+                        + " treating the dynamic indexable");
+            }
+        }
+        return dynamicRaws;
     }
 
     @Override
@@ -92,7 +127,6 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         return nonIndexableKeys;
     }
 
-    @Override
     public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllersFromCode =
                 createPreferenceControllers(context);

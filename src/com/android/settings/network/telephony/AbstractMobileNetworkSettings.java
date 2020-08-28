@@ -16,7 +16,9 @@
 
 package com.android.settings.network.telephony;
 
+import android.os.SystemClock;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -34,6 +36,7 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
 
     private List<AbstractPreferenceController> mHiddenControllerList =
             new ArrayList<AbstractPreferenceController>();
+    private boolean mIsRedrawRequired;
 
     /**
      * @param restrictionKey The restriction key to check before pin protecting
@@ -50,6 +53,15 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
                 new ArrayList<AbstractPreferenceController>();
         getPreferenceControllers().forEach(controllers -> result.addAll(controllers));
         return result;
+    }
+
+    Preference searchForPreference(PreferenceScreen screen,
+            AbstractPreferenceController controller) {
+        final String key = controller.getPreferenceKey();
+        if (TextUtils.isEmpty(key)) {
+            return null;
+        }
+        return screen.findPreference(key);
     }
 
     TelephonyStatusControlSession setTelephonyAvailabilityStatus(
@@ -78,26 +90,60 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
     protected void updatePreferenceStates() {
         mHiddenControllerList.clear();
 
+        if (mIsRedrawRequired) {
+            redrawPreferenceControllers();
+            return;
+        }
+
         final PreferenceScreen screen = getPreferenceScreen();
-        getPreferenceControllersAsList().forEach(controller -> {
-            final String key = controller.getPreferenceKey();
-            if (TextUtils.isEmpty(key)) {
-                return;
-            }
-            final Preference preference = screen.findPreference(key);
-            if (preference == null) {
-                return;
-            }
-            if (!isPreferenceExpanded(preference)) {
-                mHiddenControllerList.add(controller);
-                return;
-            }
-            if (!controller.isAvailable()) {
-                return;
-            }
-            controller.updateState(preference);
-        });
+        getPreferenceControllersAsList().forEach(controller ->
+                updateVisiblePreferenceControllers(screen, controller));
     }
 
+    private void updateVisiblePreferenceControllers(PreferenceScreen screen,
+            AbstractPreferenceController controller) {
+        final Preference preference = searchForPreference(screen, controller);
+        if (preference == null) {
+            return;
+        }
+        if (!isPreferenceExpanded(preference)) {
+            mHiddenControllerList.add(controller);
+            return;
+        }
+        if (!controller.isAvailable()) {
+            return;
+        }
+        controller.updateState(preference);
+    }
+
+    void redrawPreferenceControllers() {
+        mHiddenControllerList.clear();
+
+        if (!isResumed()) {
+            mIsRedrawRequired = true;
+            return;
+        }
+        mIsRedrawRequired = false;
+
+        final long startTime = SystemClock.elapsedRealtime();
+
+        final List<AbstractPreferenceController> controllers =
+                getPreferenceControllersAsList();
+        final TelephonyStatusControlSession session =
+                setTelephonyAvailabilityStatus(controllers);
+
+
+        final PreferenceScreen screen = getPreferenceScreen();
+        controllers.forEach(controller -> {
+            controller.displayPreference(screen);
+            updateVisiblePreferenceControllers(screen, controller);
+        });
+
+        final long endTime = SystemClock.elapsedRealtime();
+
+        Log.d(LOG_TAG, "redraw fragment: +" + (endTime - startTime) + "ms");
+
+        session.close();
+    }
 
 }

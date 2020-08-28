@@ -20,7 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -60,8 +60,8 @@ public class P2pCategoryPreferenceControllerTest {
     }
 
     @Test
-    public void isAlwaysAvailable() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void isAvailable_withInitialEmptyGroup_shouldBeFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -69,7 +69,7 @@ public class P2pCategoryPreferenceControllerTest {
         mController.removeAllChildren();
 
         verify(mCategory).removeAll();
-        verify(mCategory).setVisible(false);
+        verify(mCategory, times(2)).setVisible(false);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class P2pCategoryPreferenceControllerTest {
 
         verify(mCategory).addPreference(pref);
         verify(mCategory, atLeastOnce()).setVisible(true);
-        verify(mCategory, never()).setVisible(false);
+        verify(mCategory).setVisible(false);
     }
 
     @Test

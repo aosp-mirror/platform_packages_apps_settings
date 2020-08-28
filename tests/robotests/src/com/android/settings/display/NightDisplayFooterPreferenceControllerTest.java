@@ -14,6 +14,9 @@
 
 package com.android.settings.display;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -34,7 +37,8 @@ public class NightDisplayFooterPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mController = new NightDisplayFooterPreferenceController(RuntimeEnvironment.application);
+        mController =
+                new NightDisplayFooterPreferenceController(RuntimeEnvironment.application, "key");
     }
 
     @After
@@ -43,16 +47,18 @@ public class NightDisplayFooterPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_configuredAvailable() {
+    public void getAvailabilityStatus_configuredAvailable_shouldReturnAVAILABLE_UNSEARCHABLE() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_nightDisplayAvailable, true);
-        assertThat(mController.isAvailable()).isTrue();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void isAvailable_configuredUnavailable() {
+    public void getAvailabilityStatus_configuredUnavailable_shouldReturnUNSUPPORTED_ON_DEVICE() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_nightDisplayAvailable, false);
-        assertThat(mController.isAvailable()).isFalse();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

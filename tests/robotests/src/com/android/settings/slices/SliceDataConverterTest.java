@@ -37,6 +37,7 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeIndexProvider;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
 import org.junit.Before;
@@ -92,7 +93,8 @@ public class SliceDataConverterTest {
     public void testFakeProvider_convertsFakeData() {
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues()
-                .add(FakeIndexProvider.class);
+                .add(new SearchIndexableData(FakeIndexProvider.class,
+                        FakeIndexProvider.SEARCH_INDEX_DATA_PROVIDER));
 
         doReturn(getFakeService()).when(mSliceDataConverter).getAccessibilityServiceInfoList();
 
@@ -119,13 +121,14 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
         assertThat(fakeSlice.getKeywords()).isNull();
         assertThat(fakeSlice.getIconResource()).isNotNull();
-        assertThat(fakeSlice.getUri()).isNull();
+        assertThat(fakeSlice.getUri().toSafeString())
+                .isEqualTo("content://com.android.settings.slices/action/key");
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_CLASSNAME);
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
         assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
-        assertThat(fakeSlice.isPlatformDefined()).isTrue(); // from XML
         assertThat(fakeSlice.getUnavailableSliceSubtitle()).isEqualTo(
                 "subtitleOfUnavailableSlice"); // from XML
+        assertThat(fakeSlice.isPublicSlice()).isTrue();
     }
 
     private void assertFakeA11ySlice(SliceData fakeSlice) {
@@ -135,7 +138,7 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getScreenTitle()).isEqualTo(
                 mContext.getString(R.string.accessibility_settings));
         assertThat(fakeSlice.getIconResource()).isEqualTo(FAKE_ICON);
-        assertThat(fakeSlice.getUri()).isNull();
+        assertThat(fakeSlice.getUri()).isNotNull();
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(ACCESSIBILITY_FRAGMENT);
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(A11Y_CONTROLLER_NAME);
     }

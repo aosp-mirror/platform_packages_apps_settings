@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityOptions;
 import android.app.IActivityManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.RemoteException;
@@ -54,8 +55,12 @@ public class ConfirmDeviceCredentialUtils {
     }
 
     public static void reportSuccessfulAttempt(LockPatternUtils utils, UserManager userManager,
-            int userId) {
-        utils.reportSuccessfulPasswordAttempt(userId);
+            DevicePolicyManager dpm, int userId, boolean isStrongAuth) {
+        if (isStrongAuth) {
+            utils.reportSuccessfulPasswordAttempt(userId);
+        } else {
+            dpm.reportSuccessfulBiometricAttempt(userId);
+        }
         if (userManager.isManagedProfile(userId)) {
             // Keyguard is responsible to disable StrongAuth for primary user. Disable StrongAuth
             // for work challenge only here.

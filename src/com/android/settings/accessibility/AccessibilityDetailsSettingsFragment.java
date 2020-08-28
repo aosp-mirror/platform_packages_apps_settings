@@ -135,19 +135,12 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         final String packageName = serviceInfo.packageName;
         final ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
 
-        final List<AccessibilityServiceInfo> enabledServiceInfos = AccessibilityManager.getInstance(
-                getActivity()).getEnabledAccessibilityServiceList(
-                AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
         final Set<ComponentName> enabledServices =
                 AccessibilityUtils.getEnabledServicesFromSettings(getActivity());
         final boolean serviceEnabled = enabledServices.contains(componentName);
         String description = info.loadDescription(getActivity().getPackageManager());
-        if (TextUtils.isEmpty(description)) {
-            description = getString(R.string.accessibility_service_default_description);
-        }
 
-        if (serviceEnabled && AccessibilityUtils.hasServiceCrashed(
-                packageName, serviceInfo.name, enabledServiceInfos)) {
+        if (serviceEnabled && info.crashed) {
             // Update the summaries for services that have crashed.
             description = getString(R.string.accessibility_description_state_stopped);
         }
@@ -168,7 +161,10 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     new ComponentName(packageName, settingsClassName).flattenToString());
         }
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
+        extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 
+        final String htmlDescription = info.loadHtmlDescription(getActivity().getPackageManager());
+        extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
         return extras;
     }
 

@@ -11,6 +11,7 @@ import static org.robolectric.Robolectric.buildActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -106,7 +107,9 @@ public class RedactionInterstitialTest {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
         final ShadowUserManager sum =
                 Shadow.extract(RuntimeEnvironment.application.getSystemService(UserManager.class));
-        sum.setManagedProfile(true);
+        sum.addProfile(
+                UserHandle.myUserId(), UserHandle.myUserId(),
+                "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
         setupActivity();
 
         assertHideAllVisible(false);
@@ -119,7 +122,9 @@ public class RedactionInterstitialTest {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
         final ShadowUserManager sum =
                 Shadow.extract(RuntimeEnvironment.application.getSystemService(UserManager.class));
-        sum.setManagedProfile(true);
+        sum.addProfile(
+                UserHandle.myUserId(), UserHandle.myUserId(),
+                "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
         ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
         setupActivity();

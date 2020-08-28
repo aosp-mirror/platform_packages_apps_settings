@@ -36,7 +36,9 @@ import com.google.common.util.concurrent.SettableFuture;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
@@ -114,37 +116,6 @@ public class NetworkScanHelper {
     private static final int MAX_SEARCH_TIME_SEC = 300;
     private static final int INCREMENTAL_RESULTS_PERIODICITY_SEC = 3;
 
-    private static final NetworkScanRequest NETWORK_SCAN_REQUEST =
-            new NetworkScanRequest(
-                    NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
-                    new RadioAccessSpecifier[]{
-                            // GSM
-                            new RadioAccessSpecifier(
-                                    AccessNetworkType.GERAN,
-                                    null /* bands */,
-                                    null /* channels */),
-                            // LTE
-                            new RadioAccessSpecifier(
-                                    AccessNetworkType.EUTRAN,
-                                    null /* bands */,
-                                    null /* channels */),
-                            // WCDMA
-                            new RadioAccessSpecifier(
-                                    AccessNetworkType.UTRAN,
-                                    null /* bands */,
-                                    null /* channels */),
-                            // NR
-                            new RadioAccessSpecifier(
-                                    AccessNetworkType.NGRAN,
-                                    null /* bands */,
-                                    null /* channels */),
-                    },
-                    SEARCH_PERIODICITY_SEC,
-                    MAX_SEARCH_TIME_SEC,
-                    INCREMENTAL_RESULTS,
-                    INCREMENTAL_RESULTS_PERIODICITY_SEC,
-                    null /* List of PLMN ids (MCC-MNC) */);
-
     private final NetworkScanCallback mNetworkScanCallback;
     private final TelephonyManager mTelephonyManager;
     private final TelephonyScanManager.NetworkScanCallback mInternalNetworkScanCallback;
@@ -160,6 +131,54 @@ public class NetworkScanHelper {
         mNetworkScanCallback = callback;
         mInternalNetworkScanCallback = new NetworkScanCallbackImpl();
         mExecutor = executor;
+    }
+
+    private NetworkScanRequest createNetworkScanForPreferredAccessNetworks() {
+        long networkTypeBitmap3gpp = mTelephonyManager.getPreferredNetworkTypeBitmask()
+                & TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP;
+
+        List<RadioAccessSpecifier> radioAccessSpecifiers = new ArrayList<>();
+        // If the allowed network types are unknown or if they are of the right class, scan for
+        // them; otherwise, skip them to save scan time and prevent users from being shown networks
+        // that they can't connect to.
+        if (networkTypeBitmap3gpp == 0
+                || (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_2G) != 0) {
+            radioAccessSpecifiers.add(
+                    new RadioAccessSpecifier(AccessNetworkType.GERAN, null, null));
+        }
+        if (networkTypeBitmap3gpp == 0
+                || (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_3G) != 0) {
+            radioAccessSpecifiers.add(
+                    new RadioAccessSpecifier(AccessNetworkType.UTRAN, null, null));
+        }
+        if (networkTypeBitmap3gpp == 0
+                || (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_4G) != 0) {
+            radioAccessSpecifiers.add(
+                    new RadioAccessSpecifier(AccessNetworkType.EUTRAN, null, null));
+        }
+        // If a device supports 5G stand-alone then the code below should be re-enabled; however
+        // a device supporting only non-standalone mode cannot perform PLMN selection and camp on
+        // a 5G network, which means that it shouldn't scan for 5G at the expense of battery as
+        // part of the manual network selection process.
+        //
+        // FIXME(b/151119451): re-enable this code once there is a way to distinguish SA from NSA
+        // support in the modem.
+        //
+        // if (networkTypeBitmap3gpp == 0
+        //        || (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_5G) != 0) {
+        //    radioAccessSpecifiers.add(
+        //            new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
+        // }
+
+        return new NetworkScanRequest(
+                NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
+                radioAccessSpecifiers.toArray(
+                        new RadioAccessSpecifier[radioAccessSpecifiers.size()]),
+                SEARCH_PERIODICITY_SEC,
+                MAX_SEARCH_TIME_SEC,
+                INCREMENTAL_RESULTS,
+                INCREMENTAL_RESULTS_PERIODICITY_SEC,
+                null /* List of PLMN ids (MCC-MNC) */);
     }
 
     /**
@@ -182,6 +201,9 @@ public class NetworkScanHelper {
 
                 @Override
                 public void onFailure(Throwable t) {
+                    if (t instanceof CancellationException) {
+                        return;
+                    }
                     int errCode = Integer.parseInt(t.getMessage());
                     onError(errCode);
                 }
@@ -189,10 +211,16 @@ public class NetworkScanHelper {
             mExecutor.execute(new NetworkScanSyncTask(
                     mTelephonyManager, (SettableFuture) mNetworkScanFuture));
         } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS) {
+            if (mNetworkScanRequester != null) {
+                return;
+            }
             mNetworkScanRequester = mTelephonyManager.requestNetworkScan(
-                    NETWORK_SCAN_REQUEST,
+                    createNetworkScanForPreferredAccessNetworks(),
                     mExecutor,
                     mInternalNetworkScanCallback);
+            if (mNetworkScanRequester == null) {
+                onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
+            }
         }
     }
 
@@ -204,7 +232,7 @@ public class NetworkScanHelper {
     public void stopNetworkQuery() {
         if (mNetworkScanRequester != null) {
             mNetworkScanRequester.stopScan();
-            mNetworkScanFuture = null;
+            mNetworkScanRequester = null;
         }
 
         if (mNetworkScanFuture != null) {

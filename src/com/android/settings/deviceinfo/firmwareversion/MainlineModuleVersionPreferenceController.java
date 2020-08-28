@@ -47,6 +47,10 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
     @VisibleForTesting
     static final Intent MODULE_UPDATE_INTENT =
             new Intent("android.settings.MODULE_UPDATE_SETTINGS");
+    @VisibleForTesting
+    static final Intent MODULE_UPDATE_V2_INTENT =
+            new Intent("android.settings.MODULE_UPDATE_VERSIONS");
+
     private final PackageManager mPackageManager;
 
     private String mModuleVersion;
@@ -81,13 +85,23 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        // Confirm MODULE_UPDATE_INTENT is handleable, and set it to Preference.
+        final ResolveInfo resolvedV2 =
+                mPackageManager.resolveActivity(MODULE_UPDATE_V2_INTENT, 0 /* flags */);
+        if (resolvedV2 != null) {
+            preference.setIntent(MODULE_UPDATE_V2_INTENT);
+            preference.setSelectable(true);
+            return;
+        }
+
         final ResolveInfo resolved =
                 mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0 /* flags */);
         if (resolved != null) {
             preference.setIntent(MODULE_UPDATE_INTENT);
+            preference.setSelectable(true);
         } else {
+            Log.d(TAG, "The ResolveInfo of the update intent is null.");
             preference.setIntent(null);
+            preference.setSelectable(false);
         }
     }
 

@@ -28,6 +28,7 @@ import java.util.List;
 public class AssistantCapabilityPreferenceController extends TogglePreferenceController {
 
     static final String PRIORITIZER_KEY = "asst_capability_prioritizer";
+    static final String RANKING_KEY = "asst_capability_ranking";
     static final String SMART_KEY = "asst_capabilities_actions_replies";
     private NotificationBackend mBackend;
 
@@ -45,7 +46,9 @@ public class AssistantCapabilityPreferenceController extends TogglePreferenceCon
     public boolean isChecked() {
         List<String> capabilities = mBackend.getAssistantAdjustments(mContext.getPackageName());
         if (PRIORITIZER_KEY.equals(getPreferenceKey())) {
-           return capabilities.contains(Adjustment.KEY_IMPORTANCE);
+            return capabilities.contains(Adjustment.KEY_IMPORTANCE);
+        } else if (RANKING_KEY.equals(getPreferenceKey())) {
+            return capabilities.contains(Adjustment.KEY_RANKING_SCORE);
         } else if (SMART_KEY.equals(getPreferenceKey())) {
             return capabilities.contains(Adjustment.KEY_CONTEXTUAL_ACTIONS)
                     && capabilities.contains(Adjustment.KEY_TEXT_REPLIES);
@@ -57,6 +60,8 @@ public class AssistantCapabilityPreferenceController extends TogglePreferenceCon
     public boolean setChecked(boolean isChecked) {
         if (PRIORITIZER_KEY.equals(getPreferenceKey())) {
             mBackend.allowAssistantAdjustment(Adjustment.KEY_IMPORTANCE, isChecked);
+        } else if (RANKING_KEY.equals(getPreferenceKey())) {
+            mBackend.allowAssistantAdjustment(Adjustment.KEY_RANKING_SCORE, isChecked);
         } else if (SMART_KEY.equals(getPreferenceKey())) {
             mBackend.allowAssistantAdjustment(Adjustment.KEY_CONTEXTUAL_ACTIONS, isChecked);
             mBackend.allowAssistantAdjustment(Adjustment.KEY_TEXT_REPLIES, isChecked);

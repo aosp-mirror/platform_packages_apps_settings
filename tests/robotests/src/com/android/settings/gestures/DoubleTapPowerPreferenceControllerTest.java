@@ -140,4 +140,9 @@ public class DoubleTapPowerPreferenceControllerTest {
                 new DoubleTapPowerPreferenceController(mContext, "bad_key");
         assertThat(controller.isSliceable()).isFalse();
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

@@ -16,39 +16,31 @@
 
 package com.android.settings.network.telephony;
 
-import static com.android.settings.network.telephony.MobileNetworkActivity.MOBILE_SETTINGS_TAG;
+import static androidx.lifecycle.Lifecycle.State;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.view.Menu;
-import android.view.View;
+
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.view.menu.ContextMenuBuilder;
-import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
-import com.android.settings.network.SubscriptionUtil;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.android.settings.network.ProxySubscriptionManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -56,213 +48,167 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowContextImpl;
+import org.robolectric.shadows.ShadowSubscriptionManager;
+import org.robolectric.shadows.ShadowSubscriptionManager.SubscriptionInfoBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class MobileNetworkActivityTest {
 
     private static final int CURRENT_SUB_ID = 3;
     private static final int PREV_SUB_ID = 1;
 
     private Context mContext;
-    private MobileNetworkActivity mMobileNetworkActivity;
-    private List<SubscriptionInfo> mSubscriptionInfos;
-    private Fragment mShowFragment;
-    private Fragment mHideFragment;
+    private ShadowContextImpl mShadowContextImpl;
+    private Intent mTestIntent;
 
     @Mock
-    private SubscriptionManager mSubscriptionManager;
+    private UserManager mUserManager;
     @Mock
     private TelephonyManager mTelephonyManager;
-    @Mock
-    private SubscriptionInfo mSubscriptionInfo;
-    @Mock
+
+    private ShadowSubscriptionManager mSubscriptionManager;
+    private SubscriptionInfo mSubscriptionInfo1;
     private SubscriptionInfo mSubscriptionInfo2;
-    @Mock
-    private FragmentManager mFragmentManager;
-    @Mock
-    private FragmentTransaction mFragmentTransaction;
-    @Mock
-    private BottomNavigationView mBottomNavigationView;
+
+    private ActivityScenario<MobileNetworkActivity> mMobileNetworkActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
 
-        mMobileNetworkActivity = spy(new MobileNetworkActivity());
-        mSubscriptionInfos = new ArrayList<>();
-        mShowFragment = new Fragment();
-        mHideFragment = new Fragment();
-        mMobileNetworkActivity.mSubscriptionInfos = mSubscriptionInfos;
-        mMobileNetworkActivity.mSubscriptionManager = mSubscriptionManager;
-        when(mSubscriptionInfo.getSubscriptionId()).thenReturn(PREV_SUB_ID);
-        when(mSubscriptionInfo2.getSubscriptionId()).thenReturn(CURRENT_SUB_ID);
+        mContext = ApplicationProvider.getApplicationContext();
+        mShadowContextImpl = Shadow.extract(RuntimeEnvironment.application.getBaseContext());
 
-        doReturn(mSubscriptionManager).when(mMobileNetworkActivity).getSystemService(
-                SubscriptionManager.class);
-        doReturn(mTelephonyManager).when(mMobileNetworkActivity).getSystemService(
-                TelephonyManager.class);
-        doReturn(mBottomNavigationView).when(mMobileNetworkActivity).findViewById(R.id.bottom_nav);
-        doReturn(mFragmentManager).when(mMobileNetworkActivity).getSupportFragmentManager();
-        doReturn(mFragmentTransaction).when(mFragmentManager).beginTransaction();
-        doReturn(mHideFragment).when(mFragmentManager).findFragmentByTag(
-                MOBILE_SETTINGS_TAG + PREV_SUB_ID);
-        doReturn(mShowFragment).when(mFragmentManager).findFragmentByTag(
-                MOBILE_SETTINGS_TAG + CURRENT_SUB_ID);
+        mShadowContextImpl.setSystemService(Context.USER_SERVICE, mUserManager);
+        doReturn(true).when(mUserManager).isAdminUser();
+
+        mShadowContextImpl.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
+        doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(anyInt());
+
+        mTestIntent = new Intent(mContext, MockMobileNetworkActivity.class);
+
+        mSubscriptionManager = shadowOf(mContext.getSystemService(SubscriptionManager.class));
+        mSubscriptionInfo1 = SubscriptionInfoBuilder.newBuilder()
+                .setId(PREV_SUB_ID).buildSubscriptionInfo();
+        mSubscriptionInfo2 = SubscriptionInfoBuilder.newBuilder()
+                .setId(CURRENT_SUB_ID).buildSubscriptionInfo();
     }
 
     @After
-    public void tearDown() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
+    public void cleanUp() {
+        if (mMobileNetworkActivity != null) {
+            mMobileNetworkActivity.close();
+        }
+    }
+
+    private static class MockMobileNetworkActivity extends MobileNetworkActivity {
+        private MockMobileNetworkActivity() {
+            super();
+        }
+
+        private SubscriptionInfo mSubscriptionInFragment;
+
+        @Override
+        ProxySubscriptionManager getProxySubscriptionManager() {
+            if (mProxySubscriptionMgr == null) {
+                mProxySubscriptionMgr = mock(ProxySubscriptionManager.class);
+            }
+            return mProxySubscriptionMgr;
+        }
+
+        @Override
+        void registerActiveSubscriptionsListener() {
+            onChanged();
+        }
+
+        @Override
+        void switchFragment(SubscriptionInfo subInfo) {
+            mSubscriptionInFragment = subInfo;
+        }
+    }
+
+    private ActivityScenario<MobileNetworkActivity> createTargetActivity(Intent activityIntent) {
+        return ActivityScenario.launch(activityIntent);
     }
 
     @Test
-    public void updateBottomNavigationView_oneSubscription_shouldBeGone() {
-        mSubscriptionInfos.add(mSubscriptionInfo);
-        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getActiveSubscriptionInfoList(
-                eq(true));
+    public void updateBottomNavigationView_oneSubscription_shouldNotCrash() {
+        mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1);
 
-        mMobileNetworkActivity.updateBottomNavigationView();
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
-        verify(mBottomNavigationView).setVisibility(View.GONE);
+        mMobileNetworkActivity.moveToState(State.STARTED);
     }
 
     @Test
-    public void updateBottomNavigationView_twoSubscription_updateMenu() {
-        final Menu menu = new ContextMenuBuilder(mContext);
-        mSubscriptionInfos.add(mSubscriptionInfo);
-        mSubscriptionInfos.add(mSubscriptionInfo);
-        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getActiveSubscriptionInfoList(
-                eq(true));
-        doReturn(menu).when(mBottomNavigationView).getMenu();
+    public void updateBottomNavigationView_twoSubscription_shouldNotCrash() {
+        mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
-        mMobileNetworkActivity.updateBottomNavigationView();
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
-        assertThat(menu.size()).isEqualTo(2);
+        mMobileNetworkActivity.moveToState(State.STARTED);
     }
 
     @Test
-    public void switchFragment_newFragment_replaceIt() {
-        mMobileNetworkActivity.mCurSubscriptionId = PREV_SUB_ID;
+    public void switchFragment_switchBetweenTwoSubscriptions() {
+        mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
-        mMobileNetworkActivity.switchFragment(mShowFragment, CURRENT_SUB_ID);
+        mTestIntent.putExtra(Settings.EXTRA_SUB_ID, PREV_SUB_ID);
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
-        verify(mFragmentTransaction).replace(R.id.main_content, mShowFragment,
-                MOBILE_SETTINGS_TAG + CURRENT_SUB_ID);
+        mMobileNetworkActivity.moveToState(State.STARTED);
+
+        mMobileNetworkActivity.onActivity(activity -> {
+            final MockMobileNetworkActivity mockActivity = (MockMobileNetworkActivity) activity;
+            mockActivity.switchFragment(mSubscriptionInfo1);
+            assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo1);
+        });
     }
 
     @Test
-    public void phoneChangeReceiver_ignoresStickyBroadcastFromBeforeRegistering() {
-        Activity activity = Robolectric.setupActivity(Activity.class);
-        MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
-                MobileNetworkActivity.PhoneChangeReceiver.Client.class);
-        MobileNetworkActivity.PhoneChangeReceiver receiver =
-                new MobileNetworkActivity.PhoneChangeReceiver(activity, client);
-        Intent intent = new Intent(TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
-        activity.sendStickyBroadcast(intent);
+    public void switchFragment_subscriptionsUpdate_notifyByIntent() {
+        mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
-        receiver.register();
-        verify(client, never()).onPhoneChange();
+        mTestIntent.putExtra(Settings.EXTRA_SUB_ID, PREV_SUB_ID);
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
-        activity.sendStickyBroadcast(intent);
-        verify(client, times(1)).onPhoneChange();
-    }
+        mMobileNetworkActivity.moveToState(State.STARTED);
 
-    @Test
-    public void phoneChangeReceiver_ignoresCarrierConfigChangeForWrongSubscriptionId() {
-        Activity activity = Robolectric.setupActivity(Activity.class);
+        mMobileNetworkActivity.onActivity(activity -> {
+            final MockMobileNetworkActivity mockActivity = (MockMobileNetworkActivity) activity;
+            mockActivity.switchFragment(mSubscriptionInfo1);
+            assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo1);
 
-        MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
-                MobileNetworkActivity.PhoneChangeReceiver.Client.class);
-        doReturn(2).when(client).getSubscriptionId();
+            mContext.sendBroadcast(new Intent(
+                    CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED), null);
 
-        MobileNetworkActivity.PhoneChangeReceiver receiver =
-                new MobileNetworkActivity.PhoneChangeReceiver(activity, client);
+            mockActivity.switchFragment(mSubscriptionInfo2);
+            assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo2);
 
-        receiver.register();
+            mContext.sendBroadcast(new Intent(
+                    TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED), null);
 
-        Intent intent = new Intent(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
-        intent.putExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX, 3);
-        activity.sendBroadcast(intent);
-        verify(client, never()).onPhoneChange();
-    }
-
-    @Test
-    public void phoneChangeReceiver_dispatchesCarrierConfigChangeForCorrectSubscriptionId() {
-        Activity activity = Robolectric.setupActivity(Activity.class);
-
-        MobileNetworkActivity.PhoneChangeReceiver.Client client = mock(
-                MobileNetworkActivity.PhoneChangeReceiver.Client.class);
-        doReturn(2).when(client).getSubscriptionId();
-
-        MobileNetworkActivity.PhoneChangeReceiver receiver =
-                new MobileNetworkActivity.PhoneChangeReceiver(activity, client);
-
-        receiver.register();
-
-        Intent intent = new Intent(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
-        intent.putExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX, 2);
-        activity.sendBroadcast(intent);
-        verify(client).onPhoneChange();
-    }
-
-
-    @Test
-    public void getSubscriptionId_hasIntent_getIdFromIntent() {
-        final Intent intent = new Intent();
-        intent.putExtra(Settings.EXTRA_SUB_ID, CURRENT_SUB_ID);
-        doReturn(intent).when(mMobileNetworkActivity).getIntent();
-        mSubscriptionInfos.add(mSubscriptionInfo);
-        mSubscriptionInfos.add(mSubscriptionInfo2);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(mSubscriptionInfos);
-        doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(CURRENT_SUB_ID);
-
-        assertThat(mMobileNetworkActivity.getSubscriptionId()).isEqualTo(CURRENT_SUB_ID);
-    }
-
-    @Test
-    public void getSubscriptionId_noIntent_firstIdInList() {
-        doReturn(null).when(mMobileNetworkActivity).getIntent();
-        mSubscriptionInfos.add(mSubscriptionInfo);
-        mSubscriptionInfos.add(mSubscriptionInfo2);
-
-        assertThat(mMobileNetworkActivity.getSubscriptionId()).isEqualTo(PREV_SUB_ID);
+            mockActivity.switchFragment(mSubscriptionInfo1);
+            assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo1);
+        });
     }
 
     @Test
     public void onSaveInstanceState_saveCurrentSubId() {
-        mMobileNetworkActivity = Robolectric.buildActivity(MobileNetworkActivity.class).get();
-        mMobileNetworkActivity.mCurSubscriptionId = PREV_SUB_ID;
-        final Bundle bundle = new Bundle();
+        mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
-        mMobileNetworkActivity.saveInstanceState(bundle);
+        mTestIntent.putExtra(Settings.EXTRA_SUB_ID, PREV_SUB_ID);
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
-        assertThat(bundle.getInt(Settings.EXTRA_SUB_ID)).isEqualTo(PREV_SUB_ID);
-    }
+        mMobileNetworkActivity.moveToState(State.STARTED);
 
-    @Test
-    public void onNewIntent_newSubscriptionId_fragmentReplaced() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
-
-        mSubscriptionInfos.add(mSubscriptionInfo);
-        mSubscriptionInfos.add(mSubscriptionInfo2);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(mSubscriptionInfos);
-        mMobileNetworkActivity.mCurSubscriptionId = PREV_SUB_ID;
-
-        final Intent newIntent = new Intent();
-        newIntent.putExtra(Settings.EXTRA_SUB_ID, CURRENT_SUB_ID);
-        mMobileNetworkActivity.onNewIntent(newIntent);
-        assertThat(mMobileNetworkActivity.mCurSubscriptionId).isEqualTo(CURRENT_SUB_ID);
+        mMobileNetworkActivity.onActivity(activity -> {
+            final Bundle bundle = new Bundle();
+            activity.saveInstanceState(bundle);
+            assertThat(bundle.getInt(Settings.EXTRA_SUB_ID)).isEqualTo(PREV_SUB_ID);
+        });
     }
 }

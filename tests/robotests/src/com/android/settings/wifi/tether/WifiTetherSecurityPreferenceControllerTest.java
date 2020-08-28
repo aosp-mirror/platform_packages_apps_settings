@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
 import androidx.preference.ListPreference;
@@ -25,8 +25,9 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class WifiTetherSecurityPreferenceControllerTest {
 
-    private static final String WPA2_PSK = String.valueOf(WifiConfiguration.KeyMgmt.WPA2_PSK);
-    private static final String NONE = String.valueOf(WifiConfiguration.KeyMgmt.NONE);
+    private static final String WPA2_PSK =
+            String.valueOf(SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
+    private static final String NONE = String.valueOf(SoftApConfiguration.SECURITY_TYPE_OPEN);
     @Mock
     private WifiTetherBasePreferenceController.OnTetherConfigUpdateListener mListener;
     private Context mContext;
@@ -38,19 +39,18 @@ public class WifiTetherSecurityPreferenceControllerTest {
     private PreferenceScreen mScreen;
     private WifiTetherSecurityPreferenceController mController;
     private ListPreference mPreference;
-    private WifiConfiguration mConfig;
+    private SoftApConfiguration mConfig;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mConfig = new WifiConfiguration();
-        mConfig.SSID = "test_1234";
-        mConfig.preSharedKey = "test_password";
-        mConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA2_PSK);
+        mConfig = new SoftApConfiguration.Builder().setSsid("test_1234")
+                .setPassphrase("test_password",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
         mContext = spy(RuntimeEnvironment.application);
 
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(mConfig);
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(mConfig);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
         when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
@@ -64,35 +64,42 @@ public class WifiTetherSecurityPreferenceControllerTest {
     @Test
     public void onPreferenceChange_securityValueUpdated() {
         mController.onPreferenceChange(mPreference, WPA2_PSK);
-        assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
+        assertThat(mController.getSecurityType()).isEqualTo(
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         assertThat(mPreference.getSummary().toString()).isEqualTo("WPA2-Personal");
 
         mController.onPreferenceChange(mPreference, NONE);
-        assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.NONE);
+        assertThat(mController.getSecurityType()).isEqualTo(
+                SoftApConfiguration.SECURITY_TYPE_OPEN);
         assertThat(mPreference.getSummary().toString()).isEqualTo("None");
     }
 
     @Test
     public void updateDisplay_preferenceUpdated() {
         // test defaulting to WPA2-Personal on new config
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(null);
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(null);
         mController.updateDisplay();
-        assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
+        assertThat(mController.getSecurityType()).isEqualTo(
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         assertThat(mPreference.getSummary().toString()).isEqualTo("WPA2-Personal");
 
         // test open tether network
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(mConfig);
-        mConfig.allowedKeyManagement.clear();
-        mConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+        SoftApConfiguration config = new SoftApConfiguration.Builder(mConfig)
+                .setPassphrase(null, SoftApConfiguration.SECURITY_TYPE_OPEN).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
         mController.updateDisplay();
-        assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.NONE);
+        assertThat(mController.getSecurityType()).isEqualTo(
+                SoftApConfiguration.SECURITY_TYPE_OPEN);
         assertThat(mPreference.getSummary().toString()).isEqualTo("None");
 
         // test WPA2-Personal tether network
-        mConfig.allowedKeyManagement.clear();
-        mConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA2_PSK);
+        SoftApConfiguration config2 = new SoftApConfiguration.Builder(mConfig)
+                .setPassphrase("test_password",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(config2);
         mController.updateDisplay();
-        assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
+        assertThat(mController.getSecurityType()).isEqualTo(
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         assertThat(mPreference.getSummary().toString()).isEqualTo("WPA2-Personal");
     }
 }

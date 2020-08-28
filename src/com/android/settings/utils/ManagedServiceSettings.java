@@ -17,7 +17,6 @@
 package com.android.settings.utils;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -91,12 +90,8 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     @Override
     public void onResume() {
         super.onResume();
-        if (!ActivityManager.isLowRamDeviceStatic()) {
-            mServiceListing.reload();
-            mServiceListing.setListening(true);
-        } else {
-            setEmptyText(R.string.disabled_low_ram_device);
-        }
+        mServiceListing.reload();
+        mServiceListing.setListening(true);
     }
 
     @Override

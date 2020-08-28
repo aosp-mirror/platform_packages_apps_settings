@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockscreenCredential;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -66,7 +67,8 @@ public class ShadowLockPatternUtils {
     }
 
     @Implementation
-    protected byte[] getPasswordHistoryHashFactor(byte[] currentPassword, int userId) {
+    protected byte[] getPasswordHistoryHashFactor(LockscreenCredential currentPassword,
+            int userId) {
         return null;
     }
 

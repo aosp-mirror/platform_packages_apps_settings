@@ -31,6 +31,6 @@ public class SystemAlertWindowPreferenceController extends BasePreferenceControl
     @Override
     public int getAvailabilityStatus() {
         return isSystemAlertWindowEnabled(mContext)
-                ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE ;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE ;
     }
 }

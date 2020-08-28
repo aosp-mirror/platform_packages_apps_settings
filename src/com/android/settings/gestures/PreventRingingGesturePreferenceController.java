@@ -20,7 +20,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 
@@ -31,19 +30,17 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class PreventRingingGesturePreferenceController extends AbstractPreferenceController
-        implements RadioButtonPreference.OnClickListener, LifecycleObserver, OnSaveInstanceState,
-        OnResume, OnPause, OnCreate, PreferenceControllerMixin {
+        implements RadioButtonPreference.OnClickListener, LifecycleObserver,
+        OnResume, OnPause, PreferenceControllerMixin {
 
     @VisibleForTesting
     static final String KEY_VIBRATE = "prevent_ringing_option_vibrate";
@@ -51,13 +48,11 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     @VisibleForTesting
     static final String KEY_MUTE = "prevent_ringing_option_mute";
 
-    private final String KEY_VIDEO_PAUSED = "key_video_paused";
     private final String PREF_KEY_VIDEO = "gesture_prevent_ringing_video";
     private final String KEY = "gesture_prevent_ringing_category";
     private final Context mContext;
 
     private VideoPreference mVideoPreference;
-    private boolean mVideoPaused;
 
     @VisibleForTesting
     PreferenceCategory mPreferenceCategory;
@@ -110,11 +105,6 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean(KEY_VIDEO_PAUSED, mVideoPaused);
-    }
-
-    @Override
     public void onRadioButtonClicked(RadioButtonPreference preference) {
         int preventRingingSetting = keyToSetting(preference.getKey());
         if (preventRingingSetting != Settings.Secure.getInt(mContext.getContentResolver(),
@@ -147,13 +137,6 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            mVideoPaused = savedInstanceState.getBoolean(KEY_VIDEO_PAUSED, false);
-        }
-    }
-
-    @Override
     public void onResume() {
         if (mSettingObserver != null) {
             mSettingObserver.register(mContext.getContentResolver());
@@ -161,7 +144,7 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
         }
 
         if (mVideoPreference != null) {
-            mVideoPreference.onViewVisible(mVideoPaused);
+            mVideoPreference.onViewVisible();
         }
     }
 
@@ -172,7 +155,6 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
         }
 
         if (mVideoPreference != null) {
-            mVideoPaused = mVideoPreference.isVideoPaused();
             mVideoPreference.onViewInvisible();
         }
     }

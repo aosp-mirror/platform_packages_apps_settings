@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
@@ -100,29 +101,31 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
         } else {
             preference.setVisible(true);
         }
-        final int userId = getUserId();
-        final String clazz;
-        if (hasEnrolledBiometrics()) {
-            preference.setSummary(getSummaryTextEnrolled());
-            clazz = getSettingsClassName();
-        } else {
-            preference.setSummary(getSummaryTextNoneEnrolled());
-            clazz = getEnrollClassName();
+        preference.setSummary(hasEnrolledBiometrics() ? getSummaryTextEnrolled()
+                : getSummaryTextNoneEnrolled());
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return super.handlePreferenceTreeClick(preference);
         }
-        preference.setOnPreferenceClickListener(target -> {
-            final Context context = target.getContext();
-            final UserManager userManager = UserManager.get(context);
-            if (Utils.startQuietModeDialogIfNecessary(context, userManager,
-                    userId)) {
-                return false;
-            }
-            Intent intent = new Intent();
-            intent.setClassName(SETTINGS_PACKAGE_NAME, clazz);
-            intent.putExtra(Intent.EXTRA_USER_ID, userId);
-            intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
-            context.startActivity(intent);
-            return true;
-        });
+
+        final Context context = preference.getContext();
+        final UserManager userManager = UserManager.get(context);
+        final int userId = getUserId();
+        if (Utils.startQuietModeDialogIfNecessary(context, userManager, userId)) {
+            return false;
+        }
+
+        final Intent intent = new Intent();
+        final String clazz = hasEnrolledBiometrics() ? getSettingsClassName()
+                : getEnrollClassName();
+        intent.setClassName(SETTINGS_PACKAGE_NAME, clazz);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
+        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
+        context.startActivity(intent);
+        return true;
     }
 
     protected int getUserId() {

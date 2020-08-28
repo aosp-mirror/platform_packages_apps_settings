@@ -17,24 +17,32 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="connected_devices_advanced_screen"
     android:title="@string/connected_device_connections_title">
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
-        android:key="bluetooth_settings"
+        android:key="bluetooth_switchbar_screen"
         android:title="@string/bluetooth_settings_title"
         android:icon="@*android:drawable/ic_settings_bluetooth"
-        android:order="-9"
-        settings:searchable="false"/>
+        android:order="-9"/>
 
-    <SwitchPreference
-        android:key="toggle_nfc"
+    <Preference
+        android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
+        android:key="nfc_and_payment_settings"
         android:title="@string/nfc_quick_toggle_title"
         android:icon="@drawable/ic_nfc"
-        android:summary="@string/nfc_quick_toggle_summary"
-        settings:controller="com.android.settings.nfc.NfcPreferenceController"
-        android:order="-7"/>
+        android:order="-7"
+        settings:searchable="false"
+        settings:controller="com.android.settings.connecteddevice.NfcAndPaymentFragmentController"/>
+
+    <Preference
+        android:fragment="com.android.settings.wfd.WifiDisplaySettings"
+        android:key="wifi_display_settings"
+        android:title="@string/wifi_display_settings_title"
+        android:icon="@drawable/ic_cast_24dp"
+        android:order="-6"
+        settings:controller="com.android.settings.wfd.WifiDisplayPreferenceController"
+        settings:keywords="@string/keywords_wifi_display_settings"/>
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.nfc.AndroidBeam"
@@ -42,15 +50,7 @@
         android:title="@string/android_beam_settings_title"
         settings:controller="com.android.settings.nfc.AndroidBeamPreferenceController"
         android:icon="@drawable/ic_android"
-        android:order="-6"/>
-
-    <SwitchPreference
-        android:key="nfc_secure_settings"
-        android:title="@string/nfc_secure_settings_title"
-        settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"
-        android:icon="@drawable/ic_nfc"
-        android:summary="@string/nfc_secure_toggle_summary"
-        android:order="-7"/>
+        android:order="-5"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="connected_device_printing"
@@ -58,8 +58,7 @@
         android:summary="@string/summary_placeholder"
         android:icon="@*android:drawable/ic_settings_print"
         android:fragment="com.android.settings.print.PrintSettingsFragment"
-        android:order="-3"
-        settings:searchable="false"/>
+        android:order="-3"/>
 
     <Preference
         android:key="bt_received_files"

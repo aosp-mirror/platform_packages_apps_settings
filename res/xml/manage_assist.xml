@@ -19,13 +19,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="manage_assist_screen"
-    android:title="@string/assist_and_voice_input_title"
+    android:title="@string/default_assist_title"
     settings:keywords="@string/keywords_assist_input">
 
     <com.android.settings.widget.GearPreference
         android:key="default_assist"
-        android:title="@string/default_assist_title"
-        android:summary="@string/summary_placeholder" />
+        android:title="@string/default_digital_assistant_title"
+        android:summary="@string/summary_placeholder"
+        settings:searchable="false"/>
 
     <Preference
         android:key="gesture_assist_application"
@@ -52,5 +53,11 @@
         android:key="voice_input_settings"
         android:title="@string/voice_input_settings_title"
         android:fragment="com.android.settings.applications.assist.DefaultVoiceInputPicker" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="manage_assist_footer"
+        android:title="@string/assist_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

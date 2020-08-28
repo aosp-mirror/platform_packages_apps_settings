@@ -44,8 +44,6 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment
 
     private static final String TAG = "AppAndNotifDashboard";
 
-    private View mProgressHeader;
-    private View mProgressAnimation;
     private RecentAppStatsMixin mRecentAppStatsMixin;
     private RecentAppsPreferenceController mRecentAppsPreferenceController;
     private AllAppsInfoPreferenceController mAllAppsInfoPreferenceController;
@@ -92,20 +90,19 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mProgressHeader = setPinnedHeaderView(R.layout.progress_header);
-        mProgressAnimation = mProgressHeader.findViewById(R.id.progress_bar_animation);
-        setLoadingEnabled(false);
+        setPinnedHeaderView(R.layout.progress_header);
+        showPinnedHeader(false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        setLoadingEnabled(true);
+        showPinnedHeader(true);
     }
 
     @Override
     public void onReloadDataCompleted(@NonNull List<UsageStats> recentApps) {
-        setLoadingEnabled(false);
+        showPinnedHeader(false);
         if (!recentApps.isEmpty()) {
             Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(),
                     getListView());
@@ -117,13 +114,6 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment
         return buildPreferenceControllers(context);
     }
 
-    private void setLoadingEnabled(boolean enabled) {
-        if (mProgressHeader != null && mProgressAnimation != null) {
-            mProgressHeader.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-            mProgressAnimation.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-        }
-    }
-
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyBroadcastPreferenceController(context,
@@ -131,7 +121,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment
         return controllers;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(

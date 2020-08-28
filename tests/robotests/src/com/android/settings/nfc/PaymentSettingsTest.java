@@ -29,6 +29,10 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +53,6 @@ public class PaymentSettingsTest {
 
     static final String PAYMENT_KEY = "nfc_payment";
     static final String FOREGROUND_KEY = "nfc_foreground";
-    static final String PAYMENT_SCREEN_KEY = "nfc_payment_settings_screen";
 
     private Context mContext;
 
@@ -103,14 +106,42 @@ public class PaymentSettingsTest {
     }
 
     @Test
-    public void getNonIndexabkeKey_guestUser_returnsFalse() {
+    public void getNonIndexableKey_guestUser_returnsFalse() {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
         when(mUserInfo.isGuest()).thenReturn(true);
 
         final List<String> niks =
                 PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
-        assertThat(niks).containsAllOf(FOREGROUND_KEY, PAYMENT_KEY, PAYMENT_SCREEN_KEY);
+        assertThat(niks).containsAllOf(FOREGROUND_KEY, PAYMENT_KEY);
+    }
+
+    @Test
+    public void isShowEmptyImage_hasVisiblePreference_returnFalse() {
+        final PaymentSettings paymentSettings = new PaymentSettings();
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        final PreferenceScreen screen = preferenceManager.createPreferenceScreen(mContext);
+        final Preference preference1 = new Preference(mContext);
+        screen.addPreference(preference1);
+        final Preference preference2 = new Preference(mContext);
+        screen.addPreference(preference2);
+
+        assertThat(paymentSettings.isShowEmptyImage(screen)).isFalse();
+    }
+
+    @Test
+    public void isShowEmptyImage_hasNoVisiblePreference_returnTrue() {
+        final PaymentSettings paymentSettings = new PaymentSettings();
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        final PreferenceScreen screen = preferenceManager.createPreferenceScreen(mContext);
+        final Preference preference1 = new Preference(mContext);
+        preference1.setVisible(false);
+        screen.addPreference(preference1);
+        final Preference preference2 = new Preference(mContext);
+        screen.addPreference(preference2);
+        preference2.setVisible(false);
+
+        assertThat(paymentSettings.isShowEmptyImage(screen)).isTrue();
     }
 
     @Implements(PaymentBackend.class)

@@ -16,29 +16,46 @@ package com.android.settings.location;
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
  * A base controller for preferences that listens to location settings change and modifies location
  * settings.
  */
-public abstract class LocationBasePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LocationEnabler.LocationModeChangeListener {
+public abstract class LocationBasePreferenceController extends BasePreferenceController
+        implements LocationEnabler.LocationModeChangeListener {
 
-    protected final UserManager mUserManager;
-    protected final LocationEnabler mLocationEnabler;
+    protected UserManager mUserManager;
+    protected LocationEnabler mLocationEnabler;
+    protected DashboardFragment mFragment;
+    protected Lifecycle mLifecycle;
 
-    public LocationBasePreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mLocationEnabler = new LocationEnabler(context, this /* listener */, lifecycle);
+    /**
+     * Constructor of LocationBasePreferenceController. {@link BasePreferenceController} uses
+     * reflection to create controller, all controllers extends {@link BasePreferenceController}
+     * should have this function.
+     */
+    public LocationBasePreferenceController(Context context, String key) {
+        super(context, key);
+        mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+    }
+
+    /**
+     * Initialize {@link LocationEnabler} in this controller
+     *
+     * @param fragment The {@link DashboardFragment} uses the controller.
+     */
+    public void init(DashboardFragment fragment) {
+        mFragment = fragment;
+        mLifecycle = mFragment.getSettingsLifecycle();
+        mLocationEnabler = new LocationEnabler(mContext, this /* listener */, mLifecycle);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
 }

@@ -19,18 +19,13 @@ package com.android.settings.wifi.tether;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
-import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
@@ -49,7 +44,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -67,8 +61,7 @@ public class WifiTetherPreferenceControllerTest {
     private WifiManager mWifiManager;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock
-    private WifiConfiguration mWifiConfiguration;
+    private SoftApConfiguration mSoftApConfiguration;
 
     private WifiTetherPreferenceController mController;
     private Lifecycle mLifecycle;
@@ -88,8 +81,8 @@ public class WifiTetherPreferenceControllerTest {
                 .thenReturn(mConnectivityManager);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(mWifiConfiguration);
-        mWifiConfiguration.SSID = SSID;
+        mSoftApConfiguration = new SoftApConfiguration.Builder().setSsid(SSID).build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
 
         when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         mController = new WifiTetherPreferenceController(mContext, mLifecycle,

@@ -32,7 +32,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.os.Build;
+import android.os.SystemProperties;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
 import android.telephony.TelephonyManager;
@@ -49,11 +49,13 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class OemUnlockPreferenceControllerTest {
+
+    private static final String OEM_UNLOCK_SUPPORTED_KEY = "ro.oem_unlock_supported";
+    private static final String UNSUPPORTED = "-9999";
+    private static final String SUPPORTED = "1";
 
     @Mock
     private Context mContext;
@@ -80,6 +82,7 @@ public class OemUnlockPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        SystemProperties.set(OEM_UNLOCK_SUPPORTED_KEY, SUPPORTED);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager
                     .FEATURE_TELEPHONY_CARRIERLOCK)).thenReturn(true);
@@ -96,20 +99,14 @@ public class OemUnlockPreferenceControllerTest {
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
-    public void OemUnlockPreferenceController_shouldNotCrashInEmulatorEngBuild() {
-        ReflectionHelpers.setStaticField(Build.class, "IS_EMULATOR", true);
-        ReflectionHelpers.setStaticField(Build.class, "IS_ENG", true);
+    public void OemUnlockPreferenceController_oemUnlockUnsupported_shouldNotCrash() {
+        SystemProperties.set(OEM_UNLOCK_SUPPORTED_KEY, UNSUPPORTED);
 
         new OemUnlockPreferenceController(mContext, mActivity, mFragment);
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
-    public void OemUnlockPreferenceController_shouldNotCrashInOtherBuild() {
-        ReflectionHelpers.setStaticField(Build.class, "IS_EMULATOR", false);
-        ReflectionHelpers.setStaticField(Build.class, "IS_ENG", false);
-
+    public void OemUnlockPreferenceController_oemUnlockSupported_shouldNotCrash() {
         new OemUnlockPreferenceController(mContext, mActivity, mFragment);
     }
 

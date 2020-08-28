@@ -64,16 +64,6 @@ public class RingtonePreferenceControllerBaseTest {
         verify(preference).setSummary(anyString());
     }
 
-    @Test
-    public void updateState_nullRingtone_shouldNotGetTitle() {
-        Preference preference = mock(Preference.class);
-        Settings.System.putString(mContext.getContentResolver(), Settings.System.RINGTONE, null);
-
-        mController.updateState(preference);
-
-        verify(preference, never()).setSummary(anyString());
-    }
-
     private class RingtonePreferenceControllerBaseTestable
             extends RingtonePreferenceControllerBase {
         RingtonePreferenceControllerBaseTestable(Context context) {

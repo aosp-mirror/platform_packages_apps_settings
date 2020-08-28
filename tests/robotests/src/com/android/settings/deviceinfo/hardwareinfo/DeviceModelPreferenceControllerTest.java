@@ -61,4 +61,9 @@ public class DeviceModelPreferenceControllerTest {
     public void isAlwaysSliceable() {
         assertThat(mController.isSliceable()).isTrue();
     }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
 }

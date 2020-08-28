@@ -20,7 +20,6 @@ import static com.android.settings.security.EncryptionStatusPreferenceController
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
@@ -48,7 +47,6 @@ public class SecuritySettings extends DashboardFragment {
     private static final String WORK_PROFILE_SECURITY_CATEGORY = "security_category_profile";
 
     public static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
-    public static final int UNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 128;
     public static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
     public static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
 
@@ -138,19 +136,8 @@ public class SecuritySettings extends DashboardFragment {
     /**
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final List<SearchIndexableResource> index = new ArrayList<>();
-                    // Append the rest of the settings
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.security_dashboard_settings;
-                    index.add(sir);
-                    return index;
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.security_dashboard_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context

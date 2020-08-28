@@ -19,13 +19,22 @@ package com.android.settings;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.FeatureFlagUtils;
+
+import androidx.preference.Preference;
+
+import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,6 +75,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_tetherAvailable_keysNotReturned() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // To let TetherUtil.isTetherAvailable return true, select one of the combinations
         setupIsTetherAvailable(true);
 
@@ -100,6 +110,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_usbAvailable_usbKeyNotReturned() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // We can ignore the condition of Utils.isMonkeyRunning()
         // In normal case, monkey and robotest should not execute at the same time
         when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{"dummyRegex"});
@@ -122,6 +133,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_bluetoothAvailable_bluetoothKeyNotReturned() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         when(mConnectivityManager.getTetherableBluetoothRegexs())
                 .thenReturn(new String[]{"dummyRegex"});
 
@@ -129,6 +141,23 @@ public class TetherSettingsTest {
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(niks).doesNotContain(TetherSettings.KEY_ENABLE_BLUETOOTH_TETHERING);
+    }
+
+    @Test
+    public void testSetFooterPreferenceTitle_isStaApConcurrencySupported_showStaApString() {
+        final TetherSettings spyTetherSettings = spy(new TetherSettings());
+        when(spyTetherSettings.getContext()).thenReturn(mContext);
+        final Preference mockPreference = mock(Preference.class);
+        when(spyTetherSettings.findPreference(TetherSettings.KEY_TETHER_PREFS_FOOTER))
+            .thenReturn(mockPreference);
+        final WifiManager mockWifiManager = mock(WifiManager.class);
+        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mockWifiManager);
+        when(mockWifiManager.isStaApConcurrencySupported()).thenReturn(true);
+
+        spyTetherSettings.setFooterPreferenceTitle();
+
+        verify(mockPreference, never()).setTitle(R.string.tethering_footer_info);
+        verify(mockPreference).setTitle(R.string.tethering_footer_info_sta_ap_concurrency);
     }
 
     private void setupIsTetherAvailable(boolean returnValue) {

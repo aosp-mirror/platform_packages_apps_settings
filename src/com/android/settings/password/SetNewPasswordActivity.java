@@ -32,15 +32,15 @@ import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.List;
 
@@ -110,7 +110,7 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
 
     @Override
     public void launchChooseLock(Bundle chooseLockFingerprintExtras) {
-        final boolean isInSetupWizard = !Utils.isDeviceProvisioned(this);
+        final boolean isInSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         Intent intent = isInSetupWizard ? new Intent(this, SetupChooseLockGeneric.class)
                 : new Intent(this, ChooseLockGeneric.class);
         intent.setAction(mNewPasswordAction);

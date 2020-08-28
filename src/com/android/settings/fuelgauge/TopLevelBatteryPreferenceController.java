@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.text.BidiFormatter;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -49,8 +48,7 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_top_level_battery)
-        ? AVAILABLE_UNSEARCHABLE
-        : UNSUPPORTED_ON_DEVICE;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -79,15 +77,14 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
             return null;
         }
         CharSequence label;
-        final BidiFormatter formatter = BidiFormatter.getInstance();
         if (!info.discharging && info.chargeLabel != null) {
             label = info.chargeLabel;
         } else if (info.remainingLabel == null) {
             label = info.batteryPercentString;
         } else {
             label = context.getString(R.string.power_remaining_settings_home_page,
-                    formatter.unicodeWrap(info.batteryPercentString),
-                    formatter.unicodeWrap(info.remainingLabel));
+                    info.batteryPercentString,
+                    info.remainingLabel);
         }
         return label;
     }

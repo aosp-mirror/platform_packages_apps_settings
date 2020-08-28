@@ -16,34 +16,26 @@
 
 package com.android.settings.wifi.savedaccesspoints;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
-import android.content.pm.FeatureInfo;
-import android.content.pm.PackageManager;
+import android.net.wifi.EAPConstants;
 import android.net.wifi.WifiConfiguration;
-
-import android.net.wifi.hotspot2.PasspointConfiguration;
-import android.net.wifi.hotspot2.pps.HomeSp;
-import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiManager;
+import android.net.wifi.hotspot2.PasspointConfiguration;
+import android.net.wifi.hotspot2.pps.Credential;
+import android.net.wifi.hotspot2.pps.HomeSp;
+
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.testutils.shadow.ShadowAccessPoint;
-import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settingslib.wifi.AccessPointPreference;
 
@@ -58,7 +50,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowThreadUtils.class, ShadowWifiManager.class})
+@Config(shadows = {ShadowWifiManager.class})
 public class SubscribedAccessPointsPreferenceControllerTest {
 
     @Mock
@@ -83,54 +75,11 @@ public class SubscribedAccessPointsPreferenceControllerTest {
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
                 .thenReturn(mPreferenceCategory);
         when(mPreferenceCategory.getContext()).thenReturn(mContext);
-
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
-    }
-
-    @Test
-    public void getAvailability_alwaysAvailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void onStart_shouldRefreshApList() {
-        doNothing().when(mController).refreshSubscribedAccessPoints();
-
-        mController.onStart();
-
-        verify(mController).refreshSubscribedAccessPoints();
-    }
-
-    @Test
-    public void postRefresh_shouldRefreshApList() {
-        doNothing().when(mController).refreshSubscribedAccessPoints();
-
-        mController.postRefreshSubscribedAccessPoints();
-
-        verify(mController).refreshSubscribedAccessPoints();
-    }
-
-    @Test
-    public void forget_onSuccess_shouldRefreshApList() {
-        doNothing().when(mController).refreshSubscribedAccessPoints();
-
-        mController.onSuccess();
-
-        verify(mController).refreshSubscribedAccessPoints();
-    }
-
-    @Test
-    public void forget_onFailure_shouldRefreshApList() {
-        doNothing().when(mController).refreshSubscribedAccessPoints();
-
-        mController.onFailure(0 /* reason */);
-
-        verify(mController).refreshSubscribedAccessPoints();
     }
 
     @Test
     @Config(shadows = ShadowAccessPoint.class)
-    public void refreshSubscribedAccessPoints_shouldNotListNonSubscribedAPs() {
+    public void displayPreference_oneAccessPoint_shouldNotListNonSubscribedAPs() {
         final WifiConfiguration config = new WifiConfiguration();
         config.SSID = "SSID";
         config.BSSID = "BSSID";
@@ -138,18 +87,16 @@ public class SubscribedAccessPointsPreferenceControllerTest {
         mWifiManager.addNetwork(config);
 
         mController.displayPreference(mPreferenceScreen);
-        mController.refreshSubscribedAccessPoints();
 
         verify(mPreferenceCategory, never()).addPreference(any(AccessPointPreference.class));
     }
 
     @Test
     @Config(shadows = ShadowAccessPoint.class)
-    public void refreshSubscribedAccessPoints_shouldListSubscribedAPs() {
+    public void displayPreference_onePasspoint_shouldListSubscribedAPs() {
         mWifiManager.addOrUpdatePasspointConfiguration(createMockPasspointConfiguration());
 
         mController.displayPreference(mPreferenceScreen);
-        mController.refreshSubscribedAccessPoints();
 
         final ArgumentCaptor<AccessPointPreference> captor =
                 ArgumentCaptor.forClass(AccessPointPreference.class);
@@ -165,6 +112,13 @@ public class SubscribedAccessPointsPreferenceControllerTest {
         homeSp.setFqdn("FQDN");
         homeSp.setFriendlyName("TESTPASSPOINT");
         config.setHomeSp(homeSp);
+        final Credential.SimCredential simCredential = new Credential.SimCredential();
+        final Credential credential = new Credential();
+        credential.setRealm("test.example.com");
+        simCredential.setImsi("12345*");
+        simCredential.setEapType(EAPConstants.EAP_SIM);
+        credential.setSimCredential(simCredential);
+        config.setCredential(credential);
         return config;
     }
 }

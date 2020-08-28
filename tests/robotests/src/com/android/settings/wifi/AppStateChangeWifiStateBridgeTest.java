@@ -22,6 +22,7 @@ import static org.mockito.Mockito.mock;
 import android.Manifest;
 import android.content.pm.PackageInfo;
 
+import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
@@ -79,6 +80,13 @@ public class AppStateChangeWifiStateBridgeTest {
         mState.packageInfo.requestedPermissions
                 = new String[] { Manifest.permission.NETWORK_SETTINGS };
         mEntry.extraInfo = mState;
+        assertThat(mFilter.filterApp(mEntry)).isFalse();
+    }
+
+    @Test
+    public void testFilterApp_filterWrongTypeExtraInfo_returnFalse() {
+        mEntry.extraInfo = mock(DataUsageState.class);
+
         assertThat(mFilter.filterApp(mEntry)).isFalse();
     }
 }

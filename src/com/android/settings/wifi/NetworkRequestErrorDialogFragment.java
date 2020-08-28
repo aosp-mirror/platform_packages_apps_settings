@@ -19,8 +19,8 @@ package com.android.settings.wifi;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,10 +45,6 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
         return new NetworkRequestErrorDialogFragment();
     }
 
-    private NetworkRequestErrorDialogFragment() {
-        super();
-    }
-
     @Override
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
@@ -68,7 +64,7 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
         if (msgType == ERROR_DIALOG_TYPE.TIME_OUT) {
             builder.setMessage(R.string.network_connection_timeout_dialog_message)
                     .setPositiveButton(R.string.network_connection_timeout_dialog_ok,
-                            (dialog, which) -> startScanningDialog())
+                            (dialog, which) -> onRescanClick())
                     .setNegativeButton(R.string.cancel,
                             (dialog, which) -> rejectNetworkRequestAndFinish());
         } else {
@@ -89,10 +85,11 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
         mRejectCallback = rejectCallback;
     }
 
-    protected void startScanningDialog() {
-        final NetworkRequestDialogFragment fragment = NetworkRequestDialogFragment.newInstance();
-        fragment.show(getActivity().getSupportFragmentManager(),
-                NetworkRequestErrorDialogFragment.class.getSimpleName());
+    protected void onRescanClick() {
+        if (getActivity() != null) {
+            dismiss();
+            ((NetworkRequestDialogActivity)getActivity()).onClickRescanButton();
+        }
     }
 
     private void rejectNetworkRequestAndFinish() {

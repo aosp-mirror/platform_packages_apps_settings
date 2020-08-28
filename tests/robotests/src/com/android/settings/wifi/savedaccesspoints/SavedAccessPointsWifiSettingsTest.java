@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

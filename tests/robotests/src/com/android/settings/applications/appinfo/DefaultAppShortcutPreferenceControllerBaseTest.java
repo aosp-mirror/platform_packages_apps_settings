@@ -85,8 +85,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     }
 
     @Test
-    public void constructor_callsIsApplicationQualifiedForRole() {
-        verify(mRoleControllerManager).isApplicationQualifiedForRole(eq(TEST_ROLE_NAME), eq(
+    public void constructor_callsIsApplicationVisibleForRole() {
+        verify(mRoleControllerManager).isApplicationVisibleForRole(eq(TEST_ROLE_NAME), eq(
                 TEST_PACKAGE_NAME), any(Executor.class), any(Consumer.class));
     }
 
@@ -108,7 +108,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     @Test
     public void
     getAvailabilityStatus_noCallbackForIsRoleNotVisible_shouldReturnUnsupported() {
-        setApplicationIsQualifiedForRole(true);
+        setApplicationIsVisibleForRole(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
@@ -117,7 +117,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     @Test
     public void getAvailabilityStatus_RoleIsNotVisible_shouldReturnUnsupported() {
         setRoleIsVisible(false);
-        setApplicationIsQualifiedForRole(true);
+        setApplicationIsVisibleForRole(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
@@ -125,7 +125,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
 
     @Test
     public void
-    getAvailabilityStatus_noCallbackForIsApplicationQualifiedForRole_shouldReturnUnsupported() {
+    getAvailabilityStatus_noCallbackForIsApplicationVisibleForRole_shouldReturnUnsupported() {
         setRoleIsVisible(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
@@ -133,18 +133,18 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     }
 
     @Test
-    public void getAvailabilityStatus_applicationIsNotQualifiedForRole_shouldReturnUnsupported() {
+    public void getAvailabilityStatus_applicationIsNotVisibleForRole_shouldReturnUnsupported() {
         setRoleIsVisible(true);
-        setApplicationIsQualifiedForRole(false);
+        setApplicationIsVisibleForRole(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void getAvailabilityStatus_RoleVisibleAndApplicationQualified_shouldReturnAvailable() {
+    public void getAvailabilityStatus_RoleVisibleAndApplicationVisible_shouldReturnAvailable() {
         setRoleIsVisible(true);
-        setApplicationIsQualifiedForRole(true);
+        setApplicationIsVisibleForRole(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 DefaultAppShortcutPreferenceControllerBase.AVAILABLE);
@@ -159,13 +159,13 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
         callback.accept(visible);
     }
 
-    private void setApplicationIsQualifiedForRole(boolean qualified) {
+    private void setApplicationIsVisibleForRole(boolean visible) {
         final ArgumentCaptor<Consumer<Boolean>> callbackCaptor = ArgumentCaptor.forClass(
                 Consumer.class);
-        verify(mRoleControllerManager).isApplicationQualifiedForRole(eq(TEST_ROLE_NAME), eq(
+        verify(mRoleControllerManager).isApplicationVisibleForRole(eq(TEST_ROLE_NAME), eq(
                 TEST_PACKAGE_NAME), any(Executor.class), callbackCaptor.capture());
         final Consumer<Boolean> callback = callbackCaptor.getValue();
-        callback.accept(qualified);
+        callback.accept(visible);
     }
 
     @Test

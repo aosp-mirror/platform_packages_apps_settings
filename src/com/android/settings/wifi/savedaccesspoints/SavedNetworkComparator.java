@@ -30,7 +30,7 @@ public final class SavedNetworkComparator {
                 @Override
                 public int compare(AccessPoint ap1, AccessPoint ap2) {
                     return mCollator.compare(
-                            nullToEmpty(ap1.getConfigName()), nullToEmpty(ap2.getConfigName()));
+                            nullToEmpty(ap1.getTitle()), nullToEmpty(ap2.getTitle()));
                 }
 
                 private String nullToEmpty(String string) {

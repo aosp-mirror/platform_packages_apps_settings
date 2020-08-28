@@ -67,17 +67,12 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @Override
     public void onStart() {
         super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         mBatteryBroadcastReceiver.register();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         mBatteryBroadcastReceiver.unRegister();
     }
 

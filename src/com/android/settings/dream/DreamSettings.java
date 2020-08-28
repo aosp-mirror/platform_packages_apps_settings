@@ -23,7 +23,6 @@ import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -36,7 +35,6 @@ import com.android.settingslib.dream.DreamBackend.WhenToDream;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -137,15 +135,8 @@ public class DreamSettings extends DashboardFragment {
         return controllers;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER
-            = new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-            final SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.dream_fragment_overview;
-            return Arrays.asList(sir);
-        }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER
+            = new BaseSearchIndexProvider(R.xml.dream_fragment_overview) {
 
         @Override
         public List<AbstractPreferenceController> createPreferenceControllers(Context context) {

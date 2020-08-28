@@ -19,5 +19,6 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="trust_agents"
     android:title="@string/manage_trust_agents"
+    settings:searchable="false"
     settings:controller="com.android.settings.security.trustagent.TrustAgentsPreferenceController">
 </PreferenceScreen>

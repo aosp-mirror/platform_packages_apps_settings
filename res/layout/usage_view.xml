@@ -35,7 +35,8 @@
             android:orientation="vertical">
 
             <include android:id="@+id/label_top"
-                layout="@layout/usage_side_label" />
+                layout="@layout/usage_side_label"
+                android:contentDescription="@null" />
 
             <Space
                 android:id="@+id/space1"
@@ -44,7 +45,8 @@
                 android:layout_weight="1" />
 
             <include android:id="@+id/label_middle"
-                layout="@layout/usage_side_label" />
+                layout="@layout/usage_side_label"
+                android:contentDescription="@null" />
 
             <Space
                 android:id="@+id/space2"
@@ -53,7 +55,8 @@
                 android:layout_weight="1" />
 
             <include android:id="@+id/label_bottom"
-                layout="@layout/usage_side_label" />
+                layout="@layout/usage_side_label"
+                android:contentDescription="@null" />
 
         </LinearLayout>
 
@@ -82,7 +85,8 @@
             android:layout_weight="1"
             android:orientation="horizontal">
             <include android:id="@+id/label_start"
-                     layout="@layout/usage_side_label" />
+                layout="@layout/usage_side_label"
+                android:contentDescription="@null" />
 
             <Space
                 android:id="@+id/spacer"
@@ -91,7 +95,8 @@
                 android:layout_weight="1" />
 
             <include android:id="@+id/label_end"
-                     layout="@layout/usage_side_label" />
+                layout="@layout/usage_side_label"
+                android:contentDescription="@null" />
         </com.android.settings.widget.BottomLabelLayout>
     </LinearLayout>
 

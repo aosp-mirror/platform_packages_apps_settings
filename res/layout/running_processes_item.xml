@@ -17,71 +17,19 @@
 */
 -->
 
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:paddingTop="8dip"
-    android:paddingBottom="8dip"
-    android:columnCount="2">
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:layout_rowSpan="2"
-        android:layout_marginEnd="8dip"
-        android:scaleType="centerInside"
-        android:contentDescription="@null" />
-
-    <LinearLayout
-        android:layout_width="0dip"
-        android:layout_gravity="fill_horizontal"
-        android:layout_marginTop="2dip">
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-            android:textAlignment="viewStart" />
-
-        <TextView
-            android:id="@+id/size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dip"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
-            android:textColor="?android:attr/textColorSecondary" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dip"
-        android:layout_gravity="fill_horizontal|top">
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textAlignment="viewStart" />
-
-        <TextView
-            android:id="@+id/uptime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dip"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
-            android:textColor="?android:attr/textColorSecondary" />
-
-    </LinearLayout>
-
-</GridLayout>
+    android:layout_height="match_parent">
+    <include
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/widget_summary"
+        layout="@layout/preference_widget_two_summary"/>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toStartOf="@id/widget_summary"
+        layout="@layout/preference_material"/>
+</RelativeLayout>

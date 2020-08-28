@@ -43,6 +43,10 @@ public class PictureInPictureDetailPreferenceController extends AppInfoPreferenc
 
     @Override
     public int getAvailabilityStatus() {
+        if (!mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_PICTURE_IN_PICTURE)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return hasPictureInPictureActivites() ? AVAILABLE : DISABLED_FOR_USER;
     }
 

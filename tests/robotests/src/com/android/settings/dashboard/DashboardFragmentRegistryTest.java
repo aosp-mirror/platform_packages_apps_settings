@@ -18,6 +18,9 @@ package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.android.settings.accounts.AccountDashboardFragment;
+import com.android.settingslib.drawer.CategoryKey;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -28,5 +31,13 @@ public class DashboardFragmentRegistryTest {
     public void pageAndKeyShouldHave1to1Mapping() {
         assertThat(DashboardFragmentRegistry.CATEGORY_KEY_TO_PARENT_MAP.size())
                 .isEqualTo(DashboardFragmentRegistry.PARENT_TO_CATEGORY_KEY_MAP.size());
+    }
+
+    @Test
+    public void accountDetailCategoryShouldRedirectToAccountDashboardFragment() {
+        final String fragment = DashboardFragmentRegistry.CATEGORY_KEY_TO_PARENT_MAP.get(
+                CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+
+        assertThat(fragment).isEqualTo(AccountDashboardFragment.class.getName());
     }
 }

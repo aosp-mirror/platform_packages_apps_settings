@@ -46,6 +46,21 @@
         android:layout="@layout/preference_category_no_label"
         android:order="-997"/>
 
+    <Preference
+        android:key="conversations"
+        android:title="@string/conversations_category_title"
+        android:order="-550"
+        settings:controller="com.android.settings.notification.ConversationListSummaryPreferenceController"
+        android:fragment="com.android.settings.notification.app.ConversationListSettings"
+    />
+
+    <Preference
+        android:key="configure_notification_settings"
+        android:title="@string/configure_notification_settings"
+        android:summary="@string/notification_screen_summary"
+        android:order="-440"
+        android:fragment="com.android.settings.notification.ConfigureNotificationSettings"/>
+
     <!-- Notifications (appears before manage_perms), default apps (appears after) -->
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
@@ -62,9 +77,9 @@
     <Preference
         android:key="manage_perms"
         android:title="@string/app_permissions"
+        android:summary="@string/runtime_permissions_summary_control_app_access"
         android:order="12"
-        settings:keywords="@string/keywords_app_permissions"
-        settings:controller="com.android.settings.applications.AppPermissionsPreferenceController">
+        settings:keywords="@string/keywords_app_permissions">
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
@@ -75,7 +90,7 @@
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.cellbroadcastreceiver"
+            android:targetPackage="@string/cell_broadcast_receiver_package"
             android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
     </com.android.settingslib.RestrictedPreference>
 

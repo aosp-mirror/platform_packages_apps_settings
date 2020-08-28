@@ -90,7 +90,7 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
         if (!mWifiTracker.connected) {
             return mContext.getString(R.string.disconnected);
         }
-        String ssid = WifiInfo.removeDoubleQuotes(mWifiTracker.ssid);
+        String ssid = WifiInfo.sanitizeSsid(mWifiTracker.ssid);
         if (TextUtils.isEmpty(mWifiTracker.statusLabel)) {
             return ssid;
         }

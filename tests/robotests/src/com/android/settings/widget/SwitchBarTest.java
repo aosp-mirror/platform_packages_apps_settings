@@ -85,6 +85,24 @@ public class SwitchBarTest {
     }
 
     @Test
+    public void setCheck_customLabelWithStringType_shouldUpdateTextAndBackground() {
+        final String onText = mContext.getString(
+                R.string.accessibility_service_master_switch_title);
+        final String offText = mContext.getString(
+                R.string.accessibility_service_master_switch_title);
+        final TextView switchBarTextView = ((TextView) mBar.findViewById(R.id.switch_text));
+
+        mBar.setSwitchBarText(onText, offText);
+
+        assertThat(switchBarTextView.getText()).isEqualTo(offText);
+
+        mBar.setChecked(true);
+
+        assertThat(mBar.getBackground()).isInstanceOf(ColorDrawable.class);
+        assertThat(switchBarTextView.getText()).isEqualTo(onText);
+    }
+
+    @Test
     public void disabledByAdmin_shouldDelegateToRestrictedIcon() {
         mBar.setDisabledByAdmin(new EnforcedAdmin());
         assertThat(mBar.getDelegatingView().getId()).isEqualTo(R.id.restricted_icon);

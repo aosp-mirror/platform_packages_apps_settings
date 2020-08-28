@@ -45,7 +45,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
 
     private boolean mRoleVisible;
 
-    private boolean mAppQualified;
+    private boolean mAppVisible;
 
     private PreferenceScreen mPreferenceScreen;
 
@@ -65,9 +65,9 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
             mRoleVisible = visible;
             refreshAvailability();
         });
-        roleControllerManager.isApplicationQualifiedForRole(mRoleName, mPackageName, executor,
-                qualified -> {
-                    mAppQualified = qualified;
+        roleControllerManager.isApplicationVisibleForRole(mRoleName, mPackageName, executor,
+                visible -> {
+                    mAppVisible = visible;
                     refreshAvailability();
                 });
     }
@@ -94,7 +94,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
         if (mContext.getSystemService(UserManager.class).isManagedProfile()) {
             return DISABLED_FOR_USER;
         }
-        return mRoleVisible && mAppQualified ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mRoleVisible && mAppVisible ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

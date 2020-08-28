@@ -30,7 +30,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
@@ -78,7 +77,12 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
         holder.appIcon.setImageDrawable(
                 Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, app.packageName,
                         UserHandle.getUserId(app.uid)));
-        holder.appName.setText(Utils.getApplicationLabel(mContext, app.packageName));
+        CharSequence label = Utils.getApplicationLabel(mContext, app.packageName);
+        if (label == null) {
+            label = app.packageName;
+        }
+
+        holder.appName.setText(label);
     }
 
     @Override

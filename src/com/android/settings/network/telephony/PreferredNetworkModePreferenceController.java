@@ -26,7 +26,6 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 

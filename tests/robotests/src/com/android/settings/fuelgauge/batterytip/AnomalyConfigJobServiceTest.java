@@ -30,10 +30,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
 
+import android.app.JobSchedulerImpl;
 import android.app.StatsManager;
+import android.app.job.IJobScheduler;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.Context;
+import android.os.Binder;
 import android.provider.Settings;
 
 import com.android.settings.R;
@@ -66,7 +69,7 @@ public class AnomalyConfigJobServiceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mJobScheduler = spy(mContext.getSystemService(JobScheduler.class));
+        mJobScheduler = spy(new JobSchedulerImpl(IJobScheduler.Stub.asInterface(new Binder())));
         when(mContext.getSystemService(JobScheduler.class)).thenReturn(mJobScheduler);
 
         mJobService = spy(new AnomalyConfigJobService());

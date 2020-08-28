@@ -20,4 +20,12 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/manage_device_admin"
     android:key="device_admin_settings"
-    settings:controller="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminListPreferenceController" />
+    settings:searchable="false"
+    settings:controller="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminListPreferenceController">
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="device_admin_footer"
+        android:title="@string/no_device_admins"
+        android:selectable="false"
+        settings:searchable="false"/>
+</PreferenceScreen>

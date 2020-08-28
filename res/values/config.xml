@@ -201,10 +201,16 @@
     <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
     <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
 
+    <!-- Whether dismissal timestamp should be kept before deletion -->
+    <bool name="config_keep_contextual_card_dismissal_timestamp">false</bool>
+
     <!-- Settings intelligence package name -->
     <string name="config_settingsintelligence_package_name" translatable="false">
         com.android.settings.intelligence
     </string>
+
+    <!-- Whether the confirmation for sim deletion is defaulted to be on or off-->
+    <bool name="config_sim_deletion_confirmation_default_on">false</bool>
 
     <!-- Package Installer package name -->
     <string name="config_package_installer_package_name" translatable="false">
@@ -214,10 +220,21 @@
     <!-- Settings intelligence interaction log intent action -->
     <string name="config_settingsintelligence_log_action" translatable="false"></string>
 
+    <!-- AOSP Emergency app package name -->
+    <string name="config_aosp_emergency_package_name" translatable="false">
+        com.android.emergency
+    </string>
+
+    <!-- AOSP Emergency app intent action -->
+    <string name="config_aosp_emergency_intent_action" translatable="false">
+        android.settings.EDIT_EMERGENCY_INFO
+    </string>
+
     <!-- Emergency app package name -->
     <string name="config_emergency_package_name" translatable="false">
         com.android.emergency
     </string>
+
     <!-- Emergency app intent action -->
     <string name="config_emergency_intent_action" translatable="false">
         android.settings.EDIT_EMERGENCY_INFO
@@ -415,15 +432,6 @@
     <!-- List containing the injected tile keys which are suppressed. -->
     <string-array name="config_suppress_injected_tile_keys" translatable="false"/>
 
-    <!-- "Show work policy info" intent action. TODO(b/134391103): Replace with final SystemAPI intent when it's available. -->
-    <string name="config_work_policy_info_intent_action" translatable="false"/>
-
-    <!-- RTT setting intent action -->
-    <string name="config_rtt_setting_intent_action" translatable="false"></string>
-
-    <!-- Package name of dialer supports RTT setting-->
-    <string name="config_rtt_setting_package_name" translatable="false"></string>
-
     <!-- Reset application package name -->
     <string-array name="config_skip_reset_apps_package_name" translatable="false">
         <item>android</item>
@@ -431,4 +439,27 @@
         <item>com.android.systemui</item>
         <item>com.android.vending</item>
     </string-array>
+
+    <!-- Settings panel keeps observe this uri -->
+    <string-array name="config_panel_keep_observe_uri" translatable="false">
+        <item>content://com.android.settings.slices/intent/media_output_indicator</item>
+    </string-array>
+
+    <!-- Uri to query non-public Slice Uris. -->
+    <string name="config_non_public_slice_query_uri" translatable="false"></string>
+
+    <!-- RTT setting intent action -->
+    <string name="config_rtt_setting_intent_action" translatable="false"></string>
+
+    <!-- Package name of dialer supports RTT setting-->
+    <string name="config_rtt_setting_package_name" translatable="false"></string>
+
+    <!-- Whether nfc detection point preview image is available or not. -->
+    <bool name="config_nfc_detection_point">false</bool>
+
+    <!-- Whether to show Enhanced Connectivity switch in Developer Options -->
+    <bool name="config_show_enhanced_connectivity">false</bool>
+
+    <!-- Whether to show Smooth Display feature in Settings Options -->
+    <bool name="config_show_smooth_display">false</bool>
 </resources>

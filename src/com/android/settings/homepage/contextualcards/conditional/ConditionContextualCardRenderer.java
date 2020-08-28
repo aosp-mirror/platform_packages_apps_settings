@@ -65,7 +65,7 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
                 mContext).getMetricsFeatureProvider();
 
         metricsFeatureProvider.visible(mContext, SettingsEnums.SETTINGS_HOMEPAGE,
-                card.getMetricsConstant());
+                card.getMetricsConstant(), 0);
         initializePrimaryClick(view, card, metricsFeatureProvider);
         initializeView(view, card);
         initializeActionButton(view, card, metricsFeatureProvider);

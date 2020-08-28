@@ -16,30 +16,36 @@
 
 package com.android.settings.search.actionbar;
 
+import static com.android.settings.search.actionbar.SearchMenuController.MENU_SEARCH;
+
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Global;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowUtils;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -48,38 +54,25 @@ public class SearchMenuControllerTest {
 
     @Mock
     private Menu mMenu;
-    private TestPreferenceFragment mPreferenceHost;
     private InstrumentedFragment mHost;
-    private Context mContext;
+    private FragmentActivity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mHost = new InstrumentedFragment() {
-            @Override
-            public Context getContext() {
-                return mContext;
-            }
+        mActivity = Robolectric.buildActivity(FragmentActivity.class).get();
+        mHost = spy(new InstrumentedFragment() {
 
             @Override
             public int getMetricsCategory() {
                 return SettingsEnums.TESTING;
             }
-        };
-        mPreferenceHost = new TestPreferenceFragment();
-        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
+        });
+        Global.putInt(mActivity.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
 
-        when(mMenu.add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu))
+        when(mHost.getActivity()).thenReturn(mActivity);
+        when(mMenu.add(Menu.NONE, MENU_SEARCH, 0 /* order */, R.string.search_menu))
                 .thenReturn(mock(MenuItem.class));
-    }
-
-    @Test
-    public void init_prefFragment_shouldAddMenu() {
-        SearchMenuController.init(mPreferenceHost);
-        mPreferenceHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
-
-        verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
     }
 
     @Test
@@ -87,7 +80,7 @@ public class SearchMenuControllerTest {
         SearchMenuController.init(mHost);
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
-        verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
+        verify(mMenu).add(Menu.NONE, MENU_SEARCH, 0 /* order */, R.string.search_menu);
     }
 
     @Test
@@ -103,26 +96,22 @@ public class SearchMenuControllerTest {
 
     @Test
     public void init_deviceNotProvisioned_shouldNotAddMenu() {
-        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        Global.putInt(mActivity.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
         SearchMenuController.init(mHost);
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
         verifyZeroInteractions(mMenu);
     }
 
-    private static class TestPreferenceFragment extends InstrumentedPreferenceFragment {
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        }
+    @Test
+    public void init_startFromSetupWizard_shouldNotAddMenu() {
+        final Intent intent = new Intent();
+        intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
+        mActivity.setIntent(intent);
+        SearchMenuController.init(mHost);
 
-        @Override
-        public Context getContext() {
-            return RuntimeEnvironment.application;
-        }
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
-        @Override
-        public int getMetricsCategory() {
-            return SettingsEnums.TESTING;
-        }
+        verifyZeroInteractions(mMenu);
     }
 }

@@ -62,6 +62,11 @@ public class AdaptiveSleepDetailPreferenceControllerTest {
     }
 
     @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
+
+    @Test
     public void getAvailabilityStatus_configTrueSet_shouldReturnAvailable() {
         SettingsShadowResources.overrideResource(R.bool.config_adaptive_sleep_available, true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);

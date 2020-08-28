@@ -38,10 +38,12 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.loader.app.LoaderManager;
 import androidx.preference.PreferenceManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
@@ -67,9 +69,11 @@ import java.util.List;
 public class DataUsageListTest {
 
     @Mock
-    private CellDataPreference.DataStateListener mListener;
+    private MobileDataEnabledListener mMobileDataEnabledListener;
     @Mock
     private TemplatePreference.NetworkServices mNetworkServices;
+    @Mock
+    private LoaderManager mLoaderManager;
 
     private Activity mActivity;
     private DataUsageList mDataUsageList;
@@ -83,14 +87,17 @@ public class DataUsageListTest {
         mActivity = spy(mActivityController.get());
         mNetworkServices.mPolicyEditor = mock(NetworkPolicyEditor.class);
         mDataUsageList = spy(DataUsageList.class);
+        mDataUsageList.mDataStateListener = mMobileDataEnabledListener;
 
         doReturn(mActivity).when(mDataUsageList).getContext();
-        ReflectionHelpers.setField(mDataUsageList, "mDataStateListener", mListener);
+        ReflectionHelpers.setField(mDataUsageList, "mDataStateListener",
+                mMobileDataEnabledListener);
         ReflectionHelpers.setField(mDataUsageList, "services", mNetworkServices);
+        doReturn(mLoaderManager).when(mDataUsageList).getLoaderManager();
     }
 
     @Test
-    public void resumePause_shouldListenUnlistenDataStateChange() {
+    public void resume_shouldListenDataStateChange() {
         ReflectionHelpers.setField(
                 mDataUsageList, "mVisibilityLoggerMixin", mock(VisibilityLoggerMixin.class));
         ReflectionHelpers.setField(
@@ -98,11 +105,22 @@ public class DataUsageListTest {
 
         mDataUsageList.onResume();
 
-        verify(mListener).setListener(true, mDataUsageList.mSubId, mActivity);
+        verify(mMobileDataEnabledListener).start(anyInt());
 
         mDataUsageList.onPause();
+    }
 
-        verify(mListener).setListener(false, mDataUsageList.mSubId, mActivity);
+    @Test
+    public void pause_shouldUnlistenDataStateChange() {
+        ReflectionHelpers.setField(
+                mDataUsageList, "mVisibilityLoggerMixin", mock(VisibilityLoggerMixin.class));
+        ReflectionHelpers.setField(
+                mDataUsageList, "mPreferenceManager", mock(PreferenceManager.class));
+
+        mDataUsageList.onResume();
+        mDataUsageList.onPause();
+
+        verify(mMobileDataEnabledListener).stop();
     }
 
     @Test
@@ -200,6 +218,14 @@ public class DataUsageListTest {
         mDataUsageList.mNetworkCycleDataCallbacks.onLoadFinished(null, null);
 
         assertThat(spinner.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void onPause_shouldDestroyLoaders() {
+        mDataUsageList.onPause();
+
+        verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_CHART_DATA);
+        verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_SUMMARY);
     }
 
     private View getHeader() {

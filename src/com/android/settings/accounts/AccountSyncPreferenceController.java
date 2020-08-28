@@ -66,8 +66,8 @@ public class AccountSyncPreferenceController extends AbstractPreferenceControlle
         new SubSettingLauncher(mContext)
                 .setDestination(AccountSyncSettings.class.getName())
                 .setArguments(args)
-                .setSourceMetricsCategory( SettingsEnums.ACCOUNT)
-                .setTitleRes( R.string.account_sync_title)
+                .setSourceMetricsCategory(SettingsEnums.ACCOUNT)
+                .setTitleRes(R.string.account_sync_title)
                 .launch();
 
         return true;

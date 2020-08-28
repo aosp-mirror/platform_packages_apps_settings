@@ -41,9 +41,9 @@ import android.webkit.UserPackage;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.After;
 import org.junit.Before;

@@ -28,12 +28,12 @@
 
     <PreferenceCategory
         android:key="available_device_list"
-        android:title="@string/connected_device_available_media_title"
+        android:title="@string/connected_device_media_device_title"
         settings:controller="com.android.settings.connecteddevice.AvailableMediaDeviceGroupController"/>
 
     <PreferenceCategory
         android:key="connected_device_list"
-        android:title="@string/connected_device_connected_title"
+        android:title="@string/connected_device_other_device_title"
         settings:controller="com.android.settings.connecteddevice.ConnectedDeviceGroupController"/>
 
     <com.android.settingslib.RestrictedPreference
@@ -43,6 +43,7 @@
         android:summary="@string/connected_device_add_device_summary"
         android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
         settings:allowDividerAbove="true"
+        settings:keywords="@string/keywords_add_bt_device"
         settings:userRestriction="no_config_bluetooth"
         settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
@@ -57,14 +58,23 @@
             android:title="@string/previous_connected_see_all"
             android:icon="@drawable/ic_chevron_right_24dp"
             android:order="10"
+            settings:searchable="false"
             android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
     </PreferenceCategory>
 
     <Preference
         android:key="connection_preferences"
         android:title="@string/connected_device_connections_title"
+        android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController"/>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="discoverable_footer"
+        android:title="@string/bluetooth_off_footer"
+        android:selectable="false"
+        settings:controller="com.android.settings.connecteddevice.DiscoverableFooterPreferenceController">
+    </com.android.settingslib.widget.FooterPreference>
 
 </PreferenceScreen>

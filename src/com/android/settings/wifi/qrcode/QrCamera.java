@@ -68,9 +68,9 @@ public class QrCamera extends Handler {
      * size is 1920x1440, MAX_RATIO_DIFF 0.1 could allow picture size of 720x480 or 352x288 or
      * 176x44 but not 1920x1080.
      */
-    private static double MAX_RATIO_DIFF = 0.1;
+    private static final double MAX_RATIO_DIFF = 0.1;
 
-    private static long AUTOFOCUS_INTERVAL_MS = 1500L;
+    private static final long AUTOFOCUS_INTERVAL_MS = 1500L;
 
     private static Map<DecodeHintType, List<BarcodeFormat>> HINTS = new ArrayMap<>();
     private static List<BarcodeFormat> FORMATS = new ArrayList<>();
@@ -80,14 +80,16 @@ public class QrCamera extends Handler {
         HINTS.put(DecodeHintType.POSSIBLE_FORMATS, FORMATS);
     }
 
-    private Camera mCamera;
+    @VisibleForTesting
+    Camera mCamera;
     private Size mPreviewSize;
     private WeakReference<Context> mContext;
     private ScannerCallback mScannerCallback;
     private MultiFormatReader mReader;
     private DecodingTask mDecodeTask;
     private int mCameraOrientation;
-    private Camera.Parameters mParameters;
+    @VisibleForTesting
+    Camera.Parameters mParameters;
 
     public QrCamera(Context context, ScannerCallback callback) {
         mContext =  new WeakReference<Context>(context);
@@ -171,12 +173,13 @@ public class QrCamera extends Handler {
         boolean isValid(String qrCode);
     }
 
-    private void setCameraParameter() {
+    @VisibleForTesting
+    void setCameraParameter() {
         mParameters = mCamera.getParameters();
         mPreviewSize = getBestPreviewSize(mParameters);
         mParameters.setPreviewSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
         Size pictureSize = getBestPictureSize(mParameters);
-        mParameters.setPreviewSize(pictureSize.getWidth(), pictureSize.getHeight());
+        mParameters.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
 
         final List<String> supportedFlashModes = mParameters.getSupportedFlashModes();
         if (supportedFlashModes != null &&
@@ -219,7 +222,7 @@ public class QrCamera extends Handler {
         final int rotateDegrees = (mCameraOrientation - degrees + 360) % 360;
         mCamera.setDisplayOrientation(rotateDegrees);
         mCamera.startPreview();
-        if (mParameters.getFocusMode() == Parameters.FOCUS_MODE_AUTO) {
+        if (Parameters.FOCUS_MODE_AUTO.equals(mParameters.getFocusMode())) {
             mCamera.autoFocus(/* Camera.AutoFocusCallback */ null);
             sendMessageDelayed(obtainMessage(MSG_AUTO_FOCUS), AUTOFOCUS_INTERVAL_MS);
         }
@@ -243,7 +246,7 @@ public class QrCamera extends Handler {
             final Semaphore imageGot = new Semaphore(0);
             while (true) {
                 // This loop will try to capture preview image continuously until a valid QR Code
-                // decoded. The caller can also call {@link #stop()} to inturrupts scanning loop.
+                // decoded. The caller can also call {@link #stop()} to interrupts scanning loop.
                 mCamera.setOneShotPreviewCallback(
                         (imageData, camera) -> {
                             mImage = getFrameImage(imageData);
@@ -290,42 +293,57 @@ public class QrCamera extends Handler {
                 for (int i = 0; i < numberOfCameras; ++i) {
                     Camera.getCameraInfo(i, cameraInfo);
                     if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
+                        releaseCamera();
                         mCamera = Camera.open(i);
-                        mCamera.setPreviewTexture(surface);
                         mCameraOrientation = cameraInfo.orientation;
                         break;
                     }
                 }
-                if (mCamera == null) {
-                    Log.e(TAG, "Cannot find available back camera.");
-                    mScannerCallback.handleCameraFailure();
-                    return false;
+                if (mCamera == null && numberOfCameras > 0) {
+                    Log.i(TAG, "Can't find back camera. Opening a different camera");
+                    Camera.getCameraInfo(0, cameraInfo);
+                    releaseCamera();
+                    mCamera = Camera.open(0);
+                    mCameraOrientation = cameraInfo.orientation;
                 }
-                setCameraParameter();
-                setTransformationMatrix(mScannerCallback.getViewSize());
-                if (!startPreview()) {
-                    Log.e(TAG, "Error to init Camera");
-                    mCamera = null;
-                    mScannerCallback.handleCameraFailure();
-                    return false;
-                }
-                return true;
-            } catch (IOException e) {
-                Log.e(TAG, "Error to init Camera");
+            } catch (RuntimeException e) {
+                Log.e(TAG, "Fail to open camera: " + e);
                 mCamera = null;
                 mScannerCallback.handleCameraFailure();
                 return false;
             }
+
+            try {
+                if (mCamera == null) {
+                    throw new IOException("Cannot find available camera");
+                }
+                mCamera.setPreviewTexture(surface);
+                setCameraParameter();
+                setTransformationMatrix();
+                if (!startPreview()) {
+                    throw new IOException("Lost contex");
+                }
+            } catch (IOException ioe) {
+                Log.e(TAG, "Fail to startPreview camera: " + ioe);
+                mCamera = null;
+                mScannerCallback.handleCameraFailure();
+                return false;
+            }
+            return true;
         }
     }
 
-    /** Set transfom matrix to crop and center the preview picture */
-    private void setTransformationMatrix(Size viewSize) {
-        // Check aspect ratio, can only handle square view.
-        final int viewRatio = (int)getRatio(viewSize.getWidth(), viewSize.getHeight());
+    private void releaseCamera() {
+        if (mCamera != null) {
+            mCamera.release();
+            mCamera = null;
+        }
+    }
 
+    /** Set transform matrix to crop and center the preview picture */
+    private void setTransformationMatrix() {
         final boolean isPortrait = mContext.get().getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_PORTRAIT ? true : false;
+                == Configuration.ORIENTATION_PORTRAIT;
 
         final int previewWidth = isPortrait ? mPreviewSize.getWidth() : mPreviewSize.getHeight();
         final int previewHeight = isPortrait ? mPreviewSize.getHeight() : mPreviewSize.getWidth();
@@ -359,7 +377,7 @@ public class QrCamera extends Handler {
         switch (msg.what) {
             case MSG_AUTO_FOCUS:
                 // Calling autoFocus(null) will only trigger the camera to focus once. In order
-                // to make the camera continuously auto focus during scanning, need to periodly
+                // to make the camera continuously auto focus during scanning, need to periodically
                 // trigger it.
                 mCamera.autoFocus(/* Camera.AutoFocusCallback */ null);
                 sendMessageDelayed(obtainMessage(MSG_AUTO_FOCUS), AUTOFOCUS_INTERVAL_MS);

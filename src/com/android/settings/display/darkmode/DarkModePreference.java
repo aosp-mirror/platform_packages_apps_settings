@@ -22,6 +22,8 @@ import android.util.AttributeSet;
 import com.android.settings.R;
 import com.android.settings.widget.MasterSwitchPreference;
 
+import java.time.LocalTime;
+
 /**
  * component for the display settings dark ui summary*/
 public class DarkModePreference extends MasterSwitchPreference {
@@ -31,11 +33,14 @@ public class DarkModePreference extends MasterSwitchPreference {
     private PowerManager mPowerManager;
     private Runnable mCallback;
 
+    private TimeFormatter mFormat;
+
     public DarkModePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDarkModeObserver = new DarkModeObserver(context);
         mUiModeManager = context.getSystemService(UiModeManager.class);
         mPowerManager = context.getSystemService(PowerManager.class);
+        mFormat = new TimeFormatter(context);
         mCallback = () -> {
             final boolean batterySaver = mPowerManager.isPowerSaveMode();
             final boolean active = (getContext().getResources().getConfiguration().uiMode
@@ -60,21 +65,30 @@ public class DarkModePreference extends MasterSwitchPreference {
 
     private void updateSummary(boolean batterySaver, boolean active) {
         if (batterySaver) {
-            final int stringId = active ? R.string.dark_ui_mode_disabled_summary_dark_theme_on
+            final int stringId = active
+                    ? R.string.dark_ui_mode_disabled_summary_dark_theme_on
                     : R.string.dark_ui_mode_disabled_summary_dark_theme_off;
             setSummary(getContext().getString(stringId));
             return;
         }
-        final boolean auto = mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_AUTO;
-
+        final int mode = mUiModeManager.getNightMode();
         String detail;
-        if (active) {
-            detail = getContext().getString(auto
+
+        if (mode == UiModeManager.MODE_NIGHT_AUTO) {
+            detail = getContext().getString(active
                     ? R.string.dark_ui_summary_on_auto_mode_auto
-                    : R.string.dark_ui_summary_on_auto_mode_never);
+                    : R.string.dark_ui_summary_off_auto_mode_auto);
+        } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
+            final LocalTime time = active
+                    ? mUiModeManager.getCustomNightModeEnd()
+                    : mUiModeManager.getCustomNightModeStart();
+            final String timeStr = mFormat.of(time);
+            detail = getContext().getString(active
+                    ? R.string.dark_ui_summary_on_auto_mode_custom
+                    : R.string.dark_ui_summary_off_auto_mode_custom, timeStr);
         } else {
-            detail = getContext().getString(auto
-                    ? R.string.dark_ui_summary_off_auto_mode_auto
+            detail = getContext().getString(active
+                    ? R.string.dark_ui_summary_on_auto_mode_never
                     : R.string.dark_ui_summary_off_auto_mode_never);
         }
         String summary = getContext().getString(active

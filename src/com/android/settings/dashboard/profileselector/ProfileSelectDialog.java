@@ -30,6 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
@@ -38,14 +39,23 @@ public class ProfileSelectDialog extends DialogFragment implements OnClickListen
 
     private static final String TAG = "ProfileSelectDialog";
     private static final String ARG_SELECTED_TILE = "selectedTile";
+    private static final String ARG_SOURCE_METRIC_CATEGORY = "sourceMetricCategory";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
+    private int mSourceMetricCategory;
     private Tile mSelectedTile;
 
-    public static void show(FragmentManager manager, Tile tile) {
-        ProfileSelectDialog dialog = new ProfileSelectDialog();
-        Bundle args = new Bundle();
+    /**
+     * Display the profile select dialog, adding the fragment to the given FragmentManager.
+     * @param manager The FragmentManager this fragment will be added to.
+     * @param tile The tile for this fragment.
+     * @param sourceMetricCategory The source metric category.
+     */
+    public static void show(FragmentManager manager, Tile tile, int sourceMetricCategory) {
+        final ProfileSelectDialog dialog = new ProfileSelectDialog();
+        final Bundle args = new Bundle();
         args.putParcelable(ARG_SELECTED_TILE, tile);
+        args.putInt(ARG_SOURCE_METRIC_CATEGORY, sourceMetricCategory);
         dialog.setArguments(args);
         dialog.show(manager, "select_profile");
     }
@@ -54,13 +64,14 @@ public class ProfileSelectDialog extends DialogFragment implements OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSelectedTile = getArguments().getParcelable(ARG_SELECTED_TILE);
+        mSourceMetricCategory = getArguments().getInt(ARG_SOURCE_METRIC_CATEGORY);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Context context = getActivity();
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        UserAdapter adapter = UserAdapter.createUserAdapter(UserManager.get(context), context,
+        final Context context = getActivity();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final UserAdapter adapter = UserAdapter.createUserAdapter(UserManager.get(context), context,
                 mSelectedTile.userHandle);
         builder.setTitle(com.android.settingslib.R.string.choose_profile)
                 .setAdapter(adapter, this);
@@ -70,15 +81,18 @@ public class ProfileSelectDialog extends DialogFragment implements OnClickListen
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        UserHandle user = mSelectedTile.userHandle.get(which);
+        final UserHandle user = mSelectedTile.userHandle.get(which);
         // Show menu on top level items.
         final Intent intent = mSelectedTile.getIntent();
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                .logStartedIntentWithProfile(intent, mSourceMetricCategory,
+                        which == 1 /* isWorkProfile */);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getActivity().startActivityAsUser(intent, user);
     }
 
     public static void updateUserHandlesIfNeeded(Context context, Tile tile) {
-        List<UserHandle> userHandles = tile.userHandle;
+        final List<UserHandle> userHandles = tile.userHandle;
         if (tile.userHandle == null || tile.userHandle.size() <= 1) {
             return;
         }

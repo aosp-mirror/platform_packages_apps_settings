@@ -6,6 +6,8 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PasswordMetrics;
+import android.app.admin.PasswordPolicy;
 import android.content.ComponentName;
 
 import org.robolectric.RuntimeEnvironment;
@@ -26,7 +28,6 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     private ComponentName mDeviceOwnerComponentName;
     private int mDeviceOwnerUserId = -1;
     private int mPasswordMinQuality = PASSWORD_QUALITY_UNSPECIFIED;
-    private int mPasswordMaxLength = 16;
     private int mPasswordMinLength = 0;
     private int mPasswordMinSymbols = 0;
 
@@ -77,39 +78,24 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     }
 
     @Implementation
-    public int getPasswordQuality(ComponentName admin, int userHandle) {
-        return mPasswordMinQuality;
+    public PasswordMetrics getPasswordMinimumMetrics(int userHandle) {
+        PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = mPasswordMinQuality;
+        policy.length = mPasswordMinLength;
+        policy.symbols = mPasswordMinSymbols;
+        return policy.getMinMetrics();
     }
 
     public void setPasswordQuality(int quality) {
         mPasswordMinQuality = quality;
     }
 
-    @Implementation
-    public int getPasswordMinimumLength(ComponentName admin, int userHandle) {
-        return mPasswordMinLength;
-    }
-
     public void setPasswordMinimumLength(int length) {
         mPasswordMinLength = length;
     }
 
-    @Implementation
-    public int getPasswordMinimumSymbols(ComponentName admin, int userHandle) {
-        return mPasswordMinSymbols;
-    }
-
     public void setPasswordMinimumSymbols(int numOfSymbols) {
         mPasswordMinSymbols = numOfSymbols;
-    }
-
-    @Implementation
-    public int getPasswordMaximumLength(int quality) {
-        return mPasswordMaxLength;
-    }
-
-    public void setPasswordMaximumLength(int length) {
-        mPasswordMaxLength = length;
     }
 
     public static ShadowDevicePolicyManager getShadow() {

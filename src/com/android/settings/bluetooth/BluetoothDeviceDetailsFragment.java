@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
@@ -23,6 +24,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.DeviceConfig;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -107,12 +109,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
+        super.onAttach(context);
         if (mCachedDevice == null) {
             // Close this page if device is null with invalid device mac address
+            Log.w(TAG, "onAttach() CachedDevice is null!");
             finish();
             return;
         }
-        super.onAttach(context);
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
@@ -123,6 +126,20 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        finishFragmentIfNecessary();
+    }
+
+    @VisibleForTesting
+    void finishFragmentIfNecessary() {
+        if (mCachedDevice.getBondState() == BOND_NONE) {
+            finish();
+            return;
+        }
     }
 
     @Override

@@ -15,6 +15,8 @@
  */
 package com.android.settings.security;
 
+import static com.android.settings.security.OwnerInfoPreferenceController.KEY_OWNER_INFO;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -23,7 +25,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +32,6 @@ import android.content.Context;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -39,6 +39,8 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.users.OwnerInfoSettings;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +55,7 @@ import org.robolectric.util.ReflectionHelpers;
 public class OwnerInfoPreferenceControllerTest {
 
     @Mock
-    private PreferenceFragmentCompat mFragment;
+    private ObservablePreferenceFragment mFragment;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -80,9 +82,10 @@ public class OwnerInfoPreferenceControllerTest {
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mPreference.getContext()).thenReturn(mContext);
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
+        when(mFragment.getSettingsLifecycle()).thenReturn(mock(Lifecycle.class));
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
 
-        mController = spy(new OwnerInfoPreferenceController(mContext, mFragment, null));
+        mController = spy(new OwnerInfoPreferenceController(mContext, mFragment));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         ReflectionHelpers.setField(mController, "mLockPatternUtils", mLockPatternUtils);
     }
@@ -177,18 +180,17 @@ public class OwnerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void performClick_shouldLaunchOwnerInfoSettings() {
+    public void handlePreferenceTreeClick_shouldLaunchOwnerInfoSettings() {
         final RestrictedPreference preference = new RestrictedPreference(mContext);
+        preference.setKey(KEY_OWNER_INFO);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(preference);
         doReturn(false).when(mController).isDeviceOwnerInfoEnabled();
         doReturn(false).when(mLockPatternUtils).isLockScreenDisabled(anyInt());
         mController.displayPreference(mScreen);
         mController.updateEnableState();
 
-        preference.performClick();
+        mController.handlePreferenceTreeClick(preference);
 
-        // Called once in setTargetFragment, and a second time to display the fragment.
-        verify(mFragment, times(2)).getFragmentManager();
         verify(mFragment.getFragmentManager().beginTransaction())
                 .add(any(OwnerInfoSettings.class), anyString());
     }

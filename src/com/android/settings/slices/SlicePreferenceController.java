@@ -65,7 +65,6 @@ public class SlicePreferenceController extends BasePreferenceController implemen
         mUri = uri;
         mLiveData = SliceLiveData.fromUri(mContext, mUri, (int type, Throwable source) -> {
             Log.w(TAG, "Slice may be null. uri = " + uri + ", error = " + type);
-            onChanged(null);
         });
 
         //TODO(b/120803703): figure out why we need to remove observer first

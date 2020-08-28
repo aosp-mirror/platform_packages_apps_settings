@@ -22,8 +22,12 @@ import static org.mockito.Mockito.when;
 
 import android.app.Application;
 import android.app.WallpaperManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,6 +35,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
@@ -47,6 +52,10 @@ public class WallpaperSuggestionActivityTest {
     private Context mContext;
     @Mock
     private Resources mResources;
+
+    private static final String PACKAGE_WALLPAPER_ACTIVITY =
+            "com.android.settings.wallpaper.WallpaperSuggestionActivity";
+    private static final String WALLPAPER_FLAVOR = "com.android.launcher3.WALLPAPER_FLAVOR";
 
     @Before
     public void setUp() {
@@ -89,6 +98,34 @@ public class WallpaperSuggestionActivityTest {
         assertThat(WallpaperSuggestionActivity.isSuggestionComplete(RuntimeEnvironment.application))
                 .isTrue();
     }
+
+    @Test
+    public void addExtras_intentFromSetupWizard_extrasHasWallpaperOnly() {
+        WallpaperSuggestionActivity activity =
+                Robolectric.buildActivity(WallpaperSuggestionActivity.class, new Intent(
+                        Intent.ACTION_MAIN).setComponent(
+                        new ComponentName(RuntimeEnvironment.application,
+                                PACKAGE_WALLPAPER_ACTIVITY)).putExtra(
+                        WizardManagerHelper.EXTRA_IS_FIRST_RUN, true).putExtra(
+                        WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true)).setup().get();
+        Intent intent = Shadows.shadowOf(activity).getNextStartedActivity();
+
+        assertThat(intent).isNotNull();
+        assertThat(intent.getStringExtra(WALLPAPER_FLAVOR)).isEqualTo("wallpaper_only");
+    }
+
+    @Test
+    public void addExtras_intentNotFromSetupWizard_extrasHasFocusWallpaper() {
+        WallpaperSuggestionActivity activity = Robolectric.buildActivity(
+                WallpaperSuggestionActivity.class, new Intent(Intent.ACTION_MAIN).setComponent(
+                        new ComponentName(RuntimeEnvironment.application,
+                                PACKAGE_WALLPAPER_ACTIVITY))).setup().get();
+        Intent intent = Shadows.shadowOf(activity).getNextStartedActivity();
+
+        assertThat(intent).isNotNull();
+        assertThat(intent.getStringExtra(WALLPAPER_FLAVOR)).isEqualTo("focus_wallpaper");
+    }
+
 
     @Implements(WallpaperManager.class)
     public static class ShadowWallpaperManager extends

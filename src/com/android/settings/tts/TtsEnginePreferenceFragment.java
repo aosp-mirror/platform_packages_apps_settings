@@ -4,41 +4,30 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
 import android.util.Log;
-import android.widget.Checkable;
 
-import androidx.preference.PreferenceCategory;
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.tts.TtsEnginePreference.RadioButtonGroupState;
+import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.CandidateInfo;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SearchIndexable
-public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment
-        implements RadioButtonGroupState {
+public class TtsEnginePreferenceFragment extends RadioButtonPickerFragment {
     private static final String TAG = "TtsEnginePrefFragment";
-
-    private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
-
-    /** The currently selected engine. */
-    private String mCurrentEngine;
-
-    /**
-     * The engine checkbox that is currently checked. Saves us a bit of effort in deducing the right
-     * one from the currently selected engine.
-     */
-    private Checkable mCurrentChecked;
 
     /**
      * The previously selected TTS engine. Useful for rollbacks if the users choice is not loaded or
@@ -46,69 +35,10 @@ public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment
      */
     private String mPreviousEngine;
 
-    private PreferenceCategory mEnginePreferenceCategory;
-
     private TextToSpeech mTts = null;
     private TtsEngines mEnginesHelper = null;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.tts_engine_picker);
-
-        mEnginePreferenceCategory =
-                (PreferenceCategory) findPreference("tts_engine_preference_category");
-        mEnginesHelper = new TtsEngines(getActivity().getApplicationContext());
-
-        mTts = new TextToSpeech(getActivity().getApplicationContext(), null);
-
-        initSettings();
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.TTS_ENGINE_SETTINGS;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mTts != null) {
-            mTts.shutdown();
-            mTts = null;
-        }
-    }
-
-    private void initSettings() {
-        if (mTts != null) {
-            mCurrentEngine = mTts.getCurrentEngine();
-        }
-
-        mEnginePreferenceCategory.removeAll();
-
-        List<EngineInfo> engines = mEnginesHelper.getEngines();
-        for (EngineInfo engine : engines) {
-            TtsEnginePreference enginePref =
-                    new TtsEnginePreference(getPrefContext(), engine, this);
-            mEnginePreferenceCategory.addPreference(enginePref);
-        }
-    }
-
-    @Override
-    public Checkable getCurrentChecked() {
-        return mCurrentChecked;
-    }
-
-    @Override
-    public String getCurrentKey() {
-        return mCurrentEngine;
-    }
-
-    @Override
-    public void setCurrentChecked(Checkable current) {
-        mCurrentChecked = current;
-    }
-
+    private Context mContext;
+    private Map<String, EngineCandidateInfo> mEngineMap;
     /**
      * The initialization listener used when the user changes his choice of engine (as opposed to
      * when then screen is being initialized for the first time).
@@ -120,6 +50,116 @@ public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment
                     onUpdateEngine(status);
                 }
             };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        mContext = getContext().getApplicationContext();
+        mEnginesHelper = new TtsEngines(mContext);
+        mEngineMap = new HashMap<>();
+        mTts = new TextToSpeech(mContext, null);
+
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mTts != null) {
+            mTts.shutdown();
+            mTts = null;
+        }
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.TTS_ENGINE_SETTINGS;
+    }
+
+    /**
+     * Step 3: We have now bound to the TTS engine the user requested. We will attempt to check
+     * voice data for the engine if we successfully bound to it, or revert to the previous engine if
+     * we didn't.
+     */
+    public void onUpdateEngine(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            Log.d(TAG, "Updating engine: Successfully bound to the engine: "
+                    + mTts.getCurrentEngine());
+            android.provider.Settings.Secure.putString(
+                    mContext.getContentResolver(), TTS_DEFAULT_SYNTH, mTts.getCurrentEngine());
+        } else {
+            Log.d(TAG, "Updating engine: Failed to bind to engine, reverting.");
+            if (mPreviousEngine != null) {
+                // This is guaranteed to at least bind, since mPreviousEngine would be
+                // null if the previous bind to this engine failed.
+                mTts = new TextToSpeech(mContext, null, mPreviousEngine);
+                updateCheckedState(mPreviousEngine);
+            }
+            mPreviousEngine = null;
+        }
+    }
+
+    @Override
+    protected void onRadioButtonConfirmed(String selectedKey) {
+        final EngineCandidateInfo info = mEngineMap.get(selectedKey);
+        // Should we alert user? if that's true, delay making engine current one.
+        if (shouldDisplayDataAlert(info)) {
+            displayDataAlert(info, (dialog, which) -> {
+                setDefaultKey(selectedKey);
+            });
+        } else {
+            // Privileged engine, set it current
+            setDefaultKey(selectedKey);
+        }
+    }
+
+    @Override
+    protected List<? extends CandidateInfo> getCandidates() {
+        final List<EngineCandidateInfo> infos = new ArrayList<>();
+        final List<EngineInfo> engines = mEnginesHelper.getEngines();
+        for (EngineInfo engine : engines) {
+            final EngineCandidateInfo info = new EngineCandidateInfo(engine);
+            infos.add(info);
+            mEngineMap.put(engine.name, info);
+        }
+        return infos;
+    }
+
+    @Override
+    protected String getDefaultKey() {
+        return mEnginesHelper.getDefaultEngine();
+    }
+
+    @Override
+    protected boolean setDefaultKey(String key) {
+        updateDefaultEngine(key);
+        updateCheckedState(key);
+        return true;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.tts_engine_picker;
+    }
+
+    private boolean shouldDisplayDataAlert(EngineCandidateInfo info) {
+        return !info.isSystem();
+    }
+
+    private void displayDataAlert(EngineCandidateInfo info,
+            DialogInterface.OnClickListener positiveOnClickListener) {
+        Log.i(TAG, "Displaying data alert for :" + info.getKey());
+
+        final AlertDialog dialog = new AlertDialog.Builder(getPrefContext())
+                .setTitle(android.R.string.dialog_alert_title)
+                .setMessage(mContext.getString(
+                        R.string.tts_engine_security_warning, info.loadLabel()))
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok, positiveOnClickListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+
+        dialog.show();
+    }
 
     private void updateDefaultEngine(String engine) {
         Log.d(TAG, "Updating default synth to : " + engine);
@@ -146,51 +186,38 @@ public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment
         // Step 3 is continued on #onUpdateEngine (below) which is called when
         // the app binds successfully to the engine.
         Log.i(TAG, "Updating engine : Attempting to connect to engine: " + engine);
-        mTts = new TextToSpeech(getActivity().getApplicationContext(), mUpdateListener, engine);
+        mTts = new TextToSpeech(mContext, mUpdateListener, engine);
         Log.i(TAG, "Success");
     }
 
-    /**
-     * Step 3: We have now bound to the TTS engine the user requested. We will attempt to check
-     * voice data for the engine if we successfully bound to it, or revert to the previous engine if
-     * we didn't.
-     */
-    public void onUpdateEngine(int status) {
-        if (status == TextToSpeech.SUCCESS) {
-            Log.d(
+    public static class EngineCandidateInfo extends CandidateInfo {
+        private final EngineInfo mEngineInfo;
 
-                    TAG,
-                    "Updating engine: Successfully bound to the engine: "
-                            + mTts.getCurrentEngine());
-            android.provider.Settings.Secure.putString(
-                    getContentResolver(), TTS_DEFAULT_SYNTH, mTts.getCurrentEngine());
-        } else {
-            Log.d(TAG, "Updating engine: Failed to bind to engine, reverting.");
-            if (mPreviousEngine != null) {
-                // This is guaranteed to at least bind, since mPreviousEngine would be
-                // null if the previous bind to this engine failed.
-                mTts =
-                        new TextToSpeech(
-                                getActivity().getApplicationContext(), null, mPreviousEngine);
-            }
-            mPreviousEngine = null;
+        EngineCandidateInfo(EngineInfo engineInfo) {
+            super(true /* enabled */);
+            mEngineInfo = engineInfo;
+        }
+
+        @Override
+        public CharSequence loadLabel() {
+            return mEngineInfo.label;
+        }
+
+        @Override
+        public Drawable loadIcon() {
+            return null;
+        }
+
+        @Override
+        public String getKey() {
+            return mEngineInfo.name;
+        }
+
+        public boolean isSystem() {
+            return mEngineInfo.system;
         }
     }
 
-    @Override
-    public void setCurrentKey(String key) {
-        mCurrentEngine = key;
-        updateDefaultEngine(mCurrentEngine);
-    }
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.tts_engine_picker;
-                    return Arrays.asList(sir);
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.tts_engine_picker);
 }

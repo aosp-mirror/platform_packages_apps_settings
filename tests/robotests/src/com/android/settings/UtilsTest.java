@@ -29,7 +29,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -67,6 +66,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowBinder;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -280,5 +280,23 @@ public class UtilsTest {
                 new ScrollView(mContext));
 
         assertThat(actionBar.getElevation()).isEqualTo(0.f);
+    }
+
+    @Test
+    public void isSettingsIntelligence_IsSI_returnTrue() {
+        final String siPackageName = mContext.getString(
+                R.string.config_settingsintelligence_package_name);
+        ShadowBinder.setCallingUid(USER_ID);
+        when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{siPackageName});
+
+        assertThat(Utils.isSettingsIntelligence(mContext)).isTrue();
+    }
+
+    @Test
+    public void isSettingsIntelligence_IsNotSI_returnFalse() {
+        ShadowBinder.setCallingUid(USER_ID);
+        when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{PACKAGE_NAME});
+
+        assertThat(Utils.isSettingsIntelligence(mContext)).isFalse();
     }
 }

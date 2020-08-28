@@ -22,7 +22,8 @@
     android:paddingStart="72dp"
     android:paddingEnd="72dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight">
 
     <Button
         android:id="@+id/state_on_button"

@@ -26,6 +26,7 @@
       android:key="default_autofill_main"
       android:title="@string/autofill_app"
       android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
+      settings:searchable="false"
       settings:keywords="@string/autofill_keywords">
     <extra android:name="for_work" android:value="false" />
   </com.android.settings.widget.GearPreference>
@@ -39,6 +40,7 @@
         android:key="default_autofill_work"
         android:title="@string/autofill_app"
         android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
+        settings:searchable="false"
         settings:keywords="@string/autofill_keywords">
       <extra android:name="for_work" android:value="true" />
     </com.android.settings.widget.GearPreference>

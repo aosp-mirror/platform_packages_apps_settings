@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENA
 
 import android.content.Context;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -31,6 +32,7 @@ import com.android.settings.overlay.FeatureFactory;
 
 public class AssistGestureSettingsPreferenceController extends GesturePreferenceController {
 
+    private static final String TAG = "AssistGesture";
     private static final String PREF_KEY_VIDEO = "gesture_assist_video";
 
     private static final String SECURE_KEY_ASSIST = ASSIST_GESTURE_ENABLED;
@@ -55,8 +57,11 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
 
     @Override
     public int getAvailabilityStatus() {
-        final boolean isAvailable = mAssistOnly ? mFeatureProvider.isSupported(mContext)
-                : mFeatureProvider.isSensorAvailable(mContext);
+        final boolean isSupported = mFeatureProvider.isSupported(mContext);
+        final boolean isSensorAvailable = mFeatureProvider.isSensorAvailable(mContext);
+        final boolean isAvailable = mAssistOnly ? isSupported : isSensorAvailable;
+        Log.d(TAG, "mAssistOnly:" + mAssistOnly + ", isSupported:" + isSupported
+                + ", isSensorAvailable:" + isSensorAvailable);
         return isAvailable ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -68,7 +73,7 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (mWasAvailable != isAvailable()) {
             // Only update the preference visibility if the availability has changed -- otherwise
             // the preference may be incorrectly added to screens with collapsed sections.

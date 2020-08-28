@@ -34,7 +34,7 @@ public class ColorModePreferenceController extends BasePreferenceController {
         return mContext.getSystemService(ColorDisplayManager.class)
                 .isDeviceColorManaged()
                 && !ColorDisplayManager.areAccessibilityTransformsEnabled(mContext) ?
-                AVAILABLE_UNSEARCHABLE : DISABLED_FOR_USER;
+                AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override

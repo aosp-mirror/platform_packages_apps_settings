@@ -51,6 +51,11 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final SeekBarPreference preference = screen.findPreference(getPreferenceKey());

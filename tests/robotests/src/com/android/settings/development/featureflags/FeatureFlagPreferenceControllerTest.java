@@ -28,7 +28,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.SystemProperties;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -77,9 +76,8 @@ public class FeatureFlagPreferenceControllerTest {
 
     @Test
     public void onStart_shouldRefreshFeatureFlags() {
-        mController.onStart();
+        mController.displayPreference(mScreen);
 
-        verify(mCategory).removeAll();
         verify(mCategory, atLeastOnce()).addPreference(any(FeatureFlagPreference.class));
     }
 }

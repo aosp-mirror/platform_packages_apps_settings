@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -109,7 +110,7 @@ public class WifiMasterSwitchPreferenceControllerTest {
         mController.onPause();
 
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
-        verify(mConnectivityManager).unregisterNetworkCallback(
+        verify(mConnectivityManager, times(2)).unregisterNetworkCallback(
                 any(ConnectivityManager.NetworkCallback.class));
     }
 

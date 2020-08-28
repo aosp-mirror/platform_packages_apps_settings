@@ -22,11 +22,9 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -38,11 +36,8 @@ import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,22 +60,17 @@ public class LocationFooterPreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private Resources mResources;
-    private Context mContext;
     private LocationFooterPreferenceController mController;
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
     private static final int TEST_RES_ID = 1234;
     private static final String TEST_TEXT = "text";
 
     @Before
     public void setUp() throws NameNotFoundException {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
-        when(mPreferenceCategory.getContext()).thenReturn(mContext);
-        mController = spy(new LocationFooterPreferenceController(mContext, mLifecycle));
+        Context context = spy(RuntimeEnvironment.application);
+        when(context.getPackageManager()).thenReturn(mPackageManager);
+        when(mPreferenceCategory.getContext()).thenReturn(context);
+        mController = spy(new LocationFooterPreferenceController(context, "key"));
         when(mPackageManager.getResourcesForApplication(any(ApplicationInfo.class)))
                 .thenReturn(mResources);
         when(mResources.getString(TEST_RES_ID)).thenReturn(TEST_TEXT);
@@ -119,32 +109,6 @@ public class LocationFooterPreferenceControllerTest {
     }
 
     @Test
-    public void sendBroadcastFooterInject() {
-        ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
-        final ActivityInfo activityInfo =
-                getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true).activityInfo;
-        mController.sendBroadcastFooterDisplayed(
-                new ComponentName(activityInfo.packageName, activityInfo.name));
-        verify(mContext).sendBroadcast(intent.capture());
-        assertThat(intent.getValue().getAction())
-                .isEqualTo(LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION);
-    }
-
-    @Test
-    public void updateState_sendBroadcast() {
-        final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));
-        when(mPackageManager.queryBroadcastReceivers(any(), anyInt()))
-                .thenReturn(testResolveInfos);
-        mController.updateState(mPreferenceCategory);
-        ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).sendBroadcast(intent.capture());
-        assertThat(intent.getValue().getAction())
-                .isEqualTo(LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION);
-    }
-
-    @Test
     public void updateState_addPreferences() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
@@ -166,32 +130,6 @@ public class LocationFooterPreferenceControllerTest {
                 .thenReturn(testResolveInfos);
         mController.updateState(mPreferenceCategory);
         verify(mPreferenceCategory, never()).addPreference(any(Preference.class));
-        verify(mContext, never()).sendBroadcast(any(Intent.class));
-    }
-
-    @Test
-    public void updateState_thenOnPause_sendBroadcasts() {
-        final List<ResolveInfo> testResolveInfos = new ArrayList<>();
-        testResolveInfos.add(
-                getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));
-        when(mPackageManager.queryBroadcastReceivers(any(Intent.class), anyInt()))
-                .thenReturn(testResolveInfos);
-        mController.updateState(mPreferenceCategory);
-        ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).sendBroadcast(intent.capture());
-        assertThat(intent.getValue().getAction())
-                .isEqualTo(LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION);
-
-        mController.onPause();
-        verify(mContext, times(2)).sendBroadcast(intent.capture());
-        assertThat(intent.getValue().getAction())
-                .isEqualTo(LocationManager.SETTINGS_FOOTER_REMOVED_ACTION);
-    }
-
-    @Test
-    public void onPause_doNotSendBroadcast() {
-        mController.onPause();
-        verify(mContext, never()).sendBroadcast(any(Intent.class));
     }
 
     /**

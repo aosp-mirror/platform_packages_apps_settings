@@ -46,6 +46,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 public class BuildNumberPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart {
 
@@ -96,16 +98,6 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
     }
 
     @Override
-    public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public boolean isCopyableSlice() {
-        return true;
-    }
-
-    @Override
     public boolean useDynamicSliceSummary() {
         return true;
     }
@@ -131,7 +123,7 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
         }
 
         // Don't enable developer options until device has been provisioned
-        if (!Utils.isDeviceProvisioned(mContext)) {
+        if (!WizardManagerHelper.isDeviceProvisioned(mContext)) {
             mMetricsFeatureProvider.action(
                     mContext, SettingsEnums.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;

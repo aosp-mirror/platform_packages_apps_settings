@@ -17,23 +17,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <TextView
         android:id="@+id/reset_network_confirm"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/reset_network_margin_start"
+        android:layout_marginEnd="@dimen/reset_network_margin_end"
         android:layout_marginTop="12dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="@string/reset_network_final_desc" />
-
-    <Button android:id="@+id/execute_reset_network"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dip"
+    <Button
+        android:id="@+id/execute_reset_network"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/suc_customization_button_margin_end"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reset_network_final_button_text"
-        android:gravity="center" />
-
+        android:gravity="center"
+        style="@style/ActionPrimaryButton"/>
 </LinearLayout>

@@ -17,15 +17,11 @@
 package com.android.settings.password;
 
 import android.app.KeyguardManager;
-import android.hardware.biometrics.BiometricConstants;
-import android.hardware.biometrics.BiometricManager;
-import android.hardware.biometrics.IBiometricConfirmDeviceCredentialCallback;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 
@@ -50,16 +46,6 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     private boolean mFirstTimeVisible = true;
     private boolean mIsKeyguardLocked = false;
     private ConfirmCredentialTheme mConfirmCredentialTheme;
-    private BiometricManager mBiometricManager;
-
-    // TODO(b/123378871): Remove when moved.
-    private final IBiometricConfirmDeviceCredentialCallback mCancelCallback
-            = new IBiometricConfirmDeviceCredentialCallback.Stub() {
-        @Override
-        public void cancel() {
-            finish();
-        }
-    };
 
     private boolean isInternalActivity() {
         return (this instanceof ConfirmLockPassword.InternalActivity)
@@ -78,7 +64,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             return;
         }
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
-            setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
+            setTheme(SetupWizardUtils.getTheme(getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;
         } else if (getIntent().getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
@@ -89,9 +75,6 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             mConfirmCredentialTheme = ConfirmCredentialTheme.NORMAL;
         }
         super.onCreate(savedState);
-
-        mBiometricManager = getSystemService(BiometricManager.class);
-        mBiometricManager.registerCancellationCallback(mCancelCallback);
 
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
             // Prevent the content parent from consuming the window insets because GlifLayout uses
@@ -167,16 +150,21 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     @Override
     public void onStop() {
         super.onStop();
-        // TODO(b/123378871): Remove when moved.
-        if (!isChangingConfigurations()) {
-            mBiometricManager.onConfirmDeviceCredentialError(
-                    BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED,
-                    getString(com.android.internal.R.string.biometric_error_user_canceled));
-            if (getIntent().getBooleanExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_FOREGROUND_ONLY, false)) {
-                finish();
-            }
+        final boolean foregroundOnly = getIntent().getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_FOREGROUND_ONLY, false);
+        if (!isChangingConfigurations() && foregroundOnly) {
+            finish();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // Force a garbage collection immediately to remove remnant of user password shards
+        // from memory.
+        System.gc();
+        System.runFinalization();
+        System.gc();
     }
 
     @Override
@@ -186,11 +174,6 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
                 ConfirmDeviceCredentialBaseFragment.USE_FADE_ANIMATION, false)) {
             overridePendingTransition(0, R.anim.confirm_credential_biometric_transition_exit);
         }
-    }
-
-    @Override
-    public boolean isLaunchableInTaskModePinned() {
-        return true;
     }
 
     public void prepareEnterAnimation() {

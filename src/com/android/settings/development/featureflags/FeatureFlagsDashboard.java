@@ -23,9 +23,7 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -55,7 +53,6 @@ public class FeatureFlagsDashboard extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(FeatureFlagFooterPreferenceController.class).setFooterMixin(mFooterPreferenceMixin);
     }
 
     @Override
@@ -63,24 +60,7 @@ public class FeatureFlagsDashboard extends DashboardFragment {
         return 0;
     }
 
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPrefControllers(context, getSettingsLifecycle());
-    }
-
-    private static List<AbstractPreferenceController> buildPrefControllers(Context context,
-            Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final FeatureFlagFooterPreferenceController footerController =
-                new FeatureFlagFooterPreferenceController(context);
-        if (lifecycle != null) {
-            lifecycle.addObserver(footerController);
-        }
-        controllers.add(footerController);
-        return controllers;
-    }
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
@@ -96,12 +76,6 @@ public class FeatureFlagsDashboard extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPrefControllers(context, null /* lifecycle */);
                 }
             };
 }

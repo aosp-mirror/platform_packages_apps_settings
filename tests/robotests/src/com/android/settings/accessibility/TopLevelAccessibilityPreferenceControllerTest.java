@@ -16,14 +16,12 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +29,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelAccessibilityPreferenceControllerTest {
@@ -48,7 +44,7 @@ public class TopLevelAccessibilityPreferenceControllerTest {
 
     @Test
     public void getAvailibilityStatus_availableByDefault() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

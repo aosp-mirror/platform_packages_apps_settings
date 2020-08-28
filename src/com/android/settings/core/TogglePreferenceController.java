@@ -18,8 +18,10 @@ import android.content.Context;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SliceData;
 import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.TwoStateButtonPreference;
 
 /**
  * Abstract class that consolidates logic for updating toggle controllers.
@@ -54,6 +56,8 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
             ((TwoStatePreference) preference).setChecked(isChecked());
         } else if (preference instanceof MasterSwitchPreference) {
             ((MasterSwitchPreference) preference).setChecked(isChecked());
+        } else if (preference instanceof TwoStateButtonPreference) {
+            ((TwoStateButtonPreference) preference).setChecked(isChecked());
         } else {
             refreshSummary(preference);
         }
@@ -61,6 +65,12 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
 
     @Override
     public final boolean onPreferenceChange(Preference preference, Object newValue) {
+        // TwoStatePreference is a regular preference and can be handled by DashboardFragment
+        if (preference instanceof MasterSwitchPreference
+                || preference instanceof TwoStateButtonPreference) {
+            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                    .logClickedPreference(preference, getMetricsCategory());
+        }
         return setChecked((boolean) newValue);
     }
 
@@ -70,4 +80,13 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
         return SliceData.SliceType.SWITCH;
     }
 
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isPublicSlice() {
+        return false;
+    }
 }

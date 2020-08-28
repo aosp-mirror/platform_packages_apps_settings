@@ -31,8 +31,8 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableData;
 import com.android.settingslib.search.SearchIndexableResources;
 
 import org.junit.Before;
@@ -67,8 +67,8 @@ public class SliceDataContractTest {
                 FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
                         .getSearchIndexableResources();
 
-        for (Class<?> clazz : resources.getProviderValues()) {
-            verifyPreferenceTitle(nullTitleFragments, clazz);
+        for (SearchIndexableData SearchIndexableData : resources.getProviderValues()) {
+            verifyPreferenceTitle(nullTitleFragments, SearchIndexableData);
         }
 
         if (!nullTitleFragments.isEmpty()) {
@@ -82,14 +82,13 @@ public class SliceDataContractTest {
         }
     }
 
-    private void verifyPreferenceTitle(Set<String> nullTitleFragments, Class<?> clazz)
+    private void verifyPreferenceTitle(Set<String> nullTitleFragments,
+            SearchIndexableData searchIndexableData)
             throws IOException, XmlPullParserException {
-        if (clazz == null) {
-            return;
-        }
-        final String className = clazz.getName();
+
+        final String className = searchIndexableData.getTargetClass().getName();
         final Indexable.SearchIndexProvider provider =
-                DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+                searchIndexableData.getSearchIndexProvider();
 
         final List<SearchIndexableResource> resourcesToIndex =
                 provider.getXmlResourcesToIndex(mContext, true);

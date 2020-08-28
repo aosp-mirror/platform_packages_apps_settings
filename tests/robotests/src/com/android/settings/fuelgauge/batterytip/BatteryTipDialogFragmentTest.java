@@ -22,6 +22,9 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.text.format.DateUtils;
 
 import androidx.appcompat.app.AlertDialog;
@@ -38,6 +41,7 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.fuelgauge.EstimateKt;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +49,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
@@ -69,6 +75,7 @@ public class BatteryTipDialogFragmentTest {
     private UnrestrictAppTip mUnrestrictAppTip;
     private SummaryTip mSummaryTip;
     private AppInfo mAppInfo;
+    private ShadowPackageManager mPackageManager;
 
     @Before
     public void setUp() {
@@ -77,6 +84,18 @@ public class BatteryTipDialogFragmentTest {
         mContext = spy(RuntimeEnvironment.application);
         FakeFeatureFactory.setupForTest();
         ShadowUtils.setApplicationLabel(PACKAGE_NAME, DISPLAY_NAME);
+
+        mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+
+        final ApplicationInfo applicationInfo = new ApplicationInfo();
+        applicationInfo.name = DISPLAY_NAME;
+        applicationInfo.packageName = PACKAGE_NAME;
+
+        final PackageInfo packageInfo = new PackageInfo();
+        packageInfo.packageName = PACKAGE_NAME;
+        packageInfo.applicationInfo = applicationInfo;
+        mPackageManager.addPackage(packageInfo);
+        mPackageManager.setApplicationIcon(PACKAGE_NAME, new ColorDrawable());
 
         List<AppInfo> highUsageTips = new ArrayList<>();
         mAppInfo = new AppInfo.Builder()
@@ -97,6 +116,11 @@ public class BatteryTipDialogFragmentTest {
         mUnrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW, mAppInfo);
         mSummaryTip = spy(new SummaryTip(BatteryTip.StateType.NEW,
                 EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
+    }
+
+    @After
+    public void tearDown() {
+        mPackageManager.removePackage(PACKAGE_NAME);
     }
 
     @Test

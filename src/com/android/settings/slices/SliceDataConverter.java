@@ -19,7 +19,6 @@ package com.android.settings.slices;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
-import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_PLATFORM_SLICE_FLAG;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAILABLE_SLICE_SUBTITLE;
@@ -27,14 +26,17 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAI
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -51,9 +53,9 @@ import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable.SearchIndexProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.search.Indexable.SearchIndexProvider;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -99,14 +101,13 @@ class SliceDataConverter {
     public List<SliceData> getSliceData() {
         List<SliceData> sliceData = new ArrayList<>();
 
-        final Collection<Class> indexableClasses = FeatureFactory.getFactory(mContext)
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(mContext)
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
 
-        for (Class clazz : indexableClasses) {
-            final String fragmentName = clazz.getName();
+        for (SearchIndexableData bundle : bundles) {
+            final String fragmentName = bundle.getTargetClass().getName();
 
-            final SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
-                    clazz);
+            final SearchIndexProvider provider = bundle.getSearchIndexProvider();
 
             // CodeInspection test guards against the null check. Keep check in case of bad actors.
             if (provider == null) {
@@ -187,7 +188,6 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_TITLE
                             | MetadataFlag.FLAG_NEED_PREF_ICON
                             | MetadataFlag.FLAG_NEED_PREF_SUMMARY
-                            | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG
                             | MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE);
 
             for (Bundle bundle : metadata) {
@@ -199,17 +199,24 @@ class SliceDataConverter {
                 }
 
                 final String key = bundle.getString(METADATA_KEY);
+                final BasePreferenceController controller = SliceBuilderUtils
+                        .getPreferenceController(mContext, controllerClassName, key);
+                // Only add pre-approved Slices available on the device.
+                if (!controller.isSliceable() || !controller.isAvailable()) {
+                    continue;
+                }
                 final String title = bundle.getString(METADATA_TITLE);
                 final String summary = bundle.getString(METADATA_SUMMARY);
                 final int iconResId = bundle.getInt(METADATA_ICON);
-                final int sliceType = SliceBuilderUtils.getSliceType(mContext, controllerClassName,
-                        key);
-                final boolean isPlatformSlice = bundle.getBoolean(METADATA_PLATFORM_SLICE_FLAG);
+
+                final int sliceType = controller.getSliceType();
                 final String unavailableSliceSubtitle = bundle.getString(
                         METADATA_UNAVAILABLE_SLICE_SUBTITLE);
+                final boolean isPublicSlice = controller.isPublicSlice();
 
                 final SliceData xmlSlice = new SliceData.Builder()
                         .setKey(key)
+                        .setUri(controller.getSliceUri())
                         .setTitle(title)
                         .setSummary(summary)
                         .setIcon(iconResId)
@@ -217,17 +224,11 @@ class SliceDataConverter {
                         .setPreferenceControllerClassName(controllerClassName)
                         .setFragmentName(fragmentName)
                         .setSliceType(sliceType)
-                        .setPlatformDefined(isPlatformSlice)
                         .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
+                        .setIsPublicSlice(isPublicSlice)
                         .build();
 
-                final BasePreferenceController controller =
-                        SliceBuilderUtils.getPreferenceController(mContext, xmlSlice);
-
-                // Only add pre-approved Slices available on the device.
-                if (controller.isSliceable() && controller.isAvailable()) {
-                    xmlSliceData.add(xmlSlice);
-                }
+                xmlSliceData.add(xmlSlice);
             }
         } catch (SliceData.InvalidSliceDataException e) {
             Log.w(TAG, "Invalid data when building SliceData for " + fragmentName, e);
@@ -294,6 +295,12 @@ class SliceDataConverter {
 
             sliceDataBuilder.setKey(flattenedName)
                     .setTitle(title)
+                    .setUri(new Uri.Builder()
+                            .scheme(ContentResolver.SCHEME_CONTENT)
+                            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                            .appendPath(flattenedName)
+                            .build())
                     .setIcon(iconResource)
                     .setSliceType(SliceData.SliceType.SWITCH);
             try {

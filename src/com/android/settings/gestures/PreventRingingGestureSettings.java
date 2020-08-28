@@ -74,15 +74,8 @@ public class PreventRingingGestureSettings extends DashboardFragment {
         return R.string.help_uri_prevent_ringing_gesture;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.prevent_ringing_gesture_settings;
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.prevent_ringing_gesture_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
