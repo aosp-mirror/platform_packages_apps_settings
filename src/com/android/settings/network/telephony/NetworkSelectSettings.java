@@ -404,6 +404,9 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (mTelephonyManager.getDataState() == mTelephonyManager.DATA_CONNECTED) {
             // Try to get the network registration states
             final ServiceState ss = mTelephonyManager.getServiceState();
+            if (ss == null) {
+                return;
+            }
             final List<NetworkRegistrationInfo> networkList =
                     ss.getNetworkRegistrationInfoListForTransportType(
                             AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
