@@ -1017,7 +1017,7 @@
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"בתהליך התחברות…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"שיתוף של נקודה לשיתוף אינטרנט"</string>
     <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"אימות הזהות שלך"</string>
-    <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏סיסמה של Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏סיסמת ה-Wi‑Fi היא: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"סיסמה של נקודה לשיתוף אינטרנט: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"הוספת מכשיר"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"‏אפשר להשתמש בקוד QR כדי להוסיף מכשיר לרשת זו"</string>
@@ -2464,10 +2464,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"האפליקציות משתמשות בכמות רגילה של צריכת סוללה. אם אפליקציות יצרכו יותר מדי מהסוללה, המכשיר יציע פעולות שאפשר לנקוט.\n\nניתן תמיד להפעיל את תכונת החיסכון בסוללה אם הסוללה עומדת להתרוקן."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"מנהל הסוללה"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"ניהול אפליקציות באופן אוטומטי"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"הגבלת שימוש בסוללה לאפליקציות שבהן לא נעשה שימוש לעתים קרובות"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"כשמנהל הסוללה יזהה שאפליקציות גורמות להתרוקנות הסוללה, תהיה לך אפשרות להגביל אותן. ייתכן שהאפליקציות שיש להן הגבלה לא יפעלו כראוי ויהיה עיכוב בקבלת התראות."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"כשמנהל הסוללה יזהה שאפליקציות גורמות להתרוקנות הסוללה, תהיה לך אפשרות להגביל אותן. ייתכן שהאפליקציות שיש להן הגבלה לא יפעלו כראוי ויהיה עיכוב בקבלת התראות."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"כשמנהל הסוללה יזהה שאפליקציות גורמות להתרוקנות הסוללה, תהיה לך אפשרות להגביל אותן. ייתכן שהאפליקציות שיש להן הגבלה לא יפעלו כראוי ויהיה עיכוב בקבלת התראות."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"הגבלת שימוש בסוללה לאפליקציות שבהן לא נעשה שימוש לעתים קרובות"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"כשמנהל הסוללה יזהה שאפליקציות גורמות להתרוקנות הסוללה, תהיה לך אפשרות להגביל אותן. ייתכן שהאפליקציות שיש להן הגבלה לא יפעלו כראוי ויהיה עיכוב בקבלת התראות."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"אפליקציות בשימוש מוגבל"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="two">‏מגביל שימוש בסוללה של %1$d אפליקציות</item>
@@ -2479,7 +2477,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"אפליקציות אלה השתמשו בסוללה ברקע. ייתכן שאפליקציות מוגבלות לא יפעלו כראוי ושיהיה עיכוב בקבלת התראות."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"שימוש במנהל הסוללה"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"זיהוי אפליקציות שגורמות להתרוקנות הסוללה"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"פועל / מזהה כשאפליקציות גורמות להתרוקנות הסוללה"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"פועל / מזהה כשאפליקציות גורמות להתרוקנות הסוללה"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"כבוי"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="two">‏%1$d אפליקציות מוגבלות</item>
@@ -2704,7 +2702,7 @@
     <string name="backup_data_management_title" msgid="6596830198441939702">"ניהול של חשבון גיבוי"</string>
     <string name="include_app_data_title" msgid="2969603876620594523">"עם נתוני אפליקציה"</string>
     <string name="auto_restore_title" msgid="4124345897936637561">"שחזור אוטומטי"</string>
-    <string name="auto_restore_summary" msgid="6830198851045584001">"לאחר התקנה מחדש של אפליקציה, שחזר את ההגדרות והנתונים המגובים"</string>
+    <string name="auto_restore_summary" msgid="6830198851045584001">"לאחר התקנה מחדש של אפליקציה, יש לשחזר את ההגדרות והנתונים המגובים"</string>
     <string name="backup_inactive_title" msgid="6753265378043349277">"שירות הגיבוי לא פעיל"</string>
     <string name="backup_configure_account_default_summary" msgid="5323225330966306690">"אף חשבון אינו מאחסן כרגע נתונים מגובים"</string>
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
@@ -3259,7 +3257,7 @@
     <string name="keywords_lockscreen" msgid="3656926961043485797">"החלק כדי לבטל נעילה, סיסמה, קו ביטול נעילה, קוד גישה"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"אתגר בעבודה, עבודה, פרופיל"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"פרופיל עבודה, פרופיל מנוהל, לאחד, איחוד, עבודה, פרופיל"</string>
-    <string name="keywords_gesture" msgid="3456930847450080520">"תנועות"</string>
+    <string name="keywords_gesture" msgid="3456930847450080520">"תנועות לביצוע פעולות"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"שלם, הקש, תשלומים"</string>
     <string name="keywords_backup" msgid="707735920706667685">"‏גיבוי, לגבות, backup, back up"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"תנועה"</string>
@@ -3595,7 +3593,7 @@
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"אין אפליקציות מותקנות שתומכות ב\'תמונה בתוך תמונה\'"</string>
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"תמונה בתוך תמונה"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"תמונה בתוך תמונה"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"עם תמונה בתוך תמונה"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"תמונה בתוך תמונה"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"אפליקציה זו תוכל ליצור חלון מסוג תמונה-בתוך-תמונה בזמן שהיא תהיה פתוחה או לאחר היציאה ממנה (למשל, כדי להמשיך לצפות בסרטון). חלון זה מוצג מעל אפליקציות אחרות שנמצאות בשימוש."</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"גישה אל \'נא לא להפריע\'"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"הפעלת ההרשאה \'נא לא להפריע\'"</string>
@@ -4362,7 +4360,7 @@
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"באופן אוטומטי"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"ידני"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"פינוי שטח אחסון עכשיו"</string>
-    <string name="gesture_preference_title" msgid="8291899281322647187">"תנועות"</string>
+    <string name="gesture_preference_title" msgid="8291899281322647187">"תנועות לביצוע פעולות"</string>
     <string name="gesture_preference_summary" product="default" msgid="7941981260703379398">"תנועות מהירות לשליטה בטלפון"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4031666250963488007">"תנועות מהירות לשליטה בטאבלט"</string>
     <string name="gesture_preference_summary" product="device" msgid="3520072325356373349">"תנועות מהירות לשליטה במכשיר"</string>

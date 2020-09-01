@@ -1310,7 +1310,7 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Hvornår skal det vises"</string>
     <string name="doze_title" msgid="7164999188166153712">"Nye notifikationer"</string>
     <string name="doze_summary" msgid="1047254712885464738">"Væk skærmen, når du modtager notifikationer"</string>
-    <string name="doze_always_on_title" msgid="3357953547262808865">"Altid aktiveret"</string>
+    <string name="doze_always_on_title" msgid="3357953547262808865">"Altid aktiv"</string>
     <string name="doze_always_on_summary" msgid="1593188198982222910">"Vis klokkeslæt, notifikationsikoner og anden info. Øget batteriforbrug."</string>
     <string name="title_font_size" msgid="570613010306330622">"Skriftstørrelse"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Gør teksten større eller mindre"</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Dine apps har et normalt batteriforbrug. Hvis apps bruger for meget batteri, foreslår din enhed, hvad du kan gøre.\n\nDu kan altid aktivere batterisparefunktionen, hvis enheden er ved at løbe tør for batteri."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Batteriadministration"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Administrer automatisk apps"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Begræns batteriforbrug for apps, du ikke bruger så ofte"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Når batteriadministrator registrerer, at der er apps, som dræner batteriet, får du mulighed for at begrænse disse apps. Begrænsede apps fungere muligvis ikke korrekt, og notifikationer kan være forsinkede."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Når batteriadministrator registrerer, at der er apps, som dræner batteriet, får du mulighed for at begrænse disse apps. Begrænsede apps fungere muligvis ikke korrekt, og notifikationer kan være forsinkede."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Når batteriadministrator registrerer, at der er apps, som dræner batteriet, får du mulighed for at begrænse disse apps. Begrænsede apps fungere muligvis ikke korrekt, og notifikationer kan være forsinkede."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Begræns batteriforbrug for apps, du ikke bruger så ofte"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Når batteriadministrator registrerer, at der er apps, som dræner batteriet, får du mulighed for at begrænse disse apps. Begrænsede apps fungere muligvis ikke korrekt, og notifikationer kan være forsinkede."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Begrænsede apps"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="one">Begræns batteriforbruget for %1$d app</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Disse apps har brugt batteri i baggrunden. Begrænsede apps fungerer muligvis ikke korrekt, og notifikationer kan være forsinkede."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Brug batteriadministration"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Registrer, når apps dræner batteriet"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Til – Registrerer, når apps dræner batteriet"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Til – Registrerer, når apps dræner batteriet"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Fra"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">%1$d app er begrænset</item>
@@ -4463,7 +4461,7 @@
     <string name="network_connecting" msgid="6856124847029124041">"Opretter forbindelse…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Der kunne ikke oprettes forbindelse"</string>
     <string name="empty_networks_list" msgid="6519489879480673428">"Der blev ikke fundet nogen netværk."</string>
-    <string name="network_query_error" msgid="6406348372070035274">"Der kunne ikke findes nogen netværk. Prøv igen."</string>
+    <string name="network_query_error" msgid="6406348372070035274">"Der blev ikke fundet nogen netværk. Prøv igen."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(forbudt)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Intet SIM-kort"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Foretrukken netværkstilstand: WCDMA foretrækkes"</string>

@@ -374,8 +374,8 @@
     <string name="location_settings_master_switch_title" msgid="4232810467362584112">"Utiliser ma position"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivé"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="one">Localisation activée - <xliff:g id="COUNT_1">%1$d</xliff:g> application a accès à votre position</item>
-      <item quantity="other">Localisation activée - <xliff:g id="COUNT_1">%1$d</xliff:g> applications ont accès à votre position</item>
+      <item quantity="one">Activée - <xliff:g id="COUNT_1">%1$d</xliff:g> application a accès à votre position</item>
+      <item quantity="other">Activée - <xliff:g id="COUNT_1">%1$d</xliff:g> applications ont accès à votre position</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Chargement…"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
@@ -527,7 +527,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Supprimer les empreintes digitales ?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Supprimer \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Souhaitez-vous supprimer cette empreinte digitale ?"</string>
-    <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications"</string>
+    <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Vous ne pourrez pas utiliser vos empreintes digitales pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre profil professionnel, autoriser des achats ou vous connecter à des applications professionnelles"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Oui, supprimer"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Chiffrement"</string>
@@ -574,7 +574,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Protéger la tablette"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Protéger l\'appareil"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"Protégez votre téléphone"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Pour plus de sécurité, définissez un mode de verrouillage d\'écran secondaire"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Pour plus de sécurité, définissez une méthode secondaire pour verrouiller l\'écran"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cette tablette sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cet appareil sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser ce téléphone sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
@@ -607,7 +607,7 @@
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Continuer sans empreinte digitale"</string>
     <string name="fingerprint_unlock_title" msgid="4978686534505944042">"Vous pouvez déverrouiller votre téléphone à l\'aide de votre empreinte digitale. Pour plus de sécurité, cette option doit être associée à un autre mode de verrouillage de l\'écran."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="5991691559532427891">"Face Unlock + schéma"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="8990569318587034610">"Face Unlock + code PIN"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="8990569318587034610">"Face Unlock + code"</string>
     <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"Face Unlock + mot de passe"</string>
     <string name="face_unlock_skip_face" msgid="7117201898540606846">"Continuer sans Face Unlock"</string>
     <string name="face_unlock_title" msgid="7344830351598247267">"Vous pouvez déverrouiller votre téléphone à l\'aide de votre visage. Pour plus de sécurité, cette option doit être associée à un mode de verrouillage d\'écran secondaire."</string>
@@ -1769,7 +1769,7 @@
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Saisissez de nouveau votre mot de passe"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirmez votre schéma"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Saisissez de nouveau votre code"</string>
-    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Les mots de passe ne correspondent pas."</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Les mots de passe ne correspondent pas"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Les codes ne correspondent pas"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Dessinez de nouveau votre schéma"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Méthode de déverrouillage"</string>
@@ -1778,7 +1778,7 @@
     <string name="lockpassword_pattern_set_toast" msgid="3090582314362416762">"Le schéma a été défini."</string>
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Pour utiliser Face Unlock, définissez un mot de passe"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Pour utiliser Face Unlock, définissez un schéma"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Pour utiliser Face Unlock, définissez un code PIN"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Pour utiliser Face Unlock, définissez un code"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Utilisez le schéma de l\'appareil pour continuer."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Saisissez le code de l\'appareil pour continuer."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Saisissez le mot de passe de l\'appareil pour continuer."</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Vos applications utilisent une quantité normale d\'énergie. Si elles sollicitent trop la batterie, votre téléphone vous suggérera des mesures à prendre.\n\nSi le niveau de votre batterie est faible, vous pouvez également activer l\'économiseur de batterie."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Gestionnaire de batterie"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Gérer les applications automatiquement"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Limiter l\'utilisation de la batterie pour les applications peu utilisées"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Si le gestionnaire de batterie détecte que certaines applications déchargent la batterie, vous pouvez choisir de limiter ces applications. Les applications auxquelles une restriction est appliquée peuvent ne pas fonctionner correctement et leurs notifications risquent d\'être retardées."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Si le gestionnaire de batterie détecte que certaines applications déchargent la batterie, vous pouvez choisir de limiter ces applications. Les applications auxquelles une restriction est appliquée peuvent ne pas fonctionner correctement et leurs notifications risquent d\'être retardées."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Si le gestionnaire de batterie détecte que certaines applications déchargent la batterie, vous pouvez choisir de limiter ces applications. Les applications auxquelles une restriction est appliquée peuvent ne pas fonctionner correctement et leurs notifications risquent d\'être retardées."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limiter l\'utilisation de la batterie pour les applications peu utilisées"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Si le gestionnaire de batterie détecte que certaines applications déchargent la batterie, vous pouvez choisir de limiter ces applications. Les applications auxquelles une restriction est appliquée peuvent ne pas fonctionner correctement et leurs notifications risquent d\'être retardées."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Applications dont l\'accès est limité"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="one">Limitation de l\'utilisation de la batterie pour %1$d application</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Ces applications utilisent la batterie en arrière-plan. Les applications dont l\'accès est limité peuvent ne pas fonctionner correctement et leurs notifications risquent d\'être retardées."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utiliser le gestionnaire de batterie"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Détecter les applications qui déchargent la batterie"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Activé - Détection des applications qui déchargent la batterie"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Activé - Détection des applications qui déchargent la batterie"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Désactivé"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">%1$d application limitée</item>
@@ -3390,12 +3388,12 @@
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Les icônes des notifications discrètes ne s\'affichent pas dans la barre d\'état"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Autoriser les pastilles de notification"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bulles"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Certaines notifications peuvent s\'afficher sous forme d\'info-bulles à l\'écran"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Certaines notifications ainsi que d\'autres contenus peuvent s\'afficher à l\'écran sous forme de bulles. Pour ouvrir une bulle, appuyez dessus. Pour l\'ignorer, faites-la glisser vers le bas de l\'écran."</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Certaines notifications peuvent s\'afficher à l\'écran sous forme de bulles"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Certaines notifications et d\'autres contenus peuvent s\'afficher à l\'écran sous forme de bulles. Pour ouvrir une bulle, appuyez dessus. Pour l\'ignorer, faites-la glisser vers le bas de l\'écran."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bulles"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Autoriser <xliff:g id="APP_NAME">%1$s</xliff:g> à afficher certaines notifications sous forme de bulles"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Activer les bulles"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Avant d\'activer les bulles pour cette application, vous devez les activer pour votre appareil. Ceci a une incidence sur les autres applications dans lesquelles vous avez déjà activé les bulles."</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Avant d\'activer les bulles de cette application, vous devez les activer sur votre appareil. Cela a un impact sur les autres applications pour lesquelles vous avez déjà activé les bulles."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Activer pour l\'appareil"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Annuler"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Actions associées au balayage"</string>
@@ -4655,7 +4653,7 @@
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Impossible de capturer l\'empreinte de la mémoire du système"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Capturer automatiquement les empreintes de la mémoire du système"</string>
     <string name="automatic_system_heap_dump_summary" msgid="4060846186592886986">"Capturer automatiquement une empreinte de la mémoire pour le système Android lorsqu\'il utilise trop de mémoire"</string>
-    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"Dissocier"</string>
+    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"Se déconnecter"</string>
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Appels d\'urgence"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Les appels d\'urgence via la fonctionnalité Appels Wi-Fi ne sont pas compatibles avec votre opérateur.\nL\'appareil basculera automatiquement sur un réseau mobile pour passer un appel d\'urgence.\nLes appels d\'urgence sont possibles uniquement dans les zones couvertes par le réseau mobile."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Utiliser le Wi-Fi pour les appels afin d\'améliorer leur qualité"</string>

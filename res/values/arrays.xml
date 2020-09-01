@@ -368,14 +368,12 @@
 
     <!-- Phase 2 options for PEAP -->
     <string-array name="wifi_peap_phase2_entries">
-        <item>None</item>
         <item>MSCHAPV2</item>
         <item>GTC</item>
     </string-array>
 
     <!-- Type of EAP method when EAP SIM, AKA, AKA' are supported -->
     <string-array name="wifi_peap_phase2_entries_with_sim_auth">
-        <item>None</item>
         <item translatable="false">MSCHAPV2</item>
         <item translatable="false">GTC</item>
         <item translatable="false">SIM</item>
@@ -383,9 +381,8 @@
         <item translatable="false">AKA\'</item>
     </string-array>
 
-    <!-- Phase 2 options for rest of EAP methods -->
-    <string-array name="wifi_phase2_entries">
-        <item>None</item>
+    <!-- Phase 2 options for TTLS -->
+    <string-array name="wifi_ttls_phase2_entries">
         <item>PAP</item>
         <item>MSCHAP</item>
         <item>MSCHAPV2</item>
@@ -1417,6 +1414,18 @@
         <item>@string/enhanced_4g_lte_mode_summary</item>
         <!-- 2: All carriers who want 4G -->
         <item>@string/enhanced_4g_lte_mode_summary_4g_calling</item>
+    </string-array>
+
+    <!--String arrays for showing the rtt settings options -->
+    <string-array name="rtt_setting_mode">
+        <!-- 0: Invalid value -->
+        <item></item>
+        <!-- 1:  Not visible -->
+        <item>@string/rtt_settings_no_visible</item>
+        <!-- 2:  Visible during call -->
+        <item>@string/rtt_settings_visible_during_call</item>
+        <!-- 3:  Always visible -->
+        <item>@string/rtt_settings_always_visible</item>
     </string-array>
 
 </resources>

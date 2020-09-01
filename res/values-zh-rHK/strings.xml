@@ -2395,10 +2395,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"您的應用程式目前的耗電量正常。如果應用程式耗電過多，裝置將會為您提供操作建議。\n\n如果電量較低，您可以隨時開啟省電模式。"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"電池管理工具"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"自動管理應用程式"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"限制不常用應用程式的耗電量"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"當「電池管理工具」偵測到應用程式正在耗電時，您可選擇限制這些應用程式。受限制的應用程式可能會因此無法正常運作，且相關通知可能會延遲。"</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"當「電池管理工具」偵測到應用程式正在耗電時，您可選擇限制這些應用程式。受限制的應用程式可能會因此無法正常運作，且相關通知可能會延遲。"</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"當「電池管理工具」偵測到應用程式正在耗電時，您可選擇限制這些應用程式。受限制的應用程式可能會因此無法正常運作，且相關通知可能會延遲。"</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"限制不常用應用程式的耗電量"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"當「電池管理工具」偵測到應用程式正在耗電時，您可選擇限制這些應用程式。受限制的應用程式可能會因此無法正常運作，且相關通知可能會延遲。"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"受限制的應用程式"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">限制 %1$d 個應用程式的用電量</item>
@@ -2408,7 +2406,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"這些應用程式會在背景中耗電。受限制的應用程式可能會無法正常運作，且相關通知可能會延遲。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"使用電池管理工具"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"偵測應用程式何時耗電"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"已開啟/正在偵測應用程式何時耗電"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"已開啟/正在偵測應用程式何時耗電"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"已關閉"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d 個應用程式受限制</item>
@@ -3499,7 +3497,7 @@
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"pip 畫中畫"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"畫中畫"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"允許畫中畫"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"允許此應用程式在開啟時或您離開後 (例如繼續觀看影片) 建立畫中畫視窗。該視窗會在您目前使用的其他應用程式上層顯示。"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"當您離開正運作中的應用程式時，允許該應用程式建立畫中畫視窗 (例如方便您繼續觀看影片)。該視窗會顯示在您目前使用的其他應用程式上層。"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"「請勿騷擾」權限"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"允許請勿騷擾權限"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"沒有已安裝的應用程式要求存取「請勿騷擾」。"</string>
@@ -3755,7 +3753,7 @@
     <string name="advanced_apps" msgid="7643010673326578815">"進階"</string>
     <string name="configure_apps" msgid="5468359087126598115">"設定應用程式"</string>
     <string name="unknown_app" msgid="2027248925719898714">"不明應用程式"</string>
-    <string name="app_permissions" msgid="8666537659217653626">"權限管理員"</string>
+    <string name="app_permissions" msgid="8666537659217653626">"權限管理工具"</string>
     <string name="app_permissions_summary" msgid="2709819220672938860">"使用<xliff:g id="APPS">%1$s</xliff:g>的應用程式"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"輕按以喚醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在螢幕上任何地方連按兩下即可喚醒裝置"</string>
@@ -3787,7 +3785,7 @@
     <string name="system_app" msgid="1863291702508355041">"(系統)"</string>
     <string name="system_default_app" msgid="2647834628622214931">"(系統預設)"</string>
     <string name="apps_storage" msgid="643866814746927111">"應用程式儲存空間"</string>
-    <string name="usage_access" msgid="5487993885373893282">"使用情況存取權"</string>
+    <string name="usage_access" msgid="5487993885373893282">"使用紀錄存取權"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"允許使用記錄存取權"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"應用程式使用喜好"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"裝置使用時間"</string>

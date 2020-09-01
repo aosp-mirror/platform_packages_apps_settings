@@ -497,7 +497,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Dzēst"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Pieskarieties sensoram"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Novietojiet pirkstu uz sensora un paceliet to pēc tam, kad sajūtat vibrāciju"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Paceliet un vēlreiz pieskar."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Pieskarieties vēlreiz"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Atkārtoti uzlieciet pirkstu, lai pievienotu dažādas pirksta nospieduma daļas."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Pirksta nospiedums pievienots"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="8220458039597261933">"Kad tiek rādīta šī ikona, izmantojiet pirksta nospiedumu identifikācijai vai pirkuma autorizēšanai."</string>
@@ -1785,7 +1785,7 @@
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Parole pirksta nosp. lietošanai"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Kombinācijas iestatīšana"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Drošības nolūkos iestatiet PIN kodu."</string>
-    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"PIN pirksta nosp. lietošanai"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Iestatiet PIN kodu"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Drošības nolūkos iestatiet kombināciju."</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Atkārtota paroles ievade"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Apstipriniet kombināciju"</string>
@@ -2429,10 +2429,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Jūsu lietotnes patērē normālu akumulatora enerģijas apjomu. Ja lietotnes patērē pārāk daudz akumulatora enerģijas, jūsu ierīcē tiks parādītas ieteicamās darbības.\n\nJa akumulatora uzlādes līmenis ir zems, varat jebkurā laikā ieslēgt akumulatora jaudas taupīšanas režīmu."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Akumulatora pārvaldnieks"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Automātiska akumulatora enerģijas patēriņa pārvaldība"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Ierobežojiet akumulatora enerģijas patēriņu tām lietotnēm, kuras neizmantojat bieži"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Ja akumulatora pārvaldnieks konstatēs, ka lietotnes patērē daudz akumulatora enerģijas, varēsiet ierobežot šo lietotņu darbību. Šīs lietotnes var darboties neatbilstoši, un paziņojumi var tikt parādīti aizkavēti."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Ja akumulatora pārvaldnieks konstatēs, ka lietotnes patērē daudz akumulatora enerģijas, varēsiet ierobežot šo lietotņu darbību. Šīs lietotnes var darboties neatbilstoši, un paziņojumi var tikt parādīti aizkavēti."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Ja akumulatora pārvaldnieks konstatēs, ka lietotnes patērē daudz akumulatora enerģijas, varēsiet ierobežot šo lietotņu darbību. Šīs lietotnes var darboties neatbilstoši, un paziņojumi var tikt parādīti aizkavēti."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Ierobežojiet akumulatora enerģijas patēriņu tām lietotnēm, kuras neizmantojat bieži"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Ja akumulatora pārvaldnieks konstatēs, ka lietotnes patērē daudz akumulatora enerģijas, varēsiet ierobežot šo lietotņu darbību. Šīs lietotnes var darboties neatbilstoši, un paziņojumi var tikt parādīti aizkavēti."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Lietotnes ar ierobežotu darbību"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="zero">Akumulatora lietojums tiek ierobežots %1$d lietotnēm</item>
@@ -2443,7 +2441,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Šīs lietotnes fonā patērēja akumulatora enerģiju. Lietotnes ar ierobežotu darbību var darboties neatbilstoši, un paziņojumi var tikt parādīti aizkavēti."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Izmantot akumulatora pārvaldnieku"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Nosaka lietotnes, kas patērē daudz akumulatora enerģijas"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Ieslēgts/nosaka lietotnes, kas patērē daudz akumulatora enerģijas"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Ieslēgts/nosaka lietotnes, kas patērē daudz akumulatora enerģijas"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Izslēgts"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="zero">Ierobežota %1$d lietotņu darbība</item>

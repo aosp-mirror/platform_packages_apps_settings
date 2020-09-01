@@ -1862,7 +1862,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Зробити ключ видимим"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Зробити ключ профілю видимим"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Вібрація під час дотику"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Блокування кнопкою живлення"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Блокувати кнопкою живлення"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Якщо <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> не запобігає блокуванню"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Налашт. ключ розблок."</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Змінити ключ розблокув."</string>
@@ -2464,10 +2464,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Додатки використовують звичайний обсяг заряду акумулятора. Якщо вони споживатимуть забагато енергії, пристрій запропонує відповідні дії.\n\nВи завжди можете ввімкнути режим економії заряду акумулятора."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Диспетчер заряду акумулятора"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Керувати додатками автоматично"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Обмежте споживання заряду акумулятора для додатків, які рідко використовуються"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Коли диспетчер заряду виявляє додатки, які швидко розряджають акумулятор, ви можете обмежити їх. Можливо, додатки працюватимуть неналежним чином, а сповіщення надходитимуть із затримкою."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Коли диспетчер заряду виявляє додатки, які швидко розряджають акумулятор, ви можете обмежити їх. Можливо, додатки працюватимуть неналежним чином, а сповіщення надходитимуть із затримкою."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Коли диспетчер заряду виявляє додатки, які швидко розряджають акумулятор, ви можете обмежити їх. Можливо, додатки працюватимуть неналежним чином, а сповіщення надходитимуть із затримкою."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Обмежте споживання заряду акумулятора для додатків, які рідко використовуються"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Коли диспетчер заряду виявляє додатки, які швидко розряджають акумулятор, ви можете обмежити їх. Можливо, додатки працюватимуть неналежним чином, а сповіщення надходитимуть із затримкою."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Обмежені додатки"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="one">Обмежується споживання заряду акумулятора для %1$d додатка</item>
@@ -2479,7 +2477,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Ці додатки споживали заряд акумулятора у фоновому режимі. Якщо ви їх обмежите, можливо, вони працюватимуть неналежним чином, а сповіщення надходитимуть із затримкою."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Використовувати диспетчер заряду акумулятора"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Виявляти, коли додатки швидко розряджають акумулятор"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Увімкнено / Виявляється, коли додатки швидко розряджають акумулятор"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Увімкнено / Виявляється, коли додатки швидко розряджають акумулятор"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Вимкнено"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">%1$d додаток обмежено</item>
@@ -3072,7 +3070,7 @@
     <string name="application_restrictions" msgid="276179173572729205">"Дозволи для програм і вмісту"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Програми з обмеженнями"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Розгорнути налаштув. програм"</string>
-    <string name="nfc_payment_settings_title" msgid="400718454435230486">"Натиснути й оплатити"</string>
+    <string name="nfc_payment_settings_title" msgid="400718454435230486">"Експрес-платежі"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Як це працює"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Оплачуйте покупки за допомогою телефона"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Додаток для платежів за умовчанням"</string>
@@ -3479,13 +3477,13 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Сховати значки тихих сповіщень"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Значки тихих сповіщень не показуються в рядку стану"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Дозволити значки сповіщень"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"Спливаючі підказки"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Деякі сповіщення можуть з’являтись як спливаючі підказки на екрані"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Деякі сповіщення та інший вміст можуть з’являтися у вигляді спливаючих підказок на екрані. Щоб відкрити спливаючу підказку, натисніть її, а щоб сховати – перетягніть вниз екрана."</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Спливаючі підказки"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Дозволити додатку <xliff:g id="APP_NAME">%1$s</xliff:g> показувати деякі сповіщення у вигляді спливаючих підказок"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Увімкнути спливаючі підказки"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Щоб увімкнути спливаючі підказки від цього додатка, спершу увімкніть їх для пристрою. Це вплине на інші додатки, у яких уже ввімкнено спливаючі підказки."</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"Спливаючі чати"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Деякі сповіщення можуть з’являтись як спливаючі чати на екрані"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Деякі сповіщення та інший контент можуть з’являтися у вигляді спливаючих чатів на екрані. Щоб відкрити чат, натисніть його, а щоб сховати – перетягніть униз екрана."</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Спливаючі чати"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Дозволити додатку <xliff:g id="APP_NAME">%1$s</xliff:g> показувати деякі сповіщення у вигляді спливаючих чатів"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Увімкнути спливаючі чати"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Щоб увімкнути спливаючі чати від цього додатка, спершу ввімкніть їх на пристрої. Це вплине на інші додатки, у яких ви вже ввімкнули спливаючі чати."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Увімкнути для пристрою"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Скасувати"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Проведення по екрану"</string>
@@ -4201,7 +4199,7 @@
     <string name="data_warning_footnote" msgid="5991901765915710592">"Пристрій вимірює мобільний трафік і показує застереження. Дані оператора можуть бути інші."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Установити ліміт трафіку"</string>
     <string name="data_limit" msgid="8731731657513652363">"Ліміт трафіку"</string>
-    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> використано <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="data_usage_template" msgid="3822452362629968010">"Використано <xliff:g id="ID_1">%1$s</xliff:g> за період <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Налаштувати"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Інші додатки, які використовуються"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">

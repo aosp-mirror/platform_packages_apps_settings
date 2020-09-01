@@ -2395,10 +2395,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"तुमची अ‍ॅप्स योग्य प्रमाणात बॅटरी वापरत आहेत. तुमची अ‍ॅप्स जास्त बॅटरी वापरत असल्यास तुमचे डिव्हाइस तुम्ही करू शकता अशा क्रिया सुचवेल. \n\nबॅटरी संपत आली असल्यास तुम्ही कायम बॅटरी सेव्हर सुरू करू शकता."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"बॅटरी व्यवस्थापक"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"अ‍ॅप्स आपोआप व्यवस्थापित करा"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"तुम्ही नेहमी वापरत नसलेल्या ॲप्सचा बॅटरी वापर मर्यादित करा"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"जेव्हा बॅटरी व्यवस्थापकाला अ‍ॅप्सद्वारे बॅटरी जास्त वापरली जात आहे असे लक्षात येईल, तेव्हा तुमच्याकडे या अ‍ॅप्सचा वापर मर्यादित राखण्याचा पर्याय असेल. प्रतिबंधित अ‍ॅप्स योग्यरीत्या कार्य करणार नाहीत आणि सूचना येण्यास उशीर होऊ शकतो."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"जेव्हा बॅटरी व्यवस्थापकाला अ‍ॅप्सद्वारे बॅटरी जास्त वापरली जात आहे असे लक्षात येईल, तेव्हा तुमच्याकडे या अ‍ॅप्सचा वापर मर्यादित राखण्याचा पर्याय असेल. प्रतिबंधित अ‍ॅप्स योग्यरीत्या कार्य करणार नाहीत आणि सूचना येण्यास उशीर होऊ शकतो."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"जेव्हा बॅटरी व्यवस्थापकाला अ‍ॅप्सद्वारे बॅटरी जास्त वापरली जात आहे असे लक्षात येईल, तेव्हा तुमच्याकडे या अ‍ॅप्सचा वापर मर्यादित राखण्याचा पर्याय असेल. प्रतिबंधित अ‍ॅप्स योग्यरीत्या कार्य करणार नाहीत आणि सूचना येण्यास उशीर होऊ शकतो."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"तुम्ही नेहमी वापरत नसलेल्या ॲप्सचा बॅटरी वापर मर्यादित करा"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"जेव्हा बॅटरी व्यवस्थापकाला अ‍ॅप्सद्वारे बॅटरी जास्त वापरली जात आहे असे लक्षात येईल, तेव्हा तुमच्याकडे या अ‍ॅप्सचा वापर मर्यादित राखण्याचा पर्याय असेल. प्रतिबंधित अ‍ॅप्स योग्यरीत्या कार्य करणार नाहीत आणि सूचना येण्यास उशीर होऊ शकतो."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"प्रतिबंधित अ‍ॅप्स"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">%1$d ॲप्ससाठी बॅटरीचा वापर मर्यादित करत आहे</item>
@@ -2408,7 +2406,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"ही अ‍ॅप्स बॅकग्राउंडवर बॅटरी वापरत आहेत. प्रतिबंधित अ‍ॅप्स व्यवस्थित काम करू शकणार नाहीत आणि सूचना येण्यास उशीर होऊ शकतो."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"बॅटरी व्यवस्थापक वापरा"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"अ‍ॅप्सची बॅटरी केव्हा संंपते ते ओळखा"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"ॲप्सची बॅटरी केव्हा संपते ते ओळखत आहे / सुरू आहे"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"ॲप्सची बॅटरी केव्हा संपते ते ओळखत आहे / सुरू आहे"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"बंद"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d अ‍ॅप्स प्रतिबंधित केली</item>
@@ -2695,7 +2693,7 @@
     <string name="sync_one_time_sync" msgid="8114337154112057462">"आता संकालित करण्यासाठी टॅप करा<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
     <string name="sync_gmail" msgid="228561698646018808">"Gmail"</string>
-    <string name="sync_calendar" msgid="4603704438090387251">"कॅलेंडर"</string>
+    <string name="sync_calendar" msgid="4603704438090387251">"Calendar"</string>
     <string name="sync_contacts" msgid="2376465611511325472">"संपर्क"</string>
     <string name="sync_plug" msgid="7956982719077985381"><font fgcolor="#ffffffff">"Google सिंकामध्ये स्वागत आहे!"</font>" \nतुम्ही जेथे आहात तेथून आपल्या संपर्क, भेटी आणि अधिक मध्ये प्रवेश करण्याची अनुमती देण्यासाठी डेटा सिंक करण्याकरिता एक Google दृष्टिकोन."</string>
     <string name="header_application_sync_settings" msgid="7427706834875419243">"अ‍ॅप सिंक सेटिंग्ज"</string>

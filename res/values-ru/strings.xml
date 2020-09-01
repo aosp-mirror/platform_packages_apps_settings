@@ -975,7 +975,7 @@
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Сертификат центра сертификации"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Домен"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Сертификат пользователя"</string>
-    <string name="wifi_eap_identity" msgid="3629406902174137028">"Пользователь"</string>
+    <string name="wifi_eap_identity" msgid="3629406902174137028">"Идентификация"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Неизвестный"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Пароль"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Показать пароль"</string>
@@ -1024,9 +1024,9 @@
     <string name="retry" msgid="7542103800274026915">"Повторить попытку"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Поделиться с другими пользователями устройства"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(без изменений)"</string>
-    <string name="wifi_unspecified" msgid="4561964943472312208">"Выберите"</string>
+    <string name="wifi_unspecified" msgid="4561964943472312208">"Выбрать"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Добавлено несколько сертификатов)"</string>
-    <string name="wifi_use_system_certs" msgid="5587866698144996931">"Использовать системные сертификаты"</string>
+    <string name="wifi_use_system_certs" msgid="5587866698144996931">"Системные сертификаты"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Не указывать"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Не проверять"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Сертификат не указан. Будет установлено незащищенное соединение."</string>
@@ -1149,7 +1149,7 @@
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Настройка точки доступа Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"Настройка точки доступа Wi‑Fi"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"Точка доступа AndroidAP WPA2 PSK"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"Хот-спот Android"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Звонки по Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Звонки по Wi-Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Звоните по Wi-Fi, когда нет сигнала сотовой связи."</string>
@@ -1712,7 +1712,7 @@
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Открыть доступ к интернет-подключению планшета через USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth-модем"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Открыть доступ к интернет-подключению планшета по Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Открыть доступ к интернет-подключению телефона по Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Открыть доступ к интернет-подключению телефона через Bluetooth"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Доступ к интернет-подключению устройства \"<xliff:g id="DEVICE_NAME">%1$d</xliff:g>\" по Bluetooth открыт"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Макс. число подключаемых устройств: <xliff:g id="MAXCONNECTION">%1$d</xliff:g>"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Подключение к <xliff:g id="DEVICE_NAME">%1$s</xliff:g> будет прервано."</string>
@@ -1848,7 +1848,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Начертите ключ разблокировки"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Для справки нажмите \"Меню\"."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"По завершении отпустите палец"</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Соедините не менее <xliff:g id="NUMBER">%d</xliff:g> точек"</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Соедините не менее <xliff:g id="NUMBER">%d</xliff:g> точек."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Графический ключ сохранен"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Начертите ключ ещё раз"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Ваш новый ключ разблокировки"</string>
@@ -2464,10 +2464,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Ваши приложения расходуют заряд батареи нормально. При повышенном расходе вы получите рекомендации о том, что можно предпринять.\n\nЕсли заряд батареи будет на исходе, вы можете включить режим энергосбережения."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Автоматическое управление приложениями"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Ограничить работу редко используемых приложений"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Battery Manager определяет, какие приложения быстрее всего расходуют заряд батареи, и предлагает ограничить их работу. Ограничение фоновых процессов может привести к нарушениям функциональности приложений и задержке поступающих от них уведомлений."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Battery Manager определяет, какие приложения быстрее всего расходуют заряд батареи, и предлагает ограничить их работу. Ограничение фоновых процессов может привести к нарушениям функциональности приложений и задержке поступающих от них уведомлений."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Battery Manager определяет, какие приложения быстрее всего расходуют заряд батареи, и предлагает ограничить их работу. Ограничение фоновых процессов может привести к нарушениям функциональности приложений и задержке поступающих от них уведомлений."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Ограничить работу редко используемых приложений"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Battery Manager определяет, какие приложения быстрее всего расходуют заряд батареи, и предлагает ограничить их работу. Ограничение фоновых процессов может привести к нарушениям функциональности приложений и задержке поступающих от них уведомлений."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Приложения с ограниченным доступом"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="one">Потребление энергии ограничено для %1$d приложения</item>
@@ -2479,7 +2477,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Эти приложения используют батарею в фоновом режиме. Ограничение может снизить их функциональность и вызвать задержку уведомлений."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Использовать Battery Manager"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Выявлять приложения, быстро расходующие заряд батареи"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Включена функция выявления приложений, быстро расходующих заряд батареи"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Включена функция выявления приложений, быстро расходующих заряд батареи"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Отключено"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">%1$d приложение с ограниченным доступом</item>
@@ -3479,13 +3477,13 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Скрыть значки у беззвучных уведомлений"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Значки беззвучных уведомлений не появляются в строке состояния"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Показывать значки уведомлений"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"Всплывающие уведомления"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Некоторые уведомления могут появляться как всплывающие"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Некоторые уведомления могут появляться на экране как всплывающие. Чтобы открыть уведомление, нажмите на него. Чтобы скрыть уведомление, перетащите его в нижнюю часть экрана."</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Всплывающие уведомления"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Разрешить приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" показывать некоторые уведомления как всплывающие"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Включить всплывающие уведомления"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Сначала включите всплывающие уведомления на устройстве. Это отразится и на других приложениях, в которых вы включили всплывающие уведомления."</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"Всплывающие чаты"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Некоторые уведомления могут появляться как всплывающие чаты"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Некоторые уведомления и другой контент могут появляться на экране как всплывающие чаты. Чтобы открыть чат, нажмите на него, а чтобы скрыть – перетащите в нижнюю часть экрана."</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Всплывающие чаты"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Разрешить приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" показывать некоторые уведомления как всплывающие чаты"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Включить всплывающие чаты"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Сначала включите всплывающие чаты на устройстве. Это отразится и на других приложениях, в которых вы включили всплывающие чаты."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Включить на устройстве"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Отмена"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Жесты пролистывания"</string>
@@ -4321,7 +4319,7 @@
     <string name="dark_ui_mode" msgid="898146394425795281">"Тёмная тема"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Включена (временно отключено из-за режима энергосбережения)"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Временно включена из-за режима энергосбережения"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Приложения, которые поддерживают эту функцию, также перейдут в ночной режим."</string>
+    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Приложения, которые поддерживают эту функцию, также переключатся на тёмную тему."</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"ОК"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Тёмная тема"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Продлить время работы от батареи"</string>

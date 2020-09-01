@@ -349,7 +349,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Auf UTC-Basis auswählen"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Datum"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Uhrzeit"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Displaysperre nach autom. Ausschalten des Displays"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Sperren nach autom. Ausschalten des Displays"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Ablauf des Zeitlimits"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Unmittelbar nach Ablauf des Zeitlimits, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Ablauf des Zeitlimits, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -887,7 +887,7 @@
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Für diese Funktion musst du zuerst einen kompatiblen Anbieter von Netzwerkbewertungen auswählen"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Zertifikate installieren"</string>
     <string name="wifi_scan_notify_text" msgid="2518097467707535013">"Zur Verbesserung der Standortgenauigkeit können Apps und Dienste weiter nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Dadurch können beispielsweise standortbasierte Funktionen und Dienste verbessert werden. Dies lässt sich in den <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Sucheinstellungen<xliff:g id="LINK_END_1">LINK_END</xliff:g> ändern."</string>
-    <string name="wifi_scan_notify_text_scanning_off" msgid="6189528915806353667">"Um die Standortgenauigkeit zu erhöhen, aktiviere die WLAN-Suche in den <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Sucheinstellungen<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text_scanning_off" msgid="6189528915806353667">"Aktiviere zur Erhöhung der Standortgenauigkeit die WLAN-Suche in den <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Sucheinstellungen<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"Nicht mehr anzeigen"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"WLAN im Ruhemodus aktiviert lassen"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8753852404141070878">"WLAN im Ruhemodus aktiviert"</string>
@@ -1073,7 +1073,7 @@
     <string name="wifi_dns1" msgid="6462967242512284778">"DNS 1"</string>
     <string name="wifi_dns2" msgid="8494337355389723965">"DNS 2"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
-    <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Länge Netzwerkpräfix"</string>
+    <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Länge d. Netzwerkpräfixes"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Geräte-Informationen"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Diese Verbindung speichern"</string>
@@ -2395,10 +2395,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Akku-Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Apps automatisch verwalten"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Akkunutzung für selten verwendete Apps einschränken"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Wenn die Funktion \"Akku-Manager\" Apps mit hohem Akkuverbrauch erkennt, hast du die Möglichkeit, diese Apps einzuschränken. Eventuell funktionieren sie dann nicht mehr richtig und Benachrichtigungen werden verzögert angezeigt."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Wenn die Funktion \"Akku-Manager\" Apps mit hohem Akkuverbrauch erkennt, hast du die Möglichkeit, diese Apps einzuschränken. Eventuell funktionieren sie dann nicht mehr richtig und Benachrichtigungen werden verzögert angezeigt."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Wenn die Funktion \"Akku-Manager\" Apps mit hohem Akkuverbrauch erkennt, hast du die Möglichkeit, diese Apps einzuschränken. Eventuell funktionieren sie dann nicht mehr richtig und Benachrichtigungen werden verzögert angezeigt."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Akkunutzung für selten verwendete Apps einschränken"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Wenn die Funktion \"Akku-Manager\" Apps mit hohem Akkuverbrauch erkennt, hast du die Möglichkeit, diese Apps einzuschränken. Eventuell funktionieren sie dann nicht mehr richtig und Benachrichtigungen werden verzögert angezeigt."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Eingeschränkte Apps"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Akkunutzung wird für %1$d Apps eingeschränkt</item>
@@ -2408,7 +2406,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Diese Apps verbrauchen im Hintergrund Strom. Durch Einschränken der Apps funktionieren sie möglicherweise nicht mehr richtig und Benachrichtigungen können verzögert angezeigt werden."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Funktion \"Akku-Manager\" verwenden"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Starke Beanspruchung des Akkus durch Apps erkennen"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"An / Starke Beanspruchung des Akkus durch Apps wird erkannt"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"An / Starke Beanspruchung des Akkus durch Apps wird erkannt"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Aus"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d Apps beschränkt</item>

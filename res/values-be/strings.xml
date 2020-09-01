@@ -957,7 +957,7 @@
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Дадатковыя параметры"</string>
     <string name="wifi_advanced_toggle_description_expanded" msgid="142819158732919941">"Выпадальны спіс \"Дадатковыя параметры\". Двойчы дакраніцеся, каб згарнуць."</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="6577687828045126764">"Выпадальны спіс \"Дадатковыя параметры\". Двойчы дакраніцеся, каб разгарнуць."</string>
-    <string name="wifi_ssid" msgid="2713062130735103151">"Імя сеткі"</string>
+    <string name="wifi_ssid" msgid="2713062130735103151">"Назва сеткі"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Увядзіце SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Бяспека"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Схаваная сетка"</string>
@@ -2464,10 +2464,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Вашы праграмы спажываюць нармальную колькасць зараду акумулятара. Калі выкарыстанне зараду павысіцца, вы атрымаеце адпаведныя рэкамендацыі.\n\nВы заўсёды можаце ўключыць рэжым эканоміі зараду."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Менеджар акумулятара"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Аўтаматычнае кіраванне праграмамі"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Абмежаваць выкарыстанне акумулятара праграмамі, якія рэдка запускаюцца"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Калі менеджар акумулятара выяўляе выкарыстанне зараду праграмамі, ёсць магчымасць абмежаваць іх работу. Работа праграм з абмежаваннямі можа быць неналежнай, і апавяшчэнні могуць прыходзіць з затрымкай."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Калі менеджар акумулятара выяўляе выкарыстанне зараду праграмамі, ёсць магчымасць абмежаваць іх работу. Работа праграм з абмежаваннямі можа быць неналежнай, і апавяшчэнні могуць прыходзіць з затрымкай."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Калі менеджар акумулятара выяўляе выкарыстанне зараду праграмамі, ёсць магчымасць абмежаваць іх работу. Работа праграм з абмежаваннямі можа быць неналежнай, і апавяшчэнні могуць прыходзіць з затрымкай."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Абмежаваць выкарыстанне акумулятара праграмамі, якія рэдка запускаюцца"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Калі менеджар акумулятара выяўляе выкарыстанне зараду праграмамі, ёсць магчымасць абмежаваць іх работу. Работа праграм з абмежаваннямі можа быць неналежнай, і апавяшчэнні могуць прыходзіць з затрымкай."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Праграмы, якія не працуюць у фонавым рэжыме"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="one">Абмежаванае выкарыстанне зараду для %1$d праграмы</item>
@@ -2479,7 +2477,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Гэтыя праграмы выкарыстоўваюць энергію ў фонавым рэжыме. Праграмы з абмежаваннямі могуць працаваць павольна, і апавяшчэнні могуць прыходзіць з затрымкай."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Уключыць менеджар акумулятара"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Выяўляць праграмы, якія разраджаюць акумулятар"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Уключэнне / выяўленне праграм, якія разраджаюць акумулятар"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Уключэнне / выяўленне праграм, якія разраджаюць акумулятар"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Выключана"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">Абмежаваных праграм: %1$d</item>
@@ -4543,7 +4541,7 @@
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Аўтазапаўненне параметраў распрацоўшчыка было скінута"</string>
     <string name="device_theme" msgid="5027604586494772471">"Тэма прылады"</string>
     <string name="default_theme" msgid="4815428567082263639">"Стандартная"</string>
-    <string name="show_operator_name_title" msgid="3355910331531144028">"Імя сеткі"</string>
+    <string name="show_operator_name_title" msgid="3355910331531144028">"Назва сеткі"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"Паказваць імя сеткі на панэлі стану"</string>
     <string name="storage_manager_indicator" msgid="6187509172735927297">"Менеджар сховішча: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="2705959642617709265">"Выключаны"</string>

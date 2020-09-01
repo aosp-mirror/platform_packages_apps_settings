@@ -409,7 +409,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Ghairi"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Hapana, asante"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Hapana"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="1822303197642630076">"Kubali"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Zaidi"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Fungua ukitumia uso wako"</string>
@@ -599,7 +599,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="1961863114590024945">"Wastani hadi usalama wa juu"</string>
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Nenosiri"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7647435233968707432">"Usalama wa juu"</string>
-    <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Siyo sasa"</string>
+    <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Si sasa"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Mbinu inayotumika kufunga skrini"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4492334416059646032">"Alama ya kidole + Mchoro"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Alama ya kidole + PIN"</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Programu zako zinatumia kiwango cha kawaida cha betri. Programu zikitumia kiwango cha juu zaidi cha betri, kifaa chako kitapendekeza hatua unazoweza kuchukua.\n\nUnaweza kuwasha Kiokoa Betri wakati wowote, kama chaji ya betri yako inakaribia kuisha."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Kidhibiti cha Betri"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Dhibiti programu kiotomatiki"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Dhibiti matumizi ya chaji kwenye programu ambazo hutumii sana"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Kidhibiti cha betri kikitambua kuwa programu zinatumia chaji sana, utakuwa na chaguo la kudhibiti programu hizi. Huenda programu zilizodhibitiwa zisifanye kazi vizuri na arifa zikachelewa."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Kidhibiti cha betri kikitambua kuwa programu zinatumia chaji sana, utakuwa na chaguo la kudhibiti programu hizi. Huenda programu zilizodhibitiwa zisifanye kazi vizuri na arifa zikachelewa."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Kidhibiti cha betri kikitambua kuwa programu zinatumia chaji sana, utakuwa na chaguo la kudhibiti programu hizi. Huenda programu zilizodhibitiwa zisifanye kazi vizuri na arifa zikachelewa."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Dhibiti matumizi ya chaji kwenye programu ambazo hutumii sana"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Kidhibiti cha betri kikitambua kuwa programu zinatumia chaji sana, utakuwa na chaguo la kudhibiti programu hizi. Huenda programu zilizodhibitiwa zisifanye kazi vizuri na arifa zikachelewa."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Programu zilizodhibitiwa"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Inadhibiti matumizi ya betri kwa programu %1$d</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Programu hizi zimekuwa zikitumia chaji chinichini. Huenda programu ulizozuia zisifanye kazi vizuri na huenda arifa zikachelewa."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Tumia Kidhibiti cha Betri"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Tambua wakati programu zinatumia chaji sana"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Imewashwa/Inatambua wakati programu zinatumia chaji sana"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Imewashwa/Inatambua wakati programu zinatumia chaji sana"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Imezimwa"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">Imezuia programu %1$d</item>
@@ -3391,11 +3389,11 @@
     <string name="notification_badging_title" msgid="3149547223586336353">"Ruhusu vitone vya arifa"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Viputo"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Baadhi ya arifa zinaweza kuonekana kama viputo kwenye skrini"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Baadhi ya arifa na maudhui mengine yanaweza kuonekana kama viputo kwenye skrini. Ili ufungue kiputo, kiguse. Ili kukiondoa, kiburute chini kwenye skrini."</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Baadhi ya arifa na maudhui mengine yanaweza kuonekana kama viputo kwenye skrini. Ili ufungue kiputo, kiguse. Ili ukiondoe, kiburute chini kwenye skrini."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Viputo"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Ruhusu <xliff:g id="APP_NAME">%1$s</xliff:g> ionyeshe baadhi ya arifa kama viputo"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Washa viputo"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Ili kuwasha viputo kwenye programu hii, unahitaji kuviwasha kwenye kifaa chako kwanza. Hii huathiri programu zingine ulizowashia viputo awali."</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Ili uwashe viputo kwenye programu hii, unahitaji kuviwasha kwenye kifaa chako kwanza. Hatua hii huathiri programu zingine ulizowashia viputo awali."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Washa kwenye kifaa"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Ghairi"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Vitendo vya kutelezesha kidole"</string>
@@ -4644,7 +4642,7 @@
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Inacheza sasa kwenye <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Maelezo muhimu"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ENDELEA"</string>
-    <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"HAPANA, ASANTE"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"HAPANA"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Eneo"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="2799241640320172899">"Mtoa huduma wako huenda atachukua eneo lako ili atoe huduma hii.\n\n Tafadhali kagua sera ya faragha ya mtoa huduma wako."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Huenda ukapoteza idhini ya kutumia muda au data inayosalia. Wasiliana na mtoa huduma wako kabla hujaondoa."</string>

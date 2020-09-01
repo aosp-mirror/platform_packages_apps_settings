@@ -5558,13 +5558,9 @@
     <!-- Title for the smart battery toggle [CHAR LIMIT=NONE] -->
     <string name="smart_battery_title">Manage apps automatically</string>
     <!-- Summary for the smart battery toggle [CHAR LIMIT=NONE] -->
-    <string name="smart_battery_summary">Limit battery for apps that you don\u2019t use often</string>
+    <string name="smart_battery_summary" product="default">Limit battery for apps that you don\u2019t use often</string>
     <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="default">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
-    <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="tablet">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
-    <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="device">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
+    <string name="smart_battery_footer">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
     <!-- Title for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
     <string name="restricted_app_title">Restricted apps</string>
     <!-- Summary for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
@@ -5585,7 +5581,8 @@
     <string name="battery_auto_restriction_summary">Detect when apps drain battery</string>
 
     <!-- Summary for battery manager when it is on -->
-    <string name="battery_manager_on">On / Detecting when apps drain battery</string>
+    <string name="battery_manager_on" product="default">On / Detecting when apps drain battery</string>
+
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
     <!-- Summary for battery manager, showing app restricted -->
