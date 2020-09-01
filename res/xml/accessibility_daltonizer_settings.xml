@@ -16,15 +16,40 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="daltonizer_preference_screen"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:persistent="false"
     android:title="@string/accessibility_display_daltonizer_preference_title">
 
-    <ListPreference
-        android:entries="@array/daltonizer_type_entries"
-        android:entryValues="@array/daltonizer_type_values"
-        android:key="type"
-        android:summary="%s"
+    <com.android.settings.accessibility.PaletteListPreference
+        android:key="daltonizer_preview"
+        android:persistent="false"
+        android:selectable="false"
+        android:title="@string/summary_placeholder"
+        settings:allowDividerBelow="true"
+        settings:searchable="false"/>
+
+    <PreferenceCategory
         android:title="@string/daltonizer_type"
-        android:icon="@drawable/ic_accessibility_illustration_colorblind" />
+        android:key="daltonizer_mode_category" >
+
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="daltonizer_mode_deuteranomaly"
+            android:persistent="false"
+            android:summary="@string/daltonizer_mode_deuteranomaly_summary"
+            android:title="@string/daltonizer_mode_deuteranomaly_title" />
+
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="daltonizer_mode_protanomaly"
+            android:persistent="false"
+            android:summary="@string/daltonizer_mode_protanomaly_summary"
+            android:title="@string/daltonizer_mode_protanomaly_title" />
+
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="daltonizer_mode_tritanomaly"
+            android:persistent="false"
+            android:summary="@string/daltonizer_mode_tritanomaly_summary"
+            android:title="@string/daltonizer_mode_tritanomaly_title" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

@@ -18,18 +18,17 @@ package com.android.settings.connecteddevice.usb;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
+import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-
-import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +52,12 @@ public class UsbDetailsFragment extends DashboardFragment {
                     controller.refresh(connected, functions, powerRole, dataRole);
                 }
             };
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), getListView());
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -93,15 +98,8 @@ public class UsbDetailsFragment extends DashboardFragment {
     /**
      * For Search.
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    SearchIndexableResource res = new SearchIndexableResource(context);
-                    res.xmlResId = R.xml.usb_details_fragment;
-                    return Lists.newArrayList(res);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.usb_details_fragment) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

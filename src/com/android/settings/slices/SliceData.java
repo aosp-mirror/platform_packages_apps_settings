@@ -71,9 +71,9 @@ public class SliceData {
     @SliceType
     private final int mSliceType;
 
-    private final boolean mIsPlatformDefined;
-
     private final String mUnavailableSliceSubtitle;
+
+    private final boolean mIsPublicSlice;
 
     public String getKey() {
         return mKey;
@@ -115,12 +115,12 @@ public class SliceData {
         return mSliceType;
     }
 
-    public boolean isPlatformDefined() {
-        return mIsPlatformDefined;
-    }
-
     public String getUnavailableSliceSubtitle() {
         return mUnavailableSliceSubtitle;
+    }
+
+    public boolean isPublicSlice() {
+        return mIsPublicSlice;
     }
 
     private SliceData(Builder builder) {
@@ -134,8 +134,8 @@ public class SliceData {
         mUri = builder.mUri;
         mPreferenceController = builder.mPrefControllerClassName;
         mSliceType = builder.mSliceType;
-        mIsPlatformDefined = builder.mIsPlatformDefined;
         mUnavailableSliceSubtitle = builder.mUnavailableSliceSubtitle;
+        mIsPublicSlice = builder.mIsPublicSlice;
     }
 
     @Override
@@ -173,9 +173,9 @@ public class SliceData {
 
         private int mSliceType;
 
-        private boolean mIsPlatformDefined;
-
         private String mUnavailableSliceSubtitle;
+
+        private boolean mIsPublicSlice;
 
         public Builder setKey(String key) {
             mKey = key;
@@ -227,14 +227,14 @@ public class SliceData {
             return this;
         }
 
-        public Builder setPlatformDefined(boolean isPlatformDefined) {
-            mIsPlatformDefined = isPlatformDefined;
-            return this;
-        }
-
         public Builder setUnavailableSliceSubtitle(
                 String unavailableSliceSubtitle) {
             mUnavailableSliceSubtitle = unavailableSliceSubtitle;
+            return this;
+        }
+
+        public Builder setIsPublicSlice(boolean isPublicSlice) {
+            mIsPublicSlice = isPublicSlice;
             return this;
         }
 

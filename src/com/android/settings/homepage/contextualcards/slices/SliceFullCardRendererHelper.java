@@ -26,7 +26,6 @@ import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
-import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -50,27 +49,19 @@ class SliceFullCardRendererHelper {
         final SliceViewHolder cardHolder = (SliceViewHolder) holder;
         cardHolder.sliceView.setScrollable(false);
         cardHolder.sliceView.setTag(card.getSliceUri());
-        //TODO(b/114009676): We will soon have a field to decide what slice mode we should set.
         cardHolder.sliceView.setMode(SliceView.MODE_LARGE);
         cardHolder.sliceView.setSlice(slice);
         // Set this listener so we can log the interaction users make on the slice
-        cardHolder.sliceView.setOnSliceActionListener(
-                (eventInfo, sliceItem) -> {
-                    final String log = ContextualCardLogUtils.buildCardClickLog(card, eventInfo.rowIndex,
-                            eventInfo.actionType, cardHolder.getAdapterPosition());
+        cardHolder.sliceView.setOnSliceActionListener((eventInfo, sliceItem) -> {
+            final String log = ContextualCardLogUtils.buildCardClickLog(card, eventInfo.rowIndex,
+                    eventInfo.actionType, cardHolder.getAdapterPosition());
 
-                    final MetricsFeatureProvider metricsFeatureProvider =
-                            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+            final MetricsFeatureProvider metricsFeatureProvider =
+                    FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
-                    metricsFeatureProvider.action(mContext,
-                            SettingsEnums.ACTION_CONTEXTUAL_CARD_CLICK, log);
-
-                    final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                            FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(
-                                    mContext);
-
-                    contextualCardFeatureProvider.logNotificationPackage(slice);
-                });
+            metricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_CLICK, log);
+        });
 
         // Customize slice view for Settings
         cardHolder.sliceView.setShowTitleItems(true);

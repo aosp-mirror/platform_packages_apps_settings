@@ -16,6 +16,9 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE;
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
+
 import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.List;
@@ -52,11 +55,14 @@ public class ContextualCardsDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areContentsTheSame(int oldCardPosition, int newCardPosition) {
-        // Slices with toggles needs to be updated continuously, which means their contents may
-        // change. So here we assume the content will always be different to force view rebinding.
-        if (mNewCards.get(newCardPosition).hasInlineAction()) {
+        final ContextualCard newCard = mNewCards.get(newCardPosition);
+        // Sticky, important, or toggleable slices need to be updated continuously, which means
+        // their contents may change. So here we assume the content will always be different to
+        // force view rebinding.
+        if (newCard.getCategory() == STICKY_VALUE || newCard.getCategory() == IMPORTANT_VALUE
+                || newCard.hasInlineAction()) {
             return false;
         }
-        return mOldCards.get(oldCardPosition).equals(mNewCards.get(newCardPosition));
+        return mOldCards.get(oldCardPosition).equals(newCard);
     }
 }

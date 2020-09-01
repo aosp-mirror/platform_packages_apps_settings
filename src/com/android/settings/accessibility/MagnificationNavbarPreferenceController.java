@@ -55,10 +55,11 @@ public class MagnificationNavbarPreferenceController extends TogglePreferenceCon
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED);
             extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
                     R.string.accessibility_screen_magnification_navbar_title);
-            extras.putInt(AccessibilitySettings.EXTRA_SUMMARY_RES,
-                    R.string.accessibility_screen_magnification_navbar_summary);
+            extras.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION,
+                    mContext.getText(R.string.accessibility_screen_magnification_navbar_summary));
             extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED, isChecked());
             extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, mIsFromSUW);
+            return true;
         }
         return false;
     }
@@ -74,6 +75,11 @@ public class MagnificationNavbarPreferenceController extends TogglePreferenceCon
     public boolean isSliceable() {
         return TextUtils.equals(getPreferenceKey(),
                 "screen_magnification_navbar_preference_screen");
+    }
+
+    @Override
+    public boolean isPublicSlice() {
+        return true;
     }
 
     @Override

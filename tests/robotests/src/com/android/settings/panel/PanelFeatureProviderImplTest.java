@@ -17,17 +17,19 @@
 
 package com.android.settings.panel;
 
+import static com.android.settings.panel.SettingsPanelActivity.KEY_MEDIA_PACKAGE_NAME;
+import static com.android.settings.panel.SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT;
 import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.Settings;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -38,33 +40,39 @@ public class PanelFeatureProviderImplTest {
 
     private Context mContext;
     private PanelFeatureProviderImpl mProvider;
+    private Bundle mBundle;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mProvider = new PanelFeatureProviderImpl();
+        mBundle = new Bundle();
+        mBundle.putString(KEY_MEDIA_PACKAGE_NAME, TEST_PACKAGENAME);
     }
 
     @Test
     public void getPanel_internetConnectivityKey_returnsCorrectPanel() {
-        final PanelContent panel = mProvider.getPanel(mContext,
-                Settings.Panel.ACTION_INTERNET_CONNECTIVITY, TEST_PACKAGENAME);
+        mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+        final PanelContent panel = mProvider.getPanel(mContext, mBundle);
 
         assertThat(panel).isInstanceOf(InternetConnectivityPanel.class);
     }
 
     @Test
     public void getPanel_volume_returnsCorrectPanel() {
-        final PanelContent panel = mProvider.getPanel(mContext,
-                Settings.Panel.ACTION_VOLUME, TEST_PACKAGENAME);
+        mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, Settings.Panel.ACTION_VOLUME);
+
+        final PanelContent panel = mProvider.getPanel(mContext, mBundle);
 
         assertThat(panel).isInstanceOf(VolumePanel.class);
     }
 
     @Test
     public void getPanel_mediaOutputKey_returnsCorrectPanel() {
-        final PanelContent panel = mProvider.getPanel(mContext,
-                ACTION_MEDIA_OUTPUT, TEST_PACKAGENAME);
+        mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, ACTION_MEDIA_OUTPUT);
+
+        final PanelContent panel = mProvider.getPanel(mContext, mBundle);
 
         assertThat(panel).isInstanceOf(MediaOutputPanel.class);
     }

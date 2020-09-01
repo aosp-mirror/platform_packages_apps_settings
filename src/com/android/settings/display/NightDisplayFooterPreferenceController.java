@@ -19,26 +19,17 @@ package com.android.settings.display;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 
-import androidx.preference.Preference;
-
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.FooterPreference;
 
 public class NightDisplayFooterPreferenceController extends BasePreferenceController {
 
-    public NightDisplayFooterPreferenceController(Context context) {
-        super(context, FooterPreference.KEY_FOOTER);
+    public NightDisplayFooterPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        preference.setTitle(R.string.night_display_text);
+        return ColorDisplayManager.isNightDisplayAvailable(mContext)
+                ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

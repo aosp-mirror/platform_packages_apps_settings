@@ -21,7 +21,6 @@ import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -52,6 +51,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.drawable.CircleFramedDrawable;
@@ -141,14 +141,14 @@ public class EditUserPhotoController {
     }
 
     private void showUpdatePhotoPopup() {
-        final boolean canTakePhoto = canTakePhoto();
-        final boolean canChoosePhoto = canChoosePhoto();
+        final Context context = mImageView.getContext();
+        final boolean canTakePhoto = PhotoCapabilityUtils.canTakePhoto(context);
+        final boolean canChoosePhoto = PhotoCapabilityUtils.canChoosePhoto(context);
 
         if (!canTakePhoto && !canChoosePhoto) {
             return;
         }
 
-        final Context context = mImageView.getContext();
         final List<EditUserPhotoController.RestrictedMenuItem> items = new ArrayList<>();
 
         if (canTakePhoto) {
@@ -198,19 +198,6 @@ public class EditUserPhotoController {
         });
 
         listPopupWindow.show();
-    }
-
-    private boolean canTakePhoto() {
-        return mImageView.getContext().getPackageManager().queryIntentActivities(
-                new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
-                PackageManager.MATCH_DEFAULT_ONLY).size() > 0;
-    }
-
-    private boolean canChoosePhoto() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        return mImageView.getContext().getPackageManager().queryIntentActivities(
-                intent, 0).size() > 0;
     }
 
     private void takePhoto() {
@@ -369,8 +356,7 @@ public class EditUserPhotoController {
         if (purge) {
             fullPath.delete();
         }
-        return FileProvider.getUriForFile(context,
-                RestrictedProfileSettings.FILE_PROVIDER_AUTHORITY, fullPath);
+        return FileProvider.getUriForFile(context, Utils.FILE_PROVIDER_AUTHORITY, fullPath);
     }
 
     File saveNewUserPhotoBitmap() {

@@ -26,23 +26,27 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
+import android.view.View;
+import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.datausage.DataSaverBackend;
-import com.android.settings.widget.SwitchWidgetController;
+import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class WifiTetherSwitchBarController implements SwitchWidgetController.OnSwitchChangeListener,
-        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener {
-
+/**
+ * Controller for logic pertaining to switch Wi-Fi tethering.
+ */
+public class WifiTetherSwitchBarController implements
+        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener, View.OnClickListener {
     private static final IntentFilter WIFI_INTENT_FILTER;
 
     private final Context mContext;
-    private final SwitchWidgetController mSwitchBar;
+    private final SwitchBar mSwitchBar;
+    private final Switch mSwitch;
     private final ConnectivityManager mConnectivityManager;
     private final WifiManager mWifiManager;
 
@@ -63,40 +67,38 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
         WIFI_INTENT_FILTER = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
     }
 
-    WifiTetherSwitchBarController(Context context, SwitchWidgetController switchBar) {
+    WifiTetherSwitchBarController(Context context, SwitchBar switchBar) {
         mContext = context;
         mSwitchBar = switchBar;
+        mSwitch = mSwitchBar.getSwitch();
         mDataSaverBackend = new DataSaverBackend(context);
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mSwitchBar.setChecked(mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED);
-        mSwitchBar.setListener(this);
         updateWifiSwitch();
     }
 
     @Override
     public void onStart() {
         mDataSaverBackend.addListener(this);
-        mSwitchBar.startListening();
+        mSwitch.setOnClickListener(this);
         mContext.registerReceiver(mReceiver, WIFI_INTENT_FILTER);
     }
 
     @Override
     public void onStop() {
         mDataSaverBackend.remListener(this);
-        mSwitchBar.stopListening();
         mContext.unregisterReceiver(mReceiver);
     }
 
     @Override
-    public boolean onSwitchToggled(boolean isChecked) {
-        if (!isChecked) {
-            stopTether();
-        } else if (!mWifiManager.isWifiApEnabled()) {
+    public void onClick(View v) {
+        if (((Switch) v).isChecked()) {
             startTether();
+        } else {
+            stopTether();
         }
-        return true;
     }
 
     void stopTether() {
@@ -128,23 +130,23 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
                 mSwitchBar.setEnabled(false);
                 break;
             case WifiManager.WIFI_AP_STATE_ENABLED:
-                if (!mSwitchBar.isChecked()) {
-                    mSwitchBar.setChecked(true);
+                if (!mSwitch.isChecked()) {
+                    mSwitch.setChecked(true);
                 }
                 updateWifiSwitch();
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLING:
-                if (mSwitchBar.isChecked()) {
-                    mSwitchBar.setChecked(false);
+                if (mSwitch.isChecked()) {
+                    mSwitch.setChecked(false);
                 }
                 mSwitchBar.setEnabled(false);
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLED:
-                mSwitchBar.setChecked(false);
+                mSwitch.setChecked(false);
                 updateWifiSwitch();
                 break;
             default:
-                mSwitchBar.setChecked(false);
+                mSwitch.setChecked(false);
                 updateWifiSwitch();
                 break;
         }

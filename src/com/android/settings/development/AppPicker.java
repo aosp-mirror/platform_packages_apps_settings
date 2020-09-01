@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -46,21 +47,28 @@ public class AppPicker extends ListActivity {
             = "com.android.settings.extra.REQUESTIING_PERMISSION";
     public static final String EXTRA_DEBUGGABLE = "com.android.settings.extra.DEBUGGABLE";
     public static final String EXTRA_NON_SYSTEM = "com.android.settings.extra.NON_SYSTEM";
+    public static final String EXTRA_INCLUDE_NOTHING = "com.android.settings.extra.INCLUDE_NOTHING";
+
+    public static final int RESULT_NO_MATCHING_APPS = -2;
 
     private String mPermissionName;
     private boolean mDebuggableOnly;
     private boolean mNonSystemOnly;
+    private boolean mIncludeNothing;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mPermissionName = getIntent().getStringExtra(EXTRA_REQUESTIING_PERMISSION);
         mDebuggableOnly = getIntent().getBooleanExtra(EXTRA_DEBUGGABLE, false);
         mNonSystemOnly = getIntent().getBooleanExtra(EXTRA_NON_SYSTEM, false);
+        mIncludeNothing = getIntent().getBooleanExtra(EXTRA_INCLUDE_NOTHING, true);
 
         mAdapter = new AppListAdapter(this);
         if (mAdapter.getCount() <= 0) {
+            setResult(RESULT_NO_MATCHING_APPS);
             finish();
         } else {
             setListAdapter(mAdapter);
@@ -68,13 +76,12 @@ public class AppPicker extends ListActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            handleBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -84,6 +91,15 @@ public class AppPicker extends ListActivity {
         if (app.info != null) intent.setAction(app.info.packageName);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private void handleBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 1) {
+            super.onBackPressed();
+        } else {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
     }
 
     class MyApplicationInfo {
@@ -150,9 +166,11 @@ public class AppPicker extends ListActivity {
                 mPackageInfoList.add(info);
             }
             Collections.sort(mPackageInfoList, sDisplayNameComparator);
-            MyApplicationInfo info = new MyApplicationInfo();
-            info.label = context.getText(R.string.no_application);
-            mPackageInfoList.add(0, info);
+            if (mIncludeNothing) {
+                MyApplicationInfo info = new MyApplicationInfo();
+                info.label = context.getText(R.string.no_application);
+                mPackageInfoList.add(0, info);
+            }
             addAll(mPackageInfoList);
         }
 
@@ -172,6 +190,7 @@ public class AppPicker extends ListActivity {
                 holder.summary.setText("");
             }
             holder.disabled.setVisibility(View.GONE);
+            holder.widget.setVisibility(View.GONE);
             return convertView;
         }
     }

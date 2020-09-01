@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.SeekBar;
 
 /**
  * A slider preference that controls remote volume, which doesn't go through
@@ -50,7 +51,17 @@ public class RemoteVolumeSeekBarPreference extends VolumeSeekBarPreference {
     @Override
     protected void init() {
         if (mSeekBar == null) return;
+        setContinuousUpdates(true);
         updateIconView();
         updateSuppressionText();
+        notifyHierarchyChanged();
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        super.onProgressChanged(seekBar, progress, fromUser);
+        if (fromUser) {
+            notifyChanged();
+        }
     }
 }

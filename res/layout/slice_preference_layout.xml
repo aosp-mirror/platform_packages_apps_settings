@@ -15,15 +15,12 @@
   limitations under the License.
   -->
 
-<FrameLayout
+<androidx.slice.widget.SliceView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/slice_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
+    android:paddingTop="12dp"
+    android:paddingBottom="8dp"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
-    <androidx.slice.widget.SliceView
-        android:id="@+id/slice_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</FrameLayout>
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"/>

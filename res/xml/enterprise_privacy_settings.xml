@@ -16,15 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
-                  android:key="enterprise_privacy_settings"
                   android:title="@string/enterprise_privacy_settings">
-
-    <!-- Header -->
-    <Preference android:key="enterprise_privacy_header"
-                android:order="100"
-                android:icon="@drawable/ic_info_outline_24dp"
-                android:summary="@string/enterprise_privacy_header"
-                android:selectable="false"/>
 
     <PreferenceCategory android:key="exposure_category"
                         android:order="200"
@@ -125,4 +117,10 @@
                     android:title="@string/enterprise_privacy_failed_password_wipe_work"
                     android:selectable="false"/>
     </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="enterprise_privacy_footer"
+        android:title="@string/enterprise_privacy_header"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

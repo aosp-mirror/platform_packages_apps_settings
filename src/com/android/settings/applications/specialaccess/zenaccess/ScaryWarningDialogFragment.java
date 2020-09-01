@@ -25,7 +25,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.notification.ZenAccessSettings;
 
 /**
  * Warning dialog when allowing zen access warning about the privileges being granted.

@@ -49,9 +49,7 @@ public class ZenAccessController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return isSupported(mActivityManager)
-                ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return isSupported(mActivityManager) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     public static boolean isSupported(ActivityManager activityManager) {
@@ -70,7 +68,9 @@ public class ZenAccessController extends BasePreferenceController {
             final List<PackageInfo> pkgs = list.getList();
             if (pkgs != null) {
                 for (PackageInfo info : pkgs) {
-                    requestingPackages.add(info.packageName);
+                    if (info.applicationInfo.enabled) {
+                        requestingPackages.add(info.packageName);
+                    }
                 }
             }
         } catch (RemoteException e) {

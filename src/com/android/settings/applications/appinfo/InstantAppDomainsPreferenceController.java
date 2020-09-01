@@ -38,7 +38,8 @@ public class InstantAppDomainsPreferenceController extends AppInfoPreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return AppUtils.isInstant(mParent.getPackageInfo().applicationInfo)
+        return mParent.getPackageInfo() != null
+                && AppUtils.isInstant(mParent.getPackageInfo().applicationInfo)
                 ? AVAILABLE : DISABLED_FOR_USER;
     }
 

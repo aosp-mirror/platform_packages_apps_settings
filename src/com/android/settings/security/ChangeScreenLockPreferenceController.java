@@ -31,6 +31,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.security.screenlock.ScreenLockSettings;
@@ -39,6 +40,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class ChangeScreenLockPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, GearPreference.OnGearClickListener {
@@ -52,6 +54,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
 
     protected final int mUserId = UserHandle.myUserId();
     protected final int mProfileChallengeUserId;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     protected RestrictedPreference mPreference;
 
@@ -64,6 +67,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
                 .getLockPatternUtils(context);
         mHost = host;
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -104,6 +108,8 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     @Override
     public void onGearClick(GearPreference p) {
         if (TextUtils.equals(p.getKey(), getPreferenceKey())) {
+            mMetricsFeatureProvider.logClickedPreference(p,
+                    p.getExtras().getInt(DashboardFragment.CATEGORY));
             new SubSettingLauncher(mContext)
                     .setDestination(ScreenLockSettings.class.getName())
                     .setSourceMetricsCategory(mHost.getMetricsCategory())

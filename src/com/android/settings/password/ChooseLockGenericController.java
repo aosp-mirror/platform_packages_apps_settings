@@ -92,6 +92,7 @@ public class ChooseLockGenericController {
      */
     public int upgradeQuality(int quality) {
         // Compare specified quality and dpm quality
+        // TODO(b/142781408): convert from quality to credential type once PIN is supported.
         int dpmUpgradedQuality = Math.max(quality, mDpm.getPasswordQuality(null, mUserId));
         return Math.max(dpmUpgradedQuality,
                 PasswordMetrics.complexityLevelToMinQuality(mRequestedMinComplexity));

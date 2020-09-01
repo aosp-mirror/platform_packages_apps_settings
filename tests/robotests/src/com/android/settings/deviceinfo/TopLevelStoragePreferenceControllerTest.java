@@ -29,6 +29,8 @@ import android.icu.text.NumberFormat;
 import android.os.storage.VolumeInfo;
 import android.text.format.Formatter;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
@@ -77,14 +79,15 @@ public class TopLevelStoragePreferenceControllerTest {
         when(mStorageManagerVolumeProvider
                 .getFreeBytes(nullable(StorageStatsManager.class), nullable(VolumeInfo.class)))
                 .thenReturn(0L);
-
         ReflectionHelpers.setField(mController,
                 "mStorageManagerVolumeProvider", mStorageManagerVolumeProvider);
-
         final String percentage = NumberFormat.getPercentInstance().format(1);
         final String freeSpace = Formatter.formatFileSize(RuntimeEnvironment.application, 0);
-        assertThat(mController.getSummary()).isEqualTo(
-                RuntimeEnvironment.application.getString(
-                        R.string.storage_summary, percentage, freeSpace));
+        final Preference preference = new Preference(mContext);
+
+        mController.updateState(preference);
+
+        assertThat(preference.getSummary()).isEqualTo(
+                mContext.getString(R.string.storage_summary, percentage, freeSpace));
     }
 }

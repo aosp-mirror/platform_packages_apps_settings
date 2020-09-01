@@ -35,9 +35,10 @@ import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.WeakHashMap;
+import java.util.List;
 
 /**
  * Parent class for settings fragments that contain a list of Bluetooth
@@ -72,6 +73,7 @@ public abstract class DeviceListPreferenceFragment extends
 
     final HashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
             new HashMap<>();
+    final List<BluetoothDevice> mSelectedList = new ArrayList<>();
 
     boolean mShowDevicesWithoutNames;
 
@@ -154,6 +156,7 @@ public abstract class DeviceListPreferenceFragment extends
             BluetoothDevicePreference btPreference = (BluetoothDevicePreference) preference;
             CachedBluetoothDevice device = btPreference.getCachedDevice();
             mSelectedDevice = device.getDevice();
+            mSelectedList.add(mSelectedDevice);
             onDevicePreferenceClick(btPreference);
             return true;
         }
@@ -191,7 +194,7 @@ public abstract class DeviceListPreferenceFragment extends
 
         if (preference == null) {
             preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice,
-                    mShowDevicesWithoutNames);
+                    mShowDevicesWithoutNames, BluetoothDevicePreference.SortType.TYPE_FIFO);
             preference.setKey(key);
             //Set hideSecondTarget is true if it's bonded device.
             preference.hideSecondTarget(true);

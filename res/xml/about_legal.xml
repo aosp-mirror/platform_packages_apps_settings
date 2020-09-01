@@ -16,8 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/legal_information"
-                  android:key="legal_screen">
+                  android:title="@string/legal_information">
 
     <!-- Note: The titles given here probably won't be used.  Instead, we programmatically
        fill the title with the label of the activity with the corresponding action.
@@ -59,6 +58,7 @@
         android:key="wallpaper_attributions"
         android:title="@string/wallpaper_attributions"
         android:summary="@string/wallpaper_attributions_values"
+        android:selectable="false"
         settings:controller="com.android.settings.deviceinfo.legal.WallpaperAttributionsPreferenceController" />
 
 </PreferenceScreen>

@@ -49,6 +49,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
         super(context, KEY_RESTRICT_APP);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mUserManager = context.getSystemService(UserManager.class);
+        mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager);
     }
 
     public RestrictAppPreferenceController(InstrumentedPreferenceFragment preferenceFragment) {
@@ -58,17 +59,15 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mAppInfos.size() > 0 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-
         mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager);
-
         final int num = mAppInfos.size();
-        // Don't show it if no app been restricted
+        // Fragment change RestrictedAppsList after onPause(), UI needs to be updated in onResume()
         preference.setVisible(num > 0);
         preference.setSummary(
                 mContext.getResources().getQuantityString(R.plurals.restricted_app_summary, num,

@@ -39,6 +39,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.testutils.shadow.ShadowSettingsLibUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -58,7 +59,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowEntityHeaderController.class)
+@Config(shadows = {ShadowEntityHeaderController.class, ShadowSettingsLibUtils.class})
 public class AppInfoWithHeaderTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

@@ -16,33 +16,25 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.view.inputmethod.InputMethodSystemProperty;
 
 import com.android.settings.R;
-import com.android.settings.core.WorkProfilePreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 public final class VirtualKeyboardForWorkPreferenceController
-        extends WorkProfilePreferenceController {
+        extends BasePreferenceController {
 
     public VirtualKeyboardForWorkPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
     }
 
-    @Override
-    protected int getSourceMetricsCategory() {
-        return SettingsEnums.SETTINGS_LANGUAGE_CATEGORY;
-    }
-
     @AvailabilityStatus
     @Override
     public int getAvailabilityStatus() {
-        if (!mContext.getResources().getBoolean(R.bool.config_show_virtual_keyboard_pref)
-                || !InputMethodSystemProperty.PER_PROFILE_IME_ENABLED) {
+        if (!mContext.getResources().getBoolean(R.bool.config_show_virtual_keyboard_pref)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return super.getAvailabilityStatus();
+        return AVAILABLE;
     }
 }

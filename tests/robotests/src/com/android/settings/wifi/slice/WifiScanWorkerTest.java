@@ -28,6 +28,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -39,17 +40,13 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.WifiSsid;
 import android.os.Bundle;
 import android.os.UserHandle;
 
+import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -62,11 +59,13 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowNetworkInfo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowWifiManager.class,
-        WifiScanWorkerTest.ShadowWifiTracker.class,
-})
+@Config(shadows = {ShadowSliceBackgroundWorker.class, ShadowWifiManager.class,
+        WifiScanWorkerTest.ShadowWifiTracker.class})
 public class WifiScanWorkerTest {
 
     private Context mContext;
@@ -205,8 +204,8 @@ public class WifiScanWorkerTest {
     }
 
     static void setConnectionInfoSSID(String ssid) {
-        final WifiInfo wifiInfo = new WifiInfo();
-        wifiInfo.setSSID(WifiSsid.createFromAsciiEncoded(ssid));
+        final WifiInfo wifiInfo = mock(WifiInfo.class);
+        when(wifiInfo.getSSID()).thenReturn(ssid);
         ShadowWifiManager.get().setConnectionInfo(wifiInfo);
     }
 

@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,6 +77,12 @@ public class BaseSearchIndexProviderTest {
         @Override
         public String getPreferenceKey() {
             return TEST_PREF_KEY;
+        }
+
+        @Override
+        public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+            final SearchIndexableRaw raw = new SearchIndexableRaw(this.mContext);
+            rawData.add(raw);
         }
     }
 
@@ -189,5 +196,19 @@ public class BaseSearchIndexProviderTest {
                 provider.getNonIndexableKeys(RuntimeEnvironment.application);
 
         assertThat(nonIndexableKeys).contains("pref_key_5");
+    }
+
+    @Test
+    public void getDynamicRawDataToIndex_noPreferenceController_shouldReturnEmptyList() {
+        assertThat(mIndexProvider.getDynamicRawDataToIndex(mContext, true)).isEmpty();
+    }
+
+    @Test
+    public void getDynamicRawDataToIndex_hasDynamicRaw_shouldNotEmpty() {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new AvailablePreferenceController(mContext));
+        doReturn(controllers).when(mIndexProvider).createPreferenceControllers(mContext);
+
+        assertThat(mIndexProvider.getDynamicRawDataToIndex(mContext, true)).isNotEmpty();
     }
 }

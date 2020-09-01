@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -37,6 +38,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.WorkOnlyCategory;
 
 import org.junit.Before;
@@ -46,6 +48,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
@@ -147,6 +150,7 @@ public class SettingsPreferenceFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_hasExtraFragmentKey_shouldExpandPreferences() {
         doReturn(mContext.getTheme()).when(mActivity).getTheme();
         doReturn(mContext.getResources()).when(mFragment).getResources();
@@ -161,6 +165,7 @@ public class SettingsPreferenceFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_noPreferenceScreen_shouldNotCrash() {
         doReturn(mContext.getTheme()).when(mActivity).getTheme();
         doReturn(mContext.getResources()).when(mFragment).getResources();
@@ -185,6 +190,24 @@ public class SettingsPreferenceFragmentTest {
 
         verify(mPreferenceScreen, never()).removePreference(workOnlyCategory);
         verify(workOnlyCategory).setVisible(false);
+    }
+
+    @Test
+    public void showPinnedHeader_shouldBeVisible() {
+        mFragment.mPinnedHeaderFrameLayout = new FrameLayout(mContext);
+
+        mFragment.showPinnedHeader(true);
+
+        assertThat(mFragment.mPinnedHeaderFrameLayout.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void hidePinnedHeader_shouldBeInvisible() {
+        mFragment.mPinnedHeaderFrameLayout = new FrameLayout(mContext);
+
+        mFragment.showPinnedHeader(false);
+
+        assertThat(mFragment.mPinnedHeaderFrameLayout.getVisibility()).isEqualTo(View.INVISIBLE);
     }
 
     public static class TestFragment extends SettingsPreferenceFragment {

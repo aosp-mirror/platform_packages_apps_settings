@@ -30,7 +30,6 @@ import android.hardware.display.AmbientDisplayConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -89,5 +88,10 @@ public class TapScreenGesturePreferenceControllerTest {
         final TapScreenGesturePreferenceController controller =
                 new TapScreenGesturePreferenceController(mContext, KEY_WAKE_LOCK_SCREEN);
         assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
     }
 }

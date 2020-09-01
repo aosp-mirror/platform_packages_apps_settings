@@ -24,7 +24,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.UserManager;
@@ -48,19 +47,36 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class})
 public class BluetoothDevicePreferenceTest {
     private static final boolean SHOW_DEVICES_WITHOUT_NAMES = true;
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+    private static final String MAC_ADDRESS_2 = "05:52:C7:0B:D8:3C";
+    private static final String MAC_ADDRESS_3 = "06:52:C7:0B:D8:3C";
+    private static final String MAC_ADDRESS_4 = "07:52:C7:0B:D8:3C";
+    private static final Comparator<BluetoothDevicePreference> COMPARATOR =
+            Comparator.naturalOrder();
 
     private Context mContext;
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
+    @Mock
+    private CachedBluetoothDevice mCachedDevice1;
+    @Mock
+    private CachedBluetoothDevice mCachedDevice2;
+    @Mock
+    private CachedBluetoothDevice mCachedDevice3;
 
     private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private BluetoothDevicePreference mPreference;
+    private List<BluetoothDevicePreference> mPreferenceList = new ArrayList<>();
 
     @Before
     public void setUp() {
@@ -70,8 +86,11 @@ public class BluetoothDevicePreferenceTest {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mCachedDevice1.getAddress()).thenReturn(MAC_ADDRESS_2);
+        when(mCachedDevice2.getAddress()).thenReturn(MAC_ADDRESS_3);
+        when(mCachedDevice3.getAddress()).thenReturn(MAC_ADDRESS_4);
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
-                SHOW_DEVICES_WITHOUT_NAMES);
+                SHOW_DEVICES_WITHOUT_NAMES, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
     }
 
     @Test
@@ -170,7 +189,8 @@ public class BluetoothDevicePreferenceTest {
         doReturn(false).when(mCachedBluetoothDevice).hasHumanReadableName();
         BluetoothDevicePreference preference =
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
-                        SHOW_DEVICES_WITHOUT_NAMES);
+                        SHOW_DEVICES_WITHOUT_NAMES,
+                        BluetoothDevicePreference.SortType.TYPE_DEFAULT);
 
         assertThat(preference.isVisible()).isTrue();
     }
@@ -179,7 +199,8 @@ public class BluetoothDevicePreferenceTest {
     public void isVisible_hideDeviceWithoutNames_invisible() {
         doReturn(false).when(mCachedBluetoothDevice).hasHumanReadableName();
         BluetoothDevicePreference preference =
-                new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
+                new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                        false, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
 
         assertThat(preference.isVisible()).isFalse();
     }
@@ -189,5 +210,55 @@ public class BluetoothDevicePreferenceTest {
         mPreference.setNeedNotifyHierarchyChanged(true);
 
         assertThat(mPreference.mNeedNotifyHierarchyChanged).isTrue();
+    }
+
+    @Test
+    public void compareTo_sortTypeFIFO() {
+        final BluetoothDevicePreference preference3 = new BluetoothDevicePreference(mContext,
+                mCachedDevice3, SHOW_DEVICES_WITHOUT_NAMES,
+                BluetoothDevicePreference.SortType.TYPE_FIFO);
+        final BluetoothDevicePreference preference2 = new BluetoothDevicePreference(mContext,
+                mCachedDevice2, SHOW_DEVICES_WITHOUT_NAMES,
+                BluetoothDevicePreference.SortType.TYPE_FIFO);
+        final BluetoothDevicePreference preference1 = new BluetoothDevicePreference(mContext,
+                mCachedDevice1, SHOW_DEVICES_WITHOUT_NAMES,
+                BluetoothDevicePreference.SortType.TYPE_FIFO);
+
+        mPreferenceList.add(preference1);
+        mPreferenceList.add(preference2);
+        mPreferenceList.add(preference3);
+        Collections.sort(mPreferenceList, COMPARATOR);
+
+        assertThat(mPreferenceList.get(0).getCachedDevice().getAddress())
+                .isEqualTo(preference3.getCachedDevice().getAddress());
+        assertThat(mPreferenceList.get(1).getCachedDevice().getAddress())
+                .isEqualTo(preference2.getCachedDevice().getAddress());
+        assertThat(mPreferenceList.get(2).getCachedDevice().getAddress())
+                .isEqualTo(preference1.getCachedDevice().getAddress());
+    }
+
+    @Test
+    public void compareTo_sortTypeDefault() {
+        final BluetoothDevicePreference preference3 = new BluetoothDevicePreference(mContext,
+                mCachedDevice3, SHOW_DEVICES_WITHOUT_NAMES,
+                BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+        final BluetoothDevicePreference preference2 = new BluetoothDevicePreference(mContext,
+                mCachedDevice2, SHOW_DEVICES_WITHOUT_NAMES,
+                BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+        final BluetoothDevicePreference preference1 = new BluetoothDevicePreference(mContext,
+                mCachedDevice1, SHOW_DEVICES_WITHOUT_NAMES,
+                BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+
+        mPreferenceList.add(preference1);
+        mPreferenceList.add(preference2);
+        mPreferenceList.add(preference3);
+        Collections.sort(mPreferenceList, COMPARATOR);
+
+        assertThat(mPreferenceList.get(0).getCachedDevice().getAddress())
+                .isEqualTo(preference1.getCachedDevice().getAddress());
+        assertThat(mPreferenceList.get(1).getCachedDevice().getAddress())
+                .isEqualTo(preference2.getCachedDevice().getAddress());
+        assertThat(mPreferenceList.get(2).getCachedDevice().getAddress())
+                .isEqualTo(preference3.getCachedDevice().getAddress());
     }
 }

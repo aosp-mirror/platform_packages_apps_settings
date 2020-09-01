@@ -27,6 +27,50 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/panel_header"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:gravity="start|center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="16dp">
+                <ImageView
+                    android:id="@+id/title_icon"
+                    android:layout_width="@dimen/output_switcher_panel_icon_size"
+                    android:layout_height="@dimen/output_switcher_panel_icon_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/header_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/header_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/panel_title"
             android:layout_width="match_parent"
@@ -41,6 +85,11 @@
 
         <!-- Note: There is a landscape version of panel_slice_list which supports scrolling. -->
         <include layout="@layout/panel_slice_list"/>
+
+        <include
+            android:id="@+id/footer_divider"
+            layout="@layout/horizontal_divider"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -121,6 +121,16 @@ public class AccessibilitySlicePreferenceControllerTest {
         new AccessibilitySlicePreferenceController(mContext, "not_split_by_slash");
     }
 
+    @Test
+    public void isSliceable_returnTrue() {
+        assertThat(mController.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isPublicSlice_returnTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
+    }
+
     private List<AccessibilityServiceInfo> getFakeServiceList() {
         final List<AccessibilityServiceInfo> infoList = new ArrayList<>();
 

@@ -22,6 +22,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
+import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.KEY_LOCK_SETTINGS_FOOTER;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
@@ -33,13 +34,16 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings.Global;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
@@ -52,16 +56,20 @@ import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowPersistentDataBlockManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
                 ShadowLockPatternUtils.class,
+                ShadowPersistentDataBlockManager.class,
                 ShadowStorageManager.class,
                 ShadowUserManager.class,
                 ShadowUtils.class
@@ -81,14 +89,27 @@ public class ChooseLockGenericTest {
     public void tearDown() {
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         ShadowStorageManager.reset();
+        ShadowPersistentDataBlockManager.reset();
     }
 
     @Test
-    public void onCreate_deviceNotProvisioned_shouldFinishActivity() {
+    public void onCreate_deviceNotProvisioned_persistentDataExists_shouldFinishActivity() {
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        ShadowPersistentDataBlockManager.setDataBlockSize(1000);
 
         initActivity(null);
         assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void onCreate_deviceNotProvisioned_persistentDataServiceNotAvailable_shouldNotFinish() {
+        Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        ShadowPersistentDataBlockManager.setDataBlockSize(1000);
+        ShadowApplication.getInstance().setSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE,
+                null);
+
+        initActivity(null);
+        assertThat(mActivity.isFinishing()).isFalse();
     }
 
     @Test
@@ -136,7 +157,7 @@ public class ChooseLockGenericTest {
               mActivity.getString(R.string.unlock_footer_high_complexity_requested, "app name");
 
         mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
     }
@@ -152,7 +173,7 @@ public class ChooseLockGenericTest {
                 mActivity.getString(R.string.unlock_footer_medium_complexity_requested, "app name");
 
         mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
     }
@@ -168,7 +189,7 @@ public class ChooseLockGenericTest {
                 mActivity.getString(R.string.unlock_footer_low_complexity_requested, "app name");
 
         mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
     }
@@ -184,19 +205,31 @@ public class ChooseLockGenericTest {
                 mActivity.getString(R.string.unlock_footer_none_complexity_requested, "app name");
 
         mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
 
         assertThat(footer.getTitle()).isEqualTo(expectedTitle);
     }
 
     @Test
-    public void updatePreferencesOrFinish_callingAppIsAdmin_noFooter() {
+    public void updatePreferencesOrFinish_callingAppIsAdmin_deviceProvisioned_footerInvisible() {
         initActivity(new Intent().putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true));
 
         mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
 
-        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
-        assertThat(footer).isNull();
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
+        assertThat(footer.isVisible()).isFalse();
+    }
+
+    @Test
+    @Ignore
+    public void updatePreferencesOrFinish_callingAppIsAdmin_deviceNotProvisioned_footerInvisible() {
+        Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        initActivity(new Intent().putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true));
+
+        mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
+
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
+        assertThat(footer.isVisible()).isFalse();
     }
 
     @Test
@@ -292,6 +325,56 @@ public class ChooseLockGenericTest {
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
         assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME))
                 .isEqualTo("app name");
+    }
+
+    @Test
+    public void testUnifyProfile_IntentPassedToChooseLockPassword() {
+        final Bundle arguments = new Bundle();
+        arguments.putInt(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 11);
+        arguments.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL,
+                LockscreenCredential.createNone());
+        mFragment.setArguments(arguments);
+
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        Intent nextIntent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(nextIntent).isNotNull();
+        assertThat(nextIntent.getComponent().getClassName()).isEqualTo(
+                ChooseLockPassword.class.getName());
+        assertThat(nextIntent.getIntExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 0)).isEqualTo(11);
+        assertThat((LockscreenCredential) nextIntent.getParcelableExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)).isNotNull();
+    }
+
+    @Test
+    public void testUnifyProfile_IntentPassedToChooseLockPattern() {
+        final Bundle arguments = new Bundle();
+        arguments.putInt(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 13);
+        arguments.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL,
+                LockscreenCredential.createNone());
+        mFragment.setArguments(arguments);
+
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        Intent nextIntent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(nextIntent).isNotNull();
+        assertThat(nextIntent.getComponent().getClassName()).isEqualTo(
+                ChooseLockPattern.class.getName());
+        assertThat(nextIntent.getIntExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 0)).isEqualTo(13);
+        assertThat((LockscreenCredential) nextIntent.getParcelableExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)).isNotNull();
     }
 
     private void initActivity(@Nullable Intent intent) {

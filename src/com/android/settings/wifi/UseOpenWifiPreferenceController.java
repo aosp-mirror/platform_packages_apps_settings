@@ -17,12 +17,10 @@ import android.text.TextUtils;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -30,10 +28,10 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import java.util.List;
 
 /**
- * {@link AbstractPreferenceController} that controls whether a user wants to enable the "use open
- * networks automatically" feature provider by the current network recommendation provider.
+ * {@link TogglePreferenceController} that controls whether a user wants to enable the "use open
+ * networks automatically" feature provided by the current network recommendation provider.
  */
-public class UseOpenWifiPreferenceController extends AbstractPreferenceController
+public class UseOpenWifiPreferenceController extends TogglePreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
         LifecycleObserver, OnResume, OnPause {
     public static final int REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY = 400;
@@ -41,7 +39,7 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
     private static final String KEY_USE_OPEN_WIFI_AUTOMATICALLY = "use_open_wifi_automatically";
 
     private final ContentResolver mContentResolver;
-    private final Fragment mFragment;
+    private Fragment mFragment;
     private final NetworkScoreManager mNetworkScoreManager;
     private final SettingObserver mSettingObserver;
 
@@ -49,17 +47,18 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
     private ComponentName mEnableUseWifiComponentName;
     private boolean mDoFeatureSupportedScorersExist;
 
-    public UseOpenWifiPreferenceController(Context context, Fragment fragment,
-            Lifecycle lifecycle) {
-        super(context);
+    public UseOpenWifiPreferenceController(Context context) {
+        super(context, KEY_USE_OPEN_WIFI_AUTOMATICALLY);
         mContentResolver = context.getContentResolver();
-        mFragment = fragment;
         mNetworkScoreManager =
                 (NetworkScoreManager) context.getSystemService(Context.NETWORK_SCORE_SERVICE);
         mSettingObserver = new SettingObserver();
         updateEnableUseWifiComponentName();
         checkForFeatureSupportedScorers();
-        lifecycle.addObserver(this);
+    }
+
+    public void setFragment(Fragment hostFragment) {
+        mFragment = hostFragment;
     }
 
     private void updateEnableUseWifiComponentName() {
@@ -86,7 +85,7 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_USE_OPEN_WIFI_AUTOMATICALLY);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -100,65 +99,56 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
     }
 
     @Override
-    public boolean isAvailable() {
-        return mDoFeatureSupportedScorersExist;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_USE_OPEN_WIFI_AUTOMATICALLY;
+    public int getAvailabilityStatus() {
+        // It is possible that mEnableUseWifiComponentName is no longer enabled by
+        // USE_OPEN_WIFI_PACKAGE. So update this component to reflect correct availability.
+        updateEnableUseWifiComponentName();
+        checkForFeatureSupportedScorers();
+        return mDoFeatureSupportedScorersExist ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
-        if (!(preference instanceof SwitchPreference)) {
-            return;
-        }
-        final SwitchPreference useOpenWifiPreference = (SwitchPreference) preference;
+        super.updateState(preference);
 
-        boolean isScorerSet = mNetworkScoreManager.getActiveScorerPackage() != null;
-        boolean doesActiveScorerSupportFeature = mEnableUseWifiComponentName != null;
+        final boolean isScorerSet = mNetworkScoreManager.getActiveScorerPackage() != null;
+        final boolean doesActiveScorerSupportFeature = mEnableUseWifiComponentName != null;
 
-        useOpenWifiPreference.setChecked(isSettingEnabled());
-        useOpenWifiPreference.setVisible(isAvailable());
-        useOpenWifiPreference.setEnabled(isScorerSet && doesActiveScorerSupportFeature);
-
+        preference.setEnabled(isScorerSet && doesActiveScorerSupportFeature);
         if (!isScorerSet) {
-            useOpenWifiPreference.setSummary(
-                    R.string.use_open_wifi_automatically_summary_scoring_disabled);
+            preference.setSummary(R.string.use_open_wifi_automatically_summary_scoring_disabled);
         } else if (!doesActiveScorerSupportFeature) {
-            useOpenWifiPreference.setSummary(
+            preference.setSummary(
                     R.string.use_open_wifi_automatically_summary_scorer_unsupported_disabled);
         } else {
-            useOpenWifiPreference.setSummary(R.string.use_open_wifi_automatically_summary);
+            preference.setSummary(R.string.use_open_wifi_automatically_summary);
         }
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (!TextUtils.equals(preference.getKey(), KEY_USE_OPEN_WIFI_AUTOMATICALLY)
-                || !isAvailable()) {
-            return false;
-        }
-
-        if (isSettingEnabled()) {
-            Settings.Global.putString(mContentResolver,
-                    Settings.Global.USE_OPEN_WIFI_PACKAGE, "");
-            return true;
-        }
-
-        Intent intent = new Intent(NetworkScoreManager.ACTION_CUSTOM_ENABLE);
-        intent.setComponent(mEnableUseWifiComponentName);
-        mFragment.startActivityForResult(intent, REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY);
-        return false; // Updating state is done in onActivityResult.
-    }
-
-    private boolean isSettingEnabled() {
-        String enabledUseOpenWifiPackage = Settings.Global.getString(mContentResolver,
+    public boolean isChecked() {
+        final String enabledUseOpenWifiPackage = Settings.Global.getString(mContentResolver,
                 Settings.Global.USE_OPEN_WIFI_PACKAGE);
-        String currentUseOpenWifiPackage = mEnableUseWifiComponentName == null
+        final String currentUseOpenWifiPackage = mEnableUseWifiComponentName == null
                 ? null : mEnableUseWifiComponentName.getPackageName();
         return TextUtils.equals(enabledUseOpenWifiPackage, currentUseOpenWifiPackage);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (isChecked) {
+            if (mFragment == null) {
+                throw new IllegalStateException("No fragment to start activity");
+            }
+
+            final Intent intent = new Intent(NetworkScoreManager.ACTION_CUSTOM_ENABLE);
+            intent.setComponent(mEnableUseWifiComponentName);
+            mFragment.startActivityForResult(intent, REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY);
+            return false; // Updating state is done in onActivityResult.
+        } else {
+            Settings.Global.putString(mContentResolver, Settings.Global.USE_OPEN_WIFI_PACKAGE, "");
+            return true;
+        }
     }
 
     public boolean onActivityResult(int requestCode, int resultCode) {

@@ -21,16 +21,16 @@
     <PreferenceCategory android:key="app_launch_domain_links"
                         android:title="@string/app_launch_domain_links_title">
 
-        <DropDownPreference
-                android:key="app_link_state"
-                android:summary="%s"
-                android:title="@string/app_launch_open_domain_urls_title" />
+        <Preference
+            android:key="app_link_state"
+            android:summary="@string/summary_placeholder"
+            android:title="@string/app_launch_open_domain_urls_title"/>
 
         <com.android.settings.applications.AppDomainsPreference
-                android:key="app_launch_supported_domain_urls"
-                android:title="@string/app_launch_supported_domain_urls_title"
-                android:dependency="app_link_state"
-                />
+            android:key="app_launch_supported_domain_urls"
+            android:title="@string/app_launch_supported_domain_urls_title"
+            android:dependency="app_link_state"
+        />
 
     </PreferenceCategory>
 
@@ -38,7 +38,8 @@
                         android:title="@string/app_launch_other_defaults_title">
 
         <com.android.settings.applications.ClearDefaultsPreference
-                android:key="app_launch_clear_defaults" />
+            android:key="app_launch_clear_defaults"
+            android:selectable="false"/>
 
     </PreferenceCategory>
 

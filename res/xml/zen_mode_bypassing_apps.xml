@@ -17,5 +17,21 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="zen_mode_bypassing_apps_screen"
-    android:title="@string/zen_mode_bypassing_apps_title" />
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/zen_mode_bypassing_apps_title">
+
+    <PreferenceCategory
+        android:key="zen_mode_bypassing_apps_list"
+        android:title="@string/zen_mode_bypassing_apps_header">
+        <!-- apps that have notifications that can bypass DND are added here -->
+    </PreferenceCategory>
+
+    <Preference
+        android:key="zen_mode_bypassing_apps_add"
+        android:title="@string/zen_mode_bypassing_apps_add"
+        android:icon="@drawable/ic_add_24dp"
+        settings:allowDividerAbove="true" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/zen_mode_bypassing_apps_footer" />
+</PreferenceScreen>

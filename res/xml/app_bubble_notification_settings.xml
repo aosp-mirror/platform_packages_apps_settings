@@ -13,22 +13,26 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/bubbles_app_toggle_title"
                   android:key="app_bubble_notification_settings">
+
         <com.android.settingslib.widget.LayoutPreference
             android:key="pref_app_header"
             android:layout="@layout/settings_entity_header"/>
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.notification.app.BubblePreference
             android:key="bubble_pref"
-            android:title="@string/notification_bubbles_title"/>
+            android:title="@string/notification_bubbles_title"
+            settings:allowDividerBelow="false"/>
 
-        <com.android.settingslib.widget.FooterPreference
-            android:key="notification_bubbles_footer"
-            android:title="@string/bubbles_feature_education"
-            android:selectable="false" />
+        <!-- Selected or excluded conversations get added here -->
+        <PreferenceCategory
+            android:title="@string/bubble_app_setting_selected_conversation_title"
+            android:key="bubble_conversations"
+            android:visibility="gone"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false" />
 
 </PreferenceScreen>

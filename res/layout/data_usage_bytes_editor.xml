@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:minWidth="48dip"
+        android:minHeight="48dp"
         android:layout_gravity="center_vertical"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -36,7 +37,7 @@
     <Spinner
         android:id="@+id/size_spinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:entries="@array/bytes_picker_sizes" />
 

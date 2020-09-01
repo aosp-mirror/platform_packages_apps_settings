@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2006 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -144,8 +143,9 @@
     <style name="wifi_item_edit_content">
         <item name="android:paddingStart">4dip</item>
         <item name="android:layout_marginStart">4dip</item>
-        <item name="android:textSize">18sp</item>
         <item name="android:textAlignment">viewStart</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
@@ -282,8 +282,6 @@
         <item name="android:letterSpacing">0.072727273</item>
     </style>
 
-    <style name="TextAppearance.TileTitle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead"/>
-
     <style name="TextAppearance.SuggestionTitle"
            parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:textSize">16sp</item>
@@ -314,7 +312,7 @@
         <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
-    <style name="TextAppearance.ConditionCardTitle"
+    <style name="TextAppearance.HomepageCardTitle"
            parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textSize">16sp</item>
@@ -333,6 +331,24 @@
         <item name="android:gravity">center</item>
         <item name="android:focusable">true</item>
         <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="TextAppearance.NotificationHistory">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.NotificationHistory.AppName">
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.NotificationHistory.Title">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
+    </style>
+
+    <style name="TextAppearance.NotificationHistory.Text">
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="TextAppearance.ContextualCardDismissalText"
@@ -499,70 +515,80 @@
 
     <style name="Widget.SliceView.Settings">
         <item name="titleSize">@*android:dimen/text_size_subhead_material</item>
-        <item name="rowStyle">@style/SliceRowStyle.Settings</item>
+        <item name="rowStyle">@style/SliceRow.Settings</item>
     </style>
 
-    <style name="TextAppearance.DeferredSetupCardTitle">
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="TextAppearance.DeferredSetupCardSummary"
-           parent="@*android:style/TextAppearance.DeviceDefault.Body1">
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-
-    <style name="DeferredSetupCardButton" parent="android:Widget.DeviceDefault.Button.Colored">
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
-        <item name="android:paddingBottom">@dimen/contextual_deferred_setup_card_button_padding_bottom</item>
-        <item name="android:paddingEnd">@dimen/contextual_deferred_setup_card_button_padding_end</item>
-        <item name="android:paddingStart">@dimen/contextual_deferred_setup_card_button_padding_start</item>
-        <item name="android:paddingTop">@dimen/contextual_deferred_setup_card_button_padding_top</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="SliceViewStyle">
-        <!-- 2dp start padding for the start icon -->
-        <item name="android:paddingStart">2dp</item>
-
-        <!-- End margin of content without end items is 24dp.
-             android:paddingEnd = 24 - 16(contentEndPadding) -->
-        <item name="android:paddingEnd">8dp</item>
-
-        <item name="rowStyle">@style/SliceRowStyle</item>
-        <item name="android:background">?android:attr/colorBackgroundFloating</item>
-    </style>
-
-    <style name="ContextualCardSliceViewStyle" parent="SliceViewStyle">
+    <style name="Widget.SliceView.ContextualCard">
+        <item name="rowStyle">@style/SliceRow</item>
         <item name="android:background">@color/contextual_card_background</item>
     </style>
 
-    <style name="SliceRowStyle">
+    <style name="Widget.SliceView.Panel">
+        <item name="titleSize">16sp</item>
+        <item name="rowStyle">@style/SliceRow</item>
+        <item name="android:background">?android:attr/colorBackgroundFloating</item>
+    </style>
+
+    <style name="Widget.SliceView.Panel.Slider">
+        <item name="rowStyle">@style/SliceRow.Slider</item>
+    </style>
+
+    <style name="Widget.SliceView.Panel.Slider.LargeIcon">
+        <item name="rowStyle">@style/SliceRow.Slider.LargeIcon</item>
+    </style>
+
+    <style name="SliceRow">
+        <!-- 2dp start padding for the start icon -->
+        <item name="titleItemStartPadding">2dp</item>
         <item name="titleItemEndPadding">0dp</item>
 
-        <!-- Padding between content and the start icon is 14dp. -->
+        <!-- Padding between content and the start icon is 14dp -->
         <item name="contentStartPadding">14dp</item>
-        <!-- Padding between content and end items is 16dp. -->
+        <!-- Padding between content and end items is 16dp -->
         <item name="contentEndPadding">16dp</item>
 
-        <!-- Both side margins of end item are 16dp.
-             endItemEndPadding = 16 - 8(android:paddingEnd) -->
+        <!-- Both side margins of end item are 16dp -->
         <item name="endItemStartPadding">16dp</item>
-        <item name="endItemEndPadding">8dp</item>
+        <item name="endItemEndPadding">16dp</item>
 
-        <!-- Both side margins of bottom divider are 12dp.
-             bottomDividerStartPadding = 12 - 2(android:paddingStart)
-             bottomDividerEndPadding = 12 - 8(android:paddingEnd) -->
-        <item name="bottomDividerStartPadding">10dp</item>
-        <item name="bottomDividerEndPadding">4dp</item>
+        <!-- Both side margins of bottom divider are 12dp -->
+        <item name="bottomDividerStartPadding">12dp</item>
+        <item name="bottomDividerEndPadding">12dp</item>
 
         <item name="actionDividerHeight">32dp</item>
     </style>
 
-    <style name="SliceRowStyle.Settings">
-        <!-- Padding between content and the start icon is 8dp. -->
+    <style name="SliceRow.Settings">
+        <!-- Padding between content and the start icon is 8dp -->
         <item name="contentStartPadding">8dp</item>
+    </style>
+
+    <style name="SliceRow.Slider">
+        <!-- Padding between content and the start icon is 0dp -->
+        <item name="contentStartPadding">0dp</item>
+        <item name="contentEndPadding">36dp</item>
+
+        <!-- 0dp start padding for the end item -->
+        <item name="endItemStartPadding">0dp</item>
+        <!-- 8dp end padding for the end item -->
+        <item name="endItemEndPadding">8dp</item>
+
+        <!-- Align text with slider -->
+        <item name="titleStartPadding">11dp</item>
+        <item name="subContentStartPadding">11dp</item>
+
+        <!-- Padding for indeterminate progress bar -->
+        <item name="progressBarStartPadding">12dp</item>
+        <item name="progressBarEndPadding">16dp</item>
+    </style>
+
+    <style name="SliceRow.Slider.LargeIcon">
+        <!-- 10dp start padding for the start icon -->
+        <item name="titleItemStartPadding">10dp</item>
+        <!-- Layout is 48dp and actual icon size is 48-(iconSize/2) -->
+        <item name="iconSize">12dp</item>
+        <!-- RecycleView item animator -->
+        <item name="disableRecyclerViewItemAnimator">true</item>
     </style>
 
     <style name="DisclaimerPositiveButton" parent="@style/SudGlifButton.Primary">
@@ -610,6 +636,12 @@
         <item name="android:orientation">vertical</item>
         <item name="android:divider">@*android:drawable/list_divider_material</item>
         <item name="android:showDividers">middle</item>
+    </style>
+
+    <style name="TextAppearance.Tab" parent="@android:style/TextAppearance.DeviceDefault.Medium">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
     <style name="AccessibilityDialogServiceIcon">
@@ -689,9 +721,70 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
-    <style name="AccessibilityDialogButtonAllow"
-           parent="@style/AccessibilityDialogButton"></style>
-    <style name="AccessibilityDialogButtonDeny"
-           parent="@style/AccessibilityDialogButton"></style>
+    <style name="Widget.PopupWindow.Settings"
+           parent="@android:style/Widget.DeviceDefault.PopupWindow">
+        <item name="android:clipToPadding">true</item>
+        <item name="android:clipChildren">true</item>
+    </style>
 
+    <style name="PickerDialogTheme.Settings" parent="@*android:style/ThemeOverlay.Material.Dialog.DatePicker">
+        <item name="android:clipToPadding">true</item>
+        <item name="android:clipChildren">true</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">google-sans-medium</item>
+        <item name="android:paddingTop">36dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogDescription">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">36dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogIcon">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:antialias">true</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogSubTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogSubDescription">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="TextAppearance.HeadLineFontFamily"
+           parent="@*android:style/TextAppearance.DeviceDefault.Title">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+    </style>
+
+    <style name="TextAppearance.HeadLineFontFamily.Subhead"
+           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+    </style>
 </resources>

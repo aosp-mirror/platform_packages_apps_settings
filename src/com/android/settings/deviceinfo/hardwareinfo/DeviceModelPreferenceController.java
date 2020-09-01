@@ -41,6 +41,11 @@ public class DeviceModelPreferenceController extends HardwareInfoPreferenceContr
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public CharSequence getSummary() {
         return HardwareInfoPreferenceController.getDeviceModel();
     }

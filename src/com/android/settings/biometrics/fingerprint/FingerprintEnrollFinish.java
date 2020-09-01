@@ -152,6 +152,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         startActivity(intent);
     }
 

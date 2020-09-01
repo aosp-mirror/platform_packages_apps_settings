@@ -20,7 +20,8 @@ import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTE
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.os.Build;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.WindowManager;
 
@@ -28,6 +29,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.settings.R;
+import com.android.settings.development.OverlaySettingsPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +37,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class HideNonSystemOverlayMixinTest {
@@ -69,17 +70,27 @@ public class HideNonSystemOverlayMixinTest {
     }
 
     @Test
-    public void isEnabled_debug_false() {
-        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
+    public void isEnabled_isAllowedOverlaySettings_returnFalse() {
+        mActivityController.setup();
+        final TestActivity activity = mActivityController.get();
+        final SharedPreferences editor = activity.getSharedPreferences(
+                OverlaySettingsPreferenceController.SHARE_PERFS,
+                Context.MODE_PRIVATE);
+        editor.edit().putBoolean(OverlaySettingsPreferenceController.SHARE_PERFS, true).apply();
 
-        assertThat(new HideNonSystemOverlayMixin(null).isEnabled()).isFalse();
+        assertThat(new HideNonSystemOverlayMixin(activity).isEnabled()).isFalse();
     }
 
     @Test
-    public void isEnabled_user_true() {
-        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
+    public void isEnabled_isNotAllowedOverlaySettings_returnTrue() {
+        mActivityController.setup();
+        TestActivity activity = mActivityController.get();
+        final SharedPreferences editor = activity.getSharedPreferences(
+                OverlaySettingsPreferenceController.SHARE_PERFS,
+                Context.MODE_PRIVATE);
+        editor.edit().putBoolean(OverlaySettingsPreferenceController.SHARE_PERFS, false).apply();
 
-        assertThat(new HideNonSystemOverlayMixin(null).isEnabled()).isTrue();
+        assertThat(new HideNonSystemOverlayMixin(activity).isEnabled()).isTrue();
     }
 
     public static class TestActivity extends AppCompatActivity {

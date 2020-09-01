@@ -82,6 +82,11 @@ public class AutoRotatePreferenceController extends TogglePreferenceController i
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean isChecked() {
         return !RotationPolicy.isRotationLocked(mContext);
     }

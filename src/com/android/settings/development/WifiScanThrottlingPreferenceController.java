@@ -17,9 +17,8 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.net.wifi.WifiManager;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
@@ -29,13 +28,12 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 public class WifiScanThrottlingPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
     private static final String WIFI_SCAN_THROTTLING_KEY = "wifi_scan_throttling";
-    @VisibleForTesting
-    static final int SETTING_THROTTLING_ENABLE_VALUE_ON = 1;  // default is throttling enabled.
-    @VisibleForTesting
-    static final int SETTING_THROTTLING_ENABLE_VALUE_OFF = 0;
+
+    private final WifiManager mWifiManager;
 
     public WifiScanThrottlingPreferenceController(Context context) {
         super(context);
+        mWifiManager = context.getSystemService(WifiManager.class);
     }
 
     @Override
@@ -46,28 +44,19 @@ public class WifiScanThrottlingPreferenceController extends DeveloperOptionsPref
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_THROTTLE_ENABLED,
-                isEnabled
-                        ? SETTING_THROTTLING_ENABLE_VALUE_ON
-                        : SETTING_THROTTLING_ENABLE_VALUE_OFF);
+        mWifiManager.setScanThrottleEnabled(isEnabled);
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final int scanThrottleEnabled = Settings.Global.getInt(
-                mContext.getContentResolver(), Settings.Global.WIFI_SCAN_THROTTLE_ENABLED,
-                SETTING_THROTTLING_ENABLE_VALUE_ON);
-        ((SwitchPreference) mPreference).setChecked(
-                scanThrottleEnabled == SETTING_THROTTLING_ENABLE_VALUE_ON);
+        ((SwitchPreference) mPreference).setChecked(mWifiManager.isScanThrottleEnabled());
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_THROTTLE_ENABLED, SETTING_THROTTLING_ENABLE_VALUE_ON);
+        mWifiManager.setScanThrottleEnabled(true);
         ((SwitchPreference) mPreference).setChecked(true);
     }
 }

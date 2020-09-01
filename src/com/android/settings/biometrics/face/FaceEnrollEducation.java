@@ -16,17 +16,13 @@
 
 package com.android.settings.biometrics.face;
 
-import static android.security.KeyStore.getApplicationContext;
-
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -173,14 +169,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (!isChangingConfigurations() && !WizardManagerHelper.isAnySetupWizard(getIntent())
-                && !mNextClicked) {
-            setResult(RESULT_SKIP);
-            finish();
-        }
+    protected boolean shouldFinishWhenBackgrounded() {
+        return super.shouldFinishWhenBackgrounded() && !mNextClicked;
     }
 
     @Override
@@ -216,11 +206,13 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         mResultIntent = data;
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
             // If the user finished or skipped enrollment, finish this activity
-            if (resultCode == RESULT_SKIP || resultCode == RESULT_FINISHED) {
-                setResult(resultCode);
+            if (resultCode == RESULT_FINISHED || resultCode == RESULT_SKIP
+                    || resultCode == RESULT_TIMEOUT) {
+                setResult(resultCode, data);
                 finish();
             }
         }

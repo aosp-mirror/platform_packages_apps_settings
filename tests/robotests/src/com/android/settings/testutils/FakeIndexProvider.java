@@ -18,30 +18,19 @@
 package com.android.settings.testutils;
 
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FakeIndexProvider implements Indexable {
 
     public static final String KEY = "TestKey";
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    List<SearchIndexableResource> resources = new ArrayList<>();
-                    SearchIndexableResource res = new SearchIndexableResource(context);
-                    res.xmlResId = R.xml.location_settings;
-                    resources.add(res);
-                    return resources;
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.location_settings) {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {

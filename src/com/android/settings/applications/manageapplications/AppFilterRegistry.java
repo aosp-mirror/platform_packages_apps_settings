@@ -20,6 +20,7 @@ import androidx.annotation.IntDef;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateInstallAppsBridge;
+import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
@@ -71,14 +72,15 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_INSTALL_SOURCES = 13;
     public static final int FILTER_APP_CAN_CHANGE_WIFI_STATE = 15;
     public static final int FILTER_APPS_BLOCKED = 16;
-    // Next id: 17
+    public static final int FILTER_MANAGE_EXTERNAL_STORAGE = 17;
+    // Next id: 18. If you add an entry here, length of mFilters should be updated
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[17];
+        mFilters = new AppFilterItem[18];
 
         // High power whitelist, on
         mFilters[FILTER_APPS_POWER_WHITELIST] = new AppFilterItem(
@@ -136,13 +138,13 @@ public class AppFilterRegistry {
         mFilters[FILTER_APPS_PERSONAL] = new AppFilterItem(
                 ApplicationsState.FILTER_PERSONAL,
                 FILTER_APPS_PERSONAL,
-                R.string.filter_personal_apps);
+                R.string.category_personal);
 
         // Work
         mFilters[FILTER_APPS_WORK] = new AppFilterItem(
                 ApplicationsState.FILTER_WORK,
                 FILTER_APPS_WORK,
-                R.string.filter_work_apps);
+                R.string.category_work);
 
         // Usage access screen, never displayed.
         mFilters[FILTER_APPS_USAGE_ACCESS] = new AppFilterItem(
@@ -178,6 +180,11 @@ public class AppFilterRegistry {
                 AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,
                 FILTER_APPS_BLOCKED,
                 R.string.filter_notif_blocked_apps);
+
+        mFilters[FILTER_MANAGE_EXTERNAL_STORAGE] = new AppFilterItem(
+                AppStateManageExternalStorageBridge.FILTER_MANAGE_EXTERNAL_STORAGE,
+                FILTER_MANAGE_EXTERNAL_STORAGE,
+                R.string.filter_manage_external_storage);
     }
 
     public static AppFilterRegistry getInstance() {
@@ -204,6 +211,8 @@ public class AppFilterRegistry {
                 return FILTER_APP_CAN_CHANGE_WIFI_STATE;
             case ManageApplications.LIST_TYPE_NOTIFICATION:
                 return FILTER_APPS_RECENT;
+            case ManageApplications.LIST_MANAGE_EXTERNAL_STORAGE:
+                return FILTER_MANAGE_EXTERNAL_STORAGE;
             default:
                 return FILTER_APPS_ALL;
         }

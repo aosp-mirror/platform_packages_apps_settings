@@ -16,8 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/configure_notification_settings"
-                  android:key="configure_notification_settings">
+                  android:title="@string/configure_notification_settings">
 
     <com.android.settings.widget.VideoPreference
         android:key="notification_model_illustration"
@@ -26,16 +25,33 @@
         settings:controller="com.android.settings.widget.VideoPreferenceController"
         android:persistent="false" />
 
-    <!-- Empty category to draw divider -->
-    <PreferenceCategory
-        android:key="all_notifications_divider"
-        android:order="2"/>
+    <Preference
+        android:key="notification_history"
+        android:title="@string/notification_history"
+        android:summary="@string/notification_history_summary"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false"
+        android:order="2">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.notification.history.NotificationHistoryActivity" />
+    </Preference>
+
+    <Preference
+        android:key="notification_bubbles"
+        android:title="@string/notification_bubbles_title"
+        android:summary="@string/notifications_bubble_setting_on_summary"
+        android:order="4"
+        settings:controller="com.android.settings.notification.BubbleSummaryNotificationPreferenceController"
+        android:fragment="com.android.settings.notification.BubbleNotificationSettings"
+    />
 
     <PreferenceCategory
         android:key="recent_notifications_category"
         android:title="@string/recent_notifications"
-        settings:allowDividerAbove="false"
-        android:order="3">
+        settings:allowDividerAbove="true"
+        android:order="5">
         <!-- Placeholder for a list of recent apps -->
 
         <!-- See all apps button -->
@@ -43,12 +59,14 @@
             android:key="all_notifications"
             android:title="@string/notifications_title"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            android:order="4">
+            android:order="6"
+            settings:searchable="false">
             <extra
                 android:name="classname"
                 android:value="com.android.settings.Settings$NotificationAppListActivity"/>
         </Preference>
     </PreferenceCategory>
+
 
     <PreferenceCategory
         android:key="configure_notifications_lock"
@@ -58,6 +76,7 @@
         <com.android.settings.RestrictedListPreference
             android:key="lock_screen_notifications"
             android:title="@string/lock_screen_notifs_title"
+            android:singleLineTitle="false"
             android:summary="@string/summary_placeholder" />
 
         <SwitchPreference
@@ -85,6 +104,11 @@
         android:key="configure_notifications_advanced"
         android:order="15"
         settings:initialExpandedChildrenCount="0">
+
+        <SwitchPreference
+            android:key="silent_icons"
+            android:title="@string/silent_notifications_status_bar"
+            settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController"/>
 
         <SwitchPreference
             android:key="show_snooze_options"
@@ -115,7 +139,8 @@
             android:title="@string/notification_ringtone_title"
             android:dialogTitle="@string/notification_ringtone_title"
             android:summary="@string/summary_placeholder"
-            android:ringtoneType="notification"/>
+            android:ringtoneType="notification"
+            settings:searchable="false"/>
 
         <Preference
             android:key="gesture_swipe_down_fingerprint_notifications"
@@ -127,8 +152,8 @@
             android:key="zen_mode_notifications"
             android:title="@string/zen_mode_settings_title"
             settings:useAdminDisabledSummary="true"
-            android:fragment="com.android.settings.notification.ZenModeSettings"
-            settings:controller="com.android.settings.notification.ZenModePreferenceController"
+            android:fragment="com.android.settings.notification.zen.ZenModeSettings"
+            settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"
             settings:allowDividerAbove="false"/>
     </PreferenceCategory>
 </PreferenceScreen>

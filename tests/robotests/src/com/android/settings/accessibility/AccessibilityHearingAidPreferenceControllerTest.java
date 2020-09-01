@@ -111,7 +111,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Test
     public void onHearingAidStateChanged_connected_updateHearingAidSummary() {
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
-        mPreferenceController.onResume();
+        mPreferenceController.onStart();
         Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_CONNECTED);
         sendIntent(intent);
@@ -121,7 +121,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
     @Test
     public void onHearingAidStateChanged_disconnected_updateHearingAidSummary() {
-        mPreferenceController.onResume();
+        mPreferenceController.onStart();
         Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_DISCONNECTED);
         sendIntent(intent);
@@ -132,7 +132,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
     @Test
     public void onBluetoothStateChanged_bluetoothOff_updateHearingAidSummary() {
-        mPreferenceController.onResume();
+        mPreferenceController.onStart();
         Intent intent = new Intent(BluetoothAdapter.ACTION_STATE_CHANGED);
         intent.putExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.STATE_OFF);
         sendIntent(intent);
@@ -173,11 +173,11 @@ public class AccessibilityHearingAidPreferenceControllerTest {
                 HEARING_AID_PREFERENCE);
         mPreferenceController.setPreference(mHearingAidPreference);
         //not call registerReceiver()
-        mPreferenceController.onResume();
+        mPreferenceController.onStart();
         verify(mContext, never()).registerReceiver(any(), any());
 
         //not call unregisterReceiver()
-        mPreferenceController.onPause();
+        mPreferenceController.onStop();
         verify(mContext, never()).unregisterReceiver(any());
     }
 

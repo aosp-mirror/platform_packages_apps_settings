@@ -18,17 +18,21 @@ package com.android.settings.dashboard;
 
 import static com.android.settingslib.drawer.CategoryKey.CATEGORY_HOMEPAGE;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_ORDER;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ProviderInfo;
 import android.os.Bundle;
 import android.util.Pair;
 
+import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
@@ -68,8 +72,8 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldNotChangeCategoryForNewKeys() {
-        final Tile tile1 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
-        final Tile tile2 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final Tile tile1 = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final Tile tile2 = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
         final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_ACCOUNT);
         category.addTile(tile1);
         category.addTile(tile2);
@@ -85,9 +89,9 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldNotChangeCategoryForMixedKeys() {
-        final Tile tile1 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final Tile tile1 = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
         final String oldCategory = "com.android.settings.category.wireless";
-        final Tile tile2 = new Tile(mActivityInfo, oldCategory);
+        final Tile tile2 = new ActivityTile(mActivityInfo, oldCategory);
         final DashboardCategory category1 = new DashboardCategory(CategoryKey.CATEGORY_ACCOUNT);
         category1.addTile(tile1);
         final DashboardCategory category2 = new DashboardCategory(oldCategory);
@@ -108,7 +112,7 @@ public class CategoryManagerTest {
     @Test
     public void backwardCompatCleanupForCategory_shouldChangeCategoryForOldKeys() {
         final String oldCategory = "com.android.settings.category.wireless";
-        final Tile tile1 = new Tile(mActivityInfo, oldCategory);
+        final Tile tile1 = new ActivityTile(mActivityInfo, oldCategory);
         tile1.setCategory(oldCategory);
         final DashboardCategory category1 = new DashboardCategory(oldCategory);
         category1.addTile(tile1);
@@ -131,25 +135,9 @@ public class CategoryManagerTest {
         // Create some fake tiles that are not sorted.
         final String testPackage = "com.android.test";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        final ActivityInfo activityInfo1 = new ActivityInfo();
-        activityInfo1.metaData = new Bundle();
-        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        activityInfo1.packageName = testPackage;
-        activityInfo1.name = "class1";
-        final ActivityInfo activityInfo2 = new ActivityInfo();
-        activityInfo2.metaData = new Bundle();
-        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 50);
-        activityInfo2.packageName = testPackage;
-        activityInfo2.name = "class2";
-        final ActivityInfo activityInfo3 = new ActivityInfo();
-        activityInfo3.metaData = new Bundle();
-        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 200);
-        activityInfo3.packageName = testPackage;
-        activityInfo3.name = "class3";
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
-
+        final Tile tile1 = createActivityTile(category.key, testPackage, "class1", 100);
+        final Tile tile2 = createActivityTile(category.key, testPackage, "class2", 50);
+        final Tile tile3 = createActivityTile(category.key, testPackage, "class3", 200);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -170,25 +158,9 @@ public class CategoryManagerTest {
         final String testPackage1 = "com.android.test1";
         final String testPackage2 = "com.android.test2";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        final ActivityInfo activityInfo1 = new ActivityInfo();
-        activityInfo1.metaData = new Bundle();
-        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        activityInfo1.packageName = testPackage2;
-        activityInfo1.name = "class1";
-        final ActivityInfo activityInfo2 = new ActivityInfo();
-        activityInfo2.metaData = new Bundle();
-        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        activityInfo2.packageName = testPackage1;
-        activityInfo2.name = "class2";
-        final ActivityInfo activityInfo3 = new ActivityInfo();
-        activityInfo3.metaData = new Bundle();
-        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
-        activityInfo3.packageName = testPackage1;
-        activityInfo3.name = "class3";
-
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = createActivityTile(category.key, testPackage2, "class1", 100);
+        final Tile tile2 = createActivityTile(category.key, testPackage1, "class2", 100);
+        final Tile tile3 = createActivityTile(category.key, testPackage1, "class3", 50);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -208,24 +180,9 @@ public class CategoryManagerTest {
         // Create some fake tiles that are not sorted.
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        final ActivityInfo activityInfo1 = new ActivityInfo();
-        activityInfo1.packageName = testPackage;
-        activityInfo1.name = "class1";
-        activityInfo1.metaData = new Bundle();
-        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        final ActivityInfo activityInfo2 = new ActivityInfo();
-        activityInfo2.packageName = testPackage;
-        activityInfo2.name = "class2";
-        activityInfo2.metaData = new Bundle();
-        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        final ActivityInfo activityInfo3 = new ActivityInfo();
-        activityInfo3.packageName = testPackage;
-        activityInfo3.name = "class3";
-        activityInfo3.metaData = new Bundle();
-        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = createActivityTile(category.key, testPackage, "class1", 100);
+        final Tile tile2 = createActivityTile(category.key, testPackage, "class2", 100);
+        final Tile tile3 = createActivityTile(category.key, testPackage, "class3", 50);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -246,32 +203,10 @@ public class CategoryManagerTest {
         final String testPackage = mContext.getPackageName();
         final String testPackage2 = "com.google.test2";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-
-        final ActivityInfo activityInfo1 = new ActivityInfo();
-        activityInfo1.packageName = testPackage;
-        activityInfo1.name = "class1";
-        activityInfo1.metaData = new Bundle();
-        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 2);
-        final ActivityInfo activityInfo2 = new ActivityInfo();
-        activityInfo2.packageName = testPackage;
-        activityInfo2.name = "class2";
-        activityInfo2.metaData = new Bundle();
-        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 1);
-        final ActivityInfo activityInfo3 = new ActivityInfo();
-        activityInfo3.packageName = testPackage2;
-        activityInfo3.name = "class0";
-        activityInfo3.metaData = new Bundle();
-        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 0);
-        final ActivityInfo activityInfo4 = new ActivityInfo();
-        activityInfo4.packageName = testPackage;
-        activityInfo4.name = "class3";
-        activityInfo4.metaData = new Bundle();
-        activityInfo4.metaData.putInt(META_DATA_KEY_ORDER, -1);
-
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile4 = new Tile(activityInfo4, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = createActivityTile(category.key, testPackage, "class1", 2);
+        final Tile tile2 = createActivityTile(category.key, testPackage, "class2", 1);
+        final Tile tile3 = createActivityTile(category.key, testPackage2, "class0", 0);
+        final Tile tile4 = createActivityTile(category.key, testPackage, "class3", -1);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -295,24 +230,9 @@ public class CategoryManagerTest {
         final String testPackage2 = "com.google.test2";
         final String testPackage3 = "com.abcde.test3";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        final ActivityInfo activityInfo1 = new ActivityInfo();
-        activityInfo1.packageName = testPackage2;
-        activityInfo1.name = "class1";
-        activityInfo1.metaData = new Bundle();
-        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 1);
-        final ActivityInfo activityInfo2 = new ActivityInfo();
-        activityInfo2.packageName = testPackage;
-        activityInfo2.name = "class2";
-        activityInfo2.metaData = new Bundle();
-        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 1);
-        final ActivityInfo activityInfo3 = new ActivityInfo();
-        activityInfo3.packageName = testPackage3;
-        activityInfo3.name = "class3";
-        activityInfo3.metaData = new Bundle();
-        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 1);
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = createActivityTile(category.key, testPackage2, "class1", 1);
+        final Tile tile2 = createActivityTile(category.key, testPackage, "class2", 1);
+        final Tile tile3 = createActivityTile(category.key, testPackage3, "class3", 1);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -332,58 +252,36 @@ public class CategoryManagerTest {
         // Create some unique tiles
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        final ActivityInfo activityInfo1 = new ActivityInfo();
-        activityInfo1.packageName = testPackage;
-        activityInfo1.name = "class1";
-        activityInfo1.metaData = new Bundle();
-        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        final ActivityInfo activityInfo2 = new ActivityInfo();
-        activityInfo2.packageName = testPackage;
-        activityInfo2.name = "class2";
-        activityInfo2.metaData = new Bundle();
-        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        final ActivityInfo activityInfo3 = new ActivityInfo();
-        activityInfo3.packageName = testPackage;
-        activityInfo3.name = "class3";
-        activityInfo3.metaData = new Bundle();
-        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = createActivityTile(category.key, testPackage, "class1", 100);
+        final Tile tile2 = createActivityTile(category.key, testPackage, "class2", 100);
+        final Tile tile3 = createActivityTile(category.key, testPackage, "class3", 50);
+        final Tile tile4 = createProviderTile(category.key, testPackage, "class1", "authority1",
+                "key1", 100);
+        final Tile tile5 = createProviderTile(category.key, testPackage, "class1", "authority2",
+                "key2", 100);
+        final Tile tile6 = createProviderTile(category.key, testPackage, "class1", "authority1",
+                "key2", 50);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
+        category.addTile(tile4);
+        category.addTile(tile5);
+        category.addTile(tile6);
         mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         mCategoryManager.filterDuplicateTiles(mCategoryByKeyMap);
 
-        assertThat(category.getTilesCount()).isEqualTo(3);
+        assertThat(category.getTilesCount()).isEqualTo(6);
     }
 
     @Test
-    public void filterTiles_hasDuplicate_shouldOnlyKeepUniqueTiles() {
+    public void filterTiles_hasDuplicateActivityTiles_shouldOnlyKeepUniqueTiles() {
         // Create tiles pointing to same intent.
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        final ActivityInfo activityInfo1 = new ActivityInfo();
-        activityInfo1.packageName = testPackage;
-        activityInfo1.name = "class1";
-        activityInfo1.metaData = new Bundle();
-        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        final ActivityInfo activityInfo2 = new ActivityInfo();
-        activityInfo2.packageName = testPackage;
-        activityInfo2.name = "class1";
-        activityInfo2.metaData = new Bundle();
-        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 100);
-        final ActivityInfo activityInfo3 = new ActivityInfo();
-        activityInfo3.packageName = testPackage;
-        activityInfo3.name = "class1";
-        activityInfo3.metaData = new Bundle();
-        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
-
-        final Tile tile1 = new Tile(activityInfo1, category.key);
-        final Tile tile2 = new Tile(activityInfo2, category.key);
-        final Tile tile3 = new Tile(activityInfo3, category.key);
+        final Tile tile1 = createActivityTile(category.key, testPackage, "class1", 100);
+        final Tile tile2 = createActivityTile(category.key, testPackage, "class1", 100);
+        final Tile tile3 = createActivityTile(category.key, testPackage, "class1", 50);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -392,5 +290,48 @@ public class CategoryManagerTest {
         mCategoryManager.filterDuplicateTiles(mCategoryByKeyMap);
 
         assertThat(category.getTilesCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void filterTiles_hasDuplicateProviderTiles_shouldOnlyKeepUniqueTiles() {
+        // Create tiles pointing to same authority and key.
+        final String testPackage = mContext.getPackageName();
+        final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final Tile tile1 = createProviderTile(category.key, testPackage, "class1", "authority1",
+                "key1", 100);
+        final Tile tile2 = createProviderTile(category.key, testPackage, "class2", "authority1",
+                "key1", 100);
+        final Tile tile3 = createProviderTile(category.key, testPackage, "class3", "authority1",
+                "key1", 50);
+        category.addTile(tile1);
+        category.addTile(tile2);
+        category.addTile(tile3);
+        mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
+
+        mCategoryManager.filterDuplicateTiles(mCategoryByKeyMap);
+
+        assertThat(category.getTilesCount()).isEqualTo(1);
+    }
+
+    private Tile createActivityTile(String categoryKey, String packageName, String className,
+            int order) {
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = packageName;
+        activityInfo.name = className;
+        activityInfo.metaData = new Bundle();
+        activityInfo.metaData.putInt(META_DATA_KEY_ORDER, order);
+        return new ActivityTile(activityInfo, categoryKey);
+    }
+
+    private Tile createProviderTile(String categoryKey, String packageName, String className,
+            String authority, String key, int order) {
+        final ProviderInfo providerInfo = new ProviderInfo();
+        final Bundle metaData = new Bundle();
+        providerInfo.packageName = packageName;
+        providerInfo.name = className;
+        providerInfo.authority = authority;
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, key);
+        metaData.putInt(META_DATA_KEY_ORDER, order);
+        return new ProviderTile(providerInfo, categoryKey, metaData);
     }
 }

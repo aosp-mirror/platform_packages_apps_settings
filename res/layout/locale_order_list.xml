@@ -23,9 +23,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:clipToPadding="true"
+        android:clipChildren="true"
+        android:orientation="vertical">
 
         <com.android.settings.localepicker.LocaleRecyclerView
             android:id="@+id/dragList"
@@ -40,7 +40,7 @@
             android:paddingStart="?android:attr/listPreferredItemPaddingStart"
             android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
             android:drawableStart="@drawable/ic_add_24dp"
-            android:drawablePadding="24dp"
+            android:drawablePadding="32dp"
             android:textAlignment="textStart"
             android:text="@string/add_a_language"
             style="@style/Base.Widget.AppCompat.Button.Borderless"

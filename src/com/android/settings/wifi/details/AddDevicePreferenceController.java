@@ -25,11 +25,14 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-
 import com.android.settingslib.wifi.AccessPoint;
 
 /**
- * {@link BasePreferenceController} that launches Wi-Fi Easy Connect configurator flow
+ * {@link BasePreferenceController} that launches Wi-Fi Easy Connect configurator flow.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in
+ * {@link com.android.settings.wifi.details2.AddDevicePreferenceController2}.
  */
 public class AddDevicePreferenceController extends BasePreferenceController {
 

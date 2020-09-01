@@ -18,12 +18,11 @@ package com.android.settings.slices;
 
 import static com.android.settings.bluetooth.BluetoothSliceBuilder.ACTION_BLUETOOTH_SLICE_CHANGED;
 import static com.android.settings.network.telephony.Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED;
-import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
+import static com.android.settings.notification.zen.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_COPY;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
-import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY;
@@ -32,11 +31,9 @@ import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WI
 import android.app.settings.SettingsEnums;
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -44,7 +41,7 @@ import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.notification.ZenModeSliceBuilder;
+import com.android.settings.notification.zen.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 
 /**
@@ -58,8 +55,6 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
         final String key = intent.getStringExtra(EXTRA_SLICE_KEY);
-        final boolean isPlatformSlice = intent.getBooleanExtra(EXTRA_SLICE_PLATFORM_DEFINED,
-                false /* default */);
 
         if (CustomSliceRegistry.isValidAction(action)) {
             final CustomSliceable sliceable =
@@ -68,15 +63,16 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             sliceable.onNotifyChange(intent);
             return;
         }
+        final Uri sliceUri = intent.getData();
 
         switch (action) {
             case ACTION_TOGGLE_CHANGED:
                 final boolean isChecked = intent.getBooleanExtra(Slice.EXTRA_TOGGLE_STATE, false);
-                handleToggleAction(context, key, isChecked, isPlatformSlice);
+                handleToggleAction(context, sliceUri, key, isChecked);
                 break;
             case ACTION_SLIDER_CHANGED:
                 final int newPosition = intent.getIntExtra(Slice.EXTRA_RANGE_VALUE, -1);
-                handleSliderAction(context, key, newPosition, isPlatformSlice);
+                handleSliderAction(context, sliceUri, key, newPosition);
                 break;
             case ACTION_BLUETOOTH_SLICE_CHANGED:
                 BluetoothSliceBuilder.handleUriChange(context, intent);
@@ -105,13 +101,12 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                         .handleWifiCallingPreferenceChanged(intent);
                 break;
             case ACTION_COPY:
-                handleCopyAction(context, key, isPlatformSlice);
+                handleCopyAction(context, sliceUri, key);
                 break;
         }
     }
 
-    private void handleToggleAction(Context context, String key, boolean isChecked,
-            boolean isPlatformSlice) {
+    private void handleToggleAction(Context context, Uri sliceUri, String key, boolean isChecked) {
         if (TextUtils.isEmpty(key)) {
             throw new IllegalStateException("No key passed to Intent for toggle controller");
         }
@@ -125,7 +120,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         if (!controller.isAvailable()) {
             Log.w(TAG, "Can't update " + key + " since the setting is unavailable");
             if (!controller.hasAsyncUpdate()) {
-                updateUri(context, key, isPlatformSlice);
+                context.getContentResolver().notifyChange(sliceUri, null /* observer */);
             }
             return;
         }
@@ -136,12 +131,11 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         toggleController.setChecked(isChecked);
         logSliceValueChange(context, key, isChecked ? 1 : 0);
         if (!controller.hasAsyncUpdate()) {
-            updateUri(context, key, isPlatformSlice);
+            context.getContentResolver().notifyChange(sliceUri, null /* observer */);
         }
     }
 
-    private void handleSliderAction(Context context, String key, int newPosition,
-            boolean isPlatformSlice) {
+    private void handleSliderAction(Context context, Uri sliceUri, String key, int newPosition) {
         if (TextUtils.isEmpty(key)) {
             throw new IllegalArgumentException(
                     "No key passed to Intent for slider controller. Use extra: " + EXTRA_SLICE_KEY);
@@ -159,7 +153,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         if (!controller.isAvailable()) {
             Log.w(TAG, "Can't update " + key + " since the setting is unavailable");
-            updateUri(context, key, isPlatformSlice);
+            context.getContentResolver().notifyChange(sliceUri, null /* observer */);
             return;
         }
 
@@ -174,10 +168,10 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         sliderController.setSliderPosition(newPosition);
         logSliceValueChange(context, key, newPosition);
-        updateUri(context, key, isPlatformSlice);
+        context.getContentResolver().notifyChange(sliceUri, null /* observer */);
     }
 
-    private void handleCopyAction(Context context, String key, boolean isPlatformSlice) {
+    private void handleCopyAction(Context context, Uri sliceUri, String key) {
         if (TextUtils.isEmpty(key)) {
             throw new IllegalArgumentException("No key passed to Intent for controller");
         }
@@ -192,7 +186,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         if (!controller.isAvailable()) {
             Log.w(TAG, "Can't update " + key + " since the setting is unavailable");
             if (!controller.hasAsyncUpdate()) {
-                updateUri(context, key, isPlatformSlice);
+                context.getContentResolver().notifyChange(sliceUri, null /* observer */);
             }
             return;
         }
@@ -216,18 +210,5 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final SlicesDatabaseAccessor accessor = new SlicesDatabaseAccessor(context);
         final SliceData sliceData = accessor.getSliceDataFromKey(key);
         return SliceBuilderUtils.getPreferenceController(context, sliceData);
-    }
-
-    private void updateUri(Context context, String key, boolean isPlatformDefined) {
-        final String authority = isPlatformDefined
-                ? SettingsSlicesContract.AUTHORITY
-                : SettingsSliceProvider.SLICE_AUTHORITY;
-        final Uri uri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(authority)
-                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-                .appendPath(key)
-                .build();
-        context.getContentResolver().notifyChange(uri, null /* observer */);
     }
 }

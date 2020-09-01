@@ -66,6 +66,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
      */
     public static List<AbstractPreferenceController> getSecondaryUserControllers(
             Context context, UserManager userManager) {
+
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         UserInfo primaryUser = userManager.getPrimaryUser();
         boolean addedUser = false;
@@ -77,8 +78,6 @@ public class SecondaryUserController extends AbstractPreferenceController implem
             }
 
             if (info == null || Utils.isProfileOf(primaryUser, info)) {
-                controllers.add(
-                        new UserProfileController(context, info, USER_PROFILE_INSERTION_LOCATION));
                 continue;
             }
 
@@ -183,7 +182,8 @@ public class SecondaryUserController extends AbstractPreferenceController implem
         }
     }
 
-    private static class NoSecondaryUserController extends AbstractPreferenceController implements
+    @VisibleForTesting
+    static class NoSecondaryUserController extends AbstractPreferenceController implements
             PreferenceControllerMixin {
         public NoSecondaryUserController(Context context) {
             super(context);
@@ -207,6 +207,5 @@ public class SecondaryUserController extends AbstractPreferenceController implem
         public String getPreferenceKey() {
             return null;
         }
-
     }
 }

@@ -15,6 +15,10 @@
  */
 package com.android.settings.applications;
 
+import static android.app.AppOpsManager.OP_GET_USAGE_STATS;
+import static android.app.AppOpsManager.OP_LOADER_USAGE_STATS;
+
+import android.Manifest;
 import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -104,10 +108,28 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         return false;
     }
 
+    private static boolean doesAnyPermissionMatch(String permissionToMatch, String[] permissions) {
+        for (String permission : permissions) {
+            if (permissionToMatch.equals(permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void setHasAccess(boolean newState) {
         logSpecialPermissionChange(newState, mPackageName);
-        mAppOpsManager.setMode(AppOpsManager.OP_GET_USAGE_STATS, mPackageInfo.applicationInfo.uid,
-                mPackageName, newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
+
+        final int newAppOpMode = newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED;
+        final int uid = mPackageInfo.applicationInfo.uid;
+        if (doesAnyPermissionMatch(Manifest.permission.PACKAGE_USAGE_STATS,
+                mUsageState.packageInfo.requestedPermissions)) {
+            mAppOpsManager.setMode(OP_GET_USAGE_STATS, uid, mPackageName, newAppOpMode);
+        }
+        if (doesAnyPermissionMatch(Manifest.permission.LOADER_USAGE_STATS,
+                mUsageState.packageInfo.requestedPermissions)) {
+            mAppOpsManager.setMode(OP_LOADER_USAGE_STATS, uid, mPackageName, newAppOpMode);
+        }
     }
 
     @VisibleForTesting

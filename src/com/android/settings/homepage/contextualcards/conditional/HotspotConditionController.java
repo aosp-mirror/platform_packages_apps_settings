@@ -22,7 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -114,13 +114,12 @@ public class HotspotConditionController implements ConditionalCardController {
     }
 
     private CharSequence getSsid() {
-        WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
-        if (wifiConfig == null) {
-            return mAppContext.getText(
-                    com.android.internal.R.string.wifi_tether_configure_ssid_default);
-        } else {
-            return wifiConfig.SSID;
+        final SoftApConfiguration softApConfig = mWifiManager.getSoftApConfiguration();
+        if (softApConfig == null) {
+            // Should never happen.
+            return "";
         }
+        return softApConfig.getSsid();
     }
 
     public class Receiver extends BroadcastReceiver {

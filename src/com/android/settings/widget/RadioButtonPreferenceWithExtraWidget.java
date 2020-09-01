@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class RadioButtonPreferenceWithExtraWidget extends RadioButtonPreference {
     public static final int EXTRA_WIDGET_VISIBILITY_GONE = 0;

@@ -27,6 +27,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settingslib.applications.InterestingConfigChanges;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
@@ -189,21 +190,31 @@ public class CategoryManager {
 
     /**
      * Filter out duplicate tiles from category. Duplicate tiles are the ones pointing to the
-     * same intent.
+     * same intent for ActivityTile, and also the ones having the same description for ProviderTile.
      */
     @VisibleForTesting
     synchronized void filterDuplicateTiles(Map<String, DashboardCategory> categoryByKeyMap) {
         for (Entry<String, DashboardCategory> categoryEntry : categoryByKeyMap.entrySet()) {
             final DashboardCategory category = categoryEntry.getValue();
             final int count = category.getTilesCount();
+            final Set<String> descriptions = new ArraySet<>();
             final Set<ComponentName> components = new ArraySet<>();
             for (int i = count - 1; i >= 0; i--) {
                 final Tile tile = category.getTile(i);
-                final ComponentName tileComponent = tile.getIntent().getComponent();
-                if (components.contains(tileComponent)) {
-                    category.removeTile(i);
+                if (tile instanceof ProviderTile) {
+                    final String desc = tile.getDescription();
+                    if (descriptions.contains(desc)) {
+                        category.removeTile(i);
+                    } else {
+                        descriptions.add(desc);
+                    }
                 } else {
-                    components.add(tileComponent);
+                    final ComponentName tileComponent = tile.getIntent().getComponent();
+                    if (components.contains(tileComponent)) {
+                        category.removeTile(i);
+                    } else {
+                        components.add(tileComponent);
+                    }
                 }
             }
         }

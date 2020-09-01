@@ -24,8 +24,8 @@ import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class FlashlightHandleActivity extends Activity implements Indexable {
         finish();
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
 
                 @Override

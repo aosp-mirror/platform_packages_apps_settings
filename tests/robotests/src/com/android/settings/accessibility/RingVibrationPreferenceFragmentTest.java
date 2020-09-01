@@ -20,10 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
 
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
@@ -54,8 +52,6 @@ public class RingVibrationPreferenceFragmentTest {
         // Turn on both flags to enable ramping ringer.
         Settings.Global.putInt(
                 mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 1 /* ON */);
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
-                AccessibilitySettings.RAMPING_RINGER_ENABLED, "true", false /* makeDefault*/);
         assertThat(mFragment.getVibrationEnabledSetting()).isEqualTo(
             Settings.Global.APPLY_RAMPING_RINGER);
     }

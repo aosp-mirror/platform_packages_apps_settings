@@ -20,8 +20,9 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.biometrics.BiometricPrompt;
-import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 import android.os.CancellationSignal;
 import android.os.Handler;
@@ -29,15 +30,13 @@ import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
-
 import com.android.settingslib.wifi.AccessPoint;
-
-import java.util.List;
+import com.android.wifitrackerlib.WifiEntry;
 
 import java.time.Duration;
+import java.util.List;
 
 /**
  * Here are the items shared by both WifiDppConfiguratorActivity & WifiDppEnrolleeActivity
@@ -48,62 +47,62 @@ public class WifiDppUtils {
     /**
      * The fragment tag specified to FragmentManager for container activities to manage fragments.
      */
-    public static final String TAG_FRAGMENT_QR_CODE_SCANNER = "qr_code_scanner_fragment";
+    static final String TAG_FRAGMENT_QR_CODE_SCANNER = "qr_code_scanner_fragment";
 
     /**
      * @see #TAG_FRAGMENT_QR_CODE_SCANNER
      */
-    public static final String TAG_FRAGMENT_QR_CODE_GENERATOR = "qr_code_generator_fragment";
+    static final String TAG_FRAGMENT_QR_CODE_GENERATOR = "qr_code_generator_fragment";
 
     /**
      * @see #TAG_FRAGMENT_QR_CODE_SCANNER
      */
-    public static final String TAG_FRAGMENT_CHOOSE_SAVED_WIFI_NETWORK =
+    static final String TAG_FRAGMENT_CHOOSE_SAVED_WIFI_NETWORK =
             "choose_saved_wifi_network_fragment";
 
     /**
      * @see #TAG_FRAGMENT_QR_CODE_SCANNER
      */
-    public static final String TAG_FRAGMENT_ADD_DEVICE = "add_device_fragment";
+    static final String TAG_FRAGMENT_ADD_DEVICE = "add_device_fragment";
 
     /** The data is from {@code com.android.settingslib.wifi.AccessPoint.securityToString} */
-    public static final String EXTRA_WIFI_SECURITY = "security";
+    static final String EXTRA_WIFI_SECURITY = "security";
 
     /** The data corresponding to {@code WifiConfiguration} SSID */
-    public static final String EXTRA_WIFI_SSID = "ssid";
+    static final String EXTRA_WIFI_SSID = "ssid";
 
     /** The data corresponding to {@code WifiConfiguration} preSharedKey */
-    public static final String EXTRA_WIFI_PRE_SHARED_KEY = "preSharedKey";
+    static final String EXTRA_WIFI_PRE_SHARED_KEY = "preSharedKey";
 
     /** The data corresponding to {@code WifiConfiguration} hiddenSSID */
-    public static final String EXTRA_WIFI_HIDDEN_SSID = "hiddenSsid";
+    static final String EXTRA_WIFI_HIDDEN_SSID = "hiddenSsid";
 
     /** The data corresponding to {@code WifiConfiguration} networkId */
-    public static final String EXTRA_WIFI_NETWORK_ID = "networkId";
+    static final String EXTRA_WIFI_NETWORK_ID = "networkId";
 
     /** The data to recognize if it's a Wi-Fi hotspot for configuration */
-    public static final String EXTRA_IS_HOTSPOT = "isHotspot";
+    static final String EXTRA_IS_HOTSPOT = "isHotspot";
 
     /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI} to
      * indicate test mode UI should be shown. Test UI does not make API calls. Value is a boolean.*/
-    public static final String EXTRA_TEST = "test";
+    static final String EXTRA_TEST = "test";
 
     /**
      * Default status code for Easy Connect
      */
-    public static final int EASY_CONNECT_EVENT_FAILURE_NONE = 0;
+    static final int EASY_CONNECT_EVENT_FAILURE_NONE = 0;
 
     /**
      * Success status code for Easy Connect.
      */
-    public static final int EASY_CONNECT_EVENT_SUCCESS = 1;
+    static final int EASY_CONNECT_EVENT_SUCCESS = 1;
 
     private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
 
     /**
      * Returns whether the device support WiFi DPP.
      */
-    public static boolean isWifiDppEnabled(Context context) {
+    static boolean isWifiDppEnabled(Context context) {
         final WifiManager manager = context.getSystemService(WifiManager.class);
         return manager.isEasyConnectSupported();
     }
@@ -130,10 +129,10 @@ public class WifiDppUtils {
 
     private static String getPresharedKey(WifiManager wifiManager,
             WifiConfiguration wifiConfiguration) {
-        final List<WifiConfiguration> privilegedWifiConfiguratios =
+        final List<WifiConfiguration> privilegedWifiConfigurations =
                 wifiManager.getPrivilegedConfiguredNetworks();
 
-        for (WifiConfiguration privilegedWifiConfiguration : privilegedWifiConfiguratios) {
+        for (WifiConfiguration privilegedWifiConfiguration : privilegedWifiConfigurations) {
             if (privilegedWifiConfiguration.networkId == wifiConfiguration.networkId) {
                 // WEP uses a shared key hence the AuthAlgorithm.SHARED is used
                 // to identify it.
@@ -181,6 +180,22 @@ public class WifiDppUtils {
                 WifiQrCode.SECURITY_NO_PASSWORD : WifiQrCode.SECURITY_WEP;
     }
 
+    static String getSecurityString(WifiEntry wifiEntry) {
+        final int security = wifiEntry.getSecurity();
+        switch (security) {
+            case WifiEntry.SECURITY_SAE:
+                return WifiQrCode.SECURITY_SAE;
+            case WifiEntry.SECURITY_PSK:
+                return WifiQrCode.SECURITY_WPA_PSK;
+            case WifiEntry.SECURITY_WEP:
+                return WifiQrCode.SECURITY_WEP;
+            case WifiEntry.SECURITY_OWE:
+            case WifiEntry.SECURITY_NONE:
+            default:
+                return WifiQrCode.SECURITY_NO_PASSWORD;
+        }
+    }
+
     /**
      * Returns an intent to launch QR code generator. It may return null if the security is not
      * supported by QR code generator.
@@ -209,6 +224,33 @@ public class WifiDppUtils {
         if (accessPoint.isPskSaeTransitionMode()) {
             intent.putExtra(EXTRA_WIFI_SECURITY, WifiQrCode.SECURITY_WPA_PSK);
         }
+
+        return intent;
+    }
+
+    /**
+     * Returns an intent to launch QR code generator. It may return null if the security is not
+     * supported by QR code generator.
+     *
+     * Do not use this method for Wi-Fi hotspot network, use
+     * {@code getHotspotConfiguratorIntentOrNull} instead.
+     *
+     * @param context     The context to use for the content resolver
+     * @param wifiManager An instance of {@link WifiManager}
+     * @param wifiEntry An instance of {@link WifiEntry}
+     * @return Intent for launching QR code generator
+     */
+    public static Intent getConfiguratorQrCodeGeneratorIntentOrNull(Context context,
+            WifiManager wifiManager, WifiEntry wifiEntry) {
+        final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
+        if (wifiEntry.canShare()) {
+            intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+        } else {
+            return null;
+        }
+
+        final WifiConfiguration wifiConfiguration = wifiEntry.getWifiConfiguration();
+        setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
 
         return intent;
     }
@@ -244,24 +286,77 @@ public class WifiDppUtils {
     }
 
     /**
+     * Returns an intent to launch QR code scanner. It may return null if the security is not
+     * supported by QR code scanner.
+     *
+     * @param context     The context to use for the content resolver
+     * @param wifiManager An instance of {@link WifiManager}
+     * @param wifiEntry An instance of {@link WifiEntry}
+     * @return Intent for launching QR code scanner
+     */
+    public static Intent getConfiguratorQrCodeScannerIntentOrNull(Context context,
+            WifiManager wifiManager, WifiEntry wifiEntry) {
+        final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
+        if (wifiEntry.canEasyConnect()) {
+            intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        } else {
+            return null;
+        }
+
+        final WifiConfiguration wifiConfiguration = wifiEntry.getWifiConfiguration();
+        setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
+
+        if (wifiConfiguration.networkId == WifiConfiguration.INVALID_NETWORK_ID) {
+            throw new IllegalArgumentException("Invalid network ID");
+        } else {
+            intent.putExtra(EXTRA_WIFI_NETWORK_ID, wifiConfiguration.networkId);
+        }
+
+        return intent;
+    }
+
+    /**
      * Returns an intent to launch QR code generator for the Wi-Fi hotspot. It may return null if
      * the security is not supported by QR code generator.
      *
      * @param context The context to use for the content resolver
      * @param wifiManager An instance of {@link WifiManager}
-     * @param wifiConfiguration {@link WifiConfiguration} of the Wi-Fi hotspot
+     * @param softApConfiguration {@link SoftApConfiguration} of the Wi-Fi hotspot
      * @return Intent for launching QR code generator
      */
     public static Intent getHotspotConfiguratorIntentOrNull(Context context,
-            WifiManager wifiManager, WifiConfiguration wifiConfiguration) {
+            WifiManager wifiManager, SoftApConfiguration softApConfiguration) {
         final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
-        if (isSupportHotspotConfiguratorQrCodeGenerator(wifiConfiguration)) {
+        if (isSupportHotspotConfiguratorQrCodeGenerator(softApConfiguration)) {
             intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
         } else {
             return null;
         }
 
-        setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
+        final String ssid = removeFirstAndLastDoubleQuotes(softApConfiguration.getSsid());
+        String security;
+        if (softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+            security = WifiQrCode.SECURITY_WPA_PSK;
+        } else {
+            security = WifiQrCode.SECURITY_NO_PASSWORD;
+        }
+
+        // When the value of this key is read, the actual key is not returned, just a "*".
+        // Call privileged system API to obtain actual key.
+        final String preSharedKey = removeFirstAndLastDoubleQuotes(
+                softApConfiguration.getPassphrase());
+
+        if (!TextUtils.isEmpty(ssid)) {
+            intent.putExtra(EXTRA_WIFI_SSID, ssid);
+        }
+        if (!TextUtils.isEmpty(security)) {
+            intent.putExtra(EXTRA_WIFI_SECURITY, security);
+        }
+        if (!TextUtils.isEmpty(preSharedKey)) {
+            intent.putExtra(EXTRA_WIFI_PRE_SHARED_KEY, preSharedKey);
+        }
+        intent.putExtra(EXTRA_WIFI_HIDDEN_SSID, softApConfiguration.isHiddenSsid());
+
 
         intent.putExtra(EXTRA_WIFI_NETWORK_ID, WifiConfiguration.INVALID_NETWORK_ID);
         intent.putExtra(EXTRA_IS_HOTSPOT, true);
@@ -384,12 +479,12 @@ public class WifiDppUtils {
     }
 
     private static boolean isSupportHotspotConfiguratorQrCodeGenerator(
-            WifiConfiguration wifiConfiguration) {
+            SoftApConfiguration softApConfiguration) {
         // QR code generator produces QR code with ZXing's Wi-Fi network config format,
         // it supports PSK and WEP and non security
         // KeyMgmt.NONE is for WEP or non security
-        return wifiConfiguration.allowedKeyManagement.get(KeyMgmt.WPA2_PSK) ||
-                wifiConfiguration.allowedKeyManagement.get(KeyMgmt.NONE);
+        return softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                || softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OPEN;
     }
 
     private static boolean isSupportWifiDpp(Context context, int accesspointSecurity) {

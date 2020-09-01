@@ -53,7 +53,7 @@ public class AnnotationSpan extends URLSpan {
     @Override
     public void updateDrawState(TextPaint ds) {
         super.updateDrawState(ds);
-        ds.setUnderlineText(false);
+        ds.setUnderlineText(true);
     }
 
     public static CharSequence linkify(CharSequence rawText, LinkInfo... linkInfos) {

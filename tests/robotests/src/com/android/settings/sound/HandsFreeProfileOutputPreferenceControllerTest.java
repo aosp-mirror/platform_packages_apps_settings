@@ -51,6 +51,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -243,6 +244,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * Preference summary should be the activated device name
      */
     @Test
+    @Ignore
     public void updateState_oneHeadsetsAvailableAndActivated_shouldSetDeviceName() {
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_SCO);
@@ -264,6 +266,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * Preference summary should be the activated device name
      */
     @Test
+    @Ignore
     public void updateState_moreThanOneHfpBtDevicesAreAvailable_shouldSetActivatedDeviceName() {
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_SCO);
@@ -324,6 +327,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * Preference summary should be the activated device name
      */
     @Test
+    @Ignore
     public void updateState_oneHapBtDeviceAreAvailable_shouldSetActivatedDeviceName() {
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
@@ -348,6 +352,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * Preference summary should be the activated device name
      */
     @Test
+    @Ignore
     public void updateState_moreThanOneHapBtDevicesAreAvailable_shouldSetActivatedDeviceName() {
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
@@ -376,6 +381,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * ConnectedDevice should not contain second HAP device with same HisyncId
      */
     @Test
+    @Ignore
     public void updateState_hapBtDeviceWithSameId_shouldSetActivatedDeviceName() {
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
@@ -409,6 +415,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * ConnectedDevice should not contain second HAP device with same HisyncId
      */
     @Test
+    @Ignore
     public void updateState_hapBtDeviceWithSameIdButDifferentOrder_shouldSetActivatedDeviceName() {
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
@@ -441,6 +448,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * ConnectedDevice should contain both HAP device with different HisyncId
      */
     @Test
+    @Ignore
     public void updateState_hapBtDeviceWithDifferentId_shouldSetActivatedDeviceName() {
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
@@ -485,6 +493,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * Preference summary should be device name.
      */
     @Test
+    @Ignore
     public void onPreferenceChange_toBtDevice_shouldSetBtDeviceName() {
         mController.mConnectedDevices.clear();
         mController.mConnectedDevices.add(mBluetoothDevice);
@@ -499,6 +508,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * Preference summary should be second device name.
      */
     @Test
+    @Ignore
     public void onPreferenceChange_toBtDevices_shouldSetSecondBtDeviceName() {
         ShadowBluetoothDevice shadowBluetoothDevice;
         BluetoothDevice secondBluetoothDevice;

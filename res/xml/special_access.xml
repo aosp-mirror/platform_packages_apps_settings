@@ -17,8 +17,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="special_app_access_screen"
     android:title="@string/special_access">
+
+    <Preference
+        android:key="manage_external_storage"
+        android:title="@string/manage_external_storage_title"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$ManageExternalStorageActivity" />
+    </Preference>
 
     <Preference
         android:key="high_power_apps"
@@ -32,17 +40,25 @@
     </Preference>
 
     <Preference
+        android:key="interact_across_profiles"
+        android:title="@string/interact_across_profiles_title"
+        android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
+        settings:keywords="@string/interact_across_profiles_keywords"
+        settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
+
+    <Preference
         android:key="device_administrators"
         android:title="@string/manage_device_admin"
         android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
         android:summary="@string/summary_placeholder"
+        settings:searchable="false"
         settings:controller="com.android.settings.enterprise.ManageDeviceAdminPreferenceController" />
 
     <Preference
-        android:key="system_alert_window"
+        android:key="system_alert_window_app_list"
         android:title="@string/system_alert_window_settings"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_system_alert_window"
+        settings:keywords="@string/keywords_draw_overlay"
         settings:controller="com.android.settings.applications.specialaccess.SystemAlertWindowPreferenceController">
         <extra
             android:name="classname"
@@ -52,7 +68,7 @@
     <Preference
         android:key="zen_access"
         android:title="@string/manage_zen_access_title"
-        android:fragment="com.android.settings.notification.ZenAccessSettings"
+        android:fragment="com.android.settings.notification.zen.ZenAccessSettings"
         settings:controller="com.android.settings.applications.specialaccess.zenaccess.ZenAccessController" />
 
     <Preference
@@ -90,13 +106,6 @@
         android:title="@string/premium_sms_access"
         android:fragment="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess"
         settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController" />
-
-    <Preference
-        android:key="default_payment_app"
-        android:title="@string/nfc_payment_settings_title"
-        android:fragment="com.android.settings.nfc.PaymentSettings"
-        settings:keywords="@string/keywords_default_payment_app"
-        settings:controller="com.android.settings.applications.specialaccess.DefaultPaymentSettingsPreferenceController" />
 
     <Preference
         android:key="data_saver"

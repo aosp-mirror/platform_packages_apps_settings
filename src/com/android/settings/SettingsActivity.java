@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settings.applications.appinfo.AppButtonsPreferenceController.KEY_REMOVE_TASK_WHEN_FINISHING;
+
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
@@ -28,6 +30,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources.Theme;
+import android.graphics.drawable.Icon;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -50,7 +53,6 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -134,6 +136,14 @@ public class SettingsActivity extends SettingsBaseActivity
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
 
+    /**
+     * Personal or Work profile tab of {@link ProfileSelectFragment}
+     * <p>0: Personal tab.
+     * <p>1: Work profile tab.
+     */
+    public static final String EXTRA_SHOW_FRAGMENT_TAB =
+            ":settings:show_fragment_tab";
+
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
             "com.android.settings.FRAGMENT_CLASS";
 
@@ -203,9 +213,13 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private String getMetricsTag() {
-        String tag = getClass().getName();
+        String tag = null;
         if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
             tag = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+        }
+        if (TextUtils.isEmpty(tag)) {
+            Log.w(LOG_TAG, "MetricsTag is invalid " + tag);
+            tag = getClass().getName();
         }
         if (tag.startsWith("com.android.settings.")) {
             tag = tag.replace("com.android.settings.", "");
@@ -268,12 +282,12 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, intent);
         }
 
-        final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
+        final boolean isInSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
 
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
-            actionBar.setHomeButtonEnabled(deviceProvisioned);
+            actionBar.setDisplayHomeAsUpEnabled(!isInSetupWizard);
+            actionBar.setHomeButtonEnabled(!isInSetupWizard);
             actionBar.setDisplayShowTitleEnabled(true);
         }
         mSwitchBar = findViewById(R.id.switch_bar);
@@ -478,7 +492,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     public void setTaskDescription(ActivityManager.TaskDescription taskDescription) {
-        taskDescription.setIcon(R.drawable.ic_launcher_settings);
+        taskDescription.setIcon(Icon.createWithResource(this, R.drawable.ic_launcher_settings));
         super.setTaskDescription(taskDescription);
     }
 
@@ -542,7 +556,12 @@ public class SettingsActivity extends SettingsBaseActivity
      */
     public void finishPreferencePanel(int resultCode, Intent resultData) {
         setResult(resultCode, resultData);
-        finish();
+        if (resultData != null &&
+                resultData.getBooleanExtra(KEY_REMOVE_TASK_WHEN_FINISHING, false)) {
+            finishAndRemoveTask();
+        } else {
+            finish();
+        }
     }
 
     /**
@@ -555,7 +574,7 @@ public class SettingsActivity extends SettingsBaseActivity
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
         }
-        Fragment f = Fragment.instantiate(this, fragmentName, args);
+        Fragment f = Utils.getTargetFragment(this, fragmentName, args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
         if (titleResId > 0) {
@@ -573,12 +592,7 @@ public class SettingsActivity extends SettingsBaseActivity
         // Generally the items that are will be changing from these updates will
         // not be in the top list of tiles, so run it in the background and the
         // SettingsBaseActivity will pick up on the updates automatically.
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                doUpdateTilesList();
-            }
-        });
+        AsyncTask.execute(() -> doUpdateTilesList());
     }
 
     private void doUpdateTilesList() {
@@ -633,16 +647,11 @@ public class SettingsActivity extends SettingsBaseActivity
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                UserBackupSettingsActivity.class.getName()), true, isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.WifiDisplaySettingsActivity.class.getName()),
                 WifiDisplaySettings.isAvailable(this), isAdmin)
                 || somethingChanged;
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
-
             // When on restricted users, disable all extra categories (but only the settings ones).
             final List<DashboardCategory> categories = mDashboardFeatureProvider.getAllCategories();
             synchronized (categories) {

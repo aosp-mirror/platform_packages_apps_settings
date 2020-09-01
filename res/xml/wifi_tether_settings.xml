@@ -18,10 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="wifi_tether_settings_screen"
-    android:title="@string/wifi_hotspot_checkbox_text"
-    settings:searchable="false"
-    settings:initialExpandedChildrenCount="3">
+    android:title="@string/wifi_hotspot_checkbox_text">
 
     <com.android.settings.wifi.tether.WifiTetherSsidPreference
         android:key="wifi_tether_network_name"
@@ -40,12 +37,12 @@
         android:persistent="false"
         android:title="@string/wifi_hotspot_password_title"/>
 
+    <ListPreference
+        android:key="wifi_tether_network_ap_band"
+        android:title="@string/wifi_hotspot_ap_band_title"/>
+
     <SwitchPreference
         android:key="wifi_tether_auto_turn_off"
         android:title="@string/wifi_hotspot_auto_off_title"
         android:summary="@string/wifi_hotspot_auto_off_summary"/>
-
-    <ListPreference
-        android:key="wifi_tether_network_ap_band"
-        android:title="@string/wifi_hotspot_ap_band_title"/>
 </PreferenceScreen>

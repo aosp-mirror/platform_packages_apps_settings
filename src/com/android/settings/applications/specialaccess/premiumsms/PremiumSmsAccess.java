@@ -21,7 +21,7 @@ import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
+import android.telephony.SmsManager;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -31,14 +31,12 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.applications.AppStateSmsPremBridge;
 import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -49,7 +47,6 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable
 public class PremiumSmsAccess extends EmptyTextSettings
@@ -113,20 +110,20 @@ public class PremiumSmsAccess extends EmptyTextSettings
 
     @VisibleForTesting
     void logSpecialPermissionChange(int smsState, String packageName) {
-        int category = SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN;
+        int category = SmsManager.PREMIUM_SMS_CONSENT_UNKNOWN;
         switch (smsState) {
-            case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER:
+            case SmsManager.PREMIUM_SMS_CONSENT_ASK_USER:
                 category = SettingsEnums.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ASK;
                 break;
-            case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW:
+            case SmsManager.PREMIUM_SMS_CONSENT_NEVER_ALLOW:
                 category = SettingsEnums.APP_SPECIAL_PERMISSION_PREMIUM_SMS_DENY;
                 break;
-            case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW:
+            case SmsManager.PREMIUM_SMS_CONSENT_ALWAYS_ALLOW:
                 category = SettingsEnums.
                         APP_SPECIAL_PERMISSION_PREMIUM_SMS_ALWAYS_ALLOW;
                 break;
         }
-        if (category != SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN) {
+        if (category != SmsManager.PREMIUM_SMS_CONSENT_UNKNOWN) {
             // TODO(117860032): Category is wrong. It should be defined in SettingsEnums.
             final MetricsFeatureProvider metricsFeatureProvider =
                     FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
@@ -223,9 +220,9 @@ public class PremiumSmsAccess extends EmptyTextSettings
             }
             setEntries(R.array.security_settings_premium_sms_values);
             setEntryValues(new CharSequence[]{
-                    String.valueOf(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER),
-                    String.valueOf(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW),
-                    String.valueOf(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW),
+                    String.valueOf(SmsManager.PREMIUM_SMS_CONSENT_ASK_USER),
+                    String.valueOf(SmsManager.PREMIUM_SMS_CONSENT_NEVER_ALLOW),
+                    String.valueOf(SmsManager.PREMIUM_SMS_CONSENT_ALWAYS_ALLOW),
             });
             setValue(String.valueOf(getCurrentValue()));
             setSummary("%s");
@@ -234,7 +231,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
         private int getCurrentValue() {
             return mAppEntry.extraInfo instanceof SmsState
                     ? ((SmsState) mAppEntry.extraInfo).smsState
-                    : SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN;
+                    : SmsManager.PREMIUM_SMS_CONSENT_UNKNOWN;
         }
 
         @Override
@@ -252,17 +249,6 @@ public class PremiumSmsAccess extends EmptyTextSettings
         }
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.premium_sms_settings;
-                    result.add(sir);
-                    return result;
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.premium_sms_settings);
 }

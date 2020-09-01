@@ -16,11 +16,11 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-
-import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -28,12 +28,9 @@ import android.hardware.face.FaceManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 
-import androidx.slice.Slice;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
-
-import com.android.settings.R;
-import com.android.settings.Utils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,8 +57,9 @@ public class FaceSetupSliceTest {
     public void getSlice_noFaceManager_shouldReturnNull() {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(false);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
+        final SliceMetadata metadata = SliceMetadata.from(mContext, setupSlice.getSlice());
 
-        assertThat(setupSlice.getSlice()).isNull();
+        assertThat(metadata.isErrorSlice()).isTrue();
     }
 
     @Test
@@ -74,7 +72,9 @@ public class FaceSetupSliceTest {
                 0);
         final FaceSetupSlice setupSlice = new FaceSetupSlice(mContext);
 
-        assertThat(setupSlice.getSlice()).isNull();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, setupSlice.getSlice());
+
+        assertThat(metadata.isErrorSlice()).isTrue();
     }
 
     @Test

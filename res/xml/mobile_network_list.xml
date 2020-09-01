@@ -17,7 +17,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="mobile_network_list_screen"
     android:title="@string/network_settings_title">
 
     <com.android.settingslib.RestrictedPreference
@@ -25,6 +24,7 @@
         settings:isPreferenceVisible="false"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true"
+        settings:searchable="false"
         android:title="@string/mobile_network_list_add_more"
         android:icon="@drawable/ic_menu_add_activated_tint"
         android:order="100" >

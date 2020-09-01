@@ -54,7 +54,7 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.apppreference.AppPreference;
 
@@ -491,17 +491,6 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         }
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    List<SearchIndexableResource> indexables = new ArrayList<>();
-                    SearchIndexableResource indexable = new SearchIndexableResource(context);
-                    indexable.xmlResId = R.xml.print_settings;
-                    indexables.add(indexable);
-                    return indexables;
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.print_settings);
 }

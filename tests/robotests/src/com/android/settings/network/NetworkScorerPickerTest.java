@@ -34,7 +34,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.widget.RadioButtonPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import com.google.android.collect.Lists;
 

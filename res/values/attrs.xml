@@ -56,8 +56,6 @@
 
     <attr name="cardPreferenceStyle" format="reference" />
 
-    <attr name="footerPreferenceStyle" format="reference" />
-
     <declare-styleable name="FixedLineSummaryPreference">
         <attr name="summaryLineCount" format="integer" />
     </declare-styleable>
@@ -70,10 +68,10 @@
         <attr name="searchable" format="boolean" />
         <!-- Classname of a PreferenceController corresponding to the preference -->
         <attr name="controller" format="string" />
-        <!-- {@code true} when the controller declared represents a slice from {@link android.app.SettingsSliceContract} -->
-        <attr name="platform_slice" format="boolean" />
-        <!-- customized subtitle if it's an unavailable slice -->
+        <!-- Customized subtitle if it's an unavailable slice -->
         <attr name="unavailableSliceSubtitle" format="string" />
+        <!-- Whether or not the preference is for work profile, by default it's false. -->
+        <attr name="forWork" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="PreferenceScreen">
@@ -116,13 +114,10 @@
     <attr name="confirmDeviceCredentialsSideMargin" format="dimension" />
     <attr name="confirmDeviceCredentialsTopMargin" format="dimension" />
 
-    <declare-styleable name="WorkPreference">
-        <attr name="forWork" format="boolean" />
-    </declare-styleable>
-
     <declare-styleable name="VideoPreference">
         <attr name="animation" format="reference" />
         <attr name="preview" format="reference" />
+        <attr name="vectorAnimation" format="reference" />
     </declare-styleable>
 
     <!-- For AspectRatioFrameLayout -->
@@ -162,6 +157,12 @@
     <declare-styleable name="TwoStateButtonPreference">
         <attr name="textOn" format="reference" />
         <attr name="textOff" format="reference" />
+    </declare-styleable>
+
+    <!-- For LabeledSeekBarPreference -->
+    <declare-styleable name="LabeledSeekBarPreference">
+        <attr name="textStart" format="reference" />
+        <attr name="textEnd" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="TintDrawable">

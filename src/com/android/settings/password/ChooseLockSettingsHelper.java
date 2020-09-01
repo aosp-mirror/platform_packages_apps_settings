@@ -33,6 +33,7 @@ import androidx.fragment.app.Fragment;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -48,6 +49,17 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_FOR_FACE = "for_face";
     public static final String EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT = "for_cred_req_boot";
     public static final String EXTRA_KEY_FOREGROUND_ONLY = "foreground_only";
+
+    /**
+     * When EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL and EXTRA_KEY_UNIFICATION_PROFILE_ID are
+     * provided to ChooseLockGeneric as fragment arguments {@link SubSettingLauncher#setArguments},
+     * at the end of the password change flow, the supplied profile user
+     * (EXTRA_KEY_UNIFICATION_PROFILE_ID) will be unified to its parent. The current profile
+     * password is supplied by EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL.
+     */
+    public static final String EXTRA_KEY_UNIFICATION_PROFILE_ID = "unification_profile_id";
+    public static final String EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL =
+            "unification_profile_credential";
 
     /**
      * Intent extra for passing the requested min password complexity to later steps in the set new

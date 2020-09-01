@@ -33,7 +33,9 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
-    private static final boolean DBG = false;
+    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
+
+    private static final String PREF_KEY = "available_media_bt";
 
     private final AudioManager mAudioManager;
 
@@ -97,9 +99,14 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         return device.setActive();
     }
-}
 
+    @Override
+    protected String getPreferenceKey() {
+        return PREF_KEY;
+    }
+}

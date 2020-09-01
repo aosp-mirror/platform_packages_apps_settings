@@ -19,16 +19,28 @@ package com.android.settings.network.telephony;
 import static android.telephony.SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
 
 import android.content.Context;
+import android.telephony.CellIdentity;
+import android.telephony.CellIdentityGsm;
+import android.telephony.CellIdentityLte;
+import android.telephony.CellIdentityNr;
+import android.telephony.CellIdentityTdscdma;
+import android.telephony.CellIdentityWcdma;
 import android.telephony.CellInfo;
+import android.telephony.CellInfoCdma;
+import android.telephony.CellInfoGsm;
+import android.telephony.CellInfoLte;
+import android.telephony.CellInfoNr;
+import android.telephony.CellInfoTdscdma;
+import android.telephony.CellInfoWcdma;
 import android.telephony.CellSignalStrength;
 import android.util.Log;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A Preference represents a network operator in the NetworkSelectSetting fragment.
@@ -41,38 +53,76 @@ public class NetworkOperatorPreference extends Preference {
     private static final int LEVEL_NONE = -1;
 
     private CellInfo mCellInfo;
+    private CellIdentity mCellId;
     private List<String> mForbiddenPlmns;
     private int mLevel = LEVEL_NONE;
     private boolean mShow4GForLTE;
     private boolean mUseNewApi;
 
-    public NetworkOperatorPreference(
-            CellInfo cellinfo, Context context, List<String> forbiddenPlmns, boolean show4GForLTE) {
+    public NetworkOperatorPreference(Context context, CellInfo cellinfo,
+            List<String> forbiddenPlmns, boolean show4GForLTE) {
+        this(context, forbiddenPlmns, show4GForLTE);
+        updateCell(cellinfo);
+    }
+
+    public NetworkOperatorPreference(Context context, CellIdentity connectedCellId,
+            List<String> forbiddenPlmns, boolean show4GForLTE) {
+        this(context, forbiddenPlmns, show4GForLTE);
+        updateCell(null, connectedCellId);
+    }
+
+    private NetworkOperatorPreference(
+            Context context, List<String> forbiddenPlmns, boolean show4GForLTE) {
         super(context);
-        mCellInfo = cellinfo;
         mForbiddenPlmns = forbiddenPlmns;
         mShow4GForLTE = show4GForLTE;
         mUseNewApi = context.getResources().getBoolean(
                 com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
+    }
+
+    /**
+     * Change cell information
+     */
+    public void updateCell(CellInfo cellinfo) {
+        updateCell(cellinfo, CellInfoUtil.getCellIdentity(cellinfo));
+    }
+
+    private void updateCell(CellInfo cellinfo, CellIdentity cellId) {
+        mCellInfo = cellinfo;
+        mCellId = cellId;
         refresh();
     }
 
-    public CellInfo getCellInfo() {
-        return mCellInfo;
+    /**
+     * Compare cell within preference
+     */
+    public boolean isSameCell(CellInfo cellinfo) {
+        if (cellinfo == null) {
+            return false;
+        }
+        return mCellId.equals(CellInfoUtil.getCellIdentity(cellinfo));
     }
 
     /**
      * Refresh the NetworkOperatorPreference by updating the title and the icon.
      */
     public void refresh() {
-        if (DBG) Log.d(TAG, "refresh the network: " + CellInfoUtil.getNetworkTitle(mCellInfo));
-        String networkTitle = CellInfoUtil.getNetworkTitle(mCellInfo);
-        if (CellInfoUtil.isForbidden(mCellInfo, mForbiddenPlmns)) {
-            networkTitle += " " + getContext().getResources().getString(R.string.forbidden_network);
-        }
-        setTitle(networkTitle);
+        String networkTitle = getOperatorName();
 
-        final CellSignalStrength signalStrength = mCellInfo.getCellSignalStrength();
+        if ((mForbiddenPlmns != null) && mForbiddenPlmns.contains(getOperatorNumeric())) {
+            if (DBG) Log.d(TAG, "refresh forbidden network: " + networkTitle);
+            networkTitle += " "
+                    + getContext().getResources().getString(R.string.forbidden_network);
+        } else {
+            if (DBG) Log.d(TAG, "refresh the network: " + networkTitle);
+        }
+        setTitle(Objects.toString(networkTitle, ""));
+
+        if (mCellInfo == null) {
+            return;
+        }
+
+        final CellSignalStrength signalStrength = getCellSignalStrength(mCellInfo);
         final int level = signalStrength != null ? signalStrength.getLevel() : LEVEL_NONE;
         if (DBG) Log.d(TAG, "refresh level: " + String.valueOf(level));
         if (mLevel != level) {
@@ -88,29 +138,90 @@ public class NetworkOperatorPreference extends Preference {
         updateIcon(level);
     }
 
-    private int getIconIdForCell(CellInfo ci) {
-        final int type = ci.getCellIdentity().getType();
-        switch (type) {
-            case CellInfo.TYPE_GSM:
-                return R.drawable.signal_strength_g;
-            case CellInfo.TYPE_WCDMA: // fall through
-            case CellInfo.TYPE_TDSCDMA:
-                return R.drawable.signal_strength_3g;
-            case CellInfo.TYPE_LTE:
-                return mShow4GForLTE
-                        ? R.drawable.ic_signal_strength_4g : R.drawable.signal_strength_lte;
-            case CellInfo.TYPE_CDMA:
-                return R.drawable.signal_strength_1x;
-            default:
-                return MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
+    /**
+     * Operator numeric of this cell
+     */
+    public String getOperatorNumeric() {
+        final CellIdentity cellId = mCellId;
+        if (cellId == null) {
+            return null;
         }
+        if (cellId instanceof CellIdentityGsm) {
+            return ((CellIdentityGsm) cellId).getMobileNetworkOperator();
+        }
+        if (cellId instanceof CellIdentityWcdma) {
+            return ((CellIdentityWcdma) cellId).getMobileNetworkOperator();
+        }
+        if (cellId instanceof CellIdentityTdscdma) {
+            return ((CellIdentityTdscdma) cellId).getMobileNetworkOperator();
+        }
+        if (cellId instanceof CellIdentityLte) {
+            return ((CellIdentityLte) cellId).getMobileNetworkOperator();
+        }
+        if (cellId instanceof CellIdentityNr) {
+            final String mcc = ((CellIdentityNr) cellId).getMccString();
+            if (mcc == null) {
+                return null;
+            }
+            return mcc.concat(((CellIdentityNr) cellId).getMncString());
+        }
+        return null;
+    }
+
+    /**
+     * Operator name of this cell
+     */
+    public String getOperatorName() {
+        return CellInfoUtil.getNetworkTitle(mCellId, getOperatorNumeric());
+    }
+
+    private int getIconIdForCell(CellInfo ci) {
+        if (ci instanceof CellInfoGsm) {
+            return R.drawable.signal_strength_g;
+        }
+        if (ci instanceof CellInfoCdma) {
+            return R.drawable.signal_strength_1x;
+        }
+        if ((ci instanceof CellInfoWcdma) || (ci instanceof CellInfoTdscdma)) {
+            return R.drawable.signal_strength_3g;
+        }
+        if (ci instanceof CellInfoLte) {
+            return mShow4GForLTE
+                    ? R.drawable.ic_signal_strength_4g : R.drawable.signal_strength_lte;
+        }
+        if (ci instanceof CellInfoNr) {
+            return R.drawable.signal_strength_5g;
+        }
+        return MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
+    }
+
+    private CellSignalStrength getCellSignalStrength(CellInfo ci) {
+        if (ci instanceof CellInfoGsm) {
+            return ((CellInfoGsm) ci).getCellSignalStrength();
+        }
+        if (ci instanceof CellInfoCdma) {
+            return ((CellInfoCdma) ci).getCellSignalStrength();
+        }
+        if (ci instanceof CellInfoWcdma) {
+            return ((CellInfoWcdma) ci).getCellSignalStrength();
+        }
+        if (ci instanceof CellInfoTdscdma) {
+            return ((CellInfoTdscdma) ci).getCellSignalStrength();
+        }
+        if (ci instanceof CellInfoLte) {
+            return ((CellInfoLte) ci).getCellSignalStrength();
+        }
+        if (ci instanceof CellInfoNr) {
+            return ((CellInfoNr) ci).getCellSignalStrength();
+        }
+        return null;
     }
 
     private void updateIcon(int level) {
         if (!mUseNewApi || level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
             return;
         }
-        Context context = getContext();
+        final Context context = getContext();
         setIcon(MobileNetworkUtils.getSignalStrengthIcon(context, level, NUM_SIGNAL_STRENGTH_BINS,
                 getIconIdForCell(mCellInfo), false));
     }

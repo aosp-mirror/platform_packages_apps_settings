@@ -18,6 +18,7 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Switch;
@@ -26,16 +27,17 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.TwoTargetPreference;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * A custom preference that provides inline switch toggle. It has a mandatory field for title, and
- * optional fields for icon and sub-text.
+ * optional fields for icon and sub-text. And it can be restricted by admin state.
  */
-public class MasterSwitchPreference extends TwoTargetPreference {
+public class MasterSwitchPreference extends RestrictedPreference {
 
     private Switch mSwitch;
     private boolean mChecked;
+    private boolean mCheckedSet;
     private boolean mEnableSwitch = true;
 
     public MasterSwitchPreference(Context context, AttributeSet attrs,
@@ -57,15 +59,16 @@ public class MasterSwitchPreference extends TwoTargetPreference {
 
     @Override
     protected int getSecondTargetResId() {
-        return R.layout.preference_widget_master_switch;
+        return R.layout.restricted_preference_widget_master_switch;
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        final View widgetView = holder.findViewById(android.R.id.widget_frame);
-        if (widgetView != null) {
-            widgetView.setOnClickListener(new OnClickListener() {
+        final View switchWidget = holder.findViewById(R.id.switchWidget);
+        if (switchWidget != null) {
+            switchWidget.setVisibility(isDisabledByAdmin() ? View.GONE : View.VISIBLE);
+            switchWidget.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mSwitch != null && !mSwitch.isEnabled()) {
@@ -78,6 +81,11 @@ public class MasterSwitchPreference extends TwoTargetPreference {
                         persistBoolean(mChecked);
                     }
                 }
+            });
+
+            // Consumes move events to ignore drag actions.
+            switchWidget.setOnTouchListener((v, event) -> {
+                return event.getActionMasked() == MotionEvent.ACTION_MOVE;
             });
         }
 
@@ -94,9 +102,14 @@ public class MasterSwitchPreference extends TwoTargetPreference {
     }
 
     public void setChecked(boolean checked) {
-        mChecked = checked;
-        if (mSwitch != null) {
-            mSwitch.setChecked(checked);
+        // Always set checked the first time; don't assume the field's default of false.
+        final boolean changed = mChecked != checked;
+        if (changed || !mCheckedSet) {
+            mChecked = checked;
+            mCheckedSet = true;
+            if (mSwitch != null) {
+                mSwitch.setChecked(checked);
+            }
         }
     }
 
@@ -112,10 +125,16 @@ public class MasterSwitchPreference extends TwoTargetPreference {
      * Otherwise, keep it enabled.
      */
     public void setDisabledByAdmin(EnforcedAdmin admin) {
+        super.setDisabledByAdmin(admin);
         setSwitchEnabled(admin == null);
     }
 
     public Switch getSwitch() {
         return mSwitch;
+    }
+
+    @Override
+    protected boolean shouldHideSecondTarget() {
+        return getSecondTargetResId() == 0;
     }
 }

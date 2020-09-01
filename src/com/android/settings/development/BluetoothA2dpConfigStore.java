@@ -54,7 +54,7 @@ public class BluetoothA2dpConfigStore {
         mChannelMode = channelMode;
     }
 
-    public void setCodecSpecific1Value(int codecSpecific1Value) {
+    public void setCodecSpecific1Value(long codecSpecific1Value) {
         mCodecSpecific1Value = codecSpecific1Value;
     }
 

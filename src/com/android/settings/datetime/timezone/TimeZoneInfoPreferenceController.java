@@ -29,20 +29,19 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settingslib.widget.FooterPreference;
+import com.android.settings.core.BasePreferenceController;
 
 import java.util.Date;
 
-public class TimeZoneInfoPreferenceController extends BaseTimeZonePreferenceController {
+public class TimeZoneInfoPreferenceController extends BasePreferenceController {
 
-    private static final String PREFERENCE_KEY = FooterPreference.KEY_FOOTER;
     @VisibleForTesting
     Date mDate;
     private TimeZoneInfo mTimeZoneInfo;
     private final DateFormat mDateFormat;
 
-    public TimeZoneInfoPreferenceController(Context context) {
-        super(context, PREFERENCE_KEY);
+    public TimeZoneInfoPreferenceController(Context context, String key) {
+        super(context, key);
         mDateFormat = DateFormat.getDateInstance(SimpleDateFormat.LONG);
         mDateFormat.setContext(DisplayContext.CAPITALIZATION_NONE);
         mDate = new Date();
@@ -50,22 +49,16 @@ public class TimeZoneInfoPreferenceController extends BaseTimeZonePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mTimeZoneInfo != null ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public void updateState(Preference preference) {
-        CharSequence formattedTimeZone = mTimeZoneInfo == null ? "" : formatInfo(mTimeZoneInfo);
-        preference.setTitle(formattedTimeZone);
-        preference.setVisible(mTimeZoneInfo != null);
+    public CharSequence getSummary() {
+        return mTimeZoneInfo == null ? "" : formatInfo(mTimeZoneInfo);
     }
 
     public void setTimeZoneInfo(TimeZoneInfo timeZoneInfo) {
         mTimeZoneInfo = timeZoneInfo;
-    }
-
-    public TimeZoneInfo getTimeZoneInfo() {
-        return mTimeZoneInfo;
     }
 
     private CharSequence formatOffsetAndName(TimeZoneInfo item) {
@@ -130,5 +123,4 @@ public class TimeZoneInfoPreferenceController extends BaseTimeZonePreferenceCont
         } while (transition != null);
         return transition;
     }
-
 }

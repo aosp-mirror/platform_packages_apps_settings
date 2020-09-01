@@ -123,13 +123,13 @@ public class LockscreenDashboardFragmentTest {
     }
 
     @Test
-    public void isPageSearchable_notLocked_shouldNotBeSearchable() {
+    public void isPageSearchable_notLocked_shouldBeSearchable() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
         when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(true);
 
         assertThat(LockscreenDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext))
-                .contains("security_lockscreen_settings_screen");
+                .doesNotContain("security_lockscreen_settings_screen");
     }
 
     public static class TestFragment extends LockscreenDashboardFragment {

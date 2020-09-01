@@ -46,4 +46,9 @@
         android:key="restricted_app"
         android:title="@string/restricted_app_title"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="smart_battery_detail_footer"
+        android:title="@string/smart_battery_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

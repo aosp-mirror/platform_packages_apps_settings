@@ -19,14 +19,20 @@ package com.android.settings.biometrics.face;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import androidx.preference.SwitchPreference;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +48,10 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
 
     @Mock
     private FaceManager mFaceManager;
-    private SwitchPreference mPreference;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private RestrictedSwitchPreference mPreference;
     @Mock
     private UserManager mUserManager;
 
@@ -52,12 +61,15 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mPreference = new SwitchPreference(mContext);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(eq(Context.FACE_SERVICE))).thenReturn(mFaceManager);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
-        mController = new FaceSettingsLockscreenBypassPreferenceController(mContext, "test_key");
+        mController = spy(new FaceSettingsLockscreenBypassPreferenceController(mContext,
+                "test_key"));
         ReflectionHelpers.setField(mController, "mFaceManager", mFaceManager);
         ReflectionHelpers.setField(mController, "mUserManager", mUserManager);
+
     }
 
     @Test
@@ -81,9 +93,21 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
         boolean state = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD, defaultValue ? 1 : 0) != 0;
 
+        assertThat(mController.isChecked()).isFalse();
         assertThat(mController.onPreferenceChange(mPreference, !state)).isTrue();
         boolean newState = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD, 0) != 0;
         assertThat(newState).isEqualTo(!state);
+    }
+
+    @Test
+    public void preferenceDisabled_byAdmin() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        EnforcedAdmin admin = new EnforcedAdmin();
+        doReturn(admin).when(mController).getRestrictingAdmin();
+        mController.updateState(mPreference);
+        verify(mPreference).setDisabledByAdmin(admin);
     }
 }

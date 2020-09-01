@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,7 @@ import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
+import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
@@ -89,8 +92,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private TextView mHeaderTextView;
         private TextView mDetailsTextView;
-        private View mLeftSpacerLandscape;
-        private View mRightSpacerLandscape;
 
         // caller-supplied text for various prompts
         private CharSequence mHeaderText;
@@ -98,6 +99,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
+
+        private boolean mIsManagedProfile;
 
         // required constructor for fragments
         public ConfirmLockPatternFragment() {
@@ -118,8 +121,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mDetailsTextView = (TextView) view.findViewById(R.id.sud_layout_description);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
-            mLeftSpacerLandscape = view.findViewById(R.id.leftSpacer);
-            mRightSpacerLandscape = view.findViewById(R.id.rightSpacer);
+
+            mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
 
             // make it so unhandled touch events within the unlock screen go to the
             // lock pattern view.
@@ -133,6 +136,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         ConfirmDeviceCredentialBaseFragment.HEADER_TEXT);
                 mDetailsText = intent.getCharSequenceExtra(
                         ConfirmDeviceCredentialBaseFragment.DETAILS_TEXT);
+            }
+            if (TextUtils.isEmpty(mHeaderText) && mIsManagedProfile) {
+                mHeaderText = mDevicePolicyManager.getOrganizationNameForUser(mUserId);
             }
 
             mLockPatternView.setTactileFeedbackEnabled(
@@ -180,7 +186,16 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 getFragmentManager().beginTransaction().add(mCredentialCheckResultTracker,
                         FRAGMENT_TAG_CHECK_LOCK_RESULT).commit();
             }
+
             return view;
+        }
+
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            if (mForgotButton != null) {
+                mForgotButton.setText(R.string.lockpassword_forgot_pattern);
+            }
         }
 
         @Override
@@ -229,6 +244,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             super.prepareEnterAnimation();
             mHeaderTextView.setAlpha(0f);
             mCancelButton.setAlpha(0f);
+            if (mForgotButton != null) {
+                mForgotButton.setAlpha(0f);
+            }
             mLockPatternView.setAlpha(0f);
             mDetailsTextView.setAlpha(0f);
         }
@@ -238,7 +256,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 return R.string.lockpassword_confirm_your_pattern_details_frp;
             }
             final boolean isStrongAuthRequired = isStrongAuthRequired();
-            if (UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId)) {
+            if (mIsManagedProfile) {
                 return isStrongAuthRequired
                         ? R.string.lockpassword_strong_auth_required_work_pattern
                         : R.string.lockpassword_confirm_your_pattern_generic_profile;
@@ -251,10 +269,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private Object[][] getActiveViews() {
             ArrayList<ArrayList<Object>> result = new ArrayList<>();
-            result.add(new ArrayList<Object>(Collections.singletonList(mHeaderTextView)));
-            result.add(new ArrayList<Object>(Collections.singletonList(mDetailsTextView)));
+            result.add(new ArrayList<>(Collections.singletonList(mHeaderTextView)));
+            result.add(new ArrayList<>(Collections.singletonList(mDetailsTextView)));
             if (mCancelButton.getVisibility() == View.VISIBLE) {
-                result.add(new ArrayList<Object>(Collections.singletonList(mCancelButton)));
+                result.add(new ArrayList<>(Collections.singletonList(mCancelButton)));
+            }
+            if (mForgotButton != null) {
+                result.add(new ArrayList<>(Collections.singletonList(mForgotButton)));
             }
             LockPatternView.CellState[][] cellStates = mLockPatternView.getCellStates();
             for (int i = 0; i < cellStates.length; i++) {
@@ -324,7 +345,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultHeader() {
-            return mFrp ? R.string.lockpassword_confirm_your_pattern_header_frp
+            if (mFrp) return R.string.lockpassword_confirm_your_pattern_header_frp;
+            return mIsManagedProfile
+                    ? R.string.lockpassword_confirm_your_work_pattern_header
                     : R.string.lockpassword_confirm_your_pattern_header;
         }
 
@@ -401,14 +424,16 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
                 final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+                final LockscreenCredential credential = LockscreenCredential.createPattern(pattern);
+                //TODO: how to sanitize this?
                 Intent intent = new Intent();
                 if (verifyChallenge) {
                     if (isInternalActivity()) {
-                        startVerifyPattern(pattern, intent);
+                        startVerifyPattern(credential, intent);
                         return;
                     }
                 } else {
-                    startCheckPattern(pattern, intent);
+                    startCheckPattern(credential, intent);
                     return;
                 }
 
@@ -419,7 +444,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 return getActivity() instanceof ConfirmLockPattern.InternalActivity;
             }
 
-            private void startVerifyPattern(final List<LockPatternView.Cell> pattern,
+            private void startVerifyPattern(final LockscreenCredential pattern,
                     final Intent intent) {
                 final int localEffectiveUserId = mEffectiveUserId;
                 final int localUserId = mUserId;
@@ -444,15 +469,15 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         }
                     };
                 mPendingLockCheck = (localEffectiveUserId == localUserId)
-                        ? LockPatternChecker.verifyPattern(
+                        ? LockPatternChecker.verifyCredential(
                                 mLockPatternUtils, pattern, challenge, localUserId,
                                 onVerifyCallback)
                         : LockPatternChecker.verifyTiedProfileChallenge(
-                                mLockPatternUtils, LockPatternUtils.patternToByteArray(pattern),
-                                true, challenge, localUserId, onVerifyCallback);
+                                mLockPatternUtils, pattern,
+                                challenge, localUserId, onVerifyCallback);
             }
 
-            private void startCheckPattern(final List<LockPatternView.Cell> pattern,
+            private void startCheckPattern(final LockscreenCredential pattern,
                     final Intent intent) {
                 if (pattern.size() < LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {
                     // Pattern size is less than the minimum, do not count it as an fail attempt.
@@ -461,7 +486,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 }
 
                 final int localEffectiveUserId = mEffectiveUserId;
-                mPendingLockCheck = LockPatternChecker.checkPattern(
+                mPendingLockCheck = LockPatternChecker.checkCredential(
                         mLockPatternUtils,
                         pattern,
                         localEffectiveUserId,
@@ -473,7 +498,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
                                                     StorageManager.CRYPT_TYPE_PATTERN);
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
-                                                    LockPatternUtils.patternToByteArray(pattern));
+                                                    pattern);
                                 }
                                 mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
                                         localEffectiveUserId);
@@ -488,9 +513,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (matched) {
                 if (newResult) {
                     ConfirmDeviceCredentialUtils.reportSuccessfulAttempt(mLockPatternUtils,
-                            mUserManager, mEffectiveUserId);
+                            mUserManager, mDevicePolicyManager, mEffectiveUserId,
+                            /* isStrongAuth */ true);
                 }
-                mBiometricManager.onConfirmDeviceCredentialSuccess();
                 startDisappearAnimation(intent);
                 ConfirmDeviceCredentialUtils.checkForPendingIntent(getActivity());
             } else {

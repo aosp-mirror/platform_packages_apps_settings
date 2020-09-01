@@ -35,6 +35,7 @@ import java.util.List;
 public class ShadowInputMethodManagerWithMethodList extends ShadowInputMethodManager {
 
     private List<InputMethodInfo> mInputMethodInfos = Collections.emptyList();
+    private List<InputMethodInfo> mEnabledInputMethodInfos = Collections.emptyList();
 
     @Implementation
     public static InputMethodManager getInstance() {
@@ -46,9 +47,24 @@ public class ShadowInputMethodManagerWithMethodList extends ShadowInputMethodMan
         return mInputMethodInfos;
     }
 
+    @Implementation
+    protected List<InputMethodInfo> getEnabledInputMethodList() {
+        return mEnabledInputMethodInfos;
+    }
+
+    @Implementation
+    protected List<InputMethodInfo> getEnabledInputMethodSubtypeList(InputMethodInfo imi,
+            boolean allowsImplicitlySelectedSubtypes) {
+        return Collections.emptyList();
+    }
+
     // Non-Android setter.
     public void setInputMethodList(List<InputMethodInfo> inputMethodInfos) {
         mInputMethodInfos = inputMethodInfos;
+    }
+
+    public void setEnabledInputMethodList(List<InputMethodInfo> inputMethodInfos) {
+        mEnabledInputMethodInfos = inputMethodInfos;
     }
 
     public static ShadowInputMethodManagerWithMethodList getShadow() {

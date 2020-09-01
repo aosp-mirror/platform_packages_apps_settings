@@ -52,8 +52,6 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
         mListener = listener;
         mUserCapabilities = UserCapabilities.create(context);
         mSwitchBar.setChecked(mUserCapabilities.mUserSwitcherEnabled);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.USER_SWITCHER_ENABLED, mSwitchBar.isChecked() ? 1 : 0);
 
         if (mUserCapabilities.mDisallowSwitchUser) {
             mSwitchBar.setDisabledByAdmin(RestrictedLockUtilsInternal

@@ -16,6 +16,10 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.core.instrumentation.SettingsStatsLog.AUTO_REVOKED_APP_INTERACTION;
+import static com.android.settings.core.instrumentation.SettingsStatsLog.AUTO_REVOKED_APP_INTERACTION__ACTION__OPEN_IN_SETTINGS;
+import static com.android.settings.core.instrumentation.SettingsStatsLog.AUTO_REVOKED_APP_INTERACTION__ACTION__REMOVE_IN_SETTINGS;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
@@ -25,8 +29,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.om.OverlayManager;
 import android.content.om.OverlayInfo;
+import android.content.om.OverlayManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -52,6 +56,7 @@ import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAd
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -80,6 +85,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         PreferenceControllerMixin, LifecycleObserver, OnResume, OnDestroy,
         ApplicationsState.Callbacks {
     public static final String APP_CHG = "chg";
+    public static final String KEY_REMOVE_TASK_WHEN_FINISHING = "remove_task_when_finishing";
 
     private static final String TAG = "AppButtonsPrefCtl";
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
@@ -115,11 +121,14 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private Intent mAppLaunchIntent;
     private ApplicationsState.Session mSession;
     private RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
+    private PreferenceScreen mScreen;
 
+    private long mSessionId;
     private boolean mUpdatedSysApp = false;
     private boolean mListeningToPackageRemove = false;
     private boolean mFinishing = false;
     private boolean mAppsControlDisallowedBySystem;
+    private boolean mAccessedFromAutoRevoke;
 
     public AppButtonsPreferenceController(SettingsActivity activity,
             InstrumentedPreferenceFragment fragment,
@@ -147,6 +156,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         mRequestUninstall = requestUninstall;
         mRequestRemoveDeviceAdmin = requestRemoveDeviceAdmin;
         mAppLaunchIntent = mPm.getLaunchIntentForPackage(mPackageName);
+        mSessionId = activity.getIntent().getLongExtra(Intent.ACTION_AUTO_REVOKE_PERMISSIONS, 0);
+        mAccessedFromAutoRevoke = mSessionId != 0;
 
         if (packageName != null) {
             mAppEntry = mState.getEntry(packageName, mUserId);
@@ -166,19 +177,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mScreen = screen;
         if (isAvailable()) {
-            mButtonsPref = ((ActionButtonsPreference) screen.findPreference(
-                    KEY_ACTION_BUTTONS))
-                    .setButton1Text(R.string.launch_instant_app)
-                    .setButton1Icon(R.drawable.ic_settings_open)
-                    .setButton1OnClickListener(v -> launchApplication())
-                    .setButton2Text(R.string.uninstall_text)
-                    .setButton2Icon(R.drawable.ic_settings_delete)
-                    .setButton2OnClickListener(new UninstallAndDisableButtonListener())
-                    .setButton3Text(R.string.force_stop)
-                    .setButton3Icon(R.drawable.ic_settings_force_stop)
-                    .setButton3OnClickListener(new ForceStopButtonListener())
-                    .setButton3Enabled(false);
+            initButtonPreference();
         }
     }
 
@@ -196,7 +197,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                     mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
             if (!refreshUi()) {
-                setIntentAndFinish(true);
+                setIntentAndFinish(true, false);
             }
         }
     }
@@ -210,6 +211,13 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
 
         @Override
         public void onClick(View v) {
+            if (mAccessedFromAutoRevoke) {
+
+                Log.i(TAG, "sessionId: " + mSessionId + " uninstalling " + mPackageName
+                        + " with uid " + getUid() + ", reached from auto revoke");
+                SettingsStatsLog.write(AUTO_REVOKED_APP_INTERACTION, mSessionId, getUid(),
+                        mPackageName, AUTO_REVOKED_APP_INTERACTION__ACTION__REMOVE_IN_SETTINGS);
+            }
             final String packageName = mAppEntry.info.packageName;
             // Uninstall
             if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
@@ -278,9 +286,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 AsyncTask.execute(new DisableChangerRunnable(mPm, mAppEntry.info.packageName,
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER));
             }
-            refreshAndFinishIfPossible();
+            refreshAndFinishIfPossible(true);
         } else if (requestCode == mRequestRemoveDeviceAdmin) {
-            refreshAndFinishIfPossible();
+            refreshAndFinishIfPossible(false);
         }
     }
 
@@ -392,11 +400,19 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             enabled = false;
         }
 
-        // We don't allow uninstalling DO/PO on *any* users, because if it's a system app,
+        // We don't allow uninstalling DO/PO on *any* users if it's a system app, because
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
-        if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
-            enabled = false;
+        if (isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
+            if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
+                enabled = false;
+            }
+        // We allow uninstalling if the calling user is not a DO/PO and if it's not a system app,
+        // because this will not have device-wide consequences.
+        } else {
+            if (Utils.isProfileOrDeviceOwner(mDpm, mPackageInfo.packageName, mUserId)) {
+                enabled = false;
+            }
         }
 
         // Don't allow uninstalling the device provisioning package.
@@ -466,19 +482,20 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     /**
      * Finish this fragment and return data if possible
      */
-    private void setIntentAndFinish(boolean appChanged) {
+    private void setIntentAndFinish(boolean appChanged, boolean removeTaskWhenFinishing) {
         if (LOCAL_LOGV) {
             Log.i(TAG, "appChanged=" + appChanged);
         }
         Intent intent = new Intent();
         intent.putExtra(APP_CHG, appChanged);
+        intent.putExtra(KEY_REMOVE_TASK_WHEN_FINISHING, removeTaskWhenFinishing);
         mActivity.finishPreferencePanel(Activity.RESULT_OK, intent);
         mFinishing = true;
     }
 
-    private void refreshAndFinishIfPossible() {
+    private void refreshAndFinishIfPossible(boolean removeTaskWhenFinishing) {
         if (!refreshUi()) {
-            setIntentAndFinish(true);
+            setIntentAndFinish(true, removeTaskWhenFinishing);
         } else {
             startListeningToPackageRemove();
         }
@@ -653,11 +670,31 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             }
         }
 
+        // When the app was installed from instant state, buttons preferences could be null.
+        if (mButtonsPref == null) {
+            initButtonPreference();
+            mButtonsPref.setVisible(true);
+        }
         updateOpenButton();
         updateUninstallButton();
         updateForceStopButton();
 
         return true;
+    }
+
+    private void initButtonPreference() {
+        mButtonsPref = ((ActionButtonsPreference) mScreen.findPreference(
+                KEY_ACTION_BUTTONS))
+                .setButton1Text(R.string.launch_instant_app)
+                .setButton1Icon(R.drawable.ic_settings_open)
+                .setButton1OnClickListener(v -> launchApplication())
+                .setButton2Text(R.string.uninstall_text)
+                .setButton2Icon(R.drawable.ic_settings_delete)
+                .setButton2OnClickListener(new UninstallAndDisableButtonListener())
+                .setButton3Text(R.string.force_stop)
+                .setButton3Icon(R.drawable.ic_settings_force_stop)
+                .setButton3OnClickListener(new ForceStopButtonListener())
+                .setButton3Enabled(false);
     }
 
     private void startListeningToPackageRemove() {
@@ -680,8 +717,26 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
 
     private void launchApplication() {
         if (mAppLaunchIntent != null) {
+            if (mAccessedFromAutoRevoke) {
+
+                Log.i(TAG, "sessionId: " + mSessionId + " uninstalling " + mPackageName
+                        + " with uid " + getUid() + ", reached from auto revoke");
+                SettingsStatsLog.write(AUTO_REVOKED_APP_INTERACTION, mSessionId, getUid(),
+                        mPackageName, AUTO_REVOKED_APP_INTERACTION__ACTION__OPEN_IN_SETTINGS);
+            }
             mContext.startActivityAsUser(mAppLaunchIntent, new UserHandle(mUserId));
         }
+    }
+
+    private int getUid() {
+        int uid = -1;
+        if (mPackageInfo == null) {
+            retrieveAppEntry();
+        }
+        if (mPackageInfo != null) {
+            uid = mPackageInfo.applicationInfo.uid;
+        }
+        return uid;
     }
 
     private boolean isInstantApp() {
@@ -689,7 +744,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     }
 
     private boolean isSystemModule() {
-        return mAppEntry != null && AppUtils.isSystemModule(mContext, mAppEntry.info.packageName);
+        return mAppEntry != null
+                && (AppUtils.isSystemModule(mContext, mAppEntry.info.packageName)
+                || AppUtils.isMainlineModule(mPm, mAppEntry.info.packageName));
     }
 
     /**

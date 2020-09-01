@@ -22,10 +22,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings.Global;
 import android.text.format.Formatter;
 import android.view.Menu;
@@ -55,7 +53,6 @@ import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -68,19 +65,15 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     static final String TAG = "PowerUsageSummary";
 
-    private static final boolean DEBUG = false;
     private static final String KEY_BATTERY_HEADER = "battery_header";
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
     private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
-    private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
 
     @VisibleForTesting
     static final int BATTERY_INFO_LOADER = 1;
     @VisibleForTesting
     static final int BATTERY_TIP_LOADER = 2;
-    @VisibleForTesting
-    static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_ADVANCED_BATTERY = Menu.FIRST + 1;
     public static final int DEBUG_INFO_LOADER = 3;
@@ -104,7 +97,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     boolean mNeedUpdateBatteryTip;
     @VisibleForTesting
     BatteryTipPreferenceController mBatteryTipPreferenceController;
-    private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
     @VisibleForTesting
     final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
@@ -226,7 +218,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         mScreenUsagePref = (PowerGaugePreference) findPreference(KEY_SCREEN_USAGE);
         mLastFullChargePref = (PowerGaugePreference) findPreference(
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
-        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
 
         restartBatteryInfoLoader();
@@ -266,12 +257,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (DEBUG) {
-            menu.add(Menu.NONE, MENU_STATS_TYPE, Menu.NONE, R.string.menu_stats_total)
-                    .setIcon(com.android.internal.R.drawable.ic_menu_info_details)
-                    .setAlphabeticShortcut('t');
-        }
-
         menu.add(Menu.NONE, MENU_ADVANCED_BATTERY, Menu.NONE, R.string.advanced_battery_title);
 
         super.onCreateOptionsMenu(menu, inflater);
@@ -285,14 +270,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_STATS_TYPE:
-                if (mStatsType == BatteryStats.STATS_SINCE_CHARGED) {
-                    mStatsType = BatteryStats.STATS_SINCE_UNPLUGGED;
-                } else {
-                    mStatsType = BatteryStats.STATS_SINCE_CHARGED;
-                }
-                refreshUi(BatteryUpdateType.MANUAL);
-                return true;
             case MENU_ADVANCED_BATTERY:
                 new SubSettingLauncher(getContext())
                         .setDestination(PowerUsageAdvanced.class.getName())
@@ -416,14 +393,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     }
 
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.power_usage_summary;
-                    return Collections.singletonList(sir);
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.power_usage_summary);
 }

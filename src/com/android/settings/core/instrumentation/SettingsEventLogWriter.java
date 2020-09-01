@@ -25,19 +25,19 @@ import com.android.settingslib.core.instrumentation.EventLogWriter;
 public class SettingsEventLogWriter extends EventLogWriter {
 
     @Override
-    public void visible(Context context, int source, int category) {
+    public void visible(Context context, int source, int category, int latency) {
         if (shouldDisableGenericEventLogging()) {
             return;
         }
-        super.visible(context, source, category);
+        super.visible(context, source, category, latency);
     }
 
     @Override
-    public void hidden(Context context, int category) {
+    public void hidden(Context context, int category, int visibleTime) {
         if (shouldDisableGenericEventLogging()) {
             return;
         }
-        super.hidden(context, category);
+        super.hidden(context, category, visibleTime);
     }
 
     @Override

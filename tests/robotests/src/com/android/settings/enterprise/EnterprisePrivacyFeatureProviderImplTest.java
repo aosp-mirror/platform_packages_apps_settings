@@ -422,8 +422,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
     private Intent addWorkPolicyInfoIntent(
             String packageName, boolean deviceOwner, boolean profileOwner) {
-        Intent intent =
-                new Intent(mResources.getString(R.string.config_work_policy_info_intent_action));
+        Intent intent = new Intent(Settings.ACTION_SHOW_WORK_POLICY_INFO);
         intent.setPackage(packageName);
         ResolveInfo resolveInfo = new ResolveInfo();
         resolveInfo.resolvePackageName = packageName;

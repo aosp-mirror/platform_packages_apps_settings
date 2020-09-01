@@ -22,23 +22,18 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
-
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
-import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.SubscriptionsChangeListener;
-import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.widget.LayoutPreference;
-
-import java.util.List;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.SubscriptionsChangeListener;
+import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.widget.LayoutPreference;
 
 /** This controls a switch to allow enabling/disabling a mobile network */
 public class MobileNetworkSwitchController extends BasePreferenceController implements
@@ -80,13 +75,14 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         mSwitchBar.setSwitchBarText(R.string.mobile_network_use_sim_on,
                 R.string.mobile_network_use_sim_off);
 
-        mSwitchBar.addOnSwitchChangeListener((switchView, isChecked) -> {
+        mSwitchBar.getSwitch().setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
             if (mSubscriptionManager.isActiveSubscriptionId(mSubId) != isChecked
                     && (!mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked))) {
-                mSwitchBar.setChecked(!isChecked);
+                return true;
             }
+            return false;
         });
         update();
     }
@@ -104,23 +100,21 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             }
         }
 
-        // For eSIM, we always want the toggle. The telephony stack doesn't currently support
-        // disabling a pSIM directly (b/133379187), so we for now we don't include this on pSIM.
-        if (subInfo == null || !subInfo.isEmbedded()) {
+        // For eSIM, we always want the toggle. If telephony stack support disabling a pSIM
+        // directly, we show the toggle.
+        if (subInfo == null || (!subInfo.isEmbedded() && !SubscriptionUtil.showToggleForPhysicalSim(
+                mSubscriptionManager))) {
             mSwitchBar.hide();
         } else {
             mSwitchBar.show();
-            mSwitchBar.setChecked(mSubscriptionManager.isActiveSubscriptionId(mSubId));
+            mSwitchBar.setCheckedInternal(mSubscriptionManager.isActiveSubscriptionId(mSubId));
         }
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (FeatureFlagPersistent.isEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2)) {
-            return AVAILABLE_UNSEARCHABLE;
-        } else {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
+        return AVAILABLE_UNSEARCHABLE;
+
     }
 
     @Override

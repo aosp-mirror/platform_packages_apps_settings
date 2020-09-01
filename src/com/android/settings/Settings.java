@@ -16,8 +16,12 @@
 
 package com.android.settings;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 
 /**
@@ -33,9 +37,43 @@ public class Settings extends SettingsActivity {
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
     public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class SimSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class TetherSettingsActivity extends SettingsActivity {
+        // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
+        @Override
+        public Intent getIntent() {
+            return wrapIntentWithAllInOneTetherSettingsIfNeeded(
+                    getApplicationContext(), super.getIntent());
+        }
+    }
+    public static class WifiTetherSettingsActivity extends SettingsActivity {
+        // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
+        @Override
+        public Intent getIntent() {
+            return wrapIntentWithAllInOneTetherSettingsIfNeeded(
+                    getApplicationContext(), super.getIntent());
+        }
+    }
+
+    private static Intent wrapIntentWithAllInOneTetherSettingsIfNeeded(
+            Context context, Intent superIntent) {
+        if (!FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE)) {
+            return superIntent;
+        }
+
+        final Intent modIntent = new Intent(superIntent);
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT,
+                AllInOneTetherSettings.class.getCanonicalName());
+        Bundle args = superIntent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        if (args != null) {
+            args = new Bundle(args);
+        } else {
+            args = new Bundle();
+        }
+        args.putParcelable("intent", superIntent);
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+        return modIntent;
+    }
+
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataSaverSummaryActivity extends SettingsActivity{ /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -43,6 +81,7 @@ public class Settings extends SettingsActivity {
     public static class PrivateVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PublicVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WifiSettings2Activity extends SettingsActivity { /* empty */ }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
@@ -97,6 +136,7 @@ public class Settings extends SettingsActivity {
     public static class NotificationStationActivity extends SettingsActivity { /* empty */ }
     public static class UserSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class NotificationAccessDetailsActivity extends SettingsActivity { /* empty */ }
     public static class VrListenersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppPictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
@@ -117,6 +157,7 @@ public class Settings extends SettingsActivity {
     public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ConversationListSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
@@ -130,12 +171,21 @@ public class Settings extends SettingsActivity {
     public static class PhotosStorageActivity extends SettingsActivity {
         /* empty */
     }
+    public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class InteractAcrossProfilesSettingsActivity extends SettingsActivity {
+        /* empty */
+    }
+    public static class AppInteractAcrossProfilesSettingsActivity extends SettingsActivity {
+        /* empty */
+    }
 
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MemorySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppMemoryUsageActivity extends SettingsActivity { /* empty */ }
     public static class OverlaySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ManageExternalStorageActivity extends SettingsActivity { /* empty */ }
+    public static class AppManageExternalStorageActivity extends SettingsActivity { /* empty */ }
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
@@ -146,6 +196,7 @@ public class Settings extends SettingsActivity {
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
+
 
     public static class ApnEditorActivity extends SettingsActivity { /* empty */ }
     public static class ChooseAccountActivity extends SettingsActivity { /* empty */ }
@@ -168,6 +219,12 @@ public class Settings extends SettingsActivity {
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class GlobalActionsPanelSettingsActivity extends SettingsActivity {}
+    public static class PowerMenuSettingsActivity extends SettingsActivity {}
+    public static class QuickControlsSettingsActivity extends SettingsActivity {}
+    /**
+     * Activity for BugReportHandlerPicker.
+     */
+    public static class BugReportHandlerPickerActivity extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}
@@ -177,5 +234,10 @@ public class Settings extends SettingsActivity {
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class AccountDashboardActivity extends SettingsActivity {}
     public static class SystemDashboardActivity extends SettingsActivity {}
+
+    /**
+     * Activity for MediaControlsSettings
+     */
+    public static class MediaControlsSettingsActivity extends SettingsActivity {}
 
 }

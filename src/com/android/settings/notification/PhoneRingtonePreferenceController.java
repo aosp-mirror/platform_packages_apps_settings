@@ -23,7 +23,7 @@ import com.android.settings.Utils;
 
 public class PhoneRingtonePreferenceController extends RingtonePreferenceControllerBase {
 
-    private static final String KEY_PHONE_RINGTONE = "ringtone";
+    private static final String KEY_PHONE_RINGTONE = "phone_ringtone";
 
     public PhoneRingtonePreferenceController(Context context) {
         super(context);

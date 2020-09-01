@@ -17,6 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_block_settings_page"
     android:title="@string/zen_mode_what_to_block_title">
 
@@ -56,5 +57,11 @@
            android:key="zen_effect_list"
            android:title="@string/zen_mode_block_effect_list" />
    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="zen_mode_block_footer"
+        android:title="@string/zen_mode_blocked_effects_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

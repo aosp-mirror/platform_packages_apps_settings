@@ -13,7 +13,6 @@
  */
 package com.android.settings.location;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -24,13 +23,9 @@ import android.content.pm.ResolveInfo;
 import android.location.LocationManager;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
@@ -41,63 +36,44 @@ import java.util.List;
 /**
  * Preference controller for location footer preference category
  */
-public class LocationFooterPreferenceController extends LocationBasePreferenceController
-        implements LifecycleObserver, OnPause {
+public class LocationFooterPreferenceController extends LocationBasePreferenceController {
+
     private static final String TAG = "LocationFooter";
-    private static final String KEY_LOCATION_FOOTER = "location_footer";
     private static final Intent INJECT_INTENT =
             new Intent(LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION);
-    private final Context mContext;
+
     private final PackageManager mPackageManager;
-    private Collection<ComponentName> mFooterInjectors;
 
-    public LocationFooterPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, lifecycle);
-        mContext = context;
-        mPackageManager = mContext.getPackageManager();
-        mFooterInjectors = new ArrayList<>();
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_LOCATION_FOOTER;
+    public LocationFooterPreferenceController(Context context, String key) {
+        super(context, key);
+        mPackageManager = context.getPackageManager();
     }
 
     /**
-     * Insert footer preferences. Send a {@link LocationManager#SETTINGS_FOOTER_DISPLAYED_ACTION}
-     * broadcast to receivers who have injected a footer
+     * Insert footer preferences.
      */
     @Override
     public void updateState(Preference preference) {
         PreferenceCategory category = (PreferenceCategory) preference;
         category.removeAll();
-        mFooterInjectors.clear();
         Collection<FooterData> footerData = getFooterData();
         for (FooterData data : footerData) {
-            // Generate a footer preference with the given text
-            FooterPreference footerPreference = new FooterPreference(preference.getContext());
-            String footerString;
             try {
-                footerString =
+                String footerString =
                         mPackageManager
                                 .getResourcesForApplication(data.applicationInfo)
                                 .getString(data.footerStringRes);
+
+                // Generate a footer preference with the given text
+                FooterPreference footerPreference = new FooterPreference(preference.getContext());
+                footerPreference.setTitle(footerString);
+                category.addPreference(footerPreference);
             } catch (NameNotFoundException exception) {
                 Log.w(
                         TAG,
                         "Resources not found for application "
                                 + data.applicationInfo.packageName);
-                continue;
             }
-            footerPreference.setTitle(footerString);
-            // Inject the footer
-            category.addPreference(footerPreference);
-            // Send broadcast to the injector announcing a footer has been injected
-            sendBroadcastFooterDisplayed(data.componentName);
-            mFooterInjectors.add(data.componentName);
         }
     }
 
@@ -112,41 +88,16 @@ public class LocationFooterPreferenceController extends LocationBasePreferenceCo
      * inject.
      */
     @Override
-    public boolean isAvailable() {
-        return !getFooterData().isEmpty();
-    }
-
-    /**
-     * Send a {@link LocationManager#SETTINGS_FOOTER_REMOVED_ACTION} broadcast to footer injectors
-     * when LocationFragment is on pause
-     */
-    @Override
-    public void onPause() {
-        // Send broadcast to the footer injectors. Notify them the footer is not visible.
-        for (ComponentName componentName : mFooterInjectors) {
-            final Intent intent = new Intent(LocationManager.SETTINGS_FOOTER_REMOVED_ACTION);
-            intent.setComponent(componentName);
-            mContext.sendBroadcast(intent);
-        }
-    }
-
-    /**
-     * Send a {@link LocationManager#SETTINGS_FOOTER_DISPLAYED_ACTION} broadcast to a footer
-     * injector.
-     */
-    @VisibleForTesting
-    void sendBroadcastFooterDisplayed(ComponentName componentName) {
-        Intent intent = new Intent(LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION);
-        intent.setComponent(componentName);
-        mContext.sendBroadcast(intent);
+    public int getAvailabilityStatus() {
+        return !getFooterData().isEmpty() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     /**
      * Return a list of strings with text provided by ACTION_INJECT_FOOTER broadcast receivers.
      */
-    private Collection<FooterData> getFooterData() {
+    private List<FooterData> getFooterData() {
         // Fetch footer text from system apps
-        final List<ResolveInfo> resolveInfos =
+        List<ResolveInfo> resolveInfos =
                 mPackageManager.queryBroadcastReceivers(
                         INJECT_INTENT, PackageManager.GET_META_DATA);
         if (resolveInfos == null) {
@@ -158,10 +109,10 @@ public class LocationFooterPreferenceController extends LocationBasePreferenceCo
             Log.d(TAG, "Found broadcast receivers: " + resolveInfos);
         }
 
-        final Collection<FooterData> footerDataList = new ArrayList<>(resolveInfos.size());
+        List<FooterData> footerDataList = new ArrayList<>(resolveInfos.size());
         for (ResolveInfo resolveInfo : resolveInfos) {
-            final ActivityInfo activityInfo = resolveInfo.activityInfo;
-            final ApplicationInfo appInfo = activityInfo.applicationInfo;
+            ActivityInfo activityInfo = resolveInfo.activityInfo;
+            ApplicationInfo appInfo = activityInfo.applicationInfo;
 
             // If a non-system app tries to inject footer, ignore it
             if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
@@ -187,11 +138,7 @@ public class LocationFooterPreferenceController extends LocationBasePreferenceCo
                                 + LocationManager.METADATA_SETTINGS_FOOTER_STRING);
                 continue;
             }
-            footerDataList.add(
-                    new FooterData(
-                            footerTextRes,
-                            appInfo,
-                            new ComponentName(activityInfo.packageName, activityInfo.name)));
+            footerDataList.add(new FooterData(footerTextRes, appInfo));
         }
         return footerDataList;
     }
@@ -207,14 +154,9 @@ public class LocationFooterPreferenceController extends LocationBasePreferenceCo
         // Application info of receiver injecting this footer
         final ApplicationInfo applicationInfo;
 
-        // The component that injected the footer. It must be a receiver of broadcast
-        // LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION
-        final ComponentName componentName;
-
-        FooterData(int footerRes, ApplicationInfo appInfo, ComponentName componentName) {
+        FooterData(int footerRes, ApplicationInfo appInfo) {
             this.footerStringRes = footerRes;
             this.applicationInfo = appInfo;
-            this.componentName = componentName;
         }
     }
 }

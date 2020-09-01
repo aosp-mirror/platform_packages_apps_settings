@@ -27,14 +27,16 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.JobSchedulerImpl;
+import android.app.job.IJobScheduler;
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
 import android.content.Context;
+import android.os.Binder;
 
 import com.android.settings.R;
 import com.android.settings.testutils.DatabaseTestUtils;
-import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,13 +47,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowThreadUtils.class)
 public class AnomalyCleanupJobServiceTest {
     private static final int UID = 1234;
     private static final String PACKAGE_NAME = "com.android.package";
@@ -70,7 +70,7 @@ public class AnomalyCleanupJobServiceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mJobScheduler = spy(mContext.getSystemService(JobScheduler.class));
+        mJobScheduler = spy(new JobSchedulerImpl(IJobScheduler.Stub.asInterface(new Binder())));
         when(mContext.getSystemService(JobScheduler.class)).thenReturn(mJobScheduler);
     }
 

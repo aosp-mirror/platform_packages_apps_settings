@@ -38,7 +38,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
 
+import android.app.JobSchedulerImpl;
 import android.app.StatsManager;
+import android.app.job.IJobScheduler;
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
@@ -46,6 +48,7 @@ import android.app.job.JobWorkItem;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.StatsDimensionsValue;
@@ -105,12 +108,16 @@ public class AnomalyDetectionJobServiceTest {
     private AnomalyDetectionJobService mAnomalyDetectionJobService;
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
+    private JobScheduler mJobScheduler;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        mJobScheduler = spy(new JobSchedulerImpl(IJobScheduler.Stub.asInterface(new Binder())));
+        when(mContext.getSystemService(JobScheduler.class)).thenReturn(mJobScheduler);
+
         mPolicy = new BatteryTipPolicy(mContext);
         mBundle = new Bundle();
         mBundle.putParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE, mStatsDimensionsValue);
@@ -125,9 +132,9 @@ public class AnomalyDetectionJobServiceTest {
 
     @Test
     public void scheduleCleanUp() {
-        AnomalyDetectionJobService.scheduleAnomalyDetection(application, new Intent());
+        AnomalyDetectionJobService.scheduleAnomalyDetection(mContext, new Intent());
 
-        JobScheduler jobScheduler = application.getSystemService(JobScheduler.class);
+        JobScheduler jobScheduler = mContext.getSystemService(JobScheduler.class);
         List<JobInfo> pendingJobs = jobScheduler.getAllPendingJobs();
         assertThat(pendingJobs).hasSize(1);
 

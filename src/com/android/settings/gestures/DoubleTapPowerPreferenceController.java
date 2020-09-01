@@ -61,6 +61,11 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     protected String getVideoPrefKey() {
         return PREF_KEY_VIDEO;
     }

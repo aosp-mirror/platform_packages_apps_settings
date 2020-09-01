@@ -32,6 +32,7 @@ public class AppViewHolder {
     public ImageView appIcon;
     public TextView summary;
     public TextView disabled;
+    public View widget;
 
     static public AppViewHolder createOrRecycle(LayoutInflater inflater, View convertView) {
         if (convertView == null) {
@@ -45,6 +46,7 @@ public class AppViewHolder {
             holder.appIcon = convertView.findViewById(android.R.id.icon);
             holder.summary = convertView.findViewById(android.R.id.summary);
             holder.disabled = convertView.findViewById(R.id.appendix);
+            holder.widget = convertView.findViewById(android.R.id.widget_frame);
             convertView.setTag(holder);
             return holder;
         } else {

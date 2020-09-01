@@ -25,6 +25,8 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.widget.Toast;
 
+import androidx.slice.Slice;
+
 import com.android.settings.R;
 
 /**
@@ -49,9 +51,20 @@ public interface Sliceable {
      * <p>
      * This does not guarantee the setting is available.
      *
-     * @return {@code true} if the controller should be used externally as a Slice.
+     * @return {@code true} if the controller should be used as a Slice.
      */
     default boolean isSliceable() {
+        return false;
+    }
+
+    /**
+     * Determines if the {@link Slice} should be public to other apps.
+     * This does not guarantee the setting is available.
+     *
+     * @return {@code true} if the controller should be used as a Slice, and is
+     * publicly visible to other apps.
+     */
+    default boolean isPublicSlice() {
         return false;
     }
 

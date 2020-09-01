@@ -56,6 +56,8 @@
 
     <dimen name="captioning_preview_height">200dp</dimen>
 
+    <dimen name="autoclick_preview_height">200dp</dimen>
+
     <dimen name="color_mode_preview_height">320dp</dimen>
 
     <dimen name="ring_progress_bar_thickness">4dp</dimen>
@@ -64,6 +66,8 @@
     <integer name="preferences_left_pane_weight">4</integer>
     <!-- Weight of the right pane in a multi-pane preference layout. So the split is 40:60 -->
     <integer name="preferences_right_pane_weight">6</integer>
+
+    <dimen name="nfc_detection_point_height">300dp</dimen>
 
     <dimen name="notification_app_icon_size">64dp</dimen>
     <dimen name="notification_app_icon_badge_size">20dp</dimen>
@@ -81,6 +85,16 @@
     <dimen name="notification_importance_button_text">16sp</dimen>
     <dimen name="notification_importance_button_padding">14dp</dimen>
 
+    <dimen name="notification_history_header_drawable_start">26dp</dimen>
+    <dimen name="conversation_icon_size">48dp</dimen>
+
+    <dimen name="zen_mode_icon_size">36dp</dimen>
+    <dimen name="zen_mode_icon_margin">16dp</dimen>
+    <dimen name="zen_mode_settings_button_margin_vertical">24dp</dimen>
+    <dimen name="zen_senders_image_margin_vertical">16dp</dimen>
+    <dimen name="zen_conversations_image_margin_vertical">24dp</dimen>
+    <dimen name="zen_conversations_icon_offset">32dp</dimen>
+    <dimen name="zen_conversations_icon_size">50dp</dimen>
     <dimen name="zen_schedule_rule_checkbox_padding">7dp</dimen>
     <dimen name="zen_schedule_day_margin">17dp</dimen>
 
@@ -156,9 +170,6 @@
 
     <!-- CryptKeeper pattern size for tablet -->
     <dimen name="crypt_keeper_pattern_size">354dip</dimen>
-
-    <!-- Screen pinning textview paddings -->
-    <dimen name="screen_pinning_textview_padding">40dp</dimen>
 
     <!-- SIM Dialog Margin top -->
     <dimen name="sim_dialog_margin_top">8dip</dimen>
@@ -252,9 +263,6 @@
     <dimen name="admin_details_dialog_learn_more_button_padding">8dp</dimen>
     <dimen name="admin_details_dialog_learn_more_button_minWidth">88dp</dimen>
 
-    <!-- Button bar padding for unmount button. -->
-    <dimen name="unmount_button_padding">8dp</dimen>
-
     <!-- Display, Screen zoom -->
     <dimen name="conversation_message_list_padding">10dp</dimen>
     <dimen name="conversation_message_contact_icon_text_size">32sp</dimen>
@@ -269,15 +277,8 @@
     <dimen name="message_metadata_top_padding">4dp</dimen>
 
     <!-- Accessibility Settings -->
-    <dimen name="accessibility_layout_margin_start_end">24dp</dimen>
+    <dimen name="accessibility_layout_margin_start_end">16dp</dimen>
     <dimen name="accessibility_button_preference_padding_top_bottom">18dp</dimen>
-
-    <!-- Accessibility, Screen magnification. These values are meant to be relative values and the actual layout value will be set programmatically. -->
-    <dimen name="screen_magnification_video_background_width">750dp</dimen>
-    <dimen name="screen_magnification_video_background_height">383dp</dimen>
-    <dimen name="screen_magnification_video_width">170dp</dimen>
-    <dimen name="screen_magnification_video_height">311dp</dimen>
-    <dimen name="screen_magnification_video_margin_top">40dp</dimen>
 
     <!-- Restricted icon in switch bar -->
     <dimen name="restricted_icon_margin_end">16dp</dimen>
@@ -328,10 +329,6 @@
     <dimen name="reset_master_clear_margin_start">32dp</dimen>
     <dimen name="reset_master_clear_margin_end">12dp</dimen>
 
-    <!-- Padding for screen pinning -->
-    <dimen name="screen_pinning_padding_start">64dp</dimen>
-    <dimen name="screen_pinning_padding_end">64dp</dimen>
-
     <!-- Padding for the reset screens -->
     <dimen name="reset_checkbox_padding_end">8dp</dimen>
     <dimen name="reset_checkbox_title_padding_top">12dp</dimen>
@@ -351,15 +348,6 @@
     <dimen name="contextual_half_card_padding_top">12dp</dimen>
     <dimen name="contextual_half_card_padding_bottom">16dp</dimen>
     <dimen name="contextual_half_card_title_margin_top">12dp</dimen>
-    <dimen name="contextual_deferred_setup_card_padding_top">16dp</dimen>
-    <dimen name="contextual_deferred_setup_card_padding_bottom">12dp</dimen>
-    <dimen name="contextual_deferred_setup_card_title_margin_top">12dp</dimen>
-    <dimen name="contextual_deferred_setup_card_summary_margin_top">2dp</dimen>
-    <dimen name="contextual_deferred_setup_card_button_margin_top">8dp</dimen>
-    <dimen name="contextual_deferred_setup_card_button_padding_top">8dp</dimen>
-    <dimen name="contextual_deferred_setup_card_button_padding_bottom">8dp</dimen>
-    <dimen name="contextual_deferred_setup_card_button_padding_start">24dp</dimen>
-    <dimen name="contextual_deferred_setup_card_button_padding_end">24dp</dimen>
 
     <!-- Homepage dismissal cards size and padding -->
     <dimen name="contextual_card_dismissal_margin_top">12dp</dimen>
@@ -401,19 +389,18 @@
     <dimen name="qrcode_size">264dp</dimen>
     <dimen name="qrcode_preview_size">360dp</dimen>
 
-    <!-- Wi-Fi DPP fragment icon size -->
-    <dimen name="wifi_dpp_fragment_icon_width_height">48dp</dimen>
-
     <!-- Elevation of bluetooth icon -->
     <dimen name="bt_icon_elevation">4dp</dimen>
 
     <dimen name="two_target_min_width">80dp</dimen>
 
     <!-- Maximum height for SliceView, override on slices/view/src/main/res/values/dimens.xml -->
-    <dimen name="abc_slice_large_height">480dp</dimen>
+    <dimen name="abc_slice_large_height">1800dp</dimen>
 
     <!-- System navigation settings illustration height -->
     <dimen name="system_navigation_illustration_height">320dp</dimen>
+
+    <dimen name="back_gesture_indicator_width">60dp</dimen>
 
     <!-- Header title size of advanced bluetooth device -->
     <dimen name="advanced_bluetooth_header_title_text_size">16sp</dimen>
@@ -421,4 +408,25 @@
     <!-- Battery meter icon size of advanced bluetooth device -->
     <dimen name="advanced_bluetooth_battery_meter_width">7.8dp</dimen>
     <dimen name="advanced_bluetooth_battery_meter_height">13dp</dimen>
+    <dimen name="advanced_bluetooth_battery_width">15.5dp</dimen>
+    <dimen name="advanced_bluetooth_battery_height">27.5dp</dimen>
+    <dimen name="advanced_bluetooth_battery_right_margin">-4dp</dimen>
+
+    <!-- Developer option bluetooth settings dialog -->
+    <dimen name="developer_option_dialog_margin_start">8dp</dimen>
+    <dimen name="developer_option_dialog_margin_top">8dp</dimen>
+    <dimen name="developer_option_dialog_min_height">48dp</dimen>
+    <dimen name="developer_option_dialog_padding_start">16dp</dimen>
+
+    <!-- Developer options shared data screens related dimensions -->
+    <dimen name="list_preferred_item_padding">16dp</dimen>
+
+    <!-- Output switcher panel related dimensions -->
+    <dimen name="output_switcher_slice_padding_top">11dp</dimen>
+    <dimen name="output_switcher_slice_max_height">458dp</dimen>
+    <dimen name="output_switcher_panel_icon_size">52dp</dimen>
+    <dimen name="output_switcher_panel_icon_corner_radius">16dp</dimen>
+
+    <!-- Text padding for EmptyTextSettings -->
+    <dimen name="empty_text_padding">24dp</dimen>
 </resources>

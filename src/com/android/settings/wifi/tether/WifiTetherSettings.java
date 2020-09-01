@@ -24,27 +24,27 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -54,6 +54,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
+    private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 3;
+    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 4;
+
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
     @VisibleForTesting
@@ -126,8 +129,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SwitchBar switchBar = activity.getSwitchBar();
-        mSwitchBarController = new WifiTetherSwitchBarController(activity,
-                new SwitchBarController(switchBar));
+        mSwitchBarController = new WifiTetherSwitchBarController(activity, switchBar);
         getSettingsLifecycle().addObserver(mSwitchBarController);
         switchBar.show();
     }
@@ -185,9 +187,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     @Override
-    public void onTetherConfigUpdated() {
-        final WifiConfiguration config = buildNewConfig();
-        mPasswordPreferenceController.updateVisibility(config.getAuthType());
+    public void onTetherConfigUpdated(AbstractPreferenceController context) {
+        final SoftApConfiguration config = buildNewConfig();
+        mPasswordPreferenceController.updateVisibility(config.getSecurityType());
 
         /**
          * if soft AP is stopped, bring up
@@ -200,19 +202,24 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mRestartWifiApAfterConfigChange = true;
             mSwitchBarController.stopTether();
         }
-        mWifiManager.setWifiApConfiguration(config);
+        mWifiManager.setSoftApConfiguration(config);
+
+        if (context instanceof WifiTetherSecurityPreferenceController) {
+            reConfigInitialExpandedChildCount();
+        }
     }
 
-    private WifiConfiguration buildNewConfig() {
-        final WifiConfiguration config = new WifiConfiguration();
+    private SoftApConfiguration buildNewConfig() {
+        final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
-
-        config.SSID = mSSIDPreferenceController.getSSID();
-        config.allowedKeyManagement.set(securityType);
-        config.preSharedKey = mPasswordPreferenceController.getPasswordValidated(securityType);
-        config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
-        config.apBand = mApBandPreferenceController.getBandIndex();
-        return config;
+        configBuilder.setSsid(mSSIDPreferenceController.getSSID());
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+            configBuilder.setPassphrase(
+                    mPasswordPreferenceController.getPasswordValidated(securityType),
+                    SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
+        }
+        configBuilder.setBand(mApBandPreferenceController.getBandIndex());
+        return configBuilder.build();
     }
 
     private void startTether() {
@@ -231,15 +238,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 .updateDisplay();
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.wifi_tether_settings;
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.wifi_tether_settings) {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
@@ -255,6 +255,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     // Remove duplicate
                     keys.add(KEY_WIFI_TETHER_SCREEN);
                     return keys;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
                 }
 
                 @Override
@@ -284,5 +289,26 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 }
             }
         }
+    }
+
+    private void reConfigInitialExpandedChildCount() {
+        final PreferenceGroup screen = getPreferenceScreen();
+        if (mSecurityPreferenceController.getSecurityType()
+                == SoftApConfiguration.SECURITY_TYPE_OPEN) {
+            screen.setInitialExpandedChildrenCount(EXPANDED_CHILD_COUNT_WITH_SECURITY_NON);
+            return;
+        }
+        screen.setInitialExpandedChildrenCount(EXPANDED_CHILD_COUNT_DEFAULT);
+    }
+
+    @Override
+    public int getInitialExpandedChildCount() {
+        if (mSecurityPreferenceController == null) {
+            return EXPANDED_CHILD_COUNT_DEFAULT;
+        }
+
+        return (mSecurityPreferenceController.getSecurityType()
+                == SoftApConfiguration.SECURITY_TYPE_OPEN)
+            ? EXPANDED_CHILD_COUNT_WITH_SECURITY_NON : EXPANDED_CHILD_COUNT_DEFAULT;
     }
 }

@@ -17,9 +17,6 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.text.Annotation;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -35,13 +32,9 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Battery saver settings page
@@ -49,7 +42,7 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BatterySaverSettings extends DashboardFragment {
     private static final String TAG = "BatterySaverSettings";
-    public static final String KEY_FOOTER_PREFERENCE = "footer_preference";
+    private static final String KEY_FOOTER_PREFERENCE = "battery_saver_footer_preference";
     private SpannableStringBuilder mFooterText;
     private String mHelpUri;
 
@@ -82,16 +75,8 @@ public class BatterySaverSettings extends DashboardFragment {
     /**
      * For Search.
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.battery_saver_settings;
-                    return Arrays.asList(sir);
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.battery_saver_settings);
 
     // Updates the footer for this page.
     @VisibleForTesting

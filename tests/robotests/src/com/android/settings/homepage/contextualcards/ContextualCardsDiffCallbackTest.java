@@ -16,6 +16,9 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE;
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.net.Uri;
@@ -24,7 +27,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +81,24 @@ public class ContextualCardsDiffCallbackTest {
     public void areContentsTheSame_sliceWithToggle_returnFalse() {
         final ContextualCard card = getContextualCard("test1").mutate()
                 .setHasInlineAction(true).build();
+        mNewCards.add(0, card);
+
+        assertThat(mDiffCallback.areContentsTheSame(0, 0)).isFalse();
+    }
+
+    @Test
+    public void areContentsTheSame_stickySlice_returnFalse() {
+        final ContextualCard card = getContextualCard("test1").mutate()
+                .setCategory(STICKY_VALUE).build();
+        mNewCards.add(0, card);
+
+        assertThat(mDiffCallback.areContentsTheSame(0, 0)).isFalse();
+    }
+
+    @Test
+    public void areContentsTheSame_importantSlice_returnFalse() {
+        final ContextualCard card = getContextualCard("test1").mutate()
+                .setCategory(IMPORTANT_VALUE).build();
         mNewCards.add(0, card);
 
         assertThat(mDiffCallback.areContentsTheSame(0, 0)).isFalse();

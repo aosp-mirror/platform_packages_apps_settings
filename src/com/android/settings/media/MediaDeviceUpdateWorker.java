@@ -16,18 +16,34 @@
 
 package com.android.settings.media;
 
+import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
+
+import static com.android.settings.media.MediaOutputSlice.MEDIA_PACKAGE_NAME;
+
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.media.AudioManager;
+import android.media.RoutingSessionInfo;
 import android.net.Uri;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.Utils;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * SliceBackgroundWorker for get MediaDevice list and handle MediaDevice state change event.
@@ -35,10 +51,13 @@ import java.util.List;
 public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         implements LocalMediaManager.DeviceCallback {
 
-    private final Context mContext;
-    private final List<MediaDevice> mMediaDevices = new ArrayList<>();
+    protected final Context mContext;
+    protected final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
+    private final DevicesChangedBroadcastReceiver mReceiver;
+    private final String mPackageName;
 
-    private String mPackageName;
+    private boolean mIsTouched;
+    private MediaDevice mTopDevice;
 
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
@@ -46,26 +65,29 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     public MediaDeviceUpdateWorker(Context context, Uri uri) {
         super(context, uri);
         mContext = context;
-    }
-
-    public void setPackageName(String packageName) {
-        mPackageName = packageName;
+        mPackageName = uri.getQueryParameter(MEDIA_PACKAGE_NAME);
+        mReceiver = new DevicesChangedBroadcastReceiver();
     }
 
     @Override
     protected void onSlicePinned() {
         mMediaDevices.clear();
-        if (mLocalMediaManager == null) {
+        mIsTouched = false;
+        if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
+                mLocalMediaManager.getPackageName())) {
             mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
         }
 
         mLocalMediaManager.registerCallback(this);
+        final IntentFilter intentFilter = new IntentFilter(STREAM_DEVICES_CHANGED_ACTION);
+        mContext.registerReceiver(mReceiver, intentFilter);
         mLocalMediaManager.startScan();
     }
 
     @Override
     protected void onSliceUnpinned() {
         mLocalMediaManager.unregisterCallback(this);
+        mContext.unregisterReceiver(mReceiver);
         mLocalMediaManager.stopScan();
     }
 
@@ -90,21 +112,149 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         notifySliceChange();
     }
 
-    public List<MediaDevice> getMediaDevices() {
-        return new ArrayList<>(mMediaDevices);
+    @Override
+    public void onDeviceAttributesChanged() {
+        notifySliceChange();
+    }
+
+    @Override
+    public void onRequestFailed(int reason) {
+        notifySliceChange();
+    }
+
+    public Collection<MediaDevice> getMediaDevices() {
+        return mMediaDevices;
     }
 
     public void connectDevice(MediaDevice device) {
         ThreadUtils.postOnBackgroundThread(() -> {
-            mLocalMediaManager.connectDevice(device);
+            if (mLocalMediaManager.connectDevice(device)) {
+                ThreadUtils.postOnMainThread(() -> {
+                    notifySliceChange();
+                });
+            }
         });
     }
 
     public MediaDevice getMediaDeviceById(String id) {
-        return mLocalMediaManager.getMediaDeviceById(mMediaDevices, id);
+        return mLocalMediaManager.getMediaDeviceById(new ArrayList<>(mMediaDevices), id);
     }
 
     public MediaDevice getCurrentConnectedMediaDevice() {
         return mLocalMediaManager.getCurrentConnectedDevice();
+    }
+
+    void setIsTouched(boolean isTouched) {
+        mIsTouched = isTouched;
+    }
+
+    boolean getIsTouched() {
+        return mIsTouched;
+    }
+
+    void setTopDevice(MediaDevice device) {
+        mTopDevice = device;
+    }
+
+    MediaDevice getTopDevice() {
+        return getMediaDeviceById(mTopDevice.getId());
+    }
+
+    boolean addDeviceToPlayMedia(MediaDevice device) {
+        return mLocalMediaManager.addDeviceToPlayMedia(device);
+    }
+
+    boolean removeDeviceFromPlayMedia(MediaDevice device) {
+        return mLocalMediaManager.removeDeviceFromPlayMedia(device);
+    }
+
+    List<MediaDevice> getSelectableMediaDevice() {
+        return mLocalMediaManager.getSelectableMediaDevice();
+    }
+
+    List<MediaDevice> getSelectedMediaDevice() {
+        return mLocalMediaManager.getSelectedMediaDevice();
+    }
+
+    List<MediaDevice> getDeselectableMediaDevice() {
+        return mLocalMediaManager.getDeselectableMediaDevice();
+    }
+
+    boolean isDeviceIncluded(Collection<MediaDevice> deviceCollection, MediaDevice targetDevice) {
+        for (MediaDevice device : deviceCollection) {
+            if (TextUtils.equals(device.getId(), targetDevice.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void adjustSessionVolume(String sessionId, int volume) {
+        mLocalMediaManager.adjustSessionVolume(sessionId, volume);
+    }
+
+    void adjustSessionVolume(int volume) {
+        mLocalMediaManager.adjustSessionVolume(volume);
+    }
+
+    int getSessionVolumeMax() {
+        return mLocalMediaManager.getSessionVolumeMax();
+    }
+
+    int getSessionVolume() {
+        return mLocalMediaManager.getSessionVolume();
+    }
+
+    CharSequence getSessionName() {
+        return mLocalMediaManager.getSessionName();
+    }
+
+    List<RoutingSessionInfo> getActiveRemoteMediaDevice() {
+        final List<RoutingSessionInfo> sessionInfos = new ArrayList<>();
+        for (RoutingSessionInfo info : mLocalMediaManager.getActiveMediaSession()) {
+            if (!info.isSystemSession()) {
+                sessionInfos.add(info);
+            }
+        }
+        return sessionInfos;
+    }
+
+    /**
+     * Request to set volume.
+     *
+     * @param device for the targeted device.
+     * @param volume for the new value.
+     *
+     */
+    public void adjustVolume(MediaDevice device, int volume) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            device.requestSetVolume(volume);
+        });
+    }
+
+    String getPackageName() {
+        return mPackageName;
+    }
+
+    boolean hasAdjustVolumeUserRestriction() {
+        if (RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId()) != null) {
+            return true;
+        }
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        return um.hasBaseUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME,
+                UserHandle.of(UserHandle.myUserId()));
+
+    }
+
+    private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (TextUtils.equals(AudioManager.STREAM_DEVICES_CHANGED_ACTION, action)
+                    && Utils.isAudioModeOngoingCall(mContext)) {
+                notifySliceChange();
+            }
+        }
     }
 }

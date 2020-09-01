@@ -141,11 +141,11 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
         if (isAudioModeOngoingCall(mContext)) {
             // in phone call
             mPreferenceGroup.
-                    setTitle(mContext.getString(R.string.connected_device_available_call_title));
+                    setTitle(mContext.getString(R.string.connected_device_call_device_title));
         } else {
             // without phone call
             mPreferenceGroup.
-                    setTitle(mContext.getString(R.string.connected_device_available_media_title));
+                    setTitle(mContext.getString(R.string.connected_device_media_device_title));
         }
     }
 }

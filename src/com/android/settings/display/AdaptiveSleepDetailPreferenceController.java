@@ -36,7 +36,7 @@ public class AdaptiveSleepDetailPreferenceController extends AdaptiveSleepPrefer
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 

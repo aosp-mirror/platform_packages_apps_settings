@@ -16,63 +16,166 @@
 
 package com.android.settings.notification;
 
-import android.app.Dialog;
+import android.annotation.Nullable;
 import android.app.NotificationManager;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.os.AsyncTask;
+import android.content.pm.PackageItemInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
+import android.util.IconDrawableFactory;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.Utils;
+import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessDetails;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
+import com.android.settings.widget.EmptyTextSettings;
+import com.android.settingslib.applications.ServiceListing;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Settings screen for managing notification listener permissions
  */
 @SearchIndexable
-public class NotificationAccessSettings extends ManagedServiceSettings {
-    private static final String TAG = "NotificationAccessSettings";
-    private static final Config CONFIG = new Config.Builder()
-            .setTag(TAG)
-            .setSetting(Settings.Secure.ENABLED_NOTIFICATION_LISTENERS)
-            .setIntentAction(NotificationListenerService.SERVICE_INTERFACE)
-            .setPermission(android.Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE)
-            .setNoun("notification listener")
-            .setWarningDialogTitle(R.string.notification_listener_security_warning_title)
-            .setWarningDialogSummary(R.string.notification_listener_security_warning_summary)
-            .setEmptyText(R.string.no_notification_listeners)
-            .build();
+public class NotificationAccessSettings extends EmptyTextSettings {
+    private static final String TAG = "NotifAccessSettings";
+    private static final ManagedServiceSettings.Config CONFIG =
+            new ManagedServiceSettings.Config.Builder()
+                    .setTag(TAG)
+                    .setSetting(Settings.Secure.ENABLED_NOTIFICATION_LISTENERS)
+                    .setIntentAction(NotificationListenerService.SERVICE_INTERFACE)
+                    .setPermission(android.Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE)
+                    .setNoun("notification listener")
+                    .setWarningDialogTitle(R.string.notification_listener_security_warning_title)
+                    .setWarningDialogSummary(
+                            R.string.notification_listener_security_warning_summary)
+                    .setEmptyText(R.string.no_notification_listeners)
+                    .build();
 
     private NotificationManager mNm;
+    protected Context mContext;
+    private PackageManager mPm;
+    private DevicePolicyManager mDpm;
+    private ServiceListing mServiceListing;
+    private IconDrawableFactory mIconDrawableFactory;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        final Context ctx = getContext();
-        if (UserManager.get(ctx).isManagedProfile()) {
+
+        mContext = getActivity();
+        mPm = mContext.getPackageManager();
+        mDpm = (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
+        mServiceListing = new ServiceListing.Builder(mContext)
+                .setPermission(CONFIG.permission)
+                .setIntentAction(CONFIG.intentAction)
+                .setNoun(CONFIG.noun)
+                .setSetting(CONFIG.setting)
+                .setTag(CONFIG.tag)
+                .build();
+        mServiceListing.addCallback(this::updateList);
+        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
+
+        if (UserManager.get(mContext).isManagedProfile()) {
             // Apps in the work profile do not support notification listeners.
-            Toast.makeText(ctx, R.string.notification_settings_work_profile, Toast.LENGTH_SHORT)
-                .show();
+            Toast.makeText(mContext, R.string.notification_settings_work_profile,
+                    Toast.LENGTH_SHORT).show();
             finish();
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setEmptyText(CONFIG.emptyText);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mServiceListing.reload();
+        mServiceListing.setListening(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mServiceListing.setListening(false);
+    }
+
+    private void updateList(List<ServiceInfo> services) {
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        final int managedProfileId = Utils.getManagedProfileId(um, UserHandle.myUserId());
+
+        final PreferenceScreen screen = getPreferenceScreen();
+        screen.removeAll();
+        services.sort(new PackageItemInfo.DisplayNameComparator(mPm));
+        for (ServiceInfo service : services) {
+            final ComponentName cn = new ComponentName(service.packageName, service.name);
+            CharSequence title = null;
+            try {
+                title = mPm.getApplicationInfoAsUser(
+                        service.packageName, 0, UserHandle.myUserId()).loadLabel(mPm);
+            } catch (PackageManager.NameNotFoundException e) {
+                // unlikely, as we are iterating over live services.
+                Log.e(TAG, "can't find package name", e);
+            }
+
+            final Preference pref = new Preference(getPrefContext());
+            pref.setTitle(title);
+            pref.setIcon(mIconDrawableFactory.getBadgedIcon(service, service.applicationInfo,
+                    UserHandle.getUserId(service.applicationInfo.uid)));
+            pref.setKey(cn.flattenToString());
+            pref.setSummary(mNm.isNotificationListenerAccessGranted(cn)
+                    ? R.string.app_permission_summary_allowed
+                    : R.string.app_permission_summary_not_allowed);
+            if (managedProfileId != UserHandle.USER_NULL
+                    && !mDpm.isNotificationListenerServicePermitted(
+                    service.packageName, managedProfileId)) {
+                pref.setSummary(R.string.work_profile_notification_access_blocked_summary);
+            }
+            pref.setOnPreferenceClickListener(preference -> {
+                final Bundle args = new Bundle();
+                args.putString(AppInfoBase.ARG_PACKAGE_NAME, cn.getPackageName());
+                args.putInt(AppInfoBase.ARG_PACKAGE_UID, service.applicationInfo.uid);
+
+                Bundle extras = new Bundle();
+                extras.putString(Settings.EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME,
+                        cn.flattenToString());
+
+                new SubSettingLauncher(getContext())
+                        .setDestination(NotificationAccessDetails.class.getName())
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .setTitleRes(R.string.manage_zen_access_title)
+                        .setArguments(args)
+                        .setExtras(extras)
+                        .setUserHandle(UserHandle.getUserHandleForUid(service.applicationInfo.uid))
+                        .launch();
+                        return true;
+                    });
+            pref.setKey(cn.flattenToString());
+            screen.addPreference(pref);
+        }
+        highlightPreferenceIfNeeded();
     }
 
     @Override
@@ -87,120 +190,10 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     }
 
     @Override
-    protected Config getConfig() {
-        return CONFIG;
-    }
-
-    @Override
-    protected boolean setEnabled(ComponentName service, String title, boolean enable) {
-        logSpecialPermissionChange(enable, service.getPackageName());
-        if (!enable) {
-            if (!isServiceEnabled(service)) {
-                return true; // already disabled
-            }
-            // show a friendly dialog
-            new FriendlyWarningDialogFragment()
-                    .setServiceInfo(service, title, this)
-                    .show(getFragmentManager(), "friendlydialog");
-            return false;
-        } else {
-            if (isServiceEnabled(service)) {
-                return true; // already enabled
-            }
-            // show a scary dialog
-            new ScaryWarningDialogFragment()
-                    .setServiceInfo(service, title, this)
-                    .show(getFragmentManager(), "dialog");
-            return false;
-        }
-    }
-
-    @Override
-    protected boolean isServiceEnabled(ComponentName cn) {
-        return mNm.isNotificationListenerAccessGranted(cn);
-    }
-
-    @Override
-    protected void enable(ComponentName service) {
-        mNm.setNotificationListenerAccessGranted(service, true);
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.notification_access_settings;
     }
 
-    @VisibleForTesting
-    void logSpecialPermissionChange(boolean enable, String packageName) {
-        int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
-                : SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
-                logCategory, packageName);
-    }
-
-    private static void disable(final NotificationAccessSettings parent, final ComponentName cn) {
-        parent.mNm.setNotificationListenerAccessGranted(cn, false);
-        AsyncTask.execute(() -> {
-            if (!parent.mNm.isNotificationPolicyAccessGrantedForPackage(
-                    cn.getPackageName())) {
-                parent.mNm.removeAutomaticZenRules(cn.getPackageName());
-            }
-        });
-    }
-
-    public static class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
-        static final String KEY_COMPONENT = "c";
-        static final String KEY_LABEL = "l";
-
-        public FriendlyWarningDialogFragment setServiceInfo(ComponentName cn, String label,
-                Fragment target) {
-            Bundle args = new Bundle();
-            args.putString(KEY_COMPONENT, cn.flattenToString());
-            args.putString(KEY_LABEL, label);
-            setArguments(args);
-            setTargetFragment(target, 0);
-            return this;
-        }
-
-        @Override
-        public int getMetricsCategory() {
-            return SettingsEnums.DIALOG_DISABLE_NOTIFICATION_ACCESS;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Bundle args = getArguments();
-            final String label = args.getString(KEY_LABEL);
-            final ComponentName cn = ComponentName.unflattenFromString(args
-                    .getString(KEY_COMPONENT));
-            NotificationAccessSettings parent = (NotificationAccessSettings) getTargetFragment();
-
-            final String summary = getResources().getString(
-                    R.string.notification_listener_disable_warning_summary, label);
-            return new AlertDialog.Builder(getContext())
-                    .setMessage(summary)
-                    .setCancelable(true)
-                    .setPositiveButton(R.string.notification_listener_disable_warning_confirm,
-                            (dialog, id) -> disable(parent, cn))
-                    .setNegativeButton(R.string.notification_listener_disable_warning_cancel,
-                            (dialog, id) -> {
-                                // pass
-                            })
-                    .create();
-        }
-    }
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.notification_access_settings;
-                    result.add(sir);
-                    return result;
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.notification_access_settings);
 }

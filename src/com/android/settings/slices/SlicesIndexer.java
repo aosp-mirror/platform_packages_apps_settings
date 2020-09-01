@@ -101,17 +101,21 @@ class SlicesIndexer implements Runnable {
         for (SliceData dataRow : indexData) {
             values = new ContentValues();
             values.put(IndexColumns.KEY, dataRow.getKey());
+            values.put(IndexColumns.SLICE_URI, dataRow.getUri().toSafeString());
             values.put(IndexColumns.TITLE, dataRow.getTitle());
             values.put(IndexColumns.SUMMARY, dataRow.getSummary());
-            values.put(IndexColumns.SCREENTITLE, dataRow.getScreenTitle().toString());
+            final CharSequence screenTitle = dataRow.getScreenTitle();
+            if (screenTitle != null) {
+                values.put(IndexColumns.SCREENTITLE, screenTitle.toString());
+            }
             values.put(IndexColumns.KEYWORDS, dataRow.getKeywords());
             values.put(IndexColumns.ICON_RESOURCE, dataRow.getIconResource());
             values.put(IndexColumns.FRAGMENT, dataRow.getFragmentClassName());
             values.put(IndexColumns.CONTROLLER, dataRow.getPreferenceController());
-            values.put(IndexColumns.PLATFORM_SLICE, dataRow.isPlatformDefined());
             values.put(IndexColumns.SLICE_TYPE, dataRow.getSliceType());
             values.put(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
                     dataRow.getUnavailableSliceSubtitle());
+            values.put(IndexColumns.PUBLIC_SLICE, dataRow.isPublicSlice());
 
             database.replaceOrThrow(Tables.TABLE_SLICES_INDEX, null /* nullColumnHack */,
                     values);

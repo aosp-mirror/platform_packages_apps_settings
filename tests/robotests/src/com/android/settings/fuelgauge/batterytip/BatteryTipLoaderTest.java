@@ -32,7 +32,6 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -43,15 +42,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryTipLoaderTest {
 
     private static final int[] TIP_ORDER = {
-            BatteryTip.TipType.APP_RESTRICTION,
             BatteryTip.TipType.BATTERY_SAVER,
             BatteryTip.TipType.HIGH_DEVICE_USAGE,
             BatteryTip.TipType.LOW_BATTERY,

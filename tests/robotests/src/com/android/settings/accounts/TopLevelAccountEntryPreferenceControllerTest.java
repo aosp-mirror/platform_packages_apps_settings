@@ -16,19 +16,12 @@
 
 package com.android.settings.accounts;
 
-import static com.android.settings.accounts.TopLevelAccountEntryPreferenceControllerTest
-        .ShadowAuthenticationHelper.LABELS;
-import static com.android.settings.accounts.TopLevelAccountEntryPreferenceControllerTest
-        .ShadowAuthenticationHelper.TYPES;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.os.UserHandle;
-import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settings.testutils.shadow.ShadowAuthenticationHelper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,21 +30,22 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {TopLevelAccountEntryPreferenceControllerTest.ShadowAuthenticationHelper.class})
+@Config(shadows = {ShadowAuthenticationHelper.class})
 public class TopLevelAccountEntryPreferenceControllerTest {
 
     private TopLevelAccountEntryPreferenceController mController;
     private Context mContext;
+    private String[] LABELS;
+    private String[] TYPES;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mController = new TopLevelAccountEntryPreferenceController(mContext, "test_key");
+        LABELS = ShadowAuthenticationHelper.getLabels();
+        TYPES = ShadowAuthenticationHelper.getTypes();
     }
 
     @After
@@ -60,7 +54,6 @@ public class TopLevelAccountEntryPreferenceControllerTest {
     }
 
     @Test
-
     public void updateSummary_hasAccount_shouldDisplayUpTo3AccountTypes() {
         assertThat(mController.getSummary())
                 .isEqualTo(LABELS[0] + ", " + LABELS[1] + ", and " + LABELS[2]);
@@ -82,45 +75,5 @@ public class TopLevelAccountEntryPreferenceControllerTest {
 
         // should only show the 2 accounts with labels
         assertThat(mController.getSummary()).isEqualTo(LABELS[0] + " and " + LABELS[1]);
-    }
-
-    @Implements(AuthenticatorHelper.class)
-    public static class ShadowAuthenticationHelper {
-
-        static final String[] TYPES = {"type1", "type2", "type3", "type4"};
-        static final String[] LABELS = {"LABEL1", "LABEL2", "LABEL3", "LABEL4"};
-        private static String[] sEnabledAccount = TYPES;
-
-        protected void __constructor__(Context context, UserHandle userHandle,
-                AuthenticatorHelper.OnAccountsUpdateListener listener) {
-        }
-
-        private static void setEnabledAccount(String[] enabledAccount) {
-            sEnabledAccount = enabledAccount;
-        }
-
-        @Resetter
-        public static void reset() {
-            sEnabledAccount = TYPES;
-        }
-
-        @Implementation
-        protected String[] getEnabledAccountTypes() {
-            return sEnabledAccount;
-        }
-
-        @Implementation
-        protected CharSequence getLabelForType(Context context, final String accountType) {
-            if (TextUtils.equals(accountType, TYPES[0])) {
-                return LABELS[0];
-            } else if (TextUtils.equals(accountType, TYPES[1])) {
-                return LABELS[1];
-            } else if (TextUtils.equals(accountType, TYPES[2])) {
-                return LABELS[2];
-            } else if (TextUtils.equals(accountType, TYPES[3])) {
-                return LABELS[3];
-            }
-            return null;
-        }
     }
 }

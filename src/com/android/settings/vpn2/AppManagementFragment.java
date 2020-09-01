@@ -21,6 +21,7 @@ import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 import android.annotation.NonNull;
 import android.app.AppOpsManager;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -48,6 +49,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -67,6 +70,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     private static final String KEY_FORGET_VPN = "forget_vpn";
 
     private PackageManager mPackageManager;
+    private DevicePolicyManager mDevicePolicyManager;
     private ConnectivityManager mConnectivityManager;
     private IConnectivityManager mConnectivityService;
 
@@ -119,6 +123,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.vpn_app_management);
 
         mPackageManager = getContext().getPackageManager();
+        mDevicePolicyManager = getContext().getSystemService(DevicePolicyManager.class);
         mConnectivityManager = getContext().getSystemService(ConnectivityManager.class);
         mConnectivityService = IConnectivityManager.Stub
                 .asInterface(ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
@@ -250,6 +255,15 @@ public class AppManagementFragment extends SettingsPreferenceFragment
             mPreferenceForget.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
 
+            if (mPackageName.equals(mDevicePolicyManager.getAlwaysOnVpnPackage())) {
+                EnforcedAdmin admin = RestrictedLockUtils.getProfileOrDeviceOwner(
+                        getContext(), UserHandle.of(mUserId));
+                mPreferenceAlwaysOn.setDisabledByAdmin(admin);
+                mPreferenceForget.setDisabledByAdmin(admin);
+                if (mDevicePolicyManager.isAlwaysOnVpnLockdownEnabled()) {
+                    mPreferenceLockdown.setDisabledByAdmin(admin);
+                }
+            }
             if (mConnectivityManager.isAlwaysOnVpnPackageSupportedForUser(mUserId, mPackageName)) {
                 // setSummary doesn't override the admin message when user restriction is applied
                 mPreferenceAlwaysOn.setSummary(R.string.vpn_always_on_summary);

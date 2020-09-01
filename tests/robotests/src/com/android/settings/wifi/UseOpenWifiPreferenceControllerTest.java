@@ -39,11 +39,9 @@ import android.net.NetworkScorerAppData;
 import android.provider.Settings;
 
 import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.common.collect.Lists;
 
@@ -77,8 +75,6 @@ public class UseOpenWifiPreferenceControllerTest {
     }
 
     @Mock
-    private Lifecycle mLifecycle;
-    @Mock
     private Fragment mFragment;
     @Mock
     private NetworkScoreManager mNetworkScoreManager;
@@ -97,7 +93,8 @@ public class UseOpenWifiPreferenceControllerTest {
     }
 
     private void createController() {
-        mController = new UseOpenWifiPreferenceController(mContext, mFragment, mLifecycle);
+        mController = new UseOpenWifiPreferenceController(mContext);
+        mController.setFragment(mFragment);
     }
 
     /**
@@ -146,52 +143,41 @@ public class UseOpenWifiPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_nonMatchingKey_shouldDoNothing() {
+    public void isAvailable_disableUseOpenWifiComponentBetweenCalls_returnsTrueThenReturnsFalse() {
+        setupScorers(Lists.newArrayList(sAppData));
         createController();
 
-        final SwitchPreference pref = new SwitchPreference(mContext);
+        assertThat(mController.isAvailable()).isTrue();
 
-        assertThat(mController.onPreferenceChange(pref, null)).isFalse();
+        // Update NetworkScorerAppData so that it no longer has openWifiActivity.
+        setupScorers(Lists.newArrayList(sAppDataNoActivity));
+
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void onPreferenceChange_notAvailable_shouldDoNothing() {
-        createController();
-
-        final Preference pref = new Preference(mContext);
-        pref.setKey(mController.getPreferenceKey());
-
-        assertThat(mController.onPreferenceChange(pref, null)).isFalse();
-    }
-
-    @Test
-    public void onPreferenceChange_matchingKeyAndAvailable_enableShouldStartEnableActivity() {
+    public void setChecked_withTrue_enableShouldStartEnableActivity() {
         setupScorers(Lists.newArrayList(sAppData, sAppDataNoActivity));
         createController();
 
-        final SwitchPreference pref = new SwitchPreference(mContext);
-        pref.setKey(mController.getPreferenceKey());
+        mController.setChecked(true);
 
-        assertThat(mController.onPreferenceChange(pref, null)).isFalse();
         verify(mFragment).startActivityForResult(mIntentCaptor.capture(),
                 eq(REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY));
-        Intent activityIntent = mIntentCaptor.getValue();
+        final Intent activityIntent = mIntentCaptor.getValue();
         assertThat(activityIntent.getComponent()).isEqualTo(sEnableActivityComponent);
         assertThat(activityIntent.getAction()).isEqualTo(NetworkScoreManager.ACTION_CUSTOM_ENABLE);
     }
 
     @Test
-    public void onPreferenceChange_matchingKeyAndAvailable_disableShouldUpdateSetting() {
+    public void setChecked_withFalse_disableShouldUpdateSetting() {
         setupScorers(Lists.newArrayList(sAppData, sAppDataNoActivity));
         Settings.Global.putString(mContext.getContentResolver(), USE_OPEN_WIFI_PACKAGE,
                 sEnableActivityComponent.getPackageName());
-
         createController();
 
-        final SwitchPreference pref = new SwitchPreference(mContext);
-        pref.setKey(mController.getPreferenceKey());
+        mController.setChecked(false);
 
-        assertThat(mController.onPreferenceChange(pref, null)).isTrue();
         assertThat(Settings.Global.getString(mContext.getContentResolver(), USE_OPEN_WIFI_PACKAGE))
                 .isEqualTo("");
     }

@@ -18,19 +18,16 @@ package com.android.settings.applications.assist;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.AssistGestureSettingsPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -68,14 +65,6 @@ public class ManageAssist extends DashboardFragment {
         use(AssistGestureSettingsPreferenceController.class).setAssistOnly(true);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        mFooterPreferenceMixin.createFooterPreference()
-                .setTitle(R.string.assist_footer);
-    }
-
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
@@ -88,15 +77,8 @@ public class ManageAssist extends DashboardFragment {
         return controllers;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.manage_assist;
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.manage_assist) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

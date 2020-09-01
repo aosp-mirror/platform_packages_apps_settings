@@ -22,13 +22,14 @@
     settings:keywords="@string/keywords_sounds"
     settings:initialExpandedChildrenCount="9">
 
-    <!-- Remote volume -->
-    <com.android.settings.notification.RemoteVolumeSeekBarPreference
-        android:key="remote_volume"
-        android:icon="@drawable/ic_volume_remote"
-        android:title="@string/remote_media_volume_option_title"
+    <!-- Remote volume group -->
+    <PreferenceCategory
+        android:key="remote_media_group"
+        android:title=""
         android:order="-185"
-        settings:controller="com.android.settings.notification.RemoteVolumePreferenceController"/>
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.notification.RemoteVolumeGroupController">
+    </PreferenceCategory>
 
     <!-- Media volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
@@ -44,6 +45,7 @@
         android:title="@string/media_output_title"
         android:dialogTitle="@string/media_output_title"
         android:order="-175"
+        settings:searchable="false"
         settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
 
     <!-- Call volume -->
@@ -60,6 +62,7 @@
         android:title="@string/take_call_on_title"
         android:dialogTitle="@string/take_call_on_title"
         android:order="-165"
+        settings:searchable="false"
         settings:controller="com.android.settings.sound.HandsFreeProfileOutputPreferenceController"/>
 
     <!-- Ring volume -->
@@ -88,33 +91,43 @@
         settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"/>
 
     <!-- Also vibrate for calls -->
-    <SwitchPreference
-        android:key="vibrate_when_ringing"
+    <Preference
+        android:fragment="com.android.settings.sound.VibrateForCallsPreferenceFragment"
+        android:key="vibrate_for_calls"
         android:title="@string/vibrate_when_ringing_title"
-        settings:controller="com.android.settings.notification.VibrateWhenRingPreferenceController"
-        android:order="-130"/>
+        android:order="-130"
+        settings:controller="com.android.settings.sound.VibrateForCallsPreferenceController"
+        settings:keywords="@string/keywords_vibrate_for_calls"/>
 
     <!-- Interruptions -->
     <com.android.settingslib.RestrictedPreference
         android:key="zen_mode"
         android:title="@string/zen_mode_settings_title"
-        android:fragment="com.android.settings.notification.ZenModeSettings"
+        android:fragment="com.android.settings.notification.zen.ZenModeSettings"
         android:order="-120"
         settings:useAdminDisabledSummary="true"
         settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
         settings:allowDividerAbove="true"
-        settings:controller="com.android.settings.notification.ZenModePreferenceController"/>
+        settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"/>
+
+    <Preference
+        android:key="media_controls_summary"
+        android:title="@string/media_controls_title"
+        android:fragment="com.android.settings.sound.MediaControlsSettings"
+        android:order="-110"
+        settings:controller="com.android.settings.sound.MediaControlsParentPreferenceController"
+        settings:keywords="@string/keywords_media_controls"/>
 
     <Preference
         android:key="gesture_prevent_ringing_sound"
         android:title="@string/gesture_prevent_ringing_sound_title"
-        android:order="-110"
+        android:order="-107"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController"/>
 
     <!-- Phone ringtone -->
     <com.android.settings.DefaultRingtonePreference
-        android:key="ringtone"
+        android:key="phone_ringtone"
         android:title="@string/ringtone_title"
         android:dialogTitle="@string/ringtone_title"
         android:summary="@string/summary_placeholder"

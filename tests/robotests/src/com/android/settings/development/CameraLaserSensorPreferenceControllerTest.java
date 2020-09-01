@@ -128,16 +128,4 @@ public class CameraLaserSensorPreferenceControllerTest {
                         CameraLaserSensorPreferenceController.PROPERTY_CAMERA_LASER_SENSOR,
                         Integer.toString(CameraLaserSensorPreferenceController.ENABLED)));
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeEnabled() {
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        verify(mPreference).setEnabled(false);
-        verify(mPreference).setChecked(false);
-        assertThat(Integer.toString(CameraLaserSensorPreferenceController.DISABLED)).isEqualTo(
-                SystemProperties.get(
-                        CameraLaserSensorPreferenceController.PROPERTY_CAMERA_LASER_SENSOR,
-                        Integer.toString(CameraLaserSensorPreferenceController.ENABLED)));
-    }
 }

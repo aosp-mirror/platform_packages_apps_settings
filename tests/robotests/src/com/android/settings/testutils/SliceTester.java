@@ -137,16 +137,19 @@ public class SliceTester {
      */
     public static void testSettingsSliderSlice(Context context, Slice slice, SliceData sliceData) {
         final SliceMetadata metadata = SliceMetadata.from(context, slice);
-
-        final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
-        final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
-
         final SliceAction primaryAction = metadata.getPrimaryAction();
 
-        final IconCompat expectedIcon = IconCompat.createWithResource(context,
-                sliceData.getIconResource());
-        assertThat(expectedIcon.toString()).isEqualTo(primaryAction.getIcon().toString());
+        final IconCompat icon = primaryAction.getIcon();
+        if (icon == null) {
+            final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
+            final int color = colorItem.getInt();
+            assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
+
+        } else {
+            final IconCompat expectedIcon = IconCompat.createWithResource(context,
+                    sliceData.getIconResource());
+            assertThat(expectedIcon.toString()).isEqualTo(icon.toString());
+        }
 
         final long sliceTTL = metadata.getExpiry();
         assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);

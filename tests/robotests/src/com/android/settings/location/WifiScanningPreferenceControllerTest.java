@@ -15,14 +15,13 @@
  */
 package com.android.settings.location;
 
-import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
-import android.provider.Settings;
-import android.provider.Settings.Global;
+import android.content.Context;
+import android.net.wifi.WifiManager;
 
 import androidx.preference.SwitchPreference;
 
@@ -39,7 +38,10 @@ public class WifiScanningPreferenceControllerTest {
 
     @Mock
     private SwitchPreference mPreference;
+    @Mock
+    private WifiManager mWifiManager;
 
+    private Context mContext;
     private ContentResolver mContentResolver;
     private WifiScanningPreferenceController mController;
 
@@ -47,13 +49,16 @@ public class WifiScanningPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
-        mController = new WifiScanningPreferenceController(RuntimeEnvironment.application);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+
+        mController = new WifiScanningPreferenceController(mContext);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
     }
 
     @Test
     public void updateState_wifiScanningEnabled_shouldCheckedPreference() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
 
         mController.updateState(mPreference);
 
@@ -62,7 +67,7 @@ public class WifiScanningPreferenceControllerTest {
 
     @Test
     public void updateState_wifiScanningDisabled_shouldUncheckedPreference() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
 
         mController.updateState(mPreference);
 
@@ -75,9 +80,7 @@ public class WifiScanningPreferenceControllerTest {
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        final int scanAlways =
-            Settings.Global.getInt(mContentResolver, Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
-        assertThat(scanAlways).isEqualTo(1);
+        verify(mWifiManager).setScanAlwaysAvailable(true);
     }
 
     @Test
@@ -86,8 +89,6 @@ public class WifiScanningPreferenceControllerTest {
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        final int scanAlways =
-            Settings.Global.getInt(mContentResolver, Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
-        assertThat(scanAlways).isEqualTo(0);
+        verify(mWifiManager).setScanAlwaysAvailable(false);
     }
 }

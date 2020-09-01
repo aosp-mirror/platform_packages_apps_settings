@@ -19,30 +19,21 @@ package com.android.settings.accounts;
 import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
+import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 public class EnterpriseDisclosurePreferenceController extends BasePreferenceController {
 
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
-    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
-    private PreferenceScreen mScreen;
 
-    public EnterpriseDisclosurePreferenceController(Context context) {
+    public EnterpriseDisclosurePreferenceController(Context context, String key) {
         // Preference key doesn't matter as we are creating the preference in code.
-        super(context, "add_account_enterprise_disclosure_footer");
-
+        super(context, key);
         mFeatureProvider = FeatureFactory.getFactory(mContext)
                 .getEnterprisePrivacyFeatureProvider(mContext);
-    }
-
-    public void setFooterPreferenceMixin(FooterPreferenceMixinCompat footerPreferenceMixin) {
-        mFooterPreferenceMixin = footerPreferenceMixin;
     }
 
     @Override
@@ -53,27 +44,17 @@ public class EnterpriseDisclosurePreferenceController extends BasePreferenceCont
         return AVAILABLE;
     }
 
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mScreen = screen;
-        addEnterpriseDisclosure();
-    }
-
     @VisibleForTesting
     CharSequence getDisclosure() {
         return mFeatureProvider.getDeviceOwnerDisclosure();
     }
 
-    private void addEnterpriseDisclosure() {
+    @Override
+    public void updateState(Preference preference) {
         final CharSequence disclosure = getDisclosure();
         if (disclosure == null) {
             return;
         }
-        final FooterPreference enterpriseDisclosurePreference =
-                mFooterPreferenceMixin.createFooterPreference();
-        enterpriseDisclosurePreference.setSelectable(false);
-        enterpriseDisclosurePreference.setTitle(disclosure);
-        mScreen.addPreference(enterpriseDisclosurePreference);
+        preference.setTitle(disclosure);
     }
 }

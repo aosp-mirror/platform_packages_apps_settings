@@ -15,6 +15,8 @@
  */
 package com.android.settings.wifi;
 
+import static android.net.wifi.WifiManager.WIFI_STATE_ENABLED;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -31,38 +33,56 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.wifi.EAPConstants;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.hotspot2.PasspointConfiguration;
+import android.net.wifi.hotspot2.pps.Credential;
 import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
-
+import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.View;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.datausage.DataUsagePreference;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
+import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
-import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -77,9 +97,27 @@ public class WifiSettingsTest {
     @Mock
     private DataUsagePreference mDataUsagePreference;
     @Mock
+    private RecyclerView mRecyclerView;
+    @Mock
+    private RecyclerView.Adapter mRecyclerViewAdapter;
+    @Mock
+    private View mHeaderView;
+    @Mock
     private WifiManager mWifiManager;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
+    @Mock
+    private Intent mActivityIntent;
+    @Mock
+    private SwitchBar mSwitchBar;
+    @Mock
+    private WifiInfo mWifiInfo;
+    @Mock
+    private PackageManager mPackageManager;
     private Context mContext;
     private WifiSettings mWifiSettings;
+    private FakeFeatureFactory mFakeFeatureFactory;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() {
@@ -88,32 +126,23 @@ public class WifiSettingsTest {
 
         mWifiSettings = spy(new WifiSettings());
         doReturn(mContext).when(mWifiSettings).getContext();
+        doReturn(mRecyclerViewAdapter).when(mRecyclerView).getAdapter();
+        doReturn(mRecyclerView).when(mWifiSettings).getListView();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
+        doReturn(mHeaderView).when(mWifiSettings).setPinnedHeaderView(anyInt());
+        doReturn(mWifiInfo).when(mWifiManager).getConnectionInfo();
+        doReturn(mWifiManager).when(mWifiTracker).getManager();
         mWifiSettings.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mWifiSettings.mSavedNetworksPreference = new Preference(mContext);
         mWifiSettings.mConfigureWifiSettingsPreference = new Preference(mContext);
         mWifiSettings.mWifiTracker = mWifiTracker;
         mWifiSettings.mWifiManager = mWifiManager;
-    }
-
-    @Test
-    public void testSearchIndexProvider_shouldIndexFragmentTitle() {
-        final List<SearchIndexableRaw> indexRes =
-                WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext,
-                        true /* enabled */);
-
-        assertThat(indexRes).isNotNull();
-        assertThat(indexRes.get(0).key).isEqualTo(WifiSettings.DATA_KEY_REFERENCE);
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testSearchIndexProvider_ifWifiSettingsNotVisible_shouldNotIndexFragmentTitle() {
-        final List<SearchIndexableRaw> indexRes =
-                WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext,
-                        true /* enabled */);
-
-        assertThat(indexRes).isEmpty();
+        mWifiSettings.mConnectivityManager = mConnectivityManager;
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
+        ReflectionHelpers.setField(mWifiSettings, "mMetricsFeatureProvider",
+                mMetricsFeatureProvider);
+        WifiTrackerFactory.setTestingWifiTracker(mWifiTracker);
     }
 
     @Test
@@ -142,9 +171,24 @@ public class WifiSettingsTest {
             sp.setFqdn("fqdn");
             final PasspointConfiguration config = new PasspointConfiguration();
             config.setHomeSp(sp);
+            Credential.SimCredential simCredential = new Credential.SimCredential();
+            Credential credential = new Credential();
+            credential.setRealm("test.example.com");
+            simCredential.setImsi("12345*");
+            simCredential.setEapType(EAPConstants.EAP_SIM);
+            credential.setSimCredential(simCredential);
+            config.setCredential(credential);
             mockConfigs.add(config);
         }
         return mockConfigs;
+    }
+
+    static NetworkCapabilities makeCaptivePortalNetworkCapabilities() {
+        final NetworkCapabilities capabilities = new NetworkCapabilities();
+        capabilities.clearAll();
+        capabilities.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        capabilities.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
+        return capabilities;
     }
 
     @Test
@@ -204,8 +248,8 @@ public class WifiSettingsTest {
     @Test
     public void setAdditionalSettingsSummaries_wifiWakeupEnabled_displayOn() {
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_WAKEUP_ENABLED, 1);
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(true);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
         Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0);
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
@@ -218,7 +262,7 @@ public class WifiSettingsTest {
     @Test
     public void setAdditionalSettingsSummaries_wifiWakeupDisabled_displayOff() {
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_WAKEUP_ENABLED, 0);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(false);
 
         mWifiSettings.setAdditionalSettingsSummaries();
 
@@ -234,21 +278,29 @@ public class WifiSettingsTest {
     }
 
     private void setUpForOnCreate() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
+        final SettingsActivity activity = mock(SettingsActivity.class);
+        when(activity.getSwitchBar()).thenReturn(mSwitchBar);
         when(mWifiSettings.getActivity()).thenReturn(activity);
         final Resources.Theme theme = mContext.getTheme();
         when(activity.getTheme()).thenReturn(theme);
+        when(activity.getIntent()).thenReturn(mActivityIntent);
         UserManager userManager = mock(UserManager.class);
         when(activity.getSystemService(Context.USER_SERVICE))
                 .thenReturn(userManager);
-
         when(mWifiSettings.findPreference(WifiSettings.PREF_KEY_DATA_USAGE))
                 .thenReturn(mDataUsagePreference);
+        when(activity.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
+        when(activity.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
+        when(activity.getPackageManager()).thenReturn(mPackageManager);
     }
 
     @Test
-    @Config(shadows = {ShadowDataUsageUtils.class})
+    @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceInvisibleIfWifiNotSupported() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
         setUpForOnCreate();
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = false;
 
@@ -258,8 +310,12 @@ public class WifiSettingsTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDataUsageUtils.class})
+    @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceVisibleIfWifiSupported() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
         setUpForOnCreate();
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
 
@@ -289,5 +345,73 @@ public class WifiSettingsTest {
         mWifiSettings.onCreateContextMenu(menu, view, null /* info */);
 
         verify(menu).add(anyInt(), eq(WifiSettings.MENU_ID_FORGET), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onCreateAdapter_hasStableIdsTrue() {
+        final PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
+        when(preferenceScreen.getContext()).thenReturn(mContext);
+
+        RecyclerView.Adapter adapter = mWifiSettings.onCreateAdapter(preferenceScreen);
+
+        assertThat(adapter.hasStableIds()).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
+    public void clickOnWifiNetworkWith_shouldStartCaptivePortalApp() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
+        when(mWifiManager.getConfiguredNetworks()).thenReturn(createMockWifiConfigurations(
+                NUM_NETWORKS));
+        when(mWifiTracker.isConnected()).thenReturn(true);
+
+        final AccessPoint accessPointActive = mock(AccessPoint.class);
+        when(accessPointActive.isActive()).thenReturn(true);
+        when(accessPointActive.isSaved()).thenReturn(false);
+        when(accessPointActive.getConfig()).thenReturn(mock(WifiConfiguration.class));
+
+        final AccessPoint accessPointInactive = mock(AccessPoint.class);
+        when(accessPointInactive.isActive()).thenReturn(false);
+        when(accessPointInactive.isSaved()).thenReturn(false);
+        when(accessPointInactive.getConfig()).thenReturn(mock(WifiConfiguration.class));
+
+        when(mWifiTracker.getAccessPoints()).thenReturn(Arrays.asList(accessPointActive,
+                accessPointInactive));
+        when(mWifiManager.getWifiState()).thenReturn(WIFI_STATE_ENABLED);
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
+
+        final Network network = mock(Network.class);
+        when(mWifiManager.getCurrentNetwork()).thenReturn(network);
+
+        // Simulate activity creation cycle
+        setUpForOnCreate();
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        mWifiSettings.onCreate(Bundle.EMPTY);
+        mWifiSettings.onActivityCreated(null);
+        mWifiSettings.onViewCreated(new View(mContext), new Bundle());
+        mWifiSettings.onStart();
+
+        // Click on open network
+        final Preference openWifiPref = new LongPressAccessPointPreference(accessPointInactive,
+                mContext, null,
+                false /* forSavedNetworks */, R.drawable.ic_wifi_signal_0,
+                null);
+        mWifiSettings.onPreferenceTreeClick(openWifiPref);
+
+        // Ensure connect() was called, and fake success.
+        ArgumentCaptor<WifiManager.ActionListener> wifiCallbackCaptor = ArgumentCaptor.forClass(
+                WifiManager.ActionListener.class);
+        verify(mWifiManager).connect(any(WifiConfiguration.class), wifiCallbackCaptor.capture());
+        wifiCallbackCaptor.getValue().onSuccess();
+
+        // Simulate capability change
+        mWifiSettings.mCaptivePortalNetworkCallback.onCapabilitiesChanged(network,
+                makeCaptivePortalNetworkCapabilities());
+
+        // Ensure CP was called
+        verify(mConnectivityManager).startCaptivePortalApp(eq(network));
     }
 }

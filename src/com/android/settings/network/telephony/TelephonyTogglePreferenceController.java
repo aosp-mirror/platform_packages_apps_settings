@@ -59,6 +59,10 @@ public abstract class TelephonyTogglePreferenceController extends TogglePreferen
         mSetSessionCount.getAndDecrement();
     }
 
+    @Override
+    public boolean isSliceable() {
+        return false;
+    }
 
     /**
      * Get carrier config based on specific subscription id.

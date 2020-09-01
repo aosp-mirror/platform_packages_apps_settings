@@ -29,7 +29,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -312,11 +311,6 @@ public class RequestToggleWiFiActivity extends AlertActivity
                         RequestToggleWiFiActivity.this.setResult(Activity.RESULT_OK);
                         finish();
                     }
-                } break;
-
-                case WifiManager.ERROR: {
-                    Toast.makeText(activity, R.string.wifi_error, Toast.LENGTH_SHORT).show();
-                    finish();
                 } break;
             }
         }

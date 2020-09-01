@@ -34,8 +34,6 @@ public class EnabledVrListenersController extends BasePreferenceController {
     @AvailabilityStatus
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_enabled_vr_listeners)
-                && !mActivityManager.isLowRamDevice()
-                ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+                && !mActivityManager.isLowRamDevice() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

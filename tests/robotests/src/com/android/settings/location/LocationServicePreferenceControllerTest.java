@@ -59,8 +59,8 @@ import java.util.Map;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
 public class LocationServicePreferenceControllerTest {
-    private static final String LOCATION_SERVICES_MANAGED_PROFILE_KEY =
-            "location_services_managed_profile";
+
+    private static final String KEY_LOCATION_SERVICES = "location_service";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocationSettings mFragment;
@@ -86,14 +86,13 @@ public class LocationServicePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = spy(new LocationServicePreferenceController(
-                mContext, mFragment, mLifecycle, mSettingsInjector));
+        mController = spy(new LocationServicePreferenceController(mContext, KEY_LOCATION_SERVICES));
+        when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
+        mController.init(mFragment);
+        mController.mInjector = mSettingsInjector;
         final String key = mController.getPreferenceKey();
         when(mScreen.findPreference(key)).thenReturn(mCategoryPrimary);
-        when(mScreen.findPreference(LOCATION_SERVICES_MANAGED_PROFILE_KEY)).thenReturn(
-                mCategoryManaged);
         when(mCategoryPrimary.getKey()).thenReturn(key);
-        when(mCategoryManaged.getKey()).thenReturn(LOCATION_SERVICES_MANAGED_PROFILE_KEY);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
     }

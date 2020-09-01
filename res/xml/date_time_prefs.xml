@@ -17,48 +17,40 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="date_time_settings_screen"
     android:title="@string/date_and_time"
     settings:keywords="@string/keywords_date_and_time">
 
-    <PreferenceCategory
-        android:key="date_time_preference_category"
-        android:layout="@layout/preference_category_no_label">
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="auto_time"
-            android:title="@string/date_time_auto"
-            settings:useAdditionalSummary="true"
-            settings:userRestriction="no_config_date_time" />
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="auto_time"
+        android:title="@string/date_time_auto"
+        settings:useAdditionalSummary="true"
+        settings:userRestriction="no_config_date_time"/>
 
-        <com.android.settingslib.RestrictedPreference
-            android:key="date"
-            android:title="@string/date_time_set_date_title"
-            android:summary="@string/summary_placeholder"
-            settings:userRestriction="no_config_date_time" />
+    <com.android.settingslib.RestrictedPreference
+        android:key="date"
+        android:title="@string/date_time_set_date_title"
+        android:summary="@string/summary_placeholder"
+        settings:userRestriction="no_config_date_time"/>
 
-        <com.android.settingslib.RestrictedPreference
-            android:key="time"
-            android:title="@string/date_time_set_time_title"
-            android:summary="@string/summary_placeholder"
-            settings:userRestriction="no_config_date_time" />
-    </PreferenceCategory>
+    <com.android.settingslib.RestrictedPreference
+        android:key="time"
+        android:title="@string/date_time_set_time_title"
+        android:summary="@string/summary_placeholder"
+        settings:userRestriction="no_config_date_time"/>
 
-    <PreferenceCategory
-        android:key="time_zone_preference_category"
-        android:layout="@layout/preference_category_no_label">
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="auto_zone"
-            android:title="@string/zone_auto_title"
-            settings:userRestriction="no_config_date_time" />
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="auto_zone"
+        android:title="@string/zone_auto_title"
+        settings:allowDividerAbove="true"
+        settings:userRestriction="no_config_date_time"/>
 
-        <com.android.settingslib.RestrictedPreference
-            android:key="timezone"
-            android:title="@string/date_time_set_timezone_title"
-            android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.datetime.timezone.TimeZoneSettings"
-            settings:userRestriction="no_config_date_time"
-            settings:keywords="@string/keywords_time_zone"/>
-    </PreferenceCategory>
+    <com.android.settingslib.RestrictedPreference
+        android:key="timezone"
+        android:title="@string/date_time_set_timezone_title"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.datetime.timezone.TimeZoneSettings"
+        settings:userRestriction="no_config_date_time"
+        settings:keywords="@string/keywords_time_zone"/>
 
     <PreferenceCategory
         android:key="time_format_preference_category"

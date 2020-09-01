@@ -27,6 +27,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -157,7 +158,8 @@ public class MockLocationAppPreferenceController extends DeveloperOptionsPrefere
         }
     }
 
-    private String getCurrentMockLocationApp() {
+    @VisibleForTesting
+    String getCurrentMockLocationApp() {
         final List<AppOpsManager.PackageOps> packageOps = mAppsOpsManager.getPackagesForOps(
                 MOCK_LOCATION_APP_OPS);
         if (packageOps != null) {

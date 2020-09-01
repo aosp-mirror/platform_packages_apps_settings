@@ -16,8 +16,6 @@
 
 package com.android.settings.security.screenlock;
 
-import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-
 import android.content.Context;
 import android.os.UserHandle;
 
@@ -52,14 +50,7 @@ public class LockScreenPreferenceController extends BasePreferenceController imp
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mLockPatternUtils.isSecure(MY_USER_ID)) {
-            return mLockPatternUtils.isLockScreenDisabled(MY_USER_ID)
-                    ? DISABLED_FOR_USER : AVAILABLE_UNSEARCHABLE;
-        } else {
-            return mLockPatternUtils.getKeyguardStoredPasswordQuality(MY_USER_ID)
-                    == PASSWORD_QUALITY_UNSPECIFIED
-                    ? DISABLED_FOR_USER : AVAILABLE_UNSEARCHABLE;
-        }
+        return AVAILABLE;
     }
 
     @Override

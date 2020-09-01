@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -31,6 +32,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
@@ -45,9 +49,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
-
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultSubscriptionControllerTest {
@@ -89,6 +90,20 @@ public class DefaultSubscriptionControllerTest {
                 createMockSub(1, "sub1"),
                 createMockSub(2, "sub2")));
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void isCallingAccountBindToSubscription_invalidAccount_withoutCrash() {
+        doReturn(null).when(mController).getPhoneAccount(any());
+
+        mController.isCallingAccountBindToSubscription(null);
+    }
+
+    @Test
+    public void getLabelFromCallingAccount_invalidAccount_emptyString() {
+        doReturn(null).when(mController).getPhoneAccount(any());
+
+        assertThat(mController.getLabelFromCallingAccount(null)).isEqualTo("");
     }
 
     @Test

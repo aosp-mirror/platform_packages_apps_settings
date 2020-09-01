@@ -28,6 +28,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -64,6 +65,7 @@ public class NrDisabledInDsdsFooterPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void isAvailable_dataOnAndDsdsAnd5GSupported_Available() {
         when(mTelephonyManager.getSupportedRadioAccessFamily())
                 .thenReturn(TelephonyManager.NETWORK_TYPE_BITMASK_NR);

@@ -69,8 +69,13 @@ public class FirmwareVersionDetailPreferenceController extends BasePreferenceCon
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public CharSequence getSummary() {
-        return Build.VERSION.RELEASE;
+        return Build.VERSION.RELEASE_OR_CODENAME;
     }
 
     @Override

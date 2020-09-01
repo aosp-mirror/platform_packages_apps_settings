@@ -48,29 +48,26 @@ import java.util.regex.Pattern;
  *
  */
 public class WifiQrCode {
-    public static final String SCHEME_DPP = "DPP";
-    public static final String SCHEME_ZXING_WIFI_NETWORK_CONFIG = "WIFI";
-    public static final String PREFIX_DPP = "DPP:";
-    public static final String PREFIX_ZXING_WIFI_NETWORK_CONFIG = "WIFI:";
+    static final String SCHEME_DPP = "DPP";
+    static final String SCHEME_ZXING_WIFI_NETWORK_CONFIG = "WIFI";
+    static final String PREFIX_DPP = "DPP:";
+    static final String PREFIX_ZXING_WIFI_NETWORK_CONFIG = "WIFI:";
 
-    public static final String PREFIX_DPP_PUBLIC_KEY = "K:";
-    public static final String PREFIX_DPP_INFORMATION = "I:";
+    static final String PREFIX_DPP_PUBLIC_KEY = "K:";
+    static final String PREFIX_DPP_INFORMATION = "I:";
 
-    public static final String PREFIX_ZXING_SECURITY = "T:";
-    public static final String PREFIX_ZXING_SSID = "S:";
-    public static final String PREFIX_ZXING_PASSWORD = "P:";
-    public static final String PREFIX_ZXING_HIDDEN_SSID = "H:";
+    static final String PREFIX_ZXING_SECURITY = "T:";
+    static final String PREFIX_ZXING_SSID = "S:";
+    static final String PREFIX_ZXING_PASSWORD = "P:";
+    static final String PREFIX_ZXING_HIDDEN_SSID = "H:";
 
-    public static final String DELIMITER_QR_CODE = ";";
+    static final String DELIMITER_QR_CODE = ";";
 
     // Ignores password if security is SECURITY_NO_PASSWORD or absent
-    public static final String SECURITY_NO_PASSWORD = "nopass"; //open network or OWE
-    public static final String SECURITY_WEP = "WEP";
-    public static final String SECURITY_WPA_PSK = "WPA";
-    public static final String SECURITY_SAE = "SAE";
-    // Adb QR code pairing is in the following format:
-    // WIFI:T:ADB;S:myname;P:mypass;;
-    public static final String SECURITY_ADB = "ADB";
+    static final String SECURITY_NO_PASSWORD = "nopass"; //open network or OWE
+    static final String SECURITY_WEP = "WEP";
+    static final String SECURITY_WPA_PSK = "WPA";
+    static final String SECURITY_SAE = "SAE";
 
     private String mQrCode;
 
@@ -107,7 +104,7 @@ public class WifiQrCode {
 
     /** Parses Wi-Fi DPP QR code string */
     private void parseWifiDppQrCode(String qrCode) throws IllegalArgumentException {
-        List keyValueList = getKeyValueList(qrCode, PREFIX_DPP, DELIMITER_QR_CODE);
+        List<String> keyValueList = getKeyValueList(qrCode, PREFIX_DPP, DELIMITER_QR_CODE);
 
         String publicKey = getValueOrNull(keyValueList, PREFIX_DPP_PUBLIC_KEY);
         if (TextUtils.isEmpty(publicKey)) {
@@ -120,7 +117,7 @@ public class WifiQrCode {
 
     /** Parses ZXing reader library's Wi-Fi Network config format */
     private void parseZxingWifiQrCode(String qrCode) throws IllegalArgumentException {
-        List keyValueList = getKeyValueList(qrCode, PREFIX_ZXING_WIFI_NETWORK_CONFIG,
+        List<String> keyValueList = getKeyValueList(qrCode, PREFIX_ZXING_WIFI_NETWORK_CONFIG,
                 DELIMITER_QR_CODE);
 
         String security = getValueOrNull(keyValueList, PREFIX_ZXING_SECURITY);
@@ -158,8 +155,7 @@ public class WifiQrCode {
         // Should not treat \delimiter as a delimiter
         String regex = "(?<!\\\\)" + Pattern.quote(delimiter);
 
-        List<String> result = Arrays.asList(keyValueString.split(regex));
-        return result;
+        return Arrays.asList(keyValueString.split(regex));
     }
 
     private String getValueOrNull(List<String> keyValueList, String prefix) {
@@ -198,7 +194,7 @@ public class WifiQrCode {
         return sb.toString();
     }
 
-    public String getQrCode() {
+    String getQrCode() {
         return mQrCode;
     }
 
@@ -224,7 +220,7 @@ public class WifiQrCode {
     }
 
     /** Available when {@code getScheme()} returns SCHEME_ZXING_WIFI_NETWORK_CONFIG */
-    public WifiNetworkConfig getWifiNetworkConfig() {
+    WifiNetworkConfig getWifiNetworkConfig() {
         if (mWifiNetworkConfig == null) {
             return null;
         }
@@ -232,7 +228,7 @@ public class WifiQrCode {
         return new WifiNetworkConfig(mWifiNetworkConfig);
     }
 
-    public static WifiQrCode getValidWifiDppQrCodeOrNull(String qrCode) {
+    static WifiQrCode getValidWifiDppQrCodeOrNull(String qrCode) {
         WifiQrCode wifiQrCode;
         try {
             wifiQrCode = new WifiQrCode(qrCode);

@@ -209,6 +209,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     }
 
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        init(icicle);
+    }
+
     protected void init(Bundle icicle) {
         if (icicle != null) {
             mUser = new UserHandle(icicle.getInt(EXTRA_USER_ID));

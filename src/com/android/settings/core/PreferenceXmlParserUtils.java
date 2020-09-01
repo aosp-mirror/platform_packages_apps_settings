@@ -72,7 +72,8 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_PREF_SUMMARY,
             MetadataFlag.FLAG_NEED_PREF_ICON,
             MetadataFlag.FLAG_NEED_SEARCHABLE,
-            MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE})
+            MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE,
+            MetadataFlag.FLAG_FOR_WORK})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MetadataFlag {
 
@@ -83,11 +84,11 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PREF_TITLE = 1 << 4;
         int FLAG_NEED_PREF_SUMMARY = 1 << 5;
         int FLAG_NEED_PREF_ICON = 1 << 6;
-        int FLAG_NEED_PLATFORM_SLICE_FLAG = 1 << 7;
         int FLAG_NEED_KEYWORDS = 1 << 8;
         int FLAG_NEED_SEARCHABLE = 1 << 9;
         int FLAG_NEED_PREF_APPEND = 1 << 10;
         int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 11;
+        int FLAG_FOR_WORK = 1 << 12;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -96,12 +97,11 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_TITLE = "title";
     public static final String METADATA_SUMMARY = "summary";
     public static final String METADATA_ICON = "icon";
-    public static final String METADATA_PLATFORM_SLICE_FLAG = "platform_slice";
     public static final String METADATA_KEYWORDS = "keywords";
     public static final String METADATA_SEARCHABLE = "searchable";
     public static final String METADATA_APPEND = "staticPreferenceLocation";
-    public static final String METADATA_UNAVAILABLE_SLICE_SUBTITLE =
-            "unavailable_slice_subtitle";
+    public static final String METADATA_UNAVAILABLE_SLICE_SUBTITLE = "unavailable_slice_subtitle";
+    public static final String METADATA_FOR_WORK = "for_work";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -231,10 +231,6 @@ public class PreferenceXmlParserUtils {
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_ICON)) {
                 preferenceMetadata.putInt(METADATA_ICON, getIcon(preferenceAttributes));
             }
-            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG)) {
-                preferenceMetadata.putBoolean(METADATA_PLATFORM_SLICE_FLAG,
-                        getPlatformSlice(preferenceAttributes));
-            }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_KEYWORDS)) {
                 preferenceMetadata.putString(METADATA_KEYWORDS, getKeywords(preferenceAttributes));
             }
@@ -249,6 +245,10 @@ public class PreferenceXmlParserUtils {
             if (hasFlag(flags, MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE)) {
                 preferenceMetadata.putString(METADATA_UNAVAILABLE_SLICE_SUBTITLE,
                         getUnavailableSliceSubtitle(preferenceAttributes));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_FOR_WORK)) {
+                preferenceMetadata.putBoolean(METADATA_FOR_WORK,
+                        isForWork(preferenceAttributes));
             }
             metadata.add(preferenceMetadata);
 
@@ -318,10 +318,6 @@ public class PreferenceXmlParserUtils {
         return styledAttributes.getResourceId(com.android.internal.R.styleable.Icon_icon, 0);
     }
 
-    private static boolean getPlatformSlice(TypedArray styledAttributes) {
-        return styledAttributes.getBoolean(R.styleable.Preference_platform_slice, false /* def */);
-    }
-
     private static boolean isSearchable(TypedArray styledAttributes) {
         return styledAttributes.getBoolean(R.styleable.Preference_searchable, true /* default */);
     }
@@ -338,5 +334,10 @@ public class PreferenceXmlParserUtils {
     private static String getUnavailableSliceSubtitle(TypedArray styledAttributes) {
         return styledAttributes.getString(
                 R.styleable.Preference_unavailableSliceSubtitle);
+    }
+
+    private static boolean isForWork(TypedArray styledAttributes) {
+        return styledAttributes.getBoolean(
+                R.styleable.Preference_forWork, false);
     }
 }

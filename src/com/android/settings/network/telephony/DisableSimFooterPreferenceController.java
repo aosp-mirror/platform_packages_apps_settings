@@ -19,31 +19,39 @@ package com.android.settings.network.telephony;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 
-public class DisableSimFooterPreferenceController extends BasePreferenceController {
-    private int mSubId;
+/**
+ * Shows information about disable a physical SIM.
+ */
+public class DisableSimFooterPreferenceController extends TelephonyBasePreferenceController {
 
+    /**
+     * Constructor
+     */
     public DisableSimFooterPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
+    /**
+     * re-init for SIM based on given subscription ID.
+     * @param subId is the given subscription ID
+     */
     public void init(int subId) {
         mSubId = subId;
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+    public int getAvailabilityStatus(int subId) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+
+        SubscriptionManager subManager = mContext.getSystemService(SubscriptionManager.class);
         for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
-            if (info.getSubscriptionId() == mSubId) {
-                if (info.isEmbedded()) {
+            if (info.getSubscriptionId() == subId) {
+                if (info.isEmbedded() || SubscriptionUtil.showToggleForPhysicalSim(subManager)) {
                     return CONDITIONALLY_UNAVAILABLE;
                 }
                 break;

@@ -16,17 +16,22 @@
 
 package com.android.settings.display;
 
-import static android.provider.Settings.System.ADAPTIVE_SLEEP;
+import static android.provider.Settings.Secure.ADAPTIVE_SLEEP;
+
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 
@@ -76,10 +81,18 @@ public class AdaptiveSleepPreferenceControllerTest {
     }
 
     @Test
+    public void isControllerAvailable_ServiceUnavailable_returnUnsupported() {
+        doReturn(null).when(mPackageManager).resolveService(isA(Intent.class), anyInt());
+
+        assertThat(AdaptiveSleepPreferenceController.isControllerAvailable(mContext)).isEqualTo(
+                UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
     public void onPreferenceChange_turnOn_returnOn() {
         mController.onPreferenceChange(null, true);
 
-        final int mode = Settings.System.getInt(mContentResolver, ADAPTIVE_SLEEP, 0);
+        final int mode = Settings.Secure.getInt(mContentResolver, ADAPTIVE_SLEEP, 0);
         assertThat(mode).isEqualTo(1);
     }
 
@@ -87,7 +100,7 @@ public class AdaptiveSleepPreferenceControllerTest {
     public void onPreferenceChange_turnOff_returnOff() {
         mController.onPreferenceChange(null, false);
 
-        final int mode = Settings.System.getInt(mContentResolver, ADAPTIVE_SLEEP, 1);
+        final int mode = Settings.Secure.getInt(mContentResolver, ADAPTIVE_SLEEP, 1);
         assertThat(mode).isEqualTo(0);
     }
 
@@ -111,7 +124,7 @@ public class AdaptiveSleepPreferenceControllerTest {
 
     @Test
     public void isChecked_yes() {
-        Settings.System.putInt(mContentResolver, ADAPTIVE_SLEEP, 1);
+        Settings.Secure.putInt(mContentResolver, ADAPTIVE_SLEEP, 1);
 
         assertThat(mController.isChecked()).isTrue();
     }
@@ -133,10 +146,10 @@ public class AdaptiveSleepPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceable_returnsFalse() {
+    public void isSliceable_returnsTrue() {
         final AdaptiveSleepPreferenceController controller =
                 new AdaptiveSleepPreferenceController(mContext, "any_key");
-        assertThat(controller.isSliceable()).isFalse();
+        assertThat(controller.isSliceable()).isTrue();
     }
 
     @Test

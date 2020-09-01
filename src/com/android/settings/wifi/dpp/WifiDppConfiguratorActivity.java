@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,12 +27,9 @@ import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
-import com.android.settings.core.InstrumentedActivity;
 
 import java.util.List;
 
@@ -54,18 +50,17 @@ import java.util.List;
  * For intent action {@link Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI}, specify Wi-Fi
  * Easy Connect bootstrapping information string in Intent's data URI.
  */
-public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
+public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
         WifiNetworkConfig.Retriever,
-        WifiDppQrCodeGeneratorFragment.OnQrCodeGeneratorFragmentAddButtonClickedListener,
         WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener,
         WifiDppAddDeviceFragment.OnClickChooseDifferentNetworkListener,
         WifiNetworkListFragment.OnChooseNetworkListener {
 
     private static final String TAG = "WifiDppConfiguratorActivity";
 
-    public static final String ACTION_CONFIGURATOR_QR_CODE_SCANNER =
+    static final String ACTION_CONFIGURATOR_QR_CODE_SCANNER =
             "android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER";
-    public static final String ACTION_CONFIGURATOR_QR_CODE_GENERATOR =
+    static final String ACTION_CONFIGURATOR_QR_CODE_GENERATOR =
             "android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR";
 
     // Key for Bundle usage
@@ -77,13 +72,21 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     private static final String KEY_WIFI_NETWORK_ID = "key_wifi_network_id";
     private static final String KEY_IS_HOTSPOT = "key_is_hotspot";
 
-    private FragmentManager mFragmentManager;
-
     /** The Wi-Fi network which will be configured */
     private WifiNetworkConfig mWifiNetworkConfig;
 
     /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_EASY_CONNECT_URI */
     private WifiQrCode mWifiDppQrCode;
+
+    /**
+     * The remote device's band support obtained as an (optional) extra
+     * EXTRA_EASY_CONNECT_BAND_LIST from the intent ACTION_PROCESS_WIFI_EASY_CONNECT_URI.
+     *
+     * The band support is provided as IEEE 802.11 Global Operating Classes. There may be a single
+     * or multiple operating classes specified. The array may also be a null if the extra wasn't
+     * specified.
+     */
+    private int[] mWifiDppRemoteBandSupport;
 
     /** Secret extra that allows fake networks to show in UI for testing purposes */
     private boolean mIsTest;
@@ -96,9 +99,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.wifi_dpp_activity);
-        mFragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState != null) {
             String qrCode = savedInstanceState.getString(KEY_QR_CODE);
@@ -114,28 +114,27 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
             mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid,
                     preSharedKey, hiddenSsid, networkId, isHotspot);
-        } else {
-            handleIntent(getIntent());
-        }
-
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setElevation(0);
-            actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 
-    private void handleIntent(Intent intent) {
+    @Override
+    protected void handleIntent(Intent intent) {
+        String action = intent != null ? intent.getAction() : null;
+        if (action == null) {
+            finish();
+            return;
+        }
+
         boolean cancelActivity = false;
         WifiNetworkConfig config;
-        switch (intent.getAction()) {
+        switch (action) {
             case ACTION_CONFIGURATOR_QR_CODE_SCANNER:
                 config = WifiNetworkConfig.getValidConfigOrNull(intent);
                 if (config == null) {
                     cancelActivity = true;
                 } else {
                     mWifiNetworkConfig = config;
-                    showQrCodeScannerFragment(/* addToBackStack= */ false);
+                    showQrCodeScannerFragment();
                 }
                 break;
             case ACTION_CONFIGURATOR_QR_CODE_GENERATOR:
@@ -152,9 +151,16 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                 final String uriString = (uri == null) ? null : uri.toString();
                 mIsTest = intent.getBooleanExtra(WifiDppUtils.EXTRA_TEST, false);
                 mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(uriString);
+                mWifiDppRemoteBandSupport = intent.getIntArrayExtra(
+                        Settings.EXTRA_EASY_CONNECT_BAND_LIST); // returns null if none
                 final boolean isDppSupported = WifiDppUtils.isWifiDppEnabled(this);
                 if (!isDppSupported) {
-                    Log.d(TAG, "Device doesn't support Wifi DPP");
+                    Log.e(TAG,
+                            "ACTION_PROCESS_WIFI_EASY_CONNECT_URI for a device that doesn't "
+                                    + "support Wifi DPP - use WifiManager#isEasyConnectSupported");
+                }
+                if (mWifiDppQrCode == null) {
+                    Log.e(TAG, "ACTION_PROCESS_WIFI_EASY_CONNECT_URI with null URI!");
                 }
                 if (mWifiDppQrCode == null || !isDppSupported) {
                     cancelActivity = true;
@@ -178,7 +184,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         }
     }
 
-    private void showQrCodeScannerFragment(boolean addToBackStack) {
+    private void showQrCodeScannerFragment() {
         WifiDppQrCodeScannerFragment fragment =
                 (WifiDppQrCodeScannerFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
@@ -199,9 +205,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
         fragmentTransaction.replace(R.id.fragment_container, fragment,
                 WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
-        if (addToBackStack) {
-            fragmentTransaction.addToBackStack(/* name */ null);
-        }
         fragmentTransaction.commit();
     }
 
@@ -293,7 +296,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         return mWifiNetworkConfig;
     }
 
-    public WifiQrCode getWifiDppQrCode() {
+    WifiQrCode getWifiDppQrCode() {
         return mWifiDppQrCode;
     }
 
@@ -319,19 +322,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
         mWifiDppQrCode = new WifiQrCode(wifiQrCode.getQrCode());
         return true;
-    }
-
-    @Override
-    public boolean onNavigateUp() {
-        if (!mFragmentManager.popBackStackImmediate()) {
-            finish();
-        }
-        return true;
-    }
-
-    @Override
-    public void onQrCodeGeneratorFragmentAddButtonClicked() {
-        showQrCodeScannerFragment(/* addToBackStack */ true);
     }
 
     @Override

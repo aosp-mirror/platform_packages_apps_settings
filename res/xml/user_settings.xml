@@ -28,9 +28,14 @@
     </PreferenceCategory>
 
     <com.android.settingslib.RestrictedPreference
+        android:key="guest_add"
+        android:title="@string/guest_new_guest"
+        android:order="15"/>
+
+    <com.android.settingslib.RestrictedPreference
         android:key="user_add"
         android:title="@string/user_add_user_or_profile_menu"
-        android:icon="@drawable/ic_add_24dp"
+        android:icon="@drawable/ic_add_40dp"
         android:order="20"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
@@ -39,5 +44,12 @@
         android:singleLineTitle="false"
         android:order="105"
         settings:allowDividerAbove="true"/>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="multiuser_footer"
+        android:title="@string/user_settings_footer_text"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.users.MultiUserFooterPreferenceController"/>
 
 </PreferenceScreen>

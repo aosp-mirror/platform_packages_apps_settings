@@ -40,6 +40,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -175,6 +176,15 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         mRadioGroup = view.findViewById(R.id.private_dns_radio_group);
         mRadioGroup.setOnCheckedChangeListener(this);
         mRadioGroup.check(PRIVATE_DNS_MAP.getOrDefault(mMode, R.id.private_dns_mode_opportunistic));
+
+        // Initial radio button text
+        final RadioButton offRadioButton = view.findViewById(R.id.private_dns_mode_off);
+        offRadioButton.setText(R.string.private_dns_mode_off);
+        final RadioButton opportunisticRadioButton =
+                view.findViewById(R.id.private_dns_mode_opportunistic);
+        opportunisticRadioButton.setText(R.string.private_dns_mode_opportunistic);
+        final RadioButton providerRadioButton = view.findViewById(R.id.private_dns_mode_provider);
+        providerRadioButton.setText(R.string.private_dns_mode_provider);
 
         final TextView helpTextView = view.findViewById(R.id.private_dns_help_info);
         helpTextView.setMovementMethod(LinkMovementMethod.getInstance());

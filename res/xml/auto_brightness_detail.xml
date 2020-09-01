@@ -18,7 +18,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="auto_brightness_detail"
     android:title="@string/auto_brightness_title">
 
     <com.android.settings.widget.VideoPreference
@@ -38,5 +37,11 @@
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness"
         settings:allowDividerAbove="true" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="auto_brightness_footer"
+        android:title="@string/auto_brightness_description"
+        android:selectable="false"
+        settings:searchable="false" />
 
 </PreferenceScreen>

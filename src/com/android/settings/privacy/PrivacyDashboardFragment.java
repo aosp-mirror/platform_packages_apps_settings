@@ -18,10 +18,6 @@ package com.android.settings.privacy;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
-import android.view.View;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -42,11 +38,6 @@ public class PrivacyDashboardFragment extends DashboardFragment {
             "privacy_work_profile_notifications_category";
     private static final String KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS =
             "privacy_lock_screen_work_profile_notifications";
-
-    @VisibleForTesting
-    View mProgressHeader;
-    @VisibleForTesting
-    View mProgressAnimation;
 
     @Override
     public int getMetricsCategory() {
@@ -90,18 +81,8 @@ public class PrivacyDashboardFragment extends DashboardFragment {
 
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.privacy_dashboard_settings;
-                    result.add(sir);
-                    return result;
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.privacy_dashboard_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
