@@ -96,7 +96,6 @@ public final class BluetoothDevicePreference extends GearPreference implements
         }
 
         mCachedDevice = cachedDevice;
-        mCachedDevice.registerCallback(this);
         mCurrentTime = System.currentTimeMillis();
         mType = type;
 
@@ -127,11 +126,22 @@ public final class BluetoothDevicePreference extends GearPreference implements
     @Override
     protected void onPrepareForRemoval() {
         super.onPrepareForRemoval();
-        mCachedDevice.unregisterCallback(this);
         if (mDisconnectDialog != null) {
             mDisconnectDialog.dismiss();
             mDisconnectDialog = null;
         }
+    }
+
+    @Override
+    public void onAttached() {
+        super.onAttached();
+        mCachedDevice.registerCallback(this);
+    }
+
+    @Override
+    public void onDetached() {
+        super.onDetached();
+        mCachedDevice.unregisterCallback(this);
     }
 
     public CachedBluetoothDevice getBluetoothDevice() {

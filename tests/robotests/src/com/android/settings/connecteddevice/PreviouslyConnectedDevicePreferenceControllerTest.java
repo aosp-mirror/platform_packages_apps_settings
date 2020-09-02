@@ -41,6 +41,7 @@ import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.widget.SingleTargetGearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
@@ -188,6 +189,16 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
+    public void onDeviceAdded_addDockDevicePreference_displayIt() {
+        final SingleTargetGearPreference dockPreference = new SingleTargetGearPreference(
+                mContext, null /* AttributeSet */);
+
+        mPreConnectedDeviceController.onDeviceAdded(dockPreference);
+
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
+    }
+
+    @Test
     public void onDeviceAdded_addFourDevicePreference_onlyDisplayThree() {
         final BluetoothDevicePreference preference1 = new BluetoothDevicePreference(
                 mContext, mCachedDevice1, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
@@ -197,11 +208,14 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
                 mContext, mCachedDevice3, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
         final BluetoothDevicePreference preference4 = new BluetoothDevicePreference(
                 mContext, mCachedDevice4, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        final SingleTargetGearPreference dockPreference = new SingleTargetGearPreference(
+                mContext, null /* AttributeSet */);
 
         mPreConnectedDeviceController.onDeviceAdded(preference1);
         mPreConnectedDeviceController.onDeviceAdded(preference2);
         mPreConnectedDeviceController.onDeviceAdded(preference3);
         mPreConnectedDeviceController.onDeviceAdded(preference4);
+        mPreConnectedDeviceController.onDeviceAdded(dockPreference);
 
         // 3 BluetoothDevicePreference and 1 see all preference
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(4);
@@ -211,9 +225,13 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     public void onDeviceRemoved_removeLastDevice_showSeeAllPreference() {
         final BluetoothDevicePreference preference1 = new BluetoothDevicePreference(
                 mContext, mCachedDevice1, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        final SingleTargetGearPreference dockPreference = new SingleTargetGearPreference(
+                mContext, null /* AttributeSet */);
         mPreferenceGroup.addPreference(preference1);
+        mPreferenceGroup.addPreference(dockPreference);
 
         mPreConnectedDeviceController.onDeviceRemoved(preference1);
+        mPreConnectedDeviceController.onDeviceRemoved(dockPreference);
 
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
     }
