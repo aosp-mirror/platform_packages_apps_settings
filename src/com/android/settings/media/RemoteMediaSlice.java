@@ -91,7 +91,6 @@ public class RemoteMediaSlice implements CustomSliceable {
                 R.drawable.ic_volume_remote);
         // To create an empty icon to indent the row
         final IconCompat emptyIcon = createEmptyIcon();
-        int requestCode = 0;
         for (RoutingSessionInfo info : infos) {
             final int maxVolume = info.getVolumeMax();
             if (maxVolume <= 0) {
@@ -104,7 +103,7 @@ public class RemoteMediaSlice implements CustomSliceable {
             listBuilder.addInputRange(new InputRangeBuilder()
                     .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                     .setTitle(castVolume)
-                    .setInputAction(getSliderInputAction(requestCode++, info.getId()))
+                    .setInputAction(getSliderInputAction(info.getId().hashCode(), info.getId()))
                     .setPrimaryAction(getSoundSettingAction(castVolume, icon, info.getId()))
                     .setMax(maxVolume)
                     .setValue(info.getVolume()));
