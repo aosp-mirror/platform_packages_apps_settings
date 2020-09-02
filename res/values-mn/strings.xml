@@ -105,7 +105,7 @@
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Профайлын тохиргоо"</string>
     <string name="bluetooth_name_not_set" msgid="4654357917928126208">"Нэр тохируулаагүй, бүртгэлийн нэрийг ашиглаж байна"</string>
     <string name="bluetooth_scan_for_devices" msgid="8143654526358934069">"Төхөөрөмжүүдийг скан хийх"</string>
-    <string name="bluetooth_rename_device" msgid="4219655243836021443">"Энэ төхөөрөмжийг дахин нэрлэх"</string>
+    <string name="bluetooth_rename_device" msgid="4219655243836021443">"Энэ төхөөрөмжийн нэрийг өөрчлөх"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Нэр солих"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Төхөөрөмжийг салгах уу?"</string>
     <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"Таны утас <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална."</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Таны апп хэвийн хэмжээний батарей ашиглаж байна. Хэрэв апп хэт их батарей ашиглаж байвал таны төхөөрөмж танд авах боломжтой алхмуудыг санал болгоно.\n\nХэрэв таны батарей дуусах гэж байвал та Батарей хэмнэгчийг хүссэн үедээ асаах боломжтой."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Батерейны менежер"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Аппыг автоматаар удирдах"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Тогтмол ашигладаггүй аппуудын батерейг хязгаарлах"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Батерейны менежер нь аппуудыг батерейг хурдан дуусгаж байгааг илрүүлэх үед та тэдгээр аппыг хязгаарлах боломжтой. Хязгаарласан аппууд буруу ажиллаж болзошгүй бөгөөд мэдэгдэл хоцорч болзошгүй."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Батерейны менежер нь аппуудыг батерейг хурдан дуусгаж байгааг илрүүлэх үед та тэдгээр аппыг хязгаарлах боломжтой. Хязгаарласан аппууд буруу ажиллаж болзошгүй бөгөөд мэдэгдэл хоцорч болзошгүй."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Батерейны менежер нь аппуудыг батерейг хурдан дуусгаж байгааг илрүүлэх үед та тэдгээр аппыг хязгаарлах боломжтой. Хязгаарласан аппууд буруу ажиллаж болзошгүй бөгөөд мэдэгдэл хоцорч болзошгүй."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Тогтмол ашигладаггүй аппуудын батерейг хязгаарлах"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Батерейны менежер нь аппуудыг батерейг хурдан дуусгаж байгааг илрүүлэх үед та тэдгээр аппыг хязгаарлах боломжтой. Хязгаарласан аппууд буруу ажиллаж болзошгүй бөгөөд мэдэгдэл хоцорч болзошгүй."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Хязгаарласан аппууд"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">%1$d аппын батерей ашиглалтыг хязгаарлаж байна</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Эдгээр апп батарейг дэвсгэрт ашигласаар байна. Хязгаарласан аппууд зохих ёсоор ажиллахгүй байж болзошгүй бөгөөд мэдэгдэл хоцорч болзошгүй."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Батерейны менежерийг ашиглах"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Аппууд батерейг хурдан дуусгах үед илрүүлэх"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Асаах / Аппууд батерейг хурдан дуусгах үед илрүүлэх"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Асаах / Аппууд батерейг хурдан дуусгах үед илрүүлэх"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Унтраалттай"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d аппыг хязгаарласан</item>
@@ -3389,13 +3387,13 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Бага ач холбогдолтой мэдэгдлүүдийн дүрс тэмдгийг нуух"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Бага ач холбогдолтой мэдэгдлүүдийн дүрс тэмдгийг статусын хэсэгт харуулахгүй"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Мэдэгдлийн цэгийг зөвшөөрөх"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"Хөөс"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Зарим мэдэгдэл дэлгэц дээр хөөс хэлбэрээр харагдах боломжтой"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Зарим мэдэгдэл болон бусад контент дэлгэцэд хөөс хэлбэрээр харагдах боломжтой. Хөөсийг нээхийн тулд дээр нь товшино уу. Хөөсийг үл хэрэгсэх бол дэлгэцийн доош чирнэ үү."</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Хөөс"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"<xliff:g id="APP_NAME">%1$s</xliff:g>-д зарим мэдэгдлийг хөөс хэлбэрээр харуулахыг зөвшөөрөх"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Хөөсийг асаах"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Та энэ аппын хөөсийг асаахын тулд эхлээд эдгээрийг төхөөрөмж дээрээ асаах шаардлагатай. Энэ нь таны өмнө нь хөөс асаасан байсан бусад аппад нөлөөлдөг."</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"Бөмбөлгүүд"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Зарим мэдэгдэл дэлгэц дээр бөмбөлөг хэлбэрээр харагдах боломжтой"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Зарим мэдэгдэл болон бусад контент дэлгэцэд бөмбөлөг хэлбэрээр харагдах боломжтой. Бөмбөлгийг нээхийн тулд дээр нь товшино уу. Бөмбөлгийг үл хэрэгсэх бол дэлгэцийн доош чирнэ үү."</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Бөмбөлгүүд"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"<xliff:g id="APP_NAME">%1$s</xliff:g>-д зарим мэдэгдлийг бөмбөлөг хэлбэрээр харуулахыг зөвшөөрөх"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Бөмбөлгүүдийг асаах"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Та энэ аппын бөмбөлгийг асаахын тулд эхлээд эдгээрийг төхөөрөмж дээрээ асаах шаардлагатай. Энэ нь таны өмнө нь бөмбөлөг асаасан байсан бусад аппад нөлөөлдөг."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Энэ төхөөрөмжид асаах"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Болих"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Шудрах үйлдлүүд"</string>
@@ -4578,7 +4576,7 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Үнийг нь сүлжээний үйлчилгээ үзүүлэгчээсээ тодруулна уу."</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Аппын дата ашиглалт"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Буруу сүлжээний горим <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Үл хэрэгсэнэ үү."</string>
-    <string name="mobile_network_apn_title" msgid="5582995550142073054">"APN"</string>
+    <string name="mobile_network_apn_title" msgid="5582995550142073054">"Хандах цэгийн нэрс (APN)"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>-д холбогдсон үед боломжгүй"</string>
     <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Эмнэлгийн мэдээлэл, яаралтай тусламжийн харилцагчид"</string>
     <string name="see_more" msgid="7499355691042812723">"Дэлгэрэнгүй үзэх"</string>

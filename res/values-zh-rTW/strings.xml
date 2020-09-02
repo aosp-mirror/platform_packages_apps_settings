@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"你的應用程式目前耗用的電力正常。如果應用程式耗用過多電力，你的裝置會為你提供操作建議。\n\n如果電池電量偏低，你隨時可以開啟節約耗電量模式。"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"自動管理應用程式"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"針對不常使用的應用程式限制電池用量"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"當電池管理員偵測到應用程式正在耗用大量電力時，你可以選擇限制這些應用程式。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。"</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"當電池管理員偵測到應用程式正在耗用大量電力時，你可以選擇限制這些應用程式。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。"</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"當電池管理員偵測到應用程式正在耗用大量電力時，你可以選擇限制這些應用程式。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。"</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"針對不常使用的應用程式限制電池用量"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"當電池管理員偵測到應用程式正在耗用大量電力時，你可以選擇限制這些應用程式。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"受限制的應用程式"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">限制 %1$d 個應用程式的電池用量</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"這些應用程式會在背景耗用電量。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"使用電池管理員"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"偵測應用程式是否耗用大量電力"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"開啟/偵測應用程式是否耗用大量電力"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"開啟/偵測應用程式是否耗用大量電力"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"已關閉"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">有 %1$d 個應用程式受到限制</item>
@@ -3389,13 +3387,13 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"隱藏無聲通知的圖示"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"無聲通知的圖示不會顯示在狀態列中"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"允許使用通知圓點"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"泡泡"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"部分通知可能會以泡泡形式顯示在畫面上"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知和其他內容可能會以泡泡形式顯示在畫面上。輕觸泡泡即可將其開啟，將泡泡向畫面下方拖曳則可將其關閉。"</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"泡泡"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」以泡泡形式顯示部分通知"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"啟用泡泡功能"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"必須先啟用裝置的泡泡功能，才能啟用這個應用程式的泡泡功能。這麼做會影響先前已啟用泡泡功能的其他應用程式。"</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"對話框"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"部分通知可能會以對話框形式顯示在畫面上"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知和其他內容可能會以對話框形式顯示在畫面上。輕觸對話框即可將其開啟，將對話框向畫面下方拖曳則可將其關閉。"</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"對話框"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」以對話框形式顯示部分通知"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"啟用對話框功能"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"必須先啟用裝置的對話框功能，才能啟用這個應用程式的對話框功能。這麼做會影響先前已啟用對話框功能的其他應用程式。"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"為裝置啟用泡泡功能"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"取消"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"滑動動作"</string>

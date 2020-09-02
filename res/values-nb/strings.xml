@@ -1711,7 +1711,7 @@
     <string name="location_high_battery_use" msgid="4277318891200626524">"Høy batteribruk"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Lav batteribruk"</string>
     <string name="location_scanning_screen_title" msgid="2346125609614249968">"Søking etter Wi‑Fi og Bluetooth"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi‑Fi-søking"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi‑Fi-skanning"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"La apper og tjenester søke etter Wi-Fi-nettverk når som helst, selv når Wi-Fi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-søking"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"La apper og tjenester søke etter enheter i nærheten når som helst, selv når Bluetooth er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Appene bruker en normal batterimengde. Hvis apper bruker for mye batteri, får du forslag om hva du kan gjøre.\n\nDu kan når som helst slå på batterisparing hvis du har lite batteri."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Batteristyring"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Administrer apper automatisk"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Begrens batteribruken for apper du sjelden bruker"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Når batteristyring oppdager at apper bruker for mye batteri, får du muligheten til å begrense disse appene. Begrensede apper fungerer muligens ikke som de skal, og varsler kan bli forsinket."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Når batteristyring oppdager at apper bruker for mye batteri, får du muligheten til å begrense disse appene. Begrensede apper fungerer muligens ikke som de skal, og varsler kan bli forsinket."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Når batteristyring oppdager at apper bruker for mye batteri, får du muligheten til å begrense disse appene. Begrensede apper fungerer muligens ikke som de skal, og varsler kan bli forsinket."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Begrens batteribruken for apper du sjelden bruker"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Når batteristyring oppdager at apper bruker for mye batteri, får du muligheten til å begrense disse appene. Begrensede apper fungerer muligens ikke som de skal, og varsler kan bli forsinket."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Begrensede apper"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Begrenser batteribruken for %1$d apper</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Disse appene har brukt batteri i bakgrunnen. Begrensede apper fungerer muligens ikke som de skal, og varsler kan bli forsinket."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Bruk batteristyring"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Oppdag når apper har for høyt batteriforbruk"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"På / oppdager når apper har for høyt batteriforbruk"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"På / oppdager når apper har for høyt batteriforbruk"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Av"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d apper er begrenset</item>

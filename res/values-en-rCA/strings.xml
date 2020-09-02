@@ -1249,11 +1249,11 @@
     <string name="night_display_end_time_title" msgid="5243112480391192111">"End time"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Status"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Intensity"</string>
-    <string name="night_display_summary_off" msgid="4676320734342206009">"Off / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off" msgid="4676320734342206009">"Off/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Will never turn on automatically"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Will turn on automatically at <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Will turn on automatically at sunset"</string>
-    <string name="night_display_summary_on" msgid="8932395375143965229">"On / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on" msgid="8932395375143965229">"On/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Will never turn off automatically"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Will turn off automatically at <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Will turn off automatically at sunrise"</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Your apps are using a normal amount of battery. If apps use too much battery, your device will suggest actions that you can take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Manage apps automatically"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Limit battery for apps that you don’t use often"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"When Battery Manager detects that apps are draining battery, you’ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"When Battery Manager detects that apps are draining battery, you’ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"When Battery Manager detects that apps are draining battery, you’ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limit battery for apps that you don’t use often"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"When Battery Manager detects that apps are draining battery, you’ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Restricted apps"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Limiting battery usage for %1$d apps</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"These apps have been using battery in the background. Restricted apps may not work properly and notifications may be delayed."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Use Battery Manager"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detect when apps drain battery"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"On/detecting when apps drain battery"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"On/detecting when apps drain battery"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Off"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d apps restricted</item>
@@ -3572,7 +3570,7 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"Yes or Maybe"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"Yes"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"Rule not found."</string>
-    <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"On / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"On/<xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="785343032708491365">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Days"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"None"</string>

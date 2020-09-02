@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"您的应用目前耗电量正常。如果应用耗电量过高，您的设备会为您提供操作建议。\n\n如果电池电量不足，您可以随时开启省电模式。"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"电池管理器"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"自动管理应用"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"限制不常用的应用的耗电量"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"当电池管理器检测到应用正在使用电量时，您可以选择限制这些应用。受限应用可能无法正常运行，相应通知也可能会有所延迟。"</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"当电池管理器检测到应用正在使用电量时，您可以选择限制这些应用。受限应用可能无法正常运行，相应通知也可能会有所延迟。"</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"当电池管理器检测到应用正在使用电量时，您可以选择限制这些应用。受限应用可能无法正常运行，相应通知也可能会有所延迟。"</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"限制不常用的应用的耗电量"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"当电池管理器检测到应用正在使用电量时，您可以选择限制这些应用。受限应用可能无法正常运行，相应通知也可能会有所延迟。"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"受限应用"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">正在限制 %1$d 个应用的电池用量</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"这些应用一直在后台消耗电量。受限应用可能无法正常运行，且相关通知可能也会有所延迟。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"使用电池管理器"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"检测应用何时使用电量"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"开启 / 正在检测应用何时使用电量"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"开启 / 正在检测应用何时使用电量"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"关闭"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d 个应用受到限制</item>
@@ -3389,13 +3387,13 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"隐藏无声通知的图标"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"无声通知的图标不会显示在状态栏中"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"允许使用通知圆点"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"气泡"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"部分通知可能会以气泡形式显示在屏幕上"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知及其他内容可以在屏幕上以气泡的形式显示。点按气泡即可将其打开，将气泡向屏幕下方拖动即可将其关闭。"</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"气泡"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"允许<xliff:g id="APP_NAME">%1$s</xliff:g>以气泡的形式显示部分通知"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"开启气泡功能"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"您需要先为设备开启气泡功能，然后才能为此应用开启气泡功能。这会影响您之前已开启气泡功能的其他应用。"</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"对话泡"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"部分通知可能会以对话泡形式显示在屏幕上"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知及其他内容可以对话泡形式显示在屏幕上。点按对话泡即可将其打开，将对话泡向屏幕下方拖动即可将其关闭。"</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"对话泡"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"允许<xliff:g id="APP_NAME">%1$s</xliff:g>以对话泡的形式显示部分通知"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"开启对话泡功能"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"您需要先为设备开启对话泡功能，然后才能为此应用开启对话泡功能。这会影响您之前已开启对话泡功能的其他应用。"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"为设备开启"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"取消"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"滑动操作"</string>

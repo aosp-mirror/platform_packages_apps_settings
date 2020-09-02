@@ -37,6 +37,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ResetAppsHelper implements DialogInterface.OnClickListener,
@@ -109,10 +110,17 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                List<ApplicationInfo> apps = mPm.getInstalledApplications(
+                final List<ApplicationInfo> apps = mPm.getInstalledApplications(
                         PackageManager.GET_DISABLED_COMPONENTS);
+                final List<String> whiteList = Arrays.asList(
+                        mContext.getResources().getStringArray(
+                                R.array.config_skip_reset_apps_package_name));
+
                 for (int i = 0; i < apps.size(); i++) {
                     ApplicationInfo app = apps.get(i);
+                    if (whiteList.contains(app.packageName)) {
+                        continue;
+                    }
                     try {
                         mNm.clearData(app.packageName, app.uid, false);
                     } catch (android.os.RemoteException ex) {

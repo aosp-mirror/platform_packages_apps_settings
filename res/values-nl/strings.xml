@@ -527,7 +527,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Alle vingerafdrukken verwijderen?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' verwijderen"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Wil je deze vingerafdruk verwijderen?"</string>
-    <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Je kunt je vingerafdrukken niet gebruiken om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps"</string>
+    <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Je kunt je vingerafdrukken dan niet meer gebruiken om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"Je kunt je vingerafdrukken niet gebruiken om je werkprofiel te ontgrendelen, aankopen te autoriseren of in te loggen bij werk-apps"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, verwijderen"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Versleuteling"</string>
@@ -591,7 +591,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"Kies een methode voor schermvergrendeling"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Geen"</string>
     <string name="unlock_set_unlock_off_summary" msgid="4578319976164001322"></string>
-    <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"Vegen"</string>
+    <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"Swipen"</string>
     <string name="unlock_set_unlock_none_summary" msgid="641298008390890152">"Geen beveiliging"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="8224895208452995332">"Patroon"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="4482018884090552709">"Gemiddelde beveiliging"</string>
@@ -613,7 +613,7 @@
     <string name="face_unlock_title" msgid="7344830351598247267">"Je kunt je telefoon ontgrendelen met je gezicht. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Uitgeschakeld door beheerder, versleutelingsbeleid of opslag certificaatgegevens"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Geen"</string>
-    <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Vegen"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Swipen"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Patroon"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"Pincode"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"Wachtwoord"</string>
@@ -740,7 +740,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> actieve apps</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> actieve app</item>
     </plurals>
-    <string name="manage_trust_agents" msgid="6410149930029992356">"Trust-agents"</string>
+    <string name="manage_trust_agents" msgid="6410149930029992356">"Trust agents"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Stel voor gebruik eerst een schermvergrendeling in"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Geen"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Je apps gebruiken een normale hoeveelheid batterijlading. Als apps te veel batterijlading gebruiken, stelt je apparaat acties voor die je kunt uitvoeren.\n\nJe kunt Batterijbesparing altijd inschakelen als de batterij bijna leeg is."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Batterijbeheer"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Apps automatisch beheren"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Batterijgebruik beperken voor apps die je niet vaak gebruikt"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Wanneer batterijbeheer detecteert dat apps de batterij snel leegmaken, heb je de optie om deze apps te beperken. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Wanneer batterijbeheer detecteert dat apps de batterij snel leegmaken, heb je de optie om deze apps te beperken. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Wanneer batterijbeheer detecteert dat apps de batterij snel leegmaken, heb je de optie om deze apps te beperken. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Batterijgebruik beperken voor apps die je niet vaak gebruikt"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Wanneer batterijbeheer detecteert dat apps de batterij snel leegmaken, heb je de optie om deze apps te beperken. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Beperkte apps"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Batterijgebruik voor %1$d apps wordt beperkt</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Deze apps hebben op de achtergrond batterijlading verbruikt. Beperkte apps werken mogelijk niet goed en meldingen kunnen worden vertraagd."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Batterijbeheer gebruiken"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detecteren wanneer apps de batterij snel leegmaken"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Aan/Detecteren wanneer apps de batterij snel leegmaken"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Aan/Detecteren wanneer apps de batterij snel leegmaken"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Uit"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d apps beperkt</item>
@@ -3116,8 +3114,8 @@
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"datagebruik"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Verbonden apparaten"</string>
-    <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, rijmodus, NFC"</string>
-    <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, rijmodus"</string>
+    <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, rijstand, NFC"</string>
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, rijstand"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps en meldingen"</string>
@@ -3389,13 +3387,13 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Pictogrammen van subtiele meldingen verbergen"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Pictogrammen van subtiele meldingen worden niet weergegeven in de statusbalk"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Meldingsstipjes toestaan"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"Ballonnen"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Bepaalde meldingen kunnen in ballonnen worden weergegeven op het scherm"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Bepaalde meldingen en andere content kunnen in ballonnen worden weergegeven op het scherm. Tik op een ballon om deze te openen. Sleep deze naar de onderkant van het scherm als je deze wilt sluiten."</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Ballonnen"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Toestaan dat <xliff:g id="APP_NAME">%1$s</xliff:g> bepaalde meldingen weergeeft als ballonnen"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Ballonnen inschakelen"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Als je ballonnen wilt inschakelen voor deze app, moet je ze eerst inschakelen voor je apparaat. Dit heeft effect op andere apps waarin je eerder ballonnen hebt ingeschakeld."</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbels"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Bepaalde meldingen kunnen in bubbels worden weergegeven op het scherm"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Bepaalde meldingen en andere content kunnen in bubbels worden weergegeven op het scherm. Tik op een bubbel om deze te openen. Sleep deze naar de onderkant van het scherm als je deze wilt sluiten."</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubbels"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Toestaan dat <xliff:g id="APP_NAME">%1$s</xliff:g> bepaalde meldingen weergeeft als bubbels"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Bubbels inschakelen"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Als je bubbels wilt inschakelen voor deze app, moet je ze eerst inschakelen voor je apparaat. Dit heeft effect op andere apps waarin je eerder bubbels hebt ingeschakeld."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Inschakelen voor apparaat"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Annuleren"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Veegacties"</string>
@@ -4252,7 +4250,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Pak je telefoon op om de tijd, meldingen en andere informatie te bekijken."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Pak je tablet op om de tijd, meldingen en andere informatie te bekijken."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Pak je apparaat op om de tijd, meldingen en andere informatie te bekijken."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Tik om telefoon te controleren"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Tikken om telefoon te checken"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Tik om tablet te controleren"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tik om apparaat te controleren"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Tik op je scherm om de tijd, meldingen en andere informatie te bekijken."</string>

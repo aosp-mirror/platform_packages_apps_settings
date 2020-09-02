@@ -950,7 +950,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Brzina linka za prenos"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Brzina linka za prijem"</string>
-    <string name="wifi_frequency" msgid="3120998420184702834">"Učestalost"</string>
+    <string name="wifi_frequency" msgid="3120998420184702834">"Frekvencija"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"IP adresa"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Sačuvano preko"</string>
     <string name="passpoint_content" msgid="5219226173518418335">"Akreditiv za <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -975,7 +975,7 @@
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privatnost"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Nasumično izabrani MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Dodaj uređaj"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Postavite QR kôd u nastavku da biste dodali uređaj na mrežu „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centrirajte QR kôd ispod da biste dodali uređaj na mrežu „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skeniraj QR kôd"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Postavite QR kôd u nastavku da biste dodali uređaj na mrežu „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Povežite se na Wi‑Fi mrežu tako što ćete skenirati QR kôd"</string>
@@ -2429,10 +2429,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacije koriste uobičajenu količinu baterije. Ako aplikacije koriste previše baterije, uređaj će vam predložiti radnje koje možete da preduzmete.\n\nUvek možete da uključite Uštedu baterije ako vam je baterija pri kraju."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Menadžer baterije"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Upravljajte aplikacijama automatski"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Ograničite potrošnju baterije za aplikacije koje ne koristite često"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Kada menadžer baterije otkrije da aplikacije prazne bateriju, imate opciju da ograničite te aplikacije. Ograničene aplikacije možda neće raditi kako treba i obaveštenja mogu da kasne."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Kada menadžer baterije otkrije da aplikacije prazne bateriju, imate opciju da ograničite te aplikacije. Ograničene aplikacije možda neće raditi kako treba i obaveštenja mogu da kasne."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Kada menadžer baterije otkrije da aplikacije prazne bateriju, imate opciju da ograničite te aplikacije. Ograničene aplikacije možda neće raditi kako treba i obaveštenja mogu da kasne."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Ograničite potrošnju baterije za aplikacije koje ne koristite često"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Kada menadžer baterije otkrije da aplikacije prazne bateriju, imate opciju da ograničite te aplikacije. Ograničene aplikacije možda neće raditi kako treba i obaveštenja mogu da kasne."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Ograničene aplikacije"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="one">Ograničite potrošnju baterije za %1$d aplikaciju</item>
@@ -2443,7 +2441,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Ove aplikacije su trošile bateriju u pozadini. Ograničene aplikacije možda neće raditi kako treba i obaveštenja mogu da kasne."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Koristite menadžer baterije"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Otkrijte kada aplikacije isprazne bateriju"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Uključeno / Otkrivanje kada aplikacije isprazne bateriju"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Uključeno / Otkrivanje kada aplikacije isprazne bateriju"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Isključeno"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">%1$d aplikacija je ograničena</item>
@@ -2675,7 +2673,7 @@
     <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Želite li da zaustavite pravljenje rezervnih kopija podataka uređaja (poput Wi-Fi lozinki i istorije poziva) i podataka aplikacija (poput podešavanja i datoteka sačuvanih u aplikacijama) i izbrišete sve kopije na udaljenim serverima?"</string>
     <string name="fullbackup_data_summary" msgid="971587401251601473">"Automatski pravite rezervne kopije podataka uređaja (poput Wi-Fi lozinki i istorije poziva) i podataka aplikacija (poput podešavanja i datoteka sačuvanih u aplikacijama) daljinski.\n\nKada uključite automatsko pravljenje rezervnih kopija, podaci uređaja i aplikacija se povremeno čuvaju daljinski. Podaci aplikacija mogu da budu bilo koji podaci koje je aplikacija sačuvala (na osnovu podešavanja programera), uključujući potencijalno osetljive podatke kao što su kontakti, poruke i slike."</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"Podešavanja administratora uređaja"</string>
-    <string name="active_device_admin_msg" msgid="7744106305636543184">"Aplikacija za administratore uređaja"</string>
+    <string name="active_device_admin_msg" msgid="7744106305636543184">"Aplikacija za administratora uređaja"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"Deaktiviraj ovu aplikaciju za administratora uređaja"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Deinstaliraj aplikaciju"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Deaktiviraj i deinstaliraj"</string>
@@ -2691,7 +2689,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"Administrator uređaja"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Aktiviranje ove aplikacije za administratore omogućiće aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> da obavi sledeće operacije:"</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"<xliff:g id="APP_NAME">%1$s</xliff:g> će upravljati ovim uređajem i štititi ga."</string>
-    <string name="device_admin_status" msgid="6332571781623084064">"Ova aplikacija za administratore je aktivna i omogućava aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> da obavi sledeće operacije:"</string>
+    <string name="device_admin_status" msgid="6332571781623084064">"Ova aplikacija za administratora je aktivna i omogućava aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> da obavi sledeće operacije:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Aktivirati Menadžera profila?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"Želite li da dozvolite nadzor?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"Ako nastavite, korisnikom će upravljati administrator, koji će možda moći da čuva i povezane podatke, pored ličnih podataka.\n\nAdministrator može da prati podešavanja, pristup, aplikacije i podatke povezane sa ovim korisnikom, uključujući aktivnosti na mreži i informacije o lokaciji uređaja, kao i da upravlja njima."</string>

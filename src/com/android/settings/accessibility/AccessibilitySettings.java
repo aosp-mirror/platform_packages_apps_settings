@@ -121,6 +121,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "accessibility_shortcut_preference";
     private static final String HEARING_AID_PREFERENCE =
             "hearing_aid_preference";
+    private static final String RTT_SETTINGS_SCREEN = "rtt_setting";
     private static final String CAPTIONING_PREFERENCE_SCREEN =
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
@@ -240,6 +241,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
+    private Preference mRTTPreference;
     private Preference mVibrationPreferenceScreen;
     private Preference mLiveCaptionPreference;
     private SwitchPreference mToggleInversionPreference;
@@ -248,6 +250,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mDarkUIModePreference;
     private DarkUIPreferenceController mDarkUIPreferenceController;
     private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
+    private RTTSettingPreferenceController mRTTSettingPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -309,6 +312,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         mLiveCaptionPreferenceController = new LiveCaptionPreferenceController(context,
                 LIVE_CAPTION_PREFERENCE_KEY);
+        mRTTSettingPreferenceController =
+                new RTTSettingPreferenceController(context, RTT_SETTINGS_SCREEN);
+
     }
 
     @Override
@@ -502,6 +508,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Hearing Aid.
         mHearingAidPreference = findPreference(HEARING_AID_PREFERENCE);
         mHearingAidPreferenceController.displayPreference(getPreferenceScreen());
+
+        // RTT Setting
+        mRTTPreference = findPreference(RTT_SETTINGS_SCREEN);
+        mRTTSettingPreferenceController.displayPreference(getPreferenceScreen());
+
 
         // Captioning.
         mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
@@ -786,6 +797,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateVibrationSummary(mVibrationPreferenceScreen);
 
         mHearingAidPreferenceController.updateState(mHearingAidPreference);
+
+        mRTTSettingPreferenceController.updateState(mRTTPreference);
 
         mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
 

@@ -1776,7 +1776,7 @@
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"Se ha configurado la contraseña."</string>
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"Se ha configurado el PIN."</string>
     <string name="lockpassword_pattern_set_toast" msgid="3090582314362416762">"Se ha configurado el patrón."</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Establece contraseña para desb. facial"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Establece una contraseña"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Establece patrón para Desbloqueo facial"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Establece PIN para Desbloqueo facial"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Para continuar, usa el patrón del dispositivo"</string>
@@ -2108,7 +2108,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Ampliar presionando tres veces"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliar con gesto"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Ampliar con acceso directo y presionar tres veces"</string>
-    <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Ampliar la pantalla"</string>
+    <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Amplía la pantalla"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Presiona tres veces para ampliar"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Presiona un botón para ampliar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2831926970059739911"><b>"Para ampliar"</b>", presiona la pantalla 3 veces rápidamente \n"<ul><li>"Arrastra 2 o más dedos para desplazarte."</li>\n<li>"Pellizca con 2 o más dedos para ajustar el zoom."</li></ul>\n\n<b>"Para hacer zoom de manera temporal"</b>", presiona la pantalla 3 veces rápidamente y mantén presionado la última vez.\n"<ul><li>"Arrastra el dedo para moverte por la pantalla."</li>\n<li>"Levanta el dedo para alejar la imagen."</li></ul>\n\n"No se puede ampliar el teclado ni la barra de navegación."</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"La cantidad de batería que usan tus apps es normal. Si consumen demasiada batería, el dispositivo te recomendará acciones.\n\nSi tienes poca batería, también puedes activar el Ahorro de batería."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Administrador de batería"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Administra apps automáticamente"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Limitar el consumo de batería de las apps que no uses con frecuencia"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Si el administrador de batería detecta que hay apps que agotan la batería, podrás restringirlas, aunque es posible que no funcionen correctamente y que se retrasen las notificaciones."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Si el administrador de batería detecta que hay apps que agotan la batería, podrás restringirlas, aunque es posible que no funcionen correctamente y que se retrasen las notificaciones."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Si el administrador de batería detecta que hay apps que agotan la batería, podrás restringirlas, aunque es posible que no funcionen correctamente y que se retrasen las notificaciones."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limitar el consumo de batería de las apps que no uses con frecuencia"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Si el administrador de batería detecta que hay apps que agotan la batería, podrás restringirlas, aunque es posible que no funcionen correctamente y que se retrasen las notificaciones."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Apps restringidas"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Limitando el uso de batería de %1$d apps</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Estas apps consumen batería en segundo plano. Es posible que las apps restringidas no funcionen correctamente y que se retrasen las notificaciones."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Usar el administrador de batería"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detectar cuando las apps agotan la batería"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Activado: detectando cuando las apps agotan la batería"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Activado: detectando cuando las apps agotan la batería"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Desactivado"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d apps restringidas</item>
@@ -2604,7 +2602,7 @@
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Quitar todos los certificados"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Credenciales de confianza"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"Mostrar certificados de CA de confianza"</string>
-    <string name="user_credentials" msgid="4044405430790970775">"Credenciales del usuario"</string>
+    <string name="user_credentials" msgid="4044405430790970775">"Credenciales de usuario"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Ver y modificar las credenciales guardadas"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Configuración avanzada"</string>
     <string name="credential_storage_type" msgid="930861336971619888">"Tipo de almacenamiento"</string>
@@ -3910,7 +3908,7 @@
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Aplicaciones"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Mostrar sobre otras apps"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Permitir mostrar sobre otras apps"</string>
-    <string name="allow_overlay_description" msgid="2266886438777971131">"Permite que esta app se muestre sobre otras en uso. Es posible que interfiera con el uso de esas apps o cambie afecte su apariencia o el comportamiento."</string>
+    <string name="allow_overlay_description" msgid="2266886438777971131">"Permite que esta app se muestre sobre otras en uso. Es posible que interfiera con el uso de esas apps, afecte su apariencia o modifique el comportamiento."</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"rv, procesador de realidad virtual, estéreo, servicio de ayuda"</string>
     <string name="keywords_system_alert_window" msgid="5810664019581804395">"sistema, alerta, ventana, cuadro de diálogo, mostrar sobre otras apps"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Mostrar sobre otras apps"</string>
@@ -3994,7 +3992,7 @@
     <string name="condition_expand_hide" msgid="8347564076209121058">"Ocultar"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"El hotspot está activo"</string>
     <string name="condition_airplane_title" msgid="5847967403687381705">"El modo de avión está activado"</string>
-    <string name="condition_airplane_summary" msgid="1964500689287879888">"Redes no disponible"</string>
+    <string name="condition_airplane_summary" msgid="1964500689287879888">"Redes no disponibles"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"\"No interrumpir\" activado"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Se silenció el teléfono"</string>
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"Con excepciones"</string>
@@ -4239,7 +4237,7 @@
     <string name="high_label" msgid="357503396626018487">"Alta"</string>
     <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"La sensibilidad alta puede entrar en conflicto con los gestos de la app que se hagan en los bordes de la pantalla."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilidad posterior"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Presiona la pantalla dos veces para consultar el teléfono"</string>
+    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Presionar la pantalla dos veces para consultar el teléfono"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Presionar dos veces la tablet para revisarla"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Presionar dos veces el dispositivo para revisarlo"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Para consultar la hora, las notificaciones y otra información, presiona dos veces la pantalla."</string>
@@ -4262,7 +4260,7 @@
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Consulta tus notificaciones rápidamente"</string>
     <string name="gesture_setting_on" msgid="3223448394997988591">"Activado"</string>
     <string name="gesture_setting_off" msgid="3444029475726294919">"Desactivado"</string>
-    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"El cargador de inicio está desbloqueado"</string>
+    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"El bootloader está desbloqueado"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="8045017109714463041">"Primero debes conectarte a Internet"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Conéctate a Internet o comunícate con tu proveedor"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="168124660162907358">"No disponible en dispositivos bloqueados por el proveedor"</string>
