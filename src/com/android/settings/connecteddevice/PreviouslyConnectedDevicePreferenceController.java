@@ -51,14 +51,15 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final int MAX_DEVICE_NUM = 3;
+    private static final int DOCK_DEVICE_INDEX = 9;
     private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
 
     private final List<Preference> mDevicesList = new ArrayList<>();
+    private final List<Preference> mDockDevicesList = new ArrayList<>();
 
     private PreferenceGroup mPreferenceGroup;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private DockUpdater mSavedDockUpdater;
-    private int mPreferenceSize;
     private BluetoothAdapter mBluetoothAdapter;
 
     @VisibleForTesting
@@ -126,33 +127,38 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     @Override
     public void onDeviceAdded(Preference preference) {
-        mPreferenceSize++;
         final List<BluetoothDevice> bluetoothDevices =
                 mBluetoothAdapter.getMostRecentlyConnectedDevices();
-        final int index = bluetoothDevices.indexOf(((BluetoothDevicePreference) preference)
-                .getBluetoothDevice().getDevice());
+        final int index = preference instanceof BluetoothDevicePreference
+                ? bluetoothDevices.indexOf(((BluetoothDevicePreference) preference)
+                .getBluetoothDevice().getDevice()) : DOCK_DEVICE_INDEX;
         if (DEBUG) {
             Log.d(TAG, "onDeviceAdded() " + preference.getTitle() + ", index of : " + index);
             for (BluetoothDevice device : bluetoothDevices) {
                 Log.d(TAG, "onDeviceAdded() most recently device : " + device.getName());
             }
         }
-        if (mPreferenceSize <= MAX_DEVICE_NUM) {
-            addPreference(mPreferenceSize, index, preference);
-        } else {
-            addPreference(MAX_DEVICE_NUM, index, preference);
-        }
+        addPreference(index, preference);
         updatePreferenceVisibility();
     }
 
-    private void addPreference(int size, int index, Preference preference) {
-        if (mDevicesList.size() >= index) {
-            mDevicesList.add(index, preference);
+    private void addPreference(int index, Preference preference) {
+        if (preference instanceof BluetoothDevicePreference) {
+            if (mDevicesList.size() >= index) {
+                mDevicesList.add(index, preference);
+            } else {
+                mDevicesList.add(preference);
+            }
         } else {
-            mDevicesList.add(preference);
+            mDockDevicesList.add(preference);
         }
+        addPreference();
+    }
+
+    private void addPreference() {
         mPreferenceGroup.removeAll();
         mPreferenceGroup.addPreference(mSeeAllPreference);
+        final int size = getDeviceListSize();
         for (int i = 0; i < size; i++) {
             if (DEBUG) {
                 Log.d(TAG, "addPreference() add device : " + mDevicesList.get(i).getTitle());
@@ -160,23 +166,37 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
             mDevicesList.get(i).setOrder(i);
             mPreferenceGroup.addPreference(mDevicesList.get(i));
         }
+        if (mDockDevicesList.size() > 0) {
+            for (int i = 0; i < getDockDeviceListSize(MAX_DEVICE_NUM - size); i++) {
+                if (DEBUG) {
+                    Log.d(TAG, "addPreference() add dock device : "
+                            + mDockDevicesList.get(i).getTitle());
+                }
+                mDockDevicesList.get(i).setOrder(DOCK_DEVICE_INDEX);
+                mPreferenceGroup.addPreference(mDockDevicesList.get(i));
+            }
+        }
+    }
+
+    private int getDeviceListSize() {
+        return mDevicesList.size() >= MAX_DEVICE_NUM
+                ? MAX_DEVICE_NUM : mDevicesList.size();
+    }
+
+    private int getDockDeviceListSize(int availableSize) {
+        return mDockDevicesList.size() >= availableSize
+                ? availableSize : mDockDevicesList.size();
     }
 
     @Override
     public void onDeviceRemoved(Preference preference) {
-        mPreferenceSize--;
-        mDevicesList.remove(preference);
-        mPreferenceGroup.removeAll();
-        mPreferenceGroup.addPreference(mSeeAllPreference);
-        final int size = mDevicesList.size() >= MAX_DEVICE_NUM
-                ? MAX_DEVICE_NUM : mDevicesList.size();
-        for (int i = 0; i < size; i++) {
-            if (DEBUG) {
-                Log.d(TAG, "onDeviceRemoved() add device : " + mDevicesList.get(i).getTitle());
-            }
-            mDevicesList.get(i).setOrder(i);
-            mPreferenceGroup.addPreference(mDevicesList.get(i));
+        if (preference instanceof BluetoothDevicePreference) {
+            mDevicesList.remove(preference);
+        } else {
+            mDockDevicesList.remove(preference);
         }
+
+        addPreference();
         updatePreferenceVisibility();
     }
 
