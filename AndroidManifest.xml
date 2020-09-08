@@ -511,6 +511,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
+                  android:exported="false"
+                  android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+                  android:theme="@style/Transparent" />
+
         <activity
             android:name="Settings$TetherSettingsActivity"
             android:label="@string/tether_settings_title_all"
