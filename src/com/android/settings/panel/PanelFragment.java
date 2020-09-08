@@ -97,6 +97,7 @@ public class PanelFragment extends Fragment {
     private TextView mHeaderSubtitle;
     private int mMaxHeight;
     private View mFooterDivider;
+    private boolean mPanelCreating;
 
     private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
@@ -127,6 +128,7 @@ public class PanelFragment extends Fragment {
                     if (mPanelSlices != null) {
                         mPanelSlices.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
+                    mPanelCreating = false;
                 }
             };
 
@@ -140,6 +142,7 @@ public class PanelFragment extends Fragment {
         mLayoutView.getViewTreeObserver()
                 .addOnGlobalLayoutListener(mPanelLayoutListener);
         mMaxHeight = getResources().getDimensionPixelSize(R.dimen.output_switcher_slice_max_height);
+        mPanelCreating = true;
         createPanelContent();
         return mLayoutView;
     }
@@ -153,6 +156,7 @@ public class PanelFragment extends Fragment {
      * Call createPanelContent() once animation end.
      */
     void updatePanelWithAnimation() {
+        mPanelCreating = true;
         final View panelContent = mLayoutView.findViewById(R.id.panel_container);
         final AnimatorSet animatorSet = buildAnimatorSet(mLayoutView,
                 0.0f /* startY */, panelContent.getHeight() /* endY */,
@@ -171,6 +175,10 @@ public class PanelFragment extends Fragment {
         animatorSet.start();
     }
 
+    boolean isPanelCreating() {
+        return mPanelCreating;
+    }
+
     private void createPanelContent() {
         final FragmentActivity activity = getActivity();
         if (activity == null) {
@@ -181,6 +189,7 @@ public class PanelFragment extends Fragment {
             activity.finish();
             return;
         }
+
         final ViewGroup.LayoutParams params = mLayoutView.getLayoutParams();
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         mLayoutView.setLayoutParams(params);
