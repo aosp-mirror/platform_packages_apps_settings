@@ -243,7 +243,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         final MetricsFeatureProvider metricsFeatureProvider =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
-        //navigate back to the homepage, screen rotate or after card dismissal
+        // navigate back to the homepage, screen rotate or after card dismissal
         if (!mIsFirstLaunch) {
             onContextualCardUpdated(cardsToKeep.stream()
                     .collect(groupingBy(ContextualCard::getCardType)));
@@ -266,8 +266,17 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
                     SettingsEnums.ACTION_CONTEXTUAL_CARD_LOAD_TIMEOUT,
                     SettingsEnums.SETTINGS_HOMEPAGE,
                     null /* key */, (int) loadTime /* value */);
+
+            // display a card on timeout if the one-card space is pre-allocated
+            if (!cards.isEmpty() && ContextualCardLoader.getCardCount(mContext) == 1) {
+                onContextualCardUpdated(cards.stream()
+                        .collect(groupingBy(ContextualCard::getCardType)));
+                metricsFeatureProvider.action(mContext,
+                        SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW,
+                        ContextualCardLogUtils.buildCardListLog(cards));
+            }
         }
-        //only log homepage display upon a fresh launch
+        // only log homepage display upon a fresh launch
         final long totalTime = System.currentTimeMillis() - mStartTime;
         metricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_CONTEXTUAL_HOME_SHOW, (int) totalTime);
