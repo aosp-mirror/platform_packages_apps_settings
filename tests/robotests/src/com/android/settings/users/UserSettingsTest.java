@@ -16,9 +16,14 @@
 
 package com.android.settings.users;
 
+import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
+import static android.os.UserManager.SWITCHABILITY_STATUS_USER_IN_CALL;
+import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
@@ -26,14 +31,18 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.UserInfo;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -43,16 +52,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.After;
@@ -60,14 +68,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.AdditionalMatchers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowIntent;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -76,7 +87,18 @@ import java.util.List;
 public class UserSettingsTest {
 
     private static final String KEY_USER_GUEST = "user_guest";
-    private int mProvisioned;
+    private static final int ACTIVE_USER_ID = 0;
+    private static final int INACTIVE_ADMIN_USER_ID = 1;
+    private static final int INACTIVE_SECONDARY_USER_ID = 14;
+    private static final int INACTIVE_RESTRICTED_USER_ID = 21;
+    private static final int INACTIVE_GUEST_USER_ID = 23;
+    private static final int MANAGED_USER_ID = 11;
+    private static final String ADMIN_USER_NAME = "Owner";
+    private static final String SECONDARY_USER_NAME = "Tom";
+    private static final String RESTRICTED_USER_NAME = "Bob";
+    private static final String GUEST_USER_NAME = "Guest";
+    private static final String MANAGED_USER_NAME = "Work profile";
+    private int mProvisionedBackupValue;
 
     @Mock
     private Drawable mDefaultIconDrawable;
@@ -85,15 +107,16 @@ public class UserSettingsTest {
     @Mock
     private UserPreference mMePreference;
     @Mock
-    private UserManager mUserManager;
+    private RestrictedPreference mAddUserPreference;
     @Mock
-    private SummaryLoader mSummaryLoader;
+    private RestrictedPreference mAddGuestPreference;
+    @Mock
+    private UserManager mUserManager;
 
     private FragmentActivity mActivity;
     private Context mContext;
     private UserSettings mFragment;
     private UserCapabilities mUserCapabilities;
-    private SummaryLoader.SummaryProvider mSummaryProvider;
 
     @Before
     public void setUp() {
@@ -101,6 +124,7 @@ public class UserSettingsTest {
         mActivity = spy(ActivityController.of(new FragmentActivity()).get());
         mContext = spy(RuntimeEnvironment.application);
         mUserCapabilities = UserCapabilities.create(mContext);
+        mUserCapabilities.mUserSwitcherEnabled = true;
 
         mFragment = spy(new UserSettings());
         ReflectionHelpers.setField(mFragment, "mAddUserWhenLockedPreferenceController",
@@ -111,116 +135,41 @@ public class UserSettingsTest {
         ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
         ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
         ReflectionHelpers.setField(mFragment, "mAddingUser", false);
-        mFragment.mMePreference = mMePreference;
 
-        when((Object) mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
+
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mMockPreferenceManager).when(mFragment).getPreferenceManager();
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
-        mProvisioned = Settings.Global.getInt(mContext.getContentResolver(),
-            Settings.Global.DEVICE_PROVISIONED, 0);
-        final SharedPreferences prefs = mock(SharedPreferences .class);
-        when(mMockPreferenceManager.getSharedPreferences()).thenReturn(prefs);
-        when(mMockPreferenceManager.getContext()).thenReturn(mContext);
 
-        mSummaryProvider =
-            UserSettings.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(mActivity, mSummaryLoader);
+        mProvisionedBackupValue = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1); //default state
+
+        final SharedPreferences prefs = mock(SharedPreferences.class);
+
+        doReturn(prefs).when(mMockPreferenceManager).getSharedPreferences();
+        doReturn(mContext).when(mMockPreferenceManager).getContext();
+        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
+
+        mFragment.mMePreference = mMePreference;
+        mFragment.mAddUser = mAddUserPreference;
+        mFragment.mAddGuest = mAddGuestPreference;
+        mFragment.mUserListCategory = mock(PreferenceCategory.class);
     }
 
     @After
     public void tearDown() {
         Settings.Global.putInt(mContext.getContentResolver(),
-            Settings.Global.DEVICE_PROVISIONED, mProvisioned);
-    }
-
-    @Test
-    public void setListening_shouldSetSummaryWithUserName() {
-        final String name = "John";
-        final UserInfo userInfo = new UserInfo();
-        userInfo.name = name;
-        when(mUserManager.getUserInfo(anyInt())).thenReturn(userInfo);
-
-        mSummaryProvider.setListening(true);
-
-        verify(mSummaryLoader)
-            .setSummary(mSummaryProvider, mActivity.getString(R.string.users_summary, name));
+                Settings.Global.DEVICE_PROVISIONED, mProvisionedBackupValue);
     }
 
     @Test
     public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
         // Should not crash here
-        assertThat(UserSettings.assignDefaultPhoto(null, 0)).isFalse();
-    }
-
-    @Test
-    public void updateUserList_cannotSwitchUser_shouldNotBeSelectableForGuest() {
-        final RestrictedPreference addUser = spy(new RestrictedPreference(mContext));
-        final PreferenceGroup userListCategory = spy(new PreferenceCategory(mContext));
-
-        mUserCapabilities.mIsGuest = false;
-        mUserCapabilities.mCanAddGuest = true;
-        mUserCapabilities.mDisallowAddUser = false;
-        mUserCapabilities.mDisallowSwitchUser = false;
-        mUserCapabilities.mUserSwitcherEnabled = true;
-
-        mFragment.mUserListCategory = userListCategory;
-        mFragment.mAddUser = addUser;
-
-        when(mUserManager.canSwitchUsers()).thenReturn(false);
-        doReturn(mMockPreferenceManager).when(mFragment).getPreferenceManager();
-        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
-        doReturn(mMockPreferenceManager).when(userListCategory).getPreferenceManager();
-
-        mFragment.updateUserList();
-
-        final Preference guest = userListCategory.findPreference(KEY_USER_GUEST);
-        assertThat(guest.isSelectable()).isFalse();
-    }
-
-    @Test
-    public void updateUserList_cannotSwitchUser_shouldDisableAddUser() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-            Settings.Global.DEVICE_PROVISIONED, 1);
-        final RestrictedPreference addUser = spy(new RestrictedPreference(mContext));
-        final PreferenceGroup userListCategory = spy(new PreferenceCategory(mContext));
-
-        mUserCapabilities.mCanAddUser = true;
-        mUserCapabilities.mDisallowAddUser = false;
-        mUserCapabilities.mUserSwitcherEnabled = true;
-
-        mFragment.mUserListCategory = userListCategory;
-        mFragment.mAddUser = addUser;
-
-        when(mUserManager.canSwitchUsers()).thenReturn(false);
-        when(mUserManager.canAddMoreUsers()).thenReturn(true);
-        doReturn(mMockPreferenceManager).when(mFragment).getPreferenceManager();
-        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
-        doReturn(mMockPreferenceManager).when(userListCategory).getPreferenceManager();
-
-        mFragment.updateUserList();
-
-        assertThat(addUser.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void updateUserList_cannotAddUserButCanSwitchUser_shouldNotShowAddUser() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-            Settings.Global.DEVICE_PROVISIONED, 1);
-        final RestrictedPreference addUser = mock(RestrictedPreference.class);
-
-        mUserCapabilities.mCanAddUser = false;
-        mUserCapabilities.mDisallowAddUser = true;
-        mUserCapabilities.mUserSwitcherEnabled = true;
-
-        mFragment.mUserListCategory = mock(PreferenceCategory.class);
-        mFragment.mAddUser = addUser;
-
-        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
-
-        mFragment.updateUserList();
-
-        verify(addUser, never()).setVisible(true);
+        assertThat(UserSettings.assignDefaultPhoto(null, ACTIVE_USER_ID)).isFalse();
     }
 
     @Test
@@ -240,7 +189,7 @@ public class UserSettingsTest {
         ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(
                 new ComponentName("test", "test"));
 
-        doReturn(true).when(mUserManager).canSwitchUsers();
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
         mUserCapabilities.mIsAdmin = false;
 
         Menu menu = mock(Menu.class);
@@ -265,7 +214,7 @@ public class UserSettingsTest {
     @Test
     public void withoutDisallowRemoveUser_ShouldNotDisableRemoveUser() {
         // Arrange
-        doReturn(true).when(mUserManager).canSwitchUsers();
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
         mUserCapabilities.mIsAdmin = false;
 
         Menu menu = mock(Menu.class);
@@ -288,44 +237,482 @@ public class UserSettingsTest {
 
     @Test
     public void updateUserList_canAddUserAndSwitchUser_shouldShowAddUser() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-            Settings.Global.DEVICE_PROVISIONED, 1);
-        final RestrictedPreference addUser = mock(RestrictedPreference.class);
-
         mUserCapabilities.mCanAddUser = true;
-        mUserCapabilities.mDisallowAddUser = false;
-        mUserCapabilities.mUserSwitcherEnabled = true;
-
-        mFragment.mAddUser = addUser;
-        mFragment.mUserListCategory = mock(PreferenceCategory.class);
-
-        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
-        doReturn("Test summary").when(mFragment).getString(anyInt(), anyInt());
+        doReturn(true).when(mUserManager).canAddMoreUsers();
+        doReturn(true).when(mAddUserPreference).isEnabled();
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
 
         mFragment.updateUserList();
 
-        verify(addUser).setVisible(true);
+        verify(mAddUserPreference).setVisible(true);
+        verify(mAddUserPreference).setSummary(null);
+        verify(mAddUserPreference).setEnabled(true);
+        verify(mAddUserPreference).setDisabledByAdmin(null);
+        verify(mAddUserPreference).setSelectable(true);
     }
 
     @Test
-    public void updateUserList_addUserDisallowedByAdmin_shouldShowAddUserDisabled() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 1);
-        final RestrictedPreference addUser = mock(RestrictedPreference.class);
-
-        mUserCapabilities.mCanAddUser = false;
-        mUserCapabilities.mDisallowAddUser = true;
-        mUserCapabilities.mDisallowAddUserSetByAdmin = true;
-        mUserCapabilities.mUserSwitcherEnabled = true;
-
-        mFragment.mUserListCategory = mock(PreferenceCategory.class);
-        mFragment.mAddUser = addUser;
-
-        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
+    public void updateUserList_canAddGuestAndSwitchUser_shouldShowAddGuest() {
+        mUserCapabilities.mCanAddGuest = true;
+        doReturn(true).when(mUserManager).canAddMoreUsers();
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
 
         mFragment.updateUserList();
 
-        verify(addUser).setVisible(true);
-        assertThat(addUser.isEnabled()).isFalse();
+        verify(mAddGuestPreference).setVisible(true);
+        verify(mAddGuestPreference).setEnabled(true);
+        verify(mAddGuestPreference).setIcon(any(Drawable.class));
+        verify(mAddGuestPreference).setSelectable(true);
     }
+
+    @Test
+    public void updateUserList_cannotSwitchUser_shouldDisableAddUser() {
+        mUserCapabilities.mCanAddUser = true;
+        doReturn(true).when(mUserManager).canAddMoreUsers();
+        doReturn(true).when(mAddUserPreference).isEnabled();
+        doReturn(SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED)
+                .when(mUserManager).getUserSwitchability();
+
+        mFragment.updateUserList();
+
+        verify(mAddUserPreference).setVisible(true);
+        verify(mAddUserPreference).setSummary(null);
+        verify(mAddUserPreference).setEnabled(false);
+        verify(mAddUserPreference).setSelectable(true);
+    }
+
+    @Test
+    public void updateUserList_canNotAddMoreUsers_shouldDisableAddUserWithSummary() {
+        mUserCapabilities.mCanAddUser = true;
+        doReturn(false).when(mUserManager).canAddMoreUsers();
+        doReturn(false).when(mAddUserPreference).isEnabled();
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+        doReturn(4).when(mFragment).getRealUsersCount();
+
+        mFragment.updateUserList();
+
+        verify(mAddUserPreference).setVisible(true);
+        verify(mAddUserPreference).setSummary("You can add up to 4 users");
+        verify(mAddUserPreference).setEnabled(false);
+        verify(mAddUserPreference).setSelectable(true);
+    }
+
+    @Test
+    public void updateUserList_cannotSwitchUser_shouldDisableAddGuest() {
+        mUserCapabilities.mCanAddGuest = true;
+        doReturn(true).when(mUserManager).canAddMoreUsers();
+        doReturn(SWITCHABILITY_STATUS_USER_IN_CALL).when(mUserManager).getUserSwitchability();
+
+        mFragment.updateUserList();
+
+        verify(mAddGuestPreference).setVisible(true);
+        verify(mAddGuestPreference).setEnabled(false);
+        verify(mAddGuestPreference).setIcon(any(Drawable.class));
+        verify(mAddGuestPreference).setSelectable(true);
+    }
+
+    @Test
+    public void updateUserList_addUserDisallowedByAdmin_shouldShowDisabledAddUser() {
+        RestrictedLockUtils.EnforcedAdmin enforcedAdmin = mock(
+                RestrictedLockUtils.EnforcedAdmin.class);
+        mUserCapabilities.mEnforcedAdmin = enforcedAdmin;
+        mUserCapabilities.mCanAddUser = false;
+        mUserCapabilities.mDisallowAddUser = true;
+        mUserCapabilities.mDisallowAddUserSetByAdmin = true;
+        doReturn(true).when(mAddUserPreference).isEnabled();
+
+        mFragment.updateUserList();
+
+        verify(mAddUserPreference).setVisible(true);
+        ArgumentCaptor<RestrictedLockUtils.EnforcedAdmin> captor = ArgumentCaptor.forClass(
+                RestrictedLockUtils.EnforcedAdmin.class);
+        verify(mAddUserPreference).setDisabledByAdmin(captor.capture());
+        assertThat(captor.getValue()).isEqualTo(enforcedAdmin);
+    }
+
+    @Test
+    public void updateUserList_cannotAddUserButCanSwitchUser_shouldNotShowAddUser() {
+        mUserCapabilities.mCanAddUser = false;
+
+        mFragment.updateUserList();
+
+        verify(mAddUserPreference).setVisible(false);
+    }
+
+    @Test
+    public void updateUserList_canNotAddGuest_shouldNotShowAddGuest() {
+        mUserCapabilities.mCanAddGuest = false;
+
+        mFragment.updateUserList();
+
+        verify(mAddGuestPreference).setVisible(false);
+    }
+
+    @Test
+    public void updateUserList_notProvisionedDevice_shouldNotShowAddUser() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0);
+        mUserCapabilities.mCanAddUser = true;
+
+        mFragment.updateUserList();
+
+        verify(mAddUserPreference).setVisible(false);
+    }
+
+    @Test
+    public void updateUserList_notProvisionedDevice_shouldNotShowAddGuest() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0);
+        mUserCapabilities.mCanAddGuest = true;
+
+        mFragment.updateUserList();
+
+        verify(mAddGuestPreference).setVisible(false);
+    }
+
+    @Test
+    public void updateUserList_userSwitcherDisabled_shouldNotShowAddUser() {
+        mUserCapabilities.mCanAddUser = true;
+        mUserCapabilities.mUserSwitcherEnabled = false;
+
+        mFragment.updateUserList();
+
+        verify(mAddUserPreference).setVisible(false);
+    }
+
+    @Test
+    public void updateUserList_userSwitcherDisabled_shouldNotShowAddGuest() {
+        mUserCapabilities.mCanAddGuest = true;
+        mUserCapabilities.mUserSwitcherEnabled = false;
+
+        mFragment.updateUserList();
+
+        verify(mAddGuestPreference).setVisible(false);
+    }
+
+    @Test
+    public void updateUserList_shouldAddAdminUserPreference() {
+        givenUsers(getAdminUser(true));
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory).addPreference(captor.capture());
+        UserPreference adminPref = captor.getValue();
+        assertThat(adminPref).isSameAs(mMePreference);
+    }
+
+    @Test
+    public void updateUserList_existingGuest_shouldAddGuestUserPreference() {
+        givenUsers(getAdminUser(true), getGuest(false));
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference guestPref = captor.getAllValues().get(1);
+        assertThat(guestPref.getUserId()).isEqualTo(INACTIVE_GUEST_USER_ID);
+        assertThat(guestPref.getTitle()).isEqualTo("Guest");
+        assertThat(guestPref.getIcon()).isNotNull();
+        assertThat(guestPref.getKey()).isEqualTo(KEY_USER_GUEST);
+        assertThat(guestPref.isEnabled()).isEqualTo(true);
+        assertThat(guestPref.isSelectable()).isEqualTo(true);
+        assertThat(guestPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+    }
+
+    @Test
+    public void updateUserList_existingSecondaryUser_shouldAddSecondaryUserPreference() {
+        givenUsers(getAdminUser(true), getSecondaryUser(false));
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_SECONDARY_USER_ID);
+        assertThat(userPref.getTitle()).isEqualTo(SECONDARY_USER_NAME);
+        assertThat(userPref.getIcon()).isNotNull();
+        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
+        assertThat(userPref.isEnabled()).isEqualTo(true);
+        assertThat(userPref.isSelectable()).isEqualTo(true);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+    }
+
+    @Test
+    public void updateUserList_existingRestrictedUser_shouldAddRestrictedUserPreference() {
+        givenUsers(getAdminUser(true), getRestrictedUser(false));
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_RESTRICTED_USER_ID);
+        assertThat(userPref.getTitle()).isEqualTo(RESTRICTED_USER_NAME);
+        assertThat(userPref.getIcon()).isNotNull();
+        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_RESTRICTED_USER_ID);
+        assertThat(userPref.getSummary()).isEqualTo("Restricted profile");
+        assertThat(userPref.isEnabled()).isEqualTo(true);
+        assertThat(userPref.isSelectable()).isEqualTo(true);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+    }
+
+    @Test
+    public void updateUserList_existingManagedUser_shouldNotAddUserPreference() {
+        givenUsers(getAdminUser(true), getManagedUser());
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory).addPreference(captor.capture());
+        List<UserPreference> userPreferences = captor.getAllValues();
+        assertThat(userPreferences.size()).isEqualTo(1);
+        assertThat(userPreferences.get(0).getUserId()).isEqualTo(ACTIVE_USER_ID);
+    }
+
+    @Test
+    public void updateUserList_uninitializedRestrictedUser_shouldAddUserPreference() {
+        UserInfo restrictedUser = getRestrictedUser(false);
+        removeFlag(restrictedUser, UserInfo.FLAG_INITIALIZED);
+        givenUsers(getAdminUser(true), restrictedUser);
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+        mUserCapabilities.mDisallowSwitchUser = false;
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_RESTRICTED_USER_ID);
+        assertThat(userPref.getTitle()).isEqualTo(RESTRICTED_USER_NAME);
+        assertThat(userPref.getIcon()).isNotNull();
+        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_RESTRICTED_USER_ID);
+        assertThat(userPref.getSummary()).isEqualTo("Not set up - Restricted profile");
+        assertThat(userPref.isEnabled()).isEqualTo(true);
+        assertThat(userPref.isSelectable()).isEqualTo(true);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+    }
+
+    @Test
+    public void updateUserList_uninitializedUserAndCanNotSwitchUser_shouldDisablePref() {
+        UserInfo uninitializedUser = getSecondaryUser(false);
+        removeFlag(uninitializedUser, UserInfo.FLAG_INITIALIZED);
+        givenUsers(getAdminUser(true), uninitializedUser);
+        doReturn(SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED)
+                .when(mUserManager).getUserSwitchability();
+        mUserCapabilities.mDisallowSwitchUser = false;
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_SECONDARY_USER_ID);
+        assertThat(userPref.getTitle()).isEqualTo(SECONDARY_USER_NAME);
+        assertThat(userPref.getIcon()).isNotNull();
+        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
+        assertThat(userPref.getSummary()).isEqualTo("Not set up");
+        assertThat(userPref.isEnabled()).isEqualTo(false);
+        assertThat(userPref.isSelectable()).isEqualTo(true);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+    }
+
+    @Test
+    public void updateUserList_guestWithoutInitializedFlag_shouldNotSetSummary() {
+        UserInfo guest = getGuest(false);
+        removeFlag(guest, UserInfo.FLAG_INITIALIZED);
+        givenUsers(getAdminUser(true), guest);
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_GUEST_USER_ID);
+        assertThat(userPref.getSummary()).isNull();
+    }
+
+    @Test
+    public void updateUserList_activeUserWithoutInitializedFlag_shouldNotSetSummary() {
+        UserInfo activeUser = getSecondaryUser(true);
+        removeFlag(activeUser, UserInfo.FLAG_INITIALIZED);
+        givenUsers(activeUser);
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory).addPreference(captor.capture());
+        UserPreference userPref = captor.getValue();
+        assertThat(userPref.getUserId()).isEqualTo(ACTIVE_USER_ID);
+        assertThat(userPref.getSummary()).isNull();
+    }
+
+    @Test
+    public void updateUserList_guestIsAlreadyCreated_shouldNotShowAddGuest() {
+        givenUsers(getAdminUser(true), getGuest(true));
+        mUserCapabilities.mCanAddGuest = true;
+
+        mFragment.updateUserList();
+
+        verify(mAddGuestPreference).setVisible(false);
+    }
+
+    @Test
+    public void updateUserList_userIconLoaded_shouldNotLoadIcon() {
+        UserInfo currentUser = getAdminUser(true);
+        currentUser.iconPath = "/data/system/users/0/photo.png";
+        givenUsers(currentUser);
+        mFragment.mUserIcons.put(ACTIVE_USER_ID,
+                Bitmap.createBitmap(100, 200, Bitmap.Config.ARGB_8888));
+
+        mFragment.updateUserList();
+
+        verify(mUserManager, never()).getUserIcon(anyInt());
+        // updateUserList should be called only once
+        verify(mUserManager).getUsers(true);
+    }
+
+    @Test
+    public void updateUserList_userIconMissing_shouldLoadIcon() {
+        UserInfo currentUser = getAdminUser(true);
+        currentUser.iconPath = "/data/system/users/0/photo.png";
+        givenUsers(currentUser);
+        // create a non-empty sparsearray
+        mFragment.mUserIcons.put(5, Bitmap.createBitmap(100, 200, Bitmap.Config.ARGB_8888));
+        Bitmap userIcon = Bitmap.createBitmap(100, 200, Bitmap.Config.ARGB_8888);
+        doReturn(userIcon).when(mUserManager).getUserIcon(ACTIVE_USER_ID);
+
+        mFragment.updateUserList();
+
+        verify(mUserManager).getUserIcon(ACTIVE_USER_ID);
+        // updateUserList should be called another time after loading the icons
+        verify(mUserManager, times(2)).getUsers(true);
+    }
+
+    @Test
+    public void onPreferenceClick_addGuestClicked_createGuestAndOpenDetails() {
+        UserInfo createdGuest = getGuest(false);
+        removeFlag(createdGuest, UserInfo.FLAG_INITIALIZED);
+        doReturn(createdGuest).when(mUserManager).createGuest(mActivity, "Guest");
+        doReturn(mActivity).when(mFragment).getContext();
+
+        mFragment.onPreferenceClick(mAddGuestPreference);
+
+        verify(mUserManager).createGuest(mActivity, "Guest");
+        Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+        assertThat(shadowIntent.getIntentClass()).isEqualTo(SubSettings.class);
+        assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(UserDetailsSettings.class.getName());
+        Bundle arguments = startedIntent.getBundleExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat(arguments).isNotNull();
+        assertThat(arguments.getInt(UserDetailsSettings.EXTRA_USER_ID, 0))
+                .isEqualTo(createdGuest.id);
+        assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false))
+                .isEqualTo(true);
+    }
+
+    @Test
+    public void getRealUsersCount_onlyAdmin_shouldCount() {
+        givenUsers(getAdminUser(true));
+
+        int result = mFragment.getRealUsersCount();
+
+        assertThat(result).isEqualTo(1);
+        verify(mUserManager).getUsers();
+    }
+
+    @Test
+    public void getRealUsersCount_secondaryUser_shouldCount() {
+        givenUsers(getAdminUser(true), getSecondaryUser(false));
+
+        int result = mFragment.getRealUsersCount();
+
+        assertThat(result).isEqualTo(2);
+        verify(mUserManager).getUsers();
+    }
+
+    @Test
+    public void getRealUsersCount_restrictedUser_shouldCount() {
+        givenUsers(getAdminUser(true), getSecondaryUser(false));
+
+        int result = mFragment.getRealUsersCount();
+
+        assertThat(result).isEqualTo(2);
+        verify(mUserManager).getUsers();
+    }
+
+    @Test
+    public void getRealUsersCount_guest_shouldNotCount() {
+        givenUsers(getAdminUser(true), getGuest(false));
+
+        int result = mFragment.getRealUsersCount();
+
+        assertThat(result).isEqualTo(1);
+        verify(mUserManager).getUsers();
+    }
+
+    @Test
+    public void getRealUsersCount_managedUser_shouldNotCount() {
+        givenUsers(getAdminUser(true), getManagedUser());
+
+        int result = mFragment.getRealUsersCount();
+
+        assertThat(result).isEqualTo(1);
+        verify(mUserManager).getUsers();
+    }
+
+    private void givenUsers(UserInfo... userInfo) {
+        List<UserInfo> users = Arrays.asList(userInfo);
+        doReturn(users).when(mUserManager).getUsers();
+        doReturn(users).when(mUserManager).getUsers(anyBoolean());
+    }
+
+    private static void removeFlag(UserInfo userInfo, int flag) {
+        userInfo.flags &= ~flag;
+    }
+
+    private static UserInfo getAdminUser(boolean active) {
+        return new UserInfo(active ? ACTIVE_USER_ID : INACTIVE_ADMIN_USER_ID, ADMIN_USER_NAME,
+                null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_ADMIN,
+                UserManager.USER_TYPE_FULL_SYSTEM);
+    }
+
+    private static UserInfo getSecondaryUser(boolean active) {
+        return new UserInfo(active ? ACTIVE_USER_ID : INACTIVE_SECONDARY_USER_ID,
+                SECONDARY_USER_NAME, null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED,
+                UserManager.USER_TYPE_FULL_SECONDARY);
+    }
+
+    private static UserInfo getRestrictedUser(boolean active) {
+        return new UserInfo(active ? ACTIVE_USER_ID : INACTIVE_RESTRICTED_USER_ID,
+                RESTRICTED_USER_NAME, null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_RESTRICTED,
+                UserManager.USER_TYPE_FULL_RESTRICTED);
+    }
+
+    private static UserInfo getManagedUser() {
+        return new UserInfo(MANAGED_USER_ID,
+                MANAGED_USER_NAME, null,
+                UserInfo.FLAG_PROFILE | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_MANAGED_PROFILE,
+                UserManager.USER_TYPE_PROFILE_MANAGED);
+    }
+
+    private static UserInfo getGuest(boolean active) {
+        return new UserInfo(active ? ACTIVE_USER_ID : INACTIVE_GUEST_USER_ID, GUEST_USER_NAME,
+                null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_GUEST,
+                UserManager.USER_TYPE_FULL_GUEST);
+    }
+
+
 }

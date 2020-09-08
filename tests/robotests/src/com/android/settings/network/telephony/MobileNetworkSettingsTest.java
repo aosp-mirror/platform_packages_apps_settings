@@ -26,6 +26,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
@@ -36,9 +37,7 @@ import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -92,32 +91,7 @@ public class MobileNetworkSettingsTest {
     }
 
     @Test
-    public void onAttach_noV2Flag_noCrash() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
-        mFragment.onAttach(mContext);
-    }
-
-    @Test
-    public void onAttach_v2Flag_noCrash() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
-        mFragment.onAttach(mContext);
-    }
-
-    @Test
-    public void createPreferenceControllers_noV2Flag_noDataUsageSummaryController() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
-        final List<AbstractPreferenceController> controllers =
-                mFragment.createPreferenceControllers(mContext);
-        assertThat(controllers.stream().filter(
-                c -> c.getClass().equals(DataUsageSummaryPreferenceController.class))
-                .count())
-                .isEqualTo(0);
-    }
-
-    @Test
-    public void createPreferenceControllers_v2Flag_createsDataUsageSummaryController() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
-
+    public void createPreferenceControllers_createsDataUsageSummaryController() {
         final List<AbstractPreferenceController> controllers =
                 mFragment.createPreferenceControllers(mContext);
         assertThat(controllers.stream().filter(
@@ -130,12 +104,12 @@ public class MobileNetworkSettingsTest {
     public void onActivityResult_noActivity_noCrash() {
         when(mFragment.getActivity()).thenReturn(null);
         // this should not crash
-        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, 0, null);
+        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, Activity.RESULT_OK, null);
     }
 
     @Test
     public void onActivityResult_deleteSubscription_activityFinishes() {
-        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, 0, null);
+        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, Activity.RESULT_OK, null);
         verify(mActivity).finish();
     }
 

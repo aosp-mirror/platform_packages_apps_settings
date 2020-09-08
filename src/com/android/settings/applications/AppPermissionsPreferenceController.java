@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class AppPermissionsPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "AppPermissionPrefCtrl";
-    private static int NUM_PACKAGE_TO_CHECK = 3;
+    private static final int NUM_PACKAGE_TO_CHECK = 4;
 
     @VisibleForTesting
     static int NUM_PERMISSIONS_TO_SHOW = 3;
@@ -78,7 +78,7 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
     void queryPermissionSummary() {
         final List<PackageInfo> installedPackages =
                 mPackageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS);
-        // Here we only get the first three apps and check their permissions.
+        // Here we only get the first four apps and check their permissions.
         final List<PackageInfo> packagesWithPermission = installedPackages.stream()
                 .filter(pInfo -> pInfo.permissions != null)
                 .limit(NUM_PACKAGE_TO_CHECK)
@@ -102,10 +102,21 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
         final List<CharSequence> permissionsToShow = mPermissionGroups.stream()
                 .limit(NUM_PERMISSIONS_TO_SHOW)
                 .collect(Collectors.toList());
-        final CharSequence summary = !permissionsToShow.isEmpty()
-                ? mContext.getString(R.string.app_permissions_summary,
-                ListFormatter.getInstance().format(permissionsToShow).toLowerCase())
-                : null;
+        final boolean isMoreShowed = mPermissionGroups.size() > NUM_PERMISSIONS_TO_SHOW;
+        CharSequence summary;
+
+        if (!permissionsToShow.isEmpty()) {
+            if (isMoreShowed) {
+                summary = mContext.getString(R.string.app_permissions_summary_more,
+                        ListFormatter.getInstance().format(permissionsToShow).toLowerCase());
+            } else {
+                summary = mContext.getString(R.string.app_permissions_summary,
+                        ListFormatter.getInstance().format(permissionsToShow).toLowerCase());
+            }
+        } else {
+            summary = mContext.getString(
+                    R.string.runtime_permissions_summary_no_permissions_granted);
+        }
         mPreference.setSummary(summary);
     }
 }

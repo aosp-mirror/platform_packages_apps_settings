@@ -16,16 +16,11 @@
 
 package com.android.settings.widget;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.SurfaceTexture;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,31 +29,31 @@ import android.widget.LinearLayout;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import com.android.settings.R;
 
 /**
- * A full width preference that hosts a MP4 video.
+ * A full width preference that hosts a MP4 video or a {@link AnimatedVectorDrawableCompat}.
  */
 public class VideoPreference extends Preference {
 
     private static final String TAG = "VideoPreference";
     private final Context mContext;
 
-    private Uri mVideoPath;
     @VisibleForTesting
-    MediaPlayer mMediaPlayer;
+    AnimationController mAnimationController;
     @VisibleForTesting
     boolean mAnimationAvailable;
-    @VisibleForTesting
-    boolean mVideoReady;
-    private boolean mVideoPaused;
+
     private float mAspectRatio = 1.0f;
-    private int mPreviewResource;
-    private boolean mViewVisible;
-    private Surface mSurface;
+    private int mPreviewId;
     private int mAnimationId;
+    private int mVectorAnimationId;
     private int mHeight = LinearLayout.LayoutParams.MATCH_PARENT - 1; // video height in pixels
+    private TextureView mVideo;
+    private ImageView mPreviewImage;
+    private ImageView mPlayButton;
 
     public VideoPreference(Context context) {
         super(context);
@@ -84,19 +79,17 @@ public class VideoPreference extends Preference {
             mAnimationId = mAnimationId == 0
                 ? attributes.getResourceId(R.styleable.VideoPreference_animation, 0)
                 : mAnimationId;
-            mVideoPath = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                    .authority(context.getPackageName())
-                    .appendPath(String.valueOf(mAnimationId))
-                    .build();
-            mPreviewResource = mPreviewResource == 0
-                ? attributes.getResourceId(R.styleable.VideoPreference_preview, 0)
-                : mPreviewResource;
-            if (mPreviewResource == 0 && mAnimationId == 0) {
+            mPreviewId = mPreviewId == 0
+                    ? attributes.getResourceId(R.styleable.VideoPreference_preview, 0)
+                    : mPreviewId;
+            mVectorAnimationId = attributes.getResourceId(
+                    R.styleable.VideoPreference_vectorAnimation, 0);
+            if (mPreviewId == 0 && mAnimationId == 0 && mVectorAnimationId == 0) {
                 setVisible(false);
                 return;
             }
-            initMediaPlayer();
-            if (mMediaPlayer != null && mMediaPlayer.getDuration() > 0) {
+            initAnimationController();
+            if (mAnimationController != null && mAnimationController.getDuration() > 0) {
                 setVisible(true);
                 setLayoutResource(R.layout.video_preference);
                 mAnimationAvailable = true;
@@ -119,136 +112,74 @@ public class VideoPreference extends Preference {
             return;
         }
 
-        final TextureView video = (TextureView) holder.findViewById(R.id.video_texture_view);
-        final ImageView imageView = (ImageView) holder.findViewById(R.id.video_preview_image);
-        final ImageView playButton = (ImageView) holder.findViewById(R.id.video_play_button);
+        mVideo = (TextureView) holder.findViewById(R.id.video_texture_view);
+        mPreviewImage = (ImageView) holder.findViewById(R.id.video_preview_image);
+        mPlayButton = (ImageView) holder.findViewById(R.id.video_play_button);
         final AspectRatioFrameLayout layout = (AspectRatioFrameLayout) holder.findViewById(
                 R.id.video_container);
 
-        imageView.setImageResource(mPreviewResource);
+        mPreviewImage.setImageResource(mPreviewId);
         layout.setAspectRatio(mAspectRatio);
         if (mHeight >= LinearLayout.LayoutParams.MATCH_PARENT) {
             layout.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, mHeight));
         }
-        updateViewStates(imageView, playButton);
-
-        video.setOnClickListener(v -> updateViewStates(imageView, playButton));
-
-        video.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-            @Override
-            public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
-                    int height) {
-                if (mMediaPlayer != null) {
-                    mSurface = new Surface(surfaceTexture);
-                    mMediaPlayer.setSurface(mSurface);
-                }
-            }
-
-            @Override
-            public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int width,
-                    int height) {
-            }
-
-            @Override
-            public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
-                imageView.setVisibility(View.VISIBLE);
-                return false;
-            }
-
-            @Override
-            public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
-                if (!mViewVisible) {
-                    return;
-                }
-                if (mVideoReady) {
-                    if (imageView.getVisibility() == View.VISIBLE) {
-                        imageView.setVisibility(View.GONE);
-                    }
-                    if (!mVideoPaused && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
-                        mMediaPlayer.start();
-                        playButton.setVisibility(View.GONE);
-                    }
-                }
-                if (mMediaPlayer != null && !mMediaPlayer.isPlaying() &&
-                        playButton.getVisibility() != View.VISIBLE) {
-                    playButton.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-    }
-
-    @VisibleForTesting
-    void updateViewStates(ImageView imageView, ImageView playButton) {
-        if (mMediaPlayer != null) {
-            if (mMediaPlayer.isPlaying()) {
-                mMediaPlayer.pause();
-                playButton.setVisibility(View.VISIBLE);
-                imageView.setVisibility(View.VISIBLE);
-                mVideoPaused = true;
-            } else {
-                imageView.setVisibility(View.GONE);
-                playButton.setVisibility(View.GONE);
-                mMediaPlayer.start();
-                mVideoPaused = false;
-            }
+        if (mAnimationController != null) {
+            mAnimationController.attachView(mVideo, mPreviewImage, mPlayButton);
         }
     }
 
     @Override
     public void onDetached() {
-        releaseMediaPlayer();
+        releaseAnimationController();
         super.onDetached();
     }
 
-    public void onViewVisible(boolean videoPaused) {
-        mViewVisible = true;
-        mVideoPaused = videoPaused;
-        initMediaPlayer();
+    /**
+     * Called from {@link VideoPreferenceController} when the view is onResume
+     */
+    public void onViewVisible() {
+        initAnimationController();
     }
 
+    /**
+     * Called from {@link VideoPreferenceController} when the view is onPause
+     */
     public void onViewInvisible() {
-        mViewVisible = false;
-        releaseMediaPlayer();
+        releaseAnimationController();
     }
 
     /**
      * Sets the video for this preference. If a previous video was set this one will override it
      * and properly release any resources and re-initialize the preference to play the new video.
      *
-     * @param videoId The raw res id of the video
+     * @param videoId   The raw res id of the video
      * @param previewId The drawable res id of the preview image to use if the video fails to load.
      */
     public void setVideo(int videoId, int previewId) {
         mAnimationId = videoId;
-        mPreviewResource = previewId;
-        releaseMediaPlayer();
+        mPreviewId = previewId;
+        releaseAnimationController();
         initialize(mContext, null);
     }
 
-    private void initMediaPlayer() {
-        if (mMediaPlayer == null) {
-            mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
-            // when the playback res is invalid or others, MediaPlayer create may fail
-            // and return null, so need add the null judgement.
-            if (mMediaPlayer != null) {
-                mMediaPlayer.seekTo(0);
-                mMediaPlayer.setOnSeekCompleteListener(mp -> mVideoReady = true);
-                mMediaPlayer.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
-                if (mSurface != null) {
-                    mMediaPlayer.setSurface(mSurface);
-                }
+    private void initAnimationController() {
+        if (mVectorAnimationId != 0) {
+            mAnimationController = new VectorAnimationController(mContext, mVectorAnimationId);
+            return;
+        }
+        if (mAnimationId != 0) {
+            mAnimationController = new MediaAnimationController(mContext, mAnimationId);
+            if (mVideo != null) {
+                mAnimationController.attachView(mVideo, mPreviewImage, mPlayButton);
             }
         }
     }
 
-    private void releaseMediaPlayer() {
-        if (mMediaPlayer != null) {
-            mMediaPlayer.stop();
-            mMediaPlayer.reset();
-            mMediaPlayer.release();
-            mMediaPlayer = null;
-            mVideoReady = false;
+    private void releaseAnimationController() {
+        if (mAnimationController != null) {
+            mAnimationController.release();
+            mAnimationController = null;
         }
     }
 
@@ -256,12 +187,9 @@ public class VideoPreference extends Preference {
         return mAnimationAvailable;
     }
 
-    public boolean isVideoPaused() {
-        return mVideoPaused;
-    }
-
     /**
      * sets the height of the video preference
+     *
      * @param height in dp
      */
     public void setHeight(float height) {
@@ -271,6 +199,52 @@ public class VideoPreference extends Preference {
 
     @VisibleForTesting
     void updateAspectRatio() {
-        mAspectRatio = mMediaPlayer.getVideoWidth() / (float) mMediaPlayer.getVideoHeight();
+        mAspectRatio = mAnimationController.getVideoWidth()
+                / (float) mAnimationController.getVideoHeight();
+    }
+
+    /**
+     * Handle animation operations.
+     */
+    interface AnimationController {
+        /**
+         * Pauses the animation.
+         */
+        void pause();
+
+        /**
+         * Starts the animation.
+         */
+        void start();
+
+        /**
+         * Releases the animation object.
+         */
+        void release();
+
+        /**
+         * Attaches the animation to UI view.
+         */
+        void attachView(TextureView video, View preview, View playButton);
+
+        /**
+         * Returns the animation Width.
+         */
+        int getVideoWidth();
+
+        /**
+         * Returns the animation Height.
+         */
+        int getVideoHeight();
+
+        /**
+         * Returns the animation duration.
+         */
+        int getDuration();
+
+        /**
+         * Returns if the animation is playing.
+         */
+        boolean isPlaying();
     }
 }

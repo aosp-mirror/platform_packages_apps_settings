@@ -17,14 +17,12 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="tts_settings_screen"
     android:title="@string/tts_settings_title">
 
    <com.android.settings.widget.GearPreference
        android:key="tts_engine_preference"
        android:title="@string/tts_engine_preference_title"
-       android:fragment="com.android.settings.tts.TtsEnginePreferenceFragment"
-       settings:searchable="false"/>
+       android:fragment="com.android.settings.tts.TtsEnginePreferenceFragment"/>
 
    <ListPreference
        android:key="tts_default_lang"

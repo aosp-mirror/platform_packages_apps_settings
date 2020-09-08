@@ -18,9 +18,14 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Process;
 import android.util.Log;
 
-import com.android.settings.bluetooth.Utils;
+import androidx.annotation.Nullable;
+
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -30,29 +35,46 @@ public class BluetoothUpdateWorker extends SliceBackgroundWorker implements Blue
 
     private static final String TAG = "BluetoothUpdateWorker";
 
-    private final LocalBluetoothManager mLocalBluetoothManager;
+    private static LocalBluetoothManager sLocalBluetoothManager;
+
+    private LoadBtManagerHandler mLoadBtManagerHandler;
 
     public BluetoothUpdateWorker(Context context, Uri uri) {
         super(context, uri);
-        mLocalBluetoothManager = Utils.getLocalBtManager(context);
+        mLoadBtManagerHandler = LoadBtManagerHandler.getInstance(context);
+        if (sLocalBluetoothManager == null) {
+            mLoadBtManagerHandler.startLoadingBtManager(this);
+        }
+    }
+
+    /** Initialize {@link LocalBluetoothManager} in the background */
+    public static void initLocalBtManager(Context context) {
+        if (sLocalBluetoothManager == null) {
+            LoadBtManagerHandler.getInstance(context).startLoadingBtManager();
+        }
+    }
+
+    @Nullable
+    static LocalBluetoothManager getLocalBtManager() {
+        return sLocalBluetoothManager;
     }
 
     @Override
     protected void onSlicePinned() {
-        if (mLocalBluetoothManager == null) {
-            Log.i(TAG, "onSlicePinned() Bluetooth is unsupported.");
+        final LocalBluetoothManager localBtManager = mLoadBtManagerHandler.getLocalBtManager();
+        if (localBtManager == null) {
             return;
         }
-        mLocalBluetoothManager.getEventManager().registerCallback(this);
+        localBtManager.getEventManager().registerCallback(this);
     }
 
     @Override
     protected void onSliceUnpinned() {
-        if (mLocalBluetoothManager == null) {
-            Log.i(TAG, "onSliceUnpinned() Bluetooth is unsupported.");
+        final LocalBluetoothManager localBtManager = mLoadBtManagerHandler.getLocalBtManager();
+        if (localBtManager == null) {
             return;
         }
-        mLocalBluetoothManager.getEventManager().unregisterCallback(this);
+        localBtManager.getEventManager().unregisterCallback(this);
     }
 
     @Override
@@ -83,5 +105,60 @@ public class BluetoothUpdateWorker extends SliceBackgroundWorker implements Blue
     public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
             int bluetoothProfile) {
         notifySliceChange();
+    }
+
+    private static class LoadBtManagerHandler extends Handler {
+
+        private static LoadBtManagerHandler sHandler;
+
+        private final Runnable mLoadBtManagerTask;
+        private final Context mContext;
+        private BluetoothUpdateWorker mWorker;
+
+        private static LoadBtManagerHandler getInstance(Context context) {
+            if (sHandler == null) {
+                final HandlerThread workerThread = new HandlerThread(TAG,
+                        Process.THREAD_PRIORITY_BACKGROUND);
+                workerThread.start();
+                sHandler = new LoadBtManagerHandler(context, workerThread.getLooper());
+            }
+            return sHandler;
+        }
+
+        private LoadBtManagerHandler(Context context, Looper looper) {
+            super(looper);
+            mContext = context;
+            mLoadBtManagerTask = () -> {
+                Log.d(TAG, "LoadBtManagerHandler: start loading...");
+                final long startTime = System.currentTimeMillis();
+                sLocalBluetoothManager = getLocalBtManager();
+                Log.d(TAG, "LoadBtManagerHandler took " + (System.currentTimeMillis() - startTime)
+                        + " ms");
+            };
+        }
+
+        private LocalBluetoothManager getLocalBtManager() {
+            if (sLocalBluetoothManager != null) {
+                return sLocalBluetoothManager;
+            }
+            return LocalBluetoothManager.getInstance(mContext,
+                    (context, btManager) -> {
+                        if (mWorker != null) {
+                            // notify change if the worker is ready
+                            mWorker.notifySliceChange();
+                        }
+                    });
+        }
+
+        private void startLoadingBtManager() {
+            if (!hasCallbacks(mLoadBtManagerTask)) {
+                post(mLoadBtManagerTask);
+            }
+        }
+
+        private void startLoadingBtManager(BluetoothUpdateWorker worker) {
+            mWorker = worker;
+            startLoadingBtManager();
+        }
     }
 }

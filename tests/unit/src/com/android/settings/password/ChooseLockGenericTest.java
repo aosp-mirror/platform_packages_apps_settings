@@ -43,6 +43,7 @@ import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import androidx.test.runner.lifecycle.Stage;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockscreenCredential;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -150,7 +151,7 @@ public class ChooseLockGenericTest {
                 .putExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_NUMERIC)
                 .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
-                        "12345")
+                        LockscreenCredential.createPin("12345"))
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getInstrumentation().getContext().startActivity(newPasswordIntent);
         mDevice.waitForIdle();

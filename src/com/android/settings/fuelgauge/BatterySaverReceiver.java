@@ -39,7 +39,7 @@ public class BatterySaverReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (DEBUG) Log.d(TAG, "Received " + intent.getAction());
         String action = intent.getAction();
-        if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGING.equals(action)) {
+        if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGED.equals(action)) {
             if (mBatterySaverListener != null) {
                 mBatterySaverListener.onPowerSaveModeChanged();
             }
@@ -55,7 +55,7 @@ public class BatterySaverReceiver extends BroadcastReceiver {
     public void setListening(boolean listening) {
         if (listening && !mRegistered) {
             final IntentFilter ifilter = new IntentFilter();
-            ifilter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGING);
+            ifilter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
             ifilter.addAction(Intent.ACTION_BATTERY_CHANGED);
             mContext.registerReceiver(this, ifilter);
             mRegistered = true;

@@ -10,12 +10,11 @@ import android.util.AttributeSet;
 import android.util.Xml;
 
 import com.android.settings.R;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
-import com.android.settings.security.SecuritySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,9 +33,6 @@ import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 public class XmlControllerAttributeTest {
-
-    // List of classes that are too hard to mock in order to retrieve xml information.
-    private final List<Class> illegalClasses = Arrays.asList(SecuritySettings.class);
 
     // List of XML that could be retrieved from the illegalClasses list.
     private final List<Integer> whitelistXml = Arrays.asList(R.xml.security_dashboard_settings);
@@ -112,14 +108,12 @@ public class XmlControllerAttributeTest {
     private Set<Integer> getIndexableXml() {
         Set<Integer> xmlResSet = new HashSet<>();
 
-        Collection<Class> indexableClasses =
+        Collection<SearchIndexableData> SearchIndexableDatas =
                 mSearchProvider.getSearchIndexableResources().getProviderValues();
-        indexableClasses.removeAll(illegalClasses);
 
-        for (Class clazz : indexableClasses) {
+        for (SearchIndexableData bundle : SearchIndexableDatas) {
 
-            Indexable.SearchIndexProvider provider =
-                DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+            Indexable.SearchIndexProvider provider = bundle.getSearchIndexProvider();
 
             if (provider == null) {
                 continue;

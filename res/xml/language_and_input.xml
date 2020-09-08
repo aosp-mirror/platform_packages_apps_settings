@@ -18,7 +18,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="language_and_input_settings_screen"
     android:title="@string/language_settings"
     settings:initialExpandedChildrenCount="3">
 
@@ -34,13 +33,13 @@
         <Preference
             android:key="virtual_keyboard_pref"
             android:title="@string/virtual_keyboard_category"
-            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment" />
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
         <Preference
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
             android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"
-            settings:searchable="false"/>
+            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -101,18 +100,21 @@
             android:key="virtual_keyboards_for_work_pref"
             android:title="@string/virtual_keyboards_for_work_title"
             android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:forWork="true"
             settings:controller="com.android.settings.inputmethod.VirtualKeyboardForWorkPreferenceController" />
 
         <Preference
             android:key="spellcheckers_settings_for_work_pref"
             android:title="@string/spellcheckers_settings_for_work_title"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
-            settings:controller="com.android.settings.language.UserDictionaryForWorkPreferenceController" />
+            settings:forWork="true"
+            settings:controller="com.android.settings.core.WorkPreferenceController" />
 
         <Preference
             android:key="user_dictionary_settings_for_work_pref"
             android:title="@string/user_dict_settings_for_work_title"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
+            settings:forWork="true"
             settings:controller="com.android.settings.inputmethod.SpellCheckerForWorkPreferenceController" />
     </com.android.settings.widget.WorkOnlyCategory>
 

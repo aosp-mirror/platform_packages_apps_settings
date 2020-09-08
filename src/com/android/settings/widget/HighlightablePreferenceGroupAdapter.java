@@ -160,7 +160,7 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
             return;
         }
         mFadeInAnimated = true;
-        final int colorFrom = Color.WHITE;
+        final int colorFrom = mNormalBackgroundRes;
         final int colorTo = mHighlightColor;
         final ValueAnimator fadeInLoop = ValueAnimator.ofObject(
                 new ArgbEvaluator(), colorFrom, colorTo);
@@ -188,7 +188,7 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
             return;
         }
         int colorFrom = mHighlightColor;
-        int colorTo = Color.WHITE;
+        int colorTo = mNormalBackgroundRes;
 
         v.setTag(R.id.preference_highlighted, false);
         final ValueAnimator colorAnimation = ValueAnimator.ofObject(

@@ -16,10 +16,11 @@
 
 package com.android.settings.wifi.tether;
 
+import android.annotation.NonNull;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiClient;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.text.BidiFormatter;
 
@@ -146,8 +147,8 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                 mPreference.setSummary(R.string.wifi_tether_starting);
                 break;
             case WifiManager.WIFI_AP_STATE_ENABLED:
-                WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
-                updateConfigSummary(wifiConfig);
+                final SoftApConfiguration softApConfig = mWifiManager.getSoftApConfiguration();
+                updateConfigSummary(softApConfig);
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLING:
                 mPreference.setSummary(R.string.wifi_tether_stopping);
@@ -164,12 +165,12 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         }
     }
 
-    private void updateConfigSummary(WifiConfiguration wifiConfig) {
-        final String s = mContext.getString(
-                com.android.internal.R.string.wifi_tether_configure_ssid_default);
-
+    private void updateConfigSummary(@NonNull SoftApConfiguration softApConfig) {
+        if (softApConfig == null) {
+            // Should never happen.
+            return;
+        }
         mPreference.setSummary(mContext.getString(R.string.wifi_tether_enabled_subtext,
-                BidiFormatter.getInstance().unicodeWrap(
-                        (wifiConfig == null) ? s : wifiConfig.SSID)));
+                BidiFormatter.getInstance().unicodeWrap(softApConfig.getSsid())));
     }
 }

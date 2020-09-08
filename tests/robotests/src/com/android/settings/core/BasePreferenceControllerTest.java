@@ -28,6 +28,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -203,6 +204,15 @@ public class BasePreferenceControllerTest {
         mPreferenceController.updateNonIndexableKeys(keys);
 
         assertThat(keys).isEmpty();
+    }
+
+    @Test
+    public void getMetricsCategory_metricsCategoryIsSet_shouldReturnTheSameCategory() {
+        mPreferenceController.setMetricsCategory(SettingsEnums.DISPLAY);
+
+        final int category = mPreferenceController.getMetricsCategory();
+
+        assertThat(category).isEqualTo(SettingsEnums.DISPLAY);
     }
 
     private class FakeBasePreferenceController extends BasePreferenceController {

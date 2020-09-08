@@ -22,6 +22,8 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.FactoryResetProtectionPolicy;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +51,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.template.FooterButton.ButtonType;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
 
 /**
@@ -82,14 +85,9 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
             final PersistentDataBlockManager pdbManager = (PersistentDataBlockManager)
                     getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
-            final OemLockManager oemLockManager = (OemLockManager)
-                    getActivity().getSystemService(Context.OEM_LOCK_SERVICE);
 
-            if (pdbManager != null && !oemLockManager.isOemUnlockAllowed() &&
-                    Utils.isDeviceProvisioned(getActivity())) {
-                // if OEM unlock is allowed, the persistent data block will be wiped during FR
-                // process. If disabled, it will be wiped here, unless the device is still being
-                // provisioned, in which case the persistent data block will be preserved.
+            if (shouldWipePersistentDataBlock(pdbManager)) {
+
                 new AsyncTask<Void, Void, Void>() {
                     int mOldOrientation;
                     ProgressDialog mProgressDialog;
@@ -138,6 +136,49 @@ public class MasterClearConfirm extends InstrumentedFragment {
             return progressDialog;
         }
     };
+
+    @VisibleForTesting
+    boolean shouldWipePersistentDataBlock(PersistentDataBlockManager pdbManager) {
+        if (pdbManager == null) {
+            return false;
+        }
+        // The persistent data block will persist if the device is still being provisioned.
+        if (isDeviceStillBeingProvisioned()) {
+            return false;
+        }
+        // If OEM unlock is allowed, the persistent data block will be wiped during FR
+        // process. If disabled, it will be wiped here instead.
+        if (isOemUnlockedAllowed()) {
+            return false;
+        }
+        final DevicePolicyManager dpm = (DevicePolicyManager) getActivity()
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
+        // Do not erase the factory reset protection data (from Settings) if factory reset
+        // protection policy is not supported on the device.
+        if (!dpm.isFactoryResetProtectionPolicySupported()) {
+            return false;
+        }
+        // Do not erase the factory reset protection data (from Settings) if the
+        // device is an organization-owned managed profile device and a factory
+        // reset protection policy has been set.
+        FactoryResetProtectionPolicy frpPolicy = dpm.getFactoryResetProtectionPolicy(null);
+        if (dpm.isOrganizationOwnedDeviceWithManagedProfile() && frpPolicy != null
+                && frpPolicy.isNotEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    @VisibleForTesting
+    boolean isOemUnlockedAllowed() {
+        return ((OemLockManager) getActivity().getSystemService(
+                Context.OEM_LOCK_SERVICE)).isOemUnlockAllowed();
+    }
+
+    @VisibleForTesting
+    boolean isDeviceStillBeingProvisioned() {
+        return !WizardManagerHelper.isDeviceProvisioned(getActivity());
+    }
 
     private void doMasterClear() {
         Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);

@@ -48,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -111,6 +112,7 @@ public class RenameMobileNetworkDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void dialog_subscriptionMissing_noCrash() {
         final AlertDialog dialog = startDialog();
         final Button negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);

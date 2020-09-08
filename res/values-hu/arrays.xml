@@ -50,6 +50,7 @@
   </string-array>
     <!-- no translation found for dark_ui_scheduler_preference_titles:0 (7465697698048662118) -->
     <!-- no translation found for dark_ui_scheduler_preference_titles:1 (4057198235664064478) -->
+    <!-- no translation found for dark_ui_scheduler_preference_titles:2 (8842756744447000897) -->
   <string-array name="lock_after_timeout_entries">
     <item msgid="2223808927866488981">"Azonnal"</item>
     <item msgid="463591454172790676">"5 másodperc"</item>
@@ -97,6 +98,12 @@
   </string-array>
     <!-- no translation found for wifi_tether_security:0 (6312112980634811065) -->
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
+  <string-array name="eap_ocsp_type">
+    <item msgid="7202884222741437608">"Ne hitelesítse"</item>
+    <item msgid="5703177653586269306">"Tanúsítvány állapotának kérése"</item>
+    <item msgid="326388247868439528">"Tanúsítvány állapotának kötelező kérése"</item>
+    <item msgid="1090956283885790552">"Az összes nem megbízható tanúsítvány állapotának kötelező kérése"</item>
+  </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Nyomógomb"</item>
     <item msgid="2630618799033509548">"Partnereszköztől kapott PIN"</item>
@@ -372,9 +379,16 @@
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="923916134548435468">"Nagyon kicsi"</item>
     <item msgid="5738147437573674872">"Kicsi"</item>
-    <item msgid="8111006422178051129">"Normál"</item>
+    <item msgid="3942006483573485941">"Alapértelmezett"</item>
     <item msgid="824386705928670045">"Nagy"</item>
     <item msgid="2790561781512874585">"Nagyon nagy"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_summaries">
+    <item msgid="5700290209695344464">"Nagyon kicsi szövegméret"</item>
+    <item msgid="4400431625665186389">"Kis szövegméret"</item>
+    <item msgid="2340994108094808362">"Alapértelmezett szövegméret"</item>
+    <item msgid="6446684863055375405">"Nagy szövegméret"</item>
+    <item msgid="6838252010935384975">"Nagyon nagy szövegméret"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="70686029249840227">"Alapértelmezett"</item>
@@ -391,7 +405,7 @@
     <item msgid="3237802033158517495">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="4180191497452407161">"Alapbeállítások használata"</item>
+    <item msgid="3880932435325583041">"Alkalmazás által beállítva"</item>
     <item msgid="8719204526359229387">"Fekete alapon fehér"</item>
     <item msgid="5410164687403735103">"Fehér alapon fekete"</item>
     <item msgid="1119043472912497241">"Fekete alapon sárga"</item>
@@ -500,50 +514,11 @@
     <item msgid="1205665684426617345">"Csak otthoni"</item>
     <item msgid="6691772120712000966">"Automatikus"</item>
   </string-array>
-  <string-array name="preferred_network_mode_choices">
-    <item msgid="5746729990546256950">"GSM/WCDMA a preferált"</item>
-    <item msgid="6443811977675152844">"Csak GSM"</item>
-    <item msgid="8767554719068876877">"Csak WCDMA"</item>
-    <item msgid="928773614806830223">"GSM/WCDMA – automatikus"</item>
-    <item msgid="6742068706546460481">"CDMA/EvDo – automatikus"</item>
-    <item msgid="3649606999166018819">"CDMA EvDo nélkül"</item>
-    <item msgid="3335567389804180984">"Csak EvDo"</item>
-    <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
-    <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
-    <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
-    <item msgid="2908834445708457736">"LTE"</item>
-    <item msgid="2947411877551747693">"LTE/WCDMA"</item>
-    <item msgid="7723670142495874534">"Csak TDSCDMA"</item>
-    <item msgid="7662033849563993380">"TDSCDMA/WCDMA"</item>
-    <item msgid="1030644331822315228">"LTE/TDSCDMA"</item>
-    <item msgid="7094751610086221480">"TDSCDMA/GSM"</item>
-    <item msgid="4183784131291491454">"LTE/TDSCDMA/GSM"</item>
-    <item msgid="1012405424112901282">"TDSCDMA/GSM/WCDMA"</item>
-    <item msgid="9095153819433727441">"LTE/TDSCDMA/WCDMA"</item>
-    <item msgid="8130733279433187514">"LTE/TDSCDMA/GSM/WCDMA"</item>
-    <item msgid="4901583947595116332">"TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
-    <item msgid="6400630497408723600">"LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
-    <item msgid="9080352308817056162">"Csak NR"</item>
-    <item msgid="8150548370973671395">"NR/LTE"</item>
-    <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
-    <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="8908263949185004366">"Globális"</item>
-    <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
-    <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
-    <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
-    <item msgid="2816766128443809642">"NR/LTE/TDSCDMA/WCDMA"</item>
-    <item msgid="611069084780684089">"NR/LTE/TDSCDMA/GSM/WCDMA"</item>
-    <item msgid="5790800263975092724">"NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</item>
-  </string-array>
+    <!-- no translation found for preferred_network_mode_choices:10 (4147872615520331421) -->
+    <!-- no translation found for preferred_network_mode_choices:27 (8908263949185004366) -->
   <string-array name="cdma_subscription_choices">
     <item msgid="6242790734457941014">"RUIM/SIM"</item>
     <item msgid="8980776035119085660">"NV"</item>
-  </string-array>
-  <string-array name="preferred_network_mode_choices_world_mode">
-    <item msgid="8219021147046131771">"Globális"</item>
-    <item msgid="5291208617720023560">"LTE/CDMA"</item>
-    <item msgid="6742002477816975742">"LTE/GSM/UMTS"</item>
   </string-array>
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->

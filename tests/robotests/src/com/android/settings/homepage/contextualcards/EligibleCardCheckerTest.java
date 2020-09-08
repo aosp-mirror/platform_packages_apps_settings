@@ -31,7 +31,6 @@ import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
-import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 
@@ -66,14 +65,6 @@ public class EligibleCardCheckerTest {
     }
 
     @Test
-    public void isSliceToggleable_cardWithoutToggle_returnFalse() {
-        final EmergencyInfoSlice emergencyInfoSlice = new EmergencyInfoSlice(mContext);
-        final Slice slice = emergencyInfoSlice.getSlice();
-
-        assertThat(mEligibleCardChecker.isSliceToggleable(slice)).isFalse();
-    }
-
-    @Test
     public void isCardEligibleToDisplay_toggleSlice_hasInlineActionShouldBeTrue() {
         final ContextualWifiSlice wifiSlice = new ContextualWifiSlice(mContext);
         final Slice slice = wifiSlice.getSlice();
@@ -85,33 +76,10 @@ public class EligibleCardCheckerTest {
     }
 
     @Test
-    public void isCardEligibleToDisplay_notToggleSlice_hasInlineActionShouldBeFalse() {
-        final EmergencyInfoSlice emergencyInfoSlice = new EmergencyInfoSlice(mContext);
-        final Slice slice = emergencyInfoSlice.getSlice();
-        doReturn(slice).when(mEligibleCardChecker).bindSlice(any(Uri.class));
-
-        mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI));
-
-        assertThat(mEligibleCardChecker.mCard.hasInlineAction()).isFalse();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_customCard_returnTrue() {
-        final ContextualCard customCard = new ContextualCard.Builder()
-                .setName("custom_card")
-                .setCardType(ContextualCard.CardType.DEFAULT)
-                .setTitleText("custom_title")
-                .setSummaryText("custom_summary")
-                .build();
-
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(customCard)).isTrue();
-    }
-
-    @Test
     public void isCardEligibleToDisplay_invalidScheme_returnFalse() {
-        final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
+        final Uri invalidUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
 
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(sliceUri)))
+        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(invalidUri)))
                 .isFalse();
     }
 
@@ -144,6 +112,17 @@ public class EligibleCardCheckerTest {
 
         assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI)))
                 .isFalse();
+    }
+
+    @Test
+    public void isCardEligibleToDisplay_sliceNotNull_cacheSliceToCard() {
+        final ContextualWifiSlice wifiSlice = new ContextualWifiSlice(mContext);
+        final Slice slice = wifiSlice.getSlice();
+        doReturn(slice).when(mEligibleCardChecker).bindSlice(any(Uri.class));
+
+        mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI));
+
+        assertThat(mEligibleCardChecker.mCard.getSlice()).isNotNull();
     }
 
     private ContextualCard getContextualCard(Uri sliceUri) {

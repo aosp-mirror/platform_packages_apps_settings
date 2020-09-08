@@ -17,7 +17,6 @@
 package com.android.settings.security;
 
 import android.content.Context;
-import android.os.UserManager;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -27,16 +26,11 @@ public class InstallWifiCertificatePreferenceController extends
     private static final String KEY_INSTALL_WIFI_CERTIFICATE = "install_wifi_certificate";
 
     public InstallWifiCertificatePreferenceController(Context context) {
-        super(context, UserManager.DISALLOW_CONFIG_CREDENTIALS);
+        super(context, KEY_INSTALL_WIFI_CERTIFICATE);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_INSTALL_WIFI_CERTIFICATE;
     }
 }

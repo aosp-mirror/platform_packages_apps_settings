@@ -68,8 +68,7 @@ public class CellularFallbackPreferenceController extends TogglePreferenceContro
 
     @VisibleForTesting
     Resources getResourcesForSubId(int subscriptionId) {
-        return SubscriptionManager.getResourcesForSubId(mContext, subscriptionId,
-                false /* useRootLocale */);
+        return SubscriptionManager.getResourcesForSubId(mContext, subscriptionId);
     }
 
     private boolean avoidBadWifiCurrentSettings() {

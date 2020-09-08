@@ -56,6 +56,11 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean isChecked() {
         return getConfig().alwaysOnEnabled(MY_USER);
     }

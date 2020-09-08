@@ -83,7 +83,8 @@ public class AppStateChangeWifiStateBridge extends AppStateAppOpsBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            if (info == null || info.extraInfo == null) {
+            if (info == null || info.extraInfo == null
+                    || !(info.extraInfo instanceof WifiSettingsState)) {
                 return false;
             }
             WifiSettingsState wifiSettingsState = (WifiSettingsState) info.extraInfo;

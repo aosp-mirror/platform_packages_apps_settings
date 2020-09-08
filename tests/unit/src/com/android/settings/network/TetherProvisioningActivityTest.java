@@ -75,7 +75,7 @@ public class TetherProvisioningActivityTest {
                         .putExtra(EXTRA_PROVISION_CALLBACK, receiver)
                         .putExtra(TetherProvisioningActivity.EXTRA_TETHER_SUBID, 10000))) {
             assertEquals(TetheringManager.TETHER_ERROR_PROVISIONING_FAILED, receiver.get());
-            //assertEquals(Lifecycle.State.DESTROYED, scenario.getState());
+            assertEquals(Lifecycle.State.DESTROYED, scenario.getState());
         }
     }
 

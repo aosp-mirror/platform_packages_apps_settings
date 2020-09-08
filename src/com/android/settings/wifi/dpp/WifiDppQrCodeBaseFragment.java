@@ -16,13 +16,21 @@
 
 package com.android.settings.wifi.dpp;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupdesign.GlifLayout;
 
 /**
  * There are below 4 fragments for Wi-Fi DPP UI flow, to reduce redundant code of UI components,
@@ -34,37 +42,64 @@ import com.android.settings.core.InstrumentedFragment;
  * {@code WifiDppAddDeviceFragment}
  */
 public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
-    private ImageView mHeaderIcon;
-    private ImageView mDevicesCheckCircleGreenHeaderIcon;
-    protected TextView mTitle;
+    private static final String TAG = "WifiDppQrCodeBaseFragment";
+
+    private GlifLayout mGlifLayout;
     protected TextView mSummary;
-    protected View mTitleSummaryContainer;
+    protected FooterButton mLeftButton;
+    protected FooterButton mRightButton;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mHeaderIcon = view.findViewById(android.R.id.icon);
-        mDevicesCheckCircleGreenHeaderIcon =
-                view.findViewById(R.id.devices_check_circle_green_icon);
-        mTitle = view.findViewById(android.R.id.title);
+        mGlifLayout = (GlifLayout) view;
         mSummary = view.findViewById(android.R.id.summary);
 
-        // This is the LinearLayout which groups mTitle and mSummary for Talkback to announce the
-        // content in a way that reflects its natural groupings.
-        mTitleSummaryContainer =  view.findViewById(R.id.title_summary_container);
+        if (isFooterAvailable()) {
+            mLeftButton = new FooterButton.Builder(getContext())
+                    .setButtonType(FooterButton.ButtonType.CANCEL)
+                    .setTheme(R.style.SudGlifButton_Secondary)
+                    .build();
+            mGlifLayout.getMixin(FooterBarMixin.class).setSecondaryButton(mLeftButton);
+
+            mRightButton = new FooterButton.Builder(getContext())
+                    .setButtonType(FooterButton.ButtonType.NEXT)
+                    .setTheme(R.style.SudGlifButton_Primary)
+                    .build();
+            mGlifLayout.getMixin(FooterBarMixin.class).setPrimaryButton(mRightButton);
+        }
+
+        mGlifLayout.getHeaderTextView().setAccessibilityLiveRegion(
+                View.ACCESSIBILITY_LIVE_REGION_POLITE);
     }
 
-    protected void setHeaderIconImageResource(int resId) {
-        // ic_devices_check_circle_green is a LayerDrawable,
-        // it has different size from other VectorDrawable icons
-        if (resId == R.drawable.ic_devices_check_circle_green) {
-            mHeaderIcon.setVisibility(View.GONE);
-            mDevicesCheckCircleGreenHeaderIcon.setVisibility(View.VISIBLE);
-        } else {
-            mDevicesCheckCircleGreenHeaderIcon.setVisibility(View.GONE);
-            mHeaderIcon.setImageResource(resId);
-            mHeaderIcon.setVisibility(View.VISIBLE);
-        }
+    protected void setHeaderIconImageResource(@DrawableRes int iconResId) {
+        mGlifLayout.setIcon(getDrawable(iconResId));
     }
+
+    private Drawable getDrawable(@DrawableRes int iconResId) {
+        Drawable buttonIcon = null;
+
+        try {
+            buttonIcon = getContext().getDrawable(iconResId);
+        } catch (Resources.NotFoundException exception) {
+            Log.e(TAG, "Resource does not exist: " + iconResId);
+        }
+        return buttonIcon;
+    }
+
+    protected void setHeaderTitle(String title) {
+        mGlifLayout.setHeaderText(title);
+    }
+
+    protected void setHeaderTitle(int resId, Object... formatArgs) {
+        mGlifLayout.setHeaderText(getString(resId, formatArgs));
+    }
+
+    protected void setProgressBarShown(boolean shown) {
+        mGlifLayout.setProgressBarShown(shown);
+    }
+
+    protected abstract boolean isFooterAvailable();
 }

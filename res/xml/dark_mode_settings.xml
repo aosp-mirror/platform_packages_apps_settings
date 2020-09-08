@@ -18,8 +18,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/dark_ui_mode"
-    android:key="dark_ui_mode_screen"
     settings:keywords="@string/keywords_dark_ui_mode">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="dark_ui_location_off"
+        android:selectable="false"
+        android:layout="@layout/twilight_mode_location_off"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
 
     <DropDownPreference
         android:key="dark_ui_auto_mode"
@@ -27,8 +33,19 @@
         android:summary="%s"
         android:entries="@array/dark_ui_scheduler_preference_titles"
         android:entryValues="@array/dark_ui_scheduler_preference_titles"
+        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
         settings:keywords="@string/keywords_dark_ui_mode"/>
+
+    <Preference
+        android:key="dark_theme_start_time"
+        android:title="@string/night_display_start_time_title"
+        settings:searchable="false"/>
+
+    <Preference
+        android:key="dark_theme_end_time"
+        android:title="@string/night_display_end_time_title"
+        settings:searchable="false"/>
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="dark_ui_activated"
@@ -36,8 +53,7 @@
         android:selectable="false"
         android:layout="@layout/dark_ui_activation_button"
         settings:allowDividerBelow="true"
-        settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"
-        settings:keywords="@string/keywords_dark_ui_mode"/>
+        settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference
             android:key="dark_ui_footer"

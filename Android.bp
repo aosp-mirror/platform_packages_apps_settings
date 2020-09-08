@@ -3,6 +3,21 @@ java_library {
     srcs: ["src/**/*.logtags"],
 }
 
+genrule {
+    name: "statslog-settings-java-gen",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --java $(out) --module settings"
+        + " --javaPackage com.android.settings.core.instrumentation --javaClass SettingsStatsLog",
+    out: ["com/android/settings/core/instrumentation/SettingsStatsLog.java"],
+}
+
+java_library {
+    name: "statslog-settings",
+    srcs: [
+        ":statslog-settings-java-gen",
+    ],
+}
+
 // Build the Settings APK
 android_library {
     name: "Settings-core",
@@ -36,13 +51,23 @@ android_library {
         "settings-log-bridge-protos-lite",
         "contextualcards",
         "settings-logtags",
+        "statslog-settings",
         "zxing-core-1.7",
+        "android.hardware.dumpstate-V1.0-java",
+        "android.hardware.dumpstate-V1.1-java",
     ],
 
     libs: [
         "telephony-common",
         "ims-common",
+        "app-compat-annotations",
     ],
+}
+
+platform_compat_config {
+    name: "settings-platform-compat-config",
+    src: ":Settings-core",
+    system_ext_specific: true,
 }
 
 android_app {
@@ -51,7 +76,10 @@ android_app {
     certificate: "platform",
     system_ext_specific: true,
     privileged: true,
-    required: ["privapp_whitelist_com.android.settings"],
+    required: [
+        "privapp_whitelist_com.android.settings",
+        "settings-platform-compat-config",
+    ],
     static_libs: ["Settings-core"],
     resource_dirs: [],
     optimize: {

@@ -22,7 +22,7 @@ import android.net.NetworkCapabilities;
 import com.android.internal.util.Preconditions;
 
 /** Listens for changes to NetworkCapabilities to update the ConnectedAccessPointPreference. */
-final class CaptivePortalNetworkCallback extends NetworkCallback {
+class CaptivePortalNetworkCallback extends NetworkCallback {
 
     private final ConnectedAccessPointPreference mConnectedApPreference;
     private final Network mNetwork;
@@ -36,25 +36,42 @@ final class CaptivePortalNetworkCallback extends NetworkCallback {
     }
 
     @Override
-    public void onLost(Network network) {
+    public final void onLost(Network network) {
         if (mNetwork.equals(network)) {
-            mIsCaptivePortal = false;
+            setIsCaptivePortal(false);
         }
     }
 
     @Override
-    public void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
+    public final void onCapabilitiesChanged(Network network,
+            NetworkCapabilities networkCapabilities) {
         if (mNetwork.equals(network)) {
-            mIsCaptivePortal = WifiUtils.canSignIntoNetwork(networkCapabilities);
-            mConnectedApPreference.setCaptivePortal(mIsCaptivePortal);
+            boolean isCaptivePortal = WifiUtils.canSignIntoNetwork(networkCapabilities);
+            setIsCaptivePortal(isCaptivePortal);
+            mConnectedApPreference.setCaptivePortal(isCaptivePortal);
         }
+    }
+
+    /**
+     * Called when captive portal capability changes for the current network. Default implementation
+     * is a no-op. Use {@link CaptivePortalNetworkCallback#isCaptivePortal()} to read new
+     * capability.
+     */
+    public void onCaptivePortalCapabilityChanged() {}
+
+    private void setIsCaptivePortal(boolean isCaptivePortal) {
+        if (isCaptivePortal == mIsCaptivePortal) {
+            return;
+        }
+        mIsCaptivePortal = isCaptivePortal;
+        onCaptivePortalCapabilityChanged();
     }
 
     /**
      * Returns true if the supplied network and preference are not null and are the same as the
      * originally supplied values.
      */
-    public boolean isSameNetworkAndPreference(
+    public final boolean isSameNetworkAndPreference(
             Network network, ConnectedAccessPointPreference connectedApPreference) {
         return mNetwork.equals(network) && mConnectedApPreference == connectedApPreference;
     }
@@ -63,12 +80,12 @@ final class CaptivePortalNetworkCallback extends NetworkCallback {
      * Returns true if the most recent update to the NetworkCapabilities indicates a captive portal
      * network and the Network was not lost in the interim.
      */
-    public boolean isCaptivePortal() {
+    public final boolean isCaptivePortal() {
         return mIsCaptivePortal;
     }
 
     /** Returns the currently associated network. */
-    public Network getNetwork() {
+    public final Network getNetwork() {
         return mNetwork;
     }
 }

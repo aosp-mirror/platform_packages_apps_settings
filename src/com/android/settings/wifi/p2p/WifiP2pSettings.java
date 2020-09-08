@@ -38,16 +38,19 @@ import android.net.wifi.p2p.WifiP2pManager.DeviceInfoListener;
 import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.net.wifi.p2p.WifiP2pManager.PersistentGroupInfoListener;
 import android.os.Bundle;
-import android.os.SystemProperties;
+import android.sysprop.TelephonyProperties;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -67,46 +70,47 @@ public class WifiP2pSettings extends DashboardFragment
 
     private static final String TAG = "WifiP2pSettings";
     private static final boolean DBG = false;
-    private static final int MENU_ID_SEARCH = Menu.FIRST;
-    private static final int MENU_ID_RENAME = Menu.FIRST + 1;
+    @VisibleForTesting static final int MENU_ID_SEARCH = Menu.FIRST;
+    @VisibleForTesting static final int MENU_ID_RENAME = Menu.FIRST + 1;
 
     private final IntentFilter mIntentFilter = new IntentFilter();
-    private WifiP2pManager mWifiP2pManager;
+    @VisibleForTesting WifiP2pManager mWifiP2pManager;
     private WifiP2pManager.Channel mChannel;
-    private OnClickListener mRenameListener;
-    private OnClickListener mDisconnectListener;
-    private OnClickListener mCancelConnectListener;
-    private OnClickListener mDeleteGroupListener;
-    private WifiP2pPeer mSelectedWifiPeer;
-    private WifiP2pPersistentGroup mSelectedGroup;
-    private String mSelectedGroupName;
+    @VisibleForTesting OnClickListener mRenameListener;
+    @VisibleForTesting OnClickListener mDisconnectListener;
+    @VisibleForTesting OnClickListener mCancelConnectListener;
+    @VisibleForTesting OnClickListener mDeleteGroupListener;
+    @VisibleForTesting WifiP2pPeer mSelectedWifiPeer;
+    @VisibleForTesting WifiP2pPersistentGroup mSelectedGroup;
+    @VisibleForTesting String mSelectedGroupName;
     private EditText mDeviceNameText;
 
     private boolean mWifiP2pEnabled;
-    private boolean mWifiP2pSearching;
-    private int mConnectedDevices;
-    private boolean mLastGroupFormed = false;
+    @VisibleForTesting boolean mWifiP2pSearching;
+    @VisibleForTesting int mConnectedDevices;
+    @VisibleForTesting boolean mLastGroupFormed = false;
     private boolean mIsIgnoreInitConnectionInfoCallback = false;
 
-    private P2pPeerCategoryPreferenceController mPeerCategoryController;
-    private P2pPersistentCategoryPreferenceController mPersistentCategoryController;
-    private P2pThisDevicePreferenceController mThisDevicePreferenceController;
+    @VisibleForTesting P2pPeerCategoryPreferenceController mPeerCategoryController;
+    @VisibleForTesting P2pPersistentCategoryPreferenceController mPersistentCategoryController;
+    @VisibleForTesting P2pThisDevicePreferenceController mThisDevicePreferenceController;
 
-    private static final int DIALOG_DISCONNECT  = 1;
-    private static final int DIALOG_CANCEL_CONNECT = 2;
-    private static final int DIALOG_RENAME = 3;
-    private static final int DIALOG_DELETE_GROUP = 4;
+    @VisibleForTesting static final int DIALOG_DISCONNECT  = 1;
+    @VisibleForTesting static final int DIALOG_CANCEL_CONNECT = 2;
+    @VisibleForTesting static final int DIALOG_RENAME = 3;
+    @VisibleForTesting static final int DIALOG_DELETE_GROUP = 4;
 
-    private static final String SAVE_DIALOG_PEER = "PEER_STATE";
-    private static final String SAVE_DEVICE_NAME = "DEV_NAME";
-    private static final String SAVE_SELECTED_GROUP = "GROUP_NAME";
+    @VisibleForTesting static final String SAVE_DIALOG_PEER = "PEER_STATE";
+    @VisibleForTesting static final String SAVE_DEVICE_NAME = "DEV_NAME";
+    @VisibleForTesting static final String SAVE_SELECTED_GROUP = "GROUP_NAME";
 
     private WifiP2pDevice mThisDevice;
     private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
 
-    private String mSavedDeviceName;
+    @VisibleForTesting String mSavedDeviceName;
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    @VisibleForTesting
+    final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -150,7 +154,7 @@ public class WifiP2pSettings extends DashboardFragment
                 } else {
                     updateSearchMenu(false);
                 }
-            } else if (WifiP2pManager.WIFI_P2P_PERSISTENT_GROUPS_CHANGED_ACTION.equals(action)) {
+            } else if (WifiP2pManager.ACTION_WIFI_P2P_PERSISTENT_GROUPS_CHANGED.equals(action)) {
                 if (mWifiP2pManager != null) {
                     mWifiP2pManager.requestPersistentGroupInfo(mChannel, WifiP2pSettings.this);
                 }
@@ -195,7 +199,10 @@ public class WifiP2pSettings extends DashboardFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         final Activity activity = getActivity();
-        mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        if (mWifiP2pManager == null) {
+            mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        }
+
         if (mWifiP2pManager != null) {
             mChannel = mWifiP2pManager.initialize(activity.getApplicationContext(),
                     getActivity().getMainLooper(), null);
@@ -337,7 +344,7 @@ public class WifiP2pSettings extends DashboardFragment
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PERSISTENT_GROUPS_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.ACTION_WIFI_P2P_PERSISTENT_GROUPS_CHANGED);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
 
         getActivity().registerReceiver(mReceiver, mIntentFilter);
@@ -427,7 +434,7 @@ public class WifiP2pSettings extends DashboardFragment
                 WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = mSelectedWifiPeer.device.deviceAddress;
 
-                int forceWps = SystemProperties.getInt("wifidirect.wps", -1);
+                int forceWps = TelephonyProperties.wps_info().orElse(-1);
 
                 if (forceWps != -1) {
                     config.wps.setup = forceWps;
@@ -495,7 +502,9 @@ public class WifiP2pSettings extends DashboardFragment
                 .create();
             return dialog;
         } else if (id == DIALOG_RENAME) {
-            mDeviceNameText = new EditText(getActivity());
+            final LayoutInflater layoutInflater = LayoutInflater.from(getPrefContext());
+            final View root = layoutInflater.inflate(R.layout.dialog_edittext, null /* root */);
+            mDeviceNameText = root.findViewById(R.id.edittext);
             mDeviceNameText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(30)});
             if (mSavedDeviceName != null) {
                 mDeviceNameText.setText(mSavedDeviceName);
@@ -507,7 +516,7 @@ public class WifiP2pSettings extends DashboardFragment
             mSavedDeviceName = null;
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.wifi_p2p_menu_rename)
-                .setView(mDeviceNameText)
+                .setView(root)
                 .setPositiveButton(getActivity().getString(R.string.dlg_ok), mRenameListener)
                 .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
                 .create();

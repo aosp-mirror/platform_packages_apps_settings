@@ -26,6 +26,7 @@ import org.robolectric.annotation.Resetter;
 public class ShadowThreadUtils {
 
     private static boolean sIsMainThread = true;
+    private static final String TAG = "ShadowThreadUtils";
 
     @Resetter
     public static void reset() {

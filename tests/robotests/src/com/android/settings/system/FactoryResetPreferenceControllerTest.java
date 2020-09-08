@@ -18,6 +18,8 @@ package com.android.settings.system;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -81,7 +83,7 @@ public class FactoryResetPreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 1);
 
         // Indicate the user is a demo user.
-        mShadowUserManager.setIsDemoUser(true);
+        mShadowUserManager.addUser(UserHandle.myUserId(), "test", UserInfo.FLAG_DEMO);
 
         assertThat(mController.isAvailable()).isTrue();
     }

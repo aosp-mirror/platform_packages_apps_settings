@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.Utils.isNightMode;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -113,8 +115,7 @@ public class BalanceSeekBar extends SeekBar {
                 res.getDimensionPixelSize(R.dimen.balance_seekbar_center_marker_width),
                 res.getDimensionPixelSize(R.dimen.balance_seekbar_center_marker_height));
         mCenterMarkerPaint = new Paint();
-        // TODO use a more suitable colour?
-        mCenterMarkerPaint.setColor(Color.BLACK);
+        mCenterMarkerPaint.setColor(isNightMode(context) ? Color.WHITE : Color.BLACK);
         mCenterMarkerPaint.setStyle(Paint.Style.FILL);
         // Remove the progress colour
         setProgressTintList(ColorStateList.valueOf(Color.TRANSPARENT));

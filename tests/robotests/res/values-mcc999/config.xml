@@ -68,10 +68,13 @@
     <bool name="config_show_avatar_in_homepage">true</bool>
     <bool name="config_show_branded_account_in_device_info">false</bool>
     <bool name="config_show_emergency_info_in_device_info">false</bool>
+    <bool name="config_show_smooth_display">false</bool>
 
     <!-- Whether or not extra preview panels should be used for screen zoom setting. -->
     <bool name="config_enable_extra_screen_zoom_preview">false</bool>
 
+    <!-- Whether dismissal timestamp should be kept before deletion -->
+    <bool name="config_keep_contextual_card_dismissal_timestamp">true</bool>
 
     <!-- List of a11y components on the device allowed to be enabled by Settings Slices -->
     <string-array name="config_settings_slices_accessibility_components" translatable="false">
@@ -87,10 +90,14 @@
     <string name="config_contextual_card_feedback_email" translatable="false">test@test.test</string>
 
     <!-- Grayscale settings intent -->
-    <string name="config_grayscale_settings_intent" translate="false">intent:#Intent;action=test.test;end</string>
+    <string name="config_grayscale_settings_intent" translatable="false">intent:#Intent;action=test.test;end</string>
 
     <!-- List containing the injected tile keys which are suppressed. -->
     <string-array name="config_suppress_injected_tile_keys" translatable="false">
         <item>injected_tile_key</item>
+        <item>injected_tile_key2</item>
     </string-array>
+
+    <!-- Uri to query non-public Slice Uris. -->
+    <string name="config_non_public_slice_query_uri" translatable="false">content://com.android.settings.slices/test</string>
 </resources>

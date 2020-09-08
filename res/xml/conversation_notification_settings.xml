@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="conversation_settings"
+    android:title="" >
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="pref_app_header"
+        android:layout="@layout/settings_entity_header"
+        settings:allowDividerBelow="true"/>
+
+    <!-- important conversation -->
+    <com.android.settings.notification.app.ConversationPriorityPreference
+        android:key="priority"
+        android:title="@string/notification_conversation_important"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="true"/>
+
+    <PreferenceCategory
+        android:key="bubbles"
+        android:title="@string/notification_bubbles_title">
+
+        <!-- bubbles -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="bubble_pref"
+            android:title="@string/bubbles_conversation_toggle_title"
+            android:summary="@string/bubbles_conversation_toggle_summary"
+            android:icon="@drawable/ic_create_bubble"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+
+        <Preference
+            android:key="notification_bubbles"
+            android:title="@string/bubbles_conversation_app_link"
+        />
+    </PreferenceCategory>
+
+    <!-- demote -->
+    <Preference
+        android:key="demote"
+        android:icon="@drawable/ic_demote_conversation"
+        android:title="@string/demote_conversation_title"
+        android:summary="@string/demote_conversation_summary"
+        settings:allowDividerAbove="true"/>
+
+    <com.android.settings.notification.app.NotificationFooterPreference
+        android:key="block_desc"
+        settings:allowDividerAbove="false"/>
+
+    <PreferenceCategory
+        android:key="channel_advanced"
+        android:order="50"
+        settings:initialExpandedChildrenCount="0">
+
+        <!-- peeking -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="high_importance"
+            android:title="@string/notification_importance_high_title"
+            android:summary="@string/notification_channel_summary_high"/>
+
+        <!-- ringtone -->
+        <com.android.settings.notification.app.NotificationSoundPreference
+            android:key="ringtone"
+            android:title="@string/notification_channel_sound_title"
+            android:dialogTitle="@string/notification_channel_sound_title"
+            android:icon="@drawable/ic_notifications"
+            android:showSilent="true"
+            android:showDefault="true"/>
+
+        <!-- Visibility Override -->
+        <com.android.settings.RestrictedListPreference
+            android:key="visibility_override"
+            android:icon="@drawable/ic_lock_closed"
+            android:title="@string/app_notification_visibility_override_title"/>
+
+        <!-- Show badge -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="badge"
+            android:title="@string/notification_channel_badge_title"
+            settings:useAdditionalSummary="true"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
+
+        <!-- Lights -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="lights"
+            android:title="@string/notification_show_lights_title"
+            settings:useAdditionalSummary="true"/>
+
+        <!-- Vibration -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="vibrate"
+            android:icon="@drawable/ic_volume_ringer_vibrate"
+            android:title="@string/notification_vibrate_title"
+            settings:useAdditionalSummary="true" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

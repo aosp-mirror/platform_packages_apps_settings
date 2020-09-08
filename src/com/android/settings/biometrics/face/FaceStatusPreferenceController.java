@@ -41,7 +41,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
 
     @Override
     protected boolean isDeviceSupported() {
-        return mFaceManager != null && mFaceManager.isHardwareDetected();
+        return FaceSettings.isFaceHardwareDetected(mContext);
     }
 
     @Override

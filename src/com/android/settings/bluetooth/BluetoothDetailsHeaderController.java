@@ -20,6 +20,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.DeviceConfig;
+import android.text.TextUtils;
 import android.util.Pair;
 
 import androidx.preference.PreferenceFragmentCompat;
@@ -74,10 +75,13 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
         final Pair<Drawable, String> pair =
                 BluetoothUtils.getBtRainbowDrawableWithDescription(mContext, mCachedDevice);
         String summaryText = mCachedDevice.getConnectionSummary();
-        // If both the hearing aids are connected, two device status should be shown.
-        // If Second Summary is unavailable, to set it to null.
-        mHeaderController.setSecondSummary(
-                mDeviceManager.getSubDeviceSummary(mCachedDevice));
+        if (TextUtils.isEmpty(summaryText)) {
+            // If first summary is unavailable, not to show second summary.
+            mHeaderController.setSecondSummary((CharSequence)null);
+        } else {
+            // If both the hearing aids are connected, two device status should be shown.
+            mHeaderController.setSecondSummary(mDeviceManager.getSubDeviceSummary(mCachedDevice));
+        }
         mHeaderController.setLabel(mCachedDevice.getName());
         mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);

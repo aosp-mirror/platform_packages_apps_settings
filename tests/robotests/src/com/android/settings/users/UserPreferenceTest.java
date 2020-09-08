@@ -18,12 +18,8 @@ package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.os.UserHandle;
-import android.view.View;
 
 import com.android.settingslib.RestrictedPreferenceHelper;
 
@@ -48,28 +44,12 @@ public class UserPreferenceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mUserPreference = new UserPreference(mContext, null /* attrs */, UserHandle.USER_CURRENT,
-                null /* settingsListener */, null /* deleteListener */);
+        mUserPreference = new UserPreference(mContext, null /* attrs */, UserHandle.USER_CURRENT);
         ReflectionHelpers.setField(mUserPreference, "mHelper", mRestrictedPreferenceHelper);
     }
 
     @Test
-    public void testShouldHideSecondTarget_noListener_shouldHide() {
+    public void testShouldHideSecondTarget_shouldHide() {
         assertThat(mUserPreference.shouldHideSecondTarget()).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSecondTarget_disabledByAdmin_shouldHide() {
-        when(mRestrictedPreferenceHelper.isDisabledByAdmin()).thenReturn(true);
-
-        assertThat(mUserPreference.shouldHideSecondTarget()).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSecondTarget_hasSettingListener_shouldNotHide() {
-        ReflectionHelpers.setField(mUserPreference, "mSettingsClickListener",
-                mock(View.OnClickListener.class));
-
-        assertThat(mUserPreference.shouldHideSecondTarget()).isFalse();
     }
 }

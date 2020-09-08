@@ -21,7 +21,6 @@ import static com.android.settings.security.EncryptionStatusPreferenceController
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -87,28 +86,19 @@ public class EncryptionAndCredential extends DashboardFragment {
     /**
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new SecuritySearchIndexProvider();
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.encryption_and_credential) {
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */);
+                }
 
-    private static class SecuritySearchIndexProvider extends BaseSearchIndexProvider {
-
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-            final SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.encryption_and_credential;
-            return Arrays.asList(sir);
-        }
-
-        @Override
-        public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-            return buildPreferenceControllers(context, null /* lifecycle */);
-        }
-
-        @Override
-        protected boolean isPageSearchEnabled(Context context) {
-            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-            return um.isAdminUser();
-        }
-    }
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    final UserManager um = (UserManager) context.getSystemService(
+                            Context.USER_SERVICE);
+                    return um.isAdminUser();
+                }
+            };
 }

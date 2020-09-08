@@ -52,7 +52,7 @@ public class PresetPreference extends ListDialogPreference {
         final View previewViewport = view.findViewById(R.id.preview_viewport);
         final SubtitleView previewText = (SubtitleView) view.findViewById(R.id.preview);
         final int value = getValueAt(index);
-        CaptionPropertiesFragment.applyCaptionProperties(
+        CaptionAppearanceFragment.applyCaptionProperties(
                 mCaptioningManager, previewText, previewViewport, value);
 
         final float density = getContext().getResources().getDisplayMetrics().density;

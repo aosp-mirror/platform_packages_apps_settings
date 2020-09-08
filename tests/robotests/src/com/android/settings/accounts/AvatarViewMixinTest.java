@@ -131,6 +131,17 @@ public class AvatarViewMixinTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void onStart_noAccount_mAccountNameShouldBeNull() {
+        final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(mActivity, mImageView);
+        avatarViewMixin.mAccountName = DUMMY_ACCOUNT;
+
+        avatarViewMixin.onStart();
+
+        assertThat(avatarViewMixin.mAccountName).isNull();
+    }
+
+    @Test
     public void queryProviderAuthority_useShadowPackagteManager_returnNull() {
         final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(mActivity, mImageView);
 

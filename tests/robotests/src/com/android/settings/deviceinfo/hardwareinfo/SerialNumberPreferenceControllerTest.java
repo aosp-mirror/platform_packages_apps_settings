@@ -43,12 +43,6 @@ public class SerialNumberPreferenceControllerTest {
     }
 
     @Test
-    public void isCopyableSlice() {
-        assertThat(mController.isSliceable()).isTrue();
-        assertThat(mController.isCopyableSlice()).isTrue();
-    }
-
-    @Test
     public void copy_shouldPutSerialNumberToClipBoard() {
         mController.copy();
 

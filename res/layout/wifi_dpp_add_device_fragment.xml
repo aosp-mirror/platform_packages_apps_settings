@@ -15,62 +15,53 @@
      limitations under the License.
 -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:icon="@drawable/ic_devices_other_32dp">
 
-    <ScrollView
+    <LinearLayout
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@android:id/summary"
+            style="@style/TextAppearance.SudGlifBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?attr/sudMarginSides"
+            android:layout_marginEnd="?attr/sudMarginSides"
+            android:textAlignment="center"
+            android:accessibilityLiveRegion="polite"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="vertical">
-
-            <include layout="@layout/wifi_dpp_fragment_header"/>
-
-            <ProgressBar
-                android:id="@+id/indeterminate_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:layout_marginBottom="8dp"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:visibility="invisible"/>
 
             <ImageView
                 android:id="@+id/wifi_ap_picture_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/wifi_dpp_success"
-                android:scaleType="fitCenter"
-                app:layout_constraintTop_toBottomOf="@+id/header"/>
+                android:scaleType="fitCenter"/>
 
             <Button
                 android:id="@+id/choose_different_network"
                 style="@style/SudGlifButton.Secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/wifi_ap_picture_view"
                 android:layout_marginTop="8dp"
                 android:text="@string/wifi_dpp_choose_different_network"/>
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
-    <include
-        layout="@layout/wifi_dpp_fragment_footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.setupdesign.GlifLayout>
 

@@ -83,8 +83,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     @Mock
     private Preference mSeeAllPref;
     @Mock
-    private PreferenceCategory mDivider;
-    @Mock
     private UserManager mUserManager;
     @Mock
     private ApplicationsState mAppState;
@@ -120,8 +118,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
 
         when(mScreen.findPreference(RecentNotifyingAppsPreferenceController.KEY_SEE_ALL))
                 .thenReturn(mSeeAllPref);
-        when(mScreen.findPreference(RecentNotifyingAppsPreferenceController.KEY_DIVIDER))
-                .thenReturn(mDivider);
         when(mCategory.getContext()).thenReturn(mContext);
         when(mHost.getActivity()).thenReturn(mActivity);
     }
@@ -129,16 +125,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     @Test
     public void isAlwaysAvailable() {
         assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void doNotIndexCategory() {
-        final List<String> nonIndexable = new ArrayList<>();
-
-        mController.updateNonIndexableKeys(nonIndexable);
-
-        assertThat(nonIndexable).containsAllOf(mController.getPreferenceKey(),
-                RecentNotifyingAppsPreferenceController.KEY_DIVIDER);
     }
 
     @Test
@@ -163,7 +149,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         verify(mCategory).setTitle(null);
         verify(mSeeAllPref).setTitle(R.string.notifications_title);
         verify(mSeeAllPref).setIcon(null);
-        verify(mDivider).setVisible(false);
     }
 
     @Test
@@ -211,7 +196,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
 
         verify(mSeeAllPref).setSummary(null);
         verify(mSeeAllPref).setIcon(R.drawable.ic_chevron_right_24dp);
-        verify(mDivider).setVisible(true);
     }
 
     @Test

@@ -43,7 +43,6 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
     @VisibleForTesting
     final static int CANCEL_BUTTON_ID = android.R.id.button2;
     final static int SSID_SCANNER_BUTTON_ID = R.id.ssid_scanner_button;
-    final static int PASSWORD_SCANNER_BUTTON_ID = R.id.password_scanner_button;
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
@@ -74,11 +73,9 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
         mSubmitBtn = rootView.findViewById(SUBMIT_BUTTON_ID);
         mCancelBtn = rootView.findViewById(CANCEL_BUTTON_ID);
         final ImageButton ssidScannerButton = rootView.findViewById(SSID_SCANNER_BUTTON_ID);
-        final ImageButton passwordScannerButton = rootView.findViewById(PASSWORD_SCANNER_BUTTON_ID);
         mSubmitBtn.setOnClickListener(this);
         mCancelBtn.setOnClickListener(this);
         ssidScannerButton.setOnClickListener(this);
-        passwordScannerButton.setOnClickListener(this);
         mUIController = new WifiConfigController(this, rootView, null, getMode());
 
         return rootView;
@@ -92,22 +89,15 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
     @Override
     public void onClick(View view) {
-        String ssid = null;
-
         if (view.getId() == SUBMIT_BUTTON_ID) {
             handleSubmitAction();
         } else if (view.getId() == CANCEL_BUTTON_ID) {
             handleCancelAction();
         } else if (view.getId() == SSID_SCANNER_BUTTON_ID) {
             final TextView ssidEditText = getView().findViewById(R.id.ssid);
-            ssid = ssidEditText.getText().toString();
-            // No break and flows to case PASSWORD_SCANNER_BUTTON_ID
+            final String ssid = ssidEditText.getText().toString();
 
             // Launch QR code scanner to join a network.
-            startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
-                    REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
-        } else if (view.getId()
-                == PASSWORD_SCANNER_BUTTON_ID) {// Launch QR code scanner to join a network.
             startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
                     REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
         }

@@ -42,6 +42,11 @@ public class AppInstallerInfoPreferenceController extends AppInfoPreferenceContr
         if (UserManager.get(mContext).isManagedProfile()) {
             return DISABLED_FOR_USER;
         }
+
+        if (AppUtils.isMainlineModule(mContext.getPackageManager(), mPackageName)) {
+            return DISABLED_FOR_USER;
+        }
+
         return mInstallerLabel != null ? AVAILABLE : DISABLED_FOR_USER;
     }
 

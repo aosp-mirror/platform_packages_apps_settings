@@ -77,14 +77,12 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     private TextView mTextView;
     private String mLabel;
     private String mSummary;
+    private String mOnText;
+    private String mOffText;
     @ColorInt
     private int mBackgroundColor;
     @ColorInt
     private int mBackgroundActivatedColor;
-    @StringRes
-    private int mOnTextId;
-    @StringRes
-    private int mOffTextId;
 
     private boolean mLoggingIntialized;
     private boolean mDisabledByAdmin;
@@ -178,14 +176,20 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     }
 
     public void setTextViewLabelAndBackground(boolean isChecked) {
-        mLabel = getResources().getString(isChecked ? mOnTextId : mOffTextId);
+        mLabel = isChecked ? mOnText : mOffText;
         setBackgroundColor(isChecked ? mBackgroundActivatedColor : mBackgroundColor);
         updateText();
     }
 
-    public void setSwitchBarText(int onText, int offText) {
-        mOnTextId = onText;
-        mOffTextId = offText;
+    public void setSwitchBarText(int onTextId, int offTextId) {
+        mOnText = getResources().getString(onTextId);
+        mOffText = getResources().getString(offTextId);
+        setTextViewLabelAndBackground(isChecked());
+    }
+
+    public void setSwitchBarText(String onText, String offText) {
+        mOnText = onText;
+        mOffText = offText;
         setTextViewLabelAndBackground(isChecked());
     }
 
@@ -249,8 +253,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             mSwitch.setEnabled(false);
             mSwitch.setVisibility(View.GONE);
             mRestrictedIcon.setVisibility(View.VISIBLE);
-            mRestrictedIcon.setFocusable(false);
-            mRestrictedIcon.setClickable(false);
         } else {
             mDisabledByAdmin = false;
             mSwitch.setVisibility(View.VISIBLE);

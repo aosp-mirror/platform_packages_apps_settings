@@ -60,7 +60,7 @@ public class PhotosViewHolderControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final String fsUuid = new VolumeInfo("id", 0, null, "id").fsUuid;
-        mController = new PhotosViewHolderController(mContext, mSource, fsUuid, new UserHandle(0));
+        mController = new PhotosViewHolderController(mContext, mSource, fsUuid, UserHandle.of(-1));
 
         final View view = ApplicationViewHolder.newView(new FrameLayout(mContext));
         mHolder = new ApplicationViewHolder(view);

@@ -15,26 +15,28 @@
  */
 package com.android.settings.wifi;
 
-import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 
@@ -53,20 +55,26 @@ public class WifiScanningRequiredFragmentTest {
     private Context mContext;
     private ContentResolver mResolver;
     @Mock
+    private WifiManager mWifiManager;
+    @Mock
     private Fragment mCallbackFragment;
     @Mock
     private AlertDialog.Builder mBuilder;
+    @Mock
+    private FragmentActivity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFragment = spy(WifiScanningRequiredFragment.newInstance());
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         mResolver = mContext.getContentResolver();
+        doReturn(mActivity).when(mFragment).getActivity();
 
         doReturn(mContext).when(mFragment).getContext();
         mFragment.setTargetFragment(mCallbackFragment, 1000);
-        Settings.Global.putInt(mResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
     }
 
     @Test
@@ -74,8 +82,7 @@ public class WifiScanningRequiredFragmentTest {
             throws Settings.SettingNotFoundException {
         mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
 
-        assertThat(Settings.Global.getInt(mResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE))
-                .isEqualTo(1);
+        verify(mWifiManager).setScanAlwaysAvailable(true);
     }
 
     @Test
@@ -87,16 +94,24 @@ public class WifiScanningRequiredFragmentTest {
 
     @Test
     public void learnMore_launchesHelpWhenIntentFound() {
-        Context context = mock(Context.class);
-        doReturn(context).when(mFragment).getContext();
-        doReturn("").when(context).getString(eq(R.string.help_uri_wifi_scanning_required));
+        doReturn("").when(mContext).getString(eq(R.string.help_uri_wifi_scanning_required));
         mFragment.addButtonIfNeeded(mBuilder);
         verify(mBuilder, never())
                 .setNeutralButton(anyInt(), nullable(DialogInterface.OnClickListener.class));
 
-        doReturn("help").when(context).getString(eq(R.string.help_uri_wifi_scanning_required));
+        doReturn("help").when(mContext).getString(eq(R.string.help_uri_wifi_scanning_required));
         mFragment.addButtonIfNeeded(mBuilder);
         verify(mBuilder, times(1))
                 .setNeutralButton(anyInt(), nullable(DialogInterface.OnClickListener.class));
+    }
+
+    @Test
+    public void learnMore_launchesHelp_shouldStartActivityForResult() {
+        doReturn(new Intent()).when(mFragment).getHelpIntent(mContext);
+        mFragment.addButtonIfNeeded(mBuilder);
+
+        mFragment.onClick(null, DialogInterface.BUTTON_NEUTRAL);
+
+        verify(mActivity, times(1)).startActivityForResult(any(), anyInt());
     }
 }
