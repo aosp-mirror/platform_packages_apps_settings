@@ -50,8 +50,12 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_FORCE_VERIFY = "force_verify";
     // Gatekeeper HardwareAuthToken
     public static final String EXTRA_KEY_CHALLENGE_TOKEN = "hw_auth_token";
+    // For the fingerprint-only path
     public static final String EXTRA_KEY_FOR_FINGERPRINT = "for_fingerprint";
+    // For the face-only path
     public static final String EXTRA_KEY_FOR_FACE = "for_face";
+    // For the paths where multiple biometric sensors exist
+    public static final String EXTRA_KEY_FOR_BIOMETRICS = "for_biometrics";
     public static final String EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT = "for_cred_req_boot";
     public static final String EXTRA_KEY_FOREGROUND_ONLY = "foreground_only";
     public static final String EXTRA_KEY_REQUEST_GK_PW_HANDLE = "request_gk_pw_handle";

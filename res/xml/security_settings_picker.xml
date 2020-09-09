@@ -58,6 +58,11 @@
             android:title="@string/face_unlock_skip_face"
             android:persistent="false"/>
 
+    <com.android.settingslib.RestrictedPreference
+        android:key="unlock_skip_biometrics"
+        android:title="@string/biometrics_unlock_skip_biometrics"
+        android:persistent="false"/>
+
     <com.android.settingslib.widget.FooterPreference
             android:key="lock_settings_footer"
             android:selectable="false"

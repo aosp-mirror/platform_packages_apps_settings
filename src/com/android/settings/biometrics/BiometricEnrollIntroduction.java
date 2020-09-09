@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.storage.StorageManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,9 +29,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.password.ChooseLockGeneric;
-import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.password.SetupChooseLockGeneric;
 
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -42,6 +40,8 @@ import com.google.android.setupdesign.span.LinkSpan;
  */
 public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         implements LinkSpan.OnClickListener {
+
+    private static final String TAG = "BiometricEnrollIntroduction";
 
     private static final String KEY_CONFIRMING_CREDENTIALS = "confirming_credentials";
 
@@ -164,7 +164,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 // No password registered, launch into enrollment wizard.
                 mConfirmingCredentials = true;
                 launchChooseLock();
-            } else if (!BiometricUtils.containsGatekeeperPassword(getIntent()) && mToken == null) {
+            } else if (!BiometricUtils.containsGatekeeperPasswordHandle(getIntent())
+                    && mToken == null) {
                 // It's possible to have a token but mLaunchedConfirmLock == false, since
                 // ChooseLockGeneric can pass us a token.
                 mConfirmingCredentials = true;
@@ -220,7 +221,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     private void launchChooseLock() {
-        Intent intent = getChooseLockIntent();
+        Intent intent = BiometricUtils.getChooseLockIntent(this, getIntent());
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
@@ -240,25 +241,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
-    }
-
-    protected Intent getChooseLockIntent() {
-        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            // Default to PIN lock in setup wizard
-            Intent intent = new Intent(this, SetupChooseLockGeneric.class);
-            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
-                intent.putExtra(
-                        LockPatternUtils.PASSWORD_TYPE_KEY,
-                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
-                intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, true);
-            }
-            WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
-            return intent;
-        } else {
-            return new Intent(this, ChooseLockGeneric.class);
-        }
     }
 
     @Override
@@ -301,6 +286,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             }
         } else if (requestCode == LEARN_MORE_REQUEST) {
             overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
+        } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST) {
+            Log.d(TAG, "ENROLL_NEXT_BIOMETRIC_REQUEST, result: " + resultCode);
+            if (resultCode != RESULT_CANCELED) {
+                setResult(resultCode, data);
+                finish();
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

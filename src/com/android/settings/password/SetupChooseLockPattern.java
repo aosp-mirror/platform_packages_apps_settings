@@ -90,18 +90,23 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         @Override
         protected void onSkipOrClearButtonClick(View view) {
             if (mLeftButtonIsSkip) {
-                SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                        getActivity().getIntent()
-                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
+                final Intent intent = getActivity().getIntent();
+                final boolean frpSupported = intent
+                        .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false);
+                final boolean forFingerprint = intent
+                        .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
+                final boolean forFace = intent
+                        .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
+                final boolean forBiometrics = intent
+                        .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
+
+                final SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        frpSupported,
                         /* isPatternMode= */ true,
                         /* isAlphaMode= */ false,
-                        getActivity().getIntent()
-                                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
-                                false),
-                        getActivity().getIntent()
-                                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false)
-
-                );
+                        forFingerprint,
+                        forFace,
+                        forBiometrics);
                 dialog.show(getFragmentManager());
                 return;
             }

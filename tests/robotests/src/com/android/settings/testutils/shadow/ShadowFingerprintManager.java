@@ -18,14 +18,22 @@ package com.android.settings.testutils.shadow;
 
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorProperties;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Implements(FingerprintManager.class)
 public class ShadowFingerprintManager extends org.robolectric.shadows.ShadowFingerprintManager {
+
+    private static List<FingerprintSensorProperties> sFingerprintSensorProperties;
+
+    public static void setSensorProperties(List<FingerprintSensorProperties> props) {
+        sFingerprintSensorProperties = props;
+    }
 
     @Implementation
     protected List<Fingerprint> getEnrolledFingerprints(int userId) {
@@ -33,7 +41,7 @@ public class ShadowFingerprintManager extends org.robolectric.shadows.ShadowFing
     }
 
     @Implementation
-    protected long generateChallengeBlocking() {
-        return 0L;
+    protected List<FingerprintSensorProperties> getSensorProperties() {
+        return sFingerprintSensorProperties;
     }
 }
