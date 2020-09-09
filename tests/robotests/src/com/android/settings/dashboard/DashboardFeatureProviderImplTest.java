@@ -583,4 +583,28 @@ public class DashboardFeatureProviderImplTest {
                 .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
         verify(mActivity).getSupportFragmentManager();
     }
+
+    @Test
+    public void openTileIntent_profileSelectionDialog_unresolvableWorkProfileIntentShouldNotShow() {
+        final int userId = 10;
+        ShadowUserManager.getShadow().addUser(userId, "Someone", 0);
+        final UserHandle userHandle = new UserHandle(userId);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        final ArrayList<UserHandle> handles = new ArrayList<>();
+        handles.add(new UserHandle(0));
+        handles.add(userHandle);
+        tile.userHandle = handles;
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), eq(0)))
+                .thenReturn(new ResolveInfo());
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), eq(userId)))
+                .thenReturn(null);
+
+        mImpl.openTileIntent(mActivity, tile);
+
+        final ArgumentCaptor<UserHandle> argument = ArgumentCaptor.forClass(UserHandle.class);
+        verify(mActivity)
+                .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
+        assertThat(argument.getValue().getIdentifier()).isEqualTo(0);
+        verify(mActivity, never()).getSupportFragmentManager();
+    }
 }
