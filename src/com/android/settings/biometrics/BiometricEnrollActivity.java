@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics;
 
+import android.annotation.NonNull;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -48,6 +49,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
     private static final String TAG = "BiometricEnrollActivity";
 
+    // Intent extra. If true, biometric enrollment should skip introductory screens. Currently
+    // this only applies to fingerprint.
     public static final String EXTRA_SKIP_INTRO = "skip_intro";
 
     public static final class InternalActivity extends BiometricEnrollActivity {}
@@ -62,64 +65,103 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         Log.d(TAG, "Authenticators: " + authenticators);
 
-        final BiometricManager bm = getSystemService(BiometricManager.class);
         final PackageManager pm = getApplicationContext().getPackageManager();
-        Intent intent = null;
+        final boolean hasFeatureFingerprint =
+                pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
+        final boolean hasFeatureFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE);
+        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
 
-        final int result = bm.canAuthenticate(authenticators);
-
-        if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            if (result == BiometricManager.BIOMETRIC_SUCCESS
-                    || result == BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE) {
+        if (isSetupWizard) {
+            if (hasFeatureFace && hasFeatureFingerprint) {
+                // TODO(b/162341940, b/152242790) this should show a multi-biometric selection
+                //  screen
+                launchFingerprintOnlyEnroll();
+            } else if (hasFeatureFace) {
+                launchFaceOnlyEnroll();
+            } else if (hasFeatureFingerprint) {
+                launchFingerprintOnlyEnroll();
+            } else {
+                Log.e(TAG, "No biometrics but started by SUW?");
+                finish();
+            }
+        } else {
+            // If the caller is not setup wizard, and the user has something enrolled, finish.
+            final BiometricManager bm = getSystemService(BiometricManager.class);
+            final @BiometricManager.BiometricError int result = bm.canAuthenticate(authenticators);
+            if (result != BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED) {
                 Log.e(TAG, "Unexpected result: " + result);
                 finish();
                 return;
             }
-        }
 
-        if (authenticators == BiometricManager.Authenticators.DEVICE_CREDENTIAL) {
-            // If only device credential was specified, ask the user to only set that up.
-            intent = new Intent(this, ChooseLockGeneric.class);
-            intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-        } else if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            // This logic may have to be modified on devices with multiple biometrics.
-            // ChooseLockGeneric can request to start fingerprint enroll bypassing the intro screen.
-            if (getIntent().getBooleanExtra(EXTRA_SKIP_INTRO, false)
-                    && this instanceof InternalActivity) {
-                intent = getFingerprintFindSensorIntent();
+            // This will need to be updated if the device has sensors other than BIOMETRIC_STRONG
+            if (authenticators == BiometricManager.Authenticators.DEVICE_CREDENTIAL) {
+                launchCredentialOnlyEnroll();
+            } else if (hasFeatureFace && hasFeatureFingerprint) {
+                // TODO(b/162341940, b/152242790) this should show a multi-biometric selection
+                //  screen
+                launchFingerprintOnlyEnroll();
+            } else if (hasFeatureFingerprint) {
+                launchFingerprintOnlyEnroll();
+            } else if (hasFeatureFace) {
+                launchFaceOnlyEnroll();
             } else {
-                intent = getFingerprintIntroIntent();
+                Log.e(TAG, "Unknown state, finishing");
+                finish();
             }
-        } else if (pm.hasSystemFeature(PackageManager.FEATURE_FACE)) {
-            intent = getFaceIntroIntent();
+        }
+    }
+
+    /**
+     * @param intent Enrollment activity that should be started (e.g. FaceEnrollIntroduction.class,
+     *               etc).
+     */
+    private void launchEnrollActivity(@NonNull Intent intent) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        if (this instanceof InternalActivity) {
+            // Propagate challenge and user Id from ChooseLockGeneric.
+            final byte[] token = getIntent()
+                    .getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+            final int userId = getIntent()
+                    .getIntExtra(Intent.EXTRA_USER_ID, UserHandle.USER_NULL);
+            final long gkPwHandle = getIntent().getLongExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L);
+
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+            intent.putExtra(Intent.EXTRA_USER_ID, userId);
+            if (gkPwHandle != 0L) {
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
+            }
         }
 
-        if (intent != null) {
-            intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        startActivity(intent);
+        finish();
+    }
 
-            if (this instanceof InternalActivity) {
-                // Propagate challenge and user Id from ChooseLockGeneric.
-                final byte[] token = getIntent()
-                        .getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-                final int userId = getIntent()
-                        .getIntExtra(Intent.EXTRA_USER_ID, UserHandle.USER_NULL);
-                final long gkPwHandle = getIntent().getLongExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L);
+    private void launchCredentialOnlyEnroll() {
+        final Intent intent;
+        // If only device credential was specified, ask the user to only set that up.
+        intent = new Intent(this, ChooseLockGeneric.class);
+        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        launchEnrollActivity(intent);
+    }
 
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                intent.putExtra(Intent.EXTRA_USER_ID, userId);
-                if (gkPwHandle != 0L) {
-                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
-                }
-            }
-
-            startActivity(intent);
-            finish();
+    private void launchFingerprintOnlyEnroll() {
+        final Intent intent;
+        // ChooseLockGeneric can request to start fingerprint enroll bypassing the intro screen.
+        if (getIntent().getBooleanExtra(EXTRA_SKIP_INTRO, false)
+                && this instanceof InternalActivity) {
+            intent = getFingerprintFindSensorIntent();
         } else {
-            Log.e(TAG, "Intent was null, finishing");
-            finish();
+            intent = getFingerprintIntroIntent();
         }
+        launchEnrollActivity(intent);
+    }
+
+    private void launchFaceOnlyEnroll() {
+        final Intent intent = getFaceIntroIntent();
+        launchEnrollActivity(intent);
     }
 
     private Intent getFingerprintFindSensorIntent() {
