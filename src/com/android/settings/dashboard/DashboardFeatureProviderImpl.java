@@ -398,26 +398,41 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
+        mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
 
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResult(intent, 0);
         } else if (tile.userHandle.size() == 1) {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
                 activity.startActivityForResultAsUser(intent, 0, userHandle);
-            } else {
-                ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
-                        sourceMetricCategory);
+                return;
             }
+
+            final List<UserHandle> resolvableUsers = getResolvableUsers(intent, tile);
+            if (resolvableUsers.size() == 1) {
+                activity.startActivityForResultAsUser(intent, 0, resolvableUsers.get(0));
+                return;
+            }
+
+            ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
+                    sourceMetricCategory);
         }
     }
 
     private boolean isIntentResolvable(Intent intent) {
         return mPackageManager.resolveActivity(intent, 0) != null;
+    }
+
+    private List<UserHandle> getResolvableUsers(Intent intent, Tile tile) {
+        final ArrayList<UserHandle> eligibleUsers = new ArrayList<>();
+        for (UserHandle user : tile.userHandle) {
+            if (mPackageManager.resolveActivityAsUser(intent, 0, user.getIdentifier()) != null) {
+                eligibleUsers.add(user);
+            }
+        }
+        return eligibleUsers;
     }
 }
