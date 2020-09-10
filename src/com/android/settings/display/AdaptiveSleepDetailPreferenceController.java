@@ -17,13 +17,25 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.os.UserManager;
 
 import androidx.preference.Preference;
 
+import com.android.settings.bluetooth.RestrictionUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
+
 public class AdaptiveSleepDetailPreferenceController extends AdaptiveSleepPreferenceController {
+    private RestrictionUtils mRestrictionUtils;
+
+    public AdaptiveSleepDetailPreferenceController(Context context, String key,
+            RestrictionUtils restrictionUtils) {
+        super(context, key);
+        mRestrictionUtils = restrictionUtils;
+    }
 
     public AdaptiveSleepDetailPreferenceController(Context context, String key) {
-        super(context, key);
+        this(context, key, new RestrictionUtils());
     }
 
     @Override
@@ -43,6 +55,12 @@ public class AdaptiveSleepDetailPreferenceController extends AdaptiveSleepPrefer
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(hasSufficientPermission(mContext.getPackageManager()));
+        final EnforcedAdmin enforcedAdmin = mRestrictionUtils.checkIfRestrictionEnforced(mContext,
+                UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT);
+        if (enforcedAdmin != null) {
+            ((RestrictedSwitchPreference) preference).setDisabledByAdmin(enforcedAdmin);
+        } else {
+            preference.setEnabled(hasSufficientPermission(mContext.getPackageManager()));
+        }
     }
 }
