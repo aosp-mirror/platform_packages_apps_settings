@@ -22,38 +22,34 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
- * {@link AbstractPreferenceController} that controls whether we should notify user when open
+ * {@link TogglePreferenceController} that controls whether we should notify user when open
  * network is available.
  */
-public class NotifyOpenNetworksPreferenceController extends AbstractPreferenceController
+public class NotifyOpenNetworksPreferenceController extends TogglePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
     private SettingObserver mSettingObserver;
 
-    public NotifyOpenNetworksPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
-        lifecycle.addObserver(this);
+    public NotifyOpenNetworksPreferenceController(Context context) {
+        super(context, KEY_NOTIFY_OPEN_NETWORKS);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(KEY_NOTIFY_OPEN_NETWORKS));
+        mSettingObserver = new SettingObserver(screen.findPreference(getPreferenceKey()));
     }
 
     @Override
@@ -71,37 +67,22 @@ public class NotifyOpenNetworksPreferenceController extends AbstractPreferenceCo
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_NOTIFY_OPEN_NETWORKS)) {
-            return false;
-        }
-        if (!(preference instanceof SwitchPreference)) {
-            return false;
-        }
+    public boolean isChecked() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1;
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
-                ((SwitchPreference) preference).isChecked() ? 1 : 0);
+                isChecked ? 1 : 0);
         return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_NOTIFY_OPEN_NETWORKS;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        if (!(preference instanceof SwitchPreference)) {
-            return;
-        }
-        final SwitchPreference notifyOpenNetworks = (SwitchPreference) preference;
-        notifyOpenNetworks.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
     }
 
     class SettingObserver extends ContentObserver {

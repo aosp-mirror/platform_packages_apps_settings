@@ -18,8 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:key="gesture_global_actions_panel"
-    android:title="@string/global_actions_panel_title">
+    android:title="@string/cards_passes_sentence">
 
     <com.android.settings.widget.VideoPreference
         android:key="global_actions_panel_video"
@@ -27,9 +26,9 @@
 
     <SwitchPreference
         android:key="gesture_global_actions_panel_switch"
-        android:title="@string/global_actions_panel_title"
-        android:summary="@string/global_actions_panel_summary"
-        app:keywords="@string/keywords_global_actions_panel"
+        android:title="@string/cards_passes_setting_toggle"
+        android:summary="@string/cards_passes_setting_subtitle"
+        app:keywords="@string/keywords_cards_passes"
         app:controller="com.android.settings.gestures.GlobalActionsPanelPreferenceController"
         app:allowDividerAbove="true" />
 

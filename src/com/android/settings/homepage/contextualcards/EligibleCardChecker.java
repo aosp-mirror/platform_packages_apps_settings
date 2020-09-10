@@ -22,6 +22,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,16 +33,14 @@ import androidx.slice.core.SliceAction;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 public class EligibleCardChecker implements Callable<ContextualCard> {
 
     private static final String TAG = "EligibleCardChecker";
-    private static final long LATCH_TIMEOUT_MS = 200;
 
     private final Context mContext;
 
@@ -54,7 +53,7 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
     }
 
     @Override
-    public ContextualCard call() throws Exception {
+    public ContextualCard call() {
         final long startTime = System.currentTimeMillis();
         final MetricsFeatureProvider metricsFeatureProvider =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
@@ -88,9 +87,6 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
         if (card.getRankingScore() < 0) {
             return false;
         }
-        if (card.isCustomCard()) {
-            return true;
-        }
 
         final Uri uri = card.getSliceUri();
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
@@ -99,49 +95,40 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
 
         final Slice slice = bindSlice(uri);
 
-        if (isSliceToggleable(slice)) {
-            mCard = card.mutate().setHasInlineAction(true).build();
-        }
-
         if (slice == null || slice.hasHint(HINT_ERROR)) {
             Log.w(TAG, "Failed to bind slice, not eligible for display " + uri);
             return false;
         }
+
+        mCard = card.mutate().setSlice(slice).build();
+
+        if (isSliceToggleable(slice)) {
+            mCard = card.mutate().setHasInlineAction(true).build();
+        }
+
         return true;
     }
 
     @VisibleForTesting
     Slice bindSlice(Uri uri) {
         final SliceViewManager manager = SliceViewManager.getInstance(mContext);
-        final Slice[] returnSlice = new Slice[1];
-        final CountDownLatch latch = new CountDownLatch(1);
-        final SliceViewManager.SliceCallback callback =
-                new SliceViewManager.SliceCallback() {
-                    @Override
-                    public void onSliceUpdated(Slice slice) {
-                        try {
-                            // We are just making sure the existence of the slice, so ignore
-                            // slice loading state here.
-                            returnSlice[0] = slice;
-                            latch.countDown();
-                        } catch (Exception e) {
-                            Log.w(TAG, uri + " cannot be indexed", e);
-                        } finally {
-                            manager.unregisterSliceCallback(uri, this);
-                        }
-                    }
-                };
-        // Register a callback until we get a loaded slice.
+        final SliceViewManager.SliceCallback callback = slice -> { };
+
+        // Register a trivial callback to pin the slice
         manager.registerSliceCallback(uri, callback);
-        // Trigger the binding.
-        callback.onSliceUpdated(manager.bindSlice(uri));
-        try {
-            latch.await(LATCH_TIMEOUT_MS, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            Log.w(TAG, "Error waiting for slice binding for uri" + uri, e);
-            manager.unregisterSliceCallback(uri, callback);
-        }
-        return returnSlice[0];
+        final Slice slice = manager.bindSlice(uri);
+
+        // Workaround of unpinning slice in the same SerialExecutor of AsyncTask as SliceCallback's
+        // observer.
+        ThreadUtils.postOnMainThread(() -> AsyncTask.execute(() -> {
+            try {
+                manager.unregisterSliceCallback(uri, callback);
+            } catch (SecurityException e) {
+                Log.d(TAG, "No permission currently: " + e);
+            }
+        }));
+
+        return slice;
     }
 
     @VisibleForTesting

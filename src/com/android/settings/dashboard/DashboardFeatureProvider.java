@@ -44,19 +44,22 @@ public interface DashboardFeatureProvider {
     String getDashboardKeyForTile(Tile tile);
 
     /**
-     * Binds preference to data provided by tile.
+     * Binds preference to data provided by tile and gets dynamic data observers.
      *
      * @param activity If tile contains intent to launch, it will be launched from this activity
-     * @param forceRoundedIcon Whether or not injected tiles from other packages should be forced to rounded icon.
+     * @param forceRoundedIcon Whether or not injected tiles from other packages should be forced to
+     * rounded icon.
      * @param sourceMetricsCategory The context (source) from which an action is performed
      * @param pref The preference to bind data
      * @param tile The binding data
      * @param key They key for preference. If null, we will generate one from tile data
      * @param baseOrder The order offset value. When binding, pref's order is determined by
      * both this value and tile's own priority.
+     * @return The list of dynamic data observers
      */
-    void bindPreferenceToTile(FragmentActivity activity, boolean forceRoundedIcon,
-            int sourceMetricsCategory, Preference pref, Tile tile, String key, int baseOrder);
+    List<DynamicDataObserver> bindPreferenceToTileAndGetObservers(FragmentActivity activity,
+            boolean forceRoundedIcon, int sourceMetricsCategory, Preference pref, Tile tile,
+            String key, int baseOrder);
 
     /**
      * Opens a tile to its destination intent.

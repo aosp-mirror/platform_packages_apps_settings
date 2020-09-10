@@ -17,22 +17,24 @@
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:title="@string/wifi_settings"
-        settings:keywords="@string/keywords_wifi">
+        android:title="@string/wifi_settings">
 
     <com.android.settings.wifi.LinkablePreference
-        android:key="wifi_status_message"/>
+        android:key="wifi_status_message"
+        settings:searchable="false"/>
 
     <PreferenceCategory
         android:key="connected_access_point"
-        android:layout="@layout/preference_category_no_label"/>
+        android:layout="@layout/preference_category_no_label"
+        settings:searchable="false"/>
 
     <PreferenceCategory
         android:key="access_points"
-        android:layout="@layout/preference_category_no_label"/>
+        android:layout="@layout/preference_category_no_label"
+        settings:searchable="false"/>
 
     <Preference
-        android:key="configure_settings"
+        android:key="configure_wifi_settings"
         android:title="@string/wifi_configure_settings_preference_title"
         settings:allowDividerAbove="true"
         android:fragment="com.android.settings.wifi.ConfigureWifiSettings"/>
@@ -44,5 +46,6 @@
 
     <com.android.settings.datausage.DataUsagePreference
         android:key="wifi_data_usage"
-        android:title="@string/wifi_data_usage"/>
+        android:title="@string/wifi_data_usage"
+        settings:keywords="@string/keywords_wifi_data_usage"/>
 </PreferenceScreen>

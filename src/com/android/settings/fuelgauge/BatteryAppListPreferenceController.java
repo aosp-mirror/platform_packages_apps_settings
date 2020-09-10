@@ -46,7 +46,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -339,7 +338,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     void setUsageSummary(Preference preference, BatterySipper sipper) {
         // Only show summary when usage time is longer than one minute
         final long usageTimeMs = sipper.usageTimeMs;
-        if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
+        if (shouldShowSummary(sipper) && usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence =
                     StringUtil.formatElapsedTime(mContext, usageTimeMs, false);
             preference.setSummary(
@@ -355,7 +354,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         // Don't show over-counted, unaccounted and hidden system module in any condition
         return sipper.drainType == BatterySipper.DrainType.OVERCOUNTED
                 || sipper.drainType == BatterySipper.DrainType.UNACCOUNTED
-                || mBatteryUtils.isHiddenSystemModule(sipper);
+                || mBatteryUtils.isHiddenSystemModule(sipper) || sipper.getUid() < 0;
     }
 
     @VisibleForTesting
@@ -389,6 +388,19 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
             mPreferenceCache.put(p.getKey(), p);
         }
+    }
+
+    private boolean shouldShowSummary(BatterySipper sipper) {
+        final CharSequence[] whitelistPackages = mContext.getResources()
+                .getTextArray(R.array.whitelist_hide_summary_in_battery_usage);
+        final String target = sipper.packageWithHighestDrain;
+
+        for (CharSequence packageName: whitelistPackages) {
+            if (TextUtils.equals(target, packageName)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean isSharedGid(int uid) {

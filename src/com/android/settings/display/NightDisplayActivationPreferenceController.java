@@ -16,6 +16,8 @@
 
 package com.android.settings.display;
 
+import static android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED;
+
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.text.TextUtils;
@@ -28,20 +30,27 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.LayoutPreference;
 
 public class NightDisplayActivationPreferenceController extends TogglePreferenceController {
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private ColorDisplayManager mColorDisplayManager;
     private NightDisplayTimeFormatter mTimeFormatter;
+    private LayoutPreference mPreference;
+
     private Button mTurnOffButton;
     private Button mTurnOnButton;
 
     private final OnClickListener mListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            mColorDisplayManager.setNightDisplayActivated(!mColorDisplayManager.isNightDisplayActivated());
-            updateStateInternal();
+            mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
+            mColorDisplayManager.setNightDisplayActivated(
+                    !mColorDisplayManager.isNightDisplayActivated());
+            updateStateInternal(true);
         }
     };
 
@@ -50,6 +59,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
 
         mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
         mTimeFormatter = new NightDisplayTimeFormatter(context);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -64,19 +74,24 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        final LayoutPreference preference = screen.findPreference(getPreferenceKey());
-        mTurnOnButton = preference.findViewById(R.id.night_display_turn_on_button);
+        mPreference = screen.findPreference(getPreferenceKey());
+        mTurnOnButton = mPreference.findViewById(R.id.night_display_turn_on_button);
         mTurnOnButton.setOnClickListener(mListener);
-        mTurnOffButton = preference.findViewById(R.id.night_display_turn_off_button);
+        mTurnOffButton = mPreference.findViewById(R.id.night_display_turn_off_button);
         mTurnOffButton.setOnClickListener(mListener);
     }
 
     @Override
     public final void updateState(Preference preference) {
-        updateStateInternal();
+        updateStateInternal(false);
     }
 
     /** FOR SLICES */
@@ -96,7 +111,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
         return mTimeFormatter.getAutoModeSummary(mContext, mColorDisplayManager);
     }
 
-    private void updateStateInternal() {
+    private void updateStateInternal(boolean selfChanged) {
         if (mTurnOnButton == null || mTurnOffButton == null) {
             return;
         }
@@ -126,10 +141,16 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
             mTurnOnButton.setVisibility(View.GONE);
             mTurnOffButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setText(buttonText);
+            if (selfChanged) {
+                mTurnOffButton.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
+            }
         } else {
             mTurnOnButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setVisibility(View.GONE);
             mTurnOnButton.setText(buttonText);
+            if (selfChanged) {
+                mTurnOnButton.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
+            }
         }
     }
 }

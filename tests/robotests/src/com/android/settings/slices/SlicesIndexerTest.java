@@ -52,7 +52,6 @@ public class SlicesIndexerTest {
     private final int ICON = 1234; // I declare a thumb war
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
-    private final boolean PLATFORM_DEFINED = true;
     private final int SLICE_TYPE = SliceData.SliceType.SLIDER;
     private final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
 
@@ -106,8 +105,8 @@ public class SlicesIndexerTest {
     }
 
     @Test
-    public void testInsertSliceData_mockDataInserted() {
-        final List<SliceData> sliceData = getDummyIndexableData();
+    public void testInsertSliceData_nonPublicSlice_mockDataInserted() {
+        final List<SliceData> sliceData = getDummyIndexableData(false);
         doReturn(sliceData).when(mManager).getSliceData();
 
         mManager.run();
@@ -136,14 +135,58 @@ public class SlicesIndexerTest {
                 assertThat(
                         cursor.getString(cursor.getColumnIndex(IndexColumns.CONTROLLER)))
                         .isEqualTo(PREF_CONTROLLER);
-                assertThat(cursor.getInt(
-                        cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE)))
-                        .isEqualTo(1 /* true */);
                 assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.SLICE_TYPE)))
                         .isEqualTo(SLICE_TYPE);
                 assertThat(cursor.getString(
                         cursor.getColumnIndex(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE)))
                         .isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
+                assertThat(cursor.getInt(
+                        cursor.getColumnIndex(IndexColumns.PUBLIC_SLICE))).isEqualTo(0);
+                cursor.moveToNext();
+            }
+        } finally {
+            db.close();
+        }
+    }
+
+    @Test
+    public void insertSliceData_publicSlice_mockDataInserted() {
+        final List<SliceData> sliceData = getDummyIndexableData(true);
+        doReturn(sliceData).when(mManager).getSliceData();
+
+        mManager.run();
+
+        final SQLiteDatabase db = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
+        try (Cursor cursor = db.rawQuery("SELECT * FROM slices_index", null)) {
+            assertThat(cursor.getCount()).isEqualTo(sliceData.size());
+
+            cursor.moveToFirst();
+            for (int i = 0; i < sliceData.size(); i++) {
+                assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY)))
+                        .isEqualTo(KEYS[i]);
+                assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE)))
+                        .isEqualTo(TITLES[i]);
+                assertThat(
+                        cursor.getString(cursor.getColumnIndex(IndexColumns.FRAGMENT)))
+                        .isEqualTo(FRAGMENT_NAME);
+                assertThat(cursor.getString(
+                        cursor.getColumnIndex(IndexColumns.SCREENTITLE))).isEqualTo(SCREEN_TITLE);
+                assertThat(
+                        cursor.getString(cursor.getColumnIndex(IndexColumns.KEYWORDS)))
+                        .isEqualTo(KEYWORDS);
+                assertThat(
+                        cursor.getInt(cursor.getColumnIndex(IndexColumns.ICON_RESOURCE)))
+                        .isEqualTo(ICON);
+                assertThat(
+                        cursor.getString(cursor.getColumnIndex(IndexColumns.CONTROLLER)))
+                        .isEqualTo(PREF_CONTROLLER);
+                assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.SLICE_TYPE)))
+                        .isEqualTo(SLICE_TYPE);
+                assertThat(cursor.getString(
+                        cursor.getColumnIndex(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE)))
+                        .isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
+                assertThat(cursor.getInt(
+                        cursor.getColumnIndex(IndexColumns.PUBLIC_SLICE))).isEqualTo(1);
                 cursor.moveToNext();
             }
         } finally {
@@ -166,7 +209,7 @@ public class SlicesIndexerTest {
         db.close();
     }
 
-    private List<SliceData> getDummyIndexableData() {
+    private List<SliceData> getDummyIndexableData(boolean isPublicSlice) {
         final List<SliceData> sliceData = new ArrayList<>();
         final SliceData.Builder builder = new SliceData.Builder()
                 .setSummary(SUMMARY)
@@ -176,9 +219,12 @@ public class SlicesIndexerTest {
                 .setIcon(ICON)
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
-                .setPlatformDefined(PLATFORM_DEFINED)
                 .setSliceType(SLICE_TYPE)
                 .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
+
+        if (isPublicSlice) {
+            builder.setIsPublicSlice(true);
+        }
 
         for (int i = 0; i < KEYS.length; i++) {
             builder.setKey(KEYS[i]).setTitle(TITLES[i]);

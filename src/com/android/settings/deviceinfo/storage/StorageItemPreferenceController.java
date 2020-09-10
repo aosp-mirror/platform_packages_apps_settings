@@ -16,8 +16,10 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PERSONAL_TAB;
+import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.WORK_TAB;
+
 import android.app.settings.SettingsEnums;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -25,6 +27,7 @@ import android.graphics.drawable.Drawable;
 import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.os.storage.VolumeInfo;
 import android.util.Log;
 import android.util.SparseArray;
@@ -36,6 +39,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
@@ -167,7 +172,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (intent != null) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
 
-            launchIntent(intent);
+            Utils.launchIntent(mFragment, intent);
             return true;
         }
 
@@ -249,25 +254,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     public void onLoadFinished(SparseArray<StorageAsyncLoader.AppsStorageResult> result,
             int userId) {
         final StorageAsyncLoader.AppsStorageResult data = result.get(userId);
+        final StorageAsyncLoader.AppsStorageResult profileData = result.get(
+                Utils.getManagedProfileId(mContext.getSystemService(UserManager.class), userId));
 
-        // TODO(b/35927909): Figure out how to split out apps which are only installed for work
-        //       profiles in order to attribute those app's code bytes only to that profile.
-        mPhotoPreference.setStorageSize(
-                data.photosAppsSize + data.externalStats.imageBytes + data.externalStats.videoBytes,
-                mTotalSize);
-        mAudioPreference.setStorageSize(
-                data.musicAppsSize + data.externalStats.audioBytes, mTotalSize);
-        mGamePreference.setStorageSize(data.gamesSize, mTotalSize);
-        mMoviesPreference.setStorageSize(data.videoAppsSize, mTotalSize);
-        mAppPreference.setStorageSize(data.otherAppsSize, mTotalSize);
-
-        long otherExternalBytes =
-                data.externalStats.totalBytes
-                        - data.externalStats.audioBytes
-                        - data.externalStats.videoBytes
-                        - data.externalStats.imageBytes
-                        - data.externalStats.appBytes;
-        mFilePreference.setStorageSize(otherExternalBytes, mTotalSize);
+        mPhotoPreference.setStorageSize(getPhotosSize(data, profileData), mTotalSize);
+        mAudioPreference.setStorageSize(getAudioSize(data, profileData), mTotalSize);
+        mGamePreference.setStorageSize(getGamesSize(data, profileData), mTotalSize);
+        mMoviesPreference.setStorageSize(getMoviesSize(data, profileData), mTotalSize);
+        mAppPreference.setStorageSize(getAppsSize(data, profileData), mTotalSize);
+        mFilePreference.setStorageSize(getFilesSize(data, profileData), mTotalSize);
 
         if (mSystemPreference != null) {
             // Everything else that hasn't already been attributed is tracked as
@@ -328,6 +323,19 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .toIntent();
     }
 
+    private long getPhotosSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.photosAppsSize + data.externalStats.imageBytes
+                    + data.externalStats.videoBytes
+                    + profileData.photosAppsSize + profileData.externalStats.imageBytes
+                    + profileData.externalStats.videoBytes;
+        } else {
+            return data.photosAppsSize + data.externalStats.imageBytes
+                    + data.externalStats.videoBytes;
+        }
+    }
+
     private Intent getAudioIntent() {
         if (mVolume == null) {
             return null;
@@ -347,6 +355,16 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .toIntent();
     }
 
+    private long getAudioSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.musicAppsSize + data.externalStats.audioBytes
+                    + profileData.musicAppsSize + profileData.externalStats.audioBytes;
+        } else {
+            return data.musicAppsSize + data.externalStats.audioBytes;
+        }
+    }
+
     private Intent getAppsIntent() {
         if (mVolume == null) {
             return null;
@@ -364,6 +382,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .toIntent();
     }
 
+    private long getAppsSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.otherAppsSize + profileData.otherAppsSize;
+        } else {
+            return data.otherAppsSize;
+        }
+    }
+
     private Intent getGamesIntent() {
         final Bundle args = getWorkAnnotatedBundle(1);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
@@ -374,6 +401,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
+    }
+
+    private long getGamesSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.gamesSize + profileData.gamesSize;
+        } else {
+            return data.gamesSize;
+        }
     }
 
     private Intent getMoviesIntent() {
@@ -388,10 +424,19 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .toIntent();
     }
 
+    private long getMoviesSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.videoAppsSize + profileData.videoAppsSize;
+        } else {
+            return data.videoAppsSize;
+        }
+    }
+
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
-        final Bundle args = new Bundle(2 + additionalCapacity);
-        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
-        args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
+        final Bundle args = new Bundle(1 + additionalCapacity);
+        args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB,
+                mIsWorkProfile ? WORK_TAB : PERSONAL_TAB);
         return args;
     }
 
@@ -399,21 +444,25 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         return mSvp.findEmulatedForPrivate(mVolume).buildBrowseIntent();
     }
 
-    private void launchIntent(Intent intent) {
-        try {
-            final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
-
-            // b/33117269: Note that launchIntent may launch activity in different task which set
-            // different launchMode (e.g. Files), using startActivityForesult to set task as
-            // source task, and set requestCode as 0 means don't care about returnCode currently.
-            if (userId == -1) {
-                mFragment.startActivityForResult(intent, 0 /* requestCode not used */);
-            } else {
-                mFragment.getActivity().startActivityForResultAsUser(intent,
-                        0 /* requestCode not used */, new UserHandle(userId));
-            }
-        } catch (ActivityNotFoundException e) {
-            Log.w(TAG, "No activity found for " + intent);
+    private long getFilesSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.externalStats.totalBytes
+                    - data.externalStats.audioBytes
+                    - data.externalStats.videoBytes
+                    - data.externalStats.imageBytes
+                    - data.externalStats.appBytes
+                    + profileData.externalStats.totalBytes
+                    - profileData.externalStats.audioBytes
+                    - profileData.externalStats.videoBytes
+                    - profileData.externalStats.imageBytes
+                    - profileData.externalStats.appBytes;
+        } else {
+            return data.externalStats.totalBytes
+                    - data.externalStats.audioBytes
+                    - data.externalStats.videoBytes
+                    - data.externalStats.imageBytes
+                    - data.externalStats.appBytes;
         }
     }
 

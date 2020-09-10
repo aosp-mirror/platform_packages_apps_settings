@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -31,7 +30,6 @@ import android.os.storage.VolumeRecord;
 import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.text.format.Formatter.BytesResult;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -137,13 +135,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             return;
         }
 
-        final Resources resources = getResources();
-        final int padding = resources.getDimensionPixelSize(
-                R.dimen.unmount_button_padding);
-        final ViewGroup buttonBar = getButtonBar();
-        buttonBar.removeAllViews();
-        buttonBar.setPadding(padding, padding, padding, padding);
-        buttonBar.addView(mUnmount, new ViewGroup.LayoutParams(
+        final ViewGroup container = getActivity().findViewById(R.id.container_material);
+        container.addView(mUnmount, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
     }
@@ -169,7 +162,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             final long freeBytes = file.getFreeSpace();
             final long usedBytes = totalBytes - freeBytes;
 
-            final BytesResult result = Formatter.formatBytes(getResources(), usedBytes, 0);
+            final Formatter.BytesResult result = Formatter.formatBytes(getResources(), usedBytes,
+                    0);
             mSummary.setTitle(TextUtils.expandTemplate(getText(R.string.storage_size_large),
                     result.value, result.units));
             mSummary.setSummary(getString(R.string.storage_volume_used,
@@ -180,8 +174,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         if (mVolume.getState() == VolumeInfo.STATE_UNMOUNTED) {
             addPreference(mMount);
         }
-        if (mVolume.isMountedReadable()) {
-            getButtonBar().setVisibility(View.VISIBLE);
+        if (!mVolume.isMountedReadable()) {
+            mUnmount.setVisibility(View.GONE);
         }
         addPreference(mFormatPublic);
         if (mDisk.isAdoptable() && mIsPermittedToAdopt) {

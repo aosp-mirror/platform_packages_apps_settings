@@ -32,6 +32,9 @@ import android.os.Bundle;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.FragmentActivity;
+
+import com.android.settings.testutils.shadow.ShadowFragment;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +42,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
 import org.xmlpull.v1.XmlPullParserException;
@@ -47,6 +51,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Config(shadows = ShadowFragment.class)
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityDetailsSettingsFragmentTest {
     private final static String PACKAGE_NAME = "com.foo.bar";

@@ -17,7 +17,7 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CARD_CONTENT_LOADER_ID;
-import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE;
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
 import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.widget.BaseAdapter;
 
@@ -38,6 +39,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.conditional.ConditionalCardController;
 import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
@@ -80,10 +82,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     private static final String TAG = "ContextualCardManager";
 
-    //The list for Settings Custom Card
-    private static final int[] SETTINGS_CARDS =
-            {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
-
     private final Context mContext;
     private final Lifecycle mLifecycle;
     private final List<LifecycleObserver> mLifecycleObservers;
@@ -113,13 +111,13 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         } else {
             mSavedCards = savedInstanceState.getStringArrayList(KEY_CONTEXTUAL_CARDS);
         }
-        //for data provided by Settings
-        for (@ContextualCard.CardType int cardType : SETTINGS_CARDS) {
+        // for data provided by Settings
+        for (@ContextualCard.CardType int cardType : getSettingsCards()) {
             setupController(cardType);
         }
     }
 
-    void loadContextualCards(LoaderManager loaderManager) {
+    void loadContextualCards(LoaderManager loaderManager, boolean restartLoaderNeeded) {
         if (mContext.getResources().getBoolean(R.bool.config_use_legacy_suggestion)) {
             Log.w(TAG, "Legacy suggestion contextual card enabled, skipping contextual cards.");
             return;
@@ -128,15 +126,32 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
-        // Use the cached data when navigating back to the first page and upon screen rotation.
-        loaderManager.initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
-                cardContentLoaderCallbacks);
+        if (!restartLoaderNeeded) {
+            // Use the cached data when navigating back to the first page and upon screen rotation.
+            loaderManager.initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+                    cardContentLoaderCallbacks);
+        } else {
+            // Reload all cards when navigating back after pressing home key, recent app key, or
+            // turn off screen.
+            mIsFirstLaunch = true;
+            loaderManager.restartLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+                    cardContentLoaderCallbacks);
+        }
     }
 
     private void loadCardControllers() {
         for (ContextualCard card : mContextualCards) {
             setupController(card.getCardType());
         }
+    }
+
+    @VisibleForTesting
+    int[] getSettingsCards() {
+        if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.CONDITIONAL_CARDS)) {
+            return new int[] {ContextualCard.CardType.LEGACY_SUGGESTION};
+        }
+        return new int[]
+                {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
     }
 
     @VisibleForTesting
@@ -156,16 +171,23 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     @VisibleForTesting
     List<ContextualCard> sortCards(List<ContextualCard> cards) {
-        //take mContextualCards as the source and do the ranking based on the rule.
-        return cards.stream()
+        // take mContextualCards as the source and do the ranking based on the rule.
+        final List<ContextualCard> result = cards.stream()
                 .sorted((c1, c2) -> Double.compare(c2.getRankingScore(), c1.getRankingScore()))
                 .collect(Collectors.toList());
+        final List<ContextualCard> stickyCards = result.stream()
+                .filter(c -> c.getCategory() == STICKY_VALUE)
+                .collect(Collectors.toList());
+        // make sticky cards be at the tail end.
+        result.removeAll(stickyCards);
+        result.addAll(stickyCards);
+        return result;
     }
 
     @Override
     public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> updateList) {
         final Set<Integer> cardTypes = updateList.keySet();
-        //Remove the existing data that matches the certain cardType before inserting new data.
+        // Remove the existing data that matches the certain cardType before inserting new data.
         List<ContextualCard> cardsToKeep;
 
         // We are not sure how many card types will be in the database, so when the list coming
@@ -174,7 +196,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         // except Conditional cards, all other cards are from the database. So when the map sent
         // here is empty, we only keep Conditional cards.
         if (cardTypes.isEmpty()) {
-            final Set<Integer> conditionalCardTypes = new TreeSet() {{
+            final Set<Integer> conditionalCardTypes = new TreeSet<Integer>() {{
                 add(ContextualCard.CardType.CONDITIONAL);
                 add(ContextualCard.CardType.CONDITIONAL_HEADER);
                 add(ContextualCard.CardType.CONDITIONAL_FOOTER);
@@ -303,7 +325,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
             return cards;
         }
 
-        final List<ContextualCard> result = getCardsWithDeferredSetupViewType(cards);
+        final List<ContextualCard> result = getCardsWithStickyViewType(cards);
         return getCardsWithSuggestionViewType(result);
     }
 
@@ -334,17 +356,13 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         return result;
     }
 
-    private List<ContextualCard> getCardsWithDeferredSetupViewType(List<ContextualCard> cards) {
-        // Find the deferred setup card and assign it with proper view type.
-        // Reason: The returned card list will mix deferred setup card and other suggestion cards
-        // after device running 1 days.
+    private List<ContextualCard> getCardsWithStickyViewType(List<ContextualCard> cards) {
         final List<ContextualCard> result = new ArrayList<>(cards);
         for (int index = 0; index < result.size(); index++) {
             final ContextualCard card = cards.get(index);
-            if (card.getCategory() == DEFERRED_SETUP_VALUE) {
+            if (card.getCategory() == STICKY_VALUE) {
                 result.set(index, card.mutate().setViewType(
-                        SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP).build());
-                return result;
+                        SliceContextualCardRenderer.VIEW_TYPE_STICKY).build());
             }
         }
         return result;

@@ -18,11 +18,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="feature_flags_settings"
     android:title="@string/feature_flags_dashboard_title">
     <PreferenceCategory
         android:key="feature_flag_category"
         android:layout="@layout/preference_category_no_label"
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.development.featureflags.FeatureFlagsPreferenceController" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="feature_flag_footer"
+        android:title="@string/experimental_category_title"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

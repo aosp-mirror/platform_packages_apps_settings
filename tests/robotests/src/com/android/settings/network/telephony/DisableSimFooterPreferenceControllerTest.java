@@ -18,11 +18,13 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 
 import com.android.settings.network.SubscriptionUtil;
 
@@ -45,12 +47,15 @@ public class DisableSimFooterPreferenceControllerTest {
     private SubscriptionInfo mInfo;
 
     private Context mContext;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
     private DisableSimFooterPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
         when(mInfo.getSubscriptionId()).thenReturn(SUB_ID);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mInfo));
         mController = new DisableSimFooterPreferenceController(mContext, PREF_KEY);
@@ -69,9 +74,18 @@ public class DisableSimFooterPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_pSIM_available() {
+    public void isAvailable_pSIM_available_cannot_disable_pSIM() {
         when(mInfo.isEmbedded()).thenReturn(false);
         mController.init(SUB_ID);
+        doReturn(false).when(mSubscriptionManager).canDisablePhysicalSubscription();
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_pSIM_available_can_disable_pSIM() {
+        when(mInfo.isEmbedded()).thenReturn(false);
+        mController.init(SUB_ID);
+        doReturn(true).when(mSubscriptionManager).canDisablePhysicalSubscription();
+        assertThat(mController.isAvailable()).isFalse();
     }
 }

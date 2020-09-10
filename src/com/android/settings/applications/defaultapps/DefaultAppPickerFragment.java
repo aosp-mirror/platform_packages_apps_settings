@@ -33,9 +33,9 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.widget.RadioButtonPickerFragment;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 /**
  * A generic app picker fragment that shows a list of app as radio button group.
@@ -73,7 +73,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
                 SettingsEnums.ACTION_SETTINGS_UPDATE_DEFAULT_APP,
                 getMetricsCategory(),
                 selectedKey,
-                 0 /* value */);
+                0 /* value */);
         super.onRadioButtonConfirmed(selectedKey);
     }
 

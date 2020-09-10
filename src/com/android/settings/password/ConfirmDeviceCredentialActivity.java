@@ -25,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
@@ -35,6 +36,7 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -51,6 +53,13 @@ import java.util.concurrent.Executor;
  */
 public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     public static final String TAG = ConfirmDeviceCredentialActivity.class.getSimpleName();
+
+    /**
+     * If the intent is sent from {@link com.android.systemui.keyguard.WorkLockActivityController}
+     * then check for device policy management flags.
+     */
+    public static final String EXTRA_FROM_WORK_LOCK_ACTIVITY_CONTROLLER =
+            "from_work_lock_activity_controller";
 
     // The normal flow that apps go through
     private static final int CREDENTIAL_NORMAL = 1;
@@ -90,50 +99,67 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private TrustManager mTrustManager;
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private Handler mHandler = new Handler(Looper.getMainLooper());
-    private boolean mIsFallback; // BiometricPrompt fallback
-    private boolean mCCLaunched;
+    private Context mContext;
+    private boolean mCheckDevicePolicyManager;
 
     private String mTitle;
     private String mDetails;
     private int mUserId;
     private int mCredentialMode;
     private boolean mGoingToBackground;
+    private boolean mWaitingForBiometricCallback;
 
     private Executor mExecutor = (runnable -> {
         mHandler.post(runnable);
     });
 
     private AuthenticationCallback mAuthenticationCallback = new AuthenticationCallback() {
+        @Override
         public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
             if (!mGoingToBackground) {
+                mWaitingForBiometricCallback = false;
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
                         || errorCode == BiometricPrompt.BIOMETRIC_ERROR_CANCELED) {
-                    if (mIsFallback) {
-                        mBiometricManager.onConfirmDeviceCredentialError(
-                                errorCode, getStringForError(errorCode));
-                    }
                     finish();
                 } else {
                     // All other errors go to some version of CC
                     showConfirmCredentials();
                 }
+            } else if (mWaitingForBiometricCallback) { // mGoingToBackground is true
+                mWaitingForBiometricCallback = false;
+                finish();
             }
         }
 
+        @Override
         public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+            mWaitingForBiometricCallback = false;
             mTrustManager.setDeviceLockedForUser(mUserId, false);
-
+            final boolean isStrongAuth = result.getAuthenticationType()
+                    == BiometricPrompt.AUTHENTICATION_RESULT_TYPE_DEVICE_CREDENTIAL;
             ConfirmDeviceCredentialUtils.reportSuccessfulAttempt(mLockPatternUtils, mUserManager,
-                    mUserId);
+                    mDevicePolicyManager, mUserId, isStrongAuth);
             ConfirmDeviceCredentialUtils.checkForPendingIntent(
                     ConfirmDeviceCredentialActivity.this);
 
-            if (mIsFallback) {
-                mBiometricManager.onConfirmDeviceCredentialSuccess();
-            }
-
             setResult(Activity.RESULT_OK);
             finish();
+        }
+
+        @Override
+        public void onAuthenticationFailed() {
+            mWaitingForBiometricCallback = false;
+            mDevicePolicyManager.reportFailedBiometricAttempt(mUserId);
+        }
+
+        @Override
+        public void onSystemEvent(int event) {
+            Log.d(TAG, "SystemEvent: " + event);
+            switch (event) {
+                case BiometricConstants.BIOMETRIC_SYSTEM_EVENT_EARLY_USER_CANCEL:
+                    finish();
+                    break;
+            }
         }
     };
 
@@ -152,6 +178,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+
         mBiometricManager = getSystemService(BiometricManager.class);
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
         mUserManager = UserManager.get(this);
@@ -159,6 +188,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mLockPatternUtils = new LockPatternUtils(this);
 
         Intent intent = getIntent();
+        mContext = this;
+        mCheckDevicePolicyManager = intent
+                .getBooleanExtra(BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
         mTitle = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
         mDetails = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
@@ -180,19 +212,26 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         if ((mTitle == null) && isManagedProfile) {
             mTitle = getTitleFromOrganizationName(mUserId);
         }
+
+
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
-        Bundle bpBundle =
-                intent.getBundleExtra(KeyguardManager.EXTRA_BIOMETRIC_PROMPT_BUNDLE);
-        if (bpBundle != null) {
-            mIsFallback = true;
-            mTitle = bpBundle.getString(BiometricPrompt.KEY_TITLE);
-            mDetails = bpBundle.getString(BiometricPrompt.KEY_SUBTITLE);
-        } else {
-            bpBundle = new Bundle();
-            bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
-            bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
+        final Bundle bpBundle = new Bundle();
+        bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
+        bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
+        bpBundle.putBoolean(BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS,
+                mCheckDevicePolicyManager);
+
+        final @LockPatternUtils.CredentialType int credentialType = Utils.getCredentialType(
+                mContext, effectiveUserId);
+        if (mTitle == null) {
+            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_TITLE,
+                    getTitleFromCredentialType(credentialType, isManagedProfile));
+        }
+        if (mDetails == null) {
+            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_SUBTITLE,
+                    getDetailsFromCredentialType(credentialType, isManagedProfile));
         }
 
         boolean launchedBiometric = false;
@@ -230,11 +269,50 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             finish();
         } else if (launchedBiometric) {
             // Keep this activity alive until BiometricPrompt goes away
+            mWaitingForBiometricCallback = true;
         } else {
             Log.d(TAG, "No pattern, password or PIN set.");
             setResult(Activity.RESULT_OK);
             finish();
         }
+    }
+
+    private String getTitleFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
+            boolean isManagedProfile) {
+        switch (credentialType) {
+            case LockPatternUtils.CREDENTIAL_TYPE_PIN:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_work_pin_header)
+                        : getString(R.string.lockpassword_confirm_your_pin_header);
+            case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_work_pattern_header)
+                        : getString(R.string.lockpassword_confirm_your_pattern_header);
+            case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_work_password_header)
+                        : getString(R.string.lockpassword_confirm_your_password_header);
+        }
+        return null;
+    }
+
+    private String getDetailsFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
+            boolean isManagedProfile) {
+        switch (credentialType) {
+            case LockPatternUtils.CREDENTIAL_TYPE_PIN:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_pin_generic_profile)
+                        : getString(R.string.lockpassword_confirm_your_pin_generic);
+            case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_pattern_generic_profile)
+                        : getString(R.string.lockpassword_confirm_your_pattern_generic);
+            case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_password_generic_profile)
+                        : getString(R.string.lockpassword_confirm_your_password_generic);
+        }
+        return null;
     }
 
     @Override
@@ -250,20 +328,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         super.onPause();
         if (!isChangingConfigurations()) {
             mGoingToBackground = true;
-            if (mBiometricFragment != null) {
-                Log.d(TAG, "Authenticating: " + mBiometricFragment.isAuthenticating());
-                if (mBiometricFragment.isAuthenticating()) {
-                    mBiometricFragment.cancel();
-                }
+            if (!mWaitingForBiometricCallback) {
+                finish();
             }
-
-            if (mIsFallback && !mCCLaunched) {
-                mBiometricManager.onConfirmDeviceCredentialError(
-                        BiometricConstants.BIOMETRIC_ERROR_CANCELED,
-                        getString(com.android.internal.R.string.biometric_error_user_canceled));
-            }
-
-            finish();
         } else {
             mGoingToBackground = false;
         }
@@ -278,16 +345,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 || !mUserManager.isUserUnlocked(mUserId);
     }
 
-    private boolean isBiometricDisabledByAdmin(int effectiveUserId) {
-        final int disabledFeatures =
-                mDevicePolicyManager.getKeyguardDisabledFeatures(null, effectiveUserId);
-        return (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_BIOMETRICS) != 0;
-    }
-
     private boolean isBiometricAllowed(int effectiveUserId, int realUserId) {
-        return !isStrongAuthRequired(effectiveUserId)
-                && !isBiometricDisabledByAdmin(effectiveUserId)
-                && !mLockPatternUtils.hasPendingEscrowToken(realUserId);
+        return !isStrongAuthRequired(effectiveUserId) && !mLockPatternUtils
+                .hasPendingEscrowToken(realUserId);
     }
 
     private void showBiometricPrompt(Bundle bundle) {
@@ -314,7 +374,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
      * Shows ConfirmDeviceCredentials for normal apps.
      */
     private void showConfirmCredentials() {
-        mCCLaunched = true;
         boolean launched = false;
         // The only difference between CREDENTIAL_MANAGED and CREDENTIAL_NORMAL is that for
         // CREDENTIAL_MANAGED, we launch the real confirm credential activity with an explicit
@@ -332,7 +391,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .launchConfirmationActivityWithExternalAndChallenge(
                             0 /* request code */, null /* title */, mTitle, mDetails,
                             true /* isExternal */, 0L /* challenge */, mUserId);
-        } else if (mCredentialMode == CREDENTIAL_NORMAL){
+        } else if (mCredentialMode == CREDENTIAL_NORMAL) {
             launched = mChooseLockSettingsHelper.launchConfirmationActivity(
                     0 /* request code */, null /* title */,
                     mTitle, mDetails, false /* returnCredentials */, true /* isExternal */,
@@ -343,14 +402,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             setResult(Activity.RESULT_OK);
         }
         finish();
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        // Finish without animation since the activity is just there so we can launch
-        // BiometricPrompt.
-        overridePendingTransition(R.anim.confirm_credential_biometric_transition_enter, 0);
     }
 
     private boolean isInternalActivity() {

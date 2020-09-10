@@ -51,9 +51,6 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.wifi.AccessPoint;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,12 +60,16 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = WifiSliceTest.ShadowSliceBackgroundWorker.class)
 public class WifiSliceTest {
 
     private static final String AP1_NAME = "ap1";
     private static final String AP2_NAME = "ap2";
+    private static final String AP3_NAME = "ap3";
 
     private Context mContext;
     private ContentResolver mResolver;
@@ -205,15 +206,15 @@ public class WifiSliceTest {
     }
 
     @Test
-    public void getWifiSlice_oneReachableAp_shouldNotReturnLoadingRow() {
+    public void getWifiSlice_oneReachableAp_shouldReturnLoadingRow() {
         setWorkerResults(createAccessPoint(AP1_NAME, false, true));
 
         final Slice wifiSlice = mWifiSlice.getSlice();
         final List<SliceItem> sliceItems = wifiSlice.getItems();
 
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
-        // No scanning text
-        SliceTester.assertNoSliceItemContainsSubtitle(sliceItems,
+        // Has scanning text
+        SliceTester.assertAnySliceItemContainsSubtitle(sliceItems,
                 mContext.getString(R.string.wifi_empty_list_wifi_on));
     }
 
@@ -221,13 +222,15 @@ public class WifiSliceTest {
     public void getWifiSlice_allReachableAps_shouldNotReturnLoadingRow() {
         setWorkerResults(
                 createAccessPoint(AP1_NAME, false, true),
-                createAccessPoint(AP2_NAME, false, true));
+                createAccessPoint(AP2_NAME, false, true),
+                createAccessPoint(AP3_NAME, false, true));
 
         final Slice wifiSlice = mWifiSlice.getSlice();
         final List<SliceItem> sliceItems = wifiSlice.getItems();
 
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP2_NAME);
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP3_NAME);
         // No scanning text
         SliceTester.assertNoSliceItemContainsSubtitle(sliceItems,
                 mContext.getString(R.string.wifi_empty_list_wifi_on));

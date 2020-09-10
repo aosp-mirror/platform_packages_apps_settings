@@ -23,12 +23,12 @@ import static org.mockito.Mockito.verify;
 import android.app.Dialog;
 import android.hardware.fingerprint.Fingerprint;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings
         .FingerprintSettingsFragment.DeleteFingerprintDialog;
-import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,10 +37,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowFragment.class)
+@Config(shadows = DeleteFingerprintDialogTest.ShadowFragment.class)
 public class DeleteFingerprintDialogTest {
 
     @Mock
@@ -74,5 +76,20 @@ public class DeleteFingerprintDialogTest {
         mFragment.onClick(mFragment.getDialog(), Dialog.BUTTON_NEGATIVE);
 
         verify(mTarget, never()).deleteFingerPrint(mFingerprint);
+    }
+
+    @Implements(Fragment.class)
+    public static class ShadowFragment {
+        private Fragment mTargetFragment;
+
+        @Implementation
+        protected void setTargetFragment(Fragment fragment, int requestCode) {
+            mTargetFragment = fragment;
+        }
+
+        @Implementation
+        protected Fragment getTargetFragment() {
+            return mTargetFragment;
+        }
     }
 }

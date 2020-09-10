@@ -29,11 +29,18 @@ import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Controller to maintain connected usb device
  */
 public class ConnectedUsbDeviceUpdater {
+
+    private static final String PREF_KEY = "connected_usb";
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
     private DashboardFragment mFragment;
     private UsbBackend mUsbBackend;
     private DevicePreferenceCallback mDevicePreferenceCallback;
@@ -67,6 +74,8 @@ public class ConnectedUsbDeviceUpdater {
         mUsbBackend = usbBackend;
         mUsbReceiver = new UsbConnectionBroadcastReceiver(context,
                 mUsbConnectionListener, mUsbBackend);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(mFragment.getContext())
+                .getMetricsFeatureProvider();
     }
 
     public void registerCallback() {
@@ -82,7 +91,9 @@ public class ConnectedUsbDeviceUpdater {
         mUsbPreference = new Preference(context, null /* AttributeSet */);
         mUsbPreference.setTitle(R.string.usb_pref);
         mUsbPreference.setIcon(R.drawable.ic_usb);
+        mUsbPreference.setKey(PREF_KEY);
         mUsbPreference.setOnPreferenceClickListener((Preference p) -> {
+            mMetricsFeatureProvider.logClickedPreference(p, mFragment.getMetricsCategory());
             // New version - uses a separate screen.
             new SubSettingLauncher(mFragment.getContext())
                     .setDestination(UsbDetailsFragment.class.getName())

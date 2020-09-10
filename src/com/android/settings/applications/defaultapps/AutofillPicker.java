@@ -23,7 +23,7 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -54,16 +54,8 @@ public class AutofillPicker extends DashboardFragment {
         return buildPreferenceControllers(context);
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    SearchIndexableResource searchIndexableResource =
-                            new SearchIndexableResource(context);
-                    searchIndexableResource.xmlResId = R.xml.default_autofill_picker_settings;
-                    return Arrays.asList(searchIndexableResource);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.default_autofill_picker_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(Context

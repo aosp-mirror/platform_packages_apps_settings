@@ -29,7 +29,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
-import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -136,7 +135,8 @@ public class EntityHeaderController {
      */
     public EntityHeaderController setIcon(Drawable icon) {
         if (icon != null) {
-            mIcon = icon.getConstantState().newDrawable(mAppContext.getResources());
+            final Drawable.ConstantState state = icon.getConstantState();
+            mIcon = state != null ? state.newDrawable(mAppContext.getResources()) : icon;
         }
         return this;
     }
@@ -147,7 +147,7 @@ public class EntityHeaderController {
      * accessibility purposes.
      */
     public EntityHeaderController setIcon(ApplicationsState.AppEntry appEntry) {
-        mIcon = IconDrawableFactory.newInstance(mAppContext).getBadgedIcon(appEntry.info);
+        mIcon = Utils.getBadgedIcon(mAppContext, appEntry.info);
         return this;
     }
 
@@ -373,7 +373,6 @@ public class EntityHeaderController {
             }
         }
     }
-
 
     private void setText(@IdRes int id, CharSequence text) {
         TextView textView = mHeader.findViewById(id);

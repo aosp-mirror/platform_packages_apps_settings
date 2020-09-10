@@ -17,10 +17,16 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.NotificationHistory;
+import android.app.NotificationManager;
 import android.app.role.RoleManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
@@ -28,14 +34,17 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.service.notification.NotifyingApp;
+import android.service.notification.ConversationChannelWrapper;
 import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -44,9 +53,11 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
+import com.android.settingslib.notification.ConversationIconFactory;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +84,7 @@ public class NotificationBackend {
         row.icon = IconDrawableFactory.newInstance(context).getBadgedIcon(app);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
         row.showBadge = canShowBadge(row.pkg, row.uid);
-        row.allowBubbles = canBubble(row.pkg, row.uid);
+        row.bubblePreference = getBubblePreference(row.pkg, row.uid);
         row.userId = UserHandle.getUserId(row.uid);
         row.blockedChannelCount = getBlockedChannelCount(row.pkg, row.uid);
         row.channelCount = getChannelCount(row.pkg, row.uid);
@@ -153,7 +164,7 @@ public class NotificationBackend {
         try {
             if (onlyHasDefaultChannel(pkg, uid)) {
                 NotificationChannel defaultChannel =
-                        getChannel(pkg, uid, NotificationChannel.DEFAULT_CHANNEL_ID);
+                        getChannel(pkg, uid, NotificationChannel.DEFAULT_CHANNEL_ID, null);
                 defaultChannel.setImportance(enabled ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_NONE);
                 updateChannel(pkg, uid, defaultChannel);
             }
@@ -184,18 +195,18 @@ public class NotificationBackend {
         }
     }
 
-    public boolean canBubble(String pkg, int uid) {
+    public int getBubblePreference(String pkg, int uid) {
         try {
-            return sINM.areBubblesAllowedForPackage(pkg, uid);
+            return sINM.getBubblePreferenceForPackage(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return false;
+            return -1;
         }
     }
 
-    public boolean setAllowBubbles(String pkg, int uid, boolean allow) {
+    public boolean setAllowBubbles(String pkg, int uid, int preference) {
         try {
-            sINM.setBubblesAllowed(pkg, uid, allow);
+            sINM.setBubblesAllowed(pkg, uid, preference);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
@@ -203,13 +214,17 @@ public class NotificationBackend {
         }
     }
 
-
     public NotificationChannel getChannel(String pkg, int uid, String channelId) {
+        return getChannel(pkg, uid, channelId, null);
+    }
+
+    public NotificationChannel getChannel(String pkg, int uid, String channelId,
+            String conversationId) {
         if (channelId == null) {
             return null;
         }
         try {
-            return sINM.getNotificationChannelForPackage(pkg, uid, channelId, true);
+            return sINM.getNotificationChannelForPackage(pkg, uid, channelId, conversationId, true);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return null;
@@ -234,6 +249,59 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return ParceledListSlice.emptyList();
+        }
+    }
+
+    public ParceledListSlice<ConversationChannelWrapper> getConversations(String pkg, int uid) {
+        try {
+            return sINM.getConversationsForPackage(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
+    public ParceledListSlice<ConversationChannelWrapper> getConversations(boolean onlyImportant) {
+        try {
+            return sINM.getConversations(onlyImportant);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
+    public boolean hasSentValidMsg(String pkg, int uid) {
+        try {
+            return sINM.hasSentValidMsg(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public boolean isInInvalidMsgState(String pkg, int uid) {
+        try {
+            return sINM.isInInvalidMsgState(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public boolean hasUserDemotedInvalidMsgApp(String pkg, int uid) {
+        try {
+            return sINM.hasUserDemotedInvalidMsgApp(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public void setInvalidMsgAppDemoted(String pkg, int uid, boolean isDemoted) {
+        try {
+             sINM.setInvalidMsgAppDemoted(pkg, uid, isDemoted);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
         }
     }
 
@@ -367,6 +435,15 @@ public class NotificationBackend {
         return false;
     }
 
+    public NotificationHistory getNotificationHistory(String pkg, String attributionTag) {
+        try {
+            return sINM.getNotificationHistory(pkg, attributionTag);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return new NotificationHistory();
+    }
+
     protected void recordAggregatedUsageEvents(Context context, AppRow appRow) {
         long now = System.currentTimeMillis();
         long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);
@@ -464,6 +541,41 @@ public class NotificationBackend {
         }
     }
 
+    public ShortcutInfo getConversationInfo(Context context, String pkg, int uid, String id) {
+        LauncherApps la = context.getSystemService(LauncherApps.class);
+
+        LauncherApps.ShortcutQuery query = new LauncherApps.ShortcutQuery()
+                .setPackage(pkg)
+                .setQueryFlags(FLAG_MATCH_DYNAMIC
+                        | FLAG_MATCH_PINNED_BY_ANY_LAUNCHER | FLAG_MATCH_CACHED)
+                .setShortcutIds(Arrays.asList(id));
+        List<ShortcutInfo> shortcuts = la.getShortcuts(
+                query, UserHandle.of(UserHandle.getUserId(uid)));
+        if (shortcuts != null && !shortcuts.isEmpty()) {
+           return shortcuts.get(0);
+        }
+        return null;
+    }
+
+    public Drawable getConversationDrawable(Context context, ShortcutInfo info, String pkg,
+            int uid, boolean important) {
+        if (info == null) {
+            return null;
+        }
+        ConversationIconFactory iconFactory = new ConversationIconFactory(context,
+                context.getSystemService(LauncherApps.class),
+                context.getPackageManager(),
+                IconDrawableFactory.newInstance(context, false),
+                context.getResources().getDimensionPixelSize(
+                        R.dimen.conversation_icon_size));
+        return iconFactory.getConversationDrawable(info, pkg, uid, important);
+    }
+
+    public void requestPinShortcut(Context context, ShortcutInfo shortcutInfo) {
+        ShortcutManager sm = context.getSystemService(ShortcutManager.class);
+        sm.requestPinShortcut(shortcutInfo, null);
+    }
+
     /**
      * NotificationsSentState contains how often an app sends notifications and how recently it sent
      * one.
@@ -490,7 +602,7 @@ public class NotificationBackend {
         public boolean systemApp;
         public boolean lockedImportance;
         public boolean showBadge;
-        public boolean allowBubbles;
+        public int bubblePreference = NotificationManager.BUBBLE_PREFERENCE_NONE;
         public int userId;
         public int blockedChannelCount;
         public int channelCount;

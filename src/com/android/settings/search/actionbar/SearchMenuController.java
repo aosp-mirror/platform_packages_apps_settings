@@ -17,8 +17,8 @@
 package com.android.settings.search.actionbar;
 
 import android.annotation.NonNull;
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -37,9 +37,12 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 public class SearchMenuController implements LifecycleObserver, OnCreateOptionsMenu {
 
     public static final String NEED_SEARCH_ICON_IN_ACTION_BAR = "need_search_icon_in_action_bar";
+    public static final int MENU_SEARCH = Menu.FIRST + 10;
 
     private final Fragment mHost;
     private final int mPageId;
@@ -61,13 +64,14 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        final Context context = mHost.getContext();
-        final String SettingsIntelligencePkgName = context.getString(
+        final Activity activity = mHost.getActivity();
+        final String SettingsIntelligencePkgName = activity.getString(
                 R.string.config_settingsintelligence_package_name);
-        if (!Utils.isDeviceProvisioned(mHost.getContext())) {
+        if (!WizardManagerHelper.isDeviceProvisioned(activity)
+                || WizardManagerHelper.isAnySetupWizard(activity.getIntent())) {
             return;
         }
-        if (!Utils.isPackageEnabled(mHost.getContext(), SettingsIntelligencePkgName)) {
+        if (!Utils.isPackageEnabled(activity, SettingsIntelligencePkgName)) {
             return;
         }
         if (menu == null) {
@@ -77,23 +81,27 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
         if (arguments != null && !arguments.getBoolean(NEED_SEARCH_ICON_IN_ACTION_BAR, true)) {
             return;
         }
-        final MenuItem searchItem = menu.add(Menu.NONE, Menu.NONE, 0 /* order */,
+        // menu contains search item, skip it
+        if (menu.findItem(MENU_SEARCH) != null) {
+            return;
+        }
+        final MenuItem searchItem = menu.add(Menu.NONE, MENU_SEARCH, 0 /* order */,
                 R.string.search_menu);
         searchItem.setIcon(R.drawable.ic_search_24dp);
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         searchItem.setOnMenuItemClickListener(target -> {
-            final Intent intent = FeatureFactory.getFactory(context)
+            final Intent intent = FeatureFactory.getFactory(activity)
                     .getSearchFeatureProvider()
-                    .buildSearchIntent(context, mPageId);
+                    .buildSearchIntent(activity, mPageId);
 
-            if (context.getPackageManager().queryIntentActivities(intent,
+            if (activity.getPackageManager().queryIntentActivities(intent,
                     PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
                 return true;
             }
 
-            FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                    .action(context, SettingsEnums.ACTION_SEARCH_RESULTS);
+            FeatureFactory.getFactory(activity).getMetricsFeatureProvider()
+                    .action(activity, SettingsEnums.ACTION_SEARCH_RESULTS);
             mHost.startActivityForResult(intent, SearchFeatureProvider.REQUEST_CODE);
             return true;
         });

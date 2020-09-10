@@ -19,7 +19,6 @@ package com.android.settings.wifi;
 import android.annotation.StyleRes;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +32,12 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.wifi.AccessPoint;
 
+/**
+ * Dialog for users to edit a Wi-Fi network.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in {@link WifiDialog2}.
+ */
 public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
         DialogInterface.OnClickListener {
 
@@ -114,31 +119,22 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
 
     @Override
     protected void onStart() {
+        final ImageButton ssidScannerButton = findViewById(R.id.ssid_scanner_button);
+        if (mHideSubmitButton) {
+            ssidScannerButton.setVisibility(View.GONE);
+            return;
+        }
+
         View.OnClickListener onClickScannerButtonListener = v -> {
             if (mListener == null) {
                 return;
             }
 
-            String ssid = null;
-            if (mAccessPoint == null) {
-                final TextView ssidEditText = findViewById(R.id.ssid);
-                ssid = ssidEditText.getText().toString();
-            } else {
-                ssid = mAccessPoint.getSsidStr();
-            }
+            final TextView ssidEditText = findViewById(R.id.ssid);
+            final String ssid = ssidEditText.getText().toString();
             mListener.onScan(/* WifiDialog */ this, ssid);
         };
-
-        final ImageButton ssidScannerButton = findViewById(R.id.ssid_scanner_button);
         ssidScannerButton.setOnClickListener(onClickScannerButtonListener);
-
-        final ImageButton passwordScannerButton = findViewById(R.id.password_scanner_button);
-        passwordScannerButton.setOnClickListener(onClickScannerButtonListener);
-
-        if (mHideSubmitButton) {
-            ssidScannerButton.setVisibility(View.GONE);
-            passwordScannerButton.setVisibility(View.GONE);
-        }
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {

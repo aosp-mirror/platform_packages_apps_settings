@@ -44,7 +44,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.search.Indexable;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
@@ -53,7 +52,7 @@ import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.UUID;
@@ -67,10 +66,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     private static final String TAG = "SettingsPreference";
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
-
-    protected final FooterPreferenceMixinCompat mFooterPreferenceMixin =
-            new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
-
 
     private static final int ORDER_FIRST = -1;
 
@@ -113,8 +108,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                 }
             };
 
-    private ViewGroup mPinnedHeaderFrameLayout;
-    private ViewGroup mButtonBar;
+    @VisibleForTesting
+    ViewGroup mPinnedHeaderFrameLayout;
 
     private LayoutPreference mHeader;
 
@@ -145,7 +140,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             Bundle savedInstanceState) {
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = root.findViewById(R.id.pinned_header);
-        mButtonBar = root.findViewById(R.id.button_bar);
         return root;
     }
 
@@ -169,10 +163,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
     }
 
-    public ViewGroup getButtonBar() {
-        return mButtonBar;
-    }
-
     public View setPinnedHeaderView(int layoutResId) {
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         final View pinnedHeader =
@@ -184,6 +174,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     public void setPinnedHeaderView(View pinnedHeader) {
         mPinnedHeaderFrameLayout.addView(pinnedHeader);
         mPinnedHeaderFrameLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void showPinnedHeader(boolean show) {
+        mPinnedHeaderFrameLayout.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -287,11 +281,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     protected void setHeaderView(int resource) {
         mHeader = new LayoutPreference(getPrefContext(), resource);
+        mHeader.setSelectable(false);
         addPreferenceToTop(mHeader);
     }
 
     protected void setHeaderView(View view) {
         mHeader = new LayoutPreference(getPrefContext(), view);
+        mHeader.setSelectable(false);
         addPreferenceToTop(mHeader);
     }
 
@@ -322,8 +318,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         if (getPreferenceScreen() != null) {
             final View listContainer = getActivity().findViewById(android.R.id.list_container);
             boolean show = (getPreferenceScreen().getPreferenceCount()
-                    - (mHeader != null ? 1 : 0)
-                    - (mFooterPreferenceMixin.hasFooter() ? 1 : 0)) <= 0
+                    - (mHeader != null ? 1 : 0)) <= 0
                     || (listContainer != null && listContainer.getVisibility() != View.VISIBLE);
             mEmptyView.setVisibility(show ? View.VISIBLE : View.GONE);
         } else {
@@ -703,5 +698,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             return;
         }
         getActivity().setResult(result);
+    }
+
+    protected boolean isFinishingOrDestroyed() {
+        final Activity activity = getActivity();
+        return activity == null || activity.isFinishing() || activity.isDestroyed();
     }
 }

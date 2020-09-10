@@ -30,7 +30,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
-import com.android.settings.users.RestrictedProfileSettings;
 import com.android.settingslib.license.LicenseHtmlLoaderCompat;
 
 import java.io.File;
@@ -78,7 +77,7 @@ public class SettingsLicenseActivity extends FragmentActivity implements
 
     @VisibleForTesting
     Uri getUriFromGeneratedHtmlFile(File generatedHtmlFile) {
-        return FileProvider.getUriForFile(this, RestrictedProfileSettings.FILE_PROVIDER_AUTHORITY,
+        return FileProvider.getUriForFile(this, Utils.FILE_PROVIDER_AUTHORITY,
                 generatedHtmlFile);
     }
 

@@ -19,6 +19,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.debug.IAdbManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,10 +28,12 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -131,9 +135,32 @@ public class WirelessDebuggingPreferenceController extends DeveloperOptionsPrefe
         ((MasterSwitchPreference) preference).setChecked(enabled);
     }
 
+    /**
+     * Returns true if connected to Wi-Fi network.
+     */
+    public static boolean isWifiConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            NetworkInfo info = cm.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                return info.getType() == ConnectivityManager.TYPE_WIFI;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean enabled = (Boolean) newValue;
+        if (enabled && !isWifiConnected(mContext)) {
+            // Cannot enable ADB over Wi-Fi if we're not connected to wifi.
+            Toast.makeText(
+                    mContext, R.string.adb_wireless_no_network_msg, Toast.LENGTH_LONG)
+                    .show();
+            return false;
+        }
+
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ADB_WIFI_ENABLED,
                 enabled ? AdbPreferenceController.ADB_SETTING_ON

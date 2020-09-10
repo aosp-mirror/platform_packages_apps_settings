@@ -62,6 +62,7 @@ public abstract class ActiveSubsciptionsListener
     private BroadcastReceiver mSubscriptionChangeReceiver;
 
     private static final int MAX_SUBSCRIPTION_UNKNOWN = -1;
+    private final int mTargetSubscriptionId;
 
     private AtomicInteger mMaxActiveSubscriptionInfos;
     private List<SubscriptionInfo> mCachedActiveSubscriptionInfo;
@@ -73,9 +74,21 @@ public abstract class ActiveSubsciptionsListener
      * @param context {@code Context} of this listener
      */
     public ActiveSubsciptionsListener(Looper looper, Context context) {
+        this(looper, context, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+    }
+
+    /**
+     * Constructor
+     *
+     * @param looper {@code Looper} of this listener
+     * @param context {@code Context} of this listener
+     * @param subscriptionId for subscription on this listener
+     */
+    public ActiveSubsciptionsListener(Looper looper, Context context, int subscriptionId) {
         super(looper);
         mLooper = looper;
         mContext = context;
+        mTargetSubscriptionId = subscriptionId;
 
         mCacheState = new AtomicInteger(STATE_NOT_LISTENING);
         mMaxActiveSubscriptionInfos = new AtomicInteger(MAX_SUBSCRIPTION_UNKNOWN);
@@ -107,6 +120,12 @@ public abstract class ActiveSubsciptionsListener
                             SubscriptionManager.INVALID_SUBSCRIPTION_ID);
                     if (!clearCachedSubId(subId)) {
                         return;
+                    }
+                    if (SubscriptionManager.isValidSubscriptionId(mTargetSubscriptionId)) {
+                        if (SubscriptionManager.isValidSubscriptionId(subId)
+                                && (mTargetSubscriptionId != subId)) {
+                            return;
+                        }
                     }
                 }
                 onSubscriptionsChanged();

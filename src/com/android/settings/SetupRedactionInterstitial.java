@@ -20,8 +20,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 
 import com.android.settings.notification.RedactionInterstitial;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Setup Wizard's version of RedactionInterstitial screen. It inherits the logic and basic structure
@@ -44,6 +47,15 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
                 enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                         : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstance) {
+        // Only allow to start the activity from Setup Wizard.
+        if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            finish();
+        }
+        super.onCreate(savedInstance);
     }
 
     @Override

@@ -211,7 +211,12 @@ public class AppStateNotificationBridgeTest {
         when(mSession.getAllApps()).thenReturn(apps);
 
         mBridge.loadAllExtraInfo();
-        assertThat(apps.get(0).extraInfo).isNull();
+        // extra info should exist and blocked status should be populated
+        assertThat(apps.get(0).extraInfo).isNotNull();
+        verify(mBackend).getNotificationsBanned(PKG1, 0);
+        // but the recent/frequent counts should be 0 so they don't appear on those screens
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentDaily).isEqualTo(0);
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).lastSent).isEqualTo(0);
     }
 
     @Test

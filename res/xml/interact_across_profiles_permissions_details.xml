@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/interact_across_profiles_title">
+
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="interact_across_profiles_header"
+            android:layout="@layout/cross_profiles_settings_entity_header"
+            android:selectable="false"/>
+
+        <com.android.settings.widget.CardPreference
+            android:key="install_app_banner"
+            android:icon="@drawable/ic_download_for_offline"
+            android:gravity="top"/>
+
+        <com.android.settings.widget.FilterTouchesRestrictedSwitchPreference
+            android:key="interact_across_profiles_settings_switch" />
+
+        <Preference
+            android:summary="@string/interact_across_profiles_summary_1"
+            android:selectable="false" />
+
+        <Preference
+            android:summary="@string/interact_across_profiles_summary_2"
+            android:selectable="false" />
+
+        <Preference
+            android:key="interact_across_profiles_extra_summary"
+            android:summary="@string/interact_across_profiles_summary_3"
+            android:selectable="false"/>
+</PreferenceScreen>

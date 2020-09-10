@@ -15,47 +15,45 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/vision_settings_title"
-        android:persistent="true" >
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:persistent="true"
+    android:title="@string/vision_settings_title">
 
     <com.android.settings.accessibility.DividerAllowedBelowPreference
         android:key="vision_settings_summary"
-        android:title="@string/vision_settings_description"
         android:layout="@layout/preference_multiline_title"
-        android:selectable="false" />
+        android:selectable="false"
+        android:title="@string/vision_settings_description" />
 
     <Preference
-        android:fragment=
-                "com.android.settings.accessibility.MagnificationPreferenceFragment"
+        settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"
+        android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
         android:key="screen_magnification_preference"
-        android:title="@string/accessibility_screen_magnification_title"
-        android:summary="@string/accessibility_preference_magnification_summary" />
+        android:summary="@string/accessibility_preference_magnification_summary"
+        android:title="@string/accessibility_screen_magnification_title" />
 
     <Preference
-        android:fragment=
-                "com.android.settings.display.FontSizePreferenceFragmentForSetupWizard"
+        android:fragment="com.android.settings.display.FontSizePreferenceFragmentForSetupWizard"
         android:key="font_size_preference"
-        android:title="@string/title_font_size"
-        android:summary="@string/short_summary_font_size" />
+        android:summary="@string/short_summary_font_size"
+        android:title="@string/title_font_size" />
 
     <com.android.settings.display.ScreenZoomPreference
         android:fragment="com.android.settings.display.ScreenZoomPreferenceFragmentForSetupWizard"
         android:key="force_density_preference"
-        android:title="@string/screen_zoom_title"
-        android:summary="@string/screen_zoom_short_summary" />
+        android:summary="@string/screen_zoom_short_summary"
+        android:title="@string/screen_zoom_title" />
 
     <Preference
-        android:fragment=
-                "com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"
+        android:fragment="com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"
         android:key="select_to_speak_preference"
-        android:summary="@string/select_to_speak_summary"
-        android:persistent="true" />
+        android:persistent="true"
+        android:summary="@string/select_to_speak_summary" />
 
     <Preference
-        android:fragment=
-                "com.android.settings.accessibility.ToggleScreenReaderPreferenceFragmentForSetupWizard"
+        android:fragment="com.android.settings.accessibility.ToggleScreenReaderPreferenceFragmentForSetupWizard"
         android:key="screen_reader_preference"
-        android:summary="@string/talkback_summary"
-        android:persistent="true" />
+        android:persistent="true"
+        android:summary="@string/talkback_summary" />
 
 </PreferenceScreen>

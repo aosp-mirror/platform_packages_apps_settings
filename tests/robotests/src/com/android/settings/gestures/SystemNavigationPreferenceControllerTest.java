@@ -137,30 +137,36 @@ public class SystemNavigationPreferenceControllerTest {
     public void testIsSwipeUpEnabled() {
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_2BUTTON);
-        assertThat(SystemNavigationPreferenceController.isSwipeUpEnabled(mContext)).isTrue();
+        assertThat(SystemNavigationPreferenceController.is2ButtonNavigationEnabled(
+                mContext)).isTrue();
 
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_3BUTTON);
-        assertThat(SystemNavigationPreferenceController.isSwipeUpEnabled(mContext)).isFalse();
+        assertThat(SystemNavigationPreferenceController.is2ButtonNavigationEnabled(
+                mContext)).isFalse();
 
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_GESTURAL);
-        assertThat(SystemNavigationPreferenceController.isSwipeUpEnabled(mContext)).isFalse();
+        assertThat(SystemNavigationPreferenceController.is2ButtonNavigationEnabled(
+                mContext)).isFalse();
     }
 
     @Test
     public void testIsEdgeToEdgeEnabled() {
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_GESTURAL);
-        assertThat(SystemNavigationPreferenceController.isEdgeToEdgeEnabled(mContext)).isTrue();
+        assertThat(SystemNavigationPreferenceController.isGestureNavigationEnabled(
+                mContext)).isTrue();
 
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_3BUTTON);
-        assertThat(SystemNavigationPreferenceController.isEdgeToEdgeEnabled(mContext)).isFalse();
+        assertThat(SystemNavigationPreferenceController.isGestureNavigationEnabled(
+                mContext)).isFalse();
 
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_2BUTTON);
-        assertThat(SystemNavigationPreferenceController.isEdgeToEdgeEnabled(mContext)).isFalse();
+        assertThat(SystemNavigationPreferenceController.isGestureNavigationEnabled(
+                mContext)).isFalse();
     }
 
     @Test

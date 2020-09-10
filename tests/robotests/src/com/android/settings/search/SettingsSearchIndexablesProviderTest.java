@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
 import android.Manifest;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,6 +14,9 @@ import android.provider.SearchIndexablesContract;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.drawer.ActivityTile;
+import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +32,8 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class SettingsSearchIndexablesProviderTest {
 
-    private static final String BASE_AUTHORITY = "com.android.settings";
+    private static final String PACKAGE_NAME = "com.android.settings";
+    private static final String BASE_AUTHORITY = "content://" + PACKAGE_NAME + "/";
 
     private SettingsSearchIndexablesProvider mProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
@@ -39,14 +44,15 @@ public class SettingsSearchIndexablesProviderTest {
         ProviderInfo info = new ProviderInfo();
         info.exported = true;
         info.grantUriPermissions = true;
-        info.authority = BASE_AUTHORITY;
+        info.authority = PACKAGE_NAME;
         info.readPermission = Manifest.permission.READ_SEARCH_INDEXABLES;
         mProvider.attachInfo(RuntimeEnvironment.application, info);
 
         final SearchFeatureProvider featureProvider = new SearchFeatureProviderImpl();
         featureProvider.getSearchIndexableResources().getProviderValues().clear();
         featureProvider.getSearchIndexableResources().getProviderValues()
-                .add(FakeSettingsFragment.class);
+                .add(new SearchIndexableData(FakeSettingsFragment.class,
+                        FakeSettingsFragment.SEARCH_INDEX_DATA_PROVIDER));
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = featureProvider;
     }
@@ -58,8 +64,7 @@ public class SettingsSearchIndexablesProviderTest {
 
     @Test
     public void testRawColumnFetched() {
-        Uri rawUri = Uri.parse("content://" + BASE_AUTHORITY + "/" +
-                SearchIndexablesContract.INDEXABLES_RAW_PATH);
+        Uri rawUri = Uri.parse(BASE_AUTHORITY + SearchIndexablesContract.INDEXABLES_RAW_PATH);
 
         final Cursor cursor = mProvider.query(rawUri,
                 SearchIndexablesContract.INDEXABLES_RAW_COLUMNS, null, null, null);
@@ -81,8 +86,7 @@ public class SettingsSearchIndexablesProviderTest {
 
     @Test
     public void testResourcesColumnFetched() {
-        Uri rawUri = Uri.parse("content://" + BASE_AUTHORITY + "/" +
-                SearchIndexablesContract.INDEXABLES_XML_RES_PATH);
+        Uri rawUri = Uri.parse(BASE_AUTHORITY + SearchIndexablesContract.INDEXABLES_XML_RES_PATH);
 
         final Cursor cursor = mProvider.query(rawUri,
                 SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS, null, null, null);
@@ -100,8 +104,8 @@ public class SettingsSearchIndexablesProviderTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void testNonIndexablesColumnFetched() {
-        final Uri rawUri = Uri.parse("content://" + BASE_AUTHORITY + "/" +
-                SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);
+        final Uri rawUri = Uri.parse(
+                BASE_AUTHORITY + SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);
 
         final List<String> keys = new ArrayList<>();
 
@@ -114,5 +118,38 @@ public class SettingsSearchIndexablesProviderTest {
 
         assertThat(keys).hasSize(3);
         assertThat(keys).containsAllOf("pref_key_1", "pref_key_3", "pref_key_5");
+    }
+
+    @Test
+    public void testIsEligibleForIndexing_isSettingsInjectedItem_ShouldBeFalse() {
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = PACKAGE_NAME;
+        activityInfo.name = "class";
+        final ActivityTile activityTile = new ActivityTile(activityInfo,
+                CategoryKey.CATEGORY_SYSTEM);
+
+        assertThat(mProvider.isEligibleForIndexing(PACKAGE_NAME, activityTile)).isFalse();
+    }
+
+    @Test
+    public void testIsEligibleForIndexing_isHomepageInjectedItem_ShouldBeFalse() {
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "class";
+        final ActivityTile activityTile = new ActivityTile(activityInfo,
+                CategoryKey.CATEGORY_HOMEPAGE);
+
+        assertThat(mProvider.isEligibleForIndexing(PACKAGE_NAME, activityTile)).isFalse();
+    }
+
+    @Test
+    public void testIsEligibleForIndexing_normalInjectedItem_ShouldBeTrue() {
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "class";
+        final ActivityTile activityTile = new ActivityTile(activityInfo,
+                CategoryKey.CATEGORY_CONNECT);
+
+        assertThat(mProvider.isEligibleForIndexing(PACKAGE_NAME, activityTile)).isTrue();
     }
 }

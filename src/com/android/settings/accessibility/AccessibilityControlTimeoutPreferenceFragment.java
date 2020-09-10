@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
-import android.provider.SearchIndexableResource;
 
 import androidx.preference.Preference;
 
@@ -31,10 +30,10 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-@SearchIndexable
+/** Settings fragment containing accessibility control timeout preference. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public final class AccessibilityControlTimeoutPreferenceFragment extends DashboardFragment
         implements AccessibilityTimeoutController.OnChangeListener {
 
@@ -88,6 +87,11 @@ public final class AccessibilityControlTimeoutPreferenceFragment extends Dashboa
         return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_timeout;
+    }
+
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         if (sControllers.size() == 0) {
@@ -104,21 +108,8 @@ public final class AccessibilityControlTimeoutPreferenceFragment extends Dashboa
         return sControllers;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.accessibility_control_timeout_settings;
-                    return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.accessibility_control_timeout_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

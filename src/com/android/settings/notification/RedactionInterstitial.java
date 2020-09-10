@@ -48,6 +48,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
 
 public class RedactionInterstitial extends SettingsActivity {
@@ -144,7 +145,11 @@ public class RedactionInterstitial extends SettingsActivity {
         }
 
         private void onDoneButtonClicked(View view) {
-            SetupRedactionInterstitial.setEnabled(getContext(), false);
+            // If the activity starts by Setup Wizard, then skip disable component which avoids the
+            // framework force closing all activities on the same task when the system is busy.
+            if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
+                SetupRedactionInterstitial.setEnabled(getContext(), false);
+            }
             final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
             if (activity != null) {
                 activity.setResult(RESULT_OK, null);

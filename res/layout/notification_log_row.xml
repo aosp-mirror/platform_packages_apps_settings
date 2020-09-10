@@ -26,8 +26,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@*android:dimen/status_bar_icon_size"
-        android:layout_marginBottom="6dp"
+        android:layout_height="wrap_content"
         >
 
         <ImageView
@@ -46,24 +45,50 @@
             android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:id="@+id/pkgname"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/timestamp"
             android:layout_toEndOf="@id/icon"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="?android:attr/textColorPrimary"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold"
-            android:textAlignment="viewStart"
-            android:labelFor="@android:id/button2" />
+            android:textAlignment="viewStart" />
+
+        <ImageView
+            android:id="@+id/alerted_icon"
+            android:layout_width="@*android:dimen/status_bar_icon_size"
+            android:layout_height="@*android:dimen/status_bar_icon_size"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:paddingTop="1dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:layout_toEndOf="@id/pkgname"
+            android:tint="?android:attr/textColorSecondary"
+            android:src="@drawable/ic_notifications_alert"
+        />
+
+        <ImageView
+            android:id="@+id/profile_badge"
+            android:layout_width="@*android:dimen/status_bar_icon_size"
+            android:layout_height="@*android:dimen/status_bar_icon_size"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="6dp"
+            android:paddingTop="1dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:layout_toStartOf="@id/timestamp"
+        />
 
         <DateTimeView
             android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
             android:layout_alignBottom="@android:id/widget_frame"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@android:id/widget_frame"
@@ -78,26 +103,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@*android:dimen/status_bar_icon_size"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="6dp"
         >
 
-        <ImageView
-            android:id="@+id/pkgicon"
-            android:layout_width="@*android:dimen/status_bar_icon_size"
-            android:layout_height="@*android:dimen/status_bar_icon_size"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="6dp"
-            android:contentDescription="@null"
-            android:adjustViewBounds="true"
-            android:maxHeight="@*android:dimen/status_bar_icon_size"
-            android:maxWidth="@*android:dimen/status_bar_icon_size"
-            android:scaleType="fitCenter" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textAlignment="viewStart"
+        />
 
         <TextView
-            android:id="@+id/pkgname"
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
@@ -106,12 +130,30 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textAlignment="viewStart"
-            />
+        />
 
     </LinearLayout>
 
-    <TextView
-            android:id="@+id/extra"
+    <LinearLayout
+        android:id="@+id/extra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+    >
+        <TextView
+                android:id="@+id/notification_extra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="30dp"
+                android:singleLine="false"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="10sp"
+                android:fontFamily="monospace"
+                android:textAlignment="viewStart"
+        />
+        <TextView
+            android:id="@+id/ranking_extra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -122,6 +164,7 @@
             android:textSize="10sp"
             android:fontFamily="monospace"
             android:textAlignment="viewStart"
-    />
+        />
+    </LinearLayout>
 
 </LinearLayout>

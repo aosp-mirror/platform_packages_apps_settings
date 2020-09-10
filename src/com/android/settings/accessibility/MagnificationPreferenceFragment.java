@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
-
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -25,9 +23,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -36,20 +35,15 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.actionbar.SearchMenuController;
-import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.Arrays;
 import java.util.List;
 
-@SearchIndexable
+/** Settings fragment containing magnification preference. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public final class MagnificationPreferenceFragment extends DashboardFragment {
-    @VisibleForTesting
-    static final int ON = 1;
-    @VisibleForTesting
-    static final int OFF = 0;
+    @VisibleForTesting static final int ON = 1;
+    @VisibleForTesting static final int OFF = 0;
 
     private static final String TAG = "MagnificationPreferenceFragment";
 
@@ -101,12 +95,17 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
             // If invoked from SUW, redirect to fragment instrumented for Vision Settings metrics
             preference.setFragment(
                     ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
-            Bundle args = preference.getExtras();
-            // Copy from AccessibilitySettingsForSetupWizardActivity, hide search and help menu
-            args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
-            args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
         }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (mLaunchedFromSuw) {
+            // Do not call super. We don't want to see the "Help & feedback" on OOBE page.
+        } else {
+            super.onCreateOptionsMenu(menu, inflater);
+        }
     }
 
     static CharSequence getConfigurationWarningStringForSecureSettingsKey(String key,
@@ -121,7 +120,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
         final AccessibilityManager am = (AccessibilityManager) context.getSystemService(
                 Context.ACCESSIBILITY_SERVICE);
         final String assignedId = Settings.Secure.getString(context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT);
+                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         if (!TextUtils.isEmpty(assignedId) && !MAGNIFICATION_COMPONENT_ID.equals(assignedId)) {
             final ComponentName assignedComponentName = ComponentName.unflattenFromString(
                     assignedId);
@@ -134,7 +133,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
                 if (info.getComponentName().equals(assignedComponentName)) {
                     final CharSequence assignedServiceName = info.getResolveInfo().loadLabel(
                             context.getPackageManager());
-                    final int messageId = isGestureNavigateEnabled(context)
+                    final int messageId = AccessibilityUtil.isGestureNavigateEnabled(context)
                             ? R.string.accessibility_screen_magnification_gesture_navigation_warning
                             : R.string.accessibility_screen_magnification_navbar_configuration_warning;
                     return context.getString(messageId, assignedServiceName);
@@ -161,21 +160,8 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
         return res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
     }
 
-    private static boolean isGestureNavigateEnabled(Context context) {
-        return context.getResources().getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode)
-                == NAV_BAR_MODE_GESTURAL;
-    }
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.accessibility_magnification_settings;
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.accessibility_magnification_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

@@ -19,10 +19,7 @@ package com.android.settings.deviceinfo.storage;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.storage.StorageManager;
-import android.text.TextPaint;
-import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -31,8 +28,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.DonutView;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * StorageSummaryDonutPreference is a preference which summarizes the used and remaining storage left
@@ -79,23 +78,14 @@ public class StorageSummaryDonutPreference extends Preference implements View.On
     @Override
     public void onClick(View v) {
         if (v != null && R.id.deletion_helper_button == v.getId()) {
-            Context context = getContext();
-            FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(
-                    context, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
-            Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
-            getContext().startActivity(intent);
-        }
-    }
-
-    private static class BoldLinkSpan extends StyleSpan {
-        public BoldLinkSpan() {
-            super(Typeface.BOLD);
-        }
-
-        @Override
-        public void updateDrawState(TextPaint ds) {
-            super.updateDrawState(ds);
-            ds.setColor(ds.linkColor);
+            final Context context = getContext();
+            final MetricsFeatureProvider metricsFeatureProvider =
+                    FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+            metricsFeatureProvider.logClickedPreference(this,
+                    getExtras().getInt(DashboardFragment.CATEGORY));
+            metricsFeatureProvider.action(context, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
+            final Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
+            context.startActivity(intent);
         }
     }
 }

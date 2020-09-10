@@ -22,24 +22,35 @@ import android.net.NetworkTemplate;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.preference.Preference;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settingslib.net.DataUsageController;
+import com.android.settingslib.utils.ThreadUtils;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Preference controller for "Data usage"
  */
 public class DataUsagePreferenceController extends TelephonyBasePreferenceController {
 
-    private NetworkTemplate mTemplate;
-    private DataUsageController.DataUsageInfo mDataUsageInfo;
-    private Intent mIntent;
+    private static final String LOG_TAG = "DataUsagePreferCtrl";
+
+    private Future<NetworkTemplate> mTemplateFuture;
+    private AtomicReference<NetworkTemplate> mTemplate;
+    private Future<Long> mHistoricalUsageLevel;
 
     public DataUsagePreferenceController(Context context, String key) {
         super(context, key);
+        mTemplate = new AtomicReference<NetworkTemplate>();
     }
 
     @Override
@@ -54,8 +65,11 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return false;
         }
+        final Intent intent = new Intent(Settings.ACTION_MOBILE_DATA_USAGE);
+        intent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, getNetworkTemplate());
+        intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
 
-        mContext.startActivity(mIntent);
+        mContext.startActivity(intent);
         return true;
     }
 
@@ -66,34 +80,71 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
             preference.setEnabled(false);
             return;
         }
-        long usageLevel = mDataUsageInfo.usageLevel;
-        if (usageLevel <= 0L) {
-            final DataUsageController controller = new DataUsageController(mContext);
-            usageLevel = controller.getHistoricalUsageLevel(mTemplate);
-        }
-        final boolean enabled = usageLevel > 0L;
-        preference.setEnabled(enabled);
-
-        if (enabled) {
-            preference.setSummary(mContext.getString(R.string.data_usage_template,
-                    DataUsageUtils.formatDataUsage(mContext, mDataUsageInfo.usageLevel),
-                    mDataUsageInfo.period));
+        final CharSequence summary = getDataUsageSummary(mContext, mSubId);
+        if (summary == null) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+            preference.setSummary(summary);
         }
     }
 
     public void init(int subId) {
         mSubId = subId;
+        mTemplate.set(null);
+        mTemplateFuture = ThreadUtils.postOnBackgroundThread(()
+                -> fetchMobileTemplate(mContext, mSubId));
+    }
 
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            mTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubId);
-
-            final DataUsageController controller = new DataUsageController(mContext);
-            controller.setSubscriptionId(mSubId);
-            mDataUsageInfo = controller.getDataUsageInfo(mTemplate);
-
-            mIntent = new Intent(Settings.ACTION_MOBILE_DATA_USAGE);
-            mIntent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mTemplate);
-            mIntent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
+    private NetworkTemplate fetchMobileTemplate(Context context, int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return null;
         }
+        return DataUsageLib.getMobileTemplate(context, subId);
+    }
+
+    private NetworkTemplate getNetworkTemplate() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return null;
+        }
+        NetworkTemplate template = mTemplate.get();
+        if (template != null) {
+            return template;
+        }
+        try {
+            template = mTemplateFuture.get();
+            mTemplate.set(template);
+        } catch (ExecutionException | InterruptedException | NullPointerException exception) {
+            Log.e(LOG_TAG, "Fail to get data usage template", exception);
+        }
+        return template;
+    }
+
+    @VisibleForTesting
+    DataUsageController.DataUsageInfo getDataUsageInfo(DataUsageController controller) {
+        return controller.getDataUsageInfo(getNetworkTemplate());
+    }
+
+    private CharSequence getDataUsageSummary(Context context, int subId) {
+        final DataUsageController controller = new DataUsageController(context);
+        controller.setSubscriptionId(subId);
+
+        mHistoricalUsageLevel = ThreadUtils.postOnBackgroundThread(() ->
+                controller.getHistoricalUsageLevel(getNetworkTemplate()));
+
+        final DataUsageController.DataUsageInfo usageInfo = getDataUsageInfo(controller);
+
+        long usageLevel = usageInfo.usageLevel;
+        if (usageLevel <= 0L) {
+            try {
+                usageLevel = mHistoricalUsageLevel.get();
+            } catch (Exception exception) {
+            }
+        }
+        if (usageLevel <= 0L) {
+            return null;
+        }
+        return context.getString(R.string.data_usage_template,
+                DataUsageUtils.formatDataUsage(context, usageLevel), usageInfo.period);
     }
 }

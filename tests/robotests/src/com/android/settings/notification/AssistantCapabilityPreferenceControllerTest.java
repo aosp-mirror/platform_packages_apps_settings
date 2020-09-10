@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.notification.AssistantCapabilityPreferenceController.PRIORITIZER_KEY;
+import static com.android.settings.notification.AssistantCapabilityPreferenceController.RANKING_KEY;
 import static com.android.settings.notification.AssistantCapabilityPreferenceController.SMART_KEY;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -56,8 +57,10 @@ public class AssistantCapabilityPreferenceControllerTest {
 
     private Context mContext;
     private AssistantCapabilityPreferenceController mPrioritizerController;
+    private AssistantCapabilityPreferenceController mRankingController;
     private AssistantCapabilityPreferenceController mChipController;
     private Preference mPrioritizerPreference;
+    private Preference mRankingPreference;
     private Preference mChipPreference;
 
     @Before
@@ -71,6 +74,13 @@ public class AssistantCapabilityPreferenceControllerTest {
         mPrioritizerPreference.setKey(mPrioritizerController.getPreferenceKey());
         when(mScreen.findPreference(
                 mPrioritizerController.getPreferenceKey())).thenReturn(mPrioritizerPreference);
+        mRankingController = new AssistantCapabilityPreferenceController(
+                mContext, RANKING_KEY);
+        mRankingController.setBackend(mBackend);
+        mRankingPreference = new Preference(mContext);
+        mRankingPreference.setKey(mRankingController.getPreferenceKey());
+        when(mScreen.findPreference(
+                mRankingController.getPreferenceKey())).thenReturn(mRankingPreference);
         mChipController = new AssistantCapabilityPreferenceController(mContext, SMART_KEY);
         mChipController.setBackend(mBackend);
         mChipPreference = new Preference(mContext);
@@ -111,12 +121,38 @@ public class AssistantCapabilityPreferenceControllerTest {
         capabilities.add(Adjustment.KEY_IMPORTANCE);
         when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
         assertThat(mPrioritizerController.isChecked()).isTrue();
+
+        capabilities = new ArrayList<>();
+        capabilities.add(Adjustment.KEY_RANKING_SCORE);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
+        assertThat(mPrioritizerController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void isChecked_rankingSettingIsOff_false() {
+        List<String> capabilities = new ArrayList<>();
+        capabilities.add(Adjustment.KEY_IMPORTANCE);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
+        assertThat(mRankingController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void isChecked_rankingSettingIsOn_true() {
+        List<String> capabilities = new ArrayList<>();
+        capabilities.add(Adjustment.KEY_RANKING_SCORE);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
+        assertThat(mRankingController.isChecked()).isTrue();
     }
 
     @Test
     public void isChecked_chipSettingIsOff_false() {
         List<String> capabilities = new ArrayList<>();
         capabilities.add(Adjustment.KEY_IMPORTANCE);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
+        assertThat(mChipController.isChecked()).isFalse();
+
+        capabilities = new ArrayList<>();
+        capabilities.add(Adjustment.KEY_RANKING_SCORE);
         when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
         assertThat(mChipController.isChecked()).isFalse();
 
@@ -150,6 +186,18 @@ public class AssistantCapabilityPreferenceControllerTest {
     public void onPreferenceChange_prioritizerOff() {
         mPrioritizerController.onPreferenceChange(mPrioritizerPreference, false);
         verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_IMPORTANCE, false);
+    }
+
+    @Test
+    public void onPreferenceChange_rankingOn() {
+        mRankingController.onPreferenceChange(mRankingPreference, true);
+        verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_RANKING_SCORE, true);
+    }
+
+    @Test
+    public void onPreferenceChange_rankingOff() {
+        mRankingController.onPreferenceChange(mRankingPreference, false);
+        verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_RANKING_SCORE, false);
     }
 
     @Test

@@ -20,12 +20,12 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 
+import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
 import org.junit.Before;
@@ -36,7 +36,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class})
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowSliceBackgroundWorker.class})
 public class BluetoothUpdateWorkerTest {
 
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");

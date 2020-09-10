@@ -17,11 +17,11 @@ package com.android.settings.wifi.details;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
@@ -35,11 +35,12 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.CaptivePortalData;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.IpPrefix;
@@ -51,12 +52,12 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
+import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -69,14 +70,13 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.AccessPoint;
@@ -101,8 +101,12 @@ import org.robolectric.shadows.ShadowToast;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @RunWith(RobolectricTestRunner.class)
@@ -147,6 +151,8 @@ public class WifiDetailPreferenceControllerTest {
     private MetricsFeatureProvider mockMetricsFeatureProvider;
     @Mock
     private WifiDetailPreferenceController.IconInjector mockIconInjector;
+    @Mock
+    private WifiDetailPreferenceController.Clock mMockClock;
     @Mock
     private MacAddress mockMacAddress;
 
@@ -288,7 +294,10 @@ public class WifiDetailPreferenceControllerTest {
         // builder pattern
         when(mockHeaderController.setRecyclerView(mockFragment.getListView(), mLifecycle))
                 .thenReturn(mockHeaderController);
-        when(mockHeaderController.setSummary(anyString())).thenReturn(mockHeaderController);
+        when(mockHeaderController.setSummary(nullable(String.class)))
+                .thenReturn(mockHeaderController);
+        when(mockHeaderController.setSecondSummary(nullable(String.class)))
+                .thenReturn(mockHeaderController);
         when(mockIconInjector.getIcon(anyInt())).thenReturn(new ColorDrawable());
 
         setupMockedPreferenceScreen();
@@ -340,7 +349,8 @@ public class WifiDetailPreferenceControllerTest {
                 mLifecycle,
                 mockWifiManager,
                 mockMetricsFeatureProvider,
-                mockIconInjector);
+                mockIconInjector,
+                mMockClock);
     }
 
     private void setupMockedPreferenceScreen() {
@@ -525,6 +535,54 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockHeaderController).setSummary(summary);
+    }
+
+    private void doShouldShowRemainingTimeTest(ZonedDateTime now, long timeRemainingMs) {
+        when(mMockClock.now()).thenReturn(now);
+        setUpForConnectedNetwork();
+        displayAndResume();
+
+        final CaptivePortalData data = new CaptivePortalData.Builder()
+                .setExpiryTime(now.toInstant().getEpochSecond() * 1000 + timeRemainingMs)
+                .build();
+        final LinkProperties lp = new LinkProperties();
+        lp.setCaptivePortalData(data);
+
+        updateLinkProperties(lp);
+    }
+
+    @Test
+    public void entityHeader_shouldShowShortRemainingTime() {
+        // Expires in 1h, 2min, 15sec
+        final long timeRemainingMs = (3600 + 2 * 60 + 15) * 1000;
+        final ZonedDateTime fakeNow = ZonedDateTime.of(2020, 1, 2, 3, 4, 5, 6,
+                ZoneId.of("Europe/London"));
+        doShouldShowRemainingTimeTest(fakeNow, timeRemainingMs);
+        final String expectedSummary = mContext.getString(R.string.wifi_time_remaining,
+                StringUtil.formatElapsedTime(mContext, timeRemainingMs, false /* withSeconds */));
+        final InOrder inOrder = inOrder(mockHeaderController);
+        inOrder.verify(mockHeaderController).setSecondSummary(expectedSummary);
+
+        updateLinkProperties(new LinkProperties());
+        inOrder.verify(mockHeaderController).setSecondSummary((String) null);
+    }
+
+    @Test
+    public void entityHeader_shouldShowExpiryDate() {
+        // Expires in 49h, 2min, 15sec
+        final long timeRemainingMs = (49 * 3600 + 2 * 60 + 15) * 1000;
+        final ZonedDateTime fakeNow = ZonedDateTime.of(2020, 1, 2, 3, 4, 5, 6,
+                ZoneId.of("Europe/London"));
+        doShouldShowRemainingTimeTest(fakeNow, timeRemainingMs);
+        final String expectedSummary = mContext.getString(
+                R.string.wifi_expiry_time,
+                DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(
+                        fakeNow.plusNanos(timeRemainingMs * 1_000_000)));
+        final InOrder inOrder = inOrder(mockHeaderController);
+        inOrder.verify(mockHeaderController).setSecondSummary(expectedSummary);
+
+        updateLinkProperties(new LinkProperties());
+        inOrder.verify(mockHeaderController).setSecondSummary((String) null);
     }
 
     @Test
@@ -1132,24 +1190,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void forgetNetwork_v1_Passpoint() {
-        setUpForConnectedNetwork();
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
-
-        mockWifiConfig.networkId = 5;
-        when(mockAccessPoint.isPasspoint()).thenReturn(true);
-        when(mockAccessPoint.getPasspointFqdn()).thenReturn(FQDN);
-
-        mController.displayPreference(mockScreen);
-        mForgetClickListener.getValue().onClick(null);
-
-        verify(mockWifiManager).removePasspointConfiguration(FQDN);
-        verify(mockMetricsFeatureProvider)
-                .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
-    }
-
-    @Test
-    public void forgetNetwork_PasspointV2_shouldShowDialog() {
+    public void forgetNetwork_shouldShowDialog() {
         setUpForConnectedNetwork();
         final WifiDetailPreferenceController spyController = spy(mController);
 
@@ -1157,7 +1198,6 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.isPasspoint()).thenReturn(true);
         when(mockAccessPoint.getPasspointFqdn()).thenReturn(FQDN);
         spyController.displayPreference(mockScreen);
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
 
         mForgetClickListener.getValue().onClick(null);
 
@@ -1292,10 +1332,37 @@ public class WifiDetailPreferenceControllerTest {
 
         nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
         updateNetworkCapabilities(nc);
+
+        inOrder.verify(mockButtonsPref).setButton2Text(R.string.wifi_sign_in_button_text);
         inOrder.verify(mockButtonsPref).setButton2Visible(true);
 
         nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
         updateNetworkCapabilities(nc);
+        inOrder.verify(mockButtonsPref).setButton2Visible(false);
+    }
+
+    @Test
+    public void captivePortal_shouldShowVenueInfoButton() {
+        setUpForConnectedNetwork();
+
+        InOrder inOrder = inOrder(mockButtonsPref);
+
+        displayAndResume();
+
+        inOrder.verify(mockButtonsPref).setButton2Visible(false);
+
+        LinkProperties lp = new LinkProperties();
+        final CaptivePortalData data = new CaptivePortalData.Builder()
+                .setVenueInfoUrl(Uri.parse("https://example.com/info"))
+                .build();
+        lp.setCaptivePortalData(data);
+        updateLinkProperties(lp);
+
+        inOrder.verify(mockButtonsPref).setButton2Text(R.string.wifi_venue_website_button_text);
+        inOrder.verify(mockButtonsPref).setButton2Visible(true);
+
+        lp.setCaptivePortalData(null);
+        updateLinkProperties(lp);
         inOrder.verify(mockButtonsPref).setButton2Visible(false);
     }
 
@@ -1306,7 +1373,8 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         ArgumentCaptor<OnClickListener> captor = ArgumentCaptor.forClass(OnClickListener.class);
-        verify(mockButtonsPref).setButton2OnClickListener(captor.capture());
+        verify(mockButtonsPref, atLeastOnce()).setButton2OnClickListener(captor.capture());
+        // getValue() returns the last captured value
         captor.getValue().onClick(null);
         verify(mockConnectivityManager).startCaptivePortalApp(mockNetwork);
         verify(mockMetricsFeatureProvider)
@@ -1851,6 +1919,46 @@ public class WifiDetailPreferenceControllerTest {
         verify(mockHeaderController, times(1)).setIcon(drawableCaptor.capture());
         ColorDrawable icon = drawableCaptor.getValue();
         assertThat(icon).isNotNull();
+    }
+
+    @Test
+    public void checkMacTitle_whenPrivacyRandomizedMac_shouldBeRandom() {
+        setUpForDisconnectedNetwork();
+        mockWifiConfig.macRandomizationSetting = WifiConfiguration.RANDOMIZATION_PERSISTENT;
+        when(mockWifiConfig.getRandomizedMacAddress()).thenReturn(mockMacAddress);
+        when(mockMacAddress.toString()).thenReturn(RANDOMIZED_MAC_ADDRESS);
+
+        displayAndResume();
+
+        verify(mockMacAddressPref).setTitle(R.string.wifi_advanced_randomized_mac_address_title);
+    }
+
+    @Test
+    public void checkMacTitle_whenPrivacyDeviceMac_shouldBeFactory() {
+        setUpForDisconnectedNetwork();
+        mockWifiConfig.macRandomizationSetting = WifiConfiguration.RANDOMIZATION_NONE;
+        when(mockWifiConfig.getRandomizedMacAddress()).thenReturn(mockMacAddress);
+        when(mockWifiManager.getFactoryMacAddresses())
+                .thenReturn(new String[]{FACTORY_MAC_ADDRESS});
+
+        displayAndResume();
+
+        verify(mockMacAddressPref).setTitle(R.string.wifi_advanced_device_mac_address_title);
+    }
+
+    @Test
+    public void entityHeader_expiredPasspointR1_shouldHandleExpiration() {
+        when(mockAccessPoint.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.isPasspointConfigurationR1()).thenReturn(true);
+        when(mockAccessPoint.isExpired()).thenReturn(true);
+        setUpForDisconnectedNetwork();
+        String expireSummary = mContext.getResources().getString(
+                com.android.settingslib.R.string.wifi_passpoint_expired);
+
+        displayAndResume();
+
+        verify(mockButtonsPref, atLeastOnce()).setButton3Visible(false);
+        verify(mockHeaderController).setSummary(expireSummary);
     }
 
     private ActionButtonsPreference createMock() {

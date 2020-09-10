@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.specialaccess.premiumsms;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -47,7 +47,7 @@ public class PremiumSmsControllerTest {
 
     @Test
     public void getAvailability_byDefault_shouldBeShown() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

@@ -17,21 +17,14 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Accessibility settings for the vibration.
- */
-@SearchIndexable
+/** Accessibility settings for the vibration. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class VibrationSettings extends DashboardFragment {
 
     private static final String TAG = "VibrationSettings";
@@ -39,6 +32,11 @@ public class VibrationSettings extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_VIBRATION;
+    }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_uri_accessibility_vibration;
     }
 
     @Override
@@ -51,16 +49,6 @@ public class VibrationSettings extends DashboardFragment {
         return TAG;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    List<SearchIndexableResource> indexables = new ArrayList<>();
-                    SearchIndexableResource indexable = new SearchIndexableResource(context);
-                    indexable.xmlResId = R.xml.accessibility_vibration_settings;
-                    indexables.add(indexable);
-                    return indexables;
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.accessibility_vibration_settings);
 }

@@ -123,7 +123,7 @@ public class WallpaperPreferenceControllerTest {
         assertThat(mController.getKeywords())
                 .contains(mContext.getString(R.string.keywords_wallpaper));
         assertThat(mController.getKeywords())
-                .doesNotContain(mContext.getString(R.string.theme_customization_category));
+                .doesNotContain(mContext.getString(R.string.keywords_styles));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class WallpaperPreferenceControllerTest {
         assertThat(mController.getKeywords())
                 .contains(mContext.getString(R.string.keywords_wallpaper));
         assertThat(mController.getKeywords())
-                .contains(mContext.getString(R.string.theme_customization_category));
+                .contains(mContext.getString(R.string.keywords_styles));
     }
 
     @Test

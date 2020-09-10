@@ -33,13 +33,20 @@ public class AppStateUsageBridge extends AppStateAppOpsBridge {
     private static final String TAG = "AppStateUsageBridge";
 
     private static final String PM_USAGE_STATS = Manifest.permission.PACKAGE_USAGE_STATS;
-    private static final int APP_OPS_OP_CODE = AppOpsManager.OP_GET_USAGE_STATS;
-    private static final String[] PM_PERMISSION = {
-            PM_USAGE_STATS
+    private static final String PM_LOADER_STATS = Manifest.permission.LOADER_USAGE_STATS;
+    private static final int APP_OPS_USAGE_STATS = AppOpsManager.OP_GET_USAGE_STATS;
+    private static final int APP_OPS_LOADER_STATS = AppOpsManager.OP_LOADER_USAGE_STATS;
+    private static final int[] APP_OPS_OP_CODES = {
+            APP_OPS_USAGE_STATS,
+            APP_OPS_LOADER_STATS,
+    };
+    private static final String[] PM_PERMISSIONS = {
+            PM_USAGE_STATS,
+            PM_LOADER_STATS,
     };
 
     public AppStateUsageBridge(Context context, ApplicationsState appState, Callback callback) {
-        super(context, appState, callback, APP_OPS_OP_CODE, PM_PERMISSION);
+        super(context, appState, callback, APP_OPS_OP_CODES, PM_PERMISSIONS);
     }
 
     @Override

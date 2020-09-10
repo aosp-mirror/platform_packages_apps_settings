@@ -16,16 +16,12 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityEvent;
-import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -39,10 +35,6 @@ import com.android.settings.R;
 public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG_FRAGMENT_WIFI_NETWORK_LIST = "wifi_network_list_fragment";
 
-    private ListView mSavedWifiNetworkList;
-    private Button mButtonLeft;
-    private Button mButtonRight;
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
@@ -52,13 +44,8 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final ActionBar actionBar = getActivity().getActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-
-        /** Embeded WifiNetworkListFragment as child fragment within
-         * WifiDppChooseSavedWifiNetworkFragment. */
+        // Embedded WifiNetworkListFragment as child fragment within
+        // WifiDppChooseSavedWifiNetworkFragment.
         final FragmentManager fragmentManager = getChildFragmentManager();
         final WifiNetworkListFragment fragment = new WifiNetworkListFragment();
         final Bundle args = getArguments();
@@ -82,14 +69,11 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setHeaderIconImageResource(R.drawable.ic_wifi_signal_4);
-
-        mTitle.setText(R.string.wifi_dpp_choose_network);
+        setHeaderTitle(R.string.wifi_dpp_choose_network);
         mSummary.setText(R.string.wifi_dpp_choose_network_to_connect_device);
 
-        mButtonLeft = view.findViewById(R.id.button_left);
-        mButtonLeft.setText(R.string.cancel);
-        mButtonLeft.setOnClickListener(v -> {
+        mLeftButton.setText(getContext(), R.string.cancel);
+        mLeftButton.setOnClickListener(v -> {
             String action = null;
             final Intent intent = getActivity().getIntent();
             if (intent != null) {
@@ -104,13 +88,11 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
             }
         });
 
-        mButtonRight = view.findViewById(R.id.button_right);
-        mButtonRight.setVisibility(View.GONE);
+        mRightButton.setVisibility(View.GONE);
+    }
 
-        if (savedInstanceState == null) {
-            // For Talkback to describe this fragment
-            mTitleSummaryContainer.sendAccessibilityEvent(
-                    AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
-        }
+    @Override
+    protected boolean isFooterAvailable() {
+        return true;
     }
 }

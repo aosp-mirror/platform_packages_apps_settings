@@ -35,6 +35,11 @@ public class ShadowRotationPolicy {
     }
 
     @Implementation
+    protected static void setRotationLockForAccessibility(Context context, final boolean enabled) {
+        rotationLockEnabled = enabled;
+    }
+
+    @Implementation
     protected static boolean isRotationLocked(Context context) {
         return rotationLockEnabled;
     }
