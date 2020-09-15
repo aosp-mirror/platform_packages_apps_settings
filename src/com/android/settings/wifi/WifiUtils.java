@@ -56,12 +56,12 @@ public class WifiUtils {
     }
 
     /**
-     * Check if the WPA2-PSK hotspot password is valid.
+     * Check if the hotspot password is valid.
      */
-    public static boolean isHotspotWpa2PasswordValid(String password) {
+    public static boolean isHotspotPasswordValid(String password, int securityType) {
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         try {
-            configBuilder.setPassphrase(password, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
+            configBuilder.setPassphrase(password, securityType);
         } catch (IllegalArgumentException e) {
             return false;
         }
