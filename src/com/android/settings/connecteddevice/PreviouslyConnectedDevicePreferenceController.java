@@ -15,7 +15,11 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -23,6 +27,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
@@ -37,17 +42,34 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback {
 
     private static final int MAX_DEVICE_NUM = 3;
+    private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
 
     private PreferenceGroup mPreferenceGroup;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private DockUpdater mSavedDockUpdater;
     private int mPreferenceSize;
+    private BluetoothAdapter mBluetoothAdapter;
+
+    @VisibleForTesting
+    Preference mSeeAllPreference;
+    @VisibleForTesting
+    IntentFilter mIntentFilter;
+
+    @VisibleForTesting
+    BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updatePreferenceVisibility();
+        }
+    };
 
     public PreviouslyConnectedDevicePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
 
         mSavedDockUpdater = FeatureFactory.getFactory(
                 context).getDockUpdaterFeatureProvider().getSavedDockUpdater(context, this);
+        mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     @Override
@@ -62,7 +84,8 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceGroup = screen.findPreference(getPreferenceKey());
-        mPreferenceGroup.setVisible(false);
+        mSeeAllPreference = mPreferenceGroup.findPreference(KEY_SEE_ALL);
+        updatePreferenceVisibility();
 
         if (isAvailable()) {
             final Context context = screen.getContext();
@@ -75,12 +98,14 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     public void onStart() {
         mBluetoothDeviceUpdater.registerCallback();
         mSavedDockUpdater.registerCallback();
+        mContext.registerReceiver(mReceiver, mIntentFilter);
     }
 
     @Override
     public void onStop() {
         mBluetoothDeviceUpdater.unregisterCallback();
         mSavedDockUpdater.unregisterCallback();
+        mContext.unregisterReceiver(mReceiver);
     }
 
     public void init(DashboardFragment fragment) {
@@ -94,14 +119,14 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         if (mPreferenceSize <= MAX_DEVICE_NUM) {
             mPreferenceGroup.addPreference(preference);
         }
-        updatePreferenceVisiblity();
+        updatePreferenceVisibility();
     }
 
     @Override
     public void onDeviceRemoved(Preference preference) {
         mPreferenceSize--;
         mPreferenceGroup.removePreference(preference);
-        updatePreferenceVisiblity();
+        updatePreferenceVisibility();
     }
 
     @VisibleForTesting
@@ -120,7 +145,12 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     }
 
     @VisibleForTesting
-    void updatePreferenceVisiblity() {
-        mPreferenceGroup.setVisible(mPreferenceSize > 0);
+    void updatePreferenceVisibility() {
+        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
+            mSeeAllPreference.setSummary("");
+        } else {
+            mSeeAllPreference.setSummary(
+                    mContext.getString(R.string.connected_device_see_all_summary));
+        }
     }
 }
