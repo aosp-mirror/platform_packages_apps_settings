@@ -17,10 +17,12 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,7 +37,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -260,5 +261,20 @@ public class BluetoothDevicePreferenceTest {
                 .isEqualTo(preference2.getCachedDevice().getAddress());
         assertThat(mPreferenceList.get(2).getCachedDevice().getAddress())
                 .isEqualTo(preference3.getCachedDevice().getAddress());
+    }
+
+    @Test
+    public void onAttached_callbackNotRemoved_doNotRegisterCallback() {
+        mPreference.onAttached();
+
+        verify(mCachedBluetoothDevice, never()).unregisterCallback(any());
+    }
+
+    @Test
+    public void onAttached_callbackRemoved_registerCallback() {
+        mPreference.onPrepareForRemoval();
+        mPreference.onAttached();
+
+        verify(mCachedBluetoothDevice, times(2)).registerCallback(any());
     }
 }
