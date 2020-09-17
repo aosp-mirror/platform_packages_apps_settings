@@ -280,7 +280,8 @@ public class MobileNetworkUtils {
                 String.format("showEuiccSettings: esimIgnoredDevice: %b, enabledEsimUiByDefault: "
                         + "%b, euiccProvisioned: %b, inDeveloperMode: %b.",
                 esimIgnoredDevice, enabledEsimUiByDefault, euiccProvisioned, inDeveloperMode));
-        return (inDeveloperMode || euiccProvisioned
+        return (euiccProvisioned
+                || (!esimIgnoredDevice && inDeveloperMode)
                 || (!esimIgnoredDevice && enabledEsimUiByDefault
                         && isCurrentCountrySupported(context)));
     }
