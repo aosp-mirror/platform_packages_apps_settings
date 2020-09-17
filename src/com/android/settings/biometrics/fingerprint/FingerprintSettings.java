@@ -570,7 +570,7 @@ public class FingerprintSettings extends SubSettings {
             if (requestCode == CONFIRM_REQUEST || requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
                 mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
-                    if (data != null && BiometricUtils.containsGatekeeperPassword(data)) {
+                    if (data != null && BiometricUtils.containsGatekeeperPasswordHandle(data)) {
                         mFingerprintManager.generateChallenge((sensorId, challenge) -> {
                             mToken = BiometricUtils.requestGatekeeperHat(getActivity(), data,
                                     mUserId, challenge);

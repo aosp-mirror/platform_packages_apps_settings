@@ -43,14 +43,16 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
     public static final int RESULT_SKIP = Activity.RESULT_FIRST_USER + 10;
 
     public static SetupSkipDialog newInstance(boolean isFrpSupported, boolean isPatternMode,
-            boolean isAlphanumericMode, boolean isFingerprintSupported, boolean isFaceSupported) {
+            boolean isAlphanumericMode, boolean forFingerprint, boolean forFace,
+            boolean forBiometrics) {
         SetupSkipDialog dialog = new SetupSkipDialog();
         Bundle args = new Bundle();
         args.putBoolean(ARG_FRP_SUPPORTED, isFrpSupported);
         args.putBoolean(ARG_LOCK_TYPE_PATTERN, isPatternMode);
         args.putBoolean(ARG_LOCK_TYPE_ALPHANUMERIC, isAlphanumericMode);
-        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, isFingerprintSupported);
-        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, isFaceSupported);
+        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, forFingerprint);
+        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, forFace);
+        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, forBiometrics);
         dialog.setArguments(args);
         return dialog;
     }
@@ -68,11 +70,13 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
     @NonNull
     public AlertDialog.Builder onCreateDialogBuilder() {
         Bundle args = getArguments();
-        final boolean isFaceSupported =
+        final boolean forFace =
                 args.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE);
-        final boolean isFingerprintSupported =
+        final boolean forFingerprint =
                 args.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT);
-        if (isFaceSupported || isFingerprintSupported) {
+        final boolean forBiometrics =
+                args.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS);
+        if (forFace || forFingerprint || forBiometrics) {
             final int titleId;
 
             if (args.getBoolean(ARG_LOCK_TYPE_PATTERN)) {
@@ -82,13 +86,20 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
                     R.string.lock_screen_password_skip_title : R.string.lock_screen_pin_skip_title;
             }
 
+            final int msgResId;
+            if (forBiometrics) {
+                msgResId = R.string.biometrics_lock_screen_setup_skip_dialog_text;
+            } else if (forFace) {
+                msgResId = R.string.face_lock_screen_setup_skip_dialog_text;
+            } else {
+                msgResId = R.string.fingerprint_lock_screen_setup_skip_dialog_text;
+            }
+
             return new AlertDialog.Builder(getContext())
                     .setPositiveButton(R.string.skip_lock_screen_dialog_button_label, this)
                     .setNegativeButton(R.string.cancel_lock_screen_dialog_button_label, this)
                     .setTitle(titleId)
-                    .setMessage(isFaceSupported ?
-                            R.string.face_lock_screen_setup_skip_dialog_text :
-                            R.string.fingerprint_lock_screen_setup_skip_dialog_text);
+                    .setMessage(msgResId);
         } else {
             return new AlertDialog.Builder(getContext())
                     .setPositiveButton(R.string.skip_anyway_button_label, this)

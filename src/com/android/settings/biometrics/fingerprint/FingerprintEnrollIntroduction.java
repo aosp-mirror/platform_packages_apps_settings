@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -35,6 +37,8 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.span.LinkSpan;
+
+import java.util.List;
 
 public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
@@ -45,13 +49,14 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_face_enroll_introduction_cancel)
-                        .setListener(this::onCancelButtonClick)
+                        .setText(getNegativeButtonTextId())
+                        .setListener(this::onSkipButtonClick)
                         .setButtonType(FooterButton.ButtonType.SKIP)
                         .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
@@ -65,6 +70,10 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
+    }
+
+    int getNegativeButtonTextId() {
+        return R.string.security_settings_fingerprint_enroll_introduction_no_thanks;
     }
 
     @Override
@@ -117,8 +126,10 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected int checkMaxEnrolled() {
         if (mFingerprintManager != null) {
-            final int max = getResources().getInteger(
-                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+            final List<FingerprintSensorProperties> props =
+                    mFingerprintManager.getSensorProperties();
+            // This will need to be updated for devices with multiple fingerprint sensors
+            final int max = props.get(0).maxTemplatesAllowed;
             final int numEnrolledFingerprints =
                     mFingerprintManager.getEnrolledFingerprints(mUserId).size();
             if (numEnrolledFingerprints >= max) {
@@ -147,7 +158,12 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected Intent getEnrollingIntent() {
-        return new Intent(this, FingerprintEnrollFindSensor.class);
+        final Intent intent = new Intent(this, FingerprintEnrollFindSensor.class);
+        if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                    BiometricUtils.getGatekeeperPasswordHandle(getIntent()));
+        }
+        return intent;
     }
 
     @Override
