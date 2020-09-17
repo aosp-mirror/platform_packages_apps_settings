@@ -89,7 +89,7 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
                 LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS,
                 1);
 
-        mController.updateState(mPreference);
+        mController.displayPreference(mScreen);
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(R.string.lock_screen_notifs_show_none));
@@ -107,7 +107,7 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
                 LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS,
                 0);
 
-        mController.updateState(mPreference);
+        mController.displayPreference(mScreen);
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(R.string.lock_screen_notifs_show_alerting));
@@ -124,7 +124,7 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
                 LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS,
                 1);
 
-        mController.updateState(mPreference);
+        mController.displayPreference(mScreen);
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(R.string.lock_screen_notifs_show_all));
@@ -136,7 +136,7 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
     public void updateState_allNotifsOnLockscreen_isDefault() {
         // settings don't exist
 
-        mController.updateState(mPreference);
+        mController.displayPreference(mScreen);
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(R.string.lock_screen_notifs_show_all));
@@ -158,7 +158,7 @@ public class ShowOnLockscreenNotificationPreferenceControllerTest {
         ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
 
-        mController.updateState(mPreference);
+        mController.displayPreference(mScreen);
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(R.string.lock_screen_notifs_show_none));
