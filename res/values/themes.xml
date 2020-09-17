@@ -32,6 +32,7 @@
         <item name="android:listPreferredItemHeight">72dip</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:datePickerDialogTheme">@style/PickerDialogTheme.Settings</item>
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="face_layout_theme">@style/FaceLayoutTheme</item>
@@ -209,6 +210,10 @@
         <item name="android:windowBackground">@android:color/white</item>
     </style>
 
+    <style name="Theme.Settings.ContextualCard" parent="Theme.Settings.Home">
+        <item name="android:textAppearanceListItem">@style/TextAppearance.HomepageCardTitle</item>
+    </style>
+
     <!-- Note that Dialog themes do not set list dividers -->
     <style name="Theme.Panel" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog">
         <item name="android:windowBackground">@null</item>
@@ -251,5 +256,9 @@
         <item name="android:colorPrimary">@android:color/white</item>
         <item name="android:colorPrimaryDark">@android:color/white</item>
         <item name="android:colorAccent">@color/material_blue_700</item>
+    </style>
+    <!-- Material theme for the pages containing TabLayout and ViewPager -->
+    <style name="Theme.TabTheme" parent="@style/Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">@*android:color/edge_effect_device_default_light</item>
     </style>
 </resources>

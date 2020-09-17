@@ -19,7 +19,9 @@ package com.android.settings.biometrics.face;
 import static android.app.Activity.RESULT_OK;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
+import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -28,7 +30,6 @@ import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -56,6 +57,11 @@ public class FaceSettings extends DashboardFragment {
 
     private static final String TAG = "FaceSettings";
     private static final String KEY_TOKEN = "hw_auth_token";
+
+    private static final String PREF_KEY_DELETE_FACE_DATA =
+            "security_settings_face_delete_faces_container";
+    private static final String PREF_KEY_ENROLL_FACE_UNLOCK =
+            "security_settings_face_enroll_faces_container";
 
     private UserManager mUserManager;
     private FaceManager mFaceManager;
@@ -86,9 +92,23 @@ public class FaceSettings extends DashboardFragment {
         mEnrollButton.setVisible(true);
     };
 
-    public static boolean isAvailable(Context context) {
+    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
+            startActivityForResult(intent, ENROLL_REQUEST);
+
+    /**
+     * @param context
+     * @return true if the Face hardware is detected.
+     */
+    public static boolean isFaceHardwareDetected(Context context) {
         FaceManager manager = Utils.getFaceManagerOrNull(context);
-        return manager != null && manager.isHardwareDetected();
+        boolean isHardwareDetected = false;
+        if (manager == null) {
+            Log.d(TAG, "FaceManager is null");
+        } else {
+            isHardwareDetected = manager.isHardwareDetected();
+            Log.d(TAG, "FaceManager is not null. Hardware detected: " + isHardwareDetected);
+        }
+        return manager != null && isHardwareDetected;
     }
 
     @Override
@@ -116,9 +136,17 @@ public class FaceSettings extends DashboardFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final Context context = getPrefContext();
+        if (!isFaceHardwareDetected(context)) {
+            Log.w(TAG, "no faceManager, finish this");
+            finish();
+            return;
+        }
+
+        mUserManager = context.getSystemService(UserManager.class);
+        mFaceManager = context.getSystemService(FaceManager.class);
         mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
-        mUserManager = getPrefContext().getSystemService(UserManager.class);
-        mFaceManager = getPrefContext().getSystemService(FaceManager.class);
+
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
         mFaceFeatureProvider = FeatureFactory.getFactory(getContext()).getFaceFeatureProvider();
@@ -218,11 +246,16 @@ public class FaceSettings extends DashboardFragment {
                     }
                 }
             }
+        } else if (requestCode == ENROLL_REQUEST) {
+            if (resultCode == RESULT_TIMEOUT) {
+                setResult(resultCode, data);
+                finish();
+            }
         }
 
         if (mToken == null) {
             // Didn't get an authentication, finishing
-            getActivity().finish();
+            finish();
         }
     }
 
@@ -240,7 +273,7 @@ public class FaceSettings extends DashboardFragment {
                 }
                 mToken = null;
             }
-            getActivity().finish();
+            finish();
         }
     }
 
@@ -251,7 +284,7 @@ public class FaceSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        if (!isAvailable(context)) {
+        if (!isFaceHardwareDetected(context)) {
             return null;
         }
         mControllers = buildPreferenceControllers(context, getSettingsLifecycle());
@@ -265,6 +298,7 @@ public class FaceSettings extends DashboardFragment {
                 mRemoveController.setActivity((SettingsActivity) getActivity());
             } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
                 mEnrollController = (FaceSettingsEnrollButtonPreferenceController) controller;
+                mEnrollController.setListener(mEnrollListener);
                 mEnrollController.setActivity((SettingsActivity) getActivity());
             }
         }
@@ -275,7 +309,6 @@ public class FaceSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new FaceSettingsVideoPreferenceController(context));
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
         controllers.add(new FaceSettingsAttentionPreferenceController(context));
@@ -286,20 +319,13 @@ public class FaceSettings extends DashboardFragment {
         return controllers;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.security_settings_face;
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.security_settings_face) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    if (isAvailable(context)) {
+                    if (isFaceHardwareDetected(context)) {
                         return buildPreferenceControllers(context, null /* lifecycle */);
                     } else {
                         return null;
@@ -308,8 +334,48 @@ public class FaceSettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return isAvailable(context);
+                    if (isFaceHardwareDetected(context)) {
+                        return hasEnrolledBiometrics(context);
+                    }
+
+                    return false;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    final boolean isFaceHardwareDetected = isFaceHardwareDetected(context);
+                    Log.d(TAG, "Get non indexable keys. isFaceHardwareDetected: "
+                            + isFaceHardwareDetected + ", size:" + keys.size());
+                    if (isFaceHardwareDetected) {
+                        final boolean hasEnrolled = hasEnrolledBiometrics(context);
+                        keys.add(hasEnrolled ? PREF_KEY_ENROLL_FACE_UNLOCK
+                                : PREF_KEY_DELETE_FACE_DATA);
+                    }
+
+                    if (!isAttentionSupported(context)) {
+                        keys.add(FaceSettingsAttentionPreferenceController.KEY);
+                    }
+
+                    return keys;
+                }
+
+                private boolean isAttentionSupported(Context context) {
+                    FaceFeatureProvider featureProvider = FeatureFactory.getFactory(
+                            context).getFaceFeatureProvider();
+                    boolean isAttentionSupported = false;
+                    if (featureProvider != null) {
+                        isAttentionSupported = featureProvider.isAttentionSupported(context);
+                    }
+                    return isAttentionSupported;
+                }
+
+                private boolean hasEnrolledBiometrics(Context context) {
+                    final FaceManager faceManager = Utils.getFaceManagerOrNull(context);
+                    if (faceManager != null) {
+                        return faceManager.hasEnrolledTemplates(UserHandle.myUserId());
+                    }
+                    return false;
                 }
             };
-
 }

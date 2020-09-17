@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -58,6 +59,8 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     private static final int BATTERY_LEVEL_MAIN = 30;
     private static final int BATTERY_LEVEL_LEFT = 25;
     private static final int BATTERY_LEVEL_RIGHT = 45;
+    private static final int LOW_BATTERY_LEVEL = 15;
+    private static final int CASE_LOW_BATTERY_LEVEL = 19;
     private static final String ICON_URI = "content://test.provider/icon.png";
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
@@ -115,6 +118,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY)).thenReturn(
                 String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
+
         when(mCachedDevice.isConnected()).thenReturn(true);
         mController.refresh();
 
@@ -141,6 +145,37 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                 View.GONE);
         assertThat(layout.findViewById(R.id.bt_battery_icon).getVisibility()).isEqualTo(View.GONE);
         assertThat(layout.findViewById(R.id.header_icon).getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void refresh_withLowBatteryAndUncharged_showAlertIcon() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
+                String.valueOf(LOW_BATTERY_LEVEL).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY)).thenReturn(
+                String.valueOf(LOW_BATTERY_LEVEL).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY)).thenReturn(
+                String.valueOf(CASE_LOW_BATTERY_LEVEL).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_LEFT_CHARGING)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_RIGHT_CHARGING)).thenReturn(
+                String.valueOf(true).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_CASE_CHARGING)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_left),
+                R.drawable.ic_battery_alert_24dp);
+        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_right), /* resId= */-1);
+        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle),
+                R.drawable.ic_battery_alert_24dp);
     }
 
     @Test
@@ -210,11 +245,8 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void onStop_isAvailable_unregisterCallback() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("true".getBytes());
+    public void onStop_isRegisterCallback_unregisterCallback() {
+        mController.mIsRegisterCallback = true;
 
         mController.onStop();
 
@@ -234,9 +266,8 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void onStop_notAvailable_unregisterCallback() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("false".getBytes());
+    public void onStop_notRegisterCallback_unregisterCallback() {
+        mController.mIsRegisterCallback = false;
 
         mController.onStop();
 
@@ -245,11 +276,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void onDestroy_isAvailable_recycleBitmap() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("true".getBytes());
+    public void onDestroy_recycleBitmap() {
         mController.mIconCache.put(ICON_URI, mBitmap);
 
         mController.onDestroy();
@@ -262,6 +289,12 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         final TextView textView = linearLayout.findViewById(R.id.bt_battery_summary);
         assertThat(textView.getText().toString()).isEqualTo(
                 com.android.settings.Utils.formatPercentage(batteryLevel));
+    }
+
+    private void assertBatteryIcon(LinearLayout linearLayout, int resId) {
+        final ImageView imageView = linearLayout.findViewById(R.id.bt_battery_icon);
+        assertThat(shadowOf(imageView.getDrawable()).getCreatedFromResId())
+                .isEqualTo(resId);
     }
 
 }

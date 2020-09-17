@@ -35,7 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;

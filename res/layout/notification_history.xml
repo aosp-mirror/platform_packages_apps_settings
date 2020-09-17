@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/styled_switch_bar"/>
+
+        <LinearLayout
+            android:id="@+id/history_off"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="164dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/history_image"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter"
+                android:focusable="false"
+                android:tint="?android:attr/colorControlNormal"
+                android:src="@drawable/ic_history" />
+
+            <TextView
+                android:id="@+id/history_off_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:focusable="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/notification_history_off_title_extended" />
+
+            <TextView
+                android:id="@+id/history_off_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:focusable="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/notification_history_off_summary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/history_on_empty"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="164dp"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/history_image_on"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter"
+                android:focusable="false"
+                android:tint="?android:attr/colorControlNormal"
+                android:src="@drawable/ic_history" />
+            <TextView
+                android:id="@+id/history_toggled_on_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:focusable="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/history_toggled_on_title" />
+
+            <TextView
+                android:id="@+id/history_toggled_on_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/history_off_title"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:focusable="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/history_toggled_on_summary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/history_on"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/snoozed_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="28dp">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/notification_history_snooze"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textAppearance="@style/TextAppearance.HomepageCardTitle"
+                    android:paddingBottom="16dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/notification_list"
+                        android:elevation="1dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="true"
+                        android:scrollbars="none"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/recently_dismissed_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="28dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/notification_history_dismiss"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textAppearance="@style/TextAppearance.HomepageCardTitle"
+                    android:paddingBottom="16dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/notification_list"
+                        android:elevation="1dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="true"
+                        android:scrollbars="none"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/today_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/notification_history_today"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textAppearance="@style/TextAppearance.HomepageCardTitle"
+                    android:paddingBottom="16dp" />
+                <LinearLayout
+                    android:id="@+id/apps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="1dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_bg">
+                    <!-- app based recycler views added here -->
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -61,6 +61,11 @@ public class GlobalActionsPanelPreferenceController extends GesturePreferenceCon
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean isChecked() {
         int enabled = Settings.Secure.getInt(mContext.getContentResolver(), ENABLED_SETTING, 0);
         return enabled == 1;

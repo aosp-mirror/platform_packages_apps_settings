@@ -16,9 +16,11 @@
 
 package com.android.settings.applications.appinfo;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.util.Log;
@@ -28,14 +30,25 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.PermissionsSummaryHelper;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class AppPermissionPreferenceController extends AppInfoPreferenceControllerBase {
+/**
+ * A PreferenceController handling the logic for permissions of apps.
+ */
+public class AppPermissionPreferenceController extends AppInfoPreferenceControllerBase implements
+        LifecycleObserver, OnStart, OnStop {
 
     private static final String TAG = "PermissionPrefControl";
     private static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
+    private static final long INVALID_SESSION_ID = 0;
+
+    private final PackageManager mPackageManager;
 
     private String mPackageName;
 
@@ -73,8 +86,22 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
         }
     };
 
+    private final PackageManager.OnPermissionsChangedListener mOnPermissionsChangedListener =
+            uid -> updateState(mPreference);
+
     public AppPermissionPreferenceController(Context context, String key) {
         super(context, key);
+        mPackageManager = context.getPackageManager();
+    }
+
+    @Override
+    public void onStart() {
+        mPackageManager.addOnPermissionsChangeListener(mOnPermissionsChangedListener);
+    }
+
+    @Override
+    public void onStop() {
+        mPackageManager.removeOnPermissionsChangeListener(mOnPermissionsChangedListener);
     }
 
     @Override
@@ -97,11 +124,28 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
 
     private void startManagePermissionsActivity() {
         // start new activity to manage app permissions
-        final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
-        intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mParent.getAppEntry().info.packageName);
-        intent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
+        final Intent permIntent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
+        permIntent.putExtra(Intent.EXTRA_PACKAGE_NAME, mParent.getAppEntry().info.packageName);
+        permIntent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
+        Activity activity = mParent.getActivity();
+        Intent intent = activity != null ? activity.getIntent() : null;
+        if (intent != null) {
+            String action = intent.getAction();
+            long sessionId = intent.getLongExtra(
+                    Intent.ACTION_AUTO_REVOKE_PERMISSIONS, INVALID_SESSION_ID);
+            if ((action != null && action.equals(Intent.ACTION_AUTO_REVOKE_PERMISSIONS))
+                    || sessionId != INVALID_SESSION_ID) {
+                // If intent is Auto revoke, and we don't already have a session ID, make one
+                while (sessionId == INVALID_SESSION_ID) {
+                    sessionId = new Random().nextLong();
+                }
+                permIntent.putExtra(Intent.ACTION_AUTO_REVOKE_PERMISSIONS, sessionId);
+            }
+        }
         try {
-            mParent.getActivity().startActivityForResult(intent, mParent.SUB_INFO_FRAGMENT);
+            if (activity != null) {
+                activity.startActivityForResult(permIntent, mParent.SUB_INFO_FRAGMENT);
+            }
         } catch (ActivityNotFoundException e) {
             Log.w(TAG, "No app can handle android.intent.action.MANAGE_APP_PERMISSIONS");
         }

@@ -16,13 +16,16 @@
 
 package com.android.settings.datetime.timezone;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.spy;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
-import androidx.preference.Preference;
+import static com.google.common.truth.Truth.assertThat;
+
+import android.content.Context;
 
 import com.android.settings.datetime.timezone.TimeZoneInfo.Formatter;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -34,20 +37,38 @@ import java.util.Locale;
 @RunWith(RobolectricTestRunner.class)
 public class TimeZoneInfoPreferenceControllerTest {
 
-    @Test
-    public void updateState_matchExpectedFormattedText() {
-        Date now = new Date(0L); // 00:00 1/1/1970
-        Formatter formatter = new Formatter(Locale.US, now);
+    private TimeZoneInfo mTimeZoneInfo;
+    private TimeZoneInfoPreferenceController mController;
 
-        TimeZoneInfo timeZoneInfo = formatter.format("America/Los_Angeles");
-        TimeZoneInfoPreferenceController controller =
-                new TimeZoneInfoPreferenceController(RuntimeEnvironment.application);
-        controller.mDate = now;
-        controller.setTimeZoneInfo(timeZoneInfo);
-        Preference preference = spy(new Preference(RuntimeEnvironment.application));
-        controller.updateState(preference);
-        assertEquals("Uses Pacific Time (GMT-08:00). "
-                        + "Pacific Daylight Time starts on April 26, 1970.",
-                preference.getTitle().toString());
+    @Before
+    public void setUp() {
+        final Context context = RuntimeEnvironment.application;
+        final Date now = new Date(0L); // 00:00 1/1/1970
+        final Formatter formatter = new Formatter(Locale.US, now);
+        mTimeZoneInfo = formatter.format("America/Los_Angeles");
+        mController = new TimeZoneInfoPreferenceController(context, "key");
+        mController.mDate = now;
+        mController.setTimeZoneInfo(mTimeZoneInfo);
+    }
+
+    @Test
+    public void getSummary_matchExpectedFormattedText() {
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                "Uses Pacific Time (GMT-08:00). "
+                        + "Pacific Daylight Time starts on April 26, 1970.");
+    }
+
+    @Test
+    public void getAvailabilityStatus_timeZoneInfoSet_shouldReturnAVAILABLE_UNSEARCHABLE() {
+        mController.setTimeZoneInfo(mTimeZoneInfo);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_noTimeZoneInfoSet_shouldReturnUNSUPPORTED_ON_DEVICE() {
+        mController.setTimeZoneInfo(null);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

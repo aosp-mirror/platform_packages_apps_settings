@@ -19,6 +19,8 @@ package com.android.settings.password;
 import android.content.Context;
 import android.content.Intent;
 
+import com.android.internal.widget.LockscreenCredential;
+
 /**
  * Helper for handling managed passwords in security settings UI.
  * It provides resources that should be shown in settings UI when lock password quality is set to
@@ -59,7 +61,7 @@ public class ManagedLockPasswordProvider {
      * @param password Current lock password.
      * @return Intent that should update lock password to a managed password.
      */
-    Intent createIntent(boolean requirePasswordToDecrypt, byte[] password) {
+    Intent createIntent(boolean requirePasswordToDecrypt, LockscreenCredential password) {
         return null;
     }
 }

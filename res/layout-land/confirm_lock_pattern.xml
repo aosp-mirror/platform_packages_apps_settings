@@ -13,83 +13,77 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<FrameLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <include layout="@layout/confirm_lock_background_base" />
+    android:layout_height="match_parent"
+    android:icon="@drawable/ic_enterprise"
+    android:layout="@layout/sud_glif_blank_template">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/topLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                style="@*android:style/TextAppearance.DeviceDefault.Headline"
-                android:id="@+id/headerText"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?android:attr/colorAccent"/>
-
-            <TextView
-                style="@*android:style/TextAppearance.DeviceDefault.Body1"
-                android:id="@+id/sud_layout_description"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                style="@android:style/Widget.Material.Button.Borderless"
-                android:id="@+id/cancelButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cancel"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:clipChildren="false"
-            android:clipToPadding="false">
+            android:fillViewport="true">
 
-            <View
-                android:id="@+id/leftSpacer"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clipChildren="false"
-                android:clipToPadding="false">
+                <ImageView
+                    android:id="@+id/sud_layout_icon"
+                    style="@style/SudGlifIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="?attr/sudGlifHeaderGravity"
+                    android:src="@drawable/ic_enterprise" />
 
-                <com.android.internal.widget.LockPatternView
-                    android:id="@+id/lockPattern"
+                <TextView
+                    android:id="@+id/headerText"
+                    style="@style/SudGlifHeaderTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"/>
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/sud_layout_description"
+                    style="@style/SudDescription.Glif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides" />
+
+                <Button
+                    android:id="@+id/cancelButton"
+                    style="@style/SetupWizardButton.Negative"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:text="@string/cancel" />
+
+                <Button
+                    android:id="@+id/forgotButton"
+                    style="@style/SudGlifButton.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     style="@style/TextAppearance.ErrorText"
@@ -97,16 +91,30 @@
                     android:id="@+id/errorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="24dp"/>
-            </FrameLayout>
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center_vertical"/>
 
-            <View
-                android:id="@+id/rightSpacer"
-                android:layout_width="0dp"
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.google.android.setupdesign.view.FillContentLayout
+            style="@style/LockPatternContainerStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingStart="0dp">
+
+            <com.android.internal.widget.LockPatternView
+                android:id="@+id/lockPattern"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
-        </LinearLayout>
+                android:layout_gravity="center" />
+
+        </com.google.android.setupdesign.view.FillContentLayout>
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
-</FrameLayout>
+</com.google.android.setupdesign.GlifLayout>
+

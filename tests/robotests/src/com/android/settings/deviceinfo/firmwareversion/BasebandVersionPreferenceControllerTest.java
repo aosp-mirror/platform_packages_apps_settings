@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionPreferenceController.BASEBAND_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -26,7 +25,7 @@ import static org.robolectric.shadow.api.Shadow.extract;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.os.SystemProperties;
+import android.sysprop.TelephonyProperties;
 
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
@@ -37,6 +36,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.Arrays;
+
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
@@ -64,7 +66,7 @@ public class BasebandVersionPreferenceControllerTest {
     @Test
     public void getAvailability_hasMobile_available() {
         final String text = "test";
-        SystemProperties.set(BASEBAND_PROPERTY, text);
+        TelephonyProperties.baseband_version(Arrays.asList(new String[]{text}));
         ShadowConnectivityManager connectivityManager =
                 extract(mContext.getSystemService(ConnectivityManager.class));
         connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);

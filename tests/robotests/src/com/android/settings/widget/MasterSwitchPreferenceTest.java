@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
@@ -43,161 +42,131 @@ import org.robolectric.RuntimeEnvironment;
 public class MasterSwitchPreferenceTest {
 
     private Context mContext;
+    private MasterSwitchPreference mPreference;
+    private PreferenceViewHolder mHolder;
+    private LinearLayout mWidgetView;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mPreference = new MasterSwitchPreference(mContext);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        mHolder = PreferenceViewHolder.createInstanceForTests(inflater.inflate(
+                com.android.settingslib.R.layout.preference_two_target, null));
+        mWidgetView = mHolder.itemView.findViewById(android.R.id.widget_frame);
+        inflater.inflate(R.layout.restricted_preference_widget_master_switch, mWidgetView, true);
     }
 
     @Test
     public void createNewPreference_shouldSetLayout() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-
-        assertThat(preference.getWidgetLayoutResource())
-                .isEqualTo(R.layout.preference_widget_master_switch);
+        assertThat(mPreference.getWidgetLayoutResource())
+                .isEqualTo(R.layout.restricted_preference_widget_master_switch);
     }
 
     @Test
     public void setChecked_shouldUpdateButtonCheckedState() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                LayoutInflater.from(mContext).inflate(
-                  R.layout.preference_widget_master_switch, null));
-        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
-        preference.onBindViewHolder(holder);
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
+        mPreference.onBindViewHolder(mHolder);
 
-        preference.setChecked(true);
+        mPreference.setChecked(true);
         assertThat(toggle.isChecked()).isTrue();
 
-        preference.setChecked(false);
+        mPreference.setChecked(false);
         assertThat(toggle.isChecked()).isFalse();
     }
 
     @Test
     public void setSwitchEnabled_shouldUpdateButtonEnabledState() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                LayoutInflater.from(mContext).inflate(
-                  R.layout.preference_widget_master_switch, null));
-        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
-        preference.onBindViewHolder(holder);
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
+        mPreference.onBindViewHolder(mHolder);
 
-        preference.setSwitchEnabled(true);
+        mPreference.setSwitchEnabled(true);
         assertThat(toggle.isEnabled()).isTrue();
 
-        preference.setSwitchEnabled(false);
+        mPreference.setSwitchEnabled(false);
         assertThat(toggle.isEnabled()).isFalse();
     }
 
     @Test
     public void setSwitchEnabled_shouldUpdateButtonEnabledState_beforeViewBound() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                LayoutInflater.from(mContext).inflate(
-                        R.layout.preference_widget_master_switch, null));
-        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
 
-        preference.setSwitchEnabled(false);
-        preference.onBindViewHolder(holder);
+        mPreference.setSwitchEnabled(false);
+        mPreference.onBindViewHolder(mHolder);
         assertThat(toggle.isEnabled()).isFalse();
     }
 
     @Test
     public void clickWidgetView_shouldToggleButton() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                inflater.inflate(R.layout.preference_two_target, null));
-        final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
-        assertThat(widgetView).isNotNull();
+        assertThat(mWidgetView).isNotNull();
 
-        inflater.inflate(R.layout.preference_widget_master_switch, widgetView, true);
-        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
-        preference.onBindViewHolder(holder);
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
+        mPreference.onBindViewHolder(mHolder);
 
-        widgetView.performClick();
+        toggle.performClick();
         assertThat(toggle.isChecked()).isTrue();
 
-        widgetView.performClick();
+        toggle.performClick();
         assertThat(toggle.isChecked()).isFalse();
     }
 
     @Test
     public void clickWidgetView_shouldNotToggleButtonIfDisabled() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                inflater.inflate(R.layout.preference_two_target, null));
-        final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
-        assertThat(widgetView).isNotNull();
+        assertThat(mWidgetView).isNotNull();
 
-        inflater.inflate(R.layout.preference_widget_master_switch, widgetView, true);
-        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
-        preference.onBindViewHolder(holder);
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
+        mPreference.onBindViewHolder(mHolder);
         toggle.setEnabled(false);
 
-        widgetView.performClick();
+        mWidgetView.performClick();
         assertThat(toggle.isChecked()).isFalse();
     }
 
     @Test
     public void clickWidgetView_shouldNotifyPreferenceChanged() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                LayoutInflater.from(mContext).inflate(R.layout.preference_two_target, null));
-        final View widgetView = holder.findViewById(android.R.id.widget_frame);
+
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
+
         final OnPreferenceChangeListener listener = mock(OnPreferenceChangeListener.class);
-        preference.setOnPreferenceChangeListener(listener);
-        preference.onBindViewHolder(holder);
+        mPreference.setOnPreferenceChangeListener(listener);
+        mPreference.onBindViewHolder(mHolder);
 
-        preference.setChecked(false);
-        widgetView.performClick();
-        verify(listener).onPreferenceChange(preference, true);
+        mPreference.setChecked(false);
+        toggle.performClick();
+        verify(listener).onPreferenceChange(mPreference, true);
 
-        preference.setChecked(true);
-        widgetView.performClick();
-        verify(listener).onPreferenceChange(preference, false);
+        mPreference.setChecked(true);
+        toggle.performClick();
+        verify(listener).onPreferenceChange(mPreference, false);
     }
 
     @Test
     public void setDisabledByAdmin_hasEnforcedAdmin_shouldDisableButton() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                LayoutInflater.from(mContext)
-                  .inflate(R.layout.preference_widget_master_switch, null));
-        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
         toggle.setEnabled(true);
-        preference.onBindViewHolder(holder);
+        mPreference.onBindViewHolder(mHolder);
 
-        preference.setDisabledByAdmin(mock(EnforcedAdmin.class));
+        mPreference.setDisabledByAdmin(mock(EnforcedAdmin.class));
         assertThat(toggle.isEnabled()).isFalse();
     }
 
     @Test
     public void setDisabledByAdmin_noEnforcedAdmin_shouldEnableButton() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                LayoutInflater.from(mContext)
-                  .inflate(R.layout.preference_widget_master_switch, null));
-        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
         toggle.setEnabled(false);
-        preference.onBindViewHolder(holder);
+        mPreference.onBindViewHolder(mHolder);
 
-        preference.setDisabledByAdmin(null);
+        mPreference.setDisabledByAdmin(null);
         assertThat(toggle.isEnabled()).isTrue();
     }
 
     @Test
     public void onBindViewHolder_toggleButtonShouldHaveContentDescription() {
-        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
-        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-            LayoutInflater.from(mContext)
-                .inflate(R.layout.preference_widget_master_switch, null));
-        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
+        final Switch toggle = (Switch) mHolder.findViewById(R.id.switchWidget);
         final String label = "TestButton";
-        preference.setTitle(label);
+        mPreference.setTitle(label);
 
-        preference.onBindViewHolder(holder);
+        mPreference.onBindViewHolder(mHolder);
 
         assertThat(toggle.getContentDescription()).isEqualTo(label);
     }

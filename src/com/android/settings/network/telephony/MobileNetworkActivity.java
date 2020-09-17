@@ -17,19 +17,17 @@
 package com.android.settings.network.telephony;
 
 import android.app.ActionBar;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.Settings;
-import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
-import android.view.Menu;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -37,21 +35,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
+import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class MobileNetworkActivity extends SettingsBaseActivity {
+/**
+ * Activity for displaying MobileNetworkSettings
+ */
+public class MobileNetworkActivity extends SettingsBaseActivity
+        implements ProxySubscriptionManager.OnActiveSubscriptionChangedListener {
 
     private static final String TAG = "MobileNetworkActivity";
     @VisibleForTesting
@@ -60,29 +56,16 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     static final int SUB_ID_NULL = Integer.MIN_VALUE;
 
     @VisibleForTesting
-    SubscriptionManager mSubscriptionManager;
-    @VisibleForTesting
-    int mCurSubscriptionId;
-    @VisibleForTesting
-    List<SubscriptionInfo> mSubscriptionInfos = new ArrayList<>();
-    private PhoneChangeReceiver mPhoneChangeReceiver;
+    ProxySubscriptionManager mProxySubscriptionMgr;
 
-    private final SubscriptionManager.OnSubscriptionsChangedListener
-            mOnSubscriptionsChangeListener
-            = new SubscriptionManager.OnSubscriptionsChangedListener() {
-        @Override
-        public void onSubscriptionsChanged() {
-            if (!Objects.equals(mSubscriptionInfos,
-                    mSubscriptionManager.getActiveSubscriptionInfoList(true))) {
-                int oldSubIndex = mCurSubscriptionId;
-                updateSubscriptions(null);
-                // Remove the dialog if the subscription associated with this activity changes.
-                if (mCurSubscriptionId != oldSubIndex) {
-                    removeContactDiscoveryDialog(oldSubIndex);
-                }
-            }
-        }
-    };
+    private int mCurSubscriptionId;
+
+    // This flag forces subscription information fragment to be re-created.
+    // Otherwise, fragment will be kept when subscription id has not been changed.
+    //
+    // Set initial value to true allows subscription information fragment to be re-created when
+    // Activity re-create occur.
+    private boolean mFragmentForceReload = true;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -95,7 +78,10 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
             updateSubscriptionIndex = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
         }
         int oldSubId = mCurSubscriptionId;
-        updateSubscriptions(null);
+        mCurSubscriptionId = updateSubscriptionIndex;
+        mFragmentForceReload = (mCurSubscriptionId == oldSubId);
+        final SubscriptionInfo info = getSubscription();
+        updateSubscriptions(info);
 
         // If the subscription has changed or the new intent doesnt contain the opt in action,
         // remove the old discovery dialog. If the activity is being recreated, we will see
@@ -107,60 +93,99 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         // evaluate showing the new discovery dialog if this intent contains an action to show the
         // opt-in.
         if (doesIntentContainOptInAction(intent)) {
-            maybeShowContactDiscoveryDialog(updateSubscriptionIndex);
+            maybeShowContactDiscoveryDialog(info);
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
-            setContentView(R.layout.mobile_network_settings_container_v2);
-        } else {
-            setContentView(R.layout.mobile_network_settings_container);
+        final UserManager userManager = this.getSystemService(UserManager.class);
+        if (!userManager.isAdminUser()) {
+            this.finish();
+            return;
         }
-        setActionBar(findViewById(R.id.mobile_action_bar));
-        mPhoneChangeReceiver = new PhoneChangeReceiver(this, new PhoneChangeReceiver.Client() {
-            @Override
-            public void onPhoneChange() {
-                // When the radio or carrier config changes (ex: CDMA->GSM), refresh the fragment.
-                switchFragment(new MobileNetworkSettings(), mCurSubscriptionId,
-                        true /* forceUpdate */);
-            }
 
-            @Override
-            public int getSubscriptionId() {
-                return mCurSubscriptionId;
-            }
-        });
-        mSubscriptionManager = getSystemService(SubscriptionManager.class);
-        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
-        final Intent startIntent = getIntent();
-        validate(startIntent);
-        mCurSubscriptionId = savedInstanceState != null
-                ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
-                : SUB_ID_NULL;
+        final Toolbar toolbar = findViewById(R.id.action_bar);
+        toolbar.setVisibility(View.VISIBLE);
+        setActionBar(toolbar);
 
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        updateSubscriptions(savedInstanceState);
-        maybeShowContactDiscoveryDialog(mCurSubscriptionId);
+
+        getProxySubscriptionManager().setLifecycle(getLifecycle());
+
+        final Intent startIntent = getIntent();
+        validate(startIntent);
+        mCurSubscriptionId = savedInstanceState != null
+                ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
+                : ((startIntent != null)
+                ? startIntent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
+                : SUB_ID_NULL);
+
+        final SubscriptionInfo subscription = getSubscription();
+        maybeShowContactDiscoveryDialog(subscription);
+
+        // Since onChanged() will take place immediately when addActiveSubscriptionsListener(),
+        // perform registration after mCurSubscriptionId been configured.
+        registerActiveSubscriptionsListener();
+
+        updateSubscriptions(subscription);
+    }
+
+    @VisibleForTesting
+    ProxySubscriptionManager getProxySubscriptionManager() {
+        if (mProxySubscriptionMgr == null) {
+            mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
+        }
+        return mProxySubscriptionMgr;
+    }
+
+    @VisibleForTesting
+    void registerActiveSubscriptionsListener() {
+        getProxySubscriptionManager().addActiveSubscriptionsListener(this);
+    }
+
+    /**
+     * Implementation of ProxySubscriptionManager.OnActiveSubscriptionChangedListener
+     */
+    public void onChanged() {
+        SubscriptionInfo info = getSubscription();
+        int oldSubIndex = mCurSubscriptionId;
+        updateSubscriptions(info);
+
+        // Remove the dialog if the subscription associated with this activity changes.
+        if (info == null) {
+            // Close the activity when subscription removed
+            if ((oldSubIndex != SUB_ID_NULL)
+                    && (!isFinishing()) && (!isDestroyed())) {
+                finish();
+            }
+            return;
+        }
+        int subIndex = info.getSubscriptionId();
+        if (subIndex != oldSubIndex) {
+            removeContactDiscoveryDialog(oldSubIndex);
+        }
     }
 
     @Override
     protected void onStart() {
+        getProxySubscriptionManager().setLifecycle(getLifecycle());
         super.onStart();
-        mPhoneChangeReceiver.register();
-        mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
+        // updateSubscriptions doesn't need to be called, onChanged will always be called after we
+        // register a listener.
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        mPhoneChangeReceiver.unregister();
-        mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mProxySubscriptionMgr == null) {
+            return;
+        }
+        mProxySubscriptionMgr.removeActiveSubscriptionsListener(this);
     }
 
     @Override
@@ -174,25 +199,27 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         outState.putInt(Settings.EXTRA_SUB_ID, mCurSubscriptionId);
     }
 
-    @VisibleForTesting
-    void updateSubscriptions(Bundle savedInstanceState) {
+    private void updateTitleAndNavigation(SubscriptionInfo subscription) {
         // Set the title to the name of the subscription. If we don't have subscription info, the
         // title will just default to the label for this activity that's already specified in
         // AndroidManifest.xml.
-        final SubscriptionInfo subscription = getSubscription();
         if (subscription != null) {
             setTitle(subscription.getDisplayName());
         }
+    }
 
-        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
-
-        if (!FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
-            updateBottomNavigationView();
+    @VisibleForTesting
+    void updateSubscriptions(SubscriptionInfo subscription) {
+        if (subscription == null) {
+            return;
         }
+        final int subscriptionIndex = subscription.getSubscriptionId();
 
-        if (savedInstanceState == null) {
-            switchFragment(new MobileNetworkSettings(), getSubscriptionId());
-        }
+        updateTitleAndNavigation(subscription);
+        switchFragment(subscription);
+
+        mCurSubscriptionId = subscriptionIndex;
+        mFragmentForceReload = false;
     }
 
     /**
@@ -202,137 +229,45 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
      */
     @VisibleForTesting
     SubscriptionInfo getSubscription() {
-        final Intent intent = getIntent();
-        if (intent != null) {
-            final int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
-            SubscriptionInfo info = getSubscriptionInfo(subId);
-            if (info != null) return info;
+        if (mCurSubscriptionId != SUB_ID_NULL) {
+            return getSubscriptionForSubId(mCurSubscriptionId);
         }
-        if (CollectionUtils.isEmpty(mSubscriptionInfos)) {
+        final List<SubscriptionInfo> subInfos = getProxySubscriptionManager()
+                .getActiveSubscriptionsInfo();
+        if (CollectionUtils.isEmpty(subInfos)) {
             return null;
         }
-        return mSubscriptionInfos.get(0);
-    }
-
-    /**
-     * @return the subscription associated with a given subscription ID or null if none can be
-     * found.
-     */
-    SubscriptionInfo getSubscriptionInfo(int subId) {
-        if (subId == SUB_ID_NULL) {
-            return null;
-        }
-
-        for (SubscriptionInfo subscription : SubscriptionUtil.getAvailableSubscriptions(this)) {
-            if (subscription.getSubscriptionId() == subId) {
-                return subscription;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Get the current subId to display.
-     */
-    @VisibleForTesting
-    int getSubscriptionId() {
-        final SubscriptionInfo subscription = getSubscription();
-        if (subscription != null) {
-            return subscription.getSubscriptionId();
-        }
-        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        return subInfos.get(0);
     }
 
     @VisibleForTesting
-    void updateBottomNavigationView() {
-        final BottomNavigationView navigation = findViewById(R.id.bottom_nav);
-
-        if (CollectionUtils.size(mSubscriptionInfos) <= 1) {
-            navigation.setVisibility(View.GONE);
-        } else {
-            final Menu menu = navigation.getMenu();
-            menu.clear();
-            for (int i = 0, size = mSubscriptionInfos.size(); i < size; i++) {
-                final SubscriptionInfo subscriptionInfo = mSubscriptionInfos.get(i);
-                menu.add(0, subscriptionInfo.getSubscriptionId(), i,
-                        subscriptionInfo.getDisplayName())
-                        .setIcon(R.drawable.ic_settings_sim);
-            }
-            navigation.setOnNavigationItemSelectedListener(item -> {
-                switchFragment(new MobileNetworkSettings(), item.getItemId());
-                return true;
-            });
-        }
+    SubscriptionInfo getSubscriptionForSubId(int subId) {
+        return SubscriptionUtil.getAvailableSubscription(this,
+                getProxySubscriptionManager(), subId);
     }
 
     @VisibleForTesting
-    void switchFragment(Fragment fragment, int subscriptionId) {
-        switchFragment(fragment, subscriptionId, false /* forceUpdate */);
-    }
-
-    @VisibleForTesting
-    void switchFragment(Fragment fragment, int subscriptionId, boolean forceUpdate) {
-        if (mCurSubscriptionId != SUB_ID_NULL && subscriptionId == mCurSubscriptionId
-                && !forceUpdate) {
-            return;
-        }
+    void switchFragment(SubscriptionInfo subInfo) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        final int subId = subInfo.getSubscriptionId();
         final Bundle bundle = new Bundle();
-        bundle.putInt(Settings.EXTRA_SUB_ID, subscriptionId);
+        bundle.putInt(Settings.EXTRA_SUB_ID, subId);
 
-        fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.main_content, fragment,
-                buildFragmentTag(subscriptionId));
-        fragmentTransaction.commit();
-        mCurSubscriptionId = subscriptionId;
-    }
-
-    @VisibleForTesting
-    private String buildFragmentTag(int subscriptionId) {
-        return MOBILE_SETTINGS_TAG + subscriptionId;
-    }
-
-    @VisibleForTesting
-    static class PhoneChangeReceiver extends BroadcastReceiver {
-        private Context mContext;
-        private Client mClient;
-
-        interface Client {
-            void onPhoneChange();
-            int getSubscriptionId();
-        }
-
-        public PhoneChangeReceiver(Context context, Client client) {
-            mContext = context;
-            mClient = client;
-        }
-
-        public void register() {
-            final IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
-            intentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
-            mContext.registerReceiver(this, intentFilter);
-        }
-
-        public void unregister() {
-            mContext.unregisterReceiver(this);
-        }
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (isInitialStickyBroadcast()) {
+        final String fragmentTag = buildFragmentTag(subId);
+        if (fragmentManager.findFragmentByTag(fragmentTag) != null) {
+            if (!mFragmentForceReload) {
+                Log.d(TAG, "Keep current fragment: " + fragmentTag);
                 return;
             }
-            if (intent.getAction().equals(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED)) {
-                if (!intent.hasExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX) ||
-                        intent.getIntExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX, -1)
-                                != mClient.getSubscriptionId()) {
-                    return;
-                }
-            }
-            mClient.onPhoneChange();
+            Log.d(TAG, "Construct fragment: " + fragmentTag);
         }
+
+        final Fragment fragment = new MobileNetworkSettings();
+        fragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.content_frame, fragment, fragmentTag);
+        fragmentTransaction.commit();
     }
 
     private void removeContactDiscoveryDialog(int subId) {
@@ -349,10 +284,11 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
                 .findFragmentByTag(ContactDiscoveryDialogFragment.getFragmentTag(subId));
     }
 
-    private void maybeShowContactDiscoveryDialog(int subId) {
-        SubscriptionInfo info = getSubscriptionInfo(subId);
+    private void maybeShowContactDiscoveryDialog(SubscriptionInfo info) {
+        int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         CharSequence carrierName = "";
         if (info != null) {
+            subId = info.getSubscriptionId();
             carrierName = info.getDisplayName();
         }
         // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
@@ -387,12 +323,16 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         // since we do not want the user to accidentally turn on capability polling for the wrong
         // subscription.
         if (doesIntentContainOptInAction(intent)) {
-            if (SubscriptionManager.INVALID_SUBSCRIPTION_ID == intent.getIntExtra(
-                    Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)) {
+            if (SUB_ID_NULL == intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL)) {
                 throw new IllegalArgumentException("Intent with action "
                         + "SHOW_CAPABILITY_DISCOVERY_OPT_IN must also include the extra "
                         + "Settings#EXTRA_SUB_ID");
             }
         }
+    }
+
+    @VisibleForTesting
+    String buildFragmentTag(int subscriptionId) {
+        return MOBILE_SETTINGS_TAG + subscriptionId;
     }
 }

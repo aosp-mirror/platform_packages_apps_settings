@@ -20,6 +20,8 @@ package com.android.settings.flashlight;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.provider.Settings;
 
 import androidx.slice.Slice;
@@ -35,6 +37,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowCameraCharacteristics;
+import org.robolectric.shadows.ShadowCameraManager;
 
 import java.util.List;
 
@@ -42,10 +49,12 @@ import java.util.List;
 public class FlashlightSliceTest {
 
     private Context mContext;
+    private ShadowCameraManager mShadowCameraManager;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mShadowCameraManager = Shadows.shadowOf(mContext.getSystemService(CameraManager.class));
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -63,5 +72,23 @@ public class FlashlightSliceTest {
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
+    }
+
+    @Test
+    public void isFlashlightAvailable_nullSecureAttr_noFlashUnit_returnFalse() {
+        assertThat(FlashlightSlice.isFlashlightAvailable(mContext)).isFalse();
+    }
+
+    @Test
+    public void isFlashlightAvailable_nullSecureAttr_hasFlashUnit_returnTrue() {
+        final CameraCharacteristics characteristics =
+                ShadowCameraCharacteristics.newCameraCharacteristics();
+        final ShadowCameraCharacteristics shadowCharacteristics = Shadow.extract(characteristics);
+        shadowCharacteristics.set(CameraCharacteristics.FLASH_INFO_AVAILABLE, true);
+        shadowCharacteristics
+                .set(CameraCharacteristics.LENS_FACING, CameraCharacteristics.LENS_FACING_BACK);
+        mShadowCameraManager.addCamera("camera_id", characteristics);
+
+        assertThat(FlashlightSlice.isFlashlightAvailable(mContext)).isTrue();
     }
 }

@@ -37,8 +37,7 @@ public class HearingAidDialogFragment extends InstrumentedDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.accessibility_hearingaid_pair_instructions_first_message)
-                .setMessage(R.string.accessibility_hearingaid_pair_instructions_second_message)
+                .setMessage(R.string.accessibility_hearingaid_pair_instructions_message)
                 .setPositiveButton(R.string.accessibility_hearingaid_instruction_continue_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

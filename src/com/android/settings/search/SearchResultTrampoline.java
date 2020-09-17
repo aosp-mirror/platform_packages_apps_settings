@@ -17,6 +17,7 @@
 package com.android.settings.search;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS;
+import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -46,8 +47,10 @@ public class SearchResultTrampoline extends Activity {
         // EXTRA_SHOW_FRAGMENT_ARGUMENTS. This is necessary because intent could be from external
         // caller and args may not persisted.
         final String settingKey = intent.getStringExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
+        final int tab = intent.getIntExtra(EXTRA_SHOW_FRAGMENT_TAB, 0);
         final Bundle args = new Bundle();
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, settingKey);
+        args.putInt(EXTRA_SHOW_FRAGMENT_TAB, tab);
         intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
 
         // Reroute request to SubSetting.

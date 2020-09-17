@@ -122,6 +122,11 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
     }
 
     @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        return super.shouldFinishWhenBackgrounded() && !mNextClicked;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mAnimation != null) {
@@ -163,26 +168,25 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
                 finish();
             }
         } else if (requestCode == ENROLL_REQUEST) {
-            if (resultCode == RESULT_FINISHED) {
-                setResult(RESULT_FINISHED);
-                finish();
-            } else if (resultCode == RESULT_SKIP) {
-                setResult(RESULT_SKIP);
-                finish();
-            } else if (resultCode == RESULT_TIMEOUT) {
-                setResult(RESULT_TIMEOUT);
-                finish();
-            } else {
-                FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
-                int enrolled = fpm.getEnrolledFingerprints().size();
-                int max = getResources().getInteger(
-                        com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
-                if (enrolled >= max) {
+            switch (resultCode) {
+                case RESULT_FINISHED:
+                case RESULT_SKIP:
+                case RESULT_TIMEOUT:
+                    setResult(resultCode);
                     finish();
-                } else {
-                    // We came back from enrolling but it wasn't completed, start again.
-                    startLookingForFingerprint();
-                }
+                    break;
+                default:
+                    FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
+                    int enrolled = fpm.getEnrolledFingerprints().size();
+                    int max = getResources().getInteger(
+                            com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+                    if (enrolled >= max) {
+                        finish();
+                    } else {
+                        // We came back from enrolling but it wasn't completed, start again.
+                        startLookingForFingerprint();
+                    }
+                    break;
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

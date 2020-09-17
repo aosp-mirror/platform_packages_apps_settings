@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/power_menu_setting_name">
+
+    <Preference
+        android:key="gesture_global_actions_panel_summary"
+        android:title="@string/cards_passes_sentence"
+        android:fragment="com.android.settings.gestures.GlobalActionsPanelSettings"
+        settings:controller="com.android.settings.gestures.GlobalActionsPanelPreferenceController" />
+
+    <Preference
+        android:key="gesture_device_controls_summary"
+        android:title="@string/device_controls_sentence"
+        android:fragment="com.android.settings.gestures.DeviceControlsSettings"
+        settings:controller="com.android.settings.gestures.DeviceControlsPreferenceController" />
+
+    <PreferenceCategory
+        android:title="@string/power_menu_lock_screen_category" >
+
+        <SwitchPreference
+            android:key="gesture_power_menu_privacy"
+            android:title="@string/power_menu_privacy"
+            settings:controller="com.android.settings.gestures.PowerMenuPrivacyPreferenceController" />
+    </PreferenceCategory>
+</PreferenceScreen>

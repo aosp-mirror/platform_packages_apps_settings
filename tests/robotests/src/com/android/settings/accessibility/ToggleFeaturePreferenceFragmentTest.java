@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -29,23 +31,87 @@ import androidx.annotation.XmlRes;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.accessibility.ToggleFeaturePreferenceFragment.AccessibilityUserShortcutType;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @RunWith(RobolectricTestRunner.class)
 public class ToggleFeaturePreferenceFragmentTest {
 
     private ToggleFeaturePreferenceFragmentTestable mFragment;
 
+    private static final String TEST_SERVICE_KEY_1 = "abc:111";
+    private static final String TEST_SERVICE_KEY_2 = "mno:222";
+    private static final String TEST_SERVICE_KEY_3 = "xyz:333";
+
+    private static final String TEST_SERVICE_NAME_1 = "abc";
+    private static final int TEST_SERVICE_VALUE_1 = 111;
+
+    @Test
+    public void a11yUserShortcutType_setConcatString_shouldReturnTargetValue() {
+        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
+                TEST_SERVICE_KEY_1);
+
+        assertThat(shortcut.getComponentName()).isEqualTo(TEST_SERVICE_NAME_1);
+        assertThat(shortcut.getType()).isEqualTo(TEST_SERVICE_VALUE_1);
+    }
+
+    @Test
+    public void a11yUserShortcutType_shouldUpdateConcatString() {
+        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
+                TEST_SERVICE_KEY_2);
+
+        shortcut.setComponentName(TEST_SERVICE_NAME_1);
+        shortcut.setType(TEST_SERVICE_VALUE_1);
+
+        assertThat(shortcut.flattenToString()).isEqualTo(TEST_SERVICE_KEY_1);
+    }
+
+    @Test
+    public void stringSet_convertA11yPreferredShortcut_shouldRemoveTarget() {
+        Set<String> mySet = new HashSet<>();
+        mySet.add(TEST_SERVICE_KEY_1);
+        mySet.add(TEST_SERVICE_KEY_2);
+        mySet.add(TEST_SERVICE_KEY_3);
+
+        final Set<String> filtered = mySet.stream()
+                .filter(str -> str.contains(TEST_SERVICE_NAME_1))
+                .collect(Collectors.toSet());
+        mySet.removeAll(filtered);
+
+        assertThat(mySet).doesNotContain(TEST_SERVICE_KEY_1);
+        assertThat(mySet).hasSize(/* expectedSize= */2);
+    }
+
+    @Test
+    public void stringSet_convertA11yUserShortcutType_shouldReturnPreferredShortcut() {
+        Set<String> mySet = new HashSet<>();
+        mySet.add(TEST_SERVICE_KEY_1);
+        mySet.add(TEST_SERVICE_KEY_2);
+        mySet.add(TEST_SERVICE_KEY_3);
+
+        final Set<String> filtered = mySet.stream()
+                .filter(str -> str.contains(TEST_SERVICE_NAME_1))
+                .collect(Collectors.toSet());
+
+        final String str = (String) filtered.toArray()[0];
+        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(str);
+        final int type = shortcut.getType();
+        assertThat(type).isEqualTo(TEST_SERVICE_VALUE_1);
+    }
+
     @Test
     public void createFragment_shouldOnlyAddPreferencesOnce() {
         mFragment = spy(new ToggleFeaturePreferenceFragmentTestable());
-        FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId*/,
-                null /* bundle */);
+        FragmentController.setupFragment(mFragment, FragmentActivity.class,
+                /* containerViewId= */ 0, /* bundle= */null);
 
         // execute exactly once
         verify(mFragment).addPreferencesFromResource(R.xml.placeholder_prefs);
@@ -60,6 +126,11 @@ public class ToggleFeaturePreferenceFragmentTest {
 
         @Override
         public int getMetricsCategory() {
+            return 0;
+        }
+
+        @Override
+        int getUserShortcutTypes() {
             return 0;
         }
 
@@ -82,12 +153,6 @@ public class ToggleFeaturePreferenceFragmentTest {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             // do nothing
-        }
-
-        @Override
-        public void onActivityCreated(Bundle savedInstanceState) {
-            mSwitchBar = mock(SwitchBar.class);
-            super.onActivityCreated(savedInstanceState);
         }
     }
 }

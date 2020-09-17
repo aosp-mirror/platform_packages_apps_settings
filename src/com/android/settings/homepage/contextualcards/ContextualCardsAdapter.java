@@ -135,8 +135,6 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             // Adding items to empty list, should animate.
             mRecyclerView.scheduleLayoutAnimation();
         }
-
-        //TODO(b/119465242): flickering conditional cards after collapsing/expanding
     }
 
     @Override

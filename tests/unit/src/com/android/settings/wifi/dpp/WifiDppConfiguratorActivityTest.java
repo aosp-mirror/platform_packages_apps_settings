@@ -26,9 +26,12 @@ import android.os.RemoteException;
 import android.provider.Settings;
 import android.support.test.uiautomator.UiDevice;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -60,8 +63,13 @@ public class WifiDppConfiguratorActivityTest {
         intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
 
         mActivityRule.launchActivity(intent);
+        FragmentManager fragmentManager = mActivityRule.getActivity().getSupportFragmentManager();
+        WifiDppQrCodeScannerFragment fragment =
+                (WifiDppQrCodeScannerFragment) fragmentManager.findFragmentByTag(
+                        WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
 
-        assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
+        assertThat(fragment.getView() instanceof GlifLayout).isTrue();
+        assertThat(mActivityRule.getActivity().isFinishing()).isFalse();
     }
 
     @Test
@@ -73,8 +81,13 @@ public class WifiDppConfiguratorActivityTest {
         intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
 
         mActivityRule.launchActivity(intent);
+        FragmentManager fragmentManager = mActivityRule.getActivity().getSupportFragmentManager();
+        WifiDppQrCodeGeneratorFragment fragment =
+                (WifiDppQrCodeGeneratorFragment) fragmentManager.findFragmentByTag(
+                        WifiDppUtils.TAG_FRAGMENT_QR_CODE_GENERATOR);
 
-        assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
+        assertThat(fragment.getView() instanceof GlifLayout).isTrue();
+        assertThat(mActivityRule.getActivity().isFinishing()).isFalse();
     }
 
     @Test
@@ -84,22 +97,14 @@ public class WifiDppConfiguratorActivityTest {
 
         mActivityRule.launchActivity(intent);
 
-        assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
+        assertThat(mActivityRule.getActivity().isFinishing()).isFalse();
     }
 
     @Test
     public void testActivity_shouldImplementsWifiNetworkConfigRetriever() {
         WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
 
-        assertThat(activity instanceof WifiNetworkConfig.Retriever).isEqualTo(true);
-    }
-
-    @Test
-    public void testActivity_shouldImplementsQrCodeGeneratorFragmentCallback() {
-        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
-
-        assertThat(activity instanceof WifiDppQrCodeGeneratorFragment
-                .OnQrCodeGeneratorFragmentAddButtonClickedListener).isEqualTo(true);
+        assertThat(activity instanceof WifiNetworkConfig.Retriever).isTrue();
     }
 
     @Test
@@ -107,7 +112,7 @@ public class WifiDppConfiguratorActivityTest {
         WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
 
         assertThat(activity instanceof WifiDppQrCodeScannerFragment
-                .OnScanWifiDppSuccessListener).isEqualTo(true);
+                .OnScanWifiDppSuccessListener).isTrue();
     }
 
     @Test
@@ -115,7 +120,7 @@ public class WifiDppConfiguratorActivityTest {
         WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
 
         assertThat(activity instanceof WifiDppAddDeviceFragment
-                .OnClickChooseDifferentNetworkListener).isEqualTo(true);
+                .OnClickChooseDifferentNetworkListener).isTrue();
     }
 
     @Test
@@ -175,40 +180,4 @@ public class WifiDppConfiguratorActivityTest {
         assertThat(restoredWifiNetworkConfig.getNetworkId()).isEqualTo(0);
         assertThat(restoredWifiNetworkConfig.isHotspot()).isTrue();
     }
-
-    @Test
-    public void launchScanner_onNavigateUp_shouldFinish() {
-        Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
-        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
-        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
-        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
-        final Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-
-        mActivityRule.launchActivity(intent);
-
-        instrumentation.runOnMainSync(() -> {
-            mActivityRule.getActivity().onNavigateUp();
-
-            assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(true);
-        });
-    }
-
-    @Test
-    public void launchGenerator_onNavigateUp_shouldFinish() {
-        Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
-        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
-        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
-        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
-        final Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-
-        mActivityRule.launchActivity(intent);
-
-        instrumentation.runOnMainSync(() -> {
-            mActivityRule.getActivity().onNavigateUp();
-
-            assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(true);
-        });
-    }
-
 }

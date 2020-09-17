@@ -19,30 +19,29 @@ package com.android.settings.core.instrumentation;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.Pair;
-import android.util.StatsLog;
 
 import com.android.settingslib.core.instrumentation.LogWriter;
 
 public class StatsLogWriter implements LogWriter {
 
     @Override
-    public void visible(Context context, int attribution, int pageId) {
-        StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* Atom name */,
-                attribution,
+    public void visible(Context context, int attribution, int pageId, int latency) {
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* Atom name */,
+                attribution, /* from pageId */
                 SettingsEnums.PAGE_VISIBLE /* action */,
-                pageId,
+                pageId, /* target pageId */
                 "" /* changedPreferenceKey */,
-                0 /* changedPreferenceIntValue */);
+                latency /* changedPreferenceIntValue */);
     }
 
     @Override
-    public void hidden(Context context, int pageId) {
-        StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* Atom name */,
+    public void hidden(Context context, int pageId, int visibleTime) {
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* Atom name */,
                 SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 SettingsEnums.PAGE_HIDE /* action */,
                 pageId,
                 "" /* changedPreferenceKey */,
-                0 /* changedPreferenceIntValue */);
+                visibleTime /* changedPreferenceIntValue */);
     }
 
     @Override
@@ -83,7 +82,7 @@ public class StatsLogWriter implements LogWriter {
 
     @Override
     public void action(int attribution, int action, int pageId, String key, int value) {
-        StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* atomName */,
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* atomName */,
                 attribution,
                 action,
                 pageId,

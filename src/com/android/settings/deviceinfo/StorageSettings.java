@@ -50,13 +50,13 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,6 +69,16 @@ import java.util.List;
 @SearchIndexable
 public class StorageSettings extends SettingsPreferenceFragment implements Indexable {
     static final String TAG = "StorageSettings";
+
+    private static final String KEY_STORAGE_SETTINGS = "storage_settings";
+    private static final String KEY_INTERNAL_STORAGE = "storage_settings_internal_storage";
+    private static final String KEY_STORAGE_SETTINGS_VOLUME = "storage_settings_volume_";
+    private static final String KEY_STORAGE_SETTINGS_MEMORY_SIZE = "storage_settings_memory_size";
+    private static final String KEY_STORAGE_SETTINGS_MEMORY = "storage_settings_memory_available";
+    private static final String KEY_STORAGE_SETTINGS_DCIM = "storage_settings_dcim_space";
+    private static final String KEY_STORAGE_SETTINGS_MUSIC = "storage_settings_music_space";
+    private static final String KEY_STORAGE_SETTINGS_MISC = "storage_settings_misc_space";
+    private static final String KEY_STORAGE_SETTINGS_FREE_SPACE = "storage_settings_free_space";
 
     private static final String TAG_VOLUME_UNMOUNTED = "volume_unmounted";
     private static final String TAG_DISK_INIT = "disk_init";
@@ -542,7 +552,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     }
 
     /** Enable indexing of searchable data */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(
@@ -551,14 +561,14 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.storage_settings);
-                    data.key = "storage_settings";
+                    data.key = KEY_STORAGE_SETTINGS;
                     data.screenTitle = context.getString(R.string.storage_settings);
                     data.keywords = context.getString(R.string.keywords_storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.internal_storage);
-                    data.key = "storage_settings_internal_storage";
+                    data.key = KEY_INTERNAL_STORAGE;
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
@@ -568,7 +578,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     for (VolumeInfo vol : vols) {
                         if (isInteresting(vol)) {
                             data.title = storage.getBestVolumeDescription(vol);
-                            data.key = "storage_settings_volume_" + vol.id;
+                            data.key = KEY_STORAGE_SETTINGS_VOLUME + vol.id;
                             data.screenTitle = context.getString(R.string.storage_settings);
                             result.add(data);
                         }
@@ -576,53 +586,107 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_size);
-                    data.key = "storage_settings_memory_size";
+                    data.key = KEY_STORAGE_SETTINGS_MEMORY_SIZE;
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_available);
-                    data.key = "storage_settings_memory_available";
-                    data.screenTitle = context.getString(R.string.storage_settings);
-                    result.add(data);
-
-                    data = new SearchIndexableRaw(context);
-                    data.title = context.getString(R.string.memory_apps_usage);
-                    data.key = "storage_settings_apps_space";
+                    data.key = KEY_STORAGE_SETTINGS_MEMORY;
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_dcim_usage);
-                    data.key = "storage_settings_dcim_space";
+                    data.key = KEY_STORAGE_SETTINGS_DCIM;
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_music_usage);
-                    data.key = "storage_settings_music_space";
+                    data.key = KEY_STORAGE_SETTINGS_MUSIC;
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_media_misc_usage);
-                    data.key = "storage_settings_misc_space";
+                    data.key = KEY_STORAGE_SETTINGS_MISC;
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.storage_menu_free);
-                    data.key = "storage_settings_free_space";
+                    data.key = KEY_STORAGE_SETTINGS_FREE_SPACE;
                     data.screenTitle = context.getString(R.string.storage_menu_free);
-                    // We need to define all three in order for this to trigger properly.
                     data.intentAction = StorageManager.ACTION_MANAGE_STORAGE;
-                    data.intentTargetPackage =
-                            context.getString(R.string.config_deletion_helper_package);
-                    data.intentTargetClass =
-                            context.getString(R.string.config_deletion_helper_class);
+                    data.keywords = context.getString(R.string.keywords_storage_menu_free);
                     result.add(data);
 
                     return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> niks = super.getNonIndexableKeys(context);
+                    if (isExternalExist(context)) {
+                        niks.add(KEY_STORAGE_SETTINGS);
+                        niks.add(KEY_INTERNAL_STORAGE);
+                        niks.add(KEY_STORAGE_SETTINGS_MEMORY_SIZE);
+                        niks.add(KEY_STORAGE_SETTINGS_MEMORY);
+                        niks.add(KEY_STORAGE_SETTINGS_DCIM);
+                        niks.add(KEY_STORAGE_SETTINGS_MUSIC);
+                        niks.add(KEY_STORAGE_SETTINGS_MISC);
+                        niks.add(KEY_STORAGE_SETTINGS_FREE_SPACE);
+
+                        final StorageManager storage = context.getSystemService(
+                                StorageManager.class);
+                        final List<VolumeInfo> vols = storage.getVolumes();
+                        for (VolumeInfo vol : vols) {
+                            if (isInteresting(vol)) {
+                                niks.add(KEY_STORAGE_SETTINGS_VOLUME + vol.id);
+                            }
+                        }
+                    }
+                    return niks;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !isExternalExist(context);
+                }
+
+                private boolean isExternalExist(Context context) {
+                    int internalCount = 0;
+                    StorageManager storageManager = context.getSystemService(StorageManager.class);
+                    final List<VolumeInfo> volumes = storageManager.getVolumes();
+                    for (VolumeInfo vol : volumes) {
+                        //External storage
+                        if (vol.getType() == VolumeInfo.TYPE_PUBLIC
+                                || vol.getType() == VolumeInfo.TYPE_STUB) {
+                            return true;
+                        } else if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
+                            internalCount++;
+                        }
+                    }
+
+                    // Unsupported disks
+                    final List<DiskInfo> disks = storageManager.getDisks();
+                    for (DiskInfo disk : disks) {
+                        if (disk.volumeCount == 0 && disk.size > 0) {
+                            return true;
+                        }
+                    }
+
+                    // Missing private volumes
+                    final List<VolumeRecord> recs = storageManager.getVolumeRecords();
+                    for (VolumeRecord rec : recs) {
+                        if (rec.getType() == VolumeInfo.TYPE_PRIVATE
+                                && storageManager.findVolumeByUuid(rec.getFsUuid()) == null) {
+                            internalCount++;
+                        }
+                    }
+
+                    return (internalCount != 1);
                 }
             };
 }

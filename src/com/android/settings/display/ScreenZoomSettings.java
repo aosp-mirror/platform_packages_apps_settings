@@ -20,19 +20,14 @@ import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Display;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.display.DisplayDensityConfiguration;
 import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Preference fragment used to control screen zoom.
@@ -100,9 +95,9 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
     protected void commit() {
         final int densityDpi = mValues[mCurrentIndex];
         if (densityDpi == mDefaultDensity) {
-            DisplayDensityUtils.clearForcedDisplayDensity(Display.DEFAULT_DISPLAY);
+            DisplayDensityConfiguration.clearForcedDisplayDensity(Display.DEFAULT_DISPLAY);
         } else {
-            DisplayDensityUtils.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, densityDpi);
+            DisplayDensityConfiguration.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, densityDpi);
         }
     }
 
@@ -117,21 +112,11 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
     }
 
     /** Index provider used to expose this fragment in search. */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final Resources res = context.getResources();
-                    final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = res.getString(R.string.screen_zoom_title);
-                    data.key = "screen_zoom_settings";
-                    data.screenTitle = res.getString(R.string.screen_zoom_title);
-                    data.keywords = res.getString(R.string.screen_zoom_keywords);
-
-                    final List<SearchIndexableRaw> result = new ArrayList<>(1);
-                    result.add(data);
-                    return result;
+                protected boolean isPageSearchEnabled(Context context) {
+                    return false;
                 }
             };
 }

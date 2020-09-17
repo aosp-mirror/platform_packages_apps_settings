@@ -20,16 +20,14 @@ import static com.android.settings.network.MobilePlanPreferenceController.MANAGE
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
@@ -39,7 +37,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -60,21 +57,22 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
-            return R.xml.network_and_internet_v2;
-        } else {
-            return R.xml.network_and_internet;
-        }
+        return R.xml.network_and_internet;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
-            use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
-        }
+        use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
         use(AirplaneModePreferenceController.class).setFragment(this);
+        getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        use(AllInOneTetherPreferenceController.class).initEnabler(getSettingsLifecycle());
     }
 
     @Override
@@ -88,6 +86,11 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 this /* fragment */, this /* mobilePlanHost */);
     }
 
+    @Override
+    protected boolean isParalleledControllers() {
+        return true;
+    }
+
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, MetricsFeatureProvider metricsFeatureProvider, Fragment fragment,
             MobilePlanPreferenceHost mobilePlanHost) {
@@ -95,10 +98,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final WifiMasterSwitchPreferenceController wifiPreferenceController =
                 new WifiMasterSwitchPreferenceController(context, metricsFeatureProvider);
-        MobileNetworkPreferenceController mobileNetworkPreferenceController = null;
-        if (!FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
-            mobileNetworkPreferenceController = new MobileNetworkPreferenceController(context);
-        }
 
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
@@ -108,21 +107,13 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
             lifecycle.addObserver(wifiPreferenceController);
-            if (mobileNetworkPreferenceController != null) {
-                lifecycle.addObserver(mobileNetworkPreferenceController);
-            }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
-            controllers.add(new MobileNetworkSummaryController(context, lifecycle));
-        }
-        if (mobileNetworkPreferenceController != null) {
-            controllers.add(mobileNetworkPreferenceController);
-        }
+        controllers.add(new MobileNetworkSummaryController(context, lifecycle));
         controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
@@ -162,20 +153,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         return 0;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    if (FeatureFlagPersistent.isEnabled(context,
-                            FeatureFlags.NETWORK_INTERNET_V2)) {
-                        sir.xmlResId = R.xml.network_and_internet_v2;
-                    } else {
-                        sir.xmlResId = R.xml.network_and_internet;
-                    }
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.network_and_internet) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
@@ -183,14 +162,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* metricsFeatureProvider */, null /* fragment */,
                             null /* mobilePlanHost */);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Remove master switch as a result
-                    keys.add(WifiMasterSwitchPreferenceController.KEY_TOGGLE_WIFI);
-                    return keys;
                 }
             };
 }

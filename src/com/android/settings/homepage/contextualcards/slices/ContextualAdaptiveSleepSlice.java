@@ -81,7 +81,8 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
         if (isSettingsAvailable() && !isUserInteracted() && !isRecentlySetup() && !isTurnedOn()) {
             final IconCompat icon = IconCompat.createWithResource(mContext,
                     R.drawable.ic_settings_adaptive_sleep);
-            final CharSequence title = mContext.getText(R.string.adaptive_sleep_title);
+            final CharSequence title =
+                    mContext.getText(R.string.adaptive_sleep_contextual_slice_title);
             final CharSequence subtitle = mContext.getText(
                     R.string.adaptive_sleep_contextual_slice_summary);
 
@@ -128,8 +129,8 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
      * @return {@code true} if the feature is turned on for the device, otherwise {@code false}
      */
     private boolean isTurnedOn() {
-        return Settings.System.getInt(
-                mContext.getContentResolver(), Settings.System.ADAPTIVE_SLEEP, 0) != 0;
+        return Settings.Secure.getInt(
+                mContext.getContentResolver(), Settings.Secure.ADAPTIVE_SLEEP, 0) != 0;
     }
 
     /**

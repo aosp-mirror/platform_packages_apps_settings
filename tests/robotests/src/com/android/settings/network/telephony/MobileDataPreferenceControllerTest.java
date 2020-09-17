@@ -16,7 +16,7 @@
 
 package com.android.settings.network.telephony;
 
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -88,10 +88,10 @@ public class MobileDataPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_invalidSubscription_returnDisabledDependentSetting() {
+    public void getAvailabilityStatus_invalidSubscription_returnAvailableUnsearchable() {
         mController.init(mFragmentManager, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test

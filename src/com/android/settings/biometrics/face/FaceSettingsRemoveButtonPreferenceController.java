@@ -35,6 +35,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.List;
@@ -80,12 +82,14 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         void onRemoved();
     }
 
+    private Preference mPreference;
     private Button mButton;
     private Listener mListener;
     private SettingsActivity mActivity;
     private int mUserId;
     private boolean mRemoving;
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final Context mContext;
     private final FaceManager mFaceManager;
     private final FaceManager.RemovalCallback mRemovalCallback = new FaceManager.RemovalCallback() {
@@ -141,6 +145,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         super(context, preferenceKey);
         mContext = context;
         mFaceManager = context.getSystemService(FaceManager.class);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     public FaceSettingsRemoveButtonPreferenceController(Context context) {
@@ -155,11 +160,12 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     public void updateState(Preference preference) {
         super.updateState(preference);
 
+        mPreference = preference;
         mButton = ((LayoutPreference) preference)
                 .findViewById(R.id.security_settings_face_settings_remove_button);
         mButton.setOnClickListener(this);
 
-        if (!FaceSettings.isAvailable(mContext)) {
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             mButton.setEnabled(false);
         } else {
             mButton.setEnabled(!mRemoving);
@@ -179,6 +185,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     @Override
     public void onClick(View v) {
         if (v == mButton) {
+            mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
             mRemoving = true;
             ConfirmRemoveDialog dialog = new ConfirmRemoveDialog();
             dialog.setOnClickListener(mOnClickListener);

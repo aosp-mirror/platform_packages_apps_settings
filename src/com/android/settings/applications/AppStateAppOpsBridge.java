@@ -62,16 +62,28 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
                 AppGlobals.getPackageManager());
     }
 
+    AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
+            int[] appOpsOpCodes, String[] permissions) {
+        this(context, appState, callback, appOpsOpCodes, permissions,
+                AppGlobals.getPackageManager());
+    }
+
     @VisibleForTesting
     AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int appOpsOpCode, String[] permissions, IPackageManager packageManager) {
+        this(context, appState, callback, new int[]{appOpsOpCode}, permissions,
+                packageManager);
+    }
+
+    AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
+            int[] appOpsOpCodes, String[] permissions, IPackageManager packageManager) {
         super(appState, callback);
         mContext = context;
         mIPackageManager = packageManager;
         mUserManager = UserManager.get(context);
         mProfiles = mUserManager.getUserProfiles();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mAppOpsOpCodes = new int[] {appOpsOpCode};
+        mAppOpsOpCodes = appOpsOpCodes;
         mPermissions = permissions;
     }
 
@@ -145,8 +157,12 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         for (int i = 0; i < N; i++) {
             AppEntry app = apps.get(i);
             int userId = UserHandle.getUserId(app.info.uid);
-            ArrayMap<String, PermissionState> userMap = entries.get(userId);
-            app.extraInfo = userMap != null ? userMap.get(app.info.packageName) : null;
+            if (entries != null) {
+                ArrayMap<String, PermissionState> userMap = entries.get(userId);
+                app.extraInfo = userMap != null ? userMap.get(app.info.packageName) : null;
+            } else {
+                app.extraInfo = null;
+            }
         }
     }
 
@@ -237,6 +253,10 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
      * a particular package.
      */
     private void loadAppOpsStates(SparseArray<ArrayMap<String, PermissionState>> entries) {
+        if (entries == null) {
+            return;
+        }
+
         // Find out which packages have been granted permission from AppOps.
         final List<AppOpsManager.PackageOps> packageOps = mAppOpsManager.getPackagesForOps(
                 mAppOpsOpCodes);
@@ -328,7 +348,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         public boolean isPermissible() {
             // defining the default behavior as permissible as long as the package requested this
             // permission (this means pre-M gets approval during install time; M apps gets approval
-            // during runtime.
+            // during runtime).
             if (appOpMode == AppOpsManager.MODE_DEFAULT) {
                 return staticPermissionGranted;
             }

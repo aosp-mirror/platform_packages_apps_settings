@@ -1,12 +1,16 @@
 package com.android.settings.wifi.tether;
 
+import static com.android.settings.AllInOneTetherSettings.DEDUP_POSTFIX;
+
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 
 public class WifiTetherSecurityPreferenceController extends WifiTetherBasePreferenceController {
 
@@ -23,17 +27,17 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY;
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)
+                ? PREF_KEY + DEDUP_POSTFIX : PREF_KEY;
     }
 
     @Override
     public void updateDisplay() {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        if (config != null && config.getAuthType() == WifiConfiguration.KeyMgmt.NONE) {
-            mSecurityValue = WifiConfiguration.KeyMgmt.NONE;
-
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        if (config != null && config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OPEN) {
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_OPEN;
         } else {
-            mSecurityValue = WifiConfiguration.KeyMgmt.WPA2_PSK;
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
         }
 
         final ListPreference preference = (ListPreference) mPreference;
@@ -45,7 +49,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mSecurityValue = Integer.parseInt((String) newValue);
         preference.setSummary(getSummaryForSecurityType(mSecurityValue));
-        mListener.onTetherConfigUpdated();
+        mListener.onTetherConfigUpdated(this);
         return true;
     }
 
@@ -54,7 +58,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     }
 
     private String getSummaryForSecurityType(int securityType) {
-        if (securityType == WifiConfiguration.KeyMgmt.NONE) {
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN) {
             return mSecurityEntries[1];
         }
         // WPA2 PSK

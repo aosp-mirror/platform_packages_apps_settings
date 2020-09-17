@@ -36,9 +36,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.After;
 import org.junit.Before;
@@ -156,10 +156,11 @@ public class EmergencyInfoPreferenceControllerTest {
         final Preference preference = new Preference(activity);
         preference.setKey("emergency_info");
         mController = new EmergencyInfoPreferenceController(activity, preference.getKey());
+        mController.mIntent = new Intent("com.example.action.new").setPackage("com.example.test");
 
         mController.handlePreferenceTreeClick(preference);
 
         assertThat(application.getNextStartedActivity().getAction())
-                .isEqualTo("android.settings.EDIT_EMERGENCY_INFO");
+                .isEqualTo("com.example.action.new");
     }
 }

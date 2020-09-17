@@ -56,8 +56,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowAppUtils;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,12 +70,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenuItem;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowAppUtils.class})
 public class ManageApplicationsTest {
 
     @Mock
@@ -99,6 +105,7 @@ public class ManageApplicationsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mContext.setTheme(R.style.Theme_AppCompat);
         mAppReset = new RoboMenuItem(R.id.reset_app_preferences);
         mSortRecent = new RoboMenuItem(R.id.sort_order_recent_notification);
         mSortFrequent = new RoboMenuItem(R.id.sort_order_frequent_notification);
@@ -109,9 +116,12 @@ public class ManageApplicationsTest {
         mFragment = spy(new ManageApplications());
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getActivity()).thenReturn(mActivity);
+        ReflectionHelpers.setField(mFragment, "mUserManager",
+                mContext.getSystemService(UserManager.class));
         when(mActivity.getResources()).thenReturn(mResources);
         when(mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mActivity.getPackageManager()).thenReturn(mPackageManager);
+        when(mActivity.getLayoutInflater()).thenReturn(LayoutInflater.from(mContext));
     }
 
     @Test
@@ -366,6 +376,7 @@ public class ManageApplicationsTest {
         appEntry.extraInfo = mock(AppFilterItem.class);
         appList.add(appEntry);
         ReflectionHelpers.setField(adapter, "mEntries", appList);
+        ReflectionHelpers.setField(adapter, "mContext", mContext);
 
         adapter.onBindViewHolder(holder, 0);
         // no crash? yay!
@@ -387,6 +398,7 @@ public class ManageApplicationsTest {
         appEntry.info = mock(ApplicationInfo.class);
         appList.add(appEntry);
         ReflectionHelpers.setField(adapter, "mEntries", appList);
+        ReflectionHelpers.setField(adapter, "mContext", mContext);
 
         adapter.onBindViewHolder(holder, 0);
         verify(holder).updateSwitch(any(), anyBoolean(), anyBoolean());
@@ -406,6 +418,7 @@ public class ManageApplicationsTest {
         appEntry.info = mock(ApplicationInfo.class);
         appList.add(appEntry);
         ReflectionHelpers.setField(adapter, "mEntries", appList);
+        ReflectionHelpers.setField(adapter, "mContext", mContext);
 
         adapter.onBindViewHolder(holder, 0);
         verify(holder, never()).updateSwitch(any(), anyBoolean(), anyBoolean());
@@ -494,6 +507,116 @@ public class ManageApplicationsTest {
         assertThat(mFragment.mRecyclerView.getPaddingTop()).isEqualTo(0);
     }
 
+    @Test
+    public void onSaveInstanceState_noSearchView_shouldNotSetBundleValue() {
+        final Bundle bundle = new Bundle();
+        ReflectionHelpers.setField(mFragment, "mResetAppsHelper", mock(ResetAppsHelper.class));
+        ReflectionHelpers.setField(mFragment, "mFilter", mock(AppFilterItem.class));
+        ReflectionHelpers.setField(mFragment, "mApplications",
+                mock(ManageApplications.ApplicationsAdapter.class));
+
+        mFragment.onSaveInstanceState(bundle);
+
+        assertThat(bundle.containsKey(ManageApplications.EXTRA_EXPAND_SEARCH_VIEW)).isFalse();
+    }
+
+    @Test
+    public void onSaveInstanceState_searchViewSet_shouldSetBundleValue() {
+        final SearchView searchView = mock(SearchView.class);
+        final Bundle bundle = new Bundle();
+        ReflectionHelpers.setField(mFragment, "mResetAppsHelper", mock(ResetAppsHelper.class));
+        ReflectionHelpers.setField(mFragment, "mFilter", mock(AppFilterItem.class));
+        ReflectionHelpers.setField(mFragment, "mApplications",
+                mock(ManageApplications.ApplicationsAdapter.class));
+        ReflectionHelpers.setField(mFragment, "mSearchView", searchView);
+        when(searchView.isIconified()).thenReturn(true);
+
+        mFragment.onSaveInstanceState(bundle);
+
+        assertThat(bundle.containsKey(ManageApplications.EXTRA_EXPAND_SEARCH_VIEW)).isTrue();
+        assertThat(bundle.getBoolean(ManageApplications.EXTRA_EXPAND_SEARCH_VIEW)).isFalse();
+    }
+
+    @Test
+    public void createHeader_batteryListType_hasCorrectItems() {
+        ReflectionHelpers.setField(mFragment, "mListType", ManageApplications.LIST_TYPE_HIGH_POWER);
+        ReflectionHelpers.setField(mFragment, "mRootView",
+                LayoutInflater.from(mContext).inflate(R.layout.manage_applications_apps, null));
+        mFragment.mRecyclerView = new RecyclerView(mContext);
+        final ManageApplications.ApplicationsAdapter adapter =
+                spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
+        ReflectionHelpers.setField(mFragment, "mApplications", adapter);
+
+        mFragment.createHeader();
+
+        assertThat(mFragment.mFilterAdapter.getCount()).isEqualTo(2);
+        assertThat(mFragment.mFilterAdapter.getItem(0)).isEqualTo(
+                mContext.getString(R.string.high_power_filter_on));
+        assertThat(mFragment.mFilterAdapter.getItem(1)).isEqualTo(
+                mContext.getString(R.string.filter_all_apps));
+    }
+
+    @Test
+    public void createHeader_notificationListType_hasCorrectItems() {
+        ReflectionHelpers.setField(mFragment, "mListType", LIST_TYPE_NOTIFICATION);
+        ReflectionHelpers.setField(mFragment, "mRootView",
+                LayoutInflater.from(mContext).inflate(R.layout.manage_applications_apps, null));
+        mFragment.mRecyclerView = new RecyclerView(mContext);
+        final ManageApplications.ApplicationsAdapter adapter =
+                spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
+        ReflectionHelpers.setField(mFragment, "mApplications", adapter);
+
+        mFragment.createHeader();
+
+        assertThat(mFragment.mFilterAdapter.getCount()).isEqualTo(3);
+        assertThat(mFragment.mFilterAdapter.getItem(0)).isEqualTo(
+                mContext.getString(R.string.sort_order_recent_notification));
+        assertThat(mFragment.mFilterAdapter.getItem(1)).isEqualTo(
+                mContext.getString(R.string.sort_order_frequent_notification));
+        assertThat(mFragment.mFilterAdapter.getItem(2)).isEqualTo(
+                mContext.getString(R.string.filter_notif_blocked_apps));
+    }
+
+    @Test
+    public void onItemSelected_powerWhiteApps_returnCorrectValue() {
+        ReflectionHelpers.setField(mFragment, "mListType", ManageApplications.LIST_TYPE_HIGH_POWER);
+        ReflectionHelpers.setField(mFragment, "mRootView",
+                LayoutInflater.from(mContext).inflate(R.layout.manage_applications_apps, null));
+        mFragment.mRecyclerView = new RecyclerView(mContext);
+        final ManageApplications.ApplicationsAdapter adapter =
+                spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
+        ReflectionHelpers.setField(mFragment, "mApplications", adapter);
+        mFragment.createHeader();
+
+        mFragment.onItemSelected(null, null, 0, 0);
+
+        AppFilter filter = ReflectionHelpers.getField(adapter, "mCompositeFilter");
+        assertThat(filter.filterApp(createPowerWhiteListApp(false))).isFalse();
+        assertThat(filter.filterApp(createPowerWhiteListApp(true))).isTrue();
+    }
+
+    @Test
+    public void onItemSelected_allApps_returnCorrectValue() {
+        ReflectionHelpers.setField(mFragment, "mListType", ManageApplications.LIST_TYPE_HIGH_POWER);
+        ReflectionHelpers.setField(mFragment, "mRootView",
+                LayoutInflater.from(mContext).inflate(R.layout.manage_applications_apps, null));
+        mFragment.mRecyclerView = new RecyclerView(mContext);
+        final ManageApplications.ApplicationsAdapter adapter =
+                spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
+        ReflectionHelpers.setField(mFragment, "mApplications", adapter);
+        mFragment.createHeader();
+
+        mFragment.onItemSelected(null, null, 1, 0);
+
+        AppFilter filter = ReflectionHelpers.getField(adapter, "mCompositeFilter");
+        assertThat(filter.filterApp(createPowerWhiteListApp(false))).isTrue();
+        assertThat(filter.filterApp(createPowerWhiteListApp(true))).isTrue();
+    }
+
     private void setUpOptionMenus() {
         when(mMenu.findItem(anyInt())).thenAnswer(invocation -> {
             final Object[] args = invocation.getArguments();
@@ -511,13 +634,21 @@ public class ManageApplicationsTest {
         });
     }
 
-    private ArrayList<ApplicationsState.AppEntry> getTestAppList(String[] appNames) {
-        final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
+    private ArrayList<AppEntry> getTestAppList(String[] appNames) {
+        final ArrayList<AppEntry> appList = new ArrayList<>();
         for (String name : appNames) {
-            final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
+            final AppEntry appEntry = mock(AppEntry.class);
             appEntry.label = name;
             appList.add(appEntry);
         }
         return appList;
+    }
+
+    private AppEntry createPowerWhiteListApp(boolean isPowerWhiteListed) {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.sourceDir = "abc";
+        final AppEntry entry = new AppEntry(mContext, info, 0);
+        entry.extraInfo = isPowerWhiteListed ? Boolean.TRUE : Boolean.FALSE;
+        return entry;
     }
 }

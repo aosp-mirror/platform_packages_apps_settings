@@ -88,6 +88,11 @@ public class AmbientDisplayNotificationsPreferenceController extends
         return TextUtils.equals(getPreferenceKey(), "ambient_display_notification");
     }
 
+    @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
     private AmbientDisplayConfiguration getAmbientConfig() {
         if (mConfig == null) {
             mConfig = new AmbientDisplayConfiguration(mContext);

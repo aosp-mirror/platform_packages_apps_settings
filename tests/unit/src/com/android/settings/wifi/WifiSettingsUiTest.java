@@ -15,7 +15,6 @@
  */
 package com.android.settings.wifi;
 
-import static androidx.test.InstrumentationRegistry.getInstrumentation;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -28,9 +27,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -39,9 +36,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiConfiguration.NetworkSelectionStatus;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.WifiSsid;
 import android.provider.Settings;
 
 import androidx.fragment.app.Fragment;
@@ -60,13 +57,13 @@ import com.android.settingslib.wifi.WifiTrackerFactory;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -129,11 +126,12 @@ public class WifiSettingsUiTest {
         config.SSID = TEST_SSID;
         config.BSSID = TEST_BSSID;
         config.networkId = TEST_NETWORK_ID;
-        WifiInfo wifiInfo = new WifiInfo();
-        wifiInfo.setSSID(WifiSsid.createFromAsciiEncoded(TEST_UNQUOTED_SSID));
-        wifiInfo.setBSSID(TEST_BSSID);
-        wifiInfo.setRssi(TEST_RSSI);
-        wifiInfo.setNetworkId(TEST_NETWORK_ID);
+        WifiInfo wifiInfo = new WifiInfo.Builder()
+                .setSsid(TEST_UNQUOTED_SSID.getBytes(StandardCharsets.UTF_8))
+                .setBssid(TEST_BSSID)
+                .setRssi(TEST_RSSI)
+                .setNetworkId(TEST_NETWORK_ID)
+                .build();
         NetworkInfo networkInfo = new NetworkInfo(ConnectivityManager.TYPE_WIFI, 0, null, null);
         networkInfo.setDetailedState(NetworkInfo.DetailedState.CONNECTED, null, null);
         AccessPoint accessPoint = new AccessPoint(mContext, config);
@@ -294,19 +292,20 @@ public class WifiSettingsUiTest {
         config.networkId = TEST_NETWORK_ID;
         config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
 
-        WifiConfiguration.NetworkSelectionStatus selectionStatus =
-                new WifiConfiguration.NetworkSelectionStatus();
-        selectionStatus.setNetworkSelectionDisableReason(
-                WifiConfiguration.NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD);
-        selectionStatus.setNetworkSelectionStatus(
-                WifiConfiguration.NetworkSelectionStatus.NETWORK_SELECTION_TEMPORARY_DISABLED);
+        NetworkSelectionStatus selectionStatus = new NetworkSelectionStatus.Builder()
+                .setNetworkSelectionDisableReason(
+                        NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD)
+                .setNetworkSelectionStatus(
+                        NetworkSelectionStatus.NETWORK_SELECTION_TEMPORARY_DISABLED)
+                .build();
         config.setNetworkSelectionStatus(selectionStatus);
 
-        WifiInfo wifiInfo = new WifiInfo();
-        wifiInfo.setSSID(WifiSsid.createFromAsciiEncoded(TEST_UNQUOTED_SSID));
-        wifiInfo.setBSSID(TEST_BSSID);
-        wifiInfo.setRssi(TEST_RSSI);
-        wifiInfo.setNetworkId(TEST_NETWORK_ID);
+        WifiInfo wifiInfo = new WifiInfo.Builder()
+                .setSsid(TEST_UNQUOTED_SSID.getBytes(StandardCharsets.UTF_8))
+                .setBssid(TEST_BSSID)
+                .setRssi(TEST_RSSI)
+                .setNetworkId(TEST_NETWORK_ID)
+                .build();
         AccessPoint accessPoint = new AccessPoint(mContext, config);
         accessPoint.update(config, wifiInfo, null);
 
@@ -315,12 +314,12 @@ public class WifiSettingsUiTest {
         assertThat(accessPoint.getBssid()).isEqualTo(TEST_BSSID);
         assertThat(accessPoint.isActive()).isFalse();
         assertThat(accessPoint.getConfig()).isNotNull();
-        WifiConfiguration.NetworkSelectionStatus networkStatus =
-                accessPoint.getConfig().getNetworkSelectionStatus();
+        NetworkSelectionStatus networkStatus = accessPoint.getConfig().getNetworkSelectionStatus();
         assertThat(networkStatus).isNotNull();
-        assertThat(networkStatus.isNetworkEnabled()).isFalse();
+        assertThat(networkStatus.getNetworkSelectionStatus())
+                .isEqualTo(NetworkSelectionStatus.NETWORK_SELECTION_TEMPORARY_DISABLED);
         assertThat(networkStatus.getNetworkSelectionDisableReason()).isEqualTo(
-                WifiConfiguration.NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD);
+                NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD);
 
         when(mWifiTracker.getAccessPoints()).thenReturn(Lists.newArrayList(accessPoint));
         launchActivity(WifiSettings.EXTRA_START_CONNECT_SSID, accessPoint.getSsidStr());

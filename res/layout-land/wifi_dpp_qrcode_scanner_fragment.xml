@@ -15,33 +15,33 @@
      limitations under the License.
 -->
 
-<LinearLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:icon="@drawable/ic_scan_32dp">
 
-    <ScrollView
+    <LinearLayout
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@android:id/summary"
+            style="@style/TextAppearance.SudGlifBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?attr/sudMarginSides"
+            android:layout_marginEnd="?attr/sudMarginSides"
+            android:textAlignment="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <include layout="@layout/wifi_dpp_fragment_header"/>
-
-            <ProgressBar
-                android:id="@+id/indeterminate_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:layout_marginBottom="8dp"
-                style="?android:attr/progressBarStyleHorizontal"/>
+            android:gravity="center"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="@dimen/qrcode_preview_size"
@@ -59,18 +59,18 @@
 
             <TextView
                 android:id="@+id/error_message"
+                style="@style/TextAppearance.ErrorText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="?attr/sudMarginSides"
+                android:layout_marginEnd="?attr/sudMarginSides"
                 android:textAlignment="center"
-                android:textColor="?android:attr/colorError"
                 android:visibility="invisible"/>
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
-</LinearLayout>
+</com.google.android.setupdesign.GlifLayout>
 

@@ -23,17 +23,29 @@ import static android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFIC
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class RedactNotificationPreferenceController extends TogglePreferenceController {
-
+/**
+ * The controller of the sensitive notifications.
+ */
+public class RedactNotificationPreferenceController extends TogglePreferenceController implements
+        LifecycleObserver, OnStart, OnStop {
     private static final String TAG = "LockScreenNotifPref";
 
     static final String KEY_LOCKSCREEN_REDACT = "lock_screen_redact";
@@ -43,6 +55,17 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
     private UserManager mUm;
     private KeyguardManager mKm;
     private final int mProfileUserId;
+    private Preference mPreference;
+    private ContentObserver mContentObserver =
+            new ContentObserver(new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange) {
+                    if (mPreference != null) {
+                        mPreference.setEnabled(
+                                getAvailabilityStatus() != DISABLED_DEPENDENT_SETTING);
+                    }
+                }
+            };
 
     public RedactNotificationPreferenceController(Context context, String settingKey) {
         super(context, settingKey);
@@ -52,6 +75,12 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
         mKm = context.getSystemService(KeyguardManager.class);
 
         mProfileUserId = Utils.getManagedProfileId(mUm, UserHandle.myUserId());
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -108,6 +137,18 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
         return AVAILABLE;
     }
 
+    @Override
+    public void onStart() {
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS),
+                false /* notifyForDescendants */, mContentObserver);
+    }
+
+    @Override
+    public void onStop() {
+        mContext.getContentResolver().unregisterContentObserver(mContentObserver);
+    }
+
     private boolean adminAllowsNotifications(int userId) {
         final int dpmFlags = mDpm.getKeyguardDisabledFeatures(null/* admin */, userId);
         return (dpmFlags & KEYGUARD_DISABLE_SECURE_NOTIFICATIONS) == 0;
@@ -123,7 +164,7 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, userId) != 0;
     }
 
-   private boolean getLockscreenNotificationsEnabled(int userId) {
+    private boolean getLockscreenNotificationsEnabled(int userId) {
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 1, userId) != 0;
     }

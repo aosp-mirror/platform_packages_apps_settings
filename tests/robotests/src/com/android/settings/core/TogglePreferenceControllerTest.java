@@ -90,6 +90,16 @@ public class TogglePreferenceControllerTest {
                 SliceData.SliceType.SWITCH);
     }
 
+    @Test
+    public void isSliceable_returnTrue() {
+        assertThat(mToggleController.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isPublicSlice_returnFalse() {
+        assertThat(mToggleController.isPublicSlice()).isFalse();
+    }
+
     private static class FakeToggle extends TogglePreferenceController {
 
         private boolean checkedFlag;
