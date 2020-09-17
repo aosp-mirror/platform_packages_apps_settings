@@ -17,17 +17,12 @@
 package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AutoBrightnessSettings extends DashboardFragment {
@@ -37,8 +32,6 @@ public class AutoBrightnessSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mFooterPreferenceMixin.createFooterPreference()
-                .setTitle(R.string.auto_brightness_description);
     }
 
     @Override
@@ -61,14 +54,6 @@ public class AutoBrightnessSettings extends DashboardFragment {
         return R.string.help_url_auto_brightness;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.auto_brightness_detail;
-                    return Arrays.asList(sir);
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.auto_brightness_detail);
 }

@@ -27,8 +27,13 @@
         <item name="twoStateButtonPreferenceStyle">@style/TwoStateButtonPreference</item>
         <item name="preferenceCategoryTitleTextAppearance">@style/TextAppearance.CategoryTitle
         </item>
+        <item name="preferenceCategoryStyle">@style/SettingsCategoryPreference</item>
+        <!-- For preference category color -->
+        <item name="preferenceCategoryTitleTextColor">?android:attr/textColorSecondary</item>
         <item name="preferenceFragmentCompatStyle">@style/SettingsPreferenceFragmentStyle</item>
     </style>
+
+    <style name="SettingsCategoryPreference" parent="Preference.Category.Material" />
 
     <style name="PreferenceTheme.SetupWizard">
         <item name="preferenceFragmentCompatStyle">@style/SetupWizardPreferenceFragmentStyle</item>

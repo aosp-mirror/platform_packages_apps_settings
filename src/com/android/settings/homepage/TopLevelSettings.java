@@ -22,7 +22,6 @@ import static com.android.settingslib.search.SearchIndexable.MOBILE;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -35,9 +34,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.SupportPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable(forTarget = MOBILE)
 public class TopLevelSettings extends DashboardFragment implements
@@ -103,15 +99,8 @@ public class TopLevelSettings extends DashboardFragment implements
                 .getBoolean(R.bool.config_force_rounded_icon_TopLevelSettings);
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.top_level_settings;
-                    return Arrays.asList(sir);
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.top_level_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

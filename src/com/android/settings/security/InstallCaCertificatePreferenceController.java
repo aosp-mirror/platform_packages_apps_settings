@@ -17,7 +17,6 @@
 package com.android.settings.security;
 
 import android.content.Context;
-import android.os.UserManager;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -27,16 +26,11 @@ public class InstallCaCertificatePreferenceController extends
     private static final String KEY_INSTALL_CA_CERTIFICATE = "install_ca_certificate";
 
     public InstallCaCertificatePreferenceController(Context context) {
-        super(context, UserManager.DISALLOW_CONFIG_CREDENTIALS);
+        super(context, KEY_INSTALL_CA_CERTIFICATE);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_INSTALL_CA_CERTIFICATE;
     }
 }

@@ -78,6 +78,7 @@ public class SecondaryUserControllerTest {
         when(mScreen.getContext()).thenReturn(mContext);
         when(mScreen.findPreference(anyString())).thenReturn(mGroup);
         when(mGroup.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
+
     }
 
     @Test
@@ -119,7 +120,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void secondaryUserAddedIfHasDistinctId() {
+    public void getSecondaryUserControllers_notWorkProfile_addSecondaryUserController() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = 10;
@@ -136,7 +137,24 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void profilesOfPrimaryUserAreNotIgnored() {
+    public void getSecondaryUserControllers_workProfile_addNoSecondaryUserController() {
+        final ArrayList<UserInfo> userInfos = new ArrayList<>();
+        final UserInfo secondaryUser = new UserInfo();
+        secondaryUser.id = 10;
+        secondaryUser.profileGroupId = 101010; // this just has to be something not 0
+        userInfos.add(mPrimaryUser);
+        userInfos.add(secondaryUser);
+        when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
+        when(mUserManager.getUsers()).thenReturn(userInfos);
+        final List<AbstractPreferenceController> controllers =
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
+
+        assertThat(controllers).hasSize(1);
+        assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
+    }
+
+    @Test
+    public void profilesOfPrimaryUserAreIgnored() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = mPrimaryUser.id;
@@ -148,9 +166,8 @@ public class SecondaryUserControllerTest {
         final List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
-        assertThat(controllers).hasSize(2);
-        assertThat(controllers.get(0) instanceof UserProfileController).isTrue();
-        assertThat(controllers.get(1) instanceof SecondaryUserController).isFalse();
+        assertThat(controllers).hasSize(1);
+        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
     }
 
     @Test

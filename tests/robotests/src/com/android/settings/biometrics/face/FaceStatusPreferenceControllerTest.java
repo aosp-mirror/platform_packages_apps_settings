@@ -113,7 +113,6 @@ public class FaceStatusPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.security_settings_face_preference_summary_none));
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getOnPreferenceClickListener()).isNotNull();
     }
 
     @Test
@@ -129,6 +128,5 @@ public class FaceStatusPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(mContext.getResources()
                 .getString(R.string.security_settings_face_preference_summary));
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getOnPreferenceClickListener()).isNotNull();
     }
 }

@@ -22,8 +22,9 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.robolectric.RuntimeEnvironment;
@@ -45,8 +46,8 @@ public class DashboardFragmentSearchIndexProviderInspector {
             return true;
         }
 
-        final Indexable.SearchIndexProvider provider =
-                DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+        final BaseSearchIndexProvider provider =
+                (BaseSearchIndexProvider) DatabaseIndexingUtils.getSearchIndexProvider(clazz);
         if (provider == null) {
             return true;
         }

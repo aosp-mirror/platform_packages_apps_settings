@@ -18,6 +18,7 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.location.LocationManager;
 
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
@@ -29,12 +30,14 @@ import com.android.settings.core.BasePreferenceController;
 public class NightDisplayAutoModePreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
+    private final LocationManager mLocationManager;
     private DropDownPreference mPreference;
     private ColorDisplayManager mColorDisplayManager;
 
     public NightDisplayAutoModePreferenceController(Context context, String key) {
         super(context, key);
         mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
+        mLocationManager = context.getSystemService(LocationManager.class);
     }
 
     @Override
@@ -68,6 +71,11 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
 
     @Override
     public final boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (String.valueOf(ColorDisplayManager.AUTO_MODE_TWILIGHT).equals(newValue)
+                && !mLocationManager.isLocationEnabled()) {
+            TwilightLocationDialog.show(mContext);
+            return true;
+        }
         return mColorDisplayManager.setNightDisplayAutoMode(Integer.parseInt((String) newValue));
     }
 }

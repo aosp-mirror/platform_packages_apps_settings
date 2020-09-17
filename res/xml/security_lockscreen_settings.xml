@@ -17,9 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="security_lockscreen_settings_screen"
-    android:title="@string/lockscreen_settings_title"
-    settings:keywords="@string/keywords_ambient_display_screen">
+    android:title="@string/lockscreen_settings_title">
 
     <PreferenceCategory
         android:key="lockscreen_what_to_show"
@@ -71,18 +69,21 @@
             android:key="ambient_display_tap"
             android:title="@string/ambient_display_tap_screen_title"
             android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
+            settings:searchable="false"
             settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
         <Preference
             android:key="ambient_display_double_tap"
             android:title="@string/ambient_display_title"
             android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
+            settings:searchable="false"
             settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
 
         <Preference
             android:key="ambient_display_pick_up"
             android:title="@string/ambient_display_pickup_title"
             android:fragment="com.android.settings.gestures.PickupGestureSettings"
+            settings:searchable="false"
             settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
         <SwitchPreference

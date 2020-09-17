@@ -39,10 +39,11 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.View.AccessibilityDelegate;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
@@ -57,6 +58,8 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
+import com.android.settings.network.MobileDataEnabledListener;
+import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.NetworkCycleChartData;
@@ -72,7 +75,8 @@ import java.util.List;
  * Panel showing data usage history across various networks, including options
  * to inspect based on usage cycle and control through {@link NetworkPolicy}.
  */
-public class DataUsageList extends DataUsageBaseFragment {
+public class DataUsageList extends DataUsageBaseFragment
+        implements MobileDataEnabledListener.Client {
 
     static final String EXTRA_SUB_ID = "sub_id";
     static final String EXTRA_NETWORK_TEMPLATE = "network_template";
@@ -88,16 +92,13 @@ public class DataUsageList extends DataUsageBaseFragment {
     private static final String KEY_APP = "app";
     private static final String KEY_FIELDS = "fields";
 
-    private static final int LOADER_CHART_DATA = 2;
-    private static final int LOADER_SUMMARY = 3;
+    @VisibleForTesting
+    static final int LOADER_CHART_DATA = 2;
+    @VisibleForTesting
+    static final int LOADER_SUMMARY = 3;
 
-    private final CellDataPreference.DataStateListener mDataStateListener =
-            new CellDataPreference.DataStateListener() {
-                @Override
-                public void onChange(boolean selfChange) {
-                    updatePolicy();
-                }
-            };
+    @VisibleForTesting
+    MobileDataEnabledListener mDataStateListener;
 
     @VisibleForTesting
     NetworkTemplate mTemplate;
@@ -111,7 +112,6 @@ public class DataUsageList extends DataUsageBaseFragment {
     LoadingViewController mLoadingViewController;
 
     private ChartDataUsagePreference mChart;
-    private TelephonyManager mTelephonyManager;
     private List<NetworkCycleChartData> mCycleData;
     private ArrayList<Long> mCycles;
     private UidDetailProvider mUidDetailProvider;
@@ -133,14 +133,15 @@ public class DataUsageList extends DataUsageBaseFragment {
         if (!isBandwidthControlEnabled()) {
             Log.w(TAG, "No bandwidth control; leaving");
             activity.finish();
+            return;
         }
 
         mUidDetailProvider = new UidDetailProvider(activity);
-        mTelephonyManager = activity.getSystemService(TelephonyManager.class);
         mUsageAmount = findPreference(KEY_USAGE_AMOUNT);
         mChart = findPreference(KEY_CHART_DATA);
         mApps = findPreference(KEY_APPS_GROUP);
         processArgument();
+        mDataStateListener = new MobileDataEnabledListener(activity, this);
     }
 
     @Override
@@ -181,6 +182,16 @@ public class DataUsageList extends DataUsageBaseFragment {
                 mCycleSpinner.setSelection(position);
             }
         }, mCycleListener);
+        mCycleSpinner.setAccessibilityDelegate(new AccessibilityDelegate() {
+            @Override
+            public void sendAccessibilityEvent(View host, int eventType) {
+                if (eventType == AccessibilityEvent.TYPE_VIEW_SELECTED) {
+                    // Ignore TYPE_VIEW_SELECTED or TalkBack will speak for it at onResume.
+                    return;
+                }
+                super.sendAccessibilityEvent(host, eventType);
+            }
+        });
 
         mLoadingViewController = new LoadingViewController(
                 getView().findViewById(R.id.loading_container), getListView());
@@ -190,14 +201,24 @@ public class DataUsageList extends DataUsageBaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        mDataStateListener.setListener(true, mSubId, getContext());
+        mDataStateListener.start(mSubId);
+
+        // kick off loader for network history
+        // TODO: consider chaining two loaders together instead of reloading
+        // network history when showing app detail.
+        getLoaderManager().restartLoader(LOADER_CHART_DATA,
+                buildArgs(mTemplate), mNetworkCycleDataCallbacks);
+
         updateBody();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mDataStateListener.setListener(false, mSubId, getContext());
+        mDataStateListener.stop();
+
+        getLoaderManager().destroyLoader(LOADER_CHART_DATA);
+        getLoaderManager().destroyLoader(LOADER_SUMMARY);
     }
 
     @Override
@@ -234,6 +255,13 @@ public class DataUsageList extends DataUsageBaseFragment {
     }
 
     /**
+     * Implementation of {@code MobileDataEnabledListener.Client}
+     */
+    public void onMobileDataEnabledChange() {
+        updatePolicy();
+    }
+
+    /**
      * Update body content based on current tab. Loads network cycle data from system, and
      * binds them to visible controls.
      */
@@ -242,18 +270,12 @@ public class DataUsageList extends DataUsageBaseFragment {
 
         final Context context = getActivity();
 
-        // kick off loader for network history
-        // TODO: consider chaining two loaders together instead of reloading
-        // network history when showing app detail.
-        getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                buildArgs(mTemplate), mNetworkCycleDataCallbacks);
-
         // detail mode can change visible menus, invalidate
         getActivity().invalidateOptionsMenu();
 
         int seriesColor = context.getColor(R.color.sim_noitification);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            final SubscriptionInfo sir = services.mSubscriptionManager
+            final SubscriptionInfo sir = ProxySubscriptionManager.getInstance(context)
                     .getActiveSubscriptionInfo(mSubId);
 
             if (sir != null) {
@@ -400,7 +422,7 @@ public class DataUsageList extends DataUsageBaseFragment {
         Collections.sort(items);
         for (int i = 0; i < items.size(); i++) {
             final int percentTotal = largest != 0 ? (int) (items.get(i).total * 100 / largest) : 0;
-            AppDataUsagePreference preference = new AppDataUsagePreference(getContext(),
+            final AppDataUsagePreference preference = new AppDataUsagePreference(getContext(),
                     items.get(i), percentTotal, mUidDetailProvider);
             preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override

@@ -19,28 +19,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_calls_settings_page"
-    android:title="@string/zen_mode_calls_title" >
+    settings:searchable="false"
+    android:title="@string/zen_mode_calls_title">
 
-   <PreferenceCategory
-       android:title="@string/zen_mode_settings_category"
-       android:key="zen_mode_settings_category_calls">
-      <!-- Calls -->
-      <ListPreference
-          android:key="zen_mode_calls"
-          android:title="@string/zen_mode_calls"
-          android:entries="@array/zen_mode_contacts_calls_entries"
-          android:entryValues="@array/zen_mode_contacts_values"/>
+    <PreferenceCategory
+        android:key="zen_mode_settings_category_calls"
+        android:title="@string/zen_mode_calls_header"
+        settings:allowDividerBelow="true">
 
-      <Preference
-          android:key="zen_mode_starred_contacts_callers"
-          android:title="@string/zen_mode_starred_contacts_title"/>
+        <!-- Senders image -->
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="zen_mode_calls_image"
+            android:layout="@layout/zen_mode_senders_image"
+            android:selectable="false"/>
+    </PreferenceCategory>
 
-      <!-- Repeat callers -->
-      <SwitchPreference
-          android:key="zen_mode_repeat_callers"
-          android:title="@string/zen_mode_repeat_callers_title" />
-   </PreferenceCategory>
+    <!-- Repeat callers -->
+    <SwitchPreference
+        android:key="zen_mode_repeat_callers"
+        android:title="@string/zen_mode_repeat_callers_title"
+        settings:allowDividerAbove="true"/>
 
-   <com.android.settingslib.widget.FooterPreference/>
+    <com.android.settingslib.widget.FooterPreference/>
 
 </PreferenceScreen>

@@ -43,6 +43,11 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean useDynamicSliceSummary() {
         return true;
     }

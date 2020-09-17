@@ -18,6 +18,7 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.view.Gravity;
@@ -28,6 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settingslib.R;
+
+import java.util.Locale;
 
 public class UsageView extends FrameLayout {
 
@@ -85,6 +88,14 @@ public class UsageView extends FrameLayout {
         }
         mUsageGraph.setAccentColor(a.getColor(R.styleable.UsageView_android_colorAccent, 0));
         a.recycle();
+
+        // Locale Persian & Urdu are RTL languages but request LTR graph direction layout.
+        final String defaultLanguageCode = Locale.getDefault().getLanguage();
+        if (TextUtils.equals(defaultLanguageCode, new Locale("fa").getLanguage())
+                || TextUtils.equals(defaultLanguageCode, new Locale("ur").getLanguage())) {
+            findViewById(R.id.graph_label_group).setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            findViewById(R.id.bottom_label_group).setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
     }
 
     public void clearPaths() {

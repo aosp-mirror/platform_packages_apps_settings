@@ -15,51 +15,36 @@
  */
 package com.android.settings.location;
 
-import android.content.Context;
+import static com.android.settings.location.RecentLocationRequestPreferenceController.createAppPreference;
+import static com.android.settings.location.RecentLocationRequestPreferenceController.isRequestMatchesProfileType;
 
-import androidx.annotation.VisibleForTesting;
+import android.content.Context;
+import android.os.UserManager;
+
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.R;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.widget.apppreference.AppPreference;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.android.settings.R;
 
 /** Preference controller for preference category displaying all recent location requests. */
 public class RecentLocationRequestSeeAllPreferenceController
         extends LocationBasePreferenceController {
-    /** Key for preference category "All recent location requests" */
-    private static final String KEY_ALL_RECENT_LOCATION_REQUESTS = "all_recent_location_requests";
-    private final RecentLocationRequestSeeAllFragment mFragment;
-    private PreferenceCategory mCategoryAllRecentLocationRequests;
+
+    private PreferenceScreen mCategoryAllRecentLocationRequests;
     private RecentLocationApps mRecentLocationApps;
     private boolean mShowSystem = false;
     private Preference mPreference;
+    private int mType = ProfileSelectFragment.ProfileType.ALL;
 
-    public RecentLocationRequestSeeAllPreferenceController(
-            Context context, Lifecycle lifecycle, RecentLocationRequestSeeAllFragment fragment) {
-        this(context, lifecycle, fragment, new RecentLocationApps(context));
-    }
-
-    @VisibleForTesting
-    RecentLocationRequestSeeAllPreferenceController(
-            Context context,
-            Lifecycle lifecycle,
-            RecentLocationRequestSeeAllFragment fragment,
-            RecentLocationApps recentLocationApps) {
-        super(context, lifecycle);
-        mFragment = fragment;
-        mRecentLocationApps = recentLocationApps;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_ALL_RECENT_LOCATION_REQUESTS;
+    public RecentLocationRequestSeeAllPreferenceController(Context context, String key) {
+        super(context, key);
+        mRecentLocationApps = new RecentLocationApps(context);
     }
 
     @Override
@@ -70,41 +55,46 @@ public class RecentLocationRequestSeeAllPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mCategoryAllRecentLocationRequests =
-                (PreferenceCategory) screen.findPreference(KEY_ALL_RECENT_LOCATION_REQUESTS);
+        mCategoryAllRecentLocationRequests = screen.findPreference(getPreferenceKey());
     }
 
     @Override
     public void updateState(Preference preference) {
         mCategoryAllRecentLocationRequests.removeAll();
         mPreference = preference;
-        List<RecentLocationApps.Request> requests = mRecentLocationApps.getAppListSorted(
-                mShowSystem);
-        if (requests.isEmpty()) {
+
+        final UserManager userManager = UserManager.get(mContext);
+        final List<RecentLocationApps.Request> recentLocationRequests = new ArrayList<>();
+        for (RecentLocationApps.Request request : mRecentLocationApps.getAppListSorted(
+                mShowSystem)) {
+            if (isRequestMatchesProfileType(userManager, request, mType)) {
+                recentLocationRequests.add(request);
+            }
+        }
+
+        if (recentLocationRequests.isEmpty()) {
             // If there's no item to display, add a "No recent apps" item.
             final Preference banner = new AppPreference(mContext);
             banner.setTitle(R.string.location_no_recent_apps);
             banner.setSelectable(false);
             mCategoryAllRecentLocationRequests.addPreference(banner);
         } else {
-            for (RecentLocationApps.Request request : requests) {
-                Preference appPreference = createAppPreference(preference.getContext(), request);
+            for (RecentLocationApps.Request request : recentLocationRequests) {
+                final Preference appPreference = createAppPreference(
+                        preference.getContext(),
+                        request, mFragment);
                 mCategoryAllRecentLocationRequests.addPreference(appPreference);
             }
         }
     }
 
-    @VisibleForTesting
-    AppPreference createAppPreference(
-            Context prefContext, RecentLocationApps.Request request) {
-        final AppPreference pref = new AppPreference(prefContext);
-        pref.setSummary(request.contentDescription);
-        pref.setIcon(request.icon);
-        pref.setTitle(request.label);
-        pref.setOnPreferenceClickListener(
-                new RecentLocationRequestPreferenceController.PackageEntryClickedListener(
-                        mFragment, request.packageName, request.userHandle));
-        return pref;
+    /**
+     * Initialize {@link ProfileSelectFragment.ProfileType} of the controller
+     *
+     * @param type {@link ProfileSelectFragment.ProfileType} of the controller.
+     */
+    public void setProfileType(@ProfileSelectFragment.ProfileType int type) {
+        mType = type;
     }
 
     public void setShowSystem(boolean showSystem) {

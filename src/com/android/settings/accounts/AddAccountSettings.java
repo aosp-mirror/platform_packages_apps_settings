@@ -100,8 +100,9 @@ public class AddAccountSettings extends Activity {
                     addAccountOptions.putBoolean(EXTRA_HAS_MULTIPLE_USERS,
                             Utils.hasMultipleUsers(AddAccountSettings.this));
                     addAccountOptions.putParcelable(EXTRA_USER, mUserHandle);
-                    intent.putExtras(addAccountOptions);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtras(addAccountOptions)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivityForResultAsUser(intent, ADD_ACCOUNT_REQUEST, mUserHandle);
                 } else {
                     setResult(RESULT_OK);

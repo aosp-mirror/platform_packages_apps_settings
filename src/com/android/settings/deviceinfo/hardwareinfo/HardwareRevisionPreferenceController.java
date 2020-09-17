@@ -41,16 +41,6 @@ public class HardwareRevisionPreferenceController extends BasePreferenceControll
     }
 
     @Override
-    public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public boolean isCopyableSlice() {
-        return true;
-    }
-
-    @Override
     public void copy() {
         Sliceable.setCopyContent(mContext, getSummary(),
                 mContext.getText(R.string.hardware_revision));

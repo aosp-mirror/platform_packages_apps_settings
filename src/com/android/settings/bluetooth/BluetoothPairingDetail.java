@@ -29,9 +29,9 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
@@ -191,12 +191,19 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     }
 
     @Override
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-        if (mSelectedDevice != null) {
-            BluetoothDevice device = cachedDevice.getDevice();
-            if (device != null && mSelectedDevice.equals(device)
-                && state == BluetoothAdapter.STATE_CONNECTED) {
+    public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
+            int bluetoothProfile) {
+        // This callback is used to handle the case that bonded device is connected in pairing list.
+        // 1. If user selected multiple bonded devices in pairing list, after connected
+        // finish this page.
+        // 2. If the bonded devices auto connected in paring list, after connected it will be
+        // removed from paring list.
+        if (cachedDevice != null && cachedDevice.isConnected()) {
+            final BluetoothDevice device = cachedDevice.getDevice();
+            if (device != null && mSelectedList.contains(device)) {
                 finish();
+            } else if (mDevicePreferenceMap.containsKey(cachedDevice)) {
+                onDeviceDeleted(cachedDevice);
             }
         }
     }

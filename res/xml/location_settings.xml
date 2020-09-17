@@ -14,64 +14,74 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:key="location_settings"
-        android:title="@string/location_settings_title"
-        settings:keywords="@string/keywords_location">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="location_settings"
+    android:title="@string/location_settings_title"
+    settings:keywords="@string/keywords_location">
 
-        <PreferenceCategory
-            android:key="recent_location_requests"
-            android:title="@string/location_category_recent_location_requests"/>
+    <PreferenceCategory
+        android:key="recent_location_requests"
+        android:title="@string/location_category_recent_location_requests"
+        settings:controller="com.android.settings.location.RecentLocationRequestPreferenceController"/>
+
+    <Preference
+        android:key="recent_location_requests_see_all_button"
+        android:title="@string/location_recent_location_requests_see_all"
+        android:icon="@drawable/ic_chevron_right_24dp"
+        android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
+        settings:searchable="false"/>
+
+    <PreferenceCategory
+        android:key="location_advanced_settings"
+        android:layout="@layout/preference_category_no_label"
+        settings:initialExpandedChildrenCount="2">
+
+        <!-- This preference category gets removed if new_recent_location_ui is disabled -->
+        <Preference
+            android:key="app_level_permissions"
+            android:title="@string/location_app_level_permissions"
+            settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
+            <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
+                <extra android:name="android.intent.extra.PERMISSION_NAME"
+                       android:value="android.permission-group.LOCATION"/>
+            </intent>
+        </Preference>
 
         <Preference
-            android:key="recent_location_requests_see_all_button"
-            android:title="@string/location_recent_location_requests_see_all"
-            android:icon="@drawable/ic_chevron_right_24dp"
-            android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
-            settings:searchable="false"/>
+            android:fragment="com.android.settings.location.ScanningSettings"
+            android:key="location_scanning"
+            android:title="@string/location_scanning_screen_title"
+            settings:controller="com.android.settings.location.LocationScanningPreferenceController"/>
+
+        <!-- This preference gets removed if there is no managed profile -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:enabled="false"
+            android:key="managed_profile_location_switch"
+            android:selectable="true"
+            android:title="@string/managed_profile_location_switch_title"
+            settings:controller="com.android.settings.location.LocationForWorkPreferenceController"
+            settings:forWork="true"
+            settings:useAdminDisabledSummary="true"/>
 
         <PreferenceCategory
-            android:key="location_advanced_settings"
+            android:key="location_services"
             android:layout="@layout/preference_category_no_label"
-            settings:initialExpandedChildrenCount="2">
+            settings:controller="com.android.settings.location.LocationServicePreferenceController"/>
 
-            <!-- This preference category gets removed if new_recent_location_ui is disabled -->
-            <Preference
-                android:key="app_level_permissions"
-                android:title="@string/location_app_level_permissions">
-                <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
-                    <extra android:name="android.intent.extra.PERMISSION_NAME"
-                           android:value="android.permission-group.LOCATION" />
-                </intent>
-            </Preference>
-
-            <Preference
-                android:key="location_scanning"
-                android:title="@string/location_scanning_screen_title"
-                android:fragment="com.android.settings.location.ScanningSettings"/>
-
-            <!-- This preference gets removed if there is no managed profile -->
-            <com.android.settingslib.RestrictedSwitchPreference
-                android:key="managed_profile_location_switch"
-                android:title="@string/managed_profile_location_switch_title"
-                settings:useAdminDisabledSummary="true"
-                android:enabled="false"
-                android:selectable="true" />
-
-            <PreferenceCategory
-                android:key="location_services"
-                android:layout="@layout/preference_category_no_label"/>
-
-            <!-- This preference gets removed if there is no managed profile -->
-            <PreferenceCategory
-                android:title="@string/managed_profile_location_services"
-                android:key="location_services_managed_profile" />
-
-        </PreferenceCategory>
-
+        <!-- This preference gets removed if there is no managed profile -->
         <PreferenceCategory
-            android:key="location_footer"
-            android:layout="@layout/preference_category_no_label"
-            settings:allowDividerAbove="false"/>
+            android:key="location_services_managed_profile"
+            android:title="@string/managed_profile_location_services"
+            settings:forWork="true"
+            settings:controller="com.android.settings.location.LocationServiceForWorkPreferenceController"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="location_footer"
+        android:layout="@layout/preference_category_no_label"
+        settings:allowDividerAbove="false"
+        settings:controller="com.android.settings.location.LocationFooterPreferenceController"/>
 </PreferenceScreen>

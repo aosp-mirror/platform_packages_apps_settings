@@ -15,22 +15,28 @@
      limitations under the License.
 -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:icon="@drawable/ic_wifi_signal_4_32dp">
 
     <LinearLayout
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/footer">
+        android:orientation="vertical">
 
-        <include layout="@layout/wifi_dpp_fragment_header"/>
+        <TextView
+            android:id="@android:id/summary"
+            style="@style/TextAppearance.SudGlifBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?attr/sudMarginSides"
+            android:layout_marginEnd="?attr/sudMarginSides"
+            android:textAlignment="center"
+            android:accessibilityLiveRegion="polite"/>
 
         <LinearLayout android:id="@+id/wifi_network_list_container"
             android:layout_width="match_parent"
@@ -38,12 +44,5 @@
 
     </LinearLayout>
 
-    <include
-        android:id="@+id/footer"
-        layout="@layout/wifi_dpp_fragment_footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.setupdesign.GlifLayout>
 

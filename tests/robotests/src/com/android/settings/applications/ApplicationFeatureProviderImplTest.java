@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -36,7 +38,6 @@ import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.R;
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
 import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
@@ -165,7 +166,7 @@ public final class ApplicationFeatureProviderImplTest {
                 .thenReturn(PackageManager.INSTALL_REASON_POLICY);
 
         mAppCount = -1;
-        mProvider.calculateNumberOfAppsWithAdminGrantedPermissions(new String[] {PERMISSION}, async,
+        mProvider.calculateNumberOfAppsWithAdminGrantedPermissions(new String[]{PERMISSION}, async,
                 (num) -> mAppCount = num);
         if (async) {
             ShadowApplication.runBackgroundTasks();
@@ -202,7 +203,7 @@ public final class ApplicationFeatureProviderImplTest {
                 .thenReturn(PackageManager.INSTALL_REASON_POLICY);
 
         mAppList = null;
-        mProvider.listAppsWithAdminGrantedPermissions(new String[] {PERMISSION},
+        mProvider.listAppsWithAdminGrantedPermissions(new String[]{PERMISSION},
                 (list) -> mAppList = list);
         assertThat(mAppList).isNotNull();
         assertThat(mAppList.size()).isEqualTo(2);
@@ -251,10 +252,10 @@ public final class ApplicationFeatureProviderImplTest {
                 new ApplicationInfo(app2.activityInfo.applicationInfo)));
 
         assertThat(mProvider.findPersistentPreferredActivities(MAIN_USER_ID,
-                new Intent[] {viewIntent, editIntent, sendIntent}))
+                new Intent[]{viewIntent, editIntent, sendIntent}))
                 .isEqualTo(expectedMainUserActivities);
         assertThat(mProvider.findPersistentPreferredActivities(MANAGED_PROFILE_ID,
-                new Intent[] {viewIntent, editIntent, sendIntent}))
+                new Intent[]{viewIntent, editIntent, sendIntent}))
                 .isEqualTo(expectedManagedUserActivities);
     }
 
@@ -280,6 +281,35 @@ public final class ApplicationFeatureProviderImplTest {
         final List<String> expectedPackages = Arrays.asList(testDialer, testSms,
                 testLocationHistory);
         assertThat(keepEnabledPackages).containsAllIn(expectedPackages);
+    }
+
+    @Test
+    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    public void getKeepEnabledPackages_hasEuiccComponent_shouldContainEuiccPackage() {
+        final String testDialer = "com.android.test.defaultdialer";
+        final String testSms = "com.android.test.defaultsms";
+        final String testLocationHistory = "com.android.test.location.history";
+        final String testEuicc = "com.android.test.euicc";
+
+        ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
+        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+        final ComponentInfo componentInfo = new ComponentInfo();
+        componentInfo.packageName = testEuicc;
+
+        ApplicationFeatureProviderImpl spyProvider = spy(new ApplicationFeatureProviderImpl(
+                mContext, mPackageManager, mPackageManagerService, mDevicePolicyManager));
+        doReturn(componentInfo).when(spyProvider).findEuiccService(mPackageManager);
+
+        // Spy the real context to mock LocationManager.
+        Context spyContext = spy(RuntimeEnvironment.application);
+        when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
+        when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+
+        ReflectionHelpers.setField(mProvider, "mContext", spyContext);
+
+        final Set<String> keepEnabledPackages = spyProvider.getKeepEnabledPackages();
+
+        assertThat(keepEnabledPackages).contains(testEuicc);
     }
 
     @Test

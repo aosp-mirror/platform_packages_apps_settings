@@ -16,12 +16,54 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="autoclick_preference_screen"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/accessibility_autoclick_preference_title">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="accessibility_autoclick_preview"
+        android:layout="@layout/accessibility_autoclick_preview"
+        android:persistent="false"
+        android:selectable="false"
+        android:title="@string/summary_placeholder"
+        settings:allowDividerBelow="true"
+        settings:searchable="false" />
 
-    <com.android.settings.widget.SeekBarPreference
-        android:key="autoclick_delay"
-        android:title="@string/accessibility_autoclick_delay_preference_title" />
+    <com.android.settingslib.widget.RadioButtonPreference
+        android:key="accessibility_control_autoclick_default"
+        android:title="@string/accessibility_autoclick_default_title"
+        settings:allowDividerAbove="true" />
+
+    <com.android.settingslib.widget.RadioButtonPreference
+        android:key="accessibility_control_autoclick_200ms"
+        android:title="@string/accessibility_autoclick_short_title"
+        android:summary="@string/accessibility_autoclick_short_summary" />
+
+    <com.android.settingslib.widget.RadioButtonPreference
+        android:key="accessibility_control_autoclick_600ms"
+        android:title="@string/accessibility_autoclick_medium_title"
+        android:summary="@string/accessibility_autoclick_medium_summary" />
+
+    <com.android.settingslib.widget.RadioButtonPreference
+        android:key="accessibility_control_autoclick_1sec"
+        android:title="@string/accessibility_autoclick_long_title"
+        android:summary="@string/accessibility_autoclick_long_summary" />
+
+    <com.android.settingslib.widget.RadioButtonPreference
+        android:key="accessibility_control_autoclick_custom"
+        android:title="@string/accessibility_autoclick_custom_title" />
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="autoclick_custom_seekbar"
+        android:layout="@layout/accessibility_autoclick_custom_seekbar"
+        android:selectable="false"
+        android:visibility="gone"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="autoclick_footer"
+        android:title="@string/accessibility_autoclick_description"
+        android:selectable="false"
+        settings:searchable="false" />
 
 </PreferenceScreen>

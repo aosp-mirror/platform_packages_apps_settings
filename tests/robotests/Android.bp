@@ -31,6 +31,9 @@ android_app {
         "androidx-constraintlayout_constraintlayout-solver",
         "androidx.lifecycle_lifecycle-runtime",
         "androidx.lifecycle_lifecycle-extensions",
+        "androidx.test.core",
+        "androidx.test.runner",
+        "androidx.test.ext.junit",
         "guava",
         "jsr305",
         "settings-contextual-card-protos-lite",
@@ -66,8 +69,8 @@ android_robolectric_test {
     ],
 
     libs: [
+        "framework-wifi.impl",
         "ims-common",
-        "telephony-common",
     ],
 
     java_resource_dirs: ["config", "resources"],
@@ -76,6 +79,7 @@ android_robolectric_test {
 
     test_options: {
         timeout: 36000,
+        shards: 10,
     },
 
     coverage_libs: [

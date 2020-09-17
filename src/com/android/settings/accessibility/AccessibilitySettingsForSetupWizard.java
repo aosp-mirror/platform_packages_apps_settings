@@ -16,13 +16,14 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,6 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             "screen_magnification_preference";
     private static final String SCREEN_READER_PREFERENCE = "screen_reader_preference";
     private static final String SELECT_TO_SPEAK_PREFERENCE = "select_to_speak_preference";
-    private static final String FONT_SIZE_PREFERENCE = "font_size_preference";
 
     // Package names and service names used to identify screen reader and SelectToSpeak services.
     private static final String SCREEN_READER_PACKAGE_NAME = "com.google.android.marvin.talkback";
@@ -100,9 +100,11 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     public void onResume() {
         super.onResume();
         updateAccessibilityServicePreference(mScreenReaderPreference,
-                findService(SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME));
+                SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME,
+                VolumeShortcutToggleScreenReaderPreferenceFragmentForSetupWizard.class.getName());
         updateAccessibilityServicePreference(mSelectToSpeakPreference,
-                findService(SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME));
+                SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME,
+                VolumeShortcutToggleSelectToSpeakPreferenceFragmentForSetupWizard.class.getName());
         configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreference);
     }
 
@@ -144,7 +146,8 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     }
 
     private void updateAccessibilityServicePreference(Preference preference,
-            AccessibilityServiceInfo info) {
+            String packageName, String serviceName, String targetFragment) {
+        final AccessibilityServiceInfo info = findService(packageName, serviceName);
         if (info == null) {
             getPreferenceScreen().removePreference(preference);
             return;
@@ -155,6 +158,9 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         preference.setTitle(title);
         ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
         preference.setKey(componentName.flattenToString());
+        if (AccessibilityUtil.getAccessibilityServiceFragmentType(info) == VOLUME_SHORTCUT_TOGGLE) {
+            preference.setFragment(targetFragment);
+        }
 
         // Update the extras.
         Bundle extras = preference.getExtras();
@@ -165,23 +171,20 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         extras.putString(AccessibilitySettings.EXTRA_TITLE, title);
 
         String description = info.loadDescription(getPackageManager());
-        if (TextUtils.isEmpty(description)) {
-            description = getString(R.string.accessibility_service_default_description);
-        }
         extras.putString(AccessibilitySettings.EXTRA_SUMMARY, description);
+
+        extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
+
+        final String htmlDescription = info.loadHtmlDescription(getPackageManager());
+        extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
     }
 
     private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
-        // Some devices support only a single magnification mode. In these cases, we redirect to
-        // the magnification mode's UI directly, rather than showing a PreferenceScreen with a
-        // single list item.
         final Context context = preference.getContext();
-        if (!MagnificationPreferenceFragment.isApplicable(context.getResources())) {
-            preference.setFragment(
-                    ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
-            final Bundle extras = preference.getExtras();
-            MagnificationGesturesPreferenceController
-                    .populateMagnificationGesturesPreferenceExtras(extras, context);
-        }
+        preference.setFragment(
+                ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
+        final Bundle extras = preference.getExtras();
+        MagnificationGesturesPreferenceController
+                .populateMagnificationGesturesPreferenceExtras(extras, context);
     }
 }

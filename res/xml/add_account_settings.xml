@@ -19,5 +19,11 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="add_account_screen"
     android:title="@string/header_add_an_account"
-    settings:controller="com.android.settings.accounts.ChooseAccountPreferenceController"
-    settings:keywords="@string/keywords_add_an_account"/>
+    settings:controller="com.android.settings.accounts.ChooseAccountPreferenceController">
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="add_account_enterprise_disclosure_footer"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accounts.EnterpriseDisclosurePreferenceController"/>
+</PreferenceScreen>

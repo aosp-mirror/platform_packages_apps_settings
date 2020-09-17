@@ -18,28 +18,43 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingEnd="?android:attr/dialogPreferredPadding"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="?android:attr/selectableItemBackground"
     android:minHeight="?android:attr/listPreferredItemHeightSmall">
 
-  <TextView
-      android:id="@+id/network_request_title_text"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:paddingLeft="24dp"
-      android:paddingTop="18dp"
-      android:layout_weight="1"
-      android:textSize="18sp"
-      android:gravity="center_vertical"
-      style="@style/info_label"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="24dp">
 
-  <ProgressBar
-      android:id="@+id/network_request_title_progress"
-      style="?android:attr/progressBarStyleSmallTitle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_vertical"
-      android:layout_marginStart="16dip"
-      android:minWidth="32dp"
-      android:text="@string/progress_scanning"/>
+        <TextView
+            android:id="@+id/network_request_title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            style="@style/info_label"/>
+
+        <ProgressBar
+            android:id="@+id/network_request_title_progress"
+            style="?android:attr/progressBarStyleSmallTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="16dip"
+            android:minWidth="32dp"
+            android:text="@string/progress_scanning"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/network_request_summary_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingTop="18dp"
+        android:textSize="16sp"/>
 </LinearLayout>

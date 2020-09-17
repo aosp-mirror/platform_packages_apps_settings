@@ -33,7 +33,9 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
 
     private static final String TAG = "ConnBluetoothDeviceUpdater";
-    private static final boolean DBG = false;
+    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
+
+    private static final String PREF_KEY = "connected_bt";
 
     private final AudioManager mAudioManager;
 
@@ -110,5 +112,10 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
                 return true;
             });
         }
+    }
+
+    @Override
+    protected String getPreferenceKey() {
+        return PREF_KEY;
     }
 }

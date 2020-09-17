@@ -17,8 +17,6 @@ package com.android.settings.applications.specialaccess.vrlistener;
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.Context;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.vr.VrListenerService;
 
@@ -27,13 +25,9 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable
 public class VrListenerSettings extends ManagedServiceSettings {
@@ -84,18 +78,7 @@ public class VrListenerSettings extends ManagedServiceSettings {
                 0);
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.vr_listeners_settings;
-                    result.add(sir);
-                    return result;
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.vr_listeners_settings);
 
 }

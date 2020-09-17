@@ -18,7 +18,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="adaptive_sleep_detail"
     android:title="@string/adaptive_sleep_title">
 
     <com.android.settings.widget.VideoPreference
@@ -44,5 +43,12 @@
         settings:controller="com.android.settings.display.AdaptiveSleepDetailPreferenceController"
         settings:useAdminDisabledSummary="true"
         settings:allowDividerAbove="true" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="adaptive_sleep_footer"
+        android:title="@string/adaptive_sleep_privacy"
+        android:icon="@drawable/ic_privacy_shield_24dp"
+        android:selectable="false"
+        settings:searchable="false" />
 
 </PreferenceScreen>

@@ -55,7 +55,7 @@ public class InstallCertificateFromStorage extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return new ArrayList<AbstractPreferenceController>();
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -76,7 +76,7 @@ public class InstallCertificateFromStorage extends DashboardFragment {
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
+            new BaseSearchIndexProvider(R.xml.install_certificate_from_storage) {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {

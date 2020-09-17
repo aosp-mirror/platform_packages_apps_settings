@@ -25,6 +25,8 @@ import android.util.Log;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.dashboard.DashboardFragmentSearchIndexProviderInspector;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableData;
 import com.android.settingslib.search.SearchIndexableResources;
 
 import org.robolectric.RuntimeEnvironment;
@@ -53,7 +55,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                     + " but these are not: \n";
     private static final String NOT_PROVIDING_VALID_RESOURCE_ERROR =
             "SearchIndexableProvider must either provide no resource to index, or valid ones. "
-            + "But the followings contain resource with xml id = 0\n";
+                    + "But the followings contain resource with xml id = 0\n";
 
     private final List<String> notImplementingIndexProviderGrandfatherList;
     private final List<String> notInSearchIndexableRegistryGrandfatherList;
@@ -78,6 +80,13 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         final Set<String> notInSearchProviderRegistry = new ArraySet<>();
         final Set<String> notSharingPreferenceControllers = new ArraySet<>();
         final Set<String> notProvidingValidResource = new ArraySet<>();
+        final Set<Class> providerClasses = new ArraySet<>();
+
+        final SearchFeatureProvider provider = new SearchFeatureProviderImpl();
+        for (SearchIndexableData bundle :
+                provider.getSearchIndexableResources().getProviderValues()) {
+            providerClasses.add(bundle.getTargetClass());
+        }
 
         for (Class clazz : mClasses) {
             if (!isConcreteSettingsClass(clazz)) {
@@ -107,8 +116,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                 continue;
             }
             // Must be in SearchProviderRegistry
-            SearchFeatureProvider provider = new SearchFeatureProviderImpl();
-            if (!provider.getSearchIndexableResources().getProviderValues().contains(clazz)) {
+            if (!providerClasses.contains(clazz)) {
                 if (!notInSearchIndexableRegistryGrandfatherList.remove(className)) {
                     notInSearchProviderRegistry.add(className);
                 }

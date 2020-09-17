@@ -85,8 +85,5 @@ public class RestrictedEncryptionPreferenceControllerTest {
         assertThat(mInstallCertificatePreferenceController.isAvailable()).isFalse();
         assertThat(mResetCredentialsPreferenceController.isAvailable()).isFalse();
         assertThat(mUserCredentialsPreferenceController.isAvailable()).isFalse();
-        assertThat(mInstallCaCertificatePreferenceController.isAvailable()).isFalse();
-        assertThat(mInstallUserCertificatePreferenceController.isAvailable()).isFalse();
-        assertThat(mInstallWifiCertificatePreferenceController.isAvailable()).isFalse();
     }
 }

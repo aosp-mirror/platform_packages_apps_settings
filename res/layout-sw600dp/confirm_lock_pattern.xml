@@ -13,12 +13,16 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout="@layout/sud_glif_blank_template">
 
-    <include layout="@layout/confirm_lock_pattern_base"
+    <include
+        layout="@layout/confirm_lock_pattern_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"/>
-</FrameLayout>
+        android:layout_gravity="center_horizontal" />
+</com.google.android.setupdesign.GlifLayout>

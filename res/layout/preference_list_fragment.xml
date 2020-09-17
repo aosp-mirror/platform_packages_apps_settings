@@ -17,7 +17,9 @@
 */
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container_material"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -49,44 +51,41 @@
         android:gravity="center_vertical"
         android:visibility="gone" />
 
-    <RelativeLayout android:id="@+id/button_bar"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:theme="@style/Theme.TabTheme"
+        android:id="@+id/tab_container"
+        android:clipToPadding="true"
+        android:clipChildren="true"
         android:layout_width="match_parent"
-        android:layout_weight="0"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="gone">
 
-        <Button android:id="@+id/back_button"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="150dip"
+        <com.google.android.material.tabs.TabLayout
+            android:background="@android:color/transparent"
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:layout_alignParentStart="true"
-            android:text="@*android:string/back_button_label" />
+            android:layoutDirection="ltr"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabIndicatorColor="@*android:color/accent_device_default"
+            app:tabSelectedTextColor="@*android:color/accent_device_default"
+            app:tabTextAppearance="@style/TextAppearance.Tab"
+            app:tabTextColor="?android:attr/textColorSecondary"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <Button android:id="@+id/skip_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="@*android:string/skip_button_label"
-                android:visibility="gone" />
-
-            <Button android:id="@+id/next_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="@*android:string/next_button_label" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+        </androidx.viewpager.widget.ViewPager>
+    </LinearLayout>
 
 </LinearLayout>
 

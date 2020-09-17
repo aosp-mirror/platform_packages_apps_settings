@@ -23,9 +23,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +33,6 @@ import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.WifiSsid;
 import android.provider.Settings;
 
 import androidx.fragment.app.Fragment;
@@ -45,19 +42,18 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
-import com.android.settingslib.wifi.WifiTracker.WifiListener;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -107,8 +103,6 @@ public class WifiNetworkListFragmentTest {
         intent.setData(Uri.parse(uriString));
         mActivityRule.launchActivity(intent);
 
-        verify(mWifiTracker).getManager();
-
         List<Fragment> fragments =
                 mActivityRule.getActivity().getSupportFragmentManager().getFragments();
         assertThat(fragments.size()).isEqualTo(1);
@@ -138,11 +132,12 @@ public class WifiNetworkListFragmentTest {
         config.BSSID = TEST_BSSID;
         config.networkId = TEST_NETWORK_ID;
         config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
-        final WifiInfo wifiInfo = new WifiInfo();
-        wifiInfo.setSSID(WifiSsid.createFromAsciiEncoded(TEST_UNQUOTED_SSID));
-        wifiInfo.setBSSID(TEST_BSSID);
-        wifiInfo.setRssi(TEST_RSSI);
-        wifiInfo.setNetworkId(TEST_NETWORK_ID);
+        final WifiInfo wifiInfo = new WifiInfo.Builder()
+                .setSsid(TEST_UNQUOTED_SSID.getBytes(StandardCharsets.UTF_8))
+                .setBssid(TEST_BSSID)
+                .setRssi(TEST_RSSI)
+                .setNetworkId(TEST_NETWORK_ID)
+                .build();
         final NetworkInfo networkInfo = new NetworkInfo(ConnectivityManager.TYPE_WIFI, 0, null, null);
         networkInfo.setDetailedState(NetworkInfo.DetailedState.CONNECTED, null, null);
         final AccessPoint accessPoint = new AccessPoint(mContext, config);

@@ -38,7 +38,6 @@ public class TtsPreferenceController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return !mTtsEngines.getEngines().isEmpty() &&
                 mContext.getResources().getBoolean(R.bool.config_show_tts_settings_summary)
-                ? AVAILABLE_UNSEARCHABLE
-                : CONDITIONALLY_UNAVAILABLE;
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 }
