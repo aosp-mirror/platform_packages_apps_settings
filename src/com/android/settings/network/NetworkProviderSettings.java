@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi;
+package com.android.settings.network;
 
 import static android.net.wifi.WifiConfiguration.NetworkSelectionStatus.NETWORK_SELECTION_ENABLED;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
@@ -68,6 +68,16 @@ import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBarController;
+import com.android.settings.wifi.AddNetworkFragment;
+import com.android.settings.wifi.AddWifiNetworkPreference;
+import com.android.settings.wifi.ConfigureWifiEntryFragment;
+import com.android.settings.wifi.ConnectedWifiEntryPreference;
+import com.android.settings.wifi.LinkablePreference;
+import com.android.settings.wifi.WifiConfigUiBase2;
+import com.android.settings.wifi.WifiConnectListener;
+import com.android.settings.wifi.WifiDialog2;
+import com.android.settings.wifi.WifiEnabler;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.HelpUtils;
@@ -87,17 +97,16 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * UI for Wi-Fi settings screen
+ * UI for Mobile network and Wi-Fi network settings.
  *
- * TODO(b/167474581): This file will be deprecated at Android S, please merge your WifiSettings
- * in change in {@link NetworkProviderSettings}.
+ * TODO(b/167474581): Define the intent android.settings.NETWORK_PROVIDER_SETTINGS in Settings.java.
  */
 @SearchIndexable
-public class WifiSettings extends RestrictedSettingsFragment
+public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener {
 
-    private static final String TAG = "WifiSettings";
+    private static final String TAG = "NetworkProviderSettings";
 
     // IDs of context menu
     static final int MENU_ID_CONNECT = Menu.FIRST + 1;
@@ -173,7 +182,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WifiManager.ActionListener mForgetListener;
 
     /**
-     * The state of {@link #isUiRestricted()} at {@link #onCreate(Bundle)}}. This is neccesary to
+     * The state of {@link #isUiRestricted()} at {@link #onCreate(Bundle)}}. This is necessary to
      * ensure that behavior is consistent if {@link #isUiRestricted()} changes. It could be changed
      * by the Test DPC tool in AFW mode.
      */
@@ -209,7 +218,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     private boolean mClickedConnect;
 
-    public WifiSettings() {
+    public NetworkProviderSettings() {
         super(DISALLOW_CONFIG_WIFI);
     }
 
@@ -221,26 +230,16 @@ public class WifiSettings extends RestrictedSettingsFragment
             mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
                     .findViewById(R.id.progress_bar_animation);
             setProgressBarVisible(false);
+
+            ((SettingsActivity) activity).getSwitchBar().setSwitchBarText(
+                    R.string.wifi_settings_primary_switch_title,
+                    R.string.wifi_settings_primary_switch_title);
         }
-        ((SettingsActivity) activity).getSwitchBar().setSwitchBarText(
-                R.string.wifi_settings_primary_switch_title,
-                R.string.wifi_settings_primary_switch_title);
     }
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
-            final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS");
-            final Bundle extras = getActivity().getIntent().getExtras();
-            if (extras != null) {
-                intent.putExtras(extras);
-            }
-            getContext().startActivity(intent);
-            finish();
-            return;
-        }
 
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
         // loaded (ODR).
@@ -252,7 +251,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void addPreferences() {
-        addPreferencesFromResource(R.xml.wifi_settings);
+        addPreferencesFromResource(R.xml.network_provider_settings);
 
         mConnectedWifiEntryPreferenceCategory = findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
         mWifiEntryPreferenceCategory = findPreference(PREF_KEY_ACCESS_POINTS);
@@ -1049,7 +1048,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     };
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.wifi_settings) {
+            new BaseSearchIndexProvider(R.xml.network_provider_settings) {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
@@ -1111,7 +1110,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 .setDestination(ConfigureWifiEntryFragment.class.getName())
                 .setArguments(bundle)
                 .setSourceMetricsCategory(getMetricsCategory())
-                .setResultListener(WifiSettings.this, CONFIG_NETWORK_REQUEST)
+                .setResultListener(NetworkProviderSettings.this, CONFIG_NETWORK_REQUEST)
                 .launch();
     }
 
