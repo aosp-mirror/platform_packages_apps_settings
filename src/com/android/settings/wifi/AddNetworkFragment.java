@@ -41,7 +41,7 @@ import com.android.settings.wifi.dpp.WifiDppUtils;
 public class AddNetworkFragment extends InstrumentedFragment implements WifiConfigUiBase2,
         View.OnClickListener {
 
-    final static String WIFI_CONFIG_KEY = "wifi_config_key";
+    public static final String WIFI_CONFIG_KEY = "wifi_config_key";
     @VisibleForTesting
     final static int SUBMIT_BUTTON_ID = android.R.id.button1;
     @VisibleForTesting
