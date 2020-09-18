@@ -57,6 +57,9 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
      * starting the next activity. However, this leads to broken 'Back'
      * behavior. So, now an activity does not finish itself until it gets this
      * result.
+     *
+     * This must be the same as
+     * {@link com.android.settings.password.ChooseLockPattern#RESULT_FINISHED}
      */
     public static final int RESULT_FINISHED = RESULT_FIRST_USER;
 
@@ -78,6 +81,11 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final int LEARN_MORE_REQUEST = 3;
     public static final int CONFIRM_REQUEST = 4;
     public static final int ENROLL_REQUEST = 5;
+    /**
+     * Request code when starting another biometric enrollment from within a biometric flow. For
+     * example, when starting fingerprint enroll after face enroll.
+     */
+    public static final int ENROLL_NEXT_BIOMETRIC_REQUEST = 6;
 
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;

@@ -200,8 +200,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                                 .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
                         /* isPatternMode= */ false,
                         /* isAlphaMode= */ false,
-                        /* isFingerprintSupported= */ false,
-                        /* isFaceSupported= */ false
+                        /* forFingerprint= */ false,
+                        /* forFace= */ false,
+                        /* forBiometrics= */ false
                 );
                 dialog.show(getFragmentManager());
                 return true;
@@ -242,7 +243,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         }
 
         private boolean isForBiometric() {
-            return mForFingerprint || mForFace;
+            return mForFingerprint || mForFace || mForBiometrics;
         }
     }
 

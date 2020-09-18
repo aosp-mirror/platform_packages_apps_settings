@@ -236,7 +236,7 @@ public class FaceSettings extends DashboardFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (mToken == null && !BiometricUtils.containsGatekeeperPassword(data)) {
+        if (mToken == null && !BiometricUtils.containsGatekeeperPasswordHandle(data)) {
             Log.e(TAG, "No credential");
             finish();
         }

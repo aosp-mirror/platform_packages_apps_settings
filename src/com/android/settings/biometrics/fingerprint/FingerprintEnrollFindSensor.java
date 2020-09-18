@@ -63,7 +63,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
         // This is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
-        if (mToken == null && BiometricUtils.containsGatekeeperPassword(getIntent())) {
+        if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
             final FingerprintManager fpm = getSystemService(FingerprintManager.class);
             fpm.generateChallenge((sensorId, challenge) -> {
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
@@ -79,6 +79,9 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
         } else if (mToken != null) {
             // HAT passed in from somewhere else, such as FingerprintEnrollIntroduction
             startLookingForFingerprint();
+        } else {
+            // There's something wrong with the enrollment flow, this should never happen.
+            throw new IllegalStateException("HAT and GkPwHandle both missing...");
         }
 
         View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
