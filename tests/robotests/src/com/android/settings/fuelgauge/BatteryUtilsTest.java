@@ -533,7 +533,7 @@ public class BatteryUtilsTest {
         BatterySipper sipper = mBatteryUtils.findBatterySipperByType(mUsageList,
                 BatterySipper.DrainType.SCREEN);
 
-        assertThat(sipper).isSameAs(mScreenBatterySipper);
+        assertThat(sipper).isSameInstanceAs(mScreenBatterySipper);
     }
 
     @Test
@@ -541,7 +541,7 @@ public class BatteryUtilsTest {
         BatterySipper sipper = mBatteryUtils.findBatterySipperByType(mUsageList,
                 BatterySipper.DrainType.APP);
 
-        assertThat(sipper).isSameAs(mNormalBatterySipper);
+        assertThat(sipper).isSameInstanceAs(mNormalBatterySipper);
     }
 
     @Test

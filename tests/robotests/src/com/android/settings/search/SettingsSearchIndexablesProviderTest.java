@@ -117,7 +117,7 @@ public class SettingsSearchIndexablesProviderTest {
         }
 
         assertThat(keys).hasSize(3);
-        assertThat(keys).containsAllOf("pref_key_1", "pref_key_3", "pref_key_5");
+        assertThat(keys).containsAtLeast("pref_key_1", "pref_key_3", "pref_key_5");
     }
 
     @Test
