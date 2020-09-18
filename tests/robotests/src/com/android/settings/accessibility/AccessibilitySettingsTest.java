@@ -99,7 +99,7 @@ public class AccessibilitySettingsTest {
         final List<String> keys =
                 XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
 
-        assertThat(keys).containsAllIn(niks);
+        assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
     @Test

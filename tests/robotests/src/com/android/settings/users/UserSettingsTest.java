@@ -398,7 +398,7 @@ public class UserSettingsTest {
         ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
         verify(mFragment.mUserListCategory).addPreference(captor.capture());
         UserPreference adminPref = captor.getValue();
-        assertThat(adminPref).isSameAs(mMePreference);
+        assertThat(adminPref).isSameInstanceAs(mMePreference);
     }
 
     @Test
@@ -417,7 +417,7 @@ public class UserSettingsTest {
         assertThat(guestPref.getKey()).isEqualTo(KEY_USER_GUEST);
         assertThat(guestPref.isEnabled()).isEqualTo(true);
         assertThat(guestPref.isSelectable()).isEqualTo(true);
-        assertThat(guestPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(guestPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -436,7 +436,7 @@ public class UserSettingsTest {
         assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
         assertThat(userPref.isEnabled()).isEqualTo(true);
         assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -456,7 +456,7 @@ public class UserSettingsTest {
         assertThat(userPref.getSummary()).isEqualTo("Restricted profile");
         assertThat(userPref.isEnabled()).isEqualTo(true);
         assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -493,7 +493,7 @@ public class UserSettingsTest {
         assertThat(userPref.getSummary()).isEqualTo("Not set up - Restricted profile");
         assertThat(userPref.isEnabled()).isEqualTo(true);
         assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -518,7 +518,7 @@ public class UserSettingsTest {
         assertThat(userPref.getSummary()).isEqualTo("Not set up");
         assertThat(userPref.isEnabled()).isEqualTo(false);
         assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
