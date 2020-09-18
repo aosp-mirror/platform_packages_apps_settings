@@ -81,7 +81,7 @@ public class ChooseLockPattern extends SettingsActivity {
      * behavior. So, now an activity does not finish itself until it gets this
      * result.
      */
-    static final int RESULT_FINISHED = RESULT_FIRST_USER;
+    public static final int RESULT_FINISHED = RESULT_FIRST_USER;
 
     private static final String TAG = "ChooseLockPattern";
 
@@ -131,6 +131,11 @@ public class ChooseLockPattern extends SettingsActivity {
 
         public IntentBuilder setForFace(boolean forFace) {
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, forFace);
+            return this;
+        }
+
+        public IntentBuilder setForBiometrics(boolean forBiometrics) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, forBiometrics);
             return this;
         }
 
@@ -455,6 +460,7 @@ public class ChooseLockPattern extends SettingsActivity {
         protected int mUserId;
         protected boolean mForFingerprint;
         protected boolean mForFace;
+        protected boolean mForBiometrics;
 
         private static final String KEY_UI_STAGE = "uiStage";
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
@@ -488,6 +494,8 @@ public class ChooseLockPattern extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             mForFace = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
+            mForBiometrics = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
         }
 
         @Override
@@ -506,6 +514,8 @@ public class ChooseLockPattern extends SettingsActivity {
                     layout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
                 } else if (mForFace) {
                     layout.setIcon(getActivity().getDrawable(R.drawable.ic_face_header));
+                } else if (mForBiometrics) {
+                    layout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
                 }
             }
 
@@ -732,8 +742,8 @@ public class ChooseLockPattern extends SettingsActivity {
             } else {
                 mHeaderText.setText(stage.headerMessage);
             }
-            final boolean forBiometrics = mForFingerprint || mForFace;
-            int message = forBiometrics ? stage.messageForBiometrics : stage.message;
+            final boolean forAnyBiometric = mForFingerprint || mForFace || mForBiometrics;
+            int message = forAnyBiometric ? stage.messageForBiometrics : stage.message;
             if (message == ID_EMPTY_MESSAGE) {
                 mMessageText.setText("");
             } else {
@@ -756,7 +766,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     mHeaderText.setTextColor(mDefaultHeaderColorList);
                 }
 
-                if (stage == Stage.NeedToConfirm && forBiometrics) {
+                if (stage == Stage.NeedToConfirm && forAnyBiometric) {
                     mHeaderText.setText("");
                     mTitleText.setText(R.string.lockpassword_draw_your_pattern_again_header);
                 }

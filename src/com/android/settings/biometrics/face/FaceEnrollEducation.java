@@ -33,6 +33,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -183,6 +184,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
         final String flattenedString = getString(R.string.config_face_enroll);
         if (!TextUtils.isEmpty(flattenedString)) {
             ComponentName componentName = ComponentName.unflattenFromString(flattenedString);
