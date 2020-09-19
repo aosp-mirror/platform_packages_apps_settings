@@ -138,6 +138,12 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
                 mZenMuted = zenMuted;
                 updateIconView();
             }
+            @Override
+            public void onStartTrackingTouch(SeekBarVolumizer sbv) {
+                if (mCallback != null) {
+                    mCallback.onStartTrackingTouch(sbv);
+                }
+            }
         };
         final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
         if (mVolumizer == null) {
@@ -201,5 +207,10 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     public interface Callback {
         void onSampleStarting(SeekBarVolumizer sbv);
         void onStreamValueChanged(int stream, int progress);
+
+        /**
+         * Callback reporting that the seek bar is start tracking.
+         */
+        void onStartTrackingTouch(SeekBarVolumizer sbv);
     }
 }
