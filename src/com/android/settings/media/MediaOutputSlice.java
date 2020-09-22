@@ -257,9 +257,11 @@ public class MediaOutputSlice implements CustomSliceable {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
                         getWorker().getPackageName());
-
+        final int requestCode = TextUtils.isEmpty(getWorker().getPackageName())
+                ? 0
+                : getWorker().getPackageName().hashCode();
         return SliceAction.createDeeplink(
-                PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */),
+                PendingIntent.getActivity(mContext, requestCode, intent, 0 /* flags */),
                 IconCompat.createWithResource(mContext, R.drawable.ic_add_blue_24dp),
                 ListBuilder.ICON_IMAGE,
                 mContext.getText(R.string.add));
