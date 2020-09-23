@@ -100,7 +100,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             pref = getProfilePreference(UsbBackend.usbFunctionsToString(option), title);
             // Only show supported options
             if (mUsbBackend.areFunctionsSupported(option)) {
-                pref.setChecked(functions == option);
+                if (functions == UsbManager.FUNCTION_ACCESSORY) {
+                    pref.setChecked(UsbManager.FUNCTION_MTP == option);
+                } else {
+                    pref.setChecked(functions == option);
+                }
             } else {
                 mProfilesContainer.removePreference(pref);
             }

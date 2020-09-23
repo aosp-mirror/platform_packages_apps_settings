@@ -154,6 +154,19 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     @Test
+    public void displayRefresh_accessoryEnabled_shouldCheckSwitches() {
+        when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
+
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_ACCESSORY, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
+        List<RadioButtonPreference> prefs = getRadioPreferences();
+
+        assertThat(prefs.get(0).getKey())
+                .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
+        assertThat(prefs.get(0).isChecked()).isTrue();
+    }
+
+    @Test
     public void onClickMtp_noneEnabled_shouldEnableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
