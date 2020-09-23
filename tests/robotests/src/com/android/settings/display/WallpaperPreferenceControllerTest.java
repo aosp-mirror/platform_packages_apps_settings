@@ -211,4 +211,19 @@ public class WallpaperPreferenceControllerTest {
                 .getNextStartedActivityForResult().intent.getComponent().getClassName())
                 .isEqualTo(mContext.getString(R.string.config_styles_and_wallpaper_picker_class));
     }
+
+    @Test
+    public void handlePreferenceTreeClick_launchSourceExtra() {
+        mShadowPackageManager.setResolveInfosForIntent(
+            mWallpaperIntent, Lists.newArrayList());
+        mShadowPackageManager.setResolveInfosForIntent(
+            mStylesAndWallpaperIntent, Lists.newArrayList());
+        Preference preference = new Preference(mContext);
+        preference.setKey(TEST_KEY);
+
+        mController.handlePreferenceTreeClick(preference);
+
+        assertThat(Shadows.shadowOf(mContext).getNextStartedActivityForResult()
+            .intent.hasExtra("com.android.wallpaper.LAUNCH_SOURCE")).isTrue();
+    }
 }
