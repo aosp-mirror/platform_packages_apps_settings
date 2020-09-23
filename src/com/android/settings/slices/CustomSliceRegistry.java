@@ -217,6 +217,16 @@ public class CustomSliceRegistry {
             .build();
 
     /**
+     * Full {@link Uri} for the all volume Slices.
+     */
+    public static final Uri VOLUME_SLICES_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("volume_slices")
+            .build();
+
+    /**
      * Full {@link Uri} for the Wifi Calling Slice.
      */
     public static final Uri WIFI_CALLING_URI = new Uri.Builder()
