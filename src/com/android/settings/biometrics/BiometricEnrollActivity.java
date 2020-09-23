@@ -241,7 +241,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         final boolean maxFacesEnrolled = faceManager.getEnrolledFaces(mUserId).size()
                 >= faceProperties.get(0).maxTemplatesAllowed;
         final boolean maxFingerprintsEnrolled = fingerprintManager.getEnrolledFingerprints(mUserId)
-                .size() >= fpProperties.get(0).maxTemplatesAllowed;
+                .size() >= fpProperties.get(0).maxEnrollmentsPerUser;
 
         if (maxFacesEnrolled) {
             mCheckboxFace.setEnabled(false);
