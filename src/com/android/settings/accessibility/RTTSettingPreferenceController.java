@@ -20,8 +20,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telecom.TelecomManager;
+import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -37,7 +41,6 @@ import java.util.List;
 public class RTTSettingPreferenceController extends BasePreferenceController {
 
     private static final String DIALER_RTT_CONFIGURATION = "dialer_rtt_configuration";
-
     private final Context mContext;
     private final PackageManager mPackageManager;
     private final TelecomManager mTelecomManager;
@@ -81,8 +84,41 @@ public class RTTSettingPreferenceController extends BasePreferenceController {
         return mModes[option];
     }
 
-    @VisibleForTesting
-    boolean isDialerSupportRTTSetting() {
-        return TextUtils.equals(mTelecomManager.getDefaultDialerPackage(), mDialerPackage);
+    private boolean isDialerSupportRTTSetting() {
+        final TelephonyManager telephonyManager = createTelephonyManagerFromSubId();
+        final boolean isCarrierAndRttSupported = telephonyManager.isRttSupported()
+                && getBooleanCarrierConfig(CarrierConfigManager.KEY_IGNORE_RTT_MODE_SETTING_BOOL);
+
+        return isCarrierAndRttSupported
+                && TextUtils.equals(mTelecomManager.getDefaultDialerPackage(), mDialerPackage);
+    }
+
+    /**
+     * Gets the boolean config from carrier config manager.
+     *
+     * @param key config key defined in CarrierConfigManager.
+     * @return boolean value of corresponding key.
+     */
+    private boolean getBooleanCarrierConfig(String key) {
+        final CarrierConfigManager configManager =
+                mContext.getSystemService(CarrierConfigManager.class);
+        if (configManager == null) {
+            // Return static default defined in CarrierConfigManager.
+            return CarrierConfigManager.getDefaultConfig().getBoolean(key);
+        }
+
+        // If an invalid subId is used, this bundle will contain default values.
+        final int subId = SubscriptionManager.getDefaultVoiceSubscriptionId();
+        final PersistableBundle bundle = configManager.getConfigForSubId(subId);
+
+        return bundle != null
+                ? bundle.getBoolean(key)
+                : CarrierConfigManager.getDefaultConfig().getBoolean(key);
+    }
+
+    private TelephonyManager createTelephonyManagerFromSubId() {
+        final TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
+        final int subId = SubscriptionManager.getDefaultVoiceSubscriptionId();
+        return telephonyManager.createForSubscriptionId(subId);
     }
 }

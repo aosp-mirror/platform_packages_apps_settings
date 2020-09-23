@@ -23,6 +23,8 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_SELECTED;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_OFF;
 import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_ON;
 
@@ -37,6 +39,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.content.Context;
 import android.provider.Settings;
@@ -53,6 +56,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
@@ -136,6 +141,28 @@ public class BubbleSummaryPreferenceControllerTest {
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
         mController.onResume(mAppRow, channel, null, null, null, null);
 
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void isAvailable_lowRam_shouldReturnFalse() {
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+        mController.onResume(mAppRow, null, null, null, null, null);
+
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(true);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void isAvailable_notLowRam_shouldReturnTrue() {
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+        mController.onResume(mAppRow, null, null, null, null, null);
+
+        final ShadowActivityManager activityManager =
+               Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(false);
         assertTrue(mController.isAvailable());
     }
 
