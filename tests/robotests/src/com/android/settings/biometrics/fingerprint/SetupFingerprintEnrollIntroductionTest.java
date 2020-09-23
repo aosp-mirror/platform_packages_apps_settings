@@ -23,6 +23,7 @@ import static org.robolectric.RuntimeEnvironment.application;
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.view.View;
@@ -74,9 +75,10 @@ public class SetupFingerprintEnrollIntroductionTest {
             .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
 
         final FingerprintSensorProperties prop = new FingerprintSensorProperties(0 /* sensorId */,
+                SensorProperties.STRENGTH_STRONG,
+                5 /* maxEnrollmentsPerUser */,
                 FingerprintSensorProperties.TYPE_REAR,
-                true /* resetLockoutRequiresHardwareAuthToken */,
-                5 /* maxTemplatesAllowed */);
+                true /* resetLockoutRequiresHardwareAuthToken */);
         final ArrayList<FingerprintSensorProperties> props = new ArrayList<>();
         props.add(prop);
         ShadowFingerprintManager.setSensorProperties(props);
