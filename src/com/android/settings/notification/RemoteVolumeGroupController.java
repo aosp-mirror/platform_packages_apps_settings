@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.text.TextUtils;
 
@@ -57,6 +58,8 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
 
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
+    @VisibleForTesting
+    MediaRouter2Manager mRouterManager;
 
     public RemoteVolumeGroupController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -65,6 +68,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             mLocalMediaManager.registerCallback(this);
             mLocalMediaManager.startScan();
         }
+        mRouterManager = MediaRouter2Manager.getInstance(context);
     }
 
     @Override
@@ -111,8 +115,10 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             if (mPreferenceCategory.findPreference(info.getId()) != null) {
                 continue;
             }
+            final CharSequence appName = Utils.getApplicationLabel(
+                    mContext, info.getClientPackageName());
             final CharSequence outputTitle = mContext.getString(R.string.media_output_label_title,
-                    Utils.getApplicationLabel(mContext, info.getClientPackageName()));
+                    appName);
             // Add slider
             final RemoteVolumeSeekBarPreference seekBarPreference =
                     new RemoteVolumeSeekBarPreference(mContext);
@@ -125,10 +131,13 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             seekBarPreference.setIcon(R.drawable.ic_volume_remote);
             mPreferenceCategory.addPreference(seekBarPreference);
             // Add output indicator
+            final boolean isMediaOutputDisabled = Utils.isMediaOutputDisabled(
+                    mRouterManager, info.getClientPackageName());
             final Preference preference = new Preference(mContext);
             preference.setKey(SWITCHER_PREFIX + info.getId());
-            preference.setTitle(outputTitle);
+            preference.setTitle(isMediaOutputDisabled ? appName : outputTitle);
             preference.setSummary(info.getName());
+            preference.setEnabled(!isMediaOutputDisabled);
             mPreferenceCategory.addPreference(preference);
         }
     }
