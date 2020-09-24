@@ -153,7 +153,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
                 if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                         || mIsGlobalCdma
                         || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
-                    return R.string.preferred_network_mode_global_summary;
+                    return R.string.preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary;
                 } else {
                     return R.string.preferred_network_mode_lte_summary;
                 }
@@ -174,7 +174,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA:
                 return R.string.preferred_network_mode_nr_lte_gsm_wcdma_summary;
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
-                return R.string.preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary;
+                return R.string.preferred_network_mode_global_summary;
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA:
                 return R.string.preferred_network_mode_nr_lte_wcdma_summary;
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA:
