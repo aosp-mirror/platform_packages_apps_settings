@@ -248,7 +248,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String titleFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_TITLE);
-            ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+            if (!TextUtils.equals(titleFromUri, preference.getTitle())) {
+                ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+            }
         });
     }
 
@@ -277,7 +279,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String summaryFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
-            ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
+            if (!TextUtils.equals(summaryFromUri, preference.getSummary())) {
+                ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
+            }
         });
     }
 
