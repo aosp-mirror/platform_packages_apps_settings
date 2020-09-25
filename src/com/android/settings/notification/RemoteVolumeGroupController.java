@@ -131,8 +131,8 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             seekBarPreference.setIcon(R.drawable.ic_volume_remote);
             mPreferenceCategory.addPreference(seekBarPreference);
             // Add output indicator
-            final boolean isMediaOutputDisabled = Utils.isMediaOutputDisabled(
-                    mRouterManager, info.getClientPackageName());
+            final boolean isMediaOutputDisabled = mLocalMediaManager.shouldDisableMediaOutput(
+                    info.getClientPackageName());
             final Preference preference = new Preference(mContext);
             preference.setKey(SWITCHER_PREFIX + info.getId());
             preference.setTitle(isMediaOutputDisabled ? appName : outputTitle);
