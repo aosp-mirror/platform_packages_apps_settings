@@ -151,8 +151,9 @@ public class RemoteMediaSlice implements CustomSliceable {
                 .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME, packageName);
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_volume_remote);
+        final int requestCode = TextUtils.isEmpty(packageName) ? 0 : packageName.hashCode();
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
-                0 /* requestCode */, intent, 0 /* flags */);
+                requestCode, intent, 0 /* flags */);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryActionIntent, icon, ListBuilder.ICON_IMAGE,
                 mContext.getString(R.string.media_output_label_title,
