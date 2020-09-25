@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.session.MediaController;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -62,8 +63,12 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
                 com.android.internal.R.drawable.ic_settings_bluetooth);
         final CharSequence title = mContext.getString(R.string.media_output_label_title,
                 Utils.getApplicationLabel(mContext, getWorker().getPackageName()));
+        final int requestCode = TextUtils.isEmpty(getWorker().getPackageName())
+                ? 0
+                : getWorker().getPackageName().hashCode();
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
-                0 /* requestCode */, getMediaOutputSliceIntent(), FLAG_UPDATE_CURRENT);
+                requestCode,
+                getMediaOutputSliceIntent(), FLAG_UPDATE_CURRENT);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryActionIntent, icon, ListBuilder.ICON_IMAGE, title);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
