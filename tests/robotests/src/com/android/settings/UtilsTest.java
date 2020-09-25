@@ -40,6 +40,8 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.VectorDrawable;
+import android.media.MediaRoute2Info;
+import android.media.MediaRouter2Manager;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
@@ -298,5 +300,34 @@ public class UtilsTest {
         when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{PACKAGE_NAME});
 
         assertThat(Utils.isSettingsIntelligence(mContext)).isFalse();
+    }
+
+    @Test
+    public void isMediaOutputDisabled_infosSizeEqual1_returnsTrue() {
+        final MediaRouter2Manager router2Manager = mock(MediaRouter2Manager.class);
+        final MediaRoute2Info info = mock(MediaRoute2Info.class);
+        final List<MediaRoute2Info> infos = new ArrayList<>();
+        infos.add(info);
+
+        when(router2Manager.getAvailableRoutes(anyString())).thenReturn(infos);
+        when(info.getType()).thenReturn(0);
+
+        assertThat(Utils.isMediaOutputDisabled(router2Manager, "test")).isTrue();
+    }
+
+    @Test
+    public void isMediaOutputDisabled_infosSizeOverThan1_returnsFalse() {
+        final MediaRouter2Manager router2Manager = mock(MediaRouter2Manager.class);
+        final MediaRoute2Info info = mock(MediaRoute2Info.class);
+        final MediaRoute2Info info2 = mock(MediaRoute2Info.class);
+        final List<MediaRoute2Info> infos = new ArrayList<>();
+        infos.add(info);
+        infos.add(info2);
+
+        when(router2Manager.getAvailableRoutes(anyString())).thenReturn(infos);
+        when(info.getType()).thenReturn(0);
+        when(info2.getType()).thenReturn(0);
+
+        assertThat(Utils.isMediaOutputDisabled(router2Manager, "test")).isFalse();
     }
 }
