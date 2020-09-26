@@ -208,12 +208,14 @@ public class MediaOutputIndicatorSliceTest {
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
-        final Intent intent = mMediaOutputIndicatorSlice.getMediaOutputSliceIntent();
+        final Intent intent = mMediaOutputIndicatorSlice.getMediaOutputDialogIntent();
 
         assertThat(TextUtils.equals(TEST_PACKAGE_NAME, intent.getStringExtra(
                 MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
-        assertThat(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT).isEqualTo(intent.getAction());
-        assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intent.getPackage())).isTrue();
+        assertThat(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG).isEqualTo(
+                intent.getAction());
+        assertThat(TextUtils.equals(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME,
+                intent.getPackage())).isTrue();
         assertThat(mToken == intent.getExtras().getParcelable(
                 MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN)).isTrue();
     }
@@ -222,12 +224,14 @@ public class MediaOutputIndicatorSliceTest {
     public void getMediaOutputSliceIntent_withoutActiveLocalMedia_verifyIntentExtra() {
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
-        final Intent intent = mMediaOutputIndicatorSlice.getMediaOutputSliceIntent();
+        final Intent intent = mMediaOutputIndicatorSlice.getMediaOutputDialogIntent();
 
         assertThat(TextUtils.isEmpty(intent.getStringExtra(
                 MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
-        assertThat(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT).isEqualTo(intent.getAction());
-        assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intent.getPackage())).isTrue();
+        assertThat(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG).isEqualTo(
+                intent.getAction());
+        assertThat(TextUtils.equals(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME,
+                intent.getPackage())).isTrue();
         assertThat(intent.getExtras().getParcelable(
                 MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN) == null).isTrue();
     }

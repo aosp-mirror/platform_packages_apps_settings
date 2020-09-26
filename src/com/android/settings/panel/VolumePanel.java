@@ -16,6 +16,8 @@
 
 package com.android.settings.panel;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
+
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.REMOTE_MEDIA_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_ALARM_URI;
@@ -29,12 +31,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+
 import com.android.settings.R;
+import com.android.settingslib.media.MediaOutputSliceConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VolumePanel implements PanelContent {
+/**
+ * Panel data class for Volume settings.
+ */
+public class VolumePanel implements PanelContent, LifecycleObserver {
 
     private final Context mContext;
 
@@ -44,6 +53,15 @@ public class VolumePanel implements PanelContent {
 
     private VolumePanel(Context context) {
         mContext = context.getApplicationContext();
+    }
+
+    /** Invoked when the panel is paused. */
+    @OnLifecycleEvent(ON_PAUSE)
+    public void onPause() {
+        // Media output dialog should not show when onPause
+        mContext.sendBroadcast(new Intent()
+                .setAction(MediaOutputSliceConstants.ACTION_DISMISS_MEDIA_OUTPUT_DIALOG)
+                .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME));
     }
 
     @Override
