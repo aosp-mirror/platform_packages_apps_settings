@@ -57,6 +57,8 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.FooterPreference;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -87,19 +89,24 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected Uri mImageUri;
     private CharSequence mDescription;
     protected CharSequence mHtmlDescription;
-    // Used to restore the edit dialog status.
-    protected int mUserShortcutTypesCache = UserShortcutType.EMPTY;
+
     private static final String DRAWABLE_FOLDER = "drawable";
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     protected static final String KEY_GENERAL_CATEGORY = "general_categories";
     protected static final String KEY_INTRODUCTION_CATEGORY = "introduction_categories";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
-    private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
+    @VisibleForTesting
+    static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
+
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
-    private int mUserShortcutTypes = UserShortcutType.EMPTY;
+    private SettingsContentObserver mSettingsContentObserver;
+
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
-    private SettingsContentObserver mSettingsContentObserver;
+
+    // Used to restore the edit dialog status.
+    protected int mUserShortcutTypesCache = UserShortcutType.EMPTY;
+    protected int mUserShortcutTypes = UserShortcutType.EMPTY;
 
     // For html description of accessibility service, must follow the rule, such as
     // <img src="R.drawable.fileName"/>, a11y settings will get the resources successfully.
@@ -121,6 +128,12 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Restore the user shortcut type.
+        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
+            mUserShortcutTypesCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
+                    UserShortcutType.EMPTY);
+        }
+
         setupDefaultShortcutIfNecessary(getPrefContext());
         final int resId = getPreferenceScreenResId();
         if (resId <= 0) {
@@ -150,7 +163,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         initAnimatedImagePreference();
         initToggleServiceDividerSwitchPreference();
         initGeneralCategory();
-        initShortcutPreference(savedInstanceState);
+        initShortcutPreference();
         initSettingsPreference();
         initHtmlTextPreference();
         initFooterPreference();
@@ -521,7 +534,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         });
     }
 
-    private void initializeDialogCheckBox(Dialog dialog) {
+    @VisibleForTesting
+    void initializeDialogCheckBox(Dialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
         mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
         setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
@@ -544,7 +558,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         checkBox.setChecked((mUserShortcutTypesCache & type) == type);
     }
 
-    private void updateUserShortcutType(boolean saveChanges) {
+    @VisibleForTesting
+    void updateUserShortcutType(boolean saveChanges) {
         mUserShortcutTypesCache = UserShortcutType.EMPTY;
         if (mSoftwareTypeCheckBox.isChecked()) {
             mUserShortcutTypesCache |= UserShortcutType.SOFTWARE;
@@ -677,13 +692,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
     }
 
-    protected void initShortcutPreference(Bundle savedInstanceState) {
-        // Restore the user shortcut type.
-        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
-            mUserShortcutTypesCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
-                    UserShortcutType.EMPTY);
-        }
-
+    protected void initShortcutPreference() {
         // Initial the shortcut preference.
         mShortcutPreference = new ShortcutPreference(getPrefContext(), null);
         mShortcutPreference.setPersistent(false);
@@ -737,6 +746,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mUserShortcutTypesCache = mShortcutPreference.isChecked()
                 ? getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE)
                 : UserShortcutType.EMPTY;
+        showDialog(DialogEnums.EDIT_SHORTCUT);
     }
 
     private void createFooterPreference(CharSequence title) {

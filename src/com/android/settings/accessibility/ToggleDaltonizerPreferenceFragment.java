@@ -195,12 +195,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    public void onSettingsClicked(ShortcutPreference preference) {
-        super.onSettingsClicked(preference);
-        showDialog(DialogEnums.EDIT_SHORTCUT);
-    }
-
-    @Override
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
