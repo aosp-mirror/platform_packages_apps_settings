@@ -66,11 +66,11 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         final int requestCode = TextUtils.isEmpty(getWorker().getPackageName())
                 ? 0
                 : getWorker().getPackageName().hashCode();
-        final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
-                requestCode,
-                getMediaOutputSliceIntent(), FLAG_UPDATE_CURRENT);
+        final PendingIntent primaryBroadcastIntent = PendingIntent.getBroadcast(mContext,
+                requestCode, getMediaOutputDialogIntent(), FLAG_UPDATE_CURRENT);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
-                primaryActionIntent, icon, ListBuilder.ICON_IMAGE, title);
+                primaryBroadcastIntent, icon, ListBuilder.ICON_IMAGE, title);
+
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         // To set an empty icon to indent the row
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
@@ -84,12 +84,11 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     }
 
     @VisibleForTesting
-    Intent getMediaOutputSliceIntent() {
+    Intent getMediaOutputDialogIntent() {
         final MediaController mediaController = getWorker().getActiveLocalMediaController();
         final Intent intent = new Intent()
-                .setPackage(Utils.SETTINGS_PACKAGE_NAME)
-                .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
+                .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
         if (mediaController != null) {
             intent.putExtra(MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN,
                     mediaController.getSessionToken());
