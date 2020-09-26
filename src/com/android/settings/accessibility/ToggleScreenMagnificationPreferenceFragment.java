@@ -62,7 +62,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
-    private int mUserShortcutType = UserShortcutType.EMPTY;
+
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
     private CheckBox mTripleTapTypeCheckBox;
@@ -158,7 +158,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         generalCategory.addPreference(mSettingsPreference);
     }
 
-    private void initializeDialogCheckBox(AlertDialog dialog) {
+    @VisibleForTesting
+    void initializeDialogCheckBox(AlertDialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
         mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
         setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
@@ -193,7 +194,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         checkBox.setChecked((mUserShortcutTypesCache & type) == type);
     }
 
-    private void updateUserShortcutType(boolean saveChanges) {
+    @VisibleForTesting
+    void updateUserShortcutType(boolean saveChanges) {
         mUserShortcutTypesCache = UserShortcutType.EMPTY;
         if (mSoftwareTypeCheckBox.isChecked()) {
             mUserShortcutTypesCache |= UserShortcutType.SOFTWARE;
@@ -210,7 +212,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             if (isChanged) {
                 setUserShortcutType(getPrefContext(), mUserShortcutTypesCache);
             }
-            mUserShortcutType = mUserShortcutTypesCache;
+            mUserShortcutTypes = mUserShortcutTypesCache;
         }
     }
 
@@ -289,9 +291,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
         updateUserShortcutType(/* saveChanges= */ true);
-        optInAllMagnificationValuesToSettings(getPrefContext(), mUserShortcutType);
-        optOutAllMagnificationValuesFromSettings(getPrefContext(), ~mUserShortcutType);
-        mShortcutPreference.setChecked(mUserShortcutType != UserShortcutType.EMPTY);
+        optInAllMagnificationValuesToSettings(getPrefContext(), mUserShortcutTypes);
+        optOutAllMagnificationValuesFromSettings(getPrefContext(), ~mUserShortcutTypes);
+        mShortcutPreference.setChecked(mUserShortcutTypes != UserShortcutType.EMPTY);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
     }
@@ -361,17 +363,17 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     protected void updateShortcutPreferenceData() {
         // Get the user shortcut type from settings provider.
-        mUserShortcutType = getUserShortcutTypeFromSettings(getPrefContext());
-        if (mUserShortcutType != UserShortcutType.EMPTY) {
-            setUserShortcutType(getPrefContext(), mUserShortcutType);
+        mUserShortcutTypes = getUserShortcutTypeFromSettings(getPrefContext());
+        if (mUserShortcutTypes != UserShortcutType.EMPTY) {
+            setUserShortcutType(getPrefContext(), mUserShortcutTypes);
         } else {
             //  Get the user shortcut type from shared_prefs if cannot get from settings provider.
-            mUserShortcutType = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
+            mUserShortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         }
     }
 
     @Override
-    protected void initShortcutPreference(Bundle savedInstanceState) {
+    protected void initShortcutPreference() {
         mShortcutPreference = new ShortcutPreference(getPrefContext(), null);
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(getShortcutPreferenceKey());
