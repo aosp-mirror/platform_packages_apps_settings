@@ -139,7 +139,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mVibrator = getSystemService(Vibrator.class);
 
         if (getLayout().shouldApplyPartnerHeavyThemeResource()) {
-            DescriptionStyler.applyPartnerCustomizationStyle(mRepeatMessage);
+            DescriptionStyler.applyPartnerCustomizationHeavyStyle(mRepeatMessage);
+        } else if (getLayout().shouldApplyPartnerResource()) {
+            DescriptionStyler.applyPartnerCustomizationLightStyle(mRepeatMessage);
         }
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
