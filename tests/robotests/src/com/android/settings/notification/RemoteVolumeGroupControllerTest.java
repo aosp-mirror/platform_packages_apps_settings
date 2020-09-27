@@ -31,6 +31,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageStats;
+import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.media.session.MediaSessionManager;
 
@@ -100,6 +101,7 @@ public class RemoteVolumeGroupControllerTest {
                 Context.MEDIA_SESSION_SERVICE);
         mController = new RemoteVolumeGroupController(mContext, KEY_REMOTE_VOLUME_GROUP);
         mController.mLocalMediaManager = mLocalMediaManager;
+        mController.mRouterManager = mock(MediaRouter2Manager.class);
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         mPreferenceCategory.setKey(mController.getPreferenceKey());
 

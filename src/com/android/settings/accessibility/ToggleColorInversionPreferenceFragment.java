@@ -123,12 +123,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    public void onSettingsClicked(ShortcutPreference preference) {
-        super.onSettingsClicked(preference);
-        showDialog(DialogEnums.EDIT_SHORTCUT);
-    }
-
-    @Override
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
