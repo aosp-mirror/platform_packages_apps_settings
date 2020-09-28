@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorProperties;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.view.View;
 import android.widget.Button;
 
@@ -74,12 +75,13 @@ public class SetupFingerprintEnrollIntroductionTest {
         Shadows.shadowOf(application.getPackageManager())
             .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
 
-        final FingerprintSensorProperties prop = new FingerprintSensorProperties(0 /* sensorId */,
+        final FingerprintSensorPropertiesInternal prop = new FingerprintSensorPropertiesInternal(
+                0 /* sensorId */,
                 SensorProperties.STRENGTH_STRONG,
                 5 /* maxEnrollmentsPerUser */,
                 FingerprintSensorProperties.TYPE_REAR,
                 true /* resetLockoutRequiresHardwareAuthToken */);
-        final ArrayList<FingerprintSensorProperties> props = new ArrayList<>();
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
         props.add(prop);
         ShadowFingerprintManager.setSensorProperties(props);
 
