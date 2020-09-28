@@ -182,6 +182,9 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             if (SubscriptionManager.isValidSubscriptionId(subId)) {
                 mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
             }
+            // assign current call state so that it helps to show correct preference state even
+            // before first onCallStateChanged() by initial registration.
+            mCallState = mTelephonyManager.getCallState(subId);
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
         }
 
