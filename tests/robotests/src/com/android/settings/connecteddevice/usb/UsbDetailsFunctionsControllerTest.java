@@ -264,6 +264,18 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     @Test
+    public void onRadioButtonClicked_functionMtp_inAccessoryMode_doNothing() {
+        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
+        doReturn(UsbManager.FUNCTION_ACCESSORY).when(mUsbBackend).getCurrentFunctions();
+
+        mDetailsFunctionsController.mPreviousFunction = UsbManager.FUNCTION_ACCESSORY;
+        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
+
+        assertThat(mDetailsFunctionsController.mPreviousFunction).isEqualTo(
+                UsbManager.FUNCTION_ACCESSORY);
+    }
+
+    @Test
     public void onRadioButtonClicked_clickSameButton_doNothing() {
         mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_PTP));
         doReturn(UsbManager.FUNCTION_PTP).when(mUsbBackend).getCurrentFunctions();
