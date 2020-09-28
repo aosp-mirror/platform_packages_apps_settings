@@ -53,10 +53,12 @@ import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -174,6 +176,8 @@ public class WifiDetailPreferenceController2Test {
     private Preference mMockSecurityPref;
     @Mock
     private Preference mMockSsidPref;
+    @Mock
+    private Preference mMockEapSimSubscriptionPref;
     @Mock
     private Preference mMockMacAddressPref;
     @Mock
@@ -295,7 +299,7 @@ public class WifiDetailPreferenceController2Test {
                 .thenReturn(mMockHeaderController);
         when(mMockHeaderController.setSecondSummary(nullable(String.class)))
                 .thenReturn(mMockHeaderController);
-        when(mMockIconInjector.getIcon(anyInt())).thenReturn(new ColorDrawable());
+        when(mMockIconInjector.getIcon(anyBoolean(), anyInt())).thenReturn(new ColorDrawable());
 
         setupMockedPreferenceScreen();
     }
@@ -374,6 +378,8 @@ public class WifiDetailPreferenceController2Test {
                 .thenReturn(mMockSecurityPref);
         when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_SSID_PREF))
                 .thenReturn(mMockSsidPref);
+        when(mMockScreen.findPreference(WifiDetailPreferenceController2
+                .KEY_EAP_SIM_SUBSCRIPTION_PREF)).thenReturn(mMockEapSimSubscriptionPref);
         when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_MAC_ADDRESS_PREF))
                 .thenReturn(mMockMacAddressPref);
         when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_IP_ADDRESS_PREF))
@@ -494,7 +500,7 @@ public class WifiDetailPreferenceController2Test {
     public void entityHeader_shouldHaveIconSetForConnectedNetwork() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        Drawable expectedIcon = mMockIconInjector.getIcon(LEVEL);
+        Drawable expectedIcon = mMockIconInjector.getIcon(false /* showX */, LEVEL);
 
         displayAndResume();
 
@@ -504,7 +510,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void entityHeader_shouldHaveIconSetForDisconnectedNetwork() {
         setUpForDisconnectedNetwork();
-        Drawable expectedIcon = mMockIconInjector.getIcon(LEVEL);
+        Drawable expectedIcon = mMockIconInjector.getIcon(false /* showX */, LEVEL);
 
         displayAndResume();
 
@@ -609,6 +615,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref).setIcon(any(Drawable.class));
     }
 
@@ -618,6 +625,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref).setIcon(any(Drawable.class));
     }
 
@@ -627,6 +635,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref, never()).setIcon(any(Drawable.class));
     }
 
@@ -639,6 +648,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref).setSummary(expectedStrength);
     }
 
@@ -650,6 +660,7 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref).setSummary(expectedStrength);
     }
 
@@ -659,7 +670,22 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
+        assertThat(mController.mShowX).isFalse();
         verify(mMockSignalStrengthPref, never()).setSummary(any(String.class));
+    }
+
+    @Test
+    public void signalStrengthPref_shouldShowXLevelIcon_showXTrue() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final String expectedStrength =
+                mContext.getResources().getStringArray(R.array.wifi_signal)[LEVEL];
+        when(mMockWifiEntry.shouldShowXLevelIcon()).thenReturn(true);
+
+        displayAndResume();
+
+        assertThat(mController.mShowX).isTrue();
+        verify(mMockSignalStrengthPref).setSummary(expectedStrength);
     }
 
     @Test
@@ -1523,7 +1549,7 @@ public class WifiDetailPreferenceController2Test {
         ArgumentCaptor<BitmapDrawable> drawableCaptor =
                 ArgumentCaptor.forClass(BitmapDrawable.class);
         Drawable original = mContext.getDrawable(Utils.getWifiIconResource(LEVEL)).mutate();
-        when(mMockIconInjector.getIcon(anyInt())).thenReturn(original);
+        when(mMockIconInjector.getIcon(anyBoolean(), anyInt())).thenReturn(original);
 
         displayAndResume();
 
@@ -1542,7 +1568,7 @@ public class WifiDetailPreferenceController2Test {
         ArgumentCaptor<BitmapDrawable> drawableCaptor =
                 ArgumentCaptor.forClass(BitmapDrawable.class);
         Drawable original = mContext.getDrawable(Utils.getWifiIconResource(LEVEL)).mutate();
-        when(mMockIconInjector.getIcon(anyInt())).thenReturn(original);
+        when(mMockIconInjector.getIcon(anyBoolean(), anyInt())).thenReturn(original);
 
         displayAndResume();
 
@@ -1580,6 +1606,82 @@ public class WifiDetailPreferenceController2Test {
 
         verify(mMockButtonsPref, atLeastOnce()).setButton3Visible(false);
         verify(mMockHeaderController).setSummary(expired);
+    }
+
+    @Test
+    public void refreshEapSimSubscription_nonEapSecurity_invisibleEapSimSubscriptionPref() {
+        setUpForDisconnectedNetwork();
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_NONE);
+
+        displayAndResume();
+
+        verify(mMockEapSimSubscriptionPref, times(1)).setVisible(false);
+
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_OWE);
+
+        displayAndResume();
+
+        verify(mMockEapSimSubscriptionPref, times(2)).setVisible(false);
+
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_PSK);
+
+        displayAndResume();
+
+        verify(mMockEapSimSubscriptionPref, times(3)).setVisible(false);
+
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_SAE);
+
+        displayAndResume();
+
+        verify(mMockEapSimSubscriptionPref, times(4)).setVisible(false);
+        verify(mMockEapSimSubscriptionPref, never()).setVisible(true);
+    }
+
+    @Test
+    public void refreshEapSimSubscription_nonSimEapMethod_invisibleEapSimSubscriptionPref() {
+        setUpForDisconnectedNetwork();
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        when(mockWifiEnterpriseConfig.isAuthenticationSimBased()).thenReturn(false);
+        mockWifiConfiguration.enterpriseConfig = mockWifiEnterpriseConfig;
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+
+        displayAndResume();
+
+        verify(mMockEapSimSubscriptionPref, times(1)).setVisible(false);
+    }
+
+    @Test
+    public void refreshEapSimSubscription_simEapMethod_visibleEapSimSubscriptionPref() {
+        setUpForDisconnectedNetwork();
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        when(mockWifiEnterpriseConfig.isAuthenticationSimBased()).thenReturn(true);
+        mockWifiConfiguration.enterpriseConfig = mockWifiEnterpriseConfig;
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+
+        displayAndResume();
+
+        verify(mMockEapSimSubscriptionPref).setVisible(true);
+    }
+
+    @Test
+    public void refreshEapSimSubscription_unknownCarrierId_noSimEapSimSubscriptionPref() {
+        setUpForDisconnectedNetwork();
+        when(mMockWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        mockWifiConfiguration.carrierId = TelephonyManager.UNKNOWN_CARRIER_ID;
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        when(mockWifiEnterpriseConfig.isAuthenticationSimBased()).thenReturn(true);
+        mockWifiConfiguration.enterpriseConfig = mockWifiEnterpriseConfig;
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+
+        displayAndResume();
+
+        verify(mMockEapSimSubscriptionPref).setVisible(true);
+        verify(mMockEapSimSubscriptionPref).setSummary(R.string.wifi_no_related_sim_card);
     }
 
     private ActionButtonsPreference createMock() {

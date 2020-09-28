@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"যাচাইকরণ করতে আপনার ফেস ব্যবহার করুন"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"শুরু করুন"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"অ্যাক্সেসিবিলিটি ফেস আনলক বন্ধ থাকলে কিছু সেটআপ পদ্ধতি টকব্যাকের ক্ষেত্রে সঠিকভাবে কাজ নাও করতে পারে।"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"ফিরে যান"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"সেটআপ চালিয়ে যান"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"অ্যাক্সেসিবিলিটি সেট-আপ ব্যবহার"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"ওয়াই-ফাইয়ের পাসওয়ার্ড: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"হটস্পটের পাসওয়ার্ড: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"অটো-কানেক্ট"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"এই নেটওয়ার্কের কাছাকাছি আসলেই আপনার ফোন যাতে অটোমেটিক কানেক্ট হয়ে যায়, তার অনুমতি দিন"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"এই নেটওয়ার্কের কাছাকাছি আসলেই আপনার ট্যাবলেট যাতে অটোমেটিক কানেক্ট হয়ে যায়, তার অনুমতি দিন"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"সীমার মধ্যে থাকলে এই নেটওয়ার্কে কানেকশনের অনুমতি দিন"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"ডিভাইস যোগ করুন"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"এই নেটওয়ার্কে কোনও ডিভাইস যোগ করার জন্য QR কোড ব্যবহার করুন"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR কোড ফর্ম্যাট ভুল"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"সিস্টেমের সার্টিফিকেটগুলি ব্যবহার করুন"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"প্রদান করবেন না"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"যাচাই করবেন না"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"কোনও সার্টিফিকেট নির্দিষ্ট করা নেই৷ আপনার কানেকশন ব্যক্তিগত করা হবে না৷"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"নেটওয়ার্কের নাম খুব বড়।"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"একটি ডোমেন উল্লেখ করা আবশ্যক৷"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"সার্টিফিকেট প্রয়োজন।"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"স্মুথ ডিসপ্লে"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"কিছু কন্টেন্টের রিফ্রেশ রেট অটোমেটিক ৬০ থেকে ৯০ Hz পর্যন্ত বেড়ে যায়। ব্যাটারির ব্যবহার বেড়ে যায়।"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"স্মুথ ডিসপ্লে"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"ফোর্স 90 Hz রিফ্রেশ রেট"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"সর্বাধিক রিফ্রেশ রেট সেট করে টাচ রেসপন্সিভনেস এবং অ্যানিমেশন কোয়ালিটি উন্নত করুন। ব্যাটারির খরচ বেড়ে যায়।"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"স্ক্রিন অ্যাটেনশন"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"চালু আছে / আপনি এটির দিকে তাকিয়ে থাকলে স্ক্রিন বন্ধ হবে না"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android ভার্সন"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android-এর নিরাপত্তা সংক্রান্ত আপডেট"</string>
     <string name="model_info" msgid="8997566254717810904">"মডেল"</string>
-    <string name="model_summary" msgid="2246651782442466213">"মডেল: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"মডেল ও হার্ডওয়্যার"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"হার্ডওয়্যার ভার্সন"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"টুল ID"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> ডিভাইসের থেকে বেশি ডিভাইসে টেদার করা যাবে না।"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> আনটেদার্ড হয়ে যাবে।"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ইথারনেট টিথারিং"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"ইউএসবি কেবেলের মাধ্যমে ফোনের ইন্টারনেট কানেকশন শেয়ার করুন"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ইথারনেটের মাধ্যমে ফোনের ইন্টারনেট কানেকশন শেয়ার করুন"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"আপনার মোবাইল ডেটা কানেকশন মাধ্যমে অন্যান্য ডিভাইসে ইন্টারনেট কানেকশন দিতে হটস্পট এবং টিথারিং ব্যবহার করুন। অ্যাপগুলিও আশেপাশের ডিভাইসের সাথে কন্টেন্ট শেয়ার করার জন্য হটস্পট তৈরি করে নিতে পারে।"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"আপনার মোবাইল ডেটা কানেকশন অথবা ওয়াই-ফাই থেকে অন্য ডিভাইসে ইন্টারনেট কানেকশন দিতে হটস্পট এবং টেথারিং ব্যবহার করুন। অ্যাপগুলি আশেপাশের ডিভাইসের সাথে কন্টেন্ট শেয়ার করার জন্য হটস্পট তৈরি করতে পারে।"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"সহায়তা"</string>
@@ -1851,13 +1851,19 @@
     <string name="install_applications_title" msgid="7890233747559108106">"সব অ্যাপ্লিকেশান উৎসকে অনুমতি দিন"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"সম্প্রতি ব্যবহার করা অ্যাপ"</string>
     <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="one">সমস্ত %1$d অ্যাপ দেখুন</item>
-      <item quantity="other">সমস্ত %1$d অ্যাপ দেখুন</item>
+      <item quantity="one">%1$dটি অ্যাপের সবগুলি দেখুন</item>
+      <item quantity="other">%1$dটি অ্যাপের সবগুলি দেখুন</item>
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"আপনার আইটি অ্যাডমিনের সাথে যোগাযোগ করুন"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"পিন, প্যাটার্ন বা পাসওয়ার্ড রিসেট করতে তারা সাহায্য করতে পারে"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"অজানা অ্যাপের দ্বারা আপনার ট্যাবলেট এবং ব্যক্তিগত তথ্য আক্রান্ত হওয়ার সম্ভাবনা সবচেয়ে বেশি। এই উৎস থেকে আসা অ্যাপগুলি ইনস্টল করে আপনি সম্মত হচ্ছেন যে সেগুলি ব্যবহারের ফলে আপনার ট্যাবলেটের কোনো ক্ষতি হলে বা ডেটা হারিয়ে গেলে তার জন্য আপনিই দায়ী থাকবেন।"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"অজানা অ্যাপের দ্বারা আপনার ফোন এবং ব্যক্তিগত তথ্য আক্রান্ত হওয়ার সম্ভাবনা সবচেয়ে বেশি। এই উৎস থেকে আসা অ্যাপগুলি ইনস্টল করে আপনি সম্মত হচ্ছেন যে সেগুলি ব্যবহারের ফলে আপনার ফোনের কোনো ক্ষতি হলে বা ডেটা হারিয়ে গেলে তার জন্য আপনিই দায়ী থাকবেন।"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ডাউনলোড করা সিম মুছে ফেলার কাজে কোনও সমস্যা হয়েছে"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"ডিভাইস রিবুট করে আবার চেষ্টা করুন। \'ফ্যাক্টরি রিসেট\' করা চালিয়ে গেলে, ডাউনলোড করা সিম ডিভাইসেই থেকে যেতে পারে।"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"আবার চালু করুন"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"\'ফ্যাক্টরি রিসেট\' চালিয়ে যেতে চান?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ডাউনলোড করা সিম ডিভাইসেই থেকে যাবে।"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"\'ফ্যাক্টরি রিসেট\' করুন"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"অজানা অ্যাপের দ্বারা আপনার ফোন এবং ব্যক্তিগত তথ্য আক্রান্ত হওয়ার সম্ভাবনা সবচেয়ে বেশি। এই উৎস থেকে আসা অ্যাপগুলি ইনস্টল করে আপনি সম্মত হচ্ছেন যে সেগুলি ব্যবহারের ফলে আপনার ফোনের কোনও ক্ষতি হলে বা ডেটা হারিয়ে গেলে তার জন্য আপনিই দায়ী থাকবেন।"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"উন্নত সেটিংস"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"আরো সেটিংস বিকল্প সক্ষম করুন"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"রিসেট করুন"</string>
     <string name="tts_play" msgid="2945513377250757221">"চালান"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"অ্যাডাপ্টিভ কানেক্টিভিটি"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"আপনার নেটওয়ার্ক কানেকশন অটোমেটিক ম্যানেজ করে ব্যাটারি আরও বেশিক্ষণ ব্যবহার করুন এবং ডিভাইসের পারফর্ম্যান্স উন্নত করুন"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ক্রেডেনশিয়াল স্টোরেজ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"সার্টিফিকেট ইনস্টল করা"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"স্টোরেজ থেকে সার্টিফিকেট ইনস্টল করুন"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"নেটওয়ার্ক পাওয়া যায়নি। আবার চেষ্টা করুন।"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(নিষিদ্ধ)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"কোনও সিম কার্ড নেই"</string>
+    <string name="sim_card" msgid="6381158752066377709">"সিম"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"কোনও সিম নেই"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"কোনও কিছুই নয়"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"কানেক্ট করার জন্য সিম প্রয়োজন"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"কানেক্ট করার জন্য <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> সিম প্রয়োজন"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"পছন্দের নেটওয়ার্ক মোড: বেছে নেওয়া WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"পছন্দের নেটওয়ার্ক মোড: শুধুমাত্র GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"পছন্দের নেটওয়ার্ক মোড: শুধুমাত্র WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"সেটিংসে স্ক্রিন ওভারলে করার অনুমতি দিন"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"যেসব অ্যাপ অন্যান্য অ্যাপের উপর কন্টেন্ট দেখাতে পারে সেগুলিকে সেটিংস স্ক্রিনের উপর ওভারলে করার অনুমতি দিন"</string>
     <string name="media_controls_title" msgid="403271085636252597">"মিডিয়া"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"মিডিয়া সেশন শেষ হয়ে গেলে প্লেয়ার লুকান"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"আপনি প্লেয়ার ব্যবহার করে বড় করা দ্রুত সেটিংস প্যানেল থেকে সেশন আবার শুরু করতে পারবেন।"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"দ্রুত সেটিংসে মিডিয়া প্লেয়ার"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"প্লেব্যাক সহজেই আবার শুরু করতে, মিডিয়া প্লেয়ারকে আরও দীর্ঘ সময়ের জন্য দেখান"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"প্লেয়ার লুকান"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"প্লেয়ার দেখুন"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"কোনও প্লেয়ার উপলভ্য নেই"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"মিডিয়া"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth চালু হবে"</string>
 </resources>

@@ -335,6 +335,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Використовуйте обличчя для автентифікації"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Почати"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Якщо спеціальні можливості функції \"Фейсконтроль\" вимкнено, деякі налаштування можуть працювати з TalkBack неналежним чином."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Назад"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Продовжити налаштування"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Показати параметри доступності"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -963,8 +966,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Пароль Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Пароль точки доступу: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Автоматичне підключення"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Надати телефону дозвіл на автоматичне з\'єднання з цією мережею"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Надайте планшету дозвіл на автоматичне з\'єднання з цією мережею"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Дозволити підключатися до цієї мережі в зоні її покриття"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Додати пристрій"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Зіскануйте QR-код, щоб додати пристрій до цієї мережі"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Недійсний формат QR-коду"</string>
@@ -976,7 +978,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Використовувати сертифікати системи"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Не надавати"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Не перевіряти"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Сертифікат не вказано. З’єднання не буде конфіденційним."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Назва мережі задовга."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Укажіть домен."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Потрібен сертифікат."</string>
@@ -1230,7 +1231,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавне відображення"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматично збільшує частоту оновлення певного вмісту з 60 до 90 Гц. Підвищує використання заряду акумулятора."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Плавне відображення"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Примусова частота оновлення: 90 Гц"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Найвища частота оновлення для кращого реагування на дотики й вищої якості анімації. Підвищує використання заряду акумулятора."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Адаптивний сплячий режим"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ввімкнено: екран не вимикатиметься, доки ви на нього дивитесь"</string>
@@ -1371,7 +1372,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Версія Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Оновлення системи безпеки Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Модель"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Модель: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Модель і апаратне забезпечення"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Версія апаратного забезпечення"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Ідентифікатор обладнання"</string>
@@ -1718,7 +1718,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Режим модема можливий для макс. стількох пристр.: <xliff:g id="MAXCONNECTION">%1$d</xliff:g>"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Прив\'язку <xliff:g id="DEVICE_NAME">%1$s</xliff:g> буде скасовано."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Телефон як модем Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Надавати доступ до Інтернету через телефон за допомогою USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Надавати доступ до Інтернету через телефон за допомогою Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Надавайте іншим пристроям доступ до Інтернету через мобільне передавання даних за допомогою точки доступу та телефона в режимі модема. Додатки також можуть створювати точку доступу, щоб ділитися вмістом із пристроями поруч."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Надавайте іншим пристроям доступ до Інтернету через Wi-Fi або мобільне передавання даних за допомогою точки доступу й режиму модема. Додатки також можуть створювати точку доступу, щоб ділитися контентом із пристроями поруч."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Довідка"</string>
@@ -1904,6 +1904,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Він може допомогти вам скинути PIN-код, ключ або пароль"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Ваш планшет і особисті дані більш уразливі до атак із боку додатків із невідомих джерел Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому планшету, чи втрату даних унаслідок використання таких додатків."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Ваш телефон і особисті дані більш уразливі до атак із боку додатків із невідомих джерел Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому телефону, чи втрату даних унаслідок використання таких додатків."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Виникла проблема з видаленням завантажених SIM-карт"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Перезапустіть пристрій і повторіть спробу. Якщо ви продовжите скидання налаштувань, завантажені SIM-карти можуть залишитися на пристрої."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Перезапустити"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Продовжити скидання налаштувань?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Завантажені SIM-карти залишаться на пристрої."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Скинути налаштування"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Ваш пристрій і особисті дані більш уразливі до атак невідомих додатків. Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому пристрою, чи втрату даних унаслідок використання таких додатків."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Розширені налаштування"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Увімкнути додаткові варіанти налаштувань"</string>
@@ -2154,7 +2160,7 @@
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Змінити розмір шрифту"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Програми зчитування з екрана"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Аудіо й текст на екрані"</string>
-    <string name="display_category_title" msgid="6638191682294461408">"Дисплей"</string>
+    <string name="display_category_title" msgid="6638191682294461408">"Екран"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Елементи керування взаємодією"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Завантажені додатки"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Експериментальні налаштування"</string>
@@ -2734,6 +2740,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Скинути"</string>
     <string name="tts_play" msgid="2945513377250757221">"Відтворити"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Адаптивне підключення"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Подовжує час роботи акумулятора й покращує продуктивність пристрою завдяки автоматичному керуванню з\'єднанням із мережею"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Сховище облікових даних"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Установити сертифікат"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Установити сертифікати з носія"</string>
@@ -3635,7 +3643,7 @@
     <string name="conversation_category_title" msgid="6777135786004214149">"Чат"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Розмови"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Дозволити додатку використовувати розділ розмов"</string>
-    <string name="demote_conversation_title" msgid="6355383023376508485">"Не чат"</string>
+    <string name="demote_conversation_title" msgid="6355383023376508485">"Не розмова"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Вилучити зі списку розмов"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Це чат"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Додати в список розмов"</string>
@@ -4881,6 +4889,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Не вдалося знайти мережу. Повторіть спробу."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(заборонено)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Немає SIM-карти"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM-карта"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Немає SIM-карти"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Не вказано"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Щоб підключитись, вставте SIM-карту"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Щоб підключитись, вставте SIM-карту <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Рекомендований режим мережі: бажано WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Рекомендований режим мережі: лише GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Рекомендований режим мережі: лише WCDMA"</string>
@@ -5122,10 +5135,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволити показ поверх інших вікон у налаштуваннях"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозволити додаткам, що можуть показуватися поверх інших додатків, накладатися на екрани налаштувань"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Медіа"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Приховати програвач після завершення медіасеансу"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Програвач дає змогу відновлювати сеанси з розгорнутої панелі Швидких налаштувань."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Медіапрогравач в \"Швидких налаштуваннях\""</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Показувати медіапрогравач протягом тривалого часу, щоб швидко відновлювати відтворення"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Приховати програвач"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Показати програвач"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Немає доступних програвачів"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"медіа"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Увімкнеться Bluetooth"</string>
 </resources>

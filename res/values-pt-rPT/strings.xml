@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Utilize o rosto para autenticação"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Iniciar"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Se o desbloqueio facial da acessibilidade estiver desativado, alguns passos de configuração podem não funcionar corretamente com o TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Voltar"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Continuar config."</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Utiliz. config. acessibilidade"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Palavra-passe de Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Palavra-passe da zona Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Ligação automática"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Permitir que o telemóvel estabeleça ligação automaticamente quando estiver perto desta rede"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Permitir que o tablet estabeleça ligação automaticamente quando estiver perto desta rede"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Permita a ligação a esta rede quando estiver ao alcance."</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Adicionar dispositivo"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utilize um código QR para adicionar um dispositivo a esta rede"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"O código QR não é um formato válido."</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utilizar certificados do sistema"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Não fornecer"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Não validar"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Nenhum certificado especificado. A sua ligação não será privada."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"O nome da rede é demasiado longo."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"É necessário especificar um domínio."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certificado obrigatório."</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automaticamente a taxa de atualização de 60 para 90 Hz para algum conteúdo. Aumenta a utilização da bateria."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Forçar taxa de atualização de 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"A taxa de atualização mais elevada para uma capacidade de resposta tátil e uma qualidade de animação melhoradas. Aumenta a utilização da bateria."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atenção ao ecrã"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ativada/O ecrã não se desliga se estiver a olhar para o mesmo"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Versão do Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Atualização de segurança do Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modelo"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modelo: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modelo e hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Versão do hardware"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID do Equipamento"</string>
@@ -1388,7 +1388,7 @@
     <string name="memory_available_read_only" msgid="3201969221573511590">"Disponível (só de leitura)"</string>
     <string name="memory_size" msgid="2710897518522931469">"Espaço total"</string>
     <string name="memory_calculating_size" msgid="3898240439798661242">"A calcular..."</string>
-    <string name="memory_apps_usage" msgid="8818570780540532952">"Aplicações e respetivos dados"</string>
+    <string name="memory_apps_usage" msgid="8818570780540532952">"Apps e respetivos dados"</string>
     <string name="memory_media_usage" msgid="5161308657995646963">"Multimédia"</string>
     <string name="memory_downloads_usage" msgid="8252462247720191179">"Transferências"</string>
     <string name="memory_dcim_usage" msgid="3568913845973164352">"Imagens, vídeos"</string>
@@ -1469,7 +1469,7 @@
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Para utilizar as aplicações, as fotos ou os dados incluídos em <xliff:g id="NAME">^1</xliff:g>, insira-o novamente. \n\nEm alternativa, pode optar por esquecer este armazenamento se o mesmo não estiver disponível. \n\nSe optar por esquecê-lo, todos os dados presentes no dispositivo são eliminados permanentemente. \n\nPode reinstalar as aplicações posteriormente, mas os dados armazenados neste dispositivo são eliminados."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Pretende esquecer <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Todas as aplicações, as fotos e os dados armazenados neste <xliff:g id="NAME">^1</xliff:g> são eliminados definitivamente."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"Aplicações"</string>
+    <string name="storage_detail_apps" msgid="5055911985540355324">"Apps"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"Imagens"</string>
     <string name="storage_detail_videos" msgid="9079894412680404208">"Vídeos"</string>
     <string name="storage_detail_audio" msgid="234272983148223114">"Áudio"</string>
@@ -1666,7 +1666,7 @@
     <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Partilhar a Internet apenas através de Bluetooth e Ethernet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Partilhar a Internet apenas através de USB, Bluetooth e Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="7364633823180913777">"Associação USB"</string>
+    <string name="usb_tethering_button_text" msgid="7364633823180913777">"Ligação USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Partilhar a ligação à Internet do telemóvel através de USB"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Partilhar a ligação à Internet do tablet através de USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Ligação Bluetooth"</string>
@@ -1675,8 +1675,8 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"A partilhar a ligação à Internet deste <xliff:g id="DEVICE_NAME">%1$d</xliff:g> por Bluetooth…"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Não é possível ligar mais de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> aparelhos."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> será desligado."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ligação Ethernet via tlm."</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Partilhar a ligação à Internet do telemóvel através de Ethernet USB"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ligação Ethernet via telemóvel"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Partilhar a ligação à Internet do telemóvel através de Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utilize uma zona Wi-Fi e uma ligação via telemóvel para disponibilizar Internet a outros dispositivos através da sua ligação móvel de dados. As aplicações podem igualmente criar uma zona Wi-Fi para partilhar conteúdo com dispositivos próximos."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utilize uma zona Wi-Fi e uma ligação (à Internet) via telemóvel para disponibilizar Internet a outros dispositivos através de Wi-Fi ou da sua ligação móvel de dados. As apps também podem criar uma zona Wi-Fi para partilhar conteúdo com dispositivos próximos."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ajuda"</string>
@@ -1849,7 +1849,7 @@
     <string name="applications_settings_header" msgid="3154670675856048015">"Definições da aplicação"</string>
     <string name="install_applications" msgid="3921609656584369901">"Fontes desconhecidas"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Permit. todas as fontes app"</string>
-    <string name="recent_app_category_title" msgid="189758417804427533">"Aplicações abertas recentemente"</string>
+    <string name="recent_app_category_title" msgid="189758417804427533">"Apps abertas recentemente"</string>
     <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
       <item quantity="other">Ver todas as %1$d apps</item>
       <item quantity="one">Ver todas as apps</item>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Pode ajudar a repor o seu PIN, padrão ou palavra-passe."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"O seu tablet e os dados pessoais são mais vulneráveis a ataques de aplicações desconhecidas. Ao instalar aplicações desta fonte, aceita ser responsável por quaisquer danos no tablet ou perdas de dados que possam resultar da utilização do mesmo."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"O seu telemóvel e os dados pessoais são mais vulneráveis a ataques de aplicações desconhecidas. Ao instalar aplicações desta fonte, aceita ser responsável por quaisquer danos no telemóvel ou perdas de dados que possam resultar da utilização do mesmo."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Ocorreu um problema ao apagar os SIMs transferidos"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Reinicie o dispositivo e tente novamente. Se continuar a reposição de fábrica, os SIMs transferidos poderão permanecer no dispositivo."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Reiniciar"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Continuar reposição de fábrica?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Os SIMs transferidos permanecerão no dispositivo."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Efetuar reposição de fábrica"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"O dispositivo e os dados pessoais são mais vulneráveis a ataques de aplicações desconhecidas. Ao instalar aplicações desta fonte, aceita ser responsável por quaisquer danos no dispositivo ou perdas de dados que possam resultar da utilização do mesmo."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Definições avançadas"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Ativar mais opções de definições"</string>
@@ -1907,13 +1913,13 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Aplicação de emergência"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Repor preferências de aplicações"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Repor preferências de aplicações?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Esta ação irá repor todas as preferências de:\n\n"<li>"Aplicações desativadas"</li>\n<li>"Notificações de aplicações desativadas"</li>\n<li>"Aplicações predefinidas para ações"</li>\n<li>"Restrições de dados de segundo plano para aplicações"</li>\n<li>"Todas as restrições de autorização"</li>\n\n"Não irá perder quaisquer dados das aplicações."</string>
+    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Esta ação irá repor todas as preferências de:\n\n"<li>"Apps desativadas"</li>\n<li>"Notificações de aplicações desativadas"</li>\n<li>"Apps predefinidas para ações"</li>\n<li>"Restrições de dados de segundo plano para aplicações"</li>\n<li>"Todas as restrições de autorização"</li>\n\n"Não irá perder quaisquer dados das aplicações."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Repor aplicações"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Gerir espaço"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrar"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Escolher opções de filtro"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Todas as aplicações"</string>
-    <string name="filter_apps_disabled" msgid="5068011814871004105">"Aplicações desativadas"</string>
+    <string name="filter_apps_disabled" msgid="5068011814871004105">"Apps desativadas"</string>
     <string name="filter_apps_third_party" msgid="9049447784849114843">"Transferidas"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"Em execução"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="5140211657134608469">"Armazenamento USB"</string>
@@ -1959,7 +1965,7 @@
     <string name="instant_app_details_summary" msgid="417197491598208216">"Mais informações sobre <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Em execução"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nunca utilizado)"</string>
-    <string name="no_default_apps" msgid="8966319676910104570">"Sem Aplicações predefin."</string>
+    <string name="no_default_apps" msgid="8966319676910104570">"Sem Apps predefin."</string>
     <string name="storageuse_settings_title" msgid="3125650750657988194">"Utilização do armazenam."</string>
     <string name="storageuse_settings_summary" msgid="5001621552305431831">"Ver armazenamento utilizado pelas aplicações"</string>
     <string name="service_restarting" msgid="5104563288155809226">"A reiniciar"</string>
@@ -1982,7 +1988,7 @@
     <string name="running_processes_header_title" msgid="558961782589967366">"Memória do dispositivo"</string>
     <string name="running_processes_header_footer" msgid="2726092156680487584">"Utilização da RAM da aplicação"</string>
     <string name="running_processes_header_system_prefix" msgid="8819527769608555124">"Sistema"</string>
-    <string name="running_processes_header_apps_prefix" msgid="4151874328324238133">"Aplicações"</string>
+    <string name="running_processes_header_apps_prefix" msgid="4151874328324238133">"Apps"</string>
     <string name="running_processes_header_free_prefix" msgid="4271100378295864738">"Livre"</string>
     <string name="running_processes_header_used_prefix" msgid="5205762402234243007">"Utilizada"</string>
     <string name="running_processes_header_cached_prefix" msgid="839132595831993521">"Em cache"</string>
@@ -2108,7 +2114,7 @@
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Áudio e texto no ecrã"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Visualização"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controlos de interação"</string>
-    <string name="user_installed_services_category_title" msgid="2639470729311439731">"Aplicações transferidas"</string>
+    <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps transferidas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Sinalizadores de funcionalidades"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
@@ -2448,8 +2454,8 @@
       <item quantity="one">Restringir a aplicação?</item>
     </plurals>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Para poupar bateria, impeça que a aplicação <xliff:g id="APP">%1$s</xliff:g> consuma bateria em segundo plano. Esta aplicação poderá não funcionar corretamente e as notificações poderão sofrer atrasos."</string>
-    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Para poupar bateria, impeça estas aplicações de consumir bateria em segundo plano. As aplicações restringidas poderão não funcionar corretamente e as notificações poderão sofrer atrasos.\n\nAplicações:"</string>
-    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Para poupar bateria, impeça que estas aplicações consumam bateria em segundo plano. As aplicações restringidas poderão não funcionar corretamente e as notificações poderão sofrer atrasos.\n\nAplicações:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Para poupar bateria, impeça estas aplicações de consumir bateria em segundo plano. As aplicações restringidas poderão não funcionar corretamente e as notificações poderão sofrer atrasos.\n\nApps:"</string>
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Para poupar bateria, impeça que estas aplicações consumam bateria em segundo plano. As aplicações restringidas poderão não funcionar corretamente e as notificações poderão sofrer atrasos.\n\nApps:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"Restringir"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="5501997201160532301">"Remover a restrição?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Esta aplicação poderá utilizar a bateria em segundo plano e, por conseguinte, pode ficar sem bateria mais cedo do que o esperado."</string>
@@ -2462,7 +2468,7 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Gerir aplicações automaticamente"</string>
     <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limitar a bateria para as aplicações que não utiliza frequentemente"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Quando o Battery Manager deteta a existência de aplicações a consumir a bateria rapidamente, tem a opção de restringir estas aplicações. As aplicações restringidas poderão não funcionar corretamente e as notificações poderão sofrer atrasos."</string>
-    <string name="restricted_app_title" msgid="6585080822121007436">"Aplicações restritas"</string>
+    <string name="restricted_app_title" msgid="6585080822121007436">"Apps restritas"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Limiar a utilização da bateria para %1$d aplicações</item>
       <item quantity="one">Limitar a utilização da bateria para %1$d aplicação</item>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Repor"</string>
     <string name="tts_play" msgid="2945513377250757221">"Reproduzir"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conetividade adaptável"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prolonga a autonomia da bateria e melhora o desempenho do dispositivo ao gerir as suas ligações de rede automaticamente."</string>
     <string name="credentials_title" msgid="7535942196886123656">"Armazenamento de credenciais"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalar um certificado"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instalar certificados a partir do armazenamento"</string>
@@ -2871,8 +2879,8 @@
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="6402714504088590463">"Se restringir os dados móveis de segundo plano, algumas aplicações e serviços não funcionarão, exceto se estiver ligado a uma rede Wi-Fi.\n\nEsta definição afeta todos os utilizadores neste telemóvel."</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"aviso"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limite"</font></string>
-    <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Aplicações removidas"</string>
-    <string name="data_usage_uninstalled_apps_users" msgid="1262228664057122983">"Aplicações e utilizadores removidos"</string>
+    <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Apps removidas"</string>
+    <string name="data_usage_uninstalled_apps_users" msgid="1262228664057122983">"Apps e utilizadores removidos"</string>
     <string name="data_usage_received_sent" msgid="1486740779864806124">"<xliff:g id="RECEIVED">%1$s</xliff:g> recebidos, <xliff:g id="SENT">%2$s</xliff:g> enviados"</string>
     <string name="data_usage_total_during_range" msgid="2695893609573024612">"<xliff:g id="RANGE">%2$s</xliff:g>: cerca de <xliff:g id="TOTAL">%1$s</xliff:g> utilizado(s)"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="45300375132284265">"<xliff:g id="RANGE">%2$s</xliff:g>: cerca de <xliff:g id="TOTAL">%1$s</xliff:g> utilizado(s), conforme medido pelo tablet. O registo da utilização de dados do seu operador poderá ser diferente."</string>
@@ -3045,7 +3053,7 @@
     <string name="emergency_info_title" msgid="8233682750953695582">"Informações de emergência"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informações e contactos de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="276179173572729205">"Permitir aplicações e conteúdo"</string>
-    <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Aplicações com restrições"</string>
+    <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Apps com restrições"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Expandir defin. da aplicação"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagamentos sem contacto"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Como funciona"</string>
@@ -3198,7 +3206,7 @@
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"O acesso às notificações não está disponível para aplicações no perfil de trabalho."</string>
     <string name="account_dashboard_title" msgid="2735150283267749852">"Contas"</string>
     <string name="account_dashboard_default_summary" msgid="2025250151574540063">"Nenhuma conta adicionada"</string>
-    <string name="app_default_dashboard_title" msgid="4071015747629103216">"Aplicações predefinidas"</string>
+    <string name="app_default_dashboard_title" msgid="4071015747629103216">"Apps predefinidas"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, hora, cópia de segurança"</string>
     <string name="search_results_title" msgid="3360639917793022533">"Definições"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, ligação de rede, Internet, sem fios, dados, wi fi"</string>
@@ -3208,7 +3216,7 @@
     <string name="keywords_time_format" msgid="5384803098766166820">"Utilizar formato de 24 horas"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Transferir"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Abrir com"</string>
-    <string name="keywords_applications_settings" msgid="999926810912037792">"Aplicações"</string>
+    <string name="keywords_applications_settings" msgid="999926810912037792">"Apps"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"fuso horário"</string>
     <string name="keywords_draw_overlay" msgid="3170036145197260392">"Balão de chat, sistema, alerta, janela, caixa de diálogo, ecrã, sobrepor-se a outras aplicações, desenhar"</string>
     <string name="keywords_flashlight" msgid="2133079265697578183">"Lanterna, luz"</string>
@@ -3434,7 +3442,7 @@
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Definição atual)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Pretende alterar as definições de notificação do modo Não incomodar?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Sons do perfil de trabalho"</string>
-    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Util. sons do perfil pessoal"</string>
+    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Utilizar sons do perfil pessoal"</string>
     <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"Os sons são iguais para os perfis de trabalho e pessoal"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Toque do telemóvel de trabalho"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Som de notificação de trabalho predefinido"</string>
@@ -3478,7 +3486,7 @@
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Balões"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Todas as definições de balões"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Apresentar esta conversa como balão"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Mostrar ícone flutuante por cima de apps"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Mostrar ícone flutuante por cima das apps"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Permitir que a aplicação <xliff:g id="APP_NAME">%1$s</xliff:g> mostre algumas notificações como balões"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Pretende ativar os balões para o dispositivo?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"A ativação dos balões para esta app também irá ativar os balões para o seu dispositivo.\n\nEsta ação afeta outras apps ou conversas que tenham autorização para aparecer em balões."</string>
@@ -3575,7 +3583,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupções"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permitir que a aplicação emita som, vibre e/ou apresente notificações no ecrã"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridade"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Aparece na parte superior da secção de conversas, surge como um balão flutuante e apresenta a imagem do perfil no ecrã de bloqueio."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Aparece no topo da secção de conversas, surge como balão flutuante e apresenta a imagem do perfil no ecrã de bloqueio."</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"A <xliff:g id="APP_NAME">%1$s</xliff:g> não suporta a maioria das funcionalidades de conversas. Não é possível definir uma conversa como prioritária e as conversas não vão aparecer como balões flutuantes."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"No painel pendente, reduza as notificações para uma linha"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sem som ou vibração"</string>
@@ -3956,9 +3964,9 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nenhuma permissão solicitada"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Controle o acesso de apps aos seus dados"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Todas as aplicações"</string>
-    <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicações instaladas"</string>
+    <string name="filter_enabled_apps" msgid="8868356616126759124">"Apps instaladas"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Apps instantâneas"</string>
-    <string name="filter_notif_all_apps" msgid="2764590815789208306">"Aplicações: todas"</string>
+    <string name="filter_notif_all_apps" msgid="2764590815789208306">"Apps: todas"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desativadas"</string>
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Categorias: importância alta"</string>
     <string name="filter_notif_low_channels" msgid="2163005243095264537">"Categorias: importância baixa"</string>
@@ -3968,7 +3976,7 @@
     <string name="configure_apps" msgid="5468359087126598115">"Configurar aplicações"</string>
     <string name="unknown_app" msgid="2027248925719898714">"Aplicação desconhecida"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Gestor de autorizações"</string>
-    <string name="app_permissions_summary" msgid="2709819220672938860">"Aplicações que utilizam <xliff:g id="APPS">%1$s</xliff:g>"</string>
+    <string name="app_permissions_summary" msgid="2709819220672938860">"Apps que utilizam <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="app_permissions_summary_more" msgid="6247952473615352350">"Apps que utilizam <xliff:g id="APPS">%1$s</xliff:g> e mais."</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Tocar para ativar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Tocar duas vezes em qualquer ponto do ecrã para ativar o dispositivo"</string>
@@ -4070,7 +4078,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferências de USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB controlado por"</string>
-    <string name="usb_control_host" msgid="7404215921555021871">"Dispositivo associado"</string>
+    <string name="usb_control_host" msgid="7404215921555021871">"Dispositivo ligado"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Este dispositivo"</string>
     <string name="usb_switching" msgid="3713602881103295766">"A mudar..."</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Não foi possível mudar."</string>
@@ -4129,7 +4137,7 @@
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> carateres utilizados"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"Sobrepor a outras apps"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Sobrepor a outras apps"</string>
-    <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Aplicações"</string>
+    <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Apps"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Sobrepor a outras apps"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Permitir sobreposição a outras apps"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Permita que esta app se sobreponha a outras apps que esteja a utilizar. Esta app poderá ver onde toca ou alterar o que é apresentado no ecrã."</string>
@@ -4140,7 +4148,7 @@
     <string name="keywords_vr_listener" msgid="902737490270081131">"rv realidade virtual serviço de escuta estéreo serviço assistente"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Sobrepor a outras apps"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> apps autorizadas a sobreporem-se a outras apps"</string>
-    <string name="filter_overlay_apps" msgid="2483998217116789206">"Aplicações com autorização"</string>
+    <string name="filter_overlay_apps" msgid="2483998217116789206">"Apps com autorização"</string>
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitida"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Não permitida"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalar apps de fontes desconhecidas"</string>
@@ -4379,8 +4387,8 @@
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Falha ao aplicar a sobreposição."</string>
     <string name="special_access" msgid="1767980727423395147">"Acesso especial a apps"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicações podem utilizar dados sem restrições</item>
-      <item quantity="one">1 aplicação pode utilizar dados sem restrições</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps podem utilizar dados sem restrições</item>
+      <item quantity="one">1 app pode utilizar dados sem restrições</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Veja mais"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"Pretende mesmo limpar os dados do utilizador e converter para a encriptação de ficheiros?"</string>
@@ -4500,7 +4508,7 @@
     <string name="web_action_enable_summary" msgid="2658930257777545990">"Abrir links nas aplicações, mesmo que não estejam instaladas"</string>
     <string name="web_action_section_title" msgid="994717569424234098">"Apps instantâneas"</string>
     <string name="instant_apps_settings" msgid="4280942494969957858">"Preferências das Apps instantâneas"</string>
-    <string name="domain_url_section_title" msgid="9028890472923474958">"Aplicações instaladas"</string>
+    <string name="domain_url_section_title" msgid="9028890472923474958">"Apps instaladas"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"O seu armazenamento está agora a ser gerido pelo gestor de armazenamento"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"Contas de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="configure_section_header" msgid="3126887329521705210">"Configurar"</string>
@@ -4526,7 +4534,7 @@
     <string name="enterprise_privacy_bug_reports" msgid="2635897583413134123">"Relatório de erro mais recente"</string>
     <string name="enterprise_privacy_security_logs" msgid="8494681624247959075">"Registo de segurança mais recente"</string>
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"Nenhuma"</string>
-    <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Aplicações instaladas"</string>
+    <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Apps instaladas"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"O número de aplicações é uma estimativa. Pode não incluir as aplicações instaladas fora da Play Store."</string>
     <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
       <item quantity="other">No mínimo, <xliff:g id="COUNT_1">%d</xliff:g> aplicações</item>
@@ -4535,7 +4543,7 @@
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Autoriz. de Localização"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Autorizações do microfone"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Autorizações da câmara"</string>
-    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Aplicações predefinidas"</string>
+    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Apps predefinidas"</string>
     <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplicações</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicação</item>
@@ -4616,7 +4624,7 @@
     <string name="storage_manager_indicator_on" msgid="8380330763647785309">"Ativado"</string>
     <string name="install_type_instant" msgid="7685381859060486009">"App instantânea"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Pretende desativar o gestor de armazenamento?"</string>
-    <string name="storage_movies_tv" msgid="7897612625450668593">"Aplicações de filmes e TV"</string>
+    <string name="storage_movies_tv" msgid="7897612625450668593">"Apps de filmes e TV"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"Informações de fornecimento do operador"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Acionar fornecimento do operador"</string>
     <string name="zen_suggestion_title" msgid="4555260320474465668">"Atualizar o modo Não incomodar"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Não foi possível encontrar qualquer rede. Tente novamente."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(proibida)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Nenhum cartão SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Nenhum cartão SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nenhum"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Requer o SIM para estabelecer ligação"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Requer o SIM do operador <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> para estabelecer ligação"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Modo de rede preferido: apenas WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Modo de rede preferido: apenas GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Modo de rede preferido: apenas WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir sobreposições de ecrãs nas Definições"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permita que as apps que se podem sobrepor a outras apps se sobreponham a ecrãs de Definições."</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimédia"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Oculte o leitor quando sessão multimédia terminar"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"O leitor permite-lhe retomar uma sessão a partir do painel Definições rápidas expandido."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Leitor de Multimédia nas Definições rápidas"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Mostre o Leitor de Multimédia por um período alargado para retomar facilmente a reprodução"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar leitor"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar leitor"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nenhum leitor disponível."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multimédia"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"O Bluetooth será ativado"</string>
 </resources>

@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"使用臉孔驗證"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"開始"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"如無障礙版「臉孔解鎖」已關閉，部分設定步驟可能無法配合 TalkBack 正常執行。"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"返回"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"繼續設定"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"使用無障礙功能設定"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi 密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"熱點密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動連線"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"允許手機在此網絡附近時自動連線"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"允許平板電腦在此網絡附近時自動連線"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"當進入覆蓋範圍內時，允許連接此網絡"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"新增裝置"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用二維條碼，在此網絡中加入裝置"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"二維條碼格式無效"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"使用系統憑證"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"不驗證"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"您未指定任何憑證，因此將無法設定私人連線。"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"網絡名稱太長。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"必須指定網域。"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要認證。"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自動將部分內容的重新整理頻率，從 60 Hz 提升到 90 Hz。此功能會增加耗電量。"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"流暢畫面"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"提升重新整理頻率至 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"最高的重新整理頻率，帶來更靈敏的觸控反應和更高畫質的動畫。這會增加電池用量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"螢幕感知"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"啟用 / 假如正您望向螢幕，螢幕將不會關閉"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android 版本"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android 安全性更新"</string>
     <string name="model_info" msgid="8997566254717810904">"型號"</string>
-    <string name="model_summary" msgid="2246651782442466213">"型號：%1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"型號和硬件"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"硬件版本"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"設備編號"</string>
@@ -1677,7 +1677,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"不可與超過 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 部裝置分享網絡。"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 的網絡共享即將中斷。"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"以太網網絡共享"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"透過 USB 以太網分享手機的互聯網連線"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"透過以太網分享手機的互聯網連線"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"使用熱點和網絡共享功能，透過您的流動數據連線提供互聯網服務給其他裝置。應用程式可以建立熱點，與附近的裝置分享內容。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用熱點和網絡共享功能，讓其他裝置透過 Wi‑Fi 或流動數據連接到互聯網。應用程式亦可以建立熱點，與附近的裝置分享內容。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"說明"</string>
@@ -1859,6 +1859,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"他們可協助您重設 PIN、圖案或密碼"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"來源不明的應用程式可能會侵害您的平板電腦和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致平板電腦損壞或資料遺失的責任。"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"來源不明的應用程式可能會侵害您的手機和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致手機損壞或資料遺失的責任。"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"清除已下載的 SIM 卡時發生錯誤"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"請重新啟動裝置，然後再試一次。如繼續回復原廠設定，已下載的 SIM 卡可能會保留在裝置上。"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"重新啟動"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"要繼續回復原廠設定嗎？"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"已下載的 SIM 卡將會保留在裝置上。"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"回復原廠設定"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"來源不明的應用程式可能會侵害您的裝置和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致裝置損壞或資料遺失的責任。"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"進階設定"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"啟用更多設定選項"</string>
@@ -2659,6 +2665,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"重設"</string>
     <string name="tts_play" msgid="2945513377250757221">"播放"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"自動調節連線"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"自動管理網路連線，藉此延長電池壽命並提升裝置效能"</string>
     <string name="credentials_title" msgid="7535942196886123656">"憑證儲存空間"</string>
     <string name="credentials_install" msgid="3933218407598415827">"安裝憑證"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"從儲存裝置安裝憑證"</string>
@@ -3474,18 +3482,18 @@
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"低重要性的通知圖示不會顯示在狀態列"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"應用程式圖示上的通知圓點"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"顯示最近的對話列"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"小視窗"</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"對話泡"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知和其他內容可在螢幕中以小視窗形式顯示。輕按小視窗即可開啟。如要關閉小視窗，只需將之拖至螢幕下方。"</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"小視窗"</string>
-    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"所有「小視窗」設定"</string>
-    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"以小視窗顯示此對話"</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"對話泡"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"所有「對話泡」設定"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"以「對話泡」顯示此對話"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"在應用程式上顯示浮動圖示"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」以小視窗形式顯示部分通知"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"要開啟裝置的小視窗功能嗎？"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"如開啟此應用程式的小視窗功能，裝置的小視窗功能也會開啟。\n\n此操作會影響其他允許以小視窗顯示的應用程式或對話。"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"開啟"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"取消"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"開啟 / 對話可以浮動圖示顯示"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"開啟 / 對話可透過浮動圖示顯示"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"允許應用程式顯示小視窗"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"部分對話會在其他應用程式上以浮動圖示顯示"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"所有對話均可以小視窗顯示"</string>
@@ -3553,7 +3561,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個優先對話</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"優先對話"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以浮動對話氣泡顯示在對話部分的頂部"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以浮動對話泡顯示在對話部分的頂部"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"在對話部分的頂部顯示"</string>
     <string name="other_conversations" msgid="7218658664423361043">"其他對話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"已變更的對話"</string>
@@ -4665,7 +4673,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"允許應用程式控制 Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允許這個應用程式開啟或關閉 Wi-Fi，掃瞄和連線至 Wi-Fi 網絡、新增或移除網絡，或啟動僅限本機的熱點"</string>
     <string name="media_output_title" msgid="8283629315159510680">"播放媒體的裝置"</string>
-    <string name="media_output_label_title" msgid="4139048973886819148">"透過以下裝置播放「<xliff:g id="LABEL">%s</xliff:g>」中的媒體"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"使用以下裝置播放「<xliff:g id="LABEL">%s</xliff:g>」的內容"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"此裝置"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"手機"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"平板電腦"</string>
@@ -4706,6 +4714,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"找不到網絡，請再試一次。"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(禁止)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"沒有 SIM 卡"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM 卡"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"沒有 SIM 卡"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"無"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"需要 SIM 卡才能連接網絡"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"需要 <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> 的 SIM 卡才能連接網絡"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"首選網絡模式：首選 WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"首選網絡模式：僅限 GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"首選網絡模式：僅限 WCDMA"</string>
@@ -4941,10 +4954,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"允許在「設定」上顯示重疊式畫面"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"允許可以在其他應用程式上顯示内容的應用程式重疊「設定」畫面"</string>
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"媒體工作階段結束後隱藏播放器"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"播放器讓您在展開的「快速設定」面板中恢復工作階段。"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"「快速設定」中的媒體播放器"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"延長媒體播放器的顯示時間，讓您輕鬆繼續播放"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"顯示播放器"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"沒有可用的播放器"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒體"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"系統將開啟藍牙"</string>
 </resources>

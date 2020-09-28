@@ -254,7 +254,7 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"Fecha y hora"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Establecer fecha y hora"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Establecer fecha, hora, zona horaria y formatos"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"Usar hora de la red"</string>
+    <string name="date_time_auto" msgid="8227898528525208628">"Usar la hora proporcionada por la red"</string>
     <string name="zone_auto_title" msgid="4715775349468228598">"Usar la zona horaria proporcionada por la red"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar la configuración regional predeterminada"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"Formato de 24 horas"</string>
@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Usa tu cara para autenticarte"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Empezar"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Si el desbloqueo facial está desactivado, es posible que algunos pasos de la configuración no funcionen correctamente con TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Atrás"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Continuar configuración"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Utilizar ajustes accesibilidad"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -876,7 +879,7 @@
     <string name="passpoint_content" msgid="5219226173518418335">"Credenciales de <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_eap_method" msgid="3776009521349381742">"Método EAP"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Autenticación de fase 2"</string>
-    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Certificado de CA"</string>
+    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Certificado AC"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Estado del certificado online"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Dominio"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Certificado de usuario"</string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Contraseña de la red Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Contraseña del punto de acceso: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Conexión automática"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Permite que el teléfono se conecte automáticamente a esta red cuando esté cerca"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Permitir que el tablet se conecte automáticamente a esta red cuando esté cerca"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Permitir conectarse a esta red cuando esté en rango"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Añadir dispositivo"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Usa un código QR para añadir un dispositivo a esta red"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"El formato del código QR no es válido"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Usar certificados del sistema"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"No proporcionar"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"No validar"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"No se ha especificado ningún certificado. La conexión no será privada."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"El nombre de la red es demasiado largo."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Se debe especificar un dominio."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Se necesita un certificado."</string>
@@ -1034,7 +1035,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"¿Quieres cancelar la invitación para conectar con <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"¿Olvidar este grupo?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Punto de acceso Wi-Fi"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"No se está compartiendo Internet ni el contenido con otros dispositivos"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"No se está compartiendo Internet ni contenido con otros dispositivos"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"Se está compartiendo la conexión a Internet de este tablet mediante un punto de acceso"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"Se está compartiendo la conexión a Internet de este teléfono mediante un punto de acceso"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"La aplicación está compartiendo contenido. Para compartir la conexión a Internet, desactiva el punto de acceso y vuelve a activarlo"</string>
@@ -1156,7 +1157,7 @@
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturales"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Mejorados"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"Saturados"</string>
-    <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptativo"</string>
+    <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptativos"</string>
     <string name="color_mode_summary_natural" msgid="8298840714001791628">"Usar solo colores reales"</string>
     <string name="color_mode_summary_automatic" msgid="8157885594041700275">"Ajustar entre colores vívidos y reales"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="6413384391658481700">"Cambiar orientación al girar el tablet"</string>
@@ -1189,8 +1190,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balance de blancos de pantalla"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Pantalla fluida"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automáticamente la frecuencia de actualización de 60 a 90 Hz en determinados tipos de contenido, lo que gasta más batería."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Pantalla fluida"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automáticamente la frecuencia de actualización de 60 a 90 Hz en determinados tipos de contenido. Se usará más batería."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Forzar frecuencia de actualización de 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Se utiliza la mayor frecuencia de actualización posible para mejorar la capacidad de respuesta a toques y la calidad de las animaciones. Aumenta el uso de batería."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atención a la pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activado / La pantalla no se apagará si estás mirándola"</string>
@@ -1314,7 +1315,7 @@
     <string name="sim_multi_sims_summary" msgid="1711012455679332238">"Selecciona la SIM que prefieras para usar datos móviles."</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"¿Usar <xliff:g id="CARRIER">%1$s</xliff:g> para los datos móviles?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estás utilizando <xliff:g id="CARRIER2_0">%2$s</xliff:g> para los datos móviles. Si cambias a <xliff:g id="CARRIER1">%1$s</xliff:g>, no se utilizará más a <xliff:g id="CARRIER2_1">%2$s</xliff:g> para los datos móviles."</string>
-    <string name="sim_change_data_ok" msgid="4922114750417276560">"Utilizar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="7182406911552216373">"¿Actualizar tarjeta SIM preferida?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> es la única SIM del dispositivo. ¿Quieres usarla para los datos móviles, las llamadas y los mensajes SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Código PIN de la tarjeta SIM incorrecto. Debes ponerte en contacto con tu operador para desbloquear el dispositivo."</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Versión de Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Actualización de seguridad de Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modelo"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modelo: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modelo y hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Versión de hardware"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID de equipo"</string>
@@ -1657,7 +1657,7 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Punto de acceso, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"No se está compartiendo Internet con otros dispositivos"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Compartir conexión"</string>
-    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"No usar el punto de acceso Wi‑Fi"</string>
+    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"No usar punto de acceso Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Compartir Internet solo mediante USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Compartir Internet solo mediante Bluetooth"</string>
     <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Compartir Internet solo por Ethernet"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"No se puede anclar a más de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> dispositivos."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Se desactivará el anclaje a red de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Compartir Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Comparte la conexión a Internet del teléfono por USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Comparte la conexión a Internet del teléfono por Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utiliza el punto de acceso y la conexión compartida para que otros dispositivos puedan conectarse a Internet a través de tu conexión de datos móviles. Las aplicaciones también pueden crear un punto de acceso para compartir contenido con dispositivos cercanos."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utiliza el punto de acceso y la conexión compartida para que otros dispositivos puedan conectarse a Internet a través de tu red Wi‑Fi o tus datos móviles. Las aplicaciones también pueden crear un punto de acceso para compartir contenido con dispositivos cercanos."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ayuda"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Te podrá ayudar a cambiar el PIN, el patrón o la contraseña"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tu tablet y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu tablet o la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Tu teléfono y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu teléfono o la pérdida de datos que se pueda derivar de su uso."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Error al eliminar las tarjetas SIM descargadas"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Reinicia el dispositivo e inténtalo de nuevo. Si quieres seguir y restablecer el estado de fábrica, es posible que las tarjetas SIM descargadas no se eliminen."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Reiniciar"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"¿Restablecer estado de fábrica?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Las tarjetas SIM descargadas no se eliminarán."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Restablecer estado de fábrica"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Tu dispositivo y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu dispositivo o de la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Ajustes avanzados"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Habilitar más opciones de configuración"</string>
@@ -2159,7 +2165,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Desde la parte inferior de la pantalla, desliza tres dedos hacia arriba.\n\nPara cambiar de una función a otra, desliza tres dedos hacia arriba y mantén pulsada la pantalla."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantener pulsadas las teclas de volumen"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mantén pulsadas las teclas de volumen"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén pulsadas las dos teclas de volumen"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantener pulsadas las dos teclas de volumen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Triple toque en la pantalla"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"toca tres veces la pantalla"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Toca la pantalla tres veces rápidamente. Esta acción puede hacer que tu dispositivo funcione más lento."</string>
@@ -2211,7 +2217,7 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibración de las notificaciones"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibración del tono"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respuesta táctil"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Utilizar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Usar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Usar corrección de color"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Mostrar subtítulos"</string>
@@ -2221,9 +2227,9 @@
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Más opciones"</string>
     <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"Algunas aplicaciones no admiten estas preferencias de subtítulos"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Botón Accesibilidad"</string>
-    <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Desliza hacia arriba con dos dedos desde la parte inferior"</string>
-    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Mantén pulsadas las teclas de volumen"</string>
-    <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Toca tres veces la pantalla"</string>
+    <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Deslizar hacia arriba con dos dedos desde la parte inferior"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Mantener pulsadas las teclas de volumen"</string>
+    <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocar tres veces la pantalla"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Audífonos"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"No hay audífonos conectados"</string>
@@ -2588,7 +2594,7 @@
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Según el porcentaje"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"El modo Ahorro de batería se activa si es probable que te quedes sin batería antes de tu próxima carga normal."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Se activará cuando llegue al <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Establecer una programación"</string>
+    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Programar"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Amplía la duración de la batería"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cuando la batería esté cargada"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"El modo Ahorro de batería se desactiva cuando el teléfono está al <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Restablecer"</string>
     <string name="tts_play" msgid="2945513377250757221">"Reproducir"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conectividad adaptable"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Alarga la duración de la batería y mejora el rendimiento del dispositivo gestionando automáticamente las conexiones de red"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Almacenamiento de credenciales"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalar certificados"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instala certificados desde el almacenamiento"</string>
@@ -2679,11 +2687,11 @@
     <string name="credentials_erased" msgid="9121052044566053345">"Almacenamiento de credenciales borrado"</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"No se ha podido borrar el almacenamiento de credenciales."</string>
     <string name="usage_access_title" msgid="1580006124578134850">"Apps con acceso de uso"</string>
-    <string name="ca_certificate" msgid="3076484307693855611">"Certificado de CA"</string>
+    <string name="ca_certificate" msgid="3076484307693855611">"Certificado AC"</string>
     <string name="user_certificate" msgid="6897024598058566466">"Certificado de usuario"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certificado de Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Tus datos no serán privados"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Los certificados de CA permiten que los sitios web, las aplicaciones y las VPN puedan cifrar datos. Instala solo certificados de CA de organizaciones de confianza. \n\n Si instalas un certificado de CA, el propietario podrá acceder a datos (como contraseñas e información de tarjetas de crédito) que proporciones en sitios web que visites o aplicaciones que uses, incluso aunque la información esté cifrada."</string>
+    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Los certificados de CA permiten que los sitios web, las aplicaciones y las VPN puedan cifrar datos. Instala solo certificados de CA de organizaciones de confianza. \n\n Si instalas un certificado AC, el propietario podrá acceder a datos (como contraseñas e información de tarjetas de crédito) que proporciones en sitios web que visites o aplicaciones que uses, incluso aunque la información esté cifrada."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"No instalar"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Instalar (no seguro)"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"No se ha instalado el certificado"</string>
@@ -2897,7 +2905,7 @@
     <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"Identificador de IPSec"</string>
     <string name="vpn_ipsec_secret" msgid="532007567355505963">"Clave precompartida de IPSec"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"Certificado de usuario de IPSec"</string>
-    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"Certificado de CA de IPSec"</string>
+    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"Certificado AC de IPSec"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"Certificado del servidor IPSec"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Mostrar opciones avanzadas"</string>
     <string name="vpn_search_domains" msgid="1973799969613962440">"Dominios de búsqueda de DNS"</string>
@@ -2959,13 +2967,13 @@
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Activar"</string>
     <string name="trusted_credentials_remove_label" msgid="8975881053042174913">"Quitar"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Confiar"</string>
-    <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"¿Quieres habilitar el certificado de CA del sistema?"</string>
-    <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"¿Quieres inhabilitar el certificado de CA del sistema?"</string>
-    <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"¿Eliminar el certificado de CA de usuario de forma permanente?"</string>
+    <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"¿Quieres habilitar el certificado AC del sistema?"</string>
+    <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"¿Quieres inhabilitar el certificado AC del sistema?"</string>
+    <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"¿Eliminar el certificado AC de usuario de forma permanente?"</string>
     <string name="credential_contains" msgid="407972262032275476">"Esta entrada incluye:"</string>
     <string name="one_userkey" msgid="4417212932385103517">"una clave de usuario"</string>
     <string name="one_usercrt" msgid="1865069301105101370">"un certificado de usuario"</string>
-    <string name="one_cacrt" msgid="7467796501404158399">"un certificado de CA"</string>
+    <string name="one_cacrt" msgid="7467796501404158399">"un certificado AC"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d certificados de CA"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Detalles de credenciales"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Quitar credencial: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -3459,7 +3467,7 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Clasificar las notificaciones por importancia automáticamente"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Acciones y respuestas sugeridas"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Muestra automáticamente las acciones y las respuestas sugeridas"</string>
-    <string name="notification_history_summary" msgid="5434741516307706892">"Consulta las notificaciones recientes y pospuestas"</string>
+    <string name="notification_history_summary" msgid="5434741516307706892">"Mostrar notificaciones recientes y pospuestas"</string>
     <string name="notification_history" msgid="8663811361243456201">"Historial de notificaciones"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"Usar historial de notificaciones"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"El historial de notificaciones está desactivado"</string>
@@ -3546,7 +3554,7 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Es una conversación"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Añadir a la sección de conversaciones"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gestiona las conversaciones"</string>
-    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Ninguna conversación prioritaria"</string>
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"No hay conversaciones prioritarias"</string>
     <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> conversaciones prioritarias</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> conversación prioritaria</item>
@@ -3555,7 +3563,7 @@
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Mostrar en la parte superior de la sección de conversaciones y en forma de burbuja"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Mostrar en la parte superior de la sección de conversaciones"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Otras conversaciones"</string>
-    <string name="other_conversations_summary" msgid="3487426787901236273">"Conversaciones que has modificado"</string>
+    <string name="other_conversations_summary" msgid="3487426787901236273">"Conversaciones en las que has hecho cambios"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Convertir conversaciones prioritarias en burbujas"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Las conversaciones prioritarias se muestran en la parte superior del panel desplegable. También puedes configurarlas para que se muestren en burbujas y puedan interrumpirte aunque esté activado No molestar."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Aquí se mostrarán las conversaciones prioritarias y las modificadas"</string>
@@ -3575,11 +3583,11 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupciones"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permite que la aplicación emita sonido, vibre o muestre notificaciones en la pantalla"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridad"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Se muestra arriba en la sección de conversaciones en forma de burbuja flotante, y la imagen de perfil aparece en la pantalla de bloqueo"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Se muestra arriba en la sección de conversaciones, como burbuja flotante, y la imagen de perfil aparece en la pantalla de bloqueo"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> no admite la mayoría de las funciones de conversaciones. No puedes establecer una conversación como prioritaria, y las conversaciones no se mostrarán en forma de burbuja flotante."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"En la pantalla desplegable, mostrar las notificaciones en una sola línea"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sin sonido ni vibración"</string>
-    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sin sonido ni vibración y se muestra más abajo en la sección de conversaciones"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sin sonido ni vibración, y se muestra más abajo en la sección de conversaciones"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Es posible que suene o vibre según los ajustes del teléfono"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo está desbloqueado, muestra las notificaciones en la parte superior"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
@@ -4074,7 +4082,7 @@
     <string name="usb_control_device" msgid="527916783743021577">"Este dispositivo"</string>
     <string name="usb_switching" msgid="3713602881103295766">"Cambiando..."</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"No se ha podido hacer el cambio"</string>
-    <string name="usb_summary_charging_only" msgid="678095599403565146">"Cargando el dispositivo"</string>
+    <string name="usb_summary_charging_only" msgid="678095599403565146">"Cargando este dispositivo"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Cargando dispositivo conectado"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Transferencia de archivos"</string>
     <string name="usb_summary_tether" msgid="2554569836525075702">"Compartir conexión por USB"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"No se ha encontrado ninguna red. Vuelve a intentarlo."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(prohibida)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"No hay ninguna tarjeta SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"Tarjeta SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Ninguna tarjeta SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nada"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Se necesita una tarjeta SIM para conectarse"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Se necesita una tarjeta SIM de <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> para conectarse"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Preferencia de modo de red: WCDMA preferido"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Preferencia de modo de red: solo GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Preferencia de modo de red: solo WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir las superposiciones en pantallas de Ajustes"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permite que otras aplicaciones se superpongan a la aplicación ajustes"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Ocultar reproductor al acabar la sesión multimedia"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"El reproductor te permite seguir con una sesión desde el panel ampliado de ajustes rápidos."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Reproductor multimedia en los ajustes rápidos"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Muestra el reproductor durante mucho tiempo para que puedas reanudar fácilmente el contenido"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar reproductor"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar reproductor"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"No hay reproductores disponibles"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multimedia"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Se activará el Bluetooth"</string>
 </resources>
