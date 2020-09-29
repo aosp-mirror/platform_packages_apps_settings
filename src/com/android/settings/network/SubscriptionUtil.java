@@ -21,6 +21,7 @@ import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.os.ParcelUuid;
 import android.telephony.SubscriptionInfo;
@@ -29,6 +30,8 @@ import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
 
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -278,6 +281,33 @@ public class SubscriptionUtil {
         }
     }
 
+    /** Starts a dialog activity to handle SIM enabling/disabling. */
+    public static void startToggleSubscriptionDialogActivity(
+            Context context, int subId, boolean enable) {
+        context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, enable));
+    }
+
+    /**
+     * Finds and returns a subscription with a specific subscription ID.
+     * @param subscriptionManager The ProxySubscriptionManager for accessing subscription
+     *                            information
+     * @param subId The id of subscription to be returned
+     * @return the {@code SubscriptionInfo} whose ID is {@code subId}. It returns null if the
+     * {@code subId} is {@code SubscriptionManager.INVALID_SUBSCRIPTION_ID} or no such
+     * {@code SubscriptionInfo} is found.
+     */
+    @Nullable
+    public static SubscriptionInfo getSubById(SubscriptionManager subscriptionManager, int subId) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return null;
+        }
+        return subscriptionManager
+                .getAllSubscriptionInfoList()
+                .stream()
+                .filter(subInfo -> subInfo.getSubscriptionId() == subId)
+                .findFirst()
+                .get();
+    }
 
     /**
      * Whether a subscription is visible to API caller. If it's a bundled opportunistic
