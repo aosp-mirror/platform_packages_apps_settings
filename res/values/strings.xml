@@ -2305,9 +2305,9 @@
     <!-- Error message if the network prefix length is not valid [CHAR LIMIT=50]-->
     <string name="wifi_ip_settings_invalid_network_prefix_length">Type a network prefix length between 0 and 32.</string>
     <!-- Label for the DNS (first one) -->
-    <string name="wifi_dns1">DNS 1</string>
+    <string name="wifi_dns1">DNS 1 (unless overridden by Private DNS)</string>
     <!-- Label for the DNS (second one)-->
-    <string name="wifi_dns2">DNS 2</string>
+    <string name="wifi_dns2">DNS 2 (unless overridden by Private DNS)</string>
     <!-- Label for the gateway of the network -->
     <string name="wifi_gateway">Gateway</string>
     <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
@@ -11925,6 +11925,18 @@
     <string name="see_more">See more</string>
     <!-- See less items in contextual homepage [CHAR LIMIT=30]-->
     <string name="see_less">See less</string>
+
+    <!-- Strings for toggling subscriptions dialog activity -->
+    <!-- Title of confirmation dialog asking the user if they want to disable subscription. [CHAR_LIMIT=NONE] -->
+    <string name="privileged_action_disable_sub_dialog_title">Turn off <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
+    <!-- Title of confirmation dialog asking the user if they want to disable subscription. [CHAR_LIMIT=NONE] -->
+    <string name="privileged_action_disable_sub_dialog_title_without_carrier">Turn off SIM?</string>
+    <!-- Disabling SIMs progress dialog message [CHAR LIMIT=NONE] -->
+    <string name="privileged_action_disable_sub_dialog_progress">Turning off SIM<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
+    <!-- Title of error messaging indicating the device could not disable the mobile network. [CHAR LIMIT=NONE] -->
+    <string name="privileged_action_disable_fail_title">Can\'t disable carrier</string>
+    <!-- Body text of error message indicating the device could not disable the mobile network, due to an unknown issue. [CHAR LIMIT=NONE] -->
+    <string name="privileged_action_disable_fail_text">Something went wrong and your carrier could not be disabled.</string>
 
     <!-- Title for Network connection request Dialog [CHAR LIMIT=60] -->
     <string name="network_connection_request_dialog_title">Connect to device</string>
