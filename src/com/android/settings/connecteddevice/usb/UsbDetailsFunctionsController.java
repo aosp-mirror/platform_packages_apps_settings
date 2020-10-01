@@ -115,7 +115,8 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     public void onRadioButtonClicked(RadioButtonPreference preference) {
         final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
         final long previousFunction = mUsbBackend.getCurrentFunctions();
-        if (function != previousFunction && !Utils.isMonkeyRunning()) {
+        if (function != previousFunction && !Utils.isMonkeyRunning()
+                && !shouldIgnoreClickEvent(function, previousFunction)) {
             mPreviousFunction = previousFunction;
 
             //Update the UI in advance to make it looks smooth
@@ -136,6 +137,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                 mUsbBackend.setCurrentFunctions(function);
             }
         }
+    }
+
+    private boolean shouldIgnoreClickEvent(long function, long previousFunction) {
+        return previousFunction == UsbManager.FUNCTION_ACCESSORY
+                && function == UsbManager.FUNCTION_MTP;
     }
 
     @Override
