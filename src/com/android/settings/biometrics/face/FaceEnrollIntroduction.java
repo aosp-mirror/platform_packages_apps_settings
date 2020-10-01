@@ -16,15 +16,12 @@
 
 package com.android.settings.biometrics.face;
 
-import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.hardware.face.FaceManager;
-import android.hardware.face.FaceSensorProperties;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,7 +29,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -173,9 +169,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private boolean maxFacesEnrolled() {
         if (mFaceManager != null) {
-            final List<FaceSensorProperties> props = mFaceManager.getSensorProperties();
+            final List<FaceSensorPropertiesInternal> props =
+                    mFaceManager.getSensorPropertiesInternal();
             // This will need to be updated for devices with multiple face sensors.
-            final int max = props.get(0).maxTemplatesAllowed;
+            final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
             return numEnrolledFaces >= max;
         } else {
