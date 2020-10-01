@@ -21,7 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
-import android.hardware.fingerprint.FingerprintSensorProperties;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -126,8 +126,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected int checkMaxEnrolled() {
         if (mFingerprintManager != null) {
-            final List<FingerprintSensorProperties> props =
-                    mFingerprintManager.getSensorProperties();
+            final List<FingerprintSensorPropertiesInternal> props =
+                    mFingerprintManager.getSensorPropertiesInternal();
             // This will need to be updated for devices with multiple fingerprint sensors
             final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFingerprints =

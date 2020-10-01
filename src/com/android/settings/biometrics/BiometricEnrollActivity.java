@@ -25,9 +25,9 @@ import android.content.res.Resources;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricManager.Authenticators;
 import android.hardware.face.FaceManager;
-import android.hardware.face.FaceSensorProperties;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.fingerprint.FingerprintManager;
-import android.hardware.fingerprint.FingerprintSensorProperties;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -233,13 +233,14 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
         final FaceManager faceManager = getSystemService(FaceManager.class);
-        final List<FingerprintSensorProperties> fpProperties =
-                fingerprintManager.getSensorProperties();
-        final List<FaceSensorProperties> faceProperties = faceManager.getSensorProperties();
+        final List<FingerprintSensorPropertiesInternal> fpProperties =
+                fingerprintManager.getSensorPropertiesInternal();
+        final List<FaceSensorPropertiesInternal> faceProperties =
+                faceManager.getSensorPropertiesInternal();
 
         // This would need to be updated for devices with multiple sensors of the same modality
         final boolean maxFacesEnrolled = faceManager.getEnrolledFaces(mUserId).size()
-                >= faceProperties.get(0).maxTemplatesAllowed;
+                >= faceProperties.get(0).maxEnrollmentsPerUser;
         final boolean maxFingerprintsEnrolled = fingerprintManager.getEnrolledFingerprints(mUserId)
                 .size() >= fpProperties.get(0).maxEnrollmentsPerUser;
 
