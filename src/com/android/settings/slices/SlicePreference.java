@@ -18,6 +18,7 @@ package com.android.settings.slices;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 
 import androidx.slice.Slice;
 import androidx.slice.widget.SliceView;
@@ -43,11 +44,17 @@ public class SlicePreference extends LayoutPreference {
 
     private void init() {
         mSliceView = findViewById(R.id.slice_view);
-        mSliceView.showTitleItems(true);
+        mSliceView.setShowTitleItems(true);
         mSliceView.setScrollable(false);
+        mSliceView.setVisibility(View.GONE);
     }
 
     public void onSliceUpdated(Slice slice) {
+        if (slice == null) {
+            mSliceView.setVisibility(View.GONE);
+        } else {
+            mSliceView.setVisibility(View.VISIBLE);
+        }
         mSliceView.onChanged(slice);
         notifyChanged();
     }

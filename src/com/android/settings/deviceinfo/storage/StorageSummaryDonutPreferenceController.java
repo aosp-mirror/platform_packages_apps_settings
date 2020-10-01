@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo.storage;
 
 import android.content.Context;
+import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.text.TextUtils;
 import android.text.format.Formatter;
@@ -25,22 +26,29 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.deviceinfo.PrivateStorageInfo;
+import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
+import com.android.settingslib.utils.ThreadUtils;
+
+import java.text.NumberFormat;
 
 /**
- * StorgaeSummaryPreferenceController updates the donut storage summary preference to have the
+ * SummaryPreferenceController updates the donut storage summary preference to have the
  * correct sizes showing.
  */
-public class StorageSummaryDonutPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class StorageSummaryDonutPreferenceController extends BasePreferenceController {
     private long mUsedBytes;
     private long mTotalBytes;
     private StorageSummaryDonutPreference mSummary;
+    private final StorageManager mStorageManager;
+    private final StorageManagerVolumeProvider mStorageManagerVolumeProvider;
 
-    public StorageSummaryDonutPreferenceController(Context context) {
-        super(context);
+    public StorageSummaryDonutPreferenceController(Context context, String key) {
+        super(context, key);
+        mStorageManager = mContext.getSystemService(StorageManager.class);
+        mStorageManagerVolumeProvider = new StorageManagerVolumeProvider(mStorageManager);
     }
 
     /**
@@ -58,19 +66,31 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mSummary = screen.findPreference("pref_summary");
+        mSummary = screen.findPreference(getPreferenceKey());
         mSummary.setEnabled(true);
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+            final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
+                    mStorageManagerVolumeProvider);
+            final double privateUsedBytes = info.totalBytes - info.freeBytes;
+            mTotalBytes = info.totalBytes;
+            mUsedBytes = info.totalBytes - info.freeBytes;
+
+            ThreadUtils.postOnMainThread(() -> {
+                updateState(mSummary);
+            });
+        });
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        StorageSummaryDonutPreference summary = (StorageSummaryDonutPreference) preference;
-        summary.setTitle(convertUsedBytesToFormattedText(mContext, mUsedBytes));
-        summary.setSummary(mContext.getString(R.string.storage_volume_total,
+        mSummary.setTitle(convertUsedBytesToFormattedText(mContext, mUsedBytes));
+        mSummary.setSummary(mContext.getString(R.string.storage_volume_total,
                 Formatter.formatShortFileSize(mContext, mTotalBytes)));
-        summary.setPercent(mUsedBytes, mTotalBytes);
-        summary.setEnabled(true);
+        mSummary.setPercent(mUsedBytes, mTotalBytes);
+        mSummary.setEnabled(true);
     }
 
     /** Invalidates the data on the view and re-renders. */
@@ -81,13 +101,8 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return "pref_summary";
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     /**

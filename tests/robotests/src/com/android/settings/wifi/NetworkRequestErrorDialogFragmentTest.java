@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -29,7 +30,6 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -49,19 +49,26 @@ import org.robolectric.annotation.Config;
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class NetworkRequestErrorDialogFragmentTest {
 
-    private FragmentActivity mActivity;
+    private NetworkRequestDialogActivity mActivity;
     private NetworkRequestErrorDialogFragment mFragment;
-    private WifiTracker mWifiTracker;
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        WifiTracker wifiTracker = mock(WifiTracker.class);
+        WifiTrackerFactory.setTestingWifiTracker(wifiTracker);
+
+        mActivity = Robolectric.setupActivity(NetworkRequestDialogActivity.class);
         mFragment = spy(NetworkRequestErrorDialogFragment.newInstance());
         mFragment.show(mActivity.getSupportFragmentManager(), null);
+    }
 
-        // Prevents NPE when calling up NetworkRequestDialogFragment.
-        mWifiTracker = mock(WifiTracker.class);
-        WifiTrackerFactory.setTestingWifiTracker(mWifiTracker);
+    @Test
+    public void getConstructor_shouldNotThrowNoSuchMethodException() {
+        try {
+            NetworkRequestErrorDialogFragment.class.getConstructor();
+        } catch (NoSuchMethodException e) {
+            fail("No default constructor for configuration change!");
+        }
     }
 
     @Test
@@ -106,7 +113,7 @@ public class NetworkRequestErrorDialogFragmentTest {
         assertThat(positiveButton).isNotNull();
 
         positiveButton.performClick();
-        verify(mFragment, times(1)).startScanningDialog();
+        verify(mFragment, times(1)).onRescanClick();
     }
 
     @Test

@@ -27,6 +27,9 @@ import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * This class is used to add {@link View.OnClickListener} for the text been wrapped by
  * annotation.
@@ -50,7 +53,7 @@ public class AnnotationSpan extends URLSpan {
     @Override
     public void updateDrawState(TextPaint ds) {
         super.updateDrawState(ds);
-        ds.setUnderlineText(false);
+        ds.setUnderlineText(true);
     }
 
     public static CharSequence linkify(CharSequence rawText, LinkInfo... linkInfos) {
@@ -73,6 +76,23 @@ public class AnnotationSpan extends URLSpan {
             }
         }
         return builder;
+    }
+
+    /**
+     * get the text part without having text for link part
+     */
+    public static CharSequence textWithoutLink(CharSequence encodedText) {
+        SpannableString msg = new SpannableString(encodedText);
+        Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
+        if (spans == null) {
+            return encodedText;
+        }
+        Arrays.sort(spans, Comparator.comparingInt(span -> -msg.getSpanStart(span)));
+        StringBuilder msgWithoutLink = new StringBuilder(msg.toString());
+        for (Annotation span : spans) {
+            msgWithoutLink.delete(msg.getSpanStart(span), msg.getSpanEnd(span));
+        }
+        return msgWithoutLink.toString();
     }
 
     /**

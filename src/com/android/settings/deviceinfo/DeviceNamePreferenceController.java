@@ -18,7 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -160,10 +160,10 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     }
 
     private void setTetherSsidName(String deviceName) {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        config.SSID = deviceName;
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         // TODO: If tether is running, turn off the AP and restart it after setting config.
-        mWifiManager.setWifiApConfiguration(config);
+        mWifiManager.setSoftApConfiguration(
+                new SoftApConfiguration.Builder(config).setSsid(deviceName).build());
     }
 
     @Override

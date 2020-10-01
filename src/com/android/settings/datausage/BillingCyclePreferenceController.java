@@ -26,10 +26,11 @@ import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.NetworkPolicyEditor;
-
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.datausage.lib.DataUsageLib;
+import com.android.settingslib.NetworkPolicyEditor;
 
 public class BillingCyclePreferenceController extends BasePreferenceController {
     private int mSubscriptionId;
@@ -58,7 +59,7 @@ public class BillingCyclePreferenceController extends BasePreferenceController {
         services.mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
         services.mUserManager = mContext.getSystemService(UserManager.class);
 
-        NetworkTemplate template = DataUsageUtils.getMobileTemplate(mContext, mSubscriptionId);
+        NetworkTemplate template = DataUsageLib.getMobileTemplate(mContext, mSubscriptionId);
 
         preference.setTemplate(template, mSubscriptionId, services);
     }

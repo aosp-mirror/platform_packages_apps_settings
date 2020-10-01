@@ -37,8 +37,7 @@
         android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
         android:key="battery_saver_summary"
         android:title="@string/battery_saver"
-        settings:controller="com.android.settings.fuelgauge.BatterySaverController"
-        settings:platform_slice="true" />
+        settings:controller="com.android.settings.fuelgauge.BatterySaverController" />
 
     <Preference
         android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
@@ -64,4 +63,9 @@
         android:title="@string/device_screen_usage"
         android:selectable="false" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="power_usage_footer"
+        android:title="@string/battery_footer_summary"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

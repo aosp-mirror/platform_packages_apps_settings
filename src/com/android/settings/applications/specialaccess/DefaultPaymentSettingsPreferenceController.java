@@ -21,11 +21,23 @@ import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
 import android.os.UserManager;
 
-import com.android.settings.core.BasePreferenceController;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
-public class DefaultPaymentSettingsPreferenceController extends BasePreferenceController {
+import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
+
+/**
+ * This Controller works with PaymentSettingsEnabler to control payment features availability
+ * based on NFC status
+ */
+public class DefaultPaymentSettingsPreferenceController extends BasePreferenceController
+        implements LifecycleObserver, OnResume, OnPause {
 
     private final NfcAdapter mNfcAdapter;
+    private PaymentSettingsEnabler mPaymentSettingsEnabler;
     private final PackageManager mPackageManager;
     private final UserManager mUserManager;
 
@@ -38,6 +50,32 @@ public class DefaultPaymentSettingsPreferenceController extends BasePreferenceCo
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        if (!isAvailable()) {
+            mPaymentSettingsEnabler = null;
+            return;
+        }
+
+        final Preference preference = screen.findPreference(getPreferenceKey());
+        mPaymentSettingsEnabler = new PaymentSettingsEnabler(mContext, preference);
+    }
+
+    @Override
+    public void onResume() {
+        if (mPaymentSettingsEnabler != null) {
+            mPaymentSettingsEnabler.resume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mPaymentSettingsEnabler != null) {
+            mPaymentSettingsEnabler.pause();
+        }
+    }
+
+    @Override
     public int getAvailabilityStatus() {
         if (!mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)
                 || !mPackageManager.hasSystemFeature(
@@ -47,8 +85,11 @@ public class DefaultPaymentSettingsPreferenceController extends BasePreferenceCo
         if (!mUserManager.isAdminUser()) {
             return DISABLED_FOR_USER;
         }
-        if (mNfcAdapter == null || !mNfcAdapter.isEnabled()) {
+        if (mNfcAdapter == null) {
             return CONDITIONALLY_UNAVAILABLE;
+        }
+        if (!mNfcAdapter.isEnabled()) {
+            return DISABLED_DEPENDENT_SETTING;
         }
         return AVAILABLE;
     }

@@ -24,13 +24,13 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import java.util.Map;
 
-public class FeatureFlagsPreferenceController extends BasePreferenceController
-        implements LifecycleObserver, OnStart {
+/**
+ * A {@link BasePreferenceController} used in {@link FeatureFlagsDashboard}
+ */
+public class FeatureFlagsPreferenceController extends BasePreferenceController {
 
     private PreferenceGroup mGroup;
 
@@ -47,13 +47,6 @@ public class FeatureFlagsPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mGroup = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
-    public void onStart() {
-        if (mGroup == null) {
-            return;
-        }
         final Map<String, String> featureMap = FeatureFlagUtils.getAllFeatureFlags();
         if (featureMap == null) {
             return;

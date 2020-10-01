@@ -93,6 +93,9 @@ public class ApnPreferenceController extends TelephonyBasePreferenceController i
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (mPreference == null) {
+            return;
+        }
         ((RestrictedPreference) mPreference).setDisabledByAdmin(
                 MobileNetworkUtils.isDpcApnEnforced(mContext)
                         ? RestrictedLockUtilsInternal.getDeviceOwner(mContext)

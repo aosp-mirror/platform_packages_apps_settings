@@ -24,20 +24,25 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 public class StartNowPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
-    private static final String TAG = "StartNowPreferenceController";
+
     private static final String PREF_KEY = "dream_start_now_button_container";
     private final DreamBackend mBackend;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public StartNowPreferenceController(Context context) {
         super(context);
 
         mBackend = DreamBackend.getInstance(context);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -56,7 +61,11 @@ public class StartNowPreferenceController extends AbstractPreferenceController i
 
         LayoutPreference pref = screen.findPreference(getPreferenceKey());
         Button startButton = pref.findViewById(R.id.dream_start_now_button);
-        startButton.setOnClickListener(v -> mBackend.startDreaming());
+        startButton.setOnClickListener(v -> {
+            mMetricsFeatureProvider.logClickedPreference(pref,
+                    pref.getExtras().getInt(DashboardFragment.CATEGORY));
+            mBackend.startDreaming();
+        });
     }
 
     @Override

@@ -35,7 +35,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.applications.ApplicationsState;
 

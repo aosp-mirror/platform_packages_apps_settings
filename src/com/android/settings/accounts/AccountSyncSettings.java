@@ -42,17 +42,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class AccountSyncSettings extends AccountPreferenceBase {
@@ -61,9 +64,11 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private static final int MENU_SYNC_NOW_ID = Menu.FIRST;
     private static final int MENU_SYNC_CANCEL_ID = Menu.FIRST + 1;
     private static final int CANT_DO_ONETIME_SYNC_DIALOG = 102;
+    private static final String UID_REQUEST_KEY = "uid_request_code";
 
     private Account mAccount;
     private ArrayList<SyncAdapterType> mInvisibleAdapters = Lists.newArrayList();
+    private HashMap<Integer, Integer> mUidRequestCodeMap = new HashMap<>();
 
     @Override
     public Dialog onCreateDialog(final int id) {
@@ -102,6 +107,14 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (!mUidRequestCodeMap.isEmpty()) {
+            outState.putSerializable(UID_REQUEST_KEY, mUidRequestCodeMap);
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -130,6 +143,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 .done(activity, getPrefContext());
         pref.setOrder(0);
         getPreferenceScreen().addPreference(pref);
+        if (savedInstanceState != null && savedInstanceState.containsKey(UID_REQUEST_KEY)) {
+            mUidRequestCodeMap = (HashMap<Integer, Integer>) savedInstanceState.getSerializable(
+                    UID_REQUEST_KEY);
+        }
     }
 
     private void setAccessibilityTitle() {
@@ -187,11 +204,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
-                getString(R.string.sync_menu_sync_now))
-                .setIcon(R.drawable.ic_menu_refresh_holo_dark);
+                getString(R.string.sync_menu_sync_now));
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
-                getString(R.string.sync_menu_sync_cancel))
-                .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
+                getString(R.string.sync_menu_sync_cancel));
 
         syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -207,7 +222,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         // Note that this also counts accounts that are not currently displayed
         boolean syncActive = !ContentResolver.getCurrentSyncsAsUser(
                 mUserHandle.getIdentifier()).isEmpty();
-        menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive);
+        menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive).setEnabled(enabledSyncNowMenu());
         menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive);
     }
 
@@ -227,13 +242,12 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            final int uid = requestCode;
             final int count = getPreferenceScreen().getPreferenceCount();
             for (int i = 0; i < count; i++) {
                 Preference preference = getPreferenceScreen().getPreference(i);
                 if (preference instanceof SyncStateSwitchPreference) {
                     SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) preference;
-                    if (syncPref.getUid() == uid) {
+                    if (getRequestCodeByUid(syncPref.getUid()) == requestCode) {
                         onPreferenceTreeClick(syncPref);
                         return;
                     }
@@ -314,7 +328,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                     mAccount, packageName, mUserHandle);
             if (intent != null) {
                 try {
-                    startIntentSenderForResult(intent, uid, null, 0, 0, 0, null);
+                    final int requestCode = addUidAndGenerateRequestCode(uid);
+                    startIntentSenderForResult(intent, requestCode, null /* fillInIntent */, 0, 0,
+                            0, null /* options */);
                     return true;
                 } catch (IntentSender.SendIntentException e) {
                     Log.e(TAG, "Error requesting account access", e);
@@ -458,8 +474,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             syncPref.setChecked(oneTimeSyncMode || syncEnabled);
         }
         if (syncIsFailing) {
-            mFooterPreferenceMixin.createFooterPreference()
-                    .setTitle(R.string.sync_is_failing);
+            getPreferenceScreen().addPreference(new FooterPreference.Builder(
+                    getActivity()).setTitle(R.string.sync_is_failing).build());
         }
     }
 
@@ -546,10 +562,43 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         return R.string.help_url_accounts;
     }
 
+    @VisibleForTesting
+    boolean enabledSyncNowMenu() {
+        boolean enabled = false;
+        for (int i = 0, count = getPreferenceScreen().getPreferenceCount(); i < count; i++) {
+            final Preference pref = getPreferenceScreen().getPreference(i);
+            if (!(pref instanceof SyncStateSwitchPreference)) {
+                continue;
+            }
+            final SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) pref;
+            if (syncPref.isChecked()) {
+                enabled = true;
+                break;
+            }
+        }
+        return enabled;
+    }
+
     private static String formatSyncDate(Context context, Date date) {
         return DateUtils.formatDateTime(context, date.getTime(),
                 DateUtils.FORMAT_SHOW_DATE
                         | DateUtils.FORMAT_SHOW_YEAR
                         | DateUtils.FORMAT_SHOW_TIME);
+    }
+
+    private int addUidAndGenerateRequestCode(int uid) {
+        if (mUidRequestCodeMap.containsKey(uid)) {
+            return mUidRequestCodeMap.get(uid);
+        }
+        final int requestCode = mUidRequestCodeMap.size() + 1;
+        mUidRequestCodeMap.put(uid, requestCode);
+        return requestCode;
+    }
+
+    private int getRequestCodeByUid(int uid) {
+        if (!mUidRequestCodeMap.containsKey(uid)) {
+            return -1;
+        }
+        return mUidRequestCodeMap.get(uid);
     }
 }

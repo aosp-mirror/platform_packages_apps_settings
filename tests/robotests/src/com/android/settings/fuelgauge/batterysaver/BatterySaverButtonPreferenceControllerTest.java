@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PowerManager;
+import android.provider.SettingsSlicesContract;
 import android.widget.Button;
 
 import androidx.preference.PreferenceScreen;
@@ -73,6 +74,12 @@ public class BatterySaverButtonPreferenceControllerTest {
     }
 
     @Test
+    public void getSliceUri_shouldUsePlatformAuthority() {
+        assertThat(mController.getSliceUri().getAuthority())
+                .isEqualTo(SettingsSlicesContract.AUTHORITY);
+    }
+
+    @Test
     public void updateState_lowPowerOn_preferenceIsChecked() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
@@ -102,5 +109,10 @@ public class BatterySaverButtonPreferenceControllerTest {
         mController.setChecked(false);
 
         verify(mPowerManager).setPowerSaveModeEnabled(false);
+    }
+
+    @Test
+    public void isPublicSlice_returnsTrue() {
+        assertThat(mController.isPublicSlice()).isTrue();
     }
 }

@@ -72,6 +72,6 @@ public class AssistGestureSettingsTest {
 
         assertThat(AssistGestureSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
                 RuntimeEnvironment.application))
-                .contains("gesture_assist_settings_page");
+                .isNotEmpty();
     }
 }

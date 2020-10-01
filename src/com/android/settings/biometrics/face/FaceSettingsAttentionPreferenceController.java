@@ -26,7 +26,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.Utils;
-import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller that manages the ability to use face authentication with/without
@@ -94,7 +93,7 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
 
     @Override
     public boolean isChecked() {
-        if (!FaceSettings.isAvailable(mContext)) {
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             return true;
         }
         // Set to disabled until we know the true value.
@@ -115,6 +114,11 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
         mFaceManager.setFeature(getUserId(), FaceManager.FEATURE_REQUIRE_ATTENTION, isChecked,
                 mToken, mSetFeatureCallback);
         return true;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return false;
     }
 
     @Override

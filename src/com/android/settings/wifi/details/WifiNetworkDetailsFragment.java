@@ -46,6 +46,10 @@ import java.util.List;
  *
  * <p>The AccessPoint should be saved to the intent Extras when launching this class via
  * {@link AccessPoint#saveWifiState(Bundle)} in order to properly render this page.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in
+ * {@link com.android.settings.wifi.details2.WifiNetworkDetailsFragment2}.
  */
 public class WifiNetworkDetailsFragment extends DashboardFragment implements
         WifiDialog.WifiDialogListener {

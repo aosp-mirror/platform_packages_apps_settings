@@ -47,7 +47,8 @@
             android:key="adb_pair_method_qrcode_pref"
             android:icon="@drawable/ic_scan_24dp"
             android:title="@string/adb_pair_method_qrcode_title"
-            android:summary="@string/adb_pair_method_qrcode_summary"/>
+            android:summary="@string/adb_pair_method_qrcode_summary"
+            settings:controller="com.android.settings.development.AdbQrCodePreferenceController"/>
         <Preference
             android:key="adb_pair_method_code_pref"
             android:title="@string/adb_pair_method_code_title"

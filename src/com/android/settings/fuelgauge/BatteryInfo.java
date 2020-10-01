@@ -133,7 +133,7 @@ public class BatteryInfo {
             remaining = context.getString(R.string.remaining_length_format,
                     Formatter.formatShortElapsedTime(context, remainingTimeUs / 1000));
         }
-        view.setBottomLabels(new CharSequence[] {timeString, remaining});
+        view.setBottomLabels(new CharSequence[]{timeString, remaining});
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback) {
@@ -160,7 +160,7 @@ public class BatteryInfo {
                 callback.onBatteryInfoLoaded(batteryInfo);
                 BatteryUtils.logRuntime(LOG_TAG, "time for callback", startTime);
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public static BatteryInfo getBatteryInfo(final Context context,
@@ -232,9 +232,8 @@ public class BatteryInfo {
         info.batteryPercentString = Utils.formatPercentage(info.batteryLevel);
         info.mCharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
         info.averageTimeToDischarge = estimate.getAverageDischargeTime();
-        final Resources resources = context.getResources();
 
-        info.statusLabel = Utils.getBatteryStatus(resources, batteryBroadcast);
+        info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
         if (!info.mCharging) {
             updateBatteryInfoDischarging(context, shortString, estimate, info);
         } else {
@@ -261,12 +260,11 @@ public class BatteryInfo {
                     R.string.power_remaining_charging_duration_only, timeString);
             info.chargeLabel = context.getString(resId, info.batteryPercentString, timeString);
         } else {
-            final String chargeStatusLabel = resources.getString(
-                    R.string.battery_info_status_charging_lower);
+            final String chargeStatusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
             info.remainingLabel = null;
             info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
                     resources.getString(R.string.power_charging, info.batteryPercentString,
-                            chargeStatusLabel);
+                            chargeStatusLabel.toLowerCase());
         }
     }
 

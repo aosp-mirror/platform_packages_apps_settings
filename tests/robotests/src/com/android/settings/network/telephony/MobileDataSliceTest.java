@@ -24,8 +24,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -79,9 +79,8 @@ public class MobileDataSliceTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(anyInt());
         doReturn(SUB_ID).when(mSubscriptionInfo).getSubscriptionId();
-        doReturn(new ArrayList<>(Arrays.asList(mSubscriptionInfo)))
-                .when(mSubscriptionManager).getSelectableSubscriptionInfoList();
-
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo));
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -172,7 +171,7 @@ public class MobileDataSliceTest {
 
     @Test
     public void isMobileDataAvailable_noSubscriptions_slicePrimaryActionIsEmpty() {
-        doReturn(new ArrayList<>()).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(new ArrayList<>());
         final Slice mobileData = mMobileDataSlice.getSlice();
 
         assertThat(mobileData).isNull();
@@ -180,7 +179,7 @@ public class MobileDataSliceTest {
 
     @Test
     public void isMobileDataAvailable_nullSubscriptions_slicePrimaryActionIsEmpty() {
-        doReturn(null).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(null);
         final Slice mobileData = mMobileDataSlice.getSlice();
 
         assertThat(mobileData).isNull();

@@ -130,17 +130,6 @@ public class VerifyAppsOverUsbPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_verifierOff_preferenceShouldNotBeChecked() {
-        setupVerifyBroadcastReceivers(true);
-        setupEnforcedAdmin(null);
-        mGlobals.set(Global.ADB_ENABLED, 1 /* setting enabled */)
-                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1 /* setting enabled */)
-                .set(Global.PACKAGE_VERIFIER_ENABLE, 0 /* setting disabled */);
-        mController.updateState(mPreference);
-        verify(mPreference).setChecked(false);
-    }
-
-    @Test
     public void updateState_noBroadcastReceivers_preferenceShouldNotBeChecked() {
         setupVerifyBroadcastReceivers(false);
         setupEnforcedAdmin(null);

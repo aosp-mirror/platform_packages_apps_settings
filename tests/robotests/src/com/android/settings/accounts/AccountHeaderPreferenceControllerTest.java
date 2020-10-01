@@ -36,7 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settings.testutils.shadow.ShadowAuthenticationHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -48,11 +48,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class)
+@Config(shadows = ShadowAuthenticationHelper.class)
 public class AccountHeaderPreferenceControllerTest {
 
     @Mock
@@ -108,13 +106,5 @@ public class AccountHeaderPreferenceControllerTest {
                 ((TextView) mHeaderPreference.findViewById(R.id.entity_header_title)).getText();
 
         assertThat(label).isEqualTo(account.name);
-    }
-
-    @Implements(AuthenticatorHelper.class)
-    public static class ShadowAuthenticatorHelper {
-        @Implementation
-        protected void onAccountsUpdated(Account[] accounts) {
-
-        }
     }
 }

@@ -26,13 +26,14 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import com.google.android.collect.Lists;
 
@@ -50,21 +51,38 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     OnStartTetheringCallback mOnStartTetheringCallback = new OnStartTetheringCallback();
     @VisibleForTesting
     long mPreviousFunctions;
+    @VisibleForTesting
+    long mCurrentFunctions;
+    @VisibleForTesting
+    boolean mIsStartTethering = false;
+
+    private UsbConnectionBroadcastReceiver mUsbReceiver;
+
+    @VisibleForTesting
+    UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
+            (connected, functions, powerRole, dataRole) -> {
+                if (mIsStartTethering) {
+                    mCurrentFunctions = functions;
+                    refresh(functions);
+                }
+            };
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mUsbBackend = new UsbBackend(context);
         mConnectivityManager = context.getSystemService(ConnectivityManager.class);
+        mUsbReceiver = new UsbConnectionBroadcastReceiver(context, mUsbConnectionListener,
+                mUsbBackend);
+        getSettingsLifecycle().addObserver(mUsbReceiver);
+        mCurrentFunctions = mUsbBackend.getDefaultUsbFunctions();
     }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        FooterPreferenceMixinCompat footer = new FooterPreferenceMixinCompat(this,
-                this.getSettingsLifecycle());
-        FooterPreference pref = footer.createFooterPreference();
-        pref.setTitle(R.string.usb_default_info);
+        getPreferenceScreen().addPreference(new FooterPreference.Builder(getActivity()).setTitle(
+                R.string.usb_default_info).build());
     }
 
     @Override
@@ -121,14 +139,23 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
             if (functions == UsbManager.FUNCTION_RNDIS) {
                 // We need to have entitlement check for usb tethering, so use API in
                 // ConnectivityManager.
+                mIsStartTethering = true;
                 mConnectivityManager.startTethering(TETHERING_USB, true /* showProvisioningUi */,
                         mOnStartTetheringCallback);
             } else {
+                mIsStartTethering = false;
+                mCurrentFunctions = functions;
                 mUsbBackend.setDefaultUsbFunctions(functions);
             }
 
         }
         return true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mUsbBackend.setDefaultUsbFunctions(mCurrentFunctions);
     }
 
     @VisibleForTesting
@@ -139,6 +166,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
         public void onTetheringStarted() {
             super.onTetheringStarted();
             // Set default usb functions again to make internal data persistent
+            mCurrentFunctions = UsbManager.FUNCTION_RNDIS;
             mUsbBackend.setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
         }
 
@@ -147,6 +175,21 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
             super.onTetheringFailed();
             mUsbBackend.setDefaultUsbFunctions(mPreviousFunctions);
             updateCandidates();
+        }
+    }
+
+    private void refresh(long functions) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        for (long option : UsbDetailsFunctionsController.FUNCTIONS_MAP.keySet()) {
+            final RadioButtonPreference pref =
+                    screen.findPreference(UsbBackend.usbFunctionsToString(option));
+            if (pref != null) {
+                final boolean isSupported = mUsbBackend.areFunctionsSupported(option);
+                pref.setEnabled(isSupported);
+                if (isSupported) {
+                    pref.setChecked(functions == option);
+                }
+            }
         }
     }
 }

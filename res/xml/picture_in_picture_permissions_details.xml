@@ -18,7 +18,7 @@
     android:key="picture_in_picture_permission_detail_settings"
     android:title="@string/picture_in_picture_app_detail_title">
 
-    <SwitchPreference
+    <com.android.settings.widget.FilterTouchesSwitchPreference
         android:key="app_ops_settings_switch"
         android:title="@string/picture_in_picture_app_detail_switch"/>
 

@@ -18,7 +18,6 @@ import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.telephony.SubscriptionManager;
 import android.widget.Switch;
 
@@ -30,7 +29,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.datausage.DataSaverBackend.Listener;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
 import com.android.settingslib.applications.ApplicationsState;
@@ -40,7 +38,6 @@ import com.android.settingslib.applications.ApplicationsState.Session;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable
 public class DataSaverSummary extends SettingsPreferenceFragment
@@ -63,8 +60,6 @@ public class DataSaverSummary extends SettingsPreferenceFragment
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.data_saver);
-        mFooterPreferenceMixin.createFooterPreference()
-                .setTitle(com.android.internal.R.string.data_saver_description);
         mUnrestrictedAccess = findPreference(KEY_UNRESTRICTED_ACCESS);
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
@@ -199,18 +194,8 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.data_saver;
-                    result.add(sir);
-                    return result;
-                }
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.data_saver) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

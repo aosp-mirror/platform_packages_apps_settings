@@ -14,11 +14,28 @@
 
 package com.android.settings.display.darkmode;
 
+import static junit.framework.TestCase.assertFalse;
+
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.UiModeManager;
 import android.content.Context;
+import android.location.LocationManager;
 import android.os.PowerManager;
+
 import androidx.preference.DropDownPreference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,16 +43,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import com.android.settings.R;
-
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 public class DarkModeScheduleSelectorControllerTest {
@@ -49,6 +56,8 @@ public class DarkModeScheduleSelectorControllerTest {
     @Mock
     private UiModeManager mUiService;
     @Mock
+    private LocationManager mLocationManager;
+    @Mock
     private PowerManager mPM;
 
     @Before
@@ -57,9 +66,17 @@ public class DarkModeScheduleSelectorControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(UiModeManager.class)).thenReturn(mUiService);
         when(mContext.getSystemService(PowerManager.class)).thenReturn(mPM);
+        when(mContext.getSystemService(LocationManager.class)).thenReturn(mLocationManager);
         when(mContext.getString(R.string.dark_ui_auto_mode_never)).thenReturn("never");
         when(mContext.getString(R.string.dark_ui_auto_mode_auto)).thenReturn("auto");
+        when(mContext.getString(R.string.dark_ui_auto_mode_custom)).thenReturn("custom");
         mPreference = spy(new DropDownPreference(mContext));
+        mPreference.setEntryValues(new CharSequence[]{
+                mContext.getString(R.string.dark_ui_auto_mode_never),
+                mContext.getString(R.string.dark_ui_auto_mode_auto)
+        });
+        doNothing().when(mPreference).setValueIndex(anyInt());
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         when(mUiService.setNightModeActivated(anyBoolean())).thenReturn(true);
         mController = new DarkModeScheduleSelectorController(mContext, mPreferenceKey);
@@ -81,23 +98,23 @@ public class DarkModeScheduleSelectorControllerTest {
     public void nightMode_updateStateNone_dropDownValueChangedToNone() {
         when(mUiService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
         mController.displayPreference(mScreen);
-        mController.updateState(mPreference);
-        verify(mPreference).setValue(mContext.getString(R.string.dark_ui_auto_mode_never));
+        mController.updateState(mScreen);
+        verify(mPreference).setValueIndex(0);
     }
 
     @Test
     public void nightMode_updateStateNone_dropDownValueChangedToAuto() {
         when(mUiService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_AUTO);
         mController.displayPreference(mScreen);
-        mController.updateState(mPreference);
-        verify(mPreference).setValue(mContext.getString(R.string.dark_ui_auto_mode_auto));
+        mController.updateState(mScreen);
+        verify(mPreference).setValueIndex(1);
     }
 
     @Test
     public void batterySaver_dropDown_disabledSelector() {
         when(mPM.isPowerSaveMode()).thenReturn(true);
         mController.displayPreference(mScreen);
-        mController.updateState(mPreference);
+        mController.updateState(mScreen);
         verify(mPreference).setEnabled(eq(false));
     }
 }

@@ -22,6 +22,8 @@ import android.content.pm.PackageManager;
 import android.icu.text.ListFormatter;
 import android.text.TextUtils;
 
+import androidx.core.text.BidiFormatter;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.applications.AppUtils;
 
@@ -72,6 +74,7 @@ public class DefaultAppsPreferenceController extends BasePreferenceController {
             return null;
         }
         final String packageName = packageNames.get(0);
-        return AppUtils.getApplicationLabel(mPackageManager, packageName);
+        return BidiFormatter.getInstance().unicodeWrap(AppUtils.getApplicationLabel(mPackageManager,
+                packageName));
     }
 }

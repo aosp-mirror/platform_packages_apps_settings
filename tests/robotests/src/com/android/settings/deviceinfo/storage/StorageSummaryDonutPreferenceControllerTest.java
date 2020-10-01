@@ -37,24 +37,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowPrivateStorageInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.io.File;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowPrivateStorageInfo.class)
 public class StorageSummaryDonutPreferenceControllerTest {
 
     private Context mContext;
@@ -63,14 +69,18 @@ public class StorageSummaryDonutPreferenceControllerTest {
     private PreferenceViewHolder mHolder;
     private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private PreferenceScreen mScreen;
 
     @Before
     public void setUp() throws Exception {
+        ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(10L, 100L));
         mContext = spy(Robolectric.setupActivity(Activity.class));
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
-        mController = new StorageSummaryDonutPreferenceController(mContext);
+        mController = new StorageSummaryDonutPreferenceController(mContext, "key");
         mPreference = new StorageSummaryDonutPreference(mContext);
+        mScreen = spy(new PreferenceScreen(mContext, null));
+        when(mScreen.findPreference("key")).thenReturn(mPreference);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view =
@@ -79,10 +89,16 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mHolder = PreferenceViewHolder.createInstanceForTests(view);
     }
 
+    @After
+    public void tearDown() {
+        ShadowPrivateStorageInfo.reset();
+    }
+
     @Test
     public void testEmpty() {
         final long totalSpace = 32 * GIGABYTE;
         final long usedSpace = 0;
+        mController.displayPreference(mScreen);
         mController.updateBytes(0, 32 * GIGABYTE);
         mController.updateState(mPreference);
 
@@ -98,6 +114,7 @@ public class StorageSummaryDonutPreferenceControllerTest {
     public void testTotalStorage() {
         final long totalSpace = KILOBYTE * 10;
         final long usedSpace = KILOBYTE;
+        mController.displayPreference(mScreen);
         mController.updateBytes(KILOBYTE, totalSpace);
         mController.updateState(mPreference);
 
@@ -121,6 +138,7 @@ public class StorageSummaryDonutPreferenceControllerTest {
         when(file.getTotalSpace()).thenReturn(totalSpace);
         when(file.getFreeSpace()).thenReturn(freeSpace);
         when(svp.getPrimaryStorageSize()).thenReturn(totalSpace);
+        mController.displayPreference(mScreen);
 
         mController.updateSizes(svp, volume);
         mController.updateState(mPreference);

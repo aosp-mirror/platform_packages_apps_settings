@@ -31,15 +31,15 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -49,20 +49,20 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class DefaultAppPickerFragmentTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private FragmentActivity mActivity;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private UserManager mUserManager;
 
     private FakeFeatureFactory mFeatureFactory;
+    private FragmentActivity mActivity;
     private TestFragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         mFragment = spy(new TestFragment());
 
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);

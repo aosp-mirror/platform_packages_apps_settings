@@ -16,22 +16,24 @@
 
 package com.android.settings.wifi.tether;
 
+import static com.android.settings.AllInOneTetherSettings.DEDUP_POSTFIX;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
+import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
@@ -47,6 +49,15 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
+    // This constructor is used for testing.
+    @VisibleForTesting
+    WifiTetherSSIDPreferenceController(Context context, OnTetherConfigUpdateListener listener,
+            MetricsFeatureProvider provider) {
+        super(context, listener);
+        mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
+        mMetricsFeatureProvider = provider;
+    }
+
     public WifiTetherSSIDPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
@@ -57,14 +68,15 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY;
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)
+                ? PREF_KEY + DEDUP_POSTFIX : PREF_KEY;
     }
 
     @Override
     public void updateDisplay() {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         if (config != null) {
-            mSSID = config.SSID;
+            mSSID = config.getSsid();
         } else {
             mSSID = DEFAULT_SSID;
         }
@@ -91,9 +103,13 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (!TextUtils.equals(mSSID, (String) newValue)) {
+            mMetricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_SETTINGS_CHANGE_WIFI_HOTSPOT_NAME);
+        }
         mSSID = (String) newValue;
         updateSsidDisplay((EditTextPreference) preference);
-        mListener.onTetherConfigUpdated();
+        mListener.onTetherConfigUpdated(this);
         return true;
     }
 

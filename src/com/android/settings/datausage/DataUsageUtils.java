@@ -33,6 +33,9 @@ import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 
+import com.android.settings.datausage.lib.DataUsageLib;
+import com.android.settings.network.ProxySubscriptionManager;
+
 import java.util.List;
 
 /**
@@ -107,8 +110,8 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
         }
         final List<SubscriptionInfo> subInfoList =
-                context.getSystemService(SubscriptionManager.class)
-                .getActiveSubscriptionInfoList();
+                ProxySubscriptionManager.getInstance(context)
+                .getActiveSubscriptionsInfo();
         // No activated Subscriptions
         if (subInfoList == null) {
             if (LOGD) {
@@ -149,33 +152,25 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
         return connectivityManager != null && connectivityManager.isNetworkSupported(TYPE_WIFI);
     }
 
-    public static boolean hasSim(Context context) {
-        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-        final int simState = telephonyManager.getSimState();
-        // Note that pulling the SIM card returns UNKNOWN, not ABSENT.
-        return simState != TelephonyManager.SIM_STATE_ABSENT
-                && simState != TelephonyManager.SIM_STATE_UNKNOWN;
-    }
-
     /**
      * Returns the default subscription if available else returns
      * SubscriptionManager#INVALID_SUBSCRIPTION_ID
      */
     public static int getDefaultSubscriptionId(Context context) {
-        final SubscriptionManager subscriptionMgr =
-                context.getSystemService(SubscriptionManager.class);
-
         // default data subscription is first choice
-        final int dataSubId = subscriptionMgr.getDefaultDataSubscriptionId();
+        final int dataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (SubscriptionManager.isValidSubscriptionId(dataSubId)) {
             return dataSubId;
         }
 
+        final ProxySubscriptionManager proxySubscriptionMgr =
+                ProxySubscriptionManager.getInstance(context);
+
         // any active subscription is second choice
-        List<SubscriptionInfo> subList = subscriptionMgr.getActiveSubscriptionInfoList();
+        List<SubscriptionInfo> subList = proxySubscriptionMgr.getActiveSubscriptionsInfo();
         if ((subList == null) || (subList.size() <= 0)) {
             // any subscription is third choice
-            subList = subscriptionMgr.getAvailableSubscriptionInfoList();
+            subList = proxySubscriptionMgr.getAccessibleSubscriptionsInfo();
         }
         if ((subList == null) || (subList.size() <= 0)) {
             return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -189,7 +184,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
      */
     public static NetworkTemplate getDefaultTemplate(Context context, int defaultSubId) {
         if (SubscriptionManager.isValidSubscriptionId(defaultSubId) && hasMobileData(context)) {
-            return getMobileTemplate(context, defaultSubId);
+            return DataUsageLib.getMobileTemplate(context, defaultSubId);
         } else if (hasWifiRadio(context)) {
             return NetworkTemplate.buildTemplateWifiWildcard();
         } else {

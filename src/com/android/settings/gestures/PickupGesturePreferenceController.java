@@ -73,6 +73,11 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     protected String getVideoPrefKey() {
         return PREF_KEY_VIDEO;
     }

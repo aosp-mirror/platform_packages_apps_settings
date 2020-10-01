@@ -18,6 +18,7 @@ package com.android.settings.slices;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
@@ -38,6 +39,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
  */
 public class SlicePreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, Observer<Slice> {
+    private static final String TAG = "SlicePreferenceController";
     @VisibleForTesting
     LiveData<Slice> mLiveData;
     @VisibleForTesting
@@ -61,7 +63,9 @@ public class SlicePreferenceController extends BasePreferenceController implemen
 
     public void setSliceUri(Uri uri) {
         mUri = uri;
-        mLiveData = SliceLiveData.fromUri(mContext, mUri);
+        mLiveData = SliceLiveData.fromUri(mContext, mUri, (int type, Throwable source) -> {
+            Log.w(TAG, "Slice may be null. uri = " + uri + ", error = " + type);
+        });
 
         //TODO(b/120803703): figure out why we need to remove observer first
         mLiveData.removeObserver(this);

@@ -82,7 +82,7 @@ public class BluetoothDeviceUpdaterTest {
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private BluetoothDevicePreference mPreference;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
-    private List<CachedBluetoothDevice> mCachedDevices = new ArrayList<CachedBluetoothDevice>();
+    private List<CachedBluetoothDevice> mCachedDevices = new ArrayList<>();
 
     @Before
     public void setUp() {
@@ -99,15 +99,21 @@ public class BluetoothDeviceUpdaterTest {
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mSubBluetoothDevice.getAddress()).thenReturn(SUB_MAC_ADDRESS);
 
-        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
+        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                false, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
         mBluetoothDeviceUpdater =
-            new BluetoothDeviceUpdater(mDashboardFragment, mDevicePreferenceCallback,
+            new BluetoothDeviceUpdater(mContext, mDashboardFragment, mDevicePreferenceCallback,
                     mLocalManager) {
-            @Override
-            public boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice) {
-                return true;
-            }
-        };
+                @Override
+                public boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice) {
+                    return true;
+                }
+
+                @Override
+                protected String getPreferenceKey() {
+                    return "test_bt";
+                }
+            };
         mBluetoothDeviceUpdater.setPrefContext(mContext);
     }
 

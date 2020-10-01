@@ -24,20 +24,20 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 @SearchIndexable
@@ -74,11 +74,11 @@ public class PaymentSettings extends DashboardFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ViewGroup contentRoot = (ViewGroup) getListView().getParent();
-        View emptyView = getActivity().getLayoutInflater().inflate(
-                R.layout.nfc_payment_empty, contentRoot, false);
-        contentRoot.addView(emptyView);
-        setEmptyView(emptyView);
+        if (isShowEmptyImage(getPreferenceScreen())) {
+            View emptyView = getActivity().getLayoutInflater().inflate(
+                    R.layout.nfc_payment_empty, null, false);
+            ((ViewGroup) view.findViewById(android.R.id.list_container)).addView(emptyView);
+        }
     }
 
     @Override
@@ -102,15 +102,19 @@ public class PaymentSettings extends DashboardFragment {
         menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.nfc_payment_settings;
-                    return Arrays.asList(sir);
-                }
+    @VisibleForTesting
+    boolean isShowEmptyImage(PreferenceScreen screen) {
+        for (int i = 0; i < screen.getPreferenceCount(); i++) {
+            final Preference preference = screen.getPreference(i);
+            if(preference.isVisible()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.nfc_payment_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

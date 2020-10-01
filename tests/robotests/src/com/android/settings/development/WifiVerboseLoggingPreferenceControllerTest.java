@@ -59,21 +59,19 @@ public class WifiVerboseLoggingPreferenceControllerTest {
     public void onPreferenceChange_settingEnabled_shouldEnableVerboseLogging() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        verify(mWifiManager).enableVerboseLogging(
-                WifiVerboseLoggingPreferenceController.SETTING_VALUE_ON);
+        verify(mWifiManager).setVerboseLoggingEnabled(true);
     }
 
     @Test
     public void onPreferenceChange_settingDisabled_shouldDisablVerboseLogging() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        verify(mWifiManager).enableVerboseLogging(
-                WifiVerboseLoggingPreferenceController.SETTING_VALUE_OFF);
+        verify(mWifiManager).setVerboseLoggingEnabled(false);
     }
 
     @Test
     public void updateState_settingEnabled_shouldEnablePreference() {
-        when(mWifiManager.getVerboseLoggingLevel()).thenReturn(1);
+        when(mWifiManager.isVerboseLoggingEnabled()).thenReturn(true);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -81,7 +79,7 @@ public class WifiVerboseLoggingPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_shouldDisablePreference() {
-        when(mWifiManager.getVerboseLoggingLevel()).thenReturn(0);
+        when(mWifiManager.isVerboseLoggingEnabled()).thenReturn(false);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
@@ -91,8 +89,7 @@ public class WifiVerboseLoggingPreferenceControllerTest {
     public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        verify(mWifiManager)
-            .enableVerboseLogging(WifiVerboseLoggingPreferenceController.SETTING_VALUE_OFF);
+        verify(mWifiManager).setVerboseLoggingEnabled(false);
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
     }

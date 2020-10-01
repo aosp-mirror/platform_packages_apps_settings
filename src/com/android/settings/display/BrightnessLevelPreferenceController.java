@@ -14,7 +14,8 @@
 package com.android.settings.display;
 
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX;
-import static com.android.settingslib.display.BrightnessUtils.convertLinearToGamma;
+import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN;
+import static com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -52,16 +53,16 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     private static final Uri BRIGHTNESS_FOR_VR_URI;
     private static final Uri BRIGHTNESS_ADJ_URI;
 
-    private final int mMinBrightness;
-    private final int mMaxBrightness;
-    private final int mMinVrBrightness;
-    private final int mMaxVrBrightness;
+    private final float mMinBrightness;
+    private final float mMaxBrightness;
+    private final float mMinVrBrightness;
+    private final float mMaxVrBrightness;
     private final ContentResolver mContentResolver;
 
     private Preference mPreference;
 
     static {
-        BRIGHTNESS_URI = System.getUriFor(System.SCREEN_BRIGHTNESS);
+        BRIGHTNESS_URI = System.getUriFor(System.SCREEN_BRIGHTNESS_FLOAT);
         BRIGHTNESS_FOR_VR_URI = System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR);
         BRIGHTNESS_ADJ_URI = System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ);
     }
@@ -80,10 +81,14 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
             lifecycle.addObserver(this);
         }
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        mMinBrightness = powerManager.getMinimumScreenBrightnessSetting();
-        mMaxBrightness = powerManager.getMaximumScreenBrightnessSetting();
-        mMinVrBrightness = powerManager.getMinimumScreenBrightnessForVrSetting();
-        mMaxVrBrightness = powerManager.getMaximumScreenBrightnessForVrSetting();
+        mMinBrightness = powerManager.getBrightnessConstraint(
+                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MINIMUM);
+        mMaxBrightness = powerManager.getBrightnessConstraint(
+                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MAXIMUM);
+        mMinVrBrightness = powerManager.getBrightnessConstraint(
+                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MINIMUM_VR);
+        mMaxVrBrightness = powerManager.getBrightnessConstraint(
+                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MAXIMUM_VR);
         mContentResolver = mContext.getContentResolver();
     }
 
@@ -129,16 +134,15 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     private double getCurrentBrightness() {
         final int value;
         if (isInVrMode()) {
-            value = convertLinearToGamma(System.getInt(mContentResolver,
-                    System.SCREEN_BRIGHTNESS_FOR_VR, mMaxBrightness),
+            value = convertLinearToGammaFloat(System.getFloat(mContentResolver,
+                    System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, mMaxBrightness),
                     mMinVrBrightness, mMaxVrBrightness);
         } else {
-            value = convertLinearToGamma(Settings.System.getInt(mContentResolver,
-                    System.SCREEN_BRIGHTNESS, mMinBrightness),
+            value = convertLinearToGammaFloat(Settings.System.getFloat(mContentResolver,
+                    System.SCREEN_BRIGHTNESS_FLOAT, mMinBrightness),
                     mMinBrightness, mMaxBrightness);
-
         }
-        return getPercentage(value, 0, GAMMA_SPACE_MAX);
+        return getPercentage(value, GAMMA_SPACE_MIN, GAMMA_SPACE_MAX);
     }
 
     private double getPercentage(double value, int min, int max) {

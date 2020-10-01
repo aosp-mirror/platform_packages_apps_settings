@@ -33,12 +33,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -110,7 +112,8 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
     @Override
     public boolean isAvailable() {
-        return TetherUtil.isTetherAvailable(mContext);
+        return TetherUtil.isTetherAvailable(mContext)
+                && !FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE);
     }
 
     @Override

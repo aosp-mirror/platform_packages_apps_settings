@@ -16,9 +16,11 @@
 
 package com.android.settings;
 
+import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -34,12 +36,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.core.OnActivityResultListener;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -61,7 +65,7 @@ public class SettingsActivityTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mActivity = spy(new SettingsActivity());
+        mActivity = spy(Robolectric.buildActivity(SettingsActivity.class).create().get());
     }
 
     @Test
@@ -69,7 +73,6 @@ public class SettingsActivityTest {
         when(mActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
         doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
-
         doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();
 
         mActivity.launchSettingFragment(null, mock(Intent.class));
@@ -79,7 +82,18 @@ public class SettingsActivityTest {
     public void setTaskDescription_shouldUpdateIcon() {
         mActivity.setTaskDescription(mTaskDescription);
 
-        verify(mTaskDescription).setIcon(anyInt());
+        verify(mTaskDescription).setIcon(any());
+    }
+
+    @Test
+    public void getSharedPreferences_intentExtraIsNull_shouldNotCrash() {
+        final Intent intent = new Intent();
+        intent.putExtra(EXTRA_SHOW_FRAGMENT, (String)null);
+        doReturn(intent).when(mActivity).getIntent();
+        doReturn(mContext.getPackageName()).when(mActivity).getPackageName();
+        FakeFeatureFactory.setupForTest();
+
+        mActivity.getSharedPreferences(mContext.getPackageName() + "_preferences", 0);
     }
 
     @Test

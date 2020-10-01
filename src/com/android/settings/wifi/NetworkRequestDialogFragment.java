@@ -16,21 +16,15 @@
 
 package com.android.settings.wifi;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.NetworkRequestMatchCallback;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +34,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -48,8 +41,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.internal.PreferenceImageView;
 
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.wifi.AccessPoint;
@@ -64,11 +55,8 @@ import java.util.List;
  * behaviors of the callback when requesting wifi network, except for error message. When error
  * happens, {@link NetworkRequestErrorDialogFragment} will be called to display error message.
  */
-public class NetworkRequestDialogFragment extends InstrumentedDialogFragment implements
-        DialogInterface.OnClickListener, NetworkRequestMatchCallback {
-
-    /** Message sent to us to stop scanning wifi and pop up timeout dialog. */
-    private static final int MESSAGE_STOP_SCAN_WIFI_LIST = 0;
+public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragment implements
+        DialogInterface.OnClickListener{
 
     /**
      * Spec defines there should be 5 wifi ap on the list at most or just show all if {@code
@@ -77,20 +65,11 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     private static final int MAX_NUMBER_LIST_ITEM = 5;
     private boolean mShowLimitedItem = true;
 
-    /** Delayed time to stop scanning wifi. */
-    private static final int DELAY_TIME_STOP_SCAN_MS = 30 * 1000;
-
-    @VisibleForTesting
-    final static String EXTRA_APP_NAME = "com.android.settings.wifi.extra.APP_NAME";
-    final static String EXTRA_IS_SPECIFIED_SSID =
-            "com.android.settings.wifi.extra.REQUEST_IS_FOR_SINGLE_NETWORK";
-
     private List<AccessPoint> mAccessPointList;
-    private FilterWifiTracker mFilterWifiTracker;
+    @VisibleForTesting
+    FilterWifiTracker mFilterWifiTracker;
     private AccessPointAdapter mDialogAdapter;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
-    private boolean mIsSpecifiedSsid;
-    private boolean mWaitingConnectCallback;
 
     public static NetworkRequestDialogFragment newInstance() {
         NetworkRequestDialogFragment dialogFragment = new NetworkRequestDialogFragment();
@@ -107,11 +86,8 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
         final TextView title = customTitle.findViewById(R.id.network_request_title_text);
         title.setText(getTitle());
-
-        final Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            mIsSpecifiedSsid = intent.getBooleanExtra(EXTRA_IS_SPECIFIED_SSID, false);
-        }
+        final TextView summary = customTitle.findViewById(R.id.network_request_summary_text);
+        summary.setText(getSummary());
 
         final ProgressBar progressBar = customTitle.findViewById(
                 R.id.network_request_title_progress);
@@ -128,9 +104,6 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                 // Do nothings, will replace the onClickListener to avoid auto closing dialog.
                 .setNeutralButton(R.string.network_connection_request_dialog_showall,
                         null /* OnClickListener */);
-        if (mIsSpecifiedSsid) {
-            builder.setPositiveButton(R.string.wifi_connect, null /* OnClickListener */);
-        }
 
         // Clicking list item is to connect wifi ap.
         final AlertDialog dialog = builder.create();
@@ -148,34 +121,12 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
             neutralBtn.setVisibility(View.GONE);
             neutralBtn.setOnClickListener(v -> {
                 mShowLimitedItem = false;
-                renewAccessPointList(null /* List<ScanResult> */);
+                renewAccessPointList(null /* scanResults */);
                 notifyAdapterRefresh();
                 neutralBtn.setVisibility(View.GONE);
             });
-
-            // Replace Positive onClickListener to avoid closing dialog
-            if (mIsSpecifiedSsid) {
-                final Button positiveBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                positiveBtn.setOnClickListener(v -> {
-                    // When clicking connect button, should connect to the first and the only one
-                    // list item.
-                    this.onClick(dialog, 0 /* position */);
-                });
-                // Disable button in first, and enable it after there are some accesspoints in list.
-                positiveBtn.setEnabled(false);
-            }
         });
         return dialog;
-    }
-
-    private String getTitle() {
-        final Intent intent = getActivity().getIntent();
-        String appName = "";
-        if (intent != null) {
-            appName = intent.getStringExtra(EXTRA_APP_NAME);
-        }
-
-        return getString(R.string.network_connection_request_dialog_title, appName);
     }
 
     @NonNull
@@ -211,9 +162,6 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
             if (wifiConfig != null) {
                 mUserSelectionCallback.select(wifiConfig);
-
-                mWaitingConnectCallback = true;
-                updateConnectButton(false);
             }
         }
     }
@@ -221,10 +169,6 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     @Override
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
-        // Finishes the activity when user clicks back key or outside of the dialog.
-        if (getActivity() != null) {
-            getActivity().finish();
-        }
         if (mUserSelectionCallback != null) {
             mUserSelectionCallback.reject();
         }
@@ -233,13 +177,6 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     @Override
     public void onPause() {
         super.onPause();
-
-        mHandler.removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
-        final WifiManager wifiManager = getContext().getApplicationContext()
-                .getSystemService(WifiManager.class);
-        if (wifiManager != null) {
-            wifiManager.unregisterNetworkRequestMatchCallback(this);
-        }
 
         if (mFilterWifiTracker != null) {
             mFilterWifiTracker.onPause();
@@ -268,23 +205,6 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         }
     }
 
-    private void updateConnectButton(boolean enabled) {
-        // The button is only showed in single SSID mode.
-        if (!mIsSpecifiedSsid) {
-            return;
-        }
-
-        final AlertDialog alertDialog = (AlertDialog) getDialog();
-        if (alertDialog == null) {
-            return;
-        }
-
-        final Button positiveBtn = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        if (positiveBtn != null) {
-            positiveBtn.setEnabled(enabled);
-        }
-    }
-
     private void hideProgressIcon() {
         final AlertDialog alertDialog = (AlertDialog) getDialog();
         if (alertDialog == null) {
@@ -301,56 +221,10 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     public void onResume() {
         super.onResume();
 
-        final WifiManager wifiManager = getContext().getApplicationContext()
-                .getSystemService(WifiManager.class);
-        if (wifiManager != null) {
-            wifiManager.registerNetworkRequestMatchCallback(this, mHandler);
-        }
-        // Sets time-out to stop scanning.
-        mHandler.sendEmptyMessageDelayed(MESSAGE_STOP_SCAN_WIFI_LIST, DELAY_TIME_STOP_SCAN_MS);
-
         if (mFilterWifiTracker == null) {
             mFilterWifiTracker = new FilterWifiTracker(getContext(), getSettingsLifecycle());
         }
         mFilterWifiTracker.onResume();
-    }
-
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MESSAGE_STOP_SCAN_WIFI_LIST:
-                    removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
-                    stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE.TIME_OUT);
-                    break;
-                default:
-                    // Do nothing.
-                    break;
-            }
-        }
-    };
-
-    protected void stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE type) {
-        // Dismisses current dialog.
-        final Dialog dialog =  getDialog();
-        if (dialog != null && dialog.isShowing()) {
-            dismiss();
-        }
-
-        // Throws error dialog.
-        final NetworkRequestErrorDialogFragment fragment = NetworkRequestErrorDialogFragment
-                .newInstance();
-        fragment.setRejectCallback(mUserSelectionCallback);
-        final Bundle bundle = new Bundle();
-        bundle.putSerializable(NetworkRequestErrorDialogFragment.DIALOG_TYPE, type);
-        fragment.setArguments(bundle);
-        fragment.show(getActivity().getSupportFragmentManager(),
-                NetworkRequestDialogFragment.class.getSimpleName());
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.WIFI_SCANNING_NEEDED_DIALOG;
     }
 
     private class AccessPointAdapter extends ArrayAdapter<AccessPoint> {
@@ -409,11 +283,6 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     }
 
     @Override
-    public void onAbort() {
-        stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE.ABORT);
-    }
-
-    @Override
     public void onUserSelectionCallbackRegistration(
             NetworkRequestUserSelectionCallback userSelectionCallback) {
         mUserSelectionCallback = userSelectionCallback;
@@ -423,7 +292,6 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     public void onMatch(List<ScanResult> scanResults) {
         // Shouldn't need to renew cached list, since input result is empty.
         if (scanResults != null && scanResults.size() > 0) {
-            mHandler.removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
             renewAccessPointList(scanResults);
 
             notifyAdapterRefresh();
@@ -456,24 +324,8 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         }
     }
 
-    @Override
-    public void onUserSelectionConnectSuccess(WifiConfiguration wificonfiguration) {
-        final Activity activity = getActivity();
-        if (activity != null) {
-            Toast.makeText(activity, R.string.network_connection_connect_successful,
-                    Toast.LENGTH_SHORT).show();
-            activity.finish();
-        }
-    }
-
-    @Override
-    public void onUserSelectionConnectFailure(WifiConfiguration wificonfiguration) {
-        // Do nothing when selection is failed, let user could try again easily.
-        mWaitingConnectCallback = false;
-        updateConnectButton(true);
-    }
-
-    private final class FilterWifiTracker {
+    @VisibleForTesting
+    final class FilterWifiTracker {
         private final List<String> mAccessPointKeys;
         private final WifiTracker mWifiTracker;
         private final Context mContext;
@@ -529,18 +381,12 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
             if (count > 0) {
                 hideProgressIcon();
             }
-            // Enable connect button if there is Accesspoint item, except for the situation that
-            // user click but connected status doesn't come back yet.
-            if (count < 0) {
-                updateConnectButton(false);
-            } else if (!mWaitingConnectCallback) {
-                updateConnectButton(true);
-            }
 
             return result;
         }
 
-        private WifiTracker.WifiListener mWifiListener = new WifiTracker.WifiListener() {
+        @VisibleForTesting
+        WifiTracker.WifiListener mWifiListener = new WifiTracker.WifiListener() {
 
             @Override
             public void onWifiStateChanged(int state) {
@@ -554,6 +400,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
             @Override
             public void onAccessPointsChanged() {
+                renewAccessPointList(null /* scanResults */);
                 notifyAdapterRefresh();
             }
         };

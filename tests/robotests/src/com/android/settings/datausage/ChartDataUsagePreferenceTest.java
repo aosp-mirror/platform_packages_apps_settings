@@ -18,11 +18,19 @@ package com.android.settings.datausage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.content.Context;
+import android.app.Activity;
 import android.util.SparseIntArray;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
+import com.android.settings.datausage.ChartDataUsagePreference.DataUsageSummaryNode;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleData;
@@ -32,8 +40,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,15 +57,20 @@ public class ChartDataUsagePreferenceTest {
 
     private List<NetworkCycleData> mNetworkCycleData;
     private NetworkCycleChartData mNetworkCycleChartData;
-    private Context mContext;
     private ChartDataUsagePreference mPreference;
+    private Activity mActivity;
+    private PreferenceViewHolder mHolder;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        mPreference = new ChartDataUsagePreference(mContext, null);
+        mActivity = spy(Robolectric.setupActivity(Activity.class));
+        mPreference = new ChartDataUsagePreference(mActivity, null /* attrs */);
+        LayoutInflater inflater = LayoutInflater.from(mActivity);
+        View view = inflater.inflate(mPreference.getLayoutResource(), null /* root */,
+                false /* attachToRoot */);
+        mHolder = spy(PreferenceViewHolder.createInstanceForTests(view));
     }
 
     @Test
@@ -148,6 +161,40 @@ public class ChartDataUsagePreferenceTest {
         assertThat(points.keyAt(6)).isEqualTo(TimeUnit.DAYS.toMinutes(5));
     }
 
+    @Test
+    public void notifyChange_nonEmptyDataUsage_shouldHaveSingleContentDescription() {
+        final UsageView chart = (UsageView) mHolder.findViewById(R.id.data_usage);
+        final TextView labelTop = (TextView) mHolder.findViewById(R.id.label_top);
+        final TextView labelMiddle = (TextView) mHolder.findViewById(R.id.label_middle);
+        final TextView labelBottom = (TextView) mHolder.findViewById(R.id.label_bottom);
+        final TextView labelStart = (TextView) mHolder.findViewById(R.id.label_start);
+        final TextView labelEnd = (TextView) mHolder.findViewById(R.id.label_end);
+        createTestNetworkData();
+        mPreference.setNetworkCycleData(mNetworkCycleChartData);
+
+        mPreference.onBindViewHolder(mHolder);
+
+        assertThat(chart.getContentDescription()).isNotNull();
+        assertThat(labelTop.getContentDescription()).isNull();
+        assertThat(labelMiddle.getContentDescription()).isNull();
+        assertThat(labelBottom.getContentDescription()).isNull();
+        assertThat(labelStart.getContentDescription()).isNull();
+        assertThat(labelEnd.getContentDescription()).isNull();
+    }
+
+    @Test
+    public void getDensedStatsData_someSamePercentageNodes_getDifferentPercentageNodes() {
+        createSomeSamePercentageNetworkData();
+        final List<DataUsageSummaryNode> densedStatsData =
+                mPreference.getDensedStatsData(mNetworkCycleData);
+
+        assertThat(mNetworkCycleData.size()).isEqualTo(8);
+        assertThat(densedStatsData.size()).isEqualTo(3);
+        assertThat(densedStatsData.get(0).getDataUsagePercentage()).isEqualTo(33);
+        assertThat(densedStatsData.get(1).getDataUsagePercentage()).isEqualTo(99);
+        assertThat(densedStatsData.get(2).getDataUsagePercentage()).isEqualTo(100);
+    }
+
     private void createTestNetworkData() {
         mNetworkCycleData = new ArrayList<>();
         // create 10 arbitrary network data
@@ -167,6 +214,18 @@ public class ChartDataUsagePreferenceTest {
             .setStartTime(TIMESTAMP_START)
             .setEndTime(TIMESTAMP_END);
         mNetworkCycleChartData = builder.build();
+    }
+
+    private void createSomeSamePercentageNetworkData() {
+        mNetworkCycleData = new ArrayList<>();
+        mNetworkCycleData.add(createNetworkCycleData(1521583200000L, 1521586800000L, 100));//33%
+        mNetworkCycleData.add(createNetworkCycleData(1521586800000L, 1521590400000L, 1));  //33%
+        mNetworkCycleData.add(createNetworkCycleData(1521590400000L, 1521655200000L, 0));  //33%
+        mNetworkCycleData.add(createNetworkCycleData(1521655200000L, 1521658800000L, 0));  //33%
+        mNetworkCycleData.add(createNetworkCycleData(1521658800000L, 1521662400000L, 200));//99%
+        mNetworkCycleData.add(createNetworkCycleData(1521662400000L, 1521666000000L, 1));  //99%
+        mNetworkCycleData.add(createNetworkCycleData(1521666000000L, 1521669600000L, 1));  //100
+        mNetworkCycleData.add(createNetworkCycleData(1521669600000L, 1521673200000L, 0));  //100%
     }
 
     private NetworkCycleData createNetworkCycleData(long start, long end, long usage) {

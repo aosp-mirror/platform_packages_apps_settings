@@ -159,11 +159,6 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceable_shouldBeTrue() {
-        assertThat(mController.isSliceable()).isTrue();
-    }
-
-    @Test
     public void copy_shouldCopyPhoneNumberToClipboard() {
         final List<SubscriptionInfo> list = new ArrayList<>();
         list.add(mSubscriptionInfo);

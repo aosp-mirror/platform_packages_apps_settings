@@ -18,6 +18,7 @@ package com.android.settings.applications.specialaccess.pictureinpicture;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -30,7 +31,7 @@ public class PictureInPictureController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return !ActivityManager.isLowRamDeviceStatic()
-                ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+                && mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_PICTURE_IN_PICTURE) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

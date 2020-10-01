@@ -16,8 +16,6 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -35,7 +33,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer.ConditionalCardHolder;
-import com.android.settings.homepage.contextualcards.slices.SliceDeferredSetupCardRendererHelper.DeferredSetupCardViewHolder;
 import com.android.settings.homepage.contextualcards.slices.SliceFullCardRendererHelper.SliceViewHolder;
 
 import org.junit.Before;
@@ -73,12 +70,6 @@ public class SwipeDismissalDelegateTest {
     @Test
     public void getMovementFlags_conditionalViewHolder_shouldDisableSwipe() {
         assertThat(mDismissalDelegate.getMovementFlags(mRecyclerView, getConditionalViewHolder()))
-                .isEqualTo(0);
-    }
-
-    @Test
-    public void getMovementFlags_deferredSetupViewHolder_shouldDisableSwipe() {
-        assertThat(mDismissalDelegate.getMovementFlags(mRecyclerView, getDeferredSetupViewHolder()))
                 .isEqualTo(0);
     }
 
@@ -123,15 +114,6 @@ public class SwipeDismissalDelegateTest {
         final RecyclerView.ViewHolder viewHolder = spy(new ConditionalCardHolder(view));
         doReturn(ConditionContextualCardRenderer.VIEW_TYPE_FULL_WIDTH).when(
                 viewHolder).getItemViewType();
-
-        return viewHolder;
-    }
-
-    private RecyclerView.ViewHolder getDeferredSetupViewHolder() {
-        final View view = LayoutInflater.from(mActivity)
-                .inflate(VIEW_TYPE_DEFERRED_SETUP, mRecyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = spy(new DeferredSetupCardViewHolder(view));
-        doReturn(VIEW_TYPE_DEFERRED_SETUP).when(viewHolder).getItemViewType();
 
         return viewHolder;
     }

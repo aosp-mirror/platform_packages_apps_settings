@@ -33,8 +33,8 @@ import androidx.test.filters.MediumTest;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableData;
 import com.android.settingslib.search.SearchIndexableResources;
 
 import com.google.android.collect.Sets;
@@ -84,21 +84,20 @@ public class UserRestrictionTest {
         final SearchIndexableResources resources =
                 FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
                         .getSearchIndexableResources();
-        for (Class<?> clazz : resources.getProviderValues()) {
-            verifyUserRestriction(clazz);
+        for (SearchIndexableData bundle : resources.getProviderValues()) {
+            verifyUserRestriction(bundle);
         }
     }
 
-    private void verifyUserRestriction(Class<?> clazz)
+    private void verifyUserRestriction(SearchIndexableData searchIndexableData)
             throws IOException, XmlPullParserException, Resources.NotFoundException {
-        if (clazz == null) {
-            return;
-        }
-        final String className = clazz.getName();
+
         final Indexable.SearchIndexProvider provider =
-                DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+                searchIndexableData.getSearchIndexProvider();
         final List<SearchIndexableResource> resourcesToIndex =
                 provider.getXmlResourcesToIndex(mContext, true);
+
+        final String className = searchIndexableData.getTargetClass().getName();
 
         if (resourcesToIndex == null) {
             Log.d(TAG, className + "is not providing SearchIndexableResource, skipping");

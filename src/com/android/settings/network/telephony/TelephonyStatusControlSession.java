@@ -22,6 +22,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -37,7 +38,7 @@ public class TelephonyStatusControlSession implements AutoCloseable {
     private static final String LOG_TAG = "TelephonyStatusControlSS";
 
     private Collection<AbstractPreferenceController> mControllers;
-    private Future<Boolean> mResult;
+    private Collection<Future<Boolean>> mResult = new ArrayList<>();
 
     /**
      * Buider of session
@@ -67,9 +68,9 @@ public class TelephonyStatusControlSession implements AutoCloseable {
 
     private TelephonyStatusControlSession(Collection<AbstractPreferenceController> controllers) {
         mControllers = controllers;
-        mResult = ThreadUtils.postOnBackgroundThread(() ->
-            setupAvailabilityStatus(controllers)
-        );
+        controllers.forEach(prefCtrl -> mResult
+                .add(ThreadUtils.postOnBackgroundThread(() -> setupAvailabilityStatus(prefCtrl))));
+
     }
 
     /**
@@ -79,25 +80,24 @@ public class TelephonyStatusControlSession implements AutoCloseable {
      */
     public void close() {
         //check the background thread is finished then unset the status of availability.
-        try {
-            mResult.get();
-        } catch (ExecutionException | InterruptedException exception) {
-            Log.e(LOG_TAG, "setup availability status failed!", exception);
+
+        for (Future<Boolean> result : mResult) {
+            try {
+                result.get();
+            } catch (ExecutionException | InterruptedException exception) {
+                Log.e(LOG_TAG, "setup availability status failed!", exception);
+            }
         }
         unsetAvailabilityStatus(mControllers);
     }
 
-    private Boolean setupAvailabilityStatus(
-            Collection<AbstractPreferenceController> controllerLists) {
+    private Boolean setupAvailabilityStatus(AbstractPreferenceController controller) {
         try {
-            controllerLists.stream()
-                    .filter(controller -> controller instanceof TelephonyAvailabilityHandler)
-                    .map(TelephonyAvailabilityHandler.class::cast)
-                    .forEach(controller -> {
-                        int status = ((BasePreferenceController) controller)
-                                .getAvailabilityStatus();
-                        controller.setAvailabilityStatus(status);
-                    });
+            if (controller instanceof TelephonyAvailabilityHandler) {
+                int status = ((BasePreferenceController) controller)
+                        .getAvailabilityStatus();
+                ((TelephonyAvailabilityHandler) controller).setAvailabilityStatus(status);
+            }
             return true;
         } catch (Exception exception) {
             Log.e(LOG_TAG, "Setup availability status failed!", exception);

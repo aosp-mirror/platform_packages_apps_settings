@@ -36,13 +36,13 @@ public abstract class P2pCategoryPreferenceController extends AbstractPreference
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mCategory.getPreferenceCount() > 0;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
         mCategory = screen.findPreference(getPreferenceKey());
+        super.displayPreference(screen);
     }
 
     public void removeAllChildren() {

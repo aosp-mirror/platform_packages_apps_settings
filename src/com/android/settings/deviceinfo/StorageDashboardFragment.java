@@ -33,20 +33,20 @@ import android.view.View;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
-import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController;
 import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -63,20 +63,20 @@ public class StorageDashboardFragment extends DashboardFragment
         implements
         LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private static final String TAG = "StorageDashboardFrag";
+    private static final String SUMMARY_PREF_KEY = "storage_summary";
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
     private static final int VOLUME_SIZE_JOB_ID = 2;
-    private static final int OPTIONS_MENU_MIGRATE_DATA = 100;
 
     private VolumeInfo mVolume;
     private PrivateStorageInfo mStorageInfo;
     private SparseArray<StorageAsyncLoader.AppsStorageResult> mAppsResult;
     private CachedStorageValuesHelper mCachedStorageValuesHelper;
 
-    private StorageSummaryDonutPreferenceController mSummaryController;
     private StorageItemPreferenceController mPreferenceController;
     private PrivateVolumeOptionMenuController mOptionMenuController;
     private List<AbstractPreferenceController> mSecondaryUsers;
+    private boolean mPersonalOnly;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -86,12 +86,19 @@ public class StorageDashboardFragment extends DashboardFragment
         final Activity activity = getActivity();
         StorageManager sm = activity.getSystemService(StorageManager.class);
         mVolume = Utils.maybeInitializeVolume(sm, getArguments());
+        mPersonalOnly = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.ProfileType.PERSONAL;
         if (mVolume == null) {
             activity.finish();
             return;
         }
-
         initializeOptionsMenu(activity);
+        if (mPersonalOnly) {
+            final Preference summary = getPreferenceScreen().findPreference(SUMMARY_PREF_KEY);
+            if (summary != null) {
+                summary.setVisible(false);
+            }
+        }
     }
 
     @Override
@@ -121,7 +128,6 @@ public class StorageDashboardFragment extends DashboardFragment
                 null /* header view */)
                 .setRecyclerView(getListView(), getSettingsLifecycle())
                 .styleActionBar(activity);
-
     }
 
     @Override
@@ -130,7 +136,7 @@ public class StorageDashboardFragment extends DashboardFragment
         getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
         getLoaderManager()
                 .restartLoader(VOLUME_SIZE_JOB_ID, Bundle.EMPTY, new VolumeSizeCallbacks());
-        getLoaderManager().initLoader(ICON_JOB_ID, Bundle.EMPTY, new IconLoaderCallbacks());
+        getLoaderManager().restartLoader(ICON_JOB_ID, Bundle.EMPTY, new IconLoaderCallbacks());
     }
 
     @Override
@@ -139,9 +145,9 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     private void onReceivedSizes() {
+        boolean stopLoading = false;
         if (mStorageInfo != null) {
             long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
-            mSummaryController.updateBytes(privateUsedBytes, mStorageInfo.totalBytes);
             mPreferenceController.setVolume(mVolume);
             mPreferenceController.setUsedSize(privateUsedBytes);
             mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
@@ -152,18 +158,21 @@ public class StorageDashboardFragment extends DashboardFragment
                     userController.setTotalSize(mStorageInfo.totalBytes);
                 }
             }
+            stopLoading = true;
+
         }
 
-        if (mAppsResult == null) {
-            return;
+        if (mAppsResult != null) {
+            mPreferenceController.onLoadFinished(mAppsResult, UserHandle.myUserId());
+            updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
+            stopLoading = true;
         }
-
-        mPreferenceController.onLoadFinished(mAppsResult, UserHandle.myUserId());
-        updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
 
         // setLoading always causes a flicker, so let's avoid doing it.
-        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
-            setLoading(false, true);
+        if (stopLoading) {
+            if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
+                setLoading(false, true);
+            }
         }
     }
 
@@ -185,8 +194,6 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        mSummaryController = new StorageSummaryDonutPreferenceController(context);
-        controllers.add(mSummaryController);
 
         StorageManager sm = context.getSystemService(StorageManager.class);
         mPreferenceController = new StorageItemPreferenceController(context, this,
@@ -223,7 +230,7 @@ public class StorageDashboardFragment extends DashboardFragment
     /**
      * For Search.
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
@@ -239,7 +246,6 @@ public class StorageDashboardFragment extends DashboardFragment
                     final StorageManager sm = context.getSystemService(StorageManager.class);
                     final UserManager userManager = context.getSystemService(UserManager.class);
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
-                    controllers.add(new StorageSummaryDonutPreferenceController(context));
                     controllers.add(new StorageItemPreferenceController(context, null /* host */,
                             null /* volume */, new StorageManagerVolumeProvider(sm)));
                     controllers.addAll(SecondaryUserController.getSecondaryUserControllers(
