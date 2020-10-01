@@ -63,7 +63,7 @@ public class DoubleTwistGestureSettings extends DashboardFragment {
         return R.xml.double_twist_gesture_settings;
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(

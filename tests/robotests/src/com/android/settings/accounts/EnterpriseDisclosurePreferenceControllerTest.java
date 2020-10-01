@@ -18,46 +18,37 @@ package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
+import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class EnterpriseDisclosurePreferenceControllerTest {
-
     private static final String TEST_DISCLOSURE = "This is a test disclosure.";
 
-    private ChooseAccountFragment mFragment;
     private Context mContext;
     private EnterpriseDisclosurePreferenceController mController;
-    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
-    private PreferenceManager mPreferenceManager;
-    private PreferenceScreen mPreferenceScreen;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new EnterpriseDisclosurePreferenceController(mContext));
-        mFragment = spy(new ChooseAccountFragment());
-        mFooterPreferenceMixin = new FooterPreferenceMixinCompat(mFragment,
-                mFragment.getSettingsLifecycle());
-        mPreferenceManager = new PreferenceManager(mContext);
-        mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
+        mController = spy(new EnterpriseDisclosurePreferenceController(mContext, "my_key"));
+        mPreference = spy(new Preference(mContext));
     }
 
     @Test
@@ -77,24 +68,20 @@ public class EnterpriseDisclosurePreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_hasDisclosure_shouldSetTitle() {
+    public void updateState_hasDisclosure_shouldSetTitle() {
         doReturn(TEST_DISCLOSURE).when(mController).getDisclosure();
-        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
-        doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
 
-        mController.setFooterPreferenceMixin(mFooterPreferenceMixin);
-        mController.displayPreference(mPreferenceScreen);
+        mController.updateState(mPreference);
 
-        assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(1);
-        assertThat(mPreferenceScreen.getPreference(0).getTitle()).isEqualTo(TEST_DISCLOSURE);
+        assertThat(mPreference.getTitle()).isEqualTo(TEST_DISCLOSURE);
     }
 
     @Test
-    public void displayPreference_noDisclosure_shouldBeInvisible() {
+    public void updateState_noDisclosure_shouldBeInvisible() {
         doReturn(null).when(mController).getDisclosure();
 
-        mController.displayPreference(mPreferenceScreen);
+        mController.updateState(mPreference);
 
-        assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(0);
+        verify(mPreference, never()).setTitle(any());
     }
 }

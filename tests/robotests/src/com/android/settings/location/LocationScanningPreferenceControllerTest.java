@@ -18,7 +18,11 @@ package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import com.android.settings.R;
@@ -26,19 +30,25 @@ import com.android.settings.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class LocationScanningPreferenceControllerTest {
+    @Mock
+    private WifiManager mWifiManager;
     private Context mContext;
     private LocationScanningPreferenceController mController;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mController = new LocationScanningPreferenceController(mContext);
+        MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        mController = new LocationScanningPreferenceController(mContext, "key");
     }
 
     @Test
@@ -48,8 +58,7 @@ public class LocationScanningPreferenceControllerTest {
 
     @Test
     public void testLocationScanning_WifiOnBleOn() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 1);
         assertThat(mController.getSummary()).isEqualTo(
@@ -58,8 +67,7 @@ public class LocationScanningPreferenceControllerTest {
 
     @Test
     public void testLocationScanning_WifiOnBleOff() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0);
         assertThat(mController.getSummary()).isEqualTo(
@@ -68,8 +76,7 @@ public class LocationScanningPreferenceControllerTest {
 
     @Test
     public void testLocationScanning_WifiOffBleOn() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 1);
         assertThat(mController.getSummary()).isEqualTo(
@@ -78,8 +85,7 @@ public class LocationScanningPreferenceControllerTest {
 
     @Test
     public void testLocationScanning_WifiOffBleOff() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0);
         assertThat(mController.getSummary()).isEqualTo(

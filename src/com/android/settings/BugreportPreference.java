@@ -46,12 +46,15 @@ public class BugreportPreference extends CustomDialogPreferenceCompat {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(Builder builder, DialogInterface.OnClickListener listener) {
+    protected void onPrepareDialogBuilder(Builder builder,
+            DialogInterface.OnClickListener listener) {
         super.onPrepareDialogBuilder(builder, listener);
 
         final View dialogView = View.inflate(getContext(), R.layout.bugreport_options_dialog, null);
-        mInteractiveTitle = (CheckedTextView) dialogView.findViewById(R.id.bugreport_option_interactive_title);
-        mInteractiveSummary = (TextView) dialogView.findViewById(R.id.bugreport_option_interactive_summary);
+        mInteractiveTitle = (CheckedTextView) dialogView
+                .findViewById(R.id.bugreport_option_interactive_title);
+        mInteractiveSummary = (TextView) dialogView
+                .findViewById(R.id.bugreport_option_interactive_summary);
         mFullTitle = (CheckedTextView) dialogView.findViewById(R.id.bugreport_option_full_title);
         mFullSummary = (TextView) dialogView.findViewById(R.id.bugreport_option_full_summary);
         final View.OnClickListener l = new View.OnClickListener() {
@@ -86,21 +89,21 @@ public class BugreportPreference extends CustomDialogPreferenceCompat {
                 Log.v(TAG, "Taking full bugreport right away");
                 FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
                         SettingsEnums.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
-                takeBugreport(ActivityManager.BUGREPORT_OPTION_FULL);
+                try {
+                    ActivityManager.getService().requestFullBugReport();
+                } catch (RemoteException e) {
+                    Log.e(TAG, "error taking bugreport (bugreportType=Full)", e);
+                }
             } else {
                 Log.v(TAG, "Taking interactive bugreport right away");
                 FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
                         SettingsEnums.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
-                takeBugreport(ActivityManager.BUGREPORT_OPTION_INTERACTIVE);
+                try {
+                    ActivityManager.getService().requestInteractiveBugReport();
+                } catch (RemoteException e) {
+                    Log.e(TAG, "error taking bugreport (bugreportType=Interactive)", e);
+                }
             }
-        }
-    }
-
-    private void takeBugreport(int bugreportType) {
-        try {
-            ActivityManager.getService().requestBugReport(bugreportType);
-        } catch (RemoteException e) {
-            Log.e(TAG, "error taking bugreport (bugreportType=" + bugreportType + ")", e);
         }
     }
 }

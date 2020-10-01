@@ -25,7 +25,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.UserManager;
@@ -36,7 +35,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker;
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker.NfcUpdateReceiver;
-import com.android.settings.slices.SliceBuilderUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -163,6 +161,7 @@ public class NfcPreferenceControllerTest {
 
         assertThat(keys).hasSize(1);
     }
+
     @Test
     public void setChecked_True_nfcShouldEnable() {
         mNfcController.setChecked(true);
@@ -209,7 +208,7 @@ public class NfcPreferenceControllerTest {
     @Test
     public void shouldTurnOffNFCInAirplaneMode_airplaneModeRadiosContainsNfc_shouldReturnTrue() {
         Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
+                Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
 
         assertThat(NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)).isTrue();
     }
@@ -217,14 +216,15 @@ public class NfcPreferenceControllerTest {
     @Test
     public void shouldTurnOffNFCInAirplaneMode_airplaneModeRadiosWithoutNfc_shouldReturnFalse() {
         Settings.Global.putString(mContext.getContentResolver(),
-            Settings.Global.AIRPLANE_MODE_RADIOS, "");
+                Settings.Global.AIRPLANE_MODE_RADIOS, "");
 
         assertThat(NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)).isFalse();
     }
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_noExtra_sliceDoesntUpdate() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
 
@@ -235,7 +235,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_turningOn_sliceDoesntUpdate() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
         triggerIntent.putExtra(NfcAdapter.EXTRA_ADAPTER_STATE, NfcAdapter.STATE_TURNING_ON);
@@ -247,7 +248,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_turningOff_sliceDoesntUpdate() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
         triggerIntent.putExtra(NfcAdapter.EXTRA_ADAPTER_STATE, NfcAdapter.STATE_TURNING_OFF);
@@ -259,7 +261,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_nfcOn_sliceUpdates() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
         triggerIntent.putExtra(NfcAdapter.EXTRA_ADAPTER_STATE, NfcAdapter.STATE_ON);
@@ -271,7 +274,8 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void ncfSliceWorker_nfcBroadcast_nfcOff_sliceUpdates() {
-        final NfcSliceWorker worker = spy(new NfcSliceWorker(mContext, getDummyUri()));
+        final NfcSliceWorker worker = spy(
+                new NfcSliceWorker(mContext, mNfcController.getSliceUri()));
         final NfcUpdateReceiver receiver = worker.new NfcUpdateReceiver(worker);
         final Intent triggerIntent = new Intent(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
         triggerIntent.putExtra(NfcAdapter.EXTRA_ADAPTER_STATE, NfcAdapter.STATE_OFF);
@@ -281,7 +285,8 @@ public class NfcPreferenceControllerTest {
         verify(worker).updateSlice();
     }
 
-    private Uri getDummyUri() {
-        return SliceBuilderUtils.getUri("action/nfc", false);
+    @Test
+    public void isPublicSlice_returnsTrue() {
+        assertThat(mNfcController.isPublicSlice()).isTrue();
     }
 }

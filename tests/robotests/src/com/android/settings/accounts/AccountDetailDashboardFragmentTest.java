@@ -47,6 +47,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
@@ -105,7 +106,7 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void refreshDashboardTiles_HasAccountType_shouldDisplay() {
-        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
 
@@ -114,7 +115,7 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void refreshDashboardTiles_NoAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
 
         assertThat(mFragment.displayTile(tile)).isFalse();
@@ -122,7 +123,7 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void refreshDashboardTiles_OtherAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.other");
 
@@ -138,7 +139,7 @@ public class AccountDetailDashboardFragmentTest {
         when(packageManager.resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(mock(ResolveInfo.class));
 
-        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
         mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
         mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
@@ -150,9 +151,9 @@ public class AccountDetailDashboardFragmentTest {
 
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Preference preference = new Preference(mContext);
-        dashboardFeatureProvider.bindPreferenceToTile(activity, false /* forceRoundedIcon */,
-                MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, null /* key */,
-                Preference.DEFAULT_ORDER);
+        dashboardFeatureProvider.bindPreferenceToTileAndGetObservers(activity,
+                false /* forceRoundedIcon */, MetricsProto.MetricsEvent.DASHBOARD_SUMMARY,
+                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getKey()).isEqualTo(tile.getKey(mContext));
         preference.performClick();
@@ -166,7 +167,7 @@ public class AccountDetailDashboardFragmentTest {
     public void displayTile_shouldAddUserHandleToTileIntent() {
         mFragment.mUserHandle = new UserHandle(1);
 
-        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
         mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
 

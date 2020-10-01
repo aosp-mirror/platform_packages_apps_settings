@@ -14,11 +14,8 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.os.RemoteException;
-import android.os.ServiceManager;
+import android.telephony.SmsManager;
 
-import com.android.internal.telephony.ISms;
-import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -31,12 +28,12 @@ import java.util.ArrayList;
 public class AppStateSmsPremBridge extends AppStateBaseBridge {
 
     private final Context mContext;
-    private final ISms mSmsManager;
+    private final SmsManager mSmsManager;
 
     public AppStateSmsPremBridge(Context context, ApplicationsState appState, Callback callback) {
         super(appState, callback);
         mContext = context;
-        mSmsManager = ISms.Stub.asInterface(ServiceManager.getService("isms"));
+        mSmsManager = SmsManager.getDefault();
     }
 
     @Override
@@ -61,25 +58,18 @@ public class AppStateSmsPremBridge extends AppStateBaseBridge {
     }
 
     private int getSmsState(String pkg) {
-        try {
-            return mSmsManager.getPremiumSmsPermission(pkg);
-        } catch (RemoteException e) {
-            return SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN;
-        }
+        return mSmsManager.getPremiumSmsConsent(pkg);
     }
 
     public void setSmsState(String pkg, int state) {
-        try {
-            mSmsManager.setPremiumSmsPermission(pkg, state);
-        } catch (RemoteException e) {
-        }
+        mSmsManager.setPremiumSmsConsent(pkg, state);
     }
 
     public static class SmsState {
         public int smsState;
 
         public boolean isGranted() {
-            return smsState == SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW;
+            return smsState == SmsManager.PREMIUM_SMS_CONSENT_ALWAYS_ALLOW;
         }
     }
 
@@ -91,7 +81,7 @@ public class AppStateSmsPremBridge extends AppStateBaseBridge {
         @Override
         public boolean filterApp(AppEntry info) {
             return info.extraInfo instanceof SmsState && ((SmsState) info.extraInfo).smsState
-                    != SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN;
+                    != SmsManager.PREMIUM_SMS_CONSENT_UNKNOWN;
         }
     };
 }

@@ -37,7 +37,6 @@ public class SliceDataTest {
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
     private final int SLICE_TYPE = SliceData.SliceType.SWITCH;
-    private final boolean IS_PLATFORM_DEFINED = true;
     private final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
 
     @Test
@@ -53,8 +52,8 @@ public class SliceDataTest {
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .setSliceType(SLICE_TYPE)
-                .setPlatformDefined(IS_PLATFORM_DEFINED)
-                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
+                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE)
+                .setIsPublicSlice(true);
 
         SliceData data = builder.build();
 
@@ -68,8 +67,8 @@ public class SliceDataTest {
         assertThat(data.getUri()).isEqualTo(URI);
         assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
         assertThat(data.getSliceType()).isEqualTo(SLICE_TYPE);
-        assertThat(data.isPlatformDefined()).isEqualTo(IS_PLATFORM_DEFINED);
         assertThat(data.getUnavailableSliceSubtitle()).isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
+        assertThat(data.isPublicSlice()).isEqualTo(true);
     }
 
     @Test(expected = SliceData.InvalidSliceDataException.class)

@@ -117,10 +117,10 @@ public class RoamingPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_needDialog_showDialog() {
+    public void setChecked_needDialog_showDialog() {
         doReturn(true).when(mController).isDialogNeeded();
 
-        mController.handlePreferenceTreeClick(mPreference);
+        mController.setChecked(true);
 
         verify(mFragmentManager).beginTransaction();
     }

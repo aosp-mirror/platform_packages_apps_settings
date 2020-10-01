@@ -17,8 +17,10 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
@@ -28,6 +30,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.network.ProxySubscriptionManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +45,8 @@ import org.robolectric.RuntimeEnvironment;
 public class CellDataPreferenceTest {
 
     @Mock
+    private ProxySubscriptionManager mProxySubscriptionMgr;
+    @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private SubscriptionInfo mSubInfo;
@@ -48,17 +54,28 @@ public class CellDataPreferenceTest {
     private Context mContext;
     private PreferenceViewHolder mHolder;
     private CellDataPreference mPreference;
-    private SubscriptionManager.OnSubscriptionsChangedListener mListener;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mPreference = new CellDataPreference(mContext, null);
-        mListener = mPreference.mOnSubscriptionsChangeListener;
+        mPreference = new CellDataPreference(mContext, null) {
+            @Override
+            ProxySubscriptionManager getProxySubscriptionManager() {
+                return mProxySubscriptionMgr;
+            }
+            @Override
+            SubscriptionInfo getActiveSubscriptionInfo(int subId) {
+                return mSubInfo;
+            }
+        };
+        doNothing().when(mSubscriptionManager).setDefaultDataSubId(anyInt());
+        doReturn(mSubscriptionManager).when(mProxySubscriptionMgr).get();
+        doNothing().when(mProxySubscriptionMgr).addActiveSubscriptionsListener(any());
+        doNothing().when(mProxySubscriptionMgr).removeActiveSubscriptionsListener(any());
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view = inflater.inflate(mPreference.getLayoutResource(),
                 new LinearLayout(mContext), false);
 
@@ -67,12 +84,14 @@ public class CellDataPreferenceTest {
 
     @Test
     public void noActiveSub_shouldDisable() {
-        mPreference.mSubscriptionManager = mSubscriptionManager;
-        mListener.onSubscriptionsChanged();
+        mSubInfo = null;
+        mPreference.mOnSubscriptionsChangeListener.onChanged();
         assertThat(mPreference.isEnabled()).isFalse();
+    }
 
-        when(mSubscriptionManager.getActiveSubscriptionInfo(anyInt())).thenReturn(mSubInfo);
-        mListener.onSubscriptionsChanged();
+    @Test
+    public void hasActiveSub_shouldEnable() {
+        mPreference.mOnSubscriptionsChangeListener.onChanged();
         assertThat(mPreference.isEnabled()).isTrue();
     }
 }

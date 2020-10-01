@@ -20,11 +20,11 @@ import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 
@@ -47,8 +47,7 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
                 .setRecyclerView(getListView(), getSettingsLifecycle())
-                .setIcon(IconDrawableFactory.newInstance(getContext())
-                        .getBadgedIcon(mPackageInfo.applicationInfo))
+                .setIcon(Utils.getBadgedIcon(getContext(), mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
                 .setSummary(mPackageInfo)
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))

@@ -25,7 +25,6 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.settings.Utils;
-import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller giving the user an option to always require confirmation.
@@ -65,7 +64,7 @@ public class FaceSettingsConfirmPreferenceController extends FaceSettingsPrefere
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (!FaceSettings.isAvailable(mContext)) {
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             preference.setEnabled(false);
         } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
             preference.setEnabled(false);

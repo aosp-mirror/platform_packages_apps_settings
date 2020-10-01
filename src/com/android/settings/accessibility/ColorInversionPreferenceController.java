@@ -19,30 +19,21 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
+import com.android.settings.core.BasePreferenceController;
 
-import com.android.settings.core.TogglePreferenceController;
+/** Controller that shows the color inversion summary. */
+public class ColorInversionPreferenceController extends BasePreferenceController {
 
-public class ColorInversionPreferenceController extends TogglePreferenceController {
-    @VisibleForTesting
-    static final int ON = 1;
-    @VisibleForTesting
-    static final int OFF = 0;
+    private static final String DISPLAY_INVERSION_ENABLED =
+            Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
 
     public ColorInversionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
-    public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, OFF) == ON;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, (isChecked ? ON : OFF));
+    public CharSequence getSummary() {
+        return AccessibilityUtil.getSummary(mContext, DISPLAY_INVERSION_ENABLED);
     }
 
     @Override

@@ -26,11 +26,15 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
+
+import java.util.Map;
 
 /**
  * Provider stores and manages user interaction feedback for homepage contextual cards.
@@ -40,15 +44,15 @@ public class CardContentProvider extends ContentProvider {
     public static final String CARD_AUTHORITY = "com.android.settings.homepage.CardContentProvider";
 
     public static final Uri REFRESH_CARD_URI = new Uri.Builder()
-                    .scheme(ContentResolver.SCHEME_CONTENT)
-                    .authority(CardContentProvider.CARD_AUTHORITY)
-                    .appendPath(CardDatabaseHelper.CARD_TABLE)
-                    .build();
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(CardContentProvider.CARD_AUTHORITY)
+            .appendPath(CardDatabaseHelper.CARD_TABLE)
+            .build();
 
     public static final Uri DELETE_CARD_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(CardContentProvider.CARD_AUTHORITY)
-            .appendPath(CardDatabaseHelper.CardColumns.CARD_DISMISSED)
+            .appendPath(CardDatabaseHelper.CardColumns.DISMISSED_TIMESTAMP)
             .build();
 
     private static final String TAG = "CardContentProvider";
@@ -81,6 +85,9 @@ public class CardContentProvider extends ContentProvider {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         int numInserted = 0;
         final SQLiteDatabase database = mDBHelper.getWritableDatabase();
+        final boolean keepDismissalTimestampBeforeDeletion = getContext().getResources()
+                .getBoolean(R.bool.config_keep_contextual_card_dismissal_timestamp);
+        final Map<String, Long> dismissedTimeMap = new ArrayMap<>();
 
         try {
             maybeEnableStrictMode();
@@ -88,9 +95,42 @@ public class CardContentProvider extends ContentProvider {
             final String table = getTableFromMatch(uri);
             database.beginTransaction();
 
-            // Here deletion first is avoiding redundant insertion. According to cl/215350754
+            if (keepDismissalTimestampBeforeDeletion) {
+                // Query the existing db and get dismissal info.
+                final String[] columns = new String[]{CardDatabaseHelper.CardColumns.NAME,
+                        CardDatabaseHelper.CardColumns.DISMISSED_TIMESTAMP};
+                final String selection =
+                        CardDatabaseHelper.CardColumns.DISMISSED_TIMESTAMP + " IS NOT NULL";
+                try (Cursor cursor = database.query(table, columns, selection,
+                        null/* selectionArgs */, null /* groupBy */,
+                        null /* having */, null /* orderBy */)) {
+                    // Save them to a Map
+                    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                        final String cardName = cursor.getString(cursor.getColumnIndex(
+                                CardDatabaseHelper.CardColumns.NAME));
+                        final long timestamp = cursor.getLong(cursor.getColumnIndex(
+                                CardDatabaseHelper.CardColumns.DISMISSED_TIMESTAMP));
+                        dismissedTimeMap.put(cardName, timestamp);
+                    }
+                }
+            }
+
+            // Here delete data first to avoid redundant insertion. According to cl/215350754
             database.delete(table, null /* whereClause */, null /* whereArgs */);
+
             for (ContentValues value : values) {
+                if (keepDismissalTimestampBeforeDeletion) {
+                    // Replace dismissedTimestamp in each value if there is an old one.
+                    final String cardName =
+                            value.get(CardDatabaseHelper.CardColumns.NAME).toString();
+                    if (dismissedTimeMap.containsKey(cardName)) {
+                        // Replace the value of dismissedTimestamp
+                        value.put(CardDatabaseHelper.CardColumns.DISMISSED_TIMESTAMP,
+                                dismissedTimeMap.get(cardName));
+                        Log.d(TAG, "Replace dismissed time: " + cardName);
+                    }
+                }
+
                 long ret = database.insert(table, null /* nullColumnHack */, value);
                 if (ret != -1L) {
                     numInserted++;

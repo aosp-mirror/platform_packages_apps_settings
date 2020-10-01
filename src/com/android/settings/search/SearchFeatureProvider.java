@@ -34,6 +34,8 @@ import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.search.SearchIndexableResources;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 /**
  * FeatureProvider for Settings Search
  */
@@ -67,8 +69,9 @@ public interface SearchFeatureProvider {
             return;
         }
 
-        if (!Utils.isDeviceProvisioned(activity) ||
-                !Utils.isPackageEnabled(activity, getSettingsIntelligencePkgName(activity))) {
+        if (!WizardManagerHelper.isDeviceProvisioned(activity)
+                || !Utils.isPackageEnabled(activity, getSettingsIntelligencePkgName(activity))
+                || WizardManagerHelper.isAnySetupWizard(activity.getIntent())) {
             final ViewGroup parent = (ViewGroup) toolbar.getParent();
             if (parent != null) {
                 parent.setVisibility(View.GONE);

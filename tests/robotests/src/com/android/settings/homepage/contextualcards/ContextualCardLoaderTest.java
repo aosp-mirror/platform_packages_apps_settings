@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardLoader.DEFAULT_CARD_COUNT;
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -31,6 +32,7 @@ import static org.mockito.Mockito.verify;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
+import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -81,13 +83,38 @@ public class ContextualCardLoaderTest {
 
     @Test
     public void getDisplayableCards_fourEligibleCards_shouldShowDefaultCardCount() {
-        final List<ContextualCard> fourCards = getContextualCardList();
-        doReturn(fourCards).when(mContextualCardLoader).filterEligibleCards(anyList());
+        final List<ContextualCard> cards = getContextualCardList().stream().limit(4)
+                .collect(Collectors.toList());
+        doReturn(cards).when(mContextualCardLoader).filterEligibleCards(anyList());
 
-        final List<ContextualCard> result = mContextualCardLoader
-                .getDisplayableCards(fourCards);
+        final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(cards);
 
         assertThat(result).hasSize(DEFAULT_CARD_COUNT);
+    }
+
+    @Test
+    public void getDisplayableCards_oneStickyCard_shouldShowOneStickyCardAtTheTail() {
+        final List<ContextualCard> cards = getContextualCardList().stream().limit(5)
+                .collect(Collectors.toList());
+        doReturn(cards).when(mContextualCardLoader).filterEligibleCards(anyList());
+
+        final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(cards);
+
+        assertThat(result).hasSize(DEFAULT_CARD_COUNT);
+        assertThat(result.get(DEFAULT_CARD_COUNT - 1).getCategory()).isEqualTo(STICKY_VALUE);
+    }
+
+    @Test
+    public void getDisplayableCards_threeStickyCards_shouldShowThreeStickyCardAtTheTail() {
+        final List<ContextualCard> cards = getContextualCardList();
+        doReturn(cards).when(mContextualCardLoader).filterEligibleCards(anyList());
+
+        final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(cards);
+
+        assertThat(result).hasSize(DEFAULT_CARD_COUNT);
+        for (int i = 1; i <= Math.min(3, DEFAULT_CARD_COUNT); i++) {
+            assertThat(result.get(DEFAULT_CARD_COUNT - i).getCategory()).isEqualTo(STICKY_VALUE);
+        }
     }
 
     @Test
@@ -110,29 +137,61 @@ public class ContextualCardLoaderTest {
                 eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW), any(String.class));
     }
 
+    @Test
+    public void getCardCount_noConfiguredCardCount_returnDefaultCardCount() {
+        assertThat(mContextualCardLoader.getCardCount()).isEqualTo(DEFAULT_CARD_COUNT);
+    }
+
+    @Test
+    public void getCardCount_hasConfiguredCardCount_returnConfiguredCardCount() {
+        int configCount = 4;
+        Settings.Global.putLong(mContext.getContentResolver(),
+                ContextualCardLoader.CONTEXTUAL_CARD_COUNT, configCount);
+
+        assertThat(mContextualCardLoader.getCardCount()).isEqualTo(configCount);
+    }
+
     private List<ContextualCard> getContextualCardList() {
         final List<ContextualCard> cards = new ArrayList<>();
         cards.add(new ContextualCard.Builder()
-                .setName("test_wifi")
+                .setName("test_low_storage")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.LOW_STORAGE_SLICE_URI)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_flashlight")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(
-                        Uri.parse("content://com.android.settings.test.slices/action/flashlight"))
+                .setSliceUri(Uri.parse(
+                        "content://com.android.settings.test.slices/action/flashlight"))
                 .build());
         cards.add(new ContextualCard.Builder()
-                .setName("test_connected")
+                .setName("test_dark_theme")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.DARK_THEME_SLICE_URI)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_gesture")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(
                         "content://com.android.settings.test.slices/action/gesture_pick_up"))
+                .build());
+        cards.add(new ContextualCard.Builder()
+                .setName("test_wifi")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI)
+                .setCategory(STICKY_VALUE)
+                .build());
+        cards.add(new ContextualCard.Builder()
+                .setName("test_connected")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI)
+                .setCategory(STICKY_VALUE)
+                .build());
+        cards.add(new ContextualCard.Builder()
+                .setName("test_sticky")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(Uri.parse("content://com.android.settings.test.slices/action/sticky"))
+                .setCategory(STICKY_VALUE)
                 .build());
         return cards;
     }

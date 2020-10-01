@@ -17,7 +17,9 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.view.View;
 
+import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
@@ -27,5 +29,15 @@ public class AppSwitchPreference extends SwitchPreference {
     public AppSwitchPreference(Context context) {
         super(context);
         setLayoutResource(R.layout.preference_app);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        final View switchView = holder.findViewById(android.R.id.switch_widget);
+        if (switchView != null) {
+            final View rootView = switchView.getRootView();
+            rootView.setFilterTouchesWhenObscured(true);
+        }
     }
 }

@@ -76,10 +76,11 @@ public class PreferenceXmlParserUtilsTest {
 
     @Test
     public void testDataKeywordsValid_ReturnsPreferenceKeywords() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
+        XmlResourceParser parser = getChildByType(R.xml.display_settings,
+                "com.android.settings.display.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String keywords = PreferenceXmlParserUtils.getDataKeywords(mContext, attrs);
-        String expKeywords = mContext.getString(R.string.keywords_display);
+        String expKeywords = mContext.getString(R.string.keywords_screen_timeout);
         assertThat(keywords).isEqualTo(expKeywords);
     }
 

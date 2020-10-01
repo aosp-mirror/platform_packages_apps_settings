@@ -20,6 +20,7 @@ import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.preference.Preference;
 
@@ -54,11 +55,12 @@ public abstract class RingtonePreferenceControllerBase extends AbstractPreferenc
                 mContext, getRingtoneType());
 
         final CharSequence summary;
-        if (ringtoneUri == null) {
-            summary = mContext.getString(com.android.internal.R.string.ringtone_silent);
-        } else {
+        try {
             summary = Ringtone.getTitle(
                     mContext, ringtoneUri, false /* followSettingsUri */, true /* allowRemote */);
+        } catch (IllegalArgumentException e) {
+            Log.w(TAG, "Error getting ringtone summary.", e);
+            return;
         }
         if (summary != null) {
             ThreadUtils.postOnMainThread(() -> preference.setSummary(summary));

@@ -18,9 +18,14 @@ package com.android.settings.testutils.shadow;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.ArraySet;
 
 import com.android.settings.Utils;
 
@@ -39,6 +44,8 @@ public class ShadowUtils {
     private static ComponentName sDeviceOwnerComponentName;
     private static Map<String, String> sAppNameMap;
     private static boolean sIsSystemAlertWindowEnabled;
+    private static boolean sIsVoiceCapable;
+    private static ArraySet<String> sResultLinks = new ArraySet<>();
 
     @Implementation
     protected static int enforceSameOwner(Context context, int userId) {
@@ -58,6 +65,8 @@ public class ShadowUtils {
         sFingerprintManager = null;
         sIsUserAMonkey = false;
         sIsDemoUser = false;
+        sIsVoiceCapable = false;
+        sResultLinks = new ArraySet<>();
     }
 
     public static void setIsDemoUser(boolean isDemoUser) {
@@ -122,5 +131,28 @@ public class ShadowUtils {
 
     public static void setIsSystemAlertWindowEnabled(boolean enabled) {
         sIsSystemAlertWindowEnabled = enabled;
+    }
+
+    @Implementation
+    protected static boolean isVoiceCapable(Context context) {
+        return sIsVoiceCapable;
+    }
+
+    public static void setIsVoiceCapable(boolean isVoiceCapable) {
+        sIsVoiceCapable = isVoiceCapable;
+    }
+
+    @Implementation
+    protected static ArraySet<String> getHandledDomains(PackageManager pm, String packageName) {
+        return sResultLinks;
+    }
+
+    @Implementation
+    protected static Drawable getBadgedIcon(Context context, ApplicationInfo appInfo) {
+        return new ColorDrawable(0);
+    }
+
+    public static void setHandledDomains(ArraySet<String> links) {
+        sResultLinks = links;
     }
 }

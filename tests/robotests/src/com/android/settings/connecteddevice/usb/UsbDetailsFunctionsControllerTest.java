@@ -31,12 +31,16 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbPort;
 import android.net.ConnectivityManager;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,11 +54,6 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
 public class UsbDetailsFunctionsControllerTest {

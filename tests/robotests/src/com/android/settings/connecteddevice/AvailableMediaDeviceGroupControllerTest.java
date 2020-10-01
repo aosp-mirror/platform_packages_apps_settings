@@ -193,7 +193,7 @@ public class AvailableMediaDeviceGroupControllerTest {
         mAvailableMediaDeviceGroupController.onAudioModeChanged();
 
         assertThat(mPreferenceGroup.getTitle()).isEqualTo(
-                mContext.getText(R.string.connected_device_available_call_title));
+                mContext.getText(R.string.connected_device_call_device_title));
     }
 
     @Test
@@ -202,7 +202,7 @@ public class AvailableMediaDeviceGroupControllerTest {
         mAvailableMediaDeviceGroupController.onAudioModeChanged();
 
         assertThat(mPreferenceGroup.getTitle()).isEqualTo(
-                mContext.getText(R.string.connected_device_available_media_title));
+                mContext.getText(R.string.connected_device_media_device_title));
     }
 
     @Test

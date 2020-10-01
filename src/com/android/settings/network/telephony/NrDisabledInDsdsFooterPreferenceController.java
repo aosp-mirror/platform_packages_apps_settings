@@ -69,7 +69,7 @@ public class NrDisabledInDsdsFooterPreferenceController extends BasePreferenceCo
         if (linkInfo.isActionable()) {
             return AnnotationSpan.linkify(mContext.getText(R.string.no_5g_in_dsds_text), linkInfo);
         } else {
-            return mContext.getText(R.string.no_5g_in_dsds_text);
+            return AnnotationSpan.textWithoutLink(mContext.getText(R.string.no_5g_in_dsds_text));
         }
     }
 

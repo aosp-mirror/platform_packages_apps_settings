@@ -36,6 +36,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
 
 /**
@@ -118,6 +119,19 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         initViews();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()) {
+            setResult(RESULT_TIMEOUT);
+            finish();
+        }
+    }
+
+    protected boolean shouldFinishWhenBackgrounded() {
+        return !WizardManagerHelper.isAnySetupWizard(getIntent());
     }
 
     protected void initViews() {

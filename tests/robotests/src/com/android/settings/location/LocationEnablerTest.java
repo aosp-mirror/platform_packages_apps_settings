@@ -158,10 +158,6 @@ public class LocationEnablerTest {
             Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
         mEnabler.setLocationEnabled(true);
 
-        verify(mContext).sendBroadcastAsUser(
-            argThat(actionMatches(LocationManager.MODE_CHANGING_ACTION)),
-            eq(UserHandle.of(ActivityManager.getCurrentUser())),
-            eq(WRITE_SECURE_SETTINGS));
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.LOCATION_CHANGER, Settings.Secure.LOCATION_CHANGER_UNKNOWN))
                 .isEqualTo(Settings.Secure.LOCATION_CHANGER_SYSTEM_SETTINGS);

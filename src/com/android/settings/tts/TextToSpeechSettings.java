@@ -26,7 +26,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.provider.Settings.Secure;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
@@ -36,21 +38,23 @@ import android.util.Log;
 import android.util.Pair;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
+import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -148,6 +152,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
      */
     private final TextToSpeech.OnInitListener mInitListener = this::onInitEngine;
 
+    /**
+     * A UserManager used to set settings for both person and work profiles for a user
+     */
+    private UserManager mUserManager;
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.TTS_TEXT_TO_SPEECH;
@@ -176,6 +185,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                 .setButton2OnClickListener(v -> resetTts())
                 .setButton1Enabled(true);
 
+        mUserManager = (UserManager) getActivity()
+                .getApplicationContext().getSystemService(Context.USER_SERVICE);
+
         if (savedInstanceState == null) {
             mLocalePreference.setEnabled(false);
             mLocalePreference.setEntries(new CharSequence[0]);
@@ -195,13 +207,18 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             mLocalePreference.setEnabled(entries.length > 0);
         }
 
-        mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener);
+        final TextToSpeechViewModel ttsViewModel =
+                ViewModelProviders.of(this).get(TextToSpeechViewModel.class);
+        Pair<TextToSpeech, Boolean> ttsAndNew = ttsViewModel.getTtsAndWhetherNew(mInitListener);
+        mTts = ttsAndNew.first;
+        // If the TTS object is not newly created, we need to run the setup on the settings side to
+        // ensure that we can use the TTS object.
+        if (!ttsAndNew.second) {
+            successSetup();
+        }
 
         setTtsUtteranceProgressListener();
         initSettings();
-
-        // Prevent restarting the TTS connection on rotation
-        setRetainInstance(true);
     }
 
     @Override
@@ -217,13 +234,21 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             return;
         }
         if (!mTts.getDefaultEngine().equals(mTts.getCurrentEngine())) {
+            final TextToSpeechViewModel ttsViewModel =
+                    ViewModelProviders.of(this).get(TextToSpeechViewModel.class);
             try {
-                mTts.shutdown();
-                mTts = null;
+                // If the current engine isn't the default engine shut down the current engine in
+                // preparation for creating the new engine.
+                ttsViewModel.shutdownTts();
             } catch (Exception e) {
                 Log.e(TAG, "Error shutting down TTS engine" + e);
             }
-            mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener);
+            final Pair<TextToSpeech, Boolean> ttsAndNew =
+                    ttsViewModel.getTtsAndWhetherNew(mInitListener);
+            mTts = ttsAndNew.first;
+            if (!ttsAndNew.second) {
+                successSetup();
+            }
             setTtsUtteranceProgressListener();
             initSettings();
         } else {
@@ -264,15 +289,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                 updateWidgetState(true);
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mTts != null) {
-            mTts.shutdown();
-            mTts = null;
-        }
     }
 
     @Override
@@ -365,8 +381,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     public void onInitEngine(int status) {
         if (status == TextToSpeech.SUCCESS) {
             if (DBG) Log.d(TAG, "TTS engine for settings screen initialized.");
-            checkDefaultLocale();
-            getActivity().runOnUiThread(() -> mLocalePreference.setEnabled(true));
+            successSetup();
         } else {
             if (DBG) {
                 Log.d(TAG,
@@ -374,6 +389,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             }
             updateWidgetState(false);
         }
+    }
+
+    /** Initialize TTS Settings on successful engine init. */
+    private void successSetup() {
+        checkDefaultLocale();
+        getActivity().runOnUiThread(() -> mLocalePreference.setEnabled(true));
     }
 
     private void checkDefaultLocale() {
@@ -509,8 +530,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             }
         }
 
-        // Sort it
-        Collections.sort(entryPairs, (lhs, rhs) -> lhs.first.compareToIgnoreCase(rhs.first));
+        // Get the primary locale and create a Collator to sort the strings
+        Locale userLocale = getResources().getConfiguration().getLocales().get(0);
+        Collator collator = Collator.getInstance(userLocale);
+
+        // Sort the list
+        Collections.sort(entryPairs, (lhs, rhs) -> collator.compare(lhs.first, rhs.first));
 
         // Get two arrays out of one of pairs
         mSelectedLocaleIndex = 0; // Will point to the R.string.tts_lang_use_system value
@@ -670,8 +695,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private void updateSpeechRate(int speechRateSeekBarProgress) {
         mDefaultRate = getValueFromSeekBarProgress(KEY_DEFAULT_RATE, speechRateSeekBarProgress);
         try {
-            android.provider.Settings.Secure.putInt(
-                    getContentResolver(), TTS_DEFAULT_RATE, mDefaultRate);
+            updateTTSSetting(TTS_DEFAULT_RATE, mDefaultRate);
             if (mTts != null) {
                 mTts.setSpeechRate(mDefaultRate / 100.0f);
             }
@@ -685,8 +709,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private void updateSpeechPitchValue(int speechPitchSeekBarProgress) {
         mDefaultPitch = getValueFromSeekBarProgress(KEY_DEFAULT_PITCH, speechPitchSeekBarProgress);
         try {
-            android.provider.Settings.Secure.putInt(
-                    getContentResolver(), TTS_DEFAULT_PITCH, mDefaultPitch);
+            updateTTSSetting(TTS_DEFAULT_PITCH, mDefaultPitch);
             if (mTts != null) {
                 mTts.setPitch(mDefaultPitch / 100.0f);
             }
@@ -695,6 +718,15 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             Log.e(TAG, "could not persist default TTS pitch setting", e);
         }
         return;
+    }
+
+    private void updateTTSSetting(String key, int value) {
+        Secure.putInt(getContentResolver(), key, value);
+        final int managedProfileUserId =
+                Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+        if (managedProfileUserId != UserHandle.USER_NULL) {
+            Secure.putIntForUser(getContentResolver(), key, value, managedProfileUserId);
+        }
     }
 
     private void updateWidgetState(boolean enable) {
@@ -767,18 +799,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             } else {
                 Log.e(TAG, "settingsIntent is null");
             }
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                    .logClickedPreference(p, getMetricsCategory());
         }
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.tts_settings;
-                    return Arrays.asList(sir);
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.tts_settings);
 
 }

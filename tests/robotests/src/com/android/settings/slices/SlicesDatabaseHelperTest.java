@@ -65,6 +65,7 @@ public class SlicesDatabaseHelperTest {
 
         String[] expectedNames = {
                 IndexColumns.KEY,
+                IndexColumns.SLICE_URI,
                 IndexColumns.TITLE,
                 IndexColumns.SUMMARY,
                 IndexColumns.SCREENTITLE,
@@ -72,9 +73,9 @@ public class SlicesDatabaseHelperTest {
                 IndexColumns.ICON_RESOURCE,
                 IndexColumns.FRAGMENT,
                 IndexColumns.CONTROLLER,
-                IndexColumns.PLATFORM_SLICE,
                 IndexColumns.SLICE_TYPE,
                 IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
+                IndexColumns.PUBLIC_SLICE
         };
 
         assertThat(columnNames).isEqualTo(expectedNames);

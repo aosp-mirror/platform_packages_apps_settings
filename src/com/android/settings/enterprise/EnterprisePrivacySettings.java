@@ -98,20 +98,13 @@ public class EnterprisePrivacySettings extends DashboardFragment {
                 .hasDeviceOwner();
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.enterprise_privacy_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return isPageEnabled(context);
                 }
 
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.enterprise_privacy_settings;
-                    return Arrays.asList(sir);
-                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

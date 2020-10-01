@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.accessibility;
@@ -55,6 +55,7 @@ public class RTTSettingPreferenceController extends BasePreferenceController {
         mPackageManager = context.getPackageManager();
         mTelecomManager = context.getSystemService(TelecomManager.class);
         mRTTIntent = new Intent(context.getString(R.string.config_rtt_setting_intent_action));
+
     }
 
     @Override

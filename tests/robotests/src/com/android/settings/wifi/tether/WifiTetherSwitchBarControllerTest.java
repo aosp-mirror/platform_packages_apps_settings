@@ -21,7 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -32,10 +32,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiManager;
-import android.provider.Settings;
+import android.widget.Switch;
 
 import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -70,10 +69,9 @@ public class WifiTetherSwitchBarControllerTest {
         when(mContext.getSystemService(Context.NETWORK_POLICY_SERVICE)).thenReturn(
                 mNetworkPolicyManager);
 
-        mController = new WifiTetherSwitchBarController(mContext,
-                new SwitchBarController(mSwitchBar));
+        mController = new WifiTetherSwitchBarController(mContext, mSwitchBar);
     }
-    
+
     @Test
     public void startTether_fail_resetSwitchBar() {
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);
@@ -101,14 +99,21 @@ public class WifiTetherSwitchBarControllerTest {
     }
 
     @Test
-    public void onSwitchToggled_onlyStartsTetherWhenNeeded() {
-        when(mWifiManager.isWifiApEnabled()).thenReturn(true);
-        mController.onSwitchToggled(true);
+    public void onSwitchToggled_switchOff_noStartTethering() {
+        final Switch mockSwitch = mock(Switch.class);
+        when(mockSwitch.isChecked()).thenReturn(false);
+
+        mController.onClick(mockSwitch);
 
         verify(mConnectivityManager, never()).startTethering(anyInt(), anyBoolean(), any(), any());
+    }
 
-        doReturn(false).when(mWifiManager).isWifiApEnabled();
-        mController.onSwitchToggled(true);
+    @Test
+    public void onSwitchToggled_switchOn_startTethering() {
+        final Switch mockSwitch = mock(Switch.class);
+        when(mockSwitch.isChecked()).thenReturn(true);
+
+        mController.onClick(mockSwitch);
 
         verify(mConnectivityManager, times(1))
                 .startTethering(anyInt(), anyBoolean(), any(), any());

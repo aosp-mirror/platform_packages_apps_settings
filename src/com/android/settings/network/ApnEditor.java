@@ -68,6 +68,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     private final static boolean VDBG = false;   // STOPSHIP if true
 
     private final static String KEY_AUTH_TYPE = "auth_type";
+    private static final String KEY_APN_TYPE = "apn_type";
     private final static String KEY_PROTOCOL = "apn_protocol";
     private final static String KEY_ROAMING_PROTOCOL = "apn_roaming_protocol";
     private final static String KEY_CARRIER_ENABLED = "carrier_enabled";
@@ -130,7 +131,8 @@ public class ApnEditor extends SettingsPreferenceFragment
 
     private boolean mNewApn;
     private int mSubId;
-    private ProxySubscriptionManager mProxySubscriptionMgr;
+    @VisibleForTesting
+    ProxySubscriptionManager mProxySubscriptionMgr;
     private int mBearerInitialVal = 0;
     private String mMvnoTypeStr;
     private String mMvnoMatchDataStr;
@@ -138,6 +140,10 @@ public class ApnEditor extends SettingsPreferenceFragment
     String[] mReadOnlyApnTypes;
     @VisibleForTesting
     String[] mDefaultApnTypes;
+    @VisibleForTesting
+    String mDefaultApnProtocol;
+    @VisibleForTesting
+    String mDefaultApnRoamingProtocol;
     private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
     private Uri mCarrierUri;
@@ -242,12 +248,14 @@ public class ApnEditor extends SettingsPreferenceFragment
     private static final int AUTH_TYPE_INDEX = 14;
     @VisibleForTesting
     static final int TYPE_INDEX = 15;
-    private static final int PROTOCOL_INDEX = 16;
+    @VisibleForTesting
+    static final int PROTOCOL_INDEX = 16;
     @VisibleForTesting
     static final int CARRIER_ENABLED_INDEX = 17;
     private static final int BEARER_INDEX = 18;
     private static final int BEARER_BITMASK_INDEX = 19;
-    private static final int ROAMING_PROTOCOL_INDEX = 20;
+    @VisibleForTesting
+    static final int ROAMING_PROTOCOL_INDEX = 20;
     private static final int MVNO_TYPE_INDEX = 21;
     private static final int MVNO_MATCH_DATA_INDEX = 22;
     private static final int EDITED_INDEX = 23;
@@ -257,34 +265,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        // enable ProxySubscriptionMgr with Lifecycle support for all controllers
-        // live within this fragment
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(getContext());
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
-
-        addPreferencesFromResource(R.xml.apn_editor);
-
-        sNotSet = getResources().getString(R.string.apn_not_set);
-        mName = (EditTextPreference) findPreference("apn_name");
-        mApn = (EditTextPreference) findPreference("apn_apn");
-        mProxy = (EditTextPreference) findPreference("apn_http_proxy");
-        mPort = (EditTextPreference) findPreference("apn_http_port");
-        mUser = (EditTextPreference) findPreference("apn_user");
-        mServer = (EditTextPreference) findPreference("apn_server");
-        mPassword = (EditTextPreference) findPreference(KEY_PASSWORD);
-        mMmsProxy = (EditTextPreference) findPreference("apn_mms_proxy");
-        mMmsPort = (EditTextPreference) findPreference("apn_mms_port");
-        mMmsc = (EditTextPreference) findPreference("apn_mmsc");
-        mMcc = (EditTextPreference) findPreference("apn_mcc");
-        mMnc = (EditTextPreference) findPreference("apn_mnc");
-        mApnType = (EditTextPreference) findPreference("apn_type");
-        mAuthType = (ListPreference) findPreference(KEY_AUTH_TYPE);
-        mProtocol = (ListPreference) findPreference(KEY_PROTOCOL);
-        mRoamingProtocol = (ListPreference) findPreference(KEY_ROAMING_PROTOCOL);
-        mCarrierEnabled = (SwitchPreference) findPreference(KEY_CARRIER_ENABLED);
-        mBearerMulti = (MultiSelectListPreference) findPreference(KEY_BEARER_MULTI);
-        mMvnoType = (ListPreference) findPreference(KEY_MVNO_TYPE);
-        mMvnoMatchData = (EditTextPreference) findPreference("mvno_match_data");
+        setLifecycleForAllControllers();
 
         final Intent intent = getIntent();
         final String action = intent.getAction();
@@ -292,34 +273,11 @@ public class ApnEditor extends SettingsPreferenceFragment
             finish();
             return;
         }
-
         mSubId = intent.getIntExtra(ApnSettings.SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        mReadOnlyApn = false;
-        mReadOnlyApnTypes = null;
-        mReadOnlyApnFields = null;
 
-        final CarrierConfigManager configManager = (CarrierConfigManager)
-                getSystemService(Context.CARRIER_CONFIG_SERVICE);
-        if (configManager != null) {
-            final PersistableBundle b = configManager.getConfigForSubId(mSubId);
-            if (b != null) {
-                mReadOnlyApnTypes = b.getStringArray(
-                        CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
-                if (!ArrayUtils.isEmpty(mReadOnlyApnTypes)) {
-                    Log.d(TAG,
-                            "onCreate: read only APN type: " + Arrays.toString(mReadOnlyApnTypes));
-                }
-                mReadOnlyApnFields = b.getStringArray(
-                        CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY);
-
-                mDefaultApnTypes = b.getStringArray(
-                        CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY);
-                if (!ArrayUtils.isEmpty(mDefaultApnTypes)) {
-                    Log.d(TAG, "onCreate: default apn types: " + Arrays.toString(mDefaultApnTypes));
-                }
-            }
-        }
+        initApnEditorUi();
+        getCarrierCustomizedConfig();
 
         Uri uri = null;
         if (action.equals(Intent.ACTION_EDIT)) {
@@ -372,10 +330,22 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
     }
 
+    /**
+     * Enable ProxySubscriptionMgr with Lifecycle support for all controllers
+     * live within this fragment
+     */
+    private void setLifecycleForAllControllers() {
+        if (mProxySubscriptionMgr == null) {
+            mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(getContext());
+        }
+        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+    }
+
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         fillUI(savedInstanceState == null);
+        setCarrierCustomizedConfigToUi();
     }
 
     @VisibleForTesting
@@ -677,7 +647,9 @@ public class ApnEditor extends SettingsPreferenceFragment
      * return null.
      */
     private String protocolDescription(String raw, ListPreference protocol) {
-        final int protocolIndex = protocol.findIndexOfValue(raw);
+        String uRaw = checkNull(raw).toUpperCase();
+        uRaw = uRaw.equals("IPV4") ? "IP" : uRaw;
+        final int protocolIndex = protocol.findIndexOfValue(uRaw);
         if (protocolIndex == -1) {
             return null;
         } else {
@@ -754,6 +726,9 @@ public class ApnEditor extends SettingsPreferenceFragment
                         telephonyManager = telephonyManagerForSubId;
                     }
                     mMvnoMatchData.setText(telephonyManager.getGroupIdLevel1());
+                } else {
+                    // mvno type 'none' case. At this time, mvnoIndex should be 0.
+                    mMvnoMatchData.setText("");
                 }
             }
 
@@ -776,6 +751,13 @@ public class ApnEditor extends SettingsPreferenceFragment
                 mAuthType.setSummary(values[index]);
             } catch (NumberFormatException e) {
                 return false;
+            }
+        } else if (KEY_APN_TYPE.equals(key)) {
+            String data = (TextUtils.isEmpty((String) newValue)
+                    && !ArrayUtils.isEmpty(mDefaultApnTypes))
+                    ? getEditableApnType(mDefaultApnTypes) : (String) newValue;
+            if (!TextUtils.isEmpty(data)) {
+                mApnType.setSummary(data);
             }
         } else if (KEY_PROTOCOL.equals(key)) {
             final String protocol = protocolDescription((String) newValue, mProtocol);
@@ -805,6 +787,7 @@ public class ApnEditor extends SettingsPreferenceFragment
             }
             mMvnoType.setValue((String) newValue);
             mMvnoType.setSummary(mvno);
+            mMvnoMatchData.setSummary(checkNull(mMvnoMatchData.getText()));
         } else if (KEY_PASSWORD.equals(key)) {
             mPassword.setSummary(starify(newValue != null ? String.valueOf(newValue) : ""));
         } else if (KEY_CARRIER_ENABLED.equals(key)) {
@@ -812,7 +795,6 @@ public class ApnEditor extends SettingsPreferenceFragment
         } else {
             preference.setSummary(checkNull(newValue != null ? String.valueOf(newValue) : null));
         }
-
         return true;
     }
 
@@ -1243,36 +1225,121 @@ public class ApnEditor extends SettingsPreferenceFragment
         String userEnteredApnType = mApnType.getText();
         if (userEnteredApnType != null) userEnteredApnType = userEnteredApnType.trim();
         if ((TextUtils.isEmpty(userEnteredApnType)
-                || APN_TYPE_ALL.equals(userEnteredApnType))
-                && !ArrayUtils.isEmpty(mReadOnlyApnTypes)) {
-            String[] apnTypeList = APN_TYPES;
-            if (TextUtils.isEmpty(userEnteredApnType) && !ArrayUtils.isEmpty(mDefaultApnTypes)) {
-                apnTypeList = mDefaultApnTypes;
-            }
+                || APN_TYPE_ALL.equals(userEnteredApnType))) {
+            userEnteredApnType = getEditableApnType(APN_TYPES);
+        }
+        Log.d(TAG, "getUserEnteredApnType: changed apn type to editable apn types: "
+                + userEnteredApnType);
+        return userEnteredApnType;
+    }
 
-            final StringBuilder editableApnTypes = new StringBuilder();
-            final List<String> readOnlyApnTypes = Arrays.asList(mReadOnlyApnTypes);
-            boolean first = true;
-            for (String apnType : apnTypeList) {
-                // add APN type if it is not read-only and is not wild-cardable
-                if (!readOnlyApnTypes.contains(apnType)
-                        && !apnType.equals(APN_TYPE_IA)
-                        && !apnType.equals(APN_TYPE_EMERGENCY)
-                        && !apnType.equals(APN_TYPE_MCX)) {
-                    if (first) {
-                        first = false;
-                    } else {
-                        editableApnTypes.append(",");
-                    }
-                    editableApnTypes.append(apnType);
+    private String getEditableApnType(String[] apnTypeList) {
+        final StringBuilder editableApnTypes = new StringBuilder();
+        final List<String> readOnlyApnTypes = Arrays.asList(mReadOnlyApnTypes);
+        boolean first = true;
+        for (String apnType : apnTypeList) {
+            // add APN type if it is not read-only and is not wild-cardable
+            if (!readOnlyApnTypes.contains(apnType)
+                    && !apnType.equals(APN_TYPE_IA)
+                    && !apnType.equals(APN_TYPE_EMERGENCY)
+                    && !apnType.equals(APN_TYPE_MCX)) {
+                if (first) {
+                    first = false;
+                } else {
+                    editableApnTypes.append(",");
+                }
+                editableApnTypes.append(apnType);
+            }
+        }
+        return editableApnTypes.toString();
+    }
+
+    private void initApnEditorUi() {
+        addPreferencesFromResource(R.xml.apn_editor);
+
+        sNotSet = getResources().getString(R.string.apn_not_set);
+        mName = (EditTextPreference) findPreference("apn_name");
+        mApn = (EditTextPreference) findPreference("apn_apn");
+        mProxy = (EditTextPreference) findPreference("apn_http_proxy");
+        mPort = (EditTextPreference) findPreference("apn_http_port");
+        mUser = (EditTextPreference) findPreference("apn_user");
+        mServer = (EditTextPreference) findPreference("apn_server");
+        mPassword = (EditTextPreference) findPreference(KEY_PASSWORD);
+        mMmsProxy = (EditTextPreference) findPreference("apn_mms_proxy");
+        mMmsPort = (EditTextPreference) findPreference("apn_mms_port");
+        mMmsc = (EditTextPreference) findPreference("apn_mmsc");
+        mMcc = (EditTextPreference) findPreference("apn_mcc");
+        mMnc = (EditTextPreference) findPreference("apn_mnc");
+        mApnType = (EditTextPreference) findPreference("apn_type");
+        mAuthType = (ListPreference) findPreference(KEY_AUTH_TYPE);
+        mProtocol = (ListPreference) findPreference(KEY_PROTOCOL);
+        mRoamingProtocol = (ListPreference) findPreference(KEY_ROAMING_PROTOCOL);
+        mCarrierEnabled = (SwitchPreference) findPreference(KEY_CARRIER_ENABLED);
+        mBearerMulti = (MultiSelectListPreference) findPreference(KEY_BEARER_MULTI);
+        mMvnoType = (ListPreference) findPreference(KEY_MVNO_TYPE);
+        mMvnoMatchData = (EditTextPreference) findPreference("mvno_match_data");
+    }
+
+    private void getCarrierCustomizedConfig() {
+        mReadOnlyApn = false;
+        mReadOnlyApnTypes = null;
+        mReadOnlyApnFields = null;
+
+        final CarrierConfigManager configManager = (CarrierConfigManager)
+                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        if (configManager != null) {
+            final PersistableBundle b = configManager.getConfigForSubId(mSubId);
+            if (b != null) {
+                mReadOnlyApnTypes = b.getStringArray(
+                        CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
+                if (!ArrayUtils.isEmpty(mReadOnlyApnTypes)) {
+                    Log.d(TAG,
+                            "onCreate: read only APN type: " + Arrays.toString(mReadOnlyApnTypes));
+                }
+                mReadOnlyApnFields = b.getStringArray(
+                        CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY);
+
+                mDefaultApnTypes = b.getStringArray(
+                        CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY);
+
+                if (!ArrayUtils.isEmpty(mDefaultApnTypes)) {
+                    Log.d(TAG, "onCreate: default apn types: " + Arrays.toString(mDefaultApnTypes));
+                }
+
+                mDefaultApnProtocol = b.getString(
+                        CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_PROTOCOL_STRING);
+                if (!TextUtils.isEmpty(mDefaultApnProtocol)) {
+                    Log.d(TAG, "onCreate: default apn protocol: " + mDefaultApnProtocol);
+                }
+
+                mDefaultApnRoamingProtocol = b.getString(
+                        CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING);
+                if (!TextUtils.isEmpty(mDefaultApnRoamingProtocol)) {
+                    Log.d(TAG, "onCreate: default apn roaming protocol: "
+                            + mDefaultApnRoamingProtocol);
                 }
             }
-            userEnteredApnType = editableApnTypes.toString();
-            Log.d(TAG, "getUserEnteredApnType: changed apn type to editable apn types: "
-                    + userEnteredApnType);
+        }
+    }
+
+    private void setCarrierCustomizedConfigToUi() {
+        if (TextUtils.isEmpty(mApnType.getText()) && !ArrayUtils.isEmpty(mDefaultApnTypes)) {
+            String value = getEditableApnType(mDefaultApnTypes);
+            mApnType.setText(value);
+            mApnType.setSummary(value);
         }
 
-        return userEnteredApnType;
+        String protocol = protocolDescription(mDefaultApnProtocol, mProtocol);
+        if (TextUtils.isEmpty(mProtocol.getValue()) && !TextUtils.isEmpty(protocol)) {
+            mProtocol.setValue(mDefaultApnProtocol);
+            mProtocol.setSummary(protocol);
+        }
+
+        String roamingProtocol = protocolDescription(mDefaultApnRoamingProtocol, mRoamingProtocol);
+        if (TextUtils.isEmpty(mRoamingProtocol.getValue()) && !TextUtils.isEmpty(roamingProtocol)) {
+            mRoamingProtocol.setValue(mDefaultApnRoamingProtocol);
+            mRoamingProtocol.setSummary(roamingProtocol);
+        }
     }
 
     public static class ErrorDialog extends InstrumentedDialogFragment {

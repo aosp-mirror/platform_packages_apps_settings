@@ -27,12 +27,7 @@ import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Preference fragment used to control font size.
@@ -115,19 +110,11 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         return indices.length - 1;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableRaw> result = new ArrayList<>();
-                    final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = context.getString(R.string.title_font_size);
-                    data.screenTitle = context.getString(R.string.title_font_size);
-                    data.key = "font_size_setting_screen";
-                    data.keywords = context.getString(R.string.keywords_display_font_size);
-                    result.add(data);
-                    return result;
+                protected boolean isPageSearchEnabled(Context context) {
+                    return false;
                 }
             };
 

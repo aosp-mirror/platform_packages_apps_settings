@@ -32,9 +32,9 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableData;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexableResources;
 
 import org.junit.Before;
@@ -120,8 +120,8 @@ public class UniquePreferenceTest {
         final SearchIndexableResources resources =
                 FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
                         .getSearchIndexableResources();
-        for (Class<?> clazz : resources.getProviderValues()) {
-            verifyPreferenceKeys(uniqueKeys, duplicatedKeys, nullKeyClasses, clazz);
+        for (SearchIndexableData SearchIndexableData : resources.getProviderValues()) {
+            verifyPreferenceKeys(uniqueKeys, duplicatedKeys, nullKeyClasses, SearchIndexableData);
         }
 
         if (!nullKeyClasses.isEmpty()) {
@@ -145,14 +145,12 @@ public class UniquePreferenceTest {
     }
 
     private void verifyPreferenceKeys(Set<String> uniqueKeys, Set<String> duplicatedKeys,
-            Set<String> nullKeyClasses, Class<?> clazz)
+            Set<String> nullKeyClasses, SearchIndexableData searchIndexableData)
             throws IOException, XmlPullParserException, Resources.NotFoundException {
-        if (clazz == null) {
-            return;
-        }
-        final String className = clazz.getName();
+
+        final String className = searchIndexableData.getTargetClass().getName();
         final Indexable.SearchIndexProvider provider =
-                DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+                searchIndexableData.getSearchIndexProvider();
         final List<SearchIndexableRaw> rawsToIndex = provider.getRawDataToIndex(mContext, true);
         final List<SearchIndexableResource> resourcesToIndex =
                 provider.getXmlResourcesToIndex(mContext, true);

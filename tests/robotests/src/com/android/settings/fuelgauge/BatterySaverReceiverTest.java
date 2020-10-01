@@ -68,7 +68,7 @@ public class BatterySaverReceiverTest {
 
     @Test
     public void testOnReceive_powerSaveModeChanged_invokeCallback() {
-        Intent intent = new Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGING);
+        Intent intent = new Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
 
         mBatterySaverReceiver.onReceive(mContext, intent);
 

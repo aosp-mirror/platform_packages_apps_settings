@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
-import android.app.ActivityManager;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
@@ -29,8 +28,6 @@ public class NotificationAccessScreenPreferenceController extends BasePreference
 
     @Override
     public int getAvailabilityStatus() {
-        return !ActivityManager.isLowRamDeviceStatic()
-                ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 }

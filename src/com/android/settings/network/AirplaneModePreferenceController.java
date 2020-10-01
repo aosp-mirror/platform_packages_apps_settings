@@ -17,29 +17,42 @@ package com.android.settings.network;
 
 import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.provider.SettingsSlicesContract;
+import android.telephony.TelephonyManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class AirplaneModePreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnResume, OnPause,
+        implements LifecycleObserver, OnStart, OnStop,
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
+    /**
+     * Uri for Airplane mode Slice.
+     */
+    public static final Uri SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSlicesContract.AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath(SettingsSlicesContract.KEY_AIRPLANE_MODE)
+            .build();
     private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
     private Fragment mFragment;
@@ -58,6 +71,11 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         mFragment = hostFragment;
     }
 
+    @VisibleForTesting
+    void setAirplaneModeEnabler(AirplaneModeEnabler airplaneModeEnabler) {
+        mAirplaneModeEnabler = airplaneModeEnabler;
+    }
+
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_AIRPLANE_MODE.equals(preference.getKey())
@@ -65,13 +83,18 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             // In ECM mode launch ECM app dialog
             if (mFragment != null) {
                 mFragment.startActivityForResult(
-                        new Intent(TelephonyIntents.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
+                        new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
                         REQUEST_CODE_EXIT_ECM);
             }
             return true;
         }
 
         return false;
+    }
+
+    @Override
+    public Uri getSliceUri() {
+        return SLICE_URI;
     }
 
     @Override
@@ -86,7 +109,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public boolean isSliceable() {
+    public boolean isPublicSlice() {
         return true;
     }
 
@@ -97,16 +120,16 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (isAvailable()) {
-            mAirplaneModeEnabler.resume();
+            mAirplaneModeEnabler.start();
         }
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         if (isAvailable()) {
-            mAirplaneModeEnabler.pause();
+            mAirplaneModeEnabler.stop();
         }
     }
 

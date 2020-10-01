@@ -28,31 +28,20 @@
         <RadioGroup
             android:id="@+id/private_dns_radio_group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/developer_option_dialog_margin_start">
 
-            <RadioButton
+            <include
                 android:id="@+id/private_dns_mode_off"
-                android:text="@string/private_dns_mode_off"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:minHeight="48dp"/>
+                layout="@layout/preference_widget_dialog_radiobutton"/>
 
-            <RadioButton
+            <include
                 android:id="@+id/private_dns_mode_opportunistic"
-                android:text="@string/private_dns_mode_opportunistic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:minHeight="48dp"/>
+                layout="@layout/preference_widget_dialog_radiobutton"/>
 
-            <RadioButton
+            <include
                 android:id="@+id/private_dns_mode_provider"
-                android:text="@string/private_dns_mode_provider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:minHeight="48dp"/>
+                layout="@layout/preference_widget_dialog_radiobutton"/>
 
             <EditText
                 android:id="@+id/private_dns_mode_provider_hostname"
@@ -64,17 +53,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="8dp"
-                android:minHeight="48dp"/>
+                android:minHeight="@dimen/developer_option_dialog_min_height"/>
         </RadioGroup>
 
-        <TextView
+        <include
             android:id="@+id/private_dns_help_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:minHeight="48dp"
-            android:paddingStart="16dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+            layout="@layout/preference_widget_dialog_summary"/>
     </LinearLayout>
 
 </ScrollView>

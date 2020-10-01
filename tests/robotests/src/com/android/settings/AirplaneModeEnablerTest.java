@@ -53,7 +53,7 @@ public final class AirplaneModeEnablerTest {
 
     @Test
     public void onRadioPowerStateChanged_beenInvoke_invokeOnAirplaneModeChanged() {
-        mAirplaneModeEnabler.resume();
+        mAirplaneModeEnabler.start();
 
         ShadowSettings.setAirplaneMode(true);
 

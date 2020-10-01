@@ -61,7 +61,7 @@ public class HardwareInfoPreferenceControllerTest {
     @Test
     public void isAvailable_returnTrueIfVisible() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+                BasePreferenceController.AVAILABLE);
     }
 
     @Test

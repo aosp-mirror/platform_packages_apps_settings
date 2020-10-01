@@ -16,11 +16,17 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="screen_pinning_settings_screen"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/screen_pinning_title">
 
     <SwitchPreference
         android:key="use_screen_lock"
         android:title="@string/screen_pinning_unlock_none" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="screen_pinning_settings_screen_footer"
+        android:title="@string/screen_pinning_description"
+        android:selectable="false"
+        settings:searchable="false" />
 
 </PreferenceScreen>

@@ -16,82 +16,57 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.ColorInversionPreferenceController.OFF;
-import static com.android.settings.accessibility.ColorInversionPreferenceController.ON;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.SwitchPreference;
-
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 @RunWith(RobolectricTestRunner.class)
 public class ColorInversionPreferenceControllerTest {
-    private static final int UNKNOWN = -1;
+    private static final String PREF_KEY = "toggle_inversion_preference";
+    private static final String DISPLAY_INVERSION_ENABLED =
+            Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
     private Context mContext;
     private ColorInversionPreferenceController mController;
-    private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new ColorInversionPreferenceController(mContext, "pref_key");
-        mPreference = new SwitchPreference(mContext);
-        mController.updateState(mPreference);
+        mController = new ColorInversionPreferenceController(mContext, PREF_KEY);
     }
 
     @Test
-    public void getAvailabilityStatus_available() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    public void isChecked_enabled() {
+    public void getSummary_enabledColorInversion_shouldReturnOnSummary() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, ON);
+                DISPLAY_INVERSION_ENABLED, State.ON);
 
-        mController.updateState(mPreference);
-
-        assertThat(mController.isChecked()).isTrue();
-        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mController.getSummary().toString().contains(
+                mContext.getText(R.string.accessibility_feature_state_on))).isTrue();
     }
 
     @Test
-    public void isChecked_disabled() {
+    public void getSummary_disabledColorInversion_shouldReturnOffSummary() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, OFF);
+                DISPLAY_INVERSION_ENABLED, State.OFF);
 
-        mController.updateState(mPreference);
-
-        assertThat(mController.isChecked()).isFalse();
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mController.getSummary().toString().contains(
+                mContext.getText(R.string.accessibility_feature_state_off))).isTrue();
     }
 
-    @Test
-    public void setChecked_enabled() {
-        mController.setChecked(true);
-
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, UNKNOWN)).isEqualTo(ON);
-    }
-
-    @Test
-    public void setChecked_disabled() {
-        mController.setChecked(false);
-
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, UNKNOWN)).isEqualTo(OFF);
+    @Retention(RetentionPolicy.SOURCE)
+    private @interface State {
+        int OFF = 0;
+        int ON = 1;
     }
 }

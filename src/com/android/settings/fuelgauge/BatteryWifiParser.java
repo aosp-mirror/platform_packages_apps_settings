@@ -14,8 +14,8 @@
 
 package com.android.settings.fuelgauge;
 
-import android.os.BatteryStats;
 import android.os.BatteryStats.HistoryItem;
+import android.os.BatteryStatsManager;
 
 public class BatteryWifiParser extends BatteryFlagParser {
 
@@ -27,12 +27,12 @@ public class BatteryWifiParser extends BatteryFlagParser {
     protected boolean isSet(HistoryItem record) {
         switch ((record.states2 & HistoryItem.STATE2_WIFI_SUPPL_STATE_MASK)
                 >> HistoryItem.STATE2_WIFI_SUPPL_STATE_SHIFT) {
-            case BatteryStats.WIFI_SUPPL_STATE_DISCONNECTED:
-            case BatteryStats.WIFI_SUPPL_STATE_DORMANT:
-            case BatteryStats.WIFI_SUPPL_STATE_INACTIVE:
-            case BatteryStats.WIFI_SUPPL_STATE_INTERFACE_DISABLED:
-            case BatteryStats.WIFI_SUPPL_STATE_INVALID:
-            case BatteryStats.WIFI_SUPPL_STATE_UNINITIALIZED:
+            case BatteryStatsManager.WIFI_SUPPL_STATE_DISCONNECTED:
+            case BatteryStatsManager.WIFI_SUPPL_STATE_DORMANT:
+            case BatteryStatsManager.WIFI_SUPPL_STATE_INACTIVE:
+            case BatteryStatsManager.WIFI_SUPPL_STATE_INTERFACE_DISABLED:
+            case BatteryStatsManager.WIFI_SUPPL_STATE_INVALID:
+            case BatteryStatsManager.WIFI_SUPPL_STATE_UNINITIALIZED:
                 return false;
         }
         return true;

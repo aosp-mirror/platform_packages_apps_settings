@@ -34,6 +34,7 @@ import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 import com.android.settings.password.SetupChooseLockPassword.SetupChooseLockPasswordFragment;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.ScrollToParentEditText;
@@ -62,6 +63,7 @@ import java.util.List;
         shadows = {
                 SettingsShadowResources.class,
                 ShadowLockPatternUtils.class,
+                ShadowDevicePolicyManager.class,
                 ShadowUtils.class,
                 ShadowAlertDialogCompat.class
         })
@@ -80,7 +82,7 @@ public class SetupChooseLockPasswordTest {
 
     @Test
     public void createActivity_shouldNotCrash() {
-        // Basic sanity test for activity created without crashing
+        // Basic test for activity created without crashing
         final Intent intent =
                 SetupChooseLockPassword.modifyIntentForSetup(
                         application,

@@ -21,27 +21,16 @@ import android.content.Context;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 public class MultiUserFooterPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
     final UserCapabilities mUserCaps;
 
-    private FooterPreferenceMixinCompat mFooterMixin;
-
-    public MultiUserFooterPreferenceController(Context context) {
-        super(context, "dummy_key");
+    public MultiUserFooterPreferenceController(Context context, String key) {
+        super(context, key);
         mUserCaps = UserCapabilities.create(context);
-    }
-
-    public MultiUserFooterPreferenceController setFooterMixin(
-            FooterPreferenceMixinCompat footerMixin) {
-        mFooterMixin = footerMixin;
-        return this;
     }
 
     @Override
@@ -54,8 +43,6 @@ public class MultiUserFooterPreferenceController extends BasePreferenceControlle
     @Override
     public void updateState(Preference preference) {
         mUserCaps.updateAddUserCapabilities(mContext);
-        final FooterPreference pref = mFooterMixin.createFooterPreference();
-        pref.setTitle(R.string.user_settings_footer_text);
-        pref.setVisible(isAvailable());
+        preference.setVisible(isAvailable());
     }
 }

@@ -39,6 +39,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.MobileDataContentObserver;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
@@ -95,15 +96,18 @@ public class MobileDataSlice implements CustomSliceable {
                 ListBuilder.ICON_IMAGE, title);
         final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
                 null /* actionTitle */, isMobileDataEnabled());
+        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
+                .setTitle(title)
+                .addEndItem(toggleSliceAction)
+                .setPrimaryAction(primarySliceAction);
+        if (!Utils.isSettingsIntelligence(mContext)) {
+            rowBuilder.setSubtitle(summary);
+        }
 
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(),
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(new ListBuilder.RowBuilder()
-                        .setTitle(title)
-                        .setSubtitle(summary)
-                        .addEndItem(toggleSliceAction)
-                        .setPrimaryAction(primarySliceAction));
+                .addRow(rowBuilder);
         return listBuilder.build();
     }
 
@@ -177,7 +181,7 @@ public class MobileDataSlice implements CustomSliceable {
      */
     private boolean isMobileDataAvailable() {
         final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getSelectableSubscriptionInfoList();
+                SubscriptionUtil.getSelectableSubscriptionInfoList(mContext);
 
         return !(subInfoList == null || subInfoList.isEmpty());
     }

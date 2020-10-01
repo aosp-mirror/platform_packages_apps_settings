@@ -38,7 +38,7 @@ public class PreventRingingParentPreferenceController extends BasePreferenceCont
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_volumeHushGestureEnabled)
-                ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

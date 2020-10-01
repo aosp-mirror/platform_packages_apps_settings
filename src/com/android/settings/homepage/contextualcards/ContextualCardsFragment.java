@@ -19,24 +19,42 @@ package com.android.settings.homepage.contextualcards;
 import static com.android.settings.homepage.contextualcards.ContextualCardsAdapter.SPAN_COUNT;
 
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.homepage.contextualcards.slices.BluetoothUpdateWorker;
 import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.slice.ContextualWifiScanWorker;
 
 public class ContextualCardsFragment extends InstrumentedFragment implements
         FocusRecyclerView.FocusListener {
+
+    private static final String TAG = "ContextualCardsFragment";
+    private static final boolean DEBUG = Build.IS_DEBUGGABLE;
+
+    @VisibleForTesting
+    static boolean sRestartLoaderNeeded;
+
+    @VisibleForTesting
+    BroadcastReceiver mKeyEventReceiver;
+    @VisibleForTesting
+    BroadcastReceiver mScreenOffReceiver;
 
     private FocusRecyclerView mCardsContainer;
     private GridLayoutManager mLayoutManager;
@@ -50,17 +68,34 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         final Context context = getContext();
         if (savedInstanceState == null) {
             FeatureFactory.getFactory(context).getSlicesFeatureProvider().newUiSession();
+            BluetoothUpdateWorker.initLocalBtManager(getContext());
         }
         mContextualCardManager = new ContextualCardManager(context, getSettingsLifecycle(),
                 savedInstanceState);
-
+        mKeyEventReceiver = new KeyEventReceiver();
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        registerScreenOffReceiver();
+        registerKeyEventReceiver();
         ContextualWifiScanWorker.newVisibleUiSession();
-        mContextualCardManager.loadContextualCards(LoaderManager.getInstance(this));
+        mContextualCardManager.loadContextualCards(LoaderManager.getInstance(this),
+                sRestartLoaderNeeded);
+        sRestartLoaderNeeded = false;
+    }
+
+    @Override
+    public void onStop() {
+        unregisterKeyEventReceiver();
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        unregisterScreenOffReceiver();
+        super.onDestroy();
     }
 
     @Override
@@ -74,6 +109,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         mCardsContainer.setLayoutManager(mLayoutManager);
         mContextualCardsAdapter = new ContextualCardsAdapter(context, this /* lifecycleOwner */,
                 mContextualCardManager);
+        mCardsContainer.setItemAnimator(null);
         mCardsContainer.setAdapter(mContextualCardsAdapter);
         mContextualCardManager.setListener(mContextualCardsAdapter);
         mCardsContainer.setListener(this);
@@ -91,5 +127,83 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_HOMEPAGE;
+    }
+
+    private void registerKeyEventReceiver() {
+        getActivity().registerReceiver(mKeyEventReceiver,
+                new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+    }
+
+    private void unregisterKeyEventReceiver() {
+        getActivity().unregisterReceiver(mKeyEventReceiver);
+    }
+
+    private void registerScreenOffReceiver() {
+        if (mScreenOffReceiver == null) {
+            mScreenOffReceiver = new ScreenOffReceiver();
+            getActivity().registerReceiver(mScreenOffReceiver,
+                    new IntentFilter(Intent.ACTION_SCREEN_OFF));
+        }
+    }
+
+    private void unregisterScreenOffReceiver() {
+        if (mScreenOffReceiver != null) {
+            getActivity().unregisterReceiver(mScreenOffReceiver);
+            mScreenOffReceiver = null;
+        }
+    }
+
+    private void resetSession(Context context) {
+        sRestartLoaderNeeded = true;
+        unregisterScreenOffReceiver();
+        FeatureFactory.getFactory(context).getSlicesFeatureProvider().newUiSession();
+    }
+
+    /**
+     * Receiver for updating UI session when home key or recent app key is pressed.
+     */
+    @VisibleForTesting
+    class KeyEventReceiver extends BroadcastReceiver {
+
+        private static final String KEY_REASON = "reason";
+        private static final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
+        private static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent == null || !Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(intent.getAction())) {
+                return;
+            }
+
+            final String reason = intent.getStringExtra(KEY_REASON);
+            if (!SYSTEM_DIALOG_REASON_RECENT_APPS.equals(reason)
+                    && !SYSTEM_DIALOG_REASON_HOME_KEY.equals(reason)) {
+                return;
+            }
+
+            if (DEBUG) {
+                Log.d(TAG, "key pressed = " + reason);
+            }
+            resetSession(context);
+        }
+    }
+
+    /**
+     * Receiver for updating UI session when screen is turned off.
+     */
+    @VisibleForTesting
+    class ScreenOffReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent == null || !Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
+                return;
+            }
+
+            if (DEBUG) {
+                Log.d(TAG, "screen off");
+            }
+            resetSession(context);
+        }
     }
 }

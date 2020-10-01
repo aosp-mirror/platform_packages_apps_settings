@@ -19,16 +19,21 @@ package com.android.settings.homepage.contextualcards.slices;
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
 
+import static com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice.EXTRA_ENABLE_BLUETOOTH;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 
@@ -42,6 +47,7 @@ import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SliceTester;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.After;
@@ -52,11 +58,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowBluetoothAdapter.class)
 public class BluetoothDevicesSliceTest {
 
     private static final String BLUETOOTH_MOCK_ADDRESS = "00:11:00:11:00:11";
@@ -66,6 +77,7 @@ public class BluetoothDevicesSliceTest {
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
 
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private List<CachedBluetoothDevice> mBluetoothDeviceList;
     private BluetoothDevicesSlice mBluetoothDevicesSlice;
     private Context mContext;
@@ -91,6 +103,13 @@ public class BluetoothDevicesSliceTest {
 
         // Initial Bluetooth device list.
         mBluetoothDeviceList = new ArrayList<>();
+
+        final BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (defaultAdapter != null) {
+            mShadowBluetoothAdapter = Shadow.extract(defaultAdapter);
+            mShadowBluetoothAdapter.setEnabled(true);
+            mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_ON);
+        }
     }
 
     @After
@@ -101,20 +120,60 @@ public class BluetoothDevicesSliceTest {
     }
 
     @Test
-    public void getSlice_hasBluetoothDevices_shouldHaveBluetoothDevicesTitle() {
-        mockBluetoothDeviceList(1);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+    @Config(shadows = ShadowNoBluetoothAdapter.class)
+    public void getSlice_noBluetoothHardware_shouldReturnNull() {
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
+
+        assertThat(slice).isNull();
+    }
+
+    @Test
+    public void getSlice_bluetoothOff_shouldHaveBluetoothOffTitleAndSummary() {
+        mShadowBluetoothAdapter.setEnabled(false);
+        mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_OFF);
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(
+                R.string.bluetooth_devices_card_off_title));
+        assertThat(metadata.getSummary()).isEqualTo(mContext.getString(
+                R.string.bluetooth_devices_card_off_summary));
+    }
+
+    @Test
+    public void getSlice_bluetoothTurningOn_shouldHaveBluetoothDevicesTitleAndPairNewDevice() {
+        mShadowBluetoothAdapter.setEnabled(false);
+        mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_OFF);
+        final Intent intent = new Intent().putExtra(EXTRA_ENABLE_BLUETOOTH, true);
+
+        mBluetoothDevicesSlice.onNotifyChange(intent);
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.bluetooth_devices));
+
+        final List<SliceItem> sliceItems = slice.getItems();
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, mContext.getString(
+                R.string.bluetooth_pairing_pref_title));
+    }
+
+    @Test
+    public void getSlice_bluetoothOn_shouldHaveBluetoothDevicesTitleAndPairNewDevice() {
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.bluetooth_devices));
+
+        final List<SliceItem> sliceItems = slice.getItems();
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, mContext.getString(
+                R.string.bluetooth_pairing_pref_title));
     }
 
     @Test
     public void getSlice_hasBluetoothDevices_shouldMatchBluetoothMockTitle() {
         mockBluetoothDeviceList(1);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
@@ -123,67 +182,56 @@ public class BluetoothDevicesSliceTest {
     }
 
     @Test
-    public void getSlice_hasMediaBluetoothDevice_shouldBuildMediaBluetoothAction() {
-        mockBluetoothDeviceList(1 /* deviceCount */);
-        doReturn(true).when(mBluetoothDeviceList.get(0)).isConnectedA2dpDevice();
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+    public void getSlice_hasAvailableMediaDevice_shouldBuildPrimaryBluetoothAction() {
+        mockBluetoothDeviceList(1);
+        when(mBluetoothDeviceList.get(0).getDevice().isConnected()).thenReturn(true);
+        doReturn(true).when(mBluetoothDeviceList.get(0)).isConnectedHearingAidDevice();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
 
         mBluetoothDevicesSlice.getSlice();
 
-        verify(mBluetoothDevicesSlice).buildMediaBluetoothAction(any());
+        verify(mBluetoothDevicesSlice).buildPrimaryBluetoothAction(any());
     }
 
     @Test
-    public void getSlice_noMediaBluetoothDevice_shouldNotBuildMediaBluetoothAction() {
-        mockBluetoothDeviceList(1 /* deviceCount */);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+    public void getSlice_hasPreviouslyConnectedDevice_shouldBuildPrimaryBluetoothAction() {
+        mockBluetoothDeviceList(1);
+        when(mBluetoothDeviceList.get(0).getDevice().isConnected()).thenReturn(false);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
 
         mBluetoothDevicesSlice.getSlice();
 
-        verify(mBluetoothDevicesSlice, never()).buildMediaBluetoothAction(any());
+        verify(mBluetoothDevicesSlice).buildPrimaryBluetoothAction(any());
     }
 
     @Test
-    public void getSlice_noBluetoothDevices_shouldHaveNoBluetoothDevicesTitle() {
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+    public void getSlice_hasNonMediaDeviceConnected_shouldNotBuildPrimaryBluetoothAction() {
+        mockBluetoothDeviceList(1);
+        when(mBluetoothDeviceList.get(0).getDevice().isConnected()).thenReturn(true);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
 
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
+        mBluetoothDevicesSlice.getSlice();
 
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertThat(metadata.getTitle()).isEqualTo(
-                mContext.getString(R.string.no_bluetooth_devices));
+        verify(mBluetoothDevicesSlice, never()).buildPrimaryBluetoothAction(any());
     }
 
     @Test
-    public void getSlice_exceedDefaultRowCount_shouldOnlyShowDefaultRows() {
-        mockBluetoothDeviceList(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 1);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+    public void getSlice_exceedDefaultRowCount_shouldOnlyShowHeaderAndDefaultRowCount() {
+        mockBluetoothDeviceList(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 2);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         // Get the number of RowBuilders from Slice.
         final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM, null).size();
-        assertThat(rows).isEqualTo(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT);
+        assertThat(rows).isEqualTo(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 1);
     }
 
     @Test
-    public void getSlice_exceedDefaultRowCount_shouldContainDefaultCountInSubTitle() {
-        mockBluetoothDeviceList(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 1);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
-
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertThat(metadata.getSubtitle()).isEqualTo(
-                mContext.getResources().getQuantityString(R.plurals.show_bluetooth_devices,
-                        BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT,
-                        BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT));
-    }
-
-    @Test
-    public void onNotifyChange_mediaDevice_shouldActivateDevice() {
+    public void onNotifyChange_connectedDevice_shouldActivateDevice() {
         mockBluetoothDeviceList(1);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+        doReturn(true).when(mBluetoothDeviceList.get(0)).isConnected();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
         final Intent intent = new Intent().putExtra(
                 BluetoothDevicesSlice.BLUETOOTH_DEVICE_HASH_CODE,
                 mCachedBluetoothDevice.hashCode());
@@ -193,12 +241,54 @@ public class BluetoothDevicesSliceTest {
         verify(mCachedBluetoothDevice).setActive();
     }
 
+    @Test
+    public void onNotifyChange_availableDisconnectedDevice_shouldConnectToDevice() {
+        mockBluetoothDeviceList(1);
+        doReturn(false).when(mBluetoothDeviceList.get(0)).isConnected();
+        doReturn(false).when(mBluetoothDeviceList.get(0)).isBusy();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
+        final Intent intent = new Intent().putExtra(
+                BluetoothDevicesSlice.BLUETOOTH_DEVICE_HASH_CODE,
+                mCachedBluetoothDevice.hashCode());
+
+        mBluetoothDevicesSlice.onNotifyChange(intent);
+
+        verify(mCachedBluetoothDevice).connect();
+    }
+
+    @Test
+    public void onNotifyChange_busyDisconnectedDevice_shouldDoNothing() {
+        mockBluetoothDeviceList(1);
+        doReturn(false).when(mBluetoothDeviceList.get(0)).isConnected();
+        doReturn(true).when(mBluetoothDeviceList.get(0)).isBusy();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
+        final Intent intent = new Intent().putExtra(
+                BluetoothDevicesSlice.BLUETOOTH_DEVICE_HASH_CODE,
+                mCachedBluetoothDevice.hashCode());
+
+        mBluetoothDevicesSlice.onNotifyChange(intent);
+
+        verify(mCachedBluetoothDevice, never()).setActive();
+        verify(mCachedBluetoothDevice, never()).connect();
+    }
+
     private void mockBluetoothDeviceList(int deviceCount) {
+        final BluetoothDevice device = mock(BluetoothDevice.class);
+        doReturn(BluetoothDevice.BOND_BONDED).when(device).getBondState();
+        doReturn(device).when(mCachedBluetoothDevice).getDevice();
         doReturn(BLUETOOTH_MOCK_TITLE).when(mCachedBluetoothDevice).getName();
         doReturn(BLUETOOTH_MOCK_SUMMARY).when(mCachedBluetoothDevice).getConnectionSummary();
         doReturn(BLUETOOTH_MOCK_ADDRESS).when(mCachedBluetoothDevice).getAddress();
         for (int i = 0; i < deviceCount; i++) {
             mBluetoothDeviceList.add(mCachedBluetoothDevice);
+        }
+    }
+
+    @Implements(BluetoothAdapter.class)
+    public static class ShadowNoBluetoothAdapter extends ShadowBluetoothAdapter {
+        @Implementation
+        protected static BluetoothAdapter getDefaultAdapter() {
+            return null;
         }
     }
 }

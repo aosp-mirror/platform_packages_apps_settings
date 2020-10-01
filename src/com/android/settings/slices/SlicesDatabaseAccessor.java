@@ -23,6 +23,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Binder;
+import android.text.TextUtils;
 import android.util.Pair;
 
 import androidx.slice.Slice;
@@ -47,13 +48,9 @@ public class SlicesDatabaseAccessor {
             IndexColumns.ICON_RESOURCE,
             IndexColumns.FRAGMENT,
             IndexColumns.CONTROLLER,
-            IndexColumns.PLATFORM_SLICE,
             IndexColumns.SLICE_TYPE,
             IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
     };
-
-    // Cursor value for boolean true
-    private final int TRUE = 1;
 
     private final Context mContext;
     private final SlicesDatabaseHelper mHelper;
@@ -91,34 +88,31 @@ public class SlicesDatabaseAccessor {
     }
 
     /**
-     * @return a list of keys in the Slices database matching on {@param isPlatformSlice}.
+     * @return a list of Slice {@link Uri}s based on their visibility {@param isPublicSlice } and
+     * {@param authority}.
      */
-    public List<String> getSliceKeys(boolean isPlatformSlice) {
+    public List<Uri> getSliceUris(String authority, boolean isPublicSlice) {
         verifyIndexing();
-        final String whereClause;
-
-        if (isPlatformSlice) {
-            whereClause = IndexColumns.PLATFORM_SLICE + " = 1";
-        } else {
-            whereClause = IndexColumns.PLATFORM_SLICE + " = 0";
-        }
-
+        final List<Uri> uris = new ArrayList<>();
+        final String whereClause = IndexColumns.PUBLIC_SLICE + (isPublicSlice ? "=1" : "=0");
         final SQLiteDatabase database = mHelper.getReadableDatabase();
-        final String[] columns = new String[]{IndexColumns.KEY};
-        final List<String> keys = new ArrayList<>();
-
-        try (final Cursor resultCursor = database.query(TABLE_SLICES_INDEX, columns, whereClause,
-                null /* selection */, null /* groupBy */, null /* having */, null /* orderBy */)) {
+        final String[] columns = new String[]{IndexColumns.SLICE_URI};
+        try (Cursor resultCursor = database.query(TABLE_SLICES_INDEX, columns,
+                whereClause /* where */, null /* selection */, null /* groupBy */,
+                null /* having */, null /* orderBy */)) {
             if (!resultCursor.moveToFirst()) {
-                return keys;
+                return uris;
             }
 
             do {
-                keys.add(resultCursor.getString(0 /* key index */));
+                final Uri uri = Uri.parse(resultCursor.getString(0 /* SLICE_URI */));
+                if (TextUtils.isEmpty(authority)
+                        || TextUtils.equals(authority, uri.getAuthority())) {
+                    uris.add(uri);
+                }
             } while (resultCursor.moveToNext());
         }
-
-        return keys;
+        return uris;
     }
 
     private Cursor getIndexedSliceData(String path) {
@@ -133,10 +127,12 @@ public class SlicesDatabaseAccessor {
         int numResults = resultCursor.getCount();
 
         if (numResults == 0) {
+            resultCursor.close();
             throw new IllegalStateException("Invalid Slices key from path: " + path);
         }
 
         if (numResults > 1) {
+            resultCursor.close();
             throw new IllegalStateException(
                     "Should not match more than 1 slice with path: " + path);
         }
@@ -151,7 +147,7 @@ public class SlicesDatabaseAccessor {
                 .toString();
     }
 
-    private SliceData buildSliceData(Cursor cursor, Uri uri, boolean isIntentOnly) {
+    private static SliceData buildSliceData(Cursor cursor, Uri uri, boolean isIntentOnly) {
         final String key = cursor.getString(cursor.getColumnIndex(IndexColumns.KEY));
         final String title = cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE));
         final String summary = cursor.getString(cursor.getColumnIndex(IndexColumns.SUMMARY));
@@ -163,8 +159,6 @@ public class SlicesDatabaseAccessor {
                 cursor.getColumnIndex(IndexColumns.FRAGMENT));
         final String controllerClassName = cursor.getString(
                 cursor.getColumnIndex(IndexColumns.CONTROLLER));
-        final boolean isPlatformDefined = cursor.getInt(
-                cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE)) == TRUE;
         int sliceType = cursor.getInt(
                 cursor.getColumnIndex(IndexColumns.SLICE_TYPE));
         final String unavailableSliceSubtitle = cursor.getString(
@@ -184,7 +178,6 @@ public class SlicesDatabaseAccessor {
                 .setFragmentName(fragmentClassName)
                 .setPreferenceControllerClassName(controllerClassName)
                 .setUri(uri)
-                .setPlatformDefined(isPlatformDefined)
                 .setSliceType(sliceType)
                 .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                 .build();

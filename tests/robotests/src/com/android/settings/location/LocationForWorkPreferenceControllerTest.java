@@ -15,8 +15,6 @@
  */
 package com.android.settings.location;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -69,6 +67,7 @@ public class LocationForWorkPreferenceControllerTest {
     private LocationForWorkPreferenceController mController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
+    private LocationSettings mLocationSettings;
 
     @Before
     public void setUp() {
@@ -77,10 +76,13 @@ public class LocationForWorkPreferenceControllerTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = spy(new LocationForWorkPreferenceController(mContext, mLifecycle));
+        mLocationSettings = spy(new LocationSettings());
+        when(mLocationSettings.getSettingsLifecycle()).thenReturn(mLifecycle);
+        mController = spy(new LocationForWorkPreferenceController(mContext, "key"));
+        mController.init(mLocationSettings);
         mockManagedProfile();
         ReflectionHelpers.setField(mController, "mLocationEnabler", mEnabler);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        when(mScreen.findPreference(any())).thenReturn(mPreference);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
         when(mPreference.isVisible()).thenReturn(true);
@@ -111,17 +113,6 @@ public class LocationForWorkPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_noManagedProfile_shouldReturnFalse() {
-        when(mUserManager.getUserProfiles()).thenReturn(new ArrayList<>());
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_hasManagedProfile_shouldReturnTrue() {
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
     public void onLocationModeChanged_disabledByAdmin_shouldDisablePreference() {
         mController.displayPreference(mScreen);
         final EnforcedAdmin admin = mock(EnforcedAdmin.class);
@@ -131,7 +122,6 @@ public class LocationForWorkPreferenceControllerTest {
         mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, false);
 
         verify(mPreference).setDisabledByAdmin(any());
-        verify(mPreference).setChecked(false);
     }
 
     @Test
@@ -144,7 +134,7 @@ public class LocationForWorkPreferenceControllerTest {
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
-        verify(mPreference).setSummary(R.string.switch_off_text);
+        verify(mPreference).setSummary(R.string.location_app_permission_summary_location_off);
     }
 
     @Test

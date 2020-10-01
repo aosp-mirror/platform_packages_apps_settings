@@ -46,9 +46,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
+import com.android.settings.testutils.shadow.ShadowSettingsLibUtils;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.After;
 import org.junit.Before;
@@ -66,7 +68,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+@Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
+        ShadowSettingsLibUtils.class})
 public class AccountPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -94,9 +97,10 @@ public class AccountPreferenceControllerTest {
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt()))
-            .thenReturn(new AuthenticatorDescription[0]);
+                .thenReturn(new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
-        mController = new AccountPreferenceController(mContext, mFragment, null, mAccountHelper);
+        mController = new AccountPreferenceController(mContext, mFragment, null, mAccountHelper,
+                ProfileSelectFragment.ProfileType.ALL);
     }
 
     @After
@@ -272,33 +276,33 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    public void updateRawDataToIndex_EnabledUser_shouldAddOne() {
+    public void updateDynamicRawDataToIndex_enabledUser_notManagedUser_shouldNotUpdate() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
-        mController.updateRawDataToIndex(data);
+        mController.updateDynamicRawDataToIndex(data);
 
-        assertThat(data.size()).isEqualTo(1);
+        assertThat(data.size()).isEqualTo(0);
     }
 
     @Test
-    public void updateRawDataToIndex_ManagedUser_shouldAddThree() {
+    public void updateDynamicRawDataToIndex_managedUser_shouldAddTwo() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
-        mController.updateRawDataToIndex(data);
+        mController.updateDynamicRawDataToIndex(data);
 
-        assertThat(data.size()).isEqualTo(3);
+        assertThat(data.size()).isEqualTo(2);
     }
 
     @Test
-    public void updateRawDataToIndex_DisallowRemove_shouldAddTwo() {
+    public void updateDynamicRawDataToIndex_disallowRemove_shouldAddOne() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
@@ -308,13 +312,13 @@ public class AccountPreferenceControllerTest {
                 eq(UserManager.DISALLOW_REMOVE_MANAGED_PROFILE), anyInt()))
                 .thenReturn(true);
 
-        mController.updateRawDataToIndex(data);
+        mController.updateDynamicRawDataToIndex(data);
 
-        assertThat(data.size()).isEqualTo(2);
+        assertThat(data.size()).isEqualTo(1);
     }
 
     @Test
-    public void updateRawDataToIndex_DisallowModify_shouldAddTwo() {
+    public void updateDynamicRawDataToIndex_disallowModify_shouldAddTwo() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
@@ -323,7 +327,7 @@ public class AccountPreferenceControllerTest {
         when(mAccountHelper.hasBaseUserRestriction(
                 eq(UserManager.DISALLOW_MODIFY_ACCOUNTS), anyInt())).thenReturn(true);
 
-        mController.updateRawDataToIndex(data);
+        mController.updateDynamicRawDataToIndex(data);
 
         assertThat(data.size()).isEqualTo(2);
     }
@@ -339,8 +343,8 @@ public class AccountPreferenceControllerTest {
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(accounts);
 
         Account[] accountType1 = {
-            new Account("Account11", "com.acct1"),
-            new Account("Account12", "com.acct1")
+                new Account("Account11", "com.acct1"),
+                new Account("Account12", "com.acct1")
         };
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
                 .thenReturn(accountType1);
@@ -533,8 +537,8 @@ public class AccountPreferenceControllerTest {
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(accounts);
 
         Account[] accountType1 = {
-            new Account("Acct11", "com.acct1"),
-            new Account("Acct12", "com.acct1")
+                new Account("Acct11", "com.acct1"),
+                new Account("Acct12", "com.acct1")
         };
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
                 .thenReturn(accountType1);
@@ -553,7 +557,7 @@ public class AccountPreferenceControllerTest {
         mController.onResume();
 
         // remove an account
-        accountType1 = new Account[] {new Account("Acct11", "com.acct1")};
+        accountType1 = new Account[]{new Account("Acct11", "com.acct1")};
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
                 .thenReturn(accountType1);
 
@@ -575,19 +579,19 @@ public class AccountPreferenceControllerTest {
         Account[] accounts = {new Account("Acct1", "com.acct1")};
         when(mAccountManager.getAccountsAsUser(1)).thenReturn(accounts);
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
-            .thenReturn(accounts);
+                .thenReturn(accounts);
 
         AuthenticatorDescription[] authDescs = {
-            new AuthenticatorDescription("com.acct1", "com.android.settings",
-                R.string.account_settings_title, 0 /* iconId */, 0 /* smallIconId */,
-                0 /* prefId */, false /* customTokens */)
+                new AuthenticatorDescription("com.acct1", "com.android.settings",
+                        R.string.account_settings_title, 0 /* iconId */, 0 /* smallIconId */,
+                        0 /* prefId */, false /* customTokens */)
         };
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
 
         AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
         when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class)))
-            .thenReturn(preferenceGroup);
+                .thenReturn(preferenceGroup);
 
         // First time resume will build the UI with no account
         mController.onResume();

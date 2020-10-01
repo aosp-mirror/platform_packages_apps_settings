@@ -17,7 +17,6 @@ package com.android.settings.datausage;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,13 +25,9 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable
 public class UnrestrictedDataAccess extends DashboardFragment {
@@ -117,17 +112,6 @@ public class UnrestrictedDataAccess extends DashboardFragment {
         return R.xml.unrestricted_data_access_settings;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.unrestricted_data_access_settings;
-                    result.add(sir);
-                    return result;
-                }
-            };
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.unrestricted_data_access_settings);
 }

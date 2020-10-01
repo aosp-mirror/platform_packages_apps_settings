@@ -9,6 +9,7 @@ import com.android.settings.Settings.TestingSettingsActivity;
 
 
 public class TestingSettingsBroadcastReceiver extends BroadcastReceiver {
+
     public TestingSettingsBroadcastReceiver() {
     }
 

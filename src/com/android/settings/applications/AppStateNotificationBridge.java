@@ -84,6 +84,9 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         for (AppEntry entry : apps) {
             NotificationsSentState stats =
                     map.get(getKey(UserHandle.getUserId(entry.info.uid), entry.info.packageName));
+            if (stats == null) {
+                stats = new NotificationsSentState();
+            }
             calculateAvgSentCounts(stats);
             addBlockStatus(entry, stats);
             entry.extraInfo = stats;

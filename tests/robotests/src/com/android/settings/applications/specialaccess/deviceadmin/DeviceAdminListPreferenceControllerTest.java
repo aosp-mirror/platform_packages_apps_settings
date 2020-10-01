@@ -33,37 +33,26 @@ import android.os.UserHandle;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class DeviceAdminListPreferenceControllerTest {
-
-    @Mock
-    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     private Context mContext;
-    private DeviceAdminListPreferenceController mController;
-    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
+        final LifecycleOwner lifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(lifecycleOwner);
 
-        mController = spy(new DeviceAdminListPreferenceController(mContext, "test_key")
-                .setFooterPreferenceMixin(mFooterPreferenceMixin));
-        mLifecycle.addObserver(mController);
+        mLifecycle.addObserver(new DeviceAdminListPreferenceController(mContext, "test_key"));
     }
 
     @Test

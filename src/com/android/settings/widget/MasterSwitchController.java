@@ -18,7 +18,10 @@ package com.android.settings.widget;
 
 import androidx.preference.Preference;
 
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /*
  * The switch controller that is used to update the switch widget in the MasterSwitchPreference
@@ -28,9 +31,12 @@ public class MasterSwitchController extends SwitchWidgetController implements
     Preference.OnPreferenceChangeListener {
 
     private final MasterSwitchPreference mPreference;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public MasterSwitchController(MasterSwitchPreference preference) {
         mPreference = preference;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(preference.getContext())
+                .getMetricsFeatureProvider();
     }
 
     @Override
@@ -65,7 +71,12 @@ public class MasterSwitchController extends SwitchWidgetController implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (mListener != null) {
-            return mListener.onSwitchToggled((Boolean) newValue);
+            final boolean result = mListener.onSwitchToggled((Boolean) newValue);
+            if (result) {
+                mMetricsFeatureProvider.logClickedPreference(preference,
+                        preference.getExtras().getInt(DashboardFragment.CATEGORY));
+            }
+            return result;
         }
         return false;
     }

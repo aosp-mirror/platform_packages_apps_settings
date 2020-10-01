@@ -29,18 +29,26 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_WHITELIST_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_RECENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WORK;
+import static com.android.settings.search.actionbar.SearchMenuController.MENU_SEARCH;
 
 import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
+import android.compat.annotation.ChangeId;
+import android.compat.annotation.LoggingOnly;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -68,6 +76,7 @@ import androidx.annotation.WorkerThread;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.compat.IPlatformCompat;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Settings.GamesStorageActivity;
@@ -84,6 +93,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
+import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
 import com.android.settings.applications.AppStateOverlayBridge;
@@ -92,19 +102,19 @@ import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
-import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
+import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.fuelgauge.HighPowerDetail;
-import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
@@ -135,7 +145,7 @@ public class ManageApplications extends InstrumentedFragment
         implements View.OnClickListener, OnItemSelectedListener, SearchView.OnQueryTextListener {
 
     static final String TAG = "ManageApplications";
-    static final boolean DEBUG = false;
+    static final boolean DEBUG = Build.IS_DEBUGGABLE;
 
     // Intent extras.
     public static final String EXTRA_CLASSNAME = "classname";
@@ -143,7 +153,6 @@ public class ManageApplications extends InstrumentedFragment
     public static final String EXTRA_VOLUME_UUID = "volumeUuid";
     public static final String EXTRA_VOLUME_NAME = "volumeName";
     public static final String EXTRA_STORAGE_TYPE = "storageType";
-    public static final String EXTRA_WORK_ONLY = "workProfileOnly";
     public static final String EXTRA_WORK_ID = "workId";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
@@ -151,7 +160,8 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_HAS_ENTRIES = "hasEntries";
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
     private static final String EXTRA_FILTER_TYPE = "filterType";
-    private static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
+    @VisibleForTesting
+    static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
 
     // attributes used as keys when passing values to AppInfoDashboardFragment activity
     public static final String APP_CHG = "chg";
@@ -170,7 +180,15 @@ public class ManageApplications extends InstrumentedFragment
     public static final int STORAGE_TYPE_LEGACY = 2; // Show apps even if they can be categorized.
     public static final int STORAGE_TYPE_PHOTOS_VIDEOS = 3;
 
-    private static final int NO_USER_SPECIFIED = -1;
+    /**
+     * Intents with action {@code android.settings.MANAGE_APP_OVERLAY_PERMISSION}
+     * and data URI scheme {@code package} don't go to the app-specific screen for managing the
+     * permission anymore. Instead, they redirect to this screen for managing all the apps that have
+     * requested such permission.
+     */
+    @ChangeId
+    @LoggingOnly
+    private static final long CHANGE_RESTRICT_SAW_INTENT = 135920175L;
 
     // sort order
     @VisibleForTesting
@@ -209,6 +227,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_MOVIES = 10;
     public static final int LIST_TYPE_PHOTOGRAPHY = 11;
     public static final int LIST_TYPE_WIFI_ACCESS = 13;
+    public static final int LIST_MANAGE_EXTERNAL_STORAGE = 14;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -235,6 +254,7 @@ public class ManageApplications extends InstrumentedFragment
     private int mStorageType;
     private boolean mIsWorkOnly;
     private int mWorkUserId;
+    private boolean mIsPersonalOnly;
     private View mEmptyView;
     private int mFilterType;
 
@@ -243,6 +263,7 @@ public class ManageApplications extends InstrumentedFragment
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         final Activity activity = getActivity();
+        mUserManager = activity.getSystemService(UserManager.class);
         mApplicationsState = ApplicationsState.getInstance(activity.getApplication());
 
         Intent intent = activity.getIntent();
@@ -274,6 +295,8 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(OverlaySettingsActivity.class.getName())) {
             mListType = LIST_TYPE_OVERLAY;
             screenTitle = R.string.system_alert_window_settings;
+
+            reportIfRestrictedSawIntent(intent);
         } else if (className.equals(WriteSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_WRITE_SETTINGS;
             screenTitle = R.string.write_settings;
@@ -293,11 +316,13 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
             mListType = LIST_TYPE_WIFI_ACCESS;
             screenTitle = R.string.change_wifi_state_title;
+        } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
+            mListType = LIST_MANAGE_EXTERNAL_STORAGE;
+            screenTitle = R.string.manage_external_storage_title;
         } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
-            mUserManager = UserManager.get(getContext());
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
             screenTitle = R.string.app_notifications_title;
@@ -309,8 +334,15 @@ public class ManageApplications extends InstrumentedFragment
         }
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
         mFilter = appFilterRegistry.get(appFilterRegistry.getDefaultFilterType(mListType));
-        mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
-        mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
+        mIsPersonalOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.ProfileType.PERSONAL : false;
+        mIsWorkOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.ProfileType.WORK : false;
+        mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : UserHandle.myUserId();
+        if (mIsWorkOnly && mWorkUserId == UserHandle.myUserId()) {
+            mWorkUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+        }
+
         mExpandSearch = activity.getIntent().getBooleanExtra(EXTRA_EXPAND_SEARCH_VIEW, false);
 
         if (savedInstanceState != null) {
@@ -327,6 +359,31 @@ public class ManageApplications extends InstrumentedFragment
 
         if (screenTitle > 0) {
             activity.setTitle(screenTitle);
+        }
+    }
+
+    private void reportIfRestrictedSawIntent(Intent intent) {
+        try {
+            Uri data = intent.getData();
+            if (data == null || !TextUtils.equals("package", data.getScheme())) {
+                // Not a restricted intent
+                return;
+            }
+            IBinder activityToken = getActivity().getActivityToken();
+            int callingUid = ActivityManager.getService().getLaunchedFromUid(activityToken);
+            if (callingUid == -1) {
+                Log.w(TAG, "Error obtaining calling uid");
+                return;
+            }
+            IPlatformCompat platformCompat = IPlatformCompat.Stub.asInterface(
+                    ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
+            if (platformCompat == null) {
+                Log.w(TAG, "Error obtaining IPlatformCompat service");
+                return;
+            }
+            platformCompat.reportChangeByUid(CHANGE_RESTRICT_SAW_INTENT, callingUid);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error reporting SAW intent restriction", e);
         }
     }
 
@@ -354,7 +411,7 @@ public class ManageApplications extends InstrumentedFragment
                 mApplications.mHasReceivedBridgeCallback =
                         savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
             }
-            int userId = mIsWorkOnly ? mWorkUserId : UserHandle.getUserId(mCurrentUid);
+            int userId = mIsWorkOnly ? mWorkUserId : UserHandle.myUserId();
             if (mStorageType == STORAGE_TYPE_MUSIC) {
                 Context context = getContext();
                 mApplications.setExtraViewController(
@@ -405,9 +462,12 @@ public class ManageApplications extends InstrumentedFragment
         pinnedHeader.addView(mSpinnerHeader, 0);
 
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
-        mFilterAdapter.enableFilter(appFilterRegistry.getDefaultFilterType(mListType));
+        final int filterType = appFilterRegistry.getDefaultFilterType(mListType);
+        mFilterAdapter.enableFilter(filterType);
+
         if (mListType == LIST_TYPE_MAIN) {
-            if (UserManager.get(getActivity()).getUserProfiles().size() > 1) {
+            if (UserManager.get(getActivity()).getUserProfiles().size() > 1 && !mIsWorkOnly
+                    && !mIsPersonalOnly) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
             }
@@ -422,14 +482,7 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
         }
 
-        AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
-        if (mIsWorkOnly) {
-            final AppFilter workFilter = appFilterRegistry.get(FILTER_APPS_WORK).getFilter();
-            compositeFilter = new CompoundFilter(compositeFilter, workFilter);
-        }
-        if (compositeFilter != null) {
-            mApplications.setCompositeFilter(compositeFilter);
-        }
+        setCompositeFilter();
     }
 
     @VisibleForTesting
@@ -451,7 +504,6 @@ public class ManageApplications extends InstrumentedFragment
         } else if (listType == LIST_TYPE_PHOTOGRAPHY) {
             return new CompoundFilter(ApplicationsState.FILTER_PHOTOS, filter);
         }
-
         return null;
     }
 
@@ -485,6 +537,8 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.MANAGE_EXTERNAL_SOURCES;
             case LIST_TYPE_WIFI_ACCESS:
                 return SettingsEnums.CONFIGURE_WIFI;
+            case LIST_MANAGE_EXTERNAL_STORAGE:
+                return SettingsEnums.MANAGE_EXTERNAL_STORAGE;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
         }
@@ -505,11 +559,13 @@ public class ManageApplications extends InstrumentedFragment
         super.onSaveInstanceState(outState);
         mResetAppsHelper.onSaveInstanceState(outState);
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
+        outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
-        outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
-        outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
+        if (mSearchView != null) {
+            outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+        }
         if (mApplications != null) {
             mApplications.onSaveInstanceState(outState);
         }
@@ -548,6 +604,21 @@ public class ManageApplications extends InstrumentedFragment
         }
     }
 
+    private void setCompositeFilter() {
+        AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
+        if (compositeFilter == null) {
+            compositeFilter = mFilter.getFilter();
+        }
+        if (mIsWorkOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter, ApplicationsState.FILTER_WORK);
+        }
+        if (mIsPersonalOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter,
+                    ApplicationsState.FILTER_PERSONAL);
+        }
+        mApplications.setCompositeFilter(compositeFilter);
+    }
+
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
         switch (mListType) {
@@ -584,6 +655,10 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_WIFI_ACCESS:
                 startAppInfoFragment(ChangeWifiStateDetails.class,
                         R.string.change_wifi_state_title);
+                break;
+            case LIST_MANAGE_EXTERNAL_STORAGE:
+                startAppInfoFragment(ManageExternalStorageDetails.class,
+                        R.string.manage_external_storage_title);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -658,6 +733,8 @@ public class ManageApplications extends InstrumentedFragment
                 return R.string.help_uri_apps_photography;
             case LIST_TYPE_WIFI_ACCESS:
                 return R.string.help_uri_apps_wifi_access;
+            case LIST_MANAGE_EXTERNAL_STORAGE:
+                return R.string.help_uri_manage_external_storage;
             default:
             case LIST_TYPE_MAIN:
                 return R.string.help_uri_apps;
@@ -685,6 +762,10 @@ public class ManageApplications extends InstrumentedFragment
         // Hide notification menu items, because sorting happens when filtering
         mOptionsMenu.findItem(R.id.sort_order_recent_notification).setVisible(false);
         mOptionsMenu.findItem(R.id.sort_order_frequent_notification).setVisible(false);
+        final MenuItem searchItem = mOptionsMenu.findItem(MENU_SEARCH);
+        if (searchItem != null) {
+            searchItem.setVisible(false);
+        }
     }
 
     @Override
@@ -746,6 +827,7 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mFilter = mFilterAdapter.getFilter(position);
+        setCompositeFilter();
         mApplications.setFilter(mFilter);
 
         if (DEBUG) {
@@ -972,6 +1054,8 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateInstallAppsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_WIFI_ACCESS) {
                 mExtraInfoBridge = new AppStateChangeWifiStateBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_MANAGE_EXTERNAL_STORAGE) {
+                mExtraInfoBridge = new AppStateManageExternalStorageBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1148,14 +1232,10 @@ public class ManageApplications extends InstrumentedFragment
                 comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
             }
 
-            filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
-            AppFilter finalFilterObj = filterObj;
+            final AppFilter finalFilterObj = new CompoundFilter(filterObj,
+                    ApplicationsState.FILTER_NOT_HIDE);
             ThreadUtils.postOnBackgroundThread(() -> {
-                final ArrayList<AppEntry> entries = mSession.rebuild(finalFilterObj,
-                        comparatorObj, false);
-                if (entries != null) {
-                    ThreadUtils.postOnMainThread(() -> onRebuildComplete(entries));
-                }
+                mSession.rebuild(finalFilterObj, comparatorObj, false);
             });
         }
 
@@ -1165,7 +1245,7 @@ public class ManageApplications extends InstrumentedFragment
                 mSearchFilter = new SearchFilter();
             }
             // If we haven't load apps list completely, don't filter anything.
-            if(mOriginalEntries == null) {
+            if (mOriginalEntries == null) {
                 Log.w(TAG, "Apps haven't loaded completely yet, so nothing can be filtered");
                 return;
             }
@@ -1205,7 +1285,7 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public void onRebuildComplete(ArrayList<AppEntry> entries) {
             if (DEBUG) {
-                Log.d(TAG, "onRebuildComplete");
+                Log.d(TAG, "onRebuildComplete size=" + entries.size());
             }
             final int filterType = mAppFilter.getFilterType();
             if (filterType == FILTER_APPS_POWER_WHITELIST ||
@@ -1381,7 +1461,10 @@ public class ManageApplications extends InstrumentedFragment
                 ApplicationsState.AppEntry entry = mEntries.get(position);
                 synchronized (entry) {
                     holder.setTitle(entry.label);
-                    holder.setIcon(mIconDrawableFactory.getBadgedIcon(entry.info));
+                    mState.ensureLabelDescription(entry);
+                    holder.itemView.setContentDescription(entry.labelDescription);
+                    mState.ensureIcon(entry);
+                    holder.setIcon(entry.icon);
                     updateSummary(holder, entry);
                     updateSwitch(holder, entry);
                     holder.updateDisableView(entry.info);
@@ -1426,6 +1509,9 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 case LIST_TYPE_WIFI_ACCESS:
                     holder.setSummary(ChangeWifiStateDetails.getSummary(mContext, entry));
+                    break;
+                case LIST_MANAGE_EXTERNAL_STORAGE:
+                    holder.setSummary(ManageExternalStorageDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
@@ -1515,38 +1601,4 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
     }
-
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mLoader;
-
-        private SummaryProvider(Context context, SummaryLoader loader) {
-            mContext = context;
-            mLoader = loader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
-                        mContext.getPackageManager()) {
-                    @Override
-                    protected void onCountComplete(int num) {
-                        mLoader.setSummary(SummaryProvider.this,
-                                mContext.getString(R.string.apps_summary, num));
-                    }
-                }.execute();
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 }

@@ -106,9 +106,6 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
 
     @Override
     public void updateState(Preference preference) {
-        if (mBluetoothA2dp == null) {
-            return;
-        }
         BluetoothDevice activeDevice = mBluetoothA2dp.getActiveDevice();
         if (activeDevice == null || getCodecConfig(activeDevice) == null || mPreference == null) {
             return;
@@ -186,9 +183,6 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
     @VisibleForTesting
     void setCodecConfigPreference(BluetoothDevice device,
             BluetoothCodecConfig config) {
-        if (mBluetoothA2dp == null) {
-            return;
-        }
         BluetoothDevice bluetoothDevice =
                 (device != null) ? device : mBluetoothA2dp.getActiveDevice();
         if (bluetoothDevice == null) {
