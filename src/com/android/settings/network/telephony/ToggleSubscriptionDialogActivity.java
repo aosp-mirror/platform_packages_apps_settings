@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -35,15 +34,17 @@ import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
 
 /** This dialog activity handles both eSIM and pSIM subscriptions enabling and disabling. */
 public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogActivity
-        implements SidecarFragment.Listener {
+        implements SidecarFragment.Listener, ConfirmDialogFragment.OnConfirmListener {
 
     private static final String TAG = "ToggleSubscriptionDialogActivity";
-
-    private static final String ARG_SUB_ID = "sub_id";
+    // Arguments
     private static final String ARG_enable = "enable";
+    // Dialog tags
+    private static final int DIALOG_TAG_DISABLE_SIM_CONFIRMATION = 1;
 
     /**
      * Returns an intent of ToggleSubscriptionDialogActivity.
+     *
      * @param context The context used to start the ToggleSubscriptionDialogActivity.
      * @param subId The subscription ID of the subscription needs to be toggled.
      * @param enable Whether the activity should enable or disable the subscription.
@@ -55,7 +56,6 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         return intent;
     }
 
-    private SubscriptionManager mSubscriptionManager;
     private SubscriptionInfo mSubInfo;
     private SwitchToEuiccSubscriptionSidecar mSwitchToEuiccSubscriptionSidecar;
     private AlertDialog mToggleSimConfirmDialog;
@@ -67,7 +67,6 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
         Intent intent = getIntent();
         int subId = intent.getIntExtra(ARG_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        mSubscriptionManager = getSystemService(SubscriptionManager.class);
 
         UserManager userManager = getSystemService(UserManager.class);
         if (!userManager.isAdminUser()) {
@@ -87,10 +86,12 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 SwitchToEuiccSubscriptionSidecar.get(getFragmentManager());
         mEnable = intent.getBooleanExtra(ARG_enable, true);
 
-        if (mEnable) {
-            handleEnablingSubAction();
-        } else {
-            handleDisablingSubAction();
+        if (savedInstanceState == null) {
+            if (mEnable) {
+                handleEnablingSubAction();
+            } else {
+                showDisableSimConfirmDialog();
+            }
         }
     }
 
@@ -110,6 +111,31 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     public void onStateChange(SidecarFragment fragment) {
         if (fragment == mSwitchToEuiccSubscriptionSidecar) {
             handleSwitchToEuiccSubscriptionSidecarStateChange();
+        }
+    }
+
+    @Override
+    public void onConfirm(int tag, boolean confirmed) {
+        if (!confirmed) {
+            finish();
+            return;
+        }
+
+        switch (tag) {
+            case DIALOG_TAG_DISABLE_SIM_CONFIRMATION:
+                if (mSubInfo.isEmbedded()) {
+                    Log.i(TAG, "Disabling the eSIM profile.");
+                    showProgressDialog(
+                            getString(R.string.privileged_action_disable_sub_dialog_progress));
+                    mSwitchToEuiccSubscriptionSidecar.run(
+                            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                    return;
+                }
+                Log.i(TAG, "Disabling the pSIM profile.");
+                break;
+            default:
+                Log.e(TAG, "Unrecognized confirmation dialog tag: " + tag);
+                break;
         }
     }
 
@@ -134,8 +160,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 dismissProgressDialog();
                 showErrorDialog(
                         getString(R.string.privileged_action_disable_fail_title),
-                        getString(R.string.privileged_action_disable_fail_text),
-                        (dialog, which) -> finish());
+                        getString(R.string.privileged_action_disable_fail_text));
                 break;
         }
     }
@@ -146,45 +171,24 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         // TODO(b/160819390): Implement enabling eSIM/pSIM profile.
     }
 
-    /* Handles the disabling SIM action. */
-    private void handleDisablingSubAction() {
-        showToggleSimConfirmDialog(
-                (dialog, which) -> {
-                    if (mSubInfo.isEmbedded()) {
-                        Log.i(TAG, "Disabling the eSIM profile.");
-                        showProgressDialog(
-                                getString(R.string.privileged_action_disable_sub_dialog_progress));
-                        mSwitchToEuiccSubscriptionSidecar.run(
-                                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-                        return;
-                    }
-                    Log.i(TAG, "Disabling the pSIM profile.");
-                    // TODO(b/160819390): Implement disabling pSIM profile.
-                });
-    }
-
     /* Displays the SIM toggling confirmation dialog. */
-    private void showToggleSimConfirmDialog(
-            DialogInterface.OnClickListener positiveOnClickListener) {
-        if (mToggleSimConfirmDialog == null) {
-            mToggleSimConfirmDialog =
-                    new AlertDialog.Builder(this)
-                            .setTitle(getToggleSimConfirmDialogTitle())
-                            .setPositiveButton(
-                                    R.string.yes,
-                                    (dialog, which) -> {
-                                        positiveOnClickListener.onClick(dialog, which);
-                                        dismissToggleSimConfirmDialog();
-                                    })
-                            .setNegativeButton(
-                                    R.string.cancel,
-                                    (dialog, which) -> {
-                                        dismissToggleSimConfirmDialog();
-                                        finish();
-                                    })
-                            .create();
-        }
-        mToggleSimConfirmDialog.show();
+    private void showDisableSimConfirmDialog() {
+        String title =
+                mSubInfo == null || TextUtils.isEmpty(mSubInfo.getDisplayName())
+                        ? getString(
+                                R.string.privileged_action_disable_sub_dialog_title_without_carrier)
+                        : getString(
+                                R.string.privileged_action_disable_sub_dialog_title,
+                                mSubInfo.getDisplayName());
+
+        ConfirmDialogFragment.show(
+                this,
+                ConfirmDialogFragment.OnConfirmListener.class,
+                DIALOG_TAG_DISABLE_SIM_CONFIRMATION,
+                title,
+                null,
+                getString(R.string.yes),
+                getString(R.string.cancel));
     }
 
     /* Dismisses the SIM toggling confirmation dialog. */
@@ -192,18 +196,5 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         if (mToggleSimConfirmDialog != null) {
             mToggleSimConfirmDialog.dismiss();
         }
-    }
-
-    /* Returns the title of toggling SIM confirmation dialog. */
-    private String getToggleSimConfirmDialogTitle() {
-        if (mEnable) {
-            // TODO(b/160819390): Handle the case for enabling SIM.
-            return null;
-        }
-        return mSubInfo == null || TextUtils.isEmpty(mSubInfo.getDisplayName())
-                ? getString(R.string.privileged_action_disable_sub_dialog_title_without_carrier)
-                : getString(
-                        R.string.privileged_action_disable_sub_dialog_title,
-                        mSubInfo.getDisplayName());
     }
 }
