@@ -982,7 +982,7 @@
     <string name="lost_internet_access_switch" msgid="7935665847081706202">"मोबाइल पर स्विच करें"</string>
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"वाई-फ़ाई पर रहें"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"फिर कभी ना दिखाएं"</string>
-    <string name="wifi_connect" msgid="2481467560349907397">"जोड़ दें"</string>
+    <string name="wifi_connect" msgid="2481467560349907397">"कनेक्ट करें"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"वाई-फ़ाई चालू किया गया"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> से कनेक्ट किया गया"</string>
     <string name="wifi_connecting_to_message" msgid="3153205024060064551">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> से कनेक्ट हो रहा है"</string>
@@ -1030,8 +1030,10 @@
     <string name="wifi_ip_settings_invalid_gateway" msgid="1174931247370931239">"कोई मान्‍य गेटवे पता लिखें."</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="1757402215999845975">"कोई मान्‍य DNS पता लिखें."</string>
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="5980808986926987299">"0 और 32 के बीच की लंबाई का नेटवर्क उपसर्ग लिखें."</string>
-    <string name="wifi_dns1" msgid="6462967242512284778">"DNS 1"</string>
-    <string name="wifi_dns2" msgid="8494337355389723965">"DNS 2"</string>
+    <!-- no translation found for wifi_dns1 (6764769531843748514) -->
+    <skip />
+    <!-- no translation found for wifi_dns2 (7273133202625326148) -->
+    <skip />
     <string name="wifi_gateway" msgid="3699227808616416759">"गेटवे"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"नेटवर्क उपसर्ग लंबाई"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"वाई-फ़ाई डायरेक्ट"</string>
@@ -3597,12 +3599,12 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> की सभी सूचनाएं"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ज़रूरत के हिसाब से सूचनाएं"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">रोज़ ~<xliff:g id="NUMBER_1">%d</xliff:g> सूचनाएं</item>
+      <item quantity="one">रोज़~<xliff:g id="NUMBER_1">%d</xliff:g> सूचनाएं</item>
       <item quantity="other">रोज़ ~<xliff:g id="NUMBER_1">%d</xliff:g> सूचनाएं</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">हर हफ़्ते ~<xliff:g id="NUMBER_1">%d</xliff:g>सूचनाएं</item>
-      <item quantity="other">हर हफ़्ते ~<xliff:g id="NUMBER_1">%d</xliff:g>सूचनाएं</item>
+      <item quantity="one">हर हफ़्ते~<xliff:g id="NUMBER_1">%d</xliff:g> सूचना</item>
+      <item quantity="other">हर हफ़्ते~<xliff:g id="NUMBER_1">%d</xliff:g> सूचनाएं</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"कभी नहीं"</string>
     <string name="manage_notification_access_title" msgid="4714320299084782521">"सूचना का ऐक्सेस"</string>
@@ -4833,6 +4835,11 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> से कनेक्ट होने पर उपलब्ध नहीं है"</string>
     <string name="see_more" msgid="7499355691042812723">"ज़्यादा देखें"</string>
     <string name="see_less" msgid="2642392725363552793">"कम देखें"</string>
+    <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> को बंद करना चाहते हैं?"</string>
+    <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"क्या आप सिम बंद करना चाहते हैं?"</string>
+    <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"सिम बंद किया जा रहा है<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सकता"</string>
+    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"कोई गड़बड़ी हुई, जिसकी वजह से आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सका."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"डिवाइस से कनेक्ट करें"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"आपके डिवाइस से कनेक्ट होने के लिए, <xliff:g id="APPNAME">%1$s</xliff:g> ऐप्लिकेशन को किसी वाई-फ़ाई नेटवर्क से कुछ समय के लिए जुड़ना होगा"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"कोई डिवाइस नहीं मिला देख लें कि डिवाइस चालू हों और कनेक्ट किए जा सकते हों."</string>

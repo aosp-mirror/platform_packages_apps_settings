@@ -237,7 +237,7 @@
     <string name="settings_shortcut" msgid="8548239727871847171">"Settings shortcut"</string>
     <string name="airplane_mode" msgid="3196085857882526817">"Airplane mode"</string>
     <string name="wireless_networks_settings_title" msgid="8557542379234105369">"Wireless &amp; networks"</string>
-    <string name="radio_controls_summary" msgid="9028430178697624501">"Manage Wi‑Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs"</string>
+    <string name="radio_controls_summary" msgid="9028430178697624501">"Manage Wi‑Fi, Bluetooth, Airplane mode, mobile networks and VPNs"</string>
     <string name="cellular_data_summary" msgid="6551434804367912367">"Allow data usage over mobile network"</string>
     <string name="allow_data_usage_title" msgid="2645963379925196671">"Allow data usage when roaming"</string>
     <string name="roaming" msgid="3055365654530847985">"Roaming"</string>
@@ -1030,8 +1030,8 @@
     <string name="wifi_ip_settings_invalid_gateway" msgid="1174931247370931239">"Please type a valid gateway address."</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="1757402215999845975">"Type a valid DNS address."</string>
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="5980808986926987299">"Type a network prefix length between 0 and 32."</string>
-    <string name="wifi_dns1" msgid="6462967242512284778">"DNS 1"</string>
-    <string name="wifi_dns2" msgid="8494337355389723965">"DNS 2"</string>
+    <string name="wifi_dns1" msgid="6764769531843748514">"DNS 1 (unless overridden by private DNS)"</string>
+    <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (unless overridden by private DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Network prefix length"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
@@ -1739,8 +1739,8 @@
     <string name="location_street_level" product="tablet" msgid="865953107414742784">"Let apps use GPS on your tablet to pinpoint your location"</string>
     <string name="location_street_level" product="default" msgid="3813836654645896185">"Let apps use GPS on your phone to pinpoint your location"</string>
     <string name="assisted_gps" msgid="1714546606018821498">"Use assisted GPS"</string>
-    <string name="assisted_gps_enabled" msgid="6220188450779319248">"Use server to assist GPS (un-tick to reduce network usage)"</string>
-    <string name="assisted_gps_disabled" msgid="1062496503892849">"Use server to assist GPS (un-tick to improve GPS performance)"</string>
+    <string name="assisted_gps_enabled" msgid="6220188450779319248">"Use server to assist GPS (uncheck to reduce network usage)"</string>
+    <string name="assisted_gps_disabled" msgid="1062496503892849">"Use server to assist GPS (uncheck to improve GPS performance)"</string>
     <string name="use_location_title" msgid="1345594777162897654">"Location &amp; Google search"</string>
     <string name="use_location_summary" msgid="377322574549729921">"Let Google use your location to improve search results and other services"</string>
     <string name="location_access_title" msgid="4052667453826272040">"Access to my location"</string>
@@ -4833,6 +4833,11 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Unavailable when connected to <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"See more"</string>
     <string name="see_less" msgid="2642392725363552793">"See less"</string>
+    <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Turn off <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Turn off SIM?"</string>
+    <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Turning off SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Can\'t disable operator"</string>
+    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Something went wrong and your operator could not be disabled."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Connect to device"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> app wants to use a temporary Wi‑Fi network to connect to your device"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"No devices found. Make sure that devices are turned on and available to connect."</string>
