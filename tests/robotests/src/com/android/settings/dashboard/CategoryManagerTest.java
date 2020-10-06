@@ -67,7 +67,7 @@ public class CategoryManagerTest {
 
     @Test
     public void getInstance_shouldBeSingleton() {
-        assertThat(mCategoryManager).isSameAs(CategoryManager.get(mContext));
+        assertThat(mCategoryManager).isSameInstanceAs(CategoryManager.get(mContext));
     }
 
     @Test
@@ -147,9 +147,9 @@ public class CategoryManagerTest {
         mCategoryManager.sortCategories(RuntimeEnvironment.application, mCategoryByKeyMap);
 
         // Verify they are now sorted.
-        assertThat(category.getTile(0)).isSameAs(tile3);
-        assertThat(category.getTile(1)).isSameAs(tile1);
-        assertThat(category.getTile(2)).isSameAs(tile2);
+        assertThat(category.getTile(0)).isSameInstanceAs(tile3);
+        assertThat(category.getTile(1)).isSameInstanceAs(tile1);
+        assertThat(category.getTile(2)).isSameInstanceAs(tile2);
     }
 
     @Test
@@ -170,9 +170,9 @@ public class CategoryManagerTest {
         mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
 
         // Verify they are now sorted.
-        assertThat(category.getTile(0)).isSameAs(tile2);
-        assertThat(category.getTile(1)).isSameAs(tile1);
-        assertThat(category.getTile(2)).isSameAs(tile3);
+        assertThat(category.getTile(0)).isSameInstanceAs(tile2);
+        assertThat(category.getTile(1)).isSameInstanceAs(tile1);
+        assertThat(category.getTile(2)).isSameInstanceAs(tile3);
     }
 
     @Test
@@ -192,9 +192,9 @@ public class CategoryManagerTest {
         mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
 
         // Verify the sorting order is not changed
-        assertThat(category.getTile(0)).isSameAs(tile1);
-        assertThat(category.getTile(1)).isSameAs(tile2);
-        assertThat(category.getTile(2)).isSameAs(tile3);
+        assertThat(category.getTile(0)).isSameInstanceAs(tile1);
+        assertThat(category.getTile(1)).isSameInstanceAs(tile2);
+        assertThat(category.getTile(2)).isSameInstanceAs(tile3);
     }
 
     @Test
@@ -217,10 +217,10 @@ public class CategoryManagerTest {
         mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
 
         // Verify the sorting order is not changed
-        assertThat(category.getTile(0)).isSameAs(tile1);
-        assertThat(category.getTile(1)).isSameAs(tile2);
-        assertThat(category.getTile(2)).isSameAs(tile3);
-        assertThat(category.getTile(3)).isSameAs(tile4);
+        assertThat(category.getTile(0)).isSameInstanceAs(tile1);
+        assertThat(category.getTile(1)).isSameInstanceAs(tile2);
+        assertThat(category.getTile(2)).isSameInstanceAs(tile3);
+        assertThat(category.getTile(3)).isSameInstanceAs(tile4);
     }
 
     @Test
@@ -242,9 +242,9 @@ public class CategoryManagerTest {
         mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
 
         // Verify the sorting order is internal first, follow by package name ordering
-        assertThat(category.getTile(0)).isSameAs(tile2);
-        assertThat(category.getTile(1)).isSameAs(tile3);
-        assertThat(category.getTile(2)).isSameAs(tile1);
+        assertThat(category.getTile(0)).isSameInstanceAs(tile2);
+        assertThat(category.getTile(1)).isSameInstanceAs(tile3);
+        assertThat(category.getTile(2)).isSameInstanceAs(tile1);
     }
 
     @Test

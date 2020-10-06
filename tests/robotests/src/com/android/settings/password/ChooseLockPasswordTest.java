@@ -33,6 +33,7 @@ import static com.android.settings.password.ChooseLockGeneric.CONFIRM_CREDENTIAL
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -92,18 +93,16 @@ public class ChooseLockPasswordTest {
                 .setUserId(123)
                 .build();
 
-        assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true))
-                .named("EXTRA_KEY_HAS_CHALLENGE")
+        assertWithMessage("EXTRA_KEY_HAS_CHALLENGE").that(intent
+                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true))
                 .isFalse();
-        assertThat((LockscreenCredential) intent.getParcelableExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
-                .named("EXTRA_KEY_PASSWORD")
+        assertWithMessage("EXTRA_KEY_PASSWORD").that(
+                (LockscreenCredential) intent.getParcelableExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
                 .isEqualTo(LockscreenCredential.createPassword("password"));
-        assertThat(intent.getIntExtra(PASSWORD_TYPE_KEY, 0))
-                .named("PASSWORD_TYPE_KEY")
+        assertWithMessage("PASSWORD_TYPE_KEY").that(intent.getIntExtra(PASSWORD_TYPE_KEY, 0))
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
-        assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
-                .named("EXTRA_USER_ID")
+        assertWithMessage("EXTRA_USER_ID").that(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .isEqualTo(123);
     }
 
@@ -115,17 +114,15 @@ public class ChooseLockPasswordTest {
                 .setUserId(123)
                 .build();
 
-        assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false))
-                .named("EXTRA_KEY_HAS_CHALLENGE")
+        assertWithMessage("EXTRA_KEY_HAS_CHALLENGE").that(intent
+                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false))
                 .isTrue();
-        assertThat(intent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L))
-                .named("EXTRA_KEY_CHALLENGE")
+        assertWithMessage("EXTRA_KEY_CHALLENGE").that(intent
+                .getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L))
                 .isEqualTo(12345L);
-        assertThat(intent.getIntExtra(PASSWORD_TYPE_KEY, 0))
-                .named("PASSWORD_TYPE_KEY")
+        assertWithMessage("PASSWORD_TYPE_KEY").that(intent.getIntExtra(PASSWORD_TYPE_KEY, 0))
                 .isEqualTo(PASSWORD_QUALITY_ALPHANUMERIC);
-        assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
-                .named("EXTRA_USER_ID")
+        assertWithMessage("EXTRA_USER_ID").that(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .isEqualTo(123);
     }
 
@@ -153,12 +150,12 @@ public class ChooseLockPasswordTest {
                 .setProfileToUnify(23, LockscreenCredential.createNone())
                 .build();
 
-        assertThat(intent.getIntExtra(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 0))
-                .named("EXTRA_KEY_UNIFICATION_PROFILE_ID")
+        assertWithMessage("EXTRA_KEY_UNIFICATION_PROFILE_ID").that(
+                intent.getIntExtra(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 0))
                 .isEqualTo(23);
-        assertThat((LockscreenCredential) intent.getParcelableExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL))
-                .named("EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL")
+        assertWithMessage("EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL").that(
+                (LockscreenCredential) intent.getParcelableExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL))
                 .isNotNull();
     }
 

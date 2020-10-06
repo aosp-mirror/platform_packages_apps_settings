@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -115,7 +116,7 @@ public class SetupChooseLockPasswordTest {
         activity.findViewById(R.id.screen_lock_options).performClick();
         AlertDialog latestAlertDialog = (AlertDialog) ShadowDialog.getLatestDialog();
         int count = latestAlertDialog.getListView().getCount();
-        assertThat(count).named("List items shown").isEqualTo(3);
+        assertWithMessage("List items shown").that(count).isEqualTo(3);
     }
 
     @Test
@@ -141,7 +142,7 @@ public class SetupChooseLockPasswordTest {
         assertThat(nextStartedActivity).isNotNull();
         assertThat(nextStartedActivity.getBooleanExtra(
                 ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false)).isTrue();
-        assertThat(nextStartedActivity.getStringExtra("foo")).named("Foo extra")
+        assertWithMessage("Foo extra").that(nextStartedActivity.getStringExtra("foo"))
                 .isEqualTo("bar");
     }
 
