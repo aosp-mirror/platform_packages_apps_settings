@@ -122,7 +122,7 @@ public class RemoteMediaSlice implements CustomSliceable {
                     .setValue(info.getVolume()));
 
             final boolean isMediaOutputDisabled =
-                    Utils.isMediaOutputDisabled(mRouterManager, info.getClientPackageName());
+                    getWorker().shouldDisableMediaOutput(info.getClientPackageName());
             final SpannableString spannableTitle = new SpannableString(
                     TextUtils.isEmpty(appName) ? "" : appName);
             spannableTitle.setSpan(new ForegroundColorSpan(
