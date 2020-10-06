@@ -54,7 +54,7 @@ public class TimeZoneDataTest {
         when(countryTimeZones.getTimeZoneMappings()).thenReturn(emptyList());
         when(mCountryZonesFinder.lookupCountryTimeZones("US")).thenReturn(countryTimeZones);
         assertThat(timeZoneData.lookupCountryTimeZones("US").getCountryTimeZones())
-                .isSameAs(countryTimeZones);
+                .isSameInstanceAs(countryTimeZones);
     }
 
     @Test

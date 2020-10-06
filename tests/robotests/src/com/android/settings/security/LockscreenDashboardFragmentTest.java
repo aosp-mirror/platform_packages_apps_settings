@@ -74,7 +74,7 @@ public class LockscreenDashboardFragmentTest {
         List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(RuntimeEnvironment.application,
                 mTestFragment.getPreferenceScreenResId());
 
-        assertThat(keys).containsAllOf(LockscreenDashboardFragment.KEY_LOCK_SCREEN_NOTIFICATON,
+        assertThat(keys).containsAtLeast(LockscreenDashboardFragment.KEY_LOCK_SCREEN_NOTIFICATON,
                 LockscreenDashboardFragment.KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE,
                 LockscreenDashboardFragment.KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE_HEADER);
     }

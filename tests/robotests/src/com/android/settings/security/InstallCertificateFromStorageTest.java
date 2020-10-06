@@ -80,7 +80,7 @@ public class InstallCertificateFromStorageTest {
         final List<String> nonIndexableKeys =
                 SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
-        assertThat(nonIndexableKeys).containsAllIn(mTestKeys);
+        assertThat(nonIndexableKeys).containsAtLeastElementsIn(mTestKeys);
     }
 
 }

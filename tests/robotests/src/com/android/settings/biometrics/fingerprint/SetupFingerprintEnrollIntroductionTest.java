@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -90,12 +91,12 @@ public class SetupFingerprintEnrollIntroductionTest {
                 mController.get().findViewById(R.id.setup_wizard_layout);
         final Button skipButton =
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
-        assertThat(skipButton.getVisibility()).named("Skip visible").isEqualTo(View.VISIBLE);
+        assertWithMessage("Skip visible").that(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
         skipButton.performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
-        assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
-        assertThat(shadowActivity.getResultCode()).named("Result code")
+        assertWithMessage("Is finishing").that(mController.get().isFinishing()).isTrue();
+        assertWithMessage("Result code").that(shadowActivity.getResultCode())
             .isEqualTo(SetupSkipDialog.RESULT_SKIP);
     }
 
@@ -109,12 +110,12 @@ public class SetupFingerprintEnrollIntroductionTest {
                 mController.get().findViewById(R.id.setup_wizard_layout);
         final Button skipButton =
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
-        assertThat(skipButton.getVisibility()).named("Skip visible").isEqualTo(View.VISIBLE);
+        assertWithMessage("Skip visible").that(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
         skipButton.performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
-        assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
-        assertThat(shadowActivity.getResultCode()).named("Result code")
+        assertWithMessage("Is finishing").that(mController.get().isFinishing()).isTrue();
+        assertWithMessage("Result code").that(shadowActivity.getResultCode())
             .isEqualTo(BiometricEnrollBase.RESULT_SKIP);
     }
 
