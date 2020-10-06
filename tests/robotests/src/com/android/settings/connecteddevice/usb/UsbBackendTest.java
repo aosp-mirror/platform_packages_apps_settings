@@ -181,4 +181,24 @@ public class UsbBackendTest {
 
         assertThat(usbBackend.areFunctionsSupported(UsbManager.FUNCTION_MTP)).isTrue();
     }
+
+    @Test
+    public void areFunctionsDisallowedByNonAdminUser_isAdminUser_returnFalse() {
+        when(mUserManager.isAdminUser()).thenReturn(true);
+
+        final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
+
+        assertThat(usbBackend.areFunctionsDisallowedByNonAdminUser(
+                UsbManager.FUNCTION_RNDIS)).isFalse();
+    }
+
+    @Test
+    public void areFunctionsDisallowedByNonAdminUser_isNotAdminUser_returnTrue() {
+        when(mUserManager.isAdminUser()).thenReturn(false);
+
+        final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
+
+        assertThat(usbBackend.areFunctionsDisallowedByNonAdminUser(
+                UsbManager.FUNCTION_RNDIS)).isTrue();
+    }
 }
