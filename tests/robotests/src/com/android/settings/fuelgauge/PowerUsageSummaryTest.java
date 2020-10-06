@@ -232,7 +232,7 @@ public class PowerUsageSummaryTest {
         final List<String> keys =
                 XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.power_usage_summary);
 
-        assertThat(keys).containsAllIn(niks);
+        assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
     @Test
