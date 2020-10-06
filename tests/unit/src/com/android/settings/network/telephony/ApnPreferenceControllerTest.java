@@ -37,7 +37,7 @@ import android.telephony.TelephonyManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.network.ApnSettings;
+import com.android.settings.network.apn.ApnSettings;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;

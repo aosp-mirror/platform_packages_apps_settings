@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.network;
+package com.android.settings.network.apn;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -53,6 +53,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
@@ -61,20 +62,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+/** Use to edit apn settings. */
 public class ApnEditor extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnKeyListener {
 
-    private final static String TAG = ApnEditor.class.getSimpleName();
-    private final static boolean VDBG = false;   // STOPSHIP if true
+    private static final String TAG = ApnEditor.class.getSimpleName();
+    private static final boolean VDBG = false;   // STOPSHIP if true
 
-    private final static String KEY_AUTH_TYPE = "auth_type";
+    private static final String KEY_AUTH_TYPE = "auth_type";
     private static final String KEY_APN_TYPE = "apn_type";
-    private final static String KEY_PROTOCOL = "apn_protocol";
-    private final static String KEY_ROAMING_PROTOCOL = "apn_roaming_protocol";
-    private final static String KEY_CARRIER_ENABLED = "carrier_enabled";
-    private final static String KEY_BEARER_MULTI = "bearer_multi";
-    private final static String KEY_MVNO_TYPE = "mvno_type";
-    private final static String KEY_PASSWORD = "apn_password";
+    private static final String KEY_PROTOCOL = "apn_protocol";
+    private static final String KEY_ROAMING_PROTOCOL = "apn_roaming_protocol";
+    private static final String KEY_CARRIER_ENABLED = "carrier_enabled";
+    private static final String KEY_BEARER_MULTI = "bearer_multi";
+    private static final String KEY_MVNO_TYPE = "mvno_type";
+    private static final String KEY_PASSWORD = "apn_password";
 
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int MENU_SAVE = Menu.FIRST + 1;
@@ -213,7 +215,7 @@ public class ApnEditor extends SettingsPreferenceFragment
             Telephony.Carriers.MCC, // 9
             Telephony.Carriers.MNC, // 10
             Telephony.Carriers.NUMERIC, // 11
-            Telephony.Carriers.MMSPROXY,// 12
+            Telephony.Carriers.MMSPROXY, // 12
             Telephony.Carriers.MMSPORT, // 13
             Telephony.Carriers.AUTH_TYPE, // 14
             Telephony.Carriers.TYPE, // 15
@@ -583,7 +585,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 }
             }
 
-            if (mBearerInitialVal != 0 && bearers.contains("" + mBearerInitialVal) == false) {
+            if (mBearerInitialVal != 0 && !bearers.contains("" + mBearerInitialVal)) {
                 // add mBearerInitialVal to bearers
                 bearers.add("" + mBearerInitialVal);
             }
@@ -699,7 +701,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                             && Arrays.asList(mReadOnlyApnFields)
                             .contains(Telephony.Carriers.MVNO_MATCH_DATA));
             mMvnoMatchData.setEnabled(!mvnoMatchDataUneditable && mvnoIndex != 0);
-            if (newValue != null && newValue.equals(oldValue) == false) {
+            if (newValue != null && !newValue.equals(oldValue)) {
                 if (values[mvnoIndex].equals("SPN")) {
                     TelephonyManager telephonyManager = (TelephonyManager)
                             getContext().getSystemService(TelephonyManager.class);
@@ -739,7 +741,9 @@ public class ApnEditor extends SettingsPreferenceFragment
             }
         }
     }
-
+    /**
+     * Callback when preference status changed.
+     */
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String key = preference.getKey();
         if (KEY_AUTH_TYPE.equals(key)) {
@@ -1342,8 +1346,13 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
     }
 
+    /**
+     * Dialog of error message.
+     */
     public static class ErrorDialog extends InstrumentedDialogFragment {
-
+        /**
+         * Show error dialog.
+         */
         public static void showError(ApnEditor editor) {
             final ErrorDialog dialog = new ErrorDialog();
             dialog.setTargetFragment(editor, 0);
