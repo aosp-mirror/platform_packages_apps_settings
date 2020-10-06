@@ -32,7 +32,6 @@ import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
-import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputSliceConstants;
@@ -46,7 +45,7 @@ import java.util.List;
  * {@link com.android.settings.notification.RemoteVolumeSeekBarPreference}
  **/
 public class RemoteVolumeGroupController extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver, OnDestroy, OnPause,
+        Preference.OnPreferenceChangeListener, LifecycleObserver, OnDestroy,
         LocalMediaManager.DeviceCallback {
 
     private static final String KEY_REMOTE_VOLUME_GROUP = "remote_media_group";
@@ -95,14 +94,6 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
                 mRoutingSessionInfos.add(info);
             }
         }
-    }
-
-    @Override
-    public void onPause() {
-        // Media output dialog should not show when onPause
-        mContext.sendBroadcast(new Intent()
-                .setAction(MediaOutputSliceConstants.ACTION_DISMISS_MEDIA_OUTPUT_DIALOG)
-                .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME));
     }
 
     @Override

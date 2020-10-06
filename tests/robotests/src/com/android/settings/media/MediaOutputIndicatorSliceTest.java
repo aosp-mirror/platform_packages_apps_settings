@@ -23,6 +23,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -54,6 +56,7 @@ import com.android.settingslib.media.MediaOutputSliceConstants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -203,12 +206,17 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
-    public void getMediaOutputSliceIntent_withActiveLocalMedia_verifyIntentExtra() {
+    public void onNotifyChange_withActiveLocalMedia_verifyIntentExtra() {
         when(mMediaController.getSessionToken()).thenReturn(mToken);
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
-        final Intent intent = mMediaOutputIndicatorSlice.getMediaOutputDialogIntent();
+        ArgumentCaptor<Intent> argument = ArgumentCaptor.forClass(Intent.class);
+
+        mMediaOutputIndicatorSlice.onNotifyChange(null);
+        verify(mContext, times(2)).sendBroadcast(argument.capture());
+        List<Intent> intentList = argument.getAllValues();
+        Intent intent = intentList.get(0);
 
         assertThat(TextUtils.equals(TEST_PACKAGE_NAME, intent.getStringExtra(
                 MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
@@ -221,10 +229,15 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
-    public void getMediaOutputSliceIntent_withoutActiveLocalMedia_verifyIntentExtra() {
+    public void onNotifyChange_withoutActiveLocalMedia_verifyIntentExtra() {
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
-        final Intent intent = mMediaOutputIndicatorSlice.getMediaOutputDialogIntent();
+        ArgumentCaptor<Intent> argument = ArgumentCaptor.forClass(Intent.class);
+
+        mMediaOutputIndicatorSlice.onNotifyChange(null);
+        verify(mContext, times(2)).sendBroadcast(argument.capture());
+        List<Intent> intentList = argument.getAllValues();
+        Intent intent = intentList.get(0);
 
         assertThat(TextUtils.isEmpty(intent.getStringExtra(
                 MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();

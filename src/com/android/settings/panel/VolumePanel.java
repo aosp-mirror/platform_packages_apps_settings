@@ -17,6 +17,7 @@
 package com.android.settings.panel;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.REMOTE_MEDIA_SLICE_URI;
@@ -26,8 +27,10 @@ import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
 
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.Settings;
 
@@ -47,6 +50,17 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
 
     private final Context mContext;
 
+    private PanelContentCallback mCallback;
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (MediaOutputSliceConstants.ACTION_CLOSE_PANEL.equals(intent.getAction())) {
+                mCallback.forceClose();
+            }
+        }
+    };
+
     public static VolumePanel create(Context context) {
         return new VolumePanel(context);
     }
@@ -55,13 +69,18 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
         mContext = context.getApplicationContext();
     }
 
+    /** Invoked when the panel is resumed. */
+    @OnLifecycleEvent(ON_RESUME)
+    public void onResume() {
+        final IntentFilter filter = new IntentFilter();
+        filter.addAction(MediaOutputSliceConstants.ACTION_CLOSE_PANEL);
+        mContext.registerReceiver(mReceiver, filter);
+    }
+
     /** Invoked when the panel is paused. */
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        // Media output dialog should not show when onPause
-        mContext.sendBroadcast(new Intent()
-                .setAction(MediaOutputSliceConstants.ACTION_DISMISS_MEDIA_OUTPUT_DIALOG)
-                .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME));
+        mContext.unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -95,5 +114,10 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
     @Override
     public int getViewType() {
         return PanelContent.VIEW_TYPE_SLIDER;
+    }
+
+    @Override
+    public void registerCallback(PanelContentCallback callback) {
+        mCallback = callback;
     }
 }
