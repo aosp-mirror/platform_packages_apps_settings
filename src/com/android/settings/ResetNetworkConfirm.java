@@ -49,7 +49,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settings.network.ApnSettings;
+import com.android.settings.network.apn.ApnSettings;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /**

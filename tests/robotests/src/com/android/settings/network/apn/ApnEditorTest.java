@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.network;
+package com.android.settings.network.apn;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -46,7 +46,8 @@ import androidx.preference.MultiSelectListPreference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.network.ApnEditor.ApnData;
+import com.android.settings.network.ProxySubscriptionManager;
+import com.android.settings.network.apn.ApnEditor.ApnData;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
@@ -93,7 +94,7 @@ public class ApnEditorTest {
     private static final int CURSOR_INTEGER_INDEX = 0;
     private static final int CURSOR_STRING_INDEX = 1;
 
-    private static final Uri mApnUri = Uri.parse("Apn://row/1");
+    private static final Uri APN_URI = Uri.parse("Apn://row/1");
 
     @Mock
     private Cursor mCursor;
@@ -382,7 +383,7 @@ public class ApnEditorTest {
     public void testApnData_invalidIntegerType_throwsInvalidTypeException() {
         // GIVEN a ApnData constructed from cursor
         initCursor();
-        final ApnData data = new ApnData(mApnUri, mCursor);
+        final ApnData data = new ApnData(APN_URI, mCursor);
 
         // WHEN get a string from an integer column
         // THEN the InvalidTypeException is threw
@@ -393,7 +394,7 @@ public class ApnEditorTest {
     public void testApnData_invalidStringType_throwsInvalidTypeException() {
         // GIVEN a ApnData constructed from cursor
         initCursor();
-        final ApnData data = new ApnData(mApnUri, mCursor);
+        final ApnData data = new ApnData(APN_URI, mCursor);
 
         // WHEN get a integer from a string column
         // THEN the InvalidTypeException is threw
@@ -404,7 +405,7 @@ public class ApnEditorTest {
     public void testApnData_validIntegerType_returnCorrectValue() {
         // GIVEN a ApnData constructed from cursor
         initCursor();
-        final ApnData data = new ApnData(mApnUri, mCursor);
+        final ApnData data = new ApnData(APN_URI, mCursor);
 
         // WHEN get integer from an integer column
         final int val = data.getInteger(CURSOR_INTEGER_INDEX);
@@ -417,7 +418,7 @@ public class ApnEditorTest {
     public void testApnData_validStringType_returnCorrectValue() {
         // GIVEN a ApnData constructed from cursor
         initCursor();
-        final ApnData data = new ApnData(mApnUri, mCursor);
+        final ApnData data = new ApnData(APN_URI, mCursor);
 
         // WHEN get string from a string column
         final String str = data.getString(CURSOR_STRING_INDEX);
