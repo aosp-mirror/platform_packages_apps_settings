@@ -36,6 +36,6 @@ public class LocalClassLoaderContextThemeWrapperTest {
         final Class clazz = LocalClassLoaderContextThemeWrapperTest.class;
         mContextThemeWrapper = new LocalClassLoaderContextThemeWrapper(clazz, context, 0);
 
-        assertThat(mContextThemeWrapper.getClassLoader()).isSameAs(clazz.getClassLoader());
+        assertThat(mContextThemeWrapper.getClassLoader()).isSameInstanceAs(clazz.getClassLoader());
     }
 }

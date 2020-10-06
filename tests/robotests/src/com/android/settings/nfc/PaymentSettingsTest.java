@@ -113,7 +113,7 @@ public class PaymentSettingsTest {
         final List<String> niks =
                 PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
-        assertThat(niks).containsAllOf(FOREGROUND_KEY, PAYMENT_KEY);
+        assertThat(niks).containsAtLeast(FOREGROUND_KEY, PAYMENT_KEY);
     }
 
     @Test
