@@ -22,6 +22,10 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.util.FeatureFlagUtils;
+
+import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,5 +48,18 @@ public class TopLevelSettingsTest {
     @Test
     public void shouldForceRoundedIcon_true() {
         assertThat(mSettings.shouldForceRoundedIcon()).isTrue();
+    }
+
+    @Test
+    public void getPreferenceScreenResId_silkyHomeDisabled_defaultSettings() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.top_level_settings);
+    }
+
+    @Test
+    public void getPreferenceScreenResId_silkyHomeEnabled_groupedSettings() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
+        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(
+                R.xml.top_level_settings_grouped);
     }
 }
