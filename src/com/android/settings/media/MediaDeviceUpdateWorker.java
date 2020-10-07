@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -50,6 +51,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         implements LocalMediaManager.DeviceCallback {
+
+    private static final String TAG = "MediaDeviceUpdateWorker";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     protected final Context mContext;
     protected final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
@@ -213,6 +217,10 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         final List<RoutingSessionInfo> sessionInfos = new ArrayList<>();
         for (RoutingSessionInfo info : mLocalMediaManager.getActiveMediaSession()) {
             if (!info.isSystemSession()) {
+                if (DEBUG) {
+                    Log.d(TAG, "getActiveRemoteMediaDevice() info : " + info.toString()
+                            + ", package name : " + info.getClientPackageName());
+                }
                 sessionInfos.add(info);
             }
         }
