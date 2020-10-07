@@ -34,7 +34,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.network.ApnSettings;
+import com.android.settings.network.apn.ApnSettings;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;

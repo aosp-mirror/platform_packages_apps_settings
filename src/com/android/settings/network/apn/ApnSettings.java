@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.network;
+package com.android.settings.network.apn;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -56,19 +56,21 @@ import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
 
+/** Handle each different apn setting. */
 public class ApnSettings extends RestrictedSettingsFragment
         implements Preference.OnPreferenceChangeListener {
     static final String TAG = "ApnSettings";
 
     public static final String EXTRA_POSITION = "position";
     public static final String RESTORE_CARRIERS_URI =
-        "content://telephony/carriers/restore";
+            "content://telephony/carriers/restore";
     public static final String PREFERRED_APN_URI =
-        "content://telephony/carriers/preferapn";
+            "content://telephony/carriers/preferapn";
 
     public static final String APN_ID = "apn_id";
     public static final String SUB_ID = "sub_id";
@@ -104,7 +106,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     private static final Uri DEFAULTAPN_URI = Uri.parse(RESTORE_CARRIERS_URI);
     private static final Uri PREFERAPN_URI = Uri.parse(PREFERRED_APN_URI);
 
-    private static boolean mRestoreDefaultApnMode;
+    private boolean mRestoreDefaultApnMode;
 
     private UserManager mUserManager;
     private TelephonyManager mTelephonyManager;
@@ -385,13 +387,12 @@ public class ApnSettings extends RestrictedSettingsFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case MENU_NEW:
-            addNewApn();
-            return true;
-
-        case MENU_RESTORE:
-            restoreDefaultApn();
-            return true;
+            case MENU_NEW:
+                addNewApn();
+                return true;
+            case MENU_RESTORE:
+                restoreDefaultApn();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -451,8 +452,7 @@ public class ApnSettings extends RestrictedSettingsFragment
             mRestoreApnUiHandler = new RestoreApnUiHandler();
         }
 
-        if (mRestoreApnProcessHandler == null ||
-            mRestoreDefaultApnThread == null) {
+        if (mRestoreApnProcessHandler == null || mRestoreDefaultApnThread == null) {
             mRestoreDefaultApnThread = new HandlerThread(
                     "Restore default APN Handler: Process Thread");
             mRestoreDefaultApnThread.start();
@@ -503,7 +503,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     private class RestoreApnProcessHandler extends Handler {
         private Handler mRestoreApnUiHandler;
 
-        public RestoreApnProcessHandler(Looper looper, Handler restoreApnUiHandler) {
+        RestoreApnProcessHandler(Looper looper, Handler restoreApnUiHandler) {
             super(looper);
             this.mRestoreApnUiHandler = restoreApnUiHandler;
         }
