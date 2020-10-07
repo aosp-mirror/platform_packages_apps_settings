@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.network;
+package com.android.settings.network.apn;
 
 import android.content.ContentUris;
 import android.content.Context;
@@ -40,7 +40,7 @@ import com.android.settings.R;
  */
 public class ApnPreference extends Preference implements CompoundButton.OnCheckedChangeListener,
         View.OnClickListener {
-    final static String TAG = "ApnPreference";
+    private static final  String TAG = "ApnPreference";
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
@@ -65,8 +65,8 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
         this(context, null);
     }
 
-    private static String mSelectedKey = null;
-    private static CompoundButton mCurrentChecked = null;
+    private static String sSelectedKey = null;
+    private static CompoundButton sCurrentChecked = null;
     private boolean mProtectFromCheckedChange = false;
     private boolean mSelectable = true;
     private boolean mHideDetails = false;
@@ -84,10 +84,10 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
             if (mSelectable) {
                 rb.setOnCheckedChangeListener(this);
 
-                final boolean isChecked = getKey().equals(mSelectedKey);
+                final boolean isChecked = getKey().equals(sSelectedKey);
                 if (isChecked) {
-                    mCurrentChecked = rb;
-                    mSelectedKey = getKey();
+                    sCurrentChecked = rb;
+                    sSelectedKey = getKey();
                 }
 
                 mProtectFromCheckedChange = true;
@@ -100,14 +100,23 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
         }
     }
 
+    /**
+     * Return the preference is checked or not.
+     */
     public boolean isChecked() {
-        return getKey().equals(mSelectedKey);
+        return getKey().equals(sSelectedKey);
     }
 
+    /**
+     * Set preference checked.
+     */
     public void setChecked() {
-        mSelectedKey = getKey();
+        sSelectedKey = getKey();
     }
 
+    /**
+     * Change the preference status.
+     */
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Log.i(TAG, "ID: " + getKey() + " :" + isChecked);
         if (mProtectFromCheckedChange) {
@@ -115,15 +124,15 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
         }
 
         if (isChecked) {
-            if (mCurrentChecked != null) {
-                mCurrentChecked.setChecked(false);
+            if (sCurrentChecked != null) {
+                sCurrentChecked.setChecked(false);
             }
-            mCurrentChecked = buttonView;
-            mSelectedKey = getKey();
-            callChangeListener(mSelectedKey);
+            sCurrentChecked = buttonView;
+            sSelectedKey = getKey();
+            callChangeListener(sSelectedKey);
         } else {
-            mCurrentChecked = null;
-            mSelectedKey = null;
+            sCurrentChecked = null;
+            sSelectedKey = null;
         }
     }
 
@@ -161,6 +170,9 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
         mSubId = subId;
     }
 
+    /**
+     * Hide details
+     */
     public void setHideDetails() {
         mHideDetails = true;
     }

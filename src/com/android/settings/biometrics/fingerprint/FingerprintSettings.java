@@ -670,7 +670,9 @@ public class FingerprintSettings extends SubSettings {
             mRemovalSidecar.startRemove(fingerPrint, mUserId);
             String name = genKey(fingerPrint.getBiometricId());
             Preference prefToRemove = findPreference(name);
-            prefToRemove.setEnabled(false);
+            if (prefToRemove != null) {
+                prefToRemove.setEnabled(false);
+            }
             updateAddPreference();
         }
 

@@ -16,8 +16,6 @@
 
 package com.android.settings.users;
 
-import static android.os.Process.myUserHandle;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -39,10 +37,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -73,6 +73,8 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.users.EditUserInfoController;
+import com.android.settingslib.users.UserCreatingDialog;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -83,7 +85,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Screen that manages the list of users on the device.
@@ -165,9 +166,11 @@ public class UserSettings extends SettingsPreferenceFragment
     private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<>();
 
     private MultiUserSwitchBarController mSwitchBarController;
-    private EditUserInfoController mEditUserInfoController = new EditUserInfoController();
+    private EditUserInfoController mEditUserInfoController =
+            new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     private MultiUserFooterPreferenceController mMultiUserFooterPreferenceController;
+    private UserCreatingDialog mUserCreatingDialog;
 
     private CharSequence mPendingUserName;
     private Drawable mPendingUserIcon;
@@ -175,6 +178,8 @@ public class UserSettings extends SettingsPreferenceFragment
     // A place to cache the generated default avatar
     private Drawable mDefaultIconDrawable;
 
+    // TODO:   Replace current Handler solution to something that doesn't leak memory and works
+    // TODO:   during a configuration change
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -321,9 +326,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         mEditUserInfoController.onSaveInstanceState(outState);
         outState.putInt(SAVE_REMOVING_USER, mRemovingUserId);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -471,9 +476,20 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void onUserCreated(int userId) {
+        hideUserCreatingDialog();
+        // prevent crash when config changes during user creation
+        if (getContext() == null) {
+            return;
+        }
         mAddingUser = false;
         UserInfo userInfo = mUserManager.getUserInfo(userId);
         openUserDetails(userInfo, true);
+    }
+
+    private void hideUserCreatingDialog() {
+        if (mUserCreatingDialog != null && mUserCreatingDialog.isShowing()) {
+            mUserCreatingDialog.dismiss();
+        }
     }
 
     private void openUserDetails(UserInfo userInfo, boolean newUser) {
@@ -605,94 +621,82 @@ public class UserSettings extends SettingsPreferenceFragment
                 return dlg;
             }
             case DIALOG_USER_PROFILE_EDITOR: {
-                UserHandle user = myUserHandle();
-                UserInfo info = mUserManager.getUserInfo(user.getIdentifier());
-                return mEditUserInfoController.createDialog(
-                        this,
-                        Utils.getUserIcon(getPrefContext(), mUserManager, info),
-                        info.name,
-                        getString(com.android.settingslib.R.string.profile_info_settings_title),
-                        new EditUserInfoController.OnContentChangedCallback() {
-                            @Override
-                            public void onPhotoChanged(UserHandle user, Drawable photo) {
-                                ThreadUtils.postOnBackgroundThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mUserManager.setUserIcon(user.getIdentifier(),
-                                                UserIcons.convertToBitmap(photo));
-                                    }
-                                });
-                                mMePreference.setIcon(photo);
-                            }
-
-                            @Override
-                            public void onLabelChanged(UserHandle user, CharSequence label) {
-                                mMePreference.setTitle(label.toString());
-                                mUserManager.setUserName(user.getIdentifier(), label.toString());
-                            }
-                        },
-                        user,
-                        null);
+                return buildEditCurrentUserDialog();
             }
             case DIALOG_USER_PROFILE_EDITOR_ADD_USER: {
                 synchronized (mUserLock) {
-                    mPendingUserIcon = UserIcons.getDefaultUserIcon(getPrefContext().getResources(),
-                            new Random(System.currentTimeMillis()).nextInt(8), false);
                     mPendingUserName = getString(
                             com.android.settingslib.R.string.user_new_user_name);
+                    mPendingUserIcon = null;
                 }
-                return buildAddUserProfileEditorDialog(USER_TYPE_USER);
+                return buildAddUserDialog(USER_TYPE_USER);
             }
             case DIALOG_USER_PROFILE_EDITOR_ADD_RESTRICTED_PROFILE: {
                 synchronized (mUserLock) {
-                    mPendingUserIcon = UserIcons.getDefaultUserIcon(getPrefContext().getResources(),
-                            new Random(System.currentTimeMillis()).nextInt(8), false);
                     mPendingUserName = getString(
                             com.android.settingslib.R.string.user_new_profile_name);
+                    mPendingUserIcon = null;
                 }
-                return buildAddUserProfileEditorDialog(USER_TYPE_RESTRICTED_PROFILE);
+                return buildAddUserDialog(USER_TYPE_RESTRICTED_PROFILE);
             }
             default:
                 return null;
         }
     }
 
-    private Dialog buildAddUserProfileEditorDialog(int userType) {
+    private Dialog buildEditCurrentUserDialog() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return null;
+        }
+
+        UserInfo user = mUserManager.getUserInfo(Process.myUserHandle().getIdentifier());
+        Drawable userIcon = Utils.getUserIcon(activity, mUserManager, user);
+
+        return mEditUserInfoController.createDialog(
+                activity,
+                this::startActivityForResult,
+                userIcon,
+                user.name,
+                getString(com.android.settingslib.R.string.profile_info_settings_title),
+                (newUserName, newUserIcon) -> {
+                    if (newUserIcon != userIcon) {
+                        ThreadUtils.postOnBackgroundThread(() ->
+                                mUserManager.setUserIcon(user.id,
+                                        UserIcons.convertToBitmap(newUserIcon)));
+                        mMePreference.setIcon(newUserIcon);
+                    }
+
+                    if (!TextUtils.isEmpty(newUserName) && !newUserName.equals(user.name)) {
+                        mMePreference.setTitle(newUserName);
+                        mUserManager.setUserName(user.id, newUserName);
+                    }
+                }, null);
+    }
+
+    private Dialog buildAddUserDialog(int userType) {
         Dialog d;
         synchronized (mUserLock) {
             d = mEditUserInfoController.createDialog(
-                    this,
-                    mPendingUserIcon,
-                    mPendingUserName,
+                    getActivity(),
+                    this::startActivityForResult,
+                    null,
+                    mPendingUserName.toString(),
                     getString(userType == USER_TYPE_USER
                             ? com.android.settingslib.R.string.user_info_settings_title
                             : com.android.settingslib.R.string.profile_info_settings_title),
-                    new EditUserInfoController.OnContentChangedCallback() {
-                        @Override
-                        public void onPhotoChanged(UserHandle user, Drawable photo) {
-                            mPendingUserIcon = photo;
-                        }
-
-                        @Override
-                        public void onLabelChanged(UserHandle user, CharSequence label) {
-                            mPendingUserName = label;
-                        }
+                    (userName, userIcon) -> {
+                        mPendingUserIcon = userIcon;
+                        mPendingUserName = userName;
+                        addUserNow(userType);
                     },
-                    myUserHandle(),
-                    new EditUserInfoController.OnDialogCompleteCallback() {
-                        @Override
-                        public void onPositive() {
-                            addUserNow(userType);
+                    () -> {
+                        synchronized (mUserLock) {
+                            mPendingUserIcon = null;
+                            mPendingUserName = null;
                         }
-
-                        @Override
-                        public void onNegativeOrCancel() {
-                            synchronized (mUserLock) {
-                                mPendingUserIcon = null;
-                                mPendingUserName = null;
-                            }
-                        }
-                    });
+                    }
+            );
         }
         return d;
     }
@@ -759,6 +763,9 @@ public class UserSettings extends SettingsPreferenceFragment
                     : (mPendingUserName != null ? mPendingUserName.toString()
                             : getString(R.string.user_new_profile_name));
         }
+
+        mUserCreatingDialog = new UserCreatingDialog(getActivity());
+        mUserCreatingDialog.show();
         ThreadUtils.postOnBackgroundThread(new Runnable() {
             @Override
             public void run() {
@@ -781,13 +788,15 @@ public class UserSettings extends SettingsPreferenceFragment
                         mAddingUser = false;
                         mPendingUserIcon = null;
                         mPendingUserName = null;
+                        ThreadUtils.postOnMainThread(() -> hideUserCreatingDialog());
                         return;
                     }
 
-                    if (mPendingUserIcon != null) {
-                        mUserManager.setUserIcon(user.id,
-                                UserIcons.convertToBitmap(mPendingUserIcon));
+                    Drawable newUserIcon = mPendingUserIcon;
+                    if (newUserIcon == null) {
+                        newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
                     }
+                    mUserManager.setUserIcon(user.id, UserIcons.convertToBitmap(newUserIcon));
 
                     if (userType == USER_TYPE_USER) {
                         mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);

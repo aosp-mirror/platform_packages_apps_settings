@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -92,7 +93,7 @@ public class FingerprintEnrollFindSensorTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         IntentForResult startedActivity =
                 shadowActivity.getNextStartedActivityForResult();
-        assertThat(startedActivity).named("Next activity 1").isNotNull();
+        assertWithMessage("Next activity 1").that(startedActivity).isNotNull();
         assertThat(startedActivity.intent.getComponent())
                 .isEqualTo(new ComponentName(application, FingerprintEnrollEnrolling.class));
     }
@@ -107,12 +108,12 @@ public class FingerprintEnrollFindSensorTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         IntentForResult startedActivity =
                 shadowActivity.getNextStartedActivityForResult();
-        assertThat(startedActivity).named("Next activity 1").isNotNull();
+        assertWithMessage("Next activity 1").that(startedActivity).isNotNull();
         assertThat(startedActivity.intent.getComponent())
                 .isEqualTo(new ComponentName(application, FingerprintEnrollEnrolling.class));
 
         // Should only start one next activity
-        assertThat(shadowActivity.getNextStartedActivityForResult()).named("Next activity 2")
+        assertWithMessage("Next activity 2").that(shadowActivity.getNextStartedActivityForResult())
                 .isNull();
     }
 
@@ -129,7 +130,7 @@ public class FingerprintEnrollFindSensorTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         IntentForResult startedActivity =
                 shadowActivity.getNextStartedActivityForResult();
-        assertThat(startedActivity).named("Next activity").isNotNull();
+        assertWithMessage("Next activity").that(startedActivity).isNotNull();
         assertThat(startedActivity.intent.getComponent())
                 .isEqualTo(new ComponentName(application, FingerprintEnrollEnrolling.class));
     }
@@ -140,7 +141,7 @@ public class FingerprintEnrollFindSensorTest {
         layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
-        assertThat(shadowActivity.getResultCode()).named("result code")
+        assertWithMessage("result code").that(shadowActivity.getResultCode())
                 .isEqualTo(BiometricEnrollBase.RESULT_SKIP);
     }
 

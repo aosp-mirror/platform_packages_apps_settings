@@ -247,6 +247,10 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     }
 
+    boolean shouldDisableMediaOutput(String packageName) {
+        return mLocalMediaManager.shouldDisableMediaOutput(packageName);
+    }
+
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
