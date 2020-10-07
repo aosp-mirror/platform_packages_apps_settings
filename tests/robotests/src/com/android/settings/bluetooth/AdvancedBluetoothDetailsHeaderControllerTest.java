@@ -42,6 +42,7 @@ import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
@@ -283,6 +284,68 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
 
         assertThat(mController.mIconCache).isEmpty();
         verify(mBitmap).recycle();
+    }
+
+    @Test
+    public void showBatteryPredictionIfNecessary_estimateReadyIsAvailable_showView() {
+        mController.showBatteryPredictionIfNecessary(1, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_left));
+        mController.showBatteryPredictionIfNecessary(1, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_middle));
+        mController.showBatteryPredictionIfNecessary(1, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_right));
+
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_left),
+                View.VISIBLE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_middle),
+                View.VISIBLE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_right),
+                View.VISIBLE);
+    }
+
+    @Test
+    public void showBatteryPredictionIfNecessary_estimateReadyIsNotAvailable_notShowView() {
+        mController.showBatteryPredictionIfNecessary(0, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_left));
+        mController.showBatteryPredictionIfNecessary(0, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_middle));
+        mController.showBatteryPredictionIfNecessary(0, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_right));
+
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_left),
+                View.GONE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_middle),
+                View.GONE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_right),
+                View.GONE);
+    }
+
+    @Test
+    public void showBatteryPredictionIfNecessary_estimateReadyIsAvailable_showCorrectValue() {
+        final String leftBatteryPrediction =
+                StringUtil.formatElapsedTime(mContext, 12000000, false).toString();
+        final String rightBatteryPrediction =
+                StringUtil.formatElapsedTime(mContext, 1200000, false).toString();
+
+        mController.showBatteryPredictionIfNecessary(1, 12000000,
+                mLayoutPreference.findViewById(R.id.layout_left));
+        mController.showBatteryPredictionIfNecessary(1, 1200000,
+                mLayoutPreference.findViewById(R.id.layout_right));
+
+        assertBatteryPrediction(mLayoutPreference.findViewById(R.id.layout_left),
+                leftBatteryPrediction);
+        assertBatteryPrediction(mLayoutPreference.findViewById(R.id.layout_right),
+                rightBatteryPrediction);
+    }
+
+    private void assertBatteryPredictionVisible(LinearLayout linearLayout, int visible) {
+        final TextView textView = linearLayout.findViewById(R.id.bt_battery_prediction);
+        assertThat(textView.getVisibility()).isEqualTo(visible);
+    }
+
+    private void assertBatteryPrediction(LinearLayout linearLayout, String prediction) {
+        final TextView textView = linearLayout.findViewById(R.id.bt_battery_prediction);
+        assertThat(textView.getText().toString()).isEqualTo(prediction);
     }
 
     private void assertBatteryLevel(LinearLayout linearLayout, int batteryLevel) {
