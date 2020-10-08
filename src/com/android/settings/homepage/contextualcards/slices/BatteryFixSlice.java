@@ -163,7 +163,8 @@ public class BatteryFixSlice implements CustomSliceable {
 
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
-        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
+        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     private Slice buildBatteryGoodSlice(ListBuilder sliceBuilder, boolean isError) {

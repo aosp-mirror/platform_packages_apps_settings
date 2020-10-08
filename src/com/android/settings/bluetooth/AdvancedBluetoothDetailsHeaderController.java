@@ -18,8 +18,10 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -49,12 +51,14 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class adds a header with device name and status (connected/disconnected, etc.).
@@ -64,7 +68,22 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     private static final String TAG = "AdvancedBtHeaderCtrl";
     private static final int LOW_BATTERY_LEVEL = 15;
     private static final int CASE_LOW_BATTERY_LEVEL = 19;
-    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
+    private static final String PATH = "time_remaining";
+    private static final String QUERY_PARAMETER_ADDRESS = "address";
+    private static final String QUERY_PARAMETER_BATTERY_ID = "battery_id";
+    private static final String QUERY_PARAMETER_BATTERY_LEVEL = "battery_level";
+    private static final String QUERY_PARAMETER_TIMESTAMP = "timestamp";
+    private static final String BATTERY_ESTIMATE = "battery_estimate";
+    private static final String ESTIMATE_READY = "estimate_ready";
+    private static final String DATABASE_ID = "id";
+    private static final String DATABASE_BLUETOOTH = "Bluetooth";
+    private static final long TIME_OF_HOUR = TimeUnit.SECONDS.toMillis(3600);
+    private static final long TIME_OF_MINUTE = TimeUnit.SECONDS.toMillis(60);
+    private static final int LEFT_DEVICE_ID = 1;
+    private static final int RIGHT_DEVICE_ID = 2;
+    private static final int CASE_DEVICE_ID = 3;
 
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
@@ -168,19 +187,22 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                     BluetoothDevice.METADATA_UNTETHERED_LEFT_ICON,
                     BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY,
                     BluetoothDevice.METADATA_UNTETHERED_LEFT_CHARGING,
-                    R.string.bluetooth_left_name);
+                    R.string.bluetooth_left_name,
+                    LEFT_DEVICE_ID);
 
             updateSubLayout(mLayoutPreference.findViewById(R.id.layout_middle),
                     BluetoothDevice.METADATA_UNTETHERED_CASE_ICON,
                     BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY,
                     BluetoothDevice.METADATA_UNTETHERED_CASE_CHARGING,
-                    R.string.bluetooth_middle_name);
+                    R.string.bluetooth_middle_name,
+                    CASE_DEVICE_ID);
 
             updateSubLayout(mLayoutPreference.findViewById(R.id.layout_right),
                     BluetoothDevice.METADATA_UNTETHERED_RIGHT_ICON,
                     BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY,
                     BluetoothDevice.METADATA_UNTETHERED_RIGHT_CHARGING,
-                    R.string.bluetooth_right_name);
+                    R.string.bluetooth_right_name,
+                    RIGHT_DEVICE_ID);
         }
     }
 
@@ -204,7 +226,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     }
 
     private void updateSubLayout(LinearLayout linearLayout, int iconMetaKey, int batteryMetaKey,
-            int chargeMetaKey, int titleResId) {
+            int chargeMetaKey, int titleResId, int batteryId) {
         if (linearLayout == null) {
             return;
         }
@@ -217,10 +239,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
         final int batteryLevel = BluetoothUtils.getIntMetaData(bluetoothDevice, batteryMetaKey);
         final boolean charging = BluetoothUtils.getBooleanMetaData(bluetoothDevice, chargeMetaKey);
-        if (DBG) {
+        if (DEBUG) {
             Log.d(TAG, "updateSubLayout() icon : " + iconMetaKey + ", battery : " + batteryMetaKey
                     + ", charge : " + chargeMetaKey + ", batteryLevel : " + batteryLevel
                     + ", charging : " + charging + ", iconUri : " + iconUri);
+        }
+
+        if (batteryId != CASE_DEVICE_ID) {
+            showBatteryPredictionIfNecessary(linearLayout, batteryId, batteryLevel);
         }
         if (batteryLevel != BluetoothUtils.META_INT_ERROR) {
             linearLayout.setVisibility(View.VISIBLE);
@@ -236,6 +262,64 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         final TextView textView = linearLayout.findViewById(R.id.header_title);
         textView.setText(titleResId);
         textView.setVisibility(View.VISIBLE);
+    }
+
+    private void showBatteryPredictionIfNecessary(LinearLayout linearLayout, int batteryId,
+            int batteryLevel) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final Uri contentUri = new Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(mContext.getString(R.string.config_battery_prediction_authority))
+                    .appendPath(PATH)
+                    .appendPath(DATABASE_ID)
+                    .appendPath(DATABASE_BLUETOOTH)
+                    .appendQueryParameter(QUERY_PARAMETER_ADDRESS, mCachedDevice.getAddress())
+                    .appendQueryParameter(QUERY_PARAMETER_BATTERY_ID, String.valueOf(batteryId))
+                    .appendQueryParameter(QUERY_PARAMETER_BATTERY_LEVEL,
+                            String.valueOf(batteryLevel))
+                    .appendQueryParameter(QUERY_PARAMETER_TIMESTAMP,
+                            String.valueOf(System.currentTimeMillis()))
+                    .build();
+
+            final String[] columns = new String[] {BATTERY_ESTIMATE, ESTIMATE_READY};
+            final Cursor cursor =
+                    mContext.getContentResolver().query(contentUri, columns, null, null, null);
+            if (cursor == null) {
+                Log.w(TAG, "showBatteryPredictionIfNecessary() cursor is null!");
+                return;
+            }
+            try {
+                for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                    final int estimateReady =
+                            cursor.getInt(cursor.getColumnIndex(ESTIMATE_READY));
+                    final long batteryEstimate =
+                            cursor.getLong(cursor.getColumnIndex(BATTERY_ESTIMATE));
+                    if (DEBUG) {
+                        Log.d(TAG, "showBatteryTimeIfNecessary() batteryId : " + batteryId
+                                + ", ESTIMATE_READY : " + estimateReady
+                                + ", BATTERY_ESTIMATE : " + batteryEstimate);
+                    }
+                    showBatteryPredictionIfNecessary(estimateReady, batteryEstimate,
+                            linearLayout);
+                }
+            } finally {
+                cursor.close();
+            }
+        });
+    }
+
+    @VisibleForTesting
+    void showBatteryPredictionIfNecessary(int estimateReady, long batteryEstimate,
+            LinearLayout linearLayout) {
+        ThreadUtils.postOnMainThread(() -> {
+            final TextView textView = linearLayout.findViewById(R.id.bt_battery_prediction);
+            if (estimateReady == 1) {
+                textView.setVisibility(View.VISIBLE);
+                textView.setText(StringUtil.formatElapsedTime(mContext, batteryEstimate, false));
+            } else {
+                textView.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void showBatteryIcon(LinearLayout linearLayout, int level, boolean charging,
@@ -279,7 +363,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         final String iconUri = BluetoothUtils.getStringMetaData(bluetoothDevice,
                 BluetoothDevice.METADATA_MAIN_ICON);
-        if (DBG) {
+        if (DEBUG) {
             Log.d(TAG, "updateDisconnectLayout() iconUri : " + iconUri);
         }
         if (iconUri != null) {
