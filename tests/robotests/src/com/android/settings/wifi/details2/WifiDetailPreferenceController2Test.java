@@ -815,6 +815,22 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
+    public void macAddressPref_shouldVisibleAsRandomizedForConnectedNetwork() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        when(mMockWifiEntry.isSaved()).thenReturn(true);
+        when(mMockWifiEntry.getPrivacy()).thenReturn(WifiEntry.PRIVACY_RANDOMIZED_MAC);
+        when(mMockWifiEntry.getMacAddress()).thenReturn(RANDOMIZED_MAC_ADDRESS);
+
+        displayAndResume();
+
+        verify(mMockMacAddressPref).setVisible(true);
+        verify(mMockMacAddressPref).setSummary(RANDOMIZED_MAC_ADDRESS);
+        verify(mMockMacAddressPref).setTitle(
+                R.string.wifi_advanced_randomized_mac_address_title);
+    }
+
+    @Test
     public void macAddressPref_shouldVisibleAsRandomizedForDisconnectedNetwork() {
         setUpForDisconnectedNetwork();
         when(mMockWifiEntry.isSaved()).thenReturn(true);
@@ -825,7 +841,8 @@ public class WifiDetailPreferenceController2Test {
 
         verify(mMockMacAddressPref).setVisible(true);
         verify(mMockMacAddressPref).setSummary(RANDOMIZED_MAC_ADDRESS);
-        verify(mMockMacAddressPref).setTitle(R.string.wifi_advanced_randomized_mac_address_title);
+        verify(mMockMacAddressPref).setTitle(
+                R.string.wifi_advanced_randomized_mac_address_disconnected_title);
     }
 
     @Test
