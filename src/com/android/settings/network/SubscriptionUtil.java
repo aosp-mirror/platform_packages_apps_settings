@@ -31,12 +31,15 @@ import android.telephony.UiccSlotInfo;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class SubscriptionUtil {
     private static final String TAG = "SubscriptionUtil";
@@ -287,6 +290,11 @@ public class SubscriptionUtil {
         context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, enable));
     }
 
+    /** Starts a dialog activity to handle eSIM deletion. */
+    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId) {
+        context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
+    }
+
     /**
      * Finds and returns a subscription with a specific subscription ID.
      * @param subscriptionManager The ProxySubscriptionManager for accessing subscription
@@ -331,5 +339,34 @@ public class SubscriptionUtil {
         boolean hasCarrierPrivilegePermission = telephonyManager.hasCarrierPrivileges()
                 || subscriptionManager.canManageSubscription(info);
         return hasCarrierPrivilegePermission;
+    }
+
+    /**
+     * Finds all the available subscriptions having the same group uuid as {@code subscriptionInfo}.
+     * @param subscriptionManager The SubscriptionManager for accessing subscription information
+     * @param subId The id of subscription
+     * @return a list of {@code SubscriptionInfo} which have the same group UUID.
+     */
+    public static List<SubscriptionInfo> findAllSubscriptionsInGroup(
+            SubscriptionManager subscriptionManager, int subId) {
+
+        SubscriptionInfo subscription = getSubById(subscriptionManager, subId);
+        if (subscription == null) {
+            return Collections.emptyList();
+        }
+        ParcelUuid groupUuid = subscription.getGroupUuid();
+        List<SubscriptionInfo> availableSubscriptions =
+                subscriptionManager.getAvailableSubscriptionInfoList();
+
+        if (availableSubscriptions == null
+                || availableSubscriptions.isEmpty()
+                || groupUuid == null) {
+            return Collections.singletonList(subscription);
+        }
+
+        return availableSubscriptions
+                .stream()
+                .filter(sub -> sub.isEmbedded() && groupUuid.equals(sub.getGroupUuid()))
+                .collect(Collectors.toList());
     }
 }
