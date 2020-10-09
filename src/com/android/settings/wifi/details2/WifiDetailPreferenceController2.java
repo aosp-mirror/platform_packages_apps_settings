@@ -738,16 +738,22 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
 
         mMacAddressPref.setVisible(true);
-
-        mMacAddressPref.setTitle((mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC)
-                ? R.string.wifi_advanced_randomized_mac_address_title
-                : R.string.wifi_advanced_device_mac_address_title);
+        mMacAddressPref.setTitle(getMacAddressTitle());
 
         if (macAddress.equals(WifiInfo.DEFAULT_MAC_ADDRESS)) {
             mMacAddressPref.setSummary(R.string.device_info_not_available);
         } else {
             mMacAddressPref.setSummary(macAddress);
         }
+    }
+
+    private int getMacAddressTitle() {
+        if (mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC) {
+            return mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
+                    ? R.string.wifi_advanced_randomized_mac_address_title
+                    : R.string.wifi_advanced_randomized_mac_address_disconnected_title;
+        }
+        return R.string.wifi_advanced_device_mac_address_title;
     }
 
     private void updatePreference(Preference pref, String detailText) {
