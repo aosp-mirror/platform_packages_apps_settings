@@ -1093,6 +1093,8 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"‏عنوان MAC للجهاز"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"‏عنوان MAC العشوائي"</string>
+    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
+    <skip />
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"‏عنوان IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"تفاصيل الشبكة"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"قناع الشبكة الفرعية"</string>
@@ -1110,10 +1112,8 @@
     <string name="wifi_ip_settings_invalid_gateway" msgid="1174931247370931239">"اكتب عنوان بوابة صالحًا."</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="1757402215999845975">"اكتب عنوان نظام أسماء نطاقات صالحًا."</string>
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="5980808986926987299">"اكتب بادئة شبكة يترواح طولها بين 0 و32."</string>
-    <!-- no translation found for wifi_dns1 (6764769531843748514) -->
-    <skip />
-    <!-- no translation found for wifi_dns2 (7273133202625326148) -->
-    <skip />
+    <string name="wifi_dns1" msgid="6764769531843748514">"نظام أسماء النطاقات 1 (ما لم يتم إلغاؤها باستخدام نظام أسماء النطاقات الخاص)"</string>
+    <string name="wifi_dns2" msgid="7273133202625326148">"نظام أسماء النطاقات 2 (ما لم يتم إلغاؤها باستخدام نظام أسماء النطاقات الخاص)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"البوابة"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"طول بادئة الشبكة"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"‏اتصال Wi-Fi مباشر"</string>
@@ -2213,7 +2213,7 @@
     <string name="app_name_label" msgid="3809910527680143673">"التطبيق"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"آخر مرة تم استخدامه"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"وقت الاستخدام"</string>
-    <string name="accessibility_settings" msgid="4713215774904704682">"إمكانية الوصول"</string>
+    <string name="accessibility_settings" msgid="4713215774904704682">"تسهيل الاستخدام"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"إعدادات \"سهولة الاستخدام\""</string>
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"أجهزة قارئ الشاشة والشاشة وعناصر التحكم التفاعلية"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"إعدادات الرؤية"</string>
@@ -2268,7 +2268,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"لاستخدام إحدى ميزات إمكانية الوصول، مرّر سريعًا من أسفل الشاشة للأعلى بثلاثة أصابع.\n\nللتبديل بين الميزات، مرّر سريعًا للأعلى بثلاثة أصابع مع تثبيتها."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"حسنًا"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"اختصار <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"زر أدوات تمكين الوصول"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"زر تسهيل الاستخدام"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"التمرير بسرعة إلى الأعلى بإصبعين"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"التمرير بسرعة إلى الأعلى بثلاثة أصابع"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"النقر على زر أدوات تمكين الوصول"</string>
@@ -2338,7 +2338,7 @@
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"حجم النص: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"خيارات أكثر"</string>
     <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"لا تتوفّر هذه الإعدادات المفضّلة للشرح في بعض التطبيقات."</string>
-    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"زر أدوات تمكين الوصول"</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"زر تسهيل الاستخدام"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"التمرير سريعًا بإصبعين إلى أعلى الشاشة من أسفلها"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"الضغط مع الاستمرار على مفتاحَي التحكّم بمستوى الصوت"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"النقر ثلاث مرات على الشاشة"</string>
@@ -3204,7 +3204,6 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"لم يتم الإعداد - الملف الشخصي للعمل"</string>
     <string name="user_admin" msgid="4024553191395768119">"المشرف"</string>
     <string name="user_you" msgid="3070562015202859996">"أنت (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_nickname" msgid="3763630194459958977">"اللقب"</string>
     <string name="user_add_max_count" msgid="5739771048517070983">"يمكنك إضافة ما يصل إلى <xliff:g id="USER_COUNT">%1$d</xliff:g> من المستخدمين"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"يمكن لمالك الجهاز اللوحي فقط إدارة المستخدمين."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"يمكن لمالك الهاتف فقط إدارة المستخدمين."</string>
@@ -3324,9 +3323,6 @@
     <string name="wizard_back" msgid="8257697435061870191">"رجوع"</string>
     <string name="wizard_next" msgid="3884832431439072471">"التالي"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"إنهاء"</string>
-    <string name="user_image_take_photo" msgid="2601691481533190924">"التقاط صورة"</string>
-    <string name="user_image_choose_photo" msgid="5904586923236027350">"اختيار صورة"</string>
-    <string name="user_image_photo_selector" msgid="7727851029781491727">"اختيار صورة"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"‏بطاقات SIM"</string>
     <string name="sim_settings_title" msgid="8392862852842113531">"‏بطاقات SIM"</string>
@@ -5197,7 +5193,7 @@
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"تمت إزالة الاقتراح."</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"تراجع"</string>
     <string name="low_storage_summary" msgid="1979492757417779718">"مساحة التخزين منخفضة. <xliff:g id="PERCENTAGE">%1$s</xliff:g> مُستخدَمة - <xliff:g id="FREE_SPACE">%2$s</xliff:g> فارغة"</string>
-    <string name="contextual_card_feedback_send" msgid="7409408664417908922">"إرسال تعليقات"</string>
+    <string name="contextual_card_feedback_send" msgid="7409408664417908922">"إرسال ملاحظات وآراء"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"هل ترغب في إرسال تعليقات إلينا بشأن هذا الاقتراح؟"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"تمّ نسخ <xliff:g id="COPY_CONTENT">%1$s</xliff:g> إلى الحافظة."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>

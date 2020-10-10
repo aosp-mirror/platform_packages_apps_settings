@@ -1053,6 +1053,8 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Adresa MAC zariadenia"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Randomizovaná adresa MAC"</string>
+    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
+    <skip />
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"Adresa IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Podrobnosti siete"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Maska podsiete"</string>
@@ -1070,10 +1072,8 @@
     <string name="wifi_ip_settings_invalid_gateway" msgid="1174931247370931239">"Zadajte platnú adresu brány."</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="1757402215999845975">"Zadajte platnú adresu DNS."</string>
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="5980808986926987299">"Zadajte dĺžku sieťovej predpony v rozsahu 0 až 32."</string>
-    <!-- no translation found for wifi_dns1 (6764769531843748514) -->
-    <skip />
-    <!-- no translation found for wifi_dns2 (7273133202625326148) -->
-    <skip />
+    <string name="wifi_dns1" msgid="6764769531843748514">"1. systém DNS (pokiaľ nie je prepísaný súkromným)"</string>
+    <string name="wifi_dns2" msgid="7273133202625326148">"2. systém DNS (pokiaľ nie je prepísaný súkromným)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Brána"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Dĺžka sieťovej predpony"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
@@ -3118,7 +3118,6 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Pracovný profil (nie je nastavený)"</string>
     <string name="user_admin" msgid="4024553191395768119">"Správca"</string>
     <string name="user_you" msgid="3070562015202859996">"Vy (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_nickname" msgid="3763630194459958977">"Prezývka"</string>
     <string name="user_add_max_count" msgid="5739771048517070983">"Môžete pridať až <xliff:g id="USER_COUNT">%1$d</xliff:g> používateľov"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Používateľov môže spravovať iba vlastník tabletu."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Používateľov môže spravovať iba vlastník telefónu."</string>
@@ -3238,9 +3237,6 @@
     <string name="wizard_back" msgid="8257697435061870191">"Späť"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Ďalej"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Dokončiť"</string>
-    <string name="user_image_take_photo" msgid="2601691481533190924">"Odfotiť"</string>
-    <string name="user_image_choose_photo" msgid="5904586923236027350">"Vybrať obrázok"</string>
-    <string name="user_image_photo_selector" msgid="7727851029781491727">"Vybrať fotku"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM karty"</string>
     <string name="sim_settings_title" msgid="8392862852842113531">"SIM karty"</string>
@@ -3982,7 +3978,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Pred odopnutím požiadať o PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred uvoľnením požiadať o heslo"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Pri odopnutí zamknúť zariadenie"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrdenie odstránenia SIM karty"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrdiť odstránenie SIM karty"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Pred vymazaním stiahnutej SIM karty overiť, že ste to vy"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Tento pracovný profil spravuje aplikácia:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Spravované aplikáciou <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
@@ -4963,7 +4959,7 @@
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Názov"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Farba (používajú kompatibilné aplikácie)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Uložiť"</string>
-    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"Použiť SIM"</string>
+    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"Používať SIM kartu"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Vypnuté"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Ak chcete túto SIM kartu deaktivovať, odstráňte ju"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Klepnutím aktivujete operátora <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
