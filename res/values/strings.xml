@@ -11931,6 +11931,20 @@
     <!-- Body text of error message indicating the device could not disable the mobile network, due to an unknown issue. [CHAR LIMIT=NONE] -->
     <string name="privileged_action_disable_fail_text">Something went wrong and your carrier could not be disabled.</string>
 
+    <!-- Strings for deleting eUICC subscriptions dialog activity -->
+    <!-- Title on confirmation dialog asking the user if they want to erase the downloaded SIM from the device. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_dialog_title">Erase this downloaded SIM?</string>
+    <!-- Body text in confirmation dialog indicating what erasing a SIM entails. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_dialog_text">Erasing this SIM removes <xliff:g id="carrier_name_a" example="Google Fi">%1$s</xliff:g> service from this device.\n\nService for <xliff:g id="carrier_name_b" example="Google Fi">%1$s</xliff:g> won\'t be canceled.</string>
+    <!-- Button label to erase the eSIM [CHAR_LIMIT=20] -->
+    <string name="erase_sim_confirm_button">Erase</string>
+    <!-- Status message indicating the device is in the process of erasing the SIM. [CHAR_LIMIT=NONE] -->
+    <string name="erasing_sim">Erasing SIM&#8230;</string>
+    <!-- Title of error message indicating the device could not erase the SIM. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_fail_title">Can\'t erase SIM</string>
+    <!-- Body text of error message indicating the device could not erase the SIM due to an error. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_fail_text">This SIM can\'t be erased due to an error.\n\nRestart your device and try again.</string>
+
     <!-- Title for Network connection request Dialog [CHAR LIMIT=60] -->
     <string name="network_connection_request_dialog_title">Connect to device</string>
     <!-- Summary for Network connection request Dialog [CHAR LIMIT=NONE] -->
