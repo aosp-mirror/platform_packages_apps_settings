@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -47,5 +48,14 @@ public class PanicGestureSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.panic_gesture_settings);
+            new BaseSearchIndexProvider(R.xml.panic_gesture_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    final PanicGesturePreferenceController controller =
+                            new PanicGesturePreferenceController(context,
+                                    "dummy_panic_gesture_pref_key");
+                    return !controller.isAvailable()
+                            || controller.shouldSuppressFromSearch();
+                }
+            };
 }
