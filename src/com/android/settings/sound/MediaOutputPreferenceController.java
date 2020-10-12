@@ -133,10 +133,13 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            final Intent intent = new Intent()
-                    .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(intent);
+            mContext.sendBroadcast(new Intent()
+                    .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                    .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
+                    .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                            mMediaController.getPackageName())
+                    .putExtra(MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN,
+                            mMediaController.getSessionToken()));
             return true;
         }
         return false;
