@@ -83,6 +83,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.setSwitchBarText(R.string.bluetooth_setting_on, R.string.bluetooth_setting_off);
         mController = new BluetoothSwitchPreferenceController(activity,
                 new SwitchBarController(mSwitchBar), mFooterPreference);
         Lifecycle lifecycle = getSettingsLifecycle();
