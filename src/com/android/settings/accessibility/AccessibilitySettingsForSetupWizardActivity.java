@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.ComponentName;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -121,5 +122,12 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
             subSettingLauncher.launch();
             finish();
         }
+    }
+
+    @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, new_resid, first);
     }
 }
