@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
+import static com.android.settings.accessibility.PreferredShortcuts.retrieveUserShortcutType;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
@@ -292,7 +293,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
-        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
+                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         if (preference.isChecked()) {
             if (!mToggleServiceDividerSwitchPreference.isChecked()) {
                 preference.setChecked(false);
@@ -313,7 +315,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     public void onSettingsClicked(ShortcutPreference preference) {
         // Do not restore shortcut in shortcut chooser dialog when shortcutPreference is turned off.
         mUserShortcutTypesCache = mShortcutPreference.isChecked()
-                ? getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE)
+                ? retrieveUserShortcutType(getPrefContext(), mComponentName.flattenToString(),
+                UserShortcutType.SOFTWARE)
                 : UserShortcutType.EMPTY;
 
         final boolean isServiceOnOrShortcutAdded = mShortcutPreference.isChecked()
@@ -415,7 +418,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void onAllowButtonFromShortcutToggleClicked() {
         mShortcutPreference.setChecked(true);
 
-        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
+                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
 
         mIsDialogShown.set(false);
