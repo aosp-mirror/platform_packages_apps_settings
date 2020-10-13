@@ -44,7 +44,6 @@ import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.ToggleFeaturePreferenceFragment.AccessibilityUserShortcutType;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
@@ -54,10 +53,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 public class ToggleScreenMagnificationPreferenceFragmentTest {
@@ -183,7 +178,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     public void updateShortcutPreferenceData_hasValueInSharedPreference_assignToVariable() {
-        final AccessibilityUserShortcutType tripleTapShortcut = new AccessibilityUserShortcutType(
+        final PreferredShortcut tripleTapShortcut = new PreferredShortcut(
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.TRIPLETAP);
 
         putUserShortcutTypeIntoSharedPreference(mContext, tripleTapShortcut);
@@ -217,10 +212,8 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     private void putUserShortcutTypeIntoSharedPreference(Context context,
-            AccessibilityUserShortcutType shortcut) {
-        Set<String> value = new HashSet<>(Collections.singletonList(shortcut.flattenToString()));
-
-        SharedPreferenceUtils.setUserShortcutType(context, value);
+            PreferredShortcut shortcut) {
+        PreferredShortcuts.saveUserShortcutType(context, shortcut);
     }
 
     private void setMagnificationTripleTapEnabled(boolean enabled) {
