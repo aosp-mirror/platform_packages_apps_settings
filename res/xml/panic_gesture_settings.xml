@@ -43,15 +43,4 @@
         app:controller="com.android.settings.gestures.PanicGestureSoundPreferenceController"
         app:allowDividerAbove="true"/>
 
-    <Preference
-        android:key="panic_emergency_contacts"
-        android:icon="@drawable/ic_emergency_contact"
-        android:title="@string/panic_gesture_edit_emergency_contact_setting_title"
-        app:keywords="@sttring/keywords_gesture"
-        app:allowDividerAbove="true">
-        <intent
-            android:action="android.settings.EDIT_EMERGENCY_INFO"
-            android:targetPackage="@string/config_aosp_emergency_package_name"/>
-    </Preference>
-
 </PreferenceScreen>
