@@ -86,6 +86,11 @@
             android:title="@string/accessibility_disable_animations"
             settings:controller="com.android.settings.accessibility.DisableAnimationsPreferenceController"/>
 
+        <SwitchPreference
+            android:key="toggle_force_bold_text"
+            android:persistent="false"
+            android:title="@string/force_bold_text"
+            settings:controller="com.android.settings.accessibility.ForceBoldTextPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
