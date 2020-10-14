@@ -20,6 +20,7 @@ import android.animation.LayoutTransition;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
 import com.android.settings.accounts.AvatarViewMixin;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -58,7 +60,8 @@ public class SettingsHomepageActivity extends FragmentActivity {
         getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
 
-        if (!getSystemService(ActivityManager.class).isLowRamDevice()) {
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)
+                && !getSystemService(ActivityManager.class).isLowRamDevice()) {
             // Only allow contextual feature on high ram devices.
             showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
         }
