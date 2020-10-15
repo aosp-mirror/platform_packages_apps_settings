@@ -31,9 +31,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,6 +66,13 @@ public class TopLevelDisplayPreferenceControllerTest {
         when(mContext.getString(R.string.config_wallpaper_picker_class)).thenReturn("cls");
 
         mController = new TopLevelDisplayPreferenceController(mContext, "test_key");
+    }
+
+    @After
+    public void tearDown() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        }
     }
 
     @Test
@@ -108,5 +118,12 @@ public class TopLevelDisplayPreferenceControllerTest {
 
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getText(R.string.display_dashboard_nowallpaper_summary));
+    }
+
+    @Test
+    public void getSummary_silkyHomeEnabled_shouldBeNull() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
+
+        assertThat(mController.getSummary()).isNull();
     }
 }
