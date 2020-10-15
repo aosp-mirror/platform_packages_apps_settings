@@ -26,8 +26,8 @@ import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.display.AdaptiveSleepPreferenceController;
 import com.android.settings.display.AlwaysOnDisplaySlice;
+import com.android.settings.display.ScreenTimeoutPreferenceController;
 import com.android.settings.flashlight.FlashlightSlice;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
@@ -63,7 +63,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath(AdaptiveSleepPreferenceController.PREF_NAME)
+            .appendPath(ScreenTimeoutPreferenceController.PREF_NAME)
             .build();
 
     /**

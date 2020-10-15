@@ -1,66 +1,95 @@
 /*
  * Copyright (C) 2019 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.android.settings.display;
 
-import static android.provider.Settings.Secure.ADAPTIVE_SLEEP;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.service.attention.AttentionService;
 import android.text.TextUtils;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.bluetooth.RestrictionUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
 
+import com.google.common.annotations.VisibleForTesting;
 
-public class AdaptiveSleepPreferenceController extends TogglePreferenceController {
-    public static final String PREF_NAME = "adaptive_sleep";
-    private static final String SYSTEM_KEY = ADAPTIVE_SLEEP;
+/** The controller for Screen attention switch preference. */
+public class AdaptiveSleepPreferenceController {
+    public static final String PREFERENCE_KEY = "adaptive_sleep";
     private static final int DEFAULT_VALUE = 0;
+    private RestrictionUtils mRestrictionUtils;
+    private PackageManager mPackageManager;
+    private Context mContext;
 
-    public AdaptiveSleepPreferenceController(Context context, String key) {
-        super(context, key);
+    @VisibleForTesting
+    RestrictedSwitchPreference mPreference;
+
+    public AdaptiveSleepPreferenceController(Context context, RestrictionUtils restrictionUtils) {
+        mContext = context;
+        mRestrictionUtils = restrictionUtils;
+        mPreference = new RestrictedSwitchPreference(context);
+        mPreference.setTitle(R.string.adaptive_sleep_title);
+        mPreference.setSummary(R.string.adaptive_sleep_description);
+        mPreference.setIcon(R.drawable.empty_icon);
+        mPreference.setChecked(isChecked());
+        mPreference.setKey(PREFERENCE_KEY);
+        mPreference.setOnPreferenceClickListener(preference -> {
+            final boolean isChecked = ((RestrictedSwitchPreference) preference).isChecked();
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
+            return true;
+        });
+        mPackageManager = context.getPackageManager();
     }
 
-    @Override
-    public boolean isChecked() {
+    public AdaptiveSleepPreferenceController(Context context) {
+        this(context, new RestrictionUtils());
+    }
+
+    /**
+     * Adds the controlled preference to the provided preference screen.
+     */
+    public void addToScreen(PreferenceScreen screen) {
+        final EnforcedAdmin enforcedAdmin = mRestrictionUtils.checkIfRestrictionEnforced(mContext,
+                UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT);
+        if (enforcedAdmin != null) {
+            mPreference.setDisabledByAdmin(enforcedAdmin);
+        } else {
+            mPreference.setEnabled(hasSufficientPermission(mPackageManager));
+        }
+        screen.addPreference(mPreference);
+    }
+
+    @VisibleForTesting
+    boolean isChecked() {
         return hasSufficientPermission(mContext.getPackageManager()) && Settings.Secure.getInt(
-                mContext.getContentResolver(), SYSTEM_KEY, DEFAULT_VALUE) != DEFAULT_VALUE;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        Settings.Secure.putInt(mContext.getContentResolver(), SYSTEM_KEY,
-                isChecked ? 1 : DEFAULT_VALUE);
-        return true;
-    }
-
-    @Override
-    @AvailabilityStatus
-    public int getAvailabilityStatus() {
-        return isControllerAvailable(mContext);
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return mContext.getText(isChecked()
-                ? R.string.adaptive_sleep_summary_on
-                : R.string.adaptive_sleep_summary_off);
+                mContext.getContentResolver(), Settings.Secure.ADAPTIVE_SLEEP, DEFAULT_VALUE)
+                != DEFAULT_VALUE;
     }
 
     public static int isControllerAvailable(Context context) {

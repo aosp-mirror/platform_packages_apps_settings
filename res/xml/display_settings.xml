@@ -63,20 +63,12 @@
     </com.android.settingslib.RestrictedPreference>
 
     <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
-    <com.android.settings.display.TimeoutListPreference
+    <Preference
         android:key="screen_timeout"
         android:title="@string/screen_timeout"
         android:summary="@string/summary_placeholder"
-        android:entries="@array/screen_timeout_entries"
-        android:entryValues="@array/screen_timeout_values"
-        settings:keywords="@string/keywords_screen_timeout" />
-
-    <Preference
-        android:key="adaptive_sleep_entry"
-        android:title="@string/adaptive_sleep_title"
-        android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.display.AdaptiveSleepSettings"
-        settings:controller="com.android.settings.display.AdaptiveSleepPreferenceController" />
+        android:fragment="com.android.settings.display.ScreenTimeoutSettings"
+        settings:controller="com.android.settings.display.ScreenTimeoutPreferenceController" />
 
     <SwitchPreference
         android:key="auto_rotate"

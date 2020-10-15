@@ -247,7 +247,8 @@ public class AddAccountSettings extends Activity {
         identityIntent.setAction(SHOULD_NOT_RESOLVE);
         identityIntent.addCategory(SHOULD_NOT_RESOLVE);
 
-        mPendingIntent = PendingIntent.getBroadcast(this, 0, identityIntent, 0);
+        mPendingIntent = PendingIntent.getBroadcast(this, 0, identityIntent,
+                PendingIntent.FLAG_IMMUTABLE);
         addAccountOptions.putParcelable(KEY_CALLER_IDENTITY, mPendingIntent);
         addAccountOptions.putBoolean(EXTRA_HAS_MULTIPLE_USERS, Utils.hasMultipleUsers(this));
         AccountManager.get(this).addAccountAsUser(
