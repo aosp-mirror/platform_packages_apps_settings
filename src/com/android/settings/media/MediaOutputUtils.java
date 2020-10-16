@@ -25,6 +25,9 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.sound.MediaOutputPreferenceController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Utilities that can be shared between {@link MediaOutputIndicatorWorker} and
  * {@link MediaOutputPreferenceController}.
@@ -43,6 +46,7 @@ public class MediaOutputUtils {
             MediaSessionManager mediaSessionManager) {
 
         MediaController localController = null;
+        final List<String> remoteMediaSessionLists = new ArrayList<>();
         for (MediaController controller : mediaSessionManager.getActiveSessions(null)) {
             final MediaController.PlaybackInfo pi = controller.getPlaybackInfo();
             if (pi == null) {
@@ -69,10 +73,14 @@ public class MediaOutputUtils {
                         controller.getPackageName())) {
                     localController = null;
                 }
+                if (!remoteMediaSessionLists.contains(controller.getPackageName())) {
+                    remoteMediaSessionLists.add(controller.getPackageName());
+                }
                 continue;
             }
             if (pi.getPlaybackType() == MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL) {
-                if (localController == null) {
+                if (localController == null
+                        && !remoteMediaSessionLists.contains(controller.getPackageName())) {
                     localController = controller;
                 }
             }
