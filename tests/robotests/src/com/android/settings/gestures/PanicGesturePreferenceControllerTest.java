@@ -23,6 +23,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -35,15 +38,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class PanicGesturePreferenceControllerTest {
 
+    private static final String TEST_PKG_NAME = "test_pkg";
+    private static final String TEST_CLASS_NAME = "name";
+    private static final Intent SETTING_INTENT = new Intent(
+            PanicGesturePreferenceController.ACTION_PANIC_SETTINGS).setPackage(TEST_PKG_NAME);
 
     private Context mContext;
     private ContentResolver mContentResolver;
+    private ShadowPackageManager mPackageManager;
     private PanicGesturePreferenceController mController;
     private static final String PREF_KEY = "gesture_panic_button";
 
@@ -51,12 +61,35 @@ public class PanicGesturePreferenceControllerTest {
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mContentResolver = mContext.getContentResolver();
+        mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         mController = new PanicGesturePreferenceController(mContext, PREF_KEY);
     }
 
     @After
     public void tearDown() {
         SettingsShadowResources.reset();
+    }
+
+    @Test
+    public void constructor_hasCustomPackageConfig_shouldSetIntent() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = TEST_PKG_NAME;
+        info.activityInfo.name = TEST_CLASS_NAME;
+
+        mPackageManager.addResolveInfoForIntent(SETTING_INTENT, info);
+
+        SettingsShadowResources.overrideResource(
+                R.bool.config_show_panic_gesture_settings,
+                Boolean.TRUE);
+
+        SettingsShadowResources.overrideResource(
+                R.string.panic_gesture_settings_package,
+                TEST_PKG_NAME);
+
+        mController = new PanicGesturePreferenceController(mContext, PREF_KEY);
+
+        assertThat(mController.mIntent).isNotNull();
     }
 
     @Test

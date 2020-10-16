@@ -42,7 +42,7 @@
     <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Isključena"</string>
     <string name="radioInfo_data_connecting" msgid="7280819598028917888">"Povezivanje"</string>
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"Povezano"</string>
-    <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspendirano"</string>
+    <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Obustavljeno"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Nepoznato"</string>
     <string name="sdcard_unmount" product="nosdcard" msgid="1816306320988638382">"Deaktiviraj USB pohranu"</string>
     <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"Deaktiviraj SD karticu"</string>
@@ -1033,8 +1033,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"MAC adresa uređaja"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Nasumično odabrana MAC adresa"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Nasumično odabrana MAC adresa (zadnje korišteno)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP adresa"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Detalji o mreži"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Maska podmreže"</string>
@@ -4917,6 +4916,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Isključivanje SIM-a<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Nismo mogli onemogućiti operatera"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Nešto nije uredu i nismo mogli onemogućiti vašeg operatera."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Potpuno izbrisati ovaj preuzeti SIM?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ako potpuno izbrišete ovaj SIM, s ovog uređaja će se ukloniti usluga operatera <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>.\n\nUsluga za operatera <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> neće se otkazati."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Potpuno izbriši"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"Potpuno brisanje SIM-a…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"Nije moguće potpuno izbrisati SIM"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"Nije moguće potpuno izbrisati ovaj SIM zbog greške.\n\nPonovo pokrenite uređaj i pokušajte ponovo."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Povezivanje s uređajem"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Aplikacija <xliff:g id="APPNAME">%1$s</xliff:g> želi koristiti privremenu WiFi mrežu da se poveže s vašim uređajem"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Nije pronađen nijedan uređaj Provjerite jesu li uređaji uključeni i dostupni za povezivanje."</string>
