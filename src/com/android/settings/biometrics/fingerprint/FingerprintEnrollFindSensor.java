@@ -65,7 +65,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
             final FingerprintManager fpm = getSystemService(FingerprintManager.class);
-            fpm.generateChallenge((sensorId, challenge) -> {
+            fpm.generateChallenge(mUserId, (sensorId, challenge) -> {
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
                 BiometricUtils.removeGatekeeperPasswordHandle(this, getIntent());
 
