@@ -571,7 +571,7 @@ public class FingerprintSettings extends SubSettings {
                 mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                     if (data != null && BiometricUtils.containsGatekeeperPasswordHandle(data)) {
-                        mFingerprintManager.generateChallenge((sensorId, challenge) -> {
+                        mFingerprintManager.generateChallenge(mUserId, (sensorId, challenge) -> {
                             mToken = BiometricUtils.requestGatekeeperHat(getActivity(), data,
                                     mUserId, challenge);
                             BiometricUtils.removeGatekeeperPasswordHandle(getActivity(), data);
@@ -599,7 +599,7 @@ public class FingerprintSettings extends SubSettings {
         public void onDestroy() {
             super.onDestroy();
             if (getActivity().isFinishing()) {
-                mFingerprintManager.revokeChallenge();
+                mFingerprintManager.revokeChallenge(mUserId);
             }
         }
 

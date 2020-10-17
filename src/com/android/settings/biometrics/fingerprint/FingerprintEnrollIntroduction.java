@@ -148,7 +148,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
             callback.onChallengeGenerated(0, 0L);
             return;
         }
-        mFingerprintManager.generateChallenge(callback::onChallengeGenerated);
+        mFingerprintManager.generateChallenge(mUserId, callback::onChallengeGenerated);
     }
 
     @Override
