@@ -184,9 +184,10 @@ public class DataUsageSummaryPreferenceControllerTest {
         CharSequence value = captor.getValue();
         assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
 
+        // TODO (b/170330084): return intent instead of null for mSummaryPreference
         verify(mSummaryPreference).setUsageInfo((info.cycleEnd / 1000) * 1000,
                 now - UPDATE_BACKOFF_MS,
-                CARRIER_NAME, 1 /* numPlans */, intent);
+                CARRIER_NAME, 1 /* numPlans */, null /* launchIntent */);
         verify(mSummaryPreference).setChartEnabled(true);
         verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
                 false /* isSingleWifi */);
