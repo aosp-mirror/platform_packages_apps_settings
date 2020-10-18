@@ -92,7 +92,7 @@ public class MultiBiometricEnrollHelper {
     private void launchFingerprintEnroll() {
         final FingerprintManager fingerprintManager = mActivity
                 .getSystemService(FingerprintManager.class);
-        fingerprintManager.generateChallenge(((sensorId, challenge) -> {
+        fingerprintManager.generateChallenge(mUserId, ((sensorId, challenge) -> {
             final byte[] hardwareAuthToken = BiometricUtils.requestGatekeeperHat(mActivity,
                     mGkPwHandle, mUserId, challenge);
             final Intent intent = BiometricUtils.getFingerprintIntroIntent(mActivity,

@@ -140,7 +140,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     private void postEnroll() {
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
         if (fpm != null) {
-            fpm.revokeChallenge();
+            fpm.revokeChallenge(mUserId);
         }
     }
 

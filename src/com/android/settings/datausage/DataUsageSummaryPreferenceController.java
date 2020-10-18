@@ -325,7 +325,10 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                 mSnapshotTime = primaryPlan.getDataUsageTime();
             }
         }
-        mManageSubscriptionIntent = createManageSubscriptionIntent(mSubId);
+        // Temporarily return null, since no current users of SubscriptionPlan have this intent set.
+        // TODO (b/170330084): Remove after refactoring 5G SubscriptionPlan logic.
+        // mManageSubscriptionIntent = createManageSubscriptionIntent(mSubId);
+        mManageSubscriptionIntent = null;
         Log.i(TAG, "Have " + mDataplanCount + " plans, dflt sub-id " + mSubId
                 + ", intent " + mManageSubscriptionIntent);
     }
