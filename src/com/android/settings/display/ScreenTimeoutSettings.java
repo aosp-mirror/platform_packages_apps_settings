@@ -104,6 +104,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     public void onStart() {
         super.onStart();
         mAdaptiveSleepPermissionController.updateVisibility();
+        mAdaptiveSleepController.updatePreference();
     }
 
     @Override
