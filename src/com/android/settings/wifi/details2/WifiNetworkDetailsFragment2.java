@@ -255,6 +255,11 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
      * API call for refreshing the preferences in this fragment.
      */
     public void refreshPreferences() {
+        updatePreferenceStates();
+        displayPreferenceControllers();
+    }
+
+    protected void displayPreferenceControllers() {
         final PreferenceScreen screen = getPreferenceScreen();
         for (AbstractPreferenceController controller : mControllers) {
             // WifiDetailPreferenceController2 gets the callback WifiEntryCallback#onUpdated,
