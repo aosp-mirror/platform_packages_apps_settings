@@ -21,6 +21,8 @@ import static android.content.Intent.EXTRA_USER;
 import static com.android.settingslib.drawer.SwitchesProvider.EXTRA_SWITCH_SET_CHECKED_ERROR;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_ORDER;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_PROFILE;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON_URI;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SWITCH_URI;
@@ -48,10 +50,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -60,6 +64,7 @@ import androidx.preference.SwitchPreference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -401,17 +406,75 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowTileUtils.class})
-    public void bindPreference_withIconUri_shouldLoadIconFromContentProvider() {
+    public void bindIcon_withStaticIcon_shouldLoadStaticIcon() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
-        mActivityInfo.metaData.putString(TileUtils.META_DATA_PREFERENCE_ICON_URI,
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON, R.drawable.ic_add_40dp);
+
+        mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+
+        final Bitmap preferenceBmp = Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
+        final Drawable staticIcon = Icon.createWithResource(mActivityInfo.packageName,
+                R.drawable.ic_add_40dp).loadDrawable(preference.getContext());
+        final Bitmap staticIconBmp = Utils.createIconWithDrawable(staticIcon).getBitmap();
+        assertThat(preferenceBmp.sameAs(staticIconBmp)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowTileUtils.class})
+    public void bindIcon_withIconUri_shouldLoadIconFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_URI,
                 "content://com.android.settings/tile_icon");
+
         mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
 
         assertThat(preference.getIcon()).isNotNull();
+    }
+
+    @Test
+    @Config(shadows = {ShadowTileUtils.class})
+    public void bindIcon_withStaticIconAndIconUri_shouldLoadIconFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON, R.drawable.ic_add_40dp);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_URI,
+                "content://com.android.settings/tile_icon");
+
+        mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+
+        final Bitmap preferenceBmp = Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
+        final Drawable staticIcon = Icon.createWithResource(mActivityInfo.packageName,
+                R.drawable.ic_add_40dp).loadDrawable(preference.getContext());
+        final Bitmap staticIconBmp = Utils.createIconWithDrawable(staticIcon).getBitmap();
+        assertThat(preferenceBmp.sameAs(staticIconBmp)).isFalse();
+
+        final Pair<String, Integer> iconInfo = TileUtils.getIconFromUri(
+                mContext, "pkg", null /* uri */, null /* providerMap */);
+        final Drawable iconFromUri = Icon.createWithResource(iconInfo.first, iconInfo.second)
+                .loadDrawable(preference.getContext());
+        final Bitmap iconBmpFromUri = Utils.createIconWithDrawable(iconFromUri).getBitmap();
+        assertThat(preferenceBmp.sameAs(iconBmpFromUri)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowTileUtils.class})
+    public void bindIcon_noIcon_shouldNotLoadIcon() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+
+        mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+
+        assertThat(preference.getIcon()).isNull();
     }
 
     @Test
