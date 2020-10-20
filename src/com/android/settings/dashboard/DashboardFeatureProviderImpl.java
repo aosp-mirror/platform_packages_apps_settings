@@ -357,18 +357,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @VisibleForTesting
     void bindIcon(Preference preference, Tile tile, boolean forceRoundedIcon) {
-        // Use preference context instead here when get icon from Tile, as we are using the context
-        // to get the style to tint the icon. Using mContext here won't get the correct style.
-        final Icon tileIcon = tile.getIcon(preference.getContext());
-        if (tileIcon != null) {
-            Drawable iconDrawable = tileIcon.loadDrawable(preference.getContext());
-            if (forceRoundedIcon
-                    && !TextUtils.equals(mContext.getPackageName(), tile.getPackageName())) {
-                iconDrawable = new AdaptiveIcon(mContext, iconDrawable);
-                ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
-            }
-            preference.setIcon(iconDrawable);
-        } else if (tile.getMetaData() != null
+        // Icon provided by the content provider overrides any static icon.
+        if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Intent intent = tile.getIntent();
@@ -388,11 +378,30 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     return;
                 }
                 final Icon icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
-                ThreadUtils.postOnMainThread(() ->
-                        preference.setIcon(icon.loadDrawable(preference.getContext()))
-                );
+                ThreadUtils.postOnMainThread(() -> {
+                    setPreferenceIcon(preference, tile, forceRoundedIcon, iconInfo.first, icon);
+                });
             });
+            return;
         }
+
+        // Use preference context instead here when get icon from Tile, as we are using the context
+        // to get the style to tint the icon. Using mContext here won't get the correct style.
+        final Icon tileIcon = tile.getIcon(preference.getContext());
+        if (tileIcon == null) {
+            return;
+        }
+        setPreferenceIcon(preference, tile, forceRoundedIcon, tile.getPackageName(), tileIcon);
+    }
+
+    private void setPreferenceIcon(Preference preference, Tile tile, boolean forceRoundedIcon,
+            String iconPackage, Icon icon) {
+        Drawable iconDrawable = icon.loadDrawable(preference.getContext());
+        if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
+            iconDrawable = new AdaptiveIcon(mContext, iconDrawable);
+            ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
+        }
+        preference.setIcon(iconDrawable);
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,

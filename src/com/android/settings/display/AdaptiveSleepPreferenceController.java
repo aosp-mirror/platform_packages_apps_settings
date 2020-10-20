@@ -75,6 +75,14 @@ public class AdaptiveSleepPreferenceController {
      * Adds the controlled preference to the provided preference screen.
      */
     public void addToScreen(PreferenceScreen screen) {
+        updatePreference();
+        screen.addPreference(mPreference);
+    }
+
+    /**
+     *  Updates the appearance of the preference.
+     */
+    public void updatePreference() {
         final EnforcedAdmin enforcedAdmin = mRestrictionUtils.checkIfRestrictionEnforced(mContext,
                 UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT);
         if (enforcedAdmin != null) {
@@ -82,7 +90,6 @@ public class AdaptiveSleepPreferenceController {
         } else {
             mPreference.setEnabled(hasSufficientPermission(mPackageManager));
         }
-        screen.addPreference(mPreference);
     }
 
     @VisibleForTesting
