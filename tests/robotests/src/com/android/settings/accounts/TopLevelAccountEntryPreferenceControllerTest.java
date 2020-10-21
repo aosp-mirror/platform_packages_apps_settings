@@ -19,8 +19,10 @@ package com.android.settings.accounts;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowAuthenticationHelper;
 
 import org.junit.After;
@@ -51,6 +53,10 @@ public class TopLevelAccountEntryPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowAuthenticationHelper.reset();
+
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        }
     }
 
     @Test
@@ -75,5 +81,12 @@ public class TopLevelAccountEntryPreferenceControllerTest {
 
         // should only show the 2 accounts with labels
         assertThat(mController.getSummary()).isEqualTo(LABELS[0] + " and " + LABELS[1]);
+    }
+
+    @Test
+    public void getSummary_silkyHomeEnabled_shouldBeNull() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
+
+        assertThat(mController.getSummary()).isNull();
     }
 }

@@ -19,11 +19,13 @@ package com.android.settings.deviceinfo;
 import android.content.Context;
 import android.os.storage.StorageManager;
 import android.text.format.Formatter;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -48,6 +50,11 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
 
     @Override
     protected void refreshSummary(Preference preference) {
+        // Remove homepage summaries for silky home.
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            return;
+        }
+
         if (preference == null) {
             return;
         }
