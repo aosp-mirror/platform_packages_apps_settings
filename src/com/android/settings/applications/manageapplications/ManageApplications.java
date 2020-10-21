@@ -1045,6 +1045,7 @@ public class ManageApplications extends InstrumentedFragment
             } else if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_HIGH_POWER) {
+                mBackend.refreshList();
                 mExtraInfoBridge = new AppStatePowerBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_OVERLAY) {
                 mExtraInfoBridge = new AppStateOverlayBridge(mContext, mState, this);
