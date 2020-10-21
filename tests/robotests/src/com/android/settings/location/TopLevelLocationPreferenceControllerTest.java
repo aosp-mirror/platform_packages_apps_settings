@@ -20,9 +20,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.location.LocationManager;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +44,13 @@ public class TopLevelLocationPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new TopLevelLocationPreferenceController(mContext, PREFERENCE_KEY);
         mLocationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+    }
+
+    @After
+    public void tearDown() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        }
     }
 
     @Test
@@ -82,5 +92,12 @@ public class TopLevelLocationPreferenceControllerTest {
                 mContext.getResources().getQuantityString(
                         R.plurals.location_settings_summary_location_on,
                         LOCATION_APP_COUNT, LOCATION_APP_COUNT));
+    }
+
+    @Test
+    public void getSummary_silkyHomeEnabled_shouldBeNull() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
+
+        assertThat(mController.getSummary()).isNull();
     }
 }
