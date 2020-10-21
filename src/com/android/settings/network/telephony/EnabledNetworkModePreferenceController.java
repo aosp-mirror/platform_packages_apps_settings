@@ -365,9 +365,15 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         private int getPreferredNetworkMode() {
-            return Settings.Global.getInt(mContext.getContentResolver(),
+            int networkMode = Settings.Global.getInt(mContext.getContentResolver(),
                     Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
                     TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+            if (!showNrList()) {
+                Log.d(LOG_TAG, "Network mode :" + networkMode + " reduce NR");
+                networkMode = reduceNrToLteNetworkType(networkMode);
+            }
+            Log.d(LOG_TAG, "getPreferredNetworkMode: " + networkMode);
+            return networkMode;
         }
 
         private EnabledNetworks getEnabledNetworkType() {
@@ -632,6 +638,40 @@ public class EnabledNetworkModePreferenceController extends
                             .NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
                 default:
                     return networkType; // not LTE
+            }
+        }
+
+        /**
+         * Transform NR5G network mode to LTE network mode.
+         *
+         * @param networkType an 5G network mode.
+         * @return the corresponding network mode without 5G.
+         */
+        private static int reduceNrToLteNetworkType(int networkType) {
+            switch(networkType) {
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA:
+                    return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA;
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+                    return TelephonyManagerConstants
+                            .NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
+                default:
+                    return networkType; // do nothing
             }
         }
 
