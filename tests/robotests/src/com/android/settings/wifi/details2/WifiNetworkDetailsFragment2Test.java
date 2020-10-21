@@ -73,46 +73,4 @@ public class WifiNetworkDetailsFragment2Test {
 
         verify(menuItem).setIcon(com.android.internal.R.drawable.ic_mode_edit);
     }
-
-    @Test
-    public void refreshPreferences_shouldUpdatePreferenceStates() {
-        final FakeWifiNetworkDetailsFragment2 fakeFragment = new FakeWifiNetworkDetailsFragment2();
-
-        fakeFragment.refreshPreferences();
-
-        assertThat(fakeFragment.isUpdatePreferenceStatesCalled()).isTrue();
-    }
-
-    @Test
-    public void refreshPreferences_shouldDisplayPreferenceControllers() {
-        final FakeWifiNetworkDetailsFragment2 fakeFragment = new FakeWifiNetworkDetailsFragment2();
-
-        fakeFragment.refreshPreferences();
-
-        assertThat(fakeFragment.isDisplayPreferenceControllersCalled()).isTrue();
-    }
-
-    // Fake WifiNetworkDetailsFragment2 to verify the protected functions
-    public class FakeWifiNetworkDetailsFragment2 extends WifiNetworkDetailsFragment2 {
-
-        private boolean mUpdatePreferenceStatesCalled;
-        private boolean mDisplayPreferenceControllersCalled;
-
-        @Override
-        protected void updatePreferenceStates() {
-            mUpdatePreferenceStatesCalled = true;
-        }
-
-        @Override
-        protected void displayPreferenceControllers() {
-            mDisplayPreferenceControllersCalled = true;
-        }
-
-        public boolean isUpdatePreferenceStatesCalled() {
-            return mUpdatePreferenceStatesCalled;
-        }
-        public boolean isDisplayPreferenceControllersCalled() {
-            return mDisplayPreferenceControllersCalled;
-        }
-    }
 }
