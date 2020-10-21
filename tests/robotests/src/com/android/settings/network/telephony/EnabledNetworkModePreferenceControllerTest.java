@@ -222,6 +222,28 @@ public class EnabledNetworkModePreferenceControllerTest {
     }
 
     @Test
+    public void updateState_NrEnableBoolFalse_5gOptionHidden() {
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_NR_ENABLED_BOOL, false);
+
+        mController.init(mLifecycle, SUB_ID);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
+                TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getValue()).isEqualTo(
+                String.valueOf(
+                        TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
+        assertThat(mPreference.getEntryValues())
+                .asList()
+                .doesNotContain(
+                        String.valueOf(TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA));
+    }
+
+    @Test
     public void updateState_GlobalDisAllowed5g_GlobalWithoutNR() {
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
         mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
@@ -393,6 +415,11 @@ public class EnabledNetworkModePreferenceControllerTest {
         } else if (networkMode == TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA) {
             mockPhoneType(TelephonyManager.PHONE_TYPE_GSM);
             mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, true);
+        } else if (networkMode
+                == TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA) {
+            mockPhoneType(TelephonyManager.PHONE_TYPE_GSM);
+            mPersistableBundle.putBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL, true);
+            mPersistableBundle.putBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL, true);
         }
     }
 
@@ -407,6 +434,6 @@ public class EnabledNetworkModePreferenceControllerTest {
     }
 
     private void mockPhoneType(int phoneType) {
-        doReturn(TelephonyManager.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
+        doReturn(phoneType).when(mTelephonyManager).getPhoneType();
     }
 }
