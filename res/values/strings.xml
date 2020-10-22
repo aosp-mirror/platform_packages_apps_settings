@@ -5239,6 +5239,18 @@
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
+    <!-- TODO(b/170970602): remove translatable=false when RBC has official name and strings -->
+    <!-- Title for the accessibility preference to configure Reduce Bright Colors feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_title" translatable="false">Reduce Bright Colors</string>
+    <!-- Used in the accessibility service settings to control switching Reduce Bright Colors on/off. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_switch_title" translatable="false">Use Reduce Bright Colors</string>
+    <!-- Subtitle that describes Reduce Bright Colors. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_subtitle" translatable="false">Reduce Bright Colors reduces screen brightness.</string>
+    <!-- Title for setting the brightness intensity of the display using Reduce Bright Colors. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_preference_title" translatable="false">Intensity</string>
+    <!-- Title for setting whether the Reduce Bright Colors activation state persists across reboots. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_persist_preference_title" translatable="false">Keeps feature on after a restart</string>
+
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
         <item quantity="one">Short (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
