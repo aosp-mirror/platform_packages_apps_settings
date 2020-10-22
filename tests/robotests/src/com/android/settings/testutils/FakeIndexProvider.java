@@ -30,7 +30,7 @@ public class FakeIndexProvider implements Indexable {
     public static final String KEY = "TestKey";
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.sound_settings) {
+            new BaseSearchIndexProvider(R.xml.location_settings) {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
