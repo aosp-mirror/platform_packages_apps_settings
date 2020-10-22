@@ -16,6 +16,8 @@
 
 package com.android.settings.security;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -23,9 +25,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +40,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-public class TopLevelSecurityPreferenceControllerTest {
+public class TopLevelSecurityEntryPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -53,6 +58,13 @@ public class TopLevelSecurityPreferenceControllerTest {
         when(mContext.getSystemService(Context.FACE_SERVICE))
                 .thenReturn(mFaceManager);
         mController = new TopLevelSecurityEntryPreferenceController(mContext, "test_key");
+    }
+
+    @After
+    public void tearDown() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        }
     }
 
     @Test
@@ -127,5 +139,12 @@ public class TopLevelSecurityPreferenceControllerTest {
         mController.getSummary();
 
         verify(mContext).getText(R.string.security_dashboard_summary_no_fingerprint);
+    }
+
+    @Test
+    public void getSummary_silkyHomeEnabled_shouldBeNull() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
+
+        assertThat(mController.getSummary()).isNull();
     }
 }

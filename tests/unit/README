@@ -1,3 +1,11 @@
+The simplest way to run all SettingsUnitTests is with atest
+$ atest SettingsUnitTests
+
+A single class can also be tested with the following command
+$ atest -c <YourClassName>
+
+// The following instrutions show how to run the test suite using make + adb //
+
 To build the tests you can use the following command at the root of your android source tree
 $ make SettingsUnitTests
 

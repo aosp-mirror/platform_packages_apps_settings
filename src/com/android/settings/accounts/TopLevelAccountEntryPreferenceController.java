@@ -21,9 +21,11 @@ import android.icu.text.ListFormatter;
 import android.os.UserHandle;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
@@ -41,6 +43,11 @@ public class TopLevelAccountEntryPreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
+        // Remove homepage summaries for silky home.
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            return null;
+        }
+
         final AuthenticatorHelper authHelper = new AuthenticatorHelper(mContext,
                 UserHandle.of(UserHandle.myUserId()), null /* OnAccountsUpdateListener */);
         final String[] types = authHelper.getEnabledAccountTypes();
