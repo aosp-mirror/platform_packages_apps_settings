@@ -231,6 +231,14 @@
             android:summary="@string/accessibility_shortcut_description"
             settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
 
+        <!--TODO(b/170973645): Get icon-->
+        <Preference
+            android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
+            android:key="reduce_bright_colors_preference"
+            android:persistent="false"
+            android:title="@string/reduce_bright_colors_preference_title"
+            settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>
