@@ -28,12 +28,15 @@ import android.content.Context;
 import android.icu.text.NumberFormat;
 import android.os.storage.VolumeInfo;
 import android.text.format.Formatter;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -68,6 +71,13 @@ public class TopLevelStoragePreferenceControllerTest {
         mController = new TopLevelStoragePreferenceController(mContext, "test_key");
     }
 
+    @After
+    public void tearDown() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        }
+    }
+
     @Test
     public void updateSummary_shouldDisplayUsedPercentAndFreeSpace() throws Exception {
         final VolumeInfo volumeInfo = mVolumes.get(0);
@@ -89,5 +99,12 @@ public class TopLevelStoragePreferenceControllerTest {
 
         assertThat(preference.getSummary()).isEqualTo(
                 mContext.getString(R.string.storage_summary, percentage, freeSpace));
+    }
+
+    @Test
+    public void refreshSummary_silkyHomeEnabled_shouldBeNull() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
+
+        assertThat(mController.getSummary()).isNull();
     }
 }

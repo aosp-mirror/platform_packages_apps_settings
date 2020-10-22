@@ -17,12 +17,14 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -69,6 +71,11 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
+        // Remove homepage summaries for silky home.
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            return null;
+        }
+
         return getDashboardLabel(mContext, mBatteryInfo);
     }
 

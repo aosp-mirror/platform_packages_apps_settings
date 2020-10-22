@@ -24,6 +24,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,13 +33,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.AbstractPreferenceController;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+
+import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiNetworkDetailsFragment2Test {
+
+    final String TEST_PREFERENCE_KEY = "TEST_PREFERENCE_KEY";
 
     private WifiNetworkDetailsFragment2 mFragment;
 
@@ -72,5 +84,45 @@ public class WifiNetworkDetailsFragment2Test {
         mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
 
         verify(menuItem).setIcon(com.android.internal.R.drawable.ic_mode_edit);
+    }
+
+    @Test
+    public void refreshPreferences_controllerShouldUpdateStateAndDisplayPreference() {
+        final FakeFragment fragment = spy(new FakeFragment());
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        final Preference preference = mock(Preference.class);
+        final TestController controller = mock(TestController.class);
+        doReturn(screen).when(fragment).getPreferenceScreen();
+        doReturn(preference).when(screen).findPreference(TEST_PREFERENCE_KEY);
+        doReturn(TEST_PREFERENCE_KEY).when(controller).getPreferenceKey();
+        fragment.mControllers = new ArrayList<>();
+        fragment.mControllers.add(controller);
+        fragment.addPreferenceController(controller);
+
+        fragment.refreshPreferences();
+
+        verify(controller).updateState(preference);
+        verify(controller).displayPreference(screen);
+    }
+
+    // Fake WifiNetworkDetailsFragment2 to override the protected method as public.
+    public class FakeFragment extends WifiNetworkDetailsFragment2 {
+
+        @Override
+        public void addPreferenceController(AbstractPreferenceController controller) {
+            super.addPreferenceController(controller);
+        }
+    }
+
+    public class TestController extends BasePreferenceController {
+
+        public TestController() {
+            super(RuntimeEnvironment.application, TEST_PREFERENCE_KEY);
+        }
+
+        @Override
+        public int getAvailabilityStatus() {
+            return AVAILABLE;
+        }
     }
 }

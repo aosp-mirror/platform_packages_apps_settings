@@ -19,10 +19,12 @@ package com.android.settings.security;
 import android.content.Context;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
 
 public class TopLevelSecurityEntryPreferenceController extends BasePreferenceController {
 
@@ -37,6 +39,11 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
 
     @Override
     public CharSequence getSummary() {
+        // Remove homepage summaries for silky home.
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            return null;
+        }
+
         final FingerprintManager fpm =
                 Utils.getFingerprintManagerOrNull(mContext);
         final FaceManager faceManager =
