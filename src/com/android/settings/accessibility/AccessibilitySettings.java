@@ -97,6 +97,8 @@ public class AccessibilitySettings extends DashboardFragment {
             "magnification_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference";
+    private static final String DISPLAY_REDUCE_BRIGHT_COLORS_PREFERENCE_SCREEN =
+            "reduce_bright_colors_preference";
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -170,6 +172,8 @@ public class AccessibilitySettings extends DashboardFragment {
     private Preference mDisplayMagnificationPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mToggleInversionPreference;
+    private Preference mReduceBrightColorsPreference;
+
 
     /**
      * Check if the color transforms are color accelerated. Some transforms are experimental only
@@ -335,6 +339,10 @@ public class AccessibilitySettings extends DashboardFragment {
 
         // Display color adjustments.
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
+
+        // Reduce brightness.
+        mReduceBrightColorsPreference =
+                findPreference(DISPLAY_REDUCE_BRIGHT_COLORS_PREFERENCE_SCREEN);
     }
 
     private void updateAllPreferences() {
@@ -488,6 +496,7 @@ public class AccessibilitySettings extends DashboardFragment {
                     mCategoryToPrefCategoryMap.get(CATEGORY_DISPLAY);
             experimentalCategory.removePreference(mToggleInversionPreference);
             experimentalCategory.removePreference(mDisplayDaltonizerPreferenceScreen);
+            experimentalCategory.removePreference(mReduceBrightColorsPreference);
             mDisplayMagnificationPreferenceScreen.setSummary(
                     ToggleScreenMagnificationPreferenceFragment.getServiceSummary(getContext()));
             mDisplayDaltonizerPreferenceScreen.setOrder(
@@ -502,8 +511,13 @@ public class AccessibilitySettings extends DashboardFragment {
                     mToggleLargePointerIconPreference.getOrder() + 1);
             mToggleInversionPreference.setSummary(AccessibilityUtil.getSummary(
                     getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED));
+            mReduceBrightColorsPreference.setOrder(
+                    mToggleDisableAnimationsPreference.getOrder() + 1);
+            mReduceBrightColorsPreference.setSummary(AccessibilityUtil.getSummary(
+                    getContext(), Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED));
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
+            displayCategory.addPreference(mReduceBrightColorsPreference);
         }
     }
 
