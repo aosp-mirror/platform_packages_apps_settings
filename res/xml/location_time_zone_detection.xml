@@ -14,12 +14,15 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/location_time_zone_detection_screen_title">
 
     <SwitchPreference
         android:title="@string/location_time_zone_detection_enabled_title"
         android:summary="@string/location_time_zone_detection_enabled_description"
+        settings:controller="com.android.settings.location.TimeZoneDetectionTogglePreferenceController"
         android:key="location_time_zone_detection_enabled" />
 
 </PreferenceScreen>
