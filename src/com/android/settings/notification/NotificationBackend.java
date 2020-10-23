@@ -541,6 +541,15 @@ public class NotificationBackend {
         }
     }
 
+    public void createConversationNotificationChannel(String pkg, int uid,
+            NotificationChannel parent, String conversationId) {
+        try {
+            sINM.createConversationNotificationChannelForPackage(pkg, uid, parent, conversationId);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
     public ShortcutInfo getConversationInfo(Context context, String pkg, int uid, String id) {
         LauncherApps la = context.getSystemService(LauncherApps.class);
 
