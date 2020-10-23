@@ -1597,6 +1597,24 @@
         </activity>
 
         <activity
+            android:name="Settings$ReduceBrightColorsSettingsActivity"
+            android:exported="true"
+            android:label="@string/reduce_bright_colors_preference_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REDUCE_BRIGHT_COLORS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$CaptioningSettingsActivity"
             android:exported="true"
             android:label="@string/accessibility_captioning_title">

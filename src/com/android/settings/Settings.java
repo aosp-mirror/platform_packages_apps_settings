@@ -111,6 +111,10 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityContrastSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
+    /**
+     * Activity for Reduce Bright Colors.
+     */
+    public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SecurityDashboardActivity extends SettingsActivity { /* empty */ }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
