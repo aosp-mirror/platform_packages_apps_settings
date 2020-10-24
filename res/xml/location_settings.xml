@@ -65,6 +65,13 @@
             settings:forWork="true"
             settings:useAdminDisabledSummary="true"/>
 
+        <!-- This preference gets removed if location-based time zone detection is not supported -->
+        <Preference
+            android:key="location_time_zone_detection"
+            android:title="@string/location_time_zone_detection_screen_title"
+            settings:controller="com.android.settings.location.LocationTimeZoneDetectionPreferenceController"
+            android:fragment="com.android.settings.location.TimeZoneDetectionSettings" />
+
         <PreferenceCategory
             android:key="location_services"
             android:layout="@layout/preference_category_no_label"
