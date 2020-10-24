@@ -72,6 +72,7 @@ platform_compat_config {
 
 android_app {
     name: "Settings",
+    defaults: ["platform_app_defaults"],
     platform_apis: true,
     certificate: "platform",
     system_ext_specific: true,
