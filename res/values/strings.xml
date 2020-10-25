@@ -4002,6 +4002,32 @@
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
     <string name="managed_profile_location_services">Location services for work</string>
 
+    <!-- [CHAR LIMIT=60] Location settings screen, screen title -->
+    <string name="location_time_zone_detection_screen_title">Location time zone detection</string>
+    <!-- [CHAR LIMIT=50] Location settings screen, title for the setting that control whether the
+         device can use its location for time zone detection. -->
+    <string name="location_time_zone_detection_enabled_title">Location time zone detection</string>
+    <!-- [CHAR LIMIT=NONE] Preference description text for location time zone detection -->
+    <string name="location_time_zone_detection_enabled_description">Allows the device\u2019s location to be used to detect the current time zone. Other location settings such as Wi\u2011Fi scanning can affect the accuracy of time zone detection.</string>
+
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is on -->
+    <string name="location_time_zone_detection_on">On</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is off -->
+    <string name="location_time_zone_detection_off">Off</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
+         applicable due to other settings like the "automatic time zone detection enabled" setting
+         being set to "off". -->
+    <string name="location_time_zone_detection_auto_is_off">Automatic time zone detection is disabled</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
+         applicable for the user for unspecified reasons. More specific messages are used when there
+         is a clear reason. -->
+    <string name="location_time_zone_detection_not_applicable">Location time zone detection is disabled</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not supported -->
+    <string name="location_time_zone_detection_not_supported">Location time zone detection is not supported</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
+         allowed for the user, e.g. because of device policy -->
+    <string name="location_time_zone_detection_not_allowed">Location time zone detection changes are not allowed</string>
+
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
     <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary for Google location service check box-->
@@ -8509,10 +8535,19 @@
     <string name="important_conversations_summary">Show at top of conversation section</string>
 
     <!-- [CHAR LIMIT=100] preference category title -->
-    <string name="other_conversations">Other conversations</string>
+    <string name="other_conversations">Non-priority conversations</string>
 
     <!-- summary for other conversations list -->
     <string name="other_conversations_summary">Conversations you\u2019ve made changes to</string>
+
+    <!-- [CHAR LIMIT=100] preference category title -->
+    <string name="recent_conversations">Recent conversations</string>
+
+    <!-- [CHAR LIMIT=20] button title -->
+    <string name="conversation_settings_clear_recents">Clear recents</string>
+
+    <!-- a11y string -->
+    <string name="clear">Clear</string>
 
     <!-- [CHAR LIMIT=100] Setting to automatically bubble all notifications from favorite conversations -->
     <string name="important_bubble">Bubble priority conversations</string>

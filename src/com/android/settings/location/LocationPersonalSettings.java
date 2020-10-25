@@ -58,6 +58,8 @@ public class LocationPersonalSettings extends DashboardFragment {
                 RecentLocationRequestPreferenceController.class);
         controller.init(this);
         controller.setProfileType(profileType);
+
+        use(LocationTimeZoneDetectionPreferenceController.class);
     }
 
     @Override

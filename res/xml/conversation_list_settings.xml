@@ -43,11 +43,17 @@
         </PreferenceCategory>
     </PreferenceCategory>
 
-
-    <!--Other conversations added here -->
+    <!-- Non-priority modified conversations added here -->
     <PreferenceCategory
         android:title="@string/other_conversations"
         android:key="other_conversations"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false" />
+
+    <!-- Recent conversations added here -->
+    <PreferenceCategory
+        android:title="@string/recent_conversations"
+        android:key="recent_conversations"
         settings:allowDividerAbove="true"
         settings:allowDividerBelow="false" />
 
