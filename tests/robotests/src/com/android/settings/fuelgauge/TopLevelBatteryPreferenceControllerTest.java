@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.util.FeatureFlagUtils;
 
+import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 
 import org.junit.After;
@@ -83,5 +84,14 @@ public class TopLevelBatteryPreferenceControllerTest {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
 
         assertThat(mController.getSummary()).isNull();
+    }
+
+    @Test
+    public void getSummary_batteryNotPresent_shouldShowWarningMessage() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        mController.mIsBatteryPresent = false;
+
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getString(R.string.battery_missing_message));
     }
 }
