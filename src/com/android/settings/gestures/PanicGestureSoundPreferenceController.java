@@ -34,7 +34,7 @@ public class PanicGestureSoundPreferenceController extends TogglePreferenceContr
     @VisibleForTesting
     static final int OFF = 0;
 
-    private static final String SECURE_KEY = Settings.Secure.PANIC_SOUND_ENABLED;
+    private static final String SECURE_KEY = Settings.Secure.EMERGENCY_GESTURE_SOUND_ENABLED;
 
     public PanicGestureSoundPreferenceController(Context context, String key) {
         super(context, key);

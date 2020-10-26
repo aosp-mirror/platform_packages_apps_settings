@@ -113,7 +113,7 @@ public class PanicGesturePreferenceControllerTest {
     @Test
     public void isChecked_configIsNotSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_GESTURE_ENABLED, ON);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_ENABLED, ON);
         mController = new PanicGesturePreferenceController(mContext, PREF_KEY);
 
         assertThat(mController.isChecked()).isTrue();
@@ -122,7 +122,7 @@ public class PanicGesturePreferenceControllerTest {
     @Test
     public void isChecked_configIsSet_shouldReturnFalse() {
         // Set the setting to be disabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_GESTURE_ENABLED, OFF);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_ENABLED, OFF);
         mController = new PanicGesturePreferenceController(mContext, PREF_KEY);
 
         assertThat(mController.isChecked()).isFalse();
