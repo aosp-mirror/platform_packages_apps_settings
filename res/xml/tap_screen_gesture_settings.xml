@@ -23,7 +23,8 @@
     <com.android.settings.widget.VideoPreference
         android:key="gesture_tap_screen_video"
         app:animation="@raw/gesture_ambient_tap_screen"
-        app:preview="@drawable/gesture_ambient_tap_screen" />
+        app:preview="@drawable/gesture_ambient_tap_screen"
+        app:controller="com.android.settings.widget.VideoPreferenceController" />
 
     <SwitchPreference
         android:key="gesture_tap"
