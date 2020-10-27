@@ -50,7 +50,7 @@ public class PanicGesturePreferenceController extends GesturePreferenceControlle
 
     private static final String PREF_KEY_VIDEO = "panic_button_screen_video";
 
-    private static final String SECURE_KEY = Settings.Secure.PANIC_GESTURE_ENABLED;
+    private static final String SECURE_KEY = Settings.Secure.EMERGENCY_GESTURE_ENABLED;
 
     public PanicGesturePreferenceController(Context context, String key) {
         super(context, key);
