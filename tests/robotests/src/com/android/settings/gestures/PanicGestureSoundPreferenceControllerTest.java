@@ -78,7 +78,8 @@ public class PanicGestureSoundPreferenceControllerTest {
     @Test
     public void isChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_SOUND_ENABLED, ON);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_SOUND_ENABLED,
+                ON);
 
         assertThat(mController.isChecked()).isTrue();
     }
@@ -86,7 +87,8 @@ public class PanicGestureSoundPreferenceControllerTest {
     @Test
     public void isChecked_configIsSetToFalse_shouldReturnFalse() {
         // Set the setting to be disabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_SOUND_ENABLED, OFF);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_SOUND_ENABLED,
+                OFF);
 
         assertThat(mController.isChecked()).isFalse();
     }
