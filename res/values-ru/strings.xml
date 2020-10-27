@@ -1778,24 +1778,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Поиск Bluetooth-устройств"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Разрешить приложениям и сервисам искать устройства поблизости, даже когда Bluetooth отключен. Это может улучшить работу функций и сервисов, использующих данные о местоположении."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Геолокация для работы"</string>
-    <!-- no translation found for location_time_zone_detection_screen_title (8396625087466311625) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_enabled_title (1195178875042989835) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_enabled_description (1064716900984397624) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_on (5514817179120761597) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_off (192427076195667079) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_auto_is_off (8067073548483627695) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_not_applicable (6757964612836952714) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_not_supported (3251181656388306501) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_not_allowed (8264525161514617051) -->
-    <skip />
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"Определение часового пояса с помощью геолокации"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"Определение часового пояса с помощью геолокации"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"Позволяет использовать местоположение устройства для того, чтобы определять текущий часовой пояс. На точность могут влиять другие настройки геолокации (например, поиск сетей Wi‑Fi)."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"Включено"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"Отключено"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"Автоматическое определение часовых поясов отключено"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Определение часового пояса с помощью геолокации отключено."</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Определение часового пояса с помощью геолокации не поддерживается."</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Вы не можете изменить настройки определения часового пояса с помощью геолокации."</string>
     <string name="location_network_based" msgid="5247042890080021887">"По координатам сети"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Разрешить отправлять анонимные геоданные и позволить приложениям определять ваше местоположение с помощью Wi-Fi и мобильных сетей"</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"С помощью Wi-Fi"</string>
@@ -2595,6 +2586,10 @@
       <item quantity="other">%1$d приложения с ограниченным доступом</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <!-- no translation found for battery_missing_message (5202575301365811053) -->
+    <skip />
+    <!-- no translation found for battery_missing_help_message (4583322687535428926) -->
+    <skip />
     <string name="dialog_stop_title" msgid="5972757101865665655">"Остановить приложение?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Заряд батареи расходуется слишком быстро, так как приложение \"<xliff:g id="APP">%1$s</xliff:g>\" не позволяет телефону перейти в спящий режим.\n\nЧтобы устранить эту проблему, остановите приложение.\n\nЕсли это не поможет, удалите его."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Заряд батареи расходуется слишком быстро, так как приложение \"<xliff:g id="APP">%1$s</xliff:g>\" не позволяет планшету перейти в спящий режим.\n\nЧтобы устранить эту проблему, остановите приложение.\n\nЕсли это не поможет, удалите его."</string>
@@ -3671,15 +3666,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"Важные разговоры"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Показывать в верхней части списка разговоров и в виде всплывающих чатов"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Показывать в верхней части списка разговоров"</string>
-    <!-- no translation found for other_conversations (551178916855139870) -->
-    <skip />
+    <string name="other_conversations" msgid="551178916855139870">"Неприоритетные разговоры"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Разговоры, в которые вы вносили изменения:"</string>
-    <!-- no translation found for recent_conversations (471678228756995274) -->
-    <skip />
-    <!-- no translation found for conversation_settings_clear_recents (7502738708058226585) -->
-    <skip />
-    <!-- no translation found for clear (5092178335409471100) -->
-    <skip />
+    <string name="recent_conversations" msgid="471678228756995274">"Недавние разговоры"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Удалить недавние"</string>
+    <string name="clear" msgid="5092178335409471100">"Очистить"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Показывать всплывающие чаты для важных разговоров"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Важные разговоры появляются в верхней части панели уведомлений. Для них можно включить всплывающие чаты, а также разрешить показ сообщений в режиме \"Не беспокоить\"."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Здесь будут появляться важные и измененные разговоры"</string>

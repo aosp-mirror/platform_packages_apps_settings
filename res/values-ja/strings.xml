@@ -1734,24 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetoothのスキャン"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"仕事用プロファイル向けの位置情報サービス"</string>
-    <!-- no translation found for location_time_zone_detection_screen_title (8396625087466311625) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_enabled_title (1195178875042989835) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_enabled_description (1064716900984397624) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_on (5514817179120761597) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_off (192427076195667079) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_auto_is_off (8067073548483627695) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_not_applicable (6757964612836952714) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_not_supported (3251181656388306501) -->
-    <skip />
-    <!-- no translation found for location_time_zone_detection_not_allowed (8264525161514617051) -->
-    <skip />
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"位置情報によるタイムゾーン検出"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"位置情報によるタイムゾーン検出"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"デバイスの位置情報を使用して、現在のタイムゾーンを検出できるようにします。タイムゾーンの検出精度は、Wi-Fi スキャンなどの位置情報の設定によって異なります。"</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"ON"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"OFF"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"タイムゾーンの自動検出が無効です"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置情報によるタイムゾーン検出は無効です"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"位置情報によるタイムゾーン検出はサポートされていません"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"位置情報によるタイムゾーン検出は変更できません"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Wi-Fi/モバイル接続時の位置情報"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Googleの位置情報サービスで現在地をすばやく推定することをアプリに許可します。匿名の現在地データが収集され、Googleに送信されます。"</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Wi-Fiで検出される現在地"</string>
@@ -2519,6 +2510,10 @@
       <item quantity="one">制限されているアプリ: %1$d 個</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small></string>
+    <!-- no translation found for battery_missing_message (5202575301365811053) -->
+    <skip />
+    <!-- no translation found for battery_missing_help_message (4583322687535428926) -->
+    <skip />
     <string name="dialog_stop_title" msgid="5972757101865665655">"アプリを停止しますか？"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、スマートフォンで電池を正常に管理できません。\n\nアプリを停止して、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、タブレットで電池を正常に管理できません。\n\nアプリを停止して、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
@@ -3581,15 +3576,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"優先度の高い会話"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"会話セクションの一番上にバブルとして表示されます"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"会話セクションの一番上に表示"</string>
-    <!-- no translation found for other_conversations (551178916855139870) -->
-    <skip />
+    <string name="other_conversations" msgid="551178916855139870">"優先度の低い会話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"設定に変更を加えた会話"</string>
-    <!-- no translation found for recent_conversations (471678228756995274) -->
-    <skip />
-    <!-- no translation found for conversation_settings_clear_recents (7502738708058226585) -->
-    <skip />
-    <!-- no translation found for clear (5092178335409471100) -->
-    <skip />
+    <string name="recent_conversations" msgid="471678228756995274">"最近の会話"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"最近の項目の消去"</string>
+    <string name="clear" msgid="5092178335409471100">"消去"</string>
     <string name="important_bubble" msgid="7911698275408390846">"優先度の高い会話をバブルとして表示"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"優先度の高い会話はプルダウン シェードの一番上に表示されます。サイレント モードに割り込んでバブルとして表示されるよう、設定することもできます。"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"優先度の高い会話や設定を変更した会話がここに表示されます"</string>
