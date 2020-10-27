@@ -18,6 +18,7 @@ package com.android.settings.network.telephony.gsm;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -41,6 +42,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @RunWith(AndroidJUnit4.class)
 public class AutoSelectPreferenceControllerTest {
@@ -93,7 +97,14 @@ public class AutoSelectPreferenceControllerTest {
         when(mTelephonyManager.getNetworkSelectionMode()).thenReturn(
             TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
 
-        assertThat(mController.setChecked(true)).isFalse();
+        // Wait for asynchronous thread to finish, otherwise test will flake.
+        Future thread = mController.setAutomaticSelectionMode();
+        try {
+            thread.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            fail("Exception during automatic selection");
+        }
 
         verify(mProgressDialog).show();
         verify(mTelephonyManager).setNetworkSelectionModeAutomatic();
