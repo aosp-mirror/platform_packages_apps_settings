@@ -83,6 +83,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -1146,4 +1147,9 @@ public final class Utils extends com.android.settingslib.Utils {
         drawable.draw(canvas);
         return roundedBitmap;
     }
+
+    public static boolean isProviderModelEnabled(Context context) {
+        return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
+    }
+
 }

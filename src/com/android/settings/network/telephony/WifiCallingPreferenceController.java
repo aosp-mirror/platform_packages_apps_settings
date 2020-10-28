@@ -71,7 +71,7 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     @Override
     public int getAvailabilityStatus(int subId) {
         return SubscriptionManager.isValidSubscriptionId(subId)
-                && isWifiCallingEnabled(mContext, subId)
+                && MobileNetworkUtils.isWifiCallingEnabled(mContext, subId, null, null)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -220,24 +220,5 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
             mCallState = null;
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
         }
-    }
-
-    private boolean isWifiCallingEnabled(Context context, int subId) {
-        final PhoneAccountHandle simCallManager =
-                context.getSystemService(TelecomManager.class)
-                       .getSimCallManagerForSubscription(subId);
-        final int phoneId = SubscriptionManager.getSlotIndex(subId);
-
-        boolean isWifiCallingEnabled;
-        if (simCallManager != null) {
-            final Intent intent = MobileNetworkUtils.buildPhoneAccountConfigureIntent(
-                    context, simCallManager);
-
-            isWifiCallingEnabled = intent != null;
-        } else {
-            isWifiCallingEnabled = queryImsState(subId).isReadyToWifiCalling();
-        }
-
-        return isWifiCallingEnabled;
     }
 }
