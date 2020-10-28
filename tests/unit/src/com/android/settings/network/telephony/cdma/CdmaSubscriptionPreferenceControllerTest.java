@@ -24,7 +24,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
@@ -64,7 +63,7 @@ public class CdmaSubscriptionPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
 
         mPreference = new ListPreference(mContext);
-        mController = new CdmaSubscriptionPreferenceController(mContext, "mobile_data");
+        mController = spy(new CdmaSubscriptionPreferenceController(mContext, "mobile_data"));
         mController.init(mPreferenceManager, SUB_ID);
         mController.mPreference = mPreference;
         mPreference.setKey(mController.getPreferenceKey());
@@ -72,16 +71,12 @@ public class CdmaSubscriptionPreferenceControllerTest {
         mCdmaMode = Settings.Global.getInt(mContext.getContentResolver(),
             Settings.Global.CDMA_SUBSCRIPTION_MODE,
             TelephonyManager.CDMA_SUBSCRIPTION_RUIM_SIM);
-
-        mSubscriptionsSupported = SystemProperties.get("ril.subscription.types");
     }
 
     @After
     public void tearDown() {
         Settings.Global.putInt(mContext.getContentResolver(),
             Settings.Global.CDMA_SUBSCRIPTION_MODE, mCdmaMode);
-
-        SystemProperties.set("ril.subscription.types", mSubscriptionsSupported);
     }
 
     @Test
@@ -123,11 +118,9 @@ public class CdmaSubscriptionPreferenceControllerTest {
 
     @Test
     public void deviceSupportsNvAndRuim() {
-        SystemProperties.set("ril.subscription.types", "NV,RUIM");
+        doReturn("NV,RUIM").when(mController).getRilSubscriptionTypes();
         assertThat(mController.deviceSupportsNvAndRuim()).isTrue();
-
-        SystemProperties.set("ril.subscription.types", "");
-
+        doReturn("").when(mController).getRilSubscriptionTypes();
         assertThat(mController.deviceSupportsNvAndRuim()).isFalse();
     }
 }
