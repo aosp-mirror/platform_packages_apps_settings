@@ -18,29 +18,29 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:title="@string/panic_gesture_screen_title">
+    android:title="@string/emergency_gesture_screen_title">
 
     <com.android.settings.widget.VideoPreference
-        android:key="panic_button_screen_video"
+        android:key="emergency_gesture_screen_video"
         app:animation="@raw/gesture_double_tap"
         app:preview="@drawable/gesture_double_tap"/>
 
     <SwitchPreference
-        android:key="gesture_panic_button"
-        android:title="@string/panic_gesture_screen_title"
-        android:summary="@string/panic_gesture_screen_summary"
+        android:key="gesture_emergency_button"
+        android:title="@string/emergency_gesture_screen_title"
+        android:summary="@string/emergency_gesture_screen_summary"
         android:icon="@drawable/ic_hand_gesture"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.PanicGesturePreferenceController"
+        app:controller="com.android.settings.gestures.EmergencyGesturePreferenceController"
         app:allowDividerAbove="true"/>
 
     <SwitchPreference
-        android:key="panic_gesture_sound"
+        android:key="emergency_gesture_sound"
         android:icon="@drawable/ic_hearing"
-        android:title="@string/panic_gesture_sound_setting_title"
-        android:summary="@string/panic_gesture_sound_setting_summary"
+        android:title="@string/emergency_gesture_sound_setting_title"
+        android:summary="@string/emergency_gesture_sound_setting_summary"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.PanicGestureSoundPreferenceController"
+        app:controller="com.android.settings.gestures.EmergencyGestureSoundPreferenceController"
         app:allowDividerAbove="true"/>
 
 </PreferenceScreen>
