@@ -30,6 +30,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.PinResult;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -532,30 +533,25 @@ public class IccLockSettings extends SettingsPreferenceFragment
         mPinToggle.setEnabled(false);
     }
 
-    private class SetIccLockEnabled extends AsyncTask<Void, Void, Void> {
+    private class SetIccLockEnabled extends AsyncTask<Void, Void, PinResult> {
         private final boolean mState;
-        private final String mPassword;
-        private int mAttemptsRemaining;
+        private final String mPin;
 
         private SetIccLockEnabled(boolean state, String pin) {
             mState = state;
-            mPassword = pin;
+            mPin = pin;
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected PinResult doInBackground(Void... params) {
             mTelephonyManager =  mTelephonyManager.createForSubscriptionId(mSubId);
-            mAttemptsRemaining = mTelephonyManager.setIccLockEnabled(mState, mPassword);
-            return null;
+            return mTelephonyManager.setIccLockEnabled(mState, mPin);
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            if (mAttemptsRemaining == TelephonyManager.CHANGE_ICC_LOCK_SUCCESS) {
-                iccLockChanged(true, mAttemptsRemaining);
-            } else {
-                iccLockChanged(false, mAttemptsRemaining);
-            }
+        protected void onPostExecute(PinResult pinResult) {
+            iccLockChanged(pinResult.getResult() == PinResult.PIN_RESULT_TYPE_SUCCESS /* success */,
+                    pinResult.getAttemptsRemaining() /* attemptsRemaining */);
         }
     }
 
@@ -641,33 +637,28 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     private void tryChangePin() {
-        new ChangeIccLockPassword(mOldPin, mNewPin).execute();
+        new ChangeIccLockPin(mOldPin, mNewPin).execute();
     }
 
-    private class ChangeIccLockPassword extends AsyncTask<Void, Void, Void> {
-        private final String mOldPwd;
-        private final String mNewPwd;
-        private int mAttemptsRemaining;
+    private class ChangeIccLockPin extends AsyncTask<Void, Void, PinResult> {
+        private final String mOldPin;
+        private final String mNewPin;
 
-        private ChangeIccLockPassword(String oldPin, String newPin) {
-            mOldPwd = oldPin;
-            mNewPwd = newPin;
+        private ChangeIccLockPin(String oldPin, String newPin) {
+            mOldPin = oldPin;
+            mNewPin = newPin;
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected PinResult doInBackground(Void... params) {
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
-            mAttemptsRemaining = mTelephonyManager.changeIccLockPassword(mOldPwd, mNewPwd);
-            return null;
+            return mTelephonyManager.changeIccLockPin(mOldPin, mNewPin);
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            if (mAttemptsRemaining == TelephonyManager.CHANGE_ICC_LOCK_SUCCESS) {
-                iccPinChanged(true, mAttemptsRemaining);
-            } else {
-                iccPinChanged(false, mAttemptsRemaining);
-            }
+        protected void onPostExecute(PinResult pinResult) {
+            iccPinChanged(pinResult.getResult() == PinResult.PIN_RESULT_TYPE_SUCCESS /* success */,
+                    pinResult.getAttemptsRemaining() /* attemptsRemaining */);
         }
     }
 
