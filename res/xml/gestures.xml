@@ -21,10 +21,10 @@
     android:title="@string/gesture_preference_title">
 
     <Preference
-        android:key="gesture_panic_button_summary"
-        android:title="@string/panic_gesture_screen_title"
-        android:fragment="com.android.settings.gestures.PanicGestureSettings"
-        settings:controller="com.android.settings.gestures.PanicGesturePreferenceController" />
+        android:key="gesture_emergency_summary"
+        android:title="@string/emergency_gesture_screen_title"
+        android:fragment="com.android.settings.gestures.EmergencyGestureSettings"
+        settings:controller="com.android.settings.gestures.EmergencyGesturePreferenceController" />
 
     <Preference
         android:key="gesture_assist_input_summary"

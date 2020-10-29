@@ -16,8 +16,8 @@
 
 package com.android.settings.gestures;
 
-import static com.android.settings.gestures.PanicGesturePreferenceController.OFF;
-import static com.android.settings.gestures.PanicGesturePreferenceController.ON;
+import static com.android.settings.gestures.EmergencyGestureSoundPreferenceController.OFF;
+import static com.android.settings.gestures.EmergencyGestureSoundPreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -39,17 +39,17 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
-public class PanicGestureSoundPreferenceControllerTest {
+public class EmergencyGestureSoundPreferenceControllerTest {
 
     private Context mContext;
     private ContentResolver mContentResolver;
-    private PanicGestureSoundPreferenceController mController;
+    private EmergencyGestureSoundPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mContentResolver = mContext.getContentResolver();
-        mController = new PanicGestureSoundPreferenceController(mContext, "test_key");
+        mController = new EmergencyGestureSoundPreferenceController(mContext, "test_key");
     }
 
     @After
@@ -60,7 +60,7 @@ public class PanicGestureSoundPreferenceControllerTest {
     @Test
     public void isAvailable_configIsTrue_shouldReturnTrue() {
         SettingsShadowResources.overrideResource(
-                R.bool.config_show_panic_gesture_settings,
+                R.bool.config_show_emergency_gesture_settings,
                 Boolean.TRUE);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -69,7 +69,7 @@ public class PanicGestureSoundPreferenceControllerTest {
     @Test
     public void isAvailable_configIsTrue_shouldReturnFalse() {
         SettingsShadowResources.overrideResource(
-                R.bool.config_show_panic_gesture_settings,
+                R.bool.config_show_emergency_gesture_settings,
                 Boolean.FALSE);
 
         assertThat(mController.isAvailable()).isFalse();
