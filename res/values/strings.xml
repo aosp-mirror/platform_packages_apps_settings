@@ -11975,6 +11975,30 @@
     <string name="see_less">See less</string>
 
     <!-- Strings for toggling subscriptions dialog activity -->
+    <!-- Title of confirmation dialog asking the user if they want to enable subscription. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_enable_sub_dialog_title">Turn on <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
+    <!-- Title of confirmation dialog asking the user if they want to enable subscription without the subscription name. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name">Turn on SIM?</string>
+    <!-- Title of confirmation dialog asking the user if they want to switch subscription. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_title">Switch to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
+    <!-- Title of confirmation dialog asking the user if they want to switch to the SIM card. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_psim_dialog_title">Switch to using SIM card?</string>
+    <!-- Body text of confirmation dialog for switching subscription that involves switching SIM slots. Indicates that only one SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_text">Only one SIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
+    <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one downloaded SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_text_downloaded">Only one downloaded SIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
+    <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_text_single_sim">Only one SIM can be active at a time.\n\nSwitching won\u2019t cancel your <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> service.</string>
+    <!-- Text of confirm button in the confirmation dialog asking the user if they want to switch subscription. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_confirm">Switch to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g></string>
+    <!-- Status message indicating the device is in the process of disconnecting from one mobile network and immediately connecting to another. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_enabling_sim_without_carrier_name">Connecting to network&#8230;</string>
+    <!-- Text of progress dialog indicating the subscription switch is in progress. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_progress">Switching to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g></string>
+    <!-- Title of error message indicating that the device could not disconnect from one mobile network and immediately connect to another. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_enable_sim_fail_title">Can\u2019t switch carrier</string>
+    <!-- Body text of error message indicating the device could not disconnect from one mobile network and immediately connect to another, due to an unspecified issue. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_enable_sim_fail_text">The carrier can\u2019t be switched due to an error.</string>
     <!-- Title of confirmation dialog asking the user if they want to disable subscription. [CHAR_LIMIT=NONE] -->
     <string name="privileged_action_disable_sub_dialog_title">Turn off <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
     <!-- Title of confirmation dialog asking the user if they want to disable subscription. [CHAR_LIMIT=NONE] -->
@@ -11982,9 +12006,31 @@
     <!-- Disabling SIMs progress dialog message [CHAR LIMIT=NONE] -->
     <string name="privileged_action_disable_sub_dialog_progress">Turning off SIM<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
     <!-- Title of error messaging indicating the device could not disable the mobile network. [CHAR LIMIT=NONE] -->
-    <string name="privileged_action_disable_fail_title">Can\'t disable carrier</string>
+    <string name="privileged_action_disable_fail_title">Can\u2019t disable carrier</string>
     <!-- Body text of error message indicating the device could not disable the mobile network, due to an unknown issue. [CHAR LIMIT=NONE] -->
     <string name="privileged_action_disable_fail_text">Something went wrong and your carrier could not be disabled.</string>
+    <!-- Title on a dialog asking the users whether they want to enable DSDS mode. [CHAR LIMIT=NONE] -->
+    <string name="sim_action_enable_dsds_title">Use 2 SIMs?</string>
+    <!-- Message in a dialog indicating the user can enable DSDS mode. [CHAR LIMIT=NONE] -->
+    <string name="sim_action_enable_dsds_text">This device can have 2 SIMs active at once. To continue using 1 SIM at a time, tap \"No thanks\".</string>
+    <!-- Ask the user whether to restart device. [CHAR LIMIT=NONE] -->
+    <string name="sim_action_restart_title">Restart device?</string>
+    <!-- Tell the user that in order to enable DSDS mode, the phone needs to restart. [CHAR LIMIT=NONE] -->
+    <string name="sim_action_restart_text">To get started, restart your device. Then you can add another SIM.</string>
+    <!-- Button on a dialog to confirm SIM operations. [CHAR LIMIT=30] -->
+    <string name="sim_action_continue">Continue</string>
+    <!-- User confirms reboot the phone. [CHAR LIMIT=30] -->
+    <string name="sim_action_reboot">Restart</string>
+    <!-- Button on a dialog to reject SIM operations. [CHAR LIMIT=30] -->
+    <string name="sim_action_no_thanks">No thanks</string>
+    <!-- Button which will disconnect the user from one mobile network and immediately connect to another. [CHAR LIMIT=30] -->
+    <string name="sim_switch_button">Switch</string>
+    <!-- Title of DSDS activation failure dialog [CHAR LIMIT=40] -->
+    <string name="dsds_activation_failure_title">Can\u2019t activate SIM</string>
+    <!-- Body text of DSDS activation failure dialog. Users could reinsert the SIM card or reboot to recover. [CHAR LIMIT=NONE] -->
+    <string name="dsds_activation_failure_body_msg1">Remove the SIM and insert it again. If the problem continues, restart your device.</string>
+    <!-- Body text of DSDS activation failure dialog. Users could toggle the selected SIM again or reboot to recover. [CHAR LIMIT=NONE] -->
+    <string name="dsds_activation_failure_body_msg2">Try turning on the SIM again. If the problem continues, restart your device.</string>
 
     <!-- Strings for deleting eUICC subscriptions dialog activity -->
     <!-- Title on confirmation dialog asking the user if they want to erase the downloaded SIM from the device. [CHAR_LIMIT=NONE] -->
