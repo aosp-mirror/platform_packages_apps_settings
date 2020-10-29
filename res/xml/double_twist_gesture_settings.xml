@@ -23,7 +23,8 @@
     <com.android.settings.widget.VideoPreference
         android:key="gesture_double_twist_video"
         app:animation="@raw/gesture_twist"
-        app:preview="@drawable/gesture_twist" />
+        app:preview="@drawable/gesture_twist"
+        app:controller="com.android.settings.widget.VideoPreferenceController" />
 
     <SwitchPreference
         android:key="gesture_double_twist"

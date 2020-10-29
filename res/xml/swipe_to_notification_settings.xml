@@ -23,7 +23,8 @@
     <com.android.settings.widget.VideoPreference
         android:key="gesture_swipe_down_fingerprint_video"
         app:animation="@raw/gesture_fingerprint_swipe"
-        app:preview="@drawable/gesture_fingerprint_swipe" />
+        app:preview="@drawable/gesture_fingerprint_swipe"
+        app:controller="com.android.settings.widget.VideoPreferenceController" />
 
     <SwitchPreference
         android:key="gesture_swipe_down_fingerprint"

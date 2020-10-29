@@ -23,7 +23,8 @@
     <com.android.settings.widget.VideoPreference
         android:key="gesture_prevent_ringing_video"
         app:animation="@raw/gesture_prevent_ringing"
-        app:preview="@drawable/gesture_prevent_ringing" />
+        app:preview="@drawable/gesture_prevent_ringing"
+        app:controller="com.android.settings.widget.VideoPreferenceController" />
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="gesture_prevent_ringing_switch"
