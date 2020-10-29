@@ -461,7 +461,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             sb.append("\n")
                     .append(bold("getShortcutInfo"))
                     .append(delim)
-                    .append(String.valueOf(rank.getShortcutInfo()));
+                    .append(String.valueOf(rank.getConversationShortcutInfo()));
             sb.append("\n")
                     .append(bold("isConversation"))
                     .append(delim)
