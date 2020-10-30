@@ -18,7 +18,6 @@ package com.android.settings.network.telephony.cdma;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -86,8 +85,6 @@ public class CdmaSubscriptionPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_selectNV_returnNVMode() {
-        doReturn(true).when(mTelephonyManager).setCdmaSubscriptionMode(anyInt());
-
         mController.onPreferenceChange(mPreference, Integer.toString(
                 TelephonyManager.CDMA_SUBSCRIPTION_NV));
 
