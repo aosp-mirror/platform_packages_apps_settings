@@ -44,6 +44,8 @@ import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +62,11 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     private CharSequence[] mInitialEntries;
     private CharSequence[] mInitialValues;
     private FooterPreference mPrivacyPreference;
-    private AdaptiveSleepPreferenceController mAdaptiveSleepController;
-    private AdaptiveSleepPermissionPreferenceController mAdaptiveSleepPermissionController;
+    @VisibleForTesting
+    AdaptiveSleepPermissionPreferenceController mAdaptiveSleepPermissionController;
+
+    @VisibleForTesting
+    AdaptiveSleepPreferenceController mAdaptiveSleepController;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -87,15 +92,17 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
-        final Context context = getContext();
         final List<CandidateInfo> candidates = new ArrayList<>();
-        final long maxTimeout = getMaxScreenTimeout(context);
-        for (int i = 0; i < mInitialValues.length; ++i) {
-            if (Long.parseLong(mInitialValues[i].toString()) <= maxTimeout) {
-                candidates.add(
-                        new TimeoutCandidateInfo(mInitialEntries[i], mInitialValues[i].toString(),
-                                true));
+        final long maxTimeout = getMaxScreenTimeout(getContext());
+        if (mInitialValues != null) {
+            for (int i = 0; i < mInitialValues.length; ++i) {
+                if (Long.parseLong(mInitialValues[i].toString()) <= maxTimeout) {
+                    candidates.add(new TimeoutCandidateInfo(mInitialEntries[i],
+                            mInitialValues[i].toString(), true));
+                }
             }
+        } else {
+            Log.e(TAG, "Screen timeout options do not exist.");
         }
         return candidates;
     }
@@ -125,9 +132,11 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
             screen.addPreference(pref);
         }
 
-        mAdaptiveSleepPermissionController.addToScreen(screen);
-        mAdaptiveSleepController.addToScreen(screen);
-        screen.addPreference(mPrivacyPreference);
+        if (isScreenAttentionAvailable()) {
+            mAdaptiveSleepPermissionController.addToScreen(screen);
+            mAdaptiveSleepController.addToScreen(screen);
+            screen.addPreference(mPrivacyPreference);
+        }
     }
 
     @Override
@@ -156,12 +165,19 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         return R.string.help_url_adaptive_sleep;
     }
 
+    private boolean isScreenAttentionAvailable() {
+        return getResources().getBoolean(
+                com.android.internal.R.bool.config_adaptive_sleep_available);
+    }
+
     private Long getMaxScreenTimeout(Context context) {
+        if (context == null) {
+            return Long.MAX_VALUE;
+        }
         final DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
         if (dpm == null) {
             return Long.MAX_VALUE;
         }
-
         final RestrictedLockUtils.EnforcedAdmin admin =
                 RestrictedLockUtilsInternal.checkIfMaximumTimeToLockIsSet(context);
         if (admin != null) {

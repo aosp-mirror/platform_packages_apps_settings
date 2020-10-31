@@ -23,13 +23,18 @@ import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
@@ -54,6 +59,15 @@ public class ScreenTimeoutSettingsTest {
     @Mock
     private Resources mResources;
 
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
+
+    @Mock
+    AdaptiveSleepPermissionPreferenceController mPermissionPreferenceController;
+
+    @Mock
+    AdaptiveSleepPreferenceController mAdaptiveSleepPreferenceController;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -63,8 +77,17 @@ public class ScreenTimeoutSettingsTest {
 
         doReturn(TIMEOUT_ENTRIES).when(mResources).getStringArray(R.array.screen_timeout_entries);
         doReturn(TIMEOUT_VALUES).when(mResources).getStringArray(R.array.screen_timeout_entries);
+        doReturn(true).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_adaptive_sleep_available);
+
+        doReturn(null).when(mContext).getSystemService(DevicePolicyManager.class);
+
         doReturn(mResources).when(mSettings).getResources();
         doReturn(mContext).when(mSettings).getContext();
+        doReturn(mPreferenceScreen).when(mSettings).getPreferenceScreen();
+
+        mSettings.mAdaptiveSleepController = mAdaptiveSleepPreferenceController;
+        mSettings.mAdaptiveSleepPermissionController = mPermissionPreferenceController;
     }
 
     @Test
@@ -85,6 +108,23 @@ public class ScreenTimeoutSettingsTest {
         String key = mSettings.getDefaultKey();
 
         assertThat(key).isEqualTo(TIMEOUT_VALUES[1]);
+    }
+
+    @Test
+    public void updateCandidates_screenAttentionAvailable_showAdaptiveSleepPreference() {
+        mSettings.updateCandidates();
+
+        verify(mSettings.mAdaptiveSleepController).addToScreen(mPreferenceScreen);
+    }
+
+    @Test
+    public void updateCandidates_screenAttentionNotAvailable_doNotShowAdaptiveSleepPreference() {
+        doReturn(false).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_adaptive_sleep_available);
+
+        mSettings.updateCandidates();
+
+        verify(mSettings.mAdaptiveSleepController, never()).addToScreen(mPreferenceScreen);
     }
 
     @Test
