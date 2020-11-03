@@ -585,6 +585,14 @@ public class NotificationBackend {
         sm.requestPinShortcut(shortcutInfo, null);
     }
 
+    public void resetNotificationImportance() {
+        try {
+            sINM.unlockAllNotificationChannels();
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
     /**
      * NotificationsSentState contains how often an app sends notifications and how recently it sent
      * one.
