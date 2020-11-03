@@ -17,6 +17,8 @@
 
 package com.android.settings.notification;
 
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import static com.android.internal.notification.NotificationAccessConfirmationActivityContract
         .EXTRA_COMPONENT_NAME;
 import static com.android.internal.notification.NotificationAccessConfirmationActivityContract
@@ -57,6 +59,8 @@ public class NotificationAccessConfirmationActivity extends Activity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().addPrivateFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
 
         mNm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
