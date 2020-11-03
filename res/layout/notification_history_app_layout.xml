@@ -24,6 +24,7 @@
         android:id="@+id/app_header"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:background="@drawable/button_ripple_radius"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
         android:paddingStart="16dp">
@@ -54,17 +55,19 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:paddingStart="6dp"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="start|center_vertical"
+                android:textDirection="locale"
                 android:paddingTop="8dp"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"/>
         </LinearLayout>
-        <ImageButton
+        <ImageView
             android:id="@+id/expand"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_height="48dp"
             android:layout_width="48dp"
-            android:background="@drawable/button_ripple_radius"
+            android:scaleType="center"
+            android:contentDescription="@null"
             android:src="@*android:drawable/ic_expand_more"/>
     </RelativeLayout>
 

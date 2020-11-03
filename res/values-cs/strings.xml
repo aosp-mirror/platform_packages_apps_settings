@@ -335,6 +335,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Ověření pomocí obličeje"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Začít"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Pokud je vypnuto odemknutí obličejem v režimu přístupnosti, některé kroky nastavení nemusí s aplikací TalkBack fungovat správně."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Zpět"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Pokračovat v nastavení"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Použít nastavení přístupnosti"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -963,8 +966,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Heslo k Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Heslo k hotspotu: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatické připojení"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Povolit telefonu automatické připojování v dosahu této sítě"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Povolit tabletu automatické připojování v dosahu této sítě"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Povolit připojení k této síti, když bude v dosahu"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Přidat zařízení"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Pomocí QR kódu přidejte zařízení do této sítě"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kód není platný formát"</string>
@@ -976,7 +978,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Použít certifikáty systému"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Neposkytovat"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Neověřovat"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Není určen žádný certifikát. Připojení nebude soukromé."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Název sítě je příliš dlouhý."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Zadejte doménu."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Je vyžadován certifikát."</string>
@@ -1074,7 +1075,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"Chcete zrušit pozvánku ke spojení s klientem <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"Zapomenout tuto skupinu?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Wi‑Fi hotspot"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Internet ani obsah není sdílen s dalšími zařízeními"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Internet ani obsah nejsou sdíleny s dalšími zařízeními"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"Internetové připojení tohoto tabletu je sdíleno pomocí hotspotu"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"Internetové připojení tohoto telefonu je sdíleno pomocí hotspotu"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"Aplikace sdílí obsah. Chcete-li sdílet připojení k internetu, vypněte hotspot a znovu jej zapněte"</string>
@@ -1147,7 +1148,7 @@
     <string name="ring_volume_title" msgid="4869034595079914541">"Hlasitost vyzvánění a oznámení"</string>
     <string name="vibrate_in_silent_title" msgid="5076579100685867363">"Vibrovat v tichém režimu"</string>
     <string name="notification_sound_title" msgid="8747567935870133157">"Výchozí zvuk oznámení"</string>
-    <string name="incoming_call_volume_title" msgid="8445408274513654261">"Vyzváněcí tón"</string>
+    <string name="incoming_call_volume_title" msgid="8445408274513654261">"Vyzvánění"</string>
     <string name="notification_volume_title" msgid="328053763590888609">"Oznámení"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1798481722572489141">"Použije hlasitost příchozích hovorů také pro oznámení"</string>
     <string name="home_work_profile_not_supported" msgid="2605589489324241338">"Nepodporuje pracovní profily"</string>
@@ -1230,7 +1231,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Plynulé zobrazení"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"U některého obsahu automaticky zvýší obnovovací frekvenci z 60 na 90 Hz. Zvyšuje využití baterie."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Plynulé zobrazení"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Vynutit obnovovací frekvenci 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Vyšší obnovovací frekvence za účelem vylepšení responzivity klepnutí a kvality animace. Zvyšuje využití baterie."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Vnímavá obrazovka"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Zapnuto / obrazovka se nevypne, když se na ni budete dívat"</string>
@@ -1371,7 +1372,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Verze systému Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Aktualizace zabezpečení Androidu"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model a hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Verze hardwaru"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID zařízení"</string>
@@ -1718,7 +1718,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Připojení lze sdílet s nejvýše <xliff:g id="MAXCONNECTION">%1$d</xliff:g> zařízeními."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"U zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude ukončeno sdílené připojení."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering ethernetu"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Sdílet připojení telefonu k internetu přes USB ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Sdílet připojení telefonu k internetu přes ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot a tethering umožňují poskytovat připojení k internetu přes mobilní datové připojení dalším zařízením. Aplikace také mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňují poskytovat připojení k internetu přes připojení Wi-Fi nebo mobilní datové připojení dalším zařízením. Aplikace také mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Nápověda"</string>
@@ -1730,7 +1730,7 @@
     <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"Chcete pro zprávy SMS používat aplikaci <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
     <string name="network_scorer_picker_title" msgid="2022922801936206195">"Poskytovatel hodnocení sítí"</string>
     <string name="network_scorer_picker_none_preference" msgid="8894034333043177807">"Žádné"</string>
-    <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Změnit nastavení Google Wi-Fi Assistant?"</string>
+    <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Změnit asistenta pro Wi-Fi?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Chcete spravovat síťová připojení pomocí aplikace <xliff:g id="NEW_APP">%1$s</xliff:g> namísto aplikace <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Chcete spravovat síťová připojení pomocí aplikace <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
     <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Operátor SIM karty není znám"</string>
@@ -1904,6 +1904,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Mohou vám pomoci resetovat PIN, gesto či heslo"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tablet a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození tabletu nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefon a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození telefonu nebo ztrátu dat, které jejich používání může způsobit."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Při mazání stažených SIM karet došlo k problému"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Restartujte zařízení a zkuste to znovu. Pokud budete pokračovat v resetování do továrního nastavení, stažené SIM karty v zařízení zůstanou."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Restartovat"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Pokračovat v resetování?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Stažené SIM karty zůstanou v zařízení."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Tovární nastavení"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Zařízení a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození zařízení nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Upřesnit nastavení"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Povolit další možnosti nastavení"</string>
@@ -2103,7 +2109,7 @@
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Přidat"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Přidat do slovníku"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"Fráze"</string>
-    <string name="user_dict_settings_add_dialog_more_options" msgid="2642928746425808108">"Více možností"</string>
+    <string name="user_dict_settings_add_dialog_more_options" msgid="2642928746425808108">"Další možnosti"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="100432503633458156">"Méně možností"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="1866751313790655088">"OK"</string>
     <string name="user_dict_settings_add_word_option_name" msgid="2686051785623698231">"Slovo:"</string>
@@ -2266,7 +2272,7 @@
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Jen pro podporovanou aplikaci"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Velikost a styl titulků"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> velikost textu"</string>
-    <string name="captioning_more_options_title" msgid="3484496882942539652">"Více možností"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Další možnosti"</string>
     <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"Tyto předvolby titulků podporují jen některé aplikace"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Tlačítko Přístupnost"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Přejetí dvěma prsty zdola nahoru"</string>
@@ -2734,6 +2740,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Obnovit"</string>
     <string name="tts_play" msgid="2945513377250757221">"Přehrát"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"Síť VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptivní připojení"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prodlužuje životnost baterie a zlepšuje výkon zařízení tím, že automaticky spravuje síťová připojení"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Úložiště pověření"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalace certifikátu"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Nainstalovat certifikáty z úložiště"</string>
@@ -3387,7 +3395,7 @@
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Hlasitost budíku"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Hlasitost vyzvánění a oznámení"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Hlasitost oznámení"</string>
-    <string name="ringtone_title" msgid="3271453110387368088">"Vyzváněcí tón telefonu"</string>
+    <string name="ringtone_title" msgid="3271453110387368088">"Vyzvánění telefonu"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Výchozí zvuk oznámení"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Zvuk z aplikace"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"Výchozí zvuk oznámení"</string>
@@ -3530,7 +3538,7 @@
     <string name="sound_work_settings" msgid="752627453846309092">"Zvuky pracovního profilu"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Použít zvuky osobního profilu"</string>
     <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"Zvuky pracovního a osobního profilu jsou stejné"</string>
-    <string name="work_ringtone_title" msgid="4810802758746102589">"Vyzváněcí tón prac. telefonu"</string>
+    <string name="work_ringtone_title" msgid="4810802758746102589">"Vyzvánění pracovního telefonu"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Výchozí zvuk pracovního oznámení"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Výchozí zvuk pracovního budíku"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Stejné jako v osobním profilu"</string>
@@ -3539,7 +3547,7 @@
     <string name="work_sync_dialog_message" msgid="1328692374812258546">"Pro pracovní profil budou použity zvuky z osobního profilu"</string>
     <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"Přidat vlastní zvuk?"</string>
     <string name="ringtones_install_custom_sound_content" msgid="5844996763705884979">"Soubor bude zkopírován do složky <xliff:g id="FOLDER_NAME">%s</xliff:g>"</string>
-    <string name="ringtones_category_preference_title" msgid="26680768777533727">"Vyzváněcí tóny"</string>
+    <string name="ringtones_category_preference_title" msgid="26680768777533727">"Vyzvánění"</string>
     <string name="other_sound_category_preference_title" msgid="8182757473602586634">"Další zvuky a vibrace"</string>
     <string name="configure_notification_settings" msgid="1492820231694314376">"Oznámení"</string>
     <string name="recent_notifications" msgid="1105631022180160436">"Nedávno odeslané"</string>
@@ -3636,9 +3644,9 @@
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Sekce konverzací"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Povolit aplikaci používat sekci konverzací"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Není konverzace"</string>
-    <string name="demote_conversation_summary" msgid="4319929331165604112">"Odstranit ze sekce konverzace"</string>
+    <string name="demote_conversation_summary" msgid="4319929331165604112">"Odstranit ze sekce konverzací"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Toto je konverzace"</string>
-    <string name="promote_conversation_summary" msgid="3890724115743515035">"Přidat do sekce konverzace"</string>
+    <string name="promote_conversation_summary" msgid="3890724115743515035">"Přidat do sekce konverzací"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Správa konverzací"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Žádné prioritní konverzace"</string>
     <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
@@ -3648,8 +3656,8 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> prioritní konverzace</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Prioritní konverzace"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Zobrazovat v horní části sekce konverzace a jako plovoucí bubliny"</string>
-    <string name="important_conversations_summary" msgid="3184022761562676418">"Zobrazovat v horní části sekce konverzace"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Zobrazovat v horní části sekce konverzací a jako plovoucí bubliny"</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"Zobrazovat v horní části sekce konverzací"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Jiné konverzace"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Konverzace, ve kterých jste provedli změny"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Prioritní konverzace automaticky zobrazovat jako bubliny"</string>
@@ -3671,7 +3679,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Povolit vyrušení"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Umožněte aplikacím vydávat zvuky, vibrovat nebo zobrazovat oznámení na obrazovce"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorita"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Zobrazuje se v horní části sekce konverzace a má podobu plovoucí bubliny, zobrazuje profilovou fotku na obrazovce uzamčení"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Zobrazuje se v horní části sekce konverzací a má podobu plovoucí bubliny, zobrazuje profilovou fotku na obrazovce uzamčení"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> většinu funkcí konverzace nepodporuje. Konverzace nelze nastavit jako prioritní a nebudou se zobrazovat jako plovoucí bubliny."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"V rozbalovacím panelu sbalit oznámení na jeden řádek"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Žádný zvuk ani vibrace"</string>
@@ -4881,6 +4889,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Nebyla nalezena žádná síť. Zkuste to znovu."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(zakázáno)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Chybí SIM karta"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Žádná SIM karta"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Žádné"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"K připojení vyžaduje SIM kartu"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"K připojení vyžaduje SIM kartu <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Preferovaný režim sítě: preferováno WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Preferovaný režim sítě: pouze GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Preferovaný režim sítě: pouze WCDMA"</string>
@@ -5122,10 +5135,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Povolte překryvné vrstvy obrazovek v Nastavení"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Povolte aplikace, které se smí zobrazovat přes jiné aplikace a vytvářet vrstvy obrazovek Nastavení"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Média"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Skrýt přehrávač po ukončení relace média"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Přehrávač umožňuje obnovit relaci z rozbaleného panelu Rychlé nastavení."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Přehrávač médií v rychlém nastavení"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Zobrazit přehrávač médií delší dobu, aby bylo snadné obnovit přehrávání"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrýt přehrávač"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Zobrazit přehrávač"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nejsou k dispozici žádné přehrávače"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Zapne se Bluetooth"</string>
 </resources>

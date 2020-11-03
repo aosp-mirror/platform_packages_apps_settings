@@ -25,6 +25,7 @@ import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -45,6 +46,9 @@ import com.android.settingslib.wifi.AccessPoint;
 public class ContextualWifiSlice extends WifiSlice {
 
     @VisibleForTesting
+    static final String CONTEXTUAL_WIFI_EXPANDABLE = "contextual_wifi_expandable";
+
+    @VisibleForTesting
     static final int COLLAPSED_ROW_COUNT = 0;
 
     @VisibleForTesting
@@ -63,13 +67,17 @@ public class ContextualWifiSlice extends WifiSlice {
 
     @Override
     public Slice getSlice() {
-        final long currentUiSession = FeatureFactory.getFactory(mContext)
-                .getSlicesFeatureProvider().getUiSessionToken();
-        if (currentUiSession != sActiveUiSession) {
-            sActiveUiSession = currentUiSession;
-            sApRowCollapsed = hasWorkingNetwork();
-        } else if (!mWifiManager.isWifiEnabled()) {
-            sApRowCollapsed = false;
+        if (isExpandable()) {
+            final long currentUiSession = FeatureFactory.getFactory(mContext)
+                    .getSlicesFeatureProvider().getUiSessionToken();
+            if (currentUiSession != sActiveUiSession) {
+                sActiveUiSession = currentUiSession;
+                sApRowCollapsed = hasWorkingNetwork();
+            } else if (!mWifiManager.isWifiEnabled()) {
+                sApRowCollapsed = false;
+            }
+        } else {
+            sApRowCollapsed = true;
         }
         return super.getSlice();
     }
@@ -87,10 +95,16 @@ public class ContextualWifiSlice extends WifiSlice {
     protected ListBuilder.RowBuilder getHeaderRow(boolean isWifiEnabled, AccessPoint accessPoint) {
         final ListBuilder.RowBuilder builder = super.getHeaderRow(isWifiEnabled, accessPoint);
         builder.setTitleItem(getHeaderIcon(isWifiEnabled, accessPoint), ListBuilder.ICON_IMAGE);
-        if (sApRowCollapsed) {
+        if (sApRowCollapsed && isWifiEnabled) {
             builder.setSubtitle(getSubtitle(accessPoint));
         }
         return builder;
+    }
+
+    private boolean isExpandable() {
+        // Return whether this slice can be expandable.
+        return Settings.Global.getInt(mContext.getContentResolver(), CONTEXTUAL_WIFI_EXPANDABLE, 0)
+                != 0;
     }
 
     private IconCompat getHeaderIcon(boolean isWifiEnabled, AccessPoint accessPoint) {

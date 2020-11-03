@@ -133,7 +133,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s သည် သင်၏ စာများကို ရယူအသုံးပြုလိုသည်။ %2$s ကို အသုံးပြုခွင့် ပေးမည်လား?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"SIM ကတ် သုံးခွင့် တောင်းဆိုမှု"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> သည် သင့် SIM ကဒ်အား ဝင်ရောက်သုံးလို၏။ SIM ကဒ်အား ဝင်ရောက်သုံးခွင့်ပြုပါက ချိတ်ဆက်နေစဉ်ကာလအတွင်း သင့် စက်ကိရိယာ၏ ဒေတာချိတ်ဆက်မှုအား ပိတ်ထားလိမ့်မည်။ <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> အား ဝင်ရောက်သုံးခွင့်ပြုရန်"</string>
-    <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"အခြားစက်ပစ္စည်းများက \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' အဖြစ် မြင်ရပါမည်"</string>
+    <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"အခြားစက်ပစ္စည်းများက “<xliff:g id="DEVICE_NAME">^1</xliff:g>” အဖြစ် မြင်ရပါမည်"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"အခြားစက်များသို့ ချိတ်ဆက်ရန် \'ဘလူးတုသ်\' ကို ဖွင့်ပါ။"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"သင်၏ စက်ပစ္စည်းများ"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"စက်အသစ် တွဲချိတ်ရန်"</string>
@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"အထောက်အထားစိစစ်ရန် သင့်မျက်နှာကို သုံးပါ"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"စတင်ရန်"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"အများသုံးစွဲနိုင်သည့် မျက်နှာမှတ် သော့ဖွင့်ခြင်းကို ပိတ်ထားပါက အချို့သော စနစ်ထည့်သွင်းခြင်းအဆင့်များသည် TalkBack နှင့် အဆင်ပြေစွာအလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"နောက်သို့"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"ဆက်၍စနစ်ထည့်သွင်းရန်"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"အများသုံးစွဲနိုင်မှုကို သုံးရန်"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -872,7 +875,7 @@
     <string name="wifi_speed" msgid="6562147734565434513">"လိုင်းအမြန်နှုန်း"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"လှိုင်းနှုန်း"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"အိုင်ပီလိပ်စာ"</string>
-    <string name="passpoint_label" msgid="6513669696739302866">"မှတဆင့် သိမ်းရန်"</string>
+    <string name="passpoint_label" msgid="6513669696739302866">"မှတစ်ဆင့် သိမ်းရန်"</string>
     <string name="passpoint_content" msgid="5219226173518418335">"<xliff:g id="NAME">%1$s</xliff:g> အထောက်အထားများ"</string>
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP နည်းလမ်း"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"အဆင့်(၂) စစ်မှန်ကြောင်းအတည်ပြုခြင်း"</string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi စကားဝှက်− <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ဟော့စပေါ့စကားဝှက်− <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"အလိုအလျောက် ချိတ်ဆက်မှု"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"ဤကွန်ရက်အနီးတွင် ဖုန်းရှိပါက အလိုအလျောက် ချိတ်ဆက်ခွင့်ပြုပါ"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ဤကွန်ရက်အနီးတွင် တက်ဘလက်ရှိပါက အလိုအလျောက် ချိတ်ဆက်ခွင့်ပြုပါ"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"ချိတ်ဆက်နိုင်သည့် အကွာအဝေးအတွင်း ရှိပါက ဤကွန်ရက်သို့ ချိတ်ဆက်မှုအား ခွင့်ပြုရန်"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"စက်ပစ္စည်း ထည့်ရန်"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ဤကွန်ရက်သို့ စက်တစ်ခုထည့်ရန် QR ကုဒ်ကို အသုံးပြုပါ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR ကုဒ်သည် မှန်ကန်သောဖော်မက် မဟုတ်ပါ"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"စနစ်ပိုင်း အသိအမှတ်ပြုလက်မှတ်များကို သုံးပါ"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"မပေးထားပါ"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"အတည်မပြုပါ"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"အသိမှတ်ပြုလက်မှတ် သတ်မှတ်မထားပါ။ သင့်ချိတ်ဆက်မှု တသီးတသန့်ဖြစ်မည် မဟုတ်ပါ။"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ကွန်ရက်အမည် ရှည်လွန်းပါသည်။"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ဒိုမိန်းတစ်ခု သတ်မှတ်ပေးရပါမည်။"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"အသိအမှတ်ပြုလက်မှတ် လိုအပ်သည်။"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"အကြောင်းအရာအချို့အတွက် ပြန်လည်စတင်နှုန်းကို ၆၀ မှ ၉၀ Hz သို့ အလိုအလျောက် တိုးပေးသည်။ ဘက်ထရီ အသုံးပြုမှု တိုးလာပါမည်။"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"ချောမွေ့သော ဖန်သားပြင်ပြသမှု"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"၉၀ Hz ပြန်ဖွင့်မှုနှုန်းကို မဖြစ်မနေအသုံးပြုရန်"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"ထိတွေ့မှု တုံ့ပြန်အားနှင့် ကာတွန်းပုံအရည်အသွေးပိုကောင်းလာရန် အမြင့်ဆုံးပြန်ဖွင့်မှုနှုန်း။ ဘက်ထရီ အသုံးပြုမှု တိုးလာပါမည်။"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ဖန်သားပြင်ကို အာရုံစိုက်ခြင်း"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ဖွင့်ထားသည် / ၎င်းကို သင်ကြည့်နေလျှင် မျက်နှာပြင် ပိတ်မည်မဟုတ်ပါ"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android ဗားရှင်း"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android လုံခြုံရေးအပ်ဒိတ်"</string>
     <string name="model_info" msgid="8997566254717810904">"မော်ဒယ်"</string>
-    <string name="model_summary" msgid="2246651782442466213">"မော်ဒယ်- %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"မော်ဒယ်နှင့် စက်ပစ္စည်း"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"စက်ပစ္စည်းဗားရှင်း"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"စက်ပစ္စည်း အမှတ်"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> စက်လုံးထက် ပို၍တဆင့်ပြန်လည်ချိတ်ဆက်မရပါ"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> သည် ချိတ်ဆက်မှု ပြတ်တောက်မည်"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"အီသာနက် ချိတ်၍မျှဝေခြင်း"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"ဖုန်း၏ အင်တာနက်ကို USB အီသာနက်မှတစ်ဆင့် မျှဝေရန်"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ဖုန်း၏ အင်တာနက်ကို အီသာနက်မှတစ်ဆင့် မျှဝေရန်"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"သင်၏ မိုဘိုင်းဒေတာ ချိတ်ဆက်မှုမှတစ်ဆင့် အခြားစက်များသို့ အင်တာနက် အသုံးပြုခွင့် ပေးလိုလျှင် ဟောစပေါ့နှင့် မိုဘိုင်းဖုန်းကို မိုဒမ်အဖြစ်အသုံးပြုခြင်းစနစ်ကို သုံးပါ။ အနီးတစ်ဝိုက်ရှိ စက်များနှင့် ပါဝင်သည့်အကြောင်းအရာများကို မျှဝေရန်အတွက်လည်း အက်ပ်များက ဟော့စပေါ့တစ်ခု ဖွင့်နိုင်ပါသည်။"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ဟော့စပေါ့နှင့် မိုဘိုင်းကို မိုဒမ်အဖြစ်သုံးပြီး သင်၏ Wi-Fi သို့မဟုတ် မိုဘိုင်းဒေတာ ချိတ်ဆက်မှုမှတစ်ဆင့် အခြားစက်ပစ္စည်းများသို့ အင်တာနက်လွှင့်ပေးပါ။ အနီးရှိစက်ပစ္စည်းများသို့ အကြောင်းအရာမျှဝေရန်အတွက် အက်ပ်များသည်လည်း ဟော့စပေါ့ပြုလုပ်နိုင်သည်။"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"အကူအညီ"</string>
@@ -1851,13 +1851,19 @@
     <string name="install_applications_title" msgid="7890233747559108106">"အက်ပ်ရင်းမြစ်များ ခွင့်ပြုရန်"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"မကြာသေးမီက ဖွင့်ထားသော အက်ပ်များ"</string>
     <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="other">အက်ပ် %1$d ခုကို ပြခြင်း</item>
-      <item quantity="one">အက်ပ်အားလုံးကို ပြခြင်း</item>
+      <item quantity="other">အက်ပ် %1$d ခု ကြည့်ရန်</item>
+      <item quantity="one">အက်ပ်အားလုံး ကြည့်ရန်</item>
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"IT စီမံခန့်ခွဲသူကို ဆက်သွယ်ပါ"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"၎င်းတို့သည် ပင်နံပါတ်၊ လော့ခ်ပုံစံ သို့မဟုတ် စကားဝှက်အား ပြင်ဆင်ရန် ကူညီသည်။"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"သင်၏တက်ဘလက်နှင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်များသည် အမျိုးအမည် မသိသောအက်ပ်များ၏ တိုက်ခိုက်ခြင်းကို ပိုမိုခံရနိုင်ပါသည်။ ဤနေရာမှ ရယူထားသည့် အက်ပ်များကို ထည့်သွင်းအသုံးပြုခြင်းဖြင့် ဖြစ်ပေါ်လာနိုင်သော ဖုန်းပျက်စီးမှု သို့မဟုတ် ဒေတာဆုံးရှုံးမှုများအတွက် သင့်ထံ၌သာ တာဝန်ရှိကြောင်းကို သင်က သဘောတူရာရောက်ပါသည်။"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"သင်၏ဖုန်းနှင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်များသည် အမျိုးအမည် မသိသောအက်ပ်များ၏ တိုက်ခိုက်ခြင်းကို ပိုမိုခံရနိုင်ပါသည်။ ဤနေရာမှ ရယူထားသည့် အက်ပ်များကို ထည့်သွင်းအသုံးပြုခြင်းဖြင့် ဖြစ်ပေါ်လာနိုင်သော ဖုန်းပျက်စီးမှု သို့မဟုတ် ဒေတာဆုံးရှုံးမှုများအတွက် သင့်ထံ၌သာ တာဝန်ရှိကြောင်းကို သင်က သဘောတူရာရောက်ပါသည်။"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ဒေါင်းလုဒ်လုပ်ထားသော ဆင်းမ်ကတ်ကိုဖျက်ရာတွင် ပြဿနာရှိနေသည်"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"စက်ပစ္စည်းကို ပြန်လည်စတင်ပြီး ထပ်စမ်းကြည့်ပါ။ စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ရန်ကို ဆက်လုပ်ပါက ဒေါင်းလုဒ်လုပ်ထားသော ဆင်းမ်ကတ်များသည် စက်တွင်ကျန်ရှိနိုင်ပါသည်။"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"ပြန်လည်စတင်ရန်"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"စက်ရုံထုတ်အတိုင်း ဆက်ပြင်မလား။"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ဒေါင်းလုဒ်လုပ်ထားသော ဆင်းမ်ကတ်များသည် စက်တွင်ကျန်ရှိနေပါမည်။"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"စက်ရုံထုတ်အတိုင်း သတ်မှတ်ခြင်း"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"သင့်စက်ပစ္စည်းနှင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်များသည် အမျိုးအမည် မသိသောအက်ပ်များ၏ တိုက်ခိုက်ခြင်းကို ပိုမိုခံရနိုင်ပါသည်။ ဤနေရာမှ ရယူထားသည့် အက်ပ်များကို ထည့်သွင်းအသုံးပြုခြင်းအားဖြင့် ဖြစ်ပေါ်လာနိုင်သော စက်ပစ္စည်းပျက်စီးမှု (သို့) ဒေတာဆုံးရှုံးမှုများအတွက် သင့်ထံ၌သာ တာဝန်ရှိကြောင်းကို သင်သဘောတူထားပါသည်။"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"အဆင့်မြင့်အပြင်အဆင်များ"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"ပိုမိုပြီးရွေးချယ်နိုင်သော အပြင်အဆင်များ ရရှိခြင်း"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"ပြန်သတ်မှတ်ရန်"</string>
     <string name="tts_play" msgid="2945513377250757221">"ဖွင့်ရန်"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"အလိုက်သင့် ချိတ်ဆက်နိုင်မှု"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"သင်၏ ကွန်ရက်ချိတ်ဆက်မှုကို အလိုအလျောက် စီမံခန့်ခွဲခြင်းဖြင့် ဘက်ထရီ သက်တမ်းကို ရှည်စေပြီး စက်၏စွမ်းဆောင်ရည်ကို ပိုမိုကောင်းမွန်စေသည်"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ယုံကြည်စိတ်ချရသောသိုလှောင်နေရာ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"လက်မှတ် ထည့်သွင်းရန်"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"သိုလှောင်နေရာမှ အသိအမှတ်ပြုလက်မှတ်များကို ထည့်သွင်းရန်"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"ကွန်ရက် ရှာမတွေ့ပါ။ ထပ်စမ်းကြည့်ပါ။"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(တားမြစ်ထားသည်)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"ဆင်းမ်ကတ် မရှိပါ"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"ဆင်းကဒ်မရှိပါ"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"မရှိ"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"ချိတ်ဆက်ရန် SIM ကတ်လိုအပ်သည်"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"ချိတ်ဆက်ရန် <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> SIM ကတ် လိုအပ်သည်"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- GSM သီးသန့်"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- WCDMA သာ"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"\'ဆက်တင်များ\' ပေါ် ဖန်သားပြင်ထပ်ဆင့်ပြခွင့်ပြုခြင်း"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"အခြားအက်ပ်များအပေါ်တွင် ပြသနိုင်သည့် အက်ပ်များအား \'ဆက်တင်များ\' မျက်နှာပြင်ကို ထပ်ဆင့်ပြခွင့်ပြုပါ"</string>
     <string name="media_controls_title" msgid="403271085636252597">"မီဒီယာ"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"မီဒီယာစက်ရှင် ပြီးဆုံးသွားလျှင် ပလေယာကိုဖျောက်မည်"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"ချဲ့ထားသော အမြန် ဆက်တင်များအကန့်မှ စက်ရှင်တစ်ခုကို ပလေယာက ဆက်လုပ်ခွင့်ပြုသည်။"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"\'အမြန် ဆက်တင်များ\' ရှိ မီဒီယာ ပလေယာ"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"အလွယ်တကူပြန်ဖွင့်ရန်အတွက် မီဒီယာ ပလေယာကို အချိန်ကြာမြင့်စွာပြရန်"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"ပလေယာကို ဖျောက်ထားမည်"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"ပလေယာကို ပြရန်"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"မည်သည့်ပလေယာကိုမျှ မရရှိနိုင်ပါ"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"မီဒီယာ"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ဘလူးတုသ် ပွင့်ပါမည်"</string>
 </resources>

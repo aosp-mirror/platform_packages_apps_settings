@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Tumia uso wako kuthibitisha"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Anza"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Ikiwa kipengele cha ufikivu cha kufungua kwa uso kimezimwa, huenda baadhi ya hatua za kuweka mipangilio zisifanye kazi vizuri pamoja na TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Rudi nyuma"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Endelea kuweka mipangilio"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Tumia mipangilio ya ufikivu"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Nenosiri la Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Nenosiri la mtandaopepe: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Unganisha kiotomatiki"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Ruhusu simu iunganishe kiotomatiki ikiwa karibu na mtandao huu"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Ruhusu kompyuta kibao iunganishe kiotomatiki karibu na mtandao huu"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Ruhusu iunganishe kwenye mtandao huu unapokuwa karibu"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Ongeza kifaa"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Tumia msimbo wa QR ili uongeze kifaa kwenye mtandao huu"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Msimbo wa QR si muundo sahihi"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Tumia vyeti vya mfumo"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Usitoe"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Usithibitishe"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Hakuna cheti kilichobainishwa. Muunganisho wako hautakuwa wa faragha."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Jina la mtandao ni refu sana."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Lazima ubainishe kikoa."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Inahitaji cheti."</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Onyesho Laini"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Huinua kiotomatiki kiwango cha kuonyesha upya kutoka Hz 60 hadi 90 kwa baadhi ya maudhui. Huongeza matumizi ya betri."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Onyesho Laini"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Lazimisha kiwango cha kuonyesha upya cha Hz 90"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Kiwango cha juu kabisa cha kuonyesha upya kwa utendakazi wa mguso ulioboreshwa na ubora wa uhuishaji. Huongeza matumizi ya betri."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Utashi wa skrini"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Umewashwa / Skrini haitazima ikiwa unaiangalia"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Toleo la Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Sasisho la usalama la Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Muundo"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Muundo: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Muundo na maunzi"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Toleo la maunzi"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Kitambulisho cha Kifaa"</string>
@@ -1631,10 +1631,10 @@
     <string name="master_clear_progress_text" msgid="8891964820486632180">"Tafadhali subiri..."</string>
     <string name="call_settings_title" msgid="2531072044177194164">"Mipangilio ya simu"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"Weka mipangilio ya ujumbe wa sauti, kupitisha simu, kusubiri simu, kitambulisho cha mteja"</string>
-    <string name="tether_settings_title_usb" msgid="5926474044238409099">"Shiriki intaneti kwa USB"</string>
+    <string name="tether_settings_title_usb" msgid="5926474044238409099">"Sambaza mtandao kwa USB"</string>
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Intaneti ya kusambazwa"</string>
-    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Shiriki intaneti kwa Bluetooth"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Inazuia"</string>
+    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Sambaza mtandao kwa Bluetooth"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Kusambaza mtandao"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"Mtandaopepe na usambazaji wa mtandao"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Mtandaopepe umewashwa, inasambaza mtandao"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Mtandaopepe umewashwa"</string>
@@ -1666,17 +1666,17 @@
     <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Shiriki intaneti kupitia Bluetooth na Ethaneti pekee"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Shiriki intaneti kupitia USB, Bluetooth na Ethaneti pekee"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="7364633823180913777">"Shiriki intaneti kwa USB"</string>
+    <string name="usb_tethering_button_text" msgid="7364633823180913777">"Sambaza mtandao kwa USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Shiriki muunganisho wa intaneti ya simu kupitia USB"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Shiriki muunganisho wa intaneti ya kompyuta kibao kupitia USB"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Shiriki intaneti kwa Bluetooth"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Sambaza mtandao kwa Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Shiriki muunganisho wa intaneti ya kompyuta kibao kupitia Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Shiriki muunganisho wa intaneti ya simu kupitia Bluetooth"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Inashiriki muunganisho wa intaneti wa <xliff:g id="DEVICE_NAME">%1$d</xliff:g> hii kupitia Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Haiwezi kuzuia kwa zaidi kuliko vifaa <xliff:g id="MAXCONNECTION">%1$d</xliff:g>"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>itazuiwa"</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Kusambaza mtandao wa Ethaneti"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Shiriki muunganisho wa intaneti ya simu kupitia Ethaneti ya USB"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Sambaza mtandao kwa Ethaneti"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Shiriki muunganisho wa intaneti ya simu kupitia Ethaneti"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Tumia mtandao pepe na kipengele cha kusambaza mtandao ili ushiriki intaneti na vifaa vingine kupitia muunganisho wa data wa simu za mkononi. Programu pia zinaweza kuunda mtandao pepe ili kushiriki maudhui na vifaa vilivyo karibu."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Tumia mtandaopepe na huduma ya kusambaza mtandao ili uvisambazie vifaa vingine intaneti kupitia muunganisho wa data kwa simu za mkononi au Wi-Fi. Programu pia zinaweza kuunda mtandaopepe ili kushiriki maudhui na vifaa vilivyo karibu."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Usaidizi"</string>
@@ -1851,13 +1851,19 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Ruhusu vyanzo vyote vya programu"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Programu ulizofungua hivi karibuni"</string>
     <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="other">Angalia programu zote kwenye %1$d</item>
+      <item quantity="other">Angalia programu zote %1$d</item>
       <item quantity="one">Angalia programu zote</item>
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Wasiliana na msimamizi wako wa TEHAMA"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Anaweza kukusaidia kubadilisha PIN, mchoro au nenosiri lako"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Data yako ya binafsi na ya kompyuta kibao yako zinaweza kuathiriwa na programu ambazo hazijulikani. Kwa kusakinisha programu kutoka chanzo hiki, unakubali kuwajibika kila wakati kutokana na uharibifu wowote kwenye simu yako au kupotea kwa data kutokana na matumizi yake."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Data yako ya binafsi na ya simu yako zinaweza kuathiriwa na programu ambazo hazijulikani. Kwa kusakinisha programu kutoka chanzo hiki, unakubali kuwajibika kila wakati kutokana na uharibifu wowote kwenye simu yako au kupotea kwa data kutokana na matumizi yake."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Kuna tatizo la kufuta data yote kwenye SIM zilizopakuliwa"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Tafadhali washa tena kifaa na ujaribu. Ukiendelea kurejesha mipangilio iliyotoka nayo kiwandani, SIM zilizopakuliwa zinaweza kusalia kwenye kifaa."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Washa tena"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Utaendelea kurejesha mipangilio iliyotoka nayo kiwandani?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"SIM zilizopakuliwa zitasalia kwenye kifaa."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Rejesha mipangilio iliyotoka nayo kiwandani"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Data yako ya binafsi na ya kifaa chako inaweza kuathiriwa na programu ambazo hazijulikani. Kwa kusakinisha programu kutoka chanzo hiki, unakubali kuwajibikia uharibifu wowote kwenye kifaa chako au kupotea kwa data kutokana na matumizi ya programu hizo."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Mipangilio ya kina"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Wezesha chaguo zaidi ya mipangilio."</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Weka upya"</string>
     <string name="tts_play" msgid="2945513377250757221">"Cheza"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Muunganisho unaojirekebisha"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Huboresha muda wa matumizi ya betri na kuboresha utendaji wa kifaa kwa kudhibiti kiotomatiki miunganisho yako ya mtandao"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Hifadhi ya hati-tambulishi"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Sakinisha cheti"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Sakinisha vyeti kutoka kwenye hifadhi"</string>
@@ -3437,8 +3445,8 @@
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Tumia sauti za wasifu wako binafsi"</string>
     <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"Sauti za wasifu wa binafsi na wa kazini ni sawa"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Mlio wa simu ya kazini"</string>
-    <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Sauti chaguomsingi ya arifa ya kazini"</string>
-    <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Sauti chaguomsingi ya kengele ya kazini"</string>
+    <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Sauti chaguomsingi ya arifa za kazini"</string>
+    <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Sauti chaguomsingi ya kengele za kazini"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Sawa na wasifu binafsi"</string>
     <string name="work_sync_dialog_title" msgid="2359563902332046231">"Ungependa kubadilisha sauti?"</string>
     <string name="work_sync_dialog_yes" msgid="9161415252411868574">"Badilisha"</string>
@@ -3457,8 +3465,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Weka kiotomatiki arifa za kipaumbele cha chini ili Zisitoe sauti"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Nafasi ya arifa zinazojirekebisha"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Panga arifa kiotomatiki kulingana na uhusiano"</string>
-    <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Vitendo na majibu yaliyopendekezwa"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Onyesha kiotomatiki vitendo na majibu yaliyopendekezwa"</string>
+    <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Vitendo na majibu yanayopendekezwa"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Onyesha kiotomatiki vitendo na majibu yanayopendekezwa"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Onyesha arifa za hivi majuzi na zile ulizoahirisha"</string>
     <string name="notification_history" msgid="8663811361243456201">"Historia ya arifa"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"Tumia historia ya arifa"</string>
@@ -4706,6 +4714,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Imeshindwa kupata mitandao. Jaribu tena."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(hairuhusiwi)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Hakuna SIM kadi"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Hakuna SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Hamna"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Inahitaji SIM ili uunganishe"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Inahitaji SIM ya <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> ili uunganishe"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Hali ya mtandao inayopendelewa: WCDMA pendekezwa"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Hali ya mtandao inayopendelewa: GSM pekee"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Hali ya mtandao inayopendelewa: WCDMA pekee"</string>
@@ -4941,10 +4954,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Ruhusu programu zinazowekelewa juu ya nyingine kwenye Mipangilio"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Ruhusu programu zinazoweza kuonyeshwa juu ya programu nyingine ziwekelewe juu ya skrini za Mipangilio"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Maudhui"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Ficha kichezaji kipindi cha maudhui kikiisha"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Kichezaji hukuruhusu kuendelea kucheza kipindi kwenye kidirisha kilichopanuliwa cha Mipangilio ya Haraka."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Kichezaji Faili za Sauti na Video katika Mipangilio ya Haraka"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Onyesha kichezaji faili za sauti na video kwa muda mrefu ili uendelee kucheza kwa urahisi"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ficha kichezaji"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Onyesha kichezaji"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Hakuna vichezaji vinavyopatikana"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"maudhui"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth itawaka"</string>
 </resources>

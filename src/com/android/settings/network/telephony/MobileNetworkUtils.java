@@ -48,6 +48,7 @@ import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -279,7 +280,8 @@ public class MobileNetworkUtils {
                 String.format("showEuiccSettings: esimIgnoredDevice: %b, enabledEsimUiByDefault: "
                         + "%b, euiccProvisioned: %b, inDeveloperMode: %b.",
                 esimIgnoredDevice, enabledEsimUiByDefault, euiccProvisioned, inDeveloperMode));
-        return (inDeveloperMode || euiccProvisioned
+        return (euiccProvisioned
+                || (!esimIgnoredDevice && inDeveloperMode)
                 || (!esimIgnoredDevice && enabledEsimUiByDefault
                         && isCurrentCountrySupported(context)));
     }
@@ -475,8 +477,9 @@ public class MobileNetworkUtils {
         if (carrierConfig.getBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL)) {
             return true;
         }
-
-        final String operatorNumeric = telephonyManager.getServiceState().getOperatorNumeric();
+        final ServiceState serviceState = telephonyManager.getServiceState();
+        final String operatorNumeric =
+                (serviceState != null) ? serviceState.getOperatorNumeric() : null;
         final String[] numericArray = carrierConfig.getStringArray(
                 CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
         if (numericArray == null || operatorNumeric == null) {

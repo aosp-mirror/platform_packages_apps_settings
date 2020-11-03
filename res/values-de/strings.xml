@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Per Gesichtserkennung authentifizieren"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Starten"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Wenn Face Unlock mit Bedienungshilfen deaktiviert ist, funktionieren manche Einrichtungsschritte möglicherweise nicht richtig mit TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Zurück"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Einrichtung fortsetzen"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Bedienungshilfen-Einrichtung verwenden"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -930,8 +933,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"WLAN-Passwort: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Passwort des Hotspots: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatische Verbindung"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Zulassen, dass das Smartphone automatisch eine Verbindung herstellt, wenn es in der Nähe dieses Netzwerks ist"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Zulassen, dass das Tablet automatisch eine Verbindung herstellt, wenn es in der Nähe dieses Netzwerks ist"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Verbindung zulassen, wenn dieses Netzwerk in Reichweite ist"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Gerät hinzufügen"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR-Code verwenden, um diesem Netzwerk ein Gerät hinzuzufügen"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-Code ist kein gültiges Format"</string>
@@ -943,7 +945,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Systemzertifikate verwenden"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Nicht bereitstellen"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Nicht validieren"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Kein Zertifikat angegeben. Es wird keine private Verbindung hergestellt."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Der Netzwerkname ist zu lang."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Angabe einer Domain erforderlich."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Zertifikat erforderlich."</string>
@@ -1191,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Setzt die Aktualisierungsrate für einige Inhalte automatisch von 60 auf 90 Hz herauf. Erhöhter Akkuverbrauch."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Aktualisierungsrate von 90 Hz erzwingen"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Höchste Aktualisierungsrate für bessere Touchscreen-Reaktion und flüssigere Animationen. Erhöhter Akkuverbrauch."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Aufmerksamkeitserkennung"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"An / Der Bildschirm wird nicht ausgeschaltet, solange du auf ihn blickst"</string>
@@ -1330,7 +1331,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android-Version"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android-Sicherheitsupdate"</string>
     <string name="model_info" msgid="8997566254717810904">"Modell"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modell: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modell und Hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardwareversion"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Geräte-ID"</string>
@@ -1677,7 +1677,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Tethering nur für maximal <xliff:g id="MAXCONNECTION">%1$d</xliff:g> Geräte möglich"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Tethering für <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wird deaktiviert."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-Tethering"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Internetverbindung des Smartphones über USB-Ethernet freigeben"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Internetverbindung des Smartphones über Ethernet freigeben"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Mithilfe der Hotspot- und Tethering-Funktion kannst du deine mobile Datenverbindung für andere Geräte freigeben, damit diese eine Internetverbindung erhalten. Apps können ebenfalls einen Hotspot erstellen und so das Teilen von Inhalten mit Geräten in der Nähe ermöglichen."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Mithilfe der Hotspot- und Tethering-Funktion kannst du anderen Geräten erlauben, deine Internetverbindung (WLAN oder mobile Daten) mitzunutzen. Es gibt auch Apps für das Erstellen eines Hotspots, damit Inhalte mit Geräten in der Nähe geteilt werden können."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hilfe"</string>
@@ -1859,6 +1859,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Der IT-Administrator hilft dir beim Zurücksetzen deiner PIN, deines Musters oder Passworts"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Apps mit unbekannter Herkunft können gefährlich für dein Tablet und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Tablet und jegliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Apps mit unbekannter Herkunft können gefährlich für dein Smartphone und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Smartphone und jegliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Problem beim Löschen der heruntergeladenen SIMs"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Bitte starte das Gerät neu und versuch es noch einmal. Wenn du das Zurücksetzen auf die Werkseinstellungen fortsetzt, bleiben die heruntergeladenen SIMs möglicherweise auf dem Gerät."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Neu starten"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Mit dem Zurücksetzen fortfahren?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Die heruntergeladenen SIMs bleiben auf dem Gerät."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Auf Werkseinstellungen zurücksetzen"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Apps mit unbekannter Herkunft können gefährlich für dein Gerät und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Gerät und sämtliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Erweiterte Einstellungen"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Weitere Einstellungsoptionen aktivieren"</string>
@@ -2213,7 +2219,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibration bei Klingeln"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Haptisches Feedback"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> verwenden"</string>
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> öffnen"</string>
+    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"\"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\" öffnen"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Farbkorrektur aktivieren"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Untertitel anzeigen"</string>
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Nur für unterstützte Apps"</string>
@@ -2416,9 +2422,9 @@
     <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"Akkulaufzeit des Tablets verbessern"</string>
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Akkulaufzeit des Geräts verbessern"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Funktion \"Akku-Manager\" aktivieren"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Energiesparmodus aktivieren"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Stromsparmodus aktivieren"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Der Akku könnte früher als üblich leer sein"</string>
-    <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Energiesparmodus ist aktiviert"</string>
+    <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Stromsparmodus ist aktiviert"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Einige Funktionen sind eventuell eingeschränkt"</string>
     <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Smartphone mehr als üblich genutzt"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet mehr als üblich genutzt"</string>
@@ -2456,9 +2462,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Diese App kann dann im Hintergrund laufen und beansprucht dabei den Akku. Er könnte deshalb früher als erwartet leer sein."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Entfernen"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Abbrechen"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Energiesparmodus aktivieren."</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Stromsparmodus aktivieren."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Stromsparmodus aktivieren."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Der Akkuverbrauch durch Apps ist zurzeit normal. Falls der Akku zu stark beansprucht wird, werden dir mögliche Maßnahmen vorgeschlagen.\n\nBei niedrigem Akkustand kannst du jederzeit den Stromsparmodus aktivieren."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Akku-Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Apps automatisch verwalten"</string>
     <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Akkunutzung für selten verwendete Apps einschränken"</string>
@@ -2551,7 +2557,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="6495519793211758353">"Mit einem anderen Bluetooth-Gerät verbinden"</string>
     <string name="battery_desc_apps" msgid="4187483940383266017">"Akkuverbrauch durch App"</string>
     <string name="battery_sugg_apps_info" msgid="4796917242296658454">"App anhalten oder deinstallieren"</string>
-    <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"Energiesparmodus auswählen"</string>
+    <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"Stromsparmodus auswählen"</string>
     <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"Die App bietet unter Umständen Einstellungen für einen geringeren Akkuverbrauch."</string>
     <string name="battery_desc_users" msgid="1959428568888686847">"Akkuverbrauch durch Nutzer"</string>
     <string name="battery_desc_unaccounted" msgid="1649497860893660763">"Sonstiger Akkuverbrauch"</string>
@@ -2582,23 +2588,23 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Aktualisieren"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Mediaserver"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"App-Optimierung"</string>
-    <string name="battery_saver" msgid="7737147344510595864">"Energiesparmodus"</string>
+    <string name="battery_saver" msgid="7737147344510595864">"Stromsparmodus"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Automatisch aktivieren"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Keine Aktivierung nach Zeitplan"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Anhand meiner üblichen Abläufe"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Anhand des Ladestands"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Der Energiesparmodus wird automatisch aktiviert, wenn der Akku wahrscheinlich nicht bis zum nächsten Aufladen hält (ermittelt anhand deines üblichen Aufladezeitpunkts)."</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Der Stromsparmodus wird automatisch aktiviert, wenn der Akku wahrscheinlich nicht bis zum nächsten Aufladen hält (ermittelt anhand deines üblichen Aufladezeitpunkts)."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Wird bei <xliff:g id="PERCENT">%1$s</xliff:g> aktiviert"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Zeitplan festlegen"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Akkulaufzeit verlängern"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Bei vollem Akku ausschalten"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Der Energiesparmodus wird deaktiviert, sobald dein Smartphone wieder zu <xliff:g id="PERCENT">%1$s</xliff:g> geladen ist"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Der Energiesparmodus wird deaktiviert, wenn dein Tabletakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Der Energiesparmodus wird deaktiviert, wenn dein Geräteakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Der Stromsparmodus wird deaktiviert, sobald dein Smartphone wieder zu <xliff:g id="PERCENT">%1$s</xliff:g> geladen ist"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Der Stromsparmodus wird deaktiviert, wenn dein Tabletakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Der Stromsparmodus wird deaktiviert, wenn dein Geräteakku bei <xliff:g id="PERCENT">%1$s</xliff:g> steht"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivieren"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Energiesparmodus aktivieren"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Stromsparmodus aktivieren"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Automatisch aktivieren"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Nie"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"bei <xliff:g id="PERCENT">%1$s</xliff:g> Akku"</string>
@@ -2659,6 +2665,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Zurücksetzen"</string>
     <string name="tts_play" msgid="2945513377250757221">"Wiedergeben"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Automatische Konnektivität"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Verlängert die Akkulaufzeit und optimiert die Leistung des Geräts durch automatisches Verwalten deiner Netzwerkverbindungen"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Anmeldedatenspeicher"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Ein Zertifikat installieren"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Zertifikate von Speicher installieren"</string>
@@ -3284,7 +3292,7 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptik, vibrieren, display, empfindlichkeit"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"Haptik, vibrieren, Smartphone, Anruf, Empfindlichkeit, klingeln"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"Haptik, vibrieren, Empfindlichkeit"</string>
-    <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"Energiesparmodus, fixiert, nichtflüchtig, Stromsparfunktion, Akku"</string>
+    <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"Stromsparmodus, fixiert, nichtflüchtig, Stromsparfunktion, Akku"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ablauf, zeitplan, energiesparmodus, stromsparfunktion, akku, automatisch, prozent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, erweiterte Anruffunktionen, 4G-Anrufe"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Sprache hinzufügen, eine Sprache hinzufügen"</string>
@@ -4224,7 +4232,7 @@
     <string name="condition_zen_title" msgid="7674761111934567490">"\"Bitte nicht stören\" aktiviert"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Smartphone stummgeschaltet"</string>
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"Mit Ausnahmen"</string>
-    <string name="condition_battery_title" msgid="6395113995454385248">"Energiesparmodus aktiviert"</string>
+    <string name="condition_battery_title" msgid="6395113995454385248">"Stromsparmodus aktiviert"</string>
     <string name="condition_battery_summary" msgid="8436806157833107886">"Funktionen eingeschränkt"</string>
     <string name="condition_cellular_title" msgid="155474690792125747">"Mobile Daten sind deaktiviert"</string>
     <string name="condition_cellular_summary" msgid="1678098728303268851">"Internet nur über WLAN verfügbar"</string>
@@ -4401,8 +4409,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Mit mehreren Geräten verbunden"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Demomodus der System-UI"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Dunkles Design"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"An / Wegen Energiesparmodus vorübergehend deaktiviert"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Wegen Energiesparmodus vorübergehend aktiviert"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"An / Wegen Stromsparmodus vorübergehend deaktiviert"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Wegen Stromsparmodus vorübergehend aktiviert"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Unterstützte Apps wechseln ebenfalls zum dunklen Design"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Ok"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Dunkles Design testen"</string>
@@ -4706,6 +4714,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Netzwerke nicht gefunden. Bitte versuch es noch einmal."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(nicht zulässig)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Keine SIM-Karte"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Keine SIM-Karte"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Keine"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Zum Herstellen einer Verbindung ist eine SIM-Karte erforderlich"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Zum Herstellen einer Verbindung ist eine <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>-SIM-Karte erforderlich"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Bevorzugter Netzmodus: WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Bevorzugter Netzmodus: nur GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Bevorzugter Netzmodus: nur WCDMA"</string>
@@ -4941,10 +4954,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Apps dürfen über Einstellungen angezeigt werden"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Apps, die über anderen Apps angezeigt werden dürfen, dürfen auch über den Einstellungen angezeigt werden"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Medien"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Player ausblenden, wenn die Sitzung beendet ist"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Mit dem Player kannst du eine Sitzung aus dem erweiterten Bereich der Schnelleinstellungen fortsetzen."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Mediaplayer in den Schnelleinstellungen"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Mediaplayer für längere Zeit anzeigen, um die Wiedergabe einfach fortsetzen zu können"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Player ausblenden"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Player anzeigen"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Es sind keine Player verfügbar."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Medien"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth wird aktiviert"</string>
 </resources>

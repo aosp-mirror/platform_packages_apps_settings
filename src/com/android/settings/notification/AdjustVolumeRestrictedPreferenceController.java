@@ -64,6 +64,7 @@ public abstract class AdjustVolumeRestrictedPreferenceController extends
         filter.addAction(AudioManager.VOLUME_CHANGED_ACTION);
         filter.addAction(AudioManager.STREAM_MUTE_CHANGED_ACTION);
         filter.addAction(AudioManager.MASTER_MUTE_CHANGED_ACTION);
+        filter.addAction(AudioManager.STREAM_DEVICES_CHANGED_ACTION);
         return filter;
     }
 }

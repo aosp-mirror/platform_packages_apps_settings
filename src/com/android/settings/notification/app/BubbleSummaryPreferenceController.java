@@ -20,6 +20,7 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_ALL;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -99,7 +100,8 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
     }
 
     private boolean isGloballyEnabled() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
+        ActivityManager am = mContext.getSystemService(ActivityManager.class);
+        return !am.isLowRamDevice() && Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON) == ON;
     }
 }

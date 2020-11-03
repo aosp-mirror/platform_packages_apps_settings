@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Utilizar a autenticación facial"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Comezar"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Se o desbloqueo facial da accesibilidade está desactivado, é posible que algúns pasos da configuración non funcionen ben con TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Atrás"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Continuar"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Usar axustes de accesibilidade"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Contrasinal da rede wifi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Contrasinal da zona wifi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Conectar automaticamente"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Permite que o teléfono se conecte automaticamente a esta rede cando estea preto dela"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Permite que a tableta se conecte automaticamente a esta rede cando estea preto dela"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Permite que o dispositivo se conecte a esta rede cando estea dentro da súa zona de cobertura"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Engadir dispositivo"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utiliza un código QR para engadir un dispositivo a esta rede"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"O formato do código QR non é válido"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utilizar certificados do sistema"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Non fornecer"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Non validar"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Non se especificou ningún certificado. A túa conexión non será privada."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"O nome da rede é demasiado longo."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Debe especificarse un dominio."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Necesítase un certificado."</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Incrementa automaticamente a frecuencia de actualización de 60 a 90 Hz en determinados tipos de contido. Aumenta o uso da batería."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Forzar taxa de actualización de 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"A taxa de actualización máis alta para mellorar a resposta aos toques e a calidade das animacións. Aumenta o uso da batería."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atención á pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activado/A pantalla non se apagará se miras para ela"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Versión de Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Actualización de seguranza de Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modelo"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modelo: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modelo e hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Versión de hardware"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID de equipamento"</string>
@@ -1661,7 +1661,7 @@
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Compartir Internet só por USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Compartir Internet só por Bluetooth"</string>
     <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Comparte Internet só por Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Compartir Internet só por USB e Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Compartirase Internet só por USB e Bluetooth"</string>
     <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Comparte Internet só por USB e Ethernet"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Comparte Internet só por Bluetooth e Ethernet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Comparte Internet só por USB, Bluetooth e Ethernet"</string>
@@ -1671,12 +1671,12 @@
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Comparte a conexión a Internet da tableta por USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Conexión por Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Compartir a conexión a Internet da tableta por Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Compartir a conexión a Internet do teléfono por Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Comparte a conexión a Internet do teléfono por Bluetooth"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Compartindo a conexión a Internet de <xliff:g id="DEVICE_NAME">%1$d</xliff:g> por Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Non se pode compartir a conexión con máis de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> dispositivos"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Desactivarase a conexión compartida de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet compartida"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Comparte a conexión a Internet do teléfono por Ethernet USB"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Comparte a conexión a Internet do teléfono por Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utiliza a zona wifi e a conexión compartida para ofrecer acceso a Internet a outros dispositivos mediante a túa conexión de datos móbiles. As aplicacións tamén poden crear unha zona wifi para compartir contido cos dispositivos que están cerca."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utiliza a zona wifi e a conexión compartida para ofrecer acceso a Internet a outros dispositivos mediante a túa wifi ou a túa conexión de datos móbiles. As aplicacións tamén poden crear unha zona wifi para compartir contido cos dispositivos que están cerca."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Axuda"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Pode axudar a restablecer o PIN, o padrón ou o contrasinal"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"A tableta e os datos persoais son máis vulnerables aos ataques de aplicacións descoñecidas. Ao instalar aplicacións desta fonte, aceptas que es responsable dos danos ocasionados na tableta ou da perda dos datos que se poidan derivar do seu uso."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"O teléfono e os datos persoais son máis vulnerables aos ataques de aplicacións descoñecidas. Ao instalar aplicacións desta fonte, aceptas que es responsable dos danos ocasionados no teléfono ou da perda dos datos que se poidan derivar do seu uso."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Houbo un problema ao borrar as SIM descargadas"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Reinicia o dispositivo e téntao de novo. Se continúas co restablecemento da configuración de fábrica, é posible que as SIM descargadas permanezan no dispositivo."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Reiniciar"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Continuar restablecemento fábrica?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"As SIM descargadas permanecerán no dispositivo."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Restablecer configuración de fábrica"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"O teu dispositivo e os datos persoais son máis vulnerables aos ataques de aplicacións descoñecidas. Ao instalar aplicacións desta fonte, aceptas que es responsable dos danos que se poidan producir no dispositivo ou da perda de datos que se poida derivar do seu uso."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Configuración avanzada"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Activa máis opcións de configuración"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Restablecer"</string>
     <string name="tts_play" msgid="2945513377250757221">"Reproducir"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conectividade intelixente"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Aumenta a duración da batería e mellora o rendemento do dispositivo ao xestionar automaticamente as conexións de rede"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Almacenamento de credenciais"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalar un certificado"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instala certificados desde o almacenamento"</string>
@@ -3552,7 +3560,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> conversa prioritaria</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Conversas prioritarias"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Mostra as conversas prioritarias como burbullas flotantes situadas na parte superior da sección de conversas"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Móstranse as conversas prioritarias como burbullas flotantes situadas na parte superior da sección de conversas"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Mostra as conversas prioritarias na parte superior da sección de conversas"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Outras conversas"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas que modificases"</string>
@@ -3574,13 +3582,13 @@
     <string name="notification_alert_title" msgid="1632401211722199217">"Configuración predeterminada"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupcións"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permite que a aplicación emita son, vibre e mostre notificacións na pantalla"</string>
-    <string name="notification_priority_title" msgid="5554834239080425229">"Prioridade"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Móstrase na parte superior da sección de conversas en forma de burbulla flotante e aparece a imaxe do perfil na pantalla de bloqueo"</string>
+    <string name="notification_priority_title" msgid="5554834239080425229">"Prioritarias"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Móstranse na parte superior da sección de conversas en forma de burbulla flotante e aparece a imaxe do perfil na pantalla de bloqueo"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"A aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> non é compatible coa maior parte das funcións das conversas. Non poderás marcar as conversas como prioritarias nin tampouco mostralas en forma de burbullas flotantes."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"No panel despregable, contrae as notificacións e móstraas nunha liña"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sen son nin vibración"</string>
-    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Non soa nin vibra, e aparece máis abaixo na sección de conversas"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Podería soar ou vibrar en función da configuración do teléfono"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sen son nin vibración, e aparecen máis abaixo na sección de conversas"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Poderían soar ou vibrar en función da configuración do teléfono"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Ao desbloquear o dispositivo, as notificacións móstranse nun cartel na parte superior da pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas as notificacións da aplicación <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas as notificacións de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Non se puido encontrar ningunha rede. Téntao de novo."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(rede non-permitida)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Non hai ningunha tarxeta SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Sen SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Ningunha"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Require unha SIM para conectarse"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Require unha SIM de <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> para conectarse"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Modo de rede preferido: WCDMA preferido"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Modo de rede preferido: só GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Modo de rede preferido: só WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir superposic. na pantalla en Configuración"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permite que as aplicacións que se poden mostrar sobre outras se superpoñan nas pantallas da aplicación Configuración"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Contido multimedia"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Oculta o reprodutor ao rematar a sesión multimedia"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"O reprodutor permíteche retomar unha sesión cando se desprega o panel Configuración rápida."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Reprodutor multimedia en Configuración rápida"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Mostra o reprodutor multimedia durante un período de tempo prolongado para retomar a reprodución facilmente"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar reprodutor"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar reprodutor"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Non hai reprodutores dispoñibles"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"contido multimedia"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Activarase o Bluetooth"</string>
 </resources>
