@@ -177,8 +177,9 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         .setOnlyAlertOnce(false)
                         .setDefaults(Notification.DEFAULT_ALL)
                         .setContentIntent(PendingIntent.getActivity(context, 0,
-                                connectionAccessIntent, 0))
-                        .setDeleteIntent(PendingIntent.getBroadcast(context, 0, deleteIntent, 0))
+                                connectionAccessIntent, PendingIntent.FLAG_IMMUTABLE))
+                        .setDeleteIntent(PendingIntent.getBroadcast(context, 0, deleteIntent,
+                                PendingIntent.FLAG_IMMUTABLE))
                         .setColor(context.getColor(
                                 com.android.internal.R.color.system_notification_accent_color))
                         .setLocalOnly(true)
