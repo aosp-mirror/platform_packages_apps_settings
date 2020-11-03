@@ -17,6 +17,8 @@
 
 package com.android.settings.notification;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_COMPONENT_NAME;
 import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_PACKAGE_TITLE;
 import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_USER_ID;
@@ -54,6 +56,8 @@ public class NotificationAccessConfirmationActivity extends Activity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
 
         mNm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
