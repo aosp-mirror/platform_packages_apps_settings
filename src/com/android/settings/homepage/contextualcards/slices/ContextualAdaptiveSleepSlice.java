@@ -43,6 +43,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.util.concurrent.TimeUnit;
 
+// TODO(b/172310863): consider removing this slice.
 public class ContextualAdaptiveSleepSlice implements CustomSliceable {
     private static final String TAG = "ContextualAdaptiveSleepSlice";
     private static final long DEFAULT_SETUP_TIME = 0;
@@ -122,7 +123,8 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
 
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
-        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
+        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE  /* flags */);
     }
 
     /**
