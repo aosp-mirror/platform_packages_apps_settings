@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -57,14 +58,20 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.network_and_internet;
+        if (isProviderModelEnabled(getContext())) {
+            return R.xml.network_provider_internet;
+        } else {
+            return R.xml.network_and_internet;
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
+        if (!isProviderModelEnabled(context)) {
+            use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
+        }
         use(AirplaneModePreferenceController.class).setFragment(this);
         getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
     }
@@ -164,4 +171,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                             null /* mobilePlanHost */);
                 }
             };
+
+    private static boolean isProviderModelEnabled(Context context) {
+        return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
+    }
 }

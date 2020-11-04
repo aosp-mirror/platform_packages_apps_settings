@@ -610,6 +610,13 @@
             android:title="@string/asst_feedback_indicator_title"
             settings:controller="com.android.settings.notification.AssistantFeedbackPreferenceController" />
 
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="asst_importance_reset"
+            android:title="@string/asst_importance_reset_title"
+            android:selectable="false"
+            android:layout="@layout/reset_importance_button"
+            settings:controller="com.android.settings.notification.ImportanceResetPreferenceController" />
+
         <Preference
             android:key="inactive_apps"
             android:title="@string/inactive_apps_title"
