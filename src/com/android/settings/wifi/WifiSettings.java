@@ -106,6 +106,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     static final int MENU_ID_FORGET = Menu.FIRST + 3;
     static final int MENU_ID_MODIFY = Menu.FIRST + 4;
+    static final int MENU_ID_SHARE = Menu.FIRST + 5;
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
@@ -499,7 +500,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         if (mSelectedWifiEntry.canDisconnect()) {
-            menu.add(Menu.NONE, MENU_ID_DISCONNECT, 0 /* order */,
+            menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+            menu.add(Menu.NONE, MENU_ID_DISCONNECT, 1 /* order */,
                     R.string.wifi_disconnect_button_text);
         }
 
@@ -537,6 +539,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return true;
             case MENU_ID_FORGET:
                 forget(mSelectedWifiEntry);
+                return true;
+            case MENU_ID_SHARE:
+                WifiDppUtils.showLockScreen(getContext(),
+                        () -> launchWifiDppConfiguratorActivity(mSelectedWifiEntry));
                 return true;
             case MENU_ID_MODIFY:
                 showDialog(mSelectedWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
@@ -1113,6 +1119,23 @@ public class WifiSettings extends RestrictedSettingsFragment
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setResultListener(WifiSettings.this, CONFIG_NETWORK_REQUEST)
                 .launch();
+    }
+
+    private void launchWifiDppConfiguratorActivity(WifiEntry wifiEntry) {
+        final Intent intent = WifiDppUtils.getConfiguratorQrCodeGeneratorIntentOrNull(getContext(),
+                mWifiManager, wifiEntry);
+
+        if (intent == null) {
+            Log.e(TAG, "Launch Wi-Fi DPP QR code generator with a wrong Wi-Fi network!");
+        } else {
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_SETTINGS_SHARE_WIFI_QR_CODE,
+                    SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR,
+                    /* key */ null,
+                    /* value */ Integer.MIN_VALUE);
+
+            startActivity(intent);
+        }
     }
 
     /** Helper method to return whether a WifiEntry is disabled due to a wrong password */

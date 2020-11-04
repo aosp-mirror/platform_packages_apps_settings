@@ -145,7 +145,7 @@ public class WifiDppUtils {
         return wifiConfiguration.preSharedKey;
     }
 
-    private static String removeFirstAndLastDoubleQuotes(String str) {
+    static String removeFirstAndLastDoubleQuotes(String str) {
         if (TextUtils.isEmpty(str)) {
             return str;
         }
