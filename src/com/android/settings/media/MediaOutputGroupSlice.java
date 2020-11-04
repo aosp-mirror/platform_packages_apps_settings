@@ -194,7 +194,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
         intent.putExtra(CUSTOMIZED_ACTION, action);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         return PendingIntent.getBroadcast(mContext, requestCode, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     private MediaDeviceUpdateWorker getWorker() {

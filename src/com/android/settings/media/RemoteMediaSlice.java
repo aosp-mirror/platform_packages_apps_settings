@@ -165,7 +165,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                 .setData(getUri())
                 .putExtra(MEDIA_ID, id)
                 .setClass(mContext, SliceBroadcastReceiver.class);
-        return PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
+        return PendingIntent.getBroadcast(mContext, requestCode, intent,
+                PendingIntent.FLAG_MUTABLE);
     }
 
     private SliceAction getSoundSettingAction(CharSequence actionTitle, IconCompat icon,
@@ -177,7 +178,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                 mContext.getText(R.string.sound_settings).toString(), 0);
         intent.setClassName(mContext.getPackageName(), SubSettings.class.getName());
         intent.setData(contentUri);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent,
+                PendingIntent.FLAG_IMMUTABLE);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(pendingIntent, icon,
                 ListBuilder.ICON_IMAGE, actionTitle);
         return primarySliceAction;
@@ -192,7 +194,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                 .putExtra(SESSION_INFO, info)
                 .addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         final PendingIntent primaryBroadcastIntent = PendingIntent.getBroadcast(mContext,
-                info.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                info.hashCode(), intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryBroadcastIntent,
                 IconCompat.createWithResource(mContext, R.drawable.ic_volume_remote),
