@@ -19,7 +19,7 @@ package com.android.settings.accessibility;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
-import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.EXTRA_SHORTCUT_TYPE;
+import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -62,6 +62,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
             PLACEHOLDER_PACKAGE_NAME + ".mock_a11y_service";
     private static final ComponentName PLACEHOLDER_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
+    private static final String PLACEHOLDER_DIALOG_TITLE = "title";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
@@ -162,8 +163,10 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     public void updateShortcutPreferenceData_assignDefaultValueToVariable() {
         mFragment.updateShortcutPreferenceData();
 
+        final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
+                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
         // Compare to default UserShortcutType
-        assertThat(mFragment.mUserShortcutTypes).isEqualTo(UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
     }
 
     @Test
@@ -172,8 +175,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         setMagnificationTripleTapEnabled(/* enabled= */ true);
         mFragment.updateShortcutPreferenceData();
 
-        assertThat(mFragment.mUserShortcutTypes).isEqualTo(
-                UserShortcutType.SOFTWARE | UserShortcutType.TRIPLETAP);
+        final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
+                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.TRIPLETAP);
     }
 
     @Test
@@ -184,27 +188,66 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         putUserShortcutTypeIntoSharedPreference(mContext, tripleTapShortcut);
         mFragment.updateShortcutPreferenceData();
 
-        assertThat(mFragment.mUserShortcutTypes).isEqualTo(UserShortcutType.TRIPLETAP);
+        final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
+                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(UserShortcutType.TRIPLETAP);
+    }
+
+    @Test
+    public void setupMagnificationEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        final AlertDialog dialog = AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
+                mContext, PLACEHOLDER_DIALOG_TITLE, this::callEmptyOnClicked);
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
+                null);
+        mFragment.mShortcutPreference = shortcutPreference;
+
+        mFragment.mShortcutPreference.setChecked(false);
+        mFragment.setupMagnificationEditShortcutDialog(dialog);
+
+        final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
+        assertThat(checkboxValue).isEqualTo(UserShortcutType.EMPTY);
+    }
+
+    @Test
+    public void setupMagnificationEditShortcutDialog_shortcutPreferenceOn_checkboxIsSavedValue() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        final AlertDialog dialog = AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
+                mContext, PLACEHOLDER_DIALOG_TITLE, this::callEmptyOnClicked);
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
+                null);
+        final PreferredShortcut tripletapShortcut = new PreferredShortcut(
+                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.TRIPLETAP);
+        mFragment.mShortcutPreference = shortcutPreference;
+
+        PreferredShortcuts.saveUserShortcutType(mContext, tripletapShortcut);
+        mFragment.mShortcutPreference.setChecked(true);
+        mFragment.setupMagnificationEditShortcutDialog(dialog);
+
+        final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
+        assertThat(checkboxValue).isEqualTo(UserShortcutType.TRIPLETAP);
     }
 
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignToVariable() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        final String dialogTitle = "title";
         final AlertDialog dialog = AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
-                mContext, dialogTitle, this::callEmptyOnClicked);
+                mContext, PLACEHOLDER_DIALOG_TITLE, this::callEmptyOnClicked);
         final Bundle savedInstanceState = new Bundle();
+        mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
 
-        savedInstanceState.putInt(EXTRA_SHORTCUT_TYPE,
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+        savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
+                UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP);
         mFragment.onCreate(savedInstanceState);
-        mFragment.initializeDialogCheckBox(dialog);
-        mFragment.updateUserShortcutType(true);
+        mFragment.setupMagnificationEditShortcutDialog(dialog);
+        final int value = mFragment.getShortcutTypeCheckBoxValue();
+        mFragment.saveNonEmptyUserShortcutType(value);
 
-        assertThat(mFragment.mUserShortcutTypes).isEqualTo(
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
-
+        final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
+                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+        assertThat(value).isEqualTo(6);
+        assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP);
     }
 
     private void putStringIntoSettings(String key, String componentName) {

@@ -64,14 +64,14 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             return;
         }
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
-            setTheme(SetupWizardUtils.getTheme(getIntent()));
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;
         } else if (getIntent().getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsDark);
             mConfirmCredentialTheme = ConfirmCredentialTheme.DARK;
         } else {
-            setTheme(SetupWizardUtils.getTheme(getIntent()));
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.NORMAL;
         }
         super.onCreate(savedState);
