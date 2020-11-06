@@ -94,8 +94,8 @@ public class ChooseLockPattern extends SettingsActivity {
 
     @Override
     protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
+        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
+        super.onApplyThemeResource(theme, new_resid, first);
     }
 
     public static class IntentBuilder {

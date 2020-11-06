@@ -313,12 +313,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        // Do not restore shortcut in shortcut chooser dialog when shortcutPreference is turned off.
-        mUserShortcutTypesCache = mShortcutPreference.isChecked()
-                ? retrieveUserShortcutType(getPrefContext(), mComponentName.flattenToString(),
-                UserShortcutType.SOFTWARE)
-                : UserShortcutType.EMPTY;
-
         final boolean isServiceOnOrShortcutAdded = mShortcutPreference.isChecked()
                 || mToggleServiceDividerSwitchPreference.isChecked();
         showPopupDialog(isServiceOnOrShortcutAdded ? DialogEnums.EDIT_SHORTCUT

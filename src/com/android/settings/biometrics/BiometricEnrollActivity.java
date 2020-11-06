@@ -203,9 +203,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
+        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
         theme.applyStyle(R.style.SetupWizardPartnerResource, true);
-        super.onApplyThemeResource(theme, resid, first);
+        super.onApplyThemeResource(theme, new_resid, first);
     }
 
     @Override

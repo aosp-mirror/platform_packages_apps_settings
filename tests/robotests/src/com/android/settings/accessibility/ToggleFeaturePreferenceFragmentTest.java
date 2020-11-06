@@ -16,7 +16,7 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.EXTRA_SHORTCUT_TYPE;
+import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -62,6 +62,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
     private static final ComponentName PLACEHOLDER_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
+    private static final String PLACEHOLDER_DIALOG_TITLE = "title";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
@@ -88,7 +89,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void createFragment_shouldOnlyAddPreferencesOnce() {
         FragmentController.setupFragment(mFragment, FragmentActivity.class,
-                /* containerViewId= */ 0, /* bundle= */null);
+                /* containerViewId= */ 0, /* bundle= */ null);
 
         // execute exactly once
         verify(mFragment).addPreferencesFromResource(R.xml.placeholder_prefs);
@@ -100,8 +101,10 @@ public class ToggleFeaturePreferenceFragmentTest {
 
         mFragment.updateShortcutPreferenceData();
 
+        final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
+                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         // Compare to default UserShortcutType
-        assertThat(mFragment.mUserShortcutTypes).isEqualTo(UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
     }
 
     @Test
@@ -112,8 +115,9 @@ public class ToggleFeaturePreferenceFragmentTest {
         putStringIntoSettings(HARDWARE_SHORTCUT_KEY, PLACEHOLDER_COMPONENT_NAME.flattenToString());
         mFragment.updateShortcutPreferenceData();
 
-        assertThat(mFragment.mUserShortcutTypes).isEqualTo(
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+        final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
+                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
     }
 
     @Test
@@ -125,28 +129,70 @@ public class ToggleFeaturePreferenceFragmentTest {
         putUserShortcutTypeIntoSharedPreference(mContext, hardwareShortcut);
         mFragment.updateShortcutPreferenceData();
 
-        assertThat(mFragment.mUserShortcutTypes).isEqualTo(UserShortcutType.HARDWARE);
+        final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
+                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
+    }
+
+    @Test
+    public void setupEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+                mContext, PLACEHOLDER_DIALOG_TITLE, this::callEmptyOnClicked);
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
+                null);
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+        mFragment.mShortcutPreference = shortcutPreference;
+
+        mFragment.mShortcutPreference.setChecked(false);
+        mFragment.setupEditShortcutDialog(dialog);
+
+        final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
+        assertThat(checkboxValue).isEqualTo(UserShortcutType.EMPTY);
+    }
+
+    @Test
+    public void setupEditShortcutDialog_shortcutPreferenceOn_checkboxIsSavedValue() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+                mContext, PLACEHOLDER_DIALOG_TITLE, this::callEmptyOnClicked);
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
+                null);
+        final PreferredShortcut hardwareShortcut = new PreferredShortcut(
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+        mFragment.mShortcutPreference = shortcutPreference;
+
+        PreferredShortcuts.saveUserShortcutType(mContext, hardwareShortcut);
+        mFragment.mShortcutPreference.setChecked(true);
+        mFragment.setupEditShortcutDialog(dialog);
+
+        final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
+        assertThat(checkboxValue).isEqualTo(UserShortcutType.HARDWARE);
     }
 
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignToVariable() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        final String dialogTitle = "title";
         final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
-                mContext, dialogTitle, this::callEmptyOnClicked);
+                mContext, PLACEHOLDER_DIALOG_TITLE, this::callEmptyOnClicked);
         final Bundle savedInstanceState = new Bundle();
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
+                null);
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+        mFragment.mShortcutPreference = shortcutPreference;
 
-        savedInstanceState.putInt(EXTRA_SHORTCUT_TYPE,
+        savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
                 UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
         mFragment.onCreate(savedInstanceState);
-        mFragment.initializeDialogCheckBox(dialog);
-        mFragment.updateUserShortcutType(true);
+        mFragment.setupEditShortcutDialog(dialog);
+        final int value = mFragment.getShortcutTypeCheckBoxValue();
+        mFragment.saveNonEmptyUserShortcutType(value);
 
-        assertThat(mFragment.mUserShortcutTypes).isEqualTo(
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
-
+        final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
+                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
     }
 
     private void putStringIntoSettings(String key, String componentName) {

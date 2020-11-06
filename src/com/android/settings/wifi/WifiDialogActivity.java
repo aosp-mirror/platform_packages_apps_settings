@@ -45,6 +45,7 @@ import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.time.Clock;
 import java.time.ZoneOffset;
@@ -105,7 +106,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
     protected void onCreate(Bundle savedInstanceState) {
         mIntent = getIntent();
         if (WizardManagerHelper.isSetupWizardIntent(mIntent)) {
-            setTheme(SetupWizardUtils.getTransparentTheme(mIntent));
+            setTheme(SetupWizardUtils.getTransparentTheme(this, mIntent));
         }
 
         super.onCreate(savedInstanceState);
@@ -151,13 +152,16 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         }
 
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            final int targetStyle = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                    ? R.style.SuwAlertDialogThemeCompat_DayNight :
+                    R.style.SuwAlertDialogThemeCompat_Light;
             if (mIsWifiTrackerLib) {
                 mDialog2 = WifiDialog2.createModal(this, this,
                         mNetworkDetailsTracker.getWifiEntry(),
-                        WifiConfigUiBase2.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light);
+                        WifiConfigUiBase2.MODE_CONNECT, targetStyle);
             } else {
                 mDialog = WifiDialog.createModal(this, this, mAccessPoint,
-                        WifiConfigUiBase.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light);
+                        WifiConfigUiBase.MODE_CONNECT, targetStyle);
             }
         } else {
             if (mIsWifiTrackerLib) {
