@@ -57,8 +57,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     private boolean mShow5gLimitedDialog;
     boolean mIsNrEnabledFromCarrierConfig;
     private boolean mHas5gCapability;
-    @VisibleForTesting
-    Integer mCallState;
+    private Integer mCallState;
     private final List<On4gLteUpdateListener> m4gLteListeners;
 
     protected static final int MODE_NONE = -1;
@@ -199,8 +198,13 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         return new VolteQueryImsState(mContext, subId);
     }
 
+    @VisibleForTesting
+    boolean isCallStateIdle() {
+        return (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE);
+    }
+
     private boolean isUserControlAllowed(final PersistableBundle carrierConfig) {
-        return (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE)
+        return isCallStateIdle()
                 && (carrierConfig != null)
                 && carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
