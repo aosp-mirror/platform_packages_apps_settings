@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.location;
+package com.android.settings.datetime.locationtimezone;
 
 import static com.google.common.truth.Truth.assertThat;
 
