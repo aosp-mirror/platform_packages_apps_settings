@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.location;
+package com.android.settings.datetime;
 
 import static android.app.time.TimeZoneCapabilities.CAPABILITY_NOT_APPLICABLE;
 import static android.app.time.TimeZoneCapabilities.CAPABILITY_NOT_SUPPORTED;

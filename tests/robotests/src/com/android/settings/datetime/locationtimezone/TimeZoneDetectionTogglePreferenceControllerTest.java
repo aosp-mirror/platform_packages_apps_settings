@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.location;
+package com.android.settings.datetime.locationtimezone;
 
 import static android.app.time.TimeZoneCapabilities.CAPABILITY_NOT_APPLICABLE;
 import static android.app.time.TimeZoneCapabilities.CAPABILITY_POSSESSED;
