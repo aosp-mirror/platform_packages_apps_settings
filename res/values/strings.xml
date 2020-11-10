@@ -10469,6 +10469,9 @@
     <!-- Label for wifi data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="wifi_data_usage">Wi\u2011Fi data usage</string>
 
+    <!-- Label for non-carrier data usage in data usage screen [CHAR LIMIT=60] -->
+    <string name="non_carrier_data_usage">Non-carrier data usage</string>
+
     <!-- Label for ethernet data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="ethernet_data_usage">Ethernet data usage</string>
 
@@ -10516,6 +10519,9 @@
 
     <!-- A summary shown on data usage screens to indicate inaccuracy of data tracking [CHAR LIMIT=NONE] -->
     <string name="operator_warning">Carrier data accounting may differ from device accounting</string>
+
+    <!-- A summary shown on data usage screens to indicate data tracking excluded from carrier networks [CHAR LIMIT=NONE] -->
+    <string name="non_carrier_data_usage_warning">Excludes data that is used by carrier networks</string>
 
     <!-- Format string describing how much data has been used [CHAR LIMIT=20] -->
     <string name="data_used_template"><xliff:g name="amount" example="1 GB">%1$s</xliff:g> used</string>
