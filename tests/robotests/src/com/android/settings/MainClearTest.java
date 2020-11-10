@@ -236,7 +236,7 @@ public class MainClearTest {
 
     @Test
     public void testEsimRecheckBoxDefaultChecked() {
-        assertThat(((CheckBox) mContentView.findViewById(R.id.erase_esim)).isChecked()).isTrue();
+        assertThat(((CheckBox) mContentView.findViewById(R.id.erase_esim)).isChecked()).isFalse();
     }
 
     @Test
