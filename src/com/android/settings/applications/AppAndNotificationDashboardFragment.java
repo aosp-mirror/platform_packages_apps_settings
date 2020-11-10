@@ -21,12 +21,14 @@ import android.app.usage.UsageStats;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.util.FeatureFlagUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -65,6 +67,10 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment
 
     @Override
     protected int getPreferenceScreenResId() {
+        // TODO(b/168166015): Remove this when the new Apps page ready.
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            return R.xml.apps;
+        }
         return R.xml.app_and_notification;
     }
 
