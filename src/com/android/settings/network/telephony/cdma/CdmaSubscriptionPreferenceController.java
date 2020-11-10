@@ -67,13 +67,14 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
     public boolean onPreferenceChange(Preference preference, Object object) {
         final int newMode = Integer.parseInt((String) object);
         //TODO(b/117611981): only set it in one place
-        if (mTelephonyManager.setCdmaSubscriptionMode(newMode)) {
+        try {
+            mTelephonyManager.setCdmaSubscriptionMode(newMode);
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.CDMA_SUBSCRIPTION_MODE, newMode);
             return true;
+        } catch (IllegalStateException e) {
+            return false;
         }
-
-        return false;
     }
 
     @VisibleForTesting
