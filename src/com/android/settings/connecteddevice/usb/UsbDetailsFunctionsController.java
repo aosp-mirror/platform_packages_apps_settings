@@ -22,6 +22,7 @@ import static android.net.ConnectivityManager.TETHERING_USB;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
@@ -39,6 +40,9 @@ import java.util.Map;
  */
 public class UsbDetailsFunctionsController extends UsbDetailsController
         implements RadioButtonPreference.OnClickListener {
+
+    private static final String TAG = "UsbFunctionsCtrl";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     static final Map<Long, Integer> FUNCTIONS_MAP = new LinkedHashMap<>();
 
@@ -88,6 +92,10 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
 
     @Override
     protected void refresh(boolean connected, long functions, int powerRole, int dataRole) {
+        if (DEBUG) {
+            Log.d(TAG, "refresh() connected : " + connected + ", functions : " + functions
+                    + ", powerRole : " + powerRole + ", dataRole : " + dataRole);
+        }
         if (!connected || dataRole != DATA_ROLE_DEVICE) {
             mProfilesContainer.setEnabled(false);
         } else {
@@ -100,7 +108,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             pref = getProfilePreference(UsbBackend.usbFunctionsToString(option), title);
             // Only show supported options
             if (mUsbBackend.areFunctionsSupported(option)) {
-                if (functions == UsbManager.FUNCTION_ACCESSORY) {
+                if (isAccessoryMode(functions)) {
                     pref.setChecked(UsbManager.FUNCTION_MTP == option);
                 } else {
                     pref.setChecked(functions == option);
@@ -115,6 +123,12 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     public void onRadioButtonClicked(RadioButtonPreference preference) {
         final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
         final long previousFunction = mUsbBackend.getCurrentFunctions();
+        if (DEBUG) {
+            Log.d(TAG, "onRadioButtonClicked() function : " + function + ", toString() : "
+                    + UsbManager.usbFunctionsToString(function) + ", previousFunction : "
+                    + previousFunction + ", toString() : "
+                    + UsbManager.usbFunctionsToString(previousFunction));
+        }
         if (function != previousFunction && !Utils.isMonkeyRunning()
                 && !shouldIgnoreClickEvent(function, previousFunction)) {
             mPreviousFunction = previousFunction;
@@ -140,8 +154,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     }
 
     private boolean shouldIgnoreClickEvent(long function, long previousFunction) {
-        return previousFunction == UsbManager.FUNCTION_ACCESSORY
-                && function == UsbManager.FUNCTION_MTP;
+        return isAccessoryMode(previousFunction) && function == UsbManager.FUNCTION_MTP;
+    }
+
+    private boolean isAccessoryMode(long function) {
+        return (function & UsbManager.FUNCTION_ACCESSORY) != 0;
     }
 
     @Override
