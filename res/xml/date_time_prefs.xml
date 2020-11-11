@@ -52,6 +52,14 @@
         settings:userRestriction="no_config_date_time"
         settings:keywords="@string/keywords_time_zone"/>
 
+    <!-- This preference gets removed if location-based time zone detection is not supported -->
+    <com.android.settingslib.RestrictedPreference
+        android:key="location_time_zone_detection"
+        android:title="@string/location_time_zone_detection_screen_title"
+        settings:controller="com.android.settings.datetime.LocationTimeZoneDetectionPreferenceController"
+        android:fragment="com.android.settings.datetime.locationtimezone.TimeZoneDetectionSettings"
+        settings:userRestriction="no_config_date_time"/>
+
     <PreferenceCategory
         android:key="time_format_preference_category"
         android:title="@string/time_format_category_title"
