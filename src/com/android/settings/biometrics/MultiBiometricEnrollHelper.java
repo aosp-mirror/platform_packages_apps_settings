@@ -80,7 +80,7 @@ public class MultiBiometricEnrollHelper {
                         mActivity.getIntent());
                 fpIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, mGkPwHandle);
                 final PendingIntent fpAfterFaceIntent = PendingIntent.getActivity(mActivity,
-                        0 /* requestCode */, fpIntent, 0 /* flags */);
+                        0 /* requestCode */, fpIntent, PendingIntent.FLAG_IMMUTABLE);
                 faceIntent.putExtra(EXTRA_ENROLL_AFTER_FACE, fpAfterFaceIntent);
             }
 
