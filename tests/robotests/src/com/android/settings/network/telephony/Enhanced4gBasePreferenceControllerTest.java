@@ -79,6 +79,9 @@ public class Enhanced4gBasePreferenceControllerTest {
 
         mCarrierConfig = new PersistableBundle();
         doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL, false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL, true);
+        mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 1);
 
         mQueryImsState = spy(new MockVolteQueryImsState(mContext, SUB_ID));
         mQueryImsState.setEnabledByPlatform(true);
@@ -91,6 +94,8 @@ public class Enhanced4gBasePreferenceControllerTest {
         mController = spy(new Enhanced4gLtePreferenceController(mContext, "VoLTE"));
         mController.init(SUB_ID);
         doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
+        doReturn(true).when(mController).isCallStateIdle();
+        doReturn(1).when(mController).getMode();
         mPreference.setKey(mController.getPreferenceKey());
     }
 
@@ -98,6 +103,16 @@ public class Enhanced4gBasePreferenceControllerTest {
     public void getAvailabilityStatus_default_returnUnavailable() {
         mQueryImsState.setEnabledByPlatform(false);
         mQueryImsState.setIsProvisionedOnDevice(false);
+
+        mController.init(SUB_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_modeMismatch_returnUnavailable() {
+        doReturn(2).when(mController).getMode();
 
         mController.init(SUB_ID);
 
@@ -115,15 +130,21 @@ public class Enhanced4gBasePreferenceControllerTest {
 
     @Test
     public void updateState_configEnabled_prefEnabled() {
-        mQueryImsState.setIsEnabledByUser(true);
         mPreference.setEnabled(false);
-        mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 1);
-        mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
-        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL, true);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_callStateNotIdle_prefDisabled() {
+        doReturn(false).when(mController).isCallStateIdle();
+        mPreference.setEnabled(true);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
