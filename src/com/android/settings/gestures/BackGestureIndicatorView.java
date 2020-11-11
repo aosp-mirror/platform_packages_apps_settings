@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class BackGestureIndicatorView extends LinearLayout {
     private ImageView mRightIndicator;
     private BackGestureIndicatorDrawable mLeftDrawable;
     private BackGestureIndicatorDrawable mRightDrawable;
+    private int mHeightScale;
 
     public BackGestureIndicatorView(Context context) {
         super(context);
@@ -87,6 +89,10 @@ public class BackGestureIndicatorView extends LinearLayout {
         indicator.setWidth(width);
     }
 
+    public void setIndicatorHeightScale(int heightScale) {
+        mHeightScale = heightScale;
+    }
+
     public WindowManager.LayoutParams getLayoutParams(
             WindowManager.LayoutParams parentWindowAttributes) {
         int copiedFlags = (parentWindowAttributes.flags
@@ -99,8 +105,33 @@ public class BackGestureIndicatorView extends LinearLayout {
                         | copiedFlags,
                 PixelFormat.TRANSLUCENT);
 
+        setCurrentGestureHeight(lp);
         lp.setTitle("BackGestureIndicatorView");
         lp.token = getContext().getActivityToken();
         return lp;
+    }
+
+    private void setCurrentGestureHeight(WindowManager.LayoutParams lp) {
+        Point displaySize = new Point();
+        getContext().getDisplay().getRealSize(displaySize);
+
+        // mHeightScale cant be range 0 - 3
+        // 0 means full height
+        // 1 measns half of the screen
+        // 2 means lower third of the screen
+        // 3 means lower sicth of the screen
+        if (mHeightScale == 0) {
+            lp.height = displaySize.y;
+            lp.y = 0;
+        } else if (mHeightScale == 1) {
+            lp.height = displaySize.y / 2;
+            lp.y = displaySize.y - lp.height;
+        } else if (mHeightScale == 2) {
+            lp.height = displaySize.y / 3;
+            lp.y = displaySize.y - lp.height;
+        } else {
+            lp.height = displaySize.y / 6;
+            lp.y = displaySize.y - lp.height;
+        }
     }
 }
