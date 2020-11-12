@@ -41,6 +41,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.network.telephony.DataConnectivityListener;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
@@ -77,7 +78,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     // Map of subscription id to Preference
     private Map<Integer, Preference> mSubscriptionPreferences;
     private int mStartOrder;
-
     /**
      * This interface lets a parent of this class know that some change happened - this could
      * either be because overall availability changed, or because we've added/removed/updated some
@@ -291,7 +291,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 // subscriptions with same group UUID.
                 .filter(subInfo ->
                         isSubscriptionCanBeDisplayed(mContext, subInfo.getSubscriptionId()))
-                .count() >= 2;
+                .count() >= (Utils.isProviderModelEnabled(mContext) ? 1 : 2);
     }
 
     @Override
