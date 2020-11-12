@@ -88,7 +88,7 @@
     <item msgid="3409219643606946053">"در حال اتصال به <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="7891463004457278422">"در حال راستی‌آزمایی با <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
     <item msgid="3193388999810487137">"‏درحال دریافت نشانی IP از <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
-    <item msgid="2227930004124157952">"متصل شد به <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="2227930004124157952">"به <xliff:g id="NETWORK_NAME">%1$s</xliff:g> متصل شد"</item>
     <item msgid="7104168043537022445">"معلق"</item>
     <item msgid="2595938203187002544">"اتصال قطع شد از <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
     <item msgid="2435175968703898648">"اتصال قطع شد"</item>
@@ -120,7 +120,7 @@
     <item msgid="6697785880436838464">"۲ دقیقه"</item>
     <item msgid="3886297451944778457">"۵ دقیقه"</item>
     <item msgid="5972466727114812286">"۱ ساعت"</item>
-    <item msgid="4241913314075719627">"بدون مهلت زمانی"</item>
+    <item msgid="4241913314075719627">"بدون درنگ"</item>
   </string-array>
   <string-array name="bluetooth_max_connected_audio_devices">
     <item msgid="4792793579224104167">"استفاده از پیش‌فرض سیستم: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
@@ -365,6 +365,11 @@
     <item msgid="5118829513010894576">"متوسط"</item>
     <item msgid="6740026006576843477">"طولانی"</item>
   </string-array>
+  <string-array name="long_press_timeout_selector_list_titles">
+    <item msgid="8908021508913038488">"کوتاه"</item>
+    <item msgid="7397961711906421599">"متوسط"</item>
+    <item msgid="4079132024502041928">"طولانی"</item>
+  </string-array>
   <string-array name="captioning_typeface_selector_titles">
     <item msgid="2166553138528640250">"پیش‌فرض"</item>
     <item msgid="4234707448428002595">"Sans-serif"</item>
@@ -382,6 +387,13 @@
     <item msgid="3942006483573485941">"پیش‌فرض"</item>
     <item msgid="824386705928670045">"بزرگ"</item>
     <item msgid="2790561781512874585">"بسیار بزرگ"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_summaries">
+    <item msgid="5700290209695344464">"اندازه نوشتار خیلی کوچک"</item>
+    <item msgid="4400431625665186389">"اندازه نوشتار کوچک"</item>
+    <item msgid="2340994108094808362">"اندازه نوشتار پیش‌فرض"</item>
+    <item msgid="6446684863055375405">"اندازه نوشتار بزرگ"</item>
+    <item msgid="6838252010935384975">"اندازه نوشتار خیلی بزرگ"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="70686029249840227">"پیش‌فرض"</item>
@@ -409,10 +421,10 @@
     <item msgid="6621806338070912611">"PPTP VPN"</item>
     <item msgid="2552427673212085780">"‏L2TP/IPSec VPN با کلیدهای از قبل به اشتراک گذاشته شده"</item>
     <item msgid="7378096704485168082">"‏L2TP/IPSec VPN با گواهی"</item>
-    <item msgid="3792393562235791509">"‏IPSec VPN با کلیدهای از قبل به اشتراک گذاشته شده و احراز هویت Xauth"</item>
-    <item msgid="2484564813864139237">"‏IPSec VPN با گواهی و احراز هویت Xauth"</item>
-    <item msgid="68918911194507915">"‏IPSec VPN دارای گواهی و احراز هویت دوگانه"</item>
-    <item msgid="4631647675167100375">"‏IKEv2/IPSec VPN دارای گواهی و احراز هویت گذرواژه/ نام کاربری"</item>
+    <item msgid="3792393562235791509">"‏IPSec VPN با کلیدهای از قبل به اشتراک گذاشته شده و اصالت‌سنجی Xauth"</item>
+    <item msgid="2484564813864139237">"‏IPSec VPN با گواهی و اصالت‌سنجی Xauth"</item>
+    <item msgid="68918911194507915">"‏IPSec VPN دارای گواهی و اصالت‌سنجی دوگانه"</item>
+    <item msgid="4631647675167100375">"‏IKEv2/IPSec VPN دارای گواهی و اصالت‌سنجی گذرواژه/ نام کاربری"</item>
     <item msgid="8812228622975052811">"‏IKEv2/IPSec VPN با کلیدهای ازپیش مشترک‌شده"</item>
     <item msgid="6630554779981113046">"‏IKEv2/IPSec VPN دارای گواهی"</item>
   </string-array>
@@ -425,7 +437,7 @@
     <item msgid="9141074028293812365">"آماده سازی..."</item>
     <item msgid="2234425878608626285">"در حال اتصال..."</item>
     <item msgid="27547778933579155">"متصل شد"</item>
-    <item msgid="893506841727300393">"وقفه زمانی"</item>
+    <item msgid="893506841727300393">"درنگ"</item>
     <item msgid="2974952010554140659">"ناموفق"</item>
   </string-array>
   <string-array name="security_settings_premium_sms_values">
@@ -518,7 +530,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="1091258946200124345">"جهانی"</item>
+    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE / WCDMA"</item>
     <item msgid="7723670142495874534">"‏فقط TDSCDMA"</item>
@@ -535,7 +547,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8908263949185004366">"سراسری"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
