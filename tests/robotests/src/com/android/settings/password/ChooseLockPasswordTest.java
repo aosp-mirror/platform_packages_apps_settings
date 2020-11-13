@@ -31,6 +31,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED
 import static com.android.internal.widget.LockPatternUtils.PASSWORD_TYPE_KEY;
 import static com.android.settings.password.ChooseLockGeneric.CONFIRM_CREDENTIALS;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
@@ -67,6 +68,7 @@ import org.robolectric.shadows.ShadowDrawable;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         SettingsShadowResources.class,
+        ShadowLockPatternUtils.class,
         ShadowUtils.class,
         ShadowDevicePolicyManager.class,
 })
@@ -84,6 +86,7 @@ public class ChooseLockPasswordTest {
     @After
     public void tearDown() {
         SettingsShadowResources.reset();
+        ShadowLockPatternUtils.reset();
     }
 
     @Test
@@ -378,6 +381,29 @@ public class ChooseLockPasswordTest {
         assertThat(drawable.getCreatedFromResId()).isNotEqualTo(R.drawable.ic_fingerprint_header);
     }
 
+    @Test
+    public void validateComplexityMergedFromDpmOnCreate() {
+        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
+
+        assertPasswordValidationResult(
+                /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
+                /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
+                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                "PIN must be at least 8 digits");
+    }
+
+    @Test
+    public void validateComplexityMergedFromUnificationUserOnCreate() {
+        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
+        ShadowLockPatternUtils.setRequiredPasswordComplexity(123, PASSWORD_COMPLEXITY_HIGH);
+
+        Intent intent = createIntentForPasswordValidation(PASSWORD_COMPLEXITY_NONE,
+                PASSWORD_QUALITY_NUMERIC);
+        intent.putExtra(EXTRA_KEY_UNIFICATION_PROFILE_ID, 123);
+        assertPasswordValidationResultForIntent(LockscreenCredential.createNone(), intent,
+                "PIN must be at least 8 digits");
+    }
+
     private ChooseLockPassword buildChooseLockPasswordActivity(Intent intent) {
         return Robolectric.buildActivity(ChooseLockPassword.class, intent).setup().get();
     }
@@ -400,14 +426,27 @@ public class ChooseLockPasswordTest {
     private void assertPasswordValidationResult(@PasswordComplexity int minComplexity,
             int passwordType, LockscreenCredential userEnteredPassword,
             String... expectedValidationResult) {
-        Intent intent = new Intent();
-        intent.putExtra(CONFIRM_CREDENTIALS, false);
-        intent.putExtra(PASSWORD_TYPE_KEY, passwordType);
-        intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, minComplexity);
+        Intent intent = createIntentForPasswordValidation(minComplexity, passwordType);
+        assertPasswordValidationResultForIntent(userEnteredPassword, intent,
+                expectedValidationResult);
+    }
+
+    private void assertPasswordValidationResultForIntent(LockscreenCredential userEnteredPassword,
+            Intent intent, String... expectedValidationResult) {
         ChooseLockPassword activity = buildChooseLockPasswordActivity(intent);
         ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(activity);
         fragment.validatePassword(userEnteredPassword);
         String[] messages = fragment.convertErrorCodeToMessages();
-        assertThat(messages).asList().containsExactly((Object[]) expectedValidationResult);
+        assertThat(messages).asList().containsExactly(expectedValidationResult);
+    }
+
+    private Intent createIntentForPasswordValidation(
+            @PasswordComplexity int minComplexity,
+            int passwordType) {
+        Intent intent = new Intent();
+        intent.putExtra(CONFIRM_CREDENTIALS, false);
+        intent.putExtra(PASSWORD_TYPE_KEY, passwordType);
+        intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, minComplexity);
+        return intent;
     }
 }
