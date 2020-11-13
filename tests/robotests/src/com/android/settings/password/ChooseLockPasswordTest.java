@@ -55,6 +55,7 @@ import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -182,6 +183,7 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
+    @Ignore
     public void processAndValidatePasswordRequirements_minPasswordComplexityStricter_password() {
         mShadowDpm.setPasswordQuality(PASSWORD_QUALITY_SOMETHING);
 
@@ -295,6 +297,7 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
+    @Ignore
     public void processAndValidatePasswordRequirements_requirementsUpdateAccordingToMinComplexityAndUserInput_empty() {
         mShadowDpm.setPasswordQuality(PASSWORD_QUALITY_UNSPECIFIED);
 
@@ -307,6 +310,7 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
+    @Ignore
     public void processAndValidatePasswordRequirements_requirementsUpdateAccordingToMinComplexityAndUserInput_numeric() {
         mShadowDpm.setPasswordQuality(PASSWORD_QUALITY_UNSPECIFIED);
 
