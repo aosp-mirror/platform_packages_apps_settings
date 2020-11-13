@@ -22,12 +22,11 @@ import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller for emergency sos gesture setting
  */
-public class EmergencyGestureSoundPreferenceController extends TogglePreferenceController {
+public class EmergencyGestureSoundPreferenceController extends GesturePreferenceController {
 
     @VisibleForTesting
     static final int ON = 1;
@@ -38,6 +37,11 @@ public class EmergencyGestureSoundPreferenceController extends TogglePreferenceC
 
     public EmergencyGestureSoundPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    @Override
+    protected String getVideoPrefKey() {
+        return "emergency_gesture_screen_video";
     }
 
     private static boolean isGestureAvailable(Context context) {
