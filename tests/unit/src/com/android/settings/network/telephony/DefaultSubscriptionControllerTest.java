@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,22 +22,25 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Looper;
+import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
 import androidx.preference.ListPreference;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.testutils.Utils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,18 +48,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class DefaultSubscriptionControllerTest {
     @Mock
     private SubscriptionManager mManager;
     @Mock
-    private PreferenceScreen mScreen;
+    private TelecomManager mTelecomManager;
 
+    private PreferenceScreen mScreen;
+    private PreferenceManager mPreferenceManager;
     private ListPreference mListPreference;
     private Context mContext;
     private DefaultSubscriptionController mController;
@@ -64,12 +67,21 @@ public class DefaultSubscriptionControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mManager);
+        when(mContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
+
         final String key = "prefkey";
-        mController = spy(new TestDefaultSubscriptionController(mContext, key));
-        mListPreference = spy(new ListPreference(mContext));
-        when(mScreen.findPreference(key)).thenReturn(mListPreference);
+        mController = new TestDefaultSubscriptionController(mContext, key);
+
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+        mPreferenceManager = new PreferenceManager(mContext);
+        mScreen = mPreferenceManager.createPreferenceScreen(mContext);
+        mListPreference = new ListPreference(mContext);
+        mListPreference.setKey(key);
+        mScreen.addPreference(mListPreference);
     }
 
     @After
@@ -94,14 +106,14 @@ public class DefaultSubscriptionControllerTest {
 
     @Test
     public void isCallingAccountBindToSubscription_invalidAccount_withoutCrash() {
-        doReturn(null).when(mController).getPhoneAccount(any());
+        doReturn(null).when(mTelecomManager).getPhoneAccount(any());
 
         mController.isCallingAccountBindToSubscription(null);
     }
 
     @Test
     public void getLabelFromCallingAccount_invalidAccount_emptyString() {
-        doReturn(null).when(mController).getPhoneAccount(any());
+        doReturn(null).when(mTelecomManager).getPhoneAccount(any());
 
         assertThat(mController.getLabelFromCallingAccount(null)).isEqualTo("");
     }
@@ -111,7 +123,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
 
@@ -124,7 +136,8 @@ public class DefaultSubscriptionControllerTest {
         assertThat(entries.length).isEqualTo(3);
         assertThat(entries[0]).isEqualTo("sub1");
         assertThat(entries[1]).isEqualTo("sub2");
-        assertThat(entries[2]).isEqualTo(mContext.getString(R.string.calls_and_sms_ask_every_time));
+        assertThat(entries[2]).isEqualTo(
+                Utils.getResourceString(mContext, "calls_and_sms_ask_every_time"));
 
         final CharSequence[] entryValues = mListPreference.getEntryValues();
         assertThat(entryValues.length).isEqualTo(3);
@@ -139,7 +152,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        doReturn(sub2.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub2.getSubscriptionId());
 
         mController.displayPreference(mScreen);
 
@@ -152,7 +165,8 @@ public class DefaultSubscriptionControllerTest {
         assertThat(entries.length).isEqualTo(3);
         assertThat(entries[0]).isEqualTo("sub1");
         assertThat(entries[1]).isEqualTo("sub2");
-        assertThat(entries[2]).isEqualTo(mContext.getString(R.string.calls_and_sms_ask_every_time));
+        assertThat(entries[2]).isEqualTo(
+                Utils.getResourceString(mContext, "calls_and_sms_ask_every_time"));
 
         final CharSequence[] entryValues = mListPreference.getEntryValues();
         assertThat(entryValues.length).isEqualTo(3);
@@ -172,7 +186,7 @@ public class DefaultSubscriptionControllerTest {
         when(sub2.isOpportunistic()).thenReturn(true);
 
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2, sub3));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
 
@@ -180,7 +194,8 @@ public class DefaultSubscriptionControllerTest {
         assertThat(entries.length).isEqualTo(3);
         assertThat(entries[0]).isEqualTo("sub1");
         assertThat(entries[1]).isEqualTo("sub3");
-        assertThat(entries[2]).isEqualTo(mContext.getString(R.string.calls_and_sms_ask_every_time));
+        assertThat(entries[2]).isEqualTo(
+                Utils.getResourceString(mContext, "calls_and_sms_ask_every_time"));
 
         final CharSequence[] entryValues = mListPreference.getEntryValues();
         assertThat(entryValues.length).isEqualTo(3);
@@ -195,12 +210,12 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
         mListPreference.setValue("222");
         mController.onPreferenceChange(mListPreference, "222");
-        verify(mController).setDefaultSubscription(eq(222));
+        assertThat(mController.getDefaultSubscriptionId()).isEqualTo(222);
     }
 
     @Test
@@ -208,14 +223,14 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
         mListPreference.setValue(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         mController.onPreferenceChange(mListPreference,
                 Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
-        verify(mController).setDefaultSubscription(
-                eq(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
+        assertThat(mController.getDefaultSubscriptionId()).isEqualTo(
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
 
     @Test
@@ -225,7 +240,7 @@ public class DefaultSubscriptionControllerTest {
 
         // Start with only one sub active, so the pref is not available
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isFalse();
@@ -233,11 +248,12 @@ public class DefaultSubscriptionControllerTest {
         // Now make two subs be active - the pref should become available, and the
         // onPreferenceChange callback should be properly wired up.
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+
         mController.onSubscriptionsChanged();
+
         assertThat(mController.isAvailable()).isTrue();
-        assertThat(mListPreference.getOnPreferenceChangeListener()).isEqualTo(mController);
         mListPreference.callChangeListener("222");
-        verify(mController).setDefaultSubscription(eq(222));
+        assertThat(mController.getDefaultSubscriptionId()).isEqualTo(222);
     }
 
     @Test
@@ -245,15 +261,15 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
-        assertThat( mListPreference.getEntry()).isEqualTo("sub1");
+        assertThat(mListPreference.getEntry()).isEqualTo("sub1");
         assertThat(mListPreference.getValue()).isEqualTo("111");
 
-        doReturn(sub2.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub2.getSubscriptionId());
         mController.onSubscriptionsChanged();
-        assertThat( mListPreference.getEntry()).isEqualTo("sub2");
+        assertThat(mListPreference.getEntry()).isEqualTo("sub2");
         assertThat(mListPreference.getValue()).isEqualTo("222");
     }
 
@@ -262,7 +278,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isTrue();
@@ -280,7 +296,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isFalse();
@@ -299,7 +315,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         final SubscriptionInfo sub3 = createMockSub(333, "sub3");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+        mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
         assertThat(mListPreference.getEntries().length).isEqualTo(3);
@@ -316,7 +332,7 @@ public class DefaultSubscriptionControllerTest {
         assertThat(entries[1].toString()).isEqualTo("sub2");
         assertThat(entries[2].toString()).isEqualTo("sub3");
         assertThat(entries[3].toString()).isEqualTo(
-                mContext.getString(R.string.calls_and_sms_ask_every_time));
+                Utils.getResourceString(mContext, "calls_and_sms_ask_every_time"));
         assertThat(entryValues[0].toString()).isEqualTo("111");
         assertThat(entryValues[1].toString()).isEqualTo("222");
         assertThat(entryValues[2].toString()).isEqualTo("333");
@@ -332,8 +348,9 @@ public class DefaultSubscriptionControllerTest {
     }
 
     private class TestDefaultSubscriptionController extends DefaultSubscriptionController {
+        int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
-        public TestDefaultSubscriptionController(Context context, String preferenceKey) {
+        TestDefaultSubscriptionController(Context context, String preferenceKey) {
             super(context, preferenceKey);
         }
 
@@ -344,11 +361,12 @@ public class DefaultSubscriptionControllerTest {
 
         @Override
         protected int getDefaultSubscriptionId() {
-            return 0;
+            return mSubId;
         }
 
         @Override
         protected void setDefaultSubscription(int subscriptionId) {
+            mSubId = subscriptionId;
         }
     }
 }
