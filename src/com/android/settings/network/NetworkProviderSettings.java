@@ -60,14 +60,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
@@ -76,7 +74,6 @@ import com.android.settings.wifi.LinkablePreference;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiConnectListener;
 import com.android.settings.wifi.WifiDialog2;
-import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
@@ -188,8 +185,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
      */
     private boolean mIsRestricted;
 
-    private WifiEnabler mWifiEnabler;
-
     // Worker thread used for WifiPickerTracker work
     private HandlerThread mWorkerThread;
 
@@ -230,10 +225,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
                     .findViewById(R.id.progress_bar_animation);
             setProgressBarVisible(false);
-
-            ((SettingsActivity) activity).getSwitchBar().setSwitchBarText(
-                    R.string.wifi_settings_primary_switch_title,
-                    R.string.wifi_settings_primary_switch_title);
         }
     }
 
@@ -351,9 +342,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onDestroyView() {
-        if (mWifiEnabler != null) {
-            mWifiEnabler.teardownSwitchController();
-        }
         mWorkerThread.quit();
 
         super.onDestroyView();
@@ -362,8 +350,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onStart() {
         super.onStart();
-
-        mWifiEnabler = createWifiEnabler();
 
         if (mIsRestricted) {
             restrictUi();
@@ -375,15 +361,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             getEmptyTextView().setText(R.string.wifi_empty_list_user_restricted);
         }
         getPreferenceScreen().removeAll();
-    }
-
-    /**
-     * @return new WifiEnabler
-     */
-    private WifiEnabler createWifiEnabler() {
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        return new WifiEnabler(activity, new SwitchBarController(activity.getSwitchBar()),
-                mMetricsFeatureProvider);
     }
 
     @Override
@@ -399,19 +376,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             restrictUi();
         }
 
-        if (mWifiEnabler != null) {
-            mWifiEnabler.resume(activity);
-        }
-
         changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mWifiEnabler != null) {
-            mWifiEnabler.pause();
-        }
     }
 
     @Override

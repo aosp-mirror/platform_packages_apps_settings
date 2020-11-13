@@ -447,9 +447,9 @@ public class ZenModeBackend {
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 String contact = cursor.getString(0);
-                if (contact != null) {
-                    starredContacts.add(contact);
-                }
+                starredContacts.add(contact != null ? contact :
+                        mContext.getString(R.string.zen_mode_starred_contacts_empty_name));
+
             } while (cursor.moveToNext());
         }
         return starredContacts;
