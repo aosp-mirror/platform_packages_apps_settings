@@ -10472,6 +10472,9 @@
     <!-- Label for wifi data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="wifi_data_usage">Wi\u2011Fi data usage</string>
 
+    <!-- Label for non-carrier data usage in data usage screen [CHAR LIMIT=60] -->
+    <string name="non_carrier_data_usage">Non-carrier data usage</string>
+
     <!-- Label for ethernet data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="ethernet_data_usage">Ethernet data usage</string>
 
@@ -10519,6 +10522,9 @@
 
     <!-- A summary shown on data usage screens to indicate inaccuracy of data tracking [CHAR LIMIT=NONE] -->
     <string name="operator_warning">Carrier data accounting may differ from device accounting</string>
+
+    <!-- A summary shown on data usage screens to indicate data tracking excluded from carrier networks [CHAR LIMIT=NONE] -->
+    <string name="non_carrier_data_usage_warning">Excludes data that is used by carrier networks</string>
 
     <!-- Format string describing how much data has been used [CHAR LIMIT=20] -->
     <string name="data_used_template"><xliff:g name="amount" example="1 GB">%1$s</xliff:g> used</string>
@@ -11064,13 +11070,13 @@
     <string name="emergency_gesture_entrypoint_summary">Managed by <xliff:g id="app_name" example="Emergency Info">%1$s</xliff:g></string>
 
     <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="emergency_gesture_screen_summary">Start the emergency SOS actions by pressing the power button quickly 5 times.</string>
+    <string name="emergency_gesture_screen_summary">Start the actions below by pressing the power button quickly 5 times or more</string>
 
     <!-- Preference title to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
-    <string name="emergency_gesture_sound_setting_title">Warning sound</string>
+    <string name="emergency_gesture_sound_setting_title">Countdown alarm</string>
 
     <!-- Preference summary to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="emergency_gesture_sound_setting_summary">Alert before starting the actions</string>
+    <string name="emergency_gesture_sound_setting_summary">Play a loud sound before calling</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -12423,4 +12429,7 @@
     <string name="calls_preference_title">Calls</string>
     <!-- Provider Model: SMS preference title -->
     <string name="sms_preference_title">SMS</string>
+
+    <!-- Summary for preference when Bedtime mode is on [CHAR LIMIT=NONE] -->
+    <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>
 </resources>

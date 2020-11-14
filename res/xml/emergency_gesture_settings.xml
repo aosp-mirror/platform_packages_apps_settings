@@ -25,14 +25,11 @@
         app:animation="@raw/gesture_double_tap"
         app:preview="@drawable/gesture_double_tap"/>
 
-    <SwitchPreference
-        android:key="gesture_emergency_button"
-        android:title="@string/emergency_gesture_screen_title"
-        android:summary="@string/emergency_gesture_screen_summary"
-        android:icon="@drawable/ic_hand_gesture"
-        app:keywords="@string/keywords_gesture"
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="gesture_emergency_button_switch_bar"
+        android:layout="@layout/emergency_gesture_switch_bar"
         app:controller="com.android.settings.gestures.EmergencyGesturePreferenceController"
-        app:allowDividerAbove="true"/>
+        app:allowDividerBelow="true"/>
 
     <SwitchPreference
         android:key="emergency_gesture_sound"
