@@ -140,7 +140,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     private SubscriptionInfo mSubscriptionInfo;
     private TelephonyDisplayInfo mTelephonyDisplayInfo;
-    private ServiceState mServiceState;
+    private ServiceState mPreviousServiceState;
 
     private final int mSlotIndex;
     private TelephonyManager mTelephonyManager;
@@ -438,7 +438,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         final int state = Utils.getCombinedServiceState(serviceState);
         if (!Utils.isInService(serviceState)) {
             resetSignalStrength();
-        } else if (mServiceState != null && !Utils.isInService(mServiceState)) {
+        } else if (!Utils.isInService(mPreviousServiceState)) {
             // If ServiceState changed from out of service -> in service, update signal strength.
             updateSignalStrength(mTelephonyManager.getSignalStrength());
         }
@@ -771,7 +771,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 updateNetworkProvider();
                 updateServiceState(serviceState);
                 updateRoamingStatus(serviceState);
-                mServiceState = serviceState;
+                mPreviousServiceState = serviceState;
             }
 
             @Override

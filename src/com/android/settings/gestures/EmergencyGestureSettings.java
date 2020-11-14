@@ -51,8 +51,8 @@ public class EmergencyGestureSettings extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.emergency_gesture_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    final EmergencyGesturePreferenceController controller =
-                            new EmergencyGesturePreferenceController(context,
+                    final EmergencyGestureEntrypointPreferenceController controller =
+                            new EmergencyGestureEntrypointPreferenceController(context,
                                     "dummy_emergency_gesture_pref_key");
                     return !controller.isAvailable()
                             || controller.shouldSuppressFromSearch();

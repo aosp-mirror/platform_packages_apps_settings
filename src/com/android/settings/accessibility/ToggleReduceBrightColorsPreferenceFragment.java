@@ -91,8 +91,8 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         final List<String> lists = new ArrayList<>();
         lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_INTENSITY);
-        lists.add(KEY_PERSIST);
         lists.add(KEY_GENERAL_CATEGORY);
+        lists.add(KEY_PERSIST);
         lists.add(KEY_INTRODUCTION_CATEGORY);
         return lists;
     }

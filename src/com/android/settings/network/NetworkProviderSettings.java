@@ -131,7 +131,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
     private static final String PREF_KEY_STATUS_MESSAGE = "wifi_status_message";
     @VisibleForTesting
-    static final String PREF_KEY_DATA_USAGE = "wifi_data_usage";
+    static final String PREF_KEY_DATA_USAGE = "non_carrier_data_usage";
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
