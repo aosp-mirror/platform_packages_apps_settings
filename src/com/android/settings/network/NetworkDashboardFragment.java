@@ -104,7 +104,13 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final WifiPrimarySwitchPreferenceController wifiPreferenceController =
-                new WifiPrimarySwitchPreferenceController(context, metricsFeatureProvider);
+                isProviderModelEnabled(context)
+                        ? null
+                        : new WifiPrimarySwitchPreferenceController(
+                                context,
+                                metricsFeatureProvider);
+        final InternetPreferenceController internetPreferenceController =
+                isProviderModelEnabled(context) ? new InternetPreferenceController(context) : null;
 
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
@@ -113,7 +119,12 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
-            lifecycle.addObserver(wifiPreferenceController);
+            if (wifiPreferenceController != null) {
+                lifecycle.addObserver(wifiPreferenceController);
+            }
+            if (internetPreferenceController != null) {
+                lifecycle.addObserver(internetPreferenceController);
+            }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
@@ -125,7 +136,12 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
-        controllers.add(wifiPreferenceController);
+        if (wifiPreferenceController != null) {
+            controllers.add(wifiPreferenceController);
+        }
+        if (internetPreferenceController != null) {
+            controllers.add(internetPreferenceController);
+        }
         controllers.add(privateDnsPreferenceController);
         return controllers;
     }
