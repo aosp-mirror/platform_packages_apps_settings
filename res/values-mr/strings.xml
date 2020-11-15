@@ -3478,10 +3478,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"उपयुक्ततेनुसार सूचनांना आपोआप रँक करा"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"अडॅप्टिव्ह सूचना फीडबॅक"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"सूचनांमध्ये केलेल्‍या अ‍ॅडजस्टमेंट दाखवा आणि सिस्‍टममध्ये फीडबॅक देण्याचा पर्याय नमूद करा"</string>
-    <!-- no translation found for asst_importance_reset_title (6191265591976440115) -->
-    <skip />
-    <!-- no translation found for asst_importance_reset_summary (684794589254282667) -->
-    <skip />
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"सूचनेचे महत्त्व रीसेट करा"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"वापरकर्त्याने बदललेली महत्त्वपूर्ण सेटिंग्ज रीसेट करा आणि सूचना असिस्टंटला प्राधान्य देण्याची परवानगी द्या"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"सुचवलेली कृती आणि उत्तरे"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"सुचवलेली कृती आणि उत्तरे आपोआप दाखवा"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"अलीकडील आणि स्नूझ केलेल्या सूचना दाखवा"</string>
@@ -4850,58 +4848,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>शी कनेक्ट केले असल्यास उपलब्ध नाही"</string>
     <string name="see_more" msgid="7499355691042812723">"आणखी पाहा"</string>
     <string name="see_less" msgid="2642392725363552793">"कमी पहा"</string>
-    <!-- no translation found for sim_action_enable_sub_dialog_title (4003377033815971802) -->
-    <skip />
-    <!-- no translation found for sim_action_enable_sub_dialog_title_without_carrier_name (4842051610633654278) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_title (9180969453358718635) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_psim_dialog_title (5613177333235213024) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text (2091834911153293004) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (1396320209544698027) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_single_sim (6188750682431170845) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_confirm (1901181581944638961) -->
-    <skip />
-    <!-- no translation found for sim_action_enabling_sim_without_carrier_name (2706862823501979981) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (8341013572582875574) -->
-    <skip />
-    <!-- no translation found for sim_action_enable_sim_fail_title (1765646238941015899) -->
-    <skip />
-    <!-- no translation found for sim_action_enable_sim_fail_text (4781863235721417544) -->
-    <skip />
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> सुरू करायचे आहे का?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"सिम सुरू करायचे आहे का?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> वर स्विच करायचे आहे का?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"सिम कार्ड वापरण्यावर स्विच करायचे आहे का?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"एका वेळी एक सिम अ‍ॅक्टिव्ह असू शकते.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> वर स्विच केल्याने तुमची <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> सेवा रद्द होणार नाही."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"एका वेळी डाउनलोड केलेले फक्त एकच सिम अ‍ॅक्टिव्ह असू शकते.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> वर स्विच केल्याने तुमच्या <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> सेवा रद्द होणार नाहीत."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"एकावेळी एकच सिम अ‍ॅक्टिव्ह असू शकते.\n\nस्विच केल्याने तुमची <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> सेवा रद्द होणार नाही."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> वर स्विच करा"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"नेटवर्कशी कनेक्ट करत आहे…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> वर स्विच करत आहे"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"वाहक स्विच करू शकत नाही"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"एररमुळे वाहक स्विच करू शकत नाही."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> बंद करायचे आहे का?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"सिम बंद करायचे आहे का?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"सिम बंद करत आहे<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <!-- no translation found for privileged_action_disable_fail_title (6689494935697043555) -->
-    <skip />
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"वाहक बंद करू शकत नाही"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"काहीतरी गडबड झाली आणि तुमचा वाहक बंद करता आला नाही."</string>
-    <!-- no translation found for sim_action_enable_dsds_title (226508711751577169) -->
-    <skip />
-    <!-- no translation found for sim_action_enable_dsds_text (970986559326263949) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_title (7054617569121993825) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_text (8019300474703571013) -->
-    <skip />
-    <!-- no translation found for sim_action_continue (1688813133152389943) -->
-    <skip />
-    <!-- no translation found for sim_action_reboot (3508948833333441538) -->
-    <skip />
-    <!-- no translation found for sim_action_no_thanks (435717748384544195) -->
-    <skip />
-    <!-- no translation found for sim_switch_button (1405772571706095387) -->
-    <skip />
-    <!-- no translation found for dsds_activation_failure_title (4467364110584914794) -->
-    <skip />
-    <!-- no translation found for dsds_activation_failure_body_msg1 (6303921196869256391) -->
-    <skip />
-    <!-- no translation found for dsds_activation_failure_body_msg2 (73044349546544410) -->
-    <skip />
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"दोन सिम वापरायची आहेत का?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"या डिव्हाइसमध्ये एकाच वेळी दोन सिम अ‍ॅक्टिव्ह असू शकतात. एकावेळी एक सिम वापरणे सुरू ठेवण्यासाठी, \"नाही, नको\" वर टॅप करा."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"डिव्हाइस रीस्टार्ट करायचे आहे का?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"सुरुवात करण्यासाठी, तुमचे डिव्हाइस रीस्टार्ट करा. नंतर तुम्ही दुसरे सिम जोडू शकता."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"पुढे सुरू ठेवा"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"रीस्टार्ट करा"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"नाही, नको"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"स्विच करा"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"सिम ॲक्टिव्हेट करू शकत नाही"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"सिम काढा आणि ते पुन्हा घाला. समस्या कायम राहिल्यास, तुमचे डिव्हाइस रीस्टार्ट करा."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"सिम पुन्हा सुरू करून पाहा. समस्या सुरू राहिल्यास, तुमचे डिव्हाइस रीस्टार्ट करा."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"हे डाउनलोड केलेले सिम मिटवायचे?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"हे सिम मिटवल्याने या डिव्हाइसवरून <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> सेवा काढली जाते.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> ची सेवा रद्द केली जाणार नाही."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"मिटवा"</string>
@@ -5040,16 +5014,11 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लूटूथ सुरू होईल"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"सुरू करा"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"बंद करा"</string>
-    <!-- no translation found for provider_internet_settings (3831259474776313323) -->
-    <skip />
-    <!-- no translation found for provider_network_settings_title (2624756136016346774) -->
-    <skip />
-    <!-- no translation found for airplane_safe_networks (8689587134664565669) -->
-    <skip />
-    <!-- no translation found for airplane_safe_networks_summary (8352420324632195912) -->
-    <skip />
-    <!-- no translation found for keywords_airplane_safe_networks (5902708537892978245) -->
-    <skip />
+    <string name="provider_internet_settings" msgid="3831259474776313323">"इंटरनेट"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"सिम"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"विमानामध्ये वापरण्यासाठी सुरक्षित असलेले नेटवर्क"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"विमानामध्ये वापरण्यासाठी सुरक्षित असलेले नेटवर्क शोधा आणि कनेक्ट करा"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"विमान, विमान सुरक्षित"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"कॉल आणि एसएमएस"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"वाय-फाय कॉलिंग"</string>
     <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"वाय-फाय यांसारख्या वाहक नसलेल्या नेटवर्कवरून कॉल करा आणि घ्या"</string>
