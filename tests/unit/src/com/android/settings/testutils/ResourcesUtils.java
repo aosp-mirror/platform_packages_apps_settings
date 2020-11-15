@@ -17,12 +17,16 @@ package com.android.settings.testutils;
 
 import android.content.Context;
 
-public final class Utils {
-    public static int getResourceId(Context context, String type, String name) {
+public final class ResourcesUtils {
+    public static int getResourcesId(Context context, String type, String name) {
         return context.getResources().getIdentifier(name, type, context.getPackageName());
     }
 
-    public static String getResourceString(Context context, String name) {
-        return context.getResources().getString(getResourceId(context, "string", name));
+    public static String getResourcesString(Context context, String name) {
+        return context.getResources().getString(getResourcesId(context, "string", name));
+    }
+
+    public static String getResourcesString(Context context, String name, Object value) {
+        return context.getResources().getString(getResourcesId(context, "string", name), value);
     }
 }
