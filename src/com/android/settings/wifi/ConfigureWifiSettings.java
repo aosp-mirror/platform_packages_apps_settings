@@ -21,6 +21,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -43,6 +45,14 @@ public class ConfigureWifiSettings extends DashboardFragment {
     private UseOpenWifiPreferenceController mUseOpenWifiPreferenceController;
 
     @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
+            getActivity().setTitle(R.string.network_and_internet_preferences_title);
+        }
+    }
+
+    @Override
     public int getMetricsCategory() {
         return SettingsEnums.CONFIGURE_WIFI;
     }
@@ -54,7 +64,10 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     public int getInitialExpandedChildCount() {
-        int tileLimit = 2;
+        int tileLimit = 1;
+        if (mWifiWakeupPreferenceController.isAvailable()) {
+            tileLimit++;
+        }
         if (mUseOpenWifiPreferenceController.isAvailable()) {
             tileLimit++;
         }
