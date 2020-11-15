@@ -51,24 +51,24 @@ import org.robolectric.shadows.ShadowPackageManager;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
-public class TranscodeSkipAppsPreferenceControllerTest {
+public class TranscodeAppsPreferenceControllerTest {
 
     private static final int APPLICATION_UID = 1234;
-    private static final String SKIP_SELECTED_APPS_PROP_KEY =
-            "persist.sys.fuse.transcode_skip_uids";
+    private static final String TRANSCODE_SELECTED_APPS_PROP_KEY =
+            "persist.sys.fuse.transcode_uids";
 
     @Mock
     private PreferenceScreen mScreen;
     private Context mContext;
     private ShadowPackageManager mShadowPackageManager;
-    private TranscodeSkipAppsPreferenceController mController;
+    private TranscodeAppsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
         mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
-        mController = new TranscodeSkipAppsPreferenceController(mContext, "test_key");
+        mController = new TranscodeAppsPreferenceController(mContext, "test_key");
         Preference preference = new Preference(mContext);
 
         when(mScreen.getContext()).thenReturn(mContext);
@@ -99,28 +99,28 @@ public class TranscodeSkipAppsPreferenceControllerTest {
     }
 
     @Test
-    public void preferenceChecked_shouldSkipApp() {
-        // First ensure that the app is not in skip list.
-        SystemProperties.set(SKIP_SELECTED_APPS_PROP_KEY, String.valueOf(-1));
+    public void preferenceChecked_shouldSelectApp() {
+        // First ensure that the app is not selected.
+        SystemProperties.set(TRANSCODE_SELECTED_APPS_PROP_KEY, String.valueOf(-1));
         SwitchPreference switchPreference = createPreference(/* defaultCheckedState = */ false);
 
         switchPreference.performClick();
 
-        // Verify that the app is added to skip list.
-        assertThat(SystemProperties.get(SKIP_SELECTED_APPS_PROP_KEY)).contains(
+        // Verify that the app is selected.
+        assertThat(SystemProperties.get(TRANSCODE_SELECTED_APPS_PROP_KEY)).contains(
                 String.valueOf(APPLICATION_UID));
     }
 
     @Test
-    public void preferenceUnchecked_shouldNotSkipApp() {
-        // First ensure that the app is in skip list.
-        SystemProperties.set(SKIP_SELECTED_APPS_PROP_KEY, String.valueOf(APPLICATION_UID));
+    public void preferenceUnchecked_shouldUnSelectApp() {
+        // First ensure that the app is selected.
+        SystemProperties.set(TRANSCODE_SELECTED_APPS_PROP_KEY, String.valueOf(APPLICATION_UID));
         SwitchPreference switchPreference = createPreference(/* defaultCheckedState = */ true);
 
         switchPreference.performClick();
 
-        // Verify that the app is removed from skip list.
-        assertThat(SystemProperties.get(SKIP_SELECTED_APPS_PROP_KEY)).doesNotContain(
+        // Verify that the app is not selected.
+        assertThat(SystemProperties.get(TRANSCODE_SELECTED_APPS_PROP_KEY)).doesNotContain(
                 String.valueOf(APPLICATION_UID));
     }
 
