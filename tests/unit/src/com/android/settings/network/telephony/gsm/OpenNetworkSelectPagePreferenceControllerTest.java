@@ -34,6 +34,8 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.testutils.ResourcesUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,14 +120,7 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
     public void getSummary_notInService_returnDisconnect() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
 
-        assertThat(mController.getSummary()).isEqualTo(resourceString("network_disconnected"));
-    }
-
-    public int resourceId(String type, String name) {
-        return mContext.getResources().getIdentifier(name, type, mContext.getPackageName());
-    }
-
-    public String resourceString(String name) {
-        return mContext.getResources().getString(resourceId("string", name));
+        assertThat(mController.getSummary()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "network_disconnected"));
     }
 }

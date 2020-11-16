@@ -40,7 +40,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.testutils.Utils;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -137,7 +137,7 @@ public class DefaultSubscriptionControllerTest {
         assertThat(entries[0]).isEqualTo("sub1");
         assertThat(entries[1]).isEqualTo("sub2");
         assertThat(entries[2]).isEqualTo(
-                Utils.getResourceString(mContext, "calls_and_sms_ask_every_time"));
+                ResourcesUtils.getResourcesString(mContext, "calls_and_sms_ask_every_time"));
 
         final CharSequence[] entryValues = mListPreference.getEntryValues();
         assertThat(entryValues.length).isEqualTo(3);
@@ -166,7 +166,7 @@ public class DefaultSubscriptionControllerTest {
         assertThat(entries[0]).isEqualTo("sub1");
         assertThat(entries[1]).isEqualTo("sub2");
         assertThat(entries[2]).isEqualTo(
-                Utils.getResourceString(mContext, "calls_and_sms_ask_every_time"));
+                ResourcesUtils.getResourcesString(mContext, "calls_and_sms_ask_every_time"));
 
         final CharSequence[] entryValues = mListPreference.getEntryValues();
         assertThat(entryValues.length).isEqualTo(3);
@@ -195,7 +195,7 @@ public class DefaultSubscriptionControllerTest {
         assertThat(entries[0]).isEqualTo("sub1");
         assertThat(entries[1]).isEqualTo("sub3");
         assertThat(entries[2]).isEqualTo(
-                Utils.getResourceString(mContext, "calls_and_sms_ask_every_time"));
+                ResourcesUtils.getResourcesString(mContext, "calls_and_sms_ask_every_time"));
 
         final CharSequence[] entryValues = mListPreference.getEntryValues();
         assertThat(entryValues.length).isEqualTo(3);
@@ -332,7 +332,7 @@ public class DefaultSubscriptionControllerTest {
         assertThat(entries[1].toString()).isEqualTo("sub2");
         assertThat(entries[2].toString()).isEqualTo("sub3");
         assertThat(entries[3].toString()).isEqualTo(
-                Utils.getResourceString(mContext, "calls_and_sms_ask_every_time"));
+                ResourcesUtils.getResourcesString(mContext, "calls_and_sms_ask_every_time"));
         assertThat(entryValues[0].toString()).isEqualTo("111");
         assertThat(entryValues[1].toString()).isEqualTo("222");
         assertThat(entryValues[2].toString()).isEqualTo("333");
