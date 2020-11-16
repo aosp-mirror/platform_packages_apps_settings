@@ -78,7 +78,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     private static final String KEY_ENABLE_ETHERNET_TETHERING = "enable_ethernet_tethering";
     private static final String KEY_DATA_SAVER_FOOTER = "disabled_on_data_saver";
     @VisibleForTesting
-    static final String KEY_TETHER_PREFS_FOOTER = "tether_prefs_footer";
+    static final String KEY_TETHER_PREFS_TOP_INTRO = "tether_prefs_top_intro";
 
     private static final String TAG = "TetheringSettings";
 
@@ -155,7 +155,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
 
         setupTetherPreference();
-        setFooterPreferenceTitle();
+        setTopIntroPreferenceTitle();
 
         mDataSaverBackend.addListener(this);
 
@@ -231,14 +231,14 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     @VisibleForTesting
-    void setFooterPreferenceTitle() {
-        final Preference footerPreference = findPreference(KEY_TETHER_PREFS_FOOTER);
+    void setTopIntroPreferenceTitle() {
+        final Preference topIntroPreference = findPreference(KEY_TETHER_PREFS_TOP_INTRO);
         final WifiManager wifiManager =
                 (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         if (wifiManager.isStaApConcurrencySupported()) {
-            footerPreference.setTitle(R.string.tethering_footer_info_sta_ap_concurrency);
+            topIntroPreference.setTitle(R.string.tethering_footer_info_sta_ap_concurrency);
         } else {
-            footerPreference.setTitle(R.string.tethering_footer_info);
+            topIntroPreference.setTitle(R.string.tethering_footer_info);
         }
     }
 

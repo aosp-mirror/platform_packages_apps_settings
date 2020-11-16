@@ -158,13 +158,13 @@ public class TetherSettingsTest {
         final TetherSettings spyTetherSettings = spy(new TetherSettings());
         when(spyTetherSettings.getContext()).thenReturn(mContext);
         final Preference mockPreference = mock(Preference.class);
-        when(spyTetherSettings.findPreference(TetherSettings.KEY_TETHER_PREFS_FOOTER))
+        when(spyTetherSettings.findPreference(TetherSettings.KEY_TETHER_PREFS_TOP_INTRO))
             .thenReturn(mockPreference);
         final WifiManager mockWifiManager = mock(WifiManager.class);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mockWifiManager);
         when(mockWifiManager.isStaApConcurrencySupported()).thenReturn(true);
 
-        spyTetherSettings.setFooterPreferenceTitle();
+        spyTetherSettings.setTopIntroPreferenceTitle();
 
         verify(mockPreference, never()).setTitle(R.string.tethering_footer_info);
         verify(mockPreference).setTitle(R.string.tethering_footer_info_sta_ap_concurrency);
