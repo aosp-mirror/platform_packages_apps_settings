@@ -79,7 +79,8 @@ public class BatteryEntryTest {
     }
 
     private BatteryEntry createBatteryEntryForApp() {
-        return new BatteryEntry(mockContext, mockHandler, mockUserManager, createSipperForApp());
+        return new BatteryEntry(mockContext, mockHandler, mockUserManager, createSipperForApp(),
+                null);
     }
 
     private BatterySipper createSipperForApp() {
@@ -90,7 +91,8 @@ public class BatteryEntryTest {
     }
 
     private BatteryEntry createBatteryEntryForSystem() {
-        return new BatteryEntry(mockContext, mockHandler, mockUserManager, createSipperForSystem());
+        return new BatteryEntry(mockContext, mockHandler, mockUserManager, createSipperForSystem(),
+                null);
     }
 
     private BatterySipper createSipperForSystem() {
@@ -144,7 +146,7 @@ public class BatteryEntryTest {
         final BatterySipper batterySipper = mock(BatterySipper.class);
         batterySipper.drainType = DrainType.AMBIENT_DISPLAY;
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
-                mockUserManager, batterySipper);
+                mockUserManager, batterySipper, null);
 
         assertThat(entry.iconId).isEqualTo(R.drawable.ic_settings_aod);
         assertThat(entry.name).isEqualTo("Ambient display");
