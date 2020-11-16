@@ -38,8 +38,8 @@ import androidx.preference.ListPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.R;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -73,7 +73,8 @@ public class PreferredNetworkModePreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(mCarrierConfigManager);
+        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
+                mCarrierConfigManager);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
@@ -91,7 +92,7 @@ public class PreferredNetworkModePreferenceControllerTest {
     @After
     public void tearDown() {
         Settings.Global.putInt(
-            mContext.getContentResolver(), Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0);
+                mContext.getContentResolver(), Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0);
     }
 
     @Test
@@ -142,7 +143,8 @@ public class PreferredNetworkModePreferenceControllerTest {
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA));
         assertThat(mPreference.getSummary()).isEqualTo(
-                resourceString("preferred_network_mode_tdscdma_gsm_wcdma_summary"));
+                ResourcesUtils.getResourcesString(mContext,
+                        "preferred_network_mode_tdscdma_gsm_wcdma_summary"));
     }
 
     @Test
@@ -161,7 +163,7 @@ public class PreferredNetworkModePreferenceControllerTest {
     @Test
     public void onPreferenceChange_updateFail() {
         doReturn(false).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
-            getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
+                getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
 
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
@@ -169,13 +171,5 @@ public class PreferredNetworkModePreferenceControllerTest {
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isNotEqualTo(
                 TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
-    }
-
-    public int resourceId(String type, String name) {
-        return mContext.getResources().getIdentifier(name, type, mContext.getPackageName());
-    }
-
-    public String resourceString(String name) {
-        return mContext.getResources().getString(resourceId("string", name));
     }
 }

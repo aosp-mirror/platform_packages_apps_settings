@@ -36,6 +36,8 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.testutils.ResourcesUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -128,7 +130,7 @@ public class AutoSelectPreferenceControllerTest {
 
         assertThat(mSwitchPreference.isEnabled()).isFalse();
         assertThat(mSwitchPreference.getSummary()).isEqualTo(
-            resourceString("manual_mode_disallowed_summary",
+                ResourcesUtils.getResourcesString(mContext, "manual_mode_disallowed_summary",
                 mTelephonyManager.getSimOperatorName()));
     }
 
@@ -138,13 +140,5 @@ public class AutoSelectPreferenceControllerTest {
 
         // Should not crash
         mController.init(mLifecycle, SUB_ID);
-    }
-
-    public int resourceId(String type, String name) {
-        return mContext.getResources().getIdentifier(name, type, mContext.getPackageName());
-    }
-
-    public String resourceString(String name, Object value) {
-        return mContext.getResources().getString(resourceId("string", name), value);
     }
 }

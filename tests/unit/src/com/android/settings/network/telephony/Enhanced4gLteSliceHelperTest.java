@@ -32,7 +32,6 @@ import static org.mockito.Mockito.when;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ims.ProvisioningManager;
 
@@ -53,6 +52,7 @@ import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -203,7 +203,8 @@ public class Enhanced4gLteSliceHelperTest {
 
         // Check the title
         final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, resourceString("enhanced_4g_lte_mode_title"));
+        assertTitle(sliceItems,
+                ResourcesUtils.getResourcesString(mContext, "enhanced_4g_lte_mode_title"));
     }
 
     private void testEnhanced4gLteSettingsToggleSlice(Slice slice) {
@@ -228,7 +229,8 @@ public class Enhanced4gLteSliceHelperTest {
 
         // Check the title
         final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, resourceString("enhanced_4g_lte_mode_title"));
+        assertTitle(sliceItems,
+                ResourcesUtils.getResourcesString(mContext, "enhanced_4g_lte_mode_title"));
     }
 
     private PendingIntent getBroadcastIntent(String action) {
@@ -286,10 +288,5 @@ public class Enhanced4gLteSliceHelperTest {
         protected VolteQueryImsState queryImsState(int subId) {
             return mQueryImsState;
         }
-    }
-
-    public String resourceString(String name) {
-        final Resources res = mContext.getResources();
-        return res.getString(res.getIdentifier(name, "string", mContext.getPackageName()));
     }
 }

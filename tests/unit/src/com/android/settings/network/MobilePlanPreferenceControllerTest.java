@@ -19,10 +19,11 @@ package com.android.settings.network;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,12 +43,8 @@ public class MobilePlanPreferenceControllerTest {
     public void testNoProvisionStringFormattedCorrectly() {
         final String operator = "test_operator";
 
-        assertThat(resourceString("mobile_no_provisioning_url", operator))
+        assertThat(
+                ResourcesUtils.getResourcesString(mContext, "mobile_no_provisioning_url", operator))
                 .contains(operator);
-    }
-
-    public String resourceString(String name, Object value) {
-        final Resources res = mContext.getResources();
-        return res.getString(res.getIdentifier(name, "string", mContext.getPackageName()), value);
     }
 }
