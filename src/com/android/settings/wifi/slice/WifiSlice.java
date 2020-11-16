@@ -224,7 +224,7 @@ public class WifiSlice implements CustomSliceable {
     private SliceAction getActivityAction(int requestCode, Intent intent, IconCompat icon,
             CharSequence title) {
         final PendingIntent pi = PendingIntent.getActivity(mContext, requestCode, intent,
-                0 /* flags */);
+                PendingIntent.FLAG_IMMUTABLE /* flags */);
         return SliceAction.createDeeplink(pi, icon, ListBuilder.ICON_IMAGE, title);
     }
 
@@ -289,7 +289,7 @@ public class WifiSlice implements CustomSliceable {
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
         return PendingIntent.getActivity(mContext, 0 /* requestCode */,
-                intent, 0 /* flags */);
+                intent, PendingIntent.FLAG_IMMUTABLE /* flags */);
     }
 
     private Set<String> getKeywords() {
