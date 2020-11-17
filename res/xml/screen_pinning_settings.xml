@@ -19,14 +19,18 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/screen_pinning_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/app_pinning_intro"
+        settings:searchable="false"/>
+
     <SwitchPreference
         android:key="use_screen_lock"
-        android:title="@string/screen_pinning_unlock_none" />
+        android:title="@string/screen_pinning_unlock_none"
+        settings:allowDividerAbove="true"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="screen_pinning_settings_screen_footer"
         android:title="@string/screen_pinning_description"
-        android:selectable="false"
         settings:searchable="false" />
 
 </PreferenceScreen>
