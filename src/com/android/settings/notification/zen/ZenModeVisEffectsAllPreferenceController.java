@@ -24,12 +24,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class ZenModeVisEffectsAllPreferenceController
         extends AbstractZenModePreferenceController
-        implements ZenCustomRadioButtonPreference.OnRadioButtonClickListener {
+        implements RadioButtonPreference.OnClickListener {
 
-    private ZenCustomRadioButtonPreference mPreference;
+    private RadioButtonPreference mPreference;
 
     protected static final int EFFECTS = Policy.SUPPRESSED_EFFECT_SCREEN_OFF
             | Policy.SUPPRESSED_EFFECT_SCREEN_ON
@@ -50,7 +51,7 @@ public class ZenModeVisEffectsAllPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.setOnRadioButtonClickListener(this);
+        mPreference.setOnClickListener(this);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class ZenModeVisEffectsAllPreferenceController
     }
 
     @Override
-    public void onRadioButtonClick(ZenCustomRadioButtonPreference p) {
+    public void onRadioButtonClicked(RadioButtonPreference p) {
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_ZEN_SOUND_AND_VIS_EFFECTS, true);
         mBackend.saveVisualEffectsPolicy(EFFECTS, true);
