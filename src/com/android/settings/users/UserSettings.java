@@ -110,7 +110,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_GUEST = "guest_add";
     private static final String KEY_ADD_USER = "user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
-    private static final String KEY_MULTIUSER_FOOTER = "multiuser_footer";
+    private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -169,7 +169,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
-    private MultiUserFooterPreferenceController mMultiUserFooterPreferenceController;
+    private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
     private UserCreatingDialog mUserCreatingDialog;
 
     private CharSequence mPendingUserName;
@@ -240,12 +240,12 @@ public class UserSettings extends SettingsPreferenceFragment
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 activity, KEY_ADD_USER_WHEN_LOCKED);
 
-        mMultiUserFooterPreferenceController = new MultiUserFooterPreferenceController(activity,
-                KEY_MULTIUSER_FOOTER);
+        mMultiUserTopIntroPreferenceController = new MultiUserTopIntroPreferenceController(activity,
+                KEY_MULTIUSER_TOP_INTRO);
 
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
-        mMultiUserFooterPreferenceController.displayPreference(screen);
+        mMultiUserTopIntroPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
@@ -936,14 +936,14 @@ public class UserSettings extends SettingsPreferenceFragment
         // Remove everything from mUserListCategory and add new users.
         mUserListCategory.removeAll();
 
-        // If multi-user is disabled, just show footer and return.
+        // If multi-user is disabled, just show top info and return.
         final Preference addUserOnLockScreen = getPreferenceScreen().findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
 
-        final Preference multiUserFooterPrefence = getPreferenceScreen().findPreference(
-                mMultiUserFooterPreferenceController.getPreferenceKey());
-        mMultiUserFooterPreferenceController.updateState(multiUserFooterPrefence);
+        final Preference multiUserTopIntroPrefence = getPreferenceScreen().findPreference(
+                mMultiUserTopIntroPreferenceController.getPreferenceKey());
+        mMultiUserTopIntroPreferenceController.updateState(multiUserTopIntroPrefence);
         mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
 
         updateAddGuest(context, users.stream().anyMatch(UserInfo::isGuest));

@@ -33,12 +33,12 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.TopIntroPreference;
 
 /**
- * Controller of footer preference for Graphics Driver Preferences dashboard.
+ * Controller of top info preference for Graphics Driver Preferences dashboard.
  */
-public class GraphicsDriverFooterPreferenceController extends BasePreferenceController
+public class GraphicsDriverTopIntroPreferenceController extends BasePreferenceController
         implements GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener,
         LifecycleObserver, OnStart, OnStop {
 
@@ -46,9 +46,9 @@ public class GraphicsDriverFooterPreferenceController extends BasePreferenceCont
     @VisibleForTesting
     GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
-    private FooterPreference mPreference;
+    private TopIntroPreference mPreference;
 
-    public GraphicsDriverFooterPreferenceController(Context context, String key) {
+    public GraphicsDriverTopIntroPreferenceController(Context context, String key) {
         super(context, key);
         mContentResolver = context.getContentResolver();
         mGraphicsDriverContentObserver =
@@ -83,8 +83,8 @@ public class GraphicsDriverFooterPreferenceController extends BasePreferenceCont
 
     @Override
     public void updateState(Preference preference) {
-        final FooterPreference footerPref = (FooterPreference) preference;
-        footerPref.setVisible(isAvailable());
+        final TopIntroPreference topIntroPref = (TopIntroPreference) preference;
+        topIntroPref.setVisible(isAvailable());
     }
 
     @Override

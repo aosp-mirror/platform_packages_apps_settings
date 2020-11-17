@@ -34,7 +34,7 @@ import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.TopIntroPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,25 +45,25 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GraphicsDriverFooterPreferenceControllerTest {
+public class GraphicsDriverTopIntroPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private FooterPreference mPreference;
+    private TopIntroPreference mPreference;
     @Mock
     private GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     private Context mContext;
     private ContentResolver mResolver;
-    private GraphicsDriverFooterPreferenceController mController;
+    private GraphicsDriverTopIntroPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mResolver = mContext.getContentResolver();
-        mController = spy(new GraphicsDriverFooterPreferenceController(mContext, "key"));
+        mController = spy(new GraphicsDriverTopIntroPreferenceController(mContext, "key"));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
