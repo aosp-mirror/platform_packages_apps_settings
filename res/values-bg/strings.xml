@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Входящите обаждания за „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“ са блокирани. Можете да коригирате настройките, за да разрешите на близки, приятели и други контакти да се свързват с вас."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Контакти със звезда"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Нито един}=1{{contact_1}}=2{{contact_1} и {contact_2}}=3{{contact_1}, {contact_2} и {contact_3}}other{{contact_1}, {contact_2} и още #}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Няма име)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Съобщения"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"съобщения"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Съобщения"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Пренос на мобилни данни"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Пренос на данни от приложенията"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Пренос на данни през Wi-Fi"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Пренос на данни, които не са на мобилни оператори"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Пренос на данни през Ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">1 ограничение</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Отчетените от оператора данни може да се различават от показаните на устройството"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Изключва данните, които се използват от мрежите на операторите"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Използвали сте <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Задаване на предупр. за данните"</string>
     <string name="data_warning" msgid="2925054658166062884">"Предупреждение за данните"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"За да проверите часа, известията и друга информация, докоснете екрана."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Спешен случай (SOS)"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Управлява се от <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Стартирайте действията при спешни случаи (SOS) с бързо петкратно натискане на бутона за включване/изключване."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Предупредителен звук"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Сигнал преди стартиране на действията"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Стартирайте действията по-долу с бързо петкратно натискане на бутона за включване/изключване"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Аларма с обратен брояч"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Възпроизвеждане на висок звук преди обаждането"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Преглед на известията с плъзване през сензора за отпечатъци"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Плъзване през сензора за отпечат."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"За да проверите известията си, плъзнете пръст надолу през сензора за отпечатъци на гърба на телефона си."</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Функцията за обаждания през Wi-Fi ви дава възможност да извършвате и получавате обаждания през мрежи, които не са на мобилни оператори, като например някои Wi-Fi мрежи.\n\nФункцията за обаждания през друга SIM карта ви дава възможност да използвате мобилните данни на дадена SIM карта, за да извършвате и получавате обаждания от друга."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Обаждания"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Не е налице, тъй като режимът „Време за сън“ е включен"</string>
 </resources>

@@ -2623,7 +2623,7 @@
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"\"Kursyesi i baterisë\" aktivizohet nëse bateria mund të mbarojë përpara karikimit të zakonshëm të radhës"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Do të aktivizohet në <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Cakto një orar"</string>
-    <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Zgjat kohëzgjatjen e baterisë"</string>
+    <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Rrit kohëzgjatjen e baterisë"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Çaktivizo kur të karikohet"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"\"Kursyesi i baterisë\" çaktivizohet kur telefoni yt karikohet mbi <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"\"Kursyesi i baterisë\" çaktivizohet kur tableti yt karikohet mbi <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Për \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" telefonatat hyrëse janë të bllokuara. Mund t\'i rregullosh cilësimet për të lejuar shokët, familjen ose kontakte të tjera të lidhen me ty."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontaktet me yll"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Asnjë}=1{{contact_1}}=2{{contact_1} dhe {contact_2}}=3{{contact_1}, {contact_2} dhe {contact_3}}other{{contact_1}, {contact_2} dhe # kontakte të tjera}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Pa emër)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mesazhet"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mesazhet"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mesazhet"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Përdorimi i të dhënave celulare"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Përdorimi i të dhënave të aplikacionit"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Përdorimi i të dhënave me Wi-Fi"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Përdorimi i të dhënave jo të operatorit celular"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Përdorimi i të dhënave me eternet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Eterneti"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">1 kufizim</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Llogaritja e të dhënave nga operatori mund të ndryshojë nga llogaritja e pajisjes"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Përjashton të dhënat që përdoren nga rrjetet e operatorit celular"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> të përdorura"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Cakto paralajm. për të dhënat"</string>
     <string name="data_warning" msgid="2925054658166062884">"Paralajmërimi i të dhënave"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Për të kontrolluar orën, njoftimet dhe informacione të tjera, trokit tek ekrani."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS i urgjencës"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Menaxhohet nga <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Nis veprimet SOS të urgjencës duke shtypur butonin e energjisë me shpejtësi 5 herë."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Tingull paralajmërues"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Sinjalizim përpara nisjes së veprimeve"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Nis veprimet më poshtë duke shtypur 5 herë me shpejtësi butonin e energjisë"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Alarmi i numërimit mbrapsht"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Luaj një tingull të lartë përpara se të telefonosh"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Rrëshqit gjurmën e gishtit për njoftimet"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Rrëshqit gjurmën e gishtit"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të telefonit."</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Telefonata me Wi-Fi të mundëson dërgimin dhe marrjen e telefonatave përmes rrjeteve jo nga operatorë telefonie, si p.sh. disa rrjete Wi‑Fi.\n\nTelefonata përmes SIM të ndryshme të mundëson shfrytëzimin e të dhënave celular të një SIM për të dërguar e marrë telefonata nga një SIM tjetër."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Telefonatat"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nuk ofrohet sepse modaliteti i orarit të gjumit është aktiv"</string>
 </resources>

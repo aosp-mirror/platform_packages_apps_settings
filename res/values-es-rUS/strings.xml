@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Se bloquearán las llamadas entrantes durante \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Puedes ajustar la configuración para permitir que tus amigos, familia y otros contactos se comuniquen contigo."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Contactos destacados"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Ninguno}=1{{contact_1}}=2{{contact_1} y {contact_2}}=3{{contact_1}, {contact_2} y {contact_3}}other{{contact_1}, {contact_2} y # más}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Sin nombre)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mensajes"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mensajes"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mensajes"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Uso de datos móviles"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Uso de datos de la app"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Uso de datos Wi‑Fi"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Uso de datos que no corresponde al proveedor"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Uso de datos de Ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">1 restricción</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"El cálculo de datos del proveedor puede diferir del que hace el dispositivo."</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Excluye los datos que usan las redes del proveedor"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Datos usados: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Configurar advertencia"</string>
     <string name="data_warning" msgid="2925054658166062884">"Advertencia de datos"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para consultar la hora, las notificaciones y otra información, presiona la pantalla."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Ayuda en emergencias"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Administrador: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Para iniciar las acciones de ayuda en emergencias, presiona rápido el botón de encendido 5 veces."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Sonido de advertencia"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Alerta previa al inicio de las acciones"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Inicia las acciones que se indican más abajo presionando rápidamente el botón de encendido 5 veces o más."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Alarma de cuenta regresiva"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Reproducir un sonido fuerte antes de llamar"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Deslizar tu huella para ver notificaciones"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Deslizar huella digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Para ver las notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales ubicado en la parte posterior del teléfono."</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"La función Llamada por Wi-Fi te permite hacer y recibir llamadas mediante redes que no pertenecen a ningún proveedor, como algunas redes Wi-Fi.\n\nLas llamadas entre tarjetas SIM te permiten aprovechar los datos móviles de una SIM para hacer y recibir llamadas de otra SIM."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Llamadas"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"No disponible cuando el modo hora de dormir está activado"</string>
 </resources>

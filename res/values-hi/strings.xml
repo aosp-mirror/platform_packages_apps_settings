@@ -698,7 +698,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"ब्लूटूथ"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"ब्लूटूथ"</string>
     <string name="bluetooth_settings_summary" msgid="6805458703566046784">"कनेक्‍शन प्रबंधित करें, डिवाइस का नाम सेट करें और उसे खोजने लायक बनाएं"</string>
-    <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> से जोड़ें?"</string>
+    <string name="bluetooth_pairing_request" msgid="7762990650683525640">"क्या आप <xliff:g id="DEVICE_NAME">%1$s</xliff:g> से जोड़ना चाहते हैं?"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"ब्‍लूटूथ से जोड़ने वाला कोड"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"दूसरे डिवाइस से जोड़ना वाला कोड लिखें और फिर Return या Enter दबाएं"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"पिन में अक्षर या प्रतीक शामिल होते हैं"</string>
@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए आने वाले कॉल ब्लॉक कर दिए गए हैं. आप सेटिंग में बदलाव करके दोस्तों, परिवार के लोगों, या दूसरे संपर्कों को आप तक पहुंचने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"तारे के निशान वाले संपर्क"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{स्टार के निशान वाला कोई संपर्क नहीं}=1{{contact_1}}=2{{contact_1} और {contact_2}}=3{{contact_1}, {contact_2}, और {contact_3}}one{{contact_1}, {contact_2}, और # अन्य संपर्क}other{{contact_1}, {contact_2}, और # अन्य संपर्क}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(कोई नाम नहीं)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"मैसेज"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"मैसेज"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"मैसेज"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"मोबाइल डेटा खर्च"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"ऐप का डेटा खर्च"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"वाई-फ़ाई डेटा खर्च"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी का डेटा खर्च छोड़कर"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"ईथरनेट डेटा खर्च"</string>
     <string name="wifi" msgid="2932584495223243842">"वाई-फ़ाई"</string>
     <string name="ethernet" msgid="4665162609974492983">"ईथरनेट"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> प्रतिबंध</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"डेटा खर्च को लेकर मोबाइल और इंटरनेट सेवा देने वाली कंपनी का हिसाब आपके डिवाइस के हिसाब से अलग हो सकता है."</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी के बजाय किसी दूसरी कंपनी का इस्तेमाल किया गया डेटा"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> का उपयोग किया गया"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"डेटा चेतावनी सेट करें"</string>
     <string name="data_warning" msgid="2925054658166062884">"डेटा चेतावनी"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"समय, सूचनाएं, और दूसरी जानकारी देखने के लिए फ़ोन की स्क्रीन पर टैप करें."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"आपातकालीन एसओएस चेतावनी"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> प्रबंधित करता है"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"आपातकालीन सेवाओं को कॉल करने के लिए, पावर बटन को पांच बार तेज़ी से दबाएं."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"चेतावनी की आवाज़"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"आपातकालीन सेवाओं को कॉल करने से पहले आवाज़ वाली चेतावनी जारी करें"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"आपातकालीन स्थिति में यहां बताई गई कार्रवाइयां करने के लिए, पावर बटन को पांच या इससे ज़्यादा बार तेज़ी से दबाएं"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"काउंटडाउन अलार्म"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"कॉल करने से पहले, तेज़ आवाज़ चलाएं"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"सूचनाओं के लिए फ़िंगरप्रिंट स्वाइप करें"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"फ़िंगरप्रिंट स्वाइप करें"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"अपनी सूचनाएं देखने के लिए, अपने फ़ोन के पीछे फ़िंगरप्रिंट सेंसर पर नीचे की तरफ़ स्वाइप करें."</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"वाई-फ़ाई कॉलिंग आपको ऐसे नेटवर्क से कॉल करने और उन पर कॉल पाने की सुविधा देती है जो सिम का इस्तेमाल नहीं करते, जैसे कुछ वाई-फ़ाई नेटवर्क.\n\nक्रॉस-सिम कॉलिंग की मदद से, आप एक सिम के मोबाइल डेटा का इस्तेमाल करके, दूसरे सिम वाले नंबर से कॉल कर सकते हैं और उस पर कॉल पा सकते हैं."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"कॉल"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"मैसेज (एसएमएस)"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"बेडटाइम मोड चालू होने पर यह सुविधा काम नहीं करती है"</string>
 </resources>
