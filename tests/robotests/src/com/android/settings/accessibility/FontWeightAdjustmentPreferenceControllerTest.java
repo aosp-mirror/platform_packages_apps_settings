@@ -32,20 +32,20 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class ForceBoldTextPreferenceControllerTest {
-    private static final int ON = 2;
-    private static final int OFF = 1;
-    private static final int UNKNOWN = 0;
+public class FontWeightAdjustmentPreferenceControllerTest {
+    private static final int ON = FontWeightAdjustmentPreferenceController.BOLD_TEXT_ADJUSTMENT;
+    private static final int OFF = 0;
 
     private Context mContext;
     private SwitchPreference mPreference;
-    private ForceBoldTextPreferenceController mController;
+    private FontWeightAdjustmentPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
-        mController = new ForceBoldTextPreferenceController(mContext, "force_bold_text");
+        mController = new FontWeightAdjustmentPreferenceController(
+                mContext, "font_weight_adjustment");
     }
 
     @Test
@@ -55,9 +55,9 @@ public class ForceBoldTextPreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_enabledTextContrast_shouldReturnTrue() {
+    public void isChecked_enabledBoldText_shouldReturnTrue() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.FORCE_BOLD_TEXT, ON);
+                Settings.Secure.FONT_WEIGHT_ADJUSTMENT, ON);
 
         mController.updateState(mPreference);
 
@@ -66,9 +66,9 @@ public class ForceBoldTextPreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_disabledTextContrast_shouldReturnFalse() {
+    public void isChecked_disabledBoldText_shouldReturnFalse() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.FORCE_BOLD_TEXT, OFF);
+                Settings.Secure.FONT_WEIGHT_ADJUSTMENT, OFF);
 
         mController.updateState(mPreference);
 
@@ -77,19 +77,18 @@ public class ForceBoldTextPreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_setTrue_shouldEnableTextContrast() {
+    public void setChecked_setTrue_shouldEnableBoldText() {
         mController.setChecked(true);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.FORCE_BOLD_TEXT, UNKNOWN)).isEqualTo(ON);
-
+                Settings.Secure.FONT_WEIGHT_ADJUSTMENT, OFF)).isEqualTo(ON);
     }
 
     @Test
-    public void setChecked_setFalse_shouldDisableTextContrast() {
+    public void setChecked_setFalse_shouldDisableBoldText() {
         mController.setChecked(false);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.FORCE_BOLD_TEXT, UNKNOWN)).isEqualTo(OFF);
+                Settings.Secure.FONT_WEIGHT_ADJUSTMENT, OFF)).isEqualTo(OFF);
     }
 }

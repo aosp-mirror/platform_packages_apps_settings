@@ -747,8 +747,9 @@ public class UserSettings extends SettingsPreferenceFragment
             return;
         }
         try {
+            getContext().getSystemService(UserManager.class)
+                    .removeUserOrSetEphemeral(UserHandle.myUserId());
             ActivityManager.getService().switchUser(UserHandle.USER_SYSTEM);
-            getContext().getSystemService(UserManager.class).removeUser(UserHandle.myUserId());
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
         }

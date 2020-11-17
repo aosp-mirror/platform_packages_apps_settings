@@ -17,15 +17,17 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.content.res.Configuration;
+import android.graphics.fonts.FontStyle;
 import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 
 /** PreferenceController for displaying all text in bold. */
-public class ForceBoldTextPreferenceController extends TogglePreferenceController {
+public class FontWeightAdjustmentPreferenceController extends TogglePreferenceController {
+    static final int BOLD_TEXT_ADJUSTMENT =
+            FontStyle.FONT_WEIGHT_BOLD - FontStyle.FONT_WEIGHT_NORMAL;
 
-    public ForceBoldTextPreferenceController(Context context, String preferenceKey) {
+    public FontWeightAdjustmentPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -37,14 +39,12 @@ public class ForceBoldTextPreferenceController extends TogglePreferenceControlle
     @Override
     public boolean isChecked() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.FORCE_BOLD_TEXT, Configuration.FORCE_BOLD_TEXT_NO)
-                == Configuration.FORCE_BOLD_TEXT_YES;
+                Settings.Secure.FONT_WEIGHT_ADJUSTMENT, 0) == BOLD_TEXT_ADJUSTMENT;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.FORCE_BOLD_TEXT,
-                (isChecked ? Configuration.FORCE_BOLD_TEXT_YES : Configuration.FORCE_BOLD_TEXT_NO));
+                Settings.Secure.FONT_WEIGHT_ADJUSTMENT, (isChecked ? BOLD_TEXT_ADJUSTMENT : 0));
     }
 }
