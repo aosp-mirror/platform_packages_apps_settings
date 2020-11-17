@@ -33,19 +33,19 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * The controller for the "Skip transcoding for apps" section on the transcode settings
+ * The controller for the "Enable transcoding for apps" section on the transcode settings
  * screen.
  */
-public class TranscodeSkipAppsPreferenceController extends BasePreferenceController implements
+public class TranscodeAppsPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String SKIP_SELECTED_APPS_PROP_KEY =
-            "persist.sys.fuse.transcode_skip_uids";
+    private static final String TRANSCODE_SELECTED_APPS_PROP_KEY =
+            "persist.sys.fuse.transcode_uids";
 
     private final PackageManager mPackageManager;
-    private final List<String> mUidsToSkip = new ArrayList<>();
+    private final List<String> mUids = new ArrayList<>();
 
-    public TranscodeSkipAppsPreferenceController(Context context,
+    public TranscodeAppsPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
         mPackageManager = context.getPackageManager();
@@ -60,8 +60,8 @@ public class TranscodeSkipAppsPreferenceController extends BasePreferenceControl
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Context context = screen.getContext();
-        mUidsToSkip.addAll(Arrays.asList(
-                SystemProperties.get(SKIP_SELECTED_APPS_PROP_KEY).split(",")));
+        mUids.addAll(Arrays.asList(
+                SystemProperties.get(TRANSCODE_SELECTED_APPS_PROP_KEY).split(",")));
         Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
         launcherIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> apps = mPackageManager.queryIntentActivities(launcherIntent, 0);
@@ -71,7 +71,7 @@ public class TranscodeSkipAppsPreferenceController extends BasePreferenceControl
             preference.setTitle(app.loadLabel(mPackageManager));
             preference.setIcon(app.loadIcon(mPackageManager));
             preference.setKey(uid);
-            preference.setChecked(isSkippedForTranscoding(uid));
+            preference.setChecked(isSelectedForTranscoding(uid));
             preference.setOnPreferenceChangeListener(this);
 
             screen.addPreference(preference);
@@ -83,15 +83,15 @@ public class TranscodeSkipAppsPreferenceController extends BasePreferenceControl
         boolean value = (Boolean) o;
         String uidStr = preference.getKey();
         if (value) {
-            mUidsToSkip.add(uidStr);
+            mUids.add(uidStr);
         } else {
-            mUidsToSkip.remove(uidStr);
+            mUids.remove(uidStr);
         }
-        SystemProperties.set(SKIP_SELECTED_APPS_PROP_KEY, String.join(",", mUidsToSkip));
+        SystemProperties.set(TRANSCODE_SELECTED_APPS_PROP_KEY, String.join(",", mUids));
         return true;
     }
 
-    private boolean isSkippedForTranscoding(String uid) {
-        return mUidsToSkip.contains(uid);
+    private boolean isSelectedForTranscoding(String uid) {
+        return mUids.contains(uid);
     }
 }

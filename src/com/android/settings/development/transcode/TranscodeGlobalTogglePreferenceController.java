@@ -22,7 +22,7 @@ import android.os.SystemProperties;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * The controller for the "Enable transcode for all apps" switch on the transcode settings
+ * The controller for the "Disable transcoding for all apps" switch on the transcode settings
  * screen.
  */
 public class TranscodeGlobalTogglePreferenceController extends TogglePreferenceController {
@@ -41,12 +41,12 @@ public class TranscodeGlobalTogglePreferenceController extends TogglePreferenceC
 
     @Override
     public boolean isChecked() {
-        return SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, false);
+        return !SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, false);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, String.valueOf(isChecked));
+        SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, String.valueOf(!isChecked));
         return true;
     }
 }

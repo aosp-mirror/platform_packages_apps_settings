@@ -47,14 +47,14 @@ public class TranscodeGlobalTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_whenEnabled_shouldReturnTrue() {
-        SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, "true");
+    public void isChecked_whenDisabled_shouldReturnTrue() {
+        SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, "false");
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void isChecked_whenDisabled_shouldReturnTrue() {
-        SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, "false");
+    public void isChecked_whenEnabled_shouldReturnFalse() {
+        SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, "true");
         assertThat(mController.isChecked()).isFalse();
     }
 
@@ -63,8 +63,8 @@ public class TranscodeGlobalTogglePreferenceControllerTest {
         // Simulate the UI being clicked.
         mController.setChecked(true);
 
-        // Verify the system property was updated with the UI value.
-        assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, false)).isTrue();
+        // Verify the system property was updated.
+        assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, true)).isFalse();
     }
 
     @Test
@@ -72,7 +72,7 @@ public class TranscodeGlobalTogglePreferenceControllerTest {
         // Simulate the UI being clicked.
         mController.setChecked(false);
 
-        // Verify the system property was updated with the UI value.
-        assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, true)).isFalse();
+        // Verify the system property was updated.
+        assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, false)).isTrue();
     }
 }
