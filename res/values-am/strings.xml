@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"ለ ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ ገቢ ጥሪዎች ታግደዋል። የእርስዎ ጓደኛዎች፣ ቤተሰብ ወይም ሌሎች እውቂያዎች እርስዎን ማግኘት እንዲችሉ ቅንብሮችን ማስተካከል ይችላሉ።"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"ባለኮከብ ዕውቂያዎች"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{ምንም}=1{{contact_1}}=2{{contact_1} እና {contact_2}}=3{{contact_1}፣ {contact_2} እና {contact_3}}one{{contact_1}፣ {contact_2} እና # ሌሎች}other{{contact_1}፣ {contact_2} እና # ሌሎች}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(ስም የለም)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"መልዕክቶች"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"መልዕክቶች"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"መልዕክቶች"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"የተንቀሳቃሽ ውሂብ አጠቃቀም"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"የመተግበሪያ ውሂብ አጠቃቀም"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wi-Fi ውሂብ አጠቃቀም"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"አገልግሎት አቅራቢ ያልሆነ የውሂብ አጠቃቀም"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"የኤተርኔት ውሂብ አጠቃቀም"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"ኤተርኔት"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ገደቦች</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"የአገልግሎት አቅራቢ ውሂብ የሂሳብ አከፋፈል ከመሳሪያ የሂሳብ አከፋፈል የተለየ ሊሆን ይችላል"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"የአገልግሎት አቅራቢ አውታረ መረቦች የሚጠቀሙበትን ውሂብ አያካትትም"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> ጥቅም ላይ ውሏል"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"የውሂብ ማስጠንቀቂያ አዘጋጅ"</string>
     <string name="data_warning" msgid="2925054658166062884">"የውሂብ ማስጠንቀቂያ"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"ጊዜን፣ ማሳወቂያዎችን እና ሌላ መረጃን ለማረጋገጥ የእርስዎን ማያ ገጽ መታ ያድርጉት።"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"የድንገተኛ አደጋ ኤስኦኤስ"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"የሚቀናበረው በ<xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"የኃይል አዝራሩን 5 ጊዜ በፍጥነት በመጫን የድንገተኛ አደጋ ኤስኦኤስ እርምጃዎችን ያስጀምሩ።"</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"የማስጠንቀቂያ ድምጽ"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"እርምጃዎቹን ከመጀመር በፊት ማንቂያ"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"የኃይል ቁልፉን በፍጥነት 5 ጊዜ ወይም ከዚያ በላይ በመጫን ከታች ያሉትን እርምጃዎች ይጀምሩ"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"ወደኋላ ቆጠራ ማንቂያ"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"ከመደወልዎ በፊት ጮክ ያለ ድምጽ ያጫውቱ"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"ማሳወቂያዎችን ለማግኘት የጣት አሻራን ያንሸራትቱ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"የጣት አሻራን ያንሸራቱ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"የእርስዎን ማሳወቂያዎች ለመመልከት በስልክዎ ጀርባ ላይ ባለው የጣት አሻራ ዳሳሽ ላይ ወደ ታች ጠረግ ያድርጉት"</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"የWi-Fi ጥሪ ማድረጊያ እንደ አንዳንድ የWi‑Fi አውታረ መረቦች ባሉ አገልግሎት አቅራቢ ባልሆኑ አውታረመረቦች ላይ ጥሪዎችን እንዲያደርጉ እና እንዲቀበሉ ያስችልዎታል፡፡\n\nከሌላ ሲም ጥሪዎችን ለማድረግ እና ለመቀበል መስቀለኛ-ሲም ጥሪ አንድ ሲም የሞባይል መረጃን እንዲጠቀሙ ያስችልዎታል።"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"ጥሪዎች"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"ኤስኤምኤስ"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"የመኝታ ሰዓት ሁነታ ስለበራ የማይገኝ"</string>
 </resources>

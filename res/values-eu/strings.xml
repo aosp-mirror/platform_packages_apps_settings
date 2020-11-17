@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"“<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>” arauan, blokeatuta dago deiak jasotzeko aukera. Lagunak, familia eta beste kontaktu batzuk zurekin harremanetan jartzeko aukera izan dezaten, aldatu ezarpenak."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontaktu izardunak"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Bat ere ez}=1{{contact_1}}=2{{contact_1} eta {contact_2}}=3{{contact_1}, {contact_2} eta {contact_3}}other{{contact_1}, {contact_2} eta beste #}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Izengabea)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mezuak"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"Mezu"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mezuak"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Datu-konexioaren erabilera"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Aplikazioak erabilitako datuak"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wifi-datuen erabilera"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Operadorearenak ez diren datuen erabilera"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet datuen erabilera"</string>
     <string name="wifi" msgid="2932584495223243842">"Wifia"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">1 murriztapen</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Agian ez dira bat etorriko gailuak eta operadoreak egindako datu-kontsumoen neurketak"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Ez dira hartzen kontuan operadorearen sareek erabilitako datuak"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> erabilita"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Ezarri datuen erabileraren abisua"</string>
     <string name="data_warning" msgid="2925054658166062884">"Datuen erabileraren abisua"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Ordua, jakinarazpenak eta bestelako informazioa ikusteko, sakatu pantaila."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Larrialdia"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Kudeatzailea: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Larrialdi-ekintzak abiarazteko, sakatu etengailua azkar bost aldiz."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Abisu-soinua"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Jo alerta bat ekintzak abiarazi aurretik"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Abiarazi ekintza hauek etengailua bost aldiz edo gehiagoz bizkor sakatuta"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Atzera-kontaketa duen alarma"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Deitu aurretik, erreproduzitu soinu ozen bat"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Pasatu hatza sentsoretik jakinarazpenak ikusteko"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Pasatu hatza sentsoretik"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Jakinarazpenei begiratu bat emateko, pasatu hatza behera telefonoaren atzealdeko hatz-marken sentsorean."</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Wifi bidezko deiekin, deiak egin eta jaso ahalko dituzu operadore batenak ez diren sareen bitartez (adibidez, zenbait wifi-sare).\n\nDatu-konexioa partekatzeko aukerari esker, SIM txartel batetik bestera bidal ditzakezu datuak, datuak jasotzen dituen SIM txartelean deiak egin eta jasotzeko."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Deiak"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMSa"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ez dago erabilgarri, lo egiteko garaiaren modua aktibatuta dagoelako"</string>
 </resources>
