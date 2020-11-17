@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.preference.Preference;
 
@@ -57,6 +58,8 @@ public class ImportanceResetPreferenceController extends BasePreferenceControlle
     @Override
     public void onClick(View v) {
         mBackend.resetNotificationImportance();
+        Toast.makeText(mContext, R.string.reset_importance_completed, Toast.LENGTH_SHORT)
+                            .show();
     }
 
     @Override
