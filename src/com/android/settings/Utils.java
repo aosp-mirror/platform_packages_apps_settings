@@ -273,6 +273,15 @@ public final class Utils extends com.android.settingslib.Utils {
         return batteryChangedIntent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
     }
 
+    /**
+     * Return true if battery is present.
+     */
+    public static boolean isBatteryPresent(Context context) {
+        Intent batteryBroadcast = context.registerReceiver(null /* receiver */,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return isBatteryPresent(batteryBroadcast);
+    }
+
     public static String getBatteryPercentage(Intent batteryChangedIntent) {
         return formatPercentage(getBatteryLevel(batteryChangedIntent));
     }

@@ -5752,6 +5752,11 @@
     <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
     <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
 
+    <!-- Summary for top level battery tile if battery is not present. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_message">Problem reading your battery meter</string>
+    <!-- Summary to battery page if battery is not present. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_help_message">Problem reading your battery meter. Tap to <annotation id="url">learn more</annotation></string>
+
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
     <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
@@ -7272,6 +7277,8 @@
     <string name="help_uri_sim_combination_warning" translatable="false"></string>
     <!-- url for the NFC and payment settings page -->
     <string name="help_uri_nfc_and_payment_settings" translatable="false"></string>
+    <!-- url for battery page if battery is not present -->
+    <string name="help_url_battery_missing" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
