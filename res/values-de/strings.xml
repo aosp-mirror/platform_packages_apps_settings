@@ -3781,6 +3781,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Im Modus \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" werden eingehende Anrufe blockiert. Du kannst die Einstellungen anpassen, sodass dich Freunde, Familie oder andere Kontakte erreichen können."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Markierte Kontakte"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Keiner}=1{{contact_1}}=2{{contact_1} und {contact_2}}=3{{contact_1}, {contact_2} und {contact_3}}other{{contact_1}, {contact_2} und # weitere Kontakte}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Kein Name)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Nachrichten"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"Nachrichten"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Nachrichten"</string>
@@ -4275,6 +4276,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Mobile Datennutzung"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Datennutzung durch Apps"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"WLAN-Datennutzung"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Datennutzung in Netzwerken ohne Mobilfunkanbieter"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet-Datennutzung"</string>
     <string name="wifi" msgid="2932584495223243842">"WLAN"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4293,6 +4295,7 @@
       <item quantity="one">1 Beschränkung</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Dein Mobilfunkanbieter berechnet die Datennutzung eventuell anders als das Gerät"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Beinhaltet keine Daten, die in Mobilfunkanbieter-Netzwerken verwendet werden"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Verbrauchte Daten: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Datenwarnung festlegen"</string>
     <string name="data_warning" msgid="2925054658166062884">"Warnlimit für mobile Daten"</string>
@@ -4503,9 +4506,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Wenn du auf den Bildschirm tippst, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Notfall"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Verwaltet von <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Drücke fünfmal schnell die Ein-/Aus-Taste, um die Aktionen für Notfälle zu starten."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Warnton"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Warnung vor Beginn der Aktionen"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Fünfmal oder öfter schnell die Ein-/Aus-Taste drücken, um die Aktionen unten zu starten"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Countdown-Alarm"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Vor dem Anruf einen lauten Ton abspielen"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Benachrichtigungen durch Wischen über Fingerabdrucksensor öffnen"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Fingerabdrucksensor verwenden"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Zum Lesen von Benachrichtigungen von oben nach unten über den Fingerabdrucksensor auf der Rückseite des Smartphones wischen"</string>
@@ -5025,4 +5028,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Mit WLAN-Telefonie kannst du Anrufe über Netzwerke ohne Mobilfunkanbieter starten und empfangen, wie etwa über einige WLAN-Netzwerke.\n\nBei Anrufen über ein Netzwerk von SIM-Karten nutzt du die mobilen Daten einer SIM-Karte, um Anrufe einer anderen SIM-Karte auszuführen und zu empfangen."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Anrufe"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nicht verfügbar, weil der Modus „Schlafenszeit“ aktiviert ist"</string>
 </resources>

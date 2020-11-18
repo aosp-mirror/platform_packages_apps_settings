@@ -32,15 +32,15 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 @Ignore
-public class MultiUserFooterPreferenceControllerTest {
+public class MultiUserTopIntroPreferenceControllerTest {
 
     private Context mContext;
-    private MultiUserFooterPreferenceController mController;
+    private MultiUserTopIntroPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new MultiUserFooterPreferenceController(mContext, "footer");
+        mController = new MultiUserTopIntroPreferenceController(mContext, "top_info");
     }
 
     @Test

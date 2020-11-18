@@ -27,6 +27,11 @@
         settings:allowDividerBelow="true"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="dark_ui_top_intro"
+        android:title="@string/dark_ui_text"
+        settings:searchable="false"/>
+
     <DropDownPreference
         android:key="dark_ui_auto_mode"
         android:title="@string/dark_ui_auto_mode_title"
@@ -54,12 +59,5 @@
         android:layout="@layout/dark_ui_activation_button"
         settings:allowDividerBelow="true"
         settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
-
-    <com.android.settingslib.widget.FooterPreference
-            android:key="dark_ui_footer"
-            android:title="@string/dark_ui_text"
-            android:selectable="false"
-            settings:searchable="false"
-            settings:allowDividerAbove="true"/>
 
 </PreferenceScreen>

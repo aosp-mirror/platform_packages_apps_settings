@@ -747,7 +747,7 @@
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ không được ghép nối với bất kỳ thiết bị nào liên kết với tài khoản này"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Xóa thiết bị"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Kết nối với…"</string>
-    <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi âm thanh phương tiện."</string>
+    <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi âm thanh nội dung nghe nhìn."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi âm thanh thiết bị rảnh tay."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="4794752406024916925">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi thiết bị nhập."</string>
     <string name="bluetooth_disconnect_pan_user_profile" msgid="283176886159444413">"Truy cập Internet qua <xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối."</string>
@@ -3349,7 +3349,7 @@
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Phản hồi xúc giác cho thao tác chạm, bàn phím và nhiều thao tác khác"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Phát âm đế kết nối"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Tất cả âm thanh"</string>
-    <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Chỉ âm thanh phương tiện"</string>
+    <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Chỉ âm thanh nội dung nghe nhìn"</string>
     <string name="emergency_tone_silent" msgid="5048069815418450902">"Im lặng"</string>
     <string name="emergency_tone_alert" msgid="1977698889522966589">"Âm"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Rung"</string>
@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Đối với ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, các cuộc gọi đến đều bị chặn. Bạn có thể điều chỉnh các tùy chọn cài đặt để cho phép bạn bè, gia đình hoặc những người liên hệ khác liên lạc với bạn."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Người liên hệ có gắn dấu sao"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Không có}=1{{contact_1}}=2{{contact_1} và {contact_2}}=3{{contact_1}, {contact_2} và {contact_3}}other{{contact_1}, {contact_2} và # người liên hệ khác}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Không có tên)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Tin nhắn"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"tin nhắn"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Tin nhắn"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Mức sử dụng dữ liệu di động"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Mức sử dụng dữ liệu của ứng dụng"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Mức sử dụng dữ liệu Wi-Fi"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Mức sử dụng dữ liệu không phải của nhà mạng"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Sử dụng dữ liệu ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">1 hạn chế</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Cách tính dữ liệu của nhà mạng có thể khác với thiết bị của bạn."</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Ngoại trừ dữ liệu được dùng trong mạng của nhà mạng"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Đã sử dụng <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Đặt cảnh báo dữ liệu"</string>
     <string name="data_warning" msgid="2925054658166062884">"Cảnh báo dữ liệu"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Để xem thời gian, thông báo và thông tin khác, hãy nhấn vào màn hình."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS khẩn cấp"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Do <xliff:g id="APP_NAME">%1$s</xliff:g> quản lý"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Bật tính năng SOS khẩn cấp bằng cách nhấn nhanh nút nguồn 5 lần."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Âm cảnh báo"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Cảnh báo trước khi bắt đầu các thao tác"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Bắt đầu các hành động đã chọn bằng cách nhấn nhanh nút nguồn 5 lần trở lên"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Chuông báo đếm ngược"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Phát một âm thanh lớn trước khi gọi"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Vuốt cảm biến vân tay để xem thông báo"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Vuốt vân tay"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Để kiểm tra thông báo, hãy vuốt xuống trên cảm biến vân tay ở mặt sau điện thoại."</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Với tính năng Gọi qua Wi-Fi, bạn có thể gọi và nhận cuộc gọi qua các mạng không phải do nhà mạng cung cấp, chẳng hạn như một số mạng Wi‑Fi.\n\nTính năng gọi bằng nhiều SIM cho phép bạn tận dụng dữ liệu di động của một SIM để gọi và nhận cuộc gọi trên một SIM khác."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Cuộc gọi"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"Tin nhắn SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Không dùng được vì chế độ giờ đi ngủ đang bật"</string>
 </resources>

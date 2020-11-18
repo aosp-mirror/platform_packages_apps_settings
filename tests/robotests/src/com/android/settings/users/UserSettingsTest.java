@@ -128,8 +128,8 @@ public class UserSettingsTest {
         mFragment = spy(new UserSettings());
         ReflectionHelpers.setField(mFragment, "mAddUserWhenLockedPreferenceController",
                 mock(AddUserWhenLockedPreferenceController.class));
-        ReflectionHelpers.setField(mFragment, "mMultiUserFooterPreferenceController",
-                mock(MultiUserFooterPreferenceController.class));
+        ReflectionHelpers.setField(mFragment, "mMultiUserTopIntroPreferenceController",
+                mock(MultiUserTopIntroPreferenceController.class));
         ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
         ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);

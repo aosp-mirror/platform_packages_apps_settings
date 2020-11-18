@@ -3781,6 +3781,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系統會封鎖「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」時段接收的來電。您可以調整設定，讓好友、家人或其他聯絡人聯絡您。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"已加星號的聯絡人"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{無}=1{{contact_1}}=2{{contact_1}和{contact_2}}=3{{contact_1}、{contact_2}和{contact_3}}other{{contact_1}、{contact_2}和另外 # 個}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(沒有名稱)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"訊息"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"訊息"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"訊息"</string>
@@ -4275,6 +4276,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"流動數據用量"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"應用程式數據用量"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wi-Fi 數據用量"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"非流動網絡供應商數據用量"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"以太網數據用量"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"以太網"</string>
@@ -4293,6 +4295,7 @@
       <item quantity="one">1 個限制</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"流動網絡供應商的數據計算方式可能與裝置有所不同"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"不包括流動網絡供應商網絡使用的數據"</string>
     <string name="data_used_template" msgid="8229342096562327646">"已使用 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"設定數據用量警告"</string>
     <string name="data_warning" msgid="2925054658166062884">"數據用量警告"</string>
@@ -4503,9 +4506,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"輕按螢幕即可查看時間、通知和其他資訊。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"緊急求救"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"由<xliff:g id="APP_NAME">%1$s</xliff:g>管理"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"快速按下電源按鈕 5 次即可觸發緊急求救動作。"</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"警示音效"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"開始操作前響起警示"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"快速按下電源按鈕 5 次或以上即可觸發操作"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"倒數警報"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"致電之前播放響亮音效"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"在指紋感應器上滑動以查看通知"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"滑動指紋"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"如要查看通知，請在手機背面的指紋感應器上向下滑動。"</string>
@@ -5025,4 +5028,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Wi-Fi 通話讓您透過非流動網絡供應商網絡 (例如部分 Wi-Fi 網絡) 撥打和接聽電話。\n\n跨 SIM 卡通話讓您利用 SIM 卡的流動數據撥打和接聽來自另一張 SIM 卡的電話。"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"通話"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"短訊"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"睡眠模式開啟時無法使用"</string>
 </resources>
