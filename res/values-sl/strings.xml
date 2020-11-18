@@ -2675,7 +2675,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Razčlenitev od zadnje napolnjenosti akumulatorja"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Zadnja polna napolnjenost"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Polno napolnjena naprava deluje približno"</string>
-    <string name="battery_footer_summary" msgid="9125397752380281832">"Podatki o porabi baterije so približni in se lahko spremenijo glede na uporabo naprave"</string>
+    <string name="battery_footer_summary" msgid="9125397752380281832">"Podatki o porabi baterije so približni in se lahko spremenijo glede na uporabo naprave."</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"Med aktivno uporabo"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"Med izvajanjem v ozadju"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Poraba baterije"</string>
@@ -3884,6 +3884,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Dohodni klici za »<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>« so blokirani. Nastavitve lahko prilagodite tako, da boste dosegljivi za prijatelje, družinske člane ali druge stike."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stiki z zvezdico"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Noben}=1{{contact_1}}=2{{contact_1} in {contact_2}}=3{{contact_1}, {contact_2} in {contact_3}}one{{contact_1}, {contact_2} in še # drug}two{{contact_1}, {contact_2} in še # druga}few{{contact_1}, {contact_2} in še # drugi}other{{contact_1}, {contact_2} in še # drugih}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Ni imena)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Sporočila"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"sporočila"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Sporočila"</string>
@@ -4406,6 +4407,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Prenos mobilnih podatkov"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Prenos podatkov aplikacij"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Preneseni podatki (Wi-Fi)"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Prenesena količina podatkov zunaj omrežij operaterjev"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Preneseni podatki (ethernet)"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4426,6 +4428,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> omejitev</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Operaterjeve meritve prenosa podatkov so morda drugačne kot v napravi"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Ne vključuje podatkov, prenesenih v omrežjih operaterjev"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Preneseno: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Nastavi opozorilo za prenos podatkov"</string>
     <string name="data_warning" msgid="2925054658166062884">"Opozorilo za prenos podatkov"</string>
@@ -4648,9 +4651,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Če želite preveriti uro, obvestila in druge informacije, se dotaknite zaslona."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Nujni primer"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Upravlja <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Zaženite dejanja za nujne primere tako, da petkrat hitro pritisnete gumb za vklop."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Opozorilni zvok"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Sproži zvočno opozorilo pred ukrepanjem"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Spodnja dejanja zaženete tako, da najmanj petkrat hitro pritisnete gumb za vklop."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Alarm z odštevanjem"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Predvajanje glasnega zvoka pred klicanjem"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Poteg s prstom po tipalu prstnih odtisov za prikaz obvestil"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Poteg po prstnem tipalu"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Če želite preveriti obvestila, povlecite navzdol po tipalu prstnih odtisov na hrbtni strani telefona."</string>
@@ -5190,4 +5193,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Klicanje prek Wi-Fi-ja omogoča opravljanje in prejemanje klicev v omrežjih, ki niso operaterjeva, na primer v nekaterih omrežjih Wi-Fi.\n\nKlicanje ne glede na kartico SIM omogoča, da prenos podatkov v mobilnem omrežju v sklopu ene kartice SIM uporabljate za opravljanje in prejemanje klicev prek druge kartice SIM."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Klici"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"Sporočila SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ni na voljo, ker je vklopljen način za spanje"</string>
 </resources>

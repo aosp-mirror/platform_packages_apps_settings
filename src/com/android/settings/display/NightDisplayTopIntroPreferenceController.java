@@ -14,35 +14,26 @@
  * limitations under the License.
  */
 
-package com.android.settings.users;
+package com.android.settings.display;
 
 import android.content.Context;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
+import android.hardware.display.ColorDisplayManager;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class MultiUserFooterPreferenceController extends BasePreferenceController {
+/**
+ * NightDisplayTopIntroPreferenceController can control the visibility of night display top info
+ * preference.
+ */
+public class NightDisplayTopIntroPreferenceController extends BasePreferenceController {
 
-    @VisibleForTesting
-    final UserCapabilities mUserCaps;
-
-    public MultiUserFooterPreferenceController(Context context, String key) {
+    public NightDisplayTopIntroPreferenceController(Context context, String key) {
         super(context, key);
-        mUserCaps = UserCapabilities.create(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return (mUserCaps.mEnabled && !mUserCaps.mUserSwitcherEnabled)
-                ? AVAILABLE_UNSEARCHABLE
-                : DISABLED_FOR_USER;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        mUserCaps.updateAddUserCapabilities(mContext);
-        preference.setVisible(isAvailable());
+        return ColorDisplayManager.isNightDisplayAvailable(mContext)
+                ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

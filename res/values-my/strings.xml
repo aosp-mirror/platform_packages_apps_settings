@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ အတွက် အဝင်ခေါ်ဆိုမှုများကို ပိတ်ထားသည်။ သင့်မိတ်ဆွေ၊ မိသားစု သို့မဟုတ် အခြားအဆက်အသွယ်များအား သင့်ကို ဆက်သွယ်ခွင့်ပြုရန်အတွက် ဆက်တင်များကို သင်ချိန်ညှိနိုင်သည်။"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"ကြယ်ပွင့်ပြ အဆက်အသွယ်များ"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{မရှိ}=1{{contact_1}}=2{{contact_1} နှင့် {contact_2}}=3{{contact_1}၊ {contact_2} နှင့် {contact_3}}other{{contact_1}၊ {contact_2} နှင့် အခြား # ခု}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(အမည်မရှိ)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"မက်ဆေ့ဂျ်များ"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"မက်ဆေ့ဂျ်များ"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"မက်ဆေ့ဂျ်များ"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"မိုဘိုင်းဒေတာ အသုံးပြုမှု"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"အက်ပ်ဒေတာ သုံးစွဲမှု"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wi-Fi ဒေတာ အသုံးပြုမှု"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"ဝန်ဆောင်မှုပေးသူမှမဟုတ်သည့် ဒေတာသုံးစွဲမှု"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"အီတာနက်ဒေတာအသုံးပြုချက်"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"အီတာနက်"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">ကန့်သတ်ချက် ၁ ခု</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"ဝန်ဆောင်မှုပေးသူ၏ ဒေတာအသုံးပြုမှု တွက်ချက်ခြင်းသည် စက်ပစ္စည်း၏ တွက်ချက်ခြင်းနှင့် ကွဲပြားနိုင်သည်"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"ဝန်ဆောင်မှုပေးသူ၏ကွန်ရက်များက အသုံးပြုသော ဒေတာများ မပါဝင်ပါ"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> အသုံးပြုထားသည်"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"ဒေတာသတိပေးချက် သတ်မှတ်ရန်"</string>
     <string name="data_warning" msgid="2925054658166062884">"ဒေတာသတိပေးချက်"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"အချိန်၊ အကြောင်းကြားချက်များနှင့် အခြားအချက်အလက်များကို စစ်ဆေးရန် သင့်ဖန်သားပြင်ကို တို့ပါ။"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"အရေးပေါ် SOS"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> က စီမံခန့်ခွဲသည်"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"ဖွင့်ပိတ်ခလုတ်ကို ၅ ကြိမ် အမြန်နှိပ်ခြင်းဖြင့် အရေးပေါ် SOS လုပ်ဆောင်ချက်များကို စတင်ပါ။"</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"သတိပေးသံ"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"လုပ်ဆောင်ချက်များ မစတင်မီ သတိပေးသည်"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"ဖွင့်ပိတ်ခလုတ်ကို ၅ ကြိမ် (သို့) ၅ ကြိမ်ထက်ပို၍ အမြန်နှိပ်ခြင်းဖြင့် အောက်ပါ လုပ်ဆောင်ချက်များကို စတင်နိုင်သည်"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"စက္ကန့်ပိုင်းအတွင်း နှိုးစက်"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"မခေါ်ဆိုခင် ကျယ်လောင်သောအသံကို ဖွင့်သည်"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"သတိပေးချက်အတွက် လက်ဗွေပွတ်ဆွဲပါ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"လက်ဗွေပွတ်ဆွဲခြင်း"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"အကြောင်းကြားချက်များကို ကြည့်ရန် ဖုန်း၏ နောက်ကျောဘက်ရှိ လက်ဗွေ အာရုံခံကိရိယာပေါ်တွင် အောက်သို့ ပွတ်ဆွဲပါ။"</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Wi-Fi ခေါ်ဆိုမှုက Wi-Fi ကွန်ရက်အချို့ကဲ့သို့သော ဖုန်းဝန်ဆောင်မှုပေးသူမှမဟုတ်သည့် ကွန်ရက်များတွင် ဖုန်းခေါ်ဆိုခြင်းနှင့် လက်ခံခြင်းများကို ပြုလုပ်ရန်ခွင့်ပြုသည်။\n\nCross-SIM ခေါ်ဆိုမှုက နောက်ဆင်းမ်တစ်ခုမှ ဖုန်းခေါ်ဆိုခြင်းနှင့် လက်ခံခြင်းများကို ပြုလုပ်ရန်အတွက် ဆင်းမ်တစ်ခု၏ မိုဘိုင်းဒေတာကို တွန်းအားပေးရန် ခွင့်ပြုသည်။"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"ခေါ်ဆိုမှုများ"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"အိပ်ချိန်မုဒ်ကို ဖွင့်ထားသောကြောင့် မရရှိနိုင်ပါ"</string>
 </resources>

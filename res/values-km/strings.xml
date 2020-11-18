@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"បាន​ទប់ស្កាត់​ការហៅចូល​សម្រាប់ ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ ។ អ្នកអាចកែតម្រូវការកំណត់ ដើម្បីអនុញ្ញាតឱ្យមិត្តភ័ក្តិ គ្រួសារ ឬទំនាក់ទំនងផ្សេងទៀតរបស់អ្នកអាចទាក់ទងអ្នកបាន។"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"ទំនាក់​ទំនង​​​​​មាន​ផ្កាយ"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{គ្មាន}=1{{contact_1}}=2{{contact_1} និង {contact_2}}=3{{contact_1}, {contact_2} និង {contact_3}}other{{contact_1}, {contact_2} និង # នាក់ទៀត}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(គ្មាន​ឈ្មោះ)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"សារ"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"សារ​"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"សារ"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"ការប្រើ​ទិន្នន័យ​ទូរសព្ទចល័ត"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"ការប្រើទិន្នន័យកម្មវិធី"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"ការប្រើប្រាស់​ទិន្នន័យ Wi-Fi"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"ការប្រើទិន្នន័យ​ដែលមិនមានប្រភព​មកពីក្រុមហ៊ុនសេវាទូរសព្ទ"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"ការប្រើប្រាស់ទិន្នន័យអ៊ីសឺរណិត"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"អ៊ីសឺរណិត"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">ការដាក់កំហិត 1</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"ការគណនាទិន្នន័យរបស់ក្រុមហ៊ុនសេវាទូរសព្ទអាចនឹងខុសគ្នាពីការគណនារបស់ឧបករណ៍"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"មិនរួមបញ្ចូល​ទិន្នន័យ​ដែលប្រើ​ដោយ​បណ្ដាញដែលមានប្រភព​មកពីក្រុមហ៊ុនសេវាទូរសព្ទ​ទេ"</string>
     <string name="data_used_template" msgid="8229342096562327646">"បានប្រើ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"កំណត់ការព្រមានពីការប្រើទិន្នន័យ"</string>
     <string name="data_warning" msgid="2925054658166062884">"ការព្រមានពីការប្រើទិន្នន័យ"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូម​ចុចអេក្រង់​របស់អ្នក។"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"ការហៅទៅ​លេខសង្គ្រោះបន្ទាន់"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"គ្រប់គ្រងដោយ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"ចាប់ផ្ដើម​សកម្មភាព​ហៅទូរសព្ទទៅ​សេវាសង្គ្រោះបន្ទាន់ ដោយចុច​ប៊ូតុងថាមពលឱ្យរហ័ស 5 ដង។"</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"សំឡេងព្រមាន"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"ជូនដំណឹង មុនពេល​ចាប់ផ្ដើមសកម្មភាព"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"ចាប់ផ្ដើម​សកម្មភាព​ខាងក្រោម ដោយចុច​ប៊ូតុង​ថាមពល​ឱ្យរហ័ស​យ៉ាងតិច 5 ដង"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"សំឡេង​ប្រកាស​អាសន្ន​រាប់​ថយក្រោយ"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"ចាក់​សំឡេង​ឮៗ មុនពេល​ហៅទូរសព្ទ"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"អូសលើ​ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​សម្រាប់​ការជូនដំណឹង"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"អូសស្នាមម្រាមដៃ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"ដើម្បីពិនិត្យមើលការជូនដំណឹងរបស់អ្នក សូមអូសចុះក្រោមនៅលើឧបករណ៍ចាប់ស្នាមម្រាមដៃ ដែលស្ថិតនៅផ្នែកខាងក្រោយទូរសព្ទរបស់អ្នក។"</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"ការហៅតាម Wi-Fi អនុញ្ញាតឱ្យអ្នក​ហៅ និងទទួលទូរសព្ទ​តាម​បណ្ដាញដែលមិនមាន​ប្រភពមកពីក្រុមហ៊ុនសេវាទូរសព្ទ​ដូចជា បណ្ដាញ Wi‑Fi មួយចំនួនជាដើម។\n\nការហៅទូរសព្ទឆ្លងប្រព័ន្ធ​អនុញ្ញាតឱ្យអ្នក​ប្រើទិន្នន័យទូរសព្ទចល័តរបស់ស៊ីម ដើម្បីហៅ និងទទួលទូរសព្ទ​ពីស៊ីមផ្សេងទៀត។"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"ការហៅទូរសព្ទ"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"សារ SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"មិនអាច​ប្រើបានទេ ដោយសារ​បើកមុខងារ​ម៉ោងគេង"</string>
 </resources>

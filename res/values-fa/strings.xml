@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"تماس‌های ورودی برای «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>» مسدود می‌شود. برای اینکه به دوستان و خانواده و سایر مخاطبین امکان دسترسی به خودتان بدهید، می‌توانید تنظیمات را تغییر دهید."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"مخاطبین ستاره‌دار"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{هیچ‌کدام}=1{{contact_1}}=2{{contact_1} و {contact_2}}=3{{contact_1}، {contact_2} و {contact_3}}one{{contact_1}، {contact_2}، و # نفر دیگر}other{{contact_1}، {contact_2}، و # نفر دیگر}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(بدون نام)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"پیام‌ها"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"پیام‌ها"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"پیام‌ها"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"مصرف داده شبکه تلفن همراه"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"مصرف داده برنامه"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"‏مصرف داده Wi-Fi"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"مصرف داده غیرمخابراتی"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"میزان مصرف داده اترنت"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"اترنت"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> محدودیت</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"روش شرکت مخابراتی برای اندازه‌گیری مصرف داده ممکن است با روش دستگاهتان متفاوت باشد."</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"داده‌هایی را که شبکه‌های شرکت مخابراتی استفاده می‌کنند لحاظ نمی‌کند"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> مصرف شده"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"تنظیم هشدار داده"</string>
     <string name="data_warning" msgid="2925054658166062884">"هشدار داده"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"برای بررسی زمان، اعلان‌ها و اطلاعات دیگر، روی صفحه‌نمایش ضربه بزنید."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"کمک اضطراری"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"تحت مدیریت <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"با پنج‌بار فشار دادن سریع دکمه روشن/خاموش، کنش‌های مربوط به درخواست کمک اضطراری را شروع کنید."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"صدای هشدار"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"هشدار پیش از شروع کنش‌ها"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"با ۵ بار یا بیشتر فشار دادن سریع دکمه روشن/خاموش، کنش‌های زیر راه‌اندازی می‌شود"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"هشدار شمارش معکوس"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"قبل‌از تماس، صدای بلندی پخش می‌شود"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"تند کشیدن اثر انگشت برای اعلان‌ها"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"تند کشیدن اثر انگشت"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"برای بررسی اعلان‌ها، انگشتتان را روی حسگر اثر انگشت (در پشت تلفن) تند به‌پایین بکشید."</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"‏«تماس ازطریق Wi-Fi» امکان برقراری و دریافت تماس ازطریق شبکه‌های غیرمخابراتی (مثل برخی از شبکه‌های Wi-Fi) را به شما می‌دهد.\n\nتماس بین سیم‌کارت به شما اجازه می‌دهد از داده تلفن همراه یک سیم‌کارت برای برقراری و دریافت تماس از سیم‌کارت دیگری بهره ببرید."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"تماس"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"پیامک"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"دردسترس نیست زیرا «حالت وقت خواب» روشن است"</string>
 </resources>

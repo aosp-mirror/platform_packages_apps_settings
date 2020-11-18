@@ -3832,6 +3832,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Долазни позиви су блокирани за „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Можете да прилагодите подешавања и дозволите пријатељима, члановима породице или другим контактима да допру до вас."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Контакти са звездицом"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Ниједан}=1{{contact_1}}=2{{contact_1} и {contact_2}}=3{{contact_1}, {contact_2} и {contact_3}}one{{contact_1}, {contact_2} и још #}few{{contact_1}, {contact_2} и још #}other{{contact_1}, {contact_2} и још #}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Без имена)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Поруке"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"поруке"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Поруке"</string>
@@ -4340,6 +4341,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Потрошња мобил. података"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Коришћење података апликације"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Потрошња WiFi података"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Потрошња података који не припадају мобилном оператеру"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Потрошња података на етернету"</string>
     <string name="wifi" msgid="2932584495223243842">"WiFi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Етернет"</string>
@@ -4359,6 +4361,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ограничења</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Обрачун података код мобилног оператера се можда разликује од обрачуна уређаја."</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Не обухвата податке које користе мреже мобилних оператера"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Потрошили сте <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Подеси упозорење о подацима"</string>
     <string name="data_warning" msgid="2925054658166062884">"Упозорење за потрошњу података"</string>
@@ -4575,9 +4578,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Да бисте проверили време, обавештења и друге информације, додирните екран."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Хитни случајеви"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Управља <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Да бисте покренули радње за хитне случајеве, брзо додирните дугме за укључивање 5 пута."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Звук упозорења"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Упозорење пре почетка радњи"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Покрените радње у наставку тако што ћете брзо притиснути дугме за укључивање најмање 5 пута"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Аларм за одбројавање"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Пустите гласан звук пре позива"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Превуците прстом за обавештења"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Превуците прстом"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Да бисте проверили обавештења, превуците прстом надоле по сензору за отисак прста на задњој страни телефона."</string>
@@ -5107,4 +5110,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Позивање преко WiFi-ја вам омогућава да примате и упућујете позиве преко мрежа које не припадају мобилном оператеру, на пример, неких WiFi мрежа.\n\nПозиви преко више SIM картица омогућавају вам да искористите мобилне податке SIM картице да бисте са друге SIM картице упућивали или примали позиве."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Позиви"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Недоступно је јер је ноћни режим укључен"</string>
 </resources>

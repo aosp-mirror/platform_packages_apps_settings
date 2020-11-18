@@ -2692,7 +2692,7 @@
     <string name="tts_reset" msgid="9047681050813970031">"リセット"</string>
     <string name="tts_play" msgid="2945513377250757221">"再生"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"アダプティブ接続"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"接続の自動調整"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"証明書のインストール"</string>
@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、着信がブロックされます。設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"スター付きの連絡先"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{なし}=1{{contact_1}}=2{{contact_1} さんと {contact_2} さん}=3{{contact_1} さん、{contact_2} さん、{contact_3} さん}other{{contact_1} さん、{contact_2} さん、他 # 人}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"（名前なし）"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"メッセージ"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"メッセージ"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"メッセージ"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"モバイルデータ使用量"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"アプリのデータ使用量"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wi-Fi データ使用量"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"携帯通信会社以外のデータ使用量"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"イーサネット データ使用量"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"イーサネット"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">1 個の制限</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"デバイスで記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"携帯通信会社のネットワークで使用したデータ使用量は除外しています"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> 使用"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"データ使用量を警告"</string>
     <string name="data_warning" msgid="2925054658166062884">"警告するデータ使用量"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"時刻、通知などの情報を確認するには、画面をタップします。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS 緊急通報"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g>によって管理されています"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"電源ボタンを 5 回すばやく押すと、SOS 緊急アクションが実行されます。"</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"警告音"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"アクション実行前のアラート"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"電源ボタンを 5 回以上すばやく押すと、下記の緊急時対応が開始されます"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"カウントダウン アラーム"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"発信する前に大きな音が鳴ります"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"指紋センサーをスワイプして通知を表示"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"指紋センサーのスワイプ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"スマートフォンの背面にある指紋認証センサーを下にスワイプして、通知を確認できます。"</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"Wi-Fi 通話では、携帯通信会社以外のネットワーク（一部の Wi-Fi ネットワークなど）を利用して通話の発信と着信を行えます。\n\nCross-SIM 通話では、SIM のモバイルデータを利用して別の SIM から通話の発信と着信を行えます。"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"通話"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
 </resources>

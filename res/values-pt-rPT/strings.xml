@@ -3780,6 +3780,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"As chamadas recebidas são bloqueadas no horário \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Pode ajustar as definições para permitir que os seus amigos, a sua família ou outras pessoas o contactem."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Contactos com estrela"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Nenhum}=1{{contact_1}}=2{{contact_1} e {contact_2}}=3{{contact_1}, {contact_2} e {contact_3}}other{{contact_1}, {contact_2} e mais #}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Sem nome)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mensagens"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mensagens"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mensagens"</string>
@@ -4274,6 +4275,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Utilização de dados móveis"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Utilização de dados da aplicação"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Uso de dados Wi-Fi"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Utilização de dados sem operador móvel"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Utilização de dados de Ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4292,6 +4294,7 @@
       <item quantity="one">1 restrição</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"A contagem de dados do operador pode ser diferente da contagem do dispositivo"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Exclui os dados utilizados por redes de operadores."</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> utilizado(s)"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Definir aviso de dados"</string>
     <string name="data_warning" msgid="2925054658166062884">"Aviso de dados"</string>
@@ -4502,9 +4505,9 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para consultar a hora, as notificações e outras informações, toque no ecrã."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS de emergência"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Gerido por <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Inicie as ações SOS de emergência ao premir o botão ligar/desligar rapidamente 5 vezes."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Som de aviso"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Alerte antes de iniciar as ações."</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Inicie as ações abaixo ao premir o botão ligar/desligar rapidamente 5 vezes ou mais."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Alarme de contagem decrescente"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Reproduza um som alto antes de ligar."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Utilizar impressão digital para ver as notificações"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Usar impressão digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Para verificar as suas notificações, deslize rapidamente para baixo no sensor de impressões digitais situado na parte posterior do telemóvel."</string>
@@ -5024,4 +5027,9 @@
     <string name="calls_sms_footnote" msgid="148659606229186084">"As Chamadas Wi-Fi permitem-lhe fazer e receber chamadas através de redes sem operador móvel, tais como redes Wi‑Fi.\n\nAs chamadas com vários cartões SIM permitem-lhe aproveitar os dados móveis de um SIM para fazer e receber chamadas de outro SIM."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Chamadas"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <skip />
+    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Não disponível porque o modo de hora de dormir está ativado."</string>
 </resources>
