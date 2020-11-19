@@ -63,8 +63,8 @@ public class EmergencyGesturePreferenceController extends BasePreferenceControll
         super.displayPreference(screen);
         final LayoutPreference pref = screen.findPreference(mPreferenceKey);
         mSwitchBar = pref.findViewById(R.id.switch_bar);
-        mSwitchBar.setSwitchBarText(R.string.emergency_gesture_screen_title,
-                R.string.emergency_gesture_screen_title);
+        mSwitchBar.setSwitchBarText(R.string.emergency_gesture_switchbar_title,
+                R.string.emergency_gesture_switchbar_title);
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.setChecked(isChecked());
         mSwitchBar.show();
