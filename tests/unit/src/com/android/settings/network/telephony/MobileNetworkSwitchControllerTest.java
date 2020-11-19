@@ -18,15 +18,20 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Looper;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -47,6 +52,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -168,9 +174,15 @@ public class MobileNetworkSwitchControllerTest {
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isTrue();
 
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
         mSwitchBar.setChecked(false);
+        Bundle extra = intentCaptor.getValue().getExtras();
 
-        verify(mSubscriptionManager).setSubscriptionEnabled(eq(mSubId), eq(false));
+        verify(mContext, times(1)).startActivity(any());
+        assertThat(extra.getInt(ToggleSubscriptionDialogActivity.ARG_SUB_ID)).isEqualTo(mSubId);
+        assertThat(extra.getBoolean(ToggleSubscriptionDialogActivity.ARG_enable))
+                .isEqualTo(false);
     }
 
     @Test
@@ -183,9 +195,15 @@ public class MobileNetworkSwitchControllerTest {
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isTrue();
 
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
         mSwitchBar.setChecked(false);
+        Bundle extra = intentCaptor.getValue().getExtras();
 
-        verify(mSubscriptionManager).setSubscriptionEnabled(eq(mSubId), eq(false));
+        verify(mContext, times(1)).startActivity(any());
+        assertThat(extra.getInt(ToggleSubscriptionDialogActivity.ARG_SUB_ID)).isEqualTo(mSubId);
+        assertThat(extra.getBoolean(ToggleSubscriptionDialogActivity.ARG_enable))
+                .isEqualTo(false);
         assertThat(mSwitchBar.isChecked()).isTrue();
     }
 
@@ -197,8 +215,13 @@ public class MobileNetworkSwitchControllerTest {
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isFalse();
 
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
         mSwitchBar.setChecked(true);
+        Bundle extra = intentCaptor.getValue().getExtras();
 
-        verify(mSubscriptionManager).setSubscriptionEnabled(eq(mSubId), eq(true));
+        verify(mContext, times(1)).startActivity(any());
+        assertThat(extra.getInt(ToggleSubscriptionDialogActivity.ARG_SUB_ID)).isEqualTo(mSubId);
+        assertThat(extra.getBoolean(ToggleSubscriptionDialogActivity.ARG_enable)).isEqualTo(true);
     }
 }
