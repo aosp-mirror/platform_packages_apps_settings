@@ -45,6 +45,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MobileNetworkSummaryController extends AbstractPreferenceController implements
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver,
@@ -124,10 +125,18 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                 return subs.get(0).getDisplayName();
             }
         } else {
+            if (com.android.settings.Utils.isProviderModelEnabled(mContext)) {
+                return getSummaryForProviderModel(subs);
+            }
             final int count = subs.size();
             return mContext.getResources().getQuantityString(R.plurals.mobile_network_summary_count,
                     count, count);
         }
+    }
+
+    private CharSequence getSummaryForProviderModel(List<SubscriptionInfo> subs) {
+        return String.join(", ", subs.stream().map(SubscriptionInfo::getDisplayName)
+                .collect(Collectors.toList()));
     }
 
     private void startAddSimFlow() {
