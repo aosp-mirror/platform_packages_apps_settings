@@ -36,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
 
@@ -90,7 +91,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     @Override
     public int getAvailabilityStatus(int subId) {
         final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
-        if (subs.size() > 1) {
+        if (subs.size() > 1 || Utils.isProviderModelEnabled(mContext)) {
             return AVAILABLE;
         } else {
             return CONDITIONALLY_UNAVAILABLE;
@@ -156,6 +157,12 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         // time" entry at the end.
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
+
+        if (Utils.isProviderModelEnabled(mContext) && subs.size() == 1) {
+            mPreference.setEnabled(false);
+            mPreference.setSummary(subs.get(0).getDisplayName());
+            return;
+        }
 
         final int serviceDefaultSubId = getDefaultSubscriptionId();
         boolean subIsAvailable = false;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,11 +27,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Looper;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.test.UiThreadTest;
 
-import com.android.settings.R;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.testutils.ResourcesUtils;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
@@ -42,42 +49,34 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
-import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceScreen;
-
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class MobileNetworkSwitchControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private PreferenceScreen mScreen;
+    private SubscriptionInfo mSubscription;
+    @Mock
+    private Lifecycle mLifecycle;
     @Mock
     private LayoutPreference mLayoutPreference;
-    @Mock
-    private SubscriptionInfo mSubscription;
 
-    private Context mContext;
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
-    private MobileNetworkSwitchController mController;
+    private PreferenceScreen mScreen;
+    private PreferenceManager mPreferenceManager;
     private SwitchBar mSwitchBar;
+    private Context mContext;
+    private MobileNetworkSwitchController mController;
     private int mSubId = 123;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mSubscriptionManager.setSubscriptionEnabled(eq(mSubId), anyBoolean()))
                 .thenReturn(true);
-
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
 
         when(mSubscription.isEmbedded()).thenReturn(true);
         when(mSubscription.getSubscriptionId()).thenReturn(mSubId);
@@ -90,9 +89,18 @@ public class MobileNetworkSwitchControllerTest {
         mController = new MobileNetworkSwitchController(mContext, key);
         mController.init(mLifecycle, mSubscription.getSubscriptionId());
 
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+
+        mPreferenceManager = new PreferenceManager(mContext);
+        mScreen = mPreferenceManager.createPreferenceScreen(mContext);
+        mScreen.addPreference(mLayoutPreference);
         mSwitchBar = new SwitchBar(mContext);
-        when(mScreen.findPreference(key)).thenReturn(mLayoutPreference);
-        when(mLayoutPreference.findViewById(R.id.switch_bar)).thenReturn(mSwitchBar);
+        doReturn(key).when(mLayoutPreference).getKey();
+        when(mLayoutPreference.findViewById(
+                ResourcesUtils.getResourcesId(mContext, "id", "switch_bar"))).thenReturn(
+                mSwitchBar);
     }
 
     @After
@@ -101,6 +109,7 @@ public class MobileNetworkSwitchControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void isAvailable_pSIM_isNotAvailable() {
         when(mSubscription.isEmbedded()).thenReturn(false);
         mController.displayPreference(mScreen);
@@ -112,6 +121,7 @@ public class MobileNetworkSwitchControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void displayPreference_oneEnabledSubscription_switchBarNotHidden() {
         doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(mSubId);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription));
@@ -120,14 +130,18 @@ public class MobileNetworkSwitchControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void displayPreference_oneDisabledSubscription_switchBarNotHidden() {
         doReturn(false).when(mSubscriptionManager).isActiveSubscriptionId(mSubId);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription));
+
         mController.displayPreference(mScreen);
+
         assertThat(mSwitchBar.isShowing()).isTrue();
     }
 
     @Test
+    @UiThreadTest
     public void displayPreference_subscriptionEnabled_switchIsOn() {
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(true);
         mController.displayPreference(mScreen);
@@ -136,24 +150,31 @@ public class MobileNetworkSwitchControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void displayPreference_subscriptionDisabled_switchIsOff() {
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(false);
+
         mController.displayPreference(mScreen);
+
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isFalse();
     }
 
     @Test
+    @UiThreadTest
     public void switchChangeListener_fromEnabledToDisabled_setSubscriptionEnabledCalledCorrectly() {
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(true);
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isTrue();
+
         mSwitchBar.setChecked(false);
+
         verify(mSubscriptionManager).setSubscriptionEnabled(eq(mSubId), eq(false));
     }
 
     @Test
+    @UiThreadTest
     public void switchChangeListener_fromEnabledToDisabled_setSubscriptionEnabledFailed() {
         when(mSubscriptionManager.setSubscriptionEnabled(eq(mSubId), anyBoolean()))
                 .thenReturn(false);
@@ -161,18 +182,23 @@ public class MobileNetworkSwitchControllerTest {
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isTrue();
+
         mSwitchBar.setChecked(false);
+
         verify(mSubscriptionManager).setSubscriptionEnabled(eq(mSubId), eq(false));
         assertThat(mSwitchBar.isChecked()).isTrue();
     }
 
     @Test
+    @UiThreadTest
     public void switchChangeListener_fromDisabledToEnabled_setSubscriptionEnabledCalledCorrectly() {
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(false);
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isTrue();
         assertThat(mSwitchBar.isChecked()).isFalse();
+
         mSwitchBar.setChecked(true);
+
         verify(mSubscriptionManager).setSubscriptionEnabled(eq(mSubId), eq(true));
     }
 }
