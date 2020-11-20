@@ -47,6 +47,7 @@ import java.util.List;
 /**
  * Preference controller for "Wifi Calling"
  */
+//TODO: Remove the class once Provider Model is always enabled in the future.
 public class WifiCallingPreferenceController extends TelephonyBasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
