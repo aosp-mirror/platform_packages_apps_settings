@@ -63,13 +63,14 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
     public boolean onPreferenceChange(Preference preference, Object object) {
         int newMode = Integer.parseInt((String) object);
         //TODO(b/117611981): only set it in one place
-        if (mTelephonyManager.setCdmaRoamingMode(newMode)) {
+        try {
+            mTelephonyManager.setCdmaRoamingMode(newMode);
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.CDMA_ROAMING_MODE, newMode);
             return true;
+        } catch (IllegalStateException e) {
+            return false;
         }
-
-        return false;
     }
 
     private void resetCdmaRoamingModeToDefault() {
