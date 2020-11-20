@@ -5719,6 +5719,10 @@
     <string name="battery_tip_high_usage_title" product="device">Device used more than usual</string>
     <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
+    <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_title">Battery limited temporarily</string>
+    <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_summary">Helps preserve battery health. Tap to learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -11069,16 +11073,35 @@
     <string name="emergency_gesture_screen_title">Emergency SOS</string>
 
     <!-- Preference title to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
+    <string name="emergency_gesture_switchbar_title">Use esmergency SOS</string>
+
+    <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
     <string name="emergency_gesture_entrypoint_summary">Managed by <xliff:g id="app_name" example="Emergency Info">%1$s</xliff:g></string>
 
     <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
     <string name="emergency_gesture_screen_summary">Start the actions below by pressing the power button quickly 5 times or more</string>
 
     <!-- Preference title to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
-    <string name="emergency_gesture_sound_setting_title">Countdown alarm</string>
+    <string name="emergency_gesture_sound_setting_title">Play countdown alarm</string>
 
     <!-- Preference summary to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="emergency_gesture_sound_setting_summary">Play a loud sound before calling</string>
+    <string name="emergency_gesture_sound_setting_summary">Play a loud sound before notifying for help</string>
+
+    <!-- Preference title listing a phone number to call during emergency gesture [CHAR_LIMIT=60]-->
+    <string name="emergency_gesture_call_for_help_title">Call for help</string>
+
+    <!-- Preference title listing a phone number to call during emergency gesture [CHAR_LIMIT=NONE]-->
+    <string name="emergency_gesture_call_for_help_dialog_title">Number to call for help</string>
+
+    <!-- Preference summary listing a phone number to call during emergency gesture, and clicking the perference will show a dialog to change this number [CHAR_LIMIT=NONE]-->
+    <string name="emergency_gesture_call_for_help_summary"><xliff:g id="phone_number" example="911">%1$s</xliff:g>. Tap to change</string>
+
+    <!-- Notes explaining limitations for emergency gesture number override [CHAR_LIMIT=NONE]-->
+    <string name="emergency_gesture_number_override_notes">
+        If you enter a non-emergency number:\n
+        • Your device must be unlocked to use emergency SOS\n
+        • Your call may not be answered
+    </string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
