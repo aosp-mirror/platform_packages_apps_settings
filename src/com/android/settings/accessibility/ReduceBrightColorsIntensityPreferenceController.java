@@ -45,6 +45,7 @@ public class ReduceBrightColorsIntensityPreferenceController extends SliderPrefe
         preference.setContinuousUpdates(true);
         preference.setMax(getMax());
         preference.setMin(getMin());
+        preference.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
         updateState(preference);
     }
 

@@ -60,6 +60,7 @@ public class BatterySaverScheduleSeekBarController implements
         mSeekBarPreference.setMax(MAX_SEEKBAR_VALUE);
         mSeekBarPreference.setMin(MIN_SEEKBAR_VALUE);
         mSeekBarPreference.setKey(KEY_BATTERY_SAVER_SEEK_BAR);
+        mSeekBarPreference.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_TICKS);
         updateSeekBar();
     }
 
