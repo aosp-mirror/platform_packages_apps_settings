@@ -35,6 +35,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * PreferenceController to update the wifi state.
  */
+// TODO(b/167474581): Should clean up this controller when Provider Model finished.
 public class WifiPrimarySwitchPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, SummaryUpdater.OnSummaryChangeListener,
         LifecycleObserver, OnResume, OnPause, OnStart, OnStop {
