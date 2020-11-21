@@ -52,6 +52,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.util.ContrastColorUtil;
 import com.android.settings.R;
+import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,8 +80,8 @@ public class NotificationSbnAdapter extends
         mPm = pm;
         mUserBadgeCache = new HashMap<>();
         mValues = new ArrayList<>();
-        mBackgroundColor = mContext.getColor(
-                com.android.internal.R.color.notification_material_background_color);
+        mBackgroundColor = Utils.getColorAttrDefaultColor(context,
+                android.R.attr.colorBackground);
         Configuration currentConfig = mContext.getResources().getConfiguration();
         mInNightMode = (currentConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK)
                 == Configuration.UI_MODE_NIGHT_YES;
