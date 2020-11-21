@@ -124,7 +124,7 @@ public class BatteryTipUtils {
             throws StatsManager.StatsUnavailableException {
         final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
-                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         statsManager.setBroadcastSubscriber(pendingIntent,
                 StatsManagerConfig.ANOMALY_CONFIG_KEY, StatsManagerConfig.SUBSCRIBER_ID);
     }
