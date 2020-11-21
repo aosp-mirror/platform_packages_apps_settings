@@ -21,13 +21,13 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -58,7 +58,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (isProviderModelEnabled(getContext())) {
+        if (Utils.isProviderModelEnabled(getContext())) {
             return R.xml.network_provider_internet;
         } else {
             return R.xml.network_and_internet;
@@ -69,7 +69,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (!isProviderModelEnabled(context)) {
+        if (!Utils.isProviderModelEnabled(context)) {
             use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
         }
         use(AirplaneModePreferenceController.class).setFragment(this);
@@ -104,7 +104,15 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final WifiPrimarySwitchPreferenceController wifiPreferenceController =
-                new WifiPrimarySwitchPreferenceController(context, metricsFeatureProvider);
+                Utils.isProviderModelEnabled(context)
+                        ? null
+                        : new WifiPrimarySwitchPreferenceController(
+                                context,
+                                metricsFeatureProvider);
+        final InternetPreferenceController internetPreferenceController =
+                Utils.isProviderModelEnabled(context)
+                        ? new InternetPreferenceController(context)
+                        : null;
 
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
@@ -113,7 +121,12 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
-            lifecycle.addObserver(wifiPreferenceController);
+            if (wifiPreferenceController != null) {
+                lifecycle.addObserver(wifiPreferenceController);
+            }
+            if (internetPreferenceController != null) {
+                lifecycle.addObserver(internetPreferenceController);
+            }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
@@ -125,8 +138,16 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
-        controllers.add(wifiPreferenceController);
+        if (wifiPreferenceController != null) {
+            controllers.add(wifiPreferenceController);
+        }
+        if (internetPreferenceController != null) {
+            controllers.add(internetPreferenceController);
+        }
         controllers.add(privateDnsPreferenceController);
+        if (Utils.isProviderModelEnabled(context)) {
+            controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
+        }
         return controllers;
     }
 
@@ -171,8 +192,4 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                             null /* mobilePlanHost */);
                 }
             };
-
-    private static boolean isProviderModelEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
-    }
 }
