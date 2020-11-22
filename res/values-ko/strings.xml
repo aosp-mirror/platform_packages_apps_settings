@@ -385,8 +385,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"앱에서 얼굴인식 잠금해제를 사용할 때 항상 확인 요청"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"얼굴 데이터 삭제"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"얼굴인식 잠금해제 설정"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"얼굴인식 잠금해제를 사용하여 기기를 잠금 해제하거나 앱에 로그인하거나 결제를 확인하세요.\n\n주의사항:\n휴대전화를 바라보면 의도치 않게 잠금이 해제될 수 있습니다.\n\n다른 사람이 내 얼굴에 휴대전화를 가져다 대면 잠금이 해제될 수 있습니다.\n\n나와 많이 닮은 사람(예: 일란성 쌍둥이)이 휴대전화의 잠금을 해제할 수도 있습니다."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"얼굴인식 잠금해제를 사용하여 기기를 잠금 해제하거나 앱에 로그인하거나 결제를 확인하세요.\n\n주의사항:\n휴대전화를 바라보면 의도치 않게 잠금이 해제될 수 있습니다.\n\n다른 사람이 내 얼굴에 휴대전화를 가져다 대면 눈을 감고 있더라도 잠금이 해제될 수 있습니다.\n\n일란성 쌍둥이와 같이 나와 많이 닮은 사람이 휴대전화의 잠금을 해제할 수도 있습니다."</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"얼굴인식 잠금해제를 사용하여 기기를 잠금 해제하거나 앱에 로그인하거나 결제를 확인하세요."</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"주의사항:\n휴대전화를 바라보면 의도치 않게 잠금이 해제될 수 있습니다.\n\n다른 사람이 내 얼굴에 휴대전화를 가져다 대면 잠금이 해제될 수 있습니다.\n\n일란성 쌍둥이와 같이 나와 많이 닮은 사람이 휴대전화의 잠금을 해제할 수도 있습니다."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"주의사항:\n휴대전화를 바라보면 의도치 않게 잠금이 해제될 수 있습니다.\n\n다른 사람이 내 얼굴에 휴대전화를 가져다 대면 눈을 감고 있더라도 잠금이 해제될 수 있습니다.\n\n일란성 쌍둥이와 같이 나와 많이 닮은 사람이 휴대전화의 잠금을 해제할 수도 있습니다."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"얼굴 데이터를 삭제하시겠습니까?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"얼굴인식 잠금해제에 사용되는 얼굴 데이터가 영구적으로 안전하게 삭제됩니다. 삭제한 후 휴대전화를 잠금 해제하거나 앱에 로그인하거나 결제를 확인하려면 PIN, 패턴 또는 비밀번호가 필요합니다."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"얼굴인식 잠금해제로 휴대전화 잠금 해제"</string>
@@ -2455,6 +2456,10 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"태블릿을 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"기기를 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"배터리가 평소보다 빨리 소진될 수 있습니다."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
+    <skip />
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"휴대전화를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"태블릿을 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"기기를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
@@ -3780,8 +3785,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"예약된 시간(‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\')에 수신 전화가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자의 연락을 허용할 수 있습니다."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"별표 표시한 연락처"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{없음}=1{{contact_1}}=2{{contact_1} 및 {contact_2}}=3{{contact_1}, {contact_2} 및 {contact_3}}other{{contact_1}, {contact_2} 외 #명}}"</string>
-    <!-- no translation found for zen_mode_starred_contacts_empty_name (2906404745550293688) -->
-    <skip />
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(이름 없음)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"메시지"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"메시지"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"메시지"</string>
@@ -4276,8 +4280,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"모바일 데이터 사용량"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"앱 데이터 사용량"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wi-Fi 데이터 사용량"</string>
-    <!-- no translation found for non_carrier_data_usage (6494603202578414755) -->
-    <skip />
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"비이동통신사 네트워크 데이터 사용량"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"이더넷 데이터 사용량"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"이더넷"</string>
@@ -4296,8 +4299,7 @@
       <item quantity="one">제한 1개</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"기기에 표시되는 데이터 사용량은 이동통신사에서 산출한 데이터 사용량과 다를 수 있습니다."</string>
-    <!-- no translation found for non_carrier_data_usage_warning (7361998122602474430) -->
-    <skip />
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"이동통신사 네트워크를 통해 사용한 데이터는 제외됩니다."</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> 사용함"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"데이터 경고 설정"</string>
     <string name="data_warning" msgid="2925054658166062884">"데이터 경고"</string>
@@ -4507,12 +4509,21 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"탭하여 기기 확인"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"시간, 알림, 기타 정보를 확인하려면 화면을 탭하세요."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"응급 SOS"</string>
+    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
+    <skip />
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"관리자: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for emergency_gesture_screen_summary (458991229689082120) -->
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"전원 버튼을 빠르게 5회 이상 누르면 아래 조치가 시작됩니다."</string>
+    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
     <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_title (8796259368039897084) -->
+    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
     <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (4428581020335541585) -->
+    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
     <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"지문을 스와이프하여 알림 보기"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"지문 스와이프"</string>
@@ -5029,14 +5040,16 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"항공, 항공 안전"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"통화 및 SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi 통화"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Wi‑Fi와 같은 비이동통신사 네트워크를 통해 전화를 주고받습니다."</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Wi-Fi 통화를 사용하면 Wi‑Fi 네트워크와 같은 비이동통신사 네트워크를 통해 전화를 주고받을 수 있습니다.\n\nCross SIM 통화를 사용하면 SIM의 모바일 데이터를 활용하여 다른 SIM과 전화를 주고받을 수 있습니다."</string>
+    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
+    <skip />
+    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
+    <skip />
     <string name="calls_preference_title" msgid="7536882032182563800">"통화"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
-    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"환경설정"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"공용 네트워크에 연결"</string>
+    <!-- no translation found for keywords_internet (7674082764898690310) -->
     <skip />
-    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
-    <skip />
-    <!-- no translation found for aware_summary_when_bedtime_on (2063856008597376344) -->
-    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"취침 모드가 켜져 있으므로 사용할 수 없습니다."</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"알림 중요도가 재설정되었습니다."</string>
 </resources>
