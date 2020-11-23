@@ -385,8 +385,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Solicita confirmación al usar el desbloqueo facial en aplicaciones"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Eliminar datos faciales"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Configurar desbloqueo facial"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Con el desbloqueo facial, puedes desbloquear tu dispositivo, iniciar sesión en aplicaciones y confirmar pagos.\n\nTen en cuenta lo siguiente:\nEs posible que el teléfono se desbloquee si lo miras aunque no sea tu intención.\n\nOtra persona puede desbloquear el teléfono si lo pone frente a tu cara.\n\nEs posible que una persona que se parezca mucho a ti, como un gemelo, pueda desbloquear el teléfono."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Utiliza el desbloqueo facial para desbloquear tu dispositivo, iniciar sesión en aplicaciones y confirmar pagos.\n\nTen en cuenta lo siguiente:\nEs posible que el teléfono se desbloquee si lo miras, aunque no sea tu intención.\n\nOtra persona puede desbloquear el teléfono si lo pone frente a tu cara, incluso si tienes los ojos cerrados.\n\nEs posible que una persona que se parezca mucho a ti (como un hermano o una hermana) pueda desbloquear el teléfono."</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Utiliza el desbloqueo facial para desbloquear el dispositivo, iniciar sesión en aplicaciones y confirmar pagos."</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Ten en cuenta lo siguiente:\nEs posible que el teléfono se desbloquee si lo miras, aunque no sea tu intención.\n\nOtra persona puede desbloquear el teléfono si lo pone frente a tu cara.\n\nOtra persona que se parezca mucho a ti, como un hermano gemelo, puede desbloquear el teléfono."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Ten en cuenta lo siguiente:\nEs posible que el teléfono se desbloquee si lo miras, aunque no sea tu intención.\n\nOtra persona puede desbloquear el teléfono si lo pone frente a tu cara, incluso si tienes los ojos cerrados.\n\nOtra persona que se parezca mucho a ti, como un hermano gemelo, puede desbloquear el teléfono."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"¿Eliminar los datos faciales?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Los datos faciales que se utilizan para el reconocimiento facial se eliminarán definitivamente y de forma segura. Una vez que se hayan eliminado, tendrás que usar tu PIN, patrón o contraseña para desbloquear el teléfono, iniciar sesión en aplicaciones y confirmar pagos."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Úsalo para desbloquear el teléfono"</string>
@@ -2455,6 +2456,10 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"El tablet se ha usado más de lo normal"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"El dispositivo se ha usado más de lo normal"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Quizás se agote la batería antes de lo normal"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
+    <skip />
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Tu teléfono se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tu tablet se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Tu dispositivo se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
@@ -4324,8 +4329,8 @@
     <string name="billing_cycle_less_than_one_day_left" msgid="1210202399053992163">"Queda menos de 1 día"</string>
     <string name="carrier_and_update_text" msgid="5363656651921656280">"Actualizado por <xliff:g id="ID_1">^1</xliff:g> hace <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="no_carrier_update_text" msgid="5432798085593055966">"Actualizado hace <xliff:g id="ID_1">^2</xliff:g>"</string>
-    <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Actualizado por <xliff:g id="ID_1">^1</xliff:g> ahora mismo"</string>
-    <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Actualizado ahora"</string>
+    <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Actualizado por <xliff:g id="ID_1">^1</xliff:g> justo ahora"</string>
+    <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Actualizado justo ahora"</string>
     <string name="launch_mdp_app_text" msgid="8791816789749304897">"Ver el plan"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Ver detalles"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Ahorro de datos"</string>
@@ -4504,10 +4509,22 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Toca para comprobar el dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para ver la hora, las notificaciones y otra información, toca la pantalla."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS de emergencia"</string>
+    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
+    <skip />
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Gestionado por <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Inicia las acciones que se indican más abajo pulsando rápidamente el botón de encendido 5 o más veces."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Alarma de cuenta atrás"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Emite un fuerte sonido antes de llamar"</string>
+    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Deslizar por el sensor de huellas para ver notificaciones"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Deslizar por sensor de huella digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales de la parte trasera del teléfono."</string>
@@ -5023,13 +5040,16 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"modo avión, seguro para modo avión"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Llamadas y SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Llamada por Wi-Fi"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Llamar o recibir llamadas de redes que no pertenecen a ningún operador, como las redes Wi-Fi"</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Llamada por Wi-Fi le permite llamar y recibir llamadas por redes que no pertenecen a ningún operador, como algunas redes Wi‑Fi.\n\nLas llamadas entre SIM distintas le permiten aprovechar los datos móviles de una tarjeta SIM para llamar y recibir llamadas de otra SIM."</string>
+    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
+    <skip />
+    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
+    <skip />
     <string name="calls_preference_title" msgid="7536882032182563800">"Llamadas"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
-    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
-    <skip />
-    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferencias"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectarse a redes públicas"</string>
+    <!-- no translation found for keywords_internet (7674082764898690310) -->
     <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"No disponible porque el modo Descanso está activado"</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"Borrado de la importancia de las notificaciones completado."</string>
 </resources>

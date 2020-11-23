@@ -385,8 +385,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Tətbiqlərdə üz kilidi istifadə etdikdə həmişə təsdiq tələb edin"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Üz datasını silin"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Üz kilidi ayarlayın"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün üz ilə kiliddən çıxarmadan istifadə edin.\n\nUnutmayın:\nTelefona baxmaqla istəmədiyiniz halda belə onu kiliddən çıxara bilərsiniz.\n\nTelefon üzünüzə tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, əkiziniz kimi sizə çox bənzəyən şəxs tərəfindən kiliddən çıxarıla bilər."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün üz kilidindən istifadə edin.\n\nUnutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nHətta gözləriniz bağlı halda telefon üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, həmçinin Sizə oxşayan övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Cihazınızı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün üz ilə kiliddən çıxarma funksiyasını istifadə edin."</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Unutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nTelefon üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, həmçinin sizə oxşayan övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Unutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nHətta gözləriniz bağlı halda telefon üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, həmçinin sizə oxşayan övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Üz datası silinsin?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Üz ilə kiliddən çıxarma üçün istifadə edilən üz datası həmişəlik və təhlükəsiz silinəcək. Silindikdən sonra telefonu kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün PIN, model və ya parol tələb ediləcək."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Telefonu kiliddən çıxarmaq üçün üz kilidindən istifadə edin"</string>
@@ -2455,6 +2456,10 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Planşet hədindən çox istifadə etdi"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Cihaz həddindən çox istifadə etdi"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batareya həmişə olduğundan daha tez bitə bilər"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
+    <skip />
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Planşet həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Cihaz həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
@@ -3780,8 +3785,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"\"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" üçün daxil olan zənglər blok edilir. Dostlar, ailə və ya digər kontakların əlaqə saxlaması üçün ayarları tənzimləyə bilərsiniz."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Ulduzlanmış kontaktlar"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Heç biri}=1{{contact_1}}=2{{contact_1} və {contact_2}}=3{{contact_1}, {contact_2} və {contact_3}}other{{contact_1}, {contact_2} və daha # kontakt}}"</string>
-    <!-- no translation found for zen_mode_starred_contacts_empty_name (2906404745550293688) -->
-    <skip />
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Ad yoxdur)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mesajlar"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mesajlar"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mesajlar"</string>
@@ -4276,8 +4280,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Mobil data istifadəsi"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Tətbiq data istifadəsi"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wi-Fi data istifadəsi"</string>
-    <!-- no translation found for non_carrier_data_usage (6494603202578414755) -->
-    <skip />
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Operatordan kənar data istifadəsi"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet data istifadəsi"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4296,8 +4299,7 @@
       <item quantity="one">1 məhdudiyyət</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Operator data hesablanması cihazınızın hesablamasından fərqli ola bilər"</string>
-    <!-- no translation found for non_carrier_data_usage_warning (7361998122602474430) -->
-    <skip />
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Operator şəbəkələri tərəfindən istifadə edilən data daxil deyil"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> istifadə edildi"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Data xəbərdarlığı ayarlayın"</string>
     <string name="data_warning" msgid="2925054658166062884">"Data xəbərdarlığı"</string>
@@ -4507,12 +4509,21 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Cihazı yoxlamaq üçün klikləyin"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Vaxt, bildiriş və digər məlumatı yoxlamaq üçün ekrana klikləyin."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Fövqəladə halda SOS"</string>
+    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
+    <skip />
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> tərəfindən idarə edilir"</string>
-    <!-- no translation found for emergency_gesture_screen_summary (458991229689082120) -->
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Yandırıb-söndürmə düyməsini 5 dəfə və ya daha çox cəld basaraq aşağıdakı əməliyyatları başladın"</string>
+    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
     <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_title (8796259368039897084) -->
+    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
     <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (4428581020335541585) -->
+    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
     <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Bildirişlər üçün barmaq izinizi sürüşdürün"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Barmaq izini sürüşdürün"</string>
@@ -5029,14 +5040,16 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"təyyarə, güvənli təyyarə şəbəkəsi"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Zənglər və SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi Zəngi"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Wi‑Fi kimi operator olmayan şəbəkələr üzərindən zəng edin və qəbul edin"</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Wi-Fi zəngi bəzi Wi‑Fi şəbəkələri kimi operator olmayan şəbəkələr üzərindən zəng etmək və qəbul etməyinizə imkan verir.\n\nSIM kartlararası zəng başqa SIM karta zəng etmək və zəng qəbul etmək üçün SIM mobil datasını istifadə etməyinizə imkan verir."</string>
+    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
+    <skip />
+    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
+    <skip />
     <string name="calls_preference_title" msgid="7536882032182563800">"Zənglər"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
-    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Tərcihlər"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"İctimai şəbəkələrə qoşulun"</string>
+    <!-- no translation found for keywords_internet (7674082764898690310) -->
     <skip />
-    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
-    <skip />
-    <!-- no translation found for aware_summary_when_bedtime_on (2063856008597376344) -->
-    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Yuxu vaxtı rejimi aktiv olduğuna görə əlçatan deyil"</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"Bildiriş əhəmiyyətinin sıfırlanması tamamlandı."</string>
 </resources>

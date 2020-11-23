@@ -391,8 +391,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Zawsze wymagaj potwierdzenia, gdy używasz rozpoznawania twarzy w aplikacjach"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Usuń dane twarzy"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Skonfiguruj rozpoznawanie twarzy"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Rozpoznawanie twarzy umożliwia odblokowywanie urządzenia, logowanie się w aplikacjach i zatwierdzanie płatności.\n\nPamiętaj:\nPatrząc na telefon, możesz go niechcący odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Rozpoznawanie twarzy umożliwia odblokowywanie urządzenia, logowanie się do aplikacji i zatwierdzanie płatności.\n\nPamiętaj:\nPatrząc na telefon, możesz go mimowolnie odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy – nawet wtedy, gdy masz zamknięte oczy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Rozpoznawanie twarzy pozwala odblokowywać urządzenie, logować się w aplikacjach i potwierdzać płatności."</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Pamiętaj:\nPatrząc na telefon, możesz go przypadkowo odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Pamiętaj:\nPatrząc na telefon, możesz go przypadkowo odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy, nawet jeśli będziesz mieć zamknięte oczy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Usunąć dane twarzy?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Dane twarzy używane przez rozpoznawanie twarzy zostaną trwale i bezpiecznie usunięte. Po usunięciu danych do odblokowywania telefonu, logowania się w aplikacjach i potwierdzania płatności będziesz potrzebować kodu PIN, wzoru lub hasła."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Rozpoznawanie twarzy odblokuje telefon"</string>
@@ -477,7 +478,7 @@
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Usuń odcisk palca „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Czy chcesz usunąć ten odcisk palca?"</string>
     <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Odcisków palców nie będzie można używać do odblokowywania telefonu, autoryzowania zakupów ani logowania się w aplikacjach"</string>
-    <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"Nie będziesz mieć możliwości używania odcisków palców, by odblokować profil służbowy, autoryzować zakupy czy logować się w aplikacjach używanych do pracy"</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"Nie będziesz mieć możliwości używania odcisków palców, by odblokować profil służbowy, autoryzować zakupy czy logować się w aplikacjach służbowych"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Tak, usuń"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Szyfrowanie"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Zaszyfruj tablet"</string>
@@ -1168,7 +1169,7 @@
     <string name="incoming_call_volume_title" msgid="8445408274513654261">"Dzwonek"</string>
     <string name="notification_volume_title" msgid="328053763590888609">"Powiadomienie"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1798481722572489141">"Użyj głośności połączeń przychodzących dla powiadomień"</string>
-    <string name="home_work_profile_not_supported" msgid="2605589489324241338">"Nie obsługuje profili do pracy"</string>
+    <string name="home_work_profile_not_supported" msgid="2605589489324241338">"Nie obsługuje profili służbowych"</string>
     <string name="notification_sound_dialog_title" msgid="7431891669251806266">"Domyślny dźwięk powiadomienia"</string>
     <string name="media_volume_title" msgid="5209147840160985178">"Multimedia"</string>
     <string name="media_volume_summary" msgid="4671324482655564873">"Ustaw głośność muzyki oraz filmów wideo"</string>
@@ -1203,9 +1204,9 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="7833926726878567889">"Nie odtwarzaj dźwięku podczas umieszczania tabletu w doku i wyjmowania go"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="5560601997128422001">"Nie odtwarzaj dźwięku podczas umieszczania telefonu w podstawce i wyjmowania go"</string>
     <string name="account_settings" msgid="255404935489127404">"Konta"</string>
-    <string name="accessibility_category_work" msgid="5133894487353964944">"Konta profili do pracy – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_category_work" msgid="5133894487353964944">"Konta profili służbowych – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Konta profili osobistych"</string>
-    <string name="accessibility_work_account_title" msgid="7622485151217943839">"Konto do pracy – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_work_account_title" msgid="7622485151217943839">"Konto służbowe – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Konto osobiste – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Wyszukiwanie"</string>
     <string name="display_settings" msgid="7197750639709493852">"Wyświetlacz"</string>
@@ -1757,7 +1758,7 @@
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Zobacz wszystkie"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Usługi lokalizacyjne"</string>
     <string name="location_title" msgid="5819154746934945021">"Moja lokalizacja"</string>
-    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokalizacja dla profilu do pracy"</string>
+    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokalizacja dla profilu służbowego"</string>
     <string name="location_app_level_permissions" msgid="45436724900423656">"Dostęp aplikacji"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Lokalizacja jest wyłączona"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
@@ -1835,9 +1836,9 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Aby korzystać z odcisku palca, ustaw kod PIN"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Ze względów bezpieczeństwa ustaw wzór"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Podaj ponownie hasło"</string>
-    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Podaj hasło profilu do pracy"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Podaj hasło profilu służbowego"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Potwierdź wzór"</string>
-    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Podaj wzór profilu do pracy"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Podaj wzór profilu służbowego"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Podaj ponownie kod PIN"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Podaj kod PIN profilu służbowego"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Hasła nie są takie same"</string>
@@ -1865,9 +1866,9 @@
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Ze względów bezpieczeństwa podaj wzór używany na urządzeniu"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Ze względów bezpieczeństwa podaj kod PIN urządzenia"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Ze względów bezpieczeństwa podaj hasło do urządzenia"</string>
-    <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Ze względów bezpieczeństwa podaj wzór do profilu do pracy"</string>
+    <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Ze względów bezpieczeństwa podaj wzór do profilu służbowego"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Ze względów bezpieczeństwa podaj kod PIN do profilu służbowego"</string>
-    <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Ze względów bezpieczeństwa podaj hasło do profilu do pracy"</string>
+    <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Ze względów bezpieczeństwa podaj hasło do profilu służbowego"</string>
     <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wprowadź poprzedni wzór."</string>
     <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wprowadź poprzedni kod PIN."</string>
     <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wpisz poprzednie hasło."</string>
@@ -1909,8 +1910,8 @@
     <string name="lock_settings_profile_unification_title" msgid="5777961097706546513">"Używaj jednej blokady"</string>
     <string name="lock_settings_profile_unification_summary" msgid="1317553536289481654">"Używaj jednej blokady dla profilu służbowego i ekranu urządzenia"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="5163178097464820825">"Używać jednej blokady?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="1222905637428672355">"Urządzenie użyje ekranu blokady profilu do pracy. Zasady służbowe dotyczą obu blokad."</string>
-    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"Twoja blokada profilu do pracy nie spełnia wymagań bezpieczeństwa organizacji. Możesz ustawić nową blokadę zarówno dla ekranu urządzenia, jak i dla profilu do pracy, ale będą obowiązywać wszystkie zasady dotyczące blokady profilu do pracy."</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1222905637428672355">"Urządzenie użyje ekranu blokady profilu służbowego. Zasady służbowe dotyczą obu blokad."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"Twoja blokada profilu służbowego nie spełnia wymagań bezpieczeństwa organizacji. Możesz ustawić nową blokadę zarówno dla ekranu urządzenia, jak i dla profilu służbowego, ale będą obowiązywać wszystkie zasady dotyczące blokady profilu służbowego."</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Używaj jednej blokady"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Używaj jednej blokady"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Taka sama jak blokada ekranu urządzenia"</string>
@@ -2113,7 +2114,7 @@
     <string name="show_ime_summary" msgid="7293345791727205975">"Pozostaw na ekranie, gdy aktywna jest klawiatura fizyczna"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Skróty klawiszowe"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Wyświetl dostępne skróty"</string>
-    <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klawiatura i narzędzia w profilu do pracy"</string>
+    <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klawiatura i narzędzia w profilu służbowym"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Klawiatura ekranowa do pracy"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Domyślny"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Szybkość wskaźnika"</string>
@@ -2517,6 +2518,10 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet używany intensywniej niż zwykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Urządzenie używane intensywniej niż zwykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Bateria może wyczerpać się szybciej niż zwykle"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
+    <skip />
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon był używany intensywniej niż zwykle. Bateria może rozładować się szybciej.\n\nAplikacje najbardziej wyczerpujące baterię:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet był używany intensywniej niż zwykle. Bateria może rozładować się szybciej.\n\nAplikacje najbardziej wyczerpujące baterię:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Urządzenie było używane intensywniej niż zwykle. Bateria może rozładować się szybciej.\n\nAplikacje najbardziej wyczerpujące baterię:"</string>
@@ -3104,10 +3109,10 @@
       <item quantity="one">Domena <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> zainstalowała na Twoim urządzeniu certyfikat, który może zezwolić jej na monitorowanie aktywności urządzenia w sieci, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tym certyfikacie, skontaktuj się z administratorem.</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="3989916958347169622">
-      <item quantity="few">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim profilu do pracy certyfikaty, które mogą zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się z administratorem.</item>
-      <item quantity="many">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim profilu do pracy certyfikaty, które mogą zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się z administratorem.</item>
-      <item quantity="other">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim profilu do pracy certyfikaty, które mogą zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się z administratorem.</item>
-      <item quantity="one">Domena <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> zainstalowała na Twoim profilu do pracy certyfikat, który może zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tym certyfikacie, skontaktuj się z administratorem.</item>
+      <item quantity="few">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim profilu służbowym certyfikaty, które mogą zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się z administratorem.</item>
+      <item quantity="many">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim profilu służbowym certyfikaty, które mogą zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się z administratorem.</item>
+      <item quantity="other">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim profilu służbowym certyfikaty, które mogą zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się z administratorem.</item>
+      <item quantity="one">Domena <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> zainstalowała na Twoim profilu służbowym certyfikat, który może zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tym certyfikacie, skontaktuj się z administratorem.</item>
     </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Podmiot zewnętrzny może monitorować Twoją aktywność w sieci (np. e-maile, aplikacje i bezpieczne strony).\n\nUmożliwiają to dane uwierzytelniające zainstalowane na Twoim urządzeniu."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
@@ -3312,7 +3317,7 @@
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Najpierw zainstaluj aplikację do obsługi płatności"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Aplikacje i powiadomienia"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Ostatnio używane aplikacje, domyślne aplikacje"</string>
-    <string name="notification_settings_work_profile" msgid="6076211850526353975">"Aplikacje w profilu do pracy nie mają dostępu do powiadomień."</string>
+    <string name="notification_settings_work_profile" msgid="6076211850526353975">"Aplikacje w profilu służbowym nie mają dostępu do powiadomień."</string>
     <string name="account_dashboard_title" msgid="2735150283267749852">"Konta"</string>
     <string name="account_dashboard_default_summary" msgid="2025250151574540063">"Nie dodano kont"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Aplikacje domyślne"</string>
@@ -3351,7 +3356,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"nie przeszkadzać, przerywać, zakłócenie, zakłócać"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"w pobliżu, lokalizacja, historia, raportowanie, GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"konto, dodaj konto, profil do pracy, dodawanie konta"</string>
+    <string name="keywords_accounts" msgid="3482052586502133909">"konto, dodaj konto, profil służbowy, dodawanie konta"</string>
     <string name="keywords_users" msgid="3497517660077620843">"ograniczenie, ogranicz, ograniczony"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"poprawianie tekstu, popraw, dźwięk, wibracje, automatycznie, język, gest, sugeruj, sugestia, motyw, obraźliwe, słowo, typ, emotikon, międzynarodowe"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"zresetuj, ustawienia, domyślne"</string>
@@ -3539,7 +3544,7 @@
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Powiadomienia nie będą wyświetlane ani sygnalizowane dźwiękiem. Dozwolone są połączenia od kontaktów oznaczonych gwiazdką i dzwoniących powtórnie."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Aktualne ustawienie)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Zmienić ustawienia trybu Nie przeszkadzać?"</string>
-    <string name="sound_work_settings" msgid="752627453846309092">"Dźwięki w profilu do pracy"</string>
+    <string name="sound_work_settings" msgid="752627453846309092">"Dźwięki w profilu służbowym"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Użyj dźwięków z profilu osobistego"</string>
     <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"Dźwięki są takie same w profilu osobistym i służbowym"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Dzwonek w profilu służbowym"</string>
@@ -3548,7 +3553,7 @@
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Taki sam jak w profilu osobistym"</string>
     <string name="work_sync_dialog_title" msgid="2359563902332046231">"Zastąpić dźwięki?"</string>
     <string name="work_sync_dialog_yes" msgid="9161415252411868574">"Zastąp"</string>
-    <string name="work_sync_dialog_message" msgid="1328692374812258546">"W profilu do pracy będą używane dźwięki z profilu osobistego"</string>
+    <string name="work_sync_dialog_message" msgid="1328692374812258546">"W profilu służbowym będą używane dźwięki z profilu osobistego"</string>
     <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"Dodać niestandardowy dźwięk?"</string>
     <string name="ringtones_install_custom_sound_content" msgid="5844996763705884979">"Ten plik zostanie skopiowany do folderu <xliff:g id="FOLDER_NAME">%s</xliff:g>"</string>
     <string name="ringtones_category_preference_title" msgid="26680768777533727">"Dzwonki"</string>
@@ -3622,15 +3627,15 @@
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Pomijanie ekranu blokady"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Po rozpoznaniu twarzy przejdź od razu do ostatnio używanego ekranu"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekran blokady, Pomiń, Pomijaj"</string>
-    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Gdy profil do pracy jest zablokowany"</string>
+    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Gdy profil służbowy jest zablokowany"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Powiadomienia na ekranie blokady"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Pokaż rozmowy, domyślne i ciche"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ukryj ciche rozmowy i powiadomienia"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Nie pokazuj żadnych powiadomień"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Powiadomienia poufne"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Pokazuj treści poufne po zablokowaniu"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Poufne powiadomienia z profilu do pracy"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Pokazuj poufne treści z profilu do pracy po zablokowaniu"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Poufne powiadomienia z profilu służbowego"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Pokazuj poufne treści z profilu służbowego po zablokowaniu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Pokazuj całą treść powiadomień"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Pokazuj poufne treści tylko po odblokowaniu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Nie pokazuj żadnych powiadomień"</string>
@@ -3714,7 +3719,7 @@
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nigdy"</string>
     <string name="manage_notification_access_title" msgid="4714320299084782521">"Dostęp do powiadomień"</string>
-    <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Dostęp do powiadomień profilu do pracy jest zablokowany"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Dostęp do powiadomień profilu służbowego jest zablokowany"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Aplikacje nie mogą odczytywać powiadomień"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
       <item quantity="few">%d aplikacje mogą odczytywać powiadomienia</item>
@@ -3750,7 +3755,7 @@
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Połączono"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Nie połączono"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Brak połączonych aplikacji"</string>
-    <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"aplikacja połączona między profilami aplikacje do pracy i osobiste"</string>
+    <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"aplikacja połączona między profilami aplikacje służbowe i osobiste"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Połączone aplikacje służbowe i osobiste"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Połączono"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Połącz te aplikacje"</string>
@@ -3770,7 +3775,7 @@
       <item quantity="other">Połączono <xliff:g id="COUNT_1">%d</xliff:g> aplikacji</item>
       <item quantity="one">Połączono <xliff:g id="COUNT_0">%d</xliff:g> aplikację</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Aby połączyć te aplikacje, zainstaluj aplikację <xliff:g id="NAME">%1$s</xliff:g> w profilu do pracy"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Aby połączyć te aplikacje, zainstaluj aplikację <xliff:g id="NAME">%1$s</xliff:g> w profilu służbowym"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Aby połączyć te aplikacje, zainstaluj aplikację <xliff:g id="NAME">%1$s</xliff:g> w profilu osobistym"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Kliknij, by pobrać aplikację"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Dostęp do „Nie przeszkadzać”"</string>
@@ -3884,8 +3889,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"W harmonogramie „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>” połączenia przychodzące są zablokowane. Możesz dostosować ustawienia, tak by znajomi, rodzina i inne osoby z kontaktów mogły do Ciebie pisać."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontakty oznaczone gwiazdką"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Brak}=1{{contact_1}}=2{{contact_1} i {contact_2}}=3{{contact_1}, {contact_2} i {contact_3}}few{{contact_1}, {contact_2}i jeszcze # inne}many{{contact_1}, {contact_2}i jeszcze # innych}other{{contact_1}, {contact_2}i jeszcze # innego}}"</string>
-    <!-- no translation found for zen_mode_starred_contacts_empty_name (2906404745550293688) -->
-    <skip />
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Bez nazwy)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Wiadomości"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"wiadomości"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Wiadomości"</string>
@@ -3998,7 +4002,7 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Zablokuj urządzenie przy odpinaniu"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potwierdź chęć usunięcia karty SIM"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Zanim wykasujesz dane z pobranej karty SIM, potwierdź swoją tożsamość"</string>
-    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Tym profilem do pracy zarządza:"</string>
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Tym profilem służbowym zarządza:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Zarządzane przez: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Funkcja eksperymentalna)"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Bezpieczne uruchamianie"</string>
@@ -4261,7 +4265,7 @@
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Zalecane, by wydłużyć czas pracy baterii"</string>
     <string name="ignore_optimizations_title" msgid="3464172726254542889">"Zezwolić aplikacji <xliff:g id="APP">%s</xliff:g> na ignorowanie optymalizacji baterii?"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"Brak"</string>
-    <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Wyłączenie tej aplikacji dostępu do użytkowania nie uniemożliwi administratorowi śledzenia danych użytkowania aplikacji, które zostały dodane do Twojego profilu do pracy"</string>
+    <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Wyłączenie tej aplikacji dostępu do użytkowania nie uniemożliwi administratorowi śledzenia danych użytkowania aplikacji, które zostały dodane do Twojego profilu służbowego"</string>
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"Wykorzystałeś <xliff:g id="COUNT_0">%1$d</xliff:g> z <xliff:g id="COUNT_1">%2$d</xliff:g> znaków"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"Wyświetlanie nad innymi"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Wyświetlanie nad innymi aplikacjami"</string>
@@ -4348,7 +4352,7 @@
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Nie można otworzyć tej aplikacji"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Jeśli masz pytania, skontaktuj się z administratorem IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Więcej szczegółów"</string>
-    <string name="admin_profile_owner_message" msgid="8860709969532649195">"Administrator może monitorować aplikacje i dane powiązane z Twoim profilem do pracy (w tym ustawienia, uprawnienia, firmowe uprawnienia dostępu, aktywność w sieci i informacje o lokalizacji urządzenia) oraz nimi zarządzać."</string>
+    <string name="admin_profile_owner_message" msgid="8860709969532649195">"Administrator może monitorować aplikacje i dane powiązane z Twoim profilem służbowym (w tym ustawienia, uprawnienia, firmowe uprawnienia dostępu, aktywność w sieci i informacje o lokalizacji urządzenia) oraz nimi zarządzać."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Administrator może monitorować aplikacje i dane powiązane z tym użytkownikiem (w tym ustawienia, uprawnienia, firmowe uprawnienia dostępu, aktywność w sieci i informacje o lokalizacji urządzenia) oraz nimi zarządzać."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Administrator może monitorować aplikacje i dane powiązane z tym urządzeniem (w tym ustawienia, uprawnienia, firmowe uprawnienia dostępu, aktywność w sieci i informacje o lokalizacji urządzenia) oraz nimi zarządzać."</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Wyłącz"</string>
@@ -4408,8 +4412,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Zużycie danych"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Użycie danych przez aplikację"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Użycie danych (Wi-Fi)"</string>
-    <!-- no translation found for non_carrier_data_usage (6494603202578414755) -->
-    <skip />
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Użycie danych poza siecią operatora"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Użycie danych w sieci Ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4430,8 +4433,7 @@
       <item quantity="one">1 ograniczenie</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Operator komórkowy może obliczać ilość przesłanych danych inaczej niż urządzenie"</string>
-    <!-- no translation found for non_carrier_data_usage_warning (7361998122602474430) -->
-    <skip />
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Użycie danych w sieciach operatorów nie jest uwzględniane"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Wykorzystano <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Ustaw ostrzeżenie dotyczące danych"</string>
     <string name="data_warning" msgid="2925054658166062884">"Ostrzeżenie dotyczące danych"</string>
@@ -4569,7 +4571,7 @@
     <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Wyszukiwanie kontaktów"</string>
     <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Zezwalaj na wyszukiwanie kontaktów do identyfikacji rozmówców i kontaktów przez Twoją organizację"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Wszystkie profile w kalendarzu"</string>
-    <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Pokazuj zdarzenia w profilu do pracy w kalendarzu osobistym"</string>
+    <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Pokazuj zdarzenia w profilu służbowym w kalendarzu osobistym"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
       <item quantity="few"><xliff:g id="NUMBER">%s</xliff:g> godziny</item>
       <item quantity="many"><xliff:g id="NUMBER">%s</xliff:g> godzin</item>
@@ -4653,12 +4655,21 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Kliknij, by sprawdzić urządzenie"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Aby sprawdzić godzinę, powiadomienia i inne informacje, kliknij ekran."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Sygnał SOS"</string>
+    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
+    <skip />
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Zarządzane przez: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for emergency_gesture_screen_summary (458991229689082120) -->
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Aby uruchomić te działania, naciśnij szybko przycisk zasilania co najmniej 5 razy"</string>
+    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
     <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_title (8796259368039897084) -->
+    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
     <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (4428581020335541585) -->
+    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
     <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Sprawdzanie powiadomień odciskiem palca"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Przesuwanie po czytniku"</string>
@@ -4684,7 +4695,7 @@
     <string name="configure_section_header" msgid="3126887329521705210">"Konfiguracja"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Automatycznie synchronizuj dane aplikacji"</string>
     <string name="auto_sync_personal_account_title" msgid="3544275021920818595">"Automatycznie synchronizuj dane osobiste"</string>
-    <string name="auto_sync_work_account_title" msgid="6060310415978781885">"Automatycznie synchronizuj dane do pracy"</string>
+    <string name="auto_sync_work_account_title" msgid="6060310415978781885">"Automatycznie synchronizuj dane służbowe"</string>
     <string name="auto_sync_account_summary" msgid="7580352130028957346">"Pozwala aplikacjom automatycznie odświeżać dane"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"Synchronizacja konta"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Włączona jest synchronizacja <xliff:g id="ID_1">%1$d</xliff:g> z <xliff:g id="ID_2">%2$d</xliff:g> elementów"</string>
@@ -4726,11 +4737,11 @@
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"Ustaw: <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"Włączono stały VPN"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="8395903360175064841">"Wyłączono stały VPN w Twoim profilu osobistym"</string>
-    <string name="enterprise_privacy_always_on_vpn_work" msgid="2496961514592522377">"Włączono stały VPN w Twoim profilu do pracy"</string>
+    <string name="enterprise_privacy_always_on_vpn_work" msgid="2496961514592522377">"Włączono stały VPN w Twoim profilu służbowym"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="4350347418068037051">"Ustawiono globalny serwer proxy HTTP"</string>
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Zaufane certyfikaty"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Zaufane certyfikaty w Twoim profilu osobistym"</string>
-    <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Zaufane certyfikaty w Twoim profilu do pracy"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Zaufane certyfikaty w Twoim profilu służbowym"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
       <item quantity="few">Co najmniej <xliff:g id="COUNT_1">%d</xliff:g> certyfikaty urzędu certyfikacji</item>
       <item quantity="many">Co najmniej <xliff:g id="COUNT_1">%d</xliff:g> certyfikatów urzędu certyfikacji</item>
@@ -4740,7 +4751,7 @@
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"Administrator może zablokować urządzenie i zresetować hasło"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"Administrator może usunąć wszystkie dane z urządzenia"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"Nieudane próby podania hasła przed usunięciem wszystkich danych z urządzenia"</string>
-    <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"Nieudane próby podania hasła przed usunięciem danych z profilu do pracy"</string>
+    <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"Nieudane próby podania hasła przed usunięciem danych z profilu służbowego"</string>
     <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> próby</item>
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> prób</item>
@@ -5195,14 +5206,16 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"samolot, bezpieczny w trybie samolotowym"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Połączenia i SMS-y"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Połączenia przez Wi‑Fi"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Nawiązywanie i odbieranie połączeń w sieciach innych niż należące do operatorów, np. w sieciach Wi‑Fi"</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Połączenia przez Wi-Fi umożliwiają nawiązywanie i odbieranie połączeń w sieciach innych niż należące do operatorów, np. w niektórych sieciach Wi‑Fi.\n\nPołączenia między kartami SIM pozwalają wykorzystać mobilną transmisję danych z jednej karty SIM do nawiązywania i odbierania połączeń z drugiej."</string>
+    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
+    <skip />
+    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
+    <skip />
     <string name="calls_preference_title" msgid="7536882032182563800">"Połączenia"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS-y"</string>
-    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Ustawienia"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Łącz się z sieciami publicznymi"</string>
+    <!-- no translation found for keywords_internet (7674082764898690310) -->
     <skip />
-    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
-    <skip />
-    <!-- no translation found for aware_summary_when_bedtime_on (2063856008597376344) -->
-    <skip />
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Niedostępne, ponieważ włączony jest tryb snu"</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"Ukończono resetowanie ważności powiadomień."</string>
 </resources>
