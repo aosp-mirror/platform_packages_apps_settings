@@ -246,6 +246,22 @@ public class BatteryInfoTest {
         assertThat(info.chargeLabel).isEqualTo("100%");
     }
 
+    @Test
+    public void testGetBatteryInfo_chargingWithOverheated_updateChargeLabel() {
+        doReturn(TEST_CHARGE_TIME_REMAINING)
+            .when(mBatteryStats)
+            .computeChargeTimeRemaining(anyLong());
+        mChargingBatteryBroadcast
+                .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_OVERHEAT);
+
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
+                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(info.isOverheated).isTrue();
+        assertThat(info.chargeLabel).isEqualTo("50% - Battery limited temporarily");
+    }
+
     // Make our battery stats return a sequence of battery events.
     private void mockBatteryStatsHistory() {
         // Mock out new data every time start...Locked is called.
