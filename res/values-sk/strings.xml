@@ -391,8 +391,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Pri používaní odomknutia tvárou v aplikáciách požadovať potvrdenie"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Odstrániť údaje o tvári"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Nastaviť odomknutie tvárou"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Odomknutím tvárou môžete odomykať zariadenie, prihlasovať sa do aplikácií a potvrdzovať platby.\n\nDôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše dvojča."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Odomknutím tvárou môžete odomykať zariadenie, prihlasovať sa do aplikácií a potvrdzovať platby.\n\nDôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár, a to dokonca aj vtedy, keď budete mať zatvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše dvojča."</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Odomykajte svoje zariadenie, prihlasujte sa do aplikácií a potvrdzujte platby pomocou odomknutia tvárou."</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Dôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše jednovaječné dvojča."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Dôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár, a to dokonca aj vtedy, keď budete mať zatvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše jednovaječné dvojča."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Chcete odstrániť údaje o tvári?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Údaje o tvári používané na odomknutie tvárou budú natrvalo a bezpečne odstránené. Po ich odstránení budete na odomykanie telefónu, prihlasovanie do aplikácií a potvrdzovanie platieb potrebovať svoj kód PIN, vzor alebo heslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Odomykajte telefón tvárou"</string>
@@ -2517,6 +2518,10 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet bol používaný viac ako obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Zariadenie bolo používané viac ako obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batéria sa môže vybiť skôr ako obvykle"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
+    <skip />
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefón sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Zariadenie sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
@@ -4650,10 +4655,22 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Klepnutím skontrolujete zariadenie"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Ak chcete zistiť čas, skontrolovať upozornenia a získať ďalšie informácie, klepnite na obrazovku."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Tiesňové SOS"</string>
+    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
+    <skip />
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Spravované aplikáciou <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Akcie nižšie spustíte tak, že aspoň päťkrát rýchlo stlačíte vypínač"</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"Upozornenie na odpočítavanie"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"Pred zavolaním prehrať hlasitý zvuk"</string>
+    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Upozornenia odtlačkom prsta"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Potiahnutie prstom"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Upozornenia zobrazíte potiahnutím nadol po senzore odtlačkov prstov na zadnej strane telefónu."</string>
@@ -5189,13 +5206,16 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"lietadlo, možné používať v lietadle"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Hovory a SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Volanie cez Wi‑Fi"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Volajte a prijímajte hovory cez siete bez operátorov, ako je Wi‑Fi"</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Volanie cez Wi-Fi vám umožňuje volať a prijímať hovory cez siete bez operátorov, ako sú niektoré siete Wi‑Fi.\n\nVolanie naprieč SIM kartami vám umožňuje pomocou mobilných dát jednej SIM karty volať a prijímať hovory z druhej SIM karty."</string>
+    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
+    <skip />
+    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
+    <skip />
     <string name="calls_preference_title" msgid="7536882032182563800">"Hovory"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
-    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
-    <skip />
-    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Predvoľby"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Pripájať k verejným sieťam"</string>
+    <!-- no translation found for keywords_internet (7674082764898690310) -->
     <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupné, pretože je zapnutý režim večierky"</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"Resetovanie dôležitosti upozornenia je dokončené."</string>
 </resources>

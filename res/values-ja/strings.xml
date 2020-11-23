@@ -385,8 +385,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"アプリで顔認証を使用する場合、常に確認手順を要求します"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"顔認証データを削除"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"顔認証を設定"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"顔認証を使用して、デバイスのロック解除、アプリへのログイン、お支払いの承認を行えます。\n\n注:\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\nスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"顔認証を使用して、デバイスのロック解除、アプリへのログイン、お支払いの承認ができます。\n\n注:\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"顔認証を使用して、デバイスのロック解除、アプリへのログイン、お支払いの承認を行えます。"</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"注:\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\nスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"注:\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"顔認証データを削除しますか？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"顔認証によって使用された顔認証データは安全かつ完全に削除されます。削除後に、スマートフォンのロック解除、アプリへのログイン、お支払いの承認を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"顔認証を使用して、スマートフォンのロックを解除します"</string>
@@ -2455,6 +2456,10 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"タブレットの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"デバイスの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池が通常より早くなくなる可能性があります"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
+    <skip />
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
+    <skip />
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"スマートフォンの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"タブレットの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"デバイスの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
@@ -4504,10 +4509,22 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"デバイスをタップしてチェックする"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"時刻、通知などの情報を確認するには、画面をタップします。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS 緊急通報"</string>
+    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
+    <skip />
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g>によって管理されています"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"電源ボタンを 5 回以上すばやく押すと、下記の緊急時対応が開始されます"</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="8796259368039897084">"カウントダウン アラーム"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="4428581020335541585">"発信する前に大きな音が鳴ります"</string>
+    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"指紋センサーをスワイプして通知を表示"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"指紋センサーのスワイプ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"スマートフォンの背面にある指紋認証センサーを下にスワイプして、通知を確認できます。"</string>
@@ -5023,13 +5040,16 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"機内、機内で利用できる"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"通話と SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi 通話"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"携帯通信会社以外のネットワーク（Wi-Fi など）を利用して通話の発信と着信を行う"</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Wi-Fi 通話では、携帯通信会社以外のネットワーク（一部の Wi-Fi ネットワークなど）を利用して通話の発信と着信を行えます。\n\nCross-SIM 通話では、SIM のモバイルデータを利用して別の SIM から通話の発信と着信を行えます。"</string>
+    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
+    <skip />
+    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
+    <skip />
     <string name="calls_preference_title" msgid="7536882032182563800">"通話"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
-    <!-- no translation found for network_and_internet_preferences_title (8038469368705591439) -->
-    <skip />
-    <!-- no translation found for network_and_internet_preferences_summary (613207494152304537) -->
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"設定"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"パブリック ネットワークに接続する"</string>
+    <!-- no translation found for keywords_internet (7674082764898690310) -->
     <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"通知の重要度をリセットしました。"</string>
 </resources>
