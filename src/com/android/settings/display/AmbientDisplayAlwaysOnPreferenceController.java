@@ -16,12 +16,17 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.display.AmbientDisplayConfiguration;
+import android.os.PowerManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreferenceController {
@@ -31,13 +36,9 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
 
     private static final int MY_USER = UserHandle.myUserId();
     private static final String PROP_AWARE_AVAILABLE = "ro.vendor.aware_available";
+    private static final String AOD_SUPPRESSED_TOKEN = "winddown";
 
     private AmbientDisplayConfiguration mConfig;
-    private OnPreferenceChangedCallback mCallback;
-
-    public interface OnPreferenceChangedCallback {
-        void onPreferenceChanged();
-    }
 
     public AmbientDisplayAlwaysOnPreferenceController(Context context, String key) {
         super(context, key);
@@ -48,6 +49,12 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         return isAvailable(getConfig())
                 && !SystemProperties.getBoolean(PROP_AWARE_AVAILABLE, false) ?
                 AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        refreshSummary(preference);
     }
 
     @Override
@@ -70,21 +77,19 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         int enabled = isChecked ? ON : OFF;
         Settings.Secure.putInt(
                 mContext.getContentResolver(), Settings.Secure.DOZE_ALWAYS_ON, enabled);
-        if (mCallback != null) {
-            mCallback.onPreferenceChanged();
-        }
         return true;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mContext.getText(
+                isAodSuppressedByBedtime(mContext) ? R.string.aware_summary_when_bedtime_on
+                        : R.string.doze_always_on_summary);
     }
 
     public AmbientDisplayAlwaysOnPreferenceController setConfig(
             AmbientDisplayConfiguration config) {
         mConfig = config;
-        return this;
-    }
-
-    public AmbientDisplayAlwaysOnPreferenceController setCallback(
-            OnPreferenceChangedCallback callback) {
-        mCallback = callback;
         return this;
     }
 
@@ -97,5 +102,26 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
             mConfig = new AmbientDisplayConfiguration(mContext);
         }
         return mConfig;
+    }
+
+    /**
+     * Returns whether AOD is suppressed by Bedtime mode, a feature of Digital Wellbeing.
+     *
+     * We know that Bedtime mode suppresses AOD using {@link AOD_SUPPRESSED_TOKEN}. If the Digital
+     * Wellbeing app is suppressing AOD with {@link AOD_SUPPRESSED_TOKEN}, then we can infer that
+     * AOD is being suppressed by Bedtime mode.
+     */
+    public static boolean isAodSuppressedByBedtime(Context context) {
+        int uid;
+        final PowerManager powerManager = context.getSystemService(PowerManager.class);
+        final PackageManager packageManager = context.getPackageManager();
+        final String packageName = context.getString(
+                com.android.internal.R.string.config_defaultWellbeingPackage);
+        try {
+            uid = packageManager.getApplicationInfo(packageName, /* flags= */ 0).uid;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+        return powerManager.isAmbientDisplaySuppressedForTokenByApp(AOD_SUPPRESSED_TOKEN, uid);
     }
 }
