@@ -2553,6 +2553,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"الجهاز اللوحي المستخدَم أكثر من المعتاد"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"الجهاز المستخدَم أكثر من المعتاد"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"قد تنفد البطارية قبل الوقت المعتاد."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"تأثير محدود على البطارية مؤقتًا"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"يحافظ هذا على سلامة البطارية. انقر لمعرفة مزيد من المعلومات."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"تم استخدام هاتفك أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"تم استخدام جهازك اللوحي أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"تم استخدام جهازك أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
@@ -2636,6 +2638,8 @@
       <item quantity="one">‏تم تقييد تطبيق واحد (%1$d)</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"حدثت مشكلة أثناء قراءة مقياس مستوى شحن البطارية."</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"حدثت مشكلة أثناء قراءة مقياس مستوى شحن البطارية. انقر "<annotation id="url">"لمعرفة مزيد من المعلومات"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"هل تريد إيقاف التطبيق؟"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"لا يستطيع هاتفك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي هاتفك نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"لا يستطيع جهازك اللوحي إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي جهازك اللوحي نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
@@ -3776,14 +3780,14 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"السماح للتطبيق بإصدار صوت و/أو اهتزاز و/أو عرض إشعارات منبثقة على الشاشة"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"الأولوية"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"تظهر في أعلى قسم المحادثات وتظهر كفقاعة عائمة وتعرض صورة الملف الشخصي على شاشة القفل"</string>
-    <string name="convo_not_supported_summary" msgid="4285471045268268048">"لا يدعم تطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> معظم ميزات المحادثات. لا يمكنك ضبط محادثة كأولوية ولن تظهر المحادثات كفقاعات عائمة."</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"لا يدعم تطبيق \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" معظم ميزات المحادثات. لا يمكنك ضبط محادثة كأولوية ولن تظهر المحادثات كفقاعات عائمة."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"في الظل المنسدل، يمكنك تصغير الإشعارات إلى سطر واحد."</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"بدون صوت أو اهتزاز"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"بدون صوت أو اهتزاز وتظهر في موضع أسفل في قسم المحادثات"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"يمكن إصدار رنين أو اهتزاز بناءً على إعدادات الهاتف"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"عند فتح قفل الجهاز، تظهر الإشعارات في صورة بانر أعلى الشاشة."</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"الإشعارات التكيّفية"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="zero"><xliff:g id="NUMBER_1">%d</xliff:g> إشعار تقريبًا في اليوم</item>
@@ -3968,7 +3972,7 @@
     <string name="summary_divider_text" msgid="8836285171484563986">"، "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g> إلى <xliff:g id="END">%2$s</xliff:g>"</string>
-    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"محادثات"</string>
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"المحادثات"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"المحادثات التي يمكنها مقاطعة عمل الميزة"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"كل المحادثات"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"المحادثات ذات الأولوية"</string>
@@ -5324,4 +5328,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"ما مِن مشغِّلات متاحة"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"الوسائط"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"سيتم تفعيل البلوتوث."</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"الميزة غير متاحة لأن وضع \"وقت النوم\" مفعّل."</string>
 </resources>

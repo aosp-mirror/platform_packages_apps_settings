@@ -2412,9 +2412,9 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Cómo reducir el uso de la batería"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Paquetes incluidos"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Las aplicaciones funcionan con normalidad"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"El teléfono tiene un consumo normal de batería en segundo plano"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"El tablet tiene un consumo normal de batería en segundo plano"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"El dispositivo tiene un consumo normal de batería en segundo plano"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"El teléfono tiene un consumo de batería normal en segundo plano"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"El tablet tiene un consumo de batería normal en segundo plano"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"El dispositivo tiene un consumo de batería normal en segundo plano"</string>
     <string name="battery_tip_low_battery_title" msgid="7789690720316830767">"La capacidad de la batería es baja"</string>
     <string name="battery_tip_low_battery_summary" msgid="357649681960300945">"Queda poca batería"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2903272443772298636">"Mejorar la duración de la batería del teléfono"</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"El tablet se ha usado más de lo normal"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"El dispositivo se ha usado más de lo normal"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Quizás se agote la batería antes de lo normal"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Batería limitada temporalmente"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Ayuda a mantener la batería en buen estado. Toca para ver más información."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Tu teléfono se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tu tablet se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Tu dispositivo se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">%1$d aplicación restringida</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small><font size="20">" <xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Se ha producido un problema al leer tu indicador de batería"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Se ha producido un problema al leer tu indicador de batería. Toca para "<annotation id="url">"consultar más información"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"¿Detener la aplicación?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Tu teléfono no puede administrar el uso de la batería con normalidad porque <xliff:g id="APP">%1$s</xliff:g> lo mantiene activo.\n\nPara solucionarlo, detén la aplicación.\n\nSi el problema persiste, desinstala la aplicación para mejorar el rendimiento de la batería."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Tu tablet no puede administrar el uso de la batería con normalidad porque <xliff:g id="APP">%1$s</xliff:g> lo mantiene activo.\n\nPara solucionarlo, detén la aplicación.\n\nSi el problema persiste, desinstala la aplicación para mejorar el rendimiento de la batería."</string>
@@ -3078,7 +3082,7 @@
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restricciones"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Quitar restricciones"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Cambiar PIN"</string>
-    <string name="help_label" msgid="2896538416436125883">"Ayuda y sugerencias"</string>
+    <string name="help_label" msgid="2896538416436125883">"Ayuda y comentarios"</string>
     <string name="support_summary" msgid="1034146931237148885">"Artículos de ayuda, teléfono y chat, cómo empezar"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Cuenta para contenido"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ID de foto"</string>
@@ -4321,8 +4325,8 @@
     <string name="billing_cycle_less_than_one_day_left" msgid="1210202399053992163">"Queda menos de 1 día"</string>
     <string name="carrier_and_update_text" msgid="5363656651921656280">"Actualizado por <xliff:g id="ID_1">^1</xliff:g> hace <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="no_carrier_update_text" msgid="5432798085593055966">"Actualizado hace <xliff:g id="ID_1">^2</xliff:g>"</string>
-    <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Actualizado por <xliff:g id="ID_1">^1</xliff:g> ahora mismo"</string>
-    <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Actualizado ahora"</string>
+    <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Actualizado por <xliff:g id="ID_1">^1</xliff:g> justo ahora"</string>
+    <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Actualizado justo ahora"</string>
     <string name="launch_mdp_app_text" msgid="8791816789749304897">"Ver el plan"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Ver detalles"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Ahorro de datos"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"No hay reproductores disponibles"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multimedia"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Se activará el Bluetooth"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"No disponible porque el modo Descanso está activado"</string>
 </resources>

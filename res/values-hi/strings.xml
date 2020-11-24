@@ -683,7 +683,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"ब्लूटूथ"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"ब्लूटूथ"</string>
     <string name="bluetooth_settings_summary" msgid="6805458703566046784">"कनेक्‍शन प्रबंधित करें, डिवाइस का नाम सेट करें और उसे खोजने लायक बनाएं"</string>
-    <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> से जोड़ें?"</string>
+    <string name="bluetooth_pairing_request" msgid="7762990650683525640">"क्या आप <xliff:g id="DEVICE_NAME">%1$s</xliff:g> से जोड़ना चाहते हैं?"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"ब्‍लूटूथ से जोड़ने वाला कोड"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"दूसरे डिवाइस से जोड़ना वाला कोड लिखें और फिर Return या Enter दबाएं"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"पिन में अक्षर या प्रतीक शामिल होते हैं"</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"टैबलेट को सामान्य से ज़्यादा इस्तेमाल किया गया"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"डिवाइस को सामान्य से ज़्यादा इस्तेमाल किया गया"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"हो सकता है कि बैटरी सामान्य समय से पहले खत्म हो जाए"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"कुछ समय के लिए, बैटरी का सीमित इस्तेमाल होगा"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"इससे बैटरी की परफ़ॉर्मेंस बेहतर होती है. ज़्यादा जानने के लिए टैप करें."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"आपका फ़ोन सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके फ़ोन की बैटरी समय से पहले खत्म हो सकती है.\n\nसबसे ज़्यादा बैटरी इस्तेमाल करने वाले ऐप्लिकेशन:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"आपका टैबलेट सामान्य से ज़्यादा इस्तेमाल हुआ है. आपके टैबलेट की बैटरी समय से पहले खत्म हो सकती है.\n\nसबसे ज़्यादा बैटरी इस्तेमाल करने वाले ऐप्लिकेशन:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"आपका डिवाइस सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके डिवाइस की बैटरी समय से पहले खत्म हो सकती है.\n\nसबसे ज़्यादा बैटरी इस्तेमाल करने वाले ऐप्लिकेशन:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">%1$d ऐप्लिकेशन पर रोक लगाई गई</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"आपके डिवाइस के बैटरी मीटर की रीडिंग लेने में समस्या आ रही है"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"आपके डिवाइस के बैटरी मीटर की रीडिंग लेने में समस्या आ रही है. इस बारे में "<annotation id="url">"ज़्यादा जानने के लिए"</annotation>"टैप करें"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"ऐप्लिकेशन रोकना चाहते हैं?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"आपका फ़ोन बैटरी को सामान्य सामान्य तौर पर प्रबंधित नहीं कर पा रहा है क्योंकि <xliff:g id="APP">%1$s</xliff:g> उसे चालू रख रहा है.\n\nइस समस्या को ठीक करने के लिए, आप ऐप्लिकेशन को रोक सकते हैं.\n\nअगर ऐसा बार-बार हो रहा है, तो बैटरी का प्रदर्शन बेहतर करने के लिए आपको ऐप अनइंस्टॉल करना पड़ सकता है."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"आपका टैबलेट बैटरी को सामान्य सामान्य तौर पर प्रबंधित नहीं कर पा रहा है क्योंकि <xliff:g id="APP">%1$s</xliff:g> उसे चालू रख रहा है.\n\nइस समस्या को ठीक करने के लिए, आप ऐप को रोक सकते हैं.\n\nअगर ऐसा बार-बार हो रहा है, तो बैटरी का प्रदर्शन बेहतर करने के लिए आपको ऐप अनइंस्टॉल करना पड़ सकता है."</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"कोई मीडिया प्लेयर उपलब्ध नहीं है"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"मीडिया"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लूटूथ चालू हो जाएगा"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"बेडटाइम मोड चालू होने पर यह सुविधा काम नहीं करती है"</string>
 </resources>
