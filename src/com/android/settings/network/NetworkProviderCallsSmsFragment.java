@@ -20,6 +20,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -35,10 +37,14 @@ import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class NetworkProviderCallsSmsFragment extends DashboardFragment {
-    private static final String LOG_TAG = "NetworkProviderCallsSmsFragment";
-    private static final String KEY_PREFERENCE_CATEGORY_CALLING = "provider_model_calling_category";
-    private static final String KEY_PREFERENCE_CALLS= "calls_preference";
-    private static final String KEY_PREFERENCE_SMS = "sms_preference";
+    @VisibleForTesting
+    static final String LOG_TAG = "NetworkProviderCallsSmsFragment";
+    @VisibleForTesting
+    static final String KEY_PREFERENCE_CATEGORY_CALLING = "provider_model_calling_category";
+    @VisibleForTesting
+    static final String KEY_PREFERENCE_CALLS= "provider_model_calls_preference";
+    @VisibleForTesting
+    static final String KEY_PREFERENCE_SMS = "provider_model_sms_preference";
 
     private NetworkProviderWifiCallingPreferenceController
             mNetworkProviderWifiCallingPreferenceController;
