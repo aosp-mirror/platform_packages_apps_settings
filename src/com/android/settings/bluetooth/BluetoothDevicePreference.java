@@ -44,6 +44,7 @@ import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -175,6 +176,18 @@ public final class BluetoothDevicePreference extends GearPreference {
     }
 
     private void onPreferenceAttributesChanged() {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final Pair<Drawable, String> pair =
+                    BluetoothUtils.getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
+
+            ThreadUtils.postOnMainThread(() -> {
+                if (pair.first != null) {
+                    setIcon(pair.first);
+                    contentDescription = pair.second;
+                }
+            });
+        });
+
         /*
          * The preference framework takes care of making sure the value has
          * changed before proceeding. It will also call notifyChanged() if
@@ -183,13 +196,6 @@ public final class BluetoothDevicePreference extends GearPreference {
         setTitle(mCachedDevice.getName());
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
-
-        final Pair<Drawable, String> pair =
-                BluetoothUtils.getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
-        if (pair.first != null) {
-            setIcon(pair.first);
-            contentDescription = pair.second;
-        }
 
         // Used to gray out the item
         setEnabled(!mCachedDevice.isBusy());

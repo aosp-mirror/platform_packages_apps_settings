@@ -144,7 +144,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     private void addPreference(int index, Preference preference) {
         if (preference instanceof BluetoothDevicePreference) {
-            if (mDevicesList.size() >= index) {
+            if (index >= 0 && mDevicesList.size() >= index) {
                 mDevicesList.add(index, preference);
             } else {
                 mDevicesList.add(preference);
