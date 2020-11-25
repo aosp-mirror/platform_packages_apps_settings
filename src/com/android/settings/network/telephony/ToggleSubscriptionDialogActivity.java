@@ -34,6 +34,7 @@ import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
 import com.android.settings.network.SwitchToRemovableSlotSidecar;
 import com.android.settings.network.UiccSlotUtil;
+import com.android.settings.sim.SimActivationNotifier;
 
 import com.google.common.collect.ImmutableList;
 
@@ -189,9 +190,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                     return;
                 }
                 Log.i(TAG, "User confirmed reboot to enable DSDS.");
+                SimActivationNotifier.setShowSimSettingsNotification(this, true);
                 mTelMgr.switchMultiSimConfig(NUM_OF_SIMS_FOR_DSDS);
-                // TODO(b/170507290): Store a bit in preferences for displaying the notification
-                //  after the reboot.
                 break;
             case DIALOG_TAG_ENABLE_SIM_CONFIRMATION:
                 Log.i(TAG, "User confirmed to enable the subscription.");
