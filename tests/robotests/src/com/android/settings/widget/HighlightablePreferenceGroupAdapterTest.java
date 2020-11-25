@@ -19,6 +19,7 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -32,6 +33,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
@@ -65,14 +67,18 @@ public class HighlightablePreferenceGroupAdapterTest {
     private Context mContext;
     private HighlightablePreferenceGroupAdapter mAdapter;
     private PreferenceViewHolder mViewHolder;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mPreference = new Preference(mContext);
+        mPreference.setKey(TEST_KEY);
         when(mPreferenceCatetory.getContext()).thenReturn(mContext);
         mAdapter = spy(new HighlightablePreferenceGroupAdapter(mPreferenceCatetory, TEST_KEY,
                 false /* highlighted*/));
+        when(mAdapter.getItem(anyInt())).thenReturn(mPreference);
         mViewHolder = PreferenceViewHolder.createInstanceForTests(
                 View.inflate(mContext, R.layout.app_preference_item, null));
     }
