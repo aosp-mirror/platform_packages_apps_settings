@@ -1813,7 +1813,7 @@
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"وقتی الگو را کشیدید، انگشتتان را بردارید"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"حداقل <xliff:g id="NUMBER">%d</xliff:g> نقطه را به یکدیگر متصل کنید. دوباره امتحان کنید."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"الگو ضبط شد"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"برای تأیید دوباره الگو را بکشید"</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"برای تأیید، دوباره الگو را بکشید"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"الگوی جدید بازگشایی قفلتان"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"تأیید"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"کشیدن مجدد"</string>
@@ -2234,7 +2234,7 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"سمعک‌ها"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"هیچ سمعکی متصل نشده است"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"افزودن سمعک‌ها"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"برای مرتبط‌سازی سمعکتان، دستگاهتان را در صفحه بعدی پیدا کنید و روی آن ضربه بزنید. مطمئن شوید سمعکتان در حالت مرتبط‌سازی باشد."</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"برای مرتبط‌سازی سمعکتان، دستگاهتان را در صفحه بعد پیدا کنید و روی آن ضربه بزنید. مطمئن شوید سمعکتان در حالت مرتبط‌سازی باشد."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> فعال"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> سمعک ذخیره‌شده</item>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"رایانه لوحی بیشتر از حد معمول استفاده شده است"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"دستگاه بیشتر از حد معمول استفاده شده است"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"ممکن است شارژ باتری زودتر از معمول تمام شود"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"باتری موقتاً محدود شده است"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"به حفظ سلامت باتری کمک می‌کند. برای اطلاعات بیشتر ضربه بزنید."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"از تلفنتان بیش‌ازحد معمول استفاده شده است. ممکن است باتری آن زودتر از موعد موردانتظار تمام شود.\n\nبرنامه‌های برتر براساس مصرف باتری:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"از رایانه لوحی بیش از حد معمول استفاده شده است. ممکن است باتری آن زودتر از موعد موردانتظار تمام شود.\n\nبرنامه‌های برتر براساس مصرف باتری:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"از دستگاه بیش از حد معمول استفاده شده است. ممکن است باتری آن زودتر از موعد موردانتظار تمام شود.\n\nبرنامه‌های برتر براساس مصرف باتری:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">‏%1$d برنامه محدود شد</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"مشکلی در خواندن میزان باتری وجود دارد"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"مشکلی در خواندن میزان باتری وجود دارد. برای "<annotation id="url">"اطلاعات بیشتر"</annotation>" ضربه بزنید"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"برنامه متوقف شود؟"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"تلفنتان نمی‌تواند به‌طور عادی میزان استفاده از شارژ باتری را مدیریت کند، زیرا <xliff:g id="APP">%1$s</xliff:g> آن را بیدار نگه می‌دارد.\n\nبرای برطرف کردن این مشکل، می‌توانید برنامه را متوقف کنید.\n\nاگر مشکل ادامه داشت، ممکن است لازم باشد برنامه را حذف نصب کنید تا عملکرد باتری بهبود یابد."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"رایانه لوحی‌تان نمی‌تواند به‌طور عادی میزان استفاده از شارژ باتری را مدیریت کند، زیرا <xliff:g id="APP">%1$s</xliff:g> آن را بیدار نگه می‌دارد.\n\nبرای برطرف کردن این مشکل، می‌توانید برنامه را متوقف کنید.\n\nاگر مشکل ادامه داشت، ممکن است لازم باشد برنامه را حذف نصب کنید تا عملکرد باتری بهبود یابد."</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"پخش‌کننده‌ای دردسترس نیست"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"رسانه‌"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"بلوتوث روشن می‌شود"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"دردسترس نیست زیرا «حالت وقت خواب» روشن است"</string>
 </resources>
