@@ -23,7 +23,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -114,7 +113,9 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
     @VisibleForTesting
     void updateBackground(PreferenceViewHolder holder, int position) {
         View v = holder.itemView;
-        if (position == mHighlightPosition) {
+        if (position == mHighlightPosition
+                && (mHighlightKey != null
+                        && TextUtils.equals(mHighlightKey, getItem(position).getKey()))) {
             // This position should be highlighted. If it's highlighted before - skip animation.
             addHighlightBackground(v, !mFadeInAnimated);
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
