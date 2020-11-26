@@ -20,12 +20,10 @@
     android:title="@string/night_display_title"
     settings:keywords="@string/keywords_display_night_display">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
-        android:selectable="false"
-        android:layout="@layout/twilight_mode_location_off"
-        settings:controller="com.android.settings.display.TwilightLocationPreferenceController"
-        settings:allowDividerBelow="true"/>
+        android:title="@string/twilight_mode_location_off_dialog_message"
+        settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="night_display_top_intro"
