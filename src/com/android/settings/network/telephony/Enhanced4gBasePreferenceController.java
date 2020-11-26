@@ -127,7 +127,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public void onStart() {
-        if (mPhoneStateListener == null) {
+        if (!isModeMatched() || (mPhoneStateListener == null)) {
             return;
         }
         mPhoneStateListener.register(mContext, mSubId);
@@ -241,7 +241,9 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
         public void unregister() {
             mCallState = null;
-            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
+            if (mTelephonyManager != null) {
+                mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
+            }
         }
     }
 
