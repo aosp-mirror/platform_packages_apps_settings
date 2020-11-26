@@ -165,6 +165,21 @@
         <item name="android:colorAccent">@*android:color/white</item>
     </style>
 
+    <style name="Theme.RequestManageCredentials" parent="@style/Theme.MaterialComponents.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
+        <item name="colorAccent">@*android:color/accent_device_default_light</item>
+        <item name="colorPrimaryDark">@*android:color/primary_dark_device_default_settings_light</item>
+
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+    </style>
+
     <style name="FallbackHome" parent="@android:style/Theme.DeviceDefault.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
