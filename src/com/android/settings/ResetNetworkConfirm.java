@@ -82,6 +82,8 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
      * erasing eSIM profiles or timeout, an error msg is shown.
      */
     private class ResetNetworkTask extends AsyncTask<Void, Void, Boolean> {
+        private static final String TAG = "ResetNetworkTask";
+
         private final Context mContext;
         private final String mPackageName;
 
@@ -135,6 +137,8 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             restoreDefaultApn(mContext);
+            Log.d(TAG, "network factoryReset complete. succeeded: "
+                    + String.valueOf(isResetSucceed));
             return isResetSucceed;
         }
 
