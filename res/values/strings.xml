@@ -6325,6 +6325,17 @@
     <!-- Toast message that a certificate was not installed -->
     <string name="cert_not_installed">Certificate not installed</string>
 
+    <!-- Title of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
+    <string name="request_manage_credentials_title">Allow <xliff:g id="app_name" example="Ping">%s</xliff:g> to install certificates on this device?</string>
+    <!-- Description of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
+    <string name="request_manage_credentials_description">These certificates will identify you to the apps and URLs below</string>
+    <!-- Label for button to not allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
+    <string name="request_manage_credentials_dont_allow">Don\u2019t allow</string>
+    <!-- Label for button to allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
+    <string name="request_manage_credentials_allow">Allow</string>
+    <!-- Label for floating action button to scroll to the end of the authentication policy list [CHAR LIMIT=30] -->
+    <string name="request_manage_credentials_more">Show more</string>
+
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
     <!-- Sound settings screen, setting option summary text -->

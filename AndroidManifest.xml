@@ -1431,6 +1431,15 @@
                   android:exported="false">
         </activity>
 
+        <activity android:name=".security.RequestManageCredentials"
+                  android:theme="@style/Theme.RequestManageCredentials"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.security.MANAGE_CREDENTIALS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity
             android:name="Settings$DeviceAdminSettingsActivity"
             android:exported="true"
