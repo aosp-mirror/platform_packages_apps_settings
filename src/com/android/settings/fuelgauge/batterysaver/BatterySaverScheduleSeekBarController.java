@@ -28,7 +28,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.widget.SeekBarPreference;
 
 /**
  * Responds to user actions in the Settings > Battery > Set a Schedule Screen for the seekbar.
@@ -55,7 +55,6 @@ public class BatterySaverScheduleSeekBarController implements
     public BatterySaverScheduleSeekBarController(Context context) {
         mContext = context;
         mSeekBarPreference = new SeekBarPreference(context);
-        mSeekBarPreference.setLayoutResource(R.layout.battery_saver_schedule_percentage_seekbar);
         mSeekBarPreference.setOnPreferenceChangeListener(this);
         mSeekBarPreference.setContinuousUpdates(true);
         mSeekBarPreference.setMax(MAX_SEEKBAR_VALUE);

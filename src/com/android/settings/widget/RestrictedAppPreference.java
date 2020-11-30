@@ -26,7 +26,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.Restrictable;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.widget.AppPreference;
 
@@ -35,7 +35,7 @@ import com.android.settingslib.widget.AppPreference;
  * {@link com.android.settingslib.RestrictedPreferenceHelper}.
  * Used to show policy transparency on {@link AppPreference}.
  */
-public class RestrictedAppPreference extends AppPreference {
+public class RestrictedAppPreference extends AppPreference implements Restrictable {
     private RestrictedPreferenceHelper mHelper;
     private String userRestriction;
 
@@ -85,14 +85,14 @@ public class RestrictedAppPreference extends AppPreference {
         super.setEnabled(enabled);
     }
 
-    public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
-        if (mHelper.setDisabledByAdmin(admin)) {
-            notifyChanged();
-        }
+    @Override
+    public RestrictedPreferenceHelper getHelper() {
+        return mHelper;
     }
 
-    public boolean isDisabledByAdmin() {
-        return mHelper.isDisabledByAdmin();
+    @Override
+    public void notifyPreferenceChanged() {
+        notifyChanged();
     }
 
     public void useAdminDisabledSummary(boolean useSummary) {
@@ -110,13 +110,5 @@ public class RestrictedAppPreference extends AppPreference {
             return;
         }
         mHelper.checkRestrictionAndSetDisabled(userRestriction, UserHandle.myUserId());
-    }
-
-    public void checkRestrictionAndSetDisabled(String userRestriction) {
-        mHelper.checkRestrictionAndSetDisabled(userRestriction, UserHandle.myUserId());
-    }
-
-    public void checkRestrictionAndSetDisabled(String userRestriction, int userId) {
-        mHelper.checkRestrictionAndSetDisabled(userRestriction, userId);
     }
 }
