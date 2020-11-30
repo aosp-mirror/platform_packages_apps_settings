@@ -22,7 +22,8 @@
 
     <com.android.settings.widget.VideoPreference
         android:key="global_actions_panel_video"
-        app:animation="@raw/gesture_global_actions_panel" />
+        app:animation="@raw/gesture_global_actions_panel"
+        app:controller="com.android.settings.widget.VideoPreferenceController" />
 
     <SwitchPreference
         android:key="gesture_global_actions_panel_switch"

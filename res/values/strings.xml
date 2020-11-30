@@ -2753,7 +2753,7 @@
     <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
     <string name="peak_refresh_rate_summary">Automatically raises the refresh rate from 60 to 90 Hz for some content. Increases battery usage.</string>
     <!-- Display developer settings: Force to the highest refresh rate [CHAR LIMIT=NONE] -->
-    <string name="force_high_refresh_rate_toggle">Smooth Display</string>
+    <string name="force_high_refresh_rate_toggle">Force 90 Hz refresh rate</string>
     <!-- Display developer settings: Force to the highest refresh rate description [CHAR LIMIT=NONE]-->
     <string name="force_high_refresh_rate_desc">Highest refresh rate for improved touch responsiveness &amp; animation quality. Increases battery usage.</string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
@@ -3054,8 +3054,6 @@
     <string name="security_patch">Android security update</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="model_info">Model</string>
-    <!-- About phone screen, status item summary  [CHAR LIMIT=40] -->
-    <string name="model_summary">Model&#58; %1$s</string>
     <!-- About phone screen, dialog title for showing hardware information such as model, serial number, etc.[CHAR LIMIT=60] -->
     <string name="hardware_info">Model &amp; hardware</string>
     <!-- Label for device's hardware revision value [CHAR LIMIT=40] -->
@@ -11315,7 +11313,7 @@
     <!-- Title for default disabled app compat changes category [CHAR LIMIT=50] -->
     <string name="platform_compat_default_disabled_title">Default disabled changes</string>
     <!-- Title for target SDK gated app compat changes category (do not translate 'targetSdkVersion') [CHAR LIMIT=50] -->
-    <string name="platform_compat_target_sdk_title">Enabled for targetSdkVersion &gt; <xliff:g id="number" example="29">%d</xliff:g></string>
+    <string name="platform_compat_target_sdk_title">Enabled for targetSdkVersion &gt;= <xliff:g id="number" example="29">%d</xliff:g></string>
     <!-- Title for the dialog shown when no debuggable apps are available [CHAR LIMIT=30] -->
     <string name="platform_compat_dialog_title_no_apps">No apps available</string>
     <!-- Explanatory text shown when no debuggable apps are available [CHAR LIMIT=NONE] -->

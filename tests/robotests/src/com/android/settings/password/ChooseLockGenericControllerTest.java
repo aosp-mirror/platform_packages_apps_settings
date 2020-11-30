@@ -22,6 +22,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -84,24 +85,24 @@ public class ChooseLockGenericControllerTest {
     public void isScreenLockVisible_shouldRespectResourceConfig() {
         for (ScreenLockType lock : ScreenLockType.values()) {
             // All locks except managed defaults to visible
-            assertThat(mController.isScreenLockVisible(lock)).named(lock + " visible")
+            assertWithMessage(lock + " visible").that(mController.isScreenLockVisible(lock))
                     .isEqualTo(lock != ScreenLockType.MANAGED);
         }
 
         SettingsShadowResources.overrideResource(R.bool.config_hide_none_security_option, true);
         SettingsShadowResources.overrideResource(R.bool.config_hide_swipe_security_option, true);
-        assertThat(mController.isScreenLockVisible(ScreenLockType.NONE)).named("NONE visible")
+        assertWithMessage("NONE visible").that(mController.isScreenLockVisible(ScreenLockType.NONE))
                 .isFalse();
-        assertThat(mController.isScreenLockVisible(ScreenLockType.SWIPE)).named("SWIPE visible")
-                .isFalse();
+        assertWithMessage("SWIPE visible").that(
+                mController.isScreenLockVisible(ScreenLockType.SWIPE)).isFalse();
     }
 
     @Test
     public void isScreenLockVisible_notCurrentUser_shouldHideInsecure() {
         mController = new ChooseLockGenericController(application, 1 /* userId */);
-        assertThat(mController.isScreenLockVisible(ScreenLockType.SWIPE)).named("SWIPE visible")
-                .isFalse();
-        assertThat(mController.isScreenLockVisible(ScreenLockType.NONE)).named("NONE visible")
+        assertWithMessage("SWIPE visible").that(
+                mController.isScreenLockVisible(ScreenLockType.SWIPE)).isFalse();
+        assertWithMessage("NONE visible").that(mController.isScreenLockVisible(ScreenLockType.NONE))
                 .isFalse();
     }
 
@@ -109,34 +110,31 @@ public class ChooseLockGenericControllerTest {
     public void isScreenLockVisible_managedPasswordChoosable_shouldShowManaged() {
         doReturn(true).when(mManagedLockPasswordProvider).isManagedPasswordChoosable();
 
-        assertThat(mController.isScreenLockVisible(ScreenLockType.MANAGED)).named("MANAGED visible")
-                .isTrue();
+        assertWithMessage("MANAGED visible").that(
+                mController.isScreenLockVisible(ScreenLockType.MANAGED)).isTrue();
     }
 
     @Test
     public void isScreenLockEnabled_lowerQuality_shouldReturnFalse() {
         for (ScreenLockType lock : ScreenLockType.values()) {
-            assertThat(mController.isScreenLockEnabled(lock, lock.maxQuality + 1))
-                    .named(lock + " enabled")
-                    .isFalse();
+            assertWithMessage(lock + " enabled").that(
+                    mController.isScreenLockEnabled(lock, lock.maxQuality + 1)).isFalse();
         }
     }
 
     @Test
     public void isScreenLockEnabled_equalQuality_shouldReturnTrue() {
         for (ScreenLockType lock : ScreenLockType.values()) {
-            assertThat(mController.isScreenLockEnabled(lock, lock.defaultQuality))
-                    .named(lock + " enabled")
-                    .isTrue();
+            assertWithMessage(lock + " enabled").that(
+                    mController.isScreenLockEnabled(lock, lock.defaultQuality)).isTrue();
         }
     }
 
     @Test
     public void isScreenLockEnabled_higherQuality_shouldReturnTrue() {
         for (ScreenLockType lock : ScreenLockType.values()) {
-            assertThat(mController.isScreenLockEnabled(lock, lock.maxQuality - 1))
-                    .named(lock + " enabled")
-                    .isTrue();
+            assertWithMessage(lock + " enabled").that(
+                    mController.isScreenLockEnabled(lock, lock.maxQuality - 1)).isTrue();
         }
     }
 
@@ -144,9 +142,8 @@ public class ChooseLockGenericControllerTest {
     public void isScreenLockDisabledByAdmin_lowerQuality_shouldReturnTrue() {
         doReturn(true).when(mManagedLockPasswordProvider).isManagedPasswordChoosable();
         for (ScreenLockType lock : ScreenLockType.values()) {
-            assertThat(mController.isScreenLockDisabledByAdmin(lock, lock.maxQuality + 1))
-                    .named(lock + " disabledByAdmin")
-                    .isTrue();
+            assertWithMessage(lock + " disabledByAdmin").that(
+                    mController.isScreenLockDisabledByAdmin(lock, lock.maxQuality + 1)).isTrue();
         }
     }
 
@@ -154,9 +151,8 @@ public class ChooseLockGenericControllerTest {
     public void isScreenLockDisabledByAdmin_equalQuality_shouldReturnFalse() {
         doReturn(true).when(mManagedLockPasswordProvider).isManagedPasswordChoosable();
         for (ScreenLockType lock : ScreenLockType.values()) {
-            assertThat(mController.isScreenLockDisabledByAdmin(lock, lock.maxQuality))
-                    .named(lock + " disabledByAdmin")
-                    .isFalse();
+            assertWithMessage(lock + " disabledByAdmin").that(
+                    mController.isScreenLockDisabledByAdmin(lock, lock.maxQuality)).isFalse();
         }
     }
 
@@ -164,18 +160,16 @@ public class ChooseLockGenericControllerTest {
     public void isScreenLockDisabledByAdmin_higherQuality_shouldReturnFalse() {
         doReturn(true).when(mManagedLockPasswordProvider).isManagedPasswordChoosable();
         for (ScreenLockType lock : ScreenLockType.values()) {
-            assertThat(mController.isScreenLockDisabledByAdmin(lock, lock.maxQuality - 1))
-                    .named(lock + " disabledByAdmin")
-                    .isFalse();
+            assertWithMessage(lock + " disabledByAdmin").that(
+                    mController.isScreenLockDisabledByAdmin(lock, lock.maxQuality - 1)).isFalse();
         }
     }
 
     @Test
     public void isScreenLockDisabledByAdmin_managedNotChoosable_shouldReturnTrue() {
         doReturn(false).when(mManagedLockPasswordProvider).isManagedPasswordChoosable();
-        assertThat(mController.isScreenLockDisabledByAdmin(
+        assertWithMessage("MANANGED disabledByAdmin").that(mController.isScreenLockDisabledByAdmin(
                 ScreenLockType.MANAGED, DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED))
-                .named("MANANGED disabledByAdmin")
                 .isTrue();
     }
 
@@ -218,7 +212,7 @@ public class ChooseLockGenericControllerTest {
 
         final int upgradedQuality =
             mController.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
-        assertThat(upgradedQuality).named("upgradedQuality")
+        assertWithMessage("upgradedQuality").that(upgradedQuality)
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
     }
 
@@ -230,7 +224,7 @@ public class ChooseLockGenericControllerTest {
 
         final int upgradedQuality =
             mController.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-        assertThat(upgradedQuality).named("upgradedQuality")
+        assertWithMessage("upgradedQuality").that(upgradedQuality)
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
     }
 
