@@ -129,7 +129,7 @@ public class DashboardFragmentTest {
         final TestPreferenceController retrievedController = mTestFragment.use
                 (TestPreferenceController.class);
 
-        assertThat(controller).isSameAs(retrievedController);
+        assertThat(controller).isSameInstanceAs(retrievedController);
     }
 
     @Test
@@ -142,7 +142,7 @@ public class DashboardFragmentTest {
         final TestPreferenceController retrievedController = mTestFragment.use
                 (TestPreferenceController.class);
 
-        assertThat(controller1).isSameAs(retrievedController);
+        assertThat(controller1).isSameInstanceAs(retrievedController);
     }
 
     @Test

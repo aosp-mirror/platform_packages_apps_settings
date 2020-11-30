@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -70,12 +71,13 @@ public class FingerprintSuggestionActivityTest {
         final Button cancelButton =
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
         assertThat(cancelButton.getText().toString()).isEqualTo("Cancel");
-        assertThat(cancelButton.getVisibility()).named("Cancel visible").isEqualTo(View.VISIBLE);
+        assertWithMessage("Cancel visible").that(cancelButton.getVisibility())
+                .isEqualTo(View.VISIBLE);
         cancelButton.performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
-        assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
-        assertThat(shadowActivity.getResultCode()).named("Result code")
+        assertWithMessage("Is finishing").that(mController.get().isFinishing()).isTrue();
+        assertWithMessage("Result code").that(shadowActivity.getResultCode())
             .isEqualTo(Activity.RESULT_CANCELED);
     }
 

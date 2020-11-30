@@ -23,7 +23,8 @@
     <com.android.settings.widget.VideoPreference
         android:key="gesture_double_tap_power_video"
         app:animation="@raw/gesture_double_tap"
-        app:preview="@drawable/gesture_double_tap" />
+        app:preview="@drawable/gesture_double_tap"
+        app:controller="com.android.settings.widget.VideoPreferenceController" />
 
     <SwitchPreference
         android:key="gesture_double_tap_power"

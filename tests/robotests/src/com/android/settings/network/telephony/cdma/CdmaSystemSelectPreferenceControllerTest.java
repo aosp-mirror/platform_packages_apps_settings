@@ -18,7 +18,6 @@ package com.android.settings.network.telephony.cdma;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -92,7 +91,6 @@ public class CdmaSystemSelectPreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.CDMA_ROAMING_MODE,
                 TelephonyManager.CDMA_ROAMING_MODE_ANY);
-        doReturn(true).when(mTelephonyManager).setCdmaRoamingMode(anyInt());
 
         mController.onPreferenceChange(mPreference,
                 Integer.toString(TelephonyManager.CDMA_ROAMING_MODE_HOME));

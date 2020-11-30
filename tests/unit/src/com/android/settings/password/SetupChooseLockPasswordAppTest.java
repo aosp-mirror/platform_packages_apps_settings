@@ -27,6 +27,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.hamcrest.CoreMatchers.not;
 
@@ -80,7 +81,7 @@ public class SetupChooseLockPasswordAppTest {
         assertThat(skipOrClearButton.getText()).isEqualTo(mContext.getString(R.string.skip_label));
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
         skipOrClearButton.performClick();
-        assertThat(activity.isFinishing()).named("Is finishing").isTrue();
+        assertWithMessage("Is finishing").that(activity.isFinishing()).isTrue();
     }
 
     @Test

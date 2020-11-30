@@ -1046,7 +1046,7 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP 周波数帯"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"アクセス ポイントを使って他のデバイスとの Wi‑Fi ネットワークを作成します。アクセス ポイントはモバイルデータ通信によるインターネット接続を提供します。モバイルデータ通信料が追加で発生する可能性があります。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有できます。"</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"アクセス ポイントを自動的にオフにする"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"アクセス ポイントを自動的に OFF にする"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"デバイスが接続されていない場合"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"アクセスポイントをONにしています…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"アクセスポイントをOFFにしています…"</string>
@@ -2860,8 +2860,8 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"データ使用量の警告の設定"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"データ使用量の上限の設定"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"データ使用量の上限の設定"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"タブレットで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はタブレットで測定された値ですが、携帯通信会社による測定結果とは異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"スマートフォンで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はスマートフォンで測定された値ですが、携帯通信会社による測定結果とは異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"タブレットで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はタブレットで測定された値ですが、携帯通信会社での使用量の計算はこれと異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"スマートフォンで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はスマートフォンで測定された値ですが、携帯通信会社での使用量の計算はこれと異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
     <string name="data_usage_restrict_background_title" msgid="2745551538820692821">"バックグラウンドデータを制限しますか？"</string>
     <string name="data_usage_restrict_background" msgid="1893102079135282794">"バックグラウンドのモバイルデータを制限すると、アプリやサービスによっては、Wi-Fi 未接続時に機能しない場合があります。"</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="5588623586867665419">"バックグラウンドのモバイルデータを制限すると、アプリやサービスによっては、Wi‑Fi 未接続時に機能しない場合があります。\n\nこの設定はこのタブレット上のすべてのユーザーに影響します。"</string>
@@ -3475,7 +3475,7 @@
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"すべてのバブル設定"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"この会話をバブルで表示"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"他のアプリに重ねてフローティング アイコンとして表示"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"他のアプリに重ねてフローティング アイコンとして表示します"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルで表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"このデバイスでバブルを ON にしますか？"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"このアプリのバブルを ON にすると、デバイスでもバブルが ON になります。\n\nこの設定は、バブルが許可されているその他のアプリや会話に影響します。"</string>
@@ -3549,7 +3549,7 @@
       <item quantity="one">優先度の高い会話: <xliff:g id="COUNT_0">%d</xliff:g> 件</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"優先度の高い会話"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"会話セクションの一番上に表示され、ふきだしとして表示することもできます"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"会話セクションの一番上にバブルとして表示されます"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"会話セクションの一番上に表示"</string>
     <string name="other_conversations" msgid="7218658664423361043">"他の会話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"設定に変更を加えた会話"</string>
@@ -3573,7 +3573,7 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"音やバイブレーションによる通知、または画面のポップアップ通知をアプリに許可します"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"優先"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"会話セクションの一番上にバブルとして表示され、プロフィール写真がロック画面に表示されます"</string>
-    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> はほとんどの会話機能に対応していません。会話の優先度を高く設定することができず、会話はふきだしとして表示されません。"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> はほとんどの会話機能に対応していません。会話の優先度を高く設定することはできず、会話はバブルとして表示されません。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"プルダウン シェードで、通知を折りたたんで 1 行で表示します"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"着信音もバイブレーションも無効です"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"着信音もバイブレーションも無効になり会話セクションの下に表示されます"</string>
