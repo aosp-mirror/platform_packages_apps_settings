@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,77 +16,87 @@
 
 package com.android.settings.network;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.wifi.WifiConnectionPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
- * This controls a header at the top of the Network & internet page that only appears when there
- * are two or more active mobile subscriptions. It shows an overview of available network
- * connections with an entry for wifi (if connected) and an entry for each subscription.
+ * This controls mobile network display of the internet page that only appears when there
+ * are active mobile subscriptions. It shows an overview of available mobile network
+ * connections with an entry for each subscription.
  *
- * TODO(tomhsu) when provider model is completed, this class will be replaced
- * by {@link NetworkMobileProviderController}
- */
-public class MultiNetworkHeaderController extends BasePreferenceController implements
-        WifiConnectionPreferenceController.UpdateListener,
+ *  {@link NetworkMobileProviderController} is used to show subscription status on internet
+ *  page for provider model. This original class can refer to {@link MultiNetworkHeaderController},
+ *
+  */
+public class NetworkMobileProviderController extends BasePreferenceController implements
         SubscriptionsPreferenceController.UpdateListener {
-    public static final String TAG = "MultiNetworkHdrCtrl";
 
-    private WifiConnectionPreferenceController mWifiController;
-    private SubscriptionsPreferenceController mSubscriptionsController;
+    private static final String TAG = NetworkMobileProviderController.class.getSimpleName();
+
+    public static final String PREF_KEY_PROVIDER_MOBILE_NETWORK = "provider_model_mobile_network";
+    private static final int PREFERENCE_START_ORDER = 10;
+
     private PreferenceCategory mPreferenceCategory;
     private PreferenceScreen mPreferenceScreen;
+
+    private SubscriptionsPreferenceController mSubscriptionsController;
+
     private int mOriginalExpandedChildrenCount;
 
-    public MultiNetworkHeaderController(Context context, String key) {
+    public NetworkMobileProviderController(Context context, String key) {
         super(context, key);
     }
 
+    /**
+     * Initialize NetworkMobileProviderController
+     * @param lifecycle Lifecycle of Settings
+     */
     public void init(Lifecycle lifecycle) {
-        mWifiController = createWifiController(lifecycle);
         mSubscriptionsController = createSubscriptionsController(lifecycle);
     }
 
     @VisibleForTesting
-    WifiConnectionPreferenceController createWifiController(Lifecycle lifecycle) {
-        final int prefOrder = 0;
-        return new WifiConnectionPreferenceController(mContext, lifecycle, this, mPreferenceKey,
-                prefOrder, SettingsEnums.SETTINGS_NETWORK_CATEGORY);
-    }
-
-    @VisibleForTesting
     SubscriptionsPreferenceController createSubscriptionsController(Lifecycle lifecycle) {
-        final int prefStartOrder = 10;
-        return new SubscriptionsPreferenceController(mContext, lifecycle, this, mPreferenceKey,
-                prefStartOrder);
+        if (mSubscriptionsController == null) {
+            return new SubscriptionsPreferenceController(
+                    mContext,
+                    lifecycle,
+                    this,
+                    PREF_KEY_PROVIDER_MOBILE_NETWORK,
+                    PREFERENCE_START_ORDER);
+        }
+        return mSubscriptionsController;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        if (mSubscriptionsController == null) {
+            Log.e(TAG, "[displayPreference] SubscriptionsController is null.");
+            return;
+        }
         mPreferenceScreen = screen;
         mOriginalExpandedChildrenCount = mPreferenceScreen.getInitialExpandedChildrenCount();
-        mPreferenceCategory = screen.findPreference(mPreferenceKey);
+        mPreferenceCategory = screen.findPreference(PREF_KEY_PROVIDER_MOBILE_NETWORK);
         mPreferenceCategory.setVisible(isAvailable());
-        mWifiController.displayPreference(screen);
+        // TODO(tomhsu) For the provider model, subscriptionsController shall do more
+        // implementation of preference type change and summary control.
         mSubscriptionsController.displayPreference(screen);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (mSubscriptionsController == null || !mSubscriptionsController.isAvailable()) {
+        if (mSubscriptionsController == null) {
             return CONDITIONALLY_UNAVAILABLE;
-        } else {
-            return AVAILABLE;
         }
+        return mSubscriptionsController.isAvailable() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
