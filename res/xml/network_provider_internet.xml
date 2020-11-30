@@ -57,18 +57,17 @@
         android:key="airplane_mode"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
-        android:disableDependentsState="true"
         android:order="-5"
         settings:controller="com.android.settings.network.AirplaneModePreferenceController"
         settings:userRestriction="no_airplane_mode"/>
 
-    <SwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="airplane_safe_networks"
         android:title="@string/airplane_safe_networks"
         android:icon="@drawable/ic_airplanemode_active"
-        android:order="-4"
         android:summary="@string/airplane_safe_networks_summary"
-        settings:controller="com.android.settings.network.AirplaneSafeNetworkModePreferenceController"
+        android:order="-4"
+        settings:userRestriction="no_airplane_mode"
         settings:keywords="@string/keywords_airplane_safe_networks" />
 
     <com.android.settingslib.RestrictedPreference
