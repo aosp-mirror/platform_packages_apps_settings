@@ -398,8 +398,8 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"حذف بيانات الوجه"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"إعداد ميزة \"فتح القفل بالوجه\""</string>
     <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"يمكنك استخدام ميزة \"فتح القفل بالوجه\" لفتح قفل جهازك وتسجيل الدخول إلى التطبيقات وتأكيد عمليات الدفع."</string>
-    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"ملاحظة:\nقد يتم فتح قفل الهاتف عند النظر إليه بالرغم من أنك لا تريد فتحه.\n\nويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك.\n\nيمكن لشخص آخر يشبهك بدرجة كبيرة فتح هاتفك، مثلاً أخوك الذي يشبهك تمامًا."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"ملاحظة:\nقد يتم فتح قفل الهاتف عند النظر إليه بالرغم من أنك لا تريد فتحه.\n\nويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك، حتى وأنت مغلق عينيك.\n\nيمكن لشخص آخر يشبهك بدرجة كبيرة فتح هاتفك، مثلاً أخوك الذي يشبهك تمامًا."</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"ملاحظة:\nقد يتم فتح قفل الهاتف عند النظر إليه حتى إذا لم تكن تقصد فتحه.\n\nويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك.\n\nيمكن لشخص آخر يشبهك بدرجة كبيرة فتح هاتفك، مثل أخيك الذي يشبهك تمامًا."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"ملاحظة:\nقد يتم فتح قفل الهاتف عند النظر إليه حتى إذا لم تكن تقصد فتحه.\n\nويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك، حتى وأنت مغلق عينيك.\n\nيمكن لشخص آخر يشبهك بدرجة كبيرة فتح هاتفك، مثل أخيك الذي يشبهك تمامًا."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"هل تريد حذف بيانات الوجه؟"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"ستُحذف بيانات الوجه التي تستخدمها ميزة \"فتح القفل بالوجه\" نهائيًا وبشكلٍ آمن. وبعد إزالتها، ستحتاج إلى استخدام رقم التعريف الشخصي أو النقش أو كلمة المرور لفتح قفل الهاتف وتسجيل الدخول إلى التطبيقات وتأكيد عمليات الدفع."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"استخدام \"فتح القفل بالوجه\" لفتح قفل الهاتف"</string>
@@ -2580,10 +2580,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"الجهاز اللوحي المستخدَم أكثر من المعتاد"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"الجهاز المستخدَم أكثر من المعتاد"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"قد تنفد البطارية قبل الوقت المعتاد."</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"تأثير محدود على البطارية مؤقتًا"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"يحافظ هذا على سلامة البطارية. انقر لمعرفة مزيد من المعلومات."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"تم استخدام هاتفك أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"تم استخدام جهازك اللوحي أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"تم استخدام جهازك أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
@@ -4101,8 +4099,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"مفعّل"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"غير مفعّل"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"تثبيت الشاشة على تطبيق معيّن"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"تسمح لك ميزة \"تثبيت الشاشة على تطبيق معيّن\" بالحفاظ على التطبيق الحالي في حيز رؤيتك إلى أن تتم إزالة تثبيته. على سبيل المثال، يمكن استخدام هذه الميزة للسماح لصديق موثوق فيه بلعب لعبة معيّنة. \n\nعندما يتم تثبيت الشاشة على تطبيق معيّن، يمكن للتطبيق المثبت فتح التطبيقات الأخرى والوصول إلى البيانات الشخصية. \n\nلاستخدام ميزة \"تثبيت الشاشة على تطبيق معيّن\"، عليك تنفيذ ما يلي: 	\n١-	تفعيل ميزة \"تثبيت الشاشة على تطبيق معيّن\" 	\n٢-	فتح \"نظرة عامة\" 	\n٣-	النقر على رمز التطبيق في أعلى الشاشة ثم النقر على \"تثبيت\""</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"تسمح لك ميزة تثبيت التطبيق بالحفاظ على التطبيق الحالي في حيز رؤيتك إلى أن تتم إزالة تثبيته. على سبيل المثال، يمكن استخدام هذه الميزة للسماح لصديق موثوق فيه بلعب لعبة معيّنة. \n\nعندما يتم تثبيت تطبيق، يمكن للتطبيق المثبت فتح التطبيقات الأخرى والوصول إلى البيانات الشخصية. \n\nإذا أردت مشاركة جهازك بأمان مع أحد الأشخاص، اجعله يستخدم حساب ضيف بدلاً من استخدام حسابك. \n\nلاستخدام ميزة تثبيت التطبيقات، يجب تنفيذ ما يلي: 	\n1-	تفعيل ميزة تثبيت التطبيقات 	\n2-	فتح \"نظرة عامة\" 	\n3-	النقر على رمز التطبيق في أعلى الشاشة ثم النقر على \"تثبيت\""</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"تسمح لك ميزة \"تثبيت الشاشة على تطبيق معيّن\" بالحفاظ على التطبيق الحالي في حيز رؤيتك إلى أن تتم إزالة تثبيتها. على سبيل المثال، يمكن استخدام هذه الميزة للسماح لصديق موثوق فيه بلعب لعبة معيّنة."</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"عندما يتم تثبيت الشاشة على تطبيق معيّن، يمكن لهذا التطبيق فتح التطبيقات الأخرى والوصول إلى البيانات الشخصية. \n\nلاستخدام ميزة \"تثبيت الشاشة على تطبيق معيّن\":، يجب تنفيذ ما يلي: 	\n1-	تفعيل ميزة \"تثبيت الشاشة على تطبيق معيّن\" 	\n2-	فتح \"نظرة عامة\" 	\n3-	النقر على رمز التطبيق في أعلى الشاشة ثم النقر على \"تثبيت\""</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"عندما يتم تثبيت الشاشة على تطبيق معيّن، يمكن لهذا التطبيق فتح التطبيقات الأخرى والوصول إلى البيانات الشخصية. \n\nإذا أردت مشاركة جهازك بأمان مع أحد الأشخاص، اجعله يستخدم حساب ضيف بدلاً من استخدام حسابك. \n\nلاستخدام ميزة \"تثبيت الشاشة على تطبيق معيّن\"، يجب تنفيذ ما يلي: 	\n1-	تفعيل ميزة \"تثبيت الشاشة على تطبيق معيّن\" 	\n2-	فتح \"نظرة عامة\" 	\n3-	النقر على رمز التطبيق في أعلى الشاشة ثم النقر على \"تثبيت\""</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"عندما يتم تثبيت الشاشة على تطبيق معيّن: \n\n•	 يمكن الوصول إلى البيانات الشخصية \n		(مثلاً جهات الاتصال ومحتوى الرسائل الإلكترونية) \n•	 يمكن للتطبيق المثبت فتح التطبيقات الأخرى \n\nلا تستخدِم ميزة \"تثبيت الشاشة على تطبيق معيّن\" إلا مع المستخدمين الموثوق فيهم."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"طلب إدخال النقش الخاص بإلغاء القفل قبل إزالة التثبيت"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"طلب إدخال رقم التعريف الشخصي قبل إزالة التثبيت"</string>
@@ -4801,22 +4800,15 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"النقر لفحص الجهاز"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، انقر على شاشتك."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"‏تنبيه SOS في حالة طوارئ"</string>
-    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
-    <skip />
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"‏استخدام تنبيه SOS في حالة الطوارئ"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"تحت إدارة <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"يمكنك بدء الإجراءات أدناه عن طريق الضغط بسرعة على زر التشغيل 5 مرات أو أكثر."</string>
-    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
-    <skip />
+    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"تشغيل إنذار العد التنازلي"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="9215504009890604179">"تشغيل صوت مرتفع قبل إرسال إشعار لطلب المساعدة"</string>
+    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"الاتصال للحصول على مساعدة"</string>
+    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"رقم هاتف للحصول على مساعدة"</string>
+    <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>، انقر لتغيير الرقم."</string>
+    <string name="emergency_gesture_number_override_notes" msgid="7270300987756837957">"‏إذا أدخلت رقمًا غير أرقام الطوارئ:\n • يجب فتح قفل جهازك لاستخدام تنبيه SOS في حالة الطوارئ. \n • قد لا يتم الرد على المكالمة."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"تمرير بصمة الإصبع لعرض الإشعارات"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"تمرير بصمة الإصبع"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"للاطّلاع على الإشعارات، مرِّر إصبعك للأسفل على زر استشعار بصمات الإصبع في الجزء الخلفي لهاتفك."</string>
@@ -5304,6 +5296,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"مكالمات الطوارئ"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"‏لا يتيح مشغّل شبكة الجوّال مكالمات الطوارئ من خلال ميزة \"الاتصال عبر Wi-Fi\".\nويتم تبديل الجهاز تلقائيًا إلى شبكة جوّال لإجراء مكالمة طوارئ.\nلا يمكن إجراء مكالمات الطوارئ إلا في المناطق التي تتوفّر فيها تغطية شبكة الجوّال."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"‏استخدام شبكة Wi‑Fi لإجراء المكالمات لتحسين الجودة"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"‏الاتصال عبر شرائح SIM"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"‏السماح بتلقّي المكالمات والرسائل القصيرة SMS من شريحة SIM أخرى على هذه الشريحة."</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"‏الاتصال عبر شرائح sim"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"رسالة وسائط متعددة واردة"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"يتعذّر إرسال رسالة وسائط متعددة"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"انقر للسماح بالمراسلة باستخدام رسائل الوسائط المتعددة على <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> عند إيقاف بيانات الجوّال."</string>
@@ -5372,16 +5367,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"وضع الطيران، آمنة في وضع الطيران"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"‏المكالمات والرسائل القصيرة SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"‏الاتصال عبر Wi-Fi"</string>
-    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"‏يمكنك إجراء مكالمات وتلقّيها عبر شبكات غير تابعة لمشغّلي شبكات الجوّال، مثلاً عبر شبكة Wi-Fi."</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"‏تسمح لك ميزة \"الاتصال عبر Wi-Fi\" بإجراء مكالمات وتلقّيها عبر شبكات غير تابعة لمشغّلي شبكات الجوّال."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"المكالمات"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"التفضيلات"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"‏الاتصال بشبكات Wi-Fi عامة"</string>
-    <!-- no translation found for keywords_internet (7674082764898690310) -->
-    <skip />
+    <string name="keywords_internet" msgid="7674082764898690310">"‏الاتصال بالشبكة، الإنترنت، لاسلكي، بيانات، wifi، wi-fi، wi fi، خلوي، جهاز جوّال، مشغل شبكة الجوال، جيل رابع، جيل ثالث، جيل ثاني، lte"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"الميزة غير متاحة لأن وضع \"وقت النوم\" مفعّل."</string>
-    <string name="reset_importance_completed" msgid="3595536767426097205">"اكتملت عملية إعادة ضبط أهمية الإشعار."</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"اكتملت عملية إعادة ضبط درجة الأهمية الخاصة بالإشعارات."</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"التطبيقات"</string>
 </resources>

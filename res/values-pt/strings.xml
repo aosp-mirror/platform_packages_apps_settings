@@ -3883,8 +3883,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Ativado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desativado"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fixação de apps"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"A fixação de apps permite manter o app atual em exibição até você liberá-lo. Esse recurso pode ser usado, por exemplo, para permitir que um amigo confiável abra um jogo específico. \n\nQuando um app está fixado, ele pode abrir outros apps e acessar dados pessoais. \n\nPara usar a fixação de apps: 	\n1.	Ative a fixação de apps 	\n2.	Abra a opção \"Visão geral\" 	\n3.	Na parte superior da tela, toque no ícone do app e depois em \"Fixar\""</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"A fixação de apps permite manter o app atual em exibição até você liberá-lo. Esse recurso pode ser usado, por exemplo, para permitir que um amigo confiável abra um jogo específico. \n\nQuando um app está fixado, ele pode abrir outros apps e acessar dados pessoais. \n\nSe você quiser compartilhar seu dispositivo com alguém de forma segura, tente usar um usuário convidado. \n\nPara usar a fixação de apps: 	\n1.	Ative a fixação de apps 	\n2.	Abra a opção \"Visão geral\" 	\n3.	Na parte superior da tela, toque no ícone do app e depois em \"Fixar\""</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"A fixação de apps permite manter o app atual em exibição até você liberá-lo. Esse recurso pode ser usado, por exemplo, para permitir que um amigo confiável abra um jogo específico."</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Quando um app está fixado, ele pode abrir outros apps e os dados pessoais podem ficar acessíveis. \n\nPara usar a fixação de apps, faça o seguinte: 	\n1.	Ative a fixação de apps 	\n2.	Abra a opção \"Visão geral\" 	\n3.	Na parte superior da tela, toque no ícone do app e depois em \"Fixar\""</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Quando um app está fixado, ele pode abrir outros apps e os dados pessoais podem ficar acessíveis. \n\nSe você quiser compartilhar seu dispositivo com alguém de forma segura, tente fazer isso com um usuário convidado. \n\nPara usar a fixação de apps, faça o seguinte: 	\n1.	Ative a fixação de apps 	\n2.	Abra a opção \"Visão geral\" 	\n3.	Na parte superior da tela, toque no ícone do app e depois em \"Fixar\""</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Quando o app está fixado, ele pode: \n\n•		acessar dados pessoais \n		(como contatos e conteúdo de e-mail); \n•		abrir outros apps. \n\nUse a fixação de apps apenas com pessoas em quem você confia."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pedir padrão de desbloqueio antes de desafixar"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Pedir PIN antes de desafixar"</string>
@@ -4507,7 +4508,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tocar para verificar o dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para verificar a hora, as notificações e outras informações, toque na tela."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Emergência"</string>
-    <string name="emergency_gesture_switchbar_title" msgid="6443099373482993393">"Usar as opções de emergência"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"Usar as opções de emergência"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Gerenciado por <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Pressione o botão liga/desliga rapidamente cinco vezes ou mais para iniciar as ações abaixo"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Tocar alarme de contagem regressiva"</string>
@@ -4963,6 +4964,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Chamadas de emergência"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"As chamadas de emergência feitas com o recurso \"Chamada no Wi-Fi\" não são compatíveis com sua operadora.\nO dispositivo alterna automaticamente para uma rede celular para fazer uma chamada de emergência.\nAs chamadas de emergência são possíveis apenas em áreas com cobertura de celular."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Usar Wi-Fi nas chamadas para melhorar a qualidade"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Chamadas entre chips"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Permitir chamadas e mensagens SMS de outro chip por este."</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"chamadas entre chips"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Mensagem MMS recebida"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Não é possível enviar mensagens MMS"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Toque para permitir mensagens MMS pela <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> quando os dados móveis estiverem desativados"</string>
@@ -5031,16 +5035,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"avião, segura para aviões"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Chamadas e SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Chamada no Wi-Fi"</string>
-    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"Faça e receba chamadas por redes sem operadora, como Wi-Fi"</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"A chamada no Wi-Fi permite que você faça e receba chamadas por redes sem operadora, como algumas redes Wi-Fi."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Chamadas"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferências"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectar-se a redes públicas"</string>
-    <!-- no translation found for keywords_internet (7674082764898690310) -->
-    <skip />
+    <string name="keywords_internet" msgid="7674082764898690310">"conexão de rede, internet, sem fio, dados, wifi, wi-fi, wi fi, celular, rede móvel, operadora de celular, 4g, 3g, 2g, lte"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Indisponível durante o Modo noite"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Redefinição da importância de notificações concluída."</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
 </resources>
