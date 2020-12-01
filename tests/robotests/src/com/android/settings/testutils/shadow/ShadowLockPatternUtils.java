@@ -18,19 +18,31 @@ package com.android.settings.testutils.shadow;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Implements(LockPatternUtils.class)
 public class ShadowLockPatternUtils {
 
     private static boolean sDeviceEncryptionEnabled;
+    private static Map<Integer, Integer> sUserToComplexityMap = new HashMap<>();
+
+
+    @Resetter
+    public static void reset() {
+        sUserToComplexityMap.clear();
+        sDeviceEncryptionEnabled = false;
+    }
 
     @Implementation
     protected boolean hasSecureLockScreen() {
@@ -75,5 +87,19 @@ public class ShadowLockPatternUtils {
     @Implementation
     protected boolean checkPasswordHistory(byte[] passwordToCheck, byte[] hashFactor, int userId) {
         return false;
+    }
+
+    @Implementation
+    public @DevicePolicyManager.PasswordComplexity int getRequestedPasswordComplexity(int userId) {
+        return sUserToComplexityMap.getOrDefault(userId,
+                DevicePolicyManager.PASSWORD_COMPLEXITY_NONE);
+    }
+
+    public static void setRequiredPasswordComplexity(int userId, int complexity) {
+        sUserToComplexityMap.put(userId, complexity);
+    }
+
+    public static void setRequiredPasswordComplexity(int complexity) {
+        setRequiredPasswordComplexity(UserHandle.myUserId(), complexity);
     }
 }
