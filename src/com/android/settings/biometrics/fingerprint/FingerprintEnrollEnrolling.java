@@ -27,6 +27,7 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.media.AudioAttributes;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -50,6 +51,8 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.util.DescriptionStyler;
+
+import java.util.List;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -130,12 +133,29 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fingerprint_enroll_enrolling);
+
+        final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
+        final List<FingerprintSensorPropertiesInternal> props =
+                fingerprintManager.getSensorPropertiesInternal();
+        final boolean canAssumeUdfps = props.size() == 1 && props.get(0).isAnyUdfpsType();
+
+        if (canAssumeUdfps) {
+            // Use a custom layout since animations, etc must be based off of the sensor's physical
+            // location.
+            setContentView(R.layout.udfps_enroll_enrolling);
+            final UdfpsEnrollLayout udfpsEnrollLayout = (UdfpsEnrollLayout) getLayoutInflater()
+                    .inflate(R.layout.udfps_enroll_layout, null /* root */);
+            getLayout().addView(udfpsEnrollLayout);
+        } else {
+            setContentView(R.layout.fingerprint_enroll_enrolling);
+        }
+
         setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
-        mStartMessage = (TextView) findViewById(R.id.sud_layout_description);
-        mRepeatMessage = (TextView) findViewById(R.id.repeat_message);
-        mErrorText = (TextView) findViewById(R.id.error_text);
-        mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
+
+        mStartMessage = findViewById(R.id.sud_layout_description);
+        mRepeatMessage = findViewById(R.id.repeat_message);
+        mErrorText = findViewById(R.id.error_text);
+        mProgressBar = findViewById(R.id.fingerprint_progress_bar);
         mVibrator = getSystemService(Vibrator.class);
 
         if (getLayout().shouldApplyPartnerHeavyThemeResource()) {
