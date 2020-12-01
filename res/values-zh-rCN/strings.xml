@@ -2456,10 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板电脑的使用强度比平时高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"设备的使用强度比平时高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"电池电量可能会比平时更快耗尽"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"暂时限用电池"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"有助于使电池保持良好状态。点按即可了解详情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"您使用的手机的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"您使用平板电脑的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"您使用设备的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
@@ -3885,8 +3883,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"开启"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"关闭"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"固定应用"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。\n\n固定某个应用后，该应用可打开其他应用，也能访问您的个人数据。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能 \n2.	打开“概览” \n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。\n\n固定某个应用后，该应用可打开其他应用，也能访问您的个人数据。\n\n如果您想安全地与他人共用您的设备，请尝试改用访客用户个人资料。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能 \n2.	打开“概览” \n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。"</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"固定某个应用后，该应用可打开其他应用，也能访问个人数据。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能	\n2.	打开“概览”	\n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"固定某个应用后，该应用可打开其他应用，也能访问个人数据。\n\n如果您想安全地与他人共用您的设备，请尝试改用访客用户个人资料。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能	\n2.	打开“概览”	\n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定应用后：\n\n•		该应用可访问您的个人数据\n		（例如通讯录和电子邮件内容）\n•		已固定的应用可打开其他应用\n\n请务必只为您非常信任的人开启固定应用功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定屏幕前要求绘制解锁图案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定前要求输入 PIN 码"</string>
@@ -4509,22 +4508,15 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"点按即可查看设备相关信息"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"要查看时间、通知和其他信息，请点按您的屏幕。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"紧急求救"</string>
-    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
-    <skip />
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"使用紧急求救功能"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"由<xliff:g id="APP_NAME">%1$s</xliff:g>管理"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"快速按电源按钮 5 次或更多次即可启动以下操作"</string>
-    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
-    <skip />
+    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"播放倒计时警报"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="9215504009890604179">"先播放响亮的声音，再发出求助通知"</string>
+    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"打电话寻求帮助"</string>
+    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"求助电话号码"</string>
+    <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>。点按即可更改"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="7270300987756837957">"如果您输入的不是紧急电话号码：\n • 您必须解锁设备才能使用紧急求救服务\n • 您的电话可能不会有人接听"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"滑动指纹即可查看通知"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"滑动指纹"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"要查看通知，请在手机背面的指纹传感器上向下滑动手指。"</string>
@@ -4972,6 +4964,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"紧急呼叫"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"您的运营商不支持通过 WLAN 通话进行紧急呼叫。\n设备会自动切换到移动网络，以拨打紧急呼叫电话。\n只能在移动网络覆盖区域内进行紧急呼叫。"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"使用 WLAN 通话以提升通话质量"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"跨 SIM 卡通话"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"使用这张 SIM 卡时，允许通过另一张 SIM 卡进行通话和收发短信。"</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"跨 SIM 卡通话"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"接收彩信"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"无法发送彩信"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"点按即可在移动数据网络关闭时通过<xliff:g id="OPERATOR_NAME">%1$s</xliff:g>收发彩信"</string>
@@ -5040,16 +5035,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"飞机，可在飞机上安全使用"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"通话和短信"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"WLAN 通话"</string>
-    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"通过 WLAN 等非运营商网络接打电话"</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"WLAN 通话功能支持您通过非运营商网络（例如某些 WLAN 网络）接打电话。"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"通话"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"短信"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"偏好设置"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"连接到公共网络"</string>
-    <!-- no translation found for keywords_internet (7674082764898690310) -->
-    <skip />
+    <string name="keywords_internet" msgid="7674082764898690310">"网络连接, 互联网, 无线, 数据, WiFi, Wi-Fi, Wi Fi, WLAN, 移动网络, 移动, 手机运营商, 4G, 3G, 2G, LTE"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寝模式开启时无法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重置完成。"</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"应用"</string>
 </resources>

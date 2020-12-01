@@ -208,6 +208,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private LinkablePreference mStatusMessagePreference;
 
     /**
+     * Mobile networks list for provider model
+     */
+    private static final String PREF_KEY_PROVIDER_MOBILE_NETWORK = "provider_model_mobile_network";
+    private NetworkMobileProviderController mNetworkMobileProviderController;
+
+    /**
      * Tracks whether the user initiated a connection via clicking in order to autoscroll to the
      * network once connected.
      */
@@ -255,6 +261,16 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mDataUsagePreference.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(),
                 0 /*subId*/,
                 null /*service*/);
+        addNetworkMobileProviderController();
+    }
+
+    private void addNetworkMobileProviderController() {
+        if (mNetworkMobileProviderController == null) {
+            mNetworkMobileProviderController = new NetworkMobileProviderController(
+                    getContext(), PREF_KEY_PROVIDER_MOBILE_NETWORK);
+        }
+        mNetworkMobileProviderController.init(getSettingsLifecycle());
+        mNetworkMobileProviderController.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -338,6 +354,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
     }
 
     @Override

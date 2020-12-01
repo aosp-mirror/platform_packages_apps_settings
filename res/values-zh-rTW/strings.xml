@@ -2456,10 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板電腦使用率比平常高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"裝置使用率比平常高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池電量可能會比平常更快耗盡"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"暫時限制電池用量"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"有助延長電池壽命。輕觸即可瞭解詳情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"你的手機使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"你的平板電腦使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"你的裝置使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
@@ -3885,8 +3883,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"開啟"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"關閉"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"應用程式固定"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"你可以使用應用程式固定功能，讓目前使用的應用程式持續顯示在螢幕上，直到你取消固定為止。請務必只針對你信任的人使用這項功能，例如讓信任的好友遊玩特定遊戲。\n\n固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n使用應用程式固定功能的步驟如下：\n1.	開啟應用程式固定功能\n2.	開啟總覽\n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"你可以使用應用程式固定功能，將目前使用的應用程式固定在螢幕上，直到你取消固定為止。如果想讓信任的好友用你的手機玩遊戲，就可以使用這個功能。\n\n固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n如要安全地與他人共用裝置，建議改用訪客使用者設定檔。\n\n使用應用程式固定功能的步驟如下：\n1.	開啟應用程式固定功能 	\n2.	開啟「總覽」 \n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"你可以使用應用程式固定功能，將目前使用的應用程式固定在螢幕上，直到你取消固定為止。如果想讓信任的好友用你的手機玩遊戲，就可以使用這個功能。"</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n如何使用應用程式固定功能：	\n1.	開啟應用程式固定功能 	\n2.	開啟 [總覽] 	\n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n如要安全地與他人共用裝置，建議你改用訪客使用者設定檔。\n\n如何使用應用程式固定功能：	\n1.	開啟應用程式固定功能 	\n2.	開啟 [總覽] 	\n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電子郵件內容)\n•		固定的應用程式可開啟其他應用程式\n\n請務必只針對你信任的人使用應用程式固定功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定時必須畫出解鎖圖案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定時必須輸入 PIN 碼"</string>
@@ -4509,22 +4508,15 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"輕觸以查看裝置"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"如要查看時間、通知和其他資訊，請輕觸螢幕。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"緊急求救"</string>
-    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
-    <skip />
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"使用緊急求救功能"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"由「<xliff:g id="APP_NAME">%1$s</xliff:g>」管理"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"快速連按電源按鈕 5 次以上即可觸發動作"</string>
-    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
-    <skip />
+    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"播放倒數計時警報"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="9215504009890604179">"先播放高分貝的音效，再發出求救通知"</string>
+    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"撥打求救電話"</string>
+    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"求救電話號碼"</string>
+    <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>。輕觸即可變更"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="7270300987756837957">"如果你輸入的不是緊急電話號碼：\n • 你必須解鎖裝置，才能使用緊急求救功能\n • 電話可能沒有回應"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"滑動指紋感應器以查看通知"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"滑動手指"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"將手指放在手機背面的指紋感應器上並向下滑動，即可查看通知。"</string>
@@ -4972,6 +4964,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"緊急電話"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"你的電信業者目前不支援透過 Wi-Fi 通話撥打緊急電話。\n這個裝置會在撥打緊急電話時自動切換到行動數據網路。\n你只能在有行動網路訊號的地區撥打緊急電話。"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"使用 Wi-Fi 進行通話以改善通話品質"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"跨 SIM 卡通話"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"使用這張 SIM 卡時允許透過另一張 SIM 卡進行通話和收發簡訊。"</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"跨 SIM 卡通話"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"收到多媒體訊息"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"無法傳送多媒體訊息"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"如要在行動數據關閉時透過「<xliff:g id="OPERATOR_NAME">%1$s</xliff:g>」收發多媒體訊息，請輕觸這裡"</string>
@@ -5040,16 +5035,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"飛航, 飛航安全"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"通話和簡訊"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi 通話"</string>
-    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"透過諸如 Wi‑Fi 這類非電信業者提供的網路撥打電話及接聽來電"</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"Wi-Fi 通話功能可讓你透過非電信業者網路 (例如某些 Wi-Fi 網路) 撥打電話及接聽來電。"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"通話"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"簡訊"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"偏好設定"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"連線至公用網路"</string>
-    <!-- no translation found for keywords_internet (7674082764898690310) -->
-    <skip />
+    <string name="keywords_internet" msgid="7674082764898690310">"網路連線, 網際網路, 無線, 行動數據, wifi, wi-fi, wi fi, 行動網路, 行動, 電信業者, 4g, 3g, 2g, lte"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寢時間模式開啟時無法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重設完成。"</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"應用程式"</string>
 </resources>

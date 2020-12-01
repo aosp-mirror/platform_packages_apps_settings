@@ -3883,8 +3883,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"On"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Off"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"App pinning"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game. \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible. \n\nTo use app pinning: 	\n1.	Turn on app pinning 	\n2.	Open Overview 	\n3.	Tap the app icon at the top of the screen, then tap Pin"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game. \n\nWhen an app is pinned, the pinned app may open other apps, and personal data may be accessible. \n\nIf you want to share your device securely with someone, try using a guest user instead. \n\nTo use app pinning: 	\n1.	Turn on app pinning 	\n2.	Open Overview 	\n3.	Tap the app icon at the top of the screen, then tap \'Pin\'"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game."</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"When an app is pinned, the pinned app may open other apps and personal data may be accessible. \n\nTo use app pinning: 	\n1.	Turn on app pinning 	\n2.	Open Overview 	\n3.	Tap the app icon at the top of the screen, then tap Pin"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"When an app is pinned, the pinned app may open other apps and personal data may be accessible. \n\nIf you want to securely share your device with someone, try using a guest user instead. \n\nTo use app pinning: 	\n1.	Turn on app pinning 	\n2.	Open Overview 	\n3.	Tap the app icon at the top of the screen, then tap Pin"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"When app is pinned: \n\n• Personal data may be accessible \n(such as contacts and email content) \n• Pinned app may open other apps \n\nOnly use app pinning with people that you trust."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Ask for unlock pattern before unpinning"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Ask for PIN before unpinning"</string>
@@ -4507,7 +4508,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tap to check device"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"To check time, notifications and other info, tap your screen."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Emergency SOS"</string>
-    <string name="emergency_gesture_switchbar_title" msgid="6443099373482993393">"Use emergency SOS"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"Use emergency SOS"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Managed by <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Start the actions below by pressing the power button quickly five times or more"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Play countdown alarm"</string>
@@ -4963,6 +4964,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Emergency calls"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Emergency calls over Wi‑Fi Calling are not supported by your operator.\nThe device switches automatically to a mobile network to place an emergency call.\nEmergency calls are only possible in areas with mobile coverage."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Use Wi‑Fi for calls to improve quality"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Cross-SIM calling"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Allow other SIM calls and SMSs over this SIM."</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"cross-SIM calling"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Incoming MMS message"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Can’t send MMS message"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Tap to allow MMS messaging on <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> when mobile data is off"</string>
@@ -5031,16 +5035,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"aeroplane, aeroplane-safe"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Calls and SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi calling"</string>
-    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"Make and receive calls over non‑operator networks, like Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"Wi‑Fi calling allows you to make and receive calls over non‑operator networks, such as some Wi‑Fi networks."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Calls"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferences"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Connect to public networks"</string>
-    <!-- no translation found for keywords_internet (7674082764898690310) -->
-    <skip />
+    <string name="keywords_internet" msgid="7674082764898690310">"network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, mobile operator, 4g, 3g, 2g, lte"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Unavailable because bedtime mode is on"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Reset notification importance completed."</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
 </resources>

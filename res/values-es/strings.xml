@@ -2456,10 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"El tablet se ha usado más de lo normal"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"El dispositivo se ha usado más de lo normal"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Quizás se agote la batería antes de lo normal"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (8826010086459178383) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4476296841600798068) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Batería limitada temporalmente"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Ayuda a mantener la batería en buen estado. Toca para ver más información."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Tu teléfono se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tu tablet se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Tu dispositivo se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
@@ -3885,8 +3883,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Activado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desactivado"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fijar aplicaciones"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico. \n\nEs posible que una aplicación fijada pueda abrir otras aplicaciones y que se pueda acceder a datos personales. \n\nPara fijar una aplicación, sigue estos pasos: \n1. Activa la función de fijar aplicaciones. \n2. Abre Aplicaciones recientes. \n3. Toca el icono de la aplicación situado en la parte superior de la pantalla y, a continuación, toca Fijar."</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico. \n\nEs posible que una aplicación fijada puede abrir otras aplicaciones y que se pueda acceder a datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, prueba a usar un usuario invitado. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	Toca el icono de la aplicación situado en la parte superior de la pantalla y, a continuación, toca Fijar."</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico."</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Al fijar una aplicación, es posible que se abran otras aplicaciones y que se pueda acceder a datos personales. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	En la parte superior de la pantalla, toca el icono de la aplicación y, después, toca Fijar."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Al fijar una aplicación, es posible que se abran otras aplicaciones y que se pueda acceder a datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, prueba con la función para usuarios invitados. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	En la parte superior de la pantalla, toca el icono de la aplicación y, después, toca Fijar."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Al fijar una aplicación: \n\n• Es posible que se pueda acceder a datos personales (como contactos y contenido de correos). \n• Es posible que las aplicaciones fijadas abran otras aplicaciones. \n\n\nUsa la función de fijar aplicaciones solo con personas de confianza."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicitar patrón de desbloqueo para desactivar"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Solicitar PIN para desactivar"</string>
@@ -4509,22 +4508,15 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Toca para comprobar el dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para ver la hora, las notificaciones y otra información, toca la pantalla."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS de emergencia"</string>
-    <!-- no translation found for emergency_gesture_switchbar_title (6443099373482993393) -->
-    <skip />
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"Usar SOS de emergencia"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Gestionado por <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Inicia las acciones que se indican más abajo pulsando rápidamente el botón de encendido 5 o más veces."</string>
-    <!-- no translation found for emergency_gesture_sound_setting_title (7153948164862156536) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (9215504009890604179) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_title (4969340870836239982) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_dialog_title (8901271205171421201) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_call_for_help_summary (6552830427932669221) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_number_override_notes (7270300987756837957) -->
-    <skip />
+    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Poner alarma de cuenta atrás"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="9215504009890604179">"Emite un fuerte sonido antes de pedir ayuda."</string>
+    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Llamar para pedir ayuda"</string>
+    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Número al que llamar para pedir ayuda"</string>
+    <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>; toca para cambiarlo"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="7270300987756837957">"Si indicas un número que no es de los servicios de emergencias:\n • El dispositivo debe estar desbloqueado para usar SOS de emergencia.\n • Puede que no se responda a tu llamada."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Deslizar por el sensor de huellas para ver notificaciones"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Deslizar por sensor de huella digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales de la parte trasera del teléfono."</string>
@@ -4972,6 +4964,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Llamadas de emergencia"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Este operador no admite las llamadas de emergencia por Wi‑Fi.\nEl dispositivo cambia automáticamente a una red móvil para hacer una llamada de emergencia.\nSolo se pueden hacer llamadas de emergencia en zonas con cobertura móvil."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Usar Wi‑Fi en las llamadas para mejorar la calidad"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Llamadas entre tarjetas SIM"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Permite usar esta SIM para hacer llamadas y enviar SMS como si fuera otra SIM."</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"llamadas entre tarjetas SIM"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Mensaje MMS entrante"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"No se puede enviar el mensaje MMS"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Toca para permitir mensajes MMS con <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> cuando los datos móviles estén desactivados"</string>
@@ -5040,16 +5035,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"modo avión, seguro para modo avión"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Llamadas y SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Llamada por Wi-Fi"</string>
-    <!-- no translation found for calls_sms_wfc_summary (4930471357980272294) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (7002461875954024216) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"Llama o recibe llamadas por redes que no sean de ningún operador, como redes Wi-Fi"</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"Con las llamadas por Wi‑Fi, puedes llamar y recibir llamadas por redes que no son de operadores, como ciertas redes Wi‑Fi."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Llamadas"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferencias"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectarse a redes públicas"</string>
-    <!-- no translation found for keywords_internet (7674082764898690310) -->
-    <skip />
+    <string name="keywords_internet" msgid="7674082764898690310">"conexión de red, internet, inalámbrico, datos, wifi, wi-fi, wi fi, datos móviles, móvil, operador de telefonía, 4g, 3g, 2g, lte"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"No disponible porque el modo Descanso está activado"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Borrado de la importancia de las notificaciones completado."</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplicaciones"</string>
 </resources>
