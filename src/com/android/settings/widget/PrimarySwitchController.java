@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,22 +21,32 @@ import androidx.preference.Preference;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * The switch controller that is used to update the switch widget in the PrimarySwitchPreference
- * layout.
+ * and RestrictedSwitchPreference layouts.
  */
+// TODO(b/174022082): Modify the class name to GenericSwitchController.
 public class PrimarySwitchController extends SwitchWidgetController implements
         Preference.OnPreferenceChangeListener {
 
-    private final PrimarySwitchPreference mPreference;
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private Preference mPreference;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     public PrimarySwitchController(PrimarySwitchPreference preference) {
+        setPreference(preference);
+    }
+
+    public PrimarySwitchController(RestrictedSwitchPreference preference) {
+        setPreference(preference);
+    }
+
+    private void setPreference(Preference preference) {
         mPreference = preference;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(preference.getContext())
-                .getMetricsFeatureProvider();
+        mMetricsFeatureProvider =
+                FeatureFactory.getFactory(preference.getContext()).getMetricsFeatureProvider();
     }
 
     @Override
@@ -55,17 +65,30 @@ public class PrimarySwitchController extends SwitchWidgetController implements
 
     @Override
     public void setChecked(boolean checked) {
-        mPreference.setChecked(checked);
+        if (mPreference instanceof PrimarySwitchPreference) {
+            ((PrimarySwitchPreference) mPreference).setChecked(checked);
+        } else if (mPreference instanceof RestrictedSwitchPreference) {
+            ((RestrictedSwitchPreference) mPreference).setChecked(checked);
+        }
     }
 
     @Override
     public boolean isChecked() {
-        return mPreference.isChecked();
+        if (mPreference instanceof PrimarySwitchPreference) {
+            return ((PrimarySwitchPreference) mPreference).isChecked();
+        } else if (mPreference instanceof RestrictedSwitchPreference) {
+            return ((RestrictedSwitchPreference) mPreference).isChecked();
+        }
+        return false;
     }
 
     @Override
     public void setEnabled(boolean enabled) {
-        mPreference.setSwitchEnabled(enabled);
+        if (mPreference instanceof PrimarySwitchPreference) {
+            ((PrimarySwitchPreference) mPreference).setSwitchEnabled(enabled);
+        } else if (mPreference instanceof RestrictedSwitchPreference) {
+            ((RestrictedSwitchPreference) mPreference).setEnabled(enabled);
+        }
     }
 
     @Override
@@ -83,6 +106,10 @@ public class PrimarySwitchController extends SwitchWidgetController implements
 
     @Override
     public void setDisabledByAdmin(EnforcedAdmin admin) {
-        mPreference.setDisabledByAdmin(admin);
+        if (mPreference instanceof PrimarySwitchPreference) {
+            ((PrimarySwitchPreference) mPreference).setDisabledByAdmin(admin);
+        } else if (mPreference instanceof RestrictedSwitchPreference) {
+            ((RestrictedSwitchPreference) mPreference).setDisabledByAdmin(admin);
+        }
     }
 }
