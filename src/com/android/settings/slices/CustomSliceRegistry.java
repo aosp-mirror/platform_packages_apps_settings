@@ -41,6 +41,7 @@ import com.android.settings.media.MediaOutputGroupSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
 import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.media.RemoteMediaSlice;
+import com.android.settings.network.AirplaneSafeNetworksSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
@@ -314,6 +315,16 @@ public class CustomSliceRegistry {
             .appendPath("always_on_display")
             .build();
 
+    /**
+     * Backing Uri for the Always On Slice.
+     */
+    public static final Uri AIRPLANE_SAFE_NETWORKS_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("airplane_safe_networks")
+            .build();
+
     @VisibleForTesting
     static final Map<Uri, Class<? extends CustomSliceable>> sUriToSlice;
 
@@ -336,6 +347,7 @@ public class CustomSliceRegistry {
         sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
         sUriToSlice.put(MEDIA_OUTPUT_GROUP_SLICE_URI, MediaOutputGroupSlice.class);
         sUriToSlice.put(ALWAYS_ON_SLICE_URI, AlwaysOnDisplaySlice.class);
+        sUriToSlice.put(AIRPLANE_SAFE_NETWORKS_SLICE_URI, AirplaneSafeNetworksSlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {
