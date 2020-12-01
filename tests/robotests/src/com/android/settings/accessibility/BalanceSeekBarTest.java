@@ -16,12 +16,16 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.HapticFeedbackConstants.CLOCK_TICK;
+import static android.view.HapticFeedbackConstants.CONTEXT_CLICK;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -49,7 +53,7 @@ public class BalanceSeekBarTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mSeekBar = new BalanceSeekBar(mContext, mAttrs);
-        mProxySeekBarListener = mSeekBar.getProxySeekBarListener();
+        mProxySeekBarListener = shadowOf(mSeekBar).getOnSeekBarChangeListener();
         mockSeekBarChangeListener = mock(SeekBar.OnSeekBarChangeListener.class);
         mSeekBar.setOnSeekBarChangeListener(mockSeekBarChangeListener);
     }
@@ -75,6 +79,31 @@ public class BalanceSeekBarTest {
 
         verify(mockSeekBarChangeListener, times(1)).onProgressChanged(eq(mSeekBar),
                 eq(MAX_PROGRESS_VALUE), eq(true));
+    }
+
+    @Test
+    public void onProgressChanged_minimumValue_clockTickFeedbackPerformed() {
+        mSeekBar.performHapticFeedback(CONTEXT_CLICK);
+        mProxySeekBarListener.onProgressChanged(mSeekBar, 0, true);
+
+        assertThat(shadowOf(mSeekBar).lastHapticFeedbackPerformed()).isEqualTo(CLOCK_TICK);
+    }
+
+    @Test
+    public void onProgressChanged_centerValue_clockTickFeedbackPerformed() {
+        mSeekBar.performHapticFeedback(CONTEXT_CLICK);
+        mProxySeekBarListener.onProgressChanged(mSeekBar, MAX_PROGRESS_VALUE / 2, true);
+
+        assertThat(shadowOf(mSeekBar).lastHapticFeedbackPerformed()).isEqualTo(CLOCK_TICK);
+    }
+
+    @Test
+    public void onProgressChanged_maximumValue_clockTickFeedbackPerformed() {
+        mSeekBar.setMax(MAX_PROGRESS_VALUE);
+        mSeekBar.performHapticFeedback(CONTEXT_CLICK);
+        mProxySeekBarListener.onProgressChanged(mSeekBar, MAX_PROGRESS_VALUE, true);
+
+        assertThat(shadowOf(mSeekBar).lastHapticFeedbackPerformed()).isEqualTo(CLOCK_TICK);
     }
 
     @Test
