@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -59,6 +60,7 @@ import java.util.List;
  */
 public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
+    private static final String TAG = "FingerprintEnrollEnrolling";
     static final String TAG_SIDECAR = "sidecar";
 
     private static final int PROGRESS_BAR_MAX = 10000;
@@ -89,6 +91,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                     .build();
 
+    private boolean mCanAssumeUdfps;
     private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
     private TextView mStartMessage;
@@ -137,9 +140,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
         final List<FingerprintSensorPropertiesInternal> props =
                 fingerprintManager.getSensorPropertiesInternal();
-        final boolean canAssumeUdfps = props.size() == 1 && props.get(0).isAnyUdfpsType();
+        mCanAssumeUdfps = props.size() == 1 && props.get(0).isAnyUdfpsType();
 
-        if (canAssumeUdfps) {
+        if (mCanAssumeUdfps) {
             // Use a custom layout since animations, etc must be based off of the sensor's physical
             // location.
             setContentView(R.layout.udfps_enroll_enrolling);
@@ -157,6 +160,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mErrorText = findViewById(R.id.error_text);
         mProgressBar = findViewById(R.id.fingerprint_progress_bar);
         mVibrator = getSystemService(Vibrator.class);
+
+        if (mCanAssumeUdfps) {
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }
 
         if (getLayout().shouldApplyPartnerHeavyThemeResource()) {
             DescriptionStyler.applyPartnerCustomizationHeavyStyle(mRepeatMessage);
@@ -213,7 +220,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     protected boolean shouldStartAutomatically() {
-        return true;
+        return !mCanAssumeUdfps;
     }
 
     @Override
@@ -229,6 +236,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     public void onEnterAnimationComplete() {
         super.onEnterAnimationComplete();
+
+        if (mCanAssumeUdfps) {
+            startEnrollment();
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+
         mAnimationCancelled = false;
         startIconAnimation();
     }
@@ -272,7 +285,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void updateDescription() {
-        if (mSidecar.getEnrollmentSteps() == -1) {
+        if (mSidecar == null || mSidecar.getEnrollmentSteps() == -1) {
             mStartMessage.setVisibility(View.VISIBLE);
             mRepeatMessage.setVisibility(View.INVISIBLE);
         } else {
@@ -319,6 +332,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void updateProgress(boolean animate) {
+        if (mSidecar == null || !mSidecar.isEnrolling()) {
+            Log.d(TAG, "Enrollment not started yet");
+            return;
+        }
+
         int progress = getProgress(
                 mSidecar.getEnrollmentSteps(), mSidecar.getEnrollmentRemaining());
         if (animate) {
