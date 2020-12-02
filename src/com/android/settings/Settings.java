@@ -23,6 +23,7 @@ import android.util.FeatureFlagUtils;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Top-level Settings activity
@@ -213,7 +214,11 @@ public class Settings extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            if (!EnterprisePrivacySettings.isPageEnabled(this)) {
+            if (FeatureFactory.getFactory(this)
+                    .getEnterprisePrivacyFeatureProvider(this)
+                    .showParentalControls()) {
+                finish();
+            } else if (!EnterprisePrivacySettings.isPageEnabled(this)) {
                 finish();
             }
         }

@@ -63,6 +63,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+
 @RunWith(RobolectricTestRunner.class)
 public class EnterprisePrivacyFeatureProviderImplTest {
 
@@ -426,6 +427,17 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         verify(mContext).startActivity(intentEquals(intent));
     }
 
+    @Test
+    public void testShowParentalControls() {
+        when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(any()))
+                .thenReturn(mOwner);
+
+        // If the intent is resolved, then we can use it to launch the activity
+        Intent intent = addParentalControlsIntent(mOwner.getPackageName());
+        assertThat(mProvider.showParentalControls()).isTrue();
+        verify(mContext).startActivity(intentEquals(intent));
+    }
+
     private Intent addWorkPolicyInfoIntent(
             String packageName, boolean deviceOwner, boolean profileOwner) {
         Intent intent = new Intent(Settings.ACTION_SHOW_WORK_POLICY_INFO);
@@ -447,6 +459,23 @@ public class EnterprisePrivacyFeatureProviderImplTest {
                     .thenReturn(activities);
         }
 
+        return intent;
+    }
+
+    private Intent addParentalControlsIntent(String packageName) {
+        Intent intent = new Intent(EnterprisePrivacyFeatureProviderImpl.ACTION_PARENTAL_CONTROLS);
+        intent.setPackage(packageName);
+        ResolveInfo resolveInfo = new ResolveInfo();
+        resolveInfo.resolvePackageName = packageName;
+        resolveInfo.activityInfo = new ActivityInfo();
+        resolveInfo.activityInfo.name = "activityName";
+        resolveInfo.activityInfo.packageName = packageName;
+
+        List<ResolveInfo> activities = ImmutableList.of(resolveInfo);
+        when(mPackageManager.queryIntentActivities(intentEquals(intent), anyInt()))
+                .thenReturn(activities);
+        when(mPackageManager.queryIntentActivitiesAsUser(intentEquals(intent), anyInt(), anyInt()))
+                .thenReturn(activities);
         return intent;
     }
 

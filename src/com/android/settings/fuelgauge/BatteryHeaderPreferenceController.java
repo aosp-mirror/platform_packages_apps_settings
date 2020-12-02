@@ -124,7 +124,9 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public void updateHeaderPreference(BatteryInfo info) {
         mBatteryPercentText.setText(formatBatteryPercentageText(info.batteryLevel));
         if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
-            if (info.remainingLabel == null) {
+            if (BatteryUtils.isBatteryDefenderOn(info)) {
+                mSummary1.setText(null);
+            } else if (info.remainingLabel == null) {
                 mSummary1.setText(info.statusLabel);
             } else {
                 mSummary1.setText(info.remainingLabel);

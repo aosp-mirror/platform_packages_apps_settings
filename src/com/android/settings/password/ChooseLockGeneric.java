@@ -221,9 +221,19 @@ public class ChooseLockGeneric extends SettingsActivity {
             mForBiometrics = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
 
-            mRequestedMinComplexity = intent
+            final int complexityFromIntent = intent
                     .getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
-            mCallerAppName =
+            final int complexityFromAdmin = mLockPatternUtils.getRequestedPasswordComplexity(
+                    mUserId);
+            mRequestedMinComplexity = Math.max(complexityFromIntent, complexityFromAdmin);
+            final boolean isComplexityProvidedByAdmin = (complexityFromAdmin > complexityFromIntent)
+                    && mRequestedMinComplexity > PASSWORD_COMPLEXITY_NONE;
+
+            // If the complexity is provided by the admin, do not get the caller app's name.
+            // If the app requires, for example, low complexity, and the admin requires high
+            // complexity, it does not make sense to show a footer telling the user it's the app
+            // requesting a particular complexity because the admin-set complexity will override it.
+            mCallerAppName = isComplexityProvidedByAdmin ? null :
                     intent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME);
             mIsCallingAppAdmin = intent
                     .getBooleanExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, /* defValue= */ false);
@@ -669,8 +679,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             final PreferenceScreen entries = getPreferenceScreen();
 
             int adminEnforcedQuality = mDpm.getPasswordQuality(null, mUserId);
-            EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(
-                    getActivity(), mUserId);
+            EnforcedAdmin enforcedAdmin =
+                    RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(getActivity(),
+                            mUserId);
             // If we are to unify a work challenge at the end of the credential enrollment, manually
             // merge any password policy from that profile here, so we are enrolling a compliant
             // password. This is because once unified, the profile's password policy will
