@@ -18,7 +18,6 @@
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:BiometricEnrollCheckbox="http://schemas.android.com/apk/res/com.android.settings"
     style="?attr/face_layout_theme"
     app:sucHeaderText="@string/multi_biometric_enroll_title"
     android:id="@+id/setup_wizard_layout"
@@ -59,9 +58,9 @@
             android:id="@+id/checkbox_face"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            BiometricEnrollCheckbox:title="@string/multi_biometric_enroll_face_unlock_title"
-            BiometricEnrollCheckbox:description="@string/multi_biometric_enroll_face_unlock_description"
-            BiometricEnrollCheckbox:icon="@drawable/ic_face_24dp"/>
+            app:title="@string/multi_biometric_enroll_face_unlock_title"
+            app:description="@string/multi_biometric_enroll_face_unlock_description"
+            app:icon="@drawable/ic_face_24dp"/>
 
         <include layout="@layout/horizontal_divider"/>
 
@@ -69,9 +68,9 @@
             android:id="@+id/checkbox_fingerprint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            BiometricEnrollCheckbox:title="@string/multi_biometric_enroll_fingerprint_unlock_title"
-            BiometricEnrollCheckbox:description="@string/multi_biometric_enroll_fingerprint_unlock_description"
-            BiometricEnrollCheckbox:icon="@drawable/ic_fingerprint_24dp"/>
+            app:title="@string/multi_biometric_enroll_fingerprint_unlock_title"
+            app:description="@string/multi_biometric_enroll_fingerprint_unlock_description"
+            app:icon="@drawable/ic_fingerprint_24dp"/>
 
         <include layout="@layout/horizontal_divider"/>
 

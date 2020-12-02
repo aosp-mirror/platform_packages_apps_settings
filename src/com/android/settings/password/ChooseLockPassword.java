@@ -421,6 +421,8 @@ public class ChooseLockPassword extends SettingsActivity {
             if (mUnificationProfileId != UserHandle.USER_NULL) {
                 mMinMetrics.maxWith(
                         mLockPatternUtils.getRequestedPasswordMetrics(mUnificationProfileId));
+                mMinComplexity = Math.max(mMinComplexity,
+                        mLockPatternUtils.getRequestedPasswordComplexity(mUnificationProfileId));
             }
 
             if (intent.getBooleanExtra(

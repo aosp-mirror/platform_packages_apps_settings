@@ -21,6 +21,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_HIGH;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
 
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.KEY_LOCK_SETTINGS_FOOTER;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
@@ -90,6 +91,7 @@ public class ChooseLockGenericTest {
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         ShadowStorageManager.reset();
         ShadowPersistentDataBlockManager.reset();
+        ShadowLockPatternUtils.reset();
     }
 
     @Test
@@ -375,6 +377,64 @@ public class ChooseLockGenericTest {
                 ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 0)).isEqualTo(13);
         assertThat((LockscreenCredential) nextIntent.getParcelableExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)).isNotNull();
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_ComplexityIsReadFromDPM() {
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_HIGH);
+
+        initActivity(null);
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
+        assertThat(footer.getTitle()).isEqualTo(null);
+
+        Intent intent = mFragment.getLockPasswordIntent(PASSWORD_QUALITY_COMPLEX);
+        assertThat(intent.getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY,
+                PASSWORD_COMPLEXITY_NONE)).isEqualTo(PASSWORD_COMPLEXITY_HIGH);
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_ComplexityIsMergedWithDPM() {
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_HIGH);
+        Intent intent = new Intent()
+                .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
+                .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_LOW);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        // Footer should be null because admin complexity wins.
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
+        assertThat(footer.getTitle()).isEqualTo(null);
+
+        Intent passwordIntent = mFragment.getLockPasswordIntent(PASSWORD_QUALITY_COMPLEX);
+        assertThat(passwordIntent.getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY,
+                PASSWORD_COMPLEXITY_NONE)).isEqualTo(PASSWORD_COMPLEXITY_HIGH);
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_ComplexityIsMergedWithDPM_AppIsHigher() {
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
+        Intent intent = new Intent()
+                .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
+                .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        // Footer should include app name because app requirement is higher.
+        CharSequence expectedTitle =
+                mActivity.getString(R.string.unlock_footer_high_complexity_requested, "app name");
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
+        assertThat(footer.getTitle()).isEqualTo(expectedTitle);
+
+        Intent passwordIntent = mFragment.getLockPasswordIntent(PASSWORD_QUALITY_COMPLEX);
+        assertThat(passwordIntent.getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY,
+                PASSWORD_COMPLEXITY_NONE)).isEqualTo(PASSWORD_COMPLEXITY_HIGH);
     }
 
     private void initActivity(@Nullable Intent intent) {
