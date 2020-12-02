@@ -29,15 +29,12 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
-import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.wifi.WifiConnectionPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.wifi.WifiEntryPreference;
-import com.android.wifitrackerlib.WifiEntry;
-import com.android.wifitrackerlib.WifiPickerTracker;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.AccessPointPreference;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,12 +45,19 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 @RunWith(RobolectricTestRunner.class)
 public class WifiConnectionPreferenceControllerTest {
     private static final String KEY = "wifi_connection";
 
     @Mock
-    WifiPickerTracker mWifiPickerTracker;
+    WifiTracker mWifiTracker;
     @Mock
     PreferenceScreen mScreen;
     @Mock
@@ -70,6 +74,7 @@ public class WifiConnectionPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        WifiTrackerFactory.setTestingWifiTracker(mWifiTracker);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mScreen.findPreference(eq(KEY))).thenReturn(mPreferenceCategory);
@@ -78,51 +83,49 @@ public class WifiConnectionPreferenceControllerTest {
 
         mController = new WifiConnectionPreferenceController(mContext, mLifecycle, mUpdateListener,
                 KEY, 0, 0);
-        mController.mWifiPickerTracker = mWifiPickerTracker;
     }
 
     @Test
-    public void isAvailable_noConnectedWifiEntry_availableIsFalse() {
-        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(null);
-
+    public void isAvailable_noWiFiConnection_availableIsFalse() {
+        when(mWifiTracker.isConnected()).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void displayPreference_noConnectedWifiEntry_noPreferenceAdded() {
-        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(null);
-
+    public void displayPreference_noWiFiConnection_noPreferenceAdded() {
+        when(mWifiTracker.isConnected()).thenReturn(false);
+        when(mWifiTracker.getAccessPoints()).thenReturn(new ArrayList<>());
         mController.displayPreference(mScreen);
-
         verify(mPreferenceCategory, never()).addPreference(any());
     }
 
     @Test
-    public void displayPreference_hasConnectedWifiEntry_preferenceAdded() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(wifiEntry);
-
+    public void displayPreference_hasWiFiConnection_preferenceAdded() {
+        when(mWifiTracker.isConnected()).thenReturn(true);
+        final AccessPoint accessPoint = mock(AccessPoint.class);
+        when(accessPoint.isActive()).thenReturn(true);
+        when(mWifiTracker.getAccessPoints()).thenReturn(Arrays.asList(accessPoint));
         mController.displayPreference(mScreen);
-        verify(mPreferenceCategory).addPreference(any(WifiEntryPreference.class));
+        verify(mPreferenceCategory).addPreference(any(AccessPointPreference.class));
     }
 
     @Test
     public void onConnectedChanged_wifiBecameDisconnected_preferenceRemoved() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(wifiEntry);
+        when(mWifiTracker.isConnected()).thenReturn(true);
+        final AccessPoint accessPoint = mock(AccessPoint.class);
 
+        when(accessPoint.isActive()).thenReturn(true);
+        when(mWifiTracker.getAccessPoints()).thenReturn(Arrays.asList(accessPoint));
         mController.displayPreference(mScreen);
-        final ArgumentCaptor<WifiEntryPreference> captor = ArgumentCaptor.forClass(
-                WifiEntryPreference.class);
+        final ArgumentCaptor<AccessPointPreference> captor = ArgumentCaptor.forClass(
+                AccessPointPreference.class);
         verify(mPreferenceCategory).addPreference(captor.capture());
-        final WifiEntryPreference pref = captor.getValue();
+        final AccessPointPreference pref = captor.getValue();
 
-        // Become disconnected.
-        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(null);
+        when(mWifiTracker.isConnected()).thenReturn(false);
+        when(mWifiTracker.getAccessPoints()).thenReturn(new ArrayList<>());
         final int onUpdatedCountBefore = mOnChildUpdatedCount;
-
-        mController.onWifiStateChanged();
-
+        mController.onConnectedChanged();
         verify(mPreferenceCategory).removePreference(pref);
         assertThat(mOnChildUpdatedCount).isEqualTo(onUpdatedCountBefore + 1);
     }
@@ -130,24 +133,28 @@ public class WifiConnectionPreferenceControllerTest {
 
     @Test
     public void onAccessPointsChanged_wifiBecameConnectedToDifferentAP_preferenceReplaced() {
-        final WifiEntry wifiEntry1 = mock(WifiEntry.class);
-        when(wifiEntry1.getKey()).thenReturn("KEY_1");
-        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(wifiEntry1);
-        mController.displayPreference(mScreen);
-        final ArgumentCaptor<WifiEntryPreference> captor = ArgumentCaptor.forClass(
-                WifiEntryPreference.class);
+        when(mWifiTracker.isConnected()).thenReturn(true);
+        final AccessPoint accessPoint1 = mock(AccessPoint.class);
 
-        final WifiEntry wifiEntry2 = mock(WifiEntry.class);
-        when(wifiEntry1.getKey()).thenReturn("KEY_2");
-        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(wifiEntry2);
+        when(accessPoint1.isActive()).thenReturn(true);
+        when(mWifiTracker.getAccessPoints()).thenReturn(Arrays.asList(accessPoint1));
+        mController.displayPreference(mScreen);
+        final ArgumentCaptor<AccessPointPreference> captor = ArgumentCaptor.forClass(
+                AccessPointPreference.class);
+
+
+        final AccessPoint accessPoint2 = mock(AccessPoint.class);
+        when(accessPoint1.isActive()).thenReturn(false);
+        when(accessPoint2.isActive()).thenReturn(true);
+        when(mWifiTracker.getAccessPoints()).thenReturn(Arrays.asList(accessPoint1, accessPoint2));
         final int onUpdatedCountBefore = mOnChildUpdatedCount;
-        mController.onWifiEntriesChanged();
+        mController.onAccessPointsChanged();
 
         verify(mPreferenceCategory, times(2)).addPreference(captor.capture());
-        final WifiEntryPreference pref1 = captor.getAllValues().get(0);
-        final WifiEntryPreference pref2 = captor.getAllValues().get(1);
-        assertThat(pref1.getWifiEntry()).isEqualTo(wifiEntry1);
-        assertThat(pref2.getWifiEntry()).isEqualTo(wifiEntry2);
+        final AccessPointPreference pref1 = captor.getAllValues().get(0);
+        final AccessPointPreference pref2 = captor.getAllValues().get(1);
+        assertThat(pref1.getAccessPoint()).isEqualTo(accessPoint1);
+        assertThat(pref2.getAccessPoint()).isEqualTo(accessPoint2);
         verify(mPreferenceCategory).removePreference(eq(pref1));
         assertThat(mOnChildUpdatedCount).isEqualTo(onUpdatedCountBefore + 1);
     }

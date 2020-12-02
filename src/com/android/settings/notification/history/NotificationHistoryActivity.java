@@ -155,21 +155,22 @@ public class NotificationHistoryActivity extends Activity {
 
             final View container = viewForPackage.findViewById(R.id.notification_list);
             container.setVisibility(View.GONE);
-            ImageButton expand = viewForPackage.findViewById(R.id.expand);
-            expand.setContentDescription(container.getVisibility() == View.VISIBLE
+            View header = viewForPackage.findViewById(R.id.app_header);
+            ImageView expand = viewForPackage.findViewById(R.id.expand);
+            header.setStateDescription(container.getVisibility() == View.VISIBLE
                     ? getString(R.string.condition_expand_hide)
                     : getString(R.string.condition_expand_show));
             int finalI = i;
-            expand.setOnClickListener(v -> {
+            header.setOnClickListener(v -> {
                 container.setVisibility(container.getVisibility() == View.VISIBLE
                         ? View.GONE : View.VISIBLE);
                 expand.setImageResource(container.getVisibility() == View.VISIBLE
                         ? R.drawable.ic_expand_less
                         : com.android.internal.R.drawable.ic_expand_more);
-                expand.setContentDescription(container.getVisibility() == View.VISIBLE
+                header.setStateDescription(container.getVisibility() == View.VISIBLE
                         ? getString(R.string.condition_expand_hide)
                         : getString(R.string.condition_expand_show));
-                expand.sendAccessibilityEvent(TYPE_VIEW_ACCESSIBILITY_FOCUSED);
+                header.sendAccessibilityEvent(TYPE_VIEW_ACCESSIBILITY_FOCUSED);
                 mUiEventLogger.logWithPosition(
                         (container.getVisibility() == View.VISIBLE)
                             ? NotificationHistoryEvent.NOTIFICATION_HISTORY_PACKAGE_HISTORY_OPEN

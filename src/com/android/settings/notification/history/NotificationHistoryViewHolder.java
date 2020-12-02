@@ -33,7 +33,6 @@ public class NotificationHistoryViewHolder extends RecyclerView.ViewHolder {
     NotificationHistoryViewHolder(View itemView) {
         super(itemView);
         mTime = itemView.findViewById(R.id.timestamp);
-        mTime.setShowRelativeTime(true);
         mTitle = itemView.findViewById(R.id.title);
         mSummary = itemView.findViewById(R.id.text);
     }
