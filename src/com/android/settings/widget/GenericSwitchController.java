@@ -28,18 +28,17 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  * The switch controller that is used to update the switch widget in the PrimarySwitchPreference
  * and RestrictedSwitchPreference layouts.
  */
-// TODO(b/174022082): Modify the class name to GenericSwitchController.
-public class PrimarySwitchController extends SwitchWidgetController implements
+public class GenericSwitchController extends SwitchWidgetController implements
         Preference.OnPreferenceChangeListener {
 
     private Preference mPreference;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public PrimarySwitchController(PrimarySwitchPreference preference) {
+    public GenericSwitchController(PrimarySwitchPreference preference) {
         setPreference(preference);
     }
 
-    public PrimarySwitchController(RestrictedSwitchPreference preference) {
+    public GenericSwitchController(RestrictedSwitchPreference preference) {
         setPreference(preference);
     }
 

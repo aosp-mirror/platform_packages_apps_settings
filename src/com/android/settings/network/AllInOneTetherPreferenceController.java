@@ -42,7 +42,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.widget.PrimarySwitchController;
+import com.android.settings.widget.GenericSwitchController;
 import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.TetherUtil;
 
@@ -191,7 +191,7 @@ public class AllInOneTetherPreferenceController extends BasePreferenceController
     void initEnabler(Lifecycle lifecycle) {
         if (mPreference != null) {
             mTetherEnabler = new TetherEnabler(
-                    mContext, new PrimarySwitchController(mPreference), mBluetoothPan);
+                    mContext, new GenericSwitchController(mPreference), mBluetoothPan);
             if (lifecycle != null) {
                 lifecycle.addObserver(mTetherEnabler);
             }
