@@ -97,7 +97,8 @@ public class RequestManageCredentials extends Activity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         CredentialManagementAppAdapter recyclerViewAdapter = new CredentialManagementAppAdapter(
-                this, mCredentialManagerPackage, mAuthenticationPolicy.getAppAndUriMappings());
+                this, mCredentialManagerPackage, mAuthenticationPolicy.getAppAndUriMappings(),
+                /* include header= */ true, /* include expander= */ false);
         mRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
