@@ -22,6 +22,7 @@ import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -34,9 +35,11 @@ import android.content.res.Resources;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +70,9 @@ public class ScreenTimeoutSettingsTest {
 
     @Mock
     AdaptiveSleepPreferenceController mAdaptiveSleepPreferenceController;
+
+    @Mock
+    Preference mDisableOptionsPreference;
 
     @Before
     public void setup() {
@@ -125,6 +131,16 @@ public class ScreenTimeoutSettingsTest {
         mSettings.updateCandidates();
 
         verify(mSettings.mAdaptiveSleepController, never()).addToScreen(mPreferenceScreen);
+    }
+
+    @Test
+    public void updateCandidates_enforcedAdmin_showDisabledByAdminPreference() {
+        mSettings.mAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mSettings.mDisableOptionsPreference = mDisableOptionsPreference;
+
+        mSettings.updateCandidates();
+
+        verify(mPreferenceScreen, atLeast(1)).addPreference(mDisableOptionsPreference);
     }
 
     @Test
