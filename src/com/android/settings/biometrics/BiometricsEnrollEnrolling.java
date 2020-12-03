@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics;
 
+import android.annotation.Nullable;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.view.View;
@@ -33,6 +34,7 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
 
     private static final String TAG_SIDECAR = "sidecar";
 
+    @Nullable
     protected BiometricEnrollSidecar mSidecar;
 
     /**
