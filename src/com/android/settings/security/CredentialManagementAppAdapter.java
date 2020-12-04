@@ -59,6 +59,9 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
     private final PackageManager mPackageManager;
     private final RecyclerView.RecycledViewPool mViewPool;
 
+    private final boolean mIncludeHeader;
+    private final boolean mIncludeExpander;
+
     /**
      * View holder for the header in the request manage credentials screen.
      */
@@ -96,13 +99,29 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
     public class AppAuthenticationViewHolder extends RecyclerView.ViewHolder {
         private final ImageView mAppIconView;
         private final TextView mAppNameView;
-        RecyclerView mChildRecyclerView;
+        private final TextView mNumberOfUrisView;
+        private final ImageView mExpanderIconView;
+        private final RecyclerView mChildRecyclerView;
+        private final List<String> mExpandedApps;
 
         public AppAuthenticationViewHolder(View view) {
             super(view);
             mAppIconView = view.findViewById(R.id.app_icon);
             mAppNameView = view.findViewById(R.id.app_name);
+            mNumberOfUrisView = view.findViewById(R.id.number_of_uris);
+            mExpanderIconView = view.findViewById(R.id.expand);
             mChildRecyclerView = view.findViewById(R.id.uris);
+            mExpandedApps = new ArrayList<>();
+
+            mExpanderIconView.setOnClickListener(view1 -> {
+                final String appName = mSortedAppNames.get(getBindingAdapterPosition());
+                if (mExpandedApps.contains(appName)) {
+                    mExpandedApps.remove(appName);
+                } else {
+                    mExpandedApps.add(appName);
+                }
+                bindPolicyView(appName);
+            });
         }
 
         /**
@@ -119,32 +138,63 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
                 mAppIconView.setImageDrawable(null);
                 mAppNameView.setText(appName);
             }
-            bindChildView(mAppUriAuthentication.get(appName));
+            bindPolicyView(appName);
+        }
+
+        private void bindPolicyView(String appName) {
+            if (mIncludeExpander) {
+                mExpanderIconView.setVisibility(View.VISIBLE);
+                if (mExpandedApps.contains(appName)) {
+                    mNumberOfUrisView.setVisibility(View.GONE);
+                    mExpanderIconView.setImageResource(R.drawable.ic_expand_less);
+                    bindChildView(mAppUriAuthentication.get(appName));
+                } else {
+                    mChildRecyclerView.setVisibility(View.GONE);
+                    mNumberOfUrisView.setVisibility(View.VISIBLE);
+                    mNumberOfUrisView.setText(
+                            getNumberOfUrlsText(mAppUriAuthentication.get(appName)));
+                    mExpanderIconView.setImageResource(
+                            com.android.internal.R.drawable.ic_expand_more);
+                }
+            } else {
+                mNumberOfUrisView.setVisibility(View.GONE);
+                mExpanderIconView.setVisibility(View.GONE);
+                bindChildView(mAppUriAuthentication.get(appName));
+            }
         }
 
         /**
          * Bind the list of URIs for an app.
          */
-        public void bindChildView(Map<Uri, String> urisToAliases) {
+        private void bindChildView(Map<Uri, String> urisToAliases) {
             LinearLayoutManager layoutManager = new LinearLayoutManager(
                     mChildRecyclerView.getContext(), RecyclerView.VERTICAL, false);
             layoutManager.setInitialPrefetchItemCount(urisToAliases.size());
             UriAuthenticationPolicyAdapter childItemAdapter =
                     new UriAuthenticationPolicyAdapter(new ArrayList<>(urisToAliases.keySet()));
             mChildRecyclerView.setLayoutManager(layoutManager);
+            mChildRecyclerView.setVisibility(View.VISIBLE);
             mChildRecyclerView.setAdapter(childItemAdapter);
             mChildRecyclerView.setRecycledViewPool(mViewPool);
+        }
+
+        private String getNumberOfUrlsText(Map<Uri, String> urisToAliases) {
+            String url = urisToAliases.size() > 1 ? " URLs" : " URL";
+            return urisToAliases.size() + url;
         }
     }
 
     public CredentialManagementAppAdapter(Context context, String credentialManagerPackage,
-            Map<String, Map<Uri, String>> appUriAuthentication) {
+            Map<String, Map<Uri, String>> appUriAuthentication,
+            boolean includeHeader, boolean includeExpander) {
         mContext = context;
         mCredentialManagerPackage = credentialManagerPackage;
         mPackageManager = context.getPackageManager();
         mAppUriAuthentication = appUriAuthentication;
         mSortedAppNames = sortPackageNames(mAppUriAuthentication);
         mViewPool = new RecyclerView.RecycledViewPool();
+        mIncludeHeader = includeHeader;
+        mIncludeExpander = includeExpander;
     }
 
     /**
@@ -198,19 +248,20 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
         if (viewHolder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) viewHolder).bindView();
         } else if (viewHolder instanceof AppAuthenticationViewHolder) {
-            ((AppAuthenticationViewHolder) viewHolder).bindView(i - 1);
+            int position = mIncludeHeader ? i - 1 : i;
+            ((AppAuthenticationViewHolder) viewHolder).bindView(position);
         }
     }
 
     @Override
     public int getItemCount() {
         // Add an extra view to show the header view
-        return mAppUriAuthentication.size() + 1;
+        return mIncludeHeader ? mAppUriAuthentication.size() + 1 : mAppUriAuthentication.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
+        if (mIncludeHeader && position == 0) {
             return HEADER_VIEW;
         }
         return super.getItemViewType(position);
