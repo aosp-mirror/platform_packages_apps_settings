@@ -294,6 +294,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private void handleTogglePsimAction() {
         if (mSubscriptionManager.canDisablePhysicalSubscription() && mSubInfo != null) {
             mSubscriptionManager.setUiccApplicationsEnabled(mSubInfo.getSubscriptionId(), mEnable);
+            finish();
         } else {
             Log.i(
                     TAG,
