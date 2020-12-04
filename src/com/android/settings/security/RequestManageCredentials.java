@@ -35,6 +35,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
 /**
  * Displays a full screen to the user asking whether the calling app can manage the user's
  * KeyChain credentials. This screen includes the authentication policy highlighting what apps and
@@ -62,6 +64,7 @@ public class RequestManageCredentials extends Activity {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private LinearLayout mButtonPanel;
+    private ExtendedFloatingActionButton mExtendedFab;
 
     private boolean mDisplayingButtonPanel = false;
 
@@ -79,6 +82,7 @@ public class RequestManageCredentials extends Activity {
 
             loadRecyclerView();
             loadButtons();
+            loadExtendedFloatingActionButton();
             addOnScrollListener();
         } else {
             Log.e(TAG, "Unable to start activity because intent action is not "
@@ -93,7 +97,8 @@ public class RequestManageCredentials extends Activity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         CredentialManagementAppAdapter recyclerViewAdapter = new CredentialManagementAppAdapter(
-                this, mCredentialManagerPackage, mAuthenticationPolicy.getAppAndUriMappings());
+                this, mCredentialManagerPackage, mAuthenticationPolicy.getAppAndUriMappings(),
+                /* include header= */ true, /* include expander= */ false);
         mRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
@@ -104,6 +109,15 @@ public class RequestManageCredentials extends Activity {
 
         dontAllowButton.setOnClickListener(finishRequestManageCredentials());
         allowButton.setOnClickListener(setCredentialManagementApp());
+    }
+
+    private void loadExtendedFloatingActionButton() {
+        mExtendedFab = findViewById(R.id.extended_fab);
+        mExtendedFab.setOnClickListener(v -> {
+            mRecyclerView.scrollToPosition(mAuthenticationPolicy.getAppAndUriMappings().size());
+            mExtendedFab.hide();
+            showButtonPanel();
+        });
     }
 
     private View.OnClickListener finishRequestManageCredentials() {
@@ -130,9 +144,16 @@ public class RequestManageCredentials extends Activity {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!mDisplayingButtonPanel) {
+                    // On down scroll, hide text in floating action button by setting
+                    // extended to false.
+                    if (dy > 0 && mExtendedFab.getVisibility() == View.VISIBLE) {
+                        mExtendedFab.setExtended(false);
+                    }
                     if (isRecyclerScrollable()) {
+                        mExtendedFab.show();
                         hideButtonPanel();
                     } else {
+                        mExtendedFab.hide();
                         showButtonPanel();
                     }
                 }

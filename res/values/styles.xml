@@ -805,6 +805,13 @@
         <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
+    <style name="RequestManageCredentialsFab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+
     <style name="RequestManageCredentialsHeader">
         <item name="android:paddingStart">40dp</item>
         <item name="android:paddingEnd">24dp</item>
@@ -816,13 +823,13 @@
     <style name="RequestManageCredentialsTitle">
         <item name="android:layout_marginTop">24dp</item>
         <item name="android:textSize">36sp</item>
-        <item name="android:textColor">#202124</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="RequestManageCredentialsDescription">
         <item name="android:layout_marginTop">24dp</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#202124</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="AppAuthenticationPolicyItem">
@@ -838,12 +845,25 @@
     <style name="AppAuthenticationPolicyText">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#202124</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="AppAuthenticationPolicyNumberOfUrisText">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:alpha">0.7</item>
+    </style>
+
+    <style name="AppAuthenticationExpander">
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:scaleType">fitEnd</item>
     </style>
 
     <style name="AppUriAuthenticationPolicyText">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">#5F6368</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 </resources>
