@@ -22,9 +22,19 @@
     settings:searchable="false">
 
     <SwitchPreference
+        android:key="transcode_user_control"
+        android:title="@string/transcode_user_control"
+        settings:controller="com.android.settings.development.transcode.TranscodeUserControlPreferenceController" />
+
+    <SwitchPreference
         android:key="transcode_enable_all"
         android:title="@string/transcode_enable_all"
         settings:controller="com.android.settings.development.transcode.TranscodeGlobalTogglePreferenceController" />
+
+    <SwitchPreference
+        android:key="transcode_default"
+        android:title="@string/transcode_default"
+        settings:controller="com.android.settings.development.transcode.TranscodeDefaultOptionPreferenceController" />
 
     <PreferenceCategory
         android:key="transcode_skip_apps"

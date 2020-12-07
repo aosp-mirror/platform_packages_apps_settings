@@ -22,31 +22,30 @@ import android.os.SystemProperties;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * The controller for the "Enabling transcoding for all apps" switch on the transcode settings
- * screen.
+ * The controller for the User's control (over other transcoding preferences) preference switch on
+ * the transcode settings screen.
  */
-public class TranscodeGlobalTogglePreferenceController extends TogglePreferenceController {
+public class TranscodeUserControlPreferenceController extends TogglePreferenceController {
+    private static final String TRANSCODE_USER_CONTROL_SYS_PROP_KEY =
+            "persist.sys.fuse.transcode_user_control";
 
-    private static final String TRANSCODE_ENABLED_PROP_KEY = "persist.sys.fuse.transcode_enabled";
-
-    public TranscodeGlobalTogglePreferenceController(Context context,
-            String preferenceKey) {
+    public TranscodeUserControlPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+    }
+
+    @Override
+    public boolean isChecked() {
+        return SystemProperties.getBoolean(TRANSCODE_USER_CONTROL_SYS_PROP_KEY, false);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        SystemProperties.set(TRANSCODE_USER_CONTROL_SYS_PROP_KEY, String.valueOf(isChecked));
+        return true;
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public boolean isChecked() {
-        return SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, false);
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, String.valueOf(isChecked));
-        return true;
     }
 }
