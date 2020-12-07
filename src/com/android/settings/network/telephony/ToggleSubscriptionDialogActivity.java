@@ -27,6 +27,7 @@ import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.EnableMultiSimSidecar;
@@ -45,7 +46,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
     private static final String TAG = "ToggleSubscriptionDialogActivity";
     // Arguments
-    private static final String ARG_enable = "enable";
+    @VisibleForTesting
+    public static final String ARG_enable = "enable";
     // Dialog tags
     private static final int DIALOG_TAG_DISABLE_SIM_CONFIRMATION = 1;
     private static final int DIALOG_TAG_ENABLE_SIM_CONFIRMATION = 2;
