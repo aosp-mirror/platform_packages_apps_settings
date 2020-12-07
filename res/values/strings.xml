@@ -12093,6 +12093,17 @@
     <!-- Body text of DSDS activation failure dialog. Users could toggle the selected SIM again or reboot to recover. [CHAR LIMIT=NONE] -->
     <string name="dsds_activation_failure_body_msg2">Try turning on the SIM again. If the problem continues, restart your device.</string>
 
+    <!--  Strings for SIM push notifications  -->
+    <!-- Category name of the notifications related to SIM setup. [CHAR LIMIT=NONE] -->
+    <string name="sim_setup_channel_id">Network activation</string>
+    <!--  The title of post DSDS reboot notification. The title includes carrier's name. [CHAR LIMIT=NONE] -->
+    <string name="post_dsds_reboot_notification_title_with_carrier"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> is active</string>
+    <!--  The body text of post DSDS reboot notification. [CHAR LIMIT=NONE] -->
+    <string name="post_dsds_reboot_notification_text">Tap to update SIM settings</string>
+
+    <!-- Button label of the removable sim card. [CHAR LIMIT=NONE] -->
+    <string name="sim_card_label">SIM card</string>
+
     <!-- Strings for deleting eUICC subscriptions dialog activity -->
     <!-- Title on confirmation dialog asking the user if they want to erase the downloaded SIM from the device. [CHAR_LIMIT=NONE] -->
     <string name="erase_sim_dialog_title">Erase this downloaded SIM?</string>
