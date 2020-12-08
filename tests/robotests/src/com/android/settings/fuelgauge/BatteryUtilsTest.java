@@ -144,6 +144,8 @@ public class BatteryUtilsTest {
     @Mock
     private BatterySipper mIdleBatterySipper;
     @Mock
+    private BatteryInfo mBatteryInfo;
+    @Mock
     private Bundle mBundle;
     @Mock
     private UserManager mUserManager;
@@ -753,5 +755,37 @@ public class BatteryUtilsTest {
         assertThat(estimate).isNotNull();
         assertThat(estimate.isBasedOnUsage()).isTrue();
         assertThat(estimate.getAverageDischargeTime()).isEqualTo(1000);
+    }
+
+    @Test
+    public void testIsBatteryDefenderOn_isOverheatedAndIsCharging_returnTrue() {
+        mBatteryInfo.isOverheated = true;
+        mBatteryInfo.discharging = false;
+
+        assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isTrue();
+    }
+
+    @Test
+    public void testIsBatteryDefenderOn_isOverheatedAndDischarging_returnFalse() {
+        mBatteryInfo.isOverheated = true;
+        mBatteryInfo.discharging = true;
+
+        assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();
+    }
+
+    @Test
+    public void testIsBatteryDefenderOn_notOverheatedAndDischarging_returnFalse() {
+        mBatteryInfo.isOverheated = false;
+        mBatteryInfo.discharging = true;
+
+        assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();
+    }
+
+    @Test
+    public void testIsBatteryDefenderOn_notOverheatedAndIsCharging_returnFalse() {
+        mBatteryInfo.isOverheated = false;
+        mBatteryInfo.discharging = false;
+
+        assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();
     }
 }
