@@ -128,7 +128,7 @@ public class MobileNetworkListController extends AbstractPreferenceController im
             pref.setOnPreferenceClickListener(clickedPref -> {
                 if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
                         && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
-                    mSubscriptionManager.setSubscriptionEnabled(subId, true);
+                    SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true);
                 } else {
                     final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                     intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());

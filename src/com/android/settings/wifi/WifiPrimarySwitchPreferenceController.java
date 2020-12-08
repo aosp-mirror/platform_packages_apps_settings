@@ -21,7 +21,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.PrimarySwitchController;
+import com.android.settings.widget.GenericSwitchController;
 import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -89,7 +89,7 @@ public class WifiPrimarySwitchPreferenceController extends AbstractPreferenceCon
 
     @Override
     public void onStart() {
-        mWifiEnabler = new WifiEnabler(mContext, new PrimarySwitchController(mWifiPreference),
+        mWifiEnabler = new WifiEnabler(mContext, new GenericSwitchController(mWifiPreference),
                 mMetricsFeatureProvider);
     }
 

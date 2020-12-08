@@ -189,7 +189,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                     final int subId = info.getSubscriptionId();
                     if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
                             && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
-                        mSubscriptionManager.setSubscriptionEnabled(subId, true);
+                        SubscriptionUtil.startToggleSubscriptionDialogActivity(
+                                mContext, subId, true);
                     } else {
                         final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                         intent.putExtra(Settings.EXTRA_SUB_ID, subs.get(0).getSubscriptionId());

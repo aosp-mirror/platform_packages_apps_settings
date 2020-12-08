@@ -28,6 +28,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -284,14 +285,31 @@ public class SubscriptionUtil {
         }
     }
 
-    /** Starts a dialog activity to handle SIM enabling/disabling. */
+    /**
+     * Starts a dialog activity to handle SIM enabling/disabling.
+     * @param context {@code Context}
+     * @param subId The id of subscription need to be enabled or disabled.
+     * @param enable Whether the subscription with {@code subId} should be enabled or disabled.
+     */
     public static void startToggleSubscriptionDialogActivity(
             Context context, int subId, boolean enable) {
+        if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
+            Log.i(TAG, "Unable to toggle subscription due to invalid subscription ID.");
+            return;
+        }
         context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, enable));
     }
 
-    /** Starts a dialog activity to handle eSIM deletion. */
+    /**
+     * Starts a dialog activity to handle eSIM deletion.
+     * @param context {@code Context}
+     * @param subId The id of subscription need to be deleted.
+     */
     public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId) {
+        if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
+            Log.i(TAG, "Unable to delete subscription due to invalid subscription ID.");
+            return;
+        }
         context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
     }
 
