@@ -34,6 +34,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -49,6 +50,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @VisibleForTesting
     static final String KEY_BATTERY_HEADER = "battery_header";
 
+    @VisibleForTesting
+    BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
     @VisibleForTesting
     BatteryMeterView mBatteryMeterView;
     @VisibleForTesting
@@ -66,6 +69,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public BatteryHeaderPreferenceController(Context context, String key) {
         super(context, key);
         mPowerManager = context.getSystemService(PowerManager.class);
+        mBatteryStatusFeatureProvider = FeatureFactory.getFactory(context)
+                .getBatteryStatusFeatureProvider(context);
     }
 
     public void setActivity(Activity activity) {
@@ -107,15 +112,24 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
     public void updateHeaderPreference(BatteryInfo info) {
         mBatteryPercentText.setText(formatBatteryPercentageText(info.batteryLevel));
-        if (info.remainingLabel == null) {
-            mSummary1.setText(info.statusLabel);
-        } else {
-            mSummary1.setText(info.remainingLabel);
+        if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
+            if (info.remainingLabel == null) {
+                mSummary1.setText(info.statusLabel);
+            } else {
+                mSummary1.setText(info.remainingLabel);
+            }
         }
 
         mBatteryMeterView.setBatteryLevel(info.batteryLevel);
         mBatteryMeterView.setCharging(!info.discharging);
         mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
+    }
+
+    /**
+     * Callback which receives text for the summary line.
+     */
+    public void updateBatteryStatus(String statusLabel) {
+        mSummary1.setText(statusLabel);
     }
 
     public void quickUpdateHeaderPreference() {

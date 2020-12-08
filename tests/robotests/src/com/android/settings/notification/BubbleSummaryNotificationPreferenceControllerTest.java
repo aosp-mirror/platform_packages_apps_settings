@@ -18,11 +18,14 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settings.notification.BadgingNotificationPreferenceController.OFF;
 import static com.android.settings.notification.BadgingNotificationPreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -35,6 +38,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class BubbleSummaryNotificationPreferenceControllerTest {
@@ -67,5 +72,21 @@ public class BubbleSummaryNotificationPreferenceControllerTest {
 
         String onString = mContext.getString(R.string.notifications_bubble_setting_on_summary);
         assertThat(mController.getSummary()).isEqualTo(onString);
+    }
+
+    @Test
+    public void isAvailable_lowRam_returnsUnsupported() {
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void isAvailable_notLowRam_returnsAvailable() {
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 }

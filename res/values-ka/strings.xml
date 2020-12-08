@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"გამოიყენეთ თქვენი სახე ავტორიზაციისთვის"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"დაწყება"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"თუ მარტივი წვდომის მეშვეობით სახით განბლოკვა გამორთულია, დაყენების ზოგიერთი ეტაპმა შესაძლოა TalkBack-თან გამართულად არ იმუშაოს."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"უკან"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"დაყენების გაგრძელება"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ადაპტირებული დაყენება"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi ქსელის პაროლი: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"უსადენო ქსელის პაროლი: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"ავტოდაკავშირება"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"ტელეფონს შეეძლოს ავტომატურად დაკავშირება ამ ქსელთან ახლოს ყოფნისას"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ტაბლეტს შეეძლოს ავტომატურად დაკავშირება ამ ქსელთან ახლოს ყოფნისას"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"დაუშვით ამ ქსელთან დაკავშირება, როდესაც დიაპაზონში მოხვდება"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"მოწყობილობის დამატება"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ამ ქსელზე მოწყობილობის დასამატებლად გამოიყენეთ QR კოდი"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR კოდის ფორმატი არასწორია"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"სისტემის სერტიფიკატების გამოყენება"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"არ მსურს მიწოდება"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"არ მსურს დადასტურება"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"სერტიფიკატი მითითებული არ არის. კავშირი არ იქნება კონფიდენციალური."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ქსელის სახელი მეტისმეტად გრძელია."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"მიუთითეთ დომენი."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"საჭიროა სერტიფიკატი."</string>
@@ -1034,7 +1035,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"ნამდვილად გსურთ <xliff:g id="PEER_NAME">%1$s</xliff:g>-თან დაკავშირების მიწვევის გაუქმება?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"გსურთ, ამ ჯგუფის დავიწყება?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Wi‑Fi უსადენო ქსელი"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"არ ხორციელდება ინტერნეტის ან კონტენტის სხვა მოწყობილობებთან გაზიარება"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"სხვა მოწყობილობებთან ინტერნეტი ან კონტენტი არ ზიარდება"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"ამ ტაბლეტის ინტერნეტ-კავშირი უსადენო ქსელით ზიარდება"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"ამ ტელეფონის ინტერნეტ-კავშირი უსადენო ქსელით ზიარდება"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"აპი კონტენტს აზიარებს. ინტერნეტ-კავშირის გასაზიარებლად, ჯერ გამორთეთ, შემდეგ კი ხელახლა ჩართეთ უსადენო ქსელი"</string>
@@ -1046,7 +1047,7 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP Band"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"გამოიყენეთ უსადენო ქსელი თქვენი სხვა მოწყობილობებისთვის Wi‑Fi ქსელის შესაქმნელად. უსადენო ქსელი ინტერნეტზე წვდომას უზრუნველყოფს თქვენი მობილური ინტერნეტ-კავშირის მეშვეობით. შედეგად, შესაძლოა დაგეკისროთ მობილური ინტერნეტის შესაბამისი გადასახადები."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"აპებს შეუძლიათ უსადენო ქსელის შექმნა, რათა გაუზიარონ კონტენტი ახლომდებარე მოწყობილობებს."</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"უსადენო ქსელის ავტომატურად გამორთვა"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"უსადენო ქსელის ავტოგამორთვა"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"როდესაც არცერთი მოწყობილობა არ არის დაკავშირებული"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"უსადენო ქსელი ჩართვა…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"hotspot-ია გამორთვა…"</string>
@@ -1190,9 +1191,9 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"ავტომატურად ზრდის განახლების სიხშირეს 60-დან და 90 ჰც-მდე გარკვეული კონტენტისთვის. გაზრდის ბატარეის მოხმარებას."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"იძულებითი 90 ჰც განახლების სიხშირე"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"განახლების უმაღლესი სიხშირე შეხებაზე გაუმჯობესებული რეაგირებისთვის და უფრო ერთგვაროვანი ანიმაციისთვის. გაზრდის ბატარეის მოხმარებას."</string>
-    <string name="adaptive_sleep_title" msgid="2987961991423539233">"ეკრანისკენ მიმართული ყურადღება"</string>
+    <string name="adaptive_sleep_title" msgid="2987961991423539233">"ეკრანზე ყურადღება"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ჩართულია / ეკრანი არ გამოირთვება, თუ მას უყურებთ"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"გამორთულია"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"საჭიროა კამერაზე წვდომა"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android-ის ვერსია"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android-ის უსაფრთხოების განახლება"</string>
     <string name="model_info" msgid="8997566254717810904">"მოდელი"</string>
-    <string name="model_summary" msgid="2246651782442466213">"მოდელი: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"მოდელი და აპარატურა"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"აპარატურის ვერსია"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"მოწყობილობის ID"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"შეუძლებელია <xliff:g id="MAXCONNECTION">%1$d</xliff:g>-ზე მეტ მოწყობილობაზე მოედმის მიერთება."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან კავშირი გაწყდება."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-ტეტერინგი"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"ტელეფონის ინტერნეტ-კავშირის USB Ethernet-ის მეშვეობით გაზიარება"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ტელეფონის ინტერნეტ-კავშირის Ethernet-ის მეშვეობით გაზიარება"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"უსადენო ქსელი და ტეტერინგი მობილური ინტერნეტის სხვა მოწყობილობებთან გაზიარების საშუალებას მოგცემთ. აპებს ასევე შეუძლიათ უსადენო ქსელის შექმნა, რათა გაუზიარონ კონტენტი ახლომდებარე მოწყობილობებს."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"უსადენო ქსელი და ტეტერინგი საშუალებას მოგცემთ, გაუზიაროთ მობილური ინტერნეტი ან Wi‑Fi კავშირი სხვა მოწყობილობებს. უსადენო ქსელის შექმნა შეუძლია აპებსაც, კონტენტის გასაზიარებლად ახლომახლო მოწყობილობებთან."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"დახმარება"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"ისინი შეძლებენ PIN-კოდის, ნიმუშის ან პაროლის გადაყენებას"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"თქვენი ტაბლეტი და პირადი მონაცემები უცნობი აპების შემოტევების წინაშე მეტად დაუცველია. აპების ამ წყაროდან ინსტალაციის შემთხვევაში, თქვენ თანახმა ხართ, პასუხისმგებელი იყოთ ამ აპების გამოყენების შედეგად ტაბლეტისთვის მიყენებულ ზიანსა და მონაცემების დაკარგვაზე."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"თქვენი ტელეფონი და პირადი მონაცემები უცნობი აპების შემოტევების წინაშე მეტად დაუცველია. აპების ამ წყაროდან ინსტალაციის შემთხვევაში, თქვენ თანახმა ხართ, პასუხისმგებელი იყოთ ამ აპების გამოყენების შედეგად ტელეფონისთვის მიყენებულ ზიანსა და მონაცემების დაკარგვაზე."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ჩამოტვირთული SIM-ების ამოშლისას პრობლემა წარმოიშვა"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"გთხოვთ, გადატვირთოთ მოწყობილობა და ხელახლა ცადოთ. თუ განაგრძობთ ქარხნული პარამეტრების დაბრუნებას, ჩამოტვირთული SIM-ები შეიძლება მოწყობილობაზე დარჩეს."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"გადატვირთვა"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"განაგრძობთ ქარხ. პარამ. დაბრუნებას?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ჩამოტვირთული SIM-ები მოწყობილობაზე დარჩება."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"ქარხნული პარამეტრების დაბრუნება"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"თქვენი მოწყობილობა და პირადი მონაცემები უცნობი აპების შემოტევების წინაშე მეტად დაუცველია. აპების ამ წყაროდან ინსტალაციის შემთხვევაში თქვენ თანახმა ხართ, პასუხისმგებელი იყოთ ამ აპების გამოყენების შედეგად მოწყობილობისთვის მიყენებულ ზიანსა და მონაცემების დაკარგვაზე."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"დამატებითი პარამეტრები"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"მეტი პარამეტრების ვარიანტების ჩართვა"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"გადაყენება"</string>
     <string name="tts_play" msgid="2945513377250757221">"დაკვრა"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"ადაპტაციური კავშირი"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ახანგრძლივებს ბატარეის მუშაობას და აუმჯობესებს მოწყობილობის შესრულებას ქსელთან კავშირის ავტომატურად მართვით."</string>
     <string name="credentials_title" msgid="7535942196886123656">"ავტორიზაციის მონაცემთა საცავი"</string>
     <string name="credentials_install" msgid="3933218407598415827">"სერტიფიკატის ინსტალაცია"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"სერტიფიკატების საცავიდან დაყენება"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"ქსელები ვერ მოიძებნა. ცადეთ ხელახლა."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(აკრძალული)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM ბარათი არ არის"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM არ არის"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"არცერთი"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"დასაკავშირებლად სჭირდება SIM"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"დასაკავშირებლად სჭირდება <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>-ის SIM"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"ქსელის სასურველი რეჟიმი: სასურველია WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"ქსელის სასურველი რეჟიმი: მხოლოდ GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"ქსელის სასურველი რეჟიმი: მხოლოდ WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"პარამეტრებზე ეკრანის გადაფარვის დაშვება"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"პარამეტრების ეკრანების გადაფარვის დაშვება აპებისთვის, რომლებსაც სხვა აპების ზემოდან გამოჩენა შეუძლია"</string>
     <string name="media_controls_title" msgid="403271085636252597">"მედია"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"დამკვრელი დაიმალოს მედიასესიის დასრულებისას"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"დამკვრელი საშუალებას გაძლევთ, განაგრძოთ სესია სწრაფი პარამეტრების გაფართოებული პანელიდან."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"მედია დამკვრელი სწრაფ პარამეტრებში"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"მედია დამკვრელის ხანგრძლივი დროით ჩვენება დაკვრის მარტივად გასაგრძელებლად"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"დამკვრელის დამალვა"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"დამკვრელის ჩვენება"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"დამკვრელები მიუწვდომელია"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"მედია"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ჩაირთვება Bluetooth"</string>
 </resources>

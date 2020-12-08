@@ -42,6 +42,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -67,7 +68,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowActivityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +140,7 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_channel_yesIfAppOff() {
+    public void isAvailable_channel_notIfAppOff() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.bubblePreference = BUBBLE_PREFERENCE_NONE;
@@ -145,7 +148,7 @@ public class BubblePreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null);
 
-        assertTrue(mController.isAvailable());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -159,6 +162,18 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
+    public void isNotAvailable_ifLowRam() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mController.onResume(appRow, null, null, null, null, null);
+
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(true);
+        assertFalse(mController.isAvailable());
+    }
+
+
+    @Test
     public void isAvailable_notIfOffGlobally_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
@@ -168,6 +183,18 @@ public class BubblePreferenceControllerTest {
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
 
         assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void isAvailable_ifNotLowRam() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mController.onResume(appRow, null, null, null, null, null);
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(false);
+        assertTrue(mController.isAvailable());
     }
 
     @Test

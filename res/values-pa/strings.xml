@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦੀ ਵਰਤੋਂ ਕਰੋ"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"ਸ਼ੁਰੂ ਕਰੋ"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"ਜੇ ਪਹੁੰਚਯੋਗਤਾ ਵਾਲੀ ਚਿਹਰਾ ਅਣਲਾਕ ਵਿਸ਼ੇਸ਼ਤਾ ਬੰਦ ਹੈ, ਤਾਂ ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਸੈੱਟਅੱਪ ਦੇ ਕੁਝ ਪੜਾਅ TalkBack ਨਾਲ ਸਹੀ ਢੰਗ ਨਾਲ ਕੰਮ ਨਾ ਕਰਨ।"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"ਵਾਪਸ ਜਾਓ"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"ਸੈੱਟਅੱਪ ਜਾਰੀ ਰੱਖੋ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ਪਹੁੰਚਯੋਗਤਾ ਦਾ ਸੈੱਟਅੱਪ ਵਰਤੋ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"ਵਾਈ-ਫਾਈ ਪਾਸਵਰਡ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ਹੌਟਸਪੌਟ ਪਾਸਵਰਡ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"ਸਵੈ-ਕਨੈਕਟ ਕਰੋ"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"ਫ਼ੋਨ ਨੂੰ ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਇਸ ਨੈੱਟਵਰਕ ਦੇ ਨੇੜੇ ਹੋਣ \'ਤੇ ਕਨੈਕਟ ਹੋਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ਟੈਬਲੈੱਟ ਨੂੰ ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਇਸ ਨੈੱਟਵਰਕ ਦੇ ਨੇੜੇ ਕਨੈਕਟ ਹੋਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"ਰੇਂਜ ਵਿੱਚ ਹੋਣ \'ਤੇ ਇਸ ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੋਣ ਦਿਓ"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"ਡੀਵਾਈਸ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ਇਸ ਨੈੱਟਵਰਕ \'ਤੇ ਡੀਵਾਈਸ ਸ਼ਾਮਲ ਕਰਨ ਲਈ QR ਕੋਡ ਵਰਤੋ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR ਕੋਡ ਵੈਧ ਫਾਰਮੈਟ ਨਹੀਂ ਹੈ"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"ਸਿਸਟਮ ਪ੍ਰਮਾਣ-ਪੱਤਰਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"ਮੁਹੱਈਆ ਨਾ ਕਰੋ"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"ਪ੍ਰਮਾਣਿਤ ਨਾ ਕਰੋ"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"ਕੋਈ ਪ੍ਰਮਾਣ-ਪੱਤਰ ਨਿਰਧਾਰਤ ਨਹੀਂ ਕੀਤਾ ਗਿਆ। ਤੁਹਾਡਾ ਕਨੈਕਸ਼ਨ ਨਿੱਜੀ ਨਹੀਂ ਰਹੇਗਾ।"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ਨੈੱਟਵਰਕ ਦਾ ਨਾਮ ਬਹੁਤ ਹੀ ਵੱਡਾ ਹੈ।"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ਇੱਕ ਡੋਮੇਨ ਨਿਰਧਾਰਤ ਕਰਨਾ ਲਾਜ਼ਮੀ ਹੈ।"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"ਪ੍ਰਮਾਣ-ਪੱਤਰ ਲੋੜੀਂਦਾ ਹੈ।"</string>
@@ -1039,7 +1040,7 @@
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"ਇਸ ਫ਼ੋਨ ਦੇ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਨੂੰ ਹੌਟਸਪੌਟ ਰਾਹੀਂ ਸਾਂਝਾ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"ਐਪ ਸਮੱਗਰੀ ਨੂੰ ਸਾਂਝਾ ਕਰ ਰਹੀ ਹੈ। ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਸਾਂਝਾ ਕਰਨ ਲਈ, ਹੌਟਸਪੌਟ ਨੂੰ ਬੰਦ ਕਰਕੇ ਫਿਰ ਚਾਲੂ ਕਰੋ"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"ਕੋਈ ਪਾਸਵਰਡ ਸੈੱਟ ਨਹੀਂ ਹੈ"</string>
-    <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"ਹੌਟਸਪੌਟ ਨਾਮ"</string>
+    <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"ਹੌਟਸਪੌਟ ਦਾ ਨਾਮ"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="6178719924661022928">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ਨੂੰ ਚਾਲੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"ਹੋਰ ਡੀਵਾਈਸਾਂ <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ਨਾਲ ਕਨੈਕਟ ਹੋ ਸਕਦੀਆਂ ਹਨ"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"ਹੌਟਸਪੌਟ ਪਾਸਵਰਡ"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"ਸਮੂਥ ਡਿਸਪਲੇ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਕੁਝ ਸਮੱਗਰੀਆਂ ਲਈ ਰਿਫ੍ਰੈਸ਼ ਦਰ ਨੂੰ 60 ਤੋਂ ਵਧਾ ਕੇ 90 Hz ਕਰ ਦਿੰਦਾ ਹੈ। ਬੈਟਰੀ ਵਰਤੋਂ ਵੱਧ ਜਾਂਦੀ ਹੈ।"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"ਸਮੂਥ ਡਿਸਪਲੇ"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90 Hz ਰਿਫ੍ਰੈਸ਼ ਦਰ ਸੈੱਟ ਕਰੋ"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"ਬਿਹਤਰ ਸਪਰਸ਼ ਪ੍ਰਤੀਕਿਰਿਆ ਅਤੇ ਐਨੀਮੇਸ਼ਨ ਕੁਆਲਿਟੀ ਲਈ ਉੱਚਤਮ ਰਿਫ੍ਰੈਸ਼ ਦਰ। ਬੈਟਰੀ ਵਰਤੋਂ ਵੱਧ ਜਾਂਦੀ ਹੈ।"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ਸਕ੍ਰੀਨ ਦਾ ਚੌਕੰਨਾਪਣ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ਚਾਲੂ / ਸਕ੍ਰੀਨ ਬੰਦ ਨਹੀਂ ਹੋਵੇਗੀ ਜੇ ਤੁਸੀਂ ਉਸ ਵੱਲ ਦੇਖ ਰਹੇ ਹੋ"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android ਵਰਜਨ"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android ਸੁਰੱਖਿਆ ਅੱਪਡੇਟ"</string>
     <string name="model_info" msgid="8997566254717810904">"ਮਾਡਲ"</string>
-    <string name="model_summary" msgid="2246651782442466213">"ਮਾਡਲ: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"ਮਾਡਲ ਅਤੇ ਹਾਰਡਵੇਅਰ"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"ਹਾਰਡਵੇਅਰ ਵਰਜਨ"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ਉਪਕਰਨ ਆਈ.ਡੀ."</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> ਤੋਂ ਵੱਧ ਡਿਵਾਈਸਾਂ ਨਾਲ ਟੀਥਰ ਨਹੀਂ ਕਰ ਸਕਦਾ।"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ਅਨਟੀਥਰ ਹੋ ਜਾਏਗਾ।"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ਈਥਰਨੈੱਟ ਟੈਦਰਿੰਗ"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"ਫ਼ੋਨ ਦੇ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਨੂੰ USB ਈਥਰਨੈੱਟ ਰਾਹੀਂ ਸਾਂਝਾ ਕਰੋ"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ਫ਼ੋਨ ਦੇ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਨੂੰ ਈਥਰਨੈੱਟ ਰਾਹੀਂ ਸਾਂਝਾ ਕਰੋ"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"ਆਪਣੇ ਮੋਬਾਈਲ ਡਾਟਾ ਕਨੈਕਸ਼ਨ ਦੇ ਰਾਹੀਂ ਦੂਜਿਆਂ ਡੀਵਾਈਸਾਂ ਨੂੰ ਇੰਟਰਨੈੱਟ ਮੁਹੱਈਆ ਕਰਵਾਉਣ ਲਈ ਹੌਟਸਪੌਟ ਅਤੇ ਟੈਦਰਿੰਗ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਨੇੜਲੇ ਡੀਵਾਈਸਾਂ ਨਾਲ ਸਮੱਗਰੀ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਲਈ ਐਪਾਂ ਵੀ ਇੱਕ ਹੌਟਸਪੌਟ ਬਣਾ ਸਕਦੀਆਂ ਹਨ।"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ਹੋਰਾਂ ਡੀਵਾਈਸਾਂ ਨੂੰ ਆਪਣੇ ਵਾਈ-ਫਾਈ ਜਾਂ ਮੋਬਾਈਲ ਡਾਟਾ ਕਨੈਕਸ਼ਨ ਰਾਹੀਂ ਇੰਟਰਨੈੱਟ ਮੁਹੱਈਆ ਕਰਵਾਉਣ ਲਈ ਹੌਟਸਪੌਟ ਅਤੇ ਟੈਦਰਿੰਗ ਵਰਤੋ। ਐਪਾਂ ਨਜ਼ਦੀਕੀ ਡੀਵਾਈਸਾਂ ਨਾਲ ਸਮੱਗਰੀ ਸਾਂਝਾ ਕਰਨ ਲਈ ਇੱਕ ਹੌਟਸਪੌਟ ਵੀ ਬਣਾ ਸਕਦੀਆਂ ਹਨ।"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ਮਦਦ"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"ਉਹ ਤੁਹਾਨੂੰ ਆਪਣਾ ਪਿੰਨ, ਪੈਟਰਨ ਜਾਂ ਪਾਸਵਰਡ ਰੀਸੈੱਟ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰ ਸਕਦੇ ਹਨ"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"ਤੁਹਾਡਾ ਟੈਬਲੈੱਟ ਅਤੇ ਨਿੱਜੀ ਡਾਟਾ ਅਗਿਆਤ ਐਪਾਂ ਤੋਂ ਹਮਲੇ ਪ੍ਰਤੀ ਵਧੇਰੇ ਕਮਜ਼ੋਰ ਹੈ। ਇਸ ਸਰੋਤ ਤੋਂ ਐਪਾਂ ਸਥਾਪਿਤ ਕਰਕੇ, ਤੁਸੀਂ ਸਹਿਮਤੀ ਦਿੰਦੇ ਹੋ ਕਿ ਆਪਣੇ ਟੈਬਲੈੱਟ ਨੂੰ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਨੁਕਸਾਨ ਜਾਂ ਡਾਟੇ ਦੇ ਗੁੰਮ ਹੋਣ ਲਈ ਤੁਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਹੋ, ਜੋ ਸ਼ਾਇਦ ਇਹਨਾਂ ਐਪਾਂ ਨੂੰ ਵਰਤਣ ਦੇ ਨਤੀਜੇ ਵਜੋਂ ਹੋ ਸਕਦਾ ਹੈ।"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"ਤੁਹਾਡਾ ਫ਼ੋਨ ਅਤੇ ਨਿੱਜੀ ਡਾਟਾ ਅਗਿਆਤ ਐਪਾਂ ਤੋਂ ਹਮਲੇ ਪ੍ਰਤੀ ਵਧੇਰੇ ਵਿੰਨਣਸ਼ੀਲ ਹਨ। ਇਸ ਸਰੋਤ ਤੋਂ ਐਪਾਂ ਸਥਾਪਤ ਕਰ ਕੇ, ਤੁਸੀਂ ਸਹਿਮਤੀ ਦਿੰਦੇ ਹੋ ਕਿ ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਨੁਕਸਾਨ ਜਾਂ ਡਾਟੇ ਦੇ ਗੁੰਮ ਹੋਣ ਲਈ ਤੁਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਹੋ ਜੋ ਸ਼ਾਇਦ ਇਹਨਾਂ ਐਪਾਂ ਨੂੰ ਵਰਤਣ ਦੇ ਨਤੀਜੇ ਵਜੋਂ ਹੋ ਸਕਦਾ ਹੈ।"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ਡਾਊਨਲੋਡ ਕੀਤੇ ਸਿਮਾਂ ਨੂੰ ਮਿਟਾਉਣ ਵਿੱਚ ਕੋਈ ਸਮੱਸਿਆ ਹੈ"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"ਕਿਰਪਾ ਕਰਕੇ ਡੀਵਾਈਸ ਨੂੰ ਰੀਬੂਟ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਤੁਸੀਂ ਫੈਕਟਰੀ ਰੀਸੈੱਟ ਜਾਰੀ ਰੱਖਦੇ ਹੋ, ਤਾਂ ਸ਼ਾਇਦ ਡਾਊਨਲੋਡ ਕੀਤੇ ਸਿਮ ਡੀਵਾਈਸ \'ਤੇ ਰਹਿਣ।"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"ਰੀਬੂਟ ਕਰੋ"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"ਕੀ ਫੈਕਟਰੀ ਰੀਸੈੱਟ ਨੂੰ ਜਾਰੀ ਰੱਖਣਾ ਹੈ?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ਡਾਊਨਲੋਡ ਕੀਤੇ ਸਿਮ ਡੀਵਾਈਸ \'ਤੇ ਰਹਿਣਗੇ।"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"ਫੈਕਟਰੀ ਰੀਸੈੱਟ ਕਰੋ"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"ਤੁਹਾਡਾ ਡੀਵਾਈਸ ਅਤੇ ਨਿੱਜੀ ਡਾਟਾ ਅਗਿਆਤ ਐਪਾਂ ਤੋਂ ਹਮਲੇ ਪ੍ਰਤੀ ਵਧੇਰੇ ਵਿੰਨਣਸ਼ੀਲ ਹਨ। ਇਸ ਸਰੋਤ ਤੋਂ ਐਪਾਂ ਸਥਾਪਤ ਕਰ ਕੇ, ਤੁਸੀਂ ਸਹਿਮਤੀ ਦਿੰਦੇ ਹੋ ਕਿ ਆਪਣੇ ਡੀਵਾਈਸ ਨੂੰ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਨੁਕਸਾਨ ਜਾਂ ਡਾਟੇ ਦੇ ਗੁੰਮ ਹੋਣ ਲਈ ਤੁਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਹੋ ਜੋ ਸ਼ਾਇਦ ਇਹਨਾਂ ਐਪਾਂ ਨੂੰ ਵਰਤਣ ਦੇ ਨਤੀਜੇ ਵਜੋਂ ਹੋ ਸਕਦਾ ਹੈ।"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"ਉੱਨਤ ਸੈਟਿੰਗਾਂ"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"ਹੋਰ ਸੈਟਿੰਗਾਂ ਚੋਣਾਂ ਚਾਲੂ ਕਰੋ"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"ਰੀਸੈੱਟ ਕਰੋ"</string>
     <string name="tts_play" msgid="2945513377250757221">"ਚਲਾਓ"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"ਅਡੈਪਟਿਵ ਕਨੈਕਟੀਵਿਟੀ"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ਇਹ ਤੁਹਾਡੇ ਨੈੱਟਵਰਕ ਕਨੈਕਸ਼ਨਾਂ ਦਾ ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਪ੍ਰਬੰਧਨ ਕਰਕੇ, ਬੈਟਰੀ ਲਾਈਫ਼ ਨੂੰ ਵਧਾਉਂਦੀ ਹੈ ਅਤੇ ਡੀਵਾਈਸ ਦੀ ਕਾਰਗੁਜ਼ਾਰੀ ਵਿੱਚ ਸੁਧਾਰ ਕਰਦੀ ਹੈ"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ਕ੍ਰੀਡੈਂਸ਼ੀਅਲ ਸਟੋਰੇਜ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"ਪ੍ਰਮਾਣ-ਪੱਤਰ ਸਥਾਪਤ ਕਰੋ"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"ਸਟੋਰੇਜ ਤੋਂ ਪ੍ਰਮਾਣ-ਪੱਤਰ ਸਥਾਪਤ ਕਰੋ"</string>
@@ -3036,7 +3044,7 @@
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ਇਸ ਸੈਸ਼ਨ ਵਿੱਚ ਸਾਰੀਆਂ ਐਪਾਂ ਅਤੇ ਡਾਟਾ ਨੂੰ ਮਿਟਾ ਦਿੱਤਾ ਜਾਏਗਾ।"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"ਹਟਾਓ"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ਫ਼ੋਨ ਕਾਲਾਂ ਚਾਲੂ ਕਰੋ"</string>
-    <string name="user_enable_calling_sms" msgid="8546430559552381324">"ਫ਼ੋਨ ਕਾਲਾਂ &amp; SMS ਚਾਲੂ ਕਰੋ"</string>
+    <string name="user_enable_calling_sms" msgid="8546430559552381324">"ਫ਼ੋਨ ਕਾਲਾਂ ਅਤੇ SMS ਚਾਲੂ ਕਰੋ"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ਵਰਤੋਂਕਾਰ ਨੂੰ ਮਿਟਾਓ"</string>
     <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"ਕੀ ਫ਼ੋਨ ਕਾਲਾਂ ਚਾਲੂ ਕਰਨੀਆਂ ਹਨ?"</string>
     <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"ਕਾਲ ਇਤਿਹਾਸ ਇਸ ਵਰਤੋਂਕਾਰ ਨਾਲ ਸਾਂਝਾ ਕੀਤਾ ਜਾਏਗਾ।"</string>
@@ -3796,10 +3804,10 @@
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"ਕੀ-ਬੋਰਡ ਅਤੇ ਹੋਰ ਬਟਨਾਂ ਤੋਂ ਧੁਨੀਆਂ"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"ਸਪਰਸ਼ ਧੁਨੀਆਂ"</string>
     <string name="zen_mode_system_list_first" msgid="8590078626001067855">"ਸਪਰਸ਼ ਧੁਨੀਆਂ"</string>
-    <string name="zen_mode_reminders" msgid="1970224691551417906">"ਯਾਦ-ਸੂਚਨਾਵਾਂ"</string>
+    <string name="zen_mode_reminders" msgid="1970224691551417906">"ਰਿਮਾਈਂਡਰ"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"ਕਾਰਜਾਂ ਅਤੇ ਯਾਦ-ਸੂਚਨਾਵਾਂ ਤੋਂ"</string>
-    <string name="zen_mode_reminders_list" msgid="3133513621980999858">"ਯਾਦ-ਸੂਚਨਾਵਾਂ"</string>
-    <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"ਯਾਦ-ਸੂਚਨਾਵਾਂ"</string>
+    <string name="zen_mode_reminders_list" msgid="3133513621980999858">"ਰਿਮਾਈਂਡਰ"</string>
+    <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"ਰਿਮਾਈਂਡਰ"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"ਕੈਲੰਡਰ ਇਵੈਂਟ"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"ਆਗਾਮੀ ਕੈਲੰਡਰ ਇਵੈਂਟਾਂ ਤੋਂ"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"ਇਵੈਂਟ"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"ਨੈੱਟਵਰਕ ਨਹੀਂ ਮਿਲ ਸਕੇ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ਵਰਜਿਤ)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"ਕੋਈ ਸਿਮ ਕਾਰਡ ਨਹੀਂ"</string>
+    <string name="sim_card" msgid="6381158752066377709">"ਸਿਮ"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"ਸਿਮ ਨਹੀਂ ਹੈ"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"ਕੋਈ ਨਹੀਂ"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"ਕਨੈਕਟ ਕਰਨ ਲਈ ਸਿਮ ਲੋੜੀਂਦਾ ਹੈ"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"ਕਨੈਕਟ ਕਰਨ ਲਈ <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> ਸਿਮ ਲੋੜੀਂਦਾ ਹੈ"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"ਤਰਜੀਹੀ ਨੈੱਟਵਰਕ ਮੋਡ: ਤਰਜੀਹੀ WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"ਤਰਜੀਹੀ ਨੈੱਟਵਰਕ ਮੋਡ: ਸਿਰਫ਼ GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"ਤਰਜੀਹੀ ਨੈੱਟਵਰਕ ਮੋਡ: ਸਿਰਫ਼ WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"\'ਸੈਟਿੰਗਾਂ\' \'ਤੇ ਸਕ੍ਰੀਨ ਓਵਰਲੇ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"ਉਹਨਾਂ ਐਪਾਂ ਨੂੰ ਇਜਾਜ਼ਤ ਦਿਓ ਜੋ \'ਸੈਟਿੰਗਾਂ\' ਸਕ੍ਰੀਨਾਂ ਨੂੰ ਓਵਰਲੇ ਕਰਨ ਲਈ ਦੂਜੀਆਂ ਐਪਾਂ ਦੇ ਉੱਪਰ ਪ੍ਰਦਰਸ਼ਿਤ ਹੋ ਸਕਦੀਆਂ ਹਨ"</string>
     <string name="media_controls_title" msgid="403271085636252597">"ਮੀਡੀਆ"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"ਮੀਡੀਆ ਸੈਸ਼ਨ ਸਮਾਪਤ ਹੋਣ \'ਤੇ ਪਲੇਅਰ ਨੂੰ ਲੁਕਾਓ"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"ਪਲੇਅਰ ਤੁਹਾਨੂੰ ਵਿਸਤ੍ਰਿਤ ਤਤਕਾਲ ਸੈਟਿੰਗਾਂ ਪੈਨਲ ਤੋਂ ਸੈਸ਼ਨ ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰਨ ਦਿੰਦਾ ਹੈ।"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"ਤਤਕਾਲ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਮੀਡੀਆ ਪਲੇਅਰ"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"ਆਸਾਨੀ ਨਾਲ ਪਲੇਬੈਕ ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰਨ ਲਈ ਮੀਡੀਆ ਪਲੇਅਰ ਨੂੰ ਲੰਮੇ ਸਮੇਂ ਲਈ ਦਿਖਾਓ"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"ਪਲੇਅਰ ਲੁਕਾਓ"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"ਪਲੇਅਰ ਦਿਖਾਓ"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"ਕੋਈ ਪਲੇਅਰ ਉਪਲਬਧ ਨਹੀਂ"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"ਮੀਡੀਆ"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ਬਲੂਟੁੱਥ ਚਾਲੂ ਹੋਵੇਗਾ"</string>
 </resources>

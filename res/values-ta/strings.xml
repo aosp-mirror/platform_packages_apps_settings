@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"அங்கீகரிக்க, முகத்தைப் பயன்படுத்தலாம்"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"தொடங்கு"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"அணுகல்தன்மை முகம் காட்டித் திறத்தல் ஆஃப் செய்யப்பட்டிருந்தால் சில அமைவுப் படிகள் TalkBack அம்சத்துடன் சரியாக இயங்காமல் போகலாம்."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"பின்செல்"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"அமைவைத் தொடர்க"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"அணுகல்தன்மை அமைவைப் பயன்படுத்து"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"வைஃபை கடவுச்சொல்: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ஹாட்ஸ்பாட் கடவுச்சொல்: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"தானாக இணைத்தல்"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"இந்த நெட்வொர்க்கின் அருகில் இருக்கும்போது மொபைலைத் தானாக இணைவதற்கு அனுமதிக்கும்"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"இந்த நெட்வொர்க்கின் அருகில் இருக்கும்போது டேப்லெட்டைத் தானாக இணைவதற்கு அனுமதிக்கும்"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"தொடர்பு எல்லையில் இருக்கும்போது இந்த நெட்வொர்க்கிற்கு இணைப்பை அனுமதிக்கவும்"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"சாதனத்தைச் சேர்க்கவும்"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"நெட்வொர்க்கில் சாதனத்தைச் சேர்க்க QR குறியீட்டைப் பயன்படுத்தவும்"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR குறியீடு சரியான வடிவமில்லை"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"முறைமைச் சான்றிதழ்களைப் பயன்படுத்து"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"வழங்காதே"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"சரிபார்க்காதே"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"சான்றிதழ் எதுவும் குறிப்பிடப்படவில்லை. உங்கள் இணைப்பு தனிப்பட்டதாக இருக்காது."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"நெட்வொர்க்கின் பெயர் மிகவும் நீளமாக உள்ளது."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"டொமைனைக் குறிப்பிட வேண்டும்."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"சான்றிதழ் தேவை."</string>
@@ -1188,9 +1189,9 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"நீங்கள் இருக்கும் சூழலுக்கும், செய்யும் வேலைகளுக்கும் ஏற்றவாறு, தானாகவே உங்களின் திரை ஒளிர்வு கூடும், குறையும். நீங்கள் எவ்வளவு வெளிச்சத்தை விரும்புகிறீர்கள் என்பதைச் சூழலுக்கேற்ற ஒளிர்வு தெரிந்துகொள்ள, ஸ்லைடரைக் கைமுறையாக நகர்த்தலாம்."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"வெண் சமநிலையை காட்சிப்படுத்தல்"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"சீரான காட்சி"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"சில உள்ளடக்கத்திற்குப் புதுப்பிக்கும் விகிதத்தை 60லிருந்து 90 Hzக்குத் தானாகவே உயர்த்தும். இதனால் பேட்டரி உபயோகம் அதிகரிக்கும்."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"ரெஃப்ரெஷ் விகிதம்: Force 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"மேம்பட்ட தொடு இயக்கத்திறனுக்கும் அனிமேஷன் தரத்திற்குமான அதிவேக ரெஃப்ரெஷ் விகிதம். இதனால் பேட்டரி உபயோகம் அதிகரிக்கும்."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"திரை மீது கவனம்"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ஆன் / திரையைப் பார்த்துக் கொண்டிருக்கையில் அது ஆஃப் ஆகாது"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android பதிப்பு"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android பாதுகாப்புப் புதுப்பிப்பு"</string>
     <string name="model_info" msgid="8997566254717810904">"மாடல்"</string>
-    <string name="model_summary" msgid="2246651782442466213">"மாடல்: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"மாடல் &amp; வன்பொருள்"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"வன்பொருள் பதிப்பு"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"உபகரணத்தின் ஐடி"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> சாதனங்களுக்கு மேல் இணைக்க முடியாது."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> இன் இணைப்புமுறை நீக்கப்படும்."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ஈத்தர்நெட் இணைப்புமுறை"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"USB ஈத்தர்நெட் மூலம் மொபைலின் இணைய இணைப்பைப் பகிருங்கள்"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ஈத்தர்நெட் மூலம் மொபைலின் இணைய இணைப்பைப் பகிரும்"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"மொபைல் டேட்டா இணைப்பு வழியாக, மற்ற சாதனங்களுக்கு இண்டர்நெட்டை வழங்க, ஹாட்ஸ்பாட் மற்றும் டெதெரிங் முறையை பயன்படுத்தவும். அருகிலுள்ள சாதனங்களுடன் உள்ளடக்கத்தைப் பகிர, ஆப்ஸும் ஹாட்ஸ்பாட்டை உருவாக்கலாம்."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"உங்கள் வைஃபை அல்லது மொபைல் டேட்டா மூலம் வேறு சாதனங்களுக்கு இணைய இணைப்பை வழங்க ஹாட்ஸ்பாட்டையும் இணைப்பு முறையையும் பயன்படுத்தும். மேலும், அருகிலுள்ள சாதனங்களுடன் உள்ளடக்கத்தைப் பகிர, தனியாக ஒரு ஹாட்ஸ்பாட்டையும் ஆப்ஸ் உருவாக்கலாம்."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"உதவி"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"உங்கள் பின், பேட்டர்ன் அல்லது கடவுச்சொல்லை மீட்டமைக்க அவர் உதவுவார்"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"அறியப்படாத ஆப்ஸால் உங்கள் டேப்லெட்டும் தனிப்பட்ட தரவும் அதிகம் பாதிப்பிற்கு உள்ளாகும். இந்த மூலத்திலிருந்து ஆப்ஸை நிறுவுவதால், அவற்றைப் பயன்படுத்தும் போது உங்கள் டேப்லெட்டுக்கு ஏதேனும் சேதம் ஏற்பட்டாலோ அல்லது தரவை இழந்தாலோ, அதற்கு நீங்கள்தான் பொறுப்பாவீர்கள் என்பதை ஏற்கிறீர்கள்."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"அறியப்படாத பயன்பாடுககளால் உங்கள் மொபைலும் தனிப்பட்ட தரவும் அதிகம் பாதிப்பிற்கு உள்ளாகும். இந்த மூலத்திலிருந்து ஆப்ஸை நிறுவுவதால், அவற்றைப் பயன்படுத்தும் போது உங்கள் மொபைலுக்கு ஏதேனும் சேதம் ஏற்பட்டாலோ அல்லது தரவை இழந்தாலோ, அதற்கு நீங்கள்தான் பொறுப்பாவீர்கள் என்பதை ஏற்கிறீர்கள்."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"பதிவிறக்கப்பட்ட சிம்களை அழிப்பதில் சிக்கல் உள்ளது"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"சாதனத்தை மறுபடி தொடங்கிவிட்டு மீண்டும் முயலவும். ஆரம்பநிலைக்கு மீட்டமைப்பதைத் தொடர்ந்தால் பதிவிறக்கப்பட்ட சிம்கள் சாதனத்திலேயே இருக்கும்."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"மறுபடி தொடங்கு"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"ஆரம்பநிலைக்கு மீட்டமைப்பதை தொடரவா?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"பதிவிறக்கப்பட்ட சிம்கள் சாதனத்திலேயே இருக்கும்."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"ஆரம்பநிலைக்கு மீட்டமை"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"அறியப்படாத ஆப்ஸால் உங்கள் சாதனம் மற்றும் தனிப்பட்ட தரவு மிக எளிதாகப் பாதிப்புக்குள்ளாகும். இந்த மூலத்திலிருந்து ஆப்ஸை நிறுவி, பயன்படுத்தும்போது, உங்கள் சாதனத்திற்கு ஏதேனும் சேதம் ஏற்பட்டாலோ தரவை இழந்தாலோ, அதற்கு நீங்கள்தான் பொறுப்பாவீர்கள் என்பதை ஏற்கிறீர்கள்."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"மேம்பட்ட அமைப்பு"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"மேலும் அமைப்பு விருப்பங்களை இயக்கு"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"மீட்டமை"</string>
     <string name="tts_play" msgid="2945513377250757221">"இயக்கு"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"சூழல்சார் இணைப்புநிலை"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"உங்கள் நெட்வொர்க் இணைப்புகளைத் தானாக நிர்வகிப்பதன் மூலம் பேட்டரி நிலையை நீட்டிப்பதோடு சாதனச் செயல்திறனையும் மேம்படுத்தும்"</string>
     <string name="credentials_title" msgid="7535942196886123656">"அனுமதிச் சான்று சேமிப்பிடம்"</string>
     <string name="credentials_install" msgid="3933218407598415827">"சான்றிதழை நிறுவுதல்"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"சேமிப்பிடத்திலிருந்து சான்றிதழ்களை நிறுவு"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"நெட்வொர்க்குகளைக் கண்டறிய முடியவில்லை. மீண்டும் முயலவும்."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(தடுக்கப்பட்டது)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"சிம் கார்டு இல்லை"</string>
+    <string name="sim_card" msgid="6381158752066377709">"சிம்"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"சிம் இல்லை"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"ஏதுமில்லை"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"இணைப்பதற்கு சிம் தேவைப்படுகிறது"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"இணைப்பதற்கு <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> சிம் தேவைப்படுகிறது"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"விருப்பமான நெட்வொர்க் பயன்முறை: WCDMAக்கு முன்னுரிமை"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"விருப்பமான நெட்வொர்க் பயன்முறை: GSM மட்டும்"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"விருப்பமான நெட்வொர்க் பயன்முறை: WCDMA மட்டும்"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"அமைப்புகளில் திரை மேலடுக்கை அனுமதித்தல்"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"அமைப்புகள் திரைகளுக்கு மேலாகக் காட்டுவதற்கு மற்ற ஆப்ஸில் டிஸ்ப்ளே செய்யப்படக்கூடிய ஆப்ஸை அனுமதிக்கும்"</string>
     <string name="media_controls_title" msgid="403271085636252597">"மீடியா"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"மீடியா அமர்வு முடிந்தபிறகு பிளேயரை மறை"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"விரிவாக்கப்பட்ட விரைவு அமைப்புகள் பேனலிலிருந்து அமர்வு ஒன்றை மீண்டும் தொடங்க இந்தப் பிளேயர் அனுமதிக்கும்."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"விரைவு அமைப்புகளில் மீடியா பிளேயர்"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"பிளேபேக்கை எளிதாக மீண்டும் தொடங்க மீடியா பிளேயரை கூடுதல் நேரத்துக்குக் காண்பிக்கும்"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"பிளேயர் மறை"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"பிளேயரைக் காட்டு"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"பிளேயர்கள் எதுவுமில்லை"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"மீடியா"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"புளூடூத் ஆன் செய்யப்படும்"</string>
 </resources>

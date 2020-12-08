@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"使用您的面孔进行身份验证"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"开始"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"如果人脸解锁无障碍功能处于关闭状态，某些设置步骤可能无法与 TalkBack 正常搭配运行。"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"返回"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"继续设置"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"使用无障碍设置"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"WLAN 密码：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"热点密码：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自动连接"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"允许手机在此网络附近时自动连接"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"允许平板电脑在此网络附近时自动连接"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"允许在进入此网络的覆盖范围时连接到此网络"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"添加设备"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用二维码将设备添加到此网络"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"二维码的格式无效"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"使用系统证书"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"不验证"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"未指定任何证书。您的网络连接将不是私密连接。"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"网络名称太长。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"必须指定域名。"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要指定证书。"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流畅画面"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自动将某些内容的刷新频率从 60 Hz 调高到 90 Hz。这么做会增加耗电量。"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"流畅画面"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"强制使用 90 Hz 刷新频率"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"使用最高刷新频率可提升按触操作响应和动画质量，但会增加耗电量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"屏幕感知"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"开启 / 您看着屏幕时，它将不会关闭"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android 版本"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android 安全更新"</string>
     <string name="model_info" msgid="8997566254717810904">"型号"</string>
-    <string name="model_summary" msgid="2246651782442466213">"型号：%1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"型号和硬件"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"硬件版本"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"设备 ID"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"无法与 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 台以上的设备共享网络。"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"即将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的网络共享。"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"以太网络共享"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"通过 USB 以太网共享手机的互联网连接"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"通过以太网共享手机的互联网连接"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"使用热点和网络共享功能，让其他设备能通过您的移动数据网络连接到互联网。应用还可以通过创建热点，与附近的设备共享内容。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用热点和网络共享功能，让其他设备能通过您的 WLAN 或移动数据网络连接到互联网。应用还可以通过创建热点，与附近的设备共享内容。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"帮助"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"他们可以帮助您重置 PIN 码、解锁图案或密码"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"您的平板电脑和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的平板电脑损坏或数据丢失承担责任。"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"您的手机和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的手机损坏或数据丢失承担责任。"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"清除已下载的 SIM 卡时出现问题"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"请重新启动设备，然后重试。如果您继续恢复出厂设置，已下载的 SIM 卡可能仍会保留在设备上。"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"重新启动"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"要继续恢复出厂设置吗？"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"已下载的 SIM 卡仍会保留在设备上。"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"恢复出厂设置"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"您的设备和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的设备损坏或数据丢失问题承担责任。"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"高级设置"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"启用更多设置选项"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"重置"</string>
     <string name="tts_play" msgid="2945513377250757221">"播放"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"自适应网络连接"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"自动管理您的网络连接，从而延长电池续航时间并提升设备性能"</string>
     <string name="credentials_title" msgid="7535942196886123656">"凭据存储"</string>
     <string name="credentials_install" msgid="3933218407598415827">"安装证书"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"从存储设备安装证书"</string>
@@ -3489,7 +3497,7 @@
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"部分对话将以浮动图标形式显示在其他应用上"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"所有对话都能以对话泡形式显示"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"所选对话能以对话泡形式显示"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"任何内容都不能以气泡形式显示"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"任何内容都不能以对话泡形式显示"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"对话"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"以下对话无法以对话泡形式显示"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"为该对话关闭对话泡功能"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"找不到网络，请重试。"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"（禁止）"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"没有 SIM 卡"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM 卡"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"没有 SIM 卡"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"无"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"需要 SIM 卡才能连接"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"需要<xliff:g id="WIRELESS_CARRIER">%s</xliff:g> SIM 卡才能连接"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"首选网络模式：首选 WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"首选网络模式：仅限 GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"首选网络模式：仅限 WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"允许在“设置”上重叠显示"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"允许可在其他应用上层显示的应用重叠显示在“设置”屏幕上"</string>
     <string name="media_controls_title" msgid="403271085636252597">"媒体"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"在媒体会话结束后隐藏播放器"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"播放器允许您通过展开的快捷设置面板恢复会话。"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"快捷设置中的媒体播放器"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"延长媒体播放器在显示在屏幕上的时间，让您轻松继续播放"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隐藏播放器"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"显示播放器"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"没有可用的播放器"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒体"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"蓝牙将开启"</string>
 </resources>

@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"얼굴로 인증"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"시작"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"접근성 얼굴인식 잠금해제가 사용 중지되면 음성 안내 지원 사용 시 일부 설정 단계가 제대로 작동하지 않을 수 있습니다."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"뒤로"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"설정 계속"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"접근성 설정 사용"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi 비밀번호: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"핫스팟 비밀번호: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"자동 연결"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"이 네트워크 근처에 있을 때 휴대전화가 자동으로 연결되도록 허용"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"이 네트워크 근처에 있을 때 태블릿이 자동으로 연결되도록 허용"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"범위 안에 들어오면 이 네트워크의 연결을 허용합니다."</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"기기 추가"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR 코드를 사용하여 네트워크에 기기 추가"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR 코드가 유효한 형식이 아닙니다."</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"시스템 인증 사용"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"제공하지 않음"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"확인하지 않음"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"지정한 인증서가 없습니다. 비공개로 연결되지 않습니다."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"네트워크 이름이 너무 깁니다."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"도메인을 지정해야 합니다."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"인증서가 필요합니다."</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"스무스 디스플레이"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"일부 콘텐츠의 새로고침 빈도를 자동으로 60Hz에서 90Hz로 늘립니다. 이렇게 하면 배터리 사용량이 증가합니다."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"스무스 디스플레이"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90Hz 새로고침 빈도 강제 적용"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"향상된 터치 반응 속도 및 애니메이션 품질에 맞는 가장 높은 새로고침 빈도입니다. 배터리 사용량이 증가합니다."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"화면 시선 감지"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"사용/화면을 보고 있으면 꺼지지 않음"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android 버전"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android 보안 업데이트"</string>
     <string name="model_info" msgid="8997566254717810904">"모델"</string>
-    <string name="model_summary" msgid="2246651782442466213">"모델: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"모델 및 하드웨어"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"하드웨어 버전"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"장비 ID"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g>개의 기기까지만 테더링 사용 가능"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기의 테더링이 끊깁니다."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"이더넷 테더링"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"USB 이더넷을 통해 휴대전화의 인터넷 연결 공유"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"이더넷을 통해 휴대전화의 인터넷 연결 공유"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"핫스팟 및 테더링을 사용하여 다른 기기에서 내 모바일 데이터 연결을 통해 인터넷을 사용할 수 있도록 합니다. 앱에서도 핫스팟을 만들어 주변 기기와 콘텐츠를 공유할 수 있습니다."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"핫스팟 및 테더링으로 다른 기기에서 내 Wi-Fi 또는 모바일 데이터 연결을 통해 인터넷을 사용할 수 있도록 합니다. 앱에서도 핫스팟을 만들어 주변 기기와 콘텐츠를 공유할 수 있습니다."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"고객센터"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN, 패턴 또는 비밀번호 재설정에 도움을 받을 수 있습니다."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"태블릿과 개인 데이터는 알 수 없는 앱의 공격에 더욱 취약합니다. 이 소스에서 가져온 앱을 설치하면 앱 사용으로 인해 발생할 수 있는 태블릿의 손상 및 데이터 손실에 책임을 진다는 데 동의하게 됩니다."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"휴대전화와 개인 데이터는 알 수 없는 앱의 공격에 더욱 취약합니다. 이 소스에서 가져온 앱을 설치하면 앱 사용으로 인해 발생할 수 있는 휴대전화의 손상 및 데이터 손실에 책임을 진다는 데 동의하게 됩니다."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"다운로드한 SIM을 삭제하는 데 문제가 발생했습니다"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"기기를 재부팅한 후 다시 시도해 주세요. 초기화를 계속하면 다운로드한 SIM이 기기에 남아 있을 수 있습니다."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"재부팅"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"초기화하시겠습니까?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"다운로드한 SIM이 기기에 남아 있게 됩니다."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"초기화"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"기기와 개인 데이터는 알 수 없는 앱의 공격에 더욱 취약합니다. 이 소스에서 받은 앱을 설치하면 앱 사용으로 인해 발생할 수 있는 기기의 손상 및 데이터 손실에 사용자가 책임을 지는 것에 동의하게 됩니다."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"고급 설정"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"기타 설정 옵션을 사용하도록 설정합니다."</string>
@@ -2169,7 +2175,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"볼륨 키 단축키"</string>
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"단축키 서비스"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"단축키 설정"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"잠금 화면에서 단축키 사용"</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"잠금 화면에서 바로가기 사용"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"잠금 화면에서 기능 단축키 사용을 허용합니다. 볼륨 키 2개를 몇 초 동안 동시에 길게 누릅니다."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"고대비 텍스트"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"화면 확대 자동 업데이트"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"재설정"</string>
     <string name="tts_play" msgid="2945513377250757221">"재생"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"스마트 연결"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"네트워크 연결을 자동으로 관리하여 배터리 수명을 연장하고 기기 성능을 개선합니다."</string>
     <string name="credentials_title" msgid="7535942196886123656">"사용자 인증 정보 저장소"</string>
     <string name="credentials_install" msgid="3933218407598415827">"인증서 설치"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"저장소에서 인증서 설치"</string>
@@ -3086,7 +3094,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"통화 관리자"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="2416980110093867199">"무선 긴급 경보"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"재난문자"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"네트워크 이동통신사"</string>
     <string name="access_point_names" msgid="5768430498022188057">"액세스 포인트 이름(APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3435,7 +3443,7 @@
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"방해 금지 모드의 알림 설정을 변경하시겠습니까?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"직장 프로필 사운드"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"개인 프로필 사운드 사용"</string>
-    <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"직장 프로필과 개인 프로필의 소리가 같습니다."</string>
+    <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"직장 프로필과 개인 프로필의 사운드가 같습니다."</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"직장 휴대전화 벨소리"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"기본 직장 알림 소리"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"기본 직장 알람 소리"</string>
@@ -3458,7 +3466,7 @@
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"적응형 알림 순위 지정"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"관련성에 따라 자동으로 알림 순위 지정"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"추천 작업 및 답장"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"추천 작업 및 답장을 자동으로 표시합니다."</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"추천 작업 및 답장을 자동으로 표시"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"최근 알림 및 일시 중지된 알림 표시"</string>
     <string name="notification_history" msgid="8663811361243456201">"알림 기록"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"알림 기록 사용"</string>
@@ -3575,7 +3583,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"알림 허용"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"앱의 소리, 진동, 화면 알림 표시 허용"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"우선순위"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"대화 섹션 상단에 표시, 플로팅 대화창으로 표시, 그리고 잠금 화면에 프로필 사진이 표시됩니다."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"대화 섹션 상단에 표시, 플로팅 대화창으로 표시, 그리고 잠금 화면에 프로필 사진이 표시됨"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 대부분의 대화 기능을 지원하지 않습니다. 대화의 우선순위 설정이 불가하며 대화가 플로팅 대화창으로 표시되지 않습니다."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"풀다운 창에서 알림을 한 줄로 최소화합니다."</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"소리 또는 진동 없음"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"네트워크를 찾지 못했습니다. 다시 시도해 주세요."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(금지됨)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM 카드 없음"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM 없음"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"없음"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"연결하려면 SIM이 필요합니다."</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"연결하려면 <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> SIM이 필요합니다."</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"기본 네트워크 모드: WCDMA 선호"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"기본 네트워크 모드: GSM 전용"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"기본 네트워크 모드: WCDMA 전용"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"설정에서 화면 오버레이 허용"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"다른 앱 위에 표시할 수 있는 앱이 설정 화면을 오버레이하도록 허용합니다."</string>
     <string name="media_controls_title" msgid="403271085636252597">"미디어"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"미디어 세션이 종료되면 플레이어를 숨깁니다."</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"플레이어를 사용하여 펼쳐진 빠른 설정 패널에서 세션을 다시 시작할 수 있습니다."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"빠른 설정의 미디어 플레이어"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"쉽게 이어서 재생할 수 있도록 미디어 플레이어를 오랫동안 표시합니다."</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"플레이어를 숨깁니다."</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"플레이어를 표시합니다."</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"사용 가능한 플레이어가 없습니다."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"미디어"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"블루투스를 사용 설정함"</string>
 </resources>

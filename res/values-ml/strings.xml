@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"പരിശോധിച്ചുറപ്പിക്കാൻ നിങ്ങളുടെ മുഖം ഉപയോഗിക്കൂ"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"ആരംഭിക്കുക"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"മുഖം തിരിച്ചറിഞ്ഞുള്ള അൺലോക്ക് ഉപയോഗസഹായി ഓഫാക്കുകയാണെങ്കിൽ, ചില സജ്ജീകരണ ഘട്ടങ്ങൾ TalkBack-ന് ഒപ്പം ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"മടങ്ങുക"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"സജ്ജമാക്കൽ തുടരുക"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ഉപയോഗസഹായി സജ്ജീകരണം ഉപയോഗിക്കുക"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"വൈഫൈ പാസ്‌വേഡ്: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ഹോട്ട്‌സ്‌പോട്ടിന്റെ പാസ്‌വേഡ്: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"സ്വയമേവ കണ‌ക്റ്റ് ചെയ്യുക"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"ഈ നെറ്റ്‌വർക്കിന് സമീപമെത്തുമ്പോൾ സ്വയമേവ കണക്‌റ്റ് ചെയ്യാൻ ഫോണിനെ അനുവദിക്കുക"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ഈ നെറ്റ്‌വർക്കിന് സമീപമെത്തുമ്പോൾ സ്വയമേവ കണക്‌റ്റ് ചെയ്യാൻ ടാബ്‌ലെറ്റിനെ അനുവദിക്കുക"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"പരിധിയിൽ വരുമ്പോൾ ഈ നെറ്റവർക്കിലേക്ക് കണക്ഷൻ അനുവദിക്കുക"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"ഉപകരണം ചേർക്കുക"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ഈ നെറ്റ്‌വർക്കിലേക്ക് ഒരു ഉപകരണം ചേർക്കാൻ ഒരു QR കോഡ് ഉപയോഗിക്കൂ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR കോഡ് സാധുവായ ഫോർമാറ്റിലല്ല"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"സിസ്റ്റം സർട്ടിഫിക്കറ്റുകൾ ഉപയോഗിക്കുക"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"നൽകരുത്"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"സാധൂകരിക്കരുത്"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"സർട്ടിഫിക്കറ്റൊന്നും വ്യക്തമാക്കിയിട്ടില്ല. നിങ്ങളുടെ കണക്ഷൻ സ്വകാര്യമായിരിക്കുകയില്ല."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"നെറ്റ്‌വർക്കിന്റെ പേര് ദൈർഘ്യമേറിയതാണ്."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ഒരു ഡൊമെയ്ൻ വ്യക്തമാക്കിയിരിക്കണം."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"സർട്ടിഫിക്കറ്റ് ആവശ്യമാണ്."</string>
@@ -1149,7 +1150,7 @@
     <string name="accessibility_category_personal" msgid="2228088849803484780">"വ്യക്തിഗത പ്രൊഫൈൽ അക്കൗണ്ടുകൾ"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"ഔദ്യോഗിക അക്കൗണ്ട് - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"വ്യക്തിഗത അക്കൗണ്ട് - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
-    <string name="search_settings" msgid="7573686516434589771">"തിരയൽ"</string>
+    <string name="search_settings" msgid="7573686516434589771">"Search"</string>
     <string name="display_settings" msgid="7197750639709493852">"ഡിസ്പ്ലേ"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"സ്‌ക്രീൻ സ്വയമേവ തിരിക്കുക"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"നിറങ്ങൾ"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"സ്‌മൂത്ത് ഡിസ്പ്ലേ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"ചില ഉള്ളടക്കങ്ങളുടെ പുതുക്കൽ നിരക്ക് 60 Hz-ൽ നിന്നും 90 Hz-ലേക്ക് സ്വയമേവ ഉയർത്തുന്നു. ബാറ്ററി ഉപയോഗം വർദ്ധിപ്പിക്കുന്നു."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"സ്‌മൂത്ത് ഡിസ്പ്ലേ"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"ഫോഴ്‌സ് 90 Hz പുതുക്കൽ നിരക്ക്"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"മെച്ചപ്പെട്ട സ്‌പർശന പ്രതികരണശേഷി, ആനിമേഷൻ നിലവാരം എന്നിവയ്‌ക്കുള്ള ഉയർന്ന പുതുക്കൽ നിരക്ക്. ബാറ്ററി ഉപയോഗം വർദ്ധിപ്പിക്കുന്നു."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"സ്ക്രീൻ ശ്രദ്ധ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ഓണാണ് / നിങ്ങൾ അതിൽ നോക്കുന്നുണ്ടെങ്കിൽ സ്ക്രീൻ ഓഫാക്കില്ല"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android പതിപ്പ്"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android സുരക്ഷാ അപ്ഡേറ്റ്"</string>
     <string name="model_info" msgid="8997566254717810904">"മോഡല്‍"</string>
-    <string name="model_summary" msgid="2246651782442466213">"മോഡൽ: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"മോഡലും ഹാർഡ്‌വെയറും"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"ഹാർഡ്‌വെയർ പതിപ്പ്"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ഉപകരണ ഐഡി"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g>-ൽ കൂടുതൽ ഉപകരണങ്ങളിൽ ടെതർ ചെയ്യാനായില്ല."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ടെതർ ചെയ്‌തത് മാറ്റും."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ഇതർനെറ്റ് ടെതറിംഗ്"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"USB ഇതർനെറ്റ് വഴി ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ഇതർനെറ്റ് വഴി ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷനിലൂടെ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്‍റർനെറ്റ് നൽകാൻ ഹോട്ട്‌സ്പോട്ടും ‌ടെതറിംഗും ഉപയോഗിക്കുക. ചുറ്റുവട്ടത്തുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടാൻ ആപ്പുകൾക്കും ഹോട്ട്‌സ്പോട്ട് സൃഷ്ടിക്കാൻ കഴിയും."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"നിങ്ങളുടെ വൈഫൈ വഴിയോ മൊബൈൽ ഡാറ്റാ കണക്ഷൻ വഴിയോ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്റർനെറ്റ് നൽകാൻ ഹോട്ട്‌സ്പോട്ടും ടെതറിംഗും ഉപയോഗിക്കുക. സമീപമുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടാൻ ആപ്പുകൾക്ക് ഹോട്ട്‌സ്പോട്ട് സൃഷ്‌ടിക്കാനുമാവും."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"സഹായം"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"പിൻ, പാറ്റേൺ അല്ലെങ്കിൽ പാസ്‌വേഡ് റീസെറ്റ് ചെയ്യാൻ നിങ്ങളെ അവർക്ക് സഹായിക്കാനാകും"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"തിരിച്ചറിയാനാകാത്ത ആപ്‌സിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"തിരിച്ചറിയാനാകാത്ത ആപ്‌സിനാൽ നിങ്ങളുടെ ഫോണും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ഫോണിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ഡൗൺലോഡ് ചെയ്‌ത SIM-കൾ മായ്ക്കുന്നതിൽ പ്രശ്‌നമുണ്ട്"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"ഉപകരണം റീബൂട്ട് ചെയ്‌ത ശേഷം വീണ്ടും ശ്രമിക്കുക. ഫാക്‌ടറി റീസെറ്റ് തുടരുകയാണെങ്കിൽ, ഡൗൺലോഡ് ചെയ്‌ത SIM-കൾ ഉപകരണത്തിൽ തുടർന്നുമുണ്ടായേക്കാം."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"റീബൂട്ട് ചെയ്യുക"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"ഫാക്‌ടറി റീസെറ്റ് തുടരണോ?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ഡൗൺലോഡ് ചെയ്‌ത SIM-കൾ ഉപകരണത്തിൽ തുടർന്നുമുണ്ടാകും."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"ഫാക്‌ടറി റീസെറ്റ്"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"തിരിച്ചറിയാനാകാത്ത ആപ്പുകളാൽ നിങ്ങളുടെ ഉപകരണവും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്പുകൾ ഇൻസ്‌റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ഉപകരണത്തിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"വിപുലമായ ക്രമീകരണം"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"കൂടുതൽ ക്രമീകരണ ഓപ്‌ഷനുകൾ പ്രവർത്തനക്ഷമമാക്കുക"</string>
@@ -2349,7 +2355,7 @@
     <string name="print_feature_state_off" msgid="1466195699995209446">"ഓഫ്"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"സേവനം ചേർക്കുക"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"പ്രിന്റർ ചേർക്കുക"</string>
-    <string name="print_menu_item_search" msgid="5989979785203603169">"തിരയൽ"</string>
+    <string name="print_menu_item_search" msgid="5989979785203603169">"Search"</string>
     <string name="print_searching_for_printers" msgid="5401413178028348800">"പ്രിന്ററുകൾക്കായി തിരയുന്നു"</string>
     <string name="print_service_disabled" msgid="9185935228930987786">"സേവനം പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="print_print_jobs" msgid="2605944855933091183">"പ്രിന്റ് ജോലികൾ"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"റീസെറ്റ് ചെയ്യുക"</string>
     <string name="tts_play" msgid="2945513377250757221">"പ്ലേ ചെയ്യുക"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"അഡാപ്റ്റീവ് കണക്റ്റിവിറ്റി"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"നിങ്ങളുടെ നെറ്റ്‌വർക്ക് കണക്ഷൻ സ്വയമേവ മാനേജ് ചെയ്യുന്നതിലൂടെ ബാറ്ററി ലൈഫ് വർദ്ധിപ്പിക്കുകയും ഉപകരണത്തിന്റെ പ്രകടനം മെച്ചപ്പെടുത്തുകയും ചെയ്യുന്നു"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ക്രെഡൻഷ്യൽ സ്റ്റോറേജ്"</string>
     <string name="credentials_install" msgid="3933218407598415827">"സർട്ടിഫിക്കറ്റ് ഇൻസ്റ്റാൾ ചെയ്യൂ"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"സ്റ്റോറേജിൽനിന്ന് സർട്ടിഫിക്കറ്റുകൾ ഇൻസ്റ്റാൾ ചെയ്യുക"</string>
@@ -3435,7 +3443,7 @@
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"ശല്ല്യപ്പെടുത്തരുത് അറിയിപ്പ് ക്രമീകരണം മാറ്റണോ?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"ഔദ്യോഗിക പ്രൊഫൈൽ ശബ്ദങ്ങൾ"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"സ്വകാര്യ പ്രൊഫൈൽ ശബ്ദങ്ങൾ ഉപയോഗിക്കുക"</string>
-    <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"ഔദ്യോഗിക പ്രൊഫൈലുകൾക്കും വ്യക്തിഗത പ്രൊഫൈലുകൾക്കുമുള്ള ശബ്ദങ്ങൾ ഒന്നുതന്നെ ആയിരിക്കും"</string>
+    <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"ഔദ്യോഗിക പ്രൊഫൈലുകൾക്കും സ്വകാര്യ പ്രൊഫൈലുകൾക്കുമുള്ള ശബ്ദങ്ങൾ ഒന്നുതന്നെ ആയിരിക്കും"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"ഔദ്യോഗിക ഫോൺ റിംഗ്‌ടോൺ"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"ഡിഫോൾട്ട് ഔദ്യോഗിക അറിയിപ്പ് ശബ്‌ദം"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"ഡിഫോൾട്ട് ഔദ്യോഗിക അലാറം ശബ്‌ദം"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"നെറ്റ്‌വർക്കുകൾ കണ്ടെത്താനായില്ല. വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(നിരോധിക്കപ്പെട്ടത്)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"സിം കാർഡില്ല"</string>
+    <string name="sim_card" msgid="6381158752066377709">"സിം"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"സിം ഇല്ല"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"ഒന്നുമില്ല"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"കണക്റ്റ് ചെയ്യാൻ സിം ആവശ്യമാണ്"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"കണക്റ്റ് ചെയ്യാൻ <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> സിം ആവശ്യമാണ്"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"മുൻഗണന നൽകുന്ന നെറ്റ്‌വർക്ക് മോഡ്: WCDMA-യ്ക്ക് മുൻഗണന"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"മുൻഗണന നൽകുന്ന നെറ്റ്‌വർക്ക് മോഡ്: GSM മാത്രം"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"മുൻഗണന നൽകുന്ന നെറ്റ്‌വർക്ക് മോഡ്: WCDMA മാത്രം"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Settings ആപ്പിൽ സ്‌ക്രീൻ ഓവർലേ അനുവദിക്കുക"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Settings സ്‌ക്രീനുകളിൽ ഓവർലേ ചെയ്യാൻ മറ്റ് ആപ്പുകൾക്ക് മുകളിൽ കാണിക്കാനാകുന്ന ആപ്പുകളെ അനുവദിക്കുക"</string>
     <string name="media_controls_title" msgid="403271085636252597">"മീഡിയ"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"മീഡിയ സെഷൻ അവസാനിക്കുമ്പോൾ പ്ലേയർ മറയ്‌ക്കുക"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"വികസിപ്പിച്ച ദ്രുത ക്രമീകരണ പാനലിൽ നിന്ന് സെഷൻ പുനരാരംഭിക്കാൻ പ്ലേയർ നിങ്ങളെ അനുവദിക്കുന്നു."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"ദ്രുത ക്രമീകരണത്തിൽ മീഡിയ പ്ലേയർ"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"പ്ലേബാക്ക് എളുപ്പത്തിൽ പുനരാരംഭിക്കാൻ വിപുലീകരിച്ച കാലയളവിലേക്ക് മീഡിയ പ്ലേയർ കാണിക്കുക"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"പ്ലേയർ മറയ്‌ക്കുക"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"പ്ലേയർ കാണിക്കുക"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"പ്ലേയറുകളൊന്നും ലഭ്യമല്ല"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"മീഡിയ"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth ഓണാകും"</string>
 </resources>

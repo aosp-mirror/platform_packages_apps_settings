@@ -107,7 +107,10 @@ public abstract class VolumeSeekBarPreferenceController extends
         return mHelper.getMinVolume(getAudioStream());
     }
 
-    protected abstract int getAudioStream();
+    /**
+     * @return the audio stream type
+     */
+    public abstract int getAudioStream();
 
     protected abstract int getMuteIcon();
 
