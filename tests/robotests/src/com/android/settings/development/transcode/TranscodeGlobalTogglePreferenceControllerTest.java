@@ -31,7 +31,7 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class TranscodeGlobalTogglePreferenceControllerTest {
 
-    private static final String TRANSCODE_ENABLED_PROP_KEY = "persist.sys.fuse.transcode";
+    private static final String TRANSCODE_ENABLED_PROP_KEY = "persist.sys.fuse.transcode_enabled";
 
     private TranscodeGlobalTogglePreferenceController mController;
 
@@ -47,15 +47,15 @@ public class TranscodeGlobalTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_whenDisabled_shouldReturnTrue() {
+    public void isChecked_whenDisabled_shouldReturnFalse() {
         SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, "false");
-        assertThat(mController.isChecked()).isTrue();
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
-    public void isChecked_whenEnabled_shouldReturnFalse() {
+    public void isChecked_whenEnabled_shouldReturnTrue() {
         SystemProperties.set(TRANSCODE_ENABLED_PROP_KEY, "true");
-        assertThat(mController.isChecked()).isFalse();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
@@ -64,7 +64,7 @@ public class TranscodeGlobalTogglePreferenceControllerTest {
         mController.setChecked(true);
 
         // Verify the system property was updated.
-        assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, true)).isFalse();
+        assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, false)).isTrue();
     }
 
     @Test
@@ -73,6 +73,6 @@ public class TranscodeGlobalTogglePreferenceControllerTest {
         mController.setChecked(false);
 
         // Verify the system property was updated.
-        assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, false)).isTrue();
+        assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, true)).isFalse();
     }
 }

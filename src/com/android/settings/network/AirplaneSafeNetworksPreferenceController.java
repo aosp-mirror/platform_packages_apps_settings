@@ -25,7 +25,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.PrimarySwitchController;
+import com.android.settings.widget.GenericSwitchController;
 import com.android.settings.wifi.WifiEnabler;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -70,7 +70,7 @@ public class AirplaneSafeNetworksPreferenceController extends AbstractPreference
     public void onStart() {
         mAirplaneModeEnabler.start();
         if (mPreference != null) {
-            mWifiEnabler = new WifiEnabler(mContext, new PrimarySwitchController(mPreference),
+            mWifiEnabler = new WifiEnabler(mContext, new GenericSwitchController(mPreference),
                     FeatureFactory.getFactory(mContext).getMetricsFeatureProvider());
         }
     }

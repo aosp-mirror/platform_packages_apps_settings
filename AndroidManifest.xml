@@ -3652,6 +3652,17 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".sim.receivers.SimCompleteBootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".sim.SimNotificationService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

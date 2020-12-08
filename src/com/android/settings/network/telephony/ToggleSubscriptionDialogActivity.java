@@ -27,6 +27,7 @@ import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.EnableMultiSimSidecar;
@@ -34,6 +35,7 @@ import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
 import com.android.settings.network.SwitchToRemovableSlotSidecar;
 import com.android.settings.network.UiccSlotUtil;
+import com.android.settings.sim.SimActivationNotifier;
 
 import com.google.common.collect.ImmutableList;
 
@@ -45,7 +47,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
     private static final String TAG = "ToggleSubscriptionDialogActivity";
     // Arguments
-    private static final String ARG_enable = "enable";
+    @VisibleForTesting
+    public static final String ARG_enable = "enable";
     // Dialog tags
     private static final int DIALOG_TAG_DISABLE_SIM_CONFIRMATION = 1;
     private static final int DIALOG_TAG_ENABLE_SIM_CONFIRMATION = 2;
@@ -189,9 +192,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                     return;
                 }
                 Log.i(TAG, "User confirmed reboot to enable DSDS.");
+                SimActivationNotifier.setShowSimSettingsNotification(this, true);
                 mTelMgr.switchMultiSimConfig(NUM_OF_SIMS_FOR_DSDS);
-                // TODO(b/170507290): Store a bit in preferences for displaying the notification
-                //  after the reboot.
                 break;
             case DIALOG_TAG_ENABLE_SIM_CONFIRMATION:
                 Log.i(TAG, "User confirmed to enable the subscription.");
@@ -294,6 +296,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private void handleTogglePsimAction() {
         if (mSubscriptionManager.canDisablePhysicalSubscription() && mSubInfo != null) {
             mSubscriptionManager.setUiccApplicationsEnabled(mSubInfo.getSubscriptionId(), mEnable);
+            finish();
         } else {
             Log.i(
                     TAG,

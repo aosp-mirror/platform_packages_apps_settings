@@ -11659,7 +11659,7 @@
     <string name="pref_title_network_details">Network details</string>
 
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
-    <string name="about_phone_device_name_warning">Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices or set up a Wi-Fi hotspot.</string>
+    <string name="about_phone_device_name_warning">Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot.</string>
 
     <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
     <string name="devices_title">Devices</string>
@@ -12093,6 +12093,17 @@
     <!-- Body text of DSDS activation failure dialog. Users could toggle the selected SIM again or reboot to recover. [CHAR LIMIT=NONE] -->
     <string name="dsds_activation_failure_body_msg2">Try turning on the SIM again. If the problem continues, restart your device.</string>
 
+    <!--  Strings for SIM push notifications  -->
+    <!-- Category name of the notifications related to SIM setup. [CHAR LIMIT=NONE] -->
+    <string name="sim_setup_channel_id">Network activation</string>
+    <!--  The title of post DSDS reboot notification. The title includes carrier's name. [CHAR LIMIT=NONE] -->
+    <string name="post_dsds_reboot_notification_title_with_carrier"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> is active</string>
+    <!--  The body text of post DSDS reboot notification. [CHAR LIMIT=NONE] -->
+    <string name="post_dsds_reboot_notification_text">Tap to update SIM settings</string>
+
+    <!-- Button label of the removable sim card. [CHAR LIMIT=NONE] -->
+    <string name="sim_card_label">SIM card</string>
+
     <!-- Strings for deleting eUICC subscriptions dialog activity -->
     <!-- Title on confirmation dialog asking the user if they want to erase the downloaded SIM from the device. [CHAR_LIMIT=NONE] -->
     <string name="erase_sim_dialog_title">Erase this downloaded SIM?</string>
@@ -12490,6 +12501,10 @@
     <string name="network_and_internet_preferences_summary">Connect to public networks</string>
     <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_internet">network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte</string>
+    <!-- Label text to view airplane-safe networks. [CHAR LIMIT=40] -->
+    <string name="view_airplane_safe_networks">View airplane-safe networks</string>
+    <!-- Label text to turn off airplane mode. [CHAR LIMIT=40] -->
+    <string name="turn_off_airplane_mode">Turn off Airplane Mode</string>
 
     <!-- Summary for preference when Bedtime mode is on [CHAR LIMIT=NONE] -->
     <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>

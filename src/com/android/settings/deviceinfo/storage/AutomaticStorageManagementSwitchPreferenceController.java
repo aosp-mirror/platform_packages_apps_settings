@@ -29,7 +29,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.PrimarySwitchController;
+import com.android.settings.widget.GenericSwitchController;
 import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.Utils;
@@ -44,7 +44,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
     static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY = "ro.storage_manager.enabled";
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private PrimarySwitchPreference mSwitch;
-    private PrimarySwitchController mSwitchController;
+    private GenericSwitchController mSwitchController;
     private FragmentManager mFragmentManager;
 
     public AutomaticStorageManagementSwitchPreferenceController(Context context, String key) {
@@ -77,7 +77,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
         mSwitch.setChecked(Utils.isStorageManagerEnabled(mContext));
 
         if (mSwitch != null) {
-            mSwitchController = new PrimarySwitchController(mSwitch);
+            mSwitchController = new GenericSwitchController(mSwitch);
             mSwitchController.setListener(this);
             mSwitchController.startListening();
         }

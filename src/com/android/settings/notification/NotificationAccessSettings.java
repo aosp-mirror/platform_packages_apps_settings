@@ -35,7 +35,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -48,6 +47,7 @@ import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ServiceListing;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.List;
 
@@ -140,7 +140,7 @@ public class NotificationAccessSettings extends EmptyTextSettings {
                 Log.e(TAG, "can't find package name", e);
             }
 
-            final Preference pref = new Preference(getPrefContext());
+            final AppPreference pref = new AppPreference(getPrefContext());
             pref.setTitle(title);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(service, service.applicationInfo,
                     UserHandle.getUserId(service.applicationInfo.uid)));
