@@ -133,8 +133,7 @@ public class RemoteMediaSlice implements CustomSliceable {
                     .setTitle(isMediaOutputDisabled ? spannableTitle : outputTitle)
                     .setSubtitle(info.getName())
                     .setTitleItem(emptyIcon, ListBuilder.ICON_IMAGE)
-                    .setPrimaryAction(getMediaOutputSliceAction(
-                            info.getClientPackageName(), isMediaOutputDisabled)));
+                    .setPrimaryAction(getMediaOutputDialogAction(info, isMediaOutputDisabled)));
         }
         return listBuilder.build();
     }
@@ -167,23 +166,23 @@ public class RemoteMediaSlice implements CustomSliceable {
         return primarySliceAction;
     }
 
-    private SliceAction getMediaOutputSliceAction(
-            String packageName, boolean isMediaOutputDisabled) {
+    private SliceAction getMediaOutputDialogAction(RoutingSessionInfo info,
+            boolean isMediaOutputDisabled) {
         final Intent intent = new Intent()
                 .setAction(isMediaOutputDisabled
-                        ? ""
-                        : MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME, packageName);
+                        ? "" : MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
+                .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                        info.getClientPackageName());
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_volume_remote);
-        final int requestCode = TextUtils.isEmpty(packageName) ? 0 : packageName.hashCode();
-        final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
-                requestCode, intent, 0 /* flags */);
+
+        final PendingIntent primaryBroadcastIntent = PendingIntent.getBroadcast(mContext,
+                0 /* requestCode */, intent, 0 /* flags */);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
-                primaryActionIntent, icon, ListBuilder.ICON_IMAGE,
+                primaryBroadcastIntent, icon, ListBuilder.ICON_IMAGE,
                 mContext.getString(R.string.media_output_label_title,
-                        Utils.getApplicationLabel(mContext, packageName)));
+                        Utils.getApplicationLabel(mContext, info.getClientPackageName())));
         return primarySliceAction;
     }
 

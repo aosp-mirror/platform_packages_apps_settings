@@ -32,6 +32,8 @@ import com.android.settings.media.MediaOutputUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.media.MediaOutputSliceConstants;
 
 import java.util.List;
@@ -44,7 +46,8 @@ import java.util.List;
  * - Media stream captured by remote device
  * - During a call.
  */
-public class MediaOutputPreferenceController extends AudioSwitchPreferenceController {
+public class MediaOutputPreferenceController extends AudioSwitchPreferenceController
+        implements LifecycleObserver, OnStop {
 
     private MediaController mMediaController;
 
@@ -61,6 +64,15 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         if (!Utils.isAudioModeOngoingCall(mContext) && mMediaController != null) {
             mPreference.setVisible(true);
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        // Media output dialog should not show when onStop
+        mContext.sendBroadcast(new Intent()
+                .setAction(MediaOutputSliceConstants.ACTION_DISMISS_MEDIA_OUTPUT_DIALOG)
+                .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME));
     }
 
     @Override
@@ -133,10 +145,13 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            final Intent intent = new Intent()
-                    .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(intent);
+            mContext.sendBroadcast(new Intent()
+                    .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                    .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
+                    .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                            mMediaController.getPackageName())
+                    .putExtra(MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN,
+                            mMediaController.getSessionToken()));
             return true;
         }
         return false;
