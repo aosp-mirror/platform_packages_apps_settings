@@ -129,8 +129,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         super.displayPreference(screen);
         mLayoutPreference = screen.findPreference(getPreferenceKey());
         mLayoutPreference.setVisible(isAvailable());
-
-        refresh();
     }
 
     @Override
@@ -142,6 +140,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         mCachedDevice.registerCallback(this);
         mBluetoothAdapter.addOnMetadataChangedListener(mCachedDevice.getDevice(),
                 mContext.getMainExecutor(), mMetadataListener);
+
+        refresh();
     }
 
     @Override
