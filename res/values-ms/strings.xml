@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Gunakan wajah untuk membuat pengesahan"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Mula"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Jika wajah buka kunci kebolehaksesan dimatikan, beberapa langkah persediaan mungkin tidak berfungsi dengan baik dengan TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Kembali"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Teruskan persediaan"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Gunakan persediaan kebolehaksesan"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Kata laluan Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Kata laluan tempat liputan: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Autosambung"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Benarkan telefon bersambung secara automatik berdekatan rangkaian ini"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Benarkan tablet bersambung secara automatik berdekatan rangkaian ini"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Benarkan sambungan kepada rangkaian ini apabila berada dalam julat"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Tambah peranti"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Gunakan kod QR untuk menambahkan peranti pada rangkaian ini"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Kod QR bukan dalam format yang sah"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Gunakan sijil sistem"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Jangan berikan"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Jangan sahkan"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Tiada sijil yang ditentukan. Sambungan anda tidak akan menjadi sambungan peribadi."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Nama rangkaian terlalu panjang."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Perlu nyatakan domain."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Sijil diperlukan."</string>
@@ -1190,13 +1191,13 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Meningkatkan kadar muat semula daripada 60 kepada 90 Hz untuk sesetengah kandungan secara automatik. Meningkatkan penggunaan bateri."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Paksa kadar muat semula 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Kadar muat semula tertinggi untuk keresponsifan sentuhan &amp; kualiti animasi yang dipertingkat. Meningkatkan penggunaan bateri."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Perhatian skrin"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Hidup / Skrin tidak akan dimatikan jika anda melihat pada skrin"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Mati"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"Akses kamera diperlukan"</string>
-    <string name="adaptive_sleep_summary_no_permission" msgid="5107880175176848307">"Ketik untuk mengurus kebenaran bagi Perkhidmatan Pemperibadian Peranti"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="5107880175176848307">"Ketik untuk mengurus kebenaran bagi Perkhidmatan Pemeribadian Peranti"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Menghalang skrin daripada dimatikan jika anda memandang skrin"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Perhatian skrin menggunakan kamera depan untuk melihat sama ada seseorang sedang memandang skrin. Ciri ini berfungsi pada peranti dan imej tidak sekali-kali disimpan atau dihantar kepada Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Hidupkan perhatian skrin"</string>
@@ -1267,7 +1268,7 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Semasa mengecas"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Semasa didok"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Jangan sekali-kali"</string>
-    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Dimatikan"</string>
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Mati"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Untuk mengawal perkara yang berlaku semasa telefon didok dan/atau tidur, hidupkan penyelamat skrin."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Masa untuk mulakan"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Penyelamat skrin semasa"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Versi Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Kemas kini keselamatan Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model &amp; perkakasan"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Versi perkakasan"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID Peralatan"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Tidak boleh menambat pada lebih daripada <xliff:g id="MAXCONNECTION">%1$d</xliff:g> peranti."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> akan dinyahtambat."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Penambatan Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Kongsi sambungan Internet telefon melalui Ethernet USB"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Kongsi sambungan Internet telefon melalui Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Gunakan tempat liputan dan penambatan untuk menyediakan Internet kepada peranti lain melalui sambungan data mudah alih anda. Apl juga boleh membuat tempat liputan untuk berkongsi kandungan dengan peranti berdekatan."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gunakan tempat liputan dan penambatan untuk menyediakan Internet kepada peranti lain melalui Wi-Fi atau sambungan data mudah alih anda. Apl juga boleh membuat tempat liputan untuk berkongsi kandungan dengan peranti berdekatan."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Bantuan"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Mereka dapat membantu anda menetapkan semula PIN, corak atau kata laluan"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tablet dan data peribadi anda lebih mudah diserang oleh apl yang tidak diketahui. Dengan memasang apl daripada sumber ini, anda bersetuju bahawa anda bertanggungjawab terhadap sebarang kerosakan pada tablet anda atau kehilangan data akibat penggunaan apl tersebut."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefon dan data peribadi anda lebih mudah diserang oleh apl yang tidak diketahui. Dengan memasang apl daripada sumber ini, anda bersetuju bahawa anda bertanggungjawab terhadap sebarang kerosakan pada telefon anda atau kehilangan data akibat penggunaan apl tersebut."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Terdapat masalah memadamkan SIM yang dimuat turun."</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Sila but semula peranti dan cuba lagi. Jika anda meneruskan tetapan semula kilang, SIM yang dimuat turun akan kekal pada peranti."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"But semula"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Teruskan tetapan semula kilang?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"SIM yang dimuat turun akan kekal pada peranti."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Tetapan semula kilang"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Peranti dan data peribadi anda lebih mudah diserang oleh apl yang tidak diketahui. Dengan memasang apl daripada sumber ini, anda bersetuju bahawa anda bertanggungjawab terhadap sebarang kerosakan pada peranti anda atau kehilangan data akibat penggunaan apl tersebut."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Tetapan terperinci"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Dayakan lebih banyak pilihan tetapan"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Tetapkan semula"</string>
     <string name="tts_play" msgid="2945513377250757221">"Main"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Kesambungan mudah suai"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Melanjutkan hayat bateri dan meningkatkan prestasi peranti dengan mengurus sambungan rangkaian anda secara automatik"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Storan bukti kelayakan"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Pasang sijil"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Pasang sijil daripada storan"</string>
@@ -3552,7 +3560,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> perbualan keutamaan</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Perbualan keutamaan"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Tunjukkan di sebelah atas bahagian perbualan dan kelihatan seperti gelembung yang terapung"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Tunjukkan di sebelah atas bahagian perbualan dan kelihatan sebagai gelembung terapung"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Muncul di atas bahagian perbualan"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Perbualan lain"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Perbualan yang telah anda buat perubahan"</string>
@@ -3871,8 +3879,8 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"Tutup"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Hntr mklm balas tentang peranti ini"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Masukkan PIN pentadbir"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"Dihidupkan"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Dimatikan"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"Hidup"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Mati"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Penyematan apl"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Penyematan apl membenarkan anda mengekalkan paparan apl semasa sehingga anda menyahsemat apl itu. Ciri ini boleh digunakan, contohnya, untuk membenarkan rakan yang dipercayai bermain permainan tertentu. \n\nApabila apl disemat, apl yang disemat itu boleh membuka apl lain dan data peribadi mungkin boleh diakses. \n\nUntuk menggunakan penyematan apl: 	\n1.	Hidupkan penyematan apl 	\n2.	Buka Ikhtisar 	\n3.	Ketik ikon kunci di bahagian atas skrin, kemudian ketik Pin"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Penyematan apl membenarkan anda mengekalkan paparan apl semasa sehingga anda menyahsemat apl itu. Ciri ini boleh digunakan, contohnya, untuk membenarkan rakan yang dipercayai bermain permainan tertentu. \n\nApabila apl disemat, apl yang disemat itu boleh membuka apl lain dan data peribadi mungkin boleh diakses. \n\nJika anda mahu berkongsi peranti anda dengan orang lain secara selamat, cuba gunakan pengguna tetamu. \n\nUntuk menggunakan penyematan apl: 	\n1.	Hidupkan penyematan apl 	\n2.	Buka Ikhtisar 	\n3.	Ketik ikon apl di bahagian atas skrin, kemudian ketik Semat"</string>
@@ -3925,7 +3933,7 @@
     <string name="change" msgid="273206077375322595">"Tukar"</string>
     <string name="change_storage" msgid="8773820275624113401">"Tukar storan"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Pemberitahuan"</string>
-    <string name="notifications_enabled" msgid="7743168481579361019">"Dihidupkan"</string>
+    <string name="notifications_enabled" msgid="7743168481579361019">"Hidup"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="5603160425378437143">"Mati"</string>
     <string name="notifications_partly_blocked" msgid="5738239705473445725">"<xliff:g id="COUNT_0">%1$d</xliff:g> daripada <xliff:g id="COUNT_1">%2$d</xliff:g> kategori dimatikan"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Tidak menemui rangkaian. Cuba lagi."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(dilarang)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Tiada kad SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Tiada SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Tiada"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Memerlukan SIM untuk menyambung"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Memerlukan SIM <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> untuk menyambung"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Mod rangkaian pilihan: WCDMA diutamakan"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Mod rangkaian pilihan: GSM sahaja"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Mod rangkaian pilihan: WCDMA sahaja"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Benarkan tindanan skrin pada Tetapan"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Benarkan apl yang boleh dipaparkan di atas apl lain untuk menindan skrin Tetapan"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Sembunyikan pemain apabila sesi media tamat"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Pemain membolehkan anda menyambung semula sesi daripada panel Tetapan Pantas yang dikembangkan."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Pemain media dalam Tetapan Pantas"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Tunjukkan pemain media untuk tempoh yang lama untuk menyambung semula main balik dengan mudah"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Sembunyikan pemain"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Tunjukkan pemain"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Tiada pemain tersedia"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth akan dihidupkan"</string>
 </resources>

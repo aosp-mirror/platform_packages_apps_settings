@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Bruk ansiktet ditt til å godkjenne"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Start"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Hvis ansiktslås med tilgjengelighet er slått av, fungerer muligens ikke enkelte konfigureringstrinn som de skal, med TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Gå tilbake"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Fortsett konfig."</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Bruk tilgjengelighetsoppsett"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi-passord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Passord for Wi-Fi-sone: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatisk tilkobling"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Tillat at telefonen kobler seg til automatisk i nærheten av dette nettverket"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Tillat at nettbrettet kobler seg til automatisk i nærheten av dette nettverket"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Tillat tilkobling til dette nettverket når det er innen rekkevidde"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Legg til en enhet"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Bruk en QR-kode for å legge til en enhet på dette nettverket"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-kode er ikke et gyldig format"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Bruk systemsertifikat"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Ikke oppgi"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ikke godkjenn"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Ingen sertifikater er spesifisert. Tilkoblingen din blir ikke privat."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Nettverksnavnet er for langt."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Du må angi et domene."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Sertifikat er påkrevd."</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Øker oppdateringsfrekvensen automatisk fra 60 til 90 Hz for noe innhold. Øker batteribruken."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Tving oppdateringsfrekvens på 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Den høyeste oppdateringsfrekvensen for å oppnå bedre trykkfølsomhet og animasjonskvalitet. Øker batteribruken."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Skjermoppmerksomhet"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"På / skjermen slås ikke av hvis du ser på den"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android-versjon"</string>
     <string name="security_patch" msgid="4071756145347865382">"Sikkerhetsoppdatering for Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modell"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modell: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modell og maskinvare"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Maskinvareversjon"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Utstyrs-ID"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Kan ikke knytte til mer enn <xliff:g id="MAXCONNECTION">%1$d</xliff:g> enheter."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kobles fra."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-internettdeling"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Del telefonens internettilkobling via USB-Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Del telefonens internettilkobling via Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Bruk Wi-Fi-sone og internettdeling for å gi andre enheter tilgang til internett via mobildataforbindelsen din. Apper kan også opprette en Wi-Fi-sone for å dele innhold med enheter i nærheten."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Bruk Wi-Fi-soner og internettdeling for å gi andre enheter internettilgang via Wi-Fi- eller mobildatatilkoblingen din. Du kan også bruke apper til å opprette Wi-Fi-soner for å dele innhold med enheter i nærheten."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hjelp"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"De kan hjelpe deg med å tilbakestille PIN-koden, mønsteret eller passordet"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Nettbrettet ditt og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for enhver skade på nettbrettet eller tap av data som kan oppstå, fra bruk av slike apper."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefonen din og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for enhver skade på telefonen eller tap av data som kan oppstå, fra bruk av slike apper."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Problem med tømming av de nedlastede SIM-kortene"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Start enheten på nytt og prøv igjen. Hvis du fortsetter tilbakestillingen til fabrikkstandard, blir de nedlastede SIM-kortene værende på enheten."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Start på nytt"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Vil du fortsette tilbakestillingen?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Nedlastede SIM-kort blir værende på enheten."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Tilbakestill til fabrikkstandard"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Enheten din og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for eventuelle skader på enheten eller tap av data som oppstår på grunn av bruk av dem."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Avanserte innstillinger"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Aktiver flere innstillingsalternativer"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Tilbakestill"</string>
     <string name="tts_play" msgid="2945513377250757221">"Spill av"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Selvjusterende tilkobling"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Forlenger batterilevetiden og enhetsytelsen ved å administrere nettverkstilkoblingene automatisk"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Legitimasjonslager"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installer et sertifikat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installer sertifikater fra lagringsenhet"</string>
@@ -2750,7 +2758,7 @@
     <string name="work_mode_label" msgid="1001415270126064436">"Jobbprofil"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"Administreres av organisasjonen din"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"Apper og varsler er slått av"</string>
-    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Fjern arbeidsprofilen"</string>
+    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Fjern jobbprofilen"</string>
     <string name="background_data" msgid="321903213000101158">"Bakgrunnsdata"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Apper kan når som helst synkronisere, sende og motta data"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"Vil du deaktivere bakgrunnsdata?"</string>
@@ -3021,7 +3029,7 @@
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vil du slette deg selv?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vil du slette brukeren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Fjerne denne profilen?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Vil du fjerne arbeidsprofilen?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Fjern jobbprofilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Lagringsplassen og dataene dine blir fjernet fra dette nettbrettet. Denne handlingen kan ikke angres."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Lagringsplassen og dataene dine blir fjernet fra telefonen. Denne handlingen kan ikke angres."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Alle apper og data slettes."</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Fant ingen nettverk. Prøv på nytt."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(forbudt)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM-kortet mangler"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM-kort"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Uten SIM-kort"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Ingen"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Krever SIM-kort for å koble til"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Krever <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>-SIM-kort for å koble til"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Foretrukket nettverksmodus: WCDMA foretrekkes"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Foretrukket nettverksmodus: kun GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Foretrukket nettverksmodus: kun WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Tillat skjermoverlegg over Innstillinger"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Tillat apper som kan vises over andre apper, å legge seg over Innstillinger-skjermer"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Medier"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Skjul spilleren når medieøkten er avsluttet"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Med spilleren kan du gjenoppta en økt fra det utvidede Hurtiginnstillinger-panelet."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Mediseavspiller i hurtiginnstillingene"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Vis medieavspilleren i en lengre periode for å gjenoppta avspilling enkelt"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skjul spilleren"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Vis spilleren"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Det finnes ingen tilgjengelige spillere"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"medier"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth slås på"</string>
 </resources>

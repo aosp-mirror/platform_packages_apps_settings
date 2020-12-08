@@ -335,6 +335,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Preverjanje pristnosti z obrazom"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Začni"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Če je odklepanje z obrazom za ljudi s posebnimi potrebami izklopljeno, nekateri koraki nastavitve morda ne bodo dobro delovali s funkcijo TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Nazaj"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Nadaljuj nastavitev"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Uporabi nastavitev dostopnosti"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -963,8 +966,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Geslo za Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Geslo za dostopno točko: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Samodejna povezava"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Dovoli telefonu, da se samodejno poveže v bližini tega omrežja"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Dovoli tabličnemu računalniku, da se samodejno poveže v bližini tega omrežja"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Dovolite povezavo s tem omrežjem, ko je v dosegu"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Dodajte napravo"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Če želite dodati napravo v to omrežje, uporabite kodo QR"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Koda QR nima pravilne oblike zapisa"</string>
@@ -976,7 +978,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Uporabi sistemska potrdila"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Ne posreduj"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ne preverjaj"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Ni navedenih potrdil. Povezava ne bo zasebna."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Ime omrežja je predolgo."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Določiti morate domeno."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Potrdilo je obvezno."</string>
@@ -1074,7 +1075,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"Ali želite preklicati povabilo za povezavo z napravo <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"Želite pozabiti to skupino?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Dostopna točka Wi-Fi"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Internetna povezava ali vsebina ni v skupni rabi z drugimi napravami"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Internetna povezava ali vsebina ni deljena z drugimi napravami"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"Skupna raba internetne povezave tega tabličnega računalnika prek dostopne točke"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"Skupna raba internetne povezave tega telefona prek dostopne točke"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"Aplikacija daje vsebino v skupno rabo. Če želite omogočiti skupno rabo internetne povezave, dostopno točko izklopite in znova vklopite."</string>
@@ -1230,7 +1231,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Tekoč prikaz"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Samodejno povečanje hitrosti osveževanja s 60 na 90 Hz za nekatere vsebine. Poveča porabo energije baterije."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Tekoč prikaz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Vsili hitrost osveževanja 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Višja hitrost osveževanja za izboljšano odzivnost na dotik in kakovost animacij. Povečana poraba energije baterije."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Zaznavanje pogleda na zaslon"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Vklopljeno / zaslon se ne bo izklopil, če ga gledate"</string>
@@ -1371,7 +1372,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Različica sistema Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Varnostna posodobitev za Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model in strojna oprema"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Različica strojne opreme"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID opreme"</string>
@@ -1718,7 +1718,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Internetna povezava ni mogoča z več kot <xliff:g id="MAXCONNECTION">%1$d</xliff:g> naprav."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Internetna povezava z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bo prekinjena."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Internet prek etherneta"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Deljenje internetne povezave telefona prek povezave USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Deljenje internetne povezave telefona prek etherneta"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Uporabite dostopno točko in povezavo z internetom prek mobilnega telefona, da zagotovite internet drugim napravam prek svoje mobilne podatkovne povezave. Tudi aplikacije lahko ustvarijo dostopno točko za skupno rabo vsebin z napravami v bližini."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Uporabite dostopno točko in povezavo z internetom prek mobilnega telefona, da zagotovite internet drugim napravam prek Wi-Fi-ja ali mobilne podatkovne povezave. Tudi aplikacije lahko ustvarijo dostopno točko za deljenje vsebin z napravami v bližini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoč"</string>
@@ -1904,6 +1904,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Lahko vam pomaga ponastaviti kodo PIN, vzorec ali geslo"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Neznane aplikacije lažje napadejo tablični računalnik in osebne podatke v njem. Če namestite aplikacije iz tega vira, se strinjate, da ste sami odgovorni za morebitno škodo, nastalo v tabličnem računalniku, ali izgubo podatkov, ki je lahko posledica uporabe teh aplikacij."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Neznane aplikacije lažje napadejo telefon in osebne podatke v njem. Če namestite aplikacije iz tega vira, se strinjate, da ste sami odgovorni za morebitno škodo, nastalo v telefonu, ali izgubo podatkov, ki je lahko posledica uporabe teh aplikacij."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Težava z brisanjem prenesenih kartic SIM"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Znova zaženite napravo in poskusite znova. Če nadaljujete s tovarniško ponastavitvijo, bodo prenesene kartice SIM morda ostale v napravi."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Znova zaženi"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Nadaljuj s tovarn. ponastavitvijo?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Prenesene kartice SIM bodo ostale v napravi."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Tovarniška ponastavitev"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Neznane aplikacije lažje napadejo napravo in osebne podatke v njej. Če namestite aplikacije iz tega vira, se strinjate, da ste sami odgovorni za morebitno škodo, nastalo v napravi, ali izgubo podatkov zaradi uporabe teh aplikacij."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Dodatne nastavitve"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Omogoči več možnosti nastavitev."</string>
@@ -2734,6 +2740,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Ponastavi"</string>
     <string name="tts_play" msgid="2945513377250757221">"Predvajaj"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Prilagajanje povezav"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Podaljša čas delovanja baterije in izboljša učinkovitost delovanja naprave s samodejnim upravljanjem omrežnih povezav"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Shramba poverilnic"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Namestitev potrdila"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Namestitev potrdil iz shrambe"</string>
@@ -3602,13 +3610,13 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"Prikaz na poteznem zaslonu z obvestili, v vrstici stanja in na zaklenjenem zaslonu"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Skrivanje tihih obvestil v vrstici stanja"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Utripajoča lučka"</string>
-    <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Obvestila na zaklenj. zaslonu"</string>
+    <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Obvestila na zaklenjenem zaslonu"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Preskok zaklenjenega zaslona"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Po odklepanju z obrazom se odpre nazadnje uporabljeni zaslon"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"odklepanje zaslona, zaklenjen zaslon, preskok, zaobitje"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Ko je delovni profil zaklenjen"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Obvestila na zaklenjenem zaslonu"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Prikaži privzete in tihe pogovore in obvestila"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Prikaži obvestila za privzeto in tiho v razdelku Pogovori"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Skrij tihe pogovore in obvestila"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ne prikaži nobenih obvestil"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Občutljiva obvestila"</string>
@@ -4840,7 +4848,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Tej aplikaciji omogočite, da upravlja povezavo Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Tej aplikacij omogočite, da vklopi ali izklopi povezavo Wi-Fi, išče omrežja Wi-Fi in se z njimi poveže, doda ali odstrani omrežja ali pa zažene lokalno dostopno točko"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Predvajaj predstavnost v"</string>
-    <string name="media_output_label_title" msgid="4139048973886819148">"Predvajanje predstavnosti <xliff:g id="LABEL">%s</xliff:g> v"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"Predvajanje <xliff:g id="LABEL">%s</xliff:g> v"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Ta naprava"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Telefon"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablični računalnik"</string>
@@ -4881,6 +4889,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Omrežij ni bilo mogoče najti. Poskusite znova."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(prepovedano)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Ni kartice SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Ni kartice SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Ni podatkov"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Za povezavo je potrebna kartica SIM"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Za povezavo je potrebna kartica SIM operaterja <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Prednostni način omrežja: prednostno WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Prednostni način omrežja: samo GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Prednostni način omrežja: samo WCDMA"</string>
@@ -5122,10 +5135,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Dovoli prekrivanje zaslonov z nastavitvami"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Dovoli aplikacijam, ki lahko prekrivajo druge aplikacije, prekrivanje zaslonov v aplikaciji Nastavitve"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Predstavnost"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Skrije predvajalnik po končani seji predstavnosti"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Predvajalnik vam omogoča nadaljevanje seje prek razširjenega podokna s hitrimi nastavitvami."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Predvajalnik predstavnosti v hitrih nastavitvah"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Prikaz predvajalnika predstavnosti dalj časa za preprosto nadaljevanje predvajanja"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrij predvajalnik"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Prikaži predvajalnik"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Na voljo ni noben predvajalnik"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"predstavnost"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth se bo vklopil"</string>
 </resources>

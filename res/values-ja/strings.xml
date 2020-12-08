@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"顔で認証"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"開始"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"ユーザー補助の顔認証が OFF に設定されている場合、一部の設定手順は TalkBack を使用して適切に行えないことがあります。"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"戻る"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"設定を続行"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ユーザー補助の設定を使用"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi‑Fi パスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"アクセス ポイントのパスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動接続"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"このネットワークに近付いたら自動で接続する"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"このネットワークの近くで自動接続することをタブレットに許可する"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"圏内に入ると自動的にこのネットワークに接続するようになります"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"デバイスを追加"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR コードを使用して、このネットワークにデバイスを追加できます"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR コードの形式が無効です"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"システム証明書を使用"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"指定しない"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"検証しない"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"証明書が指定されていません。この接続ではプライバシーが保護されません。"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ネットワーク名が長すぎます。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ドメインを指定する必要があります。"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"証明書が必要です。"</string>
@@ -1046,7 +1047,7 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP 周波数帯"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"アクセス ポイントを使って他のデバイスとの Wi‑Fi ネットワークを作成します。アクセス ポイントはモバイルデータ通信によるインターネット接続を提供します。モバイルデータ通信料が追加で発生する可能性があります。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有できます。"</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"アクセス ポイントを自動的にオフにする"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"アクセス ポイントを自動的に OFF にする"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"デバイスが接続されていない場合"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"アクセスポイントをONにしています…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"アクセスポイントをOFFにしています…"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"コンテンツに応じて、リフレッシュ レートを自動的に 60 Hz から 90 Hz に変更します。電池使用量が増えます。"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"スムーズ ディスプレイ"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90 Hz リフレッシュ レートの適用"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"最高のリフレッシュ レートを適用します。タップの反応とアニメーションの品質が向上します。電池使用量が増えます。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"スクリーン アテンション"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ON / 見ている間は画面が OFF になりません"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android バージョン"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android セキュリティ アップデート"</string>
     <string name="model_info" msgid="8997566254717810904">"モデル"</string>
-    <string name="model_summary" msgid="2246651782442466213">"モデル: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"モデルとハードウェア"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"ハードウェア バージョン"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"装置ID"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"テザリングできるデバイスは<xliff:g id="MAXCONNECTION">%1$d</xliff:g>個までです。"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>のテザリングを解除します。"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"イーサネット テザリング"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"スマートフォンのインターネット接続を USB イーサネット経由で共有"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"スマートフォンのインターネット接続をイーサネット経由で共有"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"アクセス ポイントとテザリングを使用して、モバイルデータ通信により他のデバイスにインターネット接続を提供します。アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有することもできます。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"アクセス ポイントとテザリングを使用して、Wi-Fi やモバイルデータ通信により他のデバイスにインターネット接続を提供します。アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有することもできます。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ヘルプ"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN、パターン、またはパスワードのリセットを依頼できます"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"不明なアプリをインストールするとタブレットや個人データが攻撃を受ける可能性が高くなります。この提供元からアプリをインストールすることにより、アプリの使用により生じる可能性があるタブレットへの損害やデータの損失について、ユーザーご自身が単独で責任を負うことに同意するものとします。"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"不明なアプリをインストールするとスマートフォンや個人データが攻撃を受ける可能性が高くなります。この提供元からアプリをインストールすることにより、アプリの使用により生じる可能性があるスマートフォンへの損害やデータの損失について、ユーザーご自身が単独で責任を負うことに同意するものとします。"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ダウンロード型 SIM の消去中に問題が発生しました"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"デバイスを再起動してもう一度お試しください。初期状態へのリセットを続行しても、ダウンロード型 SIM はデバイスに残ります。"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"再起動"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"初期状態へのリセットを続行しますか？"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ダウンロード型 SIM はデバイスに残ります。"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"初期状態にリセット"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"不明なアプリをインストールするとデバイスや個人データが攻撃を受ける可能性が高くなります。この提供元からアプリをインストールすることにより、アプリの使用により生じる可能性があるデバイスへの損害やデータの損失について、ユーザーご自身が責任を負うことに同意するものとします。"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"詳細設定"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"詳細設定オプションを有効にする"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"リセット"</string>
     <string name="tts_play" msgid="2945513377250757221">"再生"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"アダプティブ接続"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"証明書のインストール"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"ストレージから証明書をインストールする"</string>
@@ -3478,7 +3486,7 @@
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"すべてのバブル設定"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"この会話をバブルで表示"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"他のアプリに重ねてフローティング アイコンとして表示"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"他のアプリに重ねてフローティング アイコンとして表示します"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルで表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"このデバイスでバブルを ON にしますか？"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"このアプリのバブルを ON にすると、デバイスでもバブルが ON になります。\n\nこの設定は、バブルが許可されているその他のアプリや会話に影響します。"</string>
@@ -3552,7 +3560,7 @@
       <item quantity="one">優先度の高い会話: <xliff:g id="COUNT_0">%d</xliff:g> 件</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"優先度の高い会話"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"会話セクションの一番上に表示され、ふきだしとして表示することもできます"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"会話セクションの一番上にバブルとして表示されます"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"会話セクションの一番上に表示"</string>
     <string name="other_conversations" msgid="7218658664423361043">"他の会話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"設定に変更を加えた会話"</string>
@@ -3576,7 +3584,7 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"音やバイブレーションによる通知、または画面のポップアップ通知をアプリに許可します"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"優先"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"会話セクションの一番上にバブルとして表示され、プロフィール写真がロック画面に表示されます"</string>
-    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> はほとんどの会話機能に対応していません。会話の優先度を高く設定することができず、会話はふきだしとして表示されません。"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> はほとんどの会話機能に対応していません。会話の優先度を高く設定することはできず、会話はバブルとして表示されません。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"プルダウン シェードで、通知を折りたたんで 1 行で表示します"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"着信音もバイブレーションも無効です"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"着信音もバイブレーションも無効になり会話セクションの下に表示されます"</string>
@@ -3623,7 +3631,7 @@
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"ピクチャー イン ピクチャーに対応したアプリはインストールされていません"</string>
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"pip ピクチャー イン"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"ピクチャー イン ピクチャー"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"PIP を許可"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"ピクチャー イン ピクチャーを許可"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"このアプリを開いているとき、またはアプリを離れた後に、動画の再生を続けるなどの目的でピクチャー イン ピクチャー ウィンドウを表示できるようにします。このウィンドウは、使用中の他のアプリの上に重ねて表示されます。"</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"シングル プロファイル モード"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"接続済み"</string>
@@ -4054,7 +4062,7 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"このバグレポートを IT 管理者と共有しています。詳しくは、IT 管理者にお問い合わせください。"</string>
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"共有する"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"共有しない"</string>
-    <string name="usb_use_charging_only" msgid="1743303747327057947">"データ転送なし"</string>
+    <string name="usb_use_charging_only" msgid="1743303747327057947">"充電"</string>
     <string name="usb_use_charging_only_desc" msgid="1234421230461847336">"このデバイスの充電のみを行う"</string>
     <string name="usb_use_power_only" msgid="3408055485802114621">"接続デバイスの充電"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"ファイル転送"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"ネットワークが見つかりませんでした。もう一度お試しください。"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"（禁止）"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM カードなし"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM なし"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"なし"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"SIM を接続する必要があります"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"<xliff:g id="WIRELESS_CARRIER">%s</xliff:g> の SIM を接続する必要があります"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"優先ネットワーク モード: WCDMA 優先"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"優先ネットワーク モード: GSM のみ"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"優先ネットワーク モード: WCDMA のみ"</string>
@@ -4905,7 +4918,7 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"仕事用"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"システムのデフォルト"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"この選択は無効になりました。もう一度お試しください。"</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"デバイス コントロール"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"ホームデバイス コントロール"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"デバイス コントロール"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
@@ -4916,7 +4929,7 @@
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"カード、パス、デバイス コントロールを表示"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"ロック画面"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"どのコンテンツも表示しない"</string>
-    <string name="power_menu_privacy" msgid="7900052501075197854">"デリケートなコンテンツ"</string>
+    <string name="power_menu_privacy" msgid="7900052501075197854">"プライベートな内容"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"ロック時にカードとコントロールを表示"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"ロック中にコントロールを表示"</string>
     <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"ロック中にカードを表示"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"設定での画面オーバーレイを許可する"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"他のアプリの上に重ねて表示して設定画面をオーバーレイすることをアプリに許可します"</string>
     <string name="media_controls_title" msgid="403271085636252597">"メディア"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"メディア セッションの終了にプレーヤーを非表示にする"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"プレーヤーを使用すると、クイック設定の展開パネルからセッションを再開できます。"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"クイック設定のメディア プレーヤー"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"メディア プレーヤーを長時間表示し、再生を簡単に再開できるようにします"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"プレーヤーを表示"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"プレーヤーなし"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth が ON になります"</string>
 </resources>

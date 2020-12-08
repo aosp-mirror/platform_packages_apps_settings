@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Doğrulamaq üçün üzünüzdən istifadə edin"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Başladın"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Əlçatımlılıq üz ilə kiliddən çıxarması funksiyası deaktiv olarsa, bəzi ayarlama mərhələləri TalkBack ilə düzgün işləməyə bilər."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Qayıdın"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Ayarlamağa davam edin"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Əlçatımlıq quraşdırması istifadə edin"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi parolu: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Hotspot parolu: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Avto bağlantı"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Bu şəbəkənin yaxınlığında telefonun avtomatik qoşulmasına icazə verin"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Bu şəbəkənin yaxınlığında planşetin avtomatik qoşulmasına icazə verin"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Əhatə dairəsində olduqda bu şəbəkəyə bağlanmağa icazə verin"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Cihaz əlavə edin"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Bu şəbəkəyə cihaz əlavə etmək üçün QR kodundan istifadə edin"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kodu doğru formatda deyil"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Sistem sertifikatlarını istifadə edin"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Təmin etməyin"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Düzgünlüyü yoxlamayın"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Sertifikat təyin olunmayıb. Bağlantınız şəxsi olmayacaq."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Şəbəkə adı çox uzundur."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Domen göstərilməlidir."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Sertifikat tələb edilir."</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Rahat Displey"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Bəzi məzmun üçün yeniləmə dərəcəsini 60 Hs-dən 90 Hs-ə avtomatik yüksəldir. Batareya istifadəsini artırır."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Rahat Displey"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90 Hs yeniləmə dərəcəsini məcbur tətbiq edin"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Təkmilləşdirilmiş toxunuş həssaslığı və animasiya keyfiyyəti üçün yüksək yeniləmə dərəcəsi. Batareya istifadəsini artırır."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ekran həssaslığı"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aktiv/ Ekrana baxırsınızsa, sönməyəcək"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android versiyası"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android güvənlik güncəlləməsi"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model və avadanlıq"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Avadanlıq versiyası"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Avadanlıq ID"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> cihazdan çoxu ilə birləşə bilməz."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> idarəolunmaz olacaq."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet bağlantısı"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"USB Ethernet vasitəsilə telefonun internet bağlantısını paylaşın"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Ethernet vasitəsilə telefonun internet bağlantısını paylaşın"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Mobil data bağlantısı vasitəsilə digər cihazları internetlə təmin etmək üçün hotspot və birləşmədən istifadə edin. Tətbiqlər yaxınlıqdakı cihazlarla kontenti paylaşmaq üçün də hotspot yarada bilər."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Wi‑Fi və ya mobil məlumat bağlantısı vasitəsilə digər cihazları internetlə təmin etmək üçün hotspot və birləşmədən istifadə edin. Tətbiqlər yaxınlıqdakı cihazlarla məzmun paylaşmaq üçün də hotspot yarada bilər."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Yardım"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN, model və ya parolu sıfırlamanıza yardım edə bilər"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Planşet və şəxsi datanız naməlum tətbiqlərin hücumuna qarşı daha həssasdır. Bu mənbədən tətbiq quraşdırmaqla planşetinə dəyə biləcək zərər və ya həmin tətbiqlərin istifadəsi nəticəsində baş verən data itkisinə görə məsuliyyət daşıdığınızı qəbul edirsiniz."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefon və şəxsi datanız naməlum tətbiqlərin hücumuna qarşı daha həssasdır. Bu mənbədən tətbiq quraşdırmaqla telefona dəyə biləcək zərər və ya həmin tətbiqlərin istifadəsi nəticəsində baş verən data itkisinə görə məsuliyyət daşıdığınızı qəbul edirsiniz."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Endirilmiş SIM\'ləri silməklə bağlı problem var"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Cihazı yenidən başladıb cəhd edin. Zavod sıfırlamasına davam etsəniz, endirilmiş SIM\'lər cihazda qala bilər."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Yenidən başladın"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Zavod sıfırlamasına davam edilsin?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Endirilmiş SIM\'lər cihazda qalacaq."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Zavod sıfırlaması edin"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Cihaz və şəxsi datanız naməlum tətbiqlərin hücumuna qarşı daha həssasdır. Bu mənbədən tətbiq quraşdırmaqla cihaza dəyə biləcək zərər və ya həmin tətbiqlərin istifadəsi nəticəsində baş verən data itkisinə görə məsuliyyət daşıdığınızı qəbul edirsiniz."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Qabaqcıl ayarlar"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Daha çox parametr seçimlərini aktiv edin"</string>
@@ -2497,7 +2503,7 @@
     <string name="dialog_location_message" product="device" msgid="4606829479989940464">"Cihaz batareya istifadəsini normal idarə edə bilmir, çünki tətbiqdən istifadə etmədiyiniz zaman <xliff:g id="APP">%1$s</xliff:g> məkanı təklif etməyə davam edir.\n\n Bu problemi həll etmək üçün tətbiq məkanını deaktiv edə bilərsiniz."</string>
     <string name="dialog_location_ok" msgid="6338680851382069716">"Deaktiv edin"</string>
     <string name="power_screen" msgid="4596900105850963806">"Ekran"</string>
-    <string name="power_flashlight" msgid="8993388636332573202">"İşartı"</string>
+    <string name="power_flashlight" msgid="8993388636332573202">"Fənər"</string>
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Sıfırlayın"</string>
     <string name="tts_play" msgid="2945513377250757221">"Oxutma"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN (Virtual Şəxsi Şəbəkələr)"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Uyğunlaşan bağlantı"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"şəbəkə bağlantılarınızı avtomatik idarə edərək batareyanın ömrünü artırır və cihazın performansını yaxşılaşdırır"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Etimadnamə yaddaşı"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Sertifikat quraşdırın"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Sertifikatları yaddaşdan quraşdırın"</string>
@@ -3310,7 +3318,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Həmişə vibrasiya etsin"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Əvvəlcə vibrasiya etsin, sonra tədricən zəng çalsın"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Digər səslər"</string>
-    <string name="dial_pad_tones_title" msgid="3536945335367914892">"Klaviş tonları"</string>
+    <string name="dial_pad_tones_title" msgid="3536945335367914892">"Nömrə yığma tonları"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Ekran kilidləmə səsi"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Batareya səs və vibrasiyası"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Toqquşma səsləri"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Şəbəkə tapılmadı. Yenidən cəhd edin."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(qadağandır)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM kart yoxdur"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM yoxdur"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Heç biri"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Qoşulmaq üçün SIM tələb olunur"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Qoşulmaq üçün <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> SIM tələb olunur"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Tərcih edilmiş şəbəkə rejimi: WCDMA tərcih edilir"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Tərcih edilmiş şəbəkə rejimi: Yalnız GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Tərcih edilmiş şəbəkə rejimi: yalnız WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Ayarlarda ekranların üst-üstə yerləşdirilməsinə icazə verin"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Digər tətbiqlər üzərində görüntülənə biləcək tətbiqlərə Ayarlar ekranlarını üst-üstə yerləşdirməyə icazə verin"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Media sessiyası bitdikdə oyunçunu gizlədin"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Oyunçu genişləndirilmiş Sürətli Ayarlar panelindən sessiyaya davam etməyə icazə verir."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Sürətli Ayarlarda media pleyer"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Oxutmanı asanlıqla davam etdirmək üçün media pleyeri daha uzun müddət göstərin"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Oyunçunu gizlədin"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Oyunçunu göstərin"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Əlçatan oyunçu yoxdur"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth aktivləşəcək"</string>
 </resources>

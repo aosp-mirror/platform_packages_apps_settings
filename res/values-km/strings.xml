@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"ប្រើ​មុខ​របស់អ្នកដើម្បីផ្ទៀងផ្ទាត់"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"ចាប់ផ្ដើម"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"ប្រសិនបើការដោះសោ​តាមទម្រង់មុខ​សម្រាប់​ភាពងាយស្រួលត្រូវបានបិទ ជំហាន​រៀបចំ​មួយចំនួនអាច​នឹង​ដំណើរការ​មិន​ប្រក្រតីជាមួយមុខងារ​តបវិញ។"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"ថយក្រោយ"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"បន្ត​រៀបចំ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ប្រើការរៀបចំភាពងាយស្រួល"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"ពាក្យសម្ងាត់ Wi‑Fi៖ <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ពាក្យសម្ងាត់​ហតស្ប៉ត៖ <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"ភ្ជាប់ដោយ​ស្វ័យប្រវត្តិ"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"អនុញ្ញាតឱ្យ​ទូរសព្ទភ្ជាប់ដោយស្វ័យប្រវត្តិ នៅពេលនៅជិត​បណ្ដាញនេះ"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"អនុញ្ញាតឱ្យ​ថេប្លេតភ្ជាប់ដោយស្វ័យប្រវត្តិ នៅពេលនៅជិត​បណ្ដាញនេះ"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"អនុញ្ញាត​ឱ្យភ្ជាប់​ជាមួយ​បណ្ដាញនេះ នៅពេល​មានសេវា"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"បញ្ចូល​ឧបករណ៍"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ប្រើកូដ QR ដើម្បី​បញ្ចូល​ឧបករណ៍​ទៅ​បណ្តាញ​នេះ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"កូដ QR មិនមែនជា​ទម្រង់​ដែលត្រឹមត្រូវ​ទេ"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"ប្រើវិញ្ញាបនបត្រប្រព័ន្ធ"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"កុំផ្តល់"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"កុំបញ្ជាក់សុពលភាព"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"មិនមានវិញ្ញាបនបត្រដែលបានបញ្ជាក់ទេ។ ការតភ្ជាប់របស់អ្នកនឹងមិនមានលក្ខណៈឯកជនទេ។"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ឈ្មោះ​បណ្តាញ​វែងពេក​ហើយ។"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ត្រូវតែបញ្ជាក់ដែន"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"តម្រូវឱ្យ​មាន​វិញ្ញាបនបត្រ។"</string>
@@ -1166,7 +1167,7 @@
     <string name="brightness" msgid="6216871641021779698">"កម្រិត​ពន្លឺ"</string>
     <string name="brightness_title" msgid="5457874893085305155">"ពន្លឺ"</string>
     <string name="brightness_summary" msgid="6309641759293018049">"កែ​ពន្លឺ​អេក្រង់"</string>
-    <string name="auto_brightness_title" msgid="4239324728760986697">"ពន្លឺ​​ដែល​ចេះសម្រប​ខ្លួន"</string>
+    <string name="auto_brightness_title" msgid="4239324728760986697">"ពន្លឺ​មានភាពបត់បែន"</string>
     <string name="auto_brightness_summary" msgid="1737148869232725883">"ពន្លឺអេក្រង់​កែតម្រូវឱ្យស្របតាម​បរិយាកាស"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"បើក"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"បិទ"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"បង្កើន​អត្រា​ផ្ទុកឡើងវិញ​ដោយស្វ័យប្រវត្តិ​ពី 60 ទៅ 90 Hz សម្រាប់​ខ្លឹមសារ​មួយចំនួន។ ប្រើប្រាស់ថ្ម​ច្រើន​ជាងមុន។"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"ជំរុញឱ្យមានអត្រា​ផ្ទុកឡើងវិញ 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"អត្រា​ផ្ទុកឡើងវិញ​ខ្ពស់បំផុតសម្រាប់​គុណភាពនៃ​រូបមានចលនា និង​ការឆ្លើយតបនៃ​ការចុចប្រសើរជាងមុន។ ប្រើប្រាស់ថ្ម​ច្រើន​ជាងមុន។"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ការដឹងថាកំពុងនៅប្រើ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"បើក / អេក្រង់​នឹងមិន​បិទទេ ប្រសិនបើ​អ្នក​កំពុង​មើល​អេក្រង់"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"កំណែ Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"កំណែ​សុវត្ថិភាពថ្មី​របស់ Android"</string>
     <string name="model_info" msgid="8997566254717810904">"ម៉ូដែល"</string>
-    <string name="model_summary" msgid="2246651782442466213">"ម៉ូដែល៖ %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"ម៉ូដែល និងហាតវែរ"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"កំណែ​ហាតវែរ"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"លេខ​សម្គាល់​បរិក្ខារ"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"មិន​អាច​ភ្ជាប់​ទៅ​ឧបករណ៍​ច្រើន​ជាង <xliff:g id="MAXCONNECTION">%1$d</xliff:g> ។"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> នឹង​ត្រូវ​បាន​ផ្ដាច់។"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ការ​ភ្ជាប់អ៊ីសឺរណិត"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"ចែករំលែកការតភ្ជាប់អ៊ីនធឺណិតរបស់ទូរសព្ទតាមរយៈអ៊ីសឺរណិត USB"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ចែករំលែកការតភ្ជាប់អ៊ីនធឺណិតរបស់ទូរសព្ទតាមរយៈអ៊ីសឺរណិត"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"ប្រើហតស្ប៉ត និងការភ្ជាប់ ដើម្បីផ្តល់អ៊ីនធឺណិតដល់ឧបករណ៍ផ្សេងទៀតតាមរយៈការភ្ជាប់ទិន្នន័យទូរសព្ទចល័តរបស់អ្នក។ កម្មវិធីក៏អាចបង្កើតហតស្ប៉ត ដើម្បីចែករំលែកខ្លឹមសារជាមួយឧបករណ៍ដែលនៅជិតផងដែរ។"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ប្រើ​ហតស្ប៉ត និង​ការភ្ជាប់ ដើម្បី​ផ្តល់​អ៊ីនធឺណិត​ដល់​ឧបករណ៍​ផ្សេងទៀត​តាមរយៈ​ការតភ្ជាប់ Wi-Fi ឬ​ទិន្នន័យ​ទូរសព្ទ​ចល័ត​របស់​អ្នក។ កម្មវិធី​ក៏​អាច​បង្កើត​ហតស្ប៉ត ដើម្បី​ចែករំលែក​ខ្លឹមសារ​ជាមួយ​ឧបករណ៍​ដែល​នៅជិត​បាន​ផងដែរ។"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ជំនួយ"</string>
@@ -1851,13 +1851,19 @@
     <string name="install_applications_title" msgid="7890233747559108106">"អនុញ្ញាតប្រភពកម្មវិធីទាំងអស់"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"កម្មវិធីដែលទើបបើកថ្មីៗ"</string>
     <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="other">មើលឃើញ​កម្មវិធី​ទាំង %1$d</item>
-      <item quantity="one">មើលឃើញ​កម្មវិធី​ទាំងអស់</item>
+      <item quantity="other">មើល​កម្មវិធី​ទាំង %1$d</item>
+      <item quantity="one">មើល​កម្មវិធី​ទាំងអស់</item>
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"ទាក់ទងអ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យារបស់អ្នក"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"អ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យាអាចជួយអ្នកក្នុងការកំណត់កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់របស់អ្នកឡើងវិញ"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"ថេប្លេត និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតណាមួយចំពោះទូរសព្ទ ឬការបាត់បង់ទិន្នន័យ ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"ទូរសព្ទ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកនឹងទទួលខុសត្រូវលើការខូចខាតណាមួយចំពោះទូរសព្ទ ឬការបាត់បង់ទិន្នន័យរបស់អ្នក ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"មានបញ្ហាក្នុង​ការលុបស៊ីម​ដែលបានទាញយក"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"សូម​ចាប់ផ្ដើម​ឧបករណ៍​ឡើងវិញ រួចព្យាយាមម្ដងទៀត។ ប្រសិនបើអ្នកបន្ត​ការកំណត់ដូចចេញ​ពីរោងចក្រ ស៊ីមដែលបាន​ទាញយកអាចនឹង​នៅតែស្ថិតនៅលើ​ឧបករណ៍ដដែល។"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"ចាប់​ផ្ដើម​ឡើង​វិញ"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"បន្តការកំណត់​ដូចចេញពី​រោងចក្រឬ?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ស៊ីមដែលបានទាញយក​នឹងនៅតែស្ថិតនៅលើ​ឧបករណ៍ដដែល។"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"កំណត់ដូចចេញពីរោងចក្រ"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"ឧបករណ៍ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយចំពោះឧបករណ៍ ឬការបាត់បង់ទិន្នន័យ ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"ការ​កំណត់​កម្រិត​ខ្ពស់"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"បើក​ជម្រើស​កំណត់​ច្រើន​ទៀត"</string>
@@ -2581,7 +2587,7 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"ផ្ទុក​ឡើងវិញ"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Mediaserver"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"បង្កើនប្រសិទ្ធិភាពកម្មវិធី"</string>
-    <string name="battery_saver" msgid="7737147344510595864">"កម្មវិធីសន្សំថ្ម"</string>
+    <string name="battery_saver" msgid="7737147344510595864">"មុខងារ​សន្សំ​ថ្ម"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"បើកដោយស្វ័យប្រវត្តិ"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"គ្មាន​កាលវិភាគ​ទេ"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"ផ្អែកលើ​ទម្លាប់​របស់អ្នក"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"កំណត់​ឡើងវិញ"</string>
     <string name="tts_play" msgid="2945513377250757221">"លេង"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"ការតភ្ជាប់មានភាពបត់បែន"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"បង្កើនកម្រិតថាមពលថ្ម និងកែលម្អសមត្ថភាព​ឧបករណ៍​ដោយគ្រប់គ្រងការតភ្ជាប់បណ្ដាញ​របស់អ្នកដោយស្វ័យប្រវត្តិ"</string>
     <string name="credentials_title" msgid="7535942196886123656">"កន្លែងផ្ទុកព័ត៌មានសម្ងាត់"</string>
     <string name="credentials_install" msgid="3933218407598415827">"ដំឡើង​វិញ្ញាបនបត្រ"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"ដំឡើង​វិញ្ញាបនបត្រ​ពី​ឧបករណ៍​ផ្ទុក"</string>
@@ -3433,8 +3441,8 @@
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"អ្នកនឹង​មិនឃើញ ឬមិន​​ឮការជូន​ដំណឹងទេ។ ការហៅ​ទូរសព្ទ​ពីទំនាក់​ទំនងមានផ្កាយ និង​អ្នកហៅ​ទូរសព្ទ​ដដែលៗ​ត្រូវបាន​អនុញ្ញាត។"</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(ការកំណត់​បច្ចុប្បន្ន)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"ប្ដូរ​ការកំណត់​ការជូនដំណឹង​នៃមុខងារ​កុំរំខាន?"</string>
-    <string name="sound_work_settings" msgid="752627453846309092">"សំឡេងប្រវត្តិរូបការងារ"</string>
-    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"ប្រើសំឡេងប្រវត្តិរូបផ្ទាល់ខ្លួន"</string>
+    <string name="sound_work_settings" msgid="752627453846309092">"សំឡេងកម្រងព័ត៌មានការងារ"</string>
+    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"ប្រើសំឡេងកម្រងព័ត៌មានផ្ទាល់ខ្លួន"</string>
     <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"សំឡេងសម្រាប់កម្រងព័ត៌មានការងារ និងផ្ទាល់ខ្លួនគឺដូចគ្នា"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"សំឡេងរោទិ៍ទូរស័ព្ទការងារ"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"សំឡេងការជូនដំណឹងការងារលំនាំដើម"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"រក​បណ្ដាញ​មិនឃើញទេ។ សូមព្យាយាម​ម្ដង​ទៀត។"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ហាម)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"គ្មាន​ស៊ីម​កាត​ទេ"</string>
+    <string name="sim_card" msgid="6381158752066377709">"ស៊ីម"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"មិនមានស៊ីមទេ"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"គ្មាន"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"តម្រូវឱ្យមាន​ស៊ីម ដើម្បីភ្ជាប់"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"តម្រូវឱ្យមានស៊ីម <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> ដើម្បីភ្ជាប់"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"មុខងារ​​​បណ្ដាញដែលប្រើជាអាទិភាព​៖ ប្រើ WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"មុខងារ​​​បណ្ដាញដែលប្រើជាអាទិភាព​៖ GSM ប៉ុណ្ណោះ"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"មុខងារ​​​បណ្ដាញដែលប្រើជាអាទិភាព​៖ WCDMA ប៉ុណ្ណោះ"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"អនុញ្ញាត​ការត្រួតគ្នាលើ​អេក្រង់នៅលើ​ការកំណត់"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"អនុញ្ញាតឱ្យ​កម្មវិធីដែលអាច​បង្ហាញនៅលើកម្មវិធី​ផ្សេងទៀត​ដាក់អេក្រង់ការកំណត់​ត្រួតគ្នា"</string>
     <string name="media_controls_title" msgid="403271085636252597">"មេឌៀ"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"លាក់​កម្មវិធីចាក់ នៅពេលវគ្គ​មេឌៀបានបញ្ចប់"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"កម្មវិធីចាក់​អនុញ្ញាតឱ្យអ្នក​បន្តវគ្គពីផ្ទាំង​ការកំណត់រហ័ស​ដែលបានពង្រីក។"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"កម្មវិធីចាក់មេឌៀនៅក្នុងការកំណត់រហ័ស"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"បង្ហាញកម្មវិធីចាក់មេឌៀរយៈពេលយូរ ដើម្បីងាយស្រួលបន្តការចាក់"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"លាក់​កម្មវិធីចាក់"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"បង្ហាញ​កម្មវិធីចាក់"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"មិនមាន​កម្មវិធីចាក់ទេ"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"មេឌៀ"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ប៊្លូធូសនឹងបើក"</string>
 </resources>

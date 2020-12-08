@@ -317,4 +317,20 @@ public class MediaOutputPanelTest {
     public void getViewType_checkType() {
         assertThat(mPanel.getViewType()).isEqualTo(PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON);
     }
+
+    @Test
+    public void getIcon_mediaControllerIsNull_returnNull() {
+        mMediaControllers.clear();
+        mPanel.onStart();
+
+        assertThat(mPanel.getIcon()).isNull();
+    }
+
+    @Test
+    public void getIcon_mediaMetadataIsNull_returnNull() {
+        mPanel.onStart();
+        when(mMediaController.getMetadata()).thenReturn(null);
+
+        assertThat(mPanel.getIcon()).isNull();
+    }
 }

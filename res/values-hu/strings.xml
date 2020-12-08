@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Arc használata hitelesítéshez"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Kezdés"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"A kisegítő arcalapú feloldás ki van kapcsolva, ezért előfordulhat, hogy egyes beállítási lépések nem működnek megfelelően a TalkBack funkcióval."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Vissza"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Beállítás folytatása"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Kisegítő beállítás használata"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -876,7 +879,7 @@
     <string name="passpoint_content" msgid="5219226173518418335">"A(z) <xliff:g id="NAME">%1$s</xliff:g> hitelesítési adatai"</string>
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP módszer"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Hitelesítés 2. fázisa"</string>
-    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA tanúsítvány"</string>
+    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA-tanúsítvány"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Online tanúsítvány állapota"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Domain"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Felhasználói tanúsítvány"</string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi-jelszó: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Hotspot jelszava: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatikus csatlakozás"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"A telefon automatikusan csatlakozhat e hálózat közelében"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"A táblagép automatikusan csatlakozhat e hálózat közelében"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"A hálózathoz való csatlakozás engedélyezése hatótávolságon belül"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Eszköz hozzáadása"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Használjon QR-kódot, ha új eszközt szeretne hozzáadni a hálózathoz"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"A QR-kód nem érvényes formátum"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Rendszertanúsítvány használata"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Ne adja meg"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ne hitelesítse"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Nincs megadva tanúsítvány. A kapcsolat nem privát jellegű lesz."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"A hálózat neve túl hosszú."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"A domain megadása kötelező."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Tanúsítvány szükséges."</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Néhány tartalomnál automatikusan megemeli a frissítés gyakoriságát 60-ról 90 Hz-re. Növeli az akkumulátorhasználatot."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90 Hz-es frissítési gyakoriság kényszerítése"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Legnagyobb frissítési gyakoriság a kifinomultabb érintési érzékenység és a jobb minőségű animációk érdekében. Növeli az akkumulátorhasználatot."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Képernyőfigyelő"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Be / A képernyő nem kapcsol majd ki, ha Ön épp azt nézi"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android verziója"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android biztonsági frissítés"</string>
     <string name="model_info" msgid="8997566254717810904">"Modell"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modell: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modell és hardver"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardververzió"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Eszközazonosító"</string>
@@ -1633,7 +1633,7 @@
     <string name="call_settings_summary" msgid="8244293779053318053">"Hangposta, hívásátirányítás, hívásvárakoztatás és hívóazonosító beállítása"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB-megosztás"</string>
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Hordozható hotspot"</string>
-    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Bluetooth megosztása"</string>
+    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Bluetooth-megosztás"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Megosztás"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"Hotspot és internetmegosztás"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Hotspot és internetmegosztás bekapcsolva"</string>
@@ -1669,14 +1669,14 @@
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB-megosztás"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"A telefon internetkapcsolatának megosztása USB-n keresztül"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"A táblagép internetkapcsolatának megosztása USB-n keresztül"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth megosztása"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth-megosztás"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Táblagép internetkapcsolatának megosztása Bluetooth-on keresztül"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Telefon internetkapcsolatának megosztása Bluetooth-on keresztül"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"<xliff:g id="DEVICE_NAME">%1$d</xliff:g> internetkapcsolatának megosztása Bluetooth-on keresztül"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Nem köthető több mint <xliff:g id="MAXCONNECTION">%1$d</xliff:g> eszközhöz."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> megosztása meg lesz szüntetve."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet megosztása"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"A telefon internetkapcsolatának megosztása USB Etherneten keresztül"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"A telefon internetkapcsolatának megosztása Etherneten keresztül"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspotot és internetmegosztást használhat annak érdekében, hogy internetet biztosítson más eszközöknek mobiladat-kapcsolat segítségével. Az alkalmazások is létrehozhatnak hotspotokat, hogy tartalmakat osszanak meg a közeli eszközökkel."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"A hotspot és az internetmegosztás funkcióval más eszközöknek biztosíthat internet-hozzáférést saját Wi‑Fi- vagy mobiladat-kapcsolatán keresztül. Az alkalmazások szintén létrehozhatnak hotspotot, hogy tartalmat osszanak meg a közeli eszközökkel."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Súgó"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"A rendszergazda segíthet a PIN-kód, a minta vagy a jelszó visszaállításában"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Az ismeretlen alkalmazások nagyobb eséllyel támadják meg táblagépét és személyes adatait. Az ebből a forrásból származó alkalmazások telepítésével egyidejűleg kijelenti, hogy Ön viseli a felelősséget az alkalmazások használatából eredő, táblagépét vagy személyes adatait ért bármilyen kár vagy bármilyen adatvesztés esetén."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Az ismeretlen alkalmazások nagyobb eséllyel támadják meg telefonját és személyes adatait. Az ebből a forrásból származó alkalmazások telepítésével egyidejűleg kijelenti, hogy Ön viseli a felelősséget az alkalmazások használatából eredő, telefonját vagy személyes adatait ért bármilyen kár vagy adatvesztés esetén."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Probléma történt a letöltött SIM-ek törlésekor"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Indítsa újra az eszközt, majd próbálja meg újra. Ha folytatja a gyári beállítások visszaállítását, a letöltött SIM-ek az eszközön maradhatnak."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Újraindítás"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Folytatja a visszaállítást?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"A letöltött SIM-ek az eszközön maradnak."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Gyári beállítások visszaállítása"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Az ismeretlen alkalmazások nagyobb eséllyel támadják meg eszközét és személyes adatait. Az ebből a forrásból származó alkalmazások telepítésével egyidejűleg elfogadja, hogy Ön viseli a felelősséget az alkalmazások használatából eredő, eszközét vagy személyes adatait ért bármilyen kár vagy adatvesztés esetén."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Speciális beállítások"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"További beállítási lehetőségek engedélyezése"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Visszaállítás"</string>
     <string name="tts_play" msgid="2945513377250757221">"Lejátszás"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptív kapcsolódás"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"A hálózati kapcsolatok automatikus kezelésével megnöveli az akkumulátor élettartamát és javítja az eszköz teljesítményét"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Hitelesítési adatok tárolója"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Tanúsítvány telepítése"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Tanúsítványok telepítése tárhelyről"</string>
@@ -2897,7 +2905,7 @@
     <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"IPSec-azonosító"</string>
     <string name="vpn_ipsec_secret" msgid="532007567355505963">"Megosztott IPSec-kulcs"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"IPSec felhasználói tanúsítvány"</string>
-    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec CA tanúsítvány"</string>
+    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec CA-tanúsítvány"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"IPSec-szervertanúsítvány"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Speciális beállítások megjelenítése"</string>
     <string name="vpn_search_domains" msgid="1973799969613962440">"DNS-keresési domainek"</string>
@@ -2965,8 +2973,8 @@
     <string name="credential_contains" msgid="407972262032275476">"A bejegyzés a következőket tartalmazza:"</string>
     <string name="one_userkey" msgid="4417212932385103517">"egy felhasználói kulcs"</string>
     <string name="one_usercrt" msgid="1865069301105101370">"egy felhasználói tanúsítvány"</string>
-    <string name="one_cacrt" msgid="7467796501404158399">"egy CA tanúsítvány"</string>
-    <string name="n_cacrts" msgid="5886462550192731627">"%d CA tanúsítvány"</string>
+    <string name="one_cacrt" msgid="7467796501404158399">"egy CA-tanúsítvány"</string>
+    <string name="n_cacrts" msgid="5886462550192731627">"%d CA-tanúsítvány"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Hitelesítési adatok"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"A következő hitelesítési adatot törölte a rendszer: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"Nincsenek telepített felhasználói hitelesítési adatok"</string>
@@ -3182,7 +3190,7 @@
     <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"mobil"</string>
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"adathasználat"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"hotspot"</string>
-    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Társított eszközök"</string>
+    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Csatlakoztatott eszközök"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, vezetési mód, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, vezetési mód"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
@@ -3514,7 +3522,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lezárási képernyő, Kihagyás, Megkerülés"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Zárolt munkaprofil esetén"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Értesítések a lezárási képernyőn"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Beszélgetések megjelenítése, alapértelmezés szerint és némán"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Beszélgetések megjelenítése, alapértelmezett és néma is"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Néma beszélgetések és értesítések elrejtése"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ne jelenjenek meg értesítések"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Bizalmas értesítések"</string>
@@ -4070,7 +4078,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-beállítások"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"Az USB-t vezérli:"</string>
-    <string name="usb_control_host" msgid="7404215921555021871">"Társított eszköz"</string>
+    <string name="usb_control_host" msgid="7404215921555021871">"Csatlakoztatott eszköz"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Ez az eszköz"</string>
     <string name="usb_switching" msgid="3713602881103295766">"Átváltás folyamatban..."</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Sikertelen átváltás"</string>
@@ -4550,8 +4558,8 @@
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Megbízható hitelesítési adatok a személyes profilban"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Megbízható hitelesítési adatok a munkaprofilban"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="other">Legalább <xliff:g id="COUNT_1">%d</xliff:g> CA tanúsítvány</item>
-      <item quantity="one">Legalább <xliff:g id="COUNT_0">%d</xliff:g> CA tanúsítvány</item>
+      <item quantity="other">Legalább <xliff:g id="COUNT_1">%d</xliff:g> CA-tanúsítvány</item>
+      <item quantity="one">Legalább <xliff:g id="COUNT_0">%d</xliff:g> CA-tanúsítvány</item>
     </plurals>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"A rendszergazda zárolhatja az eszközt, és új jelszót állíthat be"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"A rendszergazda törölheti az összes adatot az eszközről"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Nincs hálózat. Próbálja újra."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(tiltott)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Nincs SIM-kártya"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Nincs SIM-kártya"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nincs"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"A csatlakozáshoz SIM-kártya szükséges"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"A csatlakozáshoz <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> SIM-kártya szükséges"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Előnyben részesített hálózati mód: preferált WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Előnyben részesített hálózati mód: csak GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Előnyben részesített hálózati mód: csak WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Beállítások feletti képernyőfedvény engedélyezése"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Engedélyezi a más alkalmazások felett megjeleníthető alkalmazások számára a Beállítások képernyők fedését"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Média"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Lejátszó elrejtése a munkamenet befejezésekor"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"A lejátszó lehetővé teszi a munkamenet folytatását a kibontott Gyorsbeállítások panelen."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Médialejátszó a Gyorsbeállításokban"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Médialejátszó hosszabb időtartamon keresztüli megjelenítése a lejátszás könnyebb folytatása érdekében"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Lejátszó elrejtése"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Lejátszó megjelenítése"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nincs rendelkezésre álló lejátszó"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"A Bluetooth bekapcsol"</string>
 </resources>

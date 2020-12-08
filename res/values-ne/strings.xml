@@ -81,7 +81,7 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"तपाईंको यन्त्र <xliff:g id="DEVICE_NAME">%1$s</xliff:g> बाट विच्छेद हुनेछ।"</string>
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"विच्छेद गर्नुहोस्"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"तपाईं सँग ब्लुटुथ सेटिङहरू परिवर्तन गर्न अनुमति छैन।"</string>
-    <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"नयाँ यन्त्रलाई जोडा बनाउनुहोस्"</string>
+    <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"नयाँ यन्त्रको जोडा बनाउनुहोस्"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ब्लुटुथ"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"ब्लुटुथ सेटिङहरू खुला हुँदा <xliff:g id="DEVICE_NAME">%1$s</xliff:g> लाई नजिकैका उपकरणहरू देख्न सक्नेछन्।"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"फोनको ब्लुटुथ ठेगाना: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -136,7 +136,7 @@
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"अन्य यन्त्रहरूमा <xliff:g id="DEVICE_NAME">^1</xliff:g> को रूपमा देखिन्छ"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"अन्य यन्त्रहरूमा जडान गर्न ब्लुटुथ सक्रिय गर्नुहोस्‌।"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"तपाईंका यन्त्रहरू"</string>
-    <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"नयाँ यन्त्रलाई जोडा बनाउनुहोस्"</string>
+    <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"नयाँ यन्त्रको जोडा बनाउनुहोस्"</string>
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"आफ्नो ट्याब्लेटलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"आफ्नो यन्त्रलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"आफ्नो फोनलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"प्रमाणित गर्न आफ्नो अनुहार प्रयोग गर्नु…"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"सुरु गर्नुहोस्"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"सुलभता मोडमा फेस अनलक गर्ने सुविधा अफ गरिएको छ भने TalkBack प्रयोग गरी सेटअपका केही चरणहरू पूरा गर्न नसकिने सम्भावना हुन्छ।"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"पछाडि जानु"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"सेटअप जारी राख्नु"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"पहुँचसम्बन्धी सेटअप प्रयोग गर्नु"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -444,7 +447,7 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"अर्को थप्नुहोस्"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"अर्को"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"तपाईँले आफ्नो फोन खोल्नका अतिरिक्त खरिद र एप पहुँच प्राधिकरण गर्नाका लागि पनि आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ। "<annotation id="url">"थप जान्नुहोस्"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" स्क्रिन लकको विकल्प असक्षम पारिएको छ। थप जान्नलाई आफ्नो सङ्गठनको प्रशासकलाई सम्पर्क गर्नुहोस्। "<annotation id="admin_details">"थप विवरणहरू"</annotation>\n\n"तपाईं खरिदहरूलाई अधिकार दिन र अनुप्रयोगमाथि पहुँच पाउनका लागि आफ्नो फिंगरप्रिन्ट समेत प्रयोग गर्न सक्नुहुन्छ। "<annotation id="url">"थप जान्नुहोस्"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" स्क्रिन लकको विकल्प असक्षम पारिएको छ। थप जान्नलाई आफ्नो सङ्गठनको प्रशासकलाई सम्पर्क गर्नुहोस्। "<annotation id="admin_details">"थप विवरणहरू"</annotation>\n\n"तपाईं खरिदहरूलाई अधिकार दिन र एपमाथि पहुँच पाउनका लागि आफ्नो फिंगरप्रिन्ट समेत प्रयोग गर्न सक्नुहुन्छ। "<annotation id="url">"थप जान्नुहोस्"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"औँला उठाई, फेरि सेंसर छुनुहोस्"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"तपाईं <xliff:g id="COUNT">%d</xliff:g> सम्म फिंगरप्रिन्टहरू थप्न सक्नुहुन्छ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"तपाईंले अधिकतम संख्यामा फिंगरप्रिन्टहरू थप्नुभएको छ"</string>
@@ -466,7 +469,7 @@
     <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"तपाईँको ब्याट्री चार्ज गरी पुनःप्रयास गर्नुहोस्।"</string>
     <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"तपाईंको चार्जरमा प्लग इन गरेर फेरि प्रयास गर्नुहोस्।"</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"कुनै लक स्क्रिन PIN वा पासवर्ड छैन"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"तपाईंले इन्क्रिप्सन सुरु गर्नु अघि लक स्क्रिन PIN वा पासवर्ड सेट गर्न आवश्यक छ।"</string>
+    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"तपाईंले इन्क्रिप्सन सुरु गर्नुअघि लक स्क्रिन PIN वा पासवर्ड सेट गर्न आवश्यक छ।"</string>
     <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"इन्क्रिप्ट गर्ने हो?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"इन्क्रिप्सन कार्य उल्ट्याउन मिल्दैन र यदि तपाईँले अवरोध पुर्‍याउनु भयो भने तपाईँले डेटा गुमाउनु हुने छ। इन्क्रिप्सनले एक घन्टा वा बढी समय लिन सक्छ, यस समयमा ट्याब्लेट धेरै पटक पुनःस्टार्ट हुन सक्छ।"</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"इन्क्रिप्सन अपरेसन उल्टाउन मिल्दैन र यदि तपाईँले यसलाई अवरूद्ध गर्नु भयो भने तपाईँले डेटा गुमाउनु हुने छ। इनक्रिप्सनलाई करिब एक घन्टा वा बढी लाग्छ जुन समय फोन धेरै चोटि पुनःस्टार्ट हुन सक्छ।"</string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi को पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"हटस्पटको पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"स्वतः जडान"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"फोनलाई यो नेटवर्कका छेउमा हुँदा स्वतः कनेक्ट हुन दिनुहोस्"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ट्याब्लेटलाई यो नेटवर्कका छेउमा हुँदा स्वतः जोडिन दिनुहोस्"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"दायराभित्र भएको बेला यो नेटवर्कमा जडान हुने अनुमति दिनुहोस्"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"यन्त्र थप्नुहोस्"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"यो नेटवर्कमा थप्नका ला्गि कुनै QR प्रयोग गर्नुहोस्"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR कोडको ढाँचा मान्य छैन"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"प्रणालीका प्रमाणपत्रहरू प्रयोग गर्नुहोस्"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"प्रदान नगर्नुहोस्"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"प्रमाणित नगर्नुहोस्"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"कुनै प्रमाणपत्र निर्दिष्ट गरिएको छैन। तपाईंको जडान निजी हुने छैन।"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"नेटवर्कको नाम धेरै लामो भयो।"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"डोमेन तोक्नु पर्छ"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"प्रमाणपत्र चाहिन्छ।"</string>
@@ -1046,7 +1047,7 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP ब्यान्ड"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"आफ्ना अन्य यन्त्रहरूका लागि Wi‑Fi नेटवर्क सिर्जना गर्न हटस्पट प्रयोग गर्नुहोस्। हटस्पटले तपाईंको मोबाइल डेटा जडान प्रयोग गरेर इन्टरनेट प्रदान गर्दछ। अतिरिक्त मोबाइल डेटाको शुल्क लाग्न सक्छ।"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"एपहरूले नजिकैका यन्त्रहरूसँग सामग्री आदान प्रदान गर्न एउटा हटस्पट सिर्जना गर्न सक्छन्।"</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"स्वतः Wi‑Fi हटस्पट अफ गर्नुहोस्"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"हटस्पट स्वतः अफ गर्नुहोस्"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"कुनै पनि यन्त्र कनेक्ट नभएका बेला"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"हटस्पट खुल्दै..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"हटस्पट बन्द गरिँदै..."</string>
@@ -1138,7 +1139,7 @@
     <string name="dock_audio_summary_unknown" msgid="5486086330763810318">"संलग्न डकको लागि सेटिङहरू"</string>
     <string name="dock_not_found_title" msgid="4721157149003423417">"डक भेटिएन"</string>
     <string name="dock_not_found_text" product="tablet" msgid="9192097687086523411">"डक अडियो सेट गर्न अघि तपाईँले ट्याब्लेट डक गर्नु पर्ने हुन्छ।"</string>
-    <string name="dock_not_found_text" product="default" msgid="2247163115146852069">"तपाईंले डक अडियो सेटिङ गर्नु अघि फोन डक गर्नु आवश्यक पर्दछ।"</string>
+    <string name="dock_not_found_text" product="default" msgid="2247163115146852069">"तपाईंले डक अडियो सेटिङ गर्नुअघि फोन डक गर्नु आवश्यक पर्दछ।"</string>
     <string name="dock_sounds_enable_title" msgid="2974614136344237932">"डक राख्ने आवाज"</string>
     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="468592489565539336">"डकबाट ट्याब्लेट हटाउँदा वा राख्दा आवाज बजाउनुहोस्"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8121670617316301768">"फोन डकमा राख्दा वा झिक्दा आवाज बजाउनुहोस्"</string>
@@ -1190,7 +1191,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"केही सामग्रीका लागि रिफ्रेस रेट स्वतः ६० हर्ट्जबाट बढाएर ९० हर्ट्ज बनाउँछ। ब्याट्रीको उपयोग बढाउँछ।"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"रिफ्रेस गर्ने दर बलपूर्वक ९० हर्ज बनाउनुहोस्"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"स्क्रिनमा छुँदा स्क्रिनले जनाउने प्रतिक्रिया र एनिमेसनको गुणस्तर सुधार्न उच्चतम रिफ्रेस रेट। ब्याट्रीको खपत बढाउँछ।"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"स्क्रिनमा हेरिरहेको पहिचान गर्ने सुविधा"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"सक्रिय / तपाईं स्क्रिनमा हेर्दै हुनुहुन्छ भने यो बन्द हुने छैन"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"एन्ड्रोइड संस्करण"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android को सुरक्षासम्बन्धी अद्यावधिक"</string>
     <string name="model_info" msgid="8997566254717810904">"मोडेल"</string>
-    <string name="model_summary" msgid="2246651782442466213">"मोडेल: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"मोडेल तथा हार्डवेयर"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"हार्डवेयरको संस्करण"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"उपकरण ID"</string>
@@ -1391,7 +1391,7 @@
     <string name="memory_apps_usage" msgid="8818570780540532952">"एप &amp; एप डेटा"</string>
     <string name="memory_media_usage" msgid="5161308657995646963">"मिडिया"</string>
     <string name="memory_downloads_usage" msgid="8252462247720191179">"डाउनलोडहरू"</string>
-    <string name="memory_dcim_usage" msgid="3568913845973164352">"तस्बिरहरू, भिडियोहरू"</string>
+    <string name="memory_dcim_usage" msgid="3568913845973164352">"फोटोहरू, भिडियोहरू"</string>
     <string name="memory_music_usage" msgid="8100634000114206429">"अडियो (सङ्गीत, रिङ्गटोन, पडकास्ट, आदि)"</string>
     <string name="memory_media_misc_usage" msgid="7066851245178533269">"अन्य फाइलहरू"</string>
     <string name="memory_media_cache_usage" msgid="780808666853685824">"क्यास गरेको डेटा"</string>
@@ -1407,7 +1407,7 @@
     <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
     <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"USB भण्डारण मेटाउनुहोस्"</string>
     <string name="sd_format" product="default" msgid="9085302892248732329">"SD कार्ड मेटाउनुहोस्"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"आन्तरिक USB भण्डारणमा सम्पूर्ण डेटाहरू मेटाउँछ, जस्तै सङ्गीत र तस्बिरहरू"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"आन्तरिक USB भण्डारणमा सम्पूर्ण डेटाहरू मेटाउँछ, जस्तै सङ्गीत र फोटोहरू"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"SD कार्डमा सबै डेटा जस्तै सङ्गीत र फोटोहरू मेटाउँछ"</string>
     <string name="memory_clear_cache_title" msgid="2605096903803953619">"क्यास डेटा हटाउनु हुन्छ?"</string>
     <string name="memory_clear_cache_message" msgid="4759561226480906588">"यसले सबै अनुप्रयोगहरूको लागि केस गरिएको डेटा हटाउँछ।"</string>
@@ -1464,11 +1464,11 @@
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"यो <xliff:g id="NAME_0">^1</xliff:g> सुरक्षित रूपमा निकालियो, तर अझै पनि उपलब्ध छ। \n\n यो <xliff:g id="NAME_1">^1</xliff:g> प्रयोग गर्न, तपाईँले पहिला यो माउन्ट गर्नुपर्छ।"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"यो <xliff:g id="NAME_0">^1</xliff:g> बिग्रिएको छ। \n\n यो <xliff:g id="NAME_1">^1</xliff:g> प्रयोग गर्न, तपाईँले पहिले यसलाई सेटअप गर्नुहोस्।"</string>
     <string name="storage_dialog_unsupported" msgid="7787241928013470089">"यो यन्त्रले यो <xliff:g id="NAME_0">^1</xliff:g> लाई समर्थन गर्दैन। \n\n यस यन्त्रसँग यो <xliff:g id="NAME_1">^1</xliff:g> प्रयोग गर्न, तपाईँले पहिला यो सेटअप गर्नुपर्छ।"</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"ढाँचामा मिलाएपछि, तपाईँले यसलाई <xliff:g id="NAME_0">^1</xliff:g> अन्य यन्त्रहरूमा प्रयोग गर्न सक्नुहुन्छ। \n\nयसका <xliff:g id="NAME_1">^1</xliff:g> सबै डेटा मेटिनेछन्। पहिले ब्याकअप राख्ने बारे विचार गर्नुहोस्। \n\n"<b>"तस्बिर तथा अन्य मिडिया ब्याकअप गर्नुहोस्"</b>" \n यस यन्त्रमा वैकल्पिक भण्डारण गर्न आफ्नो मिडिया फाइलहरू सार्नुहोस्, वा USB केबल प्रयोग गरी कम्प्युटरको स्थानान्तरण गर्नुहोस्। \n\n"<b>"एपहरू ब्याकअप गर्नुहोस्"</b>" \n यसमा <xliff:g id="NAME_6">^1</xliff:g> भण्डारित सबै एपहरू हटाइने छन् र तिनका डेटा मेटिनेछन्। यी एपहरू राख्न, यस यन्त्रमा वैकल्पिक भण्डारण गर्न तिनीहरूलाई सार्नुहोस्।"</string>
+    <string name="storage_internal_format_details" msgid="8922023528848861812">"ढाँचामा मिलाएपछि, तपाईँले यसलाई <xliff:g id="NAME_0">^1</xliff:g> अन्य यन्त्रहरूमा प्रयोग गर्न सक्नुहुन्छ। \n\nयसका <xliff:g id="NAME_1">^1</xliff:g> सबै डेटा मेटिनेछन्। पहिले ब्याकअप राख्ने बारे विचार गर्नुहोस्। \n\n"<b>"फोटो तथा अन्य मिडिया ब्याकअप गर्नुहोस्"</b>" \n यस यन्त्रमा वैकल्पिक भण्डारण गर्न आफ्नो मिडिया फाइलहरू सार्नुहोस्, वा USB केबल प्रयोग गरी कम्प्युटरको स्थानान्तरण गर्नुहोस्। \n\n"<b>"एपहरू ब्याकअप गर्नुहोस्"</b>" \n यसमा <xliff:g id="NAME_6">^1</xliff:g> भण्डारित सबै एपहरू हटाइने छन् र तिनका डेटा मेटिनेछन्। यी एपहरू राख्न, यस यन्त्रमा वैकल्पिक भण्डारण गर्न तिनीहरूलाई सार्नुहोस्।"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"जब तपाईं <xliff:g id="NAME_0">^1</xliff:g> लाई निकाल्नुहुन्छ, यसमा भएका एपहरू चल्न छोड्नेछन्, र पुनः नघुसाएसम्म त्यसमा भएका मिडिया फाइलहरू उपलब्ध हुने छैनन्।"</b>\n\n"यो <xliff:g id="NAME_1">^1</xliff:g> यस यन्त्रमा मात्र काम गर्ने हिसाबले फरम्याट गरिएको छ। यो अन्य कुनैमा काम गर्ने छैन।"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"<xliff:g id="NAME">^1</xliff:g> मा भएका एपहरू, तस्बिरहरु, र डेटाको प्रयोग गर्न, यसलाई पुन: घुसाउनुहोस्।\n\nवैकल्पिक रूपमा, यन्त्र उपलब्ध नभएको खण्डमा यस भण्डारणलाई भुल्नको लागि रोज्न सक्नुहुनेछ।\n\nयदि तपाईँले भुल्ने विकल्प रोज्नु हुन्छ भने, यन्त्रमा भएका सम्पूर्ण डेटा सदाको लागि नष्ट हुनेछ।\n\nतपाईँले पछि पनि एपहरू पुन: स्थापना गर्न सक्नुहुन्छ तर यस यन्त्रमा भण्डारण भएका डेटा नष्ट हुनेछ।"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> भुल्नुभयो?"</string>
-    <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"यो <xliff:g id="NAME">^1</xliff:g> मा भण्डारण गरिएका सबै एपहरू, तस्बिरहरू, र डेटा सधैंका लागि नष्ट हुनेछन्।"</string>
+    <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"यो <xliff:g id="NAME">^1</xliff:g> मा भण्डारण गरिएका सबै एपहरू, फोटोहरू, र डेटा सधैंका लागि नष्ट हुनेछन्।"</string>
     <string name="storage_detail_apps" msgid="5055911985540355324">"एपहरू"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"छविहरू"</string>
     <string name="storage_detail_videos" msgid="9079894412680404208">"भिडियोहरू"</string>
@@ -1479,12 +1479,12 @@
     <string name="storage_detail_explore" msgid="13782374784415466">"<xliff:g id="NAME">^1</xliff:g> अन्वेषण गर्नुहोस्"</string>
     <string name="storage_detail_dialog_other" msgid="3359851869961609901">"अन्यमा एपहरूले सुरक्षित गेरका साझा फाइल, इन्टरनेट वा ब्लुटुथबाट डाउनलोड गरिएका फाइल, Android का फाइलहरू र यस्तै थप कुराहरू पर्छन्। \n\nयो <xliff:g id="NAME">^1</xliff:g> का देख्न सकिने सामग्रीहरू हेर्न अन्वेषण गर्नुहोस् नामक विकल्पमा ट्याप गर्नुहोस्।"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"प्रणालीमा Android संस्करण <xliff:g id="VERSION">%s</xliff:g> चलाउनका लागि प्रयोग भएका फाइलहरू समावेश छन्"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> ले तस्बिर, सङ्गीत, एप वा अन्य डेटा सुरक्षित गर्नुभएको हुनसक्छ, जसले <xliff:g id="SIZE">^2</xliff:g> भण्डारण ओगटिरहेको छ। \n\nविवरणहरू हेर्न <xliff:g id="USER_1">^1</xliff:g> मा स्विच गर्नुहोस्।"</string>
+    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> ले फोटो, सङ्गीत, एप वा अन्य डेटा सुरक्षित गर्नुभएको हुनसक्छ, जसले <xliff:g id="SIZE">^2</xliff:g> भण्डारण ओगटिरहेको छ। \n\nविवरणहरू हेर्न <xliff:g id="USER_1">^1</xliff:g> मा स्विच गर्नुहोस्।"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"तपाईँको <xliff:g id="NAME">^1</xliff:g> सेट गर्नुहोस्"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"पोर्टेबल भण्डारणको रूपमा प्रयोग गर्नुहोस्"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"यन्त्रहरू बीच तस्बिर र अन्य मिडिया सार्नका लागि।"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"यन्त्रहरू बीच फोटो र अन्य मिडिया सार्नका लागि।"</string>
     <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"आन्तरिक भण्डारणको रूपमा प्रयोग गर्नुहोस्"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"यस यन्त्रमा मात्र कुनै पनि चिज, एप र तस्बिरहरू  भण्डारण गर्नाका लागि। यसलाई ढाँचा मिलाउन आवश्यक हुन्छ जसले अर्का यन्त्रहरूसँग काम गर्नबाट रोक्छ।"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"यस यन्त्रमा मात्र कुनै पनि चिज, एप र फोटोहरू  भण्डारण गर्नाका लागि। यसलाई ढाँचा मिलाउन आवश्यक हुन्छ जसले अर्का यन्त्रहरूसँग काम गर्नबाट रोक्छ।"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"आन्तरिक भण्डारणको रुपमा ढाँचा गर्नुहोस्"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"यो सुरक्षित बनाउन यसलाई <xliff:g id="NAME_0">^1</xliff:g> ढाँचा बनाउन आवश्यकता छ। \n\nढाँचामा मिलाएपछि, यो यन्त्रमा यसले <xliff:g id="NAME_1">^1</xliff:g> मात्र काम गर्ने छ। \n\n"<b>" ढाँचा मिलाउँदा <xliff:g id="NAME_2">^1</xliff:g> मा हालैका भण्डारित सबै डेटा मेटिन्छ।"</b>" डेटा गुमाउनुपर्ने बाट जोगिन, यसको ब्याकअप राख्ने बारे विचार गर्नुहोस्।"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"पोर्टेबल भण्डारणका रूपमा फरम्याट गर्नुहोस्"</string>
@@ -1502,8 +1502,8 @@
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"डेटा सार्दै..."</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"सार्दाको समयमा: \n• <xliff:g id="NAME">^1</xliff:g> नहटाउनुहोस्। \n• केही एपहरूले सही काम गर्ने छैन। \n• यन्त्र चार्जमा राख्नुहोस्।"</string>
     <string name="storage_wizard_ready_title" msgid="3093468548660255543">"तपाईंको <xliff:g id="NAME">^1</xliff:g> प्रयोगका लागि तयार छ"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"तपाईँको <xliff:g id="NAME">^1</xliff:g> तस्बिर र अन्य मिडिया प्रयोग गर्न सबै सेट छ।"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"तपाईँको नयाँ <xliff:g id="NAME">^1</xliff:g> ले काम गर्दैछ। \n\n यो यन्त्रमा तस्बिरहरू, फाइलहरू, र एप डेटा सार्न, सेटिङ &amp;gt मा जानुहोस्; भण्डारण गर्नुहोस्।"</string>
+    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"तपाईँको <xliff:g id="NAME">^1</xliff:g> फोटो र अन्य मिडिया प्रयोग गर्न सबै सेट छ।"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"तपाईँको नयाँ <xliff:g id="NAME">^1</xliff:g> ले काम गर्दैछ। \n\n यो यन्त्रमा फोटोहरू, फाइलहरू, र एप डेटा सार्न, सेटिङ &amp;gt मा जानुहोस्; भण्डारण गर्नुहोस्।"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"सार्नुहोस् <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="NAME_0">^2</xliff:g> मा <xliff:g id="APP">^1</xliff:g> र यसको डेटा सार्न केही बेर मात्र लिनेछ। तपाईं सार्ने क्रम पूरा नहुन्जेल एप प्रयोग गर्न सक्नुहुने छैन। \n\n सार्ने क्रममा <xliff:g id="NAME_1">^2</xliff:g> नहटाउनुहोस्।"</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"डेटा सार्न तपाईंले प्रयोगकर्ताको <xliff:g id="APP">^1</xliff:g> अनलक गर्नु पर्ने हुन्छ।"</string>
@@ -1631,9 +1631,9 @@
     <string name="master_clear_progress_text" msgid="8891964820486632180">"कृपया प्रतीक्षा गर्नुहोला..."</string>
     <string name="call_settings_title" msgid="2531072044177194164">"कल सेटिङहरू"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"भ्वाइस मेल, कल फर्वार्ड, कल प्रतीक्षा, र कलर ID सेटअप गर्नुहोस्"</string>
-    <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB टेथर गर्दै"</string>
+    <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB टेदर गर्दै"</string>
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"पोर्टेबल हटस्पट"</string>
-    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"ब्लुटुथ टेथर गर्दै"</string>
+    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"ब्लुटुथ टेदर गर्दै"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"टेदर गर्दै"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"हटस्पट र टेदरिङ"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"हटस्पट सक्रिय छ, टेदरिङ"</string>
@@ -1669,14 +1669,14 @@
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB टेदर गर्दै"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"USB मार्फत फोनको इन्टरनेट सेयर गर्नुहोस्"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"USB मार्फत ट्याब्लेटको इन्टरनेट जडान साझा गर्नुहोस्"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"ब्लुटुथ टेथर गर्दै"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"ब्लुटुथ टेदर गर्दै"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"ब्लुटुथमार्फत ट्याब्लेटको इन्टरनेट जडान सझा गर्नुहोस्‌"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"ब्लुटुथमार्फत फोनको इन्टरनेट सेयर गर्नुहोस्‌"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"ब्लुटुथमार्फत यो <xliff:g id="DEVICE_NAME">%1$d</xliff:g> को इन्टरनेट जडान साझा गर्दै"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> उपकरणहरूभन्दा बढीसँग टेदर गर्न सक्दैन।"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> अनटेथर गरिने छ।"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"इथरनेट टेदरिङ"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"USB इथरनेटमार्फत फोनको सेयर गर्नुहोस्"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"इथरनेटमार्फत फोनको इन्टरनेट कनेक्सन सेयर गर्नुहोस्"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"आफ्नो मोबाइल डेटा जडानमार्फत अन्य यन्त्रहरूलाई इन्टरनेट उपलब्ध गराउन हटस्पट र टेदरिङ प्रयोग गर्नुहोस्। नजिकैका यन्त्रहरूसँग सामग्री आदान प्रदान गर्नाका निम्ति एपहरूले हटस्पट सिर्जना गर्न पनि सक्छन्।"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"आफ्नो Wi‑Fi वा मोबाइल डेटा इन्टरनेटमार्फत अन्य यन्त्रहरूमा इन्टरनेट उपलब्ध गराउन हटस्पट र टेदरिङ प्रयोग गर्नुहोस्। एपहरूले पनि वरपरका यन्त्रहरूसँग सामग्री सेयर गर्न हटस्पट सिर्जना गर्न सक्छन्।"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"मद्दत"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"उनीहरूले तपाईंलाई आफ्नो PIN, ढाँचा र पासवर्ड रिसेट गर्न मद्दत गर्न सक्छन्"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"तपाईंको ट्याब्लेट र व्यक्तिगत डेटा अज्ञात अनुप्रयोगहरूबाट हुने आक्रमणमा पर्न सक्ने जोखिम अझ बढी हुन्छ। यो स्रोतबाट प्राप्त हुने अनुप्रयोगहरूको स्थापना गरेर, तिनीहरूको प्रयोगबाट तपाईंको ट्याब्लेटमा हुनसक्ने क्षति वा डेटाको नोक्सानीको जिम्मेवार तपाईं आफैँ हुनुहुन्छ भन्ने कुरामा तपाईं सहमत हुनुहुन्छ।"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"तपाईंको फोन र व्यक्तिगत डेटा अज्ञात अनुप्रयोगहरूबाट हुने आक्रमणमा पर्न सक्ने जोखिम अझ बढी हुन्छ। यो स्रोतबाट प्राप्त हुने अनुप्रयोगहरूको स्थापना गरेर, तिनीहरूको प्रयोगबाट तपाईंको फोनमा हुनसक्ने क्षति वा डेटाको नोक्सानीको जिम्मेवार तपाईं आफैँ हुनुहुन्छ भन्ने कुरामा तपाईं सहमत हुनुहुन्छ।"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"डाउनलोड गरिएका SIM हरू मेटाउने क्रममा कुनै समस्या भयो"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"कृपया यन्त्र रिबुट गर्नुहोस् र फेरि प्रयास गर्नुहोस्। तपाईंले फ्याक्ट्री रिसेट गर्ने प्रक्रिया जारी राख्नुभएका खण्डमा डाउनलोड गरिएका SIM हरू यन्त्रमै रहन सक्छन्।"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"रिबुट गर्नुहोस्"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"फ्याक्ट्री रिसेट गर्ने प्रक्रिया जारी राख्ने हो?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"डाउनलोड गरिएका SIM हरू यन्त्रमै रहने छन्।"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"फ्याक्ट्री रिसेट"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"तपाईंको यन्त्र र व्यक्तिगत डेटा अज्ञात अनुप्रयोगहरूबाट हुने आक्रमणमा पर्न सक्ने जोखिम अझ बढी हुन्छ। यो स्रोतबाट प्राप्त हुने अनुप्रयोगहरूको स्थापना गरेर, तिनीहरूको प्रयोगबाट फोनमा हुनसक्ने क्षति वा डेटाको नोक्सानीको जिम्मेवार तपाईं आफैँ हुनुहुन्छ भन्ने कुरामा तपाईं सहमत हुनुहुन्छ।"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"जटिल सेटिङहरू"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"थप सेटिङ विकल्पहरू सक्षम पार्नुहोस्"</string>
@@ -2315,7 +2321,7 @@
     <string name="enable_service_pin_reason" msgid="6040417014360237703">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेवा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो PIN पुष्टि गर्न आवश्यक छ।"</string>
     <string name="enable_service_password_reason" msgid="6962544350351734238">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेबा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो पासवर्ड पुष्टि गर्न आवश्यक छ।"</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> ले यो यन्त्र पूर्ण रूपमा नियन्त्रण गर्ने अनुमति माग्दै छ। यो सेवाले स्क्रिनमा भएका जानकारी पढ्न तथा पहुँचसम्बन्धी आवश्यकता भएका प्रयोगकर्ताहरूका तर्फबाट कारबाही गर्न सक्छ। धेरैजसो अनुप्रयोगहरूका हकमा यो स्तरको नियन्त्रण उपयुक्त हुँदैन।"</string>
-    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"तपाईंलाई पहुँच राख्न आवश्यक पर्ने कुरामा सहयोग गर्ने अनुप्रयोगहरूमाथि पूर्ण नियन्त्रण गर्नु उपयुक्त हुन्छ तर अधिकांश अनुप्रयोगहरूका हकमा यस्तो नियन्त्रण उपयुक्त हुँदैन।"</string>
+    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"तपाईंलाई पहुँच राख्न आवश्यक पर्ने कुरामा सहयोग गर्ने एपमाथि पूर्ण नियन्त्रण गर्नु उपयुक्त हुन्छ तर अधिकांश अनुप्रयोगहरूका हकमा यस्तो नियन्त्रण उपयुक्त हुँदैन।"</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"स्क्रिन हेर्नुहोस् र नियन्त्रण गर्नुहोस्"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"यसले स्क्रिनमा देखिने सबै सामग्री पढ्न सक्छ र अन्य एपहरूमा उक्त सामग्री देखाउन सक्छ।"</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"कारबाहीहरू हेर्नुहोस् र तिनमा कार्य गर्नुहोस्"</string>
@@ -2428,11 +2434,11 @@
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"तपाईंको यन्त्र सामान्यभन्दा धेरै प्रयोग भएको छ। तपाईंको ब्याट्रीको चार्ज अपेक्षा गरिएभन्दा चाँडो सकिन सक्छ।\n\nसबैभन्दा बढी ब्याट्री उपयोग गर्ने एपहरू:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"यसले उच्च क्षमतायुक्त पृष्ठभूमिको गतिविधि समावेश गर्दछ"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="other">%1$d अनुप्रयोगहरूमाथि बन्देज लगाउनुहोस्</item>
+      <item quantity="other">%1$d एपमाथि बन्देज लगाउनुहोस्</item>
       <item quantity="one">%1$d माथि बन्देज लगाउनुहोस्</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="other">%1$d अनुप्रयोगहरूमाथि हालसालै बन्देज लगाइयो</item>
+      <item quantity="other">%1$d एपमाथि हालसालै बन्देज लगाइयो</item>
       <item quantity="one">%1$s माथि हालसालै बन्देज लगाइयो</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
@@ -2444,8 +2450,8 @@
       <item quantity="one">यो एप पृष्ठभूमिमा चल्न सक्दैन</item>
     </plurals>
     <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="other">%1$d अनुप्रयोगमाथि बन्देज लगाउने हो?</item>
-      <item quantity="one">अनुप्रयोगमाथि बन्देज लगाउने हो?</item>
+      <item quantity="other">%1$d एपमाथि बन्देज लगाउने हो?</item>
+      <item quantity="one">एपमाथि बन्देज लगाउने हो?</item>
     </plurals>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"ब्याट्री जोगाउन, <xliff:g id="APP">%1$s</xliff:g> लाई पृष्ठभूमिमा ब्याट्री प्रयोग गर्नबाट रोक्नुहोस्। यो अनुप्रयोगले सही किसिमले काम नगर्न सक्छ र सूचनाहरू आइपुग्न ढिलाइ हुन सक्छ।"</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"ब्याट्री जोगाउन, यी एपहरूलाई पृष्ठभूमिमा ब्याट्री प्रयोग गर्नबाट रोक्नुहोस्। प्रतिबन्ध लगाइएका एपहरूले सही किसिमले काम नगर्न सक्छन् र सूचनाहरू आइपुग्न ढिलाइ हुन सक्छ।\n\nएपहरू:"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"रिसेट गर्नुहोस्"</string>
     <string name="tts_play" msgid="2945513377250757221">"प्ले गर्नुहोस्"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"एड्याप्टिभ कनेक्टिभिटी"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"तपाईंले एड्याप्टिभ कनेक्टिभिटी नामक विकल्प छनौट गर्नुभयो भने तपाईंको इन्टरनेट कनेक्सन स्वतः व्यवस्थापन गरिन्छ। यसले गर्दा ब्याट्रीको आयु बढ्छ र यन्त्रको कार्यसम्पादनमा सुधार आउँछ"</string>
     <string name="credentials_title" msgid="7535942196886123656">"प्रमाण संग्रहण"</string>
     <string name="credentials_install" msgid="3933218407598415827">"प्रमाणपत्र स्थापना गर्नुहोस्"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"भण्डारणबाट प्रमाणपत्रहरू स्थापना गर्नुहोस्"</string>
@@ -2706,7 +2714,7 @@
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
     <string name="backup_erase_dialog_message" msgid="2250872501409574331">"तपाईँको Wi-Fi पासवर्डहरू, बुकमार्क, अन्य सेटिङहरू, र एप डेटाको जगेडा राख्न बन्द गर्ने र Google सर्भरबाट सम्पूर्ण प्रतिलिपिहरू मेटाउने हो?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"के यन्त्र डेटा (जस्तै Wi-Fi पासवर्डहरू र इतिहास कल) र एप डेटा (जस्तै एपहरू द्वारा भण्डारण सेटिङहरू र फाइलहरू) को ब्याकअपलाई रोक्ने, र थप रिमोट सर्भरहरूमा सबै प्रतिलिपिहरू मेटाउन चाहनु हुन्छ?"</string>
-    <string name="fullbackup_data_summary" msgid="971587401251601473">"यन्त्र डेटा (जस्तै Wi-Fi पासवर्डहरू र कल इतिहास) र एप डेटा (जस्तै एपहरूद्वारा भण्डारित सेटिङहरू र फाइलहरू) टाढाबाट स्वचालित रुपमा ब्याकअप गर्नुहोस्। \n\nजब तपाईं स्वचालित ब्याकअप यन्त्र सक्षम गर्नुहुन्छ, यन्त्र र एप डेटा आवधिक रूपमा टाढाबाट सुरक्षित गरिएको छ। सम्पर्क, सन्देशहरू, र तस्बिरहरू जस्तै सम्भावित संवेदनशील डेटा सहित, एप डेटा कुनै पनि डेटा हुनसक्छ जुन एपले (विकासकर्ता सेटिङहरूमा आधारित) सुरक्षित गरेको छ।"</string>
+    <string name="fullbackup_data_summary" msgid="971587401251601473">"यन्त्र डेटा (जस्तै Wi-Fi पासवर्डहरू र कल इतिहास) र एप डेटा (जस्तै एपहरूद्वारा भण्डारित सेटिङहरू र फाइलहरू) टाढाबाट स्वचालित रुपमा ब्याकअप गर्नुहोस्। \n\nजब तपाईं स्वचालित ब्याकअप यन्त्र सक्षम गर्नुहुन्छ, यन्त्र र एप डेटा आवधिक रूपमा टाढाबाट सुरक्षित गरिएको छ। सम्पर्क, सन्देशहरू, र फोटोहरू जस्तै सम्भावित संवेदनशील डेटा सहित, एप डेटा कुनै पनि डेटा हुनसक्छ जुन एपले (विकासकर्ता सेटिङहरूमा आधारित) सुरक्षित गरेको छ।"</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"यन्त्रका प्रशासक सम्बन्धी सेटिङहरू"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"यन्त्रको प्रशासन सम्बन्धी एप"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"यो यन्त्रको प्रशासकीय एपलाई निष्क्रिय पार्नुहोस्"</string>
@@ -3073,7 +3081,7 @@
     <string name="help_label" msgid="2896538416436125883">"मद्दत र प्रतिक्रिया"</string>
     <string name="support_summary" msgid="1034146931237148885">"मद्दतसम्बन्धी लेखहरू, फोन, कुराकानी र सुरूवात गर्नेसम्बन्धी सहायता"</string>
     <string name="user_account_title" msgid="6389636876210834864">"सामग्रीको लागि खाता"</string>
-    <string name="user_picture_title" msgid="7176437495107563321">"तस्बिर ID"</string>
+    <string name="user_picture_title" msgid="7176437495107563321">"फोटो ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"चरम धम्की"</string>
     <string name="extreme_threats_summary" msgid="3560742429496902008">"जीवन र सम्पत्तिको चरम खतराहरूको लागि चेतावनीहरू प्राप्त"</string>
     <string name="severe_threats_title" msgid="8962959394373974324">"गम्भीर खतराहरू"</string>
@@ -3130,9 +3138,9 @@
     <string name="wizard_back" msgid="8257697435061870191">"पछाडि जानुहोस्"</string>
     <string name="wizard_next" msgid="3884832431439072471">"अर्को"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"समाप्त गर्नुहोस्"</string>
-    <string name="user_image_take_photo" msgid="2601691481533190924">"तस्बिर खिच्नुहोस्"</string>
-    <string name="user_image_choose_photo" msgid="5904586923236027350">"कुनै तस्बिर छनौट गर्नुहोस्"</string>
-    <string name="user_image_photo_selector" msgid="7727851029781491727">"तस्बिर छान्नुहोस्"</string>
+    <string name="user_image_take_photo" msgid="2601691481533190924">"फोटो खिच्नुहोस्"</string>
+    <string name="user_image_choose_photo" msgid="5904586923236027350">"कुनै फोटो छनौट गर्नुहोस्"</string>
+    <string name="user_image_photo_selector" msgid="7727851029781491727">"फोटो छान्नुहोस्"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"सिम कार्ड"</string>
     <string name="sim_settings_title" msgid="8392862852842113531">"SIM कार्डहरू"</string>
@@ -3486,7 +3494,7 @@
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"रद्द गर्नुहोस्"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"सक्रिय / वार्तालापहरू तैरने आइकनका रूपमा देखिन सक्छन्"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"एपहरूलाई बबल देखाउन दिनुहोस्"</string>
-    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"केही वार्तालापहरू तैरने आइकनका रूपमा अन्य अनुप्रयोगहरूमाथि देखिने छन्"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"केही वार्तालापहरू तैरने आइकनका रूपमा अन्य एपमाथि देखिने छन्"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"सबै वार्तालापहरू बबलमा देखाउन दिनुहोस्"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"चयन गरिएका वार्तालापहरू बबलमा देखिन सक्छन्"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"कुनै पनि वार्तालाप बबलमा देखाउन नदिनुहोस्"</string>
@@ -3575,7 +3583,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"अवरोधहरूहरूलाई अनुमति दिनुहोस्"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"एपलाई बज्न, कम्पन गर्न र/वा स्क्रिनमा सूचनाहरू पप गर्न दिनुहोस्"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"प्राथमिकता"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"वार्तालाप खण्डको सिरानमा देखा पर्छ, तैरने बबलका रूपमा देखा पर्छ, लक स्क्रिनमा प्रोफाइल तस्बिर देखाइन्छ"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"वार्तालाप खण्डको सिरानमा देखा पर्छ, तैरने बबलका रूपमा देखा पर्छ, लक स्क्रिनमा प्रोफाइल फोटो देखाइन्छ"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> मा वार्तालापसम्बन्धी धेरैजसो सुविधाहरू प्रयोग गर्न मिल्दैन। तपाईं वार्तालापलाई महत्त्वपूर्ण वार्तालापका रूपमा सेट गर्न सक्नुहुन्न र वार्तालापहरू तैरने बबलका रूपमा देखा पर्दैनन्।"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"पुल डाउन सेडमा सूचनाहरूलाई एउटा पङ्क्तिमा सङ्क्षिप्त पार्नुहोस्"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"न घन्टी बज्छ न त कम्पन नै हुन्छ"</string>
@@ -3621,7 +3629,7 @@
     <string name="display_vr_pref_off" msgid="4008841566387432721">"स्क्रिन झिलमिलाउने प्रभाव कम गर्नुहोस्"</string>
     <string name="picture_in_picture_title" msgid="9001594281840542493">"Picture-in-picture"</string>
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"स्थापना गरिएका कुनै पनि एपहरूले Picture-in-picture मोडलाई समर्थन गर्दैनन्"</string>
-    <string name="picture_in_picture_keywords" msgid="3605379820551656253">"तस्बिरमा तस्बिर मोडमा तस्बिर"</string>
+    <string name="picture_in_picture_keywords" msgid="3605379820551656253">"फोटोमा फोटो मोडमा फोटो"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Picture-in-picture"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Picture-in-picture लाई अनुमति दिनुहोस्"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"यो एप खुला रहेको अवस्थामा वा तपाईंले यसलाई छाड्नुभएपछि (उदाहरणका लागि, भिडियो हेर्ने कार्य जारी राख्न) यस एपलाई picture-in-picture विन्डो सिर्जना गर्न अनुमति दिनुहोस्। यो विन्डो तपाईंले प्रयोग गरिरहनुभएका अन्य एपहरूको शीर्ष भागमा देखिन्छ।"</string>
@@ -4429,8 +4437,8 @@
       <item quantity="one">१ सेकेन्ड</item>
     </plurals>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"भण्डारणको व्यवस्थापन गर्नुहोस्"</string>
-    <string name="automatic_storage_manager_text" msgid="6900593059927987273">"भण्डारण प्रबन्धकले भण्डारणको ठाउँ खाली गर्न मद्दतका लागि तपाईँको यन्त्रबाट ब्याक अप गरिएका तस्बिर र भिडियोहरू हटाउँदछ।"</string>
-    <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"तस्बिर र भिडियोहरूलाई मेट्नुहोस्"</string>
+    <string name="automatic_storage_manager_text" msgid="6900593059927987273">"भण्डारण प्रबन्धकले भण्डारणको ठाउँ खाली गर्न मद्दतका लागि तपाईँको यन्त्रबाट ब्याक अप गरिएका फोटो र भिडियोहरू हटाउँदछ।"</string>
+    <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"फोटो र भिडियोहरूलाई मेट्नुहोस्"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"भण्डारण प्रबन्धक"</string>
     <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"भण्डारण प्रबन्धक प्रयोग गर्नुहोस्"</string>
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"स्वतः"</string>
@@ -4582,7 +4590,7 @@
     </plurals>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
-    <string name="storage_photos_videos" msgid="6926197783745481869">"तस्बिर र भिडियोहरू"</string>
+    <string name="storage_photos_videos" msgid="6926197783745481869">"फोटो र भिडियोहरू"</string>
     <string name="storage_music_audio" msgid="1185624135490182822">"सङ्गीत तथा अडियो"</string>
     <string name="storage_games" msgid="1176568610086802469">"खेलहरू"</string>
     <string name="storage_other_apps" msgid="5902520888043081176">"अन्य एपहरू"</string>
@@ -4600,7 +4608,7 @@
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(प्रयोगकर्ता <xliff:g id="USER">%s</xliff:g> को लागि असक्षम पारियो)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"स्वतः भरण सेवा"</string>
     <string name="autofill_keywords" msgid="6260653325195017912">"स्वतः, भरण, स्वतः भरण"</string>
-    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;तपाईं यो अनुप्रयोगमाथि भरोसा गर्नुहुन्छ भन्ने कुरा पक्का गर्नुहोस्&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; यस अनुप्रयोगले स्वतः भर्नसकिने कुराहरूको निर्धारण गर्न तपाईंको स्क्रिनमा भएका वस्तुहरूको प्रयोग गर्छ।"</string>
+    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;तपाईं यो एपमाथि भरोसा गर्नुहुन्छ भन्ने कुरा पक्का गर्नुहोस्&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; यस अनुप्रयोगले स्वतः भर्नसकिने कुराहरूको निर्धारण गर्न तपाईंको स्क्रिनमा भएका वस्तुहरूको प्रयोग गर्छ।"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"स्वतः भरण"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"लगिङको स्तर"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"प्रति सत्र अनुरोधको अधिकतम सङ्ख्या"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"नेटवर्कहरू फेला पार्न सकिएन। फेरि प्रयास गर्नुहोस्।"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(निषेध गरिएको)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM कार्ड छैन"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM कार्ड छैन"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"SIM कार्डसम्बन्धी कुनै पनि जानकारी दिइएको छैन"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"कनेक्ट गर्न SIM कार्ड चाहिन्छ"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"कनेक्ट गर्न <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> को SIM कार्ड चाहिन्छ"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"रुचाइएको नेटवर्क मोड: WCDMA रुचाइएको"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"रुचाइएको नेटवर्क मोड: GSM मात्र"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"रुचाइएको नेटवर्क मोड: WCDMA मात्र"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"सेटिङका स्क्रिनको माथिपट्टि देखिन दिनुहोस्"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"अन्य एपको माथिपट्टि देखिन सक्ने एपहरूलाई सेटिङका स्क्रिनको माथिपट्टि देखिन दिनुहोस्"</string>
     <string name="media_controls_title" msgid="403271085636252597">"मिडिया"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"मिडियाको सत्र सकिएपछि प्लेयर लुकाउनुहोस्"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"प्लेयरले तपाईंलाई विस्तृत गरिएको द्रुत सेटिङको प्यानलबाट कुनै सत्र सुचारु गर्न दिन्छ।"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"द्रुत सेटिङमा मिडिया प्लेयर"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"सजिलैसँग प्लेब्याक सुचारु गर्न मिडिया प्लेयर लामो अवधिसम्म देखाउनुहोस्"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"प्लेयर लुकाउनुहोस्"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"प्लेयर देखाउनुहोस्"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"कुनै पनि प्लेयर उपलब्ध छैन"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"मिडिया"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लुटुथ अन हुने छ"</string>
 </resources>

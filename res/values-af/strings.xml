@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Gebruik jou gesig om te staaf"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Begin"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"As toeganklikheidgesigslot afgeskakel is, sal sommige opstellingstappe dalk nie behoorlik werk met TalkBack nie."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Gaan terug"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Gaan aan met opstelling"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Gebruik toeganklikheidopstelling"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi-wagwoord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Warmkolwagwoord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Outokoppel"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Laat foon toe om outomaties te koppel naby hierdie netwerk"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Laat tablet toe om outomaties te koppel naby hierdie netwerk"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Laat aansluiting aan hierdie netwerk toe wanneer dit binne bereik is"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Voeg toestel by"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Gebruik \'n QR-kode om \'n toestel by hierdie netwerk te voeg"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-kode is nie \'n geldige formaat nie"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Gebruik stelselsertifikate"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Moenie verskaf nie"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Moenie staaf nie"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Geen sertifikaat is gespesifiseer nie. Jou verbinding sal nie privaat wees nie."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Netwerknaam is te lank."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Moet \'n domein spesifiseer."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Sertifikaat word vereis."</string>
@@ -1189,8 +1190,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Wys witbalans"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Gladde Vertoning"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Verhoog die herlaaikoers vir sommige inhoud outomaties van 60 tot 90 Hz. Verhoog batterygebruik."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Gladde vertoonskerm"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Verhoog die herlaaikoers vir sommige inhoud outomaties van 60 na 90 Hz. Verhoog batterygebruik."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Dwing herlaaikoers van 90 Hz af"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Hoogste herlaaikoers vir verbeterde raaksensitiwiteit en animasiegehalte. Verhoog batterygebruik."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Skermaandag"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aan / skerm sal nie afskakel as jy daarna kyk nie"</string>
@@ -1329,7 +1330,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android-weergawe"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android-sekuriteitopdatering"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model en hardeware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardewareweergawe"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Toerusting-ID"</string>
@@ -1636,7 +1636,7 @@
     <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Bluetooth-verbinding"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Verbinding"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"Warmkol en verbinding"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Warmkol is aan, verbinding"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Warmkol is aan, verbind"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Warmkol is aan"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Verbinding"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"Kan nie verbind of Wi-Fi-warmkol gebruik wanneer Databespaarder aan is nie"</string>
@@ -1676,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Kan nie aan meer as <xliff:g id="MAXCONNECTION">%1$d</xliff:g> toestelle verbind nie."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sal ontverbind word."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-verbinding"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Deel foon se internetverbinding via USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Deel foon se internetverbinding via Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Gebruik warmkol en verbinding om deur jou mobiele dataverbinding internet aan ander toestelle te verskaf. Programme kan ook \'n warmkol skep om inhoud met nabygeleë toestelle te deel."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gebruik warmkol en verbinding om deur jou Wi-Fi- of mobiele dataverbinding internet aan ander toestelle te verskaf. Programme kan ook \'n warmkol skep om inhoud met toestelle in die omtrek te deel."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hulp"</string>
@@ -1858,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Hulle kan jou help om jou PIN, patroon of wagwoord terug te stel"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Jou tablet en persoonlike data is meer kwesbaar vir aanvalle deur onbekende programme. Deur programme van hierdie bron af te installeer, stem jy in dat jy verantwoordelik is vir enige skade aan jou tablet of verlies van data wat uit hul gebruik kan spruit."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Jou foon en persoonlike data is meer kwesbaar vir aanvalle deur onbekende programme. Deur programme van hierdie bron af te installeer, stem jy in dat jy verantwoordelik is vir enige skade aan jou foon of verlies van data wat uit hul gebruik kan spruit."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Kan tans nie afgelaaide SIM-kaarte uitvee nie"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Laat die toestel herselflaai en probeer weer. As jy voortgaan met fabriekterugstelling, kan die afgelaaide SIM-kaarte dalk op die toestel bly."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Herselflaai"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Gaan voort met fabriekterugstelling?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Afgelaaide SIM-kaarte sal op jou toestel bly."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Fabriekterugstelling"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Jou toestel en persoonlike data is meer kwesbaar vir aanvalle deur onbekende programme. Deur programme van hierdie bron af te installeer, stem jy in dat jy verantwoordelikheid aanvaar vir enige skade aan jou toestel of verlies van data wat uit die gebruik van hierdie programme kan spruit."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Gevorderde instellings"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Aktiveer meer instellingsopsies"</string>
@@ -2658,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Stel terug"</string>
     <string name="tts_play" msgid="2945513377250757221">"Speel"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Aanpasbare konnektiwiteit"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Verleng die batterylewe en verbeter die toestel se werkverrigting deur jou netwerkverbindings outomaties te bestuur"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Eiebewysberging"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installeer \'n sertifikaat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installeer sertifikate uit berging"</string>
@@ -4705,6 +4713,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Kon nie netwerke kry nie. Probeer weer."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(verbode)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Geen SIM-kaart nie"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Geen SIM nie"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Geen"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Benodig SIM om te koppel"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Benodig <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>-SIM om te koppel"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Voorkeurnetwerkmodus: WCDMA verkies"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Voorkeurnetwerkmodus: net GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Voorkeurnetwerkmodus: net WCDMA"</string>
@@ -4940,10 +4953,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Laat skermoorleggers op Instellings toe"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Laat programme wat oor ander programme kan wys toe om Instellings-skerms te oorlê"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Versteek speler wanneer mediasessie geëindig het"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Die speler maak dit vir jou moontlik om \'n sessie vanaf die uitgebreide Kitsinstellings-paneel te hervat."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Mediaspeler in Kitsinstellings"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Wys mediaspeler vir \'n verlengde tydperk sodat terugspeel maklik kan hervat"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Versteek speler"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Wys speler"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Geen spelers beskikbaar nie"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth sal aanskakel"</string>
 </resources>
