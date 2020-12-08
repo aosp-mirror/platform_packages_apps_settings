@@ -196,11 +196,11 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             if (TextUtils.equals(info.getId(),
                     preference.getKey().substring(SWITCHER_PREFIX.length()))) {
                 final Intent intent = new Intent()
-                        .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                        .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
                         .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
                                 info.getClientPackageName());
-                mContext.startActivity(intent);
+                mContext.sendBroadcast(intent);
                 return true;
             }
         }
