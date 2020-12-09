@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.settings.panel;
+package com.android.settings.accounts;
 
-import android.content.ComponentName;
-import android.content.Intent;
+import static com.google.common.truth.Truth.assertThat;
 
-public class FakeSettingsPanelActivity extends SettingsPanelActivity {
-    @Override
-    public ComponentName getCallingActivity() {
-        return new ComponentName("fake-package", "fake-class");
-    }
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-    @Override
-    public Intent getIntent() {
-        final Intent intent = new Intent(FakePanelContent.FAKE_ACTION);
-        return intent;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.lang.reflect.Modifier;
+
+@RunWith(AndroidJUnit4.class)
+public class RemoveUserFragmentTest {
+
+    @Test
+    public void testClassModifier_shouldBePublic() {
+        final int modifiers = RemoveUserFragment.class.getModifiers();
+
+        assertThat(Modifier.isPublic(modifiers)).isTrue();
     }
 }
