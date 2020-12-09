@@ -335,6 +335,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"שימוש באימות פנים"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"התחלה"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"‏אם הגדרות נגישות של שחרור נעילה על ידי זיהוי פנים מושבתות, ייתכן שחלק משלבי ההגדרה לא יפעלו באופן תקין עם TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"חזרה"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"להמשך הגדרה"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"שימוש בהגדרת הנגישות"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -963,8 +966,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏סיסמת ה-Wi‑Fi היא: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"סיסמה של נקודה לשיתוף אינטרנט: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"חיבור אוטומטי"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"הטלפון יוכל להתחבר באופן אוטומטי בסביבת הרשת הזו"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"הטאבלט יוכל להתחבר באופן אוטומטי בסביבת הרשת הזו"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"יש להפעיל את החיבור לרשת זו כשנמצאים בטווח"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"הוספת מכשיר"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"‏אפשר להשתמש בקוד QR כדי להוסיף מכשיר לרשת זו"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"‏קוד QR אינו בפורמט חוקי"</string>
@@ -976,7 +978,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"השתמש באישורי מערכת"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"ללא אישור"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"ללא אימות"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"לא הוגדר אישור. החיבור שלך לא יהיה פרטי."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"שם הרשת ארוך מדי."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"חובה לציין דומיין."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"נדרש אישור."</string>
@@ -1717,7 +1718,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"לא ניתן לשתף אינטרנט בין למעלה מ-<xliff:g id="MAXCONNECTION">%1$d</xliff:g> מכשירים."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"קשירת <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"‏שיתוף אינטרנט עם Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"‏שיתוף החיבור לאינטרנט של הטלפון דרך USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"‏שיתוף החיבור לאינטרנט של הטלפון דרך Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"אפשר להשתמש בנקודה לשיתוף אינטרנט ובשיתוף אינטרנט בין ניידים כדי לאפשר למכשירים אחרים להתחבר לאינטרנט דרך חבילת הגלישה שלך. ניתן גם להשתמש באפליקציות כדי ליצור נקודה לשיתוף אינטרנט ולשתף תכנים בין מכשירים שנמצאים בקרבת מקום."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"‏ניתן להשתמש בנקודה לשיתוף אינטרנט ובשיתוף אינטרנט בין מכשירים כדי לאפשר למכשירים אחרים להתחבר לאינטרנט דרך ה-Wi-Fi או דרך חבילת הגלישה שלך. ניתן גם להשתמש באפליקציות כדי ליצור נקודה לשיתוף אינטרנט ולשתף תכנים בין מכשירים שנמצאים בקרבת מקום."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"עזרה"</string>
@@ -1903,6 +1904,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"ניתן לקבל ממנו עזרה באיפוס קוד האימות, קו ביטול הנעילה או הסיסמה"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"הטאבלט והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. על ידי התקנת אפליקציות ממקור זה, אתה מסכים לכך שאתה האחראי לכל נזק לטאבלט או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"הטלפון והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. על ידי התקנת אפליקציות ממקור זה, אתה מסכים לכך שאתה האחראי לכל נזק לטלפון או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"‏יש בעיה במחיקת כרטיסי ה-SIM שהורדו"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"‏אפשר להפעיל מחדש את המכשיר ולנסות שוב. אם הפעולה לאיפוס להגדרות המקוריות תימשך, ייתכן שכרטיסי ה-SIM שהורדו יישארו במכשיר."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"הפעלה מחדש"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"להמשיך באיפוס להגדרות המקוריות?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"‏כרטיסי SIM שהורדו יישארו במכשיר."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"איפוס להגדרות המקוריות"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"המכשיר והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. התקנת אפליקציות מהמקור הזה מבטאת את הסכמתך לכך שהאחריות לכל נזק למכשיר או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה היא שלך בלבד."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"הגדרות מתקדמות"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"אפשר עוד אפשרויות הגדרה."</string>
@@ -2733,6 +2740,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"איפוס המכשיר"</string>
     <string name="tts_play" msgid="2945513377250757221">"הפעלה"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"קישוריות ניתנת להתאמה"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ההעדפה הזו מאריכה את חיי הסוללה ומשפרת את ביצועי המכשיר על ידי ניהול אוטומטי של החיבורים שלך לרשת"</string>
     <string name="credentials_title" msgid="7535942196886123656">"אחסון אישורים"</string>
     <string name="credentials_install" msgid="3933218407598415827">"התקנת אישור"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"התקנת אישורים מאמצעי אחסון"</string>
@@ -4808,7 +4817,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"הפעלה לכל האפליקציות"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"בחירת מנהל ההתקן לגרפיקה"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"ברירת מחדל"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"מנהל ההתקן של המשחק"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"מנהל ההתקן של המשחק"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"מנהל ההתקן למפתחים"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"מנהל ההתקן לגרפיקה של המערכת"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4877,6 +4886,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"לא נמצאו רשתות. אפשר לנסות שוב."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(אסור)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"‏אין כרטיס SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"‏אין כרטיס SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"‏אין מידע על רשת ה-Wi-Fi"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"‏נדרש כרטיס SIM כדי להתחבר לרשת ה-Wi-Fi"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"‏נדרש כרטיס SIM של <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> כדי להתחבר לרשת ה-Wi-Fi"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"‏מצב רשת מועדפת: WCDMA מועדף"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"‏מצב רשת מועדפת: GSM בלבד"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"‏מצב רשת מועדפת: WCDMA בלבד"</string>
@@ -5119,10 +5133,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"אפשרות של שכבות-על במסכי \'הגדרות\'"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"אפליקציות שיכולות להופיע מעל אפליקציות אחרות יוכלו ליצור שכבות-על במסכי ההגדרות"</string>
     <string name="media_controls_title" msgid="403271085636252597">"מדיה"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"הנגן יוסתר כשסשן המדיה יסתיים"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"הנגן מאפשר לך להמשיך סשן מחלונית מורחבת של הגדרות מהירות."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"‏Media Player בהגדרות המהירות"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"‏הצגת Media Player לפרק זמן ממושך כדי להמשיך את ההפעלה בקלות"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"הסתרת הנגן"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"הצגת הנגן"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"אין נגנים זמינים"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"מדיה"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"‏ה-Bluetooth יופעל"</string>
 </resources>

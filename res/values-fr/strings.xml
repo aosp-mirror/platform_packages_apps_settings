@@ -332,6 +332,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Vous authentifier avec votre visage"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Démarrer"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Si Face Unlock avec l\'option Accessibilité est désactivée, certaines étapes de configuration risquent de ne pas fonctionner correctement avec TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Retour"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Poursuivre configuration"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Utiliser config. d\'accessibilité"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -946,8 +949,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Mot de passe Wi-Fi : <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Mot de passe du point d\'accès : <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Connexion automatique"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Autoriser le téléphone à se connecter automatiquement lorsqu\'il se trouve à proximité de ce réseau"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Autoriser la tablette à se connecter automatiquement lorsqu\'elle se trouve à proximité de ce réseau"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Autoriser la connexion à ce réseau lorsqu\'il est à portée"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Ajouter un appareil"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utiliser un code QR pour ajouter un appareil à ce réseau"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Le format de code QR n\'est pas valide"</string>
@@ -959,7 +961,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utiliser les certificats du système"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Ne pas fournir"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ne pas valider"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Aucun certificat indiqué. Votre connexion ne sera pas privée."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Le nom du réseau est trop long."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Vous devez spécifier un domaine."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certificat requis."</string>
@@ -1696,7 +1697,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Partage connexion impossible au-delà de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> appareils."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Le partage connexion avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être annulé."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Partage via Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Partager la connexion Internet du téléphone via un câble Ethernet USB"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Partager la connexion Internet du téléphone via Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utilisez un point d\'accès et le partage de connexion pour fournir un accès à Internet à d\'autres appareils via votre connexion de données mobiles. Les applications peuvent également créer un point d\'accès pour partager du contenu avec des appareils à proximité."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utilisez un point d\'accès et le partage de connexion pour fournir un accès à Internet à d\'autres appareils via votre Wi-Fi ou votre connexion de données mobiles. Les applications peuvent également créer un point d\'accès pour partager du contenu avec des appareils à proximité."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Aide"</string>
@@ -1880,6 +1881,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Il peut vous aider à réinitialiser votre code, votre schéma ou votre mot de passe"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Votre tablette et vos données personnelles sont très vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être le seul responsable de tout dommage causé à votre tablette ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Votre téléphone et vos données personnelles sont très vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être le seul responsable de tout dommage causé à votre téléphone ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Erreur de suppression des cartes SIM téléchargées"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Veuillez redémarrer l\'appareil et réessayer. Si vous poursuivez le rétablissement de la configuration d\'usine, les cartes SIM téléchargées risquent de rester sur l\'appareil."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Redémarrer"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Poursuivre rétab. config. usine ?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Les cartes SIM téléchargées resteront sur l\'appareil."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Rétablir la configuration d\'usine"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Votre appareil et vos données personnelles sont très vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être le seul responsable de tout dommage causé à votre appareil ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Paramètres avancés"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Activer d\'autres paramètres"</string>
@@ -2695,6 +2702,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Réinitialiser"</string>
     <string name="tts_play" msgid="2945513377250757221">"Lecture"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Connectivité adaptative"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prolonge l\'autonomie de la batterie et améliore les performances de l\'appareil en gérant automatiquement vos connexions réseau"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Stockage des identifiants"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installer un certificat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installer les certificats depuis la mémoire de stockage"</string>
@@ -4720,7 +4729,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Activer pour toutes les applications"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Sélectionner un pilote graphique"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Par défaut"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Pilote de jeu"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"Pilote de jeu"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Pilote pour les développeurs"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Pilote graphique du système"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4789,6 +4798,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Réseaux introuvables. Veuillez réessayer."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(interdit)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Pas de carte SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Aucune carte SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Aucune information"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"SIM requise pour la connexion"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"SIM <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> requise pour la connexion"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Mode réseau préféré : WCDMA de préférence"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Mode réseau préféré : GSM uniquement"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Mode réseau préféré : WCDMA uniquement"</string>
@@ -5028,10 +5042,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Autoriser superpositions d\'écran dans paramètres"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Autoriser les applications pouvant se superposer à d\'autres à se superposer aux écrans de paramètres"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimédia"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Masquer le lecteur à la fin de la session multimédia"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Le lecteur vous permet de reprendre une session depuis la fenêtre de configuration rapide une fois celle-ci développée."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Lecteur multimédia dans la fenêtre de configuration rapide"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Afficher le lecteur multimédia pendant une période prolongée pour reprendre la lecture facilement"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Masquer le lecteur"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Afficher le lecteur"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Aucun lecteur disponible"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Multimédia"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Le Bluetooth sera activé"</string>
 </resources>

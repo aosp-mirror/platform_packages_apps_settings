@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Ползване на лицето ви за удостоверяване"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Стартиране"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Ако функцията за отключване с лице е изключена, някои стъпки за настройване може да не работят правилно с TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Назад"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Продължаване за настройване"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Настр. на ф-ята за достъпност: Ползване"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Парола за Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Парола за точката за достъп: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Автоматично свързване"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Разрешаване телефонът автоматично да се свързва в района на тази мрежа"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Разрешаване таблетът автоматично да се свързва в района на тази мрежа"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Разрешете свързване с тази мрежа, когато е в обхват"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Добавяне на устройство"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Използвайте код за бърза реакция, за да добавите устройство към тази мрежа"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Невалиден формат на кода за бърза реакция"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Използване на системни сертификати"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Без предоставяне"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Без удостоверяване"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Не е посочен сертификат. Връзката ви няма да бъде частна."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Името на мрежата е твърде дълго."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Трябва да посочите домейн."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Изисква се сертификат."</string>
@@ -1675,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Не може да се извърши тетъринг с над <xliff:g id="MAXCONNECTION">%1$d</xliff:g> устройства."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Тетърингът на <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ще бъде прекъснат."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Тетъринг чрез Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Споделете връзката с интернет на телефона чрез Ethernet през USB"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Споделете връзката с интернет на телефона чрез Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Използвайте точка за достъп и тетъринг, за да предоставите достъп до интернет на други устройства чрез мобилната си връзка за данни. Приложенията могат също да създават точки за достъп, за да споделят съдържание с устройства в близост."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Използвайте точка за достъп и тетъринг, за да предоставите достъп до интернет на други устройства чрез Wi-Fi или мобилната си връзка за данни. Приложенията могат също да създават точки за достъп, за да споделят съдържание с устройства в близост."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Помощ"</string>
@@ -1857,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Можете да получите помощ за задаването на нов ПИН код, фигура или парола"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Таблетът и личните ви данни са по-уязвими към атаки от неизвестни приложения. С инсталирането на приложения от този източник приемате, че вие носите отговорност в случай на повреда на устройството ви или при загуба на данни вследствие използването на такива приложения."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Телефонът и личните ви данни са по-уязвими към атаки от неизвестни приложения. С инсталирането на приложения от този източник приемате, че вие носите отговорност в случай на повреда на устройството ви или при загуба на данни вследствие използването на такива приложения."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Има проблем с изтриването на изтеглените SIM карти"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Моля, рестартирайте устройството и опитайте отново. Ако продължите с възстановяването на фабричните настройки, изтеглените SIM карти може да останат на устройството."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Рестартиране"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Продълж. с възст. на фабр. настройки?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Изтеглените SIM карти ще останат на устройството."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Възстановяване на фабричните настройки"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Устройството и личните ви данни са по-уязвими към атаки от неизвестни приложения. С инсталирането на приложения от този източник приемате, че вие носите отговорност в случай на повреда на устройството ви или при загуба на данни вследствие използването на такива приложения."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Разширени настройки"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Да се активират още опции за настройки"</string>
@@ -2657,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Нулиране"</string>
     <string name="tts_play" msgid="2945513377250757221">"Възпроизвеждане"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Функция за адаптивно свързване"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Удължава живота на батерията и подобрява ефективността на устройството чрез автоматично управление на връзките с мрежата"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Хранилище за идент. данни"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Инсталиране на сертификат"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Инсталиране на сертификати от хранилището"</string>
@@ -4632,7 +4641,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Активиране за всички приложения"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Избиране на графичен драйвер"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"По подразбиране"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Драйвер за игри"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"Драйвер за игри"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Драйвер за програмисти"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Системен графичен драйвер"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4701,6 +4710,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Не можаха да бъдат намерени мрежи. Опитайте отново."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(забранено)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Няма SIM карта"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Няма SIM карта"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Няма"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"За установяването на връзка се изисква SIM карта"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"За установяването на връзка се изисква SIM карта от <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Предпочитан режим на мрежата: Предпочита се WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Предпочитан режим на мрежата: Само GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Предпочитан режим на мрежата: Само WCDMA"</string>
@@ -4937,10 +4951,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Разрешаване на екранни наслагвания в/у „Настройки“"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Разрешаване на приложенията, които могат да се показват върху други приложения, да се наслагват върху екрана на „Настройки“"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Мултимедия"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Скриване на плейъра при прикл. сесия за мултимедия"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Плейърът ви позволява да възобновите дадена сесия от разгънатия панел с бързи настройки."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Медиен плейър в бързите настройки"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Показване на медийния плейър за продължителен период от време с цел лесно възобновяване на възпроизвеждането"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скриване на плейъра"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Показване на плейъра"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Няма налични плейъри"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"мултимедия"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Ще се включи Bluetooth"</string>
 </resources>

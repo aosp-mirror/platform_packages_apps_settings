@@ -23,8 +23,10 @@ import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
+import android.content.AsyncQueryHandler;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -41,9 +43,14 @@ import android.net.NetworkRequest;
 import android.net.NetworkUtils;
 import android.net.RouteInfo;
 import android.net.Uri;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.provider.Telephony.CarrierId;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -98,6 +105,7 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
@@ -133,6 +141,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     @VisibleForTesting
     static final String KEY_SSID_PREF = "ssid";
     @VisibleForTesting
+    static final String KEY_EAP_SIM_SUBSCRIPTION_PREF = "eap_sim_subscription";
+    @VisibleForTesting
     static final String KEY_MAC_ADDRESS_PREF = "mac_address";
     @VisibleForTesting
     static final String KEY_IP_ADDRESS_PREF = "ip_address";
@@ -156,6 +166,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private NetworkInfo mNetworkInfo;
     private NetworkCapabilities mNetworkCapabilities;
     private int mRssiSignalLevel = -1;
+    @VisibleForTesting boolean mShowX; // Shows the Wi-Fi signal icon of Pie+x when it's true.
     private String[] mSignalStr;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
@@ -170,6 +181,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private Preference mFrequencyPref;
     private Preference mSecurityPref;
     private Preference mSsidPref;
+    private Preference mEapSimSubscriptionPref;
     private Preference mMacAddressPref;
     private Preference mIpAddressPref;
     private Preference mGatewayPref;
@@ -186,6 +198,35 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     private final NetworkRequest mNetworkRequest = new NetworkRequest.Builder()
             .clearCapabilities().addTransportType(TRANSPORT_WIFI).build();
+
+    private CarrierIdAsyncQueryHandler mCarrierIdAsyncQueryHandler;
+    private static final int TOKEN_QUERY_CARRIER_ID_AND_UPDATE_SIM_SUMMARY = 1;
+    private static final int COLUMN_CARRIER_NAME = 0;
+
+    private class CarrierIdAsyncQueryHandler extends AsyncQueryHandler {
+
+        private CarrierIdAsyncQueryHandler(Context context) {
+            super(context.getContentResolver());
+        }
+
+        @Override
+        protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
+            if (token == TOKEN_QUERY_CARRIER_ID_AND_UPDATE_SIM_SUMMARY) {
+                if (mContext == null || cursor == null || !cursor.moveToFirst()) {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
+                    mEapSimSubscriptionPref.setSummary(R.string.wifi_require_sim_card_to_connect);
+                    return;
+                }
+                mEapSimSubscriptionPref.setSummary(mContext.getString(
+                        R.string.wifi_require_specific_sim_card_to_connect,
+                        cursor.getString(COLUMN_CARRIER_NAME)));
+                cursor.close();
+                return;
+            }
+        }
+    }
 
     // Must be run on the UI thread since it directly manipulates UI state.
     private final NetworkCallback mNetworkCallback = new NetworkCallback() {
@@ -336,6 +377,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mSecurityPref = screen.findPreference(KEY_SECURITY_PREF);
 
         mSsidPref = screen.findPreference(KEY_SSID_PREF);
+        mEapSimSubscriptionPref = screen.findPreference(KEY_EAP_SIM_SUBSCRIPTION_PREF);
         mMacAddressPref = screen.findPreference(KEY_MAC_ADDRESS_PREF);
         mIpAddressPref = screen.findPreference(KEY_IP_ADDRESS_PREF);
         mGatewayPref = screen.findPreference(KEY_GATEWAY_PREF);
@@ -507,12 +549,14 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshIpLayerInfo();
         // SSID Pref
         refreshSsid();
+        // EAP SIM subscription
+        refreshEapSimSubscription();
         // MAC Address Pref
         refreshMacAddress();
     }
 
     private void refreshRssiViews() {
-        int signalLevel = mWifiEntry.getLevel();
+        final int signalLevel = mWifiEntry.getLevel();
 
         // Disappears signal view if not in range. e.g. for saved networks.
         if (signalLevel == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
@@ -521,11 +565,14 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return;
         }
 
-        if (mRssiSignalLevel == signalLevel) {
+        final boolean showX = mWifiEntry.shouldShowXLevelIcon();
+
+        if (mRssiSignalLevel == signalLevel && mShowX == showX) {
             return;
         }
         mRssiSignalLevel = signalLevel;
-        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
+        mShowX = showX;
+        Drawable wifiIcon = mIconInjector.getIcon(mShowX, mRssiSignalLevel);
 
         if (mEntityHeaderController != null) {
             mEntityHeaderController
@@ -628,6 +675,62 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         } else {
             mSsidPref.setVisible(false);
         }
+    }
+
+    private void refreshEapSimSubscription() {
+        mEapSimSubscriptionPref.setVisible(false);
+
+        if (mWifiEntry.getSecurity() != WifiEntry.SECURITY_EAP) {
+            return;
+        }
+        final WifiConfiguration config = mWifiEntry.getWifiConfiguration();
+        if (config == null || config.enterpriseConfig == null) {
+            return;
+        }
+        if (!config.enterpriseConfig.isAuthenticationSimBased()) {
+            return;
+        }
+
+        mEapSimSubscriptionPref.setVisible(true);
+
+        // Checks if the SIM subscription is active.
+        final List<SubscriptionInfo> activeSubscriptionInfos = mContext
+                .getSystemService(SubscriptionManager.class).getActiveSubscriptionInfoList();
+        final int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
+        if (activeSubscriptionInfos != null) {
+            for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfos) {
+                if (config.carrierId == subscriptionInfo.getCarrierId()) {
+                    mEapSimSubscriptionPref.setSummary(subscriptionInfo.getDisplayName());
+                    return;
+                }
+
+                // When it's UNKNOWN_CARRIER_ID, devices connects it with the SIM subscription of
+                // defaultDataSubscriptionId.
+                if (config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID
+                        && defaultDataSubscriptionId == subscriptionInfo.getSubscriptionId()) {
+                    mEapSimSubscriptionPref.setSummary(subscriptionInfo.getDisplayName());
+                    return;
+                }
+            }
+        }
+
+        if (config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID) {
+            mEapSimSubscriptionPref.setSummary(R.string.wifi_no_related_sim_card);
+            return;
+        }
+
+        // The Wi-Fi network has specified carrier id, query carrier name from CarrierIdProvider.
+        if (mCarrierIdAsyncQueryHandler == null) {
+            mCarrierIdAsyncQueryHandler = new CarrierIdAsyncQueryHandler(mContext);
+        }
+        mCarrierIdAsyncQueryHandler.cancelOperation(TOKEN_QUERY_CARRIER_ID_AND_UPDATE_SIM_SUMMARY);
+        mCarrierIdAsyncQueryHandler.startQuery(TOKEN_QUERY_CARRIER_ID_AND_UPDATE_SIM_SUMMARY,
+                null /* cookie */,
+                CarrierId.All.CONTENT_URI,
+                new String[]{CarrierId.CARRIER_NAME},
+                CarrierId.CARRIER_ID + "=?",
+                new String[] {Integer.toString(config.carrierId)},
+                null /* orderBy */);
     }
 
     private void refreshMacAddress() {
@@ -907,8 +1010,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mContext = context;
         }
 
-        public Drawable getIcon(int level) {
-            return mContext.getDrawable(Utils.getWifiIconResource(level)).mutate();
+        public Drawable getIcon(boolean showX, int level) {
+            return mContext.getDrawable(Utils.getWifiIconResource(showX, level)).mutate();
         }
     }
 

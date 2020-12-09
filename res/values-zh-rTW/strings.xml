@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"使用你的臉孔進行驗證"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"開始"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"如果關閉人臉解鎖無障礙功能，某些設定步驟可能無法與 TalkBack 搭配運作。"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"返回"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"繼續設定"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"使用無障礙設定"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi 密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"無線基地台密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動連線"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"允許手機在進入連線範圍內時自動連上這個網路"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"允許平板電腦在進入連線範圍內時自動連上這個網路"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"允許裝置在進入有效範圍時連線至這個網路"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"新增裝置"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用 QR 圖碼將裝置新增至這個網路"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR 圖碼格式無效"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"使用系統憑證"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"不進行驗證"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"你未指定任何憑證，因此無法為你設定私人連線。"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"網路名稱太長。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"必須指定網域。"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要憑證。"</string>
@@ -1675,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"最多只能有 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 個裝置共用網路。"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"將中斷 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 的網路共用。"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"乙太網路網路共用"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"透過 USB 乙太網路分享手機的網際網路連線"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"透過乙太網路分享手機的網際網路連線"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"使用無線基地台和網路共用功能，透過你的行動數據連線提供網際網路給其他裝置。應用程式也可以建立無線基地台來和鄰近的裝置分享內容。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用無線基地台和網路共用功能，讓其他裝置能夠透過你的 Wi-Fi 或行動數據連線連上網際網路。應用程式也可以建立無線基地台，以便與鄰近的裝置分享內容。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"說明"</string>
@@ -1857,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"IT 管理員可協助你重設 PIN 碼、解鎖圖案或密碼"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"來歷不明的應用程式可能會損害你的平板電腦和個人資料。安裝這個來源提供的應用程式集表示你同意，如因使用這些應用程式導致你的平板電腦受損或資料遺失，須自行負責。"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"來歷不明的應用程式可能會損害你的手機和個人資料。安裝這個來源提供的應用程式即表示你同意，如因使用這些應用程式導致你的手機受損或資料遺失，須自行負責。"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"清除已下載的 SIM 卡時發生問題"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"請重新啟動裝置，然後再試一次。如果繼續恢復原廠設定，已下載的 SIM 卡可能仍會保留在裝置中。"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"重新啟動"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"要繼續恢復原廠設定嗎？"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"已下載的 SIM 卡仍會保留在裝置中。"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"恢復原廠設定"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"來歷不明的應用程式可能會損害你的裝置和個人資料。安裝這個來源提供的應用程式即表示你同意，如因使用這些應用程式導致你的裝置受損或資料遺失，須自行負責。"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"進階設定"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"啟用更多設定選項"</string>
@@ -2657,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"重設"</string>
     <string name="tts_play" msgid="2945513377250757221">"播放"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"自動調整連線"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"自動管理網路連線，藉此延長電池續航力並提升裝置效能"</string>
     <string name="credentials_title" msgid="7535942196886123656">"憑證儲存空間"</string>
     <string name="credentials_install" msgid="3933218407598415827">"安裝憑證"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"從裝置的儲存空間安裝憑證"</string>
@@ -4632,7 +4641,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"為所有應用程式啟用這項設定"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"選取繪圖驅動程式"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"預設"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"遊戲驅動程式"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"遊戲驅動程式"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"開發人員驅動程式"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"系統繪圖驅動程式"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4701,6 +4710,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"找不到網路，請再試一次。"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(已禁止)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"沒有 SIM 卡"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM 卡"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"沒有 SIM 卡"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"無"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"必須要有 SIM 卡才能連上網路"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"必須要有「<xliff:g id="WIRELESS_CARRIER">%s</xliff:g>」的 SIM 卡才能連上網路"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"首選網路模式：首選 WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"首選網路模式：僅限 GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"首選網路模式：僅限 WCDMA"</string>
@@ -4937,10 +4951,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"允許應用程式可重疊顯示在「設定」畫面上"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"允許可顯示在其他應用程式上的應用程式重疊顯示在「設定」畫面上"</string>
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"在媒體工作階段結束後隱藏播放器"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"這個播放器可讓你透過展開的快速設定面板繼續執行工作階段。"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"快速設定中的媒體播放器"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"延長媒體播放器的顯示時間，讓你輕鬆繼續播放"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"顯示播放器"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"沒有可用的播放器"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒體"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"系統將開啟藍牙"</string>
 </resources>

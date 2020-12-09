@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Përdor fytyrën për të vërtetuar"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Nis"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Nëse shkyçja e fytyrës me qasshmëri është e çaktivizuar, disa hapa konfigurimi mund të mos funksionojnë mirë me TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Kthehu pas"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Vazhdo konfigurimin"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Përdor konfigurimin e qasshmërisë"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Fjalëkalimi i Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Fjalëkalimi i zonës së qasjes për internet: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Lidh automatikisht"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Lejo që telefoni të lidhet automatikisht në afërsi të këtij rrjeti"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Lejo që tableti të lidhet automatikisht në afërsi të këtij rrjeti"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Lejo lidhjen me këtë rrjet kur të jetë brenda rrezes"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Shto pajisje"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Përdor një kod QR për të shtuar një pajisje në këtë rrjet"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Kodi QR nuk është në format të vlefshëm"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Përdor certifikatat e sistemit"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Mos e ofro"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Mos e mirato"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Nuk u specifikua asnjë certifikatë. Lidhja jote nuk do të jetë private."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Emri i rrjetit është shumë i gjatë."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Duhet të specifikohet një domen."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Kërkohet certifikimi."</string>
@@ -1675,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Ndarja e internetit nuk mund të bëhet për më shumë se <xliff:g id="MAXCONNECTION">%1$d</xliff:g> pajisje."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Ndarja e internetit do të çaktivizohet për <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ndarja e eternetit"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Ndaj lidhjen e internetit të telefonit nëpërmjet eternetit me USB"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Ndaj lidhjen e internetit të telefonit nëpërmjet eternetit"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Përdor zonën e qasjes dhe ndarjen e internetit për t\'u ofruar internet pajisjeve të tjera nëpërmjet lidhjes tënde të të dhënave celulare. Aplikacionet mund të krijojnë po ashtu një zonë qasjeje të internetit për të ndarë përmbajtje me pajisjet në afërsi."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Përdor zonën e qasjes dhe ndarjen e internetit për t\'u ofruar internet pajisjeve të tjera nëpërmjet lidhjes tënde Wi-Fi ose të të dhënave celulare. Aplikacionet mund të krijojnë po ashtu një zonë qasjeje të internetit për të ndarë përmbajtje me pajisjet në afërsi."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ndihma"</string>
@@ -1857,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Ata mund të të ndihmojnë të rivendosësh kodin PIN, motivin ose fjalëkalimin"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tableti dhe të dhënat e tua personale janë më të cenueshme për t\'u sulmuar nga aplikacione të panjohura. Duke instaluar aplikacionet nga ky burim, ti pranon se je plotësisht përgjegjës për çdo dëm ndaj tabletit ose çdo humbje të dhënash që mund të rezultojë nga përdorimi i tyre."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefoni dhe të dhënat e tua personale janë më të cenueshme për t\'u sulmuar nga aplikacione të panjohura. Duke instaluar aplikacionet nga ky burim, ti pranon se je plotësisht përgjegjës për çdo dëm ndaj telefonit ose çdo humbje të dhënash që mund të rezultojë nga përdorimi i tyre."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Ka një problem me fshirjen e kartave SIM të shkarkuara"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Rinise pajisjen dhe provo përsëri. Nëse vazhdon rivendosjen në gjendje fabrike, kartat SIM të shkarkuara mund të mbeten në pajisje."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Rindiz"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Të vazhdohet rivendosja në gjendje fabrike?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Kartat SIM të shkarkuara do të mbeten në pajisje."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Rivendos në gjendje fabrike"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Pajisja dhe të dhënat e tua personale janë më të cenueshme nga sulmet nga aplikacionet e panjohura. Duke instaluar aplikacionet nga ky burim, ti pranon se je përgjegjës për çdo dëm ndaj pajisjes tënde ose çdo humbje të të dhënave që mund të rezultojë nga përdorimi i tyre."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Cilësimet e përparuara"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Aktivizo më shumë opsione të cilësimeve"</string>
@@ -2657,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Rivendos"</string>
     <string name="tts_play" msgid="2945513377250757221">"Luaj"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Lidhshmëria me përshtatje"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Rrit kohëzgjatjen e baterisë dhe përmirëson cilësinë e funksionimit të pajisjes duke menaxhuar automatikisht lidhjet e rrjetit"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Ruajtja e kredencialeve"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalo një certifikatë"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instalo certifikatat nga hapësira ruajtëse"</string>
@@ -4632,7 +4641,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Aktivizo për të gjitha aplikacionet"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Zgjidh drejtuesin e grafikës"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"E parazgjedhur"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Drejtuesi i lojës"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"Drejtuesi i lojës"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Drejtuesi i zhvilluesit"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Drejtuesi i grafikës së sistemit"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4701,6 +4710,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Rrjetet nuk mund të gjendeshin. Provo përsëri."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ndalohet)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Nuk ka kartë SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Nuk ka kartë SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Asnjë"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Kërkon kartë SIM për t\'u lidhur"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Kërkon kartë SIM nga <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> për t\'u lidhur"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Modaliteti i rrjetit të preferuar: preferohet WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Modaliteti i rrjetit të preferuar: vetëm GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Modaliteti i rrjetit të preferuar: vetëm WCDMA"</string>
@@ -4937,10 +4951,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Lejo mbivendosjet e ekranit te \"Cilësimet\""</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Lejo aplikacionet të cilat mund të shfaqen mbi aplikacione të tjera të mbivendosen mbi ekranet e \"Cilësimeve\""</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Fshihe luajtësin kur sesioni i medias të ketë përfunduar"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Luajtësi të lejon ta vazhdosh më vonë një sesion nga paneli i zgjeruar i \"Cilësimeve të shpejta\"."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Luajtësi i medias te \"Cilësimet e shpejta\""</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Shfaqe luajtësin e medias për një periudhë më të gjatë për të vazhduar me lehtësi luajtjen"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Fshih luajtësin"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Shfaq luajtësin"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nuk ofrohet asnjë luajtës"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth-i do të aktivizohet"</string>
 </resources>

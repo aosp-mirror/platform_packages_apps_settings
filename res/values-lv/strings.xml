@@ -332,6 +332,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Autentificēšana, izmantojot seju"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Sākt"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Ja pieejamības autorizācija pēc sejas ir izslēgta, noteiktas iestatīšanas darbības var nedarboties pareizi ar TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Atpakaļ"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Turpināt iestatīšanu"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Izmantot pieejamības iestatīšanu"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -946,8 +949,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi tīkla parole: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Tīklāja parole: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automātiski izveidot savienojumu"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Ļaut tālrunim automātiski izveidot savienojumu šī tīkla tuvumā"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Ļaut planšetdatoram automātiski izveidot savienojumu šī tīkla tuvumā"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Atļaujiet savienojuma izveidi ar šo tīklu, kad tas ir pieejams"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Pievienot ierīci"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Izmantojiet ātrās atbildes kodu, lai pievienotu ierīci šim tīklam"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Ātrās atbildes koda formāts nav derīgs."</string>
@@ -959,7 +961,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Izmantot sistēmas sertifikātus"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Nenorādīt"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Neapstiprināt"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Sertifikāts nav norādīts. Savienojums nebūs privāts."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Tīkla nosaukums ir pārāk garš."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Norādiet domēnu."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Nepieciešams sertifikāts."</string>
@@ -1696,7 +1697,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Nevar izveidot piesaisti vairāk nekā <xliff:g id="MAXCONNECTION">%1$d</xliff:g> ierīcēm."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Ierīce <xliff:g id="DEVICE_NAME">%1$s</xliff:g> tiks atsaistīta."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet piesaiste"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Koplietojiet tālruņa interneta savienojumu, izmantojot USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Koplietojiet tālruņa interneta savienojumu, izmantojot tīklu Ethernet."</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Izmantojiet tīklāju un piesaisti, lai varētu lietot internetu citās ierīcēs, izveidojot mobilo datu savienojumu. Lietotnes var arī izveidot tīklāju satura kopīgošanai ar tuvumā esošajām ierīcēm."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Izmantojot tīklāju un piesaisti, jūsu ierīces Wi-Fi vai mobilo datu savienojums var nodrošināt interneta savienojumu citām ierīcēm. Lietotnes var arī izveidot tīklāju satura kopīgošanai ar tuvumā esošajām ierīcēm."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Palīdzība"</string>
@@ -1880,6 +1881,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Administrators var palīdzēt atiestatīt PIN, kombināciju vai paroli."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Jūsu planšetdators un personīgie dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem planšetdatora bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Jūsu tālrunis un personīgie dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem tālruņa bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Dzēšot lejupielādētās SIM kartes, radās problēma"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Lūdzu, atkārtoti palaidiet ierīci un mēģiniet vēlreiz. Ja turpināsiet rūpnīcas datu atiestatīšanu, lejupielādētās SIM kartes var palikt ierīcē."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Atkārtoti palaist"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Vai turpināt datu atiestatīšanu?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Lejupielādētās SIM kartes paliks ierīcē."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Atiestatīt rūpnīcas datus"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Jūsu ierīce un personas dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem ierīces bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Papildu iestatījumi"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Iespējot papildu iestatījumu opcijas"</string>
@@ -2695,6 +2702,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Atiestatīt"</string>
     <string name="tts_play" msgid="2945513377250757221">"Atskaņot"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptīvā savienojamība"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Tiek paildzināts akumulatora darbības ilgums un uzlabota ierīces veiktspēja, automātiski pārvaldot jūsu tīkla savienojumus."</string>
     <string name="credentials_title" msgid="7535942196886123656">"Akreditācijas datu krātuve"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Sertifikāta instalēšana"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instalēt sertifikātus no atmiņas"</string>
@@ -4720,7 +4729,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Iespējot visām lietotnēm"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Grafikas draivera atlase"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Noklusējums"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Spēles draiveris"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"Spēles draiveris"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Grafikas draiveris izstrādātājiem"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Sistēmas grafikas draiveris"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4789,6 +4798,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Neizdevās atrast tīklus. Mēģiniet vēlreiz."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(aizliegts)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Nav SIM kartes"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM karte"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Nav SIM kartes"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nav"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Lai izveidotu savienojumu, nepieciešama SIM karte"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Lai izveidotu savienojumu, nepieciešama <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> SIM karte"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Ieteicamais tīkla režīms: WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Ieteicamais tīkla režīms: tikai GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Ieteicamais tīkla režīms: tikai WCDMA"</string>
@@ -5028,10 +5042,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Atļaut ekrānu pārklāšanu iestatījumos"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Atļaut lietotnēm, ko var rādīt pāri citām lietotnēm, pārklāt iestatījumu ekrānus"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multivide"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Paslēpiet atskaņotāju, multivides sesijai beidzoties"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Atskaņotāja sesiju varat atsākt izvērstajā ātro iestatījumu panelī."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Multivides atskaņotājs ātrajos iestatījumos"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Rādīt multivides atskaņotāju ilgāku laika periodu, lai varētu ērti atsākt atskaņošanu"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Paslēpt atskaņotāju"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Rādīt atskaņotāju"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nav pieejams neviens atskaņotājs"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multivide"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Tiks ieslēgts Bluetooth savienojums."</string>
 </resources>
