@@ -131,6 +131,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 // "Clear All Notifications" button
 
                 Intent deleteIntent = new Intent(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY);
+                deleteIntent.setPackage("com.android.bluetooth");
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
                         BluetoothDevice.CONNECTION_ACCESS_NO);
