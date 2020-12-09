@@ -299,9 +299,9 @@ public class MediaOutputPreferenceControllerTest {
 
         mPreference.setKey(TEST_KEY);
         mController.handlePreferenceTreeClick(mPreference);
-        verify(mContext).startActivity(intentCaptor.capture());
+        verify(mContext).sendBroadcast(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getAction())
-                .isEqualTo(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT);
+                .isEqualTo(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
     }
 
     /**
