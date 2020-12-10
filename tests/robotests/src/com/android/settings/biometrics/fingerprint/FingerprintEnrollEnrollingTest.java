@@ -36,6 +36,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -74,6 +75,7 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
+    @Ignore
     public void fingerprintEnrollHelp_shouldShowHelpText() {
         EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
 

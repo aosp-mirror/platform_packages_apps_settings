@@ -45,7 +45,6 @@ import android.util.FeatureFlagUtils;
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.RestrictedLockUtils;
@@ -171,6 +170,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummary_oneInactivePSim_cannotDisablePsim_correctSummaryAndClickHandler() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
