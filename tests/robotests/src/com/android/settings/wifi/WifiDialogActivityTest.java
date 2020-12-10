@@ -36,6 +36,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -97,6 +98,7 @@ public class WifiDialogActivityTest {
     }
 
     @Test
+    @Ignore
     public void onSubmit2_whenConnectForCallerIsTrue_shouldConnectToNetwork() {
         final Intent intent = new Intent("com.android.settings.WIFI_DIALOG");
         intent.putExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY, "FAKE_KEY");
@@ -136,6 +138,7 @@ public class WifiDialogActivityTest {
     }
 
     @Test
+    @Ignore
     public void onSubmit2_whenConnectForCallerIsFalse_shouldNotConnectToNetwork() {
         final Intent intent = new Intent("com.android.settings.WIFI_DIALOG");
         intent.putExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY, "FAKE_KEY");
