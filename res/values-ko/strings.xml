@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"태블릿을 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"기기를 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"배터리가 평소보다 빨리 소진될 수 있습니다."</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"일시적으로 배터리 사용 제한"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"배터리 상태 유지에 도움이 됩니다. 자세히 알아보려면 탭하세요."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"배터리 상태 유지"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"일시적으로 배터리 사용이 제한됩니다. 자세히 알아보려면 탭하세요."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"휴대전화를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"태블릿을 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"기기를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"설치 안함"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"계속 설치"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"인증서가 설치되지 않음"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"<xliff:g id="APP_NAME">%s</xliff:g> 앱에서 이 기기에 인증서를 설치하도록 허용하시겠습니까?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"이 인증서를 통해 아래 앱 및 URL에서 사용자를 식별합니다."</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"허용 안함"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"허용"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"자세히 보기"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"인증서 관리 앱"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"없음"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"이 앱으로 설치한 인증서를 통해 아래 앱 및 URL에서 사용자 인증 정보를 식별합니다."</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"삭제"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"응급 상황 다이얼링 신호"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"긴급 통화 중 동작 설정"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"백업"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"사용(음소거)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"사용 안함"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"네트워크 세부정보"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"휴대전화에 설치된 앱에 기기 이름이 표시됩니다. 기기 이름은 블루투스 기기에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게 표시될 수도 있습니다."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"기기 이름이 휴대전화에 있는 앱에 표시됩니다. 기기 이름은 블루투스 기기 및 Wi-Fi 네트워크에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게도 표시될 수 있습니다."</string>
     <string name="devices_title" msgid="649715719278562515">"기기"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"모든 설정"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"추천"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM을 활성화할 수 없음"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM을 삭제하고 다시 삽입해 보세요. 그래도 문제가 지속되면 기기를 다시 시작하세요."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM을 다시 사용 설정해 보세요. 그래도 문제가 지속되면 기기를 다시 시작하세요."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"네트워크 활성화"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>이(가) 활성화됨"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM 설정을 업데이트하려면 탭하세요."</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM 카드"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"다운로드한 SIM을 삭제하시겠습니까?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"이 SIM을 삭제하면 기기에서 <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> 서비스가 삭제됩니다.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> 서비스는 취소되지 않습니다."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"삭제"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"환경설정"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"공용 네트워크에 연결"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"네트워크 연결, 인터넷, 무선, 데이터, Wifi, Wi-Fi, Wi Fi, 셀룰러, 모바일, 이동통신사, 4G, 3G, 2G, LTE"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"항공 안전 네트워크 보기"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"비행기 모드 사용 중지"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"취침 모드가 켜져 있으므로 사용할 수 없습니다."</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"알림 중요도가 재설정되었습니다."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"앱"</string>

@@ -2487,8 +2487,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Planšetdators tika izmantots vairāk nekā parasti."</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Ierīce tika izmantota vairāk nekā parasti."</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Akumulators var izlādēties ātrāk nekā parasti"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Akumulatora uzlādes īslaicīga ierobežošana"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Tas palīdz uzturēt akumulatoru darba kārtībā. Pieskarieties, lai uzzinātu vairāk."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Akumulatora darbības laika paildzināšana"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Akumulatora uzlādes līmenis ir īslaicīgi ierobežots. Pieskarieties, lai uzzinātu vairāk."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Jūsu tālrunis tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Jūsu planšetdators tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Jūsu ierīce tika izmantota vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
@@ -2761,6 +2761,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Neinstalēt"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Tik un tā instalēt"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifikāts nav instalēts"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Vai atļaut lietotnei <xliff:g id="APP_NAME">%s</xliff:g> instalēt sertifikātus šajā ierīcē?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Izmantojot šos sertifikātus, tālāk norādītās lietotnes un vietrāži URL varēs jūs identificēt."</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Neatļaut"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Atļaut"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Rādīt vairāk"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Sertifikātu pārvaldības lietotne"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Nav"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Izmantojot šīs lietotnes instalētos sertifikātus, tālāk norādītās lietotnes un vietrāži URL varēs jūs identificēt."</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Noņemt"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Ārkārtas zvana signāls"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Iestatīt uzvedību, kad tiek veikts ārkārtas zvans"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Dublēšana"</string>
@@ -4807,7 +4816,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Ieslēgt (izslēgt skaņu)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Izslēgt"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Dati par tīklu"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Jūsu ierīces nosaukums ir redzams tālrunī instalētajām lietotnēm. Ja izveidosiet savienojumu ar Bluetooth ierīcēm vai iestatīsiet Wi-Fi tīklāju, tas būs redzams arī citām personām."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Jūsu ierīces nosaukums ir redzams tālrunī instalētajām lietotnēm. Tas var būt redzams arī citām personām, ja izveidosiet savienojumu ar Bluetooth ierīcēm, Wi-Fi tīklu vai iestatīsiet Wi-Fi tīklāju."</string>
     <string name="devices_title" msgid="649715719278562515">"Ierīces"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Visi iestatījumi"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Ieteikumi"</string>
@@ -4968,6 +4977,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Nevar aktivizēt SIM karti"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Izņemiet un atkal ievietojiet SIM karti. Ja problēma nav novērsta, restartējiet savu ierīci."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Mēģiniet atkal ieslēgt SIM karti. Ja problēma nav novērsta, restartējiet savu ierīci."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Tīkla aktivizācija"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ir aktīvs"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Pieskarieties, lai atjauninātu SIM kartes iestatījumus."</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM karte"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vai dzēst šo lejupielādēto SIM karti?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Izdzēšot šo SIM karti, operatora “<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>” pakalpojumi tiek noņemti no šīs ierīces.\n\nOperatora “<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>” pakalpojumi netiks atcelti."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Dzēst"</string>
@@ -5125,6 +5138,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferences"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Izveidot savienojumu ar publiskiem tīkliem"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"tīkla savienojums, internets, bezvadu, dati, Wi-Fi, mobilais tīkls, mobilie sakari, mobilo sakaru operators, 4G, 3G, 2G, LTE"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Skatīt tīklus, kas droši lidojuma režīmā"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Izslēgt lidojuma režīmu"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Šī preference nav pieejama, jo ir ieslēgts naktsmiera režīms."</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Paziņojumu svarīguma līmeņa atiestatīšana ir pabeigta."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Lietotnes"</string>
