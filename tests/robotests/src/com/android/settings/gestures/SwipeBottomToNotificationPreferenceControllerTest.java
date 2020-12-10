@@ -58,7 +58,7 @@ public class SwipeBottomToNotificationPreferenceControllerTest {
         mController.setChecked(true);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, 0)).isEqualTo(1);
+                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, 1)).isEqualTo(1);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class SwipeBottomToNotificationPreferenceControllerTest {
         mController.setChecked(false);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, 0)).isEqualTo(0);
+                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, 1)).isEqualTo(0);
     }
 
     @Test
