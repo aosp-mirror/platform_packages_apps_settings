@@ -232,7 +232,7 @@ public class WifiSlice implements CustomSliceable {
             CharSequence title) {
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         final PendingIntent pi = PendingIntent.getBroadcast(mContext, requestCode, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         return SliceAction.create(pi, icon, ListBuilder.ICON_IMAGE, title);
     }
 
