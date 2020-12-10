@@ -16,6 +16,8 @@
 
 package com.android.settings.development;
 
+import static android.service.quicksettings.TileService.ACTION_QS_TILE_PREFERENCES;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothA2dp;
@@ -23,12 +25,14 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCodecStatus;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +45,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.development.autofill.AutofillLoggingLevelPreferenceController;
 import com.android.settings.development.autofill.AutofillResetOptionsPreferenceController;
@@ -52,6 +57,7 @@ import com.android.settings.development.bluetooth.BluetoothCodecDialogPreference
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
+import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
@@ -199,9 +205,40 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // Restore UI state based on whether developer options is enabled
         if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
             enableDeveloperOptions();
+            handleQsTileLongPressActionIfAny();
         } else {
             disableDeveloperOptions();
         }
+    }
+
+    /**
+     * Long-pressing a developer options quick settings tile will by default (see
+     * QS_TILE_PREFERENCES in the manifest) take you to the developer options page.
+     * Some tiles may want to go into their own page within the developer options.
+     */
+    private void handleQsTileLongPressActionIfAny() {
+        Intent intent = getActivity().getIntent();
+        if (intent == null || !TextUtils.equals(ACTION_QS_TILE_PREFERENCES, intent.getAction())) {
+            return;
+        }
+
+        Log.d(TAG, "Developer options started from qstile long-press");
+        final ComponentName componentName = (ComponentName) intent.getParcelableExtra(
+                Intent.EXTRA_COMPONENT_NAME);
+        if (componentName == null) {
+            return;
+        }
+
+        if (DevelopmentTiles.WirelessDebugging.class.getName().equals(
+                componentName.getClassName()) && getDevelopmentOptionsController(
+                    WirelessDebuggingPreferenceController.class).isAvailable()) {
+            Log.d(TAG, "Long press from wireless debugging qstile");
+            new SubSettingLauncher(getContext())
+                    .setDestination(WirelessDebuggingFragment.class.getName())
+                    .setSourceMetricsCategory(SettingsEnums.SETTINGS_ADB_WIRELESS)
+                    .launch();
+        }
+        // Add other qstiles here
     }
 
     @Override

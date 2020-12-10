@@ -335,6 +335,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Ověření pomocí obličeje"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Začít"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Pokud je vypnuto odemknutí obličejem v režimu přístupnosti, některé kroky nastavení nemusí s aplikací TalkBack fungovat správně."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Zpět"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Pokračovat v nastavení"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Použít nastavení přístupnosti"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -963,8 +966,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Heslo k Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Heslo k hotspotu: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatické připojení"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Povolit telefonu automatické připojování v dosahu této sítě"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Povolit tabletu automatické připojování v dosahu této sítě"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Povolit připojení k této síti, když bude v dosahu"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Přidat zařízení"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Pomocí QR kódu přidejte zařízení do této sítě"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kód není platný formát"</string>
@@ -976,7 +978,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Použít certifikáty systému"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Neposkytovat"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Neověřovat"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Není určen žádný certifikát. Připojení nebude soukromé."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Název sítě je příliš dlouhý."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Zadejte doménu."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Je vyžadován certifikát."</string>
@@ -1717,7 +1718,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Připojení lze sdílet s nejvýše <xliff:g id="MAXCONNECTION">%1$d</xliff:g> zařízeními."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"U zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude ukončeno sdílené připojení."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering ethernetu"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Sdílet připojení telefonu k internetu přes USB ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Sdílet připojení telefonu k internetu přes ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot a tethering umožňují poskytovat připojení k internetu přes mobilní datové připojení dalším zařízením. Aplikace také mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňují poskytovat připojení k internetu přes připojení Wi-Fi nebo mobilní datové připojení dalším zařízením. Aplikace také mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Nápověda"</string>
@@ -1903,6 +1904,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"Mohou vám pomoci resetovat PIN, gesto či heslo"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tablet a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození tabletu nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefon a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození telefonu nebo ztrátu dat, které jejich používání může způsobit."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"Při mazání stažených SIM karet došlo k problému"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"Restartujte zařízení a zkuste to znovu. Pokud budete pokračovat v resetování do továrního nastavení, stažené SIM karty v zařízení zůstanou."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"Restartovat"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"Pokračovat v resetování?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"Stažené SIM karty zůstanou v zařízení."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"Tovární nastavení"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Zařízení a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození zařízení nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Upřesnit nastavení"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Povolit další možnosti nastavení"</string>
@@ -2733,6 +2740,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Obnovit"</string>
     <string name="tts_play" msgid="2945513377250757221">"Přehrát"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"Síť VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptivní připojení"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prodlužuje životnost baterie a zlepšuje výkon zařízení tím, že automaticky spravuje síťová připojení"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Úložiště pověření"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalace certifikátu"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Nainstalovat certifikáty z úložiště"</string>
@@ -4808,7 +4817,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Zapnout pro všechny aplikace"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Vyberte ovladač grafiky"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Výchozí"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Herní ovladač"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"Herní ovladač"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Ovladač pro vývojáře"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Systémový ovladač grafiky"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4877,6 +4886,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Nebyla nalezena žádná síť. Zkuste to znovu."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(zakázáno)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Chybí SIM karta"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Žádná SIM karta"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Žádné"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"K připojení vyžaduje SIM kartu"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"K připojení vyžaduje SIM kartu <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Preferovaný režim sítě: preferováno WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Preferovaný režim sítě: pouze GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Preferovaný režim sítě: pouze WCDMA"</string>
@@ -5119,10 +5133,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Povolte překryvné vrstvy obrazovek v Nastavení"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Povolte aplikace, které se smí zobrazovat přes jiné aplikace a vytvářet vrstvy obrazovek Nastavení"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Média"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Skrýt přehrávač po ukončení relace média"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Přehrávač umožňuje obnovit relaci z rozbaleného panelu Rychlé nastavení."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Přehrávač médií v rychlém nastavení"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Zobrazit přehrávač médií delší dobu, aby bylo snadné obnovit přehrávání"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrýt přehrávač"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Zobrazit přehrávač"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nejsou k dispozici žádné přehrávače"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Zapne se Bluetooth"</string>
 </resources>

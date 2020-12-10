@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"顔で認証"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"開始"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"ユーザー補助の顔認証が OFF に設定されている場合、一部の設定手順は TalkBack を使用して適切に行えないことがあります。"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"戻る"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"設定を続行"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ユーザー補助の設定を使用"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi‑Fi パスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"アクセス ポイントのパスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動接続"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"このネットワークに近付いたら自動で接続する"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"このネットワークの近くで自動接続することをタブレットに許可する"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"圏内に入ると自動的にこのネットワークに接続するようになります"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"デバイスを追加"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR コードを使用して、このネットワークにデバイスを追加できます"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR コードの形式が無効です"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"システム証明書を使用"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"指定しない"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"検証しない"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"証明書が指定されていません。この接続ではプライバシーが保護されません。"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ネットワーク名が長すぎます。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ドメインを指定する必要があります。"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"証明書が必要です。"</string>
@@ -1675,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"テザリングできるデバイスは<xliff:g id="MAXCONNECTION">%1$d</xliff:g>個までです。"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>のテザリングを解除します。"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"イーサネット テザリング"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"スマートフォンのインターネット接続を USB イーサネット経由で共有"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"スマートフォンのインターネット接続をイーサネット経由で共有"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"アクセス ポイントとテザリングを使用して、モバイルデータ通信により他のデバイスにインターネット接続を提供します。アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有することもできます。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"アクセス ポイントとテザリングを使用して、Wi-Fi やモバイルデータ通信により他のデバイスにインターネット接続を提供します。アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有することもできます。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ヘルプ"</string>
@@ -1857,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN、パターン、またはパスワードのリセットを依頼できます"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"不明なアプリをインストールするとタブレットや個人データが攻撃を受ける可能性が高くなります。この提供元からアプリをインストールすることにより、アプリの使用により生じる可能性があるタブレットへの損害やデータの損失について、ユーザーご自身が単独で責任を負うことに同意するものとします。"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"不明なアプリをインストールするとスマートフォンや個人データが攻撃を受ける可能性が高くなります。この提供元からアプリをインストールすることにより、アプリの使用により生じる可能性があるスマートフォンへの損害やデータの損失について、ユーザーご自身が単独で責任を負うことに同意するものとします。"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ダウンロード型 SIM の消去中に問題が発生しました"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"デバイスを再起動してもう一度お試しください。初期状態へのリセットを続行しても、ダウンロード型 SIM はデバイスに残ります。"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"再起動"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"初期状態へのリセットを続行しますか？"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ダウンロード型 SIM はデバイスに残ります。"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"初期状態にリセット"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"不明なアプリをインストールするとデバイスや個人データが攻撃を受ける可能性が高くなります。この提供元からアプリをインストールすることにより、アプリの使用により生じる可能性があるデバイスへの損害やデータの損失について、ユーザーご自身が責任を負うことに同意するものとします。"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"詳細設定"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"詳細設定オプションを有効にする"</string>
@@ -2657,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"リセット"</string>
     <string name="tts_play" msgid="2945513377250757221">"再生"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"接続の自動調整"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"証明書のインストール"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"ストレージから証明書をインストールする"</string>
@@ -4632,7 +4641,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"すべてのアプリで有効"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"グラフィックス ドライバの選択"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"デフォルト"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"ゲームドライバ"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"ゲームドライバ"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Developer Driver"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"システムのグラフィックス ドライバ"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4701,6 +4710,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"ネットワークが見つかりませんでした。もう一度お試しください。"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"（禁止）"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM カードなし"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM なし"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"なし"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"SIM を接続する必要があります"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"<xliff:g id="WIRELESS_CARRIER">%s</xliff:g> の SIM を接続する必要があります"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"優先ネットワーク モード: WCDMA 優先"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"優先ネットワーク モード: GSM のみ"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"優先ネットワーク モード: WCDMA のみ"</string>
@@ -4937,10 +4951,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"設定での画面オーバーレイを許可する"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"他のアプリの上に重ねて表示して設定画面をオーバーレイすることをアプリに許可します"</string>
     <string name="media_controls_title" msgid="403271085636252597">"メディア"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"メディア セッションの終了にプレーヤーを非表示にする"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"プレーヤーを使用すると、クイック設定の展開パネルからセッションを再開できます。"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"クイック設定のメディア プレーヤー"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"メディア プレーヤーを長時間表示し、再生を簡単に再開できるようにします"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"プレーヤーを表示"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"プレーヤーなし"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth が ON になります"</string>
 </resources>

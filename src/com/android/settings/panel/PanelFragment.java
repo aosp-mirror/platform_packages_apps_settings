@@ -93,10 +93,12 @@ public class PanelFragment extends Fragment {
     private String mPanelClosedKey;
     private LinearLayout mPanelHeader;
     private ImageView mTitleIcon;
+    private LinearLayout mTitleGroup;
     private TextView mHeaderTitle;
     private TextView mHeaderSubtitle;
     private int mMaxHeight;
     private View mFooterDivider;
+    private boolean mPanelCreating;
 
     private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
@@ -127,6 +129,7 @@ public class PanelFragment extends Fragment {
                     if (mPanelSlices != null) {
                         mPanelSlices.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
+                    mPanelCreating = false;
                 }
             };
 
@@ -140,6 +143,7 @@ public class PanelFragment extends Fragment {
         mLayoutView.getViewTreeObserver()
                 .addOnGlobalLayoutListener(mPanelLayoutListener);
         mMaxHeight = getResources().getDimensionPixelSize(R.dimen.output_switcher_slice_max_height);
+        mPanelCreating = true;
         createPanelContent();
         return mLayoutView;
     }
@@ -153,6 +157,7 @@ public class PanelFragment extends Fragment {
      * Call createPanelContent() once animation end.
      */
     void updatePanelWithAnimation() {
+        mPanelCreating = true;
         final View panelContent = mLayoutView.findViewById(R.id.panel_container);
         final AnimatorSet animatorSet = buildAnimatorSet(mLayoutView,
                 0.0f /* startY */, panelContent.getHeight() /* endY */,
@@ -171,6 +176,10 @@ public class PanelFragment extends Fragment {
         animatorSet.start();
     }
 
+    boolean isPanelCreating() {
+        return mPanelCreating;
+    }
+
     private void createPanelContent() {
         final FragmentActivity activity = getActivity();
         if (activity == null) {
@@ -181,6 +190,7 @@ public class PanelFragment extends Fragment {
             activity.finish();
             return;
         }
+
         final ViewGroup.LayoutParams params = mLayoutView.getLayoutParams();
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         mLayoutView.setLayoutParams(params);
@@ -191,6 +201,7 @@ public class PanelFragment extends Fragment {
         mTitleView = mLayoutView.findViewById(R.id.panel_title);
         mPanelHeader = mLayoutView.findViewById(R.id.panel_header);
         mTitleIcon = mLayoutView.findViewById(R.id.title_icon);
+        mTitleGroup = mLayoutView.findViewById(R.id.title_group);
         mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
         mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
         mFooterDivider = mLayoutView.findViewById(R.id.footer_divider);
@@ -228,26 +239,13 @@ public class PanelFragment extends Fragment {
 
         final IconCompat icon = mPanel.getIcon();
         final CharSequence title = mPanel.getTitle();
-        if (icon == null) {
+
+        if (icon != null || mPanel.getViewType() == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
+            enablePanelHeader(icon, title);
+        } else {
             mTitleView.setVisibility(View.VISIBLE);
             mPanelHeader.setVisibility(View.GONE);
             mTitleView.setText(title);
-        } else {
-            mTitleView.setVisibility(View.GONE);
-            mPanelHeader.setVisibility(View.VISIBLE);
-            mPanelHeader.setAccessibilityPaneTitle(title);
-            mTitleIcon.setImageIcon(icon.toIcon(getContext()));
-            mHeaderTitle.setText(title);
-            mHeaderSubtitle.setText(mPanel.getSubTitle());
-            if (mPanel.getHeaderIconIntent() != null) {
-                mTitleIcon.setOnClickListener(getHeaderIconListener());
-                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            } else {
-                final int size = getResources().getDimensionPixelSize(
-                        R.dimen.output_switcher_panel_icon_size);
-                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(size, size));
-            }
         }
 
         if (mPanel.getViewType() == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
@@ -279,6 +277,29 @@ public class PanelFragment extends Fragment {
                 mPanel.getMetricsCategory(),
                 callingPackageName,
                 0 /* value */);
+    }
+
+    private void enablePanelHeader(IconCompat icon, CharSequence title) {
+        mTitleView.setVisibility(View.GONE);
+        mPanelHeader.setVisibility(View.VISIBLE);
+        mPanelHeader.setAccessibilityPaneTitle(title);
+        mHeaderTitle.setText(title);
+        mHeaderSubtitle.setText(mPanel.getSubTitle());
+        if (icon != null) {
+            mTitleGroup.setVisibility(View.VISIBLE);
+            mTitleIcon.setImageIcon(icon.toIcon(getContext()));
+            if (mPanel.getHeaderIconIntent() != null) {
+                mTitleIcon.setOnClickListener(getHeaderIconListener());
+                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            } else {
+                final int size = getResources().getDimensionPixelSize(
+                        R.dimen.output_switcher_panel_icon_size);
+                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(size, size));
+            }
+        } else {
+            mTitleGroup.setVisibility(View.GONE);
+        }
     }
 
     private void loadAllSlices() {
@@ -477,7 +498,13 @@ public class PanelFragment extends Fragment {
         @Override
         public void onHeaderChanged() {
             ThreadUtils.postOnMainThread(() -> {
-                mTitleIcon.setImageIcon(mPanel.getIcon().toIcon(getContext()));
+                final IconCompat icon = mPanel.getIcon();
+                if (icon != null) {
+                    mTitleIcon.setImageIcon(icon.toIcon(getContext()));
+                    mTitleGroup.setVisibility(View.VISIBLE);
+                } else {
+                    mTitleGroup.setVisibility(View.GONE);
+                }
                 mHeaderTitle.setText(mPanel.getTitle());
                 mHeaderSubtitle.setText(mPanel.getSubTitle());
             });

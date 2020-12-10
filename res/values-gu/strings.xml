@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"પ્રમાણિત કરવા તમારા ચહેરાનો ઉપયોગ કરો"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"શરૂ કરો"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"જો ઍક્સેસિબિલિટી ફેસ અનલૉકની સુવિધા બંધ કરવામાં આવે, તો ટૉકબૅક વડે સેટઅપના અમુક પગલાં યોગ્ય રીતે કામ કરી શકશે નહીં."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"પાછા ફરો"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"સેટઅપ ચાલુ રાખો"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ઍક્સેસિબિલિટી સેટઅપનો ઉપયોગ કરો"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"વાઇ-ફાઇનો પાસવર્ડ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"હૉટસ્પૉટનો પાસવર્ડ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"ઑટોમૅટિક રીતે કનેક્ટ કરો"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"આ નેટવર્કની નજીક ફોનને ઑટોમૅટિક રીતે કનેક્ટ થવાની મંજૂરી આપો"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"આ નેટવર્કની નજીક ટૅબ્લેટને ઑટોમૅટિક રીતે કનેક્ટ થવાની મંજૂરી આપો"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"જ્યારે રેન્જમાં હોય, ત્યારે આ નેટવર્કના કનેક્શનની મંજૂરી આપો"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"ડિવાઇસ ઉમેરો"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"આ નેટવર્ક પર ડિવાઇસ ઉમેરવા માટે QR કોડનો ઉપયોગ કરો"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR કોડનું માન્ય ફોર્મેટ નથી"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"સિસ્ટમ પ્રમાણપત્રોનો ઉપયોગ કરો"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"પ્રદાન કરશો નહીં"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"માન્ય કરશો નહીં"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"કોઇ પ્રમાણપત્ર સ્પષ્ટ કરેલ નથી. તમારું કનેક્શન ખાનગી રહેશે નહીં."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"નેટવર્કનું નામ ખૂબ લાંબુ છે."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ડોમેનનો ઉલ્લેખ કરવો આવશ્યક છે."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"પ્રમાણપત્ર જરૂરી છે."</string>
@@ -1675,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> થી વધુ ઉપકરણો સાથે ટિથર કરી શકતાં નથી."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> અનટિથર થશે."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ઇથરનેટ ટિથરિંગ"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"USB ઇથરનેટ મારફતે ફોનનું ઇન્ટરનેટ કનેક્શન શેર કરો"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ઇથરનેટ મારફતે ફોનનું ઇન્ટરનેટ કનેક્શન શેર કરો"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"તમારા મોબાઇલ ડેટા કનેક્શન મારફતે અન્ય ઉપકરણોને ઇન્ટરનેટ પૂરું પાડવા માટે હૉટસ્પૉટ અને ટિથરિંગનો ઉપયોગ કરો. નજીકના ઉપકરણો સાથે કન્ટેન્ટ શેર કરવા માટે ઍપ પણ હૉટસ્પૉટ બનાવી શકે છે."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"તમારા વાઇ-ફાઇ અથવા મોબાઇલ ડેટા કનેક્શન મારફત અન્ય ડિવાઇસને ઇન્ટરનેટ પૂરું પાડવા માટે હૉટસ્પૉટ અને ઇન્ટરનેટ શેર કરવાની સુવિધાનો ઉપયોગ કરો. ઍપ નજીકનાં ડિવાઇસ સાથે કન્ટેન્ટ શેર કરવા માટે પણ હૉટસ્પૉટ બનાવી શકે છે."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"સહાય"</string>
@@ -1857,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"તેઓ તમારા પિન, પૅટર્ન અથવા પાસવર્ડને રીસેટ કરવામાં તમારી સહાય કરી શકે છે"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"તમારું ટૅબ્લેટ અને વ્યક્તિગત ડેટા અજાણી ઍપ્લિકેશનોના હુમલા પ્રતિ વધુ સંવેદનશીલ છે. આ સ્રોત પરથી ઍપ્લિકેશનો ઇન્સ્ટૉલ કરીને તમે સંમત થાઓ છો કે તેમનો ઉપયોગ કરવાના પરિણામે તમારા ટૅબ્લેટને થતી કોઈ પણ ક્ષતિ કે ડેટાના નુકસાન માટે તમે જવાબદાર છો."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"તમારો ફોન અને વ્યક્તિગત ડેટા અજાણી ઍપ્લિકેશનોના હુમલા પ્રતિ વધુ સંવેદનશીલ છે. આ સ્રોત પરથી ઍપ્લિકેશનો ઇન્સ્ટૉલ કરીને તમે સંમત થાઓ છો કે તેમનો ઉપયોગ કરવાના પરિણામે તમારા ફોનને થતી કોઈ પણ ક્ષતિ કે ડેટાના નુકસાન માટે તમે જવાબદાર છો."</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"ડાઉનલોડ કરેલા સિમ કાઢી નાખવામાં સમસ્યા આવી રહી છે"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"કૃપા કરીને ડિવાઇસને રીબૂટ કરો અને ફરી પ્રયાસ કરો. જો તમે ફેક્ટરી રીસેટ ચાલુ રાખશો, તો ડાઉનલોડ કરેલા સિમ કદાચ ડિવાઇસ પર રહી શકે છે."</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"રીબૂટ કરો"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"ફેક્ટરી રીસેટ ચાલુ રાખીએ?"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ડાઉનલોડ કરેલા સિમ ડિવાઇસ પર રહેશે."</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"ફેક્ટરી રીસેટ"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"તમારું ઉપકરણ અને વ્યક્તિગત ડેટા અજાણી ઍપના હુમલા પ્રતિ વધુ સંવેદનશીલ છે. આ સ્રોત પરથી ઍપ ઇન્સ્ટૉલ કરીને, તમે સંમત થાઓ છો કે તેમનો ઉપયોગ કરવાના પરિણામે તમારા ઉપકરણને થતી કોઈ પણ ક્ષતિ કે ડેટાના નુકસાન માટે તમે જવાબદાર છો."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"વિગતવાર સેટિંગ"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"વધુ સેટિંગ્સ વિકલ્પો સક્ષમ કરો"</string>
@@ -2657,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"ફરીથી સેટ કરો"</string>
     <string name="tts_play" msgid="2945513377250757221">"ચલાવો"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"એડૅપ્ટિવ કનેક્ટિવિટી"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"તમારા નેટવર્ક કનેક્શનને ઑટોમૅટિક રીતે મેનેજ કરીને બૅટરીની આવરદા વધારે છે અને ડિવાઇસનું કાર્યપ્રદર્શન બહેતર બનાવે છે"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ઓળખપત્ર સ્ટોરેજ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"પ્રમાણપત્ર ઇન્સ્ટૉલ કરો"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"સંગ્રહમાંથી પ્રમાણપત્રો ઇન્સ્ટોલ કરો"</string>
@@ -4632,7 +4641,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"બધા ઍપ માટે ચાલુ કરો"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"ગ્રાફિક્સ ડ્રાઇવર પસંદ કરો"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"ડિફૉલ્ટ"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"ગેમ ડ્રાઇવર"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"ગેમ માટેના ગ્રાફિક ડ્રાઇવર"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"ડેવલપર ડ્રાઇવર"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"સિસ્ટમ ગ્રાફિક્સ ડ્રાઇવર"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4701,6 +4710,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"નેટવર્ક શોધી શક્યાં નથી. ફરી પ્રયાસ કરો."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(પ્રતિબંધિત)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"કોઈ સિમ કાર્ડ નથી"</string>
+    <string name="sim_card" msgid="6381158752066377709">"સિમ કાર્ડ"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"કોઈ સિમ કાર્ડ નથી"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"કોઈ માહિતી નથી"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"કનેક્ટ કરવા માટે સિમ કાર્ડ જરૂરી છે"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"કનેક્ટ કરવા માટે <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> સિમ કાર્ડ જરૂરી છે"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"પસંદગીનો નેટવર્ક મોડ: WCDMA પસંદ કરેલ છે"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"પસંદગીનો નેટવર્ક મોડ: માત્ર GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"પસંદગીનો નેટવર્ક મોડ: માત્ર WCDMA"</string>
@@ -4937,10 +4951,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"સેટિંગ પર સ્ક્રીન ઓવરલે થવાની મંજૂરી આપો"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"સેટિંગ સ્ક્રીનને ઓવરલે કરવા માટે અન્ય ઍપની ટોચે પ્રદર્શિત થઈ શકે તેવી ઍપને મંજૂરી આપો"</string>
     <string name="media_controls_title" msgid="403271085636252597">"મીડિયા"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"મીડિયાનું સત્ર સમાપ્ત થઈ જાય ત્યારે, પ્લેયર છુપાવો"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"આ પ્લેયર ઝડપી સેટિંગના મોટા કરેલા પૅનલમાંથી કોઈ સત્ર ફરીથી શરૂ કરવાની મંજૂરી આપે છે."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"ઝડપી સેટિંગમાં મીડિયા પ્લેયરના સેટિંગ"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"પ્લેબૅક સરળતાથી ફરી શરૂ કરવા, મીડિયા પ્લેયરને લાંબા સમયગાળા માટે બતાવો"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"પ્લેયર છુપાવો"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"પ્લેયર બતાવો"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"કોઈ પ્લેયર ઉપલબ્ધ નથી"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"મીડિયા"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"બ્લૂટૂથ ચાલુ થશે"</string>
 </resources>

@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"ใช้ใบหน้าในการตรวจสอบสิทธิ์"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"เริ่ม"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"หากการปลดล็อกด้วยใบหน้าในการช่วยเหลือพิเศษปิดอยู่ ขั้นตอนการตั้งค่าบางรายการอาจทำงานกับ TalkBack ไม่ถูกต้อง"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"ย้อนกลับ"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"ตั้งค่าต่อ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ใช้การตั้งค่าการช่วยเหลือพิเศษ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"รหัสผ่าน Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"รหัสผ่านฮอตสปอต: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"เชื่อมต่ออัตโนมัติ"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"อนุญาตให้โทรศัพท์เชื่อมต่อโดยอัตโนมัติเมื่ออยู่ใกล้เครือข่ายนี้"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"อนุญาตให้แท็บเล็ตเชื่อมต่อโดยอัตโนมัติเมื่ออยู่ใกล้เครือข่ายนี้"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"อนุญาตให้เชื่อมต่อกับเครือข่ายนี้เมื่ออยู่ในพื้นที่ให้บริการ"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"เพิ่มอุปกรณ์"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ใช้คิวอาร์โค้ดเพื่อเพิ่มอุปกรณ์ในเครือข่ายนี้"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"คิวอาร์โค้ดมีรูปแบบไม่ถูกต้อง"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"ใช้ใบรับรองของระบบ"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"ไม่ต้องระบุ"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"ไม่ต้องตรวจสอบ"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"ไม่ได้ระบุใบรับรอง การเชื่อมต่อของคุณจะไม่เป็นส่วนตัว"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ชื่อเครือข่ายยาวเกินไป"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ต้องระบุโดเมน"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"ต้องมีใบรับรอง"</string>
@@ -1675,7 +1676,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"ไม่สามารถปล่อยการเชื่อมต่อมากกว่า <xliff:g id="MAXCONNECTION">%1$d</xliff:g> อุปกรณ์"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> จะถูกยกเลิกการปล่อยสัญญาณ"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"เชื่อมต่อผ่านอีเทอร์เน็ต"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"แชร์การเชื่อมต่ออินเทอร์เน็ตของโทรศัพท์ผ่านอีเทอร์เน็ต USB"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"แชร์การเชื่อมต่ออินเทอร์เน็ตของโทรศัพท์ผ่านอีเทอร์เน็ต"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ เพื่อให้อุปกรณ์อื่นๆ ใช้อินเทอร์เน็ตจากการเชื่อมต่อเน็ตมือถือได้ และแอปยังสามารถสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือเพื่อให้อุปกรณ์อื่นๆ ใช้อินเทอร์เน็ตจาก Wi-Fi หรือการเชื่อมต่ออินเทอร์เน็ตมือถือของคุณได้ แอปยังสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ความช่วยเหลือ"</string>
@@ -1857,6 +1858,12 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"ผู้ดูแลระบบอาจช่วยคุณรีเซ็ต PIN รูปแบบ หรือรหัสผ่านได้"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"แท็บเล็ตและข้อมูลส่วนตัวของคุณมีความเสี่ยงมากขึ้นที่จะถูกโจมตีจากแอปที่ไม่รู้จัก การติดตั้งแอปจากแหล่งที่มานี้แสดงว่าคุณยอมรับว่าจะรับผิดชอบต่อความเสียหายใดๆ ที่มีต่อแท็บเล็ตหรือการสูญเสียข้อมูลที่อาจเกิดจากการใช้งานแอปดังกล่าว"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"โทรศัพท์และข้อมูลส่วนตัวของคุณมีความเสี่ยงมากขึ้นที่จะถูกโจมตีจากแอปที่ไม่รู้จัก การติดตั้งแอปจากแหล่งที่มานี้แสดงว่าคุณยอมรับว่าจะรับผิดชอบต่อความเสียหายใดๆ ที่มีต่อโทรศัพท์หรือการสูญเสียข้อมูลที่อาจเกิดจากการใช้งานแอปดังกล่าว"</string>
+    <string name="fdr_esim_failure_title" msgid="4776006228989385163">"พบปัญหาเกี่ยวกับการลบซิมที่ดาวน์โหลด"</string>
+    <string name="fdr_esim_failure_text" msgid="8353414537422446964">"โปรดรีบูตอุปกรณ์และลองอีกครั้ง หากรีเซ็ตเป็นค่าเริ่มต้นต่อไป ซิมที่ดาวน์โหลดอาจจะยังคงอยู่ในอุปกรณ์"</string>
+    <string name="fdr_esim_failure_reboot_btn" msgid="8629204185016602747">"รีบูต"</string>
+    <string name="fdr_continue_title" msgid="5343622664826823937">"รีเซ็ตเป็นค่าเริ่มต้นต่อไปหรือไม่"</string>
+    <string name="fdr_continue_text" msgid="860874694422515489">"ซิมที่ดาวน์โหลดจะคงอยู่ในอุปกรณ์"</string>
+    <string name="fdr_continue_btn" msgid="1875421470422667092">"รีเซ็ตเป็นค่าเริ่มต้น"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"อุปกรณ์และข้อมูลส่วนตัวมีความเสี่ยงที่จะถูกโจมตีจากแอปที่ไม่มีข้อมูลมากขึ้น การติดตั้งแอปจากแหล่งที่มานี้แสดงว่าคุณยอมรับว่าจะรับผิดชอบต่อความเสียหายใดๆ ที่จะเกิดขึ้นกับอุปกรณ์หรือการสูญเสียข้อมูลที่อาจเกิดจากการใช้งานแอปดังกล่าว"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"การตั้งค่าขั้นสูง"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"เปิดใช้งานตัวเลือกการตั้งค่าเพิ่มเติม"</string>
@@ -2657,6 +2664,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"รีเซ็ต"</string>
     <string name="tts_play" msgid="2945513377250757221">"เล่น"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"การเชื่อมต่อแบบปรับอัตโนมัติ"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"เพิ่มอายุการใช้งานแบตเตอรี่และปรับปรุงประสิทธิภาพของอุปกรณ์ด้วยการจัดการการเชื่อมต่อเครือข่ายโดยอัตโนมัติ"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ที่เก็บข้อมูลเข้าสู่ระบบ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"ติดตั้งใบรับรอง"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"ติดตั้งใบรับรองจากพื้นที่เก็บข้อมูล"</string>
@@ -4632,7 +4641,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"เปิดใช้สำหรับแอปทั้งหมด"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"เลือกไดรเวอร์กราฟิก"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"ค่าเริ่มต้น"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"ไดรเวอร์เกม"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"ไดรเวอร์เกม"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"ไดรเวอร์ของนักพัฒนาซอฟต์แวร์"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"ไดรเวอร์กราฟิกของระบบ"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4701,6 +4710,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"ไม่พบเครือข่าย โปรดลองอีกครั้ง"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ห้ามใช้)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"ไม่มีซิมการ์ด"</string>
+    <string name="sim_card" msgid="6381158752066377709">"ซิม"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"ไม่มีซิม"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"ไม่มี"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"ต้องใช้ซิมเพื่อเชื่อมต่อ"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"ต้องใช้ซิม <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> เพื่อเชื่อมต่อ"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"โหมดเครือข่ายที่ต้องการ: ต้องการ WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"โหมดเครือข่ายที่ต้องการ: GSM เท่านั้น"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"โหมดเครือข่ายที่ต้องการ: WCDMA เท่านั้น"</string>
@@ -4937,10 +4951,11 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"อนุญาตการซ้อนทับบนหน้าจอในการตั้งค่า"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"อนุญาตแอปที่แสดงเหนือแอปอื่นๆ ได้เพื่อวางซ้อนหน้าจอการตั้งค่า"</string>
     <string name="media_controls_title" msgid="403271085636252597">"สื่อ"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"ซ่อนโปรแกรมเล่นเมื่อเซสชันสื่อสิ้นสุดลง"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"โปรแกรมเล่นให้คุณดำเนินเซสชันต่อได้จากแผงการตั้งค่าด่วนที่ขยายออกมา"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"โปรแกรมเล่นสื่อในการตั้งค่าด่วน"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"แสดงโปรแกรมเล่นสื่อนานขึ้นเพื่อให้กลับมาเล่นอีกครั้งได้โดยง่าย"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"ซ่อนโปรแกรมเล่น"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"แสดงโปรแกรมเล่น"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"ไม่มีโปรแกรมเล่น"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"สื่อ"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"บลูทูธจะเปิด"</string>
 </resources>

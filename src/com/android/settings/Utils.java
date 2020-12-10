@@ -18,6 +18,10 @@ package com.android.settings;
 
 import static android.content.Intent.EXTRA_USER;
 import static android.content.Intent.EXTRA_USER_ID;
+import static android.media.MediaRoute2Info.TYPE_GROUP;
+import static android.media.MediaRoute2Info.TYPE_REMOTE_SPEAKER;
+import static android.media.MediaRoute2Info.TYPE_REMOTE_TV;
+import static android.media.MediaRoute2Info.TYPE_UNKNOWN;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
@@ -53,6 +57,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.media.MediaRoute2Info;
+import android.media.MediaRouter2Manager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -1136,5 +1142,32 @@ public final class Utils extends com.android.settingslib.Utils {
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return roundedBitmap;
+    }
+
+    /**
+     * Returns {@code true} if needed to disable media output, otherwise returns {@code false}.
+     */
+    public static boolean isMediaOutputDisabled(
+            MediaRouter2Manager router2Manager, String packageName) {
+        boolean isMediaOutputDisabled = false;
+        if (!TextUtils.isEmpty(packageName)) {
+            final List<MediaRoute2Info> infos = router2Manager.getAvailableRoutes(packageName);
+            if (infos.size() == 1) {
+                final MediaRoute2Info info = infos.get(0);
+                final int deviceType = info.getType();
+                switch (deviceType) {
+                    case TYPE_UNKNOWN:
+                    case TYPE_REMOTE_TV:
+                    case TYPE_REMOTE_SPEAKER:
+                    case TYPE_GROUP:
+                        isMediaOutputDisabled = true;
+                        break;
+                    default:
+                        isMediaOutputDisabled = false;
+                        break;
+                }
+            }
+        }
+        return isMediaOutputDisabled;
     }
 }

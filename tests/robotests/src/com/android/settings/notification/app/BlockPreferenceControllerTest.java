@@ -368,6 +368,7 @@ public class BlockPreferenceControllerTest {
     public void testOnSwitchChanged_channel_nonDefault() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("a", "a", IMPORTANCE_HIGH);
+        channel.setOriginalImportance(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
@@ -375,7 +376,7 @@ public class BlockPreferenceControllerTest {
         assertEquals(IMPORTANCE_NONE, channel.getImportance());
 
         mController.onSwitchChanged(null, true);
-        assertEquals(IMPORTANCE_DEFAULT, channel.getImportance());
+        assertEquals(IMPORTANCE_HIGH, channel.getImportance());
 
         verify(mBackend, times(2)).updateChannel(any(), anyInt(), any());
     }
