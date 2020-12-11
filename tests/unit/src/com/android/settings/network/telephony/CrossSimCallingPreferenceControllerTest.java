@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
@@ -23,7 +25,10 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.core.BasePreferenceController;
+
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
@@ -39,5 +44,11 @@ public class CrossSimCallingPreferenceControllerTest {
 
         mController = new CrossSimCallingPreferenceController(mContext, "cross_sim_calling_key");
         mController.init(SUB_ID);
+    }
+
+    @Test
+    public void controller_isUnavailable() {
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 }
