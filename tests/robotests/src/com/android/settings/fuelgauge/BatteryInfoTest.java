@@ -44,7 +44,6 @@ import com.android.settingslib.R;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -248,7 +247,6 @@ public class BatteryInfoTest {
     }
 
     @Test
-    @Ignore
     public void testGetBatteryInfo_chargingWithOverheated_updateChargeLabel() {
         doReturn(TEST_CHARGE_TIME_REMAINING)
                 .when(mBatteryStats)
@@ -261,7 +259,7 @@ public class BatteryInfoTest {
                 false /* shortString */);
 
         assertThat(info.isOverheated).isTrue();
-        assertThat(info.chargeLabel).isEqualTo("50% - Battery limited temporarily");
+        assertThat(info.chargeLabel).isEqualTo("50% - Optimizing for battery health");
     }
 
     // Make our battery stats return a sequence of battery events.
