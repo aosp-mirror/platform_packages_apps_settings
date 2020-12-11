@@ -48,6 +48,8 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.LocalePicker;
+import com.android.internal.inputmethod.Completable;
+import com.android.internal.inputmethod.ResultCallbacks;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.view.IInputMethodManager;
 import com.android.settings.R;
@@ -260,9 +262,12 @@ public abstract class DevelopmentTiles extends TileService {
             return false;
         }
 
-        private boolean isImeTraceEnabled() {
+        @VisibleForTesting
+        boolean isImeTraceEnabled() {
             try {
-                return mInputMethodManager.isImeTraceEnabled();
+                final Completable.Boolean value = Completable.createBoolean();
+                mInputMethodManager.isImeTraceEnabled(ResultCallbacks.of(value));
+                return Completable.getResult(value);
             } catch (RemoteException e) {
                 Log.e(TAG, "Could not get ime trace status, defaulting to false.", e);
             }
