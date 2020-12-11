@@ -22,7 +22,6 @@ import android.content.Context;
 import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
@@ -42,10 +41,6 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     private static final String TAG = "NetworkProviderCallsSmsController";
     private static final String KEY = "calls_and_sms";
-    private static final String PREFERRED_CALL_SMS = "preferred";
-    private static final String PREFERRED_CALL = "calls preferred";
-    private static final String PREFERRED_SMS = "SMS preferred";
-    private static final String UNAVAILABLE = "unavailable";
 
     private UserManager mUserManager;
     private SubscriptionManager mSubscriptionManager;
@@ -91,7 +86,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
                 mSubscriptionManager);
 
         if (subs.isEmpty()) {
-            return null;
+            return setSummaryResId(R.string.calls_sms_no_sim);
         } else {
             final StringBuilder summary = new StringBuilder();
             for (SubscriptionInfo subInfo : subs) {
@@ -131,17 +126,21 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
         boolean isSmsPreferred = subId == getDefaultSmsSubscriptionId();
 
         if (!SubscriptionManager.isValidSubscriptionId(subId)) {
-            status = UNAVAILABLE;
+            status = setSummaryResId(R.string.calls_sms_unavailable);
         } else {
             if (isDataPreferred && isSmsPreferred) {
-                status = PREFERRED_CALL_SMS;
+                status = setSummaryResId(R.string.calls_sms_preferred);
             } else if (isDataPreferred) {
-                status = PREFERRED_CALL;
+                status = setSummaryResId(R.string.calls_sms_calls_preferred);
             } else if (isSmsPreferred) {
-                status = PREFERRED_SMS;
+                status = setSummaryResId(R.string.calls_sms_sms_preferred);
             }
         }
         return status;
+    }
+
+    private String setSummaryResId(int resId) {
+        return mContext.getResources().getString(resId);
     }
 
     @VisibleForTesting
@@ -167,6 +166,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
         if (subs.isEmpty()) {
             mPreference.setEnabled(false);
         } else {
+            mPreference.setEnabled(true);
             mPreference.setFragment(NetworkProviderCallsSmsFragment.class.getCanonicalName());
         }
     }
