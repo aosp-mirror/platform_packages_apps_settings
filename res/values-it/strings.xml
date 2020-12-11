@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet utilizzato più del solito"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Dispositivo usato più del solito"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"La batteria potrebbe esaurirsi prima del solito"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Batteria momentaneamente limitata"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Consente di preservare l\'integrità della batteria. Tocca per scoprire di più."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Preservare l\'integrità della batteria"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batteria momentaneamente limitata. Tocca per scoprire di più."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Hai utilizzato il telefono più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nApp con il maggior consumo di batteria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Hai utilizzato il tablet più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nApp con il maggiore consumo di batteria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Hai utilizzato il dispositivo più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nApp con il maggiore consumo di batteria:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Non installare"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installa comunque"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certificato non installato"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Vuoi consentire all\'app <xliff:g id="APP_NAME">%s</xliff:g> di installare certificati su questo dispositivo?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Questi certificati consentiranno la tua identificazione per le app e gli URL indicati di seguito"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Non consentire"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Consenti"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Mostra altro"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"App di gestione certificati"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Nessuna"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"I certificati installati da questa app consentono la tua identificazione per le app e gli URL indicati di seguito"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Rimuovi"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Segnale chiamata di emergenza"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Imposta il comportamento in caso di chiamata di emergenza"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Backup"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Su (audio disattivato)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Non attivo"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Dettagli rete"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Il nome del tuo dispositivo è visibile alle app installate sul telefono. Potrebbe essere visibile anche ad altre persone se ti connetti a dispositivi Bluetooth o configuri un hotspot Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Il nome del tuo dispositivo è visibile alle app installate sul telefono. Potrebbe essere visibile anche ad altre persone quando ti connetti a dispositivi Bluetooth, a una rete Wi-Fi o configuri un hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivi"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Tutte le impostazioni"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Suggerimenti"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Impossibile attivare la SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Rimuovi la SIM e inseriscila di nuovo. Se il problema persiste, riavvia il dispositivo."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Riprova ad attivare la SIM. Se il problema persiste, riavvia il dispositivo."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Attivazione della rete"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"L\'operatore <xliff:g id="CARRIER_NAME">%1$s</xliff:g> è attivo"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Tocca per aggiornare le impostazioni della SIM"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"Scheda SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Resettare questa SIM scaricata?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Se resetti questa SIM, il servizio di <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> verrà rimosso da questo dispositivo.\n\nIl servizio di <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> non verrà annullato."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Resetta"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferenze"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Connetti a reti pubbliche"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"connessione rete, internet, wireless, dati, wifi, wi-fi, wi fi, cellulare, dispositivo mobile, operatore cellulare, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Visualizza reti utilizzabili in aereo"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Disattiva la modalità aereo"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Non disponibili perché la modalità Riposo è attiva"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Reimpostazione dell\'importanza delle notifiche completata."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"App"</string>

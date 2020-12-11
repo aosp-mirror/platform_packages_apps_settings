@@ -1837,7 +1837,7 @@
     <string name="lock_settings_title" msgid="665707559508132349">"Gailuaren segurtasuna"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"Aldatu desblokeatzeko eredua"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"Aldatu desblokeatzeko PINa"</string>
-    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Marraztu desblokeatzeko eredua"</string>
+    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Marraztu desblokeatzeko eredu bat"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Laguntza lortzeko, sakatu Menua."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Bukatutakoan, jaso hatza"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Konektatu <xliff:g id="NUMBER">%d</xliff:g> puntu gutxienez. Saiatu berriro."</string>
@@ -1858,7 +1858,7 @@
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> fidagarritasun-agenteak desblokeatuta mantentzen duenean izan ezik"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Ezarri desblokeatzeko eredua"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Aldatu desblokeatzeko eredua"</string>
-    <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Desblokeatzeko eredua nola marraztu"</string>
+    <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Desblokeatzeko eredu bat nola marraztu"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="7891484005551794824">"Saiakera oker gehiegi egin dituzu. Saiatu berriro <xliff:g id="NUMBER">%d</xliff:g> segundo barru."</string>
     <string name="activity_not_found" msgid="5464331414465894254">"Ez duzu aplikazioa telefonoan instalatu."</string>
     <string name="lock_settings_profile_title" msgid="103605580492566086">"Laneko profilaren segurtasuna"</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tableta ohi baino gehiago erabili da"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Gailua ohi baino gehiago erabili da"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baliteke bateria ohi baino lehenago agortzea"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Bateria mugatuta egongo da aldi batez"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Horrela, bateria egoera onean mantentzen da. Informazio gehiago lortzeko, sakatu hau."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Bateriaren egoera ona mantentzen"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria mugatuta egongo da aldi batez. Informazio gehiago lortzeko, sakatu hau."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefonoa ohi baino gehiago erabili da. Baliteke bateria espero baino lehenago agortzea.\n\nBateria gehien erabili duten aplikazioak:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tableta ohi baino gehiago erabili da. Baliteke bateria espero baino lehenago agortzea.\n\nBateria gehien erabili duten aplikazioak:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Gailua ohi baino gehiago erabili da. Baliteke bateria espero baino lehenago agortzea.\n\nBateria gehien erabili duten aplikazioak:"</string>
@@ -2625,7 +2625,7 @@
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Bateria-mailaren ehunekoan oinarrituta"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Bateria kargatzeko ohiko ordua iritsi aurretik bateria agortzeko arriskua badago aktibatzen da bateria-aurrezlea"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Bateria-maila <xliff:g id="PERCENT">%1$s</xliff:g> denean aktibatuko da"</string>
-    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Ezarri programazioa"</string>
+    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Ezarri programazio bat"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Luzatu bateriaren iraupena"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desaktibatu kargatuta dagoenean"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"Telefonoaren bateria <xliff:g id="PERCENT">%1$s</xliff:g> baino gehiago kargatu denean, desaktibatu egiten da bateria-aurrezlea"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ez instalatu"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Instalatu halere"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Ziurtagiria ez dago instalatuta"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Gailu honetan ziurtagiriak instalatzeko baimena eman nahi diozu <xliff:g id="APP_NAME">%s</xliff:g> aplikazioari?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Ziurtagiri hauek beheko aplikazioetan eta URLtan identifikatuko zaituzte"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Ez eman baimenik"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Eman baimena"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Erakutsi gehiago"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Ziurtagiriak kudeatzeko aplikazioa"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Bat ere ez"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Aplikazio honek instalatzen dituen ziurtagiriek beheko aplikazioetan eta URLtan identifikatuko zaituzte"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Kendu"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Larrialdi-deien seinalea"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Ezarri larrialdi-deiak egitean izan beharreko portaera."</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Babeskopiak"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Aktibatuta (audioa desaktibatuta)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Desaktibatuta"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Sarearen xehetasunak"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Mugikorreko aplikazioek gailuaren izena ikus dezakete. Halaber, jendeak ere ikus dezake Bluetooth bidezko gailuetara konektatzean edo wifi-gune bat konfiguratzean."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Mugikorreko aplikazioek gailuaren izena ikus dezakete. Halaber, jendeak ere ikus dezake Bluetooth bidezko gailuetara edo wifi-sare batera konektatzean, edo wifi-gune bat konfiguratzean."</string>
     <string name="devices_title" msgid="649715719278562515">"Gailuak"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Ezarpen guztiak"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Iradokizunak"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Ezin da aktibatu SIM txartela"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Kendu SIM txartela eta sar ezazu berriro. Arazoak badirau, berrabiarazi gailua."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Saiatu berriro SIM txartela aktibatzen. Arazoak badirau, berrabiarazi gailua."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Sarearen aktibazioa"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"Aktibo dago <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Sakatu hau SIM txartelarenaren ezarpenak eguneratzeko"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM txartela"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Deskargatutako SIM txartel honetako eduki guztia ezabatu?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"SIM txartel honetako eduki guztia ezabatuz gero, <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> operadorearen zerbitzua kenduko da gailu honetatik.\n\nEz da utziko bertan behera <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> operadorearen zerbitzua."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Ezabatu eduki guztia"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Hobespenak"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Konektatu sare publikoetara"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"sareko konexioa, internet, hari gabeko konexioak, datuak, wifia, mugikorra, telefono mugikorra, operadorea, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Ikusi hegaldietarako seguruak diren sareak"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Desaktibatu hegaldi modua"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ez dago erabilgarri, lo egiteko garaiaren modua aktibatuta dagoelako"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Berrezarri da jakinarazpenen garrantzia."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikazioak"</string>

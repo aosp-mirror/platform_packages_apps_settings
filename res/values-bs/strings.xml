@@ -2487,8 +2487,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Koristili ste tablet više nego obično"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Koristili ste uređaj više nego obično"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija bi vam se mogla isprazniti brže nego obično"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Baterija je privremeno ograničena"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Pomaže prilikom očuvanja stanja baterije. Dodirnite da saznate više."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Očuvanje stanja baterije"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterija je privremeno ograničena. Dodirnite da saznate više."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Vaš telefon je korišten više nego obično. Baterija se može istrošiti brže nego što je predviđeno.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Vaš tablet je korišten više nego obično. Baterija se može istrošiti brže nego što je predviđeno.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Vaš uređaj je korišten više nego obično. Baterija se može istrošiti brže nego što je predviđeno.\n\nAplikacije koje najviše troše bateriju:"</string>
@@ -2761,6 +2761,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Nemoj instalirati"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Ipak instaliraj"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Potvrda nije instalirana"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Dozvoliti aplikaciji <xliff:g id="APP_NAME">%s</xliff:g> da instalira certifikate na ovaj uređaj?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Ovi certifikati će vas identificirati aplikacijama i URL-ovima ispod"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Nemoj dozvoliti"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Dozvoli"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Prikaži više"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Apl. za upravljanje certifik."</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Nema"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Certifikati koje je instalirala ova aplikacija vas identificiraju aplikacijama i URL-ovima navedenim u nastavku"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Ukloni"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Signal za hitne pozive"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Postavi ponašanje prilikom upućivanja poziva za hitne situacije"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Izrada sigurnosnih kopija"</string>
@@ -4807,7 +4816,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Uključeno (isključen zvuk)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Isključeno"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalji o mreži"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Naziv uređaja mogu vidjeti aplikacije na telefonu. Mogu ga vidjeti i druge osobe kada se povežete na Bluetooth uređaje ili postavite WiFi pristupnu tačku."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Aplikacije na vašem telefonu će moći vidjeti naziv vašeg uređaja. Također će ga moći vidjeti druge osobe prilikom povezivanja s Bluetooth uređajima i WiFi mrežom ili prilikom postavljanja WiFi pristupne tačke."</string>
     <string name="devices_title" msgid="649715719278562515">"Uređaji"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Sve postavke"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Prijedlozi"</string>
@@ -4968,6 +4977,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Nije moguće aktivirati SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Izvadite SIM karticu i ponovo je umetnite. Ako se problem ne riješi, ponovo pokrenite uređaj."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Pokušajte ponovo uključiti SIM. Ako se problem ne riješi, ponovo pokrenite uređaj."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Aktiviranje mreže"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"Operater <xliff:g id="CARRIER_NAME">%1$s</xliff:g> je aktivan"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Dodirnite da ažurirate postavke SIM-a"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM kartica"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Potpuno izbrisati ovaj preuzeti SIM?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ako potpuno izbrišete ovaj SIM, s ovog uređaja će se ukloniti usluga operatera <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>.\n\nUsluga za operatera <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> neće se otkazati."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Potpuno izbriši"</string>
@@ -5125,6 +5138,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Postavke"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Povežite se s javnim mrežama"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"mrežna veza, internet, bežični, podaci, wifi, wi-fi, wi fi, celularni, mobilni, mobilni operater, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Pogledajte mreže sigurne za avion"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Isključite način rada u avionu"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupno jer je uključen način rada za spavanje"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Poništavanje važnosti obavještenja je završeno."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
