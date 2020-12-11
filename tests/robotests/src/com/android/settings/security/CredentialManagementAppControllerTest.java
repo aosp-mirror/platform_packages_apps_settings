@@ -26,6 +26,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -55,6 +56,7 @@ public class CredentialManagementAppControllerTest {
     }
 
     @Test
+    @Ignore
     public void updateState_noCredentialManagementApp_shouldDisablePreference() {
         mController.updateState(mPreference);
 

@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"タブレットの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"デバイスの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池が通常より早くなくなる可能性があります"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"電池の使用が一時的に制限されています"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"電池の状態維持に役立ちます。タップして詳細をご確認ください。"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"電池の状態を維持する"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"電池の使用が一時的に制限されています。タップして詳細をご確認ください。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"スマートフォンの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"タブレットの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"デバイスの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"インストールしない"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"インストールする"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"証明書はインストールされませんでした"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"このデバイスに証明書をインストールすることを <xliff:g id="APP_NAME">%s</xliff:g> に許可しますか？"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"これらの証明書により、下記のアプリと URL はあなたを特定します"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"許可しない"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"許可"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"もっと見る"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"証明書管理アプリ"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"なし"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"このアプリがインストールした証明書により、下記のアプリと URL はあなたを特定します"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"削除"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"緊急通報信号"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"緊急通報時の動作を設定します"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"バックアップ"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"ON（ミュート）"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"OFF"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ネットワークの詳細"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"デバイス名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"デバイス名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
     <string name="devices_title" msgid="649715719278562515">"デバイス"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"すべての設定"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"おすすめの設定"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM を有効にできません"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM カードを取り出して、もう一度挿入してください。問題が解決しない場合は、デバイスを再起動してください。"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM をもう一度 ON にしてみてください。問題が解決しない場合は、デバイスを再起動してください。"</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"ネットワークの有効化"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> は有効です"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM の設定を更新するにはタップしてください"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM カード"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"このダウンロード型 SIM を消去しますか？"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"この SIM を消去すると、このデバイスから <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> サービスが削除されます。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> のサービスが解約されることはありません。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"消去"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"設定"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"パブリック ネットワークに接続する"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ネットワーク接続, インターネット, ワイヤレス, データ, wifi, Wi-Fi, ワイファイ, 携帯, モバイル, 携帯通信会社, 4G, 3G, 2G, LTE"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"機内で利用できるネットワークを表示"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"機内モードを OFF にする"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知の重要度をリセットしました。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"アプリ"</string>

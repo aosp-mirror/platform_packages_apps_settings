@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tahvelarvutit on kasutatud tavapärasest rohkem"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Seadet on kasutatud tavapärasest rohkem"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Aku võib tavapärasest kiiremini tühjaks saada"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Akutase on ajutiselt piiratud"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Aitab säilitada aku seisukorda. Lisateabe saamiseks puudutage."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Akutase säästmine"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Akutase on ajutiselt piiratud. Lisateabe saamiseks puudutage."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Teie telefoni on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Teie tahvelarvutit on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Teie seadet on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ära installi"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installi ikkagi"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifikaat on installimata"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Kas lubada rakendusel <xliff:g id="APP_NAME">%s</xliff:g> sellesse seadmesse sertifikaadid installida?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Need sertifikaadid tuvastavad teid allolevate rakenduste ja URL-ide jaoks"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Ära luba"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Luba"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Kuva rohkem"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Sertifikaadihalduse rakendus"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Pole"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Selle rakenduse installitud sertifikaadid tuvastavad teid allolevates rakendustes ja URL-idel"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Eemalda"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Hädaabikõne signaal"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Määra käitumine hädaabikõne korral"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Varundamine"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Sees (vaigistatud)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Väljas"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Võrgu üksikasjad"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Teie seadme nimi on telefonis rakendustele nähtav. Bluetoothi seadmetega ühendamisel või WiFi-pääsupunkti loomisel võivad seda näha ka teised inimesed."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Teie seadme nimi on teie telefonis olevatele rakendustele nähtav. Bluetooth-seadmetega või WiFi-võrguga ühenduse loomisel või WiFi-kuumkoha seadistamisel võivad seda näha ka teised inimesed."</string>
     <string name="devices_title" msgid="649715719278562515">"Seadmed"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Kõik seaded"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Soovitused"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM-kaarti ei saa aktiveerida"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Eemaldage SIM-kaart ja sisestage uuesti. Kui probleem jätkub, taaskäivitage seade."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Lülitage SIM-kaart uuesti sisse. Kui probleem jätkub, taaskäivitage seade."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Võrgu aktiveerimine"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> on aktiivne"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Puudutage SIM-kaardi seadete värskendamiseks"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM-kaart"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Kas soovite allalaaditud SIM-kaardi kustutada?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"SIM-kaardi kustutamisel eemaldatakse seadmest operaatori <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> teenus.\n\nOperaatori <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> teenust ei tühistata."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Kustuta"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Eelistused"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Ühenda avalike võrkudega"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"võrguühendus, internet, juhtmeta, andmeside, wifi, wi-fi, wi fi, mobiilside, mobiilsideoperaator, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Kuva lennukikindlad võrgud"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Lennukirežiimi väljalülitamine"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Pole saadaval, kuna uneaja režiim on sisse lülitatud"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Märguande olulisuse lähtestamine viidi lõpule."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Rakendused"</string>

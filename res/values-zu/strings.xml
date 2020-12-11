@@ -2457,8 +2457,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Ithebulethi isetshenziswa ngaphezulu kunokujwayelekile"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Idivayisi isetshenziswa ngaphezulu kunokujwayelekile"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Ibhethri lingaphela ngaphambi kwesikhathi kunokujwayelekile"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Ibhethri ikhawulelwe okwesikhashana"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Isiza ukugcina impilo yebhethri. Thepha ukuze ufunde kabanzi."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Igcina impilo yebhethri"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Ibhethri ikhawulelwe okwesikhashana. Thepha ukuze ufunde kabanzi."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Ifoni yakho isetshenziswe ngaphezulu kokujwayelekile. Ibhethri lakho lingaphela ngokushesha kunokulindeleke ngakhona.\n\nIzinhlelo zokusebenza eziphezulu ngokusetshenziswa kwebhethri:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Ithebulethi yakho isetshenziswe ngaphezulu kunokujwayelekile. Ibhethri lakho lingaphela ngokushesha kunokulindeleke ngakhona.\n\nIzinhlelo zokusebenza eziphezulu ngokusetshenziswa kwebhethri:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Idivayisi yakho isetshenziswe kakhulu kunokujwayelekile. Ibhethri lakho lingaphela ngokushesha kunokulindeleke ngakhona.\n\nIzinhlelo zokusebenza eziphezulu ngokusetshenziswa kwebhethri:"</string>
@@ -2724,6 +2724,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ungafaki"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Faka noma kunjalo"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Isitifiketi asifakiwe"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Uvumela i-<xliff:g id="APP_NAME">%s</xliff:g> ukuba ifake izitifiketi kule divayisi?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Lezi zitifiketi zizokuveza kuzinhlelo zokusebenza nakuma-URL angezansi"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Ungavumeli"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Vumela"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Bonisa okuningi"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Uhlelo lokusebenza lokuphatha isitifiketi"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Lutho"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Izitifiketi ezifakwe yilolu hlelo lokusebenza ziyakukhomba kuzinhlelo zokusebenza nama-URL angezansi"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Susa"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Isignali yokudayela isimo esiphuthumayo"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Hlela ukuziphatha lapho ikholi oluphuthumayo lwenziwa"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Sekela ngokulondoloza"</string>
@@ -4728,7 +4737,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Kuvuliwe (thulisa)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Valiwe"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Imininingwane yenethiwekhi"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Igama ledivayisi yakho liyabonakala kuzinhlelo zokusebenza efonini yakho. Futhi lingabonwa ngabanye abantu uma uxhuma kumadivayisi e-Bluetooth noma usetha i-Wi-Fi hotspot."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Igama ledivayisi yakho libonakala kwizinhlelo zokusebenza kufoni yakho. Lingase futhi libonwe abanye abantu lapho uxhuma kumadivayisi we-Bluetooth, uxhuma kunethiwekhi ye-Wi-Fi noma usetha i-hotspot ye-Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Amadivayisi"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Zonke izilungiselelo"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Iziphakamiso"</string>
@@ -4888,6 +4897,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Akukwazi ukwenza i-SIM isebenze"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Khipha i-SIM yakho bese uyifake futhi. Inkinga iyaqhubeka, qala kabusha idivayisi yakho."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Zama ukuvula i-SIM futhi. Inkinga iyaqhubeka, qala kabusha idivayisi yakho."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ukwenziwa kusebenze kwenethiwekhi"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"I-<xliff:g id="CARRIER_NAME">%1$s</xliff:g> iyasebenza"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Thepha ukuze ubuyekeze izilungiselelo ze-SIM"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"I-SIM card"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Sula le SIM elandiwe?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ukusula le-SIM kususa isevisi ye-<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> kusukela kule divayisi.\n\nIsevisi ye-<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> ngeke ize ikhanselwe."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Sula"</string>
@@ -5043,6 +5056,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Okuncamelayo"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Xhuma kumanethiwekhi asesidlangalaleni"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"uxhumano lenethiwekhi, i-inthanethi, okungenantambo, idatha, i-wifi, i-wi-fi, i-wi fi, iselula, iselula, inkampani yekholi, i-4g, i-3g, i-2g, i-lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Buka amanethiwekhi wendiza aphephile"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Vala imodi yendiza"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Akutholakali ngoba imodi yesikhathi sokulala ivuliwe"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Ukusetha kabusha ukubaluleka kwesaziso kuqediwe."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Izinhlelo zokusebenza"</string>

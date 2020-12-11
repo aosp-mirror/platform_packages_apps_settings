@@ -237,7 +237,7 @@
     <string name="settings_label" msgid="943294133671632976">"Paramètres"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Paramètres"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Raccourci vers les paramètres"</string>
-    <string name="airplane_mode" msgid="3196085857882526817">"Mode avion"</string>
+    <string name="airplane_mode" msgid="3196085857882526817">"Mode Avion"</string>
     <string name="wireless_networks_settings_title" msgid="8557542379234105369">"Sans fil et réseaux"</string>
     <string name="radio_controls_summary" msgid="9028430178697624501">"Gérer le Wi-Fi, le Bluetooth, le mode Avion, les réseaux mobiles et les RPV"</string>
     <string name="cellular_data_summary" msgid="6551434804367912367">"Auto. utilisation données sur réseau cell."</string>
@@ -2487,8 +2487,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"La tablette a été sollicitée plus que d\'habitude"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"L\'appareil a été sollicité plus que d\'habitude"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"La pile pourrait s\'épuiser plus tôt que d\'habitude"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Pile limitée temporairement"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Contribue à préserver la santé de la pile. Touchez ici pour en savoir plus."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Préservation de la pile"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Pile limitée temporairement. Touchez ici pour en savoir plus."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Votre téléphone a été sollicité plus que d\'habitude. Sa pile pourrait s\'épuiser plus rapidement que prévu.\n\nVoici les applications qui ont utilisé le plus d\'énergie :"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Votre tablette a été sollicitée plus que d\'habitude. Sa pile pourrait s\'épuiser plus rapidement que prévu.\n\nVoici les applications qui ont utilisé le plus d\'énergie :"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Votre appareil a été sollicité plus que d\'habitude. Sa pile pourrait s\'épuiser plus rapidement que prévu.\n\nVoici les applications qui ont utilisé le plus d\'énergie :"</string>
@@ -2761,6 +2761,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ne pas installer"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installer quand même"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certificat non installé"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Autoriser <xliff:g id="APP_NAME">%s</xliff:g> à installer des certificats sur cet appareil?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Ces certificats font en sorte que les applications et les URL ci-dessous vous reconnaissent"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Ne pas autoriser"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Autoriser"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Afficher plus d\'options"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Appli de gest. de certificats"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Aucune"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Les certificats installés par cette application permettent aux applications et aux URL ci-dessous de vous reconnaître"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Retirer"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Signal de composition d\'urgence"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Définir le comportement en cas d\'appel d\'urgence"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Sauvegarde"</string>
@@ -4807,7 +4816,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Activé (muet)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Désactivé"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Infos sur le réseau"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Le nom de votre appareil est visible pour les applications de votre téléphone. Il est aussi possible que d\'autres personnes le voient lorsque vous vous connectez à des appareils Bluetooth ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Le nom de votre appareil est visible pour les applications de votre téléphone. Il est aussi possible que d\'autres personnes le voient lorsque vous vous connectez à des appareils Bluetooth ou à un réseau Wi-Fi, ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Appareils"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Tous les paramètres"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Suggestions"</string>
@@ -4968,6 +4977,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Impossible d\'activer la carte SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Retirez la carte SIM, puis réinsérez-la. Si le problème persiste, redémarrez votre appareil."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Réessayer d\'activer la carte SIM. Si le problème persiste, redémarrez votre appareil."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Activation du réseau"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> est actif"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Touchez l\'écran pour mettre à jour les paramètres de la carte SIM"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"Carte SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Effacer ce module SIM téléchargé?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Si vous effacez ce module SIM, le service de <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> sera retiré de cet appareil.\n\nLe service de <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> ne sera pas annulé."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Effacer"</string>
@@ -5125,6 +5138,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Préférences"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Se connecter aux réseaux publics"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"connexion réseau, internet, sans fil, données, wifi, wi-fi, wi fi, cellulaire, mobile, fournisseur cellulaire, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Voir réseaux sécuritaires pour les avions"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Désactiver le mode Avion"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Cette fonctionnalité n\'est pas accessible parce que le mode Nuit est activé"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"L\'importance de la notification a bien été réinitialisée."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Applications"</string>

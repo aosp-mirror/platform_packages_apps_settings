@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Таблетот се користи повеќе од вообичаено"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Уредот се користи повеќе од вообичаено"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Батеријата може да се потроши порано од вообичаено"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Батеријата е привремено ограничена"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Помага да се зачува состојбата на батеријата. Допрете за да дознаете повеќе."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Се задржува состојбата на батеријата"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Батеријата е привремено ограничена. Допрете за да дознаете повеќе."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Телефонот сте го користеле повеќе од вообичаено. Батеријата може да се потроши порано од очекуваното.\n\nАпликации што најмногу ја користеле батеријата:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Таблетот сте го користеле повеќе од вообичаено. Батеријата може да се потроши порано од очекуваното.\n\nАпликации што најмногу ја користеле батеријата:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Уредот сте го користеле повеќе од вообичаено. Батеријата може да се потроши порано од очекуваното.\n\nАпликации што најмногу ја користеле батеријата:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Не инсталирај"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Сепак инсталирај"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Сертификатот не е инсталиран"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Да се дозволи <xliff:g id="APP_NAME">%s</xliff:g> да инсталира сертификати на уредов?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Овие сертификати ќе ве идентификуваат на апликациите и URL-адресите подолу"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Не дозволувај"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Дозволи"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Прикажи повеќе"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Управување со сертификати"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Нема"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Сертификатите инсталирани од апликацијава ве идентификуваат на апликациите и URL-адресите подолу"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Отстрани"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Сигнал за итно бирање"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Постави однесување кога се прави итен повик"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Бекап"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Вклучено (исклучен звук)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Исклучено"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Детали за мрежата"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Името на уредот е видливо за апликациите на телефонот. Може да го видат и други луѓе кога ќе се поврзете со уреди со Bluetooth или кога ќе поставите Wi-Fi точка на пристап."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Името на уредот е видливо за апликациите на телефонот. Може да го видат и други луѓе кога ќе се поврзете со уреди со Bluetooth, ќе се поврзете на Wi-Fi мрежа или кога ќе поставите Wi-Fi точка на пристап."</string>
     <string name="devices_title" msgid="649715719278562515">"Уреди"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Сите поставки"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Предлози"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Не може да се активира SIM-картичката"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Извадете и повторно вметнете ја SIM-картичката. Ако и понатаму се соочувате со проблемот, рестартирајте го уредот."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Обидете се повторно да ја вклучите SIM-картичката. Ако и понатаму се соочувате со проблемот, рестартирајте го уредот."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Активирање на мрежата"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> е активен"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Допрете за да ги ажурирате поставките на SIM"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM-картичка"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Да се избрише преземената SIM-картичка?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ако ја избришете SIM-картичкава, услугата на <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> ќе се отстрани од уредов.\n\nУслугата за <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> нема да се откаже."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Избриши"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Поставки"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Поврзувајте се на јавни мрежи"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"мрежна врска, интернет, безжичен, мобилен, Wi-Fi, мобилна, мобилен оператор, 4G, 3G, 2G, LTE"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Прикажи мрежи безбедни за во авион"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Исклучете го авионскиот режим"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Недостапно бидејќи е вклучен „Режимот за спиење“"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Ресетирањето на важноста на известувањата е завршено."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Апликации"</string>
