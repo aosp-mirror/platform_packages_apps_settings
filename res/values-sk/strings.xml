@@ -1479,8 +1479,8 @@
     <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Ak odpojíte SD kartu, niektoré používané aplikácie môžu byť zastavené a nebudú k dispozícii, kým SD kartu znova nepripojíte."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"Úložisko USB sa nepodarilo odpojiť. Skúste to znova neskôr."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD kartu sa nepodarilo odpojiť. Skúste to znova neskôr."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"Úložisko USB sa nepodarilo odpojiť. Skúste to neskôr."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD kartu sa nepodarilo odpojiť. Skúste to neskôr."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"Ukladací priestor USB bude odpojený."</string>
     <string name="unmount_inform_text" product="default" msgid="716578785262713312">"SD karta bude odpojená."</string>
     <string name="sd_ejecting_title" msgid="1641122369013595273">"Odpájanie"</string>
@@ -2518,8 +2518,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet bol používaný viac ako obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Zariadenie bolo používané viac ako obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batéria sa môže vybiť skôr ako obvykle"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Batéria je dočasne obmedzená"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Pomáha udržiavať dobrý stav batérie. Viac sa dozviete po klepnutí."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Uchovanie životnosti batérie"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batéria je dočasne obmedzená. Viac sa dozviete po klepnutí."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefón sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Zariadenie sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
@@ -2799,6 +2799,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Neinštalovať"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Inštalovať aj tak"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certifikát nie je nainštalovaný"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Chcete aplikácii <xliff:g id="APP_NAME">%s</xliff:g> povoliť inštalovať certifikáty v tomto zariadení?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Tieto certifikáty vás identifikujú aplikáciám a webovým adresám uvedeným nižšie"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Nepovoliť"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Povoliť"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Zobraziť viac"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Aplik. na správu certifikátov"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Žiadne"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Certifikáty nainštalované touto aplikáciou vás identifikujú pre aplikácie a webové adresy uvedené nižšie"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Odstrániť"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Signál núdzového vytáčania"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Nastaviť správanie pri tiesňovom volaní"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Zálohovanie"</string>
@@ -3063,7 +3072,7 @@
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Vyberte profil VPN, ku ktorému chcete mať vždy pripojenie. Sieťová premávka bude povolená len v prípade pripojenia k tejto sieti VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Žiadna"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Vždy zapnutá sieť VPN vyžaduje adresu IP pre server aj DNS."</string>
-    <string name="vpn_no_network" msgid="7187593680049843763">"Nie je k dispozícii žiadne sieťové pripojenie. Skúste to znova neskôr."</string>
+    <string name="vpn_no_network" msgid="7187593680049843763">"Nie je k dispozícii žiadne sieťové pripojenie. Skúste to neskôr."</string>
     <string name="vpn_disconnected" msgid="7694522069957717501">"Odpojiť od siete VPN"</string>
     <string name="vpn_disconnected_summary" msgid="721699709491697712">"Žiadne"</string>
     <string name="vpn_missing_cert" msgid="5397309964971068272">"Chýba certifikát. Skúste upraviť profil."</string>
@@ -4887,7 +4896,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Zapnuté (stlmené)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Vypnuté"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Podrobnosti siete"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Názov zariadenia je viditeľný pre aplikácie v telefóne. Môže sa zobrazovať aj ostatným používateľom po pripojení k zariadeniu Bluetooth alebo nastavení hotspotu Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Názov zariadenia uvidia aplikácie v telefóne. Keď sa pripojíte k zariadeniam s rozhraním Bluetooth alebo sieti Wi‑Fi, prípadne ak nastavíte hotspot Wi‑Fi, môžu ho uvidieť aj ostatní ľudia."</string>
     <string name="devices_title" msgid="649715719278562515">"Zariadenia"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Všetky nastavenia"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Návrhy"</string>
@@ -4950,7 +4959,7 @@
     <string name="load_networks_progress" msgid="4717874401621250401">"Hľadá sa…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Prebieha registrácia v sieti <xliff:g id="NETWORK">%s</xliff:g>…"</string>
     <string name="not_allowed" msgid="5756935665192962915">"Vaša SIM karta nepovoľuje pripojenie k tejto sieti."</string>
-    <string name="connect_later" msgid="2330538069949281352">"V tejto chvíli sa nedá pripojiť k sieti. Skúste to znova neskôr."</string>
+    <string name="connect_later" msgid="2330538069949281352">"V tejto chvíli sa nedá pripojiť k sieti. Skúste to neskôr."</string>
     <string name="registration_done" msgid="1750434215698850123">"Prihlásenie k sieti prebehlo úspešne."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Vybrať sieť automaticky"</string>
     <string name="carrier_settings_title" msgid="6959295328730560529">"Nastavenia operátora"</string>
@@ -5049,6 +5058,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM kartu sa nepodarilo aktivovať"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Vyberte SIM kartu a znova ju vložte. Ak bude problém pretrvávať, reštartujte zariadenie."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Skúste SIM kartu znova zapnúť. Ak bude problém pretrvávať, reštartujte zariadenie."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Aktivácia siete"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"Operátor <xliff:g id="CARRIER_NAME">%1$s</xliff:g> je aktívny"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Klepnutím aktualizujete nastavenia SIM karty"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM karta"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Chcete vymazať túto stiahnutú SIM kartu?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Vymazaním tejto SIM karty odstránite službu operátora <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> z tohto zariadenia.\n\nSlužba operátora <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> sa nezruší."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Vymazať"</string>
@@ -5208,6 +5221,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Predvoľby"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Pripájať k verejným sieťam"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"pripojenie k sieti, internet, bezdrôtové, dátové, wifi, wi-fi, wi fi, mobilné, mobilný operátor, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Zobraziť siete bezpečné v lietadle"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Vypnúť režim v lietadle"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupné, pretože je zapnutý režim večierky"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Resetovanie dôležitosti upozornenia je dokončené."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikácie"</string>

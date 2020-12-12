@@ -1837,7 +1837,7 @@
     <string name="lock_settings_title" msgid="665707559508132349">"Enhedssikkerhed"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"Skift oplåsningsmønster"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"Skift pinkode til oplåsning"</string>
-    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Tegn et oplåsningsmønster"</string>
+    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Tegn et mønster til at låse op"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Tryk på Menu for at få hjælp."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Slip, når du er færdig"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Forbind mindst <xliff:g id="NUMBER">%d</xliff:g> punkter. Prøv igen."</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Din tablet er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Enheden er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batteriet aflades muligvis hurtigere end normalt"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Batteriet er midlertidigt begrænset"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Hjælper med at holde batteriet sundt. Tryk for at få flere oplysninger."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Sådan får du mest muligt ud af dit batteri"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batteriet er midlertidigt begrænset. Tryk for at få flere oplysninger."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Din telefon er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Din tablet er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Din enhed er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Installer ikke"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installer alligevel"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certifikatet er ikke installeret"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Vil du give <xliff:g id="APP_NAME">%s</xliff:g> tilladelse til at installere certifikater på denne enhed?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Disse certifikater lader nedenstående apps og webadresser identificere dig"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Tillad ikke"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Tillad"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Se mere"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"App til certifikatadministration"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Ingen"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Certifikater, som installeres af denne app, lader nedenstående apps og webadresser identificere dig"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Fjern"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Ringesignal i nødsituationer"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Angiv adfærd ved nødopkald"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Backup"</string>
@@ -3402,7 +3411,7 @@
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Undlad at bruge blinkende lys"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Undlad at vise notifikationer på skærmen"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Skjul statusbjælkeikoner øverst på skærmen"</string>
-    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Skjul notifikationscirkler på appikoner"</string>
+    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Skjul notifikationsprikker på appikoner"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Væk ikke ved notifikationer"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Skjul i panelet, der trækkes ned"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Aldrig"</string>
@@ -3496,7 +3505,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Tillad udsættelse af notifikationer"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Skjul ikoner fra diskrete notifikationer"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Ikoner fra diskrete notifikationer vises ikke på statusbjælken"</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"Notifikationscirkel på appikon"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"Notifikationsprik på appikon"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Vis linje med seneste samtaler"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bobler"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Nogle notifikationer og andet indhold kan blive vist som bobler på skærmen. Tryk på en boble for at åbne den. Træk den ned ad skærmen for at lukke den."</string>
@@ -3709,8 +3718,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Vis aldrig disse notifikationer"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Vis notifikationer"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Vis aldrig notifikationer i underretningspanelet eller på eksterne enheder"</string>
-    <string name="notification_badge_title" msgid="6854537463548411313">"Tillad notifikationscirkel"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Vis notifikationscirkel"</string>
+    <string name="notification_badge_title" msgid="6854537463548411313">"Tillad notifikationsprik"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Vis notifikationsprik"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Tilsidesæt Forstyr ikke"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Bliv ved med at få disse notifikationer, når Forstyr ikke er aktiveret"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Låseskærm"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Til (lydløs)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Fra"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Netværksoplysninger"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Navnet på din enhed er synligt for apps på din telefon. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller konfigurerer et Wi-Fi-hotspot."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Din enheds navn er synligt for apps på din telefon. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller et Wi-Fi-netværk, eller når du konfigurerer et Wi-Fi-hotspot."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheder"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Alle indstillinger"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Forslag"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM-kortet kunne ikke aktiveres"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Tag SIM-kortet ud, og sæt det i igen. Genstart enheden, hvis problemet fortsætter."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Prøv at aktivere SIM-kortet igen. Genstart enheden, hvis problemet fortsætter."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Netværksaktivering"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> er aktiv"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Tryk for at opdatere indstillingerne for SIM-kort"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM-kort"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vil du rydde dette downloadede SIM-kort?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Hvis du rydder dette SIM-kort, fjernes tjenesten fra <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> på denne enhed.\n\nTjenesten fra <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> opsiges ikke."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Ryd"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Præferencer"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Opret forbindelse til offentlige netværk"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netværksforbindelse, internet, trådløs, data, wifi, wi-fi, mobilnetværk, mobil, mobilselskab, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Se netværk til brug i fly"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Deaktiver flytilstand"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ikke tilgængelig, da sengetidstilstand er aktiveret"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Vigtigheden af notifikationer blev nulstillet."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>

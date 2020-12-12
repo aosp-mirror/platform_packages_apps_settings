@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板電腦使用率比平常高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"裝置使用率比平常高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池電量可能會比平常更快耗盡"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"暫時限制電池用量"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"有助延長電池壽命。輕觸即可瞭解詳情。"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"維持電池續航力"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"系統已暫時限制電池用量。輕觸即可瞭解詳情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"你的手機使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"你的平板電腦使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"你的裝置使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"不要安裝"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"仍要安裝"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"未安裝憑證"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"要允許「<xliff:g id="APP_NAME">%s</xliff:g>」在這部裝置上安裝憑證嗎？"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"當你存取下方應用程式和網址時，系統就會透過這些憑證辨識你的身分"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"不允許"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"允許"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"顯示更多"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"憑證管理應用程式"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"無"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"當你存取下方的應用程式和網址時，系統就會透過這個應用程式安裝的憑證辨識你的身分"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"移除"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"緊急撥號信號"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"設定撥打緊急電話時的運作方式"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"備份"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"開啟 (靜音)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"關閉"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"網路詳細資料"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"你的裝置名稱會顯示在手機的應用程式上。此外，當你連上藍牙裝置或設定 Wi-Fi 無線基地台時，其他人可能也會看到你的裝置名稱。"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"你在手機上的應用程式會取得手機的裝置名稱。此外，當你連上藍牙裝置、Wi-Fi 網路或者設定 Wi-Fi 無線基地台時，其他人可能也會看到這個裝置名稱。"</string>
     <string name="devices_title" msgid="649715719278562515">"裝置"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"所有設定"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"建議"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"無法啟用 SIM 卡"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"請移除 SIM 卡再重新插入，如果問題持續發生，請重新啟動裝置。"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"請試著再次啟用 SIM 卡，如果問題持續發生，請重新啟動裝置。"</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"啟用網路"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」已啟用"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"輕觸即可更新 SIM 卡設定"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM 卡"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"要清除這張已下載的 SIM 卡嗎？"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"如果清除這張 SIM 卡，「<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>」服務會從這部裝置中移除。\n\n請放心，「<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>」的服務不會因此取消。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清除"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"偏好設定"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"連線至公用網路"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"網路連線, 網際網路, 無線, 行動數據, wifi, wi-fi, wi fi, 行動網路, 行動, 電信業者, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"查看飛航安全網路"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"關閉飛航模式"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寢時間模式開啟時無法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重設完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"應用程式"</string>

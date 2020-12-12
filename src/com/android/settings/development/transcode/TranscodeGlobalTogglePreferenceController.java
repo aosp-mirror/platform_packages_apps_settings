@@ -41,7 +41,7 @@ public class TranscodeGlobalTogglePreferenceController extends TogglePreferenceC
 
     @Override
     public boolean isChecked() {
-        return SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, false);
+        return SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, true);
     }
 
     @Override

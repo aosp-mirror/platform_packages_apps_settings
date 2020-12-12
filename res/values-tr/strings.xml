@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet normalden daha fazla kullanıldı"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Cihaz normalden daha fazla kullanıldı"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pil normalden daha erken bitebilir"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Pil geçici olarak sınırlı"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Pil sağlığını korumaya yardımcı olur. Daha fazla bilgi için dokunun."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Pil sağlığı korunuyor"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Pil geçici olarak sınırlı. Daha fazla bilgi için dokunun."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefonunuz normalden daha fazla kullanıldı. Piliniz beklenenden daha erken bitebilir.\n\nEn çok pil kullanan uygulamalar:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tabletiniz normalden daha fazla kullanıldı. Piliniz beklenenden daha erken bitebilir.\n\nEn çok pil kullanan uygulamalar:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Cihazınız normalden daha fazla kullanıldı. Piliniz beklenenden daha erken bitebilir.\n\nEn çok pil kullanan uygulamalar:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Yükleme"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Yine de yükle"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifika yüklenmedi"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"<xliff:g id="APP_NAME">%s</xliff:g> uygulamasının bu cihazda sertifika yüklemesine izin verilsin mi?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Bu sertifikalar sizi aşağıdaki uygulamalara ve URL\'lere tanıtacaktır"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"İzin verme"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"İzin ver"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Daha fazla göster"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Sertifika yönetim uygulaması"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Yok"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Bu uygulama tarafından yüklenen sertifikalar, sizi aşağıdaki uygulamalara ve URL\'lere tanıtır"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Kaldır"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Acil durum arama sinyali"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Acil çağrı yapıldığında nasıl işlev göreceğini ayarlayın"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Yedekleme"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Açık (sessiz)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Kapalı"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Ağ ayrıntıları"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Telefonunuzdaki uygulamalar cihazınızın adını görür. Bluetooth cihazlarına bağlandığınızda veya bir kablosuz hotspot ayarladığınızda başka kişiler de bu adı görebilir."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Telefonunuzdaki uygulamalar, cihazınızın adını görebilecek. Cihazınızın adı ayrıca Blueetoth cihazlara bağlandığınızda, kablosuz ağa bağlandığınızda veya kablosuz hotspot oluşturduğunuzda diğer kişiler tarafından görülecektir."</string>
     <string name="devices_title" msgid="649715719278562515">"Cihazlar"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Tüm Ayarlar"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Öneriler"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM etkinleştirilemiyor"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM\'i çıkarıp tekrar yerleştirmeyi deneyin. Sorun devam ederse cihazınızı yeniden başlatın."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM\'i tekrar açmayı deneyin. Sorun devam ederse cihazınızı yeniden başlatın."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ağ etkinleştirme"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> etkin durumda"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM ayarlarını güncellemek için dokunun"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM kart"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"İndirilen bu SIM silinsin mi?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Bu SIM silindiğinde, <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> hizmeti bu cihazdan kaldırılır.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> hizmeti iptal edilmez."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Sil"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Tercihler"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Herkese açık ağlara bağlan"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ağ bağlantısı, internet, kablosuz, veri, wifi, wi-fi, wi fi, hücresel, mobil, hücresel operatör, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Uçakta kullanımı güvenli ağları göster"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Uçak Modu\'nu kapat"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Uyku vakti modu açık olduğundan kullanılamıyor"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Bildirimlerin önemini sıfırlama işlemi tamamlandı."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Uygulamalar"</string>

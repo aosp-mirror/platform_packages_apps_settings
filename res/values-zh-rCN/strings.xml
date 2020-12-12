@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板电脑的使用强度比平时高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"设备的使用强度比平时高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"电池电量可能会比平时更快耗尽"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"暂时限用电池"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"有助于使电池保持良好状态。点按即可了解详情。"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"延长电池续航时间"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"暂时限用电池。点按即可了解详情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"您使用的手机的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"您使用平板电脑的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"您使用设备的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"不安装"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"仍然安装"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"未安装证书"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"要允许<xliff:g id="APP_NAME">%s</xliff:g>在此设备上安装证书吗？"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"当您访问以下应用和网址时，系统将通过这些证书识别您的身份"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"不允许"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"允许"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"显示更多"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"证书管理应用"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"无"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"当您访问以下应用和网址时，系统会通过此应用安装的证书识别您的身份"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"移除"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"紧急拨号信号"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"设置进行紧急呼救时的行为"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"备份"</string>
@@ -4727,7 +4736,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"开启（静音）"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"关闭"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"网络详情"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"您的设备名称会显示在手机上的应用中。此外，当您连接到蓝牙设备或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"您的设备名称会显示在手机上的应用中。此外，当您连接到蓝牙设备、连接到 WLAN 网络或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
     <string name="devices_title" msgid="649715719278562515">"设备"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"所有设置"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"建议"</string>
@@ -4887,6 +4896,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"无法激活 SIM 卡"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"请取出 SIM 卡，然后重新插入。如果问题仍然存在，请重启您的设备。"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"请尝试重新启用 SIM 卡。如果问题仍然存在，请重启您的设备。"</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"网络激活"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>已启用"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"点按即可更新 SIM 卡设置"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM 卡"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"要清空这个已下载的 SIM 卡吗？"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"清空此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清空"</string>
@@ -5042,6 +5055,8 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"偏好设置"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"连接到公共网络"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"网络连接, 互联网, 无线, 数据, WiFi, Wi-Fi, Wi Fi, WLAN, 移动网络, 移动, 手机运营商, 4G, 3G, 2G, LTE"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"查看可在飞机上安全使用的网络"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"关闭飞行模式"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寝模式开启时无法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重置完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"应用"</string>
