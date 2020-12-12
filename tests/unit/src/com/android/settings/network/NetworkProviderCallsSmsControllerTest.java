@@ -27,6 +27,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 
+import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.RestrictedPreference;
 
@@ -46,6 +47,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.mockito.Mockito.doReturn;
@@ -60,10 +62,6 @@ public class NetworkProviderCallsSmsControllerTest {
     private static final String KEY_PREFERENCE_CALLS_SMS = "calls_and_sms";
     private static final String DISPLAY_NAME_1 = "Sub 1";
     private static final String DISPLAY_NAME_2 = "Sub 2";
-    private static final String PREFERRED_CALL_SMS = "preferred";
-    private static final String PREFERRED_CALL = "calls preferred";
-    private static final String PREFERRED_SMS = "SMS preferred";
-    private static final String UNAVAILABLE = "unavailable";
 
     @Mock
     private SubscriptionManager mSubscriptionManager;
@@ -150,6 +148,20 @@ public class NetworkProviderCallsSmsControllerTest {
         when(subscriptionInfo.getDisplayName()).thenReturn(displayName);
     }
 
+    private String setSummaryResId(String resName) {
+        return ResourcesUtils.getResourcesString(mContext, resName);
+    }
+
+    @Test
+    @UiThreadTest
+    public void getSummary_noSim_returnNoSim() {
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(new ArrayList<>());
+        displayPreferenceWithLifecycle();
+
+        assertTrue(TextUtils.equals(mController.getSummary(),
+                setSummaryResId("calls_sms_no_sim")));
+    }
+
     @Test
     @UiThreadTest
     public void getSummary_invalidSubId_returnUnavailable() {
@@ -162,7 +174,7 @@ public class NetworkProviderCallsSmsControllerTest {
         final StringBuilder summary = new StringBuilder();
         summary.append(DISPLAY_NAME_1)
                 .append(" (")
-                .append(UNAVAILABLE)
+                .append(setSummaryResId("calls_sms_unavailable"))
                 .append(")");
 
         assertTrue(TextUtils.equals(mController.getSummary(), summary));
@@ -181,7 +193,7 @@ public class NetworkProviderCallsSmsControllerTest {
         final StringBuilder summary = new StringBuilder();
         summary.append(DISPLAY_NAME_1)
                 .append(" (")
-                .append(UNAVAILABLE)
+                .append(setSummaryResId("calls_sms_unavailable"))
                 .append(")")
                 .append(", ")
                 .append(DISPLAY_NAME_2);
@@ -233,12 +245,12 @@ public class NetworkProviderCallsSmsControllerTest {
         final StringBuilder summary = new StringBuilder();
         summary.append(DISPLAY_NAME_1)
                 .append(" (")
-                .append(PREFERRED_CALL)
+                .append(setSummaryResId("calls_sms_calls_preferred"))
                 .append(")")
                 .append(", ")
                 .append(DISPLAY_NAME_2)
                 .append(" (")
-                .append(PREFERRED_SMS)
+                .append(setSummaryResId("calls_sms_sms_preferred"))
                 .append(")");
 
         assertTrue(TextUtils.equals(mController.getSummary(), summary));
@@ -260,12 +272,12 @@ public class NetworkProviderCallsSmsControllerTest {
         final StringBuilder summary = new StringBuilder();
         summary.append(DISPLAY_NAME_1)
                 .append(" (")
-                .append(PREFERRED_SMS)
+                .append(setSummaryResId("calls_sms_sms_preferred"))
                 .append(")")
                 .append(", ")
                 .append(DISPLAY_NAME_2)
                 .append(" (")
-                .append(PREFERRED_CALL)
+                .append(setSummaryResId("calls_sms_calls_preferred"))
                 .append(")");
 
         assertTrue(TextUtils.equals(mController.getSummary(), summary));
@@ -287,7 +299,7 @@ public class NetworkProviderCallsSmsControllerTest {
         final StringBuilder summary = new StringBuilder();
         summary.append(DISPLAY_NAME_1)
                 .append(" (")
-                .append(PREFERRED_CALL_SMS)
+                .append(setSummaryResId("calls_sms_preferred"))
                 .append(")")
                 .append(", ")
                 .append(DISPLAY_NAME_2);
