@@ -185,6 +185,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         return this;
     }
 
+    @VisibleForTesting
     protected int getMode() {
         return MODE_NONE;
     }
@@ -194,12 +195,12 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     }
 
     @VisibleForTesting
-    VolteQueryImsState queryImsState(int subId) {
+    protected VolteQueryImsState queryImsState(int subId) {
         return new VolteQueryImsState(mContext, subId);
     }
 
     @VisibleForTesting
-    boolean isCallStateIdle() {
+    protected boolean isCallStateIdle() {
         return (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE);
     }
 
