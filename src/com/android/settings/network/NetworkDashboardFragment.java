@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -38,6 +39,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -184,6 +186,18 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.network_and_internet) {
+
+                @Override
+                // TODO(b/167474581): Should remove this method when Provider Model finished.
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    if (Utils.isProviderModelEnabled(context)) {
+                        final SearchIndexableResource sir = new SearchIndexableResource(context);
+                        sir.xmlResId = R.xml.network_provider_internet;
+                        return Arrays.asList(sir);
+                    }
+                    return super.getXmlResourcesToIndex(context, enabled);
+                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
