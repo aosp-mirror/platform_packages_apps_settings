@@ -11403,6 +11403,19 @@
     <!-- Toast message shown when autofill_reset_developer_options has been performed. [CHAR_LIMIT=none] -->
     <string name="autofill_reset_developer_options_complete">Autofill developer options have been reset</string>
 
+    <!-- Developer options location category strings -->
+    <!-- Title for privacy category [CHAR LIMIT=30]-->
+    <string name="location_category">Location</string>
+    <!-- [CHAR LIMIT=130] Title for location indicator settings -->
+    <string name="location_indicator_settings_title">Status bar location indicator</string>
+    <!-- [CHAR LIMIT=130] Description for location indicator settings -->
+    <string name="location_indicator_settings_description">Show for all locations, including network and connectivity</string>
+
+    <!-- Location setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->
+    <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>
+    <!-- Location setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
+    <string name="enable_gnss_raw_meas_full_tracking_summary">Track all GNSS constellations and frequencies with no duty cycling</string>
+
     <!-- Name of setting for switching device theme [CHAR LIMIT=60] -->
     <string name="device_theme">Device theme</string>
     <!-- Name of default device theme [CHAR LIMIT=60] -->
@@ -11469,11 +11482,6 @@
     <string name="disabled_feature">Feature not available</string>
     <!-- Part of a message for an empty state screen. A user will see this message if they try to use a certain feature, but the feature was turned off so it won't slow down their phone. [CHAR LIMIT=NONE] -->
     <string name="disabled_feature_reason_slow_down_phone">This feature has been turned off because it slows down your phone</string>
-
-    <!-- UI debug setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->
-    <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>
-    <!-- UI debug setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
-    <string name="enable_gnss_raw_meas_full_tracking_summary">Track all GNSS constellations and frequencies with no duty cycling</string>
 
     <!-- UI debug setting: preference title - show all crash dialogs [CHAR LIMIT=60] -->
     <string name="show_first_crash_dialog">Always show crash dialog</string>
