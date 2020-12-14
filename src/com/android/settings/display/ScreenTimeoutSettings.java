@@ -28,6 +28,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -59,9 +60,17 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     /** If there is no setting in the provider, use this. */
     public static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
 
+    private static final int DEFAULT_ORDER_OF_LOWEST_PREFERENCE = Integer.MAX_VALUE - 1;
+
     private CharSequence[] mInitialEntries;
     private CharSequence[] mInitialValues;
     private FooterPreference mPrivacyPreference;
+
+    @VisibleForTesting
+    RestrictedLockUtils.EnforcedAdmin mAdmin;
+    @VisibleForTesting
+    Preference mDisableOptionsPreference;
+
     @VisibleForTesting
     AdaptiveSleepPermissionPreferenceController mAdaptiveSleepPermissionController;
 
@@ -88,6 +97,15 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
         mPrivacyPreference.setSelectable(false);
         mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
+
+        mDisableOptionsPreference = new FooterPreference(context);
+        mDisableOptionsPreference.setLayoutResource(R.layout.preference_footer);
+        mDisableOptionsPreference.setTitle(R.string.admin_disabled_other_options);
+        mDisableOptionsPreference.setIcon(R.drawable.ic_info_outline_24dp);
+
+        // The 'disabled by admin' preference should always be at the end of the setting page.
+        mDisableOptionsPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE);
+        mPrivacyPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE - 1);
     }
 
     @Override
@@ -120,6 +138,14 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
 
+        if (mAdmin != null) {
+            mDisableOptionsPreference.setOnPreferenceClickListener(p -> {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
+                return true;
+            });
+            screen.addPreference(mDisableOptionsPreference);
+        }
+
         final List<? extends CandidateInfo> candidateList = getCandidates();
         if (candidateList == null) {
             return;
@@ -136,6 +162,14 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
             mAdaptiveSleepPermissionController.addToScreen(screen);
             mAdaptiveSleepController.addToScreen(screen);
             screen.addPreference(mPrivacyPreference);
+        }
+
+        if (mAdmin != null) {
+            mDisableOptionsPreference.setOnPreferenceClickListener(p -> {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
+                return true;
+            });
+            screen.addPreference(mDisableOptionsPreference);
         }
     }
 
@@ -178,9 +212,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         if (dpm == null) {
             return Long.MAX_VALUE;
         }
-        final RestrictedLockUtils.EnforcedAdmin admin =
-                RestrictedLockUtilsInternal.checkIfMaximumTimeToLockIsSet(context);
-        if (admin != null) {
+        mAdmin = RestrictedLockUtilsInternal.checkIfMaximumTimeToLockIsSet(context);
+        if (mAdmin != null) {
             return dpm.getMaximumTimeToLock(null /* admin */, UserHandle.myUserId());
         }
         return Long.MAX_VALUE;
