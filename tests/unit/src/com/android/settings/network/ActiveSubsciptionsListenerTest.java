@@ -17,11 +17,12 @@
 package com.android.settings.network;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.robolectric.Shadows.shadowOf;
+import static org.mockito.Mockito.when;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -32,6 +33,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.telephony.TelephonyIntents;
@@ -40,16 +42,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowBroadcastReceiver;
-import org.robolectric.shadows.ShadowContextImpl;
-import org.robolectric.shadows.ShadowSubscriptionManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @RunWith(AndroidJUnit4.class)
 public class ActiveSubsciptionsListenerTest {
@@ -66,37 +63,35 @@ public class ActiveSubsciptionsListenerTest {
             new Intent(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
 
     private Context mContext;
-    private ShadowContextImpl mShadowContextImpl;
+
+    @Mock
     private SubscriptionManager mSubscriptionManager;
-    private ShadowSubscriptionManager mShadowSubscriptionManager;
     private List<SubscriptionInfo> mActiveSubscriptions;
 
     private ActiveSubsciptionsListenerImpl mListener;
     private BroadcastReceiver mReceiver;
-    private ShadowBroadcastReceiver mShadowReceiver;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application.getBaseContext();
-        mShadowContextImpl = Shadow.extract(mContext);
-
-        mSubscriptionManager = spy(mContext.getSystemService(SubscriptionManager.class));
-        mShadowSubscriptionManager = shadowOf(mSubscriptionManager);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
 
         mActiveSubscriptions = new ArrayList<SubscriptionInfo>();
-        mActiveSubscriptions.add(ShadowSubscriptionManager.SubscriptionInfoBuilder
-                .newBuilder().setId(SUB_ID1).buildSubscriptionInfo());
-        mActiveSubscriptions.add(ShadowSubscriptionManager.SubscriptionInfoBuilder
-                .newBuilder().setId(SUB_ID2).buildSubscriptionInfo());
-        mShadowSubscriptionManager.setActiveSubscriptionInfoList(mActiveSubscriptions);
+        addMockSubscription(SUB_ID1);
+        addMockSubscription(SUB_ID2);
+        doReturn(mActiveSubscriptions).when(mSubscriptionManager).getActiveSubscriptionInfoList();
 
         mListener = spy(new ActiveSubsciptionsListenerImpl(Looper.getMainLooper(), mContext));
         doReturn(mSubscriptionManager).when(mListener).getSubscriptionManager();
         mReceiver = mListener.getSubscriptionChangeReceiver();
-        mShadowReceiver = shadowOf(mReceiver);
-        doReturn(mReceiver).when(mListener).getSubscriptionChangeReceiver();
+    }
+
+    private void addMockSubscription(int subId) {
+        SubscriptionInfo mockSubscriptionInfo = mock(SubscriptionInfo.class);
+        doReturn(subId).when(mockSubscriptionInfo).getSubscriptionId();
+        mActiveSubscriptions.add(mockSubscriptionInfo);
     }
 
     @After
@@ -104,8 +99,8 @@ public class ActiveSubsciptionsListenerTest {
         mListener.close();
     }
 
-    private class ActiveSubsciptionsListenerImpl extends ActiveSubsciptionsListener {
-        private ActiveSubsciptionsListenerImpl(Looper looper, Context context) {
+    public class ActiveSubsciptionsListenerImpl extends ActiveSubsciptionsListener {
+        public ActiveSubsciptionsListenerImpl(Looper looper, Context context) {
             super(looper, context);
         }
 
@@ -115,10 +110,6 @@ public class ActiveSubsciptionsListenerTest {
         public void onChanged() {}
     }
 
-    private void sendIntentToReceiver(Intent intent) {
-        mShadowReceiver.onReceive(mContext, intent, new AtomicBoolean(false));
-    }
-
     @Test
     public void constructor_noListeningWasSetup() {
         verify(mListener, never()).onChanged();
@@ -126,45 +117,45 @@ public class ActiveSubsciptionsListenerTest {
 
     @Test
     public void start_configChangedIntent_onChangedShouldBeCalled() {
-        sendIntentToReceiver(INTENT_RADIO_TECHNOLOGY_CHANGED);
-        sendIntentToReceiver(INTENT_MULTI_SIM_CONFIG_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_RADIO_TECHNOLOGY_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_MULTI_SIM_CONFIG_CHANGED);
         verify(mListener, never()).onChanged();
 
         mListener.start();
 
-        sendIntentToReceiver(INTENT_RADIO_TECHNOLOGY_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_RADIO_TECHNOLOGY_CHANGED);
         verify(mListener, times(1)).onChanged();
 
-        sendIntentToReceiver(INTENT_MULTI_SIM_CONFIG_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_MULTI_SIM_CONFIG_CHANGED);
         verify(mListener, times(2)).onChanged();
 
         mListener.stop();
 
-        sendIntentToReceiver(INTENT_RADIO_TECHNOLOGY_CHANGED);
-        sendIntentToReceiver(INTENT_MULTI_SIM_CONFIG_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_RADIO_TECHNOLOGY_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_MULTI_SIM_CONFIG_CHANGED);
         verify(mListener, times(2)).onChanged();
     }
 
     @Test
     public void start_carrierConfigChangedIntent_onChangedWhenSubIdBeenCached() {
-        sendIntentToReceiver(INTENT_CARRIER_CONFIG_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_CARRIER_CONFIG_CHANGED);
         verify(mListener, never()).onChanged();
 
         mListener.start();
 
         mListener.getActiveSubscriptionsInfo();
 
-        sendIntentToReceiver(INTENT_CARRIER_CONFIG_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_CARRIER_CONFIG_CHANGED);
         verify(mListener, never()).onChanged();
 
         INTENT_CARRIER_CONFIG_CHANGED.putExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX,
                 SUB_ID2);
-        sendIntentToReceiver(INTENT_CARRIER_CONFIG_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_CARRIER_CONFIG_CHANGED);
         verify(mListener, times(1)).onChanged();
 
         mListener.stop();
 
-        sendIntentToReceiver(INTENT_CARRIER_CONFIG_CHANGED);
+        mReceiver.onReceive(mContext, INTENT_CARRIER_CONFIG_CHANGED);
         verify(mListener, times(1)).onChanged();
     }
 
@@ -175,12 +166,12 @@ public class ActiveSubsciptionsListenerTest {
 
         List<SubscriptionInfo> subInfoList = null;
         int numberOfAccess = 0;
+
         for (int numberOfSubInfo = mActiveSubscriptions.size(); numberOfSubInfo >= 0;
                 numberOfSubInfo--) {
             if (mActiveSubscriptions.size() > numberOfSubInfo) {
                 mActiveSubscriptions.remove(numberOfSubInfo);
             }
-            mShadowSubscriptionManager.setActiveSubscriptionInfoList(mActiveSubscriptions);
 
             // fetch twice and test if they generated access to SubscriptionManager only once
             subInfoList = mListener.getActiveSubscriptionsInfo();
@@ -192,7 +183,7 @@ public class ActiveSubsciptionsListenerTest {
             mListener.clearCache();
         }
 
-        mShadowSubscriptionManager.setActiveSubscriptionInfoList(null);
+        mActiveSubscriptions.clear();
 
         // fetch twice and test if they generated access to SubscriptionManager only once
         subInfoList = mListener.getActiveSubscriptionsInfo();

@@ -16,41 +16,43 @@
 
 package com.android.settings.network;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+import android.test.mock.MockContentResolver;
+
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class PreferredNetworkModeContentObserverTest {
 
     private static final int SUB_ID = 1;
 
-    @Mock
-    private ContentResolver mResolver;
-    @Mock
     private Context mContext;
+    private MockContentResolver mResolver;
+    private PreferredNetworkModeContentObserver mPreferredNetworkModeContentObserver;
+
     @Mock
     private PreferredNetworkModeContentObserver.OnPreferredNetworkModeChangedListener mListener;
 
-    private PreferredNetworkModeContentObserver mPreferredNetworkModeContentObserver;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-		when(mContext.getContentResolver()).thenReturn(mResolver);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+
+        mResolver = spy(new MockContentResolver(mContext));
+        when(mContext.getContentResolver()).thenReturn(mResolver);
         mPreferredNetworkModeContentObserver =
                 spy(new PreferredNetworkModeContentObserver(null));
     }
@@ -68,8 +70,8 @@ public class PreferredNetworkModeContentObserverTest {
         mPreferredNetworkModeContentObserver.register(mContext, SUB_ID);
 
         verify(mResolver).registerContentObserver(
-            Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID), false,
-            mPreferredNetworkModeContentObserver);
+                Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID), false,
+                mPreferredNetworkModeContentObserver);
     }
 
     @Test
@@ -78,5 +80,4 @@ public class PreferredNetworkModeContentObserverTest {
 
         verify(mResolver).unregisterContentObserver(mPreferredNetworkModeContentObserver);
     }
-
 }
