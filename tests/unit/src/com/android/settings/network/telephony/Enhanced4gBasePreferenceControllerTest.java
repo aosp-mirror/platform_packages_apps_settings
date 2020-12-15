@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
@@ -30,6 +31,8 @@ import android.telephony.TelephonyManager;
 import android.telephony.ims.ProvisioningManager;
 
 import androidx.preference.SwitchPreference;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.ims.MockVolteQueryImsState;
@@ -40,10 +43,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class Enhanced4gBasePreferenceControllerTest {
     private static final int SUB_ID = 2;
 
@@ -69,10 +70,12 @@ public class Enhanced4gBasePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
-        doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
-        doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
-        doReturn(mCarrierConfigManager).when(mContext).getSystemService(CarrierConfigManager.class);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mContext.getSystemService(CarrierConfigManager.class))
+                .thenReturn(mCarrierConfigManager);
+
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);

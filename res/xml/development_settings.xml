@@ -175,14 +175,6 @@
             android:title="@string/automatic_system_heap_dump_title"
             android:summary="@string/automatic_system_heap_dump_summary" />
 
-        <Preference android:key="mock_location_app"
-                    android:title="@string/mock_location_app" />
-
-        <SwitchPreference
-            android:key="enable_gnss_raw_meas_full_tracking"
-            android:title="@string/enable_gnss_raw_meas_full_tracking"
-            android:summary="@string/enable_gnss_raw_meas_full_tracking_summary" />
-
         <SwitchPreference
             android:key="debug_view_attributes"
             android:title="@string/debug_view_attributes" />
@@ -695,5 +687,26 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.development.storage.BlobInfoListView" />
         </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="location_category"
+        android:title="@string/location_category"
+        android:order="1300">
+
+        <Preference android:key="mock_location_app"
+                    android:title="@string/mock_location_app" />
+
+        <SwitchPreference
+            android:key="enable_gnss_raw_meas_full_tracking"
+            android:title="@string/enable_gnss_raw_meas_full_tracking"
+            android:summary="@string/enable_gnss_raw_meas_full_tracking_summary" />
+
+        <SwitchPreference
+            android:title="@string/location_indicator_settings_title"
+            android:summary="@string/location_indicator_settings_description"
+            android:defaultValue="true"
+            android:key="location_indicator_settings"
+            settings:controller="com.android.settings.location.LocationIndicatorsPreferenceController"/>
     </PreferenceCategory>
 </PreferenceScreen>
