@@ -21,6 +21,8 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.telephony.PhoneNumberUtils;
+import android.text.Spannable;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -69,8 +71,17 @@ public class EmergencyGestureNumberOverridePreferenceController extends BasePref
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getString(R.string.emergency_gesture_call_for_help_summary,
-                mEmergencyNumberUtils.getPoliceNumber());
+        String number = mEmergencyNumberUtils.getPoliceNumber();
+        String summary = mContext.getString(R.string.emergency_gesture_call_for_help_summary,
+                number);
+        int numberStartIndex = summary.indexOf(number);
+        if (numberStartIndex < 0) {
+            return summary;
+        }
+        Spannable summarySpan = Spannable.Factory.getInstance().newSpannable(summary);
+        PhoneNumberUtils.addTtsSpan(summarySpan, numberStartIndex,
+                numberStartIndex + number.length());
+        return summarySpan;
     }
 
     @Override
