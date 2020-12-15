@@ -54,7 +54,6 @@ public class DeleteEuiccSubscriptionDialogActivity extends SubscriptionActionDia
     private DeleteEuiccSubscriptionSidecar mDeleteEuiccSubscriptionSidecar;
     private List<SubscriptionInfo> mSubscriptionsToBeDeleted;
     private SubscriptionInfo mSubscriptionToBeDeleted;
-    private AlertDialog mDeleteSimConfirmDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +64,14 @@ public class DeleteEuiccSubscriptionDialogActivity extends SubscriptionActionDia
         mSubscriptionToBeDeleted = SubscriptionUtil.getSubById(mSubscriptionManager, subId);
         mSubscriptionsToBeDeleted =
                 SubscriptionUtil.findAllSubscriptionsInGroup(mSubscriptionManager, subId);
-        mDeleteEuiccSubscriptionSidecar = DeleteEuiccSubscriptionSidecar.get(getFragmentManager());
 
-        if (mSubscriptionToBeDeleted == null || mDeleteEuiccSubscriptionSidecar == null) {
+        if (mSubscriptionToBeDeleted == null || mSubscriptionsToBeDeleted.isEmpty()) {
             Log.e(TAG, "Cannot find subscription with sub ID: " + subId);
             finish();
             return;
         }
 
+        mDeleteEuiccSubscriptionSidecar = DeleteEuiccSubscriptionSidecar.get(getFragmentManager());
         if (savedInstanceState == null) {
             showDeleteSimConfirmDialog();
         }
