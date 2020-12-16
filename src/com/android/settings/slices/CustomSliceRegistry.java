@@ -37,7 +37,6 @@ import com.android.settings.homepage.contextualcards.slices.DarkThemeSlice;
 import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.location.LocationSlice;
-import com.android.settings.media.MediaOutputGroupSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
 import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.media.RemoteMediaSlice;
@@ -345,7 +344,6 @@ public class CustomSliceRegistry {
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
         sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_GROUP_SLICE_URI, MediaOutputGroupSlice.class);
         sUriToSlice.put(ALWAYS_ON_SLICE_URI, AlwaysOnDisplaySlice.class);
         sUriToSlice.put(AIRPLANE_SAFE_NETWORKS_SLICE_URI, AirplaneSafeNetworksSlice.class);
     }

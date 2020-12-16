@@ -105,7 +105,7 @@ public abstract class EuiccOperationSidecar extends SidecarFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEuiccManager = (EuiccManager) getContext().getSystemService(Context.EUICC_SERVICE);
+        mEuiccManager = getContext().getSystemService(EuiccManager.class);
 
         getContext()
                 .getApplicationContext()
