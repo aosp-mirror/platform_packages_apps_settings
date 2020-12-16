@@ -143,6 +143,11 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
 
     /**
+     * Whether to show location indicators.
+     */
+    public static final String PROPERTY_LOCATION_INDICATORS_ENABLED = "location_indicators_enabled";
+
+    /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
      *
