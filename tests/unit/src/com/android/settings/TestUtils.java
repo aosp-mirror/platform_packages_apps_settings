@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.android.settings;
 
-package com.android.settings.panel;
-
-import android.content.ComponentName;
-import android.content.Intent;
-
-public class FakeSettingsPanelActivity extends SettingsPanelActivity {
-    @Override
-    public ComponentName getCallingActivity() {
-        return new ComponentName("fake-package", "fake-class");
-    }
-
-    @Override
-    public Intent getIntent() {
-        final Intent intent = new Intent(FakePanelContent.FAKE_ACTION);
-        return intent;
-    }
+/**
+ * Convenience methods and constants for testing.
+ */
+public class TestUtils {
+    public static final long KILOBYTE = 1024L; // TODO: Change to 1000 in O Robolectric.
+    public static final long MEGABYTE = KILOBYTE * KILOBYTE;
+    public static final long GIGABYTE = KILOBYTE * MEGABYTE;
 }

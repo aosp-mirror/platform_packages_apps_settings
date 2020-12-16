@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.android.settings.testutils;
 
-package com.android.settings.panel;
+import android.content.Context;
 
-import android.content.ComponentName;
-import android.content.Intent;
+public class FakeInvalidSliderController extends FakeSliderController {
 
-public class FakeSettingsPanelActivity extends SettingsPanelActivity {
-    @Override
-    public ComponentName getCallingActivity() {
-        return new ComponentName("fake-package", "fake-class");
+    public FakeInvalidSliderController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public Intent getIntent() {
-        final Intent intent = new Intent(FakePanelContent.FAKE_ACTION);
-        return intent;
+    public int getMax() {
+        // Return 0 to make it invalid
+        return 0;
     }
 }

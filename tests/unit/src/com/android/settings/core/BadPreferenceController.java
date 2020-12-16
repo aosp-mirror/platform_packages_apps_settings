@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.settings.panel;
+package com.android.settings.core;
 
-import android.content.ComponentName;
-import android.content.Intent;
+import android.content.Context;
 
-public class FakeSettingsPanelActivity extends SettingsPanelActivity {
-    @Override
-    public ComponentName getCallingActivity() {
-        return new ComponentName("fake-package", "fake-class");
+public class BadPreferenceController extends BasePreferenceController {
+
+    public BadPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
+        throw new IllegalArgumentException("error");
     }
 
     @Override
-    public Intent getIntent() {
-        final Intent intent = new Intent(FakePanelContent.FAKE_ACTION);
-        return intent;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
     }
 }

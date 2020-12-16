@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.panel;
+package com.android.settings.testutils;
 
-import android.content.ComponentName;
+import android.app.Activity;
 import android.content.Intent;
+import android.os.UserHandle;
 
-public class FakeSettingsPanelActivity extends SettingsPanelActivity {
+public class CustomActivity extends Activity {
     @Override
-    public ComponentName getCallingActivity() {
-        return new ComponentName("fake-package", "fake-class");
-    }
-
-    @Override
-    public Intent getIntent() {
-        final Intent intent = new Intent(FakePanelContent.FAKE_ACTION);
-        return intent;
-    }
+    public void startActivityAsUser(Intent intent, UserHandle user) {}
 }
