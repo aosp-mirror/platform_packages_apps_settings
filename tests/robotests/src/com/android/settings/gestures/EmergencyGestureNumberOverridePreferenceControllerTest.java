@@ -90,7 +90,7 @@ public class EmergencyGestureNumberOverridePreferenceControllerTest {
 
         mController.updateState(preference);
 
-        assertThat(preference.getSummary()).isEqualTo(
+        assertThat(preference.getSummary().toString()).isEqualTo(
                 mContext.getString(R.string.emergency_gesture_call_for_help_summary, "123"));
     }
 

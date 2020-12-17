@@ -58,16 +58,16 @@
                     style="@style/SudDescription.Glif"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/sudMarginSides"
-                    android:layout_marginEnd="?attr/sudMarginSides" />
+                    android:layout_marginStart="?attr/sudMarginStart"
+                    android:layout_marginEnd="?attr/sudMarginEnd" />
 
                 <Button
                     android:id="@+id/cancelButton"
                     style="@style/SetupWizardButton.Negative"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/sudMarginSides"
-                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:layout_marginStart="?attr/sudMarginStart"
+                    android:layout_marginEnd="?attr/sudMarginEnd"
                     android:text="@string/cancel" />
 
                 <Button
@@ -75,8 +75,8 @@
                     style="@style/SudGlifButton.Secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/sudMarginSides"
-                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:layout_marginStart="?attr/sudMarginStart"
+                    android:layout_marginEnd="?attr/sudMarginEnd"
                     android:layout_gravity="center"
                     android:visibility="gone" />
 
@@ -91,8 +91,8 @@
                     android:id="@+id/errorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/sudMarginSides"
-                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:layout_marginStart="?attr/sudMarginStart"
+                    android:layout_marginEnd="?attr/sudMarginEnd"
                     android:layout_marginBottom="24dp"
                     android:gravity="center_vertical"/>
 
