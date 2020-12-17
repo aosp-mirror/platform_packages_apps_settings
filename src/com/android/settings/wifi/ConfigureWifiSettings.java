@@ -63,18 +63,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
     }
 
     @Override
-    public int getInitialExpandedChildCount() {
-        int tileLimit = 1;
-        if (mWifiWakeupPreferenceController.isAvailable()) {
-            tileLimit++;
-        }
-        if (mUseOpenWifiPreferenceController.isAvailable()) {
-            tileLimit++;
-        }
-        return tileLimit;
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.wifi_configure_settings;
     }
