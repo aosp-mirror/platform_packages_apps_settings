@@ -140,13 +140,13 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 switch (mRequestType) {
                     case BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS:
                         title = context.getString(R.string.bluetooth_phonebook_request);
-                        message = context.getString(R.string.bluetooth_pb_acceptance_dialog_text,
-                                deviceAlias, deviceAlias);
+                        message = context.getString(
+                                R.string.bluetooth_phonebook_access_notification_content);
                         break;
                     case BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS:
                         title = context.getString(R.string.bluetooth_map_request);
-                        message = context.getString(R.string.bluetooth_map_acceptance_dialog_text,
-                                deviceAlias, deviceAlias);
+                        message = context.getString(
+                                R.string.bluetooth_message_access_notification_content);
                         break;
                     case BluetoothDevice.REQUEST_TYPE_SIM_ACCESS:
                         title = context.getString(R.string.bluetooth_sap_request);
@@ -172,6 +172,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         .setContentTitle(title)
                         .setTicker(message)
                         .setContentText(message)
+                        .setStyle(new Notification.BigTextStyle().bigText(message))
                         .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
                         .setAutoCancel(true)
                         .setPriority(Notification.PRIORITY_MAX)
