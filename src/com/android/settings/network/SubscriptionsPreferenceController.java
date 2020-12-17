@@ -170,7 +170,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             // Avoid from showing subscription(SIM)s which has been marked as hidden
             // For example, only one subscription will be shown when there're multiple
             // subscriptions with same group UUID.
-            if (!isSubscriptionCanBeDisplayed(mContext, subId)) {
+            if (!canSubscriptionBeDisplayed(mContext, subId)) {
                 continue;
             }
             activeSubIds.add(subId);
@@ -308,7 +308,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 // For example, only one subscription will be shown when there're multiple
                 // subscriptions with same group UUID.
                 .filter(subInfo ->
-                        isSubscriptionCanBeDisplayed(mContext, subInfo.getSubscriptionId()))
+                        canSubscriptionBeDisplayed(mContext, subInfo.getSubscriptionId()))
                 .count() >= 2;
     }
 
@@ -349,7 +349,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     }
 
     @VisibleForTesting
-    boolean isSubscriptionCanBeDisplayed(Context context, int subId) {
+    boolean canSubscriptionBeDisplayed(Context context, int subId) {
         return (SubscriptionUtil.getAvailableSubscription(context,
                 ProxySubscriptionManager.getInstance(context), subId) != null);
     }
