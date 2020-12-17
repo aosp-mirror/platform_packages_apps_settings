@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.deviceinfo.legal;
@@ -28,27 +28,23 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.ModuleInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
+
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class ModuleLicenseProviderTest {
     public static final String PACKAGE_NAME = "com.android.test_package";
     @Test
@@ -149,7 +145,7 @@ public class ModuleLicenseProviderTest {
         ModuleLicenseProvider provider = spy(new ModuleLicenseProvider());
         Context context = mock(Context.class);
         PackageManager packageManager = mock(PackageManager.class);
-        when(provider.getContext()).thenReturn(context);
+        when(provider.getModuleContext()).thenReturn(context);
         when(context.getPackageManager()).thenReturn(packageManager);
         when(packageManager.getModuleInfo(PACKAGE_NAME, 0))
                 .thenThrow(new PackageManager.NameNotFoundException());
@@ -168,7 +164,7 @@ public class ModuleLicenseProviderTest {
         ModuleLicenseProvider provider = spy(new ModuleLicenseProvider());
         Context context = mock(Context.class);
         PackageManager packageManager = mock(PackageManager.class);
-        when(provider.getContext()).thenReturn(context);
+        when(provider.getModuleContext()).thenReturn(context);
         when(context.getPackageManager()).thenReturn(packageManager);
         when(packageManager.getModuleInfo(PACKAGE_NAME, 0))
                 .thenReturn(new ModuleInfo());
@@ -249,7 +245,7 @@ public class ModuleLicenseProviderTest {
         ModuleLicenseProvider provider = spy(new ModuleLicenseProvider());
         Context context = mock(Context.class);
         PackageManager packageManager = mock(PackageManager.class);
-        when(provider.getContext()).thenReturn(context);
+        when(provider.getModuleContext()).thenReturn(context);
         when(context.getPackageManager()).thenReturn(packageManager);
         when(packageManager.getModuleInfo(PACKAGE_NAME, 0))
                 .thenThrow(new PackageManager.NameNotFoundException());
@@ -268,7 +264,7 @@ public class ModuleLicenseProviderTest {
         ModuleLicenseProvider provider = spy(new ModuleLicenseProvider());
         Context context = mock(Context.class);
         PackageManager packageManager = mock(PackageManager.class);
-        when(provider.getContext()).thenReturn(context);
+        when(provider.getModuleContext()).thenReturn(context);
         when(context.getPackageManager()).thenReturn(packageManager);
         when(packageManager.getModuleInfo(PACKAGE_NAME, 0))
                 .thenReturn(new ModuleInfo());
@@ -284,7 +280,7 @@ public class ModuleLicenseProviderTest {
     @Test
     public void isCachedHtmlFileOutdated_packageNotInSharedPrefs_returnTrue()
             throws PackageManager.NameNotFoundException {
-        Context context = RuntimeEnvironment.application;
+        Context context = ApplicationProvider.getApplicationContext();
         context.getSharedPreferences(ModuleLicenseProvider.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().clear().commit();
 
@@ -294,7 +290,7 @@ public class ModuleLicenseProviderTest {
     @Test
     public void isCachedHtmlFileOutdated_versionCodeDiffersFromSharedPref_returnTrue()
             throws PackageManager.NameNotFoundException {
-        Context context = spy(RuntimeEnvironment.application);
+        Context context = spy(ApplicationProvider.getApplicationContext());
         SharedPreferences.Editor editor = context.getSharedPreferences(
                 ModuleLicenseProvider.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit();
@@ -313,7 +309,7 @@ public class ModuleLicenseProviderTest {
     @Test
     public void isCachedHtmlFileOutdated_fileDoesNotExist_returnTrue()
             throws PackageManager.NameNotFoundException {
-        Context context = spy(RuntimeEnvironment.application);
+        Context context = spy(ApplicationProvider.getApplicationContext());
         context.getSharedPreferences(ModuleLicenseProvider.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().clear().commit();
         SharedPreferences.Editor editor = context.getSharedPreferences(
@@ -335,7 +331,7 @@ public class ModuleLicenseProviderTest {
     @Test
     public void isCachedHtmlFileOutdated_fileIsEmpty_returnTrue()
             throws PackageManager.NameNotFoundException, IOException {
-        Context context = spy(RuntimeEnvironment.application);
+        Context context = spy(ApplicationProvider.getApplicationContext());
         context.getSharedPreferences(ModuleLicenseProvider.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().clear().commit();
         SharedPreferences.Editor editor = context.getSharedPreferences(
@@ -360,7 +356,7 @@ public class ModuleLicenseProviderTest {
     @Test
     public void isCachedHtmlFileOutdated_notOutdated_returnFalse()
             throws PackageManager.NameNotFoundException, IOException {
-        Context context = spy(RuntimeEnvironment.application);
+        Context context = spy(ApplicationProvider.getApplicationContext());
         context.getSharedPreferences(ModuleLicenseProvider.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().clear().commit();
         SharedPreferences.Editor editor = context.getSharedPreferences(
@@ -388,6 +384,8 @@ public class ModuleLicenseProviderTest {
     @Test
     public void getUriForPackage_returnsProperlyFormattedUri() {
         assertThat(ModuleLicenseProvider.getUriForPackage(PACKAGE_NAME))
-                .isEqualTo(Uri.parse("content://com.android.settings.module_licenses/com.android.test_package/NOTICE.html"));
+                .isEqualTo(Uri.parse(
+                        "content://com.android.settings.module_licenses/"
+                        + "com.android.test_package/NOTICE.html"));
     }
 }
