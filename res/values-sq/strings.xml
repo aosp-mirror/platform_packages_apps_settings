@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Adresat IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Rrjetet e ruajtura"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abonimet"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Rrjetet e tjera"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"Cilësimet e IP-së"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"Cilësimet e Wi-Fi nuk disponohen për këtë përdorues"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"Ruaj"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"Fshi APN-në"</string>
     <string name="menu_new" msgid="6571230342655509006">"APN e re"</string>
     <string name="menu_save" msgid="6611465355127483100">"Ruaj"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"Hiq"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"Anulo"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"Fusha Emri nuk mund të jetë bosh."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"Rrjeti APN nuk mund të jetë bosh."</string>
@@ -2456,7 +2455,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tableti është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Pajisja është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Bateria mund të mbarojë më herët se zakonisht"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Po ruan gjendjen e baterisë"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria e kufizuar përkohësisht. Trokit për të mësuar më shumë."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefoni yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tableti yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
@@ -4651,6 +4651,14 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Setet maksimale të dukshme të të dhënave"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Rivendos në vlerat e parazgjedhura"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Opsionet e plotësimit automatik të zhvilluesit janë rivendosur"</string>
+    <!-- no translation found for location_category (3496759112306219062) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
+    <skip />
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Matjet GNSS me fuqi të plotë"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Gjurmo të gjitha koleksionet dhe frekuencat e GNSS pa ciklim të detyruar"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema e pajisjes"</string>
     <string name="default_theme" msgid="4815428567082263639">"I parazgjedhur"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Emri i rrjetit"</string>
@@ -4667,8 +4675,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Vendos njoftimet në pauzë për të qëndruar i fokusuar"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Veçoria nuk ofrohet"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Kjo veçori është çaktivizuar sepse ngadalëson telefonin tënd"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Matjet GNSS me fuqi të plotë"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Gjurmo të gjitha koleksionet dhe frekuencat e GNSS pa ciklim të detyruar"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Gjithmonë shfaq dialogun e ndërprerjes aksidentale"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Shfaq dialogun sa herë që një aplikacion pëson ndërprerje aksidentale"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Zgjidh aplikacionin e aktivizuar për ANGLE"</string>
@@ -4896,14 +4902,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Karta SIM nuk mund të aktivizohet"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Hiq kartën SIM dhe fute përsëri. Nëse problemi vazhdon, rinise pajisjen."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Provo të aktivizosh kartën SIM përsëri. Nëse problemi vazhdon, rinise pajisjen."</string>
-    <!-- no translation found for sim_setup_channel_id (8797972565087458515) -->
-    <skip />
-    <!-- no translation found for post_dsds_reboot_notification_title_with_carrier (3308827462185135307) -->
-    <skip />
-    <!-- no translation found for post_dsds_reboot_notification_text (7533428378211541410) -->
-    <skip />
-    <!-- no translation found for sim_card_label (5632157635124050923) -->
-    <skip />
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Aktivizimi i rrjetit"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> është aktiv"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Trokit për të përditësuar cilësimet e kartës SIM"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"Karta SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Dëshiron ta pastrosh këtë kartë SIM të shkarkuar?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Spastrimi i kësaj karte SIM e heq shërbimin e <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> nga kjo pajisje.\n\nShërbimi për <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> nuk do të anulohet."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Spastro"</string>
@@ -5056,13 +5058,16 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"Telefonata me Wi-Fi të lejon të bësh dhe të marrësh telefonata përmes rrjeteve jo të operatorëve celularë, si p.sh. disa rrjete Wi‑Fi."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Telefonatat"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"preferohet"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"preferohen telefonatat"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"preferohet SMS"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"e padisponueshme"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"Nuk ka kartë SIM"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferencat"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Lidhu me rrjetet publike"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"lidhja e rrjetit, internet, pa tel, të dhëna, wifi, wi-fi, wi fi, rrjeti celular, celular, operatori celular, 4g, 3g, 2g, lte"</string>
-    <!-- no translation found for view_airplane_safe_networks (7390511371040078514) -->
-    <skip />
-    <!-- no translation found for turn_off_airplane_mode (1334192337050190071) -->
-    <skip />
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Shiko rrjetet e sigurta për në aeroplan"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Çaktivizo \"Modalitetin e aeroplanit\""</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nuk ofrohet sepse modaliteti i orarit të gjumit është aktiv"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Rivendosja e rëndësisë së njoftimit përfundoi."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacionet"</string>
