@@ -65,7 +65,7 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
                 R.array.screen_timeout_entries);
         final CharSequence[] timeoutValues = mContext.getResources().getStringArray(
                 R.array.screen_timeout_values);
-        final CharSequence description = TimeoutPreferenceController.getTimeoutDescription(
+        final CharSequence description = getTimeoutDescription(
                 currentTimeout, timeoutEntries, timeoutValues);
         return mContext.getString(R.string.screen_timeout_summary, description);
     }
@@ -83,5 +83,21 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
     private long getCurrentScreenTimeout() {
         return Settings.System.getLong(mContext.getContentResolver(),
                 SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
+    }
+
+    private static CharSequence getTimeoutDescription(
+            long currentTimeout, CharSequence[] entries, CharSequence[] values) {
+        if (currentTimeout < 0 || entries == null || values == null
+                || values.length != entries.length) {
+            return null;
+        }
+
+        for (int i = 0; i < values.length; i++) {
+            long timeout = Long.parseLong(values[i].toString());
+            if (currentTimeout == timeout) {
+                return entries[i];
+            }
+        }
+        return null;
     }
 }
