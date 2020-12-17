@@ -240,7 +240,7 @@ public class PanelFragment extends Fragment {
         final IconCompat icon = mPanel.getIcon();
         final CharSequence title = mPanel.getTitle();
 
-        if (icon != null || mPanel.getViewType() == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
+        if (icon != null) {
             enablePanelHeader(icon, title);
         } else {
             mTitleView.setVisibility(View.VISIBLE);
@@ -248,11 +248,7 @@ public class PanelFragment extends Fragment {
             mTitleView.setText(title);
         }
 
-        if (mPanel.getViewType() == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
-            mFooterDivider.setVisibility(View.VISIBLE);
-        } else {
-            mFooterDivider.setVisibility(View.GONE);
-        }
+        mFooterDivider.setVisibility(View.GONE);
 
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());

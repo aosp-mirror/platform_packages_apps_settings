@@ -254,26 +254,6 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Backing Uri for the Media output Slice.
-     */
-    public static Uri MEDIA_OUTPUT_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT)
-            .build();
-
-    /**
-     * Backing Uri for the Media output group Slice.
-     */
-    public static Uri MEDIA_OUTPUT_GROUP_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT_GROUP)
-            .build();
-
-    /**
      * Backing Uri for the Media output indicator Slice.
      */
     public static Uri MEDIA_OUTPUT_INDICATOR_SLICE_URI = new Uri.Builder()
