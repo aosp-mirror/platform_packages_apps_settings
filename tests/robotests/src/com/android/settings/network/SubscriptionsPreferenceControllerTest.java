@@ -122,7 +122,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController = spy(
                 new SubscriptionsPreferenceController(mContext, mLifecycle, mUpdateListener,
                         KEY, 5));
-        doReturn(true).when(mController).isSubscriptionCanBeDisplayed(any(), anyInt());
+        doReturn(true).when(mController).canSubscriptionBeDisplayed(any(), anyInt());
         doReturn(mSignalStrengthIcon).when(mController).getIcon(anyInt(), anyInt(), anyBoolean());
     }
 
@@ -458,7 +458,7 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     public void displayPreference_subscriptionsWithSameGroupUUID_onlyOneWillBeSeen() {
-        doReturn(false).when(mController).isSubscriptionCanBeDisplayed(any(), eq(3));
+        doReturn(false).when(mController).canSubscriptionBeDisplayed(any(), eq(3));
         final List<SubscriptionInfo> subs = setupMockSubscriptions(3);
         SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 3));
 

@@ -48,9 +48,14 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
+        if (mFingerprintManager == null) {
+            Log.e(TAG, "Null FingerprintManager");
+            finish();
+            return;
+        }
+
+        super.onCreate(savedInstanceState);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(

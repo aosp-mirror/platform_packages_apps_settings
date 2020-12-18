@@ -32,6 +32,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,7 +54,9 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Confirm and execute a reset of the device's network settings to a clean "just out of the box"
@@ -112,7 +115,7 @@ public class ResetNetwork extends InstrumentedFragment {
         if (resultCode == Activity.RESULT_OK) {
             showFinalConfirmation();
         } else {
-            establishInitialState();
+            establishInitialState(getActiveSubscriptionInfoList());
         }
     }
 
@@ -161,14 +164,15 @@ public class ResetNetwork extends InstrumentedFragment {
      * inflate each view, caching all of the widget pointers we'll need at the
      * time, then simply reuse the inflated views directly whenever we need
      * to change contents.
+     *
+     * @param subscriptionsList is a list of SubscriptionInfo(s) which allow user to select from
      */
-    private void establishInitialState() {
+    private void establishInitialState(List<SubscriptionInfo> subscriptionsList) {
         mSubscriptionSpinner = (Spinner) mContentView.findViewById(R.id.reset_network_subscription);
         mEsimContainer = mContentView.findViewById(R.id.erase_esim_container);
         mEsimCheckbox = mContentView.findViewById(R.id.erase_esim);
 
-        mSubscriptions = SubscriptionManager.from(getActivity())
-                .getActiveSubscriptionInfoList();
+        mSubscriptions = subscriptionsList;
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             // Get the default subscription in the order of data, voice, sms, first up.
             int defaultSubscription = SubscriptionManager.getDefaultDataSubscriptionId();
@@ -231,6 +235,31 @@ public class ResetNetwork extends InstrumentedFragment {
         }
     }
 
+    private List<SubscriptionInfo> getActiveSubscriptionInfoList() {
+        SubscriptionManager mgr = getActivity().getSystemService(SubscriptionManager.class);
+        if (mgr == null) {
+            Log.w(TAG, "No SubscriptionManager");
+            return Collections.emptyList();
+        }
+        return Optional.ofNullable(mgr.getActiveSubscriptionInfoList())
+                .orElse(Collections.emptyList());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // update options if subcription has been changed
+        List<SubscriptionInfo> updatedSubscriptions = getActiveSubscriptionInfoList();
+        if ((mSubscriptions != null)
+                && (mSubscriptions.size() == updatedSubscriptions.size())
+                && mSubscriptions.containsAll(updatedSubscriptions)) {
+            return;
+        }
+        Log.d(TAG, "subcription list changed");
+        establishInitialState(updatedSubscriptions);
+    }
+
     private boolean showEuiccSettings(Context context) {
         EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
@@ -261,7 +290,7 @@ public class ResetNetwork extends InstrumentedFragment {
 
         mContentView = inflater.inflate(R.layout.reset_network, null);
 
-        establishInitialState();
+        establishInitialState(getActiveSubscriptionInfoList());
         return mContentView;
     }
 

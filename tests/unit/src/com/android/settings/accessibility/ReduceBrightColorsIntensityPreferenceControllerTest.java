@@ -18,32 +18,69 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.content.res.Resources;
+import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-/** TODO(b/170970675): Update and add tests after ColorDisplayService work is integrated */
 public class ReduceBrightColorsIntensityPreferenceControllerTest {
-    private final Context mContext = ApplicationProvider.getApplicationContext();
-    private final ReduceBrightColorsIntensityPreferenceController mPreferenceController =
-            new ReduceBrightColorsIntensityPreferenceController(mContext,
-            "rbc_intensity");
+
+    private Context mContext;
+    private Resources mResources;
+    private ReduceBrightColorsIntensityPreferenceController mPreferenceController;
+
+    @Before
+    public void setUp() {
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+        mPreferenceController = new ReduceBrightColorsIntensityPreferenceController(mContext,
+                "rbc_intensity");
+    }
 
     @Test
     public void isAvailable_configuredRbcAvailable_enabledRbc_shouldReturnTrue() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
+        doReturn(true).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_setColorTransformAccelerated);
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
     @Test
-    public void isAvailable_configuredRbcAvailable_disabledRbc_shouldReturnFalse() {
+    public void isAvailable_configuredRbcAvailable_disabledRbc_shouldReturnTrue() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0);
+        doReturn(true).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_setColorTransformAccelerated);
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
     @Test
     public void isAvailable_configuredRbcUnavailable_enabledRbc_shouldReturnFalse() {
-        assertThat(mPreferenceController.isAvailable()).isTrue();
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
+        doReturn(false).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_setColorTransformAccelerated);
+        assertThat(mPreferenceController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void onPreferenceChange_changesTemperature() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
+        mPreferenceController.onPreferenceChange(/* preference= */ null, 20);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, 0))
+                .isEqualTo(20);
     }
 }

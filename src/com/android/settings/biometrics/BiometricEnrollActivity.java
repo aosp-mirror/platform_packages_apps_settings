@@ -89,6 +89,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         if (this instanceof InternalActivity) {
             mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+            if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
+                mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(getIntent());
+            }
         }
 
         if (savedInstanceState != null) {
@@ -366,7 +369,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
         }
         BiometricUtils.launchEnrollForResult(this, intent, 0 /* requestCode */, hardwareAuthToken,
-                null /* gkPwHandle */, mUserId);
+                mGkPwHandle, mUserId);
     }
 
     private void launchCredentialOnlyEnroll() {
