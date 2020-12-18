@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -34,7 +35,12 @@ public class ReduceBrightColorsIntensityPreferenceController extends SliderPrefe
 
     @Override
     public int getAvailabilityStatus() {
-        // TODO(b/170970675): Call into ColorDisplayService (CDS) to get availability/config status
+        if (!ColorDisplayManager.isColorTransformAccelerated(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        } else if (Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0) != 1) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
         return AVAILABLE;
     }
 
@@ -59,14 +65,14 @@ public class ReduceBrightColorsIntensityPreferenceController extends SliderPrefe
 
     @Override
     public int getSliderPosition() {
-        // TODO(b/170970675): Call into CDS to get intensity
-        return 0;
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, 0);
     }
 
     @Override
     public boolean setSliderPosition(int position) {
-        // TODO(b/170970675): Call into CDS to set intensity
-        return true;
+        return Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, position);
     }
 
     @Override

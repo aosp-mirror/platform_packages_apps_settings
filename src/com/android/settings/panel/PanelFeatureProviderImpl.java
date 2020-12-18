@@ -17,7 +17,6 @@
 package com.android.settings.panel;
 
 import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
-import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT_GROUP;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -47,8 +46,6 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                 return WifiPanel.create(context);
             case Settings.Panel.ACTION_VOLUME:
                 return VolumePanel.create(context);
-            case ACTION_MEDIA_OUTPUT_GROUP:
-                return MediaOutputGroupPanel.create(context, mediaPackageName);
         }
 
         throw new IllegalStateException("No matching panel for: "  + panelType);

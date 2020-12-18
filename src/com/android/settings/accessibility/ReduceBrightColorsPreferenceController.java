@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings;
 
 import com.android.settings.core.BasePreferenceController;
@@ -37,7 +38,7 @@ public class ReduceBrightColorsPreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        // TODO(b/170970675): call into CDS to get availability/config status
-        return AVAILABLE;
+        return ColorDisplayManager.isColorTransformAccelerated(mContext) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

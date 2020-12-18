@@ -32,11 +32,14 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.RecoverySystem;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.telephony.SubscriptionManager;
+import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +66,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
  * This is the confirmation screen.
  */
 public class ResetNetworkConfirm extends InstrumentedFragment {
+    private static final String TAG = "ResetNetworkConfirm";
 
     @VisibleForTesting View mContentView;
     @VisibleForTesting boolean mEraseEsim;
@@ -71,6 +75,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ProgressDialog mProgressDialog;
     private AlertDialog mAlertDialog;
+    private OnSubscriptionsChangedListener mSubscriptionsChangedListener;
 
     /**
      * Async task used to do all reset task. If error happens during
@@ -87,6 +92,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            boolean isResetSucceed = true;
             ConnectivityManager connectivityManager = (ConnectivityManager)
                     mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivityManager != null) {
@@ -100,6 +106,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             p2pFactoryReset(mContext);
+
+            if (mEraseEsim) {
+                isResetSucceed = RecoverySystem.wipeEuiccData(mContext, mPackageName);
+            }
 
             TelephonyManager telephonyManager = (TelephonyManager)
                     mContext.getSystemService(TelephonyManager.class)
@@ -125,11 +135,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             restoreDefaultApn(mContext);
-            if (mEraseEsim) {
-                return RecoverySystem.wipeEuiccData(mContext, mPackageName);
-            } else {
-                return true;
-            }
+            return isResetSucceed;
         }
 
         @Override
@@ -159,6 +165,18 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         public void onClick(View v) {
             if (Utils.isMonkeyRunning()) {
                 return;
+            }
+
+            // abandon execution if subscription no longer active
+            if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                SubscriptionManager mgr = getSubscriptionManager();
+                // always remove listener
+                stopMonitorSubscriptionChange(mgr);
+                if (!isSubscriptionRemainActive(mgr, mSubId)) {
+                    Log.w(TAG, "subId " + mSubId + " disappear when confirm");
+                    mActivity.finish();
+                    return;
+                }
             }
 
             mProgressDialog = getProgressDialog(mActivity);
@@ -255,6 +273,56 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         }
 
         mActivity = getActivity();
+
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return;
+        }
+        // close confirmation dialog when reset specific subscription
+        // but removed priori to the confirmation button been pressed
+        startMonitorSubscriptionChange(getSubscriptionManager());
+    }
+
+    private SubscriptionManager getSubscriptionManager() {
+        SubscriptionManager mgr = mActivity.getSystemService(SubscriptionManager.class);
+        if (mgr == null) {
+            Log.w(TAG, "No SubscriptionManager");
+        }
+        return mgr;
+    }
+
+    private void startMonitorSubscriptionChange(SubscriptionManager mgr) {
+        if (mgr == null) {
+            return;
+        }
+        // update monitor listener
+        mSubscriptionsChangedListener = new OnSubscriptionsChangedListener(
+                Looper.getMainLooper()) {
+            @Override
+            public void onSubscriptionsChanged() {
+                SubscriptionManager mgr = getSubscriptionManager();
+                if (isSubscriptionRemainActive(mgr, mSubId)) {
+                    return;
+                }
+                // close UI if subscription no longer active
+                Log.w(TAG, "subId " + mSubId + " no longer active.");
+                stopMonitorSubscriptionChange(mgr);
+                mActivity.finish();
+            }
+        };
+        mgr.addOnSubscriptionsChangedListener(
+                mActivity.getMainExecutor(), mSubscriptionsChangedListener);
+    }
+
+    private boolean isSubscriptionRemainActive(SubscriptionManager mgr, int subscriptionId) {
+        return (mgr == null) ? false : (mgr.getActiveSubscriptionInfo(subscriptionId) != null);
+    }
+
+    private void stopMonitorSubscriptionChange(SubscriptionManager mgr) {
+        if ((mgr == null) || (mSubscriptionsChangedListener == null)) {
+            return;
+        }
+        mgr.removeOnSubscriptionsChangedListener(mSubscriptionsChangedListener);
+        mSubscriptionsChangedListener = null;
     }
 
     @Override
@@ -269,6 +337,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         if (mAlertDialog != null) {
             mAlertDialog.dismiss();
         }
+        stopMonitorSubscriptionChange(getSubscriptionManager());
         super.onDestroy();
     }
 
