@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Địa chỉ IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Mạng đã lưu"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Gói đăng ký"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Các mạng khác"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"Cài đặt IP"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"Cài đặt nâng cao Wi‑Fi không khả dụng cho người dùng này"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"Lưu"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"Xóa APN"</string>
     <string name="menu_new" msgid="6571230342655509006">"APN mới"</string>
     <string name="menu_save" msgid="6611465355127483100">"Lưu"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"Hủy"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"Hủy"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"Không được để trống trường Tên."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN không được để trống."</string>
@@ -2456,7 +2455,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Máy tính bảng được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Thiết bị được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pin có thể hết sớm hơn thường lệ"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Duy trì độ bền của pin"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Thời lượng pin bị hạn chế tạm thời. Nhấn để tìm hiểu thêm."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Bạn sử dụng điện thoại nhiều hơn mức bình thường. Pin điện thoại có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Bạn dùng máy tính bảng nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
@@ -4651,6 +4651,14 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Số tập dữ liệu hiển thị tối đa"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Đặt lại về giá trị mặc định"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Đã đặt lại tùy chọn tự động điền dành cho nhà phát triển"</string>
+    <!-- no translation found for location_category (3496759112306219062) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
+    <skip />
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Thực thi số đo GNSS đầy đủ"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Theo dõi tất cả chòm sao và tần suất GNSS mà không có chu kỳ làm việc"</string>
     <string name="device_theme" msgid="5027604586494772471">"Giao diện thiết bị"</string>
     <string name="default_theme" msgid="4815428567082263639">"Mặc định"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Tên mạng"</string>
@@ -4667,8 +4675,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Tạm dừng thông báo để tập trung"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Tính năng không hoạt động"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Tính năng này đã bị tắt vì sẽ khiến điện thoại chạy chậm"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Thực thi số đo GNSS đầy đủ"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Theo dõi tất cả chòm sao và tần suất GNSS mà không có chu kỳ làm việc"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Luôn hiển thị hộp thoại sự cố"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Hiển thị hộp thoại mỗi khi ứng dụng gặp sự cố"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Chọn ứng dụng hỗ trợ ANGLE"</string>
@@ -5052,6 +5058,11 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"Với tính năng gọi qua Wi‑Fi, bạn có thể gọi và nhận cuộc gọi qua các mạng không phải do nhà mạng cung cấp, chẳng hạn như một số mạng Wi‑Fi."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Cuộc gọi"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"Tin nhắn SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"ưu tiên"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"ưu tiên cuộc gọi"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"ưu tiên SMS"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"không có sẵn"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"Không có SIM"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Lựa chọn ưu tiên"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Kết nối với mạng công cộng"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"kết nối mạng, Internet, không dây, dữ liệu, wifi, wi-fi, wi fi, di động, nhà mạng di động, 4g, 3g, 2g, lte"</string>
