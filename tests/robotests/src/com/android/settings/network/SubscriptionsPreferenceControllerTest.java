@@ -37,11 +37,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -51,9 +49,13 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.graph.SignalDrawable;
 
 import org.junit.After;
 import org.junit.Before;
@@ -62,7 +64,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -71,11 +72,6 @@ import org.robolectric.shadows.ShadowSubscriptionManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSubscriptionManager.class)
@@ -126,6 +122,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController = spy(
                 new SubscriptionsPreferenceController(mContext, mLifecycle, mUpdateListener,
                         KEY, 5));
+        doReturn(true).when(mController).canSubscriptionBeDisplayed(any(), anyInt());
         doReturn(mSignalStrengthIcon).when(mController).getIcon(anyInt(), anyInt(), anyBoolean());
     }
 
@@ -459,6 +456,17 @@ public class SubscriptionsPreferenceControllerTest {
                 eq(true));
     }
 
+    @Test
+    public void displayPreference_subscriptionsWithSameGroupUUID_onlyOneWillBeSeen() {
+        doReturn(false).when(mController).canSubscriptionBeDisplayed(any(), eq(3));
+        final List<SubscriptionInfo> subs = setupMockSubscriptions(3);
+        SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 3));
+
+        mController.onResume();
+        mController.displayPreference(mScreen);
+
+        verify(mPreferenceCategory, times(2)).addPreference(any(Preference.class));
+    }
 
     @Test
     public void onMobileDataEnabledChange_mobileDataTurnedOff_bothSubsHaveCutOut() {
