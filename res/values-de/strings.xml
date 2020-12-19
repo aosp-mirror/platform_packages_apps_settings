@@ -1023,8 +1023,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6-Adressen"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gespeicherte WLANs"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abos"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Andere Netzwerke"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"IP-Einstellungen"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"Erweiterte WLAN-Einstellungen sind für diesen Nutzer nicht verfügbar"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"Speichern"</string>
@@ -1598,7 +1597,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"APN löschen"</string>
     <string name="menu_new" msgid="6571230342655509006">"Neuer APN"</string>
     <string name="menu_save" msgid="6611465355127483100">"Speichern"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"Verwerfen"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"Abbrechen"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"Das Namensfeld darf nicht leer sein."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN darf nicht leer sein."</string>
@@ -2457,7 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet mehr als üblich genutzt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Gerät mehr als üblich genutzt"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Der Akku könnte früher als üblich leer sein"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Akkuzustand erhalten"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Akku vorübergehend eingeschränkt. Für weitere Informationen tippen."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Dein Smartphone wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Dein Tablet wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
@@ -4652,6 +4652,14 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maximale Zahl sichtbarer Datensätze"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Auf Standardwerte zurücksetzen"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Die Optionen für automatisches Ausfüllen für Entwickler wurden zurückgesetzt"</string>
+    <!-- no translation found for location_category (3496759112306219062) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
+    <skip />
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Vollständige GNSS-Messung erzwingen"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Alle GNSS-Konstellationen und -Frequenzen ohne GNSS-Zyklus erfassen"</string>
     <string name="device_theme" msgid="5027604586494772471">"Gerätedesign"</string>
     <string name="default_theme" msgid="4815428567082263639">"Standard"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Netzwerkname"</string>
@@ -4668,8 +4676,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Zur besseren Konzentration Benachrichtigungen pausieren"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Funktion nicht verfügbar"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Diese Funktion wurde deaktiviert, weil sie dein Smartphone langsamer macht"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Vollständige GNSS-Messung erzwingen"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Alle GNSS-Konstellationen und -Frequenzen ohne GNSS-Zyklus erfassen"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Bei Absturz immer Absturz-Dialogfeld anzeigen"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Bei App-Abstürzen immer Dialogfeld anzeigen"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE-App auswählen"</string>
@@ -4897,14 +4903,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM kann nicht aktiviert werden"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Nimm die SIM heraus und lege sie dann wieder ein. Sollte das Problem weiterhin bestehen, starte das Gerät neu."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Versuche, die SIM noch einmal zu aktivieren. Sollte das Problem weiterhin bestehen, starte das Gerät neu."</string>
-    <!-- no translation found for sim_setup_channel_id (8797972565087458515) -->
-    <skip />
-    <!-- no translation found for post_dsds_reboot_notification_title_with_carrier (3308827462185135307) -->
-    <skip />
-    <!-- no translation found for post_dsds_reboot_notification_text (7533428378211541410) -->
-    <skip />
-    <!-- no translation found for sim_card_label (5632157635124050923) -->
-    <skip />
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Netzwerkaktivierung"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ist aktiviert"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Tippe, um die SIM-Einstellungen zu aktualisieren"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM-Karte"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Diese heruntergeladene SIM löschen?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Wenn du diese SIM löschst, wird der <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-Dienst von diesem Gerät entfernt.\n\nDer Mobilfunkvertrag bei <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> wird dadurch nicht gekündigt."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Löschen"</string>
@@ -5057,13 +5059,16 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"Mit WLAN-Telefonie kannst du Anrufe über Netzwerke ohne Mobilfunkanbieter starten und empfangen, wie etwa über einige WLAN-Netzwerke."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Anrufe"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"bevorzugt"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"Anrufe bevorzugt"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"SMS bevorzugt"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"nicht verfügbar"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"Keine SIM-Karte"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Einstellungen"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Mit öffentlichen Netzwerken verbinden"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netzwerkverbindung, internet, kabellos, drahtlos, daten, wlan, w-lan, mobilfunk, mobil, mobilfunkanbieter, 4g, 3g, 2g, lte"</string>
-    <!-- no translation found for view_airplane_safe_networks (7390511371040078514) -->
-    <skip />
-    <!-- no translation found for turn_off_airplane_mode (1334192337050190071) -->
-    <skip />
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Flugsichere Netzwerke anzeigen"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Flugmodus deaktivieren"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nicht verfügbar, weil der Modus „Schlafenszeit“ aktiviert ist"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Die Wichtigkeit von Benachrichtigungen wurde zurückgesetzt."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>

@@ -1062,8 +1062,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"‏כתובות IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"רשתות שנשמרו"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"מינויים"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"רשתות אחרות"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"‏הגדרות IP"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"‏הגדרות Wi-Fi מתקדמות אינן זמינות למשתמש הזה"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"שמירה"</string>
@@ -1639,7 +1638,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"‏מחיקת APN"</string>
     <string name="menu_new" msgid="6571230342655509006">"‏הוספת APN חדש"</string>
     <string name="menu_save" msgid="6611465355127483100">"שמירה"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"מחיקה"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"ביטול"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"השדה \'שם\' לא יכול להיות ריק."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"‏ה-APN לא יכול להיות ריק."</string>
@@ -2518,7 +2517,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"הטאבלט נמצא בשימוש יותר מהרגיל"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"המכשיר נמצא בשימוש יותר מהרגיל"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"ייתכן שהסוללה תתרוקן מוקדם מהרגיל"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"שמירה על תקינות הסוללה"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"הסוללה מוגבלת באופן זמני. למידע נוסף יש להקיש."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"השתמשת בטלפון יותר מהרגיל. ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות לפי שימוש בסוללה:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"השתמשת בטאבלט יותר מהרגיל. ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות לפי שימוש בסוללה:"</string>
@@ -3653,7 +3653,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"איך להציג התראות פרופיל כשהמכשיר נעול?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"התראות פרופיל"</string>
     <string name="notifications_title" msgid="4221655533193721131">"התראות"</string>
-    <string name="app_notifications_title" msgid="248374669037385148">"התראות אפליקציה"</string>
+    <string name="app_notifications_title" msgid="248374669037385148">"התראות של האפליקציה"</string>
     <string name="notification_channel_title" msgid="8859880871692797611">"קטגוריית התראות"</string>
     <string name="notification_group_title" msgid="7525666535695631538">"קבוצת קטגוריות של התראות"</string>
     <string name="notification_importance_title" msgid="1545158655988342703">"התנהגות"</string>
@@ -4811,6 +4811,14 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"מקסימום מערכי נתונים גלויים"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"איפוס לערכי ברירת המחדל"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"האפשרויות למפתחים למילוי האוטומטי אופסו"</string>
+    <!-- no translation found for location_category (3496759112306219062) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
+    <skip />
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"‏אילוץ של הרצה מלאה של מדידות Gnss"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"‏מעקב אחר כל מערכות הניווט והתדרים של GNSS ללא מחזור פעילות"</string>
     <string name="device_theme" msgid="5027604586494772471">"עיצוב המכשיר"</string>
     <string name="default_theme" msgid="4815428567082263639">"ברירת מחדל"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"שם הרשת"</string>
@@ -4827,8 +4835,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"אפשר להשהות את ההתראות כדי שלא יפריעו לך"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"התכונה לא זמינה"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"התכונה הזו הושבתה מפני שהיא מאטה את הטלפון שלך"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"‏אילוץ של הרצה מלאה של מדידות Gnss"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"‏מעקב אחר כל מערכות הניווט והתדרים של GNSS ללא מחזור פעילות"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"הצג תמיד דו-שיח של קריסות מחשב"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"הצג דו-שיח בכל פעם שאפליקציה קורסת"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"‏בחירת אפליקציה המותאמת ל-ANGLE"</string>
@@ -5218,6 +5224,11 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"‏התכונה שיחות Wi-Fi מאפשרת להתקשר ולקבל שיחות באמצעות רשתות שאינן רשתות הספקים, כמו רשתות Wi‑Fi מסוימות."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"שיחות"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"מועדפות"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"שיחות מועדפות"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"‏הודעות SMS מועדפות"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"לא זמין"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"‏אין כרטיס SIM"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"העדפות"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"חיבור לרשתות ציבוריות"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"‏חיבור לרשת, אינטרנט, אלחוטי, נתונים, Wi-Fi, wi-fi, wi fi, סלולרי, נייד, ספק סלולרי, 4g,‏ 3g,‏ 2g,‏ lte"</string>
