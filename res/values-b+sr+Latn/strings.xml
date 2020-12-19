@@ -1042,8 +1042,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 adrese"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Sačuvane mreže"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Pretplate"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Ostale mreže"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"IP podešavanja"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"Napredna podešavanja Wi‑Fi mreže nisu dostupna za ovog korisnika"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"Sačuvaj"</string>
@@ -1618,7 +1617,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"Izbriši naziv pristupne tačke"</string>
     <string name="menu_new" msgid="6571230342655509006">"Nov naziv pristupne tačke"</string>
     <string name="menu_save" msgid="6611465355127483100">"Sačuvaj"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"Odbaci"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"Otkaži"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"Polje Naziv ne sme da bude prazno."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"Polje Naziv pristupne tačke ne sme da bude prazno."</string>
@@ -2487,7 +2486,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet ste koristili duže nego obično"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Uređaj ste koristili duže nego obično"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija može da se isprazni ranije nego obično"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="3532338978617826383">"Održava se stanje baterije"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterija je trenutno ograničena. Dodirnite da biste saznali više."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Uređaj ste koristili duže nego obično. Baterija može da se isprazni ranije od očekivanog.\n\nAplikacije sa najvećom potrošnjom baterije:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet ste koristili duže nego obično. Baterija može da se isprazni ranije od očekivanog.\n\nAplikacije sa najvećom potrošnjom baterije:"</string>
@@ -4731,6 +4731,14 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maksimalan broj vidljivih skupova podataka"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Resetuj na podrazumevane vrednosti"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Opcije za programera za automatsko popunjavanje su resetovane"</string>
+    <!-- no translation found for location_category (3496759112306219062) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
+    <skip />
+    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
+    <skip />
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Prinudno pokreni puna GNSS merenja"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Prati sve GNSS konstalacije i frekvencije bez ciklusa rada"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema uređaja"</string>
     <string name="default_theme" msgid="4815428567082263639">"Podrazumevana"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Naziv mreže"</string>
@@ -4747,8 +4755,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Pauzirajte obaveštenja radi bolje koncentracije"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Funkcija nije dostupna"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Ova funkcija je isključena jer usporava telefon"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Prinudno pokreni puna GNSS merenja"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Prati sve GNSS konstalacije i frekvencije bez ciklusa rada"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Uvek prikazuj dijalog o otkazivanju"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Prikaži dijalog svaki put kada aplikacija otkaže"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Izaberi aplikaciju omogućenu za ANGLE"</string>
@@ -5135,6 +5141,11 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"Pozivanje preko WiFi-ja vam omogućava da primate i upućujete pozive preko mreža koje ne pripadaju mobilnom operateru, na primer, nekih WiFi mreža."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Pozivi"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"prednost"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"prednost imaju pozivi"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"prednost ima SMS"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"nedostupno"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"Nema SIM kartice"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Podešavanja"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Povežite se sa javnim mrežama"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"mrežna veza, internet, bežično, podaci, wifi, wi-fi, wi fi, mobilni telefon, mobilni, mobilni operater, 4g, 3g, 2g, lte"</string>

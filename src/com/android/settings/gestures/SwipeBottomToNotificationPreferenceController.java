@@ -76,7 +76,7 @@ public class SwipeBottomToNotificationPreferenceController extends TogglePrefere
     @Override
     public boolean isChecked() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, OFF) == ON;
+                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, ON) == ON;
     }
 
     @Override
