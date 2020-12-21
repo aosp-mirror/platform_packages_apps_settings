@@ -37,7 +37,7 @@ import com.android.settingslib.media.MediaOutputSliceConstants;
 import java.util.List;
 
 /**
- * This class allows launching MediaOutputSlice to switch output device.
+ * This class allows launching MediaOutputDialog to switch output device.
  * Preference would hide only when
  * - Bluetooth = OFF
  * - Bluetooth = ON and Connected Devices = 0 and Previously Connected = 0

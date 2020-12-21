@@ -87,7 +87,7 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
 
     @Override
     public Intent getIntent() {
-        // This Slice reflects active media device information and launch MediaOutputSlice. It does
+        // This Slice reflects active media device information and launch MediaOutputDialog. It does
         // not contain its owned Slice data
         return null;
     }

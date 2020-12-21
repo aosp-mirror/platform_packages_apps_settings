@@ -38,7 +38,6 @@ import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.location.LocationSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
-import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.media.RemoteMediaSlice;
 import com.android.settings.network.AirplaneSafeNetworksSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
@@ -255,26 +254,6 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Backing Uri for the Media output Slice.
-     */
-    public static Uri MEDIA_OUTPUT_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT)
-            .build();
-
-    /**
-     * Backing Uri for the Media output group Slice.
-     */
-    public static Uri MEDIA_OUTPUT_GROUP_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT_GROUP)
-            .build();
-
-    /**
      * Backing Uri for the Media output indicator Slice.
      */
     public static Uri MEDIA_OUTPUT_INDICATOR_SLICE_URI = new Uri.Builder()
@@ -339,7 +318,6 @@ public class CustomSliceRegistry {
         sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);
         sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
         sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
         sUriToSlice.put(MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
