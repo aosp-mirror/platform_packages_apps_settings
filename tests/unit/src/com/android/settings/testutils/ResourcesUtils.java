@@ -26,7 +26,7 @@ public final class ResourcesUtils {
         return context.getResources().getString(getResourcesId(context, "string", name));
     }
 
-    public static String getResourcesString(Context context, String name, Object value) {
+    public static String getResourcesString(Context context, String name, Object... value) {
         return context.getResources().getString(getResourcesId(context, "string", name), value);
     }
 }

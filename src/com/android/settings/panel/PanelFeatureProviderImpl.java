@@ -16,8 +16,6 @@
 
 package com.android.settings.panel;
 
-import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -38,8 +36,6 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
         switch (panelType) {
             case Settings.Panel.ACTION_INTERNET_CONNECTIVITY:
                 return InternetConnectivityPanel.create(context);
-            case ACTION_MEDIA_OUTPUT:
-                return MediaOutputPanel.create(context, mediaPackageName);
             case Settings.Panel.ACTION_NFC:
                 return NfcPanel.create(context);
             case Settings.Panel.ACTION_WIFI:
