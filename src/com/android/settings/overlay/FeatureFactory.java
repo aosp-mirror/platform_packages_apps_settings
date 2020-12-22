@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
@@ -148,6 +149,11 @@ public abstract class FeatureFactory {
      * Gets implementation for the WifiTrackerLib.
      */
     public abstract WifiTrackerLibProvider getWifiTrackerLibProvider();
+
+    /**
+     * Retrieve implementation for Extra App Info feature.
+     */
+    public abstract ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

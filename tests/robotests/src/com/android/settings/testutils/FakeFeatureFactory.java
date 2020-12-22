@@ -23,6 +23,7 @@ import android.content.Context;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
@@ -79,6 +80,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public ContextualCardFeatureProvider mContextualCardFeatureProvider;
 
     public WifiTrackerLibProvider wifiTrackerLibProvider;
+    public ExtraAppInfoFeatureProvider extraAppInfoFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -124,6 +126,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAwareFeatureProvider = mock(AwareFeatureProvider.class);
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
+        extraAppInfoFeatureProvider = mock(ExtraAppInfoFeatureProvider.class);
     }
 
     @Override
@@ -239,5 +242,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public WifiTrackerLibProvider getWifiTrackerLibProvider() {
         return wifiTrackerLibProvider;
+    }
+
+    @Override
+    public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
+        return extraAppInfoFeatureProvider;
     }
 }
