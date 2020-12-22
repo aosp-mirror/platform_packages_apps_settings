@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
+import static androidx.lifecycle.Lifecycle.Event;
+
 import android.annotation.Nullable;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -54,21 +56,23 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
+/**
+ * Controller for Sim Status information within the About Phone Settings page.
+ */
+public class SimStatusDialogController implements LifecycleObserver {
 
     private final static String TAG = "SimStatusDialogCtrl";
 
@@ -263,7 +267,10 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
     }
 
-    @Override
+    /**
+     * OnResume lifecycle event, resume listening for phone state or subscription changes.
+     */
+    @OnLifecycleEvent(Event.ON_RESUME)
     public void onResume() {
         if (mSubscriptionInfo == null) {
             return;
@@ -288,7 +295,10 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mIsRegisteredListener = true;
     }
 
-    @Override
+    /**
+     * onPause lifecycle event, no longer listen for phone state or subscription changes.
+     */
+    @OnLifecycleEvent(Event.ON_PAUSE)
     public void onPause() {
         if (mSubscriptionInfo == null) {
             if (mIsRegisteredListener) {
@@ -318,7 +328,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mDialog.setText(NETWORK_PROVIDER_VALUE_ID, carrierName);
     }
 
-    private void updatePhoneNumber() {
+    @VisibleForTesting
+    protected void updatePhoneNumber() {
         // If formattedNumber is null or empty, it'll display as "Unknown".
         mDialog.setText(PHONE_NUMBER_VALUE_ID,
                 DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext, mSubscriptionInfo));
@@ -592,7 +603,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     @VisibleForTesting
-    void requestForUpdateEid() {
+    protected void requestForUpdateEid() {
         ThreadUtils.postOnBackgroundThread(() -> {
             final AtomicReference<String> eid = getEid(mSlotIndex);
             ThreadUtils.postOnMainThread(() -> updateEid(eid));
@@ -600,7 +611,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     @VisibleForTesting
-    AtomicReference<String> getEid(int slotIndex) {
+    protected AtomicReference<String> getEid(int slotIndex) {
         boolean shouldHaveEid = false;
         String eid = null;
         if (mTelephonyManager.getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
@@ -638,7 +649,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     @VisibleForTesting
-    void updateEid(AtomicReference<String> eid) {
+    protected void updateEid(AtomicReference<String> eid) {
         if (eid == null) {
             mDialog.removeSettingFromScreen(EID_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
@@ -753,7 +764,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     @VisibleForTesting
-    PhoneStateListener getPhoneStateListener() {
+    protected PhoneStateListener getPhoneStateListener() {
         return new PhoneStateListener() {
             @Override
             public void onDataConnectionStateChanged(int state) {
