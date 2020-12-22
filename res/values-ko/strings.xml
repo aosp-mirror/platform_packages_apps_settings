@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"앱을 재설정할 수 있습니다."</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, 모바일, 블루투스 초기화"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"다음을 포함한 모든 네트워크 설정이 초기화됩니다.\n\n"<li>"Wi‑Fi"</li>\n<li>"모바일 데이터"</li>\n<li>"블루투스"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"삭제"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"다운로드한 SIM 삭제"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"교체 SIM을 다운로드하려면 이동통신사에 문의하세요. 이렇게 해도 모바일 서비스 요금제는 취소되지 않습니다."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"이렇게 해도 모바일 서비스 요금제는 취소되지 않습니다. 교체 SIM을 다운로드하려면 이동통신사에 문의하세요."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"설정 초기화"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"네트워크 설정을 모두 초기화하시겠습니까? 이 작업은 실행취소할 수 없습니다."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"모든 네트워크 설정을 초기화하고 다운로드한 SIM을 삭제하시겠습니까? 이 작업은 실행취소할 수 없습니다."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"태블릿을 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"기기를 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"배터리가 평소보다 빨리 소진될 수 있습니다."</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"배터리 상태 최적화 중"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"일시적으로 배터리 사용이 제한됩니다. 자세히 알아보려면 탭하세요."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"휴대전화를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"태블릿을 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"표시할 데이터세트 최대 개수"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"기본값으로 초기화"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"개발자 옵션 자동완성 기능이 초기화되었습니다."</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"위치"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"상태 표시줄 위치 표시기"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"네트워크 및 연결 등 모든 센서를 통해 위치 표시"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"전체 GNSS 측정 강제 사용"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"듀티 사이클 없이 모든 GNSS 배열 및 빈도를 추적"</string>
     <string name="device_theme" msgid="5027604586494772471">"기기 테마"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"취침 모드가 켜져 있으므로 사용할 수 없습니다."</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"알림 중요도가 재설정되었습니다."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"앱"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"신뢰할 수 없는 기기에서 메시지에 액세스하려고 합니다. 세부정보를 확인하려면 탭하세요."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"메시지 액세스를 허용하시겠습니까?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"신뢰할 수 없는 블루투스 기기 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]에서 메시지에 액세스하려고 합니다.\n\n전에는 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]에 연결한 적이 없습니다."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"신뢰할 수 없는 기기에서 연락처와 통화 기록에 액세스하려고 합니다. 세부정보를 확인하려면 탭하세요."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"연락처와 통화 기록 액세스를 허용하시겠습니까?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"신뢰할 수 없는 블루투스 기기 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]에서 연락처와 통화 기록에 액세스하려고 합니다. 여기에는 수신 전화와 발신 전화에 관한 데이터도 포함됩니다.\n\n전에는 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]에 연결한 적이 없습니다."</string>
 </resources>

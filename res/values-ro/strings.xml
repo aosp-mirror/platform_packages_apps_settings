@@ -1632,8 +1632,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Aplicațiile pot fi resetate"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Resetați Wi-Fi, date mobile și Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Astfel, toate setările pentru rețea vor fi reinițializate, inclusiv:\n\n"<li>"Wi‑Fi,"</li>\n<li>"date mobile,"</li>\n<li>"Bluetooth."</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Ștergeți"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Ștergeți SIM-urile descărcate"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Pentru a descărca SIM-urile de înlocuire, contactați operatorul. Nu se va anula niciun abonament de servicii mobile."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Acest lucru nu va anula niciun abonament de servicii mobile. Pentru a descărca SIM-uri de înlocuire, contactați operatorul."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Resetați setările"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Restabiliți toate setările pentru rețea? Nu puteți anula această acțiune."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Resetați toate setările pentru rețea și ștergeți SIM-urile descărcate? Nu puteți anula această acțiune."</string>
@@ -2486,8 +2487,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tabletă folosită mai mult decât de obicei"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Dispozitiv folosit mai mult decât de obicei"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Bateria se poate descărca mai repede decât de obicei"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Se fac optimizări pentru buna funcționare a bateriei"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterie limitată temporar. Atingeți ca să aflați mai multe."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefonul dvs. a fost folosit mai mult decât de obicei. Este posibil ca bateria să se descarce mai repede decât vă așteptați.\n\nAplicațiile care folosesc bateria cel mai mult:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tableta a fost folosită mai mult decât de obicei. Este posibil ca bateria să se descarce mai repede decât vă așteptați.\n\nAplicațiile care folosesc bateria cel mai mult:"</string>
@@ -4731,12 +4731,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Seturi de date cu vizibilitate maximă"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Resetați la valorile prestabilite"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Opțiunile dezvoltatorului de completare automată au fost resetate"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Locație"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indicator de locația pentru bara de stare"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Afișați pentru toate locațiile, inclusiv rețeaua și conectivitatea"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forțați măsurători GNSS complete"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Urmăriți toate constelațiile și frecvențele GNSS fără ciclu de funcționare"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema dispozitivului"</string>
@@ -5154,4 +5151,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Indisponibil deoarece modul ora de culcare este activat"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"S-a finalizat resetarea importanței notificărilor."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplicații"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Un dispozitiv care nu prezintă încredere solicită acces la mesajele dvs. Atingeți pentru detalii."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Permiteți accesul la mesaje?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Un dispozitiv Bluetooth care nu prezintă încredere, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], solicită acces la mesajele dvs.\n\nNu v-ați mai conectat la [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Un dispozitiv care nu prezintă încredere solicită acces la agenda și jurnalul dvs. de apeluri. Atingeți pentru detalii."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Permiteți accesul la agendă și la jurnalul de apeluri?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Un dispozitiv Bluetooth care nu prezintă încredere, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], solicită acces la agenda și jurnalul dvs. de apeluri. Aici sunt incluse date despre apelurile primite și efectuate.\n\nNu v-ați mai conectat la [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

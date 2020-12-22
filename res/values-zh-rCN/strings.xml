@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 地址"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"已保存的网络"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"订阅"</string>
-    <!-- no translation found for wifi_saved_other_networks_tab (7942647415716557293) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"其他网络"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"IP 设置"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"此用户无法查看或修改 WLAN 网络高级设置"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"保存"</string>
@@ -1612,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"应用可以重置"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"重置 WLAN、移动数据网络和蓝牙设置"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"此操作会重置所有网络设置，包括：\n\n"<li>"WLAN"</li>\n<li>"移动数据网络"</li>\n<li>"蓝牙"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"清空"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"清除已下载的 SIM 卡"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"要下载备用 SIM 卡，请与您的运营商联系。此操作不会取消任何移动服务套餐。"</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"此操作并不会取消任何移动服务套餐。如要下载备用 SIM 卡，请与您的运营商联系。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"重置设置"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"要重置所有网络设置吗？此操作无法撤消。"</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"要重置所有网络设置并清除已下载的 SIM 卡吗？此操作无法撤消。"</string>
@@ -2456,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板电脑的使用强度比平时高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"设备的使用强度比平时高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"电池电量可能会比平时更快耗尽"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"针对电池状况进行优化"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"暂时限用电池。点按即可了解详情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"您使用的手机的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"您使用平板电脑的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
@@ -4652,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"可见数据集最大数量"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"重置为默认值"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"已重置自动填充开发者选项"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"位置"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"状态栏位置指示器"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"对所有位置均显示，包括通过网络和连接方式获取的位置信息"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"强制启用 GNSS 测量结果全面跟踪"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"在停用工作周期的情况下跟踪所有 GNSS 星座和频率"</string>
     <string name="device_theme" msgid="5027604586494772471">"设备主题背景"</string>
@@ -5072,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寝模式开启时无法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重置完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"应用"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"不受信任的设备想要查看您的消息。点按可了解详情。"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"要允许查看消息吗？"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"不受信任的蓝牙设备 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] 想要查看您的消息。\n\n您之前没有连接过 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"不受信任的设备想要查看您的通讯录和通话记录。点按可了解详情。"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允许查看通讯录和通话记录吗？"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"不受信任的蓝牙设备 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] 想要查看您的通讯录和通话记录，包括有关来电和去电的数据。\n\n您之前没有连接过 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]。"</string>
 </resources>

@@ -1632,8 +1632,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Aplikacije se mogu vratiti na zadano"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Poništi Wi-Fi, mobilnu mrežu i Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Ovime će se poništiti sve postavke mreže, uključujući:\n\n"<li>"Wi‑Fi"</li>\n<li>"mobilne podatke"</li>\n<li>"Bluetooth."</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Izbriši"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Izbriši preuzete SIM-ove"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Da biste preuzeli zamjenske SIM-ove, obratite se mobilnom operateru. Time se neće otkazati paketi mobilnih usluga."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Time se neće poništiti ugovori o mobilnim uslugama. Za preuzimanje zamjenskih SIM-ova obratite se mobilnom operateru."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Poništi postavke"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Želite li poništiti sve postavke mreže? Ta se radnja ne može poništiti."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Želite li vratiti sve postavke mreže na zadano i izbrisati preuzete SIM-ove? Ta se radnja ne može poništiti."</string>
@@ -2486,8 +2487,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet se upotrebljava više nego obično"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Uređaj se upotrebljava više nego obično"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija bi se mogla isprazniti brže nego obično"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimiziranje radi zdravlja baterije"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterija je privremeno ograničena. Dodirnite da biste saznali više."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Vaš se telefon upotrebljavao više nego obično. Baterija bi se mogla isprazniti brže nego što očekujete.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Vaš se tablet upotrebljavao više nego obično. Baterija bi se mogla isprazniti brže nego što očekujete.\n\nAplikacije koje najviše troše bateriju:"</string>
@@ -4731,12 +4731,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maksimalan broj vidljivih skupova podataka"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Vrati na zadane vrijednosti"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Opcije automatskog popunjavanja za razvojne programere vraćene su na zadano"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Lokacija"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Pokazivač lokacije trake statusa"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Prikaži za sve lokacije, uključujući mrežu i povezivost"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Primijeni potpuna mjerenja GNSS-a"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Prati sve konstelacije i frekvencije GNSS-a bez određivanja radnog omjera"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema uređaja"</string>
@@ -5154,4 +5151,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nije dostupno jer je uključen način rada u vrijeme spavanja"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Dovršeno je vraćanje važnosti obavijesti na zadano."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Nepouzdani uređaj želi pristupiti vašim porukama. Dodirnite da biste vidjeli pojedinosti."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Dopustiti pristup porukama?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Nepouzdani Bluetooth uređaj [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] želi pristupiti vašim porukama.\n\nDo sad se niste povezali s uređajem [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Nepouzdani uređaj želi pristupiti vašim kontaktima i zapisniku poziva. Dodirnite da biste vidjeli pojedinosti."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Dopustiti pristup kontaktima i zapisniku poziva?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Nepouzdani Bluetooth uređaj [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] želi pristupiti vašim kontaktima i zapisniku poziva. To uključuje podatke o dolaznim i odlaznim pozivima.\n\nDo sad se niste povezali s uređajem [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

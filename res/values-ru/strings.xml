@@ -1653,8 +1653,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Вы можете сбросить настройки приложений"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Сбросить настройки Wi-Fi, мобильного Интернета и Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"На устройстве будут сброшены все сетевые настройки, в том числе:\n\n"<li>"Wi‑Fi"</li>\n<li>"Мобильный Интернет"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Удалить"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Удалить скачанные SIM-карты"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Чтобы скачать новую SIM-карту, свяжитесь с оператором. Это действие не повлияет на ваши тарифные планы."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Это действие не повлияет на ваши тарифные планы. Чтобы скачать новый профиль eSIM, свяжитесь с оператором связи."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Сбросить настройки"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Сбросить все настройки сети? Это действие нельзя отменить."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Сбросить все сетевые настройки и удалить скачанные SIM-карты? Это действие нельзя отменить."</string>
@@ -2517,8 +2518,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Планшет используется больше, чем обычно"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Устройство используется больше, чем обычно"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Заряд батареи расходуется быстрее, чем обычно"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Оптимизация для увеличения срока службы батареи"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Уровень заряда временно ограничен. Нажмите, чтобы узнать подробности."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Телефон используется интенсивнее, чем обычно. Из-за этого батарея может разрядиться быстрее.\n\nПриложения с самым высоким энергопотреблением:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Планшет используется интенсивнее, чем обычно. Из-за этого батарея может разрядиться быстрее.\n\nПриложения с самым высоким энергопотреблением:"</string>
@@ -4811,12 +4811,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Максимальное количество видимых наборов данных"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Восстановить значения по умолчанию"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Настройки автозаполнения для разработчиков сброшены"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Местоположение"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Индикатор местоположения в строке состояния"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Показывать для всех местоположений, включая определяемые через сеть и подключение"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Полные измерения GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Отслеживать все группировки GNSS и частоты без рабочего цикла"</string>
     <string name="device_theme" msgid="5027604586494772471">"Тема устройства"</string>
@@ -5237,4 +5234,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Недоступно в ночном режиме"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Сброс настроек важности выполнен."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Приложения"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Неизвестное устройство запрашивает доступ к вашим сообщениям. Нажмите, чтобы узнать больше."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Предоставить доступ к сообщениям?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Неизвестное устройство Bluetooth ([<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]) запрашивает доступ к вашим сообщениям.\n\nЭто ваше первое подключение к устройству [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Неизвестное устройство запрашивает доступ к вашим контактам и списку вызовов. Нажмите, чтобы узнать больше."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Предоставить доступ к контактам и списку вызовов?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Неизвестное устройство Bluetooth ([<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]) запрашивает доступ к вашим контактам и списку вызовов, включая данные о входящих и исходящих звонках.\n\nЭто ваше первое подключение к устройству [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

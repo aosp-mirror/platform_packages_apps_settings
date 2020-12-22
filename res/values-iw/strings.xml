@@ -1653,8 +1653,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"אפשר לאפס את האפליקציות"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"‏איפוס ההגדרות של Wi-Fi, חבילת גלישה ו-Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"‏פעולה זו תאפס את כל הגדרות הרשת, כולל:\n\n"<li>"Wi‑Fi"</li>\n<li>"חבילת גלישה"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"מחיקה"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"‏מחיקת כרטיסי SIM שהורדת"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"‏כדי להוריד כרטיסי SIM חלופיים יש לפנות אל הספק. הפעולה הזו לא תבטל חבילות גלישה קיימות."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"‏פעולה זו לא תבטל אף אחריות מורחבת בתשלום. כדי להוריד כרטיסי SIM חלופיים, יש לפנות לספק חבילת הסלולר."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"איפוס הגדרות"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"לאפס את כל הגדרות הרשת? לא ניתן לבטל את הפעולה הזו."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"‏לאפס את כל הגדרות הרשת ולמחוק את כרטיסי ה-SIM שהורדת? לא ניתן לבטל את הפעולה הזו."</string>
@@ -1693,8 +1694,8 @@
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"נקודה לשיתוף אינטרנט"</string>
     <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"‏שיתוף אינטרנט דרך Bluetooth"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"שיתוף אינטרנט בין ניידים"</string>
-    <string name="tether_settings_title_all" msgid="6807525590937697228">"נקודה לשיתוף אינטרנט ושיתוף אינטרנט בין ניידים"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"נקודה לשיתוף אינטרנט פועלת, שיתוף אינטרנט בין ניידים"</string>
+    <string name="tether_settings_title_all" msgid="6807525590937697228">"‏שיתוף אינטרנט (hotspot ו-tethering)"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"‏שיתוף האינטרנט פועל (hotspot ו-tethering)"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"נקודה לשיתוף אינטרנט פועלת"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"שיתוף אינטרנט"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"‏לא ניתן לשתף אינטרנט בין ניידים או להשתמש בנקודה ניידת לשיתוף אינטרנט כשחוסך הנתונים (Data Saver) פועל."</string>
@@ -1725,7 +1726,7 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"‏שיתוף אינטרנט רק באמצעות USB, ‏Bluetooth ו-Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"‏שיתוף אינטרנט דרך USB"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏שיתוף בחיבור לאינטרנט של הטלפון דרך USB"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏שיתוף האינטרנט של הטלפון דרך USB"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"‏שיתוף בחיבור לאינטרנט של הטאבלט דרך USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"‏שיתוף אינטרנט דרך Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"‏שיתוף החיבור לאינטרנט של הטאבלט דרך Bluetooth"</string>
@@ -1733,10 +1734,10 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"‏החיבור לאינטרנט של <xliff:g id="DEVICE_NAME">%1$d</xliff:g> זה משותף דרך Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"לא ניתן לשתף אינטרנט בין למעלה מ-<xliff:g id="MAXCONNECTION">%1$d</xliff:g> מכשירים."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"קשירת <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"‏שיתוף אינטרנט עם Ethernet"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"‏שיתוף אינטרנט דרך Ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"‏שיתוף החיבור לאינטרנט של הטלפון דרך Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"אפשר להשתמש בנקודה לשיתוף אינטרנט ובשיתוף אינטרנט בין ניידים כדי לאפשר למכשירים אחרים להתחבר לאינטרנט דרך חבילת הגלישה שלך. ניתן גם להשתמש באפליקציות כדי ליצור נקודה לשיתוף אינטרנט ולשתף תכנים בין מכשירים שנמצאים בקרבת מקום."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"‏ניתן להשתמש בנקודה לשיתוף אינטרנט ובשיתוף אינטרנט בין מכשירים כדי לאפשר למכשירים אחרים להתחבר לאינטרנט דרך ה-Wi-Fi או דרך חבילת הגלישה שלך. ניתן גם להשתמש באפליקציות כדי ליצור נקודה לשיתוף אינטרנט ולשתף תכנים בין מכשירים שנמצאים בקרבת מקום."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"‏נקודה לשיתוף אינטרנט (Hotspot) ושיתוף אינטרנט בין מכשירים (tethering) מאפשרים למכשירים אחרים להתחבר לאינטרנט דרך Wi-Fi או דרך חבילת הגלישה שלך. יש גם אפליקציות שמאפשרות ליצור נקודה לשיתוף אינטרנט ולשתף תכנים עם מכשירים קרובים."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"עזרה"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"רשתות סלולריות"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"תכנית לנייד"</string>
@@ -2517,8 +2518,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"הטאבלט נמצא בשימוש יותר מהרגיל"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"המכשיר נמצא בשימוש יותר מהרגיל"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"ייתכן שהסוללה תתרוקן מוקדם מהרגיל"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"מופעלת אופטימיזציה לשמירה על תקינות הסוללה"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"הסוללה מוגבלת באופן זמני. למידע נוסף יש להקיש."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"השתמשת בטלפון יותר מהרגיל. ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות לפי שימוש בסוללה:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"השתמשת בטאבלט יותר מהרגיל. ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות לפי שימוש בסוללה:"</string>
@@ -4367,7 +4367,7 @@
     <string name="condition_turn_on" msgid="3911077299444314791">"הפעלה"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"הצג"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"הסתר"</string>
-    <string name="condition_hotspot_title" msgid="7903918338790641071">"הנקודה לשיתוף אינטרנט פעילה"</string>
+    <string name="condition_hotspot_title" msgid="7903918338790641071">"‏נקודת ה-hotspot פעילה"</string>
     <string name="condition_airplane_title" msgid="5847967403687381705">"מצב טיסה מופעל"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"הרשתות לא זמינות"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"מצב \'נא לא להפריע\' מופעל"</string>
@@ -4811,12 +4811,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"מקסימום מערכי נתונים גלויים"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"איפוס לערכי ברירת המחדל"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"האפשרויות למפתחים למילוי האוטומטי אופסו"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"מיקום"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"אינדיקטור מיקום של שורת סטטוס"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"הצגת כל המיקומים, כולל רשת וקישוריות"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"‏אילוץ של הרצה מלאה של מדידות Gnss"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"‏מעקב אחר כל מערכות הניווט והתדרים של GNSS ללא מחזור פעילות"</string>
     <string name="device_theme" msgid="5027604586494772471">"עיצוב המכשיר"</string>
@@ -5237,4 +5234,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"אינו זמין כאשר מצב שינה מופעל"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"הושלם איפוס הגדרת החשיבות של ההתראות."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"אפליקציות"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"מכשיר לא מהימן מבקש לקבל גישה להודעות. יש להקיש לקבלת פרטים."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"להעניק גישה להודעות?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"‏מכשיר Bluetooth לא מהימן, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], מבקש גישה להודעות.\n\nלא התחברת בעבר למכשיר [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"מכשיר לא מהימן מבקש גישה לאנשי הקשר וליומן השיחות. יש להקיש לקבלת פרטים."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"להעניק גישה לאנשי הקשר וליומן השיחות?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"‏מכשיר Bluetooth לא מהימן, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], מבקש גישה לאנשי הקשר וליומן השיחות. הגישה תכלול גם נתונים על שיחות נכנסות ויוצאות.\n\nלא התחברת בעבר למכשיר [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>
