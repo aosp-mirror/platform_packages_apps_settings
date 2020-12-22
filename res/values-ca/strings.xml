@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Les aplicacions es poden restablir"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Restableix Wi-Fi, dades mòbils i Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Es restabliran totes les opcions de configuració de la xarxa, inclosos:\n\n"<li>"la Wi‑Fi"</li>\n<li>"les dades mòbils"</li>\n<li>"el Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Esborra"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Esborra les SIM baixades"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Per baixar targetes SIM de substitució, contacta amb el teu operador de telefonia mòbil. Aquesta acció no cancel·larà cap dels plans de servei mòbil."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Aquesta acció no cancel·larà cap dels plans de servei mòbil. Per baixar targetes SIM de substitució, contacta amb el teu operador."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Restableix la configuració"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Vols restablir totes les opcions de configuració de la xarxa? Aquesta acció no es pot desfer."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Vols restablir totes les opcions de configuració de la xarxa i esborrar les targetes SIM baixades? Aquesta acció no es pot desfer."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"La tauleta s\'ha utilitzat més del que és habitual"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"El dispositiu s\'ha utilitzat més del que és habitual"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pot ser que la bateria s\'esgoti massa ràpid"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"S\'està optimitzant per a l\'estat de la bateria"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria limitada temporalment. Toca per obtenir més informació."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"El telèfon s\'ha fet servir més del que és habitual i és possible que la bateria s\'esgoti abans del previst.\n\nAplicacions que han consumit més bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"La tauleta s\'ha fet servir més del que és habitual i és possible que la bateria s\'esgoti abans del previst.\n\nAplicacions que han consumit més bateria:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Màxim de conjunts de dades visibles"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Restableix els valors predeterminats"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"S\'han restablert les opcions d\'emplenament automàtic per a desenvolupadors"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Ubicació"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indicador d\'ubicació de la barra d\'estat"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Mostra per a totes les ubicacions, incloses la xarxa i la connectivitat"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Força mesuraments de GNSS complets"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Fes un seguiment de totes les freqüències i constel·lacions de GNSS sense cicle de treball"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema del dispositiu"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"No està disponible perquè el mode d\'hora de dormir està activat"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"S\'ha completat el restabliment de la importància de les notificacions."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplicacions"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Un dispositiu que no és de confiança vol accedir als teus missatges. Toca per veure més informació."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vols permetre l\'accés als missatges?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Un dispositiu Bluetooth que no és de confiança, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vol accedir als teus missatges. \n\nNo t\'has connectat a [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] abans."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Un dispositiu que no és de confiança vol accedir als teus contactes i al registre de trucades. Toca per veure més informació."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vols permetre l\'accés als contactes i al registre de trucades?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Un dispositiu Bluetooth que no és de confiança, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vol accedir als teus contactes i al registre de trucades. Això inclou dades sobre les trucades entrants i sortints.\n\nNo t\'has connectat a [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] abans."</string>
 </resources>

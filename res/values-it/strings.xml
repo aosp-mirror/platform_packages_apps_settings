@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Le app possono essere reimpostate"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Reimposta Wi-Fi, dati mobili e Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Verranno reimpostate tutte le impostazioni di rete, tra cui:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dati mobili"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Resetta"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Cancella SIM scaricate"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Per scaricare le SIM sostitutive, contatta il tuo operatore. Ciò non annullerà alcun piano di servizio mobile."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Gli eventuali piani di servizio mobile non verranno annullati. Per scaricare SIM sostitutive, contatta il tuo operatore."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Reimposta"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Ripristinare tutte le impostazioni della rete? Questa azione non può essere annullata."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Reimpostare tutte le impostazioni di rete e resettare tutte le SIM scaricate? Questa azione non può essere annullata."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet utilizzato più del solito"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Dispositivo usato più del solito"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"La batteria potrebbe esaurirsi prima del solito"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Ottimizzazione per integrità batteria"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batteria momentaneamente limitata. Tocca per scoprire di più."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Hai utilizzato il telefono più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nApp con il maggior consumo di batteria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Hai utilizzato il tablet più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nApp con il maggiore consumo di batteria:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Set di dati visibili massimi"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Reimposta i valori predefiniti"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Le opzioni di compilazione automatica per gli sviluppatori sono state reimpostate"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Posizione"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indicatore di posizione nella barra di stato"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Mostra per tutte le posizioni, incluse quelle rilevate tramite rete e connettività"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forza esecuzione completa delle misurazioni GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema del dispositivo"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Non disponibili perché la modalità Riposo è attiva"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Reimpostazione dell\'importanza delle notifiche completata."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"App"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Un dispositivo non attendibile richiede l\'accesso ai tuoi messaggi. Tocca per conoscere i dettagli."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vuoi consentire l\'accesso ai messaggi?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Un dispositivo Bluetooth non attendibile, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], richiede l\'accesso ai tuoi messaggi.\n\nNon hai mai effettuato la connessione al dispositivo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Un dispositivo non attendibile richiede l\'accesso ai tuoi contatti e al tuo registro chiamate. Tocca per conoscere i dettagli."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vuoi consentire l\'accesso a contatti e registro chiamate?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Un dispositivo Bluetooth non attendibile, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], richiede l\'accesso ai tuoi contatti e al tuo registro chiamate, inclusi i dati relativi a chiamate in arrivo e in uscita.\n\nNon hai mai effettuato la connessione al dispositivo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

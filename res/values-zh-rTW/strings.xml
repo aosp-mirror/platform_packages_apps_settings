@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"可重設應用程式"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"重設 Wi-Fi、行動網路和藍牙"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"這項操作會重設所有網路設定，包括：\n\n"<li>"Wi‑Fi"</li>\n<li>"行動數據"</li>\n<li>"藍牙"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"清除"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"清除已下載的 SIM 卡"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"如要下載替換用的 SIM 卡，請與你的電信業者聯絡。這個動作不會取消任何電信資費方案。"</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"這項操作不會取消任何電信資費方案。如要下載替換用的 SIM 卡，請與你的電信業者聯絡。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"重設設定"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"要重設所有網路設定嗎？請注意，這個動作無法復原。"</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"要重設所有網路設定並清除已下載的 SIM 卡嗎？請注意，這個動作無法復原。"</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板電腦使用率比平常高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"裝置使用率比平常高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池電量可能會比平常更快耗盡"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"針對電池狀態進行最佳化調整"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"系統已暫時限制電池用量。輕觸即可瞭解詳情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"你的手機使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"你的平板電腦使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"可見資料集數量上限"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"重設為預設值"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"已重設自動填入開發人員選項"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"位置"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"狀態列位置指標"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"顯示所有位置，包括透過網路和各種連線方式取得的位置資訊"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"強制啟用完整的 GNSS 測量資料"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"在停用工作週期的情況下追蹤所有 GNSS 星座圖和頻率"</string>
     <string name="device_theme" msgid="5027604586494772471">"裝置主題"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寢時間模式開啟時無法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重設完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"應用程式"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"不受信任的裝置想要存取你的訊息。輕觸即可瞭解詳情。"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"要允許存取訊息嗎？"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"不受信任的藍牙裝置 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] 想要存取你的訊息。\n\n請注意，你從未連結到 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"不受信任的裝置想要存取你的聯絡人和通話記錄。輕觸即可瞭解詳情。"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允許存取聯絡人和通話記錄嗎？"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"不受信任的藍牙裝置 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] 想要存取你的聯絡人和通話記錄，包括你接聽及撥打的電話。\n\n請注意，你從未連結到 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]。"</string>
 </resources>
