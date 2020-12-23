@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Có thể đặt lại các ứng dụng"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Đặt lại Wi-Fi, di động và Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Thao tác này sẽ đặt lại tất cả các tùy chọn cài đặt mạng, bao gồm:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dữ liệu di động"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Xóa"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Xóa SIM đã tải xuống"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Nếu bạn muốn tải SIM thay thế xuống, hãy liên hệ với nhà mạng. Thao tác này sẽ không hủy bất kỳ gói dịch vụ di động nào."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Thao tác này sẽ không hủy gói dịch vụ di động nào. Để tải SIM thay thế xuống, hãy liên hệ với nhà mạng của bạn."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Đặt lại các tùy chọn cài đặt"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Bạn muốn đặt lại tất cả tùy chọn cài đặt mạng? Bạn không thể hủy hành động này."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Bạn muốn đặt lại tất cả tùy chọn cài đặt mạng và xóa các SIM đã tải xuống? Bạn không thể hủy hành động này sau khi đã thực hiện."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Máy tính bảng được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Thiết bị được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pin có thể hết sớm hơn thường lệ"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Tối ưu hóa để cải thiện độ bền của pin"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Thời lượng pin bị hạn chế tạm thời. Nhấn để tìm hiểu thêm."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Bạn sử dụng điện thoại nhiều hơn mức bình thường. Pin điện thoại có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Bạn dùng máy tính bảng nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Số tập dữ liệu hiển thị tối đa"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Đặt lại về giá trị mặc định"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Đã đặt lại tùy chọn tự động điền dành cho nhà phát triển"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Vị trí"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Chỉ báo vị trí trên thanh trạng thái"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Hiển thị cho tất cả vị trí, bao gồm cả mạng và khả năng kết nối"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Thực thi số đo GNSS đầy đủ"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Theo dõi tất cả chòm sao và tần suất GNSS mà không có chu kỳ làm việc"</string>
     <string name="device_theme" msgid="5027604586494772471">"Giao diện thiết bị"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Không dùng được vì chế độ giờ đi ngủ đang bật"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Đã hoàn tất việc đặt lại mức độ quan trọng của thông báo."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Ứng dụng"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Thiết bị không tin cậy muốn truy cập vào tin nhắn của bạn. Hãy nhấn để biết thông tin chi tiết."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Cho phép truy cập vào tin nhắn?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Một thiết bị Bluetooth không tin cậy [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] muốn truy cập vào tin nhắn của bạn.\n\nBạn chưa từng kết nối với [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Thiết bị không tin cậy muốn truy cập vào danh bạ và nhật ký cuộc gọi của bạn. Hãy nhấn để biết thông tin chi tiết."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Cho phép truy cập vào danh bạ và nhật ký cuộc gọi?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Một thiết bị Bluetooth không tin cậy [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] muốn truy cập vào danh bạ và nhật ký cuộc gọi của bạn. Trong đó có cả dữ liệu về cuộc gọi đi và cuộc gọi đến.\n\nBạn chưa từng kết nối với [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

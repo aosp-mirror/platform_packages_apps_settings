@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Hægt er að endurstilla forrit"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Endurstilla Wi-Fi, farsímagögn og Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Þetta mun endurstilla allar netkerfisstillingar, þar á meðal:\n\n"<li>"Wi‑Fi"</li>\n<li>"Farsímagögn"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Eyða"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Eyða sóttum SIM-kortum"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Til að sækja ný SIM-kort þarftu að hafa samband við símafyrirtækið þitt. Þetta segir ekki upp neinni áskrift hjá símafyrirtæki."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Þetta segir ekki upp neinni áskrift hjá símafyrirtæki. Til að sækja ný SIM-kort þarftu að hafa samband við símafyrirtækið þitt."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Endurstilla"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Endurstilla allar netstillingar? Ekki er hægt að afturkalla þessa aðgerð."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Viltu endurstilla allar netstillingar og hreinsa sótt SIM? Ekki er hægt að afturkalla þessa aðgerð."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Spjaldtölva notuð meira en venjulega"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Tæki notað meira en venjulega"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Rafhlaðan gæti tæmst fyrr en venjulega"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Fínstillir fyrir rafhlöðuendingu"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Rafhlaða takmörkuð tímabundið. Ýttu til að fá frekari upplýsingar."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Síminn hefur verið notaður meira en venjulega. Rafhlaðan gæti tæmst fyrr en ella.\n\nForrit með mestu rafhlöðunotkunina:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Spjaldtölvan hefur verið notuð meira en venjulega. Rafhlaðan gæti tæmst fyrr en ella.\n\nForrit með mestu rafhlöðunotkunina:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Hámark sýnilegra gagnasafna"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Endurstilla á sjálfgildi"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Forritunarkostir sjálfvirkrar endurstillingar hafa verið endurstilltir"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Staðsetning"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Staðsetningarvísir stöðustiku"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Birta fyrir allar staðsetningar, þ. á m. netkerfi og tengigetu"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Full GNSS-mæling"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Rekja öll GNSS söfn og tíðnir með engum vinnulotum"</string>
     <string name="device_theme" msgid="5027604586494772471">"Þema tækisins"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ekki í boði vegna þess að kveikt er á háttatímastillingu"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Endurstilling forgangs tilkynninga tókst."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Forrit"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Ótraust tæki vill fá aðgang að skilaboðunum þínum. Ýttu til að fá frekari upplýsingar."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Leyfa aðgang að skilaboðum?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Ótraust Bluetooth-tæki, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vill fá aðgang að skilaboðunum þínum.\n\nÞú hefur ekki tengst [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] áður."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Ótraust tæki vill fá aðgang að tengiliðunum þínum og símtalaskránni. Ýttu til að fá frekari upplýsingar."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Leyfa aðgang að tengiliðum og símtalaskrá?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Ótraust Bluetooth-tæki, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vill fá aðgang að tengiliðum þínum og símtalaskrá. Þetta felur í sér gögn um móttekin og hringd símtöl.\n\nÞú hefur ekki tengst [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] áður."</string>
 </resources>

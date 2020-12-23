@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Հավելվածների կարգավորումները կարելի է զրոյացնել"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Զրոյացնել Wi-Fi-ի, բջջային թրաֆիկի և Bluetooth-ի կարգավորումները"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Արդյունքում կզրոյացվեն բոլոր ցանցային կարգավորումները, ներառյալ հետևյալը՝\n\n"<li>"Wi‑Fi"</li>\n<li>"Բջջային ինտերնետ"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Ջնջել"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Ջնջել ներբեռնված SIM-երը"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Նոր SIM քարտ ներբեռնելու համար դիմեք ձեր օպերատորին։ Բջջային կապի սակագնային պլանները չեն չեղարկվի:"</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Բջջային կապի սակագնային պլանները չեն չեղարկվի։ Նոր SIM քարտ ներբեռնելու համար դիմեք ձեր օպերատորին։"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Զրոյացնել կարգավորումները"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Զրոյացնե՞լ ցանցի բոլոր կարգավորումները: Այս գործողությունը հնարավոր չի լինի հետարկել:"</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Զրոյացնե՞լ ցանցի բոլոր կարգավորումները և ջնջել ներբեռնված SIM քարտերի տվյալները։ Այս գործողությունը չեք կարող հետարկել:"</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Պլանշետը սովորականից շատ է էներգիա օգտագործել"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Սարքը սովորականից շատ է էներգիա օգտագործել"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Մարտկոցի լիցքը կարող է սովորականից շուտ սպառվել"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Օպտիմալացում՝ մարտկոցի ծառայության ժամկետը երկարացնելու համար"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Մարտկոցը ժամանակավորապես սահմանափակված է։ Հպեք՝ ավելին իմանալու համար։"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Ձեր հեռախոսը սովորականից շատ է էներգիա օգտագործել։ Մարտկոցի լիցքը կարող է սպասվածից շուտ սպառվել։\n\nԱմենից շատ էներգիա սպառող հավելվածներն են՝"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Ձեր պլանշետը սովորականից շատ է էներգիա օգտագործել։ Մարտկոցի լիցքը կարող է սպասվածից շուտ սպառվել։\n\nԱմենից շատ էներգիա սպառող հավելվածներն են՝"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Տեսանելի տվյալակազմերի առավելագույն քանակը"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Վերականգնել կանխադրված արժեքները"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Ինքնալրացման կարգավորումները զրոյացվեցին"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Տեղադրություն"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Տեղադրության ցուցիչ կարգավիճակի գոտում"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Ցուցադրել բոլոր վայրերի համար (ներառյալ ցանցի ու կապակցման միջոցով որոշվողները)"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GNSS-ի չափումների ամբողջական բեռնում"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Հետագծել GNSS-ի բոլոր սխեմաներն ու հաճախականությունները՝ առանց աշխատաշրջանի"</string>
     <string name="device_theme" msgid="5027604586494772471">"Սարքի թեման"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Անհասանելի է, քանի որ քնի ռեժիմը միացված է"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Ծանուցումների կարևորության կարգավորումները զրոյացվեցին։"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Հավելվածներ"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Մի ոչ վստահելի սարք ուզում է հասանելիություն ստանալ ձեր հաղորդագրություններին։ Հպեք՝ ավելին իմանալու համար։"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Հասանելի դարձնե՞լ հաղորդագրությունները"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"[<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] սարքը, որը ոչ վստահելի Bluetooth սարք է, ուզում է հասանելիություն ստանալ ձեր հաղորդագրություններին։\n\nԴուք նախկինում չեք միացել [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] սարքին։"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Մի ոչ վստահելի սարք ուզում է հասանելիություն ստանալ ձեր կոնտակտներին և զանգերի մատյանին։ Հպեք՝ ավելին իմանալու համար։"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Հասանելի դարձնե՞լ կոնտակտներն ու զանգերի մատյանը"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"[<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] սարքը, որը ոչ վստահելի Bluetooth սարք է, ուզում է հասանելիություն ստանալ ձեր կոնտակտներին և զանգերի մատյանին, որը ներառում է մուտքային և ելքային զանգերի մասին տվյալներ։\n\nԴուք նախկինում չեք միացել [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] սարքին։"</string>
 </resources>

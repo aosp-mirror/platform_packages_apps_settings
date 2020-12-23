@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Berrezar daitezke aplikazioak"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Berrezarri wifi, Bluetooth eta sare mugikorrak"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Hori eginez gero, sare guztien ezarpenak berrezarriko dira, besteak beste: \n\n"<li>"Wifia"</li>\n<li>"Datu-konexioa"</li>\n<li>"Bluetooth-a"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Ezabatu eduki guztia"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Ezabatu deskargatutako SIMen edukia"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Ordezko SIM txartelak deskargatzeko, jarri operadorearekin harremanetan. Ez da utziko bertan behera mugikorraren zerbitzu-planik."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Ez da utziko bertan behera mugikorraren zerbitzu-planik. Ordezko SIMak deskargatzeko, jarri harremanetan operadorearekin."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Berrezarri ezarpenak"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Sareko ezarpen guztiak berrezarri nahi dituzu? Ezin da desegin ekintza hori."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Sareko ezarpen guztiak berrezarri eta deskargatutako SIM txartelen datu guztiak ezabatu nahi dituzu? Ezin da desegin ekintza hori."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tableta ohi baino gehiago erabili da"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Gailua ohi baino gehiago erabili da"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baliteke bateria ohi baino lehenago agortzea"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimizatzen, bateria egoera onean mantentzeko"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria mugatuta egongo da aldi batez. Informazio gehiago lortzeko, sakatu hau."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefonoa ohi baino gehiago erabili da. Baliteke bateria espero baino lehenago agortzea.\n\nBateria gehien erabili duten aplikazioak:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tableta ohi baino gehiago erabili da. Baliteke bateria espero baino lehenago agortzea.\n\nBateria gehien erabili duten aplikazioak:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Ikusgai dauden gehieneko datu multzoak"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Berrezarri balio lehenetsiak"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Garatzaileak ez ditu berrezarri betetze automatikoko aukerak"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Kokapena"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Kokapen-adierazlearen egoera-barra"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Erakutsi kokapen guztietan, sarea eta konektagarritasuna barne"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Behartu GNSS neurketa osoak gauzatzera"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Egin GNSS konstelazio eta maiztasun guztien jarraipena, eginbeharren ziklorik gabe"</string>
     <string name="device_theme" msgid="5027604586494772471">"Gailuaren gaia"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ez dago erabilgarri, lo egiteko garaiaren modua aktibatuta dagoelako"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Berrezarri da jakinarazpenen garrantzia."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikazioak"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Fidagarria ez den gailu batek zure mezuak atzitu nahi ditu. Sakatu xehetasunak ikusteko."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Mezuak atzitzeko baimena eman nahi diozu?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Fidagarria ez den Bluetooth bidezko gailu batek ([<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]) zure mezuak atzitu nahi ditu.\n\nEz zara inoiz konektatu [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] gailura."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Fidagarria ez den gailu batek zure kontaktuak eta deien historia atzitu nahi ditu. Sakatu xehetasunak ikusteko."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Kontaktuak eta deien historia atzitzeko baimena eman nahi diozu?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Fidagarria ez den Bluetooth bidezko gailu batek ([<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]) zure kontaktuak eta deien historia atzitu nahi ditu. Hor sartzen dira jasotako eta egindako deiei buruzko datuak.\n\nEz zara inoiz konektatu [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] gailura."</string>
 </resources>

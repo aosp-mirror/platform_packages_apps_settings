@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"アプリをリセットできます"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi、モバイル、Bluetooth をリセット"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"以下を含む、すべてのネットワーク設定がリセットされます。\n\n"<li>"Wi‑Fi"</li>\n<li>"モバイルデータ"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"消去"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"ダウンロードされた eSIM の消去"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"別の eSIM をダウンロードするには、携帯通信会社にお問い合わせください。この操作でモバイルのサービスプランが解約されることはありません。"</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"この操作でモバイルのサービスプランが解約されることはありません。交換用 SIM のダウンロードについては、携帯通信会社にお問い合わせください。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"設定をリセット"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"すべてのネットワーク設定をリセットしますか？この操作を取り消すことはできません。"</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"すべてのネットワーク設定をリセットして、ダウンロードされた eSIM を消去しますか？この操作を取り消すことはできません。"</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"タブレットの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"デバイスの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池が通常より早くなくなる可能性があります"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"電池の状態を最適化"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"電池の使用が一時的に制限されています。タップして詳細をご確認ください。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"スマートフォンの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"タブレットの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"表示するデータセットの最大数"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"デフォルト値にリセット"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"自動入力の開発者向けオプションをリセットしました"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"場所"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"ステータスバーの場所インジケーター"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"ネットワークや接続を含め、すべての場所で表示されます"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GNSS 計測の完全な実行"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"デューティ サイクリングを無効にした状態で、すべての GNSS コンステレーションと頻度をトラッキングします"</string>
     <string name="device_theme" msgid="5027604586494772471">"デバイスのテーマ"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知の重要度をリセットしました。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"アプリ"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"信頼できないデバイスがメッセージにアクセスしようとしています。タップして詳細をご確認ください。"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"メッセージへのアクセスを許可しますか？"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"信頼できない Bluetooth デバイス「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」がメッセージにアクセスしようとしています。\n\nこれまでに「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」に接続したことはありません。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"信頼できないデバイスが連絡先と通話履歴にアクセスしようとしています。タップして詳細をご確認ください。"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"連絡先と通話履歴へのアクセスを許可しますか？"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"信頼できない Bluetooth デバイス「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」が連絡先と通話履歴にアクセスしようとしています。これには着信や発信に関するデータも含まれます。\n\nこれまでに「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」に接続したことはありません。"</string>
 </resources>

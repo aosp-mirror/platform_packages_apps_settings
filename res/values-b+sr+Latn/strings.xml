@@ -1632,8 +1632,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Aplikacije mogu da se resetuju"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Resetuj WiFi, mobilnu mrežu i Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Ovim resetujete sva podešavanja mreže, uključujući:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobilne podatke"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Obriši"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Obriši preuzete SIM kartice"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Da biste preuzeli zamenske SIM kartice, kontaktirajte mobilnog operatera. Time se neće otkazati nijedan tarifni paket."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Ovim ne otkazujete nijedan tarifni paket. Da biste preuzimali rezervne SIM kartice, obratite se mobilnom operateru."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Resetuj podešavanja"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Želite li da resetujete sva podešavanja mreže? Ova radnja ne može da se opozove."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Želite li da resetujete podešavanja mreže i obrišete preuzete SIM kartice? Ova radnja ne može da se opozove."</string>
@@ -2486,8 +2487,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet ste koristili duže nego obično"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Uređaj ste koristili duže nego obično"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija može da se isprazni ranije nego obično"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimizuje se radi dobrog stanja baterije"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterija je trenutno ograničena. Dodirnite da biste saznali više."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Uređaj ste koristili duže nego obično. Baterija može da se isprazni ranije od očekivanog.\n\nAplikacije sa najvećom potrošnjom baterije:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet ste koristili duže nego obično. Baterija može da se isprazni ranije od očekivanog.\n\nAplikacije sa najvećom potrošnjom baterije:"</string>
@@ -4731,12 +4731,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maksimalan broj vidljivih skupova podataka"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Resetuj na podrazumevane vrednosti"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Opcije za programera za automatsko popunjavanje su resetovane"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Lokacija"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indikator lokacije statusne trake"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Prikaži sve lokacije, uključujući mrežu i povezivanje"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Prinudno pokreni puna GNSS merenja"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Prati sve GNSS konstalacije i frekvencije bez ciklusa rada"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema uređaja"</string>
@@ -5154,4 +5151,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupno je jer je noćni režim uključen"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Resetovanje važnosti obaveštenja je dovršeno."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Nepouzdani uređaj želi da pristupa porukama. Dodirnite za detalje."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Želite li da dozvolite pristup porukama?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Nepouzdani Bluetooth uređaj, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], želi da pristupa porukama.\n\nRanije se niste povezivali sa uređajem [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Nepouzdani uređaj želi da pristupa kontaktima i evidenciji poziva. Dodirnite za detalje."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Želite li da dozvolite pristup kontaktima i evidenciji poziva?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Nepouzdani Bluetooth uređaj, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], želi da pristupa kontaktima i evidenciji poziva. To obuhvata podatke o dolaznim i odlaznim pozivima.\n\nRanije se niste povezivali sa uređajem [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

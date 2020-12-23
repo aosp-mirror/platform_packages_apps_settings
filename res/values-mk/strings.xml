@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Апликациите може да се ресетираат"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Ресетирај Wi-Fi, мобилен интернет и Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Ова ќе ги ресетира сите мрежни поставки, вклучувајќи:\n\n"<li>"Wi‑Fi"</li>\n<li>"Мобилен интернет"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Избриши"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Избриши преземени SIM-картички"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"За да преземете SIM-картички за замена, контактирајте со операторот. Со ова не се откажуваат пакети за мобилни услуги."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Ова нема да ги откаже пакетите за мобилни услуги. За да преземете SIM-картички за замена, контактирајте со операторот."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Ресетирај поставки"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Да се ресетираат сите мрежни поставки? Ова дејство не може да се врати."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Да се ресетираат сите мрежни поставки и да се избришат преземените SIM-картички? Ова дејство не може да се врати."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Таблетот се користи повеќе од вообичаено"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Уредот се користи повеќе од вообичаено"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Батеријата може да се потроши порано од вообичаено"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Се оптимизира за состојба на батеријата"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Батеријата е привремено ограничена. Допрете за да дознаете повеќе."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Телефонот сте го користеле повеќе од вообичаено. Батеријата може да се потроши порано од очекуваното.\n\nАпликации што најмногу ја користеле батеријата:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Таблетот сте го користеле повеќе од вообичаено. Батеријата може да се потроши порано од очекуваното.\n\nАпликации што најмногу ја користеле батеријата:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Максимум видливи збирови на податоци"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Ресетирај на стандардните вредности"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Опциите за програмери за автоматско пополнување се ресетирани"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Локација"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Индикатор за локација на статусната лента"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Прикажи за сите локации, вклучително и за мрежата и поврзливоста"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Присилување целосни мерења со GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Следете ги сите констелации и фреквенции со GNSS без работен циклус"</string>
     <string name="device_theme" msgid="5027604586494772471">"Тема на уредот"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Недостапно бидејќи е вклучен „Режимот за спиење“"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Ресетирањето на важноста на известувањата е завршено."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Апликации"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Недоверлив уред сака да пристапи до вашите пораки. Допрете за детали."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Да се дозволи пристап до пораките?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Недоверлив уред со Bluetooth, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], сака да пристапи до вашите пораки.\n\nДосега не сте се поврзале со [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Недоверлив уред сака да пристапи до вашите контакти и евиденцијата на повици. Допрете за детали."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Да се дозволи пристап до контактите и евиденцијата на повици?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Недоверлив уред со Bluetooth, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], сака да пристапи до вашите контакти и евиденцијата на повици. Ова ги опфаќа податоците за дојдовните и појдовните повици.\n\nДосега не сте се поврзале со [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

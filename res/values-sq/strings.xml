@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Aplikacionet mund të rivendosen"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Rivendos Wi-Fi, lidhjen celulare dhe Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Kjo do të rivendosë të gjitha cilësimet e rrjetit, duke përfshirë:\n\n"<li>"Wi‑Fi"</li>\n<li>"Të dhënat celulare"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Spastro"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Spastro kartat SIM të shkarkuara"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Për të shkarkuar karta SIM zëvendësuese, kontakto me operatorin celular. Kjo nuk do të anulojë asnjë plan të shërbimit celular."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Kjo nuk do të anulojë planet e shërbimit celular. Për të shkarkuar karta zëvendësuese SIM, kontakto me operatorin celular."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Rivendos cilësimet"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Të rivendosen të gjitha cilësimet e rrjetit? Ky veprim nuk mund të zhbëhet."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Do t\'i rivendosësh të gjitha cilësimet dhe t\'i spastrosh kartat SIM të shkarkuara? Nuk mund ta zhbësh këtë veprim."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tableti është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Pajisja është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Bateria mund të mbarojë më herët se zakonisht"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Po optimizohet për integritetin e baterisë"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria e kufizuar përkohësisht. Trokit për të mësuar më shumë."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefoni yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tableti yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Setet maksimale të dukshme të të dhënave"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Rivendos në vlerat e parazgjedhura"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Opsionet e plotësimit automatik të zhvilluesit janë rivendosur"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Vendndodhja"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Treguesi i vendndodhjes së shiritit të statusit"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Shfaqe për të gjitha vendndodhjet, duke përfshirë rrjetin dhe lidhshmërinë"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Matjet GNSS me fuqi të plotë"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Gjurmo të gjitha koleksionet dhe frekuencat e GNSS pa ciklim të detyruar"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema e pajisjes"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nuk ofrohet sepse modaliteti i orarit të gjumit është aktiv"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Rivendosja e rëndësisë së njoftimit përfundoi."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacionet"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Një pajisje jo e besuar kërkon të ketë qasje te mesazhet e tua. Trokit për detaje."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Të lejohet qasja te mesazhet?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Një pajisje jo e besuar me Bluetooth, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], kërkon të ketë qasje te mesazhet e tua.\n\nNuk je lidhur me [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] më parë."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Një pajisje jo e besuar kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Trokit për detaje."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Të lejohet qasja te kontaktet dhe evidenca e telefonatave?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Një pajisje jo e besuar me Bluetooth, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Kjo përfshin të dhënat në lidhje me telefonatat hyrëse dhe dalëse.\n\nNuk je lidhur me [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] më parë."</string>
 </resources>
