@@ -28,7 +28,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.NetworkUtils;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -55,6 +54,8 @@ import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+
+import com.google.common.net.InternetDomainName;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -278,7 +279,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         final Button saveButton = getSaveButton();
         if (saveButton != null) {
             saveButton.setEnabled(modeProvider
-                    ? NetworkUtils.isWeaklyValidatedHostname(mEditText.getText().toString())
+                    ? InternetDomainName.isValid(mEditText.getText().toString())
                     : true);
         }
     }
