@@ -103,8 +103,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener {
 
-    private static final String TAG = "NetworkProviderSettings";
+    public static final String ACTION_NETWORK_PROVIDER_SETTINGS =
+            "android.settings.NETWORK_PROVIDER_SETTINGS";
 
+    private static final String TAG = "NetworkProviderSettings";
     // IDs of context menu
     static final int MENU_ID_CONNECT = Menu.FIRST + 1;
     @VisibleForTesting
