@@ -1653,8 +1653,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Aplikácie sa dajú resetovať"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Resetovať Wi‑Fi, dáta a Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Touto akciou obnovíte nastavenia všetkých sietí vrátane\n\n"<li>"Wi‑Fi"</li>\n<li>"mobilnej siete"</li>\n<li>"siete Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Vymazať"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Vymazať stiahnuté SIM karty"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Ak chcete stiahnuť náhradné SIM karty, kontaktujte operátora. Nezrušíte tým žiadne tarify mobilných služieb."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Nezrušíte tým žiadne tarify mobilných služieb. Ak si chcete stiahnuť náhradné SIM karty, kontaktujte operátora."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Resetovať nastavenia"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Chcete resetovať všetky nastavenia sietí? Túto akciu nie je možné vrátiť späť."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Chcete resetovať všetky nastavenia sietí a vymazať stiahnuté SIM karty? Túto akciu nie je možné vrátiť späť."</string>
@@ -2517,8 +2518,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet bol používaný viac ako obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Zariadenie bolo používané viac ako obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batéria sa môže vybiť skôr ako obvykle"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimalizácia na zaistenie dobrého stavu batérie"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batéria je dočasne obmedzená. Viac sa dozviete po klepnutí."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefón sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
@@ -4811,12 +4811,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Max. viditeľných množín dát"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Resetovať na predvolené hodnoty"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Možnosti automatického dopĺňania pre vývojárov boli obnovené"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Miesto"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indikátor umiestnenia stavového riadka"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Zobrazí všetky miesta vrátane siete a pripojenia"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Vynútiť úplné meranie GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Sledovať všetky konštelácie a frekvencie GNSS bez cyklického vypínania a zapínania"</string>
     <string name="device_theme" msgid="5027604586494772471">"Motív zariadenia"</string>
@@ -5237,4 +5234,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupné, pretože je zapnutý režim večierky"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Resetovanie dôležitosti upozornenia je dokončené."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikácie"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Nedôveryhodné zariadenie vyžaduje prístup k vašim správam. Klepnutím zobrazíte podrobnosti."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Chcete povoliť prístup k správam?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Nedôveryhodné zariadenie s rozhraním Bluetooth [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] vyžaduje prístup k vašim správam.\n\nK zariadeniu [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] ste sa predtým nikdy nepripojili."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Nedôveryhodné zariadenie vyžaduje prístup k vašim kontaktom a zoznamu hovorov. Klepnutím zobrazíte podrobnosti."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Chcete povoliť prístup ku kontaktom a zoznamu hovorov?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Nedôveryhodné zariadenie s rozhraním Bluetooth [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] vyžaduje prístup k vašim kontaktom a zoznamu hovorov. Zahŕňa to údaje o prichádzajúcich a odchádzajúcich hovoroch.\n\nK zariadeniu [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] ste sa predtým nikdy nepripojili."</string>
 </resources>

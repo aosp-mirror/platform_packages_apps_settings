@@ -1653,8 +1653,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Aplikacije je mogoče ponastaviti"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Ponastavi Wi-Fi, mob. podatke in Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"S tem boste ponastavili vse omrežne nastavitve, vključno s temi:\n\n"<li>"Wi‑Fi"</li>\n<li>"Prenos podatkov v mobilnih omrežjih"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Izbriši"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Brisanje prenesenih kartic SIM"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Če želite prenesti nadomestne kartice SIM, se obrnite na operaterja. S tem ne boste prekinili nobenega naročniškega paketa za mobilno telefonijo."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"S tem ne boste prekinili nobenega naročniškega paketa za mobilno telefonijo. Če želite prenesti nadomestne kartice SIM, se obrnite na operaterja."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Ponastavi nastavitve"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Želite ponastaviti vse omrežne nastavitve? Tega dejanja ni mogoče razveljaviti."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Želite ponastaviti vse omrežne nastavitve in izbrisati prenesene kartice SIM? Tega dejanja ni mogoče razveljaviti."</string>
@@ -2517,8 +2518,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablični računalnik uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Napravo uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija se bo morda izpraznila prej kot običajno"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimizacija za ohranjanje zmogljivosti baterije"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterija je začasno omejena. Za več informacij se dotaknite."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon ste uporabljali več kot običajno. Baterija se bo morda izpraznila prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije baterije:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablični računalnik ste uporabljali več kot običajno. Baterija se bo morda izpraznila prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije baterije:"</string>
@@ -4811,12 +4811,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Največje število prikazanih naborov podatkov"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Ponastavi na privzete vrednosti"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Možnosti samodejnega izpolnjevanja za razvijalce so bile ponastavljene"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Lokacija"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indikator lokacije v vrstici stanja"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Prikaži za vse lokacije, tudi za zaznane na podlagi omrežja in povezav"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Vsili popolne meritve GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Spremljaj vse razmestitve in frekvence GNSS brez ciklov"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema naprave"</string>
@@ -5237,4 +5234,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ni na voljo, ker je vklopljen način za spanje"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Ponastavitev pomembnosti obvestil je dokončana."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Naprava, ki ni vredna zaupanja, želi dostopati do vaših sporočil. Dotaknite se za podrobnosti."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Želite dovoliti dostop do sporočil?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Naprava Bluetooth [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], ki ni vredna zaupanja, želi dostopati do vaših sporočil.\n\nŠe nikoli niste vzpostavili povezave z napravo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Naprava, ki ni vredna zaupanja, želi dostopati do vaših stikov in dnevnika klicev. Dotaknite se za podrobnosti."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Želite dovoliti dostop do stikov in dnevnika klicev?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Naprava Bluetooth [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], ki ni vredna zaupanja, želi dostopati do vaših stikov in dnevnika klicev. To vključuje podatke o dohodnih in odhodnih klicih.\n\nŠe nikoli niste vzpostavili povezave z napravo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

@@ -1653,8 +1653,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Programas galima nustatyti iš naujo"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Iš naujo nustatyti „Wi-Fi“, mobiliųjų duomenų ir „Bluetooth“ nustatymus"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Bus iš naujo nustatyti visi tinklo nustatymai, įskaitant:\n\n"<li>"„Wi‑Fi“;"</li>\n<li>"mobiliojo ryšio duomenis;"</li>\n<li>"„Bluetooth“."</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Ištrinti"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Ištrinti atsisiųstas SIM kort."</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Jei norite atsisiųsti pakaitinių SIM kortelių, susisiekite su operatoriumi. Tai atlikus mobiliojo ryšio paslaugų planai nebus atšaukti."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Šiuo veiksmu neatšauksite jokio mobiliųjų paslaugų plano. Jei norite atsisiųsti pakaitinių SIM kortelių, susisiekite su operatoriumi."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Nustatyti iš naujo"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Iš naujo nustatyti visus tinklo nustatymus? Negalite anuliuoti šio veiksmo."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Iš naujo nustatyti visus tinklo nustatymus ir ištrinti atsisiųstas SIM korteles? Negalite anuliuoti šio veiksmo."</string>
@@ -2517,8 +2518,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Planšetinis kompiuteris buvo naudojamas daugiau nei įprasta"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Įrenginys buvo naudojamas daugiau nei įprasta"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Akumuliatoriaus energija gali išsekti greičiau nei įprasta"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimizuojama siekiant apsaugoti akumuliatorių"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Akumuliatorius laikinai apribotas. Palieskite, kad sužinotumėte daugiau."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefonas buvo naudojamas daugiau nei įprastai. Akumuliatoriaus energija gali išsekti greičiau, nei tikėjotės.\n\nDaugiausiai akumuliatoriaus energijos suvartojančios programos:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Planšetinis kompiuteris buvo naudojamas daugiau nei įprastai. Akumuliatoriaus energija gali išsekti greičiau, nei tikėjotės.\n\nDaugiausiai akumuliatoriaus energijos suvartojančios programos:"</string>
@@ -4811,12 +4811,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maks. matomų duomenų rinkinių"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Nustatyti numatytąsias vertes iš naujo"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Automatinio pildymo kūrėjo parinktys nustatytos iš naujo"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Vieta"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Būsenos juostos vietos indikatorius"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Rodyti visoms vietoms, įskaitant tinklą ir ryšį"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Priversti vykdyti visus GNSS matavimus"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Stebėti visas GNSS konferencijas ir visus dažnius netaikant darbo ciklų"</string>
     <string name="device_theme" msgid="5027604586494772471">"Įrenginio tema"</string>
@@ -5237,4 +5234,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nepasiekiama, nes įjungtas laiko eiti miegoti režimas"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Pranešimų svarba nustatyta iš naujo."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Programos"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Nepatikimas įrenginys nori pasiekti jūsų pranešimus. Palieskite, jei reikia išsamios informacijos."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Leisti pasiekti pranešimus?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Nepatikimas „Bluetooth“ įrenginys „<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>“ nori pasiekti jūsų pranešimus.\n\nPrie „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ dar niekada nebuvote prisijungę."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Nepatikimas įrenginys nori pasiekti jūsų kontaktus ir skambučių žurnalą. Palieskite, jei reikia išsamios informacijos."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Leisti pasiekti kontaktus ir skambučių žurnalą?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Nepatikimas „Bluetooth“ įrenginys „<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>“ nori pasiekti jūsų kontaktus ir skambučių žurnalą. Tai apima duomenis apie gaunamuosius ir siunčiamuosius skambučius.\n\nPrie „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ dar niekada nebuvote prisijungę."</string>
 </resources>

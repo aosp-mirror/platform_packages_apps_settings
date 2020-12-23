@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"ऐप्लिकेशन रीसेट किए जा सकते हैं"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"वाई-फ़ाई, मोबाइल और ब्लूटूथ रीसेट करें"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"इससे सभी नेटवर्क सेटिंग रीसेट हो जाएंगी, जिनमें ये भी शामिल हैं:\n\n"<li>"वाई-फ़ाई"</li>\n<li>"मोबाइल डेटा"</li>\n<li>"ब्लूटूथ"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"हमेशा के लिए मिटाएं"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"डाउनलोड किए गए सिम मिटाएं"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"दूसरा सिम डाउनलोड करने के लिए अपने मोबाइल और इंटरनेट सेवा देने वाली कंपनी से संपर्क करें. इससे कोई भी मोबाइल सेवा प्लान रद्द नहीं होगा."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"इससे मोबाइल सेवा का कोई भी प्लान रद्द नहीं होगा. दूसरा सिम डाउनलोड करने के लिए, मोबाइल और इंटरनेट सेवा देने वाली कंपनी से संपर्क करें."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"सेटिंग रीसेट करें"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"नेटवर्क की सभी सेटिंग रीसेट करें? आप इस कार्रवाई को पहले जैसा नहीं कर सकते."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"क्या आप नेटवर्क से जुड़ी सभी सेटिंग और डाउनलोड किए गए सिम रीसेट करना चाहते हैं? आप इस कार्रवाई को पहले जैसा नहीं कर सकते."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"टैबलेट को सामान्य से ज़्यादा इस्तेमाल किया गया"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"डिवाइस को सामान्य से ज़्यादा इस्तेमाल किया गया"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"हो सकता है कि बैटरी सामान्य समय से पहले खत्म हो जाए"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"बैटरी की परफ़ॉर्मेंस बेहतर करने के लिए, ऑप्टिमाइज़ किया जा रहा है"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"कुछ समय के लिए, बैटरी पूरी तरह से चार्ज नहीं होगी. ज़्यादा जानने के लिए टैप करें."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"आपका फ़ोन सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके फ़ोन की बैटरी समय से पहले खत्म हो सकती है.\n\nसबसे ज़्यादा बैटरी इस्तेमाल करने वाले ऐप्लिकेशन:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"आपका टैबलेट सामान्य से ज़्यादा इस्तेमाल हुआ है. आपके टैबलेट की बैटरी समय से पहले खत्म हो सकती है.\n\nसबसे ज़्यादा बैटरी इस्तेमाल करने वाले ऐप्लिकेशन:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"दिखने वाले डेटा सेट की ज़्यादा से ज़्यादा संख्या"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"डिफ़ॉल्ट मान पर रीसेट करें"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"डेवलपर के लिए अपने आप भरने की सुविधा (ऑटो फ़िल) सेटिंग और टूल रीसेट हो गए हैं"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"जगह"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"स्टेटस बार पर जगह की जानकारी दिखाने वाला संकेत"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"सभी जगह की जानकारी दिखाएं. इसके लिए, नेटवर्क और कनेक्टिविटी का भी इस्तेमाल करें"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"जीएनएसएस माप को हर हाल में लागू करें"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"बिना ड्यूटी-साइक्लिंग के जीएनएसएस के सभी तारामंडल (कॉन्स्टलेशन) और फ़्रीक्वेंसी ट्रैक करें"</string>
     <string name="device_theme" msgid="5027604586494772471">"डिवाइस की थीम"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"बेडटाइम मोड चालू होने पर यह सुविधा काम नहीं करती है"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"सूचनाओं की प्राथमिकता को रीसेट करने की प्रक्रिया पूरी हुई."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"ऐप्लिकेशन"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"एक डिवाइस आपके मैसेज ऐक्सेस करना चाहता है, लेकिन इस डिवाइस पर भरोसा नहीं किया जा सकता. जानकारी के लिए टैप करें."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"क्या आप मैसेज का ऐक्सेस देना चाहते हैं?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"एक ब्लूटूथ डिवाइस, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], आपके मैसेज ऐक्सेस करना चाहता है, लेकिन इस डिवाइस पर भरोसा नहीं किया जा सकता.\n\nआपने इसे पहले कभी [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] से कनेक्ट नहीं किया है."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"एक डिवाइस, आपके संपर्क और कॉल लॉग ऐक्सेस करना चाहता है. जानकारी के लिए टैप करें."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"क्या आप अपने संपर्क और कॉल लॉग का ऐक्सेस देना चाहते हैं?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"एक ब्लूटूथ डिवाइस, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], आपके संपर्क और कॉल लॉग ऐक्सेस करना चाहता है, लेकिन इस डिवाइस पर भरोसा नहीं किया जा सकता. इसमें आपके किए गए कॉल (आउटगोइंग) और आने वाले कॉल (इनकमिंग) से जुड़ा डेटा भी शामिल है.\n\nआपने पहले कभी अपने [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] को इससे कनेक्ट नहीं किया है."</string>
 </resources>

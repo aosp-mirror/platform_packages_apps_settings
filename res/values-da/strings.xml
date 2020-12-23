@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Apps kan nulstilles"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Nulstil Wi-Fi, mobil og Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Denne handling nulstiller alle netværksindstillinger, bl.a.:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobildata"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Ryd"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Ryd downloadede SIM-kort"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Kontakt dit mobilselskab for at downloade nye SIM-kort. Mobilabonnementer opsiges ikke."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Mobilabonnementer opsiges ikke. Kontakt dit mobilselskab for at downloade nye SIM-kort."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Nulstil indstillinger"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Vil du nulstille alle netværksindstillinger? Denne handling kan ikke fortrydes."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Vil du nulstille alle netværksindstillingerne og rydde downloadede SIM-kort? Denne handling kan ikke fortrydes."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Din tablet er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Enheden er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batteriet aflades muligvis hurtigere end normalt"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimerer på baggrund af batteritilstanden"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batteriet er midlertidigt begrænset. Tryk for at få flere oplysninger."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Din telefon er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Din tablet er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Højeste antal synlige datasæt"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Nulstil til standardværdierne"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Udviklerindstillingerne for autofyld blev nulstillet"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Placering"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Placeringsindikator i statusbjælke"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Vis i forbindelse med alle placeringer, herunder netværk og forbindelse"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Gennemtving fuld GNSS-måling"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Registrer alle GNSS-konstellationer og -frekvenser uden opgavegennemløb"</string>
     <string name="device_theme" msgid="5027604586494772471">"Enhedstema"</string>
@@ -5076,4 +5073,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ikke tilgængelig, da sengetidstilstand er aktiveret"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Vigtigheden af notifikationer blev nulstillet."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"En ikke-godkendt enhed vil gerne have adgang til dine beskeder. Tryk for at få flere oplysninger."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vil du give adgang til beskeder?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"En ikke-godkendt Bluetooth-enhed, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vil gerne have adgang til dine beskeder.\n\nDu har ikke oprettet forbindelse til [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] før."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"En ikke-godkendt enhed vil gerne have adgang til dine kontakter og din opkaldsliste. Tryk for at få flere oplysninger."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vil du give adgang til kontakter og opkaldsliste?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"En ikke-godkendt Bluetooth-enhed, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vil gerne have adgang til dine kontakter og din opkaldsliste. Dette omfatter data om indgående og udgående opkald.\n\nDu har ikke oprettet forbindelse til [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] før."</string>
 </resources>

@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Az Alkalmazások alaphelyzetbe állítható"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"A Wi-Fi, a mobiladatok és a Bluetooth beállításainak visszaállítása"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Az összes hálózati beállítást visszaállítja, például a következőket:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobiladat"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Törlés"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Letöltött SIM-ek törlése"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Csere SIM letöltése érdekében forduljon szolgáltatójához. Ezzel nem szűnik meg egyetlen mobil-előfizetési csomag sem."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Ezzel nem szűnik meg egyetlen mobil-előfizetési csomag sem. Csere-SIM letöltése érdekében forduljon szolgáltatójához."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Beállítások visszaállítása"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Alaphelyzetbe állítja az összes hálózati beállítást? Ez a művelet nem vonható vissza."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Visszaállítja az összes hálózati beállítást, és törli a letöltött SIM-eket? Ez a művelet nem vonható vissza."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"A táblagépet többet használja a megszokottnál"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Az eszközt többet használja a megszokottnál"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Az akkumulátor a szokásosnál hamarabb lemerülhet"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Akkumulátor-élettartam optimalizálása"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Az akkumulátor ideiglenesen korlátozva. A részletekért koppintson."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"A telefont többet használta a megszokottnál. A vártnál hamarabb lemerülhet az akkumulátor.\n\nAz akkumulátort leginkább igénybe vevő alkalmazások:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"A táblagépet többet használta a megszokottnál. A vártnál hamarabb lemerülhet az akkumulátor.\n\nAz akkumulátort leginkább igénybe vevő alkalmazások:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maximális látható adatkészletek"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Alapértelmezett értékek visszaállítása"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Az automatikus kitöltésre vonatkozó fejlesztői beállítások vissza lettek állítva"</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Hely"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Helyadathasználat jelzése az állapotsoron"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Megjelenítés minden helyadathasználat esetén (pl. hálózat és kapcsolódás)"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Teljes GNSS-mérés indítása"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Az összes GNSS-műhold és -frekvencia nyomon követése aktívciklus-szabályozás nélkül"</string>
     <string name="device_theme" msgid="5027604586494772471">"Eszköztéma"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nem áll rendelkezésre, mert be van kapcsolva az alvásidő mód"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Értesítés fontosságának visszaállítása befejezve."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Alkalmazások"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Egy nem megbízható eszköz hozzá szeretne férni az Ön üzeneteihez. Koppintson a részletekért."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Engedélyezi az üzenetekhez való hozzáférést?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Egy nem megbízható Bluetooth-eszköz ([<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]) hozzá szeretne férni az Ön üzeneteihez.\n\nEddig még nem csatlakozott a következő eszközhöz: [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Egy nem megbízható eszköz hozzá szeretne férni az Ön névjegyeihez és hívásnaplójához. Koppintson a részletekért."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Engedélyezi a névjegyeihez és a hívásnaplójához való hozzáférést?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Egy nem megbízható Bluetooth-eszköz ([<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]) hozzá szeretne férni az Ön névjegyeihez és hívásnaplójához. Ide tartoznak a bejövő és kimenő hívások adatai is.\n\nEddig még nem csatlakozott a következő eszközhöz: [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

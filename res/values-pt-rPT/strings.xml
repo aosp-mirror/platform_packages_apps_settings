@@ -1611,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"É possível repor as apps."</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Repor Wi-Fi, dados e Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Esta ação repõe todas as definições de rede, incluindo:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dados móveis"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Apagar"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Apagar SIMs transferidos"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Para transferir SIMs de substituição, contacte o seu operador. Esta ação não cancela qualquer plano de serviços móveis."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Esta ação não cancela qualquer plano de serviços móveis. Para transferir SIMs de substituição, contacte o seu operador."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Repor definições"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Pretende repor todas as definições de rede? Não é possível anular esta ação."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Pretende repor todas as definições de rede e apagar os SIMs transferidos? Não é possível anular esta ação."</string>
@@ -2455,8 +2456,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet utilizado mais do que o habitual"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Dispositivo utilizado mais do que o habitual"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pode ficar sem bateria mais cedo do que o habitual."</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (7152799456221596915) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"A otimizar o estado da bateria"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria limitada temporariamente. Toque para saber mais."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"O seu telemóvel tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"O seu tablet tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
@@ -4651,12 +4651,9 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Número máx. de conjuntos de dados visíveis"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Repor os valores predefinidos"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"As opções de preenchimento automático do programador foram repostas."</string>
-    <!-- no translation found for location_category (3496759112306219062) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_title (6655916258720093451) -->
-    <skip />
-    <!-- no translation found for location_indicator_settings_description (2888022085372804021) -->
-    <skip />
+    <string name="location_category" msgid="3496759112306219062">"Localização"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indicador da localização da barra de estado"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Apresente para todas as localizações, incluindo a rede e a conetividade."</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forçar medições de GNSS completas"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Monitorizar todas as constelações e frequências de GNSS sem ciclos"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema do dispositivo"</string>
@@ -5071,4 +5068,10 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Não disponível porque o modo de hora de dormir está ativado."</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Reposição da importância das notificações concluída."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Um dispositivo não fidedigno pretende aceder às suas mensagens. Toque para obter detalhes."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Pretende permitir o acesso às mensagens?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Um dispositivo Bluetooth não fidedigno, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], pretende aceder às suas mensagens.\n\nNão estabeleceu ligação ao dispositivo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] anteriormente."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Um dispositivo não fidedigno pretende aceder aos seus contactos e registo de chamadas. Toque para obter detalhes."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Pretende permitir o acesso aos contactos e registo de chamadas?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Um dispositivo Bluetooth não fidedigno, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], pretende aceder aos seus contactos e registo de chamadas. Isto inclui dados acerca de chamadas recebidas e efetuadas.\n\nNão estabeleceu ligação ao dispositivo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] anteriormente."</string>
 </resources>
