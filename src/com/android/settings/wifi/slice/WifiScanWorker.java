@@ -61,7 +61,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<WifiSliceItem> impleme
     @VisibleForTesting
     final LifecycleRegistry mLifecycleRegistry;
     @VisibleForTesting
-    WifiPickerTracker mWifiPickerTracker;
+    protected WifiPickerTracker mWifiPickerTracker;
     // Worker thread used for WifiPickerTracker work
     private final HandlerThread mWorkerThread;
 

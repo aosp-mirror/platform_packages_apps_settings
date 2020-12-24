@@ -147,7 +147,7 @@ public class WifiSlice implements CustomSliceable {
         return builder;
     }
 
-    private ListBuilder.RowBuilder getWifiSliceItemRow(WifiSliceItem wifiSliceItem) {
+    protected ListBuilder.RowBuilder getWifiSliceItemRow(WifiSliceItem wifiSliceItem) {
         final CharSequence title = wifiSliceItem.getTitle();
         final IconCompat levelIcon = getWifiSliceItemLevelIcon(wifiSliceItem);
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
