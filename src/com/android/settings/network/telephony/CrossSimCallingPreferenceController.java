@@ -17,11 +17,31 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.PersistableBundle;
+import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.telephony.ims.ImsException;
+import android.telephony.ims.ImsManager;
+import android.telephony.ims.ImsMmTelManager;
+import android.util.Log;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
+import com.android.settings.R;
+
+import java.util.Objects;
 
 /**
  * Preference controller for "Cross SIM Calling"
  **/
 public class CrossSimCallingPreferenceController extends TelephonyTogglePreferenceController {
+
+    private static final String LOG_TAG = "CrossSimCallingPrefCtrl";
+
+    private int mSubId;
+    private Preference mPreference;
 
     /**
      * Class constructor of cross sim calling.
@@ -40,26 +60,101 @@ public class CrossSimCallingPreferenceController extends TelephonyTogglePreferen
      * @return this instance after initialization
      **/
     public CrossSimCallingPreferenceController init(int subId) {
+        mSubId = subId;
         return this;
     }
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return CONDITIONALLY_UNAVAILABLE;
+        return hasCrossSimCallingFeature(subId) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     /**
      * Implementation of abstract methods
      **/
     public boolean setChecked(boolean isChecked) {
-        return false;
+        ImsMmTelManager imsMmTelMgr = getImsMmTelManager();
+        if (imsMmTelMgr == null) {
+            return false;
+        }
+        try {
+            imsMmTelMgr.setCrossSimCallingEnabled(isChecked);
+        } catch (ImsException exception) {
+            Log.w(LOG_TAG, "fail to change cross SIM calling configuration: " + isChecked,
+                    exception);
+            return false;
+        }
+        return true;
     }
 
     /**
      * Implementation of abstract methods
      **/
     public boolean isChecked() {
+        ImsMmTelManager imsMmTelMgr = getImsMmTelManager();
+        if (imsMmTelMgr == null) {
+            return false;
+        }
+        try {
+            return imsMmTelMgr.isCrossSimCallingEnabledByUser();
+        } catch (ImsException exception) {
+            Log.w(LOG_TAG, "fail to get cross SIM calling configuration", exception);
+        }
         return false;
     }
 
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if ((preference == null) || (!(preference instanceof SwitchPreference))) {
+            return;
+        }
+        mPreference = preference;
+
+        final SwitchPreference switchPreference = (SwitchPreference) preference;
+        switchPreference.setChecked(isChecked());
+
+        updateSummary(getLatestSummary());
+    }
+
+    private String getLatestSummary() {
+        SubscriptionInfo subInfo = getSubscriptionInfo();
+        return Objects.toString((subInfo == null) ? null : subInfo.getDisplayName(), "");
+    }
+
+    private void updateSummary(String displayName) {
+        Preference preference = mPreference;
+        if (preference == null) {
+            return;
+        }
+        String summary = displayName;
+        String finalText = String.format(
+                getResourcesForSubId().getString(R.string.cross_sim_calling_setting_summary),
+                summary)
+                .toString();
+        preference.setSummary(finalText);
+    }
+
+    private boolean hasCrossSimCallingFeature(int subscriptionId) {
+        PersistableBundle carrierConfig = getCarrierConfigForSubId(subscriptionId);
+        return (carrierConfig != null)
+                && carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL, false);
+    }
+
+    private ImsMmTelManager getImsMmTelManager() {
+        if (!SubscriptionManager.isUsableSubscriptionId(mSubId)) {
+            return null;
+        }
+        ImsManager imsMgr = mContext.getSystemService(ImsManager.class);
+        return (imsMgr == null) ? null : imsMgr.getImsMmTelManager(mSubId);
+    }
+
+    private SubscriptionInfo getSubscriptionInfo() {
+        SubscriptionManager subInfoMgr = mContext.getSystemService(SubscriptionManager.class);
+        if (subInfoMgr == null) {
+            return null;
+        }
+        return subInfoMgr.getActiveSubscriptionInfo(mSubId);
+    }
 }
