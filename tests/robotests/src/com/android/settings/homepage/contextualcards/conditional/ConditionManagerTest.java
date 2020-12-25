@@ -67,13 +67,6 @@ public class ConditionManagerTest {
     }
 
     @Test
-    public void getDisplayableCards_hasDisplayable() {
-        when(mController.isDisplayable()).thenReturn(true);
-
-        assertThat(mManager.getDisplayableCards()).hasSize(1);
-    }
-
-    @Test
     public void onPrimaryClick_shouldRelayToController() {
         mManager.onPrimaryClick(mContext, ID);
 

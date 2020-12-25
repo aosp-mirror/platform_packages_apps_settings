@@ -28,12 +28,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,8 +48,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDeviceConfig.class})
 public class AssistantFeedbackPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -65,11 +73,45 @@ public class AssistantFeedbackPreferenceControllerTest {
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
 
+    @After
+    public void tearDown() {
+        ShadowDeviceConfig.reset();
+    }
+
     @Test
-    public void testIsVisible() {
+    public void testIsVisible_DeviceConfigOn() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
+                SystemUiDeviceConfigFlags.ENABLE_NAS_FEEDBACK, "true", true);
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void testIsVisible_DeviceConfigOff() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
+                SystemUiDeviceConfigFlags.ENABLE_NAS_FEEDBACK, "false", true);
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void getAvailabilityStatus_DeviceConfigOn_returnAvailable() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
+                SystemUiDeviceConfigFlags.ENABLE_NAS_FEEDBACK, "true", true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_DeviceConfigOff_returnUnavailable() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
+                SystemUiDeviceConfigFlags.ENABLE_NAS_FEEDBACK, "false", true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
