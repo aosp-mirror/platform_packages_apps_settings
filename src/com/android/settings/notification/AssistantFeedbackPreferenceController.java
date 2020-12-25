@@ -23,11 +23,13 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -77,13 +79,15 @@ public class AssistantFeedbackPreferenceController extends TogglePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SYSTEMUI,
+                        SystemUiDeviceConfigFlags.ENABLE_NAS_FEEDBACK, false)
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public boolean isChecked() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                NOTIFICATION_FEEDBACK_ENABLED, OFF) == ON;
+                NOTIFICATION_FEEDBACK_ENABLED, ON) == ON;
     }
 
     @Override
