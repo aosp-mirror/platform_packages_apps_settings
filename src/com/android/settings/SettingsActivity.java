@@ -61,7 +61,7 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -172,7 +172,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     };
 
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mMainSwitch;
 
     private Button mNextButton;
 
@@ -181,8 +181,8 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
 
-    public SwitchBar getSwitchBar() {
-        return mSwitchBar;
+    public SettingsMainSwitchBar getSwitchBar() {
+        return mMainSwitch;
     }
 
     @Override
@@ -292,9 +292,9 @@ public class SettingsActivity extends SettingsBaseActivity
             // If CollapsingToolbarLayout is applied, the old action bar won't show title.
             actionBar.setDisplayShowTitleEnabled(mCollapsingToolbarLayout == null);
         }
-        mSwitchBar = findViewById(R.id.switch_bar);
-        if (mSwitchBar != null) {
-            mSwitchBar.setMetricsTag(getMetricsTag());
+        mMainSwitch = findViewById(R.id.switch_bar);
+        if (mMainSwitch != null) {
+            mMainSwitch.setMetricsTag(getMetricsTag());
         }
 
         // see if we should show Back/Next buttons

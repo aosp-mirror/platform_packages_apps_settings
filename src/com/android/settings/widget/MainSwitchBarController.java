@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,57 +18,59 @@ package com.android.settings.widget;
 
 import android.widget.Switch;
 
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
-/*
- * The switch controller that is used to update the switch widget in the SwitchBar layout.
+/**
+ * The switch controller that is used to update the switch widget in the SettingsMainSwitchBar.
  */
-public class SwitchBarController extends SwitchWidgetController implements
-    SwitchBar.OnSwitchChangeListener {
+public class MainSwitchBarController extends SwitchWidgetController implements
+        OnMainSwitchChangeListener {
 
-    private final SwitchBar mSwitchBar;
+    private final SettingsMainSwitchBar mMainSwitch;
 
-    public SwitchBarController(SwitchBar switchBar) {
-        mSwitchBar = switchBar;
+    public MainSwitchBarController(SettingsMainSwitchBar mainSwitch) {
+        mMainSwitch = mainSwitch;
     }
 
     @Override
     public void setupView() {
-        mSwitchBar.show();
+        mMainSwitch.show();
     }
 
     @Override
     public void teardownView() {
-        mSwitchBar.hide();
+        mMainSwitch.hide();
     }
 
     @Override
     public void setTitle(String title) {
+        mMainSwitch.setTitle(title);
     }
 
     @Override
     public void startListening() {
-        mSwitchBar.addOnSwitchChangeListener(this);
+        mMainSwitch.addOnSwitchChangeListener(this);
     }
 
     @Override
     public void stopListening() {
-        mSwitchBar.removeOnSwitchChangeListener(this);
+        mMainSwitch.removeOnSwitchChangeListener(this);
     }
 
     @Override
     public void setChecked(boolean checked) {
-        mSwitchBar.setChecked(checked);
+        mMainSwitch.setChecked(checked);
     }
 
     @Override
     public boolean isChecked() {
-        return mSwitchBar.isChecked();
+        return mMainSwitch.isChecked();
     }
 
     @Override
     public void setEnabled(boolean enabled) {
-        mSwitchBar.setEnabled(enabled);
+        mMainSwitch.setEnabled(enabled);
     }
 
     @Override
@@ -79,7 +81,7 @@ public class SwitchBarController extends SwitchWidgetController implements
     }
 
     @Override
-    public void setDisabledByAdmin(EnforcedAdmin admin) {
-        mSwitchBar.setDisabledByAdmin(admin);
+    public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
+        mMainSwitch.setDisabledByAdmin(admin);
     }
 }
