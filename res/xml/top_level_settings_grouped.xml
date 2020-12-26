@@ -22,13 +22,13 @@
 
     <PreferenceCategory
         android:key="connectivity"
-        android:order="-130"
+        android:order="-140"
         settings:allowDividerAbove="false">
         <Preference
             android:fragment="com.android.settings.network.NetworkDashboardFragment"
             android:icon="@drawable/ic_homepage_network"
             android:key="top_level_network"
-            android:order="-130"
+            android:order="-140"
             android:title="@string/network_dashboard_title"
             settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
@@ -36,27 +36,27 @@
             android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
             android:icon="@drawable/ic_homepage_connected_device"
             android:key="top_level_connected_devices"
-            android:order="-120"
+            android:order="-130"
             android:title="@string/connected_devices_dashboard_title"
             settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="apps"
-        android:order="-110"
+        android:order="-120"
         settings:allowDividerAbove="false">
         <Preference
             android:fragment="com.android.settings.applications.AppAndNotificationDashboardFragment"
             android:icon="@drawable/ic_homepage_apps"
             android:key="top_level_apps_and_notifs"
-            android:order="-110"
+            android:order="-120"
             android:title="@string/apps_dashboard_title"/>
 
         <Preference
             android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
             android:icon="@drawable/ic_homepage_notification"
             android:key="top_level_notification"
-            android:order="-100"
+            android:order="-110"
             android:title="@string/configure_notification_settings"/>
 
 
@@ -64,13 +64,13 @@
 
     <PreferenceCategory
         android:key="phone_essential"
-        android:order="-90"
+        android:order="-100"
         settings:allowDividerAbove="false">
         <Preference
             android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
             android:icon="@drawable/ic_homepage_battery"
             android:key="top_level_battery"
-            android:order="-90"
+            android:order="-100"
             android:title="@string/power_usage_summary_title"
             settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
@@ -78,7 +78,7 @@
             android:fragment="com.android.settings.deviceinfo.StorageSettings"
             android:icon="@drawable/ic_homepage_storage"
             android:key="top_level_storage"
-            android:order="-80"
+            android:order="-90"
             android:title="@string/storage_settings"
             settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/>
 
@@ -86,16 +86,23 @@
             android:fragment="com.android.settings.notification.SoundSettings"
             android:icon="@drawable/ic_homepage_sound"
             android:key="top_level_sound"
-            android:order="-70"
+            android:order="-80"
             android:title="@string/sound_settings"/>
 
         <Preference
             android:fragment="com.android.settings.DisplaySettings"
             android:icon="@drawable/ic_homepage_display"
             android:key="top_level_display"
-            android:order="-60"
+            android:order="-70"
             android:title="@string/display_settings"
             settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
+
+        <com.android.settingslib.RestrictedTopLevelPreference
+            android:icon="@drawable/ic_homepage_display"
+            android:key="top_level_wallpaper"
+            android:order="-60"
+            android:title="@string/wallpaper_settings_title"
+            settings:controller="com.android.settings.display.TopLevelWallpaperPreferenceController"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.AccessibilitySettings"
