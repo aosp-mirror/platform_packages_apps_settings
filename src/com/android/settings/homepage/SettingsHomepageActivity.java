@@ -21,6 +21,7 @@ import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -41,6 +42,9 @@ import com.android.settings.overlay.FeatureFactory;
 
 public class SettingsHomepageActivity extends FragmentActivity {
 
+    private static final String TAG = "SettingsHomepageActivity";
+    private int mSearchBoxHeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,9 @@ public class SettingsHomepageActivity extends FragmentActivity {
         root.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
 
-        setHomepageContainerPaddingTop();
+        final View appBar = findViewById(R.id.app_bar_container);
+        appBar.setMinimumHeight(getSearchBoxHeight());
+        setDefaultHomepageContainerPaddingTop();
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -60,14 +66,34 @@ public class SettingsHomepageActivity extends FragmentActivity {
         getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
 
-        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)
-                && !getSystemService(ActivityManager.class).isLowRamDevice()) {
-            // Only allow contextual feature on high ram devices.
-            showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
+        if (!getSystemService(ActivityManager.class).isLowRamDevice()) {
+            // Only allow contextual features on high ram devices.
+            if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)) {
+                showSuggestionFragment();
+            }
+            if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
+                showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
+            }
         }
         showFragment(new TopLevelSettings(), R.id.main_content);
         ((FrameLayout) findViewById(R.id.main_content))
                 .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+    }
+
+    private void showSuggestionFragment() {
+        final Class<? extends Fragment> fragment = FeatureFactory.getFactory(this)
+                .getSuggestionFeatureProvider(this).getContextualSuggestionFragment();
+        if (fragment == null) {
+            return;
+        }
+
+        try {
+            showFragment(fragment.newInstance(), R.id.contextual_suggestion_content);
+            setHomepageContainerTopOffset(getResources()
+                    .getDimensionPixelSize(R.dimen.suggestion_height));
+        } catch (IllegalAccessException | InstantiationException e) {
+            Log.w(TAG, "Cannot show fragment", e);
+        }
     }
 
     private void showFragment(Fragment fragment, int id) {
@@ -84,18 +110,32 @@ public class SettingsHomepageActivity extends FragmentActivity {
     }
 
     @VisibleForTesting
-    void setHomepageContainerPaddingTop() {
-        final View view = this.findViewById(R.id.homepage_container);
-
-        final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
-        final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
-
-        // The top padding is the height of action bar(48dp) + top/bottom margins(16dp)
-        final int paddingTop = searchBarHeight + searchBarMargin * 2;
+    void setHomepageContainerTopOffset(int offset) {
+        final View view = findViewById(R.id.homepage_container);
+        final int paddingTop = getSearchBoxHeight() + offset;
         view.setPadding(0 /* left */, paddingTop, 0 /* right */, 0 /* bottom */);
 
         // Prevent inner RecyclerView gets focus and invokes scrolling.
         view.setFocusableInTouchMode(true);
         view.requestFocus();
+    }
+
+    @VisibleForTesting
+    void setDefaultHomepageContainerPaddingTop() {
+        setHomepageContainerTopOffset(0);
+    }
+
+    @VisibleForTesting
+    int getSearchBoxHeight() {
+        if (mSearchBoxHeight != 0) {
+            return mSearchBoxHeight;
+        }
+
+        final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
+        final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
+
+        // The height of search box is the height of search bar(48dp) + top/bottom margins(24dp)
+        mSearchBoxHeight = searchBarHeight + searchBarMargin * 2;
+        return mSearchBoxHeight;
     }
 }
