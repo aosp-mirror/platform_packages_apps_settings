@@ -145,7 +145,7 @@ public class MobilePlanPreferenceController extends AbstractPreferenceController
             }
 
             // Get provisioning URL
-            String url = mCm.getMobileProvisioningUrl();
+            String url = mTm.getMobileProvisioningUrl();
             if (!TextUtils.isEmpty(url)) {
                 Intent intent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,
                         Intent.CATEGORY_APP_BROWSER);
