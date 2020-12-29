@@ -25,5 +25,5 @@ public interface BatteryStatusFeatureProvider {
      * Trigger a battery status update; return false if built-in status should be used.
      */
     boolean triggerBatteryStatusUpdate(
-            BatteryPreferenceController controller, BatteryInfo info);
+            BatteryHeaderPreferenceController batteryHeaderPreferenceController, BatteryInfo info);
 }
