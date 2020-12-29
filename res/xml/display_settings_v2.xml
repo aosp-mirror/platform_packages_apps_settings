@@ -55,7 +55,7 @@
         settings:controller="com.android.settings.display.AutoBrightnessPreferenceController"/>
 
     <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="screen_timeout"
         android:title="@string/screen_timeout"
         android:summary="@string/summary_placeholder"
