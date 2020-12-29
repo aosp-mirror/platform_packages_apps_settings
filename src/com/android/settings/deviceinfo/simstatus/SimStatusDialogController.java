@@ -233,7 +233,8 @@ public class SimStatusDialogController implements LifecycleObserver {
         if (mSubscriptionInfo == null) {
             return;
         }
-
+        mTelephonyManager =
+            mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
         mPhoneStateListener = getPhoneStateListener();
         updateLatestAreaInfo();
         updateSubscriptionStatus();
