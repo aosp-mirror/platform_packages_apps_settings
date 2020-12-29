@@ -20,26 +20,21 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings_grouped">
 
-    <PreferenceCategory
-        android:key="connectivity"
+    <Preference
+        android:fragment="com.android.settings.network.NetworkDashboardFragment"
+        android:icon="@drawable/ic_homepage_network"
+        android:key="top_level_network"
         android:order="-140"
-        settings:allowDividerAbove="false">
-        <Preference
-            android:fragment="com.android.settings.network.NetworkDashboardFragment"
-            android:icon="@drawable/ic_homepage_network"
-            android:key="top_level_network"
-            android:order="-140"
-            android:title="@string/network_dashboard_title"
-            settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
+        android:title="@string/network_dashboard_title"
+        settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
-        <Preference
-            android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
-            android:icon="@drawable/ic_homepage_connected_device"
-            android:key="top_level_connected_devices"
-            android:order="-130"
-            android:title="@string/connected_devices_dashboard_title"
-            settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
-    </PreferenceCategory>
+    <Preference
+        android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
+        android:icon="@drawable/ic_homepage_connected_device"
+        android:key="top_level_connected_devices"
+        android:order="-130"
+        android:title="@string/connected_devices_dashboard_title"
+        settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
 
     <PreferenceCategory
         android:key="apps"
