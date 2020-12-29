@@ -165,16 +165,28 @@ public class ProviderModelSlice extends WifiSlice {
         if (subscriptionManager == null) {
             return;
         }
-        final boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
-                mHelper.isMobileDataEnabled());
         final int defaultSubId = subscriptionManager.getDefaultDataSubscriptionId();
         log("defaultSubId:" + defaultSubId);
         if (!SubscriptionManager.isUsableSubscriptionId(defaultSubId)) {
             return; // No subscription - do nothing.
         }
+        boolean requestConnectCarrier = !intent.hasExtra(EXTRA_TOGGLE_STATE);
+        // Enable the mobile data always if the user requests to connect to the carrier network.
+        boolean newState = requestConnectCarrier ? true
+                : intent.getBooleanExtra(EXTRA_TOGGLE_STATE, mHelper.isMobileDataEnabled());
 
         MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
                 false /* disableOtherSubscriptions */);
+
+        final NetworkProviderWorker worker = getWorker();
+        if (worker == null) {
+            return;
+        }
+        if (requestConnectCarrier) {
+            worker.connectCarrierNetwork();
+        } else {
+            worker.setCarrierNetworkEnabled(newState);
+        }
     }
 
     @Override

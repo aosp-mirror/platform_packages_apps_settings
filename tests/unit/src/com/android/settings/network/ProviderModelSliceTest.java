@@ -16,6 +16,8 @@
 
 package com.android.settings.network;
 
+import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -113,13 +115,14 @@ public class ProviderModelSliceTest {
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
-        mMockNetworkProviderWorker = new MockNetworkProviderWorker(mContext,
-                PROVIDER_MODEL_SLICE_URI);
+        mMockNetworkProviderWorker = spy(new MockNetworkProviderWorker(mContext,
+                PROVIDER_MODEL_SLICE_URI));
         mMockProviderModelSlice = new MockProviderModelSlice(mContext, mMockNetworkProviderWorker);
         mListBuilder = spy(new ListBuilder(mContext, PROVIDER_MODEL_SLICE_URI,
                 ListBuilder.INFINITY).setAccentColor(-1));
         when(mProviderModelSliceHelper.createListBuilder(PROVIDER_MODEL_SLICE_URI)).thenReturn(
                 mListBuilder);
+        when(mProviderModelSliceHelper.getSubscriptionManager()).thenReturn(mSubscriptionManager);
 
         mWifiList = new ArrayList<>();
         mMockNetworkProviderWorker.updateSelfResults(mWifiList);
@@ -329,5 +332,34 @@ public class ProviderModelSliceTest {
         NetworkProviderWorker getWorker() {
             return mNetworkProviderWorker;
         }
+    }
+
+    @Test
+    public void onNotifyChange_intentToggleActionOn_shouldSetCarrierNetworkEnabledTrue() {
+        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
+        intent.putExtra(EXTRA_TOGGLE_STATE, true);
+
+        mMockProviderModelSlice.onNotifyChange(intent);
+
+        verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(true);
+    }
+
+    @Test
+    public void onNotifyChange_intentToggleActionOff_shouldSetCarrierNetworkEnabledFalse() {
+        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
+        intent.putExtra(EXTRA_TOGGLE_STATE, false);
+
+        mMockProviderModelSlice.onNotifyChange(intent);
+
+        verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(false);
+    }
+
+    @Test
+    public void onNotifyChange_intentPrimaryAction_shouldConnectCarrierNetwork() {
+        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
+
+        mMockProviderModelSlice.onNotifyChange(intent);
+
+        verify(mMockNetworkProviderWorker).connectCarrierNetwork();
     }
 }
