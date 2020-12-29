@@ -26,18 +26,21 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, OnStart, OnStop {
+        LifecycleObserver, OnStart, OnStop, BatteryPreferenceController {
 
     @VisibleForTesting
-    boolean mIsBatteryPresent = true;
+    protected boolean mIsBatteryPresent = true;
     private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     private Preference mPreference;
     private BatteryInfo mBatteryInfo;
+    private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
+    private String mBatteryStatusLabel;
 
     public TopLevelBatteryPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -51,6 +54,9 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
                 updateState(mPreference);
             }, true /* shortString */);
         });
+
+        mBatteryStatusFeatureProvider = FeatureFactory.getFactory(context)
+                .getBatteryStatusFeatureProvider(context);
     }
 
     @Override
@@ -88,20 +94,42 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         return getDashboardLabel(mContext, mBatteryInfo);
     }
 
-    static CharSequence getDashboardLabel(Context context, BatteryInfo info) {
+    protected CharSequence getDashboardLabel(Context context, BatteryInfo info) {
         if (info == null || context == null) {
             return null;
         }
+
         CharSequence label;
-        if (!info.discharging && info.chargeLabel != null) {
-            label = info.chargeLabel;
-        } else if (info.remainingLabel == null) {
-            label = info.batteryPercentString;
+        if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)
+                || mBatteryStatusLabel == null) {
+            label = generateLabel(info);
         } else {
-            label = context.getString(R.string.power_remaining_settings_home_page,
+            label = mBatteryStatusLabel;
+        }
+
+        return label;
+    }
+
+    private CharSequence generateLabel(BatteryInfo info) {
+        if (!info.discharging && info.chargeLabel != null) {
+            return info.chargeLabel;
+        } else if (info.remainingLabel == null) {
+            return info.batteryPercentString;
+        } else {
+            return mContext.getString(R.string.power_remaining_settings_home_page,
                     info.batteryPercentString,
                     info.remainingLabel);
         }
-        return label;
+    }
+
+    /**
+     * Callback which receives text for the label.
+     */
+    public void updateBatteryStatus(String label, BatteryInfo info) {
+        mBatteryStatusLabel = (label != null) ? label : generateLabel(info).toString();
+
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 }
