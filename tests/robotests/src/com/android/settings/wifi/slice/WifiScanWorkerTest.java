@@ -20,11 +20,14 @@ import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import androidx.lifecycle.Lifecycle;
 
+import com.android.wifitrackerlib.MergedCarrierEntry;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -44,6 +47,8 @@ public class WifiScanWorkerTest {
     private WifiScanWorker mWifiScanWorker;
     @Mock
     WifiPickerTracker mWifiPickerTracker;
+    @Mock
+    MergedCarrierEntry mMergedCarrierEntry;
 
     @Before
     public void setUp() {
@@ -51,6 +56,7 @@ public class WifiScanWorkerTest {
 
         mWifiScanWorker = new WifiScanWorker(RuntimeEnvironment.application, WIFI_SLICE_URI);
         mWifiScanWorker.mWifiPickerTracker = mWifiPickerTracker;
+        when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(mMergedCarrierEntry);
     }
 
     @Test
@@ -101,5 +107,25 @@ public class WifiScanWorkerTest {
         when(mWifiPickerTracker.getWifiEntries()).thenReturn(Arrays.asList(reachableWifiEntry));
 
         assertThat(mWifiScanWorker.getWifiEntry(key)).isEqualTo(reachableWifiEntry);
+    }
+
+    @Test
+    public void setCarrierNetworkEnabled_shouldCallMergedCarrierEntrySetEnabled() {
+        mWifiScanWorker.setCarrierNetworkEnabled(true);
+
+        verify(mMergedCarrierEntry).setEnabled(true);
+
+        mWifiScanWorker.setCarrierNetworkEnabled(false);
+
+        verify(mMergedCarrierEntry).setEnabled(false);
+    }
+
+    @Test
+    public void connectCarrierNetwork_shouldCallMergedCarrierEntryConnect() {
+        when(mMergedCarrierEntry.canConnect()).thenReturn(true);
+
+        mWifiScanWorker.connectCarrierNetwork();
+
+        verify(mMergedCarrierEntry).connect(any());
     }
 }
