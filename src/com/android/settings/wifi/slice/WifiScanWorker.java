@@ -36,6 +36,7 @@ import androidx.lifecycle.LifecycleRegistry;
 
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.wifitrackerlib.MergedCarrierEntry;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -198,5 +199,19 @@ public class WifiScanWorker extends SliceBackgroundWorker<WifiSliceItem> impleme
             }
         }
         super.updateResults(resultList);
+    }
+
+    public void setCarrierNetworkEnabled(boolean enable) {
+        final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
+        if (mergedCarrierEntry != null) {
+            mergedCarrierEntry.setEnabled(enable);
+        }
+    }
+
+    public void connectCarrierNetwork() {
+        final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
+        if (mergedCarrierEntry != null && mergedCarrierEntry.canConnect()) {
+            mergedCarrierEntry.connect(null /* ConnectCallback */);
+        }
     }
 }

@@ -48,25 +48,36 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class SettingsHomepageActivityTest {
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void setHomepageContainerPaddingTop_shouldBeSetPaddingTop() {
+    public void setDefaultHomepageContainerPaddingTop_shouldSetSearchBoxHeight() {
         final SettingsHomepageActivity activity = Robolectric.buildActivity(
                 SettingsHomepageActivity.class).create().get();
-        final int searchBarHeight = activity.getResources().getDimensionPixelSize(
-                R.dimen.search_bar_height);
-        final int searchBarMargin = activity.getResources().getDimensionPixelSize(
-                R.dimen.search_bar_margin);
         final View view = activity.findViewById(R.id.homepage_container);
 
-        activity.setHomepageContainerPaddingTop();
+        activity.setDefaultHomepageContainerPaddingTop();
 
         final int actualPaddingTop = view.getPaddingTop();
-        assertThat(actualPaddingTop).isEqualTo(searchBarHeight + searchBarMargin * 2);
+        assertThat(actualPaddingTop).isEqualTo(activity.getSearchBoxHeight());
+    }
+
+    @Test
+    public void setHomepageContainerTopOffset_shouldBeSetPaddingTop() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final View view = activity.findViewById(R.id.homepage_container);
+        final int offset = activity.getResources().getDimensionPixelSize(
+                R.dimen.suggestion_height);
+
+        activity.setHomepageContainerTopOffset(offset);
+
+        final int actualPaddingTop = view.getPaddingTop();
+        assertThat(actualPaddingTop).isEqualTo(activity.getSearchBoxHeight() + offset);
     }
 
     @Test

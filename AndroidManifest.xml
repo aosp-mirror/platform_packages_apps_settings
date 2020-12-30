@@ -2742,6 +2742,19 @@
         </activity>
 
         <activity
+            android:name="Settings$PremiumSmsAccessActivity"
+            android:label="@string/premium_sms_access"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.PREMIUM_SMS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess" />
+        </activity>
+
+        <activity
             android:name="Settings$SoundSettingsActivity"
             android:label="@string/sound_settings"
             android:icon="@drawable/ic_homepage_sound"
