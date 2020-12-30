@@ -131,14 +131,16 @@ public class ProviderModelSliceHelper {
             e.printStackTrace();
         }
         final IconCompat levelIcon = Utils.createIconWithDrawable(drawable);
-        final PendingIntent toggleAction = mSliceable.getBroadcastIntent(mContext);
-        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+        final PendingIntent rowIntent = mSliceable.getBroadcastIntent(mContext);
+        final SliceAction primaryAction = SliceAction.create(rowIntent,
+                levelIcon, ListBuilder.ICON_IMAGE, title);
+        final SliceAction toggleAction = SliceAction.createToggle(rowIntent,
                 "mobile_toggle" /* actionTitle */, isMobileDataEnabled());
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                 .setTitle(title)
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
-                .addEndItem(toggleSliceAction)
-                .setPrimaryAction(toggleSliceAction)
+                .addEndItem(toggleAction)
+                .setPrimaryAction(primaryAction)
                 .setSubtitle(summary);
         return rowBuilder;
     }

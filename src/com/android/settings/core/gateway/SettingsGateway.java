@@ -53,6 +53,7 @@ import com.android.settings.applications.specialaccess.interactacrossprofiles.In
 import com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
+import com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess;
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails;
 import com.android.settings.backup.PrivacySettings;
@@ -270,6 +271,7 @@ public class SettingsGateway {
             VrListenerSettings.class.getName(),
             PictureInPictureSettings.class.getName(),
             PictureInPictureDetails.class.getName(),
+            PremiumSmsAccess.class.getName(),
             ManagedProfileSettings.class.getName(),
             ChooseAccountFragment.class.getName(),
             IccLockSettings.class.getName(),
