@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiConfiguration;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -46,12 +47,48 @@ public class WifiUtilsTest {
     public void testPassword() {
         final String longPassword = "123456789012345678901234567890"
                 + "1234567890123456789012345678901234567890";
-        assertThat(WifiUtils.isHotspotWpa2PasswordValid("123")).isFalse();
-        assertThat(WifiUtils.isHotspotWpa2PasswordValid("12345678")).isTrue();
-        assertThat(WifiUtils.isHotspotWpa2PasswordValid("1234567890")).isTrue();
-        assertThat(WifiUtils.isHotspotWpa2PasswordValid(longPassword)).isFalse();
-        assertThat(WifiUtils.isHotspotWpa2PasswordValid("")).isFalse();
-        assertThat(WifiUtils.isHotspotWpa2PasswordValid("€¥£")).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("123",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("12345678",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid("1234567890",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid(longPassword,
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("€¥£",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)).isFalse();
+
+        // The WPA3_SAE_TRANSITION password limitation should be same as WPA2_PSK
+        assertThat(WifiUtils.isHotspotPasswordValid("123",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("12345678",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid("1234567890",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid(longPassword,
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("€¥£",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION)).isFalse();
+
+        // The WA3_SAE password is requested that length > 1 only.
+        assertThat(WifiUtils.isHotspotPasswordValid("",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("1",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid("123",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid("12345678",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid("1234567890",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid(longPassword,
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid("€¥£",
+                SoftApConfiguration.SECURITY_TYPE_WPA3_SAE)).isTrue();
     }
 
     @Test
