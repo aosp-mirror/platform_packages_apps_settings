@@ -1,0 +1,23 @@
+//############################################################
+// Settings Component test target.                           #
+//############################################################
+android_test {
+    name: "SettingsComponentTests",
+    certificate: "platform",
+    privileged: true,
+    srcs: [
+        "src/**/*.java",
+    ],
+
+    static_libs: [
+        "truth-prebuilt",
+        "androidx.test.core",
+        "androidx.test.runner",
+        "androidx.test.rules",
+        "androidx.test.ext.junit",
+    ],
+
+    test_suites: ["device-tests"],
+
+    instrumentation_for: "Settings",
+}
