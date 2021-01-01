@@ -22,7 +22,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -38,8 +37,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import com.google.common.primitives.Ints;
-
 import java.util.StringJoiner;
 
 /** Settings page for magnification. */
@@ -48,8 +45,6 @@ public class MagnificationSettingsFragment extends DashboardFragment {
 
     private static final String TAG = "MagnificationSettingsFragment";
     private static final String PREF_KEY_MODE = "magnification_mode";
-    private static final String KEY_CAPABILITY =
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY;
     private static final int DIALOG_MAGNIFICATION_CAPABILITY = 1;
     private static final int DIALOG_MAGNIFICATION_SWITCH_SHORTCUT = 2;
     private static final String EXTRA_CAPABILITY = "capability";
@@ -60,29 +55,6 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     private CheckBox mMagnifyFullScreenCheckBox;
     private CheckBox mMagnifyWindowCheckBox;
     private Dialog mDialog;
-
-    static String getMagnificationCapabilitiesSummary(Context context) {
-        final String[] magnificationModeSummaries = context.getResources().getStringArray(
-                R.array.magnification_mode_summaries);
-        final int[] magnificationModeValues = context.getResources().getIntArray(
-                R.array.magnification_mode_values);
-        final int capabilities = MagnificationSettingsFragment.getMagnificationCapabilities(
-                context);
-
-        final int idx = Ints.indexOf(magnificationModeValues, capabilities);
-        return magnificationModeSummaries[idx == -1 ? 0 : idx];
-    }
-
-    private static int getMagnificationCapabilities(Context context) {
-        return getSecureIntValue(context, KEY_CAPABILITY,
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN);
-    }
-
-    private static int getSecureIntValue(Context context, String key, int defaultValue) {
-        return Settings.Secure.getIntForUser(
-                context.getContentResolver(),
-                key, defaultValue, context.getContentResolver().getUserId());
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -102,7 +74,7 @@ public class MagnificationSettingsFragment extends DashboardFragment {
             mCapabilities = savedInstanceState.getInt(EXTRA_CAPABILITY, NONE);
         }
         if (mCapabilities == NONE) {
-            mCapabilities = getMagnificationCapabilities(getPrefContext());
+            mCapabilities = MagnificationCapabilities.getCapabilities(getPrefContext());
         }
     }
 
@@ -128,7 +100,7 @@ public class MagnificationSettingsFragment extends DashboardFragment {
         super.onCreate(icicle);
         mModePreference = findPreference(PREF_KEY_MODE);
         mModePreference.setOnPreferenceClickListener(preference -> {
-            mCapabilities = getMagnificationCapabilities(getPrefContext());
+            mCapabilities = MagnificationCapabilities.getCapabilities(getPrefContext());
             showDialog(DIALOG_MAGNIFICATION_CAPABILITY);
             return true;
         });
@@ -164,7 +136,7 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
         updateCapabilities(true);
         mModePreference.setSummary(
-                getMagnificationCapabilitiesSummary(getPrefContext()));
+                MagnificationCapabilities.getSummary(getPrefContext(), mCapabilities));
     }
 
     private void onSwitchShortcutDialogPositiveButtonClicked(View view) {
@@ -285,22 +257,13 @@ public class MagnificationSettingsFragment extends DashboardFragment {
                 ? Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW : 0;
         mCapabilities = capabilities;
         if (saveToDB) {
-            setMagnificationCapabilities(capabilities);
+            MagnificationCapabilities.setCapabilities(getPrefContext(), mCapabilities);
         }
     }
 
     private boolean isTripleTapEnabled() {
         return Settings.Secure.getInt(getPrefContext().getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF) == ON;
-    }
-
-    private void setSecureIntValue(String key, int value) {
-        Settings.Secure.putIntForUser(getPrefContext().getContentResolver(),
-                key, value, getPrefContext().getContentResolver().getUserId());
-    }
-
-    private void setMagnificationCapabilities(int capabilities) {
-        setSecureIntValue(KEY_CAPABILITY, capabilities);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
