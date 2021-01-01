@@ -35,7 +35,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
 
     @Override
     public CharSequence getSummary() {
-        return MagnificationSettingsFragment.getMagnificationCapabilitiesSummary(
-                mContext);
+        final int capabilities = MagnificationCapabilities.getCapabilities(mContext);
+        return MagnificationCapabilities.getSummary(mContext, capabilities);
     }
 }
