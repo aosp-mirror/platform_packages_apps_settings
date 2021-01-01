@@ -192,7 +192,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController context) {
         final SoftApConfiguration config = buildNewConfig();
-        mPasswordPreferenceController.setSecurityType(config.getSecurityType());
+        mPasswordPreferenceController.updateVisibility(config.getSecurityType());
 
         /**
          * if soft AP is stopped, bring up
@@ -216,10 +216,10 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
-        if (securityType != SoftApConfiguration.SECURITY_TYPE_OPEN) {
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
             configBuilder.setPassphrase(
                     mPasswordPreferenceController.getPasswordValidated(securityType),
-                    securityType);
+                    SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         }
         configBuilder.setBand(mApBandPreferenceController.getBandIndex());
         return configBuilder.build();
