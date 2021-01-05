@@ -12527,14 +12527,19 @@
     <!-- Label text to turn off airplane mode. [CHAR LIMIT=40] -->
     <string name="turn_off_airplane_mode">Turn off Airplane Mode</string>
 
-    <!-- Provider Model: Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_connection_active">Active, <xliff:g id="network_data_rat" example="LTE">%1$s</xliff:g></string>
-    <!-- Provider Model: Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_off_summary">Internet off</string>
-    <!-- Provider Model: Summary indicating that non-carrier network unavailable [CHAR LIMIT=50] -->
-    <string name="non_carrier_network_unavailable">Non\u2011carrier networks unavailable</string>
-    <!-- Provider Model: Summary indicating that non-carrier and carrier network unavailable [CHAR LIMIT=50] -->
-    <string name="all_network_unavailable">Networks unavailable</string>
+    <!-- Summary text separator for preferences including a short description
+         (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
+    <string name="preference_summary_default_combination"><xliff:g id="state" example="Connected">%1$s</xliff:g> / <xliff:g id="networkMode" example="LTE">%2$s</xliff:g></string>
+    <!-- Provider Model:
+         Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_connection_active">Connected</string>
+    <!-- Provider Model:
+         Summary indicating that a SIM has no mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_off_summary">Internet won\u0027t auto\u2011connect</string>
+    <!-- Provider Model: Summary indicating that no other networks available [CHAR LIMIT=50] -->
+    <string name="non_carrier_network_unavailable">No other networks available</string>
+    <!-- Provider Model: Summary indicating that no networks available [CHAR LIMIT=50] -->
+    <string name="all_network_unavailable">No networks available</string>
 
     <!-- Summary for preference when Bedtime mode is on [CHAR LIMIT=NONE] -->
     <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>
