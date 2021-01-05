@@ -35,6 +35,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.testutils.AirplaneModeRule;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -46,9 +47,6 @@ import org.mockito.junit.MockitoRule;
 
 @RunWith(AndroidJUnit4.class)
 public class AirplaneSafeNetworksSliceTest {
-
-    private static final String VIEW_AIRPLANE_SAFE_NETWORKS = "View airplane-safe networks";
-    private static final String TURN_OFF_AIRPLANE_MODE = "Turn off Airplane Mode";
 
     @Rule
     public MockitoRule mMocks = MockitoJUnit.rule();
@@ -88,7 +86,8 @@ public class AirplaneSafeNetworksSliceTest {
         assertThat(slice).isNotNull();
         final SliceItem sliceTitle =
                 SliceMetadata.from(mContext, slice).getListContent().getHeader().getTitleItem();
-        assertThat(sliceTitle.getText()).isEqualTo(VIEW_AIRPLANE_SAFE_NETWORKS);
+        assertThat(sliceTitle.getText()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "view_airplane_safe_networks"));
     }
 
     @Test
@@ -101,7 +100,8 @@ public class AirplaneSafeNetworksSliceTest {
         assertThat(slice).isNotNull();
         final SliceItem sliceTitle =
                 SliceMetadata.from(mContext, slice).getListContent().getHeader().getTitleItem();
-        assertThat(sliceTitle.getText()).isEqualTo(TURN_OFF_AIRPLANE_MODE);
+        assertThat(sliceTitle.getText()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "turn_off_airplane_mode"));
     }
 
     @Test
