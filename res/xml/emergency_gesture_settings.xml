@@ -20,16 +20,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/emergency_gesture_screen_title">
 
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="gesture_emergency_button_switch_bar"
+        app:controller="com.android.settings.gestures.EmergencyGesturePreferenceController" />
+
     <com.android.settings.widget.VideoPreference
         android:key="emergency_gesture_screen_video"
         app:animation="@raw/gesture_double_tap"
         app:preview="@drawable/gesture_double_tap"/>
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="gesture_emergency_button_switch_bar"
-        android:layout="@layout/emergency_gesture_switch_bar"
-        app:controller="com.android.settings.gestures.EmergencyGesturePreferenceController"
-        app:allowDividerBelow="true"/>
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/emergency_gesture_screen_summary"
+        app:allowDividerBelow="true" />
 
     <SwitchPreference
         android:key="emergency_gesture_sound"

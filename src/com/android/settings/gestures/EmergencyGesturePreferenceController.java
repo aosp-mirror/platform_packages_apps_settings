@@ -21,18 +21,19 @@ import android.provider.Settings;
 import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Preference controller for emergency gesture setting
  */
 public class EmergencyGesturePreferenceController extends BasePreferenceController implements
-        SwitchBar.OnSwitchChangeListener {
+        OnMainSwitchChangeListener {
 
     @VisibleForTesting
     static final int ON = 1;
@@ -41,7 +42,7 @@ public class EmergencyGesturePreferenceController extends BasePreferenceControll
 
     private static final String SECURE_KEY = Settings.Secure.EMERGENCY_GESTURE_ENABLED;
 
-    private SwitchBar mSwitchBar;
+    private MainSwitchPreference mSwitchBar;
 
     public EmergencyGesturePreferenceController(Context context, String key) {
         super(context, key);
@@ -61,13 +62,11 @@ public class EmergencyGesturePreferenceController extends BasePreferenceControll
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference pref = screen.findPreference(mPreferenceKey);
-        mSwitchBar = pref.findViewById(R.id.switch_bar);
-        mSwitchBar.setSwitchBarText(R.string.emergency_gesture_switchbar_title,
-                R.string.emergency_gesture_switchbar_title);
+        final Preference pref = screen.findPreference(mPreferenceKey);
+        mSwitchBar = (MainSwitchPreference) pref;
+        mSwitchBar.setTitle(mContext.getString(R.string.emergency_gesture_switchbar_title));
         mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.setChecked(isChecked());
-        mSwitchBar.show();
+        mSwitchBar.updateStatus(isChecked());
     }
 
     @VisibleForTesting
