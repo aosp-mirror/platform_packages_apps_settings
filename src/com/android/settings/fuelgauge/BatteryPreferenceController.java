@@ -17,13 +17,14 @@
 package com.android.settings.fuelgauge;
 
 /**
- * Feature Provider used to retrieve battery status
+ * Common interface for a preference controller that updates battery status
  */
-public interface BatteryStatusFeatureProvider {
+public interface BatteryPreferenceController {
 
     /**
-     * Trigger a battery status update; return false if built-in status should be used.
+     * Updates the label for the preference controller. If the label is null, the
+     * implementation should revert back to the original label based on the
+     * battery info.
      */
-    boolean triggerBatteryStatusUpdate(
-            BatteryPreferenceController controller, BatteryInfo info);
+    void updateBatteryStatus(String label, BatteryInfo info);
 }
