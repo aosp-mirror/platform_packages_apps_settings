@@ -174,7 +174,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".SubSettings"/>
+        <activity android:name=".SubSettings"
+                  android:theme="@style/Theme.SubSettings" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
