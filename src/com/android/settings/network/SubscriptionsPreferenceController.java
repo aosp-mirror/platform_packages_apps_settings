@@ -50,6 +50,7 @@ import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SignalStrengthListener;
 import com.android.settings.widget.GearPreference;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.SignalStrengthUtil;
 
@@ -84,6 +85,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private MobileDataEnabledListener mDataEnabledListener;
     private DataConnectivityListener mConnectivityListener;
     private SignalStrengthListener mSignalStrengthListener;
+    private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
     @VisibleForTesting
     final BroadcastReceiver mDataSubscriptionChangedReceiver = new BroadcastReceiver() {
@@ -215,7 +217,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             mPreferenceGroup.removeAll();
             mSubsGearPref = new GearPreference(mContext, null);
             mSubsGearPref.setOnPreferenceClickListener(preference -> {
-                //TODO(b/176141379) Wait for wifiManager#selectCarrier(int subscriptionId)
+                connectCarrierNetwork();
                 return true;
             });
             mSubsGearPref.setOnGearClickListener(p ->
@@ -464,6 +466,20 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     boolean canSubscriptionBeDisplayed(Context context, int subId) {
         return (SubscriptionUtil.getAvailableSubscription(context,
                 ProxySubscriptionManager.getInstance(context), subId) != null);
+    }
+
+    public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
+        mWifiPickerTrackerHelper = helper;
+    }
+
+    @VisibleForTesting
+    public void connectCarrierNetwork() {
+        if (mTelephonyManager == null || !mTelephonyManager.isDataEnabled()) {
+            return;
+        }
+        if (mWifiPickerTrackerHelper != null) {
+            mWifiPickerTrackerHelper.connectCarrierNetwork(null /* ConnectCallback */);
+        }
     }
 
     SubsPrefCtrlInjector createSubsPrefCtrlInjector() {

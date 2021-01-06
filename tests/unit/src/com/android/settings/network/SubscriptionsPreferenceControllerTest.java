@@ -28,6 +28,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -59,6 +60,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionsPreferenceController.SubsPrefCtrlInjector;
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
@@ -90,6 +92,8 @@ public class SubscriptionsPreferenceControllerTest {
     private Lifecycle mLifecycle;
     @Mock
     private LifecycleOwner mLifecycleOwner;
+    @Mock
+    private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
     private LifecycleRegistry mLifecycleRegistry;
     private int mOnChildUpdatedCount;
     private Context mContext;
@@ -527,6 +531,26 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(TelephonyManager.DATA_CONNECTED).when(mTelephonyManagerForSub).getDataState();
 
         assertThat(icon).isEqualTo(actualIcon);
+    }
+
+    @Test
+    public void connectCarrierNetwork_isDataEnabled_helperConnect() {
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
+        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
+
+        mController.connectCarrierNetwork();
+
+        verify(mWifiPickerTrackerHelper).connectCarrierNetwork(any());
+    }
+
+    @Test
+    public void connectCarrierNetwork_isNotDataEnabled_helperNeverConnect() {
+        when(mTelephonyManager.isDataEnabled()).thenReturn(false);
+        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
+
+        mController.connectCarrierNetwork();
+
+        verify(mWifiPickerTrackerHelper, never()).connectCarrierNetwork(any());
     }
 
     private void setupGetIconConditions(int subId, boolean isActiveCellularNetwork,
