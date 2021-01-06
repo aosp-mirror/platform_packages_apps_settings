@@ -194,6 +194,11 @@ public class ChooseLockPattern extends SettingsActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected boolean isToolbarEnabled() {
+        return false;
+    }
+
     public static class ChooseLockPatternFragment extends InstrumentedFragment
             implements SaveAndFinishWorker.Listener {
 

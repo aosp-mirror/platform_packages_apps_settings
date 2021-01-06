@@ -176,6 +176,11 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         }
     }
 
+    @Override
+    protected boolean isToolbarEnabled() {
+        return false;
+    }
+
     public void prepareEnterAnimation() {
         getFragment().prepareEnterAnimation();
     }
