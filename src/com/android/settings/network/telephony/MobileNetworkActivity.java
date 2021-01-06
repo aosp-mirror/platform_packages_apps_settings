@@ -115,6 +115,9 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            // TODO(b/176882938): Enable title after material component updated
+            // If CollapsingToolbarLayout is applied, the old action bar won't show title.
+            actionBar.setDisplayShowTitleEnabled(mCollapsingToolbarLayout == null);
         }
 
         getProxySubscriptionManager().setLifecycle(getLifecycle());
