@@ -34,10 +34,6 @@ import java.util.List;
 
 /**
  * Represents the Internet Connectivity Panel.
- *
- * <p>
- * Displays Wifi (full Slice) and Airplane mode.
- * </p>
  */
 public class InternetConnectivityPanel implements PanelContent {
 
@@ -76,6 +72,21 @@ public class InternetConnectivityPanel implements PanelContent {
         return new Intent(Utils.isProviderModelEnabled(mContext)
                 ? ACTION_NETWORK_PROVIDER_SETTINGS : Settings.ACTION_WIRELESS_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    }
+
+    @Override
+    public boolean isCustomizedButtonUsed() {
+        return Utils.isProviderModelEnabled(mContext);
+    }
+
+    @Override
+    public CharSequence getCustomizedButtonTitle() {
+        return mContext.getText(R.string.settings_button);
+    }
+
+    @Override
+    public void onClickCustomizedButton() {
+        mContext.startActivity(getSeeMoreIntent());
     }
 
     @Override
