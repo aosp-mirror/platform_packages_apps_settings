@@ -40,12 +40,12 @@
         settings:controller="com.android.settings.display.DarkUIPreferenceController"
         settings:keywords="@string/keywords_dark_ui_mode"/>
 
-    <com.android.settings.display.NightDisplayPreference
+    <com.android.settings.widget.PrimarySwitchPreference
         android:key="night_display"
         android:title="@string/night_display_title"
         android:fragment="com.android.settings.display.NightDisplaySettings"
-        android:widgetLayout="@null"
-        settings:widgetLayout="@null"/>
+        settings:controller="com.android.settings.display.NightDisplayPreferenceController"
+        settings:keywords="@string/keywords_display_night_display"/>
 
     <Preference
         android:key="auto_brightness_entry"
