@@ -17,11 +17,18 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="notification_access_permission_detail_settings"
     android:title="@string/manage_notification_access_title">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="pref_app_header"
+        android:layout="@layout/settings_entity_header"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.HeaderPreferenceController"/>
+
     <com.android.settings.widget.FilterTouchesSwitchPreference
         android:key="notification_access_switch"
-        android:title="@string/notification_access_detail_switch"/>
+        android:title="@string/notification_access_detail_switch"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.ApprovalPreferenceController"/>
 
 </PreferenceScreen>
