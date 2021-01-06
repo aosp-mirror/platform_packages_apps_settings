@@ -244,7 +244,8 @@ public class ProviderModelSliceHelper {
         //TODO: get radio technology.
         String networkType = "";
         if (isDataSimActive()) {
-            summary = mContext.getString(R.string.mobile_data_connection_active, networkType);
+            summary = mContext.getString(R.string.preference_summary_default_combination,
+                    mContext.getString(R.string.mobile_data_connection_active), networkType);
         } else if (!isMobileDataEnabled()) {
             summary = mContext.getString(R.string.mobile_data_off_summary);
         }
