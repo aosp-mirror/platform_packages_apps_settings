@@ -23,19 +23,19 @@
     <PreferenceCategory
         android:key="restrict_category"
         android:title="@string/zen_mode_restrict_notifications_category">
-        <com.android.settings.notification.zen.ZenCustomRadioButtonPreference
+        <com.android.settingslib.widget.RadioButtonPreference
             android:key="zen_mute_notifications"
             android:title="@string/zen_mode_restrict_notifications_mute"
             android:summary="@string/zen_mode_restrict_notifications_mute_summary"
             settings:searchable="false"/>
 
-        <com.android.settings.notification.zen.ZenCustomRadioButtonPreference
+        <com.android.settingslib.widget.RadioButtonPreference
             android:key="zen_hide_notifications"
             android:title="@string/zen_mode_restrict_notifications_hide"
             android:summary="@string/zen_mode_restrict_notifications_hide_summary"
             settings:searchable="false"/>
 
-        <com.android.settings.notification.zen.ZenCustomRadioButtonPreference
+        <com.android.settingslib.widget.RadioButtonPreference
             android:key="zen_custom"
             android:title="@string/zen_mode_restrict_notifications_custom"
             settings:searchable="false"/>
