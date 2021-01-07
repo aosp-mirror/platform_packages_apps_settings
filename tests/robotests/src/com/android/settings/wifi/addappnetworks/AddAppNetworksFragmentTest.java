@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -41,6 +42,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -82,6 +84,8 @@ public class AddAppNetworksFragmentTest {
     @Mock
     private WifiEntry mWifiEntry;
 
+    private FakeFeatureFactory mFakeFeatureFactory;
+
     @Mock
     private WifiPickerTracker mWifiPickerTracker;
 
@@ -105,6 +109,8 @@ public class AddAppNetworksFragmentTest {
                 WifiConfiguration.KeyMgmt.NONE, null);
         mSavedWpaConfigurationEntry = generateRegularWifiConfiguration(FAKE_NEW_SAVED_WPA_SSID,
                 WifiConfiguration.KeyMgmt.WPA_PSK, "\"1234567890\"");
+
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mAddAppNetworksFragment.mWifiPickerTracker = mWifiPickerTracker;
         setUpOneScannedNetworkWithScanedLevel4();
@@ -485,6 +491,9 @@ public class AddAppNetworksFragmentTest {
     }
 
     private void setupFragment() {
+        when(mFakeFeatureFactory.wifiTrackerLibProvider.createWifiPickerTracker(
+                any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
+                .thenReturn(mWifiPickerTracker);
         FragmentController.setupFragment(mAddAppNetworksFragment);
     }
 

@@ -27,8 +27,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -66,6 +64,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
@@ -283,16 +282,15 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return SystemClock.elapsedRealtime();
             }
         };
-        mWifiPickerTracker = new WifiPickerTracker(getSettingsLifecycle(), context,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
-                new Handler(Looper.getMainLooper()),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                this);
+        mWifiPickerTracker = FeatureFactory.getFactory(context)
+                .getWifiTrackerLibProvider()
+                .createWifiPickerTracker(getSettingsLifecycle(), context,
+                        new Handler(Looper.getMainLooper()),
+                        mWorkerThread.getThreadHandler(),
+                        elapsedRealtimeClock,
+                        MAX_SCAN_AGE_MILLIS,
+                        SCAN_INTERVAL_MILLIS,
+                        this);
 
         final Activity activity = getActivity();
 
