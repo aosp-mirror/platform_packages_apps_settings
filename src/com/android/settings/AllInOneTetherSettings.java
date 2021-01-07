@@ -355,7 +355,7 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController controller) {
         final SoftApConfiguration config = buildNewConfig();
-        mPasswordPreferenceController.setSecurityType(config.getSecurityType());
+        mPasswordPreferenceController.updateVisibility(config.getSecurityType());
         mWifiManager.setSoftApConfiguration(config);
 
         if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {

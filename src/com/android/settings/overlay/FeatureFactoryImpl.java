@@ -62,6 +62,8 @@ import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
+import com.android.settings.wifi.WifiTrackerLibProvider;
+import com.android.settings.wifi.WifiTrackerLibProviderImpl;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -90,6 +92,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
     private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
+    private WifiTrackerLibProvider mWifiTrackerLibProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -277,5 +280,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mFaceFeatureProvider = new FaceFeatureProviderImpl();
         }
         return mFaceFeatureProvider;
+    }
+
+    @Override
+    public WifiTrackerLibProvider getWifiTrackerLibProvider() {
+        if (mWifiTrackerLibProvider == null) {
+            mWifiTrackerLibProvider = new WifiTrackerLibProviderImpl();
+        }
+        return mWifiTrackerLibProvider;
     }
 }

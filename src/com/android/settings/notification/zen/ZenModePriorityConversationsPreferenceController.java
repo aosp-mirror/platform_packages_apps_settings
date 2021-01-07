@@ -16,9 +16,6 @@
 
 package com.android.settings.notification.zen;
 
-import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_GONE;
-import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_SETTING;
-
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -37,7 +34,6 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.ConversationListSettings;
-import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.RadioButtonPreference;
 
@@ -186,13 +182,10 @@ public class ZenModePriorityConversationsPreferenceController
     }
 
     private RadioButtonPreference makeRadioPreference(String key, int titleId) {
-        RadioButtonPreferenceWithExtraWidget pref =
-                new RadioButtonPreferenceWithExtraWidget(mPreferenceCategory.getContext());
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(mPreferenceCategory.getContext());
         if (KEY_ALL.equals(key) || KEY_IMPORTANT.equals(key)) {
             pref.setExtraWidgetOnClickListener(mConversationSettingsWidgetClickListener);
-            pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
-        } else {
-            pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
         }
         pref.setKey(key);
         pref.setTitle(titleId);

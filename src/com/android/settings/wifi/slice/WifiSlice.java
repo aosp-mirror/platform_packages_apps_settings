@@ -183,7 +183,7 @@ public class WifiSlice implements CustomSliceable {
 
     private IconCompat getEndIcon(WifiSliceItem wifiSliceItem) {
         if (wifiSliceItem.getConnectedState() != WifiEntry.CONNECTED_STATE_DISCONNECTED) {
-            return null;
+            return IconCompat.createWithResource(mContext, R.drawable.ic_settings_24dp);
         }
 
         if (wifiSliceItem.getSecurity() != WifiEntry.SECURITY_NONE) {

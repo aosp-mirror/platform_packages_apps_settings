@@ -27,19 +27,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.PowerManager;
-import android.os.Process;
-import android.os.SimpleClock;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
@@ -74,6 +67,7 @@ import com.android.settings.wifi.LinkablePreference;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiConnectListener;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
@@ -88,8 +82,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
-import java.time.Clock;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -114,11 +106,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     static final int MENU_ID_FORGET = Menu.FIRST + 3;
     static final int MENU_ID_MODIFY = Menu.FIRST + 4;
-
-    // Max age of tracked WifiEntries
-    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
-    // Interval between initiating WifiPickerTracker scans
-    private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
@@ -187,11 +174,9 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
      */
     private boolean mIsRestricted;
 
-    // Worker thread used for WifiPickerTracker work
-    private HandlerThread mWorkerThread;
-
     @VisibleForTesting
     WifiPickerTracker mWifiPickerTracker;
+    private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
     private WifiDialog2 mDialog;
 
@@ -279,27 +264,9 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final Context context = getContext();
-        mWorkerThread = new HandlerThread(TAG
-                + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
-                Process.THREAD_PRIORITY_BACKGROUND);
-        mWorkerThread.start();
-        final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
-            @Override
-            public long millis() {
-                return SystemClock.elapsedRealtime();
-            }
-        };
-        mWifiPickerTracker = new WifiPickerTracker(getSettingsLifecycle(), context,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
-                new Handler(Looper.getMainLooper()),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                this);
+        mWifiPickerTrackerHelper =
+                new WifiPickerTrackerHelper(getSettingsLifecycle(), getContext(), this);
+        mWifiPickerTracker = mWifiPickerTrackerHelper.getWifiPickerTracker();
 
         final Activity activity = getActivity();
 
@@ -356,19 +323,16 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
         }
+
+        if (mNetworkMobileProviderController != null) {
+            mNetworkMobileProviderController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-    }
-
-    @Override
-    public void onDestroyView() {
-        mWorkerThread.quit();
-
-        super.onDestroyView();
     }
 
     @Override

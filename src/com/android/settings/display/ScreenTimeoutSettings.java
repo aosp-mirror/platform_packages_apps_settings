@@ -37,13 +37,13 @@ import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
-import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -152,8 +152,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         }
 
         for (CandidateInfo info : candidateList) {
-            RadioButtonPreferenceWithExtraWidget pref =
-                    new RadioButtonPreferenceWithExtraWidget(getPrefContext());
+            RadioButtonPreference pref =
+                    new RadioButtonPreference(getPrefContext());
             bindPreference(pref, info.getKey(), info, defaultKey);
             screen.addPreference(pref);
         }

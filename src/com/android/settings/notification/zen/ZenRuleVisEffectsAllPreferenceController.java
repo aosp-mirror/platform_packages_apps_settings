@@ -27,11 +27,12 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class ZenRuleVisEffectsAllPreferenceController extends
         AbstractZenCustomRulePreferenceController implements PreferenceControllerMixin {
 
-    private ZenCustomRadioButtonPreference mPreference;
+    private RadioButtonPreference mPreference;
 
     public ZenRuleVisEffectsAllPreferenceController(Context context, Lifecycle lifecycle,
             String key) {
@@ -43,7 +44,7 @@ public class ZenRuleVisEffectsAllPreferenceController extends
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
 
-        mPreference.setOnRadioButtonClickListener(p -> {
+        mPreference.setOnClickListener(p -> {
             mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_SOUND_ONLY,
                     Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_RULE_ID, mId));
             mRule.setZenPolicy(new ZenPolicy.Builder(mRule.getZenPolicy())

@@ -31,6 +31,7 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -164,6 +165,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
     private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<>();
+    private static Bitmap sRemoveGuestBitmap = null;
 
     private MultiUserSwitchBarController mSwitchBarController;
     private EditUserInfoController mEditUserInfoController =
@@ -177,6 +179,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     // A place to cache the generated default avatar
     private Drawable mDefaultIconDrawable;
+    private Drawable mRemoveGuestIconDrawable;
 
     // TODO:   Replace current Handler solution to something that doesn't leak memory and works
     // TODO:   during a configuration change
@@ -383,8 +386,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private void loadProfile() {
         if (isCurrentUserGuest()) {
             // No need to load profile information
-            mMePreference.setIcon(getEncircledDefaultIcon());
-            mMePreference.setTitle(R.string.user_exit_guest_title);
+            mMePreference.setIcon(getEncircledRemoveGuestIcon());
+            mMePreference.setTitle(R.string.user_clear_guest_menu);
             mMePreference.setSelectable(true);
             // removing a guest will result in switching back to the admin user
             mMePreference.setEnabled(canSwitchUserNow());
@@ -899,7 +902,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 } else {
                     setPhotoId(pref, user);
                 }
-            } else {
+            } else if (!user.isGuest()) {
                 // Icon not available yet, print a placeholder
                 pref.setIcon(getEncircledDefaultIcon());
             }
@@ -1044,6 +1047,14 @@ public class UserSettings extends SettingsPreferenceFragment
         return mDefaultIconDrawable;
     }
 
+    private Drawable getEncircledRemoveGuestIcon() {
+        if (mRemoveGuestIconDrawable == null) {
+            mRemoveGuestIconDrawable = encircle(
+                    getRemoveGuestIconAsBitmap(getContext().getResources()));
+        }
+        return mRemoveGuestIconDrawable;
+    }
+
     private void setPhotoId(Preference pref, UserInfo user) {
         Bitmap bitmap = mUserIcons.get(user.id);
         if (bitmap != null) {
@@ -1120,6 +1131,23 @@ public class UserSettings extends SettingsPreferenceFragment
             sDarkDefaultUserBitmapCache.put(userId, bitmap);
         }
         return bitmap;
+    }
+
+    /**
+     * Returns a remove guest icon (as a {@link Bitmap})
+     *
+     * @param resources resources object to fetch the remove guest icon.
+     */
+    private static Bitmap getRemoveGuestIconAsBitmap(Resources resources) {
+        if (sRemoveGuestBitmap == null) {
+            Drawable icon = resources.getDrawable(R.drawable.ic_delete, null).mutate();
+            icon.setColorFilter(
+                    resources.getColor(com.android.internal.R.color.user_icon_default_gray, null),
+                    PorterDuff.Mode.SRC_IN);
+            icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+            sRemoveGuestBitmap = UserIcons.convertToBitmap(icon);
+        }
+        return sRemoveGuestBitmap;
     }
 
     /**

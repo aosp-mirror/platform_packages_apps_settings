@@ -24,11 +24,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.NetworkRequestMatchCallback;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
@@ -54,6 +51,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.internal.PreferenceImageView;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -113,16 +111,15 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             }
         };
         final Context context = getContext();
-        mWifiPickerTracker = new WifiPickerTracker(getSettingsLifecycle(), context,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
-                new Handler(Looper.getMainLooper()),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                this);
+        mWifiPickerTracker = FeatureFactory.getFactory(context)
+                .getWifiTrackerLibProvider()
+                .createWifiPickerTracker(getSettingsLifecycle(), context,
+                        new Handler(Looper.getMainLooper()),
+                        mWorkerThread.getThreadHandler(),
+                        elapsedRealtimeClock,
+                        MAX_SCAN_AGE_MILLIS,
+                        SCAN_INTERVAL_MILLIS,
+                        this);
     }
 
     @Override

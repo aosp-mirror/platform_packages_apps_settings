@@ -4952,6 +4952,8 @@
     <string name="audio_and_captions_category_title">Audio &amp; on-screen text</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
+    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
+    <string name="accessibility_text_and_display_title">Text and display</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
@@ -7111,13 +7113,15 @@
     <!-- Title for Guest user [CHAR LIMIT=35] -->
     <string name="user_guest">Guest</string>
     <!-- Label for item to exit guest mode [CHAR LIMIT=35] -->
-    <string name="user_exit_guest_title">Remove guest</string>
+    <string name="user_clear_guest_menu">Clear guest data</string>
+    <!-- Label for item to exit guest mode [CHAR LIMIT=35] -->
+    <string name="user_exit_guest_menu">End guest session</string>
     <!-- Title of dialog to user to confirm exiting guest. [CHAR LIMIT=50] -->
-    <string name="user_exit_guest_confirm_title">Remove guest?</string>
+    <string name="user_exit_guest_confirm_title">End guest session?</string>
     <!-- Message to user to confirm exiting guest. [CHAR LIMIT=none] -->
     <string name="user_exit_guest_confirm_message">All apps and data in this session will be deleted.</string>
     <!-- Label for button in confirmation dialog when exiting guest session [CHAR LIMIT=35] -->
-    <string name="user_exit_guest_dialog_remove">Remove</string>
+    <string name="user_exit_guest_dialog_remove">End session</string>
 
     <!-- Title of preference to enable calling[CHAR LIMIT=40] -->
     <string name="user_enable_calling">Turn on phone calls</string>
@@ -8587,7 +8591,7 @@
     <string name="recent_conversations">Recent conversations</string>
 
     <!-- [CHAR LIMIT=20] button title -->
-    <string name="conversation_settings_clear_recents">Clear recents</string>
+    <string name="conversation_settings_clear_recents">Clear all of the recent ones</string>
 
     <!-- a11y string -->
     <string name="clear">Clear</string>
@@ -12523,18 +12527,23 @@
     <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_internet">network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte</string>
     <!-- Label text to view airplane-safe networks. [CHAR LIMIT=40] -->
-    <string name="view_airplane_safe_networks">View airplane-safe networks</string>
+    <string name="view_airplane_safe_networks">View airplane mode networks</string>
     <!-- Label text to turn off airplane mode. [CHAR LIMIT=40] -->
-    <string name="turn_off_airplane_mode">Turn off Airplane Mode</string>
+    <string name="turn_off_airplane_mode">Turn off airplane mode</string>
 
-    <!-- Provider Model: Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_connection_active">Active, <xliff:g id="network_data_rat" example="LTE">%1$s</xliff:g></string>
-    <!-- Provider Model: Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_off_summary">Internet off</string>
-    <!-- Provider Model: Summary indicating that non-carrier network unavailable [CHAR LIMIT=50] -->
-    <string name="non_carrier_network_unavailable">Non\u2011carrier networks unavailable</string>
-    <!-- Provider Model: Summary indicating that non-carrier and carrier network unavailable [CHAR LIMIT=50] -->
-    <string name="all_network_unavailable">Networks unavailable</string>
+    <!-- Summary text separator for preferences including a short description
+         (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
+    <string name="preference_summary_default_combination"><xliff:g id="state" example="Connected">%1$s</xliff:g> / <xliff:g id="networkMode" example="LTE">%2$s</xliff:g></string>
+    <!-- Provider Model:
+         Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_connection_active">Connected</string>
+    <!-- Provider Model:
+         Summary indicating that a SIM has no mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_off_summary">Internet won\u0027t auto\u2011connect</string>
+    <!-- Provider Model: Summary indicating that no other networks available [CHAR LIMIT=50] -->
+    <string name="non_carrier_network_unavailable">No other networks available</string>
+    <!-- Provider Model: Summary indicating that no networks available [CHAR LIMIT=50] -->
+    <string name="all_network_unavailable">No networks available</string>
 
     <!-- Summary for preference when Bedtime mode is on [CHAR LIMIT=NONE] -->
     <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>
@@ -12557,4 +12566,17 @@
     <string name="bluetooth_phonebook_access_dialog_title">Allow access to contacts and call log?</string>
     <!-- Bluetooth phonebook permission alert for dialog content [CHAR LIMIT=none] -->
     <string name="bluetooth_phonebook_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+
+    <!-- Brightness category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_brightness">Brightness</string>
+    <!-- Lock screen category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_lock_display">Lock Display</string>
+    <!-- Visibility category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_visibility">Visibility</string>
+    <!-- Color category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_color">Color</string>
+    <!-- Others category name [CHAR LIMIT=none] -->
+    <string name="category_name_others">Others</string>
+    <!-- General category name [CHAR LIMIT=none] -->
+    <string name="category_name_general">General</string>
 </resources>

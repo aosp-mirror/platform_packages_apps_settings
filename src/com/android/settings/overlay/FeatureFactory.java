@@ -41,6 +41,7 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
+import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -142,6 +143,11 @@ public abstract class FeatureFactory {
     public abstract AwareFeatureProvider getAwareFeatureProvider();
 
     public abstract FaceFeatureProvider getFaceFeatureProvider();
+
+    /**
+     * Gets implementation for the WifiTrackerLib.
+     */
+    public abstract WifiTrackerLibProvider getWifiTrackerLibProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
