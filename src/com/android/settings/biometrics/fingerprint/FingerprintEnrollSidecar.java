@@ -19,7 +19,6 @@ package com.android.settings.biometrics.fingerprint;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.UserHandle;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
@@ -30,6 +29,7 @@ import com.android.settings.biometrics.BiometricEnrollSidecar;
 public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
 
     private FingerprintManager mFingerprintManager;
+    private boolean mShouldLogMetrics = true;
 
     @Override
     public void onAttach(Activity activity) {
@@ -40,7 +40,18 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
     @Override
     protected void startEnrollment() {
         super.startEnrollment();
-        mFingerprintManager.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback);
+        mFingerprintManager.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
+                mShouldLogMetrics);
+    }
+
+    /**
+     * Sets the flag mShouldLogMetrics which controls whether or not
+     * logging of enrollment successes/failures will be recorded for
+     * this particular instance of enrollment. This is primarily used by
+     * the find sensor activity so that false negatives are not reported.
+     */
+    public void logMetrics(boolean shouldLogMetrics) {
+        mShouldLogMetrics = shouldLogMetrics;
     }
 
     private FingerprintManager.EnrollmentCallback mEnrollmentCallback
