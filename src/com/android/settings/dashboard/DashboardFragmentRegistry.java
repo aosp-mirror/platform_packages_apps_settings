@@ -29,6 +29,7 @@ import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.emergency.EmergencyDashboardFragment;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.SmartBatterySettings;
@@ -81,6 +82,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_BATTERY);
         PARENT_TO_CATEGORY_KEY_MAP.put(DisplaySettings.class.getName(),
                 CategoryKey.CATEGORY_DISPLAY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(EmergencyDashboardFragment.class.getName(),
+                CategoryKey.CATEGORY_EMERGENCY);
         PARENT_TO_CATEGORY_KEY_MAP.put(SoundSettings.class.getName(),
                 CategoryKey.CATEGORY_SOUND);
         PARENT_TO_CATEGORY_KEY_MAP.put(StorageDashboardFragment.class.getName(),
