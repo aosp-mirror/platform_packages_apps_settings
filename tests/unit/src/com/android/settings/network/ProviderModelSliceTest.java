@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -50,9 +51,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.Utils;
 import com.android.settings.network.telephony.NetworkProviderWorker;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settings.wifi.slice.WifiSliceItem;
 import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -100,11 +103,21 @@ public class ProviderModelSliceTest {
     @Mock
     GridRowBuilder mMockGridRowBuilderAllNetworkUnavailable;
 
+    private FakeFeatureFactory mFeatureFactory;
+    @Mock
+    private WifiPickerTracker mWifiPickerTracker;
+
     @Before
     @UiThreadTest
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
+
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFeatureFactory.wifiTrackerLibProvider
+                .createWifiPickerTracker(
+                        any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
+                .thenReturn(mWifiPickerTracker);
 
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
