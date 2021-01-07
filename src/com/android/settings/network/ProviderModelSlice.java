@@ -82,7 +82,7 @@ public class ProviderModelSlice extends WifiSlice {
         // Third section:  Add the Wi-Fi items which are not connected.
         // Fourth section:  If device has connection problem, this row show the message for user.
 
-        if (mHelper.isAirplaneModeEnabled()) {
+        if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled()) {
             log("Airplane mode is enabled.");
             // ToDo Next CL will add the Airplane mode Message.
             return mHelper.createListBuilder(getUri()).build();
