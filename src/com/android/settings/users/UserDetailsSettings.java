@@ -243,7 +243,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mDefaultGuestRestrictions = mUserManager.getDefaultGuestRestrictions();
                 mPhonePref.setChecked(
                         !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
-                mRemoveUserPref.setTitle(R.string.user_exit_guest_title);
+                mRemoveUserPref.setTitle(R.string.user_exit_guest_menu);
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));

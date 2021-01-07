@@ -28,10 +28,8 @@ import android.content.Context;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.notification.zen.AbstractZenCustomRulePreferenceController;
-import com.android.settings.notification.zen.ZenCustomRadioButtonPreference;
-import com.android.settings.notification.zen.ZenModeBackend;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +49,7 @@ public class ZenRulePreferenceControllerTest {
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private ZenCustomRadioButtonPreference mockPref;
+    private RadioButtonPreference mMockPref;
     @Mock
     private PreferenceScreen mScreen;
 
@@ -67,7 +65,7 @@ public class ZenRulePreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new TestablePreferenceController(mContext,"test", mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
         mController.displayPreference(mScreen);
     }
 

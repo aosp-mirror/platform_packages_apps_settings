@@ -27,11 +27,12 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class ZenRuleVisEffectsCustomPreferenceController extends
         AbstractZenCustomRulePreferenceController implements PreferenceControllerMixin {
 
-    private ZenCustomRadioButtonPreference mPreference;
+    private RadioButtonPreference mPreference;
 
     public ZenRuleVisEffectsCustomPreferenceController(Context context, Lifecycle lifecycle,
             String key) {
@@ -43,12 +44,12 @@ public class ZenRuleVisEffectsCustomPreferenceController extends
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
 
-        mPreference.setOnGearClickListener(p -> {
+        mPreference.setOnClickListener(p -> {
             launchCustomSettings();
 
         });
 
-        mPreference.setOnRadioButtonClickListener(p -> {
+        mPreference.setExtraWidgetOnClickListener(p -> {
             launchCustomSettings();
         });
     }

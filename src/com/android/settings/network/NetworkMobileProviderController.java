@@ -24,6 +24,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
@@ -114,5 +115,11 @@ public class NetworkMobileProviderController extends BasePreferenceController im
             }
         }
         mPreferenceCategory.setVisible(available);
+    }
+
+    public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
+        if (mSubscriptionsController != null) {
+            mSubscriptionsController.setWifiPickerTrackerHelper(helper);
+        }
     }
 }

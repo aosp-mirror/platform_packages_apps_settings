@@ -356,6 +356,11 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public long getScreenOnEnergy() {
+        return 0;
+    }
+
+    @Override
     public long getMobileRadioApWakeupCount(int which) {
         return 0;
     }
