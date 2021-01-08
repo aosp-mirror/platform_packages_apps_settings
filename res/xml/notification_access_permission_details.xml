@@ -31,4 +31,21 @@
         android:title="@string/notification_access_detail_switch"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.ApprovalPreferenceController"/>
 
+    <MultiSelectListPreference
+        android:key="notification_type_filter"
+        android:title="@string/notification_listener_type_title"
+        android:entries="@array/notif_types_titles"
+        android:entryValues="@array/notif_types_values"
+        android:summary="%s"
+        android:persistent="false"
+        style="@style/SettingsMultiSelectListPreference"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.TypeFilterPreferenceController"/>/>
+
+    <PreferenceCategory
+        android:key="advanced"
+        android:order="50"
+        settings:initialExpandedChildrenCount="0">
+
+
+    </PreferenceCategory>
 </PreferenceScreen>

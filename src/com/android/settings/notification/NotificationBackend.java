@@ -45,6 +45,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.service.notification.ConversationChannelWrapper;
+import android.service.notification.NotificationListenerFilter;
 import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -591,6 +592,32 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }
+    }
+
+    public NotificationListenerFilter getListenerFilter(ComponentName cn, int userId) {
+        try {
+            return sINM.getListenerFilter(cn, userId);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return new NotificationListenerFilter();
+    }
+
+    public void setListenerFilter(ComponentName cn, int userId, NotificationListenerFilter nlf) {
+        try {
+            sINM.setListenerFilter(cn, userId, nlf);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public boolean isNotificationListenerAccessGranted(ComponentName cn) {
+        try {
+            return sINM.isNotificationListenerAccessGranted(cn);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
     }
 
     /**
