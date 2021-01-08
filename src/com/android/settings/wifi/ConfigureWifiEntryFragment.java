@@ -21,9 +21,6 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -40,6 +37,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
@@ -222,17 +220,17 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
             }
         };
 
-        mNetworkDetailsTracker = NetworkDetailsTracker.createNetworkDetailsTracker(
-                getSettingsLifecycle(),
-                context,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
-                new Handler(Looper.getMainLooper()),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                getArguments().getString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY));
+        mNetworkDetailsTracker = FeatureFactory.getFactory(context)
+                .getWifiTrackerLibProvider()
+                .createNetworkDetailsTracker(
+                        getSettingsLifecycle(),
+                        context,
+                        new Handler(Looper.getMainLooper()),
+                        mWorkerThread.getThreadHandler(),
+                        elapsedRealtimeClock,
+                        MAX_SCAN_AGE_MILLIS,
+                        SCAN_INTERVAL_MILLIS,
+                        getArguments().getString(
+                                WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY));
     }
 }

@@ -17,6 +17,7 @@ import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.hardware.display.NightDisplayListener;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -32,6 +33,7 @@ public class NightDisplayPreferenceController extends TogglePreferenceController
 
     private final ColorDisplayManager mColorDisplayManager;
     private final NightDisplayListener mNightDisplayListener;
+    private final NightDisplayTimeFormatter mTimeFormatter;
     private PrimarySwitchPreference mPreference;
 
     public NightDisplayPreferenceController(Context context, String key) {
@@ -39,6 +41,7 @@ public class NightDisplayPreferenceController extends TogglePreferenceController
 
         mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
         mNightDisplayListener = new NightDisplayListener(context);
+        mTimeFormatter = new NightDisplayTimeFormatter(context);
     }
 
     public static boolean isSuggestionComplete(Context context) {
@@ -84,6 +87,12 @@ public class NightDisplayPreferenceController extends TogglePreferenceController
     @Override
     public boolean setChecked(boolean isChecked) {
         return mColorDisplayManager.setNightDisplayActivated(isChecked);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setSummary(mTimeFormatter.getAutoModeSummary(mContext, mColorDisplayManager));
     }
 
     @Override

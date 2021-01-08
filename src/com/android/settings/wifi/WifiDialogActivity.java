@@ -18,9 +18,7 @@ package com.android.settings.wifi;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.NetworkScoreManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.ActionListener;
@@ -38,6 +36,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.lifecycle.ObservableActivity;
 import com.android.settingslib.wifi.AccessPoint;
@@ -124,18 +123,17 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                     return SystemClock.elapsedRealtime();
                 }
             };
-            mNetworkDetailsTracker = NetworkDetailsTracker.createNetworkDetailsTracker(
-                    getLifecycle(),
-                    this,
-                    getSystemService(WifiManager.class),
-                    getSystemService(ConnectivityManager.class),
-                    getSystemService(NetworkScoreManager.class),
-                    new Handler(Looper.getMainLooper()),
-                    mWorkerThread.getThreadHandler(),
-                    elapsedRealtimeClock,
-                    MAX_SCAN_AGE_MILLIS,
-                    SCAN_INTERVAL_MILLIS,
-                    mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
+            mNetworkDetailsTracker = FeatureFactory.getFactory(this)
+                    .getWifiTrackerLibProvider()
+                    .createNetworkDetailsTracker(
+                            getLifecycle(),
+                            this,
+                            new Handler(Looper.getMainLooper()),
+                            mWorkerThread.getThreadHandler(),
+                            elapsedRealtimeClock,
+                            MAX_SCAN_AGE_MILLIS,
+                            SCAN_INTERVAL_MILLIS,
+                            mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
         } else {
             final Bundle accessPointState = mIntent.getBundleExtra(KEY_ACCESS_POINT_STATE);
             if (accessPointState != null) {

@@ -25,8 +25,6 @@ import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
-import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.wifi.EasyConnectStatusCallback;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -57,6 +55,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
 import com.android.wifitrackerlib.WifiEntry;
@@ -363,16 +362,15 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
         };
         final Context context = getContext();
-        mWifiPickerTracker = new WifiPickerTracker(getSettingsLifecycle(), context,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
-                new Handler(Looper.getMainLooper()),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                null /* listener */);
+        mWifiPickerTracker = FeatureFactory.getFactory(context)
+                .getWifiTrackerLibProvider()
+                .createWifiPickerTracker(getSettingsLifecycle(), context,
+                        new Handler(Looper.getMainLooper()),
+                        mWorkerThread.getThreadHandler(),
+                        elapsedRealtimeClock,
+                        MAX_SCAN_AGE_MILLIS,
+                        SCAN_INTERVAL_MILLIS,
+                        null /* listener */);
 
         // setTitle for TalkBack
         if (mIsConfiguratorMode) {

@@ -19,8 +19,6 @@ package com.android.settings.wifi.slice;
 import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.HandlerThread;
@@ -34,6 +32,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.wifitrackerlib.MergedCarrierEntry;
@@ -79,16 +78,15 @@ public class WifiScanWorker extends SliceBackgroundWorker<WifiSliceItem> impleme
                 return SystemClock.elapsedRealtime();
             }
         };
-        mWifiPickerTracker = new WifiPickerTracker(getLifecycle(), context,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
-                ThreadUtils.getUiThreadHandler(),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                this);
+        mWifiPickerTracker = FeatureFactory.getFactory(context)
+                .getWifiTrackerLibProvider()
+                .createWifiPickerTracker(getLifecycle(), context,
+                        ThreadUtils.getUiThreadHandler(),
+                        mWorkerThread.getThreadHandler(),
+                        elapsedRealtimeClock,
+                        MAX_SCAN_AGE_MILLIS,
+                        SCAN_INTERVAL_MILLIS,
+                        this);
 
         mLifecycleRegistry.markState(Lifecycle.State.INITIALIZED);
         mLifecycleRegistry.markState(Lifecycle.State.CREATED);

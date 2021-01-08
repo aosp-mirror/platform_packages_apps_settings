@@ -43,6 +43,7 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
+import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.mockito.Answers;
@@ -76,6 +77,8 @@ public class FakeFeatureFactory extends FeatureFactory {
     public SlicesFeatureProvider slicesFeatureProvider;
     public SearchFeatureProvider searchFeatureProvider;
     public ContextualCardFeatureProvider mContextualCardFeatureProvider;
+
+    public WifiTrackerLibProvider wifiTrackerLibProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -120,6 +123,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mBluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         mAwareFeatureProvider = mock(AwareFeatureProvider.class);
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
+        wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
     }
 
     @Override
@@ -230,5 +234,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public FaceFeatureProvider getFaceFeatureProvider() {
         return mFaceFeatureProvider;
+    }
+
+    @Override
+    public WifiTrackerLibProvider getWifiTrackerLibProvider() {
+        return wifiTrackerLibProvider;
     }
 }

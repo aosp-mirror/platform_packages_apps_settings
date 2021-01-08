@@ -2824,16 +2824,12 @@
     <string name="night_display_status_title">Status</string>
     <!-- Night display screen, setting the color temperature of the display. [CHAR LIMIT=30] -->
     <string name="night_display_temperature_title">Intensity</string>
-    <!-- Display settings screen, summary format of night display when off. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_never">Will never turn on automatically</string>
          <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_twilight">Will turn on automatically at sunset</string>
-    <!-- Display settings screen, summary format of night display when on. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary format of night display when on and will turn off automatically at a user defined time. [CHAR LIMIT=NONE] -->
@@ -2882,16 +2878,12 @@
     <string name="dark_ui_auto_mode_custom">Turns on at custom time</string>
     <!-- Dark UI screen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
     <string name="dark_ui_status_title">Status</string>
-    <!-- Display settings screen, summary format of Dark UI when off. [CHAR LIMIT=NONE] -->
-    <string name="dark_ui_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
         <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
-    <!-- Display settings screen, summary format of Dark UI when on. [CHAR LIMIT=NONE] -->
-    <string name="dark_ui_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
@@ -4952,6 +4944,8 @@
     <string name="audio_and_captions_category_title">Audio &amp; on-screen text</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
+    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
+    <string name="accessibility_text_and_display_title">Text and display</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
@@ -10868,7 +10862,7 @@
     <string name="dark_ui_mode">Dark theme</string>
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is still on-->
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on">On / Temporarily disabled due to Battery Saver</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on">Temporarily disabled due to Battery Saver</string>
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>
@@ -10991,6 +10985,9 @@
     <string name="swipe_up_to_switch_apps_suggestion_title">Try the new Home button</string>
     <!-- Summary for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_suggestion_summary">Turn on the new gesture to switch apps</string>
+
+    <!-- Preference title for "Safety & emergency" settings page [CHAR LIMIT=60]-->
+    <string name="emergency_settings_preference_title">Safety &amp; emergency</string>
 
     <!-- Title text for edge to edge navigation [CHAR LIMIT=60] -->
     <string name="edge_to_edge_navigation_title">Gesture navigation</string>
@@ -12575,4 +12572,6 @@
     <string name="category_name_color">Color</string>
     <!-- Others category name [CHAR LIMIT=none] -->
     <string name="category_name_others">Others</string>
+    <!-- General category name [CHAR LIMIT=none] -->
+    <string name="category_name_general">General</string>
 </resources>

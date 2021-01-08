@@ -134,6 +134,13 @@
             android:order="-20"
             android:title="@string/security_settings_title"
             settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
+        <!--    TODO(b/175158310): Enable this tile when the setting content is more flushed out-->
+        <!--        <Preference-->
+        <!--            android:key="top_level_emergency"-->
+        <!--            android:title="@string/emergency_settings_preference_title"-->
+        <!--            android:icon="@drawable/ic_homepage_emergency"-->
+        <!--            android:order="-10"-->
+        <!--            android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>-->
     </PreferenceCategory>
 
     <PreferenceCategory
