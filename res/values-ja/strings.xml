@@ -24,11 +24,11 @@
     <string name="confirmation_turn_on" msgid="2979094011928347665">"ON にする"</string>
     <string name="device_info_default" msgid="1406619232867343310">"不明"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">デベロッパーになるまであと<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>ステップです。</item>
-      <item quantity="one">デベロッパーになるまであと<xliff:g id="STEP_COUNT_0">%1$d</xliff:g>ステップです。</item>
+      <item quantity="other">開発者向けオプションが有効になるまであと <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> 回です</item>
+      <item quantity="one">開発者向けオプションが有効になるまであと <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> 回です</item>
     </plurals>
     <string name="show_dev_on" msgid="2840850085134853754">"開発者向けオプションが有効になりました"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"開発者向けオプションが既に有効です。"</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"開発者向けオプションはすでに有効です"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"まず開発者向けオプションを有効にしてください。"</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"無線とネットワーク"</string>
     <string name="header_category_system" msgid="1665516346845259058">"システム"</string>
@@ -4965,4 +4965,10 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth が ON になります"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"信頼できないデバイスがメッセージにアクセスしようとしています。タップして詳細をご確認ください。"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"メッセージへのアクセスを許可しますか？"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"信頼できない Bluetooth デバイス <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> がメッセージにアクセスしようとしています。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"信頼できないデバイスが連絡先と通話履歴にアクセスしようとしています。タップして詳細をご確認ください。"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"連絡先と通話履歴へのアクセスを許可しますか？"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"信頼できない Bluetooth デバイス <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> が連絡先と通話履歴にアクセスしようとしています。これには着信や発信に関するデータも含まれます。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
 </resources>
