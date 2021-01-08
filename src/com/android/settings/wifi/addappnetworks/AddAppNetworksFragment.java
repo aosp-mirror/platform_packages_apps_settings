@@ -24,8 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
@@ -60,6 +58,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -191,16 +190,15 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
                 return SystemClock.elapsedRealtime();
             }
         };
-        mWifiPickerTracker = new WifiPickerTracker(getSettingsLifecycle(), mActivity,
-                mActivity.getSystemService(WifiManager.class),
-                mActivity.getSystemService(ConnectivityManager.class),
-                mActivity.getSystemService(NetworkScoreManager.class),
-                new Handler(Looper.getMainLooper()),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                this);
+        mWifiPickerTracker = FeatureFactory.getFactory(mActivity.getApplicationContext())
+                .getWifiTrackerLibProvider()
+                .createWifiPickerTracker(getSettingsLifecycle(), mActivity,
+                        new Handler(Looper.getMainLooper()),
+                        mWorkerThread.getThreadHandler(),
+                        elapsedRealtimeClock,
+                        MAX_SCAN_AGE_MILLIS,
+                        SCAN_INTERVAL_MILLIS,
+                        this);
         return inflater.inflate(R.layout.wifi_add_app_networks, container, false);
     }
 
