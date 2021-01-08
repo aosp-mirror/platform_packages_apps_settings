@@ -178,7 +178,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"Täytä porttikenttä."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Portti-kentän täytyy olla tyhjä, jos isäntä-kenttä on tyhjä."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Antamasi portti on virheellinen."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Selain saa käyttää HTTP-välityspalvelinta mutta muut sovellukset eivät."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Selain käyttää HTTP-välityspalvelinta, mutta muut sovellukset mahdollisesti eivät."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"Välitysp. aut. määr. URL: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Ping-kutsu isäntänimelle (www.google.com), IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Ping-kutsu isäntänimelle (www.google.com), IPv6:"</string>
@@ -789,9 +789,9 @@
     <string name="wifi_time_remaining" msgid="8503606272869846170">"<xliff:g id="REMAINING_TIME">%1$s</xliff:g> jäljellä"</string>
     <string name="wifi_expiry_time" msgid="5419758551129267624">"Vanhenee <xliff:g id="EXPIRY_TIME">%1$s</xliff:g>"</string>
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Napauta tästä kirjautuaksesi verkkoon"</string>
-    <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
-    <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
-    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
+    <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
+    <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
+    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa ottaa Wi-Fin käyttöön."</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa poistaa Wi-Fin käytöstä."</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Vahvista korjattavien sovell. tavukoodi"</string>
@@ -1229,11 +1229,9 @@
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Päättymisaika"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Tila"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Voimakkuus"</string>
-    <string name="night_display_summary_off" msgid="4676320734342206009">"Pois päältä / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Ei käynnisty automaattisesti"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Käynnistyy automaattisesti kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Käynnistyy automaattisesti, kun aurinko laskee"</string>
-    <string name="night_display_summary_on" msgid="8932395375143965229">"Päällä / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Ei sammu automaattisesti"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Sammuu automaattisesti kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Sammuu automaattisesti, kun aurinko nousee"</string>
@@ -1256,11 +1254,9 @@
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Auringonlaskusta sen nousuun"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Menee päälle valitsemaasi aikaan"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Tila"</string>
-    <string name="dark_ui_summary_off" msgid="3897438633224959099">"Pois päältä / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Ei käynnisty automaattisesti"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Käynnistyy automaattisesti, kun aurinko laskee"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Menee automaattisesti päälle kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_summary_on" msgid="3886998135388176000">"Päällä / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Ei sammu automaattisesti"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Sammuu automaattisesti, kun aurinko nousee"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Menee automaattisesti pois päältä kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -2136,6 +2132,8 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Näytönlukuohjelmat"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Ääni ja näyttöteksti"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Näyttö"</string>
+    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
+    <skip />
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Käytönhallinta"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Ladatut sovellukset"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Kokeellinen"</string>
@@ -3075,10 +3073,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Poista käyttäjä"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Poista"</string>
     <string name="user_guest" msgid="4545590092001460388">"Vieras"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Poista vieras"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Poistetaanko vieras?"</string>
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Tyhjennä vierailijadata"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Lopeta Vierailija-käyttökerta"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Lopetetaanko Vierailija-käyttökerta?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Kaikki sovellukset ja tämän istunnon tiedot poistetaan."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Poista"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Lopeta käyttökerta"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Ota puhelut käyttöön"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Ota puhelut ja tekstiviestit käyttöön"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Poista käyttäjä"</string>
@@ -3591,7 +3590,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Vähemmän tärkeät keskustelut"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Keskustelut, joihin teit muutoksia"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Uusimmat keskustelut"</string>
-    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Tyhjennä uusimmat"</string>
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Tyhjennä äskeiset"</string>
     <string name="clear" msgid="5092178335409471100">"Tyhjennä"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Näytä kuplia tärkeistä keskusteluista"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Tärkeät keskustelut näkyvät vedettävän ilmoitusalueen yläreunassa. Voit myös valita, että ne näkyvät kuplina ja keskeyttävät Älä häiritse ‑tilan."</string>
@@ -4424,7 +4423,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Yhdistetty useisiin laitteisiin"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Käyttöliittymän esittelytila"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tumma teema"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Päällä / tilapäisesti poissa virransäästön takia"</string>
+    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
+    <skip />
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Tilapäisesti päällä virransäästön takia"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Myös tuetut sovellukset vaihtavat tummaan teemaan"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -5063,15 +5063,27 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Valinnat"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Yhdistä julkisiin verkkoihin"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"verkkoyhteys, internet, langaton, data, langaton yhteys, Wi-Fi, Wi Fi, datayhteys, mobiili, puhelinoperaattori, 4g, 3g, 2g, LTE"</string>
-    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Näytä lentokoneturvalliset verkot"</string>
-    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Laita lentokonetila pois päältä"</string>
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Näytä lentokonetilan verkot"</string>
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Laita lentokonetila pois päältä"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Yhdistetty"</string>
+    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internetyhteyttä ei muodosteta automaattisesti"</string>
+    <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Ei muita verkkoja käytettävissä"</string>
+    <string name="all_network_unavailable" msgid="1163897808282057496">"Ei verkkoja käytettävissä"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ei käytettävissä, koska Nukkuma-aikamoodi on päällä"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Ilmoitusten tärkeys nollattu"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Sovellukset"</string>
     <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Epäluotettava laite pyytää pääsyä viesteihisi. Katso lisätietoja napauttamalla."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Sallitaanko pääsy viesteihin?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Epäluotettava Bluetooth-laite, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], pyytää pääsyä viesteihisi.\n\n[<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] ei ole ennen ollut yhteydessä laitteeseesi."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Epäluotettava Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä viesteihisi.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Epäluotettava laite pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Katso lisätietoja napauttamalla."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Sallitaanko pääsy yhteystietoihin ja puhelulokiin?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Epäluotettava Bluetooth-laite, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Tämä sisältää datan saapuvista ja lähtevistä puheluista.\n\n[<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] ei ole ennen ollut yhteydessä laitteeseesi."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Epäluotettava Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Tämä sisältää datan saapuvista ja lähtevistä puheluista.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
+    <string name="category_name_brightness" msgid="8520372392029305084">"Kirkkaus"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"Lukitusnäyttö"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"Näkyvyys"</string>
+    <string name="category_name_color" msgid="937514550918977151">"Väri"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"Muu"</string>
+    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <skip />
 </resources>

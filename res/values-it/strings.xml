@@ -1229,11 +1229,9 @@
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Ora fine"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Stato"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Intensità"</string>
-    <string name="night_display_summary_off" msgid="4676320734342206009">"Off/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Non verrà mai attivata automaticamente"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Verrà attivata automaticamente alle ore <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Verrà attivata automaticamente al tramonto"</string>
-    <string name="night_display_summary_on" msgid="8932395375143965229">"On/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Non verrà mai disattivata automaticamente"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Verrà disattivata automaticamente alle ore <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Verrà disattivata automaticamente al tramonto"</string>
@@ -1256,11 +1254,9 @@
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Attivo dal tramonto all\'alba"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Attivo in orario personalizzato"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Stato"</string>
-    <string name="dark_ui_summary_off" msgid="3897438633224959099">"Off/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Non verrà mai attivato automaticamente"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Verrà attivato automaticamente al tramonto"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Verrà attivata automaticamente alle ore <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_summary_on" msgid="3886998135388176000">"On/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Non verrà mai disattivato automaticamente"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Verrà disattivato automaticamente al tramonto"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Verrà disattivata automaticamente alle ore <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -2136,6 +2132,8 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Screen reader"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio e testo su schermo"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Display"</string>
+    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
+    <skip />
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controlli di interazione"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"App scaricate"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Sperimentali"</string>
@@ -3075,10 +3073,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Elimina utente"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Elimina"</string>
     <string name="user_guest" msgid="4545590092001460388">"Ospite"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Rimuovi ospite"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Rimuovere l\'ospite?"</string>
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Cancella i dati ospite"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Termina sessione Ospite"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Vuoi terminare la sessione Ospite?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Tutte le app e i dati di questa sessione verranno eliminati."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Rimuovi"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Termina sessione"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Attiva chiamate"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Attiva chiamate e SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Elimina utente"</string>
@@ -3591,7 +3590,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Conversazioni non prioritarie"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversazioni a cui hai apportato modifiche"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Conversazioni recenti"</string>
-    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Cancella recenti"</string>
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Cancella tutte recenti"</string>
     <string name="clear" msgid="5092178335409471100">"Cancella"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Usa bolla per conversazioni prioritarie"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Le conversazioni prioritarie vengono mostrate nella parte superiore dell\'area a discesa. Puoi anche impostarle in modo che vengano visualizzate come bolle e che interrompano la modalità Non disturbare."</string>
@@ -4424,7 +4423,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Connesso a più dispositivi"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Modalità demo dell\'interfaccia utente di sistema"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tema scuro"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"On/Opzione disattivata temporaneamente per Risparmio energetico"</string>
+    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
+    <skip />
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Disattivata temporaneamente a causa del Risparmio energetico"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Anche le app supportate passeranno al tema scuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -5063,15 +5063,27 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferenze"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Connetti a reti pubbliche"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"connessione rete, internet, wireless, dati, wifi, wi-fi, wi fi, cellulare, dispositivo mobile, operatore cellulare, 4g, 3g, 2g, lte"</string>
-    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Visualizza reti utilizzabili in aereo"</string>
-    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Disattiva la modalità aereo"</string>
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Visualizza reti con modalità aereo"</string>
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Disattiva la modalità aereo"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connessione attiva"</string>
+    <string name="mobile_data_off_summary" msgid="3841411571485837651">"La connessione a Internet non sarà automatica"</string>
+    <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Nessun\'altra rete disponibile"</string>
+    <string name="all_network_unavailable" msgid="1163897808282057496">"Nessuna rete disponibile"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Non disponibili perché la modalità Riposo è attiva"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Reimpostazione dell\'importanza delle notifiche completata."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"App"</string>
     <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Un dispositivo non attendibile richiede l\'accesso ai tuoi messaggi. Tocca per conoscere i dettagli."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vuoi consentire l\'accesso ai messaggi?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Un dispositivo Bluetooth non attendibile, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], richiede l\'accesso ai tuoi messaggi.\n\nNon hai mai effettuato la connessione al dispositivo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Un dispositivo Bluetooth non attendibile, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, richiede l\'accesso ai tuoi messaggi.\n\nNon hai mai effettuato la connessione al dispositivo <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Un dispositivo non attendibile richiede l\'accesso ai tuoi contatti e al tuo registro chiamate. Tocca per conoscere i dettagli."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vuoi consentire l\'accesso a contatti e registro chiamate?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Un dispositivo Bluetooth non attendibile, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], richiede l\'accesso ai tuoi contatti e al tuo registro chiamate, inclusi i dati relativi a chiamate in arrivo e in uscita.\n\nNon hai mai effettuato la connessione al dispositivo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Un dispositivo Bluetooth non attendibile, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, richiede l\'accesso ai tuoi contatti e al tuo registro chiamate, inclusi i dati relativi a chiamate in arrivo e in uscita.\n\nNon hai mai effettuato la connessione al dispositivo <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="category_name_brightness" msgid="8520372392029305084">"Luminosità"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"Schermata di blocco"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"Visibilità"</string>
+    <string name="category_name_color" msgid="937514550918977151">"Colore"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"Altre"</string>
+    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <skip />
 </resources>
