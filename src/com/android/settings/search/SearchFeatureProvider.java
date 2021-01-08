@@ -20,11 +20,13 @@ import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 
 import android.annotation.NonNull;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
@@ -100,7 +102,8 @@ public interface SearchFeatureProvider {
                     .indexSliceDataAsync(context);
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .action(context, SettingsEnums.ACTION_SEARCH_RESULTS);
-            activity.startActivityForResult(intent, REQUEST_CODE);
+            final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
+            activity.startActivityForResult(intent, REQUEST_CODE, bundle);
         });
     }
 
