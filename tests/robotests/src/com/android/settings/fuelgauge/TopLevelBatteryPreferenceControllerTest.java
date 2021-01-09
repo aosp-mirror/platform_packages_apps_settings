@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-import static com.android.settings.fuelgauge.TopLevelBatteryPreferenceController.getDashboardLabel;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -59,14 +58,16 @@ public class TopLevelBatteryPreferenceControllerTest {
     public void getDashboardLabel_returnsCorrectLabel() {
         BatteryInfo info = new BatteryInfo();
         info.batteryPercentString = "3%";
-        assertThat(getDashboardLabel(mContext, info)).isEqualTo(info.batteryPercentString);
+        assertThat(mController.getDashboardLabel(mContext, info, true))
+                .isEqualTo(info.batteryPercentString);
 
         info.remainingLabel = "Phone will shut down soon";
-        assertThat(getDashboardLabel(mContext, info)).isEqualTo("3% - Phone will shut down soon");
+        assertThat(mController.getDashboardLabel(mContext, info, true))
+                .isEqualTo("3% - Phone will shut down soon");
 
         info.discharging = false;
         info.chargeLabel = "5% - charging";
-        assertThat(getDashboardLabel(mContext, info)).isEqualTo("5% - charging");
+        assertThat(mController.getDashboardLabel(mContext, info, true)).isEqualTo("5% - charging");
     }
 
     @Test
