@@ -20,7 +20,6 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -91,11 +90,9 @@ public class EmergencyGestureNumberOverridePreference extends
         if (which == BUTTON_POSITIVE) {
             final String input = mEditText.getText().toString();
             if (!TextUtils.isEmpty(input)) {
-                Settings.Secure.putString(getContext().getContentResolver(),
-                        Settings.Secure.EMERGENCY_GESTURE_CALL_NUMBER, input);
+                mEmergencyNumberUtils.setEmergencyNumberOverride(input);
             } else {
-                Settings.Secure.putString(getContext().getContentResolver(),
-                        Settings.Secure.EMERGENCY_GESTURE_CALL_NUMBER,
+                mEmergencyNumberUtils.setEmergencyNumberOverride(
                         mEmergencyNumberUtils.getDefaultPoliceNumber());
             }
         }

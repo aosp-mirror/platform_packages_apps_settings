@@ -343,7 +343,7 @@ public class SettingsSliceProvider extends SliceProvider {
         final Intent settingsIntent = new Intent(Settings.ACTION_SETTINGS)
                 .setPackage(Utils.SETTINGS_PACKAGE_NAME);
         final PendingIntent noOpIntent = PendingIntent.getActivity(getContext(),
-                0 /* requestCode */, settingsIntent, 0 /* flags */);
+                0 /* requestCode */, settingsIntent, PendingIntent.FLAG_IMMUTABLE);
         return noOpIntent;
     }
 

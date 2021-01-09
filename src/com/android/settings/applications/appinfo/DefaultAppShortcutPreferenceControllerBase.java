@@ -14,9 +14,7 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.role.RoleControllerManager;
 import android.app.role.RoleManager;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
@@ -58,14 +56,12 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
 
         mRoleManager = context.getSystemService(RoleManager.class);
 
-        final RoleControllerManager roleControllerManager =
-                mContext.getSystemService(RoleControllerManager.class);
         final Executor executor = mContext.getMainExecutor();
-        roleControllerManager.isRoleVisible(mRoleName, executor, visible -> {
+        mRoleManager.isRoleVisible(mRoleName, executor, visible -> {
             mRoleVisible = visible;
             refreshAvailability();
         });
-        roleControllerManager.isApplicationVisibleForRole(mRoleName, mPackageName, executor,
+        mRoleManager.isApplicationVisibleForRole(mRoleName, mPackageName, executor,
                 visible -> {
                     mAppVisible = visible;
                     refreshAvailability();

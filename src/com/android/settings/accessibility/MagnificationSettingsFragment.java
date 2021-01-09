@@ -30,6 +30,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -45,20 +48,41 @@ public class MagnificationSettingsFragment extends DashboardFragment {
 
     private static final String TAG = "MagnificationSettingsFragment";
     private static final String PREF_KEY_MODE = "magnification_mode";
-    private static final int DIALOG_MAGNIFICATION_CAPABILITY = 1;
-    private static final int DIALOG_MAGNIFICATION_SWITCH_SHORTCUT = 2;
-    private static final String EXTRA_CAPABILITY = "capability";
+    @VisibleForTesting
+    static final int DIALOG_MAGNIFICATION_CAPABILITY = 1;
+    @VisibleForTesting
+    static final int DIALOG_MAGNIFICATION_SWITCH_SHORTCUT = 2;
+    @VisibleForTesting
+    static final String EXTRA_CAPABILITY = "capability";
     private static final int NONE = 0;
     private static final char COMPONENT_NAME_SEPARATOR = ':';
+
     private Preference mModePreference;
+    @VisibleForTesting
+    Dialog mDialog;
+    @VisibleForTesting
+    CheckBox mMagnifyFullScreenCheckBox;
+    @VisibleForTesting
+    CheckBox mMagnifyWindowCheckBox;
+
     private int mCapabilities = NONE;
-    private CheckBox mMagnifyFullScreenCheckBox;
-    private CheckBox mMagnifyWindowCheckBox;
-    private Dialog mDialog;
 
     @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.ACCESSIBILITY_MAGNIFICATION_SETTINGS;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            mCapabilities = savedInstanceState.getInt(EXTRA_CAPABILITY, NONE);
+        }
+        if (mCapabilities == NONE) {
+            mCapabilities = MagnificationCapabilities.getCapabilities(getPrefContext());
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initModePreference();
     }
 
     @Override
@@ -68,14 +92,8 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            mCapabilities = savedInstanceState.getInt(EXTRA_CAPABILITY, NONE);
-        }
-        if (mCapabilities == NONE) {
-            mCapabilities = MagnificationCapabilities.getCapabilities(getPrefContext());
-        }
+    public int getMetricsCategory() {
+        return SettingsEnums.ACCESSIBILITY_MAGNIFICATION_SETTINGS;
     }
 
     @Override
@@ -93,17 +111,6 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        mModePreference = findPreference(PREF_KEY_MODE);
-        mModePreference.setOnPreferenceClickListener(preference -> {
-            mCapabilities = MagnificationCapabilities.getCapabilities(getPrefContext());
-            showDialog(DIALOG_MAGNIFICATION_CAPABILITY);
-            return true;
-        });
     }
 
     @Override
@@ -131,6 +138,15 @@ public class MagnificationSettingsFragment extends DashboardFragment {
         }
 
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
+    }
+
+    private void initModePreference() {
+        mModePreference = findPreference(PREF_KEY_MODE);
+        mModePreference.setOnPreferenceClickListener(preference -> {
+            mCapabilities = MagnificationCapabilities.getCapabilities(getPrefContext());
+            showDialog(DIALOG_MAGNIFICATION_CAPABILITY);
+            return true;
+        });
     }
 
     private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
@@ -181,11 +197,11 @@ public class MagnificationSettingsFragment extends DashboardFragment {
         final View dialogWindowTextArea = dialogWidowView.findViewById(R.id.container);
         mMagnifyWindowCheckBox = dialogWidowView.findViewById(R.id.checkbox);
 
-        setTextAreasClickListener(dialogFullScreenTextArea, mMagnifyFullScreenCheckBox,
-                dialogWindowTextArea, mMagnifyWindowCheckBox);
-
         updateAlertDialogCheckState();
         updateAlertDialogEnableState(dialogFullScreenTextArea, dialogWindowTextArea);
+
+        setTextAreasClickListener(dialogFullScreenTextArea, mMagnifyFullScreenCheckBox,
+                dialogWindowTextArea, mMagnifyWindowCheckBox);
     }
 
     private void setTextAreasClickListener(View fullScreenTextArea, CheckBox fullScreenCheckBox,

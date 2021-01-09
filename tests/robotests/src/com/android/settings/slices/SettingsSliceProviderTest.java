@@ -565,7 +565,8 @@ public class SettingsSliceProviderTest {
         final Intent settingsIntent = new Intent(Settings.ACTION_SETTINGS)
                 .setPackage(Utils.SETTINGS_PACKAGE_NAME);
         PendingIntent settingsPendingIntent =
-                PendingIntent.getActivity(mContext, 0, settingsIntent, 0);
+                PendingIntent.getActivity(mContext, 0, settingsIntent,
+                        PendingIntent.FLAG_IMMUTABLE);
 
         assertThat(pendingIntent).isEqualTo(settingsPendingIntent);
     }
