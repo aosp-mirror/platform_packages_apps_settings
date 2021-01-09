@@ -1532,4 +1532,21 @@
         <item>8</item>
         <item>12</item>
     </string-array>
+
+    <!-- Array of titles list for notification listener notification types. [DO NOT TRANSLATE] -->
+    <string-array name="notif_types_titles" translatable="false">
+        <item>@string/notif_type_ongoing</item>
+        <item>@string/notif_type_conversation</item>
+        <item>@string/notif_type_alerting</item>
+        <item>@string/notif_type_silent</item>
+    </string-array>
+
+    <!-- Values of list for notification listener notification types. Values need to match
+    android.service.notification.NotificationListenerService. [DO NOT TRANSLATE] -->
+    <string-array name="notif_types_values" translatable="false">
+        <item>8</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+    </string-array>
 </resources>

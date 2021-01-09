@@ -57,6 +57,25 @@
 
         </com.google.android.setupdesign.view.FillContentLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_info_outline_24dp"/>
+
+            <com.google.android.setupdesign.view.RichTextView
+                android:id="@+id/sud_layout_info"
+                style="@style/SudDescription.Glif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/security_settings_fingerprint_enroll_introduction_bottom_message" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </com.google.android.setupdesign.GlifLayout>

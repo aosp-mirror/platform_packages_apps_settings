@@ -1229,11 +1229,9 @@
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Sluttid"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Status"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Intensitet"</string>
-    <string name="night_display_summary_off" msgid="4676320734342206009">"Av/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Aktiveras aldrig automatiskt"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Aktiveras automatiskt kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Aktiveras automatiskt när solen går ned"</string>
-    <string name="night_display_summary_on" msgid="8932395375143965229">"På/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Inaktiveras aldrig automatiskt"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Inaktiveras automatiskt kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Inaktiveras automatiskt när solen går upp"</string>
@@ -1256,11 +1254,9 @@
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"På fr. solnedgång t. soluppgång"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Aktiveras vid anpassad tid"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
-    <string name="dark_ui_summary_off" msgid="3897438633224959099">"Av/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Aktiveras aldrig automatiskt"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Aktiveras automatiskt vid solnedgången"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Aktiveras automatiskt kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_summary_on" msgid="3886998135388176000">"På/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Inaktiveras aldrig automatiskt"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Inaktiveras automatiskt vid soluppgången"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Inaktiveras automatiskt kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -2136,6 +2132,8 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Skärmläsningsprogram"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Ljud och text på skärmen"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Skärm"</string>
+    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
+    <skip />
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktionsinställningar"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Nedladdade appar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentella"</string>
@@ -3075,10 +3073,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Ta bort användare"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Ta bort"</string>
     <string name="user_guest" msgid="4545590092001460388">"Gäst"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Ta bort gäst"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Vill du ta bort gästen?"</string>
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Rensa gästdata"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Avsluta gästsession"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Vill du avsluta gästsessionen?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alla appar och data i denna session kommer att raderas."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Ta bort"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Avsluta session"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktivera telefonsamtal"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktivera telefonsamtal och sms"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Radera användare"</string>
@@ -3591,7 +3590,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Icke-prioriterade konversationer"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Konversationer som du har ändrat"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Aktuella konversationer"</string>
-    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Rensa de senaste"</string>
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Rensa alla senaste"</string>
     <string name="clear" msgid="5092178335409471100">"Rensa"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Visa prioriterade konversationer i bubblor"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriterade konversationer visas högst upp i aviseringspanelen. Du kan även ställa in så att de visas i bubblor och kringgår Stör ej."</string>
@@ -4424,7 +4423,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Ansluten till flera enheter"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Demoläge för systemgränssnitt"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Mörkt tema"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"På/tillfälligt inaktiverat i batterisparläge"</string>
+    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
+    <skip />
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Tillfälligt aktiverat i batterisparläge"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Mörkt tema aktiveras även för appar som stöds"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -5063,15 +5063,27 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Inställningar"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Anslut till offentliga nätverk"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"nätverksanslutning, internet, trådlös, data, wifi, wi-fi, wi fi, mobil, telefon, mobiloperatör, 4g, 3g, 2g, lte"</string>
-    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Visa nätverk som är flygplanssäkra"</string>
-    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Inaktivera flygplansläge"</string>
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Visa nätverk med flygplansläge"</string>
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Inaktivera flygplansläge"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Ansluten"</string>
+    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Du ansluts inte automatiskt till internet"</string>
+    <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Inga andra nätverk är tillgängliga"</string>
+    <string name="all_network_unavailable" msgid="1163897808282057496">"Det finns inga tillgängliga nätverk"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Inte tillgängligt eftersom sovläget är på"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Aviseringarnas relevans har återställts."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Appar"</string>
     <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"En enhet som inte är betrodd vill få åtkomst till dina meddelanden. Tryck här för mer information."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vill du tillåta åtkomst till meddelanden?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"En Bluetooth-enhet som inte är betrodd, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vill få åtkomst till dina meddelanden.\n\nDu har inte anslutit till [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] tidigare."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"En Bluetooth-enhet som inte är betrodd, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vill få åtkomst till dina meddelanden.\n\nDu har inte anslutit till <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> tidigare."</string>
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"En enhet som inte är betrodd vill få åtkomst till dina kontakter och samtalshistoriken. Tryck här för mer information."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vill du tillåta åtkomst till kontakter och samtalshistorik?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"En Bluetooth-enhet som inte är betrodd, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vill få åtkomst till dina kontakter och samtalshistoriken. Detta inkluderar data om inkommande och utgående samtal.\n\nDu har inte anslutit till [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] tidigare."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"En Bluetooth-enhet som inte är betrodd, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vill få åtkomst till dina kontakter och samtalshistoriken. Detta inkluderar data om inkommande och utgående samtal.\n\nDu har inte anslutit till <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> tidigare."</string>
+    <string name="category_name_brightness" msgid="8520372392029305084">"Ljusstyrka"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"Låsskärm"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"Synlighet"</string>
+    <string name="category_name_color" msgid="937514550918977151">"Färg"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"Annat"</string>
+    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <skip />
 </resources>
