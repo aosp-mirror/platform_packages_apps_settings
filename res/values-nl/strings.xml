@@ -1229,11 +1229,9 @@
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Eindtijd"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Status"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Intensiteit"</string>
-    <string name="night_display_summary_off" msgid="4676320734342206009">"Uit / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Wordt nooit automatisch ingeschakeld"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Wordt automatisch ingeschakeld om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Wordt automatisch ingeschakeld bij zonsondergang"</string>
-    <string name="night_display_summary_on" msgid="8932395375143965229">"Aan / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Wordt nooit automatisch uitgeschakeld"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Wordt automatisch uitgeschakeld om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Wordt automatisch uitgeschakeld bij zonsopgang"</string>
@@ -1256,11 +1254,9 @@
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Van zonsondergang tot zonsopgang"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Op aangepaste tijd"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
-    <string name="dark_ui_summary_off" msgid="3897438633224959099">"Uit / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Wordt nooit automatisch ingeschakeld"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Wordt automatisch ingeschakeld bij zonsondergang"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Wordt automatisch ingeschakeld om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_summary_on" msgid="3886998135388176000">"Aan / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Wordt nooit automatisch uitgeschakeld"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Wordt automatisch uitgeschakeld bij zonsopgang"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Wordt automatisch uitgeschakeld om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -2136,6 +2132,8 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Schermlezers"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio en tekst op het scherm"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Scherm"</string>
+    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
+    <skip />
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interactieopties"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Gedownloade apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimenteel"</string>
@@ -3075,10 +3073,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Gebruiker verwijderen"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Verwijderen"</string>
     <string name="user_guest" msgid="4545590092001460388">"Gast"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Gast verwijderen"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Gast verwijderen?"</string>
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Gastgegevens wissen"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Gastsessie beëindigen"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Gastsessie beëindigen?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle apps en gegevens in deze sessie worden verwijderd."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Verwijderen"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Sessie beëindigen"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Telefoonoproepen inschakelen"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefoonoproepen en sms inschakelen"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Gebruiker verwijderen"</string>
@@ -3591,7 +3590,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Niet-prioriteitsgesprekken"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Gesprekken waarin je wijzigingen hebt aangebracht"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Recente gesprekken"</string>
-    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Recente items wissen"</string>
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Alle recente wissen"</string>
     <string name="clear" msgid="5092178335409471100">"Wissen"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Prioriteitsgesprekken als bubbel weergeven"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriteitsgesprekken worden bovenaan het pull-downvenster weergegeven. Je kunt ook instellen dat ze als bubbels worden weergegeven en \'Niet storen\' onderbreken."</string>
@@ -4424,7 +4423,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Verbonden met meerdere apparaten"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Demomodus voor systeemgebruikersinterface"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Donker thema"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Aan / Tijdelijk uitgeschakeld vanwege Batterijbesparing"</string>
+    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
+    <skip />
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Tijdelijk ingeschakeld vanwege Batterijbesparing"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Ondersteunde apps krijgen ook een donker thema"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -5063,15 +5063,27 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Voorkeuren"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Verbinden met openbare netwerken"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netwerkverbinding, internet, draadloos, data, wifi, wi-fi, wi fi, mobiel, mobiele provider, 4g, 3g, 2g, lte"</string>
-    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Netwerken bekijken die geschikt zijn voor vliegtuigen"</string>
-    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Vliegtuigmodus uitschakelen"</string>
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Netwerken voor vliegtuigmodus bekijken"</string>
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Vliegtuigmodus uitzetten"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Verbonden"</string>
+    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internet maakt niet automatisch verbinding"</string>
+    <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Geen andere netwerken beschikbaar"</string>
+    <string name="all_network_unavailable" msgid="1163897808282057496">"Geen netwerken beschikbaar"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Niet beschikbaar omdat de bedtijdstand is ingeschakeld"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Belang van meldingen is gereset."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
     <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Een niet-vertrouwd apparaat wil toegang tot je berichten. Tik voor details."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Toegang tot berichten toestaan?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Een niet-vertrouwd bluetooth-apparaat, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], wil toegang tot je berichten.\n\nJe hebt niet eerder verbinding gemaakt met [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Een niet-vertrouwd bluetooth-apparaat, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, wil toegang tot je berichten.\n\nJe hebt niet eerder verbinding gemaakt met <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Een niet-vertrouwd apparaat wil toegang tot je contacten en gesprekslijst. Tik voor details."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Toegang tot contacten en gesprekslijst toestaan?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Een niet-vertrouwd bluetooth-apparaat, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], wil toegang tot je contacten en gesprekslijst. Dit omvat gegevens over inkomende en uitgaande gesprekken.\n\nJe hebt niet eerder verbinding gemaakt met [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Een niet-vertrouwd bluetooth-apparaat, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, wil toegang tot je contacten en gesprekslijst. Dit omvat gegevens over inkomende en uitgaande gesprekken.\n\nJe hebt niet eerder verbinding gemaakt met <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="category_name_brightness" msgid="8520372392029305084">"Helderheid"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"Vergrendelscherm"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"Zichtbaarheid"</string>
+    <string name="category_name_color" msgid="937514550918977151">"Kleur"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"Overig"</string>
+    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <skip />
 </resources>

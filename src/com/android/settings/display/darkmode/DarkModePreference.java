@@ -74,10 +74,10 @@ public class DarkModePreference extends PrimarySwitchPreference {
             return;
         }
         final int mode = mUiModeManager.getNightMode();
-        String detail;
+        String summary;
 
         if (mode == UiModeManager.MODE_NIGHT_AUTO) {
-            detail = getContext().getString(active
+            summary = getContext().getString(active
                     ? R.string.dark_ui_summary_on_auto_mode_auto
                     : R.string.dark_ui_summary_off_auto_mode_auto);
         } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
@@ -85,17 +85,14 @@ public class DarkModePreference extends PrimarySwitchPreference {
                     ? mUiModeManager.getCustomNightModeEnd()
                     : mUiModeManager.getCustomNightModeStart();
             final String timeStr = mFormat.of(time);
-            detail = getContext().getString(active
+            summary = getContext().getString(active
                     ? R.string.dark_ui_summary_on_auto_mode_custom
                     : R.string.dark_ui_summary_off_auto_mode_custom, timeStr);
         } else {
-            detail = getContext().getString(active
+            summary = getContext().getString(active
                     ? R.string.dark_ui_summary_on_auto_mode_never
                     : R.string.dark_ui_summary_off_auto_mode_never);
         }
-        String summary = getContext().getString(active
-                ? R.string.dark_ui_summary_on
-                : R.string.dark_ui_summary_off, detail);
 
         setSummary(summary);
     }

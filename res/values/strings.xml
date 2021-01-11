@@ -879,7 +879,9 @@
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabed by device admin [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Use your fingerprint</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.\n\nNote: Your fingerprint may be less secure than a strong pattern or PIN.</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.</string>
+    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message">Your fingerprint may be less secure than a strong pattern or PIN.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your fingerprint to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Introduction detail message shown in fingerprint enrollment screen in setup wizard. [CHAR LIMIT=NONE]-->
@@ -2824,16 +2826,12 @@
     <string name="night_display_status_title">Status</string>
     <!-- Night display screen, setting the color temperature of the display. [CHAR LIMIT=30] -->
     <string name="night_display_temperature_title">Intensity</string>
-    <!-- Display settings screen, summary format of night display when off. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_never">Will never turn on automatically</string>
          <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_twilight">Will turn on automatically at sunset</string>
-    <!-- Display settings screen, summary format of night display when on. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary format of night display when on and will turn off automatically at a user defined time. [CHAR LIMIT=NONE] -->
@@ -2882,16 +2880,12 @@
     <string name="dark_ui_auto_mode_custom">Turns on at custom time</string>
     <!-- Dark UI screen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
     <string name="dark_ui_status_title">Status</string>
-    <!-- Display settings screen, summary format of Dark UI when off. [CHAR LIMIT=NONE] -->
-    <string name="dark_ui_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
         <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
-    <!-- Display settings screen, summary format of Dark UI when on. [CHAR LIMIT=NONE] -->
-    <string name="dark_ui_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
@@ -8590,7 +8584,7 @@
     <!-- [CHAR LIMIT=100] preference category title -->
     <string name="recent_conversations">Recent conversations</string>
 
-    <!-- [CHAR LIMIT=20] button title -->
+    <!-- [CHAR LIMIT=40] button title -->
     <string name="conversation_settings_clear_recents">Clear all of the recent ones</string>
 
     <!-- a11y string -->
@@ -8764,6 +8758,11 @@
     </string>
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
+    <string name="notification_listener_type_title">Allowed notification types</string>
+    <string name="notif_type_ongoing">Important ongoing notifications</string>
+    <string name="notif_type_conversation">Conversation notifications</string>
+    <string name="notif_type_alerting">Alerting notifications</string>
+    <string name="notif_type_silent">Silent notifications</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -10870,7 +10869,7 @@
     <string name="dark_ui_mode">Dark theme</string>
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is still on-->
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on">On / Temporarily disabled due to Battery Saver</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on">Temporarily disabled due to Battery Saver</string>
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>
@@ -10993,6 +10992,9 @@
     <string name="swipe_up_to_switch_apps_suggestion_title">Try the new Home button</string>
     <!-- Summary for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_suggestion_summary">Turn on the new gesture to switch apps</string>
+
+    <!-- Preference title for "Safety & emergency" settings page [CHAR LIMIT=60]-->
+    <string name="emergency_settings_preference_title">Safety &amp; emergency</string>
 
     <!-- Title text for edge to edge navigation [CHAR LIMIT=60] -->
     <string name="edge_to_edge_navigation_title">Gesture navigation</string>

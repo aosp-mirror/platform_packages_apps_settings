@@ -16,11 +16,12 @@
 
 package com.android.settings.gestures;
 
+import static com.android.settingslib.emergencynumber.EmergencyNumberUtils.EMERGENCY_NUMBER_OVERRIDE_AUTHORITY;
+
 import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.text.Spannable;
 
@@ -86,8 +87,8 @@ public class EmergencyGestureNumberOverridePreferenceController extends BasePref
 
     @Override
     public void onStart() {
-        mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
-                Settings.Secure.EMERGENCY_GESTURE_CALL_NUMBER), false, mSettingsObserver);
+        mContext.getContentResolver().registerContentObserver(EMERGENCY_NUMBER_OVERRIDE_AUTHORITY,
+                false, mSettingsObserver);
     }
 
     @Override

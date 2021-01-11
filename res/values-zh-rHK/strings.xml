@@ -1229,11 +1229,9 @@
     <string name="night_display_end_time_title" msgid="5243112480391192111">"結束時間"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"狀態"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"強度"</string>
-    <string name="night_display_summary_off" msgid="4676320734342206009">"關閉/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"永遠不會自動開啟"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"將會在<xliff:g id="ID_1">%1$s</xliff:g>自動開啟"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"將會在日落時自動開啟"</string>
-    <string name="night_display_summary_on" msgid="8932395375143965229">"開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"永遠不會自動關閉"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"將會在<xliff:g id="ID_1">%1$s</xliff:g>自動關閉"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"將會在日出時自動關閉"</string>
@@ -1256,11 +1254,9 @@
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"由日落至日出期間開啟"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"在自訂時間開啟"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"狀態"</string>
-    <string name="dark_ui_summary_off" msgid="3897438633224959099">"關閉/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"永遠不會自動開啟"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"日落時會自動開啟"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"將會在<xliff:g id="ID_1">%1$s</xliff:g>自動開啟"</string>
-    <string name="dark_ui_summary_on" msgid="3886998135388176000">"開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"永遠不會自動關閉"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"日出時會自動關閉"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"將會在<xliff:g id="ID_1">%1$s</xliff:g>自動關閉"</string>
@@ -2137,6 +2133,8 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"螢幕閱讀器"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"音訊和螢幕上的文字"</string>
     <string name="display_category_title" msgid="6638191682294461408">"螢幕"</string>
+    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
+    <skip />
     <string name="interaction_control_category_title" msgid="2696474616743882372">"互動控制項"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下載的應用程式"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"實驗性"</string>
@@ -2457,7 +2455,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板電腦使用率比平常高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"裝置使用率比平常高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池電量可能會比平常更快耗盡"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"正在優化電池狀態"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"優化電池效能"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"暫時限制電池充電。輕按即可瞭解詳情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"您的手機使用率比平常高，電池電量可能會比預期更快耗盡。\n\n電池用量最高的應用程式："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"您的平板電腦使用率比平常高，電池電量可能會比預期更快耗盡。\n\n電池用量最高的應用程式："</string>
@@ -3076,10 +3074,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"刪除使用者"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"刪除"</string>
     <string name="user_guest" msgid="4545590092001460388">"訪客"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"移除訪客"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"移除訪客？"</string>
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"清除訪客資料"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"結束訪客工作階段"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"要結束訪客工作階段嗎？"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"這個工作階段中的所有應用程式和資料都會被刪除。"</string>
-    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"移除"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"結束工作階段"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"開啟通話功能"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"開啟通話和短訊功能"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"刪除使用者"</string>
@@ -3592,7 +3591,7 @@
     <string name="other_conversations" msgid="551178916855139870">"非優先對話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"已變更的對話"</string>
     <string name="recent_conversations" msgid="471678228756995274">"最近的對話"</string>
-    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"清除最近的聊天"</string>
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"清除所有最近的資料"</string>
     <string name="clear" msgid="5092178335409471100">"清除"</string>
     <string name="important_bubble" msgid="7911698275408390846">"優先對話用對話氣泡顯示"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"優先對話會在下拉式面板頂部顯示。您亦可設定用對話氣泡並在「請勿騷擾」模式中顯示優先對話。"</string>
@@ -4425,7 +4424,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"已連接多部裝置"</string>
     <string name="demo_mode" msgid="6566167465451386728">"系統使用者介面示範模式"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"深色主題背景"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"開啟/由於「省電模式」已開啟，因此切換功能暫時停用"</string>
+    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
+    <skip />
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"由於「省電模式」已關閉，因此切換功能暫時啟用"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"受支援的應用程式也會切換至深色主題背景"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"知道了"</string>
@@ -5064,15 +5064,27 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"偏好設定"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"連線至公共網絡"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"網絡連線, 互聯網, 無線, 數據, Wi-Fi, 流動網絡, 流動裝置, 流動網絡供應商, 4G, 3G, 2G, LTE"</string>
-    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"查看飛行安全網絡"</string>
-    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"關閉飛行模式"</string>
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"查看飛行模式網絡"</string>
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"關閉飛行模式"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"已連線"</string>
+    <string name="mobile_data_off_summary" msgid="3841411571485837651">"不會自動連線至互聯網"</string>
+    <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"沒有可用的其他網絡"</string>
+    <string name="all_network_unavailable" msgid="1163897808282057496">"沒有可用的網絡"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"睡眠模式開啟時無法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重設完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"應用程式"</string>
     <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"不信任的裝置想存取您的訊息。輕按即可瞭解詳情。"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"要允許存取訊息嗎？"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"不信任的藍牙裝置 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] 想存取您的訊息。\n\n請注意，您從未連接 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]。"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"不信任的藍牙裝置 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] 想存取您的訊息。\n\n請注意，您從未連接 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]。"</string>
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"不信任的裝置要求存取您的聯絡人和通話記錄。輕按即可瞭解詳情。"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允許存取聯絡人和通話記錄嗎？"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"不信任的藍牙裝置 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] 要求存取您的聯絡人和通話記錄，包括來電和撥出電話的資料。\n\n您從未連接 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]。"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"不信任的藍牙裝置 [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] 要求存取您的聯絡人和通話記錄，包括來電和撥出電話的資料。\n\n您從未連接 [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]。"</string>
+    <string name="category_name_brightness" msgid="8520372392029305084">"光暗度"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"鎖定顯示屏"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"分享設定"</string>
+    <string name="category_name_color" msgid="937514550918977151">"顏色"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"其他"</string>
+    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <skip />
 </resources>

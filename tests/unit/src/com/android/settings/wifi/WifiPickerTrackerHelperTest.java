@@ -18,6 +18,8 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -29,6 +31,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.wifitrackerlib.MergedCarrierEntry;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -55,8 +58,15 @@ public class WifiPickerTrackerHelperTest {
 
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
+    private FakeFeatureFactory mFeatureFactory;
+
     @Before
     public void setUp() {
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFeatureFactory.wifiTrackerLibProvider
+                .createWifiPickerTracker(
+                        any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
+                .thenReturn(mWifiPickerTracker);
         mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(mock(Lifecycle.class),
                 ApplicationProvider.getApplicationContext(), null);
     }

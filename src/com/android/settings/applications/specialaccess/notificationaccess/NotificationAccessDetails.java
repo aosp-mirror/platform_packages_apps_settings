@@ -42,11 +42,10 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.applications.ApplicationsState;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -91,6 +90,10 @@ public class NotificationAccessDetails extends DashboardFragment {
                 .setPackageInfo(mPackageInfo)
                 .setPm(context.getPackageManager())
                 .setServiceName(mServiceName);
+        use(TypeFilterPreferenceController.class)
+                .setNm(new NotificationBackend())
+                .setCn(mComponentName)
+                .setUserId(mUserId);
     }
 
     @Override
@@ -172,6 +175,8 @@ public class NotificationAccessDetails extends DashboardFragment {
         ApprovalPreferenceController controller = use(ApprovalPreferenceController.class);
         controller.disable(cn);
         controller.updateState(screen.findPreference(controller.getPreferenceKey()));
+        TypeFilterPreferenceController dependent1 = use(TypeFilterPreferenceController.class);
+        dependent1.updateState(screen.findPreference(dependent1.getPreferenceKey()));
     }
 
     protected void enable(ComponentName cn) {
@@ -179,6 +184,8 @@ public class NotificationAccessDetails extends DashboardFragment {
         ApprovalPreferenceController controller = use(ApprovalPreferenceController.class);
         controller.enable(cn);
         controller.updateState(screen.findPreference(controller.getPreferenceKey()));
+        TypeFilterPreferenceController dependent1 = use(TypeFilterPreferenceController.class);
+        dependent1.updateState(screen.findPreference(dependent1.getPreferenceKey()));
     }
 
     // To save binder calls, load this in the fragment rather than each preference controller

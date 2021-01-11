@@ -1229,11 +1229,9 @@
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Sluttidspunkt"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Status"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Intensitet"</string>
-    <string name="night_display_summary_off" msgid="4676320734342206009">"Fra/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Aktiveres aldrig automatisk"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Aktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Aktiveres automatisk ved solnedgang"</string>
-    <string name="night_display_summary_on" msgid="8932395375143965229">"Til – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Deaktiveres aldrig automatisk"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Deaktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Deaktiveres automatisk ved solopgang"</string>
@@ -1256,11 +1254,9 @@
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Aktiveres fra solnedgang til solopgang"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Aktiveres på valgt tidspunkt"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
-    <string name="dark_ui_summary_off" msgid="3897438633224959099">"Fra/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Aktiveres aldrig automatisk"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Aktiveres automatisk ved solnedgang"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Aktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_summary_on" msgid="3886998135388176000">"Til – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Deaktiveres aldrig automatisk"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Deaktiveres automatisk ved solopgang"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Deaktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -2136,6 +2132,8 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Skærmlæsere"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Lyd og tekst på skærmen"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Visning"</string>
+    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
+    <skip />
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktionsstyring"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps, du har downloadet"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentel"</string>
@@ -2456,7 +2454,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Din tablet er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Enheden er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batteriet aflades muligvis hurtigere end normalt"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimerer på baggrund af batteritilstanden"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimerer batteritilstanden"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batteriet er midlertidigt begrænset. Tryk for at få flere oplysninger."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Din telefon er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Din tablet er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
@@ -3075,10 +3073,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Slet bruger"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Slet"</string>
     <string name="user_guest" msgid="4545590092001460388">"Gæst"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Fjern gæst"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Vil du fjerne gæsten?"</string>
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Ryd gæstedata"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Afslut gæstesessionen"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Vil du afslutte gæstesessionen?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle apps og data i denne session slettes."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Fjern"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Afslut sessionen"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktivér telefonopkald"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktivér telefonopkald og sms"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Slet bruger"</string>
@@ -3591,7 +3590,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Ikke-prioriterede samtaler"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Samtaler, du har ændret"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Seneste samtaler"</string>
-    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Ryd seneste"</string>
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Ryd alle seneste"</string>
     <string name="clear" msgid="5092178335409471100">"Ryd"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Vis prioriterede samtaler som bobler"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriterede samtaler vises øverst i rullepanelet. Du kan også vise dem som bobler og afbryde Forstyr ikke."</string>
@@ -4424,7 +4423,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Forbundet med flere enheder"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Demotilstand for systemets brugerflade"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Mørkt tema"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Til – Midlertidigt deaktiveret af batterisparefunktionen"</string>
+    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
+    <skip />
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Midlertidigt aktiveret af batterisparefunktionen"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Understøttede apps skifter også til mørkt tema"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -5068,15 +5068,27 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Præferencer"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Opret forbindelse til offentlige netværk"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netværksforbindelse, internet, trådløs, data, wifi, wi-fi, mobilnetværk, mobil, mobilselskab, 4g, 3g, 2g, lte"</string>
-    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Se netværk til brug i fly"</string>
-    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Deaktiver flytilstand"</string>
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Se netværk til flytilstand"</string>
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Deaktiver flytilstand"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Forbundet"</string>
+    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Der oprettes ikke automatisk internetforbindelse"</string>
+    <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Der er ingen andre tilgængelige netværk"</string>
+    <string name="all_network_unavailable" msgid="1163897808282057496">"Der er ingen tilgængelige netværk"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ikke tilgængelig, da sengetidstilstand er aktiveret"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Vigtigheden af notifikationer blev nulstillet."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
     <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"En ikke-godkendt enhed vil gerne have adgang til dine beskeder. Tryk for at få flere oplysninger."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vil du give adgang til beskeder?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"En ikke-godkendt Bluetooth-enhed, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vil gerne have adgang til dine beskeder.\n\nDu har ikke oprettet forbindelse til [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] før."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"En ikke-godkendt Bluetooth-enhed, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vil gerne have adgang til dine beskeder.\n\nDu har ikke oprettet forbindelse til <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> før."</string>
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"En ikke-godkendt enhed vil gerne have adgang til dine kontakter og din opkaldsliste. Tryk for at få flere oplysninger."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vil du give adgang til kontakter og opkaldsliste?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"En ikke-godkendt Bluetooth-enhed, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], vil gerne have adgang til dine kontakter og din opkaldsliste. Dette omfatter data om indgående og udgående opkald.\n\nDu har ikke oprettet forbindelse til [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] før."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"En ikke-godkendt Bluetooth-enhed, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vil gerne have adgang til dine kontakter og din opkaldsliste. Dette omfatter data om indgående og udgående opkald.\n\nDu har ikke oprettet forbindelse til <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> før."</string>
+    <string name="category_name_brightness" msgid="8520372392029305084">"Lysstyrke"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"Låseskærm"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"Synlighed"</string>
+    <string name="category_name_color" msgid="937514550918977151">"Farve"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"Andre"</string>
+    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <skip />
 </resources>

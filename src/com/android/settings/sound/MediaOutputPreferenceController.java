@@ -32,7 +32,7 @@ import com.android.settings.media.MediaOutputUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.List;
 
@@ -134,11 +134,11 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             mContext.sendBroadcast(new Intent()
-                    .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
-                    .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
-                    .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                    .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                    .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
+                    .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                             mMediaController.getPackageName())
-                    .putExtra(MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN,
+                    .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
                             mMediaController.getSessionToken()));
             return true;
         }

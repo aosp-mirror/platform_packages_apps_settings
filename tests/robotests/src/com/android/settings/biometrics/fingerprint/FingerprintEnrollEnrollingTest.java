@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.content.Intent;
@@ -95,7 +96,8 @@ public class FingerprintEnrollEnrollingTest {
                 any(byte[].class),
                 any(CancellationSignal.class),
                 anyInt(),
-                callbackCaptor.capture());
+                callbackCaptor.capture(),
+                eq(true));
 
         return callbackCaptor.getValue();
     }
