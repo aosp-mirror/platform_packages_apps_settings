@@ -20,8 +20,13 @@
         android:title="@string/provider_internet_settings"
         settings:keywords="@string/keywords_wifi">
 
-    <com.android.settings.wifi.LinkablePreference
-        android:key="wifi_status_message"/>
+    <!-- View airplane mode networks button -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="view_airplane_mode_netwokrs_button"
+        android:title="@string/condition_airplane_title"
+        android:selectable="false"
+        android:layout="@layout/view_airplane_mode_networks_button"
+        settings:allowDividerBelow="true"/>
 
     <PreferenceCategory
         android:key="connected_access_point"
