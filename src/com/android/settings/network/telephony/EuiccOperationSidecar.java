@@ -99,7 +99,7 @@ public abstract class EuiccOperationSidecar extends SidecarFragment {
         Intent intent = new Intent(getReceiverAction());
         intent.putExtra(EXTRA_OP_ID, mOpId);
         return PendingIntent.getBroadcast(
-                getContext(), REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                getContext(), REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE_UNAUDITED);
     }
 
     @Override
