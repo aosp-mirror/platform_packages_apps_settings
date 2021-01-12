@@ -88,14 +88,16 @@ public class PlatformCompatDashboardTest {
     public void setUp() throws RemoteException, NameNotFoundException {
         MockitoAnnotations.initMocks(this);
         mChanges = new CompatibilityChangeInfo[5];
-        mChanges[0] = new CompatibilityChangeInfo(1L, "Default_Enabled", 0, 0, false, false, "");
-        mChanges[1] = new CompatibilityChangeInfo(2L, "Default_Disabled", 0, 0, true, false, "");
-        mChanges[2] = new CompatibilityChangeInfo(3L, "Enabled_Since_SDK_1_1", -1, 1, false, false,
-                                                  "");
-        mChanges[3] = new CompatibilityChangeInfo(4L, "Enabled_Since_SDK_1_2", -1, 1, false, false,
-                                                  "");
-        mChanges[4] = new CompatibilityChangeInfo(5L, "Enabled_Since_SDK_2", -1, 2, false, false,
-                                                  "");
+        mChanges[0] = new CompatibilityChangeInfo(
+                1L, "Default_Enabled", 0, 0, false, false, "", false);
+        mChanges[1] = new CompatibilityChangeInfo(
+                2L, "Default_Disabled", 0, 0, true, false, "", false);
+        mChanges[2] = new CompatibilityChangeInfo(
+                3L, "Enabled_Since_SDK_1_1", -1, 1, false, false, "", false);
+        mChanges[3] = new CompatibilityChangeInfo(
+                4L, "Enabled_Since_SDK_1_2", -1, 1, false, false, "", false);
+        mChanges[4] = new CompatibilityChangeInfo(
+                5L, "Enabled_Since_SDK_2", -1, 2, false, false, "", false);
         when(mPlatformCompat.listUIChanges()).thenReturn(mChanges);
         when(mPlatformCompat.getOverrideValidator()).thenReturn(mOverrideValidator);
         // By default, allow any change
@@ -208,7 +210,8 @@ public class PlatformCompatDashboardTest {
         for (int i = 0; i < mChanges.length; ++i) {
             changesToAdd.add(new CompatibilityChangeInfo(mChanges[i].getId(), mChanges[i].getName(),
                     -1, mChanges[i].getEnableSinceTargetSdk(), mChanges[i].getDisabled(),
-                    mChanges[i].getLoggingOnly(), mChanges[i].getDescription()));
+                    mChanges[i].getLoggingOnly(), mChanges[i].getDescription(),
+                    mChanges[i].getOverridable()));
         }
 
         PreferenceCategory category = mDashboard.createChangeCategoryPreference(changesToAdd,
