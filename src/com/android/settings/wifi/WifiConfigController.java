@@ -34,7 +34,6 @@ import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
-import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.telephony.SubscriptionInfo;
@@ -443,10 +442,7 @@ public class WifiConfigController implements TextWatcher,
 
             mSsidScanButton.setVisibility(View.GONE);
         }
-
-        if (!isSplitSystemUser()) {
-            mSharedCheckBox.setVisibility(View.GONE);
-        }
+        mSharedCheckBox.setVisibility(View.GONE);
 
         mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         if (mConfigUi.getSubmitButton() != null) {
@@ -457,13 +453,6 @@ public class WifiConfigController implements TextWatcher,
         if (mRequestFocus) {
             mView.findViewById(R.id.l_wifidialog).requestFocus();
         }
-    }
-
-    @VisibleForTesting
-    boolean isSplitSystemUser() {
-        final UserManager userManager =
-                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        return userManager.isSplitSystemUser();
     }
 
     private void addRow(ViewGroup group, int name, String value) {
