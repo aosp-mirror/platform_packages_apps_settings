@@ -59,6 +59,7 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -89,6 +90,8 @@ public class SimSelectNotificationTest {
     private Resources mResources;
     @Mock
     private SubscriptionInfo mSubInfo;
+    @Mock
+    private DisplayMetrics mDisplayMetrics;
 
     private final String mFakeDisplayName = "fake_display_name";
     private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
@@ -141,6 +144,9 @@ public class SimSelectNotificationTest {
                 .thenReturn(mFakeDualCdmaWarningTitle);
         when(mResources.getString(R.string.dual_cdma_sim_warning_notification_summary,
                 mSimCombinationName)).thenReturn(mFakeDualCdmaWarningSummary);
+
+        when(mResources.getDisplayMetrics()).thenReturn(mDisplayMetrics);
+        mDisplayMetrics.density = 1.5f;
     }
 
     @Test
@@ -275,4 +281,3 @@ public class SimSelectNotificationTest {
         assertThat(notification.getValue().contentIntent).isNotNull();
     }
 }
-
