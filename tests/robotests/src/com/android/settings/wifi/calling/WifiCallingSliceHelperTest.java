@@ -397,14 +397,15 @@ public class WifiCallingSliceHelperTest {
         final Intent intent = new Intent(action);
         intent.setClass(mContext, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(mContext, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE_UNAUDITED);
+                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     private PendingIntent getActivityIntent(String action) {
         final Intent intent = new Intent(action);
         intent.setPackage(SETTINGS_PACKAGE_NAME);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, PendingIntent.FLAG_MUTABLE_UNAUDITED /* flags */);
+        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     private void assertTitle(List<SliceItem> sliceItems, String title) {
