@@ -32,6 +32,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 
 import org.junit.Before;
@@ -50,12 +52,14 @@ public class PreventRingingParentPreferenceControllerTest {
 
     private Context mContext;
     private PreventRingingParentPreferenceController mController;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         mController = new PreventRingingParentPreferenceController(mContext, "test_key");
+        mPreference = new Preference(mContext);
     }
 
     @Test
@@ -80,17 +84,43 @@ public class PreventRingingParentPreferenceControllerTest {
     public void updateState_summaryUpdated() {
         Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
                 VOLUME_HUSH_MUTE);
-        assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getText(
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary()).isEqualTo(mContext.getResources().getText(
                 R.string.prevent_ringing_option_mute_summary));
 
         Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
                 VOLUME_HUSH_VIBRATE);
-        assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getText(
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary()).isEqualTo(mContext.getResources().getText(
                 R.string.prevent_ringing_option_vibrate_summary));
 
         Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
                 VOLUME_HUSH_OFF);
-        assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getText(
-                R.string.prevent_ringing_option_none_summary));
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary()).isEqualTo(null);
+    }
+
+    @Test
+    public void isChecked_vibrate_shouldReturnTrue() {
+        Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_VIBRATE);
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_mute_shouldReturnTrue() {
+        Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_MUTE);
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_off_shouldReturnFalse() {
+        Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_OFF);
+
+        assertThat(mController.isChecked()).isFalse();
     }
 }
