@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
+import android.app.role.RoleControllerManager;
 import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.Intent;
@@ -62,6 +63,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     @Mock
     private RoleManager mRoleManager;
     @Mock
+    private RoleControllerManager mRoleControllerManager;
+    @Mock
     private Preference mPreference;
 
     private Activity mActivity;
@@ -74,6 +77,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.ROLE_SERVICE, mRoleManager);
+        shadowApplication.setSystemService(Context.ROLE_CONTROLLER_SERVICE, mRoleControllerManager);
         mActivity = Robolectric.setupActivity(Activity.class);
         mShadowUserManager = shadowOf(mActivity.getSystemService(UserManager.class));
         mController = new TestRolePreferenceController(mActivity);
@@ -82,7 +86,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
 
     @Test
     public void constructor_callsIsApplicationVisibleForRole() {
-        verify(mRoleManager).isApplicationVisibleForRole(eq(TEST_ROLE_NAME), eq(
+        verify(mRoleControllerManager).isApplicationVisibleForRole(eq(TEST_ROLE_NAME), eq(
                 TEST_PACKAGE_NAME), any(Executor.class), any(Consumer.class));
     }
 
@@ -149,7 +153,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     private void setRoleIsVisible(boolean visible) {
         final ArgumentCaptor<Consumer<Boolean>> callbackCaptor = ArgumentCaptor.forClass(
                 Consumer.class);
-        verify(mRoleManager).isRoleVisible(eq(TEST_ROLE_NAME), any(Executor.class),
+        verify(mRoleControllerManager).isRoleVisible(eq(TEST_ROLE_NAME), any(Executor.class),
                 callbackCaptor.capture());
         final Consumer<Boolean> callback = callbackCaptor.getValue();
         callback.accept(visible);
@@ -158,7 +162,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     private void setApplicationIsVisibleForRole(boolean visible) {
         final ArgumentCaptor<Consumer<Boolean>> callbackCaptor = ArgumentCaptor.forClass(
                 Consumer.class);
-        verify(mRoleManager).isApplicationVisibleForRole(eq(TEST_ROLE_NAME), eq(
+        verify(mRoleControllerManager).isApplicationVisibleForRole(eq(TEST_ROLE_NAME), eq(
                 TEST_PACKAGE_NAME), any(Executor.class), callbackCaptor.capture());
         final Consumer<Boolean> callback = callbackCaptor.getValue();
         callback.accept(visible);

@@ -58,7 +58,7 @@ import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.After;
 import org.junit.Before;
@@ -302,7 +302,7 @@ public class MediaOutputPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
         verify(mContext).sendBroadcast(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getAction())
-                .isEqualTo(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
+                .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
     }
 
     /**

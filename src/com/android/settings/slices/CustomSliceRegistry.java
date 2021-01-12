@@ -46,7 +46,7 @@ import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 import com.android.settings.wifi.slice.WifiSlice;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.Map;
 
@@ -293,7 +293,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_REMOTE_MEDIA)
+            .appendPath(MediaOutputConstants.KEY_REMOTE_MEDIA)
             .build();
 
     /**

@@ -48,7 +48,7 @@ import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.List;
 
@@ -86,14 +86,14 @@ public class RemoteMediaSlice implements CustomSliceable {
             // Launch Media Output Dialog
             final RoutingSessionInfo info = intent.getParcelableExtra(SESSION_INFO);
             mContext.sendBroadcast(new Intent()
-                    .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
-                    .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
-                    .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                    .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
+                    .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                    .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                             info.getClientPackageName()));
             // Dismiss volume panel
             mContext.sendBroadcast(new Intent()
-                    .setPackage(MediaOutputSliceConstants.SETTINGS_PACKAGE_NAME)
-                    .setAction(MediaOutputSliceConstants.ACTION_CLOSE_PANEL));
+                    .setPackage(MediaOutputConstants.SETTINGS_PACKAGE_NAME)
+                    .setAction(MediaOutputConstants.ACTION_CLOSE_PANEL));
         }
     }
 

@@ -44,7 +44,7 @@ public class EmergencyDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.EMERGENCY_SOS_GESTURE_SETTINGS;
+        return SettingsEnums.EMERGENCY_SETTINGS;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
