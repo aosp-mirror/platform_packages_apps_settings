@@ -24,24 +24,24 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 
 /** A customized layout for homepage preference. */
-public class HomePagePreference extends Preference {
+public class HomepagePreference extends Preference {
 
-    public HomePagePreference(Context context) {
+    public HomepagePreference(Context context) {
         super(context);
         setLayoutResource(R.layout.homepage_preference);
     }
 
-    public HomePagePreference(Context context, AttributeSet attrs) {
+    public HomepagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.homepage_preference);
     }
 
-    public HomePagePreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HomepagePreference(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, /* defStyleRes= */ 0);
         setLayoutResource(R.layout.homepage_preference);
     }
 
-    public HomePagePreference(Context context, AttributeSet attrs,
+    public HomepagePreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setLayoutResource(R.layout.homepage_preference);
