@@ -184,6 +184,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 pref.setOrder(order + baseOrder);
             }
         }
+
+        overrideTilePosition(tile, pref);
+
         return outObservers.isEmpty() ? null : outObservers;
     }
 
@@ -456,5 +459,26 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             }
         }
         return eligibleUsers;
+    }
+
+    private void overrideTilePosition(Tile tile, Preference pref) {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)
+                && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
+            final String[] homepageTilePackages = mContext.getResources().getStringArray(
+                    R.array.config_homepage_tile_packages);
+            final int[] homepageTileOrders = mContext.getResources().getIntArray(
+                    R.array.config_homepage_tile_orders);
+            if (homepageTilePackages.length == 0
+                    || homepageTilePackages.length != homepageTileOrders.length) {
+                return;
+            }
+
+            for (int i = 0; i < homepageTilePackages.length; i++) {
+                if (TextUtils.equals(tile.getPackageName(), homepageTilePackages[i])) {
+                    pref.setOrder(homepageTileOrders[i]);
+                    return;
+                }
+            }
+        }
     }
 }
