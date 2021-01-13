@@ -1905,7 +1905,7 @@
     <string name="show_running_services" msgid="8666008279959853318">"चालु सेवाहरू देखाउनुहोस्"</string>
     <string name="show_background_processes" msgid="5682856012453562151">"केस गरिएका प्रक्रियाहरू"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"आपत्‌कालीन एप"</string>
-    <string name="reset_app_preferences" msgid="8861758340732716573">"एपका प्राथमिकताहरू रिसेट गर्नुहोस् रिसेट गर्नुहोस्"</string>
+    <string name="reset_app_preferences" msgid="8861758340732716573">"एपका प्राथमिकताहरू रिसेट गर्नुहोस्"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"एपका एपका प्राथमिकताहरू रिसेट गर्ने हो?"</string>
     <string name="reset_app_preferences_desc" msgid="6509978724602405805">"यस कार्यले निम्न सुविधाहरूका सबै प्राथमिकताहरूलाई रिसेट गर्ने छ:\n\n"<li>"असक्षम पारिएका अनुप्रयोगहरू"</li>\n<li>"असक्षम पारिएका एपसम्बन्धी सूचनाहरू"</li>\n<li>"कारबाहीका लागि पूर्वनिर्धारित अनुप्रयोगहरू"</li>\n<li>"अनुप्रयोगका लागि पृष्ठभूमिका डेटासम्बन्धी बन्देजहरू"</li>\n<li>"अनुमतिसम्बन्धी सबै बन्देजहरू"</li>\n\n"तपाईं एपको कुनै पनि डेटा गुमाउनु हुने छैन।"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"एपहरू रिसेट गर्नुहोस्"</string>
@@ -2378,7 +2378,7 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"पृष्ठभूमिको गतिविधिलाई सीमित गर्ने हो?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"तपाईंले कुनै एपको पृष्ठभूमिको गतिविधिलाई सीमित गर्नुभयो भने यसले सही तरिकाले काम नगर्न सक्छ"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"यो एपलाई ब्याट्री अप्टिमाइज गर्न भनी सेट नगरिएको हुनाले तपाईं यसमा बन्देज लगाउन सक्नुहुन्न।\n\nअनुप्रयोगमा बन्देज लगाउन पहिले ब्याट्री अप्टिमाइजेसन सुविधा सक्रिय गर्नुहोस्।"</string>
-    <string name="device_screen_usage" msgid="1011630249648289909">"पूर्ण चार्ज भएदेखि स्क्रिनको प्रयोग"</string>
+    <string name="device_screen_usage" msgid="1011630249648289909">"पूर्ण चार्ज भएदेखि स्क्रिनको प्रयोगको अवधि"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"पूर्ण चार्ज भएदेखि ब्याट्रीको प्रयोग"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"पूर्ण चार्ज भएदेखि स्क्रिन सक्रिय रहेको समय"</string>
     <string name="device_usage_list_summary" msgid="242243537371697285">"पूर्ण चार्ज भएदेखि यन्त्रको प्रयोग"</string>
@@ -2563,7 +2563,7 @@
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="APP">%2$s</xliff:g> ले प्रयोग गरेको <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"समग्र ब्याट्रीको <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"पछिल्लो पटक पूर्ण चार्ज भएदेखिको विश्लेषण"</string>
-    <string name="battery_last_full_charge" msgid="8308424441475063956">"पछिल्लो पटकको पूर्ण चार्ज"</string>
+    <string name="battery_last_full_charge" msgid="8308424441475063956">"पछिल्लो पटक पूर्ण चार्ज भएको समय"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"पूरा चार्ज हुँदा लगभग यति समय टिक्छ"</string>
     <string name="battery_footer_summary" msgid="9125397752380281832">"ब्याट्री प्रयोगसम्बन्धी डेटा अनुमानित हो र प्रयोगको अनुसार यो मान बदलिन सक्छ"</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"सक्रिय प्रयोगमा रहँदा"</string>
@@ -2591,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"समयतालिका सेट गर्नुहोस्‌"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ब्याट्रीको खपत बढाउनुहोस्"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"चार्ज भएपछि अफ गर्नुहोस्"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"तपाईंको फोन <xliff:g id="PERCENT">%1$s</xliff:g> भएपछि ब्याट्री सेभर अफ हुन्छ"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"तपाईंको फोनको चार्ज <xliff:g id="PERCENT">%1$s</xliff:g> भएपछि ब्याट्री सेभर अफ हुन्छ"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"तपाईंको ट्याब्लेटको चार्ज <xliff:g id="PERCENT">%1$s</xliff:g> भएपछि ब्याट्री सेभर अफ हुन्छ"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"तपाईंको यन्त्र <xliff:g id="PERCENT">%1$s</xliff:g> भएपछि ब्याट्री सेभर अफ हुन्छ"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"तपाईंको यन्त्रको चार्ज <xliff:g id="PERCENT">%1$s</xliff:g> भएपछि ब्याट्री सेभर अफ हुन्छ"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"सक्रिय गर्नुहोस्"</string>
@@ -3304,13 +3304,13 @@
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"अनुप्रयोगले प्रदान गरेको ध्वनि"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"सूचना सम्बन्धी पूर्वनिर्धारित ध्वनि"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"अलार्मको पूर्वनिर्धारित ध्वनि"</string>
-    <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"कलका बेला कम्पन गर्नुहोस्"</string>
+    <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"कल आउँदा भाइब्रेट गरियोस्"</string>
     <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"कम्पन"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"कहिल्यै पनि कम्पन नगर्नुहोस्"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"सधैँ कम्पन गर्नुहोस्"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"सुरुमा कम्पन गरी त्यसपछि घन्टी बजाउनुहोस्"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"अन्य ध्वनिहरू"</string>
-    <string name="dial_pad_tones_title" msgid="3536945335367914892">"प्याड टोनहरू डायल गर्नुहोस्"</string>
+    <string name="dial_pad_tones_title" msgid="3536945335367914892">"डायल प्याडको टोन"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"स्क्रिन लक हुँदा बज्ने ध्वनि"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"चार्ज गर्दाको ध्वनि तथा कम्पन"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"डाकिंग आवाज"</string>
@@ -4946,4 +4946,10 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"प्लेयर देखाउनुहोस्"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"कुनै पनि प्लेयर उपलब्ध छैन"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"मिडिया"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"कुनै अविश्वसनीय यन्त्र तपाईंका म्यासेजहरू हेर्न चाहन्छ। थप जानकारी हेर्न ट्याप गर्नुहोस्।"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"यस यन्त्रलाई म्यासेजहरू हेर्न दिने हो?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"यसअघि तपाईंको यन्त्रसँग कनेक्ट नगरिएको ब्लुटुथ चल्ने यन्त्र (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) तपाईंका म्यासेजहरू हेर्ने अनुमति माग्दै छ।\n\nयसअघि तपाईंको यन्त्र <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> सँग कनेक्ट भएको थिएन।"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"कुनै अविश्वसनीय यन्त्र तपाईंका सम्पर्क ठेगानाहरू र कल लग हेर्न तथा प्रयोग गर्न चाहन्छ। थप जानकारी हेर्न ट्याप गर्नुहोस्।"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"यस यन्त्रलाई तपाईंका सम्पर्क ठेगानाहरू र कल लग हेर्न तथा प्रयोग गर्न हो?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"यसअघि तपाईंको यन्त्रसँग कनेक्ट नगरिएको ब्लुटुथ चल्ने यन्त्र (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) तपाईंका सम्पर्क ठेगाना तथा कल लग हेर्ने अनुमति माग्दै छ। यसका साथै, उक्त यन्त्रले तपाईंका आगमन तथा बहिर्गमन कलसम्बन्धी डेटा पनि हेर्ने तथा प्रयोग गर्ने अनुमति माग्दै छ।\n\nयसअघि तपाईंको यन्त्र <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> सँग कनेक्ट भएको थिएन।"</string>
 </resources>

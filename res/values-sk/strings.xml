@@ -276,7 +276,7 @@
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer" msgid="7004693956837388129">"Používa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Čas <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> sa začína <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Používa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nepoužíva letný čas."</string>
-    <string name="zone_time_type_dst" msgid="9189689342265305808">"Obdobie letného času"</string>
+    <string name="zone_time_type_dst" msgid="9189689342265305808">"Letný čas"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Štandardný čas"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Vybrať podľa oblasti"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vybrať podľa čas. posunu UTC"</string>
@@ -1460,8 +1460,8 @@
     <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Ak odpojíte SD kartu, niektoré používané aplikácie môžu byť zastavené a nebudú k dispozícii, kým SD kartu znova nepripojíte."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"Úložisko USB sa nepodarilo odpojiť. Skúste to znova neskôr."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD kartu sa nepodarilo odpojiť. Skúste to znova neskôr."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"Úložisko USB sa nepodarilo odpojiť. Skúste to neskôr."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD kartu sa nepodarilo odpojiť. Skúste to neskôr."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"Ukladací priestor USB bude odpojený."</string>
     <string name="unmount_inform_text" product="default" msgid="716578785262713312">"SD karta bude odpojená."</string>
     <string name="sd_ejecting_title" msgid="1641122369013595273">"Odpájanie"</string>
@@ -3027,7 +3027,7 @@
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Vyberte profil VPN, ku ktorému chcete mať vždy pripojenie. Sieťová premávka bude povolená len v prípade pripojenia k tejto sieti VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Žiadna"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Vždy zapnutá sieť VPN vyžaduje adresu IP pre server aj DNS."</string>
-    <string name="vpn_no_network" msgid="7187593680049843763">"Nie je k dispozícii žiadne sieťové pripojenie. Skúste to znova neskôr."</string>
+    <string name="vpn_no_network" msgid="7187593680049843763">"Nie je k dispozícii žiadne sieťové pripojenie. Skúste to neskôr."</string>
     <string name="vpn_disconnected" msgid="7694522069957717501">"Odpojiť od siete VPN"</string>
     <string name="vpn_disconnected_summary" msgid="721699709491697712">"Žiadne"</string>
     <string name="vpn_missing_cert" msgid="5397309964971068272">"Chýba certifikát. Skúste upraviť profil."</string>
@@ -4926,7 +4926,7 @@
     <string name="load_networks_progress" msgid="4717874401621250401">"Hľadá sa…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Prebieha registrácia v sieti <xliff:g id="NETWORK">%s</xliff:g>…"</string>
     <string name="not_allowed" msgid="5756935665192962915">"Vaša SIM karta nepovoľuje pripojenie k tejto sieti."</string>
-    <string name="connect_later" msgid="2330538069949281352">"V tejto chvíli sa nedá pripojiť k sieti. Skúste to znova neskôr."</string>
+    <string name="connect_later" msgid="2330538069949281352">"V tejto chvíli sa nedá pripojiť k sieti. Skúste to neskôr."</string>
     <string name="registration_done" msgid="1750434215698850123">"Prihlásenie k sieti prebehlo úspešne."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Vybrať sieť automaticky"</string>
     <string name="carrier_settings_title" msgid="6959295328730560529">"Nastavenia operátora"</string>
@@ -5128,4 +5128,10 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Zobraziť prehrávač"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"K dispozícii nie sú žiadne prehrávače"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"médiá"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Nedôveryhodné zariadenie vyžaduje prístup k vašim správam. Klepnutím zobrazíte podrobnosti."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Chcete povoliť prístup k správam?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Nedôveryhodné zariadenie <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> s rozhraním Bluetooth vyžaduje prístup k vašim správam.\n\nK zariadeniu <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ste sa predtým nikdy nepripojili."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Nedôveryhodné zariadenie vyžaduje prístup k vašim kontaktom a zoznamu hovorov. Klepnutím zobrazíte podrobnosti."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Chcete povoliť prístup ku kontaktom a zoznamu hovorov?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Nedôveryhodné zariadenie <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> s rozhraním Bluetooth vyžaduje prístup k vašim kontaktom a zoznamu hovorov. Zahŕňa to údaje o prichádzajúcich a odchádzajúcich hovoroch.\n\nK zariadeniu <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ste sa predtým nikdy nepripojili."</string>
 </resources>
