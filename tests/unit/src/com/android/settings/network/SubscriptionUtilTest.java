@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -38,9 +39,15 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(AndroidJUnit4.class)
 public class SubscriptionUtilTest {
+    private static final int SUBID_1 = 1;
+    private static final int SUBID_2 = 2;
+    private static final int SUBID_3 = 3;
+    private static final CharSequence CARRIER_1 = "carrier1";
+    private static final CharSequence CARRIER_2 = "carrier2";
 
     private Context mContext;
     @Mock
@@ -123,6 +130,131 @@ public class SubscriptionUtilTest {
 
         assertThat(subs).isNotNull();
         assertThat(subs).hasSize(2);
+    }
+
+    @Test
+    public void getUniqueDisplayNames_uniqueCarriers_originalUsed() {
+        // Each subscription's default display name is unique.
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_2);
+        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        // Each subscription has a unique last 4 digits of the phone number.
+        TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
+        TelephonyManager sub2Telmgr = mock(TelephonyManager.class);
+        when(sub1Telmgr.getLine1Number()).thenReturn("1112223333");
+        when(sub2Telmgr.getLine1Number()).thenReturn("2223334444");
+        when(mTelMgr.createForSubscriptionId(SUBID_1)).thenReturn(sub1Telmgr);
+        when(mTelMgr.createForSubscriptionId(SUBID_2)).thenReturn(sub2Telmgr);
+
+        final Map<Integer, CharSequence> idNames =
+                SubscriptionUtil.getUniqueSubscriptionDisplayNames(mContext);
+
+        assertThat(idNames).isNotNull();
+        assertThat(idNames).hasSize(2);
+        assertEquals(CARRIER_1, idNames.get(SUBID_1));
+        assertEquals(CARRIER_2, idNames.get(SUBID_2));
+    }
+
+    @Test
+    public void getUniqueDisplayNames_identicalCarriers_fourDigitsUsed() {
+        // Both subscriptoins have the same display name.
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_1);
+        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        // Each subscription has a unique last 4 digits of the phone number.
+        TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
+        TelephonyManager sub2Telmgr = mock(TelephonyManager.class);
+        when(sub1Telmgr.getLine1Number()).thenReturn("1112223333");
+        when(sub2Telmgr.getLine1Number()).thenReturn("2223334444");
+        when(mTelMgr.createForSubscriptionId(SUBID_1)).thenReturn(sub1Telmgr);
+        when(mTelMgr.createForSubscriptionId(SUBID_2)).thenReturn(sub2Telmgr);
+
+        final Map<Integer, CharSequence> idNames =
+                SubscriptionUtil.getUniqueSubscriptionDisplayNames(mContext);
+
+        assertThat(idNames).isNotNull();
+        assertThat(idNames).hasSize(2);
+        assertEquals(CARRIER_1 + " 3333", idNames.get(SUBID_1));
+        assertEquals(CARRIER_1 + " 4444", idNames.get(SUBID_2));
+    }
+
+    @Test
+    public void getUniqueDisplayNames_phoneNumberBlocked_subscriptoinIdFallback() {
+        // Both subscriptoins have the same display name.
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_1);
+        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        // The subscriptions' phone numbers cannot be revealed to the user.
+        TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
+        TelephonyManager sub2Telmgr = mock(TelephonyManager.class);
+        when(sub1Telmgr.getLine1Number()).thenReturn("");
+        when(sub2Telmgr.getLine1Number()).thenReturn("");
+        when(mTelMgr.createForSubscriptionId(SUBID_1)).thenReturn(sub1Telmgr);
+        when(mTelMgr.createForSubscriptionId(SUBID_2)).thenReturn(sub2Telmgr);
+
+        final Map<Integer, CharSequence> idNames =
+                SubscriptionUtil.getUniqueSubscriptionDisplayNames(mContext);
+
+        assertThat(idNames).isNotNull();
+        assertThat(idNames).hasSize(2);
+        assertEquals(CARRIER_1 + " 1", idNames.get(SUBID_1));
+        assertEquals(CARRIER_1 + " 2", idNames.get(SUBID_2));
+    }
+
+    @Test
+    public void getUniqueDisplayNames_phoneNumberIdentical_subscriptoinIdFallback() {
+        // TODO have three here from the same carrier
+        // Both subscriptoins have the same display name.
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info3 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info3.getSubscriptionId()).thenReturn(SUBID_3);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_1);
+        when(info3.getDisplayName()).thenReturn(CARRIER_1);
+        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2, info3));
+
+        // Subscription 1 has a unique phone number, but subscriptions 2 and 3 share the same
+        // last four digits.
+        TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
+        TelephonyManager sub2Telmgr = mock(TelephonyManager.class);
+        TelephonyManager sub3Telmgr = mock(TelephonyManager.class);
+        when(sub1Telmgr.getLine1Number()).thenReturn("1112223333");
+        when(sub2Telmgr.getLine1Number()).thenReturn("2223334444");
+        when(sub3Telmgr.getLine1Number()).thenReturn("5556664444");
+        when(mTelMgr.createForSubscriptionId(SUBID_1)).thenReturn(sub1Telmgr);
+        when(mTelMgr.createForSubscriptionId(SUBID_2)).thenReturn(sub2Telmgr);
+        when(mTelMgr.createForSubscriptionId(SUBID_3)).thenReturn(sub3Telmgr);
+
+        final Map<Integer, CharSequence> idNames =
+                SubscriptionUtil.getUniqueSubscriptionDisplayNames(mContext);
+
+        assertThat(idNames).isNotNull();
+        assertThat(idNames).hasSize(3);
+        assertEquals(CARRIER_1 + " 3333", idNames.get(SUBID_1));
+        assertEquals(CARRIER_1 + " 2", idNames.get(SUBID_2));
+        assertEquals(CARRIER_1 + " 3", idNames.get(SUBID_3));
     }
 
     @Test
