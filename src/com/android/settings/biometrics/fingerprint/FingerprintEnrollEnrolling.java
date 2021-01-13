@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
@@ -102,8 +103,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private Interpolator mFastOutLinearInInterpolator;
     private int mIconTouchCount;
     private boolean mAnimationCancelled;
-    private AnimatedVectorDrawable mIconAnimationDrawable;
-    private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
+    @Nullable private AnimatedVectorDrawable mIconAnimationDrawable;
+    @Nullable private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
     private boolean mRestoring;
     private Vibrator mVibrator;
 
@@ -181,34 +182,34 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         );
 
         final LayerDrawable fingerprintDrawable = (LayerDrawable) mProgressBar.getBackground();
-        mIconAnimationDrawable = (AnimatedVectorDrawable)
-                fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_animation);
-        mIconBackgroundBlinksDrawable = (AnimatedVectorDrawable)
-                fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_background);
-        mIconAnimationDrawable.registerAnimationCallback(mIconAnimationCallback);
+        if (fingerprintDrawable != null) {
+            mIconAnimationDrawable = (AnimatedVectorDrawable)
+                    fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_animation);
+            mIconBackgroundBlinksDrawable = (AnimatedVectorDrawable)
+                    fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_background);
+            mIconAnimationDrawable.registerAnimationCallback(mIconAnimationCallback);
+        }
+
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_slow_in);
         mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.linear_out_slow_in);
         mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_linear_in);
-        mProgressBar.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                    mIconTouchCount++;
-                    if (mIconTouchCount == ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN) {
-                        showIconTouchDialog();
-                    } else {
-                        mProgressBar.postDelayed(mShowDialogRunnable,
-                                ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN);
-                    }
-                } else if (event.getActionMasked() == MotionEvent.ACTION_CANCEL
-                        || event.getActionMasked() == MotionEvent.ACTION_UP) {
-                    mProgressBar.removeCallbacks(mShowDialogRunnable);
+        mProgressBar.setOnTouchListener((v, event) -> {
+            if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                mIconTouchCount++;
+                if (mIconTouchCount == ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN) {
+                    showIconTouchDialog();
+                } else {
+                    mProgressBar.postDelayed(mShowDialogRunnable,
+                            ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN);
                 }
-                return true;
+            } else if (event.getActionMasked() == MotionEvent.ACTION_CANCEL
+                    || event.getActionMasked() == MotionEvent.ACTION_UP) {
+                mProgressBar.removeCallbacks(mShowDialogRunnable);
             }
+            return true;
         });
         mRestoring = savedInstanceState != null;
     }
@@ -220,7 +221,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     protected boolean shouldStartAutomatically() {
-        return !mCanAssumeUdfps;
+        if (mCanAssumeUdfps) {
+            // Continue enrollment if restoring (e.g. configuration changed). Otherwise, wait
+            // for the entry animation to complete before starting.
+            return mRestoring;
+        }
+        return true;
     }
 
     @Override
@@ -230,6 +236,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         updateDescription();
         if (mRestoring) {
             startIconAnimation();
+            if (mCanAssumeUdfps) {
+                mProgressBar.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -239,6 +248,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         if (mCanAssumeUdfps) {
             startEnrollment();
+            updateProgress(false /* animate */);
             mProgressBar.setVisibility(View.VISIBLE);
         }
 
@@ -247,7 +257,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void startIconAnimation() {
-        mIconAnimationDrawable.start();
+        if (mIconAnimationDrawable != null) {
+            mIconAnimationDrawable.start();
+        }
     }
 
     private void stopIconAnimation() {
@@ -277,7 +289,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void animateFlash() {
-        mIconBackgroundBlinksDrawable.start();
+        if (mIconBackgroundBlinksDrawable != null) {
+            mIconBackgroundBlinksDrawable.start();
+        }
     }
 
     protected Intent getFinishIntent() {

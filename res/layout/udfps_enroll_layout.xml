@@ -87,10 +87,12 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <include
-        layout="@layout/fingerprint_enroll_enrolling_content"
+    <com.android.settings.widget.RingProgressBar
+        android:id="@+id/fingerprint_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:minHeight="@dimen/fingerprint_progress_bar_min_size"
+        android:progress="0"
+        android:layout_gravity="center"/>
 
 </com.android.settings.biometrics.fingerprint.UdfpsEnrollLayout>
