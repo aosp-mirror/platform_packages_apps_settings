@@ -702,7 +702,7 @@
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="4337953030661626289">"Conexión a Internet"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="8247634441638919886">"Teclado"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="8194423860397844579">"Contactos e historial de llamadas"</string>
-    <string name="bluetooth_pairing_dialog_title" msgid="6106058683134173178">"¿Sincronizar con este dispositivo?"</string>
+    <string name="bluetooth_pairing_dialog_title" msgid="6106058683134173178">"¿Vincular con este dispositivo?"</string>
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="5472835166206721325">"¿Compartir libreta telefónica?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="7516277926581535299">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> quiere acceder a tus contactos y al historial de llamadas."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="1545098121090892788">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> quiere sincronizarse con Bluetooth. Al conectarse, podrá acceder a contactos e hist. de llamadas."</string>
@@ -1588,12 +1588,12 @@
     <string name="restore_default_apn" msgid="6596048535642130689">"Restaurando la configuración APN predeterminada"</string>
     <string name="menu_restore" msgid="4310539620115151551">"Restablecer valores predeterminados"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Se restableció la configuración predeterminada de APN."</string>
-    <string name="reset_dashboard_title" msgid="7423200250697886918">"Opciones de restablecimiento"</string>
+    <string name="reset_dashboard_title" msgid="7423200250697886918">"Restablecimiento"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Se pueden restablecer las redes, las apps y los dispositivos"</string>
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Se pueden restablecer las apps"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Restablecer configuración de Wi-Fi, datos móviles y Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Se restablecerán las opciones de configuración de todas las redes, lo que incluye:\n\n"<li>"Wi‑Fi"</li>\n<li>"Datos móviles"</li>\n<li>"Bluetooth"</li></string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Borrar tarjeta SIM descargada"</string>
+    <string name="reset_esim_title" msgid="6152167073280852849">"Borrar tarjetas SIM descargadas"</string>
     <string name="reset_esim_desc" msgid="4256518544336245086">"Para descargar tarjetas SIM de reemplazo, comunícate con tu proveedor. Esta acción no cancelará ningún plan de servicio móvil."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Restablecer configuración"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"¿Quieres restablecer toda la configuración de red? No podrás deshacer esta acción."</string>
@@ -3050,7 +3050,7 @@
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagos sin contacto"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Cómo funciona"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Paga en las tiendas con tu teléfono"</string>
-    <string name="nfc_payment_default" msgid="3769788268378614608">"App de pago predeterminada"</string>
+    <string name="nfc_payment_default" msgid="3769788268378614608">"App de pagos predeterminada"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Sin establecer"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g>: <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Utilizar la aplicación predeterminada"</string>
@@ -4946,4 +4946,10 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar reproductor"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"No hay jugadores disponibles"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"contenido multimedia"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Un dispositivo que no es de confianza quiere acceder a tus mensajes. Presiona para ver más detalles"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"¿Quieres permitir el acceso a los mensajes?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Un dispositivo Bluetooth que no es de confianza, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quiere acceder a tus mensajes.\n\nNunca antes te habías conectado a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Un dispositivo que no es de confianza quiere acceder a tus contactos y al registro de llamadas. Presiona para ver más detalles"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"¿Quieres permitir el acceso a los contactos y al registro de llamadas?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Un dispositivo Bluetooth que no es de confianza, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quiere acceder a tus contactos y al registro de llamadas. Esto incluye datos sobre llamadas entrantes y salientes.\n\nNunca antes te habías conectado a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
 </resources>
