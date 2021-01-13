@@ -45,6 +45,11 @@ public class LocationIndicatorsPreferenceController extends TogglePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
+        final boolean isEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED, false);
+        if (!isEnabled) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         // Location indicators feature is only available on devices that support location.
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LOCATION)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
