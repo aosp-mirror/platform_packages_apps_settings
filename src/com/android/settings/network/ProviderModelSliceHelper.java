@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
 public class ProviderModelSliceHelper {
     private static final String TAG = "ProviderModelSlice";
     private final SubscriptionManager mSubscriptionManager;
-    private final TelephonyManager mTelephonyManager;
+    private TelephonyManager mTelephonyManager;
     protected final Context mContext;
     private CustomSliceable mSliceable;
 
@@ -276,5 +276,17 @@ public class ProviderModelSliceHelper {
         return Arrays.stream(TextUtils.split(keywords, ","))
                 .map(String::trim)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * To update the telephony with subid.
+     */
+    public void updateTelephony() {
+        if (mSubscriptionManager == null || mSubscriptionManager.getDefaultDataSubscriptionId()
+                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return;
+        }
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(
+                mSubscriptionManager.getDefaultDataSubscriptionId());
     }
 }
