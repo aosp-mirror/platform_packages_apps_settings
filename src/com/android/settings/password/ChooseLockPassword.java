@@ -184,6 +184,11 @@ public class ChooseLockPassword extends SettingsActivity {
         return false;
     }
 
+    @Override
+    protected boolean isToolbarEnabled() {
+        return false;
+    }
+
     /* package */ Class<? extends Fragment> getFragmentClass() {
         return ChooseLockPasswordFragment.class;
     }

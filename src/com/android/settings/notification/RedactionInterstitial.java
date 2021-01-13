@@ -77,6 +77,11 @@ public class RedactionInterstitial extends SettingsActivity {
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
+    @Override
+    protected boolean isToolbarEnabled() {
+        return false;
+    }
+
     /**
      * Create an intent for launching RedactionInterstitial.
      *

@@ -172,8 +172,8 @@ public class MobileDataSlice implements CustomSliceable {
 
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
-        return PendingIntent.getActivity(mContext, 0 /* requestCode */,
-                intent, PendingIntent.FLAG_MUTABLE_UNAUDITED /* flags */);
+        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     /**

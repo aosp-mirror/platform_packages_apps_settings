@@ -26,6 +26,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
@@ -33,6 +34,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -152,6 +154,9 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
 
     @Override
     protected int getPreferenceScreenResId() {
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            return R.xml.sound_settings_v2;
+        }
         return R.xml.sound_settings;
     }
 
