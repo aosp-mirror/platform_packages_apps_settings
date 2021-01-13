@@ -178,7 +178,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"Täytä porttikenttä."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Portti-kentän täytyy olla tyhjä, jos isäntä-kenttä on tyhjä."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Antamasi portti on virheellinen."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Selain saa käyttää HTTP-välityspalvelinta mutta muut sovellukset eivät."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Selain käyttää HTTP-välityspalvelinta, mutta muut sovellukset mahdollisesti eivät."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"Välitysp. aut. määr. URL: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Ping-kutsu isäntänimelle (www.google.com), IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Ping-kutsu isäntänimelle (www.google.com), IPv6:"</string>
@@ -770,9 +770,9 @@
     <string name="wifi_time_remaining" msgid="8503606272869846170">"<xliff:g id="REMAINING_TIME">%1$s</xliff:g> jäljellä"</string>
     <string name="wifi_expiry_time" msgid="5419758551129267624">"Vanhenee <xliff:g id="EXPIRY_TIME">%1$s</xliff:g>"</string>
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Napauta tästä kirjautuaksesi verkkoon"</string>
-    <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
-    <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
-    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
+    <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
+    <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
+    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa ottaa Wi-Fin käyttöön."</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa poistaa Wi-Fin käytöstä."</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Vahvista korjattavien sovell. tavukoodi"</string>
@@ -1030,11 +1030,11 @@
     <string name="wifi_p2p_disconnect_title" msgid="96361896458072463">"Katkaistaanko yhteys?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="1208761239498807208">"Jos katkaiset yhteyden, yhteys laitteeseen <xliff:g id="PEER_NAME">%1$s</xliff:g> katkaistaan."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="4490648217799144078">"Jos kosketat Katkaise yhteys, yhteys laitteeseen <xliff:g id="PEER_NAME">%1$s</xliff:g> ja <xliff:g id="PEER_COUNT">%2$s</xliff:g> muuhun laitteeseen katkaistaan."</string>
-    <string name="wifi_p2p_cancel_connect_title" msgid="8476985132989357041">"Peruutetaanko kutsu?"</string>
+    <string name="wifi_p2p_cancel_connect_title" msgid="8476985132989357041">"Perutaanko kutsu?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"Haluatko peruuttaa laitteelle <xliff:g id="PEER_NAME">%1$s</xliff:g> lähetetyn yhteydenmuodostuskutsun?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"Unohdetaanko tämä ryhmä?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Wi‑Fi-hotspot"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Internetyhteyttä tai sisältöä ei jaeta muiden laitteiden kanssa."</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Internetyhteyttä tai sisältöä ei jaeta muille laitteille."</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"Tabletin internetyhteys jaetaan hotspotin kautta"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"Puhelimen internetyhteys jaetaan hotspotin kautta"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"Sovellus jakaa sisältöä – jos haluat jakaa internetyhteyden, sammuta hotspot ja käynnistä se uudelleen"</string>
@@ -1045,9 +1045,9 @@
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Hotspotin salasana"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP-taajuus"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"Hotspot-ominaisuudella voit luoda muille laitteillesi Wi-Fi-verkon. Ominaisuus jakaa internetyhteyden muille laitteille mobiilidatayhteydellä. Lisämaksuja mobiilidatan käytöstä voidaan periä."</string>
-    <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Sovellukset voivat luoda hotspotin ja jakaa sisältöä lähellä olevien laitteiden kanssa."</string>
+    <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Sovellukset voivat luoda hotspotin ja jakaa sisältöä lähellä oleville laitteille."</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Laita hotspot pois päältä automaattisesti"</string>
-    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Kun laitteita ei ole yhdistetty"</string>
+    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Kun laitteita ei ole yhdistettynä"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Otetaan yhteyspiste käyttöön..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Poistetaan yhteyspiste käytöstä..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> on aktiivinen"</string>
@@ -1407,8 +1407,8 @@
     <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
     <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"Tyhjennä USB-tila"</string>
     <string name="sd_format" product="default" msgid="9085302892248732329">"Tyhjennä SD-kortti"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Poistaa kaikki sisäisen USB-tallennustilan tiedot, kuten musiikin tai valokuvat."</string>
-    <string name="sd_format_summary" product="default" msgid="60583152211068164">"Poistaa kaikki SD-kortin tiedot, kuten musiikin ja valokuvat"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Poistaa kaikki sisäisen USB-tallennustilan tiedot, kuten musiikin tai kuvat."</string>
+    <string name="sd_format_summary" product="default" msgid="60583152211068164">"Poistaa kaikki SD-kortin tiedot, kuten musiikin ja kuvat"</string>
     <string name="memory_clear_cache_title" msgid="2605096903803953619">"Tyhjennetäänkö välimuistitiedot?"</string>
     <string name="memory_clear_cache_message" msgid="4759561226480906588">"Sovellusten välimuistit tyhjennetään."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTP- tai PTP-toiminto on käytössä"</string>
@@ -1468,7 +1468,7 @@
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kun tämä <xliff:g id="NAME_0">^1</xliff:g> poistetaan, siihen tallennetut sovellukset lakkaavat toimimasta eivätkä mediatiedostot ole käytettävissä ennen kuin se liitetään uudelleen."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> on alustettu niin, että se toimii vain tämän laitteen kanssa."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Jos haluat käyttää tallennuslaitteen <xliff:g id="NAME">^1</xliff:g> sisältämiä sovelluksia, kuvia tai tietoja, liitä se uudelleen. \n\nVoit myös halutessasi unohtaa tämän tallennuslaitteen, jos se ei ole käytettävissä. \n\nJos päätät unohtaa laitteen, menetät kaikki sen sisältämät tiedot lopullisesti. \n\nVoit asentaa sovellukset uudelleen myöhemmin, mutta niiden laitteelle tallentamat tiedot menetetään."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Unohdetaanko <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Kaikki kohteen (<xliff:g id="NAME">^1</xliff:g>) sovellukset, valokuvat ja tiedot poistetaan pysyvästi."</string>
+    <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Kaikki kohteen (<xliff:g id="NAME">^1</xliff:g>) sovellukset, kuvat ja tiedot poistetaan pysyvästi."</string>
     <string name="storage_detail_apps" msgid="5055911985540355324">"Sovellukset"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"Kuvahaku"</string>
     <string name="storage_detail_videos" msgid="9079894412680404208">"Videot"</string>
@@ -1617,8 +1617,8 @@
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4145566517710675883">\n\n"Jos haluat poistaa musiikin, kuvat ja muut käyttäjän tiedot, "<b>"SD-kortti"</b>" tulee tyhjentää."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Tyhjennä USB-tallennustila"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Tyhjennä SD-kortti"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Poista kaikki sisäisen USB-tallennustilan tiedot, kuten musiikki tai valokuvat."</string>
-    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Poista kaikki SD-kortin tiedot, kuten musiikki tai valokuvat."</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Poista kaikki sisäisen USB-tallennustilan tiedot, kuten musiikki tai kuvat."</string>
+    <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Poista kaikki SD-kortin tiedot, kuten musiikki tai kuvat."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3554085992851027633">"Pyyhi kaikki tiedot"</string>
     <string name="master_clear_button_text" product="default" msgid="3554085992851027633">"Pyyhi kaikki tiedot"</string>
     <string name="master_clear_final_desc" msgid="5218005891800878932">"Kaikki henkilökohtaiset tietosi ja ladatut sovellukset poistetaan. Toimintoa ei voi kumota."</string>
@@ -1655,7 +1655,7 @@
     <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Hotspot, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
-    <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetyhteyttä ei jaeta muiden laitteiden kanssa."</string>
+    <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetyhteyttä ei jaeta muille laitteille."</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Puhelimen käyttäminen modeemina"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Älä käytä Wi-Fi-hotspotia"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Jaa verkkoyhteys vain USB:n kautta"</string>
@@ -1677,8 +1677,8 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Jaettu internetyhteys katkaistaan laitteesta <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernetin jakaminen"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Jaa puhelimen internetyhteys USB-Ethernetillä"</string>
-    <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot- ja yhteyden jako ‑ominaisuuksien avulla voit jakaa internetyhteyden muille laitteille mobiilidatayhteydellä. Sovellukset voivat myös luoda hotspotin ja jakaa sisältöä lähellä olevien laitteiden kanssa."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Jaa internetyhteys muille laitteille Wi-Fin tai mobiilidatan avulla hotspotilla tai käyttämällä puhelinta modeemina. Sovellukset voivat myös luoda hotspotin ja jakaa sisältöä lähellä olevien laitteiden kanssa."</string>
+    <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot- ja yhteyden jako ‑ominaisuuksien avulla voit jakaa internetyhteyden muille laitteille mobiilidatayhteydellä. Sovellukset voivat myös luoda hotspotin ja jakaa sisältöä lähellä oleville laitteille."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Jaa internetyhteys muille laitteille Wi-Fin tai mobiilidatan avulla hotspotilla tai käyttämällä puhelinta modeemina. Sovellukset voivat myös luoda hotspotin ja jakaa sisältöä lähellä oleville laitteille."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ohjeet"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobiiliverkko"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Mobiilisopimus"</string>
@@ -1808,7 +1808,7 @@
     <string name="lock_settings_title" msgid="665707559508132349">"Laitteen suojaus"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"Vaihda lukituksenpoistokuvio"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"Muuta lukituksen poistoon tarvittava PIN-koodi"</string>
-    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Piirrä lukituksenpoistokuvio"</string>
+    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Piirrä lukituksen avaava kuvio"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Saat ohjeita painamalla Valikko-painiketta."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Nosta sormi, kun olet valmis"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Yhdistä vähintään <xliff:g id="NUMBER">%d</xliff:g> pistettä. Yritä uudelleen."</string>
@@ -2706,7 +2706,7 @@
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
     <string name="backup_erase_dialog_message" msgid="2250872501409574331">"Haluatko lopettaa Wi-Fi-salasanojen, kirjanmerkkien, muiden asetuksien ja sovellustietojen varmuuskopioinnin ja poistaa kaikki kopiot Googlen palvelimilta?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Lopetetaanko laitteen tietojen (kuten Wi-Fi-salasanojen ja soittohistorian) ja sovellusten tietojen (kuten asetusten ja sovellusten tallentamien tiedostojen) automaattinen varmuuskopiointi? Myös vanhat varmuuskopiot poistetaan etäpalvelimilta."</string>
-    <string name="fullbackup_data_summary" msgid="971587401251601473">"Varmuuskopioi laitteen tiedot (kuten Wi-Fi-salasanat ja soittohistoria) sekä sovellusten tiedot (kuten asetukset ja sovellusten tallentamat tiedostot) automaattisesti etäyhteyden kautta.\n\nKun otat automaattisen varmuuskopioinnin käyttöön, laitteen ja sovellusten tiedot varmuuskopioidaan säännöllisesti etäyhteyden kautta. Sovellusten tietoihin voi sisältyä mitä tahansa tietoja, joita sovellukset ovat tallentaneet (kehittäjien asetuksien perusteella). Ne saattavat sisältää myös arkaluontoisia tietoja, kuten yhteystietoja, viestejä ja valokuvia."</string>
+    <string name="fullbackup_data_summary" msgid="971587401251601473">"Varmuuskopioi laitteen tiedot (kuten Wi-Fi-salasanat ja soittohistoria) sekä sovellusten tiedot (kuten asetukset ja sovellusten tallentamat tiedostot) automaattisesti etäyhteyden kautta.\n\nKun otat automaattisen varmuuskopioinnin käyttöön, laitteen ja sovellusten tiedot varmuuskopioidaan säännöllisesti etäyhteyden kautta. Sovellusten tietoihin voi sisältyä mitä tahansa tietoja, joita sovellukset ovat tallentaneet (kehittäjien asetuksien perusteella). Ne saattavat sisältää myös arkaluontoisia tietoja, kuten yhteystietoja, viestejä ja kuvia."</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"Laitteenhallinnan asetukset"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"Laitteenhallintasovellus"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"Poista laitteenhallintasovellus käytöstä"</string>
@@ -3132,7 +3132,7 @@
     <string name="wizard_finish" msgid="4220258401946825946">"Valmis"</string>
     <string name="user_image_take_photo" msgid="2601691481533190924">"Ota kuva"</string>
     <string name="user_image_choose_photo" msgid="5904586923236027350">"Valitse kuva"</string>
-    <string name="user_image_photo_selector" msgid="7727851029781491727">"Valitse valokuva"</string>
+    <string name="user_image_photo_selector" msgid="7727851029781491727">"Valitse kuva"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM-kortit"</string>
     <string name="sim_settings_title" msgid="8392862852842113531">"SIM-kortit"</string>
@@ -4060,7 +4060,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Tiedostonsiirto"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Siirrä tiedostoja toiselle laitteelle."</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Siirrä valokuvia tai tiedostoja, jos MTP:tä ei tueta (PTP)."</string>
+    <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Siirrä kuvia tai tiedostoja, jos MTP:tä ei tueta (PTP)."</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Internetin jakaminen USB:n kautta"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6464135515868405143">"Käytä tätä laitetta MIDI-tilassa."</string>
@@ -4117,7 +4117,7 @@
     <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Myönnetäänkö Älä häiritse -tilan käyttöoikeus sovellukselle <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Sovellus voi ottaa Älä häiritse -tilan käyttöön tai poistaa sen käytöstä sekä muokata siihen liittyviä asetuksia."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Tämän täytyy olla käytössä, sillä ilmoitusten käyttöoikeus on myönnetty."</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Peruutetaanko sovellukselta <xliff:g id="APP">%1$s</xliff:g> Älä häiritse -tilan käyttöoikeus?"</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Perutaanko sovellukselta <xliff:g id="APP">%1$s</xliff:g> Älä häiritse -tilan käyttöoikeus?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Kaikki tämän sovelluksen luomat Älä häiritse -säännöt poistetaan."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Älä optimoi"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimoi"</string>
@@ -4946,4 +4946,10 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Näytä soitin"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Soittimia ei saatavilla"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Epäluotettava laite pyytää pääsyä viesteihisi. Katso lisätietoja napauttamalla."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Sallitaanko pääsy viesteihin?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Epäluotettava Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä viesteihisi.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Epäluotettava laite pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Katso lisätietoja napauttamalla."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Sallitaanko pääsy yhteystietoihin ja puhelulokiin?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Epäluotettava Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Tämä sisältää datan saapuvista ja lähtevistä puheluista.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
 </resources>
