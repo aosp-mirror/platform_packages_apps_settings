@@ -56,13 +56,6 @@
         settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
         settings:enableCopying="true"/>
 
-    <Preference
-        android:key="emergency_info"
-        android:order="14"
-        android:title="@string/emergency_info_title"
-        android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.accounts.EmergencyInfoPreferenceController"/>
-
     <!-- Legal information -->
     <Preference
         android:key="legal_container"

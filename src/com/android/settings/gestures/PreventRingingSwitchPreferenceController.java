@@ -16,11 +16,7 @@
 
 package com.android.settings.gestures;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
 import android.provider.Settings;
 import android.widget.Switch;
 
@@ -39,7 +35,6 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
 
     private static final String KEY = "gesture_prevent_ringing_switch";
     private final Context mContext;
-    private SettingObserver mSettingObserver;
 
     @VisibleForTesting
     SwitchBar mSwitch;
@@ -60,7 +55,6 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
         if (isAvailable()) {
             LayoutPreference pref = screen.findPreference(getPreferenceKey());
             if (pref != null) {
-                mSettingObserver = new SettingObserver(pref);
                 pref.setOnPreferenceClickListener(preference -> {
                     int preventRinging = Settings.Secure.getInt(mContext.getContentResolver(),
                             Settings.Secure.VOLUME_HUSH_GESTURE,
@@ -112,33 +106,5 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
                 Settings.Secure.VOLUME_HUSH_GESTURE, isChecked
                         ? newRingingSetting
                         : Settings.Secure.VOLUME_HUSH_OFF);
-    }
-
-    private class SettingObserver extends ContentObserver {
-        private final Uri VOLUME_HUSH_GESTURE = Settings.Secure.getUriFor(
-                Settings.Secure.VOLUME_HUSH_GESTURE);
-
-        private final Preference mPreference;
-
-        public SettingObserver(Preference preference) {
-            super(new Handler());
-            mPreference = preference;
-        }
-
-        public void register(ContentResolver cr) {
-            cr.registerContentObserver(VOLUME_HUSH_GESTURE, false, this);
-        }
-
-        public void unregister(ContentResolver cr) {
-            cr.unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (uri == null || VOLUME_HUSH_GESTURE.equals(uri)) {
-                updateState(mPreference);
-            }
-        }
     }
 }

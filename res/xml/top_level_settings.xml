@@ -125,13 +125,12 @@
         android:fragment="com.android.settings.accessibility.AccessibilitySettings"
         settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
 
-        <!--    TODO(b/175158310): Enable this tile when the setting content is more flushed out-->
-        <!--    <Preference-->
-        <!--        android:key="top_level_emergency"-->
-        <!--        android:title="@string/emergency_settings_preference_title"-->
-        <!--        android:icon="@drawable/ic_homepage_emergency"-->
-        <!--        android:order="-10"-->
-        <!--        android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>-->
+    <Preference
+        android:key="top_level_emergency"
+        android:title="@string/emergency_settings_preference_title"
+        android:icon="@drawable/ic_homepage_emergency"
+        android:order="-10"
+        android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
 
     <Preference
         android:key="top_level_system"

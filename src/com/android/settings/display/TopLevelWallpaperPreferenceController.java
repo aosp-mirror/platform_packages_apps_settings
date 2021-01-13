@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -32,6 +33,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.homepage.RestrictedHomepagePreference;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedTopLevelPreference;
 
@@ -89,7 +92,11 @@ public class TopLevelWallpaperPreferenceController extends BasePreferenceControl
 
     @Override
     public void updateState(Preference preference) {
-        disablePreferenceIfManaged((RestrictedTopLevelPreference) preference);
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            disablePreferenceIfManaged((RestrictedHomepagePreference) preference);
+        } else {
+            disablePreferenceIfManaged((RestrictedTopLevelPreference) preference);
+        }
     }
 
     @Override
@@ -121,6 +128,20 @@ public class TopLevelWallpaperPreferenceController extends BasePreferenceControl
     }
 
     private void disablePreferenceIfManaged(RestrictedTopLevelPreference pref) {
+        final String restriction = DISALLOW_SET_WALLPAPER;
+        if (pref != null) {
+            pref.setDisabledByAdmin(null);
+            if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
+                    restriction, UserHandle.myUserId())) {
+                // Do not show the admin dialog for system restriction.
+                pref.setEnabled(false);
+            } else {
+                pref.checkRestrictionAndSetDisabled(restriction);
+            }
+        }
+    }
+
+    private void disablePreferenceIfManaged(RestrictedHomepagePreference pref) {
         final String restriction = DISALLOW_SET_WALLPAPER;
         if (pref != null) {
             pref.setDisabledByAdmin(null);
