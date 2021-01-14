@@ -24,7 +24,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         android:theme="@style/Theme.CollapsingToolbar.Settings">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -37,6 +37,7 @@
             app:collapsedTitleTextAppearance="@style/ToolbarText.Collapsed"
             app:statusBarScrim="?android:attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleMarginStart="18dp"
             app:toolbarId="@id/tool_bar">
 
             <androidx.appcompat.widget.Toolbar
