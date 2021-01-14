@@ -30,7 +30,7 @@ import com.android.settings.R;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
 /** Homepage preference that can be disabled by a device admin using a user restriction. */
-public class RestrictedHomepagePreference extends HomePagePreference {
+public class RestrictedHomepagePreference extends HomepagePreference {
     private RestrictedPreferenceHelper mHelper;
 
     public RestrictedHomepagePreference(Context context, AttributeSet attrs,
