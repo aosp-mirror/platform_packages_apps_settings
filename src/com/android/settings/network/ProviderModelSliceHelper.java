@@ -215,6 +215,8 @@ public class ProviderModelSliceHelper {
             drawable = shared.get();
         }
 
+        drawable.setTint(
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal));
         if (isDataSimActive()) {
             drawable.setTint(Utils.getColorAccentDefaultColor(mContext));
         }
