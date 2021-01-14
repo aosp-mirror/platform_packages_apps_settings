@@ -36,8 +36,10 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -53,6 +55,7 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -67,6 +70,7 @@ import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 
+import com.google.android.material.transition.platform.MaterialSharedAxis;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
@@ -229,6 +233,20 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     protected void onCreate(Bundle savedState) {
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)) {
+            // Enable Activity transitions
+            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+            final MaterialSharedAxis enterTransition = new MaterialSharedAxis(
+                    MaterialSharedAxis.X, /* forward */true);
+            enterTransition.addTarget(R.id.content_parent);
+            getWindow().setEnterTransition(enterTransition);
+
+            final MaterialSharedAxis returnTransition = new MaterialSharedAxis(
+                    MaterialSharedAxis.X, /* forward */false);
+            returnTransition.addTarget(R.id.content_parent);
+            getWindow().setReturnTransition(returnTransition);
+        }
+
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
         long startTime = System.currentTimeMillis();
