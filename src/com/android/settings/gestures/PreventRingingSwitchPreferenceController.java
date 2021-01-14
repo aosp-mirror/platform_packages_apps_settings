@@ -26,18 +26,18 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class PreventRingingSwitchPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
+        implements PreferenceControllerMixin, OnMainSwitchChangeListener {
 
     private static final String KEY = "gesture_prevent_ringing_switch";
     private final Context mContext;
 
     @VisibleForTesting
-    SwitchBar mSwitch;
+    MainSwitchPreference mSwitch;
 
     public PreventRingingSwitchPreferenceController(Context context) {
         super(context);
@@ -53,7 +53,7 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            LayoutPreference pref = screen.findPreference(getPreferenceKey());
+            Preference pref = screen.findPreference(getPreferenceKey());
             if (pref != null) {
                 pref.setOnPreferenceClickListener(preference -> {
                     int preventRinging = Settings.Secure.getInt(mContext.getContentResolver(),
@@ -66,18 +66,17 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
                                     : Settings.Secure.VOLUME_HUSH_VIBRATE);
                     return true;
                 });
-                mSwitch = pref.findViewById(R.id.switch_bar);
-                if (mSwitch != null) {
-                    mSwitch.addOnSwitchChangeListener(this);
-                    mSwitch.show();
-                }
+                mSwitch = (MainSwitchPreference) pref;
+                mSwitch.setTitle(mContext.getString(R.string.prevent_ringing_main_switch_title));
+                mSwitch.addOnSwitchChangeListener(this);
+                updateState(mSwitch);
             }
         }
     }
 
     public void setChecked(boolean isChecked) {
         if (mSwitch != null) {
-            mSwitch.setChecked(isChecked);
+            mSwitch.updateStatus(isChecked);
         }
     }
 
