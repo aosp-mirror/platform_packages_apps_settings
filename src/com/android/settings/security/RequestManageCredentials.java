@@ -18,9 +18,11 @@ package com.android.settings.security;
 
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.app.admin.DevicePolicyEventLogger;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -30,6 +32,7 @@ import android.os.UserManager;
 import android.security.AppUriAuthenticationPolicy;
 import android.security.Credentials;
 import android.security.KeyChain;
+import android.stats.devicepolicy.DevicePolicyEnums;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +47,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
+import java.util.Map;
 
 /**
  * Displays a full screen to the user asking whether the calling app can manage the user's
@@ -86,21 +91,28 @@ public class RequestManageCredentials extends Activity {
         if (!Credentials.ACTION_MANAGE_CREDENTIALS.equals(getIntent().getAction())) {
             Log.e(TAG, "Unable to start activity because intent action is not "
                     + Credentials.ACTION_MANAGE_CREDENTIALS);
+            logRequestFailure();
             finishWithResultCancelled();
             return;
         }
         if (isManagedDevice()) {
             Log.e(TAG, "Credential management on managed devices should be done by the Device "
                     + "Policy Controller, not a credential management app");
+            logRequestFailure();
             finishWithResultCancelled();
             return;
         }
         mCredentialManagerPackage = getLaunchedFromPackage();
         if (TextUtils.isEmpty(mCredentialManagerPackage)) {
             Log.e(TAG, "Unknown credential manager app");
+            logRequestFailure();
             finishWithResultCancelled();
             return;
         }
+        DevicePolicyEventLogger
+                .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REQUEST_NAME)
+                .setStrings(mCredentialManagerPackage)
+                .write();
         setContentView(R.layout.request_manage_credentials);
 
         mKeyChainTread = new HandlerThread("KeyChainConnection");
@@ -111,10 +123,16 @@ public class RequestManageCredentials extends Activity {
                 getIntent().getParcelableExtra(KeyChain.EXTRA_AUTHENTICATION_POLICY);
         if (!isValidAuthenticationPolicy(policy)) {
             Log.e(TAG, "Invalid authentication policy");
+            logRequestFailure();
             finishWithResultCancelled();
             return;
         }
         mAuthenticationPolicy = policy;
+        DevicePolicyEventLogger
+                .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REQUEST_POLICY)
+                .setStrings(getNumberOfAuthenticationPolicyApps(mAuthenticationPolicy),
+                        getNumberOfAuthenticationPolicyUris(mAuthenticationPolicy))
+                .write();
 
         loadRecyclerView();
         loadButtons();
@@ -185,6 +203,9 @@ public class RequestManageCredentials extends Activity {
         Button allowButton = findViewById(R.id.allow_button);
 
         dontAllowButton.setOnClickListener(b -> {
+            DevicePolicyEventLogger
+                    .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REQUEST_DENIED)
+                    .write();
             finishWithResultCancelled();
         });
         allowButton.setOnClickListener(b -> setOrUpdateCredentialManagementApp());
@@ -203,8 +224,12 @@ public class RequestManageCredentials extends Activity {
         try {
             mKeyChainConnection.getService().setCredentialManagementApp(
                     mCredentialManagerPackage, mAuthenticationPolicy);
+            DevicePolicyEventLogger
+                    .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REQUEST_ACCEPTED)
+                    .write();
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to set credential manager app", e);
+            logRequestFailure();
         }
         finish();
     }
@@ -269,4 +294,24 @@ public class RequestManageCredentials extends Activity {
         setResult(RESULT_CANCELED);
         finish();
     }
+
+    private void logRequestFailure() {
+        DevicePolicyEventLogger
+                .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REQUEST_FAILED)
+                .write();
+    }
+
+    private String getNumberOfAuthenticationPolicyUris(AppUriAuthenticationPolicy policy) {
+        int numberOfUris = 0;
+        for (Map.Entry<String, Map<Uri, String>> appsToUris :
+                policy.getAppAndUriMappings().entrySet()) {
+            numberOfUris += appsToUris.getValue().size();
+        }
+        return String.valueOf(numberOfUris);
+    }
+
+    private String getNumberOfAuthenticationPolicyApps(AppUriAuthenticationPolicy policy) {
+        return String.valueOf(policy.getAppAndUriMappings().size());
+    }
+
 }
