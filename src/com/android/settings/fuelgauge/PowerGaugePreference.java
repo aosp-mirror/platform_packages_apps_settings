@@ -25,7 +25,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppPreference;
 
 /**
  * Custom preference for displaying battery usage info as a bar and an icon on

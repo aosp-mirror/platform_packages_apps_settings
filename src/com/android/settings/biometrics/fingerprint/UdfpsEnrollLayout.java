@@ -17,11 +17,9 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowManager;
@@ -34,11 +32,17 @@ public class UdfpsEnrollLayout extends LinearLayout {
     private static final String TAG = "UdfpsEnrollLayout";
 
     private final FingerprintSensorPropertiesInternal mSensorProps;
+    private final int mSensorDiameter;
+    private final int mAnimationDiameter;
 
     public UdfpsEnrollLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mSensorProps = context.getSystemService(FingerprintManager.class)
                 .getSensorPropertiesInternal().get(0);
+        mSensorDiameter = mSensorProps.sensorRadius * 2;
+        // Multiply the progress bar size slightly so that the progress bar is outside the UDFPS
+        // affordance, which is shown by SystemUI
+        mAnimationDiameter = (int) (mSensorDiameter * 2);
     }
 
     @Override
@@ -55,22 +59,17 @@ public class UdfpsEnrollLayout extends LinearLayout {
         // The translationY is the amount of extra height that should be added to the spacer
         // above the animation
         final int spaceHeight = mSensorProps.sensorLocationY - statusbarHeight
-                - mSensorProps.sensorRadius - animation.getTop();
+                - (mAnimationDiameter / 2) - animation.getTop();
          animation.setTranslationY(spaceHeight);
     }
-
-
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         final View animation = findViewById(R.id.fingerprint_progress_bar);
-        final int sensorDiameter = mSensorProps.sensorRadius * 2;
-        // Multiply it slightly so that the progress bar is outside the UDFPS affordance, and that
-        // the animation is within the UDFPS affordance.
-        final int animationDiameter = (int) (sensorDiameter * 1);
-        animation.measure(MeasureSpec.makeMeasureSpec(animationDiameter, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(animationDiameter, MeasureSpec.EXACTLY));
+
+        animation.measure(MeasureSpec.makeMeasureSpec(mAnimationDiameter, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(mAnimationDiameter, MeasureSpec.EXACTLY));
     }
 }
