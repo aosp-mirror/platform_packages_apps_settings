@@ -131,8 +131,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="2080511174185036562">"Дахиж үл асуух"</string>
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Мессежинд хандах хүсэлт"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"%1$s таны мессежүүдэд хандалт хийх хүсэлтэй байна. %2$s-д хандалт хийхийг зөвшөөрөх үү?"</string>
-    <string name="bluetooth_sap_request" msgid="473439406287008397">"СИМ хандалтын хүсэлт"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> нь таны СИМ картанд хандах хүсэлтэй байна. СИМ картанд хандалтыг нээж өгснөөр холболтын хугацааны туршид төхөөрөмжийн дата холболтыг идэвхгүй болгоно. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>-д хандалтыг нээх"</string>
+    <string name="bluetooth_sap_request" msgid="473439406287008397">"SIM хандалтын хүсэлт"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> нь таны SIM картанд хандах хүсэлтэй байна. SIM картанд хандалтыг нээж өгснөөр холболтын хугацааны туршид төхөөрөмжийн дата холболтыг идэвхгүй болгоно. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>-д хандалтыг нээх"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Бусад төхөөрөмжид “<xliff:g id="DEVICE_NAME">^1</xliff:g>”-р харагдана"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Бусад төхөөрөмжид холбогдохын тулд Bluetooth-г асаана уу."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Таны төхөөрөмж"</string>
@@ -403,10 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Хурууны хээгээр түгжээ тайлах"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Хурууныхаа хээг ашиглах"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (1467469714658873533) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_bottom_message (6527850754691662946) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Утасныхаа түгжээг тайлах, худалдан авалтыг зөвшөөрөх эсвэл аппуудад нэвтрэхийн тулд ердөө хурууны хээ мэдрэгчид хүрэхэд болно. Хурууных нь хээг нэмэх хүнээ болгоомжтой сонгоно уу. Нэмсэн ганц хээ эдгээр зүйлийн алийг нь ч хийх боломжтой."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Таны хурууны хээ хүчтэй хээ эсвэл ПИН-ээс хамгаалалт сул байж болзошгүй."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Утасныхаа түгжээг тайлах, худалдан авалт зөвшөөрөхийн тулд хурууны хээгээ ашиглана уу.\n\nСанамж: Та хурууны хээгээр энэ төхөөрөмжийн түгжээг тайлах боломжгүй. Дэлгэрэнгүй мэдээлэл авахын тулд байгууллагынхаа админтай холбогдоно уу."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Утасныхаа түгжээг тайлах, худалдан авалт зөвшөөрөхөд хурууны хээгээ ашиглана уу.\n\nСанамж: Таны хурууны хээ нь хүчтэй зурган түгжээ эсвэл PIN-с хамгаалалт муутай байж болзошгүй."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Цуцлах"</string>
@@ -1335,13 +1333,13 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>-г ашиглах"</string>
     <string name="sim_preferred_title" msgid="7182406911552216373">"Өөрийн сонгосон SIM картаа шинэчлэх үү?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"Таны төхөөрөмжид зөвхөн <xliff:g id="NEW_SIM">%1$s</xliff:g> SIM байна. Та мобайл дата ашиглах, дуудлага хийх, SMS мессежийн үйлчилгээ авахын тулд энэ SIM-г ашиглах уу?"</string>
-    <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"СИМ ПИН код буруу, та төхөөрөмжийн түгжээх тайлахын тулд өөрийн оператор компанитай холбоо барина уу."</string>
+    <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM ПИН код буруу, та төхөөрөмжийн түгжээх тайлахын тулд өөрийн оператор компанитай холбоо барина уу."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="other">СИМ-ны ПИН код буруу байна. Та <xliff:g id="NUMBER_1">%d</xliff:g> удаа оролдлого хийх боломжтой байна.</item>
-      <item quantity="one">СИМ-ны ПИН код буруу байна. Танд мобайл оператортойгоо холбогдохгүйгээр төхөөрөмжийн түгжээг тайлахад <xliff:g id="NUMBER_0">%d</xliff:g> оролдлого хийх боломж үлдсэн байна.</item>
+      <item quantity="other">SIM-ны ПИН код буруу байна. Та <xliff:g id="NUMBER_1">%d</xliff:g> удаа оролдлого хийх боломжтой байна.</item>
+      <item quantity="one">SIM-ны ПИН код буруу байна. Танд мобайл оператортойгоо холбогдохгүйгээр төхөөрөмжийн түгжээг тайлахад <xliff:g id="NUMBER_0">%d</xliff:g> оролдлого хийх боломж үлдсэн байна.</item>
     </plurals>
-    <string name="wrong_pin_code_one" msgid="6924852214263071441">"СИМ-ийн ПИН код буруу байна. Танд 1 оролдлого үлдсэн бөгөөд дараа нь төхөөрөжийнхөө түгжээг тайлахын тулд оператор компанитайгаа холбогдох шаардлагатай болно."</string>
-    <string name="pin_failed" msgid="3726505565797352255">"СИМ ПИН ажиллуулах амжилтгүй боллоо!"</string>
+    <string name="wrong_pin_code_one" msgid="6924852214263071441">"SIM-ийн ПИН код буруу байна. Танд 1 оролдлого үлдсэн бөгөөд дараа нь төхөөрөжийнхөө түгжээг тайлахын тулд оператор компанитайгаа холбогдох шаардлагатай болно."</string>
+    <string name="pin_failed" msgid="3726505565797352255">"SIM ПИН ажиллуулах амжилтгүй боллоо!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Системийн шинэчлэлтүүд"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Андройд хувилбар"</string>
@@ -1611,17 +1609,17 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, мобайл &amp; Bluetooth-г шинэчлэх"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Энэ нь дараах бүх сүлжээний тохиргоог шинэчилнэ: \n\n"<li>"Wi‑Fi"</li>\n<li>"мобайл дата"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Устгах"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Татаж авсан СИМ-үүдийг устгах"</string>
+    <string name="reset_esim_title" msgid="6152167073280852849">"Татаж авсан SIM-үүдийг устгах"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Энэ нь мобайл үйлчилгээний ямар ч багцыг цуцлахгүй. Орлуулах SIM татахын тулд оператор компанитайгаа холбогдоно уу."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Дахин тохируулах"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Сүлжээний бүх тохиргоог шинэчлэх үү? Та энэ үйлдлийг буцаах боломжгүй."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Сүлжээний бүх тохиргоог шинэчилж, татсан СИМ-үүдийг устгах уу? Та энэ үйлдлийг буцаах боломжгүй."</string>
+    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Сүлжээний бүх тохиргоог шинэчилж, татсан SIM-үүдийг устгах уу? Та энэ үйлдлийг буцаах боломжгүй."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Дахин тохируулах"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Дахин тохируулах уу?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Энэ хэрэглэгчид сүлжээний тохиргоо хийх боломжгүй байна"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Сүлжээний тохиргоог дахин тохируулсан байна"</string>
-    <string name="reset_esim_error_title" msgid="4670073610967959597">"СИМ-үүдийг устгаж чадсангүй"</string>
-    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Татаж авсан СИМ-үүдийг алдааны улмаас устгах боломжгүй байна.\n\nТөхөөрөмжөө дахин эхлүүлээд дахин оролдоно уу."</string>
+    <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM-үүдийг устгаж чадсангүй"</string>
+    <string name="reset_esim_error_msg" msgid="4441504470684307370">"Татаж авсан SIM-үүдийг алдааны улмаас устгах боломжгүй байна.\n\nТөхөөрөмжөө дахин эхлүүлээд дахин оролдоно уу."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Бүх өгөгдлийг устгах (үйлдвэрийн тохиргоонд шинэчлэх)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Бүх өгөгдлийг устгах (үйлдвэрийн тохиргоонд шинэчлэх)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Энэ нь таны таблетын "<b>"дотоод сангийн"</b>" бүх өгөгдлийг устгах бөгөөд үүнд:\n\n"<li>"Таны Google Бүртгэл"</li>\n<li>"Систем, аппын өгөгдөл болон тохиргоо"</li>\n<li>"Татсан аппууд"</li>" багтана"</string>
@@ -1640,7 +1638,7 @@
     <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Бүх өгөгдлийг устгах"</string>
     <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Бүх өгөгдлийг устгах"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Таны бүх хувийн мэдээлэл болон татсан аппыг устгана. Та энэ үйлдлийг болих боломжгүй."</string>
-    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Таны татаж авсан аппууд болон СИМ-үүд зэрэг бүх хувийн мэдээллийг устгана. Та энэ үйлдлийг болих боломжгүй."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Таны татаж авсан аппууд болон SIM-үүд зэрэг бүх хувийн мэдээллийг устгана. Та энэ үйлдлийг болих боломжгүй."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Бүх өгөгдлийг устгах уу?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"Энэ хэрэглэгчийн хувьд үйлдвэрийн тохиргоонд шинэчлэх боломжгүй"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"Устгаж байна"</string>
@@ -2137,6 +2135,9 @@
     <string name="display_category_title" msgid="6638191682294461408">"Дэлгэц"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Текст болон дэлгэц"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Харилцан үйлдлийн хяналт"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Товшилтын тусламж"</string>
+    <!-- no translation found for accessibility_system_controls_title (6403287349518987624) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Татсан аппууд"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Туршилтын"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Онцлогийн дарцаг"</string>
@@ -3176,8 +3177,8 @@
     <string name="wizard_next" msgid="3884832431439072471">"Дараагийн"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Дуусгах"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
-    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"СИМ карт"</string>
-    <string name="sim_settings_title" msgid="8392862852842113531">"СИМ карт"</string>
+    <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM карт"</string>
+    <string name="sim_settings_title" msgid="8392862852842113531">"SIM карт"</string>
     <string name="sim_settings_summary" msgid="5777472623476930332">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7726897488921853655">"SIM карт өөрчлөгдсөн"</string>
     <string name="sim_cards_changed_message_summary" msgid="7338082681445213621">"Үйл ажиллагааг тохируулахын тулд дарна уу"</string>
@@ -3650,16 +3651,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Хэрэв та <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>-н мэдэгдлийн хандалтыг унтраавал Бүү саад бол хандалт мөн адил унтрах болно."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Унтраах"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Цуцлах"</string>
-    <!-- no translation found for notification_listener_type_title (2791552789364336733) -->
-    <skip />
-    <!-- no translation found for notif_type_ongoing (2295338067608686711) -->
-    <skip />
-    <!-- no translation found for notif_type_conversation (3014259738224129504) -->
-    <skip />
-    <!-- no translation found for notif_type_alerting (2300039323822104165) -->
-    <skip />
-    <!-- no translation found for notif_type_silent (2514763073653979199) -->
-    <skip />
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Зөвшөөрөгдсөн мэдэгдлийн төрөл"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Үргэлжилж буй чухал мэдэгдэл"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Харилцан ярианы мэдэгдэл"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Сэрэмжлүүлэх мэдэгдэл"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Чимээгүй мэдэгдэл"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR туслагч үйлчилгээ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Суулгасан апп-с VR туслагч үйлчилгээгээр ажиллах хүсэлт гаргаагүй байна."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR үйлчилгээг <xliff:g id="SERVICE">%1$s</xliff:g>-д хандахыг зөвшөөрөх үү?"</string>
@@ -3911,8 +3907,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Бэхэлснийг болиулахаасаа өмнө PIN асуух"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Тогтоосныг суллахаас өмнө нууц үг асуух"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Unpinning хийх үед төхөөрөмжийг түгжинэ"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"СИМ-г устгахыг баталгаажуулна уу"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Татсан СИМ-г устгахын өмнө та өөрийгөө мөн болохыг баталгаажуулна уу"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM-г устгахыг баталгаажуулна уу"</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Татсан SIM-г устгахын өмнө та өөрийгөө мөн болохыг баталгаажуулна уу"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Энэ ажлын профайлыг удирдагч нь:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>-аар удирдана"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Туршилтын)"</string>
@@ -4486,8 +4482,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Аппуудыг сэлгэхийн тулд Нүүр хуудасны товчлуур дээр дээш шударна уу. Бүх аппыг харахын тулд дахин дээш шударна уу. Буцахын тулд буцах товчлуурыг товшино уу."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Шинэ нүүр хуудасны товчлуурыг оролдож үзэх"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Шинэ зангаа асааж аппуудыг сэлгэх"</string>
-    <!-- no translation found for emergency_settings_preference_title (6183455153241187148) -->
-    <skip />
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Аюулгүй байдал &amp; яаралтай тусламж"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Зангааны навигац"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Нүүр хуудас руу очихын тулд дэлгэцийн доороос дээш шударна уу. Аппуудыг сэлгэхийн тулд доороос дээш шударч, удаан дараад суллана уу. Буцахын тулд зүүн эсвэл баруун өнцгөөс шударна уу."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-товчлуурт-навигац"</string>
@@ -4748,9 +4743,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Чичиргэх"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Дууг хаах"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Юу ч бүү хий"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Асаалттай (чичрэх)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Асаалттай (дууг хаах)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Унтраалттай"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Чичиргэх"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Дууг хаах"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Сүлжээний мэдээлэл"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Таны төхөөрөмжийн нэр таны утсан дээрх аппуудад харагдана. Үүнийг мөн таныг Bluetooth төхөөрөмжүүд болон Wi-Fi сүлжээнд холбогдох эсвэл Wi-Fi сүлжээний цэг тохируулах үед бусад хүн харж болзошгүй."</string>
     <string name="devices_title" msgid="649715719278562515">"Төхөөрөмжүүд"</string>
@@ -4765,11 +4759,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Сүлжээ олдсонгүй. Дахин оролдоно уу."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(хориглосон)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM карт алга"</string>
-    <string name="sim_card" msgid="6381158752066377709">"СИМ"</string>
-    <string name="wifi_no_sim_card" msgid="7144290066491585672">"СИМ алга"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM алга"</string>
     <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Байхгүй"</string>
-    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Холбогдоход СИМ шаардлагатай"</string>
-    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Холбогдоход <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>-н СИМ шаардлагатай"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Холбогдоход SIM шаардлагатай"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Холбогдоход <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>-н SIM шаардлагатай"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Давуу эрхтэй сүлжээний горим: WCDMA давуу эрхтэй"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Давуу эрхтэй сүлжээний горим: зөвхөн GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Давуу эрхтэй сүлжээний горим: зөвхөн WCDMA"</string>
@@ -4823,14 +4817,14 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Мобайл дата"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Мобайл сүлжээг ашиглан датад холбогдох"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Утас энэ оператор компанийг хүрээнд байх үед автоматаар сэлгэнэ"</string>
-    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"СИМ карт боломжгүй"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"SIM карт боломжгүй"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Дуудлагын сонголт"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS-н сонголт"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Тухай бүрд асуух"</string>
     <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Сүлжээ нэмэх"</string>
     <plurals name="mobile_network_summary_count" formatted="false" msgid="5173633860800230925">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> СИМ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> СИМ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> SIM</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> SIM</item>
     </plurals>
     <string name="default_for_calls" msgid="2788950217176988034">"Дуудлагын өгөгдмөл"</string>
     <string name="default_for_sms" msgid="1316988329407434771">"SMS-н өгөгдмөл"</string>
@@ -4842,24 +4836,24 @@
     <string name="mobile_network_in_range" msgid="3528320750936028369">"Хүрээнд байгаа"</string>
     <string name="mobile_network_not_in_range" msgid="5680896182395366584">"Хүрээнд байхгүй"</string>
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Бусад мобайл үйлчилгээг нэмэх"</string>
-    <string name="mobile_network_active_sim" msgid="6397581267971410039">"Идэвхтэй / СИМ"</string>
-    <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Идэвхгүй / СИМ"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Идэвхтэй / Татаж авсан СИМ"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Идэвхгүй / Татаж авсан СИМ"</string>
-    <string name="mobile_network_sim_name" msgid="3187192894150386537">"СИМ-н нэр болон өнгө"</string>
+    <string name="mobile_network_active_sim" msgid="6397581267971410039">"Идэвхтэй / SIM"</string>
+    <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Идэвхгүй / SIM"</string>
+    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Идэвхтэй / Татаж авсан SIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Идэвхгүй / Татаж авсан SIM"</string>
+    <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM-н нэр болон өнгө"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Нэр"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Өнгө (тохирох аппуудын ашигладаг)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Хадгалах"</string>
-    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"СИМ ашиглах"</string>
+    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"SIM ашиглах"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Унтраах"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Энэ SIM-г идэвхгүй болгохын тулд SIM картыг салгана уу"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g>-г идэвхжүүлэхийн тулд товшино уу"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"<xliff:g id="CARRIER">%1$s</xliff:g> руу сэлгэх үү?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Нэг удаад зөвхөн татаж авсан нэг СИМ-г идэвхжүүлэх боломжтой.\n\n<xliff:g id="CARRIER1">%1$s</xliff:g> руу сэлгэснээр таны <xliff:g id="CARRIER2">%2$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
+    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Нэг удаад зөвхөн татаж авсан нэг SIM-г идэвхжүүлэх боломжтой.\n\n<xliff:g id="CARRIER1">%1$s</xliff:g> руу сэлгэснээр таны <xliff:g id="CARRIER2">%2$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> руу сэлгэх"</string>
-    <string name="mobile_network_erase_sim" msgid="4629071168032714930">"СИМ-г устгах"</string>
-    <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"СИМ-г устгаж чадсангүй"</string>
-    <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"Энэ СИМ-г алдааны улмаас устгаж чадсангүй.\n\nТөхөөрөмжөө дахин эхлүүлээд, дахин оролдоно уу."</string>
+    <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM-г устгах"</string>
+    <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM-г устгаж чадсангүй"</string>
+    <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"Энэ SIM-г алдааны улмаас устгаж чадсангүй.\n\nТөхөөрөмжөө дахин эхлүүлээд, дахин оролдоно уу."</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Давуу эрхтэй сүлжээний төрөл"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Сүлжээний ажиллах горимыг өөрчлөх"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Давуу эрхтэй сүлжээний төрөл"</string>
@@ -4885,12 +4879,12 @@
     <string name="see_more" msgid="7499355691042812723">"Дэлгэрэнгүй үзэх"</string>
     <string name="see_less" msgid="2642392725363552793">"Цөөнийг харах"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-г асаах уу?"</string>
-    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"СИМ-г асаах уу?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM-г асаах уу?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> руу сэлгэх үү?"</string>
-    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"СИМ картыг ашиглахад сэлгэх үү?"</string>
-    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Нэг удаад зөвхөн нэг СИМ-г идэвхжүүлэх боломжтой.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> руу сэлгэснээр таны <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Нэг удаад зөвхөн нэг татаж авсан СИМ-г идэвхжүүлэх боломжтой.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> руу сэлгэснээр таны <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
-    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Нэг удаад зөвхөн нэг СИМ идэвхжүүлэх боломжтой.\n\nСэлгэснээр таны <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM картыг ашиглахад сэлгэх үү?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Нэг удаад зөвхөн нэг SIM-г идэвхжүүлэх боломжтой.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> руу сэлгэснээр таны <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Нэг удаад зөвхөн нэг татаж авсан SIM-г идэвхжүүлэх боломжтой.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> руу сэлгэснээр таны <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Нэг удаад зөвхөн нэг SIM идэвхжүүлэх боломжтой.\n\nСэлгэснээр таны <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> руу сэлгэх"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Сүлжээнд холбогдож байна…"</string>
     <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> руу сэлгэж байна"</string>
@@ -4901,27 +4895,27 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM-г унтрааж байна<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Оператор компанийг идэвхгүй болгох боломжгүй"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Алдаа гарсан тул таны оператор компанийг идэвхгүй болгож чадсангүй."</string>
-    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"2 СИМ ашиглах уу?"</string>
-    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Энэ төхөөрөмжид 2 СИМ-г зэрэг идэвхжүүлэх боломжтой. Одоогоор 1 СИМ-г үргэлжлүүлэн ашиглах бол \"Үгүй, баярлалаа\"-г товшино уу."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"2 SIM ашиглах уу?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Энэ төхөөрөмжид 2 SIM-г зэрэг идэвхжүүлэх боломжтой. Одоогоор 1 SIM-г үргэлжлүүлэн ашиглах бол \"Үгүй, баярлалаа\"-г товшино уу."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Төхөөрөмжийг дахин эхлүүлэх үү?"</string>
-    <string name="sim_action_restart_text" msgid="8019300474703571013">"Эхлүүлэхийн тулд төхөөрөмжөө дахин эхлүүлнэ үү. Дараа нь та өөр СИМ нэмэх боломжтой."</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Эхлүүлэхийн тулд төхөөрөмжөө дахин эхлүүлнэ үү. Дараа нь та өөр SIM нэмэх боломжтой."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Үргэлжлүүлэх"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Дахин эхлүүлэх"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Үгүй, баярлалаа"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Сэлгэх"</string>
-    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"СИМ-г идэвхжүүлэх боломжгүй"</string>
-    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"СИМ-г салгаад, дахин хийнэ үү. Хэрэв асуудал үргэлжилсээр байвал төхөөрөмжөө дахин эхлүүлнэ үү."</string>
-    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"СИМ-г дахин асааж үзнэ үү. Хэрэв асуудал үргэлжилсээр байвал төхөөрөмжөө дахин эхлүүлнэ үү."</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM-г идэвхжүүлэх боломжгүй"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM-г салгаад, дахин хийнэ үү. Хэрэв асуудал үргэлжилсээр байвал төхөөрөмжөө дахин эхлүүлнэ үү."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM-г дахин асааж үзнэ үү. Хэрэв асуудал үргэлжилсээр байвал төхөөрөмжөө дахин эхлүүлнэ үү."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Сүлжээг идэвхжүүлэх"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> идэвхтэй байна"</string>
-    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"СИМ-н тохиргоог шинэчлэхийн тулд товшино уу"</string>
-    <string name="sim_card_label" msgid="5632157635124050923">"СИМ карт"</string>
-    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Энэ татаж авсан СИМ-г устгах уу?"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Энэ СИМ-г устгаснаар <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-н үйлчилгээг энэ төхөөрөмжөөс хасна.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM-н тохиргоог шинэчлэхийн тулд товшино уу"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM карт"</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Энэ татаж авсан SIM-г устгах уу?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Энэ SIM-г устгаснаар <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-н үйлчилгээг энэ төхөөрөмжөөс хасна.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Устгах"</string>
-    <string name="erasing_sim" msgid="7877703231075699139">"СИМ-г устгаж байна…"</string>
-    <string name="erase_sim_fail_title" msgid="2024446702985862427">"СИМ-г устгаж чадсангүй"</string>
-    <string name="erase_sim_fail_text" msgid="7870804401227483131">"Энэ СИМ-г алдааны улмаас устгаж чадсангүй.\n\nТөхөөрөмжөө дахин эхлүүлээд, дахин оролдоно уу."</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"SIM-г устгаж байна…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"SIM-г устгаж чадсангүй"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"Энэ SIM-г алдааны улмаас устгаж чадсангүй.\n\nТөхөөрөмжөө дахин эхлүүлээд, дахин оролдоно уу."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Төхөөрөмжид холбох"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> апп таны төхөөрөмжид холбогдохын тулд түр зуурын Wi-Fi сүлжээ ашиглах хүсэлтэй байна"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Төхөөрөмж олдсонгүй. Төхөөрөмжүүдийг асаалттай бөгөөд холбогдох боломжтой эсэхийг нь шалгана уу."</string>
@@ -5040,9 +5034,9 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Дамжуулалтыг зогсоох"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE-г унтраах уу?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Энэ нь мөн таны 5G холболтыг унтраана.\nАудио дуудлагын үеэр та интернэт ашиглах боломжгүй бөгөөд зарим апп ажиллахгүй байж болзошгүй."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Энэ утсанд 2 СИМ ашиглах үед сүлжээг 4G-р хязгаарлана. "<annotation id="url">"Нэмэлт мэдээлэл авах"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Энэ таблетад 2 СИМ ашиглах үед сүлжээг 4G-р хязгаарлана. "<annotation id="url">"Нэмэлт мэдээлэл авах"</annotation></string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Энэ төхөөрөмжид 2 СИМ ашиглах үед сүлжээг 4G-р хязгаарлана. "<annotation id="url">"Нэмэлт мэдээлэл авах"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Энэ утсанд 2 SIM ашиглах үед сүлжээг 4G-р хязгаарлана. "<annotation id="url">"Нэмэлт мэдээлэл авах"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Энэ таблетад 2 SIM ашиглах үед сүлжээг 4G-р хязгаарлана. "<annotation id="url">"Нэмэлт мэдээлэл авах"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Энэ төхөөрөмжид 2 SIM ашиглах үед сүлжээг 4G-р хязгаарлана. "<annotation id="url">"Нэмэлт мэдээлэл авах"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Завсрын санах ойд хадгалсан аппын ажиллагааг түр хаах"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Тохиргооны дэлгэцэд давхарлахыг зөвшөөрөх"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Бусад аппын дээр үзүүлэх боломжтой аппуудыг Тохиргооны дэлгэцийг давхарлахыг зөвшөөрөх"</string>
@@ -5059,8 +5053,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Унтраалттай"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Интернэт"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Нислэгийн аюулгүй сүлжээ"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Нислэгийн аюулгүй сүлжээг хайж олж, холбогдох"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"нислэг, нислэг аюулгүй"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Дуудлага, SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi дуудлага"</string>

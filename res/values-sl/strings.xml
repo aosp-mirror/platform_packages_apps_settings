@@ -411,10 +411,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Odklepanje s prstnim odtisom"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Uporaba prstnega odtisa"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (1467469714658873533) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_bottom_message (6527850754691662946) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Dotaknite se tipala prstnih odtisov, če želite odkleniti telefon, odobriti nakupe ali se prijaviti v aplikacije. Pazite, čigave prstne odtise boste dodali. Ta dejanja bo mogoče izvesti že z enim dodanim prstnim odtisom."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"S prstnim odtisom odklenite telefon ali odobrite nakupe.\n\nOpomba: prstnega odtisa ne morete uporabiti za odklepanje te naprave. Za več informacij se obrnite na skrbnika v organizaciji."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"S prstnim odtisom odklenite telefon ali odobrite nakupe.\n\nOpomba: Prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Prekliči"</string>
@@ -2185,6 +2183,9 @@
     <string name="display_category_title" msgid="6638191682294461408">"Zaslon"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Besedilo in prikaz"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Kontrolniki za interakcije"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Pomoč za dotike"</string>
+    <!-- no translation found for accessibility_system_controls_title (6403287349518987624) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Prenesene aplikacije"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Poskusno"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Zastavice za funkcije"</string>
@@ -3746,16 +3747,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Če za aplikacijo <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> izklopite dostop do obvestil, bo dostop do načina »ne moti« morda tudi izklopljen."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Izklop"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Prekliči"</string>
-    <!-- no translation found for notification_listener_type_title (2791552789364336733) -->
-    <skip />
-    <!-- no translation found for notif_type_ongoing (2295338067608686711) -->
-    <skip />
-    <!-- no translation found for notif_type_conversation (3014259738224129504) -->
-    <skip />
-    <!-- no translation found for notif_type_alerting (2300039323822104165) -->
-    <skip />
-    <!-- no translation found for notif_type_silent (2514763073653979199) -->
-    <skip />
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Dovoljene vrste obvestil"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Pomembna sprotna obvestila"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Obvestila za pogovor"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Obvestila z opozorilom"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Tiha obvestila"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Storitve za pomoč za VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nobena nameščena aplikacija ni zahtevala izvajanja kot storitev za pomoč za VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Dovolite storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dostop za storitev za VR?"</string>
@@ -4632,8 +4628,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Za preklop med aplikacijami povlecite navzgor po gumbu za začetni zaslon. Za ogled vseh aplikacij znova povlecite navzgor. Za vrnitev se dotaknite gumba za nazaj."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Preskus novega gumba za začetni zaslon"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Vklop nove poteze za preklop aplikacij"</string>
-    <!-- no translation found for emergency_settings_preference_title (6183455153241187148) -->
-    <skip />
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Varnost in nujni primeri"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Krmarjenje s potezami"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Za vrnitev na začetni zaslon povlecite z dna zaslona navzgor. Za preklop med aplikacijami povlecite z dna zaslona navzgor, pridržite in spustite. Za vrnitev povlecite z levega ali desnega roba."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Krmarjenje s tremi gumbi"</string>
@@ -4908,9 +4903,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibriranje"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Izklop zvoka"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Ne naredi ničesar"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Vklopljeno (vibriranje)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Vklopljeno (utišano)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Izklopljeno"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibriranje"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Izklop zvoka"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"O omrežju"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Ime naprave je vidno aplikacijam v telefonu. Ko vzpostavite povezavo z napravami Bluetooth ali omrežjem Wi-Fi ali nastavite dostopno točko Wi-Fi, ga bodo morda videle tudi druge osebe."</string>
     <string name="devices_title" msgid="649715719278562515">"Naprave"</string>
@@ -5225,8 +5219,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Izklopljeno"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Kartice SIM"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Omrežja, varna za uporabo v letalu"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Iskanje omrežij, varnih za uporabo v letalu, in povezovanje z njimi"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"letalo, varno za uporabo v letalu"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Klici in sporočila SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Klicanje prek Wi‑Fi-ja"</string>
