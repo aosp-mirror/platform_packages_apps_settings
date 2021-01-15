@@ -410,7 +410,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             String iconPackage, Icon icon) {
         Drawable iconDrawable = icon.loadDrawable(preference.getContext());
         if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
-            iconDrawable = new AdaptiveIcon(mContext, iconDrawable);
+            iconDrawable = new AdaptiveIcon(mContext, iconDrawable,
+                    FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)
+                            && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)
+                            ? R.dimen.homepage_foreground_image_inset
+                            : R.dimen.dashboard_tile_foreground_image_inset);
             ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
         }
         preference.setIcon(iconDrawable);
