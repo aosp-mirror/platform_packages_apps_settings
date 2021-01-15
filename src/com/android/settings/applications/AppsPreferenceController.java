@@ -54,7 +54,7 @@ public class AppsPreferenceController extends BasePreferenceController {
     @VisibleForTesting
     static final String KEY_GENERAL_CATEGORY = "general_category";
     @VisibleForTesting
-    static final String KEY_ALL_APP_INFO = "all_app_info";
+    static final String KEY_ALL_APP_INFO = "all_app_infos";
     @VisibleForTesting
     static final String KEY_SEE_ALL = "see_all_apps";
 
