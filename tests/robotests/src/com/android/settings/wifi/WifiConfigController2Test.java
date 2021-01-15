@@ -431,11 +431,6 @@ public class WifiConfigController2Test {
         }
 
         @Override
-        boolean isSplitSystemUser() {
-            return false;
-        }
-
-        @Override
         KeyStore getKeyStore() {
             return mKeyStore;
         }

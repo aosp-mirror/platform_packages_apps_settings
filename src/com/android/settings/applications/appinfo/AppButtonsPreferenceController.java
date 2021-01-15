@@ -613,8 +613,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     /** Returns whether there is only one user on this device, not including the system-only user */
     private boolean isSingleUser() {
         final int userCount = mUserManager.getUserCount();
-        return userCount == 1
-                || (mUserManager.isSplitSystemUser() && userCount == 2);
+        return userCount == 1;
     }
 
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
