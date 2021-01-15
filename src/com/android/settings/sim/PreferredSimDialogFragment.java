@@ -30,6 +30,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 
 /**
  * Presents a dialog asking the user if they want to update all services to use a given "preferred"
@@ -86,7 +87,9 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
             return;
         }
         final String message =
-                getContext().getString(R.string.sim_preferred_message, info.getDisplayName());
+                getContext().getString(
+                        R.string.sim_preferred_message,
+                        SubscriptionUtil.getUniqueSubscriptionDisplayName(info, getContext()));
         dialog.setMessage(message);
     }
 

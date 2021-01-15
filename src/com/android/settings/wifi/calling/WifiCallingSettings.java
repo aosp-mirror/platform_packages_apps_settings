@@ -163,7 +163,8 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return String.valueOf(mSil.get(position).getDisplayName());
+            return String.valueOf(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    mSil.get(position), getContext()));
         }
 
         @Override
