@@ -560,8 +560,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "demo_mode"));
         controllers.add(new DefaultLaunchPreferenceController(context, "quick_settings_tiles"));
         controllers.add(new DefaultLaunchPreferenceController(context, "feature_flags_dashboard"));
-        controllers.add(
-                new DefaultLaunchPreferenceController(context, "default_usb_configuration"));
+        controllers.add(new DefaultUsbConfigurationPreferenceController(context));
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
