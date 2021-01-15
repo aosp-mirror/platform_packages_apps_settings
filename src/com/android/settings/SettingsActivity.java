@@ -306,9 +306,7 @@ public class SettingsActivity extends SettingsBaseActivity
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(!isInSetupWizard);
             actionBar.setHomeButtonEnabled(!isInSetupWizard);
-            // TODO(b/176882938): Enable title after material component updated
-            // If CollapsingToolbarLayout is applied, the old action bar won't show title.
-            actionBar.setDisplayShowTitleEnabled(mCollapsingToolbarLayout == null);
+            actionBar.setDisplayShowTitleEnabled(true);
         }
         mMainSwitch = findViewById(R.id.switch_bar);
         if (mMainSwitch != null) {
