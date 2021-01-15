@@ -18,8 +18,11 @@ package com.android.settings.applications;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.provider.SearchIndexableResource;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -27,6 +30,7 @@ import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /** Settings page for apps. */
@@ -65,6 +69,7 @@ public class AppDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        use(SpecialAppAccessPreferenceController.class).setSession(getSettingsLifecycle());
         mAppsPreferenceController = use(AppsPreferenceController.class);
         mAppsPreferenceController.setFragment(this /* fragment */);
     }
@@ -85,5 +90,26 @@ public class AppDashboardFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.apps);
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.apps;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    // TODO(b/174964405): This method should be removed when silky home launched.
+                    // Only allow this page can be searchable when silky home enabled.
+                    return FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME);
+                }
+            };
 }

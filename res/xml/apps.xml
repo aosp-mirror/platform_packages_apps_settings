@@ -22,7 +22,7 @@
     android:title="@string/apps_dashboard_title">
 
     <Preference
-        android:key="all_app_info"
+        android:key="all_app_infos"
         android:title="@string/applications_settings"
         android:summary="@string/summary_placeholder"
         android:order="-999"
@@ -55,7 +55,7 @@
         settings:searchable="false"/>
 
     <Preference
-        android:key="default_apps"
+        android:key="default_apps_v2"
         android:title="@string/app_default_dashboard_title"
         android:order="-996"
         settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
@@ -65,5 +65,12 @@
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="10"/>
+
+    <Preference
+        android:key="special_access_v2"
+        android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
+        android:title="@string/special_access"
+        android:order="20"
+        settings:controller="com.android.settings.applications.SpecialAppAccessPreferenceController"/>
 
 </PreferenceScreen>
