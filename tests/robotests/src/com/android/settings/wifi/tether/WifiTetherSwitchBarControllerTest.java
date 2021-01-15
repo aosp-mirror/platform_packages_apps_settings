@@ -34,7 +34,7 @@ import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiManager;
 import android.widget.Switch;
 
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +54,7 @@ public class WifiTetherSwitchBarControllerTest {
     private NetworkPolicyManager mNetworkPolicyManager;
 
     private Context mContext;
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
     private WifiTetherSwitchBarController mController;
 
     @Before
@@ -62,7 +62,7 @@ public class WifiTetherSwitchBarControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mSwitchBar = new SwitchBar(mContext);
+        mSwitchBar = new SettingsMainSwitchBar(mContext);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);

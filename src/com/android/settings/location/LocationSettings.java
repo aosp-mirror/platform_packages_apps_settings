@@ -28,7 +28,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -70,12 +70,11 @@ public class LocationSettings extends DashboardFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setSwitchBarText(R.string.location_settings_primary_switch_title,
-                R.string.location_settings_primary_switch_title);
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        switchBar.setTitle(getContext().getString(R.string.location_settings_primary_switch_title));
+        switchBar.show();
         mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
                 getSettingsLifecycle());
-        switchBar.show();
     }
 
     @Override

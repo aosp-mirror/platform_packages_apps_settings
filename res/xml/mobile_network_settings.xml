@@ -19,10 +19,8 @@
     android:key="mobile_network_pref_screen"
     settings:initialExpandedChildrenCount="8">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="use_sim_switch"
-        android:title="@string/summary_placeholder"
-        android:layout="@layout/styled_switch_bar"
         settings:controller="com.android.settings.network.telephony.MobileNetworkSwitchController"/>
 
     <PreferenceCategory
