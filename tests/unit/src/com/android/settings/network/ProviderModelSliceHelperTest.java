@@ -34,6 +34,7 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
@@ -116,7 +117,8 @@ public class ProviderModelSliceHelperTest {
         CharSequence title = ResourcesUtils.getResourcesString(mContext,
                 "non_carrier_network_unavailable");
 
-        GridRowBuilder testGridRow = mProviderModelSliceHelper.createMessageGridRow(messageResId);
+        GridRowBuilder testGridRow = mProviderModelSliceHelper.createMessageGridRow(messageResId,
+                Settings.ACTION_AIRPLANE_MODE_SETTINGS);
         List<CellBuilder> cellItem = testGridRow.getCells();
 
         assertThat(cellItem.get(0).getTitle()).isEqualTo(title);
