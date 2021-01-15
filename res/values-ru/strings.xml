@@ -411,10 +411,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Сканер отпечатков пальцев"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Сканер отпечатков пальцев"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (1467469714658873533) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_bottom_message (6527850754691662946) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Когда нужно разблокировать телефон, подтвердить покупку или войти в приложение, просто коснитесь сканера отпечатков пальцев. Обратите внимание, что эти возможности будут доступны всем пользователям, чьи отпечатки вы сохраните на устройстве."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Защита с помощью отпечатка пальца может быть менее надежна, чем графический ключ или PIN-код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Разблокируйте телефон и подтверждайте покупки, используя отпечатки пальцев.\n\nВнимание! Для разблокировки этого устройства сканер отпечатков использовать нельзя. За подробной информацией обратитесь к администратору."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Разблокируйте телефон и подтверждайте покупки, используя отпечатки пальцев.\n\nПомните, что защита с помощью отпечатков менее надежна, чем графический ключ или PIN-код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Отмена"</string>
@@ -2185,6 +2183,9 @@
     <string name="display_category_title" msgid="6638191682294461408">"Экран"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Текст и отображение"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Элементы управления"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Помощь с нажатиями"</string>
+    <!-- no translation found for accessibility_system_controls_title (6403287349518987624) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Скачанные приложения"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Экспериментальные функции"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Экспериментальные функции"</string>
@@ -3746,16 +3747,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Если вы отключите доступ к уведомлениям для приложения \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", также может быть отключен доступ к настройкам режима \"Не беспокоить\"."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Отключить"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Отмена"</string>
-    <!-- no translation found for notification_listener_type_title (2791552789364336733) -->
-    <skip />
-    <!-- no translation found for notif_type_ongoing (2295338067608686711) -->
-    <skip />
-    <!-- no translation found for notif_type_conversation (3014259738224129504) -->
-    <skip />
-    <!-- no translation found for notif_type_alerting (2300039323822104165) -->
-    <skip />
-    <!-- no translation found for notif_type_silent (2514763073653979199) -->
-    <skip />
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Разрешенные типы уведомлений"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Важные уведомления из приложений"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Уведомления о сообщениях"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Оповещения"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Беззвучные уведомления"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Вспомогательные VR-сервисы"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Установленные приложения не запрашивали доступ для работы в качестве вспомогательного VR-сервиса"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Разрешить VR-сервису доступ к сервису \"<xliff:g id="SERVICE">%1$s</xliff:g>\"?"</string>
@@ -4632,8 +4628,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Чтобы переключиться между приложениями, проведите вверх по кнопке главного экрана. Чтобы увидеть все приложения, снова проведите вверх. Для возврата к предыдущему экрану нажмите кнопку \"Назад\"."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Попробуйте новую кнопку главного экрана"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Использовать новый жест для перехода между приложениями"</string>
-    <!-- no translation found for emergency_settings_preference_title (6183455153241187148) -->
-    <skip />
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Безопасность и экстренные случаи"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навигация с помощью жестов"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Чтобы перейти на главный экран, проведите по экрану снизу вверх. Чтобы переключиться между приложениями, проведите по экрану снизу вверх, задержите палец в этой точке и отпустите. Чтобы вернуться назад, проведите по экрану влево или вправо."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигация с помощью трех кнопок"</string>
@@ -4908,9 +4903,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Вибрация"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Без звука"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Не менять настройки"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Включено (вибросигнал)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Включено (без звука)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Выключено"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Вибрация"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Отключение звука"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Сведения о сети"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"У приложений на телефоне есть доступ к названию устройства. Его могут видеть другие пользователи, когда вы подключаетесь к устройствам по Bluetooth или настраиваете точку доступа Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Устройства"</string>
@@ -5225,8 +5219,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Отключено"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Интернет"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-карты"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Сети, безопасные в самолете"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Найти и подключиться к сети, безопасной в самолете"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"самолет, безопасность для самолета"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Звонки и SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Звонки по Wi-Fi"</string>

@@ -403,10 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Barmaq izi ilə kiliddən çıxarın"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Barmaq izinizi istifadə edin"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (1467469714658873533) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_bottom_message (6527850754691662946) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Telefonunuzu kiliddən çıxarmaq, alışları təsdiqləmək və ya tətbiqlərə daxil olmaq üçün sadəcə barmaq izi sensoruna toxunun. Kimin barmaq izini əlavə etdiyinizə diqqət edin. Hətta əlavə edilmiş bir iz bunlardan hər hansı birini edə bilər."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Barmaq izi güclü model və ya PIN-dən daha az güvənli ola bilər."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Telefonu kiliddən çıxarmaq və ya satınalmaları təsdiq etmək üçün barmaq izindən istifadə edin.\n\nYadda saxlayın: Bu cihazı kiliddən çıxarmaq üçün barmaq izindən istifadə edə bilməzsiniz. Ətraflı məlumat üçün təşkilat admini ilə əlaqə saxlayın."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Telefonu kiliddən çıxarmaq və ya satınalmaları təsdiqləmək üçün barmaq izindən istifadə edin.\n\nYadda saxlayın: Barmaq izi güclü nümunə və ya PIN\'dən daha az təhlükəsiz ola bilər."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Ləğv edin"</string>
@@ -2137,6 +2135,9 @@
     <string name="display_category_title" msgid="6638191682294461408">"Ekran"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Mətn və displey"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Qarşılıqlı əlaqə nəzarəti"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Toxunma yardımı"</string>
+    <!-- no translation found for accessibility_system_controls_title (6403287349518987624) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Endirilmiş tətbiqlər"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Eksperimental funksiyalar"</string>
@@ -3650,16 +3651,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Bildiriş girişini <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> üçün deaktiv etsəniz, Narahat Etməyin girişi də deaktiv edilə bilər."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Söndür"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Ləğv edin"</string>
-    <!-- no translation found for notification_listener_type_title (2791552789364336733) -->
-    <skip />
-    <!-- no translation found for notif_type_ongoing (2295338067608686711) -->
-    <skip />
-    <!-- no translation found for notif_type_conversation (3014259738224129504) -->
-    <skip />
-    <!-- no translation found for notif_type_alerting (2300039323822104165) -->
-    <skip />
-    <!-- no translation found for notif_type_silent (2514763073653979199) -->
-    <skip />
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"İcazə verilən bildiriş növləri"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Vacib cari bildirişlər"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Söhbət bildirişləri"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Xəbərdarlıq bildirişləri"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Səssiz bildirişlər"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR köməkçi xidmətləri"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Heç bir tətbiq VR köməkçi xidmətləri kimi çalışma sorğusu göndərməyib."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR xidmətinə <xliff:g id="SERVICE">%1$s</xliff:g> üçün girişə icazə verilsin?"</string>
@@ -4486,8 +4482,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Tətbiqləri dəyişmək üçün \"Əsas səhifə\" düyməsi üzərində yuxarı sürüşdürün. Bütün tətbiqlərə baxmaq üçün yenidən yuxarı sürüşdürün. Geri qayıtmaq üçün \"Geri\" düyməsinə toxunun."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Yeni Əsas Səhifə düyməsini sınayın"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Tətbiqi dəyişmək üçün yeni işarəni aktiv edin"</string>
-    <!-- no translation found for emergency_settings_preference_title (6183455153241187148) -->
-    <skip />
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Təhlükəsizlik və fövqəladə hal"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Jest naviqasiyası"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Əsas səhifəyə keçmək üçün ekranın aşağısından yuxarı doğru sürüşdürün. Tətbiqləri dəyişmək üçün aşağıdan yuxarı sürüşdürüb saxlayın və buraxın. Geri qayıtmaq üçün sol, yaxud sağ küncə sürüşdürün."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3 düyməli naviqasiya"</string>
@@ -4748,9 +4743,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrasiya"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Susdurun"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Heç nə etməyin"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Aktiv (vibrasiya)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Aktiv (səssiz)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Deaktiv"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrasiya"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Susdurun"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Şəbəkə bilgisi"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Cihazın adı telefondakı tətbiqlərdə görünəcək. Bluetooth cihazlarına qoşulduqda və ya Wi-Fi hotspotu ayarladıqda digərləri də onu görə bilər."</string>
     <string name="devices_title" msgid="649715719278562515">"Cihazlar"</string>
@@ -5059,8 +5053,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Deaktiv"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"İnternet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-lər"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Güvənli təyyarə şəbəkələri"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Güvənli təyyarə şəbəkələrini tapın və qoşulun"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"təyyarə, güvənli təyyarə şəbəkəsi"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Zənglər və SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi Zəngi"</string>
