@@ -50,20 +50,17 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
-import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
 import com.android.settings.wifi.ConnectedWifiEntryPreference;
-import com.android.settings.wifi.LinkablePreference;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiConnectListener;
 import com.android.settings.wifi.WifiDialog2;
@@ -118,7 +115,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_wifi_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
-    private static final String PREF_KEY_STATUS_MESSAGE = "wifi_status_message";
     @VisibleForTesting
     static final String PREF_KEY_DATA_USAGE = "non_carrier_data_usage";
 
@@ -192,7 +188,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     Preference mSavedNetworksPreference;
     @VisibleForTesting
     DataUsagePreference mDataUsagePreference;
-    private LinkablePreference mStatusMessagePreference;
+    private ViewAirplaneModeNetworksLayoutPreferenceController
+            mViewAirplaneModeNetworksButtonPreference;
 
     /**
      * Mobile networks list for provider model
@@ -242,13 +239,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
         mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
-        mStatusMessagePreference = findPreference(PREF_KEY_STATUS_MESSAGE);
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
         mDataUsagePreference.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(),
                 0 /*subId*/,
                 null /*service*/);
         addNetworkMobileProviderController();
+        addViewAirplaneModeNetworksButtonController();
     }
 
     private void addNetworkMobileProviderController() {
@@ -258,6 +255,15 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
         mNetworkMobileProviderController.init(getSettingsLifecycle());
         mNetworkMobileProviderController.displayPreference(getPreferenceScreen());
+    }
+
+    private void addViewAirplaneModeNetworksButtonController() {
+        if (mViewAirplaneModeNetworksButtonPreference == null) {
+            mViewAirplaneModeNetworksButtonPreference =
+                    new ViewAirplaneModeNetworksLayoutPreferenceController(
+                            getContext(), getSettingsLifecycle());
+        }
+        mViewAirplaneModeNetworksButtonPreference.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -602,18 +608,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             case WifiManager.WIFI_STATE_ENABLING:
                 removeConnectedWifiEntryPreference();
                 removeWifiEntryPreference();
-                addMessagePreference(R.string.wifi_starting);
                 setProgressBarVisible(true);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLING:
                 removeConnectedWifiEntryPreference();
                 removeWifiEntryPreference();
-                addMessagePreference(R.string.wifi_stopping);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
-                setOffMessage();
+                removeConnectedWifiEntryPreference();
+                removeWifiEntryPreference();
                 setAdditionalSettingsSummaries();
                 setProgressBarVisible(false);
                 mClickedConnect = false;
@@ -683,7 +688,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
 
         boolean hasAvailableWifiEntries = false;
-        mStatusMessagePreference.setVisible(false);
         mWifiEntryPreferenceCategory.setVisible(true);
 
         final WifiEntry connectedEntry = mWifiPickerTracker.getConnectedWifiEntry();
@@ -859,33 +863,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 && Settings.Global.getInt(contentResolver,
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 0
                 && !powerManager.isPowerSaveMode();
-    }
-
-    private void setOffMessage() {
-        final CharSequence title = getText(R.string.wifi_empty_list_wifi_off);
-        // Don't use WifiManager.isScanAlwaysAvailable() to check the Wi-Fi scanning mode. Instead,
-        // read the system settings directly. Because when the device is in Airplane mode, even if
-        // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
-        // TODO(b/149421497): Fix this?
-        final boolean wifiScanningMode = mWifiManager.isScanAlwaysAvailable();
-        final CharSequence description = wifiScanningMode ? getText(R.string.wifi_scan_notify_text)
-                : getText(R.string.wifi_scan_notify_text_scanning_off);
-        final LinkifyUtils.OnClickListener clickListener =
-                () -> new SubSettingLauncher(getContext())
-                        .setDestination(ScanningSettings.class.getName())
-                        .setTitleRes(R.string.location_scanning_screen_title)
-                        .setSourceMetricsCategory(getMetricsCategory())
-                        .launch();
-        mStatusMessagePreference.setText(title, description, clickListener);
-        removeConnectedWifiEntryPreference();
-        removeWifiEntryPreference();
-        mStatusMessagePreference.setVisible(true);
-    }
-
-    private void addMessagePreference(int messageId) {
-        mStatusMessagePreference.setTitle(messageId);
-        mStatusMessagePreference.setVisible(true);
-
     }
 
     protected void setProgressBarVisible(boolean visible) {
