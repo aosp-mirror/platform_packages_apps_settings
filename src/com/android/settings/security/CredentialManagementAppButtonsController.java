@@ -17,6 +17,7 @@
 package com.android.settings.security;
 
 import android.app.AppOpsManager;
+import android.app.admin.DevicePolicyEventLogger;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -25,6 +26,7 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
+import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.Log;
 
 import androidx.preference.PreferenceScreen;
@@ -98,6 +100,9 @@ public class CredentialManagementAppButtonsController extends BasePreferenceCont
                 try {
                     IKeyChainService service = KeyChain.bind(mContext).getService();
                     service.removeCredentialManagementApp();
+                    DevicePolicyEventLogger
+                            .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REMOVED)
+                            .write();
                 } catch (InterruptedException | RemoteException e) {
                     Log.e(TAG, "Unable to remove the credential management app");
                 }

@@ -47,7 +47,7 @@ import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ServiceListing;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppPreference;
 
 import java.util.List;
 
