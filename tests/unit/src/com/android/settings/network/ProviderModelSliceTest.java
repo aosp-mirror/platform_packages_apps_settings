@@ -371,6 +371,7 @@ public class ProviderModelSliceTest {
 
     @Test
     public void onNotifyChange_intentPrimaryAction_shouldConnectCarrierNetwork() {
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
         Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
 
         mMockProviderModelSlice.onNotifyChange(intent);
