@@ -19,10 +19,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/content_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:transitionGroup="true">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:theme="@style/Theme.CollapsingToolbar.Settings">
@@ -38,21 +38,14 @@
             app:statusBarScrim="?android:attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleMarginStart="18dp"
-            app:toolbarId="@id/tool_bar">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/tool_bar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:contentInsetStart="68dp"/>
+            app:toolbarId="@id/action_bar">
 
             <Toolbar
                 android:id="@+id/action_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_collapseMode="pin"
-                android:theme="?android:attr/actionBarTheme"/>
+                android:layout_height="?attr/actionBarSize"
+                android:theme="?android:attr/actionBarTheme"
+                app:layout_collapseMode="pin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

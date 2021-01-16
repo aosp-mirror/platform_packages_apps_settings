@@ -23,6 +23,8 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -287,15 +289,15 @@ public class ProviderModelSliceTest {
         SliceAction mockSliceAction = getPrimarySliceAction();
         when(mMockHeader.getTitle()).thenReturn("mockHeader");
         when(mMockHeader.getPrimaryAction()).thenReturn(mockSliceAction);
-        when(mProviderModelSliceHelper.createHeader()).thenReturn(mMockHeader);
+        when(mProviderModelSliceHelper.createHeader(anyString())).thenReturn(mMockHeader);
 
         int resId = ResourcesUtils.getResourcesId(mContext, "string",
                 "non_carrier_network_unavailable");
-        when(mProviderModelSliceHelper.createMessageGridRow(resId)).thenReturn(
+        when(mProviderModelSliceHelper.createMessageGridRow(eq(resId), anyString())).thenReturn(
                 mMockGridRowBuilderNonCarrierNetworkUnavailable);
         resId = ResourcesUtils.getResourcesId(mContext, "string",
                 "all_network_unavailable");
-        when(mProviderModelSliceHelper.createMessageGridRow(resId)).thenReturn(
+        when(mProviderModelSliceHelper.createMessageGridRow(eq(resId), anyString())).thenReturn(
                 mMockGridRowBuilderAllNetworkUnavailable);
 
         when(mMockCarrierRowBuild.getTitle()).thenReturn("mockRow");
