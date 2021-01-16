@@ -29,23 +29,23 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.datausage.DataSaverBackend.Listener;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
 
 @SearchIndexable
 public class DataSaverSummary extends SettingsPreferenceFragment
-        implements OnSwitchChangeListener, Listener, Callback, Callbacks {
+        implements OnMainSwitchChangeListener, Listener, Callback, Callbacks {
 
     private static final String KEY_UNRESTRICTED_ACCESS = "unrestricted_access";
 
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
     private DataSaverBackend mDataSaverBackend;
     private Preference mUnrestrictedAccess;
     private ApplicationsState mApplicationsState;
@@ -72,9 +72,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
-        mSwitchBar.setSwitchBarText(
-                R.string.data_saver_switch_title,
-                R.string.data_saver_switch_title);
+        mSwitchBar.setTitle(getContext().getString(R.string.data_saver_switch_title));
         mSwitchBar.show();
         mSwitchBar.addOnSwitchChangeListener(this);
     }

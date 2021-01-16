@@ -67,8 +67,8 @@ import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.MainSwitchBarController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -223,11 +223,12 @@ public class UserSettings extends SettingsPreferenceFragment
         // Assume we are in a SettingsActivity. This is only safe because we currently use
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
-        mSwitchBarController = new MultiUserSwitchBarController(activity,
-                new SwitchBarController(switchBar), this /* listener */);
-        getSettingsLifecycle().addObserver(mSwitchBarController);
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
         switchBar.show();
+        mSwitchBarController = new MultiUserSwitchBarController(activity,
+                new MainSwitchBarController(switchBar), this /* listener */);
+        getSettingsLifecycle().addObserver(mSwitchBarController);
     }
 
     @Override

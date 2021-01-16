@@ -17,25 +17,27 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.widget.Switch;
 
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
-public class LocationSwitchBarController implements SwitchBar.OnSwitchChangeListener,
+/**
+ * The switch controller for the location.
+ */
+public class LocationSwitchBarController implements OnMainSwitchChangeListener,
         LocationEnabler.LocationModeChangeListener, LifecycleObserver, OnStart, OnStop {
 
-    private final SwitchBar mSwitchBar;
-    private final Switch mSwitch;
+    private final SettingsMainSwitchBar mSwitchBar;
     private final LocationEnabler mLocationEnabler;
     private boolean mValidListener;
 
-    public LocationSwitchBarController(Context context, SwitchBar switchBar,
+    public LocationSwitchBarController(Context context, SettingsMainSwitchBar switchBar,
             Lifecycle lifecycle) {
         mSwitchBar = switchBar;
-        mSwitch = mSwitchBar.getSwitch();
         mLocationEnabler = new LocationEnabler(context, this /* listener */, lifecycle);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -77,12 +79,12 @@ public class LocationSwitchBarController implements SwitchBar.OnSwitchChangeList
             mSwitchBar.setEnabled(!restricted);
         }
 
-        if (enabled != mSwitch.isChecked()) {
+        if (enabled != mSwitchBar.isChecked()) {
             // set listener to null so that that code below doesn't trigger onCheckedChanged()
             if (mValidListener) {
                 mSwitchBar.removeOnSwitchChangeListener(this);
             }
-            mSwitch.setChecked(enabled);
+            mSwitchBar.setChecked(enabled);
             if (mValidListener) {
                 mSwitchBar.addOnSwitchChangeListener(this);
             }

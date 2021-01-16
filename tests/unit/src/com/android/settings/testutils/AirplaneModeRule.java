@@ -16,9 +16,8 @@
 
 package com.android.settings.testutils;
 
+import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -32,45 +31,41 @@ public final class AirplaneModeRule extends ExternalResource {
     private static final String TAG = "AirplaneModeRule";
 
     private Context mContext;
+    private ContentResolver mContentResolver;
     private boolean mBackupValue;
     private boolean mShouldRestore;
 
     @Override
     protected void before() throws Throwable {
         mContext = ApplicationProvider.getApplicationContext();
+        mContentResolver = mContext.getContentResolver();
     }
 
     @Override
     protected void after() {
-        if (mShouldRestore) {
-            Log.d(TAG, "Restore Airplane Mode value:" + mBackupValue);
-            setAirplaneMode(mContext, mBackupValue);
+        if (!mShouldRestore) {
+            return;
         }
+        Log.d(TAG, "Restore Airplane Mode value:" + mBackupValue);
+        Settings.Global.putInt(mContentResolver, Settings.Global.AIRPLANE_MODE_ON,
+                mBackupValue ? 1 : 0);
     }
 
     public void setAirplaneMode(boolean enable) {
-        if (!mShouldRestore && isAirplaneModeOn() != enable) {
+        if (enable == isAirplaneModeOn()) {
+            return;
+        }
+        if (!mShouldRestore) {
             mShouldRestore = true;
-            mBackupValue = isAirplaneModeOn();
+            mBackupValue = !enable;
             Log.d(TAG, "Backup Airplane Mode value:" + mBackupValue);
         }
         Log.d(TAG, "Set Airplane Mode enable:" + enable);
-        setAirplaneMode(mContext, enable);
+        Settings.Global.putInt(mContentResolver, Settings.Global.AIRPLANE_MODE_ON, enable ? 1 : 0);
     }
 
     public boolean isAirplaneModeOn() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
-    }
-
-    private static void setAirplaneMode(Context context, boolean enable) {
-        // Change the system setting
-        Settings.Global.putInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON,
-                enable ? 1 : 0);
-
-        // Post the intent
-        final Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        intent.putExtra("state", enable);
-        context.sendBroadcastAsUser(intent, UserHandle.ALL);
+            Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
     }
 }

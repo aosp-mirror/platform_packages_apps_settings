@@ -3206,6 +3206,15 @@
         </activity>
 
         <activity
+            android:name=".Settings$AppDashboardActivity"
+            android:label="@string/apps_dashboard_title"
+            android:icon="@drawable/ic_homepage_apps"
+            android:exported="true">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.AppDashboardFragment"/>
+        </activity>
+
+        <activity
             android:name=".Settings$AccountDashboardActivity"
             android:label="@string/account_dashboard_title"
             android:exported="true"

@@ -29,6 +29,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -75,6 +77,9 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            return R.xml.configure_notification_settings_v2;
+        }
         return R.xml.configure_notification_settings;
     }
 
@@ -111,6 +116,11 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
             }
 
         });
+
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)) {
+            controllers.add(new EmergencyBroadcastPreferenceController(context,
+                    "app_and_notif_cell_broadcast_settings"));
+        }
         return controllers;
     }
 

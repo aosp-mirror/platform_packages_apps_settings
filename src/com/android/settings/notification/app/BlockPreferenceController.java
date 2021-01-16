@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.app;
 
-import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
@@ -29,11 +28,11 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class BlockPreferenceController extends NotificationPreferenceController
-        implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
+        implements PreferenceControllerMixin, OnMainSwitchChangeListener {
 
     private static final String KEY_BLOCK = "block";
     private NotificationSettings.DependentFieldListener mDependentFieldListener;
@@ -59,12 +58,10 @@ public class BlockPreferenceController extends NotificationPreferenceController
     }
 
     public void updateState(Preference preference) {
-        LayoutPreference pref = (LayoutPreference) preference;
-        pref.setSelectable(false);
-        SwitchBar bar = pref.findViewById(R.id.switch_bar);
+        SettingsMainSwitchPreference bar = (SettingsMainSwitchPreference) preference;
         if (bar != null) {
             String switchBarText = getSwitchBarText();
-            bar.setSwitchBarText(switchBarText, switchBarText);
+            bar.setTitle(switchBarText);
             bar.show();
             try {
                 bar.addOnSwitchChangeListener(this);
@@ -133,7 +130,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
     String getSwitchBarText() {
         if (mChannel != null) {
             return mContext.getString(R.string.notification_content_block_title);
-        } else  {
+        } else {
             CharSequence fieldContextName;
             if (mChannelGroup != null) {
                 fieldContextName = mChannelGroup.getName();

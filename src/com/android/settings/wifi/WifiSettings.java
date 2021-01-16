@@ -66,7 +66,7 @@ import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.MainSwitchBarController;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.HelpUtils;
@@ -222,9 +222,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                     .findViewById(R.id.progress_bar_animation);
             setProgressBarVisible(false);
         }
-        ((SettingsActivity) activity).getSwitchBar().setSwitchBarText(
-                R.string.wifi_settings_primary_switch_title,
-                R.string.wifi_settings_primary_switch_title);
+        ((SettingsActivity) activity).getSwitchBar().setTitle(
+                getContext().getString(R.string.wifi_settings_primary_switch_title));
     }
 
     @Override
@@ -382,7 +381,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     private WifiEnabler createWifiEnabler() {
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        return new WifiEnabler(activity, new SwitchBarController(activity.getSwitchBar()),
+        return new WifiEnabler(activity, new MainSwitchBarController(activity.getSwitchBar()),
                 mMetricsFeatureProvider);
     }
 
@@ -1050,7 +1049,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             Toast.makeText(getContext(), R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
                     .show();
         }
-    };
+    }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_settings) {

@@ -51,7 +51,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -176,7 +176,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         super.onViewCreated(view, savedInstanceState);
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.hide();
     }
 

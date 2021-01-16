@@ -25,7 +25,6 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -42,11 +41,14 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 
-import com.android.settings.R;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -72,9 +74,7 @@ public class BlockPreferenceControllerTest {
     private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     private BlockPreferenceController mController;
-    @Mock
-    private LayoutPreference mPreference;
-    private SwitchBar mSwitch;
+    private SettingsMainSwitchPreference mPreference;
 
     @Before
     public void setUp() {
@@ -83,15 +83,20 @@ public class BlockPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new BlockPreferenceController(mContext, mDependentFieldListener, mBackend));
-        mSwitch = new SwitchBar(mContext);
-        when(mPreference.findViewById(R.id.switch_bar)).thenReturn(mSwitch);
+        mController = spy(
+                new BlockPreferenceController(mContext, mDependentFieldListener, mBackend));
+        mPreference = new SettingsMainSwitchPreference(mContext);
+
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
+        final View view = inflater.inflate(mPreference.getLayoutResource(),
+                new LinearLayout(mContext), false);
+        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
+        mPreference.onBindViewHolder(holder);
     }
 
     @Test
     public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
-        mController.updateState(mock(LayoutPreference.class));
         mController.onSwitchChanged(null, false);
     }
 
@@ -174,7 +179,7 @@ public class BlockPreferenceControllerTest {
         appRow.systemApp = true;
         mController.onResume(appRow, null, null, null, null, null);
         mController.updateState(mPreference);
-        assertFalse(mSwitch.isEnabled());
+        assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
@@ -183,7 +188,7 @@ public class BlockPreferenceControllerTest {
         appRow.systemApp = true;
         mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null, null, null);
         mController.updateState(mPreference);
-        assertFalse(mSwitch.isEnabled());
+        assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
@@ -192,7 +197,7 @@ public class BlockPreferenceControllerTest {
         appRow.systemApp = true;
         mController.onResume(appRow, null, null, null, null, null);
         mController.updateState(mPreference);
-        assertFalse(mSwitch.isEnabled());
+        assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
@@ -203,7 +208,7 @@ public class BlockPreferenceControllerTest {
         channel.setBlockable(true);
         mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
-        assertTrue(mSwitch.isEnabled());
+        assertTrue(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
@@ -216,7 +221,7 @@ public class BlockPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertFalse(mSwitch.isEnabled());
+        assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
@@ -229,7 +234,7 @@ public class BlockPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertFalse(mSwitch.isEnabled());
+        assertFalse(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
@@ -241,7 +246,7 @@ public class BlockPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertTrue(mSwitch.isEnabled());
+        assertTrue(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
@@ -251,7 +256,7 @@ public class BlockPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertTrue(mSwitch.isEnabled());
+        assertTrue(mPreference.getSwitchBar().isEnabled());
     }
 
     @Test
@@ -261,15 +266,13 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, null, null, null, null, null);
         mController.updateState(mPreference);
 
-        assertNotNull(mPreference.findViewById(R.id.switch_bar));
-
-        assertFalse(mSwitch.isChecked());
+        assertFalse(mPreference.isChecked());
 
         appRow.banned = false;
         mController.onResume(appRow, null, null, null, null, null);
         mController.updateState(mPreference);
 
-        assertTrue(mSwitch.isChecked());
+        assertTrue(mPreference.isChecked());
     }
 
     @Test
@@ -280,21 +283,21 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, null, group, null, null, null);
         mController.updateState(mPreference);
 
-        assertFalse(mSwitch.isChecked());
+        assertFalse(mPreference.isChecked());
 
         appRow.banned = true;
         mController.onResume(appRow, null, group, null, null, null);
         when(group.isBlocked()).thenReturn(true);
         mController.updateState(mPreference);
 
-        assertFalse(mSwitch.isChecked());
+        assertFalse(mPreference.isChecked());
 
         appRow.banned = false;
         mController.onResume(appRow, null, group, null, null, null);
         when(group.isBlocked()).thenReturn(false);
         mController.updateState(mPreference);
 
-        assertTrue(mSwitch.isChecked());
+        assertTrue(mPreference.isChecked());
     }
 
     @Test
@@ -304,21 +307,21 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
-        assertFalse(mSwitch.isChecked());
+        assertFalse(mPreference.isChecked());
 
         appRow.banned = true;
         channel = new NotificationChannel("a", "a", IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
-        assertFalse(mSwitch.isChecked());
+        assertFalse(mPreference.isChecked());
 
         appRow.banned = false;
         channel = new NotificationChannel("a", "a", IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
-        assertTrue(mSwitch.isChecked());
+        assertTrue(mPreference.isChecked());
     }
 
     @Test

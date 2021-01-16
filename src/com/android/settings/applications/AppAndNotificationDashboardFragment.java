@@ -67,10 +67,6 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment
 
     @Override
     protected int getPreferenceScreenResId() {
-        // TODO(b/168166015): Remove this when the new Apps page ready.
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return R.xml.apps;
-        }
         return R.xml.app_and_notification;
     }
 
@@ -141,6 +137,15 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    // TODO(b/174964405): This method should be removed when silky home launched.
+                    // This page is going to deprecate, we should make this page unsearchable
+                    // when the silky home is enabled, otherwise search results will contain the
+                    // old data and launch this page even if the silky home is enabled.
+                    return !FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME);
                 }
             };
 }
