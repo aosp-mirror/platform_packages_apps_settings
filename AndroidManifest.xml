@@ -174,7 +174,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".SubSettings"/>
+        <activity android:name=".SubSettings"
+                  android:theme="@style/Theme.SubSettings" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
@@ -3202,6 +3203,15 @@
             android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$AppDashboardActivity"
+            android:label="@string/apps_dashboard_title"
+            android:icon="@drawable/ic_homepage_apps"
+            android:exported="true">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.AppDashboardFragment"/>
         </activity>
 
         <activity

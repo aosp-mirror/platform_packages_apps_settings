@@ -25,6 +25,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 
@@ -81,11 +82,13 @@ public class ProviderModelSlice extends WifiSlice {
         // Second section:  Add a carrier item.
         // Third section:  Add the Wi-Fi items which are not connected.
         // Fourth section:  If device has connection problem, this row show the message for user.
-
+        final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
         if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled()) {
             log("Airplane mode is enabled.");
-            // ToDo Next CL will add the Airplane mode Message.
-            return mHelper.createListBuilder(getUri()).build();
+            listBuilder.setHeader(mHelper.createHeader(Settings.ACTION_AIRPLANE_MODE_SETTINGS));
+            listBuilder.addGridRow(mHelper.createMessageGridRow(R.string.condition_airplane_title,
+                    Settings.ACTION_AIRPLANE_MODE_SETTINGS));
+            return listBuilder.build();
         }
 
         int maxListSize = 0;
@@ -101,9 +104,6 @@ public class ProviderModelSlice extends WifiSlice {
 
         final boolean hasCarrier = mHelper.hasCarrier();
         log("hasCarrier: " + hasCarrier);
-
-
-        final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
 
         // First section:  Add a Wi-Fi item which state is connected.
         final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
@@ -148,9 +148,12 @@ public class ProviderModelSlice extends WifiSlice {
 
             if (!hasCarrier) {
                 // If there is no item in ProviderModelItem, slice needs a header.
-                listBuilder.setHeader(mHelper.createHeader());
+                listBuilder.setHeader(mHelper.createHeader(
+                        NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS));
             }
-            listBuilder.addGridRow(mHelper.createMessageGridRow(resId));
+            listBuilder.addGridRow(
+                    mHelper.createMessageGridRow(resId,
+                            NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS));
         }
 
         return listBuilder.build();

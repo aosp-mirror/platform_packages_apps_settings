@@ -407,7 +407,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Откључајте отиском прста"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Користите отисак прста"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Само додирните сензор за отисак прста да бисте откључали телефон, овластили куповине или се пријавили на апликације Ово ће бити могуће помоћу свих отисака прстију које додате, па будите опрезни кога додајете.\n\nНапомена: Отисак прста може да буде мање безбедан од јаког шаблона или PIN-а."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Само додирните сензор за отисак прста да бисте откључали телефон, дали овлашћење за куповине или се пријавили у апликације. Водите рачуна о томе чије отиске прстију додајете. Чак и само један додати отисак може да обавља било које од ових радњи."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Отисак прста може да буде мање безбедан од јаког шаблона или PIN-а."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Откључавајте телефон или одобравајте куповине помоћу отиска прста.\n\nНапомена: Не можете да откључавате овај уређај помоћу отиска прста. Више информација затражите од администратора организације."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Откључавајте телефон или одобравајте куповине помоћу отиска прста.\n\nНапомена: Отисак прста може да буде мање безбедан од јаког шаблона или PIN-а."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Откажи"</string>
@@ -1954,7 +1955,7 @@
     <string name="show_running_services" msgid="8666008279959853318">"Прикажи покренуте услуге"</string>
     <string name="show_background_processes" msgid="5682856012453562151">"Прикажи кеширане процесе"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Апликација за хитне случајеве"</string>
-    <string name="reset_app_preferences" msgid="8861758340732716573">"Ресетуј подешавања апликације"</string>
+    <string name="reset_app_preferences" msgid="8861758340732716573">"Ресетуј подешавања апликација"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Желите да ресетујете подешавања апликације?"</string>
     <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Овим ћете ресетовати сва подешавања за:\n\n"<li>"Онемогућене апликације"</li>\n<li>"Обавештења о онемогућеним апликацијама"</li>\n<li>"Подразумеване апликације за радње"</li>\n<li>"Ограничења за позадинске податке за апликације"</li>\n<li>"Сва ограничења за дозволе"</li>\n\n"Нећете изгубити никакве податке апликације."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Ресетуј апликације"</string>
@@ -2156,9 +2157,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Читачи екрана"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Звук и текст на екрану"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Приказ"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Текст и приказ"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Контроле интеракције"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Помоћ у вези са додирима"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Системске контроле"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Преузете апликације"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Експериментално"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Ознаке функција"</string>
@@ -3696,6 +3698,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако искључите приступ обавештењима за корисника <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, искључићете и приступ режиму Не узнемиравај."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Искључи"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Откажи"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Дозвољени типови обавештења"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Важна активна обавештења"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Обавештења за конверзацију"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Звучна обавештења"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Нечујна обавештења"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Услуге помагача за виртуелну реалност"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниједна инсталирана апликација није захтевала да се покрене као услуга помагача за виртуелну реалност."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Желите ли да дозволите приступ услузи виртуелне реалности за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4493,8 +4500,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Повезан је са више уређаја"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Режим демонстрације за кориснички интерфејс система"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Тамна тема"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Привремено је онемогућено због уштеде батерије"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Привремено укључено због Уштеде батерије"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Подржане апликације ће такође прећи на тамну тему"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Важи"</string>
@@ -4548,6 +4554,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Да бисте прешли са једне апликације на другу, превуците нагоре на дугмету Почетак. Да бисте видели све апликације, поново превуците нагоре. Да бисте се вратили, додирните дугме Назад."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Испробајте ново дугме Почетак"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Укључите нови покрет да бисте прешли на другу апликацију"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Безбедност и хитни случајеви"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навигација помоћу покрета"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Да бисте отишли на почетни екран, превуците нагоре од дна екрана. Да бисте прешли са једне апликације на другу, превуците нагоре од дна екрана, задржите, па пустите. Да бисте се вратили назад, превуците од леве или десне ивице."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигација помоћу 3 дугмета"</string>
@@ -4815,9 +4822,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Вибрирај"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Искључи звук"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Не ради ништа"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Укључено (вибрација)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Укључено (звук је искључен)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Искључено"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Вибрирај"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Искључи звук"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Детаљи о мрежи"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Апликације на телефону могу да виде назив уређаја. И други људи могу да виде назив уређаја могу када се повежете са Bluetooth уређајима или WiFi мрежом или подесите WiFi хотспот."</string>
     <string name="devices_title" msgid="649715719278562515">"Уређаји"</string>
@@ -5129,8 +5135,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Искључено"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Интернет"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM картице"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Мреже које су безбедне по авион"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Пронађите мреже које су безбедне по авион и повежите се на њих"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"авион, безбедно по авион"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Позиви и SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Позивање преко WiFi-а"</string>
@@ -5147,6 +5155,8 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Повежите се са јавним мрежама"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"мрежна веза, интернет, бежично, подаци, wifi, wi-fi, wi fi, мобилни телефон, мобилни, мобилни оператер, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Прикажи мреже за режим рада у авиону"</string>
+    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
+    <skip />
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Искључите режим рада у авиону"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Повезано"</string>
@@ -5167,6 +5177,7 @@
     <string name="category_name_visibility" msgid="4485030512199246405">"Видљивост"</string>
     <string name="category_name_color" msgid="937514550918977151">"Боја"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Друго"</string>
-    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <string name="category_name_general" msgid="7737273712848115886">"Опште"</string>
+    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
     <skip />
 </resources>

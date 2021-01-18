@@ -115,6 +115,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
         }
 
         getProxySubscriptionManager().setLifecycle(getLifecycle());

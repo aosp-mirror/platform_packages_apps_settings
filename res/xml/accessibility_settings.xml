@@ -66,38 +66,17 @@
         android:title="@string/interaction_control_category_title">
 
         <Preference
-            android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
-            android:key="autoclick_preference"
+            android:fragment="com.android.settings.accessibility.TapAssistanceFragment"
+            android:key="tap_assistance_preference_screen"
             android:persistent="false"
-            android:title="@string/accessibility_autoclick_preference_title"
-            settings:controller="com.android.settings.accessibility.AutoclickPreferenceController"/>
-
-        <SwitchPreference
-            android:key="toggle_power_button_ends_call_preference"
-            android:persistent="false"
-            android:title="@string/accessibility_power_button_ends_call_prerefence_title"
-            settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
-
-        <SwitchPreference
-            android:key="toggle_lock_screen_rotation_preference"
-            android:persistent="false"
-            android:title="@string/accelerometer_title"
-            settings:controller="com.android.settings.accessibility.LockScreenRotationPreferenceController"/>
-
-        <ListPreference
-            android:entries="@array/long_press_timeout_selector_list_titles"
-            android:entryValues="@array/long_press_timeout_selector_values"
-            android:key="select_long_press_timeout_preference"
-            android:persistent="false"
-            android:title="@string/accessibility_long_press_timeout_preference_title"
-            settings:controller="com.android.settings.accessibility.SelectLongPressTimeoutPreferenceController"/>
+            android:title="@string/accessibility_tap_assistance_title"
+            settings:searchable="true"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.AccessibilityControlTimeoutPreferenceFragment"
-            android:key="accessibility_control_timeout_preference_fragment"
-            android:persistent="false"
-            android:title="@string/accessibility_setting_item_control_timeout_title"
-            settings:controller="com.android.settings.accessibility.AccessibilityTimeoutPreferenceController"/>
+            android:fragment="com.android.settings.accessibility.SystemControlsFragment"
+            android:key="system_controls_preference_screen"
+            android:title="@string/accessibility_system_controls_title"
+            settings:searchable="true"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.VibrationSettings"
@@ -105,14 +84,6 @@
             android:persistent="false"
             android:title="@string/accessibility_vibration_settings_title"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"/>
-
-        <Preference
-            android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
-            android:key="gesture_system_navigation_input_summary_accessibility"
-            android:persistent="false"
-            android:title="@string/system_navigation_title"
-            settings:searchable="false"
-            settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"/>
 
     </PreferenceCategory>
 

@@ -411,7 +411,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"פתיחה עם טביעת אצבע"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"שימוש בטביעת האצבע"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"נגיעה בחיישן טביעות האצבע תבטל את נעילת הטלפון, תאשר רכישות או תאפשר כניסה לאפליקציות. יש לשים לב, כל מי שאת טביעות האצבע שלו או שלה הוספת יוכל לבצע את הפעולות האלה.\n\nזהירות: ייתכן ששימוש בטביעת אצבע פחות בטוח מאבטחה באמצעות קו ביטול נעילה או קוד גישה חזקים."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"נגיעה בחיישן טביעות האצבע תבטל את נעילת הטלפון, תאשר רכישות או תאפשר כניסה לאפליקציות. יש לפעול בזהירות בהוספת טביעות אצבע. גם בעזרת טביעת אצבע אחת שמוסיפים אפשר לבצע את הפעולות האלה."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"שימוש בטביעת אצבע יכול להיות פחות מאובטח משימוש בקו ביטול נעילה או בקוד אימות."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"שימוש בטביעת אצבע כדי לבטל את הנעילה של הטלפון או לאשר רכישות.\n\nהערה: לא ניתן להשתמש בטביעת אצבע כדי לבטל את הנעילה של המכשיר הזה. לקבלת מידע נוסף, אפשר לפנות למנהל המערכת של הארגון."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"שימוש בטביעת אצבע כדי לבטל את הנעילה של הטלפון או לאשר רכישות.\n\nהערה: שימוש בטביעת אצבע יכול להיות פחות מאובטח משימוש בקו ביטול נעילה או בקוד גישה."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"ביטול"</string>
@@ -2180,9 +2181,11 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"קוראי מסך"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"הקראת טקסט שמופיע במסך"</string>
     <string name="display_category_title" msgid="6638191682294461408">"תצוגה"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"טקסט ותצוגה"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"פקדי אינטראקציה"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"סיוע בהקשה"</string>
+    <!-- no translation found for accessibility_system_controls_title (6403287349518987624) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"אפליקציות שהורדת"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ניסיוני"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"סימוני תכונות"</string>
@@ -3159,15 +3162,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"מחק משתמש"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"מחיקה"</string>
     <string name="user_guest" msgid="4545590092001460388">"אורח"</string>
-    <!-- no translation found for user_clear_guest_menu (4864362688187480452) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_menu (5064400453222497734) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_confirm_title (7526978959527761497) -->
-    <skip />
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"מחיקת נתוני אורח"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"הפסקת הגלישה כאורח"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"להפסיק את הגלישה כאורח?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"כל האפליקציות והנתונים בפעילות זו באתר יימחקו."</string>
-    <!-- no translation found for user_exit_guest_dialog_remove (8095094235815676847) -->
-    <skip />
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"הפסקת הגלישה"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"הפעלת שיחות טלפון"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"‏הפעלת שיחות טלפון ו-SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"מחיקת משתמש"</string>
@@ -3684,8 +3683,7 @@
     <string name="other_conversations" msgid="551178916855139870">"שיחות בעדיפות לא גבוהה"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"שיחות שערכת בהן שינויים"</string>
     <string name="recent_conversations" msgid="471678228756995274">"שיחות אחרונות"</string>
-    <!-- no translation found for conversation_settings_clear_recents (4246342656145488662) -->
-    <skip />
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"מחיקת כל האחרונים"</string>
     <string name="clear" msgid="5092178335409471100">"ניקוי"</string>
     <string name="important_bubble" msgid="7911698275408390846">"הצגת שיחות בעדיפות גבוהה בבועות"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"שיחות בעדיפות גבוהה יוצגו בחלק העליון של חלונית ההתראות הנפתחת. בנוסף, אפשר להגדיר שיוצגו בבועות ויפריעו לתכונה \'נא לא להפריע\'."</string>
@@ -3749,6 +3747,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"אם תכבה ל-<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> את הגישה להתראות, ניתן יהיה לכבות גם את הגישה לתכונה \'נא לא להפריע\'."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"כיבוי"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ביטול"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"סוגים מורשים של התראות"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"התראות פעילות חשובות"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"התראות על שיחות"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"התראות עם צלילים או רטט"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"התראות שקטות"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏שירותי מסייע של VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏אין אפליקציות מותקנות שביקשו הפעלה כשירותי מסייע של VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"‏האם לאפשר לשירות VR גישה אל <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4568,8 +4571,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"מחובר לכמה התקנים"</string>
     <string name="demo_mode" msgid="6566167465451386728">"מצב הדגמה בממשק המשתמש של המערכת"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"עיצוב כהה"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"מושבת זמנית כי הופעל מצב \'חיסכון בסוללה\'"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"המתג מופעל באופן זמני כי מצב \'חיסכון בסוללה\' הופעל"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"גם אפליקציות נתמכות יעברו לעיצוב כהה"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"הבנתי"</string>
@@ -4626,6 +4628,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעבור בין אפליקציות יש להחליק מעלה על הלחצן הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש להקיש על הלחצן \'הקודם\'."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"כדאי לנסות את הלחצן הראשי החדש"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"הפעלת התנועה החדשה למעבר בין אפליקציות"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"בטיחות ומקרי חירום"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ניווט באמצעות תנועות"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"כדי לעבור למסך הבית, יש להחליק מעלה מהחלק התחתון של המסך. כדי לעבור בין אפליקציות יש להחליק מעלה מהחלק התחתון של המסך, להחזיק ולאחר מכן לשחרר. כדי לחזור למסך הקודם יש להחליק מהקצה הימני או השמאלי של המסך."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"ניווט באמצעות 3 לחצנים"</string>
@@ -4900,9 +4903,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"רטט"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"השתקה"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"לא לבצע שום פעולה"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"מופעל (רטט)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"מופעל (השתקה)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"כבוי"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"רטט"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"השתקה"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"פרטי הרשת"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"‏שם המכשיר שלך גלוי לאפליקציות בטלפון. כמו כן, ייתכן שאנשים אחרים יראו אותו בהתחברות למכשירי Bluetooth, לרשת Wi-Fi, או בהגדרת נקודת Wi-Fi לשיתוף אינטרנט."</string>
     <string name="devices_title" msgid="649715719278562515">"מכשירים"</string>
@@ -5217,8 +5219,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"התכונה כבויה"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"אינטרנט"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"‏כרטיסי SIM"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"רשתות בטוחות לטיסה"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"חיפוש רשתות בטוחות לטיסה והתחברות אליהן"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"טיסה, בטוח לטיסה"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"‏שיחות והודעות SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"‏שיחות Wi-Fi"</string>
@@ -5234,10 +5238,10 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"העדפות"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"חיבור לרשתות ציבוריות"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"‏חיבור לרשת, אינטרנט, אלחוטי, נתונים, Wi-Fi, wi-fi, wi fi, סלולרי, נייד, ספק סלולרי, 4g,‏ 3g,‏ 2g,‏ lte"</string>
-    <!-- no translation found for view_airplane_safe_networks (9170023210981508906) -->
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"הצגת רשתות בטוחות למצב טיסה"</string>
+    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
     <skip />
-    <!-- no translation found for turn_off_airplane_mode (7141986366534514443) -->
-    <skip />
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"השבתה של מצב טיסה"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"מחובר"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"לא ניתן להתחבר לאינטרנט באופן אוטומטי"</string>
@@ -5252,16 +5256,12 @@
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"מכשיר לא מהימן מבקש גישה לאנשי הקשר וליומן השיחות. יש להקיש לקבלת פרטים."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"להעניק גישה לאנשי הקשר וליומן השיחות?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"‏מכשיר Bluetooth לא מהימן, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, מבקש גישה לאנשי הקשר וליומן השיחות. הגישה תכלול גם נתונים על שיחות נכנסות ויוצאות.\n\nלא התחברת בעבר למכשיר <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
-    <!-- no translation found for category_name_brightness (8520372392029305084) -->
-    <skip />
-    <!-- no translation found for category_name_lock_display (7478785189102882266) -->
-    <skip />
-    <!-- no translation found for category_name_visibility (4485030512199246405) -->
-    <skip />
-    <!-- no translation found for category_name_color (937514550918977151) -->
-    <skip />
-    <!-- no translation found for category_name_others (2366006298768550310) -->
-    <skip />
-    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <string name="category_name_brightness" msgid="8520372392029305084">"בהירות"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"תצוגת נעילה"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"הרשאות גישה"</string>
+    <string name="category_name_color" msgid="937514550918977151">"צבע"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"אחרות"</string>
+    <string name="category_name_general" msgid="7737273712848115886">"כללי"</string>
+    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
     <skip />
 </resources>

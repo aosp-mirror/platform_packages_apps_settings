@@ -419,7 +419,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"فتح القفل باستخدام بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"استخدام بصمة الإصبع"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"كل ما عليك فعله هو لمس زر استشعار بصمات الإصبع لإلغاء قفل هاتفك أو السماح بإجراء عمليات الشراء أو تسجيل الدخول إلى التطبيقات. عليك توخي الحذر عند إضافة بصمة إصبع أشخاص آخرين؛ فأي بصمة من هذه البصمات يمكن أن تؤدي إلى تنفيذ أي إجراء من الإجراءات السابق ذكرها.\n\nملاحظة: يمكن أن تكون بصمة إصبعك أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"ما عليك سوى لمس مستشعر بصمات الإصبع لفتح قفل هاتفك أو السماح بإجراء عمليات الشراء أو تسجيل الدخول إلى التطبيقات. عليك توخي الحذر بخصوص بصمات الإصبع التي تضيفها، فأي بصمات إصبع تتم إضافتها ستتيح لصاحبها تنفيذ هذه الإجراءات."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"قد تكون بصمة إصبعك أقل أمانًا من استخدام نقش أو رقم تعريف شخصي شديد الأمان."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"استخدم بصمة الإصبع لفتح قفل هاتفك أو الموافقة على عمليات الشراء.\n\nملاحظة: لا يمكنك استخدام بصمة الإصبع لفتح قفل هذا الجهاز. للحصول على المزيد من المعلومات، اتصل بمشرف المؤسسة."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"استخدم بصمة الإصبع لفتح قفل هاتفك أو الموافقة على عمليات الشراء.\n\nملاحظة: قد تكون بصمة إصبعك أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"إلغاء"</string>
@@ -2228,9 +2229,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"أجهزة قارئ الشاشة"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"الصوت والنص على الشاشة"</string>
     <string name="display_category_title" msgid="6638191682294461408">"العرض"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"النص وشاشة العرض"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"عناصر التحكم في التفاعل"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"المساعدة بشأن النقر"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"عناصر التحكّم في النظام"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"التطبيقات التي تم تنزيلها"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"إعدادات تجريبية"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"عناصر التحكّم في الميزات"</string>
@@ -3245,15 +3247,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"حذف مستخدم"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"حذف"</string>
     <string name="user_guest" msgid="4545590092001460388">"ضيف"</string>
-    <!-- no translation found for user_clear_guest_menu (4864362688187480452) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_menu (5064400453222497734) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_confirm_title (7526978959527761497) -->
-    <skip />
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"محو بيانات الضيف"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"إنهاء جلسة الضيف"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"هل تريد إنهاء جلسة الضيف؟"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"سيتم حذف كل التطبيقات والبيانات في هذه الجلسة."</string>
-    <!-- no translation found for user_exit_guest_dialog_remove (8095094235815676847) -->
-    <skip />
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"إنهاء الجلسة"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"تفعيل المكالمات الهاتفية"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"تفعيل المكالمات الهاتفية والرسائل القصيرة"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"حذف حساب المستخدم"</string>
@@ -3774,8 +3772,7 @@
     <string name="other_conversations" msgid="551178916855139870">"المحادثات غير ذات الأولوية"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"المحادثات التي أجريت تغييرات عليها"</string>
     <string name="recent_conversations" msgid="471678228756995274">"المحادثات الأخيرة"</string>
-    <!-- no translation found for conversation_settings_clear_recents (4246342656145488662) -->
-    <skip />
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"محو كل العناصر الحديثة"</string>
     <string name="clear" msgid="5092178335409471100">"محو"</string>
     <string name="important_bubble" msgid="7911698275408390846">"تظهر المحادثات ذات الأولوية كفقاعات"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"تظهر المحادثات ذات الأولوية في أعلى مركز الإشعارات المنسدل. يمكنك أيضًا ضبطها لتظهر كفقاعات ولا تتقيّد بميزة \"عدم الإزعاج\"."</string>
@@ -3845,6 +3842,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"عند إيقاف الوصول إلى الإشعار لـ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>، قد يتم إيقاف الوصول إلى \"عدم الإزعاج\" أيضًا."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"إيقاف"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"إلغاء"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"أنواع الإشعارات المسموح بها"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"الإشعارات الجارية المهمة"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"إشعارات المحادثات"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"إشعارات التنبيه"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"الإشعارات الصامتة"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"خدمات مساعد الواقع الافتراضي"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"لم تطلب أي تطبيقات مثبَّتة أن يتم تشغيلها كخدمات مساعد واقع افتراضي."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"هل تريد السماح لخدمة <xliff:g id="SERVICE">%1$s</xliff:g> بالوصول إلى خدمة الواقع الافتراضي؟"</string>
@@ -4708,8 +4710,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"متصل بأجهزة متعددة"</string>
     <string name="demo_mode" msgid="6566167465451386728">"وضع تجريبي لواجهة مستخدم النظام"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"المظهر الداكن"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"تم إيقاف التبديل مؤقتًا بسبب تفعيل وضع \"توفير شحن البطارية\"."</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"مفعّل مؤقتًا نتيجة تفعيل وضع \"توفير شحن البطارية\""</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"سيتم تبديل التطبيقات المتوافقة أيضًا إلى المظهر الداكن"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"حسنًا"</string>
@@ -4772,6 +4773,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"للتبديل بين التطبيقات، مرّر سريعًا للأعلى على زر \"الشاشة الرئيسية\". للاطّلاع على كل التطبيقات، مرّر سريعًا للأعلى مرة أخرى. للرجوع، انقر على زر الرجوع."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"تجربة زر \"الشاشة الرئيسية\" الجديد"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"يمكنك تفعيل الإيماءة الجديدة لتبديل التطبيقات."</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"الأمن وحالة الطوارئ"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"التنقل بالإيماءات"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"للانتقال إلى \"الشاشة الرئيسية\"، مرّر سريعًا من أسفل الشاشة إلى أعلاها. للتبديل بين التطبيقات، مرّر سريعًا من أسفل الشاشة إلى أعلاها واضغط مع الاستمرار ثم ارفع إصبعك عن الشاشة. للرجوع، مرّر سريعًا من الحافة اليمنى أو اليسرى للشاشة."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"التنقل باستخدام ثلاثة أزرار"</string>
@@ -5060,9 +5062,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"الاهتزاز"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"كتم الصوت"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"عدم اتخاذ أي إجراء"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"مفعّل (الاهتزاز)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"تفعيل (كتم الصوت)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"غير مفعّل"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"اهتزاز"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"كتم الصوت"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"تفاصيل الشبكة"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"‏اسم جهازك مرئي للتطبيقات على هاتفك. ويمكن أيضًا للآخرين الاطّلاع على اسم جهازك عند الاتصال بأجهزة تتضمّن بلوتوث أو الاتصال بشبكة Wi-Fi أو إعداد نقطة اتصال Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"الأجهزة"</string>
@@ -5383,8 +5384,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"غير مفعّلة"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"الإنترنت"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"‏شرائح SIM"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"الشبكات الآمنة في وضع الطيران"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"العثور على الشبكات الآمنة في وضع الطيران والاتصال بها"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"وضع الطيران، آمنة في وضع الطيران"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"‏المكالمات والرسائل القصيرة SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"‏الاتصال عبر Wi-Fi"</string>
@@ -5400,10 +5403,10 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"التفضيلات"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"‏الاتصال بشبكات Wi-Fi عامة"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"‏الاتصال بالشبكة، الإنترنت، لاسلكي، بيانات، wifi، wi-fi، wi fi، خلوي، جهاز جوّال، مشغل شبكة الجوال، جيل رابع، جيل ثالث، جيل ثاني، lte"</string>
-    <!-- no translation found for view_airplane_safe_networks (9170023210981508906) -->
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"عرض الشبكات المتاحة في وضع الطيران"</string>
+    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
     <skip />
-    <!-- no translation found for turn_off_airplane_mode (7141986366534514443) -->
-    <skip />
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"إيقاف وضع الطيران"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"متصلة بالإنترنت"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"لن يتم الاتصال بالإنترنت تلقائيًا."</string>
@@ -5418,16 +5421,12 @@
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"يريد جهاز غير موثوق الوصول إلى جهات الاتصال وسجلّ المكالمات. انقر للحصول على التفاصيل."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"هل تريد السماح بالوصول إلى جهات الاتصال وسجلّ المكالمات؟"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"يريد جهاز غير موثوق يتضمّن بلوتوث، <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى جهات الاتصال وسجلّ المكالمات. يتضمن ذلك الوصول إلى بيانات عن المكالمات الواردة والصادرة.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
-    <!-- no translation found for category_name_brightness (8520372392029305084) -->
-    <skip />
-    <!-- no translation found for category_name_lock_display (7478785189102882266) -->
-    <skip />
-    <!-- no translation found for category_name_visibility (4485030512199246405) -->
-    <skip />
-    <!-- no translation found for category_name_color (937514550918977151) -->
-    <skip />
-    <!-- no translation found for category_name_others (2366006298768550310) -->
-    <skip />
-    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <string name="category_name_brightness" msgid="8520372392029305084">"السطوع"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"قفل الشاشة"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"مستوى العرض"</string>
+    <string name="category_name_color" msgid="937514550918977151">"اللون"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"غير ذلك"</string>
+    <string name="category_name_general" msgid="7737273712848115886">"عام"</string>
+    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
     <skip />
 </resources>

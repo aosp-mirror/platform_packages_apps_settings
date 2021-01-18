@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Lås op med fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Brug dit fingeraftryk"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Du sætter blot fingeren på fingeraftrykslæseren for at låse telefonen op, godkende køb eller logge ind i apps. Vær forsigtig med, hvem du tilføjer. Selv ét fingeraftryk, der føjes til din telefon, kan gøre disse ting.\n\nBemærk! Dit fingeraftryk kan være mindre sikkert end et stærkt mønster eller en stærk pinkode."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Du sætter blot fingeren på fingeraftrykslæseren for at låse telefonen op, godkende køb eller logge ind i apps. Vær forsigtig med, hvem du tilføjer fingeraftryk for. Alle, hvis fingeraftryk du tilføjer, kan foretage disse handlinger."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Dit fingeraftryk kan være mindre sikkert end et stærkt mønster eller en pinkode."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Lås din telefon op eller godkend køb ved hjælp af dit fingeraftryk.\n\nBemærk! Du kan ikke bruge dit fingeraftryk til at låse op for denne enhed. Få flere oplysninger ved at kontakte administratoren for din organisation."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Lås din telefon op eller godkend køb ved hjælp af dit fingeraftryk.\n\nBemærk! Dit fingeraftryk kan være mindre sikkert end et stærkt mønster eller en pinkode."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annuller"</string>
@@ -2132,9 +2133,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Skærmlæsere"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Lyd og tekst på skærmen"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Visning"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Tekst og visning"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktionsstyring"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Hjælp til tryk"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Styringselementer til systemet"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps, du har downloadet"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Aktivering og deaktivering af demofunktioner"</string>
@@ -3648,6 +3650,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Hvis du slår adgang til notifikationer fra for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, slås adgangen til Forstyr ikke muligvis også fra."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Slå fra"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annuller"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Tilladte notifikationstyper"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Vigtige konstante notifikationer"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Samtalenotifikationer"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Notifikationer med vibration eller lyd"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Lydløse notifikationer"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-hjælpetjenester"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen installerede apps har anmodet om at blive kørt som VR-hjælpetjenester."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vil du tillade, at <xliff:g id="SERVICE">%1$s</xliff:g> får adgang til VR-tjenesten?"</string>
@@ -4423,8 +4430,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Forbundet med flere enheder"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Demotilstand for systemets brugerflade"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Mørkt tema"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Midlertidigt deaktiveret på grund af batterisparefunktionen"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Midlertidigt aktiveret af batterisparefunktionen"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Understøttede apps skifter også til mørkt tema"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -4475,6 +4481,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Stryg opad på knappen Hjem for at skifte mellem apps. Stryg opad igen for at se alle apps. Tryk på tilbageknappen for at gå tilbage."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Prøv den nye knap Hjem"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Aktivér den nye bevægelse for at skifte apps"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sikkerhed og nødsituationer"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigering med bevægelser"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Gå til startskærmen ved at stryge opad fra bunden af skærmen. Skift mellem apps ved at stryge opad fra bunden af skærmen, holde fingeren nede og derefter give slip. Gå tilbage ved at stryge fra enten venstre eller højre kant."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigering med tre knapper"</string>
@@ -4735,9 +4742,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrere"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Slå lyden fra"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Lad være med at gøre noget"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Til (vibration)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Til (lydløs)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Fra"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrer"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Slå lyden fra"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Netværksoplysninger"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Din enheds navn er synligt for apps på din telefon. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller et Wi-Fi-netværk, eller når du konfigurerer et Wi-Fi-hotspot."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheder"</string>
@@ -5046,8 +5052,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Fra"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-kort"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Netværk til brug i fly"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Find og opret forbindelse til netværk, der kan bruges under flyrejsen"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"fly, sikkert netværk i fly"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Opkald og sms-beskeder"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi-opkald"</string>
@@ -5069,6 +5077,8 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Opret forbindelse til offentlige netværk"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netværksforbindelse, internet, trådløs, data, wifi, wi-fi, mobilnetværk, mobil, mobilselskab, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Se netværk til flytilstand"</string>
+    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
+    <skip />
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Deaktiver flytilstand"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Forbundet"</string>
@@ -5089,6 +5099,7 @@
     <string name="category_name_visibility" msgid="4485030512199246405">"Synlighed"</string>
     <string name="category_name_color" msgid="937514550918977151">"Farve"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Andre"</string>
-    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <string name="category_name_general" msgid="7737273712848115886">"Generelt"</string>
+    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
     <skip />
 </resources>

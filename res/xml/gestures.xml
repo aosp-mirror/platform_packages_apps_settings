@@ -21,12 +21,6 @@
     android:title="@string/gesture_preference_title">
 
     <Preference
-        android:key="gesture_emergency_summary"
-        android:title="@string/emergency_gesture_screen_title"
-        android:fragment="com.android.settings.gestures.EmergencyGestureSettings"
-        settings:controller="com.android.settings.gestures.EmergencyGestureEntrypointPreferenceController" />
-
-    <Preference
         android:key="gesture_assist_input_summary"
         android:title="@string/assist_gesture_title"
         android:fragment="com.android.settings.gestures.AssistGestureSettings"
@@ -94,7 +88,7 @@
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
-    <Preference
+    <com.android.settings.widget.PrimarySwitchPreference
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"

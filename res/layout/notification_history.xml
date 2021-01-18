@@ -25,7 +25,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include layout="@layout/styled_switch_bar"/>
+        <com.android.settingslib.widget.MainSwitchBar
+            android:id="@+id/main_switch_bar"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
         <LinearLayout
             android:id="@+id/history_off"

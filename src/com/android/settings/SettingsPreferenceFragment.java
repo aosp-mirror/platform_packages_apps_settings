@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.actionbar.SearchMenuController;
@@ -126,8 +128,11 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        SearchMenuController.init(this /* host */);
-        HelpMenuController.init(this /* host */);
+        // TODO(b/176883483): Remove both search and help menu if this feature rolled out
+        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            SearchMenuController.init(this /* host */);
+            HelpMenuController.init(this /* host */);
+        }
 
         if (icicle != null) {
             mPreferenceHighlighted = icicle.getBoolean(SAVE_HIGHLIGHTED_KEY);
@@ -172,11 +177,19 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     }
 
     public void setPinnedHeaderView(View pinnedHeader) {
+        if (mPinnedHeaderFrameLayout == null) {
+            Log.e(TAG, "setPinnedHeaderView: null layout");
+            return;
+        }
         mPinnedHeaderFrameLayout.addView(pinnedHeader);
         mPinnedHeaderFrameLayout.setVisibility(View.VISIBLE);
     }
 
     public void showPinnedHeader(boolean show) {
+        if (mPinnedHeaderFrameLayout == null) {
+            Log.e(TAG, "showPinnedHeader: null layout");
+            return;
+        }
         mPinnedHeaderFrameLayout.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 

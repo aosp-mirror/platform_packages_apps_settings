@@ -75,6 +75,10 @@ public class LocationIndicatorsPreferenceControllerTest {
      */
     @Test
     public void getAvailabilityStatus_locationSupported_shouldReturnAVAILABLE() {
+        // Enable the settings flags.
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED, Boolean.toString(true),
+                true);
         when(mPackageManager.hasSystemFeature(eq(PackageManager.FEATURE_LOCATION))).thenReturn(
                 true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
@@ -86,8 +90,28 @@ public class LocationIndicatorsPreferenceControllerTest {
      */
     @Test
     public void getAvailabilityStatus_locationNotSupported_shouldReturnUNSUPPORTED() {
+        // Enable the settings flags.
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED, Boolean.toString(true),
+                true);
         when(mPackageManager.hasSystemFeature(eq(PackageManager.FEATURE_LOCATION))).thenReturn(
                 false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    /**
+     * Verify the location indicator settings are not visible when location indicator settings
+     * are disabled on the device.
+     */
+    @Test
+    public void getAvailabilityStatus_flagDisabled_shouldReturnUNSUPPORTED() {
+        // Disable the settings flags.
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED, Boolean.toString(false),
+                false);
+        when(mPackageManager.hasSystemFeature(eq(PackageManager.FEATURE_LOCATION))).thenReturn(
+                true);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 

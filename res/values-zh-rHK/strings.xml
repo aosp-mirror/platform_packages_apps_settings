@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"指紋解鎖"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用您的指紋"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"輕觸指紋感應器即可解鎖手機、授權購物或登入應用程式。任何指紋加入手機後均可執行這些操作，因此請審慎決定要加入的指紋。\n\n請注意：相對於複雜的上鎖圖案或 PIN，指紋識別的安全性較低。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"輕觸指紋感應器即可解鎖手機、授權購物或登入應用程式。請審慎選擇要加入的指紋，所有已加入的指紋都可執行這些操作。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"使用複雜的上鎖圖案或 PIN 會比指紋識別更安全。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"使用指紋解鎖手機或核准購物交易。\n\n請注意：您無法使用指紋解鎖此裝置。如需瞭解詳情，請聯絡您機構的管理員。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"使用指紋解鎖手機或核准購物交易。\n\n請注意：相對於複雜的上鎖圖案或 PIN，指紋識別的安全性較低。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"取消"</string>
@@ -1610,7 +1611,7 @@
     <string name="reset_network_desc" msgid="1112523764899788246">"此操作會重設所有網絡設定，包括：\n\n"<li>"Wi‑Fi"</li>\n<li>"流動數據"</li>\n<li>"藍牙"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"清除"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"清除已下載的 SIM 卡"</string>
-    <string name="reset_esim_desc" msgid="3662444090563399131">"此操作不會取消任何流動服務計劃。如要下載替換用的 SIM，請聯絡流動網絡供應商。"</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"此操作不會取消任何流動服務計劃。如要下載替換用的 SIM 卡，請聯絡流動網絡供應商。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"重設設定"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"您要重設所有網絡設定嗎？您將無法復原這項動作。"</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"您要重設所有網絡設定並清除已下載的 SIM 卡嗎？您無法復原這個動作。"</string>
@@ -2133,9 +2134,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"螢幕閱讀器"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"音訊和螢幕上的文字"</string>
     <string name="display_category_title" msgid="6638191682294461408">"螢幕"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"文字廣告同多媒體廣告"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"互動控制項"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"輕按協助"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"系統控制項"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下載的應用程式"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"實驗性"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能標示"</string>
@@ -3649,6 +3651,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您關閉「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「請勿騷擾」的存取權亦可能會關閉。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"關閉"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"允許的通知類型"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"重要的持續性通知"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"對話通知"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"提醒通知"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"靜音通知"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服務"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"沒有已安裝的應用程式要求提供 VR 助手服務。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"允許 VR 服務存取 <xliff:g id="SERVICE">%1$s</xliff:g> 嗎？"</string>
@@ -4424,8 +4431,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"已連接多部裝置"</string>
     <string name="demo_mode" msgid="6566167465451386728">"系統使用者介面示範模式"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"深色主題背景"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"由於「省電模式」已開啟，因此切換功能暫時停用"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"由於「省電模式」已關閉，因此切換功能暫時啟用"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"受支援的應用程式也會切換至深色主題背景"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"知道了"</string>
@@ -4476,6 +4482,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"如要切換應用程式，請從主按鈕向上滑動。如要查看所有應用程式，請再次向上滑動。如要返回，請輕按 [返回] 按鈕。"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"試按新版主按鈕"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"啟用新手勢即可切換應用程式"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"安全性與緊急服務"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"手勢導覽"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"如要前往主畫面，請從螢幕底部向上滑動。如要切換應用程式，請從螢幕底部向上滑動並按住，然後放手。如要返回，請從左側或右側邊緣滑動。"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3 按鈕導覽"</string>
@@ -4736,9 +4743,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"震動"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"靜音"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"不執行任何操作"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"開啟 (震動)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"開啟 (靜音)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"關閉"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"震動"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"靜音"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"網絡詳細資料"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"您在手機上的應用程式可以取得您的裝置名稱。當您連接藍牙裝置或 Wi-Fi 網絡，或設定 Wi-Fi 熱點時，其他人亦可能會看到您的裝置名稱。"</string>
     <string name="devices_title" msgid="649715719278562515">"裝置"</string>
@@ -5047,8 +5053,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"關閉"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"互聯網"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM 卡"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"飛行安全網絡"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"尋找並連接飛行安全網絡"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"飛行, 飛行安全"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"通話和短訊"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi 通話"</string>
@@ -5065,6 +5073,8 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"連線至公共網絡"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"網絡連線, 互聯網, 無線, 數據, Wi-Fi, 流動網絡, 流動裝置, 流動網絡供應商, 4G, 3G, 2G, LTE"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"查看飛行模式網絡"</string>
+    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
+    <skip />
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"關閉飛行模式"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"已連線"</string>
@@ -5085,6 +5095,7 @@
     <string name="category_name_visibility" msgid="4485030512199246405">"分享設定"</string>
     <string name="category_name_color" msgid="937514550918977151">"顏色"</string>
     <string name="category_name_others" msgid="2366006298768550310">"其他"</string>
-    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <string name="category_name_general" msgid="7737273712848115886">"一般"</string>
+    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
     <skip />
 </resources>

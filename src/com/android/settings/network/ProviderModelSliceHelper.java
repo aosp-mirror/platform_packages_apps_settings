@@ -78,10 +78,10 @@ public class ProviderModelSliceHelper {
         Log.d(TAG, s);
     }
 
-    protected ListBuilder.HeaderBuilder createHeader() {
+    protected ListBuilder.HeaderBuilder createHeader(String intentAction) {
         return new ListBuilder.HeaderBuilder()
                 .setTitle(mContext.getText(R.string.summary_placeholder))
-                .setPrimaryAction(getPrimarySliceAction());
+                .setPrimaryAction(getPrimarySliceAction(intentAction));
     }
 
     protected ListBuilder createListBuilder(Uri uri) {
@@ -91,12 +91,12 @@ public class ProviderModelSliceHelper {
         return builder;
     }
 
-    protected GridRowBuilder createMessageGridRow(int messageResId) {
+    protected GridRowBuilder createMessageGridRow(int messageResId, String intentAction) {
         final CharSequence title = mContext.getText(messageResId);
         return new GridRowBuilder()
                 // Add cells to the grid row.
                 .addCell(new GridRowBuilder.CellBuilder().addTitleText(title))
-                .setPrimaryAction(getPrimarySliceAction());
+                .setPrimaryAction(getPrimarySliceAction(intentAction));
     }
 
     @Nullable
@@ -145,15 +145,15 @@ public class ProviderModelSliceHelper {
         return rowBuilder;
     }
 
-    protected SliceAction getPrimarySliceAction() {
+    protected SliceAction getPrimarySliceAction(String intentAction) {
         return SliceAction.createDeeplink(
-                getPrimaryAction(),
+                getPrimaryAction(intentAction),
                 Utils.createIconWithDrawable(new ColorDrawable(Color.TRANSPARENT)),
                 ListBuilder.ICON_IMAGE, mContext.getText(R.string.summary_placeholder));
     }
 
-    private PendingIntent getPrimaryAction() {
-        final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS")
+    private PendingIntent getPrimaryAction(String intentAction) {
+        final Intent intent = new Intent(intentAction)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 intent, PendingIntent.FLAG_IMMUTABLE /* flags */);
@@ -215,6 +215,8 @@ public class ProviderModelSliceHelper {
             drawable = shared.get();
         }
 
+        drawable.setTint(
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal));
         if (isDataSimActive()) {
             drawable.setTint(Utils.getColorAccentDefaultColor(mContext));
         }

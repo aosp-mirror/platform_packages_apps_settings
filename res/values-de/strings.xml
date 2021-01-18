@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Mit Fingerabdruck entsperren"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Fingerabdruck verwenden"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Tippe einfach auf den Fingerabdrucksensor, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden. Überlege genau, welche Fingerabdrücke du hinzufügen möchtest, da diese Aktionen mit allen Fingerabdrücken ausgeführt werden können, die du zu deinem Smartphone hinzufügst.\n\nHinweis: Dein Fingerabdruck ist möglicherweise nicht so sicher wie ein komplexes Muster oder eine PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Tippe einfach auf den Fingerabdrucksensor, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden. Überlege genau, wessen Fingerabdrücke du hinzufügen möchtest, da diese Aktionen mit allen Fingerabdrücken ausgeführt werden können, die du deinem Smartphone hinzufügst."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Dein Fingerabdruck ist möglicherweise nicht so sicher wie ein komplexes Muster oder eine PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Du kannst deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder Käufe zu autorisieren.\n\nHinweis: Dieses Gerät kann nicht mit deinem Fingerabdruck entsperrt werden. Weitere Informationen erhältst du vom Administrator deiner Organisation."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Du kannst deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder Käufe zu autorisieren.\n\nHinweis: Dein Fingerabdruck ist möglicherweise nicht so sicher wie ein komplexes Muster oder eine PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Abbrechen"</string>
@@ -2133,9 +2134,11 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Screenreader"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audiodienste und Text auf dem Bildschirm"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Bildschirm"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Text und Anzeige"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktionssteuerung"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Hilfe beim Tippen"</string>
+    <!-- no translation found for accessibility_system_controls_title (6403287349518987624) -->
+    <skip />
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Heruntergeladene Apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentell"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funktions-Flags"</string>
@@ -2694,7 +2697,7 @@
     <string name="tts_reset" msgid="9047681050813970031">"Zurücksetzen"</string>
     <string name="tts_play" msgid="2945513377250757221">"Wiedergeben"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Automatische Konnektivität"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive Konnektivität"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Verlängert die Akkulaufzeit und optimiert die Leistung des Geräts durch automatisches Verwalten deiner Netzwerkverbindungen"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Anmeldedatenspeicher"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Ein Zertifikat installieren"</string>
@@ -3074,15 +3077,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Nutzer löschen"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Löschen"</string>
     <string name="user_guest" msgid="4545590092001460388">"Gast"</string>
-    <!-- no translation found for user_clear_guest_menu (4864362688187480452) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_menu (5064400453222497734) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_confirm_title (7526978959527761497) -->
-    <skip />
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Gästedaten löschen"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Gastsitzung beenden"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Gastsitzung beenden?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle Apps und Daten in dieser Sitzung werden gelöscht."</string>
-    <!-- no translation found for user_exit_guest_dialog_remove (8095094235815676847) -->
-    <skip />
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Sitzung beenden"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Telefonieren zulassen"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefonieren &amp; SMS zulassen"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Nutzer löschen"</string>
@@ -3595,8 +3594,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Unterhaltungen ohne Priorität"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Unterhaltungen, an denen Änderungen vorgenommen wurden"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Neueste Unterhaltungen"</string>
-    <!-- no translation found for conversation_settings_clear_recents (4246342656145488662) -->
-    <skip />
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Kürzliche löschen"</string>
     <string name="clear" msgid="5092178335409471100">"Löschen"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Vorrangige Unterhaltungen als Bubble anzeigen"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Vorrangige Unterhaltungen werden oben in der Benachrichtigungsleiste angezeigt. Du kannst auch einstellen, dass sie als Bubbles angezeigt werden oder den \"Bitte nicht stören\"-Modus unterbrechen können."</string>
@@ -3654,6 +3652,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der \"Bitte nicht stören\"-Zugriff deaktiviert."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Deaktivieren"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Abbrechen"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Zulässige Benachrichtigungstypen"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Wichtige fortlaufende Benachrichtigungen"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Unterhaltungsbenachrichtigungen"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Warnbenachrichtigungen"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Lautlose Benachrichtigungen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfedienst angefordert."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR-Dienstzugriff für <xliff:g id="SERVICE">%1$s</xliff:g> erlauben?"</string>
@@ -4429,8 +4432,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Mit mehreren Geräten verbunden"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Demomodus der System-UI"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Dunkles Design"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Wegen Energiesparmodus vorübergehend deaktiviert"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Wegen Energiesparmodus vorübergehend aktiviert"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Unterstützte Apps wechseln ebenfalls zum dunklen Design"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Ok"</string>
@@ -4481,6 +4483,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Wenn du zwischen Apps wechseln möchtest, wische auf der Startbildschirmtaste nach oben. Wische noch einmal nach oben, um alle Apps zu sehen. Tippe auf die Schaltfläche \"Zurück\", um zurückzugehen."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Neue Startbildschirmtaste ausprobieren"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Neue Touch-Geste zum Wechseln von Apps aktivieren"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sicherheit und Notfälle"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Bedienung über Gesten"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Öffne den Startbildschirm, indem du vom unteren Bildschirmrand nach oben wischst. Wenn du zwischen Apps wechseln möchtest, wische von unten nach oben, halte den Finger gedrückt und lass ihn dann los. Wenn du zurückgehen möchtest, wische vom linken oder vom rechten Rand nach innen."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Bedienung über 3 Schaltflächen"</string>
@@ -4741,9 +4744,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrieren"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Stummschalten"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Nichts tun"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"An (Vibrieren)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"An (stumm)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Aus"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrieren"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Stummschalten"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Netzwerkdetails"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Dein Gerätename ist für Apps auf deinem Smartphone sichtbar. Wenn du dein Gerät mit Bluetooth-Geräten oder einem WLAN verbindest oder einen WLAN-Hotspot einrichtest, kann der Name möglicherweise auch von anderen Personen gesehen werden."</string>
     <string name="devices_title" msgid="649715719278562515">"Geräte"</string>
@@ -5052,8 +5054,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Aus"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-Karten"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Flugsichere Netzwerke"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Flugsichere Netzwerke finden und Verbindung herstellen"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"Flug, Flugzeug, flugsicher"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Anrufe &amp; SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"WLAN-Anrufe"</string>
@@ -5069,20 +5073,15 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Einstellungen"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Mit öffentlichen Netzwerken verbinden"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netzwerkverbindung, internet, kabellos, drahtlos, daten, wlan, w-lan, mobilfunk, mobil, mobilfunkanbieter, 4g, 3g, 2g, lte"</string>
-    <!-- no translation found for view_airplane_safe_networks (9170023210981508906) -->
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Flugmodus-Netzwerke anzeigen"</string>
+    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
     <skip />
-    <!-- no translation found for turn_off_airplane_mode (7141986366534514443) -->
-    <skip />
-    <!-- no translation found for preference_summary_default_combination (4643585915107796253) -->
-    <skip />
-    <!-- no translation found for mobile_data_connection_active (2422223108911581552) -->
-    <skip />
-    <!-- no translation found for mobile_data_off_summary (3841411571485837651) -->
-    <skip />
-    <!-- no translation found for non_carrier_network_unavailable (9031567407964127997) -->
-    <skip />
-    <!-- no translation found for all_network_unavailable (1163897808282057496) -->
-    <skip />
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Flugmodus deaktivieren"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Verbunden"</string>
+    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Keine automatische Verbindung mit dem Internet"</string>
+    <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Keine anderen Netzwerke verfügbar"</string>
+    <string name="all_network_unavailable" msgid="1163897808282057496">"Keine Netzwerke verfügbar"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nicht verfügbar, weil der Modus „Schlafenszeit“ aktiviert ist"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Die Wichtigkeit von Benachrichtigungen wurde zurückgesetzt."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
@@ -5092,16 +5091,12 @@
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Ein nicht vertrauenswürdiges Gerät fordert Zugriff auf deine Kontakte und deine Anrufliste an. Weitere Informationen."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Möchtest du den Zugriff auf Kontakte und Anrufliste zulassen?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Ein nicht vertrauenswürdiges Bluetooth-Gerät (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) möchte auf deine Kontakte und deine Anrufliste zugreifen. Dazu gehören auch Daten über ein- und ausgehende Anrufe.\n\nDu warst bisher noch nicht mit <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> verbunden."</string>
-    <!-- no translation found for category_name_brightness (8520372392029305084) -->
-    <skip />
-    <!-- no translation found for category_name_lock_display (7478785189102882266) -->
-    <skip />
-    <!-- no translation found for category_name_visibility (4485030512199246405) -->
-    <skip />
-    <!-- no translation found for category_name_color (937514550918977151) -->
-    <skip />
-    <!-- no translation found for category_name_others (2366006298768550310) -->
-    <skip />
-    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <string name="category_name_brightness" msgid="8520372392029305084">"Helligkeit"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"Sperrbildschirmanzeige"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"Sichtbarkeit"</string>
+    <string name="category_name_color" msgid="937514550918977151">"Farbe"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"Sonstige"</string>
+    <string name="category_name_general" msgid="7737273712848115886">"Allgemein"</string>
+    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
     <skip />
 </resources>

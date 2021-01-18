@@ -29,6 +29,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,8 +44,11 @@ import com.android.settings.SubSettings;
 import com.android.settings.dashboard.CategoryManager;
 import com.android.settingslib.drawer.Tile;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +59,7 @@ public class SettingsBaseActivity extends FragmentActivity {
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
     private static final String DATA_SCHEME_PKG = "package";
+    private static final int TOOLBAR_MAX_LINE_NUMBER = 2;
 
     // Serves as a temporary list of tiles to ignore until we heard back from the PM that they
     // are disabled.
@@ -62,6 +67,8 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
     private final List<CategoryListener> mCategoryListeners = new ArrayList<>();
+
+    protected CollapsingToolbarLayout mCollapsingToolbarLayout;
     private int mCategoriesUpdateTaskCount;
 
     @Override
@@ -79,21 +86,30 @@ public class SettingsBaseActivity extends FragmentActivity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
-        if (WizardManagerHelper.isAnySetupWizard(getIntent()) && this instanceof SubSettings) {
+        final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        if (isAnySetupWizard && this instanceof SubSettings) {
             setTheme(R.style.LightTheme_SubSettings_SetupWizard);
         }
-        super.setContentView(R.layout.settings_base_layout);
 
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)
+                && isToolbarEnabled() && !isAnySetupWizard) {
+            super.setContentView(R.layout.settings_collapsing_base_layout);
+            mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+        } else {
+            super.setContentView(R.layout.settings_base_layout);
+        }
+
+        // This is to hide the toolbar from those pages which don't need a toolbar originally.
         final Toolbar toolbar = findViewById(R.id.action_bar);
-        if (theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
+        if (!isToolbarEnabled() || isAnySetupWizard) {
             toolbar.setVisibility(View.GONE);
             return;
         }
         setActionBar(toolbar);
+        initCollapsingToolbar();
 
         if (DEBUG_TIMING) {
-            Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
-                    + " ms");
+            Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
     }
 
@@ -150,6 +166,70 @@ public class SettingsBaseActivity extends FragmentActivity {
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         ((ViewGroup) findViewById(R.id.content_frame)).addView(view, params);
     }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        if (mCollapsingToolbarLayout != null) {
+            mCollapsingToolbarLayout.setTitle(title);
+        }
+        super.setTitle(title);
+    }
+
+    @Override
+    public void setTitle(int titleId) {
+        if (mCollapsingToolbarLayout != null) {
+            mCollapsingToolbarLayout.setTitle(getText(titleId));
+        }
+        super.setTitle(titleId);
+    }
+
+    /**
+     * SubSetting page should show a toolbar by default. If the page wouldn't show a toolbar,
+     * override this method and return false value.
+     * @return ture by default
+     */
+    protected boolean isToolbarEnabled() {
+        return true;
+    }
+
+    private void initCollapsingToolbar() {
+        if (mCollapsingToolbarLayout == null) {
+            return;
+        }
+        mCollapsingToolbarLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                v.removeOnLayoutChangeListener(this);
+                final int count = getLineCount();
+                if (count > TOOLBAR_MAX_LINE_NUMBER) {
+                    mCollapsingToolbarLayout
+                            .setExpandedTitleTextAppearance(R.style.ToolbarText_MoreThanTwoLines);
+                } else {
+                    mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ToolbarText);
+                }
+            }
+        });
+    }
+
+    private int getLineCount() {
+        try {
+            final Class<?> toolbarClazz = mCollapsingToolbarLayout.getClass();
+            final Field textHelperField = toolbarClazz.getDeclaredField("collapsingTextHelper");
+            textHelperField.setAccessible(true);
+            final Object textHelperObj = textHelperField.get(mCollapsingToolbarLayout);
+
+            final Field layoutField = textHelperObj.getClass().getDeclaredField("textLayout");
+            layoutField.setAccessible(true);
+            final Object layoutObj = layoutField.get(textHelperObj);
+
+            final Method method = layoutObj.getClass().getDeclaredMethod("getLineCount");
+            return (int) method.invoke(layoutObj);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
 
     private void onCategoriesChanged(Set<String> categories) {
         final int N = mCategoryListeners.size();

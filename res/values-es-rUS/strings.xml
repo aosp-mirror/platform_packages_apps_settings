@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Desbloquea con tu huella digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa tus huellas digitales"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Solo toca el sensor de huellas digitales para desbloquear tu teléfono, autorizar compras o acceder a las apps. Ten cuidado con las personas que agregas, ya que todas las huellas digitales que agregues podrán realizar estas acciones.\n\nNota: Tu huella digital puede ser menos segura que un PIN o un patrón eficaz."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Toca el sensor de huellas digitales para desbloquear el teléfono, autorizar compras o acceder a las apps. Ten cuidado con las huellas digitales que agregas, ya que podrán realizar cualquiera de esas acciones."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Es posible que la huella digital sea menos segura que un patrón o PIN eficaz."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Usa tu huella digital para desbloquear el teléfono o aprobar compras.\n\nNota: No puedes usar tu huella digital para desbloquear este dispositivo. Para obtener más información, comunícate con el administrador de la organización."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Usa tu huella digital para desbloquear el teléfono o aprobar compras.\n\nNota: Es posible que la huella digital no sea tan segura como un PIN o un patrón eficaz."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
@@ -2132,9 +2133,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Lectores de pantalla"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio y texto en pantalla"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Pantalla"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Texto y pantalla"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controles de interacción"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Asistencia sobre presión"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controles del sistema"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps descargadas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funciones experimentales"</string>
@@ -3648,6 +3650,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si desactivas el acceso a las notificaciones de <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, es posible que también se desactive el modo No interrumpir."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactivar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Tipos de notificaciones permitidas"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Notificaciones constantes importantes"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Notificaciones de conversaciones"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Notificaciones de alerta"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Notificaciones silenciosas"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicio de ayuda de RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna app instalada solicitó que se la ejecutara como servicio de ayuda de RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"¿Quieres permitir que el servicio de RV acceda a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4423,8 +4430,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Conectado a varios dispositivos"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Modo demostración de la IU del sistema"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tema oscuro"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Se inhabilitó temporalmente debido al Ahorro de batería"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Activado temporalmente por el Ahorro de batería"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Las apps compatibles también se cambiarán a tema oscuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Entendido"</string>
@@ -4475,6 +4481,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para cambiar de app, desliza el dedo hacia arriba sobre el botón de inicio. Para ver todas las apps, vuelve a deslizar el dedo hacia arriba. Para volver, presiona el botón \"Atrás\"."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Prueba el nuevo botón de inicio"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Activa el nuevo gesto para cambiar de app"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Seguridad y emergencia"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegación por gestos"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para ir a la pantalla principal, desliza el dedo hacia arriba desde la parte inferior de la pantalla. Para cambiar de app, desliza el dedo hacia arriba desde la parte inferior, sostenlo y, luego, suéltalo. Para ir atrás, desliza el dedo desde el borde izquierdo o el derecho."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botones"</string>
@@ -4735,9 +4742,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrar"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Silenciar"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"No hacer nada"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Activado (vibración)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Activado (silencio)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Desactivado"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrar"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Silenciar"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalles de la red"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"El nombre de tu dispositivo es visible para las apps del teléfono. Es posible que también lo vean otras personas cuando te conectes a dispositivos Bluetooth o a una red Wi-Fi, o cuando configures un hotspot de Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivos"</string>
@@ -5046,8 +5052,10 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Desactivado"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Redes seguras para aviones"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Busca y conéctate a redes seguras para aviones"</string>
+    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
+    <skip />
+    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
+    <skip />
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"avión, segura para aviones"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Llamadas y SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Llamada por Wi‑Fi"</string>
@@ -5063,7 +5071,9 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferencias"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectarse a redes públicas"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"conexión de red, internet, inalámbrico, datos, wifi, wi-fi, wi fi, datos móviles, móvil, proveedor de telefonía, 4g, 3g, 2g, lte"</string>
-    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Ver redes para modo avión"</string>
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Ver redes para modo de avión"</string>
+    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
+    <skip />
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Desactivar el modo de avión"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conexión establecida"</string>
@@ -5084,6 +5094,7 @@
     <string name="category_name_visibility" msgid="4485030512199246405">"Visibilidad"</string>
     <string name="category_name_color" msgid="937514550918977151">"Color"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Otras opciones"</string>
-    <!-- no translation found for category_name_general (7737273712848115886) -->
+    <string name="category_name_general" msgid="7737273712848115886">"General"</string>
+    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
     <skip />
 </resources>

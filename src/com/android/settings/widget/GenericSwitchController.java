@@ -49,7 +49,7 @@ public class GenericSwitchController extends SwitchWidgetController implements
     }
 
     @Override
-    public void updateTitle(boolean isChecked) {
+    public void setTitle(String title) {
     }
 
     @Override

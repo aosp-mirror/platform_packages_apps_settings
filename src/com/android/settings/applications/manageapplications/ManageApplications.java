@@ -55,6 +55,7 @@ import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -108,6 +109,7 @@ import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
@@ -681,7 +683,10 @@ public class ManageApplications extends InstrumentedFragment
         if (activity == null) {
             return;
         }
-        HelpUtils.prepareHelpMenuItem(activity, menu, getHelpResource(), getClass().getName());
+        // TODO(b/176883483): Remove the help menu if this feature rolled out
+        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            HelpUtils.prepareHelpMenuItem(activity, menu, getHelpResource(), getClass().getName());
+        }
         mOptionsMenu = menu;
         inflater.inflate(R.menu.manage_apps, menu);
 

@@ -20,10 +20,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class LocationSettingsTest {
@@ -38,15 +40,18 @@ public class LocationSettingsTest {
     @Mock
     private SettingsActivity mActivity;
     @Mock
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
 
+    private Context mContext;
     private LocationSettings mLocationSettings;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mLocationSettings = spy(new LocationSettings());
         doReturn(mActivity).when(mLocationSettings).getActivity();
+        doReturn(mContext).when(mLocationSettings).getContext();
         when(mActivity.getSwitchBar()).thenReturn(mSwitchBar);
     }
 

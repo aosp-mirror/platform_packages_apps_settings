@@ -39,7 +39,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -128,10 +128,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         // Assume we are in a SettingsActivity. This is only safe because we currently use
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setSwitchBarText(
-                com.android.settingslib.R.string.wifi_hotspot_switch_on_text,
-                com.android.settingslib.R.string.wifi_hotspot_switch_off_text);
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        switchBar.setTitle(getContext().getString(R.string.use_wifi_hotsopt_main_switch_title));
         mSwitchBarController = new WifiTetherSwitchBarController(activity, switchBar);
         getSettingsLifecycle().addObserver(mSwitchBarController);
         switchBar.show();
@@ -192,7 +190,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController context) {
         final SoftApConfiguration config = buildNewConfig();
-        mPasswordPreferenceController.updateVisibility(config.getSecurityType());
+        mPasswordPreferenceController.setSecurityType(config.getSecurityType());
 
         /**
          * if soft AP is stopped, bring up
@@ -216,10 +214,10 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
-        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+        if (securityType != SoftApConfiguration.SECURITY_TYPE_OPEN) {
             configBuilder.setPassphrase(
                     mPasswordPreferenceController.getPasswordValidated(securityType),
-                    SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
+                    securityType);
         }
         configBuilder.setBand(mApBandPreferenceController.getBandIndex());
         return configBuilder.build();

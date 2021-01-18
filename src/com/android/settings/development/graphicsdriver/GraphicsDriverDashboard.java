@@ -24,8 +24,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.MainSwitchBarController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -62,11 +62,13 @@ public class GraphicsDriverDashboard extends DashboardFragment {
         super.onActivityCreated(savedInstanceState);
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         final GraphicsDriverGlobalSwitchBarController switchBarController =
                 new GraphicsDriverGlobalSwitchBarController(
-                        activity, new SwitchBarController(switchBar));
+                        activity, new MainSwitchBarController(switchBar));
         getSettingsLifecycle().addObserver(switchBarController);
+        switchBar.setTitle(
+                getContext().getString(R.string.graphics_driver_main_switch_title));
         switchBar.show();
     }
 
