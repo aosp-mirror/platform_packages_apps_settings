@@ -162,6 +162,13 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
                 ? getIntent().getIntExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_NONE)
                 : Integer.MIN_VALUE;
 
+        final boolean extraDevicePasswordRequirementOnly = getIntent().getBooleanExtra(
+                EXTRA_DEVICE_PASSWORD_REQUIREMENT_ONLY, false);
+
+        // Use 30th bit to encode extraDevicePasswordRequirementOnly, since the top bit (31th bit)
+        // encodes whether EXTRA_PASSWORD_COMPLEXITY has been absent.
+        final int logValue = extraPasswordComplexity
+                | (extraDevicePasswordRequirementOnly ? 1 << 30 : 0);
         // this activity is launched by either ACTION_SET_NEW_PASSWORD or
         // ACTION_SET_NEW_PARENT_PROFILE_PASSWORD
         final int action = ACTION_SET_NEW_PASSWORD.equals(mNewPasswordAction)
@@ -175,6 +182,6 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
                 action,
                 SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
                 callingAppPackageName,
-                extraPasswordComplexity);
+                logValue);
     }
 }

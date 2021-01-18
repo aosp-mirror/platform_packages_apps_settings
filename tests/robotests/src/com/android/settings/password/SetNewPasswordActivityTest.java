@@ -315,6 +315,7 @@ public class SetNewPasswordActivityTest {
     @Test
     @Config(shadows = {ShadowPasswordUtils.class})
     public void launchChooseLock_setNewParentProfilePassword_DevicePasswordRequirementExtra() {
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
 
@@ -328,6 +329,12 @@ public class SetNewPasswordActivityTest {
 
         assertThat(actualIntent.getBooleanExtra(
                 EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY, false)).isTrue();
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                Integer.MIN_VALUE | (1 << 30));
     }
 
     @Test
