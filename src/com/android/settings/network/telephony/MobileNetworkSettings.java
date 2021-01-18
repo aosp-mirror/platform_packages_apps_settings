@@ -158,6 +158,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(EnabledNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
+        use(Enable2gPreferenceController.class).init(mSubId);
 
         final WifiCallingPreferenceController wifiCallingPreferenceController =
                 use(WifiCallingPreferenceController.class).init(mSubId);
