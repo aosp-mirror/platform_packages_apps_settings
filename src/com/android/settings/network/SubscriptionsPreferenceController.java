@@ -498,7 +498,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
     @VisibleForTesting
     public void connectCarrierNetwork() {
-        if (mTelephonyManager == null || !mTelephonyManager.isDataEnabled()) {
+        if (!MobileNetworkUtils.isMobileDataEnabled(mContext)) {
             return;
         }
         if (mWifiPickerTrackerHelper != null) {
