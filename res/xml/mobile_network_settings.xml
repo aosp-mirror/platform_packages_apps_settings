@@ -172,12 +172,12 @@
                 settings:controller="com.android.settings.network.telephony.VideoCallingPreferenceController"/>
 
             <SwitchPreference
-                android:key="cross_sim_calling_key"
-                android:title="@string/cross_sim_calling_settings_title"
+                android:key="backup_calling_key"
+                android:title="@string/backup_calling_settings_title"
                 android:persistent="false"
-                android:summary="@string/cross_sim_calling_setting_summary"
-                settings:keywords="@string/keywords_cross_sim_calling"
-                settings:controller="com.android.settings.network.telephony.CrossSimCallingPreferenceController"/>
+                android:summary="@string/backup_calling_setting_summary"
+                settings:keywords="@string/keywords_backup_calling"
+                settings:controller="com.android.settings.network.telephony.BackupCallingPreferenceController"/>
 
         </PreferenceCategory>
 

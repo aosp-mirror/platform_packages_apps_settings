@@ -34,22 +34,22 @@ import com.android.settings.R;
 import java.util.Objects;
 
 /**
- * Preference controller for "Cross SIM Calling"
+ * Preference controller for "Backup Calling"
  **/
-public class CrossSimCallingPreferenceController extends TelephonyTogglePreferenceController {
+public class BackupCallingPreferenceController extends TelephonyTogglePreferenceController {
 
-    private static final String LOG_TAG = "CrossSimCallingPrefCtrl";
+    private static final String LOG_TAG = "BackupCallingPrefCtrl";
 
     private int mSubId;
     private Preference mPreference;
 
     /**
-     * Class constructor of cross sim calling.
+     * Class constructor of backup calling.
      *
      * @param context of settings
      * @param key assigned within UI entry of XML file
      **/
-    public CrossSimCallingPreferenceController(Context context, String key) {
+    public BackupCallingPreferenceController(Context context, String key) {
         super(context, key);
     }
 
@@ -59,14 +59,14 @@ public class CrossSimCallingPreferenceController extends TelephonyTogglePreferen
      * @param subId is the subscription id
      * @return this instance after initialization
      **/
-    public CrossSimCallingPreferenceController init(int subId) {
+    public BackupCallingPreferenceController init(int subId) {
         mSubId = subId;
         return this;
     }
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return hasCrossSimCallingFeature(subId) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return hasBackupCallingFeature(subId) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     /**
@@ -129,13 +129,13 @@ public class CrossSimCallingPreferenceController extends TelephonyTogglePreferen
         }
         String summary = displayName;
         String finalText = String.format(
-                getResourcesForSubId().getString(R.string.cross_sim_calling_setting_summary),
+                getResourcesForSubId().getString(R.string.backup_calling_setting_summary),
                 summary)
                 .toString();
         preference.setSummary(finalText);
     }
 
-    private boolean hasCrossSimCallingFeature(int subscriptionId) {
+    private boolean hasBackupCallingFeature(int subscriptionId) {
         PersistableBundle carrierConfig = getCarrierConfigForSubId(subscriptionId);
         return (carrierConfig != null)
                 && carrierConfig.getBoolean(
