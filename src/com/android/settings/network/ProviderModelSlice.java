@@ -116,7 +116,9 @@ public class ProviderModelSlice extends WifiSlice {
         // Second section:  Add a carrier item.
         if (hasCarrier) {
             mHelper.updateTelephony();
-            listBuilder.addRow(mHelper.createCarrierRow());
+            listBuilder.addRow(
+                    mHelper.createCarrierRow(
+                            worker != null ? worker.getNetworkTypeDescription() : ""));
             maxListSize--;
         }
 

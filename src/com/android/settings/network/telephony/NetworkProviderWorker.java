@@ -16,6 +16,9 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settingslib.mobile.MobileMappings.getIconKey;
+import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
+
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -34,6 +37,8 @@ import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.wifi.slice.WifiScanWorker;
+import com.android.settingslib.mobile.MobileMappings;
+import com.android.settingslib.mobile.MobileMappings.Config;
 
 import java.util.Collections;
 import java.util.concurrent.Executor;
@@ -58,6 +63,10 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     @VisibleForTesting
     final PhoneStateListener mPhoneStateListener;
     private TelephonyManager mTelephonyManager;
+    private Config mConfig = null;
+    private TelephonyDisplayInfo mTelephonyDisplayInfo =
+            new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_UNKNOWN,
+                    TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
 
     public NetworkProviderWorker(Context context, Uri uri) {
         super(context, uri);
@@ -75,6 +84,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         mDataEnabledListener = new MobileDataEnabledListener(context, this);
         mConnectivityListener = new DataConnectivityListener(context, this);
         mSignalStrengthListener = new SignalStrengthListener(context, this);
+        mConfig = getConfig(mContext);
     }
 
     @Override
@@ -135,6 +145,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_SERVICE_STATE
                     | PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED);
             mMobileDataObserver.register(mContext, mDefaultDataSubid);
+            mConfig = getConfig(mContext);
         } else {
             mSignalStrengthListener.updateSubscriptionIds(Collections.emptySet());
         }
@@ -217,6 +228,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         @Override
         public void onDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) {
             Log.d(TAG, "onDisplayInfoChanged: telephonyDisplayInfo=" + telephonyDisplayInfo);
+            mTelephonyDisplayInfo = telephonyDisplayInfo;
             updateSlice();
         }
     }
@@ -224,5 +236,28 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     @VisibleForTesting
     int getDefaultDataSubscriptionId() {
         return SubscriptionManager.getDefaultDataSubscriptionId();
+    }
+
+
+    private String updateNetworkTypeName(Context context, Config config,
+            TelephonyDisplayInfo telephonyDisplayInfo, int subId) {
+        String iconKey = getIconKey(telephonyDisplayInfo);
+        int resId = mapIconSets(config).get(iconKey).dataContentDescription;
+        return resId != 0
+                ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId) : "";
+
+    }
+
+    @VisibleForTesting
+    Config getConfig(Context context) {
+        return MobileMappings.Config.readConfig(context);
+    }
+
+    /**
+     * Get currently description of mobile network type.
+     */
+    public String getNetworkTypeDescription() {
+        return updateNetworkTypeName(mContext, mConfig, mTelephonyDisplayInfo,
+                mDefaultDataSubid);
     }
 }

@@ -120,9 +120,9 @@ public class ProviderModelSliceHelper {
         return true;
     }
 
-    protected ListBuilder.RowBuilder createCarrierRow() {
+    protected ListBuilder.RowBuilder createCarrierRow(String networkTypeDescription) {
         final String title = getMobileTitle();
-        final String summary = getMobileSummary();
+        final String summary = getMobileSummary(networkTypeDescription);
         Drawable drawable = mContext.getDrawable(
                 R.drawable.ic_signal_strength_zero_bar_no_internet);
         try {
@@ -241,13 +241,12 @@ public class ProviderModelSliceHelper {
                 NO_CELL_DATA_TYPE_ICON, false);
     }
 
-    private String getMobileSummary() {
-        String summary = "";
-        //TODO: get radio technology.
-        String networkType = "";
+    private String getMobileSummary(String networkTypeDescription) {
+        String summary = networkTypeDescription;
         if (isDataSimActive()) {
             summary = mContext.getString(R.string.preference_summary_default_combination,
-                    mContext.getString(R.string.mobile_data_connection_active), networkType);
+                    mContext.getString(R.string.mobile_data_connection_active),
+                    networkTypeDescription);
         } else if (!isMobileDataEnabled()) {
             summary = mContext.getString(R.string.mobile_data_off_summary);
         }

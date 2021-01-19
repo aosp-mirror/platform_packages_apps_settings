@@ -302,7 +302,8 @@ public class ProviderModelSliceTest {
 
         when(mMockCarrierRowBuild.getTitle()).thenReturn("mockRow");
         when(mMockCarrierRowBuild.getPrimaryAction()).thenReturn(mockSliceAction);
-        when(mProviderModelSliceHelper.createCarrierRow()).thenReturn(mMockCarrierRowBuild);
+        when(mProviderModelSliceHelper.createCarrierRow(anyString())).thenReturn(
+                mMockCarrierRowBuild);
     }
 
     private SliceAction getPrimarySliceAction() {
