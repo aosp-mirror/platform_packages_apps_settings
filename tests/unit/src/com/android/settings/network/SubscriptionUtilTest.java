@@ -361,6 +361,26 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    public void getUniqueDisplayName_fullSubscriptionInfo_correctNameReturned() {
+        // Each subscription's default display name is unique.
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1));
+
+        TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
+        when(sub1Telmgr.getLine1Number()).thenReturn("1112223333");
+        when(mTelMgr.createForSubscriptionId(SUBID_1)).thenReturn(sub1Telmgr);
+
+        final CharSequence name =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info1, mContext);
+
+        assertThat(name).isNotNull();
+        assertEquals(CARRIER_1, name);
+    }
+
+    @Test
     public void isInactiveInsertedPSim_nullSubInfo_doesNotCrash() {
         assertThat(SubscriptionUtil.isInactiveInsertedPSim(null)).isFalse();
     }
