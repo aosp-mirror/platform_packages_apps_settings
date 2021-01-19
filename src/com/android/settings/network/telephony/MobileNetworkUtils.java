@@ -294,6 +294,22 @@ public class MobileNetworkUtils {
     }
 
     /**
+     * Return {@code true} if mobile data is enabled
+     */
+    public static boolean isMobileDataEnabled(Context context) {
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+        if (!telephonyManager.isDataEnabled()) {
+            // Check if the data is enabled on the second SIM in the case of dual SIM.
+            final TelephonyManager tmDefaultData = telephonyManager.createForSubscriptionId(
+                    SubscriptionManager.getDefaultDataSubscriptionId());
+            if (tmDefaultData == null || !tmDefaultData.isDataEnabled()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Set whether to enable data for {@code subId}, also whether to disable data for other
      * subscription
      */
