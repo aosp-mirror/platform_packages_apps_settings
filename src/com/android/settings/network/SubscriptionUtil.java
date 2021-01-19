@@ -24,15 +24,18 @@ import static com.android.internal.util.CollectionUtils.emptyIfNull;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.os.ParcelUuid;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.UiccCardInfo;
 import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.telephony.MccTable;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 import com.android.settingslib.DeviceInfoUtils;
@@ -513,5 +516,65 @@ public class SubscriptionUtil {
                 .stream()
                 .filter(sub -> sub.isEmbedded() && groupUuid.equals(sub.getGroupUuid()))
                 .collect(Collectors.toList());
+    }
+
+    /** Returns the formatted phone number of a subscription. */
+    @Nullable
+    public static String getFormattedPhoneNumber(
+            Context context, SubscriptionInfo subscriptionInfo) {
+        if (subscriptionInfo == null) {
+            Log.e(TAG, "Invalid subscription.");
+            return null;
+        }
+
+        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+        String rawPhoneNumber =
+                telephonyManager.getLine1Number(subscriptionInfo.getSubscriptionId());
+        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
+        if (TextUtils.isEmpty(rawPhoneNumber)) {
+            return null;
+        }
+        return PhoneNumberUtils.formatNumber(rawPhoneNumber, countryIso);
+    }
+
+    /**
+     * Returns the subscription on a removable sim card. The device does not need to be on removable
+     * slot.
+     */
+    @Nullable
+    public static SubscriptionInfo getFirstRemovableSubscription(Context context) {
+        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+        SubscriptionManager subscriptionManager =
+                context.getSystemService(SubscriptionManager.class);
+        List<UiccCardInfo> cardInfos = telephonyManager.getUiccCardsInfo();
+        if (cardInfos == null) {
+            Log.w(TAG, "UICC cards info list is empty.");
+            return null;
+        }
+        List<SubscriptionInfo> allSubscriptions = subscriptionManager.getAllSubscriptionInfoList();
+        if (allSubscriptions == null) {
+            Log.w(TAG, "All subscription info list is empty.");
+            return null;
+        }
+        for (UiccCardInfo cardInfo : cardInfos) {
+            if (cardInfo == null) {
+                Log.w(TAG, "Got null card.");
+                continue;
+            }
+            if (!cardInfo.isRemovable()
+                    || cardInfo.getCardId() == TelephonyManager.UNSUPPORTED_CARD_ID) {
+                Log.i(TAG, "Skip embedded card or invalid cardId on slot: "
+                        + cardInfo.getSlotIndex());
+                continue;
+            }
+            Log.i(TAG, "Target removable cardId :" + cardInfo.getCardId());
+            for (SubscriptionInfo subInfo : allSubscriptions) {
+                // Match the removable card id with subscription card id.
+                if (cardInfo.getCardId() == subInfo.getCardId()) {
+                    return subInfo;
+                }
+            }
+        }
+        return null;
     }
 }
