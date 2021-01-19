@@ -115,7 +115,10 @@ public class ProviderModelSlice extends WifiSlice {
 
         // Second section:  Add a carrier item.
         if (hasCarrier) {
-            listBuilder.addRow(mHelper.createCarrierRow());
+            mHelper.updateTelephony();
+            listBuilder.addRow(
+                    mHelper.createCarrierRow(
+                            worker != null ? worker.getNetworkTypeDescription() : ""));
             maxListSize--;
         }
 
@@ -141,7 +144,7 @@ public class ProviderModelSlice extends WifiSlice {
         if (worker == null || wifiList == null) {
             log("wifiList is null");
             int resId = R.string.non_carrier_network_unavailable;
-            if (!hasCarrier || mHelper.isNoCarrierData()) {
+            if (!hasCarrier || !mHelper.isDataSimActive()) {
                 log("No carrier item or no carrier data.");
                 resId = R.string.all_network_unavailable;
             }

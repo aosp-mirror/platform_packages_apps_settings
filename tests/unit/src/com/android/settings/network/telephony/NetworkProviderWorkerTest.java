@@ -69,7 +69,6 @@ public class NetworkProviderWorkerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
 
-        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
@@ -141,6 +140,7 @@ public class NetworkProviderWorkerTest {
     public void onSubscriptionsChanged_notifySubscriptionChanged_callUpdateSlice() {
         mMockNetworkProviderWorker.onSlicePinned();
         mMockNetworkProviderWorker.receiveNotification(false);
+        mMockNetworkProviderWorker.setDefaultDataSubscriptionId(2);
 
         mMockNetworkProviderWorker.onSubscriptionsChanged();
 
@@ -215,17 +215,6 @@ public class NetworkProviderWorkerTest {
 
     @Test
     @UiThreadTest
-    public void onActiveDataSubscriptionIdChanged_notifyPhoneStateListener_callUpdateSlice() {
-        mMockNetworkProviderWorker.onSlicePinned();
-        mMockNetworkProviderWorker.receiveNotification(false);
-
-        mMockNetworkProviderWorker.mPhoneStateListener.onActiveDataSubscriptionIdChanged(1);
-
-        assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
-    }
-
-    @Test
-    @UiThreadTest
     public void onDisplayInfoChanged_notifyPhoneStateListener_callUpdateSlice() {
         mMockNetworkProviderWorker.onSlicePinned();
         mMockNetworkProviderWorker.receiveNotification(false);
@@ -238,7 +227,7 @@ public class NetworkProviderWorkerTest {
 
     public class MockNetworkProviderWorker extends NetworkProviderWorker {
         private boolean mHasNotification = false;
-
+        private int mDefaultDataSubId = 1;
         MockNetworkProviderWorker(Context context, Uri uri) {
             super(context, uri);
         }
@@ -259,6 +248,15 @@ public class NetworkProviderWorkerTest {
 
         public void setWifiPickerTracker(WifiPickerTracker wifiPickerTracker) {
             mWifiPickerTracker = wifiPickerTracker;
+        }
+
+        @Override
+        public int getDefaultDataSubscriptionId() {
+            return mDefaultDataSubId;
+        }
+
+        public void setDefaultDataSubscriptionId(int defaultDataSubId) {
+            mDefaultDataSubId = defaultDataSubId;
         }
     }
 }
