@@ -20,6 +20,14 @@
         android:title="@string/provider_internet_settings"
         settings:keywords="@string/keywords_wifi">
 
+    <!-- Resetting your internet description -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="resetting_your_internet"
+        android:title="@string/resetting_internet_text"
+        android:selectable="false"
+        android:layout="@layout/resetting_internet"
+        settings:allowDividerBelow="true"/>
+
     <!-- View airplane mode networks button -->
     <com.android.settingslib.widget.LayoutPreference
         android:key="view_airplane_mode_netwokrs_button"
