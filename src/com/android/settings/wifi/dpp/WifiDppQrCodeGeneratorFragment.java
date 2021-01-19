@@ -162,7 +162,8 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         setQrCode();
     }
 
-    @VisibleForTesting ComponentName getNearbySharingComponent() {
+    @VisibleForTesting
+    ComponentName getNearbySharingComponent() {
         String nearbyComponent = Settings.Secure.getString(
                 getContext().getContentResolver(),
                 Settings.Secure.NEARBY_SHARING_COMPONENT);
@@ -221,7 +222,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     }
 
     private Button createActionButton(Drawable icon, CharSequence title, View.OnClickListener r) {
-        Button b = (Button) LayoutInflater.from(getContext()).inflate(
+        final Button b = (Button) LayoutInflater.from(getContext()).inflate(
                 com.android.internal.R.layout.chooser_action_button, null);
         if (icon != null) {
             final int size = getResources()
@@ -252,8 +253,10 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     Button createNearbyButton(Intent originalIntent, View.OnClickListener r) {
         final TargetInfo ti = getNearbySharingTarget(originalIntent);
         if (ti == null) return null;
-
-        return createActionButton(ti.getDisplayIcon(getContext()), ti.getDisplayLabel(), r);
+        final Button button = createActionButton(ti.getDisplayIcon(getContext()),
+                ti.getDisplayLabel(), r);
+        button.setAllCaps(false);
+        return button;
     }
 
     private void setQrCode() {
