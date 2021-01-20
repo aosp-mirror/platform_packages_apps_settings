@@ -26,14 +26,13 @@ import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
-import android.content.ComponentName;
+import android.app.admin.PasswordPolicy;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -61,9 +60,6 @@ public class ChooseLockGenericControllerTest {
     private ManagedLockPasswordProvider mManagedLockPasswordProvider;
 
     @Mock
-    private DevicePolicyManager mDevicePolicyManager;
-
-    @Mock
     private LockPatternUtils mLockPatternUtils;
 
     @Before
@@ -71,6 +67,7 @@ public class ChooseLockGenericControllerTest {
         MockitoAnnotations.initMocks(this);
 
         when(mLockPatternUtils.hasSecureLockScreen()).thenReturn(true);
+        setDevicePolicyPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
         mController = createController(PASSWORD_COMPLEXITY_NONE);
         SettingsShadowResources.overrideResource(R.bool.config_hide_none_security_option, false);
         SettingsShadowResources.overrideResource(R.bool.config_hide_swipe_security_option, false);
@@ -206,9 +203,7 @@ public class ChooseLockGenericControllerTest {
 
     @Test
     public void upgradeQuality_noDpmRequirement_shouldReturnQuality() {
-        doReturn(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED)
-                .when(mDevicePolicyManager)
-                .getPasswordQuality(nullable(ComponentName.class), anyInt());
+        setDevicePolicyPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
 
         final int upgradedQuality =
             mController.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
@@ -218,9 +213,7 @@ public class ChooseLockGenericControllerTest {
 
     @Test
     public void upgradeQuality_dpmRequirement_shouldReturnRequiredQuality() {
-        doReturn(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC)
-                .when(mDevicePolicyManager)
-                .getPasswordQuality(nullable(ComponentName.class), anyInt());
+        setDevicePolicyPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
 
         final int upgradedQuality =
             mController.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
@@ -230,8 +223,7 @@ public class ChooseLockGenericControllerTest {
 
     @Test
     public void upgradeQuality_complexityHigh_minQualityNumericComplex() {
-        when(mDevicePolicyManager.getPasswordQuality(nullable(ComponentName.class), anyInt()))
-                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
+        setDevicePolicyPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
         ChooseLockGenericController controller = createController(PASSWORD_COMPLEXITY_HIGH);
 
         assertThat(controller.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED))
@@ -240,8 +232,7 @@ public class ChooseLockGenericControllerTest {
 
     @Test
     public void upgradeQuality_complexityMedium_minQualityNumericComplex() {
-        when(mDevicePolicyManager.getPasswordQuality(nullable(ComponentName.class), anyInt()))
-                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
+        setDevicePolicyPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
         ChooseLockGenericController controller = createController(PASSWORD_COMPLEXITY_MEDIUM);
 
         assertThat(controller.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED))
@@ -250,12 +241,19 @@ public class ChooseLockGenericControllerTest {
 
     @Test
     public void upgradeQuality_complexityLow_minQualitySomething() {
-        when(mDevicePolicyManager.getPasswordQuality(nullable(ComponentName.class), anyInt()))
-                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
+        setDevicePolicyPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
         ChooseLockGenericController controller = createController(PASSWORD_COMPLEXITY_LOW);
 
         assertThat(controller.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED))
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+    }
+
+    private void setDevicePolicyPasswordQuality(int quality) {
+        PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = quality;
+
+        when(mLockPatternUtils.getRequestedPasswordMetrics(anyInt(), anyBoolean()))
+                .thenReturn(policy.getMinMetrics());
     }
 
     private ChooseLockGenericController createController(
@@ -264,7 +262,7 @@ public class ChooseLockGenericControllerTest {
                 application,
                 0 /* userId */,
                 minPasswordComplexity,
-                mDevicePolicyManager,
+                false,
                 mManagedLockPasswordProvider,
                 mLockPatternUtils);
     }

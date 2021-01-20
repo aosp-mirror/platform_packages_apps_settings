@@ -19,6 +19,7 @@ package com.android.settings.password;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.internal.widget.PasswordValidationError.CONTAINS_INVALID_CHARACTERS;
 import static com.android.internal.widget.PasswordValidationError.CONTAINS_SEQUENCE;
 import static com.android.internal.widget.PasswordValidationError.NOT_ENOUGH_DIGITS;
@@ -31,7 +32,6 @@ import static com.android.internal.widget.PasswordValidationError.NOT_ENOUGH_UPP
 import static com.android.internal.widget.PasswordValidationError.RECENTLY_USED;
 import static com.android.internal.widget.PasswordValidationError.TOO_LONG;
 import static com.android.internal.widget.PasswordValidationError.TOO_SHORT;
-import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
 
@@ -96,6 +96,9 @@ import java.util.List;
 public class ChooseLockPassword extends SettingsActivity {
     private static final String TAG = "ChooseLockPassword";
 
+    static final String EXTRA_KEY_MIN_METRICS = "min_metrics";
+    static final String EXTRA_KEY_MIN_COMPLEXITY = "min_complexity";
+
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
@@ -119,8 +122,13 @@ public class ChooseLockPassword extends SettingsActivity {
             mIntent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, false);
         }
 
-        public IntentBuilder setPasswordQuality(int quality) {
-            mIntent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, quality);
+        /**
+         * Sets the intended credential type i.e. whether it's numeric PIN or general password
+         * @param passwordType password type represented by one of the {@code PASSWORD_QUALITY_}
+         *   constants.
+         */
+        public IntentBuilder setPasswordType(int passwordType) {
+            mIntent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, passwordType);
             return this;
         }
 
@@ -156,8 +164,11 @@ public class ChooseLockPassword extends SettingsActivity {
             return this;
         }
 
-        public IntentBuilder setRequestedMinComplexity(@PasswordComplexity int level) {
-            mIntent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, level);
+        /** Sets the minimum password requirement in terms of complexity and metrics */
+        public IntentBuilder setPasswordRequirement(@PasswordComplexity int level,
+                PasswordMetrics metrics) {
+            mIntent.putExtra(EXTRA_KEY_MIN_COMPLEXITY, level);
+            mIntent.putExtra(EXTRA_KEY_MIN_METRICS, metrics);
             return this;
         }
 
@@ -240,7 +251,7 @@ public class ChooseLockPassword extends SettingsActivity {
 
         private LockPatternUtils mLockPatternUtils;
         private SaveAndFinishWorker mSaveAndFinishWorker;
-        private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
+        private int mPasswordType = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
         protected Stage mUiStage = Stage.Introduction;
         private PasswordRequirementAdapter mPasswordRequirementAdapter;
         private GlifLayout mLayout;
@@ -410,19 +421,22 @@ public class ChooseLockPassword extends SettingsActivity {
             mForFace = intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
             mForBiometrics = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
-            mMinComplexity = intent.getIntExtra(
-                    EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
 
-            mRequestedQuality = intent.getIntExtra(
+            mPasswordType = intent.getIntExtra(
                     LockPatternUtils.PASSWORD_TYPE_KEY, PASSWORD_QUALITY_NUMERIC);
             mUnificationProfileId = intent.getIntExtra(
                     EXTRA_KEY_UNIFICATION_PROFILE_ID, UserHandle.USER_NULL);
 
-            mMinMetrics = mLockPatternUtils.getRequestedPasswordMetrics(mUserId);
+            mMinComplexity = intent.getIntExtra(EXTRA_KEY_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
+            mMinMetrics = intent.getParcelableExtra(EXTRA_KEY_MIN_METRICS);
+            if (mMinMetrics == null) mMinMetrics = new PasswordMetrics(CREDENTIAL_TYPE_NONE);
             // If we are to unify a work challenge at the end of the credential enrollment, manually
             // merge any password policy from that profile here, so we are enrolling a compliant
             // password. This is because once unified, the profile's password policy will
             // be enforced on the new credential.
+            //TODO: Move this logic to ChooseLockGeneric; let ChooseLockGeneric be the only place
+            //where password requirement mixing happens. ChooseLockPassword simply enforces what's
+            //set via IntentBuilder.setPasswordRequirement()
             if (mUnificationProfileId != UserHandle.USER_NULL) {
                 mMinMetrics.maxWith(
                         mLockPatternUtils.getRequestedPasswordMetrics(mUnificationProfileId));
@@ -494,9 +508,9 @@ public class ChooseLockPassword extends SettingsActivity {
                 mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
             }
 
-            mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mRequestedQuality
-                    || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mRequestedQuality
-                    || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == mRequestedQuality;
+            mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mPasswordType
+                    || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mPasswordType
+                    || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == mPasswordType;
 
             setupPasswordRequirementsView(view);
 
