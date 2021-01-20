@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
 public class ProviderModelSliceHelper {
     private static final String TAG = "ProviderModelSlice";
     private final SubscriptionManager mSubscriptionManager;
-    private final TelephonyManager mTelephonyManager;
+    private TelephonyManager mTelephonyManager;
     protected final Context mContext;
     private CustomSliceable mSliceable;
 
@@ -120,9 +120,9 @@ public class ProviderModelSliceHelper {
         return true;
     }
 
-    protected ListBuilder.RowBuilder createCarrierRow() {
+    protected ListBuilder.RowBuilder createCarrierRow(String networkTypeDescription) {
         final String title = getMobileTitle();
-        final String summary = getMobileSummary();
+        final String summary = getMobileSummary(networkTypeDescription);
         Drawable drawable = mContext.getDrawable(
                 R.drawable.ic_signal_strength_zero_bar_no_internet);
         try {
@@ -241,13 +241,12 @@ public class ProviderModelSliceHelper {
                 NO_CELL_DATA_TYPE_ICON, false);
     }
 
-    private String getMobileSummary() {
-        String summary = "";
-        //TODO: get radio technology.
-        String networkType = "";
+    private String getMobileSummary(String networkTypeDescription) {
+        String summary = networkTypeDescription;
         if (isDataSimActive()) {
             summary = mContext.getString(R.string.preference_summary_default_combination,
-                    mContext.getString(R.string.mobile_data_connection_active), networkType);
+                    mContext.getString(R.string.mobile_data_connection_active),
+                    networkTypeDescription);
         } else if (!isMobileDataEnabled()) {
             summary = mContext.getString(R.string.mobile_data_off_summary);
         }
@@ -276,5 +275,17 @@ public class ProviderModelSliceHelper {
         return Arrays.stream(TextUtils.split(keywords, ","))
                 .map(String::trim)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * To update the telephony with subid.
+     */
+    public void updateTelephony() {
+        if (mSubscriptionManager == null || mSubscriptionManager.getDefaultDataSubscriptionId()
+                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return;
+        }
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(
+                mSubscriptionManager.getDefaultDataSubscriptionId());
     }
 }

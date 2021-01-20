@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.view.View;
 
@@ -34,6 +35,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 
+import java.util.List;
+
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.
  */
@@ -44,10 +47,16 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
     private FingerprintEnrollSidecar mSidecar;
     private boolean mNextClicked;
+    private boolean mCanAssumeUdfps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
+        final List<FingerprintSensorPropertiesInternal> props =
+                fingerprintManager.getSensorPropertiesInternal();
+        mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
         setContentView(getContentView());
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
@@ -84,15 +93,19 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
             throw new IllegalStateException("HAT and GkPwHandle both missing...");
         }
 
-        View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
-        if (animationView instanceof FingerprintFindSensorAnimation) {
-            mAnimation = (FingerprintFindSensorAnimation) animationView;
-        } else {
-            mAnimation = null;
+        mAnimation = null;
+        if (!mCanAssumeUdfps) {
+            View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
+            if (animationView instanceof FingerprintFindSensorAnimation) {
+                mAnimation = (FingerprintFindSensorAnimation) animationView;
+            }
         }
     }
 
     protected int getContentView() {
+        if (mCanAssumeUdfps) {
+            return R.layout.udfps_enroll_find_sensor_layout;
+        }
         return R.layout.fingerprint_enroll_find_sensor;
     }
 

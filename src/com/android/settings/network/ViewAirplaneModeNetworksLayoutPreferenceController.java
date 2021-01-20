@@ -90,9 +90,7 @@ public class ViewAirplaneModeNetworksLayoutPreferenceController extends Abstract
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        if (isAvailable()) {
-            generateLayout();
-        }
+        generateLayout();
     }
 
     /** Lifecycle.Event.ON_START */
@@ -156,6 +154,15 @@ public class ViewAirplaneModeNetworksLayoutPreferenceController extends Abstract
         }
         if (mButton != null) {
             mButton.setVisibility(isWifiEnabled ? View.GONE : View.VISIBLE);
+        }
+    }
+
+    /**
+     * Sets the visibility of the preference.
+     */
+    public void setVisible(boolean visible) {
+        if (mPreference != null) {
+            mPreference.setVisible(visible);
         }
     }
 }
