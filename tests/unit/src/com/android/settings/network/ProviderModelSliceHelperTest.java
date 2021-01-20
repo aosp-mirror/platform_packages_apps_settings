@@ -164,18 +164,49 @@ public class ProviderModelSliceHelperTest {
     }
 
     @Test
-    public void createCarrierRow_hasDefaultDataSubscriptionId_verifyTitle() {
+    public void createCarrierRow_hasDdsAndActiveNetworkIsNotCellular_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
+        String expectedSubtitle = "5G";
+        String networkType = "5G";
         int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
                 mDefaultDataSubscriptionInfo);
         when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
         mBundle.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
-        ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow();
+
+        ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow(
+                networkType);
 
         assertThat(testRowBuild.getTitle()).isEqualTo(expectDisplayName);
+        assertThat(testRowBuild.getSubtitle()).isEqualTo(expectedSubtitle);
+    }
+
+    @Test
+    public void createCarrierRow_hasDdsAndActiveNetworkIsCellular_verifyTitleAndSummary() {
+        String expectDisplayName = "Name1";
+        String networkType = "5G";
+        String connectedText = ResourcesUtils.getResourcesString(mContext,
+                "mobile_data_connection_active");
+        String expectedSubtitle = ResourcesUtils.getResourcesString(mContext,
+                "preference_summary_default_combination", connectedText, networkType);
+
+        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+        when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
+                mDefaultDataSubscriptionInfo);
+        when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
+        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        mBundle.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+
+        ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow(
+                networkType);
+
+        assertThat(testRowBuild.getTitle()).isEqualTo(expectDisplayName);
+        assertThat(testRowBuild.getSubtitle()).isEqualTo(expectedSubtitle);
     }
 
     @Test

@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -44,6 +45,7 @@ import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
@@ -59,6 +61,8 @@ import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.WifiConfigController2;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
+import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -91,6 +95,15 @@ public class NetworkProviderSettingsTest {
     private WifiPickerTracker mMockWifiPickerTracker;
     @Mock
     private PreferenceManager mPreferenceManager;
+    @Mock
+    private ConnectivitySubsystemsRecoveryManager mConnectivitySubsystemsRecoveryManager;
+    @Mock
+    private ViewAirplaneModeNetworksLayoutPreferenceController
+            mViewAirplaneModeNetworksButtonPreference;
+    @Mock
+    private LayoutPreference mResetInternetPreference;
+    @Mock
+    private MenuItem mMenuItem;
 
     @Before
     public void setUp() {
@@ -373,5 +386,58 @@ public class NetworkProviderSettingsTest {
                 wifiEntry, mode));
         when(wifiDialog2.getController()).thenReturn(controller);
         return wifiDialog2;
+    }
+
+    @Test
+    public void onOptionsItemSelected_fixConnectivity_triggerSubsystemRestart() {
+        doReturn(true).when(mConnectivitySubsystemsRecoveryManager).isRecoveryAvailable();
+        mNetworkProviderSettings.mConnectivitySubsystemsRecoveryManager =
+                mConnectivitySubsystemsRecoveryManager;
+        doReturn(false).when(mNetworkProviderSettings).isPhoneOnCall();
+        doReturn(NetworkProviderSettings.MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
+
+        mNetworkProviderSettings.onOptionsItemSelected(mMenuItem);
+
+        verify(mConnectivitySubsystemsRecoveryManager).triggerSubsystemRestart(any(), any());
+    }
+
+    @Test
+    public void onOptionsItemSelected_fixConnectivityOnCall_neverTriggerSubsystemRestart() {
+        doReturn(true).when(mConnectivitySubsystemsRecoveryManager).isRecoveryAvailable();
+        mNetworkProviderSettings.mConnectivitySubsystemsRecoveryManager =
+                mConnectivitySubsystemsRecoveryManager;
+        doReturn(true).when(mNetworkProviderSettings).isPhoneOnCall();
+        doNothing().when(mNetworkProviderSettings).showResetInternetDialog();
+        doReturn(NetworkProviderSettings.MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
+
+        mNetworkProviderSettings.onOptionsItemSelected(mMenuItem);
+
+        verify(mConnectivitySubsystemsRecoveryManager, never()).triggerSubsystemRestart(any(),
+                any());
+    }
+
+    @Test
+    public void onSubsystemRestartOperationBegin_showResetInternetHideApmNetworks() {
+        mNetworkProviderSettings.mResetInternetPreference = mResetInternetPreference;
+        mNetworkProviderSettings.mViewAirplaneModeNetworksButtonPreference =
+                mViewAirplaneModeNetworksButtonPreference;
+
+        mNetworkProviderSettings.onSubsystemRestartOperationBegin();
+
+        verify(mResetInternetPreference).setVisible(true);
+        verify(mViewAirplaneModeNetworksButtonPreference).setVisible(false);
+    }
+
+    @Test
+    public void onSubsystemRestartOperationEnd_showApmNetworksHideResetInternet() {
+        mNetworkProviderSettings.mResetInternetPreference = mResetInternetPreference;
+        mNetworkProviderSettings.mViewAirplaneModeNetworksButtonPreference =
+                mViewAirplaneModeNetworksButtonPreference;
+        doReturn(true).when(mViewAirplaneModeNetworksButtonPreference).isAvailable();
+
+        mNetworkProviderSettings.onSubsystemRestartOperationEnd();
+
+        verify(mResetInternetPreference).setVisible(false);
+        verify(mViewAirplaneModeNetworksButtonPreference).setVisible(true);
     }
 }
