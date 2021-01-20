@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.emergency;
 
 import android.content.Context;
 import android.content.Intent;
