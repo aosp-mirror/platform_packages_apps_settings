@@ -32,17 +32,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class CrossSimCallingPreferenceControllerTest {
+public class BackupCallingPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
-    private CrossSimCallingPreferenceController mController;
+    private BackupCallingPreferenceController mController;
     private Context mContext;
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
 
-        mController = new CrossSimCallingPreferenceController(mContext, "cross_sim_calling_key");
+        mController = new BackupCallingPreferenceController(mContext, "backup_calling_key");
         mController.init(SUB_ID);
     }
 

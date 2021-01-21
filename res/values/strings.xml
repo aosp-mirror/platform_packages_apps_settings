@@ -926,6 +926,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title">Touch the sensor</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
+    <string name="security_settings_udfps_enroll_find_sensor_message">It\u2019s on the screen. Look for the fingerprint with a glowing circle.</string>
     <!-- Content description of graphic that shows where the fingerprint of the device is [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description">Illustration with device and fingerprint sensor location</string>
     <!-- Label text shown in fingerprint dialog for renaming a fingerprint template [CHAR LIMIT=22] -->
@@ -5237,6 +5239,8 @@
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aid</item>
         <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aids</item>
     </plurals>
+    <!-- Title for the accessibility audio adjustment page. [CHAR LIMIT=50] -->
+    <string name="accessibility_audio_adjustment_title">Audio adjustment</string>
 
     <!-- Preference's shortcut when enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_shortcut_enabled">Shortcut on</string>
@@ -12309,14 +12313,14 @@
     <!-- Summary for Wi-Fi calling to explain this feature [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_summary">Use Wi\u2011Fi for calls to improve quality</string>
 
-    <!-- Mobile network settings screen, title of Cross SIM calling setting.  [CHAR LIMIT=NONE] -->
-    <string name="cross_sim_calling_settings_title">Cross SIM calling</string>
+    <!-- Mobile network settings screen, title of Backup calling setting.  [CHAR LIMIT=NONE] -->
+    <string name="backup_calling_settings_title">Backup calling</string>
 
-    <!-- Cross SIM calling summary.  [CHAR LIMIT=100] -->
-    <string name="cross_sim_calling_setting_summary">Allow <xliff:g id="cross_sim_calling_operator_text" example="Google Fi">%1$s</xliff:g> call over the default data SIM when <xliff:g id="cross_sim_calling_carrier_text" example="Google Fi">%1$s</xliff:g> is unavailable.</string>
+    <!-- Backup calling summary.  [CHAR LIMIT=100] -->
+    <string name="backup_calling_setting_summary">If <xliff:g id="backup_calling_operator_text" example="Google Fi">%1$s</xliff:g> is unavailable, use your mobile data SIM to make and receive <xliff:g id="backup_calling_carrier_text" example="Google Fi">%1$s</xliff:g> calls.</string>
 
     <!-- List of synonyms for the cross SIM calling titles, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_cross_sim_calling">cross sim calling</string>
+    <string name="keywords_backup_calling">backup calling</string>
 
     <!-- Title for enable MMS notification when trying to receive MMS.  [CHAR LIMIT=40] -->
     <string name="enable_receiving_mms_notification_title">Incoming MMS message</string>
@@ -12536,6 +12540,16 @@
     <string name="viewing_airplane_mode_networks">Viewing airplane mode networks</string>
     <!-- Label text to turn off airplane mode. [CHAR LIMIT=40] -->
     <string name="turn_off_airplane_mode">Turn off airplane mode</string>
+    <!-- Title for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
+    <string name="reset_your_internet_title">Reset your internet?</string>
+    <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
+    <string name="reset_internet_text" product="default">This will end your phone call</string>
+    <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
+    <string name="reset_internet_text" product="tablet">This will end your phone call</string>
+    <!-- Description to wait device resetting internet networks. [CHAR_LIMIT=NONE] -->
+    <string name="resetting_internet_text">Resetting your internet\u2026</string>
+    <!-- Menu option for data connectivity recovery for all requested technologies. [CHAR_LIMIT=NONE] -->
+    <string name="fix_connectivity">Fix connectivity</string>
 
     <!-- Summary text separator for preferences including a short description
          (eg. "Connected / 5G"). [CHAR LIMIT=50] -->

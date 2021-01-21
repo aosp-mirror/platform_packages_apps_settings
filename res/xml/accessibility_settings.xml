@@ -100,24 +100,19 @@
             settings:searchable="false"
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
 
-        <SwitchPreference
-            android:key="toggle_primary_mono"
-            android:persistent="false"
-            android:summary="@string/accessibility_toggle_primary_mono_summary"
-            android:title="@string/accessibility_toggle_primary_mono_title"
-            settings:controller="com.android.settings.accessibility.PrimaryMonoPreferenceController"/>
-
-        <com.android.settings.accessibility.BalanceSeekBarPreference
-            android:key="seekbar_primary_balance"
-            android:persistent="false"
-            android:title="@string/accessibility_toggle_primary_balance_title"/>
-
         <Preference
             android:key="hearing_aid_preference"
             android:persistent="false"
             android:summary="@string/accessibility_hearingaid_not_connected_summary"
             android:title="@string/accessibility_hearingaid_title"
             settings:controller="com.android.settings.accessibility.AccessibilityHearingAidPreferenceController"/>
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.AudioAdjustmentFragment"
+            android:key="audio_adjustment_preference_screen"
+            android:persistent="false"
+            android:title="@string/accessibility_audio_adjustment_title"
+            settings:searchable="true"/>
 
         <Preference
             android:key="rtt_setting"

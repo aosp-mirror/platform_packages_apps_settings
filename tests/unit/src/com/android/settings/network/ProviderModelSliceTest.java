@@ -178,7 +178,7 @@ public class ProviderModelSliceTest {
     public void getSlice_noWifiAndHasCarrierNoData_oneCarrierOneGridRowWithAllNetworkUnavailable() {
         mWifiList.clear();
         mMockNetworkProviderWorker.updateSelfResults(null);
-        mockHelperCondition(false, true, true, null);
+        mockHelperCondition(false, true, false, null);
 
         final Slice slice = mMockProviderModelSlice.getSlice();
 
@@ -192,7 +192,7 @@ public class ProviderModelSliceTest {
     public void getSlice_noWifiAndNoCarrier_oneCarrierOneGridRowWithNonCarrierNetworkUnavailable() {
         mWifiList.clear();
         mMockProviderModelSlice = new MockProviderModelSlice(mContext, null);
-        mockHelperCondition(false, true, false, null);
+        mockHelperCondition(false, true, true, null);
 
         final Slice slice = mMockProviderModelSlice.getSlice();
 
@@ -212,7 +212,7 @@ public class ProviderModelSliceTest {
                 WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi2_key", true);
         mWifiList.add(mMockWifiSliceItem2);
         mMockNetworkProviderWorker.updateSelfResults(mWifiList);
-        mockHelperCondition(false, true, false, mWifiList.get(0));
+        mockHelperCondition(false, true, true, mWifiList.get(0));
 
         final Slice slice = mMockProviderModelSlice.getSlice();
 
@@ -268,10 +268,10 @@ public class ProviderModelSliceTest {
     }
 
     private void mockHelperCondition(boolean airplaneMode, boolean hasCarrier,
-            boolean isNoCarrierData, WifiSliceItem connectedWifiItem) {
+            boolean isDataSimActive, WifiSliceItem connectedWifiItem) {
         when(mProviderModelSliceHelper.isAirplaneModeEnabled()).thenReturn(airplaneMode);
         when(mProviderModelSliceHelper.hasCarrier()).thenReturn(hasCarrier);
-        when(mProviderModelSliceHelper.isNoCarrierData()).thenReturn(isNoCarrierData);
+        when(mProviderModelSliceHelper.isDataSimActive()).thenReturn(isDataSimActive);
         when(mProviderModelSliceHelper.getConnectedWifiItem(any())).thenReturn(connectedWifiItem);
     }
 
@@ -302,7 +302,8 @@ public class ProviderModelSliceTest {
 
         when(mMockCarrierRowBuild.getTitle()).thenReturn("mockRow");
         when(mMockCarrierRowBuild.getPrimaryAction()).thenReturn(mockSliceAction);
-        when(mProviderModelSliceHelper.createCarrierRow()).thenReturn(mMockCarrierRowBuild);
+        when(mProviderModelSliceHelper.createCarrierRow(anyString())).thenReturn(
+                mMockCarrierRowBuild);
     }
 
     private SliceAction getPrimarySliceAction() {
@@ -371,6 +372,7 @@ public class ProviderModelSliceTest {
 
     @Test
     public void onNotifyChange_intentPrimaryAction_shouldConnectCarrierNetwork() {
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
         Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
 
         mMockProviderModelSlice.onNotifyChange(intent);

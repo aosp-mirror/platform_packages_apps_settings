@@ -18,7 +18,6 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
-import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
 import android.content.Context;
@@ -42,8 +41,8 @@ public class ChooseLockGenericController {
     private final Context mContext;
     private final int mUserId;
     @PasswordComplexity private final int mRequestedMinComplexity;
+    private final boolean mDevicePasswordRequirementOnly;
     private ManagedLockPasswordProvider mManagedPasswordProvider;
-    private DevicePolicyManager mDpm;
     private final LockPatternUtils mLockPatternUtils;
 
     public ChooseLockGenericController(Context context, int userId) {
@@ -51,6 +50,7 @@ public class ChooseLockGenericController {
                 context,
                 userId,
                 PASSWORD_COMPLEXITY_NONE,
+                /* mOnlyEnforceDevicePasswordRequirement */ false,
                 new LockPatternUtils(context));
     }
 
@@ -59,12 +59,14 @@ public class ChooseLockGenericController {
      *                               when determining the available screen lock types
      */
     public ChooseLockGenericController(Context context, int userId,
-            @PasswordComplexity int requestedMinComplexity, LockPatternUtils lockPatternUtils) {
+            @PasswordComplexity int requestedMinComplexity,
+            boolean devicePasswordRequirementOnly,
+            LockPatternUtils lockPatternUtils) {
         this(
                 context,
                 userId,
                 requestedMinComplexity,
-                context.getSystemService(DevicePolicyManager.class),
+                devicePasswordRequirementOnly,
                 ManagedLockPasswordProvider.get(context, userId),
                 lockPatternUtils);
     }
@@ -74,28 +76,29 @@ public class ChooseLockGenericController {
             Context context,
             int userId,
             @PasswordComplexity int requestedMinComplexity,
-            DevicePolicyManager dpm,
+            boolean devicePasswordRequirementOnly,
             ManagedLockPasswordProvider managedLockPasswordProvider,
             LockPatternUtils lockPatternUtils) {
         mContext = context;
         mUserId = userId;
         mRequestedMinComplexity = requestedMinComplexity;
+        mDevicePasswordRequirementOnly = devicePasswordRequirementOnly;
         mManagedPasswordProvider = managedLockPasswordProvider;
-        mDpm = dpm;
         mLockPatternUtils = lockPatternUtils;
     }
 
     /**
-     * Returns the highest quality among the specified {@code quality}, the quality required by
-     * {@link DevicePolicyManager#getPasswordQuality}, and the quality required by min password
-     * complexity.
+     * Returns the highest quality among the specified {@code quality}, the password requiremnet
+     * set by device admins (legacy password quality metrics and password complexity), and the
+     * min password complexity requested by the calling app.
      */
     public int upgradeQuality(int quality) {
         // Compare specified quality and dpm quality
         // TODO(b/142781408): convert from quality to credential type once PIN is supported.
-        int dpmUpgradedQuality = Math.max(quality, mDpm.getPasswordQuality(null, mUserId));
+        int dpmUpgradedQuality = Math.max(quality, LockPatternUtils.credentialTypeToPasswordQuality(
+                getAggregatedPasswordMetrics().credType));
         return Math.max(dpmUpgradedQuality,
-                PasswordMetrics.complexityLevelToMinQuality(mRequestedMinComplexity));
+                PasswordMetrics.complexityLevelToMinQuality(getAggregatedPasswordComplexity()));
     }
 
     /**
@@ -192,5 +195,16 @@ public class ChooseLockGenericController {
             }
         }
         return locks;
+    }
+
+    public PasswordMetrics getAggregatedPasswordMetrics() {
+        return mLockPatternUtils.getRequestedPasswordMetrics(mUserId,
+                mDevicePasswordRequirementOnly);
+    }
+
+    public int getAggregatedPasswordComplexity() {
+        return Math.max(mRequestedMinComplexity,
+                mLockPatternUtils.getRequestedPasswordComplexity(
+                        mUserId, mDevicePasswordRequirementOnly));
     }
 }
