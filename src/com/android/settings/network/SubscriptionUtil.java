@@ -324,6 +324,23 @@ public class SubscriptionUtil {
         return displayNames.getOrDefault(subscriptionId, "");
     }
 
+    /**
+     * Return the display name for a subscription, which is guaranteed to be unique.
+     * The logic to create this name has the following order of operations:
+     * 1) If the original display name is not unique, the last four digits of the phone number
+     *    will be appended.
+     * 2) If the phone number is not visible or the last four digits are shared with another
+     *    subscription, the subscription id will be appended to the original display name.
+     * More details can be found at go/unique-sub-display-names.
+     *
+     * @return map of active subscription ids to diaplay names.
+     */
+    @VisibleForTesting
+    public static CharSequence getUniqueSubscriptionDisplayName(
+            SubscriptionInfo info, Context context) {
+        return getUniqueSubscriptionDisplayName(info.getSubscriptionId(), context);
+    }
+
     public static String getDisplayName(SubscriptionInfo info) {
         final CharSequence name = info.getDisplayName();
         if (name != null) {

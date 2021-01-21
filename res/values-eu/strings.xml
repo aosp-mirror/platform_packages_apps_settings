@@ -427,6 +427,8 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Utzi"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Ukitu sentsorea"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Telefonoaren atzealdean dago. Erabili hatz erakuslea."</string>
+    <!-- no translation found for security_settings_udfps_enroll_find_sensor_message (1181700918690345832) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Hatz-marken sentsorea gailuan non dagoen erakusten duen ilustrazioa"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Izena"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Ados"</string>
@@ -1626,7 +1628,7 @@
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Telefonoaren "<b>"barneko memoriako"</b>" datu guztiak ezabatuko dira, besteak beste:\n\n"<li>"Google-ko kontua,"</li>\n<li>"sistemako eta aplikazioetako datuak eta ezarpenak,"</li>\n<li>"deskargatutako aplikazioak."</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Kontu hauetan hasi duzu saioa:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Badaude erabiltzaile gehiago gailu honetan.\n"</string>
-    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musika"</li>\n<li>"Argazkiak"</li>\n<li>"Bestelako erabiltzaile-datuak"</li></string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"musika,"</li>\n<li>"argazkiak,"</li>\n<li>"bestelako erabiltzaile-datuak."</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM txartelak"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Ez da utziko bertan behera operadorearekin kontratatuta duzun zerbitzu-plana."</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Musika, irudiak eta bestelako erabiltzaile-datuak garbitzeko, "<b>"USB bidezko memoriako"</b>" eduki guztia ezabatu behar da."</string>
@@ -2135,7 +2137,7 @@
     <string name="display_category_title" msgid="6638191682294461408">"Pantaila"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Testua eta pantaila"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interakzioa kontrolatzeko aukerak"</string>
-    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Sakatu laguntza lortzeko"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Pantaila sakatzeko aukerei buruzko laguntza"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Sistemaren kontrolak"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Deskargatutako aplikazioak"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Esperimentalak"</string>
@@ -3650,7 +3652,7 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aplikazioari jakinarazpenak atzitzeko aukera desaktibatzen badiozu, baliteke ez molestatzeko modurako sarbidea era desaktibatzea."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desaktibatu"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Utzi"</string>
-    <string name="notification_listener_type_title" msgid="2791552789364336733">"Onartutako jakinarazpen motak"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Baimendutako jakinarazpen motak"</string>
     <string name="notif_type_ongoing" msgid="2295338067608686711">"Abian diren jakinarazpen garrantzitsuak"</string>
     <string name="notif_type_conversation" msgid="3014259738224129504">"Elkarrizketei buruzko jakinarazpenak"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Jakinarazpen ohartarazleak"</string>
@@ -4986,9 +4988,12 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Larrialdi-deiak"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Zure operadoreak ez ditu onartzen wifi bidezko larrialdi-deiak.\nLarrialdi-dei bat egin behar dela hautematean, gailua automatikoki aldatzen da sare mugikor batera deia egiteko.\nSare mugikorren estaldura-eremuetan bakarrik egin daitezke larrialdi-deiak."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Kalitatea hobetzeko, erabili wifi-konexioa deietan"</string>
-    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Beste SIM txartel batetik deitzeko aukera"</string>
-    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Egin deiak eta bidali SMS mezuak beste SIM txartel batekin SIM txartel hau erabilita."</string>
-    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"beste SIM txartel batetik deitzeko aukera"</string>
+    <!-- no translation found for backup_calling_settings_title (519714752900364326) -->
+    <skip />
+    <!-- no translation found for backup_calling_setting_summary (451295393447465830) -->
+    <skip />
+    <!-- no translation found for keywords_backup_calling (8592800915478816800) -->
+    <skip />
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"MMS mezu bat jaso duzu"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Ezin da bidali MMS mezua"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Sakatu hau <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> operadorearekin MMS mezuak erabiltzeko baimena emateko datu-konexioa desaktibatuta dagoenean"</string>
@@ -5052,10 +5057,8 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Desaktibatuta"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM txartelak"</string>
-    <!-- no translation found for airplane_safe_networks (6057114281183247124) -->
-    <skip />
-    <!-- no translation found for airplane_safe_networks_summary (4879620804022818385) -->
-    <skip />
+    <string name="airplane_safe_networks" msgid="6057114281183247124">"Erakutsi hegaldi moduko sareak"</string>
+    <string name="airplane_safe_networks_summary" msgid="4879620804022818385">"Aurkitu hegaldi moduko sareak eta konektatu haietara."</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"hegaldia, hegaldietarako segurua"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Deiak eta SMSak"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi bidezko deiak"</string>
@@ -5075,6 +5078,16 @@
     <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
     <skip />
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Desaktibatu hegaldi modua"</string>
+    <!-- no translation found for reset_your_internet_title (4856899004343241310) -->
+    <skip />
+    <!-- no translation found for reset_internet_text (8797910368942544453) -->
+    <skip />
+    <!-- no translation found for reset_internet_text (8797910368942544453) -->
+    <skip />
+    <!-- no translation found for resetting_internet_text (6696779371800051806) -->
+    <skip />
+    <!-- no translation found for fix_connectivity (2781433603228089501) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Konektatuta"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Ez da automatikoki konektatuko Internetera"</string>
