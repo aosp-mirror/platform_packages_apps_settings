@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.emergency;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-import static com.android.settings.gestures.EmergencyGesturePreferenceController.OFF;
-import static com.android.settings.gestures.EmergencyGesturePreferenceController.ON;
+import static com.android.settings.emergency.EmergencyGesturePreferenceController.OFF;
+import static com.android.settings.emergency.EmergencyGesturePreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 

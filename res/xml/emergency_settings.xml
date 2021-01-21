@@ -29,8 +29,8 @@
         android:key="gesture_emergency_summary"
         android:title="@string/emergency_gesture_screen_title"
         android:order="100"
-        android:fragment="com.android.settings.gestures.EmergencyGestureSettings"
-        settings:controller="com.android.settings.gestures.EmergencyGestureEntrypointPreferenceController" />
+        android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
+        settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
     <com.android.settingslib.RestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"

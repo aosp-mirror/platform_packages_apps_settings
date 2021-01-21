@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.emergency;
 
-import static com.android.settings.gestures.EmergencyGestureSoundPreferenceController.OFF;
-import static com.android.settings.gestures.EmergencyGestureSoundPreferenceController.ON;
+import static com.android.settings.emergency.EmergencyGestureSoundPreferenceController.OFF;
+import static com.android.settings.emergency.EmergencyGestureSoundPreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
