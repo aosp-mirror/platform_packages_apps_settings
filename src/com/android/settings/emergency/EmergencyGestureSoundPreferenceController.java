@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.emergency;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -22,11 +22,12 @@ import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller for emergency sos gesture setting
  */
-public class EmergencyGestureSoundPreferenceController extends GesturePreferenceController {
+public class EmergencyGestureSoundPreferenceController extends TogglePreferenceController {
 
     @VisibleForTesting
     static final int ON = 1;
@@ -37,11 +38,6 @@ public class EmergencyGestureSoundPreferenceController extends GesturePreference
 
     public EmergencyGestureSoundPreferenceController(Context context, String key) {
         super(context, key);
-    }
-
-    @Override
-    protected String getVideoPrefKey() {
-        return "emergency_gesture_screen_video";
     }
 
     private static boolean isGestureAvailable(Context context) {
