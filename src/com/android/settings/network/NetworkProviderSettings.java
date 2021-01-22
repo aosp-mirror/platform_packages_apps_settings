@@ -207,6 +207,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             mViewAirplaneModeNetworksButtonPreference;
     @VisibleForTesting
     LayoutPreference mResetInternetPreference;
+    @VisibleForTesting
+    ConnectedEthernetNetworkController mConnectedEthernetNetworkController;
 
     /**
      * Mobile networks list for provider model
@@ -267,6 +269,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
         addNetworkMobileProviderController();
         addViewAirplaneModeNetworksButtonController();
+        addConnectedEthernetNetworkController();
     }
 
     private void addNetworkMobileProviderController() {
@@ -285,6 +288,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                             getContext(), getSettingsLifecycle());
         }
         mViewAirplaneModeNetworksButtonPreference.displayPreference(getPreferenceScreen());
+    }
+
+    private void addConnectedEthernetNetworkController() {
+        if (mConnectedEthernetNetworkController == null) {
+            mConnectedEthernetNetworkController =
+                    new ConnectedEthernetNetworkController(getContext(), getSettingsLifecycle());
+        }
+        mConnectedEthernetNetworkController.displayPreference(getPreferenceScreen());
     }
 
     @Override
