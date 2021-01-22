@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.emergency;
 
 import static com.android.settingslib.emergencynumber.EmergencyNumberUtils.EMERGENCY_NUMBER_OVERRIDE_AUTHORITY;
 
