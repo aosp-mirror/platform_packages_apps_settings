@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.emergency;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -71,7 +71,7 @@ public class EmergencyGesturePreferenceController extends BasePreferenceControll
 
     @VisibleForTesting
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY, OFF) == ON;
+        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY, ON) == ON;
     }
 
     @Override

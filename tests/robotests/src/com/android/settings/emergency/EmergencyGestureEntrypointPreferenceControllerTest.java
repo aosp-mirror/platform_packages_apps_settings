@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,54 +14,79 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.emergency;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController.ACTION_EMERGENCY_GESTURE_SETTINGS;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 
-import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settingslib.emergencynumber.EmergencyNumberUtils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
-public class EmergencyGestureNumberOverridePreferenceControllerTest {
-    private static final String PREF_KEY = "test";
+public class EmergencyGestureEntrypointPreferenceControllerTest {
 
-    @Mock
-    private EmergencyNumberUtils mEmergencyNumberUtils;
+    private static final String TEST_PKG_NAME = "test_pkg";
+    private static final String TEST_CLASS_NAME = "name";
+    private static final Intent SETTING_INTENT = new Intent(ACTION_EMERGENCY_GESTURE_SETTINGS)
+            .setPackage(TEST_PKG_NAME);
+
     private Context mContext;
-    private EmergencyGestureNumberOverridePreferenceController mController;
+    private ShadowPackageManager mPackageManager;
+    private EmergencyGestureEntrypointPreferenceController mController;
+    private static final String PREF_KEY = "gesture_emergency_button";
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
-        mController = new EmergencyGestureNumberOverridePreferenceController(mContext, PREF_KEY);
+        mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mController = new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
     }
 
     @After
     public void tearDown() {
         SettingsShadowResources.reset();
+    }
+
+    @Test
+    public void constructor_hasCustomPackageConfig_shouldSetIntent() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = TEST_PKG_NAME;
+        info.activityInfo.name = TEST_CLASS_NAME;
+
+        mPackageManager.addResolveInfoForIntent(SETTING_INTENT, info);
+
+        SettingsShadowResources.overrideResource(
+                R.bool.config_show_emergency_gesture_settings,
+                Boolean.TRUE);
+
+        SettingsShadowResources.overrideResource(
+                R.string.emergency_gesture_settings_package,
+                TEST_PKG_NAME);
+
+        mController = new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
+
+        assertThat(mController.mIntent).isNotNull();
     }
 
     @Test
@@ -81,17 +106,4 @@ public class EmergencyGestureNumberOverridePreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
-
-    @Test
-    public void updateState_shouldLoadNumberFromSettings() {
-        final Preference preference = new Preference(mContext);
-        mController.mEmergencyNumberUtils = mEmergencyNumberUtils;
-        when(mEmergencyNumberUtils.getPoliceNumber()).thenReturn("123");
-
-        mController.updateState(preference);
-
-        assertThat(preference.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.emergency_gesture_call_for_help_summary, "123"));
-    }
-
 }

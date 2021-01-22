@@ -35,7 +35,7 @@ public class TranscodeDefaultOptionPreferenceController extends TogglePreference
 
     @Override
     public boolean isChecked() {
-        return !SystemProperties.getBoolean(TRANSCODE_DEFAULT_SYS_PROP_KEY, true);
+        return !SystemProperties.getBoolean(TRANSCODE_DEFAULT_SYS_PROP_KEY, false);
     }
 
     @Override
