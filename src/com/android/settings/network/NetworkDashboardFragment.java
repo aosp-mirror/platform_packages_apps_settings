@@ -113,7 +113,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                                 metricsFeatureProvider);
         final InternetPreferenceController internetPreferenceController =
                 Utils.isProviderModelEnabled(context)
-                        ? new InternetPreferenceController(context)
+                        ? new InternetPreferenceController(context, lifecycle)
                         : null;
 
         final VpnPreferenceController vpnPreferenceController =
@@ -125,9 +125,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
             lifecycle.addObserver(mobilePlanPreferenceController);
             if (wifiPreferenceController != null) {
                 lifecycle.addObserver(wifiPreferenceController);
-            }
-            if (internetPreferenceController != null) {
-                lifecycle.addObserver(internetPreferenceController);
             }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
