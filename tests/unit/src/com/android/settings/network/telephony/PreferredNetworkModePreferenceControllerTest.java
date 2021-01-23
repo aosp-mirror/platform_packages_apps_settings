@@ -18,17 +18,20 @@ package com.android.settings.network.telephony;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settings.network.telephony.MobileNetworkUtils.getRafFromNetworkType;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.GSM;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_TD_SCDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.WCDMA;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
@@ -41,7 +44,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settings.testutils.ResourcesUtils;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -89,12 +91,6 @@ public class PreferredNetworkModePreferenceControllerTest {
         mPreference.setKey(mController.getPreferenceKey());
     }
 
-    @After
-    public void tearDown() {
-        Settings.Global.putInt(
-                mContext.getContentResolver(), Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0);
-    }
-
     @Test
     public void getAvailabilityStatus_hideCarrierNetworkSettings_returnUnavailable() {
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
@@ -134,9 +130,10 @@ public class PreferredNetworkModePreferenceControllerTest {
 
     @Test
     public void updateState_updateByNetworkMode() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
-                TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
+        // NETWORK_MODE_TDSCDMA_GSM_WCDMA = RAF_TD_SCDMA | GSM | WCDMA
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER)).thenReturn(
+                (long) (RAF_TD_SCDMA | GSM | WCDMA));
 
         mController.updateState(mPreference);
 
@@ -148,28 +145,13 @@ public class PreferredNetworkModePreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_updateSuccess() {
-        doReturn(true).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
-                getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
-
+    public void onPreferenceChange_updateNetworkMode() {
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
 
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isEqualTo(
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
-    }
-
-    @Test
-    public void onPreferenceChange_updateFail() {
-        doReturn(false).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
-                getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
-
-        mController.onPreferenceChange(mPreference,
-                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
-
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isNotEqualTo(
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
+        verify(mTelephonyManager, times(1)).setAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
+                MobileNetworkUtils.getRafFromNetworkType(
+                        TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
     }
 }
