@@ -25,10 +25,9 @@
         android:order="1"
         android:layout="@layout/settings_entity_header" />
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="block"
-        android:order="2"
-        android:layout="@layout/styled_switch_bar" />
+        android:order="2" />
 
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
