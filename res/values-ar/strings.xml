@@ -443,8 +443,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"إلغاء"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"لمس زر الاستشعار"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"زر الاستشعار موجود على الجزء الخلفي لهاتفك. استخدِم إصبع السبابة."</string>
-    <!-- no translation found for security_settings_udfps_enroll_find_sensor_message (1181700918690345832) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"المستشعر على الشاشة. ابحث عن بصمة إصبع محاطة بدائرة لامعة."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"صورة توضيحية تبرز الجهاز وموقع جهاز استشعار بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"الاسم"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"حسنًا"</string>
@@ -2368,6 +2367,8 @@
       <item quantity="other">تم حفظ <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> سماعة أذن طبية</item>
       <item quantity="one">تم حفظ <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> سماعة أذن طبية</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"الاختصار مفعَّل"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"غير مفعَّل"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"مفعّل"</string>
@@ -5320,12 +5321,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"مكالمات الطوارئ"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"‏لا يتيح مشغّل شبكة الجوّال مكالمات الطوارئ من خلال ميزة \"الاتصال عبر Wi-Fi\".\nويتم تبديل الجهاز تلقائيًا إلى شبكة جوّال لإجراء مكالمة طوارئ.\nلا يمكن إجراء مكالمات الطوارئ إلا في المناطق التي تتوفّر فيها تغطية شبكة الجوّال."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"‏استخدام شبكة Wi‑Fi لإجراء المكالمات لتحسين الجودة"</string>
-    <!-- no translation found for backup_calling_settings_title (519714752900364326) -->
-    <skip />
-    <!-- no translation found for backup_calling_setting_summary (451295393447465830) -->
-    <skip />
-    <!-- no translation found for keywords_backup_calling (8592800915478816800) -->
-    <skip />
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"الاتصال الاحتياطي"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"‏إذا لم يكن <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> متاحًا، يمكنك استخدام شريحة SIM لإجراء مكالمات <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> وتلقّيها."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"الاتصال الاحتياطي"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"رسالة وسائط متعددة واردة"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"يتعذّر إرسال رسالة وسائط متعددة"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"انقر للسماح بالمراسلة باستخدام رسائل الوسائط المتعددة على <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> عند إيقاف بيانات الجوّال."</string>
@@ -5407,18 +5405,16 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"‏الاتصال بشبكات Wi-Fi عامة"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"‏الاتصال بالشبكة، الإنترنت، لاسلكي، بيانات، wifi، wi-fi، wi fi، خلوي، جهاز جوّال، مشغل شبكة الجوال، جيل رابع، جيل ثالث، جيل ثاني، lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"عرض الشبكات المتاحة في وضع الطيران"</string>
-    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
-    <skip />
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"عرض الشبكات المتاحة في وضع الطيران"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"إيقاف وضع الطيران"</string>
-    <!-- no translation found for reset_your_internet_title (4856899004343241310) -->
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"هل تريد إعادة ضبط شبكات الإنترنت؟"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"سيؤدي هذا إلى إنهاء مكالمتك الهاتفية."</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"سيؤدي هذا إلى إنهاء مكالمتك الهاتفية."</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"جارٍ إعادة ضبط شبكات الإنترنت…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"حل مشكلة اتصال البيانات"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for resetting_internet_text (6696779371800051806) -->
-    <skip />
-    <!-- no translation found for fix_connectivity (2781433603228089501) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"متصلة بالإنترنت"</string>
@@ -5440,6 +5436,5 @@
     <string name="category_name_color" msgid="937514550918977151">"اللون"</string>
     <string name="category_name_others" msgid="2366006298768550310">"غير ذلك"</string>
     <string name="category_name_general" msgid="7737273712848115886">"عام"</string>
-    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
-    <skip />
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"عرض كل التطبيقات"</string>
 </resources>
