@@ -16,6 +16,9 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.network.InternetUpdater.INTERNET_CELLULAR;
+import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
+import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 import static com.android.settings.slices.CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -223,6 +226,47 @@ public class NetworkProviderWorkerTest {
                 new TelephonyDisplayInfo(14, 0));
 
         assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
+    }
+
+    @Test
+    public void onInternetTypeChanged_connectedFromWifiToEthernet_callUpdateSlice() {
+        mMockNetworkProviderWorker.receiveNotification(false);
+        mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_WIFI);
+
+        mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_ETHERNET);
+
+        assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
+    }
+
+    @Test
+    public void onInternetTypeChanged_connectedFromEthernetToCarrier_callUpdateSlice() {
+        mMockNetworkProviderWorker.receiveNotification(false);
+        mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_ETHERNET);
+
+        mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_CELLULAR);
+
+        assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
+    }
+
+    @Test
+    public void isEthernetConnected_connectedEthernet_shouldBeTrue() {
+        mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_ETHERNET);
+
+        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isTrue();
+    }
+
+    @Test
+    public void isEthernetConnected_connectedWifi_shouldBeFalse() {
+        mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_WIFI);
+
+        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isFalse();
+    }
+
+    @Test
+    public void isEthernetConnected_connectedCarrier_shouldBeFalse() {
+        mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_CELLULAR);
+
+        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isFalse();
     }
 
     public class MockNetworkProviderWorker extends NetworkProviderWorker {
