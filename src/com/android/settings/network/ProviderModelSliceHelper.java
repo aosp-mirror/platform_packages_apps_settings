@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
 public class ProviderModelSliceHelper {
     private static final String TAG = "ProviderModelSlice";
     private final SubscriptionManager mSubscriptionManager;
-    private final TelephonyManager mTelephonyManager;
+    private TelephonyManager mTelephonyManager;
     protected final Context mContext;
     private CustomSliceable mSliceable;
 
@@ -78,10 +78,10 @@ public class ProviderModelSliceHelper {
         Log.d(TAG, s);
     }
 
-    protected ListBuilder.HeaderBuilder createHeader() {
+    protected ListBuilder.HeaderBuilder createHeader(String intentAction) {
         return new ListBuilder.HeaderBuilder()
                 .setTitle(mContext.getText(R.string.summary_placeholder))
-                .setPrimaryAction(getPrimarySliceAction());
+                .setPrimaryAction(getPrimarySliceAction(intentAction));
     }
 
     protected ListBuilder createListBuilder(Uri uri) {
@@ -91,12 +91,12 @@ public class ProviderModelSliceHelper {
         return builder;
     }
 
-    protected GridRowBuilder createMessageGridRow(int messageResId) {
+    protected GridRowBuilder createMessageGridRow(int messageResId, String intentAction) {
         final CharSequence title = mContext.getText(messageResId);
         return new GridRowBuilder()
                 // Add cells to the grid row.
                 .addCell(new GridRowBuilder.CellBuilder().addTitleText(title))
-                .setPrimaryAction(getPrimarySliceAction());
+                .setPrimaryAction(getPrimarySliceAction(intentAction));
     }
 
     @Nullable
@@ -120,9 +120,9 @@ public class ProviderModelSliceHelper {
         return true;
     }
 
-    protected ListBuilder.RowBuilder createCarrierRow() {
+    protected ListBuilder.RowBuilder createCarrierRow(String networkTypeDescription) {
         final String title = getMobileTitle();
-        final String summary = getMobileSummary();
+        final String summary = getMobileSummary(networkTypeDescription);
         Drawable drawable = mContext.getDrawable(
                 R.drawable.ic_signal_strength_zero_bar_no_internet);
         try {
@@ -145,15 +145,15 @@ public class ProviderModelSliceHelper {
         return rowBuilder;
     }
 
-    protected SliceAction getPrimarySliceAction() {
+    protected SliceAction getPrimarySliceAction(String intentAction) {
         return SliceAction.createDeeplink(
-                getPrimaryAction(),
+                getPrimaryAction(intentAction),
                 Utils.createIconWithDrawable(new ColorDrawable(Color.TRANSPARENT)),
                 ListBuilder.ICON_IMAGE, mContext.getText(R.string.summary_placeholder));
     }
 
-    private PendingIntent getPrimaryAction() {
-        final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS")
+    private PendingIntent getPrimaryAction(String intentAction) {
+        final Intent intent = new Intent(intentAction)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 intent, PendingIntent.FLAG_IMMUTABLE /* flags */);
@@ -215,6 +215,8 @@ public class ProviderModelSliceHelper {
             drawable = shared.get();
         }
 
+        drawable.setTint(
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal));
         if (isDataSimActive()) {
             drawable.setTint(Utils.getColorAccentDefaultColor(mContext));
         }
@@ -239,13 +241,12 @@ public class ProviderModelSliceHelper {
                 NO_CELL_DATA_TYPE_ICON, false);
     }
 
-    private String getMobileSummary() {
-        String summary = "";
-        //TODO: get radio technology.
-        String networkType = "";
+    private String getMobileSummary(String networkTypeDescription) {
+        String summary = networkTypeDescription;
         if (isDataSimActive()) {
             summary = mContext.getString(R.string.preference_summary_default_combination,
-                    mContext.getString(R.string.mobile_data_connection_active), networkType);
+                    mContext.getString(R.string.mobile_data_connection_active),
+                    networkTypeDescription);
         } else if (!isMobileDataEnabled()) {
             summary = mContext.getString(R.string.mobile_data_off_summary);
         }
@@ -260,7 +261,8 @@ public class ProviderModelSliceHelper {
         final SubscriptionInfo defaultSubscription = mSubscriptionManager.getActiveSubscriptionInfo(
                 mSubscriptionManager.getDefaultDataSubscriptionId());
         if (defaultSubscription != null) {
-            title = defaultSubscription.getDisplayName().toString();
+            title = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    defaultSubscription, mContext).toString();
         }
         return title;
     }
@@ -274,5 +276,17 @@ public class ProviderModelSliceHelper {
         return Arrays.stream(TextUtils.split(keywords, ","))
                 .map(String::trim)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * To update the telephony with subid.
+     */
+    public void updateTelephony() {
+        if (mSubscriptionManager == null || mSubscriptionManager.getDefaultDataSubscriptionId()
+                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return;
+        }
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(
+                mSubscriptionManager.getDefaultDataSubscriptionId());
     }
 }

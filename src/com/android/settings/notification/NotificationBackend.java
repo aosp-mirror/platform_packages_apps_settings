@@ -595,12 +595,13 @@ public class NotificationBackend {
     }
 
     public NotificationListenerFilter getListenerFilter(ComponentName cn, int userId) {
+        NotificationListenerFilter nlf = null;
         try {
-            return sINM.getListenerFilter(cn, userId);
+            nlf = sINM.getListenerFilter(cn, userId);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }
-        return new NotificationListenerFilter();
+        return nlf != null ? nlf : new NotificationListenerFilter();
     }
 
     public void setListenerFilter(ComponentName cn, int userId, NotificationListenerFilter nlf) {

@@ -16,14 +16,20 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.CDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.EVDO;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.GSM;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_TD_SCDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.WCDMA;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -38,7 +44,6 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
@@ -50,7 +55,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.network.ims.MockWfcQueryImsState;
-import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -196,10 +200,10 @@ public class MobileNetworkUtilsTest {
     public void isCdmaOptions_worldModeWithGsmWcdma_returnTrue() {
         when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_GSM);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
-
-        Settings.Global.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
+        // NETWORK_MODE_LTE_GSM_WCDMA = LTE | GSM | WCDMA
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER)).thenReturn(
+                (long) (LTE | GSM | WCDMA));
 
         assertThat(MobileNetworkUtils.isCdmaOptions(mContext, SUB_ID_1)).isTrue();
     }
@@ -271,9 +275,10 @@ public class MobileNetworkUtilsTest {
     public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdmaGsm_returnTrue() {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM);
+        // NETWORK_MODE_LTE_TDSCDMA_GSM = LTE | RAF_TD_SCDMA | GSM
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER)).thenReturn(
+                (long) (LTE | RAF_TD_SCDMA | GSM));
 
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
@@ -282,9 +287,10 @@ public class MobileNetworkUtilsTest {
     public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdmaGsmWcdma_returnTrue() {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA);
+        // NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA = LTE | RAF_TD_SCDMA | GSM | WCDMA
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER)).thenReturn(
+                (long) (LTE | RAF_TD_SCDMA | GSM | WCDMA));
 
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
@@ -293,9 +299,10 @@ public class MobileNetworkUtilsTest {
     public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdma_returnTrue() {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
+        // NETWORK_MODE_LTE_TDSCDMA = LTE | RAF_TD_SCDMA
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER)).thenReturn(
+                (long) (LTE | RAF_TD_SCDMA));
 
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
@@ -304,9 +311,10 @@ public class MobileNetworkUtilsTest {
     public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdmaWcdma_returnTrue() {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA);
+        // NETWORK_MODE_LTE_TDSCDMA_WCDMA = LTE | RAF_TD_SCDMA | WCDMA
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER)).thenReturn(
+                (long) (LTE | RAF_TD_SCDMA | WCDMA));
 
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
@@ -315,9 +323,11 @@ public class MobileNetworkUtilsTest {
     public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdmaCdmaEvdoGsmWcdma_returnTrue() {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
+        // NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
+        //     = LTE | RAF_TD_SCDMA | CDMA | EVDO | GSM | WCDMA
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER)).thenReturn(
+                (long) (LTE | RAF_TD_SCDMA | CDMA | EVDO | GSM | WCDMA));
 
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
@@ -326,9 +336,10 @@ public class MobileNetworkUtilsTest {
     public void shouldSpeciallyUpdateGsmCdma_ModeLteCdmaEvdoGsmWcdma_returnTrue() {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
+        // NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA = LTE | CDMA | EVDO | GSM | WCDMA
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER)).thenReturn(
+                (long) (LTE | CDMA | EVDO | GSM | WCDMA));
 
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }

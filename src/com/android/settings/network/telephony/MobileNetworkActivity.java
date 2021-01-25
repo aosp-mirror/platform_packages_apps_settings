@@ -115,6 +115,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
         }
 
         getProxySubscriptionManager().setLifecycle(getLifecycle());
@@ -206,7 +207,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         // title will just default to the label for this activity that's already specified in
         // AndroidManifest.xml.
         if (subscription != null) {
-            setTitle(subscription.getDisplayName());
+            setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(subscription, this));
         }
     }
 
@@ -298,7 +299,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         CharSequence carrierName = "";
         if (info != null) {
             subId = info.getSubscriptionId();
-            carrierName = info.getDisplayName();
+            carrierName = SubscriptionUtil.getUniqueSubscriptionDisplayName(info, this);
         }
         // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
         // associated dialog only if the opt-in has not been granted yet.

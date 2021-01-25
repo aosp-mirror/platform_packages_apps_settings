@@ -47,6 +47,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -194,7 +195,8 @@ public class ResetNetwork extends InstrumentedFragment {
                     // Set the first selected value to the default
                     selectedIndex = subscriptionNames.size();
                 }
-                String name = record.getDisplayName().toString();
+                String name = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                        record, getContext()).toString();
                 if (TextUtils.isEmpty(name)) {
                     name = record.getNumber();
                 }

@@ -25,6 +25,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 
@@ -81,11 +82,13 @@ public class ProviderModelSlice extends WifiSlice {
         // Second section:  Add a carrier item.
         // Third section:  Add the Wi-Fi items which are not connected.
         // Fourth section:  If device has connection problem, this row show the message for user.
-
+        final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
         if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled()) {
             log("Airplane mode is enabled.");
-            // ToDo Next CL will add the Airplane mode Message.
-            return mHelper.createListBuilder(getUri()).build();
+            listBuilder.setHeader(mHelper.createHeader(Settings.ACTION_AIRPLANE_MODE_SETTINGS));
+            listBuilder.addGridRow(mHelper.createMessageGridRow(R.string.condition_airplane_title,
+                    Settings.ACTION_AIRPLANE_MODE_SETTINGS));
+            return listBuilder.build();
         }
 
         int maxListSize = 0;
@@ -102,9 +105,6 @@ public class ProviderModelSlice extends WifiSlice {
         final boolean hasCarrier = mHelper.hasCarrier();
         log("hasCarrier: " + hasCarrier);
 
-
-        final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
-
         // First section:  Add a Wi-Fi item which state is connected.
         final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
         if (connectedWifiItem != null) {
@@ -115,7 +115,10 @@ public class ProviderModelSlice extends WifiSlice {
 
         // Second section:  Add a carrier item.
         if (hasCarrier) {
-            listBuilder.addRow(mHelper.createCarrierRow());
+            mHelper.updateTelephony();
+            listBuilder.addRow(
+                    mHelper.createCarrierRow(
+                            worker != null ? worker.getNetworkTypeDescription() : ""));
             maxListSize--;
         }
 
@@ -141,16 +144,19 @@ public class ProviderModelSlice extends WifiSlice {
         if (worker == null || wifiList == null) {
             log("wifiList is null");
             int resId = R.string.non_carrier_network_unavailable;
-            if (!hasCarrier || mHelper.isNoCarrierData()) {
+            if (!hasCarrier || !mHelper.isDataSimActive()) {
                 log("No carrier item or no carrier data.");
                 resId = R.string.all_network_unavailable;
             }
 
             if (!hasCarrier) {
                 // If there is no item in ProviderModelItem, slice needs a header.
-                listBuilder.setHeader(mHelper.createHeader());
+                listBuilder.setHeader(mHelper.createHeader(
+                        NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS));
             }
-            listBuilder.addGridRow(mHelper.createMessageGridRow(resId));
+            listBuilder.addGridRow(
+                    mHelper.createMessageGridRow(resId,
+                            NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS));
         }
 
         return listBuilder.build();
@@ -170,22 +176,31 @@ public class ProviderModelSlice extends WifiSlice {
         if (!SubscriptionManager.isUsableSubscriptionId(defaultSubId)) {
             return; // No subscription - do nothing.
         }
-        boolean requestConnectCarrier = !intent.hasExtra(EXTRA_TOGGLE_STATE);
-        // Enable the mobile data always if the user requests to connect to the carrier network.
-        boolean newState = requestConnectCarrier ? true
-                : intent.getBooleanExtra(EXTRA_TOGGLE_STATE, mHelper.isMobileDataEnabled());
 
-        MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
-                false /* disableOtherSubscriptions */);
+        boolean isToggleAction = intent.hasExtra(EXTRA_TOGGLE_STATE);
+        boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
+                mHelper.isMobileDataEnabled());
+        if (isToggleAction) {
+            // The ToggleAction is used to set mobile data enabled.
+            MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
+                    false /* disableOtherSubscriptions */);
+        }
+        doCarrierNetworkAction(isToggleAction, newState);
+    }
 
+    private void doCarrierNetworkAction(boolean isToggleAction, boolean isDataEnabled) {
         final NetworkProviderWorker worker = getWorker();
         if (worker == null) {
             return;
         }
-        if (requestConnectCarrier) {
+
+        if (isToggleAction) {
+            worker.setCarrierNetworkEnabled(isDataEnabled);
+            return;
+        }
+
+        if (MobileNetworkUtils.isMobileDataEnabled(mContext)) {
             worker.connectCarrierNetwork();
-        } else {
-            worker.setCarrierNetworkEnabled(newState);
         }
     }
 

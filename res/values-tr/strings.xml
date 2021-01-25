@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Parmak iziyle kilit açma"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Parmak izinizi kullanma"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için parmak izi sensörüne dokunmanız yeterli. Kimin parmak izini eklediğinize dikkat etmeniz gerekir. Eklenen tek bir parmak iziyle bile bu işlemlerin tümü yapılabilir.\n\nNot: Parmak iziniz, güçlü bir desenden veya PIN\'den daha az güvenli olabilir."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için parmak izi sensörüne dokunmanız yeterli. Kimin parmak izini eklediğinize dikkat edin. Eklenen tek bir parmak izi bile tüm bu işlemleri yapabilir."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Parmak iziniz, güçlü bir desen veya PIN\'e oranla daha az güvenli olabilir."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Telefonunuzun kilidini açmak veya bir satın alma işlemini onaylamak için parmak izinizi kullanın.\n\nNot: Bu cihazın kilidini açmak için parmak izinizi kullanamazsınız. Daha fazla bilgi için kuruluşunuzun yöneticisine başvurun."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Telefonunuzun kilidini açmak veya bir satın alma işlemini onaylamak için parmak izinizi kullanın.\n\nNot: Parmak iziniz, güçlü bir desen veya PIN\'e oranla daha az güvenli olabilir."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"İptal"</string>
@@ -426,6 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"İptal"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Sensöre dokunun"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Telefonunuzun arkasındadır. İşaret parmağınızı kullanın."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"Sensör ekranınızın üzerindedir. Parlayan daire içindeki parmak izini bulun."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Cihaz ve parmak izi sensörünün yerini gösteren çizim"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Ad"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Tamam"</string>
@@ -2132,9 +2134,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Ekran okuyucular"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Ses ve ekran metni"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Ekran"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Metin ve görüntülü"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Etkileşim denetimleri"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Dokunma asistanı"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Sistem kontrolleri"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"İndirilen uygulamalar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Deneysel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Özellik işaretleri"</string>
@@ -2264,6 +2267,8 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> işitme cihazı kayıtlı</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> işitme cihazı kayıtlı</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Kısayol açık"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Kapalı"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Açık"</string>
@@ -3648,6 +3653,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> için bildirim erişimini kapatırsanız Rahatsız Etmeyin erişimi de kapanabilir."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Kapat"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"İptal"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"İzin verilen bildirim türleri"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Önemli devam eden bildirimler"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Görüşme bildirimleri"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Uyaran bildirimler"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Sessiz bildirimler"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR yardımcı hizmetleri"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Yüklü hiçbir uygulamanın VR yardımcı hizmetleri olarak çalışması istenmedi."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> için VR hizmetine erişim izni verilsin mi?"</string>
@@ -4423,8 +4433,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Birden çok cihaza bağlı"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Sistem Kullanıcı Arayüzü demo modu"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Koyu tema"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Pil Tasarrufu nedeniyle geçici olarak devre dışı bırakıldı"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Pil Tasarrufu nedeniyle geçici olarak açıldı"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Desteklenen uygulamalar koyu temaya da geçiş yapar"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Anladım"</string>
@@ -4475,6 +4484,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Uygulamalar arasında geçiş yapmak için Ana sayfa düğmesinde parmağınızı yukarı doğru kaydırın. Tüm uygulamaları görmek için parmağınızı tekrar yukarı doğru kaydırın. Geri gitmek için geri düğmesine dokunun."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Yeni Ana Sayfa düğmesini deneyin"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Uygulamalar arasında geçiş yapmak için yeni hareketi açın"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Güvenlik ve acil durum"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Hareketle gezinme"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Ana sayfaya gitmek için ekranın altından yukarı kaydırın. Uygulamalar arasında geçiş yapmak için ekranın altından yukarı kaydırın, tutun ve sonra bırakın. Geri gitmek için ekranın sol veya sağ kenarından kaydırın."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3 düğmeli gezinme"</string>
@@ -4645,7 +4655,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Otomatik doldurma hizmeti"</string>
     <string name="autofill_keywords" msgid="6260653325195017912">"otomatik, doldur, otomatik doldur"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Bu uygulamaya güvendiğinizden emin olun&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Otomatik Doldurma&gt;%1$s&lt;/xliff:g&gt; otomatik doldurulabilecek öğeleri belirlemek için ekranınızdaki bilgileri kullanır."</string>
-    <string name="debug_autofill_category" msgid="5998163555428196185">"Otomatik Doldurma"</string>
+    <string name="debug_autofill_category" msgid="5998163555428196185">"Otomatik doldur"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Günlük kaydı düzeyi"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Oturum başına maksimum istek"</string>
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maksimum görünür veri kümesi"</string>
@@ -4735,9 +4745,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Titret"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Sesi kapat"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Hiçbir şey yapma"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Açık (titreşim)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Açık (sessiz)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Kapalı"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Titreşim"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Sesi kapat"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Ağ ayrıntıları"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Telefonunuzdaki uygulamalar, cihazınızın adını görebilecek. Cihazınızın adı ayrıca Blueetoth cihazlara bağlandığınızda, kablosuz ağa bağlandığınızda veya kablosuz hotspot oluşturduğunuzda diğer kişiler tarafından görülecektir."</string>
     <string name="devices_title" msgid="649715719278562515">"Cihazlar"</string>
@@ -4980,9 +4989,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Acil durum aramaları"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Operatörünüz, kablosuz çağrı üzerinden yapılan acil durum aramalarını desteklememektedir.\nAcil durum araması yapmak için cihaz otomatik olarak hücresel ağa geçer.\nAcil durum aramaları sadece hücresel ağ kapsamında olan yerlerde yapılabilir."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Kaliteyi iyileştirmek için çağrılarda kablosuz ağ kullanın"</string>
-    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Çapraz SIM araması"</string>
-    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Bu SIM üzerinden yapılan diğer SIM aramaları ve SMS\'lere izin ver"</string>
-    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"çapraz sim araması"</string>
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Yedek arama"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> kullanılamıyorsa <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> araması yapmak ve almak için mobil veri SIM\'inizi kullanın."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"yedek arama"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Gelen MMS mesajı"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS mesajı gönderilemiyor"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Mobil veri kapalıyken MMS mesajının <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> üzerinden gönderilip alınmasına izin vermek için dokunun"</string>
@@ -5046,8 +5055,8 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Kapalı"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"İnternet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM\'ler"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Uçakta kullanımı güvenli ağlar"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Uçakta kullanımı güvenli ağları bulup bağlanın"</string>
+    <string name="airplane_safe_networks" msgid="6057114281183247124">"Uçak modunda kullanılabilen ağları göster"</string>
+    <string name="airplane_safe_networks_summary" msgid="4879620804022818385">"Uçak modunda kullanılabilen ağları bulup bağlanır."</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"uçak, uçakta kullanımı güvenli"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Aramalar ve SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Kablosuz Çağrı"</string>
@@ -5064,7 +5073,17 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Herkese açık ağlara bağlan"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ağ bağlantısı, internet, kablosuz, veri, wifi, wi-fi, wi fi, hücresel, mobil, hücresel operatör, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Uçak modu ağlarını göster"</string>
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Uçak modu ağlarını göster"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Uçak modunu kapat"</string>
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"İnternet bağlantınız sıfırlansın mı?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Bu, telefon aramanızı sonlandırır"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Bu, telefon aramanızı sonlandırır"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"İnternet bağlantınız sıfırlanıyor…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Sabit bağlantı"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
+    <skip />
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Bağlı"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"İnternet otomatik olarak bağlanmaz"</string>
@@ -5078,12 +5097,12 @@
     <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Güvenilmeyen bir Bluetooth cihaz, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, mesajlarınıza erişmek istiyor.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> adlı cihaza daha önce bağlanmadınız."</string>
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Güvenilmeyen bir cihaz kişilerinize ve arama kaydınıza erişmek istiyor. Ayrıntılar için dokunun."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Kişilerinize ve arama kaydınıza erişime izin verilsin mi?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Güvenilmeyen bir Bluetooth cihaz, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kişilerinize ve arama kaydınıza erişmek istiyor. Bu hem gelen hem giden aramalarınıza ait verileri içerir.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> adlı cihaza daha önce bağlanmadınız."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Güvenilmeyen <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> adlı Bluetooth cihazı, kişilerinize ve arama kaydınıza erişmek istiyor. Bu hem gelen hem giden aramalarınıza ait verileri içerir.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> adlı cihaza daha önce bağlanmadınız."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Parlaklık"</string>
     <string name="category_name_lock_display" msgid="7478785189102882266">"Kilit Ekranı"</string>
     <string name="category_name_visibility" msgid="4485030512199246405">"Görünürlük"</string>
     <string name="category_name_color" msgid="937514550918977151">"Renk"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Diğer"</string>
-    <!-- no translation found for category_name_general (7737273712848115886) -->
-    <skip />
+    <string name="category_name_general" msgid="7737273712848115886">"Genel"</string>
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Tüm uygulamaları göster"</string>
 </resources>

@@ -44,7 +44,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,8 +55,9 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.UiEventLoggerImpl;
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.MainSwitchBar;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +75,7 @@ public class NotificationHistoryActivity extends Activity {
     private ViewGroup mTodayView;
     private ViewGroup mSnoozeView;
     private ViewGroup mDismissView;
-    private SwitchBar mSwitchBar;
+    private MainSwitchBar mSwitchBar;
 
     private HistoryLoader mHistoryLoader;
     private INotificationManager mNm;
@@ -117,9 +117,11 @@ public class NotificationHistoryActivity extends Activity {
         NOTIFICATION_HISTORY_OLDER_ITEM_DELETE(513);
 
         private int mId;
+
         NotificationHistoryEvent(int id) {
             mId = id;
         }
+
         @Override
         public int getId() {
             return mId;
@@ -171,10 +173,9 @@ public class NotificationHistoryActivity extends Activity {
                         ? getString(R.string.condition_expand_hide)
                         : getString(R.string.condition_expand_show));
                 header.sendAccessibilityEvent(TYPE_VIEW_ACCESSIBILITY_FOCUSED);
-                mUiEventLogger.logWithPosition(
-                        (container.getVisibility() == View.VISIBLE)
-                            ? NotificationHistoryEvent.NOTIFICATION_HISTORY_PACKAGE_HISTORY_OPEN
-                            : NotificationHistoryEvent.NOTIFICATION_HISTORY_PACKAGE_HISTORY_CLOSE,
+                mUiEventLogger.logWithPosition((container.getVisibility() == View.VISIBLE)
+                                ? NotificationHistoryEvent.NOTIFICATION_HISTORY_PACKAGE_HISTORY_OPEN
+                              : NotificationHistoryEvent.NOTIFICATION_HISTORY_PACKAGE_HISTORY_CLOSE,
                         nhp.uid, nhp.pkgName, finalI);
             });
 
@@ -218,7 +219,7 @@ public class NotificationHistoryActivity extends Activity {
         mHistoryOff = findViewById(R.id.history_off);
         mHistoryOn = findViewById(R.id.history_on);
         mHistoryEmpty = findViewById(R.id.history_on_empty);
-        mSwitchBar = findViewById(R.id.switch_bar);
+        mSwitchBar = findViewById(R.id.main_switch_bar);
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -299,9 +300,8 @@ public class NotificationHistoryActivity extends Activity {
 
     private void bindSwitch() {
         if (mSwitchBar != null) {
-            mSwitchBar.setSwitchBarText(R.string.notification_history_toggle,
-                    R.string.notification_history_toggle);
             mSwitchBar.show();
+            mSwitchBar.setTitle(getString(R.string.notification_history_toggle));
             try {
                 mSwitchBar.addOnSwitchChangeListener(mOnSwitchClickListener);
             } catch (IllegalStateException e) {
@@ -325,7 +325,7 @@ public class NotificationHistoryActivity extends Activity {
         mHistoryEmpty.setVisibility(View.GONE);
     }
 
-    private final SwitchBar.OnSwitchChangeListener mOnSwitchClickListener =
+    private final OnMainSwitchChangeListener mOnSwitchClickListener =
             (switchView, isChecked) -> {
                 int oldState = 0;
                 try {
@@ -387,11 +387,11 @@ public class NotificationHistoryActivity extends Activity {
 
             mDismissedRv = mDismissView.findViewById(R.id.notification_list);
             LinearLayoutManager dismissLm =
-                new LinearLayoutManager(NotificationHistoryActivity.this);
+                    new LinearLayoutManager(NotificationHistoryActivity.this);
             mDismissedRv.setLayoutManager(dismissLm);
             mDismissedRv.setAdapter(
                     new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm, mUm,
-                            false , mUiEventLogger));
+                            false, mUiEventLogger));
             mDismissedRv.setNestedScrollingEnabled(false);
 
             if (dismissed == null || dismissed.length == 0) {
@@ -399,7 +399,7 @@ public class NotificationHistoryActivity extends Activity {
             } else {
                 mDismissView.setVisibility(View.VISIBLE);
                 ((NotificationSbnAdapter) mDismissedRv.getAdapter()).onRebuildComplete(
-                    new ArrayList<>(Arrays.asList(dismissed)));
+                        new ArrayList<>(Arrays.asList(dismissed)));
             }
 
             mCountdownLatch.countDown();

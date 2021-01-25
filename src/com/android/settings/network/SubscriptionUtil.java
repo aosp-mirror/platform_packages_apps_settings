@@ -28,19 +28,25 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
+import com.android.settingslib.DeviceInfoUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SubscriptionUtil {
     private static final String TAG = "SubscriptionUtil";
@@ -212,6 +218,127 @@ public class SubscriptionUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * Return a mapping of active subscription ids to diaplay names. Each display name is
+     * guaranteed to be unique in the following manner:
+     * 1) If the original display name is not unique, the last four digits of the phone number
+     *    will be appended.
+     * 2) If the phone number is not visible or the last four digits are shared with another
+     *    subscription, the subscription id will be appended to the original display name.
+     * More details can be found at go/unique-sub-display-names.
+     *
+     * @return map of active subscription ids to diaplay names.
+     */
+    @VisibleForTesting
+    public static Map<Integer, CharSequence> getUniqueSubscriptionDisplayNames(Context context) {
+        class DisplayInfo {
+            public SubscriptionInfo subscriptionInfo;
+            public CharSequence originalName;
+            public CharSequence uniqueName;
+        }
+
+        final SubscriptionManager subscriptionManager =
+                context.getSystemService(SubscriptionManager.class);
+        // Map of SubscriptionId to DisplayName
+        final Supplier<Stream<DisplayInfo>> originalInfos =
+                () -> getActiveSubscriptions(subscriptionManager)
+                .stream()
+                .map(i -> {
+                    DisplayInfo info = new DisplayInfo();
+                    info.subscriptionInfo = i;
+                    info.originalName = i.getDisplayName();
+                    return info;
+                });
+
+        // TODO(goldmanj) consider using a map of DisplayName to SubscriptionInfos.
+        // A Unique set of display names
+        Set<CharSequence> uniqueNames = new HashSet<>();
+        // Return the set of duplicate names
+        final Set<CharSequence> duplicateOriginalNames = originalInfos.get()
+                .filter(info -> !uniqueNames.add(info.originalName))
+                .map(info -> info.originalName)
+                .collect(Collectors.toSet());
+
+        // If a display name is duplicate, append the final 4 digits of the phone number.
+        // Creates a mapping of Subscription id to original display name + phone number display name
+        final Supplier<Stream<DisplayInfo>> uniqueInfos = () -> originalInfos.get().map(info -> {
+            if (duplicateOriginalNames.contains(info.originalName)) {
+                // This may return null, if the user cannot view the phone number itself.
+                final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(context,
+                        info.subscriptionInfo);
+                String lastFourDigits = "";
+                if (phoneNumber != null) {
+                    lastFourDigits = (phoneNumber.length() > 4)
+                        ? phoneNumber.substring(phoneNumber.length() - 4) : phoneNumber;
+                }
+
+                if (TextUtils.isEmpty(lastFourDigits)) {
+                    info.uniqueName = info.originalName;
+                } else {
+                    info.uniqueName = info.originalName + " " + lastFourDigits;
+                }
+
+            } else {
+                info.uniqueName = info.originalName;
+            }
+            return info;
+        });
+
+        // Check uniqueness a second time.
+        // We might not have had permission to view the phone numbers.
+        // There might also be multiple phone numbers whose last 4 digits the same.
+        uniqueNames.clear();
+        final Set<CharSequence> duplicatePhoneNames = uniqueInfos.get()
+                .filter(info -> !uniqueNames.add(info.uniqueName))
+                .map(info -> info.uniqueName)
+                .collect(Collectors.toSet());
+
+        return uniqueInfos.get().map(info -> {
+            if (duplicatePhoneNames.contains(info.uniqueName)) {
+                info.uniqueName = info.originalName + " "
+                        + info.subscriptionInfo.getSubscriptionId();
+            }
+            return info;
+        }).collect(Collectors.toMap(
+                info -> info.subscriptionInfo.getSubscriptionId(),
+                info -> info.uniqueName));
+    }
+
+    /**
+     * Return the display name for a subscription id, which is guaranteed to be unique.
+     * The logic to create this name has the following order of operations:
+     * 1) If the original display name is not unique, the last four digits of the phone number
+     *    will be appended.
+     * 2) If the phone number is not visible or the last four digits are shared with another
+     *    subscription, the subscription id will be appended to the original display name.
+     * More details can be found at go/unique-sub-display-names.
+     *
+     * @return map of active subscription ids to diaplay names.
+     */
+    @VisibleForTesting
+    public static CharSequence getUniqueSubscriptionDisplayName(
+            Integer subscriptionId, Context context) {
+        final Map<Integer, CharSequence> displayNames = getUniqueSubscriptionDisplayNames(context);
+        return displayNames.getOrDefault(subscriptionId, "");
+    }
+
+    /**
+     * Return the display name for a subscription, which is guaranteed to be unique.
+     * The logic to create this name has the following order of operations:
+     * 1) If the original display name is not unique, the last four digits of the phone number
+     *    will be appended.
+     * 2) If the phone number is not visible or the last four digits are shared with another
+     *    subscription, the subscription id will be appended to the original display name.
+     * More details can be found at go/unique-sub-display-names.
+     *
+     * @return map of active subscription ids to diaplay names.
+     */
+    @VisibleForTesting
+    public static CharSequence getUniqueSubscriptionDisplayName(
+            SubscriptionInfo info, Context context) {
+        return getUniqueSubscriptionDisplayName(info.getSubscriptionId(), context);
     }
 
     public static String getDisplayName(SubscriptionInfo info) {

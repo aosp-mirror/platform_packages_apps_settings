@@ -452,13 +452,13 @@ public class PanelFragment extends Fragment {
     View.OnClickListener getSeeMoreListener() {
         return (v) -> {
             mPanelClosedKey = PanelClosedKeys.KEY_SEE_MORE;
+            final FragmentActivity activity = getActivity();
             if (mPanel.isCustomizedButtonUsed()) {
                 mPanel.onClickCustomizedButton();
             } else {
-                final FragmentActivity activity = getActivity();
                 activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
-                activity.finish();
             }
+            activity.finish();
         };
     }
 

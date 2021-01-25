@@ -28,6 +28,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 
 
@@ -97,12 +98,14 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                 final String previousName = (nextSubInfo == null)
                         ? getContext().getResources().getString(
                         R.string.sim_selection_required_pref)
-                        : nextSubInfo.getDisplayName().toString();
+                        : SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                                nextSubInfo, getContext()).toString();
 
                 final String newName = (currentSubInfo == null)
                         ? getContext().getResources().getString(
                         R.string.sim_selection_required_pref)
-                        : currentSubInfo.getDisplayName().toString();
+                        : SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                                currentSubInfo, getContext()).toString();
 
                 return new AlertDialog.Builder(context)
                         .setTitle(context.getString(R.string.sim_change_data_title, newName))

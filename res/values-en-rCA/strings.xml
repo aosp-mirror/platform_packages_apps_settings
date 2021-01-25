@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Unlock with fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Use your fingerprint"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Just touch the fingerprint sensor to unlock your phone, authorize purchases or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.\n\nNote: Your fingerprint may be less secure than a strong pattern or PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Just touch the fingerprint sensor to unlock your phone, authorise purchases or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Your fingerprint may be less secure than a strong pattern or PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can’t use your fingerprint to unlock this device. For more information, contact your organisation’s admin."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Use your fingerprint to unlock your phone or approve purchases.\n\nNote: Your fingerprint may be less secure than a strong pattern or PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancel"</string>
@@ -426,6 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Touch the sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"It\'s on the back of your phone. Use your index finger."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"It’s on the screen. Look for the fingerprint with a glowing circle."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustration with device and fingerprint sensor location"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Name"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
@@ -2132,9 +2134,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Screen readers"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio and on-screen text"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Display"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Text and display"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaction controls"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Tap assistance"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"System controls"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
@@ -2264,6 +2267,7 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> saved hearing aids</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> saved hearing aid</item>
     </plurals>
+    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Audio adjustment"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Shortcut on"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Off"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"On"</string>
@@ -3648,6 +3652,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"If you turn off notification access for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, Do Not Disturb access may also be turned off."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Turn off"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"cancel"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Allowed notification types"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Important ongoing notifications"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Conversation notifications"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Alerting notifications"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Silent notifications"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR helper services"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"No installed apps have requested to be run as VR helper services."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Allow VR service access for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4423,8 +4432,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Connected to multiple devices"</string>
     <string name="demo_mode" msgid="6566167465451386728">"System UI demo mode"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Dark theme"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Temporarily disabled due to Battery Saver"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Temporarily turned on due to Battery Saver"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Supported apps will also switch to dark theme"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -4475,6 +4483,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"To switch apps, swipe up on the Home button. To see all apps, swipe up again. To go back, tap the back button."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Try the new Home button"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Turn on the new gesture to switch apps"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Safety &amp; emergency"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Gesture navigation"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"To go Home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-button navigation"</string>
@@ -4735,9 +4744,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrate"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Mute"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Do nothing"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"On (vibrate)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"On (mute)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Off"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrate"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Mute"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Network details"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot."</string>
     <string name="devices_title" msgid="649715719278562515">"Devices"</string>
@@ -4980,9 +4988,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Emergency calls"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Emergency calls over Wi‑Fi Calling are not supported by your operator.\nThe device switches automatically to a mobile network to place an emergency call.\nEmergency calls are only possible in areas with mobile coverage."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Use Wi‑Fi for calls to improve quality"</string>
-    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Cross-SIM calling"</string>
-    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Allow other SIM calls and SMSs over this SIM."</string>
-    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"cross-SIM calling"</string>
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Backup calling"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"If <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> is unavailable, use your mobile data SIM to make and receive <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> calls."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"backup calling"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Incoming MMS message"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Can’t send MMS message"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Tap to allow MMS messaging on <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> when mobile data is off"</string>
@@ -5046,8 +5054,8 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Off"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMs"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Aeroplane-safe networks"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Find and connect to aeroplane‑safe networks"</string>
+    <string name="airplane_safe_networks" msgid="6057114281183247124">"Show aeroplane mode networks"</string>
+    <string name="airplane_safe_networks_summary" msgid="4879620804022818385">"Find and connect to networks in aeroplane mode."</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"aeroplane, aeroplane-safe"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Calls and SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi calling"</string>
@@ -5064,7 +5072,17 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Connect to public networks"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, mobile operator, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"View aeroplane mode networks"</string>
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Viewing aeroplane mode networks"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Turn off aeroplane mode"</string>
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Reset your Internet?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"This will end your phone call"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"This will end your phone call"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Resetting your Internet…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Fix connectivity"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
+    <skip />
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connected"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internet won\'t auto‑connect"</string>
@@ -5084,6 +5102,6 @@
     <string name="category_name_visibility" msgid="4485030512199246405">"Visibility"</string>
     <string name="category_name_color" msgid="937514550918977151">"Colour"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Others"</string>
-    <!-- no translation found for category_name_general (7737273712848115886) -->
-    <skip />
+    <string name="category_name_general" msgid="7737273712848115886">"General"</string>
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"See all apps"</string>
 </resources>

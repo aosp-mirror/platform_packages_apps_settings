@@ -28,6 +28,7 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
@@ -72,7 +73,8 @@ public class CredentialManagementAppPreferenceController extends BasePreferenceC
         });
     }
 
-    private void displayPreference(Preference preference) {
+    @VisibleForTesting
+    void displayPreference(Preference preference) {
         if (mHasCredentialManagerPackage) {
             preference.setEnabled(true);
             try {

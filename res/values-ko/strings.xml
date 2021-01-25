@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"지문으로 잠금 해제"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"지문 사용"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"지문 센서를 터치하기만 하면 휴대전화를 잠금 해제하거나 구매를 승인하거나 앱에 로그인할 수 있습니다. 휴대전화에 지문이 추가된 사용자 누구나 이러한 작업을 수행할 수 있으므로 누구의 지문을 추가할지 신중하게 선택하세요.\n\n참고: 지문은 강력한 패턴 또는 PIN보다 보안이 취약합니다."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"지문 센서를 터치하기만 하면 휴대전화를 잠금 해제하거나 구매를 승인하거나 앱에 로그인할 수 있습니다. 누구의 지문을 추가할지 신중하게 선택하세요. 지문을 한 번이라도 추가한 사용자는 이러한 작업을 모두 할 수 있습니다."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"지문은 안전한 패턴 또는 PIN보다 보안 수준이 낮을 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"지문을 사용하여 휴대전화를 잠금 해제하거나 구매를 승인하세요.\n\n참고: 이 기기는 지문을 사용하여 잠금 해제할 수 없습니다. 자세한 내용은 조직의 관리자에게 문의하세요."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"지문을 사용하여 휴대전화를 잠금 해제하거나 구매를 승인하세요.\n\n참고: 지문은 안전한 패턴 또는 PIN보다 보안 수준이 낮을 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"취소"</string>
@@ -426,6 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"취소"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"센서 터치"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"휴대전화 뒷면에 있습니다. 검지를 사용하세요."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"센서는 화면에 있습니다. 빛나는 원 안에 있는 지문을 찾으세요."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"기기와 지문 센서 위치가 포함된 그림"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"이름"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"확인"</string>
@@ -2132,9 +2134,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"스크린 리더"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"오디오 및 화면에 있는 텍스트"</string>
     <string name="display_category_title" msgid="6638191682294461408">"디스플레이"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"텍스트 및 화면"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"상호작용 관리"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"지원 탭하기"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"시스템 제어 기능"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"다운로드한 앱"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"실험"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"기능 플래그"</string>
@@ -2264,6 +2267,8 @@
       <item quantity="other">보청기 <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>개가 저장되어 있습니다.</item>
       <item quantity="one">보청기 <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g>개가 저장되어 있습니다.</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"단축키 사용"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"사용 안함"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"사용"</string>
@@ -3648,6 +3653,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>에서 알림 액세스를 사용 중지하면 방해 금지 모드 액세스도 사용 중지됩니다."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"사용 중지"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"취소"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"허용된 알림 유형"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"중요한 지속적인 알림"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"대화 알림"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"소리 알림"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"무음 알림"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 도우미 서비스"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"설치된 앱 중에서 VR 도우미 서비스로 실행되도록 요청한 앱이 없습니다."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR 서비스가 <xliff:g id="SERVICE">%1$s</xliff:g>에 액세스하도록 허용하시겠습니까?"</string>
@@ -4423,8 +4433,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"여러 기기에 연결됨"</string>
     <string name="demo_mode" msgid="6566167465451386728">"시스템 UI 데모 모드"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"어두운 테마"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"절전 모드로 인해 일시적으로 사용 중지됨"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"절전 모드로 인해 일시적으로 사용 중지됨"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"지원되는 앱도 어두운 테마로 전환됩니다."</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"확인"</string>
@@ -4475,6 +4484,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"앱을 전환하려면 홈 버튼에서 위로 스와이프합니다. 모든 앱을 보려면 다시 위로 스와이프합니다. 뒤로 돌아가려면 뒤로 버튼을 탭합니다."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"새로운 홈 버튼 사용해 보기"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"앱을 전환하는 새로운 동작을 사용 설정합니다."</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"안전 및 긴급 상황"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"동작 탐색"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"홈으로 이동하려면 화면 하단에서 위로 스와이프합니다. 앱을 전환하려면 아래에서 위로 스와이프하고 잠시 기다린 다음 손가락을 뗍니다. 뒤로 돌아가려면 왼쪽 또는 오른쪽 가장자리에서 스와이프합니다."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3버튼 탐색"</string>
@@ -4735,9 +4745,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"진동"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"음소거"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"동작 없음"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"사용(진동)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"사용(음소거)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"사용 안함"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"진동"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"음소거"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"네트워크 세부정보"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"기기 이름이 휴대전화에 있는 앱에 표시됩니다. 기기 이름은 블루투스 기기 및 Wi-Fi 네트워크에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게도 표시될 수 있습니다."</string>
     <string name="devices_title" msgid="649715719278562515">"기기"</string>
@@ -4980,9 +4989,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"긴급 전화"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Wi‑Fi 통화를 사용한 긴급 전화가 이용 중인 이동통신사에서 지원되지 않습니다.\n긴급 전화를 걸면 기기에서 모바일 네트워크로 자동 전환합니다.\n긴급 전화는 모바일 데이터가 지원되는 지역에서만 사용할 수 있습니다."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"통화에 Wi‑Fi를 사용하여 통화 품질을 개선합니다."</string>
-    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Cross SIM 통화"</string>
-    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"현재 사용 중인 SIM에서 다른 SIM으로 통화 및 SMS 허용"</string>
-    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"cross sim 통화"</string>
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"백업 전화"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> 이동통신사를 사용할 수 없을 때 모바일 데이터 SIM을 사용하여 <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> 전화를 걸고 받습니다."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"백업 전화"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"MMS 메시지 수신 중"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS 메시지 전송 불가"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"탭하여 모바일 데이터가 꺼져 있을 때 <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>에서 MMS 메시지 허용"</string>
@@ -5046,8 +5055,8 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"사용 안함"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"인터넷"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"항공 안전 네트워크"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"항공 안전 네트워크를 찾아 연결합니다."</string>
+    <string name="airplane_safe_networks" msgid="6057114281183247124">"비행기 모드 네트워크 표시"</string>
+    <string name="airplane_safe_networks_summary" msgid="4879620804022818385">"비행기 모드에서 네트워크를 찾아 연결합니다."</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"항공, 항공 안전"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"통화 및 SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi 통화"</string>
@@ -5064,7 +5073,17 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"공용 네트워크에 연결"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"네트워크 연결, 인터넷, 무선, 데이터, Wifi, Wi-Fi, Wi Fi, 셀룰러, 모바일, 이동통신사, 4G, 3G, 2G, LTE"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"비행기 모드 네트워크 보기"</string>
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"비행기 모드 네트워크 표시 중"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"비행기 모드 사용 중지"</string>
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"인터넷을 재설정하시겠습니까?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"휴대전화 통화가 종료됩니다."</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"휴대전화 통화가 종료됩니다."</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"인터넷 재설정 중…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"연결 문제 해결"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
+    <skip />
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"연결됨"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"인터넷에 자동으로 연결되지 않음"</string>
@@ -5084,6 +5103,6 @@
     <string name="category_name_visibility" msgid="4485030512199246405">"표시 상태"</string>
     <string name="category_name_color" msgid="937514550918977151">"색상"</string>
     <string name="category_name_others" msgid="2366006298768550310">"기타"</string>
-    <!-- no translation found for category_name_general (7737273712848115886) -->
-    <skip />
+    <string name="category_name_general" msgid="7737273712848115886">"일반"</string>
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"앱 모두 보기"</string>
 </resources>

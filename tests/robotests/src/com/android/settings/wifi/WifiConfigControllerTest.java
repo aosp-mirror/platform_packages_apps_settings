@@ -412,11 +412,6 @@ public class WifiConfigControllerTest {
         }
 
         @Override
-        boolean isSplitSystemUser() {
-            return false;
-        }
-
-        @Override
         KeyStore getKeyStore() { return mKeyStore; }
     }
 
@@ -630,6 +625,8 @@ public class WifiConfigControllerTest {
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
         final SubscriptionInfo subscriptionInfo = mock(SubscriptionInfo.class);
         final int carrierId = 6;
+        when(subscriptionInfo.getSubscriptionId()).thenReturn(carrierId);
+        when(subscriptionInfo.getDisplayName()).thenReturn("FAKE-CARRIER");
         when(subscriptionInfo.getCarrierId()).thenReturn(carrierId);
         when(subscriptionInfo.getCarrierName()).thenReturn("FAKE-CARRIER");
         mShadowSubscriptionManager.setActiveSubscriptionInfoList(Arrays.asList(subscriptionInfo));

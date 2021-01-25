@@ -174,7 +174,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".SubSettings"/>
+        <activity android:name=".SubSettings"
+                  android:theme="@style/Theme.SubSettings" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
@@ -216,6 +217,7 @@
                   android:label="@string/network_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MOBILE_NETWORK_LIST" />
+                <action android:name="android.settings.MANAGE_ALL_SUBSCRIPTIONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -3205,6 +3207,15 @@
         </activity>
 
         <activity
+            android:name=".Settings$AppDashboardActivity"
+            android:label="@string/apps_dashboard_title"
+            android:icon="@drawable/ic_homepage_apps"
+            android:exported="true">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.AppDashboardFragment"/>
+        </activity>
+
+        <activity
             android:name=".Settings$AccountDashboardActivity"
             android:label="@string/account_dashboard_title"
             android:exported="true"
@@ -3660,6 +3671,12 @@
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity android:name=".sim.smartForwarding.SmartForwardingActivity"
+            android:theme="@style/Theme.SubSettings.Base"
+            android:exported="true"
+            android:launchMode="singleTask">
+        </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

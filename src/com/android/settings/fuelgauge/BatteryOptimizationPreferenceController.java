@@ -69,6 +69,7 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
 
     @Override
     public void updateState(Preference preference) {
+        mBackend.refreshList();
         final boolean isAllowlisted = mBackend.isAllowlisted(mPackageName);
         preference.setSummary(isAllowlisted ? R.string.high_power_on : R.string.high_power_off);
     }

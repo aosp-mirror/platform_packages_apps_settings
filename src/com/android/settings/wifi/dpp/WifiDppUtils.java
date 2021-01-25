@@ -301,7 +301,11 @@ public class WifiDppUtils {
 
         final String ssid = removeFirstAndLastDoubleQuotes(softApConfiguration.getSsid());
         String security;
-        if (softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+        final int securityType = softApConfiguration.getSecurityType();
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE) {
+            security = WifiQrCode.SECURITY_SAE;
+        } else if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION) {
             security = WifiQrCode.SECURITY_WPA_PSK;
         } else {
             security = WifiQrCode.SECURITY_NO_PASSWORD;
@@ -431,11 +435,11 @@ public class WifiDppUtils {
 
     private static boolean isSupportHotspotConfiguratorQrCodeGenerator(
             SoftApConfiguration softApConfiguration) {
-        // QR code generator produces QR code with ZXing's Wi-Fi network config format,
-        // it supports PSK and WEP and non security
-        // KeyMgmt.NONE is for WEP or non security
-        return softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
-                || softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OPEN;
+        final int securityType = softApConfiguration.getSecurityType();
+        return securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE
+                || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION
+                || securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                || securityType == SoftApConfiguration.SECURITY_TYPE_OPEN;
     }
 
     private static boolean isSupportWifiDpp(Context context, int wifiEntrySecurity) {

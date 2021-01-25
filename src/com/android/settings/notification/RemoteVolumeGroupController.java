@@ -34,7 +34,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -196,9 +196,9 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             if (TextUtils.equals(info.getId(),
                     preference.getKey().substring(SWITCHER_PREFIX.length()))) {
                 final Intent intent = new Intent()
-                        .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
-                        .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
-                        .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                        .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                        .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
+                        .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                                 info.getClientPackageName());
                 mContext.sendBroadcast(intent);
                 return true;

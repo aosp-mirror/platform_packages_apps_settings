@@ -39,26 +39,25 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.Arrays;
 import java.util.List;
-
-
 /**
  * Screen pinning settings.
  */
 @SearchIndexable
 public class ScreenPinningSettings extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener, DialogInterface.OnClickListener {
+        implements OnMainSwitchChangeListener, DialogInterface.OnClickListener {
 
     private static final String KEY_USE_SCREEN_LOCK = "use_screen_lock";
     private static final String KEY_FOOTER = "screen_pinning_settings_screen_footer";
     private static final int CHANGE_LOCK_METHOD_REQUEST = 43;
 
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
     private SwitchPreference mUseScreenLock;
     private FooterPreference mFooterPreference;
     private LockPatternUtils mLockPatternUtils;
@@ -84,6 +83,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         mFooterPreference = root.findPreference(KEY_FOOTER);
 
         mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.setTitle(getContext().getString(R.string.app_pinning_main_switch_title));
         mSwitchBar.show();
         mSwitchBar.setChecked(isLockToAppEnabled(getActivity()));
         mSwitchBar.addOnSwitchChangeListener(this);

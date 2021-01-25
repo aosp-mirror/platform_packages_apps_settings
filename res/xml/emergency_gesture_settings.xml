@@ -20,16 +20,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/emergency_gesture_screen_title">
 
-    <com.android.settings.widget.VideoPreference
-        android:key="emergency_gesture_screen_video"
-        app:animation="@raw/gesture_double_tap"
-        app:preview="@drawable/gesture_double_tap"/>
-
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.MainSwitchPreference
         android:key="gesture_emergency_button_switch_bar"
-        android:layout="@layout/emergency_gesture_switch_bar"
-        app:controller="com.android.settings.gestures.EmergencyGesturePreferenceController"
-        app:allowDividerBelow="true"/>
+        app:controller="com.android.settings.emergency.EmergencyGesturePreferenceController" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/emergency_gesture_screen_summary"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="true" />
 
     <SwitchPreference
         android:key="emergency_gesture_sound"
@@ -37,10 +35,10 @@
         android:title="@string/emergency_gesture_sound_setting_title"
         android:summary="@string/emergency_gesture_sound_setting_summary"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.EmergencyGestureSoundPreferenceController"
+        app:controller="com.android.settings.emergency.EmergencyGestureSoundPreferenceController"
         app:allowDividerAbove="true"/>
 
-    <com.android.settings.gestures.EmergencyGestureNumberOverridePreference
+    <com.android.settings.emergency.EmergencyGestureNumberOverridePreference
         android:key="emregency_gesture_number_override"
         android:title="@string/emergency_gesture_call_for_help_title"
         android:summary="@string/summary_placeholder"
@@ -49,5 +47,5 @@
         android:dialogLayout="@layout/emergency_gesture_number_override_dialog"
         android:positiveButtonText="@string/save"
         app:allowDividerAbove="true"
-        app:controller="com.android.settings.gestures.EmergencyGestureNumberOverridePreferenceController"/>
+        app:controller="com.android.settings.emergency.EmergencyGestureNumberOverridePreferenceController"/>
 </PreferenceScreen>

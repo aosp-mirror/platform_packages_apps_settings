@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Desbloquear coa impresión dixital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa a túa impresión dixital"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Toca o sensor da impresión dixital para desbloquear o teléfono, autorizar compras ou iniciar sesión nas aplicacións. Ten coidado coas impresións dixitais que engades, pois mesmo cunha soa impresión dixital se pode facer todo o indicado previamente.\n\nNota: A túa impresión dixital é menos segura que un padrón seguro ou un PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Toca o sensor de impresión dixital para desbloquear o teléfono, autorizar compras ou iniciar sesión nas aplicacións. Ten coidado coas impresións dixitais que engadas, pois mesmo cunha soa impresión dixital se pode facer todo o indicado previamente."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"A impresión dixital pode ser menos segura que un padrón ou un PIN fiable."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Utiliza a impresión dixital para desbloquear o teléfono ou autorizar as compras.\n\nNota: Non podes utilizar a impresión dixital para desbloquear este dispositivo. Para obter máis información, ponte en contacto co administrador da túa organización."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Utiliza a impresión dixital para desbloquear o teléfono ou autorizar as compras.\n\nNota: É posible que a impresión dixital sexa menos segura que un padrón ou un PIN fiables."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
@@ -426,6 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Toca o sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Está na parte posterior do teléfono. Utiliza o dedo índice."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"Aparece na pantalla. Busca a impresión dixital cun círculo brillante."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustración coa localización do sensor de impresión dixital e do dispositivo"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nome"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Aceptar"</string>
@@ -2132,9 +2134,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Lectores de pantalla"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio e texto na pantalla"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Pantalla"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Texto e pantalla"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controis de interacción"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Asistencia para a función táctil"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controis do sistema"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Aplicacións descargadas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funcións experimentais"</string>
@@ -2264,6 +2267,8 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> audiófonos gardados</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> audiófono gardado</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Atallo activado"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desactivado"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Activado"</string>
@@ -3073,15 +3078,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Eliminar usuario"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Eliminar"</string>
     <string name="user_guest" msgid="4545590092001460388">"Convidado"</string>
-    <!-- no translation found for user_clear_guest_menu (4864362688187480452) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_menu (5064400453222497734) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_confirm_title (7526978959527761497) -->
-    <skip />
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Borrar datos da sesión de invitado"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Finalizar sesión de invitado"</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Queres finalizar a sesión de invitado?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Eliminaranse todas as aplicacións e datos desta sesión."</string>
-    <!-- no translation found for user_exit_guest_dialog_remove (8095094235815676847) -->
-    <skip />
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Finalizar sesión"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activar chamadas telefónicas"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activar chamadas telefónicas e SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Eliminar usuario"</string>
@@ -3594,8 +3595,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Conversas non prioritarias"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas que modificases"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Conversas recentes"</string>
-    <!-- no translation found for conversation_settings_clear_recents (4246342656145488662) -->
-    <skip />
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Borrar todas as recentes"</string>
     <string name="clear" msgid="5092178335409471100">"Borrar"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Mostrar conversas prioritarias nunha burbulla"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"As conversas prioritarias móstranse na parte superior do panel despregable. Tamén podes configuralas para que se inclúan en burbullas e interrompan o modo Non molestar."</string>
@@ -3653,6 +3653,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se desactivas o acceso de <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ás notificacións, é posible que tamén se desactive o acceso en modo Non molestar."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactivar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Tipos de notificacións permitidos"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Notificacións en curso importantes"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Notificacións de conversa"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Notificación de alerta"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Notificacións silenciadas"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servizos do asistente de RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ningunha aplicación instalada solicitou executarse como servizos do asistente de RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Queres permitir o acceso do servizo de RV para <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4428,8 +4433,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Conectado a varios dispositivos"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Modo de demostración da IU do sistema"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tema escuro"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Desactivouse temporalmente debido ao Aforro de batería"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Activouse temporalmente debido ao Aforro de batería"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"As aplicacións compatibles tamén cambiarán ao tema escuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"De acordo"</string>
@@ -4480,6 +4484,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para cambiar de aplicación, pasa o dedo cara arriba no botón Inicio. Para ver todas as aplicacións pasa o dedo cara arriba de novo. Para volver á pantalla anterior, toca o botón Atrás."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Proba o novo botón de inicio"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Activa o novo xesto para cambiar de aplicacións"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Seguranza e emerxencia"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegación con xestos"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para ir a Inicio, pasa o dedo cara arriba desde a parte inferior da pantalla. Para cambiar de aplicación, pasa o dedo cara arriba desde a parte inferior da pantalla, mantena premida e sóltaa. Para volver á pantalla anterior, pasa o dedo desde o bordo esquerdo ou dereito."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botóns"</string>
@@ -4740,9 +4745,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrar"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Silenciar"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Non facer nada"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Activado (vibración)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Activado (silenciado)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Desactivado"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrar"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Silenciar"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalles da rede"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"As aplicacións do teu teléfono poden consultar o nome do teu dispositivo. Tamén poden velo outros usuarios cando te conectes a dispositivos Bluetooth ou a redes wifi, así como cando configures zonas wifi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivos"</string>
@@ -4985,9 +4989,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Chamadas de emerxencia"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Este operador non admite as chamadas de emerxencia por wifi.\nO dispositivo cambia automaticamente a unha rede de telefonía móbil para facer unha chamada de emerxencia.\nSó se poden realizar chamadas de emerxencia en áreas con cobertura móbil."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Usa a wifi para mellorar a calidade das chamadas"</string>
-    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Chamadas doutra SIM a través desta"</string>
-    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Permite que outra SIM faga chamadas e envíe SMS a través desta."</string>
-    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"chamadas doutra SIM a través desta"</string>
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Chamadas alternativas"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Se <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> non está dispoñible, utiliza a SIM dos datos móbiles para realizar e recibir chamadas de <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"chamadas alternativas"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Mensaxe MMS entrante"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Non se puido enviar a mensaxe MMS"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Toca para permitir as mensaxes MMS en <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> cando os datos móbiles estean desactivados"</string>
@@ -5051,8 +5055,8 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Desactivar"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Tarxetas SIM"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Redes seguras para os avións"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Busca redes seguras para os avións e establece conexión con elas"</string>
+    <string name="airplane_safe_networks" msgid="6057114281183247124">"Mostrar redes cando se usa o modo avión"</string>
+    <string name="airplane_safe_networks_summary" msgid="4879620804022818385">"Cando se usa o modo avión, busca redes e conecta o dispositivo a elas."</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"avión, segura para os avións"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Chamadas e SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Chamadas por wifi"</string>
@@ -5068,9 +5072,17 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferencias"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectarse a redes públicas"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"conexión de rede, Internet, sen fíos, datos, wifi, móbil, operador, 4G, 3G, 2G, LTE"</string>
-    <!-- no translation found for view_airplane_safe_networks (9170023210981508906) -->
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Ver redes no modo avión"</string>
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Mostrando redes do avión"</string>
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Desactivar modo avión"</string>
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Queres restablecer a conexión a Internet?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Ao realizar esta acción finalizará a chamada telefónica"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Ao realizar esta acción finalizará a chamada telefónica"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Restablecendo conexión a Internet…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Solucionar conectividade"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for turn_off_airplane_mode (7141986366534514443) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conectada"</string>
@@ -5086,16 +5098,11 @@
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Un dispositivo non fiable quere acceder aos teus contactos e ao rexistro de chamadas. Toca para obter información."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Queres permitir o acceso aos contactos e ao rexistro de chamadas?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Un dispositivo Bluetooth non fiable, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quere acceder aos teus contactos e ao rexistro de chamadas, incluídos os datos relacionados coas chamadas entrantes e saíntes.\n\nNunca antes te conectaras a: <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
-    <!-- no translation found for category_name_brightness (8520372392029305084) -->
-    <skip />
-    <!-- no translation found for category_name_lock_display (7478785189102882266) -->
-    <skip />
-    <!-- no translation found for category_name_visibility (4485030512199246405) -->
-    <skip />
-    <!-- no translation found for category_name_color (937514550918977151) -->
-    <skip />
-    <!-- no translation found for category_name_others (2366006298768550310) -->
-    <skip />
-    <!-- no translation found for category_name_general (7737273712848115886) -->
-    <skip />
+    <string name="category_name_brightness" msgid="8520372392029305084">"Brillo"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"Pantalla de bloqueo"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"Visibilidade"</string>
+    <string name="category_name_color" msgid="937514550918977151">"Cor"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"Outras opcións de configuración"</string>
+    <string name="category_name_general" msgid="7737273712848115886">"Xeral"</string>
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ver todas as aplicacións"</string>
 </resources>

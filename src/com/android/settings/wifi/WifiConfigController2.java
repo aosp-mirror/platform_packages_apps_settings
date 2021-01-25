@@ -32,7 +32,6 @@ import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
-import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.telephony.SubscriptionInfo;
@@ -68,6 +67,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
@@ -408,10 +408,7 @@ public class WifiConfigController2 implements TextWatcher,
 
             mSsidScanButton.setVisibility(View.GONE);
         }
-
-        if (!isSplitSystemUser()) {
-            mSharedCheckBox.setVisibility(View.GONE);
-        }
+        mSharedCheckBox.setVisibility(View.GONE);
 
         mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         if (mConfigUi.getSubmitButton() != null) {
@@ -420,13 +417,6 @@ public class WifiConfigController2 implements TextWatcher,
 
         // After done view show and hide, request focus
         mView.findViewById(R.id.l_wifidialog).requestFocus();
-    }
-
-    @VisibleForTesting
-    boolean isSplitSystemUser() {
-        final UserManager userManager =
-                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        return userManager.isSplitSystemUser();
     }
 
     private void addRow(ViewGroup group, int name, String value) {
@@ -1448,8 +1438,8 @@ public class WifiConfigController2 implements TextWatcher,
         }
 
         // Shows display name of each active subscription.
-        final String[] displayNames = mActiveSubscriptionInfos.stream().map(
-                SubscriptionInfo::getDisplayName).toArray(String[]::new);
+        final String[] displayNames = SubscriptionUtil.getUniqueSubscriptionDisplayNames(
+                mContext).values().stream().toArray(String[]::new);
         mEapSimSpinner.setAdapter(getSpinnerAdapter(displayNames));
         mEapSimSpinner.setSelection(0 /* position */);
         if (displayNames.length == 1) {

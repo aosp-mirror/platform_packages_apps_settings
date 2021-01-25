@@ -126,7 +126,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final SubscriptionInfo info = getDefaultSubscriptionInfo();
         if (info != null) {
             // display subscription based account
-            return info.getDisplayName();
+            return SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext);
         } else {
             if (isAskEverytimeSupported()) {
                 return mContext.getString(R.string.calls_and_sms_ask_every_time);
@@ -160,7 +160,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
         if (Utils.isProviderModelEnabled(mContext) && subs.size() == 1) {
             mPreference.setEnabled(false);
-            mPreference.setSummary(subs.get(0).getDisplayName());
+            mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    subs.get(0), mContext));
             return;
         }
 
@@ -171,7 +172,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             if (sub.isOpportunistic()) {
                 continue;
             }
-            displayNames.add(sub.getDisplayName());
+            displayNames.add(SubscriptionUtil.getUniqueSubscriptionDisplayName(sub, mContext));
             final int subId = sub.getSubscriptionId();
             subscriptionIds.add(Integer.toString(subId));
             if (subId == serviceDefaultSubId) {

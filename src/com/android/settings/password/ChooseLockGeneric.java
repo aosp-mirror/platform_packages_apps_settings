@@ -25,6 +25,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
@@ -162,6 +163,8 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         /**
          * From intent extra {@link ChooseLockSettingsHelper#EXTRA_KEY_REQUESTED_MIN_COMPLEXITY}.
+         * Only contains complexity requested by calling app, not complexity enforced by device
+         * admins.
          */
         @PasswordComplexity private int mRequestedMinComplexity;
 
@@ -177,6 +180,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected boolean mForFingerprint = false;
         protected boolean mForFace = false;
         protected boolean mForBiometrics = false;
+
+        private boolean mOnlyEnforceDevicePasswordRequirement = false;
 
         @Override
         public int getMetricsCategory() {
@@ -221,20 +226,11 @@ public class ChooseLockGeneric extends SettingsActivity {
             mForBiometrics = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
 
-            final int complexityFromIntent = intent
-                    .getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
-            final int complexityFromAdmin = mLockPatternUtils.getRequestedPasswordComplexity(
-                    mUserId);
-            mRequestedMinComplexity = Math.max(complexityFromIntent, complexityFromAdmin);
-            final boolean isComplexityProvidedByAdmin = (complexityFromAdmin > complexityFromIntent)
-                    && mRequestedMinComplexity > PASSWORD_COMPLEXITY_NONE;
+            mRequestedMinComplexity = intent.getIntExtra(
+                    EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
+            mOnlyEnforceDevicePasswordRequirement = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY, false);
 
-            // If the complexity is provided by the admin, do not get the caller app's name.
-            // If the app requires, for example, low complexity, and the admin requires high
-            // complexity, it does not make sense to show a footer telling the user it's the app
-            // requesting a particular complexity because the admin-set complexity will override it.
-            mCallerAppName = isComplexityProvidedByAdmin ? null :
-                    intent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME);
             mIsCallingAppAdmin = intent
                     .getBooleanExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, /* defValue= */ false);
             mForChangeCredRequiredForBoot = arguments != null && arguments.getBoolean(
@@ -268,7 +264,22 @@ public class ChooseLockGeneric extends SettingsActivity {
                     arguments,
                     intent.getExtras()).getIdentifier();
             mController = new ChooseLockGenericController(
-                    getContext(), mUserId, mRequestedMinComplexity, mLockPatternUtils);
+                    getContext(), mUserId, mRequestedMinComplexity,
+                    mOnlyEnforceDevicePasswordRequirement,
+                    mLockPatternUtils);
+
+            final int aggregatedComplexity = mController.getAggregatedPasswordComplexity();
+            final boolean isComplexityProvidedByAdmin =
+                    aggregatedComplexity > mRequestedMinComplexity
+                    && aggregatedComplexity > PASSWORD_COMPLEXITY_NONE;
+
+            // If the complexity is provided by the admin, do not get the caller app's name.
+            // If the app requires, for example, low complexity, and the admin requires high
+            // complexity, it does not make sense to show a footer telling the user it's the app
+            // requesting a particular complexity because the admin-set complexity will override it.
+            mCallerAppName = isComplexityProvidedByAdmin ? null :
+                    intent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME);
+
             if (ACTION_SET_NEW_PASSWORD.equals(chooseLockAction)
                     && UserManager.get(activity).isManagedProfile(mUserId)
                     && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
@@ -356,6 +367,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 chooseLockGenericIntent.putExtra(CONFIRM_CREDENTIALS, !mPasswordConfirmed);
                 chooseLockGenericIntent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY,
                         mRequestedMinComplexity);
+                chooseLockGenericIntent.putExtra(EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY,
+                        mOnlyEnforceDevicePasswordRequirement);
                 chooseLockGenericIntent.putExtra(EXTRA_KEY_CALLER_APP_NAME, mCallerAppName);
                 if (mUserPassword != null) {
                     chooseLockGenericIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
@@ -557,7 +570,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private String getFooterString() {
             @StringRes int stringId;
-            switch (mRequestedMinComplexity) {
+            switch (mController.getAggregatedPasswordComplexity()) {
                 case PASSWORD_COMPLEXITY_HIGH:
                     stringId = R.string.unlock_footer_high_complexity_requested;
                     break;
@@ -678,7 +691,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 boolean hideDisabled) {
             final PreferenceScreen entries = getPreferenceScreen();
 
-            int adminEnforcedQuality = mDpm.getPasswordQuality(null, mUserId);
+            int adminEnforcedQuality = LockPatternUtils.credentialTypeToPasswordQuality(
+                    mLockPatternUtils.getRequestedPasswordMetrics(
+                            mUserId, mOnlyEnforceDevicePasswordRequirement).credType);
             EnforcedAdmin enforcedAdmin =
                     RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(getActivity(),
                             mUserId);
@@ -753,8 +768,10 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected Intent getLockPasswordIntent(int quality) {
             ChooseLockPassword.IntentBuilder builder =
                     new ChooseLockPassword.IntentBuilder(getContext())
-                            .setPasswordQuality(quality)
-                            .setRequestedMinComplexity(mRequestedMinComplexity)
+                            .setPasswordType(quality)
+                            .setPasswordRequirement(
+                                    mController.getAggregatedPasswordComplexity(),
+                                    mController.getAggregatedPasswordMetrics())
                             .setForFingerprint(mForFingerprint)
                             .setForFace(mForFace)
                             .setForBiometrics(mForBiometrics)

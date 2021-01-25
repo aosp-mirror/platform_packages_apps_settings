@@ -99,6 +99,12 @@ public final class ChooseLockSettingsHelper {
      */
     public static final String EXTRA_KEY_ALLOW_ANY_USER = "allow_any_user";
 
+    /**
+     *
+     */
+    public static final String EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY =
+            "device_password_requirement_only";
+
     @VisibleForTesting @NonNull LockPatternUtils mLockPatternUtils;
     @NonNull private final Activity mActivity;
     @Nullable private final Fragment mFragment;

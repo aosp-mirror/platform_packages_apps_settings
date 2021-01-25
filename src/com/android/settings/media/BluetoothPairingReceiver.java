@@ -25,7 +25,7 @@ import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 /**
  * BroadcastReceiver for handling media output intent
@@ -33,7 +33,7 @@ import com.android.settingslib.media.MediaOutputSliceConstants;
 public class BluetoothPairingReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (TextUtils.equals(MediaOutputSliceConstants.ACTION_LAUNCH_BLUETOOTH_PAIRING,
+        if (TextUtils.equals(MediaOutputConstants.ACTION_LAUNCH_BLUETOOTH_PAIRING,
                 intent.getAction())) {
             context.startActivity(new SubSettingLauncher(context)
                     .setDestination(BluetoothPairingDetail.class.getName())

@@ -707,4 +707,18 @@ public class DashboardFeatureProviderImplTest {
         assertThat(preference.getSummary()).isEqualTo(
                 mContext.getText(R.string.about_settings_summary));
     }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void bindPreference_specificHomepageTile_shouldOverridePosition() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
+                Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getOrder()).isEqualTo(100);
+    }
 }

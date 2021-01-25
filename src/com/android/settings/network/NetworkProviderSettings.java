@@ -32,38 +32,40 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.PowerManager;
+import android.os.Process;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
-import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
 import com.android.settings.wifi.ConnectedWifiEntryPreference;
-import com.android.settings.wifi.LinkablePreference;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiConnectListener;
 import com.android.settings.wifi.WifiDialog2;
@@ -74,8 +76,10 @@ import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
@@ -93,7 +97,8 @@ import java.util.Optional;
 @SearchIndexable
 public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
-        WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener {
+        WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
+        ConnectivitySubsystemsRecoveryManager.RecoveryStatusCallback {
 
     public static final String ACTION_NETWORK_PROVIDER_SETTINGS =
             "android.settings.NETWORK_PROVIDER_SETTINGS";
@@ -106,6 +111,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     static final int MENU_ID_FORGET = Menu.FIRST + 3;
     static final int MENU_ID_MODIFY = Menu.FIRST + 4;
+    static final int MENU_FIX_CONNECTIVITY = Menu.FIRST + 5;
 
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
@@ -118,9 +124,9 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_wifi_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
-    private static final String PREF_KEY_STATUS_MESSAGE = "wifi_status_message";
     @VisibleForTesting
     static final String PREF_KEY_DATA_USAGE = "non_carrier_data_usage";
+    private static final String PREF_KEY_RESET_INTERNET = "resetting_your_internet";
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
@@ -167,6 +173,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
 
+    @VisibleForTesting
+    protected ConnectivitySubsystemsRecoveryManager mConnectivitySubsystemsRecoveryManager;
+    private HandlerThread mRecoveryThread;
+
     /**
      * The state of {@link #isUiRestricted()} at {@link #onCreate(Bundle)}}. This is necessary to
      * ensure that behavior is consistent if {@link #isUiRestricted()} changes. It could be changed
@@ -192,7 +202,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     Preference mSavedNetworksPreference;
     @VisibleForTesting
     DataUsagePreference mDataUsagePreference;
-    private LinkablePreference mStatusMessagePreference;
+    @VisibleForTesting
+    ViewAirplaneModeNetworksLayoutPreferenceController
+            mViewAirplaneModeNetworksButtonPreference;
+    @VisibleForTesting
+    LayoutPreference mResetInternetPreference;
+    @VisibleForTesting
+    ConnectedEthernetNetworkController mConnectedEthernetNetworkController;
 
     /**
      * Mobile networks list for provider model
@@ -242,13 +258,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
         mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
-        mStatusMessagePreference = findPreference(PREF_KEY_STATUS_MESSAGE);
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
         mDataUsagePreference.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(),
                 0 /*subId*/,
                 null /*service*/);
+        mResetInternetPreference = findPreference(PREF_KEY_RESET_INTERNET);
+        if (mResetInternetPreference != null) {
+            mResetInternetPreference.setVisible(false);
+        }
         addNetworkMobileProviderController();
+        addViewAirplaneModeNetworksButtonController();
+        addConnectedEthernetNetworkController();
     }
 
     private void addNetworkMobileProviderController() {
@@ -258,6 +279,23 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
         mNetworkMobileProviderController.init(getSettingsLifecycle());
         mNetworkMobileProviderController.displayPreference(getPreferenceScreen());
+    }
+
+    private void addViewAirplaneModeNetworksButtonController() {
+        if (mViewAirplaneModeNetworksButtonPreference == null) {
+            mViewAirplaneModeNetworksButtonPreference =
+                    new ViewAirplaneModeNetworksLayoutPreferenceController(
+                            getContext(), getSettingsLifecycle());
+        }
+        mViewAirplaneModeNetworksButtonPreference.displayPreference(getPreferenceScreen());
+    }
+
+    private void addConnectedEthernetNetworkController() {
+        if (mConnectedEthernetNetworkController == null) {
+            mConnectedEthernetNetworkController =
+                    new ConnectedEthernetNetworkController(getContext(), getSettingsLifecycle());
+        }
+        mConnectedEthernetNetworkController.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -602,18 +640,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             case WifiManager.WIFI_STATE_ENABLING:
                 removeConnectedWifiEntryPreference();
                 removeWifiEntryPreference();
-                addMessagePreference(R.string.wifi_starting);
                 setProgressBarVisible(true);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLING:
                 removeConnectedWifiEntryPreference();
                 removeWifiEntryPreference();
-                addMessagePreference(R.string.wifi_stopping);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
-                setOffMessage();
+                removeConnectedWifiEntryPreference();
+                removeWifiEntryPreference();
                 setAdditionalSettingsSummaries();
                 setProgressBarVisible(false);
                 mClickedConnect = false;
@@ -683,7 +720,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
 
         boolean hasAvailableWifiEntries = false;
-        mStatusMessagePreference.setVisible(false);
         mWifiEntryPreferenceCategory.setVisible(true);
 
         final WifiEntry connectedEntry = mWifiPickerTracker.getConnectedWifiEntry();
@@ -859,33 +895,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 && Settings.Global.getInt(contentResolver,
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 0
                 && !powerManager.isPowerSaveMode();
-    }
-
-    private void setOffMessage() {
-        final CharSequence title = getText(R.string.wifi_empty_list_wifi_off);
-        // Don't use WifiManager.isScanAlwaysAvailable() to check the Wi-Fi scanning mode. Instead,
-        // read the system settings directly. Because when the device is in Airplane mode, even if
-        // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
-        // TODO(b/149421497): Fix this?
-        final boolean wifiScanningMode = mWifiManager.isScanAlwaysAvailable();
-        final CharSequence description = wifiScanningMode ? getText(R.string.wifi_scan_notify_text)
-                : getText(R.string.wifi_scan_notify_text_scanning_off);
-        final LinkifyUtils.OnClickListener clickListener =
-                () -> new SubSettingLauncher(getContext())
-                        .setDestination(ScanningSettings.class.getName())
-                        .setTitleRes(R.string.location_scanning_screen_title)
-                        .setSourceMetricsCategory(getMetricsCategory())
-                        .launch();
-        mStatusMessagePreference.setText(title, description, clickListener);
-        removeConnectedWifiEntryPreference();
-        removeWifiEntryPreference();
-        mStatusMessagePreference.setVisible(true);
-    }
-
-    private void addMessagePreference(int messageId) {
-        mStatusMessagePreference.setTitle(messageId);
-        mStatusMessagePreference.setVisible(true);
-
     }
 
     protected void setProgressBarVisible(boolean visible) {
@@ -1100,5 +1109,90 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     Intent getHelpIntent(Context context, String helpUrlString) {
         return HelpUtils.getHelpIntent(context, helpUrlString, context.getClass().getName());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem item = menu.add(0, MENU_FIX_CONNECTIVITY, 0, R.string.fix_connectivity);
+        item.setIcon(R.drawable.ic_refresh_24dp);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == MENU_FIX_CONNECTIVITY) {
+            if (isPhoneOnCall()) {
+                showResetInternetDialog();
+                return true;
+            }
+            fixConnectivity();
+            return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    @VisibleForTesting
+    void showResetInternetDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        DialogInterface.OnClickListener resetInternetClickListener =
+                new Dialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        fixConnectivity();
+                    }
+                };
+        builder.setTitle(R.string.reset_your_internet_title)
+                .setMessage(R.string.reset_internet_text)
+                .setPositiveButton(R.string.tts_reset, resetInternetClickListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create()
+                .show();
+    }
+
+    @VisibleForTesting
+    boolean isPhoneOnCall() {
+        TelephonyManager mTelephonyManager = getActivity().getSystemService(TelephonyManager.class);
+        int state = mTelephonyManager.getCallState();
+        return state != TelephonyManager.CALL_STATE_IDLE;
+    }
+
+    private void fixConnectivity() {
+        if (mConnectivitySubsystemsRecoveryManager == null) {
+            mRecoveryThread = new HandlerThread(TAG
+                    + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
+                    Process.THREAD_PRIORITY_BACKGROUND);
+            mRecoveryThread.start();
+            mConnectivitySubsystemsRecoveryManager = new ConnectivitySubsystemsRecoveryManager(
+                    getContext(), mRecoveryThread.getThreadHandler());
+        }
+        if (mConnectivitySubsystemsRecoveryManager.isRecoveryAvailable()) {
+            mConnectivitySubsystemsRecoveryManager.triggerSubsystemRestart(TAG, this);
+        }
+    }
+
+    /**
+     * Callback for the internet recovery started.
+     */
+    public void onSubsystemRestartOperationBegin() {
+        if (mResetInternetPreference != null) {
+            mResetInternetPreference.setVisible(true);
+        }
+        if (mViewAirplaneModeNetworksButtonPreference != null) {
+            mViewAirplaneModeNetworksButtonPreference.setVisible(false);
+        }
+    }
+
+    /**
+     * Callback for the internet recovery ended.
+     */
+    public void onSubsystemRestartOperationEnd() {
+        if (mResetInternetPreference != null) {
+            mResetInternetPreference.setVisible(false);
+        }
+        if (mViewAirplaneModeNetworksButtonPreference != null
+                && mViewAirplaneModeNetworksButtonPreference.isAvailable()) {
+            mViewAirplaneModeNetworksButtonPreference.setVisible(true);
+        }
     }
 }

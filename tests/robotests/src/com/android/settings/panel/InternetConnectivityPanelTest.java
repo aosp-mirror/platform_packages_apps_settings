@@ -20,10 +20,12 @@ package com.android.settings.panel;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.net.Uri;
+import android.os.SystemProperties;
 
 import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.slices.CustomSliceRegistry;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,20 +39,41 @@ import java.util.List;
 public class InternetConnectivityPanelTest {
 
     private InternetConnectivityPanel mPanel;
+    private static final String SETTINGS_PROVIDER_MODEL =
+            "persist.sys.fflag.override.settings_provider_model";
+    private boolean mSettingsProviderModelState;
 
     @Before
     public void setUp() {
         mPanel = InternetConnectivityPanel.create(RuntimeEnvironment.application);
+        mSettingsProviderModelState = SystemProperties.getBoolean(SETTINGS_PROVIDER_MODEL, false);
+    }
+
+    @After
+    public void tearDown() {
+        SystemProperties.set(SETTINGS_PROVIDER_MODEL,
+                mSettingsProviderModelState ? "true" : "false");
     }
 
     @Test
-    public void getSlices_containsNecessarySlices() {
+    public void getSlices_providerModelDisabled_containsNecessarySlices() {
+        SystemProperties.set(SETTINGS_PROVIDER_MODEL, "false");
         final List<Uri> uris = mPanel.getSlices();
 
         assertThat(uris).containsExactly(
                 AirplaneModePreferenceController.SLICE_URI,
                 CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
                 CustomSliceRegistry.WIFI_SLICE_URI);
+    }
+
+    @Test
+    public void getSlices_providerModelEnabled_containsNecessarySlices() {
+        SystemProperties.set(SETTINGS_PROVIDER_MODEL, "true");
+        final List<Uri> uris = mPanel.getSlices();
+
+        assertThat(uris).containsExactly(
+                CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI,
+                CustomSliceRegistry.AIRPLANE_SAFE_NETWORKS_SLICE_URI);
     }
 
     @Test

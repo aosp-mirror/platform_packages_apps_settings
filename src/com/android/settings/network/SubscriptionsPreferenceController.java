@@ -20,6 +20,8 @@ import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
+import static com.android.settingslib.mobile.MobileMappings.getIconKey;
+import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,6 +33,7 @@ import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.util.ArraySet;
 
@@ -49,9 +52,12 @@ import com.android.settings.network.telephony.DataConnectivityListener;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SignalStrengthListener;
+import com.android.settings.network.telephony.TelephonyDisplayInfoListener;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.mobile.MobileMappings;
+import com.android.settingslib.mobile.MobileMappings.Config;
 import com.android.settingslib.net.SignalStrengthUtil;
 
 import java.util.Collections;
@@ -73,7 +79,7 @@ import java.util.Set;
 public class SubscriptionsPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
         MobileDataEnabledListener.Client, DataConnectivityListener.Client,
-        SignalStrengthListener.Callback {
+        SignalStrengthListener.Callback, TelephonyDisplayInfoListener.Callback {
     private static final String TAG = "SubscriptionsPrefCntrlr";
 
     private UpdateListener mUpdateListener;
@@ -85,6 +91,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private MobileDataEnabledListener mDataEnabledListener;
     private DataConnectivityListener mConnectivityListener;
     private SignalStrengthListener mSignalStrengthListener;
+    private TelephonyDisplayInfoListener mTelephonyDisplayInfoListener;
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
     @VisibleForTesting
@@ -93,6 +100,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (action.equals(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)) {
+                mConfig = mSubsPrefCtrlInjector.getConfig(mContext);
                 update();
             }
         }
@@ -102,8 +110,12 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private Map<Integer, Preference> mSubscriptionPreferences;
     private int mStartOrder;
     private GearPreference mSubsGearPref;
-
+    private Config mConfig = null;
     private SubsPrefCtrlInjector mSubsPrefCtrlInjector;
+    private TelephonyDisplayInfo mTelephonyDisplayInfo =
+            new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_UNKNOWN,
+                    TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
+
     /**
      * This interface lets a parent of this class know that some change happened - this could
      * either be because overall availability changed, or because we've added/removed/updated some
@@ -140,8 +152,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mDataEnabledListener = new MobileDataEnabledListener(context, this);
         mConnectivityListener = new DataConnectivityListener(context, this);
         mSignalStrengthListener = new SignalStrengthListener(context, this);
+        mTelephonyDisplayInfoListener = new TelephonyDisplayInfoListener(context, this);
         lifecycle.addObserver(this);
         mSubsPrefCtrlInjector = createSubsPrefCtrlInjector();
+        mConfig = mSubsPrefCtrlInjector.getConfig(mContext);
     }
 
     private void registerDataSubscriptionChangedReceiver() {
@@ -163,6 +177,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mDataEnabledListener.start(mSubsPrefCtrlInjector.getDefaultDataSubscriptionId());
         mConnectivityListener.start();
         mSignalStrengthListener.resume();
+        mTelephonyDisplayInfoListener.resume();
         registerDataSubscriptionChangedReceiver();
         update();
     }
@@ -173,6 +188,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mDataEnabledListener.stop();
         mConnectivityListener.stop();
         mSignalStrengthListener.pause();
+        mTelephonyDisplayInfoListener.pause();
         unRegisterDataSubscriptionChangedReceiver();
     }
 
@@ -196,6 +212,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
             mSubscriptionPreferences.clear();
             mSignalStrengthListener.updateSubscriptionIds(Collections.emptySet());
+            mTelephonyDisplayInfoListener.updateSubscriptionIds(Collections.emptySet());
             mUpdateListener.onChildrenUpdated();
             return;
         }
@@ -224,24 +241,26 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                     startMobileNetworkActivity(mContext, subInfo.getSubscriptionId()));
         }
 
-        mSubsGearPref.setTitle(subInfo.getDisplayName());
+        mSubsGearPref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                subInfo, mContext));
         mSubsGearPref.setOrder(mStartOrder);
-        //TODO(b/176141828) Wait for api provided by system ui.
-        mSubsGearPref.setSummary(getMobilePreferenceSummary());
+        mSubsGearPref.setSummary(getMobilePreferenceSummary(subInfo.getSubscriptionId()));
         mSubsGearPref.setIcon(getIcon(subInfo.getSubscriptionId()));
         mPreferenceGroup.addPreference(mSubsGearPref);
 
         final Set<Integer> activeDataSubIds = new ArraySet<>();
         activeDataSubIds.add(subInfo.getSubscriptionId());
         mSignalStrengthListener.updateSubscriptionIds(activeDataSubIds);
+        mTelephonyDisplayInfoListener.updateSubscriptionIds(activeDataSubIds);
         mUpdateListener.onChildrenUpdated();
     }
 
-    private String getMobilePreferenceSummary() {
-        //TODO(b/176141828) Waiting for the api provided by system UI.
-        String result = "5G";
-        if (MobileNetworkUtils.activeNetworkIsCellular(mContext)) {
-            result = "Active, " + result;
+    private String getMobilePreferenceSummary(int subId) {
+        String result = mSubsPrefCtrlInjector.getNetworkType(
+                mContext, mConfig, mTelephonyDisplayInfo, subId);
+        if (!result.isEmpty() && mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext)) {
+            result = mContext.getString(R.string.preference_summary_default_combination,
+                    mContext.getString(R.string.mobile_data_connection_active), result);
         }
         return result;
     }
@@ -304,7 +323,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 pref = new Preference(mPreferenceGroup.getContext());
                 mPreferenceGroup.addPreference(pref);
             }
-            pref.setTitle(info.getDisplayName());
+            pref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext));
             final boolean isDefaultForData = (subId == dataDefaultSubId);
             pref.setSummary(getSummary(subId, isDefaultForData));
             setIcon(pref, subId, isDefaultForData);
@@ -462,6 +481,12 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         update();
     }
 
+    @Override
+    public void onTelephonyDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) {
+        mTelephonyDisplayInfo = telephonyDisplayInfo;
+        update();
+    }
+
     @VisibleForTesting
     boolean canSubscriptionBeDisplayed(Context context, int subId) {
         return (SubscriptionUtil.getAvailableSubscription(context,
@@ -474,7 +499,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
     @VisibleForTesting
     public void connectCarrierNetwork() {
-        if (mTelephonyManager == null || !mTelephonyManager.isDataEnabled()) {
+        if (!MobileNetworkUtils.isMobileDataEnabled(mContext)) {
             return;
         }
         if (mWifiPickerTrackerHelper != null) {
@@ -532,6 +557,24 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
          */
         public boolean isProviderModelEnabled(Context context) {
             return Utils.isProviderModelEnabled(context);
+        }
+
+        /**
+         * Get config for carrier customization.
+         */
+        public Config getConfig(Context context) {
+            return MobileMappings.Config.readConfig(context);
+        }
+
+        /**
+         * Get current mobile network type.
+         */
+        public String getNetworkType(Context context, Config config,
+                TelephonyDisplayInfo telephonyDisplayInfo, int subId) {
+            String iconKey = getIconKey(telephonyDisplayInfo);
+            int resId = mapIconSets(config).get(iconKey).dataContentDescription;
+            return resId != 0
+                ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId) : "";
         }
 
         /**

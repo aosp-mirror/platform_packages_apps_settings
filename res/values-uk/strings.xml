@@ -411,7 +411,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Розблокування відбитком"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Відбиток пальця"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Щоб розблокувати телефон, дозволити покупку або ввійти в додаток, просто торкніться сканера відбитків пальців. Будьте обачні, оскільки приймається будь-який відбиток, доданий на телефон.\n\nПримітка. Відбиток пальця може бути менш надійним, ніж ключ або PIN-код."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Щоб розблокувати телефон, дозволити покупку або ввійти в додаток, просто торкніться сканера відбитків пальців. Додавайте відбитки лише тих, кому довіряєте. Навіть одного доданого відбитка пальця досить, щоб авторизувати перелічені дії."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"Відбиток пальця може бути менш безпечним, ніж надійний ключ чи PIN-код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Розблоковуйте телефон або схвалюйте покупки відбитком пальця.\n\nПримітка. Цей пристрій не можна розблоковувати відбитком пальця. Щоб дізнатися більше, зв’яжіться з адміністратором своєї організації."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Розблоковуйте телефон або схвалюйте покупки відбитком пальця.\n\nПримітка. Відбиток пальця може бути менш надійним, ніж ключ чи PIN-код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Скасувати"</string>
@@ -434,6 +435,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Скасувати"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Торкніться сканера"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Сканер розташовано на задній панелі телефона. Прикладіть вказівний палець."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"Він на екрані. Знайдіть значок відбитка пальця в колі, що світиться."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Розташування сканера відбитків пальців на пристрої"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Назва"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"ОК"</string>
@@ -2180,9 +2182,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Програми зчитування з екрана"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Аудіо й текст на екрані"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Екран"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Текст і відображення"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Елементи керування взаємодією"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Допомога з натисканнями"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Елементи керування системою"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Завантажені додатки"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Експериментальні налаштування"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Прапорці функцій"</string>
@@ -2314,6 +2317,8 @@
       <item quantity="many">Збережено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слухових апаратів</item>
       <item quantity="other">Збережено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слухового апарата</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Комбінацію клавіш увімкнено"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Вимкнено"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Увімкнено"</string>
@@ -3159,15 +3164,11 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Видалити користувача"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Видалити"</string>
     <string name="user_guest" msgid="4545590092001460388">"Гість"</string>
-    <!-- no translation found for user_clear_guest_menu (4864362688187480452) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_menu (5064400453222497734) -->
-    <skip />
-    <!-- no translation found for user_exit_guest_confirm_title (7526978959527761497) -->
-    <skip />
+    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Видалити дані гостя"</string>
+    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Завершити сеанс у режимі \"Гість\""</string>
+    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Завершити сеанс у режимі \"Гість\"?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Усі додатки й дані з цього сеансу буде видалено."</string>
-    <!-- no translation found for user_exit_guest_dialog_remove (8095094235815676847) -->
-    <skip />
+    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Завершити сеанс"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Увімкнути телефонні дзвінки"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Увімкнути телефонні дзвінки й SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Видалити користувача"</string>
@@ -3684,8 +3685,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Непріоритетні розмови"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Розмови, у які ви вносили зміни"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Нещодавні розмови"</string>
-    <!-- no translation found for conversation_settings_clear_recents (4246342656145488662) -->
-    <skip />
+    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Видалити останні"</string>
     <string name="clear" msgid="5092178335409471100">"Очистити"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Показувати важливі чати в спливаючих сповіщеннях"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Важливі чати показуються у верхній частині розкривної панелі. Ви можете налаштувати надсилання спливаючих сповіщень про них, навіть коли ввімкнено режим \"Не турбувати\"."</string>
@@ -3749,6 +3749,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Якщо ви вимкнете доступ додатка <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до сповіщень, доступ до режиму \"Не турбувати\" також буде вимкнено."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Вимкнути"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Скасувати"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Дозволені типи сповіщень"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Важливі постійні сповіщення"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Сповіщення про повідомлення"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Сповіщення зі звуком чи вібрацією"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Беззвучні сповіщення"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Допоміжні VR-сервіси"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Установлені додатки не запитували доступу для роботи в режимі допоміжних служб VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Надати VR-сервісу доступ до сервісу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4568,8 +4573,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Під’єднано до кількох пристроїв"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Демо-режим інтерфейсу системи"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Темна тема"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Тимчасово вимкнено через режим енергозбереження"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Тимчасово ввімкнено через режим енергозбереження"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"У підтримуваних додатках також увімкнеться темна тема"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -4626,6 +4630,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Щоб переключитися між додатками, проведіть пальцем угору на кнопці головного екрана. Щоб переглянути всі додатки, знову проведіть пальцем угору. Щоб повернутися, торкніться кнопки \"Назад\"."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Спробуйте нову кнопку головного екрана"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Увімкніть новий жест, щоб переходити між додатками"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Безпека й екстрені ситуації"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навігація жестами"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Щоб перейти на головний екран, проведіть пальцем від низу екрана вгору. Щоб переключитися між додатками, проведіть пальцем від низу екрана вгору, утримуйте екран, а потім відпустіть. Щоб повернутися назад, проведіть пальцем від лівого чи правого краю."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навігація з трьома кнопками"</string>
@@ -4900,9 +4905,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Віброрежим"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Беззвучний режим"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Нічого не робити"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Увімкнено (вібрація)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Увімкнено (вимкнено звук)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Вимкнено"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Вібрація"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Вимкнути звук"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Дані мережі"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Назва пристрою відображається в додатках на телефоні. Її також можуть бачити інші люди, коли ви підключаєтеся до пристроїв Bluetooth або налаштовуєте точку доступу Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Пристрої"</string>
@@ -5151,9 +5155,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Екстрені виклики"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Ваш оператор не підтримує екстрені виклики через Wi-Fi.\nПід час таких викликів пристрій автоматично перемикається на мобільну мережу.\nЕкстрені виклики можна здійснювати лише в зонах покриття мобільної мережі."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Телефонувати через Wi-Fi для якісніших викликів"</string>
-    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Виклики між SIM-картами"</string>
-    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Дозвольте виклики й SMS для іншої SIM-карти через цю SIM-карту."</string>
-    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"виклики між SIM-картами"</string>
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Резервний спосіб здійснення викликів"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Якщо сервіс <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> недоступний, скористайтеся мобільним трафіком, щоб здійснювати й отримувати виклики <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"резервний спосіб здійснення викликів"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Вхідне MMS-повідомлення"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Не вдається надіслати MMS-повідомлення"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Торкніться, щоб увімкнути MMS-повідомлення для оператора <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>, коли мобільне передавання даних вимкнено"</string>
@@ -5217,8 +5221,8 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Вимкнено"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Інтернет"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-карти"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Безпечні мережі в літаку"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Знаходьте безпечні мережі в літаку й підключайтеся до них"</string>
+    <string name="airplane_safe_networks" msgid="6057114281183247124">"Показати мережі, доступні в режимі польоту"</string>
+    <string name="airplane_safe_networks_summary" msgid="4879620804022818385">"Знаходьте мережі, доступні в режимі польоту, і підключайтеся до них."</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"літак, безпечний у літаку"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Дзвінки та SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Дзвінки через Wi‑Fi"</string>
@@ -5234,9 +5238,17 @@
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Параметри"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Підключатися до загальнодоступних мереж"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"з\'єднання з мережею, Інтернет, бездротове, дані, Wi-Fi, wi-fi, wi fi, мобільний, стільниковий, оператор мобільного зв\'язку, 4G, 3G, 2G, LTE"</string>
-    <!-- no translation found for view_airplane_safe_networks (9170023210981508906) -->
+    <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Мережі, доступні в режимі польоту"</string>
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Мережі, доступні в режимі польоту"</string>
+    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Вимкнути режим польоту"</string>
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Скинути інтернет-з\'єднання?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Ваш дзвінок буде завершено"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Ваш дзвінок буде завершено"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Скидання інтернет-з\'єднання…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Вирішити проблеми зі з\'єднанням"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for turn_off_airplane_mode (7141986366534514443) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Підключено"</string>
@@ -5252,16 +5264,11 @@
     <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Ненадійний пристрій хоче отримати доступ до ваших контактів і журналу викликів. Натисніть, щоб дізнатися більше."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Дозволити доступ до контактів і журналу викликів?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Недовірений пристрій із Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) хоче отримати доступ до ваших контактів і журналу викликів, зокрема даних про вхідні й вихідні виклики.\n\nВи ще не підключалися до пристрою <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
-    <!-- no translation found for category_name_brightness (8520372392029305084) -->
-    <skip />
-    <!-- no translation found for category_name_lock_display (7478785189102882266) -->
-    <skip />
-    <!-- no translation found for category_name_visibility (4485030512199246405) -->
-    <skip />
-    <!-- no translation found for category_name_color (937514550918977151) -->
-    <skip />
-    <!-- no translation found for category_name_others (2366006298768550310) -->
-    <skip />
-    <!-- no translation found for category_name_general (7737273712848115886) -->
-    <skip />
+    <string name="category_name_brightness" msgid="8520372392029305084">"Яскравість"</string>
+    <string name="category_name_lock_display" msgid="7478785189102882266">"Блокування дисплея"</string>
+    <string name="category_name_visibility" msgid="4485030512199246405">"Видимість"</string>
+    <string name="category_name_color" msgid="937514550918977151">"Колір"</string>
+    <string name="category_name_others" msgid="2366006298768550310">"Інші"</string>
+    <string name="category_name_general" msgid="7737273712848115886">"Загальні"</string>
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Показати всі додатки"</string>
 </resources>

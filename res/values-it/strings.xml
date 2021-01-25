@@ -403,7 +403,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Sblocca con l\'impronta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa la tua impronta"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Tocca il sensore delle impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app. Scegli con attenzione chi aggiungere: le operazioni sopra elencate possono essere svolte con qualsiasi impronta digitale aggiunta.\n\nNota: la tua impronta digitale potrebbe essere meno sicura di una sequenza o un PIN complesso."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="1467469714658873533">"Tocca il sensore di impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app. Scegli con attenzione le impronte che aggiungi: le operazioni sopra elencate possono essere svolte con qualsiasi impronta aggiunta."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message" msgid="6527850754691662946">"La tua impronta potrebbe essere meno sicura di una sequenza o un PIN efficaci."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Utilizza la tua impronta per sbloccare il telefono o approvare un acquisto.\n\nNota: non puoi utilizzare la tua impronta per sbloccare questo dispositivo. Per ulteriori informazioni, contatta l\'amministratore dell\'organizzazione."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Utilizza la tua impronta per sbloccare il telefono o approvare un acquisto.\n\nNota: la tua impronta potrebbe essere meno sicura di una sequenza o un codice PIN complessi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annulla"</string>
@@ -426,6 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Annulla"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Tocca il sensore"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Si trova sulla parte posteriore del telefono. Utilizza il dito indice."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"È sullo schermo. Cerca l\'impronta con un cerchio luminoso."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustrazione con il dispositivo e la posizione del sensore di impronte"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nome"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
@@ -1608,7 +1610,7 @@
     <string name="reset_network_title" msgid="1395494440355807616">"Reimposta Wi-Fi, dati mobili e Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Verranno reimpostate tutte le impostazioni di rete, tra cui:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dati mobili"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Resetta"</string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Cancella SIM scaricate"</string>
+    <string name="reset_esim_title" msgid="6152167073280852849">"Resetta SIM scaricate"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Gli eventuali piani di servizio mobile non verranno annullati. Per scaricare SIM sostitutive, contatta il tuo operatore."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Reimposta"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Ripristinare tutte le impostazioni della rete? Questa azione non può essere annullata."</string>
@@ -2132,9 +2134,10 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Screen reader"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio e testo su schermo"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Display"</string>
-    <!-- no translation found for accessibility_text_and_display_title (1398507755501334961) -->
-    <skip />
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Testo e display"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controlli di interazione"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Assistenza per tocco"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controlli di sistema"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"App scaricate"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Sperimentali"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flag di funzioni"</string>
@@ -2264,6 +2267,8 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> apparecchi acustici salvati</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> apparecchio acustico salvato</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Scorciatoia attivata"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Off"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"On"</string>
@@ -3648,6 +3653,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se disattivi l\'accesso alle notifiche per <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, potrebbe essere disattivato anche l\'accesso alla funzione Non disturbare."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Disattiva"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annulla"</string>
+    <string name="notification_listener_type_title" msgid="2791552789364336733">"Tipi di notifiche consentiti"</string>
+    <string name="notif_type_ongoing" msgid="2295338067608686711">"Notifiche costanti importanti"</string>
+    <string name="notif_type_conversation" msgid="3014259738224129504">"Notifiche delle conversazioni"</string>
+    <string name="notif_type_alerting" msgid="2300039323822104165">"Notifiche di avviso"</string>
+    <string name="notif_type_silent" msgid="2514763073653979199">"Notifiche silenziose"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servizi helper VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nessuna delle app installate ha richiesto di essere eseguita come servizio helper VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Consentire l\'accesso a <xliff:g id="SERVICE">%1$s</xliff:g> al servizio VR?"</string>
@@ -4423,8 +4433,7 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Connesso a più dispositivi"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Modalità demo dell\'interfaccia utente di sistema"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tema scuro"</string>
-    <!-- no translation found for dark_ui_mode_disabled_summary_dark_theme_on (4554134480159161533) -->
-    <skip />
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Opzione disattivata temporaneamente per risparmio energetico"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Disattivata temporaneamente a causa del Risparmio energetico"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Anche le app supportate passeranno al tema scuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -4475,6 +4484,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Per cambiare app, scorri verso l\'alto sul pulsante Home. Scorri ancora verso l\'alto per visualizzare tutte le app. Per tornare indietro, tocca il pulsante Indietro."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Prova il nuovo pulsante Home"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Attiva il nuovo gesto per cambiare app"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sicurezza ed emergenza"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigazione tramite gesti"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Per andare alla schermata Home, scorri verso l\'alto dalla parte inferiore dello schermo. Per cambiare app, scorri verso l\'alto dalla parte inferiore dello schermo, tieni premuto e rilascia. Per tornare indietro, scorri dal bordo sinistro o destro."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigazione con tre pulsanti"</string>
@@ -4735,9 +4745,8 @@
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrazione"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Disattivare audio"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Non fare niente"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"On (vibrazione)"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Su (audio disattivato)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Non attivo"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrazione"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Disattiva audio"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Dettagli rete"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Il nome del tuo dispositivo è visibile alle app installate sul telefono. Potrebbe essere visibile anche ad altre persone quando ti connetti a dispositivi Bluetooth, a una rete Wi-Fi o configuri un hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivi"</string>
@@ -4980,9 +4989,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Chiamate di emergenza"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Le chiamate di emergenza tramite Chiamate Wi-Fi non sono supportate dal tuo operatore.\nIl dispositivo passa automaticamente a una rete dati per fare una chiamata di emergenza.\nÈ possibile fare chiamate di emergenza soltanto in zone con copertura mobile."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Utilizza il Wi-Fi per migliorare la qualità delle chiamate"</string>
-    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Chiamate tramite più SIM"</string>
-    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Consenti chiamate e SMS di un\'altra SIM tramite questa SIM."</string>
-    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"chiamate tramite più sim"</string>
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Chiamate di backup"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Se <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> non è disponibile, usa la SIM di dati mobili per effettuare e ricevere chiamate tramite <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"chiamate di backup"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Messaggio MMS in arrivo"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Impossibile inviare messaggio MMS"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Tocca per consentire i messaggi MMS su <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> quando i dati mobili non sono attivi"</string>
@@ -5046,8 +5055,8 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Off"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
-    <string name="airplane_safe_networks" msgid="8689587134664565669">"Reti utilizzabili in aereo"</string>
-    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Cerca e collegati a reti utilizzabili in aereo"</string>
+    <string name="airplane_safe_networks" msgid="6057114281183247124">"Mostra reti con modalità aereo"</string>
+    <string name="airplane_safe_networks_summary" msgid="4879620804022818385">"Cerca e collegati a reti in modalità aereo."</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"aereo, utilizzabile in aereo"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Chiamate e SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Chiamate Wi‑Fi"</string>
@@ -5064,7 +5073,17 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Connetti a reti pubbliche"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"connessione rete, internet, wireless, dati, wifi, wi-fi, wi fi, cellulare, dispositivo mobile, operatore cellulare, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Visualizza reti con modalità aereo"</string>
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Visualizzazione delle reti disponibili in modalità aereo"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Disattiva la modalità aereo"</string>
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Vuoi reimpostare la connessione a Internet?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"La telefonata verrà terminata"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"La telefonata verrà terminata"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Reimpostazione della connessione a Internet in corso…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Risolvi problema di connettività"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
+    <skip />
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connessione attiva"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"La connessione a Internet non sarà automatica"</string>
@@ -5084,6 +5103,6 @@
     <string name="category_name_visibility" msgid="4485030512199246405">"Visibilità"</string>
     <string name="category_name_color" msgid="937514550918977151">"Colore"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Altre"</string>
-    <!-- no translation found for category_name_general (7737273712848115886) -->
-    <skip />
+    <string name="category_name_general" msgid="7737273712848115886">"Generali"</string>
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Mostra tutte le app"</string>
 </resources>

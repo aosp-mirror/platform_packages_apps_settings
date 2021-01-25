@@ -18,20 +18,24 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="safety_and_emergency_screen"
     android:title="@string/emergency_settings_preference_title">
     <Preference
         android:key="emergency_info"
         android:title="@string/emergency_info_title"
         android:summary="@string/summary_placeholder"
+        android:order="0"
         settings:controller="com.android.settings.accounts.EmergencyInfoPreferenceController"/>
     <Preference
         android:key="gesture_emergency_summary"
         android:title="@string/emergency_gesture_screen_title"
-        android:fragment="com.android.settings.gestures.EmergencyGestureSettings"
-        settings:controller="com.android.settings.gestures.EmergencyGestureEntrypointPreferenceController" />
+        android:order="100"
+        android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
+        settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
     <com.android.settingslib.RestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
+        android:order="200"
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"
