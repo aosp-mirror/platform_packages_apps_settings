@@ -431,8 +431,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Anulați"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Atingeți senzorul"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Se află pe partea din spate a telefonului. Folosiți degetul arătător."</string>
-    <!-- no translation found for security_settings_udfps_enroll_find_sensor_message (1181700918690345832) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"Acesta se află pe ecran. Căutați amprenta cu cerc care iluminează."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Imagine cu dispozitivul și poziția senzorului de amprentă"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Denumiți"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
@@ -2293,6 +2292,8 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> de aparate auditive salvate</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> aparat auditiv salvat</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Comanda rapidă este activată"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Dezactivată"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Activat"</string>
@@ -5071,12 +5072,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Apeluri de urgență"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Apelurile de urgență prin Apelare prin Wi-Fi nu sunt acceptate de operator.\nDispozitivul comută automat la o rețea mobilă pentru a face un apel de urgență.\nApelurile de urgență sunt posibile numai în zonele cu acoperire a rețelelor de telefonie mobilă."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Folosiți Wi-Fi pentru apeluri ca să îmbunătățiți calitatea"</string>
-    <!-- no translation found for backup_calling_settings_title (519714752900364326) -->
-    <skip />
-    <!-- no translation found for backup_calling_setting_summary (451295393447465830) -->
-    <skip />
-    <!-- no translation found for keywords_backup_calling (8592800915478816800) -->
-    <skip />
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Metodă de apelare de rezervă"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Dacă <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> nu este disponibil, folosiți SIM-ul de date mobile pentru a iniția și a primi apeluri prin <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"metodă de apelare de rezervă"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Mesaj MMS primit"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Nu se poate trimite mesajul MMS"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Atingeți pentru a permite mesageria MMS pentru <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> când datele mobile sunt dezactivate"</string>
@@ -5158,18 +5156,16 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectați-vă la rețele publice"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"conexiune la rețea, internet, wireless, date, wifi, wi-fi, wi fi, celular, mobil, operator servicii mobile, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Vedeți rețelele sigure pentru avioane"</string>
-    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
-    <skip />
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Se afișează rețelele sigure pentru avioane"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Dezactivați modul Avion"</string>
-    <!-- no translation found for reset_your_internet_title (4856899004343241310) -->
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Resetați conexiunea la internet?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Astfel, apelul telefonic se va încheia"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Astfel, apelul telefonic se va încheia"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Se resetează conexiunea la internet…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Remediați problemele legate de conectivitate"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for resetting_internet_text (6696779371800051806) -->
-    <skip />
-    <!-- no translation found for fix_connectivity (2781433603228089501) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conectat"</string>
@@ -5191,6 +5187,5 @@
     <string name="category_name_color" msgid="937514550918977151">"Culoare"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Altele"</string>
     <string name="category_name_general" msgid="7737273712848115886">"General"</string>
-    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
-    <skip />
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Vedeți toate aplicațiile"</string>
 </resources>
