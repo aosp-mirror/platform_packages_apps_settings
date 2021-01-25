@@ -427,8 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Touch the sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"It’s on the back of your phone. Use your index finger."</string>
-    <!-- no translation found for security_settings_udfps_enroll_find_sensor_message (1181700918690345832) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"It’s on the screen. Look for the fingerprint with a glowing circle."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustration with device and fingerprint sensor location"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Name"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
@@ -2268,6 +2267,7 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> saved hearing aids</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> saved hearing aid</item>
     </plurals>
+    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Audio adjustment"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Shortcut on"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Off"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"On"</string>
@@ -4988,12 +4988,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Emergency calls"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Emergency calls over Wi‑Fi Calling are not supported by your operator.\nThe device switches automatically to a mobile network to place an emergency call.\nEmergency calls are only possible in areas with mobile coverage."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Use Wi‑Fi for calls to improve quality"</string>
-    <!-- no translation found for backup_calling_settings_title (519714752900364326) -->
-    <skip />
-    <!-- no translation found for backup_calling_setting_summary (451295393447465830) -->
-    <skip />
-    <!-- no translation found for keywords_backup_calling (8592800915478816800) -->
-    <skip />
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Backup calling"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"If <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> is unavailable, use your mobile data SIM to make and receive <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> calls."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"backup calling"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Incoming MMS message"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Can’t send MMS message"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Tap to allow MMS messaging on <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> when mobile data is off"</string>
@@ -5075,18 +5072,16 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Connect to public networks"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, mobile operator, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"View aeroplane mode networks"</string>
-    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
-    <skip />
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Viewing aeroplane mode networks"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Turn off aeroplane mode"</string>
-    <!-- no translation found for reset_your_internet_title (4856899004343241310) -->
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Reset your Internet?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"This will end your phone call"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"This will end your phone call"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Resetting your Internet…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Fix connectivity"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for resetting_internet_text (6696779371800051806) -->
-    <skip />
-    <!-- no translation found for fix_connectivity (2781433603228089501) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connected"</string>
@@ -5108,6 +5103,5 @@
     <string name="category_name_color" msgid="937514550918977151">"Colour"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Others"</string>
     <string name="category_name_general" msgid="7737273712848115886">"General"</string>
-    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
-    <skip />
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"See all apps"</string>
 </resources>

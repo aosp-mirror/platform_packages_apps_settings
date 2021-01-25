@@ -359,10 +359,10 @@ public class MobileNetworkUtils {
         }
 
         if (isWorldMode(context, subId)) {
-            final int settingsNetworkMode = android.provider.Settings.Global.getInt(
-                    context.getContentResolver(),
-                    android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                    TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+            final int settingsNetworkMode = getNetworkTypeFromRaf(
+                    (int) telephonyManager.getAllowedNetworkTypesForReason(
+                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
+
             if (settingsNetworkMode == NETWORK_MODE_LTE_GSM_WCDMA
                     || settingsNetworkMode == NETWORK_MODE_LTE_CDMA_EVDO
                     || settingsNetworkMode == NETWORK_MODE_NR_LTE_GSM_WCDMA
@@ -388,10 +388,11 @@ public class MobileNetworkUtils {
         if (isGsmBasicOptions(context, subId)) {
             return true;
         }
-        final int networkMode = android.provider.Settings.Global.getInt(
-                context.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subId);
+        final int networkMode = getNetworkTypeFromRaf(
+                (int) telephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
         if (isWorldMode(context, subId)) {
             if (networkMode == NETWORK_MODE_LTE_CDMA_EVDO
                     || networkMode == NETWORK_MODE_LTE_GSM_WCDMA
@@ -455,10 +456,9 @@ public class MobileNetworkUtils {
             return false;
         }
 
-        final int networkMode = android.provider.Settings.Global.getInt(
-                context.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        final int networkMode = getNetworkTypeFromRaf(
+                (int) telephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
         if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
                 && isWorldMode(context, subId)) {
             return false;
@@ -570,15 +570,17 @@ public class MobileNetworkUtils {
      */
     @VisibleForTesting
     static boolean shouldSpeciallyUpdateGsmCdma(Context context, int subId) {
-        final int networkMode = android.provider.Settings.Global.getInt(
-                context.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subId);
+        final int networkMode = getNetworkTypeFromRaf(
+                (int) telephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
         if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA
-                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
+                || networkMode
+                == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
             if (!isTdscdmaSupported(context, subId) && isWorldMode(context, subId)) {
                 return true;

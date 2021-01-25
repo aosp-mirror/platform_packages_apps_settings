@@ -95,8 +95,9 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
         mShow5gLimitedDialog = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_VOLTE_5G_LIMITED_ALERT_DIALOG_BOOL);
-        mIsNrEnabledFromCarrierConfig = carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_NR_ENABLED_BOOL);
+        mIsNrEnabledFromCarrierConfig = carrierConfig.getInt(
+                CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITY_INT)
+                != CarrierConfigManager.CARRIER_NR_AVAILABILITY_NONE;
         return this;
     }
 
