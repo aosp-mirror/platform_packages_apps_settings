@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
@@ -33,6 +34,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.network.InternetUpdater;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.SubscriptionsChangeListener;
@@ -50,7 +52,8 @@ import java.util.concurrent.Executor;
 public class NetworkProviderWorker extends WifiScanWorker implements
         SignalStrengthListener.Callback, MobileDataEnabledListener.Client,
         DataConnectivityListener.Client,
-        SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
+        SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
+        InternetUpdater.OnInternetTypeChangedListener {
     private static final String TAG = "NetworkProviderWorker";
     private static final int PROVIDER_MODEL_DEFAULT_EXPANDED_ROW_COUNT = 4;
     private DataContentObserver mMobileDataObserver;
@@ -67,6 +70,8 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     private TelephonyDisplayInfo mTelephonyDisplayInfo =
             new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_UNKNOWN,
                     TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
+    private InternetUpdater mInternetUpdater;
+    private @InternetUpdater.InternetType int mInternetType;
 
     public NetworkProviderWorker(Context context, Uri uri) {
         super(context, uri);
@@ -85,6 +90,9 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         mConnectivityListener = new DataConnectivityListener(context, this);
         mSignalStrengthListener = new SignalStrengthListener(context, this);
         mConfig = getConfig(mContext);
+
+        mInternetUpdater = new InternetUpdater(mContext, getLifecycle(), this);
+        mInternetType = mInternetUpdater.getInternetType();
     }
 
     @Override
@@ -259,5 +267,29 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     public String getNetworkTypeDescription() {
         return updateNetworkTypeName(mContext, mConfig, mTelephonyDisplayInfo,
                 mDefaultDataSubid);
+    }
+
+    /**
+     * Called when internet type is changed.
+     *
+     * @param internetType the internet type
+     */
+    public void onInternetTypeChanged(@InternetUpdater.InternetType int internetType) {
+        if (mInternetType == internetType) {
+            return;
+        }
+        boolean changeWithEthernet =
+                mInternetType == INTERNET_ETHERNET || internetType == INTERNET_ETHERNET;
+        mInternetType = internetType;
+        if (changeWithEthernet) {
+            updateSlice();
+        }
+    }
+
+    /**
+     * Returns true, if the ethernet network is connected.
+     */
+    public boolean isEthernetConnected() {
+        return mInternetType == INTERNET_ETHERNET;
     }
 }
