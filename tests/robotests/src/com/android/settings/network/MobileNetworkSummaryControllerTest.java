@@ -155,6 +155,7 @@ public class MobileNetworkSummaryControllerTest {
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub1.getDisplayName()).thenReturn("sub1");
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("sub1");
@@ -194,6 +195,7 @@ public class MobileNetworkSummaryControllerTest {
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub1.getDisplayName()).thenReturn("sub1");
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         when(mSubscriptionManager.isActiveSubscriptionId(eq(1))).thenReturn(false);
         when(mSubscriptionManager.canDisablePhysicalSubscription()).thenReturn(true);
 
@@ -238,6 +240,7 @@ public class MobileNetworkSummaryControllerTest {
         when(sub2.getDisplayName()).thenReturn("sub2");
 
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("2 SIMs");
@@ -267,6 +270,7 @@ public class MobileNetworkSummaryControllerTest {
         when(sub2.getDisplayName()).thenReturn("sub2");
 
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("sub1");
@@ -295,6 +299,7 @@ public class MobileNetworkSummaryControllerTest {
         when(sub2.getDisplayName()).thenReturn("sub2");
 
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();

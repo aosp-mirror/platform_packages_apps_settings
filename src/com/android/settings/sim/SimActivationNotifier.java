@@ -117,10 +117,12 @@ public class SimActivationNotifier {
             return;
         }
 
+        CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                activeRemovableSub, mContext);
         String carrierName =
-                TextUtils.isEmpty(activeRemovableSub.getDisplayName())
+                TextUtils.isEmpty(displayName)
                         ? mContext.getString(R.string.sim_card_label)
-                        : activeRemovableSub.getDisplayName().toString();
+                        : displayName.toString();
         String title =
                 mContext.getString(
                         R.string.post_dsds_reboot_notification_title_with_carrier, carrierName);

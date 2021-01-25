@@ -69,6 +69,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.datausage.WifiDataUsageSummaryPreferenceController;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiDialog2.WifiDialog2Listener;
@@ -696,8 +697,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         final int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (activeSubscriptionInfos != null) {
             for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfos) {
+                final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                        subscriptionInfo, mContext);
                 if (config.carrierId == subscriptionInfo.getCarrierId()) {
-                    mEapSimSubscriptionPref.setSummary(subscriptionInfo.getDisplayName());
+                    mEapSimSubscriptionPref.setSummary(displayName);
                     return;
                 }
 
@@ -705,7 +708,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 // defaultDataSubscriptionId.
                 if (config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID
                         && defaultDataSubscriptionId == subscriptionInfo.getSubscriptionId()) {
-                    mEapSimSubscriptionPref.setSummary(subscriptionInfo.getDisplayName());
+                    mEapSimSubscriptionPref.setSummary(displayName);
                     return;
                 }
             }

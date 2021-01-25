@@ -241,7 +241,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                     startMobileNetworkActivity(mContext, subInfo.getSubscriptionId()));
         }
 
-        mSubsGearPref.setTitle(subInfo.getDisplayName());
+        mSubsGearPref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                subInfo, mContext));
         mSubsGearPref.setOrder(mStartOrder);
         mSubsGearPref.setSummary(getMobilePreferenceSummary(subInfo.getSubscriptionId()));
         mSubsGearPref.setIcon(getIcon(subInfo.getSubscriptionId()));
@@ -322,7 +323,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 pref = new Preference(mPreferenceGroup.getContext());
                 mPreferenceGroup.addPreference(pref);
             }
-            pref.setTitle(info.getDisplayName());
+            pref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext));
             final boolean isDefaultForData = (subId == dataDefaultSubId);
             pref.setSummary(getSummary(subId, isDefaultForData));
             setIcon(pref, subId, isDefaultForData);

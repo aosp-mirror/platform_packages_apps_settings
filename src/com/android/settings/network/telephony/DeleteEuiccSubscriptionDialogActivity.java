@@ -16,7 +16,6 @@
 
 package com.android.settings.network.telephony;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -141,7 +140,9 @@ public class DeleteEuiccSubscriptionDialogActivity extends SubscriptionActionDia
                 DIALOG_TAG_DELETE_SIM_CONFIRMATION,
                 getString(R.string.erase_sim_dialog_title),
                 getString(
-                        R.string.erase_sim_dialog_text, mSubscriptionToBeDeleted.getDisplayName()),
+                        R.string.erase_sim_dialog_text,
+                        SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                                mSubscriptionToBeDeleted, this)),
                 getString(R.string.erase_sim_confirm_button),
                 getString(R.string.cancel));
     }
