@@ -339,7 +339,9 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         channelPref.setOnPreferenceChangeListener(
                 (preference, o) -> {
                     boolean value = (Boolean) o;
-                    int importance = value ? channel.getOriginalImportance() : IMPORTANCE_NONE;
+                    int importance = value
+                            ? Math.max(channel.getOriginalImportance(), IMPORTANCE_LOW)
+                            : IMPORTANCE_NONE;
                     channel.setImportance(importance);
                     channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
                     PrimarySwitchPreference channelPref1 = (PrimarySwitchPreference) preference;

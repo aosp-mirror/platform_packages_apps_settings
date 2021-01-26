@@ -36,6 +36,12 @@
         android:layout="@layout/view_airplane_mode_networks_button"
         settings:allowDividerBelow="true"/>
 
+    <Preference
+        android:key="connected_ethernet_network"
+        android:title="@string/ethernet"
+        android:summary="@string/cannot_switch_networks_while_connected"
+        android:icon="@drawable/ic_settings_ethernet"/>
+
     <PreferenceCategory
         android:key="connected_access_point"
         android:layout="@layout/preference_category_no_label"/>

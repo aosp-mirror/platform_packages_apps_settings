@@ -427,8 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Kanselleer"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Raak die sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Dit is op die agterkant van jou foon. Gebruik jou wysvinger."</string>
-    <!-- no translation found for security_settings_udfps_enroll_find_sensor_message (1181700918690345832) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"Dis op die skerm. Soek die vingerafdruk met \'n gloeiende sirkel."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustrasie met toestel en ligging van vingerafdruksensor"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Naam"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Goed"</string>
@@ -2268,6 +2267,8 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> gestoorde gehoortoestelle</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> gestoorde gehoortoestel</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Kortpad is aan"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Af"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Aan"</string>
@@ -4988,12 +4989,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Noodoproepe"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Jou diensverskaffer steun nie noodoproepe oor Wi‑Fi nie.\nDie toestel skakel outomaties na \'n selnetwerk toe oor om \'n noodoproep te maak.\nNoodoproepe is net moontlik in gebiede met sellulêre dekking."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Gebruik Wi-Fi vir oproepe om gehalte te verbeter"</string>
-    <!-- no translation found for backup_calling_settings_title (519714752900364326) -->
-    <skip />
-    <!-- no translation found for backup_calling_setting_summary (451295393447465830) -->
-    <skip />
-    <!-- no translation found for keywords_backup_calling (8592800915478816800) -->
-    <skip />
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Rugsteunoproepe"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Gebruik jou mobieledata-SIM om <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-oproepe te maak en te ontvang as <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> nie beskikbaar is nie."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"rugsteunoproepe"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Inkomende MMS-boodskap"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Kan nie MMS-boodskap stuur nie"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Tik om MMS-boodskappe op <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> toe te laat wanneer mobiele data af is"</string>
@@ -5075,18 +5073,16 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Koppel aan publieke netwerke"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netwerkverbinding, internet, draadloos, data, wifi, wi-fi, wi fi, sellulêr, mobiel, selfoondiensverskaffer, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Bekyk vliegtuigmodusnetwerke"</string>
-    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
-    <skip />
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Bekyk tans vliegtuigmodusnetwerke"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Skakel vliegtuigmodus af"</string>
-    <!-- no translation found for reset_your_internet_title (4856899004343241310) -->
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Stel jou internet terug?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Dit sal jou foonoproep beëindig"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Dit sal jou foonoproep beëindig"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Stel tans jou internet terug …"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Stel konnektiwiteit reg"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for resetting_internet_text (6696779371800051806) -->
-    <skip />
-    <!-- no translation found for fix_connectivity (2781433603228089501) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Gekoppel"</string>
@@ -5108,6 +5104,5 @@
     <string name="category_name_color" msgid="937514550918977151">"Kleur"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Ander"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Algemeen"</string>
-    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
-    <skip />
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Sien alle programme"</string>
 </resources>

@@ -263,6 +263,30 @@ public class ProviderModelSliceTest {
     }
 
     @Test
+    @UiThreadTest
+    public void getSlice_connectedEthernet_getOneEthernetAndOneCarrierAndTwoWiFi() {
+        mWifiList.clear();
+        mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
+                WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi1_key", true);
+        mWifiList.add(mMockWifiSliceItem1);
+        mockWifiItemCondition(mMockWifiSliceItem2, "wifi2", "wifi2",
+                WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi2_key", true);
+        mWifiList.add(mMockWifiSliceItem2);
+        mMockNetworkProviderWorker.updateSelfResults(mWifiList);
+        when(mProviderModelSliceHelper.isAirplaneModeEnabled()).thenReturn(false);
+        when(mProviderModelSliceHelper.hasCarrier()).thenReturn(true);
+        when(mProviderModelSliceHelper.isDataSimActive()).thenReturn(true);
+        when(mMockNetworkProviderWorker.isEthernetConnected()).thenReturn(true);
+
+        final Slice slice = mMockProviderModelSlice.getSlice();
+
+        assertThat(slice).isNotNull();
+        assertThat(mMockProviderModelSlice.hasCreateEthernetRow()).isTrue();
+        verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
+        verify(mListBuilder, times(4)).addRow(any(ListBuilder.RowBuilder.class));
+    }
+
+    @Test
     public void providerModelSlice_hasCorrectUri() {
         assertThat(mMockProviderModelSlice.getUri()).isEqualTo(PROVIDER_MODEL_SLICE_URI);
     }
@@ -333,6 +357,7 @@ public class ProviderModelSliceTest {
 
     public class MockProviderModelSlice extends ProviderModelSlice {
         private MockNetworkProviderWorker mNetworkProviderWorker;
+        private boolean mHasCreateEthernetRow;
 
         MockProviderModelSlice(Context context, MockNetworkProviderWorker networkProviderWorker) {
             super(context);
@@ -347,6 +372,16 @@ public class ProviderModelSliceTest {
         @Override
         NetworkProviderWorker getWorker() {
             return mNetworkProviderWorker;
+        }
+
+        @Override
+        ListBuilder.RowBuilder createEthernetRow() {
+            mHasCreateEthernetRow = true;
+            return super.createEthernetRow();
+        }
+
+        public boolean hasCreateEthernetRow() {
+            return mHasCreateEthernetRow;
         }
     }
 

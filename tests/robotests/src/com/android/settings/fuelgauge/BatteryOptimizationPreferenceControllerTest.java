@@ -112,6 +112,13 @@ public class BatteryOptimizationPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(mContext.getString(R.string.high_power_off));
     }
 
+    @Test
+    public void testUpdateState_refreshList() {
+        mController.updateState(mPreference);
+
+        verify(mBackend).refreshList();
+    }
+
     /**
      * Create this test class so we could mock it
      */

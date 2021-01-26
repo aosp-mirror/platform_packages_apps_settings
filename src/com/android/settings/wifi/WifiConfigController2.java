@@ -67,6 +67,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
@@ -1437,8 +1438,8 @@ public class WifiConfigController2 implements TextWatcher,
         }
 
         // Shows display name of each active subscription.
-        final String[] displayNames = mActiveSubscriptionInfos.stream().map(
-                SubscriptionInfo::getDisplayName).toArray(String[]::new);
+        final String[] displayNames = SubscriptionUtil.getUniqueSubscriptionDisplayNames(
+                mContext).values().stream().toArray(String[]::new);
         mEapSimSpinner.setAdapter(getSpinnerAdapter(displayNames));
         mEapSimSpinner.setSelection(0 /* position */);
         if (displayNames.length == 1) {
