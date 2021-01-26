@@ -116,13 +116,14 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             return null;
         } else if (subs.size() == 1) {
             final SubscriptionInfo info = subs.get(0);
+            final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    info, mContext);
             final int subId = info.getSubscriptionId();
             if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
                     && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
-                return mContext.getString(R.string.mobile_network_tap_to_activate,
-                        SubscriptionUtil.getDisplayName(info));
+                return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
             } else {
-                return subs.get(0).getDisplayName();
+                return displayName;
             }
         } else {
             if (com.android.settings.Utils.isProviderModelEnabled(mContext)) {
@@ -135,8 +136,9 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     }
 
     private CharSequence getSummaryForProviderModel(List<SubscriptionInfo> subs) {
-        return String.join(", ", subs.stream().map(SubscriptionInfo::getDisplayName)
-                .collect(Collectors.toList()));
+        return String.join(", ", subs.stream().map(subInfo -> {
+            return SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, mContext);
+        }).collect(Collectors.toList()));
     }
 
     private void startAddSimFlow() {

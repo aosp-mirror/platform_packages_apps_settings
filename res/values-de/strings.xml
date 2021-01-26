@@ -427,8 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Abbrechen"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Sensor berühren"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Er befindet sich auf der Rückseite des Smartphones. Am besten den Zeigefinger verwenden."</string>
-    <!-- no translation found for security_settings_udfps_enroll_find_sensor_message (1181700918690345832) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"Er befindet sich auf dem Bildschirm. Suche den Fingerabdruck mit dem leuchtenden Kreis."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Abbildung mit Gerät und Position des Fingerabdrucksensors"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Name"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Ok"</string>
@@ -2269,6 +2268,8 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> gespeicherte Hörhilfen</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> gespeicherte Hörhilfe</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Verknüpfung aktiviert"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Aus"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"An"</string>
@@ -4989,12 +4990,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Notrufe"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Notrufe über WLAN-Telefonie werden von deinem Mobilfunkanbieter nicht unterstützt.\nDas Gerät wechselt automatisch zu einem Mobilfunknetz, um einen Notruf abzusetzen.\nNotrufe sind nur in Bereichen mit Mobilfunkabdeckung möglich."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Für Anrufe WLAN verwenden, um die Qualität zu verbessern"</string>
-    <!-- no translation found for backup_calling_settings_title (519714752900364326) -->
-    <skip />
-    <!-- no translation found for backup_calling_setting_summary (451295393447465830) -->
-    <skip />
-    <!-- no translation found for keywords_backup_calling (8592800915478816800) -->
-    <skip />
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Back-up für Anrufe"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Wenn <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> nicht verfügbar ist, kannst du über deine SIM für mobile Daten <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-Anrufe starten und annehmen."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"Back-up für Anrufe"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Eingehende MMS"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS kann nicht gesendet werden"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Tippen, um MMS über <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> zuzulassen, wenn mobile Daten deaktiviert sind"</string>
@@ -5076,18 +5074,16 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Mit öffentlichen Netzwerken verbinden"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netzwerkverbindung, internet, kabellos, drahtlos, daten, wlan, w-lan, mobilfunk, mobil, mobilfunkanbieter, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Flugmodus-Netzwerke anzeigen"</string>
-    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
-    <skip />
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Flugmodus-Netzwerke werden angezeigt"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Flugmodus deaktivieren"</string>
-    <!-- no translation found for reset_your_internet_title (4856899004343241310) -->
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Internetverbindung zurücksetzen?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Dadurch wird dein Telefongespräch beendet"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Dadurch wird dein Telefongespräch beendet"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Internetverbindung wird zurückgesetzt…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Konnektivitätsprobleme beheben"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for resetting_internet_text (6696779371800051806) -->
-    <skip />
-    <!-- no translation found for fix_connectivity (2781433603228089501) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Verbunden"</string>
@@ -5109,6 +5105,5 @@
     <string name="category_name_color" msgid="937514550918977151">"Farbe"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Sonstige"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Allgemein"</string>
-    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
-    <skip />
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Alle Apps anzeigen"</string>
 </resources>

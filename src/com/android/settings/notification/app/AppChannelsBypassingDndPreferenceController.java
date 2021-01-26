@@ -59,7 +59,7 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
 
     private RestrictedSwitchPreference mAllNotificationsToggle;
     private PreferenceCategory mPreferenceCategory;
-    private final List<NotificationChannel> mChannels = new ArrayList<>();
+    private List<NotificationChannel> mChannels = new ArrayList<>();
 
     public AppChannelsBypassingDndPreferenceController(
             Context context,
@@ -126,17 +126,18 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
+                List<NotificationChannel> newChannelList = new ArrayList<>();
                 List<NotificationChannelGroup> mChannelGroupList = mBackend.getGroups(mAppRow.pkg,
                         mAppRow.uid).getList();
-                mChannels.clear();
                 for (NotificationChannelGroup channelGroup : mChannelGroupList) {
                     for (NotificationChannel channel : channelGroup.getChannels()) {
                         if (!isConversation(channel)) {
-                            mChannels.add(channel);
+                            newChannelList.add(channel);
                         }
                     }
                 }
-                Collections.sort(mChannels, CHANNEL_COMPARATOR);
+                Collections.sort(newChannelList, CHANNEL_COMPARATOR);
+                mChannels = newChannelList;
                 return null;
             }
 

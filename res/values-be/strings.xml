@@ -435,8 +435,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Скасаваць"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Дакраніцеся да сканера"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Ён на задняй панэлі тэлефона. Карыстайцеся ўказальным пальцам."</string>
-    <!-- no translation found for security_settings_udfps_enroll_find_sensor_message (1181700918690345832) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"Элемент знаходзіцца на экране. Знайдзіце адбітак пальца ў крузе, які свеціцца."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Відарыс, які паказвае, дзе размяшчаецца датчык адбіткаў пальцаў на прыладзе"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Імя"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"ОК"</string>
@@ -2318,6 +2317,8 @@
       <item quantity="many">Захавана <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слыхавых апаратаў</item>
       <item quantity="other">Захавана <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слыхавога апарата</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Хуткі доступ уключаны"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Выключана"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Уключана"</string>
@@ -5154,12 +5155,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Экстранныя выклікі"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Экстранныя выклікі праз Wi‑Fi-тэлефанію не падтрымліваюцца вашым аператарам.\nКаб зрабіць экстранны выклік, прылада аўтаматычна пераключыцца на мабільную сетку.\nЭкстранныя выклікі можна рабіць толькі ў зонах сотавага пакрыцця."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Каб палепшыць якасць выклікаў, выкарыстоўвайце Wi‑Fi"</string>
-    <!-- no translation found for backup_calling_settings_title (519714752900364326) -->
-    <skip />
-    <!-- no translation found for backup_calling_setting_summary (451295393447465830) -->
-    <skip />
-    <!-- no translation found for keywords_backup_calling (8592800915478816800) -->
-    <skip />
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"Ствараць рэзервовыя копіі выклікаў"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Калі сувязь праз <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> недаступная, для выклікаў у сетцы <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> выкарыстоўвайце мабільную перадачу даных SIM."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"ствараць рэзервовыя копіі выклікаў"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Уваходнае MMS-паведамленне"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Не ўдалося адправіць MMS-паведамленне"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Націсніце, каб дазволіць адпраўляць MMS-паведамленні ў <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>, калі мабільная перадача даных адключана"</string>
@@ -5241,18 +5239,16 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Падключацца да агульнадаступных сетак"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"падключэнне да сеткі, інтэрнэт, бесправадны, даныя, wifi, wi-fi, wi fi, сотавая сетка, мабільны, аператар сотавай сувязі, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Праглядзець сеткі рэжыма палёту"</string>
-    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
-    <skip />
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Прагляд сетак у рэжыме палёту"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Выключыць рэжым палёту"</string>
-    <!-- no translation found for reset_your_internet_title (4856899004343241310) -->
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"Скінуць налады інтэрнэту?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Гэта дзеянне завершыць ваш выклік"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Гэта дзеянне завершыць ваш выклік"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Налады інтэрнэту скідваюцца…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Выправіць праблему з падключэннем"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for resetting_internet_text (6696779371800051806) -->
-    <skip />
-    <!-- no translation found for fix_connectivity (2781433603228089501) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Падключана"</string>
@@ -5274,6 +5270,5 @@
     <string name="category_name_color" msgid="937514550918977151">"Колер"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Іншае"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Агульныя налады"</string>
-    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
-    <skip />
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Паказаць усе праграмы"</string>
 </resources>

@@ -427,8 +427,7 @@
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"취소"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"센서 터치"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"휴대전화 뒷면에 있습니다. 검지를 사용하세요."</string>
-    <!-- no translation found for security_settings_udfps_enroll_find_sensor_message (1181700918690345832) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="1181700918690345832">"센서는 화면에 있습니다. 빛나는 원 안에 있는 지문을 찾으세요."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"기기와 지문 센서 위치가 포함된 그림"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"이름"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"확인"</string>
@@ -2268,6 +2267,8 @@
       <item quantity="other">보청기 <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>개가 저장되어 있습니다.</item>
       <item quantity="one">보청기 <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g>개가 저장되어 있습니다.</item>
     </plurals>
+    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
+    <skip />
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"단축키 사용"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"사용 안함"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"사용"</string>
@@ -4988,12 +4989,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"긴급 전화"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Wi‑Fi 통화를 사용한 긴급 전화가 이용 중인 이동통신사에서 지원되지 않습니다.\n긴급 전화를 걸면 기기에서 모바일 네트워크로 자동 전환합니다.\n긴급 전화는 모바일 데이터가 지원되는 지역에서만 사용할 수 있습니다."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"통화에 Wi‑Fi를 사용하여 통화 품질을 개선합니다."</string>
-    <!-- no translation found for backup_calling_settings_title (519714752900364326) -->
-    <skip />
-    <!-- no translation found for backup_calling_setting_summary (451295393447465830) -->
-    <skip />
-    <!-- no translation found for keywords_backup_calling (8592800915478816800) -->
-    <skip />
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"백업 전화"</string>
+    <string name="backup_calling_setting_summary" msgid="451295393447465830">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> 이동통신사를 사용할 수 없을 때 모바일 데이터 SIM을 사용하여 <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> 전화를 걸고 받습니다."</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"백업 전화"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"MMS 메시지 수신 중"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS 메시지 전송 불가"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"탭하여 모바일 데이터가 꺼져 있을 때 <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>에서 MMS 메시지 허용"</string>
@@ -5075,18 +5073,16 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"공용 네트워크에 연결"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"네트워크 연결, 인터넷, 무선, 데이터, Wifi, Wi-Fi, Wi Fi, 셀룰러, 모바일, 이동통신사, 4G, 3G, 2G, LTE"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"비행기 모드 네트워크 보기"</string>
-    <!-- no translation found for viewing_airplane_mode_networks (4548508852659577531) -->
-    <skip />
+    <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"비행기 모드 네트워크 표시 중"</string>
     <string name="turn_off_airplane_mode" msgid="7141986366534514443">"비행기 모드 사용 중지"</string>
-    <!-- no translation found for reset_your_internet_title (4856899004343241310) -->
+    <string name="reset_your_internet_title" msgid="4856899004343241310">"인터넷을 재설정하시겠습니까?"</string>
+    <string name="reset_internet_text" product="default" msgid="8797910368942544453">"휴대전화 통화가 종료됩니다."</string>
+    <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"휴대전화 통화가 종료됩니다."</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"인터넷 재설정 중…"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"연결 문제 해결"</string>
+    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
     <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for reset_internet_text (8797910368942544453) -->
-    <skip />
-    <!-- no translation found for resetting_internet_text (6696779371800051806) -->
-    <skip />
-    <!-- no translation found for fix_connectivity (2781433603228089501) -->
+    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
     <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"연결됨"</string>
@@ -5108,6 +5104,5 @@
     <string name="category_name_color" msgid="937514550918977151">"색상"</string>
     <string name="category_name_others" msgid="2366006298768550310">"기타"</string>
     <string name="category_name_general" msgid="7737273712848115886">"일반"</string>
-    <!-- no translation found for default_see_all_apps_title (7481113230662612178) -->
-    <skip />
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"앱 모두 보기"</string>
 </resources>
