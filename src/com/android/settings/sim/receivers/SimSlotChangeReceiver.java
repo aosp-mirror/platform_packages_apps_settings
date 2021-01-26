@@ -27,6 +27,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
@@ -60,6 +61,11 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
 
     // Checks whether the slot event should be handled.
     private boolean shouldHandleSlotChange(Context context) {
+        if (!context.getResources().getBoolean(R.bool.config_handle_sim_slot_change)) {
+            Log.i(TAG, "The flag is off. Ignore slot changes.");
+            return false;
+        }
+
         final EuiccManager euiccManager = context.getSystemService(EuiccManager.class);
         if (euiccManager == null || !euiccManager.isEnabled()) {
             Log.i(TAG, "Ignore slot changes because EuiccManager is disabled.");
