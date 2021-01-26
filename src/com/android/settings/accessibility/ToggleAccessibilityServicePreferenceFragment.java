@@ -24,10 +24,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.net.Uri;
@@ -37,11 +41,13 @@ import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
@@ -58,7 +64,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ToggleAccessibilityServicePreferenceFragment extends
         ToggleFeaturePreferenceFragment {
 
-    public static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
+    private static final String TAG = "ToggleAccessibilityServicePreferenceFragment";
+    private static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
     private LockPatternUtils mLockPatternUtils;
     private AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
 
@@ -73,6 +80,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             };
 
     private Dialog mDialog;
+    private BroadcastReceiver mPackageRemovedReceiver;
 
     @Override
     public int getMetricsCategory() {
@@ -93,6 +101,17 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        final AccessibilityServiceInfo serviceInfo = getAccessibilityServiceInfo();
+        if (serviceInfo == null) {
+            getActivity().finishAndRemoveTask();
+        } else if (!AccessibilityUtil.isSystemApp(serviceInfo)) {
+            registerPackageRemoveReceiver();
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         updateSwitchBarToggleSwitch();
@@ -110,6 +129,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     // capabilities. For
     // example, before JellyBean MR2 the user was granting the explore by touch
     // one.
+    @Nullable
     AccessibilityServiceInfo getAccessibilityServiceInfo() {
         final List<AccessibilityServiceInfo> infos = AccessibilityManager.getInstance(
                 getPrefContext()).getInstalledAccessibilityServiceList();
@@ -135,7 +155,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 }
                 mDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getPrefContext(), info,
-                                this::onDialogButtonFromEnableToggleClicked);
+                                this::onDialogButtonFromEnableToggleClicked,
+                                this::onDialogButtonFromUninstallClicked);
                 break;
             }
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE: {
@@ -145,7 +166,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 }
                 mDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getPrefContext(), info,
-                                this::onDialogButtonFromShortcutToggleClicked);
+                                this::onDialogButtonFromShortcutToggleClicked,
+                                this::onDialogButtonFromUninstallClicked);
                 break;
             }
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT: {
@@ -155,7 +177,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 }
                 mDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getPrefContext(), info,
-                                this::onDialogButtonFromShortcutClicked);
+                                this::onDialogButtonFromShortcutClicked,
+                                this::onDialogButtonFromUninstallClicked);
                 break;
             }
             case DialogEnums.DISABLE_WARNING_FROM_TOGGLE: {
@@ -242,6 +265,32 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 handleConfirmServiceEnabled(/* confirmed= */ false);
             }
         }
+    }
+
+    private void registerPackageRemoveReceiver() {
+        if (mPackageRemovedReceiver != null || getContext() == null) {
+            return;
+        }
+        mPackageRemovedReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                final String packageName = intent.getData().getSchemeSpecificPart();
+                if (TextUtils.equals(mComponentName.getPackageName(), packageName)) {
+                    getActivity().finishAndRemoveTask();
+                }
+            }
+        };
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addDataScheme("package");
+        getContext().registerReceiver(mPackageRemovedReceiver, filter);
+    }
+
+    private void unregisterPackageRemoveReceiver() {
+        if (mPackageRemovedReceiver == null || getContext() == null) {
+            return;
+        }
+        getContext().unregisterReceiver(mPackageRemovedReceiver);
+        mPackageRemovedReceiver = null;
     }
 
     private boolean isServiceSupportAccessibilityButton() {
@@ -373,6 +422,35 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         } else {
             throw new IllegalArgumentException("Unexpected view id");
         }
+    }
+
+    private void onDialogButtonFromUninstallClicked() {
+        mDialog.dismiss();
+        final Intent uninstallIntent = createUninstallPackageActivityIntent();
+        if (uninstallIntent == null) {
+            return;
+        }
+        startActivity(uninstallIntent);
+    }
+
+    @Nullable
+    private Intent createUninstallPackageActivityIntent() {
+        final AccessibilityServiceInfo a11yServiceInfo = getAccessibilityServiceInfo();
+        if (a11yServiceInfo == null) {
+            Log.w(TAG, "createUnInstallIntent -- invalid a11yServiceInfo");
+            return null;
+        }
+        final ApplicationInfo appInfo =
+                a11yServiceInfo.getResolveInfo().serviceInfo.applicationInfo;
+        final Uri packageUri = Uri.parse("package:" + appInfo.packageName);
+        final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
+        return uninstallIntent;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        unregisterPackageRemoveReceiver();
     }
 
     private void onAllowButtonFromEnableToggleClicked() {
