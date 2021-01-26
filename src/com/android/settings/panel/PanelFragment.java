@@ -514,6 +514,13 @@ public class PanelFragment extends Fragment {
             getFragmentActivity().finish();
         }
 
+        @Override
+        public void onTitleChanged() {
+            ThreadUtils.postOnMainThread(() -> {
+                mTitleView.setText(mPanel.getTitle());
+            });
+        }
+
         @VisibleForTesting
         FragmentActivity getFragmentActivity() {
             return getActivity();
