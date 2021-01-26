@@ -66,12 +66,15 @@ public class SimActivationNotifier {
             value = {
                 NotificationType.NETWORK_CONFIG,
                 NotificationType.SWITCH_TO_REMOVABLE_SLOT,
+                NotificationType.ENABLE_DSDS,
             })
     public @interface NotificationType {
         // The notification to remind users to config network Settings.
         int NETWORK_CONFIG = 1;
         // The notification to notify users that the device is switched to the removable slot.
         int SWITCH_TO_REMOVABLE_SLOT = 2;
+        // The notification to notify users that the device is capable of DSDS.
+        int ENABLE_DSDS = 3;
     }
 
     private final Context mContext;
@@ -120,8 +123,8 @@ public class SimActivationNotifier {
             return;
         }
 
-        CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                activeRemovableSub, mContext);
+        CharSequence displayName =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(activeRemovableSub, mContext);
         String carrierName =
                 TextUtils.isEmpty(displayName)
                         ? mContext.getString(R.string.sim_card_label)
@@ -135,7 +138,8 @@ public class SimActivationNotifier {
                 TaskStackBuilder.create(mContext).addNextIntent(clickIntent);
         PendingIntent contentIntent =
                 stackBuilder.getPendingIntent(
-                        0 /* requestCode */, PendingIntent.FLAG_UPDATE_CURRENT);
+                        0 /* requestCode */,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         Notification.Builder builder =
                 new Notification.Builder(mContext, SIM_SETUP_CHANNEL_ID)
@@ -155,7 +159,8 @@ public class SimActivationNotifier {
                 TaskStackBuilder.create(mContext).addNextIntent(clickIntent);
         PendingIntent contentIntent =
                 stackBuilder.getPendingIntent(
-                        0 /* requestCode */, PendingIntent.FLAG_UPDATE_CURRENT);
+                        0 /* requestCode */,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         String titleText =
                 TextUtils.isEmpty(carrierName)
                         ? mContext.getString(
@@ -176,6 +181,33 @@ public class SimActivationNotifier {
                                                 null /* theme */))
                         .setAutoCancel(true);
         mNotificationManager.notify(SWITCH_TO_REMOVABLE_SLOT_NOTIFICATION_ID, builder.build());
+    }
+
+    /** Sends a push notification for enabling DSDS. */
+    public void sendEnableDsdsNotification() {
+        Intent parentIntent = new Intent(mContext, Settings.MobileNetworkListActivity.class);
+
+        Intent clickIntent = new Intent(mContext, DsdsDialogActivity.class);
+
+        TaskStackBuilder stackBuilder =
+                TaskStackBuilder.create(mContext)
+                        .addNextIntentWithParentStack(parentIntent)
+                        .addNextIntent(clickIntent);
+        PendingIntent contentIntent =
+                stackBuilder.getPendingIntent(
+                        0 /* requestCode */,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        Notification.Builder builder =
+                new Notification.Builder(mContext, SIM_SETUP_CHANNEL_ID)
+                        .setContentTitle(
+                                mContext.getString(R.string.dsds_notification_after_suw_title))
+                        .setContentText(
+                                mContext.getString(R.string.dsds_notification_after_suw_text))
+                        .setContentIntent(contentIntent)
+                        .setSmallIcon(R.drawable.ic_sim_alert)
+                        .setAutoCancel(true);
+        mNotificationManager.notify(SIM_ACTIVATION_NOTIFICATION_ID, builder.build());
     }
 
     @Nullable
