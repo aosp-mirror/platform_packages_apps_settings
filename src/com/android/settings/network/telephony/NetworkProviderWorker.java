@@ -43,8 +43,6 @@ import com.android.settingslib.mobile.MobileMappings;
 import com.android.settingslib.mobile.MobileMappings.Config;
 
 import java.util.Collections;
-import java.util.concurrent.Executor;
-
 
 /**
  * BackgroundWorker for Provider Model slice.
@@ -63,6 +61,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     private DataConnectivityListener mConnectivityListener;
     private int mDefaultDataSubid = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private final Context mContext;
+    final Handler mHandler;
     @VisibleForTesting
     final PhoneStateListener mPhoneStateListener;
     private TelephonyManager mTelephonyManager;
@@ -76,15 +75,15 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     public NetworkProviderWorker(Context context, Uri uri) {
         super(context, uri);
         // Mobile data worker
-        final Handler handler = new Handler(Looper.getMainLooper());
-        mMobileDataObserver = new DataContentObserver(handler, this);
+        mHandler = new Handler(Looper.getMainLooper());
+        mMobileDataObserver = new DataContentObserver(mHandler, this);
 
         mContext = context;
         mDefaultDataSubid = getDefaultDataSubscriptionId();
 
         mTelephonyManager = mContext.getSystemService(
                 TelephonyManager.class).createForSubscriptionId(mDefaultDataSubid);
-        mPhoneStateListener = new NetworkProviderPhoneStateListener(handler::post);
+        mPhoneStateListener = new NetworkProviderPhoneStateListener();
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
         mDataEnabledListener = new MobileDataEnabledListener(context, this);
         mConnectivityListener = new DataConnectivityListener(context, this);
@@ -102,9 +101,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         mDataEnabledListener.start(mDefaultDataSubid);
         mConnectivityListener.start();
         mSignalStrengthListener.resume();
-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_SERVICE_STATE
-                | PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED);
-
+        mTelephonyManager.registerPhoneStateListener(mHandler::post, mPhoneStateListener);
         super.onSlicePinned();
     }
 
@@ -115,7 +112,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         mDataEnabledListener.stop();
         mConnectivityListener.stop();
         mSignalStrengthListener.pause();
-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        mTelephonyManager.unregisterPhoneStateListener(mPhoneStateListener);
         super.onSliceUnpinned();
     }
 
@@ -145,13 +142,12 @@ public class NetworkProviderWorker extends WifiScanWorker implements
             return;
         }
         if (SubscriptionManager.isUsableSubscriptionId(defaultDataSubId)) {
-            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+            mTelephonyManager.unregisterPhoneStateListener(mPhoneStateListener);
             mMobileDataObserver.unregister(mContext);
 
             mSignalStrengthListener.updateSubscriptionIds(Collections.singleton(defaultDataSubId));
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(defaultDataSubId);
-            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_SERVICE_STATE
-                    | PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED);
+            mTelephonyManager.registerPhoneStateListener(mHandler::post, mPhoneStateListener);
             mMobileDataObserver.register(mContext, mDefaultDataSubid);
             mConfig = getConfig(mContext);
         } else {
@@ -221,11 +217,10 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         }
     }
 
-    class NetworkProviderPhoneStateListener extends PhoneStateListener {
-        NetworkProviderPhoneStateListener(Executor executor) {
-            super(executor);
-        }
-
+    class NetworkProviderPhoneStateListener extends PhoneStateListener implements
+            PhoneStateListener.DataConnectionStateChangedListener,
+            PhoneStateListener.DisplayInfoChangedListener,
+            PhoneStateListener.ServiceStateChangedListener {
         @Override
         public void onServiceStateChanged(ServiceState state) {
             Log.d(TAG, "onServiceStateChanged voiceState=" + state.getState()
@@ -237,6 +232,13 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         public void onDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) {
             Log.d(TAG, "onDisplayInfoChanged: telephonyDisplayInfo=" + telephonyDisplayInfo);
             mTelephonyDisplayInfo = telephonyDisplayInfo;
+            updateSlice();
+        }
+
+        @Override
+        public void onDataConnectionStateChanged(int state, int networkType) {
+            Log.d(TAG,
+                    "onDataConnectionStateChanged: networkType=" + networkType + " state=" + state);
             updateSlice();
         }
     }
