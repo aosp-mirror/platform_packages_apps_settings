@@ -16,7 +16,7 @@
 
 package com.android.settings.development;
 
-import static android.provider.Settings.Global.DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM;
+import static android.provider.Settings.Global.DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -29,32 +29,35 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 /**
- * Preference Controller for whether to allow launching size-compat apps in freeform windows.
+ * Preference Controller for whether to allow launching non-resizable apps in multi window,
+ * such as freeform and splitscreen.
  */
-public class SizeCompatFreeformPreferenceController extends DeveloperOptionsPreferenceController
+public class NonResizableMultiWindowPreferenceController
+        extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
-    private static final String ENABLE_SIZECOMPAT_FREEFORM_KEY = "enable_sizecompat_freeform";
+    private static final String ENABLE_NON_RESIZABLE_MULTI_WINDOW_KEY =
+            "enable_non_resizable_multi_window";
 
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
     @VisibleForTesting
     static final int SETTING_VALUE_ON = 1;
 
-    public SizeCompatFreeformPreferenceController(Context context) {
+    public NonResizableMultiWindowPreferenceController(Context context) {
         super(context);
     }
 
     @Override
     public String getPreferenceKey() {
-        return ENABLE_SIZECOMPAT_FREEFORM_KEY;
+        return ENABLE_NON_RESIZABLE_MULTI_WINDOW_KEY;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM,
+                DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW,
                 isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
         return true;
     }
@@ -62,7 +65,7 @@ public class SizeCompatFreeformPreferenceController extends DeveloperOptionsPref
     @Override
     public void updateState(Preference preference) {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM, SETTING_VALUE_OFF);
+                DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
@@ -70,7 +73,7 @@ public class SizeCompatFreeformPreferenceController extends DeveloperOptionsPref
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM, SETTING_VALUE_OFF);
+                DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }
