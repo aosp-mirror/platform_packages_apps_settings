@@ -26,9 +26,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Global;
 import android.text.format.Formatter;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.TextView;
@@ -41,16 +38,13 @@ import androidx.loader.content.Loader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.PowerUtil;
-import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.List;
@@ -67,21 +61,12 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     private static final String KEY_BATTERY_HEADER = "battery_header";
 
-    private static final String KEY_SCREEN_USAGE = "screen_usage";
-    private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
-
     @VisibleForTesting
     static final int BATTERY_INFO_LOADER = 1;
     @VisibleForTesting
     static final int BATTERY_TIP_LOADER = 2;
-    @VisibleForTesting
-    static final int MENU_ADVANCED_BATTERY = Menu.FIRST + 1;
     public static final int DEBUG_INFO_LOADER = 3;
 
-    @VisibleForTesting
-    PowerGaugePreference mScreenUsagePref;
-    @VisibleForTesting
-    PowerGaugePreference mLastFullChargePref;
     @VisibleForTesting
     PowerUsageFeatureProvider mPowerFeatureProvider;
     @VisibleForTesting
@@ -119,7 +104,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
                     mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
                     mBatteryInfo = batteryInfo;
-                    updateLastFullChargePreference();
                 }
 
                 @Override
@@ -215,9 +199,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         initFeatureProvider();
         mBatteryLayoutPref = (LayoutPreference) findPreference(KEY_BATTERY_HEADER);
 
-        mScreenUsagePref = (PowerGaugePreference) findPreference(KEY_SCREEN_USAGE);
-        mLastFullChargePref = (PowerGaugePreference) findPreference(
-                KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
 
         if (Utils.isBatteryPresent(getContext())) {
@@ -258,30 +239,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(Menu.NONE, MENU_ADVANCED_BATTERY, Menu.NONE, R.string.advanced_battery_title);
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
     public int getHelpResource() {
         return R.string.help_url_battery;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_ADVANCED_BATTERY:
-                new SubSettingLauncher(getContext())
-                        .setDestination(PowerUsageAdvanced.class.getName())
-                        .setSourceMetricsCategory(getMetricsCategory())
-                        .setTitleRes(R.string.advanced_battery_title)
-                        .launch();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     protected void refreshUi(@BatteryUpdateType int refreshType) {
@@ -303,9 +262,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         }
         // reload BatteryInfo and updateUI
         restartBatteryInfoLoader();
-        updateLastFullChargePreference();
-        mScreenUsagePref.setSubtitle(StringUtil.formatElapsedTime(getContext(),
-                mBatteryUtils.calculateScreenUsageTime(mStatsHelper), false));
     }
 
     @VisibleForTesting
@@ -316,24 +272,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     void setBatteryLayoutPreference(LayoutPreference layoutPreference) {
         mBatteryLayoutPref = layoutPreference;
-    }
-
-    @VisibleForTesting
-    void updateLastFullChargePreference() {
-        if (mBatteryInfo != null && mBatteryInfo.averageTimeToDischarge
-                != EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN) {
-            mLastFullChargePref.setTitle(R.string.battery_full_charge_last);
-            mLastFullChargePref.setSubtitle(
-                    StringUtil.formatElapsedTime(getContext(), mBatteryInfo.averageTimeToDischarge,
-                            false /* withSeconds */));
-        } else {
-            final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(mStatsHelper,
-                    System.currentTimeMillis());
-            mLastFullChargePref.setTitle(R.string.battery_last_full_charge);
-            mLastFullChargePref.setSubtitle(
-                    StringUtil.formatRelativeTime(getContext(), lastFullChargeTime,
-                            false /* withSeconds */));
-        }
     }
 
     @VisibleForTesting
