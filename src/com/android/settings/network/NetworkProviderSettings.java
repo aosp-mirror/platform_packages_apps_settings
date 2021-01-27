@@ -1167,7 +1167,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                     getContext(), mRecoveryThread.getThreadHandler());
         }
         if (mConnectivitySubsystemsRecoveryManager.isRecoveryAvailable()) {
-            mConnectivitySubsystemsRecoveryManager.triggerSubsystemRestart(TAG, this);
+            mConnectivitySubsystemsRecoveryManager.triggerSubsystemRestart(null /* reason */, this);
         }
     }
 
