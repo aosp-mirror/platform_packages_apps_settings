@@ -242,12 +242,14 @@ public class SubscriptionUtil {
             public CharSequence uniqueName;
         }
 
-        final SubscriptionManager subscriptionManager =
-                context.getSystemService(SubscriptionManager.class);
         // Map of SubscriptionId to DisplayName
         final Supplier<Stream<DisplayInfo>> originalInfos =
-                () -> getActiveSubscriptions(subscriptionManager)
+                () -> getAvailableSubscriptions(context)
                 .stream()
+                .filter(i -> {
+                    // Filter out null values.
+                    return (i != null && i.getDisplayName() != null);
+                })
                 .map(i -> {
                     DisplayInfo info = new DisplayInfo();
                     info.subscriptionInfo = i;

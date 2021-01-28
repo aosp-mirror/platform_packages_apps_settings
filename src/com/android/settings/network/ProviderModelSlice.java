@@ -182,8 +182,9 @@ public class ProviderModelSlice extends WifiSlice {
         }
         final int defaultSubId = subscriptionManager.getDefaultDataSubscriptionId();
         log("defaultSubId:" + defaultSubId);
-        if (!SubscriptionManager.isUsableSubscriptionId(defaultSubId)) {
-            return; // No subscription - do nothing.
+
+        if (!defaultSubscriptionIsUsable(defaultSubId)) {
+            return;
         }
 
         boolean isToggleAction = intent.hasExtra(EXTRA_TOGGLE_STATE);
@@ -257,5 +258,13 @@ public class ProviderModelSlice extends WifiSlice {
         return rowBuilder
                 .setTitle(mContext.getText(R.string.ethernet))
                 .setSubtitle(mContext.getText(R.string.cannot_switch_networks_while_connected));
+    }
+
+    /**
+     * Wrap the subscriptionManager call for test mocking.
+     */
+    @VisibleForTesting
+    protected boolean defaultSubscriptionIsUsable(int defaultSubId) {
+        return SubscriptionManager.isUsableSubscriptionId(defaultSubId);
     }
 }
