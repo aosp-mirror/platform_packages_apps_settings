@@ -17,8 +17,11 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
 
@@ -47,23 +50,23 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
 
     public SettingsMainSwitchPreference(Context context) {
         super(context);
-        init();
+        init(context, null);
     }
 
     public SettingsMainSwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context, attrs);
     }
 
     public SettingsMainSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context, attrs);
     }
 
     public SettingsMainSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(context, attrs);
     }
 
     @Override
@@ -79,8 +82,21 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
         registerListenerToSwitchBar();
     }
 
-    private void init() {
+    private void init(Context context, AttributeSet attrs) {
         setLayoutResource(R.layout.preference_widget_main_switch);
+
+        if (attrs != null) {
+            TypedArray a = context.obtainStyledAttributes(attrs,
+                    androidx.preference.R.styleable.Preference, 0/*defStyleAttr*/,
+                    0/*defStyleRes*/);
+            final CharSequence title = TypedArrayUtils.getText(a,
+                    androidx.preference.R.styleable.Preference_title,
+                    androidx.preference.R.styleable.Preference_android_title);
+            if (!TextUtils.isEmpty(title)) {
+                setTitle(title.toString());
+            }
+            a.recycle();
+        }
     }
 
     /**
@@ -153,7 +169,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
     /**
      * Enable or disable the text and switch.
      */
-    public void setEnabled(boolean enabled) {
+    public void setSwitchBarEnabled(boolean enabled) {
         if (mMainSwitchBar != null) {
             mMainSwitchBar.setEnabled(enabled);
         }
