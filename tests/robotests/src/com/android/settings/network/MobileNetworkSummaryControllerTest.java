@@ -104,6 +104,7 @@ public class MobileNetworkSummaryControllerTest {
 
     @After
     public void tearDown() {
+        SubscriptionUtil.setActiveSubscriptionsForTesting(null);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
     }
 
@@ -269,7 +270,8 @@ public class MobileNetworkSummaryControllerTest {
         when(sub1.getDisplayName()).thenReturn("sub1");
         when(sub2.getDisplayName()).thenReturn("sub2");
 
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(sub1));
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();

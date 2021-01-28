@@ -132,7 +132,8 @@ public class ProviderModelSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mMockNetworkProviderWorker = spy(new MockNetworkProviderWorker(mContext,
                 PROVIDER_MODEL_SLICE_URI));
-        mMockProviderModelSlice = new MockProviderModelSlice(mContext, mMockNetworkProviderWorker);
+        mMockProviderModelSlice = spy(new MockProviderModelSlice(
+                mContext, mMockNetworkProviderWorker));
         mListBuilder = spy(new ListBuilder(mContext, PROVIDER_MODEL_SLICE_URI,
                 ListBuilder.INFINITY).setAccentColor(-1));
         when(mProviderModelSliceHelper.createListBuilder(PROVIDER_MODEL_SLICE_URI)).thenReturn(
@@ -387,6 +388,7 @@ public class ProviderModelSliceTest {
 
     @Test
     public void onNotifyChange_intentToggleActionOn_shouldSetCarrierNetworkEnabledTrue() {
+        when(mMockProviderModelSlice.defaultSubscriptionIsUsable(anyInt())).thenReturn(true);
         Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
         intent.putExtra(EXTRA_TOGGLE_STATE, true);
 
@@ -397,6 +399,7 @@ public class ProviderModelSliceTest {
 
     @Test
     public void onNotifyChange_intentToggleActionOff_shouldSetCarrierNetworkEnabledFalse() {
+        when(mMockProviderModelSlice.defaultSubscriptionIsUsable(anyInt())).thenReturn(true);
         Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
         intent.putExtra(EXTRA_TOGGLE_STATE, false);
 
@@ -407,6 +410,7 @@ public class ProviderModelSliceTest {
 
     @Test
     public void onNotifyChange_intentPrimaryAction_shouldConnectCarrierNetwork() {
+        when(mMockProviderModelSlice.defaultSubscriptionIsUsable(anyInt())).thenReturn(true);
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
         Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
 
