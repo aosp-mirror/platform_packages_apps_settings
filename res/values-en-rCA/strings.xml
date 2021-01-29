@@ -2436,6 +2436,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi‑Fi on time"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Battery usage"</string>
     <string name="history_details_title" msgid="8628584613889559355">"History details"</string>
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"View battery usage"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Battery usage"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Use details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Adjust power use"</string>
@@ -4097,6 +4098,7 @@
     <string name="usb_use" msgid="6783183432648438528">"Use USB for"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Default USB configuration"</string>
     <string name="usb_default_info" msgid="167172599497085266">"When another device is connected and your phone is unlocked, these settings will be applied. Only connect to trusted devices."</string>
+    <string name="usb_power_title" msgid="5602112548385798646">"Power options"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB Preferences"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB controlled by"</string>
@@ -4936,8 +4938,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Unavailable during airplane mode"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Force desktop mode"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Force experimental desktop mode on secondary displays"</string>
-    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"Enable free-form sizecompat"</string>
-    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"Allows sizecompat apps to be in free form"</string>
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Enable non-resizable in Multi-window"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Allows non-resizable apps to be in Multi-window"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Override force-dark"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Overrides the force-dark feature to be always on"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Enable blurs"</string>
@@ -5059,8 +5061,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"aeroplane, aeroplane-safe"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Calls and SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi calling"</string>
-    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"Make and receive calls over non‑operator networks, like Wi‑Fi"</string>
-    <string name="calls_sms_footnote" msgid="7002461875954024216">"Wi‑Fi calling allows you to make and receive calls over non‑operator networks, such as some Wi‑Fi networks."</string>
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Make and receive calls over Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"With Wi‑Fi calling, calls are made and received over non-operator Wi‑Fi networks."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Calls"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"preferred"</string>
@@ -5081,6 +5083,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Fix connectivity"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Aeroplane mode networks available"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"To switch networks, disconnect Ethernet"</string>
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Cannot switch networks while connected"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connected"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internet won\'t auto‑connect"</string>
@@ -5102,4 +5105,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"Others"</string>
     <string name="category_name_general" msgid="7737273712848115886">"General"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"See all apps"</string>
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Smart forwarding"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Smart forwarding enabled"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Smart forwarding disabled"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Call settings"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Updating settings…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Call settings error"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Network or SIM card error."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM is not activated."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Enter phone numbers"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Enter phone number"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Phone number is missing."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
 </resources>
