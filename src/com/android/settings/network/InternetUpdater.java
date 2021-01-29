@@ -149,16 +149,15 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
 
     public InternetUpdater(Context context, Lifecycle lifecycle,
             OnInternetTypeChangedListener listener) {
-        if (lifecycle == null) {
-            throw new IllegalArgumentException("Lifecycle must be set");
-        }
         mContext = context;
         mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, this);
         mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
         mWifiManager = mContext.getSystemService(WifiManager.class);
         mWifiStateFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         mOnInternetTypeChangedListener = listener;
-        lifecycle.addObserver(this);
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     /** @OnLifecycleEvent(ON_RESUME) */
