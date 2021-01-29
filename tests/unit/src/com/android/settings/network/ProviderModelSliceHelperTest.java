@@ -61,10 +61,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class ProviderModelSliceHelperTest {
+    private static final int DEFAULT_SUBID = 1;
+
     private Context mContext;
     private MockProviderModelSliceHelper mProviderModelSliceHelper;
     private PersistableBundle mBundle;
@@ -168,10 +171,15 @@ public class ProviderModelSliceHelperTest {
         String expectDisplayName = "Name1";
         String expectedSubtitle = "5G";
         String networkType = "5G";
-        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+
+        final int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+        when(mDefaultDataSubscriptionInfo.getSubscriptionId()).thenReturn(defaultDataSubId);
+        when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
         when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
                 mDefaultDataSubscriptionInfo);
-        when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mDefaultDataSubscriptionInfo));
+
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
         mBundle.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
@@ -194,10 +202,13 @@ public class ProviderModelSliceHelperTest {
         String expectedSubtitle = ResourcesUtils.getResourcesString(mContext,
                 "preference_summary_default_combination", connectedText, networkType);
 
-        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+        final int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+        when(mDefaultDataSubscriptionInfo.getSubscriptionId()).thenReturn(defaultDataSubId);
+        when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
         when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
                 mDefaultDataSubscriptionInfo);
-        when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mDefaultDataSubscriptionInfo));
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
         mBundle.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);

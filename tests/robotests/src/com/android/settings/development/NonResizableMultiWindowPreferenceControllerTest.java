@@ -16,10 +16,10 @@
 
 package com.android.settings.development;
 
-import static android.provider.Settings.Global.DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM;
+import static android.provider.Settings.Global.DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW;
 
-import static com.android.settings.development.SizeCompatFreeformPreferenceController.SETTING_VALUE_OFF;
-import static com.android.settings.development.SizeCompatFreeformPreferenceController.SETTING_VALUE_ON;
+import static com.android.settings.development.NonResizableMultiWindowPreferenceController.SETTING_VALUE_OFF;
+import static com.android.settings.development.NonResizableMultiWindowPreferenceController.SETTING_VALUE_ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -41,7 +41,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class SizeCompatFreeformPreferenceControllerTest {
+public class NonResizableMultiWindowPreferenceControllerTest {
 
     @Mock
     private SwitchPreference mPreference;
@@ -49,39 +49,39 @@ public class SizeCompatFreeformPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private Context mContext;
-    private SizeCompatFreeformPreferenceController mController;
+    private NonResizableMultiWindowPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new SizeCompatFreeformPreferenceController(mContext);
+        mController = new NonResizableMultiWindowPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
     }
 
     @Test
-    public void onPreferenceChange_switchEnabled_shouldEnableSizeCompatFreeform() {
+    public void onPreferenceChange_switchEnabled_shouldEnableNonResizableMultiWindow() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM, -1 /* default */);
+                DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW, -1 /* default */);
         assertThat(mode).isEqualTo(SETTING_VALUE_ON);
     }
 
     @Test
-    public void onPreferenceChange_switchDisabled_shouldDisableSizeCompatFreeform() {
+    public void onPreferenceChange_switchDisabled_shouldDisableNonResizableMultiWindow() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM, -1 /* default */);
+                DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW, -1 /* default */);
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
     }
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM, SETTING_VALUE_ON);
+                DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW, SETTING_VALUE_ON);
 
         mController.updateState(mPreference);
 
@@ -91,7 +91,7 @@ public class SizeCompatFreeformPreferenceControllerTest {
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM, SETTING_VALUE_OFF);
+                DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW, SETTING_VALUE_OFF);
 
         mController.updateState(mPreference);
 
@@ -103,7 +103,7 @@ public class SizeCompatFreeformPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchDisabled();
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                DEVELOPMENT_ENABLE_SIZECOMPAT_FREEFORM, -1 /* default */);
+                DEVELOPMENT_ENABLE_NON_RESIZABLE_MULTI_WINDOW, -1 /* default */);
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
         verify(mPreference).setEnabled(false);
     }

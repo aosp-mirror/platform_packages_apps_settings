@@ -23,6 +23,7 @@
     android:transitionGroup="true">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:theme="@style/Theme.CollapsingToolbar.Settings">
@@ -38,6 +39,7 @@
             app:statusBarScrim="?android:attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleMarginStart="18dp"
+            app:expandedTitleMarginEnd="18dp"
             app:toolbarId="@id/action_bar">
 
             <Toolbar

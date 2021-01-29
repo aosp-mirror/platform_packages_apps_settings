@@ -32,13 +32,11 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 import android.util.ArraySet;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
@@ -194,7 +192,7 @@ public class NetworkProviderWifiCallingGroup extends
                 mPreferenceGroup.addPreference(pref);
             }
 
-            CharSequence title = info.getDisplayName();
+            CharSequence title = SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext);
             if (getPhoneAccountHandleForSubscriptionId(subId) != null) {
                 final Intent intent = MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
                         getPhoneAccountHandleForSubscriptionId(subId));

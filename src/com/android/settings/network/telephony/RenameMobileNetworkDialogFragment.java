@@ -47,6 +47,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.DeviceInfoUtils;
 
 import com.google.common.collect.ImmutableMap;
@@ -163,7 +164,8 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
             Log.w(TAG, "got null SubscriptionInfo for mSubId:" + mSubId);
             return;
         }
-        final CharSequence displayName = info.getDisplayName();
+        final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                info, getContext());
         mNameView.setText(displayName);
         if (!TextUtils.isEmpty(displayName)) {
             mNameView.setSelection(displayName.length());

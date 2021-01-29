@@ -24,6 +24,7 @@ import static com.android.settings.slices.CustomSliceRegistry.PROVIDER_MODEL_SLI
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
@@ -35,6 +36,7 @@ import androidx.slice.builders.ListBuilder;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkProviderWorker;
 import com.android.settings.slices.CustomSliceable;
@@ -105,12 +107,18 @@ public class ProviderModelSlice extends WifiSlice {
         final boolean hasCarrier = mHelper.hasCarrier();
         log("hasCarrier: " + hasCarrier);
 
-        // First section:  Add a Wi-Fi item which state is connected.
-        final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
-        if (connectedWifiItem != null) {
-            log("get Wi-Fi item witch is connected");
-            listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
+        // First section:  Add a Ethernet or Wi-Fi item which state is connected.
+        if (isEthernetConnected()) {
+            log("get Ethernet item which is connected");
+            listBuilder.addRow(createEthernetRow());
             maxListSize--;
+        } else {
+            final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
+            if (connectedWifiItem != null) {
+                log("get Wi-Fi item which is connected");
+                listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
+                maxListSize--;
+            }
         }
 
         // Second section:  Add a carrier item.
@@ -227,5 +235,26 @@ public class ProviderModelSlice extends WifiSlice {
     @VisibleForTesting
     NetworkProviderWorker getWorker() {
         return SliceBackgroundWorker.getInstance(getUri());
+    }
+
+    private boolean isEthernetConnected() {
+        final NetworkProviderWorker worker = getWorker();
+        if (worker == null) {
+            return false;
+        }
+        return worker.isEthernetConnected();
+    }
+
+    @VisibleForTesting
+    ListBuilder.RowBuilder createEthernetRow() {
+        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder();
+        final Drawable drawable = mContext.getDrawable(R.drawable.ic_settings_ethernet);
+        if (drawable != null) {
+            drawable.setTintList(Utils.getColorAttr(mContext, android.R.attr.colorAccent));
+            rowBuilder.setTitleItem(Utils.createIconWithDrawable(drawable), ListBuilder.ICON_IMAGE);
+        }
+        return rowBuilder
+                .setTitle(mContext.getText(R.string.ethernet))
+                .setSubtitle(mContext.getText(R.string.cannot_switch_networks_while_connected));
     }
 }

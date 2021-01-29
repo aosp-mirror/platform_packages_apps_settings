@@ -91,20 +91,22 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
             final StringBuilder summary = new StringBuilder();
             for (SubscriptionInfo subInfo : subs) {
                 int subsSize = subs.size();
+                final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                        subInfo, mContext);
 
                 // Set displayName as summary if there is only one valid SIM.
                 if (subsSize == 1
                         && SubscriptionManager.isValidSubscriptionId(subInfo.getSubscriptionId())) {
-                    return subInfo.getDisplayName();
+                    return displayName;
                 }
 
                 CharSequence status = getPreferredStatus(subInfo);
                 if (status.toString().isEmpty()) {
                     // If there are 2 or more SIMs and one of these has no preferred status,
                     // set only its displayName as summary.
-                    summary.append(subInfo.getDisplayName());
+                    summary.append(displayName);
                 } else {
-                    summary.append(subInfo.getDisplayName())
+                    summary.append(displayName)
                             .append(" (")
                             .append(status)
                             .append(")");

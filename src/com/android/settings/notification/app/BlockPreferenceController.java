@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.app;
 
+import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
@@ -107,7 +108,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
                         ? IMPORTANCE_NONE
                         : isDefaultChannel()
                                 ? IMPORTANCE_UNSPECIFIED
-                                : mChannel.getOriginalImportance();
+                                : Math.max(mChannel.getOriginalImportance(), IMPORTANCE_LOW);
                 mChannel.setImportance(importance);
                 saveChannel();
             }
