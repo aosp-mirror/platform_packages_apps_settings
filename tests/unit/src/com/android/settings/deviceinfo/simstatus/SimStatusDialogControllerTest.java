@@ -136,7 +136,7 @@ public class SimStatusDialogControllerTest {
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
-                SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
+                anyInt());
         doReturn(2).when(mTelephonyManager).getCardIdForDefaultEuicc();
         doReturn(TelephonyManager.NETWORK_TYPE_LTE).when(mTelephonyManager).getDataNetworkType();
 

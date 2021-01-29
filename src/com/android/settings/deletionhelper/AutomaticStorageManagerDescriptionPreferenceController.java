@@ -19,13 +19,13 @@ import android.provider.Settings;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.FooterPreference;
 
 /**
  * Handles the wall of text which appears below the options in the Storage Management settings drill
@@ -51,7 +51,7 @@ public class AutomaticStorageManagerDescriptionPreferenceController
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        Preference preference = screen.findPreference(getPreferenceKey());
+        final FooterPreference preference = screen.findPreference(getPreferenceKey());
         final Context context = preference.getContext();
         ContentResolver cr = context.getContentResolver();
         long freedBytes =
