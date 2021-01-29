@@ -789,12 +789,13 @@
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
 
-    <style name="ContextualSuggestionText" parent="@android:style/TextAppearance.DeviceDefault">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">36sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
+    <style name="ContextualSuggestionText"
+           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMaxTextSize">@dimen/tool_bar_max_text_size</item>
+        <item name="android:autoSizeMinTextSize">@dimen/tool_bar_min_text_size</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:gravity">bottom</item>
     </style>
 
     <style name="RequestManageCredentialsButtonPanel">
@@ -887,11 +888,11 @@
     </style>
 
     <style name="ToolbarText"
-           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title" >
-        <item name="android:textSize">36sp</item>
+           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/tool_bar_max_text_size</item>
     </style>
 
     <style name="ToolbarText.MoreThanTwoLines">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/tool_bar_min_text_size</item>
     </style>
 </resources>
