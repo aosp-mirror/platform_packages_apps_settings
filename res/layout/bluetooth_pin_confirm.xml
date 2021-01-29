@@ -65,6 +65,18 @@
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/pairing_group_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
+            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginBottom="@dimen/bluetooth_dialog_padding"
+            android:gravity="center_vertical"
+            android:text="@string/bluetooth_paring_group_msg"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
+            android:visibility="gone" />
+
         <CheckBox
             android:id="@+id/phonebook_sharing_message_confirm_pin"
             android:layout_width="wrap_content"
