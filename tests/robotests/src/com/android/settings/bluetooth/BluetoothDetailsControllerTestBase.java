@@ -41,7 +41,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class BluetoothDetailsControllerTestBase {
+public abstract class BluetoothDetailsControllerTestBase {
 
     protected Context mContext;
     private LifecycleOwner mLifecycleOwner;

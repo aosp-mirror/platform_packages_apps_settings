@@ -55,6 +55,13 @@ public class NrDisabledInDsdsFooterPreferenceController extends BasePreferenceCo
         super.updateState(preference);
 
         if (preference != null) {
+            // This is necessary to ensure that setting the title to the spannable string returned
+            // by getFooterText will be accepted.  Internally, setTitle does an equality check on
+            // the spannable string being set to the text already set on the preference.  That
+            // equality check apparently only takes into account the raw text and not and spannables
+            // that are part of the text.  So we clear the title before applying the spannable
+            // footer to ensure it is accepted.
+            preference.setTitle("");
             preference.setTitle(getFooterText());
         }
     }

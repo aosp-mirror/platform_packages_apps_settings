@@ -280,7 +280,7 @@ public final class ApplicationFeatureProviderImplTest {
 
         final List<String> expectedPackages = Arrays.asList(testDialer, testSms,
                 testLocationHistory);
-        assertThat(keepEnabledPackages).containsAllIn(expectedPackages);
+        assertThat(keepEnabledPackages).containsAtLeastElementsIn(expectedPackages);
     }
 
     @Test

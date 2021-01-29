@@ -48,7 +48,7 @@ public class SecurityFeatureProviderImplTest {
         final TrustAgentManager m1 = mImpl.getTrustAgentManager();
         final TrustAgentManager m2 = mImpl.getTrustAgentManager();
 
-        assertThat(m1).isSameAs(m2);
+        assertThat(m1).isSameInstanceAs(m2);
     }
 
     @Test
@@ -56,6 +56,6 @@ public class SecurityFeatureProviderImplTest {
         final LockPatternUtils l1 = mImpl.getLockPatternUtils(mContext);
         final LockPatternUtils l2 = mImpl.getLockPatternUtils(mContext);
 
-        assertThat(l1).isSameAs(l2);
+        assertThat(l1).isSameInstanceAs(l2);
     }
 }

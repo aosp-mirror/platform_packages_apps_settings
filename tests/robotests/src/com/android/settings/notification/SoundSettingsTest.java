@@ -70,7 +70,7 @@ public class SoundSettingsTest {
         keys.add("ring_volume");
         keys.add("notification_volume");
 
-        assertThat(keys).containsAllIn(niks);
+        assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
     @Test

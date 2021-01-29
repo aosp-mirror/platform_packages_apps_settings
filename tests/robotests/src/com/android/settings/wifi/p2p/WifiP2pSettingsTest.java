@@ -103,7 +103,7 @@ public class WifiP2pSettingsTest {
             preferenceKeys.add(controller.getPreferenceKey());
         }
 
-        assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
+        assertThat(preferenceScreenKeys).containsAtLeastElementsIn(preferenceKeys);
     }
 
     @Test

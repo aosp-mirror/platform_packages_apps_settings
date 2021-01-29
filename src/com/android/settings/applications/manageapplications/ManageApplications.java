@@ -476,7 +476,7 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_RECENT);
             mFilterAdapter.enableFilter(FILTER_APPS_FREQUENT);
             mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
-            mFilterAdapter.disableFilter(FILTER_APPS_ALL);
+            mFilterAdapter.enableFilter(FILTER_APPS_ALL);
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
@@ -1089,12 +1089,16 @@ public class ManageApplications extends InstrumentedFragment
             mAppFilter = appFilter;
 
             // Notification filters require resorting the list
-            if (FILTER_APPS_FREQUENT == appFilter.getFilterType()) {
-                rebuild(R.id.sort_order_frequent_notification);
-            } else if (FILTER_APPS_RECENT == appFilter.getFilterType()) {
-                rebuild(R.id.sort_order_recent_notification);
-            } else if (FILTER_APPS_BLOCKED == appFilter.getFilterType()) {
-                rebuild(R.id.sort_order_alpha);
+            if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
+                if (FILTER_APPS_FREQUENT == appFilter.getFilterType()) {
+                    rebuild(R.id.sort_order_frequent_notification);
+                } else if (FILTER_APPS_RECENT == appFilter.getFilterType()) {
+                    rebuild(R.id.sort_order_recent_notification);
+                } else if (FILTER_APPS_BLOCKED == appFilter.getFilterType()) {
+                    rebuild(R.id.sort_order_alpha);
+                } else {
+                    rebuild(R.id.sort_order_alpha);
+                }
             } else {
                 rebuild();
             }

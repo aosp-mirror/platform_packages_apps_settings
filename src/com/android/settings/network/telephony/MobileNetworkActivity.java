@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -254,8 +256,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         final int subId = subInfo.getSubscriptionId();
+        final Intent intent = getIntent();
         final Bundle bundle = new Bundle();
         bundle.putInt(Settings.EXTRA_SUB_ID, subId);
+        if (intent != null && Settings.ACTION_MMS_MESSAGE_SETTING.equals(intent.getAction())) {
+            // highlight "mms_message" preference.
+            bundle.putString(EXTRA_FRAGMENT_ARG_KEY, "mms_message");
+        }
 
         final String fragmentTag = buildFragmentTag(subId);
         if (fragmentManager.findFragmentByTag(fragmentTag) != null) {

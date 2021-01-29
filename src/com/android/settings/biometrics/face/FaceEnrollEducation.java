@@ -55,6 +55,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private Intent mResultIntent;
     private TextView mDescriptionText;
     private boolean mNextClicked;
+    private boolean mAccessibilityEnabled;
 
     private CompoundButton.OnCheckedChangeListener mSwitchDiversityListener =
             new CompoundButton.OnCheckedChangeListener() {
@@ -123,13 +124,12 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                 .setTheme(R.style.SudGlifButton_Primary)
                 .build();
 
-        boolean accessibilityEnabled = false;
         final AccessibilityManager accessibilityManager = getApplicationContext().getSystemService(
                 AccessibilityManager.class);
         if (accessibilityManager != null) {
             // Add additional check for touch exploration. This prevents other accessibility
             // features such as Live Transcribe from defaulting to the accessibility setup.
-            accessibilityEnabled = accessibilityManager.isEnabled()
+            mAccessibilityEnabled = accessibilityManager.isEnabled()
                     && accessibilityManager.isTouchExplorationEnabled();
         }
         mFooterBarMixin.setPrimaryButton(footerButton);
@@ -147,7 +147,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             mSwitchDiversity.getSwitch().toggle();
         });
 
-        if (accessibilityEnabled) {
+        if (mAccessibilityEnabled) {
             accessibilityButton.callOnClick();
         }
     }
@@ -194,9 +194,20 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         if (mResultIntent != null) {
             intent.putExtras(mResultIntent);
         }
-        mNextClicked = true;
+
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
-        startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
+
+        if (!mSwitchDiversity.isChecked() && mAccessibilityEnabled) {
+            FaceEnrollAccessibilityDialog dialog = FaceEnrollAccessibilityDialog.newInstance();
+            dialog.setPositiveButtonListener((dialog1, which) -> {
+                startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
+                mNextClicked = true;
+            });
+            dialog.show(getSupportFragmentManager(), FaceEnrollAccessibilityDialog.class.getName());
+        } else {
+            startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
+            mNextClicked = true;
+        }
     }
 
     protected void onSkipButtonClick(View view) {

@@ -21,7 +21,6 @@ package com.android.settings.core;
  */
 public class FeatureFlags {
     public static final String AUDIO_SWITCHER_SETTINGS = "settings_audio_switcher";
-    public static final String DYNAMIC_SYSTEM = "settings_dynamic_system";
     public static final String HEARING_AID_SETTINGS = "settings_bluetooth_hearing_aid";
     public static final String SETTINGS_FUSE_FLAG = "settings_fuse";
     public static final String WIFI_DETAILS_DATAUSAGE_HEADER =

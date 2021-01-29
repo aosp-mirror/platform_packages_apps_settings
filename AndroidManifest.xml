@@ -38,7 +38,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
@@ -208,6 +207,7 @@
                   android:label="@string/network_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MOBILE_NETWORK_LIST" />
+                <action android:name="android.settings.MANAGE_ALL_SUBSCRIPTIONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1922,6 +1922,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -2571,6 +2572,19 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.app.AppBubbleNotificationSettings" />
+        </activity>
+
+        <activity
+            android:name="Settings$PremiumSmsAccessActivity"
+            android:label="@string/premium_sms_access"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.PREMIUM_SMS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess" />
         </activity>
 
         <activity
@@ -3255,6 +3269,11 @@
 
         <receiver
             android:name=".slices.SliceRelayReceiver"
+            android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
+            android:exported="true" />
+
+        <receiver
+            android:name=".slices.VolumeSliceRelayReceiver"
             android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
             android:exported="true" />
 
