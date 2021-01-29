@@ -62,7 +62,7 @@ public class EmergencyGestureEntrypointPreferenceController extends BasePreferen
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final boolean canHandleClicks = !mUseCustomIntent || mIntent != null;
+        final boolean canHandleClicks = canHandleClicks();
         if (preference != null) {
             preference.setEnabled(canHandleClicks);
         }
@@ -84,6 +84,9 @@ public class EmergencyGestureEntrypointPreferenceController extends BasePreferen
                 .getBoolean(R.bool.config_show_emergency_gesture_settings);
 
         if (!isConfigEnabled) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (!canHandleClicks()) {
             return UNSUPPORTED_ON_DEVICE;
         }
         return AVAILABLE;
@@ -115,6 +118,13 @@ public class EmergencyGestureEntrypointPreferenceController extends BasePreferen
      */
     public boolean shouldSuppressFromSearch() {
         return mUseCustomIntent;
+    }
+
+    /**
+     * Whether or not this setting can react to user click
+     */
+    private boolean canHandleClicks() {
+        return !mUseCustomIntent || mIntent != null;
     }
 
     private boolean canResolveIntent(Intent intent) {
