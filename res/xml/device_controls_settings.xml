@@ -22,7 +22,8 @@
 
     <com.android.settings.widget.VideoPreference
         android:key="device_controls_video"
-        app:animation="@raw/gesture_device_controls"/>
+        app:animation="@raw/gesture_device_controls"
+        app:controller="com.android.settings.widget.VideoPreferenceController"/>
 
     <SwitchPreference
         android:key="gesture_device_controls_switch"

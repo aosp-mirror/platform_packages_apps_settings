@@ -22,6 +22,7 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME
 import static android.provider.Settings.Global.PRIVATE_DNS_MODE;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
@@ -145,13 +146,13 @@ public class PrivateDnsModeDialogPreferenceTest {
             mPreference.mEditText.setText(invalid);
 
             mPreference.onCheckedChanged(null, R.id.private_dns_mode_off);
-            assertThat(mSaveButton.isEnabled()).named("off: " + invalid).isTrue();
+            assertWithMessage("off: " + invalid).that(mSaveButton.isEnabled()).isTrue();
 
             mPreference.onCheckedChanged(null, R.id.private_dns_mode_opportunistic);
-            assertThat(mSaveButton.isEnabled()).named("opportunistic: " + invalid).isTrue();
+            assertWithMessage("opportunistic: " + invalid).that(mSaveButton.isEnabled()).isTrue();
 
             mPreference.onCheckedChanged(null, R.id.private_dns_mode_provider);
-            assertThat(mSaveButton.isEnabled()).named("provider: " + invalid).isFalse();
+            assertWithMessage("provider: " + invalid).that(mSaveButton.isEnabled()).isFalse();
         }
     }
 

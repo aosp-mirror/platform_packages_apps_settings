@@ -105,7 +105,7 @@ public class EntityHeaderControllerTest {
         mController = EntityHeaderController.newInstance(mActivity, mFragment, inputView);
         View view = mController.done(mActivity);
 
-        assertThat(view).isSameAs(inputView);
+        assertThat(view).isSameInstanceAs(inputView);
     }
 
     @Test

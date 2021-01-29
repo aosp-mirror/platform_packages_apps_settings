@@ -40,6 +40,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -185,12 +186,12 @@ public class NetworkSelectSettings extends DashboardFragment {
 
             mRequestIdManualNetworkSelect = getNewRequestId();
             mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
-            final String operatorNumeric = mSelectedPreference.getOperatorNumeric();
+            final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Message msg = mHandler.obtainMessage(
                         EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
                 msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
-                        operatorNumeric, true /* persistSelection */);
+                        operator, true /* persistSelection */);
                 msg.sendToTarget();
             });
         }

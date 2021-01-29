@@ -30,6 +30,7 @@ import android.content.Context;
 import android.net.NetworkCapabilities;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.provider.Settings;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -77,6 +78,9 @@ public class ContextualWifiSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mWifiManager.setWifiEnabled(true);
 
+        // Set WifiSlice expandable
+        Settings.Global.putInt(mContext.getContentResolver(),
+                ContextualWifiSlice.CONTEXTUAL_WIFI_EXPANDABLE, 1);
         mWifiSlice = new ContextualWifiSlice(mContext);
     }
 
@@ -120,6 +124,18 @@ public class ContextualWifiSliceTest {
         connectToWifi(makeValidatedNetworkCapabilities());
 
         mWifiManager.disconnect();
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        assertWifiHeader(wifiSlice);
+        assertThat(ContextualWifiSlice.getApRowCount()).isEqualTo(COLLAPSED_ROW_COUNT);
+    }
+
+    @Test
+    public void getWifiSlice_notExpandable_shouldCollapseSlice() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                ContextualWifiSlice.CONTEXTUAL_WIFI_EXPANDABLE, 0);
+        mWifiSlice.sApRowCollapsed = false;
+
         final Slice wifiSlice = mWifiSlice.getSlice();
 
         assertWifiHeader(wifiSlice);

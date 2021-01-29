@@ -207,17 +207,14 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         channelPref.setOnPreferenceChangeListener(
                 (preference, o) -> {
                     boolean value = (Boolean) o;
-                    int importance = value ? IMPORTANCE_LOW : IMPORTANCE_NONE;
+                    int importance = value ? channel.getOriginalImportance() : IMPORTANCE_NONE;
                     channel.setImportance(importance);
-                    channel.lockFields(
-                            NotificationChannel.USER_LOCKED_IMPORTANCE);
+                    channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
                     MasterSwitchPreference channelPref1 = (MasterSwitchPreference) preference;
                     channelPref1.setIcon(null);
                     if (channel.getImportance() > IMPORTANCE_LOW) {
                         channelPref1.setIcon(getAlertingIcon());
                     }
-                    toggleBehaviorIconState(channelPref1.getIcon(),
-                            importance != IMPORTANCE_NONE);
                     mBackend.updateChannel(mAppRow.pkg, mAppRow.uid, channel);
 
                     return true;
@@ -232,24 +229,6 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         Drawable icon = mContext.getDrawable(R.drawable.ic_notifications_alert);
         icon.setTintList(Utils.getColorAccent(mContext));
         return icon;
-    }
-
-    private void toggleBehaviorIconState(Drawable icon, boolean enabled) {
-        if (icon == null) return;
-
-        LayerDrawable layerDrawable = (LayerDrawable) icon;
-        GradientDrawable background =
-                (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.back);
-
-        if (background == null) return;
-
-        if (enabled) {
-            background.clearColorFilter();
-        } else {
-            background.setColorFilter(new BlendModeColorFilter(
-                    mContext.getColor(R.color.material_grey_300),
-                    BlendMode.SRC_IN));
-        }
     }
 
     protected void onGroupBlockStateChanged(NotificationChannelGroup group) {
