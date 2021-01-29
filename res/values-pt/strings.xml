@@ -2436,6 +2436,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Tempo de ativação da rede Wi-Fi"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Uso da bateria"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Detalhes do histórico"</string>
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Ver uso da bateria"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Uso da bateria"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalhes de uso"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar uso de energia"</string>
@@ -4097,6 +4098,7 @@
     <string name="usb_use" msgid="6783183432648438528">"Usar USB para"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Configuração USB padrão"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Quando outro dispositivo estiver conectado e seu smartphone estiver desbloqueado, essas configurações serão aplicadas. Conecte-se apenas a dispositivos confiáveis."</string>
+    <string name="usb_power_title" msgid="5602112548385798646">"Opções do botão liga/desliga"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferências de USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB controlado por"</string>
@@ -4936,8 +4938,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Indisponível no modo avião"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Forçar modo de área de trabalho"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Forçar o modo de área de trabalho experimental em telas secundárias"</string>
-    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"Ativar sizecompat em forma livre"</string>
-    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"Permite que apps sizecompat fiquem em forma livre"</string>
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Ativar recursos não redimensionáveis em várias janelas"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permitir que apps não redimensionáveis sejam usados em várias janelas"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Modificar o recurso forçar modo escuro"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Modificar o recurso de forçar modo escuro para que fique sempre ativado"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Permitir desfoques"</string>
@@ -5059,8 +5061,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"avião, segura para aviões"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Chamadas e SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Chamada no Wi-Fi"</string>
-    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"Faça e receba chamadas por redes sem operadora, como Wi-Fi"</string>
-    <string name="calls_sms_footnote" msgid="7002461875954024216">"A chamada no Wi-Fi permite que você faça e receba chamadas por redes sem operadora, como algumas redes Wi-Fi."</string>
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Fazer e receber chamadas pelo Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"As chamadas no Wi‑Fi são feitas e recebidas usando redes Wi-Fi que não são da operadora."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Chamadas"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"preferido"</string>
@@ -5079,10 +5081,9 @@
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Isso encerrará a chamada telefônica"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Redefinindo sua Internet…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Corrigir conectividade"</string>
-    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
-    <skip />
-    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
-    <skip />
+    <string name="airplane_mode_network_available" msgid="1059499681300395240">"Redes do modo avião disponíveis"</string>
+    <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Para mudar de rede, desconecte o cabo Ethernet"</string>
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Não é possível mudar de rede enquanto estiver conectado"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conectado"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"A Internet não será automaticamente conectada"</string>
@@ -5104,4 +5105,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"Outros"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Geral"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ver todos os apps"</string>
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Encaminhamento inteligente"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Encaminhamento inteligente ativado"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Encaminhamento inteligente desativado"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Configurações de chamada"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Atualizando configurações…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Erro de configurações de chamada"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Erro de rede ou do chip."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"O chip não está ativado."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Inserir números de telefone"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Inserir número de telefone"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"O número de telefone não foi informado."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
 </resources>
