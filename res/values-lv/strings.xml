@@ -2292,8 +2292,7 @@
       <item quantity="one">Saglabāts <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dzirdes aparāts</item>
       <item quantity="other">Saglabāti <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dzirdes aparāti</item>
     </plurals>
-    <!-- no translation found for accessibility_audio_adjustment_title (1332113739136802997) -->
-    <skip />
+    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Audio korekcija"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Saīsne ieslēgta"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Izslēgta"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Ieslēgts"</string>
@@ -2468,6 +2467,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi uz laiku"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Akumulatora lietojums"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Vēstures dati"</string>
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Skatīt akumulatora lietojumu"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Akumulatora lietojums"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Izmantot detaļas"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Noregulēt strāvas patēriņu"</string>
@@ -4160,6 +4160,7 @@
     <string name="usb_use" msgid="6783183432648438528">"USB savienojuma lietošana"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Noklusējuma USB konfigurācija"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Šie iestatījumi tiks piemēroti, kad būs pievienota cita ierīce un jūsu tālrunis būs atbloķēts. Izveidojiet savienojumu tikai ar uzticamām ierīcēm."</string>
+    <string name="usb_power_title" msgid="5602112548385798646">"Barošanas iespējas"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB preferences"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB, ko pārvalda:"</string>
@@ -5018,8 +5019,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Nav pieejami lidojuma režīmā"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Veikt piespiedu darbvirsmas režīma atvēršanu"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Veikt piespiedu eksperimentālā darbvirsmas režīma atvēršanu sekundārajos displejos"</string>
-    <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"Iespējot brīvu formu fiksētiem izmēriem"</string>
-    <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"Ļauj fiksētu izmēru lietotnēm būt brīvā formā"</string>
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Vairāku logu režīmā iespējot nemainīga lieluma lietotnes"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Šis iestatījums ļauj vairāku logu režīmā rādīt lietotnes, kuru lielums nav maināms"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Tumšā režīma piespiedu ieslēgšanas ignorēšana"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Ignorē tumšā režīma iestatījumu Vienmēr ieslēgts"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Iespējot aizmiglošanu"</string>
@@ -5143,8 +5144,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"lidojuma režīms, var izmantot lidojuma režīmu"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Zvani un īsziņas"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi zvani"</string>
-    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"Veiciet un saņemiet zvanus tīklos, ko nenodrošina mobilo sakaru operatori, piemēram, Wi-Fi tīklos."</string>
-    <string name="calls_sms_footnote" msgid="7002461875954024216">"Izmantojot Wi-Fi zvanus, varat veikt un saņemt zvanus tīklos, ko nenodrošina mobilo sakaru operatori, piemēram, dažos Wi-Fi tīklos."</string>
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Zvanu veikšana un saņemšana Wi-Fi tīklā"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"Wi-Fi zvani tiek veikti un saņemti Wi-Fi tīklos, ko nenodrošina mobilo sakaru operatori."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Zvani"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"Īsziņas"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"vēlamie"</string>
@@ -5163,10 +5164,9 @@
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Tiks pārtraukts jūsu tālruņa zvans."</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Notiek interneta atiestatīšana…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Novērst problēmu ar savienojamību"</string>
-    <!-- no translation found for airplane_mode_network_available (1059499681300395240) -->
-    <skip />
-    <!-- no translation found for to_switch_networks_disconnect_ethernet (6615374552827587197) -->
-    <skip />
+    <string name="airplane_mode_network_available" msgid="1059499681300395240">"Lidojuma režīmā pieejamie tīkli"</string>
+    <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Lai pārslēgtu tīklus, atvienojiet tīkla Ethernet vadu."</string>
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Nevar mainīt tīklu, kamēr savienojums ir aktīvs"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Ir izveidots savienojums"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Interneta savienojums netiks izveidots automātiski"</string>
@@ -5188,4 +5188,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"Citi"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Vispārīgi"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Skatīt visas lietotnes"</string>
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Viedā pāradresācija"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Viedā pāradresācija ir iespējota"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Viedā pāradresācija ir atspējota"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Zvanu iestatījumi"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Notiek iestatījumu atjaunināšana…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Zvanu iestatījumu kļūda"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Tīkla vai SIM kartes kļūda."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM karte nav aktivizēta."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Ievadiet tālruņa numurus"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Ievadiet tālruņa numuru"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Nav norādīts tālruņa numurs."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Labi"</string>
 </resources>
