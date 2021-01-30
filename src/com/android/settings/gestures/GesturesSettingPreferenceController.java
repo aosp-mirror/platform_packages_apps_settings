@@ -21,12 +21,14 @@ import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -86,6 +88,10 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            return null;
+        }
+
         if (!mFeatureProvider.isSensorAvailable(mContext)) {
             return "";
         }

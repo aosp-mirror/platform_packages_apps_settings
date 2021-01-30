@@ -229,6 +229,18 @@ public class NetworkProviderWorkerTest {
     }
 
     @Test
+    @UiThreadTest
+    public void onDataConnectionStateChanged_notifyPhoneStateListener_callUpdateSlice() {
+        mMockNetworkProviderWorker.onSlicePinned();
+        mMockNetworkProviderWorker.receiveNotification(false);
+
+        mMockNetworkProviderWorker.mPhoneStateListener.onDataConnectionStateChanged(
+                TelephonyManager.DATA_DISCONNECTED, TelephonyManager.NETWORK_TYPE_LTE);
+
+        assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
+    }
+
+    @Test
     public void onInternetTypeChanged_connectedFromWifiToEthernet_callUpdateSlice() {
         mMockNetworkProviderWorker.receiveNotification(false);
         mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_WIFI);
