@@ -16,6 +16,10 @@
 
 package com.android.settings.panel;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
+
+import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
 import static com.android.settings.network.NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS;
 
 import android.app.settings.SettingsEnums;
@@ -24,9 +28,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.AirplaneModePreferenceController;
+import com.android.settings.network.InternetUpdater;
 import com.android.settings.slices.CustomSliceRegistry;
 
 import java.util.ArrayList;
@@ -35,9 +44,15 @@ import java.util.List;
 /**
  * Represents the Internet Connectivity Panel.
  */
-public class InternetConnectivityPanel implements PanelContent {
+public class InternetConnectivityPanel implements PanelContent, LifecycleObserver,
+        InternetUpdater.OnInternetTypeChangedListener {
 
     private final Context mContext;
+    @VisibleForTesting
+    boolean mIsProviderModelEnabled;
+    private PanelContentCallback mCallback;
+    private InternetUpdater mInternetUpdater;
+    private @InternetUpdater.InternetType int mInternetType;
 
     public static InternetConnectivityPanel create(Context context) {
         return new InternetConnectivityPanel(context);
@@ -45,12 +60,37 @@ public class InternetConnectivityPanel implements PanelContent {
 
     private InternetConnectivityPanel(Context context) {
         mContext = context.getApplicationContext();
+        mIsProviderModelEnabled = Utils.isProviderModelEnabled(mContext);
+        mInternetUpdater = new InternetUpdater(context, null /* Lifecycle */, this);
+        mInternetType = mInternetUpdater.getInternetType();
+    }
+
+    /** @OnLifecycleEvent(ON_RESUME) */
+    @OnLifecycleEvent(ON_RESUME)
+    public void onResume() {
+        if (!mIsProviderModelEnabled) {
+            return;
+        }
+        mInternetUpdater.onResume();
+    }
+
+    /** @OnLifecycleEvent(ON_PAUSE) */
+    @OnLifecycleEvent(ON_PAUSE)
+    public void onPause() {
+        if (!mIsProviderModelEnabled) {
+            return;
+        }
+        mInternetUpdater.onPause();
     }
 
     @Override
     public CharSequence getTitle() {
-        return mContext.getText(Utils.isProviderModelEnabled(mContext)
-                ? R.string.provider_internet_settings : R.string.internet_connectivity_panel_title);
+        if (mIsProviderModelEnabled) {
+            return mContext.getText(mInternetType == INTERNET_APM_NETWORKS
+                    ? R.string.airplane_mode_network_panel_title
+                    : R.string.provider_internet_settings);
+        }
+        return mContext.getText(R.string.internet_connectivity_panel_title);
     }
 
     @Override
@@ -92,5 +132,31 @@ public class InternetConnectivityPanel implements PanelContent {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.PANEL_INTERNET_CONNECTIVITY;
+    }
+
+    @Override
+    public void registerCallback(PanelContentCallback callback) {
+        mCallback = callback;
+    }
+
+    /**
+     * Called when internet type is changed.
+     *
+     * @param internetType the internet type
+     */
+    public void onInternetTypeChanged(@InternetUpdater.InternetType int internetType) {
+        final boolean needRefresh = internetType != mInternetType
+                && (internetType == INTERNET_APM_NETWORKS
+                || mInternetType == INTERNET_APM_NETWORKS);
+        mInternetType = internetType;
+        if (needRefresh) {
+            refresh();
+        }
+    }
+
+    private void refresh() {
+        if (mCallback != null) {
+            mCallback.onTitleChanged();
+        }
     }
 }
