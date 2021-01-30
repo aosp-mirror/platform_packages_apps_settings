@@ -52,14 +52,13 @@ public class EmergencyGestureEntrypointPreferenceControllerTest {
 
     private Context mContext;
     private ShadowPackageManager mPackageManager;
-    private EmergencyGestureEntrypointPreferenceController mController;
     private static final String PREF_KEY = "gesture_emergency_button";
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
-        mController = new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
+
     }
 
     @After
@@ -69,24 +68,18 @@ public class EmergencyGestureEntrypointPreferenceControllerTest {
 
     @Test
     public void constructor_hasCustomPackageConfig_shouldSetIntent() {
-        final ResolveInfo info = new ResolveInfo();
-        info.activityInfo = new ActivityInfo();
-        info.activityInfo.packageName = TEST_PKG_NAME;
-        info.activityInfo.name = TEST_CLASS_NAME;
-
-        mPackageManager.addResolveInfoForIntent(SETTING_INTENT, info);
-
         SettingsShadowResources.overrideResource(
                 R.bool.config_show_emergency_gesture_settings,
                 Boolean.TRUE);
-
         SettingsShadowResources.overrideResource(
                 R.string.emergency_gesture_settings_package,
                 TEST_PKG_NAME);
+        prepareCustomIntent();
 
-        mController = new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
+        EmergencyGestureEntrypointPreferenceController controller =
+                new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
 
-        assertThat(mController.mIntent).isNotNull();
+        assertThat(controller.mIntent).isNotNull();
     }
 
     @Test
@@ -94,8 +87,10 @@ public class EmergencyGestureEntrypointPreferenceControllerTest {
         SettingsShadowResources.overrideResource(
                 R.bool.config_show_emergency_gesture_settings,
                 Boolean.TRUE);
+        EmergencyGestureEntrypointPreferenceController controller =
+                new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
@@ -103,7 +98,34 @@ public class EmergencyGestureEntrypointPreferenceControllerTest {
         SettingsShadowResources.overrideResource(
                 R.bool.config_show_emergency_gesture_settings,
                 Boolean.FALSE);
+        EmergencyGestureEntrypointPreferenceController controller =
+                new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_noSuitableIntent_shouldReturnUnsupported() {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_show_emergency_gesture_settings,
+                Boolean.TRUE);
+        // Provide override package name but don't provide resolvable intent
+        SettingsShadowResources.overrideResource(
+                R.string.emergency_gesture_settings_package,
+                TEST_PKG_NAME);
+
+        EmergencyGestureEntrypointPreferenceController controller =
+                new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    private void prepareCustomIntent() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = TEST_PKG_NAME;
+        info.activityInfo.name = TEST_CLASS_NAME;
+
+        mPackageManager.addResolveInfoForIntent(SETTING_INTENT, info);
     }
 }

@@ -70,13 +70,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/suggestion_height"
                 android:paddingHorizontal="@dimen/suggestion_padding_horizontal"
-                android:paddingBottom="@dimen/suggestion_padding_bottom"
+                android:paddingVertical="@dimen/suggestion_padding_vertical"
                 android:orientation="vertical"
                 android:gravity="bottom"
                 android:visibility="gone">
 
                 <TextView
                     android:id="@+id/suggestion_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:text="@string/settings_label"
                     style="@style/ContextualSuggestionText"/>
 

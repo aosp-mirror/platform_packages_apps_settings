@@ -26,12 +26,14 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Settings.PrivacySettingsActivity;
+import com.android.settings.core.FeatureFlags;
 
 import java.net.URISyntaxException;
 
@@ -55,6 +57,9 @@ public class BackupSettingsHelper {
      * Otherwise, show nothing.
      */
     public String getSummary() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            return null;
+        }
         UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         if (userManager.getUserProfiles().size() == 1) {
             try {

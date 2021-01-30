@@ -32,11 +32,13 @@ import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
@@ -165,6 +167,17 @@ public class SettingsBaseActivity extends FragmentActivity {
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         ((ViewGroup) findViewById(R.id.content_frame)).addView(view, params);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // Make the up button behave the same as the back button.
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

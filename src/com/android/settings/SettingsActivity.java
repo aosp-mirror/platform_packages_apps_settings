@@ -238,12 +238,10 @@ public class SettingsActivity extends SettingsBaseActivity
             getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
             final MaterialSharedAxis enterTransition = new MaterialSharedAxis(
                     MaterialSharedAxis.X, /* forward */true);
-            enterTransition.addTarget(R.id.content_parent);
             getWindow().setEnterTransition(enterTransition);
 
             final MaterialSharedAxis returnTransition = new MaterialSharedAxis(
                     MaterialSharedAxis.X, /* forward */false);
-            returnTransition.addTarget(R.id.content_parent);
             getWindow().setReturnTransition(returnTransition);
         }
 
