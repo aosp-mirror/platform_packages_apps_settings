@@ -31,6 +31,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -42,6 +43,7 @@ import com.android.settings.widget.SummaryUpdater;
 import com.android.settings.wifi.WifiSummaryUpdater;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -147,8 +149,13 @@ public class InternetPreferenceController extends AbstractPreferenceController i
      * @param internetType the internet type
      */
     public void onInternetTypeChanged(@InternetUpdater.InternetType int internetType) {
+        final boolean needUpdate = (internetType != mInternetType);
         mInternetType = internetType;
-        updateState(mPreference);
+        if (needUpdate) {
+            ThreadUtils.postOnMainThread(() -> {
+                updateState(mPreference);
+            });
+        }
     }
 
     @Override
@@ -158,13 +165,17 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         }
     }
 
-    private void updateCellularSummary() {
+    @VisibleForTesting
+    void updateCellularSummary() {
         final SubscriptionManager subscriptionManager =
                 mContext.getSystemService(SubscriptionManager.class);
         if (subscriptionManager == null) {
             return;
         }
         SubscriptionInfo subInfo = subscriptionManager.getDefaultDataSubscriptionInfo();
+        if (subInfo == null) {
+            return;
+        }
         mPreference.setSummary(subInfo.getDisplayName());
     }
 }
