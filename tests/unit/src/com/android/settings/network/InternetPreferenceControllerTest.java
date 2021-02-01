@@ -79,6 +79,7 @@ public class InternetPreferenceControllerTest {
         when(wifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
 
         mController = new InternetPreferenceController(mContext, mock(Lifecycle.class));
+        mController.sIconMap.put(INTERNET_WIFI, 0);
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }

@@ -62,7 +62,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     private InternetUpdater mInternetUpdater;
     private @InternetUpdater.InternetType int mInternetType;
 
-    private static Map<Integer, Integer> sIconMap = new HashMap<>();
+    @VisibleForTesting
+    static Map<Integer, Integer> sIconMap = new HashMap<>();
     static {
         sIconMap.put(INTERNET_APM, R.drawable.ic_airplanemode_active);
         sIconMap.put(INTERNET_APM_NETWORKS, R.drawable.ic_airplane_safe_networks_24dp);
