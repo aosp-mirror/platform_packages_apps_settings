@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CONTEXTUAL_CARD_COUNT;
 import static com.android.settings.homepage.contextualcards.ContextualCardManager.KEY_CONTEXTUAL_CARDS;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH;
@@ -307,7 +308,7 @@ public class ContextualCardManagerTest {
     }
 
     @Test
-    public void onFinishCardLoading_fastLoad_shouldCallOnContextualCardUpdated() {
+    public void onFinishCardLoading_fastLoad_shouldUpdateContextualCard() {
         mManager.mStartTime = System.currentTimeMillis();
         final ContextualCardManager manager = spy(mManager);
         doNothing().when(manager).onContextualCardUpdated(anyMap());
@@ -318,7 +319,7 @@ public class ContextualCardManagerTest {
     }
 
     @Test
-    public void onFinishCardLoading_slowLoad_shouldSkipOnContextualCardUpdated() {
+    public void onFinishCardLoading_slowLoadAndNoCard_shouldNotUpdateContextualCard() {
         mManager.mStartTime = 0;
         final ContextualCardManager manager = spy(mManager);
         doNothing().when(manager).onContextualCardUpdated(anyMap());
@@ -326,6 +327,30 @@ public class ContextualCardManagerTest {
         manager.onFinishCardLoading(new ArrayList<>());
 
         verify(manager, never()).onContextualCardUpdated(anyMap());
+    }
+
+    @Test
+    public void onFinishCardLoading_slowLoadAndNotPreAllocateSpace_shouldNotUpdateContextualCard() {
+        mManager.mStartTime = 0;
+        Settings.Global.putInt(mContext.getContentResolver(), CONTEXTUAL_CARD_COUNT, 3);
+        final ContextualCardManager manager = spy(mManager);
+        doNothing().when(manager).onContextualCardUpdated(anyMap());
+
+        manager.onFinishCardLoading(Arrays.asList(buildContextualCard(TEST_SLICE_URI)));
+
+        verify(manager, never()).onContextualCardUpdated(anyMap());
+    }
+
+    @Test
+    public void onFinishCardLoading_slowLoadAndPreAllocateSpace_shouldUpdateContextualCard() {
+        mManager.mStartTime = 0;
+        Settings.Global.putInt(mContext.getContentResolver(), CONTEXTUAL_CARD_COUNT, 1);
+        final ContextualCardManager manager = spy(mManager);
+        doNothing().when(manager).onContextualCardUpdated(anyMap());
+
+        manager.onFinishCardLoading(Arrays.asList(buildContextualCard(TEST_SLICE_URI)));
+
+        verify(manager).onContextualCardUpdated(anyMap());
     }
 
     @Test

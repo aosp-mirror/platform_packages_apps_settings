@@ -19,6 +19,7 @@ package com.android.settings.notification.app;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
+import android.app.ActivityManager;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.provider.Settings;
@@ -77,7 +78,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
             if (isDefaultChannel()) {
                 return true;
             } else {
-                return mAppRow != null;
+                return mAppRow != null &&  mAppRow.bubblePreference != BUBBLE_PREFERENCE_NONE;
             }
         }
         return true;
@@ -139,7 +140,8 @@ public class BubblePreferenceController extends NotificationPreferenceController
     }
 
     private boolean isGloballyEnabled() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
+        ActivityManager am = mContext.getSystemService(ActivityManager.class);
+        return !am.isLowRamDevice() && Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF) == SYSTEM_WIDE_ON;
     }
 

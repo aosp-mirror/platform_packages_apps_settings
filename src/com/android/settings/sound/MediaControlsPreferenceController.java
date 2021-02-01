@@ -35,12 +35,12 @@ public class MediaControlsPreferenceController extends TogglePreferenceControlle
     @Override
     public boolean isChecked() {
         int val = Settings.Secure.getInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, 1);
-        return val == 0;
+        return val == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        int val = isChecked ? 0 : 1;
+        int val = isChecked ? 1 : 0;
         return Settings.Secure.putInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, val);
     }
 

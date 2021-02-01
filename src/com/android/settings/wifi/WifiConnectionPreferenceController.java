@@ -17,32 +17,20 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Process;
-import android.os.SimpleClock;
-import android.os.SystemClock;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.wifi.WifiEntryPreference;
-import com.android.wifitrackerlib.WifiEntry;
-import com.android.wifitrackerlib.WifiPickerTracker;
-
-import java.time.Clock;
-import java.time.ZoneOffset;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.AccessPointPreference;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 // TODO(b/151133650): Replace AbstractPreferenceController with BasePreferenceController.
 /**
@@ -50,28 +38,21 @@ import java.time.ZoneOffset;
  * controller class when there is a wifi connection present.
  */
 public class WifiConnectionPreferenceController extends AbstractPreferenceController implements
-        WifiPickerTracker.WifiPickerTrackerCallback {
+        WifiTracker.WifiListener {
 
     private static final String TAG = "WifiConnPrefCtrl";
 
     private static final String KEY = "active_wifi_connection";
 
-    // Max age of tracked WifiEntries.
-    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
-    // Interval between initiating WifiPickerTracker scans.
-    private static final long SCAN_INTERVAL_MILLIS = 10_000;
-
     private UpdateListener mUpdateListener;
     private Context mPrefContext;
     private String mPreferenceGroupKey;
     private PreferenceGroup mPreferenceGroup;
-    @VisibleForTesting
-    public WifiPickerTracker mWifiPickerTracker;
-    private WifiEntryPreference mPreference;
+    private WifiTracker mWifiTracker;
+    private AccessPointPreference mPreference;
+    private AccessPointPreference.UserBadgeCache mBadgeCache;
     private int order;
     private int mMetricsCategory;
-    // Worker thread used for WifiPickerTracker work.
-    private HandlerThread mWorkerThread;
 
     /**
      * Used to notify a parent controller that this controller has changed in availability, or has
@@ -99,34 +80,16 @@ public class WifiConnectionPreferenceController extends AbstractPreferenceContro
         super(context);
         mUpdateListener = updateListener;
         mPreferenceGroupKey = preferenceGroupKey;
+        mWifiTracker = WifiTrackerFactory.create(context, this, lifecycle, true /* includeSaved */,
+                true /* includeScans */);
         this.order = order;
         mMetricsCategory = metricsCategory;
-
-        mWorkerThread = new HandlerThread(
-                TAG + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
-                Process.THREAD_PRIORITY_BACKGROUND);
-        mWorkerThread.start();
-        final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
-            @Override
-            public long millis() {
-                return SystemClock.elapsedRealtime();
-            }
-        };
-        mWifiPickerTracker = new WifiPickerTracker(lifecycle, context,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
-                new Handler(Looper.getMainLooper()),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                this);
+        mBadgeCache = new AccessPointPreference.UserBadgeCache(context.getPackageManager());
     }
 
     @Override
     public boolean isAvailable() {
-        return mWifiPickerTracker.getConnectedWifiEntry() != null;
+        return mWifiTracker.isConnected() && getCurrentAccessPoint() != null;
     }
 
     @Override
@@ -142,69 +105,74 @@ public class WifiConnectionPreferenceController extends AbstractPreferenceContro
         update();
     }
 
-    private void updatePreference(WifiEntry wifiEntry) {
+    private AccessPoint getCurrentAccessPoint() {
+        for (AccessPoint accessPoint : mWifiTracker.getAccessPoints()) {
+            if (accessPoint.isActive()) {
+                return accessPoint;
+            }
+        }
+        return null;
+    }
+
+    private void updatePreference(AccessPoint accessPoint) {
         if (mPreference != null) {
             mPreferenceGroup.removePreference(mPreference);
             mPreference = null;
         }
-        if (wifiEntry == null || mPrefContext == null) {
+        if (accessPoint == null) {
             return;
         }
+        if (mPrefContext != null) {
+            mPreference = new AccessPointPreference(accessPoint, mPrefContext, mBadgeCache,
+                    R.drawable.ic_wifi_signal_0, false /* forSavedNetworks */);
+            mPreference.setKey(KEY);
+            mPreference.refresh();
+            mPreference.setOrder(order);
 
-        mPreference = new WifiEntryPreference(mPrefContext, wifiEntry);
-        mPreference.setKey(KEY);
-        mPreference.refresh();
-        mPreference.setOrder(order);
-        mPreference.setOnPreferenceClickListener(pref -> {
-            final Bundle args = new Bundle();
-            args.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
-                    wifiEntry.getKey());
-            new SubSettingLauncher(mPrefContext)
-                    .setTitleRes(R.string.pref_title_network_details)
-                    .setDestination(WifiNetworkDetailsFragment2.class.getName())
-                    .setArguments(args)
-                    .setSourceMetricsCategory(mMetricsCategory)
-                    .launch();
-            return true;
-        });
-        mPreferenceGroup.addPreference(mPreference);
+            mPreference.setOnPreferenceClickListener(pref -> {
+                Bundle args = new Bundle();
+                mPreference.getAccessPoint().saveWifiState(args);
+                new SubSettingLauncher(mPrefContext)
+                        .setTitleRes(R.string.pref_title_network_details)
+                        .setDestination(WifiNetworkDetailsFragment.class.getName())
+                        .setArguments(args)
+                        .setSourceMetricsCategory(mMetricsCategory)
+                        .launch();
+                return true;
+            });
+            mPreferenceGroup.addPreference(mPreference);
+        }
     }
 
     private void update() {
-        final WifiEntry connectedWifiEntry = mWifiPickerTracker.getConnectedWifiEntry();
-        if (connectedWifiEntry == null) {
+        AccessPoint connectedAccessPoint = null;
+        if (mWifiTracker.isConnected()) {
+            connectedAccessPoint = getCurrentAccessPoint();
+        }
+        if (connectedAccessPoint == null) {
             updatePreference(null);
         } else {
-            if (mPreference == null || !mPreference.getWifiEntry().equals(connectedWifiEntry)) {
-                updatePreference(connectedWifiEntry);
-            } else if (mPreference != null) {
-                mPreference.refresh();
-            }
+          if (mPreference == null || !mPreference.getAccessPoint().equals(connectedAccessPoint)) {
+              updatePreference(connectedAccessPoint);
+          } else if (mPreference != null) {
+              mPreference.refresh();
+          }
         }
         mUpdateListener.onChildrenUpdated();
     }
 
-    /** Called when the state of Wifi has changed. */
     @Override
-    public void onWifiStateChanged() {
-        update();
-    }
-
-    /**
-     * Update the results when data changes.
-     */
-    @Override
-    public void onWifiEntriesChanged() {
+    public void onWifiStateChanged(int state) {
         update();
     }
 
     @Override
-    public void onNumSavedSubscriptionsChanged() {
-        // Do nothing.
+    public void onConnectedChanged() {
+        update();
     }
 
     @Override
-    public void onNumSavedNetworksChanged() {
-        // Do nothing.
+    public void onAccessPointsChanged() {
+        update();
     }
 }

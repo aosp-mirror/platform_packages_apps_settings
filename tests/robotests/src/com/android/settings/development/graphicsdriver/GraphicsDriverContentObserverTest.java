@@ -58,7 +58,7 @@ public class GraphicsDriverContentObserverTest {
         mGraphicsDriverContentObserver.register(mResolver);
 
         verify(mResolver).registerContentObserver(
-                Settings.Global.getUriFor(Settings.Global.GAME_DRIVER_ALL_APPS), false,
+                Settings.Global.getUriFor(Settings.Global.UPDATABLE_DRIVER_ALL_APPS), false,
                 mGraphicsDriverContentObserver);
     }
 

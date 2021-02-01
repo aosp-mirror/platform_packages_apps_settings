@@ -730,6 +730,12 @@
     <string name="security_settings_face_enroll_education_message"></string>
     <!-- Button that takes the user to the enrollment activity [CHAR LIMIT=20] -->
     <string name="security_settings_face_enroll_education_start">Start</string>
+    <!-- Confirmation dialog message shown when users with system accessibility features enabled try to start the non-accessibility version of enrollment [CHAR LIMIT=150] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message">If accessibility face unlock is turned off, some setup steps may not work properly with TalkBack.</string>
+    <!-- Negative button text for users who were shown the accessibility dialog [CHAR LIMIT=10] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative">Go back</string>
+    <!-- Positive button text for users who were shown the accessibility dialog [CHAR LIMIT=20] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive">Continue setup</string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
     <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
@@ -2112,9 +2118,7 @@
          when signal of the Wi-Fi network is reachable [CHAR LIMIT=50]  -->
     <string name="wifi_auto_connect_title">Auto\u2011connect</string>
     <!-- Hint for Wi-Fi Auto-connect [CHAR LIMIT=NONE]  -->
-    <string name="wifi_auto_connect_summary" product="default">Allow phone to automatically connect near this network</string>
-    <!-- Hint for Wi-Fi Auto-connect [CHAR LIMIT=NONE]  -->
-    <string name="wifi_auto_connect_summary" product="tablet">Allow tablet to automatically connect near this network</string>
+    <string name="wifi_auto_connect_summary">Allow connection to this network when in range</string>
     <!-- Label for "Use a QR code to add a device to this network" [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_add_device">Add device</string>
     <!-- Hint for "Add device" [CHAR LIMIT=NONE]  -->
@@ -2137,8 +2141,6 @@
     <string name="wifi_do_not_provide_eap_user_cert">Do not provide</string>
     <!-- Menu option for not validating the EAP server -->
     <string name="wifi_do_not_validate_eap_server">Do not validate</string>
-    <!-- Warning message displayed if user choses not to validate the EAP server -->
-    <string name="wifi_do_not_validate_eap_server_warning">No certificate specified. Your connection will not be private.</string>
     <!-- Warning message displayed if network name (ssid) is too long -->
     <string name="wifi_ssid_too_long">Network name is too long.</string>
     <!-- Warning message displayed if user does not specify a domain for the CA certificate.
@@ -3868,7 +3870,7 @@
     <!-- Label for ethernet tether checkbox [CHAR LIMIT=NONE]-->
     <string name="ethernet_tether_checkbox_text">Ethernet tethering</string>
     <!-- Ethernet Tethering subtext [CHAR LIMIT=NONE]-->
-    <string name="ethernet_tethering_subtext" product="default">Share phone\u2019s internet connection via USB Ethernet</string>
+    <string name="ethernet_tethering_subtext" product="default">Share phone\u2019s internet connection via Ethernet</string>
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
     <string name="tethering_footer_info">Use hotspot and tethering to provide internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
@@ -4318,6 +4320,20 @@
         any damage to your phone or loss of data that may
         result from their use.
     </string>
+
+    <!-- eSIM erase warning dialog. -->
+    <!-- Factory data reset erase eSIM failure title [CHAR LIMIT=50] -->
+    <string name="fdr_esim_failure_title" >There is an issue erasing the downloaded SIMs</string>
+    <!-- Factory data reset erase eSIM failure text [CHAR LIMIT=none] -->
+    <string name="fdr_esim_failure_text">Please reboot the device and try again. If you continue factory reset, the downloaded SIMs may remain on the device.</string>
+    <!-- Factory data reset erase eSIM failure reboot button text [CHAR LIMIT=none] -->
+    <string name="fdr_esim_failure_reboot_btn">Reboot</string>
+    <!-- Factory data reset continue factory data reset title [CHAR LIMIT=35] -->
+    <string name="fdr_continue_title" >Continue factory reset?</string>
+    <!-- Factory data reset continue factory data reset text [CHAR LIMIT=none] -->
+    <string name="fdr_continue_text">Downloaded SIMs will remain on device.</string>
+    <!-- Factory data reset continue factory data reset button text [CHAR LIMIT=none] -->
+    <string name="fdr_continue_btn">Factory reset</string>
 
     <!-- Warning that appears below the unknown sources switch in settings -->
     <string name="install_all_warning" product="device">
@@ -6175,6 +6191,11 @@
 
     <!-- Title of preference to enter the VPN settings activity -->
     <string name="vpn_settings_title">VPN</string>
+
+    <!-- Title of Adaptive connectivity. Adaptive connectivity is a feature which automatically manages network connections for better battery life and performance. [CHAR LIMIT=60] -->
+    <string name="adaptive_connectivity_title">Adaptive connectivity</string>
+    <!-- Summary of Adaptive connectivity preference. [CHAR LIMIT=NONE] -->
+    <string name="adaptive_connectivity_summary">Extends battery life and improves device performance by automatically managing your network connections</string>
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
@@ -11282,23 +11303,23 @@
     <string name="graphics_driver_app_preference_title">Select Graphics Driver</string>
     <!-- The default value of graphics driver preference for app [CHAR LIMIT=50] -->
     <string name="graphics_driver_app_preference_default">Default</string>
-    <!-- The game driver value for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="graphics_driver_app_preference_game_driver">Game Driver</string>
-    <!-- The prerelase driver value for Developer Driver app preference [CHAR LIMIT=50] -->
+    <!-- The value for updatable production driver app preference [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_production_driver">Game Driver</string>
+    <!-- The value for updatable developer driver app preference [CHAR LIMIT=50] -->
     <string name="graphics_driver_app_preference_prerelease_driver">Developer Driver</string>
     <!-- The system driver value for system graphics driver app preference [CHAR LIMIT=50] -->
     <string name="graphics_driver_app_preference_system">System Graphics Driver</string>
     <!-- All the graphics driver preference values for all apps globally [CHAR LIMIT=50] -->
     <string-array name="graphics_driver_all_apps_preference_values">
         <item>@string/graphics_driver_app_preference_default</item>
-        <item>@string/graphics_driver_app_preference_game_driver</item>
+        <item>@string/graphics_driver_app_preference_production_driver</item>
         <item>@string/graphics_driver_app_preference_prerelease_driver</item>
     </string-array>
     <!-- All the values of graphics driver for app preference [CHAR LIMIT=50] -->
     <string-array name="graphics_driver_app_preference_values">
         <item>@string/graphics_driver_app_preference_default</item>
         <item>@string/graphics_driver_app_preference_prerelease_driver</item>
-        <item>@string/graphics_driver_app_preference_game_driver</item>
+        <item>@string/graphics_driver_app_preference_production_driver</item>
         <item>@string/graphics_driver_app_preference_system</item>
     </string-array>
 
@@ -11472,6 +11493,17 @@
 
     <!-- Message informs the user that has no SIM card in personalized Settings [CHAR LIMIT=30] -->
     <string name="no_sim_card">No SIM card</string>
+
+    <!-- A title for a SIM card spinner UI component which users can choose a SIM card. [CHAR LIMIT=NONE] -->
+    <string name="sim_card">SIM</string>
+    <!-- A label when there is no SIM card to choose. [CHAR LIMIT=NONE] -->
+    <string name="wifi_no_sim_card">No SIM</string>
+    <!-- A label when there is no SIM card information of a Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_no_related_sim_card">None</string>
+    <!-- A label wen a user needs a SIM to connect to the Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_require_sim_card_to_connect">Requires SIM to connect</string>
+    <!-- A label wen a user needs a specific SIM to connect to the Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_require_specific_sim_card_to_connect">Requires <xliff:g id="wireless_carrier" example="Verizon">%s</xliff:g> SIM to connect</string>
 
     <!-- The following strings are summaries for preferred network modes in Mobile network settings,
      and have a character limit of 100 -->
@@ -12130,10 +12162,10 @@
 
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>
-    <!-- Summary for media control settings [CHAR LIMIT=60]-->
-    <string name="media_controls_summary">Hide player when the media session has ended</string>
+    <!-- Summary for media control settings [CHAR LIMIT=NONE]-->
+    <string name="media_controls_summary">Media player in Quick Settings</string>
     <!-- Description of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=NONE]-->
-    <string name="media_controls_resume_description">The player allows you to resume a session from the expanded Quick Settings panel.</string>
+    <string name="media_controls_resume_description">Show media player for an extended period to easily resume playback</string>
     <!-- Subtext for media settings when the player will be hidden [CHAR LIMIT=50] -->
     <string name="media_controls_hide_player">Hide player</string>
     <!-- Subtext for media settings when the player will be shown [CHAR LIMIT=50] -->
@@ -12142,4 +12174,7 @@
     <string name="media_controls_no_players">No players available</string>
     <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
     <string name="keywords_media_controls">media</string>
+
+    <!-- Summary for see all preference when bluetooth is disable [CHAR LIMIT=none]-->
+    <string name="connected_device_see_all_summary">Bluetooth will turn on</string>
 </resources>
