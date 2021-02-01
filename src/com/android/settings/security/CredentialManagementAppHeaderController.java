@@ -25,6 +25,7 @@ import android.os.RemoteException;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,7 +55,6 @@ public class CredentialManagementAppHeaderController extends BasePreferenceContr
     }
 
     private final PackageManager mPackageManager;
-    private boolean mHasCredentialManagerPackage;
     private String mCredentialManagerPackageName;
 
     @Override
@@ -69,7 +69,6 @@ public class CredentialManagementAppHeaderController extends BasePreferenceContr
         mExecutor.execute(() -> {
             try {
                 IKeyChainService service = KeyChain.bind(mContext).getService();
-                mHasCredentialManagerPackage = service.hasCredentialManagementApp();
                 mCredentialManagerPackageName = service.getCredentialManagementAppPackageName();
             } catch (InterruptedException | RemoteException e) {
                 Log.e(TAG, "Unable to display credential management app header");
@@ -80,23 +79,21 @@ public class CredentialManagementAppHeaderController extends BasePreferenceContr
 
     private void displayHeader(PreferenceScreen screen) {
         LayoutPreference headerPref = screen.findPreference(getPreferenceKey());
-        ImageView mAppIconView = headerPref.findViewById(R.id.entity_header_icon);
-        TextView mTitleView = headerPref.findViewById(R.id.entity_header_title);
-        TextView mDescriptionView = headerPref.findViewById(R.id.entity_header_summary);
+        ImageView appIconView = headerPref.findViewById(R.id.entity_header_icon);
+        TextView titleView = headerPref.findViewById(R.id.entity_header_title);
+        TextView summary1 = headerPref.findViewById(R.id.entity_header_summary);
+        TextView summary2 = headerPref.findViewById(R.id.entity_header_second_summary);
+        summary1.setVisibility(View.GONE);
+        summary2.setVisibility(View.GONE);
 
         try {
             ApplicationInfo applicationInfo =
                     mPackageManager.getApplicationInfo(mCredentialManagerPackageName, 0);
-            mAppIconView.setImageDrawable(mPackageManager.getApplicationIcon(applicationInfo));
-            mTitleView.setText(applicationInfo.loadLabel(mPackageManager));
+            appIconView.setImageDrawable(mPackageManager.getApplicationIcon(applicationInfo));
+            titleView.setText(applicationInfo.loadLabel(mPackageManager));
         } catch (PackageManager.NameNotFoundException e) {
-            mAppIconView.setImageDrawable(null);
-            mTitleView.setText(mCredentialManagerPackageName);
+            appIconView.setImageDrawable(null);
+            titleView.setText(mCredentialManagerPackageName);
         }
-        // TODO (b/165641221): The description should be multi-lined, which is currently a
-        // limitation of using Settings entity header. However, the Settings entity header
-        // should be used to be consistent with the rest of Settings.
-        mDescriptionView.setText(
-                mContext.getString(R.string.request_manage_credentials_description));
     }
 }
