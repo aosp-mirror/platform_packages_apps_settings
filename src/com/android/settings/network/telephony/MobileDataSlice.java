@@ -167,7 +167,7 @@ public class MobileDataSlice implements CustomSliceable {
             return null; // no summary text
         }
 
-        return defaultSubscription.getDisplayName();
+        return SubscriptionUtil.getUniqueSubscriptionDisplayName(defaultSubscription, mContext);
     }
 
     private PendingIntent getPrimaryAction() {

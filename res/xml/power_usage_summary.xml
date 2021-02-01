@@ -28,6 +28,13 @@
         android:layout="@layout/battery_header"
         settings:controller="com.android.settings.fuelgauge.BatteryHeaderPreferenceController" />
 
+    <Preference
+        android:fragment="com.android.settings.fuelgauge.PowerUsageAdvanced"
+        android:key="battery_usage_summary"
+        android:title="@string/advanced_battery_preference_title"
+        android:icon="@drawable/ic_chevron_right_24dp"
+        settings:searchable="false" />
+
     <com.android.settings.widget.CardPreference
         android:key="battery_tip"
         android:title="@string/summary_placeholder"
@@ -39,33 +46,22 @@
         android:title="@string/battery_saver"
         settings:controller="com.android.settings.fuelgauge.BatterySaverController" />
 
-    <Preference
-        android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
-        android:key="smart_battery_manager"
-        android:title="@string/smart_battery_manager_title"
-        settings:controller="com.android.settings.fuelgauge.batterytip.BatteryManagerPreferenceController" />
-
     <SwitchPreference
         android:key="battery_percentage"
         android:title="@string/battery_percentage"
         android:summary="@string/battery_percentage_description"
         settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
 
-
-    <com.android.settings.fuelgauge.PowerGaugePreference
-        android:key="last_full_charge"
-        android:title="@string/battery_last_full_charge"
-        android:selectable="false"
-        settings:allowDividerAbove="true" />
-
-    <com.android.settings.fuelgauge.PowerGaugePreference
-        android:key="screen_usage"
-        android:title="@string/device_screen_usage"
-        android:selectable="false" />
+    <Preference
+        android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
+        android:key="smart_battery_manager"
+        android:title="@string/smart_battery_manager_title"
+        settings:controller="com.android.settings.fuelgauge.batterytip.BatteryManagerPreferenceController" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="power_usage_footer"
         android:title="@string/battery_footer_summary"
         android:selectable="false"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:allowDividerAbove="true" />
 </PreferenceScreen>

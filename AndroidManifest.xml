@@ -3672,6 +3672,12 @@
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 
+        <activity android:name=".sim.smartForwarding.SmartForwardingActivity"
+            android:theme="@style/Theme.SubSettings.Base"
+            android:exported="true"
+            android:launchMode="singleTask">
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

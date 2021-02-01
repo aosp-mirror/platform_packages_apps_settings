@@ -38,6 +38,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.network.SubscriptionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -179,7 +180,7 @@ public class SimListDialogFragment extends SimDialogFragment implements
                 icon.setImageTintList(
                         Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
             } else {
-                title.setText(sub.getDisplayName());
+                title.setText(SubscriptionUtil.getUniqueSubscriptionDisplayName(sub, mContext));
                 summary.setText(isMdnProvisioned(sub.getNumber()) ? sub.getNumber() : "");
                 icon.setImageBitmap(sub.createIconBitmap(mContext));
 

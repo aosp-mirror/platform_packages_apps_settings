@@ -16,7 +16,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.PowerUsageSummary.BATTERY_INFO_LOADER;
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BATTERY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -39,9 +38,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -117,12 +113,6 @@ public class PowerUsageSummaryTest {
     private SettingsActivity mSettingsActivity;
     @Mock
     private LoaderManager mLoaderManager;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Menu mMenu;
-    @Mock
-    private MenuInflater mMenuInflater;
-    @Mock
-    private MenuItem mAdvancedPageMenu;
     @Mock
     private BatteryInfo mBatteryInfo;
     @Mock
@@ -139,8 +129,6 @@ public class PowerUsageSummaryTest {
     private TestFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
     private BatteryMeterView mBatteryMeterView;
-    private PowerGaugePreference mScreenUsagePref;
-    private PowerGaugePreference mLastFullChargePref;
     private Intent mIntent;
 
     @Before
@@ -149,15 +137,12 @@ public class PowerUsageSummaryTest {
 
         mRealContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mScreenUsagePref = new PowerGaugePreference(mRealContext);
-        mLastFullChargePref = new PowerGaugePreference(mRealContext);
         mFragment = spy(new TestFragment(mRealContext));
         mFragment.initFeatureProvider();
         mBatteryMeterView = new BatteryMeterView(mRealContext);
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
         doNothing().when(mFragment).restartBatteryStatsLoader(anyInt());
         doReturn(mock(LoaderManager.class)).when(mFragment).getLoaderManager();
-        doReturn(MENU_ADVANCED_BATTERY).when(mAdvancedPageMenu).getItemId();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
@@ -189,39 +174,12 @@ public class PowerUsageSummaryTest {
 
         mFragment.mStatsHelper = mBatteryHelper;
         when(mBatteryHelper.getUsageList()).thenReturn(mUsageList);
-        mFragment.mScreenUsagePref = mScreenUsagePref;
-        mFragment.mLastFullChargePref = mLastFullChargePref;
         mFragment.mBatteryUtils = spy(new BatteryUtils(mRealContext));
         ReflectionHelpers.setField(mFragment, "mVisibilityLoggerMixin", mVisibilityLoggerMixin);
         ReflectionHelpers.setField(mFragment, "mBatteryBroadcastReceiver",
                 mBatteryBroadcastReceiver);
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
         when(mFragment.getContentResolver()).thenReturn(mContentResolver);
-    }
-
-    @Test
-    public void updateLastFullChargePreference_noAverageTime_showLastFullChargeSummary() {
-        mFragment.mBatteryInfo = null;
-        when(mFragment.getContext()).thenReturn(mRealContext);
-        doReturn(TIME_SINCE_LAST_FULL_CHARGE_MS).when(
-                mFragment.mBatteryUtils).calculateLastFullChargeTime(any(), anyLong());
-
-        mFragment.updateLastFullChargePreference();
-
-        assertThat(mLastFullChargePref.getTitle()).isEqualTo("Last full charge");
-        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hours ago");
-    }
-
-    @Test
-    public void updateLastFullChargePreference_hasAverageTime_showFullChargeLastSummary() {
-        mFragment.mBatteryInfo = mBatteryInfo;
-        mBatteryInfo.averageTimeToDischarge = TIME_SINCE_LAST_FULL_CHARGE_MS;
-        when(mFragment.getContext()).thenReturn(mRealContext);
-
-        mFragment.updateLastFullChargePreference();
-
-        assertThat(mLastFullChargePref.getTitle()).isEqualTo("Full charge lasts about");
-        assertThat(mLastFullChargePref.getSubtitle().toString()).isEqualTo("2 hr");
     }
 
     @Test
@@ -291,35 +249,6 @@ public class PowerUsageSummaryTest {
         // Restarting the loader should reset the listener.
         mFragment.restartBatteryInfoLoader();
         verify(mSummary1, times(2)).setOnLongClickListener(any(View.OnLongClickListener.class));
-    }
-
-    @Test
-    public void optionsMenu_advancedPageEnabled() {
-        when(mFeatureFactory.powerUsageFeatureProvider.isPowerAccountingToggleEnabled())
-                .thenReturn(true);
-
-        mFragment.onCreateOptionsMenu(mMenu, mMenuInflater);
-
-        verify(mMenu).add(Menu.NONE, MENU_ADVANCED_BATTERY, Menu.NONE,
-                R.string.advanced_battery_title);
-    }
-
-    @Test
-    public void optionsMenu_clickAdvancedPage_fireIntent() {
-        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        doAnswer(invocation -> {
-            // Get the intent in which it has the app info bundle
-            mIntent = captor.getValue();
-            return true;
-        }).when(mRealContext).startActivity(captor.capture());
-
-        mFragment.onOptionsItemSelected(mAdvancedPageMenu);
-
-        assertThat(mIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
-                PowerUsageAdvanced.class.getName());
-        assertThat(
-                mIntent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0)).isEqualTo(
-                R.string.advanced_battery_title);
     }
 
     @Test
