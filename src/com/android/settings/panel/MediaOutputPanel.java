@@ -25,11 +25,7 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
@@ -109,8 +105,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     @Override
     public IconCompat getIcon() {
         if (mMediaController == null) {
-            return IconCompat.createWithResource(mContext, R.drawable.ic_media_stream).setTint(
-                    Utils.getColorAccentDefaultColor(mContext));
+            return null;
         }
         final MediaMetadata metadata = mMediaController.getMetadata();
         if (metadata != null) {
@@ -124,25 +119,6 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
             }
         }
         Log.d(TAG, "Media meta data does not contain icon information");
-        return getPackageIcon();
-    }
-
-    private IconCompat getPackageIcon() {
-        try {
-            final Drawable drawable = mContext.getPackageManager().getApplicationIcon(mPackageName);
-            if (drawable instanceof BitmapDrawable) {
-                return IconCompat.createWithBitmap(((BitmapDrawable) drawable).getBitmap());
-            }
-            final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                    drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-            final Canvas canvas = new Canvas(bitmap);
-            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            drawable.draw(canvas);
-
-            return IconCompat.createWithBitmap(bitmap);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Package is not found. Unable to get package icon.");
-        }
         return null;
     }
 

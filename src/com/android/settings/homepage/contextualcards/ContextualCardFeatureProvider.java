@@ -24,6 +24,9 @@ public interface ContextualCardFeatureProvider {
     /** Get contextual cards from the card provider */
     Cursor getContextualCards();
 
+    /** Get the default contextual card to display */
+    ContextualCard getDefaultContextualCard();
+
     /**
      * Mark a specific {@link ContextualCard} as dismissed with dismissal signal in the database
      * to indicate that the card has been dismissed.
