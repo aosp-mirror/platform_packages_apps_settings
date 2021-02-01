@@ -338,6 +338,9 @@ public class SubscriptionUtil {
     @VisibleForTesting
     public static CharSequence getUniqueSubscriptionDisplayName(
             SubscriptionInfo info, Context context) {
+        if (info == null) {
+            return "";
+        }
         return getUniqueSubscriptionDisplayName(info.getSubscriptionId(), context);
     }
 
