@@ -20,6 +20,11 @@
     android:title="@string/night_display_title"
     settings:keywords="@string/keywords_display_night_display">
 
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="night_display_activated"
+        android:title="@string/night_light_main_switch_title"
+        settings:controller="com.android.settings.display.NightDisplayActivationPreferenceController"/>
+
     <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"
@@ -53,14 +58,5 @@
         settings:keywords="@string/keywords_display_night_display"
         settings:controller="com.android.settings.display.NightDisplayIntensityPreferenceController"
         settings:unavailableSliceSubtitle="@string/night_display_not_currently_on"/>
-
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="night_display_activated"
-        android:title="@string/night_display_title"
-        android:selectable="false"
-        android:layout="@layout/night_display_activation_button"
-        settings:allowDividerBelow="true"
-        settings:keywords="@string/keywords_display_night_display"
-        settings:controller="com.android.settings.display.NightDisplayActivationPreferenceController"/>
 
 </PreferenceScreen>
