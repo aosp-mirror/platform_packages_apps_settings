@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import android.annotation.IntDef;
 import android.content.Context;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
 import android.util.Log;
@@ -35,8 +36,8 @@ public class UiccSlotUtil {
 
     private static final String TAG = "UiccSlotUtil";
 
-    // TODO(b/171846124): Pass timeout value from LPA to Settings
-    private static final long WAIT_AFTER_SWITCH_TIMEOUT_MILLIS = 25000;
+    private static final long DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS = 25 * 1000L;
+    ;
 
     public static final int INVALID_PHYSICAL_SLOT_ID = -1;
 
@@ -115,12 +116,17 @@ public class UiccSlotUtil {
     private static void performSwitchToRemovableSlot(int slotId, Context context)
             throws UiccSlotsException {
         CarrierConfigChangedReceiver receiver = null;
+        long waitingTimeMillis =
+                Settings.Global.getLong(
+                        context.getContentResolver(),
+                        Settings.Global.EUICC_SWITCH_SLOT_TIMEOUT_MILLIS,
+                        DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS);
         try {
             CountDownLatch latch = new CountDownLatch(1);
             receiver = new CarrierConfigChangedReceiver(latch);
             receiver.registerOn(context);
             switchSlots(context, slotId);
-            latch.await(WAIT_AFTER_SWITCH_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+            latch.await(waitingTimeMillis, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             Log.e(TAG, "Failed switching to physical slot.", e);
