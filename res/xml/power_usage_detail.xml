@@ -31,7 +31,8 @@
         android:order="-9999"/>
 
     <PreferenceCategory
-        android:title="@string/battery_detail_manage_title">
+        android:title="@string/battery_detail_manage_title"
+        settings:allowDividerAbove="true">
 
         <com.android.settingslib.RestrictedPreference
             android:key="background_activity"
