@@ -21,6 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
@@ -46,8 +47,7 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
     // Tags
     private static final String TAG = "EnableMultiSimSidecar";
 
-    // TODO(b/171846124): Pass timeout value from LPA to Settings
-    private static final long ENABLE_MULTI_SIM_TIMEOUT_MILLS = 40 * 1000L;
+    private static final long DEFAULT_ENABLE_MULTI_SIM_TIMEOUT_MILLS = 40 * 1000L;
 
     public static EnableMultiSimSidecar get(FragmentManager fm) {
         return SidecarFragment.get(fm, TAG, EnableMultiSimSidecar.class, null /* args */);
@@ -77,7 +77,7 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
                             TAG,
                             String.format(
                                     "%d slots are active and %d SIMs are ready. Keep waiting until"
-                                        + " timeout.",
+                                            + " timeout.",
                                     activeSlotsCount, readySimsCount));
                 }
             };
@@ -123,8 +123,12 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
                             mCarrierConfigChangeReceiver,
                             new IntentFilter(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED));
             mTelephonyManager.switchMultiSimConfig(mNumOfActiveSim);
-            if (mSimCardStateChangedLatch.await(
-                    ENABLE_MULTI_SIM_TIMEOUT_MILLS, TimeUnit.MILLISECONDS)) {
+            long waitingTimeMillis =
+                    Settings.Global.getLong(
+                            getContext().getContentResolver(),
+                            Settings.Global.ENABLE_MULTI_SLOT_TIMEOUT_MILLIS,
+                            DEFAULT_ENABLE_MULTI_SIM_TIMEOUT_MILLS);
+            if (mSimCardStateChangedLatch.await(waitingTimeMillis, TimeUnit.MILLISECONDS)) {
                 Log.i(TAG, "Multi SIM were successfully enabled.");
                 return true;
             } else {

@@ -133,6 +133,14 @@
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
     </style>
 
+    <style name="GlifV3Theme.Light.NoActionBar" parent="GlifV3Theme.Light">
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="GlifV3Theme.NoActionBar" parent="GlifV3Theme">
+        <item name="android:windowActionBar">false</item>
+    </style>
+
     <style name="GlifV2Theme.Transparent">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
@@ -216,6 +224,7 @@
     <style name="GlifTheme.DayNight" parent="GlifTheme.Light" />
     <style name="GlifV2Theme.DayNight" parent="GlifV2Theme.Light" />
     <style name="GlifV3Theme.DayNight" parent="GlifV3Theme.Light" />
+    <style name="GlifV3Theme.DayNight.NoActionBar" parent="GlifV3Theme.Light.NoActionBar" />
     <style name="GlifV2Theme.DayNight.Transparent" parent="GlifV2Theme.Light.Transparent" />
     <style name="GlifV3Theme.DayNight.Transparent" parent="GlifV3Theme.Light.Transparent" />
     <style name="SetupWizardTheme.DayNight.Transparent" parent="SetupWizardTheme.Light.Transparent" />

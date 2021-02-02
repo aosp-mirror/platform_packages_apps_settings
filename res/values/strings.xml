@@ -9958,6 +9958,10 @@
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
     <string name="usb_use_photo_transfers">PTP</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for transcoding the files that are transferred via MTP. -->
+    <string name="usb_transcode_files">Transcode exported media</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
@@ -9986,6 +9990,9 @@
     <!-- The title used in USB Preferences which provides the user with the control over this
          device's power role. -->
     <string name="usb_power_title">Power options</string>
+    <!-- The title used in USB Preferences which lets the user control the options for the file
+         transfer mode. -->
+    <string name="usb_file_transfer_title">File transfer options</string>
 
     <!-- Settings item title for USB preference [CHAR LIMIT=35] -->
     <string name="usb_pref">USB</string>
@@ -12129,6 +12136,34 @@
     <string name="post_dsds_reboot_notification_title_with_carrier"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> is active</string>
     <!--  The body text of post DSDS reboot notification. [CHAR LIMIT=NONE] -->
     <string name="post_dsds_reboot_notification_text">Tap to update SIM settings</string>
+    <!-- Title on a push notification indicating that the user's device switched to a new mobile network. [CHAR LIMIT=NONE] -->
+    <string name="switch_to_removable_notification">Switched to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g></string>
+    <!-- Title on a push notification indicating that the user's device switched to a new mobile network. [CHAR LIMIT=NONE] -->
+    <string name="switch_to_removable_notification_no_carrier_name">Switched to another carrier</string>
+    <!-- Message in a push notification indicating that the user's phone has connected to a different mobile network. [CHAR LIMIT=NONE] -->
+    <string name="network_changed_notification_text">Your mobile network has changed</string>
+
+    <!-- Strings for choose SIM activity -->
+    <!--  The title text of choose SIM activity. [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_title">Choose a number to use</string>
+    <!--  The body text of choose SIM activity. [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_text"><xliff:g id="number" example="2">%1$d</xliff:g> numbers are available on this device, but only one can be used at a time</string>
+    <!-- String indicating that we are activating the profile [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_activating">Activating<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
+    <!-- String indicating that we failed to activate the selected profile [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_could_not_activate">Couldn\u2019t be activated right now</string>
+    <!-- String indicating that the number for the specified profile is unknown [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_item_summary_unknown">Unknown number</string>
+
+    <!-- Strings for switch SIM confirmation dialog. -->
+    <!--  The title text of switch SIM confirmation dialog. [CHAR LIMIT=NONE] -->
+    <string name="switch_sim_dialog_title">Use <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
+    <!--  The body text of switch SIM confirmation dialog. [CHAR LIMIT=NONE] -->
+    <string name="switch_sim_dialog_text"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> will be used for mobile data, calls, and SMS.</string>
+    <!--  The title text of skip sim switch dialog. [CHAR LIMIT=NONE] -->
+    <string name="switch_sim_dialog_no_switch_title">No active SIMs available</string>
+    <!--  The body text of skip sim switch dialog. [CHAR LIMIT=NONE] -->
+    <string name="switch_sim_dialog_no_switch_text">To use mobile data, call features, and SMS at a later time, go to your network settings</string>
 
     <!-- Button label of the removable sim card. [CHAR LIMIT=NONE] -->
     <string name="sim_card_label">SIM card</string>
@@ -12323,7 +12358,7 @@
     <string name="backup_calling_settings_title">Backup calling</string>
 
     <!-- Backup calling summary.  [CHAR LIMIT=100] -->
-    <string name="backup_calling_setting_summary">If <xliff:g id="backup_calling_operator_text" example="Google Fi">%1$s</xliff:g> is unavailable, use your mobile data SIM to make and receive <xliff:g id="backup_calling_carrier_text" example="Google Fi">%1$s</xliff:g> calls.</string>
+    <string name="backup_calling_setting_summary">If <xliff:g id="backup_calling_operator_text" example="Google Fi">%1$s</xliff:g> is unavailable or roaming, use your mobile data SIM for <xliff:g id="backup_calling_carrier_text" example="Google Fi">%1$s</xliff:g> calls.</string>
 
     <!-- List of synonyms for the cross SIM calling titles, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_backup_calling">backup calling</string>
@@ -12519,19 +12554,20 @@
     <!-- Provider Model: Summary for calling preference -->
     <string name="calls_sms_wfc_summary">Make and receive calls over Wi\u2011Fi</string>
     <!-- Provider Model: Label for footnote on calling preference -->
-    <string name="calls_sms_footnote">With Wi\u2011Fi calling, calls are made and received over non-carrier Wi\u2011Fi networks.</string>
+    <string name="calls_sms_footnote">With Wi\u2011Fi calling, calls are made and received over non\u2011carrier Wi\u2011Fi networks.
+        <annotation id="url">Learn more</annotation></string>
     <!-- Provider Model: Calls preference title -->
     <string name="calls_preference_title">Calls</string>
     <!-- Provider Model: SMS preference title -->
     <string name="sms_preference_title">SMS</string>
     <!-- Provider Model: Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_preferred">preferred</string>
+    <string name="calls_sms_preferred">Preferred for calls &amp; SMS</string>
     <!-- Provider Model: Calls Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_calls_preferred">calls preferred</string>
+    <string name="calls_sms_calls_preferred">Preferred for calls</string>
     <!-- Provider Model: SMS Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_sms_preferred">SMS preferred</string>
+    <string name="calls_sms_sms_preferred">Preferred for SMS</string>
     <!-- Provider Model: Unavailable status in summary for Calls & SMS -->
-    <string name="calls_sms_unavailable">unavailable</string>
+    <string name="calls_sms_unavailable">Temporarily unavailable</string>
     <!-- Provider Model: No SIM status in summary for Calls & SMS -->
     <string name="calls_sms_no_sim">No SIM</string>
     <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
