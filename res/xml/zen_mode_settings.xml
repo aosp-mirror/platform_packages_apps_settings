@@ -21,12 +21,9 @@
     android:title="@string/zen_mode_settings_title">
 
     <!-- Turn on DND button -->
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.MainSwitchPreference
         android:key="zen_mode_toggle"
-        android:title="@string/zen_mode_settings_title"
-        android:selectable="false"
-        android:layout="@layout/zen_mode_settings_button"
-        settings:allowDividerBelow="true"
+        android:title="@string/do_not_disturb_main_switch_title"
         settings:keywords="@string/keywords_zen_mode_settings"/>
 
     <PreferenceCategory

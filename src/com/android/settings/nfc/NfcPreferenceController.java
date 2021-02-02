@@ -23,24 +23,27 @@ import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.io.IOException;
 
 public class NfcPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnResume, OnPause {
+        implements LifecycleObserver, OnResume, OnPause, OnMainSwitchChangeListener {
 
     public static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private final NfcAdapter mNfcAdapter;
     private NfcEnabler mNfcEnabler;
+    private MainSwitchPreference mPreference;
 
     public NfcPreferenceController(Context context, String key) {
         super(context, key);
@@ -55,10 +58,16 @@ public class NfcPreferenceController extends TogglePreferenceController
             return;
         }
 
-        final SwitchPreference switchPreference = screen.findPreference(getPreferenceKey());
+        mPreference = (MainSwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference.addOnSwitchChangeListener(this);
+        mNfcEnabler = new NfcEnabler(mContext, mPreference);
+    }
 
-        mNfcEnabler = new NfcEnabler(mContext, switchPreference);
-
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (isChecked != mNfcAdapter.isEnabled()) {
+            setChecked(isChecked);
+        }
     }
 
     @Override
@@ -129,12 +138,12 @@ public class NfcPreferenceController extends TogglePreferenceController
      * Listener for background changes to NFC.
      *
      * <p>
-     *     Listen to broadcasts from {@link NfcAdapter}. The worker will call notify changed on the
-     *     NFC Slice only when the following extras are present in the broadcast:
-     *     <ul>
-     *      <li>{@link NfcAdapter#STATE_ON}</li>
-     *      <li>{@link NfcAdapter#STATE_OFF}</li>
-     *     </ul>
+     * Listen to broadcasts from {@link NfcAdapter}. The worker will call notify changed on the
+     * NFC Slice only when the following extras are present in the broadcast:
+     * <ul>
+     * <li>{@link NfcAdapter#STATE_ON}</li>
+     * <li>{@link NfcAdapter#STATE_OFF}</li>
+     * </ul>
      */
     public static class NfcSliceWorker extends SliceBackgroundWorker<Void> {
 
@@ -185,7 +194,7 @@ public class NfcPreferenceController extends TogglePreferenceController
                         NO_EXTRA);
 
                 // Do nothing if state change is empty, or an intermediate step.
-                if ( (nfcStateExtra == NO_EXTRA)
+                if ((nfcStateExtra == NO_EXTRA)
                         || (nfcStateExtra == NfcAdapter.STATE_TURNING_ON)
                         || (nfcStateExtra == NfcAdapter.STATE_TURNING_OFF)) {
                     Log.d(TAG, "Transitional update, dropping broadcast");
