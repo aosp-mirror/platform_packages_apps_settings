@@ -87,6 +87,7 @@ public class ScreenTimeoutSettingsTest {
                 com.android.internal.R.bool.config_adaptive_sleep_available);
 
         doReturn(null).when(mContext).getSystemService(DevicePolicyManager.class);
+        doReturn(mResources).when(mContext).getResources();
 
         doReturn(mResources).when(mSettings).getResources();
         doReturn(mContext).when(mSettings).getContext();
