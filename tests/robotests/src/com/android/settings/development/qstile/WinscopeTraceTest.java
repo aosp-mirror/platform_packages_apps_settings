@@ -24,8 +24,10 @@ import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeT
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.spy;
@@ -72,6 +74,7 @@ public class WinscopeTraceTest {
         // default ImeTraceEnabled value, prevent tests from actually calling into IMM and
         // await the result forever.
         doReturn(false).when(mWinscopeTrace).isImeTraceEnabled();
+        doNothing().when(mWinscopeTrace).setImeTraceEnabled(anyBoolean());
         ReflectionHelpers.setField(mWinscopeTrace, "mWindowManager", mWindowManager);
         ReflectionHelpers.setField(mWinscopeTrace, "mInputMethodManager", mInputMethodManager);
         ReflectionHelpers.setField(mWinscopeTrace, "mSurfaceFlinger", mSurfaceFlinger);
@@ -182,7 +185,7 @@ public class WinscopeTraceTest {
     @Test
     public void setIsEnableTrue_shouldEnableImeTrace() throws RemoteException {
         mWinscopeTrace.setIsEnabled(true);
-        verify(mInputMethodManager).startImeTrace();
+        verify(mWinscopeTrace).setImeTraceEnabled(eq(true));
         verifyNoMoreInteractions(mInputMethodManager);
     }
 
@@ -210,7 +213,7 @@ public class WinscopeTraceTest {
     @Config(shadows = ShadowParcel.class)
     public void setIsEnableFalse_shouldDisableImeTrace() throws RemoteException {
         mWinscopeTrace.setIsEnabled(false);
-        verify(mInputMethodManager).stopImeTrace();
+        verify(mWinscopeTrace).setImeTraceEnabled(eq(false));
         verifyNoMoreInteractions(mInputMethodManager);
         verify(mToast).show();
     }
