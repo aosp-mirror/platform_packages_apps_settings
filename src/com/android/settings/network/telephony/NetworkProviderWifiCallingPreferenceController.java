@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.telephony.CarrierConfigManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;

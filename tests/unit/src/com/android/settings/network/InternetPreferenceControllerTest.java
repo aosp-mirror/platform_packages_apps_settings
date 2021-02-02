@@ -36,6 +36,7 @@ import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.telephony.SubscriptionManager;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
@@ -78,6 +79,7 @@ public class InternetPreferenceControllerTest {
         when(wifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
 
         mController = new InternetPreferenceController(mContext, mock(Lifecycle.class));
+        mController.sIconMap.put(INTERNET_WIFI, 0);
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
@@ -122,5 +124,14 @@ public class InternetPreferenceControllerTest {
         mController.onSummaryChanged(TEST_SUMMARY);
 
         assertThat(mPreference.getSummary()).isEqualTo(TEST_SUMMARY);
+    }
+
+    @Test
+    public void updateCellularSummary_getNullSubscriptionInfo_shouldNotCrash() {
+        final SubscriptionManager subscriptionManager = mock(SubscriptionManager.class);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(subscriptionManager);
+        when(subscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(null);
+
+        mController.updateCellularSummary();
     }
 }
