@@ -177,10 +177,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                     showRebootConfirmDialog();
                     return;
                 }
-                Log.i(
-                        TAG,
-                        "Enabling DSDS without rebooting. "
-                                + getString(R.string.sim_action_enabling_sim_without_carrier_name));
+                Log.i(TAG, "Enabling DSDS without rebooting.");
                 showProgressDialog(
                         getString(R.string.sim_action_enabling_sim_without_carrier_name));
                 mEnableMultiSimSidecar.run(NUM_OF_SIMS_FOR_DSDS);
@@ -272,7 +269,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             case SidecarFragment.State.ERROR:
                 mEnableMultiSimSidecar.reset();
                 Log.i(TAG, "Failed to switch to DSDS without rebooting.");
-                ProgressDialogFragment.dismiss(getFragmentManager());
+                dismissProgressDialog();
                 showErrorDialog(
                         getString(R.string.dsds_activation_failure_title),
                         getString(R.string.dsds_activation_failure_body_msg2));
@@ -290,7 +287,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
         Log.i(TAG, "DSDS enabled, start to enable pSIM profile.");
         handleTogglePsimAction();
-        ProgressDialogFragment.dismiss(getFragmentManager());
+        dismissProgressDialog();
         finish();
     }
 

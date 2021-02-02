@@ -19,6 +19,7 @@ package com.android.settings.sim.receivers;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Looper;
 import android.provider.Settings;
@@ -29,6 +30,13 @@ import android.telephony.UiccSlotInfo;
 import android.util.Log;
 
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.UiccSlotUtil;
+import com.android.settings.network.UiccSlotsException;
+import com.android.settings.sim.ChooseSimActivity;
+import com.android.settings.sim.DsdsDialogActivity;
+import com.android.settings.sim.SimActivationNotifier;
+import com.android.settings.sim.SimNotificationService;
+import com.android.settings.sim.SwitchToEsimConfirmDialogActivity;
 
 import com.google.common.collect.ImmutableList;
 
@@ -121,14 +129,13 @@ public class SimSlotChangeHandler {
             return;
         }
 
-        if (!hasActiveEsimSubscription()) {
-            if (mTelMgr.isMultiSimEnabled()) {
+        if (hasActiveEsimSubscription()) {
+            if (mTelMgr.isMultiSimSupported() == TelephonyManager.MULTISIM_ALLOWED) {
                 Log.i(TAG, "Enabled profile exists. DSDS condition satisfied.");
-                // TODO(b/170508680): Display DSDS dialog to ask users whether to enable DSDS.
+                startDsdsDialogActivity();
             } else {
                 Log.i(TAG, "Enabled profile exists. DSDS condition not satisfied.");
-                // TODO(b/170508680): Display Choose a number to use screen for subscription
-                //  selection.
+                startChooseSimActivity(true);
             }
             return;
         }
@@ -137,7 +144,15 @@ public class SimSlotChangeHandler {
                 TAG,
                 "No enabled eSIM profile. Ready to switch to removable slot and show"
                         + " notification.");
-        // TODO(b/170508680): Switch the slot to the removebale slot and show the notification.
+        try {
+            UiccSlotUtil.switchToRemovableSlot(
+                    UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID, mContext.getApplicationContext());
+        } catch (UiccSlotsException e) {
+            Log.e(TAG, "Failed to switch to removable slot.");
+            return;
+        }
+        SimNotificationService.scheduleSimNotification(
+                mContext, SimActivationNotifier.NotificationType.SWITCH_TO_REMOVABLE_SLOT);
     }
 
     private void handleSimRemove(UiccSlotInfo removableSlotInfo) {
@@ -160,14 +175,14 @@ public class SimSlotChangeHandler {
         // profile.
         if (groupedEmbeddedSubscriptions.size() == 1) {
             Log.i(TAG, "Only 1 eSIM profile found. Ask user's consent to switch.");
-            // TODO(b/170508680): Display a dialog to ask users to switch.
+            startSwitchSlotConfirmDialogActivity(groupedEmbeddedSubscriptions.get(0));
             return;
         }
 
         // If there are more than 1 eSIM profiles installed, we show a screen to let users to choose
         // the number they want to use.
         Log.i(TAG, "Multiple eSIM profiles found. Ask user which subscription to use.");
-        // TODO(b/170508680): Display a dialog to ask user which SIM to switch.
+        startChooseSimActivity(false);
     }
 
     private int getLastRemovableSimSlotState(Context context) {
@@ -223,6 +238,26 @@ public class SimSlotChangeHandler {
                 groupedSubscriptions.stream()
                         .filter(sub -> sub.isEmbedded())
                         .collect(Collectors.toList()));
+    }
+
+    private void startChooseSimActivity(boolean psimInserted) {
+        Intent intent = ChooseSimActivity.getIntent(mContext);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(ChooseSimActivity.KEY_HAS_PSIM, psimInserted);
+        mContext.startActivity(intent);
+    }
+
+    private void startSwitchSlotConfirmDialogActivity(SubscriptionInfo subscriptionInfo) {
+        Intent intent = new Intent(mContext, SwitchToEsimConfirmDialogActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(SwitchToEsimConfirmDialogActivity.KEY_SUB_TO_ENABLE, subscriptionInfo);
+        mContext.startActivity(intent);
+    }
+
+    private void startDsdsDialogActivity() {
+        Intent intent = new Intent(mContext, DsdsDialogActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 
     private SimSlotChangeHandler() {}

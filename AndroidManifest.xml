@@ -3669,6 +3669,26 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".sim.ChooseSimActivity"
+            android:theme="@style/GlifV3Theme.DayNight.NoActionBar"
+            android:launchMode="singleInstance"
+            android:exported="false"/>
+
+        <activity
+            android:name=".sim.SwitchToEsimConfirmDialogActivity"
+            android:exported="false"
+            android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+            android:launchMode="singleInstance"
+            android:theme="@style/Transparent" />
+
+        <activity
+            android:name=".sim.DsdsDialogActivity"
+            android:exported="false"
+            android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+            android:launchMode="singleInstance"
+            android:theme="@style/Transparent" />
+
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 

@@ -35,6 +35,7 @@ public class SimNotificationService extends JobService {
 
     /**
      * Schedules a service to send SIM push notifications.
+     *
      * @param context
      * @param notificationType indicates which SIM notification to send.
      */
@@ -66,6 +67,9 @@ public class SimNotificationService extends JobService {
                 Log.i(TAG, "Sending SIM config notification.");
                 SimActivationNotifier.setShowSimSettingsNotification(this, false);
                 new SimActivationNotifier(this).sendNetworkConfigNotification();
+                break;
+            case SimActivationNotifier.NotificationType.SWITCH_TO_REMOVABLE_SLOT:
+                new SimActivationNotifier(this).sendSwitchedToRemovableSlotNotification();
                 break;
             default:
                 Log.e(TAG, "Invalid notification type: " + notificationType);
