@@ -131,8 +131,9 @@ public class ProviderModelSlice extends WifiSlice {
         }
 
         // Third section:  Add the Wi-Fi items which are not connected.
-        if (wifiList != null) {
-            log("get Wi-Fi items which are not connected");
+        if (wifiList != null && wifiList.size() > 0) {
+            log("get Wi-Fi items which are not connected. Wi-Fi items : " + wifiList.size());
+
             final List<WifiSliceItem> disconnectedWifiList = wifiList.stream()
                     .filter(wifiSliceItem -> wifiSliceItem.getConnectedState()
                             != WifiEntry.CONNECTED_STATE_CONNECTED)
@@ -149,8 +150,8 @@ public class ProviderModelSlice extends WifiSlice {
         // 2) show all_network_unavailable:
         //    - while no wifi item + no carrier
         //    - while no wifi item + no data capability
-        if (worker == null || wifiList == null) {
-            log("wifiList is null");
+        if (worker == null || wifiList == null || wifiList.size() == 0) {
+            log("no wifi item");
             int resId = R.string.non_carrier_network_unavailable;
             if (!hasCarrier || !mHelper.isDataSimActive()) {
                 log("No carrier item or no carrier data.");

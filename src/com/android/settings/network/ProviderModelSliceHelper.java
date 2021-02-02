@@ -175,7 +175,7 @@ public class ProviderModelSliceHelper {
     }
 
     protected boolean isDataSimActive() {
-        return MobileNetworkUtils.activeNetworkIsCellular(mContext);
+        return isNoCarrierData() ? false : MobileNetworkUtils.activeNetworkIsCellular(mContext);
     }
 
     protected boolean isNoCarrierData() {
