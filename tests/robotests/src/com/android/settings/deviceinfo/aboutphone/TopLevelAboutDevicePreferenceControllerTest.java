@@ -27,7 +27,6 @@ import android.util.FeatureFlagUtils;
 
 import com.android.settings.core.FeatureFlags;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,13 +43,7 @@ public class TopLevelAboutDevicePreferenceControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mController = new TopLevelAboutDevicePreferenceController(mContext, "test_key");
-    }
-
-    @After
-    public void teardown() {
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
-        }
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test

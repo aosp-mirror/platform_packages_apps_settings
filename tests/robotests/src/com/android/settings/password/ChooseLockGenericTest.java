@@ -45,6 +45,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Global;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
@@ -53,6 +54,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
@@ -68,6 +70,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowPersistentDataBlockManager;
@@ -90,6 +93,7 @@ public class ChooseLockGenericTest {
     public void setUp() {
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         mFragment = new ChooseLockGenericFragment();
+        FeatureFlagUtils.setEnabled(RuntimeEnvironment.application, FeatureFlags.SILKY_HOME, false);
     }
 
     @After
