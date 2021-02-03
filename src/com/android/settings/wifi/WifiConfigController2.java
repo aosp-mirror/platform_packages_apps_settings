@@ -67,6 +67,7 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.net.module.util.ProxyUtils;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
@@ -1412,7 +1413,8 @@ public class WifiConfigController2 implements TextWatcher,
                 if (proxyProperties != null) {
                     mProxyHostView.setText(proxyProperties.getHost());
                     mProxyPortView.setText(Integer.toString(proxyProperties.getPort()));
-                    mProxyExclusionListView.setText(proxyProperties.getExclusionListAsString());
+                    mProxyExclusionListView.setText(
+                            ProxyUtils.exclusionListAsString(proxyProperties.getExclusionList()));
                 }
             }
         } else if (mProxySettingsSpinner.getSelectedItemPosition() == PROXY_PAC) {
