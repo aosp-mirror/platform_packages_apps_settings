@@ -12138,6 +12138,34 @@
     <string name="post_dsds_reboot_notification_title_with_carrier"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> is active</string>
     <!--  The body text of post DSDS reboot notification. [CHAR LIMIT=NONE] -->
     <string name="post_dsds_reboot_notification_text">Tap to update SIM settings</string>
+    <!-- Title on a push notification indicating that the user's device switched to a new mobile network. [CHAR LIMIT=NONE] -->
+    <string name="switch_to_removable_notification">Switched to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g></string>
+    <!-- Title on a push notification indicating that the user's device switched to a new mobile network. [CHAR LIMIT=NONE] -->
+    <string name="switch_to_removable_notification_no_carrier_name">Switched to another carrier</string>
+    <!-- Message in a push notification indicating that the user's phone has connected to a different mobile network. [CHAR LIMIT=NONE] -->
+    <string name="network_changed_notification_text">Your mobile network has changed</string>
+
+    <!-- Strings for choose SIM activity -->
+    <!--  The title text of choose SIM activity. [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_title">Choose a number to use</string>
+    <!--  The body text of choose SIM activity. [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_text"><xliff:g id="number" example="2">%1$d</xliff:g> numbers are available on this device, but only one can be used at a time</string>
+    <!-- String indicating that we are activating the profile [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_activating">Activating<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
+    <!-- String indicating that we failed to activate the selected profile [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_could_not_activate">Couldn\u2019t be activated right now</string>
+    <!-- String indicating that the number for the specified profile is unknown [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_item_summary_unknown">Unknown number</string>
+
+    <!-- Strings for switch SIM confirmation dialog. -->
+    <!--  The title text of switch SIM confirmation dialog. [CHAR LIMIT=NONE] -->
+    <string name="switch_sim_dialog_title">Use <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
+    <!--  The body text of switch SIM confirmation dialog. [CHAR LIMIT=NONE] -->
+    <string name="switch_sim_dialog_text"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> will be used for mobile data, calls, and SMS.</string>
+    <!--  The title text of skip sim switch dialog. [CHAR LIMIT=NONE] -->
+    <string name="switch_sim_dialog_no_switch_title">No active SIMs available</string>
+    <!--  The body text of skip sim switch dialog. [CHAR LIMIT=NONE] -->
+    <string name="switch_sim_dialog_no_switch_text">To use mobile data, call features, and SMS at a later time, go to your network settings</string>
 
     <!-- Button label of the removable sim card. [CHAR LIMIT=NONE] -->
     <string name="sim_card_label">SIM card</string>
@@ -12644,6 +12672,18 @@
     <string name="graphics_driver_main_switch_title" translatable="false">Use graphics driver preferences</string>
     <!-- Do not translate. Title for battery saver main switch preferences. [CHAR LIMIT=50] -->
     <string name="battery_saver_main_switch_title" translatable="false">Use battery saver</string>
+    <!-- Do not translate. Title for Do Not Disturb main switch preferences. [CHAR LIMIT=50] -->
+    <string name="do_not_disturb_main_switch_title" translatable="false">Use Do Not Disturb</string>
+    <!-- Do not translate. Title for Dark theme main switch preferences. [CHAR LIMIT=50] -->
+    <string name="dark_theme_main_switch_title" translatable="false">Use Dark Theme</string>
+    <!-- Do not translate. Title for Night Light main switch preferences. [CHAR LIMIT=50] -->
+    <string name="night_light_main_switch_title" translatable="false">Use Night Light</string>
+    <!-- Do not translate. Title for NFC main switch preferences. [CHAR LIMIT=50] -->
+    <string name="nfc_main_switch_title" translatable="false">Use NFC</string>
+    <!-- Do not translate. Title for Adaptive Battery main switch preferences. [CHAR LIMIT=50] -->
+    <string name="adaptive_battery_main_switch_title" translatable="false">Use adaptive battery</string>
+    <!-- Do not translate. Title for adaptive brightness main switch preferences. [CHAR LIMIT=50] -->
+    <string name="adaptive_brightness_main_switch_title" translatable="false">Use adaptive brightness</string>
 
     <!-- Default preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="default_see_all_apps_title">See all apps</string>

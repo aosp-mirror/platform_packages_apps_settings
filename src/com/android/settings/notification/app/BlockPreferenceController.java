@@ -72,16 +72,16 @@ public class BlockPreferenceController extends NotificationPreferenceController
             bar.setDisabledByAdmin(mAdmin);
 
             if (mChannel != null && !isChannelBlockable()) {
-                bar.setEnabled(false);
+                bar.setSwitchBarEnabled(false);
             }
 
             if (mChannelGroup != null && !isChannelGroupBlockable()) {
-                bar.setEnabled(false);
+                bar.setSwitchBarEnabled(false);
             }
 
             if (mChannel == null && mAppRow.systemApp
                     && (!mAppRow.banned || mAppRow.lockedImportance)) {
-                bar.setEnabled(false);
+                bar.setSwitchBarEnabled(false);
             }
 
             if (mChannel != null) {

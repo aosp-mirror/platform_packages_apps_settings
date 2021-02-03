@@ -26,11 +26,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.os.Build;
+import android.util.FeatureFlagUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
 
@@ -41,6 +43,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
@@ -51,6 +54,7 @@ public class SettingsHomepageActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FeatureFlagUtils.setEnabled(RuntimeEnvironment.application, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test

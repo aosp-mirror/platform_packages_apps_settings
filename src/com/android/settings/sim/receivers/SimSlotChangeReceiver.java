@@ -48,14 +48,15 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
             return;
         }
 
+        final PendingResult pendingResult = goAsync();
         ThreadUtils.postOnBackgroundThread(
                 () -> {
                     synchronized (mLock) {
-                        if (!shouldHandleSlotChange(context)) {
-                            return;
+                        if (shouldHandleSlotChange(context)) {
+                            mSlotChangeHandler.onSlotsStatusChange(context.getApplicationContext());
                         }
-                        mSlotChangeHandler.onSlotsStatusChange(context);
                     }
+                    ThreadUtils.postOnMainThread(pendingResult::finish);
                 });
     }
 
