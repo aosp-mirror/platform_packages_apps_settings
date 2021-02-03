@@ -28,10 +28,12 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -65,6 +67,7 @@ public class GesturesSettingsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
         mController = new GesturesSettingPreferenceController(mActivity);
+        FeatureFlagUtils.setEnabled(RuntimeEnvironment.application, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test

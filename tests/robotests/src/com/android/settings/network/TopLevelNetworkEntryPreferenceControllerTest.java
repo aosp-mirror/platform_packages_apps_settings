@@ -74,15 +74,12 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
                 mMobileNetworkPreferenceController);
         ReflectionHelpers.setField(mController, "mTetherPreferenceController",
                 mTetherPreferenceController);
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @After
     public void tearDown() {
         ShadowUtils.reset();
-
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
-        }
     }
 
     @Test
