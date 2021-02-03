@@ -158,7 +158,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
             screen.addPreference(pref);
         }
 
-        if (isScreenAttentionAvailable()) {
+        if (isScreenAttentionAvailable(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);
             mAdaptiveSleepController.addToScreen(screen);
             screen.addPreference(mPrivacyPreference);
@@ -199,11 +199,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         return R.string.help_url_adaptive_sleep;
     }
 
-    private boolean isScreenAttentionAvailable() {
-        return getResources().getBoolean(
-                com.android.internal.R.bool.config_adaptive_sleep_available);
-    }
-
     private Long getMaxScreenTimeout(Context context) {
         if (context == null) {
             return Long.MAX_VALUE;
@@ -239,6 +234,11 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         }
     }
 
+    private static boolean isScreenAttentionAvailable(Context context) {
+        return context.getResources().getBoolean(
+                com.android.internal.R.bool.config_adaptive_sleep_available);
+    }
+
     private static class TimeoutCandidateInfo extends CandidateInfo {
         private final CharSequence mLabel;
         private final String mKey;
@@ -269,11 +269,13 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
             new BaseSearchIndexProvider(R.xml.screen_timeout_settings) {
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
+                    if (!isScreenAttentionAvailable(context)) {
+                        return null;
+                    }
                     final Resources res = context.getResources();
                     final SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = res.getString(R.string.adaptive_sleep_title);
                     data.key = AdaptiveSleepPreferenceController.PREFERENCE_KEY;
-                    data.screenTitle = res.getString(R.string.screen_timeout_title);
                     data.keywords = res.getString(R.string.adaptive_sleep_title);
 
                     final List<SearchIndexableRaw> result = new ArrayList<>(1);

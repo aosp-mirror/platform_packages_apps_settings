@@ -265,6 +265,7 @@ public abstract class DevelopmentTiles extends TileService {
         @VisibleForTesting
         boolean isImeTraceEnabled() {
             try {
+                // TODO(b/175742251): Get rid of dependency on IInputMethodManager
                 final Completable.Boolean value = Completable.createBoolean();
                 mInputMethodManager.isImeTraceEnabled(ResultCallbacks.of(value));
                 return Completable.getResult(value);
@@ -327,13 +328,16 @@ public abstract class DevelopmentTiles extends TileService {
             }
         }
 
-        private void setImeTraceEnabled(boolean isEnabled) {
+        protected void setImeTraceEnabled(boolean isEnabled) {
             try {
+                // TODO(b/175742251): Get rid of dependency on IInputMethodManager
+                final Completable.Void value = Completable.createVoid();
                 if (isEnabled) {
-                    mInputMethodManager.startImeTrace();
+                    mInputMethodManager.startImeTrace(ResultCallbacks.of(value));
                 } else {
-                    mInputMethodManager.stopImeTrace();
+                    mInputMethodManager.stopImeTrace(ResultCallbacks.of(value));
                 }
+                Completable.getResult(value);
             } catch (RemoteException e) {
                 Log.e(TAG, "Could not set ime trace status." + e.toString());
             }
