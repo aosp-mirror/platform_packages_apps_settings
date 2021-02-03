@@ -21,8 +21,10 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
@@ -47,6 +49,7 @@ public class ResetPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new ResetPreferenceController(mContext, KEY_RESET_DASHBOARD);
         mShadowUserManager = ShadowUserManager.getShadow();
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test

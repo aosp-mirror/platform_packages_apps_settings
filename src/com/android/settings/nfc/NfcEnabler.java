@@ -21,16 +21,17 @@ import android.nfc.NfcAdapter;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
+
+import com.android.settingslib.widget.MainSwitchPreference;
 
 /**
  * NfcEnabler is a helper to manage the Nfc on/off checkbox preference. It turns on/off Nfc
  * and ensures the summary of the preference reflects the current state.
  */
 public class NfcEnabler extends BaseNfcEnabler {
-    private final SwitchPreference mPreference;
+    private final MainSwitchPreference mPreference;
 
-    public NfcEnabler(Context context, SwitchPreference preference) {
+    public NfcEnabler(Context context, MainSwitchPreference preference) {
         super(context);
         mPreference = preference;
     }
@@ -39,19 +40,19 @@ public class NfcEnabler extends BaseNfcEnabler {
     protected void handleNfcStateChanged(int newState) {
         switch (newState) {
             case NfcAdapter.STATE_OFF:
-                mPreference.setChecked(false);
+                mPreference.updateStatus(false);
                 mPreference.setEnabled(isToggleable());
                 break;
             case NfcAdapter.STATE_ON:
-                mPreference.setChecked(true);
+                mPreference.updateStatus(true);
                 mPreference.setEnabled(true);
                 break;
             case NfcAdapter.STATE_TURNING_ON:
-                mPreference.setChecked(true);
+                mPreference.updateStatus(true);
                 mPreference.setEnabled(false);
                 break;
             case NfcAdapter.STATE_TURNING_OFF:
-                mPreference.setChecked(false);
+                mPreference.updateStatus(false);
                 mPreference.setEnabled(false);
                 break;
         }
