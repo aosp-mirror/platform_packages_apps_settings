@@ -43,6 +43,7 @@ import android.widget.ImageView;
 
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,6 +62,7 @@ import org.robolectric.shadows.ShadowContentResolver;
 import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUserManager.class)
 public class AvatarViewMixinTest {
     private static final String FAKE_ACCOUNT = "test@domain.com";
     private static final String FAKE_DOMAIN = "domain.com";

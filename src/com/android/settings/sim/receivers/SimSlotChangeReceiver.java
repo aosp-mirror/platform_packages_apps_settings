@@ -52,10 +52,9 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
         ThreadUtils.postOnBackgroundThread(
                 () -> {
                     synchronized (mLock) {
-                        if (!shouldHandleSlotChange(context)) {
-                            return;
+                        if (shouldHandleSlotChange(context)) {
+                            mSlotChangeHandler.onSlotsStatusChange(context.getApplicationContext());
                         }
-                        mSlotChangeHandler.onSlotsStatusChange(context.getApplicationContext());
                     }
                     ThreadUtils.postOnMainThread(pendingResult::finish);
                 });
