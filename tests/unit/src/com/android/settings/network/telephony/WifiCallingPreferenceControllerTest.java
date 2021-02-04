@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ package com.android.settings.network.telephony;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertNull;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -35,11 +33,16 @@ import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.annotation.UiThreadTest;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.ims.MockWifiCallingQueryImsState;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -47,62 +50,57 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class WifiCallingPreferenceControllerTest {
     private static final int SUB_ID = 2;
-
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
     private ImsMmTelManager mImsMmTelManager;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
+
+    private PreferenceScreen mScreen;
+    private PreferenceManager mPreferenceManager;
 
     private MockWifiCallingQueryImsState mQueryImsState;
 
-    private WifiCallingPreferenceController mController;
+    private TestWifiCallingPreferenceController mController;
     private Preference mPreference;
     private Context mContext;
     private PersistableBundle mCarrierConfig;
 
     @Before
+    @UiThreadTest
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
 
         mQueryImsState = new MockWifiCallingQueryImsState(mContext, SUB_ID);
         mQueryImsState.setIsEnabledByUser(true);
         mQueryImsState.setIsProvisionedOnDevice(true);
 
-        mPreference = new Preference(mContext);
-        mController = spy(new WifiCallingPreferenceController(mContext, "wifi_calling") {
-            @Override
-            protected ImsMmTelManager getImsMmTelManager(int subId) {
-                return mImsMmTelManager;
-            }
-        });
+        mController = new TestWifiCallingPreferenceController(mContext, "wifi_calling");
         mController.mCarrierConfigManager = mCarrierConfigManager;
         mController.init(SUB_ID);
         mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
-        doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
-        mPreference.setKey(mController.getPreferenceKey());
-
-        when(mController.getTelephonyManager(mContext, SUB_ID)).thenReturn(mTelephonyManager);
-
         mCarrierConfig = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        mPreferenceManager = new PreferenceManager(mContext);
+        mScreen = mPreferenceManager.createPreferenceScreen(mContext);
+        mPreference = new Preference(mContext);
+        mPreference.setKey(mController.getPreferenceKey());
+        mScreen.addPreference(mPreference);
     }
 
     @Test
+    @UiThreadTest
     public void updateState_noSimCallManager_setCorrectSummary() {
         mController.mSimCallManager = null;
         mQueryImsState.setIsEnabledByUser(true);
@@ -118,6 +116,7 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void updateState_notCallIdle_disable() {
         mController.mCallState = TelephonyManager.CALL_STATE_RINGING;
 
@@ -127,6 +126,7 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void updateState_invalidPhoneAccountHandle_shouldNotCrash() {
         mController.mSimCallManager = new PhoneAccountHandle(null /* invalid */, "");
 
@@ -135,6 +135,7 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void updateState_wfcNonRoamingByConfig() {
         assertNull(mController.mSimCallManager);
         mCarrierConfig.putBoolean(
@@ -154,6 +155,7 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void updateState_wfcRoamingByConfig() {
         assertNull(mController.mSimCallManager);
         // useWfcHomeModeForRoaming is false by default. In order to check wfc in roaming mode. We
@@ -171,12 +173,15 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void displayPreference_notAvailable_setPreferenceInvisible() {
         mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(null);
 
-        mController.displayPreference(mPreferenceScreen);
+        mController.displayPreference(mScreen);
 
-        assertThat(mPreferenceScreen.isVisible()).isFalse();
+        assertThat(mController.getPreferenceKey()).isEqualTo("wifi_calling");
+        assertThat(mScreen.findPreference(mController.getPreferenceKey()).isVisible()).isFalse();
     }
 
     @Test
@@ -184,16 +189,39 @@ public class WifiCallingPreferenceControllerTest {
     public void displayPreference_available_setsSubscriptionIdOnIntent() {
         final Intent intent = new Intent();
         mPreference.setIntent(intent);
-        mController.displayPreference(mPreferenceScreen);
+        mController.displayPreference(mScreen);
         assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(SUB_ID);
     }
 
     @Test
+    @UiThreadTest
     public void getAvailabilityStatus_noWiFiCalling_shouldReturnUnsupported() {
         mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(null);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    private class TestWifiCallingPreferenceController extends WifiCallingPreferenceController {
+        TestWifiCallingPreferenceController(Context context, String preferenceKey) {
+            super(context, preferenceKey);
+        }
+
+        @Override
+        protected ImsMmTelManager getImsMmTelManager(int subId) {
+            return mImsMmTelManager;
+        }
+
+        @Override
+        protected TelephonyManager getTelephonyManager(Context context, int subId) {
+            return mTelephonyManager;
+        }
+
+        @Override
+        protected WifiCallingQueryImsState queryImsState(int subId) {
+            return mQueryImsState;
+        }
     }
 }
