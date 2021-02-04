@@ -88,7 +88,7 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mTelephonyManager.setMobileDataPolicyEnabledStatus(
+        mTelephonyManager.setMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED, isChecked);
         return isChecked == mTelephonyManager.isMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED);
