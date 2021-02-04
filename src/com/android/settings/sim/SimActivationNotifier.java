@@ -26,8 +26,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -40,6 +42,8 @@ import com.android.settings.network.SubscriptionUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import javax.annotation.Nullable;
+
 /**
  * This class manages the notification of SIM activation notification including creating and
  * canceling the notifications.
@@ -48,21 +52,26 @@ public class SimActivationNotifier {
 
     private static final String TAG = "SimActivationNotifier";
     private static final String SIM_SETUP_CHANNEL_ID = "sim_setup";
+    private static final String SWITCH_SLOT_CHANNEL_ID = "carrier_switching";
     private static final String SIM_PREFS = "sim_prefs";
     private static final String KEY_SHOW_SIM_SETTINGS_NOTIFICATION =
             "show_sim_settings_notification";
 
     public static final int SIM_ACTIVATION_NOTIFICATION_ID = 1;
+    public static final int SWITCH_TO_REMOVABLE_SLOT_NOTIFICATION_ID = 2;
 
     /** Notification types */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef(
             value = {
                 NotificationType.NETWORK_CONFIG,
+                NotificationType.SWITCH_TO_REMOVABLE_SLOT,
             })
     public @interface NotificationType {
         // The notification to remind users to config network Settings.
         int NETWORK_CONFIG = 1;
+        // The notification to notify users that the device is switched to the removable slot.
+        int SWITCH_TO_REMOVABLE_SLOT = 2;
     }
 
     private final Context mContext;
@@ -104,13 +113,7 @@ public class SimActivationNotifier {
 
     /** Sends a push notification for the SIM activation. It should be called after DSDS reboot. */
     public void sendNetworkConfigNotification() {
-        SubscriptionManager subscriptionManager =
-                mContext.getSystemService(SubscriptionManager.class);
-        SubscriptionInfo activeRemovableSub =
-                SubscriptionUtil.getActiveSubscriptions(subscriptionManager).stream()
-                        .filter(sub -> !sub.isEmbedded())
-                        .findFirst()
-                        .orElse(null);
+        SubscriptionInfo activeRemovableSub = getActiveRemovableSub();
 
         if (activeRemovableSub == null) {
             Log.e(TAG, "No removable subscriptions found. Do not show notification.");
@@ -142,5 +145,66 @@ public class SimActivationNotifier {
                         .setSmallIcon(R.drawable.ic_sim_alert)
                         .setAutoCancel(true);
         mNotificationManager.notify(SIM_ACTIVATION_NOTIFICATION_ID, builder.build());
+    }
+
+    /** Sends a push notification for switching to the removable slot. */
+    public void sendSwitchedToRemovableSlotNotification() {
+        String carrierName = getActiveCarrierName();
+        Intent clickIntent = new Intent(mContext, Settings.MobileNetworkListActivity.class);
+        TaskStackBuilder stackBuilder =
+                TaskStackBuilder.create(mContext).addNextIntent(clickIntent);
+        PendingIntent contentIntent =
+                stackBuilder.getPendingIntent(
+                        0 /* requestCode */, PendingIntent.FLAG_UPDATE_CURRENT);
+        String titleText =
+                TextUtils.isEmpty(carrierName)
+                        ? mContext.getString(
+                                R.string.switch_to_removable_notification_no_carrier_name)
+                        : mContext.getString(
+                                R.string.switch_to_removable_notification, carrierName);
+        Notification.Builder builder =
+                new Notification.Builder(mContext, SWITCH_SLOT_CHANNEL_ID)
+                        .setContentTitle(titleText)
+                        .setContentText(
+                                mContext.getString(R.string.network_changed_notification_text))
+                        .setContentIntent(contentIntent)
+                        .setSmallIcon(R.drawable.ic_sim_alert)
+                        .setColor(
+                                mContext.getResources()
+                                        .getColor(
+                                                R.color.homepage_generic_icon_background,
+                                                null /* theme */))
+                        .setAutoCancel(true);
+        mNotificationManager.notify(SWITCH_TO_REMOVABLE_SLOT_NOTIFICATION_ID, builder.build());
+    }
+
+    @Nullable
+    private SubscriptionInfo getActiveRemovableSub() {
+        SubscriptionManager subscriptionManager =
+                mContext.getSystemService(SubscriptionManager.class);
+        return SubscriptionUtil.getActiveSubscriptions(subscriptionManager).stream()
+                .filter(sub -> !sub.isEmbedded())
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Nullable
+    private String getActiveCarrierName() {
+        CarrierConfigManager configManager = mContext.getSystemService(CarrierConfigManager.class);
+        TelephonyManager telManager = mContext.getSystemService(TelephonyManager.class);
+        String telName = telManager.getSimOperatorName();
+        if (configManager != null && configManager.getConfig() != null) {
+            boolean override =
+                    configManager
+                            .getConfig()
+                            .getBoolean(CarrierConfigManager.KEY_CARRIER_NAME_OVERRIDE_BOOL);
+            String configName =
+                    configManager
+                            .getConfig()
+                            .getString(CarrierConfigManager.KEY_CARRIER_NAME_STRING);
+
+            return override || TextUtils.isEmpty(telName) ? configName : telName;
+        }
+        return telName;
     }
 }

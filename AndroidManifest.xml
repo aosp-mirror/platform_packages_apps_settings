@@ -517,12 +517,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Transparent" />
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Transparent" />
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -3668,6 +3668,26 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".sim.ChooseSimActivity"
+            android:theme="@style/GlifV3Theme.DayNight.NoActionBar"
+            android:launchMode="singleInstance"
+            android:exported="false"/>
+
+        <activity
+            android:name=".sim.SwitchToEsimConfirmDialogActivity"
+            android:exported="false"
+            android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+            android:launchMode="singleInstance"
+            android:theme="@style/Transparent" />
+
+        <activity
+            android:name=".sim.DsdsDialogActivity"
+            android:exported="false"
+            android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+            android:launchMode="singleInstance"
+            android:theme="@style/Transparent" />
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />

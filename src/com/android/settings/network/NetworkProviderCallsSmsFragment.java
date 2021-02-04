@@ -27,6 +27,7 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.telephony.CallsDefaultSubscriptionController;
 import com.android.settings.network.telephony.NetworkProviderBackupCallingPreferenceController;
+import com.android.settings.network.telephony.NetworkProviderWfcFooterPreferenceController;
 import com.android.settings.network.telephony.NetworkProviderWifiCallingPreferenceController;
 import com.android.settings.network.telephony.SmsDefaultSubscriptionController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -45,6 +46,9 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
     @VisibleForTesting
     static final String KEY_PREFERENCE_CATEGORY_BACKUP_CALLING =
             "provider_model_backup_calling_category";
+    static final String KEY_PREFERENCE_CATEGORY_WFC_FOOTER =
+            "provider_model_calls_sms_footer";
+
     @VisibleForTesting
     static final String KEY_PREFERENCE_CALLS= "provider_model_calls_preference";
     @VisibleForTesting
@@ -69,6 +73,12 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
                         KEY_PREFERENCE_CATEGORY_BACKUP_CALLING);
         backupCallingPrefCtrl.init(getSettingsLifecycle());
         controllers.add(backupCallingPrefCtrl);
+
+        NetworkProviderWfcFooterPreferenceController wfcFooterPreferenceController =
+                new NetworkProviderWfcFooterPreferenceController(context,
+                        KEY_PREFERENCE_CATEGORY_WFC_FOOTER);
+        wfcFooterPreferenceController.init(getSettingsLifecycle());
+        controllers.add(wfcFooterPreferenceController);
 
         return controllers;
     }
