@@ -16,8 +16,6 @@
 
 package com.android.settings.network;
 
-import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +23,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -387,35 +386,34 @@ public class ProviderModelSliceTest {
     }
 
     @Test
-    public void onNotifyChange_intentToggleActionOn_shouldSetCarrierNetworkEnabledTrue() {
-        when(mMockProviderModelSlice.defaultSubscriptionIsUsable(anyInt())).thenReturn(true);
-        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
-        intent.putExtra(EXTRA_TOGGLE_STATE, true);
-
-        mMockProviderModelSlice.onNotifyChange(intent);
+    public void doCarrierNetworkAction_toggleActionSetDataEnabled_setCarrierNetworkEnabledTrue() {
+        mMockProviderModelSlice.doCarrierNetworkAction(true /* isToggleAction */,
+                true /* isDataEnabled */);
 
         verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(true);
     }
 
     @Test
-    public void onNotifyChange_intentToggleActionOff_shouldSetCarrierNetworkEnabledFalse() {
-        when(mMockProviderModelSlice.defaultSubscriptionIsUsable(anyInt())).thenReturn(true);
-        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
-        intent.putExtra(EXTRA_TOGGLE_STATE, false);
-
-        mMockProviderModelSlice.onNotifyChange(intent);
+    public void doCarrierNetworkAction_toggleActionSetDataDisabled_setCarrierNetworkEnabledFalse() {
+        mMockProviderModelSlice.doCarrierNetworkAction(true /* isToggleAction */,
+                false /* isDataEnabled */);
 
         verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(false);
     }
 
     @Test
-    public void onNotifyChange_intentPrimaryAction_shouldConnectCarrierNetwork() {
-        when(mMockProviderModelSlice.defaultSubscriptionIsUsable(anyInt())).thenReturn(true);
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
-
-        mMockProviderModelSlice.onNotifyChange(intent);
+    public void doCarrierNetworkAction_primaryActionAndDataEnabled_connectCarrierNetwork() {
+        mMockProviderModelSlice.doCarrierNetworkAction(false /* isToggleAction */,
+                true /* isDataEnabled */);
 
         verify(mMockNetworkProviderWorker).connectCarrierNetwork();
+    }
+
+    @Test
+    public void doCarrierNetworkAction_primaryActionAndDataDisabled_notConnectCarrierNetwork() {
+        mMockProviderModelSlice.doCarrierNetworkAction(false /* isToggleAction */,
+                false /* isDataEnabled */);
+
+        verify(mMockNetworkProviderWorker, never()).connectCarrierNetwork();
     }
 }
