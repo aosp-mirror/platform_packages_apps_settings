@@ -41,6 +41,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.android.net.module.util.ProxyUtils;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 import com.android.settings.core.InstrumentedFragment;
 
@@ -151,7 +152,7 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
         if (proxy != null) {
             hostname = proxy.getHost();
             port = proxy.getPort();
-            exclList = proxy.getExclusionListAsString();
+            exclList = ProxyUtils.exclusionListAsString(proxy.getExclusionList());
         }
 
         if (hostname == null) {
