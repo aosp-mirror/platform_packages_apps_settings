@@ -54,7 +54,7 @@ import java.util.Arrays;
 @RunWith(AndroidJUnit4.class)
 public class DefaultSubscriptionControllerTest {
     @Mock
-    private SubscriptionManager mManager;
+    private SubscriptionManager mSubMgr;
     @Mock
     private TelecomManager mTelecomManager;
 
@@ -68,7 +68,7 @@ public class DefaultSubscriptionControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
-        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mManager);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubMgr);
         when(mContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
 
         final String key = "prefkey";
@@ -123,6 +123,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(sub1, sub2));
         mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
@@ -152,6 +153,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(sub1, sub2));
         mController.setDefaultSubscription(sub2.getSubscriptionId());
 
         mController.displayPreference(mScreen);
@@ -186,6 +188,8 @@ public class DefaultSubscriptionControllerTest {
         when(sub2.isOpportunistic()).thenReturn(true);
 
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2, sub3));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(sub1, sub2, sub3));
         mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
@@ -240,6 +244,7 @@ public class DefaultSubscriptionControllerTest {
 
         // Start with only one sub active, so the pref is not available
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(sub1));
         mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
@@ -261,6 +266,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(sub1, sub2));
         mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
@@ -296,6 +302,7 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(sub1));
         mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
@@ -303,6 +310,7 @@ public class DefaultSubscriptionControllerTest {
         assertThat(mListPreference.isVisible()).isFalse();
 
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(sub1, sub2));
         mController.onSubscriptionsChanged();
 
         assertThat(mController.isAvailable()).isTrue();
@@ -315,12 +323,15 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         final SubscriptionInfo sub3 = createMockSub(333, "sub3");
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(sub1, sub2));
         mController.setDefaultSubscription(sub1.getSubscriptionId());
 
         mController.displayPreference(mScreen);
         assertThat(mListPreference.getEntries().length).isEqualTo(3);
 
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2, sub3));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(sub1, sub2, sub3));
         mController.onSubscriptionsChanged();
 
         assertThat(mController.isAvailable()).isTrue();
