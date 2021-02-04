@@ -32,9 +32,10 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
-import android.widget.TextView;
+import android.text.TextUtils;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceFragmentCompat;
@@ -47,7 +48,7 @@ import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.UsageProgressBarPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -57,9 +58,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowPowerManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowUtils.class})
@@ -67,6 +66,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
     private static final String PREF_KEY = "battery_header";
     private static final int BATTERY_LEVEL = 60;
+    private static final int BATTERY_MAX_LEVEL = 100;
     private static final String TIME_LEFT = "2h30min";
     private static final String BATTERY_STATUS = "Charging";
 
@@ -80,13 +80,11 @@ public class BatteryHeaderPreferenceControllerTest {
     private BatteryInfo mBatteryInfo;
     @Mock
     private EntityHeaderController mEntityHeaderController;
+    @Mock
+    private UsageProgressBarPreference mBatteryUsageProgressBarPref;
     private BatteryHeaderPreferenceController mController;
     private Context mContext;
     private PowerManager mPowerManager;
-    private BatteryMeterView mBatteryMeterView;
-    private TextView mBatteryPercentText;
-    private TextView mSummary;
-    private LayoutPreference mBatteryLayoutPref;
     private Intent mBatteryIntent;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -98,9 +96,6 @@ public class BatteryHeaderPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(RuntimeEnvironment.application);
-        mBatteryMeterView = new BatteryMeterView(mContext);
-        mBatteryPercentText = new TextView(mContext);
-        mSummary = new TextView(mContext);
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
 
         mBatteryIntent = new Intent();
@@ -109,8 +104,7 @@ public class BatteryHeaderPreferenceControllerTest {
         mBatteryIntent.putExtra(BatteryManager.EXTRA_PLUGGED, 1);
         doReturn(mBatteryIntent).when(mContext).registerReceiver(any(), any());
 
-        mBatteryLayoutPref = new LayoutPreference(mContext, R.layout.battery_header);
-        doReturn(mBatteryLayoutPref).when(mPreferenceScreen)
+        doReturn(mBatteryUsageProgressBarPref).when(mPreferenceScreen)
             .findPreference(BatteryHeaderPreferenceController.KEY_BATTERY_HEADER);
 
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
@@ -122,9 +116,7 @@ public class BatteryHeaderPreferenceControllerTest {
         mController.setActivity(mActivity);
         mController.setFragment(mPreferenceFragment);
         mController.setLifecycle(mLifecycle);
-        mController.mBatteryMeterView = mBatteryMeterView;
-        mController.mBatteryPercentText = mBatteryPercentText;
-        mController.mSummary1 = mSummary;
+        mController.mBatteryUsageProgressBarPref = mBatteryUsageProgressBarPref;
     }
 
     @After
@@ -137,11 +129,8 @@ public class BatteryHeaderPreferenceControllerTest {
     public void displayPreference_displayBatteryLevel() {
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(((BatteryMeterView) mBatteryLayoutPref.findViewById(
-                R.id.battery_header_icon)).getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
-        assertThat(((TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent))
-                .getText().toString())
-                .isEqualTo("60 %");
+        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
+        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
     }
 
     @Test
@@ -150,7 +139,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        assertThat(mSummary.getText()).isEqualTo(mBatteryInfo.remainingLabel);
+        verify(mBatteryUsageProgressBarPref).setTotalSummary(mBatteryInfo.remainingLabel);
     }
 
     @Test
@@ -161,8 +150,9 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        assertThat(mBatteryMeterView.mDrawable.getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
-        assertThat(mBatteryMeterView.mDrawable.getCharging()).isEqualTo(false);
+        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
+        verify(mBatteryUsageProgressBarPref).setTotalSummary(mBatteryInfo.remainingLabel);
+        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
     }
 
     @Test
@@ -172,7 +162,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        assertThat(mSummary.getText()).isEqualTo(BATTERY_STATUS);
+        verify(mBatteryUsageProgressBarPref).setTotalSummary(BATTERY_STATUS);
     }
 
     @Test
@@ -181,7 +171,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        assertThat(mSummary.getText().toString().isEmpty()).isTrue();
+        verify(mBatteryUsageProgressBarPref).setTotalSummary(null);
     }
 
     @Test
@@ -197,27 +187,10 @@ public class BatteryHeaderPreferenceControllerTest {
 
     @Test
     public void quickUpdateHeaderPreference_onlyUpdateBatteryLevelAndChargingState() {
-        mSummary.setText(BATTERY_STATUS);
-
         mController.quickUpdateHeaderPreference();
 
-        assertThat(mBatteryMeterView.getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
-        assertThat(mBatteryMeterView.getCharging()).isTrue();
-        assertThat(mBatteryPercentText.getText().toString()).isEqualTo("60 %");
-        assertThat(mSummary.getText()).isEqualTo(BATTERY_STATUS);
-    }
-
-    @Test
-    public void quickUpdateHeaderPreference_showPowerSave() {
-        boolean testValues[] = {false, true};
-
-        ShadowPowerManager shadowPowerManager = Shadows.shadowOf(mPowerManager);
-        for (boolean value : testValues) {
-            shadowPowerManager.setIsPowerSaveMode(value);
-            mController.quickUpdateHeaderPreference();
-
-            assertThat(mBatteryMeterView.getPowerSave()).isEqualTo(value);
-        }
+        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
+        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
     }
 
     @Test
@@ -226,12 +199,8 @@ public class BatteryHeaderPreferenceControllerTest {
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
-    @Test
-    public void displayPreference_batteryNotPresent_shouldShowHelpMessage() {
-        ShadowUtils.setIsBatteryPresent(false);
-
-        mController.displayPreference(mPreferenceScreen);
-
-        verify(mController).showHelpMessage();
+    private CharSequence formatBatteryPercentageText() {
+        return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
+                NumberFormat.getIntegerInstance().format(BATTERY_LEVEL));
     }
 }
