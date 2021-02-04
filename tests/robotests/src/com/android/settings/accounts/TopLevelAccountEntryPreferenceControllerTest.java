@@ -48,15 +48,12 @@ public class TopLevelAccountEntryPreferenceControllerTest {
         mController = new TopLevelAccountEntryPreferenceController(mContext, "test_key");
         LABELS = ShadowAuthenticationHelper.getLabels();
         TYPES = ShadowAuthenticationHelper.getTypes();
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @After
     public void tearDown() {
         ShadowAuthenticationHelper.reset();
-
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
-        }
     }
 
     @Test

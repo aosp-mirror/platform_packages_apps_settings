@@ -31,11 +31,11 @@ import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker;
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker.NfcUpdateReceiver;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,7 +63,7 @@ public class NfcPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private Context mContext;
-    private SwitchPreference mNfcPreference;
+    private MainSwitchPreference mNfcPreference;
     private NfcPreferenceController mNfcController;
     private ShadowNfcAdapter mShadowNfcAdapter;
     private NfcAdapter mNfcAdapter;
@@ -81,7 +81,7 @@ public class NfcPreferenceControllerTest {
 
         mNfcController = new NfcPreferenceController(mContext,
                 NfcPreferenceController.KEY_TOGGLE_NFC);
-        mNfcPreference = new SwitchPreference(RuntimeEnvironment.application);
+        mNfcPreference = new MainSwitchPreference(RuntimeEnvironment.application);
 
         when(mScreen.findPreference(mNfcController.getPreferenceKey())).thenReturn(mNfcPreference);
     }
