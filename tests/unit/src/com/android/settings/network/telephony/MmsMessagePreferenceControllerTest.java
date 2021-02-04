@@ -111,11 +111,11 @@ public class MmsMessagePreferenceControllerTest {
     @Test
     public void setChecked_setDataIntoSubscriptionManager() {
         mController.setChecked(true);
-        verify(mTelephonyManager).setMobileDataPolicyEnabledStatus(
+        verify(mTelephonyManager).setMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED, true);
 
         mController.setChecked(false);
-        verify(mTelephonyManager).setMobileDataPolicyEnabledStatus(
+        verify(mTelephonyManager).setMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED, false);
     }
 }
