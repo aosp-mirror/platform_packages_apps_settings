@@ -48,7 +48,7 @@ public class SubscriptionUtilTest {
     private static final int SUBID_1 = 1;
     private static final int SUBID_2 = 2;
     private static final int SUBID_3 = 3;
-    private static final CharSequence CARRIER_1 = "carrier1";
+    private static final CharSequence CARRIER_1 = "carrier1111111";
     private static final CharSequence CARRIER_2 = "carrier2";
 
     private Context mContext;
@@ -94,6 +94,8 @@ public class SubscriptionUtilTest {
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
 
+        // // TODO remove this line.
+        // when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mContext);
 
         assertThat(subs).isNotNull();
@@ -143,8 +145,9 @@ public class SubscriptionUtilTest {
         when(info2.getSubscriptionId()).thenReturn(SUBID_2);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
         when(info2.getDisplayName()).thenReturn(CARRIER_2);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(info1, info2));
+            // Arrays.asList(info2));
 
         // Each subscription has a unique last 4 digits of the phone number.
         TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
@@ -172,7 +175,7 @@ public class SubscriptionUtilTest {
         when(info2.getSubscriptionId()).thenReturn(SUBID_2);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
         when(info2.getDisplayName()).thenReturn(CARRIER_1);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(info1, info2));
 
         // Each subscription has a unique last 4 digits of the phone number.
@@ -201,8 +204,7 @@ public class SubscriptionUtilTest {
         when(info2.getSubscriptionId()).thenReturn(SUBID_2);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
         when(info2.getDisplayName()).thenReturn(CARRIER_1);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(info1, info2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
 
         // The subscriptions' phone numbers cannot be revealed to the user.
         TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
@@ -234,7 +236,7 @@ public class SubscriptionUtilTest {
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
         when(info2.getDisplayName()).thenReturn(CARRIER_1);
         when(info3.getDisplayName()).thenReturn(CARRIER_1);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(info1, info2, info3));
 
         // Subscription 1 has a unique phone number, but subscriptions 2 and 3 share the same
@@ -265,8 +267,7 @@ public class SubscriptionUtilTest {
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(info1));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1));
 
         TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
         when(sub1Telmgr.getLine1Number()).thenReturn("1112223333");
@@ -288,8 +289,7 @@ public class SubscriptionUtilTest {
         when(info2.getSubscriptionId()).thenReturn(SUBID_2);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
         when(info2.getDisplayName()).thenReturn(CARRIER_1);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(info1, info2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
 
         // Each subscription has a unique last 4 digits of the phone number.
         TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
@@ -318,8 +318,7 @@ public class SubscriptionUtilTest {
         when(info2.getSubscriptionId()).thenReturn(SUBID_2);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
         when(info2.getDisplayName()).thenReturn(CARRIER_1);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(info1, info2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
 
         // Both subscriptions have a the same 4 digits of the phone number.
         TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
@@ -345,8 +344,7 @@ public class SubscriptionUtilTest {
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(info1));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1));
 
         TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
         when(sub1Telmgr.getLine1Number()).thenReturn("1112223333");
@@ -366,8 +364,7 @@ public class SubscriptionUtilTest {
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
-        when(mSubMgr.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(info1));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1));
 
         TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
         when(sub1Telmgr.getLine1Number()).thenReturn("1112223333");

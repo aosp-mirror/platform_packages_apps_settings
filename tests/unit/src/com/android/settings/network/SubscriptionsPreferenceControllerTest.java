@@ -272,6 +272,7 @@ public class SubscriptionsPreferenceControllerTest {
     @UiThreadTest
     public void onSubscriptionsChanged_subscriptionReplaced_preferencesChanged() {
         final List<SubscriptionInfo> subs = setupMockSubscriptions(3);
+        doReturn(subs).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
 
         // Start out with only sub1 and sub2.
         SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 2));
@@ -388,6 +389,7 @@ public class SubscriptionsPreferenceControllerTest {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(1);
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -402,6 +404,7 @@ public class SubscriptionsPreferenceControllerTest {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -530,6 +533,7 @@ public class SubscriptionsPreferenceControllerTest {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
         Intent intent = new Intent(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
 
         mController.onResume();
@@ -548,6 +552,7 @@ public class SubscriptionsPreferenceControllerTest {
         final int subId = sub.get(0).getSubscriptionId();
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
         Intent intent = new Intent(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
 
         mController.onResume();
