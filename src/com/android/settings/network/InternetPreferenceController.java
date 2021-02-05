@@ -177,6 +177,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         if (subInfo == null) {
             return;
         }
-        mPreference.setSummary(subInfo.getDisplayName());
+        mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                subInfo, mContext));
     }
 }

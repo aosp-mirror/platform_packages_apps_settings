@@ -30,6 +30,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 
 import java.util.Objects;
 
@@ -119,7 +120,8 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     private String getLatestSummary() {
         SubscriptionInfo subInfo = getSubscriptionInfo();
-        return Objects.toString((subInfo == null) ? null : subInfo.getDisplayName(), "");
+        return Objects.toString((subInfo == null) ? null
+                : SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, mContext), "");
     }
 
     private void updateSummary(String displayName) {

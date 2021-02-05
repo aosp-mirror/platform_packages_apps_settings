@@ -177,7 +177,7 @@ public class ProviderModelSliceHelperTest {
         when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
         when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
                 mDefaultDataSubscriptionInfo);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mDefaultDataSubscriptionInfo));
 
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
@@ -207,7 +207,7 @@ public class ProviderModelSliceHelperTest {
         when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
         when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
                 mDefaultDataSubscriptionInfo);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mDefaultDataSubscriptionInfo));
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
         mBundle.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);

@@ -19,6 +19,7 @@ package com.android.settings.panel;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
+import static com.android.settings.network.InternetUpdater.INTERNET_APM;
 import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
 import static com.android.settings.network.NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS;
 
@@ -83,6 +84,9 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         mInternetUpdater.onPause();
     }
 
+    /**
+     * @return a string for the title of the Panel.
+     */
     @Override
     public CharSequence getTitle() {
         if (mIsProviderModelEnabled) {
@@ -93,10 +97,21 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         return mContext.getText(R.string.internet_connectivity_panel_title);
     }
 
+    /**
+     * @return a string for the subtitle of the Panel.
+     */
+    @Override
+    public CharSequence getSubTitle() {
+        if (mIsProviderModelEnabled && mInternetType == INTERNET_APM) {
+            return mContext.getText(R.string.condition_airplane_title);
+        }
+        return null;
+    }
+
     @Override
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
-        if (Utils.isProviderModelEnabled(mContext)) {
+        if (mIsProviderModelEnabled) {
             uris.add(CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI);
             uris.add(CustomSliceRegistry.AIRPLANE_SAFE_NETWORKS_SLICE_URI);
         } else {
@@ -109,18 +124,21 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
 
     @Override
     public Intent getSeeMoreIntent() {
-        return new Intent(Utils.isProviderModelEnabled(mContext)
+        return new Intent(mIsProviderModelEnabled
                 ? ACTION_NETWORK_PROVIDER_SETTINGS : Settings.ACTION_WIRELESS_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override
     public boolean isCustomizedButtonUsed() {
-        return Utils.isProviderModelEnabled(mContext);
+        return mIsProviderModelEnabled;
     }
 
     @Override
     public CharSequence getCustomizedButtonTitle() {
+        if (mInternetType == INTERNET_APM) {
+            return null;
+        }
         return mContext.getText(R.string.settings_button);
     }
 
@@ -145,18 +163,35 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
      * @param internetType the internet type
      */
     public void onInternetTypeChanged(@InternetUpdater.InternetType int internetType) {
-        final boolean needRefresh = internetType != mInternetType
-                && (internetType == INTERNET_APM_NETWORKS
-                || mInternetType == INTERNET_APM_NETWORKS);
-        mInternetType = internetType;
-        if (needRefresh) {
-            refresh();
+        if (internetType == mInternetType) {
+            return;
         }
-    }
 
-    private void refresh() {
+        final boolean changeToApm = (internetType == INTERNET_APM);
+        final boolean changeFromApm = (mInternetType == INTERNET_APM);
+        final boolean changeWithApmNetworks =
+                (internetType == INTERNET_APM_NETWORKS || mInternetType == INTERNET_APM_NETWORKS);
+        mInternetType = internetType;
+
         if (mCallback != null) {
-            mCallback.onTitleChanged();
+            if (changeToApm) {
+                // The internet type is changed to the airplane mode.
+                //   Title: Internet
+                //   Sub-Title: Airplane mode is on
+                //   Settings button: Hide
+                mCallback.onHeaderChanged();
+                mCallback.onCustomizedButtonStateChanged();
+            } else if (changeFromApm) {
+                // The internet type is changed from the airplane mode.
+                //   Title: Internet
+                //   Settings button: Show
+                mCallback.onTitleChanged();
+                mCallback.onCustomizedButtonStateChanged();
+            } else if (changeWithApmNetworks) {
+                // The internet type is changed with the airplane mode networks.
+                //   Title: Airplane mode networks / Internet
+                mCallback.onTitleChanged();
+            }
         }
     }
 }
