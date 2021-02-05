@@ -372,6 +372,9 @@ public class AccessibilitySettings extends DashboardFragment {
         } else {
             getPreferenceScreen().addPreference(downloadedServicesCategory);
         }
+
+        // Hide screen reader category if it is empty.
+        updatePreferenceCategoryVisibility(CATEGORY_SCREEN_READER);
     }
 
     private List<RestrictedPreference> getInstalledAccessibilityList(Context context) {
@@ -450,6 +453,16 @@ public class AccessibilitySettings extends DashboardFragment {
                 }
             }
         }
+    }
+
+    /**
+     * Updates the visibility of a category according to its child preference count.
+     *
+     * @param categoryKey The key of the category which needs to check
+     */
+    private void updatePreferenceCategoryVisibility(String categoryKey) {
+        final PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
+        category.setVisible(category.getPreferenceCount() != 0);
     }
 
     /**
