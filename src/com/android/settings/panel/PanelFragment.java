@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,7 @@ public class PanelFragment extends Fragment {
     private LinearLayout mPanelHeader;
     private ImageView mTitleIcon;
     private LinearLayout mTitleGroup;
+    private LinearLayout mHeaderLayout;
     private TextView mHeaderTitle;
     private TextView mHeaderSubtitle;
     private int mMaxHeight;
@@ -202,6 +204,7 @@ public class PanelFragment extends Fragment {
         mPanelHeader = mLayoutView.findViewById(R.id.panel_header);
         mTitleIcon = mLayoutView.findViewById(R.id.title_icon);
         mTitleGroup = mLayoutView.findViewById(R.id.title_group);
+        mHeaderLayout = mLayoutView.findViewById(R.id.header_layout);
         mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
         mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
         mFooterDivider = mLayoutView.findViewById(R.id.footer_divider);
@@ -239,13 +242,12 @@ public class PanelFragment extends Fragment {
 
         final IconCompat icon = mPanel.getIcon();
         final CharSequence title = mPanel.getTitle();
+        final CharSequence subtitle = mPanel.getSubTitle();
 
-        if (icon != null) {
-            enablePanelHeader(icon, title);
+        if (icon != null || (subtitle != null && subtitle.length() > 0)) {
+            enablePanelHeader(icon, title, subtitle);
         } else {
-            mTitleView.setVisibility(View.VISIBLE);
-            mPanelHeader.setVisibility(View.GONE);
-            mTitleView.setText(title);
+            enableTitle(title);
         }
 
         mFooterDivider.setVisibility(View.GONE);
@@ -254,13 +256,7 @@ public class PanelFragment extends Fragment {
         mDoneButton.setOnClickListener(getCloseListener());
 
         if (mPanel.isCustomizedButtonUsed()) {
-            final CharSequence customTitle = mPanel.getCustomizedButtonTitle();
-            if (TextUtils.isEmpty(customTitle)) {
-                mSeeMoreButton.setVisibility(View.GONE);
-            } else {
-                mSeeMoreButton.setVisibility(View.VISIBLE);
-                mSeeMoreButton.setText(customTitle);
-            }
+            enableCustomizedButton();
         } else if (mPanel.getSeeMoreIntent() == null) {
             // If getSeeMoreIntent() is null hide the mSeeMoreButton.
             mSeeMoreButton.setVisibility(View.GONE);
@@ -275,14 +271,16 @@ public class PanelFragment extends Fragment {
                 0 /* value */);
     }
 
-    private void enablePanelHeader(IconCompat icon, CharSequence title) {
+    private void enablePanelHeader(IconCompat icon, CharSequence title, CharSequence subtitle) {
         mTitleView.setVisibility(View.GONE);
         mPanelHeader.setVisibility(View.VISIBLE);
         mPanelHeader.setAccessibilityPaneTitle(title);
         mHeaderTitle.setText(title);
-        mHeaderSubtitle.setText(mPanel.getSubTitle());
+        mHeaderSubtitle.setText(subtitle);
+        mHeaderSubtitle.setAccessibilityPaneTitle(subtitle);
         if (icon != null) {
             mTitleGroup.setVisibility(View.VISIBLE);
+            mHeaderLayout.setGravity(Gravity.LEFT);
             mTitleIcon.setImageIcon(icon.toIcon(getContext()));
             if (mPanel.getHeaderIconIntent() != null) {
                 mTitleIcon.setOnClickListener(getHeaderIconListener());
@@ -295,6 +293,24 @@ public class PanelFragment extends Fragment {
             }
         } else {
             mTitleGroup.setVisibility(View.GONE);
+            mHeaderLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+        }
+    }
+
+    private void enableTitle(CharSequence title) {
+        mPanelHeader.setVisibility(View.GONE);
+        mTitleView.setVisibility(View.VISIBLE);
+        mTitleView.setAccessibilityPaneTitle(title);
+        mTitleView.setText(title);
+    }
+
+    private void enableCustomizedButton() {
+        final CharSequence customTitle = mPanel.getCustomizedButtonTitle();
+        if (TextUtils.isEmpty(customTitle)) {
+            mSeeMoreButton.setVisibility(View.GONE);
+        } else {
+            mSeeMoreButton.setVisibility(View.VISIBLE);
+            mSeeMoreButton.setText(customTitle);
         }
     }
 
@@ -487,24 +503,14 @@ public class PanelFragment extends Fragment {
         @Override
         public void onCustomizedButtonStateChanged() {
             ThreadUtils.postOnMainThread(() -> {
-                mSeeMoreButton.setVisibility(
-                        mPanel.isCustomizedButtonUsed() ? View.VISIBLE : View.GONE);
-                mSeeMoreButton.setText(mPanel.getCustomizedButtonTitle());
+                enableCustomizedButton();
             });
         }
 
         @Override
         public void onHeaderChanged() {
             ThreadUtils.postOnMainThread(() -> {
-                final IconCompat icon = mPanel.getIcon();
-                if (icon != null) {
-                    mTitleIcon.setImageIcon(icon.toIcon(getContext()));
-                    mTitleGroup.setVisibility(View.VISIBLE);
-                } else {
-                    mTitleGroup.setVisibility(View.GONE);
-                }
-                mHeaderTitle.setText(mPanel.getTitle());
-                mHeaderSubtitle.setText(mPanel.getSubTitle());
+                enablePanelHeader(mPanel.getIcon(), mPanel.getTitle(), mPanel.getSubTitle());
             });
         }
 
@@ -517,7 +523,7 @@ public class PanelFragment extends Fragment {
         @Override
         public void onTitleChanged() {
             ThreadUtils.postOnMainThread(() -> {
-                mTitleView.setText(mPanel.getTitle());
+                enableTitle(mPanel.getTitle());
             });
         }
 
