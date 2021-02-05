@@ -8774,6 +8774,22 @@
     <string name="notif_type_alerting">Alerting notifications</string>
     <string name="notif_type_silent">Silent notifications</string>
 
+    <!-- Per notification listener, launches a list of apps whose notifications this listener cannot see -->
+    <string name="notif_listener_excluded_title">Apps that are not bridged to this listener</string>
+
+    <!-- Per notification listener, when the listener can see notifications from all apps -->
+    <string name="notif_listener_excluded_summary_zero">All apps are bridged</string>
+
+    <!-- Per notification listener, a summary of how many apps this listener cannot see
+     notifications from -->
+    <plurals name="notif_listener_excluded_summary_nonzero">
+        <item quantity="one">%d app is not bridged</item>
+        <item quantity="other">%d apps are not bridged</item>
+    </plurals>
+
+    <!-- Per notification listener, a list of apps whose notifications this listener cannot see -->
+    <string name="notif_listener_excluded_app_title">Bridged apps</string>
+
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
 
