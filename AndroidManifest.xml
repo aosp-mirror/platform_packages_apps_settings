@@ -3663,6 +3663,14 @@
         </receiver>
 
         <receiver
+            android:name=".sim.receivers.SuwFinishReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
             android:name=".sim.receivers.SimCompleteBootReceiver"
             android:exported="true">
             <intent-filter>
