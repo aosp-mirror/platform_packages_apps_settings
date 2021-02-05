@@ -49,6 +49,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.wifitrackerlib.WifiEntry;
@@ -834,6 +835,7 @@ public class WifiConfigController2Test {
         when(subscriptionInfo.getDisplayName()).thenReturn("FAKE-CARRIER");
         when(subscriptionInfo.getCarrierId()).thenReturn(carrierId);
         when(subscriptionInfo.getCarrierName()).thenReturn("FAKE-CARRIER");
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(subscriptionInfo));
         mShadowSubscriptionManager.setActiveSubscriptionInfoList(Arrays.asList(subscriptionInfo));
         mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
                 WifiConfigUiBase2.MODE_CONNECT);

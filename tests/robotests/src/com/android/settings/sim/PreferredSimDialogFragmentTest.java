@@ -75,6 +75,7 @@ public class PreferredSimDialogFragmentTest extends
 
     @Test
     public void onCreateDialog_twoSimsSelectFirst_correctMessage() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         mIntent.putExtra(PREFERRED_SIM, 0);
 
@@ -87,6 +88,7 @@ public class PreferredSimDialogFragmentTest extends
 
     @Test
     public void onCreateDialog_twoSimsSelectSecond_correctMessage() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         mIntent.putExtra(PREFERRED_SIM, 1);
 
@@ -99,6 +101,7 @@ public class PreferredSimDialogFragmentTest extends
 
     @Test
     public void onClick_yesClicked_callsOnSubscriptionSelected() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         mIntent.putExtra(PREFERRED_SIM, 0);
 
         final AlertDialog alertDialog = startDialog();
@@ -113,6 +116,7 @@ public class PreferredSimDialogFragmentTest extends
 
     @Test
     public void onClick_noClicked_doesNotCallOnSubscriptionSelected() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         mIntent.putExtra(PREFERRED_SIM, 0);
 
         final AlertDialog alertDialog = startDialog();

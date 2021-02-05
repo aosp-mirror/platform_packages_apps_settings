@@ -17,9 +17,13 @@
 package com.android.settings.network;
 
 import static androidx.lifecycle.Lifecycle.Event;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Looper;
@@ -27,19 +31,17 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 
-import com.android.settings.testutils.ResourcesUtils;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.RestrictedPreference;
-
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.InstrumentationRegistry;
+
+import com.android.settings.testutils.ResourcesUtils;
+import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,9 +52,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 public class NetworkProviderCallsSmsControllerTest {
@@ -156,6 +155,7 @@ public class NetworkProviderCallsSmsControllerTest {
     @UiThreadTest
     public void getSummary_noSim_returnNoSim() {
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(new ArrayList<>());
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(new ArrayList<>());
         displayPreferenceWithLifecycle();
 
         assertTrue(TextUtils.equals(mController.getSummary(),
@@ -168,6 +168,8 @@ public class NetworkProviderCallsSmsControllerTest {
         setupSubscriptionInfoList(SubscriptionManager.INVALID_SUBSCRIPTION_ID, DISPLAY_NAME_1,
                 mSubscriptionInfo1);
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1));
         displayPreferenceWithLifecycle();
 
@@ -187,6 +189,8 @@ public class NetworkProviderCallsSmsControllerTest {
                 mSubscriptionInfo1);
         setupSubscriptionInfoList(SUB_ID_2, DISPLAY_NAME_2, mSubscriptionInfo2);
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
         displayPreferenceWithLifecycle();
 
@@ -209,6 +213,8 @@ public class NetworkProviderCallsSmsControllerTest {
         setupSubscriptionInfoList(SUB_ID_1, DISPLAY_NAME_1, mSubscriptionInfo1);
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1));
         displayPreferenceWithLifecycle();
 
         assertThat(mPreference.getSummary()).isEqualTo(DISPLAY_NAME_1);
@@ -220,6 +226,8 @@ public class NetworkProviderCallsSmsControllerTest {
         setupSubscriptionInfoList(SUB_ID_1, DISPLAY_NAME_1, mSubscriptionInfo1);
         setupSubscriptionInfoList(SUB_ID_2, DISPLAY_NAME_2, mSubscriptionInfo2);
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
         displayPreferenceWithLifecycle();
 
@@ -239,6 +247,8 @@ public class NetworkProviderCallsSmsControllerTest {
         setupSubscriptionInfoList(SUB_ID_1, DISPLAY_NAME_1, mSubscriptionInfo1);
         setupSubscriptionInfoList(SUB_ID_2, DISPLAY_NAME_2, mSubscriptionInfo2);
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
         displayPreferenceWithLifecycle();
 
@@ -267,6 +277,8 @@ public class NetworkProviderCallsSmsControllerTest {
         setupSubscriptionInfoList(SUB_ID_2, DISPLAY_NAME_2, mSubscriptionInfo2);
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
         displayPreferenceWithLifecycle();
 
         final StringBuilder summary = new StringBuilder();
@@ -293,6 +305,8 @@ public class NetworkProviderCallsSmsControllerTest {
         setupSubscriptionInfoList(SUB_ID_1, DISPLAY_NAME_1, mSubscriptionInfo1);
         setupSubscriptionInfoList(SUB_ID_2, DISPLAY_NAME_2, mSubscriptionInfo2);
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
         displayPreferenceWithLifecycle();
 

@@ -125,6 +125,8 @@ public class WifiCallingSettingsTest {
         when(info1.getDisplayName()).thenReturn(DISPLAY_NAME1);
         when(info2.getDisplayName()).thenReturn(DISPLAY_NAME2);
 
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(new ArrayList<>(
+                Arrays.asList(info1, info2)));
         SubscriptionUtil.setActiveSubscriptionsForTesting(new ArrayList<>(
                 Arrays.asList(info1, info2)));
 
