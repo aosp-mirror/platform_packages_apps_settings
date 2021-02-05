@@ -21,7 +21,6 @@ import static android.provider.Settings.Secure.NOTIFICATION_HISTORY_ENABLED;
 import static androidx.core.view.accessibility.AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.INotificationManager;
 import android.content.ComponentName;
@@ -55,6 +54,7 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.UiEventLoggerImpl;
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.MainSwitchBar;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
@@ -65,7 +65,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-public class NotificationHistoryActivity extends Activity {
+public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
 
     private static String TAG = "NotifHistory";
 
