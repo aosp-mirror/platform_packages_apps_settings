@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 
@@ -87,9 +86,6 @@ public class ProviderModelSlice extends WifiSlice {
         final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
         if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled()) {
             log("Airplane mode is enabled.");
-            listBuilder.setHeader(mHelper.createHeader(Settings.ACTION_AIRPLANE_MODE_SETTINGS));
-            listBuilder.addGridRow(mHelper.createMessageGridRow(R.string.condition_airplane_title,
-                    Settings.ACTION_AIRPLANE_MODE_SETTINGS));
             return listBuilder.build();
         }
 
@@ -182,8 +178,9 @@ public class ProviderModelSlice extends WifiSlice {
         }
         final int defaultSubId = subscriptionManager.getDefaultDataSubscriptionId();
         log("defaultSubId:" + defaultSubId);
-        if (!SubscriptionManager.isUsableSubscriptionId(defaultSubId)) {
-            return; // No subscription - do nothing.
+
+        if (!defaultSubscriptionIsUsable(defaultSubId)) {
+            return;
         }
 
         boolean isToggleAction = intent.hasExtra(EXTRA_TOGGLE_STATE);
@@ -194,10 +191,14 @@ public class ProviderModelSlice extends WifiSlice {
             MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
                     false /* disableOtherSubscriptions */);
         }
-        doCarrierNetworkAction(isToggleAction, newState);
+
+        final boolean isDataEnabled =
+                isToggleAction ? newState : MobileNetworkUtils.isMobileDataEnabled(mContext);
+        doCarrierNetworkAction(isToggleAction, isDataEnabled);
     }
 
-    private void doCarrierNetworkAction(boolean isToggleAction, boolean isDataEnabled) {
+    @VisibleForTesting
+    void doCarrierNetworkAction(boolean isToggleAction, boolean isDataEnabled) {
         final NetworkProviderWorker worker = getWorker();
         if (worker == null) {
             return;
@@ -208,7 +209,7 @@ public class ProviderModelSlice extends WifiSlice {
             return;
         }
 
-        if (MobileNetworkUtils.isMobileDataEnabled(mContext)) {
+        if (isDataEnabled) {
             worker.connectCarrierNetwork();
         }
     }
@@ -257,5 +258,13 @@ public class ProviderModelSlice extends WifiSlice {
         return rowBuilder
                 .setTitle(mContext.getText(R.string.ethernet))
                 .setSubtitle(mContext.getText(R.string.cannot_switch_networks_while_connected));
+    }
+
+    /**
+     * Wrap the subscriptionManager call for test mocking.
+     */
+    @VisibleForTesting
+    protected boolean defaultSubscriptionIsUsable(int defaultSubId) {
+        return SubscriptionManager.isUsableSubscriptionId(defaultSubId);
     }
 }
