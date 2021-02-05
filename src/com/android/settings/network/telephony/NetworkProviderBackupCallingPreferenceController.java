@@ -104,7 +104,7 @@ public class NetworkProviderBackupCallingPreferenceController extends
         }
         SwitchPreference pref = new SwitchPreference(mContext);
         prefCtrl.updateState(pref);
-        pref.setTitle(subInfo.getDisplayName());
+        pref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, mContext));
         return pref;
     }
 

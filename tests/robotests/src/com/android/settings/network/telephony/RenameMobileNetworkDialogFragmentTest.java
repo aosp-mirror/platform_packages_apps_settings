@@ -45,8 +45,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -109,7 +111,14 @@ public class RenameMobileNetworkDialogFragmentTest {
         mSubscriptionInfoList.add(mSubscriptionInfo);
         when(mSubscriptionMgr.getAvailableSubscriptionInfoList()).thenReturn(
                 mSubscriptionInfoList);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(mSubscriptionInfoList);
     }
+
+    @After
+    public void tearDown() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
+    }
+
 
     @Test
     @Ignore

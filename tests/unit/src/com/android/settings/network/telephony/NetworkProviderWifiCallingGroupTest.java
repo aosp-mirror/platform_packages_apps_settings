@@ -39,14 +39,14 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.FeatureFlagUtils;
 
-import com.android.settings.network.ims.MockWfcQueryImsState;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.network.ims.MockWfcQueryImsState;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -132,10 +132,8 @@ public class NetworkProviderWifiCallingGroupTest {
 
     @Test
     public void shouldShowWifiCallingForSub_invalidSubId_returnFalse() {
-        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID)).thenReturn(null);
-
-        assertThat(mNetworkProviderWifiCallingGroup.shouldShowWifiCallingForSub(SUB_ID))
-                .isEqualTo(false);
+        assertThat(mNetworkProviderWifiCallingGroup.shouldShowWifiCallingForSub(
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(false);
     }
 
     @Test
