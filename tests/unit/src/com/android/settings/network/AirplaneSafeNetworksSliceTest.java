@@ -34,7 +34,6 @@ import androidx.slice.widget.SliceLiveData;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.testutils.AirplaneModeRule;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
@@ -50,8 +49,6 @@ public class AirplaneSafeNetworksSliceTest {
 
     @Rule
     public MockitoRule mMocks = MockitoJUnit.rule();
-    @Rule
-    public AirplaneModeRule mAirplaneModeRule = new AirplaneModeRule();
     @Mock
     private WifiManager mWifiManager;
 
@@ -67,18 +64,18 @@ public class AirplaneSafeNetworksSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
         mAirplaneSafeNetworksSlice = new AirplaneSafeNetworksSlice(mContext);
+        mAirplaneSafeNetworksSlice.onAirplaneModeChanged(true);
     }
 
     @Test
-    public void getSlice_airplaneModeOff_shouldBeNull() {
-        mAirplaneModeRule.setAirplaneMode(false);
+    public void getSlice_airplaneModeOff_shouldBeNotNull() {
+        mAirplaneSafeNetworksSlice.onAirplaneModeChanged(false);
 
-        assertThat(mAirplaneSafeNetworksSlice.getSlice()).isNull();
+        assertThat(mAirplaneSafeNetworksSlice.getSlice()).isNotNull();
     }
 
     @Test
-    public void getSlice_wifiDisabled_shouldShowViewAirplaneSafeNetworks() {
-        mAirplaneModeRule.setAirplaneMode(true);
+    public void getSlice_wifiDisabled_shouldShowTurnOnNetworks() {
         when(mWifiManager.isWifiEnabled()).thenReturn(false);
 
         final Slice slice = mAirplaneSafeNetworksSlice.getSlice();
@@ -87,12 +84,11 @@ public class AirplaneSafeNetworksSliceTest {
         final SliceItem sliceTitle =
                 SliceMetadata.from(mContext, slice).getListContent().getHeader().getTitleItem();
         assertThat(sliceTitle.getText()).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "view_airplane_safe_networks"));
+                ResourcesUtils.getResourcesString(mContext, "turn_on_networks"));
     }
 
     @Test
-    public void getSlice_wifiEnabled_shouldShowTurnOffAirplaneMode() {
-        mAirplaneModeRule.setAirplaneMode(true);
+    public void getSlice_wifiEnabled_shouldShowTurnOffNetworks() {
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
 
         final Slice slice = mAirplaneSafeNetworksSlice.getSlice();
@@ -101,12 +97,11 @@ public class AirplaneSafeNetworksSliceTest {
         final SliceItem sliceTitle =
                 SliceMetadata.from(mContext, slice).getListContent().getHeader().getTitleItem();
         assertThat(sliceTitle.getText()).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "turn_off_airplane_mode"));
+                ResourcesUtils.getResourcesString(mContext, "turn_off_networks"));
     }
 
     @Test
-    public void onNotifyChange_viewAirplaneSafeNetworks_shouldSetWifiEnabled() {
-        mAirplaneModeRule.setAirplaneMode(true);
+    public void onNotifyChange_turnOnNetworks_shouldSetWifiEnabled() {
         when(mWifiManager.isWifiEnabled()).thenReturn(false);
         Intent intent = mAirplaneSafeNetworksSlice.getIntent();
 
@@ -116,13 +111,12 @@ public class AirplaneSafeNetworksSliceTest {
     }
 
     @Test
-    public void onNotifyChange_turnOffAirplaneMode_shouldSetAirplaneModeOff() {
-        mAirplaneModeRule.setAirplaneMode(true);
+    public void onNotifyChange_turnOffNetworks_shouldSetWifiDisabled() {
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
         Intent intent = mAirplaneSafeNetworksSlice.getIntent();
 
         mAirplaneSafeNetworksSlice.onNotifyChange(intent);
 
-        assertThat(mAirplaneModeRule.isAirplaneModeOn()).isFalse();
+        verify(mWifiManager).setWifiEnabled(false);
     }
 }
