@@ -35,6 +35,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import android.util.ArraySet;
 
 import androidx.annotation.VisibleForTesting;
@@ -255,14 +256,17 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mUpdateListener.onChildrenUpdated();
     }
 
-    private String getMobilePreferenceSummary(int subId) {
+    private CharSequence getMobilePreferenceSummary(int subId) {
         String result = mSubsPrefCtrlInjector.getNetworkType(
                 mContext, mConfig, mTelephonyDisplayInfo, subId);
+        if (!mTelephonyManager.isDataEnabled()) {
+            return mContext.getString(R.string.mobile_data_off_summary);
+        }
         if (!result.isEmpty() && mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext)) {
             result = mContext.getString(R.string.preference_summary_default_combination,
                     mContext.getString(R.string.mobile_data_connection_active), result);
         }
-        return result;
+        return Html.fromHtml(result, Html.FROM_HTML_MODE_LEGACY);
     }
 
     private Drawable getIcon(int subId) {
