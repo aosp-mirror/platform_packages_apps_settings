@@ -40,12 +40,6 @@
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp" />
 
-    <Space
-        android:id="@+id/space_below_title"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
     <FrameLayout
         android:id="@+id/description_area"
         android:layout_width="match_parent"
@@ -80,19 +74,4 @@
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:visibility="invisible" />
-
-    <Space
-        android:id="@+id/space_above_animation"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <com.android.settings.widget.RingProgressBar
-        android:id="@+id/fingerprint_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="@dimen/fingerprint_progress_bar_min_size"
-        android:progress="0"
-        android:layout_gravity="center"/>
-
 </com.android.settings.biometrics.fingerprint.UdfpsEnrollLayout>
