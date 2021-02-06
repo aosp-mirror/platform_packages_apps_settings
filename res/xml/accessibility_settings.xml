@@ -29,15 +29,7 @@
     <PreferenceCategory
         android:key="screen_reader_category"
         android:persistent="false"
-        android:title="@string/screen_reader_category_title">
-
-        <Preference
-            android:fragment="com.android.settings.tts.TextToSpeechSettings"
-            android:key="tts_settings_preference"
-            android:persistent="false"
-            android:title="@string/tts_settings_title"
-            settings:controller="com.android.settings.language.TtsPreferenceController"/>
-    </PreferenceCategory>
+        android:title="@string/screen_reader_category_title"/>
 
     <PreferenceCategory
         android:key="display_category"
@@ -126,6 +118,25 @@
             android:persistent="false"
             android:title="@string/accessibility_captioning_title"
             settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
+
+    </PreferenceCategory>
+
+    <!-- TODO(b/174829936): Add title for shortcuts settings category. -->
+    <PreferenceCategory android:persistent="false">
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.ShortcutsSettingsFragment"
+            android:key="accessibility_shortcuts_preference_screen"
+            android:persistent="false"
+            android:title="@string/accessibility_shortcuts_settings_title"
+            settings:searchable="true"/>
+
+        <Preference
+            android:fragment="com.android.settings.tts.TextToSpeechSettings"
+            android:key="tts_settings_preference"
+            android:persistent="false"
+            android:title="@string/tts_settings_title"
+            settings:controller="com.android.settings.language.TtsPreferenceController"/>
 
     </PreferenceCategory>
 

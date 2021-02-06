@@ -66,7 +66,8 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
             mFragment.getPreferenceScreen().removePreference(mPreferenceCategory);
         }
 
-        mSwitchPreference.setChecked(SystemProperties.getBoolean(TRANSCODE_MTP_SYS_PROP_KEY, true));
+        mSwitchPreference.setChecked(
+                SystemProperties.getBoolean(TRANSCODE_MTP_SYS_PROP_KEY, false));
         mPreferenceCategory.setEnabled(
                 connected && isDeviceInFileTransferMode(functions, dataRole));
     }
