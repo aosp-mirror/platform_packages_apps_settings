@@ -71,6 +71,9 @@ public class SimNotificationService extends JobService {
             case SimActivationNotifier.NotificationType.SWITCH_TO_REMOVABLE_SLOT:
                 new SimActivationNotifier(this).sendSwitchedToRemovableSlotNotification();
                 break;
+            case SimActivationNotifier.NotificationType.ENABLE_DSDS:
+                new SimActivationNotifier(this).sendEnableDsdsNotification();
+                break;
             default:
                 Log.e(TAG, "Invalid notification type: " + notificationType);
                 break;
