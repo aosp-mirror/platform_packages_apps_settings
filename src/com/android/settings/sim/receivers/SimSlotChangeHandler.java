@@ -50,7 +50,13 @@ public class SimSlotChangeHandler {
     private static final String TAG = "SimSlotChangeHandler";
 
     private static final String EUICC_PREFS = "euicc_prefs";
+    // Shared preference keys
     private static final String KEY_REMOVABLE_SLOT_STATE = "removable_slot_state";
+    private static final String KEY_SUW_PSIM_ACTION = "suw_psim_action";
+    // User's last removable SIM insertion / removal action during SUW.
+    private static final int LAST_USER_ACTION_IN_SUW_NONE = 0;
+    private static final int LAST_USER_ACTION_IN_SUW_INSERT = 1;
+    private static final int LAST_USER_ACTION_IN_SUW_REMOVE = 2;
 
     private static volatile SimSlotChangeHandler sSlotChangeHandler;
 
@@ -107,6 +113,47 @@ public class SimSlotChangeHandler {
         Log.i(TAG, "Do nothing on slot status changes.");
     }
 
+    void onSuwFinish(Context context) {
+        init(context);
+
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            throw new IllegalStateException("Cannot be called from main thread.");
+        }
+
+        if (mTelMgr.getActiveModemCount() > 1) {
+            Log.i(TAG, "The device is already in DSDS mode. Do nothing.");
+            return;
+        }
+
+        UiccSlotInfo removableSlotInfo = getRemovableUiccSlotInfo();
+        if (removableSlotInfo == null) {
+            Log.e(TAG, "Unable to find the removable slot. Do nothing.");
+            return;
+        }
+
+        boolean embeddedSimExist = getGroupedEmbeddedSubscriptions().size() != 0;
+        int removableSlotAction = getSuwRemovableSlotAction(mContext);
+        setSuwRemovableSlotAction(mContext, LAST_USER_ACTION_IN_SUW_NONE);
+
+        if (embeddedSimExist
+                && removableSlotInfo.getCardStateInfo() == UiccSlotInfo.CARD_STATE_INFO_PRESENT) {
+            if (mTelMgr.isMultiSimSupported() == TelephonyManager.MULTISIM_ALLOWED) {
+                Log.i(TAG, "DSDS condition satisfied. Show notification.");
+                SimNotificationService.scheduleSimNotification(
+                        mContext, SimActivationNotifier.NotificationType.ENABLE_DSDS);
+            } else if (removableSlotAction == LAST_USER_ACTION_IN_SUW_INSERT) {
+                Log.i(
+                        TAG,
+                        "Both removable SIM and eSIM are present. DSDS condition doesn't"
+                            + " satisfied. User inserted pSIM during SUW. Show choose SIM"
+                            + " screen.");
+                startChooseSimActivity(true);
+            }
+        } else if (removableSlotAction == LAST_USER_ACTION_IN_SUW_REMOVE) {
+            handleSimRemove(removableSlotInfo);
+        }
+    }
+
     private void init(Context context) {
         mSubMgr =
                 (SubscriptionManager)
@@ -116,11 +163,11 @@ public class SimSlotChangeHandler {
     }
 
     private void handleSimInsert(UiccSlotInfo removableSlotInfo) {
-        Log.i(TAG, "Detect SIM inserted.");
+        Log.i(TAG, "Handle SIM inserted.");
 
         if (!isSuwFinished(mContext)) {
-            // TODO(b/170508680): Store the action and handle it after SUW is finished.
             Log.i(TAG, "Still in SUW. Handle SIM insertion after SUW is finished");
+            setSuwRemovableSlotAction(mContext, LAST_USER_ACTION_IN_SUW_INSERT);
             return;
         }
 
@@ -156,11 +203,11 @@ public class SimSlotChangeHandler {
     }
 
     private void handleSimRemove(UiccSlotInfo removableSlotInfo) {
-        Log.i(TAG, "Detect SIM removed.");
+        Log.i(TAG, "Handle SIM removed.");
 
         if (!isSuwFinished(mContext)) {
-            // TODO(b/170508680): Store the action and handle it after SUW is finished.
             Log.i(TAG, "Still in SUW. Handle SIM removal after SUW is finished");
+            setSuwRemovableSlotAction(mContext, LAST_USER_ACTION_IN_SUW_REMOVE);
             return;
         }
 
@@ -193,6 +240,16 @@ public class SimSlotChangeHandler {
     private void setRemovableSimSlotState(Context context, int state) {
         final SharedPreferences prefs = context.getSharedPreferences(EUICC_PREFS, MODE_PRIVATE);
         prefs.edit().putInt(KEY_REMOVABLE_SLOT_STATE, state).apply();
+    }
+
+    private int getSuwRemovableSlotAction(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(EUICC_PREFS, MODE_PRIVATE);
+        return prefs.getInt(KEY_SUW_PSIM_ACTION, LAST_USER_ACTION_IN_SUW_NONE);
+    }
+
+    private void setSuwRemovableSlotAction(Context context, int action) {
+        final SharedPreferences prefs = context.getSharedPreferences(EUICC_PREFS, MODE_PRIVATE);
+        prefs.edit().putInt(KEY_SUW_PSIM_ACTION, action).apply();
     }
 
     @Nullable

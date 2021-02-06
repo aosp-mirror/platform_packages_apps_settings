@@ -17,14 +17,12 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/search_bar_margin"
     android:layout_marginStart="@dimen/search_bar_margin"
     android:layout_marginEnd="@dimen/search_bar_margin"
-    android:layout_marginBottom="@dimen/search_bar_margin_bottom"
-    app:layout_scrollFlags="scroll|enterAlways">
+    android:layout_marginBottom="@dimen/search_bar_margin_bottom">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/search_bar"
