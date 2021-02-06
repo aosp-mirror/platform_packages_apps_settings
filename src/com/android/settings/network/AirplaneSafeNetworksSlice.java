@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.util.Log;
@@ -33,6 +34,7 @@ import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
+import androidx.slice.core.SliceHints;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
@@ -41,7 +43,6 @@ import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
-import com.android.settingslib.WirelessUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,7 +50,6 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * {@link CustomSliceable} for airplane-safe networks, used by generic clients.
  */
-// TODO(b/173413889): Need to update the slice to Button style.
 public class AirplaneSafeNetworksSlice implements CustomSliceable,
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
@@ -60,26 +60,29 @@ public class AirplaneSafeNetworksSlice implements CustomSliceable,
     /**
      * Annotation for different action of the slice.
      *
-     * {@code VIEW_AIRPLANE_SAFE_NETWORKS} for action of turning on Wi-Fi.
-     * {@code TURN_OFF_AIRPLANE_MODE} for action of turning off Airplane Mode.
+     * {@code TURN_ON_NETWORKS} for action of turning on Wi-Fi networks.
+     * {@code TURN_OFF_NETWORKS} for action of turning off Wi-Fi networks.
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef(value = {
-            Action.VIEW_AIRPLANE_SAFE_NETWORKS,
-            Action.TURN_OFF_AIRPLANE_MODE,
+            Action.TURN_ON_NETWORKS,
+            Action.TURN_OFF_NETWORKS,
     })
     public @interface Action {
-        int VIEW_AIRPLANE_SAFE_NETWORKS = 1;
-        int TURN_OFF_AIRPLANE_MODE = 2;
+        int TURN_ON_NETWORKS = 1;
+        int TURN_OFF_NETWORKS = 2;
     }
 
     private final Context mContext;
     private final AirplaneModeEnabler mAirplaneModeEnabler;
     private final WifiManager mWifiManager;
 
+    private boolean mIsAirplaneModeOn;
+
     public AirplaneSafeNetworksSlice(Context context) {
         mContext = context;
         mAirplaneModeEnabler = new AirplaneModeEnabler(context, this);
+        mIsAirplaneModeOn = mAirplaneModeEnabler.isAirplaneModeOn();
         mWifiManager = mContext.getSystemService(WifiManager.class);
     }
 
@@ -89,15 +92,14 @@ public class AirplaneSafeNetworksSlice implements CustomSliceable,
 
     @Override
     public Slice getSlice() {
-        if (!WirelessUtils.isAirplaneModeOn(mContext)) {
-            return null;
+        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY);
+        if (mIsAirplaneModeOn) {
+            listBuilder.addRow(new RowBuilder()
+                    .setTitle(getTitle())
+                    .addEndItem(getEndIcon(), SliceHints.ICON_IMAGE)
+                    .setPrimaryAction(getSliceAction()));
         }
-
-        return new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
-                .addRow(new RowBuilder()
-                        .setTitle(getTitle())
-                        .setPrimaryAction(getSliceAction()))
-                .build();
+        return listBuilder.build();
     }
 
     @Override
@@ -108,21 +110,22 @@ public class AirplaneSafeNetworksSlice implements CustomSliceable,
     @Override
     public void onNotifyChange(Intent intent) {
         final int action = intent.getIntExtra(ACTION_INTENT_EXTRA, 0);
-        if (action == Action.VIEW_AIRPLANE_SAFE_NETWORKS) {
+        if (action == Action.TURN_ON_NETWORKS) {
             if (!mWifiManager.isWifiEnabled()) {
-                logd("Action: turn on WiFi");
+                logd("Action: turn on Wi-Fi networks");
                 mWifiManager.setWifiEnabled(true);
             }
-        } else if (action == Action.TURN_OFF_AIRPLANE_MODE) {
-            if (WirelessUtils.isAirplaneModeOn(mContext)) {
-                logd("Action: turn off Airplane mode");
-                mAirplaneModeEnabler.setAirplaneMode(false);
+        } else if (action == Action.TURN_OFF_NETWORKS) {
+            if (mWifiManager.isWifiEnabled()) {
+                logd("Action: turn off Wi-Fi networks");
+                mWifiManager.setWifiEnabled(false);
             }
         }
     }
 
     @Override
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
+        mIsAirplaneModeOn = isAirplaneModeOn;
         final AirplaneSafeNetworksWorker worker = SliceBackgroundWorker.getInstance(getUri());
         if (worker != null) {
             worker.updateSlice();
@@ -140,15 +143,26 @@ public class AirplaneSafeNetworksSlice implements CustomSliceable,
     @Action
     private int getAction() {
         return mWifiManager.isWifiEnabled()
-                ? Action.TURN_OFF_AIRPLANE_MODE
-                : Action.VIEW_AIRPLANE_SAFE_NETWORKS;
+                ? Action.TURN_OFF_NETWORKS
+                : Action.TURN_ON_NETWORKS;
     }
 
     private String getTitle() {
         return mContext.getText(
-                (getAction() == Action.VIEW_AIRPLANE_SAFE_NETWORKS)
-                        ? R.string.view_airplane_safe_networks
-                        : R.string.turn_off_airplane_mode).toString();
+                (getAction() == Action.TURN_ON_NETWORKS)
+                        ? R.string.turn_on_networks
+                        : R.string.turn_off_networks).toString();
+    }
+
+    private IconCompat getEndIcon() {
+        final Drawable drawable = mContext.getDrawable(
+                (getAction() == Action.TURN_ON_NETWORKS) ? R.drawable.ic_airplane_safe_networks_24dp
+                        : R.drawable.ic_airplanemode_active);
+        if (drawable == null) {
+            return Utils.createIconWithDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+        drawable.setTintList(Utils.getColorAttr(mContext, android.R.attr.colorAccent));
+        return Utils.createIconWithDrawable(drawable);
     }
 
     private SliceAction getSliceAction() {
@@ -156,8 +170,7 @@ public class AirplaneSafeNetworksSlice implements CustomSliceable,
                 0 /* requestCode */, getIntent(),
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         final IconCompat icon = Utils.createIconWithDrawable(new ColorDrawable(Color.TRANSPARENT));
-        return SliceAction.createDeeplink(pendingIntent, icon, ListBuilder.ACTION_WITH_LABEL,
-                getTitle());
+        return SliceAction.create(pendingIntent, icon, ListBuilder.ACTION_WITH_LABEL, getTitle());
     }
 
     @Override

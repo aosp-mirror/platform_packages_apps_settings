@@ -123,7 +123,7 @@ public class UsbDetailsTranscodeMtpControllerTest {
         mUnderTest.refresh(true /* connected */, UsbManager.FUNCTION_MTP, POWER_ROLE_NONE,
                 DATA_ROLE_NONE);
 
-        assertThat(getSwitchPreference().isChecked()).isTrue();
+        assertThat(getSwitchPreference().isChecked()).isFalse();
     }
 
     @Test
@@ -162,7 +162,7 @@ public class UsbDetailsTranscodeMtpControllerTest {
         mUnderTest.displayPreference(mScreen);
         getSwitchPreference().performClick();
         getSwitchPreference().performClick();
-        assertThat(SystemProperties.getBoolean(TRANSCODE_MTP_SYS_PROP_KEY, false)).isFalse();
+        assertThat(SystemProperties.getBoolean(TRANSCODE_MTP_SYS_PROP_KEY, true)).isFalse();
     }
 
     @Test
