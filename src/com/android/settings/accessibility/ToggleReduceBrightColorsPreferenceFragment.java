@@ -157,7 +157,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
 
     @Override
     protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
-        switchPreference.setTitle(R.string.reduce_bright_colors_switch_title);
+        switchPreference.setTitle(R.string.reduce_bright_colors_preference_title);
     }
 
     @Override
