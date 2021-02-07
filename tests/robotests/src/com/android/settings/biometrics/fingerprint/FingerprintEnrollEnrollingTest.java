@@ -97,7 +97,7 @@ public class FingerprintEnrollEnrollingTest {
                 any(CancellationSignal.class),
                 anyInt(),
                 callbackCaptor.capture(),
-                eq(true));
+                eq(FingerprintManager.ENROLL_ENROLL));
 
         return callbackCaptor.getValue();
     }
