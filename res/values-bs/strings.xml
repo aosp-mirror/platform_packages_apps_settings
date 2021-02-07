@@ -341,7 +341,7 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Koristite lice za autentifikaciju"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Započni"</string>
-    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Ako je otključavanje licem za pristupačnost isključeno, neki koraci za postavljanje možda neće funkcionirati ispravno s Talkbackom."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Ako je otključavanje licem za pristupačnost isključeno, neki koraci za postavljanje možda neće funkcionirati ispravno s TalkBackom."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Nazad"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Nastavi postavljanje"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Koristi postavku za pristupačnost"</string>
@@ -2165,7 +2165,7 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Preuzete aplikacije"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentalno"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Oznake funkcija"</string>
-    <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
+    <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Čitač ekrana prvenstveno za slijepe i slabovidne osobe"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Dodirnite stavke na ekranu da se naglas pročitaju"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Postavke titlova"</string>
@@ -2299,6 +2299,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Isključeno"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Ne radi. Dodirnite za informacije."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ova usluga ne radi ispravno."</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Prečice za pristupačnost"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Prikaži u Brzim postavkama"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Način rada za ispravku"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deuteranomalija"</string>
@@ -2467,8 +2468,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi‑Fi na vrijeme"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Potrošnja baterije"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Detalji historije"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Prikaži potrošnju baterije"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Potrošnja baterije"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalji o upotrebi"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Podesite potrošnju energije"</string>
@@ -4154,6 +4154,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Prijenos fajlova"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Prebacite fajlove na drugi uređaj"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"Transkodirajte izvezene medijske fajlove"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Prebacuje slike ili fajlove ukoliko MTP nije podržan (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Povezivanje mobitela putem USB-a"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4161,8 +4162,8 @@
     <string name="usb_use" msgid="6783183432648438528">"Koristite USB za"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Zadana USB konfiguracija"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Kada se poveže drugi uređaj i vaš telefon je otključan, primijenit će se ove postavke. Povežite se samo s pouzdanim uređajima."</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"Opcije napajanja"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opcije prenošenja fajlova"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Postavke USB-a"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB-om upravlja"</string>
@@ -5021,10 +5022,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Nije dostupno dok je aktiviran način rada u avionu"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Nametni način rada na računaru"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Nametanje eksperimentalnog načina rada na računaru na sekundarnim ekranima"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Omogućite apl. nepromjenjive veličine u višestrukom prozoru"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Omogućava prikaz aplikacija nepromjenjive veličine u višestrukom prozoru"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Nadjačaj nametanje tamne teme"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Nadjačava funkciju nametanja tamne teme tako da je uvijek uključena"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Omogući zamućivanje"</string>
@@ -5148,10 +5147,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"avion, sigurno za rad u avionu"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Pozivi i SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Pozivanje putem WiFi-ja"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Uspostavljajte i primajte pozive putem WiFi mreže"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"Uz Pozivanje putem WiFi-ja, pozivi se uspostavljaju i primaju putem WiFi mreža koje ne pripadaju mobilnom operateru."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Pozivi"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"preferirano"</string>
@@ -5172,8 +5169,8 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Popravi povezivost"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Dostupne su mreže za način rada u zrakoplovu"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Da biste se prebacili na drugu mrežu, odspojite ethernet"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Nije moguće promijeniti mreže kada ste povezani"</string>
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Mreže za način rada u avionu"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Povezano"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Nije se moguće automatski povezati s internetom"</string>
@@ -5195,28 +5192,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"Ostalo"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Općenito"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Pogledajte sve aplikacije"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
-    <skip />
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Pametno prosljeđivanje"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Pametno prosljeđivanje je omogućeno"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Pametno prosljeđivanje je onemogućeno"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Postavke poziva"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Ažuriranje postavki..."</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Greška u postavkama poziva"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Greška na mreži ili SIM kartici."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM nije aktiviran."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Unesite brojeve telefona"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Unesite broj telefona"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Broj telefona nedostaje."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Uredu"</string>
 </resources>

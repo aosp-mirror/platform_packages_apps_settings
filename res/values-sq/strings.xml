@@ -732,8 +732,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Lidh"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Shkëput"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Ҫifto dhe lidh"</string>
-    <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"Hiq nga çiftimi"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"Shkëput dhe hiq nga çiftimi"</string>
+    <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"Anulo çiftimin"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"Shkëput dhe anulo çiftimin"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"Opsionet..."</string>
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Të përparuara"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Cilësimet e përparuara të Bluetooth-it"</string>
@@ -1219,7 +1219,7 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5107880175176848307">"Trokit për të menaxhuar autorizimet për \"Shërbimet e personalizimit të pajisjes\""</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Parandalon fikjen e ekranit nëse shikon tek ai"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Vëmendja ndaj ekranit përdor kamerën e përparme për të parë nëse dikush po shikon tek ekrani. Funksionon në pajisje dhe imazhet nuk dërgohen apo ruhen asnjëherë te Google."</string>
-    <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Aktivizo vëmendjen e ekranit"</string>
+    <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Aktivizo vëmendjen ndaj ekranit"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Mbaje ekranin aktiv kur e shikon"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Drita e natës"</string>
     <string name="night_display_text" msgid="4789324042428095383">"Drita e natës e ngjyros ekranin në ngjyrë qelibari. Kjo e bën më të lehtë shikimin e ekranit ose leximin në dritë të zbehtë dhe mund të të ndihmojë të flesh gjumë më lehtë."</string>
@@ -2274,6 +2274,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Joaktiv"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Nuk funksionon. Trokit për informacione."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ky shërbim nuk po funksionon mirë."</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Shkurtoret e qasshmërisë"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Shfaq në Cilësimet e shpejta"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Modaliteti i korrigjimit"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deuteranomali"</string>
@@ -2436,8 +2437,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Koha e aktivizimit të Wi‑Fi"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Përdorimi i baterisë"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Detajet e historikut"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Shiko përdorimin e baterisë"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Përdorimi i baterisë"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Përdor detajet"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Rregullo përdorimin e energjisë"</string>
@@ -4092,6 +4092,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Transferimi i skedarëve"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Transfero skedarët te një pajisje tjetër"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"Transkodo median e eksportuar"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transfero foto ose dosje, nëse MTP-ja nuk mbështetet (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Ndarja e internetit nëpërmjet USB-së"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4099,8 +4100,8 @@
     <string name="usb_use" msgid="6783183432648438528">"Opsionet e përdorimit të USB-së:"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Konfigurimi i parazgjedhur i USB-së"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Kur të lidhet një pajisje tjetër dhe telefoni yt të jetë i shkyçur, do të zbatohen këto cilësime. Lidhe vetëm me pajisje të besuara."</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"Opsionet e energjisë"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opsionet e transferimit të skedarëve"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferencat e USB-së"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB-ja kontrollohet nga"</string>
@@ -4940,10 +4941,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Nuk ofrohen në modalitetin e aeroplanit"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Detyro \"modalitetin e desktopit\""</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Detyro \"modalitetin e desktopit\" eksperimental në ekrane dytësore"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Aktivizo aplikacionet me madhësi jo të ndryshueshme në modalitetin me shumë dritare"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Lejon që aplikacionet me madhësi jo të ndryshueshme të shfaqen në modalitetin me shumë dritare"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Anulo detyrimin e errësimit"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Anulon funksionin e detyrimit të errësimit që të jetë gjithmonë aktiv"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Aktivizo turbullirat"</string>
@@ -5065,10 +5064,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"aeroplan, të sigurta për në aeroplan"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Telefonatat dhe SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Telefonatë me Wi-Fi"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Kryej dhe merr telefonata përmes Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"Me telefonatat me Wi‑Fi, telefonatat kryhen dhe merren përmes rrjeteve Wi-Fi jo të operatorëve celularë."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Telefonatat"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"preferohet"</string>
@@ -5089,8 +5086,8 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Rregullo problemin me lidhshmërinë"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Ofrohen rrjete të modalitetit të aeroplanit"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Për të ndërruar rrjetet, shkëput eternetin"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Rrjetet nuk mund të ndërrohen kur je lidhur"</string>
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Rrjetet e \"Modalitetit të aeroplanit\""</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Lidhur"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Interneti nuk do të lidhet automatikisht"</string>
@@ -5112,28 +5109,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"Të tjera"</string>
     <string name="category_name_general" msgid="7737273712848115886">"E përgjithshme"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Shiko të gjitha aplikacionet"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
-    <skip />
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Transferimi inteligjent"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Transferimi inteligjent është aktivizuar"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Transferimi inteligjent është çaktivizuar"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Cilësimet e telefonatave"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Po përditësohen cilësimet…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Gabim në cilësimet e telefonatave"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Gabim në rrjet ose në kartën SIM."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Karta SIM nuk është aktivizuar."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Fut numrat e telefonit"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Fut numrin e telefonit"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Numri i telefonit mungon."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Në rregull"</string>
 </resources>

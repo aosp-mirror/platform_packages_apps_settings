@@ -2275,6 +2275,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"關閉"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"運作唔到。㩒一下就可以睇到相關資料。"</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"呢個服務出現故障。"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"無障礙功能捷徑"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"在「快速設定」中顯示"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"校正模式"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"綠色弱視"</string>
@@ -2437,8 +2438,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi 開啟時間"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"電池用量"</string>
     <string name="history_details_title" msgid="8628584613889559355">"詳細記錄"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"查看電池用量"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"電池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"詳細使用狀況"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"調整電力使用"</string>
@@ -4093,6 +4093,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"檔案轉移"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"傳送檔案至另一部裝置"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"將已匯出的媒體轉碼"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"如不支援媒體傳輸協定，則使用相片傳輸協定傳送相片或檔案"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB 網絡共享"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4100,8 +4101,8 @@
     <string name="usb_use" msgid="6783183432648438528">"USB 用途"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"預設 USB 設定"</string>
     <string name="usb_default_info" msgid="167172599497085266">"連接至其他裝置且您的手機處於解鎖狀態時，系統便會套用這些設定。請務必只連接至信任的裝置。"</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"電源選項"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"檔案傳輸選項"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB 偏好設定"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB 由以下裝置控制"</string>
@@ -4941,10 +4942,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"飛行模式啟用期間無法使用"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"強制執行桌面模式"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"在次要顯示屏強制執行實驗版桌面模式"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"允許多重視窗模式顯示無法調整大小的應用程式"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"允許透過多重視窗模式顯示無法調整大小的應用程式"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"蓋過強制深色模式"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"蓋過永遠啟用強制深色模式的設定"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"啟用模糊效果"</string>
@@ -4995,9 +4994,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"緊急通話"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"您的電訊商目前不支援透過 Wi-Fi 通話撥打緊急電話。\n裝置會自動切換至流動網絡以撥打緊急電話。\n您只可在流動網絡覆蓋的區域撥打緊急電話。"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"使用 Wi‑Fi 撥打電話，以提升通話質素"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"備份通話"</string>
+    <string name="backup_calling_settings_title" msgid="519714752900364326">"備用通話"</string>
     <string name="backup_calling_setting_summary" msgid="451295393447465830">"如果「<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g>」無法使用，系統將透過流動數據 SIM 卡撥打和接聽「<xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>」的電話。"</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"備份通話"</string>
+    <string name="keywords_backup_calling" msgid="8592800915478816800">"備用通話"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"收到的 MMS 訊息"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"無法傳送 MMS 訊息"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"輕按即可在流動數據關閉的情況下透過<xliff:g id="OPERATOR_NAME">%1$s</xliff:g>傳送 MMS 訊息"</string>
@@ -5066,10 +5065,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"飛行, 飛行安全"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"通話和短訊"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi 通話"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"透過 Wi-Fi 撥打和接聽電話"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"Wi-Fi 通話可讓您透過非流動網絡供應商 Wi-Fi 網絡撥打和接聽電話。"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"通話"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"短訊"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"偏好"</string>
@@ -5090,8 +5087,8 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"修正連線"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"有可用的飛行模式網絡"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"如要切換網絡，請中斷以太網連線"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"連接以太網絡後就無法切絡"</string>
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"飛行模式網絡"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"已連線"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"不會自動連線至互聯網"</string>
@@ -5113,28 +5110,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"其他"</string>
     <string name="category_name_general" msgid="7737273712848115886">"一般"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"查看所有應用程式"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
-    <skip />
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"智能轉駁"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"智能轉駁功能已啟用"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"智能轉駁功能已停用"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"通話設定"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"正在更新設定…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"通話設定錯誤"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"網絡或 SIM 卡錯誤。"</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM 卡未啟用。"</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"輸入電話號碼"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"輸入電話號碼"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"缺少電話號碼。"</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"確定"</string>
 </resources>
