@@ -93,7 +93,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     .build();
 
     private boolean mCanAssumeUdfps;
-    private ProgressBar mProgressBar;
+    @Nullable private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
     private TextView mStartMessage;
     private TextView mRepeatMessage;
@@ -162,10 +162,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mProgressBar = findViewById(R.id.fingerprint_progress_bar);
         mVibrator = getSystemService(Vibrator.class);
 
-        if (mCanAssumeUdfps) {
-            mProgressBar.setVisibility(View.INVISIBLE);
-        }
-
         if (getLayout().shouldApplyPartnerHeavyThemeResource()) {
             DescriptionStyler.applyPartnerCustomizationHeavyStyle(mRepeatMessage);
         } else if (getLayout().shouldApplyPartnerResource()) {
@@ -181,7 +177,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                         .build()
         );
 
-        final LayerDrawable fingerprintDrawable = (LayerDrawable) mProgressBar.getBackground();
+        final LayerDrawable fingerprintDrawable = mProgressBar != null
+                ? (LayerDrawable) mProgressBar.getBackground() : null;
         if (fingerprintDrawable != null) {
             mIconAnimationDrawable = (AnimatedVectorDrawable)
                     fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_animation);
@@ -196,21 +193,23 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 this, android.R.interpolator.linear_out_slow_in);
         mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_linear_in);
-        mProgressBar.setOnTouchListener((v, event) -> {
-            if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                mIconTouchCount++;
-                if (mIconTouchCount == ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN) {
-                    showIconTouchDialog();
-                } else {
-                    mProgressBar.postDelayed(mShowDialogRunnable,
-                            ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN);
+        if (mProgressBar != null) {
+            mProgressBar.setOnTouchListener((v, event) -> {
+                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                    mIconTouchCount++;
+                    if (mIconTouchCount == ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN) {
+                        showIconTouchDialog();
+                    } else {
+                        mProgressBar.postDelayed(mShowDialogRunnable,
+                                ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN);
+                    }
+                } else if (event.getActionMasked() == MotionEvent.ACTION_CANCEL
+                        || event.getActionMasked() == MotionEvent.ACTION_UP) {
+                    mProgressBar.removeCallbacks(mShowDialogRunnable);
                 }
-            } else if (event.getActionMasked() == MotionEvent.ACTION_CANCEL
-                    || event.getActionMasked() == MotionEvent.ACTION_UP) {
-                mProgressBar.removeCallbacks(mShowDialogRunnable);
-            }
-            return true;
-        });
+                return true;
+            });
+        }
         mRestoring = savedInstanceState != null;
     }
 
@@ -236,9 +235,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         updateDescription();
         if (mRestoring) {
             startIconAnimation();
-            if (mCanAssumeUdfps) {
-                mProgressBar.setVisibility(View.VISIBLE);
-            }
         }
     }
 
@@ -248,8 +244,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         if (mCanAssumeUdfps) {
             startEnrollment();
-            updateProgress(false /* animate */);
-            mProgressBar.setVisibility(View.VISIBLE);
         }
 
         mAnimationCancelled = false;
@@ -276,6 +270,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void animateProgress(int progress) {
+        if (mCanAssumeUdfps) {
+            // UDFPS animations are owned by SystemUI
+            if (progress >= PROGRESS_BAR_MAX) {
+                // Wait for any animations in SysUI to finish, then proceed to next page
+                getMainThreadHandler().postDelayed(mDelayedFinishRunnable, FINISH_DELAY);
+            }
+            return;
+        }
         if (mProgressAnim != null) {
             mProgressAnim.cancel();
         }
@@ -356,7 +358,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         if (animate) {
             animateProgress(progress);
         } else {
-            mProgressBar.setProgress(progress);
+            if (mProgressBar != null) {
+                mProgressBar.setProgress(progress);
+            }
             if (progress >= PROGRESS_BAR_MAX) {
                 mDelayedFinishRunnable.run();
             }

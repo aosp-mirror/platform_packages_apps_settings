@@ -31,45 +31,12 @@ public class UdfpsEnrollLayout extends LinearLayout {
 
     private static final String TAG = "UdfpsEnrollLayout";
 
-    private final FingerprintSensorPropertiesInternal mSensorProps;
-    private final int mSensorDiameter;
-    private final int mAnimationDiameter;
-
     public UdfpsEnrollLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mSensorProps = context.getSystemService(FingerprintManager.class)
-                .getSensorPropertiesInternal().get(0);
-        mSensorDiameter = mSensorProps.sensorRadius * 2;
-        // Multiply the progress bar size slightly so that the progress bar is outside the UDFPS
-        // affordance, which is shown by SystemUI
-        mAnimationDiameter = (int) (mSensorDiameter * 2);
-    }
-
-    @Override
-    public void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        final View animation = findViewById(R.id.fingerprint_progress_bar);
-        final WindowManager wm = getContext().getSystemService(WindowManager.class);
-        final int statusbarHeight = Math.abs(wm.getCurrentWindowMetrics().getWindowInsets()
-                .getInsets(WindowInsets.Type.statusBars()).toRect().height());
-
-        // Calculate the amount of translation required. This is just re-arranged from
-        // animation.setY(mSensorProps.sensorLocationY-statusbarHeight-mSensorProps.sensorRadius)
-        // The translationY is the amount of extra height that should be added to the spacer
-        // above the animation
-        final int spaceHeight = mSensorProps.sensorLocationY - statusbarHeight
-                - (mAnimationDiameter / 2) - animation.getTop();
-         animation.setTranslationY(spaceHeight);
     }
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        final View animation = findViewById(R.id.fingerprint_progress_bar);
-
-        animation.measure(MeasureSpec.makeMeasureSpec(mAnimationDiameter, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(mAnimationDiameter, MeasureSpec.EXACTLY));
     }
 }
