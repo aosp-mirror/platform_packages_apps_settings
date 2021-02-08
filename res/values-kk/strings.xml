@@ -1654,7 +1654,7 @@
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Хотспот қосулы, тетеринг"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Хотспот қосулы"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Тетеринг"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"Data Saver функциясы қосулы кезде, тетерингті немесе тасымалы хот-спотты пайдалану мүмкін емес"</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"Трафикті үнемдеу функциясы қосулы кезде, тетерингті немесе тасымалы хот-спотты пайдалану мүмкін емес"</string>
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Тек хотспот"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Тек USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Тек Bluetooth"</string>
@@ -2274,6 +2274,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Өшірулі"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Жұмыс істеп тұрған жоқ. Ақпарат алу үшін түртіңіз."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Бұл қызмет жұмыс істемейді."</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Арнайы мүмкіндіктердің жылдам пәрмендері"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Жылдам параметрлер арқылы көрсету"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Түзету режимі"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Дейтераномалия"</string>
@@ -2436,8 +2437,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi‑Fi уақытында"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Батарея шығыны"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Тарих егжей-тегжейі"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Батарея шығынын көру"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Батарея шығыны"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Қолдану деректері"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Қуат қолданысын бейімдеу"</string>
@@ -4092,6 +4092,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Файл жіберу"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Файлдарды басқа құрылғыға тасымалдау"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"Экспортталған медиамазмұнды қайта кодтау"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"MTP қолдауы жоқ болса (PTP), фотосуреттерді немесе файлдарды тасымалдау"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB тетеринг"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4099,8 +4100,8 @@
     <string name="usb_use" msgid="6783183432648438528">"USB пайдалану мақсаты"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Әдепкі USB конфигурациясы"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Басқа құрылғымен байланыс орнатылып, телефоныңыздың құлпы ашық болса, осы параметрлер қолданылады. Тек сенімді құрылғылармен байланыс орнатқан жөн."</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"Қуат түймесінің опциялары"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Файл жіберу опциялары"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB параметрлері"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB-ді басқаратын құрылғы"</string>
@@ -4261,7 +4262,7 @@
     <string name="condition_battery_summary" msgid="8436806157833107886">"Мүмкіндіктер шектеулі"</string>
     <string name="condition_cellular_title" msgid="155474690792125747">"Мобильдік деректер өшірулі"</string>
     <string name="condition_cellular_summary" msgid="1678098728303268851">"Интернетке Wi‑Fi арқылы ғана жалғануға болады"</string>
-    <string name="condition_bg_data_title" msgid="2719263664589753094">"Data Saver"</string>
+    <string name="condition_bg_data_title" msgid="2719263664589753094">"Трафикті үнемдеу"</string>
     <string name="condition_bg_data_summary" msgid="1736255283216193834">"Мүмкіндіктер шектеулі"</string>
     <string name="condition_work_title" msgid="174326145616998813">"Жұмыс профилі өшірулі"</string>
     <string name="condition_work_summary" msgid="7113473121312772398">"Қолданбалар және хабарландырулар үшін"</string>
@@ -4330,8 +4331,8 @@
     <string name="configure" msgid="1499586749829665889">"Конфигурациялау"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Басқа қолданбалар трафикке қосылды"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="other">Data Saver қосулы кезде, <xliff:g id="COUNT">%1$d</xliff:g> қолданбаға деректерді шексіз пайдалануға рұқсат етілген</item>
-      <item quantity="one">Data Saver қосулы кезде, 1 қолданбаға деректерді шексіз пайдалануға рұқсат етілген</item>
+      <item quantity="other">Трафикті үнемдеу режимі қосулы кезде, <xliff:g id="COUNT">%1$d</xliff:g> қолданбаға деректерді шексіз пайдалануға рұқсат етілген</item>
+      <item quantity="one">Трафикті үнемдеу режимі қосулы кезде, 1 қолданбаға деректерді шексіз пайдалануға рұқсат етілген</item>
     </plurals>
     <string name="data_usage_title" msgid="4039024073687469094">"Негізгі деректер"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi деректері"</string>
@@ -4353,14 +4354,14 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Жаңа ғана жаңартылды"</string>
     <string name="launch_mdp_app_text" msgid="8791816789749304897">"Жоспарды көру"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Мәліметтерді көру"</string>
-    <string name="data_saver_title" msgid="2593804270788863815">"Data Saver"</string>
+    <string name="data_saver_title" msgid="2593804270788863815">"Трафикті үнемдеу"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Шектелмейтін деректер"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Фондық дерек өшірілген."</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Қосулы"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Өшірулі"</string>
-    <string name="data_saver_switch_title" msgid="7111538580123722959">"Data Saver функциясын қолдану"</string>
+    <string name="data_saver_switch_title" msgid="7111538580123722959">"Трафикті үнемдеу функциясын қолдану"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Деректерді шексіз пайдалану"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Data Saver қосулы кезде, деректерді шексіз пайдалануға рұқсат ету"</string>
+    <string name="unrestricted_app_summary" msgid="282698963532000403">"Трафикті үнемдеу режимі қосулы кезде, деректерді шексіз пайдалануға рұқсат ету"</string>
     <string name="home_app" msgid="6056850504746902747">"Негізгі экран қолданбасы"</string>
     <string name="no_default_home" msgid="3588073707316139318">"Әдепкі негізгі бет жоқ"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="4098653943835666086">"Қорғалған іске қосу"</string>
@@ -4940,10 +4941,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Ұшақ режимінде қолжетімді емес."</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Жұмыс үстелінің режимін мәжбүрлі қосу"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Қосымша дисплейлерде эксперименттік жұмыс үстелі режимін мәжбүрлі қосу"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Өлшемі өзгермейтін қолданбаны \"Multi-window\" режимінде қосу"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Өлшемі өзгермейтін қолданбаларды \"Multi-window\" режимінде пайдалануға мүмкіндік береді."</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Қараңғылауға жол бермеу"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Қараңғы тақырыпты мәжбүрлеп қойғанда, \"Әрдайым қосулы\" мәніне өзгертеді"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Бұлдырату функциясын қосу"</string>
@@ -5065,10 +5064,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"ұшақ, ұшақта қолдануға болатын желі"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Қоңыраулар мен SMS хабарлары"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi қоңыраулары"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Wi‑Fi арқылы қоңырау шалу және қабылдау"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"Wi-Fi қоңырауларын пайдаланған кезде, қоңыраулар оператордан тыс Wi-Fi желілерінен шалынады және қабылданады."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Қоңыраулар"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"таңдаулы"</string>
@@ -5089,8 +5086,8 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Қосылу мүмкіндігін түзету"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Ұшақ режиміндегі желілер қолжетімді."</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Желілерді ауыстыру үшін ethernet кабелін ажыратыңыз."</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Қосулы болса, желілерді ауыстыру мүмкін емес."</string>
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Ұшақ режимі желілері"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Қосылды"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Интернет автоматты түрде қосылмайды"</string>
@@ -5112,28 +5109,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"Басқалар"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Жалпы"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Барлық қолданбаны қарау"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
-    <skip />
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Қоңырауды басқа нөмірге бағыттау"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Қоңырауды басқа нөмірге бағыттау қосылды."</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Қоңырауды басқа нөмірге бағыттау өшірілді."</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Қоңырау параметрлері"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Параметрлер жаңартылуда…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Қоңырау параметрлері қатесі"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Желі немесе SIM картасының қатесі."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM картасы іске қосылмаған."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Телефон нөмірлерін енгізіңіз"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Телефон нөмірін енгізіңіз"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Телефон нөмірі енгізілмеген."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Жарайды"</string>
 </resources>

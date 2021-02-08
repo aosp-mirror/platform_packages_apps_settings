@@ -2274,6 +2274,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"OFF"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"動作していません。タップすると情報が表示されます。"</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"このサービスは機能していません。"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"ユーザー補助機能のショートカット"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"クイック設定に表示"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"補正モード"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"第二色弱"</string>
@@ -2322,7 +2323,7 @@
     <string name="captioning_window_color" msgid="1406167274530183119">"字幕ウィンドウの色"</string>
     <string name="captioning_window_opacity" msgid="4031752812991199525">"字幕ウィンドウの透明度"</string>
     <string name="captioning_foreground_color" msgid="9057327228286129232">"テキストの色"</string>
-    <string name="captioning_foreground_opacity" msgid="1395843080697567189">"テキストの透明度"</string>
+    <string name="captioning_foreground_opacity" msgid="1395843080697567189">"テキストの不透明度"</string>
     <string name="captioning_edge_color" msgid="6035818279902597518">"エッジの色"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"エッジの種類"</string>
     <string name="captioning_typeface" msgid="285325623518361407">"フォントファミリー"</string>
@@ -2436,8 +2437,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-FiをONにしている時間"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"電池使用量"</string>
     <string name="history_details_title" msgid="8628584613889559355">"履歴の詳細"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"電池使用量の確認"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"電池の使用状況"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"使用状況の詳細"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"消費電力の調整"</string>
@@ -4092,6 +4092,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"ファイル転送"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"ファイルを別のデバイスに転送します"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"エクスポートしたメディアのコード変換"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"写真を転送またはMTPがサポートされない場合にファイルを転送する（PTP）"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB テザリング"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4099,8 +4100,8 @@
     <string name="usb_use" msgid="6783183432648438528">"USB の使用"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"デフォルトの USB 設定"</string>
     <string name="usb_default_info" msgid="167172599497085266">"別のデバイスが接続されてスマートフォンのロックが解除されると、この設定が適用されます。信頼できるデバイスにのみ接続してください。"</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"電源オプション"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"ファイル転送オプション"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB の設定"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB の管理"</string>
@@ -4940,10 +4941,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"機内モードの間は使用できません"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"デスクトップ モードに強制的に切り替え"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"セカンダリ ディスプレイで試験運用版デスクトップ モードに強制的に切り替えます"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"マルチウィンドウでのサイズ変更不可を有効にする"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"サイズ変更できないアプリをマルチウィンドウで使用できるようにする"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"フォースダークのオーバーライド"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"フォースダーク機能をオーバーライドして常に ON にする"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"ぼかしを有効にする"</string>
@@ -5065,10 +5064,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"機内、機内で利用できる"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"通話と SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi 通話"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Wi-Fi を利用して通話の発信と着信を行います"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"Wi-Fi 通話では、携帯通信会社以外のネットワークを利用して通話の発信と着信を行います。"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"通話"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"優先"</string>
@@ -5089,8 +5086,8 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"接続を修正"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"機内モード ネットワークを利用できます"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"ネットワークを切り替えるには、イーサネット接続を解除してください"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"接続中はネットワークを切り替えられません"</string>
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"機内モード ネットワーク"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"接続済み"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"インターネットに自動的に接続されません"</string>
@@ -5112,28 +5109,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"その他"</string>
     <string name="category_name_general" msgid="7737273712848115886">"全般"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"アプリをすべて表示"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
-    <skip />
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"スマート転送"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"スマート転送が有効です"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"スマート転送が無効です"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"通話設定"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"設定を更新中…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"通話設定エラー"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"ネットワークまたは SIM カードのエラーです。"</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"SIM が無効です。"</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"電話番号を入力"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"電話番号を入力"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"電話番号が指定されていません。"</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
 </resources>
