@@ -21,7 +21,6 @@ import static com.android.internal.net.VpnProfile.isLegacyType;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.net.Proxy;
 import android.net.ProxyInfo;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -41,6 +40,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.net.VpnProfile;
+import com.android.net.module.util.ProxyUtils;
 import com.android.settings.R;
 
 import java.net.InetAddress;
@@ -637,7 +637,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
 
         final String host = mProxyHost.getText().toString().trim();
         final String port = mProxyPort.getText().toString().trim();
-        return Proxy.validate(host, port, "") == Proxy.PROXY_VALID;
+        return ProxyUtils.validate(host, port, "") == ProxyUtils.PROXY_VALID;
     }
 
 }
