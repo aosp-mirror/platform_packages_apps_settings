@@ -74,6 +74,7 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
     @Override
     public void register(boolean register) {
         if (register) {
+            mWifiTracker.fetchInitialState();
             notifyChangeIfNeeded();
             mContext.registerReceiver(mReceiver, INTENT_FILTER);
         } else {
