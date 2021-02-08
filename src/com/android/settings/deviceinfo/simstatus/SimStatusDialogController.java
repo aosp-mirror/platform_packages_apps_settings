@@ -550,8 +550,11 @@ public class SimStatusDialogController implements LifecycleObserver {
             voiceNetworkTypeName = getNetworkTypeName(actualVoiceNetworkType);
         }
 
-        if (overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE
-                || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA) {
+        final boolean isOverrideNwTypeNrAdvancedOrNsa =
+                overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_ADVANCED
+                        || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA;
+        if (actualDataNetworkType == TelephonyManager.NETWORK_TYPE_LTE
+                && isOverrideNwTypeNrAdvancedOrNsa) {
             dataNetworkTypeName = "NR NSA";
         }
 
