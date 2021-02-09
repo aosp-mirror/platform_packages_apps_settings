@@ -22,8 +22,8 @@
         android:key="app_ops_settings_switch"
         android:title="@string/picture_in_picture_app_detail_switch"/>
 
-    <Preference
-        android:summary="@string/picture_in_picture_app_detail_summary"
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/picture_in_picture_app_detail_summary"
         android:selectable="false"/>
 
 </PreferenceScreen>
