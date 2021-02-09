@@ -17,39 +17,39 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-/** Accessibility settings for text and display. */
+/** Accessibility settings for turning screen darker. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class TextAndDisplayFragment extends DashboardFragment {
+public class TurnScreenDarkerFragment extends DashboardFragment {
 
-    private static final String TAG = "TextAndDisplayFragment";
+    private static final String TAG = "TurnDarkerFragment";
 
     private static final String CATEGORY_EXPERIMENTAL = "experimental_category";
 
     // Preferences
-    private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN = "daltonizer_preference";
-    private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
-    private static final String TOGGLE_LARGE_POINTER_ICON = "toggle_large_pointer_icon";
+    private static final String TOGGLE_INVERSION_PREFERENCE = "toggle_inversion_preference";
+    private static final String DISPLAY_REDUCE_BRIGHT_COLORS_PREFERENCE_SCREEN =
+            "reduce_bright_colors_preference";
 
-    private Preference mDisplayDaltonizerPreferenceScreen;
-    private SwitchPreference mToggleDisableAnimationsPreference;
-    private SwitchPreference mToggleLargePointerIconPreference;
+    private Preference mToggleInversionPreference;
+    private Preference mReduceBrightColorsPreference;
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCESSIBILITY_TEXT_AND_DISPLAY;
+        return SettingsEnums.ACCESSIBILITY_TURN_SCREEN_DARKER;
     }
 
 
@@ -61,8 +61,14 @@ public class TextAndDisplayFragment extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(DarkUIPreferenceController.class).setParentFragment(this);
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_text_and_display;
+        return R.xml.accessibility_turn_screen_darker;
     }
 
     @Override
@@ -71,14 +77,12 @@ public class TextAndDisplayFragment extends DashboardFragment {
     }
 
     private void initializeAllPreferences() {
-        // Display color adjustments.
-        mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
+        // Display inversion.
+        mToggleInversionPreference = findPreference(TOGGLE_INVERSION_PREFERENCE);
 
-        // Disable animation.
-        mToggleDisableAnimationsPreference = findPreference(TOGGLE_DISABLE_ANIMATIONS);
-
-        // Large pointer icon.
-        mToggleLargePointerIconPreference = findPreference(TOGGLE_LARGE_POINTER_ICON);
+        // Reduce brightness.
+        mReduceBrightColorsPreference =
+                findPreference(DISPLAY_REDUCE_BRIGHT_COLORS_PREFERENCE_SCREEN);
     }
 
     /**
@@ -88,21 +92,21 @@ public class TextAndDisplayFragment extends DashboardFragment {
         final PreferenceCategory experimentalCategory = getPreferenceScreen().findPreference(
                 CATEGORY_EXPERIMENTAL);
         if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
-            mDisplayDaltonizerPreferenceScreen.setSummary(AccessibilityUtil.getSummary(
-                    getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED));
+            mToggleInversionPreference.setSummary(AccessibilityUtil.getSummary(
+                    getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED));
+            mReduceBrightColorsPreference.setSummary(AccessibilityUtil.getSummary(
+                    getContext(), Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED));
             getPreferenceScreen().removePreference(experimentalCategory);
         } else {
             // Move following preferences to experimental category if device don't supports HWC
             // hardware-accelerated color transform.
-            getPreferenceScreen().removePreference(mDisplayDaltonizerPreferenceScreen);
-            getPreferenceScreen().removePreference(mToggleDisableAnimationsPreference);
-            getPreferenceScreen().removePreference(mToggleLargePointerIconPreference);
-            experimentalCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
-            experimentalCategory.addPreference(mToggleDisableAnimationsPreference);
-            experimentalCategory.addPreference(mToggleLargePointerIconPreference);
+            getPreferenceScreen().removePreference(mToggleInversionPreference);
+            getPreferenceScreen().removePreference(mReduceBrightColorsPreference);
+            experimentalCategory.addPreference(mToggleInversionPreference);
+            experimentalCategory.addPreference(mReduceBrightColorsPreference);
         }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_text_and_display);
+            new BaseSearchIndexProvider(R.xml.accessibility_turn_screen_darker);
 }
