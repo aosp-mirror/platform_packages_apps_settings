@@ -18,17 +18,13 @@ package com.android.settings.vpn2;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
-import android.net.IConnectivityManager;
+import android.net.ConnectivityManager;
 import android.net.VpnManager;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -52,9 +48,9 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
     private PackageInfo mPackageInfo;
     private Listener mListener;
 
+    private ConnectivityManager mConnectivityManager;
     private UserManager mUserManager;
-    private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
-            ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
+    private VpnManager mVpnManager;
 
     @Override
     public int getMetricsCategory() {
@@ -97,7 +93,9 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mConnectivityManager = getContext().getSystemService(ConnectivityManager.class);
         mUserManager = UserManager.get(getContext());
+        mVpnManager = getContext().getSystemService(VpnManager.class);
     }
 
     @Override
@@ -145,14 +143,9 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
             return;
         }
         final int userId = getUserId();
-        try {
-            mService.setVpnPackageAuthorization(
-                    mPackageInfo.packageName, userId, VpnManager.TYPE_VPN_NONE);
-            onDisconnect(dialog);
-        } catch (RemoteException e) {
-            Log.e(TAG, "Failed to forget authorization of " + mPackageInfo.packageName +
-                    " for user " + userId, e);
-        }
+        mVpnManager.setVpnPackageAuthorization(
+                mPackageInfo.packageName, userId, VpnManager.TYPE_VPN_NONE);
+        onDisconnect(dialog);
 
         if (mListener != null) {
             mListener.onForget();
@@ -164,15 +157,10 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
             return;
         }
         final int userId = getUserId();
-        try {
-            if (mPackageInfo.packageName.equals(VpnUtils.getConnectedPackage(mService, userId))) {
-                mService.setAlwaysOnVpnPackage(userId, null, /* lockdownEnabled */ false,
-                        /* lockdownWhitelist */ null);
-                mService.prepareVpn(mPackageInfo.packageName, VpnConfig.LEGACY_VPN, userId);
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Failed to disconnect package " + mPackageInfo.packageName +
-                    " for user " + userId, e);
+        if (mPackageInfo.packageName.equals(VpnUtils.getConnectedPackage(mVpnManager, userId))) {
+            mConnectivityManager.setAlwaysOnVpnPackageForUser(userId, null,
+                    /* lockdownEnabled */ false, /* lockdownAllowlist */ null);
+            mVpnManager.prepareVpn(mPackageInfo.packageName, VpnConfig.LEGACY_VPN, userId);
         }
     }
 
