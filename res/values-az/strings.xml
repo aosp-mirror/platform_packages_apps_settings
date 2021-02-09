@@ -1211,7 +1211,7 @@
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Rahat Displey"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Bəzi məzmun üçün yeniləmə dərəcəsini 60 Hs-dən 90 Hs-ə avtomatik yüksəldir. Batareya istifadəsini artırır."</string>
     <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90 Hs yeniləmə dərəcəsini məcbur tətbiq edin"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Təkmilləşdirilmiş toxunuş həssaslığı və animasiya keyfiyyəti üçün yüksək yeniləmə dərəcəsi. Batareya istifadəsini artırır."</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Daha həssas sensor və daha axıcı animasiyalar üçün yüksək təzələmə dərəcəsi. Enerji sərfiyyatını artırır."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ekran həssaslığı"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aktiv/ Ekrana baxırsınızsa, sönməyəcək"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Deaktiv"</string>
@@ -1434,7 +1434,7 @@
     <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"SD kartınızı çıxarsanız, istifadə etdiyiniz bəzi tətbiqlər SD kartı geri qaytarana kimi işləməyəcəklər."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"USB yaddaşı çıxarmaq mümkün olmadı. Daha sonra yenidən cəhd edin."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"USB-ni çıxarmaq olmur. Sonra cəhd edin."</string>
     <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD kart çıxarıla bilmədi. Sonra cəhd edin.."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"USB yaddaş çıxarılacaq."</string>
     <string name="unmount_inform_text" product="default" msgid="716578785262713312">"SD cart çıxarılacaq."</string>
@@ -2274,6 +2274,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Deaktiv"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"İşləmir. Məlumat üçün klikləyin."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Xidmətdə problem var."</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Əlçatımlılıq qısayolları"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Sürətli Ayarlarda Göstər"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Korreksiya rejimi"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deyteranomaliya"</string>
@@ -2436,8 +2437,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi zamanı"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Batareya istifadəsi"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Tarixçə detalları"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Batareya istifadəsinə baxın"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Batareya istifadəsi"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Ətraflı istifadə"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Enerji istifadəsini idarə edin"</string>
@@ -2905,7 +2905,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"İnternet üzərindən hesabınıza etdiyiniz istənilən dəyişiklik planşetdə avtomatik qeyd ediləcək.\n\nBəzi hesablar planşet vasitəsilə internetdə etdiyiniz dəyişiklikləri avtomatik kopyalaya bilər. Google Hesabları da belə edir."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"İnternet üzərindən hesabınıza etdiyiniz istənilən dəyişiklik telefonda avtomatik qeyd ediləcək.\n\nBəzi hesablar telefon vasitəsilə internetdə etdiyiniz dəyişiklikləri avtomatik kopyalaya bilər. Google Hesabları da belə edir."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Avto-sinxronizasiya deaktiv edilsin?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Bu, data və batareya istifadəsinə qənaət edəcək, lakin Siz sonuncu məlumatları toplamaq üçün hər hesabı əl ilə sinxronlaşdırmalı olacaqsınız. Və güncəlləşmə vaxtı gələndə Sizə bildiriş gəlməyəcək."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Trafik və enerji sərfiyyatı azalacaq, lakin yeni datanın əldə edilməsi üçün hesab əl ilə sinxronlaşdırılmalı olacaq. Yeni güncəllənmə olanda sizə bildiriş gəlməyəcək."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Tarixin dövri sıfırlanması istifadəsi"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Hər ayın tarixi:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Ayarlayın"</string>
@@ -4092,6 +4092,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Fayl Transferi"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Faylları başqa cihaza köçürün"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"Eksport edilmiş medianın kodunu dəyişdirin"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Əgər MTP dəstəklənmirsə (PTP), foto və faylları transfer edin"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB birləşmə"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4099,8 +4100,8 @@
     <string name="usb_use" msgid="6783183432648438528">"USB istifadəsi"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Defolt USB konfiqurasiyası"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Digər cihaz qoşulu olduqda və telefon kiliddə olmadıqda bu ayarlar tətbiq olunacaq. Yalnız etibar edilən cihazlara qoşulacaqsınız."</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"Enerji seçimləri"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Fayl ötürmə seçimləri"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB Tərcihləri"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB nəzarətçisi"</string>
@@ -4940,10 +4941,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"Təyyarə rejimində əlçatan deyil"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Masaüstü rejiminə keçin"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"İkinci displeylərdə eksperimental masaüstü rejimə keçin"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Çoxpəncərəli rejimdə ölçüsü dəyişməyənləri aktiv edin"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Çoxpəncərəli rejimdə ölçüsü dəyişməyən tətbiqlərin olmasına imkan verir"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Qaranlıq rejimini ləğv edir"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Qaranlıq rejiminin həmişə aktiv olmasını ləğv edir"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Tutqunluqları aktivləşdirin"</string>
@@ -5065,10 +5064,8 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"təyyarə, güvənli təyyarə şəbəkəsi"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Zənglər və SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi Zəngi"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Zəngləri Wi‑Fi üzərindən edin və qəbul edin"</string>
+    <string name="calls_sms_footnote" msgid="8051604228144899434">"Wi‑Fi zəngi ilə zənglər operatordan kənar Wi‑Fi şəbəkələri üzərindən edilir və qəbul edilir."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Zənglər"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"tərcih edilənlər"</string>
@@ -5089,8 +5086,8 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Bağlantını düzəldin"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Təyyarə rejimi şəbəkələri əlçatandır"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Şəbəkələri dəyişmək üçün etherneti ayırın"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Qoşulduqdan sonra şəbəkələri dəyişmək olmur"</string>
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Təyyatə rejimi şəbəkələri"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Qoşulub"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"İnternet avtomatik qoşulmayacaq"</string>
@@ -5112,28 +5109,16 @@
     <string name="category_name_others" msgid="2366006298768550310">"Digərləri"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Ümumi"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Bütün tətbiqlərə baxın"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
-    <skip />
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"Ağıllı Yönləndirmə"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Ağıllı Yönləndirmə aktivdir"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Ağıllı Yönləndirmə deaktivdir"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"Zəng Ayarları"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"Ayarlar yenilənir…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"Zəng ayarları xətası"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"Şəbəkə və ya SİM kart xətası."</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"Sim aktiv deyil."</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"Telefon nömrələrini daxil edin"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Telefon nömrəsini daxil edin"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefon nömrəsi yoxdur."</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
 </resources>

@@ -4950,6 +4950,8 @@
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_text_and_display_title">Text and display</string>
+    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
+    <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility tap assistance page. [CHAR LIMIT=50] -->
@@ -5276,17 +5278,40 @@
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
-    <!-- TODO(b/170970602): remove translatable=false when RBC has official name and strings -->
-    <!-- Title for the accessibility preference to configure Reduce Bright Colors feature. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_preference_title" translatable="false">Reduce Bright Colors</string>
-    <!-- Used in the accessibility service settings to control switching Reduce Bright Colors on/off. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_switch_title" translatable="false">Use Reduce Bright Colors</string>
-    <!-- Subtitle that describes Reduce Bright Colors. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_preference_subtitle" translatable="false">Reduce Bright Colors reduces screen brightness.</string>
-    <!-- Title for setting the brightness intensity of the display using Reduce Bright Colors. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_intensity_preference_title" translatable="false">Intensity</string>
-    <!-- Title for setting whether the Reduce Bright Colors activation state persists across reboots. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_persist_preference_title" translatable="false">Keeps feature on after a restart</string>
+    <!-- Title for the accessibility preference and switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_title">Reduce Brightness</string>
+    <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_summary" product="default">Make screen darker than your phone\u2019s minimum brightness</string>
+    <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_summary" product="tablet">Make screen darker than your tablet\u2019s minimum brightness</string>
+    <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_subtitle" product="default">
+        <![CDATA[Make your screen darker so it\u2019s more comfortable to read.<br/><br/>
+        This can be helpful when:
+        <ol>
+            <li>\u00a0Your phone\u2019s default minimum brightness is still too bright</li>
+            <li>\u00a0You\u2019re using your phone in dark situations, like at night or in a dark room before bed</li>
+        </ol>
+        ]]>
+    </string>
+    <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet">
+        <![CDATA[Make your screen darker so it\u2019s more comfortable to read.<br/><br/>
+        This can be helpful when:
+        <ol>
+            <li>\u00a0Your tablet\u2019s default minimum brightness is still too bright</li>
+            <li>\u00a0You\u2019re using your tablet in dark situations, like at night or in a dark room before bed</li>
+        </ol>
+        ]]>
+    </string>
+    <!-- Title for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_preference_title">Intensity</string>
+    <!-- Start label for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=50] -->
+    <string name="reduce_bright_colors_intensity_preference_start_label">Slightly darker</string>
+    <!-- End label for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_preference_end_label">Darkest</string>
+    <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
@@ -12567,13 +12592,15 @@
     <!-- Provider Model: SMS preference title -->
     <string name="sms_preference_title">SMS</string>
     <!-- Provider Model: Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_preferred">Preferred for calls &amp; SMS</string>
+    <string name="calls_sms_preferred">preferred</string>
     <!-- Provider Model: Calls Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_calls_preferred">Preferred for calls</string>
+    <string name="calls_sms_calls_preferred">preferred for calls</string>
     <!-- Provider Model: SMS Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_sms_preferred">Preferred for SMS</string>
+    <string name="calls_sms_sms_preferred">preferred for SMS</string>
     <!-- Provider Model: Unavailable status in summary for Calls & SMS -->
-    <string name="calls_sms_unavailable">Temporarily unavailable</string>
+    <string name="calls_sms_unavailable">unavailable</string>
+    <!-- Provider Model: Temporarily unavailable status in summary for Calls & SMS -->
+    <string name="calls_sms_temp_unavailable">Temporarily unavailable</string>
     <!-- Provider Model: No SIM status in summary for Calls & SMS -->
     <string name="calls_sms_no_sim">No SIM</string>
     <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
