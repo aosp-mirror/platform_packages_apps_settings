@@ -74,7 +74,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
 
         getPreferenceScreen().setTitle(R.string.usage_access);
         mSwitchPref.setTitle(R.string.permit_usage_access);
-        mUsageDesc.setSummary(R.string.usage_access_description);
+        mUsageDesc.setTitle(R.string.usage_access_description);
 
         mSwitchPref.setOnPreferenceChangeListener(this);
 
