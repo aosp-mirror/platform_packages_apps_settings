@@ -20,8 +20,10 @@ import static androidx.lifecycle.Lifecycle.Event;
 
 import android.content.Context;
 import android.os.UserManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
@@ -31,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -45,7 +48,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     private UserManager mUserManager;
     private SubscriptionManager mSubscriptionManager;
     private SubscriptionsChangeListener mSubscriptionsChangeListener;
-
+    private TelephonyManager mTelephonyManager;
     private RestrictedPreference mPreference;
 
     /**
@@ -57,6 +60,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
         mUserManager = context.getSystemService(UserManager.class);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         if (lifecycle != null) {
             mSubscriptionsChangeListener = new SubscriptionsChangeListener(context, this);
             lifecycle.addObserver(this);
@@ -91,16 +95,18 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
             final StringBuilder summary = new StringBuilder();
             for (SubscriptionInfo subInfo : subs) {
                 int subsSize = subs.size();
+                int subId = subInfo.getSubscriptionId();
                 final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                         subInfo, mContext);
 
                 // Set displayName as summary if there is only one valid SIM.
                 if (subsSize == 1
-                        && SubscriptionManager.isValidSubscriptionId(subInfo.getSubscriptionId())) {
+                        && SubscriptionManager.isValidSubscriptionId(subId)
+                        && isInService(subId)) {
                     return displayName;
                 }
 
-                CharSequence status = getPreferredStatus(subInfo);
+                CharSequence status = getPreferredStatus(subsSize, subId);
                 if (status.toString().isEmpty()) {
                     // If there are 2 or more SIMs and one of these has no preferred status,
                     // set only its displayName as summary.
@@ -121,14 +127,14 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     }
 
     @VisibleForTesting
-    protected CharSequence getPreferredStatus(SubscriptionInfo subInfo) {
-        final int subId = subInfo.getSubscriptionId();
+    protected CharSequence getPreferredStatus(int subsSize, int subId) {
         String status = "";
         boolean isDataPreferred = subId == getDefaultVoiceSubscriptionId();
         boolean isSmsPreferred = subId == getDefaultSmsSubscriptionId();
 
-        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
-            status = setSummaryResId(R.string.calls_sms_unavailable);
+        if (!SubscriptionManager.isValidSubscriptionId(subId) || !isInService(subId)) {
+            status = setSummaryResId(subsSize > 1 ? R.string.calls_sms_unavailable :
+                    R.string.calls_sms_temp_unavailable);
         } else {
             if (isDataPreferred && isSmsPreferred) {
                 status = setSummaryResId(R.string.calls_sms_preferred);
@@ -202,5 +208,12 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     public void onSubscriptionsChanged() {
         refreshSummary(mPreference);
         update();
+    }
+
+    @VisibleForTesting
+    protected boolean isInService(int subId) {
+        ServiceState serviceState =
+                mTelephonyManager.createForSubscriptionId(subId).getServiceState();
+        return Utils.isInService(serviceState);
     }
 }
