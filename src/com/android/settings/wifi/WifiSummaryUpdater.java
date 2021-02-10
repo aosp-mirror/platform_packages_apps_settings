@@ -98,4 +98,11 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
                 com.android.settingslib.R.string.preference_summary_default_combination,
                 ssid, mWifiTracker.statusLabel);
     }
+
+    /**
+     * return true if Wi-Fi connected.
+     */
+    public boolean isWifiConnected() {
+        return mWifiTracker.connected;
+    }
 }

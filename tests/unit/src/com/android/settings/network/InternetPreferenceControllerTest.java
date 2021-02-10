@@ -16,6 +16,7 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
 import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -57,6 +58,7 @@ import org.mockito.junit.MockitoRule;
 public class InternetPreferenceControllerTest {
 
     private static final String TEST_SUMMARY = "test summary";
+    private static final String NOT_CONNECTED = "Not connected";
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -117,13 +119,37 @@ public class InternetPreferenceControllerTest {
     }
 
     @Test
-    public void onSummaryChanged_shouldUpdatePreferenceSummary() {
+    public void mustUseWiFiHelperSummary_internetWifi_updateSummary() {
         mController.onInternetTypeChanged(INTERNET_WIFI);
         mController.displayPreference(mScreen);
 
-        mController.onSummaryChanged(TEST_SUMMARY);
+        mController.mustUseWiFiHelperSummary(true /* isWifiConnected */, TEST_SUMMARY);
 
         assertThat(mPreference.getSummary()).isEqualTo(TEST_SUMMARY);
+
+        mController.mustUseWiFiHelperSummary(false /* isWifiConnected */, NOT_CONNECTED);
+
+        assertThat(mPreference.getSummary()).isEqualTo(NOT_CONNECTED);
+    }
+
+    @Test
+    public void mustUseWiFiHelperSummary_internetApmNetworksWifiConnected_updateSummary() {
+        mController.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+        mController.displayPreference(mScreen);
+
+        mController.mustUseWiFiHelperSummary(true /* isWifiConnected */, TEST_SUMMARY);
+
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_SUMMARY);
+    }
+
+    @Test
+    public void mustUseWiFiHelperSummary_internetApmNetworksWifiDisconnected_notUpdateSummary() {
+        mController.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+        mController.displayPreference(mScreen);
+
+        mController.mustUseWiFiHelperSummary(false /* isWifiConnected */, NOT_CONNECTED);
+
+        assertThat(mPreference.getSummary()).isNotEqualTo(NOT_CONNECTED);
     }
 
     @Test

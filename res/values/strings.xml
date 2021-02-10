@@ -97,6 +97,15 @@
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
     <string name="font_size_make_larger_desc">Make larger</string>
 
+    <!-- Auto rotate switchbar title. [CHAR_LIMIT=NONE] -->
+    <string name="auto_rotate_settings_primary_switch_title">Use Auto-Rotate</string>
+
+    <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
+    <string name="smart_rotate_text_headline">
+        Face based Autorotate uses the front camera to see if and how someone is looking at the screen. It allows
+        for reading while lying down and images are never stored or sent to Google.&lt;br>&lt;br>
+       &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more&lt;/a>
+    </string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
             translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
@@ -2704,8 +2713,18 @@
     <!-- Display settings --><skip/>
     <!-- Sound & display settings screen, section header for settings related to display -->
     <string name="display_settings">Display</string>
+    <!-- Sound & display settings screen, section header for settings related to display -->
+    <string name="rotate_settings_class" translatable="false">com.android.settings.DisplaySettings</string>
     <!-- Sound & display settings screen, accelerometer-based rotation check box label -->
     <string name="accelerometer_title">Auto-rotate screen</string>
+    <!-- Sound & display settings screen, locked rotation check box label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_option_off">Off</string>
+    <!-- Sound & display settings screen, accelerometer-based rotation check box label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_option_on">On</string>
+    <!-- Sound & display settings screen, face-based rotation check box label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_option_face_based">On - Face-based</string>
+    <!-- SmartAutoRotatePreferenceFragment settings screen, face-based rotation switch label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_switch_face_based">Enable Face Detection</string>
     <!-- Display settings screen, Color mode settings title [CHAR LIMIT=30] -->
     <string name="color_mode_title">Colors</string>
     <!-- Display settings screen, Color mode option for "natural(sRGB) color"  [CHAR LIMIT=45] -->
@@ -4950,6 +4969,8 @@
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_text_and_display_title">Text and display</string>
+    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
+    <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility tap assistance page. [CHAR LIMIT=50] -->
@@ -12590,13 +12611,15 @@
     <!-- Provider Model: SMS preference title -->
     <string name="sms_preference_title">SMS</string>
     <!-- Provider Model: Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_preferred">Preferred for calls &amp; SMS</string>
+    <string name="calls_sms_preferred">preferred</string>
     <!-- Provider Model: Calls Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_calls_preferred">Preferred for calls</string>
+    <string name="calls_sms_calls_preferred">preferred for calls</string>
     <!-- Provider Model: SMS Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_sms_preferred">Preferred for SMS</string>
+    <string name="calls_sms_sms_preferred">preferred for SMS</string>
     <!-- Provider Model: Unavailable status in summary for Calls & SMS -->
-    <string name="calls_sms_unavailable">Temporarily unavailable</string>
+    <string name="calls_sms_unavailable">unavailable</string>
+    <!-- Provider Model: Temporarily unavailable status in summary for Calls & SMS -->
+    <string name="calls_sms_temp_unavailable">Temporarily unavailable</string>
     <!-- Provider Model: No SIM status in summary for Calls & SMS -->
     <string name="calls_sms_no_sim">No SIM</string>
     <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
