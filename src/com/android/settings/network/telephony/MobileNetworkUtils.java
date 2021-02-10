@@ -73,6 +73,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -600,8 +601,7 @@ public class MobileNetworkUtils {
         final Drawable networkDrawable =
                 iconType == NO_CELL_DATA_TYPE_ICON
                         ? EMPTY_DRAWABLE
-                        : context
-                                .getResources().getDrawable(iconType, context.getTheme());
+                        : context.getResources().getDrawable(iconType, context.getTheme());
 
         // Overlay the two drawables
         final Drawable[] layers = {networkDrawable, signalDrawable};
@@ -920,4 +920,78 @@ public class MobileNetworkUtils {
         }
         return isWifiCallingEnabled;
     }
+
+
+    /**
+     * Returns preferred status of Calls & SMS separately when Provider Model is enabled.
+     */
+    public static CharSequence getPreferredStatus(Context context,
+            SubscriptionManager subscriptionManager, boolean isPreferredCallStatus) {
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(
+                subscriptionManager);
+        if (!subs.isEmpty()) {
+            final StringBuilder summary = new StringBuilder();
+            for (SubscriptionInfo subInfo : subs) {
+                int subsSize = subs.size();
+                final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                        subInfo, context);
+
+                // Set displayName as summary if there is only one valid SIM.
+                if (subsSize == 1
+                        && SubscriptionManager.isValidSubscriptionId(subInfo.getSubscriptionId())) {
+                    return displayName;
+                }
+
+                CharSequence status = isPreferredCallStatus
+                        ? getPreferredCallStatus(context, subInfo)
+                        : getPreferredSmsStatus(context, subInfo);
+                if (status.toString().isEmpty()) {
+                    // If there are 2 or more SIMs and one of these has no preferred status,
+                    // set only its displayName as summary.
+                    summary.append(displayName);
+                } else {
+                    summary.append(displayName)
+                            .append(" (")
+                            .append(status)
+                            .append(")");
+                }
+                // Do not add ", " for the last subscription.
+                if (subInfo != subs.get(subs.size() - 1)) {
+                    summary.append(", ");
+                }
+            }
+            return summary;
+        } else {
+            return "";
+        }
+    }
+
+    private static CharSequence getPreferredCallStatus(Context context, SubscriptionInfo subInfo) {
+        final int subId = subInfo.getSubscriptionId();
+        String status = "";
+        boolean isDataPreferred = subId == SubscriptionManager.getDefaultVoiceSubscriptionId();
+
+        if (isDataPreferred) {
+            status = setSummaryResId(context, R.string.calls_sms_preferred);
+        }
+
+        return status;
+    }
+
+    private static CharSequence getPreferredSmsStatus(Context context, SubscriptionInfo subInfo) {
+        final int subId = subInfo.getSubscriptionId();
+        String status = "";
+        boolean isSmsPreferred = subId == SubscriptionManager.getDefaultSmsSubscriptionId();
+
+        if (isSmsPreferred) {
+            status = setSummaryResId(context, R.string.calls_sms_preferred);
+        }
+
+        return status;
+    }
+
+    private static String setSummaryResId(Context context, int resId) {
+        return context.getResources().getString(resId);
+    }
+
 }
