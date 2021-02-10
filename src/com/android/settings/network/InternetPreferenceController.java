@@ -103,6 +103,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         if (mPreference == null) {
             return;
         }
+
         final @IdRes int icon = sIconMap.get(mInternetType);
         if (icon != 0) {
             final Drawable drawable = mContext.getDrawable(icon);
@@ -112,10 +113,17 @@ public class InternetPreferenceController extends AbstractPreferenceController i
                 mPreference.setIcon(drawable);
             }
         }
+
+        if (mustUseWiFiHelperSummary(mSummaryHelper.isWifiConnected(),
+                mSummaryHelper.getSummary())) {
+            return;
+        }
+
         if (mInternetType == INTERNET_CELLULAR) {
             updateCellularSummary();
             return;
         }
+
         final @IdRes int summary = sSummaryMap.get(mInternetType);
         if (summary != 0) {
             mPreference.setSummary(summary);
@@ -161,9 +169,17 @@ public class InternetPreferenceController extends AbstractPreferenceController i
 
     @Override
     public void onSummaryChanged(String summary) {
-        if (mPreference != null && mInternetType == INTERNET_WIFI) {
+        mustUseWiFiHelperSummary(mSummaryHelper.isWifiConnected(), summary);
+    }
+
+    @VisibleForTesting
+    boolean mustUseWiFiHelperSummary(boolean isWifiConnected, String summary) {
+        final boolean needUpdate = (mInternetType == INTERNET_WIFI)
+                || (mInternetType == INTERNET_APM_NETWORKS && isWifiConnected);
+        if (needUpdate && mPreference != null) {
             mPreference.setSummary(summary);
         }
+        return needUpdate;
     }
 
     @VisibleForTesting

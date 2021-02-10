@@ -93,7 +93,7 @@ public class NetworkProviderCallsSmsControllerTest {
 
         private int mDefaultVoiceSubscriptionId;
         private int mDefaultSmsSubscriptionId;
-
+        private boolean mIsInService;
         @Override
         protected int getDefaultVoiceSubscriptionId() {
             return mDefaultVoiceSubscriptionId;
@@ -104,12 +104,21 @@ public class NetworkProviderCallsSmsControllerTest {
             return mDefaultSmsSubscriptionId;
         }
 
+        @Override
+        protected boolean isInService(int subId) {
+            return mIsInService;
+        }
+
         public void setDefaultVoiceSubscriptionId(int subscriptionId) {
             mDefaultVoiceSubscriptionId = subscriptionId;
         }
 
         public void setDefaultSmsSubscriptionId(int subscriptionId) {
             mDefaultSmsSubscriptionId = subscriptionId;
+        }
+
+        public void setInService(boolean inService) {
+            mIsInService = inService;
         }
     }
 
@@ -128,7 +137,7 @@ public class NetworkProviderCallsSmsControllerTest {
         mPreference = new RestrictedPreference(mContext);
         mPreference.setKey(KEY_PREFERENCE_CALLS_SMS);
         mController = new MockNetworkProviderCallsSmsController(mContext, mLifecycle);
-
+        mController.setInService(true);
         mLifecycleRegistry = new LifecycleRegistry(mLifecycleOwner);
         when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
     }
@@ -176,7 +185,7 @@ public class NetworkProviderCallsSmsControllerTest {
         final StringBuilder summary = new StringBuilder();
         summary.append(DISPLAY_NAME_1)
                 .append(" (")
-                .append(setSummaryResId("calls_sms_unavailable"))
+                .append(setSummaryResId("calls_sms_temp_unavailable"))
                 .append(")");
 
         assertTrue(TextUtils.equals(mController.getSummary(), summary));

@@ -17,13 +17,11 @@ package com.android.settings.vpn2;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.IConnectivityManager;
+import android.net.VpnManager;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
-import android.util.Log;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
@@ -71,12 +69,11 @@ public class VpnUtils {
     }
 
     public static boolean isVpnActive(Context context) throws RemoteException {
-        return getIConnectivityManager().getVpnConfig(context.getUserId()) != null;
+        return getVpnManager(context).getVpnConfig(context.getUserId()) != null;
     }
 
-    public static String getConnectedPackage(IConnectivityManager service, final int userId)
-            throws RemoteException {
-        final VpnConfig config = service.getVpnConfig(userId);
+    public static String getConnectedPackage(VpnManager vpnManager, final int userId) {
+        final VpnConfig config = vpnManager.getVpnConfig(userId);
         return config != null ? config.user : null;
     }
 
@@ -84,9 +81,8 @@ public class VpnUtils {
         return context.getSystemService(ConnectivityManager.class);
     }
 
-    private static IConnectivityManager getIConnectivityManager() {
-        return IConnectivityManager.Stub.asInterface(
-                ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
+    private static VpnManager getVpnManager(Context context) {
+        return context.getSystemService(VpnManager.class);
     }
 
     public static boolean isAlwaysOnVpnSet(ConnectivityManager cm, final int userId) {
@@ -94,17 +90,12 @@ public class VpnUtils {
     }
 
     public static boolean disconnectLegacyVpn(Context context) {
-        try {
-            int userId = context.getUserId();
-            IConnectivityManager connectivityService = getIConnectivityManager();
-            LegacyVpnInfo currentLegacyVpn = connectivityService.getLegacyVpnInfo(userId);
-            if (currentLegacyVpn != null) {
-                clearLockdownVpn(context);
-                connectivityService.prepareVpn(null, VpnConfig.LEGACY_VPN, userId);
-                return true;
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Legacy VPN could not be disconnected", e);
+        int userId = context.getUserId();
+        LegacyVpnInfo currentLegacyVpn = getVpnManager(context).getLegacyVpnInfo(userId);
+        if (currentLegacyVpn != null) {
+            clearLockdownVpn(context);
+            getVpnManager(context).prepareVpn(null, VpnConfig.LEGACY_VPN, userId);
+            return true;
         }
         return false;
     }
