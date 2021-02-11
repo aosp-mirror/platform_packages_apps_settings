@@ -21,6 +21,13 @@
     android:persistent="false"
     android:title="@string/accessibility_shortcuts_settings_title">
 
+    <Preference
+        android:fragment="com.android.settings.accessibility.AccessibilityButtonFragment"
+        android:key="accessibility_button_preference"
+        android:persistent="false"
+        android:title="@string/accessibility_button_title"
+        android:summary="@string/accessibility_button_summary"/>
+
     <SwitchPreference
         android:key="accessibility_shortcut_preference"
         android:persistent="false"
