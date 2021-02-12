@@ -592,11 +592,6 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
-        <SwitchPreference
-            android:key="asst_feedback_indicator"
-            android:title="@string/asst_feedback_indicator_title"
-            settings:controller="com.android.settings.notification.AssistantFeedbackPreferenceController" />
-
         <com.android.settingslib.widget.LayoutPreference
             android:key="asst_importance_reset"
             android:title="@string/asst_importance_reset_title"
