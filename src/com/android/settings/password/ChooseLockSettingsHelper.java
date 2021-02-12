@@ -312,7 +312,7 @@ public final class ChooseLockSettingsHelper {
         switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(effectiveUserId)) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                 launched = launchConfirmationActivity(request, title, header, description,
-                        returnCredentials
+                        returnCredentials || forceVerifyPath
                                 ? ConfirmLockPattern.InternalActivity.class
                                 : ConfirmLockPattern.class, returnCredentials, external,
                                 forceVerifyPath, userId, alternateButton, allowAnyUser,
@@ -325,7 +325,7 @@ public final class ChooseLockSettingsHelper {
             case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
             case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
                 launched = launchConfirmationActivity(request, title, header, description,
-                        returnCredentials
+                        returnCredentials || forceVerifyPath
                                 ? ConfirmLockPassword.InternalActivity.class
                                 : ConfirmLockPassword.class, returnCredentials, external,
                                 forceVerifyPath, userId, alternateButton, allowAnyUser,
