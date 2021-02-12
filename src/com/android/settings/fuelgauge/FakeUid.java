@@ -361,6 +361,11 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public long[] getCustomMeasuredEnergiesMicroJoules() {
+        return null;
+    }
+
+    @Override
     public long getMobileRadioApWakeupCount(int which) {
         return 0;
     }

@@ -120,6 +120,46 @@ public class ChooseLockSettingsHelperTest {
                 .isEqualTo(ThemeHelper.THEME_GLIF_V2);
     }
 
+    @Test
+    public void launchConfirmPattern_ForceVerify_shouldLaunchInternalActivity() {
+        final Activity activity = Robolectric.setupActivity(Activity.class);
+
+        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
+        builder.setRequestCode(100)
+                .setForceVerifyPath(true);
+        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
+        when(helper.mLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
+                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        helper.launch();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+
+        assertEquals(new ComponentName("com.android.settings",
+                        ConfirmLockPattern.InternalActivity.class.getName()),
+                startedIntent.getComponent());
+    }
+
+    @Test
+    public void launchConfirmPassword_ForceVerify_shouldLaunchInternalActivity() {
+        final Activity activity = Robolectric.setupActivity(Activity.class);
+
+        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
+        builder.setRequestCode(100)
+                .setForceVerifyPath(true);
+        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
+        when(helper.mLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
+                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        helper.launch();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+
+        assertEquals(new ComponentName("com.android.settings",
+                        ConfirmLockPassword.InternalActivity.class.getName()),
+                startedIntent.getComponent());
+    }
+
     private ChooseLockSettingsHelper getChooseLockSettingsHelper(
             ChooseLockSettingsHelper.Builder builder) {
         LockPatternUtils mockLockPatternUtils = mock(LockPatternUtils.class);
