@@ -22,13 +22,17 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.app.NotificationChannel;
 import android.content.Context;
 import android.content.pm.ShortcutInfo;
 
 import androidx.preference.Preference;
 
 import com.android.settings.notification.NotificationBackend;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,12 +42,16 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
+
 @RunWith(RobolectricTestRunner.class)
 public class AddToHomeScreenPreferenceControllerTest {
 
     private Context mContext;
     @Mock
     private NotificationBackend mBackend;
+    @Mock
+    private NotificationChannel mNc;
 
     private AddToHomeScreenPreferenceController mController;
 
@@ -52,6 +60,7 @@ public class AddToHomeScreenPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = new AddToHomeScreenPreferenceController(mContext, mBackend);
+        when(mNc.getImportance()).thenReturn(4);
     }
 
     @Test
@@ -62,21 +71,41 @@ public class AddToHomeScreenPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, null, null, null, null, null);
+        mController.onResume(null, null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
     public void testIsAvailable() {
         ShortcutInfo si = mock(ShortcutInfo.class);
-        mController.onResume(mock(NotificationBackend.AppRow.class), null, null, null, si, null);
+        mController.onResume(mock(NotificationBackend.AppRow.class),
+                mNc, null, null, si, null, null);
         assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_filteredIn() {
+        ShortcutInfo si = mock(ShortcutInfo.class);
+        mController.onResume(mock(NotificationBackend.AppRow.class),
+                mNc, null, null, si, null,
+                ImmutableList.of(NotificationChannel.EDIT_LAUNCHER));
+        assertTrue(mController.isAvailable());
+    }
+
+
+    @Test
+    public void testIsAvailable_filteredOut() {
+        ShortcutInfo si = mock(ShortcutInfo.class);
+        mController.onResume(mock(NotificationBackend.AppRow.class),
+                mNc, null, null, si, null, new ArrayList<>());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
     public void testHandlePreferenceTreeClick() {
         ShortcutInfo si = mock(ShortcutInfo.class);
-        mController.onResume(mock(NotificationBackend.AppRow.class), null, null, null, si, null);
+        mController.onResume(mock(NotificationBackend.AppRow.class), null, null, null, si, null,
+                null);
 
         Preference pref = new Preference(RuntimeEnvironment.application);
         pref.setKey("add_to_home");

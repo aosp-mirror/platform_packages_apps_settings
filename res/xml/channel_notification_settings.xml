@@ -65,11 +65,6 @@
         android:summary="@string/promote_conversation_summary"
         settings:allowDividerAbove="true"/>
 
-    <PreferenceCategory
-        android:key="channel_advanced"
-        android:order="50"
-        settings:initialExpandedChildrenCount="0">
-
         <!-- Default ringtone -->
         <com.android.settings.notification.app.NotificationSoundPreference
             android:key="ringtone"
@@ -120,7 +115,6 @@
             android:order="18"
             android:title="@string/app_settings_link"
             settings:allowDividerAbove="true"/>
-    </PreferenceCategory>
 
     <com.android.settings.notification.app.NotificationFooterPreference
         android:key="desc"
