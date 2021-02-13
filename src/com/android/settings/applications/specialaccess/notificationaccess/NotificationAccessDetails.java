@@ -32,15 +32,19 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.service.notification.NotificationListenerFilter;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
 import android.util.Slog;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
@@ -52,6 +56,8 @@ import java.util.Objects;
 public class NotificationAccessDetails extends DashboardFragment {
     private static final String TAG = "NotifAccessDetails";
 
+    private NotificationBackend mNm = new NotificationBackend();
+    private NotificationListenerFilter mNlf;
     private ComponentName mComponentName;
     private CharSequence mServiceName;
     protected PackageInfo mPackageInfo;
@@ -130,6 +136,33 @@ public class NotificationAccessDetails extends DashboardFragment {
 
         if (!refreshUi()) {
             setIntentAndFinish(true /* appChanged */);
+        }
+        Preference apps = getPreferenceScreen().findPreference(
+                use(BridgedAppsPreferenceController.class).getPreferenceKey());
+        if (apps != null) {
+            mNlf = mNm.getListenerFilter(mComponentName, mUserId);
+            int nonBridgedCount = mNlf.getDisallowedPackages().size();
+            apps.setSummary(nonBridgedCount == 0 ?
+                    getString(R.string.notif_listener_excluded_summary_zero)
+                    : getResources().getQuantityString(
+                            R.plurals.notif_listener_excluded_summary_nonzero,
+                            nonBridgedCount, nonBridgedCount));
+
+            apps.setOnPreferenceClickListener(preference -> {
+                final Bundle args = new Bundle();
+                args.putString(AppInfoBase.ARG_PACKAGE_NAME, mPackageName);
+                args.putString(Settings.EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME,
+                        mComponentName.flattenToString());
+
+                new SubSettingLauncher(getContext())
+                        .setDestination(BridgedAppsSettings.class.getName())
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .setTitleRes(R.string.notif_listener_excluded_app_title)
+                        .setArguments(args)
+                        .setUserHandle(UserHandle.of(mUserId))
+                        .launch();
+                return true;
+            });
         }
     }
 
