@@ -16,7 +16,7 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;

@@ -63,8 +63,8 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.HashMap;
 import java.util.List;
