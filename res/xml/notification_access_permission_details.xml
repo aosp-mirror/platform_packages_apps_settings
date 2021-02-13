@@ -41,11 +41,11 @@
         style="@style/SettingsMultiSelectListPreference"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.TypeFilterPreferenceController"/>/>
 
-    <PreferenceCategory
-        android:key="advanced"
-        android:order="50"
-        settings:initialExpandedChildrenCount="0">
+        <Preference
+            android:key="bridged_apps"
+            android:title="@string/notif_listener_excluded_app_title"
+            android:fragment="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsSettings"
+            settings:searchable="false"
+            settings:controller="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsPreferenceController" />
 
-
-    </PreferenceCategory>
 </PreferenceScreen>
