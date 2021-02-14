@@ -82,8 +82,16 @@
         -->
     </string-array>
 
+    <!-- List containing the component names of pre-installed captioning services. -->
+    <string-array name="config_preinstalled_captions_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        -->
+    </string-array>
+
     <!-- List containing the component names of pre-installed audio and captioning services. -->
-    <string-array name="config_preinstalled_audio_and_caption_services" translatable="false">
+    <string-array name="config_preinstalled_audio_services" translatable="false">
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>
@@ -115,10 +123,23 @@
         -->
     </string-array>
 
+    <!-- List containing the order of services in captions category by preference key or
+         componentname. All preference keys in a category need to be specified to guarantee correct
+         behavior.-->
+    <string-array name="config_order_captions_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        <item>captioning_preference_screen</item>
+        <item>rtt_setting</item>
+        <item>...</item>
+        -->
+    </string-array>
+
     <!-- List containing the order of services in audio and caption category by preference key
          or componentname. All preference keys in a category need to be specified to guarantee
          correct behavior.-->
-    <string-array name="config_order_audio_and_caption_services" translatable="false">
+    <string-array name="config_order_audio_services" translatable="false">
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>

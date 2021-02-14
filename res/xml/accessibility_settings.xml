@@ -80,9 +80,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="audio_and_captions_category"
+        android:key="captions_category"
         android:persistent="false"
-        android:title="@string/audio_and_captions_category_title">
+        android:title="@string/captions_category_title">
 
         <Preference
             android:key="live_caption"
@@ -91,6 +91,26 @@
             android:title="@string/live_caption_title"
             settings:searchable="false"
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
+            android:key="captioning_preference_screen"
+            android:persistent="false"
+            android:title="@string/accessibility_captioning_title"
+            settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
+
+        <Preference
+            android:key="rtt_setting"
+            android:summary="@string/summary_placeholder"
+            android:title="@string/rtt_settings_title"
+            settings:controller="com.android.settings.accessibility.RTTSettingPreferenceController"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="audio_category"
+        android:persistent="false"
+        android:title="@string/audio_category_title">
 
         <Preference
             android:key="hearing_aid_preference"
@@ -105,19 +125,6 @@
             android:persistent="false"
             android:title="@string/accessibility_audio_adjustment_title"
             settings:searchable="true"/>
-
-        <Preference
-            android:key="rtt_setting"
-            android:summary="@string/summary_placeholder"
-            android:title="@string/rtt_settings_title"
-            settings:controller="com.android.settings.accessibility.RTTSettingPreferenceController"/>
-
-        <Preference
-            android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
-            android:key="captioning_preference_screen"
-            android:persistent="false"
-            android:title="@string/accessibility_captioning_title"
-            settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
 
     </PreferenceCategory>
 
@@ -137,21 +144,6 @@
             android:persistent="false"
             android:title="@string/tts_settings_title"
             settings:controller="com.android.settings.language.TtsPreferenceController"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="experimental_category"
-        android:persistent="false"
-        android:title="@string/experimental_category_title"
-        settings:initialExpandedChildrenCount="1">
-
-        <SwitchPreference
-            android:key="accessibility_shortcut_preference"
-            android:persistent="false"
-            android:title="@string/accessibility_shortcut_service_on_lock_screen_title"
-            android:summary="@string/accessibility_shortcut_description"
-            settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
 
     </PreferenceCategory>
 
