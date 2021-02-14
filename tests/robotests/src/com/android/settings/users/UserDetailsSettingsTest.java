@@ -363,7 +363,7 @@ public class UserDetailsSettingsTest {
         mFragment.initialize(mActivity, mArguments);
 
         verify(mRemoveUserPref).setOnPreferenceClickListener(mFragment);
-        verify(mRemoveUserPref).setTitle(R.string.user_exit_guest_menu);
+        verify(mRemoveUserPref).setTitle(R.string.user_exit_guest_title);
         verify(mFragment, never()).removePreference(KEY_REMOVE_USER);
     }
 
