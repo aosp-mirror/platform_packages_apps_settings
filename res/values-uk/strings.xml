@@ -54,6 +54,10 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Збільшуйте або зменшуйте текст на екрані."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Зменшити"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Збільшити"</string>
+    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
+    <skip />
+    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Зразок тексту"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чарівник країни Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11. Дивовижне Смарагдове місто країни Оз"</string>
@@ -1212,6 +1216,14 @@
     <string name="search_settings" msgid="7573686516434589771">"Пошук"</string>
     <string name="display_settings" msgid="7197750639709493852">"Екран"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Автообертання екрана"</string>
+    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
+    <skip />
+    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
+    <skip />
+    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
+    <skip />
+    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Кольори"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природні"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Яскраві"</string>
@@ -2183,6 +2195,7 @@
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Аудіо й текст на екрані"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Екран"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Текст і відображення"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Затемняти екран"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Елементи керування взаємодією"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Допомога з натисканнями"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Елементи керування системою"</string>
@@ -2334,6 +2347,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Червоний – зелений"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Червоний – зелений"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Синій – жовтий"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"Зменшувати яскравість"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"Робити екран телефона темнішим, ніж передбачає мінімальний рівень яскравості"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"Робити екран планшета темнішим, ніж передбачає мінімальний рівень яскравості"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"Зменште яскравість екрана, щоб читати комфортніше.&lt;br/&gt;&lt;br/&gt; Ця функція корисна, коли: &lt;ol&gt; &lt;li&gt; встановлено мінімальне стандартне значення яскравості, але екран телефона все одно засвітлий;t&lt;/li&gt; &lt;li&gt; ви користуєтеся телефоном у темряві, наприклад уночі чи перед сном.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Зменште яскравість екрана, щоб читати комфортніше.&lt;br/&gt;&lt;br/&gt; Ця функція корисна, коли: &lt;ol&gt; &lt;li&gt; встановлено мінімальне стандартне значення яскравості, але екран планшета все одно засвітлий;&lt;/li&gt; &lt;li&gt; ви користуєтеся телефоном у темряві, наприклад уночі чи перед сном.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Інтенсивність"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"Трохи темніше"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"Найтемніше"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Не вимикати після перезапуску"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="one">Коротка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
       <item quantity="few">Коротка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди)</item>
@@ -5077,6 +5099,32 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Активація мережі"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> активовано"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Натисніть, щоб оновити налаштування SIM-карти"</string>
+    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
+    <skip />
+    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
+    <skip />
+    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
+    <skip />
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Налаштуйте іншу SIM-карту"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Виберіть активну SIM-карту або використовуйте дві водночас"</string>
+    <!-- no translation found for choose_sim_title (4804689675237716286) -->
+    <skip />
+    <!-- no translation found for choose_sim_text (8056651794100746697) -->
+    <skip />
+    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
+    <skip />
+    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
+    <skip />
+    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
+    <skip />
+    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
+    <skip />
+    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
+    <skip />
+    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
+    <skip />
+    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
+    <skip />
     <string name="sim_card_label" msgid="5632157635124050923">"SIM-карта"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Видалити цю завантажену SIM-карту?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Якщо ви видалите цю SIM-карту, послугу оператора \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\" буде скасовано на цьому пристрої.\n\nПослугу оператора \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\" не буде скасовано."</string>
@@ -5160,7 +5208,8 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Ваш оператор не підтримує екстрені виклики через Wi-Fi.\nПід час таких викликів пристрій автоматично перемикається на мобільну мережу.\nЕкстрені виклики можна здійснювати лише в зонах покриття мобільної мережі."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Телефонувати через Wi-Fi для якісніших викликів"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Резервний спосіб здійснення викликів"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Якщо сервіс <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> недоступний, скористайтеся мобільним трафіком, щоб здійснювати й отримувати виклики <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
+    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
+    <skip />
     <string name="keywords_backup_calling" msgid="8592800915478816800">"резервний спосіб здійснення викликів"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Вхідне MMS-повідомлення"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Не вдається надіслати MMS-повідомлення"</string>
@@ -5231,20 +5280,25 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Дзвінки та SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Дзвінки через Wi‑Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Здійснюйте й отримуйте виклики через Wi‑Fi"</string>
-    <string name="calls_sms_footnote" msgid="8051604228144899434">"Завдяки функції \"Дзвінки через Wi-Fi\" виклики можна здійснювати й отримувати через мережі Wi‑Fi, які не обслуговують оператори мобільного зв\'язку."</string>
+    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
+    <skip />
     <string name="calls_preference_title" msgid="7536882032182563800">"Дзвінки"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"пріоритетні"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"пріоритетні дзвінки"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"пріоритетні SMS"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"рекомендовано для викликів"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"рекомендовано для SMS"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"недоступно"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Тимчасово недоступно"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Немає SIM-карти"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Параметри"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Підключатися до загальнодоступних мереж"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"з\'єднання з мережею, Інтернет, бездротове, дані, Wi-Fi, wi-fi, wi fi, мобільний, стільниковий, оператор мобільного зв\'язку, 4G, 3G, 2G, LTE"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Мережі, доступні в режимі польоту"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Мережі, доступні в режимі польоту"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Вимкнути режим польоту"</string>
+    <!-- no translation found for turn_on_networks (7786747178388835577) -->
+    <skip />
+    <!-- no translation found for turn_off_networks (886012600238121672) -->
+    <skip />
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Скинути інтернет-з\'єднання?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Ваш дзвінок буде завершено"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Ваш дзвінок буде завершено"</string>

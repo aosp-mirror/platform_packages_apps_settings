@@ -52,6 +52,10 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Muutke ekraanil kuvatavat teksti suuremaks või väiksemaks."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Vähendamine"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Suurendamine"</string>
+    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
+    <skip />
+    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Näidistekst"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Võlur Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. peatükk: Ozi imeline smaragdlinn"</string>
@@ -1172,6 +1176,14 @@
     <string name="search_settings" msgid="7573686516434589771">"Otsing"</string>
     <string name="display_settings" msgid="7197750639709493852">"Ekraan"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Pööra ekraani automaatselt"</string>
+    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
+    <skip />
+    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
+    <skip />
+    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
+    <skip />
+    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Värvid"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Loomulikud"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Võimendatud"</string>
@@ -2135,6 +2147,7 @@
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Heli ja ekraanil kuvatud tekst"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Ekraan"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Tekst ja ekraanikuva"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Ekraanikuva muutmine tumedamaks"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktsiooni juhtnupud"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"Puuteabi"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Süsteemi juhtelemendid"</string>
@@ -2284,6 +2297,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Punane-roheline"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Punane-roheline"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Sinine-kollane"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"Ereduse vähendamine"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"Muutke ekraanikuva pimedamaks kui teie telefoni miinimumeredus"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"Muutke ekraanikuva pimedamaks kui teie tahvelarvuti miinimumeredus"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"Muutke ekraanikuva tumedamaks, et seda oleks mugavam lugeda.&lt;br/&gt;&lt;br/&gt; See võib olla kasulik järgmistel juhtudel. &lt;ol&gt; &lt;li&gt; Teie telefoni vaikemiinimumheledus on siiski liiga ere.&lt;/li&gt; &lt;li&gt; Kasutate oma telefoni pimedas, näiteks öösel või pimedas ruumis enne magamaminekut.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Muutke ekraanikuva tumedamaks, et seda oleks mugavam lugeda.&lt;br/&gt;&lt;br/&gt; See võib olla kasulik järgmistel juhtudel. &lt;ol&gt; &lt;li&gt; Teie tahvelarvuti vaikemiinimumheledus on siiski liiga ere.&lt;/li&gt; &lt;li&gt; Kasutate oma tahvelarvutit pimedas, näiteks öösel või pimedas ruumis enne magamaminekut.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiivsus"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"Veidi tumedam"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"Kõige tumedam"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Hoia pärast seadme taaskäivitumist sisselülitatuna"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Lühike (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundit)</item>
       <item quantity="one">Lühike (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
@@ -4915,6 +4937,32 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Võrgu aktiveerimine"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> on aktiivne"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Puudutage SIM-kaardi seadete värskendamiseks"</string>
+    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
+    <skip />
+    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
+    <skip />
+    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
+    <skip />
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Teise SIM-kaardi seadistamine"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Valige aktiivne SIM-kaart või kasutage korraga kahte SIM-kaarti"</string>
+    <!-- no translation found for choose_sim_title (4804689675237716286) -->
+    <skip />
+    <!-- no translation found for choose_sim_text (8056651794100746697) -->
+    <skip />
+    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
+    <skip />
+    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
+    <skip />
+    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
+    <skip />
+    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
+    <skip />
+    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
+    <skip />
+    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
+    <skip />
+    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
+    <skip />
     <string name="sim_card_label" msgid="5632157635124050923">"SIM-kaart"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Kas soovite allalaaditud SIM-kaardi kustutada?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"SIM-kaardi kustutamisel eemaldatakse seadmest operaatori <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> teenus.\n\nOperaatori <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> teenust ei tühistata."</string>
@@ -4994,7 +5042,8 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Teie operaator ei toeta hädaabikõnesid WiFi-kõnede kaudu.\nSeade lülitub hädaabikõne tegemiseks automaatselt mobiilsidevõrgule.\nHädaabikõned on võimalikud ainult mobiilsidevõrgu levialas."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Kvaliteedi parandamiseks kasutage kõnede puhul WiFi-t"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Helistamise varuviis"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"Kui <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> pole saadaval, kasutage mobiilse andmeside SIM-kaarti, et <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> kaudu kõnesid teha ja vastu võtta."</string>
+    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
+    <skip />
     <string name="keywords_backup_calling" msgid="8592800915478816800">"helistamise varuviis"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Sissetulev MMS-sõnum"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS-i ei saa saata"</string>
@@ -5065,20 +5114,25 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Kõned ja SMS-id"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"WiFi-kõned"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Helistamine WiFi kaudu"</string>
-    <string name="calls_sms_footnote" msgid="8051604228144899434">"WiFi-kõnede puhul toimub helistamine operaatoriväliste WiFi-võrkude kaudu."</string>
+    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
+    <skip />
     <string name="calls_preference_title" msgid="7536882032182563800">"Kõned"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"eelistatud"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"eelistatud on kõned"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"eelistatud on SMS-id"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"eelistatud kõnede puhul"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"eelistatud SMS-ide puhul"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"pole saadaval"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Pole ajutiselt saadaval"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM-kaarti pole"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Eelistused"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Ühenda avalike võrkudega"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"võrguühendus, internet, juhtmeta, andmeside, wifi, wi-fi, wi fi, mobiilside, mobiilsideoperaator, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Kuva lennukirežiimi võrgud"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Kuvatud on lennukirežiimi võrgud"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"Lülita lennukirežiim välja"</string>
+    <!-- no translation found for turn_on_networks (7786747178388835577) -->
+    <skip />
+    <!-- no translation found for turn_off_networks (886012600238121672) -->
+    <skip />
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Kas lähtestada internetiühendus?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"See lõpetab teie telefonikõne"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"See lõpetab teie telefonikõne"</string>
