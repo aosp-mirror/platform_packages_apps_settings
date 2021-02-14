@@ -73,15 +73,15 @@ public class AccessibilitySettings extends DashboardFragment {
 
     // Preference categories
     private static final String CATEGORY_SCREEN_READER = "screen_reader_category";
-    private static final String CATEGORY_AUDIO_AND_CAPTIONS = "audio_and_captions_category";
+    private static final String CATEGORY_CAPTIONS = "captions_category";
+    private static final String CATEGORY_AUDIO = "audio_category";
     private static final String CATEGORY_DISPLAY = "display_category";
     private static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
-    private static final String CATEGORY_EXPERIMENTAL = "experimental_category";
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
 
     private static final String[] CATEGORIES = new String[]{
-            CATEGORY_SCREEN_READER, CATEGORY_AUDIO_AND_CAPTIONS, CATEGORY_DISPLAY,
-            CATEGORY_INTERACTION_CONTROL, CATEGORY_EXPERIMENTAL, CATEGORY_DOWNLOADED_SERVICES
+            CATEGORY_SCREEN_READER, CATEGORY_CAPTIONS, CATEGORY_AUDIO, CATEGORY_DISPLAY,
+            CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
     };
 
     // Preferences
@@ -330,8 +330,10 @@ public class AccessibilitySettings extends DashboardFragment {
 
         initializePreBundledServicesMapFromArray(CATEGORY_SCREEN_READER,
                 R.array.config_preinstalled_screen_reader_services);
-        initializePreBundledServicesMapFromArray(CATEGORY_AUDIO_AND_CAPTIONS,
-                R.array.config_preinstalled_audio_and_caption_services);
+        initializePreBundledServicesMapFromArray(CATEGORY_CAPTIONS,
+                R.array.config_preinstalled_captions_services);
+        initializePreBundledServicesMapFromArray(CATEGORY_AUDIO,
+                R.array.config_preinstalled_audio_services);
         initializePreBundledServicesMapFromArray(CATEGORY_DISPLAY,
                 R.array.config_preinstalled_display_services);
         initializePreBundledServicesMapFromArray(CATEGORY_INTERACTION_CONTROL,
@@ -359,8 +361,10 @@ public class AccessibilitySettings extends DashboardFragment {
         // Update the order of all the category according to the order defined in xml file.
         updateCategoryOrderFromArray(CATEGORY_SCREEN_READER,
                 R.array.config_order_screen_reader_services);
-        updateCategoryOrderFromArray(CATEGORY_AUDIO_AND_CAPTIONS,
-                R.array.config_order_audio_and_caption_services);
+        updateCategoryOrderFromArray(CATEGORY_CAPTIONS,
+                R.array.config_order_captions_services);
+        updateCategoryOrderFromArray(CATEGORY_AUDIO,
+                R.array.config_order_audio_services);
         updateCategoryOrderFromArray(CATEGORY_INTERACTION_CONTROL,
                 R.array.config_order_interaction_control_services);
         updateCategoryOrderFromArray(CATEGORY_DISPLAY,
