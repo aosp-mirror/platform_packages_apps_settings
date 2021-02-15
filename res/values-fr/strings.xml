@@ -52,10 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Agrandissez ou réduisez la taille du texte affiché."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Réduire"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
-    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
-    <skip />
-    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
-    <skip />
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Utiliser la rotation automatique"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"La rotation automatique en fonction du visage utilise la caméra avant pour vérifier si quelqu\'un regarde l\'écran et sous quel angle. Cela vous permet de lire en étant allongé. Le flux de la caméra n\'est jamais stocké ni envoyé à Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;En savoir plus&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude"</string>
@@ -1176,14 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Recherche"</string>
     <string name="display_settings" msgid="7197750639709493852">"Écran"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rotation auto de l\'écran"</string>
-    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
-    <skip />
-    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
-    <skip />
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Inactive"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Active"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Active - En fonction du visage"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Activer la détection de visages"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Couleurs"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Mode Naturel"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Mode Contrasté"</string>
@@ -3101,11 +3095,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Supprimer l\'utilisateur"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Supprimer"</string>
     <string name="user_guest" msgid="4545590092001460388">"Invité"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Effacer les données"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Fermer la session Invité"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Fermer la session Invité ?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Supprimer l\'invité"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Supprimer l\'invité ?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Toutes les applications et les données de cette session seront supprimées."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Fermer la session"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Supprimer"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activer les appels téléphoniques"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activer les appels téléphoniques et les SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Supprimer un compte utilisateur"</string>
@@ -3681,6 +3674,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Notifications de conversation"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Notifications d\'alerte"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Notifications silencieuses"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"Assistance réalité virtuelle"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que service d\'assistance pour la réalité virtuelle n\'a été envoyée pour les applications installées."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder au service de réalité virtuelle ?"</string>
@@ -4937,32 +4937,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Activation du réseau"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> est actif"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Appuyez pour mettre à jour les paramètres de la carte SIM"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Nouveau réseau : <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Vous avez changé d\'opérateur"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Votre réseau mobile a été modifié"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Configurer votre autre carte SIM"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Sélectionnez votre carte SIM active ou utilisez deux cartes SIM à la fois"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"Sélectionner un numéro à utiliser"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"<xliff:g id="NUMBER">%1$d</xliff:g> numéros sont disponibles sur cet appareil, mais vous ne pouvez en utiliser qu\'un à la fois."</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Activation<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Activation impossible pour le moment"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Numéro inconnu"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Utiliser <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> sera utilisé pour les données mobiles, les appels et les SMS"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Aucune carte SIM active disponible"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Pour utiliser ultérieurement les données mobiles, les fonctionnalités d\'appel et les SMS, accédez à vos paramètres réseau"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"Carte SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Effacer cette carte SIM téléchargée ?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"L\'effacement de cette carte SIM va supprimer le service <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> de cet appareil.\n\nLe service pour <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> ne sera pas annulé."</string>
@@ -5042,8 +5030,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Les appels d\'urgence via la fonctionnalité Appels Wi-Fi ne sont pas compatibles avec votre opérateur.\nL\'appareil basculera automatiquement sur un réseau mobile pour passer un appel d\'urgence.\nLes appels d\'urgence sont possibles uniquement dans les zones couvertes par le réseau mobile."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Utiliser le Wi-Fi pour les appels afin d\'améliorer leur qualité"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Option d\'appel de secours"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Si <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> est indisponible ou en itinérance, utilisez votre SIM de données mobiles pour les appels <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"option d\'appel de secours"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"MMS entrant"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Impossible d\'envoyer le MMS"</string>
@@ -5114,8 +5101,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Appels et SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Appels Wi‑Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Passer et recevoir des appels via Wi-Fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Avec la fonctionnalité Appels Wi-Fi, vous passez et recevez des appels sur des réseaux Wi‑Fi non gérés par des opérateurs. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Appels"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"mode préféré"</string>
@@ -5129,10 +5115,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"connexion réseau, internet, sans fil, données, wifi, wi-fi, wi fi, cellulaire, mobile, opérateur mobile, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Afficher les réseaux du mode Avion"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Afficher les réseaux du mode Avion"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"Activer les réseaux"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Désactiver les réseaux"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Réinitialiser votre connexion Internet ?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Cette action mettra fin à votre appel téléphonique"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Cette action mettra fin à votre appel téléphonique"</string>

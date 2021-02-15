@@ -3101,11 +3101,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Избриши корисник"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Избриши"</string>
     <string name="user_guest" msgid="4545590092001460388">"Гостин"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Избриши ги податоците за гостинот"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Заврши ја гостинската сесија"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Да се заврши гостинската сесија?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Отстрани гостин"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Да се отстрани гостинот?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Сите апликации и податоци во сесијата ќе се избришат."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Заврши ја сесијата"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Отстрани"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Вклучи телефонски повици"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Вклучи телефонски повици и SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Избриши корисник"</string>
@@ -3681,6 +3680,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Известувања за разговор"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Известувања за предупредување"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Тивки известувања"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR помошни услуги"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниедна инсталирана апликација не побара да се извршува како VR помошните услуги."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Дозволете пристап до VR услугата за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4937,32 +4943,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Активирање на мрежата"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> е активен"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Допрете за да ги ажурирате поставките на SIM"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Се префрливте на <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Се префрливте на друг оператор"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Вашата мобилна мрежа се промени"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Поставете ја другата SIM-картичка"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Изберете активна SIM-картичка или користете две SIM-картички во исто време"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"Изберете број што ќе се користи"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"<xliff:g id="NUMBER">%1$d</xliff:g> броја се достапни на уредов, но може да се користи само еден, а не сите одеднаш"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Се активира<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Не може да се активира во моментов"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Непознат број"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Да се користи <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ќе се користи за мобилен интернет, повици и SMS."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Нема активни SIM-картички на располагање"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"За да може подоцна да користите мобилен интернет, функции за повикување и SMS, одете на поставките за мрежата"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM-картичка"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Да се избрише преземената SIM-картичка?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ако ја избришете SIM-картичкава, услугата на <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> ќе се отстрани од уредов.\n\nУслугата за <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> нема да се откаже."</string>
@@ -5042,8 +5036,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Вашиот оператор не поддржува итни повици преку услугата „Повици преку Wi-Fi“.\nУредот се префрла автоматски на мобилна мрежа за да се оствари итен повик.\nИтните повици се можни само во области покриени со мобилна мрежа."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Користете Wi-Fi за повици за да го подобрите квалитетот"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Резервен начин на повикување"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Ако <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> е недостапен или во роаминг, користи ја SIM-картичката за мобилен интернет за повици на <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"резервен начин на повикување"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Дојдовна MMS-порака"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Не може да се испрати MMS-порака"</string>
@@ -5114,8 +5107,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Повици &amp; SMS-пораки"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Повици преку Wi-Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Упатувајте и примајте повици преку Wi‑Fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Со „Повици преку Wi-Fi“, повиците се упатуваат и примаат преку Wi‑Fi мрежи што не се на операторот. "<annotation id="url">"Дознајте повеќе"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Повици"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"претпочитано"</string>
@@ -5129,10 +5121,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"мрежна врска, интернет, безжичен, мобилен, Wi-Fi, мобилна, мобилен оператор, 4G, 3G, 2G, LTE"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Прикажи ги мрежите во авионски режим"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Се прикажуваат мрежите во авионски режим"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"Вклучете ги мрежите"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Исклучете ги мрежите"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Да се ресетира интернетот?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Ова ќе го заврши телефонскиот повик"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Ова ќе го заврши телефонскиот повик"</string>
