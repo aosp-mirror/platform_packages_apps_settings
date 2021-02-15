@@ -52,10 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Gawing mas maliit o mas malaki ang text sa screen."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Paliitin"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Palakihin"</string>
-    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
-    <skip />
-    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
-    <skip />
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Gumamit ng Auto-Rotate"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Ginagamit ng Autorotate na batay sa mukha ang camera sa harap para makita kung may nakatingin sa screen at kung paano siya nakatingin. Nagbibigay-daan ito sa pagbabasa habang nakahiga at hindi kailanman sino-store o ipinapadala sa Google ang mga larawan.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Matuto pa&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Sample na text"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"The Wonderful Wizard of Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kabanata 11: The Wonderful Emerald City of Oz"</string>
@@ -1176,14 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Paghahanap"</string>
     <string name="display_settings" msgid="7197750639709493852">"Display"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"I-auto rotate ang screen"</string>
-    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
-    <skip />
-    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
-    <skip />
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Naka-off"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Naka-on"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Naka-on - Batay sa mukha"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"I-enable Pag-detect ng Mukha"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Mga Kulay"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Naka-boost"</string>
@@ -3101,11 +3095,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"I-delete ang user"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"I-delete"</string>
     <string name="user_guest" msgid="4545590092001460388">"Bisita"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"I-clear ang data ng bisita"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Tapusin ang session ng bisita"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Tapusin ang session ng bisita?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Alisin ang bisita"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Alisin ang bisita?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Ide-delete ang lahat ng app at data sa session na ito."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Tapusin ang session"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Alisin"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"I-on ang mga pagtawag sa telepono"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"I-on ang mga pagtawag sa telepono at SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"I-delete ang user"</string>
@@ -3681,6 +3674,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Mga notification sa pag-uusap"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Mga nag-aalertong notification"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Mga silent na notification"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"Mga serbisyong pantulong sa VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Walang mga naka-install na app ang humiling na mapagana bilang mga serbisyong pantulong sa VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Payagan ang access sa serbisyo ng VR para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4937,32 +4937,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Pag-activate ng network"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"Aktibo ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"I-tap para i-update ang mga setting ng SIM"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Lumipat sa <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Lumipat sa iba pang carrier"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Binago ang iyong mobile network"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"I-set up ang ibang SIM mo"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Piliin ang iyong aktibong SIM o gumamit ng 2 SIM nang sabay"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"Pumili ng numerong gagamitin"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"May <xliff:g id="NUMBER">%1$d</xliff:g> (na) numerong available sa device na ito, pero isa lang ang magagamit sa bawat pagkakataon"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Ina-activate<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Hindi ma-activate sa ngayon"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Hindi alam na numero"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Gamitin ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ang gagamitin para sa mobile data, mga tawag, at SMS."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Walang available na aktibong SIM"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Para gamitin ang mobile data, mga feature ng tawag, at SMS sa ibang pagkakataon, pumunta sa mga setting ng iyong network"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM card"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Burahin ang na-download na SIM na ito?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Kapag binura ang SIM na ito, maaalis ang serbisyo ng <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> sa device na ito.\n\nHindi makakansela ang serbisyo para sa <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>."</string>
@@ -5042,8 +5030,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Hindi sinusuportahan ng iyong carrier ang mga emergency na tawag sa Pagtawag gamit ang Wi‑Fi.\nAwtomatikong lumilipat ang device sa isang cellular network para gumawa ng emergency na tawag.\nPosible lang ang mga emergency na tawag sa mga lugar na may cellular signal."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Gumamit ng Wi-Fi para sa mga tawag para mapahusay ang kalidad"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Backup na pagtawag"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Kung hindi available o nasa roaming ang <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g>, gamitin ang mobile data SIM mo para sa mga pagtawag sa <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"backup na pagtawag"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Papasok na MMS message"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Hindi maipadala ang MMS message"</string>
@@ -5114,8 +5101,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Mga Taawag at SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Pagtawag sa Wi‑Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Tumawag at makatanggap ng mga tawag sa Wi‑Fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Sa pagtawag gamit ang Wi‑Fi, sa pamamagitan ng mga hindi carrier na Wi‑Fi network ang mga pagtawag at pagtanggap ng tawag. "<annotation id="url">"Matuto pa"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Mga Tawag"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"mas gusto"</string>
@@ -5129,10 +5115,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"koneksyon ng network, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Tingnan ang mga network sa airplane mode"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Tinitingnan ang mga network sa airplane mode"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"I-on ang mga network"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"I-off ang mga network"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"I-reset ang iyong internet?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Tatapusin nito ang iyong tawag sa telepono"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Tatapusin nito ang iyong tawag sa telepono"</string>
