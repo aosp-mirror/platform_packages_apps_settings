@@ -3102,11 +3102,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"刪除使用者"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"刪除"</string>
     <string name="user_guest" msgid="4545590092001460388">"訪客"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"清除訪客資料"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"結束訪客工作階段"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"要結束訪客工作階段嗎？"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"移除訪客"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"移除訪客？"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"這個工作階段中的所有應用程式和資料都會被刪除。"</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"結束工作階段"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"移除"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"開啟通話功能"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"開啟通話和短訊功能"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"刪除使用者"</string>
@@ -3682,6 +3681,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"對話通知"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"提醒通知"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"靜音通知"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服務"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"沒有已安裝的應用程式要求提供 VR 助手服務。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"允許 VR 服務存取 <xliff:g id="SERVICE">%1$s</xliff:g> 嗎？"</string>
@@ -4938,32 +4944,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"網絡啟用"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"已啟用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"輕按以更新 SIM 卡設定"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"已切換至 <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"已切換至其他流動網絡供應商"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"您的流動網絡已變更"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"設定您的其他 SIM 卡"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"選擇您要使用的 SIM 卡或同時使用 2 張 SIM 卡"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"選擇要使用的號碼"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"這個裝置上有 <xliff:g id="NUMBER">%1$d</xliff:g> 個號碼可以使用，但一次只能使用一個"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"正在啟用<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"目前無法啟用"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"不明號碼"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"要使用 <xliff:g id="CARRIER_NAME">%1$s</xliff:g> 嗎？"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"系統將使用 <xliff:g id="CARRIER_NAME">%1$s</xliff:g> 的流動數據、通話和短訊服務。"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"沒有可用的 SIM 卡"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"日後如要使用流動數據、通話和短訊功能，請前往 [網絡設定] 調整設定內容"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM 卡"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"要清除這張已下載的 SIM 卡嗎？"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"清除此 SIM 卡即會從此裝置中移除 <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> 服務。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> 的服務將不會被取消。"</string>
@@ -5043,8 +5037,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"您的電訊商目前不支援透過 Wi-Fi 通話撥打緊急電話。\n裝置會自動切換至流動網絡以撥打緊急電話。\n您只可在流動網絡覆蓋的區域撥打緊急電話。"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"使用 Wi‑Fi 撥打電話，以提升通話質素"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"備用通話"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"如果 <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> 無法使用，系統將透過流動數據 SIM 卡撥打和接聽 <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> 的電話。"</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"備用通話"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"收到的 MMS 訊息"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"無法傳送 MMS 訊息"</string>
@@ -5115,8 +5108,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"通話和短訊"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi 通話"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"透過 Wi-Fi 撥打和接聽電話"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Wi-Fi 通話可讓您透過非流動網絡供應商 Wi-Fi 網絡撥打和接聽電話。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"通話"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"短訊"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"偏好"</string>
@@ -5130,10 +5122,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"網絡連線, 互聯網, 無線, 數據, Wi-Fi, 流動網絡, 流動裝置, 流動網絡供應商, 4G, 3G, 2G, LTE"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"查看飛行模式網絡"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"查看飛行模式網絡"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"開啟網絡"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"關閉網絡"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"要重設互聯網嗎？"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"通話將因此結束"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"通話將因此結束"</string>
