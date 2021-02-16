@@ -21,7 +21,6 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 
 /**
  * Location Setting page for managed profile.
@@ -54,11 +53,9 @@ public class LocationWorkProfileSettings extends DashboardFragment {
         use(LocationFooterPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
 
-        final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
-        final RecentLocationRequestPreferenceController controller = use(
-                RecentLocationRequestPreferenceController.class);
+        final RecentLocationAccessPreferenceController controller =
+                use(RecentLocationAccessPreferenceController.class);
         controller.init(this);
-        controller.setProfileType(profileType);
     }
 
     @Override
