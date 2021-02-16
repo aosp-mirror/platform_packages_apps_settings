@@ -3101,11 +3101,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Διαγραφή χρήστη"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Διαγραφή"</string>
     <string name="user_guest" msgid="4545590092001460388">"Επισκέπτης"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Διαγραφή δεδομένων επισκέπτη"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Λήξη περιόδου σύνδεσης επισκέπτη"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Λήξη περιόδου σύνδεσης επισκέπτη;"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Κατάργηση επισκέπτη"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Κατάργηση επισκέπτη;"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Όλες οι εφαρμογές και τα δεδομένα αυτής της περιόδου σύνδεσης θα διαγραφούν."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Λήξη περιόδου σύνδεσης"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Κατάργηση"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Ενεργοποίηση τηλεφωνικών κλήσεων"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Ενεργοποίηση κλήσεων και SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Διαγραφή χρήστη"</string>
@@ -3681,6 +3680,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Ειδοποιήσεις συζήτησης"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Προειδοποιήσεις"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Ειδοποιήσεις σε σίγαση"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"Βοηθητικές υπηρεσίες Εικονικής Πραγματικότητας"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Δεν έχει ζητηθεί η εκτέλεση εγκατεστημένων εφαρμογών ως βοηθητικών υπηρεσιών Εικονικής Πραγματικότητας."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Να επιτρέπεται στην υπηρεσία <xliff:g id="SERVICE">%1$s</xliff:g> να έχει πρόσβαση στην υπηρεσία Εικονικής Πραγματικότητας;"</string>
@@ -4937,32 +4943,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ενεργοποίηση δικτύου"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"Η εταιρεία κινητής τηλεφωνίας <xliff:g id="CARRIER_NAME">%1$s</xliff:g> είναι ενεργή"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Πατήστε για ενημέρωση των ρυθμίσεων SIM"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Έγινε εναλλαγή σε <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Έγινε εναλλαγή σε άλλη εταιρεία κινητής τηλεφωνίας"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Το δίκτυο κινητής τηλεφωνίας σας άλλαξε."</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Ρύθμιση της άλλης SIM"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Επιλέξτε την ενεργή SIM ή χρησιμοποιήστε 2 SIM ταυτόχρονα"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"Επιλέξτε έναν αριθμό για χρήση"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"<xliff:g id="NUMBER">%1$d</xliff:g> αριθμοί είναι διαθέσιμοι σε αυτήν τη συσκευή, αλλά μπορεί να χρησιμοποιηθεί μόνο ένας κάθε φορά."</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Ενεργοποίηση<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Η ενεργοποίηση δεν ήταν δυνατή αυτήν τη στιγμή"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Άγνωστος αριθμός"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Χρήση <xliff:g id="CARRIER_NAME">%1$s</xliff:g>;"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Η εταιρεία κινητής τηλεφωνίας <xliff:g id="CARRIER_NAME">%1$s</xliff:g> θα χρησιμοποιείται για δεδομένα κινητής τηλεφωνίας, κλήσεις και SMS."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Δεν υπάρχουν διαθέσιμες ενεργές SIM"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Για να χρησιμοποιήσετε αργότερα δεδομένα κινητής τηλεφωνίας, λειτουργίες κλήσεων και SMS, μεταβείτε στις ρυθμίσεις δικτύου σας."</string>
     <string name="sim_card_label" msgid="5632157635124050923">"Κάρτα SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Διαγραφή αυτής της SIM της οποίας έγινε λήψη;"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Η διαγραφή αυτής της SIM καταργεί την υπηρεσία <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> από αυτήν τη συσκευή.\n\nΗ υπηρεσία για <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> δεν θα ακυρωθεί."</string>
@@ -5042,8 +5036,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Οι κλήσεις έκτακτης ανάγκης μέσω Κλήσης Wi‑Fi δεν υποστηρίζονται από την εταιρεία κινητής τηλεφωνίας σας.\nΗ συσκευή αλλάζει αυτόματα σε δίκτυο κινητής τηλεφωνίας για την πραγματοποίηση μιας κλήσης έκτακτης ανάγκης.\nΗ πραγματοποίηση κλήσεων έκτακτης ανάγκης είναι δυνατή μόνο σε περιοχές με κάλυψη δικτύου κινητής τηλεφωνίας."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Χρήση Wi‑Fi για κλήσεις για βελτίωση της ποιότητας"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Δημιουργία αντιγράφων ασφαλείας κλήσεων"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Όταν δεν είναι διαθέσιμο το <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> ή κατά την περιαγωγή, χρησιμοπ. SIM δεδομένων κιν. τηλεφ. για κλήσεις <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"δημιουργία αντιγράφων ασφαλείας κλήσεων"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Εισερχόμενο μήνυμα MMS"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Αδυναμία αποστολής μηνύματος MMS"</string>
@@ -5114,8 +5107,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Κλήσεις και SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Κλήση Wi-Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Πραγματοποίηση και λήψη κλήσεων μέσω Wi‑Fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Με την Κλήση Wi-Fi, οι κλήσεις πραγματοποιούνται και λαμβάνονται μέσω δικτύων Wi‑Fi που δεν σχετίζονται με εταιρείες κινητής τηλεφωνίας. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Κλήσεις"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"προτιμώνται"</string>
@@ -5129,10 +5121,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"σύνδεση δικτύου, διαδίκτυο, ασύρματο, δεδομένα, wifi, wi-fi, wi fi, δίκτυο κινητής τηλεφωνίας, κινητό, εταιρεία κινητής τηλεφωνίας, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Προβολή δικτύων λειτουργίας πτήσης"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Προβολή δικτύων λειτουργίας πτήσης"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"Ενεργοποίηση δικτύων"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Απενεργοποίηση δικτύων"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Επαναφορά της σύνδεσής σας στο διαδίκτυο;"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Με αυτήν την ενέργεια θα τερματιστεί η τηλεφωνική σας κλήση"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Με αυτήν την ενέργεια θα τερματιστεί η τηλεφωνική σας κλήση"</string>

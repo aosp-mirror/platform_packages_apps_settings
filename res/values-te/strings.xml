@@ -3101,11 +3101,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"వినియోగదారుని తొలగించండి"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"తొలగించు"</string>
     <string name="user_guest" msgid="4545590092001460388">"అతిథి"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"గెస్ట్ డేటాను క్లియర్ చేయి"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"గెస్ట్ సెషన్‌ను ముగించు"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"గెస్ట్ సెషన్‌ను ముగించాలా?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"అతిథిని తీసివేయండి"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"అతిథిని తీసివేయాలా?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ఈ సెషన్‌లోని అన్ని యాప్‌లు మరియు డేటా తొలగించబడతాయి."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"సెషన్‌ను ముగించు"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"తీసివేయి"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ఫోన్ కాల్‌లను ఆన్ చేయి"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ఫోన్ కాల్‌లు &amp; SMS ఆన్ చేయి"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"వినియోగదారుని తొలగించు"</string>
@@ -3681,6 +3680,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"సంభాషణ నోటిఫికేషన్‌లు"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"అలర్ట్ చేసే నోటిఫికేషన్‌లు"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"నిశ్శబ్ద నోటిఫికేషన్‌లు"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR సహాయక సేవలు"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ఇన్‌స్టాల్ చేసిన యాప్‌లు ఏవీ VR సహాయక సేవలుగా అమలు కావడానికి అభ్యర్థించబడలేదు."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం VR సేవ ప్రాప్యతను అనుమతించాలా?"</string>
@@ -4939,32 +4945,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"నెట్‌వర్క్ యాక్టివేషన్"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> యాక్టివ్‌గా ఉంది"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM సెట్టింగ్‌లను అప్‌డేట్ చేయడానికి ట్యాప్ చేయండి"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>కి మార్చబడింది"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"మరొక క్యారియర్‌కి మార్చబడింది"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"మీ మొబైల్ నెట్‌వర్క్ మార్చబడింది"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"మీ వేరే SIMను సెటప్ చేయండి"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"యాక్టివ్‌గా ఉన్న మీ SIMను ఎంచుకోండి లేదా 2 SIMలను ఒకేసారి ఉపయోగించండి"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"ఉపయోగించడానికి ఒక నంబర్‌ను ఎంచుకోండి"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"ఈ పరికరంలో <xliff:g id="NUMBER">%1$d</xliff:g> నంబర్‌లు అందుబాటులో ఉన్నాయి, కానీ మీరు ఒకసారి ఒక్క నంబర్‌ను మాత్రమే ఉపయోగించడానికి వీలవుతుంది"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"<xliff:g id="ELLIPSIS">…</xliff:g>ను యాక్టివేట్ చేస్తోంది"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"ఇప్పటికిప్పుడు యాక్టివేట్ చేయడం సాధ్యం కాదు"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"తెలియని నంబర్"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ను ఉపయోగించాలా?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"మొబైల్ డేటా, కాల్‌లు, SMSల కోసం <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ఉపయోగించబడుతుంది."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"యాక్టివ్‌గా ఉన్న SIMలు ఏవీ లేవు"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"తర్వాతి సమయంలో మీ మొబైల్ డేటాను, కాల్ ఫీచర్‌లను, అలాగే SMSలను ఉపయోగించడానికి, మీ నెట్‌వర్క్ సెట్టింగ్‌లులోనికి వెళ్లండి"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM కార్డ్"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"డౌన్‌లోడ్ చేయబడిన ఈ SIMను తొలగించాలా?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"ఈ SIMను తొలగించడం వలన ఈ పరికరం నుండి <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> సర్వీస్ తీసివేయబడుతోంది.\n\n <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> సర్వీస్ రద్దు చేయబడదు."</string>
@@ -5044,8 +5038,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Wi‑Fi కాలింగ్‌ను ఉపయోగించి అత్యవసర కాల్‌లను చేయడానికి మీ క్యారియర్‌కు మద్దతు లేదు.\nఅత్యవసర కాల్‌ను చేయాల్సినప్పుడు పరికరం ఆటోమేటిక్‌గా సెల్యులార్ నెట్‌వర్క్‌‌కు మారుతుంది.\nసెల్యులార్ కవరేజీ ఉన్న ప్రాంతాలలో మాత్రమే అత్యవసర కాల్‌లను చేయడానికి సాధ్యమవుతుంది."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"కాల్‌ల నాణ్యతను మెరుగుపరచడానికి Wi‑Fiని ఉపయోగించు"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"బ్యాకప్ కాలింగ్"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> అందుబాటులో లేకపోతే లేదా రోమింగ్‌లో ఉంటే, <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> కాల్స్ కోసం మీ మొబైల్ డేటా SIMను ఉపయోగించండి."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"బ్యాకప్ కాలింగ్"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"ఇన్‌కమింగ్ MMS సందేశం"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS సందేశాన్ని పంపించడం సాధ్యం కాదు"</string>
@@ -5116,8 +5109,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"కాల్స్ &amp; SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi కాలింగ్"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Wi-Fi ద్వారా కాల్స్ చేయండి, అందుకోండి"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Wi-Fi కాలింగ్‌తో, నాన్-క్యారియర్ Wi-Fi నెట్‌వర్క్‌ల ద్వారా కాల్స్ చేయబడతాయి, అందుకోబడతాయి. "<annotation id="url">"మరింత తెలుసుకోండి"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"కాల్స్"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"ప్రాధాన్యతనిస్తుంది"</string>

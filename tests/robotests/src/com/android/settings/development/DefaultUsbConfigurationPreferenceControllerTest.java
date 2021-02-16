@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,22 @@
 
 package com.android.settings.development;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
-import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -43,60 +43,52 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class AdbPreferenceControllerTest {
+public class DefaultUsbConfigurationPreferenceControllerTest {
+
+    private static final ComponentName TEST_COMPONENT_NAME = new ComponentName("test", "test");
 
     @Mock
     private RestrictedSwitchPreference mPreference;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
-    private DevelopmentSettingsDashboardFragment mFragment;
-    @Mock
     private DevicePolicyManager mDevicePolicyManager;
 
-    private Context mContext;
-    private AdbPreferenceController mController;
+    private DefaultUsbConfigurationPreferenceController mController;
 
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mController = spy(new AdbPreferenceController(mContext, mFragment));
-        doReturn(true).when(mController).isAvailable();
+        Context context = spy(RuntimeEnvironment.application);
+        mController = new DefaultUsbConfigurationPreferenceController(context);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
-        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
-        doReturn(mContext).when(mContext).createPackageContextAsUser(
+        when(context.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
+        doReturn(context).when(context).createPackageContextAsUser(
                 any(String.class), anyInt(), any(UserHandle.class));
     }
 
     @Test
-    public void onDeveloperOptionsDisabled_shouldDisablePreference() {
-        mController.onDeveloperOptionsDisabled();
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ADB_ENABLED, -1);
+    public void updateState_usbDataSignalingEnabled_shouldNotDisablePreference() {
+        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
+                UserHandle.myUserId())).thenReturn(true);
+        when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
-        assertThat(mode).isEqualTo(AdbPreferenceController.ADB_SETTING_OFF);
-        verify(mPreference).setEnabled(false);
-        verify(mPreference).setChecked(false);
+        mController.updateState(mPreference);
+
+        verify(mPreference).setDisabledByAdmin(null);
     }
 
     @Test
-    public void onAdbDialogConfirmed_shouldEnableAdbSetting() {
-        mController.onAdbDialogConfirmed();
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ADB_ENABLED, -1);
+    public void updateState_usbDataSignalingDisabled_shouldDisablePreference() {
+        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
+                UserHandle.myUserId())).thenReturn(false);
+        when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
-        assertThat(mode).isEqualTo(AdbPreferenceController.ADB_SETTING_ON);
-    }
+        mController.updateState(mPreference);
 
-    @Test
-    public void onAdbDialogDismissed_preferenceShouldNotBeChecked() {
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED,
-                AdbPreferenceController.ADB_SETTING_OFF);
-        mController.onAdbDialogDismissed();
-
-        verify(mPreference).setChecked(false);
+        verify(mPreference).setDisabledByAdmin(eq(new RestrictedLockUtils.EnforcedAdmin(
+                TEST_COMPONENT_NAME, null, UserHandle.SYSTEM)));
     }
 }

@@ -3101,11 +3101,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Hapus pengguna"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Hapus"</string>
     <string name="user_guest" msgid="4545590092001460388">"Tamu"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Hapus data tamu"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Akhiri sesi tamu"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Akhiri sesi tamu?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Hapus tamu"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Hapus tamu?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Semua aplikasi dan data di sesi ini akan dihapus."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Akhiri sesi"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Hapus"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktifkan panggilan telepon"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktifkan panggilan telepon &amp; SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Hapus pengguna"</string>
@@ -3681,6 +3680,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Notifikasi percakapan"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Notifikasi bersuara"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Notifikasi senyap"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"Layanan bantuan VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Tidak ada aplikasi terinstall yang meminta dijalankan sebagai layanan bantuan VR"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Izinkan akses layanan VR untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4937,32 +4943,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Aktivasi jaringan"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> aktif"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Ketuk untuk memperbarui setelan SIM"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Dialihkan ke <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Dialihkan ke operator lain"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Jaringan seluler Anda telah berubah"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Siapkan SIM lainnya"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Pilih SIM yang aktif atau gunakan 2 SIM sekaligus"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"Pilih nomor yang akan digunakan"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"Tersedia <xliff:g id="NUMBER">%1$d</xliff:g> nomor di perangkat ini, tetapi hanya satu nomor yang dapat digunakan dalam satu waktu"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Mengaktifkan <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Tidak dapat diaktifkan sekarang"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Nomor tidak dikenal"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Gunakan <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> akan digunakan untuk data seluler, panggilan, dan SMS."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Tidak ada SIM aktif yang tersedia"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Untuk menggunakan data seluler, fitur panggilan, dan SMS di lain waktu, buka setelan jaringan"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"Kartu SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Hapus SIM yang didownload ini?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Menghapus SIM ini akan menghapus layanan <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> dari perangkat ini.\n\nLayanan untuk <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> tidak akan dibatalkan."</string>
@@ -5042,8 +5036,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Panggilan darurat melalui Panggilan Wi‑Fi tidak didukung oleh operator Anda.\nPerangkat beralih ke jaringan seluler secara otomatis untuk melakukan panggilan darurat.\nPanggilan darurat hanya dapat dilakukan dengan cakupan seluler."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Gunakan Wi‑Fi untuk melakukan panggilan dengan kualitas lebih baik"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Panggilan cadangan"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Jika <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> tidak tersedia atau sedang roaming, gunakan SIM data seluler untuk panggilan <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"panggilan cadangan"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Pesan MMS masuk"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Tidak dapat mengirim pesan MMS"</string>
@@ -5114,8 +5107,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Panggilan Telepon dan SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Panggilan Wi-Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Melakukan dan menerima panggilan melalui Wi‑Fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Dengan panggilan Wi-Fi, panggilan dilakukan dan diterima melalui jaringan Wi-Fi non-operator. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Panggilan Telepon"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"pilihan"</string>
@@ -5129,10 +5121,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"koneksi jaringan, internet, nirkabel, data, wifi, wi-fi, wi fi, seluler, (perangkat) seluler, operator seluler, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Tampilkan jaringan mode pesawat"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Menampilkan jaringan yang tersedia dalam mode pesawat"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"Aktifkan jaringan"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Nonaktifkan jaringan"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Reset internet?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Tindakan ini akan mengakhiri panggilan telepon"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Tindakan ini akan mengakhiri panggilan telepon"</string>

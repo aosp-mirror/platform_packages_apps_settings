@@ -52,10 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Bëje tekstin në ekran më të vogël ose më të madh."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Zvogëlo"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Zmadho"</string>
-    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
-    <skip />
-    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
-    <skip />
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Përdor \"Rrotullimin automatik\""</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"\"Rrotullimi automatik\" në bazë të fytyrave përdor kamerën e përparme për të parë nëse dhe se si dikush po shikon tek ekrani. Lejon leximin ndërkohë që je shtrirë dhe imazhet asnjëherë nuk ruhen dhe as nuk dërgohen te Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Mëso më shumë&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Teksti shembull"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Magjistari i mrekullueshëm i Ozit"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapitulli 11: Qyteti i mrekullueshëm i smeraldtë i Ozit"</string>
@@ -1176,14 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Kërko"</string>
     <string name="display_settings" msgid="7197750639709493852">"Ekrani"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Ekran me rrotullim automatik"</string>
-    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
-    <skip />
-    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
-    <skip />
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Joaktiv"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aktiv"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aktiv - Në bazë të fytyrave"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Aktivizo \"Zbulimin e fytyrave\""</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Ngjyrat"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natyrale"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Të theksuara"</string>
@@ -3101,11 +3095,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Fshi përdoruesin"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Fshi"</string>
     <string name="user_guest" msgid="4545590092001460388">"I ftuar"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Pastro të dhënat e vizitorit"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Jepi fund sesionit të vizitorit"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Dëshiron t\'i japësh fund sesionit të vizitorit?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Hiq të ftuarin"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Të hiqet i ftuari?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Të gjitha aplikacionet dhe të dhënat në këtë sesion do të fshihen."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Jepi fund sesionit"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Hiq!"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktivizo telefonatat"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktivizo telefonatat dhe SMS-të"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Fshi përdoruesin"</string>
@@ -3681,6 +3674,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Njoftimet e bisedës"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Njoftimet sinjalizuese"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Njoftimet në heshtje"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"Shërbimet e ndihmësit VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Asnjë aplikacion i instaluar nuk ka kërkuar të ekzekutohet si shërbim ndihmësi VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Të lejohet qasja e shërbimit VR për <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4937,32 +4937,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Aktivizimi i rrjetit"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> është aktiv"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Trokit për të përditësuar cilësimet e kartës SIM"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Kaloi te <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"U kalua te një operator tjetër celular"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Rrjeti yt celular ka ndryshuar"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Konfiguro kartën tjetër SIM"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Zgjidh kartën tënde aktive SIM ose përdor 2 karta SIM njëkohësisht"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"Zgjidh një numër për ta përdorur"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"<xliff:g id="NUMBER">%1$d</xliff:g> numra janë në këtë pajisje, por vetëm një mund të përdoret në të njëjtën kohë"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Po aktivizohet<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Nuk mund të aktivizohej në këtë moment"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Numër i panjohur"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Të përdoret <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> do të përdoret për të dhënat celulare, telefonatat dhe mesazhet SMS"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nuk ka karta SIM aktive"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Për të përdorur të dhënat celulare, funksionet e telefonatave dhe mesazhet SMS më vonë, shko te cilësimet e tua të rrjetit"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"Karta SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Dëshiron ta pastrosh këtë kartë SIM të shkarkuar?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Spastrimi i kësaj karte SIM e heq shërbimin e <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> nga kjo pajisje.\n\nShërbimi për <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> nuk do të anulohet."</string>
@@ -5042,8 +5030,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Telefonatat e urgjencës me \"Telefonata me Wi‑Fi\" nuk mbështeten nga operatori yt celular.\nPajisja kalon automatikisht në një rrjet celular për të kryer një telefonatë urgjence.\nTelefonatat e urgjencës janë të mundshme vetëm në zonat me mbulim celular."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Përdor Wi‑Fi për telefonatat për të përmirësuar cilësinë"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Opsioni rezervë i telefonatave"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Nëse <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> nuk ofrohet ose është në roaming, përdor kartën SIM të të dhënave celulare për telefonata me <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"opsioni rezervë i telefonatave"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Mesazh MMS në ardhje"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Mesazhi MMS nuk mund të dërgohet"</string>
@@ -5114,8 +5101,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Telefonatat dhe SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Telefonatë me Wi-Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Kryej dhe merr telefonata përmes Wi‑Fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Me telefonatat me Wi‑Fi, telefonatat kryhen dhe merren përmes rrjeteve Wi-Fi jo të operatorëve celularë. "<annotation id="url">"Mëso më shumë"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Telefonatat"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"preferohet"</string>
@@ -5129,10 +5115,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"lidhja e rrjetit, internet, pa tel, të dhëna, wifi, wi-fi, wi fi, rrjeti celular, celular, operatori celular, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Shiko rrjetet e modalitetit të aeroplanit"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Po shikon rrjetet në modalitetin e aeroplanit"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"Aktivizo rrjetet"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Çaktivizo rrjetet"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Të rivendoset interneti?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Kjo do ta mbyllë telefonatën"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Kjo do ta mbyllë telefonatën"</string>
