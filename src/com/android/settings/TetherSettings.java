@@ -20,6 +20,8 @@ import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
 import static android.net.ConnectivityManager.TETHERING_USB;
 import static android.net.TetheringManager.TETHERING_ETHERNET;
 
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfUsbDataSignalingIsDisabled;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
@@ -38,6 +40,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerExecutor;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
@@ -51,6 +54,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -82,7 +86,7 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     private static final String TAG = "TetheringSettings";
 
-    private SwitchPreference mUsbTether;
+    private RestrictedSwitchPreference mUsbTether;
 
     private SwitchPreference mBluetoothTether;
 
@@ -208,7 +212,7 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     @VisibleForTesting
     void setupTetherPreference() {
-        mUsbTether = (SwitchPreference) findPreference(KEY_USB_TETHER_SETTINGS);
+        mUsbTether = (RestrictedSwitchPreference) findPreference(KEY_USB_TETHER_SETTINGS);
         mBluetoothTether = (SwitchPreference) findPreference(KEY_ENABLE_BLUETOOTH_TETHERING);
         mEthernetTether = (SwitchPreference) findPreference(KEY_ENABLE_ETHERNET_TETHERING);
     }
@@ -415,6 +419,8 @@ public class TetherSettings extends RestrictedSettingsFragment
             mUsbTether.setEnabled(false);
             mUsbTether.setChecked(false);
         }
+        mUsbTether.setDisabledByAdmin(
+                checkIfUsbDataSignalingIsDisabled(getContext(), UserHandle.myUserId()));
     }
 
     @VisibleForTesting
