@@ -20,7 +20,6 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
-import android.net.ConnectivityManager;
 import android.net.VpnManager;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -48,7 +47,6 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
     private PackageInfo mPackageInfo;
     private Listener mListener;
 
-    private ConnectivityManager mConnectivityManager;
     private UserManager mUserManager;
     private VpnManager mVpnManager;
 
@@ -93,7 +91,6 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mConnectivityManager = getContext().getSystemService(ConnectivityManager.class);
         mUserManager = UserManager.get(getContext());
         mVpnManager = getContext().getSystemService(VpnManager.class);
     }
@@ -158,8 +155,8 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
         }
         final int userId = getUserId();
         if (mPackageInfo.packageName.equals(VpnUtils.getConnectedPackage(mVpnManager, userId))) {
-            mConnectivityManager.setAlwaysOnVpnPackageForUser(userId, null,
-                    /* lockdownEnabled */ false, /* lockdownAllowlist */ null);
+            mVpnManager.setAlwaysOnVpnPackageForUser(userId, null, /* lockdownEnabled */ false,
+                    /* lockdownAllowlist */ null);
             mVpnManager.prepareVpn(mPackageInfo.packageName, VpnConfig.LEGACY_VPN, userId);
         }
     }
