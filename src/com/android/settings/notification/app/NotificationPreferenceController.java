@@ -36,6 +36,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -60,6 +61,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     protected Drawable mConversationDrawable;
     @Nullable
     protected ShortcutInfo mConversationInfo;
+    protected List<String> mPreferenceFilter;
 
     public NotificationPreferenceController(Context context, NotificationBackend backend) {
         super(context);
@@ -87,6 +89,9 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             }
         }
         if (mChannel != null) {
+            if (mPreferenceFilter != null && !isIncludedInFilter()) {
+                return false;
+            }
             return mChannel.getImportance() != IMPORTANCE_NONE;
         }
         return true;
@@ -96,14 +101,18 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             @Nullable NotificationChannel channel, @Nullable NotificationChannelGroup group,
             Drawable conversationDrawable,
             ShortcutInfo conversationInfo,
-            RestrictedLockUtils.EnforcedAdmin admin) {
+            RestrictedLockUtils.EnforcedAdmin admin,
+            List<String> preferenceFilter) {
         mAppRow = appRow;
         mChannel = channel;
         mChannelGroup = group;
         mAdmin = admin;
         mConversationDrawable = conversationDrawable;
         mConversationInfo = conversationInfo;
+        mPreferenceFilter = preferenceFilter;
     }
+
+    abstract boolean isIncludedInFilter();
 
     protected boolean checkCanBeVisible(int minImportanceVisible) {
         if (mChannel == null) {

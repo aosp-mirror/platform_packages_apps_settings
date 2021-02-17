@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.app;
 
+import android.app.NotificationChannel;
 import android.content.Context;
 import android.util.Slog;
 
@@ -45,6 +46,11 @@ public class AddToHomeScreenPreferenceController extends NotificationPreferenceC
             return false;
         }
         return mConversationInfo != null;
+    }
+
+    @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_LAUNCHER);
     }
 
     @Override

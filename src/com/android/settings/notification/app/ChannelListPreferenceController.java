@@ -85,6 +85,11 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
+    @Override
     public void updateState(Preference preference) {
         mPreference = (PreferenceCategory) preference;
         // Load channel settings

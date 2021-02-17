@@ -69,6 +69,11 @@ public class SoundPreferenceController extends NotificationPreferenceController
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_SOUND);
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
