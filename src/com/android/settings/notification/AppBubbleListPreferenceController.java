@@ -32,7 +32,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -67,8 +66,10 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
             @Nullable NotificationChannel channel, @Nullable NotificationChannelGroup group,
             Drawable conversationDrawable,
             ShortcutInfo conversationInfo,
-            RestrictedLockUtils.EnforcedAdmin admin) {
-        super.onResume(appRow, channel, group, conversationDrawable, conversationInfo, admin);
+            RestrictedLockUtils.EnforcedAdmin admin,
+            List<String> preferenceFilter) {
+        super.onResume(appRow, channel, group, conversationDrawable, conversationInfo, admin,
+                preferenceFilter);
         // In case something changed in the foreground (e.g. via bubble button on notification)
         loadConversationsAndPopulate();
     }

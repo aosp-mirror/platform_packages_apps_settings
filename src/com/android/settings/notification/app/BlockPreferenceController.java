@@ -20,6 +20,7 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.widget.Switch;
@@ -55,7 +56,15 @@ public class BlockPreferenceController extends NotificationPreferenceController
         if (mAppRow == null) {
             return false;
         }
+        if (mPreferenceFilter != null && !isIncludedInFilter()) {
+            return false;
+        }
         return true;
+    }
+
+    @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_IMPORTANCE);
     }
 
     public void updateState(Preference preference) {

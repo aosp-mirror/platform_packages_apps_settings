@@ -21,6 +21,7 @@ import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
 import android.app.ActivityManager;
 import android.annotation.Nullable;
+import android.app.NotificationChannel;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -82,6 +83,11 @@ public class BubblePreferenceController extends NotificationPreferenceController
             }
         }
         return true;
+    }
+
+    @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_CONVERSATION);
     }
 
     @Override

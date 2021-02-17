@@ -53,6 +53,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
 
+import com.google.common.collect.ImmutableList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +66,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class SoundPreferenceControllerTest {
@@ -108,7 +112,7 @@ public class SoundPreferenceControllerTest {
     @Test
     public void testIsAvailable_notIfChannelNull() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -116,7 +120,7 @@ public class SoundPreferenceControllerTest {
     public void testIsAvailable_notIfNotImportant() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -125,7 +129,7 @@ public class SoundPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -133,8 +137,25 @@ public class SoundPreferenceControllerTest {
     public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
         assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_filteredIn() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
+        mController.onResume(appRow, channel, null, null, null, null,
+                ImmutableList.of(NotificationChannel.EDIT_SOUND));
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_filteredOut() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
+        mController.onResume(appRow, channel, null, null, null, null, new ArrayList<>());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -152,7 +173,7 @@ public class SoundPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
-                RestrictedLockUtils.EnforcedAdmin.class));
+                RestrictedLockUtils.EnforcedAdmin.class), null);
 
         AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         Preference pref = new NotificationSoundPreference(mContext, attributeSet);
@@ -166,7 +187,7 @@ public class SoundPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
 
         AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         Preference pref = new NotificationSoundPreference(mContext, attributeSet);
@@ -182,7 +203,7 @@ public class SoundPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         when(channel.getSound()).thenReturn(sound);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
 
         AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         NotificationSoundPreference pref = new NotificationSoundPreference(mContext, attributeSet);
@@ -198,7 +219,7 @@ public class SoundPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
         channel.setSound(sound, Notification.AUDIO_ATTRIBUTES_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
 
         AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         NotificationSoundPreference pref =
@@ -238,7 +259,7 @@ public class SoundPreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
         channel.setSound(null, new AudioAttributes.Builder().setUsage(
                 AudioAttributes.USAGE_ALARM).build());
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
 
         AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         NotificationSoundPreference pref =
@@ -259,7 +280,7 @@ public class SoundPreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
         channel.setSound(null, new AudioAttributes.Builder().setUsage(
                 AudioAttributes.USAGE_NOTIFICATION_RINGTONE).build());
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
 
         AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         NotificationSoundPreference pref =
@@ -280,7 +301,7 @@ public class SoundPreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
         channel.setSound(null, new AudioAttributes.Builder().setUsage(
                 AudioAttributes.USAGE_UNKNOWN).build());
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
 
         AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         NotificationSoundPreference pref =
