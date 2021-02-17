@@ -3101,11 +3101,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"သုံးစွဲသူကိုဖျက်ရန်"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"ဖျက်ရန်"</string>
     <string name="user_guest" msgid="4545590092001460388">"ဧည့်သည်"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"ဧည့်သည်ဒေတာကို ရှင်းလင်းရန်"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"ဧည့်သည်ဆက်ရှင်ကို အဆုံးသတ်ရန်"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"ဧည့်သည်စက်ရှင်ကို အဆုံးသတ်မလား။"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"ဧည့်သည်ကို ဖယ်ထုတ်ရန်"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"ဧည့်သည်ကို ဖယ်ထုတ်လိုက်ရမလား?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ဒီချိတ်ဆက်မှု ထဲက အက်ပ်များ အားလုံး နှင့် ဒေတာကို ဖျက်ပစ်မည်။"</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"သတ်မှတ်ပေးထားသည့်အချိန် ပြီးဆုံးပြီ"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"ဖယ်ထုတ်ပါ"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ဖုန်းခေါ်ဆိုမှုများ ဖွင့်မည်"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ဖုန်းခေါ်ဆိုမှုနှင့် SMS ဖွင့်မည်"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"အသုံးပြုသူကို ဖျက်ပါ"</string>
@@ -3681,6 +3680,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"စကားဝိုင်း အကြောင်းကြားချက်များ"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"သတိပေးသည့် အကြောင်းကြားချက်များ"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"အကြောင်းကြားချက်များကို အသံတိတ်ခြင်း"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR အထောက်အကူပြု ဝန်ဆောင်မှုများ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ထည့်သွင်းထားသည့် မည်သည့်အက်ပ်ကိုမျှ VR အထောက်အကူပြု ဝန်ဆောင်မှုများအဖြစ် ဖွင့်ရန် မတောင်းဆိုထားပါ။"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> အတွက် VR ဝန်ဆောင်မှု အသုံးပြုခွင့်ပြုမလား။"</string>
@@ -4937,32 +4943,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"ကွန်ရက် စတင်အသုံးပြုခြင်း"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ကို အသုံးပြုနေသည်"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"ဆင်းမ်ကတ်ဆက်တင်များ အပ်ဒိတ်လုပ်ရန် တို့ပါ"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> သို့ ပြောင်းလိုက်သည်"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"အခြား ဝန်ဆောင်မှုပေးသူသို့ ပြောင်းလိုက်သည်"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"သင်၏ မိုဘိုင်းကွန်ရက် ပြောင်းသွားပါပြီ"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"သင့် အခြားဆင်းမ်ကတ်ကို စနစ်ထည့်သွင်းပါ"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"သင်သုံးနေသော ဆင်းမ်ကတ်ရွေးပါ သို့မဟုတ် ဆင်းမ် ၂ ကတ် တစ်ပြိုင်နက်သုံးပါ"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"အသုံးပြုရန် နံပါတ်ရွေးပါ"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"ဤစက်ပစ္စည်းတွင် နံပါတ် <xliff:g id="NUMBER">%1$d</xliff:g> ခု ရနိုင်သော်လည်း တစ်ကြိမ်လျှင် တစ်ခုသာ အသုံးပြုနိုင်ပါသည်"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"<xliff:g id="ELLIPSIS">…</xliff:g> စတင်နေပါသည်"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"လက်ရှိတွင် စတင်အသုံးပြု၍ မရပါ"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"အမည်မသိ နံပါတ်"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ကို သုံးမလား။"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"မိုဘိုင်းဒေတာ၊ ခေါ်ဆိုမှုများနှင့် SMS စာတိုစနစ်အတွက် <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ကို အသုံးပြုပါမည်။"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"အသုံးပြုနေသော ဆင်းမ်ကတ်များ မရှိပါ"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"မိုဘိုင်းဒေတာ၊ ခေါ်ဆိုမှုဆိုင်ရာ ဝန်ဆောင်မှုများနှင့် SMS စာတိုစနစ်တို့ကို နောင်တွင် အသုံးပြုရန် သင့်ကွန်ရက်ဆက်တင်များသို့ သွားပါ"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"ဆင်းမ်ကတ်"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"ဒေါင်းလုဒ်လုပ်ထားသော ဤဆင်းမ်ကို ဖျက်လိုသလား။"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"ဤဆင်းမ်ကို ဖျက်ခြင်းဖြင့် ဤစက်ပစ္စည်းမှ <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> ဝန်ဆောင်မှုကို ဖယ်ရှားပါမည်။\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> အတွက် ဝန်ဆောင်မှုကို ပယ်ဖျက်မည်မဟုတ်ပါ။"</string>
@@ -5042,8 +5036,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"\'Wi‑Fi ခေါ်ဆိုခြင်း\' မှတစ်ဆင့် အရေးပေါ်ဖုန်းခေါ်ခြင်းများကို သင့်ဝန်ဆောင်မှုပေးသူက ပံ့ပိုးမထားပါ။\nအရေးပေါ်ဖုန်းခေါ်ခြင်း ပြုလုပ်ရန် စက်ပစ္စည်းသည် ဆယ်လူလာကွန်ရက်သို့ အလိုအလျောက် ပြောင်းသွားပါမည်။\nဆယ်လူလာကွန်ရက် ရရှိနိုင်သည့် နယ်မြေများတွင်သာ အရေးပေါ်ဖုန်းခေါ်ခြင်းများ ပြုလုပ်နိုင်ပါသည်။"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"ဖုန်းခေါ်ဆိုမှုများ အရည်အသွေး ပိုမိုကောင်းမွန်စေရန် Wi‑Fi အသုံးပြုသည်"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"အရန် ခေါ်ဆိုမှု"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> ကို မရနိုင်လျှင် သို့မဟုတ် ပြင်ပကွန်ရက်နှင့် ချိတ်ဆက်ထားလျှင် <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> ခေါ်ဆိုမှုများအတွက် သင်၏ မိုဘိုင်းဒေတာဆင်းမ်ကတ်ကို အသုံးပြုပါ။"</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"အရန် ခေါ်ဆိုမှု"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"MMS မက်ဆေ့ဂျ် အဝင်"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS မက်ဆေ့ဂျ်များ ပို့၍မရပါ"</string>
@@ -5114,8 +5107,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"ခေါ်ဆိုမှုများနှင့် SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi ခေါ်ဆိုမှု"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Wi-Fi မှတစ်ဆင့် ဖုန်းခေါ်ဆိုခြင်းနှင့် လက်ခံခြင်းတို့ကို ပြုလုပ်ပါ"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Wi-Fi ခေါ်ဆိုမှုဖြင့် ဖုန်းဝန်ဆောင်မှုပေးသူမဟုတ်သည့် Wi-Fi ကွန်ရက်များမှတစ်ဆင့် ဖုန်းခေါ်ဆိုနိုင်သလို လက်ခံနိုင်သည်။ "<annotation id="url">"ပိုမိုလေ့လာရန်"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"ခေါ်ဆိုမှုများ"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"ဦးစားပေး"</string>
@@ -5129,10 +5121,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"ကွန်ရက်ချိတ်ဆက်မှု၊ အင်တာနက်၊ ကြိုးမဲ့၊ ဒေတာ၊ wifi၊ wi-fi၊ wi fi၊ ဆယ်လူလာ၊ မိုဘိုင်း၊ ဖုန်းဝန်ဆောင်မှုပေးသူ၊ 4g၊ 3g၊ 2g၊ lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"လေယာဉ်ပျံမုဒ် ကွန်ရက်များကို ပြသရန်"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"လေယာဉ်ပျံမုဒ် ကွန်ရက်များကို ပြသနေသည်"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"ကွန်ရက်များ ဖွင့်ခြင်း"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"ကွန်ရက်များ ပိတ်ခြင်း"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"သင့်အင်တာနက်ကို ပြင်ဆင်သတ်မှတ်မလား။"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"၎င်းက သင့်ဖုန်းခေါ်ဆိုမှုကို ရပ်ပါမည်"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"၎င်းက သင့်ဖုန်းခေါ်ဆိုမှုကို ရပ်ပါမည်"</string>

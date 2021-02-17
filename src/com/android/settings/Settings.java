@@ -231,7 +231,7 @@ public class Settings extends SettingsActivity {
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class GlobalActionsPanelSettingsActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
-    public static class QuickControlsSettingsActivity extends SettingsActivity {}
+    public static class DeviceControlsSettingsActivity extends SettingsActivity {}
     /**
      * Activity for BugReportHandlerPicker.
      */
