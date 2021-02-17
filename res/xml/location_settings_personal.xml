@@ -46,15 +46,10 @@
     </Preference>
 
     <Preference
-        android:key="location_scanning"
-        android:title="@string/location_scanning_screen_title"
-        android:fragment="com.android.settings.location.ScanningSettings"
-        settings:controller="com.android.settings.location.LocationScanningPreferenceController"/>
-
-    <PreferenceCategory
         android:key="location_services"
-        android:layout="@layout/preference_category_no_label"
-        settings:controller="com.android.settings.location.LocationServicePreferenceController"/>
+        android:title="@string/location_services_screen_title"
+        android:fragment="com.android.settings.location.LocationServices"
+        settings:controller="com.android.settings.location.LocationScanningPreferenceController"/>
 
     <PreferenceCategory
         android:key="location_footer"
