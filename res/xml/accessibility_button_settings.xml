@@ -19,6 +19,15 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/accessibility_button_title">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="caption_preview"
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/accessibility_button_preview"
+        android:selectable="false"
+        settings:searchable="false"
+        android:persistent="false"
+        settings:controller="com.android.settings.accessibility.AccessibilityButtonPreviewPreferenceController"/>
+
     <ListPreference
         android:entries="@array/accessibility_button_location_selector_titles"
         android:entryValues="@array/accessibility_button_location_selector_values"
