@@ -3101,11 +3101,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Xóa người dùng"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Xóa"</string>
     <string name="user_guest" msgid="4545590092001460388">"Khách"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Xóa dữ liệu khách"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Kết thúc phiên khách"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Kết thúc phiên khách?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Xóa chế độ khách"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Xóa phiên khách?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Tất cả ứng dụng và dữ liệu trong phiên này sẽ bị xóa."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Kết thúc phiên"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Xóa"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Bật cuộc gọi điện thoại"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Bật cuộc gọi điện thoại và SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Xóa người dùng"</string>
@@ -3681,6 +3680,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Thông báo về cuộc trò chuyện"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Thông báo cảnh báo"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Thông báo im lặng"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"Các dịch vụ của trình trợ giúp thực tế ảo"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Không có ứng dụng đã cài đặt nào yêu cầu được chạy dưới dạng dịch vụ trình trợ giúp VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Cho phép quyền truy cập dịch vụ VR đối với <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4937,32 +4943,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Kích hoạt mạng"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> đang hoạt động"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Nhấn để cập nhật tùy chọn cài đặt SIM"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Đã chuyển sang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Đã chuyển sang nhà mạng khác"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Mạng di động của bạn đã thay đổi"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Thiết lập thẻ SIM còn lại của bạn"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Chọn SIM đang hoạt động hoặc dùng đồng thời cả 2 SIM"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"Chọn một số điện thoại để sử dụng"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"Có <xliff:g id="NUMBER">%1$d</xliff:g> số điện thoại trên thiết bị này, nhưng mỗi lần bạn chỉ dùng được một số"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Đang kích hoạt<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Không thể kích hoạt ngay bây giờ"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Số điện thoại không xác định"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Sử dụng <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> sẽ được dùng cho dữ liệu di động, các cuộc gọi và SMS."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Không có SIM nào đang hoạt động"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Để sử dụng dữ liệu di động, các tính năng gọi điện và SMS vào lúc khác, hãy chuyển đến phần cài đặt mạng của bạn"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"Thẻ SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Xóa SIM đã tải xuống này?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Khi bạn xóa SIM, dịch vụ <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> sẽ bị xóa khỏi thiết bị này.\n\nDịch vụ của <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> sẽ không bị hủy."</string>
@@ -5042,8 +5036,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Nhà mạng của bạn không hỗ trợ các cuộc gọi khẩn cấp qua tính năng Gọi qua Wi‑Fi.\nKhi cần thực hiện cuộc gọi khẩn cấp, thiết bị sẽ tự động chuyển sang mạng di động.\nBạn chỉ có thể thực hiện cuộc gọi khẩn cấp ở các khu vực có mạng di động."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Sử dụng Wi‑Fi cho cuộc gọi để cải thiện chất lượng"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Gọi điện dự phòng"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Nếu <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> không có sẵn hoặc đang chuyển vùng, hãy dùng dữ liệu di động của SIM cho những cuộc gọi qua <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"gọi điện dự phòng"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Tin nhắn MMS đến"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Không thể gửi tin nhắn MMS"</string>
@@ -5114,8 +5107,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Cuộc gọi và tin nhắn SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Gọi qua Wi-Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Gọi và nhận cuộc gọi qua mạng Wi‑Fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Với tính năng Gọi qua Wi‑Fi, bạn có thể gọi và nhận cuộc gọi qua các mạng Wi‑Fi không phải do nhà mạng cung cấp. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Cuộc gọi"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"Tin nhắn SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"ưu tiên"</string>
