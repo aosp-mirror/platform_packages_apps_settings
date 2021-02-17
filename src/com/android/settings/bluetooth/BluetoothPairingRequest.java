@@ -37,20 +37,26 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
     if (action == null || !action.equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
       return;
     }
-    PowerManager powerManager =
-        (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+    PowerManager powerManager = context.getSystemService(PowerManager.class);
     BluetoothDevice device =
         intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+    int pairingVariant = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
+        BluetoothDevice.ERROR);
     String deviceAddress = device != null ? device.getAddress() : null;
     String deviceName = device != null ? device.getName() : null;
     boolean shouldShowDialog = LocalBluetoothPreferences.shouldShowDialogInForeground(
         context, deviceAddress, deviceName);
-    if (powerManager.isInteractive() && shouldShowDialog) {
+
+    // Skips consent pairing dialog if the device was recently associated with CDM
+    if (pairingVariant == BluetoothDevice.PAIRING_VARIANT_CONSENT
+        && device.canBondWithoutDialog()) {
+      device.setPairingConfirmation(true);
+    } else if (powerManager.isInteractive() && shouldShowDialog) {
       // Since the screen is on and the BT-related activity is in the foreground,
       // just open the dialog
       // convert broadcast intent into activity intent (same action string)
       Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(context, intent,
-              BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND);
+          BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND);
 
       context.startActivityAsUser(pairingIntent, UserHandle.CURRENT);
     } else {

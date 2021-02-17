@@ -25,16 +25,8 @@
     <PreferenceCategory
         android:key="recent_location_requests"
         android:title="@string/location_category_recent_location_requests"
-        settings:controller="com.android.settings.location.RecentLocationRequestPreferenceController"/>
-
-    <Preference
-        android:key="recent_location_requests_see_all_button"
-        android:title="@string/location_recent_location_requests_see_all"
-        android:icon="@drawable/ic_chevron_right_24dp"
-        android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
-        settings:controller="com.android.settings.core.WorkPreferenceController"
-        settings:forWork="true"
-        settings:searchable="false"/>
+        settings:controller=
+            "com.android.settings.location.RecentLocationAccessPreferenceController"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="managed_profile_location_switch"
