@@ -3101,11 +3101,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"حذف کاربر"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"حذف"</string>
     <string name="user_guest" msgid="4545590092001460388">"مهمان"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"پاک کردن داده‌های مهمان"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"پایان دادن به جلسه مهمان"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"جلسه مهمان تمام شود؟"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"حذف مهمان"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"مهمان حذف شود؟"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"همه برنامه‌ها و داده‌های این جلسه حذف خواهد شد."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"پایان جلسه"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"حذف"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"روشن کردن تماس‌های تلفنی"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"روشن کردن تماس‌های تلفنی و پیامک"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"حذف کاربر"</string>
@@ -3681,6 +3680,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"اعلان‌های مکالمه"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"اعلان‌های هشداردهنده"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"اعلان‌های بی‌صدا"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏خدمات یاور VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏هیچ برنامه نصب‌شده‌ای درخواست نکرده به‌عنوان خدمات یاور VR اجرا شود."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"‏به <xliff:g id="SERVICE">%1$s</xliff:g> امکان داده شود به خدمات VR دسترسی یابد؟"</string>
@@ -4937,32 +4943,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"فعال‌سازی شبکه"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> فعال است"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"برای به‌روزرسانی تنظیمات سیم‌کارت ضربه بزنید"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"به <xliff:g id="CARRIER_NAME">%1$s</xliff:g> جابه‌جا شدید"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"به شرکت مخابراتی دیگری جابه‌جا شدید"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"شبکه تلفن همراهتان تغییر کرده است"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"راه‌اندازی سیم‌کارت دیگر"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"سیم‌کارت فعالتان را انتخاب کنید یا هم‌زمان از ۲ سیم‌کارت استفاده کنید"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"انتخاب شماره‌ای برای استفاده"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"در این دستگاه،<xliff:g id="NUMBER">%1$d</xliff:g> شماره تلفن دردسترس است، اما هربار فقط یکی از آن‌ها قابل‌استفاده است"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"درحال فعال‌سازی<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"درحال‌حاضر فعال‌سازی امکان‌پذیر نیست"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"شماره ناشناس"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"از <xliff:g id="CARRIER_NAME">%1$s</xliff:g> استفاده شود؟"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> برای داده تلفن همراه، تماس تلفنی، و پیامک استفاده می‌شود."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"هیچ سیم‌کارت فعالی وجود ندارد"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"برای استفاده از داده تلفن همراه، ویژگی‌های تماس تلفنی، و بعدتر پیامک، به تنظیمات شبکه‌تان بروید"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"سیم‌کارت"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"این سیم‌کارت بارگیری‌شده پاک‌سازی شود؟"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"با پاک‌سازی این سیم‌کارت، سرویس <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> از این دستگاه برداشته می‌شود.\n\nسرویس مربوط به <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> لغو نمی‌شود."</string>
@@ -5042,8 +5036,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"‏شرکت مخابراتی شما از تماس‌های اضطراری با استفاده از «تماس ازطریق Wi‑Fi» پشتیبانی نمی‌کند. \nدستگاه برای برقراری یک تماس اضطراری، به‌طور خودکار به یک شبکه تلفن همراه جابه‌جا می‌شود.\nتماس‌های اضطراری فقط در مناطق دارای پوشش تلفن همراه امکان‌پذیر هستند."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"‏برای بهبود کیفیت تماس‌ها، از Wi‑Fi استفاده کنید"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"تماس پشتیبان"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"اگر <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> دردسترس نیست یا درحال فراگردی است، از سیم‌کارت داده تلفن همراهتان برای تماس‌های <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> استفاده کنید."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"تماس پشتیبان"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"پیام فراپیام ورودی"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"پیام فراپیام ارسال نشد"</string>
@@ -5114,8 +5107,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"تماس و پیامک"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"‏تماس ازطریق WiFi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"‏برقراری و دریافت تماس ازطریق Wi-Fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"‏با «تماس ازطریق Wi-Fi»، برقراری و دریافت تماس ازطریق شبکه‌های Wi-Fi غیرمخابراتی انجام می‌شود. "<annotation id="url">"بیشتر بدانید"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"تماس"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"پیامک"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"دارای اولویت"</string>
@@ -5129,10 +5121,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"‏اتصال شبکه، اینترنت، بی‌سیم، داده، wifi،‏ wi-fi، ‏wi fi، شبکه تلفن همراه، تلفن همراه، شرکت مخابراتی تلفن همراه، 4g،‏ 3g،‏ 2g،‏ lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"مشاهده شبکه‌های حالت هواپیما"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"درحال مشاهده شبکه‌های دردسترس در حالت هواپیما"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"روشن کردن شبکه‌ها"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"خاموش کردن شبکه‌ها"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"اینترنت بازنشانی شود؟"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"با این کار، تماس تلفنی به‌پایان می‌رسد"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"با این کار، تماس تلفنی به‌پایان می‌رسد"</string>

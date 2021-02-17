@@ -52,10 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Maak die teks op die skerm kleiner of groter."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Maak kleiner"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Maak groter"</string>
-    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
-    <skip />
-    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
-    <skip />
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Gebruik outodraai"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Gesiggegronde outodraai gebruik die voorste kamera om te sien of en hoe iemand na die skerm kyk. Dit maak dit moontlik om te lees terwyl jy lê – en prente word nooit geberg of na Google toe gestuur nie.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Kom meer te wete&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Voorbeeldteks"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Die Wonderlike Towenaar van Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Hoofstuk 11: Die Wonderlike Smaragstad van Oz"</string>
@@ -1176,14 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Soek"</string>
     <string name="display_settings" msgid="7197750639709493852">"Skerm"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Outodraai skerm"</string>
-    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
-    <skip />
-    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
-    <skip />
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Af"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aan"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aan – gesiggegrond"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Aktiveer gesigbespeuring"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Kleure"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natuurlik"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Gemaksimeer"</string>
@@ -3101,11 +3095,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Vee gebruiker uit"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Vee uit"</string>
     <string name="user_guest" msgid="4545590092001460388">"Gas"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"Vee gastedata uit"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"Beëindig gastesessie"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"Beëindig gastesessie?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Verwyder gas"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Verwyder gas?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle programme en data in hierdie sessie sal uitgevee word."</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"Beëindig sessie"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Verwyder"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Skakel foonoproepe aan"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Skakel foonoproepe en SMS aan"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Vee gebruiker uit"</string>
@@ -3681,6 +3674,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Gesprekkennisgewings"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Opletkennisgewings"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Stil kennisgewings"</string>
+    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
+    <skip />
+    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
+    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-helperdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Geen geïnstalleerde programme het versoek om as VR-helperdienste te werk nie."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Gee <xliff:g id="SERVICE">%1$s</xliff:g> toegang tot VR-diens?"</string>
@@ -4937,32 +4937,20 @@
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Netwerkaktivering"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> is aktief"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Tik om SIM-instellings op te dateer"</string>
-    <!-- no translation found for switch_to_removable_notification (7640342063449806296) -->
-    <skip />
-    <!-- no translation found for switch_to_removable_notification_no_carrier_name (7384856964036215338) -->
-    <skip />
-    <!-- no translation found for network_changed_notification_text (2407908598496951243) -->
-    <skip />
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"Gewissel na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Gewissel na \'n ander diensverskaffer"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"Jou selnetwerk het verander"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Stel jou ander SIM op"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Kies jou aktiewe SIM of gebruik tegelyk 2 SIM\'s"</string>
-    <!-- no translation found for choose_sim_title (4804689675237716286) -->
-    <skip />
-    <!-- no translation found for choose_sim_text (8056651794100746697) -->
-    <skip />
-    <!-- no translation found for choose_sim_activating (9035902671985449448) -->
-    <skip />
-    <!-- no translation found for choose_sim_could_not_activate (2154564459842291617) -->
-    <skip />
-    <!-- no translation found for choose_sim_item_summary_unknown (7854314795485227568) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_title (5407316878973237773) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_text (7530186862171635464) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_title (809763410787744247) -->
-    <skip />
-    <!-- no translation found for switch_sim_dialog_no_switch_text (7053939850026876088) -->
-    <skip />
+    <string name="choose_sim_title" msgid="4804689675237716286">"Kies \'n nommer om te gebruik"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"<xliff:g id="NUMBER">%1$d</xliff:g> nommers is op hierdie toestel beskikbaar, maar net een kan op \'n slag gebruik word"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"Aktiveer tans <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Kan nie nou onmiddellik geaktiveer word nie"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Onbekende nommer"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Gebruik <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> sal vir mobiele data, oproepe en SMS\'e gebruik word"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Geen aktiewe SIM-kaarte beskikbaar nie"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Gaan na jou netwerkinstellings om mobiele data, oproepkenmerke en SMS\'e later te kan gebruik"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM-kaart"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vee hierdie afgelaaide SIM uit?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"As jy hierdie SIM uitvee, word <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-diens van hierdie toestel verwyder.\n\nDiens vir <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> sal nie gekanselleer word nie."</string>
@@ -5042,8 +5030,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Jou diensverskaffer steun nie noodoproepe oor Wi‑Fi nie.\nDie toestel skakel outomaties na \'n selnetwerk toe oor om \'n noodoproep te maak.\nNoodoproepe is net moontlik in gebiede met sellulêre dekking."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Gebruik Wi-Fi vir oproepe om gehalte te verbeter"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"Rugsteunoproepe"</string>
-    <!-- no translation found for backup_calling_setting_summary (599493254305348733) -->
-    <skip />
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Gebruik jou mobieledata-SIM <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> vir oproepe as <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> of swerwing nie beskikbaar is nie."</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"rugsteunoproepe"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Inkomende MMS-boodskap"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Kan nie MMS-boodskap stuur nie"</string>
@@ -5114,8 +5101,7 @@
     <string name="calls_and_sms" msgid="1931855083959003306">"Oproepe en SMS\'e"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑fi-oproepe"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Maak en ontvang oproepe oor wi-fi"</string>
-    <!-- no translation found for calls_sms_footnote (1003530944232362815) -->
-    <skip />
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"Met Wi-fi-oproepe word oproepe oor niediensverskaffer-wi-fi-netwerke gemaak en ontvang. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Oproepe"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"voorkeur"</string>
@@ -5129,10 +5115,8 @@
     <string name="keywords_internet" msgid="7674082764898690310">"netwerkverbinding, internet, draadloos, data, wifi, wi-fi, wi fi, sellulêr, mobiel, selfoondiensverskaffer, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Bekyk vliegtuigmodusnetwerke"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"Bekyk tans vliegtuigmodusnetwerke"</string>
-    <!-- no translation found for turn_on_networks (7786747178388835577) -->
-    <skip />
-    <!-- no translation found for turn_off_networks (886012600238121672) -->
-    <skip />
+    <string name="turn_on_networks" msgid="7786747178388835577">"Skakel netwerke aan"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"Skakel netwerke af"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Stel jou internet terug?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Dit sal jou foonoproep beëindig"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Dit sal jou foonoproep beëindig"</string>
