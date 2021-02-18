@@ -31,6 +31,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -38,6 +39,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsTutorialDialogWrapperActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -77,8 +79,11 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        SearchMenuController.init(this /* host */);
-        HelpMenuController.init(this /* host */);
+        // TODO(b/176883483): Remove both search and help menu if this feature rolled out
+        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            SearchMenuController.init(this /* host */);
+            HelpMenuController.init(this /* host */);
+        }
 
         SuggestionFeatureProvider suggestionFeatureProvider = FeatureFactory.getFactory(context)
                 .getSuggestionFeatureProvider(context);
