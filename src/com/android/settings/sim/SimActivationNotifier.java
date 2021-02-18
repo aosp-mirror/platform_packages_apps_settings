@@ -88,6 +88,11 @@ public class SimActivationNotifier {
                         SIM_SETUP_CHANNEL_ID,
                         mContext.getString(R.string.sim_setup_channel_id),
                         NotificationManager.IMPORTANCE_HIGH));
+        mNotificationManager.createNotificationChannel(
+                new NotificationChannel(
+                        SWITCH_SLOT_CHANNEL_ID,
+                        mContext.getString(R.string.sim_switch_channel_id),
+                        NotificationManager.IMPORTANCE_HIGH));
     }
 
     /**
