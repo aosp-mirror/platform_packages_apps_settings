@@ -39,7 +39,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
-import android.net.ProxyInfo;
 import android.net.VpnManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -222,16 +221,6 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         when(mVpnManager.getAlwaysOnVpnPackageForUser(MANAGED_PROFILE_USER_ID))
                 .thenReturn(VPN_PACKAGE_ID);
         assertThat(mProvider.isAlwaysOnVpnSetInManagedProfile()).isTrue();
-    }
-
-    @Test
-    public void testIsGlobalHttpProxySet() {
-        when(mConnectivityManger.getGlobalProxy()).thenReturn(null);
-        assertThat(mProvider.isGlobalHttpProxySet()).isFalse();
-
-        when(mConnectivityManger.getGlobalProxy())
-            .thenReturn(ProxyInfo.buildDirectProxy("localhost", 123));
-        assertThat(mProvider.isGlobalHttpProxySet()).isTrue();
     }
 
     @Test
