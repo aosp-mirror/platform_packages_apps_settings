@@ -44,6 +44,11 @@ public class BubbleLinkPreferenceController extends NotificationPreferenceContro
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY;
     }

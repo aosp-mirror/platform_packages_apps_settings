@@ -44,6 +44,11 @@ public class BubbleCategoryPreferenceController extends NotificationPreferenceCo
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY;
     }

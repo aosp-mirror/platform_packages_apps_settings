@@ -67,6 +67,11 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY;
     }

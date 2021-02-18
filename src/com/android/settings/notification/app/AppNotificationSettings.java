@@ -79,7 +79,8 @@ public class AppNotificationSettings extends NotificationSettings {
         }
 
         for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin);
+            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin,
+                    null);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
