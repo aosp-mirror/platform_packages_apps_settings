@@ -28,6 +28,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.Uri;
+import android.net.VpnManager;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
@@ -91,6 +92,11 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                     mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivityManager != null) {
                 connectivityManager.factoryReset();
+            }
+
+            VpnManager vpnManager = mContext.getSystemService(VpnManager.class);
+            if (vpnManager != null) {
+                vpnManager.factoryReset();
             }
 
             WifiManager wifiManager = (WifiManager)
