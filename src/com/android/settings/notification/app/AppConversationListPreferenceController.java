@@ -75,6 +75,11 @@ public class AppConversationListPreferenceController extends NotificationPrefere
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
+    @Override
     public void updateState(Preference preference) {
         mPreference = (PreferenceCategory) preference;
         loadConversationsAndPopulate();
