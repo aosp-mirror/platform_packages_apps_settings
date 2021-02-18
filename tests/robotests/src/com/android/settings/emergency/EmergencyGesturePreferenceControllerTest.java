@@ -18,24 +18,25 @@ package com.android.settings.emergency;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-import static com.android.settings.emergency.EmergencyGesturePreferenceController.OFF;
-import static com.android.settings.emergency.EmergencyGesturePreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.ContentResolver;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settingslib.emergencynumber.EmergencyNumberUtils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -43,16 +44,18 @@ import org.robolectric.annotation.Config;
 @Config(shadows = SettingsShadowResources.class)
 public class EmergencyGesturePreferenceControllerTest {
 
+    @Mock
+    private EmergencyNumberUtils mEmergencyNumberUtils;
     private Context mContext;
-    private ContentResolver mContentResolver;
     private EmergencyGesturePreferenceController mController;
     private static final String PREF_KEY = "gesture_emergency_button";
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
-        mContentResolver = mContext.getContentResolver();
         mController = new EmergencyGesturePreferenceController(mContext, PREF_KEY);
+        mController.mEmergencyNumberUtils = mEmergencyNumberUtils;
     }
 
     @After
@@ -81,8 +84,7 @@ public class EmergencyGesturePreferenceControllerTest {
     @Test
     public void isChecked_configIsNotSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_ENABLED, ON);
-        mController = new EmergencyGesturePreferenceController(mContext, PREF_KEY);
+        when(mEmergencyNumberUtils.getEmergencyGestureEnabled()).thenReturn(true);
 
         assertThat(mController.isChecked()).isTrue();
     }
@@ -90,8 +92,7 @@ public class EmergencyGesturePreferenceControllerTest {
     @Test
     public void isChecked_configIsSet_shouldReturnFalse() {
         // Set the setting to be disabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_ENABLED, OFF);
-        mController = new EmergencyGesturePreferenceController(mContext, PREF_KEY);
+        when(mEmergencyNumberUtils.getEmergencyGestureEnabled()).thenReturn(false);
 
         assertThat(mController.isChecked()).isFalse();
     }

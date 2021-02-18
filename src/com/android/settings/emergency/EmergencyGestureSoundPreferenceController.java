@@ -17,12 +17,12 @@
 package com.android.settings.emergency;
 
 import android.content.Context;
-import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.emergencynumber.EmergencyNumberUtils;
 
 /**
  * Preference controller for emergency sos gesture setting
@@ -30,14 +30,11 @@ import com.android.settings.core.TogglePreferenceController;
 public class EmergencyGestureSoundPreferenceController extends TogglePreferenceController {
 
     @VisibleForTesting
-    static final int ON = 1;
-    @VisibleForTesting
-    static final int OFF = 0;
-
-    private static final String SECURE_KEY = Settings.Secure.EMERGENCY_GESTURE_SOUND_ENABLED;
+    EmergencyNumberUtils mEmergencyNumberUtils;
 
     public EmergencyGestureSoundPreferenceController(Context context, String key) {
         super(context, key);
+        mEmergencyNumberUtils = new EmergencyNumberUtils(context);
     }
 
     private static boolean isGestureAvailable(Context context) {
@@ -57,12 +54,12 @@ public class EmergencyGestureSoundPreferenceController extends TogglePreferenceC
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY, ON) == ON;
+        return mEmergencyNumberUtils.getEmergencyGestureSoundEnabled();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
-                isChecked ? ON : OFF);
+        mEmergencyNumberUtils.setEmergencySoundEnabled(isChecked);
+        return true;
     }
 }
