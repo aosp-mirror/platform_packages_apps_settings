@@ -115,6 +115,11 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
+    @Override
     public void updateState(Preference preference) {
         if (mAppRow != null) {
             loadAppChannels();

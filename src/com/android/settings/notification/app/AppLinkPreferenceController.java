@@ -48,6 +48,11 @@ public class AppLinkPreferenceController extends NotificationPreferenceControlle
         return mAppRow.settingsIntent != null;
     }
 
+    @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
     public void updateState(Preference preference) {
         if (mAppRow != null) {
             preference.setIntent(mAppRow.settingsIntent);
