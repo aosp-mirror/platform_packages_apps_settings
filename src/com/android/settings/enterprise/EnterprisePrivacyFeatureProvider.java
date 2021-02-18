@@ -85,11 +85,6 @@ public interface EnterprisePrivacyFeatureProvider {
     boolean isAlwaysOnVpnSetInManagedProfile();
 
     /**
-     * Returns whether the Device Owner set a recommended global HTTP proxy.
-     */
-    boolean isGlobalHttpProxySet();
-
-    /**
      * Returns the number of failed login attempts that the Device Owner or Profile Owner allows
      * before the current user is wiped, or zero if no such limit is set.
      */
