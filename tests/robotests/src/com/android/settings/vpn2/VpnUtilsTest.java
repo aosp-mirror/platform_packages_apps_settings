@@ -21,7 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.net.ConnectivityManager;
+import android.net.VpnManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,11 +31,11 @@ import org.robolectric.RobolectricTestRunner;
 public final class VpnUtilsTest {
     @Test
     public void testIsAlwaysOnVpnSet() {
-        final ConnectivityManager cm = mock(ConnectivityManager.class);
-        when(cm.getAlwaysOnVpnPackageForUser(0)).thenReturn("com.example.vpn");
-        assertThat(VpnUtils.isAlwaysOnVpnSet(cm, 0)).isTrue();
+        final VpnManager vm = mock(VpnManager.class);
+        when(vm.getAlwaysOnVpnPackageForUser(0)).thenReturn("com.example.vpn");
+        assertThat(VpnUtils.isAlwaysOnVpnSet(vm, 0)).isTrue();
 
-        when(cm.getAlwaysOnVpnPackageForUser(0)).thenReturn(null);
-        assertThat(VpnUtils.isAlwaysOnVpnSet(cm, 0)).isFalse();
+        when(vm.getAlwaysOnVpnPackageForUser(0)).thenReturn(null);
+        assertThat(VpnUtils.isAlwaysOnVpnSet(vm, 0)).isFalse();
     }
 }

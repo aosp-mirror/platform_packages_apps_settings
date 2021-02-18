@@ -20,7 +20,6 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.ConnectivityManager;
 import android.net.VpnManager;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -177,9 +176,8 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
                 return;
             }
 
-            final ConnectivityManager conn = ConnectivityManager.from(mContext);
-            conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null,
-                    /* lockdownEnabled */ false, /* lockdownWhitelist */ null);
+            mService.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null,
+                    /* lockdownEnabled */ false, /* lockdownAllowlist */ null);
             VpnUtils.setLockdownVpn(mContext, profile.key);
         } else {
             // update only if lockdown vpn has been changed
