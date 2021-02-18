@@ -16,7 +16,6 @@
 package com.android.settings.vpn2;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.net.VpnManager;
 import android.os.RemoteException;
 import android.provider.Settings;
@@ -43,15 +42,15 @@ public class VpnUtils {
 
     public static void clearLockdownVpn(Context context) {
         KeyStore.getInstance().delete(Credentials.LOCKDOWN_VPN);
-        // Always notify ConnectivityManager after keystore update
-        getConnectivityManager(context).updateLockdownVpn();
+        // Always notify VpnManager after keystore update
+        getVpnManager(context).updateLockdownVpn();
     }
 
     public static void setLockdownVpn(Context context, String lockdownKey) {
         KeyStore.getInstance().put(Credentials.LOCKDOWN_VPN, lockdownKey.getBytes(),
                 KeyStore.UID_SELF, /* flags */ 0);
-        // Always notify ConnectivityManager after keystore update
-        getConnectivityManager(context).updateLockdownVpn();
+        // Always notify VpnManager after keystore update
+        getVpnManager(context).updateLockdownVpn();
     }
 
     public static boolean isVpnLockdown(String key) {
@@ -63,7 +62,7 @@ public class VpnUtils {
         if (getLockdownVpn() != null) {
             return true;
         }
-        return getConnectivityManager(context).getAlwaysOnVpnPackageForUser(userId) != null
+        return getVpnManager(context).getAlwaysOnVpnPackageForUser(userId) != null
                 && Settings.Secure.getIntForUser(context.getContentResolver(),
                         Settings.Secure.ALWAYS_ON_VPN_LOCKDOWN, /* default */ 0, userId) != 0;
     }
@@ -77,16 +76,12 @@ public class VpnUtils {
         return config != null ? config.user : null;
     }
 
-    private static ConnectivityManager getConnectivityManager(Context context) {
-        return context.getSystemService(ConnectivityManager.class);
-    }
-
     private static VpnManager getVpnManager(Context context) {
         return context.getSystemService(VpnManager.class);
     }
 
-    public static boolean isAlwaysOnVpnSet(ConnectivityManager cm, final int userId) {
-        return cm.getAlwaysOnVpnPackageForUser(userId) != null;
+    public static boolean isAlwaysOnVpnSet(VpnManager vm, final int userId) {
+        return vm.getAlwaysOnVpnPackageForUser(userId) != null;
     }
 
     public static boolean disconnectLegacyVpn(Context context) {
