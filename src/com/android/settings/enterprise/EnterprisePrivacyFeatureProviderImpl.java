@@ -144,11 +144,6 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     }
 
     @Override
-    public boolean isGlobalHttpProxySet() {
-        return mCm.getGlobalProxy() != null;
-    }
-
-    @Override
     public int getMaximumFailedPasswordsBeforeWipeInCurrentUser() {
         ComponentName owner = mDpm.getDeviceOwnerComponentOnCallingUser();
         if (owner == null) {
