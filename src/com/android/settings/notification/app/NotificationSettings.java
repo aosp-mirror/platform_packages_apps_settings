@@ -74,6 +74,7 @@ abstract public class NotificationSettings extends DashboardFragment {
     protected NotificationBackend.AppRow mAppRow;
     protected Drawable mConversationDrawable;
     protected ShortcutInfo mConversationInfo;
+    protected List<String> mPreferenceFilter;
 
     protected boolean mShowLegacyChannelConfig = false;
     protected boolean mListeningToPackageRemove;
@@ -119,6 +120,7 @@ abstract public class NotificationSettings extends DashboardFragment {
             loadChannel();
             loadAppRow();
             loadChannelGroup();
+            loadPreferencesFilter();
             collectConfigActivities();
 
             if (use(HeaderPreferenceController.class) != null) {
@@ -131,7 +133,7 @@ abstract public class NotificationSettings extends DashboardFragment {
 
             for (NotificationPreferenceController controller : mControllers) {
                 controller.onResume(mAppRow, mChannel, mChannelGroup, null, null,
-                        mSuspendedAppsAdmin);
+                        mSuspendedAppsAdmin, mPreferenceFilter);
             }
         }
     }
@@ -181,7 +183,15 @@ abstract public class NotificationSettings extends DashboardFragment {
         loadChannel();
         loadConversation();
         loadChannelGroup();
+        loadPreferencesFilter();
         collectConfigActivities();
+    }
+
+    private void loadPreferencesFilter() {
+        Intent intent = getActivity().getIntent();
+        mPreferenceFilter = intent != null
+                ? intent.getStringArrayListExtra(Settings.EXTRA_CHANNEL_FILTER_LIST)
+                : null;
     }
 
     private void loadChannel() {

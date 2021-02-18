@@ -60,6 +60,11 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return true;
+    }
+
+    @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mFragment != null) {
 
