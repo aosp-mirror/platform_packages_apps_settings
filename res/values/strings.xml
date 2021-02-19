@@ -2713,8 +2713,6 @@
     <!-- Display settings --><skip/>
     <!-- Sound & display settings screen, section header for settings related to display -->
     <string name="display_settings">Display</string>
-    <!-- Sound & display settings screen, section header for settings related to display -->
-    <string name="rotate_settings_class" translatable="false">com.android.settings.DisplaySettings</string>
     <!-- Sound & display settings screen, accelerometer-based rotation check box label -->
     <string name="accelerometer_title">Auto-rotate screen</string>
     <!-- Sound & display settings screen, locked rotation check box label [CHAR LIMIT=30] -->
@@ -12194,6 +12192,8 @@
     <!--  Strings for SIM push notifications  -->
     <!-- Category name of the notifications related to SIM setup. [CHAR LIMIT=NONE] -->
     <string name="sim_setup_channel_id">Network activation</string>
+    <!-- Title on a push notification indicating that the user's device is in the middle of switching between mobile networks. [CHAR LIMIT=NONE] -->
+    <string name="sim_switch_channel_id">Carrier switching</string>
     <!--  The title of post DSDS reboot notification. The title includes carrier's name. [CHAR LIMIT=NONE] -->
     <string name="post_dsds_reboot_notification_title_with_carrier"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> is active</string>
     <!--  The body text of post DSDS reboot notification. [CHAR LIMIT=NONE] -->
@@ -12780,4 +12780,7 @@
     <string name="smart_forwarding_missing_mdn_text">Phone number is missing.</string>
     <!-- Alert Dialog text when user didn't input the phone number [CHAR LIMIT=50]-->
     <string name="smart_forwarding_missing_alert_dialog_text">OK</string>
+
+    <!-- Enable 2G: Title for if user wants to enable 2G [CHAR LIMIT=40] -->
+    <string name="enable_2g_title">Allow 2G</string>
 </resources>

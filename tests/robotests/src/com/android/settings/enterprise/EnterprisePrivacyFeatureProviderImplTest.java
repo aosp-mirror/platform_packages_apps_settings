@@ -39,7 +39,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
-import android.net.ProxyInfo;
+import android.net.VpnManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -91,6 +91,8 @@ public class EnterprisePrivacyFeatureProviderImplTest {
     private UserManager mUserManager;
     @Mock
     private ConnectivityManager mConnectivityManger;
+    @Mock
+    private VpnManager mVpnManager;
     private Resources mResources;
 
     private EnterprisePrivacyFeatureProvider mProvider;
@@ -106,7 +108,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         mResources = RuntimeEnvironment.application.getResources();
 
         mProvider = new EnterprisePrivacyFeatureProviderImpl(mContext, mDevicePolicyManager,
-                mPackageManager, mUserManager, mConnectivityManger, mResources);
+                mPackageManager, mUserManager, mConnectivityManger, mVpnManager, mResources);
     }
 
     @Test
@@ -208,11 +210,10 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
     @Test
     public void testIsAlwaysOnVpnSetInCurrentUser() {
-        when(mConnectivityManger.getAlwaysOnVpnPackageForUser(mUserId)).thenReturn(null);
+        when(mVpnManager.getAlwaysOnVpnPackageForUser(mUserId)).thenReturn(null);
         assertThat(mProvider.isAlwaysOnVpnSetInCurrentUser()).isFalse();
 
-        when(mConnectivityManger.getAlwaysOnVpnPackageForUser(mUserId))
-                .thenReturn(VPN_PACKAGE_ID);
+        when(mVpnManager.getAlwaysOnVpnPackageForUser(mUserId)).thenReturn(VPN_PACKAGE_ID);
         assertThat(mProvider.isAlwaysOnVpnSetInCurrentUser()).isTrue();
     }
 
@@ -222,23 +223,12 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
         mProfiles.add(new UserInfo(mManagedProfileUserId, "", "", UserInfo.FLAG_MANAGED_PROFILE));
 
-        when(mConnectivityManger.getAlwaysOnVpnPackageForUser(mManagedProfileUserId))
-                .thenReturn(null);
+        when(mVpnManager.getAlwaysOnVpnPackageForUser(mManagedProfileUserId)).thenReturn(null);
         assertThat(mProvider.isAlwaysOnVpnSetInManagedProfile()).isFalse();
 
-        when(mConnectivityManger.getAlwaysOnVpnPackageForUser(mManagedProfileUserId))
+        when(mVpnManager.getAlwaysOnVpnPackageForUser(mManagedProfileUserId))
                 .thenReturn(VPN_PACKAGE_ID);
         assertThat(mProvider.isAlwaysOnVpnSetInManagedProfile()).isTrue();
-    }
-
-    @Test
-    public void testIsGlobalHttpProxySet() {
-        when(mConnectivityManger.getGlobalProxy()).thenReturn(null);
-        assertThat(mProvider.isGlobalHttpProxySet()).isFalse();
-
-        when(mConnectivityManger.getGlobalProxy())
-                .thenReturn(ProxyInfo.buildDirectProxy("localhost", 123));
-        assertThat(mProvider.isGlobalHttpProxySet()).isTrue();
     }
 
     @Test

@@ -398,7 +398,11 @@ public class ManageApplications extends InstrumentedFragment
             return mRootView;
         }
 
-        mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            mRootView = inflater.inflate(R.layout.manage_applications_apps_v2, null);
+        } else {
+            mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
+        }
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
         mListContainer = mRootView.findViewById(R.id.list_container);
         if (mListContainer != null) {

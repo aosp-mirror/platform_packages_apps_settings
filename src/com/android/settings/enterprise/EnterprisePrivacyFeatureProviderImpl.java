@@ -25,6 +25,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
+import android.net.VpnManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -48,18 +49,20 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     private final PackageManager mPm;
     private final UserManager mUm;
     private final ConnectivityManager mCm;
+    private final VpnManager mVm;
     private final Resources mResources;
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
     public EnterprisePrivacyFeatureProviderImpl(Context context, DevicePolicyManager dpm,
-            PackageManager pm, UserManager um, ConnectivityManager cm,
+            PackageManager pm, UserManager um, ConnectivityManager cm, VpnManager vm,
             Resources resources) {
         mContext = context.getApplicationContext();
         mDpm = dpm;
         mPm = pm;
         mUm = um;
         mCm = cm;
+        mVm = vm;
         mResources = resources;
     }
 
@@ -133,19 +136,14 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
 
     @Override
     public boolean isAlwaysOnVpnSetInCurrentUser() {
-        return VpnUtils.isAlwaysOnVpnSet(mCm, MY_USER_ID);
+        return VpnUtils.isAlwaysOnVpnSet(mVm, MY_USER_ID);
     }
 
     @Override
     public boolean isAlwaysOnVpnSetInManagedProfile() {
         final int managedProfileUserId = getManagedProfileUserId();
         return managedProfileUserId != UserHandle.USER_NULL &&
-                VpnUtils.isAlwaysOnVpnSet(mCm, managedProfileUserId);
-    }
-
-    @Override
-    public boolean isGlobalHttpProxySet() {
-        return mCm.getGlobalProxy() != null;
+                VpnUtils.isAlwaysOnVpnSet(mVm, managedProfileUserId);
     }
 
     @Override
