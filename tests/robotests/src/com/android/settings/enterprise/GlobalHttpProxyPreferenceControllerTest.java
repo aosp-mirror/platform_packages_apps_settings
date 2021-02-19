@@ -21,10 +21,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.ProxyInfo;
 
 import androidx.preference.Preference;
-
-import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,25 +41,23 @@ public class GlobalHttpProxyPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    private FakeFeatureFactory mFeatureFactory;
+    @Mock
+    private ConnectivityManager mCm;
 
     private GlobalHttpProxyPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new GlobalHttpProxyPreferenceController(mContext);
     }
 
     @Test
     public void testIsAvailable() {
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isGlobalHttpProxySet())
-                .thenReturn(false);
+        when(mCm.getGlobalProxy()).thenReturn(null);
         assertThat(mController.isAvailable()).isFalse();
 
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isGlobalHttpProxySet())
-                .thenReturn(true);
+        when(mCm.getGlobalProxy()).thenReturn(ProxyInfo.buildDirectProxy("localhost", 123));
         assertThat(mController.isAvailable()).isTrue();
     }
 

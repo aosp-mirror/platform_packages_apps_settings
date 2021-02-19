@@ -255,4 +255,8 @@
         settings:searchable="false"
         settings:controller="com.android.settings.network.telephony.NrDisabledInDsdsFooterPreferenceController"/>
 
+    <SwitchPreference
+        android:key="enable_2g"
+        android:title="@string/enable_2g_title"
+        settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
 </PreferenceScreen>

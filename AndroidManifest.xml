@@ -517,12 +517,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
+                  android:theme="@style/Theme.AlertDialog" />
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
+                  android:theme="@style/Theme.AlertDialog" />
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -954,7 +954,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="@string/rotate_settings_class" />
+                android:value="com.android.settings.display.SmartAutoRotatePreferenceFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -3688,14 +3688,14 @@
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Theme.AlertDialog" />
 
         <activity
             android:name=".sim.DsdsDialogActivity"
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Transparent" />
+            android:theme="@style/Theme.AlertDialog" />
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
