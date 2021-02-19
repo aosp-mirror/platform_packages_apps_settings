@@ -43,6 +43,7 @@ import android.telephony.PreciseDataConnectionState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.data.ApnSetting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -344,7 +345,8 @@ public class ApnSettings extends RestrictedSettingsFragment
                     pref.setSummary(apn);
                 }
 
-                final boolean selectable = ((type == null) || !type.equals("mms"));
+                final boolean selectable =
+                        ((type == null) || type.contains(ApnSetting.TYPE_DEFAULT_STRING));
                 pref.setSelectable(selectable);
                 if (selectable) {
                     if ((mSelectedKey != null) && mSelectedKey.equals(key)) {
