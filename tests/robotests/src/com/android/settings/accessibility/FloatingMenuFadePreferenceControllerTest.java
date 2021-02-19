@@ -19,8 +19,6 @@ package com.android.settings.accessibility;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
 
-import static com.android.settings.accessibility.FloatingMenuOpacityPreferenceController.DEFAULT_OPACITY;
-import static com.android.settings.accessibility.FloatingMenuOpacityPreferenceController.PRECISION;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 
@@ -33,9 +31,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
-
-import com.android.settings.widget.SeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -47,23 +44,27 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
-/** Tests for {@link FloatingMenuOpacityPreferenceController}. */
+/** Tests for {@link FloatingMenuFadePreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
-public class FloatingMenuOpacityPreferenceControllerTest {
+public class FloatingMenuFadePreferenceControllerTest {
 
     @Rule
     public MockitoRule mocks = MockitoJUnit.rule();
+
+    private static final int OFF = 0;
+    private static final int ON = 1;
 
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private ContentResolver mContentResolver;
-    private FloatingMenuOpacityPreferenceController mController;
+    private final SwitchPreference mSwitchPreference = new SwitchPreference(mContext);
+    private FloatingMenuFadePreferenceController mController;
 
     @Before
     public void setUp() {
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
-        mController = new FloatingMenuOpacityPreferenceController(mContext, "test_key");
+        mController = new FloatingMenuFadePreferenceController(mContext, "test_key");
     }
 
     @Test
@@ -83,40 +84,33 @@ public class FloatingMenuOpacityPreferenceControllerTest {
     }
 
     @Test
-    public void onChange_a11yBtnModeChangeToNavigationBar_preferenceDisabled() {
-        mController.mPreference = new SeekBarPreference(mContext);
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
-                ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR);
+    public void updateState_keyFloatingMenuFadeDisabled_fadeIsDisabled() {
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, OFF);
+
+        mController.updateState(mSwitchPreference);
+
+        assertThat(mSwitchPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void onPreferenceChange_floatingMenuFadeEnabled_keyFloatingMenuFadeIsOn() {
+        mController.onPreferenceChange(mSwitchPreference, Boolean.TRUE);
+
+        final int actualValue = Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, OFF);
+        assertThat(actualValue).isEqualTo(ON);
+    }
+
+    @Test
+    public void onChange_floatingMenuFadeChangeToDisabled_preferenceDisabled() {
+        mController.mPreference = mSwitchPreference;
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, OFF);
 
         mController.mContentObserver.onChange(false);
 
         assertThat(mController.mPreference.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void getSliderPosition_putNormalOpacityValue_expectedValue() {
-        Settings.Secure.putFloat(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, 0.35f);
-
-        assertThat(mController.getSliderPosition()).isEqualTo(35);
-    }
-
-    @Test
-    public void getSliderPosition_putOutOfBoundOpacityValue_defaultValue() {
-        Settings.Secure.putFloat(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, 0.01f);
-
-        final int defaultValue = Math.round(DEFAULT_OPACITY * PRECISION);
-        assertThat(mController.getSliderPosition()).isEqualTo(defaultValue);
-    }
-
-    @Test
-    public void setSliderPosition_expectedValue() {
-        mController.setSliderPosition(27);
-
-        final float value = Settings.Secure.getFloat(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, -1);
-        assertThat(value).isEqualTo(0.27f);
     }
 
     @Test
@@ -125,10 +119,6 @@ public class FloatingMenuOpacityPreferenceControllerTest {
 
         verify(mContentResolver).registerContentObserver(
                 Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_MODE), false,
-                mController.mContentObserver);
-        verify(mContentResolver).registerContentObserver(
-                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED),
-                false,
                 mController.mContentObserver);
     }
 

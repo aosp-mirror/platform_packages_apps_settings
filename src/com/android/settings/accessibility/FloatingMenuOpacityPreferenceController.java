@@ -38,6 +38,7 @@ public class FloatingMenuOpacityPreferenceController extends SliderPreferenceCon
 
     @VisibleForTesting
     static final float DEFAULT_OPACITY = 0.55f;
+    private static final int FADE_ENABLED = 1;
     private static final float MIN_PROGRESS = 10f;
     private static final float MAX_PROGRESS = 100f;
     @VisibleForTesting
@@ -87,7 +88,10 @@ public class FloatingMenuOpacityPreferenceController extends SliderPreferenceCon
                 Settings.Secure.getUriFor(
                         Settings.Secure.ACCESSIBILITY_BUTTON_MODE), /* notifyForDescendants= */
                 false, mContentObserver);
-
+        mContentResolver.registerContentObserver(
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED),
+                        /* notifyForDescendants= */ false, mContentObserver);
     }
 
     @Override
@@ -119,7 +123,11 @@ public class FloatingMenuOpacityPreferenceController extends SliderPreferenceCon
     }
 
     private void updateAvailabilityStatus() {
-        mPreference.setEnabled(AccessibilityUtil.isFloatingMenuEnabled(mContext));
+        final boolean fadeEnabled = Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, FADE_ENABLED)
+                == FADE_ENABLED;
+
+        mPreference.setEnabled(AccessibilityUtil.isFloatingMenuEnabled(mContext) && fadeEnabled);
     }
 
     private int convertOpacityFloatToInt(float value) {
