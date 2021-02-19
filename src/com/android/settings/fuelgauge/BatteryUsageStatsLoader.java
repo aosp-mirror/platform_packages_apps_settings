@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
+import android.os.BatteryUsageStatsQuery;
 
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
@@ -27,15 +28,21 @@ import com.android.settingslib.utils.AsyncLoaderCompat;
  */
 public class BatteryUsageStatsLoader extends AsyncLoaderCompat<BatteryUsageStats> {
     private final BatteryStatsManager mBatteryStatsManager;
+    private final boolean mIncludeBatteryHistory;
 
-    public BatteryUsageStatsLoader(Context context) {
+    public BatteryUsageStatsLoader(Context context, boolean includeBatteryHistory) {
         super(context);
         mBatteryStatsManager = context.getSystemService(BatteryStatsManager.class);
+        mIncludeBatteryHistory = includeBatteryHistory;
     }
 
     @Override
     public BatteryUsageStats loadInBackground() {
-        return mBatteryStatsManager.getBatteryUsageStats();
+        final BatteryUsageStatsQuery.Builder builder = new BatteryUsageStatsQuery.Builder();
+        if (mIncludeBatteryHistory) {
+            builder.includeBatteryHistory();
+        }
+        return mBatteryStatsManager.getBatteryUsageStats(builder.build());
     }
 
     @Override

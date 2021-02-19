@@ -24,6 +24,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.BatteryStats;
+import android.os.BatteryStatsManager;
+import android.os.BatteryUsageStats;
+import android.os.BatteryUsageStatsQuery;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
@@ -103,7 +106,7 @@ public class BatteryUtils {
     }
 
     @VisibleForTesting
-    BatteryUtils(Context context) {
+    public BatteryUtils(Context context) {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
@@ -472,29 +475,35 @@ public class BatteryUtils {
     }
 
     @WorkerThread
-    public BatteryInfo getBatteryInfo(final BatteryStatsHelper statsHelper, final String tag) {
+    public BatteryInfo getBatteryInfo(final String tag) {
+        final BatteryStatsManager systemService = mContext.getSystemService(
+                BatteryStatsManager.class);
+        final BatteryUsageStats batteryUsageStats = systemService.getBatteryUsageStats(
+                new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build());
+
         final long startTime = System.currentTimeMillis();
 
         // Stuff we always need to get BatteryInfo
         final Intent batteryBroadcast = mContext.registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
         final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
                 SystemClock.elapsedRealtime());
-        final BatteryStats stats = statsHelper.getStats();
+
         BatteryInfo batteryInfo;
         Estimate estimate = getEnhancedEstimate();
 
         // couldn't get estimate from cache or provider, use fallback
         if (estimate == null) {
             estimate = new Estimate(
-                    PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
+                    PowerUtil.convertUsToMs(batteryUsageStats.getBatteryTimeRemainingMs()),
                     false /* isBasedOnUsage */,
                     EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
 
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader post query", startTime);
-        batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
-                estimate, elapsedRealtimeUs, false /* shortString */);
+        batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast,
+                batteryUsageStats, estimate, elapsedRealtimeUs, false /* shortString */);
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
         return batteryInfo;

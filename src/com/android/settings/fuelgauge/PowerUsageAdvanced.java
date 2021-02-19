@@ -142,6 +142,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
+    protected boolean isBatteryHistoryNeeded() {
+        return true;
+    }
+
+    @Override
     protected void refreshUi(@BatteryUpdateType int refreshType) {
         final Context context = getContext();
         if (context == null) {
