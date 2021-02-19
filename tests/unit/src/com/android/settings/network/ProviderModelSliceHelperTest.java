@@ -40,6 +40,7 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 
 import androidx.slice.Slice;
 import androidx.slice.builders.GridRowBuilder;
@@ -169,7 +170,7 @@ public class ProviderModelSliceHelperTest {
     @Test
     public void createCarrierRow_hasDdsAndActiveNetworkIsNotCellular_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
-        String expectedSubtitle = "5G";
+        CharSequence expectedSubtitle = Html.fromHtml("5G", Html.FROM_HTML_MODE_LEGACY);
         String networkType = "5G";
 
         final int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
@@ -199,8 +200,9 @@ public class ProviderModelSliceHelperTest {
         String networkType = "5G";
         String connectedText = ResourcesUtils.getResourcesString(mContext,
                 "mobile_data_connection_active");
-        String expectedSubtitle = ResourcesUtils.getResourcesString(mContext,
-                "preference_summary_default_combination", connectedText, networkType);
+        CharSequence expectedSubtitle = Html.fromHtml(ResourcesUtils.getResourcesString(mContext,
+                "preference_summary_default_combination", connectedText, networkType),
+                Html.FROM_HTML_MODE_LEGACY);
 
         final int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         when(mDefaultDataSubscriptionInfo.getSubscriptionId()).thenReturn(defaultDataSubId);
