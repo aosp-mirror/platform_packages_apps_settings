@@ -25,11 +25,6 @@ import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceFragmentCompat;
@@ -39,14 +34,12 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.HelpUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.UsageProgressBarPreference;
 
 /**
  * Controller that update the battery header view
@@ -57,22 +50,17 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @VisibleForTesting
     static final String KEY_BATTERY_HEADER = "battery_header";
     private static final String ANNOTATION_URL = "url";
+    private static final int BATTERY_MAX_LEVEL = 100;
 
     @VisibleForTesting
     BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
     @VisibleForTesting
-    BatteryMeterView mBatteryMeterView;
-    @VisibleForTesting
-    TextView mBatteryPercentText;
-    @VisibleForTesting
-    TextView mSummary1;
+    UsageProgressBarPreference mBatteryUsageProgressBarPref;
 
     private Activity mActivity;
     private PreferenceFragmentCompat mHost;
     private Lifecycle mLifecycle;
     private final PowerManager mPowerManager;
-
-    private LayoutPreference mBatteryLayoutPref;
 
     public BatteryHeaderPreferenceController(Context context, String key) {
         super(context, key);
@@ -96,16 +84,12 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBatteryLayoutPref = screen.findPreference(getPreferenceKey());
-        mBatteryMeterView = mBatteryLayoutPref
-                .findViewById(R.id.battery_header_icon);
-        mBatteryPercentText = mBatteryLayoutPref.findViewById(R.id.battery_percent);
-        mSummary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
+        mBatteryUsageProgressBarPref = screen.findPreference(getPreferenceKey());
 
         if (com.android.settings.Utils.isBatteryPresent(mContext)) {
             quickUpdateHeaderPreference();
         } else {
-            showHelpMessage();
+            //TODO(b/179237551): Make new progress bar widget support help message
         }
     }
 
@@ -116,8 +100,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
     @Override
     public void onStart() {
-        EntityHeaderController.newInstance(mActivity, mHost,
-                mBatteryLayoutPref.findViewById(R.id.battery_entity_header))
+        EntityHeaderController.newInstance(mActivity, mHost, null /* header view */)
                 .setRecyclerView(mHost.getListView(), mLifecycle)
                 .styleActionBar(mActivity);
     }
@@ -133,21 +116,20 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     public void updateHeaderPreference(BatteryInfo info) {
-        mBatteryPercentText.setText(formatBatteryPercentageText(info.batteryLevel));
-        if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
-            mSummary1.setText(generateLabel(info));
-        }
 
-        mBatteryMeterView.setBatteryLevel(info.batteryLevel);
-        mBatteryMeterView.setCharging(!info.discharging);
-        mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
+        //TODO(b/179237746): Make progress bar widget support battery state icon
+
+        mBatteryUsageProgressBarPref.setUsageSummary(
+                formatBatteryPercentageText(info.batteryLevel));
+        mBatteryUsageProgressBarPref.setTotalSummary(generateLabel(info));
+        mBatteryUsageProgressBarPref.setPercent(info.batteryLevel, BATTERY_MAX_LEVEL);
     }
 
     /**
      * Callback which receives text for the summary line.
      */
     public void updateBatteryStatus(String label, BatteryInfo info) {
-        mSummary1.setText(label != null ? label : generateLabel(info));
+        mBatteryUsageProgressBarPref.setTotalSummary(label != null ? label : generateLabel(info));
     }
 
     public void quickUpdateHeaderPreference() {
@@ -157,37 +139,10 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         final boolean discharging =
                 batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
 
-        // Set battery level and charging status
-        mBatteryMeterView.setBatteryLevel(batteryLevel);
-        mBatteryMeterView.setCharging(!discharging);
-        mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
-        mBatteryPercentText.setText(formatBatteryPercentageText(batteryLevel));
-    }
+        //TODO(b/179237746): Make progress bar widget support battery state icon
 
-    @VisibleForTesting
-    void showHelpMessage() {
-        final LinearLayout batteryInfoLayout =
-                mBatteryLayoutPref.findViewById(R.id.battery_info_layout);
-        // Remove battery meter icon
-        mBatteryMeterView.setVisibility(View.GONE);
-        // Update the width of battery info layout
-        final ViewGroup.LayoutParams params = batteryInfoLayout.getLayoutParams();
-        params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        batteryInfoLayout.setLayoutParams(params);
-        mBatteryPercentText.setText(mContext.getText(R.string.unknown));
-        // Add linkable text for learn more
-        final Intent helpIntent = HelpUtils.getHelpIntent(mContext,
-                mContext.getString(R.string.help_url_battery_missing),
-                mContext.getClass().getName());
-        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan
-                .LinkInfo(mContext, ANNOTATION_URL, helpIntent);
-        if (linkInfo.isActionable()) {
-            mSummary1.setMovementMethod(LinkMovementMethod.getInstance());
-            mSummary1.setText(AnnotationSpan
-                    .linkify(mContext.getText(R.string.battery_missing_help_message), linkInfo));
-        } else {
-            mSummary1.setText(mContext.getText(R.string.battery_missing_message));
-        }
+        mBatteryUsageProgressBarPref.setUsageSummary(formatBatteryPercentageText(batteryLevel));
+        mBatteryUsageProgressBarPref.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
     }
 
     private CharSequence formatBatteryPercentageText(int batteryLevel) {
