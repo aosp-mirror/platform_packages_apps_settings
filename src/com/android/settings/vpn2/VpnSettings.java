@@ -490,7 +490,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         Set<AppVpnInfo> result = new ArraySet<>();
         for (UserHandle profile : mUserManager.getUserProfiles()) {
             final int profileId = profile.getIdentifier();
-            final String packageName = mConnectivityManager.getAlwaysOnVpnPackageForUser(profileId);
+            final String packageName = mVpnManager.getAlwaysOnVpnPackageForUser(profileId);
             if (packageName != null) {
                 result.add(new AppVpnInfo(profileId, packageName));
             }
