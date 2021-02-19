@@ -19,6 +19,7 @@ package com.android.settings.applications.assist;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.TextUtils;
 
@@ -45,9 +46,11 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
     private PreferenceScreen mScreen;
     private Preference mPreference;
     private SettingObserver mSettingObserver;
+    private Context mContext;
 
     public DefaultVoiceInputPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
+        mContext = context;
         mSettingObserver = new SettingObserver();
         mAssistUtils = new AssistUtils(context);
         mHelper = new VoiceInputHelper(context);
@@ -59,13 +62,8 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
 
     @Override
     public boolean isAvailable() {
-        // If current assist is also voice service, don't show voice preference.
-        final ComponentName currentVoiceService =
-                DefaultVoiceInputPicker.getCurrentService(mHelper);
-        final ComponentName currentAssist =
-                mAssistUtils.getAssistComponentForUser(mUserId);
-        return !DefaultVoiceInputPicker.isCurrentAssistVoiceService(
-                currentAssist, currentVoiceService);
+        return mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_VOICE_RECOGNIZERS);
     }
 
     @Override
