@@ -28,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Process;
 import android.os.RemoteException;
+import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -122,6 +123,7 @@ public class BatteryEntry {
 
     public final Context context;
     public final BatterySipper sipper;
+    public final UidBatteryConsumer uidBatteryConsumer;
 
     public String name;
     public Drawable icon;
@@ -134,10 +136,41 @@ public class BatteryEntry {
         Drawable icon;
     }
 
-    public BatteryEntry(Context context, Handler handler, UserManager um, BatterySipper sipper) {
+    public BatteryEntry(Context context, Handler handler, UserManager um, BatterySipper sipper,
+            UidBatteryConsumer uidBatteryConsumer) {
         sHandler = handler;
         this.context = context;
         this.sipper = sipper;
+        this.uidBatteryConsumer = uidBatteryConsumer;
+
+        // This condition is met when BatteryEntry is initialized from BatteryUsageStats.
+        // Once the conversion from BatteryStatsHelper is completed, the condition will
+        // always be true and can be removed.
+        if (uidBatteryConsumer != null) {
+            PackageManager pm = context.getPackageManager();
+            int uid = uidBatteryConsumer.getUid();
+            String[] packages = pm.getPackagesForUid(uid);
+            // Apps should only have one package
+            if (packages == null || packages.length != 1) {
+                name = uidBatteryConsumer.getPackageWithHighestDrain();
+            } else {
+                defaultPackageName = packages[0];
+                try {
+                    ApplicationInfo appInfo =
+                            pm.getApplicationInfo(defaultPackageName, 0 /* no flags */);
+                    name = pm.getApplicationLabel(appInfo).toString();
+                } catch (NameNotFoundException e) {
+                    Log.d(TAG, "PackageManager failed to retrieve ApplicationInfo for: "
+                            + defaultPackageName);
+                    name = defaultPackageName;
+                }
+            }
+            if ((name == null || iconId == 0) && uid != 0) {
+                getQuickNameIconForUid(uid);
+            }
+            return;
+        }
+
         switch (sipper.drainType) {
             case IDLE:
                 name = context.getResources().getString(R.string.power_idle);

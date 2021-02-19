@@ -19,9 +19,12 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.BatteryStats;
+import android.os.BatteryUsageStats;
 import android.os.Bundle;
+import android.os.UidBatteryConsumer;
 import android.os.UserManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -36,6 +39,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
+import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -46,10 +50,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppBatteryPreferenceController extends BasePreferenceController
-        implements LoaderManager.LoaderCallbacks<BatteryStatsHelper>,
-        LifecycleObserver, OnResume, OnPause {
+        implements LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_BATTERY = "battery";
+
+    // TODO(b/180630447): switch to BatteryUsageStatsLoader and remove all references to
+    // BatteryStatsHelper and BatterySipper
+    @VisibleForTesting
+    final BatteryStatsHelperLoaderCallbacks mBatteryStatsHelperLoaderCallbacks =
+            new BatteryStatsHelperLoaderCallbacks();
+    @VisibleForTesting
+    final BatteryUsageStatsLoaderCallbacks mBatteryUsageStatsLoaderCallbacks =
+            new BatteryUsageStatsLoaderCallbacks();
 
     @VisibleForTesting
     BatterySipper mSipper;
@@ -57,6 +69,11 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     BatteryStatsHelper mBatteryHelper;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+
+    @VisibleForTesting
+    BatteryUsageStats mBatteryUsageStats;
+    @VisibleForTesting
+    UidBatteryConsumer mUidBatteryConsumer;
 
     private Preference mPreference;
     private final AppInfoDashboardFragment mParent;
@@ -96,7 +113,8 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         if (isBatteryStatsAvailable()) {
             final UserManager userManager =
                     (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-            final BatteryEntry entry = new BatteryEntry(mContext, null, userManager, mSipper);
+            final BatteryEntry entry = new BatteryEntry(mContext, null, userManager, mSipper,
+                    mUidBatteryConsumer);
             entry.defaultPackageName = mPackageName;
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
                     mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent);
@@ -110,48 +128,48 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     @Override
     public void onResume() {
         mParent.getLoaderManager().restartLoader(
-                mParent.LOADER_BATTERY, Bundle.EMPTY, this);
+                AppInfoDashboardFragment.LOADER_BATTERY, Bundle.EMPTY,
+                mBatteryStatsHelperLoaderCallbacks);
+        mParent.getLoaderManager().restartLoader(
+                AppInfoDashboardFragment.LOADER_BATTERY_USAGE_STATS, Bundle.EMPTY,
+                mBatteryUsageStatsLoaderCallbacks);
     }
 
     @Override
     public void onPause() {
-        mParent.getLoaderManager().destroyLoader(mParent.LOADER_BATTERY);
+        mParent.getLoaderManager().destroyLoader(AppInfoDashboardFragment.LOADER_BATTERY);
+        mParent.getLoaderManager().destroyLoader(
+                AppInfoDashboardFragment.LOADER_BATTERY_USAGE_STATS);
     }
 
-    @Override
-    public Loader<BatteryStatsHelper> onCreateLoader(int id, Bundle args) {
-        return new BatteryStatsHelperLoader(mContext);
-    }
+    private void onLoadFinished() {
+        // Wait for both loaders to finish before proceeding.
+        if (mBatteryHelper == null || mBatteryUsageStats == null) {
+            return;
+        }
 
-    @Override
-    public void onLoadFinished(Loader<BatteryStatsHelper> loader,
-            BatteryStatsHelper batteryHelper) {
-        mBatteryHelper = batteryHelper;
         final PackageInfo packageInfo = mParent.getPackageInfo();
         if (packageInfo != null) {
-            mSipper = findTargetSipper(batteryHelper, packageInfo.applicationInfo.uid);
+            mSipper = findTargetSipper(mBatteryHelper, packageInfo.applicationInfo.uid);
+            mUidBatteryConsumer = findTargetUidBatteryConsumer(mBatteryUsageStats,
+                    packageInfo.applicationInfo.uid);
             if (mParent.getActivity() != null) {
                 updateBattery();
             }
         }
     }
 
-    @Override
-    public void onLoaderReset(Loader<BatteryStatsHelper> loader) {
-    }
-
     @VisibleForTesting
     void updateBattery() {
         mPreference.setEnabled(true);
         if (isBatteryStatsAvailable()) {
-            final int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
-                    BatteryStats.STATS_SINCE_CHARGED);
+            final int dischargePercentage = mBatteryUsageStats.getDischargePercentage();
 
             final List<BatterySipper> usageList = new ArrayList<>(mBatteryHelper.getUsageList());
             final double hiddenAmount = mBatteryUtils.removeHiddenBatterySippers(usageList);
             final int percentOfMax = (int) mBatteryUtils.calculateBatteryPercent(
-                    mSipper.totalPowerMah, mBatteryHelper.getTotalPower(), hiddenAmount,
-                    dischargeAmount);
+                    mUidBatteryConsumer.getConsumedPower(), mBatteryUsageStats.getConsumedPower(),
+                    hiddenAmount, dischargePercentage);
             mBatteryPercent = Utils.formatPercentage(percentOfMax);
             mPreference.setSummary(mContext.getString(R.string.battery_summary, mBatteryPercent));
         } else {
@@ -161,7 +179,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
 
     @VisibleForTesting
     boolean isBatteryStatsAvailable() {
-        return mBatteryHelper != null && mSipper != null;
+        return mBatteryHelper != null && mSipper != null && mUidBatteryConsumer != null;
     }
 
     @VisibleForTesting
@@ -176,4 +194,54 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         return null;
     }
 
+    @VisibleForTesting
+    UidBatteryConsumer findTargetUidBatteryConsumer(BatteryUsageStats batteryUsageStats, int uid) {
+        final List<UidBatteryConsumer> usageList = batteryUsageStats.getUidBatteryConsumers();
+        for (int i = 0, size = usageList.size(); i < size; i++) {
+            final UidBatteryConsumer consumer = usageList.get(i);
+            if (consumer.getUid() == uid) {
+                return consumer;
+            }
+        }
+        return null;
+    }
+
+    private class BatteryStatsHelperLoaderCallbacks
+            implements LoaderManager.LoaderCallbacks<BatteryStatsHelper> {
+        @Override
+        public Loader<BatteryStatsHelper> onCreateLoader(int id, Bundle args) {
+            return new BatteryStatsHelperLoader(mContext);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<BatteryStatsHelper> loader,
+                BatteryStatsHelper batteryHelper) {
+            mBatteryHelper = batteryHelper;
+            AppBatteryPreferenceController.this.onLoadFinished();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<BatteryStatsHelper> loader) {
+        }
+    }
+
+    private class BatteryUsageStatsLoaderCallbacks
+            implements LoaderManager.LoaderCallbacks<BatteryUsageStats> {
+        @Override
+        @NonNull
+        public Loader<BatteryUsageStats> onCreateLoader(int id, Bundle args) {
+            return new BatteryUsageStatsLoader(mContext);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<BatteryUsageStats> loader,
+                BatteryUsageStats batteryUsageStats) {
+            mBatteryUsageStats = batteryUsageStats;
+            AppBatteryPreferenceController.this.onLoadFinished();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<BatteryUsageStats> loader) {
+        }
+    }
 }
