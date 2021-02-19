@@ -30,11 +30,9 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.IConnectivityManager;
 import android.net.NetworkRequest;
-import android.os.IBinder;
+import android.net.VpnManager;
 import android.os.UserHandle;
-import android.os.ServiceManager;
 import android.provider.SettingsSlicesContract;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -60,9 +58,7 @@ public class VpnPreferenceControllerTest {
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
-    private IBinder mBinder;
-    @Mock
-    private IConnectivityManager mConnectivityManagerService;
+    private VpnManager mVpnManager;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -76,9 +72,7 @@ public class VpnPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
-        when(mBinder.queryLocalInterface("android.net.IConnectivityManager"))
-                .thenReturn(mConnectivityManagerService);
-        ServiceManager.addService(Context.CONNECTIVITY_SERVICE, mBinder);
+        when(mContext.getSystemService(VpnManager.class)).thenReturn(mVpnManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
 
         mController = spy(new VpnPreferenceController(mContext));
