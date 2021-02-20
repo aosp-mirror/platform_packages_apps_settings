@@ -147,7 +147,7 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
         mSwitchWidgetController.setListener(this);
         mSwitchWidgetController.startListening();
         final IntentFilter filter = new IntentFilter(
-                ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
+                TetheringManager.ACTION_TETHER_STATE_CHANGED);
         filter.addAction(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         mContext.registerReceiver(mTetherChangeReceiver, filter);
@@ -222,7 +222,7 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
     int getTetheringState(@Nullable String[] tethered) {
         int tetherState = TETHERING_OFF;
         if (tethered == null) {
-            tethered = mConnectivityManager.getTetheredIfaces();
+            tethered = mTetheringManager.getTetheredIfaces();
         }
 
         if (mWifiManager.isWifiApEnabled()) {
@@ -239,7 +239,7 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
             }
         }
 
-        String[] usbRegexs = mConnectivityManager.getTetherableUsbRegexs();
+        String[] usbRegexs = mTetheringManager.getTetherableUsbRegexs();
         for (String s : tethered) {
             for (String regex : usbRegexs) {
                 if (s.matches(regex)) {
