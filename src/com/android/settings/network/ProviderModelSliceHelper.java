@@ -29,6 +29,7 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -141,7 +142,7 @@ public class ProviderModelSliceHelper {
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
                 .addEndItem(toggleAction)
                 .setPrimaryAction(primaryAction)
-                .setSubtitle(summary);
+                .setSubtitle(Html.fromHtml(summary, Html.FROM_HTML_MODE_LEGACY));
         return rowBuilder;
     }
 

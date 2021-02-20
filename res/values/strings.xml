@@ -8306,6 +8306,9 @@
     <!-- Configure Notifications Settings title. [CHAR LIMIT=30] -->
     <string name="configure_notification_settings">Notifications</string>
 
+    <!-- notification header - settings for conversation type notifications -->
+    <string name="conversation_notifs_category">Conversation</string>
+
     <!-- notification header - apps that have recently sent notifications -->
     <string name="recent_notifications">Recently sent</string>
 
@@ -8313,7 +8316,7 @@
     <string name="recent_notifications_see_all_title">See all from last 7 days</string>
 
     <!-- Configure Notifications: Advanced section header [CHAR LIMIT=30] -->
-    <string name="advanced_section_header">Advanced</string>
+    <string name="advanced_section_header">General</string>
 
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
@@ -8480,8 +8483,8 @@
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
 
-    <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=60] -->
-    <string name="lock_screen_notifications_title">Notifications on lock screen</string>
+    <!-- Configure Notifications: Title for the option controlling privacy options for notifications. [CHAR LIMIT=60] -->
+    <string name="lock_screen_notifications_title">Privacy</string>
 
     <!-- Configure lock screen: Title for the option of unlocking directly to home. [CHAR LIMIT=30] -->
     <string name="lockscreen_bypass_title">Skip lock screen</string>
@@ -10638,7 +10641,7 @@
     <string name="operator_warning">Carrier data accounting may differ from device accounting</string>
 
     <!-- A summary shown on data usage screens to indicate data tracking excluded from carrier networks [CHAR LIMIT=NONE] -->
-    <string name="non_carrier_data_usage_warning">Excludes data that is used by carrier networks</string>
+    <string name="non_carrier_data_usage_warning">Excludes data used by carrier networks</string>
 
     <!-- Format string describing how much data has been used [CHAR LIMIT=20] -->
     <string name="data_used_template"><xliff:g name="amount" example="1 GB">%1$s</xliff:g> used</string>
@@ -12639,7 +12642,7 @@
     <!-- Provider Model: No SIM status in summary for Calls & SMS -->
     <string name="calls_sms_no_sim">No SIM</string>
     <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
-    <string name="network_and_internet_preferences_title">Preferences</string>
+    <string name="network_and_internet_preferences_title">Network preferences</string>
     <!-- Network & internet preferences summary [CHAR LIMIT=NONE] -->
     <string name="network_and_internet_preferences_summary">Connect to public networks</string>
     <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
@@ -12666,8 +12669,6 @@
     <string name="airplane_mode_network_available">Airplane mode networks available</string>
     <!-- Summary for warning to disconnect ethernet first then switch to other networks. [CHAR LIMIT=60] -->
     <string name="to_switch_networks_disconnect_ethernet">To switch networks, disconnect ethernet</string>
-    <!-- Summary for cannot switch networks to Wi-Fi nor mobile data networks while connected to an ethernet network. [CHAR LIMIT=60] -->
-    <string name="cannot_switch_networks_while_connected">Cannot switch networks while connected</string>
     <!-- Title for airplane mode network panel. [CHAR LIMIT=60] -->
     <string name="airplane_mode_network_panel_title">Airplane mode networks</string>
 

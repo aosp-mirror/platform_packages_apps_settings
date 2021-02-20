@@ -17,7 +17,6 @@
 package com.android.settings.emergency;
 
 import android.content.Context;
-import android.provider.Settings;
 import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
@@ -26,6 +25,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.emergencynumber.EmergencyNumberUtils;
 import com.android.settingslib.widget.MainSwitchPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
@@ -36,16 +36,13 @@ public class EmergencyGesturePreferenceController extends BasePreferenceControll
         OnMainSwitchChangeListener {
 
     @VisibleForTesting
-    static final int ON = 1;
-    @VisibleForTesting
-    static final int OFF = 0;
-
-    private static final String SECURE_KEY = Settings.Secure.EMERGENCY_GESTURE_ENABLED;
+    EmergencyNumberUtils mEmergencyNumberUtils;
 
     private MainSwitchPreference mSwitchBar;
 
     public EmergencyGesturePreferenceController(Context context, String key) {
         super(context, key);
+        mEmergencyNumberUtils = new EmergencyNumberUtils(context);
     }
 
     @Override
@@ -71,11 +68,11 @@ public class EmergencyGesturePreferenceController extends BasePreferenceControll
 
     @VisibleForTesting
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY, ON) == ON;
+        return mEmergencyNumberUtils.getEmergencyGestureEnabled();
     }
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY, isChecked ? ON : OFF);
+        mEmergencyNumberUtils.setEmergencyGestureEnabled(isChecked);
     }
 }

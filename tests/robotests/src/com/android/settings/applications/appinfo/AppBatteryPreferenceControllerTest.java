@@ -31,7 +31,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.BatteryStats;
+import android.os.BatteryUsageStats;
 import android.os.Bundle;
+import android.os.UidBatteryConsumer;
 
 import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
@@ -66,6 +68,10 @@ public class AppBatteryPreferenceControllerTest {
     private SettingsActivity mActivity;
     @Mock
     private BatteryUtils mBatteryUtils;
+    @Mock
+    private BatteryUsageStats mBatteryUsageStats;
+    @Mock
+    private UidBatteryConsumer mUidBatteryConsumer;
     @Mock
     private BatterySipper mBatterySipper;
     @Mock
@@ -143,6 +149,8 @@ public class AppBatteryPreferenceControllerTest {
     public void updateBattery_hasBatteryStats_summaryPercent() {
         mController.mBatteryHelper = mBatteryStatsHelper;
         mController.mSipper = mBatterySipper;
+        mController.mBatteryUsageStats = mBatteryUsageStats;
+        mController.mUidBatteryConsumer = mUidBatteryConsumer;
         doReturn(BATTERY_LEVEL).when(mBatteryUtils).calculateBatteryPercent(anyDouble(),
                 anyDouble(), anyDouble(), anyInt());
         doReturn(new ArrayList<>()).when(mBatteryStatsHelper).getUsageList();
@@ -157,6 +165,8 @@ public class AppBatteryPreferenceControllerTest {
     public void isBatteryStatsAvailable_hasBatteryStatsHelperAndSipper_returnTrue() {
         mController.mBatteryHelper = mBatteryStatsHelper;
         mController.mSipper = mBatterySipper;
+        mController.mBatteryUsageStats = mBatteryUsageStats;
+        mController.mUidBatteryConsumer = mUidBatteryConsumer;
 
         assertThat(mController.isBatteryStatsAvailable()).isTrue();
     }
@@ -175,6 +185,8 @@ public class AppBatteryPreferenceControllerTest {
         when(mBatteryPreference.getKey()).thenReturn(key);
         mController.mSipper = mBatterySipper;
         mController.mBatteryHelper = mBatteryStatsHelper;
+        mController.mBatteryUsageStats = mBatteryUsageStats;
+        mController.mUidBatteryConsumer = mUidBatteryConsumer;
 
         // Should not crash
         mController.handlePreferenceTreeClick(mBatteryPreference);
@@ -187,7 +199,8 @@ public class AppBatteryPreferenceControllerTest {
         mController.onResume();
 
         verify(mLoaderManager)
-            .restartLoader(AppInfoDashboardFragment.LOADER_BATTERY, Bundle.EMPTY, mController);
+                .restartLoader(AppInfoDashboardFragment.LOADER_BATTERY, Bundle.EMPTY,
+                        mController.mBatteryStatsHelperLoaderCallbacks);
     }
 
     @Test

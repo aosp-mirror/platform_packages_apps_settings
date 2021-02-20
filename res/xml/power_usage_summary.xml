@@ -21,11 +21,10 @@
     android:title="@string/power_usage_summary_title"
     settings:keywords="@string/keywords_battery">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.UsageProgressBarPreference
         android:key="battery_header"
         android:title="@string/summary_placeholder"
         android:selectable="false"
-        android:layout="@layout/battery_header"
         settings:controller="com.android.settings.fuelgauge.BatteryHeaderPreferenceController" />
 
     <Preference

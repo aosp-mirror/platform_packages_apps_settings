@@ -208,7 +208,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 }
                 final UserHandle userHandle = new UserHandle(UserHandle.getUserId(sipper.getUid()));
                 final BatteryEntry entry = new BatteryEntry(mActivity, mHandler, mUserManager,
-                        sipper);
+                        sipper, null);
                 final Drawable badgedIcon = mUserManager.getBadgedIconForUser(entry.getIcon(),
                         userHandle);
                 final CharSequence contentDescription = mUserManager.getBadgedLabelForUser(

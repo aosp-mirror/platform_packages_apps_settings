@@ -257,7 +257,7 @@ public class ProviderModelSlice extends WifiSlice {
         }
         return rowBuilder
                 .setTitle(mContext.getText(R.string.ethernet))
-                .setSubtitle(mContext.getText(R.string.cannot_switch_networks_while_connected));
+                .setSubtitle(mContext.getText(R.string.to_switch_networks_disconnect_ethernet));
     }
 
     /**

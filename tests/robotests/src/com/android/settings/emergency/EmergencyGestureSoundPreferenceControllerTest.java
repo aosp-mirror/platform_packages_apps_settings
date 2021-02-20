@@ -16,40 +16,42 @@
 
 package com.android.settings.emergency;
 
-import static com.android.settings.emergency.EmergencyGestureSoundPreferenceController.OFF;
-import static com.android.settings.emergency.EmergencyGestureSoundPreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.ContentResolver;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settingslib.emergencynumber.EmergencyNumberUtils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class EmergencyGestureSoundPreferenceControllerTest {
-
+    @Mock
+    private EmergencyNumberUtils mEmergencyNumberUtils;
     private Context mContext;
-    private ContentResolver mContentResolver;
     private EmergencyGestureSoundPreferenceController mController;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
-        mContentResolver = mContext.getContentResolver();
         mController = new EmergencyGestureSoundPreferenceController(mContext, "test_key");
+        mController.mEmergencyNumberUtils = mEmergencyNumberUtils;
     }
 
     @After
@@ -78,8 +80,7 @@ public class EmergencyGestureSoundPreferenceControllerTest {
     @Test
     public void isChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_SOUND_ENABLED,
-                ON);
+        when(mEmergencyNumberUtils.getEmergencyGestureSoundEnabled()).thenReturn(true);
 
         assertThat(mController.isChecked()).isTrue();
     }
@@ -87,8 +88,7 @@ public class EmergencyGestureSoundPreferenceControllerTest {
     @Test
     public void isChecked_configIsSetToFalse_shouldReturnFalse() {
         // Set the setting to be disabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_SOUND_ENABLED,
-                OFF);
+        when(mEmergencyNumberUtils.getEmergencyGestureSoundEnabled()).thenReturn(false);
 
         assertThat(mController.isChecked()).isFalse();
     }
