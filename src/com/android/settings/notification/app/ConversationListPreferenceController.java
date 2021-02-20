@@ -163,8 +163,16 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
                         return o1.getNotificationChannel().getId().compareTo(
                                 o2.getNotificationChannel().getId());
                     }
-                    return sCollator.compare(o1.getShortcutInfo().getLabel(),
-                            o2.getShortcutInfo().getLabel());
+                    if (o1.getShortcutInfo().getLabel() == null
+                            && o2.getShortcutInfo().getLabel() != null) {
+                        return 1;
+                    }
+                    if (o1.getShortcutInfo().getLabel() != null
+                            && o2.getShortcutInfo().getLabel() == null) {
+                        return -1;
+                    }
+                    return sCollator.compare(o1.getShortcutInfo().getLabel().toString(),
+                            o2.getShortcutInfo().getLabel().toString());
                 }
             };
 }
