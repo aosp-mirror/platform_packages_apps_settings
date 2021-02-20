@@ -68,7 +68,7 @@ public final class UsbTetherPreferenceController extends TetherBasePreferenceCon
 
     @Override
     public boolean shouldShow() {
-        String[] usbRegexs = mCm.getTetherableUsbRegexs();
+        String[] usbRegexs = mTm.getTetherableUsbRegexs();
         return  usbRegexs != null && usbRegexs.length != 0 && !Utils.isMonkeyRunning();
     }
 
