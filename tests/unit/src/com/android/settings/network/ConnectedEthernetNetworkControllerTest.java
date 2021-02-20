@@ -16,10 +16,10 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.network.InternetUpdater.INTERNET_APM;
-import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
 import static com.android.settings.network.InternetUpdater.INTERNET_CELLULAR;
 import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
+import static com.android.settings.network.InternetUpdater.INTERNET_NETWORKS_AVAILABLE;
+import static com.android.settings.network.InternetUpdater.INTERNET_OFF;
 import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -77,15 +77,15 @@ public class ConnectedEthernetNetworkControllerTest {
     }
 
     @Test
-    public void isAvailable_internetApm_shouldBeFalse() {
-        mController.onInternetTypeChanged(INTERNET_APM);
+    public void isAvailable_internetOff_shouldBeFalse() {
+        mController.onInternetTypeChanged(INTERNET_OFF);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_internetApmNetworks_shouldBeFalse() {
-        mController.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+    public void isAvailable_internetNetworksAvailable_shouldBeFalse() {
+        mController.onInternetTypeChanged(INTERNET_NETWORKS_AVAILABLE);
 
         assertThat(mController.isAvailable()).isFalse();
     }
