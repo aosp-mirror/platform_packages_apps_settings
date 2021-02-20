@@ -18,11 +18,11 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.InetAddresses;
 import android.net.IpConfiguration;
 import android.net.IpConfiguration.IpAssignment;
 import android.net.IpConfiguration.ProxySettings;
 import android.net.LinkAddress;
-import android.net.NetworkUtils;
 import android.net.ProxyInfo;
 import android.net.StaticIpConfiguration;
 import android.net.Uri;
@@ -65,6 +65,7 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.net.module.util.NetUtils;
 import com.android.net.module.util.ProxyUtils;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
@@ -840,7 +841,7 @@ public class WifiConfigController2 implements TextWatcher,
 
     private Inet4Address getIPv4Address(String text) {
         try {
-            return (Inet4Address) NetworkUtils.numericToInetAddress(text);
+            return (Inet4Address) InetAddresses.parseNumericAddress(text);
         } catch (IllegalArgumentException | ClassCastException e) {
             return null;
         }
@@ -876,7 +877,7 @@ public class WifiConfigController2 implements TextWatcher,
         if (TextUtils.isEmpty(gateway)) {
             try {
                 //Extract a default gateway from IP address
-                InetAddress netPart = NetworkUtils.getNetworkPart(inetAddr, networkPrefixLength);
+                InetAddress netPart = NetUtils.getNetworkPart(inetAddr, networkPrefixLength);
                 byte[] addr = netPart.getAddress();
                 addr[addr.length - 1] = 1;
                 mGatewayView.setText(InetAddress.getByAddress(addr).getHostAddress());

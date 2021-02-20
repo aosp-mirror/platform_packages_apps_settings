@@ -40,7 +40,6 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
-import android.net.NetworkUtils;
 import android.net.RouteInfo;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
@@ -64,6 +63,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
+import com.android.net.module.util.NetUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
@@ -875,7 +875,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         try {
             InetAddress all = InetAddress.getByAddress(
                     new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255});
-            return NetworkUtils.getNetworkPart(all, prefixLength).getHostAddress();
+            return NetUtils.getNetworkPart(all, prefixLength).getHostAddress();
         } catch (UnknownHostException e) {
             return null;
         }
