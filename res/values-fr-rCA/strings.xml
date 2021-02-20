@@ -2138,7 +2138,8 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Vous pouvez personnaliser cet appareil en fonction de vos besoins. Il est possible de modifier ces fonctionnalités d\'accessibilité plus tard dans les paramètres."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Modifier la taille de la police"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Lecteurs d\'écran"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio et texte à l\'écran"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Sous-titres"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Affichage"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Texte et affichage"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Assombrir l\'écran"</string>
@@ -3674,13 +3675,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Notifications de conversations"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Notifications d\'alerte"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Notifications silencieuses"</string>
-    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
-    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
-    <skip />
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Applications qui ne sont plus reliées à cet auditeur"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Toutes les applications sont reliées"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="one">%d application n\'est pas reliée</item>
+      <item quantity="other">%d applications ne sont pas reliées</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Applications reliées"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance de réalité virtuelle"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que services de soutien de réalité virtuelle n\'a été envoyée pour les applications installées."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder au service de réalité virtuelle?"</string>
@@ -4342,7 +4343,8 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> restrictions</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Le suivi de consommation de données du fournisseur de services peut différer de celui de l\'appareil"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Les données utilisées sur les réseaux cellulaires sont exclues"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> utilisés"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Activer une alerte"</string>
     <string name="data_warning" msgid="2925054658166062884">"Seuil d\'alerte"</string>
@@ -4909,7 +4911,7 @@
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Activer <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Activer la carte SIM?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Passer au réseau de <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
-    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Passer à l\'utilisation d\'une carte SIM?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Passer à la carte SIM?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Une seule carte SIM peut être active à la fois.\n\nLe fait de passer au réseau de <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> n\'annulera pas votre service auprès de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Une seule carte SIM téléchargée peut être active à la fois.\n\nLe fait de passer au réseau de <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> n\'annulera pas votre service auprès de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Une seule carte SIM peut être active à la fois.\n\nLe fait de passer à un autre réseau n\'annulera pas votre service auprès de <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
@@ -4935,6 +4937,8 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Retirez la carte SIM, puis réinsérez-la. Si le problème persiste, redémarrez votre appareil."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Réessayer d\'activer la carte SIM. Si le problème persiste, redémarrez votre appareil."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Activation du réseau"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> est actif"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Touchez l\'écran pour mettre à jour les paramètres de la carte SIM"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Vous êtes passé au réseau de <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5110,7 +5114,8 @@
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"non accessible"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Momentanément inaccessible"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Aucune carte SIM"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Préférences"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Se connecter aux réseaux publics"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"connexion réseau, internet, sans fil, données, wifi, wi-fi, wi fi, cellulaire, mobile, fournisseur cellulaire, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Afficher les réseaux du mode Avion"</string>
@@ -5124,7 +5129,6 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Dépanner la connectivité"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Réseaux accessibles en mode Avion"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Pour changer de réseau, débranchez le câble Ethernet"</string>
-    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Impossible de changer de réseau, alors que vous êtes connecté"</string>
     <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Réseaux compatibles avec le mode Avion"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> : <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connexion active"</string>
@@ -5159,4 +5163,6 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Entrer le numéro de téléphone"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Le numéro de téléphone est manquant."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
+    <skip />
 </resources>
