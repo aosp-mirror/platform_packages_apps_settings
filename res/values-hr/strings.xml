@@ -53,10 +53,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Smanjite ili povećajte tekst na zaslonu."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Smanji"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Povećaj"</string>
-    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
-    <skip />
-    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
-    <skip />
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Upotreba automatskog zakretanja"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Automatsko zakretanje na temelju lica koristi se prednjom kamerom da bi saznalo gleda li netko zaslon i kako ga gleda. Omogućuje čitanje u ležećem položaju, a slike se nikad ne pohranjuju niti se šalju Googleu.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Saznajte više&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Primjer teksta"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čarobnjak iz Oza"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. poglavlje: Čudesni Smaragdni Grad čarobnjaka Oza"</string>
@@ -1196,14 +1194,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Pretraži"</string>
     <string name="display_settings" msgid="7197750639709493852">"Prikaz"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Automatski zakreni zaslon"</string>
-    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
-    <skip />
-    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
-    <skip />
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Isključeno"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Uključeno"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Uključeno – na temelju lica"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Omogući prepoznavanje lica"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Boje"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Prirodno"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Pojačano"</string>
@@ -2168,7 +2162,8 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Ovaj uređaj možete prilagoditi svojim potrebama. Značajke pristupačnosti možete promijeniti kasnije u postavkama."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Promijenite veličinu fonta"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Čitači zaslona"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Zvuk i tekst na zaslonu"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Titlovi"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Audiozapis"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Zaslon"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Tekst i prikaz"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Zatamnjenje zaslona"</string>
@@ -3728,13 +3723,14 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Obavijesti o razgovorima"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Zvučne obavijesti"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Bešumne obavijesti"</string>
-    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
-    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
-    <skip />
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Aplikacije koje nisu premošćene za ovog slušatelja"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Sve su aplikacije premošćene"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="one">%d aplikacija nije premošćena</item>
+      <item quantity="few">%d aplikacije nisu premošćene</item>
+      <item quantity="other">%d aplikacija nije premošćeno</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Premošćene aplikacije"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pomoćne usluge za virtualnu stvarnost"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nijedna instalirana aplikacija nije zatražila da se pokrene kao pomoćna usluga za virtualnu stvarnost."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Želite li dopustiti pristup usluge virtualne stvarnosti za uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4415,7 +4411,8 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ograničenja</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Mobilni operater može obračunavati podatke na drugačiji način od uređaja"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Izuzima podatke koje koriste mreže mobilnog operatera"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"Potrošili ste <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Postavi upozorenje o potrošnji"</string>
     <string name="data_warning" msgid="2925054658166062884">"Upozorenje o potrošnji"</string>
@@ -5022,6 +5019,8 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Izvadite SIM i umetnite ga ponovo. Ako se problem ponovi, ponovo pokrenite uređaj."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Pokušajte ponovo uključiti SIM. Ako se problem ponovi, ponovo pokrenite uređaj."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Aktivacija mreže"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> je aktivan"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Dodirnite da biste ažurirali postavke SIM-a"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Prešli ste na mobilnog operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5199,7 +5198,8 @@
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"nije dostupno"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Privremeno nedostupno"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Nema SIM kartice"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Postavke"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Poveži se s javnim mrežama"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"mrežna veza, internet, bežično, podaci, wifi, wi-fi, wi fi, mobilno, mobilni uređaj, mobilni operater, 4 g, 3 g, 2 g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Pregled mreža sigurnih za rad u zrakopl."</string>
@@ -5213,7 +5213,6 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Rješavanje problema s povezivošću"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Dostupne su mreže za način rada u zrakoplovu"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Da biste se prebacili na drugu mrežu, odspojite ethernet"</string>
-    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Ne možete promijeniti mrežu dok ste povezani"</string>
     <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Mreže u načinu rada u zrakoplovu"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Povezano"</string>
@@ -5248,4 +5247,6 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Unesite telefonski broj"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Nedostaje telefonski broj."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"U redu"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
+    <skip />
 </resources>

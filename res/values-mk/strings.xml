@@ -52,10 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Намалете го или зголемете го текстот на екранот."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Намали"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Зголеми"</string>
-    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
-    <skip />
-    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
-    <skip />
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Користи автоматско ротирање"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Автоматското ротирање според лице ја користи предната камера за да види дали и како некој го гледа екранот. Тоа овозможува читање во лежечка положба, а сликите никогаш не се складираат или испраќаат во Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Дознајте повеќе&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Примерок на текст"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чудесниот волшебник од Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Поглавје 11: Чудесниот смарагден град Оз"</string>
@@ -1176,14 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Пребарај"</string>
     <string name="display_settings" msgid="7197750639709493852">"Приказ"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Автоматско ротирање на екранот"</string>
-    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
-    <skip />
-    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
-    <skip />
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Исклучено"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Вклучено"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вклучено - според лице"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Овозможи откривање лица"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Бои"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природно"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Нагласено"</string>
@@ -2144,7 +2138,8 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Уредот може да го приспособите да одговара на вашите потреби. Овие функции за пристапност може да ги смените подоцна во Поставки."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Променете ја големината на фонтот"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Читачи на екран"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Аудио и текст на екранот"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Титлови"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Аудио"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Приказ"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Текст и екран"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Затемнете го екранот"</string>
@@ -3680,13 +3675,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Известувања за разговор"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Известувања за предупредување"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Тивки известувања"</string>
-    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
-    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
-    <skip />
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Апликации што не се поврзани за слушателот"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Сите апликации се поврзани"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="one">%d апликација не е поврзана</item>
+      <item quantity="other">%d апликации не се поврзани</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Поврзани апликации"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR помошни услуги"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниедна инсталирана апликација не побара да се извршува како VR помошните услуги."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Дозволете пристап до VR услугата за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4348,7 +4343,8 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ограничувања</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Пресметаниот сообраќај на операторот може да се разликува од пресметаниот сообраќај на вашиот уред"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Го исклучува сообраќајот што се користи во мрежите на операторот"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"Потрошено <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Извести за потрошен интернет"</string>
     <string name="data_warning" msgid="2925054658166062884">"Предупредување за интернет"</string>
@@ -4941,6 +4937,8 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Извадете и повторно вметнете ја SIM-картичката. Ако и понатаму се соочувате со проблемот, рестартирајте го уредот."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Обидете се повторно да ја вклучите SIM-картичката. Ако и понатаму се соочувате со проблемот, рестартирајте го уредот."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Активирање на мрежата"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> е активен"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Допрете за да ги ажурирате поставките на SIM"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Се префрливте на <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5116,7 +5114,8 @@
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"недостапно"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Привремено недостапен"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Нема SIM"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Поставки"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Поврзувајте се на јавни мрежи"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"мрежна врска, интернет, безжичен, мобилен, Wi-Fi, мобилна, мобилен оператор, 4G, 3G, 2G, LTE"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Прикажи ги мрежите во авионски режим"</string>
@@ -5130,7 +5129,6 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Поправи ја поврзливоста"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Достапни се мрежи во авионски режим"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"За промена на мрежата, прекинете ја врската со етернетот"</string>
-    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Не може да се промени мрежата додека е поврзано"</string>
     <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Мрежи за користење во авионски режим"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Поврзано"</string>
@@ -5165,4 +5163,6 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Внесете телефонски број"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Телефонскиот број недостасува."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Во ред"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
+    <skip />
 </resources>
