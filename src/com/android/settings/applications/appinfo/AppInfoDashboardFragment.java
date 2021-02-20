@@ -95,6 +95,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     static final int LOADER_CHART_DATA = 2;
     static final int LOADER_STORAGE = 3;
     static final int LOADER_BATTERY = 4;
+    static final int LOADER_BATTERY_USAGE_STATS = 5;
 
     public static final String ARG_PACKAGE_NAME = "package";
     public static final String ARG_PACKAGE_UID = "uid";
