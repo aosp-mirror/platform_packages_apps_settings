@@ -52,10 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Lege fest, wie groß Text angezeigt wird."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Verkleinern"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Vergrößern"</string>
-    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
-    <skip />
-    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
-    <skip />
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"„Automatisch drehen“ verwenden"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Das gesichtsbasierte automatische Drehen verwendet die Frontkamera, um zu erkennen, ob und wie jemand den Bildschirm ansieht. Die Funktion erleichtert das Lesen im Liegen. Die für diese Funktion verwendeten Bilder werden nicht gespeichert oder an Google gesendet.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Weitere Informationen&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Beispieltext"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Der Zauberer von Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapitel 11: Die wundervolle Smaragdstadt von Oz"</string>
@@ -1177,14 +1175,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Suche"</string>
     <string name="display_settings" msgid="7197750639709493852">"Display"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Bildschirm automatisch drehen"</string>
-    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
-    <skip />
-    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
-    <skip />
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Aus"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"An"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"An – gesichtsbasiert"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Gesichtserkennung aktivieren"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Farben"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natürlich"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Verstärkt"</string>
@@ -2145,7 +2139,8 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Du kannst dieses Gerät an deine Bedürfnisse anpassen. Die Bedienungshilfen kannst du später in den Einstellungen ändern."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Schriftgröße ändern"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Screenreader"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audiodienste und Text auf dem Bildschirm"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Untertitel"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Bildschirm"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Text und Anzeige"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Bildschirm dunkler machen"</string>
@@ -3681,13 +3676,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Unterhaltungsbenachrichtigungen"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Warnbenachrichtigungen"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Lautlose Benachrichtigungen"</string>
-    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
-    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
-    <skip />
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Apps, die für diesen Listener nicht überbrückt sind"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Alle Apps sind überbrückt"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="other">%d Apps sind nicht überbrückt</item>
+      <item quantity="one">%d App ist nicht überbrückt</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Überbrückte Apps"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfedienst angefordert."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR-Dienstzugriff für <xliff:g id="SERVICE">%1$s</xliff:g> erlauben?"</string>
@@ -4349,7 +4344,8 @@
       <item quantity="one">1 Beschränkung</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Dein Mobilfunkanbieter berechnet die Datennutzung eventuell anders als das Gerät"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Beinhaltet keine Daten, die in Mobilfunkanbieter-Netzwerken verwendet werden"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"Verbrauchte Daten: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Datenwarnung festlegen"</string>
     <string name="data_warning" msgid="2925054658166062884">"Warnlimit für mobile Daten"</string>
@@ -4942,6 +4938,8 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Nimm die SIM heraus und lege sie dann wieder ein. Sollte das Problem weiterhin bestehen, starte das Gerät neu."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Versuche, die SIM noch einmal zu aktivieren. Sollte das Problem weiterhin bestehen, starte das Gerät neu."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Netzwerkaktivierung"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ist aktiviert"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Tippe, um die SIM-Einstellungen zu aktualisieren"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Zu <xliff:g id="CARRIER_NAME">%1$s</xliff:g> gewechselt"</string>
@@ -5117,7 +5115,8 @@
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"nicht verfügbar"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Momentan nicht verfügbar"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Keine SIM-Karte"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Einstellungen"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Mit öffentlichen Netzwerken verbinden"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netzwerkverbindung, internet, kabellos, drahtlos, daten, wlan, w-lan, mobilfunk, mobil, mobilfunkanbieter, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Flugmodus-Netzwerke anzeigen"</string>
@@ -5131,7 +5130,6 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Konnektivitätsprobleme beheben"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Im Flugmodus verfügbare Netzwerke"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Trenne das Ethernetkabel, um das Netzwerk zu wechseln"</string>
-    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Netzwerkwechsel während einer Verbindung nicht möglich"</string>
     <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Flugmodus-Netzwerke"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Verbunden"</string>
@@ -5166,4 +5164,6 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Telefonnummer eingeben"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefonnummer fehlt."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
+    <skip />
 </resources>

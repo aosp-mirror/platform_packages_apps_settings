@@ -52,10 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Thu nhỏ hoặc phóng to văn bản trên màn hình."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Thu nhỏ"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Phóng to"</string>
-    <!-- no translation found for auto_rotate_settings_primary_switch_title (1150797732067921015) -->
-    <skip />
-    <!-- no translation found for smart_rotate_text_headline (9147653205505671866) -->
-    <skip />
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Dùng tính năng Tự động xoay"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"Tính năng Tự động xoay dựa trên khuôn mặt dùng máy ảnh trước để xem liệu có người nào đang nhìn vào màn hình hay không và theo cách nào. Tính năng này giúp bạn có thể đọc khi đang nằm và hình ảnh không bao giờ được lưu trữ hoặc gửi đến Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Tìm hiểu thêm&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Văn bản mẫu"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Phù thủy xứ Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chương 11: Thành phố ngọc lục bảo của xứ Oz"</string>
@@ -1176,14 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Tìm kiếm"</string>
     <string name="display_settings" msgid="7197750639709493852">"Hiển thị"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Tự động xoay màn hình"</string>
-    <!-- no translation found for auto_rotate_option_off (2788096269396290731) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_on (5776678230808498171) -->
-    <skip />
-    <!-- no translation found for auto_rotate_option_face_based (3438645484087953174) -->
-    <skip />
-    <!-- no translation found for auto_rotate_switch_face_based (7824467067774120000) -->
-    <skip />
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Đang tắt"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Đang bật"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Đang bật – Dựa trên khuôn mặt"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Bật tính năng Phát hiện khuôn mặt"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Màu"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Tự nhiên"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Tăng độ nét"</string>
@@ -2144,7 +2138,8 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Bạn có thể tùy chỉnh thiết bị này cho phù hợp với nhu cầu của mình. Bạn có thể thay đổi các tính năng hỗ trợ tiếp cận này trong phần Cài đặt."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Thay đổi cỡ chữ"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Trình đọc màn hình"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Âm thanh và văn bản trên màn hình"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"Phụ đề"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"Âm thanh"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Hiển thị"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Văn bản và hiển thị"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Giảm bớt độ sáng màn hình"</string>
@@ -3680,13 +3675,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"Thông báo về cuộc trò chuyện"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"Thông báo cảnh báo"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Thông báo im lặng"</string>
-    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
-    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
-    <skip />
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"Những ứng dụng không bật chế độ cầu nối với trình nghe này"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Tất cả ứng dụng đều ở chế độ cầu nối"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="other">%d ứng dụng không ở chế độ cầu nối</item>
+      <item quantity="one">%d ứng dụng ở chế độ cầu nối</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Những ứng dụng ở chế độ cầu nối"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Các dịch vụ của trình trợ giúp thực tế ảo"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Không có ứng dụng đã cài đặt nào yêu cầu được chạy dưới dạng dịch vụ trình trợ giúp VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Cho phép quyền truy cập dịch vụ VR đối với <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4348,7 +4343,8 @@
       <item quantity="one">1 hạn chế</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Cách tính dữ liệu của nhà mạng có thể khác với thiết bị của bạn."</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Ngoại trừ dữ liệu được dùng trong mạng của nhà mạng"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"Đã sử dụng <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Đặt cảnh báo dữ liệu"</string>
     <string name="data_warning" msgid="2925054658166062884">"Cảnh báo dữ liệu"</string>
@@ -4941,6 +4937,8 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Hãy tháo SIM rồi lắp lại. Nếu vấn đề vẫn xảy ra, vui lòng khởi động lại thiết bị."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Hãy thử bật lại SIM. Nếu vấn đề vẫn xảy ra, vui lòng khởi động lại thiết bị."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Kích hoạt mạng"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> đang hoạt động"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Nhấn để cập nhật tùy chọn cài đặt SIM"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Đã chuyển sang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5116,7 +5114,8 @@
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"không có sẵn"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Tạm thời không sử dụng được"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Không có SIM"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Lựa chọn ưu tiên"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Kết nối với mạng công cộng"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"kết nối mạng, Internet, không dây, dữ liệu, wifi, wi-fi, wi fi, di động, nhà mạng di động, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Xem các mạng khi ở chế độ trên máy bay"</string>
@@ -5130,7 +5129,6 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Khắc phục sự cố về kết nối"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"Các mạng dùng được khi ở chế độ trên máy bay"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Để chuyển mạng, hãy rút cáp Ethernet"</string>
-    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"Bạn không thể chuyển đổi mạng khi đã kết nối"</string>
     <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"Mạng ở chế độ trên máy bay"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Đã kết nối"</string>
@@ -5165,4 +5163,6 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Nhập số điện thoại"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Thiếu số điện thoại."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Đã hiểu"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
+    <skip />
 </resources>
