@@ -2138,7 +2138,8 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"អ្នកអាចកែសម្រួលឧបករណ៍នេះឲ្យសមតាម​តម្រូវការរបស់អ្នក។ មុខងារនៃភាព​ងាយស្រួលទាំងនេះអាចផ្លាស់​ប្តូរពេលក្រោយបាននៅក្នុងការកំណត់។"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"ប្ដូរ​ទំហំពុម្ពអក្សរ"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"កម្មវិធី​អានអេក្រង់"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"សំឡេង និងអក្សរ​នៅលើអេក្រង់"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"អក្សររត់"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"សំឡេង"</string>
     <string name="display_category_title" msgid="6638191682294461408">"បង្ហាញ"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"អក្សរ និងការបង្ហាញ"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"ធ្វើឱ្យអេក្រង់ងងឹតជាងមុន"</string>
@@ -3674,13 +3675,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"ការ​ជូនដំណឹងអំពីការសន្ទនា"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"ការជូនដំណឹង​ញ័រ ឬរោទ៍"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"ការជូនដំណឹង​ស្ងាត់"</string>
-    <!-- no translation found for notif_listener_excluded_title (639103158747320529) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_zero (5152444145866958400) -->
-    <skip />
-    <!-- no translation found for notif_listener_excluded_summary_nonzero (3218891004546748617) -->
-    <!-- no translation found for notif_listener_excluded_app_title (8102477888511595023) -->
-    <skip />
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"កម្មវិធី​ដែលមិនត្រូវបាន​ភ្ជាប់ទៅ​អ្នកស្ដាប់​នេះ"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"កម្មវិធី​ទាំងអស់​ត្រូវបានភ្ជាប់"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="other">កម្មវិធី %d មិនត្រូវបាន​ភ្ជាប់ទេ</item>
+      <item quantity="one">កម្មវិធី %d មិនត្រូវបាន​ភ្ជាប់ទេ</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"កម្មវិធី​ដែលបាន​ភ្ជាប់"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"សេវាកម្មជំនួយ VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"មិនមានកម្មវិធីដែលបានដំឡើងត្រូវបានស្នើឲ្យដំណើរការជាសេវាកម្មជំនួយ VR នោះទេ។"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"អនុញ្ញាតឲ្យសេវាកម្ម VR ចូលដំណើរការ <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4342,7 +4343,8 @@
       <item quantity="one">ការដាក់កំហិត 1</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"ការគណនាទិន្នន័យរបស់ក្រុមហ៊ុនសេវាទូរសព្ទអាចនឹងខុសគ្នាពីការគណនារបស់ឧបករណ៍"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"មិនរួមបញ្ចូល​ទិន្នន័យ​ដែលប្រើ​ដោយ​បណ្ដាញដែលមានប្រភព​មកពីក្រុមហ៊ុនសេវាទូរសព្ទ​ទេ"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"បានប្រើ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"កំណត់ការព្រមានពីការប្រើទិន្នន័យ"</string>
     <string name="data_warning" msgid="2925054658166062884">"ការព្រមានពីការប្រើទិន្នន័យ"</string>
@@ -4935,6 +4937,8 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"សូមដកស៊ីម រួចបញ្ចូលឡើងវិញ។ ប្រសិនបើនៅតែមានបញ្ហា សូម​ចាប់ផ្ដើម​ឧបករណ៍​របស់អ្នកឡើងវិញ។"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"សូម​សាកល្បង​បើកស៊ីមម្ដងទៀត។ ប្រសិនបើនៅតែមានបញ្ហា សូម​ចាប់ផ្ដើម​ឧបករណ៍​របស់អ្នកឡើងវិញ។"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"ការបើកដំណើរការ​បណ្ដាញ"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> កំពុង​ដំណើរការ"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"ចុច​ដើម្បី​ធ្វើបច្ចុប្បន្នភាព​ការកំណត់​ស៊ីម"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"បាន​ប្ដូរទៅ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5110,7 +5114,8 @@
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"មិនអាចប្រើ​បានទេ"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"មិន​អាច​ប្រើ​បាន​ជា​បណ្ដោះអាសន្ន​"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"មិនមានស៊ីមទេ"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"ចំណូលចិត្ត"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"ភ្ជាប់ជាមួយ​បណ្ដាញសាធារណៈ"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ការតភ្ជាប់បណ្ដាញ, អ៊ីនធឺណិត, ឥតខ្សែ, ទិន្នន័យ, wifi, wi-fi, wi fi, បណ្ដាញចល័ត, ឧបករណ៍​ចល័ត, ក្រុមហ៊ុន​សេវាទូរសព្ទចល័ត, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"មើលបណ្ដាញ​នៃមុខងារពេល​ជិះ​យន្តហោះ"</string>
@@ -5124,7 +5129,6 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"ដោះស្រាយ​ការតភ្ជាប់"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"មានបណ្ដាញ​នៃមុខងារ​ពេលជិះ​យន្តហោះ"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"ដើម្បី​ប្ដូរ​បណ្ដាញ សូមផ្ដាច់​អ៊ីសឺរណិត"</string>
-    <string name="cannot_switch_networks_while_connected" msgid="3867944849171754777">"ខណៈពេលភ្ជាប់ មិនអាចប្ដូរបណ្ដាញបានទេ"</string>
     <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"បណ្ដាញ​ពេល​ជិះ​យន្តហោះ"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"បានភ្ជាប់"</string>
@@ -5159,4 +5163,6 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"បញ្ចូល​លេខទូរសព្ទ"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"មិនបានបញ្ចូល​លេខទូរសព្ទ​ទេ។"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"យល់ព្រម"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
+    <skip />
 </resources>
