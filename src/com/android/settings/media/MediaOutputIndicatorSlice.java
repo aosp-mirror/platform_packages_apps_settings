@@ -16,18 +16,15 @@
 
 package com.android.settings.media;
 
-import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
-
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
 
 import android.annotation.ColorInt;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.session.MediaController;
 import android.net.Uri;
-import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -63,14 +60,9 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
                 com.android.internal.R.drawable.ic_settings_bluetooth);
         final CharSequence title = mContext.getString(R.string.media_output_label_title,
                 Utils.getApplicationLabel(mContext, getWorker().getPackageName()));
-        final int requestCode = TextUtils.isEmpty(getWorker().getPackageName())
-                ? 0
-                : getWorker().getPackageName().hashCode();
-        final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
-                requestCode,
-                getMediaOutputSliceIntent(), FLAG_UPDATE_CURRENT);
-        final SliceAction primarySliceAction = SliceAction.createDeeplink(
-                primaryActionIntent, icon, ListBuilder.ICON_IMAGE, title);
+        final SliceAction primarySliceAction = SliceAction.create(
+                getBroadcastIntent(mContext), icon, ListBuilder.ICON_IMAGE, title);
+
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         // To set an empty icon to indent the row
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
@@ -81,22 +73,6 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
                         .setSubtitle(getWorker().getCurrentConnectedMediaDevice().getName())
                         .setPrimaryAction(primarySliceAction));
         return listBuilder.build();
-    }
-
-    @VisibleForTesting
-    Intent getMediaOutputSliceIntent() {
-        final MediaController mediaController = getWorker().getActiveLocalMediaController();
-        final Intent intent = new Intent()
-                .setPackage(Utils.SETTINGS_PACKAGE_NAME)
-                .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (mediaController != null) {
-            intent.putExtra(MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN,
-                    mediaController.getSessionToken());
-            intent.putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
-                    mediaController.getPackageName());
-        }
-        return intent;
     }
 
     private IconCompat createEmptyIcon() {
@@ -140,5 +116,27 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
                 && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
                 && getWorker().getMediaDevices().size() > 0
                 && getWorker().getActiveLocalMediaController() != null;
+    }
+
+    @Override
+    public void onNotifyChange(Intent intent) {
+        final MediaController mediaController = getWorker().getActiveLocalMediaController();
+
+        if (mediaController == null) {
+            Log.d(TAG, "No active local media controller");
+            return;
+        }
+        // Launch media output dialog
+        mContext.sendBroadcast(new Intent()
+                .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
+                .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                .putExtra(MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN,
+                        mediaController.getSessionToken())
+                .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                        mediaController.getPackageName()));
+        // Dismiss volume panel
+        mContext.sendBroadcast(new Intent()
+                .setPackage(MediaOutputSliceConstants.SETTINGS_PACKAGE_NAME)
+                .setAction(MediaOutputSliceConstants.ACTION_CLOSE_PANEL));
     }
 }

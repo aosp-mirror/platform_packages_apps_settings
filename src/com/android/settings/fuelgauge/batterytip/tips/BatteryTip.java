@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseIntArray;
@@ -58,7 +57,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
             TipType.APP_RESTRICTION,
             TipType.REDUCED_BATTERY,
             TipType.LOW_BATTERY,
-            TipType.REMOVE_APP_RESTRICTION})
+            TipType.REMOVE_APP_RESTRICTION,
+            TipType.BATTERY_DEFENDER})
     public @interface TipType {
         int SMART_BATTERY_MANAGER = 0;
         int APP_RESTRICTION = 1;
@@ -68,20 +68,22 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         int LOW_BATTERY = 5;
         int SUMMARY = 6;
         int REMOVE_APP_RESTRICTION = 7;
+        int BATTERY_DEFENDER = 8;
     }
 
     @VisibleForTesting
     static final SparseIntArray TIP_ORDER;
     static {
         TIP_ORDER = new SparseIntArray();
-        TIP_ORDER.append(TipType.APP_RESTRICTION, 0);
-        TIP_ORDER.append(TipType.BATTERY_SAVER, 1);
-        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 2);
-        TIP_ORDER.append(TipType.LOW_BATTERY, 3);
-        TIP_ORDER.append(TipType.SUMMARY, 4);
-        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 5);
-        TIP_ORDER.append(TipType.REDUCED_BATTERY, 6);
-        TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 7);
+        TIP_ORDER.append(TipType.BATTERY_DEFENDER, 0);
+        TIP_ORDER.append(TipType.APP_RESTRICTION, 1);
+        TIP_ORDER.append(TipType.BATTERY_SAVER, 2);
+        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 3);
+        TIP_ORDER.append(TipType.LOW_BATTERY, 4);
+        TIP_ORDER.append(TipType.SUMMARY, 5);
+        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 6);
+        TIP_ORDER.append(TipType.REDUCED_BATTERY, 7);
+        TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 8);
     }
 
     private static final String KEY_PREFIX = "key_battery_tip";
