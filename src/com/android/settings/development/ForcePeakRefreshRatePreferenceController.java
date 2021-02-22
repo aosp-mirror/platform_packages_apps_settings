@@ -122,7 +122,7 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
     private float findPeakRefreshRate(Display.Mode[] modes) {
         float peakRefreshRate = DEFAULT_REFRESH_RATE;
         for (Display.Mode mode : modes) {
-            if (Math.round(mode.getRefreshRate()) > DEFAULT_REFRESH_RATE) {
+            if (Math.round(mode.getRefreshRate()) > peakRefreshRate) {
                 peakRefreshRate = mode.getRefreshRate();
             }
         }
