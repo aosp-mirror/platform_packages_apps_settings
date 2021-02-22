@@ -129,10 +129,11 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
         mDeviceConfigDisplaySettings.stopListening();
     }
 
-    private float findPeakRefreshRate(Display.Mode[] modes) {
+    @VisibleForTesting
+    float findPeakRefreshRate(Display.Mode[] modes) {
         float peakRefreshRate = DEFAULT_REFRESH_RATE;
         for (Display.Mode mode : modes) {
-            if (Math.round(mode.getRefreshRate()) > DEFAULT_REFRESH_RATE) {
+            if (Math.round(mode.getRefreshRate()) > peakRefreshRate) {
                 peakRefreshRate = mode.getRefreshRate();
             }
         }
