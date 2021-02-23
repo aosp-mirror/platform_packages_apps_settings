@@ -16,7 +16,6 @@
 
 package com.android.settings.network;
 
-import static android.telephony.SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GOOD;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GREAT;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -24,6 +23,7 @@ import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;;
 import static org.mockito.Mockito.doReturn;
@@ -47,6 +47,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
@@ -371,14 +372,14 @@ public class SubscriptionsPreferenceControllerTest {
         final Preference pref = new Preference(mContext);
         final Drawable greatDrawWithoutCutOff = mock(Drawable.class);
         doReturn(greatDrawWithoutCutOff).when(sInjector)
-                .getIcon(mContext, 4, NUM_SIGNAL_STRENGTH_BINS, true);
+                .getIcon(any(), anyInt(), anyInt(), anyBoolean());
 
         mController.setIcon(pref, 1, true /* isDefaultForData */);
         assertThat(pref.getIcon()).isEqualTo(greatDrawWithoutCutOff);
 
         final Drawable greatDrawWithCutOff = mock(Drawable.class);
         doReturn(greatDrawWithCutOff).when(sInjector)
-                .getIcon(mContext, 4, NUM_SIGNAL_STRENGTH_BINS, true);
+                .getIcon(any(), anyInt(), anyInt(), anyBoolean());
         mController.setIcon(pref, 2, false /* isDefaultForData */);
         assertThat(pref.getIcon()).isEqualTo(greatDrawWithCutOff);
     }
@@ -416,7 +417,8 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     @UiThreadTest
     public void displayPreference_providerAndHasMultiSimAndActive_connectedAndRat() {
-        final String expectedSummary = "Connected / 5G";
+        final CharSequence expectedSummary =
+                Html.fromHtml("Connected / 5G", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "5G";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
@@ -426,6 +428,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -435,8 +438,11 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     @UiThreadTest
-    public void displayPreference_providerAndHasMultiSimAndNotActive_showRatOnly() {
-        final String expectedSummary = "5G";
+    public void displayPreference_providerAndHasMultiSimButMobileDataOff_notAutoConnect() {
+        final String dataOffSummary =
+                ResourcesUtils.getResourcesString(mContext, "mobile_data_off_summary");
+        final CharSequence expectedSummary =
+                Html.fromHtml(dataOffSummary, Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "5G";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
@@ -445,6 +451,27 @@ public class SubscriptionsPreferenceControllerTest {
                 TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+
+        mController.onResume();
+        mController.displayPreference(mPreferenceScreen);
+
+        assertThat(mPreferenceCategory.getPreference(0).getSummary())
+            .isEqualTo(expectedSummary.toString());
+    }
+
+    @Test
+    @UiThreadTest
+    public void displayPreference_providerAndHasMultiSimAndNotActive_showRatOnly() {
+        final CharSequence expectedSummary = Html.fromHtml("5G", Html.FROM_HTML_MODE_LEGACY);
+        final String networkType = "5G";
+        final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
+        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
+        doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
+                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+        doReturn(networkType)
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -467,7 +494,8 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     @UiThreadTest
     public void onTelephonyDisplayInfoChanged_providerAndHasMultiSimAndActive_connectedAndRat() {
-        final String expectedSummary = "Connected / LTE";
+        final CharSequence expectedSummary =
+                Html.fromHtml("Connected / LTE", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "LTE";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         final TelephonyDisplayInfo telephonyDisplayInfo =
@@ -480,6 +508,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -491,7 +520,8 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     @UiThreadTest
     public void onTelephonyDisplayInfoChanged_providerAndHasMultiSimAndNotActive_showRat() {
-        final String expectedSummary = "LTE";
+        final CharSequence expectedSummary =
+                Html.fromHtml("LTE", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "LTE";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         final TelephonyDisplayInfo telephonyDisplayInfo =
@@ -504,6 +534,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);

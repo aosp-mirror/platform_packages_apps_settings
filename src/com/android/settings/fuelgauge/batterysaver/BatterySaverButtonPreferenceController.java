@@ -88,8 +88,8 @@ public class BatterySaverButtonPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (MainSwitchPreference) screen.findPreference(getPreferenceKey());
-        mPreference.setTitle(mContext.getString(R.string.battery_saver_main_switch_title));
+        mPreference = screen.findPreference(getPreferenceKey());
+        mPreference.setTitle(mContext.getString(R.string.battery_saver_master_switch_title));
         mPreference.addOnSwitchChangeListener(this);
         mPreference.updateStatus(isChecked());
     }

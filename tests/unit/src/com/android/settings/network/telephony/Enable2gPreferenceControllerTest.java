@@ -22,6 +22,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -116,5 +118,28 @@ public final class Enable2gPreferenceControllerTest {
                 false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void onPreferenceChange_update() {
+        // Set "Enable 2G" flag to "on"
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(
+                (long) (TelephonyManager.NETWORK_TYPE_BITMASK_GSM
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_LTE));
+
+        // Setup state to allow disabling
+        doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
+                mTelephonyManager.CAPABILITY_ALLOWED_NETWORK_TYPES_USED);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
+                false);
+
+        // Disable 2G
+        boolean changed = mController.setChecked(false);
+        assertThat(changed).isEqualTo(true);
+
+        verify(mTelephonyManager, times(1)).setAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G,
+                TelephonyManager.NETWORK_TYPE_BITMASK_LTE);
     }
 }
