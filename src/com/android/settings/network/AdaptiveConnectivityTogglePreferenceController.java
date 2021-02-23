@@ -17,6 +17,7 @@
 package com.android.settings.network;
 
 import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
@@ -28,8 +29,11 @@ import com.android.settings.core.TogglePreferenceController;
  */
 public class AdaptiveConnectivityTogglePreferenceController extends TogglePreferenceController {
 
+    private final WifiManager mWifiManager;
+
     public AdaptiveConnectivityTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mWifiManager = context.getSystemService(WifiManager.class);
     }
 
     @Override
@@ -53,6 +57,7 @@ public class AdaptiveConnectivityTogglePreferenceController extends TogglePrefer
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED,
                 isChecked ? 1 : 0);
+        mWifiManager.setWifiScoringEnabled(isChecked);
         return true;
     }
 }
