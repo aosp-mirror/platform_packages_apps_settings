@@ -22,52 +22,51 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.pm.UserInfo;
-import android.os.Process;
-import android.os.UserHandle;
+import android.os.Looper;
 import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
+import androidx.test.annotation.UiThreadTest;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowUserManager;
 
-@RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@RunWith(AndroidJUnit4.class)
 public class BuildNumberPreferenceControllerTest {
 
     private static final String KEY_BUILD_NUMBER = "build_number";
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private InstrumentedPreferenceFragment mFragment;
 
-    private ShadowUserManager mShadowUserManager;
-
     private Context mContext;
+    private UserManager mUserManager;
+    private ClipboardManager mClipboardManager;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private FakeFeatureFactory mFactory;
@@ -75,15 +74,23 @@ public class BuildNumberPreferenceControllerTest {
     private BuildNumberPreferenceController mController;
 
     @Before
+    @UiThreadTest
     public void setUp() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mShadowUserManager = Shadows.shadowOf(
-                RuntimeEnvironment.application.getSystemService(UserManager.class));
+
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mUserManager = (UserManager) spy(mContext.getSystemService(Context.USER_SERVICE));
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        mClipboardManager = (ClipboardManager) spy(mContext.getSystemService(CLIPBOARD_SERVICE));
+        doReturn(mClipboardManager).when(mContext).getSystemService(CLIPBOARD_SERVICE);
+
         mFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new BuildNumberPreferenceController(mContext, KEY_BUILD_NUMBER);
+        mController = spy(new BuildNumberPreferenceController(mContext, KEY_BUILD_NUMBER));
         mController.setHost(mFragment);
 
         mPreference = new Preference(mContext);
@@ -93,11 +100,6 @@ public class BuildNumberPreferenceControllerTest {
                 Settings.Global.DEVICE_PROVISIONED, 1);
     }
 
-    @After
-    public void tearDown() {
-        ShadowUtils.reset();
-    }
-
     @Test
     public void handlePrefTreeClick_onlyHandleBuildNumberPref() {
         assertThat(mController.handlePreferenceTreeClick(mock(Preference.class))).isFalse();
@@ -105,32 +107,32 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void handlePrefTreeClick_notAdminUser_notDemoUser_doNothing() {
-        mShadowUserManager.setIsAdminUser(false);
-        mShadowUserManager.setIsDemoUser(false);
+        when(mUserManager.isAdminUser()).thenReturn(false);
+        when(mUserManager.isDemoUser()).thenReturn(false);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
 
     @Test
     public void handlePrefTreeClick_isAdminUser_notDemoUser_handleBuildNumberPref() {
-        mShadowUserManager.setIsAdminUser(true);
-        mShadowUserManager.setIsDemoUser(false);
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mUserManager.isDemoUser()).thenReturn(false);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
     }
 
     @Test
     public void handlePrefTreeClick_notAdminUser_isDemoUser_handleBuildNumberPref() {
-        mShadowUserManager.setIsAdminUser(false);
-        mShadowUserManager.addUser(UserHandle.myUserId(), "test", UserInfo.FLAG_DEMO);
+        when(mUserManager.isAdminUser()).thenReturn(false);
+        when(mUserManager.isDemoUser()).thenReturn(true);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
     }
 
     @Test
     public void handlePrefTreeClick_deviceNotProvisioned_doNothing() {
-        mShadowUserManager.setIsAdminUser(true);
-        mShadowUserManager.setIsDemoUser(false);
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mUserManager.isDemoUser()).thenReturn(false);
 
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_PROVISIONED,
                 0);
@@ -143,17 +145,16 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void handlePrefTreeClick_isMonkeyRun_doNothing() {
-        ShadowUtils.setIsUserAMonkey(true);
+        when(mController.isUserAMonkey()).thenReturn(true);
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
 
     @Test
     public void handlePrefTreeClick_userHasRestriction_doNothing() {
-        mShadowUserManager.setIsAdminUser(true);
-        mShadowUserManager.setIsDemoUser(false);
-
-        mShadowUserManager.setUserRestriction(Process.myUserHandle(),
-                UserManager.DISALLOW_DEBUGGING_FEATURES, true);
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mUserManager.isDemoUser()).thenReturn(false);
+        when(mUserManager.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES))
+                .thenReturn(true);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
         verify(mFactory.metricsFeatureProvider).action(
@@ -184,8 +185,9 @@ public class BuildNumberPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
-        mShadowUserManager.setIsAdminUser(true);
+        when(mUserManager.isAdminUser()).thenReturn(true);
 
         final boolean activityResultHandled = mController.onActivityResult(
                 BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
@@ -197,12 +199,14 @@ public class BuildNumberPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
     public void copy_shouldCopyBuildNumberToClipboard() {
+        ArgumentCaptor<ClipData> captor = ArgumentCaptor.forClass(ClipData.class);
+        doNothing().when(mClipboardManager).setPrimaryClip(captor.capture());
+
         mController.copy();
 
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
-        assertThat(data.toString()).isEqualTo(mController.getSummary());
+        final ClipData data = captor.getValue();
+        assertThat(data.getItemAt(0).getText().toString()).isEqualTo(mController.getSummary());
     }
 }
