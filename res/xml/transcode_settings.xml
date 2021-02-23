@@ -35,4 +35,9 @@
         android:key="transcode_default"
         android:title="@string/transcode_default"
         settings:controller="com.android.settings.development.transcode.TranscodeDefaultOptionPreferenceController" />
+
+    <SwitchPreference
+        android:key="transcode_notification"
+        android:title="@string/transcode_notification"
+        settings:controller="com.android.settings.development.transcode.TranscodeNotificationPreferenceController" />
 </PreferenceScreen>

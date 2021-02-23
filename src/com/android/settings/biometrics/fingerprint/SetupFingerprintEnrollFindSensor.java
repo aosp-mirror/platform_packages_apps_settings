@@ -37,11 +37,6 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSensor {
 
     @Override
-    protected int getContentView() {
-        return R.layout.fingerprint_enroll_find_sensor;
-    }
-
-    @Override
     protected Intent getFingerprintEnrollingIntent() {
         Intent intent = new Intent(this, SetupFingerprintEnrollEnrolling.class);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
