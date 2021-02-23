@@ -144,12 +144,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mCanAssumeUdfps = props.size() == 1 && props.get(0).isAnyUdfpsType();
 
         if (mCanAssumeUdfps) {
-            // Use a custom layout since animations, etc must be based off of the sensor's physical
-            // location.
             setContentView(R.layout.udfps_enroll_enrolling);
-            final UdfpsEnrollLayout udfpsEnrollLayout = (UdfpsEnrollLayout) getLayoutInflater()
-                    .inflate(R.layout.udfps_enroll_layout, null /* root */);
-            getLayout().addView(udfpsEnrollLayout);
         } else {
             setContentView(R.layout.fingerprint_enroll_enrolling);
         }
