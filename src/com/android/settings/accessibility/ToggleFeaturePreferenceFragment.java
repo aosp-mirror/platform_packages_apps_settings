@@ -40,20 +40,22 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -66,9 +68,9 @@ import java.util.Locale;
  * and dialog management.
  */
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment
-        implements ShortcutPreference.OnClickCallback {
+        implements ShortcutPreference.OnClickCallback, OnMainSwitchChangeListener {
 
-    protected DividerSwitchPreference mToggleServiceDividerSwitchPreference;
+    protected SettingsMainSwitchPreference mToggleServiceSwitchPreference;
     protected ShortcutPreference mShortcutPreference;
     protected Preference mSettingsPreference;
     protected String mPreferenceKey;
@@ -88,6 +90,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected static final String KEY_INTRODUCTION_CATEGORY = "introduction_categories";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
+    protected static final String KEY_ANIMATED_IMAGE = "animated_image";
 
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private SettingsContentObserver mSettingsContentObserver;
@@ -153,7 +156,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         onProcessArguments(getArguments());
 
         initAnimatedImagePreference();
-        initToggleServiceDividerSwitchPreference();
+        initToggleServiceSwitchPreference();
         initGeneralCategory();
         initShortcutPreference();
         initSettingsPreference();
@@ -162,7 +165,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         installActionBarToggleSwitch();
 
-        updateToggleServiceTitle(mToggleServiceDividerSwitchPreference);
+        updateToggleServiceTitle(mToggleServiceSwitchPreference);
 
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             removeDialog(DialogEnums.EDIT_SHORTCUT);
@@ -178,6 +181,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.hide();
+
+        updatePreferenceOrder();
     }
 
     @Override
@@ -305,12 +310,17 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         removeActionBarToggleSwitch();
     }
 
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        onPreferenceToggled(mPreferenceKey, isChecked);
+    }
+
     /**
      * Returns the shortcut type list which has been checked by user.
      */
     abstract int getUserShortcutTypes();
 
-    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+    protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         switchPreference.setTitle(R.string.accessibility_service_primary_switch_title);
     }
 
@@ -318,10 +328,16 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     protected void onInstallSwitchPreferenceToggleSwitch() {
         // Implement this to set a checked listener.
+        updateSwitchBarToggleSwitch();
+        mToggleServiceSwitchPreference.addOnSwitchChangeListener(this);
     }
 
     protected void onRemoveSwitchPreferenceToggleSwitch() {
         // Implement this to reset a checked listener.
+    }
+
+    protected void updateSwitchBarToggleSwitch() {
+        // Implement this to update the state of switch.
     }
 
     private void installActionBarToggleSwitch() {
@@ -329,7 +345,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     private void removeActionBarToggleSwitch() {
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
+        mToggleServiceSwitchPreference.setOnPreferenceClickListener(null);
         onRemoveSwitchPreferenceToggleSwitch();
     }
 
@@ -358,6 +374,31 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION)) {
             mHtmlDescription = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
+        }
+    }
+
+    /** Customizes the order by preference key. */
+    protected List<String> getPreferenceOrderList() {
+        final List<String> lists = new ArrayList<>();
+        lists.add(KEY_USE_SERVICE_PREFERENCE);
+        lists.add(KEY_ANIMATED_IMAGE);
+        lists.add(KEY_GENERAL_CATEGORY);
+        lists.add(KEY_INTRODUCTION_CATEGORY);
+        return lists;
+    }
+
+    private void updatePreferenceOrder() {
+        final List<String> lists = getPreferenceOrderList();
+
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.setOrderingAsAdded(false);
+
+        final int size = lists.size();
+        for (int i = 0; i < size; i++) {
+            final Preference preference = preferenceScreen.findPreference(lists.get(i));
+            if (preference != null) {
+                preference.setOrder(i);
+            }
         }
     }
 
@@ -401,19 +442,20 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         animatedImagePreference.setImageUri(mImageUri);
         animatedImagePreference.setSelectable(false);
         animatedImagePreference.setMaxHeight(screenHalfHeight);
+        animatedImagePreference.setKey(KEY_ANIMATED_IMAGE);
 
         getPreferenceScreen().addPreference(animatedImagePreference);
     }
 
-    private void initToggleServiceDividerSwitchPreference() {
-        mToggleServiceDividerSwitchPreference = new DividerSwitchPreference(getPrefContext());
-        mToggleServiceDividerSwitchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
+    private void initToggleServiceSwitchPreference() {
+        mToggleServiceSwitchPreference = new SettingsMainSwitchPreference(getPrefContext());
+        mToggleServiceSwitchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
         if (getArguments().containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
             final boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED);
-            mToggleServiceDividerSwitchPreference.setChecked(enabled);
+            mToggleServiceSwitchPreference.setChecked(enabled);
         }
 
-        getPreferenceScreen().addPreference(mToggleServiceDividerSwitchPreference);
+        getPreferenceScreen().addPreference(mToggleServiceSwitchPreference);
     }
 
     private void initGeneralCategory() {
@@ -598,7 +640,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
      * This method will be invoked when a button in the edit shortcut dialog is clicked.
      *
      * @param dialog The dialog that received the click
-     * @param which The button that was clicked
+     * @param which  The button that was clicked
      */
     protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
         if (mComponentName == null) {
@@ -676,7 +718,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     /**
-     *  Setups a configurable default if the setting has never been set.
+     * Setups a configurable default if the setting has never been set.
      */
     private static void setupDefaultShortcutIfNecessary(Context context) {
         final String targetKey = Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
