@@ -29,17 +29,6 @@
     </Preference>
 
     <Preference
-        android:key="high_power_apps"
-        android:title="@string/high_power_apps"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_ignore_optimizations"
-        settings:controller="com.android.settings.applications.specialaccess.HighPowerAppsController">
-        <extra
-            android:name="classname"
-            android:value="com.android.settings.Settings$HighPowerApplicationsActivity" />
-    </Preference>
-
-    <Preference
         android:key="interact_across_profiles"
         android:title="@string/interact_across_profiles_title"
         android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
