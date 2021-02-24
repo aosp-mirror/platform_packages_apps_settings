@@ -1316,7 +1316,7 @@
         </activity>
         <activity
             android:name="Settings$ScanningSettingsActivity"
-            android:label="@string/location_scanning_screen_title"
+            android:label="@string/location_services_screen_title"
             android:icon="@drawable/ic_homepage_location"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize">
@@ -1325,7 +1325,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.location.ScanningSettings" />
+                android:value="com.android.settings.location.LocationServices" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
