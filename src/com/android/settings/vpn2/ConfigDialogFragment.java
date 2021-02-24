@@ -20,11 +20,9 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.ConnectivityManager;
-import android.net.IConnectivityManager;
+import android.net.VpnManager;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.security.Credentials;
 import android.security.KeyStore;
@@ -52,9 +50,8 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
     private static final String ARG_EDITING = "editing";
     private static final String ARG_EXISTS = "exists";
 
-    private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
-            ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     private Context mContext;
+    private VpnManager mService;
 
 
     @Override
@@ -80,6 +77,7 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
     public void onAttach(final Context context) {
         super.onAttach(context);
         mContext = context;
+        mService = context.getSystemService(VpnManager.class);
     }
 
     @Override
@@ -178,9 +176,8 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
                 return;
             }
 
-            final ConnectivityManager conn = ConnectivityManager.from(mContext);
-            conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null,
-                    /* lockdownEnabled */ false, /* lockdownWhitelist */ null);
+            mService.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null,
+                    /* lockdownEnabled */ false, /* lockdownAllowlist */ null);
             VpnUtils.setLockdownVpn(mContext, profile.key);
         } else {
             // update only if lockdown vpn has been changed
@@ -212,8 +209,6 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
                 mService.startLegacyVpn(profile);
             } catch (IllegalStateException e) {
                 Toast.makeText(mContext, R.string.vpn_no_network, Toast.LENGTH_LONG).show();
-            } catch (RemoteException e) {
-                Log.e(TAG, "Failed to connect", e);
             }
         }
     }
