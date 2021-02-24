@@ -57,6 +57,8 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.LayoutPreference;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import java.util.UUID;
 
 /**
@@ -112,9 +114,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @VisibleForTesting
     ViewGroup mPinnedHeaderFrameLayout;
-
+    private AppBarLayout mAppBarLayout;
     private LayoutPreference mHeader;
-
     private View mEmptyView;
     private LinearLayoutManager mLayoutManager;
     private ArrayMap<String, Preference> mPreferenceCache;
@@ -145,6 +146,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             Bundle savedInstanceState) {
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = root.findViewById(R.id.pinned_header);
+        mAppBarLayout = getActivity().findViewById(R.id.app_bar);
         return root;
     }
 
@@ -250,7 +252,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             return;
         }
         if (mAdapter != null) {
-            mAdapter.requestHighlight(getView(), getListView());
+            mAdapter.requestHighlight(getView(), getListView(), mAppBarLayout);
         }
     }
 
