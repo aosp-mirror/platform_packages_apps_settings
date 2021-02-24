@@ -128,8 +128,9 @@
 
     </PreferenceCategory>
 
-    <!-- TODO(b/174829936): Add title for shortcuts settings category. -->
-    <PreferenceCategory android:persistent="false">
+    <PreferenceCategory
+        android:persistent="false"
+        android:title="@string/general_category_title">
 
         <Preference
             android:fragment="com.android.settings.accessibility.ShortcutsSettingsFragment"
