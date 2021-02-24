@@ -74,7 +74,7 @@ public class UriAuthenticationPolicyAdapter extends
     public void onBindViewHolder(UriAuthenticationPolicyAdapter.UriViewHolder holder,
             int position) {
         Uri uri = mUris.get(position);
-        holder.mUriNameView.setText(uri.toString());
+        holder.mUriNameView.setText(Uri.decode(uri.toString()));
     }
 
     @Override
