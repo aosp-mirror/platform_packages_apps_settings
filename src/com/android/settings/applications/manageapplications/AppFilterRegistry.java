@@ -19,6 +19,7 @@ package com.android.settings.applications.manageapplications;
 import androidx.annotation.IntDef;
 
 import com.android.settings.R;
+import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
@@ -50,6 +51,7 @@ public class AppFilterRegistry {
             FILTER_APPS_WRITE_SETTINGS,
             FILTER_APPS_INSTALL_SOURCES,
             FILTER_APPS_BLOCKED,
+            FILTER_ALARMS_AND_REMINDERS,
     })
     @interface FilterType {
     }
@@ -73,6 +75,7 @@ public class AppFilterRegistry {
     public static final int FILTER_APP_CAN_CHANGE_WIFI_STATE = 15;
     public static final int FILTER_APPS_BLOCKED = 16;
     public static final int FILTER_MANAGE_EXTERNAL_STORAGE = 17;
+    public static final int FILTER_ALARMS_AND_REMINDERS = 18;
     // Next id: 18. If you add an entry here, length of mFilters should be updated
 
     private static AppFilterRegistry sRegistry;
@@ -80,7 +83,7 @@ public class AppFilterRegistry {
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[18];
+        mFilters = new AppFilterItem[19];
 
         // High power allowlist, on
         mFilters[FILTER_APPS_POWER_ALLOWLIST] = new AppFilterItem(
@@ -185,6 +188,12 @@ public class AppFilterRegistry {
                 AppStateManageExternalStorageBridge.FILTER_MANAGE_EXTERNAL_STORAGE,
                 FILTER_MANAGE_EXTERNAL_STORAGE,
                 R.string.filter_manage_external_storage);
+
+        // Apps that can schedule alarms and reminders
+        mFilters[FILTER_ALARMS_AND_REMINDERS] = new AppFilterItem(
+                AppStateAlarmsAndRemindersBridge.FILTER_CLOCK_APPS,
+                FILTER_ALARMS_AND_REMINDERS,
+                R.string.alarms_and_reminders_title);
     }
 
     public static AppFilterRegistry getInstance() {
@@ -213,6 +222,8 @@ public class AppFilterRegistry {
                 return FILTER_APPS_RECENT;
             case ManageApplications.LIST_MANAGE_EXTERNAL_STORAGE:
                 return FILTER_MANAGE_EXTERNAL_STORAGE;
+            case ManageApplications.LIST_TYPE_ALARMS_AND_REMINDERS:
+                return FILTER_ALARMS_AND_REMINDERS;
             default:
                 return FILTER_APPS_ALL;
         }

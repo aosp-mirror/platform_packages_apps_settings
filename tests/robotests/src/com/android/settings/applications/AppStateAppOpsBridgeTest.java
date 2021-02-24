@@ -25,9 +25,12 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.IPackageManager;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+
+import com.google.common.truth.Truth;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +61,58 @@ public final class AppStateAppOpsBridgeTest {
 
         new TestAppStateAppOpsBridge().getPermissionInfo("pkg1", 1);
         // should not crash
+    }
+
+    @Test
+    public void permissionState_modeDefault_IsPermissible() {
+        AppStateAppOpsBridge.PermissionState permissionState =
+                new AppStateAppOpsBridge.PermissionState("pkg1", UserHandle.of(123));
+        permissionState.appOpMode = AppOpsManager.MODE_DEFAULT;
+
+        permissionState.staticPermissionGranted = true;
+        Truth.assertThat(permissionState.isPermissible()).isTrue();
+
+        permissionState.staticPermissionGranted = false;
+        Truth.assertThat(permissionState.isPermissible()).isFalse();
+    }
+
+    @Test
+    public void permissionState_modeErrored_IsPermissible() {
+        AppStateAppOpsBridge.PermissionState permissionState =
+                new AppStateAppOpsBridge.PermissionState("pkg1", UserHandle.of(123));
+        permissionState.appOpMode = AppOpsManager.MODE_ERRORED;
+
+        permissionState.staticPermissionGranted = true;
+        Truth.assertThat(permissionState.isPermissible()).isFalse();
+
+        permissionState.staticPermissionGranted = false;
+        Truth.assertThat(permissionState.isPermissible()).isFalse();
+    }
+
+    @Test
+    public void permissionState_modeAllowed_IsPermissible() {
+        AppStateAppOpsBridge.PermissionState permissionState =
+                new AppStateAppOpsBridge.PermissionState("pkg1", UserHandle.of(123));
+        permissionState.appOpMode = AppOpsManager.MODE_ALLOWED;
+
+        permissionState.staticPermissionGranted = true;
+        Truth.assertThat(permissionState.isPermissible()).isTrue();
+
+        permissionState.staticPermissionGranted = false;
+        Truth.assertThat(permissionState.isPermissible()).isTrue();
+    }
+
+    @Test
+    public void permissionState_modeIgnored_IsPermissible() {
+        AppStateAppOpsBridge.PermissionState permissionState =
+                new AppStateAppOpsBridge.PermissionState("pkg1", UserHandle.of(123));
+        permissionState.appOpMode = AppOpsManager.MODE_IGNORED;
+
+        permissionState.staticPermissionGranted = true;
+        Truth.assertThat(permissionState.isPermissible()).isFalse();
+
+        permissionState.staticPermissionGranted = false;
+        Truth.assertThat(permissionState.isPermissible()).isFalse();
     }
 
     private class TestAppStateAppOpsBridge extends AppStateAppOpsBridge {

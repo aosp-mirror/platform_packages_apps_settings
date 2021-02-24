@@ -204,6 +204,10 @@ public class Settings extends SettingsActivity {
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
 
+    /** Actviity to manage apps with {@link android.Manifest.permission#SCHEDULE_EXACT_ALARM} */
+    public static class AlarmsAndRemindersActivity extends SettingsActivity {/* empty */ }
+    /** App specific version of {@link AlarmsAndRemindersActivity} */
+    public static class AlarmsAndRemindersAppActivity extends SettingsActivity {/* empty */ }
 
     public static class ApnEditorActivity extends SettingsActivity { /* empty */ }
     public static class ChooseAccountActivity extends SettingsActivity { /* empty */ }
