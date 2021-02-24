@@ -39,6 +39,7 @@ import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
+import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
@@ -313,7 +314,8 @@ public class SettingsGateway {
             InteractAcrossProfilesSettings.class.getName(),
             InteractAcrossProfilesDetails.class.getName(),
             MediaControlsSettings.class.getName(),
-            NetworkProviderSettings.class.getName()
+            NetworkProviderSettings.class.getName(),
+            AlarmsAndRemindersDetails.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

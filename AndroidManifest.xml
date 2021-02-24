@@ -3067,6 +3067,33 @@
         </activity>
 
         <activity
+            android:name="Settings$AlarmsAndRemindersActivity"
+            android:exported="true"
+            android:label="@string/alarms_and_reminders_label">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SCHEDULE_EXACT_ALARM" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$AlarmsAndRemindersAppActivity"
+            android:exported="true"
+            android:label="@string/alarms_and_reminders_label">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SCHEDULE_EXACT_ALARM" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.appinfo.AlarmsAndRemindersDetails" />
+        </activity>
+
+        <activity
             android:name="Settings$ManageExternalSourcesActivity"
             android:exported="true"
             android:label="@string/install_other_apps">
