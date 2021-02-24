@@ -381,4 +381,13 @@ final class AccessibilityUtil {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, screenHeightDp,
                 resources.getDisplayMetrics()));
     }
+
+    /**
+     * Indicates if the accessibility service belongs to a system App.
+     * @param info AccessibilityServiceInfo
+     * @return {@code true} if the App is a system App.
+     */
+    public static boolean isSystemApp(@NonNull AccessibilityServiceInfo info) {
+        return info.getResolveInfo().serviceInfo.applicationInfo.isSystemApp();
+    }
 }
