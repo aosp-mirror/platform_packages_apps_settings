@@ -41,14 +41,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.Switch;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -198,7 +199,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+    protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
         final String switchBarText = (info == null) ? "" :
                 getString(R.string.accessibility_service_primary_switch_title,
@@ -206,13 +207,14 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         switchPreference.setTitle(switchBarText);
     }
 
-    private void updateSwitchBarToggleSwitch() {
+    @Override
+    protected void updateSwitchBarToggleSwitch() {
         final boolean checked = AccessibilityUtils.getEnabledServicesFromSettings(getPrefContext())
                 .contains(mComponentName);
-        if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {
+        if (mToggleServiceSwitchPreference.isChecked() == checked) {
             return;
         }
-        mToggleServiceDividerSwitchPreference.setChecked(checked);
+        mToggleServiceSwitchPreference.setChecked(checked);
     }
 
     /**
@@ -263,7 +265,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void handleConfirmServiceEnabled(boolean confirmed) {
-        mToggleServiceDividerSwitchPreference.setChecked(confirmed);
+        mToggleServiceSwitchPreference.setChecked(confirmed);
         getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, confirmed);
         onPreferenceToggled(mPreferenceKey, confirmed);
     }
@@ -286,9 +288,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    protected void onInstallSwitchPreferenceToggleSwitch() {
-        super.onInstallSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(this::onPreferenceClick);
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (isChecked != mToggleServiceSwitchPreference.isChecked()) {
+            onPreferenceClick(mToggleServiceSwitchPreference);
+        }
     }
 
     @Override
@@ -296,7 +299,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
                 mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         if (preference.isChecked()) {
-            if (!mToggleServiceDividerSwitchPreference.isChecked()) {
+            if (!mToggleServiceSwitchPreference.isChecked()) {
                 preference.setChecked(false);
                 showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE);
             } else {
@@ -314,7 +317,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         final boolean isServiceOnOrShortcutAdded = mShortcutPreference.isChecked()
-                || mToggleServiceDividerSwitchPreference.isChecked();
+                || mToggleServiceSwitchPreference.isChecked();
         showPopupDialog(isServiceOnOrShortcutAdded ? DialogEnums.EDIT_SHORTCUT
                 : DialogEnums.ENABLE_WARNING_FROM_SHORTCUT);
     }
@@ -453,9 +456,14 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private boolean onPreferenceClick(Preference preference) {
-        boolean checked = ((DividerSwitchPreference) preference).isChecked();
+        boolean checked = ((SettingsMainSwitchPreference) preference).isChecked();
         if (checked) {
-            mToggleServiceDividerSwitchPreference.setChecked(false);
+            mToggleServiceSwitchPreference.setChecked(true);
+            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
+                    /* enableService */ true);
+            showDialog(DialogEnums.DISABLE_WARNING_FROM_TOGGLE);
+        } else {
+            mToggleServiceSwitchPreference.setChecked(false);
             getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
                     /* disableService */ false);
             if (!mShortcutPreference.isChecked()) {
@@ -466,11 +474,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                     showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
                 }
             }
-        } else {
-            mToggleServiceDividerSwitchPreference.setChecked(true);
-            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
-                    /* enableService */ true);
-            showDialog(DialogEnums.DISABLE_WARNING_FROM_TOGGLE);
         }
         return true;
     }
