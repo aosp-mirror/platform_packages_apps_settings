@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -65,6 +66,8 @@ public class TetherSettingsTest {
     private ConnectivityManager mConnectivityManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private TetheringManager mTetheringManager;
 
     @Before
     public void setUp() {
@@ -75,11 +78,13 @@ public class TetherSettingsTest {
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(mUserManager)
                 .when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(mTetheringManager)
+                .when(mContext).getSystemService(Context.TETHERING_SERVICE);
 
         setupIsTetherAvailable(true);
 
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
     }
 
     @Test
@@ -109,7 +114,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_usbNotAvailable_usbKeyReturned() {
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -122,7 +127,7 @@ public class TetherSettingsTest {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // We can ignore the condition of Utils.isMonkeyRunning()
         // In normal case, monkey and robotest should not execute at the same time
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{"dummyRegex"});
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[]{"dummyRegex"});
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -132,7 +137,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_bluetoothNotAvailable_bluetoothKeyReturned() {
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -143,7 +148,7 @@ public class TetherSettingsTest {
     @Test
     public void testTetherNonIndexableKeys_bluetoothAvailable_bluetoothKeyNotReturned() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
-        when(mConnectivityManager.getTetherableBluetoothRegexs())
+        when(mTetheringManager.getTetherableBluetoothRegexs())
                 .thenReturn(new String[]{"dummyRegex"});
 
         final List<String> niks =
@@ -232,11 +237,11 @@ public class TetherSettingsTest {
     }
 
     private void updateOnlyBluetoothState(TetherSettings tetherSettings) {
-        doReturn(mConnectivityManager).when(tetherSettings)
-            .getSystemService(Context.CONNECTIVITY_SERVICE);
-        when(mConnectivityManager.getTetherableIfaces()).thenReturn(new String[0]);
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[0]);
-        when(mConnectivityManager.getTetheringErroredIfaces()).thenReturn(new String[0]);
+        doReturn(mTetheringManager).when(tetherSettings)
+            .getSystemService(Context.TETHERING_SERVICE);
+        when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetheringErroredIfaces()).thenReturn(new String[0]);
         doNothing().when(tetherSettings).updateUsbState(any(String[].class), any(String[].class),
                 any(String[].class));
         doNothing().when(tetherSettings).updateEthernetState(any(String[].class),
