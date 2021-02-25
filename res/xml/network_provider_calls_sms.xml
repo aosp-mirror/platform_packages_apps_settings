@@ -51,12 +51,4 @@
         settings:controller="com.android.settings.network.telephony.NetworkProviderBackupCallingPreferenceController"
         settings:allowDividerAbove="true"
         />
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="provider_model_calls_sms_footer"
-        android:title="@string/calls_sms_footnote"
-        android:selectable="false"
-        settings:allowDividerAbove="true"
-        settings:searchable="false"
-        settings:controller="com.android.settings.network.telephony.NetworkProviderWfcFooterPreferenceController"/>
 </PreferenceScreen>
