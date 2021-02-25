@@ -17,7 +17,7 @@
 package com.android.settings.wifi.tether;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 
 import androidx.preference.Preference;
@@ -36,7 +36,7 @@ public abstract class WifiTetherBasePreferenceController extends AbstractPrefere
 
     protected final WifiManager mWifiManager;
     protected final String[] mWifiRegexs;
-    protected final ConnectivityManager mCm;
+    protected final TetheringManager mTm;
     protected final OnTetherConfigUpdateListener mListener;
 
     protected Preference mPreference;
@@ -46,8 +46,8 @@ public abstract class WifiTetherBasePreferenceController extends AbstractPrefere
         super(context);
         mListener = listener;
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mWifiRegexs = mCm.getTetherableWifiRegexs();
+        mTm = (TetheringManager) context.getSystemService(Context.TETHERING_SERVICE);
+        mWifiRegexs = mTm.getTetherableWifiRegexs();
     }
 
     @Override
