@@ -29,20 +29,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A page that configures the background scanning settings for Wi-Fi and Bluetooth.
+ * A page that configures the Location Services settings including Wi-Fi scanning, Bluetooth
+ * scanning, and injected location services.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ScanningSettings extends DashboardFragment {
-    private static final String TAG = "ScanningSettings";
+public class LocationServices extends DashboardFragment {
+    private static final String TAG = "LocationServicesSettings";
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.LOCATION_SCANNING;
+        return SettingsEnums.LOCATION_SERVICES;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.location_scanning;
+        return R.xml.location_services;
     }
 
     @Override
@@ -53,6 +54,13 @@ public class ScanningSettings extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        use(LocationServicePreferenceController.class).init(this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
@@ -66,7 +74,7 @@ public class ScanningSettings extends DashboardFragment {
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.location_scanning) {
+            new BaseSearchIndexProvider(R.xml.location_services) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context

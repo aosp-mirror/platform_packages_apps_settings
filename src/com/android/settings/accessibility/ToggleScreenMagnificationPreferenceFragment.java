@@ -304,8 +304,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void onInstallSwitchPreferenceToggleSwitch() {
-        super.onInstallSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setVisible(false);
+        mToggleServiceSwitchPreference.setVisible(false);
     }
 
     @Override

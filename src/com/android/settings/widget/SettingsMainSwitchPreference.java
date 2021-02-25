@@ -44,7 +44,8 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
     private final List<OnMainSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
 
     private SettingsMainSwitchBar mMainSwitchBar;
-    private String mTitle;
+    private CharSequence mTitle;
+    private boolean mIsVisible;
 
     private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
 
@@ -77,16 +78,22 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
         holder.setDividerAllowedBelow(false);
 
         mMainSwitchBar = (SettingsMainSwitchBar) holder.findViewById(R.id.main_switch_bar);
+
         mMainSwitchBar.show();
         updateStatus(isChecked());
         registerListenerToSwitchBar();
+
+        if (!mIsVisible) {
+            mMainSwitchBar.hide();
+        }
     }
 
     private void init(Context context, AttributeSet attrs) {
         setLayoutResource(R.layout.preference_widget_main_switch);
+        mIsVisible = true;
 
         if (attrs != null) {
-            TypedArray a = context.obtainStyledAttributes(attrs,
+            final TypedArray a = context.obtainStyledAttributes(attrs,
                     androidx.preference.R.styleable.Preference, 0/*defStyleAttr*/,
                     0/*defStyleRes*/);
             final CharSequence title = TypedArrayUtils.getText(a,
@@ -99,6 +106,14 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
         }
     }
 
+    @Override
+    public void setChecked(boolean checked) {
+        super.setChecked(checked);
+        if (mMainSwitchBar != null) {
+            mMainSwitchBar.setChecked(checked);
+        }
+    }
+
     /**
      * Return the SettingsMainSwitchBar
      */
@@ -106,11 +121,9 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
         return mMainSwitchBar;
     }
 
-    /**
-     * Set the preference title text
-     */
-    public void setTitle(String text) {
-        mTitle = text;
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
         if (mMainSwitchBar != null) {
             mMainSwitchBar.setTitle(mTitle);
         }
@@ -133,6 +146,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
      * Show the MainSwitchBar
      */
     public void show() {
+        mIsVisible = true;
         if (mMainSwitchBar != null) {
             mMainSwitchBar.show();
         }
@@ -142,6 +156,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
      * Hide the MainSwitchBar
      */
     public void hide() {
+        mIsVisible = false;
         if (mMainSwitchBar != null) {
             mMainSwitchBar.hide();
         }

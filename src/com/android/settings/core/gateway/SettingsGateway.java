@@ -39,6 +39,7 @@ import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
+import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
@@ -110,8 +111,8 @@ import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.localepicker.LocaleListEditor;
+import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.network.NetworkProviderSettings;
@@ -200,7 +201,7 @@ public class SettingsGateway {
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
             PrivacyDashboardFragment.class.getName(),
-            ScanningSettings.class.getName(),
+            LocationServices.class.getName(),
             SecuritySettings.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
@@ -313,7 +314,8 @@ public class SettingsGateway {
             InteractAcrossProfilesSettings.class.getName(),
             InteractAcrossProfilesDetails.class.getName(),
             MediaControlsSettings.class.getName(),
-            NetworkProviderSettings.class.getName()
+            NetworkProviderSettings.class.getName(),
+            AlarmsAndRemindersDetails.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
