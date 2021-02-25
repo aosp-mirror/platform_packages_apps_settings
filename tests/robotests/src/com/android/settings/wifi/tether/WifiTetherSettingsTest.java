@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -69,6 +70,8 @@ public class WifiTetherSettingsTest {
     private ConnectivityManager mConnectivityManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private TetheringManager mTetheringManager;
 
     @Before
     public void setUp() {
@@ -77,7 +80,8 @@ public class WifiTetherSettingsTest {
         MockitoAnnotations.initMocks(this);
         doReturn(mConnectivityManager)
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
-        doReturn(WIFI_REGEXS).when(mConnectivityManager).getTetherableWifiRegexs();
+        doReturn(mTetheringManager).when(mContext).getSystemService(Context.TETHERING_SERVICE);
+        doReturn(WIFI_REGEXS).when(mTetheringManager).getTetherableWifiRegexs();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
 
         mWifiTetherSettings = new WifiTetherSettings();
