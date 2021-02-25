@@ -32,7 +32,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class ScanningSettingsTest {
+public class LocationServicesTest {
 
     private Context mContext;
 
@@ -43,10 +43,10 @@ public class ScanningSettingsTest {
 
     @Test
     public void searchProvider_shouldIndexDefaultXml() {
-        final List<SearchIndexableResource> sir = ScanningSettings.SEARCH_INDEX_DATA_PROVIDER
+        final List<SearchIndexableResource> sir = LocationServices.SEARCH_INDEX_DATA_PROVIDER
                 .getXmlResourcesToIndex(mContext, true /* enabled */);
 
         assertThat(sir).hasSize(1);
-        assertThat(sir.get(0).xmlResId).isEqualTo(R.xml.location_scanning);
+        assertThat(sir.get(0).xmlResId).isEqualTo(R.xml.location_services);
     }
 }
