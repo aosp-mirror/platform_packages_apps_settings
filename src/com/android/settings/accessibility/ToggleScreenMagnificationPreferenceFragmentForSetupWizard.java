@@ -33,12 +33,12 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         // Log the final choice in value if it's different from the previous value.
         Bundle args = getArguments();
         if ((args != null) && args.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
-            if (mToggleServiceDividerSwitchPreference.isChecked() != args.getBoolean(
+            if (mToggleServiceSwitchPreference.isChecked() != args.getBoolean(
                     AccessibilitySettings.EXTRA_CHECKED)) {
                 // TODO: Distinguish between magnification modes
                 mMetricsFeatureProvider.action(getContext(),
                         SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION,
-                        mToggleServiceDividerSwitchPreference.isChecked());
+                        mToggleServiceSwitchPreference.isChecked());
             }
         }
         super.onStop();

@@ -55,14 +55,15 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * This is the inner class of {@link WifiCallingSettings} fragment.
  * The preference screen lets you enable/disable Wi-Fi Calling and change Wi-Fi Calling mode.
  */
 public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener,
+        implements OnMainSwitchChangeListener,
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "WifiCallingForSub";
 
@@ -85,8 +86,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     public static final int LAUCH_APP_UPDATE = 1;
 
     //UI objects
-    private SwitchBar mSwitchBar;
-    private Switch mSwitch;
+    private SettingsMainSwitchBar mSwitchBar;
     private ListWithEntrySummaryPreference mButtonWfcMode;
     private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
     private Preference mUpdateAddress;
@@ -190,7 +190,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         mSwitchBar = getView().findViewById(R.id.switch_bar);
         mSwitchBar.show();
-        mSwitch = mSwitchBar.getSwitch();
     }
 
     @Override
@@ -296,7 +295,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mButtonWfcMode = findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
-        mButtonWfcRoamingMode =  findPreference(BUTTON_WFC_ROAMING_MODE);
+        mButtonWfcRoamingMode = findPreference(BUTTON_WFC_ROAMING_MODE);
         mButtonWfcRoamingMode.setOnPreferenceChangeListener(this);
 
         mUpdateAddress = findPreference(PREFERENCE_EMERGENCY_ADDRESS);
@@ -403,7 +402,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         final WifiCallingQueryImsState queryIms = queryImsState(mSubId);
         final boolean wfcEnabled = queryIms.isEnabledByUser()
                 && queryIms.isAllowUserControl();
-        mSwitch.setChecked(wfcEnabled);
+        mSwitchBar.setChecked(wfcEnabled);
         final int wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
         final int wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
         mButtonWfcMode.setValue(Integer.toString(wfcMode));

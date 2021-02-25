@@ -36,15 +36,14 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.Nullable;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import java.util.List;
 
 /** Fragment for providing open activity button. */
-public class LaunchAccessibilityActivityPreferenceFragment extends
-        ToggleFeaturePreferenceFragment {
+public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeaturePreferenceFragment {
     private static final String TAG = "LaunchA11yActivity";
     private static final String EMPTY_STRING = "";
 
@@ -52,23 +51,13 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mToggleServiceDividerSwitchPreference.setSwitchVisibility(View.GONE);
+        mToggleServiceSwitchPreference.hide();
     }
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         logAccessibilityServiceEnabled(mComponentName, enabled);
         launchShortcutTargetActivity(getPrefContext().getDisplayId(), mComponentName);
-    }
-
-    @Override
-    protected void onInstallSwitchPreferenceToggleSwitch() {
-        super.onInstallSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
-            final boolean checked = ((DividerSwitchPreference) preference).isChecked();
-            onPreferenceToggled(mPreferenceKey, checked);
-            return false;
-        });
     }
 
     @Override
@@ -111,7 +100,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
     }
 
     @Override
-    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+    protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         final AccessibilityShortcutInfo info = getAccessibilityShortcutInfo();
         final String switchBarText = (info == null) ? EMPTY_STRING : getString(
                 R.string.accessibility_service_primary_open_title,
