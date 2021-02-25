@@ -123,7 +123,30 @@ public class Settings extends SettingsActivity {
     public static class ScanningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacyDashboardActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
-    public static class FactoryResetActivity extends SettingsActivity { /* empty */ }
+    public static class FactoryResetActivity extends SettingsActivity {
+        @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            super.onCreate(savedState);
+        }
+
+        @Override
+        protected boolean isToolbarEnabled() {
+            return false;
+        }
+    }
+    public static class FactoryResetConfirmActivity extends SettingsActivity {
+        @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            super.onCreate(savedState);
+        }
+
+        @Override
+        protected boolean isToolbarEnabled() {
+            return false;
+        }
+    }
     public static class RunningServicesActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverSettingsActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverScheduleSettingsActivity extends SettingsActivity { /* empty */ }
