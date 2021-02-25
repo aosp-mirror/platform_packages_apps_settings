@@ -82,4 +82,8 @@ public class PrivateVolumeOptionMenuController implements LifecycleObserver, OnC
         }
         return false;
     }
+
+    public void setVolumeInfo(VolumeInfo volumeInfo) {
+        mVolumeInfo = volumeInfo;
+    }
 }
