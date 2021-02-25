@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 
 import androidx.preference.PreferenceScreen;
@@ -43,7 +43,7 @@ public class WifiTetherFooterPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
     @Mock
     private WifiManager mWifiManager;
     @Mock
@@ -58,9 +58,8 @@ public class WifiTetherFooterPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mConnectivityManager);
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
+        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         mController = new WifiTetherFooterPreferenceController(mContext);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
     }
