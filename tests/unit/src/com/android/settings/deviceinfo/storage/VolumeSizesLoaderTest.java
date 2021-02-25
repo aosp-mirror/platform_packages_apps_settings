@@ -34,8 +34,10 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class VolumeSizesLoaderTest {
     @Test
-    public void getVolumeSize_getsValidSizes() throws Exception {
+    public void getVolumeSize_privateMountedVolume_getsValidSizes() throws Exception {
         VolumeInfo info = mock(VolumeInfo.class);
+        when(info.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
+        when(info.getState()).thenReturn(VolumeInfo.STATE_MOUNTED);
         StorageVolumeProvider storageVolumeProvider = mock(StorageVolumeProvider.class);
         when(storageVolumeProvider.getTotalBytes(any(), any())).thenReturn(10000L);
         when(storageVolumeProvider.getFreeBytes(any(), any())).thenReturn(1000L);
@@ -45,5 +47,20 @@ public class VolumeSizesLoaderTest {
 
         assertThat(storageInfo.freeBytes).isEqualTo(1000L);
         assertThat(storageInfo.totalBytes).isEqualTo(10000L);
+    }
+
+    @Test
+    public void getVolumeSize_unmountedVolume_getsValidSizes() throws Exception {
+        VolumeInfo info = mock(VolumeInfo.class);
+        when(info.getState()).thenReturn(VolumeInfo.STATE_UNMOUNTED);
+        StorageVolumeProvider storageVolumeProvider = mock(StorageVolumeProvider.class);
+        when(storageVolumeProvider.getTotalBytes(any(), any())).thenReturn(10000L);
+        when(storageVolumeProvider.getFreeBytes(any(), any())).thenReturn(1000L);
+
+        PrivateStorageInfo storageInfo =
+                VolumeSizesLoader.getVolumeSize(storageVolumeProvider, null, info);
+
+        assertThat(storageInfo.freeBytes).isEqualTo(0L);
+        assertThat(storageInfo.totalBytes).isEqualTo(0L);
     }
 }
