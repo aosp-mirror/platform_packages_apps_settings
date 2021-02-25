@@ -3359,6 +3359,22 @@
     <!-- Section header above list of external storage devices [CHAR LIMIT=30]-->
     <string name="storage_external_title">Portable storage</string>
 
+    <!-- Label for the settings activity for controlling apps that can schedule alarms [CHAR LIMIT=30] -->
+    <string name="alarms_and_reminders_label">Alarms and reminders</string>
+    <!-- Label for the switch to toggler the permission for scheduling alarms [CHAR LIMIT=50] -->
+    <string name="alarms_and_reminders_switch_title">Allow to set alarms or reminders</string>
+    <!-- Title for the setting screen for controlling apps that can schedule alarms [CHAR LIMIT=30] -->
+    <string name="alarms_and_reminders_title">Alarms and reminders</string>
+    <!-- Description that appears below the alarms_and_reminders switch [CHAR LIMIT=NONE] -->
+    <string name="alarms_and_reminders_footer_title">
+        Allow this app to schedule alarms or other timing based events.
+        This will allow the app to wake up and run even when you are not using the device.
+        Note that revoking this permission may cause the app to malfunction, specifically any alarms
+        that the app has scheduled will no longer work.
+    </string>
+    <!-- Keywords for setting screen for controlling apps that can schedule alarms [CHAR LIMIT=100] -->
+    <string name="keywords_alarms_and_reminders">schedule, alarm, reminder, event</string>
+
     <!-- Summary of a single storage volume, constrasting available and total storage space. [CHAR LIMIT=48]-->
     <string name="storage_volume_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> used of <xliff:g id="total" example="32GB">%2$s</xliff:g></string>
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
@@ -4007,8 +4023,6 @@
     <string name="location_high_battery_use">High battery use</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests low battery use-->
     <string name="location_low_battery_use">Low battery use</string>
-    <!-- [CHAR LIMIT=60] Wireless background scanning settings screen, screen title -->
-    <string name="location_scanning_screen_title">Wi\u2011Fi and Bluetooth scanning</string>
     <!-- [CHAR LIMIT=130] Preference title for Wi-Fi always scanning -->
     <string name="location_scanning_wifi_always_scanning_title">Wi\u2011Fi scanning</string>
     <!-- Preference description text for Wi-Fi always scanning -->
@@ -4017,6 +4031,8 @@
     <string name="location_scanning_bluetooth_always_scanning_title">Bluetooth scanning</string>
     <!-- Description text for Bluetooth always scanning -->
     <string name="location_scanning_bluetooth_always_scanning_description">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
+    <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
+    <string name="location_services_screen_title">Location Services</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
     <string name="managed_profile_location_services">Location services for work</string>
 
@@ -4965,6 +4981,8 @@
     <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
     <string name="audio_category_title">Audio</string>
+    <!-- Title for the accessibility preference category of general services and settings. [CHAR LIMIT=50] -->
+    <string name="general_category_title">General</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
@@ -7304,6 +7322,8 @@
     <string name="help_uri_printing" translatable="false"></string>
     <!-- Help URI, About phone [DO NOT TRANSLATE] -->
     <string name="help_uri_about" translatable="false"></string>
+    <!-- Help URI, manage apps that can set alarms and reminders [DO NOT TRANSLATE] -->
+    <string name="help_uri_alarms_and_reminders" translatable="false"></string>
 
     <!-- Help URL, WiFi [DO NOT TRANSLATE] -->
     <string name="help_url_wifi" translatable="false"></string>
@@ -12753,6 +12773,8 @@
     <string name="adaptive_battery_main_switch_title" translatable="false">Use adaptive battery</string>
     <!-- Do not translate. Title for adaptive brightness main switch preferences. [CHAR LIMIT=50] -->
     <string name="adaptive_brightness_main_switch_title" translatable="false">Use adaptive brightness</string>
+    <!-- Do not translate. Title for wifi calling main switch preferences. [CHAR LIMIT=50] -->
+    <string name="wifi_calling_main_switch_title" translatable="false">Use Wi-Fi calling</string>
 
     <!-- Default preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="default_see_all_apps_title">See all apps</string>

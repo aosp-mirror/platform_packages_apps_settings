@@ -113,6 +113,16 @@
     </Preference>
 
     <Preference
+        android:key="alarms_and_reminders"
+        android:title="@string/alarms_and_reminders_title"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:keywords="@string/keywords_alarms_and_reminders">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$AlarmsAndRemindersActivity" />
+    </Preference>
+
+    <Preference
         android:key="special_app_usage_access"
         android:title="@string/usage_access"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"

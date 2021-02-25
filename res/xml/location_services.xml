@@ -15,7 +15,8 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/location_scanning_screen_title">
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
+        android:title="@string/location_services_screen_title">
 
         <SwitchPreference
             android:title="@string/location_scanning_wifi_always_scanning_title"
@@ -28,5 +29,10 @@
             android:summary="@string/location_scanning_bluetooth_always_scanning_description"
             android:defaultValue="true"
             android:key="bluetooth_always_scanning" />
+
+        <PreferenceCategory
+            android:key="location_services"
+            android:layout="@layout/preference_category_no_label"
+            settings:controller="com.android.settings.location.LocationServicePreferenceController"/>
 
 </PreferenceScreen>

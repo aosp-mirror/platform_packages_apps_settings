@@ -50,12 +50,13 @@ public class LocationPersonalSettings extends DashboardFragment {
         super.onAttach(context);
 
         use(AppLocationPermissionPreferenceController.class).init(this);
-        use(LocationServicePreferenceController.class).init(this);
+        // STOPSHIP(b/180533061): resolve the personal/work location services issue before we can
+        // ship.
         use(LocationFooterPreferenceController.class).init(this);
 
         final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
-        final RecentLocationRequestPreferenceController controller = use(
-                RecentLocationRequestPreferenceController.class);
+        final RecentLocationAccessPreferenceController controller = use(
+                RecentLocationAccessPreferenceController.class);
         controller.init(this);
         controller.setProfileType(profileType);
     }
