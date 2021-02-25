@@ -39,9 +39,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter {
 
     private static final String TAG = "HighlightableAdapter";
+    @VisibleForTesting
+    static final long DELAY_COLLAPSE_DURATION_MILLIS = 300L;
     @VisibleForTesting
     static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 600L;
     private static final long HIGHLIGHT_DURATION = 15000L;
@@ -115,7 +119,7 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
         View v = holder.itemView;
         if (position == mHighlightPosition
                 && (mHighlightKey != null
-                        && TextUtils.equals(mHighlightKey, getItem(position).getKey()))) {
+                && TextUtils.equals(mHighlightKey, getItem(position).getKey()))) {
             // This position should be highlighted. If it's highlighted before - skip animation.
             addHighlightBackground(v, !mFadeInAnimated);
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
@@ -124,15 +128,26 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
         }
     }
 
-    public void requestHighlight(View root, RecyclerView recyclerView) {
+    /**
+     * A function can highlight a specific setting in recycler view.
+     * note: Before highlighting a setting, screen collapses tool bar with an animation.
+     */
+    public void requestHighlight(View root, RecyclerView recyclerView, AppBarLayout appBarLayout) {
         if (mHighlightRequested || recyclerView == null || TextUtils.isEmpty(mHighlightKey)) {
             return;
         }
+        final int position = getPreferenceAdapterPosition(mHighlightKey);
+        if (position < 0) {
+            return;
+        }
+
+        if (appBarLayout != null) {
+            root.postDelayed(() -> {
+                appBarLayout.setExpanded(false, true);
+            }, DELAY_COLLAPSE_DURATION_MILLIS);
+        }
+
         root.postDelayed(() -> {
-            final int position = getPreferenceAdapterPosition(mHighlightKey);
-            if (position < 0) {
-                return;
-            }
             mHighlightRequested = true;
             recyclerView.smoothScrollToPosition(position);
             mHighlightPosition = position;

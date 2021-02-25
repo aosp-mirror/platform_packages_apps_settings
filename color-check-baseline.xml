@@ -2997,6 +2997,54 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;path"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_network_signal_blue.xml"
+            line="25"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="C6.67,19.26,7.26,18.67,8,18.67z&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_network_signal_blue.xml"
+            line="32"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        android:pathData=&quot;M16,12h1.33c0.74,0,1.33,0.6,1.33,1.33v12c0,0.74-0.6,1.33-1.33,1.33H16c-0.74,0-1.33-0.6-1.33-1.33v-12"
+        errorLine2="^">
+        <location
+            file="res/drawable/ic_network_signal_blue.xml"
+            line="35"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="                    android:color=&quot;@color/notification_block_color&quot;/>"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -3525,27 +3573,11 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;string name=&quot;sync_plug&quot; msgid=&quot;7956982719077985381&quot;>&quot;‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‏‎‏‏‏‏‏‏‏‏‎‏‏‏‎‎‏‏‎‏‏‎‎‏‏‏‎‎‎‎‏‏‎‏‎‎‎‎‎‎‎‎‎‎‏‏‎‏‎‎‏‎‎‎‎‏‎‏‎‏‏‎‎‎‏‏‎‎‏‎‏‎‎‏‎‎‏‏‎&quot;&lt;font fgcolor=&quot;#ffffffff&quot;>&quot;‎‏‎‎‏‏‏‎Welcome to Google sync!‎‏‎‎‏‏‎&quot;&lt;/font>&quot;‎‏‎‎‏‏‏‎ ‎‏‎‎‏‏‎\n‎‏‎‎‏‏‏‎A Google approach to syncing data to allow access to your contacts, appointments, and more from wherever you are.‎‏‎‎‏‎&quot;&lt;/string>"
-        errorLine2="                                                                                                                                                                         ~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values-en-rXC/strings.xml"
-            line="2816"
-            column="170"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;string name=&quot;sync_plug&quot; msgid=&quot;7956982719077985381&quot;>&lt;font fgcolor=&quot;#ffffffff&quot;>&quot;Welcome to Google sync!&quot;&lt;/font>&quot; \nA Google approach to syncing data to allow access to your contacts, appointments and more from wherever you are.&quot;&lt;/string>"
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rAU/strings.xml"
-            line="2818"
+            line="2821"
             column="64"/>
     </issue>
 
@@ -3561,7 +3593,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rCA/strings.xml"
-            line="2818"
+            line="2821"
             column="64"/>
     </issue>
 
@@ -3577,7 +3609,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rGB/strings.xml"
-            line="2818"
+            line="2821"
             column="64"/>
     </issue>
 
@@ -3593,8 +3625,24 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rIN/strings.xml"
-            line="2818"
+            line="2821"
             column="64"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;string name=&quot;sync_plug&quot; msgid=&quot;7956982719077985381&quot;>&quot;‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‏‎‏‏‏‏‏‏‏‏‎‏‏‏‎‎‏‏‎‏‏‎‎‏‏‏‎‎‎‎‏‏‎‏‎‎‎‎‎‎‎‎‎‎‏‏‎‏‎‎‏‎‎‎‎‏‎‏‎‏‏‎‎‎‏‏‎‎‏‎‏‎‎‏‎‎‏‏‎&quot;&lt;font fgcolor=&quot;#ffffffff&quot;>&quot;‎‏‎‎‏‏‏‎Welcome to Google sync!‎‏‎‎‏‏‎&quot;&lt;/font>&quot;‎‏‎‎‏‏‏‎ ‎‏‎‎‏‏‎\n‎‏‎‎‏‏‏‎A Google approach to syncing data to allow access to your contacts, appointments, and more from wherever you are.‎‏‎‎‏‎&quot;&lt;/string>"
+        errorLine2="                                                                                                                                                                         ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-en-rXC/strings.xml"
+            line="2821"
+            column="170"/>
     </issue>
 
     <issue
@@ -3609,7 +3657,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="6537"
+            line="6543"
             column="36"/>
     </issue>
 
@@ -3641,7 +3689,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="434"
+            line="435"
             column="44"/>
     </issue>
 
@@ -3657,7 +3705,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="440"
+            line="441"
             column="44"/>
     </issue>
 
@@ -3673,7 +3721,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="441"
+            line="442"
             column="44"/>
     </issue>
 
@@ -3689,7 +3737,7 @@
         errorLine2="                                 ^">
         <location
             file="res/values/styles.xml"
-            line="477"
+            line="478"
             column="34"/>
     </issue>
 
@@ -3801,7 +3849,7 @@
         errorLine2="                                         ^">
         <location
             file="res/values/themes.xml"
-            line="273"
+            line="272"
             column="42"/>
     </issue>
 
@@ -3913,7 +3961,7 @@
         errorLine2="                                          ^">
         <location
             file="res/values/themes_suw.xml"
-            line="188"
+            line="196"
             column="43"/>
     </issue>
 
@@ -3929,7 +3977,7 @@
         errorLine2="                                         ^">
         <location
             file="res/values/themes_suw.xml"
-            line="189"
+            line="197"
             column="42"/>
     </issue>
 
@@ -3945,7 +3993,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes_suw.xml"
-            line="190"
+            line="198"
             column="45"/>
     </issue>
 
