@@ -18,9 +18,6 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
@@ -33,9 +30,6 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
-import android.os.ServiceSpecificException;
-import android.security.Credentials;
-import android.security.KeyStore;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -51,8 +45,11 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.wifitrackerlib.WifiEntry;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -79,7 +76,7 @@ public class WifiConfigController2Test {
     @Mock
     private WifiEntry mWifiEntry;
     @Mock
-    private KeyStore mKeyStore;
+    private AndroidKeystoreAliasLoader mAndroidKeystoreAliasLoader;
     private View mView;
     private Spinner mHiddenSettingsSpinner;
     private Spinner mEapCaCertSpinner;
@@ -286,27 +283,11 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    public void loadCertificates_keyStoreListFail_shouldNotCrash() {
-        // Set up
-        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
-        when(mKeyStore.list(anyString()))
-            .thenThrow(new ServiceSpecificException(-1, "permission error"));
-
-        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
-              WifiConfigUiBase2.MODE_CONNECT);
-
-        // Verify that the EAP method menu is visible.
-        assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.VISIBLE);
-        // No Crash
-    }
-
-    @Test
     public void loadCertificates_undesiredCertificates_shouldNotLoadUndesiredCertificates() {
         final Spinner spinner = new Spinner(mContext);
-        when(mKeyStore.list(anyString())).thenReturn(WifiConfigController2.UNDESIRED_CERTIFICATES);
 
         mController.loadCertificates(spinner,
-                "prefix",
+                Arrays.asList(WifiConfigController.UNDESIRED_CERTIFICATES),
                 "doNotProvideEapUserCertString",
                 false /* showMultipleCerts */,
                 false /* showUsePreinstalledCertOption */);
@@ -432,8 +413,8 @@ public class WifiConfigController2Test {
         }
 
         @Override
-        KeyStore getKeyStore() {
-            return mKeyStore;
+        AndroidKeystoreAliasLoader getAndroidKeystoreAliasLoader() {
+            return mAndroidKeystoreAliasLoader;
         }
     }
 
@@ -882,6 +863,7 @@ public class WifiConfigController2Test {
             String savedUserCertificate) {
         final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
         final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+
         mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
@@ -892,15 +874,15 @@ public class WifiConfigController2Test {
             String[] savedCaCertificates = new String[]{savedCaCertificate};
             when(mockWifiEnterpriseConfig.getCaCertificateAliases())
                     .thenReturn(savedCaCertificates);
-            when(mKeyStore.list(eq(Credentials.CA_CERTIFICATE), anyInt()))
-                    .thenReturn(savedCaCertificates);
+            when(mAndroidKeystoreAliasLoader.getCaCertAliases())
+                    .thenReturn(ImmutableList.of(savedCaCertificate));
         }
         if (savedUserCertificate != null) {
             String[] savedUserCertificates = new String[]{savedUserCertificate};
             when(mockWifiEnterpriseConfig.getClientCertificateAlias())
                     .thenReturn(savedUserCertificate);
-            when(mKeyStore.list(eq(Credentials.USER_PRIVATE_KEY), anyInt()))
-                    .thenReturn(savedUserCertificates);
+            when(mAndroidKeystoreAliasLoader.getKeyCertAliases())
+                    .thenReturn(ImmutableList.of(savedUserCertificate));
         }
 
         mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
