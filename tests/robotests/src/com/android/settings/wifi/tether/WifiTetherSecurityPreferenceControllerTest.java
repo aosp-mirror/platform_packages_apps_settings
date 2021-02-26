@@ -7,7 +7,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
@@ -32,7 +32,7 @@ public class WifiTetherSecurityPreferenceControllerTest {
     private WifiTetherBasePreferenceController.OnTetherConfigUpdateListener mListener;
     private Context mContext;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
     @Mock
     private WifiManager mWifiManager;
     @Mock
@@ -51,9 +51,8 @@ public class WifiTetherSecurityPreferenceControllerTest {
 
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mConfig);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mConnectivityManager);
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
+        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
 
         mController = new WifiTetherSecurityPreferenceController(mContext, mListener);
