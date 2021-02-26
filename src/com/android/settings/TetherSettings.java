@@ -167,8 +167,8 @@ public class TetherSettings extends RestrictedSettingsFragment
         mEm = (EthernetManager) getSystemService(Context.ETHERNET_SERVICE);
         mTm = (TetheringManager) getSystemService(Context.TETHERING_SERVICE);
 
-        mUsbRegexs = mCm.getTetherableUsbRegexs();
-        mBluetoothRegexs = mCm.getTetherableBluetoothRegexs();
+        mUsbRegexs = mTm.getTetherableUsbRegexs();
+        mBluetoothRegexs = mTm.getTetherableBluetoothRegexs();
         mEthernetRegex = getContext().getResources().getString(
                 com.android.internal.R.string.config_ethernet_iface_regex);
 
@@ -251,14 +251,14 @@ public class TetherSettings extends RestrictedSettingsFragment
         public void onReceive(Context content, Intent intent) {
             String action = intent.getAction();
             // TODO: stop using ACTION_TETHER_STATE_CHANGED and use mTetheringEventCallback instead.
-            if (action.equals(ConnectivityManager.ACTION_TETHER_STATE_CHANGED)) {
+            if (action.equals(TetheringManager.ACTION_TETHER_STATE_CHANGED)) {
                 // TODO - this should understand the interface types
                 ArrayList<String> available = intent.getStringArrayListExtra(
-                        ConnectivityManager.EXTRA_AVAILABLE_TETHER);
+                        TetheringManager.EXTRA_AVAILABLE_TETHER);
                 ArrayList<String> active = intent.getStringArrayListExtra(
-                        ConnectivityManager.EXTRA_ACTIVE_TETHER);
+                        TetheringManager.EXTRA_ACTIVE_TETHER);
                 ArrayList<String> errored = intent.getStringArrayListExtra(
-                        ConnectivityManager.EXTRA_ERRORED_TETHER);
+                        TetheringManager.EXTRA_ERRORED_TETHER);
                 updateState(available.toArray(new String[available.size()]),
                         active.toArray(new String[active.size()]),
                         errored.toArray(new String[errored.size()]));
@@ -345,7 +345,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         final Activity activity = getActivity();
 
         mTetherChangeReceiver = new TetherChangeReceiver();
-        IntentFilter filter = new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
+        IntentFilter filter = new IntentFilter(TetheringManager.ACTION_TETHER_STATE_CHANGED);
         final Intent intent = activity.registerReceiver(mTetherChangeReceiver, filter);
 
         filter = new IntentFilter();
@@ -367,11 +367,10 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     private void updateState() {
-        final ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        final String[] available = cm.getTetherableIfaces();
-        final String[] tethered = cm.getTetheredIfaces();
-        final String[] errored = cm.getTetheringErroredIfaces();
+        final TetheringManager tm = getContext().getSystemService(TetheringManager.class);
+        final String[] available = tm.getTetherableIfaces();
+        final String[] tethered = tm.getTetheredIfaces();
+        final String[] errored = tm.getTetheringErroredIfaces();
         updateState(available, tethered, errored);
     }
 
@@ -391,7 +390,7 @@ public class TetherSettings extends RestrictedSettingsFragment
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) {
                     if (usbError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
-                        usbError = mCm.getLastTetherError(s);
+                        usbError = mTm.getLastTetherError(s);
                     }
                 }
             }
@@ -556,8 +555,8 @@ public class TetherSettings extends RestrictedSettingsFragment
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    final ConnectivityManager cm =
-                            context.getSystemService(ConnectivityManager.class);
+                    final TetheringManager tm =
+                            context.getSystemService(TetheringManager.class);
 
                     if (!TetherUtil.isTetherAvailable(context)) {
                         keys.add(KEY_TETHER_PREFS_SCREEN);
@@ -565,13 +564,13 @@ public class TetherSettings extends RestrictedSettingsFragment
                     }
 
                     final boolean usbAvailable =
-                            cm.getTetherableUsbRegexs().length != 0;
+                            tm.getTetherableUsbRegexs().length != 0;
                     if (!usbAvailable || Utils.isMonkeyRunning()) {
                         keys.add(KEY_USB_TETHER_SETTINGS);
                     }
 
                     final boolean bluetoothAvailable =
-                            cm.getTetherableBluetoothRegexs().length != 0;
+                            tm.getTetherableBluetoothRegexs().length != 0;
                     if (!bluetoothAvailable) {
                         keys.add(KEY_ENABLE_BLUETOOTH_TETHERING);
                     }
