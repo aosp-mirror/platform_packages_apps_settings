@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -62,6 +63,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
     private final AtomicReference<BluetoothPan> mBluetoothPan;
     private final ConnectivityManager mConnectivityManager;
     private final BluetoothAdapter mBluetoothAdapter;
+    private final TetheringManager mTetheringManager;
     @VisibleForTesting
     final BluetoothProfile.ServiceListener mBtProfileServiceListener =
             new android.bluetooth.BluetoothProfile.ServiceListener() {
@@ -86,6 +88,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
         mBluetoothPan = new AtomicReference<>();
         mConnectivityManager = null;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mTetheringManager = null;
     }
 
     public TetherPreferenceController(Context context, Lifecycle lifecycle) {
@@ -95,6 +98,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mTetheringManager = context.getSystemService(TetheringManager.class);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -144,7 +148,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
             mTetherReceiver = new TetherBroadcastReceiver();
         }
         mContext.registerReceiver(
-                mTetherReceiver, new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED));
+                mTetherReceiver, new IntentFilter(TetheringManager.ACTION_TETHER_STATE_CHANGED));
         mContext.getContentResolver()
                 .registerContentObserver(mAirplaneModeObserver.uri, false, mAirplaneModeObserver);
     }
@@ -178,9 +182,9 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
             // Preference is not ready yet.
             return;
         }
-        String[] allTethered = mConnectivityManager.getTetheredIfaces();
-        String[] wifiTetherRegex = mConnectivityManager.getTetherableWifiRegexs();
-        String[] bluetoothRegex = mConnectivityManager.getTetherableBluetoothRegexs();
+        String[] allTethered = mTetheringManager.getTetheredIfaces();
+        String[] wifiTetherRegex = mTetheringManager.getTetherableWifiRegexs();
+        String[] bluetoothRegex = mTetheringManager.getTetherableBluetoothRegexs();
 
         boolean hotSpotOn = false;
         boolean tetherOn = false;
@@ -211,7 +215,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
                 && bluetoothRegex != null && bluetoothRegex.length > 0
                 && mBluetoothAdapter != null
                 && mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
-            // Check bluetooth state. It's not included in mConnectivityManager.getTetheredIfaces.
+            // Check bluetooth state. It's not included in mTetheringManager.getTetheredIfaces.
             final BluetoothPan pan = mBluetoothPan.get();
             tetherOn = pan != null && pan.isTetheringOn();
         }
