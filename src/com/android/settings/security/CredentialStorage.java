@@ -64,7 +64,6 @@ public final class CredentialStorage extends FragmentActivity {
 
     private static final int CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST = 1;
 
-    private final KeyStore mKeyStore = KeyStore.getInstance();
     private LockPatternUtils mUtils;
 
     /**
