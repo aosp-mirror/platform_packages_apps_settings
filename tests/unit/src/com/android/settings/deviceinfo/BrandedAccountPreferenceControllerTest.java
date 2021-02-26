@@ -19,37 +19,49 @@ package com.android.settings.deviceinfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
 import android.content.Context;
+import android.content.res.Resources;
+
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class BrandedAccountPreferenceControllerTest {
 
+    @Mock
+    private Resources mResources;
     private Context mContext;
-    private FakeFeatureFactory fakeFeatureFactory;
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        fakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getResources()).thenReturn(mResources);
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
 
     }
 
     @Test
     public void isAvailable_configOn_noAccount_off() {
+        final int boolId = ResourcesUtils.getResourcesId(
+                ApplicationProvider.getApplicationContext(), "bool",
+                "config_show_branded_account_in_device_info");
+        when(mResources.getBoolean(boolId)).thenReturn(true);
+
         final BrandedAccountPreferenceController controller =
                 new BrandedAccountPreferenceController(mContext, "test_key");
         assertThat(controller.isAvailable()).isFalse();
@@ -57,7 +69,11 @@ public class BrandedAccountPreferenceControllerTest {
 
     @Test
     public void isAvailable_accountIsAvailable_on() {
-        when(fakeFeatureFactory.mAccountFeatureProvider.getAccounts(any(Context.class)))
+        final int boolId = ResourcesUtils.getResourcesId(
+                ApplicationProvider.getApplicationContext(), "bool",
+                "config_show_branded_account_in_device_info");
+        when(mResources.getBoolean(boolId)).thenReturn(true);
+        when(mFakeFeatureFactory.mAccountFeatureProvider.getAccounts(any(Context.class)))
                 .thenReturn(new Account[]{new Account("fake@account.foo", "fake.reallyfake")});
 
         final BrandedAccountPreferenceController controller =
@@ -67,9 +83,12 @@ public class BrandedAccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
     public void isAvailable_configOff_hasAccount_off() {
-        when(fakeFeatureFactory.mAccountFeatureProvider.getAccounts(any(Context.class)))
+        final int boolId = ResourcesUtils.getResourcesId(
+                ApplicationProvider.getApplicationContext(), "bool",
+                "config_show_branded_account_in_device_info");
+        when(mResources.getBoolean(boolId)).thenReturn(false);
+        when(mFakeFeatureFactory.mAccountFeatureProvider.getAccounts(any(Context.class)))
                 .thenReturn(new Account[]{new Account("fake@account.foo", "fake.reallyfake")});
 
         final BrandedAccountPreferenceController controller =
