@@ -34,18 +34,22 @@
     <CheckBoxPreference
         android:key="type_filter_ongoing"
         android:title="@string/notif_type_ongoing"
+        android:icon="@drawable/ic_ongoing_notification"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.OngoingTypeFilterPreferenceController"/>/>
     <CheckBoxPreference
         android:key="type_filter_conversation"
         android:title="@string/notif_type_conversation"
+        android:icon="@drawable/ic_promote_conversation"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.ConversationTypeFilterPreferenceController"/>/>
     <CheckBoxPreference
         android:key="type_filter_alerting"
         android:title="@string/notif_type_alerting"
+        android:icon="@drawable/ic_notification_alert"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.AlertingTypeFilterPreferenceController"/>/>
     <CheckBoxPreference
         android:key="type_filter_silent"
         android:title="@string/notif_type_silent"
+        android:icon="@drawable/ic_notification_silence"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.SilentTypeFilterPreferenceController"/>/>
 
     <Preference
