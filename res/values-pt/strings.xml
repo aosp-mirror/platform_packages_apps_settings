@@ -1472,6 +1472,11 @@
     <string name="storage_other_users" msgid="7017206190449510992">"Outros usuários"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Armazenamento do dispositivo"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"Armazenamento portátil"</string>
+    <string name="alarms_and_reminders_label" msgid="8103111654170690088">"Alarmes e lembretes"</string>
+    <string name="alarms_and_reminders_switch_title" msgid="4462627719161866171">"Permitir a definição de alarmes e lembretes"</string>
+    <string name="alarms_and_reminders_title" msgid="5296823629394843360">"Alarmes e lembretes"</string>
+    <string name="alarms_and_reminders_footer_title" msgid="5527294963734043995">"Permitir que este app programe alarmes ou outros eventos de tempo. Com isso, ele poderá funcionar mesmo quando você não estiver usando o dispositivo. Se essa permissão for revogada, o app poderá apresentar falhas, especificamente nos alarmes programados por ele, que deixarão de funcionar."</string>
+    <string name="keywords_alarms_and_reminders" msgid="3886835524865727135">"programação, alarme, lembrete, evento"</string>
     <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="USED">%1$s</xliff:g> usados de um total de <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"Usado(s) de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
@@ -1733,11 +1738,11 @@
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Nenhum app acessou o local recentemente"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Uso da bateria elevado"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Uso da bateria reduzido"</string>
-    <string name="location_scanning_screen_title" msgid="2346125609614249968">"Busca por Wi‑Fi e Bluetooth"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Busca por Wi-Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Permite que apps e serviços procurem redes Wi‑Fi a qualquer momento, mesmo quando o Wi‑Fi está desativado. Essa configuração pode ser usada, por exemplo, para melhorar recursos e serviços baseados na localização."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Busca por Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Permite que apps e serviços procurem dispositivos próximos a qualquer momento, mesmo quando o Bluetooth está desativado. Essa configuração pode ser usada, por exemplo, para melhorar recursos e serviços baseados na localização."</string>
+    <string name="location_services_screen_title" msgid="9204334551361202877">"Serviços de localização"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Serviços de localização para o trabalho"</string>
     <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"Detecção do fuso horário do local"</string>
     <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"Detecção do fuso horário do local"</string>
@@ -2140,6 +2145,7 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Leitores de tela"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Legendas"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Áudio"</string>
+    <string name="general_category_title" msgid="6298579528716834157">"Geral"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Tela"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Texto e exibição"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Escurecer a tela"</string>
@@ -2292,7 +2298,8 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Vermelho-verde"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Vermelho-verde"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Azul-amarelo"</string>
-    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"Reduzir brilho"</string>
+    <!-- no translation found for reduce_bright_colors_preference_title (8004574775504450263) -->
+    <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"Use o smartphone com o brilho da tela abaixo do mínimo"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"Use o tablet com o brilho da tela abaixo do mínimo"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"Diminua o brilho da tela para deixar a leitura mais confortável.&lt;br/&gt;&lt;br/&gt; Esse recurso pode ser útil quando: &lt;ol&gt; &lt;li&gt; o brilho mínimo padrão do smartphone ainda é claro demais;&lt;/li&gt; &lt;li&gt; você está usando o smartphone em ambientes com pouca iluminação, como à noite ou em um quarto escuro antes de dormir.&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -3499,9 +3506,10 @@
     <string name="ringtones_category_preference_title" msgid="26680768777533727">"Toques"</string>
     <string name="other_sound_category_preference_title" msgid="8182757473602586634">"Outros sons e vibrações"</string>
     <string name="configure_notification_settings" msgid="1492820231694314376">"Notificações"</string>
+    <string name="conversation_notifs_category" msgid="2549844862379963273">"Conversa"</string>
     <string name="recent_notifications" msgid="1105631022180160436">"Enviadas recentemente"</string>
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Ver todas enviadas nos últimos 7 dias"</string>
-    <string name="advanced_section_header" msgid="6003255455888626056">"Avançado"</string>
+    <string name="advanced_section_header" msgid="6478709678084326738">"Geral"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Notificações de trabalho"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notificações adaptáveis"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioridade de notificação adaptável"</string>
@@ -3563,7 +3571,7 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"Exibir na aba suspensa, barra de status e tela de bloqueio"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Ocultar notificações silenciosas na barra de status"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Piscar a luz"</string>
-    <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Notificações na tela de bloqueio"</string>
+    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Privacidade"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Pular tela de bloqueio"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Depois do desbloqueio facial, ir para a última tela usada"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Bloquear tela, tela de bloqueio, pular, ignorar"</string>
@@ -3676,12 +3684,12 @@
     <string name="notif_type_alerting" msgid="2300039323822104165">"Notificações com alerta"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"Notificações silenciosas"</string>
     <string name="notif_listener_excluded_title" msgid="639103158747320529">"Apps que não estão conectados em ponte a esse listener"</string>
-    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Todos os apps estão conectados em ponte"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"Todos os apps estão em ponte"</string>
     <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
       <item quantity="one">%d app não está conectado em ponte</item>
       <item quantity="other">%d apps não estão conectados em ponte</item>
     </plurals>
-    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Apps conectados em ponte"</string>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"Apps em ponte"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serviços de ajuda para RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nenhum app instalado solicitou ser executado como serviços de ajuda para RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Permitir acesso ao serviço de RV para <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4343,8 +4351,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> restrições</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"O cálculo de dados da operadora pode ser diferente daquele realizado pelo seu dispostivo"</string>
-    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
-    <skip />
+    <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Exclui dados usados por redes de operadoras"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> usado(s)"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Definir alerta de uso de dados"</string>
     <string name="data_warning" msgid="2925054658166062884">"Alerta de uso de dados"</string>
@@ -4888,7 +4895,7 @@
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Alterar o modo de operação de rede"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Tipo de rede preferencial"</string>
     <string name="carrier_settings_euicc" msgid="1541279297111378907">"Operadora"</string>
-    <string name="carrier_settings_version" msgid="4738147451583140935">"Versão das configurações"</string>
+    <string name="carrier_settings_version" msgid="3364919669057317776">"Versão das configurações da operadora"</string>
     <string name="call_category" msgid="641461844504128789">"Chamadas"</string>
     <string name="video_calling_settings_title" msgid="5490466306783552190">"Videochamadas pela operadora"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Seleção de sistema"</string>
@@ -4937,8 +4944,7 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Remova o chip e insira-o novamente. Se o problema continuar, reinicie o dispositivo."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Tente ativar o chip novamente. Se o problema continuar, reinicie o dispositivo."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ativação de rede"</string>
-    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
-    <skip />
+    <string name="sim_switch_channel_id" msgid="4927038626791837861">"Mudança de operadora"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"A operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g> está ativa"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Toque para atualizar as configurações do chip"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Mudou para <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5114,8 +5120,7 @@
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"indisponível"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Temporariamente indisponível"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Sem chip"</string>
-    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
-    <skip />
+    <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Preferências de rede"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectar-se a redes públicas"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"conexão de rede, internet, sem fio, dados, wifi, wi-fi, wi fi, celular, rede móvel, operadora de celular, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"Ver redes do modo avião"</string>
@@ -5163,6 +5168,5 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Inserir número de telefone"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"O número de telefone não foi informado."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
-    <!-- no translation found for enable_2g_title (8184757884636162942) -->
-    <skip />
+    <string name="enable_2g_title" msgid="8184757884636162942">"Permitir 2G"</string>
 </resources>
