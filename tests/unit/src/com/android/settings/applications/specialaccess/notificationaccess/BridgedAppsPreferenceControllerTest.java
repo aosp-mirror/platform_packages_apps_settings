@@ -35,10 +35,10 @@ import android.os.Looper;
 import android.service.notification.NotificationListenerFilter;
 import android.util.ArraySet;
 
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -122,7 +122,7 @@ public class BridgedAppsPreferenceControllerTest {
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
 
-        SwitchPreference p = mock(SwitchPreference.class);
+        CheckBoxPreference p = mock(CheckBoxPreference.class);
         when(p.getKey()).thenReturn("pkg|12300");
         mScreen.addPreference(p);
 
@@ -163,7 +163,7 @@ public class BridgedAppsPreferenceControllerTest {
 
         mController.onRebuildComplete(entries);
 
-        SwitchPreference actual = mScreen.findPreference("pkg|12300");
+        CheckBoxPreference actual = mScreen.findPreference("pkg|12300");
 
         assertThat(actual.isChecked()).isTrue();
         assertThat(actual.getTitle()).isEqualTo("hi");
@@ -180,7 +180,7 @@ public class BridgedAppsPreferenceControllerTest {
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(nlf);
 
-        SwitchPreference pref = new SwitchPreference(mContext);
+        CheckBoxPreference pref = new CheckBoxPreference(mContext);
         pref.setKey("pkg|567");
 
         mController.onPreferenceChange(pref, false);
@@ -206,7 +206,7 @@ public class BridgedAppsPreferenceControllerTest {
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(nlf);
 
-        SwitchPreference pref = new SwitchPreference(mContext);
+        CheckBoxPreference pref = new CheckBoxPreference(mContext);
         pref.setKey("pkg|567");
 
         mController.onPreferenceChange(pref, true);

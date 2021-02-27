@@ -20,6 +20,7 @@ import android.os.UserHandle;
 import android.service.notification.NotificationListenerFilter;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -130,9 +131,9 @@ public class BridgedAppsPreferenceController extends BasePreferenceController im
             }
             final String prefKey = entry.info.packageName + "|" + entry.info.uid;
             appsKeySet.add(prefKey);
-            SwitchPreference preference = mScreen.findPreference(prefKey);
+            CheckBoxPreference preference = mScreen.findPreference(prefKey);
             if (preference == null) {
-                preference = new SwitchPreference(mScreen.getContext());
+                preference = new CheckBoxPreference(mScreen.getContext());
                 preference.setIcon(entry.icon);
                 preference.setTitle(entry.label);
                 preference.setKey(prefKey);
@@ -172,7 +173,7 @@ public class BridgedAppsPreferenceController extends BasePreferenceController im
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference instanceof SwitchPreference) {
+        if (preference instanceof CheckBoxPreference) {
             String packageName = preference.getKey().substring(0, preference.getKey().indexOf("|"));
             int uid = Integer.parseInt(preference.getKey().substring(
                     preference.getKey().indexOf("|") + 1));
