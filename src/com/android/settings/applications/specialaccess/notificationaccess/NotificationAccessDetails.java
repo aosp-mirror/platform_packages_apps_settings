@@ -21,6 +21,7 @@ import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -49,7 +50,9 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,6 +63,7 @@ public class NotificationAccessDetails extends DashboardFragment {
     private NotificationListenerFilter mNlf;
     private ComponentName mComponentName;
     private CharSequence mServiceName;
+    protected ServiceInfo mServiceInfo;
     protected PackageInfo mPackageInfo;
     protected int mUserId;
     protected String mPackageName;
@@ -96,10 +100,18 @@ public class NotificationAccessDetails extends DashboardFragment {
                 .setPackageInfo(mPackageInfo)
                 .setPm(context.getPackageManager())
                 .setServiceName(mServiceName);
-        use(TypeFilterPreferenceController.class)
-                .setNm(new NotificationBackend())
-                .setCn(mComponentName)
-                .setUserId(mUserId);
+        getPreferenceControllers().forEach(controllers -> {
+            controllers.forEach(controller -> {
+                if (controller instanceof TypeFilterPreferenceController) {
+                    TypeFilterPreferenceController tfpc =
+                            (TypeFilterPreferenceController) controller;
+                    tfpc.setNm(new NotificationBackend())
+                            .setCn(mComponentName)
+                            .setServiceInfo(mServiceInfo)
+                            .setUserId(mUserId);
+                }
+            });
+        });
     }
 
     @Override
@@ -205,20 +217,34 @@ public class NotificationAccessDetails extends DashboardFragment {
     // along to keep business logic out of this file
     public void disable(final ComponentName cn) {
         final PreferenceScreen screen = getPreferenceScreen();
-        ApprovalPreferenceController controller = use(ApprovalPreferenceController.class);
-        controller.disable(cn);
-        controller.updateState(screen.findPreference(controller.getPreferenceKey()));
-        TypeFilterPreferenceController dependent1 = use(TypeFilterPreferenceController.class);
-        dependent1.updateState(screen.findPreference(dependent1.getPreferenceKey()));
+        ApprovalPreferenceController apc = use(ApprovalPreferenceController.class);
+        apc.disable(cn);
+        apc.updateState(screen.findPreference(apc.getPreferenceKey()));
+        getPreferenceControllers().forEach(controllers -> {
+            controllers.forEach(controller -> {
+                if (controller instanceof TypeFilterPreferenceController) {
+                    TypeFilterPreferenceController tfpc =
+                            (TypeFilterPreferenceController) controller;
+                    tfpc.updateState(screen.findPreference(tfpc.getPreferenceKey()));
+                }
+            });
+        });
     }
 
     protected void enable(ComponentName cn) {
         final PreferenceScreen screen = getPreferenceScreen();
-        ApprovalPreferenceController controller = use(ApprovalPreferenceController.class);
-        controller.enable(cn);
-        controller.updateState(screen.findPreference(controller.getPreferenceKey()));
-        TypeFilterPreferenceController dependent1 = use(TypeFilterPreferenceController.class);
-        dependent1.updateState(screen.findPreference(dependent1.getPreferenceKey()));
+        ApprovalPreferenceController apc = use(ApprovalPreferenceController.class);
+        apc.enable(cn);
+        apc.updateState(screen.findPreference(apc.getPreferenceKey()));
+        getPreferenceControllers().forEach(controllers -> {
+            controllers.forEach(controller -> {
+                if (controller instanceof TypeFilterPreferenceController) {
+                    TypeFilterPreferenceController tfpc =
+                            (TypeFilterPreferenceController) controller;
+                    tfpc.updateState(screen.findPreference(tfpc.getPreferenceKey()));
+                }
+            });
+        });
     }
 
     // To save binder calls, load this in the fragment rather than each preference controller
@@ -239,6 +265,7 @@ public class NotificationAccessDetails extends DashboardFragment {
                 if (Objects.equals(mComponentName, info.getComponentName())) {
                     mIsNls = true;
                     mServiceName = info.loadLabel(mPm);
+                    mServiceInfo = info;
                     break;
                 }
             }
