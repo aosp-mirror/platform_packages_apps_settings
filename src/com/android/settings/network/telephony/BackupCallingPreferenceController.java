@@ -32,6 +32,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -67,14 +68,22 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return hasBackupCallingFeature(subId) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        if (!hasBackupCallingFeature(subId)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        List<SubscriptionInfo> subIdList = getActiveSubscriptionList();
+        SubscriptionInfo subInfo = getSubscriptionInfoFromList(subIdList, subId);
+        if (subInfo == null) {  // given subId is not actives
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return (subIdList.size() > 1) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     /**
      * Implementation of abstract methods
      **/
     public boolean setChecked(boolean isChecked) {
-        ImsMmTelManager imsMmTelMgr = getImsMmTelManager();
+        ImsMmTelManager imsMmTelMgr = getImsMmTelManager(mSubId);
         if (imsMmTelMgr == null) {
             return false;
         }
@@ -92,7 +101,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
      * Implementation of abstract methods
      **/
     public boolean isChecked() {
-        ImsMmTelManager imsMmTelMgr = getImsMmTelManager();
+        ImsMmTelManager imsMmTelMgr = getImsMmTelManager(mSubId);
         if (imsMmTelMgr == null) {
             return false;
         }
@@ -110,16 +119,17 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         if ((preference == null) || (!(preference instanceof SwitchPreference))) {
             return;
         }
+        SubscriptionInfo subInfo = getSubscriptionInfoFromActiveList(mSubId);
+
         mPreference = preference;
 
         final SwitchPreference switchPreference = (SwitchPreference) preference;
-        switchPreference.setChecked(isChecked());
+        switchPreference.setChecked((subInfo != null) ? isChecked() : false);
 
-        updateSummary(getLatestSummary());
+        updateSummary(getLatestSummary(subInfo));
     }
 
-    private String getLatestSummary() {
-        SubscriptionInfo subInfo = getSubscriptionInfo();
+    private String getLatestSummary(SubscriptionInfo subInfo) {
         return Objects.toString((subInfo == null) ? null
                 : SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, mContext), "");
     }
@@ -144,19 +154,34 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
                 CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL, false);
     }
 
-    private ImsMmTelManager getImsMmTelManager() {
-        if (!SubscriptionManager.isUsableSubscriptionId(mSubId)) {
+    private ImsMmTelManager getImsMmTelManager(int subId) {
+        if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             return null;
         }
         ImsManager imsMgr = mContext.getSystemService(ImsManager.class);
-        return (imsMgr == null) ? null : imsMgr.getImsMmTelManager(mSubId);
+        return (imsMgr == null) ? null : imsMgr.getImsMmTelManager(subId);
     }
 
-    private SubscriptionInfo getSubscriptionInfo() {
-        SubscriptionManager subInfoMgr = mContext.getSystemService(SubscriptionManager.class);
-        if (subInfoMgr == null) {
+    private List<SubscriptionInfo> getActiveSubscriptionList() {
+        SubscriptionManager subscriptionManager =
+                mContext.getSystemService(SubscriptionManager.class);
+        return SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
+    }
+
+    private SubscriptionInfo getSubscriptionInfoFromList(
+            List<SubscriptionInfo> subInfoList, int subId) {
+        for (SubscriptionInfo subInfo : subInfoList) {
+            if ((subInfo != null) && (subInfo.getSubscriptionId() == subId)) {
+                return subInfo;
+            }
+        }
+        return null;
+    }
+
+    private SubscriptionInfo getSubscriptionInfoFromActiveList(int subId) {
+        if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             return null;
         }
-        return subInfoMgr.getActiveSubscriptionInfo(mSubId);
+        return getSubscriptionInfoFromList(getActiveSubscriptionList(), subId);
     }
 }
