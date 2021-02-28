@@ -31,21 +31,28 @@
         android:title="@string/notification_access_detail_switch"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.ApprovalPreferenceController"/>
 
-    <MultiSelectListPreference
-        android:key="notification_type_filter"
-        android:title="@string/notification_listener_type_title"
-        android:entries="@array/notif_types_titles"
-        android:entryValues="@array/notif_types_values"
-        android:summary="%s"
-        android:persistent="false"
-        style="@style/SettingsMultiSelectListPreference"
-        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.TypeFilterPreferenceController"/>/>
+    <CheckBoxPreference
+        android:key="type_filter_ongoing"
+        android:title="@string/notif_type_ongoing"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.OngoingTypeFilterPreferenceController"/>/>
+    <CheckBoxPreference
+        android:key="type_filter_conversation"
+        android:title="@string/notif_type_conversation"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.ConversationTypeFilterPreferenceController"/>/>
+    <CheckBoxPreference
+        android:key="type_filter_alerting"
+        android:title="@string/notif_type_alerting"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.AlertingTypeFilterPreferenceController"/>/>
+    <CheckBoxPreference
+        android:key="type_filter_silent"
+        android:title="@string/notif_type_silent"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.SilentTypeFilterPreferenceController"/>/>
 
-        <Preference
-            android:key="bridged_apps"
-            android:title="@string/notif_listener_excluded_app_title"
-            android:fragment="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsSettings"
-            settings:searchable="false"
-            settings:controller="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsPreferenceController" />
+    <Preference
+        android:key="bridged_apps"
+        android:title="@string/notif_listener_excluded_app_title"
+        android:fragment="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsSettings"
+        settings:searchable="false"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsPreferenceController" />
 
 </PreferenceScreen>

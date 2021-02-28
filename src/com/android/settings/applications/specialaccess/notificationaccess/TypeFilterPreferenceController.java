@@ -16,35 +16,31 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
-import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_ALERTING;
-import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_CONVERSATIONS;
-import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_ONGOING;
-import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_SILENT;
-
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ServiceInfo;
 import android.service.notification.NotificationListenerFilter;
+import android.service.notification.NotificationListenerService;
+import android.text.TextUtils;
 
-import androidx.preference.MultiSelectListPreference;
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class TypeFilterPreferenceController extends BasePreferenceController implements
+public abstract class TypeFilterPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "TypeFilterPrefCntlr";
+    private static final String XML_SEPARATOR = ",";
 
     private ComponentName mCn;
     private int mUserId;
     private NotificationBackend mNm;
     private NotificationListenerFilter mNlf;
+    private ServiceInfo mSi;
 
     public TypeFilterPreferenceController(Context context, String key) {
         super(context, key);
@@ -65,6 +61,13 @@ public class TypeFilterPreferenceController extends BasePreferenceController imp
         return this;
     }
 
+    public TypeFilterPreferenceController setServiceInfo(ServiceInfo si) {
+        mSi = si;
+        return this;
+    }
+
+    abstract protected int getType();
+
     @Override
     public int getAvailabilityStatus() {
         if (mNm.isNotificationListenerAccessGranted(mCn)) {
@@ -74,54 +77,8 @@ public class TypeFilterPreferenceController extends BasePreferenceController imp
         }
     }
 
-    @Override
-    public void updateState(Preference pref) {
-        mNlf = mNm.getListenerFilter(mCn, mUserId);
-        Set<String> values = new HashSet<>();
-        Set<String> entries = new HashSet<>();
-
-        if (hasFlag(mNlf.getTypes(), FLAG_FILTER_TYPE_ONGOING)) {
-            values.add(String.valueOf(FLAG_FILTER_TYPE_ONGOING));
-            entries.add(mContext.getString(R.string.notif_type_ongoing));
-        }
-        if (hasFlag(mNlf.getTypes(), FLAG_FILTER_TYPE_CONVERSATIONS)) {
-            values.add(String.valueOf(FLAG_FILTER_TYPE_CONVERSATIONS));
-            entries.add(mContext.getString(R.string.notif_type_conversation));
-        }
-        if (hasFlag(mNlf.getTypes(), FLAG_FILTER_TYPE_ALERTING)) {
-            values.add(String.valueOf(FLAG_FILTER_TYPE_ALERTING));
-            entries.add(mContext.getString(R.string.notif_type_alerting));
-        }
-        if (hasFlag(mNlf.getTypes(), FLAG_FILTER_TYPE_SILENT)) {
-            values.add(String.valueOf(FLAG_FILTER_TYPE_SILENT));
-            entries.add(mContext.getString(R.string.notif_type_silent));
-        }
-
-        final MultiSelectListPreference preference = (MultiSelectListPreference) pref;
-        preference.setValues(values);
-        super.updateState(preference);
-        pref.setEnabled(getAvailabilityStatus() == AVAILABLE);
-    }
-
     private boolean hasFlag(int value, int flag) {
         return (value & flag) != 0;
-    }
-
-    public CharSequence getSummary() {
-        Set<String> entries = new HashSet<>();
-        if (hasFlag(mNlf.getTypes(), FLAG_FILTER_TYPE_ONGOING)) {
-            entries.add(mContext.getString(R.string.notif_type_ongoing));
-        }
-        if (hasFlag(mNlf.getTypes(), FLAG_FILTER_TYPE_CONVERSATIONS)) {
-            entries.add(mContext.getString(R.string.notif_type_conversation));
-        }
-        if (hasFlag(mNlf.getTypes(), FLAG_FILTER_TYPE_ALERTING)) {
-            entries.add(mContext.getString(R.string.notif_type_alerting));
-        }
-        if (hasFlag(mNlf.getTypes(), FLAG_FILTER_TYPE_SILENT)) {
-            entries.add(mContext.getString(R.string.notif_type_silent));
-        }
-        return String.join(System.lineSeparator(), entries);
     }
 
     @Override
@@ -129,16 +86,53 @@ public class TypeFilterPreferenceController extends BasePreferenceController imp
         // retrieve latest in case the package filter has changed
         mNlf = mNm.getListenerFilter(mCn, mUserId);
 
-        Set<String> set = (Set<String>) newValue;
+        boolean enabled = (boolean) newValue;
 
-        int newFilter = 0;
-        for (String filterType : set) {
-            newFilter |= Integer.parseInt(filterType);
+        int newFilter = mNlf.getTypes();
+        if (enabled) {
+            newFilter |= getType();
+        } else {
+            newFilter &= ~getType();
         }
         mNlf.setTypes(newFilter);
-        preference.setSummary(getSummary());
         mNm.setListenerFilter(mCn, mUserId, mNlf);
         return true;
     }
 
+    @Override
+    public void updateState(Preference pref) {
+        mNlf = mNm.getListenerFilter(mCn, mUserId);
+
+        CheckBoxPreference check = (CheckBoxPreference) pref;
+        check.setChecked(hasFlag(mNlf.getTypes(), getType()));
+
+        boolean disableRequestedByApp = false;
+        if (mSi != null) {
+            if (mSi.metaData != null && mSi.metaData.containsKey(
+                    NotificationListenerService.META_DATA_DISABLED_FILTER_TYPES)) {
+                String typeList = mSi.metaData.get(
+                        NotificationListenerService.META_DATA_DISABLED_FILTER_TYPES).toString();
+                if (typeList != null) {
+                    int types = 0;
+                    String[] typeStrings = typeList.split(XML_SEPARATOR);
+                    for (int i = 0; i < typeStrings.length; i++) {
+                        if (TextUtils.isEmpty(typeStrings[i])) {
+                            continue;
+                        }
+                        try {
+                            types |= Integer.parseInt(typeStrings[i]);
+                        } catch (NumberFormatException e) {
+                            // skip
+                        }
+                    }
+                    if (hasFlag(types, getType())) {
+                        disableRequestedByApp = true;
+                    }
+                }
+            }
+        }
+        // Apps can prevent a category from being turned on, but not turned off
+        boolean disabledByApp = disableRequestedByApp && !check.isChecked();
+        pref.setEnabled(getAvailabilityStatus() == AVAILABLE && !disabledByApp);
+    }
 }
