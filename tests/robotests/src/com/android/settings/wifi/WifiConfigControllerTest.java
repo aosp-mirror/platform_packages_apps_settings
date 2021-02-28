@@ -21,7 +21,6 @@ import static com.android.settings.wifi.WifiConfigController.PRIVACY_SPINNER_IND
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
@@ -34,8 +33,6 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
-import android.os.ServiceSpecificException;
-import android.security.KeyStore;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -77,8 +74,6 @@ public class WifiConfigControllerTest {
     private Context mContext;
     @Mock
     private AccessPoint mAccessPoint;
-    @Mock
-    private KeyStore mKeyStore;
     private View mView;
     private Spinner mHiddenSettingsSpinner;
     private ShadowSubscriptionManager mShadowSubscriptionManager;
@@ -267,27 +262,11 @@ public class WifiConfigControllerTest {
     }
 
     @Test
-    public void loadCertificates_keyStoreListFail_shouldNotCrash() {
-        // Set up
-        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
-        when(mKeyStore.list(anyString()))
-            .thenThrow(new ServiceSpecificException(-1, "permission error"));
-
-        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
-              WifiConfigUiBase.MODE_CONNECT);
-
-        // Verify that the EAP method menu is visible.
-        assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.VISIBLE);
-        // No Crash
-    }
-
-    @Test
     public void loadCertificates_undesiredCertificates_shouldNotLoadUndesiredCertificates() {
         final Spinner spinner = new Spinner(mContext);
-        when(mKeyStore.list(anyString())).thenReturn(WifiConfigController.UNDESIRED_CERTIFICATES);
 
         mController.loadCertificates(spinner,
-                "prefix",
+                Arrays.asList(WifiConfigController.UNDESIRED_CERTIFICATES),
                 "doNotProvideEapUserCertString",
                 false /* showMultipleCerts */,
                 false /* showUsePreinstalledCertOption */);
@@ -412,8 +391,6 @@ public class WifiConfigControllerTest {
             super(parent, view, accessPoint, mode, wifiManager);
         }
 
-        @Override
-        KeyStore getKeyStore() { return mKeyStore; }
     }
 
     @Test
