@@ -131,28 +131,28 @@ public class StorageEntryTest {
         final StorageEntry storage = new StorageEntry(mContext, volumeInfo);
 
         assertThat(storage.isVolumeInfo()).isTrue();
-        assertThat(storage.isUnsupportedDiskInfo()).isFalse();
-        assertThat(storage.isMissingVolumeRecord()).isFalse();
+        assertThat(storage.isDiskInfoUnsupported()).isFalse();
+        assertThat(storage.isVolumeRecordMissed()).isFalse();
     }
 
     @Test
-    public void isUnsupportedDiskInfo_shouldReturnTrueForDiskInfo() {
+    public void isDiskInfoUnsupported_shouldReturnTrueForDiskInfo() {
         final DiskInfo diskInfo = mock(DiskInfo.class);
         final StorageEntry storage = new StorageEntry(diskInfo);
 
         assertThat(storage.isVolumeInfo()).isFalse();
-        assertThat(storage.isUnsupportedDiskInfo()).isTrue();
-        assertThat(storage.isMissingVolumeRecord()).isFalse();
+        assertThat(storage.isDiskInfoUnsupported()).isTrue();
+        assertThat(storage.isVolumeRecordMissed()).isFalse();
     }
 
     @Test
-    public void isMissingVolumeRecord_shouldReturnTrueForVolumeRecord() {
+    public void isVolumeRecordMissed_shouldReturnTrueForVolumeRecord() {
         final VolumeRecord volumeRecord = mock(VolumeRecord.class);
         final StorageEntry storage = new StorageEntry(volumeRecord);
 
         assertThat(storage.isVolumeInfo()).isFalse();
-        assertThat(storage.isUnsupportedDiskInfo()).isFalse();
-        assertThat(storage.isMissingVolumeRecord()).isTrue();
+        assertThat(storage.isDiskInfoUnsupported()).isFalse();
+        assertThat(storage.isVolumeRecordMissed()).isTrue();
     }
 
     @Test

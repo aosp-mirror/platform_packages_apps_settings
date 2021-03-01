@@ -17,11 +17,9 @@
 package com.android.settings.deviceinfo;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -38,26 +36,24 @@ import android.util.SparseArray;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
+import com.android.settings.deviceinfo.storage.DiskInitFragment;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageEntry;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController;
+import com.android.settings.deviceinfo.storage.StorageUtils;
 import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.overlay.FeatureFactory;
@@ -96,7 +92,7 @@ public class StorageDashboardFragment extends DashboardFragment
     private CachedStorageValuesHelper mCachedStorageValuesHelper;
 
     private StorageItemPreferenceController mPreferenceController;
-    private PrivateVolumeOptionMenuController mOptionMenuController;
+    private VolumeOptionMenuController mOptionMenuController;
     private StorageSelectionPreferenceController mStorageSelectionController;
     private StorageUsageProgressBarPreferenceController mStorageUsageProgressBarController;
     private List<AbstractPreferenceController> mSecondaryUsers;
@@ -110,22 +106,31 @@ public class StorageDashboardFragment extends DashboardFragment
                 return;
             }
 
-            final StorageEntry storageEntry = new StorageEntry(getContext(), volumeInfo);
+            final StorageEntry changedStorageEntry = new StorageEntry(getContext(), volumeInfo);
             switch (volumeInfo.getState()) {
                 case VolumeInfo.STATE_MOUNTED:
                 case VolumeInfo.STATE_MOUNTED_READ_ONLY:
                 case VolumeInfo.STATE_UNMOUNTABLE:
-                    if (!mStorageEntries.contains(storageEntry)) {
-                        mStorageEntries.add(storageEntry);
-                        refreshUi();
+                    // Add mounted or unmountable storage in the list and show it on spinner.
+                    // Unmountable storages are the storages which has a problem format and android
+                    // is not able to mount it automatically.
+                    // Users can format an unmountable storage by the UI and then use the storage.
+                    mStorageEntries.removeIf(storageEntry -> {
+                        return storageEntry.equals(changedStorageEntry);
+                    });
+                    mStorageEntries.add(changedStorageEntry);
+                    if (changedStorageEntry.equals(mSelectedStorageEntry)) {
+                        mSelectedStorageEntry = changedStorageEntry;
                     }
+                    refreshUi();
                     break;
                 case VolumeInfo.STATE_REMOVED:
                 case VolumeInfo.STATE_UNMOUNTED:
                 case VolumeInfo.STATE_BAD_REMOVAL:
                 case VolumeInfo.STATE_EJECTING:
-                    if (mStorageEntries.remove(storageEntry)) {
-                        if (mSelectedStorageEntry.equals(storageEntry)) {
+                    // Remove removed storage from list and don't show it on spinner.
+                    if (mStorageEntries.remove(changedStorageEntry)) {
+                        if (changedStorageEntry.equals(mSelectedStorageEntry)) {
                             mSelectedStorageEntry =
                                     StorageEntry.getDefaultInternalStorageEntry(getContext());
                         }
@@ -139,10 +144,32 @@ public class StorageDashboardFragment extends DashboardFragment
 
         @Override
         public void onVolumeRecordChanged(VolumeRecord volumeRecord) {
-            final StorageEntry storageEntry = new StorageEntry(volumeRecord);
-            if (!mStorageEntries.contains(storageEntry)) {
-                mStorageEntries.add(storageEntry);
-                refreshUi();
+            if (isVolumeRecordMissed(volumeRecord)) {
+                // VolumeRecord is a metadata of VolumeInfo, if a VolumeInfo is missing
+                // (e.g., internal SD card is removed.) show the missing storage to users,
+                // users can insert the SD card or manually forget the storage from the device.
+                final StorageEntry storageEntry = new StorageEntry(volumeRecord);
+                if (!mStorageEntries.contains(storageEntry)) {
+                    mStorageEntries.add(storageEntry);
+                    refreshUi();
+                }
+            } else {
+                // Find mapped VolumeInfo and replace with existing one for something changed.
+                // (e.g., Renamed.)
+                final VolumeInfo mappedVolumeInfo =
+                            mStorageManager.findVolumeByUuid(volumeRecord.getFsUuid());
+                if (mappedVolumeInfo == null) {
+                    return;
+                }
+
+                final boolean removeMappedStorageEntry = mStorageEntries.removeIf(storageEntry ->
+                        storageEntry.isVolumeInfo()
+                            && TextUtils.equals(storageEntry.getFsUuid(), volumeRecord.getFsUuid())
+                );
+                if (removeMappedStorageEntry) {
+                    mStorageEntries.add(new StorageEntry(getContext(), mappedVolumeInfo));
+                    refreshUi();
+                }
             }
         }
 
@@ -161,7 +188,7 @@ public class StorageDashboardFragment extends DashboardFragment
 
         @Override
         public void onDiskScanned(DiskInfo disk, int volumeCount) {
-            if (!isInteresting(disk)) {
+            if (!isDiskUnsupported(disk)) {
                 return;
             }
             final StorageEntry storageEntry = new StorageEntry(disk);
@@ -195,8 +222,19 @@ public class StorageDashboardFragment extends DashboardFragment
         }
     }
 
-    // Only interested in unsupported disk.
-    private static boolean isInteresting(DiskInfo disk) {
+    /**
+     * VolumeRecord is a metadata of VolumeInfo, this is the case where a VolumeInfo is missing.
+     * (e.g., internal SD card is removed.)
+     */
+    private boolean isVolumeRecordMissed(VolumeRecord volumeRecord) {
+        return volumeRecord.getType() == VolumeInfo.TYPE_PRIVATE
+                && mStorageManager.findVolumeByUuid(volumeRecord.getFsUuid()) == null;
+    }
+
+    /**
+     * A unsupported disk is the disk of problem format, android is not able to mount automatically.
+     */
+    private static boolean isDiskUnsupported(DiskInfo disk) {
         return disk.volumeCount == 0 && disk.size > 0;
     }
 
@@ -205,7 +243,8 @@ public class StorageDashboardFragment extends DashboardFragment
         mStorageSelectionController.setSelectedStorageEntry(mSelectedStorageEntry);
         mStorageUsageProgressBarController.setSelectedStorageEntry(mSelectedStorageEntry);
 
-        mOptionMenuController.setVolumeInfo(mSelectedStorageEntry.getVolumeInfo());
+        mOptionMenuController.setSelectedStorageEntry(mSelectedStorageEntry);
+        getActivity().invalidateOptionsMenu();
 
         mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
 
@@ -263,18 +302,11 @@ public class StorageDashboardFragment extends DashboardFragment
             mSelectedStorageEntry = storageEntry;
             refreshUi();
 
-            if (storageEntry.isUnsupportedDiskInfo() || storageEntry.isUnmountable()) {
+            if (storageEntry.isDiskInfoUnsupported() || storageEntry.isUnmountable()) {
                 DiskInitFragment.show(this, R.string.storage_dialog_unmountable,
                         storageEntry.getDiskId());
-            } else if (storageEntry.isMissingVolumeRecord()) {
-                final Bundle args = new Bundle();
-                args.putString(VolumeRecord.EXTRA_FS_UUID, storageEntry.getFsUuid());
-                new SubSettingLauncher(getContext())
-                        .setDestination(PrivateVolumeForget.class.getCanonicalName())
-                        .setTitleRes(R.string.storage_menu_forget)
-                        .setSourceMetricsCategory(getMetricsCategory())
-                        .setArguments(args)
-                        .launch();
+            } else if (storageEntry.isVolumeRecordMissed()) {
+                StorageUtils.launchForgetMissingVolumeRecordFragment(getContext(), storageEntry);
             }
         });
         mStorageUsageProgressBarController = use(StorageUsageProgressBarPreferenceController.class);
@@ -282,9 +314,8 @@ public class StorageDashboardFragment extends DashboardFragment
 
     @VisibleForTesting
     void initializeOptionsMenu(Activity activity) {
-        mOptionMenuController = new PrivateVolumeOptionMenuController(activity,
-                mSelectedStorageEntry.getVolumeInfo(),
-                activity.getPackageManager());
+        mOptionMenuController = new VolumeOptionMenuController(activity, this,
+                mSelectedStorageEntry);
         getSettingsLifecycle().addObserver(mOptionMenuController);
         setHasOptionsMenu(true);
         activity.invalidateOptionsMenu();
@@ -312,15 +343,12 @@ public class StorageDashboardFragment extends DashboardFragment
                 .filter(volumeInfo -> isInteresting(volumeInfo))
                 .map(volumeInfo -> new StorageEntry(getContext(), volumeInfo))
                 .collect(Collectors.toList()));
-        // Shows unsupported disks to give a chance to init.
         mStorageEntries.addAll(mStorageManager.getDisks().stream()
-                .filter(disk -> isInteresting(disk))
+                .filter(disk -> isDiskUnsupported(disk))
                 .map(disk -> new StorageEntry(disk))
                 .collect(Collectors.toList()));
-        // Shows missing private volumes.
         mStorageEntries.addAll(mStorageManager.getVolumeRecords().stream()
-                .filter(volumeRecord -> volumeRecord.getType() == VolumeInfo.TYPE_PRIVATE
-                        && mStorageManager.findVolumeByUuid(volumeRecord.getFsUuid()) == null)
+                .filter(volumeRecord -> isVolumeRecordMissed(volumeRecord))
                 .map(volumeRecord -> new StorageEntry(volumeRecord))
                 .collect(Collectors.toList()));
         refreshUi();
@@ -617,54 +645,6 @@ public class StorageDashboardFragment extends DashboardFragment
             mStorageInfo = privateStorageInfo;
             maybeCacheFreshValues();
             onReceivedSizes();
-        }
-    }
-
-    /** A dialog which guides users to initialize a specified unsupported disk. */
-    public static class DiskInitFragment extends InstrumentedDialogFragment {
-
-        private static final String TAG_DISK_INIT = "disk_init";
-
-        @Override
-        public int getMetricsCategory() {
-            return SettingsEnums.DIALOG_VOLUME_INIT;
-        }
-
-        /** Shows the dialo for the specified diskId from DiskInfo. */
-        public static void show(Fragment parent, int resId, String diskId) {
-            final Bundle args = new Bundle();
-            args.putInt(Intent.EXTRA_TEXT, resId);
-            args.putString(DiskInfo.EXTRA_DISK_ID, diskId);
-
-            final DiskInitFragment dialog = new DiskInitFragment();
-            dialog.setArguments(args);
-            dialog.setTargetFragment(parent, 0);
-            dialog.show(parent.getFragmentManager(), TAG_DISK_INIT);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Context context = getActivity();
-            final StorageManager storageManager = context.getSystemService(StorageManager.class);
-            final int resId = getArguments().getInt(Intent.EXTRA_TEXT);
-            final String diskId = getArguments().getString(DiskInfo.EXTRA_DISK_ID);
-            final DiskInfo disk = storageManager.findDiskById(diskId);
-
-            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage(TextUtils.expandTemplate(getText(resId), disk.getDescription()));
-
-            builder.setPositiveButton(R.string.storage_menu_set_up,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            final Intent intent = new Intent(context, StorageWizardInit.class);
-                            intent.putExtra(DiskInfo.EXTRA_DISK_ID, diskId);
-                            startActivity(intent);
-                        }
-                    });
-            builder.setNegativeButton(R.string.cancel, null);
-
-            return builder.create();
         }
     }
 }

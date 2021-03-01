@@ -106,7 +106,7 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         if (isVolumeInfo()) {
             return mVolumeInfo.equals(StorageEntry.mVolumeInfo);
         }
-        if (isUnsupportedDiskInfo()) {
+        if (isDiskInfoUnsupported()) {
             return mUnsupportedDiskInfo.equals(StorageEntry.mUnsupportedDiskInfo);
         }
         return mMissingVolumeRecord.equals(StorageEntry.mMissingVolumeRecord);
@@ -117,7 +117,7 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         if (isVolumeInfo()) {
             return mVolumeInfo.hashCode();
         }
-        if (isUnsupportedDiskInfo()) {
+        if (isDiskInfoUnsupported()) {
             return mUnsupportedDiskInfo.hashCode();
         }
         return mMissingVolumeRecord.hashCode();
@@ -128,7 +128,7 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         if (isVolumeInfo()) {
             return mVolumeInfo.toString();
         }
-        if (isUnsupportedDiskInfo()) {
+        if (isDiskInfoUnsupported()) {
             return mUnsupportedDiskInfo.toString();
         }
         return mMissingVolumeRecord.toString();
@@ -164,10 +164,10 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
             return 1;
         }
 
-        if (!isMissingVolumeRecord() && other.isMissingVolumeRecord()) {
+        if (!isVolumeRecordMissed() && other.isVolumeRecordMissed()) {
             return -1;
         }
-        if (isMissingVolumeRecord() && !other.isMissingVolumeRecord()) {
+        if (isVolumeRecordMissed() && !other.isVolumeRecordMissed()) {
             return 1;
         }
 
@@ -192,12 +192,12 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
     }
 
     /** If it's an unsupported DiskInfo. */
-    public boolean isUnsupportedDiskInfo() {
+    public boolean isDiskInfoUnsupported() {
         return mUnsupportedDiskInfo != null;
     }
 
     /** If it's a missing VolumeRecord. */
-    public boolean isMissingVolumeRecord() {
+    public boolean isVolumeRecordMissed() {
         return mMissingVolumeRecord != null;
     }
 
@@ -216,6 +216,11 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
                 || mVolumeInfo.getState() == VolumeInfo.STATE_MOUNTED_READ_ONLY);
     }
 
+    /** If it's an unmounted storage. */
+    public boolean isUnmounted() {
+        return mVolumeInfo == null ? false : (mVolumeInfo.getState() == VolumeInfo.STATE_UNMOUNTED);
+    }
+
     /** If it's an unmountable storage. */
     public boolean isUnmountable() {
         return mVolumeInfo == null ? false : mVolumeInfo.getState() == VolumeInfo.STATE_UNMOUNTABLE;
@@ -226,12 +231,17 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         return mVolumeInfo == null ? false : mVolumeInfo.getType() == VolumeInfo.TYPE_PRIVATE;
     }
 
+    /** If it's a public storage. */
+    public boolean isPublic() {
+        return mVolumeInfo == null ? false : mVolumeInfo.getType() == VolumeInfo.TYPE_PUBLIC;
+    }
+
     /** Returns description. */
     public String getDescription() {
         if (isVolumeInfo()) {
             return mVolumeInfoDescription;
         }
-        if (isUnsupportedDiskInfo()) {
+        if (isDiskInfoUnsupported()) {
             return mUnsupportedDiskInfo.getDescription();
         }
         return mMissingVolumeRecord.getNickname();
@@ -242,7 +252,7 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         if (isVolumeInfo()) {
             return mVolumeInfo.getId();
         }
-        if (isUnsupportedDiskInfo()) {
+        if (isDiskInfoUnsupported()) {
             return mUnsupportedDiskInfo.getId();
         }
         return mMissingVolumeRecord.getFsUuid();
@@ -253,7 +263,7 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         if (isVolumeInfo()) {
             return mVolumeInfo.getDiskId();
         }
-        if (isUnsupportedDiskInfo()) {
+        if (isDiskInfoUnsupported()) {
             return mUnsupportedDiskInfo.getId();
         }
         return null;
@@ -264,7 +274,7 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         if (isVolumeInfo()) {
             return mVolumeInfo.getFsUuid();
         }
-        if (isUnsupportedDiskInfo()) {
+        if (isDiskInfoUnsupported()) {
             return null;
         }
         return mMissingVolumeRecord.getFsUuid();
