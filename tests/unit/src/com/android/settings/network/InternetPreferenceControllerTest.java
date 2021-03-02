@@ -16,7 +16,7 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
+import static com.android.settings.network.InternetUpdater.INTERNET_NETWORKS_AVAILABLE;
 import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -119,37 +119,24 @@ public class InternetPreferenceControllerTest {
     }
 
     @Test
-    public void mustUseWiFiHelperSummary_internetWifi_updateSummary() {
+    public void onSummaryChanged_internetWifi_updateSummary() {
         mController.onInternetTypeChanged(INTERNET_WIFI);
         mController.displayPreference(mScreen);
 
-        mController.mustUseWiFiHelperSummary(true /* isWifiConnected */, TEST_SUMMARY);
-
-        assertThat(mPreference.getSummary()).isEqualTo(TEST_SUMMARY);
-
-        mController.mustUseWiFiHelperSummary(false /* isWifiConnected */, NOT_CONNECTED);
-
-        assertThat(mPreference.getSummary()).isEqualTo(NOT_CONNECTED);
-    }
-
-    @Test
-    public void mustUseWiFiHelperSummary_internetApmNetworksWifiConnected_updateSummary() {
-        mController.onInternetTypeChanged(INTERNET_APM_NETWORKS);
-        mController.displayPreference(mScreen);
-
-        mController.mustUseWiFiHelperSummary(true /* isWifiConnected */, TEST_SUMMARY);
+        mController.onSummaryChanged(TEST_SUMMARY);
 
         assertThat(mPreference.getSummary()).isEqualTo(TEST_SUMMARY);
     }
 
     @Test
-    public void mustUseWiFiHelperSummary_internetApmNetworksWifiDisconnected_notUpdateSummary() {
-        mController.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+    public void onSummaryChanged_internetNetworksAvailable_notUpdateSummary() {
+        mController.onInternetTypeChanged(INTERNET_NETWORKS_AVAILABLE);
         mController.displayPreference(mScreen);
+        mPreference.setSummary(NOT_CONNECTED);
 
-        mController.mustUseWiFiHelperSummary(false /* isWifiConnected */, NOT_CONNECTED);
+        mController.onSummaryChanged(TEST_SUMMARY);
 
-        assertThat(mPreference.getSummary()).isNotEqualTo(NOT_CONNECTED);
+        assertThat(mPreference.getSummary()).isNotEqualTo(TEST_SUMMARY);
     }
 
     @Test

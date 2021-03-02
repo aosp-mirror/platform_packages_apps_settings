@@ -49,9 +49,8 @@ import java.util.Collections;
  */
 public class NetworkProviderWorker extends WifiScanWorker implements
         SignalStrengthListener.Callback, MobileDataEnabledListener.Client,
-        DataConnectivityListener.Client,
-        SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
-        InternetUpdater.OnInternetTypeChangedListener {
+        DataConnectivityListener.Client, InternetUpdater.InternetChangeListener,
+        SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "NetworkProviderWorker";
     private static final int PROVIDER_MODEL_DEFAULT_EXPANDED_ROW_COUNT = 4;
     private DataContentObserver mMobileDataObserver;
