@@ -19,10 +19,10 @@ package com.android.settings.network;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
-import static com.android.settings.network.InternetUpdater.INTERNET_APM;
-import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
 import static com.android.settings.network.InternetUpdater.INTERNET_CELLULAR;
 import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
+import static com.android.settings.network.InternetUpdater.INTERNET_NETWORKS_AVAILABLE;
+import static com.android.settings.network.InternetUpdater.INTERNET_OFF;
 import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 
 import android.content.Context;
@@ -53,7 +53,7 @@ import java.util.Map;
  */
 public class InternetPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver, SummaryUpdater.OnSummaryChangeListener,
-        InternetUpdater.OnInternetTypeChangedListener {
+        InternetUpdater.InternetChangeListener {
 
     public static final String KEY = "internet_settings";
 
@@ -65,8 +65,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     @VisibleForTesting
     static Map<Integer, Integer> sIconMap = new HashMap<>();
     static {
-        sIconMap.put(INTERNET_APM, R.drawable.ic_airplanemode_active);
-        sIconMap.put(INTERNET_APM_NETWORKS, R.drawable.ic_airplane_safe_networks_24dp);
+        sIconMap.put(INTERNET_OFF, R.drawable.ic_no_internet_unavailable);
+        sIconMap.put(INTERNET_NETWORKS_AVAILABLE, R.drawable.ic_no_internet_available);
         sIconMap.put(INTERNET_WIFI, R.drawable.ic_wifi_signal_4);
         sIconMap.put(INTERNET_CELLULAR, R.drawable.ic_network_cell);
         sIconMap.put(INTERNET_ETHERNET, R.drawable.ic_settings_ethernet);
@@ -74,8 +74,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
 
     private static Map<Integer, Integer> sSummaryMap = new HashMap<>();
     static {
-        sSummaryMap.put(INTERNET_APM, R.string.condition_airplane_title);
-        sSummaryMap.put(INTERNET_APM_NETWORKS, R.string.airplane_mode_network_available);
+        sSummaryMap.put(INTERNET_OFF, R.string.condition_airplane_title);
+        sSummaryMap.put(INTERNET_NETWORKS_AVAILABLE, R.string.disconnected);
         sSummaryMap.put(INTERNET_WIFI, 0);
         sSummaryMap.put(INTERNET_CELLULAR, 0);
         sSummaryMap.put(INTERNET_ETHERNET, R.string.to_switch_networks_disconnect_ethernet);
@@ -114,13 +114,19 @@ public class InternetPreferenceController extends AbstractPreferenceController i
             }
         }
 
-        if (mustUseWiFiHelperSummary(mSummaryHelper.isWifiConnected(),
-                mSummaryHelper.getSummary())) {
+        if (mInternetType == INTERNET_WIFI) {
+            mPreference.setSummary(mSummaryHelper.getSummary());
             return;
         }
 
         if (mInternetType == INTERNET_CELLULAR) {
             updateCellularSummary();
+            return;
+        }
+
+        if (mInternetType == INTERNET_NETWORKS_AVAILABLE
+                && mInternetUpdater.isApmNetworksAvailable()) {
+            mPreference.setSummary(R.string.airplane_mode_network_available);
             return;
         }
 
@@ -157,6 +163,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
      *
      * @param internetType the internet type
      */
+    @Override
     public void onInternetTypeChanged(@InternetUpdater.InternetType int internetType) {
         final boolean needUpdate = (internetType != mInternetType);
         mInternetType = internetType;
@@ -167,19 +174,21 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         }
     }
 
+    /**
+     * Called when airplane mode state is changed.
+     */
     @Override
-    public void onSummaryChanged(String summary) {
-        mustUseWiFiHelperSummary(mSummaryHelper.isWifiConnected(), summary);
+    public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
+        ThreadUtils.postOnMainThread(() -> {
+            updateState(mPreference);
+        });
     }
 
-    @VisibleForTesting
-    boolean mustUseWiFiHelperSummary(boolean isWifiConnected, String summary) {
-        final boolean needUpdate = (mInternetType == INTERNET_WIFI)
-                || (mInternetType == INTERNET_APM_NETWORKS && isWifiConnected);
-        if (needUpdate && mPreference != null) {
+    @Override
+    public void onSummaryChanged(String summary) {
+        if (mInternetType == INTERNET_WIFI && mPreference != null) {
             mPreference.setSummary(summary);
         }
-        return needUpdate;
     }
 
     @VisibleForTesting
