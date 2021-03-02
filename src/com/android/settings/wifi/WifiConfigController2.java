@@ -166,6 +166,7 @@ public class WifiConfigController2 implements TextWatcher,
     private ScrollView mDialogContainer;
     private Spinner mSecuritySpinner;
     @VisibleForTesting Spinner mEapMethodSpinner;
+    private int mLastShownEapMethod;
     @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
     private Spinner mEapCaCertSpinner;
     private Spinner mEapOcspSpinner;
@@ -1059,6 +1060,7 @@ public class WifiConfigController2 implements TextWatcher,
             final int eapMethod = enterpriseConfig.getEapMethod();
             final int phase2Method = enterpriseConfig.getPhase2Method();
             mEapMethodSpinner.setSelection(eapMethod);
+            mLastShownEapMethod = eapMethod;
             showEapFieldsByMethod(eapMethod);
             switch (eapMethod) {
                 case Eap.PEAP:
@@ -1630,7 +1632,11 @@ public class WifiConfigController2 implements TextWatcher,
                 mSsidScanButton.setVisibility(View.GONE);
             }
         } else if (parent == mEapMethodSpinner) {
-            showSecurityFields(/* refreshEapMethods */ false, /* refreshCertificates */ true);
+            final int selectedItemPosition = mEapMethodSpinner.getSelectedItemPosition();
+            if (mLastShownEapMethod != selectedItemPosition) {
+                mLastShownEapMethod = selectedItemPosition;
+                showSecurityFields(/* refreshEapMethods */ false, /* refreshCertificates */ true);
+            }
         } else if (parent == mEapCaCertSpinner) {
             showSecurityFields(/* refreshEapMethods */ false, /* refreshCertificates */ false);
         } else if (parent == mPhase2Spinner

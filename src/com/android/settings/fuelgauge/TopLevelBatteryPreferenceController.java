@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -30,6 +31,8 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
+    @VisibleForTesting
+    boolean mIsBatteryPresent = true;
     private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     private Preference mPreference;
     private BatteryInfo mBatteryInfo;
@@ -38,6 +41,9 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         super(context, preferenceKey);
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
         mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
+            if (type == BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT) {
+                mIsBatteryPresent = false;
+            }
             BatteryInfo.getBatteryInfo(mContext, info -> {
                 mBatteryInfo = info;
                 updateState(mPreference);
@@ -69,6 +75,10 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
+        // Display help message if battery is not present.
+        if (!mIsBatteryPresent) {
+            return mContext.getText(R.string.battery_missing_message);
+        }
         return getDashboardLabel(mContext, mBatteryInfo);
     }
 
