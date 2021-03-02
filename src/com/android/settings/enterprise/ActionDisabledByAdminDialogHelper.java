@@ -16,6 +16,8 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_FINANCED;
+
 import android.annotation.NonNull;
 import android.annotation.UserIdInt;
 import android.app.Activity;
@@ -119,24 +121,11 @@ public class ActionDisabledByAdminDialogHelper {
         if (admin == null) {
             return;
         }
-        ImageView supportIconView = root.requireViewById(R.id.admin_support_icon);
-        if (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
-                || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId)) {
+
+        setAdminSupportIcon(root, admin, userId);
+
+        if (isNotCurrentUserOrProfile(admin, userId)) {
             admin = null;
-
-            supportIconView.setImageDrawable(
-                    mActivity.getDrawable(com.android.internal.R.drawable.ic_info));
-
-            TypedArray ta = mActivity.obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
-            supportIconView.setImageTintList(ColorStateList.valueOf(ta.getColor(0, 0)));
-            ta.recycle();
-        } else {
-            final Drawable badgedIcon = Utils.getBadgedIcon(
-                    IconDrawableFactory.newInstance(mActivity),
-                    mActivity.getPackageManager(),
-                    admin.getPackageName(),
-                    userId);
-            supportIconView.setImageDrawable(badgedIcon);
         }
 
         setAdminSupportTitle(root, restriction);
@@ -151,10 +140,42 @@ public class ActionDisabledByAdminDialogHelper {
         setAdminSupportDetails(mActivity, root, new EnforcedAdmin(admin, user));
     }
 
+    private boolean isNotCurrentUserOrProfile(ComponentName admin, int userId) {
+        return !isFinancedDevice()
+                && (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
+                        || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId));
+    }
+
+    @VisibleForTesting
+    void setAdminSupportIcon(View root, ComponentName admin, int userId) {
+        ImageView supportIconView = root.requireViewById(R.id.admin_support_icon);
+        if (isFinancedDevice()) {
+            supportIconView.setVisibility(View.GONE);
+        } else if (isNotCurrentUserOrProfile(admin, userId)) {
+            supportIconView.setImageDrawable(
+                    mActivity.getDrawable(com.android.internal.R.drawable.ic_info));
+
+            TypedArray ta = mActivity.obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
+            supportIconView.setImageTintList(ColorStateList.valueOf(ta.getColor(0, 0)));
+            ta.recycle();
+        } else {
+            final Drawable badgedIcon = Utils.getBadgedIcon(
+                    IconDrawableFactory.newInstance(mActivity),
+                    mActivity.getPackageManager(),
+                    admin.getPackageName(),
+                    userId);
+            supportIconView.setImageDrawable(badgedIcon);
+        }
+    }
+
     @VisibleForTesting
     void setAdminSupportTitle(View root, String restriction) {
         final TextView titleView = root.findViewById(R.id.admin_support_dialog_title);
         if (titleView == null) {
+            return;
+        }
+        if (isFinancedDevice()) {
+            titleView.setText(R.string.disabled_by_policy_title_financed_device);
             return;
         }
         if (restriction == null) {
@@ -195,6 +216,7 @@ public class ActionDisabledByAdminDialogHelper {
 
         final DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
+        CharSequence supportMessage = null;
         if (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(activity,
                 enforcedAdmin.component) || !RestrictedLockUtils.isCurrentUserOrProfile(
                 activity, getEnforcementAdminUserId(enforcedAdmin))) {
@@ -203,15 +225,16 @@ public class ActionDisabledByAdminDialogHelper {
             if (enforcedAdmin.user == null) {
                 enforcedAdmin.user = UserHandle.of(UserHandle.myUserId());
             }
-            CharSequence supportMessage = null;
             if (UserHandle.isSameApp(Process.myUid(), Process.SYSTEM_UID)) {
                 supportMessage = dpm.getShortSupportMessageForUser(enforcedAdmin.component,
                         getEnforcementAdminUserId(enforcedAdmin));
             }
-            if (supportMessage != null) {
-                final TextView textView = root.findViewById(R.id.admin_support_msg);
-                textView.setText(supportMessage);
-            }
+        }
+        final TextView textView = root.findViewById(R.id.admin_support_msg);
+        if (supportMessage != null) {
+            textView.setText(supportMessage);
+        } else if (!isFinancedDevice()) {
+            textView.setText(R.string.default_admin_support_msg);
         }
     }
 
@@ -232,5 +255,11 @@ public class ActionDisabledByAdminDialogHelper {
             // admins so show as same user as this activity.
             activity.startActivity(intent);
         }
+    }
+
+    private boolean isFinancedDevice() {
+        final DevicePolicyManager dpm = mActivity.getSystemService(DevicePolicyManager.class);
+        return dpm.isDeviceManaged() && dpm.getDeviceOwnerType(
+                dpm.getDeviceOwnerComponentOnAnyUser()) == DEVICE_OWNER_TYPE_FINANCED;
     }
 }
