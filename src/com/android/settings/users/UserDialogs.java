@@ -92,8 +92,7 @@ public final class UserDialogs {
         View view = inflater.inflate(R.layout.delete_managed_profile_dialog, null);
         ImageView imageView =
                 (ImageView) view.findViewById(R.id.delete_managed_profile_mdm_icon_view);
-        Drawable badgedApplicationIcon = packageManager.getUserBadgedIcon(
-                packageManager.getApplicationIcon(mdmApplicationInfo), new UserHandle(userId));
+        Drawable badgedApplicationIcon = packageManager.getApplicationIcon(mdmApplicationInfo);
         imageView.setImageDrawable(badgedApplicationIcon);
 
         CharSequence appLabel = packageManager.getApplicationLabel(mdmApplicationInfo);
