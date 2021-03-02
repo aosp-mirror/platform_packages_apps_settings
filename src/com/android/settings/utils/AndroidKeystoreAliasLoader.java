@@ -81,11 +81,10 @@ public class AndroidKeystoreAliasLoader {
             return;
         }
 
-
         while (aliases.hasMoreElements()) {
-            String alias = aliases.nextElement();
+            final String alias = aliases.nextElement();
             try {
-                Key key = keyStore.getKey(alias, null);
+                final Key key = keyStore.getKey(alias, null);
                 if (key != null) {
                     if (key instanceof PrivateKey) {
                         mKeyCertAliases.add(alias);
