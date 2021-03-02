@@ -16,12 +16,6 @@
 
 package com.android.settings.panel;
 
-import static com.android.settings.network.InternetUpdater.INTERNET_APM;
-import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
-import static com.android.settings.network.InternetUpdater.INTERNET_CELLULAR;
-import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
-import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.clearInvocations;
@@ -78,79 +72,70 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getTitle_internetApmNetworks_shouldBeApmNetworks() {
-        mPanel.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+    public void getTitle_apmOnApmNetworksOff_shouldBeInternet() {
+        mPanel.onAirplaneModeChanged(true);
+        mPanel.onAirplaneModeNetworksChanged(false);
+
+        assertThat(mPanel.getTitle()).isEqualTo(TITLE_INTERNET);
+    }
+
+    @Test
+    public void getTitle_apmOnApmNetworksOn_shouldBeApmNetworks() {
+        mPanel.onAirplaneModeChanged(true);
+        mPanel.onAirplaneModeNetworksChanged(true);
 
         assertThat(mPanel.getTitle()).isEqualTo(TITLE_APM_NETWORKS);
     }
 
     @Test
     public void getTitle_notInternetApmNetworks_shouldBeInternet() {
-        mPanel.onInternetTypeChanged(INTERNET_APM);
-
-        assertThat(mPanel.getTitle()).isEqualTo(TITLE_INTERNET);
-
-        mPanel.onInternetTypeChanged(INTERNET_WIFI);
-
-        assertThat(mPanel.getTitle()).isEqualTo(TITLE_INTERNET);
-
-        mPanel.onInternetTypeChanged(INTERNET_CELLULAR);
-
-        assertThat(mPanel.getTitle()).isEqualTo(TITLE_INTERNET);
-
-        mPanel.onInternetTypeChanged(INTERNET_ETHERNET);
+        mPanel.onAirplaneModeNetworksChanged(false);
 
         assertThat(mPanel.getTitle()).isEqualTo(TITLE_INTERNET);
     }
 
     @Test
-    public void getSubTitle_internetApm_shouldBeApmIsOn() {
-        mPanel.onInternetTypeChanged(INTERNET_APM);
+    public void getSubTitle_apmOnApmNetworksOff_shouldBeApmIsOn() {
+        mPanel.onAirplaneModeChanged(true);
+        mPanel.onAirplaneModeNetworksChanged(false);
 
         assertThat(mPanel.getSubTitle()).isEqualTo(SUBTITLE_APM_IS_ON);
     }
 
     @Test
-    public void getSubTitle_notinternetApm_shouldBeNull() {
-        mPanel.onInternetTypeChanged(INTERNET_APM_NETWORKS);
-
-        assertThat(mPanel.getSubTitle()).isNull();
-
-        mPanel.onInternetTypeChanged(INTERNET_WIFI);
-
-        assertThat(mPanel.getSubTitle()).isNull();
-
-        mPanel.onInternetTypeChanged(INTERNET_CELLULAR);
-
-        assertThat(mPanel.getSubTitle()).isNull();
-
-        mPanel.onInternetTypeChanged(INTERNET_ETHERNET);
+    public void getSubTitle_apmOnApmNetworksOn_shouldBeNull() {
+        mPanel.onAirplaneModeChanged(true);
+        mPanel.onAirplaneModeNetworksChanged(true);
 
         assertThat(mPanel.getSubTitle()).isNull();
     }
 
     @Test
-    public void getCustomizedButtonTitle_internetApm_shouldBeNull() {
-        mPanel.onInternetTypeChanged(INTERNET_APM);
+    public void getSubTitle_apmOff_shouldBeNull() {
+        mPanel.onAirplaneModeChanged(false);
+
+        assertThat(mPanel.getSubTitle()).isNull();
+    }
+
+    @Test
+    public void getCustomizedButtonTitle_apmOnApmNetworksOff_shouldBeNull() {
+        mPanel.onAirplaneModeChanged(true);
+        mPanel.onAirplaneModeNetworksChanged(false);
 
         assertThat(mPanel.getCustomizedButtonTitle()).isNull();
     }
 
     @Test
-    public void getCustomizedButtonTitle_notInternetApm_shouldBeSettings() {
-        mPanel.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+    public void getCustomizedButtonTitle_apmOnApmNetworksOn_shouldBeSettings() {
+        mPanel.onAirplaneModeChanged(true);
+        mPanel.onAirplaneModeNetworksChanged(true);
 
         assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_SETTINGS);
+    }
 
-        mPanel.onInternetTypeChanged(INTERNET_WIFI);
-
-        assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_SETTINGS);
-
-        mPanel.onInternetTypeChanged(INTERNET_CELLULAR);
-
-        assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_SETTINGS);
-
-        mPanel.onInternetTypeChanged(INTERNET_ETHERNET);
+    @Test
+    public void getCustomizedButtonTitle_apmOff_shouldBeSettings() {
+        mPanel.onAirplaneModeChanged(false);
 
         assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_SETTINGS);
     }
@@ -181,44 +166,46 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void onInternetTypeChanged_internetTypeChangedToApm_changeHeaderAndHideSettings() {
-        mPanel.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+    public void onAirplaneModeOn_apmNetworksOff_changeHeaderAndHideSettings() {
+        mPanel.onAirplaneModeNetworksChanged(false);
         clearInvocations(mPanelContentCallback);
 
-        mPanel.onInternetTypeChanged(INTERNET_APM);
+        mPanel.onAirplaneModeChanged(true);
 
         verify(mPanelContentCallback).onHeaderChanged();
         verify(mPanelContentCallback).onCustomizedButtonStateChanged();
     }
 
     @Test
-    public void onInternetTypeChanged_internetTypeChangedFomApm_changeTitleAndShowSettings() {
-        mPanel.onInternetTypeChanged(INTERNET_APM);
+    public void onAirplaneModeOn_apmNetworksOn_changeTitleAndShowSettings() {
+        mPanel.onAirplaneModeNetworksChanged(true);
         clearInvocations(mPanelContentCallback);
 
-        mPanel.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+        mPanel.onAirplaneModeChanged(true);
 
         verify(mPanelContentCallback).onTitleChanged();
         verify(mPanelContentCallback).onCustomizedButtonStateChanged();
     }
 
     @Test
-    public void onInternetTypeChanged_internetTypeChangedToApmNetworks_changeTitle() {
-        mPanel.onInternetTypeChanged(INTERNET_WIFI);
+    public void onAirplaneModeNetworksOn_apmOff_changeTitleAndShowSettings() {
+        mPanel.onAirplaneModeChanged(false);
         clearInvocations(mPanelContentCallback);
 
-        mPanel.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+        mPanel.onAirplaneModeNetworksChanged(true);
 
         verify(mPanelContentCallback).onTitleChanged();
+        verify(mPanelContentCallback).onCustomizedButtonStateChanged();
     }
 
     @Test
-    public void onInternetTypeChanged_internetTypeChangedFromApmNetworks_changeTitle() {
-        mPanel.onInternetTypeChanged(INTERNET_APM_NETWORKS);
+    public void onAirplaneModeNetworksOff_apmOff_changeTitleAndShowSettings() {
+        mPanel.onAirplaneModeChanged(false);
         clearInvocations(mPanelContentCallback);
 
-        mPanel.onInternetTypeChanged(INTERNET_WIFI);
+        mPanel.onAirplaneModeNetworksChanged(false);
 
         verify(mPanelContentCallback).onTitleChanged();
+        verify(mPanelContentCallback).onCustomizedButtonStateChanged();
     }
 }
