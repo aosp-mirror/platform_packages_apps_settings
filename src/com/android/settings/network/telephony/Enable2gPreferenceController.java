@@ -31,7 +31,8 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     private static final long BITMASK_2G =  TelephonyManager.NETWORK_TYPE_BITMASK_GSM
                 | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS
                 | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE
-                | TelephonyManager.NETWORK_TYPE_BITMASK_CDMA;
+                | TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
+                | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
 
     private CarrierConfigManager mCarrierConfigManager;
     private TelephonyManager mTelephonyManager;
