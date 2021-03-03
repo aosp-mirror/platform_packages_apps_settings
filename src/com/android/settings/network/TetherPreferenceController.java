@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
-import android.net.ConnectivityManager;
 import android.net.TetheringManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,7 +60,6 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
     private final boolean mAdminDisallowedTetherConfig;
     private final AtomicReference<BluetoothPan> mBluetoothPan;
-    private final ConnectivityManager mConnectivityManager;
     private final BluetoothAdapter mBluetoothAdapter;
     private final TetheringManager mTetheringManager;
     @VisibleForTesting
@@ -86,7 +84,6 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
         super(null);
         mAdminDisallowedTetherConfig = false;
         mBluetoothPan = new AtomicReference<>();
-        mConnectivityManager = null;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mTetheringManager = null;
     }
@@ -95,8 +92,6 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
         super(context);
         mBluetoothPan = new AtomicReference<>();
         mAdminDisallowedTetherConfig = isTetherConfigDisallowed(context);
-        mConnectivityManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mTetheringManager = context.getSystemService(TetheringManager.class);
         if (lifecycle != null) {
@@ -110,7 +105,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
         mPreference = screen.findPreference(KEY_TETHER_SETTINGS);
         if (mPreference != null && !mAdminDisallowedTetherConfig) {
             mPreference.setTitle(
-                    com.android.settingslib.Utils.getTetheringLabel(mConnectivityManager));
+                    com.android.settingslib.Utils.getTetheringLabel(mTetheringManager));
         }
     }
 
