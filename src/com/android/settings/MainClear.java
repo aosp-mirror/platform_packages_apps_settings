@@ -59,11 +59,11 @@ import android.widget.TextView;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -187,12 +187,15 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         final Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
         args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
-        new SubSettingLauncher(getContext())
-                .setDestination(MainClearConfirm.class.getName())
-                .setArguments(args)
-                .setTitleRes(R.string.main_clear_confirm_title)
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
+        final Intent intent = new Intent();
+        intent.setClass(getContext(),
+                com.android.settings.Settings.FactoryResetConfirmActivity.class);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, MainClearConfirm.class.getName());
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID,
+                R.string.main_clear_confirm_title);
+        intent.putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, getMetricsCategory());
+        getContext().startActivity(intent);
     }
 
     @VisibleForTesting

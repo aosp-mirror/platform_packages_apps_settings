@@ -29,8 +29,11 @@ import com.android.settings.widget.SeekBarPreference;
 /** PreferenceController for feature intensity. */
 public class ReduceBrightColorsIntensityPreferenceController extends SliderPreferenceController {
 
+    private final ColorDisplayManager mColorDisplayManager;
+
     public ReduceBrightColorsIntensityPreferenceController(Context context, String key) {
         super(context, key);
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
     }
 
     @Override
@@ -59,31 +62,26 @@ public class ReduceBrightColorsIntensityPreferenceController extends SliderPrefe
     @Override
     public final void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0) == 1);
+        preference.setEnabled(mColorDisplayManager.isReduceBrightColorsActivated());
     }
 
     @Override
     public int getSliderPosition() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, 0);
+        return mColorDisplayManager.getReduceBrightColorsStrength();
     }
 
     @Override
     public boolean setSliderPosition(int position) {
-        return Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, position);
+        return mColorDisplayManager.setReduceBrightColorsStrength(position);
     }
 
     @Override
     public int getMax() {
-        // TODO(b/170970675): Call into CDS to get config max intensity
-        return 100;
+        return ColorDisplayManager.getMaximumReduceBrightColorsStrength(mContext);
     }
 
     @Override
     public int getMin() {
-        // TODO(b/170970675): Call into CDS to get config min intensity
-        return 0;
+        return ColorDisplayManager.getMinimumReduceBrightColorsStrength(mContext);
     }
 }

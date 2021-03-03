@@ -24,10 +24,13 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.internal.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -79,8 +82,19 @@ public class ReduceBrightColorsIntensityPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
         mPreferenceController.onPreferenceChange(/* preference= */ null, 20);
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, 0))
+        assertThat(
+                mContext.getSystemService(
+                        ColorDisplayManager.class).getReduceBrightColorsStrength())
                 .isEqualTo(20);
+    }
+
+    @Test
+    public void rangeOfSlider_staysWithinValidRange() {
+        when(mResources.getInteger(
+                R.integer.config_reduceBrightColorsStrengthMax)).thenReturn(90);
+        when(mResources.getInteger(
+                R.integer.config_reduceBrightColorsStrengthMin)).thenReturn(10);
+        assertThat(mPreferenceController.getMax() - mPreferenceController.getMin())
+                .isEqualTo(80);
     }
 }

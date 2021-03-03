@@ -19,8 +19,6 @@ package com.android.settings.panel;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
-import static com.android.settings.network.InternetUpdater.INTERNET_APM;
-import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
 import static com.android.settings.network.NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS;
 
 import android.app.settings.SettingsEnums;
@@ -46,14 +44,15 @@ import java.util.List;
  * Represents the Internet Connectivity Panel.
  */
 public class InternetConnectivityPanel implements PanelContent, LifecycleObserver,
-        InternetUpdater.OnInternetTypeChangedListener {
+        InternetUpdater.InternetChangeListener {
 
     private final Context mContext;
     @VisibleForTesting
     boolean mIsProviderModelEnabled;
     private PanelContentCallback mCallback;
     private InternetUpdater mInternetUpdater;
-    private @InternetUpdater.InternetType int mInternetType;
+    private boolean mIsAirplaneModeOn;
+    private boolean mIsApmNetworksAvailable;
 
     public static InternetConnectivityPanel create(Context context) {
         return new InternetConnectivityPanel(context);
@@ -63,7 +62,8 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         mContext = context.getApplicationContext();
         mIsProviderModelEnabled = Utils.isProviderModelEnabled(mContext);
         mInternetUpdater = new InternetUpdater(context, null /* Lifecycle */, this);
-        mInternetType = mInternetUpdater.getInternetType();
+        mIsAirplaneModeOn = mInternetUpdater.isAirplaneModeOn();
+        mIsApmNetworksAvailable = mInternetUpdater.isApmNetworksAvailable();
     }
 
     /** @OnLifecycleEvent(ON_RESUME) */
@@ -90,7 +90,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     @Override
     public CharSequence getTitle() {
         if (mIsProviderModelEnabled) {
-            return mContext.getText(mInternetType == INTERNET_APM_NETWORKS
+            return mContext.getText(mIsApmNetworksAvailable
                     ? R.string.airplane_mode_network_panel_title
                     : R.string.provider_internet_settings);
         }
@@ -102,7 +102,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
      */
     @Override
     public CharSequence getSubTitle() {
-        if (mIsProviderModelEnabled && mInternetType == INTERNET_APM) {
+        if (mIsProviderModelEnabled && mIsAirplaneModeOn && !mIsApmNetworksAvailable) {
             return mContext.getText(R.string.condition_airplane_title);
         }
         return null;
@@ -136,7 +136,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
 
     @Override
     public CharSequence getCustomizedButtonTitle() {
-        if (mInternetType == INTERNET_APM) {
+        if (mIsAirplaneModeOn && !mIsApmNetworksAvailable) {
             return null;
         }
         return mContext.getText(R.string.settings_button);
@@ -158,40 +158,43 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     }
 
     /**
-     * Called when internet type is changed.
-     *
-     * @param internetType the internet type
+     * Called when airplane mode state is changed.
      */
-    public void onInternetTypeChanged(@InternetUpdater.InternetType int internetType) {
-        if (internetType == mInternetType) {
+    @Override
+    public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
+        if (!isAirplaneModeOn) {
+            mIsApmNetworksAvailable = false;
+        }
+        mIsAirplaneModeOn = isAirplaneModeOn;
+        updatePanelTitle();
+    }
+
+    /**
+     * Called when airplane mode networks state is changed.
+     */
+    @Override
+    public void onAirplaneModeNetworksChanged(boolean available) {
+        mIsApmNetworksAvailable = available;
+        updatePanelTitle();
+    }
+
+    private void updatePanelTitle() {
+        if (mCallback == null) {
             return;
         }
 
-        final boolean changeToApm = (internetType == INTERNET_APM);
-        final boolean changeFromApm = (mInternetType == INTERNET_APM);
-        final boolean changeWithApmNetworks =
-                (internetType == INTERNET_APM_NETWORKS || mInternetType == INTERNET_APM_NETWORKS);
-        mInternetType = internetType;
-
-        if (mCallback != null) {
-            if (changeToApm) {
-                // The internet type is changed to the airplane mode.
-                //   Title: Internet
-                //   Sub-Title: Airplane mode is on
-                //   Settings button: Hide
-                mCallback.onHeaderChanged();
-                mCallback.onCustomizedButtonStateChanged();
-            } else if (changeFromApm) {
-                // The internet type is changed from the airplane mode.
-                //   Title: Internet
-                //   Settings button: Show
-                mCallback.onTitleChanged();
-                mCallback.onCustomizedButtonStateChanged();
-            } else if (changeWithApmNetworks) {
-                // The internet type is changed with the airplane mode networks.
-                //   Title: Airplane mode networks / Internet
-                mCallback.onTitleChanged();
-            }
+        if (mIsAirplaneModeOn && !mIsApmNetworksAvailable) {
+            // When the airplane mode is on.
+            //   Title: Internet
+            //   Sub-Title: Airplane mode is on
+            //   Settings button: Hide
+            mCallback.onHeaderChanged();
+        } else {
+            // Except for airplane mode on.
+            //   Title: Airplane mode networks / Internet
+            //   Settings button: Show
+            mCallback.onTitleChanged();
         }
+        mCallback.onCustomizedButtonStateChanged();
     }
 }
