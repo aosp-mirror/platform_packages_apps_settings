@@ -2276,7 +2276,7 @@
     <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Stillt á miðlungsmikinn titring símtala og tilkynninga"</string>
     <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Stillt á mikinn titring símtala og tilkynninga"</string>
     <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Slökkt"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Lítill"</string>
+    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Lítil"</string>
     <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Í meðallagi"</string>
     <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Mikill"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Stillingar"</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Spjaldtölva notuð meira en venjulega"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Tæki notað meira en venjulega"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Rafhlaðan gæti tæmst fyrr en venjulega"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Fínstillir fyrir rafhlöðuendingu"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Rafhlaða takmörkuð tímabundið. Ýttu til að fá frekari upplýsingar."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Síminn hefur verið notaður meira en venjulega. Rafhlaðan gæti tæmst fyrr en ella.\n\nForrit með mestu rafhlöðunotkunina:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Spjaldtölvan hefur verið notuð meira en venjulega. Rafhlaðan gæti tæmst fyrr en ella.\n\nForrit með mestu rafhlöðunotkunina:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Tækið hefur verið notað meira en venjulega. Rafhlaðan gæti tæmst fyrr en ella.\n\nForrit með mestu rafhlöðunotkunina:"</string>
@@ -2450,7 +2452,7 @@
       <item quantity="other">Þessi forrit geta ekki verið í gangi í bakgrunni</item>
     </plurals>
     <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="one">Takmarka %1$d forrit?</item>
+      <item quantity="one">Restrict %1$d apps?</item>
       <item quantity="other">Takmarka %1$d forrit?</item>
     </plurals>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Til að spara rafhlöðuna skaltu stöðva rafhlöðunotkun <xliff:g id="APP">%1$s</xliff:g> í bakgrunni. Þetta forrit mun hugsanlega ekki virka rétt og tilkynningar kunna að tefjast."</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">%1$d forrit takmörkuð</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Vandamál við að lesa stöðu rafhlöðu"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Vandamál við að lesa stöðu rafhlöðu. Ýttu til að "<annotation id="url">"fá frekari upplýsingar"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Stöðva forritið?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Síminn getur ekki stjórnað rafhlöðunni venjulega þar sem <xliff:g id="APP">%1$s</xliff:g> heldur símanum vakandi.\n\nTil að reyna að lagfæra vandamálið geturðu stöðvað forritið.\n\nEf þetta gerist í sífellu gætirðu þurft að fjarlægja forritið til að bæta afköst rafhlöðunnar."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Spjaldtölvan getur ekki stjórnað rafhlöðunni venjulega þar sem <xliff:g id="APP">%1$s</xliff:g> heldur spjaldtölvunni vakandi.\n\nTil að reyna að lagfæra vandamálið geturðu stöðvað forritið.\n\nEf þetta gerist í sífellu gætirðu þurft að fjarlægja forritið til að bæta afköst rafhlöðunnar."</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Kveikt (þaggað)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Slökkt"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Upplýsingar um net"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Heiti tækisins þíns er sýnilegt forritum í símanum. Heiti þess er hugsanlega einnig sýnilegt öðru fólki þegar þú tengist Bluetooth-tækjum eða setur upp heitan Wi-Fi reit."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Heiti tækisins þíns er sýnilegt forritum í símanum. Heiti þess er hugsanlega einnig sýnilegt öðru fólki þegar þú tengist Bluetooth-tækjum, Wi-Fi neti eða setur upp heitan Wi-Fi reit."</string>
     <string name="devices_title" msgid="649715719278562515">"Tæki"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Allar stillingar"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Tillögur"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Engir spilarar tiltækir"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"margmiðlunarefni"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Kveikt verður á Bluetooth"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ekki í boði vegna þess að kveikt er á háttatímastillingu"</string>
 </resources>

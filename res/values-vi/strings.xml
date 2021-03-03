@@ -732,7 +732,7 @@
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ không được ghép nối với bất kỳ thiết bị nào liên kết với tài khoản này"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Xóa thiết bị"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Kết nối với…"</string>
-    <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi âm thanh phương tiện."</string>
+    <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi âm thanh nội dung nghe nhìn."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi âm thanh thiết bị rảnh tay."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="4794752406024916925">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi thiết bị nhập."</string>
     <string name="bluetooth_disconnect_pan_user_profile" msgid="283176886159444413">"Truy cập Internet qua <xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối."</string>
@@ -1953,7 +1953,7 @@
     <string name="system_package" msgid="7559476279008519360">"Không thể cài đặt bản cập nhật hệ thống trên phương tiện bên ngoài."</string>
     <string name="move_error_device_admin" msgid="1561502976834303626">"Không thể cài đặt ứng dụng quản trị thiết bị trên phương tiện ngoài"</string>
     <string name="force_stop_dlg_title" msgid="86745852555490146">"Buộc dừng?"</string>
-    <string name="force_stop_dlg_text" msgid="1527286468544457368">"Nếu bạn buộc dừng một ứng dụng, ứng dụng đó có thể hoạt động sai."</string>
+    <string name="force_stop_dlg_text" msgid="1527286468544457368">"Nếu bạn buộc dừng một ứng dụng, ứng dụng đó có thể hoạt động không đúng cách."</string>
     <string name="app_install_location_title" msgid="8932938164156303191">"Vị trí cài đặt ưa thích"</string>
     <string name="app_install_location_summary" msgid="4948270795544357021">"Thay đổi vị trí cài đặt ưa thích cho ứng dụng mới"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Tắt ứng dụng"</string>
@@ -2382,7 +2382,7 @@
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Ứng dụng không được phép chạy trong nền"</string>
     <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"Không thể hạn chế sử dụng trong nền"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Giới hạn hoạt động nền?"</string>
-    <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Nếu bạn giới hạn hoạt động nền cho một ứng dụng, ứng dụng đó có thể hoạt động sai"</string>
+    <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Nếu bạn giới hạn hoạt động nền cho một ứng dụng, ứng dụng đó có thể hoạt động không đúng cách"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Không thể hạn chế ứng dụng này vì bạn chưa đặt để tối ưu hóa pin.\n\nĐể hạn chế ứng dụng, trước tiên hãy bật tối ưu hóa pin."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Mức sử dụng màn hình kể từ lần sạc đầy"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Mức sử dụng pin kể từ lần sạc đầy"</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Máy tính bảng được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Thiết bị được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pin có thể hết sớm hơn thường lệ"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Tối ưu hóa để cải thiện độ bền của pin"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Thời lượng pin bị hạn chế tạm thời. Nhấn để tìm hiểu thêm."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Bạn sử dụng điện thoại nhiều hơn mức bình thường. Pin điện thoại có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Bạn dùng máy tính bảng nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Bạn dùng thiết bị nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">Đã hạn chế %1$d ứng dụng</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Đã xảy ra vấn đề khi đọc dung lượng pin của bạn"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Đã xảy ra vấn đề khi đọc dung lượng pin của bạn. Nhấn để "<annotation id="url">"tìm hiểu thêm"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Dừng ứng dụng?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Điện thoại của bạn không thể quản lý pin bình thường vì <xliff:g id="APP">%1$s</xliff:g> liên tục để điện thoại ở chế độ bật.\n\nĐể khắc phục sự cố này, bạn có thể dừng ứng dụng.\n\nNếu sự cố này vẫn tiếp diễn, có thể bạn cần phải gỡ cài đặt ứng dụng để cải thiện hiệu suất pin."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Máy tính bảng của bạn không thể quản lý pin bình thường vì <xliff:g id="APP">%1$s</xliff:g> liên tục để máy tính bảng ở chế độ bật.\n\nĐể khắc phục sự cố này, bạn có thể dừng ứng dụng.\n\nNếu sự cố này vẫn tiếp diễn, có thể bạn cần phải gỡ cài đặt ứng dụng để cải thiện hiệu suất pin."</string>
@@ -2591,7 +2595,7 @@
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Tự động bật"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Chưa có lịch biểu nào"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Dựa trên thói quen của bạn"</string>
-    <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Dựa trên số phần trăm pin"</string>
+    <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Dựa trên mức phần trăm pin"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Nếu pin có khả năng hết trước lần sạc thông thường tiếp theo, hệ thống sẽ bật Trình tiết kiệm pin."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Sẽ bật khi pin ở mức <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Đặt lịch biểu"</string>
@@ -2786,9 +2790,9 @@
     <string name="remove_account_label" msgid="4169490568375358010">"Xóa tài khoản"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Thêm tài khoản"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Xóa tài khoản?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Xóa tài khoản này sẽ xóa tất cả thư, danh bạ và dữ liệu khác khỏi máy tính bảng!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Xóa tài khoản này sẽ xóa tất cả thư, danh bạ và dữ liệu khác khỏi điện thoại!"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Xóa tài khoản này sẽ xóa tất cả thư, danh bạ và dữ liệu khác khỏi thiết bị!"</string>
+    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Nếu bạn xóa tài khoản này, tất cả thư, danh bạ và dữ liệu khác có liên quan sẽ bị xóa khỏi máy tính bảng!"</string>
+    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Nếu bạn xóa tài khoản này, tất cả thư, danh bạ và dữ liệu khác có liên quan sẽ bị xóa khỏi điện thoại!"</string>
+    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Nếu bạn xóa tài khoản này, tất cả thư, danh bạ và dữ liệu khác có liên quan sẽ bị xóa khỏi thiết bị!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Quản trị viên của bạn không cho phép thực hiện thay đổi này"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Không thể đồng bộ hóa theo cách thủ công"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Đồng bộ hóa cho mục này hiện đã bị vô hiệu hóa. Để thay đổi cài đặt này, hãy tạm thời bật dữ liệu nền và đồng bộ hóa tự động."</string>
@@ -3327,7 +3331,7 @@
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Phản hồi xúc giác cho thao tác chạm, bàn phím và nhiều thao tác khác"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Phát âm đế kết nối"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Tất cả âm thanh"</string>
-    <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Chỉ âm thanh phương tiện"</string>
+    <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Chỉ âm thanh nội dung nghe nhìn"</string>
     <string name="emergency_tone_silent" msgid="5048069815418450902">"Im lặng"</string>
     <string name="emergency_tone_alert" msgid="1977698889522966589">"Âm"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Rung"</string>
@@ -3568,10 +3572,10 @@
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Các cuộc trò chuyện ưu tiên sẽ hiển thị ở đầu ngăn kéo xuống. Bạn cũng có thể chuyển các cuộc trò chuyện này sang dạng bong bóng và tạm thời dừng chế độ Không làm phiền."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Các cuộc trò chuyện ưu tiên và đã sửa đổi sẽ xuất hiện ở đây"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Sau khi bạn đánh dấu một cuộc trò chuyện là ưu tiên hoặc thực hiện bất kỳ sự thay đổi nào khác đối với các cuộc trò chuyện, thì những cuộc trò chuyện đó sẽ xuất hiện ở đây. \n\nCách thay đổi tùy chọn cài đặt cuộc trò chuyện: \nVuốt từ đầu màn hình xuống để mở ngăn kéo xuống rồi chạm và giữ cuộc trò chuyện."</string>
-    <string name="notification_importance_min" msgid="4609688642942787774">"Hiển thị mà không phát âm báo và thu nhỏ"</string>
-    <string name="notification_importance_low" msgid="7562535765919565273">"Hiển thị mà không phát âm báo"</string>
-    <string name="notification_importance_default" msgid="7483906490369073043">"Phát âm báo"</string>
-    <string name="notification_importance_high" msgid="8453789143477210550">"Phát âm báo và hiển thị trên màn hình"</string>
+    <string name="notification_importance_min" msgid="4609688642942787774">"Hiển thị mà không phát âm thanh và thu nhỏ"</string>
+    <string name="notification_importance_low" msgid="7562535765919565273">"Hiển thị mà không phát âm thanh"</string>
+    <string name="notification_importance_default" msgid="7483906490369073043">"Phát âm thanh"</string>
+    <string name="notification_importance_high" msgid="8453789143477210550">"Phát âm thanh và hiển thị trên màn hình"</string>
     <string name="notification_importance_high_silent" msgid="8977232884004607985">"Hiển thị trên màn hình"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Thu nhỏ"</string>
     <string name="notification_importance_low_title" msgid="658158049378796947">"Trung bình"</string>
@@ -3701,7 +3705,7 @@
     <string name="app_notification_importance_title" msgid="8293193440040799998">"Mức độ quan trọng"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Nhấp nháy đèn"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Rung"</string>
-    <string name="notification_channel_sound_title" msgid="9018031231387273476">"Âm báo"</string>
+    <string name="notification_channel_sound_title" msgid="9018031231387273476">"Âm thanh"</string>
     <string name="notification_conversation_important" msgid="4365437037763608045">"Ưu tiên"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Thêm vào nhà"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Xóa"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Bật (tắt tiếng)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Tắt"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Chi tiết mạng"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Tên thiết bị của bạn sẽ hiển thị với các ứng dụng trên điện thoại. Những người khác cũng có thể thấy tên thiết bị này khi bạn kết nối với thiết bị Bluetooth hoặc thiết lập điểm phát sóng Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Tên thiết bị của bạn sẽ hiển thị với các ứng dụng trên điện thoại. Những người khác cũng có thể thấy tên thiết bị này khi bạn kết nối với thiết bị Bluetooth, mạng Wi-Fi hoặc thiết lập một điểm phát sóng Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Thiết bị"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Tất cả tùy chọn cài đặt"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Đề xuất"</string>
@@ -4772,7 +4776,7 @@
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Sử dụng dữ liệu qua mạng di động"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Điện thoại sẽ tự động chuyển sang nhà mạng này khi nằm trong vùng phủ sóng"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Tùy chọn cuộc gọi"</string>
-    <string name="sms_preference" msgid="7742964962568219351">"Tùy chọn SMS"</string>
+    <string name="sms_preference" msgid="7742964962568219351">"Tùy chọn cho SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Luôn hỏi"</string>
     <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Thêm mạng"</string>
     <plurals name="mobile_network_summary_count" formatted="false" msgid="5173633860800230925">
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Không có trình phát nào"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"nội dung nghe nhìn"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth sẽ bật"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Không dùng được vì chế độ giờ đi ngủ đang bật"</string>
 </resources>

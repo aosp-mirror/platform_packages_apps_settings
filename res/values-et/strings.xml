@@ -1605,7 +1605,7 @@
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM-kaarte ei saa kustutada"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Allalaaditud SIM-kaarte ei saa vea tõttu kustutada.\n\nTaaskäivitage seade ja proovige uuesti."</string>
     <string name="master_clear_title" msgid="5309249309235959383">"Kõigi andmete kustutamine (tehaseseadetele lähtestamine)"</string>
-    <string name="master_clear_short_title" msgid="5331449583601739360">"Kust. andmed (tehases. läht.)"</string>
+    <string name="master_clear_short_title" msgid="5331449583601739360">"Kõigi andmete kustutamine (tehaseseaded)"</string>
     <string name="master_clear_desc" product="tablet" msgid="3114467865487750525">"See kustutab teie tahvelarvuti "<b>"sisemälust"</b>" kõik andmed, sh:\n\n"<li>"teie Google\'i konto;"</li>\n<li>"süsteemi ja rakenduste andmed ning seaded;"</li>\n<li>"allalaaditud rakendused."</li></string>
     <string name="master_clear_desc" product="default" msgid="8447637796694856323">"See kustutab teie telefoni "<b>"sisemälust"</b>" kõik andmed, sh järgmised.\n\n"<li>"Teie Google\'i konto"</li>\n<li>"Süsteemi- ja rakenduste andmed ning seaded"</li>\n<li>"Allalaaditud rakendused"</li></string>
     <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n\n"Olete praegu sisse logitud järgmistele kontodele:\n"</string>
@@ -1911,7 +1911,7 @@
     <string name="show_running_services" msgid="8666008279959853318">"Kuva töötavad teenused"</string>
     <string name="show_background_processes" msgid="5682856012453562151">"Kuva vahemällu salvestatud protsessid"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Hädaabirakendus"</string>
-    <string name="reset_app_preferences" msgid="8861758340732716573">"Lähtesta rakenduste eelistused"</string>
+    <string name="reset_app_preferences" msgid="8861758340732716573">"Rakenduste eelistuste lähtestamine"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Lähtestada rakenduste eelistused?"</string>
     <string name="reset_app_preferences_desc" msgid="6509978724602405805">"See lähtestab kõik järgmised eelistused.\n\n"<li>"Keelatud rakendused"</li>\n<li>"Keelatud rakenduste märguanded"</li>\n<li>"Toimingute vaikerakendused"</li>\n<li>"Rakenduste taustaandmete piirangud"</li>\n<li>"Mis tahes lubade piirangud"</li>\n\n"Rakenduste andmed säilivad."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Lähtesta rakendused"</string>
@@ -1953,7 +1953,7 @@
     <string name="system_package" msgid="7559476279008519360">"Süsteemivärskendusi ei saa installida välisele kandjale."</string>
     <string name="move_error_device_admin" msgid="1561502976834303626">"Seadme administraatori rakendust ei saa installida välisele andmekandjale"</string>
     <string name="force_stop_dlg_title" msgid="86745852555490146">"Kas peatada sunniviisiliselt?"</string>
-    <string name="force_stop_dlg_text" msgid="1527286468544457368">"Kui sunnite rakenduse peatuma, võib see valesti käituda."</string>
+    <string name="force_stop_dlg_text" msgid="1527286468544457368">"Kui sunnite rakenduse peatuma, võib see toimida valesti."</string>
     <string name="app_install_location_title" msgid="8932938164156303191">"Eelistatud installiasukoht"</string>
     <string name="app_install_location_summary" msgid="4948270795544357021">"Muutke uute rakenduste eelistatud installiasukohta"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Keela rakendus"</string>
@@ -2382,7 +2382,7 @@
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Rakendusel ei ole lubatud taustal töötada"</string>
     <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"Taustal kasutamist ei saa piirata"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Kas piirata taustal tegevust?"</string>
-    <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Kui piirate rakenduse tegevust taustal, võib rakendus valesti käituda."</string>
+    <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Kui piirate rakenduse tegevust taustal, võib rakendus toimida valesti."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Kuna rak. pole aku optimeerimine seadistatud, ei saa te seda piirata.\n\nRak. piiramiseks lülit. esmalt sisse aku optimeerimine."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Ekraani kasutus alates täislaadimisest"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Akukasutus alates täislaadimisest"</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tahvelarvutit on kasutatud tavapärasest rohkem"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Seadet on kasutatud tavapärasest rohkem"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Aku võib tavapärasest kiiremini tühjaks saada"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimeerimine aku seisukorra põhjal"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Akutase on ajutiselt piiratud. Lisateabe saamiseks puudutage."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Teie telefoni on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Teie tahvelarvutit on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Teie seadet on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">%1$d rakendus on piiratud</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Probleem akumõõdiku lugemisel"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Probleem akumõõdiku lugemisel. "<annotation id="url">"Lisateabe"</annotation>" saamiseks puudutage"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Kas peatada rakendus?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Teie telefon ei saa akut tavapärasel moel hallata, kuna <xliff:g id="APP">%1$s</xliff:g> hoiab seadet ärkvel.\n\nProbleemi lahendamiseks võite proovida rakenduse peatada.\n\nKui probleem ei lahene, tuleb teil aku tööea pikendamiseks võib-olla rakendus desinstallida."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Teie tahvelarvuti ei saa akut tavapärasel moel hallata, kuna <xliff:g id="APP">%1$s</xliff:g> hoiab seadet ärkvel.\n\nProbleemi lahendamiseks võite proovida rakenduse peatada.\n\nKui probleem ei lahene, tuleb teil aku tööea pikendamiseks võib-olla rakendus desinstallida."</string>
@@ -3186,7 +3190,7 @@
       <item quantity="other">Kuva %d peidetud üksust</item>
       <item quantity="one">Kuva %d peidetud üksus</item>
     </plurals>
-    <string name="network_dashboard_title" msgid="788543070557731240">"Võrk ja Internet"</string>
+    <string name="network_dashboard_title" msgid="788543070557731240">"Võrk ja internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"mobiilivõrk"</string>
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"andmeside kasutus"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"kuumkoht"</string>
@@ -3213,7 +3217,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WiFi märguanne, wifi märguanne"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"andmekasutus"</string>
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Vibreerimise peatamine, puudutus, klaviatuur"</string>
-    <string name="keywords_time_format" msgid="5384803098766166820">"Kasuta 24-tunnist vormingut"</string>
+    <string name="keywords_time_format" msgid="5384803098766166820">"Kasuta 24-tunni vormingut"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Allalaadimine"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Ava rakendusega"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Rakendused"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Sees (vaigistatud)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Väljas"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Võrgu üksikasjad"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Teie seadme nimi on telefonis rakendustele nähtav. Bluetoothi seadmetega ühendamisel või WiFi-pääsupunkti loomisel võivad seda näha ka teised inimesed."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Teie seadme nimi on teie telefonis olevatele rakendustele nähtav. Bluetooth-seadmetega või WiFi-võrguga ühenduse loomisel või WiFi-kuumkoha seadistamisel võivad seda näha ka teised inimesed."</string>
     <string name="devices_title" msgid="649715719278562515">"Seadmed"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Kõik seaded"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Soovitused"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Ühtegi pleierit pole saadaval"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"meedia"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth lülitub sisse"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Pole saadaval, kuna uneaja režiim on sisse lülitatud"</string>
 </resources>

@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablette plus utilisée que d\'habitude"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Appareil plus utilisé que d\'habitude"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"La batterie pourrait s\'épuiser plus tôt que prévu"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimisation pour préserver la batterie"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batterie limitée temporairement. Appuyez sur cette notification pour en savoir plus."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Votre téléphone a été plus utilisé que d\'habitude. Il est possible que vous arriviez à court de batterie plus vite que prévu.\n\nClassement des applis par utilisation de la batterie :"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Votre tablette a été plus utilisée que d\'habitude. Il est possible que vous arriviez à court de batterie plus vite que prévu.\n\nClassement des applis par utilisation de la batterie :"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Votre appareil a été plus utilisé que d\'habitude. Il est possible que vous arriviez à court de batterie plus vite que prévu.\n\nClassement des applis par utilisation de la batterie :"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">%1$d applications limitées</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Un problème est survenu au niveau de la lecture de votre outil de mesure de batterie"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Un problème est survenu au niveau de la lecture de votre outil de mesure de batterie. Appuyez sur "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Arrêter l\'application ?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Votre téléphone ne peut pas gérer la batterie normalement, car l\'application <xliff:g id="APP">%1$s</xliff:g> le maintient activé.\n\nPour y remédier, vous pouvez arrêter l\'application.\n\nSi le problème persiste, vous devrez peut-être désinstaller l\'application pour améliorer les performances de la batterie."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Votre tablette ne peut pas gérer la batterie normalement, car l\'application <xliff:g id="APP">%1$s</xliff:g> la maintient activée.\n\nPour y remédier, vous pouvez arrêter l\'application.\n\nSi le problème persiste, vous devrez peut-être désinstaller l\'application pour améliorer les performances de la batterie."</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Activé (son coupé)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Désactivé"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Détails du réseau"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Le nom de votre appareil est visible par les applications installées sur votre téléphone. Il peut l\'être également par d\'autres personnes en cas de connexion à des appareils Bluetooth ou de configuration d\'un point d\'accès Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Les applications de votre téléphone ont accès au nom de votre appareil. D\'autres personnes peuvent aussi le voir lorsque vous vous connectez à des appareils Bluetooth ou à un réseau Wi-Fi, ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Appareils"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Tous les paramètres"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Suggestions"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Aucun lecteur disponible"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Multimédia"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Le Bluetooth sera activé"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Indisponible, car le mode Heure du coucher est activé"</string>
 </resources>

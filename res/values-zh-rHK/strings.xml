@@ -2430,6 +2430,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板電腦使用率比平常高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"裝置使用率比平常高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池電量可能會比平常更快耗盡"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"正在優化電池狀態"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"暫時限制電池充電。輕按即可瞭解詳情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"您的手機使用率比平常高，電池電量可能會比預期更快耗盡。\n\n電池用量最高的應用程式："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"您的平板電腦使用率比平常高，電池電量可能會比預期更快耗盡。\n\n電池用量最高的應用程式："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"您的裝置使用率比平常高，電池電量可能會比預期更快耗盡。\n\n電池用量最高的應用程式："</string>
@@ -2485,6 +2487,8 @@
       <item quantity="one">%1$d 個應用程式受限制</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"讀取電池計量器時發生問題"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"讀取電池計量器時發生問題。輕按即可"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"要停止應用程式嗎？"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"由於「<xliff:g id="APP">%1$s</xliff:g>」一直讓您的手機處於喚醒狀態，因此手機無法正常管理電池。\n\n如要解決此問題，您可以停止該應用程式。\n\n如果問題持續，您可能需要解除安裝應用程式，才能改善電池效能。"</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"由於「<xliff:g id="APP">%1$s</xliff:g>」一直讓您的平板電腦處於喚醒狀態，因此平板電腦無法正常管理電池。\n\n如要解決此問題，您可以停止該應用程式。\n\n如果問題持續，您可能需要解除安裝應用程式，才能改善電池效能。"</string>
@@ -4361,7 +4365,7 @@
     <string name="notification_log_details_group_summary" msgid="4364622087007803822">"(摘要)"</string>
     <string name="notification_log_details_visibility" msgid="6811292866832243357">"顯示設定"</string>
     <string name="notification_log_details_public_version" msgid="3057653571018432759">"publicVersion"</string>
-    <string name="notification_log_details_priority" msgid="4772047133062255513">"優先次序"</string>
+    <string name="notification_log_details_priority" msgid="4772047133062255513">"重要"</string>
     <string name="notification_log_details_importance" msgid="8516198274667183446">"重要性"</string>
     <string name="notification_log_details_explanation" msgid="6966274549873070059">"說明"</string>
     <string name="notification_log_details_badge" msgid="648647240928645446">"可顯示徽章"</string>
@@ -4701,7 +4705,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"開啟 (靜音)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"關閉"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"網絡詳細資料"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"您的裝置名稱會在手機的應用程式上顯示。當您連接藍牙裝置或設定 Wi-Fi 熱點時，其他人亦可能會看到您的裝置名稱。"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"您在手機上的應用程式可以取得您的裝置名稱。當您連接藍牙裝置或 Wi-Fi 網絡，或設定 Wi-Fi 熱點時，其他人亦可能會看到您的裝置名稱。"</string>
     <string name="devices_title" msgid="649715719278562515">"裝置"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"所有設定"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"建議"</string>
@@ -4961,4 +4965,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"沒有可用的播放器"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒體"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"系統將開啟藍牙"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"睡眠模式開啟時無法使用"</string>
 </resources>

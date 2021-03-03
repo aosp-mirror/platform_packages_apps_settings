@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"태블릿을 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"기기를 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"배터리가 평소보다 빨리 소진될 수 있습니다."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"배터리 상태 최적화 중"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"일시적으로 배터리 사용이 제한됩니다. 자세히 알아보려면 탭하세요."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"휴대전화를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"태블릿을 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"기기를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">앱 %1$d개가 제한됨</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"배터리 수준을 읽는 중에 문제가 발생함"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"배터리 수준을 읽는 중에 문제가 발생했습니다. 탭하여 "<annotation id="url">"자세히 알아보세요"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"앱을 종료하시겠습니까?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g>에서 휴대전화를 작동 상태로 유지하고 있어 휴대전화에서 배터리를 정상적으로 관리할 수 없습니다.\n\n문제를 해결하려면 앱을 종료하세요.\n\n문제가 계속되는 경우 앱을 제거하고 배터리 성능을 개선해야 할 수도 있습니다."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g>에서 태블릿을 작동 상태로 유지하고 있어 태블릿에서 배터리를 정상적으로 관리할 수 없습니다.\n\n문제를 해결하려면 앱을 종료하세요.\n\n문제가 계속되는 경우 앱을 제거하고 배터리 성능을 개선해야 할 수도 있습니다."</string>
@@ -3655,8 +3659,8 @@
       <item quantity="other">앱 <xliff:g id="COUNT_1">%d</xliff:g>개 연결됨</item>
       <item quantity="one">앱 <xliff:g id="COUNT_0">%d</xliff:g>개 연결됨</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"이 앱을 연결하려면 직장 프로필에 <xliff:g id="NAME">%1$s</xliff:g> 앱을 설치하세요."</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"이 앱을 연결하려면 개인 프로필에 <xliff:g id="NAME">%1$s</xliff:g> 앱을 설치하세요."</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"이 앱을 연결하려면 직장 프로필에 <xliff:g id="NAME">%1$s</xliff:g> 앱을 설치하세요"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"이 앱을 연결하려면 개인 프로필에 <xliff:g id="NAME">%1$s</xliff:g> 앱을 설치하세요"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"탭하여 앱을 다운로드하세요."</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"방해 금지 모드 액세스"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"방해 금지 모드 허용"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"사용(음소거)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"사용 안함"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"네트워크 세부정보"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"휴대전화에 설치된 앱에 기기 이름이 표시됩니다. 기기 이름은 블루투스 기기에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게 표시될 수도 있습니다."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"기기 이름이 휴대전화에 있는 앱에 표시됩니다. 기기 이름은 블루투스 기기 및 Wi-Fi 네트워크에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게도 표시될 수 있습니다."</string>
     <string name="devices_title" msgid="649715719278562515">"기기"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"모든 설정"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"추천"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"사용 가능한 플레이어가 없습니다."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"미디어"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"블루투스를 사용 설정함"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"취침 모드가 켜져 있으므로 사용할 수 없습니다."</string>
 </resources>
