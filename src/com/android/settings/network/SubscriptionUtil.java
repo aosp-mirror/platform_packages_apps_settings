@@ -70,6 +70,9 @@ public class SubscriptionUtil {
         if (sActiveResultsForTesting != null) {
             return sActiveResultsForTesting;
         }
+        if (manager == null) {
+            return Collections.emptyList();
+        }
         final List<SubscriptionInfo> subscriptions = manager.getActiveSubscriptionInfoList();
         if (subscriptions == null) {
             return new ArrayList<>();

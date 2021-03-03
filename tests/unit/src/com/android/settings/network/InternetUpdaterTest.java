@@ -20,10 +20,10 @@ import static android.net.NetworkCapabilities.TRANSPORT_CELLULAR;
 import static android.net.NetworkCapabilities.TRANSPORT_ETHERNET;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
-import static com.android.settings.network.InternetUpdater.INTERNET_APM;
-import static com.android.settings.network.InternetUpdater.INTERNET_APM_NETWORKS;
 import static com.android.settings.network.InternetUpdater.INTERNET_CELLULAR;
 import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
+import static com.android.settings.network.InternetUpdater.INTERNET_NETWORKS_AVAILABLE;
+import static com.android.settings.network.InternetUpdater.INTERNET_OFF;
 import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -109,26 +109,30 @@ public class InternetUpdaterTest {
     @Test
     public void update_apmOnWifiOff_getInternetApm() {
         doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
-        doReturn(false).when(mWifiManager).isWifiEnabled();
+        doReturn(WifiManager.WIFI_STATE_DISABLED).when(mWifiManager).getWifiState();
+        mInternetUpdater.mInternetAvailable = false;
 
         mInternetUpdater.update();
 
-        assertThat(mInternetUpdater.getInternetType()).isEqualTo(INTERNET_APM);
+        assertThat(mInternetUpdater.getInternetType()).isEqualTo(INTERNET_OFF);
     }
 
     @Test
-    public void update_apmOnWifiOn_getInternetApmNetworks() {
+    public void update_apmOnWifiOnNotConnected_getInternetNetworksAvailable() {
+        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
+        doReturn(WifiManager.WIFI_STATE_ENABLED).when(mWifiManager).getWifiState();
+        mInternetUpdater.mInternetAvailable = false;
+
+        mInternetUpdater.update();
+
+        assertThat(mInternetUpdater.getInternetType()).isEqualTo(INTERNET_NETWORKS_AVAILABLE);
+    }
+
+    @Test
+    public void update_apmOnWifiConnected_getInternetWifi() {
         doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
         doReturn(true).when(mWifiManager).isWifiEnabled();
-
-        mInternetUpdater.update();
-
-        assertThat(mInternetUpdater.getInternetType()).isEqualTo(INTERNET_APM_NETWORKS);
-    }
-
-    @Test
-    public void update_apmOffWifiConnected_getInternetWifi() {
-        doReturn(false).when(mAirplaneModeEnabler).isAirplaneModeOn();
+        mInternetUpdater.mInternetAvailable = true;
         mInternetUpdater.mTransport = TRANSPORT_WIFI;
 
         mInternetUpdater.update();
@@ -137,8 +141,9 @@ public class InternetUpdaterTest {
     }
 
     @Test
-    public void update_apmOffCellularConnected_getInternetCellular() {
-        doReturn(false).when(mAirplaneModeEnabler).isAirplaneModeOn();
+    public void update_apmOnCellularConnected_getInternetCellular() {
+        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
+        mInternetUpdater.mInternetAvailable = true;
         mInternetUpdater.mTransport = TRANSPORT_CELLULAR;
 
         mInternetUpdater.update();
@@ -147,8 +152,9 @@ public class InternetUpdaterTest {
     }
 
     @Test
-    public void update_apmOffEthernetConnected_getInternetEthernet() {
-        doReturn(false).when(mAirplaneModeEnabler).isAirplaneModeOn();
+    public void update_apmOnEthernetConnected_getInternetEthernet() {
+        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
+        mInternetUpdater.mInternetAvailable = true;
         mInternetUpdater.mTransport = TRANSPORT_ETHERNET;
 
         mInternetUpdater.update();
