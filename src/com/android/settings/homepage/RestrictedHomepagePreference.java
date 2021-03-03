@@ -16,27 +16,21 @@
 
 package com.android.settings.homepage;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.content.Context;
-import android.os.UserHandle;
 import android.util.AttributeSet;
 
 import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.RestrictedTopLevelPreference;
 
 /** Homepage preference that can be disabled by a device admin using a user restriction. */
-public class RestrictedHomepagePreference extends HomepagePreference {
-    private RestrictedPreferenceHelper mHelper;
+public class RestrictedHomepagePreference extends RestrictedTopLevelPreference {
 
     public RestrictedHomepagePreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        mHelper = new RestrictedPreferenceHelper(context, /* preference= */ this, attrs);
+        setLayoutResource(R.layout.homepage_preference);
     }
 
     public RestrictedHomepagePreference(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -50,73 +44,5 @@ public class RestrictedHomepagePreference extends HomepagePreference {
 
     public RestrictedHomepagePreference(Context context) {
         this(context, /* attrs= */ null);
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-        mHelper.onBindViewHolder(holder);
-    }
-
-    @Override
-    public void performClick() {
-        if (!mHelper.performClick()) {
-            super.performClick();
-        }
-    }
-
-    @Override
-    protected void onAttachedToHierarchy(PreferenceManager preferenceManager) {
-        mHelper.onAttachedToHierarchy();
-        super.onAttachedToHierarchy(preferenceManager);
-    }
-
-    /**
-     * Set the user restriction and disable this preference.
-     *
-     * @param userRestriction constant from {@link android.os.UserManager}
-     */
-    public void checkRestrictionAndSetDisabled(String userRestriction) {
-        mHelper.checkRestrictionAndSetDisabled(userRestriction, UserHandle.myUserId());
-    }
-
-    /**
-     * Set the user restriction and disable this preference for the given user.
-     *
-     * @param userRestriction constant from {@link android.os.UserManager}
-     * @param userId          user to check the restriction for.
-     */
-    public void checkRestrictionAndSetDisabled(String userRestriction, int userId) {
-        mHelper.checkRestrictionAndSetDisabled(userRestriction, userId);
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        if (enabled && isDisabledByAdmin()) {
-            mHelper.setDisabledByAdmin(/* admin= */ null);
-            return;
-        }
-        super.setEnabled(enabled);
-    }
-
-    /**
-     * Check whether this preference is disabled by admin.
-     *
-     * @return true if this preference is disabled by admin.
-     */
-    public boolean isDisabledByAdmin() {
-        return mHelper.isDisabledByAdmin();
-    }
-
-    /**
-     * Disable preference based on the enforce admin.
-     *
-     * @param admin details of the admin who enforced the restriction. If it is {@code null}, then
-     *              this preference will be enabled. Otherwise, it will be disabled.
-     */
-    public void setDisabledByAdmin(EnforcedAdmin admin) {
-        if (mHelper.setDisabledByAdmin(admin)) {
-            notifyChanged();
-        }
     }
 }
