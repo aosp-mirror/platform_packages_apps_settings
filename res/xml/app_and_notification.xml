@@ -83,6 +83,16 @@
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
+    <Preference
+        android:key="hibernated_apps"
+        android:title="@string/unused_apps"
+        android:summary="@string/summary_placeholder"
+        android:order="13"
+        settings:keywords="app_hibernation_key"
+        settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController">
+        <intent android:action="android.intent.action.MANAGE_UNUSED_APPS"/>
+    </Preference>
+
     <com.android.settingslib.RestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
