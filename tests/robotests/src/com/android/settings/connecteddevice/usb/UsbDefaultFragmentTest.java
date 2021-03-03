@@ -18,11 +18,12 @@ package com.android.settings.connecteddevice.usb;
 
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
 import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
-import static android.net.ConnectivityManager.TETHERING_USB;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -30,7 +31,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.hardware.usb.UsbManager;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 
 import androidx.preference.PreferenceScreen;
 
@@ -50,7 +51,7 @@ public class UsbDefaultFragmentTest {
     @Mock
     private UsbBackend mUsbBackend;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
 
     private UsbDefaultFragment mFragment;
 
@@ -59,7 +60,7 @@ public class UsbDefaultFragmentTest {
         MockitoAnnotations.initMocks(this);
         mFragment = new TestFragment();
         mFragment.mUsbBackend = mUsbBackend;
-        mFragment.mConnectivityManager = mConnectivityManager;
+        mFragment.mTetheringManager = mTetheringManager;
     }
 
     @Test
@@ -136,8 +137,9 @@ public class UsbDefaultFragmentTest {
 
         mFragment.setDefaultKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
 
-        verify(mConnectivityManager).startTethering(TETHERING_USB, true,
-                mFragment.mOnStartTetheringCallback);
+        verify(mTetheringManager).startTethering(eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mFragment.mOnStartTetheringCallback));
         assertThat(mFragment.mPreviousFunctions).isEqualTo(
                 UsbManager.FUNCTION_MTP);
     }
