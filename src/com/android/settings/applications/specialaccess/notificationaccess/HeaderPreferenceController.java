@@ -16,10 +16,14 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
+import android.companion.ICompanionDeviceManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.RemoteException;
 import android.util.IconDrawableFactory;
+import android.util.Log;
 import android.view.View;
 
 import androidx.lifecycle.LifecycleObserver;
@@ -32,8 +36,14 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 public class HeaderPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {
@@ -43,6 +53,10 @@ public class HeaderPreferenceController extends BasePreferenceController
     private PackageInfo mPackageInfo;
     private PackageManager mPm;
     private CharSequence mServiceName;
+    private ICompanionDeviceManager mCdm;
+    private LocalBluetoothManager mBm;
+    private ComponentName mCn;
+    private int mUserId;
 
     public HeaderPreferenceController(Context context, String key) {
         super(context, key);
@@ -68,6 +82,26 @@ public class HeaderPreferenceController extends BasePreferenceController
         return this;
     }
 
+    public HeaderPreferenceController setCdm(ICompanionDeviceManager cdm) {
+        mCdm = cdm;
+        return this;
+    }
+
+    public HeaderPreferenceController setBluetoothManager(LocalBluetoothManager bm) {
+        mBm = bm;
+        return this;
+    }
+
+    public HeaderPreferenceController setCn(ComponentName cn) {
+        mCn = cn;
+        return this;
+    }
+
+    public HeaderPreferenceController setUserId(int userId) {
+        mUserId = userId;
+        return this;
+    }
+
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
@@ -88,6 +122,7 @@ public class HeaderPreferenceController extends BasePreferenceController
                         .getBadgedIcon(mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
                 .setSummary(mServiceName)
+                .setSecondSummary(getDeviceList())
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
                 .setPackageName(mPackageInfo.packageName)
                 .setUid(mPackageInfo.applicationInfo.uid)
@@ -103,5 +138,34 @@ public class HeaderPreferenceController extends BasePreferenceController
         if (mHeaderController != null) {
             mHeaderController.styleActionBar(mFragment.getActivity());
         }
+    }
+
+    protected CharSequence getDeviceList() {
+        boolean multiple = false;
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            List<String> associatedMacAddrs =
+                    mCdm.getAssociations(mCn.getPackageName(), mUserId);
+            if (associatedMacAddrs != null) {
+                for (String assocMac : associatedMacAddrs) {
+                    final Collection<CachedBluetoothDevice> cachedDevices =
+                            mBm.getCachedDeviceManager().getCachedDevicesCopy();
+                    for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
+                        if (Objects.equals(assocMac, cachedBluetoothDevice.getAddress())) {
+                            if (multiple) {
+                                sb.append(", ");
+                            } else {
+                                multiple = true;
+                            }
+                            sb.append(cachedBluetoothDevice.getName());
+                        }
+                    }
+                }
+            }
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error calling CDM", e);
+        }
+        return sb.toString();
     }
 }
