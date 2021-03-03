@@ -29,9 +29,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.preference.PreferenceCategory;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -75,23 +79,26 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
             }
         };
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        updateGeneralCategoryOrder();
+        return view;
+    }
+
+    private void updateGeneralCategoryOrder() {
+        final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
+        final SeekBarPreference intensity = findPreference(KEY_INTENSITY);
+        getPreferenceScreen().removePreference(intensity);
+        intensity.setOrder(mShortcutPreference.getOrder() - 2);
+        generalCategory.addPreference(intensity);
+        final SwitchPreference persist = findPreference(KEY_PERSIST);
+        getPreferenceScreen().removePreference(persist);
+        persist.setOrder(mShortcutPreference.getOrder() - 1);
+        generalCategory.addPreference(persist);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    /** Customizes the order by preference key. */
-    protected List<String> getPreferenceOrderList() {
-        final List<String> lists = new ArrayList<>();
-        lists.add(KEY_USE_SERVICE_PREFERENCE);
-        lists.add(KEY_INTENSITY);
-        lists.add(KEY_GENERAL_CATEGORY);
-        lists.add(KEY_PERSIST);
-        lists.add(KEY_INTRODUCTION_CATEGORY);
-        return lists;
     }
 
     @Override

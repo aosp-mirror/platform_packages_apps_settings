@@ -33,7 +33,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
  * PreferenceController to show the connected ethernet network.
  */
 public class ConnectedEthernetNetworkController extends AbstractPreferenceController
-        implements InternetUpdater.OnInternetTypeChangedListener {
+        implements InternetUpdater.InternetChangeListener {
 
     public static final String KEY = "connected_ethernet_network";
 
