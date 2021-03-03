@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -75,7 +76,8 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
             "com.android.server.accessibility.MagnificationController";
 
     private TestToggleScreenMagnificationPreferenceFragment mFragment;
-    private Context mContext = ApplicationProvider.getApplicationContext();
+    private Context mContext;
+    private Resources mResources;
 
     @Mock
     private PreferenceManager mPreferenceManager;
@@ -86,10 +88,14 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     public void setUpTestFragment() {
         MockitoAnnotations.initMocks(this);
 
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mFragment = spy(new TestToggleScreenMagnificationPreferenceFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mFragment.getContext().getResources()).thenReturn(mResources);
         doReturn(null).when(mFragment).getPreferenceScreen();
         doReturn(mActivity).when(mFragment).getActivity();
     }
@@ -248,6 +254,16 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
         assertThat(value).isEqualTo(6);
         assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP);
+    }
+
+    @Test
+    public void initSettingsPreference_notSupportsMagnificationArea_settingsPreferenceIsNull() {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_magnification_area))
+                .thenReturn(false);
+        mFragment.initSettingsPreference();
+
+        assertThat(mFragment.mSettingsPreference).isNull();
     }
 
     private void putStringIntoSettings(String key, String componentName) {
