@@ -107,12 +107,18 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         if (!isModeMatched()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+        final VolteQueryImsState queryState = queryImsState(subId);
+        // Show VoLTE settings if VoIMS opt-in has been enabled irrespective of other VoLTE settings
+        if (queryState.isVoImsOptInEnabled()) {
+            return AVAILABLE;
+        }
+
         final PersistableBundle carrierConfig = getCarrierConfigForSubId(subId);
         if ((carrierConfig == null)
                 || carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL)) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        final VolteQueryImsState queryState = queryImsState(subId);
+
         if (!queryState.isReadyToVoLte()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
