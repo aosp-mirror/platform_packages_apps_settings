@@ -20,6 +20,7 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEA
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import android.Manifest;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -33,8 +34,10 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.RestrictionUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -45,6 +48,7 @@ public class AdaptiveSleepPreferenceController {
     private RestrictionUtils mRestrictionUtils;
     private PackageManager mPackageManager;
     private Context mContext;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @VisibleForTesting
     RestrictedSwitchPreference mPreference;
@@ -52,6 +56,7 @@ public class AdaptiveSleepPreferenceController {
     public AdaptiveSleepPreferenceController(Context context, RestrictionUtils restrictionUtils) {
         mContext = context;
         mRestrictionUtils = restrictionUtils;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPreference = new RestrictedSwitchPreference(context);
         mPreference.setTitle(R.string.adaptive_sleep_title);
         mPreference.setSummary(R.string.adaptive_sleep_description);
@@ -60,6 +65,8 @@ public class AdaptiveSleepPreferenceController {
         mPreference.setKey(PREFERENCE_KEY);
         mPreference.setOnPreferenceClickListener(preference -> {
             final boolean isChecked = ((RestrictedSwitchPreference) preference).isChecked();
+            mMetricsFeatureProvider.action(context, SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
+                    isChecked);
             Settings.Secure.putInt(context.getContentResolver(),
                     Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
             return true;
