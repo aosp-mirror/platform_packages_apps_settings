@@ -24,8 +24,6 @@ import android.content.pm.PackageManager;
 import android.net.ProxyInfo;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import android.security.Credentials;
-import android.security.KeyStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -42,10 +40,12 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.internal.net.VpnProfile;
 import com.android.net.module.util.ProxyUtils;
 import com.android.settings.R;
+import com.android.settings.utils.AndroidKeystoreAliasLoader;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -58,7 +58,7 @@ import java.util.List;
 class ConfigDialog extends AlertDialog implements TextWatcher,
         View.OnClickListener, AdapterView.OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
-    private final KeyStore mKeyStore = KeyStore.getInstance();
+    private static final String TAG = "ConfigDialog";
     private final DialogInterface.OnClickListener mListener;
     private final VpnProfile mProfile;
 
@@ -153,10 +153,13 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mL2tpSecret.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
         mIpsecIdentifier.setText(mProfile.ipsecIdentifier);
         mIpsecSecret.setText(mProfile.ipsecSecret);
-        loadCertificates(mIpsecUserCert, Credentials.USER_PRIVATE_KEY, 0, mProfile.ipsecUserCert);
-        loadCertificates(mIpsecCaCert, Credentials.CA_CERTIFICATE,
+        AndroidKeystoreAliasLoader androidKeystoreAliasLoader =
+                new AndroidKeystoreAliasLoader(null);
+        loadCertificates(mIpsecUserCert, androidKeystoreAliasLoader.getKeyCertAliases(), 0,
+                mProfile.ipsecUserCert);
+        loadCertificates(mIpsecCaCert, androidKeystoreAliasLoader.getCaCertAliases(),
                 R.string.vpn_no_ca_cert, mProfile.ipsecCaCert);
-        loadCertificates(mIpsecServerCert, Credentials.USER_CERTIFICATE,
+        loadCertificates(mIpsecServerCert, androidKeystoreAliasLoader.getKeyCertAliases(),
                 R.string.vpn_no_server_cert, mProfile.ipsecServerCert);
         mSaveLogin.setChecked(mProfile.saveLogin);
         mAlwaysOnVpn.setChecked(mProfile.key.equals(VpnUtils.getLockdownVpn()));
@@ -511,27 +514,30 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         typeSpinner.setAdapter(adapter);
     }
 
-    private void loadCertificates(Spinner spinner, String prefix, int firstId, String selected) {
+    private void loadCertificates(Spinner spinner, Collection<String> choices, int firstId,
+            String selected) {
         Context context = getContext();
         String first = (firstId == 0) ? "" : context.getString(firstId);
-        String[] certificates = mKeyStore.list(prefix);
+        String[] myChoices;
 
-        if (certificates == null || certificates.length == 0) {
-            certificates = new String[] {first};
+        if (choices == null || choices.size() == 0) {
+            myChoices = new String[] {first};
         } else {
-            String[] array = new String[certificates.length + 1];
-            array[0] = first;
-            System.arraycopy(certificates, 0, array, 1, certificates.length);
-            certificates = array;
+            myChoices = new String[choices.size() + 1];
+            myChoices[0] = first;
+            int i = 1;
+            for (String c : choices) {
+                myChoices[i++] = c;
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                context, android.R.layout.simple_spinner_item, certificates);
+                context, android.R.layout.simple_spinner_item, myChoices);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        for (int i = 1; i < certificates.length; ++i) {
-            if (certificates[i].equals(selected)) {
+        for (int i = 1; i < myChoices.length; ++i) {
+            if (myChoices[i].equals(selected)) {
                 spinner.setSelection(i);
                 break;
             }

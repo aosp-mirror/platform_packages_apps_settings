@@ -18,11 +18,12 @@ package com.android.settings.connecteddevice.usb;
 
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
 import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
-import static android.net.ConnectivityManager.TETHERING_USB;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -31,7 +32,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.usb.UsbManager;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceCategory;
@@ -73,7 +74,7 @@ public class UsbDetailsFunctionsControllerTest {
     @Mock
     private FragmentActivity mActivity;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
 
     @Before
     public void setUp() {
@@ -89,7 +90,7 @@ public class UsbDetailsFunctionsControllerTest {
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
-        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
+        when(mContext.getSystemService(TetheringManager.class)).thenReturn(mTetheringManager);
 
         mDetailsFunctionsController = new UsbDetailsFunctionsController(mContext, mFragment,
                 mUsbBackend);
@@ -245,8 +246,9 @@ public class UsbDetailsFunctionsControllerTest {
 
         mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
 
-        verify(mConnectivityManager).startTethering(TETHERING_USB, true,
-                mDetailsFunctionsController.mOnStartTetheringCallback);
+        verify(mTetheringManager).startTethering(eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mDetailsFunctionsController.mOnStartTetheringCallback));
         assertThat(mDetailsFunctionsController.mPreviousFunction).isEqualTo(
                 UsbManager.FUNCTION_MTP);
     }
@@ -295,15 +297,16 @@ public class UsbDetailsFunctionsControllerTest {
         mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
 
         verify(mUsbBackend, never()).setCurrentFunctions(UsbManager.FUNCTION_PTP);
-        verify(mConnectivityManager, never()).startTethering(TETHERING_USB, true,
-                mDetailsFunctionsController.mOnStartTetheringCallback);
+        verify(mTetheringManager, never()).startTethering(eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mDetailsFunctionsController.mOnStartTetheringCallback));
     }
 
     @Test
     public void onTetheringFailed_resetPreviousFunctions() {
         mDetailsFunctionsController.mPreviousFunction = UsbManager.FUNCTION_PTP;
 
-        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed();
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(0);
 
         verify(mUsbBackend).setCurrentFunctions(UsbManager.FUNCTION_PTP);
     }

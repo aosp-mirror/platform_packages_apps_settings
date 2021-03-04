@@ -28,6 +28,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -88,6 +89,10 @@ public class AndroidKeystoreAliasLoader {
                 if (key != null) {
                     if (key instanceof PrivateKey) {
                         mKeyCertAliases.add(alias);
+                        final Certificate[] cert = keyStore.getCertificateChain(alias);
+                        if (cert != null && cert.length >= 2) {
+                            mCaCertAliases.add(alias);
+                        }
                     }
                 } else {
                     if (keyStore.getCertificate(alias) != null) {
