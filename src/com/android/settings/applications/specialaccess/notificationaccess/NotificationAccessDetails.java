@@ -60,7 +60,6 @@ public class NotificationAccessDetails extends DashboardFragment {
     private static final String TAG = "NotifAccessDetails";
 
     private NotificationBackend mNm = new NotificationBackend();
-    private NotificationListenerFilter mNlf;
     private ComponentName mComponentName;
     private CharSequence mServiceName;
     protected ServiceInfo mServiceInfo;
@@ -157,13 +156,6 @@ public class NotificationAccessDetails extends DashboardFragment {
         Preference apps = getPreferenceScreen().findPreference(
                 use(BridgedAppsPreferenceController.class).getPreferenceKey());
         if (apps != null) {
-            mNlf = mNm.getListenerFilter(mComponentName, mUserId);
-            int nonBridgedCount = mNlf.getDisallowedPackages().size();
-            apps.setSummary(nonBridgedCount == 0 ?
-                    getString(R.string.notif_listener_excluded_summary_zero)
-                    : getResources().getQuantityString(
-                            R.plurals.notif_listener_excluded_summary_nonzero,
-                            nonBridgedCount, nonBridgedCount));
 
             apps.setOnPreferenceClickListener(preference -> {
                 final Bundle args = new Bundle();
@@ -174,7 +166,7 @@ public class NotificationAccessDetails extends DashboardFragment {
                 new SubSettingLauncher(getContext())
                         .setDestination(BridgedAppsSettings.class.getName())
                         .setSourceMetricsCategory(getMetricsCategory())
-                        .setTitleRes(R.string.notif_listener_excluded_app_title)
+                        .setTitleRes(R.string.notif_listener_excluded_app_screen_title)
                         .setArguments(args)
                         .setUserHandle(UserHandle.of(mUserId))
                         .launch();

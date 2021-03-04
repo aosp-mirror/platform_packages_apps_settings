@@ -8773,8 +8773,10 @@
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
 
-    <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=30] -->
-    <string name="manage_notification_access_title">Notification access</string>
+    <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=60] -->
+    <string name="manage_notification_access_title">Device &amp; app notifications</string>
+
+    <string name="manage_notification_access_summary">Control which notifications show on your apps and devices</string>
 
     <!-- Notification Access section: Indicates that the work profile admin doesn't allow this
          notification listener to access work profile notifications [CHAR LIMIT=100] -->
@@ -8833,26 +8835,19 @@
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
     <string name="notification_listener_type_title">Allowed notification types</string>
-    <string name="notif_type_ongoing">Important ongoing notifications</string>
-    <string name="notif_type_conversation">Conversation notifications</string>
-    <string name="notif_type_alerting">Alerting notifications</string>
-    <string name="notif_type_silent">Silent notifications</string>
-
-    <!-- Per notification listener, launches a list of apps whose notifications this listener cannot see -->
-    <string name="notif_listener_excluded_title">Apps that are not bridged to this listener</string>
-
-    <!-- Per notification listener, when the listener can see notifications from all apps -->
-    <string name="notif_listener_excluded_summary_zero">All apps are bridged</string>
-
-    <!-- Per notification listener, a summary of how many apps this listener cannot see
-     notifications from -->
-    <plurals name="notif_listener_excluded_summary_nonzero">
-        <item quantity="one">%d app is not bridged</item>
-        <item quantity="other">%d apps are not bridged</item>
-    </plurals>
+    <string name="notif_type_ongoing">Real-time</string>
+    <string name="notif_type_ongoing_summary">Real-time communication from apps in use, navigation, phone calls, and more</string>
+    <string name="notif_type_conversation">Conversations</string>
+    <string name="notif_type_conversation_summary">SMS and other communications</string>
+    <string name="notif_type_alerting">Default</string>
+    <string name="notif_type_alerting_summary">Notifications that may ring or vibrate based on settings</string>
+    <string name="notif_type_silent">Silent</string>
+    <string name="notif_type_silent_summary">Notifications that never make sound or vibrations</string>
 
     <!-- Per notification listener, a list of apps whose notifications this listener cannot see -->
-    <string name="notif_listener_excluded_app_title">Bridged apps</string>
+    <string name="notif_listener_excluded_app_title">See all apps</string>
+    <string name="notif_listener_excluded_app_summary">Change notification settings for each app that can send notifications</string>
+    <string name="notif_listener_excluded_app_screen_title">Apps shown on device</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
