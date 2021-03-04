@@ -41,7 +41,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.security.Credentials;
-import android.security.KeyStore;
+import android.security.LegacyVpnProfileStore;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -57,7 +57,6 @@ import com.android.internal.annotations.GuardedBy;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
-import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.widget.GearPreference;
@@ -93,8 +92,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     private ConnectivityManager mConnectivityManager;
     private UserManager mUserManager;
     private VpnManager mVpnManager;
-
-    private final KeyStore mKeyStore = KeyStore.getInstance();
 
     private Map<String, LegacyVpnPreference> mLegacyVpnPreferences = new ArrayMap<>();
     private Map<AppVpnInfo, AppPreference> mAppPreferences = new ArrayMap<>();
@@ -222,7 +219,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         final Context context = activity.getApplicationContext();
 
         // Run heavy RPCs before switching to UI thread
-        final List<VpnProfile> vpnProfiles = loadVpnProfiles(mKeyStore);
+        final List<VpnProfile> vpnProfiles = loadVpnProfiles();
         final List<AppVpnInfo> vpnApps = getVpnApps(context, /* includeProfiles */ true);
 
         final Map<String, LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
@@ -540,12 +537,13 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         return result;
     }
 
-    static List<VpnProfile> loadVpnProfiles(KeyStore keyStore, int... excludeTypes) {
+    private static List<VpnProfile> loadVpnProfiles() {
         final ArrayList<VpnProfile> result = Lists.newArrayList();
 
-        for (String key : keyStore.list(Credentials.VPN)) {
-            final VpnProfile profile = VpnProfile.decode(key, keyStore.get(Credentials.VPN + key));
-            if (profile != null && !ArrayUtils.contains(excludeTypes, profile.type)) {
+        for (String key : LegacyVpnProfileStore.list(Credentials.VPN)) {
+            final VpnProfile profile = VpnProfile.decode(key,
+                    LegacyVpnProfileStore.get(Credentials.VPN + key));
+            if (profile != null) {
                 result.add(profile);
             }
         }
