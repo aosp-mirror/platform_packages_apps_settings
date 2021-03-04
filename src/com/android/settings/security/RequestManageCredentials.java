@@ -208,7 +208,7 @@ public class RequestManageCredentials extends Activity {
                     .write();
             finishWithResultCancelled();
         });
-        allowButton.setOnClickListener(b -> setOrUpdateCredentialManagementApp());
+        allowButton.setOnClickListener(b -> setOrUpdateCredentialManagementAppAndFinish());
     }
 
     private void loadExtendedFloatingActionButton() {
@@ -220,13 +220,14 @@ public class RequestManageCredentials extends Activity {
         });
     }
 
-    private void setOrUpdateCredentialManagementApp() {
+    private void setOrUpdateCredentialManagementAppAndFinish() {
         try {
             mKeyChainConnection.getService().setCredentialManagementApp(
                     mCredentialManagerPackage, mAuthenticationPolicy);
             DevicePolicyEventLogger
                     .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REQUEST_ACCEPTED)
                     .write();
+            setResult(RESULT_OK);
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to set credential manager app", e);
             logRequestFailure();
