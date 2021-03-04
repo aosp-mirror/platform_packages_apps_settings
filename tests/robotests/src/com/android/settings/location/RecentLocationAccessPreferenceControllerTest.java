@@ -98,7 +98,7 @@ public class RecentLocationAccessPreferenceControllerTest {
     @Test
     @Ignore
     public void updateState_whenAppListIsEmpty_shouldDisplayTitleTextAndDetailsText() {
-        doReturn(new ArrayList<>()).when(mRecentLocationApps).getAppListSorted();
+        doReturn(new ArrayList<>()).when(mRecentLocationApps).getAppListSorted(false);
         mController.displayPreference(mScreen);
         mController.updateState(mLayoutPreference);
 

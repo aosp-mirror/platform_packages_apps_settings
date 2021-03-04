@@ -105,6 +105,7 @@ public class BaseBluetoothDialogPreferenceTest {
     public void onBindDialogView_checkRadioButtonsText() {
         when(mView.findViewById(ID1)).thenReturn(mRadioButton1);
         when(mView.findViewById(ID2)).thenReturn(mRadioButton2);
+        when(mView.findViewById(TEXT_VIEW_ID)).thenReturn(mTextView);
 
         assertThat(mRadioButton1.getText()).isNotEqualTo(BUTTON1);
         assertThat(mRadioButton2.getText()).isNotEqualTo(BUTTON2);
@@ -118,6 +119,7 @@ public class BaseBluetoothDialogPreferenceTest {
     public void onBindDialogView_checkRadioButtonsState() {
         when(mView.findViewById(ID1)).thenReturn(mRadioButton1);
         when(mView.findViewById(ID2)).thenReturn(mRadioButton2);
+        when(mView.findViewById(TEXT_VIEW_ID)).thenReturn(mTextView);
         List<Integer> indexes = new ArrayList<>();
         indexes.add(0);
         when(mCallback.getSelectableIndex()).thenReturn(indexes);

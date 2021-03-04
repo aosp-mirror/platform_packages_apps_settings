@@ -85,7 +85,8 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
         final Context prefContext = mCategoryRecentLocationRequests.getContext();
         final List<RecentLocationAccesses.Access> recentLocationAccesses = new ArrayList<>();
         final UserManager userManager = UserManager.get(mContext);
-        for (RecentLocationAccesses.Access access : mRecentLocationApps.getAppListSorted()) {
+        for (RecentLocationAccesses.Access access : mRecentLocationApps.getAppListSorted(
+                /* showSystemApps= */ false)) {
             if (isRequestMatchesProfileType(userManager, access, mType)) {
                 recentLocationAccesses.add(access);
             }

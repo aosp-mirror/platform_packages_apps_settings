@@ -128,8 +128,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void initSettingsPreference() {
+        // If the device doesn't support magnification area, it should hide the settings preference.
+        if (!getContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_magnification_area)) {
+            return;
+        }
         mSettingsPreference = new Preference(getPrefContext());
         mSettingsPreference.setTitle(R.string.accessibility_menu_item_settings);
+        // TODO(b/177371954): "magnification area" should be brought up to the highest level of the
+        // settings UI so that it appears below "shortcut" to replace "settings.
         mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
         mSettingsPreference.setPersistent(false);
 
