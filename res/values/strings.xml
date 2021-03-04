@@ -2985,7 +2985,7 @@
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature. -->
     <string name="doze_always_on_summary">Increased battery usage</string>
     <!-- [CHAR LIMIT=30] Display and accessibility settings screens, setting option name to force bold text. -->
-    <string name="force_bold_text">Bold Text</string>
+    <string name="force_bold_text">Bold text</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
@@ -4037,7 +4037,7 @@
     <string name="managed_profile_location_services">Location services for work</string>
 
     <!-- [CHAR LIMIT=60] Location settings screen, screen title -->
-    <string name="location_time_zone_detection_screen_title">Location time zone detection</string>
+    <string name="location_time_zone_detection_screen_title">Use location to set time zone</string>
     <!-- [CHAR LIMIT=50] Location settings screen, title for the setting that control whether the
          device can use its location for time zone detection. -->
     <string name="location_time_zone_detection_enabled_title">Location time zone detection</string>
@@ -4051,7 +4051,7 @@
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable due to other settings like the "automatic time zone detection enabled" setting
          being set to "off". -->
-    <string name="location_time_zone_detection_auto_is_off">Automatic time zone detection is disabled</string>
+    <string name="location_time_zone_detection_auto_is_off">Automatic time zone is off</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable for the user for unspecified reasons. More specific messages are used when there
          is a clear reason. -->
@@ -12801,6 +12801,8 @@
     <!-- Alert Dialog text when user didn't input the phone number [CHAR LIMIT=50]-->
     <string name="smart_forwarding_missing_alert_dialog_text">OK</string>
 
-    <!-- Enable 2G: Title for if user wants to enable 2G [CHAR LIMIT=40] -->
+    <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=40] -->
     <string name="enable_2g_title">Allow 2G</string>
+    <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=NONE] -->
+    <string name="enable_2g_summary">Use 2G cellular connections. For emergency calls, 2G is always turned on.</string>
 </resources>

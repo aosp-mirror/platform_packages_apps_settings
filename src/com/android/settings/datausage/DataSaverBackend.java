@@ -20,10 +20,7 @@ import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.net.INetworkPolicyListener;
 import android.net.NetworkPolicyManager;
-import android.os.RemoteException;
-import android.telephony.SubscriptionPlan;
 import android.util.SparseIntArray;
 
 import com.android.settings.overlay.FeatureFactory;
@@ -180,32 +177,16 @@ public class DataSaverBackend {
 
     }
 
-    private final INetworkPolicyListener mPolicyListener = new INetworkPolicyListener.Stub() {
-        @Override
-        public void onUidRulesChanged(int uid, int uidRules) throws RemoteException {
-        }
-
+    private final NetworkPolicyManager.Listener mPolicyListener =
+            new NetworkPolicyManager.Listener() {
         @Override
         public void onUidPoliciesChanged(final int uid, final int uidPolicies) {
             ThreadUtils.postOnMainThread(() -> handleUidPoliciesChanged(uid, uidPolicies));
         }
 
         @Override
-        public void onMeteredIfacesChanged(String[] strings) throws RemoteException {
-        }
-
-        @Override
-        public void onRestrictBackgroundChanged(final boolean isDataSaving) throws RemoteException {
+        public void onRestrictBackgroundChanged(final boolean isDataSaving) {
             ThreadUtils.postOnMainThread(() -> handleRestrictBackgroundChanged(isDataSaving));
-        }
-
-        @Override
-        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue,
-                int[] networkTypes) {
-        }
-
-        @Override
-        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) {
         }
     };
 
