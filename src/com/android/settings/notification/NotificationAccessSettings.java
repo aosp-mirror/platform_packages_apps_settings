@@ -20,12 +20,14 @@ import android.annotation.Nullable;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
+import android.companion.ICompanionDeviceManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -35,6 +37,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -57,6 +60,9 @@ import java.util.List;
 @SearchIndexable
 public class NotificationAccessSettings extends EmptyTextSettings {
     private static final String TAG = "NotifAccessSettings";
+    private static final String ALLOWED_KEY = "allowed";
+    private static final String NOT_ALLOWED_KEY = "not_allowed";
+
     private static final ManagedServiceSettings.Config CONFIG =
             new ManagedServiceSettings.Config.Builder()
                     .setTag(TAG)
@@ -76,6 +82,7 @@ public class NotificationAccessSettings extends EmptyTextSettings {
     private DevicePolicyManager mDpm;
     private ServiceListing mServiceListing;
     private IconDrawableFactory mIconDrawableFactory;
+    private NotificationBackend mBackend = new NotificationBackend();
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -93,7 +100,6 @@ public class NotificationAccessSettings extends EmptyTextSettings {
                 .setTag(CONFIG.tag)
                 .build();
         mServiceListing.addCallback(this::updateList);
-        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
 
         if (UserManager.get(mContext).isManagedProfile()) {
             // Apps in the work profile do not support notification listeners.
@@ -127,7 +133,11 @@ public class NotificationAccessSettings extends EmptyTextSettings {
         final int managedProfileId = Utils.getManagedProfileId(um, UserHandle.myUserId());
 
         final PreferenceScreen screen = getPreferenceScreen();
-        screen.removeAll();
+        final PreferenceCategory allowedCategory = screen.findPreference(ALLOWED_KEY);
+        allowedCategory.removeAll();
+        final PreferenceCategory notAllowedCategory = screen.findPreference(NOT_ALLOWED_KEY);
+        notAllowedCategory.removeAll();
+
         services.sort(new PackageItemInfo.DisplayNameComparator(mPm));
         for (ServiceInfo service : services) {
             final ComponentName cn = new ComponentName(service.packageName, service.name);
@@ -145,9 +155,11 @@ public class NotificationAccessSettings extends EmptyTextSettings {
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(service, service.applicationInfo,
                     UserHandle.getUserId(service.applicationInfo.uid)));
             pref.setKey(cn.flattenToString());
-            pref.setSummary(mNm.isNotificationListenerAccessGranted(cn)
-                    ? R.string.app_permission_summary_allowed
-                    : R.string.app_permission_summary_not_allowed);
+            pref.setSummary(mBackend.getDeviceList(ICompanionDeviceManager.Stub.asInterface(
+                    ServiceManager.getService(Context.COMPANION_DEVICE_SERVICE)),
+                    com.android.settings.bluetooth.Utils.getLocalBtManager(mContext),
+                    service.packageName,
+                    UserHandle.myUserId()));
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
                     service.packageName, managedProfileId)) {
@@ -173,7 +185,11 @@ public class NotificationAccessSettings extends EmptyTextSettings {
                         return true;
                     });
             pref.setKey(cn.flattenToString());
-            screen.addPreference(pref);
+            if (mNm.isNotificationListenerAccessGranted(cn)) {
+                allowedCategory.addPreference(pref);
+            } else {
+                notAllowedCategory.addPreference(pref);
+            }
         }
         highlightPreferenceIfNeeded();
     }
