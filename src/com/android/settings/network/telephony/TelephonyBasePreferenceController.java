@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
@@ -73,5 +74,14 @@ public abstract class TelephonyBasePreferenceController extends BasePreferenceCo
         final CarrierConfigManager carrierConfigMgr =
                 mContext.getSystemService(CarrierConfigManager.class);
         return carrierConfigMgr.getConfigForSubId(subId);
+    }
+
+    /**
+     * Returns the resources associated with Subscription.
+     *
+     * @return Resources associated with Subscription.
+     */
+    public Resources getResourcesForSubId() {
+        return SubscriptionManager.getResourcesForSubId(mContext, mSubId);
     }
 }
