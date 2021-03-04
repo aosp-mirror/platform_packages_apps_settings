@@ -28,6 +28,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.Uri;
+import android.net.VpnManager;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
@@ -87,10 +88,16 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            boolean isResetSucceed = true;
             ConnectivityManager connectivityManager = (ConnectivityManager)
                     mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivityManager != null) {
                 connectivityManager.factoryReset();
+            }
+
+            VpnManager vpnManager = mContext.getSystemService(VpnManager.class);
+            if (vpnManager != null) {
+                vpnManager.factoryReset();
             }
 
             WifiManager wifiManager = (WifiManager)
@@ -100,6 +107,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             p2pFactoryReset(mContext);
+
+            if (mEraseEsim) {
+                isResetSucceed = RecoverySystem.wipeEuiccData(mContext, mPackageName);
+            }
 
             TelephonyManager telephonyManager = (TelephonyManager)
                     mContext.getSystemService(TelephonyManager.class)
@@ -125,11 +136,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             }
 
             restoreDefaultApn(mContext);
-            if (mEraseEsim) {
-                return RecoverySystem.wipeEuiccData(mContext, mPackageName);
-            } else {
-                return true;
-            }
+            return isResetSucceed;
         }
 
         @Override

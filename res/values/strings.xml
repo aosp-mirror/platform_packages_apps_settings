@@ -5653,6 +5653,10 @@
     <string name="battery_tip_high_usage_title" product="device">Device used more than usual</string>
     <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
+    <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_title">Optimizing for battery health</string>
+    <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Tap to learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -5751,6 +5755,11 @@
 
     <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
     <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
+
+    <!-- Summary for top level battery tile if battery is not present. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_message">Problem reading your battery meter</string>
+    <!-- Summary to battery page if battery is not present. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_help_message">Problem reading your battery meter. Tap to <annotation id="url">learn more</annotation></string>
 
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
@@ -7178,6 +7187,8 @@
     <string name="help_url_sound" translatable="false"></string>
     <!-- Help URL, Battery [DO NOT TRANSLATE] -->
     <string name="help_url_battery" translatable="false"></string>
+    <!-- Help URL, Battery Defender [DO NOT TRANSLATE] -->
+    <string name="help_url_battery_defender" translatable="false"></string>
     <!-- Help URL, Accounts [DO NOT TRANSLATE] -->
     <string name="help_url_accounts" translatable="false"></string>
     <!-- Help URL, Choose lockscreen [DO NOT TRANSLATE] -->
@@ -7266,6 +7277,8 @@
     <string name="help_uri_sim_combination_warning" translatable="false"></string>
     <!-- url for the NFC and payment settings page -->
     <string name="help_uri_nfc_and_payment_settings" translatable="false"></string>
+    <!-- url for battery page if battery is not present -->
+    <string name="help_url_battery_missing" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -11463,7 +11476,7 @@
     <string name="pref_title_network_details">Network details</string>
 
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
-    <string name="about_phone_device_name_warning">Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices or set up a Wi-Fi hotspot.</string>
+    <string name="about_phone_device_name_warning">Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot.</string>
 
     <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
     <string name="devices_title">Devices</string>
@@ -11791,7 +11804,7 @@
     <string name="carrier_settings_euicc">Carrier</string>
     <!-- Mobile network settings screen, a string showing the version of carrier settings for this
          subscription [CHAR LIMIT=NONE] -->
-    <string name="carrier_settings_version">Settings version</string>
+    <string name="carrier_settings_version">Carrier settings version</string>
 
     <!-- Mobile network settings screen, name for call settings category [CHAR LIMIT=NONE] -->
     <string name="call_category">Calling</string>

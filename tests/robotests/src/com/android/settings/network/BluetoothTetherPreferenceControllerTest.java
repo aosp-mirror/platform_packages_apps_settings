@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.net.TetheringManager;
 
 import androidx.preference.SwitchPreference;
@@ -44,7 +43,7 @@ import org.robolectric.util.ReflectionHelpers;
 public class BluetoothTetherPreferenceControllerTest {
 
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
     @Mock
     private TetherEnabler mTetherEnabler;
 
@@ -58,9 +57,8 @@ public class BluetoothTetherPreferenceControllerTest {
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         mSwitchPreference = spy(SwitchPreference.class);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
-                mConnectivityManager);
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[] {""});
+        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[] {""});
         mController = new BluetoothTetherPreferenceController(mContext, "BLUETOOTH");
         mController.setTetherEnabler(mTetherEnabler);
         ReflectionHelpers.setField(mController, "mPreference", mSwitchPreference);
@@ -98,7 +96,7 @@ public class BluetoothTetherPreferenceControllerTest {
 
     @Test
     public void shouldShow_noBluetoothTetherable() {
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
         assertThat(mController.isAvailable()).isFalse();
     }
 

@@ -18,7 +18,6 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.os.UserManager;
-import android.security.KeyStore;
 
 import androidx.preference.PreferenceScreen;
 
@@ -26,6 +25,9 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import java.security.KeyStore;
+import java.security.KeyStoreException;
 
 public class ResetCredentialsPreferenceController extends RestrictedEncryptionPreferenceController
         implements LifecycleObserver, OnResume {
@@ -38,7 +40,13 @@ public class ResetCredentialsPreferenceController extends RestrictedEncryptionPr
 
     public ResetCredentialsPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, UserManager.DISALLOW_CONFIG_CREDENTIALS);
-        mKeyStore = KeyStore.getInstance();
+        KeyStore keyStore = null;
+        try {
+            keyStore = KeyStore.getInstance("AndroidKeyStore");
+            keyStore.load(null);
+        } catch (Exception e) {
+        }
+        mKeyStore = keyStore;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -58,7 +66,15 @@ public class ResetCredentialsPreferenceController extends RestrictedEncryptionPr
     @Override
     public void onResume() {
         if (mPreference != null && !mPreference.isDisabledByAdmin()) {
-            mPreference.setEnabled(!mKeyStore.isEmpty());
+            boolean isEnabled = false;
+            try {
+                if (mKeyStore != null) {
+                    isEnabled = mKeyStore.aliases().hasMoreElements();
+                }
+            } catch (KeyStoreException e) {
+                // If access to keystore fails, treat as disabled.
+            }
+            mPreference.setEnabled(isEnabled);
         }
     }
 }
