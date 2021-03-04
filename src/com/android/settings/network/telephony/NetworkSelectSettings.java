@@ -343,16 +343,6 @@ public class NetworkSelectSettings extends DashboardFragment {
                     mPreferenceCategory.getPreference(numberOfPreferences));
         }
 
-        // update selected preference instance by index
-        for (int index = 0; index < mCellInfoList.size(); index++) {
-            final CellInfo cellInfo = mCellInfoList.get(index);
-
-            if ((mSelectedPreference != null) && mSelectedPreference.isSameCell(cellInfo)) {
-                mSelectedPreference = (NetworkOperatorPreference)
-                        (mPreferenceCategory.getPreference(index));
-            }
-        }
-
         // update the content of preference
         NetworkOperatorPreference connectedPref = null;
         for (int index = 0; index < mCellInfoList.size(); index++) {
@@ -383,6 +373,16 @@ public class NetworkSelectSettings extends DashboardFragment {
                 connectedPref = pref;
             } else {
                 pref.setSummary(null);
+            }
+        }
+
+        // update selected preference instance by index
+        for (int index = 0; index < mCellInfoList.size(); index++) {
+            final CellInfo cellInfo = mCellInfoList.get(index);
+
+            if ((mSelectedPreference != null) && mSelectedPreference.isSameCell(cellInfo)) {
+                mSelectedPreference = (NetworkOperatorPreference)
+                        (mPreferenceCategory.getPreference(index));
             }
         }
 

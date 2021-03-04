@@ -18,11 +18,11 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.InetAddresses;
 import android.net.IpConfiguration;
 import android.net.IpConfiguration.IpAssignment;
 import android.net.IpConfiguration.ProxySettings;
 import android.net.LinkAddress;
-import android.net.NetworkUtils;
 import android.net.ProxyInfo;
 import android.net.StaticIpConfiguration;
 import android.net.Uri;
@@ -67,6 +67,8 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.net.module.util.NetUtils;
+import com.android.net.module.util.ProxyUtils;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
@@ -164,6 +166,7 @@ public class WifiConfigController2 implements TextWatcher,
     private ScrollView mDialogContainer;
     private Spinner mSecuritySpinner;
     @VisibleForTesting Spinner mEapMethodSpinner;
+    private int mLastShownEapMethod;
     @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
     private Spinner mEapCaCertSpinner;
     private Spinner mEapOcspSpinner;
@@ -878,7 +881,7 @@ public class WifiConfigController2 implements TextWatcher,
 
     private Inet4Address getIPv4Address(String text) {
         try {
-            return (Inet4Address) NetworkUtils.numericToInetAddress(text);
+            return (Inet4Address) InetAddresses.parseNumericAddress(text);
         } catch (IllegalArgumentException | ClassCastException e) {
             return null;
         }
@@ -914,7 +917,7 @@ public class WifiConfigController2 implements TextWatcher,
         if (TextUtils.isEmpty(gateway)) {
             try {
                 //Extract a default gateway from IP address
-                InetAddress netPart = NetworkUtils.getNetworkPart(inetAddr, networkPrefixLength);
+                InetAddress netPart = NetUtils.getNetworkPart(inetAddr, networkPrefixLength);
                 byte[] addr = netPart.getAddress();
                 addr[addr.length - 1] = 1;
                 mGatewayView.setText(InetAddress.getByAddress(addr).getHostAddress());
@@ -1057,6 +1060,7 @@ public class WifiConfigController2 implements TextWatcher,
             final int eapMethod = enterpriseConfig.getEapMethod();
             final int phase2Method = enterpriseConfig.getPhase2Method();
             mEapMethodSpinner.setSelection(eapMethod);
+            mLastShownEapMethod = eapMethod;
             showEapFieldsByMethod(eapMethod);
             switch (eapMethod) {
                 case Eap.PEAP:
@@ -1410,7 +1414,8 @@ public class WifiConfigController2 implements TextWatcher,
                 if (proxyProperties != null) {
                     mProxyHostView.setText(proxyProperties.getHost());
                     mProxyPortView.setText(Integer.toString(proxyProperties.getPort()));
-                    mProxyExclusionListView.setText(proxyProperties.getExclusionListAsString());
+                    mProxyExclusionListView.setText(
+                            ProxyUtils.exclusionListAsString(proxyProperties.getExclusionList()));
                 }
             }
         } else if (mProxySettingsSpinner.getSelectedItemPosition() == PROXY_PAC) {
@@ -1627,7 +1632,11 @@ public class WifiConfigController2 implements TextWatcher,
                 mSsidScanButton.setVisibility(View.GONE);
             }
         } else if (parent == mEapMethodSpinner) {
-            showSecurityFields(/* refreshEapMethods */ false, /* refreshCertificates */ true);
+            final int selectedItemPosition = mEapMethodSpinner.getSelectedItemPosition();
+            if (mLastShownEapMethod != selectedItemPosition) {
+                mLastShownEapMethod = selectedItemPosition;
+                showSecurityFields(/* refreshEapMethods */ false, /* refreshCertificates */ true);
+            }
         } else if (parent == mEapCaCertSpinner) {
             showSecurityFields(/* refreshEapMethods */ false, /* refreshCertificates */ false);
         } else if (parent == mPhase2Spinner

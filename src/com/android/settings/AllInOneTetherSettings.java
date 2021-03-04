@@ -16,8 +16,8 @@
 
 package com.android.settings;
 
-import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.ConnectivityManager.TETHERING_WIFI;
+import static android.net.TetheringManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
 import android.app.settings.SettingsEnums;

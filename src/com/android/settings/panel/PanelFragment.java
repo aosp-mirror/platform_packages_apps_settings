@@ -442,12 +442,14 @@ public class PanelFragment extends Fragment {
         if (mLayoutView != null) {
             mLayoutView.getViewTreeObserver().removeOnGlobalLayoutListener(mPanelLayoutListener);
         }
-        mMetricsProvider.action(
-                0 /* attribution */,
-                SettingsEnums.PAGE_HIDE,
-                mPanel.getMetricsCategory(),
-                mPanelClosedKey,
-                0 /* value */);
+        if (mPanel != null) {
+            mMetricsProvider.action(
+                    0 /* attribution */,
+                    SettingsEnums.PAGE_HIDE,
+                    mPanel.getMetricsCategory(),
+                    mPanelClosedKey,
+                    0 /* value */);
+        }
     }
 
     @VisibleForTesting

@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -56,7 +57,7 @@ public class TetherPreferenceControllerTest {
     @Mock
     private Context mContext;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
     @Mock
@@ -69,7 +70,7 @@ public class TetherPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mController = spy(TetherPreferenceController.class);
         ReflectionHelpers.setField(mController, "mContext", mContext);
-        ReflectionHelpers.setField(mController, "mConnectivityManager", mConnectivityManager);
+        ReflectionHelpers.setField(mController, "mTetheringManager", mTetheringManager);
         ReflectionHelpers.setField(mController, "mBluetoothAdapter", mBluetoothAdapter);
         ReflectionHelpers.setField(mController, "mPreference", mPreference);
     }
@@ -106,16 +107,16 @@ public class TetherPreferenceControllerTest {
     }
 
     @Test
-    public void updateSummary_noPreference_noInteractionWithConnectivityManager() {
+    public void updateSummary_noPreference_noInteractionWithTetheringManager() {
         ReflectionHelpers.setField(mController, "mPreference", null);
         mController.updateSummary();
-        verifyNoMoreInteractions(mConnectivityManager);
+        verifyNoMoreInteractions(mTetheringManager);
     }
 
     @Test
     public void updateSummary_wifiTethered_shouldShowHotspotMessage() {
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[]{"123"});
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"123"});
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[]{"123"});
+        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"123"});
 
         mController.updateSummary();
         verify(mPreference).setSummary(R.string.tether_settings_summary_hotspot_on_tether_off);
@@ -123,8 +124,8 @@ public class TetherPreferenceControllerTest {
 
     @Test
     public void updateSummary_btThetherOn_shouldShowTetherMessage() {
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[]{"123"});
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[]{"123"});
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[]{"123"});
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[]{"123"});
 
         mController.updateSummary();
         verify(mPreference).setSummary(R.string.tether_settings_summary_hotspot_off_tether_on);
@@ -132,8 +133,8 @@ public class TetherPreferenceControllerTest {
 
     @Test
     public void updateSummary_tetherOff_shouldShowTetherOffMessage() {
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[]{"123"});
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"456"});
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[]{"123"});
+        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"456"});
 
         mController.updateSummary();
         verify(mPreference).setSummary(R.string.switch_off_text);
@@ -141,9 +142,9 @@ public class TetherPreferenceControllerTest {
 
     @Test
     public void updateSummary_wifiBtTetherOn_shouldShowHotspotAndTetherMessage() {
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[]{"123", "456"});
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"456"});
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[]{"23"});
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[]{"123", "456"});
+        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"456"});
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[]{"23"});
 
         mController.updateSummary();
         verify(mPreference).setSummary(R.string.tether_settings_summary_hotspot_on_tether_on);

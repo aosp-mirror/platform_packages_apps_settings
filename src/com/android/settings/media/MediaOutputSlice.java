@@ -396,7 +396,7 @@ public class MediaOutputSlice implements CustomSliceable {
 
     @Override
     public Class getBackgroundWorkerClass() {
-        return MediaOutputSliceWorker.class;
+        return MediaDeviceUpdateWorker.class;
     }
 
     private boolean isVisible() {
