@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.network.telephony;
@@ -20,13 +20,17 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Looper;
 import android.telephony.SubscriptionManager;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -35,10 +39,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class DisabledSubscriptionControllerTest {
 
     private static final String KEY = "disabled_subscription_category";
@@ -47,22 +49,28 @@ public class DisabledSubscriptionControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private PreferenceScreen mScreen;
+    private Lifecycle mLifecycle;
 
+    private PreferenceScreen mScreen;
+    private PreferenceManager mPreferenceManager;
     private PreferenceCategory mCategory;
     private Context mContext;
-    private Lifecycle mLifecycle;
     private DisabledSubscriptionController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        LifecycleOwner lifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(lifecycleOwner);
-        doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+        mPreferenceManager = new PreferenceManager(mContext);
+        mScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mCategory = new PreferenceCategory(mContext);
-        doReturn(mCategory).when(mScreen).findPreference(KEY);
+        mCategory.setKey(KEY);
+        mScreen.addPreference(mCategory);
+
         mController = new DisabledSubscriptionController(mContext, KEY);
         mController.init(mLifecycle, SUB_ID);
     }

@@ -363,43 +363,43 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void checkResource_stringArrayLength() {
-        String[] entryValues = mContext.getResources().getStringArray(
+        String[] entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_cdma_values);
         assertEquals(4, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_cdma_no_lte_values);
         assertEquals(2, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_cdma_only_lte_values);
         assertEquals(2, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_tdscdma_values);
         assertEquals(3, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_except_gsm_lte_values);
         assertEquals(1, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_except_gsm_values);
         assertEquals(2, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_except_lte_values);
         assertEquals(2, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_values);
         assertEquals(3, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.enabled_networks_values);
         assertEquals(3, entryValues.length);
 
-        entryValues = mContext.getResources().getStringArray(
+        entryValues = mController.getResourcesForSubId().getStringArray(
                 R.array.preferred_network_mode_values_world_mode);
         assertEquals(3, entryValues.length);
     }
