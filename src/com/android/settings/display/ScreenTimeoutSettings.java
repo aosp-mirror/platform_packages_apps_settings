@@ -26,8 +26,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ClickableSpan;
 import android.util.Log;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -97,15 +102,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
         mPrivacyPreference.setSelectable(false);
         mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
-
-        mDisableOptionsPreference = new FooterPreference(context);
-        mDisableOptionsPreference.setLayoutResource(R.layout.preference_footer);
-        mDisableOptionsPreference.setTitle(R.string.admin_disabled_other_options);
-        mDisableOptionsPreference.setIcon(R.drawable.ic_info_outline_24dp);
-
-        // The 'disabled by admin' preference should always be at the end of the setting page.
-        mDisableOptionsPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE);
-        mPrivacyPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE - 1);
     }
 
     @Override
@@ -138,14 +134,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
 
-        if (mAdmin != null) {
-            mDisableOptionsPreference.setOnPreferenceClickListener(p -> {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
-                return true;
-            });
-            screen.addPreference(mDisableOptionsPreference);
-        }
-
         final List<? extends CandidateInfo> candidateList = getCandidates();
         if (candidateList == null) {
             return;
@@ -165,12 +153,41 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         }
 
         if (mAdmin != null) {
-            mDisableOptionsPreference.setOnPreferenceClickListener(p -> {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
-                return true;
-            });
+            setupDisabledFooterPreference();
             screen.addPreference(mDisableOptionsPreference);
         }
+    }
+
+    @VisibleForTesting
+    void setupDisabledFooterPreference() {
+        final String textDisabledByAdmin = getResources().getString(
+                R.string.admin_disabled_other_options);
+        final String textMoreDetails = getResources().getString(R.string.admin_more_details);
+
+        final SpannableString spannableString = new SpannableString(
+                textDisabledByAdmin + System.lineSeparator() + textMoreDetails);
+        final ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
+            }
+        };
+
+        if (textDisabledByAdmin != null && textMoreDetails != null) {
+            spannableString.setSpan(clickableSpan, textDisabledByAdmin.length() + 1,
+                    textDisabledByAdmin.length() + textMoreDetails.length() + 1,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        mDisableOptionsPreference = new FooterPreference(getContext());
+        mDisableOptionsPreference.setLayoutResource(R.layout.preference_footer);
+        mDisableOptionsPreference.setTitle(spannableString);
+        mDisableOptionsPreference.setSelectable(false);
+        mDisableOptionsPreference.setIcon(R.drawable.ic_info_outline_24dp);
+
+        // The 'disabled by admin' preference should always be at the end of the setting page.
+        mDisableOptionsPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE);
+        mPrivacyPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE - 1);
     }
 
     @Override
