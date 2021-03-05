@@ -61,15 +61,6 @@
         settings:controller="com.android.settings.network.AirplaneModePreferenceController"
         settings:userRestriction="no_airplane_mode"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="airplane_safe_networks"
-        android:title="@string/airplane_safe_networks"
-        android:icon="@drawable/ic_airplane_safe_networks_24dp"
-        android:summary="@string/airplane_safe_networks_summary"
-        android:order="-4"
-        settings:userRestriction="no_airplane_mode"
-        settings:keywords="@string/keywords_airplane_safe_networks" />
-
     <com.android.settingslib.RestrictedPreference
         android:key="manage_mobile_plan"
         android:title="@string/manage_mobile_plan_title"
