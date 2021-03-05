@@ -17,20 +17,15 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PowerManager;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
+import android.provider.Settings;
 
-import androidx.preference.PreferenceViewHolder;
-
-import com.android.settings.R;
-import com.android.settings.widget.PrimarySwitchPreference;
+import androidx.preference.Preference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,108 +34,84 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatterySaverControllerTest {
 
     @Mock
+    private Preference mBatterySaverPref;
+    @Mock
     private PowerManager mPowerManager;
 
     private BatterySaverController mBatterySaverController;
-    private PrimarySwitchPreference mBatterySaverPref;
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        final Context mContext = spy(RuntimeEnvironment.application);
 
-        mBatterySaverPref = new PrimarySwitchPreference(mContext);
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final PreferenceViewHolder mHolder =
-                PreferenceViewHolder.createInstanceForTests(inflater.inflate(
-                com.android.settingslib.R.layout.preference_two_target, null));
-        final LinearLayout mWidgetView = mHolder.itemView.findViewById(android.R.id.widget_frame);
-        inflater.inflate(R.layout.restricted_preference_widget_primary_switch, mWidgetView, true);
-        mBatterySaverPref.onBindViewHolder(mHolder);
+        mContext = RuntimeEnvironment.application;
+        mBatterySaverController = spy(new BatterySaverController(mContext));
+        ReflectionHelpers.setField(mBatterySaverController, "mPowerManager", mPowerManager);
+        ReflectionHelpers.setField(mBatterySaverController, "mBatterySaverPref", mBatterySaverPref);
 
-        doReturn(mPowerManager).when(mContext).getSystemService(Context.POWER_SERVICE);
-
-        mBatterySaverController = new BatterySaverController(mContext);
-        mBatterySaverController.mBatterySaverPref = mBatterySaverPref;
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
     }
 
     @Test
-    public void onBatteryChanged_true_switchEnabled() {
-        mBatterySaverController.onBatteryChanged(true);
-
-        assertThat(mBatterySaverPref.getSwitch().isEnabled()).isFalse();
+    public void onPreferenceChange_onStart() {
+        mBatterySaverController.onStart();
+        verify(mBatterySaverPref).setSummary("Off");
     }
 
     @Test
-    public void onBatteryChanged_false_switchDisabled() {
-        mBatterySaverController.onBatteryChanged(false);
-
-        assertThat(mBatterySaverPref.getSwitch().isEnabled()).isTrue();
+    public void onPreferenceChange_onPowerSaveModeChanged() {
+        mBatterySaverController.onPowerSaveModeChanged();
+        verify(mBatterySaverPref).setSummary("Off");
     }
 
     @Test
-    public void onPowerSaveModeChanged_differentState_updateToIsChecked() {
+    public void getSummary_batterySaverOn_showSummaryOn() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
-        assertThat(mBatterySaverPref.isChecked()).isFalse();
-
-        mBatterySaverController.onPowerSaveModeChanged();
-
-        assertThat(mBatterySaverPref.isChecked()).isTrue();
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("On");
     }
 
     @Test
-    public void onPowerSaveModeChanged_differentState_updateToUnChecked() {
-        mBatterySaverPref.setChecked(true);
-
+    public void getSummary_batterySaverOffButScheduled_showSummaryScheduled() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
-        assertThat(mBatterySaverPref.isChecked()).isTrue();
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 15);
 
-        mBatterySaverController.onPowerSaveModeChanged();
-
-        assertThat(mBatterySaverPref.isChecked()).isFalse();
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("Will turn on at 15%");
     }
 
     @Test
-    public void onPowerSaveModeChanged_sameState_noUpdate() {
+    public void getSummary_batterySaverOffButScheduledZeroPercent_showSummaryOff() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
-        assertThat(mBatterySaverPref.isChecked()).isFalse();
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
 
-        mBatterySaverController.onPowerSaveModeChanged();
-
-        assertThat(mBatterySaverPref.isChecked()).isFalse();
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("Off");
     }
 
     @Test
-    public void setChecked_on_setPowerSaveMode() {
-        mBatterySaverController.setChecked(true);
+    public void getSummary_batterySaverOffButScheduledBasedOnRoutine_showSummaryBasedOnRoutine() {
+        when(mPowerManager.isPowerSaveMode()).thenReturn(false);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Settings.Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
 
-        verify(mPowerManager).setPowerSaveModeEnabled(true);
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("Based on your routine");
     }
 
     @Test
-    public void setChecked_off_unsetPowerSaveMode() {
-        mBatterySaverController.setChecked(false);
-
-        verify(mPowerManager).setPowerSaveModeEnabled(false);
-    }
-
-    @Test
-    public void isChecked_on_powerSaveModeOn() {
-        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
-
-        assertThat(mBatterySaverController.isChecked()).isTrue();
-    }
-
-    @Test
-    public void isChecked_off_powerSaveModeOff() {
+    public void getSummary_batterySaverOff_showSummaryOff() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
-        assertThat(mBatterySaverController.isChecked()).isFalse();
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("Off");
     }
 }
