@@ -25,7 +25,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.security.Credentials;
-import android.security.KeyStore;
+import android.security.LegacyVpnProfileStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -151,9 +151,8 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
                 return;
             }
 
-            // Delete from KeyStore
-            KeyStore keyStore = KeyStore.getInstance();
-            keyStore.delete(Credentials.VPN + profile.key, KeyStore.UID_SELF);
+            // Delete from profile store.
+            LegacyVpnProfileStore.remove(Credentials.VPN + profile.key);
 
             updateLockdownVpn(false, profile);
         }
@@ -188,8 +187,7 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
     }
 
     private void save(VpnProfile profile, boolean lockdown) {
-        KeyStore.getInstance().put(Credentials.VPN + profile.key, profile.encode(),
-                KeyStore.UID_SELF, /* flags */ 0);
+        LegacyVpnProfileStore.put(Credentials.VPN + profile.key, profile.encode());
 
         // Flush out old version of profile
         disconnect(profile);
