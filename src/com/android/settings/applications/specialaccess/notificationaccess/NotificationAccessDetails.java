@@ -21,7 +21,7 @@ import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
-import android.bluetooth.BluetoothAdapter;
+import android.companion.ICompanionDeviceManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -45,14 +46,13 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -99,7 +99,12 @@ public class NotificationAccessDetails extends DashboardFragment {
                 .setFragment(this)
                 .setPackageInfo(mPackageInfo)
                 .setPm(context.getPackageManager())
-                .setServiceName(mServiceName);
+                .setServiceName(mServiceName)
+                .setBluetoothManager(Utils.getLocalBtManager(context))
+                .setCdm(ICompanionDeviceManager.Stub.asInterface(
+                        ServiceManager.getService(Context.COMPANION_DEVICE_SERVICE)))
+                .setCn(mComponentName)
+                .setUserId(mUserId);
         getPreferenceControllers().forEach(controllers -> {
             controllers.forEach(controller -> {
                 if (controller instanceof TypeFilterPreferenceController) {
