@@ -207,22 +207,22 @@ public class NetworkProviderWorkerTest {
 
     @Test
     @UiThreadTest
-    public void onServiceStateChanged_notifyPhoneStateListener_callUpdateSlice() {
+    public void onServiceStateChanged_notifyTelephonyCallback_callUpdateSlice() {
         mMockNetworkProviderWorker.onSlicePinned();
         mMockNetworkProviderWorker.receiveNotification(false);
 
-        mMockNetworkProviderWorker.mPhoneStateListener.onServiceStateChanged(new ServiceState());
+        mMockNetworkProviderWorker.mTelephonyCallback.onServiceStateChanged(new ServiceState());
 
         assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
     }
 
     @Test
     @UiThreadTest
-    public void onDisplayInfoChanged_notifyPhoneStateListener_callUpdateSlice() {
+    public void onDisplayInfoChanged_notifyTelephonyCallback_callUpdateSlice() {
         mMockNetworkProviderWorker.onSlicePinned();
         mMockNetworkProviderWorker.receiveNotification(false);
 
-        mMockNetworkProviderWorker.mPhoneStateListener.onDisplayInfoChanged(
+        mMockNetworkProviderWorker.mTelephonyCallback.onDisplayInfoChanged(
                 new TelephonyDisplayInfo(14, 0));
 
         assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();
@@ -230,11 +230,11 @@ public class NetworkProviderWorkerTest {
 
     @Test
     @UiThreadTest
-    public void onDataConnectionStateChanged_notifyPhoneStateListener_callUpdateSlice() {
+    public void onDataConnectionStateChanged_notifyTelephonyCallback_callUpdateSlice() {
         mMockNetworkProviderWorker.onSlicePinned();
         mMockNetworkProviderWorker.receiveNotification(false);
 
-        mMockNetworkProviderWorker.mPhoneStateListener.onDataConnectionStateChanged(
+        mMockNetworkProviderWorker.mTelephonyCallback.onDataConnectionStateChanged(
                 TelephonyManager.DATA_DISCONNECTED, TelephonyManager.NETWORK_TYPE_LTE);
 
         assertThat(mMockNetworkProviderWorker.hasNotification()).isTrue();

@@ -60,7 +60,7 @@ public class OpenNetworkSelectPagePreferenceController extends
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                 context.getMainExecutor());
-        mAllowedNetworkTypesListener.setAllowedNetworkTypesChangedListener(
+        mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                 () -> updatePreference());
 
     }
