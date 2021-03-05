@@ -30,6 +30,7 @@ import android.app.NotificationManager;
 import android.app.role.RoleManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
+import android.companion.ICompanionDeviceManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -55,14 +56,18 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.notification.ConversationIconFactory;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
@@ -136,6 +141,35 @@ public class NotificationBackend {
                 }
             }
         }
+    }
+
+    static public CharSequence getDeviceList(ICompanionDeviceManager cdm, LocalBluetoothManager lbm,
+            String pkg, int userId) {
+        boolean multiple = false;
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            List<String> associatedMacAddrs = cdm.getAssociations(pkg, userId);
+            if (associatedMacAddrs != null) {
+                for (String assocMac : associatedMacAddrs) {
+                    final Collection<CachedBluetoothDevice> cachedDevices =
+                            lbm.getCachedDeviceManager().getCachedDevicesCopy();
+                    for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
+                        if (Objects.equals(assocMac, cachedBluetoothDevice.getAddress())) {
+                            if (multiple) {
+                                sb.append(", ");
+                            } else {
+                                multiple = true;
+                            }
+                            sb.append(cachedBluetoothDevice.getName());
+                        }
+                    }
+                }
+            }
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error calling CDM", e);
+        }
+        return sb.toString();
     }
 
     public boolean isSystemApp(Context context, ApplicationInfo app) {
