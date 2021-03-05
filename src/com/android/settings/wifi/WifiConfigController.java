@@ -536,8 +536,9 @@ public class WifiConfigController implements TextWatcher,
         } else {
             enabled = ipAndProxyFieldsAreValid();
         }
-        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP ||
-                mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
                 && mEapCaCertSpinner != null
                 && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
             String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
@@ -553,8 +554,9 @@ public class WifiConfigController implements TextWatcher,
                 enabled = false;
             }
         }
-        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP ||
-                mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
                 && mEapUserCertSpinner != null
                 && mView.findViewById(R.id.l_user_cert).getVisibility() != View.GONE
                 && mEapUserCertSpinner.getSelectedItem().equals(mUnspecifiedCertString)) {
@@ -651,10 +653,13 @@ public class WifiConfigController implements TextWatcher,
                 break;
 
             case AccessPoint.SECURITY_EAP:
+            case AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE:
             case AccessPoint.SECURITY_EAP_SUITE_B:
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                     // allowedSuiteBCiphers will be set according to certificate type
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
+                } else if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_WPA3_ENTERPRISE);
                 } else {
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
                 }
@@ -1693,9 +1698,14 @@ public class WifiConfigController implements TextWatcher,
         if (mWifiManager.isWpa3SaeSupported()) {
             spinnerAdapter.add(mContext.getString(R.string.wifi_security_sae));
             mSecurityInPosition[idx++] = AccessPoint.SECURITY_SAE;
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_wpa_wpa2));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_wpa3));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE;
+        } else {
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
         }
-        spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap));
-        mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
         if (mWifiManager.isWpa3SuiteBSupported()) {
             spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_suiteb));
             mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP_SUITE_B;
