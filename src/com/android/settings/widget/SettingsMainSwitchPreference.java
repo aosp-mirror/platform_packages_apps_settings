@@ -176,6 +176,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
      * Update the status of switch but doesn't notify the mOnBeforeListener.
      */
     public void setCheckedInternal(boolean checked) {
+        super.setChecked(checked);
         if (mMainSwitchBar != null) {
             mMainSwitchBar.setCheckedInternal(checked);
         }

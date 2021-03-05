@@ -200,8 +200,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
         mSwitchBar.setTitle(getContext().getString(R.string.developer_options_main_switch_title));
         mSwitchBar.show();
-        mSwitchBar.setTranslationZ(
-                getActivity().findViewById(R.id.main_content).getTranslationZ() + 1);
         mSwitchBarController = new DevelopmentSwitchBarController(
                 this /* DevelopmentSettings */, mSwitchBar, mIsAvailable,
                 getSettingsLifecycle());
