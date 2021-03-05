@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="power_usage_summary_screen"
     android:title="@string/power_usage_summary_title"
     settings:keywords="@string/keywords_battery">
@@ -31,6 +32,7 @@
         android:fragment="com.android.settings.fuelgauge.PowerUsageAdvanced"
         android:key="battery_usage_summary"
         android:title="@string/advanced_battery_preference_title"
+        app:iconSpaceReserved="false"
         settings:searchable="false" />
 
     <com.android.settings.widget.CardPreference
@@ -38,23 +40,27 @@
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController" />
 
-    <com.android.settings.widget.PrimarySwitchPreference
-        android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
-        android:key="battery_saver_summary"
-        android:title="@string/battery_saver"
-        settings:controller="com.android.settings.fuelgauge.BatterySaverController" />
+    <PreferenceCategory>
+        <SwitchPreference
+            android:key="battery_percentage"
+            android:title="@string/battery_percentage"
+            android:summary="@string/battery_percentage_description"
+            settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
+    </PreferenceCategory>
 
-    <SwitchPreference
-        android:key="battery_percentage"
-        android:title="@string/battery_percentage"
-        android:summary="@string/battery_percentage_description"
-        settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
+    <PreferenceCategory>
+        <Preference
+            android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
+            android:key="battery_saver_summary"
+            android:title="@string/battery_saver"
+            settings:controller="com.android.settings.fuelgauge.BatterySaverController" />
 
-    <Preference
-        android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
-        android:key="smart_battery_manager"
-        android:title="@string/smart_battery_manager_title"
-        settings:controller="com.android.settings.fuelgauge.batterytip.BatteryManagerPreferenceController" />
+        <Preference
+            android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
+            android:key="smart_battery_manager"
+            android:title="@string/smart_battery_manager_title"
+            settings:controller="com.android.settings.fuelgauge.batterytip.BatteryManagerPreferenceController" />
+    </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="power_usage_footer"
