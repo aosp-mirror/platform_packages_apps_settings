@@ -57,6 +57,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
         super.onCreate(savedInstanceState);
 
+        setDescriptionText(R.string.security_settings_fingerprint_enroll_introduction_message);
+
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
@@ -69,7 +71,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
         mFooterBarMixin.setPrimaryButton(
                 new FooterButton.Builder(this)
-                        .setText(R.string.wizard_next)
+                        .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(R.style.SudGlifButton_Primary)
@@ -78,7 +80,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     int getNegativeButtonTextId() {
-        return R.string.security_settings_fingerprint_enroll_introduction_no_thanks;
+        return R.string.security_settings_fingerprint_enroll_introduction_skip;
     }
 
     @Override
