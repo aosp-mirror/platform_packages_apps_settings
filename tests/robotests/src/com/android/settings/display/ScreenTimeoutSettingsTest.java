@@ -23,6 +23,7 @@ import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -138,6 +139,7 @@ public class ScreenTimeoutSettingsTest {
     public void updateCandidates_enforcedAdmin_showDisabledByAdminPreference() {
         mSettings.mAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mSettings.mDisableOptionsPreference = mDisableOptionsPreference;
+        doNothing().when(mSettings).setupDisabledFooterPreference();
 
         mSettings.updateCandidates();
 

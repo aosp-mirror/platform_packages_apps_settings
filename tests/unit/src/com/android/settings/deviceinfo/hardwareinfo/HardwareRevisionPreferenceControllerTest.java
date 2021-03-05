@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.deviceinfo.hardwareinfo;
@@ -20,42 +20,54 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.os.Looper;
 import android.os.SystemProperties;
+
+import androidx.test.annotation.UiThreadTest;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.mockito.ArgumentCaptor;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class HardwareRevisionPreferenceControllerTest {
 
     private Context mContext;
     private HardwareRevisionPreferenceController mController;
+    private ClipboardManager mClipboardManager;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mClipboardManager = (ClipboardManager) spy(mContext.getSystemService(CLIPBOARD_SERVICE));
+        doReturn(mClipboardManager).when(mContext).getSystemService(CLIPBOARD_SERVICE);
         mController = new HardwareRevisionPreferenceController(mContext,
                 "hardware_info_device_revision");
     }
 
     @Test
+    @UiThreadTest
     public void copy_shouldCopyHardwareRevisionToClipboard() {
-        final String fakeHardwareVer = "FakeVer1.0";
-        SystemProperties.set("ro.boot.hardware.revision", fakeHardwareVer);
+        ArgumentCaptor<ClipData> captor = ArgumentCaptor.forClass(ClipData.class);
+        doNothing().when(mClipboardManager).setPrimaryClip(captor.capture());
 
         mController.copy();
 
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
-
-        assertThat(data.toString()).isEqualTo(fakeHardwareVer);
+        final ClipData data = captor.getValue();
+        final String hardwareVer = SystemProperties.get("ro.boot.hardware.revision");
+        assertThat(data.getItemAt(0).getText().toString()).isEqualTo(hardwareVer);
     }
 }

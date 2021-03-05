@@ -18,41 +18,57 @@ package com.android.settings.deviceinfo.hardwareinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.content.res.Resources;
+
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class DeviceModelPreferenceControllerTest {
 
     private Context mContext;
     private DeviceModelPreferenceController mController;
 
+    @Mock
+    private Resources mResources;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getResources()).thenReturn(mResources);
         mController = new DeviceModelPreferenceController(mContext, "test_key");
     }
 
     @Test
     public void getAvailabilityStatus_configAllowed_available() {
+        final int boolId = ResourcesUtils.getResourcesId(
+                ApplicationProvider.getApplicationContext(), "bool", "config_show_device_model");
+        when(mResources.getBoolean(boolId)).thenReturn(true);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_configDisallowed_unavailable() {
+        final int boolId = ResourcesUtils.getResourcesId(
+                ApplicationProvider.getApplicationContext(), "bool", "config_show_device_model");
+        when(mResources.getBoolean(boolId)).thenReturn(false);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
