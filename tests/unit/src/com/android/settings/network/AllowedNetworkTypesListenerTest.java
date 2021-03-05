@@ -25,8 +25,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.HandlerExecutor;
-import android.telephony.PhoneStateListener;
 import android.telephony.RadioAccessFamily;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.test.mock.MockContentResolver;
 
@@ -53,7 +53,7 @@ public class AllowedNetworkTypesListenerTest {
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
 
     @Mock
-    private AllowedNetworkTypesListener.OnAllowedNetworkTypesChangedListener mListener;
+    private AllowedNetworkTypesListener.OnAllowedNetworkTypesListener mListener;
     @Mock
     private TelephonyManager mTelephonyManager;
 
@@ -87,15 +87,15 @@ public class AllowedNetworkTypesListenerTest {
     public void register_shouldRegisterContentObserver() {
         mAllowedNetworkTypesListener.register(mContext, SUB_ID);
 
-        verify(mTelephonyManager, times(1)).registerPhoneStateListener(any(HandlerExecutor.class),
-                any(PhoneStateListener.class));
+        verify(mTelephonyManager, times(1)).registerTelephonyCallback(any(HandlerExecutor.class),
+                any(TelephonyCallback.class));
     }
 
     @Test
     public void unregister_shouldUnregisterContentObserver() {
         mAllowedNetworkTypesListener.unregister(mContext, SUB_ID);
 
-        verify(mTelephonyManager).unregisterPhoneStateListener(
+        verify(mTelephonyManager).unregisterTelephonyCallback(
                 mAllowedNetworkTypesListener);
     }
 }
