@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 package com.android.settings.deviceinfo;
 
@@ -21,7 +21,11 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import android.os.Looper;
 import android.util.SparseArray;
+
+import androidx.test.annotation.UiThreadTest;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
@@ -32,16 +36,19 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class StorageProfileFragmentTest {
 
     @Captor
     private ArgumentCaptor<SparseArray<StorageAsyncLoader.AppsStorageResult>> mCaptor;
 
     @Test
+    @UiThreadTest
     public void verifyAppSizesAreNotZeroedOut() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
         StorageItemPreferenceController controller = mock(StorageItemPreferenceController.class);
         StorageProfileFragment fragment = new StorageProfileFragment();
         StorageAsyncLoader.AppsStorageResult result = new StorageAsyncLoader.AppsStorageResult();
