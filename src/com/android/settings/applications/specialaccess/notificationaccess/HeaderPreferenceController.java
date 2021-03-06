@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
+import android.companion.ICompanionDeviceManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -30,8 +32,10 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -43,6 +47,10 @@ public class HeaderPreferenceController extends BasePreferenceController
     private PackageInfo mPackageInfo;
     private PackageManager mPm;
     private CharSequence mServiceName;
+    private ICompanionDeviceManager mCdm;
+    private LocalBluetoothManager mBm;
+    private ComponentName mCn;
+    private int mUserId;
 
     public HeaderPreferenceController(Context context, String key) {
         super(context, key);
@@ -68,6 +76,26 @@ public class HeaderPreferenceController extends BasePreferenceController
         return this;
     }
 
+    public HeaderPreferenceController setCdm(ICompanionDeviceManager cdm) {
+        mCdm = cdm;
+        return this;
+    }
+
+    public HeaderPreferenceController setBluetoothManager(LocalBluetoothManager bm) {
+        mBm = bm;
+        return this;
+    }
+
+    public HeaderPreferenceController setCn(ComponentName cn) {
+        mCn = cn;
+        return this;
+    }
+
+    public HeaderPreferenceController setUserId(int userId) {
+        mUserId = userId;
+        return this;
+    }
+
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
@@ -88,6 +116,8 @@ public class HeaderPreferenceController extends BasePreferenceController
                         .getBadgedIcon(mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
                 .setSummary(mServiceName)
+                .setSecondSummary(new NotificationBackend().getDeviceList(
+                        mCdm, mBm, mCn.getPackageName(), mUserId))
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
                 .setPackageName(mPackageInfo.packageName)
                 .setUid(mPackageInfo.applicationInfo.uid)

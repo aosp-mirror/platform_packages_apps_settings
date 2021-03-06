@@ -97,6 +97,7 @@ public class SubscriptionsPreferenceControllerTest {
     private LifecycleOwner mLifecycleOwner;
     @Mock
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+
     private LifecycleRegistry mLifecycleRegistry;
     private int mOnChildUpdatedCount;
     private Context mContext;
@@ -428,7 +429,6 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -447,7 +447,7 @@ public class SubscriptionsPreferenceControllerTest {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
-        setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
+        setupGetIconConditions(sub.get(0).getSubscriptionId(), false, false,
                 TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
@@ -534,7 +534,6 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);

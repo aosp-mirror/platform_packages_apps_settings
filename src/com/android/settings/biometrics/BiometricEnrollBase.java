@@ -173,6 +173,10 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         setHeaderText(resId, false /* force */);
     }
 
+    protected void setDescriptionText(int resId) {
+        getLayout().setDescriptionText(resId);
+    }
+
     protected FooterButton getNextButton() {
         if (mFooterBarMixin != null) {
             return mFooterBarMixin.getPrimaryButton();
