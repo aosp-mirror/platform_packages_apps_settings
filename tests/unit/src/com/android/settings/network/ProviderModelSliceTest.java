@@ -264,7 +264,7 @@ public class ProviderModelSliceTest {
 
     @Test
     @UiThreadTest
-    public void getSlice_connectedEthernet_getOneEthernetAndOneCarrierAndTwoWiFi() {
+    public void getSlice_haveEthernetAndCarrierAndTwoDisconnectedWifi_getFourRow() {
         mWifiList.clear();
         mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
                 WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi1_key", true);
@@ -273,9 +273,29 @@ public class ProviderModelSliceTest {
                 WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi2_key", true);
         mWifiList.add(mMockWifiSliceItem2);
         mMockNetworkProviderWorker.updateSelfResults(mWifiList);
-        when(mProviderModelSliceHelper.isAirplaneModeEnabled()).thenReturn(false);
-        when(mProviderModelSliceHelper.hasCarrier()).thenReturn(true);
-        when(mProviderModelSliceHelper.isDataSimActive()).thenReturn(true);
+        mockHelperCondition(false, true, true, null);
+        when(mMockNetworkProviderWorker.isEthernetConnected()).thenReturn(true);
+
+        final Slice slice = mMockProviderModelSlice.getSlice();
+
+        assertThat(slice).isNotNull();
+        assertThat(mMockProviderModelSlice.hasCreateEthernetRow()).isTrue();
+        verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
+        verify(mListBuilder, times(4)).addRow(any(ListBuilder.RowBuilder.class));
+    }
+
+    @Test
+    @UiThreadTest
+    public void getSlice_haveEthernetAndCarrierAndConnectedWifiAndDisconnectedWifi_getFourRow() {
+        mWifiList.clear();
+        mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
+                WifiEntry.CONNECTED_STATE_CONNECTED, "wifi1_key", true);
+        mWifiList.add(mMockWifiSliceItem1);
+        mockWifiItemCondition(mMockWifiSliceItem2, "wifi2", "wifi2",
+                WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi2_key", true);
+        mWifiList.add(mMockWifiSliceItem2);
+        mMockNetworkProviderWorker.updateSelfResults(mWifiList);
+        mockHelperCondition(false, true, true, mWifiList.get(0));
         when(mMockNetworkProviderWorker.isEthernetConnected()).thenReturn(true);
 
         final Slice slice = mMockProviderModelSlice.getSlice();

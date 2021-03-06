@@ -83,8 +83,9 @@ public class ProviderModelSlice extends WifiSlice {
         // Second section:  Add a carrier item.
         // Third section:  Add the Wi-Fi items which are not connected.
         // Fourth section:  If device has connection problem, this row show the message for user.
+        boolean hasEthernet = isEthernetConnected();
         final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
-        if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled()) {
+        if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled() && !hasEthernet) {
             log("Airplane mode is enabled.");
             return listBuilder.build();
         }
@@ -104,12 +105,12 @@ public class ProviderModelSlice extends WifiSlice {
         log("hasCarrier: " + hasCarrier);
 
         // First section:  Add a Ethernet or Wi-Fi item which state is connected.
-        if (isEthernetConnected()) {
+        final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
+        if (hasEthernet) {
             log("get Ethernet item which is connected");
             listBuilder.addRow(createEthernetRow());
             maxListSize--;
         } else {
-            final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
             if (connectedWifiItem != null) {
                 log("get Wi-Fi item which is connected");
                 listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
@@ -126,7 +127,14 @@ public class ProviderModelSlice extends WifiSlice {
             maxListSize--;
         }
 
-        // Third section:  Add the Wi-Fi items which are not connected.
+        // Third section:  Add the connected Wi-Fi item to Wi-Fi list if the Ethernet is connected.
+        if (connectedWifiItem != null && hasEthernet) {
+            log("get Wi-Fi item which is connected");
+            listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
+            maxListSize--;
+        }
+
+        // Fourth section:  Add the Wi-Fi items which are not connected.
         if (wifiList != null && wifiList.size() > 0) {
             log("get Wi-Fi items which are not connected. Wi-Fi items : " + wifiList.size());
 
@@ -140,7 +148,7 @@ public class ProviderModelSlice extends WifiSlice {
             }
         }
 
-        // Fourth section:  If device has connection problem, this row show the message for user.
+        // Fifth section:  If device has connection problem, this row show the message for user.
         // 1) show non_carrier_network_unavailable:
         //    - while no wifi item
         // 2) show all_network_unavailable:
@@ -154,7 +162,7 @@ public class ProviderModelSlice extends WifiSlice {
                 resId = R.string.all_network_unavailable;
             }
 
-            if (!hasCarrier) {
+            if (!hasCarrier && !hasEthernet) {
                 // If there is no item in ProviderModelItem, slice needs a header.
                 listBuilder.setHeader(mHelper.createHeader(
                         NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS));
