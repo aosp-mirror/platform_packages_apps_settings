@@ -224,6 +224,32 @@ public class UsbDefaultFragmentTest {
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_MIDI);
     }
 
+    @Test
+    public void usbIsPluginAndUsbTetheringIsOn_startTetheringIsInvoked() {
+        when(mUsbBackend.getDefaultUsbFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
+
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        verify(mTetheringManager).startTethering(eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mFragment.mOnStartTetheringCallback));
+    }
+
+    @Test
+    public void usbIsNotPluginAndUsbTetheringIsOn_startTetheringIsNotInvoked() {
+        when(mUsbBackend.getDefaultUsbFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
+
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        verify(mTetheringManager, never()).startTethering(eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mFragment.mOnStartTetheringCallback));
+    }
+
     public static class TestFragment extends UsbDefaultFragment {
         public final PreferenceScreen mScreen;
 

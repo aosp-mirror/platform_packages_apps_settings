@@ -309,9 +309,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void initViews() {
         super.initViews();
 
-        TextView description = (TextView) findViewById(R.id.sud_layout_description);
         if (mBiometricUnlockDisabledByAdmin) {
-            description.setText(getDescriptionResDisabledByAdmin());
+            setDescriptionText(getDescriptionResDisabledByAdmin());
         }
     }
 }
