@@ -15,12 +15,16 @@
  */
 package com.android.settings.network.telephony;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Preference controller for "Enable 2G"
@@ -34,6 +38,8 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
                 | TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
                 | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
     private CarrierConfigManager mCarrierConfigManager;
     private TelephonyManager mTelephonyManager;
 
@@ -46,6 +52,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     public Enable2gPreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     /**
@@ -98,6 +105,8 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         }
         mTelephonyManager.setAllowedNetworkTypesForReason(
                 mTelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G, newAllowedNetworkTypes);
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_2G_ENABLED, isChecked);
         return true;
     }
 }

@@ -257,9 +257,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     }
 
     private CharSequence getMobilePreferenceSummary(int subId) {
+        TelephonyManager tm = mTelephonyManager.createForSubscriptionId(subId);
         String result = mSubsPrefCtrlInjector.getNetworkType(
                 mContext, mConfig, mTelephonyDisplayInfo, subId);
-        if (!mTelephonyManager.isDataEnabled()) {
+        if (!tm.isDataEnabled()) {
             return mContext.getString(R.string.mobile_data_off_summary);
         }
         if (!result.isEmpty() && mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext)) {

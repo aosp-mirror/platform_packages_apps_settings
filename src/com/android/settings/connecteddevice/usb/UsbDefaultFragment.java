@@ -64,14 +64,24 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
     private UsbConnectionBroadcastReceiver mUsbReceiver;
     private Handler mHandler = new Handler();
+    private boolean mIsConnected = false;
 
     @VisibleForTesting
     UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
             (connected, functions, powerRole, dataRole) -> {
+                final long defaultFunctions = mUsbBackend.getDefaultUsbFunctions();
+                Log.d(TAG, "UsbConnectionListener() connected : " + connected + ", functions : "
+                        + functions + ", defaultFunctions : " + defaultFunctions);
+                if (connected && !mIsConnected && defaultFunctions == UsbManager.FUNCTION_RNDIS) {
+                    startTethering();
+                }
+
                 if (mIsStartTethering) {
                     mCurrentFunctions = functions;
                     refresh(functions);
+                    mIsStartTethering = false;
                 }
+                mIsConnected = connected;
             };
 
     @Override
@@ -146,9 +156,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
             if (functions == UsbManager.FUNCTION_RNDIS) {
                 // We need to have entitlement check for usb tethering, so use API in
                 // TetheringManager.
-                mIsStartTethering = true;
-                mTetheringManager.startTethering(TETHERING_USB, new HandlerExecutor(mHandler),
-                        mOnStartTetheringCallback);
+                startTethering();
             } else {
                 mIsStartTethering = false;
                 mCurrentFunctions = functions;
@@ -157,6 +165,13 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
         }
         return true;
+    }
+
+    private void startTethering() {
+        Log.d(TAG, "startTethering()");
+        mIsStartTethering = true;
+        mTetheringManager.startTethering(TETHERING_USB, new HandlerExecutor(mHandler),
+                mOnStartTetheringCallback);
     }
 
     @Override
@@ -171,6 +186,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
         @Override
         public void onTetheringStarted() {
+            Log.d(TAG, "onTetheringStarted()");
             // Set default usb functions again to make internal data persistent
             mCurrentFunctions = UsbManager.FUNCTION_RNDIS;
             mUsbBackend.setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);

@@ -151,7 +151,7 @@ public class EnabledNetworkModePreferenceController extends
         if (mAllowedNetworkTypesListener == null) {
             mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                     mContext.getMainExecutor());
-            mAllowedNetworkTypesListener.setAllowedNetworkTypesChangedListener(
+            mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                     () -> updatePreference());
         }
 
