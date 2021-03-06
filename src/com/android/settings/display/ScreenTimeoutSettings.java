@@ -37,6 +37,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
@@ -44,6 +45,7 @@ import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.CandidateInfo;
@@ -70,6 +72,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     private CharSequence[] mInitialEntries;
     private CharSequence[] mInitialValues;
     private FooterPreference mPrivacyPreference;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @VisibleForTesting
     RestrictedLockUtils.EnforcedAdmin mAdmin;
@@ -102,6 +105,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
         mPrivacyPreference.setSelectable(false);
         mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -244,6 +248,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         try {
             if (context != null) {
                 final long value = Long.parseLong(key);
+                mMetricsFeatureProvider.action(context, SettingsEnums.ACTION_SCREEN_TIMEOUT_CHANGED,
+                        (int) value);
                 Settings.System.putLong(context.getContentResolver(), SCREEN_OFF_TIMEOUT, value);
             }
         } catch (NumberFormatException e) {

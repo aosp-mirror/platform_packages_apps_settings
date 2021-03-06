@@ -884,13 +884,21 @@
     <!-- message shown in summary field when no fingerprints are registered -->
     <string name="security_settings_fingerprint_preference_summary_none"></string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature[CHAR LIMIT=29] -->
-    <string name="security_settings_fingerprint_enroll_introduction_title">Unlock with fingerprint</string>
-    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabed by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_fingerprint_enroll_introduction_title">Set up your fingerprint</string>
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Use your fingerprint</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.</string>
+    <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_1">You\u2019re in control</string>
+    <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_2">Keep in mind</string>
     <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_bottom_message">Your fingerprint may be less secure than a strong pattern or PIN.</string>
+    <string name="security_settings_fingerprint_enroll_introduction_footer_message_1">The data recorded by Fingerprint is stored securely and never leaves your phone. You can delete your data anytime in Settings.</string>
+    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_message_2">Your fingerprint may be less secure than a strong pattern or PIN.</string>
+    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default">Your phone will occasionally use your recent fingerprint images to create improved fingerprint models.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your fingerprint to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Introduction detail message shown in fingerprint enrollment screen in setup wizard. [CHAR LIMIT=NONE]-->
@@ -899,8 +907,12 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
+    <!-- Button text to skip enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_fingerprint_enroll_introduction_skip">Skip</string>
     <!-- Button text to continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_continue">Continue</string>
+    <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_introduction_agree">Agree</string>
     <!-- Button text to cancel enrollment from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
     <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
@@ -4482,13 +4494,13 @@
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
-    <string name="auto_launch_enable_text">You\u2019ve chosen to launch this app by default for some actions.</string>
+    <string name="auto_launch_enable_text">Some activities you\u2019ve selected open in this app by default.</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app was given user permission to create widgets. -->
     <string name="always_allow_bind_appwidgets_text">You\u2019ve chosen to allow this app to create widgets and access their data.</string>
     <!-- Manage applications, individual application screen, text under Launch by default heading if the app is NOT a default for actions -->
     <string name="auto_launch_disable_text">No defaults set.</string>
     <!-- Manage applications, individual application screen, button label under Launch by default heading.  This is used to clear any default actions that may be assigned to this app.  -->
-    <string name="clear_activities">Clear defaults</string>
+    <string name="clear_activities">Clear default preferences</string>
     <!-- Manage applications, individual application info screen, screen, message text under screen compatibility heading -->
     <string name="screen_compatibility_text">This app may not be designed for your screen. You can control how it
             adjusts to your screen here.</string>
@@ -5141,6 +5153,26 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title">Shortcut from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds.</string>
+    <!-- Title for the accessibility button page. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_title">Accessibility button</string>
+    <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
+    <string name="accessibility_button_summary">Quickly access accessibility features</string>
+    <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
+    <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_location_title">Location</string>
+    <!-- Title for the size of the accessibility button. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_size_title">Size</string>
+    <!-- Title for the fade of the accessibility button. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_fade_title">Fade when not in use</string>
+    <!-- Summary for the fade of the accessibility button. [CHAR LIMIT=80] -->
+    <string name="accessibility_button_fade_summary">Fades after a few seconds so it\u2019s easier to see your screen</string>
+    <!-- Title for the transparency of the accessibility button. Will become fade when not interact with the accessibility button. [CHAR LIMIT=40] -->
+    <string name="accessibility_button_opacity_title">Transparency when not in use</string>
+    <!-- Label on the left side of transparency adjustment slider [CHAR LIMIT=30] -->
+    <string name="accessibility_button_low_label">Transparent</string>
+    <!-- Label on the right side of transparency adjustment slider [CHAR LIMIT=30] -->
+    <string name="accessibility_button_high_label">Non-transparent</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
@@ -8773,8 +8805,10 @@
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
 
-    <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=30] -->
-    <string name="manage_notification_access_title">Notification access</string>
+    <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=60] -->
+    <string name="manage_notification_access_title">Device &amp; app notifications</string>
+
+    <string name="manage_notification_access_summary">Control which notifications show on your apps and devices</string>
 
     <!-- Notification Access section: Indicates that the work profile admin doesn't allow this
          notification listener to access work profile notifications [CHAR LIMIT=100] -->
@@ -8833,26 +8867,19 @@
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
     <string name="notification_listener_type_title">Allowed notification types</string>
-    <string name="notif_type_ongoing">Important ongoing notifications</string>
-    <string name="notif_type_conversation">Conversation notifications</string>
-    <string name="notif_type_alerting">Alerting notifications</string>
-    <string name="notif_type_silent">Silent notifications</string>
-
-    <!-- Per notification listener, launches a list of apps whose notifications this listener cannot see -->
-    <string name="notif_listener_excluded_title">Apps that are not bridged to this listener</string>
-
-    <!-- Per notification listener, when the listener can see notifications from all apps -->
-    <string name="notif_listener_excluded_summary_zero">All apps are bridged</string>
-
-    <!-- Per notification listener, a summary of how many apps this listener cannot see
-     notifications from -->
-    <plurals name="notif_listener_excluded_summary_nonzero">
-        <item quantity="one">%d app is not bridged</item>
-        <item quantity="other">%d apps are not bridged</item>
-    </plurals>
+    <string name="notif_type_ongoing">Real-time</string>
+    <string name="notif_type_ongoing_summary">Real-time communication from apps in use, navigation, phone calls, and more</string>
+    <string name="notif_type_conversation">Conversations</string>
+    <string name="notif_type_conversation_summary">SMS and other communications</string>
+    <string name="notif_type_alerting">Default</string>
+    <string name="notif_type_alerting_summary">Notifications that may ring or vibrate based on settings</string>
+    <string name="notif_type_silent">Silent</string>
+    <string name="notif_type_silent_summary">Notifications that never make sound or vibrations</string>
 
     <!-- Per notification listener, a list of apps whose notifications this listener cannot see -->
-    <string name="notif_listener_excluded_app_title">Bridged apps</string>
+    <string name="notif_listener_excluded_app_title">See all apps</string>
+    <string name="notif_listener_excluded_app_summary">Change notification settings for each app that can send notifications</string>
+    <string name="notif_listener_excluded_app_screen_title">Apps shown on device</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -9668,9 +9695,44 @@
     <!-- Category name for App Launch -->
     <string name="app_launch_domain_links_title">Opening links</string>
     <string name="app_launch_open_domain_urls_title">Open supported links</string>
+    <!-- Preference title for Supported links open in this app. [CHAR LIMIT=60] -->
+    <string name="app_launch_top_intro_message">Supported links open in this app</string>
+    <!-- Preference title for Links to open in this app. [CHAR LIMIT=60] -->
+    <string name="app_launch_links_category">Links to open in this app</string>
+
     <string name="app_launch_open_domain_urls_summary">Open without asking</string>
     <string name="app_launch_supported_domain_urls_title">Supported links</string>
-    <string name="app_launch_other_defaults_title">Other defaults</string>
+
+    <string name="app_launch_other_defaults_title">Other default preferences</string>
+    <!-- Preference title for Add link [CHAR LIMIT=60] -->
+    <string name="app_launch_add_link">Add link</string>
+    <!-- Footer for Open by default. [CHAR LIMIT=NONE] -->
+    <string name="app_launch_footer">An app can verify links to automatically open in the app. <annotation id="url">Learn more</annotation></string>
+
+    <!-- Title, message and button for verified links dialog. -->
+    <plurals name="app_launch_verified_links_title">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> verified link</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> verified links</item>
+    </plurals>
+    <plurals name="app_launch_verified_links_message">
+        <item quantity="one">This link is verified and automatically opens in this app.</item>
+        <item quantity="other">These links are verified and automatically open in this app.</item>
+    </plurals>
+    <!-- OK button for verified links dialog. [CHAR LIMIT=20] -->
+    <string name="app_launch_dialog_ok">OK</string>
+
+    <!-- Title for Checking other supported links dialog. [CHAR LIMIT=50] -->
+    <string name="app_launch_checking_links_title">Checking for other supported links\u2026</string>
+    <!-- Cancel button for Checking other supported links dialog. [CHAR LIMIT=20] -->
+    <string name="app_launch_dialog_cancel">Cancel</string>
+
+    <!-- Title and button for links found dialog. -->
+    <plurals name="app_launch_supported_links_title">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> supported link</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> supported links</item>
+    </plurals>
+    <!-- Add button for links found dialog. [CHAR LIMIT=20] -->
+    <string name="app_launch_supported_links_add">Add</string>
 
     <!-- Summary for app storage preference -->
     <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>

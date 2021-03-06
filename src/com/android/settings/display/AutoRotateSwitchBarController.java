@@ -93,7 +93,8 @@ public class AutoRotateSwitchBarController implements OnMainSwitchChangeListener
 
     private boolean setRotationLock(boolean isChecked) {
         final boolean isLocked = !isChecked;
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATION_LOCK, isLocked);
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATE_ROTATE_MASTER_TOGGLE,
+                isChecked);
         RotationPolicy.setRotationLock(mContext, isLocked);
         return true;
     }
