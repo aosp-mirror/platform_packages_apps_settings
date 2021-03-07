@@ -22,14 +22,27 @@
     android:title="@string/autofill_app"
     settings:keywords="@string/autofill_keywords">
 
-  <com.android.settings.widget.GearPreference
-      android:key="default_autofill_main"
-      android:title="@string/autofill_app"
-      android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
-      settings:searchable="false"
-      settings:keywords="@string/autofill_keywords">
-    <extra android:name="for_work" android:value="false" />
-  </com.android.settings.widget.GearPreference>
+  <PreferenceCategory
+      android:key="passwords_category"
+      android:persistent="false"
+      android:title="@string/autofill_passwords"
+      settings:controller="com.android.settings.applications.autofill.PasswordsPreferenceController" >
+  </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="default_service_category"
+      android:title="@string/autofill_app">
+
+    <!-- TODO(b/169455298): Fix the redundant title. -->
+    <com.android.settings.widget.GearPreference
+        android:key="default_autofill_main"
+        android:title="@string/autofill_app"
+        android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
+        settings:searchable="false"
+        settings:keywords="@string/autofill_keywords">
+      <extra android:name="for_work" android:value="false" />
+    </com.android.settings.widget.GearPreference>
+  </PreferenceCategory>
 
 
   <com.android.settings.widget.WorkOnlyCategory
