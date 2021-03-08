@@ -18,22 +18,18 @@ package com.android.settings.biometrics.fingerprint;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.storage.StorageManager;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settings.password.SetupSkipDialog;
@@ -86,8 +82,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     protected void initViews() {
         super.initViews();
 
-        TextView description = (TextView) findViewById(R.id.sud_layout_description);
-        description.setText(
+        setDescriptionText(
                 R.string.security_settings_fingerprint_enroll_introduction_message_setup);
 
         FooterButton nextButton = getNextButton();
