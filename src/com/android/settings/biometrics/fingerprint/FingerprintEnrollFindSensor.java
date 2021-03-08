@@ -68,7 +68,13 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
                         .build()
         );
 
-        setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
+        if (mCanAssumeUdfps) {
+            setHeaderText(R.string.security_settings_udfps_enroll_find_sensor_title);
+            setDescriptionText(R.string.security_settings_udfps_enroll_find_sensor_message);
+        } else {
+            setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
+            setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
+        }
 
         // This is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
