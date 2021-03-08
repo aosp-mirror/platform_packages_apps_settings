@@ -58,6 +58,7 @@ public class BluetoothDeviceUpdaterTest {
 
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
     private static final String SUB_MAC_ADDRESS = "05:52:C7:0B:D8:3C";
+    private static final String TEST_NAME = "test_name";
 
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -255,5 +256,16 @@ public class BluetoothDeviceUpdaterTest {
 
         verify(mDevicePreferenceCallback).onDeviceRemoved(mPreference);
         assertThat(mBluetoothDeviceUpdater.mPreferenceMap.containsKey(mBluetoothDevice)).isFalse();
+    }
+
+    @Test
+    public void havePreference_refreshPreference() {
+        mBluetoothDeviceUpdater.mPreferenceMap.put(mBluetoothDevice, mPreference);
+        mPreference.setTitle("fake_name");
+
+        when(mCachedBluetoothDevice.getName()).thenReturn(TEST_NAME);
+        mBluetoothDeviceUpdater.refreshPreference();
+
+        assertThat(mPreference.getTitle()).isEqualTo(TEST_NAME);
     }
 }
