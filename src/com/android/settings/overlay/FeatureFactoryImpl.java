@@ -29,6 +29,8 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProviderImpl;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
@@ -94,6 +96,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
+    private ExtraAppInfoFeatureProvider mExtraAppInfoFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -290,5 +293,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mWifiTrackerLibProvider = new WifiTrackerLibProviderImpl();
         }
         return mWifiTrackerLibProvider;
+    }
+
+    @Override
+    public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
+        if (mExtraAppInfoFeatureProvider == null) {
+            mExtraAppInfoFeatureProvider = new ExtraAppInfoFeatureProviderImpl();
+        }
+        return mExtraAppInfoFeatureProvider;
     }
 }
