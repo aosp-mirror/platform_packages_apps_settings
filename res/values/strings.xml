@@ -9726,13 +9726,15 @@
     <!-- Cancel button for Checking other supported links dialog. [CHAR LIMIT=20] -->
     <string name="app_launch_dialog_cancel">Cancel</string>
 
-    <!-- Title and button for links found dialog. -->
+    <!-- Title and button for supported links dialog. -->
     <plurals name="app_launch_supported_links_title">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> supported link</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> supported links</item>
     </plurals>
-    <!-- Add button for links found dialog. [CHAR LIMIT=20] -->
+    <!-- Add button for supported links dialog. [CHAR LIMIT=20] -->
     <string name="app_launch_supported_links_add">Add</string>
+    <!-- The subtext of the link title in supported links dialog. [CHAR LIMIT=30] -->
+    <string name="app_launch_supported_links_subtext">Opens in <xliff:g id="app_label" example="Reddit">%s</xliff:g></string>
 
     <!-- Summary for app storage preference -->
     <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
