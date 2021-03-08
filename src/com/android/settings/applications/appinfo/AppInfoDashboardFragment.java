@@ -166,6 +166,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
         use(AppStoragePreferenceController.class).setParentFragment(this);
         use(AppVersionPreferenceController.class).setParentFragment(this);
         use(InstantAppDomainsPreferenceController.class).setParentFragment(this);
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)) {
+            use(ExtraAppInfoPreferenceController.class).setPackageName(packageName);
+        }
 
         final WriteSystemSettingsPreferenceController writeSystemSettings =
                 use(WriteSystemSettingsPreferenceController.class);
