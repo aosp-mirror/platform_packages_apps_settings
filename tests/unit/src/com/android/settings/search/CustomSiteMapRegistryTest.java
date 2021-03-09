@@ -29,7 +29,7 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureNavigationSettingsFragment;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.location.RecentLocationRequestSeeAllFragment;
+import com.android.settings.location.RecentLocationAccessSeeAllFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
 import com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings;
@@ -73,7 +73,7 @@ public class CustomSiteMapRegistryTest {
     @Test
     public void shouldContainRecentLocationRequestSeeAllFragmentPairs() {
         assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
-                RecentLocationRequestSeeAllFragment.class.getName())).isEqualTo(
+                RecentLocationAccessSeeAllFragment.class.getName())).isEqualTo(
                 LocationSettings.class.getName());
     }
 
