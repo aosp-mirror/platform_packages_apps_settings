@@ -147,13 +147,16 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     public void callbackCanRegisterAndUnregister() {
         // register the callback in onStart()
         mPreConnectedDeviceController.onStart();
+
         verify(mBluetoothDeviceUpdater).registerCallback();
         verify(mDockUpdater).registerCallback();
         verify(mContext).registerReceiver(mPreConnectedDeviceController.mReceiver,
                 mPreConnectedDeviceController.mIntentFilter);
+        verify(mBluetoothDeviceUpdater).refreshPreference();
 
         // unregister the callback in onStop()
         mPreConnectedDeviceController.onStop();
+
         verify(mBluetoothDeviceUpdater).unregisterCallback();
         verify(mDockUpdater).unregisterCallback();
         verify(mContext).unregisterReceiver(mPreConnectedDeviceController.mReceiver);

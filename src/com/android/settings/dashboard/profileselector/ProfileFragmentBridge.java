@@ -21,7 +21,7 @@ import android.util.ArrayMap;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.location.RecentLocationRequestSeeAllFragment;
+import com.android.settings.location.RecentLocationAccessSeeAllFragment;
 
 import java.util.Map;
 
@@ -44,7 +44,7 @@ public class ProfileFragmentBridge {
                 ProfileSelectManageApplications.class.getName());
         FRAGMENT_MAP.put(LocationSettings.class.getName(),
                 ProfileSelectLocationFragment.class.getName());
-        FRAGMENT_MAP.put(RecentLocationRequestSeeAllFragment.class.getName(),
-                ProfileSelectRecentLocationRequestFragment.class.getName());
+        FRAGMENT_MAP.put(RecentLocationAccessSeeAllFragment.class.getName(),
+                ProfileSelectRecentLocationAccessFragment.class.getName());
     }
 }

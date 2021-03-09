@@ -146,7 +146,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(privateDnsPreferenceController);
         if (Utils.isProviderModelEnabled(context)) {
             controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
-            controllers.add(new AirplaneSafeNetworksPreferenceController(context, lifecycle));
         }
         return controllers;
     }
