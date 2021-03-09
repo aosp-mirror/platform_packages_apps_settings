@@ -945,10 +945,12 @@
     <string name="cancel_lock_screen_dialog_button_label">Cancel</string>
     <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_title">Touch the sensor</string>
+    <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=60] -->
+    <string name="security_settings_udfps_enroll_find_sensor_title">Touch &amp; hold the fingerprint icon</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
-    <string name="security_settings_udfps_enroll_find_sensor_message">It\u2019s on the screen. Look for the fingerprint with a glowing circle.</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen. Move your finger across the screen to find it.</string>
     <!-- Content description of graphic that shows where the fingerprint of the device is [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description">Illustration with device and fingerprint sensor location</string>
     <!-- Label text shown in fingerprint dialog for renaming a fingerprint template [CHAR LIMIT=22] -->
@@ -9726,13 +9728,15 @@
     <!-- Cancel button for Checking other supported links dialog. [CHAR LIMIT=20] -->
     <string name="app_launch_dialog_cancel">Cancel</string>
 
-    <!-- Title and button for links found dialog. -->
+    <!-- Title and button for supported links dialog. -->
     <plurals name="app_launch_supported_links_title">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> supported link</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> supported links</item>
     </plurals>
-    <!-- Add button for links found dialog. [CHAR LIMIT=20] -->
+    <!-- Add button for supported links dialog. [CHAR LIMIT=20] -->
     <string name="app_launch_supported_links_add">Add</string>
+    <!-- The subtext of the link title in supported links dialog. [CHAR LIMIT=30] -->
+    <string name="app_launch_supported_links_subtext">Opens in <xliff:g id="app_label" example="Reddit">%s</xliff:g></string>
 
     <!-- Summary for app storage preference -->
     <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
@@ -10501,6 +10505,8 @@
     <string name="disabled_by_policy_title_screen_capture">Screenshot not allowed</string>
     <!-- Title for dialog displayed to tell user that the app was suspended by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_suspend_packages">Can’t open this app</string>
+    <!-- Dialog title. This dialog lets a user know that a specific setting is blocked by their credit provider. Since the user purchased the device from the credit provider, the credit provider controls what they can access. [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_financed_device">Blocked by your credit provider</string>
     <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
     <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
@@ -12691,10 +12697,8 @@
     <string name="provider_internet_settings">Internet</string>
     <!-- Provider Model: SIMs controls settings screen, item title to go into the SIMs settings -->
     <string name="provider_network_settings_title">SIMs</string>
-    <!-- Provider Model: Airplane mode networks controls settings screen -->
-    <string name="airplane_safe_networks">Show airplane mode networks</string>
-    <!-- Provider Model: Summary for showing airplane mode networks-->
-    <string name="airplane_safe_networks_summary">Find and connect to networks in airplane mode.</string>
+    <!-- Provider Model: Summary for Wi-Fi switch [CHAR LIMIT=NONE] -->
+    <string name="wifi_switch_summary">Find and connect to Wi\u2011Fi networks</string>
     <!-- Provider Model: List of synonyms for the airplane-safe networks, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_airplane_safe_networks">airplane, airplane-safe</string>
     <!-- Provider Model: Calls and SMS controllers settings screen, item title to go into the Calls and SMS settings -->
@@ -12869,4 +12873,7 @@
     <string name="enable_2g_title">Allow 2G</string>
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=NONE] -->
     <string name="enable_2g_summary">Use 2G cellular connections. For emergency calls, 2G is always turned on.</string>
+
+    <!-- Label for extra app info settings for a specific app [CHAR LIMIT=40] -->
+    <string name="extra_app_info_label" translatable="false"></string>
 </resources>
