@@ -27,7 +27,7 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureNavigationSettingsFragment;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.location.RecentLocationRequestSeeAllFragment;
+import com.android.settings.location.RecentLocationAccessSeeAllFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
 import com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings;
@@ -57,7 +57,7 @@ public class CustomSiteMapRegistry {
         CUSTOM_SITE_MAP.put(
                 WifiSettings.class.getName(), NetworkDashboardFragment.class.getName());
         CUSTOM_SITE_MAP.put(PowerUsageAdvanced.class.getName(), PowerUsageSummary.class.getName());
-        CUSTOM_SITE_MAP.put(RecentLocationRequestSeeAllFragment.class.getName(),
+        CUSTOM_SITE_MAP.put(RecentLocationAccessSeeAllFragment.class.getName(),
                 LocationSettings.class.getName());
         CUSTOM_SITE_MAP.put(UsbDetailsFragment.class.getName(),
                 ConnectedDeviceDashboardFragment.class.getName());

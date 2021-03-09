@@ -22,11 +22,9 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Looper;
-import android.provider.Settings;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -43,17 +41,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
-public class AirplaneSafeNetworksPreferenceControllerTest {
+public class WifiSwitchPreferenceControllerTest {
 
-    private static final String KEY_AIRPLANE_SAFE_NETWORKS = "airplane_safe_networks";
-
-    private static final int ON = 1;
-    private static final int OFF = 0;
-
-    private ContentResolver mResolver;
     private PreferenceScreen mScreen;
     private RestrictedSwitchPreference mPreference;
-    private AirplaneSafeNetworksPreferenceController mController;
+    private WifiSwitchPreferenceController mController;
 
     @Mock
     private WifiManager mWifiManager;
@@ -62,37 +54,21 @@ public class AirplaneSafeNetworksPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         final Context context = spy(ApplicationProvider.getApplicationContext());
-        mResolver = context.getContentResolver();
         doReturn(mWifiManager).when(context).getSystemService(Context.WIFI_SERVICE);
 
-        mController = new AirplaneSafeNetworksPreferenceController(context, mock(Lifecycle.class));
+        mController = new WifiSwitchPreferenceController(context, mock(Lifecycle.class));
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
         final PreferenceManager preferenceManager = new PreferenceManager(context);
         mScreen = preferenceManager.createPreferenceScreen(context);
         mPreference = new RestrictedSwitchPreference(context);
-        mPreference.setKey(KEY_AIRPLANE_SAFE_NETWORKS);
+        mPreference.setKey(WifiSwitchPreferenceController.KEY);
         mScreen.addPreference(mPreference);
     }
 
     @Test
-    public void isAvailable_airplaneModeOff_returnFalse() {
-        Settings.Global.putInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
-
-        mController.displayPreference(mScreen);
-        mController.onStart();
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_airplaneModeOn_returnTrue() {
-        Settings.Global.putInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, ON);
-
-        mController.displayPreference(mScreen);
-        mController.onStart();
-
+    public void isAvailable_returnTrue() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
