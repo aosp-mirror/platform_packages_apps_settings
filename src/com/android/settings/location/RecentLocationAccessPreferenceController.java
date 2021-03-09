@@ -38,6 +38,7 @@ import java.util.List;
  * Preference controller that handles the display of apps that access locations.
  */
 public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController {
+    public static final int MAX_APPS = 3;
     @VisibleForTesting
     RecentLocationAccesses mRecentLocationApps;
     private PreferenceCategory mCategoryRecentLocationRequests;
@@ -89,6 +90,9 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
                 /* showSystemApps= */ false)) {
             if (isRequestMatchesProfileType(userManager, access, mType)) {
                 recentLocationAccesses.add(access);
+                if (recentLocationAccesses.size() == MAX_APPS) {
+                    break;
+                }
             }
         }
 

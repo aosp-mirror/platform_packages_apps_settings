@@ -356,12 +356,12 @@ public class FakeUid extends Uid {
     }
 
     @Override
-    public long getScreenOnEnergy() {
+    public long getScreenOnMeasuredBatteryConsumptionUC() {
         return 0;
     }
 
     @Override
-    public long[] getCustomMeasuredEnergiesMicroJoules() {
+    public long[] getCustomConsumerMeasuredBatteryConsumptionUC() {
         return null;
     }
 

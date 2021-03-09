@@ -196,6 +196,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private PreferenceCategory mWifiEntryPreferenceCategory;
     @VisibleForTesting
     AddWifiNetworkPreference mAddWifiNetworkPreference;
+    private WifiSwitchPreferenceController mWifiSwitchPreferenceController;
     @VisibleForTesting
     Preference mConfigureWifiSettingsPreference;
     @VisibleForTesting
@@ -270,6 +271,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         addNetworkMobileProviderController();
         addViewAirplaneModeNetworksButtonController();
         addConnectedEthernetNetworkController();
+        addWifiSwitchPreferenceController();
     }
 
     private void addNetworkMobileProviderController() {
@@ -296,6 +298,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                     new ConnectedEthernetNetworkController(getContext(), getSettingsLifecycle());
         }
         mConnectedEthernetNetworkController.displayPreference(getPreferenceScreen());
+    }
+
+    private void addWifiSwitchPreferenceController() {
+        if (mWifiSwitchPreferenceController == null) {
+            mWifiSwitchPreferenceController =
+                    new WifiSwitchPreferenceController(getContext(), getSettingsLifecycle());
+        }
+        mWifiSwitchPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override

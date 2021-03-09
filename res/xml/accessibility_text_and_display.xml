@@ -43,13 +43,6 @@
         settings:controller="com.android.settings.accessibility.FontWeightAdjustmentPreferenceController"/>
 
     <Preference
-        android:fragment="com.android.settings.accessibility.TurnScreenDarkerFragment"
-        android:key="turn_screen_darker_preference_screen"
-        android:persistent="false"
-        android:title="@string/accessibility_turn_screen_darker_title"
-        settings:searchable="true"/>
-
-    <Preference
         android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
         android:icon="@drawable/ic_daltonizer"
         android:key="daltonizer_preference"
@@ -57,11 +50,13 @@
         android:title="@string/accessibility_display_daltonizer_preference_title"
         settings:controller="com.android.settings.accessibility.DaltonizerPreferenceController"/>
 
-    <SwitchPreference
-        android:key="toggle_high_text_contrast_preference"
+    <Preference
+        android:fragment="com.android.settings.accessibility.ToggleColorInversionPreferenceFragment"
+        android:icon="@drawable/ic_color_inversion"
+        android:key="toggle_inversion_preference"
         android:persistent="false"
-        android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
-        settings:controller="com.android.settings.accessibility.HighTextContrastPreferenceController"/>
+        android:title="@string/accessibility_display_inversion_preference_title"
+        settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
 
     <SwitchPreference
         android:key="toggle_disable_animations"
@@ -74,6 +69,12 @@
         android:persistent="false"
         android:title="@string/accessibility_toggle_large_pointer_icon_title"
         settings:controller="com.android.settings.accessibility.LargePointerIconPreferenceController"/>
+
+    <SwitchPreference
+        android:key="toggle_high_text_contrast_preference"
+        android:persistent="false"
+        android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
+        settings:controller="com.android.settings.accessibility.HighTextContrastPreferenceController"/>
 
     <PreferenceCategory
         android:key="experimental_category"
