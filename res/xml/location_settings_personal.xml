@@ -23,10 +23,17 @@
     settings:keywords="@string/keywords_location">
 
     <PreferenceCategory
-        android:key="recent_location_requests"
-        android:title="@string/location_category_recent_location_requests"
+        android:key="recent_location_access"
+        android:title="@string/location_category_recent_location_access"
         settings:controller=
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
+
+    <Preference
+        android:key="recent_location_access_see_all_button"
+        android:title="@string/location_recent_location_access_see_all"
+        android:icon="@drawable/ic_chevron_right_24dp"
+        android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:searchable="false"/>
 
     <!-- This preference category gets removed if new_recent_location_ui is disabled -->
     <Preference

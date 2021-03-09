@@ -81,6 +81,11 @@
         settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
 
     <Preference
+        android:key="extra_app_info_settings"
+        android:title="@string/extra_app_info_label"
+        settings:controller="com.android.settings.applications.appinfo.ExtraAppInfoPreferenceController" />
+
+    <Preference
         android:key="time_spent_in_app"
         android:title="@string/time_spent_in_app_pref_title"
         settings:controller="com.android.settings.applications.appinfo.TimeSpentInAppPreferenceController" />
