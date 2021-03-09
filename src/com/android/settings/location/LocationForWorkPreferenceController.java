@@ -27,6 +27,9 @@ import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+/**
+ * Preference Controller for Location for Work Profile.
+ */
 public class LocationForWorkPreferenceController extends LocationBasePreferenceController {
 
     private RestrictedSwitchPreference mPreference;
