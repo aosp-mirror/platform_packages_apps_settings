@@ -22,6 +22,7 @@ import com.android.settings.R;
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
+import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
@@ -52,6 +53,7 @@ public class AppFilterRegistry {
             FILTER_APPS_INSTALL_SOURCES,
             FILTER_APPS_BLOCKED,
             FILTER_ALARMS_AND_REMINDERS,
+            FILTER_APPS_MEDIA_MANAGEMENT,
     })
     @interface FilterType {
     }
@@ -76,14 +78,15 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_BLOCKED = 16;
     public static final int FILTER_MANAGE_EXTERNAL_STORAGE = 17;
     public static final int FILTER_ALARMS_AND_REMINDERS = 18;
-    // Next id: 18. If you add an entry here, length of mFilters should be updated
+    public static final int FILTER_APPS_MEDIA_MANAGEMENT = 19;
+    // Next id: 20. If you add an entry here, length of mFilters should be updated
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[19];
+        mFilters = new AppFilterItem[20];
 
         // High power allowlist, on
         mFilters[FILTER_APPS_POWER_ALLOWLIST] = new AppFilterItem(
@@ -194,6 +197,12 @@ public class AppFilterRegistry {
                 AppStateAlarmsAndRemindersBridge.FILTER_CLOCK_APPS,
                 FILTER_ALARMS_AND_REMINDERS,
                 R.string.alarms_and_reminders_title);
+
+        // Apps that can manage media files
+        mFilters[FILTER_APPS_MEDIA_MANAGEMENT] = new AppFilterItem(
+                AppStateMediaManagementAppsBridge.FILTER_MEDIA_MANAGEMENT_APPS,
+                FILTER_APPS_MEDIA_MANAGEMENT,
+                R.string.media_management_apps_title);
     }
 
     public static AppFilterRegistry getInstance() {
@@ -224,6 +233,8 @@ public class AppFilterRegistry {
                 return FILTER_MANAGE_EXTERNAL_STORAGE;
             case ManageApplications.LIST_TYPE_ALARMS_AND_REMINDERS:
                 return FILTER_ALARMS_AND_REMINDERS;
+            case ManageApplications.LIST_TYPE_MEDIA_MANAGEMENT_APPS:
+                return FILTER_APPS_MEDIA_MANAGEMENT;
             default:
                 return FILTER_APPS_ALL;
         }

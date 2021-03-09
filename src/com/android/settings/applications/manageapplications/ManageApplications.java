@@ -96,6 +96,7 @@ import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
+import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
 import com.android.settings.applications.AppStateOverlayBridge;
@@ -110,6 +111,7 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
+import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedFragment;
@@ -233,6 +235,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_WIFI_ACCESS = 13;
     public static final int LIST_MANAGE_EXTERNAL_STORAGE = 14;
     public static final int LIST_TYPE_ALARMS_AND_REMINDERS = 15;
+    public static final int LIST_TYPE_MEDIA_MANAGEMENT_APPS = 16;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -324,6 +327,9 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
             mListType = LIST_MANAGE_EXTERNAL_STORAGE;
             screenTitle = R.string.manage_external_storage_title;
+        }  else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
+            mListType = LIST_TYPE_MEDIA_MANAGEMENT_APPS;
+            screenTitle = R.string.media_management_apps_title;
         } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
             mListType = LIST_TYPE_ALARMS_AND_REMINDERS;
             screenTitle = R.string.alarms_and_reminders_title;
@@ -553,6 +559,8 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.MANAGE_EXTERNAL_STORAGE;
             case LIST_TYPE_ALARMS_AND_REMINDERS:
                 return SettingsEnums.ALARMS_AND_REMINDERS;
+            case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
+                return SettingsEnums.MEDIA_MANAGEMENT_APPS;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
         }
@@ -678,6 +686,10 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(AlarmsAndRemindersDetails.class,
                         R.string.alarms_and_reminders_label);
                 break;
+            case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
+                startAppInfoFragment(MediaManagementAppsDetails.class,
+                        R.string.media_management_apps_title);
+                break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
             // app. Maybe when they load the list of apps that contains managed profile apps.
@@ -758,6 +770,8 @@ public class ManageApplications extends InstrumentedFragment
                 return R.string.help_uri_manage_external_storage;
             case LIST_TYPE_ALARMS_AND_REMINDERS:
                 return R.string.help_uri_alarms_and_reminders;
+            case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
+                return R.string.help_uri_media_management_apps;
             default:
             case LIST_TYPE_MAIN:
                 return R.string.help_uri_apps;
@@ -1082,6 +1096,8 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateManageExternalStorageBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_ALARMS_AND_REMINDERS) {
                 mExtraInfoBridge = new AppStateAlarmsAndRemindersBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_MEDIA_MANAGEMENT_APPS) {
+                mExtraInfoBridge = new AppStateMediaManagementAppsBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1545,6 +1561,9 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 case LIST_TYPE_ALARMS_AND_REMINDERS:
                     holder.setSummary(AlarmsAndRemindersDetails.getSummary(mContext, entry));
+                    break;
+                case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
+                    holder.setSummary(MediaManagementAppsDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
