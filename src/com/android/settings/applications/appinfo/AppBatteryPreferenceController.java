@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.os.BatteryStats;
 import android.os.BatteryUsageStats;
 import android.os.Bundle;
 import android.os.UidBatteryConsumer;
@@ -112,10 +111,10 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         if (isBatteryStatsAvailable()) {
             final UserManager userManager =
                     (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-            final BatteryEntry entry = new BatteryEntry(mContext, null, userManager, mSipper,
-                    mUidBatteryConsumer, mPackageName);
+            final BatteryEntry entry = new BatteryEntry(mContext, /* handler */null, userManager,
+                    mUidBatteryConsumer, /* isHidden */ false, /* packages */ null, mPackageName);
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
-                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent);
+                    entry, mBatteryPercent);
         } else {
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
                     mPackageName);

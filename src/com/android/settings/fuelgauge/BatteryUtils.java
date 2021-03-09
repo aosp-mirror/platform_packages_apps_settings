@@ -30,7 +30,9 @@ import android.os.BatteryUsageStatsQuery;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.SystemBatteryConsumer;
 import android.os.SystemClock;
+import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -59,8 +61,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -86,6 +86,7 @@ public class BatteryUtils {
     private static final String TAG = "BatteryUtils";
 
     private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
+    private static final double MIN_POWER_THRESHOLD_MILLI_AMP_HOURS = 0.002;
 
     private static final int SECONDS_IN_HOUR = 60 * 60;
     private static BatteryUtils sInstance;
@@ -172,21 +173,6 @@ public class BatteryUtils {
     }
 
     /**
-     * Remove the {@link BatterySipper} that we should hide.
-     *
-     * @param sippers sipper list that need to check and remove
-     * for proportional smearing
-     */
-    public void removeHiddenBatterySippers(List<BatterySipper> sippers) {
-        for (int i = sippers.size() - 1; i >= 0; i--) {
-            final BatterySipper sipper = sippers.get(i);
-            if (shouldHideSipper(sipper)) {
-                sippers.remove(i);
-            }
-        }
-    }
-
-    /**
      * Check whether we should hide the battery sipper.
      */
     public boolean shouldHideSipper(BatterySipper sipper) {
@@ -206,6 +192,42 @@ public class BatteryUtils {
     }
 
     /**
+     * Returns true if the specified battery consumer should be excluded from the summary
+     * battery consumption list.
+     */
+    public boolean shouldHideUidBatteryConsumer(UidBatteryConsumer consumer, String[] packages) {
+        return consumer.getConsumedPower() < MIN_POWER_THRESHOLD_MILLI_AMP_HOURS
+                || mPowerUsageFeatureProvider.isTypeSystem(consumer.getUid(), packages)
+                || shouldHideUidBatteryConsumerUnconditionally(consumer, packages);
+    }
+
+    /**
+     * Returns true if the specified battery consumer should be excluded from
+     * battery consumption lists, either short or full.
+     */
+    boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
+            String[] packages) {
+        return consumer.getUid() < 0 || isHiddenSystemModule(packages);
+    }
+
+    /**
+     * Returns true if the specified battery consumer should be excluded from the summary
+     * battery consumption list.
+     */
+    public boolean shouldHideSystemBatteryConsumer(SystemBatteryConsumer consumer) {
+        switch (consumer.getDrainType()) {
+            case SystemBatteryConsumer.DRAIN_TYPE_IDLE:
+            case SystemBatteryConsumer.DRAIN_TYPE_MOBILE_RADIO:
+            case SystemBatteryConsumer.DRAIN_TYPE_SCREEN:
+            case SystemBatteryConsumer.DRAIN_TYPE_BLUETOOTH:
+            case SystemBatteryConsumer.DRAIN_TYPE_WIFI:
+                return true;
+            default:
+                return consumer.getConsumedPower() < MIN_POWER_THRESHOLD_MILLI_AMP_HOURS;
+        }
+    }
+
+    /**
      * Return {@code true} if one of packages in {@code sipper} is hidden system modules
      */
     public boolean isHiddenSystemModule(BatterySipper sipper) {
@@ -213,14 +235,20 @@ public class BatteryUtils {
             return false;
         }
         sipper.mPackages = mPackageManager.getPackagesForUid(sipper.getUid());
-        if (sipper.mPackages != null) {
-            for (int i = 0, length = sipper.mPackages.length; i < length; i++) {
-                if (AppUtils.isHiddenSystemModule(mContext, sipper.mPackages[i])) {
+        return isHiddenSystemModule(sipper.mPackages);
+    }
+
+    /**
+     * Returns true if one the specified packages belongs to a hidden system module.
+     */
+    public boolean isHiddenSystemModule(String[] packages) {
+        if (packages != null) {
+            for (int i = 0, length = packages.length; i < length; i++) {
+                if (AppUtils.isHiddenSystemModule(mContext, packages[i])) {
                     return true;
                 }
             }
         }
-
         return false;
     }
 
@@ -306,18 +334,6 @@ public class BatteryUtils {
     }
 
     /**
-     * Sort the {@code usageList} based on {@link BatterySipper#totalPowerMah}
-     */
-    public void sortUsageList(List<BatterySipper> usageList) {
-        Collections.sort(usageList, new Comparator<BatterySipper>() {
-            @Override
-            public int compare(BatterySipper a, BatterySipper b) {
-                return Double.compare(b.totalPowerMah, a.totalPowerMah);
-            }
-        });
-    }
-
-    /**
      * Calculate the time since last full charge, including the device off time
      *
      * @param batteryStatsHelper utility class that contains the data
@@ -328,18 +344,6 @@ public class BatteryUtils {
             long currentTimeMs) {
         return currentTimeMs - batteryStatsHelper.getStats().getStartClockTime();
 
-    }
-
-    /**
-     * Calculate the screen usage time since last full charge.
-     *
-     * @param batteryStatsHelper utility class that contains the screen usage data
-     * @return time in millis
-     */
-    public long calculateScreenUsageTime(BatteryStatsHelper batteryStatsHelper) {
-        final BatterySipper sipper = findBatterySipperByType(
-                batteryStatsHelper.getUsageList(), BatterySipper.DrainType.SCREEN);
-        return sipper != null ? sipper.usageTimeMs : 0;
     }
 
     public static void logRuntime(String tag, String message, long startTime) {
@@ -464,20 +468,6 @@ public class BatteryUtils {
             }
         }
         return estimate;
-    }
-
-    /**
-     * Find the {@link BatterySipper} with the corresponding {@link BatterySipper.DrainType}
-     */
-    public BatterySipper findBatterySipperByType(List<BatterySipper> usageList,
-            BatterySipper.DrainType type) {
-        for (int i = 0, size = usageList.size(); i < size; i++) {
-            final BatterySipper sipper = usageList.get(i);
-            if (sipper.drainType == type) {
-                return sipper;
-            }
-        }
-        return null;
     }
 
     private boolean isDataCorrupted() {
@@ -614,4 +604,3 @@ public class BatteryUtils {
         return -1L;
     }
 }
-
