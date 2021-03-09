@@ -48,6 +48,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
     public static final String EXTRA_KEY_REQUIRE_VISION = "accessibility_vision";
     public static final String EXTRA_KEY_REQUIRE_DIVERSITY = "accessibility_diversity";
+    public static final String EXTRA_KEY_SENSOR_ID = "sensor_id";
+    public static final String EXTRA_KEY_CHALLENGE = "challenge";
 
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is
@@ -90,6 +92,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
     protected int mUserId;
+    protected int mSensorId;
+    protected long mChallenge;
     protected boolean mFromSettingsSummary;
     protected FooterBarMixin mFooterBarMixin;
 
@@ -102,6 +106,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         if (mToken == null) {
             mToken = getIntent().getByteArrayExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+            mChallenge = getIntent().getLongExtra(EXTRA_KEY_CHALLENGE, 0L);
+            mSensorId = getIntent().getIntExtra(EXTRA_KEY_SENSOR_ID, -1);
         }
         mFromSettingsSummary = getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false);
         if (savedInstanceState != null && mToken == null) {
@@ -110,6 +116,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
             mFromSettingsSummary =
                     savedInstanceState.getBoolean(EXTRA_FROM_SETTINGS_SUMMARY, false);
+            mChallenge = savedInstanceState.getLong(EXTRA_KEY_CHALLENGE);
+            mSensorId = savedInstanceState.getInt(EXTRA_KEY_SENSOR_ID);
         }
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
     }
@@ -127,6 +135,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         outState.putBoolean(EXTRA_KEY_LAUNCHED_CONFIRM, mLaunchedConfirmLock);
         outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         outState.putBoolean(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
+        outState.putLong(EXTRA_KEY_CHALLENGE, mChallenge);
+        outState.putInt(EXTRA_KEY_SENSOR_ID, mSensorId);
     }
 
     @Override
