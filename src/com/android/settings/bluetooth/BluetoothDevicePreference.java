@@ -175,7 +175,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         mHideSecondTarget = hideSecondTarget;
     }
 
-    private void onPreferenceAttributesChanged() {
+    void onPreferenceAttributesChanged() {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Pair<Drawable, String> pair =
                     BluetoothUtils.getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
