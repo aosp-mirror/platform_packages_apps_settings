@@ -88,6 +88,8 @@ public class NetworkProviderSettingsTest {
     @Mock
     private WifiManager mWifiManager;
     @Mock
+    private UserManager mUserManager;
+    @Mock
     private DataUsagePreference mDataUsagePreference;
     private Context mContext;
     private NetworkProviderSettings mNetworkProviderSettings;
@@ -115,6 +117,8 @@ public class NetworkProviderSettingsTest {
         doReturn(mPreferenceManager).when(mNetworkProviderSettings).getPreferenceManager();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        when(mUserManager.hasBaseUserRestriction(any(), any())).thenReturn(true);
         doReturn(mContext).when(mPreferenceManager).getContext();
         mNetworkProviderSettings.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mNetworkProviderSettings.mSavedNetworksPreference = new Preference(mContext);
