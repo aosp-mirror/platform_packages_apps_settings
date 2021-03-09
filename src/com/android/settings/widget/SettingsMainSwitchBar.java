@@ -20,11 +20,14 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.MainSwitchBar;
+import com.android.settingslib.widget.R;
 
 /**
  * A {@link MainSwitchBar} with a customized Switch and provides the metrics feature.
@@ -43,10 +46,13 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
         boolean onBeforeCheckedChanged(Switch switchView, boolean isChecked);
     }
 
+    private ImageView mRestrictedIcon;
+    private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
+    private boolean mDisabledByAdmin;
+
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private OnBeforeCheckedChangeListener mOnBeforeListener;
 
-    private Switch mSwitch;
     private String mMetricsTag;
 
     public SettingsMainSwitchBar(Context context) {
@@ -66,12 +72,57 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
         super(context, attrs, defStyleAttr, defStyleRes);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
 
-        mSwitch = (Switch) findViewById(android.R.id.switch_widget);
-
         addOnSwitchChangeListener((switchView, isChecked) -> logMetrics(isChecked));
+
+        mRestrictedIcon = findViewById(R.id.restricted_icon);
+        mRestrictedIcon.setOnClickListener((View v) -> {
+            if (mDisabledByAdmin) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context, mEnforcedAdmin);
+                onRestrictedIconClick();
+            }
+        });
+    }
+
+    /**
+     * If admin is not null, disables the text and switch but keeps the view clickable.
+     * Otherwise, calls setEnabled which will enables the entire view including
+     * the text and switch.
+     */
+    public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
+        mEnforcedAdmin = admin;
+        if (admin != null) {
+            super.setEnabled(true);
+            mDisabledByAdmin = true;
+            mTextView.setEnabled(false);
+            mSwitch.setEnabled(false);
+            mSwitch.setVisibility(View.GONE);
+            mRestrictedIcon.setVisibility(View.VISIBLE);
+        } else {
+            mDisabledByAdmin = false;
+            mSwitch.setVisibility(View.VISIBLE);
+            mRestrictedIcon.setVisibility(View.GONE);
+            setEnabled(true);
+        }
     }
 
     @Override
+    public void setEnabled(boolean enabled) {
+        if (enabled && mDisabledByAdmin) {
+            setDisabledByAdmin(null);
+            return;
+        }
+        super.setEnabled(enabled);
+    }
+
+    /**
+     * Called by the restricted icon clicked.
+     */
+
+    @Override
+    public boolean performClick() {
+        return getDelegatingView().performClick();
+    }
+
     protected void onRestrictedIconClick() {
         mMetricsFeatureProvider.action(
                 SettingsEnums.PAGE_UNKNOWN,
@@ -105,17 +156,14 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     }
 
     /**
-     * Returns if this view is visible.
-     */
-    public boolean isShowing() {
-        return (getVisibility() == View.VISIBLE);
-    }
-
-    /**
      * Set the metrics tag.
      */
     public void setMetricsTag(String tag) {
         mMetricsTag = tag;
+    }
+
+    private View getDelegatingView() {
+        return mDisabledByAdmin ? mRestrictedIcon : mSwitch;
     }
 
     private void logMetrics(boolean isChecked) {
