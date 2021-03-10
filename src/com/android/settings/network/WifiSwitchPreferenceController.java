@@ -23,41 +23,41 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GenericSwitchController;
 import com.android.settings.wifi.WifiEnabler;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AirplaneSafeNetworksPreferenceController extends AbstractPreferenceController
-        implements LifecycleObserver, AirplaneModeEnabler.OnAirplaneModeChangedListener {
+/**
+ * This controller helps to manage the state of wifi switch preference.
+ */
+public class WifiSwitchPreferenceController extends AbstractPreferenceController implements
+        LifecycleObserver {
 
-    private static final String PREFERENCE_KEY = "airplane_safe_networks";
+    public static final String KEY = "wifi_switch";
 
     private RestrictedSwitchPreference mPreference;
 
-    private AirplaneModeEnabler mAirplaneModeEnabler;
     private WifiEnabler mWifiEnabler;
 
-    public AirplaneSafeNetworksPreferenceController(Context context, Lifecycle lifecycle) {
+    public WifiSwitchPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
         if (lifecycle == null) {
             throw new IllegalArgumentException("Lifecycle must be set");
         }
 
-        mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, this);
         lifecycle.addObserver(this);
     }
 
     @Override
     public String getPreferenceKey() {
-        return PREFERENCE_KEY;
+        return KEY;
     }
 
     @Override
     public boolean isAvailable() {
-        return mAirplaneModeEnabler.isAirplaneModeOn();
+        return true;
     }
 
     @Override
@@ -66,23 +66,24 @@ public class AirplaneSafeNetworksPreferenceController extends AbstractPreference
         mPreference = screen.findPreference(getPreferenceKey());
     }
 
+    /** Lifecycle.Event.ON_START */
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
-        mAirplaneModeEnabler.start();
         if (mPreference != null) {
             mWifiEnabler = new WifiEnabler(mContext, new GenericSwitchController(mPreference),
                     FeatureFactory.getFactory(mContext).getMetricsFeatureProvider());
         }
     }
 
+    /** Lifecycle.Event.ON_STOP */
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
-        mAirplaneModeEnabler.stop();
         if (mWifiEnabler != null) {
             mWifiEnabler.teardownSwitchController();
         }
     }
 
+    /** Lifecycle.Event.ON_RESUME */
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         if (mWifiEnabler != null) {
@@ -90,17 +91,11 @@ public class AirplaneSafeNetworksPreferenceController extends AbstractPreference
         }
     }
 
+    /** Lifecycle.Event.ON_PAUSE */
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onPause() {
         if (mWifiEnabler != null) {
             mWifiEnabler.pause();
-        }
-    }
-
-    @Override
-    public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
-        if (mPreference != null) {
-            mPreference.setVisible(isAirplaneModeOn);
         }
     }
 }
