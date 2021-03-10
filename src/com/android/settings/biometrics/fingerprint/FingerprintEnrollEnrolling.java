@@ -324,7 +324,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
         if (!TextUtils.isEmpty(helpString)) {
-            mErrorText.removeCallbacks(mTouchAgainRunnable);
+            if (!mCanAssumeUdfps) {
+                mErrorText.removeCallbacks(mTouchAgainRunnable);
+            }
             showError(helpString);
         }
     }
@@ -345,7 +347,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
         showErrorDialog(getText(msgId), errMsgId);
         stopIconAnimation();
-        mErrorText.removeCallbacks(mTouchAgainRunnable);
+        if (!mCanAssumeUdfps) {
+            mErrorText.removeCallbacks(mTouchAgainRunnable);
+        }
     }
 
     @Override
@@ -354,8 +358,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         updateTitleAndDescription();
         clearError();
         animateFlash();
-        mErrorText.removeCallbacks(mTouchAgainRunnable);
-        mErrorText.postDelayed(mTouchAgainRunnable, HINT_TIMEOUT_DURATION);
+        if (!mCanAssumeUdfps) {
+            mErrorText.removeCallbacks(mTouchAgainRunnable);
+            mErrorText.postDelayed(mTouchAgainRunnable, HINT_TIMEOUT_DURATION);
+        }
     }
 
     private void updateProgress(boolean animate) {
@@ -397,22 +403,28 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void showError(CharSequence error) {
-        mErrorText.setText(error);
-        if (mErrorText.getVisibility() == View.INVISIBLE) {
-            mErrorText.setVisibility(View.VISIBLE);
-            mErrorText.setTranslationY(getResources().getDimensionPixelSize(
-                    R.dimen.fingerprint_error_text_appear_distance));
-            mErrorText.setAlpha(0f);
-            mErrorText.animate()
-                    .alpha(1f)
-                    .translationY(0f)
-                    .setDuration(200)
-                    .setInterpolator(mLinearOutSlowInInterpolator)
-                    .start();
+        if (mCanAssumeUdfps) {
+            setHeaderText(error);
+            // Show nothing for subtitle when getting an error message.
+            setDescriptionText("");
         } else {
-            mErrorText.animate().cancel();
-            mErrorText.setAlpha(1f);
-            mErrorText.setTranslationY(0f);
+            mErrorText.setText(error);
+            if (mErrorText.getVisibility() == View.INVISIBLE) {
+                mErrorText.setVisibility(View.VISIBLE);
+                mErrorText.setTranslationY(getResources().getDimensionPixelSize(
+                        R.dimen.fingerprint_error_text_appear_distance));
+                mErrorText.setAlpha(0f);
+                mErrorText.animate()
+                        .alpha(1f)
+                        .translationY(0f)
+                        .setDuration(200)
+                        .setInterpolator(mLinearOutSlowInInterpolator)
+                        .start();
+            } else {
+                mErrorText.animate().cancel();
+                mErrorText.setAlpha(1f);
+                mErrorText.setTranslationY(0f);
+            }
         }
         if (isResumed()) {
             mVibrator.vibrate(VIBRATE_EFFECT_ERROR, FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
@@ -420,7 +432,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void clearError() {
-        if (mErrorText.getVisibility() == View.VISIBLE) {
+        if (!mCanAssumeUdfps && mErrorText.getVisibility() == View.VISIBLE) {
             mErrorText.animate()
                     .alpha(0f)
                     .translationY(getResources().getDimensionPixelSize(
