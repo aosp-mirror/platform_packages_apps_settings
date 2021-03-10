@@ -157,7 +157,7 @@ public class InternetConnectivityPanelTest {
 
         assertThat(uris).containsExactly(
                 CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI,
-                CustomSliceRegistry.AIRPLANE_SAFE_NETWORKS_SLICE_URI);
+                CustomSliceRegistry.TURN_ON_WIFI_SLICE_URI);
     }
 
     @Test
