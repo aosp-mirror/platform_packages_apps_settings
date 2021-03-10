@@ -85,8 +85,14 @@ public final class VoiceInputHelper {
     }
 
     static public class RecognizerInfo extends BaseInfo {
-        public RecognizerInfo(PackageManager pm, ServiceInfo _service, String _settings) {
-            super(pm, _service, _settings);
+        public final boolean mSelectableAsDefault;
+
+        public RecognizerInfo(PackageManager pm,
+                ServiceInfo serviceInfo,
+                String settings,
+                boolean selectableAsDefault) {
+            super(pm, serviceInfo, settings);
+            this.mSelectableAsDefault = selectableAsDefault;
         }
     }
 
@@ -158,11 +164,11 @@ public final class VoiceInputHelper {
                 //continue;
             }
             ServiceInfo si = resolveInfo.serviceInfo;
-            XmlResourceParser parser = null;
             String settingsActivity = null;
-            try {
-                parser = si.loadXmlMetaData(mContext.getPackageManager(),
-                        RecognitionService.SERVICE_META_DATA);
+            // Always show in voice input settings unless specifically set to False.
+            boolean selectableAsDefault = true;
+            try (XmlResourceParser parser = si.loadXmlMetaData(mContext.getPackageManager(),
+                    RecognitionService.SERVICE_META_DATA)) {
                 if (parser == null) {
                     throw new XmlPullParserException("No " + RecognitionService.SERVICE_META_DATA +
                             " meta-data for " + si.packageName);
@@ -188,6 +194,9 @@ public final class VoiceInputHelper {
                         com.android.internal.R.styleable.RecognitionService);
                 settingsActivity = array.getString(
                         com.android.internal.R.styleable.RecognitionService_settingsActivity);
+                selectableAsDefault = array.getBoolean(
+                        com.android.internal.R.styleable.RecognitionService_selectableAsDefault,
+                        true);
                 array.recycle();
             } catch (XmlPullParserException e) {
                 Log.e(TAG, "error parsing recognition service meta-data", e);
@@ -195,11 +204,13 @@ public final class VoiceInputHelper {
                 Log.e(TAG, "error parsing recognition service meta-data", e);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "error parsing recognition service meta-data", e);
-            } finally {
-                if (parser != null) parser.close();
             }
-            mAvailableRecognizerInfos.add(new RecognizerInfo(mContext.getPackageManager(),
-                    resolveInfo.serviceInfo, settingsActivity));
+            // The current recognizer must always be shown in the settings, whatever its
+            // selectableAsDefault value is.
+            if (selectableAsDefault || comp.equals(mCurrentRecognizer)) {
+                mAvailableRecognizerInfos.add(new RecognizerInfo(mContext.getPackageManager(),
+                        resolveInfo.serviceInfo, settingsActivity, selectableAsDefault));
+            }
         }
         Collections.sort(mAvailableRecognizerInfos);
     }
