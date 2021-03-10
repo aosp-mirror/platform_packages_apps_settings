@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Retrieve the Location Services used in profile user.
+ * Retrieve the Location Services used in work profile user.
  */
-public class LocationServiceForWorkPreferenceController extends
-        LocationServicePreferenceController {
+public class LocationInjectedServicesForWorkPreferenceController extends
+        LocationInjectedServicesPreferenceController {
     private static final String TAG = "LocationWorkPrefCtrl";
 
-    public LocationServiceForWorkPreferenceController(Context context, String key) {
+    public LocationInjectedServicesForWorkPreferenceController(Context context, String key) {
         super(context, key);
     }
 

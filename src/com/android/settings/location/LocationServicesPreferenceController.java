@@ -23,12 +23,14 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
-
-public class LocationScanningPreferenceController extends BasePreferenceController {
+/**
+ * Preference controller for Location Services.
+ */
+public class LocationServicesPreferenceController extends BasePreferenceController {
 
     private final WifiManager mWifiManager;
 
-    public LocationScanningPreferenceController(Context context, String key) {
+    public LocationServicesPreferenceController(Context context, String key) {
         super(context, key);
         mWifiManager = context.getSystemService(WifiManager.class);
     }
