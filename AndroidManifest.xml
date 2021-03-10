@@ -3751,6 +3751,25 @@
             android:launchMode="singleTask">
         </activity>
 
+        <activity android:name="Settings$FactoryResetActivity"
+                  android:permission="android.permission.BACKUP"
+                  android:label="@string/main_clear_title"
+                  android:exported="true"
+                  android:theme="@style/SudThemeGlif.Light">
+            <intent-filter>
+                <action android:name="com.android.settings.action.FACTORY_RESET"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.MainClear"/>
+        </activity>
+
+        <activity android:name="Settings$FactoryResetConfirmActivity"
+                  android:label="@string/main_clear_confirm_title"
+                  android:exported="false"
+                  android:theme="@style/SudThemeGlif.Light">
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
