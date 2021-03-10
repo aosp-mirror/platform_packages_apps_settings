@@ -40,6 +40,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
@@ -78,6 +79,7 @@ public class ScreenTimeoutSettingsTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
         mContext = spy(getApplicationContext());
         mSettings = spy(new ScreenTimeoutSettings());
         mContentResolver = mContext.getContentResolver();
