@@ -58,7 +58,7 @@ import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
-public class LocationServicePreferenceControllerTest {
+public class LocationInjectedServicesPreferenceControllerTest {
 
     private static final String KEY_LOCATION_SERVICES = "location_service";
 
@@ -76,7 +76,7 @@ public class LocationServicePreferenceControllerTest {
     private DevicePolicyManager mDevicePolicyManager;
 
     private Context mContext;
-    private LocationServicePreferenceController mController;
+    private LocationInjectedServicesPreferenceController mController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
@@ -86,7 +86,8 @@ public class LocationServicePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = spy(new LocationServicePreferenceController(mContext, KEY_LOCATION_SERVICES));
+        mController = spy(
+                new LocationInjectedServicesPreferenceController(mContext, KEY_LOCATION_SERVICES));
         when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
         mController.init(mFragment);
         mController.mInjector = mSettingsInjector;

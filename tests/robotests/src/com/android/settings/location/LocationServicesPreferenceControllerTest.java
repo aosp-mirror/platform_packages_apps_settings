@@ -37,18 +37,18 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-public class LocationScanningPreferenceControllerTest {
+public class LocationServicesPreferenceControllerTest {
     @Mock
     private WifiManager mWifiManager;
     private Context mContext;
-    private LocationScanningPreferenceController mController;
+    private LocationServicesPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
-        mController = new LocationScanningPreferenceController(mContext, "key");
+        mController = new LocationServicesPreferenceController(mContext, "key");
     }
 
     @Test
