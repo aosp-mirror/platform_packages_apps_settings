@@ -16,8 +16,6 @@
 
 package com.android.settings.utils;
 
-import android.os.Process;
-import android.security.keystore.AndroidKeyStoreProvider;
 import android.security.keystore.KeyProperties;
 import android.security.keystore2.AndroidKeyStoreLoadStoreParameter;
 import android.util.Log;
@@ -41,6 +39,8 @@ import java.util.Enumeration;
 public class AndroidKeystoreAliasLoader {
     private static final String TAG = "SettingsKeystoreUtils";
 
+    private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
+
     private final Collection<String> mKeyCertAliases;
     private final Collection<String> mCaCertAliases;
     /**
@@ -58,21 +58,13 @@ public class AndroidKeystoreAliasLoader {
     public AndroidKeystoreAliasLoader(Integer namespace) {
         mKeyCertAliases = new ArrayList<>();
         mCaCertAliases = new ArrayList<>();
-        KeyStore keyStore = null;
+        final KeyStore keyStore;
         final Enumeration<String> aliases;
         try {
+            keyStore = KeyStore.getInstance(KEYSTORE_PROVIDER);
             if (namespace != null && namespace != KeyProperties.NAMESPACE_APPLICATION) {
-                if (AndroidKeyStoreProvider.isKeystore2Enabled()) {
-                    keyStore = KeyStore.getInstance("AndroidKeyStore");
-                    keyStore.load(new AndroidKeyStoreLoadStoreParameter(namespace));
-                } else {
-                    // In the legacy case we pass in the WIFI UID because that is the only
-                    // possible special namespace that existed as of this writing,
-                    // and new namespaces must only be added using the new mechanism.
-                    keyStore = AndroidKeyStoreProvider.getKeyStoreForUid(Process.WIFI_UID);
-                }
+                keyStore.load(new AndroidKeyStoreLoadStoreParameter(namespace));
             } else {
-                keyStore = KeyStore.getInstance("AndroidKeyStore");
                 keyStore.load(null);
             }
             aliases = keyStore.aliases();
