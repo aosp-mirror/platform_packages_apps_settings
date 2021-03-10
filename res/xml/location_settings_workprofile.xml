@@ -23,10 +23,19 @@
     settings:keywords="@string/keywords_location">
 
     <PreferenceCategory
-        android:key="recent_location_requests"
-        android:title="@string/location_category_recent_location_requests"
+        android:key="recent_location_access"
+        android:title="@string/location_category_recent_location_access"
         settings:controller=
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
+
+    <Preference
+        android:key="recent_location_access_see_all_button"
+        android:title="@string/location_recent_location_access_see_all"
+        android:icon="@drawable/ic_chevron_right_24dp"
+        android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:controller="com.android.settings.core.WorkPreferenceController"
+        settings:forWork="true"
+        settings:searchable="false"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="managed_profile_location_switch"
@@ -46,11 +55,11 @@
         </intent>
     </Preference>
 
-    <PreferenceCategory
-        android:title="@string/managed_profile_location_services"
-        android:layout="@layout/preference_category_no_label"
-        android:key="location_services_managed_profile"
-        settings:controller="com.android.settings.location.LocationServiceForWorkPreferenceController"/>
+    <Preference
+        android:key="location_services_for_work"
+        android:title="@string/location_services_screen_title"
+        android:fragment="com.android.settings.location.LocationServicesForWork"
+        settings:controller="com.android.settings.location.LocationServicesForWorkPreferenceController"/>
 
     <PreferenceCategory
         android:key="location_footer"

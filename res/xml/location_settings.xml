@@ -27,6 +27,13 @@
         settings:controller=
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
 
+    <Preference
+        android:key="recent_location_access_see_all_button"
+        android:title="@string/location_recent_location_access_see_all"
+        android:icon="@drawable/ic_chevron_right_24dp"
+        android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:searchable="false"/>
+
     <PreferenceCategory
         android:key="location_advanced_settings"
         android:layout="@layout/preference_category_no_label"
@@ -47,7 +54,7 @@
             android:fragment="com.android.settings.location.LocationServices"
             android:key="location_services"
             android:title="@string/location_services_screen_title"
-            settings:controller="com.android.settings.location.LocationScanningPreferenceController"/>
+            settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
         <!-- This preference gets removed if there is no managed profile -->
         <com.android.settingslib.RestrictedSwitchPreference
@@ -64,7 +71,7 @@
             android:key="location_services_managed_profile"
             android:title="@string/managed_profile_location_services"
             settings:forWork="true"
-            settings:controller="com.android.settings.location.LocationServiceForWorkPreferenceController"/>
+            settings:controller="com.android.settings.location.LocationInjectedServicesForWorkPreferenceController"/>
 
     </PreferenceCategory>
 

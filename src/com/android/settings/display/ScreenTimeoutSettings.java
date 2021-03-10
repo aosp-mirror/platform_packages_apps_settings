@@ -85,6 +85,12 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     @VisibleForTesting
     AdaptiveSleepPreferenceController mAdaptiveSleepController;
 
+    public ScreenTimeoutSettings() {
+        super();
+        mMetricsFeatureProvider = FeatureFactory.getFactory(getContext())
+                .getMetricsFeatureProvider();
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -105,7 +111,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
         mPrivacyPreference.setSelectable(false);
         mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override

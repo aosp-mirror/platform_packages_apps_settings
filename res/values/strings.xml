@@ -102,8 +102,7 @@
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
     <string name="smart_rotate_text_headline">
-        Face based Autorotate uses the front camera to see if and how someone is looking at the screen. It allows
-        for reading while lying down and images are never stored or sent to Google.&lt;br>&lt;br>
+        Face Detection uses the front-facing camera to improve Auto-Rotate accuracy. Images are never stored or sent to Google.&lt;br>&lt;br>
        &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more&lt;/a>
     </string>
     <string name="font_size_preview_text_headline">Sample text</string>
@@ -963,10 +962,18 @@
     <string name="security_settings_fingerprint_enroll_start_title">Touch the sensor</string>
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_start_message">Put your finger on the sensor and lift after you feel a vibration</string>
+    <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_enroll_start_message">Each time you touch, keep your finger on the icon until you feel a vibration</string>
     <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_repeat_title">Lift, then touch again</string>
+    <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=40] -->
+    <string name="security_settings_udfps_enroll_title_one_more_time">One more time</string>
+    <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=60] -->
+    <string name="security_settings_udfps_enroll_repeat_title_touch_icon">Touch the fingerprint icon as it moves</string>
     <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_repeat_message">Keep lifting your finger to add the different parts of your fingerprint</string>
+    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_enroll_repeat_message">This helps capture your full fingerprint</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
@@ -3999,7 +4006,7 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">App access to location</string>
+    <string name="location_app_level_permissions">Manage location permissions</string>
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
     <!--
@@ -4024,7 +4031,9 @@
             apps have access to location</item>
     </plurals>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
-    <string name="location_category_recent_location_access">Recent location access</string>
+    <string name="location_category_recent_location_access">Past 24 hour access</string>
+    <!-- Location settings screen, displayed when there're more than three recent location access apps [CHAR LIMIT=30] -->
+    <string name="location_recent_location_access_see_all">See all</string>
     <!-- [CHAR LIMIT=30] Location settings screen, button to bring the user to view the details of recent location access -->
     <string name="location_recent_location_access_view_details">View details</string>
     <!-- Location settings screen, displayed when there's no recent app accessing location
@@ -10507,8 +10516,6 @@
     <string name="disabled_by_policy_title_suspend_packages">Can’t open this app</string>
     <!-- Dialog title. This dialog lets a user know that a specific setting is blocked by their credit provider. Since the user purchased the device from the credit provider, the credit provider controls what they can access. [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_financed_device">Blocked by your credit provider</string>
-    <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
-    <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
     <string name="admin_support_more_info">More details</string>
     <!-- Shown in admin details page to warn user about policies the admin can set in a work profile. [CHAR LIMIT=NONE] -->

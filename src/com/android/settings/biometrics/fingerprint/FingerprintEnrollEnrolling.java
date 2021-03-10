@@ -52,7 +52,6 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
-import com.google.android.setupdesign.util.DescriptionStyler;
 
 import java.util.List;
 
@@ -66,6 +65,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private static final int PROGRESS_BAR_MAX = 10000;
     private static final int FINISH_DELAY = 250;
+    /**
+     * Enroll with two center touches before going to guided enrollment.
+     */
+    private static final int NUM_CENTER_TOUCHES = 2;
 
     /**
      * If we don't see progress during this time, we show an error message to remind the users that
@@ -95,8 +98,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mCanAssumeUdfps;
     @Nullable private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
-    private TextView mStartMessage;
-    private TextView mRepeatMessage;
     private TextView mErrorText;
     private Interpolator mFastOutSlowInInterpolator;
     private Interpolator mLinearOutSlowInInterpolator;
@@ -145,23 +146,18 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         if (mCanAssumeUdfps) {
             setContentView(R.layout.udfps_enroll_enrolling);
+            setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
         } else {
             setContentView(R.layout.fingerprint_enroll_enrolling);
+            setDescriptionText(R.string.security_settings_fingerprint_enroll_start_message);
         }
 
         setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
 
-        mStartMessage = findViewById(R.id.sud_layout_description);
-        mRepeatMessage = findViewById(R.id.repeat_message);
         mErrorText = findViewById(R.id.error_text);
         mProgressBar = findViewById(R.id.fingerprint_progress_bar);
         mVibrator = getSystemService(Vibrator.class);
 
-        if (getLayout().shouldApplyPartnerHeavyThemeResource()) {
-            DescriptionStyler.applyPartnerCustomizationHeavyStyle(mRepeatMessage);
-        } else if (getLayout().shouldApplyPartnerResource()) {
-            DescriptionStyler.applyPartnerCustomizationLightStyle(mRepeatMessage);
-        }
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
@@ -229,7 +225,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     protected void onStart() {
         super.onStart();
         updateProgress(false /* animate */);
-        updateDescription();
+        updateTitleAndDescription();
         if (mRestoring) {
             startIconAnimation();
         }
@@ -297,14 +293,32 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         return new Intent(this, FingerprintEnrollFinish.class);
     }
 
-    private void updateDescription() {
+    private void updateTitleAndDescription() {
         if (mSidecar == null || mSidecar.getEnrollmentSteps() == -1) {
-            mStartMessage.setVisibility(View.VISIBLE);
-            mRepeatMessage.setVisibility(View.INVISIBLE);
+            if (mCanAssumeUdfps) {
+                setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+            } else {
+                setDescriptionText(R.string.security_settings_fingerprint_enroll_start_message);
+            }
+        } else if (mCanAssumeUdfps && !isCenterEnrollmentComplete()) {
+            setHeaderText(R.string.security_settings_udfps_enroll_title_one_more_time);
+            setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
         } else {
-            mStartMessage.setVisibility(View.INVISIBLE);
-            mRepeatMessage.setVisibility(View.VISIBLE);
+            if (mCanAssumeUdfps) {
+                setHeaderText(R.string.security_settings_udfps_enroll_repeat_title_touch_icon);
+                setDescriptionText(R.string.security_settings_udfps_enroll_repeat_message);
+            } else {
+                setDescriptionText(R.string.security_settings_fingerprint_enroll_repeat_message);
+            }
         }
+    }
+
+    private boolean isCenterEnrollmentComplete() {
+        if (mSidecar == null || mSidecar.getEnrollmentSteps() == -1) {
+            return false;
+        }
+        final int stepsEnrolled = mSidecar.getEnrollmentSteps() - mSidecar.getEnrollmentRemaining();
+        return stepsEnrolled >= NUM_CENTER_TOUCHES;
     }
 
     @Override
@@ -337,7 +351,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     public void onEnrollmentProgressChange(int steps, int remaining) {
         updateProgress(true /* animate */);
-        updateDescription();
+        updateTitleAndDescription();
         clearError();
         animateFlash();
         mErrorText.removeCallbacks(mTouchAgainRunnable);
