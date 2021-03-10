@@ -100,14 +100,14 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mChallenge = getIntent().getLongExtra(EXTRA_KEY_CHALLENGE, -1L);
+        mSensorId = getIntent().getIntExtra(EXTRA_KEY_SENSOR_ID, -1);
         // Don't need to retrieve the HAT if it already exists. In some cases, the extras do not
         // contain EXTRA_KEY_CHALLENGE_TOKEN but contain EXTRA_KEY_GK_PW, in which case enrollment
         // classes may request a HAT to be created (as opposed to being passed in)
         if (mToken == null) {
             mToken = getIntent().getByteArrayExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-            mChallenge = getIntent().getLongExtra(EXTRA_KEY_CHALLENGE, 0L);
-            mSensorId = getIntent().getIntExtra(EXTRA_KEY_SENSOR_ID, -1);
         }
         mFromSettingsSummary = getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false);
         if (savedInstanceState != null && mToken == null) {
@@ -202,6 +202,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         intent.setClassName(SETTINGS_PACKAGE_NAME, FingerprintEnrollEnrolling.class.getName());
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
+        intent.putExtra(EXTRA_KEY_CHALLENGE, mChallenge);
+        intent.putExtra(EXTRA_KEY_SENSOR_ID, mSensorId);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }

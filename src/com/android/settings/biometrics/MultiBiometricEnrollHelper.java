@@ -99,6 +99,8 @@ public class MultiBiometricEnrollHelper {
                     mGkPwHandle, mUserId, challenge);
             final Intent intent = BiometricUtils.getFingerprintIntroIntent(mActivity,
                     mActivity.getIntent());
+            intent.putExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
+            intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
             BiometricUtils.launchEnrollForResult(mActivity, intent, REQUEST_FINGERPRINT_ENROLL,
                     hardwareAuthToken, mGkPwHandle, mUserId);
         }));
