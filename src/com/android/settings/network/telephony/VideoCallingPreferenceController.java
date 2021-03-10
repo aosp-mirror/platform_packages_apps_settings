@@ -17,11 +17,11 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.util.Log;
@@ -50,7 +50,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     private Preference mPreference;
     private CarrierConfigManager mCarrierConfigManager;
-    private PhoneCallStateListener mPhoneStateListener;
+    private PhoneTelephonyCallback mTelephonyCallback;
     @VisibleForTesting
     Integer mCallState;
     private MobileDataEnabledListener mDataContentObserver;
@@ -59,7 +59,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mDataContentObserver = new MobileDataEnabledListener(context, this);
-        mPhoneStateListener = new PhoneCallStateListener();
+        mTelephonyCallback = new PhoneTelephonyCallback();
     }
 
     @Override
@@ -78,13 +78,13 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     @Override
     public void onStart() {
-        mPhoneStateListener.register(mContext, mSubId);
+        mTelephonyCallback.register(mContext, mSubId);
         mDataContentObserver.start(mSubId);
     }
 
     @Override
     public void onStop() {
-        mPhoneStateListener.unregister();
+        mTelephonyCallback.unregister();
         mDataContentObserver.stop();
     }
 
@@ -163,16 +163,13 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         updateState(mPreference);
     }
 
-    private class PhoneCallStateListener extends PhoneStateListener {
-
-        PhoneCallStateListener() {
-            super(Looper.getMainLooper());
-        }
+    private class PhoneTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener {
 
         private TelephonyManager mTelephonyManager;
 
         @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
+        public void onCallStateChanged(int state) {
             mCallState = state;
             updateState(mPreference);
         }
@@ -185,12 +182,12 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             // assign current call state so that it helps to show correct preference state even
             // before first onCallStateChanged() by initial registration.
             mCallState = mTelephonyManager.getCallState(subId);
-            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
+            mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
         }
 
         public void unregister() {
             mCallState = null;
-            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
+            mTelephonyManager.unregisterTelephonyCallback(this);
         }
     }
 

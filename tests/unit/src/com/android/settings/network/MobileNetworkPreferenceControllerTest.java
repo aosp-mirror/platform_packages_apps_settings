@@ -124,13 +124,12 @@ public class MobileNetworkPreferenceControllerTest {
 
         mLifecycleRegistry.handleLifecycleEvent(Event.ON_START);
         verify(mController).onStart();
-        verify(mTelephonyManager).listen(mController.mPhoneStateListener,
-                PhoneStateListener.LISTEN_SERVICE_STATE);
+        verify(mTelephonyManager).registerTelephonyCallback(
+                mContext.getMainExecutor(), mController.mTelephonyCallback);
 
         mLifecycleRegistry.handleLifecycleEvent(Event.ON_STOP);
         verify(mController).onStop();
-        verify(mTelephonyManager).listen(mController.mPhoneStateListener,
-                PhoneStateListener.LISTEN_NONE);
+        verify(mTelephonyManager).unregisterTelephonyCallback(mController.mTelephonyCallback);
     }
 
     @Test
@@ -148,12 +147,12 @@ public class MobileNetworkPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mLifecycleRegistry.handleLifecycleEvent(Event.ON_START);
         verify(mController).onStart();
-        verify(mTelephonyManager).listen(mController.mPhoneStateListener,
-                PhoneStateListener.LISTEN_SERVICE_STATE);
+        verify(mTelephonyManager).registerTelephonyCallback(
+                mContext.getMainExecutor(), mController.mTelephonyCallback);
 
         doReturn(testCarrierName).when(mController).getSummary();
 
-        mController.mPhoneStateListener.onServiceStateChanged(null);
+        mController.mTelephonyCallback.onServiceStateChanged(null);
 
         // Carrier name should be set.
         Assert.assertEquals(mPreference.getSummary(), testCarrierName);
