@@ -233,8 +233,6 @@ public class ActionDisabledByAdminDialogHelper {
         final TextView textView = root.findViewById(R.id.admin_support_msg);
         if (supportMessage != null) {
             textView.setText(supportMessage);
-        } else if (!isFinancedDevice()) {
-            textView.setText(R.string.default_admin_support_msg);
         }
     }
 
