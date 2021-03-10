@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A page that configures the Location Services settings including Wi-Fi scanning, Bluetooth
- * scanning, and injected location services.
+ * A page that configures the Location Services settings for work profile.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class LocationServices extends DashboardFragment {
-    private static final String TAG = "LocationServicesSettings";
+public class LocationServicesForWork extends DashboardFragment {
+    private static final String TAG = "LocationServicesForWork";
 
     @Override
     public int getMetricsCategory() {
@@ -43,7 +42,7 @@ public class LocationServices extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.location_services;
+        return R.xml.location_services_workprofile;
     }
 
     @Override
@@ -59,14 +58,11 @@ public class LocationServices extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        use(LocationInjectedServicesPreferenceController.class).init(this);
+        use(LocationInjectedServicesForWorkPreferenceController.class).init(this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new WifiScanningPreferenceController(context));
-        controllers.add(new BluetoothScanningPreferenceController(context));
         return controllers;
     }
 
@@ -74,7 +70,7 @@ public class LocationServices extends DashboardFragment {
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.location_services) {
+            new BaseSearchIndexProvider(R.xml.location_services_workprofile) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context

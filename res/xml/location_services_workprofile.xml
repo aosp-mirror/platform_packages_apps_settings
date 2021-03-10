@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2015 The Android Open Source Project
+<!-- Copyright (C) 2021 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,21 +18,10 @@
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/location_services_screen_title">
 
-        <SwitchPreference
-            android:title="@string/location_scanning_wifi_always_scanning_title"
-            android:summary="@string/location_scanning_wifi_always_scanning_description"
-            android:defaultValue="true"
-            android:key="wifi_always_scanning" />
-
-        <SwitchPreference
-            android:title="@string/location_scanning_bluetooth_always_scanning_title"
-            android:summary="@string/location_scanning_bluetooth_always_scanning_description"
-            android:defaultValue="true"
-            android:key="bluetooth_always_scanning" />
-
         <PreferenceCategory
-            android:key="location_services"
+            android:title="@string/managed_profile_location_services"
             android:layout="@layout/preference_category_no_label"
-            settings:controller="com.android.settings.location.LocationInjectedServicesPreferenceController"/>
+            android:key="location_services_managed_profile"
+            settings:controller="com.android.settings.location.LocationInjectedServicesForWorkPreferenceController"/>
 
 </PreferenceScreen>

@@ -60,7 +60,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -167,7 +166,6 @@ public class WifiConfigController implements TextWatcher,
     private String mUseSystemCertsString;
     private String mDoNotProvideEapUserCertString;
 
-    private ScrollView mDialogContainer;
     private Spinner mSecuritySpinner;
     @VisibleForTesting Spinner mEapMethodSpinner;
     @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
@@ -275,7 +273,6 @@ public class WifiConfigController implements TextWatcher,
             mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
 
         mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
-        mDialogContainer = mView.findViewById(R.id.dialog_scrollview);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);

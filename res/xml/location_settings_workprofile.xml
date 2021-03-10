@@ -55,11 +55,11 @@
         </intent>
     </Preference>
 
-    <PreferenceCategory
-        android:title="@string/managed_profile_location_services"
-        android:layout="@layout/preference_category_no_label"
-        android:key="location_services_managed_profile"
-        settings:controller="com.android.settings.location.LocationServiceForWorkPreferenceController"/>
+    <Preference
+        android:key="location_services_for_work"
+        android:title="@string/location_services_screen_title"
+        android:fragment="com.android.settings.location.LocationServicesForWork"
+        settings:controller="com.android.settings.location.LocationServicesForWorkPreferenceController"/>
 
     <PreferenceCategory
         android:key="location_footer"
