@@ -310,6 +310,7 @@
     <style name="TextAppearance.SearchBar"
            parent="@*android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Subtitle">
         <item name="android:textSize">@dimen/search_bar_text_size</item>
+        <item name="android:textColor">?android:attr/textColorTertiary</item>
         <item name="android:singleLine">true</item>
     </style>
 
@@ -418,7 +419,6 @@
     </style>
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
-
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
 
     <style name="LockPatternContainerStyle">
@@ -481,11 +481,8 @@
     </style>
 
     <style name="SearchBarStyle">
-        <item name="android:layout_marginEnd">@dimen/search_bar_margin</item>
-        <item name="cardCornerRadius">34dp</item>
-        <item name="enforceMaterialTheme">true</item>
-        <item name="cardElevation">3dp</item>
-        <item name="shapeAppearance">@null</item>
+        <item name="cardCornerRadius">@dimen/search_bar_corner_radius</item>
+        <item name="cardElevation">0dp</item>
     </style>
 
     <style name="ConditionCardBorderlessButton"
@@ -789,13 +786,11 @@
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
 
-    <style name="ContextualSuggestionText"
-           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
-        <item name="android:autoSizeTextType">uniform</item>
-        <item name="android:autoSizeMaxTextSize">@dimen/tool_bar_max_text_size</item>
-        <item name="android:autoSizeMinTextSize">@dimen/tool_bar_min_text_size</item>
-        <item name="android:maxLines">3</item>
-        <item name="android:gravity">bottom</item>
+    <style name="HomepageTitleText" parent="ToolbarText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
+        <item name="android:layout_marginHorizontal">@dimen/homepage_title_margin_horizontal</item>
     </style>
 
     <style name="RequestManageCredentialsButtonPanel">
@@ -883,16 +878,7 @@
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="ToolbarText.Collapsed"
-           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
-    </style>
-
-    <style name="ToolbarText"
-           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
-        <item name="android:textSize">@dimen/tool_bar_max_text_size</item>
-    </style>
-
-    <style name="ToolbarText.MoreThanTwoLines">
-        <item name="android:textSize">@dimen/tool_bar_min_text_size</item>
-    </style>
+    <style name="ToolbarText.Collapsed" parent="CollapsingToolbarTitle.Collapsed"/>
+    <style name="ToolbarText" parent="CollapsingToolbarTitle"/>
+    <style name="ToolbarText.MoreThanTwoLines" parent="CollapsingToolbarTitle.MoreThanTwoLines"/>
 </resources>
