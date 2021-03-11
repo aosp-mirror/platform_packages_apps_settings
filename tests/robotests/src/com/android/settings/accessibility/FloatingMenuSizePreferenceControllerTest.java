@@ -84,36 +84,11 @@ public class FloatingMenuSizePreferenceControllerTest {
     public void updateState_floatingMenuLargeSizeAndFullCircle_largeSizeValue() {
         Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
                 FloatingMenuSizePreferenceController.Size.LARGE);
-        Settings.Secure.putInt(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_ICON_TYPE,
-                FloatingMenuSizePreferenceController.EdgeMode.FULL_CIRCLE);
 
         mController.updateState(mListPreference);
 
         final String largeSize = String.valueOf(FloatingMenuSizePreferenceController.Size.LARGE);
         assertThat(mListPreference.getValue()).isEqualTo(largeSize);
-    }
-
-    @Test
-    public void updateState_floatingMenuHalfCircle_edgeSizeValue() {
-        Settings.Secure.putInt(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_ICON_TYPE,
-                FloatingMenuSizePreferenceController.EdgeMode.HALF_CIRCLE);
-
-        mController.updateState(mListPreference);
-
-        final String edgeSize = String.valueOf(FloatingMenuSizePreferenceController.Size.EDGE);
-        assertThat(mListPreference.getValue()).isEqualTo(edgeSize);
-    }
-
-    @Test
-    public void onPreferenceChange_floatingMenuEdgeSize_edgeSizeValue() {
-        final String edgeSize = String.valueOf(
-                FloatingMenuSizePreferenceController.Size.EDGE);
-
-        mController.onPreferenceChange(mListPreference, edgeSize);
-
-        assertThat(mListPreference.getValue()).isEqualTo(edgeSize);
     }
 
     @Test
