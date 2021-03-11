@@ -195,6 +195,27 @@ public class ActionDisabledByAdminDialogHelperTest {
     }
 
     @Test
+    public void testSetAdminSupportDetails_shortSupportMessageIsNull() {
+        final ShadowDevicePolicyManager dpmShadow = ShadowDevicePolicyManager.getShadow();
+        final UserManager userManager = RuntimeEnvironment.application.getSystemService(
+                UserManager.class);
+        final ShadowUserManager userManagerShadow = Shadow.extract(userManager);
+        final ViewGroup view = new FrameLayout(mActivity);
+        final ComponentName component = new ComponentName("some.package.name",
+                "some.package.name.SomeClass");
+        final EnforcedAdmin admin = new EnforcedAdmin(component, UserHandle.of(123));
+        final TextView textView = createAdminSupportTextView(view, mActivity);
+        dpmShadow.setShortSupportMessageForUser(component, 123, null);
+        dpmShadow.setIsAdminActiveAsUser(true);
+        createShadowWorkProfile(userManagerShadow);
+
+        mHelper.setAdminSupportDetails(mActivity, view, admin);
+
+        assertNotNull(admin.component);
+        assertEquals("", Shadows.shadowOf(textView).innerText());
+    }
+
+    @Test
     public void testSetAdminSupportDetailsNotAdmin() {
         final ShadowDevicePolicyManager dpmShadow = ShadowDevicePolicyManager.getShadow();
         final UserManager userManager = RuntimeEnvironment.application.getSystemService(
@@ -212,27 +233,6 @@ public class ActionDisabledByAdminDialogHelperTest {
         mHelper.setAdminSupportDetails(mActivity, textView, admin);
 
         assertNull(admin.component);
-        assertEquals(mActivity.getString(R.string.default_admin_support_msg),
-                Shadows.shadowOf(textView).innerText());
-    }
-
-    @Test
-    public void testSetAdminSupportDetailsForFinancedDevice_shortSupportMessageIsNull() {
-        final ShadowDevicePolicyManager dpmShadow = ShadowDevicePolicyManager.getShadow();
-        final UserManager userManager = RuntimeEnvironment.application.getSystemService(
-                UserManager.class);
-        final ShadowUserManager userManagerShadow = Shadow.extract(userManager);
-        final ViewGroup view = new FrameLayout(mActivity);
-        final ComponentName component = new ComponentName("some.package.name",
-                "some.package.name.SomeClass");
-        final EnforcedAdmin admin = new EnforcedAdmin(component, UserHandle.of(123));
-        final TextView textView = createAdminSupportTextView(view, mActivity);
-        setupFinancedDevice(dpmShadow);
-        createShadowWorkProfile(userManagerShadow);
-
-        mHelper.setAdminSupportDetails(mActivity, view, admin);
-
-        assertNotNull(admin.component);
         assertEquals("", Shadows.shadowOf(textView).innerText());
     }
 

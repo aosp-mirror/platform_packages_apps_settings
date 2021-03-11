@@ -48,7 +48,7 @@ public class AppDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY;
+        return SettingsEnums.MANAGE_APPLICATIONS;
     }
 
     @Override

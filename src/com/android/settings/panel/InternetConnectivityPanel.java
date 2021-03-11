@@ -113,7 +113,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         final List<Uri> uris = new ArrayList<>();
         if (mIsProviderModelEnabled) {
             uris.add(CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI);
-            uris.add(CustomSliceRegistry.AIRPLANE_SAFE_NETWORKS_SLICE_URI);
+            uris.add(CustomSliceRegistry.TURN_ON_WIFI_SLICE_URI);
         } else {
             uris.add(CustomSliceRegistry.WIFI_SLICE_URI);
             uris.add(CustomSliceRegistry.MOBILE_DATA_SLICE_URI);
