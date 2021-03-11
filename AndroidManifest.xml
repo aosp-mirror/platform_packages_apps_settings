@@ -2803,8 +2803,13 @@
         </activity>
 
         <!-- Show channel-level notification settings (channel passed in as extras) -->
-        <activity android:name="Settings$ChannelNotificationSettingsActivity"
+        <activity android:name=".notification.app.ChannelPanelActivity"
                   android:label="@string/notification_channel_title"
+                  android:theme="@style/Theme.Panel"
+                  android:launchMode="singleInstance"
+                  android:excludeFromRecents="true"
+                  android:noHistory="true"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS" />
