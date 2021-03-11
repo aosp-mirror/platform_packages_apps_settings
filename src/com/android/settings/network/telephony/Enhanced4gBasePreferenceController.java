@@ -34,6 +34,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.internal.telephony.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -95,9 +96,10 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
         mShow5gLimitedDialog = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_VOLTE_5G_LIMITED_ALERT_DIALOG_BOOL);
-        mIsNrEnabledFromCarrierConfig = carrierConfig.getInt(
-                CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITY_INT)
-                != CarrierConfigManager.CARRIER_NR_AVAILABILITY_NONE;
+
+        int[] nrAvailabilities = carrierConfig.getIntArray(
+                CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITIES_INT_ARRAY);
+        mIsNrEnabledFromCarrierConfig = !ArrayUtils.isEmpty(nrAvailabilities);
         return this;
     }
 
