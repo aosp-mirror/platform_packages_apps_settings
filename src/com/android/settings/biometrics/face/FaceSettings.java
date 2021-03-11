@@ -37,6 +37,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -67,6 +68,8 @@ public class FaceSettings extends DashboardFragment {
     private UserManager mUserManager;
     private FaceManager mFaceManager;
     private int mUserId;
+    private int mSensorId;
+    private long mChallenge;
     private byte[] mToken;
     private FaceSettingsAttentionPreferenceController mAttentionController;
     private FaceSettingsRemoveButtonPreferenceController mRemoveController;
@@ -147,6 +150,8 @@ public class FaceSettings extends DashboardFragment {
         mUserManager = context.getSystemService(UserManager.class);
         mFaceManager = context.getSystemService(FaceManager.class);
         mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
+        mSensorId = getIntent().getIntExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, -1);
+        mChallenge = getIntent().getLongExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, 0L);
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
@@ -247,6 +252,8 @@ public class FaceSettings extends DashboardFragment {
                 mFaceManager.generateChallenge((sensorId, challenge) -> {
                     mToken = BiometricUtils.requestGatekeeperHat(getPrefContext(), data, mUserId,
                             challenge);
+                    mSensorId = sensorId;
+                    mChallenge = challenge;
                     BiometricUtils.removeGatekeeperPasswordHandle(getPrefContext(), data);
                     mAttentionController.setToken(mToken);
                     mEnrollController.setToken(mToken);
@@ -269,7 +276,7 @@ public class FaceSettings extends DashboardFragment {
                 && !mConfirmingPassword) {
             // Revoke challenge and finish
             if (mToken != null) {
-                mFaceManager.revokeChallenge();
+                mFaceManager.revokeChallenge(mSensorId, mUserId, mChallenge);
                 mToken = null;
             }
             finish();
