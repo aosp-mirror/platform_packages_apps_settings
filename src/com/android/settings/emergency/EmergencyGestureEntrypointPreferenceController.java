@@ -49,11 +49,11 @@ public class EmergencyGestureEntrypointPreferenceController extends BasePreferen
         final String emergencyGestureSettingsPackageName = context.getResources().getString(
                 R.string.emergency_gesture_settings_package);
         if (!TextUtils.isEmpty(emergencyGestureSettingsPackageName)) {
-            mUseCustomIntent = true;
-            // Use custom intent if it's configured and system can resolve it.
             final Intent intent = new Intent(ACTION_EMERGENCY_GESTURE_SETTINGS)
                     .setPackage(emergencyGestureSettingsPackageName);
             if (canResolveIntent(intent)) {
+                // Use custom intent if it's configured and system can resolve it.
+                mUseCustomIntent = true;
                 mIntent = intent;
             }
         }
