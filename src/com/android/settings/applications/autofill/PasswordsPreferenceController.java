@@ -31,6 +31,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
@@ -47,16 +48,23 @@ public class PasswordsPreferenceController extends BasePreferenceController {
     private final List<AutofillServiceInfo> mServices;
 
     public PasswordsPreferenceController(Context context, String preferenceKey) {
+        this(context, preferenceKey,
+                AutofillServiceInfo.getAvailableServices(context, UserHandle.myUserId()));
+    }
+
+    @VisibleForTesting
+    public PasswordsPreferenceController(
+            Context context, String preferenceKey, List<AutofillServiceInfo> availableServices) {
         super(context, preferenceKey);
         mPm = context.getPackageManager();
         mIconFactory = IconDrawableFactory.newInstance(mContext);
-        mServices = AutofillServiceInfo.getAvailableServices(mContext, UserHandle.myUserId());
-        for (int i = mServices.size() - 1; i >= 0; i--) {
-            final String passwordsActivity = mServices.get(i).getPasswordsActivity();
+        for (int i = availableServices.size() - 1; i >= 0; i--) {
+            final String passwordsActivity = availableServices.get(i).getPasswordsActivity();
             if (TextUtils.isEmpty(passwordsActivity)) {
-                mServices.remove(i);
+                availableServices.remove(i);
             }
         }
+        mServices = availableServices;
     }
 
     @Override
