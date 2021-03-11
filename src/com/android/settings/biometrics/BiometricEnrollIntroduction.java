@@ -243,6 +243,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         }
         BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
+        intent.putExtra(EXTRA_KEY_CHALLENGE, mChallenge);
+        intent.putExtra(EXTRA_KEY_SENSOR_ID, mSensorId);
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
 
@@ -262,6 +264,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 getNextButton().setEnabled(false);
                 getChallenge(((sensorId, challenge) -> {
+                    mSensorId = sensorId;
+                    mChallenge = challenge;
                     mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
                     BiometricUtils.removeGatekeeperPasswordHandle(this, data);
                     getNextButton().setEnabled(true);
@@ -276,6 +280,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 getNextButton().setEnabled(false);
                 getChallenge(((sensorId, challenge) -> {
+                    mSensorId = sensorId;
+                    mChallenge = challenge;
                     mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
                     BiometricUtils.removeGatekeeperPasswordHandle(this, data);
                     getNextButton().setEnabled(true);

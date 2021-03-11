@@ -72,6 +72,8 @@ public class MultiBiometricEnrollHelper {
                     mGkPwHandle, mUserId, challenge);
             final Intent faceIntent = BiometricUtils.getFaceIntroIntent(mActivity,
                     mActivity.getIntent());
+            faceIntent.putExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
+            faceIntent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
 
             if (mRequestEnrollFingerprint) {
                 // Give FaceEnroll a pendingIntent pointing to fingerprint enrollment, so that it
