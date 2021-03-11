@@ -2902,6 +2902,12 @@
             android:grantUriPermissions="true"
             android:exported="false"/>
 
+        <provider
+            android:name=".emergency.EmergencyActionContentProvider"
+            android:authorities="com.android.settings.emergency"
+            android:permission="android.permission.CALL_PRIVILEGED"
+            android:exported="true"/>
+
         <activity
             android:name=".wifi.RequestToggleWiFiActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert"
