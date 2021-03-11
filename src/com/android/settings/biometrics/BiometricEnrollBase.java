@@ -183,8 +183,16 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         setHeaderText(resId, false /* force */);
     }
 
+    protected void setHeaderText(CharSequence title) {
+        getLayout().setHeaderText(title);
+    }
+
     protected void setDescriptionText(int resId) {
         getLayout().setDescriptionText(resId);
+    }
+
+    protected void setDescriptionText(CharSequence descriptionText) {
+        getLayout().setDescriptionText(descriptionText);
     }
 
     protected FooterButton getNextButton() {
