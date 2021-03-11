@@ -16,9 +16,9 @@
 
 package com.android.settings.datetime;
 
-import static android.app.time.TimeZoneCapabilities.CAPABILITY_NOT_APPLICABLE;
-import static android.app.time.TimeZoneCapabilities.CAPABILITY_NOT_SUPPORTED;
-import static android.app.time.TimeZoneCapabilities.CAPABILITY_POSSESSED;
+import static android.app.time.Capabilities.CAPABILITY_NOT_APPLICABLE;
+import static android.app.time.Capabilities.CAPABILITY_NOT_SUPPORTED;
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -26,6 +26,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.time.Capabilities;
 import android.app.time.TimeManager;
 import android.app.time.TimeZoneCapabilities;
 import android.app.time.TimeZoneCapabilitiesAndConfig;
@@ -142,7 +143,7 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
     }
 
     private static TimeZoneCapabilities createTimeZoneCapabilities(
-            @TimeZoneCapabilities.CapabilityState int geoDetectionCapability) {
+            @Capabilities.CapabilityState int geoDetectionCapability) {
         UserHandle arbitraryUserHandle = UserHandle.of(123);
         return new TimeZoneCapabilities.Builder(arbitraryUserHandle)
                 .setConfigureAutoDetectionEnabledCapability(CAPABILITY_POSSESSED)
