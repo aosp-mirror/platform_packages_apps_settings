@@ -120,7 +120,9 @@ public class SettingsDumpService extends Service {
             obj.put("cell", array);
         }
         if (packageManager.hasSystemFeature(FEATURE_WIFI)) {
-            obj.put("wifi", dumpDataUsage(NetworkTemplate.buildTemplateWifiWildcard(), controller));
+            obj.put("wifi", dumpDataUsage(
+                    NetworkTemplate.buildTemplateWifi(
+                    NetworkTemplate.WIFI_NETWORKID_ALL, null /* subscriberId */), controller));
         }
 
         if (packageManager.hasSystemFeature(FEATURE_ETHERNET)) {
