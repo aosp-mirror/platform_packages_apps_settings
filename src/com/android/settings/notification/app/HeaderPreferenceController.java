@@ -92,6 +92,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                     .setRecyclerView(mFragment.getListView(), mFragment.getSettingsLifecycle())
                     .done(activity, mContext);
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
+            pref.findViewById(R.id.entity_header).setBackground(null);
         }
     }
 
