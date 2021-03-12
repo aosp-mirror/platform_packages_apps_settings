@@ -50,9 +50,8 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     @VisibleForTesting
     boolean mIsProviderModelEnabled;
     private PanelContentCallback mCallback;
-    private InternetUpdater mInternetUpdater;
-    private boolean mIsAirplaneModeOn;
-    private boolean mIsApmNetworksAvailable;
+    @VisibleForTesting
+    InternetUpdater mInternetUpdater;
 
     public static InternetConnectivityPanel create(Context context) {
         return new InternetConnectivityPanel(context);
@@ -62,8 +61,6 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         mContext = context.getApplicationContext();
         mIsProviderModelEnabled = Utils.isProviderModelEnabled(mContext);
         mInternetUpdater = new InternetUpdater(context, null /* Lifecycle */, this);
-        mIsAirplaneModeOn = mInternetUpdater.isAirplaneModeOn();
-        mIsApmNetworksAvailable = mInternetUpdater.isApmNetworksAvailable();
     }
 
     /** @OnLifecycleEvent(ON_RESUME) */
@@ -90,9 +87,8 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     @Override
     public CharSequence getTitle() {
         if (mIsProviderModelEnabled) {
-            return mContext.getText(mIsApmNetworksAvailable
-                    ? R.string.airplane_mode_network_panel_title
-                    : R.string.provider_internet_settings);
+            return mContext.getText(mInternetUpdater.isAirplaneModeOn()
+                    ? R.string.airplane_mode : R.string.provider_internet_settings);
         }
         return mContext.getText(R.string.internet_connectivity_panel_title);
     }
@@ -102,8 +98,9 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
      */
     @Override
     public CharSequence getSubTitle() {
-        if (mIsProviderModelEnabled && mIsAirplaneModeOn && !mIsApmNetworksAvailable) {
-            return mContext.getText(R.string.condition_airplane_title);
+        if (mIsProviderModelEnabled && mInternetUpdater.isAirplaneModeOn()
+                && mInternetUpdater.isWifiEnabled()) {
+            return mContext.getText(R.string.wifi_is_turned_on_subtitle);
         }
         return null;
     }
@@ -136,7 +133,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
 
     @Override
     public CharSequence getCustomizedButtonTitle() {
-        if (mIsAirplaneModeOn && !mIsApmNetworksAvailable) {
+        if (mInternetUpdater.isAirplaneModeOn() && !mInternetUpdater.isWifiEnabled()) {
             return null;
         }
         return mContext.getText(R.string.settings_button);
@@ -162,19 +159,14 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
      */
     @Override
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
-        if (!isAirplaneModeOn) {
-            mIsApmNetworksAvailable = false;
-        }
-        mIsAirplaneModeOn = isAirplaneModeOn;
         updatePanelTitle();
     }
 
     /**
-     * Called when airplane mode networks state is changed.
+     * Called when Wi-Fi enabled is changed.
      */
     @Override
-    public void onAirplaneModeNetworksChanged(boolean available) {
-        mIsApmNetworksAvailable = available;
+    public void onWifiEnabledChanged(boolean enabled) {
         updatePanelTitle();
     }
 
@@ -183,16 +175,14 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
             return;
         }
 
-        if (mIsAirplaneModeOn && !mIsApmNetworksAvailable) {
-            // When the airplane mode is on.
-            //   Title: Internet
-            //   Sub-Title: Airplane mode is on
-            //   Settings button: Hide
+        if (mInternetUpdater.isAirplaneModeOn() && mInternetUpdater.isWifiEnabled()) {
+            // When the airplane mode is on and Wi-Fi is enabled.
+            //   Title: Airplane mode
+            //   Sub-Title: Wi-Fi is turned on
             mCallback.onHeaderChanged();
         } else {
-            // Except for airplane mode on.
-            //   Title: Airplane mode networks / Internet
-            //   Settings button: Show
+            // Other situations.
+            //   Title: Airplane mode / Internet
             mCallback.onTitleChanged();
         }
         mCallback.onCustomizedButtonStateChanged();
