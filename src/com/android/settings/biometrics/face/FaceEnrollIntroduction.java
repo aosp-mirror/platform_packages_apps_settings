@@ -112,6 +112,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             // the challenge is ready. Let's just do this for now.
             mFaceManager.generateChallenge((sensorId, challenge) -> {
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
+                mSensorId = sensorId;
+                mChallenge = challenge;
                 if (BiometricUtils.isMultiBiometricEnrollmentFlow(this)) {
                     BiometricUtils.removeGatekeeperPasswordHandle(this, getIntent());
                 }
