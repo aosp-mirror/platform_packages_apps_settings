@@ -23,11 +23,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settingslib.widget.BannerMessagePreference;
 
 /**
  * The controller of Screen attention's permission warning preference. The preference appears when
@@ -35,8 +35,8 @@ import com.android.settings.R;
  */
 public class AdaptiveSleepPermissionPreferenceController {
     @VisibleForTesting
-    Preference mPreference;
-    private PackageManager mPackageManager;
+    BannerMessagePreference mPreference;
+    private final PackageManager mPackageManager;
 
     public AdaptiveSleepPermissionPreferenceController(Context context) {
         final String packageName = context.getPackageManager().getAttentionServicePackageName();
@@ -44,13 +44,12 @@ public class AdaptiveSleepPermissionPreferenceController {
         final Intent intent = new Intent(
                 android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + packageName));
-        mPreference = new Preference(context);
+        mPreference = new BannerMessagePreference(context);
         mPreference.setTitle(R.string.adaptive_sleep_title_no_permission);
         mPreference.setSummary(R.string.adaptive_sleep_summary_no_permission);
-        mPreference.setIcon(R.drawable.ic_info_outline_24);
-        mPreference.setOnPreferenceClickListener(p -> {
+        mPreference.setPositiveButtonText(R.string.adaptive_sleep_manage_permission_button);
+        mPreference.setPositiveButtonOnClickListener(p -> {
             context.startActivity(intent);
-            return true;
         });
     }
 

@@ -40,6 +40,8 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
     protected Intent getFingerprintEnrollingIntent() {
         Intent intent = new Intent(this, SetupFingerprintEnrollEnrolling.class);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        intent.putExtra(EXTRA_KEY_CHALLENGE, mChallenge);
+        intent.putExtra(EXTRA_KEY_SENSOR_ID, mSensorId);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
