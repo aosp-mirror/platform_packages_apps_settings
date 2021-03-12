@@ -16,8 +16,11 @@
 
 package com.android.settings.bluetooth;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -66,16 +69,37 @@ public class DevicePickerFragmentTest {
     }
 
     @Test
-    public void sendBroadcastWithPermission() {
+    public void callingPackageIsEqualToLaunchPackage_sendBroadcastToLaunchPackage() {
         final CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
         final BluetoothDevice bluetoothDevice = mock(BluetoothDevice.class);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         when(cachedDevice.getDevice()).thenReturn(bluetoothDevice);
         mFragment.mSelectedDevice = bluetoothDevice;
+        mFragment.mLaunchPackage = "com.android.settings";
+        mFragment.mLaunchClass = "com.android.settings.bluetooth.BluetoothPermissionActivity";
+        mFragment.mCallingAppPackageName = "com.android.settings";
 
         mFragment.onDeviceBondStateChanged(cachedDevice, BluetoothDevice.BOND_BONDED);
 
         verify(mContext).sendBroadcast(intentCaptor.capture(),
                 eq("android.permission.BLUETOOTH_ADMIN"));
+        assertThat(intentCaptor.getValue().getComponent().getPackageName())
+                .isEqualTo(mFragment.mLaunchPackage);
+    }
+
+    @Test
+    public void callingPackageIsNotEqualToLaunchPackage_broadcastNotSend() {
+        final CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
+        final BluetoothDevice bluetoothDevice = mock(BluetoothDevice.class);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        when(cachedDevice.getDevice()).thenReturn(bluetoothDevice);
+        mFragment.mSelectedDevice = bluetoothDevice;
+        mFragment.mLaunchPackage = "com.fake.settings";
+        mFragment.mLaunchClass = "com.android.settings.bluetooth.BluetoothPermissionActivity";
+        mFragment.mCallingAppPackageName = "com.android.settings";
+
+        mFragment.onDeviceBondStateChanged(cachedDevice, BluetoothDevice.BOND_BONDED);
+
+        verify(mContext, never()).sendBroadcast(intentCaptor.capture());
     }
 }
