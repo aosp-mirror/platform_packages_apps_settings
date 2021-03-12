@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import static android.app.time.TimeZoneCapabilities.CAPABILITY_POSSESSED;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.time.TimeManager;
@@ -62,9 +63,33 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
     }
 
     @Test
+    public void setChecked_withTrue_shouldUpdateSetting() {
+        // Simulate the UI being clicked.
+        mController.setChecked(true);
+
+        // Verify the TimeManager was updated with the UI value.
+        TimeZoneConfiguration expectedConfiguration = new TimeZoneConfiguration.Builder()
+                .setGeoDetectionEnabled(true)
+                .build();
+        verify(mTimeManager).updateTimeZoneConfiguration(expectedConfiguration);
+    }
+
+    @Test
+    public void setChecked_withFalse_shouldUpdateSetting() {
+        // Simulate the UI being clicked.
+        mController.setChecked(false);
+
+        // Verify the TimeManager was updated with the UI value.
+        TimeZoneConfiguration expectedConfiguration = new TimeZoneConfiguration.Builder()
+                .setGeoDetectionEnabled(false)
+                .build();
+        verify(mTimeManager).updateTimeZoneConfiguration(expectedConfiguration);
+    }
+
+    @Test
     public void testLocationTimeZoneDetection_supported_shouldBeShown() {
         TimeZoneCapabilities capabilities =
-                createTimeZoneCapabilities(/* geoDetectionSupported= */ true);
+                createTimeZoneCapabilities(CAPABILITY_POSSESSED);
         TimeZoneConfiguration configuration = createTimeZoneConfig(/* geoDetectionEnabled= */ true);
         TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
                 new TimeZoneCapabilitiesAndConfig(capabilities, configuration);
@@ -76,7 +101,7 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
     @Test
     public void testLocationTimeZoneDetection_unsupported_shouldNotBeShown() {
         TimeZoneCapabilities capabilities =
-                createTimeZoneCapabilities(/* geoDetectionSupported= */ false);
+                createTimeZoneCapabilities(CAPABILITY_NOT_SUPPORTED);
         TimeZoneConfiguration configuration = createTimeZoneConfig(/* geoDetectionEnabled= */ true);
         TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
                 new TimeZoneCapabilitiesAndConfig(capabilities, configuration);
@@ -91,20 +116,34 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
     @Test
     public void testLocationTimeZoneDetection_summary_geoDetectionEnabled() {
         TimeZoneCapabilities capabilities =
-                createTimeZoneCapabilities(/* geoDetectionSupported= */ true);
+                createTimeZoneCapabilities(CAPABILITY_POSSESSED);
         TimeZoneConfiguration configuration = createTimeZoneConfig(/* geoDetectionEnabled= */ true);
         TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
                 new TimeZoneCapabilitiesAndConfig(capabilities, configuration);
 
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-        assertThat(mController.getSummary()).isEqualTo(
-                mContext.getString(R.string.location_time_zone_detection_on));
+        assertThat(mController.getSummary().toString()).isEmpty();
     }
 
-    private static TimeZoneCapabilities createTimeZoneCapabilities(boolean geoDetectionSupported) {
+    @Test
+    public void testLocationTimeZoneDetection_toggleIsOn_whenGeoDetectionEnabledAnsMlsIsOff() {
+        TimeZoneCapabilities capabilities =
+                createTimeZoneCapabilities(CAPABILITY_NOT_APPLICABLE);
+        TimeZoneConfiguration configuration = createTimeZoneConfig(/* geoDetectionEnabled= */ true);
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
+                new TimeZoneCapabilitiesAndConfig(capabilities, configuration);
+
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+
+        assertThat(mController.isChecked()).isTrue();
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.location_app_permission_summary_location_off));
+    }
+
+    private static TimeZoneCapabilities createTimeZoneCapabilities(
+            @TimeZoneCapabilities.CapabilityState int geoDetectionCapability) {
         UserHandle arbitraryUserHandle = UserHandle.of(123);
-        int geoDetectionCapability =
-                geoDetectionSupported ? CAPABILITY_POSSESSED : CAPABILITY_NOT_SUPPORTED;
         return new TimeZoneCapabilities.Builder(arbitraryUserHandle)
                 .setConfigureAutoDetectionEnabledCapability(CAPABILITY_POSSESSED)
                 .setConfigureGeoDetectionEnabledCapability(geoDetectionCapability)

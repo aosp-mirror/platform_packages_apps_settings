@@ -23,7 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.SpannableString;
@@ -39,8 +38,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.actionbar.SearchMenuController;
-import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.RestrictedLockUtils;
@@ -89,13 +86,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         super();
         mMetricsFeatureProvider = FeatureFactory.getFactory(getContext())
                 .getMetricsFeatureProvider();
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        SearchMenuController.init(this /* host */);
-        HelpMenuController.init(this /* host */);
     }
 
     @Override
