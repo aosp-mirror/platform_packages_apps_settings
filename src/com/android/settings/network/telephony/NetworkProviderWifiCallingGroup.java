@@ -217,7 +217,12 @@ public class NetworkProviderWifiCallingGroup extends
             pref.setEnabled(getTelephonyManagerForSubscriptionId(subId).getCallState()
                     == TelephonyManager.CALL_STATE_IDLE);
             pref.setOrder(order++);
-            pref.setSummary(R.string.calls_sms_wfc_summary);
+
+            int resId = com.android.internal.R.string.wifi_calling_off_summary;
+            if (queryImsState(subId).isEnabledByUser()) {
+                resId = R.string.calls_sms_wfc_summary;
+            }
+            pref.setSummary(resId);
 
             mWifiCallingForSubPreferences.put(subId, pref);
         }
