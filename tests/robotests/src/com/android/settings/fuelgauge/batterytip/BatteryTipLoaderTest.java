@@ -77,7 +77,7 @@ public class BatteryTipLoaderTest {
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mPowerManager).when(mContext).getSystemService(Context.POWER_SERVICE);
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
-        doReturn(mBatteryInfo).when(mBatteryUtils).getBatteryInfo(any(), any());
+        doReturn(mBatteryInfo).when(mBatteryUtils).getBatteryInfo(any());
         mBatteryTipLoader = new BatteryTipLoader(mContext, mBatteryStatsHelper);
         mBatteryTipLoader.mBatteryUtils = mBatteryUtils;
     }
