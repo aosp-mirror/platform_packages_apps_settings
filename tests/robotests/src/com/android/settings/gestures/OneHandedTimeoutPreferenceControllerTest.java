@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.os.UserHandle;
 
 import androidx.preference.ListPreference;
 
@@ -34,7 +35,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class OneHandedTimeoutPreferenceControllerTest {
 
-    private static final String KEY = "one_handed_timeout_preference";
+    private static final String KEY = "gesture_one_handed_timeout";
 
     private Context mContext;
     private OneHandedTimeoutPreferenceController mController;
@@ -46,11 +47,12 @@ public class OneHandedTimeoutPreferenceControllerTest {
         mController = new OneHandedTimeoutPreferenceController(mContext, KEY);
         mPreference = new ListPreference(mContext);
         mPreference.setKey(KEY);
+        OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
     }
 
     @Test
     public void getAvailabilityStatus_enabledOneHanded_shouldAvailable() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
@@ -58,7 +60,7 @@ public class OneHandedTimeoutPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_disableOneHanded_shouldUnavailable() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
@@ -66,7 +68,7 @@ public class OneHandedTimeoutPreferenceControllerTest {
 
     @Test
     public void updateState_enableOneHanded_switchShouldEnabled() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
 
         mController.updateState(mPreference);
 
@@ -75,7 +77,7 @@ public class OneHandedTimeoutPreferenceControllerTest {
 
     @Test
     public void updateState_disableOneHanded_switchShouldDisabled() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
 
         mController.updateState(mPreference);
 
@@ -87,7 +89,7 @@ public class OneHandedTimeoutPreferenceControllerTest {
         final String[] timeoutTitles = mContext.getResources().getStringArray(
                 R.array.one_handed_timeout_title);
 
-        OneHandedSettingsUtils.setSettingsOneHandedModeTimeout(mContext,
+        OneHandedSettingsUtils.setTimeoutValue(mContext,
                 OneHandedSettingsUtils.OneHandedTimeout.NEVER.getValue());
 
         assertThat(mController.getSummary()).isEqualTo(
@@ -99,7 +101,7 @@ public class OneHandedTimeoutPreferenceControllerTest {
         final String[] timeoutTitles = mContext.getResources().getStringArray(
                 R.array.one_handed_timeout_title);
 
-        OneHandedSettingsUtils.setSettingsOneHandedModeTimeout(mContext,
+        OneHandedSettingsUtils.setTimeoutValue(mContext,
                 OneHandedSettingsUtils.OneHandedTimeout.SHORT.getValue());
 
         assertThat(mController.getSummary()).isEqualTo(String.format(
