@@ -183,6 +183,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
+        intent.putExtra(EXTRA_KEY_CHALLENGE, mChallenge);
+        intent.putExtra(EXTRA_KEY_SENSOR_ID, mSensorId);
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
         final String flattenedString = getString(R.string.config_face_enroll);

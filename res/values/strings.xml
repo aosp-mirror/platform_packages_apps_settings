@@ -2836,7 +2836,9 @@
     <!-- adaptive_sleep settings screen, title about the required permission is missing [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_title_no_permission">Camera access needed</string>
     <!-- adaptive_sleep settings screen, subtitle when permission is missing [CHAR LIMIT=NONE]-->
-    <string name="adaptive_sleep_summary_no_permission">Tap to manage permissions for Device Personalization Services</string>
+    <string name="adaptive_sleep_summary_no_permission">Camera access is required for screen attention. Tap to manage permissions for Device Personalization Services</string>
+    <!-- adaptive_sleep settings screen, text for the camera permission button [CHAR LIMIT=NONE]-->
+    <string name="adaptive_sleep_manage_permission_button">Manage permissions</string>
     <!-- Description about the feature adaptive sleep [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_description">Prevents your screen from turning off if you\u2019re looking at it</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
@@ -4059,18 +4061,8 @@
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
     <string name="managed_profile_location_services">Location services for work</string>
 
-    <!-- [CHAR LIMIT=60] Location settings screen, screen title -->
-    <string name="location_time_zone_detection_screen_title">Use location to set time zone</string>
-    <!-- [CHAR LIMIT=50] Location settings screen, title for the setting that control whether the
-         device can use its location for time zone detection. -->
-    <string name="location_time_zone_detection_enabled_title">Location time zone detection</string>
-    <!-- [CHAR LIMIT=NONE] Preference description text for location time zone detection -->
-    <string name="location_time_zone_detection_enabled_description">Allows the device\u2019s location to be used to detect the current time zone. Other location settings such as Wi\u2011Fi scanning can affect the accuracy of time zone detection.</string>
-
-    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is on -->
-    <string name="location_time_zone_detection_on">On</string>
-    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is off -->
-    <string name="location_time_zone_detection_off">Off</string>
+    <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
+    <string name="location_time_zone_detection_toggle_title">Use location to set time zone</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable due to other settings like the "automatic time zone detection enabled" setting
          being set to "off". -->
@@ -7861,10 +7853,10 @@
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness, Auto brightness</string>
 
     <!-- Search keywords for adaptive sleep setting [CHAR LIMIT=NONE]-->
-    <string name="keywords_display_adaptive_sleep">dim screen, sleep, battery, timeout, attention, display, screen, inactivity</string>
+    <string name="keywords_display_adaptive_sleep">smart, dim screen, sleep, battery, timeout, attention, display, screen, inactivity</string>
 
     <!-- List of synonyms for the auto rotate (rotate the virtual display when the device rotates) setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_auto_rotate">rotate, flip, rotation, portrait, landscape, orientation, vertical, horizontal</string>
+    <string name="keywords_auto_rotate">camera, smart, auto rotate, auto-rotate, rotate, flip, rotation, portrait, landscape, orientation, vertical, horizontal</string>
 
     <!-- List of synonyms for the System Update (update the operating system) setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_system_update_settings">upgrade, android</string>

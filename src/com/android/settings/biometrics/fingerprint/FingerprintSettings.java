@@ -138,6 +138,8 @@ public class FingerprintSettings extends SubSettings {
         private CharSequence mFooterTitle;
         private boolean mEnrollClicked;
 
+        private long mChallenge;
+
         private static final String TAG_AUTHENTICATE_SIDECAR = "authenticate_sidecar";
         private static final String TAG_REMOVAL_SIDECAR = "removal_sidecar";
         private FingerprintAuthenticateSidecar mAuthenticateSidecar;
@@ -287,6 +289,8 @@ public class FingerprintSettings extends SubSettings {
 
             mToken = getIntent().getByteArrayExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+            mChallenge = activity.getIntent()
+                    .getLongExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, -1L);
 
             mAuthenticateSidecar = (FingerprintAuthenticateSidecar)
                     getFragmentManager().findFragmentByTag(TAG_AUTHENTICATE_SIDECAR);
@@ -577,6 +581,7 @@ public class FingerprintSettings extends SubSettings {
                         mFingerprintManager.generateChallenge(mUserId, (sensorId, challenge) -> {
                             mToken = BiometricUtils.requestGatekeeperHat(getActivity(), data,
                                     mUserId, challenge);
+                            mChallenge = challenge;
                             BiometricUtils.removeGatekeeperPasswordHandle(getActivity(), data);
                             updateAddPreference();
                         });
@@ -602,7 +607,7 @@ public class FingerprintSettings extends SubSettings {
         public void onDestroy() {
             super.onDestroy();
             if (getActivity().isFinishing()) {
-                mFingerprintManager.revokeChallenge(mUserId);
+                mFingerprintManager.revokeChallenge(mUserId, mChallenge);
             }
         }
 
