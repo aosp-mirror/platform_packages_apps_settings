@@ -101,7 +101,7 @@ public class WifiTetherSettingsTest {
         assertThat(niks).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
         assertThat(niks).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
         assertThat(niks).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-        assertThat(niks).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
+        assertThat(niks).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class WifiTetherSettingsTest {
         assertThat(niks).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
         assertThat(niks).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
         assertThat(niks).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-        assertThat(niks).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
+        assertThat(niks).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
     }
 
     @Test
