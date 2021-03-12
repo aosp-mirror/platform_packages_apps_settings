@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
@@ -46,10 +47,10 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     @VisibleForTesting
     BluetoothProgressCategory mAvailableDevicesCategory;
+    @VisibleForTesting
+    Context mContext;
 
     private boolean mNeedAuth;
-    private String mLaunchPackage;
-    private String mLaunchClass;
     private boolean mScanAllowed;
 
     public DevicePickerFragment() {
@@ -62,8 +63,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         mNeedAuth = intent.getBooleanExtra(BluetoothDevicePicker.EXTRA_NEED_AUTH, false);
         setFilter(intent.getIntExtra(BluetoothDevicePicker.EXTRA_FILTER_TYPE,
                 BluetoothDevicePicker.FILTER_TYPE_ALL));
-        mLaunchPackage = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_PACKAGE);
-        mLaunchClass = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_CLASS);
         mAvailableDevicesCategory = (BluetoothProgressCategory) findPreference(KEY_BT_DEVICE_LIST);
     }
 
@@ -83,6 +82,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         getActivity().setTitle(getString(R.string.device_picker));
         UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         mScanAllowed = !um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH);
+        mContext = getContext();
         setHasOptionsMenu(true);
     }
 
@@ -182,9 +182,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     private void sendDevicePickedIntent(BluetoothDevice device) {
         Intent intent = new Intent(BluetoothDevicePicker.ACTION_DEVICE_SELECTED);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
-        if (mLaunchPackage != null && mLaunchClass != null) {
-            intent.setClassName(mLaunchPackage, mLaunchClass);
-        }
-        getActivity().sendBroadcast(intent);
+
+        mContext.sendBroadcast(intent, Manifest.permission.BLUETOOTH_ADMIN);
     }
 }
