@@ -116,4 +116,11 @@
         settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController">
     </com.android.settings.widget.PrimarySwitchPreference>
 
+    <!-- Clipboard access notifications -->
+    <SwitchPreference
+        android:key="show_clip_access_notification"
+        android:title="@string/show_clip_access_notification"
+        android:summary="@string/show_clip_access_notification_summary"
+        settings:controller="com.android.settings.privacy.ShowClipAccessNotificationPreferenceController"/>
+
 </PreferenceScreen>
