@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,63 +17,40 @@
 package com.android.settings.bluetooth;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
-
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-public class DevicePickerFragmentTest {
+public class BluetoothPermissionActivityTest {
 
-    @Mock
-    private BluetoothProgressCategory mAvailableDevicesCategory;
-
-    private DevicePickerFragment mFragment;
+    private BluetoothPermissionActivity mActivity;
     private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mFragment = new DevicePickerFragment();
         mContext = spy(RuntimeEnvironment.application);
-        mFragment.mContext = mContext;
-        mFragment.mAvailableDevicesCategory = mAvailableDevicesCategory;
-    }
-
-    @Test
-    public void testScanningStateChanged_started_setProgressStarted() {
-        mFragment.mScanEnabled = true;
-
-        mFragment.onScanningStateChanged(true);
-
-        verify(mAvailableDevicesCategory).setProgress(true);
+        mActivity = new BluetoothPermissionActivity();
     }
 
     @Test
     public void sendBroadcastWithPermission() {
-        final CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
-        final BluetoothDevice bluetoothDevice = mock(BluetoothDevice.class);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        when(cachedDevice.getDevice()).thenReturn(bluetoothDevice);
-        mFragment.mSelectedDevice = bluetoothDevice;
+        ReflectionHelpers.setField(mActivity, "mBase", mContext);
 
-        mFragment.onDeviceBondStateChanged(cachedDevice, BluetoothDevice.BOND_BONDED);
+        mActivity.sendReplyIntentToReceiver(true, true);
 
         verify(mContext).sendBroadcast(intentCaptor.capture(),
                 eq("android.permission.BLUETOOTH_ADMIN"));
