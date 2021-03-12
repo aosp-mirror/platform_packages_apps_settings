@@ -65,56 +65,56 @@
         android:summary="@string/promote_conversation_summary"
         settings:allowDividerAbove="true"/>
 
-        <!-- Default ringtone -->
-        <com.android.settings.notification.app.NotificationSoundPreference
-            android:key="ringtone"
-            android:title="@string/notification_channel_sound_title"
-            android:dialogTitle="@string/notification_channel_sound_title"
-            android:order="11"
-            android:showSilent="true"
-            android:showDefault="true"/>
+    <!-- Default ringtone -->
+    <com.android.settings.notification.app.NotificationSoundPreference
+        android:key="ringtone"
+        android:title="@string/notification_channel_sound_title"
+        android:dialogTitle="@string/notification_channel_sound_title"
+        android:order="11"
+        android:showSilent="true"
+        android:showDefault="true"/>
 
-        <!-- Vibration -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="vibrate"
-            android:order="12"
-            android:title="@string/notification_vibrate_title"
-            settings:useAdditionalSummary="true" />
+    <!-- Vibration -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="vibrate"
+        android:order="12"
+        android:title="@string/notification_vibrate_title"
+        settings:useAdditionalSummary="true" />
 
-        <!-- Visibility Override -->
-        <com.android.settings.RestrictedListPreference
-            android:key="visibility_override"
-            android:order="13"
-            android:title="@string/app_notification_visibility_override_title"/>
+    <!-- Visibility Override -->
+    <com.android.settings.RestrictedListPreference
+        android:key="visibility_override"
+        android:order="13"
+        android:title="@string/app_notification_visibility_override_title"/>
 
-        <!-- Lights -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="lights"
-            android:order="14"
-            android:title="@string/notification_show_lights_title"
-            settings:useAdditionalSummary="true"/>
+    <!-- Lights -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="lights"
+        android:order="14"
+        android:title="@string/notification_show_lights_title"
+        settings:useAdditionalSummary="true"/>
 
-        <!-- Show badge -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="badge"
-            android:order="15"
-            android:title="@string/notification_channel_badge_title"
-            settings:useAdditionalSummary="true"
-            settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
+    <!-- Show badge -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="badge"
+        android:order="15"
+        android:title="@string/notification_channel_badge_title"
+        settings:useAdditionalSummary="true"
+        settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
 
-        <!-- Bypass DND -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="bypass_dnd"
-            android:order="17"
-            android:title="@string/app_notification_override_dnd_title"
-            android:summary="@string/app_notification_override_dnd_summary"
-            settings:useAdditionalSummary="true"/>
+    <!-- Bypass DND -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="bypass_dnd"
+        android:order="17"
+        android:title="@string/app_notification_override_dnd_title"
+        android:summary="@string/app_notification_override_dnd_summary"
+        settings:useAdditionalSummary="true"/>
 
-        <Preference
-            android:key="app_link"
-            android:order="18"
-            android:title="@string/app_settings_link"
-            settings:allowDividerAbove="true"/>
+    <Preference
+        android:key="app_link"
+        android:order="18"
+        android:title="@string/app_settings_link"
+        settings:allowDividerAbove="true"/>
 
     <com.android.settings.notification.app.NotificationFooterPreference
         android:key="desc"
