@@ -46,7 +46,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppBatteryPreferenceController extends BasePreferenceController
@@ -162,13 +161,9 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     void updateBattery() {
         mPreference.setEnabled(true);
         if (isBatteryStatsAvailable()) {
-            final int dischargePercentage = mBatteryUsageStats.getDischargePercentage();
-
-            final List<BatterySipper> usageList = new ArrayList<>(mBatteryHelper.getUsageList());
-            final double hiddenAmount = mBatteryUtils.removeHiddenBatterySippers(usageList);
             final int percentOfMax = (int) mBatteryUtils.calculateBatteryPercent(
                     mUidBatteryConsumer.getConsumedPower(), mBatteryUsageStats.getConsumedPower(),
-                    hiddenAmount, dischargePercentage);
+                    mBatteryUsageStats.getDischargePercentage());
             mBatteryPercent = Utils.formatPercentage(percentOfMax);
             mPreference.setSummary(mContext.getString(R.string.battery_summary, mBatteryPercent));
         } else {
