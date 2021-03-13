@@ -106,7 +106,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
             return false;
         }
         try {
-            return imsMmTelMgr.isCrossSimCallingEnabledByUser();
+            return imsMmTelMgr.isCrossSimCallingEnabled();
         } catch (ImsException exception) {
             Log.w(LOG_TAG, "fail to get cross SIM calling configuration", exception);
         }

@@ -62,10 +62,6 @@
         android:key="block_desc"
         settings:allowDividerAbove="false"/>
 
-    <PreferenceCategory
-        android:key="channel_advanced"
-        android:order="50"
-        settings:initialExpandedChildrenCount="0">
 
         <!-- peeking -->
         <com.android.settingslib.RestrictedSwitchPreference
@@ -107,6 +103,5 @@
             android:icon="@drawable/ic_volume_ringer_vibrate"
             android:title="@string/notification_vibrate_title"
             settings:useAdditionalSummary="true" />
-    </PreferenceCategory>
 
 </PreferenceScreen>
