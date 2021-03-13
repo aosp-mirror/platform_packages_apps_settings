@@ -22,7 +22,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/airplane_mode_text"
         android:text="@string/condition_airplane_title"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="wrap_content"
@@ -30,17 +29,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="@dimen/content_margin_left"
         android:layout_marginEnd="@dimen/content_margin_left"
-        android:layout_marginTop="@dimen/view_airplane_mode_networks_button_margin_vertical"
-        android:layout_marginBottom="@dimen/view_airplane_mode_networks_button_margin_vertical"/>
-
-    <Button
-        android:id="@+id/view_airplane_mode_networks_button"
-        android:text="@string/view_airplane_safe_networks"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/content_margin_left"
-        android:layout_marginEnd="@dimen/content_margin_left"
-        android:layout_marginBottom="@dimen/view_airplane_mode_networks_button_margin_vertical"
-        style="@style/ActionPrimaryButton"/>
+        android:layout_marginTop="@dimen/airplane_mode_message_margin_vertical"
+        android:layout_marginBottom="@dimen/airplane_mode_message_margin_vertical"/>
 </LinearLayout>

@@ -93,6 +93,7 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
                     .done(activity, mContext);
 
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
+            pref.findViewById(R.id.entity_header).setBackground(null);
         }
     }
 

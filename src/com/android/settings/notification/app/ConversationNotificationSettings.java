@@ -49,10 +49,11 @@ public class ConversationNotificationSettings extends NotificationSettings {
 
         for (NotificationPreferenceController controller : mControllers) {
             controller.onResume(mAppRow, mChannel, mChannelGroup, mConversationDrawable,
-                    mConversationInfo, mSuspendedAppsAdmin, null);
+                    mConversationInfo, mSuspendedAppsAdmin, mPreferenceFilter);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
+        animatePanel();
     }
 
     @Override

@@ -26,10 +26,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.provider.Settings;
-import android.service.voice.VoiceInteractionService;
-import android.service.voice.VoiceInteractionServiceInfo;
 import android.speech.RecognitionService;
-import android.util.ArraySet;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
@@ -46,9 +43,9 @@ public final class VoiceInputHelper {
     static final String TAG = "VoiceInputHelper";
     final Context mContext;
 
-    final List<ResolveInfo> mAvailableVoiceInteractions;
     final List<ResolveInfo> mAvailableRecognition;
 
+    // TODO: Remove this superclass as we only have 1 class now (RecognizerInfo).
     static public class BaseInfo implements Comparable {
         public final ServiceInfo service;
         public final ComponentName componentName;
@@ -75,15 +72,6 @@ public final class VoiceInputHelper {
         }
     }
 
-    static public class InteractionInfo extends BaseInfo {
-        public final VoiceInteractionServiceInfo serviceInfo;
-
-        public InteractionInfo(PackageManager pm, VoiceInteractionServiceInfo _service) {
-            super(pm, _service.getServiceInfo(), _service.getSettingsActivity());
-            serviceInfo = _service;
-        }
-    }
-
     static public class RecognizerInfo extends BaseInfo {
         public final boolean mSelectableAsDefault;
 
@@ -96,56 +84,21 @@ public final class VoiceInputHelper {
         }
     }
 
-    final ArrayList<InteractionInfo> mAvailableInteractionInfos = new ArrayList<>();
     final ArrayList<RecognizerInfo> mAvailableRecognizerInfos = new ArrayList<>();
 
-    ComponentName mCurrentVoiceInteraction;
     ComponentName mCurrentRecognizer;
 
     public VoiceInputHelper(Context context) {
         mContext = context;
 
-        mAvailableVoiceInteractions = mContext.getPackageManager().queryIntentServices(
-                new Intent(VoiceInteractionService.SERVICE_INTERFACE),
-                PackageManager.GET_META_DATA);
         mAvailableRecognition = mContext.getPackageManager().queryIntentServices(
                 new Intent(RecognitionService.SERVICE_INTERFACE),
                 PackageManager.GET_META_DATA);
     }
 
     public void buildUi() {
-        // Get the currently selected interactor from the secure setting.
-        String currentSetting = Settings.Secure.getString(
-                mContext.getContentResolver(), Settings.Secure.VOICE_INTERACTION_SERVICE);
-        if (currentSetting != null && !currentSetting.isEmpty()) {
-            mCurrentVoiceInteraction = ComponentName.unflattenFromString(currentSetting);
-        } else {
-            mCurrentVoiceInteraction = null;
-        }
-
-        ArraySet<ComponentName> interactorRecognizers = new ArraySet<>();
-
-        // Iterate through all the available interactors and load up their info to show
-        // in the preference.
-        int size = mAvailableVoiceInteractions.size();
-        for (int i = 0; i < size; i++) {
-            ResolveInfo resolveInfo = mAvailableVoiceInteractions.get(i);
-            VoiceInteractionServiceInfo info = new VoiceInteractionServiceInfo(
-                    mContext.getPackageManager(), resolveInfo.serviceInfo);
-            if (info.getParseError() != null) {
-                Log.w("VoiceInteractionService", "Error in VoiceInteractionService "
-                        + resolveInfo.serviceInfo.packageName + "/"
-                        + resolveInfo.serviceInfo.name + ": " + info.getParseError());
-                continue;
-            }
-            mAvailableInteractionInfos.add(new InteractionInfo(mContext.getPackageManager(), info));
-            interactorRecognizers.add(new ComponentName(resolveInfo.serviceInfo.packageName,
-                    info.getRecognitionService()));
-        }
-        Collections.sort(mAvailableInteractionInfos);
-
         // Get the currently selected recognizer from the secure setting.
-        currentSetting = Settings.Secure.getString(
+        String currentSetting = Settings.Secure.getString(
                 mContext.getContentResolver(), Settings.Secure.VOICE_RECOGNITION_SERVICE);
         if (currentSetting != null && !currentSetting.isEmpty()) {
             mCurrentRecognizer = ComponentName.unflattenFromString(currentSetting);
@@ -155,14 +108,11 @@ public final class VoiceInputHelper {
 
         // Iterate through all the available recognizers and load up their info to show
         // in the preference.
-        size = mAvailableRecognition.size();
+        int size = mAvailableRecognition.size();
         for (int i = 0; i < size; i++) {
             ResolveInfo resolveInfo = mAvailableRecognition.get(i);
             ComponentName comp = new ComponentName(resolveInfo.serviceInfo.packageName,
                     resolveInfo.serviceInfo.name);
-            if (interactorRecognizers.contains(comp)) {
-                //continue;
-            }
             ServiceInfo si = resolveInfo.serviceInfo;
             String settingsActivity = null;
             // Always show in voice input settings unless specifically set to False.

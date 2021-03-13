@@ -361,6 +361,11 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public long getCpuMeasuredBatteryConsumptionUC() {
+        return 0;
+    }
+
+    @Override
     public long[] getCustomConsumerMeasuredBatteryConsumptionUC() {
         return null;
     }

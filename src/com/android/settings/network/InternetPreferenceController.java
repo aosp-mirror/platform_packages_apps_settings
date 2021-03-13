@@ -124,12 +124,6 @@ public class InternetPreferenceController extends AbstractPreferenceController i
             return;
         }
 
-        if (mInternetType == INTERNET_NETWORKS_AVAILABLE
-                && mInternetUpdater.isApmNetworksAvailable()) {
-            mPreference.setSummary(R.string.airplane_mode_network_available);
-            return;
-        }
-
         final @IdRes int summary = sSummaryMap.get(mInternetType);
         if (summary != 0) {
             mPreference.setSummary(summary);
