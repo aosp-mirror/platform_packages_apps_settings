@@ -55,6 +55,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.FeatureFlags;
@@ -98,7 +99,8 @@ import java.util.Optional;
 public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
-        ConnectivitySubsystemsRecoveryManager.RecoveryStatusCallback {
+        ConnectivitySubsystemsRecoveryManager.RecoveryStatusCallback,
+        AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
     public static final String ACTION_NETWORK_PROVIDER_SETTINGS =
             "android.settings.NETWORK_PROVIDER_SETTINGS";
@@ -118,6 +120,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     static final int CONFIG_NETWORK_REQUEST = 3;
     static final int MANAGE_SUBSCRIPTION = 4;
 
+    private static final String PREF_KEY_AIRPLANE_MODE_MSG = "airplane_mode_message";
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     // TODO(b/70983952): Rename these to use WifiEntry instead of AccessPoint.
     private static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
@@ -185,6 +188,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private boolean mIsRestricted;
 
     @VisibleForTesting
+    AirplaneModeEnabler mAirplaneModeEnabler;
+    @VisibleForTesting
     WifiPickerTracker mWifiPickerTracker;
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
@@ -204,8 +209,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     DataUsagePreference mDataUsagePreference;
     @VisibleForTesting
-    ViewAirplaneModeNetworksLayoutPreferenceController
-            mViewAirplaneModeNetworksButtonPreference;
+    Preference mAirplaneModeMsgPreference;
     @VisibleForTesting
     LayoutPreference mResetInternetPreference;
     @VisibleForTesting
@@ -241,6 +245,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mAirplaneModeEnabler = new AirplaneModeEnabler(getContext(), this);
 
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
         // loaded (ODR).
@@ -254,6 +259,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private void addPreferences() {
         addPreferencesFromResource(R.xml.network_provider_settings);
 
+        mAirplaneModeMsgPreference = findPreference(PREF_KEY_AIRPLANE_MODE_MSG);
+        updateAirplaneModeMsgPreference(mAirplaneModeEnabler.isAirplaneModeOn() /* visible */);
         mConnectedWifiEntryPreferenceCategory = findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
         mWifiEntryPreferenceCategory = findPreference(PREF_KEY_ACCESS_POINTS);
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
@@ -269,9 +276,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             mResetInternetPreference.setVisible(false);
         }
         addNetworkMobileProviderController();
-        addViewAirplaneModeNetworksButtonController();
         addConnectedEthernetNetworkController();
         addWifiSwitchPreferenceController();
+    }
+
+    private void updateAirplaneModeMsgPreference(boolean visible) {
+        if (mAirplaneModeMsgPreference != null) {
+            mAirplaneModeMsgPreference.setVisible(visible);
+        }
     }
 
     private void addNetworkMobileProviderController() {
@@ -281,15 +293,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
         mNetworkMobileProviderController.init(getSettingsLifecycle());
         mNetworkMobileProviderController.displayPreference(getPreferenceScreen());
-    }
-
-    private void addViewAirplaneModeNetworksButtonController() {
-        if (mViewAirplaneModeNetworksButtonPreference == null) {
-            mViewAirplaneModeNetworksButtonPreference =
-                    new ViewAirplaneModeNetworksLayoutPreferenceController(
-                            getContext(), getSettingsLifecycle());
-        }
-        mViewAirplaneModeNetworksButtonPreference.displayPreference(getPreferenceScreen());
     }
 
     private void addConnectedEthernetNetworkController() {
@@ -386,10 +389,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onStart() {
         super.onStart();
-
         if (mIsRestricted) {
             restrictUi();
+            return;
         }
+        mAirplaneModeEnabler.start();
     }
 
     private void restrictUi() {
@@ -419,6 +423,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     public void onStop() {
         getView().removeCallbacks(mUpdateWifiEntryPreferencesRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
+        mAirplaneModeEnabler.stop();
         super.onStop();
     }
 
@@ -1188,9 +1193,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (mResetInternetPreference != null) {
             mResetInternetPreference.setVisible(true);
         }
-        if (mViewAirplaneModeNetworksButtonPreference != null) {
-            mViewAirplaneModeNetworksButtonPreference.setVisible(false);
-        }
+        updateAirplaneModeMsgPreference(false /* visible */);
     }
 
     /**
@@ -1200,9 +1203,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (mResetInternetPreference != null) {
             mResetInternetPreference.setVisible(false);
         }
-        if (mViewAirplaneModeNetworksButtonPreference != null
-                && mViewAirplaneModeNetworksButtonPreference.isAvailable()) {
-            mViewAirplaneModeNetworksButtonPreference.setVisible(true);
+        if (mAirplaneModeEnabler.isAirplaneModeOn()) {
+            updateAirplaneModeMsgPreference(true /* visible */);
         }
+    }
+
+    /**
+     * Called when airplane mode status is changed.
+     *
+     * @param isAirplaneModeOn The airplane mode is on
+     */
+    @Override
+    public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
+        updateAirplaneModeMsgPreference(isAirplaneModeOn /* visible */);
     }
 }
