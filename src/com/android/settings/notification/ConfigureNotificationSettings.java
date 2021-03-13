@@ -127,20 +127,23 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        final PreferenceScreen screen = getPreferenceScreen();
-        final Bundle arguments = getArguments();
+        // TODO(b/182237530): This method should be removed when this flag is deprecated.
+        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            final PreferenceScreen screen = getPreferenceScreen();
+            final Bundle arguments = getArguments();
 
-        if (screen == null) {
-            return;
-        }
-        if (arguments != null) {
-            final String highlightKey = arguments.getString(EXTRA_FRAGMENT_ARG_KEY);
-            if (!TextUtils.isEmpty(highlightKey)) {
-                final PreferenceCategory advancedCategory =
-                        screen.findPreference(KEY_ADVANCED_CATEGORY);
-                // Has highlight row - expand everything
-                advancedCategory.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
-                scrollToPreference(advancedCategory);
+            if (screen == null) {
+                return;
+            }
+            if (arguments != null) {
+                final String highlightKey = arguments.getString(EXTRA_FRAGMENT_ARG_KEY);
+                if (!TextUtils.isEmpty(highlightKey)) {
+                    final PreferenceCategory advancedCategory =
+                            screen.findPreference(KEY_ADVANCED_CATEGORY);
+                    // Has highlight row - expand everything
+                    advancedCategory.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+                    scrollToPreference(advancedCategory);
+                }
             }
         }
     }
