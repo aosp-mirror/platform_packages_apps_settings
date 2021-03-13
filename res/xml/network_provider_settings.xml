@@ -28,12 +28,12 @@
         android:layout="@layout/resetting_internet"
         settings:allowDividerBelow="true"/>
 
-    <!-- View airplane mode networks button -->
+    <!-- Airplane mode message -->
     <com.android.settingslib.widget.LayoutPreference
-        android:key="view_airplane_mode_netwokrs_button"
+        android:key="airplane_mode_message"
         android:title="@string/condition_airplane_title"
         android:selectable="false"
-        android:layout="@layout/view_airplane_mode_networks_button"
+        android:layout="@layout/airplane_mode_message_preference"
         settings:allowDividerBelow="true"/>
 
     <Preference
