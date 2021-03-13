@@ -105,7 +105,7 @@ public class EmergencyGestureEntrypointPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noSuitableIntent_shouldReturnUnsupported() {
+    public void getAvailabilityStatus_noSuitableIntent_shouldReturnAvailable() {
         SettingsShadowResources.overrideResource(
                 R.bool.config_show_emergency_gesture_settings,
                 Boolean.TRUE);
@@ -117,7 +117,8 @@ public class EmergencyGestureEntrypointPreferenceControllerTest {
         EmergencyGestureEntrypointPreferenceController controller =
                 new EmergencyGestureEntrypointPreferenceController(mContext, PREF_KEY);
 
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(controller.mIntent).isNull();
     }
 
     private void prepareCustomIntent() {

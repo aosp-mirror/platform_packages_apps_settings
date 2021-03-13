@@ -88,7 +88,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
                 @Override
                 public Loader<BatteryInfo> onCreateLoader(int i, Bundle bundle) {
-                    return new BatteryInfoLoader(getContext(), mStatsHelper);
+                    return new BatteryInfoLoader(getContext());
                 }
 
                 @Override
@@ -188,6 +188,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @Override
     public int getHelpResource() {
         return R.string.help_url_battery;
+    }
+
+    @Override
+    protected boolean isBatteryHistoryNeeded() {
+        return false;
     }
 
     protected void refreshUi(@BatteryUpdateType int refreshType) {

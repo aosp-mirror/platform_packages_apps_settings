@@ -17,15 +17,16 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.os.BatteryUsageStats;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.widget.UsageView;
 
@@ -50,11 +51,11 @@ public class BatteryHistoryPreference extends Preference {
         setSelectable(false);
     }
 
-    public void setStats(BatteryStatsHelper batteryStats) {
+    void setBatteryUsageStats(@NonNull BatteryUsageStats batteryUsageStats) {
         BatteryInfo.getBatteryInfo(getContext(), info -> {
             mBatteryInfo = info;
             notifyChanged();
-        }, batteryStats, false);
+        }, batteryUsageStats, false);
     }
 
     public void setBottomSummary(CharSequence text) {

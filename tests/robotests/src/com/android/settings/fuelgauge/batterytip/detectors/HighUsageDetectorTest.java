@@ -18,7 +18,9 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -26,8 +28,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.BatteryStats;
-import android.text.format.DateUtils;
+import android.os.BatteryStatsManager;
+import android.os.BatteryUsageStats;
+import android.os.BatteryUsageStatsQuery;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -53,6 +58,8 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class HighUsageDetectorTest {
+    private static final String TAG = "HighUsageDetectorTest";
+
     private static final int UID_HIGH = 123;
     private static final int UID_LOW = 345;
     private static final double POWER_HIGH = 20000;
@@ -68,6 +75,10 @@ public class HighUsageDetectorTest {
     private BatterySipper mSystemBatterySipper;
     @Mock
     private HighUsageDataParser mDataParser;
+    @Mock
+    private BatteryUsageStats mBatteryUsageStats;
+    @Mock
+    private BatteryStatsManager mBatteryStatsManager;
 
     private AppInfo mHighAppInfo;
     private AppInfo mLowAppInfo;
@@ -80,11 +91,19 @@ public class HighUsageDetectorTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mPolicy = spy(new BatteryTipPolicy(mContext));
-        mBatteryUtils = spy(BatteryUtils.getInstance(mContext));
+        mBatteryUtils = spy(new BatteryUtils(mContext));
+
+        when(mContext.getSystemService(eq(Context.BATTERY_STATS_SERVICE)))
+                .thenReturn(mBatteryStatsManager);
+        when(mBatteryStatsManager.getBatteryUsageStats(any(BatteryUsageStatsQuery.class)))
+                .thenReturn(mBatteryUsageStats);
+
+        mContext.sendStickyBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED));
+
         mHighUsageDetector = spy(new HighUsageDetector(mContext, mPolicy, mBatteryStatsHelper,
-                true /* mDischarging */));
+                mBatteryUtils.getBatteryInfo(TAG)));
         mHighUsageDetector.mBatteryUtils = mBatteryUtils;
         mHighUsageDetector.mDataParser = mDataParser;
         doNothing().when(mHighUsageDetector).parseBatteryData();
