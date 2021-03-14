@@ -75,6 +75,11 @@ public class PowerUsageBaseTest {
         }
 
         @Override
+        protected boolean isBatteryHistoryNeeded() {
+            return false;
+        }
+
+        @Override
         protected void refreshUi(int refreshType) {
             // Do nothing
         }

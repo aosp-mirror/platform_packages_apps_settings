@@ -230,7 +230,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         @Override
         @NonNull
         public Loader<BatteryUsageStats> onCreateLoader(int id, Bundle args) {
-            return new BatteryUsageStatsLoader(mContext);
+            return new BatteryUsageStatsLoader(mContext, /* includeBatteryHistory */ false);
         }
 
         @Override
