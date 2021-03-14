@@ -45,6 +45,7 @@ import java.util.concurrent.TimeUnit;
 public class HighUsageDetector implements BatteryTipDetector {
     private BatteryTipPolicy mPolicy;
     private BatteryStatsHelper mBatteryStatsHelper;
+    private final BatteryInfo mBatteryInfo;
     private List<AppInfo> mHighUsageAppList;
     @VisibleForTesting
     HighUsageDataParser mDataParser;
@@ -54,14 +55,15 @@ public class HighUsageDetector implements BatteryTipDetector {
     boolean mDischarging;
 
     public HighUsageDetector(Context context, BatteryTipPolicy policy,
-            BatteryStatsHelper batteryStatsHelper, boolean discharging) {
+            BatteryStatsHelper batteryStatsHelper, BatteryInfo batteryInfo) {
         mPolicy = policy;
         mBatteryStatsHelper = batteryStatsHelper;
+        mBatteryInfo = batteryInfo;
         mHighUsageAppList = new ArrayList<>();
         mBatteryUtils = BatteryUtils.getInstance(context);
         mDataParser = new HighUsageDataParser(mPolicy.highUsagePeriodMs,
                 mPolicy.highUsageBatteryDraining);
-        mDischarging = discharging;
+        mDischarging = batteryInfo.discharging;
     }
 
     @Override
@@ -115,6 +117,6 @@ public class HighUsageDetector implements BatteryTipDetector {
 
     @VisibleForTesting
     void parseBatteryData() {
-        BatteryInfo.parse(mBatteryStatsHelper.getStats(), mDataParser);
+        mBatteryInfo.parseBatteryHistory(mDataParser);
     }
 }
