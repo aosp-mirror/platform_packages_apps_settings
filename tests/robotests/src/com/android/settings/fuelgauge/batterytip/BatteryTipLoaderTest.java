@@ -24,9 +24,9 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.BatteryUsageStats;
 import android.os.PowerManager;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
@@ -57,7 +57,7 @@ public class BatteryTipLoaderTest {
             BatteryTip.TipType.SUMMARY,
             BatteryTip.TipType.SMART_BATTERY_MANAGER};
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private BatteryStatsHelper mBatteryStatsHelper;
+    private BatteryUsageStats mBatteryUsageStats;
     @Mock
     private PowerManager mPowerManager;
     @Mock
@@ -78,7 +78,7 @@ public class BatteryTipLoaderTest {
         doReturn(mPowerManager).when(mContext).getSystemService(Context.POWER_SERVICE);
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
         doReturn(mBatteryInfo).when(mBatteryUtils).getBatteryInfo(any());
-        mBatteryTipLoader = new BatteryTipLoader(mContext, mBatteryStatsHelper);
+        mBatteryTipLoader = new BatteryTipLoader(mContext, mBatteryUsageStats);
         mBatteryTipLoader.mBatteryUtils = mBatteryUtils;
     }
 

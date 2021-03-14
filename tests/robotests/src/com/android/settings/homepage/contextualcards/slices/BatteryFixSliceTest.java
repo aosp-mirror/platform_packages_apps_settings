@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.BatteryUsageStats;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -32,6 +33,7 @@ import androidx.slice.widget.SliceLiveData;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
+import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -57,7 +59,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
-        BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
+        BatteryFixSliceTest.ShadowBatteryUsageStatsLoader.class,
         BatteryFixSliceTest.ShadowBatteryTipLoader.class
 })
 public class BatteryFixSliceTest {
@@ -140,6 +142,15 @@ public class BatteryFixSliceTest {
 
         @Implementation
         protected BatteryStatsHelper loadInBackground() {
+            return null;
+        }
+    }
+
+    @Implements(BatteryUsageStatsLoader.class)
+    public static class ShadowBatteryUsageStatsLoader {
+
+        @Implementation
+        protected BatteryUsageStats loadInBackground() {
             return null;
         }
     }
