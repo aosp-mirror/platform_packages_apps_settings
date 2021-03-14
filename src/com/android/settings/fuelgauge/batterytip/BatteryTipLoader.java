@@ -65,12 +65,11 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         }
         final List<BatteryTip> tips = new ArrayList<>();
         final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
-        final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG);
+        final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
         final Context context = getContext();
 
         tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
-        tips.add(new HighUsageDetector(context, policy, mBatteryStatsHelper,
-                batteryInfo.discharging).detect());
+        tips.add(new HighUsageDetector(context, policy, mBatteryStatsHelper, batteryInfo).detect());
         tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
         tips.add(new BatteryDefenderDetector(batteryInfo).detect());

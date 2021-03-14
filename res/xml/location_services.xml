@@ -18,21 +18,21 @@
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/location_services_screen_title">
 
-        <SwitchPreference
-            android:title="@string/location_scanning_wifi_always_scanning_title"
-            android:summary="@string/location_scanning_wifi_always_scanning_description"
-            android:defaultValue="true"
-            android:key="wifi_always_scanning" />
-
-        <SwitchPreference
-            android:title="@string/location_scanning_bluetooth_always_scanning_title"
-            android:summary="@string/location_scanning_bluetooth_always_scanning_description"
-            android:defaultValue="true"
-            android:key="bluetooth_always_scanning" />
-
         <PreferenceCategory
             android:key="location_services"
             android:layout="@layout/preference_category_no_label"
             settings:controller="com.android.settings.location.LocationInjectedServicesPreferenceController"/>
+
+        <Preference
+            android:fragment="com.android.settings.location.WifiScanningFragment"
+            android:key="location_services_wifi_scanning"
+            android:title="@string/location_scanning_wifi_always_scanning_title"
+            settings:controller="com.android.settings.location.LocationServicesWifiScanningPreferenceController"/>
+
+        <Preference
+            android:fragment="com.android.settings.location.BluetoothScanningFragment"
+            android:key="location_services_bluetooth_scanning"
+            android:title="@string/location_scanning_bluetooth_always_scanning_title"
+            settings:controller="com.android.settings.location.LocationServicesBluetoothScanningPreferenceController"/>
 
 </PreferenceScreen>
