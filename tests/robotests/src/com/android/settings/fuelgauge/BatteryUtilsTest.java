@@ -48,6 +48,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.BatteryStats;
+import android.os.BatteryStatsManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
@@ -157,6 +158,8 @@ public class BatteryUtilsTest {
     private ApplicationInfo mApplicationInfo;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryStatsHelper;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private BatteryStatsManager mBatteryStatsManager;
     @Mock
     private ApplicationInfo mHighApplicationInfo;
     @Mock
@@ -228,6 +231,8 @@ public class BatteryUtilsTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
+        doReturn(mBatteryStatsManager).when(mContext)
+                .getSystemService(Context.BATTERY_STATS_SERVICE);
         mBatteryUtils = spy(new BatteryUtils(mContext));
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
         doReturn(0L).when(mBatteryUtils)
@@ -741,7 +746,7 @@ public class BatteryUtilsTest {
                 any(IntentFilter.class))).thenReturn(new Intent());
 
         //Should not crash
-        assertThat(mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG)).isNotNull();
+        assertThat(mBatteryUtils.getBatteryInfo(TAG)).isNotNull();
     }
 
     @Test
