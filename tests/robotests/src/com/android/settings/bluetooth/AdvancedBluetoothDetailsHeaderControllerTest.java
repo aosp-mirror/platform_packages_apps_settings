@@ -109,7 +109,60 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    public void refresh_connectedWatch_behaveAsExpected() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertThat(mLayoutPreference.findViewById(R.id.layout_left).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_right).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_middle).getVisibility()).isEqualTo(
+                View.VISIBLE);
+        assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_middle), BATTERY_LEVEL_MAIN);
+    }
+
+    @Test
+    public void refresh_connectedUntetheredHeadset_behaveAsExpected() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_UNTETHERED_HEADSET.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_RIGHT).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_left), BATTERY_LEVEL_LEFT);
+        assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_right), BATTERY_LEVEL_RIGHT);
+        assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_middle), BATTERY_LEVEL_MAIN);
+    }
+
+    @Test
     public void refresh_connected_updateCorrectInfo() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(true).getBytes());
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
                 String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
@@ -150,6 +203,9 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
 
     @Test
     public void refresh_withLowBatteryAndUncharged_showAlertIcon() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(true).getBytes());
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
                 String.valueOf(LOW_BATTERY_LEVEL).getBytes());
