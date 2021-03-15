@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet digunakan lebih lama dari biasanya"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Perangkat digunakan lebih lama dari biasanya"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterai mungkin lebih cepat habis daripada biasanya"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Mengoptimalkan untuk kesehatan baterai"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Daya baterai terbatas untuk sementara. Ketuk untuk mempelajari lebih lanjut."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Ponsel dipakai lebih lama dari biasanya. Baterai mungkin lebih cepat habis dari perkiraan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet digunakan lebih sering dari biasanya. Baterai mungkin lebih cepat habis dari yang diperkirakan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Perangkat Anda digunakan lebih sering dari biasanya. Baterai mungkin lebih cepat habis dari yang diperkirakan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">%1$d aplikasi dibatasi</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Terjadi masalah saat membaca indikator baterai"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Terjadi masalah saat membaca indikator baterai. Ketuk untuk "<annotation id="url">"mempelajari lebih lanjut"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Hentikan aplikasi?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Ponsel Anda tidak dapat mengelola baterai secara normal karena <xliff:g id="APP">%1$s</xliff:g> membuat ponsel selalu aktif.\n\nUntuk menyelesaikan masalah ini, Anda dapat menghentikan aplikasi.\n\nJika masalah tersebut terus berlanjut, aplikasi mungkin perlu di-uninstal untuk meningkatkan performa baterai."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Tablet Anda tidak dapat mengelola baterai secara normal karena <xliff:g id="APP">%1$s</xliff:g> membuat tablet selalu aktif.\n\nUntuk menyelesaikan masalah ini, Anda dapat menghentikan aplikasi.\n\nJika masalah tersebut terus berlanjut, aplikasi mungkin perlu di-uninstal untuk meningkatkan performa baterai."</string>
@@ -3884,7 +3888,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Pemasangan pin aplikasi"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Pemasangan pin aplikasi memungkinkan Anda terus menampilkan aplikasi saat ini hingga pinnya dilepas. Fitur ini dapat digunakan, misalnya, untuk mengizinkan teman tepercaya memainkan game tertentu. \n\nSaat sebuah aplikasi dipasangi pin, aplikasi itu dapat membuka aplikasi lain dan data pribadi dapat diakses. \n\nUntuk menggunakan pemasangan pin aplikasi: 	\n1.	Aktifkan pemasangan pin aplikasi 	\n2.	Buka Ringkasan \n3.	Ketuk ikon aplikasi di bagian atas layar, lalu ketuk Pasang pin"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Pemasangan pin aplikasi memungkinkan Anda terus menampilkan aplikasi saat ini hingga pinnya dilepas. Fitur ini dapat digunakan, misalnya, untuk mengizinkan teman tepercaya memainkan game tertentu. \n\nSaat sebuah aplikasi dipasangi pin, aplikasi itu dapat membuka aplikasi lain dan data pribadi dapat diakses. \n\nJika Anda ingin membagikan perangkat secara aman ke seseorang, coba gunakan pengguna tamu. \n\nUntuk menggunakan pemasangan pin aplikasi: 	\n1.	Aktifkan pemasangan pin aplikasi 	\n2.	Buka Ringkasan 	\n3.	Ketuk ikon aplikasi di bagian atas layar, lalu ketuk Pasang pin"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Saat aplikasi dipasangi pin: \n\n•	 Data pribadi dapat diakses \n		(seperti kontak dan konten email) \n•	 Aplikasi yang dipasangi pin dapat membuka aplikasi lain \n\nGunakan pemasangan pin aplikasi hanya untuk orang yang Anda percayai."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Saat aplikasi disematkan: \n\n•	 Data pribadi dapat diakses \n		(seperti kontak dan konten email) \n•	 Aplikasi yang disematkan dapat membuka aplikasi lain \n\nGunakan penyematan aplikasi hanya untuk orang yang Anda percayai."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Minta pola pembuka kunci sebelum melepas pin"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Minta PIN sebelum lepas pin"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Minta sandi sebelum melepas pin"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Aktif (suara dimatikan)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Nonaktif"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detail jaringan"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Nama perangkat terlihat oleh aplikasi di ponsel, dan juga mungkin dilihat oleh orang lain saat Anda menghubungkan ke perangkat Bluetooth atau menyiapkan hotspot Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Nama perangkat terlihat oleh aplikasi di ponsel, dan juga mungkin dilihat oleh orang lain saat Anda menghubungkan ke perangkat Bluetooth atau jaringan Wi-Fi, atau saat menyiapkan hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Perangkat"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Semua Setelan"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Saran"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Tidak ada pemutar yang tersedia"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth akan diaktifkan"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Tidak tersedia karena mode waktu tidur diaktifkan"</string>
 </resources>

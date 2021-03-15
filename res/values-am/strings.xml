@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"ጡባዊው ከተለመደው በላይ ስራ ላይ ውሏል"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"መሣሪያው ከተለመደው በላይ ስራ ላይ ውሏል"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"ባትሪ ከተጠበቀው ጊዜ ቀድሞ ሊያልቅ ይችላል"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"ለባትሪ ጤና ማመቻቸት"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"ባትሪ ለጊዜው ተገድቧል። የበለጠ ለመረዳት መታ ያድርጉ።"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"የእርስዎ ስልክ ከመደበኛው በላይ ሥራ ላይ ውሏል። የእርስዎ ባትሪ ከተጠበቀው ቀድሞ ሊያልቅ ይችል ይሆናል።\n\nበባትሪ አጠቃቀም ረገድ ከፍተኛ መተግበሪያዎች፦"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"የእርስዎ ጡባዊ ከመደበኛው በላይ ሥራ ላይ ውሏል። የእርስዎ ባትሪ ከተጠበቀው ቀድሞ ሊያልቅ ይችል ይሆናል።\n\nበባትሪ አጠቃቀም ረገድ ከፍተኛ መተግበሪያዎች፦"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"የእርስዎ መሣሪያ ከተለመደው ጊዜ በላይ ጥቅም ላይ ውሏል። የእርስዎ ባትሪ ከተጠበቀው ቀድሞ ሊያልቅ ይችል ይሆናል።\n\nበባትሪ አጠቃቀም ረገድ ከፍተኛ መተግበሪያዎች፦"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">%1$d መተግበሪያዎች ተገድበዋል</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"የባትሪ መለኪያዎን የማንበብ ችግር"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"የባትሪ መለኪያዎን የማንበብ ችግር። "<annotation id="url">"የበለጠ ለመረዳት"</annotation>" መታ ያድርጉ"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"መተግበሪያ ይቁም?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g> ስልክዎን እንደነቃ እያቆየው ስለሆነ ስልክዎ ባትሪውን በጤናማ ሁኔታ ማስተዳደር አልቻለም።\n\nይህን ችግር ለመፍታት መተግበሪያውን ማቆም ይችላሉ።\n\nይህ ሁኔታ ከቀጠለ የባትሪ አፈጻጸም ብቃትን ለማሻሻል ሲባል መተግበሪያውን ማራገፍ ሊኖርብዎት ይችላል።"</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g> ጡባዊዎን እንደነቃ እያቆየው ስለሆነ ጡባዊዎ ባትሪውን በጤናማ ሁኔታ ማስተዳደር አልቻለም።\n\nይህን ችግር ለመፍታት መተግበሪያውን ማቆም ይችላሉ።\n\nይህ ሁኔታ ከቀጠለ የባትሪ አፈጻጸም ብቃትን ለማሻሻል ሲባል መተግበሪያውን ማራገፍ ሊኖርብዎት ይችላል።"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"በርቷል (ድምጸ ተዘግቷል)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"ጠፍቷል"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"የአውታረ መረብ ዝርዝሮች"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"የእርስዎ መሣሪያ በእርስዎ ስልክ ላይ ላሉ መተግበሪያዎች የሚታይ ነው። ወድ ብሉቱዝ መሣሪያዎች ሲያገኙ ወይም የWi-Fi መገናኛ ነጥብን ሲያቀናብሩ በተጨማሪ በሌሎች ሰዎች የሚታይ ይሆናል።"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"የመሣሪያዎ ስም በእርስዎ ስልክ ላይ ላሉ መተግበሪያዎች ይታያል። እንዲሁም ከብሉቱዝ መሣሪያዎች ጋር ሲገናኙ፣ ከWi-Fi አውታረ መረብ ሲገናኙ ወይም የWi-Fi መገናኛ ነጥብን ሲያቀናብሩ በሌሎች ሰዎች የሚታይ ሊሆን ይችላል።"</string>
     <string name="devices_title" msgid="649715719278562515">"መሣሪያዎች"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"ሁሉም ቅንብሮች"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"የአስተያየት ጥቆማዎች"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"ምንም ተጫዋቾች አይገኙም"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"ሚዲያ"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ብሉቱዝ ይበራል"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"የመኝታ ሰዓት ሁነታ ስለበራ የማይገኝ"</string>
 </resources>

@@ -1280,7 +1280,7 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Mikor jelenjen meg?"</string>
     <string name="doze_title" msgid="1523090408230862316">"Képernyő ébresztése értesítéskor"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Amikor a képernyő ki van kapcsolva, bekapcsol az új értesítéseknél"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Időpont és adatok mindig láthatók"</string>
+    <string name="doze_always_on_title" msgid="7326245192352868477">"Idő és adatok mindig láthatók"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Növeli az akkumulátorhasználatot"</string>
     <string name="title_font_size" msgid="570613010306330622">"Betűméret"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Szöveg nagyítása és kicsinyítése"</string>
@@ -1478,7 +1478,7 @@
     <string name="storage_detail_system" msgid="3797439069473271732">"Rendszer"</string>
     <string name="storage_detail_explore" msgid="13782374784415466">"<xliff:g id="NAME">^1</xliff:g> felfedezése"</string>
     <string name="storage_detail_dialog_other" msgid="3359851869961609901">"Az Egyéb kategóriába tartoznak az alkalmazások által mentett megosztott fájlok, az internetről, illetve Bluetooth-kapcsolaton keresztül letöltött fájlok, az androidos fájlok stb. \n\nA(z) <xliff:g id="NAME">^1</xliff:g> látható tartalmainak megtekintéséhez koppintson a Felfedezés lehetőségre."</string>
-    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer tartalmaz <xliff:g id="VERSION">%s</xliff:g> verziójú Android futtatásához használt fájlokat"</string>
+    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer az Android <xliff:g id="VERSION">%s</xliff:g>. verziójának futtatásához használt fájlokat tartalmaz"</string>
     <string name="storage_detail_dialog_user" msgid="1691219071007313226">"Lehetséges, hogy <xliff:g id="USER_0">^1</xliff:g> felhasználó fotókat, zenét, alkalmazásokat vagy más adatokat mentett, amihez <xliff:g id="SIZE">^2</xliff:g> tárhelyet használt fel.\n\nA részleteket megtekintheti, ha átvált a következő felhasználóra: <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> – beállítás"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Használat hordozható tárolóként"</string>
@@ -1591,7 +1591,7 @@
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Beállítások visszaállítása"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Visszaállítható a hálózat, az alkalmazások és az eszköz"</string>
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Az Alkalmazások alaphelyzetbe állítható"</string>
-    <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, mobiladatok Bluetooth visszaállítása"</string>
+    <string name="reset_network_title" msgid="1395494440355807616">"A Wi-Fi, a mobiladatok és a Bluetooth beállításainak visszaállítása"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Az összes hálózati beállítást visszaállítja, például a következőket:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobiladat"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Letöltött SIM-ek törlése"</string>
     <string name="reset_esim_desc" msgid="4256518544336245086">"Csere SIM letöltése érdekében forduljon szolgáltatójához. Ezzel nem szűnik meg egyetlen mobil-előfizetési csomag sem."</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"A táblagépet többet használja a megszokottnál"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Az eszközt többet használja a megszokottnál"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Az akkumulátor a szokásosnál hamarabb lemerülhet"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Akkumulátor-élettartam optimalizálása"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Az akkumulátor ideiglenesen korlátozva. A részletekért koppintson."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"A telefont többet használta a megszokottnál. A vártnál hamarabb lemerülhet az akkumulátor.\n\nAz akkumulátort leginkább igénybe vevő alkalmazások:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"A táblagépet többet használta a megszokottnál. A vártnál hamarabb lemerülhet az akkumulátor.\n\nAz akkumulátort leginkább igénybe vevő alkalmazások:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Az eszközt többet használta a megszokottnál. A vártnál hamarabb lemerülhet az akkumulátor.\n\nAz akkumulátort leginkább igénybe vevő alkalmazások:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">%1$d alkalmazás korlátozva</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small><font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Probléma merült fel az akkumulátor-töltésmérő olvasásakor"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Probléma merült fel az akkumulátor-töltésmérő olvasásakor. Koppintson, ha "<annotation id="url">"további információra"</annotation>" van szüksége."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Leállítja az alkalmazást?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"A telefon nem képes az akkumulátor normál kezelésére, mivel a(z) <xliff:g id="APP">%1$s</xliff:g> alkalmazás ébren tartja az eszközt.\n\nA probléma megoldásához leállíthatja az alkalmazást.\n\nHa a probléma továbbra is fennáll, akkor az akkumulátor teljesítményének javításához lehet, hogy el kell távolítania az alkalmazást."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"A táblagép nem képes az akkumulátor normál kezelésére, mivel a(z) <xliff:g id="APP">%1$s</xliff:g> alkalmazás ébren tartja az eszközt.\n\nA probléma megoldásához leállíthatja az alkalmazást.\n\nHa a probléma továbbra is fennáll, akkor az akkumulátor teljesítményének javításához lehet, hogy el kell távolítania az alkalmazást."</string>
@@ -2596,7 +2600,7 @@
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"<xliff:g id="PERCENT">%1$s</xliff:g>-os értéknél kapcsol be"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Ütemezés beállítása"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Az akkumulátor élettartamának növelése"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Kikapcsolás töltés közben"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Kikapcsolás feltöltés után"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Az Akkumulátorkímélő mód <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttségi szint elérésekor kikapcsol"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Az Akkumulátorkímélő mód <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttségi szint elérésekor kikapcsol"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Az Akkumulátorkímélő mód <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttségi szint elérésekor kikapcsol"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Be (némítás)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Ki"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Hálózati információk"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Eszköze neve látható a telefonján lévő alkalmazások számára. Mások is láthatják, ha csatlakoztatja telefonját más Bluetooth-eszközökhöz, vagy ha Wi-Fi-hotspotot állít be."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Eszköze neve látható a telefonján lévő alkalmazások számára. Mások is láthatják, ha csatlakoztatja telefonját más Bluetooth-eszközökhöz, Wi-Fi-hálózathoz, vagy ha Wi-Fi-hotspotot állít be."</string>
     <string name="devices_title" msgid="649715719278562515">"Eszközök"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Minden beállítás"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Javaslatok"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nincs rendelkezésre álló lejátszó"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"A Bluetooth bekapcsol"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nem áll rendelkezésre, mert be van kapcsolva az alvásidő mód"</string>
 </resources>

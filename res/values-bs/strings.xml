@@ -42,7 +42,7 @@
     <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Isključena"</string>
     <string name="radioInfo_data_connecting" msgid="7280819598028917888">"Povezivanje"</string>
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"Povezano"</string>
-    <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspendirano"</string>
+    <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Obustavljeno"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Nepoznato"</string>
     <string name="sdcard_unmount" product="nosdcard" msgid="1816306320988638382">"Deaktiviraj USB pohranu"</string>
     <string name="sdcard_unmount" product="default" msgid="8078570285871053815">"Deaktiviraj SD karticu"</string>
@@ -93,7 +93,7 @@
     <string name="bluetooth_device" msgid="2217973503732544291">"Neimenovani Bluetooth uređaj"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Pretraživanje"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Nema Bluetooth uređaja u blizini."</string>
-    <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Zahtjev za Bluetooth uparivanje"</string>
+    <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Zahtjev za uparivanje putem Bluetootha"</string>
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Zahtjev za uparivanje"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Dodirnite za spajanje s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Primljeni fajlovi"</string>
@@ -410,9 +410,9 @@
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj tablet ako ga izgubite, ako vam ga ukradu ili ga vratite na početne postavke."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj uređaj ako ga izgubite, ako vam ga ukradu ili ga vratite na početne postavke."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2412426429887900241">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj telefon ako ga izgubite, ako vam ga ukradu ili ga vratite na početne postavke."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj tablet ako ga izgubite ili vam ga ukradu."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj uređaj ako ga izgubite ili vam ga ukradu."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj telefon ako ga izgubite ili vam ga ukradu."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj tablet ako ga izgubite ili ga neko ukrade."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj uređaj ako ga izgubite ili ga neko ukrade."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"Funkcije za zaštitu uređaja neće se uključiti. Nećete moći spriječiti druge osobe da koriste ovaj telefon ako ga izgubite ili ga neko ukrade."</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Ipak preskoči"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Nazad"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Preskoči"</string>
@@ -432,12 +432,12 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Uradit ću to kasnije"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Preskočiti postavljanje otiska prsta?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Odabrali ste da koristite otisak prsta kao jedan od načina za otključavanja telefona. Ukoliko sada preskočite ovaj korak, morat ćete ga postaviti kasnije. Postavka traje otprilike samo jednu minutu."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="6901147203720764421">"Zaštitite tablet zaključavanjem ekrana da ga niko ne može koristiti ako ga izgubite ili vam ga ukradu. Zaključavanje ekrana vam je potrebno i za postavljanje otiska prsta. Dodirnite Otkaži, a zatim postavite PIN, uzorak ili lozinku."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="1286244133923093528">"Zaštitite uređaj zaključavanjem ekrana da ga niko ne može koristiti ako ga izgubite ili vam ga ukradu. Zaključavanje ekrana vam je potrebno i za postavljanje otiska prsta. Dodirnite Otkaži, a zatim postavite PIN, uzorak ili lozinku."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="4810191157587317521">"Zaštitite telefon zaključavanjem ekrana da ga niko ne može koristiti ako ga izgubite ili vam ga ukradu. Zaključavanje ekrana vam je potrebno i za postavljanje otiska prsta. Dodirnite Otkaži, a zatim postavite PIN, uzorak ili lozinku."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"Kada zaštitite tablet opcijom zaključavanja ekrana, niko ga neće moći koristiti u slučaju da ga izgubite ili ako vam ga neko ukrade. Zaključavanje ekrana vam je potrebno i za postavljanje otključavanja licem. Da se vratite, dodirnite Otkaži."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"Kada zaštitite uređaj opcijom zaključavanja ekrana, niko ga neće moći koristiti u slučaju da ga izgubite ili ako vam ga neko ukrade. Zaključavanje ekrana vam je potrebno i za postavljanje otključavanja licem. Da se vratite, dodirnite Otkaži."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"Kada zaštitite telefon opcijom zaključavanja ekrana, niko ga neće moći koristiti u slučaju da ga izgubite ili ako vam ga neko ukrade. Zaključavanje ekrana vam je potrebno i da postavite otključavanja licem. Da se vratite, dodirnite Otkaži."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="6901147203720764421">"Zaštitite tablet zaključavanjem ekrana da ga niko ne može koristiti ako ga izgubite ili ga neko ukrade. Zaključavanje ekrana vam je potrebno i za postavljanje otiska prsta. Dodirnite Otkaži, a zatim postavite PIN, uzorak ili lozinku."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="1286244133923093528">"Zaštitite uređaj zaključavanjem ekrana da ga niko ne može koristiti ako ga izgubite ili ga neko ukrade. Zaključavanje ekrana vam je potrebno i za postavljanje otiska prsta. Dodirnite Otkaži, a zatim postavite PIN, uzorak ili lozinku."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="4810191157587317521">"Zaštitite telefon zaključavanjem ekrana da ga niko ne može koristiti ako ga izgubite ili ga neko ukrade. Zaključavanje ekrana vam je potrebno i za postavljanje otiska prsta. Dodirnite Otkaži, a zatim postavite PIN, uzorak ili lozinku."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"Kada zaštitite tablet opcijom zaključavanja ekrana, niko ga neće moći koristiti u slučaju da ga izgubite ili ga neko ukrade. Zaključavanje ekrana vam je potrebno i za postavljanje otključavanja licem. Da se vratite, dodirnite Otkaži."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"Kada zaštitite uređaj opcijom zaključavanja ekrana, niko ga neće moći koristiti u slučaju da ga izgubite ili ga neko ukrade. Zaključavanje ekrana vam je potrebno i za postavljanje otključavanja licem. Da se vratite, dodirnite Otkaži."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"Kada zaštitite telefon opcijom zaključavanja ekrana, niko ga neće moći koristiti u slučaju da ga izgubite ili ga neko ukrade. Zaključavanje ekrana vam je potrebno i da postavite otključavanja licem. Da se vratite, dodirnite Otkaži."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Preskočiti postavljanje PIN-a?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"Preskočiti postavljanje lozinke?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Preskočiti postavljanje uzorka?"</string>
@@ -701,7 +701,7 @@
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="6805458703566046784">"Upravljajte vezama, postavite ime uređaja i vidljivost"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Upariti s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Kod za Bluetooth uparivanje"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Kod za uparivanje putem Bluetootha"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Upišite kod za uparivanje, zatim pritisnite Return ili Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN sadrži slova ili simbole"</string>
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"Obično 0000 ili 1234"</string>
@@ -1428,7 +1428,7 @@
     <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
     <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"Izbriši USB pohranu"</string>
     <string name="sd_format" product="default" msgid="9085302892248732329">"Izbriši SD karticu"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Briše sve podatke na internoj USB pohrani, kao što su muzika i fotografije"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Briše sve podatke na unutrašnjoj USB pohrani, kao što su muzika i fotografije"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Briše sve podatke na SD kartici, kao što su muzika i fotografije"</string>
     <string name="memory_clear_cache_title" msgid="2605096903803953619">"Želite li zbrisati keširane podatke?"</string>
     <string name="memory_clear_cache_message" msgid="4759561226480906588">"Ovo briše keširane podatke za sve aplikacije."</string>
@@ -1559,12 +1559,12 @@
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Premjesti sadržaj kasnije"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Premještanje sadržaja…"</string>
     <string name="storage_wizard_slow_v2_title" msgid="3760766921170980221">"Spora pohrana <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"I dalje možete koristiti uređaj <xliff:g id="NAME_0">^1</xliff:g>, ali može biti spor. \n\nAplikacije pohranjene na pohrani <xliff:g id="NAME_1">^2</xliff:g> možda neće raditi ispravno, a prijenos sadržaja može dugo trajati. \n\nPokušajte koristiti bržu pohranu <xliff:g id="NAME_2">^3</xliff:g> ili koristite <xliff:g id="NAME_3">^4</xliff:g> kao prenosivu pohranu."</string>
+    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"I dalje možete koristiti uređaj <xliff:g id="NAME_0">^1</xliff:g>, ali može biti spor. \n\nAplikacije pohranjene na uređaju za pohranu <xliff:g id="NAME_1">^2</xliff:g> možda neće raditi ispravno, a prijenos sadržaja može dugo trajati. \n\nPokušajte koristiti brži uređaj za pohranu <xliff:g id="NAME_2">^3</xliff:g> ili koristite ovaj uređaj <xliff:g id="NAME_3">^4</xliff:g> kao prenosivu pohranu."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Počni ispočetka"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Nastavi"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Sadržaj možete premjestiti na pohranu <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Da premjestite sadržaj na pohranu <xliff:g id="NAME">^1</xliff:g>, idite u "<b>"Postavke &gt; Pohrana"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Sadržaj je premješten na pohranu <xliff:g id="NAME_0">^1</xliff:g>. \n\nDa upravljate ovom pohranom <xliff:g id="NAME_1">^2</xliff:g>, idite u "<b>"Postavke &gt; Pohrana"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Sadržaj možete premjestiti na uređaj za pohranu <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Da premjestite sadržaj na uređaj za pohranu <xliff:g id="NAME">^1</xliff:g>, idite u "<b>"Postavke &gt; Pohrana"</b></string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Sadržaj je premješten na uređaj za pohranu <xliff:g id="NAME_0">^1</xliff:g>. \n\nDa upravljate uređajem za pohranu <xliff:g id="NAME_1">^2</xliff:g>, idite u "<b>"Postavke &gt; Pohrana"</b>"."</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Status baterije"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nivo napunjenosti baterije"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ovi"</string>
@@ -1638,7 +1638,7 @@
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4145566517710675883">\n\n"Da biste izbrisali muziku, slike i ostale korisničke podatke, "<b>"SD kartica"</b>" treba biti izbrisana."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Izbriši USB pohranu"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Izbriši SD karticu"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Izbrišite sve podatke na internoj USB pohrani, poput muzike ili fotografija"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Izbrišite sve podatke na unutrašnjoj USB pohrani, poput muzike ili fotografija"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Izbrišite sve podatke na SD kartici, poput muzike ili fotografija"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3554085992851027633">"Izbriši sve podatke"</string>
     <string name="master_clear_button_text" product="default" msgid="3554085992851027633">"Izbriši sve podatke"</string>
@@ -1696,7 +1696,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Dijeljenje internetske veze uređaja <xliff:g id="DEVICE_NAME">%1$d</xliff:g> putem Bluetootha"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Nije se moguće povezati sa više od <xliff:g id="MAXCONNECTION">%1$d</xliff:g> uređaja."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Prestat će se dijeliti veza s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Povez. putem mob. za eth."</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Povezivanje putem mobitela za Ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Dijeljenje internetske veze telefona putem etherneta"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Koristite pristupnu tačku i povezivanje putem mobitela za pružanje interneta drugim uređajima putem veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Koristite pristupnu tačku i povezivanje putem mobitela za pružanje interneta drugim uređajima putem WiFi mreže ili veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
@@ -1937,7 +1937,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Aplikacija za hitne situacije"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Vrati postavke aplikacije na zadano"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Vratiti postavke aplikacije na zadano?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Na ovaj način će se vratiti sve postavke na zadano za:\n\n"<li>" Onemogućene aplikacije"</li>\n<li>"Obavještenja za onemogućene aplikacije"</li>\n<li>"Zadane aplikacije za radnje"</li>\n<li>" Ograničenje pozadinskih podataka za aplikacije"</li>\n<li>" Sva ograničenja za odobrenja"</li>\n\n" Nećete izgubiti podatke iz aplikacija."</string>
+    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Na ovaj način će se vratiti sve postavke na zadano za:\n\n"<li>"Onemogućene aplikacije"</li>\n<li>"Obavještenja za onemogućene aplikacije"</li>\n<li>"Zadane aplikacije za radnje"</li>\n<li>"Ograničenje pozadinskih podataka za aplikacije"</li>\n<li>"Sva ograničenja za odobrenja"</li>\n\n"Nećete izgubiti podatke iz aplikacija."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Vrati aplikacije na zadano"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Upravljaj prostorom"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
@@ -2460,6 +2460,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Koristili ste tablet više nego obično"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Koristili ste uređaj više nego obično"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija bi vam se mogla isprazniti brže nego obično"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimiziranje radi očuvanja baterije"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterija je privremeno ograničena. Dodirnite da saznate više."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Vaš telefon je korišten više nego obično. Baterija se može istrošiti brže nego što je predviđeno.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Vaš tablet je korišten više nego obično. Baterija se može istrošiti brže nego što je predviđeno.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Vaš uređaj je korišten više nego obično. Baterija se može istrošiti brže nego što je predviđeno.\n\nAplikacije koje najviše troše bateriju:"</string>
@@ -2522,6 +2524,8 @@
       <item quantity="other">Ograničeno je %1$d aplikacija</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Došlo je do problema prilikom očitavanja mjerača stanja baterije"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Došlo je do problema prilikom očitavanja mjerača stanja baterije. Dodirnite da "<annotation id="url">"saznate više"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Želite zaustaviti aplikaciju?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Vaš telefon ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP">%1$s</xliff:g> stalno drži vaš telefon aktivnim.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju.\n\nAko se problem ne riješi, možda ćete trebati deinstalirati aplikaciju da poboljšate rad baterije."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Vaš tablet ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP">%1$s</xliff:g> stalno drži vaš tablet aktivnim.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju.\n\nAko se problem ne riješi, možda ćete trebati deinstalirati aplikaciju da poboljšate rad baterije."</string>
@@ -3611,7 +3615,7 @@
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Prikazuju se na vrhu odjeljka za razgovor u vidu plutajućih oblačića"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Prikazuju se na vrhu odjeljka za razgovor"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Ostali razgovori"</string>
-    <string name="other_conversations_summary" msgid="3487426787901236273">"Razgovori koje ste promijenili"</string>
+    <string name="other_conversations_summary" msgid="3487426787901236273">"Razgovori koje ste mijenjali"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Smjesti prioritetne razgovore u oblačiće"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioritetni razgovori se prikazuju na vrhu padajuće trake. Razgovore možete postaviti i u oblačić i prekinuti funkciju Ne ometaj."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Ovdje će se prikazati prioritetni i promijenjeni razgovori"</string>
@@ -4484,7 +4488,7 @@
     <string name="bluetooth_disabled" msgid="835838280837359514">"Isključeno"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Povezano s mrežom <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Povezan s više uređaja"</string>
-    <string name="demo_mode" msgid="6566167465451386728">"Način demonstracije Sistemskog UI-a"</string>
+    <string name="demo_mode" msgid="6566167465451386728">"Način rada za demonstraciju Sistemskog UI-a"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tamna tema"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Uključeno/Privremeno onemogućeno zbog Uštede baterije"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Privremeno uključeno zbog Uštede baterije"</string>
@@ -4788,7 +4792,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Uključeno (isključen zvuk)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Isključeno"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalji o mreži"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Naziv uređaja mogu vidjeti aplikacije na telefonu. Mogu ga vidjeti i druge osobe kada se povežete na Bluetooth uređaje ili postavite WiFi pristupnu tačku."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Aplikacije na vašem telefonu će moći vidjeti naziv vašeg uređaja. Također će ga moći vidjeti druge osobe prilikom povezivanja s Bluetooth uređajima i WiFi mrežom ili prilikom postavljanja WiFi pristupne tačke."</string>
     <string name="devices_title" msgid="649715719278562515">"Uređaji"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Sve postavke"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Prijedlozi"</string>
@@ -5051,4 +5055,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nema dostupnih plejera"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"mediji"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth će se uključiti"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupno jer je uključen način rada za spavanje"</string>
 </resources>

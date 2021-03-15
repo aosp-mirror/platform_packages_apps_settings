@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"ටැබ්ලට් උපාංගය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"උපාංගය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"බැටරිය සාමාන්‍යයට වඩා කලින් අවසන් විය හැක"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"බැටරි සෞඛ්‍යය සඳහා ප්‍රශස්ත කරමින්"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"බැටරිය තාවකාලිකව සීමිතයි. තව දැන ගැනීමට තට්ටු කරන්න."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"ඔබේ දුරකථනය සාමාන්‍යයට වඩා වැඩිපුර භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් විය හැක.\n\nබැටරි භාවිතයට අනුව ඉහළම යෙදුම්:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"ඔබේ ටැබ්ලටය සාමාන්‍යයට වඩා වැඩිපුර භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් විය හැක.\n\nබැටරි භාවිතයට අනුව ඉහළම යෙදුම්:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"ඔබේ උපාංගය සාමාන්‍යයට වඩා වැඩිපුර භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් විය හැක.\n\nබැටරි භාවිතයට අනුව ඉහළම යෙදුම්:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">යෙදුම් %1$dක් සීමා කර ඇත</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"ඔබගේ බැටරි මනුව කියවීමේ දෝෂයකි"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"ඔබගේ බැටරි මනුව කියවීමේ දෝෂයකි. "<annotation id="url">"තව දැන ගැනීමට"</annotation>" තට්ටු කරන්න"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"යෙදුම නවත්වන්නද?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g> ඔබේ දුරකථනය අවදියෙන් තබා ගන්නා නිසා ඔබේ දුරකථනයට සාමාන්‍ය පරිදි බැටරිය කළමනාකරණය කළ නොහැකිය.\n\nමෙම ගැටලුව විසඳීමට උත්සාහ කිරීමට, ඔබට යෙදුම නැවැත්විය හැකිය.\n\nමෙය දිගටම සිදු වන්නේ නම්, බැටරි කාර්ය සාධනය වැඩි දියුණු කිරීමට ඔබ යෙදුම අස්ථාපනය කිරීම අවශ්‍ය විය හැකිය."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g> ඔබේ ටැබ්ලටය අවදියෙන් තබා ගන්නා නිසා ඔබේ ටැබ්ලටයට සාමාන්‍ය පරිදි බැටරිය කළමනාකරණය කළ නොහැකිය.\n\nමෙම ගැටලුව විසඳීමට උත්සාහ කිරීමට, ඔබට යෙදුම නැවැත්විය හැකිය.\n\nමෙය දිගටම සිදු වන්නේ නම්, බැටරි කාර්ය සාධනය වැඩි දියුණු කිරීමට ඔබ යෙදුම අස්ථාපනය කිරීම අවශ්‍ය විය හැකිය."</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"ක්‍රියාත්මකයි (නිහඬ)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"ක්‍රියාවිරහිතයි"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ජාල විස්තර"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"ඔබගේ උපාංගයේ නම ඔබගේ දුරකථනයේ යෙදුම්වලට දෘශ්‍යමානය. ඔබ බ්ලූටූත්වලට සම්බන්ධ වූ විට හෝ Wi-Fi හොට්ස්පොට් එකක් පිහිට වූ විට වෙනත් පුද්ගලයන්ද එය දැකිය හැකිය."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"ඔබගේ උපාංගයේ නම ඔබගේ දුරකථනයේ යෙදුම්වලට දෘශ්‍යමානය. ඔබ බ්ලූටූත්වලට සම්බන්ධ වූ විට හෝ Wi-Fi හොට්ස්පොට් එකක් පිහිටු වූ විට වෙනත් පුද්ගලයන්ද එය දැකිය හැකිය."</string>
     <string name="devices_title" msgid="649715719278562515">"උපාංග"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"සියලු සැකසීම්"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"යෝජනා"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"ලබා ගත හැකි වාදක නැත"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"මාධ්‍ය"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"බ්ලූටූත් ක්‍රියාත්මක වනු ඇත"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"නිද්‍රා කාල ප්‍රකාරය ක්‍රියාත්මක නිසා ලබා ගත නොහැකිය"</string>
 </resources>
