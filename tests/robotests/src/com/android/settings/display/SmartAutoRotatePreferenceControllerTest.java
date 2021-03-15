@@ -108,6 +108,25 @@ public class SmartAutoRotatePreferenceControllerTest {
     }
 
     @Test
+    public void updatePreference_settingsIsOff_noSmartAuto_shouldTurnOffToggle() {
+        disableAutoRotation();
+        Settings.Secure.putStringForUser(mContentResolver,
+                CAMERA_AUTOROTATE, null, UserHandle.USER_CURRENT);
+
+        assertThat(mController.getSummary()).isEqualTo("Off");
+
+    }
+
+    @Test
+    public void updatePreference_settingsIsOn_noSmartAuto_shouldTurnOnToggle() {
+        enableAutoRotation();
+        Settings.Secure.putStringForUser(mContentResolver,
+                CAMERA_AUTOROTATE, null, UserHandle.USER_CURRENT);
+
+        assertThat(mController.getSummary()).isEqualTo("On");
+    }
+
+    @Test
     public void testGetAvailabilityStatus() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
                 .UNSUPPORTED_ON_DEVICE);
