@@ -17,6 +17,7 @@
 package com.android.settings.security;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -45,6 +46,12 @@ public class CredentialManagementAppFragment extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.CREDENTIAL_MANAGEMENT_APP;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(CredentialManagementAppButtonsController.class).setParentFragment(this);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

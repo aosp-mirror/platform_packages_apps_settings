@@ -16,11 +16,8 @@
 
 package com.android.settings.security;
 
-import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyEventLogger;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
@@ -29,6 +26,7 @@ import android.security.KeyChain;
 import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.Log;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -48,16 +46,15 @@ public class CredentialManagementAppButtonsController extends BasePreferenceCont
 
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private final Handler mHandler = new Handler(Looper.getMainLooper());
-
-    private final PackageManager mPackageManager;
-    private final AppOpsManager mAppOpsManager;
     private boolean mHasCredentialManagerPackage;
-    private String mCredentialManagerPackageName;
+    private Fragment mFragment;
 
     public CredentialManagementAppButtonsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mPackageManager = context.getPackageManager();
-        mAppOpsManager = context.getSystemService(AppOpsManager.class);
+    }
+
+    public void setParentFragment(Fragment fragment) {
+        mFragment = fragment;
     }
 
     @Override
@@ -73,7 +70,6 @@ public class CredentialManagementAppButtonsController extends BasePreferenceCont
             try {
                 IKeyChainService service = KeyChain.bind(mContext).getService();
                 mHasCredentialManagerPackage = service.hasCredentialManagementApp();
-                mCredentialManagerPackageName = service.getCredentialManagementAppPackageName();
             } catch (InterruptedException | RemoteException e) {
                 Log.e(TAG, "Unable to display credential management app buttons");
             }
@@ -91,24 +87,17 @@ public class CredentialManagementAppButtonsController extends BasePreferenceCont
     }
 
     private void removeCredentialManagementApp() {
-        try {
-            ApplicationInfo appInfo = mPackageManager.getApplicationInfo(
-                    mCredentialManagerPackageName, 0);
-            mAppOpsManager.setMode(AppOpsManager.OP_MANAGE_CREDENTIALS,
-                    appInfo.uid, mCredentialManagerPackageName, AppOpsManager.MODE_DEFAULT);
-            mExecutor.execute(() -> {
-                try {
-                    IKeyChainService service = KeyChain.bind(mContext).getService();
-                    service.removeCredentialManagementApp();
-                    DevicePolicyEventLogger
-                            .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REMOVED)
-                            .write();
-                } catch (InterruptedException | RemoteException e) {
-                    Log.e(TAG, "Unable to remove the credential management app");
-                }
-            });
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Unable to remove the credential management app");
-        }
+        mExecutor.execute(() -> {
+            try {
+                IKeyChainService service = KeyChain.bind(mContext).getService();
+                service.removeCredentialManagementApp();
+                DevicePolicyEventLogger
+                        .createEvent(DevicePolicyEnums.CREDENTIAL_MANAGEMENT_APP_REMOVED)
+                        .write();
+                mFragment.getActivity().finish();
+            } catch (InterruptedException | RemoteException e) {
+                Log.e(TAG, "Unable to remove the credential management app");
+            }
+        });
     }
 }
