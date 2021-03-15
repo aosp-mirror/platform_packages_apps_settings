@@ -29,9 +29,6 @@ import android.os.UserManager;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * BluetoothPermissionRequest is a receiver to receive Bluetooth connection
@@ -82,21 +79,6 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
 
             if (DEBUG) Log.d(TAG, "onReceive request type: " + mRequestType + " return "
                     + mReturnPackage + "," + mReturnClass);
-
-            // Even if the user has already made the choice, Bluetooth still may not know that if
-            // the user preference data have not been migrated from Settings app's shared
-            // preferences to Bluetooth app's. In that case, Bluetooth app broadcasts an
-            // ACTION_CONNECTION_ACCESS_REQUEST intent to ask to Settings app.
-            //
-            // If that happens, 'checkUserChoice()' here will do migration because it finds or
-            // creates a 'CachedBluetoothDevice' object for the device.
-            //
-            // After migration is done, 'checkUserChoice()' replies to the request by sending an
-            // ACTION_CONNECTION_ACCESS_REPLY intent. And we don't need to start permission activity
-            // dialog or notification.
-            if (checkUserChoice()) {
-                return;
-            }
 
             Intent connectionAccessIntent = new Intent(action);
             connectionAccessIntent.setClass(context, BluetoothPermissionActivity.class);
@@ -211,93 +193,5 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
             return NOTIFICATION_TAG_SAP;
         }
         return null;
-    }
-
-    /**
-     * @return true user had made a choice, this method replies to the request according
-     *              to user's previous decision
-     *         false user hadnot made any choice on this device
-     */
-    private boolean checkUserChoice() {
-        boolean processed = false;
-
-        // ignore if it is something else than phonebook/message settings it wants us to remember
-        if (mRequestType != BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS
-                && mRequestType != BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS
-                && mRequestType != BluetoothDevice.REQUEST_TYPE_SIM_ACCESS) {
-            if (DEBUG) Log.d(TAG, "checkUserChoice(): Unknown RequestType " + mRequestType);
-            return processed;
-        }
-
-        LocalBluetoothManager bluetoothManager = Utils.getLocalBtManager(mContext);
-        CachedBluetoothDeviceManager cachedDeviceManager =
-            bluetoothManager.getCachedDeviceManager();
-        CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
-        if (cachedDevice == null) {
-            cachedDevice = cachedDeviceManager.addDevice(mDevice);
-        }
-
-        String intentName = BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY;
-
-        if (mRequestType == BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS) {
-            int phonebookPermission = mDevice.getPhonebookAccessPermission();
-
-            if (phonebookPermission == BluetoothDevice.ACCESS_UNKNOWN) {
-                // Leave 'processed' as false.
-            } else if (phonebookPermission == BluetoothDevice.ACCESS_ALLOWED) {
-                sendReplyIntentToReceiver(true);
-                processed = true;
-            } else if (phonebookPermission == BluetoothDevice.ACCESS_REJECTED) {
-                sendReplyIntentToReceiver(false);
-                processed = true;
-            } else {
-                Log.e(TAG, "Bad phonebookPermission: " + phonebookPermission);
-            }
-        } else if (mRequestType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
-            int messagePermission = mDevice.getMessageAccessPermission();
-
-            if (messagePermission == BluetoothDevice.ACCESS_UNKNOWN) {
-                // Leave 'processed' as false.
-            } else if (messagePermission == BluetoothDevice.ACCESS_ALLOWED) {
-                sendReplyIntentToReceiver(true);
-                processed = true;
-            } else if (messagePermission == BluetoothDevice.ACCESS_REJECTED) {
-                sendReplyIntentToReceiver(false);
-                processed = true;
-            } else {
-                Log.e(TAG, "Bad messagePermission: " + messagePermission);
-            }
-        } else if(mRequestType == BluetoothDevice.REQUEST_TYPE_SIM_ACCESS) {
-            int simPermission = mDevice.getSimAccessPermission();
-
-            if (simPermission == BluetoothDevice.ACCESS_UNKNOWN) {
-                // Leave 'processed' as false.
-            } else if (simPermission == BluetoothDevice.ACCESS_ALLOWED) {
-                sendReplyIntentToReceiver(true);
-                processed = true;
-            } else if (simPermission == BluetoothDevice.ACCESS_REJECTED) {
-                sendReplyIntentToReceiver(false);
-                processed = true;
-            } else {
-                Log.e(TAG, "Bad simPermission: " + simPermission);
-            }
-        }
-        if (DEBUG) Log.d(TAG,"checkUserChoice(): returning " + processed);
-        return processed;
-    }
-
-    private void sendReplyIntentToReceiver(final boolean allowed) {
-        Intent intent = new Intent(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY);
-
-        if (mReturnPackage != null && mReturnClass != null) {
-            intent.setClassName(mReturnPackage, mReturnClass);
-        }
-
-        intent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
-                        allowed ? BluetoothDevice.CONNECTION_ACCESS_YES
-                                : BluetoothDevice.CONNECTION_ACCESS_NO);
-        intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
-        intent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
-        mContext.sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_ADMIN);
     }
 }
