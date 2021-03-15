@@ -44,6 +44,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
     protected BatteryStatsHelper mStatsHelper;
     protected UserManager mUm;
     private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
+    protected boolean mIsBatteryPresent = true;
 
     @Override
     public void onAttach(Activity activity) {
@@ -60,6 +61,9 @@ public abstract class PowerUsageBase extends DashboardFragment {
 
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(getContext());
         mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
+            if (type == BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT) {
+                mIsBatteryPresent = false;
+            }
             restartBatteryStatsLoader(type);
         });
     }

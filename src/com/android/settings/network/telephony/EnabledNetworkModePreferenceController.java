@@ -20,10 +20,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -37,7 +34,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.network.PreferredNetworkModeContentObserver;
+import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 import java.util.ArrayList;
@@ -53,7 +50,7 @@ public class EnabledNetworkModePreferenceController extends
         ListPreference.OnPreferenceChangeListener, LifecycleObserver {
 
     private static final String LOG_TAG = "EnabledNetworkMode";
-    private PreferredNetworkModeContentObserver mPreferredNetworkModeObserver;
+    private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private TelephonyManager mTelephonyManager;
@@ -88,18 +85,18 @@ public class EnabledNetworkModePreferenceController extends
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        if (mPreferredNetworkModeObserver == null) {
+        if (mAllowedNetworkTypesListener == null) {
             return;
         }
-        mPreferredNetworkModeObserver.register(mContext, mSubId);
+        mAllowedNetworkTypesListener.register(mContext, mSubId);
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        if (mPreferredNetworkModeObserver == null) {
+        if (mAllowedNetworkTypesListener == null) {
             return;
         }
-        mPreferredNetworkModeObserver.unregister(mContext);
+        mAllowedNetworkTypesListener.unregister(mContext, mSubId);
     }
 
     @Override
@@ -145,10 +142,10 @@ public class EnabledNetworkModePreferenceController extends
         mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);
 
-        if (mPreferredNetworkModeObserver == null) {
-            mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
-                    new Handler(Looper.getMainLooper()));
-            mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
+        if (mAllowedNetworkTypesListener == null) {
+            mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
+                    mContext.getMainExecutor());
+            mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                     () -> updatePreference());
         }
 
@@ -164,7 +161,22 @@ public class EnabledNetworkModePreferenceController extends
         }
     }
 
-    private final static class PreferenceEntriesBuilder {
+    enum EnabledNetworks {
+        ENABLED_NETWORKS_UNKNOWN,
+        ENABLED_NETWORKS_CDMA_CHOICES,
+        ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES,
+        ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES,
+        ENABLED_NETWORKS_TDSCDMA_CHOICES,
+        ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES,
+        ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES,
+        ENABLED_NETWORKS_EXCEPT_GSM_CHOICES,
+        ENABLED_NETWORKS_EXCEPT_LTE_CHOICES,
+        ENABLED_NETWORKS_4G_CHOICES,
+        ENABLED_NETWORKS_CHOICES,
+        PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE
+    }
+
+    private final class PreferenceEntriesBuilder {
         private CarrierConfigManager mCarrierConfigManager;
         private Context mContext;
         private TelephonyManager mTelephonyManager;
@@ -181,21 +193,6 @@ public class EnabledNetworkModePreferenceController extends
         private List<String> mEntries = new ArrayList<>();
         private List<Integer> mEntriesValue = new ArrayList<>();
 
-        enum EnabledNetworks {
-            ENABLED_NETWORKS_UNKNOWN,
-            ENABLED_NETWORKS_CDMA_CHOICES,
-            ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES,
-            ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES,
-            ENABLED_NETWORKS_TDSCDMA_CHOICES,
-            ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES,
-            ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES,
-            ENABLED_NETWORKS_EXCEPT_GSM_CHOICES,
-            ENABLED_NETWORKS_EXCEPT_LTE_CHOICES,
-            ENABLED_NETWORKS_4G_CHOICES,
-            ENABLED_NETWORKS_CHOICES,
-            PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE
-        }
-
         PreferenceEntriesBuilder(Context context, int subId) {
             this.mContext = context;
             this.mSubId = subId;
@@ -205,13 +202,12 @@ public class EnabledNetworkModePreferenceController extends
                     .createForSubscriptionId(mSubId);
 
             final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-            final boolean isNrEnabledFromCarrierConfig = carrierConfig != null
-                    && carrierConfig.getBoolean(CarrierConfigManager.KEY_NR_ENABLED_BOOL);
             mAllowed5gNetworkType = checkSupportedRadioBitmask(
-                    mTelephonyManager.getAllowedNetworkTypes(),
+                    mTelephonyManager.getAllowedNetworkTypesForReason(
+                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
                     TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-            mSupported5gRadioAccessFamily = isNrEnabledFromCarrierConfig
-                    && checkSupportedRadioBitmask(mTelephonyManager.getSupportedRadioAccessFamily(),
+            mSupported5gRadioAccessFamily = checkSupportedRadioBitmask(
+                    mTelephonyManager.getSupportedRadioAccessFamily(),
                     TelephonyManager.NETWORK_TYPE_BITMASK_NR);
             mIsGlobalCdma = mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
                     && carrierConfig != null
@@ -226,7 +222,7 @@ public class EnabledNetworkModePreferenceController extends
             int[] entryValuesInt;
             switch (getEnabledNetworkType()) {
                 case ENABLED_NETWORKS_CDMA_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_cdma_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 4) {
@@ -240,7 +236,7 @@ public class EnabledNetworkModePreferenceController extends
                     addGlobalEntry(entryValuesInt[3]);
                     break;
                 case ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_cdma_no_lte_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 2) {
@@ -251,7 +247,7 @@ public class EnabledNetworkModePreferenceController extends
                     add1xEntry(entryValuesInt[1]);
                     break;
                 case ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_cdma_only_lte_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 2) {
@@ -262,7 +258,7 @@ public class EnabledNetworkModePreferenceController extends
                     addGlobalEntry(entryValuesInt[1]);
                     break;
                 case ENABLED_NETWORKS_TDSCDMA_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_tdscdma_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 3) {
@@ -275,7 +271,7 @@ public class EnabledNetworkModePreferenceController extends
                     add2gEntry(entryValuesInt[2]);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_except_gsm_lte_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 1) {
@@ -285,7 +281,7 @@ public class EnabledNetworkModePreferenceController extends
                     add3gEntry(entryValuesInt[0]);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_except_gsm_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 2) {
@@ -297,7 +293,7 @@ public class EnabledNetworkModePreferenceController extends
                     add3gEntry(entryValuesInt[1]);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_except_gsm_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 2) {
@@ -309,7 +305,7 @@ public class EnabledNetworkModePreferenceController extends
                     add3gEntry(entryValuesInt[1]);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_LTE_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_except_lte_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 2) {
@@ -320,7 +316,7 @@ public class EnabledNetworkModePreferenceController extends
                     add2gEntry(entryValuesInt[1]);
                     break;
                 case ENABLED_NETWORKS_4G_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 3) {
@@ -334,7 +330,7 @@ public class EnabledNetworkModePreferenceController extends
                     add2gEntry(entryValuesInt[2]);
                     break;
                 case ENABLED_NETWORKS_CHOICES:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.enabled_networks_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 3) {
@@ -346,7 +342,7 @@ public class EnabledNetworkModePreferenceController extends
                     add2gEntry(entryValuesInt[2]);
                     break;
                 case PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE:
-                    entryValues = mContext.getResources().getStringArray(
+                    entryValues = getResourcesForSubId().getStringArray(
                             R.array.preferred_network_mode_values_world_mode);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
                     if (entryValuesInt.length < 3) {
@@ -354,9 +350,14 @@ public class EnabledNetworkModePreferenceController extends
                                 "PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE index error.");
                     }
                     addGlobalEntry(entryValuesInt[0]);
-                    addCustomEntry(mContext.getString(R.string.network_world_mode_cdma_lte),
+
+                    addCustomEntry(
+                            getResourcesForSubId().getString(
+                                    R.string.network_world_mode_cdma_lte),
                             entryValuesInt[1]);
-                    addCustomEntry(mContext.getString(R.string.network_world_mode_gsm_lte),
+                    addCustomEntry(
+                            getResourcesForSubId().getString(
+                                    R.string.network_world_mode_gsm_lte),
                             entryValuesInt[2]);
                     break;
                 default:
@@ -365,9 +366,9 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         private int getPreferredNetworkMode() {
-            int networkMode = Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                    TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+            int networkMode = MobileNetworkUtils.getNetworkTypeFromRaf(
+                    (int) mTelephonyManager.getAllowedNetworkTypesForReason(
+                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
             if (!showNrList()) {
                 Log.d(LOG_TAG, "Network mode :" + networkMode + " reduce NR");
                 networkMode = reduceNrToLteNetworkType(networkMode);
@@ -447,7 +448,7 @@ public class EnabledNetworkModePreferenceController extends
          * Sets the display string for the network mode choice and selects the corresponding item
          *
          * @param networkMode the current network mode. The current mode might not be an option in
-         *                   the choice list. The nearest choice is selected instead
+         *                    the choice list. The nearest choice is selected instead
          */
         void setPreferenceValueAndSummary(int networkMode) {
             setSelectedEntry(networkMode);
@@ -571,8 +572,9 @@ public class EnabledNetworkModePreferenceController extends
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA:
                     setSelectedEntry(
                             TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA);
-                    setSummary(mContext.getString(R.string.network_5G)
-                            + mContext.getString(R.string.network_recommended));
+                    setSummary(getResourcesForSubId().getString(R.string.network_5G)
+                            + getResourcesForSubId().getString(
+                            R.string.network_recommended));
                     break;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA:
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM:
@@ -581,13 +583,15 @@ public class EnabledNetworkModePreferenceController extends
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                     setSelectedEntry(TelephonyManagerConstants
                             .NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
-                    setSummary(mContext.getString(R.string.network_5G)
-                            + mContext.getString(R.string.network_recommended));
+                    setSummary(getResourcesForSubId().getString(R.string.network_5G)
+                            + getResourcesForSubId().getString(
+                            R.string.network_recommended));
                     break;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO:
                     setSelectedEntry(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO);
-                    setSummary(mContext.getString(R.string.network_5G)
-                            + mContext.getString(R.string.network_recommended));
+                    setSummary(getResourcesForSubId().getString(R.string.network_5G)
+                            + getResourcesForSubId().getString(
+                            R.string.network_recommended));
                     break;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
                     setSelectedEntry(
@@ -597,13 +601,15 @@ public class EnabledNetworkModePreferenceController extends
                             || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                         setSummary(R.string.network_global);
                     } else {
-                        setSummary(mContext.getString(R.string.network_5G)
-                                + mContext.getString(R.string.network_recommended));
+                        setSummary(getResourcesForSubId().getString(R.string.network_5G)
+                                + getResourcesForSubId().getString(
+                                R.string.network_recommended));
                     }
                     break;
                 default:
                     setSummary(
-                            mContext.getString(R.string.mobile_network_mode_error, networkMode));
+                            getResourcesForSubId().getString(
+                                    R.string.mobile_network_mode_error, networkMode));
             }
         }
 
@@ -613,7 +619,7 @@ public class EnabledNetworkModePreferenceController extends
          * @param networkType an LTE network mode without 5G.
          * @return the corresponding network mode with 5G.
          */
-        private static int addNrToLteNetworkType(int networkType) {
+        private int addNrToLteNetworkType(int networkType) {
             switch(networkType) {
                 case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
                     return TelephonyManagerConstants.NETWORK_MODE_NR_LTE;
@@ -647,7 +653,7 @@ public class EnabledNetworkModePreferenceController extends
          * @param networkType an 5G network mode.
          * @return the corresponding network mode without 5G.
          */
-        private static int reduceNrToLteNetworkType(int networkType) {
+        private int reduceNrToLteNetworkType(int networkType) {
             switch(networkType) {
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE:
                     return TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY;
@@ -689,8 +695,8 @@ public class EnabledNetworkModePreferenceController extends
         private void add5gEntry(int value) {
             boolean isNRValue = value >= TelephonyManagerConstants.NETWORK_MODE_NR_ONLY;
             if (showNrList() && isNRValue) {
-                mEntries.add(mContext.getString(R.string.network_5G)
-                        + mContext.getString(R.string.network_recommended));
+                mEntries.add(getResourcesForSubId().getString(R.string.network_5G)
+                        + getResourcesForSubId().getString(R.string.network_recommended));
                 mEntriesValue.add(value);
                 mIs5gEntryDisplayed = true;
             } else {
@@ -706,7 +712,7 @@ public class EnabledNetworkModePreferenceController extends
             Log.d(LOG_TAG, "addGlobalEntry. "
                     + " supported5GRadioAccessFamily: " + mSupported5gRadioAccessFamily
                     + " allowed5GNetworkType: " + mAllowed5gNetworkType);
-            mEntries.add(mContext.getString(R.string.network_global));
+            mEntries.add(getResourcesForSubId().getString(R.string.network_global));
             if (showNrList()) {
                 value = addNrToLteNetworkType(value);
             }
@@ -722,9 +728,9 @@ public class EnabledNetworkModePreferenceController extends
          */
         private void addLteEntry(int value) {
             if (showNrList()) {
-                mEntries.add(mContext.getString(R.string.network_lte_pure));
+                mEntries.add(getResourcesForSubId().getString(R.string.network_lte_pure));
             } else {
-                mEntries.add(mContext.getString(R.string.network_lte));
+                mEntries.add(getResourcesForSubId().getString(R.string.network_lte));
             }
             mEntriesValue.add(value);
         }
@@ -734,25 +740,25 @@ public class EnabledNetworkModePreferenceController extends
          */
         private void add4gEntry(int value) {
             if (showNrList()) {
-                mEntries.add(mContext.getString(R.string.network_4G_pure));
+                mEntries.add(getResourcesForSubId().getString(R.string.network_4G_pure));
             } else {
-                mEntries.add(mContext.getString(R.string.network_4G));
+                mEntries.add(getResourcesForSubId().getString(R.string.network_4G));
             }
             mEntriesValue.add(value);
         }
 
         private void add3gEntry(int value) {
-            mEntries.add(mContext.getString(R.string.network_3G));
+            mEntries.add(getResourcesForSubId().getString(R.string.network_3G));
             mEntriesValue.add(value);
         }
 
         private void add2gEntry(int value) {
-            mEntries.add(mContext.getString(R.string.network_2G));
+            mEntries.add(getResourcesForSubId().getString(R.string.network_2G));
             mEntriesValue.add(value);
         }
 
         private void add1xEntry(int value) {
-            mEntries.add(mContext.getString(R.string.network_1x));
+            mEntries.add(getResourcesForSubId().getString(R.string.network_1x));
             mEntriesValue.add(value);
         }
 
@@ -771,7 +777,7 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         private String[] getEntryValues() {
-            final Integer [] intArr = mEntriesValue.toArray(new Integer[0]);
+            final Integer[] intArr = mEntriesValue.toArray(new Integer[0]);
             return Arrays.stream(intArr)
                     .map(String::valueOf)
                     .toArray(String[]::new);
@@ -800,7 +806,7 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         private void setSummary(int summaryResId) {
-            setSummary(mContext.getString(summaryResId));
+            setSummary(getResourcesForSubId().getString(summaryResId));
         }
 
         private void setSummary(String summary) {

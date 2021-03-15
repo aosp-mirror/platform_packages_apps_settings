@@ -102,43 +102,80 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
         mLocalMediaManager.stopScan();
     }
 
-    private void refreshPreference() {
-        mPreferenceCategory.removeAll();
+    private synchronized void refreshPreference() {
         if (!isAvailable()) {
             mPreferenceCategory.setVisible(false);
             return;
         }
         final CharSequence castVolume = mContext.getText(R.string.remote_media_volume_option_title);
         mPreferenceCategory.setVisible(true);
-
         for (RoutingSessionInfo info : mRoutingSessionInfos) {
-            if (mPreferenceCategory.findPreference(info.getId()) != null) {
-                continue;
+            final CharSequence appName = Utils.getApplicationLabel(mContext,
+                    info.getClientPackageName());
+            RemoteVolumeSeekBarPreference seekBarPreference = mPreferenceCategory.findPreference(
+                    info.getId());
+            if (seekBarPreference != null) {
+                // Update slider
+                if (seekBarPreference.getProgress() != info.getVolume()) {
+                    seekBarPreference.setProgress(info.getVolume());
+                }
+            } else {
+                // Add slider
+                seekBarPreference = new RemoteVolumeSeekBarPreference(mContext);
+                seekBarPreference.setKey(info.getId());
+                seekBarPreference.setTitle(castVolume);
+                seekBarPreference.setMax(info.getVolumeMax());
+                seekBarPreference.setProgress(info.getVolume());
+                seekBarPreference.setMin(0);
+                seekBarPreference.setOnPreferenceChangeListener(this);
+                seekBarPreference.setIcon(R.drawable.ic_volume_remote);
+                mPreferenceCategory.addPreference(seekBarPreference);
             }
-            final CharSequence appName = Utils.getApplicationLabel(
-                    mContext, info.getClientPackageName());
-            final CharSequence outputTitle = mContext.getString(R.string.media_output_label_title,
-                    appName);
-            // Add slider
-            final RemoteVolumeSeekBarPreference seekBarPreference =
-                    new RemoteVolumeSeekBarPreference(mContext);
-            seekBarPreference.setKey(info.getId());
-            seekBarPreference.setTitle(castVolume);
-            seekBarPreference.setMax(info.getVolumeMax());
-            seekBarPreference.setProgress(info.getVolume());
-            seekBarPreference.setMin(0);
-            seekBarPreference.setOnPreferenceChangeListener(this);
-            seekBarPreference.setIcon(R.drawable.ic_volume_remote);
-            mPreferenceCategory.addPreference(seekBarPreference);
-            // Add output indicator
+
+            Preference switcherPreference = mPreferenceCategory.findPreference(
+                    SWITCHER_PREFIX + info.getId());
             final boolean isMediaOutputDisabled = Utils.isMediaOutputDisabled(
                     mRouterManager, info.getClientPackageName());
-            final Preference preference = new Preference(mContext);
-            preference.setKey(SWITCHER_PREFIX + info.getId());
-            preference.setTitle(isMediaOutputDisabled ? appName : outputTitle);
-            preference.setSummary(info.getName());
-            preference.setEnabled(!isMediaOutputDisabled);
-            mPreferenceCategory.addPreference(preference);
+            final CharSequence outputTitle = mContext.getString(R.string.media_output_label_title,
+                    appName);
+            if (switcherPreference != null) {
+                // Update output indicator
+                switcherPreference.setTitle(isMediaOutputDisabled ? appName : outputTitle);
+                switcherPreference.setSummary(info.getName());
+                switcherPreference.setEnabled(!isMediaOutputDisabled);
+            } else {
+                // Add output indicator
+                switcherPreference = new Preference(mContext);
+                switcherPreference.setKey(SWITCHER_PREFIX + info.getId());
+                switcherPreference.setTitle(isMediaOutputDisabled ? appName : outputTitle);
+                switcherPreference.setSummary(info.getName());
+                switcherPreference.setEnabled(!isMediaOutputDisabled);
+                mPreferenceCategory.addPreference(switcherPreference);
+            }
+        }
+
+        // Check and remove non-active session preference
+        // There is a pair of preferences for each session. First one is a seekBar preference.
+        // The second one shows the session information and provide an entry-point to launch output
+        // switcher. It is unnecessary to go through all preferences. It is fine ignore the second
+        // preference and only to check the seekBar's key value.
+        for (int i = 0; i < mPreferenceCategory.getPreferenceCount(); i = i + 2) {
+            final Preference preference = mPreferenceCategory.getPreference(i);
+            boolean isActive = false;
+            for (RoutingSessionInfo info : mRoutingSessionInfos) {
+                if (TextUtils.equals(preference.getKey(), info.getId())) {
+                    isActive = true;
+                    break;
+                }
+            }
+            if (isActive) {
+                continue;
+            }
+            final Preference switcherPreference = mPreferenceCategory.getPreference(i + 1);
+            if (switcherPreference != null) {
+                mPreferenceCategory.removePreference(preference);
+                mPreferenceCategory.removePreference(switcherPreference);
+            }
         }
     }
 
@@ -159,11 +196,11 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             if (TextUtils.equals(info.getId(),
                     preference.getKey().substring(SWITCHER_PREFIX.length()))) {
                 final Intent intent = new Intent()
-                        .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                        .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
                         .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
                                 info.getClientPackageName());
-                mContext.startActivity(intent);
+                mContext.sendBroadcast(intent);
                 return true;
             }
         }
@@ -181,8 +218,10 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             // Preference group is not ready.
             return;
         }
-        initRemoteMediaSession();
-        refreshPreference();
+        ThreadUtils.postOnMainThread(() -> {
+            initRemoteMediaSession();
+            refreshPreference();
+        });
     }
 
     @Override

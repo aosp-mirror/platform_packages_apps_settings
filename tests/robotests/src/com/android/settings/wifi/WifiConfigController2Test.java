@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
@@ -31,8 +30,6 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
-import android.os.ServiceSpecificException;
-import android.security.KeyStore;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -47,8 +44,11 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
 import com.android.wifitrackerlib.WifiEntry;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,9 +75,13 @@ public class WifiConfigController2Test {
     @Mock
     private WifiEntry mWifiEntry;
     @Mock
-    private KeyStore mKeyStore;
+    private AndroidKeystoreAliasLoader mAndroidKeystoreAliasLoader;
     private View mView;
     private Spinner mHiddenSettingsSpinner;
+    private Spinner mEapCaCertSpinner;
+    private Spinner mEapUserCertSpinner;
+    private String mUseSystemCertsString;
+    private String mDoNotProvideEapUserCertString;
     private ShadowSubscriptionManager mShadowSubscriptionManager;
 
     public WifiConfigController2 mController;
@@ -98,6 +102,9 @@ public class WifiConfigController2Test {
     private static final String NUMBER_AND_CHARACTER_KEY = "123456abcd";
     private static final String PARTIAL_NUMBER_AND_CHARACTER_KEY = "123456abc?";
     private static final int DHCP = 0;
+    // Saved certificates
+    private static final String SAVED_CA_CERT = "saved CA cert";
+    private static final String SAVED_USER_CERT = "saved user cert";
 
     @Before
     public void setUp() {
@@ -108,6 +115,11 @@ public class WifiConfigController2Test {
         mView = LayoutInflater.from(mContext).inflate(R.layout.wifi_dialog, null);
         final Spinner ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
+        mEapCaCertSpinner = mView.findViewById(R.id.ca_cert);
+        mEapUserCertSpinner = mView.findViewById(R.id.user_cert);
+        mUseSystemCertsString = mContext.getString(R.string.wifi_use_system_certs);
+        mDoNotProvideEapUserCertString =
+                mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
         ipSettingsSpinner.setSelection(DHCP);
         mShadowSubscriptionManager = shadowOf(mContext.getSystemService(SubscriptionManager.class));
 
@@ -270,27 +282,11 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    public void loadCertificates_keyStoreListFail_shouldNotCrash() {
-        // Set up
-        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
-        when(mKeyStore.list(anyString()))
-            .thenThrow(new ServiceSpecificException(-1, "permission error"));
-
-        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
-              WifiConfigUiBase2.MODE_CONNECT);
-
-        // Verify that the EAP method menu is visible.
-        assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.VISIBLE);
-        // No Crash
-    }
-
-    @Test
     public void loadCertificates_undesiredCertificates_shouldNotLoadUndesiredCertificates() {
         final Spinner spinner = new Spinner(mContext);
-        when(mKeyStore.list(anyString())).thenReturn(WifiConfigController.UNDESIRED_CERTIFICATES);
 
         mController.loadCertificates(spinner,
-                "prefix",
+                Arrays.asList(WifiConfigController.UNDESIRED_CERTIFICATES),
                 "doNotProvideEapUserCertString",
                 false /* showMultipleCerts */,
                 false /* showUsePreinstalledCertOption */);
@@ -421,8 +417,8 @@ public class WifiConfigController2Test {
         }
 
         @Override
-        KeyStore getKeyStore() {
-            return mKeyStore;
+        AndroidKeystoreAliasLoader getAndroidKeystoreAliasLoader() {
+            return mAndroidKeystoreAliasLoader;
         }
     }
 
@@ -834,5 +830,77 @@ public class WifiConfigController2Test {
 
         final WifiConfiguration wifiConfiguration = mController.getConfig();
         assertThat(wifiConfiguration.carrierId).isEqualTo(carrierId);
+    }
+
+    @Test
+    public void loadCaCertificateValue_shouldPersistentAsDefault() {
+        setUpModifyingSavedCertificateConfigController(null, null);
+
+        assertThat(mEapCaCertSpinner.getSelectedItem()).isEqualTo(mUseSystemCertsString);
+    }
+
+    @Test
+    public void loadSavedCaCertificateValue_shouldBeCorrectValue() {
+        setUpModifyingSavedCertificateConfigController(SAVED_CA_CERT, null);
+
+        assertThat(mEapCaCertSpinner.getSelectedItem()).isEqualTo(SAVED_CA_CERT);
+    }
+
+    @Test
+    public void loadUserCertificateValue_shouldPersistentAsDefault() {
+        setUpModifyingSavedCertificateConfigController(null, null);
+
+        assertThat(mEapUserCertSpinner.getSelectedItem()).isEqualTo(mDoNotProvideEapUserCertString);
+    }
+
+    @Test
+    public void loadSavedUserCertificateValue_shouldBeCorrectValue() {
+        setUpModifyingSavedCertificateConfigController(null, SAVED_USER_CERT);
+
+        assertThat(mEapUserCertSpinner.getSelectedItem()).isEqualTo(SAVED_USER_CERT);
+    }
+
+    private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
+            String savedUserCertificate) {
+        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+
+        mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mockWifiEnterpriseConfig.getEapMethod()).thenReturn(Eap.TLS);
+        if (savedCaCertificate != null) {
+            String[] savedCaCertificates = new String[]{savedCaCertificate};
+            when(mockWifiEnterpriseConfig.getCaCertificateAliases())
+                    .thenReturn(savedCaCertificates);
+            when(mAndroidKeystoreAliasLoader.getCaCertAliases())
+                    .thenReturn(ImmutableList.of(savedCaCertificate));
+        }
+        if (savedUserCertificate != null) {
+            String[] savedUserCertificates = new String[]{savedUserCertificate};
+            when(mockWifiEnterpriseConfig.getClientCertificateAlias())
+                    .thenReturn(savedUserCertificate);
+            when(mAndroidKeystoreAliasLoader.getKeyCertAliases())
+                    .thenReturn(ImmutableList.of(savedUserCertificate));
+        }
+
+        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
+                WifiConfigUiBase2.MODE_MODIFY);
+
+        //  Because Robolectric has a different behavior from normal flow.
+        //
+        //  Normal flow:
+        //    showSecurityFields start -> mEapMethodSpinner.setSelection
+        //        -> showSecurityFields end -> mController.onItemSelected
+        //
+        //  Robolectric flow:
+        //    showSecurityFields start -> mEapMethodSpinner.setSelection
+        //        -> mController.onItemSelected -> showSecurityFields end
+        //
+        //  We need to add a redundant mEapMethodSpinner.setSelection here to verify whether the
+        //  certificates are covered by mController.onItemSelected after showSecurityFields end.
+        mController.mEapMethodSpinner.setSelection(Eap.TLS);
     }
 }
