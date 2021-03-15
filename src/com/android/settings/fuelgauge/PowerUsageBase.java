@@ -29,7 +29,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.dashboard.DashboardFragment;
 
 /**
@@ -44,22 +43,14 @@ public abstract class PowerUsageBase extends DashboardFragment {
     private static final String KEY_REFRESH_TYPE = "refresh_type";
     private static final String KEY_INCLUDE_HISTORY = "include_history";
 
-    private static final int LOADER_BATTERY_STATS_HELPER = 0;
     private static final int LOADER_BATTERY_USAGE_STATS = 1;
 
-    protected BatteryStatsHelper mStatsHelper;
     @VisibleForTesting
     BatteryUsageStats mBatteryUsageStats;
 
     protected UserManager mUm;
     private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     protected boolean mIsBatteryPresent = true;
-
-    // TODO(b/180630447): switch to BatteryUsageStatsLoader and remove all references to
-    // BatteryStatsHelper and BatterySipper
-    @VisibleForTesting
-    final BatteryStatsHelperLoaderCallbacks mBatteryStatsHelperLoaderCallbacks =
-            new BatteryStatsHelperLoaderCallbacks();
 
     @VisibleForTesting
     final BatteryUsageStatsLoaderCallbacks mBatteryUsageStatsLoaderCallbacks =
@@ -69,13 +60,11 @@ public abstract class PowerUsageBase extends DashboardFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mUm = (UserManager) activity.getSystemService(Context.USER_SERVICE);
-        mStatsHelper = new BatteryStatsHelper(activity, true);
     }
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mStatsHelper.create(icicle);
         setHasOptionsMenu(true);
 
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(getContext());
@@ -103,18 +92,11 @@ public abstract class PowerUsageBase extends DashboardFragment {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
         bundle.putBoolean(KEY_INCLUDE_HISTORY, isBatteryHistoryNeeded());
-        getLoaderManager().restartLoader(LOADER_BATTERY_STATS_HELPER, bundle,
-                mBatteryStatsHelperLoaderCallbacks);
         getLoaderManager().restartLoader(LOADER_BATTERY_USAGE_STATS, bundle,
                 mBatteryUsageStatsLoaderCallbacks);
     }
 
     private void onLoadFinished(@BatteryUpdateType int refreshType) {
-        // Wait for both loaders to finish before proceeding.
-        if (mStatsHelper == null || mBatteryUsageStats == null) {
-            return;
-        }
-
         refreshUi(refreshType);
     }
 
@@ -125,28 +107,6 @@ public abstract class PowerUsageBase extends DashboardFragment {
         final long startTime = System.currentTimeMillis();
         historyPref.setBatteryUsageStats(mBatteryUsageStats);
         BatteryUtils.logRuntime(TAG, "updatePreference", startTime);
-    }
-
-    private class BatteryStatsHelperLoaderCallbacks
-            implements LoaderManager.LoaderCallbacks<BatteryStatsHelper> {
-        private int mRefreshType;
-
-        @Override
-        public Loader<BatteryStatsHelper> onCreateLoader(int id, Bundle args) {
-            mRefreshType = args.getInt(KEY_REFRESH_TYPE);
-            return new BatteryStatsHelperLoader(getContext());
-        }
-
-        @Override
-        public void onLoadFinished(Loader<BatteryStatsHelper> loader,
-                BatteryStatsHelper batteryHelper) {
-            mStatsHelper = batteryHelper;
-            PowerUsageBase.this.onLoadFinished(mRefreshType);
-        }
-
-        @Override
-        public void onLoaderReset(Loader<BatteryStatsHelper> loader) {
-        }
     }
 
     private class BatteryUsageStatsLoaderCallbacks

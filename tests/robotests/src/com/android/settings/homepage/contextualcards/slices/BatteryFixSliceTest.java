@@ -30,9 +30,7 @@ import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
 import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
@@ -135,15 +133,6 @@ public class BatteryFixSliceTest {
         final Slice slice = mSlice.getSlice();
 
         assertThat(ShadowEarlyWarningTip.isIconTintColorIdCalled()).isTrue();
-    }
-
-    @Implements(BatteryStatsHelperLoader.class)
-    public static class ShadowBatteryStatsHelperLoader {
-
-        @Implementation
-        protected BatteryStatsHelper loadInBackground() {
-            return null;
-        }
     }
 
     @Implements(BatteryUsageStatsLoader.class)
