@@ -202,4 +202,20 @@ public class TopLevelWallpaperPreferenceControllerTest {
         assertThat(Shadows.shadowOf(mContext).getNextStartedActivityForResult()
                 .intent.hasExtra("com.android.wallpaper.LAUNCH_SOURCE")).isTrue();
     }
+
+    @Test
+    public void handlePreferenceTreeClick_launchClearTask() {
+        mShadowPackageManager.setResolveInfosForIntent(
+                mWallpaperIntent, Lists.newArrayList());
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent, Lists.newArrayList(mock(ResolveInfo.class)));
+
+        Preference preference = new Preference(mContext);
+        preference.setKey(TEST_KEY);
+
+        mController.handlePreferenceTreeClick(preference);
+
+        assertThat((Shadows.shadowOf(mContext).getNextStartedActivityForResult()
+                .intent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TASK) != 0).isTrue();
+    }
 }

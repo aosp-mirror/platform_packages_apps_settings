@@ -105,7 +105,7 @@ public class TopLevelWallpaperPreferenceController extends BasePreferenceControl
             final Intent intent = new Intent().setComponent(
                     getComponentName()).putExtra(mWallpaperLaunchExtra, LAUNCHED_SETTINGS);
             if (areStylesAvailable()) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             }
             preference.getContext().startActivity(intent);
             return true;
