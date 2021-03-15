@@ -17,11 +17,6 @@
 package com.android.settings.network.telephony.cdma;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
-import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -29,6 +24,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -44,22 +40,25 @@ public abstract class CdmaBasePreferenceController extends TelephonyBasePreferen
     protected Preference mPreference;
     protected TelephonyManager mTelephonyManager;
     protected PreferenceManager mPreferenceManager;
-    private DataContentObserver mDataContentObserver;
+    private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
 
     public CdmaBasePreferenceController(Context context, String key) {
         super(context, key);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
     }
 
     @Override
     public void onStart() {
-        mDataContentObserver.register(mContext, mSubId);
+        if (mAllowedNetworkTypesListener != null) {
+            mAllowedNetworkTypesListener.register(mContext, mSubId);
+        }
     }
 
     @Override
     public void onStop() {
-        mDataContentObserver.unRegister(mContext);
+        if (mAllowedNetworkTypesListener != null) {
+            mAllowedNetworkTypesListener.unregister(mContext, mSubId);
+        }
     }
 
     @Override
@@ -74,10 +73,23 @@ public abstract class CdmaBasePreferenceController extends TelephonyBasePreferen
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+
+        if (mAllowedNetworkTypesListener == null) {
+            mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
+                    mContext.getMainExecutor());
+            mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
+                    () -> updatePreference());
+        }
     }
 
     public void init(int subId) {
         init(null, subId);
+    }
+
+    private void updatePreference() {
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     @Override
@@ -86,32 +98,6 @@ public abstract class CdmaBasePreferenceController extends TelephonyBasePreferen
         mPreference = screen.findPreference(getPreferenceKey());
         if (mPreference instanceof CdmaListPreference) {
             ((CdmaListPreference) mPreference).setSubId(mSubId);
-        }
-    }
-
-    /**
-     * Listener that listens to mobile data state change.
-     */
-    public class DataContentObserver extends ContentObserver {
-
-        public DataContentObserver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-            updateState(mPreference);
-        }
-
-        public void register(Context context, int subId) {
-            final Uri uri = Settings.Global.getUriFor(
-                    Settings.Global.PREFERRED_NETWORK_MODE + subId);
-            context.getContentResolver().registerContentObserver(uri, false, this);
-        }
-
-        public void unRegister(Context context) {
-            context.getContentResolver().unregisterContentObserver(this);
         }
     }
 }

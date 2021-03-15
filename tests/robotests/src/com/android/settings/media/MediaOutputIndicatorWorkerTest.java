@@ -261,4 +261,29 @@ public class MediaOutputIndicatorWorkerTest {
 
         assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isNull();
     }
+
+    @Test
+    public void getActiveLocalMediaController_bothHaveRemoteMediaAndLocalMedia_returnNull() {
+        final MediaController.PlaybackInfo playbackInfo = new MediaController.PlaybackInfo(
+                MediaController.PlaybackInfo.PLAYBACK_TYPE_REMOTE,
+                VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
+                100,
+                10,
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
+                null);
+        final PlaybackState playbackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_PLAYING, 0, 1)
+                .build();
+        final MediaController remoteMediaController = mock(MediaController.class);
+
+        mMediaControllers.add(remoteMediaController);
+        initPlayback();
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        when(remoteMediaController.getPlaybackInfo()).thenReturn(playbackInfo);
+        when(remoteMediaController.getPlaybackState()).thenReturn(playbackState);
+
+        assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isNull();
+    }
 }
