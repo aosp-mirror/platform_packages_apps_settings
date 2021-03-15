@@ -27,6 +27,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
+import android.security.Credentials;
+import android.security.LegacyVpnProfileStore;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -36,8 +38,11 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
+import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.vpn2.VpnInfoPreference;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -147,6 +152,10 @@ public class VpnPreferenceController extends AbstractPreferenceController
         } else {
             summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
         }
+        // Optionally add warning icon if an insecure VPN is present.
+        if (Utils.isProviderModelEnabled(mContext) && mPreference instanceof VpnInfoPreference) {
+            ((VpnInfoPreference) mPreference).setInsecureVpn(hasInsecureVpn());
+        }
         ThreadUtils.postOnMainThread(() -> mPreference.setSummary(summary));
     }
 
@@ -165,6 +174,20 @@ public class VpnPreferenceController extends AbstractPreferenceController
             Log.e(TAG, "Package " + vpnPackage + " is not present", nnfe);
             return null;
         }
+    }
+
+    @VisibleForTesting
+    protected boolean hasInsecureVpn() {
+        for (String key : LegacyVpnProfileStore.list(Credentials.VPN)) {
+            final VpnProfile profile = VpnProfile.decode(key,
+                    LegacyVpnProfileStore.get(Credentials.VPN + key));
+            // Return whether any profile is an insecure type.
+            if (VpnProfile.isLegacyType(profile.type)) {
+                return true;
+            }
+        }
+        // We did not find any insecure VPNs.
+        return false;
     }
 
     // Copied from SystemUI::SecurityControllerImpl
