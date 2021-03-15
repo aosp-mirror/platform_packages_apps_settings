@@ -18,8 +18,10 @@ package com.android.settings.privacy;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
@@ -27,14 +29,18 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDeviceConfig.class})
 public class ShowClipAccessNotificationPreferenceControllerTest {
 
     @Mock
@@ -54,17 +60,45 @@ public class ShowClipAccessNotificationPreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_settingIsOff_shouldReturnFalse() throws Exception {
+    public void isChecked_settingIsOff_shouldReturnFalse() {
         setProperty(0);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
-    public void isChecked_settingIsOn_shouldReturnTrue() throws Exception {
+    public void isChecked_settingIsOn_shouldReturnTrue() {
         setProperty(1);
 
         assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_settingIsUnset_deviceConfigProvidesDefaultOfTrue() {
+        clearProperty();
+
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_CLIPBOARD,
+                ClipboardManager.DEVICE_CONFIG_SHOW_ACCESS_NOTIFICATIONS,
+                "true", false);
+
+        ShowClipAccessNotificationPreferenceController controller =
+                new ShowClipAccessNotificationPreferenceController(mContext);
+
+        assertThat(controller.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_settingIsUnset_deviceConfigProvidesDefaultOfFalse() {
+        clearProperty();
+
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_CLIPBOARD,
+                ClipboardManager.DEVICE_CONFIG_SHOW_ACCESS_NOTIFICATIONS,
+                "false", false);
+
+        ShowClipAccessNotificationPreferenceController controller =
+                new ShowClipAccessNotificationPreferenceController(mContext);
+
+        assertThat(controller.isChecked()).isFalse();
     }
 
     @Test
@@ -91,6 +125,12 @@ public class ShowClipAccessNotificationPreferenceControllerTest {
         final ContentResolver contentResolver = mContext.getContentResolver();
         Settings.Secure.putInt(
                 contentResolver, Settings.Secure.CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS, newValue);
+    }
+
+    private void clearProperty() {
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.Secure.putString(
+                contentResolver, Settings.Secure.CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS, null);
     }
 
     private void assertProperty(int expectedValue) throws SettingNotFoundException {
