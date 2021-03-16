@@ -294,6 +294,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                     p.setState(LegacyVpnPreference.STATE_NONE);
                 }
                 p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(profile.key));
+                p.setInsecureVpn(VpnProfile.isLegacyType(profile.type));
                 updates.add(p);
             }
 
@@ -303,6 +304,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 LegacyVpnPreference p = mSettings.findOrCreatePreference(stubProfile, false);
                 p.setState(vpn.state);
                 p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(vpn.key));
+                p.setInsecureVpn(VpnProfile.isLegacyType(stubProfile.type));
                 updates.add(p);
             }
 
