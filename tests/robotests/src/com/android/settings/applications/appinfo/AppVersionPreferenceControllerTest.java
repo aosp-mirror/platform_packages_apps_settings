@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -61,5 +63,14 @@ public class AppVersionPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setSummary("version test1234");
+    }
+
+    @Test
+    public void updateState_packageInfoNull_shouldNotCrash() {
+        when(mFragment.getPackageInfo()).thenReturn(null);
+
+        mController.updateState(mPreference);
+
+        assertThat(mController.getSummary()).isNull();
     }
 }
