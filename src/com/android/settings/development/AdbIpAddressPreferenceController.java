@@ -126,7 +126,7 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
      * @return the formatted and newline-separated IP addresses, or null if none.
      */
     private static String getDefaultIpAddresses(ConnectivityManager cm) {
-        LinkProperties prop = cm.getActiveLinkProperties();
+        LinkProperties prop = cm.getLinkProperties(cm.getActiveNetwork());
         return formatIpAddresses(prop);
     }
 
