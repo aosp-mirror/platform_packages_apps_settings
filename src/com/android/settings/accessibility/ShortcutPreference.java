@@ -63,7 +63,7 @@ public class ShortcutPreference extends Preference {
         super(context, attrs);
         setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
         setWidgetLayoutResource(R.layout.preference_widget_primary_switch);
-        setIconSpaceReserved(true);
+        setIconSpaceReserved(false);
     }
 
     @Override
