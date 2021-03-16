@@ -21,7 +21,6 @@ import static android.provider.Settings.Secure.CAMERA_AUTOROTATE;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.preference.Preference;
 
@@ -33,8 +32,6 @@ import com.android.settings.core.BasePreferenceController;
  * SmartAutoRotatePreferenceController provides auto rotate summary in display settings
  */
 public class SmartAutoRotatePreferenceController extends BasePreferenceController {
-
-    private static final String TAG = "SmartAutoRotatePreferenceController";
 
     public SmartAutoRotatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -54,16 +51,12 @@ public class SmartAutoRotatePreferenceController extends BasePreferenceControlle
     public CharSequence getSummary() {
         int activeStringId = R.string.auto_rotate_option_off;
         if (!RotationPolicy.isRotationLocked(mContext)) {
-            try {
-                final int cameraRotate = Settings.Secure.getIntForUser(
-                        mContext.getContentResolver(),
-                        CAMERA_AUTOROTATE,
-                        UserHandle.USER_CURRENT);
-                activeStringId = cameraRotate == 1 ? R.string.auto_rotate_option_face_based
-                        : R.string.auto_rotate_option_on;
-            } catch (Settings.SettingNotFoundException e) {
-                Log.w(TAG, "CAMERA_AUTOROTATE setting not found", e);
-            }
+            final int cameraRotate = Settings.Secure.getIntForUser(
+                    mContext.getContentResolver(),
+                    CAMERA_AUTOROTATE,
+                    0, UserHandle.USER_CURRENT);
+            activeStringId = cameraRotate == 1 ? R.string.auto_rotate_option_face_based
+                    : R.string.auto_rotate_option_on;
         }
         return mContext.getString(activeStringId);
     }
