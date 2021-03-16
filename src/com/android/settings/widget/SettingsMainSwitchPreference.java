@@ -186,6 +186,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference {
      * Enable or disable the text and switch.
      */
     public void setSwitchBarEnabled(boolean enabled) {
+        setEnabled(enabled);
         if (mMainSwitchBar != null) {
             mMainSwitchBar.setEnabled(enabled);
         }
