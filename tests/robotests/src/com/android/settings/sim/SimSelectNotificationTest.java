@@ -15,7 +15,6 @@
  */
 package com.android.settings.sim;
 
-
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_INCOMING_MMS;
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_OUTGOING_MMS;

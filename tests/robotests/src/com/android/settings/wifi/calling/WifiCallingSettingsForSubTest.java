@@ -16,11 +16,11 @@
 
 package com.android.settings.wifi.calling;
 
+import static junit.framework.Assert.assertEquals;
+
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static junit.framework.Assert.assertEquals;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
