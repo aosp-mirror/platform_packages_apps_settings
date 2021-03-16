@@ -9833,6 +9833,18 @@
     <!-- Runtime permissions preference summary, which describes what the permission manager does. [CHAR LIMIT=NONE] -->
     <string name="runtime_permissions_summary_control_app_access">Control app access to your data</string>
 
+    <!-- Label for showing apps that have not been used for months. [CHAR LIMIT=40]-->
+    <string name="unused_apps">Unused apps</string>
+
+    <!-- Summary of number of apps that have not been used for months. [CHAR LIMIT=40]-->
+    <plurals name="unused_apps_summary">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> unused app</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> unused apps</item>
+    </plurals>
+
+    <!-- Label of a switch preference that controls whether the system will remove the permissions and free up space when the app has not been used for months [CHAR LIMIT=40]-->
+    <string name="unused_apps_switch">Remove permissions and free up space</string>
+
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
     <!-- Label for showing enabled apps in list [CHAR LIMIT=30] -->
