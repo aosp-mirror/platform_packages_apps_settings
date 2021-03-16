@@ -28,7 +28,6 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.shadow.api.Shadow.extract;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -88,9 +87,7 @@ public class MobileNetworkPreferenceControllerTest {
     public void secondaryUser_prefIsNotAvailable() {
         ShadowUserManager userManager = extract(mContext.getSystemService(UserManager.class));
         userManager.setIsAdminUser(false);
-        ShadowConnectivityManager connectivityManager =
-                extract(mContext.getSystemService(ConnectivityManager.class));
-        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);
+        when(mTelephonyManager.isDataCapable()).thenReturn(true);
 
         mController = new MobileNetworkPreferenceController(mContext);
         assertThat(mController.isAvailable()).isFalse();
@@ -100,10 +97,7 @@ public class MobileNetworkPreferenceControllerTest {
     public void wifiOnly_prefIsNotAvailable() {
         ShadowUserManager userManager = extract(mContext.getSystemService(UserManager.class));
         userManager.setIsAdminUser(true);
-        ShadowConnectivityManager connectivityManager =
-                extract(mContext.getSystemService(ConnectivityManager.class));
-        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
-
+        when(mTelephonyManager.isDataCapable()).thenReturn(false);
         mController = new MobileNetworkPreferenceController(mContext);
         assertThat(mController.isAvailable()).isFalse();
     }
