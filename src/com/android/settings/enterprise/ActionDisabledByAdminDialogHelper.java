@@ -141,17 +141,14 @@ public class ActionDisabledByAdminDialogHelper {
     }
 
     private boolean isNotCurrentUserOrProfile(ComponentName admin, int userId) {
-        return !isFinancedDevice()
-                && (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
-                        || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId));
+        return !RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
+                || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId);
     }
 
     @VisibleForTesting
     void setAdminSupportIcon(View root, ComponentName admin, int userId) {
         ImageView supportIconView = root.requireViewById(R.id.admin_support_icon);
-        if (isFinancedDevice()) {
-            supportIconView.setVisibility(View.GONE);
-        } else if (isNotCurrentUserOrProfile(admin, userId)) {
+        if (isNotCurrentUserOrProfile(admin, userId)) {
             supportIconView.setImageDrawable(
                     mActivity.getDrawable(com.android.internal.R.drawable.ic_info));
 
