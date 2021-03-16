@@ -5102,6 +5102,8 @@
     <string name="accessibility_tutorial_dialog_title_gesture_settings">Use new accessibility gesture</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_button">To use this feature, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
+    <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the accessibility floating button. [CHAR LIMIT=100] -->
+    <string name="accessibility_tutorial_dialog_message_floating_button">To use this feature, tap the accessibility button on your screen.</string>
     <!-- Instruction for the accessibility tutorial dialog in accessibility service with volume keys. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_message_volume">To use this feature, press &amp; hold both volume keys.</string>
     <!-- Instruction for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
@@ -5132,6 +5134,8 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
+    <!-- Summary for software shortcut in accessibility edit shortcut dialog when user had enabled the accessibility floating button mode (Floating over other apps). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">Customize accessibility button</annotation></string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
@@ -7476,6 +7480,8 @@
     <string name="help_uri_nfc_and_payment_settings" translatable="false"></string>
     <!-- url for battery page if battery is not present -->
     <string name="help_url_battery_missing" translatable="false"></string>
+    <!-- url for vpn page if connected vpn is not a secure type -->
+    <string name="help_url_insecure_vpn" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -9544,6 +9550,9 @@
     <!-- [CHAR LIMIT=NONE] Content description for per-app notification
          settings button -->
     <string name="notification_app_settings_button">Notification settings</string>
+
+    <!-- Content description for help icon button [CHAR LIMIT=20] -->
+    <string name="warning_button_text">Warning</string>
 
     <!-- Generic label for suggestion card's ok button [CHAR LIMIT=20] -->
     <string name="suggestion_button_text">Ok</string>
@@ -12809,36 +12818,36 @@
     <!-- Title for bluetooth main switch. [CHAR LIMIT=50] -->
     <string name="bluetooth_main_switch_title">Use Bluetooth</string>
 
-    <!-- Do not translate. Title for prevent ringing main switch. [CHAR LIMIT=50] -->
-    <string name="prevent_ringing_main_switch_title" translatable="false">Use prevent ringing</string>
-    <!-- Do not translate. Title for use wifi hotspot main switch [CHAR LIMIT=50]-->
-    <string name="use_wifi_hotsopt_main_switch_title" translatable="false">Use Wi\u2011Fi hotspot</string>
-    <!-- Do not translate. Title for app pinning main switch. [CHAR LIMIT=50] -->
-    <string name="app_pinning_main_switch_title" translatable="false">Use app pinning</string>
-    <!-- Do not translate. Title for developer options main switch. [CHAR LIMIT=50] -->
-    <string name="developer_options_main_switch_title" translatable="false">Use developer options</string>
-    <!-- Do not translate. Title for default print service main switch. [CHAR LIMIT=50] -->
-    <string name="default_print_service_main_switch_title" translatable="false">Use default print service</string>
-    <!-- Do not translate. Title for multiple users main switch. [CHAR LIMIT=50] -->
-    <string name="multiple_users_main_switch_title" translatable="false">Use multiple users</string>
-    <!-- Do not translate. Title for wireless debugging main switch. [CHAR LIMIT=50] -->
-    <string name="wireless_debugging_main_switch_title" translatable="false">Use wireless debugging</string>
-    <!-- Do not translate. Title for graphics driver main switch. [CHAR LIMIT=50] -->
-    <string name="graphics_driver_main_switch_title" translatable="false">Use graphics driver preferences</string>
-    <!-- Do not translate. Title for battery saver main switch preferences. [CHAR LIMIT=50] -->
-    <string name="battery_saver_main_switch_title" translatable="false">Use battery saver</string>
-    <!-- Do not translate. Title for Do Not Disturb main switch preferences. [CHAR LIMIT=50] -->
-    <string name="do_not_disturb_main_switch_title" translatable="false">Use Do Not Disturb</string>
-    <!-- Do not translate. Title for Night Light main switch preferences. [CHAR LIMIT=50] -->
-    <string name="night_light_main_switch_title" translatable="false">Use Night Light</string>
-    <!-- Do not translate. Title for NFC main switch preferences. [CHAR LIMIT=50] -->
-    <string name="nfc_main_switch_title" translatable="false">Use NFC</string>
-    <!-- Do not translate. Title for Adaptive Battery main switch preferences. [CHAR LIMIT=50] -->
-    <string name="adaptive_battery_main_switch_title" translatable="false">Use adaptive battery</string>
-    <!-- Do not translate. Title for adaptive brightness main switch preferences. [CHAR LIMIT=50] -->
-    <string name="adaptive_brightness_main_switch_title" translatable="false">Use adaptive brightness</string>
-    <!-- Do not translate. Title for wifi calling main switch preferences. [CHAR LIMIT=50] -->
-    <string name="wifi_calling_main_switch_title" translatable="false">Use Wi-Fi calling</string>
+    <!-- Title for prevent ringing main switch. [CHAR LIMIT=50] -->
+    <string name="prevent_ringing_main_switch_title">Use prevent ringing</string>
+    <!-- Title for use wifi hotspot main switch [CHAR LIMIT=50]-->
+    <string name="use_wifi_hotsopt_main_switch_title">Use Wi\u2011Fi hotspot</string>
+    <!-- Title for app pinning main switch. [CHAR LIMIT=50] -->
+    <string name="app_pinning_main_switch_title">Use app pinning</string>
+    <!-- Title for developer options main switch. [CHAR LIMIT=50] -->
+    <string name="developer_options_main_switch_title">Use developer options</string>
+    <!-- Title for default print service main switch. [CHAR LIMIT=50] -->
+    <string name="default_print_service_main_switch_title">Use default print service</string>
+    <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
+    <string name="multiple_users_main_switch_title">Use multiple users</string>
+    <!-- Title for wireless debugging main switch. [CHAR LIMIT=50] -->
+    <string name="wireless_debugging_main_switch_title">Use wireless debugging</string>
+    <!-- Title for graphics driver main switch. [CHAR LIMIT=50] -->
+    <string name="graphics_driver_main_switch_title">Use graphics driver preferences</string>
+    <!-- Title for battery saver main switch preferences. [CHAR LIMIT=50] -->
+    <string name="battery_saver_main_switch_title">Use battery saver</string>
+    <!-- Title for Do Not Disturb main switch preferences. [CHAR LIMIT=50] -->
+    <string name="do_not_disturb_main_switch_title">Use Do Not Disturb</string>
+    <!-- Title for Night Light main switch preferences. [CHAR LIMIT=50] -->
+    <string name="night_light_main_switch_title">Use Night Light</string>
+    <!-- Title for NFC main switch preferences. [CHAR LIMIT=50] -->
+    <string name="nfc_main_switch_title">Use NFC</string>
+    <!-- Title for Adaptive Battery main switch preferences. [CHAR LIMIT=50] -->
+    <string name="adaptive_battery_main_switch_title">Use adaptive battery</string>
+    <!-- Title for adaptive brightness main switch preferences. [CHAR LIMIT=50] -->
+    <string name="adaptive_brightness_main_switch_title">Use adaptive brightness</string>
+    <!-- Title for wifi calling main switch preferences. [CHAR LIMIT=50] -->
+    <string name="wifi_calling_main_switch_title">Use Wi‑Fi calling</string>
 
     <!-- Default preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="default_see_all_apps_title">See all apps</string>
