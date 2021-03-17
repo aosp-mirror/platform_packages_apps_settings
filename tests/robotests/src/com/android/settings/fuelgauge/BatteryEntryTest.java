@@ -17,6 +17,8 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -24,8 +26,12 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.BatteryConsumer;
+import android.os.BatteryStats;
 import android.os.Handler;
 import android.os.Process;
+import android.os.SystemBatteryConsumer;
+import android.os.UidBatteryConsumer;
 import android.os.UserManager;
 
 import com.android.internal.os.BatterySipper;
@@ -61,6 +67,9 @@ public class BatteryEntryTest {
     @Mock private Handler mockHandler;
     @Mock private PackageManager mockPackageManager;
     @Mock private UserManager mockUserManager;
+    @Mock private UidBatteryConsumer mUidBatteryConsumer;
+    @Mock private SystemBatteryConsumer mSystemBatteryConsumer;
+    @Mock BatteryUtils mBatteryUtils;
 
     @Before
     public void stubContextToReturnMockPackageManager() {
@@ -80,7 +89,7 @@ public class BatteryEntryTest {
 
     private BatteryEntry createBatteryEntryForApp() {
         return new BatteryEntry(mockContext, mockHandler, mockUserManager, createSipperForApp(),
-                null);
+                null, null);
     }
 
     private BatterySipper createSipperForApp() {
@@ -88,11 +97,6 @@ public class BatteryEntryTest {
             new BatterySipper(DrainType.APP, new FakeUid(APP_UID), 0 /* power use */);
         sipper.packageWithHighestDrain = HIGH_DRAIN_PACKAGE;
         return sipper;
-    }
-
-    private BatteryEntry createBatteryEntryForSystem() {
-        return new BatteryEntry(mockContext, mockHandler, mockUserManager, createSipperForSystem(),
-                null);
     }
 
     private BatterySipper createSipperForSystem() {
@@ -103,11 +107,15 @@ public class BatteryEntryTest {
         return sipper;
     }
 
+    private BatterySipper createNonAppSipper() {
+        return new BatterySipper(DrainType.IDLE, null, 0 /* power use */);
+    }
+
     @Test
     public void batteryEntryForApp_shouldSetDefaultPackageNameAndLabel() throws Exception {
         BatteryEntry entry = createBatteryEntryForApp();
 
-        assertThat(entry.defaultPackageName).isEqualTo(APP_DEFAULT_PACKAGE_NAME);
+        assertThat(entry.getDefaultPackageName()).isEqualTo(APP_DEFAULT_PACKAGE_NAME);
         assertThat(entry.getLabel()).isEqualTo(APP_LABEL);
     }
 
@@ -146,7 +154,7 @@ public class BatteryEntryTest {
         final BatterySipper batterySipper = mock(BatterySipper.class);
         batterySipper.drainType = DrainType.AMBIENT_DISPLAY;
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
-                mockUserManager, batterySipper, null);
+                mockUserManager, batterySipper, null, null);
 
         assertThat(entry.iconId).isEqualTo(R.drawable.ic_settings_aod);
         assertThat(entry.name).isEqualTo("Ambient display");
@@ -154,17 +162,82 @@ public class BatteryEntryTest {
 
     @Test
     public void extractPackageFromSipper_systemSipper_returnSystemPackage() {
-        BatteryEntry entry = createBatteryEntryForSystem();
-
-        assertThat(entry.extractPackagesFromSipper(entry.sipper))
+        assertThat(BatteryEntry.extractPackagesFromSipper(createSipperForSystem()))
             .isEqualTo(new String[] {ANDROID_PACKAGE});
     }
 
     @Test
     public void extractPackageFromSipper_normalSipper_returnDefaultPackage() {
-        BatteryEntry entry = createBatteryEntryForApp();
+        BatterySipper sipper = createSipperForApp();
+        assertThat(BatteryEntry.extractPackagesFromSipper(sipper)).isEqualTo(sipper.mPackages);
+    }
 
-        assertThat(entry.extractPackagesFromSipper(entry.sipper)).isEqualTo(entry.sipper.mPackages);
+    @Test
+    public void getTimeInForegroundMs_app() {
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, null, mUidBatteryConsumer, null);
+
+        when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND))
+                .thenReturn(100L);
+
+        assertThat(entry.getTimeInForegroundMs(mBatteryUtils)).isEqualTo(100L);
+    }
+
+    @Test
+    public void getTimeInForegroundMs_systemConsumer() {
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, createNonAppSipper(), mSystemBatteryConsumer, null);
+
+        when(mSystemBatteryConsumer.getUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_USAGE))
+                .thenReturn(100L);
+
+        assertThat(entry.getTimeInForegroundMs(mBatteryUtils)).isEqualTo(100L);
+    }
+
+    @Test
+    public void getTimeInForegroundMs_useSipper() {
+        final BatterySipper batterySipper = createSipperForApp();
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, batterySipper, null, null);
+
+        when(mBatteryUtils.getProcessTimeMs(eq(BatteryUtils.StatusType.FOREGROUND),
+                any(BatteryStats.Uid.class), eq(BatteryStats.STATS_SINCE_CHARGED)))
+                .thenReturn(100L);
+        assertThat(entry.getTimeInForegroundMs(mBatteryUtils)).isEqualTo(100L);
+    }
+
+    @Test
+    public void getTimeInBackgroundMs_app() {
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, null, mUidBatteryConsumer, null);
+
+        when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND))
+                .thenReturn(100L);
+
+        assertThat(entry.getTimeInBackgroundMs(mBatteryUtils)).isEqualTo(100L);
+    }
+
+    @Test
+    public void getTimeInBackgroundMs_systemConsumer() {
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, createNonAppSipper(), mSystemBatteryConsumer, null);
+
+        when(mSystemBatteryConsumer.getUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_USAGE))
+                .thenReturn(100L);
+
+        assertThat(entry.getTimeInBackgroundMs(mBatteryUtils)).isEqualTo(0);
+    }
+
+    @Test
+    public void getTimeInBackgroundMs_useSipper() {
+        final BatterySipper batterySipper = createSipperForApp();
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, batterySipper, null, null);
+
+        when(mBatteryUtils.getProcessTimeMs(eq(BatteryUtils.StatusType.BACKGROUND),
+                any(BatteryStats.Uid.class), eq(BatteryStats.STATS_SINCE_CHARGED)))
+                .thenReturn(100L);
+        assertThat(entry.getTimeInBackgroundMs(mBatteryUtils)).isEqualTo(100L);
     }
 
     @Test

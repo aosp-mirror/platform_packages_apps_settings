@@ -25,15 +25,19 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
+import android.os.BatteryConsumer;
+import android.os.BatteryStats;
 import android.os.Handler;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.UidBatteryConsumer;
+import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
 import com.android.internal.os.BatterySipper;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 
@@ -122,13 +126,13 @@ public class BatteryEntry {
     }
 
     public final Context context;
-    public final BatterySipper sipper;
-    public final UidBatteryConsumer uidBatteryConsumer;
+    private final BatterySipper mSipper;
+    private final BatteryConsumer mBatteryConsumer;
 
     public String name;
     public Drawable icon;
     public int iconId; // For passing to the detail screen.
-    public String defaultPackageName;
+    private String mDefaultPackageName;
 
     static class UidToDetail {
         String name;
@@ -137,37 +141,38 @@ public class BatteryEntry {
     }
 
     public BatteryEntry(Context context, Handler handler, UserManager um, BatterySipper sipper,
-            UidBatteryConsumer uidBatteryConsumer) {
+            BatteryConsumer batteryConsumer, String packageName) {
         sHandler = handler;
         this.context = context;
-        this.sipper = sipper;
-        this.uidBatteryConsumer = uidBatteryConsumer;
+        this.mSipper = sipper;
+        this.mBatteryConsumer = batteryConsumer;
+        this.mDefaultPackageName = packageName;
 
-        // This condition is met when BatteryEntry is initialized from BatteryUsageStats.
-        // Once the conversion from BatteryStatsHelper is completed, the condition will
-        // always be true and can be removed.
-        if (uidBatteryConsumer != null) {
-            PackageManager pm = context.getPackageManager();
+        if (batteryConsumer instanceof UidBatteryConsumer) {
+            UidBatteryConsumer uidBatteryConsumer = (UidBatteryConsumer) batteryConsumer;
             int uid = uidBatteryConsumer.getUid();
-            String[] packages = pm.getPackagesForUid(uid);
-            // Apps should only have one package
-            if (packages == null || packages.length != 1) {
-                name = uidBatteryConsumer.getPackageWithHighestDrain();
-            } else {
-                defaultPackageName = packages[0];
+            PackageManager pm = context.getPackageManager();
+            if (mDefaultPackageName == null) {
+                String[] packages = pm.getPackagesForUid(uid);
+                // Apps should only have one package
+                if (packages != null && packages.length == 1) {
+                    mDefaultPackageName = packages[0];
+                } else {
+                    mDefaultPackageName = uidBatteryConsumer.getPackageWithHighestDrain();
+                }
+            }
+            if (mDefaultPackageName != null) {
                 try {
                     ApplicationInfo appInfo =
-                            pm.getApplicationInfo(defaultPackageName, 0 /* no flags */);
+                            pm.getApplicationInfo(mDefaultPackageName, 0 /* no flags */);
                     name = pm.getApplicationLabel(appInfo).toString();
                 } catch (NameNotFoundException e) {
                     Log.d(TAG, "PackageManager failed to retrieve ApplicationInfo for: "
-                            + defaultPackageName);
-                    name = defaultPackageName;
+                            + mDefaultPackageName);
+                    name = mDefaultPackageName;
                 }
             }
-            if ((name == null || iconId == 0) && uid != 0) {
-                getQuickNameIconForUid(uid);
-            }
+            getQuickNameIconForUid(uid);
             return;
         }
 
@@ -207,15 +212,15 @@ public class BatteryEntry {
                 if (sipper.mPackages == null || sipper.mPackages.length != 1) {
                     name = sipper.packageWithHighestDrain;
                 } else {
-                    defaultPackageName = pm.getPackagesForUid(sipper.uidObj.getUid())[0];
+                    mDefaultPackageName = pm.getPackagesForUid(sipper.uidObj.getUid())[0];
                     try {
                         ApplicationInfo appInfo =
-                            pm.getApplicationInfo(defaultPackageName, 0 /* no flags */);
+                                pm.getApplicationInfo(mDefaultPackageName, 0 /* no flags */);
                         name = pm.getApplicationLabel(appInfo).toString();
                     } catch (NameNotFoundException e) {
                         Log.d(TAG, "PackageManager failed to retrieve ApplicationInfo for: "
-                            + defaultPackageName);
-                        name = defaultPackageName;
+                                + mDefaultPackageName);
+                        name = mDefaultPackageName;
                     }
                 }
                 break;
@@ -250,8 +255,8 @@ public class BatteryEntry {
         if (iconId > 0) {
             icon = context.getDrawable(iconId);
         }
-        if ((name == null || iconId == 0) && this.sipper.uidObj != null) {
-            getQuickNameIconForUid(this.sipper.uidObj.getUid());
+        if ((name == null || iconId == 0) && sipper.uidObj != null) {
+            getQuickNameIconForUid(sipper.uidObj.getUid());
         }
     }
 
@@ -277,7 +282,7 @@ public class BatteryEntry {
         final String uidString = Integer.toString(uid);
         if (sUidCache.containsKey(uidString)) {
             UidToDetail utd = sUidCache.get(uidString);
-            defaultPackageName = utd.packageName;
+            mDefaultPackageName = utd.packageName;
             name = utd.name;
             icon = utd.icon;
             return;
@@ -308,17 +313,17 @@ public class BatteryEntry {
      */
     public void loadNameAndIcon() {
         // Bail out if the current sipper is not an App sipper.
-        if (sipper.uidObj == null) {
+        if (mSipper.uidObj == null) {
             return;
         }
 
         PackageManager pm = context.getPackageManager();
-        final int uid = sipper.uidObj.getUid();
-        if (sipper.mPackages == null) {
-            sipper.mPackages = pm.getPackagesForUid(uid);
+        final int uid = mSipper.uidObj.getUid();
+        if (mSipper.mPackages == null) {
+            mSipper.mPackages = pm.getPackagesForUid(uid);
         }
 
-        final String[] packages = extractPackagesFromSipper(sipper);
+        final String[] packages = extractPackagesFromSipper(mSipper);
         if (packages != null) {
             String[] packageLabels = new String[packages.length];
             System.arraycopy(packages, 0, packageLabels, 0, packages.length);
@@ -340,7 +345,7 @@ public class BatteryEntry {
                         packageLabels[i] = label.toString();
                     }
                     if (ai.icon != 0) {
-                        defaultPackageName = packages[i];
+                        mDefaultPackageName = packages[i];
                         icon = ai.loadIcon(pm);
                         break;
                     }
@@ -368,7 +373,7 @@ public class BatteryEntry {
                             if (nm != null) {
                                 name = nm.toString();
                                 if (pi.applicationInfo.icon != 0) {
-                                    defaultPackageName = pkgName;
+                                    mDefaultPackageName = pkgName;
                                     icon = pi.applicationInfo.loadIcon(pm);
                                 }
                                 break;
@@ -394,17 +399,113 @@ public class BatteryEntry {
         UidToDetail utd = new UidToDetail();
         utd.name = name;
         utd.icon = icon;
-        utd.packageName = defaultPackageName;
+        utd.packageName = mDefaultPackageName;
         sUidCache.put(uidString, utd);
         if (sHandler != null) {
             sHandler.sendMessage(sHandler.obtainMessage(MSG_UPDATE_NAME_ICON, this));
         }
     }
 
-    String[] extractPackagesFromSipper(BatterySipper sipper) {
+    static String[] extractPackagesFromSipper(BatterySipper sipper) {
         // Only use system package if uid is system uid, so it could find a consistent name and icon
         return sipper.getUid() == Process.SYSTEM_UID
                 ? new String[]{PACKAGE_SYSTEM}
                 : sipper.mPackages;
+    }
+
+    /**
+     * Returns true if this entry describes an app (UID)
+     */
+    public boolean isAppEntry() {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return true;
+        } else {
+            return mSipper.drainType == BatterySipper.DrainType.APP;
+        }
+    }
+
+    /**
+     * Returns true if this entry describes a User.
+     */
+    public boolean isUserEntry() {
+        if (mBatteryConsumer instanceof UserBatteryConsumer) {
+            return true;
+        } else {
+            return mSipper.drainType == BatterySipper.DrainType.USER;
+        }
+    }
+
+    /**
+     * Returns the package name that should be used to represent the UID described
+     * by this entry.
+     */
+    public String getDefaultPackageName() {
+        if (mDefaultPackageName != null) {
+            return mDefaultPackageName;
+        }
+        if (ArrayUtils.isEmpty(mSipper.mPackages)) {
+            return null;
+        } else {
+            return mSipper.mPackages[0];
+        }
+    }
+
+    /**
+     * Returns the UID of the app described by this entry.
+     */
+    public int getUid() {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return ((UidBatteryConsumer) mBatteryConsumer).getUid();
+        } else if (mBatteryConsumer != null) {
+            return Process.INVALID_UID;
+        } else {
+            return mSipper.getUid();
+        }
+    }
+
+    /**
+     * Returns foreground foreground time (in milliseconds) that is attributed to this entry.
+     */
+    public long getTimeInForegroundMs(BatteryUtils batteryUtils) {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return ((UidBatteryConsumer) mBatteryConsumer).getTimeInStateMs(
+                    UidBatteryConsumer.STATE_FOREGROUND);
+        } else if (mBatteryConsumer != null) {
+            return mBatteryConsumer.getUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_USAGE);
+        } else if (mSipper.drainType == BatterySipper.DrainType.APP) {
+            return batteryUtils.getProcessTimeMs(
+                    BatteryUtils.StatusType.FOREGROUND, mSipper.uidObj,
+                    BatteryStats.STATS_SINCE_CHARGED);
+        } else {
+            return mSipper.usageTimeMs;
+        }
+    }
+
+    /**
+     * Returns background activity time (in milliseconds) that is attributed to this entry.
+     */
+    public long getTimeInBackgroundMs(BatteryUtils batteryUtils) {
+        if (mBatteryConsumer instanceof UidBatteryConsumer) {
+            return ((UidBatteryConsumer) mBatteryConsumer).getTimeInStateMs(
+                    UidBatteryConsumer.STATE_BACKGROUND);
+        } else if (mBatteryConsumer != null) {
+            return 0;
+        } else  if (mSipper.drainType == BatterySipper.DrainType.APP) {
+            return batteryUtils.getProcessTimeMs(
+                    BatteryUtils.StatusType.BACKGROUND, mSipper.uidObj,
+                    BatteryStats.STATS_SINCE_CHARGED);
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Returns total amount of power (in milli-amp-hours) that is attributed to this entry.
+     */
+    public double getConsumedPower() {
+        if (mBatteryConsumer != null) {
+            return mBatteryConsumer.getConsumedPower();
+        }
+        return (int) mSipper.totalPowerMah;
     }
 }
