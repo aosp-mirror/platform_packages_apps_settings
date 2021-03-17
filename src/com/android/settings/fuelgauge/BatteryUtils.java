@@ -33,9 +33,7 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.text.format.DateUtils;
 import android.util.Log;
-import android.util.SparseLongArray;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
@@ -174,72 +172,16 @@ public class BatteryUtils {
     }
 
     /**
-     * Remove the {@link BatterySipper} that we should hide and smear the screen usage based on
-     * foreground activity time.
+     * Remove the {@link BatterySipper} that we should hide.
      *
      * @param sippers sipper list that need to check and remove
-     * @return the total power of the hidden items of {@link BatterySipper}
      * for proportional smearing
      */
-    public double removeHiddenBatterySippers(List<BatterySipper> sippers) {
-        double proportionalSmearPowerMah = 0;
-        BatterySipper screenSipper = null;
+    public void removeHiddenBatterySippers(List<BatterySipper> sippers) {
         for (int i = sippers.size() - 1; i >= 0; i--) {
             final BatterySipper sipper = sippers.get(i);
             if (shouldHideSipper(sipper)) {
                 sippers.remove(i);
-                if (sipper.drainType != BatterySipper.DrainType.OVERCOUNTED
-                        && sipper.drainType != BatterySipper.DrainType.SCREEN
-                        && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED
-                        && sipper.drainType != BatterySipper.DrainType.BLUETOOTH
-                        && sipper.drainType != BatterySipper.DrainType.WIFI
-                        && sipper.drainType != BatterySipper.DrainType.IDLE
-                        && !isHiddenSystemModule(sipper)) {
-                    // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, screen
-                    // or hidden system modules
-                    proportionalSmearPowerMah += sipper.totalPowerMah;
-                }
-            }
-
-            if (sipper.drainType == BatterySipper.DrainType.SCREEN) {
-                screenSipper = sipper;
-            }
-        }
-
-        smearScreenBatterySipper(sippers, screenSipper);
-
-        return proportionalSmearPowerMah;
-    }
-
-    /**
-     * Smear the screen on power usage among {@code sippers}, based on ratio of foreground activity
-     * time.
-     */
-    @VisibleForTesting
-    void smearScreenBatterySipper(List<BatterySipper> sippers, BatterySipper screenSipper) {
-        long totalActivityTimeMs = 0;
-        final SparseLongArray activityTimeArray = new SparseLongArray();
-        for (int i = 0, size = sippers.size(); i < size; i++) {
-            final BatteryStats.Uid uid = sippers.get(i).uidObj;
-            if (uid != null) {
-                final long timeMs = getProcessTimeMs(StatusType.SCREEN_USAGE, uid,
-                        BatteryStats.STATS_SINCE_CHARGED);
-                activityTimeArray.put(uid.getUid(), timeMs);
-                totalActivityTimeMs += timeMs;
-            }
-        }
-
-        if (totalActivityTimeMs >= 10 * DateUtils.MINUTE_IN_MILLIS) {
-            if (screenSipper == null) {
-                Log.e(TAG, "screen sipper is null even when app screen time is not zero");
-                return;
-            }
-
-            final double screenPowerMah = screenSipper.totalPowerMah;
-            for (int i = 0, size = sippers.size(); i < size; i++) {
-                final BatterySipper sipper = sippers.get(i);
-                sipper.totalPowerMah += screenPowerMah * activityTimeArray.get(sipper.getUid(), 0)
-                        / totalActivityTimeMs;
             }
         }
     }
@@ -287,19 +229,17 @@ public class BatteryUtils {
      *
      * @param powerUsageMah   power used by the app
      * @param totalPowerMah   total power used in the system
-     * @param hiddenPowerMah  power used by no-actionable app that we want to hide, i.e. Screen,
-     *                        Android OS.
      * @param dischargeAmount The discharge amount calculated by {@link BatteryStats}
      * @return A percentage value scaled by {@paramref dischargeAmount}
      * @see BatteryStats#getDischargeAmount(int)
      */
     public double calculateBatteryPercent(double powerUsageMah, double totalPowerMah,
-            double hiddenPowerMah, int dischargeAmount) {
+            int dischargeAmount) {
         if (totalPowerMah == 0) {
             return 0;
         }
 
-        return (powerUsageMah / (totalPowerMah - hiddenPowerMah)) * dischargeAmount;
+        return (powerUsageMah / totalPowerMah) * dischargeAmount;
     }
 
     /**

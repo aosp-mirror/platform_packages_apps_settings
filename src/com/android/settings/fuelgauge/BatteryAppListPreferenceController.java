@@ -189,8 +189,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
             final List<BatterySipper> usageList = getCoalescedUsageList(
                     USE_FAKE_DATA ? getFakeStats() : statsHelper.getUsageList());
-            double hiddenPowerMah = showAllApps ? 0 :
-                    mBatteryUtils.removeHiddenBatterySippers(usageList);
+            if (!showAllApps) {
+                mBatteryUtils.removeHiddenBatterySippers(usageList);
+            }
             mBatteryUtils.sortUsageList(usageList);
 
             final int numSippers = usageList.size();
@@ -199,7 +200,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 double totalPower = USE_FAKE_DATA ? 4000 : statsHelper.getTotalPower();
 
                 final double percentOfTotal = mBatteryUtils.calculateBatteryPercent(
-                        sipper.totalPowerMah, totalPower, hiddenPowerMah, dischargeAmount);
+                        sipper.totalPowerMah, totalPower, dischargeAmount);
 
                 if (((int) (percentOfTotal + .5)) < 1) {
                     continue;
