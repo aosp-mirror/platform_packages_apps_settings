@@ -83,6 +83,7 @@ import com.android.settingslib.wifi.AccessPoint;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -878,7 +879,8 @@ public class WifiConfigController implements TextWatcher,
                 result = R.string.proxy_error_invalid_port;
             }
             if (result == 0) {
-                mHttpProxy = new ProxyInfo(host, port, exclusionList);
+                mHttpProxy = ProxyInfo.buildDirectProxy(
+                        host, port, Arrays.asList(exclusionList.split(",")));
             } else {
                 return false;
             }
@@ -892,7 +894,7 @@ public class WifiConfigController implements TextWatcher,
             if (uri == null) {
                 return false;
             }
-            mHttpProxy = new ProxyInfo(uri);
+            mHttpProxy = ProxyInfo.buildPacProxy(uri);
         }
         return true;
     }
