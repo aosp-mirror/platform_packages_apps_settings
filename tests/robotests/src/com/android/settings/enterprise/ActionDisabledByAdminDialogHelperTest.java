@@ -36,10 +36,8 @@ import android.content.pm.UserInfo;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -106,20 +104,6 @@ public class ActionDisabledByAdminDialogHelperTest {
         final Intent intent = mActivityShadow.getNextStartedActivity();
         assertEquals(intent.getComponent(), new ComponentName(mActivity,
                 Settings.DeviceAdminSettingsActivity.class.getName()));
-    }
-
-    @Test
-    public void testSetAdminSupportIconForFinancedDevice_adminSupportIconIsGone() {
-        final ShadowDevicePolicyManager dpmShadow = ShadowDevicePolicyManager.getShadow();
-        final ViewGroup view = new FrameLayout(mActivity);
-        final ImageView supportIconImageView = createAdminSupportIconImageView(view, mActivity);
-        final ComponentName component = new ComponentName("some.package.name",
-                "some.package.name.SomeClass");
-        setupFinancedDevice(dpmShadow);
-
-        mHelper.setAdminSupportIcon(view, component, 123);
-
-        assertEquals(View.GONE, supportIconImageView.getVisibility());
     }
 
     @Test
@@ -258,14 +242,6 @@ public class ActionDisabledByAdminDialogHelperTest {
         builder = mock(AlertDialog.Builder.class);
         mHelper.maybeSetLearnMoreButton(builder);
         verify(builder, never()).setNeutralButton(anyInt(), any());
-    }
-
-    private static ImageView createAdminSupportIconImageView(final ViewGroup view,
-            final Activity activity) {
-        final ImageView supportIconView = new ImageView(activity);
-        supportIconView.setId(R.id.admin_support_icon);
-        view.addView(supportIconView);
-        return supportIconView;
     }
 
     private static TextView createAdminSupportDialogTitleTextView(final ViewGroup view,

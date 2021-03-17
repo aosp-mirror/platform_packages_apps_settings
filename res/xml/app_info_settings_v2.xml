@@ -134,6 +134,19 @@
         android:title="@string/sms_application_title"
         android:summary="@string/summary_placeholder" />
 
+    <PreferenceCategory
+        android:key="app_hibernation_info"
+        android:title="@string/unused_apps"
+        settings:controller=
+            "com.android.settings.applications.appinfo.AppHibernationPreferenceCategoryController">
+
+        <SwitchPreference
+            android:key="hibernation_switch"
+            android:title="@string/unused_apps_switch"
+            settings:controller=
+                "com.android.settings.applications.appinfo.HibernationSwitchPreferenceController" />
+    </PreferenceCategory>
+
     <!-- Advanced apps settings -->
     <PreferenceCategory
         android:key="advanced_app_info"
