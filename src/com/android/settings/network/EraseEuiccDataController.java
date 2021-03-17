@@ -28,8 +28,7 @@ import com.android.settings.system.ResetDashboardFragment;
 /**
  * Controller for erasing Euicc data
  */
-public class EraseEuiccDataController extends BasePreferenceController implements
-        PreferenceControllerMixin {
+public class EraseEuiccDataController extends BasePreferenceController {
     private ResetDashboardFragment mHostFragment;
 
     public EraseEuiccDataController(Context context, String preferenceKey) {
