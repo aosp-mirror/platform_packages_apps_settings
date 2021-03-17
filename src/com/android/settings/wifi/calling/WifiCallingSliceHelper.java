@@ -18,9 +18,9 @@ package com.android.settings.wifi.calling;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_CALLING_PREFERENCE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_CALLING_URI;
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -43,7 +43,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.ims.ImsConfig;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
@@ -56,7 +55,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 
 /**
  * Helper class to control slices for wifi calling settings.
