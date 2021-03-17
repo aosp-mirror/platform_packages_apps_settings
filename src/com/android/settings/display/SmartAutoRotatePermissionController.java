@@ -22,11 +22,12 @@ import static com.android.settings.display.SmartAutoRotateController.isRotationR
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.text.TextUtils;
 
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.widget.BannerMessagePreference;
 
 /**
  * The controller of camera based rotate permission warning preference. The preference appears when
@@ -45,19 +46,22 @@ public class SmartAutoRotatePermissionController extends BasePreferenceControlle
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final BannerMessagePreference preference =
+                (BannerMessagePreference) screen.findPreference(getPreferenceKey());
+        preference
+                .setPositiveButtonText(R.string.auto_rotate_manage_permission_button)
+                .setPositiveButtonOnClickListener(v -> {
+                    mContext.startActivity(mIntent);
+                });
+    }
+
+    @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
         return isRotationResolverServiceAvailable(mContext) && !hasSufficientPermission(mContext)
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(getPreferenceKey(), preference.getKey())) {
-            mContext.startActivity(mIntent);
-            return true;
-        }
-        return super.handlePreferenceTreeClick(preference);
     }
 }

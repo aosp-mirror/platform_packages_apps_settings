@@ -153,6 +153,9 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED =
             "location_indicator_settings_enabled";
 
+    /** Whether or not app hibernation is enabled on the device **/
+    public static final String PROPERTY_APP_HIBERNATION_ENABLED = "app_hibernation_enabled";
+
     /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
