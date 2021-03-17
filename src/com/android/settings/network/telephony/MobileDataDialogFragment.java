@@ -31,7 +31,6 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 
-
 /**
  * Dialog Fragment to show dialog for "mobile data"
  *

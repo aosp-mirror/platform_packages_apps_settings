@@ -26,7 +26,6 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager.NetworkRequestMatchCallback;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
 import android.os.Handler;
