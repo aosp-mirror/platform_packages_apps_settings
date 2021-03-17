@@ -94,6 +94,13 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getWindow().addSystemFlags(android.view.WindowManager.LayoutParams
+                .SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+    }
+
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case BUTTON_POSITIVE:
