@@ -28,11 +28,8 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -54,7 +51,6 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.SystemClock;
 import android.os.UserManager;
-import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -91,8 +87,6 @@ public class BatteryUtilsTest {
     private static final long TIME_STATE_TOP_SLEEPING = 2500 * UNIT;
     private static final long TIME_STATE_FOREGROUND = 3000 * UNIT;
     private static final long TIME_STATE_BACKGROUND = 6000 * UNIT;
-    private static final long TIME_FOREGROUND_ZERO = 0;
-    private static final long TIME_FOREGROUND = 100 * DateUtils.MINUTE_IN_MILLIS;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_US =
             TIME_SINCE_LAST_FULL_CHARGE_MS * 1000;
@@ -106,13 +100,11 @@ public class BatteryUtilsTest {
     private static final double BATTERY_SYSTEM_USAGE = 600;
     private static final double BATTERY_OVERACCOUNTED_USAGE = 500;
     private static final double BATTERY_UNACCOUNTED_USAGE = 700;
-    private static final double BATTERY_APP_USAGE = 100;
     private static final double BATTERY_WIFI_USAGE = 200;
     private static final double BATTERY_BLUETOOTH_USAGE = 300;
     private static final double TOTAL_BATTERY_USAGE = 1000;
-    private static final double HIDDEN_USAGE = 200;
     private static final int DISCHARGE_AMOUNT = 80;
-    private static final double PERCENT_SYSTEM_USAGE = 60;
+    private static final double PERCENT_SYSTEM_USAGE = 48;
     private static final double PRECISION = 0.001;
     private static final int SDK_VERSION = Build.VERSION_CODES.L;
     private static final String PACKAGE_NAME = "com.android.app";
@@ -302,12 +294,10 @@ public class BatteryUtilsTest {
         sippers.add(mBluetoothBatterySipper);
         sippers.add(mIdleBatterySipper);
         when(mProvider.isTypeSystem(mSystemBatterySipper)).thenReturn(true);
-        doNothing().when(mBatteryUtils).smearScreenBatterySipper(any(), any());
 
-        final double totalUsage = mBatteryUtils.removeHiddenBatterySippers(sippers);
+        mBatteryUtils.removeHiddenBatterySippers(sippers);
 
         assertThat(sippers).containsExactly(mNormalBatterySipper);
-        assertThat(totalUsage).isWithin(PRECISION).of(BATTERY_SYSTEM_USAGE);
     }
 
     @Test
@@ -388,47 +378,8 @@ public class BatteryUtilsTest {
     @Test
     public void testCalculateBatteryPercent() {
         assertThat(mBatteryUtils.calculateBatteryPercent(BATTERY_SYSTEM_USAGE, TOTAL_BATTERY_USAGE,
-                HIDDEN_USAGE, DISCHARGE_AMOUNT))
+                DISCHARGE_AMOUNT))
                 .isWithin(PRECISION).of(PERCENT_SYSTEM_USAGE);
-    }
-
-    @Test
-    public void testSmearScreenBatterySipper() {
-        final BatterySipper sipperNull = createTestSmearBatterySipper(TIME_FOREGROUND_ZERO,
-                BATTERY_APP_USAGE, 0 /* uid */, true /* isUidNull */);
-        final BatterySipper sipperBg = createTestSmearBatterySipper(TIME_FOREGROUND_ZERO,
-                BATTERY_APP_USAGE, 1 /* uid */, false /* isUidNull */);
-        final BatterySipper sipperFg = createTestSmearBatterySipper(TIME_FOREGROUND,
-                BATTERY_APP_USAGE, 2 /* uid */, false /* isUidNull */);
-        final BatterySipper sipperFg2 = createTestSmearBatterySipper(TIME_FOREGROUND,
-                BATTERY_APP_USAGE, 3 /* uid */, false /* isUidNull */);
-
-        final List<BatterySipper> sippers = new ArrayList<>();
-        sippers.add(sipperNull);
-        sippers.add(sipperBg);
-        sippers.add(sipperFg);
-        sippers.add(sipperFg2);
-
-        mBatteryUtils.smearScreenBatterySipper(sippers, mScreenBatterySipper);
-
-        assertThat(sipperNull.totalPowerMah).isWithin(PRECISION).of(BATTERY_APP_USAGE);
-        assertThat(sipperBg.totalPowerMah).isWithin(PRECISION).of(BATTERY_APP_USAGE);
-        assertThat(sipperFg.totalPowerMah).isWithin(PRECISION).of(
-                BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE / 2);
-        assertThat(sipperFg2.totalPowerMah).isWithin(PRECISION).of(
-                BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE / 2);
-    }
-
-    @Test
-    public void testSmearScreenBatterySipper_screenSipperNull_shouldNotCrash() {
-        final BatterySipper sipperFg = createTestSmearBatterySipper(TIME_FOREGROUND,
-                BATTERY_APP_USAGE, 2 /* uid */, false /* isUidNull */);
-
-        final List<BatterySipper> sippers = new ArrayList<>();
-        sippers.add(sipperFg);
-
-        // Shouldn't crash
-        mBatteryUtils.smearScreenBatterySipper(sippers, null /* screenSipper */);
     }
 
     @Test
@@ -507,23 +458,6 @@ public class BatteryUtilsTest {
 
         assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID, PACKAGE_NAME))
             .isFalse();
-    }
-
-    private BatterySipper createTestSmearBatterySipper(
-        long topTime, double totalPowerMah, int uidCode, boolean isUidNull) {
-        final BatterySipper sipper = mock(BatterySipper.class);
-        sipper.drainType = BatterySipper.DrainType.APP;
-        sipper.totalPowerMah = totalPowerMah;
-        doReturn(uidCode).when(sipper).getUid();
-        if (!isUidNull) {
-            final BatteryStats.Uid uid = mock(BatteryStats.Uid.class, RETURNS_DEEP_STUBS);
-            doReturn(topTime).when(mBatteryUtils).getProcessTimeMs(
-                    eq(BatteryUtils.StatusType.SCREEN_USAGE), eq(uid), anyInt());
-            doReturn(uidCode).when(uid).getUid();
-            sipper.uidObj = uid;
-        }
-
-        return sipper;
     }
 
     @Test
