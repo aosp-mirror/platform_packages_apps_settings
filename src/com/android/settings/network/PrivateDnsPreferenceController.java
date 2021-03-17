@@ -118,7 +118,7 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     public CharSequence getSummary() {
         final Resources res = mContext.getResources();
         final ContentResolver cr = mContext.getContentResolver();
-        final String mode = ConnectivityManager.getPrivateDnsMode(cr);
+        final String mode = ConnectivityManager.getPrivateDnsMode(mContext);
         final LinkProperties lp = mLatestLinkProperties;
         final List<InetAddress> dnses = (lp == null) ? null : lp.getValidatedPrivateDnsServers();
         final boolean dnsesResolved = !ArrayUtils.isEmpty(dnses);
