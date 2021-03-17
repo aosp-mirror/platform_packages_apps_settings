@@ -85,15 +85,16 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             switch (msg.what) {
                 case BatteryEntry.MSG_UPDATE_NAME_ICON:
                     BatteryEntry entry = (BatteryEntry) msg.obj;
+                    int uid = entry.getUid();
                     PowerGaugePreference pgp =
                             (PowerGaugePreference) mAppListGroup.findPreference(
-                                    Integer.toString(entry.sipper.uidObj.getUid()));
+                                    Integer.toString(uid));
                     if (pgp != null) {
-                        final int userId = UserHandle.getUserId(entry.sipper.getUid());
+                        final int userId = UserHandle.getUserId(uid);
                         final UserHandle userHandle = new UserHandle(userId);
                         pgp.setIcon(mUserManager.getBadgedIconForUser(entry.getIcon(), userHandle));
                         pgp.setTitle(entry.name);
-                        if (entry.sipper.drainType == DrainType.APP) {
+                        if (entry.isAppEntry()) {
                             pgp.setContentDescription(entry.name);
                         }
                     }
@@ -208,7 +209,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 }
                 final UserHandle userHandle = new UserHandle(UserHandle.getUserId(sipper.getUid()));
                 final BatteryEntry entry = new BatteryEntry(mActivity, mHandler, mUserManager,
-                        sipper, null);
+                        sipper, null, null);
                 final Drawable badgedIcon = mUserManager.getBadgedIconForUser(entry.getIcon(),
                         userHandle);
                 final CharSequence contentDescription = mUserManager.getBadgedLabelForUser(
