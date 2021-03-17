@@ -32,7 +32,6 @@ import android.view.View;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -98,16 +97,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     private String mPackageName;
 
-    @VisibleForTesting
-    static void startBatteryDetailPage(Activity caller, BatteryUtils batteryUtils,
-            InstrumentedPreferenceFragment fragment, BatteryStatsHelper helper, int which,
-            BatteryEntry entry, String usagePercent) {
-        // Initialize mStats if necessary.
-        helper.getStats();
-
+    /**
+     * Launches battery details page for an individual battery consumer.
+     */
+    public static void startBatteryDetailPage(Activity caller,
+            InstrumentedPreferenceFragment fragment, BatteryEntry entry, String usagePercent) {
         final Bundle args = new Bundle();
-        final long foregroundTimeMs = entry.getTimeInForegroundMs(batteryUtils);
-        final long backgroundTimeMs = entry.getTimeInBackgroundMs(batteryUtils);
+        final long foregroundTimeMs = entry.getTimeInForegroundMs();
+        final long backgroundTimeMs = entry.getTimeInBackgroundMs();
         final String packageName = entry.getDefaultPackageName();
         if (packageName == null) {
             // populate data for system app
@@ -140,13 +137,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             return ActivityManager.getCurrentUser();
         }
         return UserHandle.getUserId(batteryEntry.getUid());
-    }
-
-    public static void startBatteryDetailPage(Activity caller,
-            InstrumentedPreferenceFragment fragment, BatteryStatsHelper helper, int which,
-            BatteryEntry entry, String usagePercent) {
-        startBatteryDetailPage(caller, BatteryUtils.getInstance(caller), fragment, helper, which,
-                entry, usagePercent);
     }
 
     public static void startBatteryDetailPage(Activity caller,

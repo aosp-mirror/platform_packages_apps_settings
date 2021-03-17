@@ -166,10 +166,8 @@ public class AdvancedPowerUsageDetailTest {
 
         when(mBatteryEntry.getUid()).thenReturn(UID);
         when(mBatteryEntry.getLabel()).thenReturn(APP_LABEL);
-        when(mBatteryEntry.getTimeInBackgroundMs(any(BatteryUtils.class)))
-                .thenReturn(BACKGROUND_TIME_MS);
-        when(mBatteryEntry.getTimeInForegroundMs(any(BatteryUtils.class)))
-                .thenReturn(FOREGROUND_TIME_MS);
+        when(mBatteryEntry.getTimeInBackgroundMs()).thenReturn(BACKGROUND_TIME_MS);
+        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(FOREGROUND_TIME_MS);
         mBatteryEntry.iconId = ICON_ID;
 
         mFragment.mHeaderPreference = mHeaderPreference;
@@ -253,8 +251,8 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testStartBatteryDetailPage_hasBasicData() {
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
@@ -269,8 +267,8 @@ public class AdvancedPowerUsageDetailTest {
     public void testStartBatteryDetailPage_NormalApp() {
         when(mBatteryEntry.getDefaultPackageName()).thenReturn(PACKAGE_NAME[0]);
 
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
                 PACKAGE_NAME[0]);
@@ -280,8 +278,8 @@ public class AdvancedPowerUsageDetailTest {
     public void testStartBatteryDetailPage_SystemApp() {
         when(mBatteryEntry.getDefaultPackageName()).thenReturn(null);
 
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_LABEL)).isEqualTo(APP_LABEL);
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_ICON_ID)).isEqualTo(ICON_ID);
@@ -293,8 +291,8 @@ public class AdvancedPowerUsageDetailTest {
         final int appUid = 1010019;
         doReturn(appUid).when(mBatteryEntry).getUid();
 
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(10)));
     }
@@ -305,8 +303,8 @@ public class AdvancedPowerUsageDetailTest {
 
         final int currentUser = 20;
         ShadowActivityManager.setCurrentUser(currentUser);
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(currentUser)));
     }
