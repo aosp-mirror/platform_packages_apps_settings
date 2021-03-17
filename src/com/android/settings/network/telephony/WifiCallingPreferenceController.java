@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.Looper;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
@@ -28,6 +27,7 @@ import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.util.Log;
@@ -60,13 +60,13 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     private ImsMmTelManager mImsMmTelManager;
     @VisibleForTesting
     PhoneAccountHandle mSimCallManager;
-    private PhoneCallStateListener mPhoneStateListener;
+    private PhoneTelephonyCallback mTelephonyCallback;
     private Preference mPreference;
 
     public WifiCallingPreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mPhoneStateListener = new PhoneCallStateListener();
+        mTelephonyCallback = new PhoneTelephonyCallback();
     }
 
     @Override
@@ -79,12 +79,12 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
 
     @Override
     public void onStart() {
-        mPhoneStateListener.register(mContext, mSubId);
+        mTelephonyCallback.register(mContext, mSubId);
     }
 
     @Override
     public void onStop() {
-        mPhoneStateListener.unregister();
+        mTelephonyCallback.unregister();
     }
 
     @Override
@@ -195,16 +195,13 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     }
 
 
-    private class PhoneCallStateListener extends PhoneStateListener {
-
-        PhoneCallStateListener() {
-            super(Looper.getMainLooper());
-        }
+    private class PhoneTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener {
 
         private TelephonyManager mTelephonyManager;
 
         @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
+        public void onCallStateChanged(int state) {
             mCallState = state;
             updateState(mPreference);
         }
@@ -214,12 +211,12 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
             // assign current call state so that it helps to show correct preference state even
             // before first onCallStateChanged() by initial registration.
             mCallState = mTelephonyManager.getCallState(subId);
-            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
+            mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
         }
 
         public void unregister() {
             mCallState = null;
-            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
+            mTelephonyManager.unregisterTelephonyCallback(this);
         }
     }
 }
