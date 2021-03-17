@@ -84,9 +84,8 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     }
 
     /**
-     * If admin is not null, disables the text and switch but keeps the view clickable.
-     * Otherwise, calls setEnabled which will enables the entire view including
-     * the text and switch.
+     * If admin is not null, disables the text and switch but keeps the view clickable (unless the
+     * switch is disabled for other reasons). Otherwise, calls setEnabled.
      */
     public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
         mEnforcedAdmin = admin;
@@ -101,7 +100,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
             mDisabledByAdmin = false;
             mSwitch.setVisibility(View.VISIBLE);
             mRestrictedIcon.setVisibility(View.GONE);
-            setEnabled(true);
+            setEnabled(isEnabled());
         }
     }
 
