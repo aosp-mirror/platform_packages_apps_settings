@@ -46,10 +46,10 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.widget.PrimarySwitchPreference;
-import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -64,9 +64,9 @@ import com.android.internal.app.MediaRouteDialogPresenter;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 /**
  * The Settings screen for WifiDisplay configuration and connection management.
