@@ -47,7 +47,6 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
-
 public class VpnPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 

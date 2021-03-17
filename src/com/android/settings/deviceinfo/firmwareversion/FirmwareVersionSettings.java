@@ -17,17 +17,11 @@
 package com.android.settings.deviceinfo.firmwareversion;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable
 public class FirmwareVersionSettings extends DashboardFragment {

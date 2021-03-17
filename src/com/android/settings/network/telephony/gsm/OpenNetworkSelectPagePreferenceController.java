@@ -41,7 +41,6 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 
-
 /**
  * Preference controller for "Open network select"
  */
