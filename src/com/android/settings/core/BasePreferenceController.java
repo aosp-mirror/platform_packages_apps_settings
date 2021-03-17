@@ -30,7 +30,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -39,7 +38,6 @@ import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceData;
 import com.android.settings.slices.Sliceable;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.lang.annotation.Retention;
@@ -52,9 +50,6 @@ import java.util.List;
  * Abstract class to consolidate utility between preference controllers and act as an interface
  * for Slices. The abstract classes that inherit from this class will act as the direct interfaces
  * for each type when plugging into Slices.
- * <p>
- * Controllers defined in xml are automatically {@link Lifecycle#addObserver(LifecycleObserver)
- * wired up} to the settings lifecycle if they implement {@link LifecycleObserver}.
  */
 public abstract class BasePreferenceController extends AbstractPreferenceController implements
         Sliceable {
