@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
