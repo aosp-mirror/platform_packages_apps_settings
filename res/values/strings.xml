@@ -1873,7 +1873,7 @@
     <!-- Used in the settings screen to secure NFC [CHAR LIMIT=NONE] -->
     <string name="nfc_secure_settings_title">Require device unlock for NFC</string>
     <!-- Description of Secure NFC in the 1st level settings screen. [CHAR LIMIT=NONE] -->
-    <string name="nfc_secure_toggle_summary" product="default">Allow NFC Payment and Transit use only when screen is unlocked</string>
+    <string name="nfc_secure_toggle_summary" product="default">Allow NFC use only when screen is unlocked</string>
 
     <!-- Used to enter the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
     <string name="android_beam_settings_title">Android Beam</string>
@@ -2847,6 +2847,10 @@
     <string name="adaptive_sleep_contextual_slice_title">Turn on screen attention</string>
     <!-- Description about the contextual adaptive sleep card [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_contextual_slice_summary">Keep screen on when looking at it</string>
+    <!-- auto_rotate settings screen, title about the required permission is missing [CHAR LIMIT=NONE]-->
+    <string name="auto_rotate_summary_no_permission">Camera access is required for Face Detection. Tap to manage permissions for Device Personalization Services</string>
+    <!-- auto_rotate settings screen, text for the camera permission button [CHAR LIMIT=NONE]-->
+    <string name="auto_rotate_manage_permission_button">Manage permissions</string>
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
@@ -7038,6 +7042,8 @@
     <string name="vpn_always_on_summary_not_supported">Not supported by this app</string>
     <!-- Preference summary for a VPN app that is set to be always-on. [CHAR LIMIT=40]  -->
     <string name="vpn_always_on_summary_active">Always-on active</string>
+    <!-- Preference summary for a VPN app that has an insecure type. [CHAR LIMIT=40]  -->
+    <string name="vpn_insecure_summary">not secure VPN</string>
     <!-- Preference title for the toggle that controls whether to force all network connections to
         go through VPN. [CHAR LIMIT=40] -->
     <string name="vpn_require_connection">Block connections without VPN</string>
@@ -9829,6 +9835,18 @@
     <!-- Runtime permissions preference summary, which describes what the permission manager does. [CHAR LIMIT=NONE] -->
     <string name="runtime_permissions_summary_control_app_access">Control app access to your data</string>
 
+    <!-- Label for showing apps that have not been used for months. [CHAR LIMIT=40]-->
+    <string name="unused_apps">Unused apps</string>
+
+    <!-- Summary of number of apps that have not been used for months. [CHAR LIMIT=40]-->
+    <plurals name="unused_apps_summary">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> unused app</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> unused apps</item>
+    </plurals>
+
+    <!-- Label of a switch preference that controls whether the system will remove the permissions and free up space when the app has not been used for months [CHAR LIMIT=40]-->
+    <string name="unused_apps_switch">Remove permissions and free up space</string>
+
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
     <!-- Label for showing enabled apps in list [CHAR LIMIT=30] -->
@@ -10535,6 +10553,9 @@
     <string name="admin_device_owner_message">Your admin can monitor and manage apps and data
         associated with this device, including settings, permissions, corporate access,
         network activity, and the device\'s location information.</string>
+    <!-- Shown in admin details page to warn user about policies the admin can set on a financed device. [CHAR LIMIT=NONE] -->
+    <string name="admin_financed_message">Your device admin may be able to access data associated
+        with this device and change this device\’s settings.</string>
 
     <!-- Turn off a conditional state of the device (e.g. airplane mode, or hotspot) [CHAR LIMIT=30] -->
     <string name="condition_turn_off">Turn off</string>
