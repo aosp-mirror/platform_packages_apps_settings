@@ -36,7 +36,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.builders.GridRowBuilder;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
@@ -79,25 +78,11 @@ public class ProviderModelSliceHelper {
         Log.d(TAG, s);
     }
 
-    protected ListBuilder.HeaderBuilder createHeader(String intentAction) {
-        return new ListBuilder.HeaderBuilder()
-                .setTitle(mContext.getText(R.string.summary_placeholder))
-                .setPrimaryAction(getPrimarySliceAction(intentAction));
-    }
-
     protected ListBuilder createListBuilder(Uri uri) {
         final ListBuilder builder = new ListBuilder(mContext, uri, ListBuilder.INFINITY)
                 .setAccentColor(-1)
                 .setKeywords(getKeywords());
         return builder;
-    }
-
-    protected GridRowBuilder createMessageGridRow(int messageResId, String intentAction) {
-        final CharSequence title = mContext.getText(messageResId);
-        return new GridRowBuilder()
-                // Add cells to the grid row.
-                .addCell(new GridRowBuilder.CellBuilder().addTitleText(title))
-                .setPrimaryAction(getPrimarySliceAction(intentAction));
     }
 
     @Nullable
@@ -111,7 +96,10 @@ public class ProviderModelSliceHelper {
         return item.isPresent() ? item.get() : null;
     }
 
-    protected boolean hasCarrier() {
+    /**
+     * @return whether there is the carrier item in the slice.
+     */
+    public boolean hasCarrier() {
         if (isAirplaneModeEnabled()
                 || mSubscriptionManager == null || mTelephonyManager == null
                 || mSubscriptionManager.getDefaultDataSubscriptionId()
@@ -175,7 +163,12 @@ public class ProviderModelSliceHelper {
         return mTelephonyManager.isDataEnabled();
     }
 
-    protected boolean isDataSimActive() {
+    /**
+     * To check the carrier data status.
+     *
+     * @return whether the carrier data is active.
+     */
+    public boolean isDataSimActive() {
         return isNoCarrierData() ? false : MobileNetworkUtils.activeNetworkIsCellular(mContext);
     }
 
@@ -191,11 +184,6 @@ public class ProviderModelSliceHelper {
         log("mobileDataOnAndNoData: " + mobileDataOnAndNoData
                 + ",mobileDataOffAndOutOfService: " + mobileDataOffAndOutOfService);
         return mobileDataOnAndNoData || mobileDataOffAndOutOfService;
-    }
-
-    private boolean isAirplaneSafeNetworksModeEnabled() {
-        // TODO: isAirplaneSafeNetworksModeEnabled is not READY
-        return false;
     }
 
     @VisibleForTesting
