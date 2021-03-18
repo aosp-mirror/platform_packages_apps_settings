@@ -50,7 +50,8 @@
         android:key="accessibility_button_fade"
         android:title="@string/accessibility_button_fade_title"
         android:summary="@string/accessibility_button_fade_summary"
-        android:persistent="false"/>
+        android:persistent="false"
+        settings:controller="com.android.settings.accessibility.FloatingMenuFadePreferenceController"/>
 
     <com.android.settings.widget.SeekBarPreference
         android:key="accessibility_button_opacity"
