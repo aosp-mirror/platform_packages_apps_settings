@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -24,6 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.utils.AnnotationSpan;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -253,6 +257,8 @@ public class AccessibilityEditDialogUtils {
             summary.setVisibility(View.GONE);
         } else {
             summary.setText(summaryText);
+            summary.setMovementMethod(LinkMovementMethod.getInstance());
+            summary.setFocusable(false);
         }
         final ImageView image = view.findViewById(R.id.image);
         image.setImageResource(imageResId);
@@ -260,10 +266,13 @@ public class AccessibilityEditDialogUtils {
 
     private static void initSoftwareShortcut(Context context, View view) {
         final View dialogView = view.findViewById(R.id.software_shortcut);
+        final CharSequence title = context.getText(
+                R.string.accessibility_shortcut_edit_dialog_title_software);
         final TextView summary = dialogView.findViewById(R.id.summary);
         final int lineHeight = summary.getLineHeight();
-        setupShortcutWidget(dialogView, retrieveTitle(context),
-                retrieveSummary(context, lineHeight), retrieveImageResId(context));
+
+        setupShortcutWidget(dialogView, title, retrieveSummary(context, lineHeight),
+                retrieveImageResId(context));
     }
 
     private static void initHardwareShortcut(Context context, View view) {
@@ -297,35 +306,28 @@ public class AccessibilityEditDialogUtils {
         });
     }
 
-    private static CharSequence retrieveTitle(Context context) {
-        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
-                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
-        }
-        return context.getText(resId);
-    }
-
     private static CharSequence retrieveSummary(Context context, int lineHeight) {
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            final int resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_shortcut_edit_dialog_summary_software_gesture_talkback
-                    : R.string.accessibility_shortcut_edit_dialog_summary_software_gesture;
-            return context.getText(resId);
-        }
-        return getSummaryStringWithIcon(context, lineHeight);
+        return AccessibilityUtil.isFloatingMenuEnabled(context)
+                ? getSummaryStringWithLink(context) : getSummaryStringWithIcon(context, lineHeight);
     }
 
     private static int retrieveImageResId(Context context) {
-        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
-        int resId = R.drawable.accessibility_shortcut_type_software;
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
-                    : R.drawable.accessibility_shortcut_type_software_gesture;
-        }
-        return resId;
+        return AccessibilityUtil.isFloatingMenuEnabled(context)
+                ? R.drawable.accessibility_shortcut_type_software_floating
+                : R.drawable.accessibility_shortcut_type_software;
+    }
+
+    private static CharSequence getSummaryStringWithLink(Context context) {
+        final View.OnClickListener linkListener = v -> new SubSettingLauncher(context)
+                .setDestination(AccessibilityButtonFragment.class.getName())
+                .setSourceMetricsCategory(
+                        SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS)
+                .launch();
+        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
+                AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, linkListener);
+
+        return AnnotationSpan.linkify(context.getText(
+                R.string.accessibility_shortcut_edit_dialog_summary_software_floating), linkInfo);
     }
 
     private static SpannableString getSummaryStringWithIcon(Context context, int lineHeight) {

@@ -5106,6 +5106,8 @@
     <string name="accessibility_tutorial_dialog_title_gesture_settings">Use new accessibility gesture</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_button">To use this feature, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
+    <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the accessibility floating button. [CHAR LIMIT=100] -->
+    <string name="accessibility_tutorial_dialog_message_floating_button">To use this feature, tap the accessibility button on your screen.</string>
     <!-- Instruction for the accessibility tutorial dialog in accessibility service with volume keys. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_message_volume">To use this feature, press &amp; hold both volume keys.</string>
     <!-- Instruction for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
@@ -5136,6 +5138,8 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
+    <!-- Summary for software shortcut in accessibility edit shortcut dialog when user had enabled the accessibility floating button mode (Floating over other apps). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">Customize accessibility button</annotation></string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
@@ -5164,6 +5168,26 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title">Shortcut from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds.</string>
+    <!-- Title for the accessibility button page. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_title">Accessibility button</string>
+    <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
+    <string name="accessibility_button_summary">Quickly access accessibility features</string>
+    <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
+    <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_location_title">Location</string>
+    <!-- Title for the size of the accessibility button. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_size_title">Size</string>
+    <!-- Title for the fade of the accessibility button. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_fade_title">Fade when not in use</string>
+    <!-- Summary for the fade of the accessibility button. [CHAR LIMIT=80] -->
+    <string name="accessibility_button_fade_summary">Fades after a few seconds so it\u2019s easier to see your screen</string>
+    <!-- Title for the transparency of the accessibility button. Will become fade when not interact with the accessibility button. [CHAR LIMIT=40] -->
+    <string name="accessibility_button_opacity_title">Transparency when not in use</string>
+    <!-- Label on the left side of transparency adjustment slider [CHAR LIMIT=30] -->
+    <string name="accessibility_button_low_label">Transparent</string>
+    <!-- Label on the right side of transparency adjustment slider [CHAR LIMIT=30] -->
+    <string name="accessibility_button_high_label">Non-transparent</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
