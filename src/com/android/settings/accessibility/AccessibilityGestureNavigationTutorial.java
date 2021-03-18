@@ -333,7 +333,8 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     private static TutorialPage createSoftwareTutorialPage(@NonNull Context context) {
-        final CharSequence title = getSoftwareTitle(context);
+        final CharSequence title = context.getText(
+                R.string.accessibility_tutorial_dialog_title_button);
         final ImageView image = createSoftwareImage(context);
         final CharSequence instruction = getSoftwareInstruction(context);
         final ImageView indicatorIcon =
@@ -390,44 +391,19 @@ public final class AccessibilityGestureNavigationTutorial {
         return tutorialPages;
     }
 
-    private static CharSequence getSoftwareTitle(Context context) {
-        final boolean isGestureNavigationEnabled =
-                AccessibilityUtil.isGestureNavigateEnabled(context);
-        final int resId = isGestureNavigationEnabled
-                ? R.string.accessibility_tutorial_dialog_title_gesture
-                : R.string.accessibility_tutorial_dialog_title_button;
-
-        return context.getText(resId);
-    }
-
     private static ImageView createSoftwareImage(Context context) {
-        int resId = R.drawable.accessibility_shortcut_type_software;
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
-                    : R.drawable.accessibility_shortcut_type_software_gesture;
-        }
+        final int resId = AccessibilityUtil.isFloatingMenuEnabled(context)
+                ? R.drawable.accessibility_shortcut_type_software_floating
+                : R.drawable.accessibility_shortcut_type_software;
 
         return createImageView(context, resId);
     }
 
     private static CharSequence getSoftwareInstruction(Context context) {
-        final boolean isGestureNavigateEnabled =
-                AccessibilityUtil.isGestureNavigateEnabled(context);
-        final boolean isTouchExploreEnabled = AccessibilityUtil.isTouchExploreEnabled(context);
-        int resId = R.string.accessibility_tutorial_dialog_message_button;
-        if (isGestureNavigateEnabled) {
-            resId = isTouchExploreEnabled
-                    ? R.string.accessibility_tutorial_dialog_message_gesture_talkback
-                    : R.string.accessibility_tutorial_dialog_message_gesture;
-        }
-
-        CharSequence text = context.getText(resId);
-        if (resId == R.string.accessibility_tutorial_dialog_message_button) {
-            text = getSoftwareInstructionWithIcon(context, text);
-        }
-
-        return text;
+        return AccessibilityUtil.isFloatingMenuEnabled(context)
+                ? context.getText(R.string.accessibility_tutorial_dialog_message_floating_button)
+                : getSoftwareInstructionWithIcon(context,
+                        context.getText(R.string.accessibility_tutorial_dialog_message_button));
     }
 
     private static CharSequence getSoftwareInstructionWithIcon(Context context, CharSequence text) {
