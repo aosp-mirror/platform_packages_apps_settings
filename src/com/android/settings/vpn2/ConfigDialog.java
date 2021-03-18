@@ -592,7 +592,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
             // 0 is a last resort default, but the interface validates that the proxy port is
             // present and non-zero.
             int port = proxyPort.isEmpty() ? 0 : Integer.parseInt(proxyPort);
-            profile.proxy = new ProxyInfo(proxyHost, port, null);
+            profile.proxy = ProxyInfo.buildDirectProxy(proxyHost, port);
         } else {
             profile.proxy = null;
         }
