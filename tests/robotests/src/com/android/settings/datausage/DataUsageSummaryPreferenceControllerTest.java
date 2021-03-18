@@ -16,13 +16,14 @@
 
 package com.android.settings.datausage;
 
-import static android.net.ConnectivityManager.TYPE_WIFI;
+import static android.content.pm.PackageManager.FEATURE_WIFI;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -31,7 +32,7 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
+import android.content.pm.PackageManager;
 import android.net.NetworkTemplate;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -104,7 +105,7 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private PackageManager mPm;
 
     private DataUsageInfoController mDataInfoController;
 
@@ -138,10 +139,9 @@ public class DataUsageSummaryPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mActivity).getSystemService(TelephonyManager.class);
         doReturn(mTelephonyManager).when(mTelephonyManager)
                 .createForSubscriptionId(mDefaultSubscriptionId);
-        when(mActivity.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mConnectivityManager);
+        doReturn(mPm).when(mActivity).getPackageManager();
+        doReturn(false).when(mPm).hasSystemFeature(eq(FEATURE_WIFI));
         doReturn(TelephonyManager.SIM_STATE_READY).when(mTelephonyManager).getSimState();
-        when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
 
         mController = spy(new DataUsageSummaryPreferenceController(
                 mDataUsageController,
@@ -363,7 +363,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         final int subscriptionId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mController.init(subscriptionId);
         mController.mDataUsageController = mDataUsageController;
-        when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(true);
+        doReturn(true).when(mPm).hasSystemFeature(eq(FEATURE_WIFI));
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 

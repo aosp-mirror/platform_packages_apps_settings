@@ -152,7 +152,7 @@ public class AppBatteryPreferenceControllerTest {
         mController.mBatteryUsageStats = mBatteryUsageStats;
         mController.mUidBatteryConsumer = mUidBatteryConsumer;
         doReturn(BATTERY_LEVEL).when(mBatteryUtils).calculateBatteryPercent(anyDouble(),
-                anyDouble(), anyDouble(), anyInt());
+                anyDouble(), anyInt());
         doReturn(new ArrayList<>()).when(mBatteryStatsHelper).getUsageList();
         mController.displayPreference(mScreen);
 

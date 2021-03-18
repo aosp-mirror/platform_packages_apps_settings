@@ -44,6 +44,7 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
@@ -170,7 +171,8 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
     };
 
-    private PhoneStateListener mPhoneStateListener;
+    @VisibleForTesting
+    protected SimStatusDialogTelephonyCallback mTelephonyCallback;
 
     private CellBroadcastServiceConnection mCellBroadcastServiceConnection;
 
@@ -235,7 +237,7 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
         mTelephonyManager =
             mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
-        mPhoneStateListener = getPhoneStateListener();
+        mTelephonyCallback = new SimStatusDialogTelephonyCallback();
         updateLatestAreaInfo();
         updateSubscriptionStatus();
     }
@@ -278,11 +280,7 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(
                 mSubscriptionInfo.getSubscriptionId());
-        mTelephonyManager.listen(mPhoneStateListener,
-                PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
-                        | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
-                        | PhoneStateListener.LISTEN_SERVICE_STATE
-                        | PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED);
+        mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(), mTelephonyCallback);
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
         registerImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
@@ -305,7 +303,7 @@ public class SimStatusDialogController implements LifecycleObserver {
             if (mIsRegisteredListener) {
                 mSubscriptionManager.removeOnSubscriptionsChangedListener(
                         mOnSubscriptionsChangedListener);
-                mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+                mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
                 if (mShowLatestAreaInfo) {
                     mContext.unregisterReceiver(mAreaInfoReceiver);
                 }
@@ -316,7 +314,7 @@ public class SimStatusDialogController implements LifecycleObserver {
 
         unregisterImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
         mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
 
         if (mShowLatestAreaInfo) {
             mContext.unregisterReceiver(mAreaInfoReceiver);
@@ -768,33 +766,35 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     @VisibleForTesting
-    protected PhoneStateListener getPhoneStateListener() {
-        return new PhoneStateListener() {
-            @Override
-            public void onDataConnectionStateChanged(int state) {
-                updateDataState(state);
-                updateNetworkType();
-            }
+    class SimStatusDialogTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.DataConnectionStateListener,
+            TelephonyCallback.SignalStrengthsListener,
+            TelephonyCallback.ServiceStateListener,
+            TelephonyCallback.DisplayInfoListener {
+        @Override
+        public void onDataConnectionStateChanged(int state, int networkType) {
+            updateDataState(state);
+            updateNetworkType();
+        }
 
-            @Override
-            public void onSignalStrengthsChanged(SignalStrength signalStrength) {
-                updateSignalStrength(signalStrength);
-            }
+        @Override
+        public void onSignalStrengthsChanged(SignalStrength signalStrength) {
+            updateSignalStrength(signalStrength);
+        }
 
-            @Override
-            public void onServiceStateChanged(ServiceState serviceState) {
-                updateNetworkProvider();
-                updateServiceState(serviceState);
-                updateRoamingStatus(serviceState);
-                mPreviousServiceState = serviceState;
-            }
+        @Override
+        public void onServiceStateChanged(ServiceState serviceState) {
+            updateNetworkProvider();
+            updateServiceState(serviceState);
+            updateRoamingStatus(serviceState);
+            mPreviousServiceState = serviceState;
+        }
 
-            @Override
-            public void onDisplayInfoChanged(@NonNull TelephonyDisplayInfo displayInfo) {
-                mTelephonyDisplayInfo = displayInfo;
-                updateNetworkType();
-            }
-        };
+        @Override
+        public void onDisplayInfoChanged(@NonNull TelephonyDisplayInfo displayInfo) {
+            mTelephonyDisplayInfo = displayInfo;
+            updateNetworkType();
+        }
     }
 
     @VisibleForTesting
