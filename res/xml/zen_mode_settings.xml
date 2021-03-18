@@ -23,7 +23,6 @@
     <!-- Turn on DND button -->
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="zen_mode_toggle"
-        android:title="@string/do_not_disturb_main_switch_title"
         settings:keywords="@string/keywords_zen_mode_settings"/>
 
     <PreferenceCategory
@@ -49,15 +48,18 @@
     </PreferenceCategory>
 
     <!-- Automatic rules -->
-    <Preference
-        android:key="zen_mode_automation_settings"
-        android:title="@string/zen_category_schedule"
-        settings:allowDividerAbove="true"
-        android:fragment="com.android.settings.notification.zen.ZenModeAutomationSettings"/>
+    <PreferenceCategory
+        android:key="zen_mode_settings_schedule"
+        android:title="@string/zen_category_schedule">
+        <Preference
+            android:key="zen_mode_automation_settings"
+            android:title="@string/zen_category_schedule"
+            android:fragment="com.android.settings.notification.zen.ZenModeAutomationSettings"/>
+    </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="zen_mode_settings_advanced"
-        settings:initialExpandedChildrenCount="0">
+        android:title="@string/zen_settings_general"
+        android:key="zen_mode_settings_advanced">
 
         <!-- DND duration settings -->
         <com.android.settings.notification.zen.ZenDurationDialogPreference
