@@ -29,6 +29,7 @@ import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsMmTelManager;
@@ -102,7 +103,10 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private ProvisioningManager mProvisioningManager;
     private TelephonyManager mTelephonyManager;
 
-    private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+    private final PhoneTelephonyCallback mTelephonyCallback = new PhoneTelephonyCallback();
+
+    private class PhoneTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener {
         /*
          * Enable/disable controls when in/out of a call and depending on
          * TTY mode and TTY support over VoLTE.
@@ -110,7 +114,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
          * java.lang.String)
          */
         @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
+        public void onCallStateChanged(int state) {
             final SettingsActivity activity = (SettingsActivity) getActivity();
             final boolean isNonTtyOrTtyOnVolteEnabled =
                     queryImsState(WifiCallingSettingsForSub.this.mSubId).isAllowUserControl();
@@ -149,7 +153,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                         && isCallStateIdle);
             }
         }
-    };
+    }
 
     /*
      * Launch carrier emergency address managemnent activity
@@ -398,7 +402,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                     res.getStringArray(R.array.wifi_calling_mode_summaries_without_wifi_only));
         }
 
-        // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
+        // NOTE: Buttons will be enabled/disabled in mTelephonyCallback
         final WifiCallingQueryImsState queryIms = queryImsState(mSubId);
         final boolean wfcEnabled = queryIms.isEnabledByUser()
                 && queryIms.isAllowUserControl();
@@ -416,16 +420,16 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         updateBody();
 
+        final Context context = getActivity();
         if (queryImsState(mSubId).isWifiCallingSupported()) {
-            getTelephonyManagerForSub(mSubId).listen(mPhoneStateListener,
-                    PhoneStateListener.LISTEN_CALL_STATE);
+            getTelephonyManagerForSub(mSubId).registerTelephonyCallback(
+                    context.getMainExecutor(), mTelephonyCallback);
 
             mSwitchBar.addOnSwitchChangeListener(this);
 
             mValidListener = true;
         }
 
-        final Context context = getActivity();
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
         final Intent intent = getActivity().getIntent();
@@ -446,8 +450,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (mValidListener) {
             mValidListener = false;
 
-            getTelephonyManagerForSub(mSubId).listen(mPhoneStateListener,
-                    PhoneStateListener.LISTEN_NONE);
+            getTelephonyManagerForSub(mSubId).unregisterTelephonyCallback(mTelephonyCallback);
 
             mSwitchBar.removeOnSwitchChangeListener(this);
         }

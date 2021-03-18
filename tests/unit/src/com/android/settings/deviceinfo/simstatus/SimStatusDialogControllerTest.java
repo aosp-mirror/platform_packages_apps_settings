@@ -48,7 +48,6 @@ import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellSignalStrength;
-import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -88,8 +87,6 @@ public class SimStatusDialogControllerTest {
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
     private ServiceState mServiceState;
-    @Mock
-    private PhoneStateListener mPhoneStateListener;
     @Mock
     private SignalStrength mSignalStrength;
     @Mock
@@ -150,7 +147,6 @@ public class SimStatusDialogControllerTest {
         doReturn(0).when(mCellSignalStrengthWcdma).getAsuLevel();
 
         doReturn(null).when(mSignalStrength).getCellSignalStrengths();
-        doReturn(mPhoneStateListener).when(mController).getPhoneStateListener();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(anyInt());
 
         when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_SINGLE_SIM);

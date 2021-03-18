@@ -25,7 +25,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.os.Looper;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -63,8 +62,6 @@ public class MobileNetworkPreferenceControllerTest {
 
     @Mock
     private UserManager mUserManager;
-    @Mock
-    private ConnectivityManager mConnectivityManager;
 
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mScreen;
@@ -82,7 +79,6 @@ public class MobileNetworkPreferenceControllerTest {
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
@@ -98,8 +94,7 @@ public class MobileNetworkPreferenceControllerTest {
     @Test
     public void secondaryUser_prefIsNotAvailable() {
         when(mUserManager.isAdminUser()).thenReturn(false);
-        when(mConnectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE))
-            .thenReturn(true);
+        when(mTelephonyManager.isDataCapable()).thenReturn(true);
 
         mController = new MobileNetworkPreferenceController(mContext);
         assertThat(mController.isAvailable()).isFalse();
@@ -108,8 +103,7 @@ public class MobileNetworkPreferenceControllerTest {
     @Test
     public void wifiOnly_prefIsNotAvailable() {
         when(mUserManager.isAdminUser()).thenReturn(true);
-        when(mConnectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE))
-            .thenReturn(false);
+        when(mTelephonyManager.isDataCapable()).thenReturn(false);
 
         mController = new MobileNetworkPreferenceController(mContext);
         assertThat(mController.isAvailable()).isFalse();
@@ -124,13 +118,12 @@ public class MobileNetworkPreferenceControllerTest {
 
         mLifecycleRegistry.handleLifecycleEvent(Event.ON_START);
         verify(mController).onStart();
-        verify(mTelephonyManager).listen(mController.mPhoneStateListener,
-                PhoneStateListener.LISTEN_SERVICE_STATE);
+        verify(mTelephonyManager).registerTelephonyCallback(
+                mContext.getMainExecutor(), mController.mTelephonyCallback);
 
         mLifecycleRegistry.handleLifecycleEvent(Event.ON_STOP);
         verify(mController).onStop();
-        verify(mTelephonyManager).listen(mController.mPhoneStateListener,
-                PhoneStateListener.LISTEN_NONE);
+        verify(mTelephonyManager).unregisterTelephonyCallback(mController.mTelephonyCallback);
     }
 
     @Test
@@ -148,12 +141,12 @@ public class MobileNetworkPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mLifecycleRegistry.handleLifecycleEvent(Event.ON_START);
         verify(mController).onStart();
-        verify(mTelephonyManager).listen(mController.mPhoneStateListener,
-                PhoneStateListener.LISTEN_SERVICE_STATE);
+        verify(mTelephonyManager).registerTelephonyCallback(
+                mContext.getMainExecutor(), mController.mTelephonyCallback);
 
         doReturn(testCarrierName).when(mController).getSummary();
 
-        mController.mPhoneStateListener.onServiceStateChanged(null);
+        mController.mTelephonyCallback.onServiceStateChanged(null);
 
         // Carrier name should be set.
         Assert.assertEquals(mPreference.getSummary(), testCarrierName);

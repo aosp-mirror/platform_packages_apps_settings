@@ -57,7 +57,7 @@ public final class AirplaneModeEnablerTest {
 
         ShadowSettings.setAirplaneMode(true);
 
-        mAirplaneModeEnabler.mPhoneStateListener.onRadioPowerStateChanged(
+        mAirplaneModeEnabler.mTelephonyCallback.onRadioPowerStateChanged(
                 TelephonyManager.RADIO_POWER_OFF);
 
         verify(mAirplaneModeChangedListener, times(1)).onAirplaneModeChanged(true);
