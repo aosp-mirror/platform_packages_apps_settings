@@ -8225,7 +8225,7 @@
     <string name="zen_mode_settings_dnd_custom_settings_footer">Do Not Disturb is on for <xliff:g id="rule_names" example="Sleeping and Work">%s</xliff:g> with custom settings.</string>
 
     <!-- [CHAR LIMIT=120] Zen mode settings footer: Link following zen_mode_settings_dnd_custom_settings_footer to see the currently applied custom dnd settings. -->
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link"><annotation id="link"> View custom settings</annotation></string>
+    <string name="zen_mode_settings_dnd_custom_settings_footer_link"> <annotation id="link">View custom settings</annotation></string>
 
     <!--[CHAR LIMIT=40] Zen Interruption level: Priority.  -->
     <string name="zen_interruption_level_priority">Priority only</string>
@@ -8283,6 +8283,9 @@
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
     long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
     <string name="zen_category_duration">Duration for Quick Settings</string>
+    <!-- Do not disturb settings, main screen, category header describing settings that do not
+    fit in another group [CHAR LIMIT=100] -->
+    <string name="zen_settings_general">General</string>
 
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
@@ -12862,7 +12865,9 @@
     <!-- Title for battery saver main switch preferences. [CHAR LIMIT=50] -->
     <string name="battery_saver_main_switch_title">Use battery saver</string>
     <!-- Title for Do Not Disturb main switch preferences. [CHAR LIMIT=50] -->
-    <string name="do_not_disturb_main_switch_title">Use Do Not Disturb</string>
+    <string name="do_not_disturb_main_switch_title_on">Turn off now</string>
+    <!-- Title for Do Not Disturb main switch preferences. [CHAR LIMIT=50] -->
+    <string name="do_not_disturb_main_switch_title_off">Turn on now</string>
     <!-- Title for Night Light main switch preferences. [CHAR LIMIT=50] -->
     <string name="night_light_main_switch_title">Use Night Light</string>
     <!-- Title for NFC main switch preferences. [CHAR LIMIT=50] -->
