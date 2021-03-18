@@ -28,13 +28,11 @@ import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Process;
 import android.os.SystemBatteryConsumer;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -42,7 +40,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
@@ -84,10 +81,8 @@ public class BatteryUtils {
 
     private static final String TAG = "BatteryUtils";
 
-    private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
     private static final double MIN_POWER_THRESHOLD_MILLI_AMP_HOURS = 0.002;
 
-    private static final int SECONDS_IN_HOUR = 60 * 60;
     private static BatteryUtils sInstance;
     private PackageManager mPackageManager;
 
@@ -369,13 +364,6 @@ public class BatteryUtils {
         } else {
             return false;
         }
-    }
-
-    public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
-            UserManager userManager) {
-        statsHelper.create(bundle);
-        statsHelper.clearStats();
-        statsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, userManager.getUserProfiles());
     }
 
     @WorkerThread
