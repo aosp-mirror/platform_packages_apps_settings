@@ -32,7 +32,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
@@ -110,9 +109,7 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void isAvailable_wifiOnlyMode_notAvailable() {
-        final ConnectivityManager cm = mock(ConnectivityManager.class);
-        when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
-        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        when(mTelephonyManager.isDataCapable()).thenReturn(false);
         when(mUserManager.isAdminUser()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -120,11 +117,8 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void isAvailable_secondaryUser_notAvailable() {
-        final ConnectivityManager cm = mock(ConnectivityManager.class);
-        when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(true);
-        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        when(mTelephonyManager.isDataCapable()).thenReturn(true);
         when(mUserManager.isAdminUser()).thenReturn(false);
-
         assertThat(mController.isAvailable()).isFalse();
     }
 

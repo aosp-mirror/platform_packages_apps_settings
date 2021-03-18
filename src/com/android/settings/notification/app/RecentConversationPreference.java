@@ -21,7 +21,7 @@ import android.view.View;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settingslib.TwoTargetPreference;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import com.google.common.annotations.VisibleForTesting;
 

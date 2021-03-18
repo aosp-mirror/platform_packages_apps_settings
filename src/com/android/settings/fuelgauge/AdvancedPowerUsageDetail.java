@@ -23,7 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
@@ -33,9 +32,6 @@ import android.view.View;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.os.BatterySipper;
-import com.android.internal.os.BatteryStatsHelper;
-import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -101,63 +97,46 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     private String mPackageName;
 
-    @VisibleForTesting
-    static void startBatteryDetailPage(Activity caller, BatteryUtils batteryUtils,
-            InstrumentedPreferenceFragment fragment, BatteryStatsHelper helper, int which,
-            BatteryEntry entry, String usagePercent) {
-        // Initialize mStats if necessary.
-        helper.getStats();
-
+    /**
+     * Launches battery details page for an individual battery consumer.
+     */
+    public static void startBatteryDetailPage(Activity caller,
+            InstrumentedPreferenceFragment fragment, BatteryEntry entry, String usagePercent) {
         final Bundle args = new Bundle();
-        final BatterySipper sipper = entry.sipper;
-        final BatteryStats.Uid uid = sipper.uidObj;
-        final boolean isTypeApp = sipper.drainType == BatterySipper.DrainType.APP;
-
-        final long foregroundTimeMs = isTypeApp ? batteryUtils.getProcessTimeMs(
-                BatteryUtils.StatusType.FOREGROUND, uid, which) : sipper.usageTimeMs;
-        final long backgroundTimeMs = isTypeApp ? batteryUtils.getProcessTimeMs(
-                BatteryUtils.StatusType.BACKGROUND, uid, which) : 0;
-
-        if (ArrayUtils.isEmpty(sipper.mPackages)) {
+        final long foregroundTimeMs = entry.getTimeInForegroundMs();
+        final long backgroundTimeMs = entry.getTimeInBackgroundMs();
+        final String packageName = entry.getDefaultPackageName();
+        if (packageName == null) {
             // populate data for system app
             args.putString(EXTRA_LABEL, entry.getLabel());
             args.putInt(EXTRA_ICON_ID, entry.iconId);
             args.putString(EXTRA_PACKAGE_NAME, null);
         } else {
             // populate data for normal app
-            args.putString(EXTRA_PACKAGE_NAME, entry.defaultPackageName != null
-                    ? entry.defaultPackageName
-                    : sipper.mPackages[0]);
+            args.putString(EXTRA_PACKAGE_NAME, packageName);
         }
 
-        args.putInt(EXTRA_UID, sipper.getUid());
+        args.putInt(EXTRA_UID, entry.getUid());
         args.putLong(EXTRA_BACKGROUND_TIME, backgroundTimeMs);
         args.putLong(EXTRA_FOREGROUND_TIME, foregroundTimeMs);
         args.putString(EXTRA_POWER_USAGE_PERCENT, usagePercent);
-        args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) sipper.totalPowerMah);
+        args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) entry.getConsumedPower());
 
         new SubSettingLauncher(caller)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
-                .setUserHandle(new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(sipper)))
+                .setUserHandle(new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(entry)))
                 .launch();
     }
 
-    private static @UserIdInt
-    int getUserIdToLaunchAdvancePowerUsageDetail(BatterySipper bs) {
-        if (bs.drainType == BatterySipper.DrainType.USER) {
+    private static @UserIdInt int getUserIdToLaunchAdvancePowerUsageDetail(
+            BatteryEntry batteryEntry) {
+        if (batteryEntry.isUserEntry()) {
             return ActivityManager.getCurrentUser();
         }
-        return UserHandle.getUserId(bs.getUid());
-    }
-
-    public static void startBatteryDetailPage(Activity caller,
-            InstrumentedPreferenceFragment fragment, BatteryStatsHelper helper, int which,
-            BatteryEntry entry, String usagePercent) {
-        startBatteryDetailPage(caller, BatteryUtils.getInstance(caller), fragment, helper, which,
-                entry, usagePercent);
+        return UserHandle.getUserId(batteryEntry.getUid());
     }
 
     public static void startBatteryDetailPage(Activity caller,

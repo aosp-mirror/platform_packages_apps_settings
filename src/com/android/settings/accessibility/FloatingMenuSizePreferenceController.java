@@ -59,24 +59,11 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
     @IntDef({
             Size.SMALL,
             Size.LARGE,
-            Size.EDGE
     })
     @VisibleForTesting
     @interface Size {
         int SMALL = 0;
         int LARGE = 1;
-        int EDGE = 2;
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({
-            EdgeMode.FULL_CIRCLE,
-            EdgeMode.HALF_CIRCLE,
-    })
-    @VisibleForTesting
-    @interface EdgeMode {
-        int FULL_CIRCLE = 0;
-        int HALF_CIRCLE = 1;
     }
 
     public FloatingMenuSizePreferenceController(Context context, String preferenceKey) {
@@ -110,7 +97,7 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
         final ListPreference listPreference = (ListPreference) preference;
         final Integer value = Ints.tryParse((String) newValue);
         if (value != null) {
-            writeToFloatingMenuSettings(value);
+            putAccessibilityFloatingMenuSize(value);
             updateState(listPreference);
         }
         return true;
@@ -121,7 +108,7 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
         super.updateState(preference);
         final ListPreference listPreference = (ListPreference) preference;
 
-        listPreference.setValue(getCurrentAccessibilityButtonSize());
+        listPreference.setValue(String.valueOf(getAccessibilityFloatingMenuSize(mDefaultSize)));
     }
 
     @Override
@@ -157,24 +144,6 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
         }
     }
 
-    private void writeToFloatingMenuSettings(@Size int sizeValue) {
-        if (sizeValue == Size.EDGE) {
-            putAccessibilityFloatingMenuSize(Size.SMALL);
-            putAccessibilityFloatingMenuIconType(EdgeMode.HALF_CIRCLE);
-        } else {
-            putAccessibilityFloatingMenuSize(sizeValue);
-            putAccessibilityFloatingMenuIconType(EdgeMode.FULL_CIRCLE);
-        }
-    }
-
-    private String getCurrentAccessibilityButtonSize() {
-        final @EdgeMode int iconType = getAccessibilityFloatingMenuIconType(EdgeMode.FULL_CIRCLE);
-        final @Size int btnSize = getAccessibilityFloatingMenuSize(mDefaultSize);
-
-        return (iconType == EdgeMode.HALF_CIRCLE)
-                ? String.valueOf(Size.EDGE) : String.valueOf(btnSize);
-    }
-
     @Size
     private int getAccessibilityFloatingMenuSize(@Size int defaultValue) {
         return Settings.Secure.getInt(mContentResolver,
@@ -184,16 +153,5 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
     private void putAccessibilityFloatingMenuSize(@Size int value) {
         Settings.Secure.putInt(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, value);
-    }
-
-    @EdgeMode
-    private int getAccessibilityFloatingMenuIconType(@EdgeMode int defaultValue) {
-        return Settings.Secure.getInt(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_ICON_TYPE, defaultValue);
-    }
-
-    private void putAccessibilityFloatingMenuIconType(@EdgeMode int value) {
-        Settings.Secure.putInt(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_ICON_TYPE, value);
     }
 }
