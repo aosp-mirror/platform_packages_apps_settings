@@ -34,7 +34,8 @@
         android:key="accessibility_button_size"
         android:title="@string/accessibility_button_size_title"
         android:summary="%s"
-        android:persistent="false"/>
+        android:persistent="false"
+        settings:controller="com.android.settings.accessibility.FloatingMenuSizePreferenceController"/>
 
     <SwitchPreference
         android:key="accessibility_button_fade"
