@@ -19,6 +19,7 @@ package com.android.settings.network.ims;
 import android.telephony.ims.ImsMmTelManager;
 import android.util.Log;
 
+
 /**
  * An {@link ImsQuery} for accessing IMS VT enabled settings from user
  */

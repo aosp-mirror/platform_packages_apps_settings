@@ -59,11 +59,6 @@ public interface PowerUsageFeatureProvider {
     boolean isTypeSystem(BatterySipper sipper);
 
     /**
-     * Check whether it is type system
-     */
-    boolean isTypeSystem(int uid, String[] packages);
-
-    /**
      * Check whether the toggle for power accounting is enabled
      */
     boolean isPowerAccountingToggleEnabled();

@@ -69,14 +69,6 @@ public class PowerUsageAdvancedTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mToggleAppsMenu.getItemId()).thenReturn(PowerUsageAdvanced.MENU_TOGGLE_APPS);
 
-        BatteryAppListPreferenceController.sConfig =
-                new BatteryAppListPreferenceController.Config() {
-                    @Override
-                    public boolean shouldShowBatteryAttributionList(Context context) {
-                        return true;
-                    }
-                };
-
         mFragment = spy(new PowerUsageAdvanced());
         mFragment.onAttach(mContext);
     }

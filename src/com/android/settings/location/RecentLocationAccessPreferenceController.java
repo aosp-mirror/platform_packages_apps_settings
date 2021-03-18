@@ -17,7 +17,6 @@ import static android.Manifest.permission_group.LOCATION;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.RelativeDateTimeFormatter;
 import android.os.UserHandle;
 import android.os.UserManager;
 
@@ -30,7 +29,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settingslib.location.RecentLocationAccesses;
-import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.AppPreference;
 
 import java.util.ArrayList;
@@ -115,8 +113,7 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
 
     @Override
     public void onLocationModeChanged(int mode, boolean restricted) {
-        boolean enabled = mLocationEnabler.isEnabled(mode);
-        mCategoryRecentLocationRequests.setVisible(enabled);
+        mCategoryRecentLocationRequests.setEnabled(mLocationEnabler.isEnabled(mode));
     }
 
     /**
@@ -136,9 +133,6 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
         final AppPreference pref = new AppPreference(prefContext);
         pref.setIcon(access.icon);
         pref.setTitle(access.label);
-        pref.setSummary(StringUtil.formatRelativeTime(prefContext,
-                System.currentTimeMillis() - access.accessFinishTime, false,
-                RelativeDateTimeFormatter.Style.SHORT));
         pref.setOnPreferenceClickListener(new PackageEntryClickedListener(
                 fragment.getContext(), access.packageName, access.userHandle));
         return pref;

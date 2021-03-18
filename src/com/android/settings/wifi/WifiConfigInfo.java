@@ -26,6 +26,7 @@ import com.android.settings.R;
 
 import java.util.List;
 
+
 /**
  * Configuration details saved by the user on the WifiSettings screen
  */

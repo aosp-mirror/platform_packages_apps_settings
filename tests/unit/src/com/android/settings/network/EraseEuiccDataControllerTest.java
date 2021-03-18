@@ -45,7 +45,7 @@ public class EraseEuiccDataControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_returnAVAILABLE_UNSEARCHABLE() {
+    public void getAvailabilityStatus_byDefault_true() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }

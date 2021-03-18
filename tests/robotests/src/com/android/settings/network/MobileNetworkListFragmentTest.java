@@ -33,6 +33,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
+
 @RunWith(RobolectricTestRunner.class)
 public class MobileNetworkListFragmentTest {
     @Mock

@@ -37,7 +37,7 @@ public class RecentLocationAccessSeeAllPreferenceController
         extends LocationBasePreferenceController {
 
     private PreferenceScreen mCategoryAllRecentLocationAccess;
-    private final RecentLocationAccesses mRecentLocationAccesses;
+    private RecentLocationAccesses mRecentLocationAccesses;
     private boolean mShowSystem = false;
     private Preference mPreference;
     private int mType = ProfileSelectFragment.ProfileType.ALL;

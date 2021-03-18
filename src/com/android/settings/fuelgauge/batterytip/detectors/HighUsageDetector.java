@@ -86,7 +86,7 @@ public class HighUsageDetector implements BatteryTipDetector {
                                 sipper1.totalSmearedPowerMah));
                 for (BatterySipper batterySipper : batterySippers) {
                     final double percent = mBatteryUtils.calculateBatteryPercent(
-                            batterySipper.totalSmearedPowerMah, totalPower, dischargeAmount);
+                            batterySipper.totalSmearedPowerMah, totalPower, 0, dischargeAmount);
                     if ((percent + 0.5f < 1f) || mBatteryUtils.shouldHideSipper(batterySipper)) {
                         // Don't show it if we should hide or usage percentage is lower than 1%
                         continue;

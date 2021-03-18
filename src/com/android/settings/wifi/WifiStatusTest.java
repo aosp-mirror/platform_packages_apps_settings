@@ -45,6 +45,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.List;
 
+
 /**
  * Show the current status details of Wifi related fields
  */

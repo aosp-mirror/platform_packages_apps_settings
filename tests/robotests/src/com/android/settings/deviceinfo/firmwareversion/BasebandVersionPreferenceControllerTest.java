@@ -39,6 +39,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class BasebandVersionPreferenceControllerTest {

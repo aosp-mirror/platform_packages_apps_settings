@@ -356,22 +356,12 @@ public class FakeUid extends Uid {
     }
 
     @Override
-    public long getBluetoothMeasuredBatteryConsumptionUC() {
-        return 0;
-    }
-
-    @Override
-    public long getCpuMeasuredBatteryConsumptionUC() {
-        return 0;
-    }
-
-    @Override
     public long getScreenOnMeasuredBatteryConsumptionUC() {
         return 0;
     }
 
     @Override
-    public long getWifiMeasuredBatteryConsumptionUC() {
+    public long getCpuMeasuredBatteryConsumptionUC() {
         return 0;
     }
 

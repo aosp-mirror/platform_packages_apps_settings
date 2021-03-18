@@ -19,22 +19,18 @@ package com.android.settings.fuelgauge;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.os.BatteryConsumer;
-import android.os.BatteryUsageStats;
+import android.os.BatteryStats;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import android.os.SystemBatteryConsumer;
-import android.os.UidBatteryConsumer;
-import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.util.SparseArray;
 
 import androidx.annotation.VisibleForTesting;
@@ -42,6 +38,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatterySipper.DrainType;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -66,57 +65,35 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     static final boolean USE_FAKE_DATA = false;
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 20;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
+    private static final int STATS_TYPE = BatteryStats.STATS_SINCE_CHARGED;
 
     private final String mPreferenceKey;
     @VisibleForTesting
     PreferenceGroup mAppListGroup;
-    private BatteryUsageStats mBatteryUsageStats;
+    private BatteryStatsHelper mBatteryStatsHelper;
     private ArrayMap<String, Preference> mPreferenceCache;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
-    private final UserManager mUserManager;
-    private final PackageManager mPackageManager;
-    private final SettingsActivity mActivity;
-    private final InstrumentedPreferenceFragment mFragment;
+    private UserManager mUserManager;
+    private SettingsActivity mActivity;
+    private InstrumentedPreferenceFragment mFragment;
     private Context mPrefContext;
 
-    /**
-     * Battery attribution list configuration.
-     */
-    public interface Config {
-        /**
-         * Returns true if the attribution list should be shown.
-         */
-        boolean shouldShowBatteryAttributionList(Context context);
-    }
-
-    @VisibleForTesting
-    static Config sConfig = new Config() {
-        @Override
-        public boolean shouldShowBatteryAttributionList(Context context) {
-            if (USE_FAKE_DATA) {
-                return true;
-            }
-
-            PowerProfile powerProfile = new PowerProfile(context);
-            return powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL)
-                    >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
-        }
-    };
-
-    private final Handler mHandler = new Handler(Looper.getMainLooper()) {
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case BatteryEntry.MSG_UPDATE_NAME_ICON:
                     BatteryEntry entry = (BatteryEntry) msg.obj;
-                    PowerGaugePreference pgp = mAppListGroup.findPreference(entry.getKey());
+                    PowerGaugePreference pgp =
+                            (PowerGaugePreference) mAppListGroup.findPreference(
+                                    Integer.toString(entry.sipper.uidObj.getUid()));
                     if (pgp != null) {
-                        final int userId = UserHandle.getUserId(entry.getUid());
+                        final int userId = UserHandle.getUserId(entry.sipper.getUid());
                         final UserHandle userHandle = new UserHandle(userId);
                         pgp.setIcon(mUserManager.getBadgedIconForUser(entry.getIcon(), userHandle));
                         pgp.setTitle(entry.name);
-                        if (entry.isAppEntry()) {
+                        if (entry.sipper.drainType == DrainType.APP) {
                             pgp.setContentDescription(entry.name);
                         }
                     }
@@ -144,7 +121,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         mPreferenceKey = preferenceKey;
         mBatteryUtils = BatteryUtils.getInstance(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mPackageManager = context.getPackageManager();
         mActivity = activity;
         mFragment = fragment;
     }
@@ -184,63 +160,78 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         if (preference instanceof PowerGaugePreference) {
             PowerGaugePreference pgp = (PowerGaugePreference) preference;
             BatteryEntry entry = pgp.getInfo();
-            AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity,
-                    mFragment, entry, pgp.getPercent());
+            AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils,
+                    mFragment, mBatteryStatsHelper, STATS_TYPE, entry, pgp.getPercent());
             return true;
         }
         return false;
     }
 
-    /**
-     * Refreshes the list of battery consumers using the supplied BatteryUsageStats.
-     */
-    public void refreshAppListGroup(BatteryUsageStats batteryUsageStats, boolean showAllApps) {
+    public void refreshAppListGroup(BatteryStatsHelper statsHelper, boolean showAllApps) {
         if (!isAvailable()) {
             return;
         }
 
-        mBatteryUsageStats = USE_FAKE_DATA ? getFakeStats() : batteryUsageStats;
+        mBatteryStatsHelper = statsHelper;
         mAppListGroup.setTitle(R.string.power_usage_list_summary);
 
+        final PowerProfile powerProfile = statsHelper.getPowerProfile();
+        final BatteryStats stats = statsHelper.getStats();
+        final double averagePower = powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL);
         boolean addedSome = false;
+        final int dischargeAmount = USE_FAKE_DATA ? 5000
+                : stats != null ? stats.getDischargeAmount(STATS_TYPE) : 0;
 
         cacheRemoveAllPrefs(mAppListGroup);
         mAppListGroup.setOrderingAsAdded(false);
 
-        if (sConfig.shouldShowBatteryAttributionList(mContext)) {
-            final int dischargePercentage = getDischargePercentage(batteryUsageStats);
-            final List<BatteryEntry> usageList = getCoalescedUsageList(showAllApps);
-            final double totalPower = batteryUsageStats.getConsumedPower();
+        if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
+            final List<BatterySipper> usageList = getCoalescedUsageList(
+                    USE_FAKE_DATA ? getFakeStats() : statsHelper.getUsageList());
+            double hiddenPowerMah = showAllApps ? 0 :
+                    mBatteryUtils.removeHiddenBatterySippers(usageList);
+            mBatteryUtils.sortUsageList(usageList);
+
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
-                final BatteryEntry entry = usageList.get(i);
+                final BatterySipper sipper = usageList.get(i);
+                double totalPower = USE_FAKE_DATA ? 4000 : statsHelper.getTotalPower();
 
                 final double percentOfTotal = mBatteryUtils.calculateBatteryPercent(
-                        entry.getConsumedPower(), totalPower, dischargePercentage);
+                        sipper.totalPowerMah, totalPower, hiddenPowerMah, dischargeAmount);
 
                 if (((int) (percentOfTotal + .5)) < 1) {
                     continue;
                 }
-
-                final UserHandle userHandle = new UserHandle(UserHandle.getUserId(entry.getUid()));
+                if (shouldHideSipper(sipper)) {
+                    continue;
+                }
+                final UserHandle userHandle = new UserHandle(UserHandle.getUserId(sipper.getUid()));
+                final BatteryEntry entry = new BatteryEntry(mActivity, mHandler, mUserManager,
+                        sipper, null);
                 final Drawable badgedIcon = mUserManager.getBadgedIconForUser(entry.getIcon(),
                         userHandle);
                 final CharSequence contentDescription = mUserManager.getBadgedLabelForUser(
-                        entry.getLabel(), userHandle);
+                        entry.getLabel(),
+                        userHandle);
 
-                final String key = entry.getKey();
+                final String key = extractKeyFromSipper(sipper);
                 PowerGaugePreference pref = (PowerGaugePreference) getCachedPreference(key);
                 if (pref == null) {
                     pref = new PowerGaugePreference(mPrefContext, badgedIcon,
                             contentDescription, entry);
                     pref.setKey(key);
                 }
-                entry.percent = percentOfTotal;
+                sipper.percent = percentOfTotal;
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
                 pref.shouldShowAnomalyIcon(false);
-                setUsageSummary(pref, entry);
+                if (sipper.usageTimeMs == 0 && sipper.drainType == DrainType.APP) {
+                    sipper.usageTimeMs = mBatteryUtils.getProcessTimeMs(
+                            BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, STATS_TYPE);
+                }
+                setUsageSummary(pref, sipper);
                 addedSome = true;
                 mAppListGroup.addPreference(pref);
                 if (mAppListGroup.getPreferenceCount() - getCachedCount()
@@ -257,14 +248,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         BatteryEntry.startRequestQueue();
     }
 
-    private int getDischargePercentage(BatteryUsageStats batteryUsageStats) {
-        int dischargePercentage = batteryUsageStats.getDischargePercentage();
-        if (dischargePercentage < 0) {
-            dischargePercentage = 0;
-        }
-        return dischargePercentage;
-    }
-
     /**
      * We want to coalesce some UIDs. For example, dex2oat runs under a shared gid that
      * exists for all users of the same app. We detect this case and merge the power use
@@ -272,100 +255,127 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
      *
      * @return A sorted list of apps using power.
      */
-    private List<BatteryEntry> getCoalescedUsageList(boolean showAllApps) {
-        final SparseArray<BatteryEntry> batteryEntryList = new SparseArray<>();
+    private List<BatterySipper> getCoalescedUsageList(final List<BatterySipper> sippers) {
+        final SparseArray<BatterySipper> uidList = new SparseArray<>();
 
-        final ArrayList<BatteryEntry> results = new ArrayList<>();
-        final List<UidBatteryConsumer> uidBatteryConsumers =
-                mBatteryUsageStats.getUidBatteryConsumers();
-        for (int i = 0, size = uidBatteryConsumers.size(); i < size; i++) {
-            final UidBatteryConsumer consumer = uidBatteryConsumers.get(i);
-            int realUid = consumer.getUid();
+        final ArrayList<BatterySipper> results = new ArrayList<>();
+        final int numSippers = sippers.size();
+        for (int i = 0; i < numSippers; i++) {
+            BatterySipper sipper = sippers.get(i);
+            if (sipper.getUid() > 0) {
+                int realUid = sipper.getUid();
 
-            // Check if this UID is a shared GID. If so, we combine it with the OWNER's
-            // actual app UID.
-            if (isSharedGid(consumer.getUid())) {
-                realUid = UserHandle.getUid(UserHandle.USER_SYSTEM,
-                        UserHandle.getAppIdFromSharedAppGid(consumer.getUid()));
-            }
+                // Check if this UID is a shared GID. If so, we combine it with the OWNER's
+                // actual app UID.
+                if (isSharedGid(sipper.getUid())) {
+                    realUid = UserHandle.getUid(UserHandle.USER_SYSTEM,
+                            UserHandle.getAppIdFromSharedAppGid(sipper.getUid()));
+                }
 
-            // Check if this UID is a system UID (mediaserver, logd, nfc, drm, etc).
-            if (isSystemUid(realUid)
-                    && !"mediaserver".equals(consumer.getPackageWithHighestDrain())) {
-                // Use the system UID for all UIDs running in their own sandbox that
-                // are not apps. We exclude mediaserver because we already are expected to
-                // report that as a separate item.
-                realUid = Process.SYSTEM_UID;
-            }
+                // Check if this UID is a system UID (mediaserver, logd, nfc, drm, etc).
+                if (isSystemUid(realUid)
+                        && !"mediaserver".equals(sipper.packageWithHighestDrain)) {
+                    // Use the system UID for all UIDs running in their own sandbox that
+                    // are not apps. We exclude mediaserver because we already are expected to
+                    // report that as a separate item.
+                    realUid = Process.SYSTEM_UID;
+                }
 
-            final String[] packages = mPackageManager.getPackagesForUid(consumer.getUid());
-            if (mBatteryUtils.shouldHideUidBatteryConsumerUnconditionally(consumer, packages)) {
-                continue;
-            }
+                if (realUid != sipper.getUid()) {
+                    // Replace the BatterySipper with a new one with the real UID set.
+                    BatterySipper newSipper = new BatterySipper(sipper.drainType,
+                            new FakeUid(realUid), 0.0);
+                    newSipper.add(sipper);
+                    newSipper.packageWithHighestDrain = sipper.packageWithHighestDrain;
+                    newSipper.mPackages = sipper.mPackages;
+                    sipper = newSipper;
+                }
 
-            final boolean isHidden = mBatteryUtils.shouldHideUidBatteryConsumer(consumer, packages);
-            if (isHidden && !showAllApps) {
-                continue;
-            }
+                int index = uidList.indexOfKey(realUid);
+                if (index < 0) {
+                    // New entry.
+                    uidList.put(realUid, sipper);
+                } else {
+                    // Combine BatterySippers if we already have one with this UID.
+                    final BatterySipper existingSipper = uidList.valueAt(index);
+                    existingSipper.add(sipper);
+                    if (existingSipper.packageWithHighestDrain == null
+                            && sipper.packageWithHighestDrain != null) {
+                        existingSipper.packageWithHighestDrain = sipper.packageWithHighestDrain;
+                    }
 
-            final int index = batteryEntryList.indexOfKey(realUid);
-            if (index < 0) {
-                // New entry.
-                batteryEntryList.put(realUid, new BatteryEntry(mActivity, mHandler, mUserManager,
-                        consumer, isHidden, packages, null));
+                    final int existingPackageLen = existingSipper.mPackages != null ?
+                            existingSipper.mPackages.length : 0;
+                    final int newPackageLen = sipper.mPackages != null ?
+                            sipper.mPackages.length : 0;
+                    if (newPackageLen > 0) {
+                        String[] newPackages = new String[existingPackageLen + newPackageLen];
+                        if (existingPackageLen > 0) {
+                            System.arraycopy(existingSipper.mPackages, 0, newPackages, 0,
+                                    existingPackageLen);
+                        }
+                        System.arraycopy(sipper.mPackages, 0, newPackages, existingPackageLen,
+                                newPackageLen);
+                        existingSipper.mPackages = newPackages;
+                    }
+                }
             } else {
-                // Combine BatterySippers if we already have one with this UID.
-                final BatteryEntry existingSipper = batteryEntryList.valueAt(index);
-                existingSipper.add(consumer);
+                results.add(sipper);
             }
         }
 
-        final List<SystemBatteryConsumer> systemBatteryConsumers =
-                mBatteryUsageStats.getSystemBatteryConsumers();
-        for (int i = 0, size = systemBatteryConsumers.size(); i < size; i++) {
-            final SystemBatteryConsumer consumer = systemBatteryConsumers.get(i);
-            if (!showAllApps && mBatteryUtils.shouldHideSystemBatteryConsumer(consumer)) {
-                continue;
-            }
-
-            results.add(new BatteryEntry(mActivity, mHandler, mUserManager,
-                    consumer, /* isHidden */ true, null, null));
-        }
-
-        if (showAllApps) {
-            final List<UserBatteryConsumer> userBatteryConsumers =
-                    mBatteryUsageStats.getUserBatteryConsumers();
-            for (int i = 0, size = userBatteryConsumers.size(); i < size; i++) {
-                final UserBatteryConsumer consumer = userBatteryConsumers.get(i);
-                results.add(new BatteryEntry(mActivity, mHandler, mUserManager,
-                        consumer, /* isHidden */ true, null, null));
-            }
-        }
-
-        final int numUidSippers = batteryEntryList.size();
-
+        final int numUidSippers = uidList.size();
         for (int i = 0; i < numUidSippers; i++) {
-            results.add(batteryEntryList.valueAt(i));
+            results.add(uidList.valueAt(i));
         }
 
         // The sort order must have changed, so re-sort based on total power use.
-        results.sort(BatteryEntry.COMPARATOR);
+        mBatteryUtils.sortUsageList(results);
         return results;
     }
 
     @VisibleForTesting
-    void setUsageSummary(Preference preference, BatteryEntry entry) {
+    void setUsageSummary(Preference preference, BatterySipper sipper) {
         // Only show summary when usage time is longer than one minute
-        final long usageTimeMs = entry.getTimeInForegroundMs();
-        if (shouldShowSummary(entry) && usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
+        final long usageTimeMs = sipper.usageTimeMs;
+        if (shouldShowSummary(sipper) && usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence =
                     StringUtil.formatElapsedTime(mContext, usageTimeMs, false);
             preference.setSummary(
-                    entry.isHidden()
+                    (sipper.drainType != DrainType.APP || mBatteryUtils.shouldHideSipper(sipper))
                             ? timeSequence
                             : TextUtils.expandTemplate(mContext.getText(R.string.battery_used_for),
                                     timeSequence));
         }
+    }
+
+    @VisibleForTesting
+    boolean shouldHideSipper(BatterySipper sipper) {
+        // Don't show over-counted, unaccounted and hidden system module in any condition
+        return sipper.drainType == BatterySipper.DrainType.OVERCOUNTED
+                || sipper.drainType == BatterySipper.DrainType.UNACCOUNTED
+                || mBatteryUtils.isHiddenSystemModule(sipper) || sipper.getUid() < 0;
+    }
+
+    @VisibleForTesting
+    String extractKeyFromSipper(BatterySipper sipper) {
+        if (sipper.uidObj != null) {
+            return extractKeyFromUid(sipper.getUid());
+        } else if (sipper.drainType == DrainType.USER) {
+            return sipper.drainType.toString() + sipper.userId;
+        } else if (sipper.drainType != DrainType.APP) {
+            return sipper.drainType.toString();
+        } else if (sipper.getPackages() != null) {
+            return TextUtils.concat(sipper.getPackages()).toString();
+        } else {
+            Log.w(TAG, "Inappropriate BatterySipper without uid and package names: " + sipper);
+            return "-1";
+        }
+    }
+
+    @VisibleForTesting
+    String extractKeyFromUid(int uid) {
+        return Integer.toString(uid);
     }
 
     private void cacheRemoveAllPrefs(PreferenceGroup group) {
@@ -380,12 +390,12 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         }
     }
 
-    private boolean shouldShowSummary(BatteryEntry entry) {
+    private boolean shouldShowSummary(BatterySipper sipper) {
         final CharSequence[] allowlistPackages = mContext.getResources()
                 .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
-        final String target = entry.getDefaultPackageName();
+        final String target = sipper.packageWithHighestDrain;
 
-        for (CharSequence packageName : allowlistPackages) {
+        for (CharSequence packageName: allowlistPackages) {
             if (TextUtils.equals(target, packageName)) {
                 return false;
             }
@@ -402,54 +412,39 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         return appUid >= Process.SYSTEM_UID && appUid < Process.FIRST_APPLICATION_UID;
     }
 
-    private BatteryUsageStats getFakeStats() {
-        BatteryUsageStats.Builder builder = new BatteryUsageStats.Builder(0, 0)
-                .setDischargePercentage(100);
-
-        float use = 500;
-        for (@SystemBatteryConsumer.DrainType int drainType : new int[]{
-                SystemBatteryConsumer.DRAIN_TYPE_AMBIENT_DISPLAY,
-                SystemBatteryConsumer.DRAIN_TYPE_BLUETOOTH,
-                SystemBatteryConsumer.DRAIN_TYPE_CAMERA,
-                SystemBatteryConsumer.DRAIN_TYPE_FLASHLIGHT,
-                SystemBatteryConsumer.DRAIN_TYPE_IDLE,
-                SystemBatteryConsumer.DRAIN_TYPE_MEMORY,
-                SystemBatteryConsumer.DRAIN_TYPE_MOBILE_RADIO,
-                SystemBatteryConsumer.DRAIN_TYPE_PHONE,
-                SystemBatteryConsumer.DRAIN_TYPE_SCREEN,
-                SystemBatteryConsumer.DRAIN_TYPE_WIFI,
-        }) {
-            builder.getOrCreateSystemBatteryConsumerBuilder(drainType)
-                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, use);
+    private static List<BatterySipper> getFakeStats() {
+        ArrayList<BatterySipper> stats = new ArrayList<>();
+        float use = 5;
+        for (DrainType type : DrainType.values()) {
+            if (type == DrainType.APP) {
+                continue;
+            }
+            stats.add(new BatterySipper(type, null, use));
             use += 5;
         }
-
-        use = 450;
         for (int i = 0; i < 100; i++) {
-            builder.getOrCreateUidBatteryConsumerBuilder(
-                            new FakeUid(Process.FIRST_APPLICATION_UID + i))
-                    .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 10000 + i * 1000)
-                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, use);
-            use += 1;
+            stats.add(new BatterySipper(DrainType.APP,
+                    new FakeUid(Process.FIRST_APPLICATION_UID + i), use));
         }
+        stats.add(new BatterySipper(DrainType.APP,
+                new FakeUid(0), use));
 
         // Simulate dex2oat process.
-        builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 1000.0)
-                .setPackageWithHighestDrain("dex2oat");
+        BatterySipper sipper = new BatterySipper(DrainType.APP,
+                new FakeUid(UserHandle.getSharedAppGid(Process.FIRST_APPLICATION_UID)), 10.0f);
+        sipper.packageWithHighestDrain = "dex2oat";
+        stats.add(sipper);
 
-        builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID + 1))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 1000.0)
-                .setPackageWithHighestDrain("dex2oat");
+        sipper = new BatterySipper(DrainType.APP,
+                new FakeUid(UserHandle.getSharedAppGid(Process.FIRST_APPLICATION_UID + 1)), 10.0f);
+        sipper.packageWithHighestDrain = "dex2oat";
+        stats.add(sipper);
 
-        builder.getOrCreateUidBatteryConsumerBuilder(
-                        new FakeUid(UserHandle.getSharedAppGid(Process.LOG_UID)))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 900.0);
+        sipper = new BatterySipper(DrainType.APP,
+                new FakeUid(UserHandle.getSharedAppGid(Process.LOG_UID)), 9.0f);
+        stats.add(sipper);
 
-        return builder.build();
+        return stats;
     }
 
     private Preference getCachedPreference(String key) {
