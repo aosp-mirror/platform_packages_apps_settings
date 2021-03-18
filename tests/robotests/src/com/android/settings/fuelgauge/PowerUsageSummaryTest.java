@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -40,8 +39,6 @@ import android.provider.Settings;
 import androidx.loader.app.LoaderManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.os.BatterySipper;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
@@ -54,7 +51,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -62,35 +58,19 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(RobolectricTestRunner.class)
 public class PowerUsageSummaryTest {
 
-    private static final int UID = 123;
-    private static final int POWER_MAH = 100;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
-    private static final long TIME_SINCE_LAST_FULL_CHARGE_US =
-            TIME_SINCE_LAST_FULL_CHARGE_MS * 1000;
-    private static final long USAGE_TIME_MS = 65 * 60 * 1000;
-    private static final double TOTAL_POWER = 200;
     private static Intent sAdditionalBatteryInfoIntent;
 
     @BeforeClass
     public static void beforeClass() {
         sAdditionalBatteryInfoIntent = new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
     }
-
-    @Mock
-    private BatterySipper mNormalBatterySipper;
-    @Mock
-    private BatterySipper mScreenBatterySipper;
-    @Mock
-    private BatterySipper mCellBatterySipper;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private BatteryStatsHelper mBatteryHelper;
     @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
@@ -104,7 +84,6 @@ public class PowerUsageSummaryTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
-    private List<BatterySipper> mUsageList;
     private Context mRealContext;
     private TestFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
@@ -123,27 +102,6 @@ public class PowerUsageSummaryTest {
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(sAdditionalBatteryInfoIntent);
-        when(mBatteryHelper.getTotalPower()).thenReturn(TOTAL_POWER);
-        when(mBatteryHelper.getStats().computeBatteryRealtime(anyLong(), anyInt()))
-                .thenReturn(TIME_SINCE_LAST_FULL_CHARGE_US);
-
-        when(mNormalBatterySipper.getUid()).thenReturn(UID);
-        mNormalBatterySipper.totalPowerMah = POWER_MAH;
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
-
-        mCellBatterySipper.drainType = BatterySipper.DrainType.CELL;
-        mCellBatterySipper.totalPowerMah = POWER_MAH;
-
-        mScreenBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
-        mScreenBatterySipper.usageTimeMs = USAGE_TIME_MS;
-
-        mUsageList = new ArrayList<>();
-        mUsageList.add(mNormalBatterySipper);
-        mUsageList.add(mScreenBatterySipper);
-        mUsageList.add(mCellBatterySipper);
-
-        mFragment.mStatsHelper = mBatteryHelper;
-        when(mBatteryHelper.getUsageList()).thenReturn(mUsageList);
         mFragment.mBatteryUtils = spy(new BatteryUtils(mRealContext));
         ReflectionHelpers.setField(mFragment, "mVisibilityLoggerMixin", mVisibilityLoggerMixin);
         ReflectionHelpers.setField(mFragment, "mBatteryBroadcastReceiver",
