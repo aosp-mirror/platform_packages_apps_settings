@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.text.BidiFormatter;
 
 import com.android.settings.R;
@@ -29,7 +30,13 @@ public class AppVersionPreferenceController extends AppInfoPreferenceControllerB
 
     @Override
     public CharSequence getSummary() {
+        // TODO(b/168333280): Review the null case in detail since this is just a quick
+        // workaround to fix NPE.
+        final PackageInfo packageInfo = mParent.getPackageInfo();
+        if (packageInfo == null) {
+            return null;
+        }
         return mContext.getString(R.string.version_text,
-                BidiFormatter.getInstance().unicodeWrap(mParent.getPackageInfo().versionName));
+                BidiFormatter.getInstance().unicodeWrap(packageInfo.versionName));
     }
 }
