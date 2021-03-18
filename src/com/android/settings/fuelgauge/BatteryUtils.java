@@ -42,7 +42,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
-import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
@@ -173,22 +172,12 @@ public class BatteryUtils {
     }
 
     /**
-     * Check whether we should hide the battery sipper.
+     * Returns true if the specified battery consumer should be excluded from the summary
+     * battery consumption list.
      */
-    public boolean shouldHideSipper(BatterySipper sipper) {
-        final BatterySipper.DrainType drainType = sipper.drainType;
-
-        return drainType == BatterySipper.DrainType.IDLE
-                || drainType == BatterySipper.DrainType.CELL
-                || drainType == BatterySipper.DrainType.SCREEN
-                || drainType == BatterySipper.DrainType.UNACCOUNTED
-                || drainType == BatterySipper.DrainType.OVERCOUNTED
-                || drainType == BatterySipper.DrainType.BLUETOOTH
-                || drainType == BatterySipper.DrainType.WIFI
-                || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
-                || mPowerUsageFeatureProvider.isTypeService(sipper)
-                || mPowerUsageFeatureProvider.isTypeSystem(sipper)
-                || isHiddenSystemModule(sipper);
+    public boolean shouldHideUidBatteryConsumer(UidBatteryConsumer consumer) {
+        return shouldHideUidBatteryConsumer(consumer,
+                mPackageManager.getPackagesForUid(consumer.getUid()));
     }
 
     /**
@@ -228,17 +217,6 @@ public class BatteryUtils {
     }
 
     /**
-     * Return {@code true} if one of packages in {@code sipper} is hidden system modules
-     */
-    public boolean isHiddenSystemModule(BatterySipper sipper) {
-        if (sipper.uidObj == null) {
-            return false;
-        }
-        sipper.mPackages = mPackageManager.getPackagesForUid(sipper.getUid());
-        return isHiddenSystemModule(sipper.mPackages);
-    }
-
-    /**
      * Returns true if one the specified packages belongs to a hidden system module.
      */
     public boolean isHiddenSystemModule(String[] packages) {
@@ -268,23 +246,6 @@ public class BatteryUtils {
         }
 
         return (powerUsageMah / totalPowerMah) * dischargeAmount;
-    }
-
-    /**
-     * Calculate the whole running time in the state {@code statsType}
-     *
-     * @param batteryStatsHelper utility class that contains the data
-     * @param statsType          state that we want to calculate the time for
-     * @return the running time in millis
-     */
-    public long calculateRunningTimeBasedOnStatsType(BatteryStatsHelper batteryStatsHelper,
-            int statsType) {
-        final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
-                SystemClock.elapsedRealtime());
-        // Return the battery time (millisecond) on status mStatsType
-        return PowerUtil.convertUsToMs(
-                batteryStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs, statsType));
-
     }
 
     /**
@@ -336,14 +297,13 @@ public class BatteryUtils {
     /**
      * Calculate the time since last full charge, including the device off time
      *
-     * @param batteryStatsHelper utility class that contains the data
+     * @param batteryUsageStats  class that contains the data
      * @param currentTimeMs      current wall time
      * @return time in millis
      */
-    public long calculateLastFullChargeTime(BatteryStatsHelper batteryStatsHelper,
+    public long calculateLastFullChargeTime(BatteryUsageStats batteryUsageStats,
             long currentTimeMs) {
-        return currentTimeMs - batteryStatsHelper.getStats().getStartClockTime();
-
+        return currentTimeMs - batteryUsageStats.getStatsStartRealtime();
     }
 
     public static void logRuntime(String tag, String message, long startTime) {
