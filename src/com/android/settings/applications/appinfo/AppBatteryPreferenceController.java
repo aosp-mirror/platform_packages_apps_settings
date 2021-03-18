@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.os.BatteryStats;
 import android.os.BatteryUsageStats;
 import android.os.Bundle;
 import android.os.UidBatteryConsumer;
@@ -46,7 +45,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppBatteryPreferenceController extends BasePreferenceController
@@ -113,11 +111,10 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         if (isBatteryStatsAvailable()) {
             final UserManager userManager =
                     (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-            final BatteryEntry entry = new BatteryEntry(mContext, null, userManager, mSipper,
-                    mUidBatteryConsumer);
-            entry.defaultPackageName = mPackageName;
+            final BatteryEntry entry = new BatteryEntry(mContext, /* handler */null, userManager,
+                    mUidBatteryConsumer, /* isHidden */ false, /* packages */ null, mPackageName);
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
-                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent);
+                    entry, mBatteryPercent);
         } else {
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
                     mPackageName);
@@ -163,13 +160,9 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     void updateBattery() {
         mPreference.setEnabled(true);
         if (isBatteryStatsAvailable()) {
-            final int dischargePercentage = mBatteryUsageStats.getDischargePercentage();
-
-            final List<BatterySipper> usageList = new ArrayList<>(mBatteryHelper.getUsageList());
-            final double hiddenAmount = mBatteryUtils.removeHiddenBatterySippers(usageList);
             final int percentOfMax = (int) mBatteryUtils.calculateBatteryPercent(
                     mUidBatteryConsumer.getConsumedPower(), mBatteryUsageStats.getConsumedPower(),
-                    hiddenAmount, dischargePercentage);
+                    mBatteryUsageStats.getDischargePercentage());
             mBatteryPercent = Utils.formatPercentage(percentOfMax);
             mPreference.setSummary(mContext.getString(R.string.battery_summary, mBatteryPercent));
         } else {

@@ -19,8 +19,11 @@ package com.android.settings.network.telephony;
 import android.content.Context;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.ArraySet;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.google.common.collect.Sets;
 
@@ -34,7 +37,9 @@ public class SignalStrengthListener {
 
     private TelephonyManager mBaseTelephonyManager;
     private Callback mCallback;
-    private Map<Integer, PhoneStateListener> mListeners;
+    private Context mContext;
+    @VisibleForTesting
+    Map<Integer, SignalStrengthTelephonyCallback> mTelephonyCallbacks;
 
     public interface Callback {
         void onSignalStrengthChanged();
@@ -43,20 +48,21 @@ public class SignalStrengthListener {
     public SignalStrengthListener(Context context, Callback callback) {
         mBaseTelephonyManager = context.getSystemService(TelephonyManager.class);
         mCallback = callback;
-        mListeners = new TreeMap<>();
+        mContext = context;
+        mTelephonyCallbacks = new TreeMap<>();
     }
 
     /** Resumes listening for signal strength changes for the set of ids from the last call to
      * {@link #updateSubscriptionIds(Set)}  */
     public void resume() {
-        for (int subId : mListeners.keySet()) {
+        for (int subId : mTelephonyCallbacks.keySet()) {
             startListening(subId);
         }
     }
 
     /** Pauses listening for signal strength changes */
     public void pause() {
-        for (int subId : mListeners.keySet()) {
+        for (int subId : mTelephonyCallbacks.keySet()) {
             stopListening(subId);
         }
     }
@@ -64,30 +70,36 @@ public class SignalStrengthListener {
     /** Updates the set of ids we want to be listening for, beginning to listen for any new ids and
      * stopping listening for any ids not contained in the new set */
     public void updateSubscriptionIds(Set<Integer> ids) {
-        Set<Integer> currentIds = new ArraySet<>(mListeners.keySet());
+        Set<Integer> currentIds = new ArraySet<>(mTelephonyCallbacks.keySet());
         for (int idToRemove : Sets.difference(currentIds, ids)) {
             stopListening(idToRemove);
-            mListeners.remove(idToRemove);
+            mTelephonyCallbacks.remove(idToRemove);
         }
         for (int idToAdd : Sets.difference(ids, currentIds)) {
-            PhoneStateListener listener = new PhoneStateListener() {
-                @Override
-                public void onSignalStrengthsChanged(SignalStrength signalStrength) {
-                    mCallback.onSignalStrengthChanged();
-                }
-            };
-            mListeners.put(idToAdd, listener);
+            SignalStrengthTelephonyCallback telephonyCallback =
+                    new SignalStrengthTelephonyCallback();
+            mTelephonyCallbacks.put(idToAdd, telephonyCallback);
             startListening(idToAdd);
+        }
+    }
+
+    @VisibleForTesting
+    class SignalStrengthTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.SignalStrengthsListener {
+        @Override
+        public void onSignalStrengthsChanged(SignalStrength signalStrength) {
+            mCallback.onSignalStrengthChanged();
         }
     }
 
     private void startListening(int subId) {
         TelephonyManager mgr = mBaseTelephonyManager.createForSubscriptionId(subId);
-        mgr.listen(mListeners.get(subId), PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+        mgr.registerTelephonyCallback(
+                mContext.getMainExecutor(), mTelephonyCallbacks.get(subId));
     }
 
     private void stopListening(int subId) {
         TelephonyManager mgr = mBaseTelephonyManager.createForSubscriptionId(subId);
-        mgr.listen(mListeners.get(subId), PhoneStateListener.LISTEN_NONE);
+        mgr.unregisterTelephonyCallback(mTelephonyCallbacks.get(subId));
     }
 }

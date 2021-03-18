@@ -28,6 +28,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -55,7 +56,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     private final UserManager mUserManager;
     private Preference mPreference;
     @VisibleForTesting
-    PhoneStateListener mPhoneStateListener;
+    MobileNetworkTelephonyCallback mTelephonyCallback;
 
     private BroadcastReceiver mAirplanModeChangedReceiver;
 
@@ -97,18 +98,22 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         return KEY_MOBILE_NETWORK_SETTINGS;
     }
 
+    class MobileNetworkTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.ServiceStateListener {
+        @Override
+        public void onServiceStateChanged(ServiceState serviceState) {
+            updateState(mPreference);
+        }
+    }
+
     @OnLifecycleEvent(Event.ON_START)
     public void onStart() {
         if (isAvailable()) {
-            if (mPhoneStateListener == null) {
-                mPhoneStateListener = new PhoneStateListener() {
-                    @Override
-                    public void onServiceStateChanged(ServiceState serviceState) {
-                        updateState(mPreference);
-                    }
-                };
+            if (mTelephonyCallback == null) {
+                mTelephonyCallback = new MobileNetworkTelephonyCallback();
             }
-            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_SERVICE_STATE);
+            mTelephonyManager.registerTelephonyCallback(
+                    mContext.getMainExecutor(), mTelephonyCallback);
         }
         if (mAirplanModeChangedReceiver != null) {
             mContext.registerReceiver(mAirplanModeChangedReceiver,
@@ -118,8 +123,8 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     @OnLifecycleEvent(Event.ON_STOP)
     public void onStop() {
-        if (mPhoneStateListener != null) {
-            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        if (mTelephonyCallback != null) {
+            mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
         }
         if (mAirplanModeChangedReceiver != null) {
             mContext.unregisterReceiver(mAirplanModeChangedReceiver);

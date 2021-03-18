@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.defaultapps;
 
-import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.content.Context;
 import android.content.Intent;
@@ -33,9 +33,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
-import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 public abstract class DefaultAppPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
