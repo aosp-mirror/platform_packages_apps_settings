@@ -901,7 +901,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         // Find IPv4 default gateway.
         String gateway = null;
         for (RouteInfo routeInfo : mLinkProperties.getRoutes()) {
-            if (routeInfo.isIPv4Default() && routeInfo.hasGateway()) {
+            if (routeInfo.hasGateway() && routeInfo.isDefaultRoute()
+                    && routeInfo.getDestination().getAddress() instanceof Inet4Address) {
                 gateway = routeInfo.getGateway().getHostAddress();
                 break;
             }
