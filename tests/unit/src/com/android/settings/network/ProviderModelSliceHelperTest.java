@@ -33,6 +33,7 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
@@ -90,6 +91,8 @@ public class ProviderModelSliceHelperTest {
     private SubscriptionInfo mDefaultDataSubscriptionInfo;
     @Mock
     private Drawable mDrawableWithSignalStrength;
+    @Mock
+    private WifiManager mWifiManager;
 
     @Before
     public void setUp() {
@@ -102,13 +105,23 @@ public class ProviderModelSliceHelperTest {
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
                 mCarrierConfigManager);
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(mBundle);
+        mBundle.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mConnectivityManager.getActiveNetwork()).thenReturn(mNetwork);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
 
         TestCustomSliceable testCustomSliceable = new TestCustomSliceable();
         mProviderModelSliceHelper = new MockProviderModelSliceHelper(mContext, testCustomSliceable);
+
+        final int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+        when(mDefaultDataSubscriptionInfo.getSubscriptionId()).thenReturn(defaultDataSubId);
+        when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
+                mDefaultDataSubscriptionInfo);
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mDefaultDataSubscriptionInfo));
     }
 
     @Test
@@ -155,20 +168,9 @@ public class ProviderModelSliceHelperTest {
         String expectDisplayName = "Name1";
         CharSequence expectedSubtitle = Html.fromHtml("5G", Html.FROM_HTML_MODE_LEGACY);
         String networkType = "5G";
-
-        final int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
-        when(mDefaultDataSubscriptionInfo.getSubscriptionId()).thenReturn(defaultDataSubId);
-        when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
-        when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
-                mDefaultDataSubscriptionInfo);
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mDefaultDataSubscriptionInfo));
-
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
-        mBundle.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);
+        mockConnections(true, ServiceState.STATE_IN_SERVICE, expectDisplayName,
+                mTelephonyManager.DATA_CONNECTED, true);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-
 
         ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow(
                 networkType);
@@ -178,7 +180,7 @@ public class ProviderModelSliceHelperTest {
     }
 
     @Test
-    public void createCarrierRow_hasDdsAndActiveNetworkIsCellular_verifyTitleAndSummary() {
+    public void createCarrierRow_wifiOnhasDdsAndActiveNetworkIsCellular_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
         String networkType = "5G";
         String connectedText = ResourcesUtils.getResourcesString(mContext,
@@ -186,16 +188,27 @@ public class ProviderModelSliceHelperTest {
         CharSequence expectedSubtitle = Html.fromHtml(ResourcesUtils.getResourcesString(mContext,
                 "preference_summary_default_combination", connectedText, networkType),
                 Html.FROM_HTML_MODE_LEGACY);
+        mockConnections(true, ServiceState.STATE_IN_SERVICE, expectDisplayName,
+                mTelephonyManager.DATA_CONNECTED, true);
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
 
-        final int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
-        when(mDefaultDataSubscriptionInfo.getSubscriptionId()).thenReturn(defaultDataSubId);
-        when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
-        when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
-                mDefaultDataSubscriptionInfo);
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mDefaultDataSubscriptionInfo));
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
-        mBundle.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);
+        ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow(
+                networkType);
+
+        assertThat(testRowBuild.getTitle()).isEqualTo(expectDisplayName);
+        assertThat(testRowBuild.getSubtitle()).isEqualTo(expectedSubtitle);
+    }
+
+    @Test
+    public void createCarrierRow_noNetworkAvailable_verifyTitleAndSummary() {
+        String expectDisplayName = "Name1";
+        CharSequence expectedSubtitle = Html.fromHtml(
+                ResourcesUtils.getResourcesString(mContext, "mobile_data_no_connection"),
+                Html.FROM_HTML_MODE_LEGACY);
+        String networkType = "";
+
+        mockConnections(true, ServiceState.STATE_OUT_OF_SERVICE, expectDisplayName,
+                mTelephonyManager.DATA_DISCONNECTED, false);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
 
         ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow(
@@ -207,53 +220,40 @@ public class ProviderModelSliceHelperTest {
 
     @Test
     public void isNoCarrierData_mobileDataOnAndNoData_returnTrue() {
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        when(mTelephonyManager.getDataState()).thenReturn(mTelephonyManager.DATA_DISCONNECTED);
-        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        mockConnections(true, ServiceState.STATE_IN_SERVICE, "",
+                mTelephonyManager.DATA_DISCONNECTED, true);
 
         assertThat(mProviderModelSliceHelper.isNoCarrierData()).isTrue();
     }
 
     @Test
     public void isNoCarrierData_mobileDataOffAndOutOfService_returnTrue() {
-        when(mTelephonyManager.isDataEnabled()).thenReturn(false);
-        when(mTelephonyManager.getDataState()).thenReturn(mTelephonyManager.DATA_DISCONNECTED);
-        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
+        mockConnections(false, ServiceState.STATE_OUT_OF_SERVICE, "",
+                mTelephonyManager.DATA_DISCONNECTED, true);
 
         assertThat(mProviderModelSliceHelper.isNoCarrierData()).isTrue();
     }
 
     @Test
     public void isNoCarrierData_mobileDataOnAndDataConnected_returnFalse() {
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        when(mTelephonyManager.getDataState()).thenReturn(mTelephonyManager.DATA_CONNECTED);
-        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        mockConnections(true, ServiceState.STATE_IN_SERVICE, "", mTelephonyManager.DATA_CONNECTED,
+                true);
 
         assertThat(mProviderModelSliceHelper.isNoCarrierData()).isFalse();
     }
 
     @Test
     public void isNoCarrierData_mobileDataOffAndVoiceIsInService_returnFalse() {
-        when(mTelephonyManager.isDataEnabled()).thenReturn(false);
-        when(mTelephonyManager.getDataState()).thenReturn(mTelephonyManager.DATA_DISCONNECTED);
-        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        mockConnections(false, ServiceState.STATE_IN_SERVICE, "",
+                mTelephonyManager.DATA_DISCONNECTED, true);
 
         assertThat(mProviderModelSliceHelper.isNoCarrierData()).isFalse();
     }
 
     @Test
     public void getMobileDrawable_noCarrierData_getMobileDrawable() throws Throwable {
-        when(mTelephonyManager.isDataEnabled()).thenReturn(false);
-        when(mTelephonyManager.getDataState()).thenReturn(mTelephonyManager.DATA_DISCONNECTED);
-        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
-        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
-        when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
-                mDefaultDataSubscriptionInfo);
+        mockConnections(false, ServiceState.STATE_OUT_OF_SERVICE, "",
+                mTelephonyManager.DATA_DISCONNECTED, true);
         when(mConnectivityManager.getActiveNetwork()).thenReturn(null);
         Drawable expectDrawable = mock(Drawable.class);
 
@@ -264,15 +264,10 @@ public class ProviderModelSliceHelperTest {
     @Test
     public void getMobileDrawable_hasCarrierDataAndDataIsOnCellular_getMobileDrawable()
             throws Throwable {
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        when(mTelephonyManager.getDataState()).thenReturn(mTelephonyManager.DATA_CONNECTED);
-        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
-        Drawable drawable = mock(Drawable.class);
-        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
-        when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
-                mDefaultDataSubscriptionInfo);
+        mockConnections(true, ServiceState.STATE_IN_SERVICE, "", mTelephonyManager.DATA_CONNECTED,
+                true);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+        Drawable drawable = mock(Drawable.class);
 
         assertThat(mProviderModelSliceHelper.getMobileDrawable(drawable)).isEqualTo(
                 mDrawableWithSignalStrength);
@@ -283,14 +278,9 @@ public class ProviderModelSliceHelperTest {
     @Test
     public void getMobileDrawable_hasCarrierDataAndDataIsOnWifi_getMobileDrawable()
             throws Throwable {
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        when(mTelephonyManager.getDataState()).thenReturn(mTelephonyManager.DATA_CONNECTED);
-        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        mockConnections(true, ServiceState.STATE_IN_SERVICE, "", mTelephonyManager.DATA_CONNECTED,
+                true);
         Drawable drawable = mock(Drawable.class);
-        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
-        when(mSubscriptionManager.getActiveSubscriptionInfo(defaultDataSubId)).thenReturn(
-                mDefaultDataSubscriptionInfo);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
 
         assertThat(mProviderModelSliceHelper.getMobileDrawable(drawable)).isEqualTo(
@@ -301,6 +291,16 @@ public class ProviderModelSliceHelperTest {
         mNetworkCapabilities = new NetworkCapabilities().addTransportType(networkType);
         when(mConnectivityManager.getNetworkCapabilities(mNetwork)).thenReturn(
                 mNetworkCapabilities);
+    }
+
+    private void mockConnections(boolean isDataEnabled, int serviceState, String expectDisplayName,
+            int getDataState, boolean isWifiEnabled) {
+        when(mTelephonyManager.isDataEnabled()).thenReturn(isDataEnabled);
+        when(mWifiManager.isWifiEnabled()).thenReturn(isWifiEnabled);
+        when(mTelephonyManager.getDataState()).thenReturn(getDataState);
+
+        when(mServiceState.getState()).thenReturn(serviceState);
+        when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
     }
 
     private class TestCustomSliceable implements CustomSliceable {

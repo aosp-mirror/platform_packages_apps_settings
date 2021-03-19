@@ -24,6 +24,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -231,6 +232,7 @@ public class ProviderModelSliceHelper {
     }
 
     private String getMobileSummary(String networkTypeDescription) {
+        final WifiManager wifiManager = mContext.getSystemService(WifiManager.class);
         String summary = networkTypeDescription;
         if (isDataSimActive()) {
             summary = mContext.getString(R.string.preference_summary_default_combination,
@@ -238,6 +240,8 @@ public class ProviderModelSliceHelper {
                     networkTypeDescription);
         } else if (!isMobileDataEnabled()) {
             summary = mContext.getString(R.string.mobile_data_off_summary);
+        } else if (!wifiManager.isWifiEnabled() && !isDataSimActive()) {
+            summary = mContext.getString(R.string.mobile_data_no_connection);
         }
         return summary;
     }
