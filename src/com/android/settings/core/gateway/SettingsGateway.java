@@ -45,6 +45,7 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
+import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
@@ -318,6 +319,7 @@ public class SettingsGateway {
             MediaControlsSettings.class.getName(),
             NetworkProviderSettings.class.getName(),
             AlarmsAndRemindersDetails.class.getName(),
+            MediaManagementAppsDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
