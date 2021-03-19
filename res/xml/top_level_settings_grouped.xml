@@ -97,27 +97,27 @@
         settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
+        android:fragment="com.android.settings.security.SecuritySettings"
+        android:icon="@drawable/ic_homepage_security_v2"
+        android:key="top_level_security"
+        android:order="-50"
+        android:title="@string/security_settings_title"
+        settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
+
+    <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
         android:icon="@drawable/ic_homepage_privacy_v2"
         android:key="top_level_privacy"
-        android:order="-50"
+        android:order="-40"
         android:title="@string/privacy_dashboard_title"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.location.LocationSettings"
         android:icon="@drawable/ic_homepage_location_v2"
         android:key="top_level_location"
-        android:order="-40"
+        android:order="-30"
         android:title="@string/location_settings_title"
         settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
-
-    <com.android.settings.homepage.HomepagePreference
-        android:fragment="com.android.settings.security.SecuritySettings"
-        android:icon="@drawable/ic_homepage_security_v2"
-        android:key="top_level_security"
-        android:order="-30"
-        android:title="@string/security_settings_title"
-        settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:key="top_level_emergency"
