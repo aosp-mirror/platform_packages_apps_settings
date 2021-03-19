@@ -19,8 +19,6 @@ package com.android.settings.wifi.slice;
 import android.content.Context;
 import android.net.Uri;
 
-import com.android.settings.slices.SliceBackgroundWorker;
-
 /**
  * {@link SliceBackgroundWorker} for Wi-Fi, used by {@link ContextualWifiSlice}.
  */

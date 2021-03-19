@@ -52,6 +52,7 @@ public class LocationWorkProfileSettings extends DashboardFragment {
         use(AppLocationPermissionPreferenceController.class).init(this);
         use(LocationFooterPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
+        use(RecentLocationAccessSeeAllButtonPreferenceController.class).init(this);
 
         final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
         final RecentLocationAccessPreferenceController controller = use(

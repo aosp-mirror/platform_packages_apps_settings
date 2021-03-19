@@ -32,6 +32,7 @@
         android:title="@string/location_recent_location_access_see_all"
         android:icon="@drawable/ic_chevron_right_24dp"
         android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
         settings:searchable="false"/>
 
     <PreferenceCategory

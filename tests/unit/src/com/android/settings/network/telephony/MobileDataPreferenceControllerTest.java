@@ -47,7 +47,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-
 @RunWith(AndroidJUnit4.class)
 public class MobileDataPreferenceControllerTest {
     private static final int SUB_ID = 2;

@@ -2416,6 +2416,10 @@
     <string name="wifi_hotspot_auto_off_title">Turn off hotspot automatically</string>
     <!-- Summary for the toggle to turn off hotspot automatically [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_auto_off_summary">When no devices are connected</string>
+    <!-- Title for the toggle to enable/disable the maximize compatibility [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_maximize_compatibility">Maximize compatibility</string>
+    <!-- Summary for the toggle to show the maximize compatibility warning message [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_maximize_compatibility_summary">This may reduce speed for devices connected to this hotspot and use more power</string>
 
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
@@ -4041,7 +4045,7 @@
             apps have access to location</item>
     </plurals>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
-    <string name="location_category_recent_location_access">Past 24 hour access</string>
+    <string name="location_category_recent_location_access">Recent access</string>
     <!-- Location settings screen, displayed when there're more than three recent location access apps [CHAR LIMIT=30] -->
     <string name="location_recent_location_access_see_all">See all</string>
     <!-- [CHAR LIMIT=30] Location settings screen, button to bring the user to view the details of recent location access -->
@@ -5362,15 +5366,17 @@
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
-    <!-- Title for the accessibility preference and switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_preference_title">Reduce brightness</string>
+    <!-- Title for the accessibility preference of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_title">Extra dim</string>
+    <!-- Title for the activation switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_switch_title">Make screen extra dim</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_preference_summary" product="default">Make screen darker than your phone\u2019s minimum brightness</string>
+    <string name="reduce_bright_colors_preference_summary" product="default">Dim screen beyond your phone\u2019s minimum brightness</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_preference_summary" product="tablet">Make screen darker than your tablet\u2019s minimum brightness</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet">Dim screen beyond your tablet\u2019s minimum brightness</string>
     <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_subtitle" product="default">
-        <![CDATA[Make your screen darker so it\u2019s more comfortable to read.<br/><br/>
+        <![CDATA[Make your screen dimmer so it\u2019s more comfortable to read.<br/><br/>
         This can be helpful when:
         <ol>
             <li>\u00a0Your phone\u2019s default minimum brightness is still too bright</li>
@@ -5390,10 +5396,6 @@
     </string>
     <!-- Title for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_intensity_preference_title">Intensity</string>
-    <!-- Start label for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=50] -->
-    <string name="reduce_bright_colors_intensity_preference_start_label">Slightly darker</string>
-    <!-- End label for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_intensity_preference_end_label">Darkest</string>
     <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
@@ -7257,6 +7259,12 @@
     <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_summary">Info &amp; contacts for <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
 
+    <!-- Button label for opening an arbitrary app [CHAR LIMIT=60] -->
+    <string name="open_app_button">Open <xliff:g id="app_name" example="Safety">%1$s</xliff:g></string>
+
+    <!-- Title for more settings button, clicking this button will open a new page containing more settings related to current page. [CHAR LIMIT=60] -->
+    <string name="more_settings_button">More Settings</string>
+
     <!-- Application Restrictions screen title [CHAR LIMIT=45] -->
     <string name="application_restrictions">Allow apps and content</string>
     <!-- Applications with restrictions header [CHAR LIMIT=45] -->
@@ -8221,7 +8229,7 @@
     <string name="zen_mode_settings_dnd_custom_settings_footer">Do Not Disturb is on for <xliff:g id="rule_names" example="Sleeping and Work">%s</xliff:g> with custom settings.</string>
 
     <!-- [CHAR LIMIT=120] Zen mode settings footer: Link following zen_mode_settings_dnd_custom_settings_footer to see the currently applied custom dnd settings. -->
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link"><annotation id="link"> View custom settings</annotation></string>
+    <string name="zen_mode_settings_dnd_custom_settings_footer_link"> <annotation id="link">View custom settings</annotation></string>
 
     <!--[CHAR LIMIT=40] Zen Interruption level: Priority.  -->
     <string name="zen_interruption_level_priority">Priority only</string>
@@ -8279,6 +8287,9 @@
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
     long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
     <string name="zen_category_duration">Duration for Quick Settings</string>
+    <!-- Do not disturb settings, main screen, category header describing settings that do not
+    fit in another group [CHAR LIMIT=100] -->
+    <string name="zen_settings_general">General</string>
 
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
@@ -10554,8 +10565,8 @@
         associated with this device, including settings, permissions, corporate access,
         network activity, and the device\'s location information.</string>
     <!-- Shown in admin details page to warn user about policies the admin can set on a financed device. [CHAR LIMIT=NONE] -->
-    <string name="admin_financed_message">Your device admin may be able to access data associated
-        with this device and change this device\’s settings.</string>
+    <string name="admin_financed_message">Your device administrator may be able to access data
+        associated with this device, manage apps, and change this device\’s settings.</string>
 
     <!-- Turn off a conditional state of the device (e.g. airplane mode, or hotspot) [CHAR LIMIT=30] -->
     <string name="condition_turn_off">Turn off</string>
@@ -12858,7 +12869,9 @@
     <!-- Title for battery saver main switch preferences. [CHAR LIMIT=50] -->
     <string name="battery_saver_main_switch_title">Use battery saver</string>
     <!-- Title for Do Not Disturb main switch preferences. [CHAR LIMIT=50] -->
-    <string name="do_not_disturb_main_switch_title">Use Do Not Disturb</string>
+    <string name="do_not_disturb_main_switch_title_on">Turn off now</string>
+    <!-- Title for Do Not Disturb main switch preferences. [CHAR LIMIT=50] -->
+    <string name="do_not_disturb_main_switch_title_off">Turn on now</string>
     <!-- Title for Night Light main switch preferences. [CHAR LIMIT=50] -->
     <string name="night_light_main_switch_title">Use Night Light</string>
     <!-- Title for NFC main switch preferences. [CHAR LIMIT=50] -->

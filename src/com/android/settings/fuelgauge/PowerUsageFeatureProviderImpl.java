@@ -66,6 +66,21 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isTypeSystem(int uid, String[] packages) {
+        // Classify all the sippers to type system if the range of uid is 0...FIRST_APPLICATION_UID
+        if (uid >= Process.ROOT_UID && uid < Process.FIRST_APPLICATION_UID) {
+            return true;
+        } else if (packages != null) {
+            for (final String packageName : packages) {
+                if (ArrayUtils.contains(PACKAGES_SYSTEM, packageName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean isLocationSettingEnabled(String[] packages) {
         return false;
     }

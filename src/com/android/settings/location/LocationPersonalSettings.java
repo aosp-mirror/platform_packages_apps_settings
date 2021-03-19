@@ -53,6 +53,7 @@ public class LocationPersonalSettings extends DashboardFragment {
         // STOPSHIP(b/180533061): resolve the personal/work location services issue before we can
         // ship.
         use(LocationFooterPreferenceController.class).init(this);
+        use(RecentLocationAccessSeeAllButtonPreferenceController.class).init(this);
 
         final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
         final RecentLocationAccessPreferenceController controller = use(

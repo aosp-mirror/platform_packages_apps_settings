@@ -47,6 +47,7 @@ public class FilterTouchesSwitchPreference extends SwitchPreference {
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
+         setSingleLineTitle(true);
         super.onBindViewHolder(holder);
         final View switchView = holder.findViewById(android.R.id.switch_widget);
         if (switchView != null) {

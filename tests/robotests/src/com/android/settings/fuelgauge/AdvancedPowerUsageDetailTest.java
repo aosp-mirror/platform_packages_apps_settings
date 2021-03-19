@@ -47,7 +47,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -114,11 +113,7 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private BatteryEntry mBatteryEntry;
     @Mock
-    private BatterySipper mBatterySipper;
-    @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
-    @Mock
-    private BatteryStats.Uid mUid;
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -140,6 +135,7 @@ public class AdvancedPowerUsageDetailTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getPackageName()).thenReturn("foo");
         FakeFeatureFactory.setupForTest();
 
         mFragment = spy(new AdvancedPowerUsageDetail());
@@ -168,19 +164,11 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
                 .setSummary(nullable(String.class));
 
-        doReturn(UID).when(mBatterySipper).getUid();
+        when(mBatteryEntry.getUid()).thenReturn(UID);
         when(mBatteryEntry.getLabel()).thenReturn(APP_LABEL);
-        doReturn(BACKGROUND_TIME_US).when(mUid).getProcessStateTime(
-                eq(BatteryStats.Uid.PROCESS_STATE_BACKGROUND), anyLong(), anyInt());
-        doReturn(PROCSTATE_TOP_TIME_US).when(mUid).getProcessStateTime(
-                eq(BatteryStats.Uid.PROCESS_STATE_TOP), anyLong(), anyInt());
-        doReturn(mForegroundActivityTimer).when(mUid).getForegroundActivityTimer();
-        doReturn(FOREGROUND_ACTIVITY_TIME_US).when(mForegroundActivityTimer)
-                .getTotalTimeLocked(anyLong(), anyInt());
-        ReflectionHelpers.setField(mBatteryEntry, "sipper", mBatterySipper);
+        when(mBatteryEntry.getTimeInBackgroundMs()).thenReturn(BACKGROUND_TIME_MS);
+        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(FOREGROUND_TIME_MS);
         mBatteryEntry.iconId = ICON_ID;
-        mBatterySipper.uidObj = mUid;
-        mBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
@@ -200,6 +188,7 @@ public class AdvancedPowerUsageDetailTest {
 
         Answer<Void> callable = invocation -> {
             mBundle = captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+            System.out.println("mBundle = " + mBundle);
             return null;
         };
         doAnswer(callable).when(mActivity).startActivityAsUser(captor.capture(),
@@ -262,8 +251,8 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testStartBatteryDetailPage_hasBasicData() {
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
@@ -275,28 +264,11 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_typeNotApp_hasBasicData() {
-        mBatterySipper.drainType = BatterySipper.DrainType.PHONE;
-        mBatterySipper.usageTimeMs = PHONE_FOREGROUND_TIME_MS;
-
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
-
-        assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
-        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
-            .isEqualTo(PHONE_FOREGROUND_TIME_MS);
-        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
-            .isEqualTo(PHONE_BACKGROUND_TIME_MS);
-        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
-            .isEqualTo(USAGE_PERCENT);
-    }
-
-    @Test
     public void testStartBatteryDetailPage_NormalApp() {
-        mBatterySipper.mPackages = PACKAGE_NAME;
-        mBatteryEntry.defaultPackageName = PACKAGE_NAME[0];
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        when(mBatteryEntry.getDefaultPackageName()).thenReturn(PACKAGE_NAME[0]);
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
                 PACKAGE_NAME[0]);
@@ -304,9 +276,10 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testStartBatteryDetailPage_SystemApp() {
-        mBatterySipper.mPackages = null;
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        when(mBatteryEntry.getDefaultPackageName()).thenReturn(null);
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_LABEL)).isEqualTo(APP_LABEL);
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_ICON_ID)).isEqualTo(ICON_ID);
@@ -316,23 +289,22 @@ public class AdvancedPowerUsageDetailTest {
     @Test
     public void testStartBatteryDetailPage_WorkApp() {
         final int appUid = 1010019;
-        mBatterySipper.mPackages = PACKAGE_NAME;
-        doReturn(appUid).when(mBatterySipper).getUid();
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        doReturn(appUid).when(mBatteryEntry).getUid();
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(10)));
     }
 
     @Test
     public void testStartBatteryDetailPage_typeUser_startByCurrentUser() {
-        mBatterySipper.drainType = BatterySipper.DrainType.USER;
-        mBatterySipper.userId = 10;
+        when(mBatteryEntry.isUserEntry()).thenReturn(true);
 
         final int currentUser = 20;
         ShadowActivityManager.setCurrentUser(currentUser);
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT);
 
         verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(currentUser)));
     }
@@ -362,18 +334,6 @@ public class AdvancedPowerUsageDetailTest {
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment, PACKAGE_NAME[0]);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
-    }
-
-    @Test
-    public void testStartBatteryDetailPage_defaultPackageNull_chooseFromBatterySipper() {
-        mBatteryEntry.defaultPackageName = null;
-        mBatteryEntry.sipper.mPackages = PACKAGE_NAME;
-
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
-
-        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME))
-            .isEqualTo(PACKAGE_NAME[0]);
     }
 
     @Test

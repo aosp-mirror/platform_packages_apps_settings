@@ -79,6 +79,7 @@ import com.android.settingslib.wifi.AccessPoint;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -319,9 +320,9 @@ public class WifiConfigController implements TextWatcher,
                     // Display IP address.
                     StaticIpConfiguration staticConfig = config.getIpConfiguration()
                             .getStaticIpConfiguration();
-                    if (staticConfig != null && staticConfig.ipAddress != null) {
+                    if (staticConfig != null && staticConfig.getIpAddress() != null) {
                         addRow(group, R.string.wifi_ip_address,
-                                staticConfig.ipAddress.getAddress().getHostAddress());
+                                staticConfig.getIpAddress().getAddress().getHostAddress());
                     }
                 } else {
                     mIpSettingsSpinner.setSelection(DHCP);
@@ -860,7 +861,8 @@ public class WifiConfigController implements TextWatcher,
                 result = R.string.proxy_error_invalid_port;
             }
             if (result == 0) {
-                mHttpProxy = new ProxyInfo(host, port, exclusionList);
+                mHttpProxy = ProxyInfo.buildDirectProxy(
+                        host, port, Arrays.asList(exclusionList.split(",")));
             } else {
                 return false;
             }
@@ -874,7 +876,7 @@ public class WifiConfigController implements TextWatcher,
             if (uri == null) {
                 return false;
             }
-            mHttpProxy = new ProxyInfo(uri);
+            mHttpProxy = ProxyInfo.buildPacProxy(uri);
         }
         return true;
     }
@@ -897,67 +899,81 @@ public class WifiConfigController implements TextWatcher,
         if (inetAddr == null || inetAddr.equals(Inet4Address.ANY)) {
             return R.string.wifi_ip_settings_invalid_ip_address;
         }
-
-        int networkPrefixLength = -1;
+        // Copy all fields into the builder first and set desired value later with builder.
+        final StaticIpConfiguration.Builder staticIPBuilder = new StaticIpConfiguration.Builder()
+                .setDnsServers(staticIpConfiguration.getDnsServers())
+                .setDomains(staticIpConfiguration.getDomains())
+                .setGateway(staticIpConfiguration.getGateway())
+                .setIpAddress(staticIpConfiguration.getIpAddress());
         try {
-            networkPrefixLength = Integer.parseInt(mNetworkPrefixLengthView.getText().toString());
-            if (networkPrefixLength < 0 || networkPrefixLength > 32) {
-                return R.string.wifi_ip_settings_invalid_network_prefix_length;
-            }
-            staticIpConfiguration.ipAddress = new LinkAddress(inetAddr, networkPrefixLength);
-        } catch (NumberFormatException e) {
-            // Set the hint as default after user types in ip address
-            mNetworkPrefixLengthView.setText(mConfigUi.getContext().getString(
-                    R.string.wifi_network_prefix_length_hint));
-        } catch (IllegalArgumentException e) {
-            return R.string.wifi_ip_settings_invalid_ip_address;
-        }
-
-        String gateway = mGatewayView.getText().toString();
-        if (TextUtils.isEmpty(gateway)) {
+            int networkPrefixLength = -1;
             try {
-                //Extract a default gateway from IP address
-                InetAddress netPart = NetUtils.getNetworkPart(inetAddr, networkPrefixLength);
-                byte[] addr = netPart.getAddress();
-                addr[addr.length - 1] = 1;
-                mGatewayView.setText(InetAddress.getByAddress(addr).getHostAddress());
-            } catch (RuntimeException ee) {
-            } catch (java.net.UnknownHostException u) {
+                networkPrefixLength = Integer.parseInt(
+                        mNetworkPrefixLengthView.getText().toString());
+                if (networkPrefixLength < 0 || networkPrefixLength > 32) {
+                    return R.string.wifi_ip_settings_invalid_network_prefix_length;
+                }
+                staticIPBuilder.setIpAddress(new LinkAddress(inetAddr, networkPrefixLength));
+            } catch (NumberFormatException e) {
+                // Set the hint as default after user types in ip address
+                mNetworkPrefixLengthView.setText(mConfigUi.getContext().getString(
+                        R.string.wifi_network_prefix_length_hint));
+            } catch (IllegalArgumentException e) {
+                return R.string.wifi_ip_settings_invalid_ip_address;
             }
-        } else {
-            InetAddress gatewayAddr = getIPv4Address(gateway);
-            if (gatewayAddr == null) {
-                return R.string.wifi_ip_settings_invalid_gateway;
-            }
-            if (gatewayAddr.isMulticastAddress()) {
-                return R.string.wifi_ip_settings_invalid_gateway;
-            }
-            staticIpConfiguration.gateway = gatewayAddr;
-        }
 
-        String dns = mDns1View.getText().toString();
-        InetAddress dnsAddr = null;
-
-        if (TextUtils.isEmpty(dns)) {
-            //If everything else is valid, provide hint as a default option
-            mDns1View.setText(mConfigUi.getContext().getString(R.string.wifi_dns1_hint));
-        } else {
-            dnsAddr = getIPv4Address(dns);
-            if (dnsAddr == null) {
-                return R.string.wifi_ip_settings_invalid_dns;
+            String gateway = mGatewayView.getText().toString();
+            if (TextUtils.isEmpty(gateway)) {
+                try {
+                    //Extract a default gateway from IP address
+                    InetAddress netPart = NetUtils.getNetworkPart(inetAddr, networkPrefixLength);
+                    byte[] addr = netPart.getAddress();
+                    addr[addr.length - 1] = 1;
+                    mGatewayView.setText(InetAddress.getByAddress(addr).getHostAddress());
+                } catch (RuntimeException ee) {
+                } catch (java.net.UnknownHostException u) {
+                }
+            } else {
+                InetAddress gatewayAddr = getIPv4Address(gateway);
+                if (gatewayAddr == null) {
+                    return R.string.wifi_ip_settings_invalid_gateway;
+                }
+                if (gatewayAddr.isMulticastAddress()) {
+                    return R.string.wifi_ip_settings_invalid_gateway;
+                }
+                staticIPBuilder.setGateway(gatewayAddr);
             }
-            staticIpConfiguration.dnsServers.add(dnsAddr);
-        }
 
-        if (mDns2View.length() > 0) {
-            dns = mDns2View.getText().toString();
-            dnsAddr = getIPv4Address(dns);
-            if (dnsAddr == null) {
-                return R.string.wifi_ip_settings_invalid_dns;
+            String dns = mDns1View.getText().toString();
+            InetAddress dnsAddr = null;
+            final ArrayList<InetAddress> dnsServers = new ArrayList<>();
+
+            if (TextUtils.isEmpty(dns)) {
+                //If everything else is valid, provide hint as a default option
+                mDns1View.setText(mConfigUi.getContext().getString(R.string.wifi_dns1_hint));
+            } else {
+                dnsAddr = getIPv4Address(dns);
+                if (dnsAddr == null) {
+                    return R.string.wifi_ip_settings_invalid_dns;
+                }
+                dnsServers.add(dnsAddr);
             }
-            staticIpConfiguration.dnsServers.add(dnsAddr);
+
+            if (mDns2View.length() > 0) {
+                dns = mDns2View.getText().toString();
+                dnsAddr = getIPv4Address(dns);
+                if (dnsAddr == null) {
+                    return R.string.wifi_ip_settings_invalid_dns;
+                }
+                dnsServers.add(dnsAddr);
+            }
+            staticIPBuilder.setDnsServers(dnsServers);
+            return 0;
+        } finally {
+            // Caller of this method may rely on staticIpConfiguration, so build the final result
+            // at the end of the method.
+            staticIpConfiguration = staticIPBuilder.build();
         }
-        return 0;
     }
 
     private void showSecurityFields(boolean refreshEapMethods, boolean refreshCertificates) {

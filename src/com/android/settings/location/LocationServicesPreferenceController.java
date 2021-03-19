@@ -17,8 +17,6 @@
 package com.android.settings.location;
 
 import android.content.Context;
-import android.net.wifi.WifiManager;
-import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -28,29 +26,8 @@ import com.android.settings.core.BasePreferenceController;
  */
 public class LocationServicesPreferenceController extends BasePreferenceController {
 
-    private final WifiManager mWifiManager;
-
     public LocationServicesPreferenceController(Context context, String key) {
         super(context, key);
-        mWifiManager = context.getSystemService(WifiManager.class);
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        final boolean wifiScanOn = mWifiManager.isScanAlwaysAvailable();
-        final boolean bleScanOn = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1;
-        int resId;
-        if (wifiScanOn && bleScanOn) {
-            resId = R.string.scanning_status_text_wifi_on_ble_on;
-        } else if (wifiScanOn && !bleScanOn) {
-            resId = R.string.scanning_status_text_wifi_on_ble_off;
-        } else if (!wifiScanOn && bleScanOn) {
-            resId = R.string.scanning_status_text_wifi_off_ble_on;
-        } else {
-            resId = R.string.scanning_status_text_wifi_off_ble_off;
-        }
-        return mContext.getString(resId);
     }
 
     @AvailabilityStatus

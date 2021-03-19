@@ -28,7 +28,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
 
-
 /**
  * Class to show the footer that can't connect to 5G when device is in DSDS mode.
  */
