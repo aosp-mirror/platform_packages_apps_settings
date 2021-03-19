@@ -50,7 +50,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -105,18 +104,17 @@ public class SetNewPasswordActivityTest {
     }
 
     @Test
-    @Ignore
     public void testSetupChooseLockGeneric() {
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0);
+        Intent intent = new Intent(ACTION_SET_NEW_PASSWORD);
+        intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
         SetNewPasswordActivity activity =
-                Robolectric.buildActivity(SetNewPasswordActivity.class).get();
-        activity.launchChooseLock(new Bundle());
+                Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent intent = getLaunchChooseLockIntent(shadowActivity);
-        intent.putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true);
 
-        assertThat(intent.getComponent())
+        Intent nextIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        assertThat(nextIntent.getComponent())
                 .isEqualTo(new ComponentName(activity, SetupChooseLockGeneric.class));
     }
 
