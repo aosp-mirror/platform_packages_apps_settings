@@ -120,7 +120,6 @@ public class AvatarViewMixinTest {
     @Test
     @Config(qualifiers = "mcc999",
             shadows = {
-                    BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
                     BatteryFixSliceTest.ShadowBatteryTipLoader.class
             })
     public void onStart_useMockAvatarViewMixin_shouldBeExecuted() {

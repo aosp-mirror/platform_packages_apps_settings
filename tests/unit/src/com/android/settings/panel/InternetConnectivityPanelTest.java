@@ -22,15 +22,19 @@ import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.Uri;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.network.InternetUpdater;
+import com.android.settings.network.ProviderModelSliceHelper;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.testutils.ResourcesUtils;
 
@@ -42,6 +46,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -55,6 +60,12 @@ public class InternetConnectivityPanelTest {
             ApplicationProvider.getApplicationContext(), "wifi_is_turned_on_subtitle");
     public static final String BUTTON_SETTINGS = ResourcesUtils.getResourcesString(
             ApplicationProvider.getApplicationContext(), "settings_button");
+    public static final String SUBTITLE_NON_CARRIER_NETWORK_UNAVAILABLE =
+            ResourcesUtils.getResourcesString(ApplicationProvider.getApplicationContext(),
+                    "non_carrier_network_unavailable");
+    public static final String SUBTITLE_ALL_NETWORK_UNAVAILABLE =
+            ResourcesUtils.getResourcesString(ApplicationProvider.getApplicationContext(),
+                    "all_network_unavailable");
 
     @Rule
     public final MockitoRule mMocks = MockitoJUnit.rule();
@@ -62,6 +73,10 @@ public class InternetConnectivityPanelTest {
     PanelContentCallback mPanelContentCallback;
     @Mock
     InternetUpdater mInternetUpdater;
+    @Mock
+    private WifiManager mWifiManager;
+    @Mock
+    private ProviderModelSliceHelper mProviderModelSliceHelper;
 
     private Context mContext;
     private InternetConnectivityPanel mPanel;
@@ -69,11 +84,14 @@ public class InternetConnectivityPanelTest {
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getApplicationContext()).thenReturn(mContext);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
 
         mPanel = InternetConnectivityPanel.create(mContext);
         mPanel.registerCallback(mPanelContentCallback);
         mPanel.mIsProviderModelEnabled = true;
         mPanel.mInternetUpdater = mInternetUpdater;
+        mPanel.mProviderModelSliceHelper = mProviderModelSliceHelper;
     }
 
     @Test
@@ -91,13 +109,6 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getSubTitle_apmOff_shouldBeNull() {
-        doReturn(false).when(mInternetUpdater).isAirplaneModeOn();
-
-        assertThat(mPanel.getSubTitle()).isNull();
-    }
-
-    @Test
     public void getSubTitle_apmOnWifiOff_shouldBeNull() {
         doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
         doReturn(false).when(mInternetUpdater).isWifiEnabled();
@@ -110,7 +121,41 @@ public class InternetConnectivityPanelTest {
         doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
         doReturn(true).when(mInternetUpdater).isWifiEnabled();
 
+        mPanel.updatePanelTitle();
+
         assertThat(mPanel.getSubTitle()).isEqualTo(SUBTITLE_WIFI_IS_TURNED_ON);
+    }
+
+    @Test
+    public void getSubTitle_apmOffWifiOnNoWifiListHasCarrierData_NonCarrierNetworkUnavailable() {
+        List wifiList = new ArrayList<ScanResult>();
+        mockCondition(false, true, true, true, wifiList);
+
+        mPanel.updatePanelTitle();
+
+        assertThat(mPanel.getSubTitle()).isEqualTo(SUBTITLE_NON_CARRIER_NETWORK_UNAVAILABLE);
+    }
+
+    @Test
+    public void getSubTitle_apmOffWifiOnNoWifiListNoCarrierData_AllNetworkUnavailable() {
+        List wifiList = new ArrayList<ScanResult>();
+        mockCondition(false, true, false, true, wifiList);
+
+        mPanel.updatePanelTitle();
+
+        assertThat(mPanel.getSubTitle()).isEqualTo(SUBTITLE_ALL_NETWORK_UNAVAILABLE);
+    }
+
+    @Test
+    public void getSubTitle_apmOffWifiOnTwoWifiItemsNoCarrierData_shouldBeNull() {
+        List wifiList = new ArrayList<ScanResult>();
+        wifiList.add(new ScanResult());
+        wifiList.add(new ScanResult());
+        mockCondition(false, true, false, true, wifiList);
+
+        mPanel.updatePanelTitle();
+
+        assertThat(mPanel.getSubTitle()).isNull();
     }
 
     @Test
@@ -243,5 +288,14 @@ public class InternetConnectivityPanelTest {
         mPanel.onWifiEnabledChanged(true);
 
         verify(mPanelContentCallback).onCustomizedButtonStateChanged();
+    }
+
+    private void mockCondition(boolean airplaneMode, boolean hasCarrier,
+            boolean isDataSimActive, boolean isWifiEnabled, List<ScanResult> wifiItems) {
+        doReturn(airplaneMode).when(mInternetUpdater).isAirplaneModeOn();
+        when(mProviderModelSliceHelper.hasCarrier()).thenReturn(hasCarrier);
+        when(mProviderModelSliceHelper.isDataSimActive()).thenReturn(isDataSimActive);
+        doReturn(isWifiEnabled).when(mInternetUpdater).isWifiEnabled();
+        doReturn(wifiItems).when(mWifiManager).getScanResults();
     }
 }

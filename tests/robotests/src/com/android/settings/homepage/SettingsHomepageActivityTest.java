@@ -68,7 +68,6 @@ public class SettingsHomepageActivityTest {
 
     @Test
     @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class
     })
     public void onStart_isNotDebuggable_shouldHideSystemOverlay() {
@@ -88,7 +87,6 @@ public class SettingsHomepageActivityTest {
 
     @Test
     @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class,
     })
     public void onStop_isNotDebuggable_shouldRemoveHideSystemOverlay() {

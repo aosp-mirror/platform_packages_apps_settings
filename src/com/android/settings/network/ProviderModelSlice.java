@@ -147,31 +147,6 @@ public class ProviderModelSlice extends WifiSlice {
                 listBuilder.addRow(getWifiSliceItemRow(item));
             }
         }
-
-        // Fifth section:  If device has connection problem, this row show the message for user.
-        // 1) show non_carrier_network_unavailable:
-        //    - while no wifi item
-        // 2) show all_network_unavailable:
-        //    - while no wifi item + no carrier
-        //    - while no wifi item + no data capability
-        if (worker == null || wifiList == null || wifiList.size() == 0) {
-            log("no wifi item");
-            int resId = R.string.non_carrier_network_unavailable;
-            if (!hasCarrier || !mHelper.isDataSimActive()) {
-                log("No carrier item or no carrier data.");
-                resId = R.string.all_network_unavailable;
-            }
-
-            if (!hasCarrier && !hasEthernet) {
-                // If there is no item in ProviderModelItem, slice needs a header.
-                listBuilder.setHeader(mHelper.createHeader(
-                        NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS));
-            }
-            listBuilder.addGridRow(
-                    mHelper.createMessageGridRow(resId,
-                            NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS));
-        }
-
         return listBuilder.build();
     }
 

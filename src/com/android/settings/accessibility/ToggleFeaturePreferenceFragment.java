@@ -608,19 +608,15 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
                 mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
-        int resId = R.string.accessibility_shortcut_edit_summary_software;
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
-                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
-        }
-        final CharSequence softwareTitle = context.getText(resId);
 
-        List<CharSequence> list = new ArrayList<>();
-        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+        final List<CharSequence> list = new ArrayList<>();
+        final CharSequence softwareTitle = context.getText(
+                R.string.accessibility_shortcut_edit_summary_software);
+
+        if (hasShortcutType(shortcutTypes, UserShortcutType.SOFTWARE)) {
             list.add(softwareTitle);
         }
-        if ((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE) {
+        if (hasShortcutType(shortcutTypes, UserShortcutType.HARDWARE)) {
             final CharSequence hardwareTitle = context.getText(
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
