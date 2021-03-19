@@ -24,7 +24,7 @@
         android:fragment="com.android.settings.network.NetworkDashboardFragment"
         android:icon="@drawable/ic_homepage_network_v2"
         android:key="top_level_network"
-        android:order="-140"
+        android:order="-150"
         android:title="@string/network_dashboard_title"
         settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
@@ -32,7 +32,7 @@
         android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
         android:icon="@drawable/ic_homepage_connected_device_v2"
         android:key="top_level_connected_devices"
-        android:order="-130"
+        android:order="-140"
         android:title="@string/connected_devices_dashboard_title"
         settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
 
@@ -40,21 +40,21 @@
         android:fragment="com.android.settings.applications.AppDashboardFragment"
         android:icon="@drawable/ic_homepage_apps_v2"
         android:key="top_level_apps"
-        android:order="-120"
+        android:order="-130"
         android:title="@string/apps_dashboard_title"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
         android:icon="@drawable/ic_homepage_notification_v2"
         android:key="top_level_notification"
-        android:order="-110"
+        android:order="-120"
         android:title="@string/configure_notification_settings"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
         android:icon="@drawable/ic_homepage_battery_v2"
         android:key="top_level_battery"
-        android:order="-100"
+        android:order="-110"
         android:title="@string/power_usage_summary_title"
         settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
@@ -62,7 +62,7 @@
         android:fragment="com.android.settings.deviceinfo.StorageSettings"
         android:icon="@drawable/ic_homepage_storage_v2"
         android:key="top_level_storage"
-        android:order="-90"
+        android:order="-100"
         android:title="@string/storage_settings"
         settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/>
 
@@ -70,21 +70,21 @@
         android:fragment="com.android.settings.notification.SoundSettings"
         android:icon="@drawable/ic_homepage_sound_v2"
         android:key="top_level_sound"
-        android:order="-80"
+        android:order="-90"
         android:title="@string/sound_settings"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.DisplaySettings"
         android:icon="@drawable/ic_homepage_display_v2"
         android:key="top_level_display"
-        android:order="-70"
+        android:order="-80"
         android:title="@string/display_settings"
         settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
     <com.android.settings.homepage.RestrictedHomepagePreference
         android:icon="@drawable/ic_homepage_wallpaper_v2"
         android:key="top_level_wallpaper"
-        android:order="-60"
+        android:order="-70"
         android:title="@string/wallpaper_settings_title"
         settings:controller="com.android.settings.display.TopLevelWallpaperPreferenceController"/>
 
@@ -92,7 +92,7 @@
         android:fragment="com.android.settings.accessibility.AccessibilitySettings"
         android:icon="@drawable/ic_homepage_accessibility_v2"
         android:key="top_level_accessibility"
-        android:order="-50"
+        android:order="-60"
         android:title="@string/accessibility_settings"
         settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
 
@@ -100,14 +100,14 @@
         android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
         android:icon="@drawable/ic_homepage_privacy_v2"
         android:key="top_level_privacy"
-        android:order="-40"
+        android:order="-50"
         android:title="@string/privacy_dashboard_title"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.location.LocationSettings"
         android:icon="@drawable/ic_homepage_location_v2"
         android:key="top_level_location"
-        android:order="-30"
+        android:order="-40"
         android:title="@string/location_settings_title"
         settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
 
@@ -115,7 +115,7 @@
         android:fragment="com.android.settings.security.SecuritySettings"
         android:icon="@drawable/ic_homepage_security_v2"
         android:key="top_level_security"
-        android:order="-20"
+        android:order="-30"
         android:title="@string/security_settings_title"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 
@@ -123,7 +123,7 @@
         android:key="top_level_emergency"
         android:title="@string/emergency_settings_preference_title"
         android:icon="@drawable/ic_homepage_emergency_v2"
-        android:order="-10"
+        android:order="-20"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
 
     <com.android.settings.homepage.HomepagePreference
