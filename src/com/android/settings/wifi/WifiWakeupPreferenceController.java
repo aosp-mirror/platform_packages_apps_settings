@@ -73,7 +73,7 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
 
     public WifiWakeupPreferenceController(Context context) {
         super(context, KEY_ENABLE_WIFI_WAKEUP);
-        mLocationManager = (LocationManager) context.getSystemService(Service.LOCATION_SERVICE);
+        mLocationManager = context.getSystemService(LocationManager.class);
         mWifiManager = context.getSystemService(WifiManager.class);
     }
 
