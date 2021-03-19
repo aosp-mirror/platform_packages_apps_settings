@@ -108,7 +108,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
                 @Override
                 public Loader<List<BatteryTip>> onCreateLoader(int id, Bundle args) {
-                    return new BatteryTipLoader(getContext(), mStatsHelper);
+                    return new BatteryTipLoader(getContext(), mBatteryUsageStats);
                 }
 
                 @Override

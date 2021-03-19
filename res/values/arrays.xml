@@ -966,6 +966,35 @@
         <item>-1</item>
     </integer-array>
 
+    <!-- Titles for the accessibility button location. [CHAR LIMIT=35] -->
+    <string-array name="accessibility_button_location_selector_titles">
+        <item>Floating over other apps</item>
+        <item>Navigation bar</item>
+    </string-array>
+
+    <!-- Values for the accessibility button location. -->
+    <!-- Should Keep in sync with Settings.Secure.ACCESSIBILITY_BUTTON_MODE_* -->
+    <string-array name="accessibility_button_location_selector_values" translatable="false">
+        <!-- Floating over other apps -->
+        <item>1</item>
+        <!-- Navigation bar -->
+        <item>0</item>
+    </string-array>
+
+    <!-- Titles for the accessibility button size. [CHAR LIMIT=35] -->
+    <string-array name="accessibility_button_size_selector_titles">
+        <item>Small</item>
+        <item>Large</item>
+    </string-array>
+
+    <!-- Values for the accessibility button size. -->
+    <string-array name="accessibility_button_size_selector_values" translatable="false" >
+        <!-- Small -->
+        <item>0</item>
+        <!-- Large -->
+        <item>1</item>
+    </string-array>
+
     <!-- Match this with the constants in VpnProfile. --> <skip />
     <!-- Short names for each VPN type, not really translatable. [CHAR LIMIT=20] -->
     <string-array name="vpn_types" translatable="false">

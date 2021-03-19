@@ -80,6 +80,8 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         };
 
         final View view = super.onCreateView(inflater, container, savedInstanceState);
+        // Parent sets the title when creating the view, so set it after calling super
+        mToggleServiceSwitchPreference.setTitle(R.string.reduce_bright_colors_switch_title);
         updateGeneralCategoryOrder();
         return view;
     }

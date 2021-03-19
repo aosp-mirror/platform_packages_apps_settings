@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.SettingsEnableZenModeDialog;
@@ -90,9 +91,11 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             case Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
                 mPreference.updateStatus(true);
+                mPreference.setTitle(R.string.do_not_disturb_main_switch_title_on);
                 break;
             case Settings.Global.ZEN_MODE_OFF:
             default:
+                mPreference.setTitle(R.string.do_not_disturb_main_switch_title_off);
                 mPreference.updateStatus(false);
         }
     }
