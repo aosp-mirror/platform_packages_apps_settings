@@ -775,9 +775,12 @@ public class WifiConfigController2 implements TextWatcher,
                 return null;
         }
 
-        config.setIpConfiguration(
-                new IpConfiguration(mIpAssignment, mProxySettings,
-                                    mStaticIpConfiguration, mHttpProxy));
+        final IpConfiguration ipConfig = new IpConfiguration();
+        ipConfig.setIpAssignment(mIpAssignment);
+        ipConfig.setProxySettings(mProxySettings);
+        ipConfig.setStaticIpConfiguration(mStaticIpConfiguration);
+        ipConfig.setHttpProxy(mHttpProxy);
+        config.setIpConfiguration(ipConfig);
         if (mMeteredSettingsSpinner != null) {
             config.meteredOverride = mMeteredSettingsSpinner.getSelectedItemPosition();
         }
@@ -920,7 +923,7 @@ public class WifiConfigController2 implements TextWatcher,
                     return R.string.wifi_ip_settings_invalid_dns;
                 }
                 dnsServers.add(dnsAddr);
-                staticIpConfiguration.dnsServers.add(dnsAddr);
+                staticIpConfiguration.getDnsServers().add(dnsAddr);
             }
 
             if (mDns2View.length() > 0) {
@@ -930,7 +933,7 @@ public class WifiConfigController2 implements TextWatcher,
                     return R.string.wifi_ip_settings_invalid_dns;
                 }
                 dnsServers.add(dnsAddr);
-                staticIpConfiguration.dnsServers.add(dnsAddr);
+                staticIpConfiguration.getDnsServers().add(dnsAddr);
             }
             staticIPBuilder.setDnsServers(dnsServers);
             return 0;
@@ -1356,7 +1359,7 @@ public class WifiConfigController2 implements TextWatcher,
                                 staticConfig.getIpAddress().getPrefixLength()));
                     }
 
-                    if (staticConfig.gateway != null) {
+                    if (staticConfig.getGateway() != null) {
                         mGatewayView.setText(staticConfig.getGateway().getHostAddress());
                     }
 
