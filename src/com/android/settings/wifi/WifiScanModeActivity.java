@@ -27,7 +27,6 @@ import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.WindowManager;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -43,8 +42,6 @@ public class WifiScanModeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addSystemFlags(
-                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         Intent intent = getIntent();
         if (savedInstanceState == null) {
             if (intent != null && intent.getAction()
