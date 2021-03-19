@@ -70,22 +70,17 @@ public class WifiNoInternetDialog extends AlertActivity implements
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();
-        if (intent == null || !isKnownAction(intent) || !"netId".equals(intent.getScheme())) {
+        if (intent == null || !isKnownAction(intent)) {
             Log.e(TAG, "Unexpected intent " + intent + ", exiting");
             finish();
             return;
         }
 
         mAction = intent.getAction();
-
-        try {
-            mNetwork = new Network(Integer.parseInt(intent.getData().getSchemeSpecificPart()));
-        } catch (NullPointerException|NumberFormatException e) {
-            mNetwork = null;
-        }
+        mNetwork = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
 
         if (mNetwork == null) {
-            Log.e(TAG, "Can't determine network from '" + intent.getData() + "' , exiting");
+            Log.e(TAG, "Can't determine network from intent extra, exiting");
             finish();
             return;
         }
