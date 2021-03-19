@@ -48,14 +48,10 @@ import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Process;
 import android.os.SystemBatteryConsumer;
 import android.os.SystemClock;
-import android.os.UserManager;
 
-import com.android.internal.os.BatterySipper;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
@@ -97,13 +93,7 @@ public class BatteryUtilsTest {
     private static final long TIME_EXPECTED_FOREGROUND = 1500;
     private static final long TIME_EXPECTED_BACKGROUND = 6000;
     private static final long TIME_EXPECTED_ALL = 7500;
-    private static final double BATTERY_SCREEN_USAGE = 300;
-    private static final double BATTERY_IDLE_USAGE = 600;
     private static final double BATTERY_SYSTEM_USAGE = 600;
-    private static final double BATTERY_OVERACCOUNTED_USAGE = 500;
-    private static final double BATTERY_UNACCOUNTED_USAGE = 700;
-    private static final double BATTERY_WIFI_USAGE = 200;
-    private static final double BATTERY_BLUETOOTH_USAGE = 300;
     private static final double TOTAL_BATTERY_USAGE = 1000;
     private static final int DISCHARGE_AMOUNT = 80;
     private static final double PERCENT_SYSTEM_USAGE = 48;
@@ -125,37 +115,13 @@ public class BatteryUtilsTest {
     @Mock
     private SystemBatteryConsumer mSystemBatteryConsumer;
     @Mock
-    private BatterySipper mNormalBatterySipper;
-    @Mock
-    private BatterySipper mWifiBatterySipper;
-    @Mock
-    private BatterySipper mBluetoothBatterySipper;
-    @Mock
-    private BatterySipper mScreenBatterySipper;
-    @Mock
-    private BatterySipper mOvercountedBatterySipper;
-    @Mock
-    private BatterySipper mUnaccountedBatterySipper;
-    @Mock
-    private BatterySipper mSystemBatterySipper;
-    @Mock
-    private BatterySipper mCellBatterySipper;
-    @Mock
-    private BatterySipper mIdleBatterySipper;
-    @Mock
     private BatteryInfo mBatteryInfo;
-    @Mock
-    private Bundle mBundle;
-    @Mock
-    private UserManager mUserManager;
     @Mock
     private PackageManager mPackageManager;
     @Mock
     private AppOpsManager mAppOpsManager;
     @Mock
     private ApplicationInfo mApplicationInfo;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private BatteryStatsHelper mBatteryStatsHelper;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsManager mBatteryStatsManager;
     @Mock
@@ -170,7 +136,6 @@ public class BatteryUtilsTest {
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
-    private List<BatterySipper> mUsageList;
     private Context mContext;
 
     @Before
@@ -190,8 +155,6 @@ public class BatteryUtilsTest {
                 anyLong(), anyInt());
         doReturn(TIME_STATE_BACKGROUND).when(mUid).getProcessStateTime(eq(PROCESS_STATE_BACKGROUND),
                 anyLong(), anyInt());
-        when(mBatteryStatsHelper.getStats().computeBatteryRealtime(anyLong(), anyInt())).thenReturn(
-                TIME_SINCE_LAST_FULL_CHARGE_US);
 
         when(mPackageManager.getApplicationInfo(eq(HIGH_SDK_PACKAGE), anyInt()))
                 .thenReturn(mHighApplicationInfo);
@@ -199,32 +162,6 @@ public class BatteryUtilsTest {
                 .thenReturn(mLowApplicationInfo);
         mHighApplicationInfo.targetSdkVersion = Build.VERSION_CODES.O;
         mLowApplicationInfo.targetSdkVersion = Build.VERSION_CODES.L;
-
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
-        mNormalBatterySipper.totalPowerMah = TOTAL_BATTERY_USAGE;
-        doReturn(UID).when(mNormalBatterySipper).getUid();
-
-        mWifiBatterySipper.drainType = BatterySipper.DrainType.WIFI;
-        mWifiBatterySipper.totalPowerMah = BATTERY_WIFI_USAGE;
-
-        mBluetoothBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
-        mBluetoothBatterySipper.totalPowerMah = BATTERY_BLUETOOTH_USAGE;
-
-        mScreenBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
-        mScreenBatterySipper.totalPowerMah = BATTERY_SCREEN_USAGE;
-
-        mSystemBatterySipper.drainType = BatterySipper.DrainType.APP;
-        mSystemBatterySipper.totalPowerMah = BATTERY_SYSTEM_USAGE;
-        when(mSystemBatterySipper.getUid()).thenReturn(Process.SYSTEM_UID);
-
-        mOvercountedBatterySipper.drainType = BatterySipper.DrainType.OVERCOUNTED;
-        mOvercountedBatterySipper.totalPowerMah = BATTERY_OVERACCOUNTED_USAGE;
-
-        mUnaccountedBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
-        mUnaccountedBatterySipper.totalPowerMah = BATTERY_UNACCOUNTED_USAGE;
-
-        mIdleBatterySipper.drainType = BatterySipper.DrainType.IDLE;
-        mIdleBatterySipper.totalPowerMah = BATTERY_IDLE_USAGE;
 
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mPackageManager).when(mContext).getPackageManager();
@@ -237,15 +174,6 @@ public class BatteryUtilsTest {
             .getForegroundServiceTotalTimeUs(any(BatteryStats.Uid.class), anyLong());
         mAnomalyInfo = new AnomalyInfo(INFO_WAKELOCK);
 
-        mUsageList = new ArrayList<>();
-        mUsageList.add(mNormalBatterySipper);
-        mUsageList.add(mScreenBatterySipper);
-        mUsageList.add(mCellBatterySipper);
-        when(mBatteryStatsHelper.getUsageList()).thenReturn(mUsageList);
-        when(mBatteryStatsHelper.getTotalPower())
-            .thenReturn(TOTAL_BATTERY_USAGE + BATTERY_SCREEN_USAGE);
-        when(mBatteryStatsHelper.getStats().getDischargeAmount(anyInt()))
-            .thenReturn(DISCHARGE_AMOUNT);
         BatteryDatabaseManager.setUpForTest(mBatteryDatabaseManager);
         ShadowThreadUtils.setIsMainThread(true);
     }
@@ -403,15 +331,6 @@ public class BatteryUtilsTest {
 
         assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID, PACKAGE_NAME))
             .isFalse();
-    }
-
-    @Test
-    public void testInitBatteryStatsHelper_init() {
-        mBatteryUtils.initBatteryStatsHelper(mBatteryStatsHelper, mBundle, mUserManager);
-
-        verify(mBatteryStatsHelper).create(mBundle);
-        verify(mBatteryStatsHelper).refreshStats(BatteryStats.STATS_SINCE_CHARGED,
-                mUserManager.getUserProfiles());
     }
 
     @Test

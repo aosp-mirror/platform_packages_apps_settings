@@ -47,7 +47,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -112,8 +111,6 @@ public class AdvancedPowerUsageDetailTest {
     private Bundle mBundle;
     @Mock
     private BatteryEntry mBatteryEntry;
-    @Mock
-    private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private PackageManager mPackageManager;
     @Mock
