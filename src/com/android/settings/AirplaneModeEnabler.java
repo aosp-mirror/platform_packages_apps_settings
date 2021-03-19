@@ -24,7 +24,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
-import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -62,7 +61,7 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
 
     private TelephonyManager mTelephonyManager;
     @VisibleForTesting
-    AirplaneModeTelephonyCallback mTelephonyCallback;
+    PhoneStateListener mPhoneStateListener;
 
     public AirplaneModeEnabler(Context context, OnAirplaneModeChangedListener listener) {
         super(context, Settings.Global.AIRPLANE_MODE_ON);
@@ -72,18 +71,16 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         mOnAirplaneModeChangedListener = listener;
 
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
-        mTelephonyCallback = new AirplaneModeTelephonyCallback();
-    }
 
-    class AirplaneModeTelephonyCallback extends TelephonyCallback implements
-            TelephonyCallback.RadioPowerStateListener {
-        @Override
-        public void onRadioPowerStateChanged(int state) {
-            if (DEBUG) {
-                Log.d(LOG_TAG, "RadioPower: " + state);
+        mPhoneStateListener = new PhoneStateListener(Looper.getMainLooper()) {
+            @Override
+            public void onRadioPowerStateChanged(int state) {
+                if (DEBUG) {
+                    Log.d(LOG_TAG, "RadioPower: " + state);
+                }
+                onAirplaneModeChanged();
             }
-            onAirplaneModeChanged();
-        }
+        };
     }
 
     /**
@@ -101,14 +98,16 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
      * Start listening to the phone state change
      */
     public void start() {
-        mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(), mTelephonyCallback);
+        mTelephonyManager.listen(mPhoneStateListener,
+                PhoneStateListener.LISTEN_RADIO_POWER_STATE_CHANGED);
     }
 
     /**
      * Stop listening to the phone state change
      */
     public void stop() {
-        mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
+        mTelephonyManager.listen(mPhoneStateListener,
+                PhoneStateListener.LISTEN_NONE);
     }
 
     private void setAirplaneModeOn(boolean enabling) {
@@ -193,3 +192,4 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         return WirelessUtils.isAirplaneModeOn(mContext);
     }
 }
+
