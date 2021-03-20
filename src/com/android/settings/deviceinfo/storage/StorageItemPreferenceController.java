@@ -158,6 +158,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 intent = getAppsIntent();
                 break;
             case FILES_KEY:
+                if (mVolume == null) {
+                    break;
+                }
                 intent = getFilesIntent();
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(
                         mContext, SettingsEnums.STORAGE_FILES);
@@ -291,6 +294,17 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     public void setTotalSize(long totalSizeBytes) {
         mTotalSize = totalSizeBytes;
+    }
+
+    /** Set storage size to 0 for each preference. */
+    public void clearStorageSizeDisplay() {
+        mPhotoPreference.setStorageSize(0L, 0L);
+        mAudioPreference.setStorageSize(0L, 0L);
+        mGamePreference.setStorageSize(0L, 0L);
+        mMoviesPreference.setStorageSize(0L, 0L);
+        mAppPreference.setStorageSize(0L, 0L);
+        mFilePreference.setStorageSize(0L, 0L);
+        mSystemPreference.setStorageSize(0L, 0L);
     }
 
     /**
