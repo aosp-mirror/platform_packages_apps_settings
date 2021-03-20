@@ -19,6 +19,7 @@ package com.android.settings.applications.manageapplications;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_ALARMS_AND_REMINDERS;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_INSTALL_SOURCES;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_MEDIA_MANAGEMENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_ALLOWLIST;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_RECENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_USAGE_ACCESS;
@@ -29,6 +30,7 @@ import static com.android.settings.applications.manageapplications.ManageApplica
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_HIGH_POWER;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MANAGE_SOURCES;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MEDIA_MANAGEMENT_APPS;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MOVIES;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_OVERLAY;
@@ -63,6 +65,9 @@ public class AppFilterRegistryTest {
 
         assertThat(registry.getDefaultFilterType(LIST_TYPE_ALARMS_AND_REMINDERS))
                 .isEqualTo(FILTER_ALARMS_AND_REMINDERS);
+
+        assertThat(registry.getDefaultFilterType(LIST_TYPE_MEDIA_MANAGEMENT_APPS))
+                .isEqualTo(FILTER_APPS_MEDIA_MANAGEMENT);
 
         assertThat(registry.getDefaultFilterType(LIST_TYPE_MAIN)).isEqualTo(FILTER_APPS_ALL);
         assertThat(registry.getDefaultFilterType(LIST_TYPE_NOTIFICATION))

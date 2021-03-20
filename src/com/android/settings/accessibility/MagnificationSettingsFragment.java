@@ -26,20 +26,26 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 /** Settings page for magnification. */
@@ -52,6 +58,7 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     static final int DIALOG_MAGNIFICATION_CAPABILITY = 1;
     @VisibleForTesting
     static final int DIALOG_MAGNIFICATION_SWITCH_SHORTCUT = 2;
+
     @VisibleForTesting
     static final String EXTRA_CAPABILITY = "capability";
     private static final int NONE = 0;
@@ -60,12 +67,12 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     private Preference mModePreference;
     @VisibleForTesting
     Dialog mDialog;
-    @VisibleForTesting
-    CheckBox mMagnifyFullScreenCheckBox;
-    @VisibleForTesting
-    CheckBox mMagnifyWindowCheckBox;
 
+    @VisibleForTesting
+    ListView mMagnificationModesListView;
     private int mCapabilities = NONE;
+
+    private final List<MagnificationModeInfo> mModeInfos = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +84,7 @@ public class MagnificationSettingsFragment extends DashboardFragment {
         if (mCapabilities == NONE) {
             mCapabilities = MagnificationCapabilities.getCapabilities(getPrefContext());
         }
+        initModeInfos();
     }
 
     @Override
@@ -121,13 +129,10 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     @Override
     public Dialog onCreateDialog(int dialogId) {
         final CharSequence title;
+
         switch (dialogId) {
             case DIALOG_MAGNIFICATION_CAPABILITY:
-                title = getPrefContext().getString(
-                        R.string.accessibility_magnification_mode_title);
-                mDialog = AccessibilityEditDialogUtils.showMagnificationModeDialog(getPrefContext(),
-                        title, this::callOnAlertDialogCheckboxClicked);
-                initializeDialogCheckBox(mDialog);
+                mDialog = createMagnificationModeDialog();
                 return mDialog;
             case DIALOG_MAGNIFICATION_SWITCH_SHORTCUT:
                 title = getPrefContext().getString(
@@ -136,8 +141,95 @@ public class MagnificationSettingsFragment extends DashboardFragment {
                         getPrefContext(), title, this::onSwitchShortcutDialogPositiveButtonClicked);
                 return mDialog;
         }
-
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
+    }
+
+    private Dialog createMagnificationModeDialog() {
+        mMagnificationModesListView = AccessibilityEditDialogUtils.createSingleChoiceListView(
+                getPrefContext(), mModeInfos, this::onMagnificationModeSelected);
+
+        final View headerView = LayoutInflater.from(getPrefContext()).inflate(
+                R.layout.accessibility_magnification_mode_header, mMagnificationModesListView,
+                false);
+        mMagnificationModesListView.addHeaderView(headerView, null, /* isSelectable= */false);
+
+        mMagnificationModesListView.setItemChecked(computeSelectedMagnificationModeIndex(), true);
+        final CharSequence title = getPrefContext().getString(
+                R.string.accessibility_magnification_mode_dialog_title);
+
+        return AccessibilityEditDialogUtils.createCustomDialog(getPrefContext(), title,
+                mMagnificationModesListView, this::onMagnificationModeDialogPositiveButtonClicked);
+    }
+
+    private int computeSelectedMagnificationModeIndex() {
+        final int size = mModeInfos.size();
+        for (int i = 0; i < size; i++) {
+            if (mModeInfos.get(i).mMagnificationMode == mCapabilities) {
+                return i + mMagnificationModesListView.getHeaderViewsCount();
+            }
+        }
+        Log.w(TAG, "chosen mode" + mCapabilities + "is not in the list");
+        return 0;
+    }
+
+    private void onMagnificationModeSelected(AdapterView<?> parent, View view, int position,
+            long id) {
+        final MagnificationModeInfo modeInfo =
+                (MagnificationModeInfo) mMagnificationModesListView.getItemAtPosition(position);
+        if (modeInfo.mMagnificationMode == mCapabilities) {
+            return;
+        }
+        mCapabilities = modeInfo.mMagnificationMode;
+        if (isTripleTapEnabled() && mCapabilities != MagnificationMode.FULLSCREEN) {
+            showDialog(DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
+        }
+    }
+
+    private void onMagnificationModeDialogPositiveButtonClicked(DialogInterface dialogInterface,
+            int which) {
+        final int selectedIndex = mMagnificationModesListView.getCheckedItemPosition();
+        if (selectedIndex != AdapterView.INVALID_POSITION) {
+            final MagnificationModeInfo modeInfo =
+                    (MagnificationModeInfo) mMagnificationModesListView.getItemAtPosition(
+                            selectedIndex);
+            updateCapabilities(modeInfo.mMagnificationMode);
+        } else {
+            Log.w(TAG, "no checked item in the list");
+        }
+    }
+
+    private void updateCapabilities(int mode) {
+        mCapabilities = mode;
+        MagnificationCapabilities.setCapabilities(getPrefContext(), mCapabilities);
+        mModePreference.setSummary(
+                MagnificationCapabilities.getSummary(getPrefContext(), mCapabilities));
+    }
+
+    private void initModeInfos() {
+        mModeInfos.clear();
+        mModeInfos.add(new MagnificationModeInfo(getPrefContext().getText(
+                R.string.accessibility_magnification_mode_dialog_option_full_screen), null,
+                R.drawable.accessibility_magnification_full_screen, MagnificationMode.FULLSCREEN));
+        mModeInfos.add(new MagnificationModeInfo(getPrefContext().getText(
+                R.string.accessibility_magnification_mode_dialog_option_window), null,
+                R.drawable.accessibility_magnification_window_screen, MagnificationMode.WINDOW));
+        mModeInfos.add(new MagnificationModeInfo(getPrefContext().getText(
+                R.string.accessibility_magnification_mode_dialog_option_switch),
+                getPrefContext().getText(
+                        R.string.accessibility_magnification_area_settings_mode_switch_summary),
+                R.drawable.accessibility_magnification_switch, MagnificationMode.ALL));
+    }
+
+    @VisibleForTesting
+    static class MagnificationModeInfo extends ItemInfoArrayAdapter.ItemInfo {
+        @MagnificationMode
+        public final int mMagnificationMode;
+
+        MagnificationModeInfo(@NonNull CharSequence title, @Nullable CharSequence summary,
+                @DrawableRes int drawableId, @MagnificationMode int magnificationMode) {
+            super(title, summary, drawableId);
+            mMagnificationMode = magnificationMode;
+        }
     }
 
     private void initModePreference() {
@@ -147,12 +239,6 @@ public class MagnificationSettingsFragment extends DashboardFragment {
             showDialog(DIALOG_MAGNIFICATION_CAPABILITY);
             return true;
         });
-    }
-
-    private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        updateCapabilities(true);
-        mModePreference.setSummary(
-                MagnificationCapabilities.getSummary(getPrefContext(), mCapabilities));
     }
 
     private void onSwitchShortcutDialogPositiveButtonClicked(View view) {
@@ -186,95 +272,6 @@ public class MagnificationSettingsFragment extends DashboardFragment {
 
         Settings.Secure.putString(getPrefContext().getContentResolver(), targetKey,
                 joiner.toString());
-    }
-
-    private void initializeDialogCheckBox(Dialog dialog) {
-        final View dialogFullScreenView = dialog.findViewById(R.id.magnify_full_screen);
-        final View dialogFullScreenTextArea = dialogFullScreenView.findViewById(R.id.container);
-        mMagnifyFullScreenCheckBox = dialogFullScreenView.findViewById(R.id.checkbox);
-
-        final View dialogWidowView = dialog.findViewById(R.id.magnify_window_screen);
-        final View dialogWindowTextArea = dialogWidowView.findViewById(R.id.container);
-        mMagnifyWindowCheckBox = dialogWidowView.findViewById(R.id.checkbox);
-
-        updateAlertDialogCheckState();
-        updateAlertDialogEnableState(dialogFullScreenTextArea, dialogWindowTextArea);
-
-        setTextAreasClickListener(dialogFullScreenTextArea, mMagnifyFullScreenCheckBox,
-                dialogWindowTextArea, mMagnifyWindowCheckBox);
-    }
-
-    private void setTextAreasClickListener(View fullScreenTextArea, CheckBox fullScreenCheckBox,
-            View windowTextArea, CheckBox windowCheckBox) {
-        fullScreenTextArea.setOnClickListener(v -> {
-            fullScreenCheckBox.toggle();
-            updateCapabilities(false);
-            updateAlertDialogEnableState(fullScreenTextArea, windowTextArea);
-        });
-
-        windowTextArea.setOnClickListener(v -> {
-            windowCheckBox.toggle();
-            updateCapabilities(false);
-            updateAlertDialogEnableState(fullScreenTextArea, windowTextArea);
-
-            if (isTripleTapEnabled() && windowCheckBox.isChecked()) {
-                showDialog(DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
-            }
-        });
-    }
-
-    private void updateAlertDialogCheckState() {
-        updateCheckStatus(mMagnifyWindowCheckBox,
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW);
-        updateCheckStatus(mMagnifyFullScreenCheckBox,
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN);
-
-    }
-
-    private void updateCheckStatus(CheckBox checkBox, int mode) {
-        checkBox.setChecked((mode & mCapabilities) != 0);
-    }
-
-    private void updateAlertDialogEnableState(View fullScreenTextArea, View windowTextArea) {
-        switch (mCapabilities) {
-            case Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN:
-                setViewAndChildrenEnabled(fullScreenTextArea, false);
-                break;
-            case Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW:
-                setViewAndChildrenEnabled(windowTextArea, false);
-                break;
-            case Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_ALL:
-                setViewAndChildrenEnabled(fullScreenTextArea, true);
-                setViewAndChildrenEnabled(windowTextArea, true);
-                break;
-            default:
-                throw new IllegalArgumentException(
-                        "Unsupported ACCESSIBILITY_MAGNIFICATION_CAPABILITY " + mCapabilities);
-        }
-    }
-
-    private void setViewAndChildrenEnabled(View view, boolean enabled) {
-        view.setEnabled(enabled);
-        if (view instanceof ViewGroup) {
-            final ViewGroup viewGroup = (ViewGroup) view;
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                View child = viewGroup.getChildAt(i);
-                setViewAndChildrenEnabled(child, enabled);
-            }
-        }
-    }
-
-    private void updateCapabilities(boolean saveToDB) {
-        int capabilities = 0;
-        capabilities |=
-                mMagnifyFullScreenCheckBox.isChecked()
-                        ? Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN : 0;
-        capabilities |= mMagnifyWindowCheckBox.isChecked()
-                ? Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW : 0;
-        mCapabilities = capabilities;
-        if (saveToDB) {
-            MagnificationCapabilities.setCapabilities(getPrefContext(), mCapabilities);
-        }
     }
 
     private boolean isTripleTapEnabled() {
