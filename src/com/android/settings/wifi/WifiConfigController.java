@@ -812,9 +812,12 @@ public class WifiConfigController implements TextWatcher,
                     .get(mEapSimSpinner.getSelectedItemPosition()).getCarrierId();
         }
 
-        config.setIpConfiguration(
-                new IpConfiguration(mIpAssignment, mProxySettings,
-                                    mStaticIpConfiguration, mHttpProxy));
+        final IpConfiguration ipConfig = new IpConfiguration();
+        ipConfig.setIpAssignment(mIpAssignment);
+        ipConfig.setProxySettings(mProxySettings);
+        ipConfig.setStaticIpConfiguration(mStaticIpConfiguration);
+        ipConfig.setHttpProxy(mHttpProxy);
+        config.setIpConfiguration(ipConfig);
         if (mMeteredSettingsSpinner != null) {
             config.meteredOverride = mMeteredSettingsSpinner.getSelectedItemPosition();
         }
@@ -1382,18 +1385,18 @@ public class WifiConfigController implements TextWatcher,
                 StaticIpConfiguration staticConfig = config.getIpConfiguration()
                         .getStaticIpConfiguration();
                 if (staticConfig != null) {
-                    if (staticConfig.ipAddress != null) {
+                    if (staticConfig.getIpAddress() != null) {
                         mIpAddressView.setText(
-                                staticConfig.ipAddress.getAddress().getHostAddress());
-                        mNetworkPrefixLengthView.setText(Integer.toString(staticConfig.ipAddress
-                                .getPrefixLength()));
+                                staticConfig.getIpAddress().getAddress().getHostAddress());
+                        mNetworkPrefixLengthView.setText(Integer.toString(
+                                staticConfig.getIpAddress().getPrefixLength()));
                     }
 
-                    if (staticConfig.gateway != null) {
-                        mGatewayView.setText(staticConfig.gateway.getHostAddress());
+                    if (staticConfig.getGateway() != null) {
+                        mGatewayView.setText(staticConfig.getGateway().getHostAddress());
                     }
 
-                    Iterator<InetAddress> dnsIterator = staticConfig.dnsServers.iterator();
+                    Iterator<InetAddress> dnsIterator = staticConfig.getDnsServers().iterator();
                     if (dnsIterator.hasNext()) {
                         mDns1View.setText(dnsIterator.next().getHostAddress());
                     }

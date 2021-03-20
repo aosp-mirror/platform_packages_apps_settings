@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
@@ -53,6 +54,7 @@ import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowKeyguardManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -70,10 +72,19 @@ public class FingerprintSuggestionActivityTest {
         Shadows.shadowOf(application.getPackageManager())
                 .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
 
+        final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
+        componentInfo.add(new ComponentInfoInternal("faceSensor" /* componentId */,
+                "vendor/model/revision" /* hardwareVersion */, "1.01" /* firmwareVersion */,
+                "00000001" /* serialNumber */, "" /* softwareVersion */));
+        componentInfo.add(new ComponentInfoInternal("matchingAlgorithm" /* componentId */,
+                "" /* hardwareVersion */, "" /* firmwareVersion */, "" /* serialNumber */,
+                "vendor/version/revision" /* softwareVersion */));
+
         final FingerprintSensorPropertiesInternal prop = new FingerprintSensorPropertiesInternal(
                 0 /* sensorId */,
                 SensorProperties.STRENGTH_STRONG,
                 5 /* maxEnrollmentsPerUser */,
+                componentInfo,
                 FingerprintSensorProperties.TYPE_REAR,
                 true /* resetLockoutRequiresHardwareAuthToken */);
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
