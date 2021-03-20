@@ -65,7 +65,6 @@ import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -233,7 +232,6 @@ public class ChooseLockGenericTest {
     }
 
     @Test
-    @Ignore
     public void updatePreferencesOrFinish_callingAppIsAdmin_deviceNotProvisioned_footerInvisible() {
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
         initActivity(new Intent().putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true));
