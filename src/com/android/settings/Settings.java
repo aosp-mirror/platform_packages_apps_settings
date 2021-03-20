@@ -217,6 +217,8 @@ public class Settings extends SettingsActivity {
     public static class OverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageExternalStorageActivity extends SettingsActivity { /* empty */ }
     public static class AppManageExternalStorageActivity extends SettingsActivity { /* empty */ }
+    public static class MediaManagementAppsActivity extends SettingsActivity { /* empty */ }
+    public static class AppMediaManagementAppsActivity extends SettingsActivity { /* empty */ }
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
