@@ -3368,6 +3368,10 @@
     <string name="storage_menu_manage">Manage storage</string>
     <!-- Storage setting. Keywords for Free up space. [CHAR LIMIT=NONE] -->
     <string name="keywords_storage_menu_free">clean, storage</string>
+    <!-- Storage setting. Title for storage free up option. [CHAR LIMIT=30] -->
+    <string name="storage_free_up_space_title">Free up space</string>
+    <!-- Storage setting. Summary for storage free up option. [CHAR LIMIT=NONE] -->
+    <string name="storage_free_up_space_summary">Go to Files app to manage and free up space</string>
 
     <!-- Storage setting.  Title for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_title_usb">USB computer connection</string>
@@ -11584,6 +11588,10 @@
     <!-- Follows the percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=7]-->
     <string name="storage_percent_full">used</string>
 
+    <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
+    <string name="storage_usage_summary"><xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g> used</string>
+    <!-- Summary of a single storage volume total space. [CHAR LIMIT=24] -->
+    <string name="storage_total_summary">Total <xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g></string>
 
     <!-- Label for button allow user to remove the instant app from the device. -->
     <string name="clear_instant_app_data">Clear app</string>
@@ -12935,4 +12943,10 @@
 
     <!-- Label for extra app info settings for a specific app [CHAR LIMIT=40] -->
     <string name="extra_app_info_label" translatable="false"></string>
+
+    <!-- Title for toggle controlling whether notifications are shown when an app pastes from clipboard. [CHAR LIMIT=50] -->
+    <string name="show_clip_access_notification">Copy &amp; paste notifications</string>
+
+    <!-- Summary for toggle controlling whether notifications are shown when an app pastes from clipboard. [CHAR LIMIT=NONE] -->
+    <string name="show_clip_access_notification_summary">Show a message when apps access text or data you have copied</string>
 </resources>
