@@ -47,7 +47,6 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.List;
 
-
 public class MobilePlanPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnSaveInstanceState {
 

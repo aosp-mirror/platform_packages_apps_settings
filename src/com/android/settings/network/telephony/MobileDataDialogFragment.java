@@ -29,7 +29,6 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
-
 /**
  * Dialog Fragment to show dialog for "mobile data"
  *

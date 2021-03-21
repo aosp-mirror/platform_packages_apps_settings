@@ -28,7 +28,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiDialog2;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
