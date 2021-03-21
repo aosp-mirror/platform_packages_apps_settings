@@ -17,6 +17,7 @@
 package com.android.settings.vpn2;
 
 import static com.android.settings.vpn2.AppManagementFragment.appHasVpnPermission;
+
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;

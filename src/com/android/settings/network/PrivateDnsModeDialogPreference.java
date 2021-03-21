@@ -15,7 +15,6 @@
  */
 package com.android.settings.network;
 
-import static android.net.ConnectivityManager.PRIVATE_DNS_DEFAULT_MODE_FALLBACK;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
@@ -28,6 +27,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -83,14 +83,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
     static final String MODE_KEY = Settings.Global.PRIVATE_DNS_MODE;
     @VisibleForTesting
     static final String HOSTNAME_KEY = Settings.Global.PRIVATE_DNS_SPECIFIER;
-
-    public static String getModeFromSettings(ContentResolver cr) {
-        String mode = Settings.Global.getString(cr, MODE_KEY);
-        if (!PRIVATE_DNS_MAP.containsKey(mode)) {
-            mode = Settings.Global.getString(cr, Settings.Global.PRIVATE_DNS_DEFAULT_MODE);
-        }
-        return PRIVATE_DNS_MAP.containsKey(mode) ? mode : PRIVATE_DNS_DEFAULT_MODE_FALLBACK;
-    }
 
     public static String getHostnameFromSettings(ContentResolver cr) {
         return Settings.Global.getString(cr, HOSTNAME_KEY);
@@ -168,7 +160,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         final Context context = getContext();
         final ContentResolver contentResolver = context.getContentResolver();
 
-        mMode = getModeFromSettings(context.getContentResolver());
+        mMode = ConnectivityManager.getPrivateDnsMode(context);
 
         mEditText = view.findViewById(R.id.private_dns_mode_provider_hostname);
         mEditText.addTextChangedListener(this);

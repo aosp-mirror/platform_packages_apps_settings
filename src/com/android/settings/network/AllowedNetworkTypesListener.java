@@ -17,7 +17,7 @@
 package com.android.settings.network;
 
 import android.content.Context;
-import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -26,16 +26,15 @@ import androidx.annotation.VisibleForTesting;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-
 /**
- * {@link PhoneStateListener} to listen to Allowed Network Types changed
+ * {@link TelephonyCallback} to listen to Allowed Network Types changed
  */
-public class AllowedNetworkTypesListener extends PhoneStateListener implements
-        PhoneStateListener.AllowedNetworkTypesChangedListener {
+public class AllowedNetworkTypesListener extends TelephonyCallback implements
+        TelephonyCallback.AllowedNetworkTypesListener {
     private static final String LOG_TAG = "NetworkModeListener";
 
     @VisibleForTesting
-    AllowedNetworkTypesListener.OnAllowedNetworkTypesChangedListener mListener;
+    OnAllowedNetworkTypesListener mListener;
     private long mAllowedNetworkType = -1;
     private Executor mExecutor;
 
@@ -44,30 +43,30 @@ public class AllowedNetworkTypesListener extends PhoneStateListener implements
         mExecutor = executor;
     }
 
-    public void setAllowedNetworkTypesChangedListener(OnAllowedNetworkTypesChangedListener lsn) {
+    public void setAllowedNetworkTypesListener(OnAllowedNetworkTypesListener lsn) {
         mListener = lsn;
     }
 
     /**
-     * Register a PhoneStateListener for Allowed Network Types changed.
+     * Register a TelephonyCallback for Allowed Network Types changed.
      * @param context the Context
      * @param subId the subscription id.
      */
     public void register(Context context, int subId) {
         TelephonyManager telephonyManager = context.getSystemService(
                 TelephonyManager.class).createForSubscriptionId(subId);
-        telephonyManager.registerPhoneStateListener(mExecutor, this);
+        telephonyManager.registerTelephonyCallback(mExecutor, this);
     }
 
     /**
-     * Unregister a PhoneStateListener for Allowed Network Types changed.
+     * Unregister a TelephonyCallback for Allowed Network Types changed.
      * @param context the Context
      * @param subId the subscription id.
      */
     public void unregister(Context context, int subId) {
         TelephonyManager telephonyManager = context.getSystemService(
                 TelephonyManager.class).createForSubscriptionId(subId);
-        telephonyManager.unregisterPhoneStateListener(this);
+        telephonyManager.unregisterTelephonyCallback(this);
     }
 
     @Override
@@ -84,7 +83,7 @@ public class AllowedNetworkTypesListener extends PhoneStateListener implements
     /**
      * Listener for update of Preferred Network Mode change
      */
-    public interface OnAllowedNetworkTypesChangedListener {
+    public interface OnAllowedNetworkTypesListener {
         /**
          * Notify the allowed network type changed.
          */

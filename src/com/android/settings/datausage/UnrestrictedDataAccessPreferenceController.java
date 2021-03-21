@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
-
 public class UnrestrictedDataAccessPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, OnDestroy, ApplicationsState.Callbacks,
         AppStateBaseBridge.Callback, Preference.OnPreferenceChangeListener {

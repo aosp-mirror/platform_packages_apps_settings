@@ -143,7 +143,7 @@ public class PercentageBarChart extends View {
     /**
      * Adds a new slice to the percentage bar chart. Callers are responsible for
      * later calling {@link #invalidate()}.
-     * 
+     *
      * @param percentage the total width that
      * @param color the color to draw the entry
      */

@@ -60,6 +60,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.media.MediaRoute2Info;
 import android.media.MediaRouter2Manager;
 import android.net.ConnectivityManager;
+import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
@@ -116,7 +117,6 @@ import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
 
-import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -237,13 +237,13 @@ public final class Utils extends com.android.settingslib.Utils {
 
     private static String formatIpAddresses(LinkProperties prop) {
         if (prop == null) return null;
-        final Iterator<InetAddress> iter = prop.getAllAddresses().iterator();
+        final Iterator<LinkAddress> iter = prop.getAllLinkAddresses().iterator();
         // If there are no entries, return null
         if (!iter.hasNext()) return null;
         // Concatenate all available addresses, comma separated
         String addresses = "";
         while (iter.hasNext()) {
-            addresses += iter.next().getHostAddress();
+            addresses += iter.next().getAddress().getHostAddress();
             if (iter.hasNext()) addresses += "\n";
         }
         return addresses;
