@@ -30,6 +30,7 @@ import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
+import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
@@ -58,6 +59,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SupportFeatureProvider supportFeatureProvider;
     public final MetricsFeatureProvider metricsFeatureProvider;
     public final BatteryStatusFeatureProvider batteryStatusFeatureProvider;
+    public final BatterySettingsFeatureProvider batterySettingsFeatureProvider;
     public final PowerUsageFeatureProvider powerUsageFeatureProvider;
     public final DashboardFeatureProvider dashboardFeatureProvider;
     public final DockUpdaterFeatureProvider dockUpdaterFeatureProvider;
@@ -106,6 +108,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         supportFeatureProvider = mock(SupportFeatureProvider.class);
         metricsFeatureProvider = mock(MetricsFeatureProvider.class);
         batteryStatusFeatureProvider = mock(BatteryStatusFeatureProvider.class);
+        batterySettingsFeatureProvider = mock(BatterySettingsFeatureProvider.class);
         powerUsageFeatureProvider = mock(PowerUsageFeatureProvider.class);
         dashboardFeatureProvider = mock(DashboardFeatureProvider.class);
         dockUpdaterFeatureProvider = mock(DockUpdaterFeatureProvider.class);
@@ -147,6 +150,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public BatteryStatusFeatureProvider getBatteryStatusFeatureProvider(Context context) {
         return batteryStatusFeatureProvider;
+    }
+
+    @Override
+    public BatterySettingsFeatureProvider getBatterySettingsFeatureProvider(Context context) {
+        return batterySettingsFeatureProvider;
     }
 
     @Override
