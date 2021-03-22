@@ -209,7 +209,7 @@ public class WifiSettings2Test {
         final Resources.Theme theme = mContext.getTheme();
         when(activity.getTheme()).thenReturn(theme);
         UserManager userManager = mock(UserManager.class);
-        when(activity.getSystemService(Context.USER_SERVICE))
+        when(activity.getSystemService(UserManager.class))
                 .thenReturn(userManager);
 
         when(mWifiSettings2.findPreference(WifiSettings2.PREF_KEY_DATA_USAGE))

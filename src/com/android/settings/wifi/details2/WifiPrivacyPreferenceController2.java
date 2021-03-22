@@ -45,7 +45,7 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     public WifiPrivacyPreferenceController2(Context context) {
         super(context, KEY_WIFI_PRIVACY);
 
-        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mWifiManager = context.getSystemService(WifiManager.class);
     }
 
     public void setWifiEntry(WifiEntry wifiEntry) {
