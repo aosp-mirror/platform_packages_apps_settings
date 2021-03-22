@@ -80,7 +80,8 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
 
     /**
      * Set the package. And also retrieve details from package manager. Some packages may be
-     * exempted from hibernation by default.
+     * exempted from hibernation by default. This method should only be called to initialize the
+     * controller.
      * @param packageName The name of the package whose hibernation state to be managed.
      */
     void setPackage(@NonNull String packageName) {
@@ -93,8 +94,7 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
                         ? android.os.Build.VERSION_CODES.R
                         : android.os.Build.VERSION_CODES.Q;
         try {
-            mPackageUid = packageManager.getPackageUidAsUser(
-                    packageName, mContext.getUserId());
+            mPackageUid = packageManager.getPackageUid(packageName, /* flags */ 0);
             mIsPackageExemptByDefault = packageManager.getTargetSdkVersion(packageName)
                     <= maxTargetSdkVersionForExemptApps;
             mIsPackageSet = true;
