@@ -248,13 +248,15 @@ public class StorageDashboardFragment extends DashboardFragment
 
         mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
 
-        if (mSelectedStorageEntry.isMounted()) {
+        if (mSelectedStorageEntry.isPrivate() && mSelectedStorageEntry.isMounted()) {
+            // Stats data is only available on private volumes.
             getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
             getLoaderManager()
                  .restartLoader(VOLUME_SIZE_JOB_ID, Bundle.EMPTY, new VolumeSizeCallbacks());
             getLoaderManager().restartLoader(ICON_JOB_ID, Bundle.EMPTY, new IconLoaderCallbacks());
         } else {
-            mPreferenceController.clearStorageSizeDisplay();
+            // Set null volume to hide category stats.
+            mPreferenceController.setVolume(null);
         }
     }
 
