@@ -1285,8 +1285,8 @@ public class ApnEditor extends SettingsPreferenceFragment
         mReadOnlyApnTypes = null;
         mReadOnlyApnFields = null;
 
-        final CarrierConfigManager configManager = (CarrierConfigManager)
-                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        final CarrierConfigManager configManager =
+                getSystemService(CarrierConfigManager.class);
         if (configManager != null) {
             final PersistableBundle b = configManager.getConfigForSubId(mSubId);
             if (b != null) {

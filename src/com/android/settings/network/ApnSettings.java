@@ -206,8 +206,8 @@ public class ApnSettings extends RestrictedSettingsFragment
         mSubscriptionInfo = getSubscriptionInfo(mSubId);
         mTelephonyManager = activity.getSystemService(TelephonyManager.class);
 
-        final CarrierConfigManager configManager = (CarrierConfigManager)
-                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        final CarrierConfigManager configManager =
+                getSystemService(CarrierConfigManager.class);
         final PersistableBundle b = configManager.getConfigForSubId(mSubId);
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);

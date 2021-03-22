@@ -146,8 +146,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
         // TODO: There may be an avatar setting action we can use here.
         final int iconId = bundle.getInt("icon_id", 0);
         if (iconId == 0) {
-            final UserManager userManager = (UserManager) getActivity().getSystemService(
-                    Context.USER_SERVICE);
+            final UserManager userManager = getActivity().getSystemService(
+                    UserManager.class);
             final UserInfo info = Utils.getExistingUser(userManager,
                     android.os.Process.myUserHandle());
             controller.setLabel(info.name);
