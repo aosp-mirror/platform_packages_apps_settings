@@ -32,7 +32,6 @@ import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.net.NetworkCapabilities.Transport;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
@@ -132,7 +131,7 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
     @VisibleForTesting
     boolean mInternetAvailable;
     @VisibleForTesting
-    @Transport int mTransport;
+    int mTransport;
     private static Map<Integer, Integer> sTransportMap = new HashMap<>();
     static {
         sTransportMap.put(TRANSPORT_WIFI, INTERNET_WIFI);
@@ -227,7 +226,7 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
         }
 
         boolean internetAvailable = false;
-        for (@Transport int transport : networkCapabilities.getTransportTypes()) {
+        for (int transport : networkCapabilities.getTransportTypes()) {
             if (sTransportMap.containsKey(transport)) {
                 mTransport = transport;
                 internetAvailable = true;
