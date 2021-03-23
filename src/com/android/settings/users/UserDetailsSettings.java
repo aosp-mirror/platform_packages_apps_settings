@@ -290,6 +290,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     void switchUser() {
         try {
+            if (mUserInfo.isGuest()) {
+                mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_SWITCH_TO_GUEST);
+            }
             ActivityManager.getService().switchUser(mUserInfo.id);
         } catch (RemoteException re) {
             Log.e(TAG, "Error while switching to other user.");

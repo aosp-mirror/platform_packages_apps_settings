@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -83,8 +82,8 @@ public class ReduceBrightColorsIntensityPreferenceControllerTest {
                 Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
         mPreferenceController.onPreferenceChange(/* preference= */ null, 20);
         assertThat(
-                mContext.getSystemService(
-                        ColorDisplayManager.class).getReduceBrightColorsStrength())
+                Settings.Secure.getInt(mContext.getContentResolver(),
+                        Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, 0))
                 .isEqualTo(20);
     }
 

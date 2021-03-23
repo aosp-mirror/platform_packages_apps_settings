@@ -192,7 +192,27 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
      */
     public void setVolume(VolumeInfo volume) {
         mVolume = volume;
-        setFilesPreferenceVisibility();
+        updateCategoryPreferencesVisibility();
+    }
+
+    private void updateCategoryPreferencesVisibility() {
+        // Stats data is only available on private volumes.
+        final boolean isValidVolume = mVolume != null
+                && mVolume.getType() == VolumeInfo.TYPE_PRIVATE
+                && (mVolume.getState() == VolumeInfo.STATE_MOUNTED
+                || mVolume.getState() == VolumeInfo.STATE_MOUNTED_READ_ONLY);
+
+        mPhotoPreference.setVisible(isValidVolume);
+        mAudioPreference.setVisible(isValidVolume);
+        mGamePreference.setVisible(isValidVolume);
+        mMoviesPreference.setVisible(isValidVolume);
+        mAppPreference.setVisible(isValidVolume);
+        mFilePreference.setVisible(isValidVolume);
+        mSystemPreference.setVisible(isValidVolume);
+
+        if (isValidVolume) {
+            setFilesPreferenceVisibility();
+        }
     }
 
     private void setFilesPreferenceVisibility() {
@@ -251,7 +271,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mSystemPreference = screen.findPreference(SYSTEM_KEY);
         mFilePreference = screen.findPreference(FILES_KEY);
 
-        setFilesPreferenceVisibility();
+        updateCategoryPreferencesVisibility();
     }
 
     public void onLoadFinished(SparseArray<StorageAsyncLoader.AppsStorageResult> result,
@@ -294,17 +314,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     public void setTotalSize(long totalSizeBytes) {
         mTotalSize = totalSizeBytes;
-    }
-
-    /** Set storage size to 0 for each preference. */
-    public void clearStorageSizeDisplay() {
-        mPhotoPreference.setStorageSize(0L, 0L);
-        mAudioPreference.setStorageSize(0L, 0L);
-        mGamePreference.setStorageSize(0L, 0L);
-        mMoviesPreference.setStorageSize(0L, 0L);
-        mAppPreference.setStorageSize(0L, 0L);
-        mFilePreference.setStorageSize(0L, 0L);
-        mSystemPreference.setStorageSize(0L, 0L);
     }
 
     /**
