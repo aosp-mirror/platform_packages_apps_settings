@@ -204,10 +204,16 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
 
             configureAdvancedOptionsVisibility();
 
-            // Create a button to forget the profile if it has already been saved..
             if (mExists) {
+                // Create a button to forget the profile if it has already been saved..
                 setButton(DialogInterface.BUTTON_NEUTRAL,
                         context.getString(R.string.vpn_forget), mListener);
+
+                // Display warning subtitle if the existing VPN is an insecure type...
+                if (VpnProfile.isLegacyType(mProfile.type)) {
+                    TextView subtitle = mView.findViewById(R.id.dialog_alert_subtitle);
+                    subtitle.setVisibility(View.VISIBLE);
+                }
             }
 
             // Create a button to save the profile.
