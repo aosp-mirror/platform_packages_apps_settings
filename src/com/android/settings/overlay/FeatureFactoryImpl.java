@@ -63,6 +63,8 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
+import com.android.settings.security.SecuritySettingsFeatureProvider;
+import com.android.settings.security.SecuritySettingsFeatureProviderImpl;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
@@ -100,6 +102,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private FaceFeatureProvider mFaceFeatureProvider;
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
     private ExtraAppInfoFeatureProvider mExtraAppInfoFeatureProvider;
+    private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -312,5 +315,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mExtraAppInfoFeatureProvider = new ExtraAppInfoFeatureProviderImpl();
         }
         return mExtraAppInfoFeatureProvider;
+    }
+
+    @Override
+    public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
+        if (mSecuritySettingsFeatureProvider == null) {
+            mSecuritySettingsFeatureProvider = new SecuritySettingsFeatureProviderImpl();
+        }
+        return mSecuritySettingsFeatureProvider;
     }
 }
