@@ -55,7 +55,7 @@ public class UsbTetherPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
-        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        when(mContext.getSystemService(TetheringManager.class)).thenReturn(mTetheringManager);
         when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[]{""});
         mController = new UsbTetherPreferenceController(mContext, "USB");
         mController.setTetherEnabler(mTetherEnabler);

@@ -53,7 +53,7 @@ public class WifiEnablerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         mEnabler = new WifiEnabler(mContext, mock(SwitchWidgetController.class),
                 mock(MetricsFeatureProvider.class), mConnectivityManager);
     }
