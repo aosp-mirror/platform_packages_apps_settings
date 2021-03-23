@@ -62,9 +62,9 @@ public class EthernetTetherPreferenceControllerTest {
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mPreference = spy(SwitchPreference.class);
-        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        when(mContext.getSystemService(TetheringManager.class)).thenReturn(mTetheringManager);
         when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[]{ETHERNET_REGEX});
-        when(mContext.getSystemService(Context.ETHERNET_SERVICE)).thenReturn(mEthernetManager);
+        when(mContext.getSystemService(EthernetManager.class)).thenReturn(mEthernetManager);
         mController = new EthernetTetherPreferenceController(mContext, "ethernet");
         mController.setTetherEnabler(mTetherEnabler);
         ReflectionHelpers.setField(mController, "mEthernetRegex", ETHERNET_REGEX);
