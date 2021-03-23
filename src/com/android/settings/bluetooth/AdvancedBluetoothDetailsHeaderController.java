@@ -192,6 +192,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 updateSubLayout(mLayoutPreference.findViewById(R.id.layout_middle),
                         BluetoothDevice.METADATA_MAIN_ICON,
                         BluetoothDevice.METADATA_MAIN_BATTERY,
+                        BluetoothDevice.METADATA_MAIN_LOW_BATTERY_THRESHOLD,
                         BluetoothDevice.METADATA_MAIN_CHARGING,
                         /* titleResId */ 0,
                         MAIN_DEVICE_ID);
@@ -202,6 +203,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 updateSubLayout(mLayoutPreference.findViewById(R.id.layout_left),
                         BluetoothDevice.METADATA_UNTETHERED_LEFT_ICON,
                         BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY,
+                        BluetoothDevice.METADATA_UNTETHERED_LEFT_LOW_BATTERY_THRESHOLD,
                         BluetoothDevice.METADATA_UNTETHERED_LEFT_CHARGING,
                         R.string.bluetooth_left_name,
                         LEFT_DEVICE_ID);
@@ -209,6 +211,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 updateSubLayout(mLayoutPreference.findViewById(R.id.layout_middle),
                         BluetoothDevice.METADATA_UNTETHERED_CASE_ICON,
                         BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY,
+                        BluetoothDevice.METADATA_UNTETHERED_CASE_LOW_BATTERY_THRESHOLD,
                         BluetoothDevice.METADATA_UNTETHERED_CASE_CHARGING,
                         R.string.bluetooth_middle_name,
                         CASE_DEVICE_ID);
@@ -216,6 +219,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 updateSubLayout(mLayoutPreference.findViewById(R.id.layout_right),
                         BluetoothDevice.METADATA_UNTETHERED_RIGHT_ICON,
                         BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY,
+                        BluetoothDevice.METADATA_UNTETHERED_RIGHT_LOW_BATTERY_THRESHOLD,
                         BluetoothDevice.METADATA_UNTETHERED_RIGHT_CHARGING,
                         R.string.bluetooth_right_name,
                         RIGHT_DEVICE_ID);
@@ -243,7 +247,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     }
 
     private void updateSubLayout(LinearLayout linearLayout, int iconMetaKey, int batteryMetaKey,
-            int chargeMetaKey, int titleResId, int deviceId) {
+            int lowBatteryMetaKey, int chargeMetaKey, int titleResId, int deviceId) {
         if (linearLayout == null) {
             return;
         }
@@ -273,7 +277,15 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             linearLayout.setVisibility(View.VISIBLE);
             batterySummaryView.setText(com.android.settings.Utils.formatPercentage(batteryLevel));
             batterySummaryView.setVisibility(View.VISIBLE);
-            showBatteryIcon(linearLayout, batteryLevel, charging, batteryMetaKey);
+            int lowBatteryLevel = BluetoothUtils.getIntMetaData(bluetoothDevice, lowBatteryMetaKey);
+            if (lowBatteryLevel == BluetoothUtils.META_INT_ERROR) {
+                if (batteryMetaKey == BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY) {
+                    lowBatteryLevel = CASE_LOW_BATTERY_LEVEL;
+                } else {
+                    lowBatteryLevel = LOW_BATTERY_LEVEL;
+                }
+            }
+            showBatteryIcon(linearLayout, batteryLevel, lowBatteryLevel, charging);
         } else {
             if (deviceId == MAIN_DEVICE_ID) {
                 linearLayout.setVisibility(View.VISIBLE);
@@ -354,11 +366,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         });
     }
 
-    private void showBatteryIcon(LinearLayout linearLayout, int level, boolean charging,
-            int batteryMetaKey) {
-        final int lowBatteryLevel =
-                batteryMetaKey == BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY
-                ? CASE_LOW_BATTERY_LEVEL : LOW_BATTERY_LEVEL;
+    private void showBatteryIcon(LinearLayout linearLayout, int level, int lowBatteryLevel,
+            boolean charging) {
         final boolean enableLowBattery = level <= lowBatteryLevel && !charging;
         final ImageView imageView = linearLayout.findViewById(R.id.bt_battery_icon);
         if (enableLowBattery) {
