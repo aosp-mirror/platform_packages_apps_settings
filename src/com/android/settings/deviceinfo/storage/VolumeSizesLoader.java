@@ -26,7 +26,6 @@ import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
-import java.io.File;
 import java.io.IOException;
 
 public class VolumeSizesLoader extends AsyncLoaderCompat<PrivateStorageInfo> {
@@ -50,11 +49,6 @@ public class VolumeSizesLoader extends AsyncLoaderCompat<PrivateStorageInfo> {
 
     @Override
     public PrivateStorageInfo loadInBackground() {
-        if (mVolume == null || (mVolume.getState() != VolumeInfo.STATE_MOUNTED
-                && mVolume.getState() != VolumeInfo.STATE_MOUNTED_READ_ONLY)) {
-            return new PrivateStorageInfo(0L /* freeBytes */, 0L /* totalBytes */);
-        }
-
         PrivateStorageInfo volumeSizes;
         try {
             volumeSizes = getVolumeSize(mVolumeProvider, mStats, mVolume);
@@ -68,14 +62,8 @@ public class VolumeSizesLoader extends AsyncLoaderCompat<PrivateStorageInfo> {
     static PrivateStorageInfo getVolumeSize(
             StorageVolumeProvider storageVolumeProvider, StorageStatsManager stats, VolumeInfo info)
             throws IOException {
-        if (info.getType() == VolumeInfo.TYPE_PRIVATE) {
-            return new PrivateStorageInfo(storageVolumeProvider.getFreeBytes(stats, info),
-                    storageVolumeProvider.getTotalBytes(stats, info));
-        }
-        // TODO(b/174964885): It's confusing to use PrivateStorageInfo for a public storage,
-        //                    replace it with a new naming or a different object.
-        final File rootFile = info.getPath();
-        return rootFile == null ? new PrivateStorageInfo(0L /* freeBytes */, 0L /* totalBytes */)
-                : new PrivateStorageInfo(rootFile.getFreeSpace(), rootFile.getTotalSpace());
+        long privateTotalBytes = storageVolumeProvider.getTotalBytes(stats, info);
+        long privateFreeBytes = storageVolumeProvider.getFreeBytes(stats, info);
+        return new PrivateStorageInfo(privateFreeBytes, privateTotalBytes);
     }
 }
