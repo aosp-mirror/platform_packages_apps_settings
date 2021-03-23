@@ -26,7 +26,6 @@ import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -45,7 +44,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
  * {@link TogglePreferenceController} that controls whether the Wi-Fi Wakeup feature should be
  * enabled.
  */
-// TODO(b/167474581): Should clean up this controller when Provider Model finished.
 public class WifiWakeupPreferenceController extends TogglePreferenceController implements
         LifecycleObserver, OnPause, OnResume {
 
@@ -91,9 +89,6 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
 
     @Override
     public int getAvailabilityStatus() {
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
         return AVAILABLE;
     }
 
