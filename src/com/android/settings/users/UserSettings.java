@@ -820,6 +820,8 @@ public class UserSettings extends SettingsPreferenceFragment
      */
     private void exitGuest() {
         // Just to be safe
+        mMetricsFeatureProvider.action(getActivity(),
+                SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
         if (!isCurrentUserGuest()) {
             return;
         }
@@ -1077,6 +1079,7 @@ public class UserSettings extends SettingsPreferenceFragment
             return true;
         } else if (pref == mAddGuest) {
             mAddGuest.setEnabled(false); // prevent multiple tap issue
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
             UserInfo guest = mUserManager.createGuest(
                     getContext(), getString(com.android.settingslib.R.string.user_guest));
             openUserDetails(guest, true);
