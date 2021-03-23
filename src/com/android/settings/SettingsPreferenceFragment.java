@@ -446,6 +446,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     }
 
     /**
+     * Returns the specified system service from the owning Activity.
+     */
+    protected <T> T getSystemService(final Class<T> serviceClass) {
+        return getActivity().getSystemService(serviceClass);
+    }
+
+    /**
      * Returns the PackageManager from the owning Activity.
      */
     protected PackageManager getPackageManager() {
