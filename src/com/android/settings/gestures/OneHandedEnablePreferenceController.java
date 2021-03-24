@@ -17,7 +17,6 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.os.SystemProperties;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -28,15 +27,13 @@ import com.android.settings.core.TogglePreferenceController;
  **/
 public class OneHandedEnablePreferenceController extends TogglePreferenceController {
 
-    static final String SUPPORT_ONE_HANDED_MODE = "ro.support_one_handed_mode";
-
     public OneHandedEnablePreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return SystemProperties.getBoolean(SUPPORT_ONE_HANDED_MODE, false)
+        return OneHandedSettingsUtils.isSupportOneHandedMode()
                 ? BasePreferenceController.AVAILABLE
                 : BasePreferenceController.UNSUPPORTED_ON_DEVICE;
     }
@@ -45,6 +42,7 @@ public class OneHandedEnablePreferenceController extends TogglePreferenceControl
     public boolean setChecked(boolean isChecked) {
         OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext,
                 isChecked);
+        OneHandedSettingsUtils.setSwipeDownNotificationEnabled(mContext, !isChecked);
         return true;
     }
 

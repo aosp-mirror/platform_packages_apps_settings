@@ -22,12 +22,15 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemProperties;
 import android.provider.Settings;
 
 /**
  * The Util to query one-handed mode settings config
  */
 public class OneHandedSettingsUtils {
+
+    static final String SUPPORT_ONE_HANDED_MODE = "ro.support_one_handed_mode";
 
     public enum OneHandedTimeout {
         NEVER(0), SHORT(4), MEDIUM(8), LONG(12);
@@ -49,6 +52,13 @@ public class OneHandedSettingsUtils {
     OneHandedSettingsUtils(Context context) {
         mContext = context;
         mSettingsObserver = new SettingsObserver(new Handler(Looper.getMainLooper()));
+    }
+
+    /**
+     * Get One-Handed mode support flag.
+     */
+    public static boolean isSupportOneHandedMode() {
+        return SystemProperties.getBoolean(SUPPORT_ONE_HANDED_MODE, false);
     }
 
     /**
@@ -116,6 +126,28 @@ public class OneHandedSettingsUtils {
     public static void setSettingsOneHandedModeTimeout(Context context, int timeout) {
         Settings.Secure.putInt(context.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT, timeout);
+    }
+
+    /**
+     * Get Swipe-down-notification enable or disable flag from Settings provider.
+     *
+     * @param context App context
+     * @return enable or disable Swipe-down-notification flag.
+     */
+    public static boolean isSwipeDownNotificationEnabled(Context context) {
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, 0) == 1;
+    }
+
+    /**
+     * Set Swipe-down-notification enable or disable flag to Settings provider.
+     *
+     * @param context App context
+     * @param enable enable or disable Swipe-down-notification.
+     */
+    public static void setSwipeDownNotificationEnabled(Context context, boolean enable) {
+        Settings.Secure.putInt(context.getContentResolver(),
+                Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, enable ? 1 : 0);
     }
 
     /**

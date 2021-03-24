@@ -20,11 +20,13 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/swipe_bottom_to_notifications_title">
 
-    <com.android.settings.widget.VideoPreference
-        android:title="@string/swipe_bottom_to_notifications_title"
-        settings:animation="@raw/gesture_fingerprint_swipe"
-        settings:preview="@drawable/gesture_fingerprint_swipe"
-        settings:controller="com.android.settings.widget.VideoPreferenceController"/>
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="one_handed_header"
+        android:layout="@layout/one_handed_header"
+        android:persistent="false"
+        android:selectable="false"
+        settings:allowDividerBelow="false"
+        settings:searchable="false"/>
 
     <SwitchPreference
         android:key="gesture_swipe_bottom_to_notification"
