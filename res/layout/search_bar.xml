@@ -19,10 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/search_bar_margin"
-    android:layout_marginStart="@dimen/search_bar_margin"
-    android:layout_marginEnd="@dimen/search_bar_margin"
-    android:layout_marginBottom="@dimen/search_bar_margin_bottom">
+    android:layout_margin="@dimen/search_bar_margin">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/search_bar"
@@ -34,7 +31,7 @@
             android:id="@+id/search_action_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
-            android:layout_marginStart="-2dp"
+            android:paddingStart="4dp"
             android:background="@drawable/search_bar_selected_background"
             android:contentInsetStartWithNavigation="@dimen/search_bar_content_inset"
             android:navigationIcon="@drawable/ic_homepage_search">
@@ -43,16 +40,11 @@
                 style="@style/TextAppearance.SearchBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="-4dp"
                 android:layout_gravity="start"
                 android:text="@string/search_menu"/>
         </Toolbar>
     </com.google.android.material.card.MaterialCardView>
 
-   <ImageView
-        android:id="@+id/account_avatar"
-        android:layout_width="@dimen/avatar_length"
-        android:layout_height="@dimen/avatar_length"
-        android:layout_gravity="center_vertical"
-        android:contentDescription="@string/search_bar_account_avatar_content_description"/>
 </LinearLayout>
 
