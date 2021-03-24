@@ -18,6 +18,8 @@ package com.android.settings.accounts;
 
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
+import static com.android.settings.accounts.AccountDashboardFragment.buildAutofillPreferenceControllers;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
@@ -61,14 +63,16 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        buildAutofillPreferenceControllers(context, controllers);
         final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
-        return buildPreferenceControllers(context, this /* parent */, authorities);
+        buildAccountPreferenceControllers(context, this /* parent */, authorities, controllers);
+        return controllers;
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            SettingsPreferenceFragment parent, String[] authorities) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
+    private static void buildAccountPreferenceControllers(
+            Context context, SettingsPreferenceFragment parent, String[] authorities,
+            List<AbstractPreferenceController> controllers) {
         final AccountPreferenceController accountPrefController =
                 new AccountPreferenceController(context, parent, authorities,
                         ProfileSelectFragment.ProfileType.PERSONAL);
@@ -78,7 +82,6 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
         controllers.add(accountPrefController);
         controllers.add(new AutoSyncDataPreferenceController(context, parent));
         controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
-        return controllers;
     }
 
     // TODO: b/141601408. After featureFlag settings_work_profile is launched, unmark this
@@ -88,6 +91,7 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
 //                @Override
 //                public List<AbstractPreferenceController> createPreferenceControllers(
 //                        Context context) {
+//                    ..Add autofill here too..
 //                    return buildPreferenceControllers(
 //                            context, null /* parent */, null /* authorities*/);
 //                }
