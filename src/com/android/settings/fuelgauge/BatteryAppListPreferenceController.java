@@ -257,6 +257,27 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         BatteryEntry.startRequestQueue();
     }
 
+    /**
+     * Gets the BatteryEntry list by using the supplied BatteryUsageStats.
+     */
+    public List<BatteryEntry> getBatteryEntryList(
+            BatteryUsageStats batteryUsageStats, boolean showAllApps) {
+        mBatteryUsageStats = USE_FAKE_DATA ? getFakeStats() : batteryUsageStats;
+        if (!sConfig.shouldShowBatteryAttributionList(mContext)) {
+            return null;
+        }
+        final int dischargePercentage = getDischargePercentage(batteryUsageStats);
+        final List<BatteryEntry> usageList = getCoalescedUsageList(showAllApps);
+        final double totalPower = batteryUsageStats.getConsumedPower();
+        for (int i = 0; i < usageList.size(); i++) {
+            final BatteryEntry entry = usageList.get(i);
+            final double percentOfTotal = mBatteryUtils.calculateBatteryPercent(
+                    entry.getConsumedPower(), totalPower, dischargePercentage);
+            entry.percent = percentOfTotal;
+        }
+        return usageList;
+    }
+
     private int getDischargePercentage(BatteryUsageStats batteryUsageStats) {
         int dischargePercentage = batteryUsageStats.getDischargePercentage();
         if (dischargePercentage < 0) {
@@ -311,7 +332,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             final int index = batteryEntryList.indexOfKey(realUid);
             if (index < 0) {
                 // New entry.
-                batteryEntryList.put(realUid, new BatteryEntry(mActivity, mHandler, mUserManager,
+                batteryEntryList.put(realUid, new BatteryEntry(mContext, mHandler, mUserManager,
                         consumer, isHidden, packages, null));
             } else {
                 // Combine BatterySippers if we already have one with this UID.
@@ -328,7 +349,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 continue;
             }
 
-            results.add(new BatteryEntry(mActivity, mHandler, mUserManager,
+            results.add(new BatteryEntry(mContext, mHandler, mUserManager,
                     consumer, /* isHidden */ true, null, null));
         }
 
@@ -337,7 +358,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                     mBatteryUsageStats.getUserBatteryConsumers();
             for (int i = 0, size = userBatteryConsumers.size(); i < size; i++) {
                 final UserBatteryConsumer consumer = userBatteryConsumers.get(i);
-                results.add(new BatteryEntry(mActivity, mHandler, mUserManager,
+                results.add(new BatteryEntry(mContext, mHandler, mUserManager,
                         consumer, /* isHidden */ true, null, null));
             }
         }
