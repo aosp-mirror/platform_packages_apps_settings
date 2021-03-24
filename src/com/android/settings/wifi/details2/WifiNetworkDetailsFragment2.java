@@ -75,7 +75,8 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
     // Interval between initiating SavedNetworkTracker scans
     private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
-    private NetworkDetailsTracker mNetworkDetailsTracker;
+    @VisibleForTesting
+    NetworkDetailsTracker mNetworkDetailsTracker;
     private HandlerThread mWorkerThread;
     private WifiDetailPreferenceController2 mWifiDetailPreferenceController2;
     private List<WifiDialog2.WifiDialog2Listener> mWifiDialogListeners = new ArrayList<>();
@@ -125,9 +126,11 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
-        item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        if (isEditable()) {
+            MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
+            item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -251,6 +254,17 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                 MAX_SCAN_AGE_MILLIS,
                 SCAN_INTERVAL_MILLIS,
                 getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY));
+    }
+
+    private boolean isEditable() {
+        if (mNetworkDetailsTracker == null) {
+            return false;
+        }
+        final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
+        if (wifiEntry == null) {
+            return false;
+        }
+        return wifiEntry.isSaved();
     }
 
     /**
