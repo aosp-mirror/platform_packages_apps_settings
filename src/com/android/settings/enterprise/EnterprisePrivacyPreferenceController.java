@@ -13,6 +13,9 @@
  */
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_FINANCED;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -39,6 +42,10 @@ public class EnterprisePrivacyPreferenceController extends AbstractPreferenceCon
         if (preference == null) {
             return;
         }
+        if (isFinancedDevice()) {
+            preference.setTitle(R.string.financed_privacy_settings);
+        }
+
         final String organizationName = mFeatureProvider.getDeviceOwnerOrganizationName();
         if (organizationName == null) {
             preference.setSummary(R.string.enterprise_privacy_settings_summary_generic);
@@ -56,5 +63,11 @@ public class EnterprisePrivacyPreferenceController extends AbstractPreferenceCon
     @Override
     public String getPreferenceKey() {
         return KEY_ENTERPRISE_PRIVACY;
+    }
+
+    private boolean isFinancedDevice() {
+        final DevicePolicyManager dpm = mContext.getSystemService(DevicePolicyManager.class);
+        return dpm.isDeviceManaged() && dpm.getDeviceOwnerType(
+                dpm.getDeviceOwnerComponentOnAnyUser()) == DEVICE_OWNER_TYPE_FINANCED;
     }
 }
