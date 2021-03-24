@@ -70,9 +70,9 @@ public class HibernationSwitchPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.APP_OPS_SERVICE)).thenReturn(mAppOpsManager);
-        when(mPackageManager.getPackageUidAsUser(eq(VALID_PACKAGE_NAME), anyInt()))
+        when(mPackageManager.getPackageUid(eq(VALID_PACKAGE_NAME), anyInt()))
                 .thenReturn(PACKAGE_UID);
-        when(mPackageManager.getPackageUidAsUser(eq(INVALID_PACKAGE_NAME), anyInt()))
+        when(mPackageManager.getPackageUid(eq(INVALID_PACKAGE_NAME), anyInt()))
                 .thenThrow(new PackageManager.NameNotFoundException());
         when(mPackageManager.getTargetSdkVersion(eq(EXEMPTED_PACKAGE_NAME)))
                 .thenReturn(android.os.Build.VERSION_CODES.Q);
