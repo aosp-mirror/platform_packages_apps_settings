@@ -18,7 +18,6 @@ package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.SystemProperties;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -52,8 +51,7 @@ public class OneHandedSettings extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.one_handed_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SystemProperties.getBoolean(
-                            OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, false);
+                    return OneHandedSettingsUtils.isSupportOneHandedMode();
                 }
             };
 }
