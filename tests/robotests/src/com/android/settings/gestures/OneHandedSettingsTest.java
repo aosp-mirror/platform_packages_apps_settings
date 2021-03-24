@@ -55,7 +55,7 @@ public class OneHandedSettingsTest {
 
     @Test
     public void isPageSearchEnabled_setSupportOneHandedModeProperty_shouldReturnTrue() {
-        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "true");
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
 
         final Object obj = ReflectionHelpers.callInstanceMethod(
                 OneHandedSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",
@@ -66,7 +66,7 @@ public class OneHandedSettingsTest {
 
     @Test
     public void isPageSearchEnabled_unsetSupportOneHandedModeProperty_shouldReturnFalse() {
-        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "false");
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "false");
 
         final Object obj = ReflectionHelpers.callInstanceMethod(
                 OneHandedSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",
