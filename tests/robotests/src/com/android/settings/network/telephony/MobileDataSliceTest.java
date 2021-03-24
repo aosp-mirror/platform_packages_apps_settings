@@ -74,7 +74,7 @@ public class MobileDataSliceTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
-        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
+        doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
         doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(anyInt());

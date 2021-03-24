@@ -46,9 +46,9 @@ public class SimStatusPreferenceController extends
     public SimStatusPreferenceController(Context context, Fragment fragment) {
         super(context);
 
-        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        mSubscriptionManager = (SubscriptionManager) context.getSystemService(
-                Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+        mTelephonyManager = context.getSystemService(TelephonyManager.class);
+        mSubscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
         mFragment = fragment;
     }
 

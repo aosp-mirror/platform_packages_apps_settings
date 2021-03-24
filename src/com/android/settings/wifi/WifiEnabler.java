@@ -75,7 +75,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
     public WifiEnabler(Context context, SwitchWidgetController switchWidget,
         MetricsFeatureProvider metricsFeatureProvider) {
         this(context, switchWidget, metricsFeatureProvider,
-            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+            context.getSystemService(ConnectivityManager.class));
     }
 
     @VisibleForTesting
@@ -86,7 +86,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         mSwitchWidget = switchWidget;
         mSwitchWidget.setListener(this);
         mMetricsFeatureProvider = metricsFeatureProvider;
-        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mWifiManager = context.getSystemService(WifiManager.class);
         mConnectivityManager = connectivityManager;
 
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);

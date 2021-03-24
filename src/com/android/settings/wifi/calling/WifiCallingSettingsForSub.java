@@ -128,8 +128,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
             boolean isWfcModeEditable = true;
             boolean isWfcRoamingModeEditable = false;
-            final CarrierConfigManager configManager = (CarrierConfigManager)
-                    activity.getSystemService(Context.CARRIER_CONFIG_SERVICE);
+            final CarrierConfigManager configManager =
+                    activity.getSystemService(CarrierConfigManager.class);
             if (configManager != null) {
                 PersistableBundle b =
                         configManager.getConfigForSubId(WifiCallingSettingsForSub.this.mSubId);
@@ -343,8 +343,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             return;
         }
 
-        final CarrierConfigManager configManager = (CarrierConfigManager)
-                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        final CarrierConfigManager configManager =
+                getSystemService(CarrierConfigManager.class);
         boolean isWifiOnlySupported = true;
 
         if (configManager != null) {
