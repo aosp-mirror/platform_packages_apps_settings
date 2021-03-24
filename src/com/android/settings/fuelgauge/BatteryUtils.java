@@ -298,7 +298,7 @@ public class BatteryUtils {
      */
     public long calculateLastFullChargeTime(BatteryUsageStats batteryUsageStats,
             long currentTimeMs) {
-        return currentTimeMs - batteryUsageStats.getStatsStartRealtime();
+        return currentTimeMs - batteryUsageStats.getStatsStartTimestamp();
     }
 
     public static void logRuntime(String tag, String message, long startTime) {
