@@ -21,7 +21,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -43,8 +42,7 @@ public class LowBatteryTip extends EarlyWarningTip {
 
     @Override
     public CharSequence getSummary(Context context) {
-        return mState == StateType.HANDLED ? context.getString(
-                R.string.battery_tip_early_heads_up_done_summary) : mSummary;
+        return mSummary;
     }
 
     @Override
