@@ -488,7 +488,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         // Show the "Settings" menu as if it were a preference screen.
         mSettingsPreference = new Preference(getPrefContext());
         mSettingsPreference.setTitle(mSettingsTitle);
-        mSettingsPreference.setIconSpaceReserved(true);
+        mSettingsPreference.setIconSpaceReserved(false);
         mSettingsPreference.setIntent(mSettingsIntent);
 
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
