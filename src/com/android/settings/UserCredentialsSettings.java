@@ -34,7 +34,6 @@ import android.security.Credentials;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
-import android.security.keystore.AndroidKeyStoreProvider;
 import android.security.keystore.KeyProperties;
 import android.security.keystore2.AndroidKeyStoreLoadStoreParameter;
 import android.util.Log;
@@ -73,6 +72,8 @@ import javax.crypto.SecretKey;
 public class UserCredentialsSettings extends SettingsPreferenceFragment
         implements View.OnClickListener {
     private static final String TAG = "UserCredentialsSettings";
+
+    private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
 
     @Override
     public int getMetricsCategory() {
@@ -210,15 +211,10 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
             private void deleteWifiCredential(final Credential credential) {
                 try {
-                    KeyStore keyStore = null;
-                    if (AndroidKeyStoreProvider.isKeystore2Enabled()) {
-                        keyStore = KeyStore.getInstance("AndroidKeyStore");
-                        keyStore.load(
-                                new AndroidKeyStoreLoadStoreParameter(
-                                        KeyProperties.NAMESPACE_WIFI));
-                    } else {
-                        keyStore = AndroidKeyStoreProvider.getKeyStoreForUid(Process.WIFI_UID);
-                    }
+                    final KeyStore keyStore = KeyStore.getInstance(KEYSTORE_PROVIDER);
+                    keyStore.load(
+                            new AndroidKeyStoreLoadStoreParameter(
+                                    KeyProperties.NAMESPACE_WIFI));
                     keyStore.deleteEntry(credential.getAlias());
                 } catch (Exception e) {
                     throw new RuntimeException("Failed to delete keys from keystore.");
@@ -278,18 +274,13 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
             final int wifiUid = UserHandle.getUid(myUserId, Process.WIFI_UID);
 
             try {
-                KeyStore processKeystore = KeyStore.getInstance("AndroidKeyStore");
+                KeyStore processKeystore = KeyStore.getInstance(KEYSTORE_PROVIDER);
                 processKeystore.load(null);
                 KeyStore wifiKeystore = null;
                 if (myUserId == 0) {
-                    // Only the primary user may see wifi configurations.
-                    if (AndroidKeyStoreProvider.isKeystore2Enabled()) {
-                        wifiKeystore = KeyStore.getInstance("AndroidKeyStore");
-                        wifiKeystore.load(new AndroidKeyStoreLoadStoreParameter(
-                                KeyProperties.NAMESPACE_WIFI));
-                    } else {
-                        wifiKeystore = AndroidKeyStoreProvider.getKeyStoreForUid(Process.WIFI_UID);
-                    }
+                    wifiKeystore = KeyStore.getInstance(KEYSTORE_PROVIDER);
+                    wifiKeystore.load(new AndroidKeyStoreLoadStoreParameter(
+                            KeyProperties.NAMESPACE_WIFI));
                 }
 
                 List<Credential> credentials = new ArrayList<>();

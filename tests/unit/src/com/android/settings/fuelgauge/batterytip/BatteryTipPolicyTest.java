@@ -94,7 +94,7 @@ public class BatteryTipPolicyTest {
         final BatteryTipPolicy batteryTipPolicy = new BatteryTipPolicy(mContext);
 
         assertThat(batteryTipPolicy.batteryTipEnabled).isTrue();
-        assertThat(batteryTipPolicy.summaryEnabled).isTrue();
+        assertThat(batteryTipPolicy.summaryEnabled).isFalse();
         assertThat(batteryTipPolicy.batterySaverTipEnabled).isTrue();
         assertThat(batteryTipPolicy.highUsageEnabled).isTrue();
         assertThat(batteryTipPolicy.highUsageAppCount).isEqualTo(3);
