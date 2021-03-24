@@ -277,7 +277,7 @@ public class BatteryUtilsTest {
     @Test
     public void testCalculateLastFullChargeTime() {
         final long currentTimeMs = System.currentTimeMillis();
-        when(mBatteryUsageStats.getStatsStartRealtime()).thenReturn(
+        when(mBatteryUsageStats.getStatsStartTimestamp()).thenReturn(
                 currentTimeMs - TIME_SINCE_LAST_FULL_CHARGE_MS);
 
         assertThat(mBatteryUtils.calculateLastFullChargeTime(mBatteryUsageStats, currentTimeMs))
