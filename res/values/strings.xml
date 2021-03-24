@@ -839,6 +839,8 @@
     <string name="security_settings_face_settings_use_face_for_apps">App sign-in \u0026 payments</string>
     <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. -->
     <string name="security_settings_face_settings_require_category">Requirements for face unlock</string>
+    <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_settings_preferences_category">When using face unlock</string>
     <!-- Text shown on a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=30] -->
     <string name="security_settings_face_settings_require_attention">Require eyes to be open</string>
     <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
@@ -849,6 +851,8 @@
     <string name="security_settings_face_settings_require_confirmation_details">When using face unlock in apps, always require confirmation step</string>
     <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_remove_face_data">Delete face data</string>
+    <!-- Button text in face settings which removes the user's face model from the device [CHAR LIMIT=40] -->
+    <string name="security_settings_face_settings_remove_face_model">Delete face model</string>
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
@@ -861,6 +865,10 @@
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_remove_dialog_details">The face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
+    <!-- Dialog title shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=35] -->
+    <string name="security_settings_face_settings_remove_model_dialog_title">Delete face model?</string>
+    <!-- Dialog contents shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_remove_model_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_context_subtitle">Use face unlock to unlock your phone</string>
 
@@ -1063,6 +1071,25 @@
 
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
+
+    <!-- Title of the combined biometrics settings screen. [CHAR LIMIT=40] -->
+    <string name="security_settings_biometrics_title">Face \u0026 fingerprint unlock</string>
+    <!-- Summary of the current biometrics setting when no biometrics have been enrolled. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_summary_none">Tap to set up</string>
+    <!-- Summary of the current biometrics setting when the user has enrolled a face but no fingerprint. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_summary_face">Face only</string>
+    <!-- Summary of the current biometrics setting when the user has enrolled a fingerprint but no face. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_summary_fingerprint">Fingerprint only</string>
+    <!-- Summary of the current biometrics setting when the user has enrolled both a face and a fingerprint. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_summary_both">Face and fingerprint</string>
+    <!-- Description shown on the combined biometrics settings screen. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_biometrics_description">When you set up face and fingerprint unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area</string>
+    <!-- Title of a section on the biometrics settings screen for setting up different types of authentication. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_types_category">Ways to unlock</string>
+    <!-- Title of a section on the biometrics settings screen for adjusting authentication preferences. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_preferences_category">Use face or fingerprint for</string>
+    <!-- Title of a section on the biometrics settings screen for adjusting authentication preferences. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_preference_use_with_apps">Authentication in apps</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
@@ -1328,15 +1355,15 @@
     <string name="face_unlock_title">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_pattern">Biometrics + Pattern</string>
+    <string name="biometrics_unlock_set_unlock_pattern">Pattern \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user through creating a backup unlock PIN for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_pin">Biometrics + PIN</string>
+    <string name="biometrics_unlock_set_unlock_pin">PIN \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user through creating a backup unlock password for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_password">Biometrics + Password</string>
+    <string name="biometrics_unlock_set_unlock_password">Password \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user to skip face unlock setup [CHAR LIMIT=60]-->
-    <string name="biometrics_unlock_skip_biometrics">Continue without biometrics</string>
+    <string name="biometrics_unlock_skip_biometrics">Continue without face or fingerprint</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
-    <string name="biometrics_unlock_title">You can unlock your phone using your biometrics. For security, this option requires a backup screen lock.</string>
+    <string name="biometrics_unlock_title">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
     <string name="unlock_set_unlock_disabled_summary">Disabled by admin, encryption policy, or
