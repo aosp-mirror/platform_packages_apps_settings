@@ -121,7 +121,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
         try {
             moveId = getPackageManager().movePrimaryStorage(mVolume);
         } catch (IllegalArgumentException e) {
-            StorageManager sm = (StorageManager) getSystemService(STORAGE_SERVICE);
+            StorageManager sm = getSystemService(StorageManager.class);
 
             if (Objects.equals(mVolume.getFsUuid(), sm.getPrimaryStorageVolume().getUuid())) {
                 final Intent intent = new Intent(this, StorageWizardReady.class);

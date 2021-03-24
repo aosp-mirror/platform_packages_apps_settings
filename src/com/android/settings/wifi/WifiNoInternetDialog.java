@@ -107,7 +107,7 @@ public class WifiNoInternetDialog extends AlertActivity implements
             }
         };
 
-        mCM = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        mCM = getSystemService(ConnectivityManager.class);
         mCM.registerNetworkCallback(request, mNetworkCallback);
 
         final NetworkInfo ni = mCM.getNetworkInfo(mNetwork);

@@ -49,7 +49,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     public ImeiInfoPreferenceController(Context context, String key) {
         super(context, key);
-        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mIsMultiSim = mTelephonyManager.getPhoneCount() > 1;
     }
 
