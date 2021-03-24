@@ -43,6 +43,25 @@ public class SettingsHomepageActivity extends FragmentActivity {
 
     private static final String TAG = "SettingsHomepageActivity";
 
+    private static final long HOMEPAGE_LOADING_TIMEOUT_MS = 300;
+
+    private View mHomepageView;
+    private View mSuggestionView;
+
+    /**
+     * Shows the homepage and shows/hides the suggestion together. Only allows to be executed once
+     * to avoid the flicker caused by the suggestion suddenly appearing/disappearing.
+     */
+    public void showHomepageWithSuggestion(boolean showSuggestion) {
+        if (mHomepageView == null) {
+            return;
+        }
+        Log.i(TAG, "showHomepageWithSuggestion: " + showSuggestion);
+        mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
+        mHomepageView.setVisibility(View.VISIBLE);
+        mHomepageView = null;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,15 +75,23 @@ public class SettingsHomepageActivity extends FragmentActivity {
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
                 .initSearchToolbar(this /* activity */, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
 
-        final ImageView avatarView = findViewById(R.id.account_avatar);
-        getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
 
         if (!getSystemService(ActivityManager.class).isLowRamDevice()) {
-            // Only allow contextual features on high ram devices.
+            // Only allow features on high ram devices.
+            final ImageView avatarView = findViewById(R.id.account_avatar);
+            if (AvatarViewMixin.isAvatarSupported(this)) {
+                avatarView.setVisibility(View.VISIBLE);
+                getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
+            }
+
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)) {
                 showSuggestionFragment();
+            } else {
+                findViewById(R.id.homepage_title).setVisibility(View.GONE);
+                avatarView.setVisibility(View.GONE);
             }
+
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
                 showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
             }
@@ -81,9 +108,16 @@ public class SettingsHomepageActivity extends FragmentActivity {
             return;
         }
 
+        mSuggestionView = findViewById(R.id.suggestion_content);
+        mHomepageView = findViewById(R.id.settings_homepage_container);
+        // Hide the homepage for preparing the suggestion.
+        mHomepageView.setVisibility(View.GONE);
+        // Schedule a timer to show the homepage and hide the suggestion on timeout.
+        mHomepageView.postDelayed(() -> showHomepageWithSuggestion(false),
+                HOMEPAGE_LOADING_TIMEOUT_MS);
         try {
-            showFragment(fragment.newInstance(), R.id.contextual_suggestion_content);
-        } catch (IllegalAccessException | InstantiationException e) {
+            showFragment(fragment.getConstructor().newInstance(), R.id.suggestion_content);
+        } catch (Exception e) {
             Log.w(TAG, "Cannot show fragment", e);
         }
     }
@@ -110,10 +144,7 @@ public class SettingsHomepageActivity extends FragmentActivity {
 
     private int getSearchBoxHeight() {
         final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
-        final int searchBarMarginTop = getResources().getDimensionPixelSize(
-                R.dimen.search_bar_margin);
-        final int searchBarMarginBottom = getResources().getDimensionPixelSize(
-                R.dimen.search_bar_margin_bottom);
-        return searchBarHeight + searchBarMarginTop + searchBarMarginBottom;
+        final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
+        return searchBarHeight + searchBarMargin * 2;
     }
 }
