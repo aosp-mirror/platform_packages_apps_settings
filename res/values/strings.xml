@@ -921,6 +921,43 @@
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text">Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings.</string>
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
+
+    <!-- Introduction detail message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup">When you see this icon, use your fingerprint for authentication, like when you sign in to apps or approve a purchase</string>
+    <!-- Introduction subtitle message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1">Keep in mind</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1">Using your fingerprint to unlock your phone may be less secure than a strong pattern or PIN</string>
+    <!-- Introduction subtitle message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2">How it works</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Fingerprint Unlock creates a unique model of your fingerprint to recognize you during authentication. To create this fingerprint model during setup, you will take images of your fingerprint from different positions.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">The phone will also use images from your interactions with Fingerprint Unlock to update your fingerprint model. Your fingerprint images and model are stored securely on your phone and never leave the phone. All processing occurs securely on your phone.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until you delete them.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
+
+    <!-- Acquire message received during fingerprint enrollment to inform the user to change the position of their finger. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting">Change the position of your finger slightly each time</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user to cover the fingerprint sensor. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected">Cover the icon with the center of your fingerprint</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user this fingerprint has already been added. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled">This fingerprint has already been added</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user to clean the screen near the fingerprint sensor. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor">Clean your screen near the sensor and try again</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user to lift their finger. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast">Lift your finger after you feel a vibration</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user to try better lighting. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright">Move somewhere with gentler lighting and try again</string>
+    <!-- Acquire message received during fingerprint enrollment to inform the user they've reached the maximum number of enrollments. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
+
+    <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase</string>
+
+    <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost, stolen or reset.</string>
@@ -1053,6 +1090,9 @@
 
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_delete_message">Do you want to delete this fingerprint?</string>
+
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprints to
