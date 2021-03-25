@@ -50,7 +50,6 @@ public class LocationWorkProfileSettings extends DashboardFragment {
         super.onAttach(context);
 
         use(AppLocationPermissionPreferenceController.class).init(this);
-        use(LocationFooterPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
         use(RecentLocationAccessSeeAllButtonPreferenceController.class).init(this);
 
