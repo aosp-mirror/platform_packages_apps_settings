@@ -164,7 +164,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         final String textMoreDetails = getResources().getString(R.string.admin_more_details);
 
         final SpannableString spannableString = new SpannableString(
-                textDisabledByAdmin + System.lineSeparator() + textMoreDetails);
+                textDisabledByAdmin + System.lineSeparator()
+                + System.lineSeparator() + textMoreDetails);
         final ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
@@ -174,7 +175,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
         if (textDisabledByAdmin != null && textMoreDetails != null) {
             spannableString.setSpan(clickableSpan, textDisabledByAdmin.length() + 1,
-                    textDisabledByAdmin.length() + textMoreDetails.length() + 1,
+                    textDisabledByAdmin.length() + textMoreDetails.length() + 2,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
