@@ -509,4 +509,17 @@
 
     <!-- Cell broacast receiver package name -->
     <string name="config_cell_broadcast_receiver_package" translatable="false">com.android.cellbroadcastreceiver.module</string>
+
+    <!-- TODO(b/174964885): These media Uri are not defined in framework yet. Replace with framework defined variables once it's available. -->
+    <!-- Media Uri to view images storage category. -->
+    <string name="config_images_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/images_root</string>
+
+    <!-- Media Uri to view videos storage category. -->
+    <string name="config_videos_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/videos_root</string>
+
+    <!-- Media Uri to view audios storage category. -->
+    <string name="config_audios_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/audio_root</string>
+
+    <!-- Media Uri to view documents & other storage category. -->
+    <string name="config_documents_and_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/documents_root</string>
 </resources>
