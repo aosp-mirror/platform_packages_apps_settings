@@ -11701,6 +11701,12 @@
     <string name="autofill_app">Autofill service</string>
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
+    <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
+         service. [CHAR LIMIT=NONE] -->
+    <plurals name="autofill_passwords_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> password</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> passwords</item>
+    </plurals>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
 
