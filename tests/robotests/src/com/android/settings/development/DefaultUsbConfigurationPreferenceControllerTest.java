@@ -91,4 +91,27 @@ public class DefaultUsbConfigurationPreferenceControllerTest {
         verify(mPreference).setDisabledByAdmin(eq(new RestrictedLockUtils.EnforcedAdmin(
                 TEST_COMPONENT_NAME, null, UserHandle.SYSTEM)));
     }
+
+    @Test
+    public void onDeveloperOptionsSwitchEnabled_usbEnabled_shouldNotDisablePreference() {
+        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
+                UserHandle.myUserId())).thenReturn(true);
+        when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
+
+        mController.onDeveloperOptionsSwitchEnabled();
+
+        verify(mPreference).setDisabledByAdmin(null);
+    }
+
+    @Test
+    public void onDeveloperOptionsSwitchEnabled_usbDisabled_shouldDisablePreference() {
+        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
+                UserHandle.myUserId())).thenReturn(false);
+        when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
+
+        mController.onDeveloperOptionsSwitchEnabled();
+
+        verify(mPreference).setDisabledByAdmin(eq(new RestrictedLockUtils.EnforcedAdmin(
+                TEST_COMPONENT_NAME, null, UserHandle.SYSTEM)));
+    }
 }

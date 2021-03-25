@@ -65,34 +65,26 @@
             android:orientation="vertical"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
-            <LinearLayout
-                android:id="@+id/contextual_suggestion_content"
+            <ImageView
+                android:id="@+id/account_avatar"
+                android:layout_width="@dimen/avatar_length"
+                android:layout_height="@dimen/avatar_length"
+                android:layout_marginTop="@dimen/avatar_margin_top"
+                android:layout_marginEnd="@dimen/avatar_margin_end"
+                android:layout_gravity="end"
+                android:visibility="invisible"
+                android:accessibilityTraversalAfter="@id/homepage_title"
+                android:contentDescription="@string/search_bar_account_avatar_content_description"/>
+
+            <TextView
+                android:id="@+id/homepage_title"
+                android:text="@string/settings_label"
+                style="@style/HomepageTitleText"/>
+
+            <FrameLayout
+                android:id="@+id/suggestion_content"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/suggestion_height"
-                android:paddingHorizontal="@dimen/suggestion_padding_horizontal"
-                android:paddingVertical="@dimen/suggestion_padding_vertical"
-                android:orientation="vertical"
-                android:gravity="bottom"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/suggestion_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="@string/settings_label"
-                    style="@style/ContextualSuggestionText"/>
-
-                <Button
-                    android:id="@+id/suggestion_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/suggestion_button_margin_top"
-                    android:paddingHorizontal="@dimen/suggestion_button_padding_horizontal"
-                    android:visibility="gone"
-                    style="@style/ActionPrimaryButton"/>
-
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
 
             <include layout="@layout/search_bar"/>
 

@@ -16,15 +16,20 @@
 
 package com.android.settings.vpn2;
 
+import static android.text.Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 
 import com.android.settings.R;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.Utils;
 
 /**
  * This class sets appropriate enabled state and user admin message when userId is set
@@ -34,6 +39,7 @@ public abstract class ManageablePreference extends GearPreference {
     public static int STATE_NONE = -1;
 
     boolean mIsAlwaysOn = false;
+    boolean mIsInsecureVpn = false;
     int mState = STATE_NONE;
     int mUserId;
 
@@ -57,6 +63,10 @@ public abstract class ManageablePreference extends GearPreference {
         return mIsAlwaysOn;
     }
 
+    public boolean isInsecureVpn() {
+        return mIsInsecureVpn;
+    }
+
     public int getState() {
         return mState;
     }
@@ -77,8 +87,19 @@ public abstract class ManageablePreference extends GearPreference {
     }
 
     /**
+     * Set whether the VPN associated with this preference has an insecure type.
+     * By default the value will be False.
+     */
+    public void setInsecureVpn(boolean isInsecureVpn) {
+        if (mIsInsecureVpn != isInsecureVpn) {
+            mIsInsecureVpn = isInsecureVpn;
+            updateSummary();
+        }
+    }
+
+    /**
      * Update the preference summary string (see {@see Preference#setSummary}) with a string
-     * reflecting connection status and always-on setting.
+     * reflecting connection status, always-on setting and whether the vpn is insecure.
      *
      * State is not shown for {@code STATE_NONE}.
      */
@@ -91,6 +112,18 @@ public abstract class ManageablePreference extends GearPreference {
             summary = TextUtils.isEmpty(summary) ? alwaysOnString : res.getString(
                     R.string.join_two_unrelated_items, summary, alwaysOnString);
         }
-        setSummary(summary);
+        if (mIsInsecureVpn) {
+            final String insecureString = res.getString(R.string.vpn_insecure_summary);
+            summary = TextUtils.isEmpty(summary) ? insecureString : res.getString(
+                    R.string.join_two_unrelated_items, summary, insecureString);
+
+            SpannableString summarySpan = new SpannableString(summary);
+            final int colorError = Utils.getColorErrorDefaultColor(getContext());
+            summarySpan.setSpan(new ForegroundColorSpan(colorError), 0, summary.length(),
+                    SPAN_EXCLUSIVE_INCLUSIVE);
+            setSummary(summarySpan);
+        } else {
+            setSummary(summary);
+        }
     }
 }

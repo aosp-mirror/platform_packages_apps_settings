@@ -71,7 +71,7 @@ public class WifiP2pPreferenceController extends AbstractPreferenceController
         super(context);
         mWifiManager = wifiManager;
         lifecycle.addObserver(this);
-        mLocationManager = (LocationManager) context.getSystemService(Service.LOCATION_SERVICE);
+        mLocationManager = context.getSystemService(LocationManager.class);
     }
 
     @Override

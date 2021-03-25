@@ -277,7 +277,7 @@ public class ManageApplications extends InstrumentedFragment
         Intent intent = activity.getIntent();
         Bundle args = getArguments();
         int screenTitle = intent.getIntExtra(
-                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.application_info_label);
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.all_apps);
         String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
         if (className == null) {
             className = intent.getComponent().getClassName();
@@ -342,7 +342,7 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.app_notifications_title;
         } else {
             if (screenTitle == -1) {
-                screenTitle = R.string.application_info_label;
+                screenTitle = R.string.all_apps;
             }
             mListType = LIST_TYPE_MAIN;
         }
