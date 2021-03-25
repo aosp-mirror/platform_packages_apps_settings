@@ -67,7 +67,7 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        Fragment fragment = getTargetFragment();
+        final Fragment fragment = getTargetFragment();
         if (!(fragment instanceof ResetDashboardFragment)) {
             Log.e(TAG, "getTargetFragment return unexpected type");
         }
