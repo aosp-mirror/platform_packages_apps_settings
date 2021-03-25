@@ -35,6 +35,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker;
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker.NfcUpdateReceiver;
+import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,16 +44,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowNfcAdapter.class)
 public class NfcPreferenceControllerTest {
 
-    @Mock
-    private NfcAdapter mNfcAdapter;
     @Mock
     NfcManager mManager;
     @Mock
@@ -63,16 +65,19 @@ public class NfcPreferenceControllerTest {
     private Context mContext;
     private SwitchPreference mNfcPreference;
     private NfcPreferenceController mNfcController;
+    private ShadowNfcAdapter mShadowNfcAdapter;
+    private NfcAdapter mNfcAdapter;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mShadowNfcAdapter = Shadow.extract(NfcAdapter.getDefaultAdapter(mContext));
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(mContext);
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.NFC_SERVICE)).thenReturn(mManager);
-        when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
 
         mNfcController = new NfcPreferenceController(mContext,
                 NfcPreferenceController.KEY_TOGGLE_NFC);
@@ -83,7 +88,7 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_hasNfc_shouldReturnAvailable() {
-        when(mNfcAdapter.isEnabled()).thenReturn(true);
+        mShadowNfcAdapter.setEnabled(true);
         assertThat(mNfcController.getAvailabilityStatus())
                 .isEqualTo(NfcPreferenceController.AVAILABLE);
     }
@@ -98,11 +103,11 @@ public class NfcPreferenceControllerTest {
     @Test
     public void isNfcEnable_nfcStateNotTurning_shouldReturnTrue() {
         mNfcController.displayPreference(mScreen);
-        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_ON);
+        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_ON);
         mNfcController.onResume();
         assertThat(mNfcPreference.isEnabled()).isTrue();
 
-        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_OFF);
+        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_OFF);
         mNfcController.onResume();
         assertThat(mNfcPreference.isEnabled()).isTrue();
     }
@@ -110,11 +115,11 @@ public class NfcPreferenceControllerTest {
     @Test
     public void isNfcEnable_nfcStateTurning_shouldReturnFalse() {
         mNfcController.displayPreference(mScreen);
-        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_ON);
+        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_TURNING_ON);
         mNfcController.onResume();
         assertThat(mNfcPreference.isEnabled()).isFalse();
 
-        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_OFF);
+        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_TURNING_OFF);
         mNfcController.onResume();
         assertThat(mNfcPreference.isEnabled()).isFalse();
     }
@@ -122,29 +127,29 @@ public class NfcPreferenceControllerTest {
     @Test
     public void isNfcChecked_nfcStateOn_shouldReturnTrue() {
         mNfcController.displayPreference(mScreen);
-        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_ON);
+        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_ON);
         mNfcController.onResume();
         assertThat(mNfcPreference.isChecked()).isTrue();
 
-        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_ON);
+        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_TURNING_ON);
         mNfcController.onResume();
         assertThat(mNfcPreference.isChecked()).isTrue();
     }
 
     @Test
     public void isNfcChecked_nfcStateOff_shouldReturnFalse() {
-        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_OFF);
+        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_OFF);
         mNfcController.onResume();
         assertThat(mNfcPreference.isChecked()).isFalse();
 
-        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_OFF);
+        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_TURNING_OFF);
         mNfcController.onResume();
         assertThat(mNfcPreference.isChecked()).isFalse();
     }
 
     @Test
     public void updateNonIndexableKeys_available_shouldNotUpdate() {
-        when(mNfcAdapter.isEnabled()).thenReturn(true);
+        mShadowNfcAdapter.setEnabled(true);
         final List<String> keys = new ArrayList<>();
 
         mNfcController.updateNonIndexableKeys(keys);
@@ -167,7 +172,7 @@ public class NfcPreferenceControllerTest {
         mNfcController.setChecked(true);
         mNfcController.onResume();
 
-        verify(mNfcAdapter).enable();
+        assertThat(mNfcAdapter.isEnabled()).isTrue();
     }
 
     @Test
@@ -175,7 +180,7 @@ public class NfcPreferenceControllerTest {
         mNfcController.setChecked(false);
         mNfcController.onResume();
 
-        verify(mNfcAdapter).disable();
+        assertThat(mNfcAdapter.isEnabled()).isFalse();
     }
 
     @Test
