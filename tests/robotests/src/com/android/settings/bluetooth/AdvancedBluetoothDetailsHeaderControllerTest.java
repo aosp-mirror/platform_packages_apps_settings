@@ -62,6 +62,9 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     private static final int BATTERY_LEVEL_RIGHT = 45;
     private static final int LOW_BATTERY_LEVEL = 15;
     private static final int CASE_LOW_BATTERY_LEVEL = 19;
+    private static final int LOW_BATTERY_LEVEL_THRESHOLD = 15;
+    private static final int BATTERY_LEVEL_5 = 5;
+    private static final int BATTERY_LEVEL_50 = 50;
     private static final String ICON_URI = "content://test.provider/icon.png";
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
@@ -199,6 +202,70 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                 View.GONE);
         assertThat(layout.findViewById(R.id.bt_battery_icon).getVisibility()).isEqualTo(View.GONE);
         assertThat(layout.findViewById(R.id.header_icon).getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void refresh_underLowBatteryThreshold_showAlertIcon() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_5).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_LOW_BATTERY_THRESHOLD)).thenReturn(
+                String.valueOf(LOW_BATTERY_LEVEL_THRESHOLD).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_CHARGING)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle),
+                R.drawable.ic_battery_alert_24dp);
+    }
+
+    @Test
+    public void refresh_underLowBatteryThresholdInCharging_showAlertIcon() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_5).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_LOW_BATTERY_THRESHOLD)).thenReturn(
+                String.valueOf(LOW_BATTERY_LEVEL_THRESHOLD).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_CHARGING)).thenReturn(
+                String.valueOf(true).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle), /* resId= */-1);
+    }
+
+    @Test
+    public void refresh_aboveLowBatteryThreshold_noAlertIcon() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_50).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_LOW_BATTERY_THRESHOLD)).thenReturn(
+                String.valueOf(LOW_BATTERY_LEVEL_THRESHOLD).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_CHARGING)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle), /* resId= */-1);
     }
 
     @Test

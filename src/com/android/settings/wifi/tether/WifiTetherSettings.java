@@ -110,7 +110,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mWifiManager = context.getSystemService(WifiManager.class);
         mTetherChangeReceiver = new TetherChangeReceiver();
 
         mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
