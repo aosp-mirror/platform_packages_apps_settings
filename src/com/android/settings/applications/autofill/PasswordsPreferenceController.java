@@ -50,6 +50,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.os.IResultReceiver;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
@@ -130,9 +131,13 @@ public class PasswordsPreferenceController extends BasePreferenceController
 
             final MutableLiveData<Integer> passwordCount = new MutableLiveData<>();
             passwordCount.observe(
-                    // TODO(b/169455298): Validate the result.
-                    // TODO(b/169455298): Use a Quantity String resource.
-                    mLifecycleOwner, count -> pref.setSummary("" + count + " passwords saved"));
+                    mLifecycleOwner, count -> {
+                        // TODO(b/169455298): Validate the result.
+                        final CharSequence summary =
+                                mContext.getResources().getQuantityString(
+                                        R.plurals.autofill_passwords_count, count, count);
+                        pref.setSummary(summary);
+                    });
             // TODO(b/169455298): Limit the number of concurrent queries.
             // TODO(b/169455298): Cache the results for some time.
             requestSavedPasswordCount(service, user, passwordCount);
