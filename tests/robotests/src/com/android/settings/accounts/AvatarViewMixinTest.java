@@ -27,7 +27,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.accounts.Account;
-import android.app.ActivityManager;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -57,7 +56,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.shadows.ShadowContentResolver;
 import org.robolectric.shadows.ShadowPackageManager;
 
@@ -97,31 +95,7 @@ public class AvatarViewMixinTest {
     }
 
     @Test
-    public void onStart_configDisabled_doNothing() {
-        final AvatarViewMixin mixin = spy(new AvatarViewMixin(mActivity, mImageView));
-        mixin.onStart();
-
-        verify(mixin, never()).hasAccount();
-    }
-
-    @Test
-    public void onStart_lowRamDevice_doNothing() {
-        final AvatarViewMixin mixin = spy(new AvatarViewMixin(mActivity, mImageView));
-
-        final ShadowActivityManager activityManager =
-                Shadow.extract(mContext.getSystemService(ActivityManager.class));
-        activityManager.setIsLowRamDevice(true);
-
-        mixin.onStart();
-
-        verify(mixin, never()).hasAccount();
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999",
-            shadows = {
-                    BatteryFixSliceTest.ShadowBatteryTipLoader.class
-            })
+    @Config(shadows = BatteryFixSliceTest.ShadowBatteryTipLoader.class)
     public void onStart_useMockAvatarViewMixin_shouldBeExecuted() {
         final AvatarViewMixin mockAvatar = spy(new AvatarViewMixin(mActivity, mImageView));
 
@@ -132,7 +106,6 @@ public class AvatarViewMixinTest {
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
     public void onStart_noAccount_mAccountNameShouldBeNull() {
         final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(mActivity, mImageView);
         avatarViewMixin.mAccountName = FAKE_ACCOUNT;

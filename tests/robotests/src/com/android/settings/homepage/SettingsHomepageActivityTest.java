@@ -25,16 +25,20 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.ActivityManager;
 import android.os.Build;
-import android.util.FeatureFlagUtils;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.HideNonSystemOverlayMixin;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,15 +50,20 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class,
+        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class})
 public class SettingsHomepageActivityTest {
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FeatureFlagUtils.setEnabled(RuntimeEnvironment.application, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test
@@ -64,6 +73,77 @@ public class SettingsHomepageActivityTest {
         final FrameLayout frameLayout = activity.findViewById(R.id.main_content);
 
         assertThat(frameLayout.getLayoutTransition()).isNotNull();
+    }
+
+    @Test
+    public void launch_configDisabled_shouldHideAvatar() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+
+        final View avatarView = activity.findViewById(R.id.account_avatar);
+        assertThat(avatarView.getVisibility()).isNotEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void launch_configEnabled_shouldShowAvatar() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+
+        final View avatarView = activity.findViewById(R.id.account_avatar);
+        assertThat(avatarView.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void launch_LowRamDevice_shouldHideAvatar() {
+        final ShadowActivityManager activityManager = Shadow.extract(
+                RuntimeEnvironment.application.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(true);
+
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+
+        final View avatarView = activity.findViewById(R.id.account_avatar);
+        assertThat(avatarView.getVisibility()).isNotEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void showHomepageWithSuggestion_showSuggestion() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final View viewRoot = activity.findViewById(R.id.settings_homepage_container);
+        final View suggestionTile = activity.findViewById(R.id.suggestion_content);
+
+        activity.showHomepageWithSuggestion(true);
+
+        assertThat(viewRoot.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(suggestionTile.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void showHomepageWithSuggestion_hideSuggestion() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final View viewRoot = activity.findViewById(R.id.settings_homepage_container);
+        final View suggestionTile = activity.findViewById(R.id.suggestion_content);
+
+        activity.showHomepageWithSuggestion(false);
+
+        assertThat(viewRoot.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(suggestionTile.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void showHomepageWithSuggestion_callTwice_shouldKeepPreviousVisibility() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final View suggestionTile = activity.findViewById(R.id.suggestion_content);
+
+        activity.showHomepageWithSuggestion(false);
+        activity.showHomepageWithSuggestion(true);
+
+        assertThat(suggestionTile.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -113,5 +193,14 @@ public class SettingsHomepageActivityTest {
         verify(window).setAttributes(paramCaptor.capture());
         assertThat(paramCaptor.getValue().privateFlags
                 & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isEqualTo(0);
+    }
+
+    @Implements(SuggestionFeatureProviderImpl.class)
+    public static class ShadowSuggestionFeatureProviderImpl {
+
+        @Implementation
+        public Class<? extends Fragment> getContextualSuggestionFragment() {
+            return Fragment.class;
+        }
     }
 }

@@ -54,4 +54,11 @@ public class DefaultUsbConfigurationPreferenceController extends
         mPreference.setDisabledByAdmin(
                 checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
     }
+
+    @Override
+    protected void onDeveloperOptionsSwitchEnabled() {
+        super.onDeveloperOptionsSwitchEnabled();
+        mPreference.setDisabledByAdmin(
+                checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
+    }
 }

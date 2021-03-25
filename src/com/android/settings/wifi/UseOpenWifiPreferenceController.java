@@ -51,7 +51,7 @@ public class UseOpenWifiPreferenceController extends TogglePreferenceController
         super(context, KEY_USE_OPEN_WIFI_AUTOMATICALLY);
         mContentResolver = context.getContentResolver();
         mNetworkScoreManager =
-                (NetworkScoreManager) context.getSystemService(Context.NETWORK_SCORE_SERVICE);
+                context.getSystemService(NetworkScoreManager.class);
         mSettingObserver = new SettingObserver();
         updateEnableUseWifiComponentName();
         checkForFeatureSupportedScorers();

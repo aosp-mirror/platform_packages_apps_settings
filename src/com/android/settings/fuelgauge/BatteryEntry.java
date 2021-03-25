@@ -35,6 +35,7 @@ import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -182,49 +183,10 @@ public class BatteryEntry {
             getQuickNameIconForUid(uid, packages);
             return;
         } else if (batteryConsumer instanceof SystemBatteryConsumer) {
-            switch(((SystemBatteryConsumer) batteryConsumer).getDrainType()) {
-                case SystemBatteryConsumer.DRAIN_TYPE_AMBIENT_DISPLAY:
-                    name = context.getResources().getString(R.string.ambient_display_screen_title);
-                    iconId = R.drawable.ic_settings_aod;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_BLUETOOTH:
-                    name = context.getResources().getString(R.string.power_bluetooth);
-                    iconId = com.android.internal.R.drawable.ic_settings_bluetooth;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_CAMERA:
-                    name = context.getResources().getString(R.string.power_camera);
-                    iconId = R.drawable.ic_settings_camera;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_MOBILE_RADIO:
-                    name = context.getResources().getString(R.string.power_cell);
-                    iconId = R.drawable.ic_cellular_1_bar;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_FLASHLIGHT:
-                    name = context.getResources().getString(R.string.power_flashlight);
-                    iconId = R.drawable.ic_settings_display;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_PHONE:
-                    name = context.getResources().getString(R.string.power_phone);
-                    iconId = R.drawable.ic_settings_voice_calls;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_SCREEN:
-                    name = context.getResources().getString(R.string.power_screen);
-                    iconId = R.drawable.ic_settings_display;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_WIFI:
-                    name = context.getResources().getString(R.string.power_wifi);
-                    iconId = R.drawable.ic_settings_wireless;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_IDLE:
-                case SystemBatteryConsumer.DRAIN_TYPE_MEMORY:
-                    name = context.getResources().getString(R.string.power_idle);
-                    iconId = R.drawable.ic_settings_phone_idle;
-                    break;
-                case SystemBatteryConsumer.DRAIN_TYPE_CUSTOM:
-                    name = null;
-                    iconId = R.drawable.ic_power_system;
-                    break;
-            }
+            final Pair<Integer, String> resourcePair = getResourcePairFromDrainType(
+                    context, ((SystemBatteryConsumer) batteryConsumer).getDrainType());
+            iconId = resourcePair.first;
+            name = resourcePair.second;
         } else if (batteryConsumer instanceof UserBatteryConsumer) {
             UserInfo info = um.getUserInfo(((UserBatteryConsumer) batteryConsumer).getUserId());
             if (info != null) {
@@ -492,5 +454,58 @@ public class BatteryEntry {
             mDefaultPackageName =
                     ((UidBatteryConsumer) batteryConsumer).getPackageWithHighestDrain();
         }
+    }
+
+    /**
+     * Gets icon ID and name from system battery consumer drain type.
+     */
+    public static Pair<Integer, String> getResourcePairFromDrainType(
+            Context context, int drainType) {
+        String name = null;
+        int iconId = 0;
+        switch (drainType) {
+            case SystemBatteryConsumer.DRAIN_TYPE_AMBIENT_DISPLAY:
+                name = context.getResources().getString(R.string.ambient_display_screen_title);
+                iconId = R.drawable.ic_settings_aod;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_BLUETOOTH:
+                name = context.getResources().getString(R.string.power_bluetooth);
+                iconId = com.android.internal.R.drawable.ic_settings_bluetooth;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_CAMERA:
+                name = context.getResources().getString(R.string.power_camera);
+                iconId = R.drawable.ic_settings_camera;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_MOBILE_RADIO:
+                name = context.getResources().getString(R.string.power_cell);
+                iconId = R.drawable.ic_cellular_1_bar;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_FLASHLIGHT:
+                name = context.getResources().getString(R.string.power_flashlight);
+                iconId = R.drawable.ic_settings_display;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_PHONE:
+                name = context.getResources().getString(R.string.power_phone);
+                iconId = R.drawable.ic_settings_voice_calls;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_SCREEN:
+                name = context.getResources().getString(R.string.power_screen);
+                iconId = R.drawable.ic_settings_display;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_WIFI:
+                name = context.getResources().getString(R.string.power_wifi);
+                iconId = R.drawable.ic_settings_wireless;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_IDLE:
+            case SystemBatteryConsumer.DRAIN_TYPE_MEMORY:
+                name = context.getResources().getString(R.string.power_idle);
+                iconId = R.drawable.ic_settings_phone_idle;
+                break;
+            case SystemBatteryConsumer.DRAIN_TYPE_CUSTOM:
+                name = null;
+                iconId = R.drawable.ic_power_system;
+                break;
+        }
+        return new Pair<>(Integer.valueOf(iconId), name);
     }
 }

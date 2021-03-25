@@ -116,9 +116,9 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
-        mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        mVpnManager = (VpnManager) getSystemService(Context.VPN_MANAGEMENT_SERVICE);
+        mUserManager = getSystemService(UserManager.class);
+        mConnectivityManager = getSystemService(ConnectivityManager.class);
+        mVpnManager = getSystemService(VpnManager.class);
 
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
@@ -294,6 +294,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                     p.setState(LegacyVpnPreference.STATE_NONE);
                 }
                 p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(profile.key));
+                p.setInsecureVpn(VpnProfile.isLegacyType(profile.type));
                 updates.add(p);
             }
 
@@ -303,6 +304,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 LegacyVpnPreference p = mSettings.findOrCreatePreference(stubProfile, false);
                 p.setState(vpn.state);
                 p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(vpn.key));
+                p.setInsecureVpn(VpnProfile.isLegacyType(stubProfile.type));
                 updates.add(p);
             }
 
@@ -509,7 +511,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         }
 
         // Fetch VPN-enabled apps from AppOps.
-        AppOpsManager aom = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        AppOpsManager aom = context.getSystemService(AppOpsManager.class);
         List<AppOpsManager.PackageOps> apps =
                 aom.getPackagesForOps(new int[] {OP_ACTIVATE_VPN, OP_ACTIVATE_PLATFORM_VPN});
         if (apps != null) {

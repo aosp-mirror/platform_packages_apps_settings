@@ -2959,6 +2959,8 @@
     <string name="wallpaper_settings_title">Wallpaper</string>
     <!-- Styles & Wallpapers settings title [CHAR LIMIT=30] -->
     <string name="style_and_wallpaper_settings_title">Styles &amp; wallpapers</string>
+    <!-- Summary for the top level Styles & wallpapers Settings [CHAR LIMIT=NONE]-->
+    <string name="wallpaper_dashboard_summary">Colors, app grid</string>
     <!-- Wallpaper settings summary when default wallpaper is used [CHAR LIMIT=NONE] -->
     <string name="wallpaper_settings_summary_default">Default</string>
     <!-- Wallpaper settings summary when wallpaper has been updated [CHAR LIMIT=NONE] -->
@@ -7054,12 +7056,17 @@
     <string name="vpn_always_on_summary_not_supported">Not supported by this app</string>
     <!-- Preference summary for a VPN app that is set to be always-on. [CHAR LIMIT=40]  -->
     <string name="vpn_always_on_summary_active">Always-on active</string>
+    <!-- Preference summary for a VPN app that has an insecure type. [CHAR LIMIT=40]  -->
+    <string name="vpn_insecure_summary">not secure VPN</string>
     <!-- Preference title for the toggle that controls whether to force all network connections to
         go through VPN. [CHAR LIMIT=40] -->
     <string name="vpn_require_connection">Block connections without VPN</string>
     <!-- Dialog message title to confirm forcing all network connections to go through VPN.
         [CHAR LIMIT=40] -->
     <string name="vpn_require_connection_title">Require VPN connection?</string>
+
+    <!-- Dialog subtitle warning for a VPN app that has an insecure type. [CHAR LIMIT=100]  -->
+    <string name="vpn_insecure_dialog_subtitle">This VPN is not secure. Update to an IKEv2 VPN</string>
 
     <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
     <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>
@@ -7498,6 +7505,8 @@
     <string name="help_uri_nfc_and_payment_settings" translatable="false"></string>
     <!-- url for battery page if battery is not present -->
     <string name="help_url_battery_missing" translatable="false"></string>
+    <!-- url for vpn page if connected vpn is not a secure type -->
+    <string name="help_url_insecure_vpn" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -7764,8 +7773,8 @@
     <string name="app_and_notification_dashboard_summary">Recent apps, default apps</string>
     <!-- Toast shown when an app in the work profile attempts to open notification settings. The apps in the work profile cannot access notification settings. [CHAR LIMIT=NONE] -->
     <string name="notification_settings_work_profile">Notification access is not available for apps in the work profile.</string>
-    <!-- Title for setting tile leading to account settings [CHAR LIMIT=40]-->
-    <string name="account_dashboard_title">Accounts</string>
+    <!-- Title for setting tile leading to saved autofill passwords, autofill , and account settings [CHAR LIMIT=40]-->
+    <string name="account_dashboard_title">Passwords and accounts</string>
     <!-- Summary for account settings tiles when there is no accounts on device [CHAR LIMIT=NONE]-->
     <string name="account_dashboard_default_summary">No accounts added</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
@@ -8386,6 +8395,9 @@
 
     <!-- Configure Notifications Settings title. [CHAR LIMIT=30] -->
     <string name="configure_notification_settings">Notifications</string>
+
+    <!-- Summary for the top level Notifications Settings [CHAR LIMIT=NONE]-->
+    <string name="notification_dashboard_summary">Notification history, conversations</string>
 
     <!-- notification header - settings for conversation type notifications -->
     <string name="conversation_notifs_category">Conversation</string>
@@ -9570,6 +9582,9 @@
          settings button -->
     <string name="notification_app_settings_button">Notification settings</string>
 
+    <!-- Content description for help icon button [CHAR LIMIT=20] -->
+    <string name="warning_button_text">Warning</string>
+
     <!-- Generic label for suggestion card's ok button [CHAR LIMIT=20] -->
     <string name="suggestion_button_text">Ok</string>
 
@@ -10519,6 +10534,9 @@
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="display_dashboard_summary_with_style">Styles, wallpapers, screen timeout, font size</string>
 
+    <!-- Summary for the top level Display Settings [CHAR LIMIT=NONE]-->
+    <string name="display_dashboard_summary_2">Screen timeout, font size</string>
+
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="display_dashboard_nowallpaper_summary">Sleep, font size</string>
 
@@ -11217,6 +11235,9 @@
     <!-- Preference title for "Safety & emergency" settings page [CHAR LIMIT=60]-->
     <string name="emergency_settings_preference_title">Safety &amp; emergency</string>
 
+    <!-- Summary for the top level Safety & emergency Settings [CHAR LIMIT=NONE]-->
+    <string name="emergency_dashboard_summary">Emergency SOS, medical info, alerts</string>
+
     <!-- Title text for edge to edge navigation [CHAR LIMIT=60] -->
     <string name="edge_to_edge_navigation_title">Gesture navigation</string>
     <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
@@ -11270,8 +11291,8 @@
 
     <!-- Title text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=60]-->
     <string name="swipe_bottom_to_notifications_title">Swipe for notifications</string>
-    <!-- Summary text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=80]-->
-    <string name="swipe_bottom_to_notifications_summary">Swipe down on the bottom edge of the screen to show your notifications</string>
+    <!-- Summary text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=NONE]-->
+    <string name="swipe_bottom_to_notifications_summary">Swipe down on the bottom edge of the screen to show your notifications.\nYou can\'t use one-handed mode when this feature is turned on.</string>
 
     <!-- Preference and settings suggestion title text for one handed [CHAR LIMIT=60] -->
     <string name="one_handed_title">One-Handed mode</string>
@@ -11586,6 +11607,39 @@
 
     <!-- Preference label for the Files storage section. [CHAR LIMIT=50] -->
     <string name="storage_files">Files</string>
+
+    <!-- Preference label for the Images storage section. [CHAR LIMIT=50] -->
+    <string name="storage_images">Images</string>
+
+    <!-- Preference label for the Videos storage section. [CHAR LIMIT=50] -->
+    <string name="storage_videos">Videos</string>
+
+    <!-- Preference label for the Audios storage section. [CHAR LIMIT=50] -->
+    <string name="storage_audios">Audios</string>
+
+    <!-- Preference label for the Apps storage section. [CHAR LIMIT=50] -->
+    <string name="storage_apps">Apps</string>
+
+    <!-- Preference label for the Documents & other storage section. [CHAR LIMIT=50] -->
+    <string name="storage_documents_and_other">Documents &amp; other</string>
+
+    <!-- Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <string name="storage_system">System</string>
+
+    <!-- Preference label for the Trash storage section. [CHAR LIMIT=50] -->
+    <string name="storage_trash">Trash</string>
+
+    <!-- Dialog title for the Trash storage section. [CHAR LIMIT=50] -->
+    <string name="storage_trash_dialog_title">Empty trash?</string>
+
+    <!-- Dialog message for the Trash storage section. [CHAR LIMIT=NONE] -->
+    <string name="storage_trash_dialog_ask_message">There are <xliff:g id="total" example="520MB">%1$s</xliff:g> of files in the trash. All items will be deleted forever, and you won\u2019t be able to restore them.</string>
+
+    <!-- Dialog message for the Trash storage section. [CHAR LIMIT=NONE] -->
+    <string name="storage_trash_dialog_empty_message">Trash is empty</string>
+
+    <!-- Dialog confirm button to empty all trash files. [CHAR LIMIT=50] -->
+    <string name="storage_trash_dialog_confirm">Empty trash</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="KB">^2</xliff:g></font></small></string>
@@ -12869,10 +12923,12 @@
     <string name="category_name_brightness">Brightness</string>
     <!-- Lock screen category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_lock_display">Lock Display</string>
-    <!-- Visibility category name in Display Settings [CHAR LIMIT=none] -->
-    <string name="category_name_visibility">Visibility</string>
+    <!-- Appearance category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_appearance">Appearance</string>
     <!-- Color category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_color">Color</string>
+    <!-- Name of Other display controls category in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_display_controls">Other Display Controls</string>
     <!-- Others category name [CHAR LIMIT=none] -->
     <string name="category_name_others">Others</string>
     <!-- General category name [CHAR LIMIT=none] -->
@@ -12956,4 +13012,7 @@
 
     <!-- Summary for toggle controlling whether notifications are shown when an app pastes from clipboard. [CHAR LIMIT=NONE] -->
     <string name="show_clip_access_notification_summary">Show a message when apps access text, images, or other content you\u2019ve copied</string>
+
+    <!-- All apps screen title, entry name on Apps page for the user to go to the all apps page. [CHAR LIMIT=30] -->
+    <string name="all_apps">All apps</string>
 </resources>

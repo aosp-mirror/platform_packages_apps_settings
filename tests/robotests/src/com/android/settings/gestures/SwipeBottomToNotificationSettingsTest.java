@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings;
 
 import com.android.settings.R;
 
@@ -64,22 +63,21 @@ public class SwipeBottomToNotificationSettingsTest {
     }
 
     @Test
-    public void isPageSearchEnabled_oneHandedUnsupported_shouldReturnTrue() {
-        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "false");
+    public void isPageSearchEnabled_oneHandedUnsupported_shouldReturnFalse() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "false");
 
         final Object obj = ReflectionHelpers.callInstanceMethod(
                 SwipeBottomToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",
                 ReflectionHelpers.ClassParameter.from(Context.class, mContext));
 
         final boolean isEnabled = (Boolean) obj;
-        assertThat(isEnabled).isTrue();
+        assertThat(isEnabled).isFalse();
     }
 
     @Test
     public void isPageSearchEnabled_oneHandedDisabled_shouldReturnTrue() {
-        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "true");
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_ENABLED, 0);
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
 
         final Object obj = ReflectionHelpers.callInstanceMethod(
                 SwipeBottomToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",
@@ -91,9 +89,8 @@ public class SwipeBottomToNotificationSettingsTest {
 
     @Test
     public void isPageSearchEnabled_oneHandedEnabled_shouldReturnFalse() {
-        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "true");
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_ENABLED, 1);
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
 
         final Object obj = ReflectionHelpers.callInstanceMethod(
                 SwipeBottomToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",
