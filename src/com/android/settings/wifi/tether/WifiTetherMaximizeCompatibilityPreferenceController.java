@@ -86,7 +86,11 @@ public class WifiTetherMaximizeCompatibilityPreferenceController extends
         if (mWifiManager.isBridgedApConcurrencySupported()) {
             final boolean isEnabled = config.isBridgedModeOpportunisticShutdownEnabled();
             Log.d(TAG, "isBridgedModeOpportunisticShutdownEnabled:" + isEnabled);
-            return isEnabled;
+            // Because the return value defined by the Wi-Fi framework API is opposite to the UI.
+            //   Compatibility on:  isBridgedModeOpportunisticShutdownEnabled() = false
+            //   Compatibility off: isBridgedModeOpportunisticShutdownEnabled() = true
+            // Need to return the reverse value.
+            return !isEnabled;
         }
 
         // If the BridgedAp Concurrency is not supported in early Pixel devices (e.g. Pixel 2~5),
@@ -112,7 +116,11 @@ public class WifiTetherMaximizeCompatibilityPreferenceController extends
                     SoftApConfiguration.BAND_2GHZ | SoftApConfiguration.BAND_5GHZ};
             builder.setBands(bands);
             Log.d(TAG, "setBridgedModeOpportunisticShutdownEnabled:" + enabled);
-            builder.setBridgedModeOpportunisticShutdownEnabled(enabled);
+            // Because the defined value by the Wi-Fi framework API is opposite to the UI.
+            //   Compatibility on:  setBridgedModeOpportunisticShutdownEnabled(false)
+            //   Compatibility off: setBridgedModeOpportunisticShutdownEnabled(true)
+            // Need to set the reverse value.
+            builder.setBridgedModeOpportunisticShutdownEnabled(!enabled);
         } else {
             int band = enabled
                     ? SoftApConfiguration.BAND_2GHZ | SoftApConfiguration.BAND_5GHZ
