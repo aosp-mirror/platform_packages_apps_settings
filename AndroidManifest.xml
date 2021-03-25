@@ -1491,6 +1491,7 @@
         <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
                   android:label="@string/device_admin_add_title"
                   android:exported="true"
+                  android:theme="@style/Theme.SubSettings"
                   android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
