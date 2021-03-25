@@ -35,6 +35,7 @@ public class StorageItemPreference extends Preference {
     private ProgressBar mProgressBar;
     private static final int PROGRESS_MAX = 100;
     private int mProgressPercent = UNINITIALIZED;
+    private long mStorageSize;
 
     public StorageItemPreference(Context context) {
         this(context, null);
@@ -47,6 +48,7 @@ public class StorageItemPreference extends Preference {
     }
 
     public void setStorageSize(long size, long total) {
+        mStorageSize = size;
         setSummary(
                 FileSizeFormatter.formatFileSize(
                         getContext(),
@@ -59,6 +61,10 @@ public class StorageItemPreference extends Preference {
             mProgressPercent = (int)(size * PROGRESS_MAX / total);
         }
         updateProgressBar();
+    }
+
+    public long getStorageSize() {
+        return mStorageSize;
     }
 
     protected void updateProgressBar() {
