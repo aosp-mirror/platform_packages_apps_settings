@@ -288,9 +288,9 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     }
 
     /**
-     * Returns true, if the ethernet network is connected.
+     * Returns the internet type.
      */
-    public boolean isEthernetConnected() {
-        return mInternetType == INTERNET_ETHERNET;
+    public @InternetUpdater.InternetType int getInternetType() {
+        return mInternetType;
     }
 }
