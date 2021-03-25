@@ -69,7 +69,8 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
 
         tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
         tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
-        tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
+        tips.add(new SmartBatteryDetector(
+                context, policy, batteryInfo, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
         tips.add(new BatteryDefenderDetector(batteryInfo).detect());
         // Disable this feature now since it introduces false positive cases. We will try to improve
