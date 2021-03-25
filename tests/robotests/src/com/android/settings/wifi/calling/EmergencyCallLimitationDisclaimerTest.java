@@ -54,7 +54,7 @@ public class EmergencyCallLimitationDisclaimerTest {
         mContext = spy(RuntimeEnvironment.application);
 
         doReturn(mCarrierConfigManager).when(mContext).getSystemService(
-                Context.CARRIER_CONFIG_SERVICE);
+                CarrierConfigManager.class);
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(mBundle);
 
         doReturn(getSharedPreferences()).when(mContext).getSharedPreferences(anyString(), anyInt());

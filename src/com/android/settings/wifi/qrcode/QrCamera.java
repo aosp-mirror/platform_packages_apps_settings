@@ -202,7 +202,7 @@ public class QrCamera extends Handler {
         }
 
         final WindowManager winManager =
-                (WindowManager) mContext.get().getSystemService(Context.WINDOW_SERVICE);
+                mContext.get().getSystemService(WindowManager.class);
         final int rotation = winManager.getDefaultDisplay().getRotation();
         int degrees = 0;
         switch (rotation) {

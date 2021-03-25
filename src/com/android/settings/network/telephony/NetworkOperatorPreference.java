@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import static android.telephony.SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
 
 import android.content.Context;
+import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellIdentity;
 import android.telephony.CellIdentityGsm;
 import android.telephony.CellIdentityLte;
@@ -180,7 +181,7 @@ public class NetworkOperatorPreference extends Preference {
     public OperatorInfo getOperatorInfo() {
         return new OperatorInfo(Objects.toString(mCellId.getOperatorAlphaLong(), ""),
                 Objects.toString(mCellId.getOperatorAlphaShort(), ""),
-                getOperatorNumeric());
+                getOperatorNumeric(), getAccessNetworkTypeFromCellInfo(mCellInfo));
     }
 
     private int getIconIdForCell(CellInfo ci) {
@@ -223,6 +224,25 @@ public class NetworkOperatorPreference extends Preference {
             return ((CellInfoNr) ci).getCellSignalStrength();
         }
         return null;
+    }
+
+    private int getAccessNetworkTypeFromCellInfo(CellInfo ci) {
+        if (ci instanceof CellInfoGsm) {
+            return AccessNetworkType.GERAN;
+        }
+        if (ci instanceof CellInfoCdma) {
+            return AccessNetworkType.CDMA2000;
+        }
+        if ((ci instanceof CellInfoWcdma) || (ci instanceof CellInfoTdscdma)) {
+            return AccessNetworkType.UTRAN;
+        }
+        if (ci instanceof CellInfoLte) {
+            return AccessNetworkType.EUTRAN;
+        }
+        if (ci instanceof CellInfoNr) {
+            return AccessNetworkType.NGRAN;
+        }
+        return AccessNetworkType.UNKNOWN;
     }
 
     private void updateIcon(int level) {
