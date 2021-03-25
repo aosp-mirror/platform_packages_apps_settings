@@ -52,6 +52,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiInfo;
@@ -83,6 +84,7 @@ import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
+import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -188,6 +190,8 @@ public class WifiDetailPreferenceController2Test {
     private Preference mMockSubnetPref;
     @Mock
     private Preference mMockDnsPref;
+    @Mock
+    private Preference mMockTypePref;
     @Mock
     private PreferenceCategory mMockIpv6Category;
     @Mock
@@ -390,6 +394,8 @@ public class WifiDetailPreferenceController2Test {
                 .thenReturn(mMockSubnetPref);
         when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_DNS_PREF))
                 .thenReturn(mMockDnsPref);
+        when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_WIFI_TYPE_PREF))
+                .thenReturn(mMockTypePref);
         when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_IPV6_CATEGORY))
                 .thenReturn(mMockIpv6Category);
         when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_IPV6_ADDRESSES_PREF))
@@ -928,6 +934,44 @@ public class WifiDetailPreferenceController2Test {
         displayAndResume();
 
         verify(mMockDnsPref).setVisible(false);
+    }
+
+    @Test
+    public void onConnectedNetwork_getKnownNetworkType_visibleWifiTypePref() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        setWifiType(ScanResult.WIFI_STANDARD_11AX);
+
+        displayAndResume();
+
+        verify(mMockTypePref).setSummary(R.string.wifi_type_11AX);
+        verify(mMockTypePref).setVisible(true);
+    }
+
+    @Test
+    public void onConnectedNetwork_getUnKnownNetworkType_invisibleWifiTypePref() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        setWifiType(ScanResult.WIFI_STANDARD_UNKNOWN);
+
+        displayAndResume();
+
+        verify(mMockTypePref).setVisible(false);
+    }
+
+    @Test
+    public void onDisconnectedNetwork_resumeUI_invisibleWifiTypePref() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        verify(mMockTypePref).setVisible(false);
+    }
+
+    private void setWifiType(int type) {
+        ConnectedInfo connectedInfo = new ConnectedInfo();
+        connectedInfo.wifiStandard = type;
+        when(mMockWifiEntry.getConnectedInfo()).thenReturn(connectedInfo);
     }
 
     @Test
