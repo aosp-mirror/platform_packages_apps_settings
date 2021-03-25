@@ -75,11 +75,12 @@ public class AccountPreferenceController extends AbstractPreferenceController
 
     private static final String TAG = "AccountPrefController";
 
-    private static final int ORDER_ACCOUNT_PROFILES = 1;
+    private static final int ORDER_ACCOUNT_PROFILES = 101;
     private static final int ORDER_LAST = 1002;
     private static final int ORDER_NEXT_TO_LAST = 1001;
     private static final int ORDER_NEXT_TO_NEXT_TO_LAST = 1000;
 
+    private static final String PREF_KEY_ACCOUNTS = "accounts_category";
     private static final String PREF_KEY_ADD_ACCOUNT = "add_account";
     private static final String PREF_KEY_REMOVE_PROFILE = "remove_profile";
     private static final String PREF_KEY_WORK_PROFILE_SETTING = "work_profile_setting";
@@ -348,8 +349,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
             }
         }
         final PreferenceScreen screen = mFragment.getPreferenceScreen();
-        if (screen != null) {
-            screen.addPreference(preferenceGroup);
+        final PreferenceGroup accounts =
+                screen == null ? null : screen.findPreference(PREF_KEY_ACCOUNTS);
+        if (accounts != null) {
+            accounts.addPreference(preferenceGroup);
         }
         profileData.preferenceGroup = preferenceGroup;
         if (userInfo.isEnabled()) {

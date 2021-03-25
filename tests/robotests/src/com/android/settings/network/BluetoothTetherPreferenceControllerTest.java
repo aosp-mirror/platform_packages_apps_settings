@@ -57,7 +57,7 @@ public class BluetoothTetherPreferenceControllerTest {
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         mSwitchPreference = spy(SwitchPreference.class);
-        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        when(mContext.getSystemService(TetheringManager.class)).thenReturn(mTetheringManager);
         when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[] {""});
         mController = new BluetoothTetherPreferenceController(mContext, "BLUETOOTH");
         mController.setTetherEnabler(mTetherEnabler);

@@ -20,15 +20,19 @@ import static android.provider.DeviceConfig.NAMESPACE_APP_HIBERNATION;
 
 import static com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED;
 
+import android.apphibernation.AppHibernationManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.provider.DeviceConfig;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+import java.util.List;
+
 /**
  * A preference controller handling the logic for updating summary of hibernated apps.
- * TODO(b/181172051): add intent to launch Auto Revoke UI in app_and_notification.xml
  */
 public final class HibernatedAppsPreferenceController extends BasePreferenceController {
     private static final String TAG = "HibernatedAppsPrefController";
@@ -39,7 +43,8 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return isHibernationEnabled() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return isHibernationEnabled() && getNumHibernated() > 0
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -50,8 +55,27 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
     }
 
     private int getNumHibernated() {
-        //TODO(b/181172051): hook into hibernation service to get the number of hibernated apps.
-        return 0;
+        final PackageManager pm = mContext.getPackageManager();
+        final AppHibernationManager ahm = mContext.getSystemService(AppHibernationManager.class);
+        final List<String> hibernatedPackages = ahm.getHibernatingPackagesForUser();
+        int numHibernated = hibernatedPackages.size();
+
+        // Also need to count packages that are auto revoked but not hibernated.
+        final List<PackageInfo> packages = pm.getInstalledPackages(
+                PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.GET_PERMISSIONS);
+        for (PackageInfo pi : packages) {
+            final String packageName = pi.packageName;
+            if (!hibernatedPackages.contains(packageName) && pi.requestedPermissions != null) {
+                for (String perm : pi.requestedPermissions) {
+                    if ((pm.getPermissionFlags(perm, packageName, mContext.getUser())
+                            & PackageManager.FLAG_PERMISSION_AUTO_REVOKED) != 0) {
+                        numHibernated++;
+                        break;
+                    }
+                }
+            }
+        }
+        return numHibernated;
     }
 
     private static boolean isHibernationEnabled() {

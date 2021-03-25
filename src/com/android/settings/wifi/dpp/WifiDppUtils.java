@@ -373,8 +373,8 @@ public class WifiDppUtils {
      *                        device security or if lock screen is unlocked
      */
     public static void showLockScreen(Context context, Runnable successRunnable) {
-        final KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(
-                Context.KEYGUARD_SERVICE);
+        final KeyguardManager keyguardManager = context.getSystemService(
+                KeyguardManager.class);
 
         if (keyguardManager.isKeyguardSecure()) {
             final BiometricPrompt.AuthenticationCallback authenticationCallback =

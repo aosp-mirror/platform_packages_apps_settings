@@ -104,8 +104,8 @@ public class SimSelectNotification extends BroadcastReceiver {
             subId = SubscriptionManager.getDefaultSmsSubscriptionId();
         }
 
-        SubscriptionManager subscriptionManager = ((SubscriptionManager) context.getSystemService(
-                Context.TELEPHONY_SUBSCRIPTION_SERVICE));
+        SubscriptionManager subscriptionManager = (context.getSystemService(
+                SubscriptionManager.class));
         if (!subscriptionManager.isActiveSubscriptionId(subId)) {
             Log.w(TAG, "onEnableMmsDataRequest invalid sub ID " + subId);
             return;
@@ -130,8 +130,8 @@ public class SimSelectNotification extends BroadcastReceiver {
             return;
         }
 
-        TelephonyManager tm = ((TelephonyManager) context.getSystemService(
-                Context.TELEPHONY_SERVICE)).createForSubscriptionId(subId);
+        TelephonyManager tm = (context.getSystemService(
+                TelephonyManager.class)).createForSubscriptionId(subId);
 
         if (tm.isDataEnabledForApn(TYPE_MMS)) {
             Log.w(TAG, "onEnableMmsDataRequest MMS data already enabled on sub ID " + subId);
@@ -230,14 +230,14 @@ public class SimSelectNotification extends BroadcastReceiver {
                 PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         builder.setContentIntent(resultPendingIntent);
         NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                context.getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(notificationChannel);
         notificationManager.notify(SIM_SELECT_NOTIFICATION_ID, builder.build());
     }
 
     public static void cancelSimSelectNotification(Context context) {
         NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                context.getSystemService(NotificationManager.class);
         notificationManager.cancel(SIM_SELECT_NOTIFICATION_ID);
     }
 
@@ -270,14 +270,14 @@ public class SimSelectNotification extends BroadcastReceiver {
 
         // Notify the notification.
         NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                context.getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(notificationChannel);
         notificationManager.notify(ENABLE_MMS_NOTIFICATION_ID, builder.build());
     }
 
     private void cancelEnableMmsNotification(Context context) {
         NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                context.getSystemService(NotificationManager.class);
         notificationManager.cancel(ENABLE_MMS_NOTIFICATION_ID);
     }
 

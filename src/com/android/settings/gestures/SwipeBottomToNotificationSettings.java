@@ -50,8 +50,10 @@ public class SwipeBottomToNotificationSettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SwipeBottomToNotificationPreferenceController
-                            .isGestureAvailable(context);
+                    if (!OneHandedSettingsUtils.isSupportOneHandedMode()) {
+                        return false;
+                    }
+                    return !OneHandedSettingsUtils.isOneHandedModeEnabled(context);
                 }
             };
 }

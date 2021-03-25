@@ -14,16 +14,16 @@
      limitations under the License.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerInside"
-        android:cropToPadding="true"
-        android:src="@drawable/one_handed_guideline"
-        android:contentDescription="@null" />
-
-</FrameLayout>
+<!-- Warning button -->
+<ImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/warning_button"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:paddingStart="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:background="?android:attr/selectableItemBackground"
+    android:scaleType="center"
+    android:src="@drawable/ic_warning_circle_24dp"
+    android:contentDescription="@string/warning_button_text" />
