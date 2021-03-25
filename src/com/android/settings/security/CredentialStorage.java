@@ -44,6 +44,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
 
@@ -75,6 +76,7 @@ public final class CredentialStorage extends FragmentActivity {
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         mUtils = new LockPatternUtils(this);
+        getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
     }
 
     @Override
