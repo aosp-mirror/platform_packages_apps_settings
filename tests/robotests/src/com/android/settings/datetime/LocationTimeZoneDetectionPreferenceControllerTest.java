@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.time.Capabilities;
@@ -36,10 +37,13 @@ import android.location.LocationManager;
 import android.os.UserHandle;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -53,6 +57,10 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
     private LocationManager mLocationManager;
     private Context mContext;
     private LocationTimeZoneDetectionPreferenceController mController;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private InstrumentedPreferenceFragment mFragment;
+    @Mock
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
@@ -60,11 +68,14 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
         when(mContext.getSystemService(LocationManager.class)).thenReturn(mLocationManager);
-        mController = new LocationTimeZoneDetectionPreferenceController(mContext, "key");
+        mController = new LocationTimeZoneDetectionPreferenceController(mContext);
+        mController.setFragment(mFragment);
     }
 
     @Test
-    public void setChecked_withTrue_shouldUpdateSetting() {
+    public void setChecked_withTrue_shouldUpdateSetting_whenLocationIsEnabled() {
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
+
         // Simulate the UI being clicked.
         mController.setChecked(true);
 
@@ -73,6 +84,17 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
                 .setGeoDetectionEnabled(true)
                 .build();
         verify(mTimeManager).updateTimeZoneConfiguration(expectedConfiguration);
+    }
+
+    @Test
+    public void setChecked_withTrue_shouldDoNothing_whenLocationIsDisabled() {
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+
+        // Simulate the UI being clicked.
+        mController.setChecked(true);
+
+        // Verify the TimeManager was not called.
+        verifyZeroInteractions(mTimeManager);
     }
 
     @Test

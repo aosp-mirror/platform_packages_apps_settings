@@ -41,6 +41,7 @@ import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.panel.PanelFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
@@ -78,6 +79,7 @@ public class FakeFeatureFactory extends FeatureFactory {
 
     public WifiTrackerLibProvider wifiTrackerLibProvider;
     public ExtraAppInfoFeatureProvider extraAppInfoFeatureProvider;
+    public SecuritySettingsFeatureProvider securitySettingsFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -116,6 +118,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
         extraAppInfoFeatureProvider = mock(ExtraAppInfoFeatureProvider.class);
+        securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
     }
 
     @Override
@@ -241,5 +244,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
         return extraAppInfoFeatureProvider;
+    }
+
+    @Override
+    public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
+        return securitySettingsFeatureProvider;
     }
 }

@@ -18,8 +18,8 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
-import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /** PreferenceController that shows the Reduce Bright Colors summary */
@@ -32,8 +32,8 @@ public class ReduceBrightColorsPreferenceController extends BasePreferenceContro
 
     @Override
     public CharSequence getSummary() {
-        return AccessibilityUtil.getSummary(mContext,
-                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED);
+        return mContext.getText(
+                R.string.reduce_bright_colors_preference_summary);
     }
 
     @Override

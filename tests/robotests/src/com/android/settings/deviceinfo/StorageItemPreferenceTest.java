@@ -69,4 +69,11 @@ public class StorageItemPreferenceTest {
         assertThat(progressBar).isNotNull();
         assertThat(progressBar.getProgress()).isEqualTo(10);
     }
+
+    @Test
+    public void getStorageSize_setStorageSize_getCorrectStorageSize() {
+        mPreference.setStorageSize(MEGABYTE_IN_BYTES, MEGABYTE_IN_BYTES * 10);
+
+        assertThat(mPreference.getStorageSize()).isEqualTo(MEGABYTE_IN_BYTES);
+    }
 }

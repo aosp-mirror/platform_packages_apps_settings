@@ -121,20 +121,20 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
     }
 
     @Test
-    public void isMaximizeCompatibilityEnabled_concurrencySupportedAndEnabled_returnTure() {
+    public void isMaximizeCompatibilityEnabled_concurrencySupportedAndEnabled_returnFalse() {
         // The preconditions are ready in setup().
 
-        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(true);
+        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(false);
     }
 
     @Test
-    public void isMaximizeCompatibilityEnabled_concurrencySupportedAndDisabled_returnFalse() {
+    public void isMaximizeCompatibilityEnabled_concurrencySupportedAndDisabled_returnTrue() {
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBridgedModeOpportunisticShutdownEnabled(false)
                 .build();
         doReturn(config).when(mWifiManager).getSoftApConfiguration();
 
-        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(false);
+        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(true);
     }
 
     @Test
@@ -171,25 +171,25 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
     }
 
     @Test
-    public void setupMaximizeCompatibility_concurrencySupportedAndDisabled_setDisabled() {
+    public void setupMaximizeCompatibility_concurrencySupportedAndDisabled_setEnabled() {
         // The precondition of the concurrency supported is ready in setup().
         mController.onPreferenceChange(mPreference, false);
 
         SoftApConfiguration.Builder builder = new SoftApConfiguration.Builder();
         mController.setupMaximizeCompatibility(builder);
 
-        assertThat(builder.build().isBridgedModeOpportunisticShutdownEnabled()).isEqualTo(false);
+        assertThat(builder.build().isBridgedModeOpportunisticShutdownEnabled()).isEqualTo(true);
     }
 
     @Test
-    public void setupMaximizeCompatibility_concurrencySupportedAndEnabled_setEnabled() {
+    public void setupMaximizeCompatibility_concurrencySupportedAndEnabled_setDisabled() {
         // The precondition of the concurrency supported is ready in setup().
         mController.onPreferenceChange(mPreference, true);
 
         SoftApConfiguration.Builder builder = new SoftApConfiguration.Builder();
         mController.setupMaximizeCompatibility(builder);
 
-        assertThat(builder.build().isBridgedModeOpportunisticShutdownEnabled()).isEqualTo(true);
+        assertThat(builder.build().isBridgedModeOpportunisticShutdownEnabled()).isEqualTo(false);
     }
 
     @Test

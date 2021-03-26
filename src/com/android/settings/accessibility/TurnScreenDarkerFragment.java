@@ -94,8 +94,6 @@ public class TurnScreenDarkerFragment extends DashboardFragment {
         if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
             mToggleInversionPreference.setSummary(AccessibilityUtil.getSummary(
                     getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED));
-            mReduceBrightColorsPreference.setSummary(AccessibilityUtil.getSummary(
-                    getContext(), Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED));
             getPreferenceScreen().removePreference(experimentalCategory);
         } else {
             // Move following preferences to experimental category if device don't supports HWC
