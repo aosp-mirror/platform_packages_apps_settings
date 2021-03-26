@@ -1234,7 +1234,6 @@
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
-                  android:permission="android.permission.OPEN_APP_OPEN_BY_DEFAULT_SETTINGS"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.APP_OPEN_BY_DEFAULT_SETTINGS" />
