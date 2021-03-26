@@ -53,9 +53,8 @@
         android:fragment="com.android.settings.location.LocationServices"
         settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/location_settings_footer"
         android:key="location_footer"
-        android:layout="@layout/preference_category_no_label"
-        settings:allowDividerAbove="false"
-        settings:controller="com.android.settings.location.LocationFooterPreferenceController"/>
+        android:selectable="false"/>
 </PreferenceScreen>

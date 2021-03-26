@@ -684,6 +684,11 @@
     </plurals>
     <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
     <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
+    <!-- Location settings footer warning text [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer">
+        Location may use sources like GPS, Wi\u2011Fi, mobile networks, and sensors to help estimate
+        your device\u2019s location.
+    </string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
@@ -839,6 +844,8 @@
     <string name="security_settings_face_settings_use_face_for_apps">App sign-in \u0026 payments</string>
     <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. -->
     <string name="security_settings_face_settings_require_category">Requirements for face unlock</string>
+    <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_settings_preferences_category">When using face unlock</string>
     <!-- Text shown on a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=30] -->
     <string name="security_settings_face_settings_require_attention">Require eyes to be open</string>
     <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
@@ -849,6 +856,8 @@
     <string name="security_settings_face_settings_require_confirmation_details">When using face unlock in apps, always require confirmation step</string>
     <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_remove_face_data">Delete face data</string>
+    <!-- Button text in face settings which removes the user's face model from the device [CHAR LIMIT=40] -->
+    <string name="security_settings_face_settings_remove_face_model">Delete face model</string>
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
@@ -861,6 +870,10 @@
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_remove_dialog_details">The face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
+    <!-- Dialog title shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=35] -->
+    <string name="security_settings_face_settings_remove_model_dialog_title">Delete face model?</string>
+    <!-- Dialog contents shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_remove_model_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_context_subtitle">Use face unlock to unlock your phone</string>
 
@@ -1063,6 +1076,25 @@
 
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
+
+    <!-- Title of the combined biometrics settings screen. [CHAR LIMIT=40] -->
+    <string name="security_settings_biometrics_title">Face \u0026 fingerprint unlock</string>
+    <!-- Summary of the current biometrics setting when no biometrics have been enrolled. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_summary_none">Tap to set up</string>
+    <!-- Summary of the current biometrics setting when the user has enrolled a face but no fingerprint. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_summary_face">Face only</string>
+    <!-- Summary of the current biometrics setting when the user has enrolled a fingerprint but no face. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_summary_fingerprint">Fingerprint only</string>
+    <!-- Summary of the current biometrics setting when the user has enrolled both a face and a fingerprint. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_summary_both">Face and fingerprint</string>
+    <!-- Description shown on the combined biometrics settings screen. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_biometrics_description">When you set up face and fingerprint unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area</string>
+    <!-- Title of a section on the biometrics settings screen for setting up different types of authentication. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_types_category">Ways to unlock</string>
+    <!-- Title of a section on the biometrics settings screen for adjusting authentication preferences. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_preferences_category">Use face or fingerprint for</string>
+    <!-- Title of a section on the biometrics settings screen for adjusting authentication preferences. [CHAR LIMIT=50] -->
+    <string name="security_settings_biometrics_preference_use_with_apps">Authentication in apps</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
@@ -1328,15 +1360,15 @@
     <string name="face_unlock_title">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_pattern">Biometrics + Pattern</string>
+    <string name="biometrics_unlock_set_unlock_pattern">Pattern \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user through creating a backup unlock PIN for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_pin">Biometrics + PIN</string>
+    <string name="biometrics_unlock_set_unlock_pin">PIN \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user through creating a backup unlock password for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_password">Biometrics + Password</string>
+    <string name="biometrics_unlock_set_unlock_password">Password \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user to skip face unlock setup [CHAR LIMIT=60]-->
-    <string name="biometrics_unlock_skip_biometrics">Continue without biometrics</string>
+    <string name="biometrics_unlock_skip_biometrics">Continue without face or fingerprint</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
-    <string name="biometrics_unlock_title">You can unlock your phone using your biometrics. For security, this option requires a backup screen lock.</string>
+    <string name="biometrics_unlock_title">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
     <string name="unlock_set_unlock_disabled_summary">Disabled by admin, encryption policy, or
@@ -2314,6 +2346,8 @@
     <string name="wifi_details_title">Network details</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
+    <!-- Wifi details preference title to display wifi type info [CHAR LIMIT=50]-->
+    <string name="wifi_type_title">TYPE</string>
     <!-- Wifi details preference title to display router DNS info -->
     <string name="wifi_details_dns">DNS</string>
     <!-- Wifi details preference category title for IPv6 information -->
@@ -2349,6 +2383,12 @@
     <string name="wifi_gateway">Gateway</string>
     <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
     <string name="wifi_network_prefix_length">Network prefix length</string>
+    <!-- Summary for the WiFi Type WIFI_STANDARD_11AX [CHAR LIMIT=50]-->
+    <string name="wifi_type_11AX">Wi\u2011Fi 6</string>
+    <!-- Summary for the WiFi Type WIFI_STANDARD_11AC [CHAR LIMIT=50]-->
+    <string name="wifi_type_11AC">Wi\u2011Fi 5</string>
+    <!-- Summary for the WiFi Type WIFI_STANDARD_11N  [CHAR LIMIT=50]-->
+    <string name="wifi_type_11N">Wi\u2011Fi 4</string>
 
     <!-- Wi-Fi p2p / Wi-Fi Direct settings -->
     <!-- Used in the 1st-level settings screen to launch Wi-fi Direct settings [CHAR LIMIT=25] -->
@@ -3400,22 +3440,6 @@
     <!-- Section header above list of external storage devices [CHAR LIMIT=30]-->
     <string name="storage_external_title">Portable storage</string>
 
-    <!-- Label for the settings activity for controlling apps that can schedule alarms [CHAR LIMIT=30] -->
-    <string name="alarms_and_reminders_label">Alarms and reminders</string>
-    <!-- Label for the switch to toggler the permission for scheduling alarms [CHAR LIMIT=50] -->
-    <string name="alarms_and_reminders_switch_title">Allow to set alarms or reminders</string>
-    <!-- Title for the setting screen for controlling apps that can schedule alarms [CHAR LIMIT=30] -->
-    <string name="alarms_and_reminders_title">Alarms and reminders</string>
-    <!-- Description that appears below the alarms_and_reminders switch [CHAR LIMIT=NONE] -->
-    <string name="alarms_and_reminders_footer_title">
-        Allow this app to schedule alarms or other timing based events.
-        This will allow the app to wake up and run even when you are not using the device.
-        Note that revoking this permission may cause the app to malfunction, specifically any alarms
-        that the app has scheduled will no longer work.
-    </string>
-    <!-- Keywords for setting screen for controlling apps that can schedule alarms [CHAR LIMIT=100] -->
-    <string name="keywords_alarms_and_reminders">schedule, alarm, reminder, event</string>
-
     <!-- Summary of a single storage volume, constrasting available and total storage space. [CHAR LIMIT=48]-->
     <string name="storage_volume_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> used of <xliff:g id="total" example="32GB">%2$s</xliff:g></string>
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
@@ -4081,6 +4105,18 @@
 
     <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
     <string name="location_time_zone_detection_toggle_title">Use location to set time zone</string>
+    <!-- [CHAR LIMIT=60] Date&Time settings screen, title of the dialog shown when user tries to
+         enable GeoTZ when Location toggle is off. -->
+    <string name="location_time_zone_detection_location_is_off_dialog_title">Device location needed</string>
+    <!-- [CHAR LIMIT=NONE] Date&Time settings screen, message on the dialog shown when user tries to
+         enable GeoTZ when Location toggle is off. -->
+    <string name="location_time_zone_detection_location_is_off_dialog_message">To set the time zone using your location, turn on location, then update time zone settings</string>
+    <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when user tries to
+    enable GeoTZ, but Location toggle is off, which leads to Location settings page. -->
+    <string name="location_time_zone_detection_location_is_off_dialog_ok_button">Location settings</string>
+    <!-- [CHAR LIMIT=30] Date&Time settings screen, button on a dialog shown when user tries to
+     enable GeoTZ, but Location toggle is off, which closes the dialog. -->
+    <string name="location_time_zone_detection_location_is_off_dialog_cancel_button">Cancel</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable due to other settings like the "automatic time zone detection enabled" setting
          being set to "off". -->
@@ -5067,7 +5103,7 @@
     <!-- Title for the accessibility magnification switch shortcut dialog. [CHAR LIMIT=48] -->
     <string name="accessibility_magnification_switch_shortcut_title">Switch to accessibility button?</string>
     <!-- Message for the accessibility magnification switch shortcut dialog. [CHAR LIMIT=none] -->
-    <string name="accessibility_magnification_switch_shortcut_message">Using triple-tap to magnify part of the screen causes typing and other delays.\n\nThe accessibility button floats on your screen over other apps. Tap it to magnify.</string>
+    <string name="accessibility_magnification_switch_shortcut_message">Using triple-tap to magnify part of your screen causes typing and other delays.\n\nThe accessibility button floats on your screen over other apps. Tap it to magnify.</string>
     <!-- Title for the switch shortcut button in accessibility switch shortcut dialog to change the config shortcut value. [CHAR LIMIT=45] -->
     <string name="accessibility_magnification_switch_shortcut_positive_button">Switch to accessibility button</string>
     <!-- Title for the cancel button in accessibility switch shortcut dialog to keep the config shortcut value. [CHAR LIMIT=54] -->
@@ -6400,6 +6436,10 @@
 
     <!-- Title of preference to enter the VPN settings activity -->
     <string name="vpn_settings_title">VPN</string>
+    <!-- Title of preference to enter the VPN settings activity [CHAR LIMIT=30] -->
+    <string name="vpn_settings_insecure_single">Not secure</string>
+    <!-- Title of preference to enter the VPN settings activity [CHAR LIMIT=30] -->
+    <string name="vpn_settings_insecure_multiple"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
 
     <!-- Title of Adaptive connectivity. Adaptive connectivity is a feature which automatically manages network connections for better battery life and performance. [CHAR LIMIT=60] -->
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
@@ -7779,10 +7819,10 @@
     <string name="app_and_notification_dashboard_summary">Recent apps, default apps</string>
     <!-- Toast shown when an app in the work profile attempts to open notification settings. The apps in the work profile cannot access notification settings. [CHAR LIMIT=NONE] -->
     <string name="notification_settings_work_profile">Notification access is not available for apps in the work profile.</string>
-    <!-- Title for setting tile leading to saved autofill passwords, autofill , and account settings [CHAR LIMIT=40]-->
+    <!-- Title for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title">Passwords and accounts</string>
-    <!-- Summary for account settings tiles when there is no accounts on device [CHAR LIMIT=NONE]-->
-    <string name="account_dashboard_default_summary">No accounts added</string>
+    <!-- Summary for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=NONE]-->
+    <string name="account_dashboard_default_summary">Saved passwords, autofill, synced accounts</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
@@ -11686,6 +11726,12 @@
     <string name="autofill_app">Autofill service</string>
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
+    <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
+         service. [CHAR LIMIT=NONE] -->
+    <plurals name="autofill_passwords_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> password</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> passwords</item>
+    </plurals>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
 
