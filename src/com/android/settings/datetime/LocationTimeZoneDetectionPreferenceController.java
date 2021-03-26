@@ -31,6 +31,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -46,15 +47,22 @@ public class LocationTimeZoneDetectionPreferenceController
         extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop, TimeManager.TimeZoneDetectorListener {
 
+    private static final String TAG = "location_time_zone_detection";
+
     private final TimeManager mTimeManager;
     private final LocationManager mLocationManager;
     private TimeZoneCapabilitiesAndConfig mTimeZoneCapabilitiesAndConfig;
+    private InstrumentedPreferenceFragment mFragment;
     private Preference mPreference;
 
-    public LocationTimeZoneDetectionPreferenceController(Context context, String key) {
-        super(context, key);
+    public LocationTimeZoneDetectionPreferenceController(Context context) {
+        super(context, TAG);
         mTimeManager = context.getSystemService(TimeManager.class);
         mLocationManager = context.getSystemService(LocationManager.class);
+    }
+
+    void setFragment(InstrumentedPreferenceFragment fragment) {
+        mFragment = fragment;
     }
 
     @Override
@@ -67,10 +75,17 @@ public class LocationTimeZoneDetectionPreferenceController
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
-                .setGeoDetectionEnabled(isChecked)
-                .build();
-        return mTimeManager.updateTimeZoneConfiguration(configuration);
+        if (isChecked && !mLocationManager.isLocationEnabled()) {
+            new LocationToggleDisabledDialogFragment(mContext)
+                    .show(mFragment.getFragmentManager(), TAG);
+            // Toggle status is not updated.
+            return false;
+        } else {
+            TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
+                    .setGeoDetectionEnabled(isChecked)
+                    .build();
+            return mTimeManager.updateTimeZoneConfiguration(configuration);
+        }
     }
 
     @Override
