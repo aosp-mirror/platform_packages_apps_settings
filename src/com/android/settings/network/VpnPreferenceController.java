@@ -124,6 +124,7 @@ public class VpnPreferenceController extends AbstractPreferenceController
         // Copied from SystemUI::SecurityControllerImpl
         SparseArray<VpnConfig> vpns = new SparseArray<>();
         final List<UserInfo> users = mUserManager.getUsers();
+        int connectedLegacyVpnCount = 0;
         for (UserInfo user : users) {
             VpnConfig cfg = mVpnManager.getVpnConfig(user.id);
             if (cfg == null) {
@@ -134,6 +135,8 @@ public class VpnPreferenceController extends AbstractPreferenceController
                 final LegacyVpnInfo legacyVpn = mVpnManager.getLegacyVpnInfo(user.id);
                 if (legacyVpn == null || legacyVpn.state != LegacyVpnInfo.STATE_CONNECTED) {
                     continue;
+                } else {
+                    connectedLegacyVpnCount++;
                 }
             }
             vpns.put(user.id, cfg);
@@ -146,7 +149,7 @@ public class VpnPreferenceController extends AbstractPreferenceController
             uid = userInfo.id;
         }
         VpnConfig vpn = vpns.get(uid);
-        final String summary;
+        String summary;
         if (vpn == null) {
             summary = mContext.getString(R.string.vpn_disconnected_summary);
         } else {
@@ -154,9 +157,26 @@ public class VpnPreferenceController extends AbstractPreferenceController
         }
         // Optionally add warning icon if an insecure VPN is present.
         if (Utils.isProviderModelEnabled(mContext) && mPreference instanceof VpnInfoPreference) {
-            ((VpnInfoPreference) mPreference).setInsecureVpn(hasInsecureVpn());
+            final int insecureVpnCount = getInsecureVpnCount();
+            boolean isInsecureVPN = insecureVpnCount > 0;
+            ((VpnInfoPreference) mPreference).setInsecureVpn(isInsecureVPN);
+            // Set the summary based on the total number of VPNs and insecure VPNs.
+            if (isInsecureVPN) {
+                // Add the users and the number of legacy vpns to determine if there is more than
+                // one vpn, since there can be more than one VPN per user.
+                final int vpnCount = vpns.size()
+                        + LegacyVpnProfileStore.list(Credentials.VPN).length
+                        - connectedLegacyVpnCount;
+                if (vpnCount == 1) {
+                    summary = mContext.getString(R.string.vpn_settings_insecure_single);
+                } else {
+                    summary = mContext.getString(
+                            R.string.vpn_settings_insecure_multiple, insecureVpnCount);
+                }
+            }
         }
-        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(summary));
+        final String finalSummary = summary;
+        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(finalSummary));
     }
 
     @VisibleForTesting
@@ -177,17 +197,18 @@ public class VpnPreferenceController extends AbstractPreferenceController
     }
 
     @VisibleForTesting
-    protected boolean hasInsecureVpn() {
+    protected int getInsecureVpnCount() {
+        int count = 0;
         for (String key : LegacyVpnProfileStore.list(Credentials.VPN)) {
             final VpnProfile profile = VpnProfile.decode(key,
                     LegacyVpnProfileStore.get(Credentials.VPN + key));
             // Return whether any profile is an insecure type.
             if (VpnProfile.isLegacyType(profile.type)) {
-                return true;
+                count++;
             }
         }
         // We did not find any insecure VPNs.
-        return false;
+        return count;
     }
 
     // Copied from SystemUI::SecurityControllerImpl
