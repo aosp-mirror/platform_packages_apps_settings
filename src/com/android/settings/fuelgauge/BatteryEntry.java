@@ -155,9 +155,10 @@ public class BatteryEntry {
         mBatteryConsumer = batteryConsumer;
         mIsHidden = isHidden;
         mDefaultPackageName = packageName;
-        mConsumedPower = batteryConsumer.getConsumedPower();
 
         if (batteryConsumer instanceof UidBatteryConsumer) {
+            mConsumedPower = batteryConsumer.getConsumedPower();
+
             UidBatteryConsumer uidBatteryConsumer = (UidBatteryConsumer) batteryConsumer;
             int uid = uidBatteryConsumer.getUid();
             if (mDefaultPackageName == null) {
@@ -183,11 +184,15 @@ public class BatteryEntry {
             getQuickNameIconForUid(uid, packages);
             return;
         } else if (batteryConsumer instanceof SystemBatteryConsumer) {
+            mConsumedPower = batteryConsumer.getConsumedPower()
+                    - ((SystemBatteryConsumer) batteryConsumer).getPowerConsumedByApps();
             final Pair<Integer, String> resourcePair = getResourcePairFromDrainType(
                     context, ((SystemBatteryConsumer) batteryConsumer).getDrainType());
             iconId = resourcePair.first;
             name = resourcePair.second;
         } else if (batteryConsumer instanceof UserBatteryConsumer) {
+            mConsumedPower = batteryConsumer.getConsumedPower();
+
             UserInfo info = um.getUserInfo(((UserBatteryConsumer) batteryConsumer).getUserId());
             if (info != null) {
                 icon = Utils.getUserIcon(context, um, info);
