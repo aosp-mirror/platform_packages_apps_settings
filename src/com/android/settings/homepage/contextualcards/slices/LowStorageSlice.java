@@ -33,7 +33,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.deviceinfo.StorageSettings;
+import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBuilderUtils;
@@ -107,7 +107,7 @@ public class LowStorageSlice implements CustomSliceable {
                 .toString();
 
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                StorageSettings.class.getName(), "" /* key */,
+                StorageDashboardFragment.class.getName(), "" /* key */,
                 screenTitle,
                 SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
