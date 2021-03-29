@@ -57,7 +57,8 @@ public class PowerMenuPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return isCardsAvailable() || isControlsAvailable() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return isCardsAvailable() || isControlsAvailable() || isAssistInvocationAvailable()
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     private boolean isControlsAvailable() {
@@ -67,5 +68,10 @@ public class PowerMenuPreferenceController extends BasePreferenceController {
     private boolean isCardsAvailable() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
                 CARDS_AVAILABLE_SETTING, 0) == 1;
+    }
+
+    private boolean isAssistInvocationAvailable() {
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable);
     }
 }
