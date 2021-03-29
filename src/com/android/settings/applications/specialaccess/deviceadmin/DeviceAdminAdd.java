@@ -71,6 +71,7 @@ import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -79,7 +80,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DeviceAdminAdd extends Activity {
+/**
+ * A confirmation screen for enabling administractor.
+ */
+public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
     static final String TAG = "DeviceAdminAdd";
 
     static final int DIALOG_WARNING = 1;
