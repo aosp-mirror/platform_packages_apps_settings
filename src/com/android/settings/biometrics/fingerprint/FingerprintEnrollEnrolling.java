@@ -47,6 +47,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -98,6 +99,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mCanAssumeUdfps;
     @Nullable private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
+    private TextView mDescriptionText;
     private TextView mErrorText;
     private Interpolator mFastOutSlowInInterpolator;
     private Interpolator mLinearOutSlowInInterpolator;
@@ -145,7 +147,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mCanAssumeUdfps = props.size() == 1 && props.get(0).isAnyUdfpsType();
 
         if (mCanAssumeUdfps) {
-            setContentView(R.layout.udfps_enroll_enrolling);
+            if (BiometricUtils.isReverseLandscape(getApplicationContext())) {
+                setContentView(R.layout.udfps_enroll_enrolling_land);
+            } else {
+                setContentView(R.layout.udfps_enroll_enrolling);
+            }
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
         } else {
             setContentView(R.layout.fingerprint_enroll_enrolling);
