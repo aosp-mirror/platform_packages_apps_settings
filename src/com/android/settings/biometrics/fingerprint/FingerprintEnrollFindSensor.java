@@ -112,7 +112,11 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
     protected int getContentView() {
         if (mCanAssumeUdfps) {
-            return R.layout.udfps_enroll_find_sensor_layout;
+            if (BiometricUtils.isReverseLandscape(getApplicationContext())) {
+                return R.layout.udfps_enroll_find_sensor_land;
+            } else {
+                return R.layout.udfps_enroll_find_sensor_layout;
+            }
         }
         return R.layout.fingerprint_enroll_find_sensor;
     }
