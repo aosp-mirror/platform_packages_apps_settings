@@ -52,6 +52,19 @@ import java.util.Locale;
  * and icon image.
  */
 public class BatteryEntry {
+
+    public static final class NameAndIcon {
+        public final String name;
+        public final Drawable icon;
+        public final int iconId;
+
+        public NameAndIcon(String name, Drawable icon, int iconId) {
+            this.name = name;
+            this.icon = icon;
+            this.iconId = iconId;
+        }
+    }
+
     public static final int MSG_UPDATE_NAME_ICON = 1;
     public static final int MSG_REPORT_FULLY_DRAWN = 2;
 
@@ -186,22 +199,16 @@ public class BatteryEntry {
         } else if (batteryConsumer instanceof SystemBatteryConsumer) {
             mConsumedPower = batteryConsumer.getConsumedPower()
                     - ((SystemBatteryConsumer) batteryConsumer).getPowerConsumedByApps();
-            final Pair<Integer, String> resourcePair = getResourcePairFromDrainType(
+            final NameAndIcon nameAndIcon = getNameAndIconFromDrainType(
                     context, ((SystemBatteryConsumer) batteryConsumer).getDrainType());
-            iconId = resourcePair.first;
-            name = resourcePair.second;
+            iconId = nameAndIcon.iconId;
+            name = nameAndIcon.name;
         } else if (batteryConsumer instanceof UserBatteryConsumer) {
             mConsumedPower = batteryConsumer.getConsumedPower();
-
-            UserInfo info = um.getUserInfo(((UserBatteryConsumer) batteryConsumer).getUserId());
-            if (info != null) {
-                icon = Utils.getUserIcon(context, um, info);
-                name = Utils.getUserLabel(context, info);
-            } else {
-                icon = null;
-                name = context.getResources().getString(
-                        R.string.running_process_item_removed_user_label);
-            }
+            final NameAndIcon nameAndIcon = getNameAndIconFromUserId(
+                    context, ((UserBatteryConsumer) batteryConsumer).getUserId());
+            icon = nameAndIcon.icon;
+            name = nameAndIcon.name;
         }
 
         if (iconId != 0) {
@@ -238,15 +245,9 @@ public class BatteryEntry {
         }
 
         if (packages == null || packages.length == 0) {
-            if (uid == 0) {
-                name = mContext.getResources().getString(R.string.process_kernel_label);
-            } else if ("mediaserver".equals(name)) {
-                name = mContext.getResources().getString(R.string.process_mediaserver_label);
-            } else if ("dex2oat".equals(name)) {
-                name = mContext.getResources().getString(R.string.process_dex2oat_label);
-            }
-            iconId = R.drawable.ic_power_system;
-            icon = mContext.getDrawable(iconId);
+            final NameAndIcon nameAndIcon = getNameAndIconFromUid(mContext, name, uid);
+            icon = nameAndIcon.icon;
+            name = nameAndIcon.name;
         } else {
             icon = mContext.getPackageManager().getDefaultActivityIcon();
         }
@@ -419,6 +420,13 @@ public class BatteryEntry {
     }
 
     /**
+     * Returns the BatteryConsumer of the app described by this entry.
+     */
+    public BatteryConsumer getBatteryConsumer() {
+        return mBatteryConsumer;
+    }
+
+    /**
      * Returns foreground foreground time (in milliseconds) that is attributed to this entry.
      */
     public long getTimeInForegroundMs() {
@@ -462,10 +470,46 @@ public class BatteryEntry {
     }
 
     /**
-     * Gets icon ID and name from system battery consumer drain type.
+     * Gets name and icon resource from UserBatteryConsumer userId.
      */
-    public static Pair<Integer, String> getResourcePairFromDrainType(
-            Context context, int drainType) {
+    public static NameAndIcon getNameAndIconFromUserId(
+            Context context, final int userId) {
+        UserManager um = context.getSystemService(UserManager.class);
+        UserInfo info = um.getUserInfo(userId);
+
+        Drawable icon = null;
+        String name = null;
+        if (info != null) {
+            icon = Utils.getUserIcon(context, um, info);
+            name = Utils.getUserLabel(context, info);
+        } else {
+            name = context.getResources().getString(
+                    R.string.running_process_item_removed_user_label);
+        }
+        return new NameAndIcon(name, icon, 0 /* iconId */);
+    }
+
+    /**
+     * Gets name and icon resource from UidBatteryConsumer uid.
+     */
+    public static NameAndIcon getNameAndIconFromUid(
+            Context context, String name, final int uid) {
+        Drawable icon = context.getDrawable(R.drawable.ic_power_system);
+        if (uid == 0) {
+            name = context.getResources().getString(R.string.process_kernel_label);
+        } else if ("mediaserver".equals(name)) {
+            name = context.getResources().getString(R.string.process_mediaserver_label);
+        } else if ("dex2oat".equals(name)) {
+            name = context.getResources().getString(R.string.process_dex2oat_label);
+        }
+        return new NameAndIcon(name, icon, 0 /* iconId */);
+    }
+
+    /**
+     * Gets name annd icon resource from SystemBatteryConsumer drain type.
+     */
+    public static NameAndIcon getNameAndIconFromDrainType(
+            Context context, final int drainType) {
         String name = null;
         int iconId = 0;
         switch (drainType) {
@@ -511,6 +555,6 @@ public class BatteryEntry {
                 iconId = R.drawable.ic_power_system;
                 break;
         }
-        return new Pair<>(Integer.valueOf(iconId), name);
+        return new NameAndIcon(name, null /* icon */, iconId);
     }
 }
