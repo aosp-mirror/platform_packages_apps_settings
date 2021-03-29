@@ -24,6 +24,6 @@ public interface BatterySettingsFeatureProvider {
     /**
      * Get replacement activity for a given activity or fragment path.
      */
-    String getReplacingActivityName(String activity);
+    String getReplacingActivityName(String originalActivity);
 
 }
