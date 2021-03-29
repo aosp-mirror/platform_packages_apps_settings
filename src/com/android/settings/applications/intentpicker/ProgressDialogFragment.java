@@ -34,19 +34,19 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** A customized {@link DialogFragment} with a progress bar. */
-public class ProgressDialogFragment extends DialogFragment {
+/** A customized {@link InstrumentedDialogFragment} with a progress bar. */
+public class ProgressDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "ProgressDialogFragment";
     private static final String DLG_ID = "ProgressDialog";
     private static final int PROGRESS_BAR_STEPPING_TIME = 20;
@@ -108,6 +108,11 @@ public class ProgressDialogFragment extends DialogFragment {
         if (mProgressAlertDialog != null && mProgressAlertDialog.isShowing()) {
             mProgressAlertDialog.cancel();
         }
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return 0;
     }
 
     /**
