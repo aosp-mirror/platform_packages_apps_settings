@@ -75,6 +75,10 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
         mIcon.setImageDrawable(icon);
     }
 
+    void setIconBackground(Drawable background) {
+        mIcon.setBackground(background);
+    }
+
     void setPackageLabel(String pkg) {
         mPkgName.setText(pkg);
     }
