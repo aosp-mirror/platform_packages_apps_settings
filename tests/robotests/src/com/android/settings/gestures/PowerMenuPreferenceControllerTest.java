@@ -18,8 +18,13 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.provider.Settings;
 
 import com.android.settings.core.BasePreferenceController;
@@ -35,6 +40,7 @@ import org.robolectric.shadows.ShadowPackageManager;
 @RunWith(RobolectricTestRunner.class)
 public class PowerMenuPreferenceControllerTest {
     private Context mContext;
+    private Resources mResources;
     private PowerMenuPreferenceController mController;
     private ShadowPackageManager mShadowPackageManager;
 
@@ -44,17 +50,26 @@ public class PowerMenuPreferenceControllerTest {
     private static final String CARDS_ENABLED = Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
     private static final String CARDS_AVAILABLE = Settings.Secure.GLOBAL_ACTIONS_PANEL_AVAILABLE;
 
+
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        mResources = mock(Resources.class);
+        when(mResources.getBoolean(
+            com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                .thenReturn(true);
+        when(mContext.getResources()).thenReturn(mResources);
         mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         mController = new PowerMenuPreferenceController(mContext, KEY_GESTURE_POWER_MENU);
     }
 
     @Test
-    public void getAvailabilityStatus_bothAvailable_available() {
+    public void getAvailabilityStatus_allAvailable_available() {
         Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 1);
         mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, true);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
@@ -64,6 +79,9 @@ public class PowerMenuPreferenceControllerTest {
     public void getAvailabilityStatus_onlyCardsAvailable_available() {
         Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 1);
         mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, false);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
@@ -73,15 +91,69 @@ public class PowerMenuPreferenceControllerTest {
     public void getAvailabilityStatus_onlyControlsAvailable_available() {
         Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 0);
         mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, true);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_bothUnavailable_unavailable() {
+    public void getAvailabilityStatus_controlsAndCardsAvailable_available() {
+        Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 1);
+        mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, true);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_controlsAndAssistAvailable_available() {
+        Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 0);
+        mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, true);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_cardsAndAssistAvailable_available() {
+        Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 1);
+        mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, false);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_onlyAssistAvailable_available() {
         Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 0);
         mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, false);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_allUnavailable_unavailable() {
+        Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 0);
+        mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, false);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
