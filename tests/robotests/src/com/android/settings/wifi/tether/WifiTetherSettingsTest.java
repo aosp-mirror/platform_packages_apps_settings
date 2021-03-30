@@ -80,8 +80,8 @@ public class WifiTetherSettingsTest {
 
         MockitoAnnotations.initMocks(this);
         doReturn(mConnectivityManager)
-                .when(mContext).getSystemService(ConnectivityManager.class);
-        doReturn(mTetheringManager).when(mContext).getSystemService(TetheringManager.class);
+                .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
+        doReturn(mTetheringManager).when(mContext).getSystemService(Context.TETHERING_SERVICE);
         doReturn(WIFI_REGEXS).when(mTetheringManager).getTetherableWifiRegexs();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
 
