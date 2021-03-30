@@ -5843,6 +5843,8 @@
     <string name="history_details_title">History details</string>
     <!-- Preference title for advanced battery usage [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_title">View battery usage</string>
+    <!-- Preference summary for advanced battery usage [CHAR LIMIT=40] -->
+    <string name="advanced_battery_preference_summary">View usage for past 24 hours</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">Battery usage</string>
@@ -5979,7 +5981,7 @@
     <string name="battery_auto_restriction_summary">Detect when apps drain battery</string>
 
     <!-- Summary for battery manager when it is on -->
-    <string name="battery_manager_on" product="default">On / Detecting when apps drain battery</string>
+    <string name="battery_manager_summary">Detecting when apps drain battery</string>
 
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
@@ -6244,6 +6246,9 @@
 
     <!-- Battery saver: Label for preference to indicate there is a routine based schedule [CHAR_LIMIT=40] -->
     <string name="battery_saver_auto_routine">Based on your routine</string>
+
+    <!-- Battery saver: Summary for preference to indicate there is a routine based schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_pref_auto_routine_summary">Will turn on based on your routine</string>
 
     <!-- Battery saver: Label for preference to indicate there is a percentage based schedule [CHAR_LIMIT=40] -->
     <string name="battery_saver_auto_percentage">Based on percentage</string>
@@ -6612,7 +6617,7 @@
 
     <!-- Message displayed to let the user know that some of the options are disabled by admin. [CHAR LIMIT=NONE] -->
     <string name="admin_disabled_other_options">Other options are disabled by your admin</string>
-    <string name="admin_more_details">More details</string>
+    <string name="admin_more_details">Learn more</string>
     <string name="notification_log_title">Notification log</string>
 
     <string name="notification_history_title">Notification history</string>
@@ -12803,6 +12808,12 @@
 
     <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
     <string name="power_menu_privacy_not_secure">To use, first set a screen lock</string>
+
+    <!-- Power menu setting use long press power to invoke assistant. [CHAR_LIMIT=NONE] -->
+    <string name="power_menu_long_press_for_assist">Hold for Assistant</string>
+
+    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR_LIMIT=NONE] -->
+    <string name="power_menu_long_press_for_assist_summary">Trigger the Assistant by holding the power button</string>
 
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="device_controls_setting_toggle">Show device controls</string>
