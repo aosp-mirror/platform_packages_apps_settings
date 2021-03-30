@@ -72,7 +72,7 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         return true;
     }
 
-    Preference getClearAll(PreferenceGroup parent) {
+    LayoutPreference getClearAll(PreferenceGroup parent) {
         LayoutPreference pref = new LayoutPreference(
                 mContext, R.layout.conversations_clear_recents);
         pref.setOrder(1);
@@ -80,10 +80,21 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         button.setOnClickListener(v -> {
             try {
                 mPs.removeAllRecentConversations();
+                // Removing recents is asynchronous, so we can't immediately reload the list from
+                // the backend. Instead, proactively remove all of items that were marked as
+                // clearable, so long as we didn't get an error
+
+                for (int i = parent.getPreferenceCount() - 1; i >= 0; i--) {
+                    Preference p = parent.getPreference(i);
+                    if (p instanceof RecentConversationPreference) {
+                        if (((RecentConversationPreference) p).hasClearListener()) {
+                            parent.removePreference(p);
+                        }
+                    }
+                }
             } catch (RemoteException e) {
                 Slog.w(TAG, "Could not clear recents", e);
             }
-            updateState(parent);
         });
         return pref;
     }
@@ -118,36 +129,45 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
     protected void populateList(List<ConversationChannel> conversations,
             PreferenceGroup containerGroup) {
         containerGroup.removeAll();
+        boolean hasClearable = false;
         if (conversations != null) {
-            populateConversations(conversations, containerGroup);
+            hasClearable = populateConversations(conversations, containerGroup);
         }
 
         if (containerGroup.getPreferenceCount() == 0) {
             containerGroup.setVisible(false);
         } else {
             containerGroup.setVisible(true);
-            Preference clearAll = getClearAll(containerGroup);
-            if (clearAll != null) {
-                containerGroup.addPreference(clearAll);
+            if (hasClearable) {
+                Preference clearAll = getClearAll(containerGroup);
+                if (clearAll != null) {
+                    containerGroup.addPreference(clearAll);
+                }
             }
         }
     }
 
-    protected void populateConversations(List<ConversationChannel> conversations,
+    protected boolean populateConversations(List<ConversationChannel> conversations,
             PreferenceGroup containerGroup) {
         int order = 100;
+        boolean hasClearable = false;
         for (ConversationChannel conversation : conversations) {
             if (conversation.getParentNotificationChannel().getImportance() == IMPORTANCE_NONE
                     || (conversation.getParentNotificationChannelGroup() != null
                     && conversation.getParentNotificationChannelGroup().isBlocked())) {
                 continue;
             }
-            containerGroup.addPreference(
-                    createConversationPref(containerGroup, conversation, order++));
+            RecentConversationPreference pref =
+                    createConversationPref(containerGroup, conversation, order++);
+            containerGroup.addPreference(pref);
+            if (pref.hasClearListener()) {
+                hasClearable = true;
+            }
         }
+        return hasClearable;
     }
 
-    protected Preference createConversationPref(PreferenceGroup parent,
+    protected RecentConversationPreference createConversationPref(PreferenceGroup parent,
             final ConversationChannel conversation, int order) {
         final String pkg = conversation.getShortcutInfo().getPackage();
         final int uid = conversation.getUid();

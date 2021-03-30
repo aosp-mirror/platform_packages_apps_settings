@@ -47,8 +47,10 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -105,9 +107,9 @@ public class RecentConversationsPreferenceControllerTest {
         ps.addPreference(outerContainer);
 
         ConversationChannel ccw = new ConversationChannel(mock(ShortcutInfo.class), 6,
-        new NotificationChannel("hi", "hi", 4),
-        new NotificationChannelGroup("hi", "hi"), 7,
-        true);
+                new NotificationChannel("hi", "hi", 4),
+                new NotificationChannelGroup("hi", "hi"), 7,
+                false);
 
         ArrayList<ConversationChannel> list = new ArrayList<>();
         list.add(ccw);
@@ -124,19 +126,19 @@ public class RecentConversationsPreferenceControllerTest {
         ConversationChannel ccw = new ConversationChannel(mock(ShortcutInfo.class), 6,
                 new NotificationChannel("hi", "hi", 4),
                 new NotificationChannelGroup("hi", "hi"), 7,
-                true);
+                false);
 
         ConversationChannel ccw2 = new ConversationChannel(mock(ShortcutInfo.class), 6,
                 new NotificationChannel("hi", "hi", 0),
                 new NotificationChannelGroup("hi", "hi"), 7,
-                true);
+                false);
 
         NotificationChannelGroup blockedGroup = new NotificationChannelGroup("hi", "hi");
         blockedGroup.setBlocked(true);
         ConversationChannel ccw3 = new ConversationChannel(mock(ShortcutInfo.class), 6,
                 new NotificationChannel("hi", "hi", 4),
                 blockedGroup, 7,
-                true);
+                false);
 
         ArrayList<ConversationChannel> list = new ArrayList<>();
         list.add(ccw);
@@ -198,7 +200,6 @@ public class RecentConversationsPreferenceControllerTest {
                 new NotificationChannelGroup("hi", "group"), 7,
                 true);
 
-
         Intent intent = mController.getSubSettingLauncher(ccw, "title").toIntent();
 
         Bundle extras = intent.getExtras();
@@ -258,6 +259,51 @@ public class RecentConversationsPreferenceControllerTest {
     }
 
     @Test
+    public void testRemoveConversations() throws Exception {
+        ShortcutInfo si = mock(ShortcutInfo.class);
+        when(si.getId()).thenReturn("person");
+        when(si.getPackage()).thenReturn("pkg");
+        ConversationChannel ccw = new ConversationChannel(si, 6,
+                new NotificationChannel("hi", "hi", 4),
+                new NotificationChannelGroup("hi", "group"), 7,
+                false);
+
+        ConversationChannel ccw2 = new ConversationChannel(si, 6,
+                new NotificationChannel("bye", "bye", 4),
+                new NotificationChannelGroup("hi", "group"), 7,
+                true);
+
+        PreferenceCategory group = new PreferenceCategory(mContext);
+        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        screen.addPreference(group);
+
+        RecentConversationPreference pref = mController.createConversationPref(
+                        new PreferenceCategory(mContext), ccw, 100);
+        final View view = View.inflate(mContext, pref.getLayoutResource(), null);
+        PreferenceViewHolder holder = spy(PreferenceViewHolder.createInstanceForTests(view));
+        View delete = View.inflate(mContext, pref.getSecondTargetResId(), null);
+        when(holder.findViewById(pref.getClearId())).thenReturn(delete);
+        group.addPreference(pref);
+
+        RecentConversationPreference pref2 = mController.createConversationPref(
+                        new PreferenceCategory(mContext), ccw2, 100);
+        final View view2 = View.inflate(mContext, pref2.getLayoutResource(), null);
+        PreferenceViewHolder holder2 = spy(PreferenceViewHolder.createInstanceForTests(view2));
+        View delete2 = View.inflate(mContext, pref2.getSecondTargetResId(), null);
+        when(holder2.findViewById(pref.getClearId())).thenReturn(delete2);
+        group.addPreference(pref2);
+
+        LayoutPreference clearAll = mController.getClearAll(group);
+        group.addPreference(clearAll);
+
+        clearAll.findViewById(R.id.conversation_settings_clear_recents).performClick();
+
+        verify(mPs).removeAllRecentConversations();
+        assertThat((Preference) group.findPreference("hi:person")).isNull();
+        assertThat((Preference) group.findPreference("bye:person")).isNotNull();
+    }
+
+    @Test
     public void testNonremoveableConversation() throws Exception {
         ShortcutInfo si = mock(ShortcutInfo.class);
         when(si.getId()).thenReturn("person");
@@ -271,5 +317,25 @@ public class RecentConversationsPreferenceControllerTest {
                 (RecentConversationPreference) mController.createConversationPref(
                         new PreferenceCategory(mContext), ccw, 100);
         assertThat(pref.hasClearListener()).isFalse();
+    }
+
+    @Test
+    public void testPopulateList_onlyNonremoveableConversations() {
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen ps = preferenceManager.createPreferenceScreen(mContext);
+        PreferenceCategory outerContainer = spy(new PreferenceCategory(mContext));
+        ps.addPreference(outerContainer);
+
+        ConversationChannel ccw = new ConversationChannel(mock(ShortcutInfo.class), 6,
+                new NotificationChannel("hi", "hi", 4),
+                new NotificationChannelGroup("hi", "hi"), 7,
+                true /* hasactivenotifs */);
+
+        ArrayList<ConversationChannel> list = new ArrayList<>();
+        list.add(ccw);
+
+        mController.populateList(list, outerContainer);
+        // one for the preference, none for 'clear all'
+        verify(outerContainer, times(1)).addPreference(any());
     }
 }
