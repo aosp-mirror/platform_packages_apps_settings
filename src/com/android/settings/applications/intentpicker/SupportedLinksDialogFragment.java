@@ -26,19 +26,19 @@ import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-/** A customized {@link DialogFragment} with multiple checkboxes. */
-public class SupportedLinksDialogFragment extends DialogFragment {
+/** A customized {@link InstrumentedDialogFragment} with multiple checkboxes. */
+public class SupportedLinksDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "SupportedLinksDialogFrg";
     private static final String DLG_ID = "SupportedLinksDialog";
 
@@ -55,11 +55,6 @@ public class SupportedLinksDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Context context = getActivity();
         final SupportedLinksAdapter adapter = new SupportedLinksAdapter(context,
@@ -70,11 +65,15 @@ public class SupportedLinksDialogFragment extends DialogFragment {
                 .setAdapter(adapter, /* listener= */ null)
                 .setCancelable(true)
                 .setPositiveButton(R.string.app_launch_supported_links_add, (dialog, id) -> {
-                    //   addSelectedItems(((AlertDialog) dialog).getListView());
                     doSelectedAction();
                 })
                 .setNegativeButton(R.string.app_launch_dialog_cancel, /* listener= */ null);
         return builder.create();
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return 0;
     }
 
     /** Display the dialog. */
