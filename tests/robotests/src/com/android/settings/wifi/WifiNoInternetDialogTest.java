@@ -44,6 +44,7 @@ import android.os.Bundle;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -87,6 +88,7 @@ public class WifiNoInternetDialogTest {
                 Robolectric.setupActivity(WifiNoInternetDialog.class);
     }
 
+    @Ignore
     @Test
     public void setupPromptUnvalidated_shouldShowNoInternetAccessRemember() {
         setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
@@ -98,6 +100,7 @@ public class WifiNoInternetDialogTest {
                 mActivity.getString(R.string.no_internet_access_remember));
     }
 
+    @Ignore
     @Test
     public void setupPromptPartialConnectivity_shouldShowNoInternetAccessRemember() {
         setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, FAKE_URL);
@@ -109,6 +112,7 @@ public class WifiNoInternetDialogTest {
                 mActivity.getString(R.string.no_internet_access_remember));
     }
 
+    @Ignore
     @Test
     public void setupPromptLostValidationAction_shouldShowLostInternetAccessPersist() {
         setupActivityWithAction(ACTION_PROMPT_LOST_VALIDATION, FAKE_URL);
@@ -120,6 +124,7 @@ public class WifiNoInternetDialogTest {
                 mActivity.getString(R.string.lost_internet_access_persist));
     }
 
+    @Ignore
     @Test
     public void clickPositiveButton_whenPromptUnvalidated_shouldCallSetAcceptUnvalidated() {
         setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
@@ -131,6 +136,7 @@ public class WifiNoInternetDialogTest {
         verify(mConnectivityManager).setAcceptUnvalidated(any(Network.class), eq(true), eq(false));
     }
 
+    @Ignore
     @Test
     public void positiveButton_withPartialConnectivity_shouldCallSetAcceptPartialConnectivity() {
         setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, FAKE_URL);
@@ -143,6 +149,7 @@ public class WifiNoInternetDialogTest {
                 eq(false));
     }
 
+    @Ignore
     @Test
     public void positiveButton_withLostValidation_shouldCallSetAvoidUnvalidated() {
         setupActivityWithAction(ACTION_PROMPT_LOST_VALIDATION, FAKE_URL);
@@ -154,6 +161,7 @@ public class WifiNoInternetDialogTest {
         verify(mConnectivityManager).setAvoidUnvalidated(any(Network.class));
     }
 
+    @Ignore
     @Test
     public void destroyWithNoClick_inPartialConnectivity_shouldCallSetAcceptPartialConnectivity() {
         setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, FAKE_URL);
@@ -167,6 +175,7 @@ public class WifiNoInternetDialogTest {
                 eq(false));
     }
 
+    @Ignore
     @Test
     public void destroyWithNoClick_whenUnvalidated_shouldCallSetAcceptUnvalidated() {
         setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
@@ -179,6 +188,7 @@ public class WifiNoInternetDialogTest {
         verify(mConnectivityManager).setAcceptUnvalidated(any(Network.class), eq(false), eq(false));
     }
 
+    @Ignore
     @Test
     public void networkCallbackOnLost_shouldFinish() {
         setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
@@ -192,6 +202,7 @@ public class WifiNoInternetDialogTest {
         verify(mActivity).finish();
     }
 
+    @Ignore
     @Test
     public void networkCallbackOnCapabilitiesChanged_shouldFinish() {
         setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
