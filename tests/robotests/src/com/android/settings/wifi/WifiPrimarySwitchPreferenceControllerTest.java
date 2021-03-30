@@ -78,7 +78,7 @@ public class WifiPrimarySwitchPreferenceControllerTest {
         when(mContext.getSystemService(NetworkScoreManager.class)).thenReturn(mNetworkScoreManager);
         mController = new WifiPrimarySwitchPreferenceController(mContext, mMetricsFeatureProvider);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mWifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
     }
 

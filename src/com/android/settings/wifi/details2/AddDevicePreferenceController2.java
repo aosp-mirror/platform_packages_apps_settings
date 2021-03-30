@@ -42,7 +42,7 @@ public class AddDevicePreferenceController2 extends BasePreferenceController {
     public AddDevicePreferenceController2(Context context) {
         super(context, KEY_ADD_DEVICE);
 
-        mWifiManager = context.getSystemService(WifiManager.class);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
     public void setWifiEntry(WifiEntry wifiEntry) {

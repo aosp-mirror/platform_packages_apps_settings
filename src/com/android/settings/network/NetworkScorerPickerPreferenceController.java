@@ -37,7 +37,7 @@ public class NetworkScorerPickerPreferenceController extends BasePreferenceContr
     public NetworkScorerPickerPreferenceController(Context context, String key) {
         super(context, key);
         mNetworkScoreManager =
-                mContext.getSystemService(NetworkScoreManager.class);
+                (NetworkScoreManager) mContext.getSystemService(Context.NETWORK_SCORE_SERVICE);
     }
 
     @Override

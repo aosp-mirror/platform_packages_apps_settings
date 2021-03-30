@@ -58,7 +58,7 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     public DeviceNamePreferenceController(Context context, String key) {
         super(context, key);
 
-        mWifiManager = context.getSystemService(WifiManager.class);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 

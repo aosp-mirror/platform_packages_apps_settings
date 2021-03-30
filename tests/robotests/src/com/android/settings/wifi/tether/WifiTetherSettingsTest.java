@@ -80,10 +80,10 @@ public class WifiTetherSettingsTest {
 
         MockitoAnnotations.initMocks(this);
         doReturn(mConnectivityManager)
-                .when(mContext).getSystemService(ConnectivityManager.class);
-        doReturn(mTetheringManager).when(mContext).getSystemService(TetheringManager.class);
+                .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
+        doReturn(mTetheringManager).when(mContext).getSystemService(Context.TETHERING_SERVICE);
         doReturn(WIFI_REGEXS).when(mTetheringManager).getTetherableWifiRegexs();
-        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
 
         mWifiTetherSettings = new WifiTetherSettings();
     }
@@ -133,7 +133,7 @@ public class WifiTetherSettingsTest {
         when(settings.getContext()).thenReturn(mContext);
         final Resources.Theme theme = mContext.getTheme();
         when(activity.getTheme()).thenReturn(theme);
-        when(activity.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(activity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         doNothing().when(settings)
             .onCreatePreferences(any(Bundle.class), nullable(String.class));
         final FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
