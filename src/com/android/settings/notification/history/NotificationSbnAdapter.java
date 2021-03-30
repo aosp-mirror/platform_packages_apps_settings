@@ -34,6 +34,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -110,6 +111,7 @@ public class NotificationSbnAdapter extends
             int position) {
         final StatusBarNotification sbn = mValues.get(position);
         if (sbn != null) {
+            holder.setIconBackground(loadBackground(sbn));
             holder.setIcon(loadIcon(sbn));
             holder.setPackageLabel(loadPackageLabel(sbn.getPackageName()).toString());
             holder.setTitle(getTitleString(sbn.getNotification()));
@@ -138,6 +140,19 @@ public class NotificationSbnAdapter extends
         } else {
             Slog.w(TAG, "null entry in list at position " + position);
         }
+    }
+
+    private Drawable loadBackground(StatusBarNotification sbn) {
+        Drawable bg = mContext.getDrawable(R.drawable.circle);
+        int color = sbn.getNotification().color;
+        if (color == COLOR_DEFAULT) {
+            color = Utils.getColorAttrDefaultColor(
+                    mContext, com.android.internal.R.attr.colorAccent);
+        }
+        color = ContrastColorUtil.resolveContrastColor(
+                mContext, color, mBackgroundColor, mInNightMode);
+        bg.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
+        return bg;
     }
 
     @Override
@@ -229,7 +244,7 @@ public class NotificationSbnAdapter extends
             return null;
         }
         draw.mutate();
-        draw.setColorFilter(getContrastedColor(sbn.getNotification()), PorterDuff.Mode.SRC_ATOP);
+        draw.setColorFilter(mBackgroundColor, PorterDuff.Mode.SRC_ATOP);
         return draw;
     }
 
@@ -239,14 +254,5 @@ public class NotificationSbnAdapter extends
             userId = mCurrentUser;
         }
         return userId;
-    }
-
-    private int getContrastedColor(Notification n) {
-        int rawColor = n.color;
-        if (rawColor != COLOR_DEFAULT) {
-            rawColor |= 0xFF000000; // no alpha for custom colors
-        }
-        return ContrastColorUtil.resolveContrastColor(
-                mContext, rawColor, mBackgroundColor, mInNightMode);
     }
 }
