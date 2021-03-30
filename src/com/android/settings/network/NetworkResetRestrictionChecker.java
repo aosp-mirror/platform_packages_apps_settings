@@ -31,7 +31,7 @@ public class NetworkResetRestrictionChecker {
 
     public NetworkResetRestrictionChecker(Context context) {
         mContext = context;
-        mUserManager = context.getSystemService(UserManager.class);
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)

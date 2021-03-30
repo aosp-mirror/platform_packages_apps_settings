@@ -49,7 +49,7 @@ public class FirmwareVersionDetailPreferenceController extends BasePreferenceCon
 
     public FirmwareVersionDetailPreferenceController(Context context, String key) {
         super(context, key);
-        mUserManager = mContext.getSystemService(UserManager.class);
+        mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         initializeAdminPermissions();
     }
 
