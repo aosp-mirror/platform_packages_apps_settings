@@ -28,6 +28,7 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -44,6 +45,8 @@ import com.android.settings.R;
 import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,8 +93,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         private boolean mDisappearing = false;
         private CountDownTimer mCountdownTimer;
 
-        private TextView mHeaderTextView;
-        private TextView mDetailsTextView;
+        private GlifLayout mGlifLayout;
 
         // caller-supplied text for various prompts
         private CharSequence mHeaderText;
@@ -117,9 +119,14 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             : R.layout.confirm_lock_pattern,
                     container,
                     false);
-            mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
+            mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
+            switch(getContext().getDisplay().getRotation()) {
+                case Surface.ROTATION_90:
+                case Surface.ROTATION_270:
+                    mGlifLayout.setLandscapeHeaderAreaVisible(false /* visible */);
+                    break;
+            }
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
-            mDetailsTextView = (TextView) view.findViewById(R.id.sud_layout_description);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
 
             mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
@@ -177,7 +184,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             return (float)(numRows - row) / numRows;
                         }
                     });
-            setAccessibilityTitle(mHeaderTextView.getText());
+            setAccessibilityTitle(mGlifLayout.getHeaderText());
 
             mCredentialCheckResultTracker = (CredentialCheckResultTracker) getFragmentManager()
                     .findFragmentByTag(FRAGMENT_TAG_CHECK_LOCK_RESULT);
@@ -242,13 +249,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public void prepareEnterAnimation() {
             super.prepareEnterAnimation();
-            mHeaderTextView.setAlpha(0f);
+            mGlifLayout.getHeaderTextView().setAlpha(0f);
             mCancelButton.setAlpha(0f);
             if (mForgotButton != null) {
                 mForgotButton.setAlpha(0f);
             }
             mLockPatternView.setAlpha(0f);
-            mDetailsTextView.setAlpha(0f);
+            mGlifLayout.getDescriptionTextView().setAlpha(0f);
         }
 
         private int getDefaultDetails() {
@@ -269,8 +276,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private Object[][] getActiveViews() {
             ArrayList<ArrayList<Object>> result = new ArrayList<>();
-            result.add(new ArrayList<>(Collections.singletonList(mHeaderTextView)));
-            result.add(new ArrayList<>(Collections.singletonList(mDetailsTextView)));
+            result.add(new ArrayList<>(Collections.singletonList(mGlifLayout.getHeaderTextView())));
+            result.add(new ArrayList<>(
+                    Collections.singletonList(mGlifLayout.getDescriptionTextView())));
             if (mCancelButton.getVisibility() == View.VISIBLE) {
                 result.add(new ArrayList<>(Collections.singletonList(mCancelButton)));
             }
@@ -306,14 +314,14 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             switch (stage) {
                 case NeedToUnlock:
                     if (mHeaderText != null) {
-                        mHeaderTextView.setText(mHeaderText);
+                        mGlifLayout.setHeaderText(mHeaderText);
                     } else {
-                        mHeaderTextView.setText(getDefaultHeader());
+                        mGlifLayout.setHeaderText(getDefaultHeader());
                     }
                     if (mDetailsText != null) {
-                        mDetailsTextView.setText(mDetailsText);
+                        mGlifLayout.setDescriptionText(mDetailsText);
                     } else {
-                        mDetailsTextView.setText(getDefaultDetails());
+                        mGlifLayout.setDescriptionText(getDefaultDetails());
                     }
                     mErrorTextView.setText("");
                     updateErrorMessage(
@@ -341,7 +349,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
             // Always announce the header for accessibility. This is a no-op
             // when accessibility is disabled.
-            mHeaderTextView.announceForAccessibility(mHeaderTextView.getText());
+            mGlifLayout.getHeaderTextView().announceForAccessibility(mGlifLayout.getHeaderText());
         }
 
         private int getDefaultHeader() {
