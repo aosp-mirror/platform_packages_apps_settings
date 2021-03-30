@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,6 +62,7 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
 
     private final boolean mIncludeHeader;
     private final boolean mIncludeExpander;
+    private final boolean mIsLayoutRtl;
 
     /**
      * View holder for the header in the request manage credentials screen.
@@ -112,6 +114,15 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
             mExpanderIconView = view.findViewById(R.id.expand);
             mChildRecyclerView = view.findViewById(R.id.uris);
             mExpandedApps = new ArrayList<>();
+
+            if (mIsLayoutRtl) {
+                RelativeLayout appDetails = view.findViewById(R.id.app_details);
+                RelativeLayout.LayoutParams params =
+                        (RelativeLayout.LayoutParams) appDetails.getLayoutParams();
+                params.addRule(RelativeLayout.LEFT_OF, R.id.app_icon);
+                params.addRule(RelativeLayout.RIGHT_OF, R.id.expand);
+                view.setLayoutParams(params);
+            }
 
             mExpanderIconView.setOnClickListener(view1 -> {
                 final String appName = mSortedAppNames.get(getBindingAdapterPosition());
@@ -195,6 +206,8 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
         mViewPool = new RecyclerView.RecycledViewPool();
         mIncludeHeader = includeHeader;
         mIncludeExpander = includeExpander;
+        mIsLayoutRtl = context.getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL;
     }
 
     /**
