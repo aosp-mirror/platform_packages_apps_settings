@@ -236,6 +236,14 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         return mVolumeInfo == null ? false : mVolumeInfo.getType() == VolumeInfo.TYPE_PUBLIC;
     }
 
+    /**
+     * Stub volume is a volume that is maintained by external party such as the ChromeOS processes
+     * in ARC++.
+     */
+    public boolean isStub() {
+        return mVolumeInfo == null ? false : mVolumeInfo.getType() == VolumeInfo.TYPE_STUB;
+    }
+
     /** Returns description. */
     public String getDescription() {
         if (isVolumeInfo()) {
