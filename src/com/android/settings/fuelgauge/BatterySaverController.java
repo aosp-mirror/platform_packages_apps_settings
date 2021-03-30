@@ -111,7 +111,7 @@ public class BatterySaverController extends BasePreferenceController
                             Utils.formatPercentage(percent)) :
                     mContext.getString(R.string.battery_saver_off_summary);
         } else {
-            return mContext.getString(R.string.battery_saver_auto_routine);
+            return mContext.getString(R.string.battery_saver_pref_auto_routine_summary);
         }
     }
 
