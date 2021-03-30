@@ -125,7 +125,7 @@ public class PrivateDnsPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mContentResolver = mContext.getContentResolver();
         mShadowContentResolver = Shadow.extract(mContentResolver);
-        when(mContext.getSystemService(ConnectivityManager.class))
+        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
         doNothing().when(mConnectivityManager).registerDefaultNetworkCallback(
                 mCallbackCaptor.capture(), nullable(Handler.class));
