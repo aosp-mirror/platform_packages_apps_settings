@@ -164,7 +164,7 @@ public class WifiSlice implements CustomSliceable {
         return rowBuilder;
     }
 
-    private IconCompat getWifiSliceItemLevelIcon(WifiSliceItem wifiSliceItem) {
+    protected IconCompat getWifiSliceItemLevelIcon(WifiSliceItem wifiSliceItem) {
         final @ColorInt int tint;
         if (wifiSliceItem.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
             tint = Utils.getColorAccentDefaultColor(mContext);

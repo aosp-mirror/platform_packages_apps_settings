@@ -236,7 +236,8 @@ public class ProviderModelSliceTest {
         mWifiList.add(mMockWifiSliceItem2);
         mMockNetworkProviderWorker.updateSelfResults(mWifiList);
         mockHelperCondition(false, true, true, null);
-        when(mMockNetworkProviderWorker.isEthernetConnected()).thenReturn(true);
+        when(mMockNetworkProviderWorker.getInternetType())
+                .thenReturn(InternetUpdater.INTERNET_ETHERNET);
 
         final Slice slice = mMockProviderModelSlice.getSlice();
 
@@ -258,7 +259,8 @@ public class ProviderModelSliceTest {
         mWifiList.add(mMockWifiSliceItem2);
         mMockNetworkProviderWorker.updateSelfResults(mWifiList);
         mockHelperCondition(false, true, true, mWifiList.get(0));
-        when(mMockNetworkProviderWorker.isEthernetConnected()).thenReturn(true);
+        when(mMockNetworkProviderWorker.getInternetType())
+                .thenReturn(InternetUpdater.INTERNET_ETHERNET);
 
         final Slice slice = mMockProviderModelSlice.getSlice();
 
