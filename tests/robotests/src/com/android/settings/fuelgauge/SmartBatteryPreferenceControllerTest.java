@@ -21,8 +21,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.provider.Settings;
+
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -42,50 +43,48 @@ public class SmartBatteryPreferenceControllerTest {
     private static final int OFF = 0;
 
     private SmartBatteryPreferenceController mController;
+    private SwitchPreference mPreference;
     private ContentResolver mContentResolver;
     private FakeFeatureFactory mFeatureFactory;
-    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         mController = new SmartBatteryPreferenceController(RuntimeEnvironment.application);
+        mPreference = new SwitchPreference(RuntimeEnvironment.application);
     }
 
     @Test
     public void testUpdateState_smartBatteryOn_preferenceChecked() {
         putSmartBatteryValue(ON);
-        final MainSwitchPreference preference = new MainSwitchPreference(mContext);
 
-        mController.updateState(preference);
+        mController.updateState(mPreference);
 
-        assertThat(preference.isChecked()).isTrue();
+        assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
     public void testUpdateState_smartBatteryOff_preferenceUnchecked() {
         putSmartBatteryValue(OFF);
-        final MainSwitchPreference preference = new MainSwitchPreference(mContext);
 
-        mController.updateState(preference);
+        mController.updateState(mPreference);
 
-        assertThat(preference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
     public void testUpdateState_checkPreference_smartBatteryOn() {
-        mController.onSwitchChanged(null, true);
+        mController.onPreferenceChange(mPreference, true);
 
         assertThat(getSmartBatteryValue()).isEqualTo(ON);
     }
 
     @Test
     public void testUpdateState_unCheckPreference_smartBatteryOff() {
-        mController.onSwitchChanged(null, false);
+        mController.onPreferenceChange(mPreference, false);
 
         assertThat(getSmartBatteryValue()).isEqualTo(OFF);
     }
