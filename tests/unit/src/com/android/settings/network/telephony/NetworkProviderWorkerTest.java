@@ -261,24 +261,24 @@ public class NetworkProviderWorkerTest {
     }
 
     @Test
-    public void isEthernetConnected_connectedEthernet_shouldBeTrue() {
+    public void getInternetType_connectedEthernet_returnInternetEthernet() {
         mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_ETHERNET);
 
-        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isTrue();
+        assertThat(mMockNetworkProviderWorker.getInternetType()).isEqualTo(INTERNET_ETHERNET);
     }
 
     @Test
-    public void isEthernetConnected_connectedWifi_shouldBeFalse() {
+    public void getInternetType_connectedWifi_returnInternetWifi() {
         mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_WIFI);
 
-        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isFalse();
+        assertThat(mMockNetworkProviderWorker.getInternetType()).isEqualTo(INTERNET_WIFI);
     }
 
     @Test
-    public void isEthernetConnected_connectedCarrier_shouldBeFalse() {
+    public void getInternetType__connectedCarrier_returnInternetCellular() {
         mMockNetworkProviderWorker.onInternetTypeChanged(INTERNET_CELLULAR);
 
-        assertThat(mMockNetworkProviderWorker.isEthernetConnected()).isFalse();
+        assertThat(mMockNetworkProviderWorker.getInternetType()).isEqualTo(INTERNET_CELLULAR);
     }
 
     public class MockNetworkProviderWorker extends NetworkProviderWorker {

@@ -21,6 +21,7 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import static com.android.settings.slices.CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI;
 
+import android.annotation.ColorInt;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 
@@ -83,9 +85,10 @@ public class ProviderModelSlice extends WifiSlice {
         // Second section:  Add a carrier item.
         // Third section:  Add the Wi-Fi items which are not connected.
         // Fourth section:  If device has connection problem, this row show the message for user.
-        boolean hasEthernet = isEthernetConnected();
+        @InternetUpdater.InternetType int internetType = getInternetType();
         final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
-        if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled() && !hasEthernet) {
+        if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled()
+                && internetType != InternetUpdater.INTERNET_ETHERNET) {
             log("Airplane mode is enabled.");
             return listBuilder.build();
         }
@@ -105,15 +108,17 @@ public class ProviderModelSlice extends WifiSlice {
         log("hasCarrier: " + hasCarrier);
 
         // First section:  Add a Ethernet or Wi-Fi item which state is connected.
+        boolean isConnectedWifiAddedTop = false;
         final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
-        if (hasEthernet) {
+        if (internetType == InternetUpdater.INTERNET_ETHERNET) {
             log("get Ethernet item which is connected");
             listBuilder.addRow(createEthernetRow());
             maxListSize--;
         } else {
-            if (connectedWifiItem != null) {
-                log("get Wi-Fi item which is connected");
+            if (connectedWifiItem != null && internetType == InternetUpdater.INTERNET_WIFI) {
+                log("get Wi-Fi item which is connected to internet");
                 listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
+                isConnectedWifiAddedTop = true;
                 maxListSize--;
             }
         }
@@ -128,7 +133,7 @@ public class ProviderModelSlice extends WifiSlice {
         }
 
         // Third section:  Add the connected Wi-Fi item to Wi-Fi list if the Ethernet is connected.
-        if (connectedWifiItem != null && hasEthernet) {
+        if (connectedWifiItem != null && !isConnectedWifiAddedTop) {
             log("get Wi-Fi item which is connected");
             listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
             maxListSize--;
@@ -222,12 +227,12 @@ public class ProviderModelSlice extends WifiSlice {
         return SliceBackgroundWorker.getInstance(getUri());
     }
 
-    private boolean isEthernetConnected() {
+    private @InternetUpdater.InternetType int getInternetType() {
         final NetworkProviderWorker worker = getWorker();
         if (worker == null) {
-            return false;
+            return InternetUpdater.INTERNET_NETWORKS_AVAILABLE;
         }
-        return worker.isEthernetConnected();
+        return worker.getInternetType();
     }
 
     @VisibleForTesting
@@ -241,6 +246,20 @@ public class ProviderModelSlice extends WifiSlice {
         return rowBuilder
                 .setTitle(mContext.getText(R.string.ethernet))
                 .setSubtitle(mContext.getText(R.string.to_switch_networks_disconnect_ethernet));
+    }
+
+    @Override
+    protected IconCompat getWifiSliceItemLevelIcon(WifiSliceItem wifiSliceItem) {
+        if (wifiSliceItem.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
+                && getInternetType() != InternetUpdater.INTERNET_WIFI) {
+            final @ColorInt int tint = Utils.getColorAttrDefaultColor(mContext,
+                    android.R.attr.colorControlNormal);
+            final Drawable drawable = mContext.getDrawable(
+                    Utils.getWifiIconResource(wifiSliceItem.getLevel()));
+            drawable.setTint(tint);
+            return Utils.createIconWithDrawable(drawable);
+        }
+        return super.getWifiSliceItemLevelIcon(wifiSliceItem);
     }
 
     /**
