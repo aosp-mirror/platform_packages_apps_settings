@@ -104,6 +104,8 @@ public class StorageItemPreferenceControllerTest {
     }
 
     private PreferenceScreen getPreferenceScreen() {
+        final StorageItemPreference publicStorage = spy(new StorageItemPreference(mContext));
+        publicStorage.setIcon(R.drawable.ic_folder_vd_theme_24);
         final StorageItemPreference images = spy(new StorageItemPreference(mContext));
         images.setIcon(R.drawable.ic_photo_library);
         final StorageItemPreference videos = spy(new StorageItemPreference(mContext));
@@ -122,6 +124,8 @@ public class StorageItemPreferenceControllerTest {
         trash.setIcon(R.drawable.ic_trash_can);
 
         final PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PUBLIC_STORAGE_KEY)))
+                .thenReturn(publicStorage);
         when(screen.findPreference(eq(StorageItemPreferenceController.IMAGES_KEY)))
                 .thenReturn(images);
         when(screen.findPreference(eq(StorageItemPreferenceController.VIDEOS_KEY)))
@@ -146,6 +150,24 @@ public class StorageItemPreferenceControllerTest {
     public void testUpdateStateWithInitialState() {
         assertThat(mPreference.getSummary().toString())
             .isEqualTo(mContext.getString(R.string.memory_calculating_size));
+    }
+
+    @Test
+    public void launchPublicStorageIntent_nonNullBrowseIntent_settingsIntent() {
+        final String fakeBrowseAction = "FAKE_BROWSE_ACTION";
+        final Intent fakeBrowseIntent = new Intent(fakeBrowseAction);
+        // mContext is not the activity, add FLAG_ACTIVITY_NEW_TASK to avoid AndroidRuntimeException
+        // during this test.
+        fakeBrowseIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        when(mVolume.buildBrowseIntent()).thenReturn(fakeBrowseIntent);
+        mPreference.setKey(StorageItemPreferenceController.PUBLIC_STORAGE_KEY);
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(argumentCaptor.capture());
+
+        final Intent intent = argumentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(fakeBrowseAction);
     }
 
     @Test
@@ -191,6 +213,7 @@ public class StorageItemPreferenceControllerTest {
 
         mController.setVolume(null);
 
+        assertThat(mController.mPublicStoragePreference.isVisible()).isFalse();
         assertThat(mController.mImagesPreference.isVisible()).isFalse();
         assertThat(mController.mVideosPreference.isVisible()).isFalse();
         assertThat(mController.mAudiosPreference.isVisible()).isFalse();
@@ -347,6 +370,7 @@ public class StorageItemPreferenceControllerTest {
 
         mController.setUserId(new UserHandle(10));
 
+        verify(mController.mPublicStoragePreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mImagesPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mVideosPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mAudiosPreference, times(2)).setIcon(nullable(Drawable.class));
@@ -417,5 +441,27 @@ public class StorageItemPreferenceControllerTest {
         mController.setVolume(mVolume);
 
         assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void setVolume_publicStorage_showFilePreference() {
+        // This will hide it initially.
+        mController.displayPreference(mPreferenceScreen);
+        when(mVolume.getType()).thenReturn(VolumeInfo.TYPE_PUBLIC);
+        when(mVolume.getState()).thenReturn(VolumeInfo.STATE_MOUNTED);
+        when(mVolume.isMountedReadable()).thenReturn(true);
+
+        // And we bring it back.
+        mController.setVolume(mVolume);
+
+        assertThat(mController.mPublicStoragePreference.isVisible()).isTrue();
+        assertThat(mController.mImagesPreference.isVisible()).isFalse();
+        assertThat(mController.mVideosPreference.isVisible()).isFalse();
+        assertThat(mController.mAudiosPreference.isVisible()).isFalse();
+        assertThat(mController.mAppsPreference.isVisible()).isFalse();
+        assertThat(mController.mGamesPreference.isVisible()).isFalse();
+        assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
+        assertThat(mController.mSystemPreference.isVisible()).isFalse();
+        assertThat(mController.mTrashPreference.isVisible()).isFalse();
     }
 }

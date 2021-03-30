@@ -70,6 +70,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private static final String SYSTEM_FRAGMENT_TAG = "SystemInfo";
 
     @VisibleForTesting
+    static final String PUBLIC_STORAGE_KEY = "pref_public_storage";
+    @VisibleForTesting
     static final String IMAGES_KEY = "pref_images";
     @VisibleForTesting
     static final String VIDEOS_KEY = "pref_videos";
@@ -103,8 +105,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private long mUsedBytes;
     private long mTotalSize;
 
-    private List<StorageItemPreference> mStorageItemPreferences;
+    private List<StorageItemPreference> mPrivateStorageItemPreferences;
     private PreferenceScreen mScreen;
+    @VisibleForTesting
+    Preference mPublicStoragePreference;
     @VisibleForTesting
     StorageItemPreference mImagesPreference;
     @VisibleForTesting
@@ -167,6 +171,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             return false;
         }
         switch (preference.getKey()) {
+            case PUBLIC_STORAGE_KEY:
+                launchPublicStorageIntent();
+                return true;
             case IMAGES_KEY:
                 launchImagesIntent();
                 return true;
@@ -210,37 +217,45 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     public void setVolume(VolumeInfo volume) {
         mVolume = volume;
 
-        final boolean isValidVolume = isValidVolume();
-        setCategoryPreferencesVisibility(isValidVolume);
-        if (isValidVolume) {
-            updateCategoryPreferencesOrder();
-        }
+        updateCategoryPreferencesVisibility();
+        updatePrivateStorageCategoryPreferencesOrder();
     }
 
     // Stats data is only available on private volumes.
-    private boolean isValidVolume() {
+    private boolean isValidPrivateVolume() {
         return mVolume != null
                 && mVolume.getType() == VolumeInfo.TYPE_PRIVATE
                 && (mVolume.getState() == VolumeInfo.STATE_MOUNTED
                 || mVolume.getState() == VolumeInfo.STATE_MOUNTED_READ_ONLY);
     }
 
-    private void setCategoryPreferencesVisibility(boolean visible) {
+    private boolean isValidPublicVolume() {
+        return mVolume != null
+                && (mVolume.getType() == VolumeInfo.TYPE_PUBLIC
+                || mVolume.getType() == VolumeInfo.TYPE_STUB)
+                && (mVolume.getState() == VolumeInfo.STATE_MOUNTED
+                || mVolume.getState() == VolumeInfo.STATE_MOUNTED_READ_ONLY);
+    }
+
+    private void updateCategoryPreferencesVisibility() {
         if (mScreen == null) {
             return;
         }
 
-        mImagesPreference.setVisible(visible);
-        mVideosPreference.setVisible(visible);
-        mAudiosPreference.setVisible(visible);
-        mAppsPreference.setVisible(visible);
-        mGamesPreference.setVisible(visible);
-        mDocumentsAndOtherPreference.setVisible(visible);
-        mSystemPreference.setVisible(visible);
+        mPublicStoragePreference.setVisible(isValidPublicVolume());
+
+        final boolean privateStoragePreferencesVisible = isValidPrivateVolume();
+        mImagesPreference.setVisible(privateStoragePreferencesVisible);
+        mVideosPreference.setVisible(privateStoragePreferencesVisible);
+        mAudiosPreference.setVisible(privateStoragePreferencesVisible);
+        mAppsPreference.setVisible(privateStoragePreferencesVisible);
+        mGamesPreference.setVisible(privateStoragePreferencesVisible);
+        mDocumentsAndOtherPreference.setVisible(privateStoragePreferencesVisible);
+        mSystemPreference.setVisible(privateStoragePreferencesVisible);
         // TODO(b/170918505): Shows trash category after trash category feature complete.
         mTrashPreference.setVisible(false);
 
-        if (visible) {
+        if (privateStoragePreferencesVisible) {
             final VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
             // If we don't have a shared volume for our internal storage (or the shared volume isn't
             // mounted as readable for whatever reason), we should hide the File preference.
@@ -250,22 +265,22 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
     }
 
-    private void updateCategoryPreferencesOrder() {
-        if (mScreen == null) {
+    private void updatePrivateStorageCategoryPreferencesOrder() {
+        if (mScreen == null || !isValidPrivateVolume()) {
             return;
         }
 
-        if (mStorageItemPreferences == null) {
-            mStorageItemPreferences = new ArrayList<>();
+        if (mPrivateStorageItemPreferences == null) {
+            mPrivateStorageItemPreferences = new ArrayList<>();
 
-            mStorageItemPreferences.add(mImagesPreference);
-            mStorageItemPreferences.add(mVideosPreference);
-            mStorageItemPreferences.add(mAudiosPreference);
-            mStorageItemPreferences.add(mAppsPreference);
-            mStorageItemPreferences.add(mGamesPreference);
-            mStorageItemPreferences.add(mDocumentsAndOtherPreference);
-            mStorageItemPreferences.add(mSystemPreference);
-            mStorageItemPreferences.add(mTrashPreference);
+            mPrivateStorageItemPreferences.add(mImagesPreference);
+            mPrivateStorageItemPreferences.add(mVideosPreference);
+            mPrivateStorageItemPreferences.add(mAudiosPreference);
+            mPrivateStorageItemPreferences.add(mAppsPreference);
+            mPrivateStorageItemPreferences.add(mGamesPreference);
+            mPrivateStorageItemPreferences.add(mDocumentsAndOtherPreference);
+            mPrivateStorageItemPreferences.add(mSystemPreference);
+            mPrivateStorageItemPreferences.add(mTrashPreference);
         }
         mScreen.removePreference(mImagesPreference);
         mScreen.removePreference(mVideosPreference);
@@ -277,10 +292,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mScreen.removePreference(mTrashPreference);
 
         // Sort display order by size.
-        Collections.sort(mStorageItemPreferences,
+        Collections.sort(mPrivateStorageItemPreferences,
                 Comparator.comparingLong(StorageItemPreference::getStorageSize));
         int orderIndex = LAST_STORAGE_CATEGORY_PREFERENCE_ORDER;
-        for (StorageItemPreference preference : mStorageItemPreferences) {
+        for (StorageItemPreference preference : mPrivateStorageItemPreferences) {
             preference.setOrder(orderIndex--);
             mScreen.addPreference(preference);
         }
@@ -292,6 +307,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     public void setUserId(UserHandle userHandle) {
         mUserId = userHandle.getIdentifier();
 
+        tintPreference(mPublicStoragePreference);
         tintPreference(mImagesPreference);
         tintPreference(mVideosPreference);
         tintPreference(mAudiosPreference);
@@ -320,6 +336,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mScreen = screen;
+        mPublicStoragePreference = screen.findPreference(PUBLIC_STORAGE_KEY);
         mImagesPreference = screen.findPreference(IMAGES_KEY);
         mVideosPreference = screen.findPreference(VIDEOS_KEY);
         mAudiosPreference = screen.findPreference(AUDIOS_KEY);
@@ -329,11 +346,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mSystemPreference = screen.findPreference(SYSTEM_KEY);
         mTrashPreference = screen.findPreference(TRASH_KEY);
 
-        final boolean isValidVolume = isValidVolume();
-        setCategoryPreferencesVisibility(isValidVolume);
-        if (isValidVolume) {
-            updateCategoryPreferencesOrder();
-        }
+        updateCategoryPreferencesVisibility();
+        updatePrivateStorageCategoryPreferencesOrder();
     }
 
     public void onLoadFinished(SparseArray<StorageAsyncLoader.AppsStorageResult> result,
@@ -371,7 +385,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             mSystemPreference.setStorageSize(systemSize, mTotalSize);
         }
 
-        updateCategoryPreferencesOrder();
+        updatePrivateStorageCategoryPreferencesOrder();
     }
 
     public void setUsedSize(long usedSizeBytes) {
@@ -380,6 +394,13 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     public void setTotalSize(long totalSizeBytes) {
         mTotalSize = totalSizeBytes;
+    }
+
+    private void launchPublicStorageIntent() {
+        final Intent intent = mVolume.buildBrowseIntent();
+        if (intent != null) {
+            mContext.startActivity(intent);
+        }
     }
 
     // TODO(b/183078080): To simplify StorageItemPreferenceController, move launchxxxIntent to a
