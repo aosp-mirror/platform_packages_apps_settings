@@ -105,7 +105,8 @@ public class BatterySaverControllerTest {
                 Settings.Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
 
-        assertThat(mBatterySaverController.getSummary()).isEqualTo("Based on your routine");
+        assertThat(mBatterySaverController.getSummary()).
+                isEqualTo("Will turn on based on your routine");
     }
 
     @Test
