@@ -63,7 +63,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
-import com.android.settings.location.LocationServices;
+import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.MainSwitchBarController;
@@ -921,8 +921,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 : getText(R.string.wifi_scan_notify_text_scanning_off);
         final LinkifyUtils.OnClickListener clickListener =
                 () -> new SubSettingLauncher(getContext())
-                        .setDestination(LocationServices.class.getName())
-                        .setTitleRes(R.string.location_services_screen_title)
+                        .setDestination(WifiScanningFragment.class.getName())
+                        .setTitleRes(R.string.location_scanning_wifi_always_scanning_title)
                         .setSourceMetricsCategory(getMetricsCategory())
                         .launch();
         mStatusMessagePreference.setText(title, description, clickListener);

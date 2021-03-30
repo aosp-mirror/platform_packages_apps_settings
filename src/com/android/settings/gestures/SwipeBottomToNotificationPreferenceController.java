@@ -16,14 +16,8 @@
 
 package com.android.settings.gestures;
 
-import static android.provider.Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED;
-
-import static com.android.settings.gestures.OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE;
 
 import android.content.Context;
-import android.os.SystemProperties;
-import android.provider.Settings;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -33,32 +27,20 @@ import com.android.settings.core.TogglePreferenceController;
  **/
 public class SwipeBottomToNotificationPreferenceController extends TogglePreferenceController {
 
-    private static final int ON = 1;
-    private static final int OFF = 0;
-
     private static final String PREF_KEY = "gesture_swipe_bottom_to_notification";
 
     public SwipeBottomToNotificationPreferenceController(Context context, String key) {
         super(context, key);
     }
 
-    /** Indicates whether the gesture is available or not. */
-    public static boolean isGestureAvailable(Context context) {
-        // Disable the gesture once One-Handed mode gesture enabled.
-        if (SystemProperties.getBoolean(SUPPORT_ONE_HANDED_MODE, false)) {
-            return !OneHandedSettingsUtils.isOneHandedModeEnabled(context);
-        }
-        return true;
-    }
-
     @Override
     public int getAvailabilityStatus() {
-        return isGestureAvailable(mContext) ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+        return OneHandedSettingsUtils.isSupportOneHandedMode() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), PREF_KEY);
+        return true;
     }
 
     @Override
@@ -68,15 +50,16 @@ public class SwipeBottomToNotificationPreferenceController extends TogglePrefere
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, isChecked ? ON : OFF);
+        if (isChecked) {
+            OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+        }
+        OneHandedSettingsUtils.setSwipeDownNotificationEnabled(mContext, isChecked);
         return true;
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, ON) == ON;
+        return OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext);
     }
 
     @Override

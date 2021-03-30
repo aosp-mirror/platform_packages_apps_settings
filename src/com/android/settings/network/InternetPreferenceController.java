@@ -75,7 +75,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     private static Map<Integer, Integer> sSummaryMap = new HashMap<>();
     static {
         sSummaryMap.put(INTERNET_OFF, R.string.condition_airplane_title);
-        sSummaryMap.put(INTERNET_NETWORKS_AVAILABLE, R.string.disconnected);
+        sSummaryMap.put(INTERNET_NETWORKS_AVAILABLE, R.string.networks_available);
         sSummaryMap.put(INTERNET_WIFI, 0);
         sSummaryMap.put(INTERNET_CELLULAR, 0);
         sSummaryMap.put(INTERNET_ETHERNET, R.string.to_switch_networks_disconnect_ethernet);

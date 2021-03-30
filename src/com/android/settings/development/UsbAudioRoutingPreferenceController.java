@@ -83,4 +83,11 @@ public class UsbAudioRoutingPreferenceController extends DeveloperOptionsPrefere
                 Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(false);
     }
+
+    @Override
+    protected void onDeveloperOptionsSwitchEnabled() {
+        super.onDeveloperOptionsSwitchEnabled();
+        mPreference.setDisabledByAdmin(
+                checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
+    }
 }

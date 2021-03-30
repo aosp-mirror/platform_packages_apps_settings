@@ -38,7 +38,17 @@
     <PreferenceCategory
         android:key="location_advanced_settings"
         android:layout="@layout/preference_category_no_label"
-        settings:initialExpandedChildrenCount="2">
+        settings:initialExpandedChildrenCount="3">
+
+        <!-- This preference gets removed if there is no managed profile -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:enabled="false"
+            android:key="managed_profile_location_switch"
+            android:selectable="true"
+            android:title="@string/managed_profile_location_switch_title"
+            settings:controller="com.android.settings.location.LocationForWorkPreferenceController"
+            settings:forWork="true"
+            settings:useAdminDisabledSummary="true"/>
 
         <!-- This preference category gets removed if new_recent_location_ui is disabled -->
         <Preference
@@ -57,28 +67,10 @@
             android:title="@string/location_services_screen_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
-        <!-- This preference gets removed if there is no managed profile -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:enabled="false"
-            android:key="managed_profile_location_switch"
-            android:selectable="true"
-            android:title="@string/managed_profile_location_switch_title"
-            settings:controller="com.android.settings.location.LocationForWorkPreferenceController"
-            settings:forWork="true"
-            settings:useAdminDisabledSummary="true"/>
-
-        <!-- This preference gets removed if there is no managed profile -->
-        <PreferenceCategory
-            android:key="location_services_managed_profile"
-            android:title="@string/managed_profile_location_services"
-            settings:forWork="true"
-            settings:controller="com.android.settings.location.LocationInjectedServicesForWorkPreferenceController"/>
-
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/location_settings_footer"
         android:key="location_footer"
-        android:layout="@layout/preference_category_no_label"
-        settings:allowDividerAbove="false"
-        settings:controller="com.android.settings.location.LocationFooterPreferenceController"/>
+        android:selectable="false"/>
 </PreferenceScreen>

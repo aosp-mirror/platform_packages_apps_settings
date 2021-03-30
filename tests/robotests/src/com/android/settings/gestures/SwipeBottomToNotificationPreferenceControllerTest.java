@@ -16,10 +16,7 @@
 
 package com.android.settings.gestures;
 
-import static android.provider.Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED;
-
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -28,6 +25,7 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,41 +55,30 @@ public class SwipeBottomToNotificationPreferenceControllerTest {
     public void setChecked_toggledOn_enablesSwipeBottomToNotification() {
         mController.setChecked(true);
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, 1)).isEqualTo(1);
+        assertThat(OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext)).isTrue();
+        assertThat(OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)).isFalse();
     }
 
     @Test
     public void setChecked_toggledOff_disablesSwipeBottomToNotification() {
         mController.setChecked(false);
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, 1)).isEqualTo(0);
+        assertThat(OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext)).isFalse();
     }
 
     @Test
-    public void getAvailabilityStatus_oneHandedUnsupported_returnsAvailable() {
-        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "false");
+    public void getAvailabilityStatus_oneHandedUnsupported_returnsUnsupport() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "false");
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_oneHandedSupported_returnsAvailable() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_oneHandedDisabled_returnsAvailable() {
-        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "true");
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_ENABLED, 0);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_oneHandedEnabled_returnsDisabled() {
-        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "true");
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_ENABLED, 1);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
     @Test
@@ -108,5 +95,14 @@ public class SwipeBottomToNotificationPreferenceControllerTest {
 
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getText(R.string.gesture_setting_off));
+    }
+
+    @Test
+    public void isChecked_getDefaultConfig_returnFalse() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "false");
+        Settings.Secure.resetToDefaults(mContext.getContentResolver(),
+                Settings.Secure.ONE_HANDED_MODE_ENABLED);
+
+        assertThat(mController.isChecked()).isFalse();
     }
 }

@@ -65,13 +65,6 @@ public class LowBatteryTipTest {
     }
 
     @Test
-    public void getSummary_tipHandled_showSummary() {
-        mLowBatteryTip.mState = BatteryTip.StateType.HANDLED;
-
-        assertThat(mLowBatteryTip.getSummary(mContext)).isEqualTo("Some features may be limited");
-    }
-
-    @Test
     public void getSummary_tipNew_showSummary() {
         mLowBatteryTip.mState = BatteryTip.StateType.NEW;
 

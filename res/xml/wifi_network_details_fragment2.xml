@@ -101,6 +101,11 @@
             android:key="ip_details_category"
             android:title="@string/wifi_setup_detail">
         <Preference
+                android:key="type"
+                android:title="@string/wifi_type_title"
+                android:selectable="false"
+                settings:enableCopying="true"/>
+        <Preference
                 android:key="ssid"
                 android:title="@string/wifi_advanced_ssid_title"
                 android:selectable="false"

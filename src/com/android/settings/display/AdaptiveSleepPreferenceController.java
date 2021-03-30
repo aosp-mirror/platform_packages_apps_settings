@@ -60,7 +60,6 @@ public class AdaptiveSleepPreferenceController {
         mPreference = new RestrictedSwitchPreference(context);
         mPreference.setTitle(R.string.adaptive_sleep_title);
         mPreference.setSummary(R.string.adaptive_sleep_description);
-        mPreference.setIcon(R.drawable.empty_icon);
         mPreference.setChecked(isChecked());
         mPreference.setKey(PREFERENCE_KEY);
         mPreference.setOnPreferenceClickListener(preference -> {

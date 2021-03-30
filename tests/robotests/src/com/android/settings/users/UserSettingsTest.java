@@ -34,6 +34,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -61,6 +62,7 @@ import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
@@ -111,6 +113,8 @@ public class UserSettingsTest {
     private RestrictedPreference mAddGuestPreference;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     private FragmentActivity mActivity;
     private Context mContext;
@@ -134,6 +138,7 @@ public class UserSettingsTest {
         ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
         ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
         ReflectionHelpers.setField(mFragment, "mAddingUser", false);
+        ReflectionHelpers.setField(mFragment, "mMetricsFeatureProvider", mMetricsFeatureProvider);
 
         doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
 
@@ -616,6 +621,7 @@ public class UserSettingsTest {
                 .isEqualTo(createdGuest.id);
         assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false))
                 .isEqualTo(true);
+        verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_USER_GUEST_ADD));
     }
 
     @Test

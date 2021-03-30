@@ -59,6 +59,7 @@ public class DateTimeSettings extends DashboardFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
         getSettingsLifecycle().addObserver(new TimeChangeListenerMixin(context, this));
+        use(LocationTimeZoneDetectionPreferenceController.class).setFragment(this);
     }
 
     @Override
@@ -77,6 +78,7 @@ public class DateTimeSettings extends DashboardFragment implements
         final AutoTimeFormatPreferenceController autoTimeFormatPreferenceController =
                 new AutoTimeFormatPreferenceController(
                         activity, this /* UpdateTimeAndDateCallback */);
+
         controllers.add(autoTimeZonePreferenceController);
         controllers.add(autoTimePreferenceController);
         controllers.add(autoTimeFormatPreferenceController);
