@@ -73,8 +73,8 @@ public class WifiTetherSwitchBarController implements
         mSwitch = mSwitchBar.getSwitch();
         mDataSaverBackend = new DataSaverBackend(context);
         mConnectivityManager =
-                context.getSystemService(ConnectivityManager.class);
-        mWifiManager = context.getSystemService(WifiManager.class);
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mSwitchBar.setChecked(mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED);
         updateWifiSwitch();
     }

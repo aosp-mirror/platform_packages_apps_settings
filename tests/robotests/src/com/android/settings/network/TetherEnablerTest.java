@@ -95,10 +95,10 @@ public class TetherEnablerTest {
         AtomicReference<BluetoothPan> panReference = spy(AtomicReference.class);
         mSwitchBar = spy(new SwitchBar(context));
         mSwitchWidgetController = spy(new SwitchBarController(mSwitchBar));
-        when(context.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
-        when(context.getSystemService(ConnectivityManager.class)).thenReturn(
+        when(context.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
+        when(context.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
-        when(context.getSystemService(TetheringManager.class)).thenReturn(mTetheringManager);
+        when(context.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(context.getSystemService(Context.NETWORK_POLICY_SERVICE)).thenReturn(
                 mNetworkPolicyManager);
         when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[0]);
