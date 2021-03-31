@@ -83,7 +83,7 @@ public class WifiUtils {
         final DevicePolicyManager dpm =
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         final PackageManager pm = context.getPackageManager();
-        final UserManager um = context.getSystemService(UserManager.class);
+        final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
 
         // Check if device has DPM capability. If it has and dpm is still null, then we
         // treat this case with suspicion and bail out.
