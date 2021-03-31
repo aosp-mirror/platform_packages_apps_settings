@@ -230,6 +230,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     }
 
     private boolean isValidPublicVolume() {
+        // Stub volume is a volume that is maintained by external party such as the ChromeOS
+        // processes in ARC++.
         return mVolume != null
                 && (mVolume.getType() == VolumeInfo.TYPE_PUBLIC
                 || mVolume.getType() == VolumeInfo.TYPE_STUB)
