@@ -64,13 +64,14 @@
         <Preference
             android:fragment="com.android.settings.location.LocationServices"
             android:key="location_services"
-            android:title="@string/location_services_screen_title"
+            android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
-        android:title="@string/location_settings_footer"
+        android:title="@string/location_settings_footer_location_on"
         android:key="location_footer"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:controller="com.android.settings.location.LocationSettingsFooterPreferenceController"/>
 </PreferenceScreen>
