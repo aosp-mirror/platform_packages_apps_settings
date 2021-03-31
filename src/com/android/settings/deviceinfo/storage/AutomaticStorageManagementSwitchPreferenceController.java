@@ -26,6 +26,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -66,6 +67,9 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
+        if (!mContext.getResources().getBoolean(R.bool.config_show_smart_storage_toggle)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return !ActivityManager.isLowRamDeviceStatic() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 

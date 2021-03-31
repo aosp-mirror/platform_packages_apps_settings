@@ -69,7 +69,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final WifiManager wifiManager = getSystemService(WifiManager.class);
+        final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new WifiP2pPreferenceController(context, getSettingsLifecycle(),
                 wifiManager));

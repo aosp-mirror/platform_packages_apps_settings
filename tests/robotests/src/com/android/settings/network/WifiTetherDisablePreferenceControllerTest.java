@@ -100,7 +100,7 @@ public class WifiTetherDisablePreferenceControllerTest {
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         mPreference = spy(SwitchPreference.class);
-        when(mContext.getSystemService(TetheringManager.class)).thenReturn(mTetheringManager);
+        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{""});
         mController = new WifiTetherDisablePreferenceController(mContext, WIFI_TETHER_DISABLE_KEY);
         mController.setTetherEnabler(mTetherEnabler);

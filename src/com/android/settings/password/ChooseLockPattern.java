@@ -32,6 +32,7 @@ import android.util.Pair;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
@@ -508,6 +509,12 @@ public class ChooseLockPattern extends SettingsActivity {
                 Bundle savedInstanceState) {
             final GlifLayout layout = (GlifLayout) inflater.inflate(
                     R.layout.choose_lock_pattern, container, false);
+            switch(getContext().getDisplay().getRotation()) {
+                case Surface.ROTATION_90:
+                case Surface.ROTATION_270:
+                    layout.setLandscapeHeaderAreaVisible(false /* visible */);
+                    break;
+            }
             layout.setHeaderText(getActivity().getTitle());
             if (getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
                 View iconView = layout.findViewById(R.id.sud_layout_icon);

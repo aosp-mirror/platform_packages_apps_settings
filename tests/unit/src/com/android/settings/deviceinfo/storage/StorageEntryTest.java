@@ -209,6 +209,24 @@ public class StorageEntryTest {
     }
 
     @Test
+    public void isPublic_prublicVolume_shouldReturnTrue() {
+        final VolumeInfo publicVolumeInfo = mock(VolumeInfo.class);
+        final StorageEntry publicStorage = new StorageEntry(mContext, publicVolumeInfo);
+        when(publicVolumeInfo.getType()).thenReturn(VolumeInfo.TYPE_PUBLIC);
+
+        assertThat(publicStorage.isPublic()).isTrue();
+    }
+
+    @Test
+    public void isStub_stubVolume_shouldReturnTrue() {
+        final VolumeInfo stubVolumeInfo = mock(VolumeInfo.class);
+        final StorageEntry stubStorage = new StorageEntry(mContext, stubVolumeInfo);
+        when(stubVolumeInfo.getType()).thenReturn(VolumeInfo.TYPE_STUB);
+
+        assertThat(stubStorage.isStub()).isTrue();
+    }
+
+    @Test
     public void isPrivate_nonVolumeInfo_shouldReturnFalse() {
         final DiskInfo diskInfo = mock(DiskInfo.class);
         final StorageEntry diskStorage = new StorageEntry(diskInfo);

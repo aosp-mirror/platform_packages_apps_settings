@@ -63,7 +63,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
             boolean initSoftApManager) {
         super(context);
         mTetheringManager = context.getSystemService(TetheringManager.class);
-        mWifiManager = context.getSystemService(WifiManager.class);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mWifiRegexs = mTetheringManager.getTetherableWifiRegexs();
         mLifecycle = lifecycle;
         if (lifecycle != null) {
