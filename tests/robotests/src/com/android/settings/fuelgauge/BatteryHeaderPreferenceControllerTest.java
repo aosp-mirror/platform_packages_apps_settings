@@ -139,7 +139,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setTotalSummary(mBatteryInfo.remainingLabel);
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(mBatteryInfo.remainingLabel);
     }
 
     @Test
@@ -151,7 +151,7 @@ public class BatteryHeaderPreferenceControllerTest {
         mController.updateHeaderPreference(mBatteryInfo);
 
         verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
-        verify(mBatteryUsageProgressBarPref).setTotalSummary(mBatteryInfo.remainingLabel);
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(mBatteryInfo.remainingLabel);
         verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
     }
 
@@ -162,7 +162,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setTotalSummary(BATTERY_STATUS);
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(BATTERY_STATUS);
     }
 
     @Test
@@ -171,7 +171,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setTotalSummary(null);
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(null);
     }
 
     @Test
