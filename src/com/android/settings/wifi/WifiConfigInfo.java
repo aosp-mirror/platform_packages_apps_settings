@@ -38,7 +38,7 @@ public class WifiConfigInfo extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mWifiManager = getSystemService(WifiManager.class);
+        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         setContentView(R.layout.wifi_config_info);
         mConfigList = (TextView) findViewById(R.id.config_list);
     }
