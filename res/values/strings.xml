@@ -6562,6 +6562,11 @@
     <string name="certificate_management_app_description">Certificates installed by this app identify you to the apps and URLs below</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
     <string name="remove_credential_management_app">Remove</string>
+    <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
+    <plurals name="number_of_urls">
+        <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
+        <item quantity="other"><xliff:g id="number">%d</xliff:g> URLs</item>
+    </plurals>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
