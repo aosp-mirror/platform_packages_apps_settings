@@ -43,6 +43,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.View;
 
@@ -105,6 +106,7 @@ public class WifiSettingsTest {
         mWifiSettings.mConfigureWifiSettingsPreference = new Preference(mContext);
         mWifiSettings.mWifiPickerTracker = mMockWifiPickerTracker;
         mWifiSettings.mWifiManager = mWifiManager;
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
     }
 
     @Test
@@ -209,7 +211,7 @@ public class WifiSettingsTest {
         final Resources.Theme theme = mContext.getTheme();
         when(activity.getTheme()).thenReturn(theme);
         UserManager userManager = mock(UserManager.class);
-        when(activity.getSystemService(UserManager.class))
+        when(activity.getSystemService(Context.USER_SERVICE))
                 .thenReturn(userManager);
 
         when(mWifiSettings.findPreference(WifiSettings.PREF_KEY_DATA_USAGE))

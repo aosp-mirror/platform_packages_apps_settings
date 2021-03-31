@@ -44,6 +44,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -131,6 +132,7 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.mResetInternetPreference = mResetInternetPreference;
         mNetworkProviderSettings.mAirplaneModeMsgPreference = mAirplaneModeMsgPreference;
         mNetworkProviderSettings.mAirplaneModeEnabler = mAirplaneModeEnabler;
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
     }
 
     @Test

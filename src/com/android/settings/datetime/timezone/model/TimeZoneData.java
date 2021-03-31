@@ -71,7 +71,7 @@ public class TimeZoneData {
         Set<String> regionIds = new ArraySet<>();
         for (CountryTimeZones countryTimeZone : countryTimeZones) {
             FilteredCountryTimeZones filteredZones = new FilteredCountryTimeZones(countryTimeZone);
-            if (filteredZones.getTimeZoneIds().contains(tzId)) {
+            if (filteredZones.matches(tzId)) {
                 regionIds.add(filteredZones.getRegionId());
             }
         }

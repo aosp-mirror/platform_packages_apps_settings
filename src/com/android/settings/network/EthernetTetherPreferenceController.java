@@ -43,7 +43,7 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
         super(context, preferenceKey);
         mEthernetRegex = context.getString(
                 com.android.internal.R.string.config_ethernet_iface_regex);
-        mEthernetManager = context.getSystemService(EthernetManager.class);
+        mEthernetManager = (EthernetManager) context.getSystemService(Context.ETHERNET_SERVICE);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
