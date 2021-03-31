@@ -684,10 +684,21 @@
     </plurals>
     <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
     <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
-    <!-- Location settings footer warning text [CHAR LIMIT=NONE] -->
-    <string name="location_settings_footer">
+    <!-- Location settings footer warning text when location is on [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer_location_on">
         Location may use sources like GPS, Wi\u2011Fi, mobile networks, and sensors to help estimate
-        your device\u2019s location.
+        your device\u2019s location. Apps with the nearby devices permission can determine the
+        relative position of connected devices.
+        &lt;a href="<xliff:g example="http://www.google.com" id="url">
+        https://support.google.com/android/answer/3467281</xliff:g>">Learn more&lt;/a>.
+    </string>
+    <!-- Location settings footer warning text when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer_location_off">
+        Location access is off for apps and services. Your device location may still be sent to
+        emergency responders when you call or text an emergency number.
+
+        &lt;br>&lt;br>Apps with the nearby devices permission can determine the relative position of
+        connected devices.
     </string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
@@ -4090,7 +4101,7 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">Manage location permissions</string>
+    <string name="location_app_level_permissions">App location permissions</string>
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
     <!--
@@ -4138,6 +4149,8 @@
     <string name="location_scanning_bluetooth_always_scanning_title">Bluetooth scanning</string>
     <!-- Description text for Bluetooth always scanning -->
     <string name="location_scanning_bluetooth_always_scanning_description">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
+    <!-- [CHAR LIMIT=60] Location Services preference title -->
+    <string name="location_services_preference_title">Manage location services</string>
     <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
     <string name="location_services_screen_title">Location Services</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
