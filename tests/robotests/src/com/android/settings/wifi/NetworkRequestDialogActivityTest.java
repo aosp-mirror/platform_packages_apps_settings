@@ -78,7 +78,7 @@ public class NetworkRequestDialogActivityTest {
         mActivity = spy(activity);
 
         mWifiManager = mock(WifiManager.class);
-        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(mActivity.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
     }
 
     @Test

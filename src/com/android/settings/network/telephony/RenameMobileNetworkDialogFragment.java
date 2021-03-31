@@ -212,8 +212,8 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            final LayoutInflater inflater =
-                    mContext.getSystemService(LayoutInflater.class);
+            final LayoutInflater inflater = (LayoutInflater)
+                    mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             if (convertView == null) {
                 convertView = inflater.inflate(mItemResId, null);

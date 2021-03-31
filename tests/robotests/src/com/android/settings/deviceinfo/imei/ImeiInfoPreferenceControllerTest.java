@@ -181,8 +181,8 @@ public class ImeiInfoPreferenceControllerTest {
 
         mController.copy();
 
-        final ClipboardManager clipboard = mContext.getSystemService(
-                ClipboardManager.class);
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
         final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
         assertThat(data.toString()).isEqualTo(meid);
     }

@@ -49,7 +49,7 @@ public class ChangeWifiStateDetails extends AppInfoWithHeader
         super.onCreate(savedInstanceState);
         final Context context = getActivity();
         mAppBridge = new AppStateChangeWifiStateBridge(context, mState, null);
-        mAppOpsManager = context.getSystemService(AppOpsManager.class);
+        mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
 
         // find preferences
         addPreferencesFromResource(R.xml.change_wifi_state_details);
