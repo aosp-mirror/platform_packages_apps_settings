@@ -85,7 +85,7 @@ public class BatteryFixSliceTest {
     @Test
     public void refreshBatteryTips_hasImportantTip_shouldReturnTrue() {
         final List<BatteryTip> tips = new ArrayList<>();
-        tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
+        tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false));
         tips.add(new EarlyWarningTip(BatteryTip.StateType.NEW, false));
         ShadowBatteryTipLoader.setBatteryTips(tips);
 
@@ -102,7 +102,7 @@ public class BatteryFixSliceTest {
                 .setPackageName("com.android.settings")
                 .setScreenOnTimeMs(10000L)
                 .build());
-        tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
+        tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false));
         tips.add(new EarlyWarningTip(BatteryTip.StateType.HANDLED, false));
         tips.add(new HighUsageTip(1000L, appList));
         ShadowBatteryTipLoader.setBatteryTips(tips);
