@@ -143,8 +143,8 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                     if (admin == null) {
                         final DevicePolicyManager dpm = (DevicePolicyManager)
                                 getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
-                        final UserManager um =
-                                getContext().getSystemService(UserManager.class);
+                        final UserManager um = (UserManager)
+                                getContext().getSystemService(Context.USER_SERVICE);
                         final int profileOwnerUserId = Utils.getManagedProfileId(
                                 um, UserHandle.myUserId());
                         if (profileOwnerUserId != UserHandle.USER_NULL) {

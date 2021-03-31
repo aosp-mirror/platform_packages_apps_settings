@@ -86,6 +86,7 @@ public class AppLaunchSettings extends AppInfoBase implements
 
     private ClearDefaultsPreference mClearDefaultsPreference;
     private MainSwitchPreference mMainSwitchPreference;
+    private Preference mAddLinkPreference;
     private PreferenceCategory mMainPreferenceCategory;
     private PreferenceCategory mSelectedLinksPreferenceCategory;
     private PreferenceCategory mOtherDefaultsPreferenceCategory;
@@ -155,6 +156,7 @@ public class AppLaunchSettings extends AppInfoBase implements
             }
             setDomainVerificationUserSelection(userState.getIdentifier(), domainSet, /* enabled= */
                     false);
+            mAddLinkPreference.setEnabled(isAddLinksNotEmpty());
         }
         return true;
     }
@@ -209,8 +211,8 @@ public class AppLaunchSettings extends AppInfoBase implements
         initMainSwitchAndCategories();
         if (canUpdateMainSwitchAndCategories()) {
             initVerifiedLinksPreference();
-            addSelectedLinksPreference();
             initAddLinkPreference();
+            addSelectedLinksPreference();
             initFooter();
         }
     }
@@ -293,7 +295,7 @@ public class AppLaunchSettings extends AppInfoBase implements
     }
 
     /** Add selected links items */
-    public void addSelectedLinksPreference() {
+    void addSelectedLinksPreference() {
         if (getLinksNumber(DOMAIN_STATE_SELECTED) == 0) {
             return;
         }
@@ -303,22 +305,25 @@ public class AppLaunchSettings extends AppInfoBase implements
         for (String host : selectedLinks) {
             generateCheckBoxPreference(mSelectedLinksPreferenceCategory, host);
         }
+        mAddLinkPreference.setEnabled(isAddLinksNotEmpty());
     }
 
     /** Initialize add link preference */
     private void initAddLinkPreference() {
-        final Preference addLinkPreference = findPreference(ADD_LINK_PREF_KEY);
-        if (addLinkPreference != null) {
-            addLinkPreference.setEnabled(getLinksNumber(DOMAIN_STATE_NONE) > 0);
-            addLinkPreference.setOnPreferenceClickListener(preference -> {
-                final int stateNoneLinksNo = getLinksNumber(DOMAIN_STATE_NONE);
-                IntentPickerUtils.logd("The number of the state none links: " + stateNoneLinksNo);
-                if (stateNoneLinksNo > 0) {
-                    showProgressDialogFragment();
-                }
-                return true;
-            });
-        }
+        mAddLinkPreference = findPreference(ADD_LINK_PREF_KEY);
+        mAddLinkPreference.setEnabled(isAddLinksNotEmpty());
+        mAddLinkPreference.setOnPreferenceClickListener(preference -> {
+            final int stateNoneLinksNo = getLinksNumber(DOMAIN_STATE_NONE);
+            IntentPickerUtils.logd("The number of the state none links: " + stateNoneLinksNo);
+            if (stateNoneLinksNo > 0) {
+                showProgressDialogFragment();
+            }
+            return true;
+        });
+    }
+
+    private boolean isAddLinksNotEmpty() {
+        return getLinksNumber(DOMAIN_STATE_NONE) > 0;
     }
 
     private void showProgressDialogFragment() {

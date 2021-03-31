@@ -142,13 +142,13 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
     private NetworkCallback mNetworkCallback = new NetworkCallback() {
         public void onCapabilitiesChanged(@NonNull Network network,
                 @NonNull NetworkCapabilities networkCapabilities) {
-            checkNetworkCapabilities(networkCapabilities);
+            updateInternetAvailable(networkCapabilities);
         }
 
         @Override
         public void onLost(@NonNull Network network) {
             mInternetAvailable = false;
-            update();
+            updateInternetType();
         }
     };
 
@@ -203,7 +203,7 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
         Network activeNetwork = mConnectivityManager.getActiveNetwork();
         if (activeNetwork == null) {
             mInternetAvailable = false;
-            update();
+            updateInternetType();
             return;
         }
 
@@ -211,36 +211,34 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
                 mConnectivityManager.getNetworkCapabilities(activeNetwork);
         if (activeNetworkCapabilities == null) {
             mInternetAvailable = false;
-            update();
+            updateInternetType();
             return;
         }
 
-        checkNetworkCapabilities(activeNetworkCapabilities);
-    }
-
-    private void checkNetworkCapabilities(@NonNull NetworkCapabilities networkCapabilities) {
-        if (!networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
-            mInternetAvailable = false;
-            update();
-            return;
-        }
-
-        boolean internetAvailable = false;
-        for (int transport : networkCapabilities.getTransportTypes()) {
-            if (sTransportMap.containsKey(transport)) {
-                mTransport = transport;
-                internetAvailable = true;
-                Log.i(TAG, "Detect an internet capability network with transport type: "
-                        + mTransport);
-                break;
-            }
-        }
-        mInternetAvailable = internetAvailable;
-        update();
+        updateInternetAvailable(activeNetworkCapabilities);
     }
 
     @VisibleForTesting
-    void update() {
+    void updateInternetAvailable(@NonNull NetworkCapabilities capabilities) {
+        boolean internetAvailable = false;
+        if (capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
+            for (int transport : capabilities.getTransportTypes()) {
+                if (sTransportMap.containsKey(transport)) {
+                    mTransport = transport;
+                    internetAvailable = true;
+                    Log.i(TAG, "Detect an internet available network with transport type: "
+                            + mTransport);
+                    break;
+                }
+            }
+        }
+        mInternetAvailable = internetAvailable;
+        updateInternetType();
+    }
+
+    @VisibleForTesting
+    void updateInternetType() {
         @InternetType int internetType = INTERNET_NETWORKS_AVAILABLE;
         if (mInternetAvailable) {
             internetType = sTransportMap.get(mTransport);
