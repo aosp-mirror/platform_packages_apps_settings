@@ -140,6 +140,6 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
 
     @VisibleForTesting
     NetworkScoreManager createNetworkScorerManager(Context context) {
-        return context.getSystemService(NetworkScoreManager.class);
+        return (NetworkScoreManager) context.getSystemService(Context.NETWORK_SCORE_SERVICE);
     }
 }

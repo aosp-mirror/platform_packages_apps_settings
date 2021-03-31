@@ -194,7 +194,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
         super.onCreate(icicle);
         final Context context = getContext();
-        mUserManager = context.getSystemService(UserManager.class);
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
 
