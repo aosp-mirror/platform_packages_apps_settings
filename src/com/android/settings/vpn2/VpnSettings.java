@@ -116,9 +116,9 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mUserManager = getSystemService(UserManager.class);
-        mConnectivityManager = getSystemService(ConnectivityManager.class);
-        mVpnManager = getSystemService(VpnManager.class);
+        mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        mVpnManager = (VpnManager) getSystemService(Context.VPN_MANAGEMENT_SERVICE);
 
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
@@ -511,7 +511,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         }
 
         // Fetch VPN-enabled apps from AppOps.
-        AppOpsManager aom = context.getSystemService(AppOpsManager.class);
+        AppOpsManager aom = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         List<AppOpsManager.PackageOps> apps =
                 aom.getPackagesForOps(new int[] {OP_ACTIVATE_VPN, OP_ACTIVATE_PLATFORM_VPN});
         if (apps != null) {

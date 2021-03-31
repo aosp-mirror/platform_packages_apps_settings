@@ -319,7 +319,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     @VisibleForTesting
     static boolean appHasVpnPermission(Context context, @NonNull ApplicationInfo application) {
         final AppOpsManager service =
-                context.getSystemService(AppOpsManager.class);
+                (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         final List<AppOpsManager.PackageOps> ops = service.getOpsForPackage(application.uid,
                 application.packageName, new int[]{OP_ACTIVATE_VPN, OP_ACTIVATE_PLATFORM_VPN});
         return !ArrayUtils.isEmpty(ops);

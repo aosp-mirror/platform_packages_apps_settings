@@ -74,7 +74,7 @@ public class MobileDataPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
-        doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
+        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
 
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);

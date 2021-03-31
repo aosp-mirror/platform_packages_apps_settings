@@ -16,11 +16,15 @@
 
 package com.android.settings.datetime.timezone.model;
 
+import android.util.ArraySet;
+
 import com.android.i18n.timezone.CountryTimeZones;
 
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 /**
  * Wrap {@class CountryTimeZones} to filter time zone that are shown in the picker.
@@ -39,29 +43,44 @@ public class FilteredCountryTimeZones {
      * a timestamp known to be in the recent past is used. This should be updated occasionally but
      * it doesn't have to be very often.
      */
-    private static final long MIN_USE_DATE_OF_TIMEZONE = 1546300800000L; // 1/1/2019 00:00 UTC
+    private static final Instant MIN_USE_DATE_OF_TIMEZONE =
+            Instant.ofEpochMilli(1546300800000L); // 1/1/2019 00:00 UTC
 
     private final CountryTimeZones mCountryTimeZones;
-    private final List<String> mTimeZoneIds;
+    private final List<String> mPreferredTimeZoneIds;
+    private final Set<String> mAlternativeTimeZoneIds;
 
     public FilteredCountryTimeZones(CountryTimeZones countryTimeZones) {
         mCountryTimeZones = countryTimeZones;
-        List<String> timeZoneIds = countryTimeZones.getTimeZoneMappings().stream()
-                .filter(timeZoneMapping ->
-                        timeZoneMapping.isShownInPicker()
-                                && (timeZoneMapping.getNotUsedAfter() == null
-                                || timeZoneMapping.getNotUsedAfter() >= MIN_USE_DATE_OF_TIMEZONE))
-                .map(timeZoneMapping -> timeZoneMapping.getTimeZoneId())
-                .collect(Collectors.toList());
-        mTimeZoneIds = Collections.unmodifiableList(timeZoneIds);
+        List<String> timeZoneIds = new ArrayList<>();
+        Set<String> alternativeTimeZoneIds = new ArraySet<>();
+        for (CountryTimeZones.TimeZoneMapping timeZoneMapping :
+                countryTimeZones.getTimeZoneMappings()) {
+            if (timeZoneMapping.isShownInPickerAt(MIN_USE_DATE_OF_TIMEZONE)) {
+                String timeZoneId = timeZoneMapping.getTimeZoneId();
+                timeZoneIds.add(timeZoneId);
+                alternativeTimeZoneIds.addAll(timeZoneMapping.getAlternativeIds());
+            }
+        }
+        mPreferredTimeZoneIds = Collections.unmodifiableList(timeZoneIds);
+        mAlternativeTimeZoneIds = Collections.unmodifiableSet(alternativeTimeZoneIds);
     }
 
-    public List<String> getTimeZoneIds() {
-        return mTimeZoneIds;
+    public List<String> getPreferredTimeZoneIds() {
+        return mPreferredTimeZoneIds;
     }
 
     public CountryTimeZones getCountryTimeZones() {
         return mCountryTimeZones;
+    }
+
+    /**
+     * Returns whether {@code timeZoneId} is currently used in the country or is an alternative
+     * name of a currently used time zone.
+     */
+    public boolean matches(String timeZoneId) {
+        return mPreferredTimeZoneIds.contains(timeZoneId)
+                || mAlternativeTimeZoneIds.contains(timeZoneId);
     }
 
     public String getRegionId() {

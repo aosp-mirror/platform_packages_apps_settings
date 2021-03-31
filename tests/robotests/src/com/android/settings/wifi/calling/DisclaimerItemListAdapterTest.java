@@ -77,7 +77,7 @@ public class DisclaimerItemListAdapterTest {
 
         when(mLayoutInflater.inflate(anyInt(), anyObject(), anyBoolean())).thenReturn(mView);
         when(mViewGroup.getContext()).thenReturn(mContext);
-        when(mViewGroup.getContext().getSystemService(LayoutInflater.class)).thenReturn(
+        when(mViewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).thenReturn(
                 mLayoutInflater);
         when(mView.findViewById(ID_DISCLAIMER_ITEM_TITLE)).thenReturn(mTestView);
         when(mView.findViewById(ID_DISCLAIMER_ITEM_DESCRIPTION)).thenReturn(mDescView);
