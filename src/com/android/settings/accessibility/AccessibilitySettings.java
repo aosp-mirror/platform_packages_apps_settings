@@ -84,10 +84,6 @@ public class AccessibilitySettings extends DashboardFragment {
             CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
     };
 
-    // Preferences
-    private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
-            "magnification_preference_screen";
-
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
     static final String EXTRA_CHECKED = "checked";
@@ -154,19 +150,6 @@ public class AccessibilitySettings extends DashboardFragment {
             new ArrayMap<>();
     private final Map<ComponentName, PreferenceCategory> mPreBundledServiceComponentToCategoryMap =
             new ArrayMap<>();
-
-    private Preference mDisplayMagnificationPreferenceScreen;
-
-    /**
-     * Check if the color transforms are color accelerated. Some transforms are experimental only
-     * on non-accelerated platforms due to the performance implications.
-     *
-     * @param context The current context
-     */
-    public static boolean isColorTransformAccelerated(Context context) {
-        return context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_setColorTransformAccelerated);
-    }
 
     public AccessibilitySettings() {
         // Observe changes to anything that the shortcut can toggle, so we can reflect updates
@@ -305,10 +288,6 @@ public class AccessibilitySettings extends DashboardFragment {
             PreferenceCategory prefCategory = findPreference(CATEGORIES[i]);
             mCategoryToPrefCategoryMap.put(CATEGORIES[i], prefCategory);
         }
-
-        // Display magnification.
-        mDisplayMagnificationPreferenceScreen = findPreference(
-                DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
     }
 
     private void updateAllPreferences() {
@@ -501,6 +480,7 @@ public class AccessibilitySettings extends DashboardFragment {
          *                          installed accessibility services
          * @return The list of {@link RestrictedPreference}
          */
+        @VisibleForTesting
         List<RestrictedPreference> createAccessibilityServicePreferenceList(
                 List<AccessibilityServiceInfo> installedServices) {
 
@@ -566,6 +546,7 @@ public class AccessibilitySettings extends DashboardFragment {
          *                           installed accessibility shortcuts
          * @return The list of {@link RestrictedPreference}
          */
+        @VisibleForTesting
         List<RestrictedPreference> createAccessibilityActivityPreferenceList(
                 List<AccessibilityShortcutInfo> installedShortcuts) {
             final Set<ComponentName> enabledServices =
