@@ -77,7 +77,7 @@ public class SwipeBottomToNotificationSettingsTest {
     @Test
     public void isPageSearchEnabled_oneHandedDisabled_shouldReturnTrue() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
 
         final Object obj = ReflectionHelpers.callInstanceMethod(
                 SwipeBottomToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",
@@ -90,7 +90,7 @@ public class SwipeBottomToNotificationSettingsTest {
     @Test
     public void isPageSearchEnabled_oneHandedEnabled_shouldReturnFalse() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
 
         final Object obj = ReflectionHelpers.callInstanceMethod(
                 SwipeBottomToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",

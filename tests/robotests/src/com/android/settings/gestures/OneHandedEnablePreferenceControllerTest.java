@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -27,24 +28,22 @@ import com.android.settings.core.BasePreferenceController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class OneHandedEnablePreferenceControllerTest {
 
     private static final String KEY = "gesture_one_handed_mode_enabled";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private OneHandedEnablePreferenceController mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mController = new OneHandedEnablePreferenceController(mContext, KEY);
+        OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
     }
 
     @Test
@@ -76,7 +75,7 @@ public class OneHandedEnablePreferenceControllerTest {
 
     @Test
     public void getSummary_enabledOneHanded_shouldDisplayOnSummary() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
 
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getText(R.string.switch_on_text));
@@ -84,7 +83,7 @@ public class OneHandedEnablePreferenceControllerTest {
 
     @Test
     public void getSummary_disabledOneHanded_shouldDisplayOffSummary() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
 
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getText(R.string.switch_off_text));

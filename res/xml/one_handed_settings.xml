@@ -41,9 +41,9 @@
         settings:controller="com.android.settings.gestures.OneHandedAppTapsExitPreferenceController"/>
 
     <ListPreference
+        android:key="gesture_one_handed_timeout"
         android:entries="@array/one_handed_timeout_title"
         android:entryValues="@array/one_handed_timeout_values"
-        android:key="one_handed_timeout_preference"
         android:persistent="false"
         android:title="@string/one_handed_timeout_title"
         settings:controller="com.android.settings.gestures.OneHandedTimeoutPreferenceController"/>

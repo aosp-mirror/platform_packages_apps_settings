@@ -40,11 +40,13 @@ public class OneHandedTimeoutPreferenceController extends BasePreferenceControll
         OneHandedSettingsUtils.TogglesCallback {
 
     private final Map<String, String> mTimeoutMap;
-    private Preference mTimeoutPreference;
     private final OneHandedSettingsUtils mUtils;
+
+    private Preference mTimeoutPreference;
 
     public OneHandedTimeoutPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+
         mTimeoutMap = new HashMap<>();
         initTimeoutMap();
         mUtils = new OneHandedSettingsUtils(context);
@@ -62,7 +64,7 @@ public class OneHandedTimeoutPreferenceController extends BasePreferenceControll
             return false;
         }
         final int newValue = Integer.parseInt((String) object);
-        OneHandedSettingsUtils.setSettingsOneHandedModeTimeout(mContext, newValue);
+        OneHandedSettingsUtils.setTimeoutValue(mContext, newValue);
         updateState(preference);
         return true;
     }
@@ -83,7 +85,7 @@ public class OneHandedTimeoutPreferenceController extends BasePreferenceControll
 
     @Override
     public CharSequence getSummary() {
-        if (OneHandedSettingsUtils.getSettingsOneHandedModeTimeout(mContext) == 0) {
+        if (OneHandedSettingsUtils.getTimeoutValue(mContext) == 0) {
             return mContext.getResources().getString(R.string.screensaver_settings_summary_never);
         }
         return String.format(mContext.getResources().getString(
@@ -112,7 +114,7 @@ public class OneHandedTimeoutPreferenceController extends BasePreferenceControll
     }
 
     private String getTimeoutValue() {
-        return String.valueOf(OneHandedSettingsUtils.getSettingsOneHandedModeTimeout(mContext));
+        return String.valueOf(OneHandedSettingsUtils.getTimeoutValue(mContext));
     }
 
     private void initTimeoutMap() {
