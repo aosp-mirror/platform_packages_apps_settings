@@ -190,8 +190,8 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
         }
 
         private String getNumberOfUrlsText(Map<Uri, String> urisToAliases) {
-            String url = urisToAliases.size() > 1 ? " URLs" : " URL";
-            return urisToAliases.size() + url;
+            return mContext.getResources().getQuantityString(R.plurals.number_of_urls,
+                    urisToAliases.size(), urisToAliases.size());
         }
     }
 

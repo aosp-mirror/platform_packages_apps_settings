@@ -28,7 +28,7 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
-import com.android.settings.biometrics.BiometricEnrollSidecar.Listener;
+import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
@@ -40,7 +40,8 @@ import java.util.List;
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.
  */
-public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
+public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
+        BiometricEnrollSidecar.Listener {
 
     @Nullable
     private FingerprintFindSensorAnimation mAnimation;
@@ -139,25 +140,27 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
                     .add(mSidecar, FingerprintEnrollEnrolling.TAG_SIDECAR)
                     .commitAllowingStateLoss();
         }
-        mSidecar.setListener(new Listener() {
-            @Override
-            public void onEnrollmentProgressChange(int steps, int remaining) {
-                mNextClicked = true;
-                proceedToEnrolling(true /* cancelEnrollment */);
-            }
+        mSidecar.setListener(this);
+    }
 
-            @Override
-            public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-            }
+    @Override
+    public void onEnrollmentProgressChange(int steps, int remaining) {
+        mNextClicked = true;
+        proceedToEnrolling(true /* cancelEnrollment */);
+    }
 
-            @Override
-            public void onEnrollmentError(int errMsgId, CharSequence errString) {
-                if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                    mNextClicked = false;
-                    proceedToEnrolling(false /* cancelEnrollment */);
-                }
-            }
-        });
+    @Override
+    public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
+    }
+
+    @Override
+    public void onEnrollmentError(int errMsgId, CharSequence errString) {
+        if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            mNextClicked = false;
+            proceedToEnrolling(false /* cancelEnrollment */);
+        } else {
+            FingerprintErrorDialog.showErrorDialog(this, errMsgId);
+        }
     }
 
     @Override
