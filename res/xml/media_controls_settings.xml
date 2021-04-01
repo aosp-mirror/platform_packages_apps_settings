@@ -20,13 +20,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/media_controls_title">
 
-    <SwitchPreference
+    <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="media_controls_resume_switch"
         android:title="@string/media_controls_summary"
-        android:summary="@string/media_controls_resume_description"
         app:keywords="@string/keywords_media_controls"
         app:controller="com.android.settings.sound.MediaControlsPreferenceController"
         app:allowDividerAbove="true" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/media_controls_resume_description"
+        app:searchable="false" />
 
     <PreferenceCategory
         android:key="media_controls_resumable_apps"
