@@ -20,32 +20,47 @@ import static android.provider.Settings.Secure.MEDIA_CONTROLS_RESUME;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.widget.Switch;
 
-import com.android.settings.core.TogglePreferenceController;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Toggle for media controls settings
  */
-public class MediaControlsPreferenceController extends TogglePreferenceController {
+public class MediaControlsPreferenceController extends BasePreferenceController
+        implements OnMainSwitchChangeListener {
 
     public MediaControlsPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
-    public boolean isChecked() {
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        SettingsMainSwitchPreference mainSwitch = screen.findPreference(mPreferenceKey);
+        mainSwitch.addOnSwitchChangeListener(this);
+        mainSwitch.setChecked(isChecked());
+    }
+
+    @VisibleForTesting
+    protected boolean isChecked() {
         int val = Settings.Secure.getInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, 1);
         return val == 1;
     }
 
     @Override
-    public boolean setChecked(boolean isChecked) {
-        int val = isChecked ? 1 : 0;
-        return Settings.Secure.putInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, val);
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        int val = isChecked ? 1 : 0;
+        Settings.Secure.putInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, val);
     }
 }
