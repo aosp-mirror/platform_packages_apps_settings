@@ -46,7 +46,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
-import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -110,32 +109,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Nullable private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
     private boolean mRestoring;
     private Vibrator mVibrator;
-
-    public static class FingerprintErrorDialog extends BiometricErrorDialog {
-        static FingerprintErrorDialog newInstance(CharSequence msg, int msgId) {
-            FingerprintErrorDialog dialog = new FingerprintErrorDialog();
-            Bundle args = new Bundle();
-            args.putCharSequence(KEY_ERROR_MSG, msg);
-            args.putInt(KEY_ERROR_ID, msgId);
-            dialog.setArguments(args);
-            return dialog;
-        }
-
-        @Override
-        public int getMetricsCategory() {
-            return SettingsEnums.DIALOG_FINGERPINT_ERROR;
-        }
-
-        @Override
-        public int getTitleResId() {
-            return R.string.security_settings_fingerprint_enroll_error_dialog_title;
-        }
-
-        @Override
-        public int getOkButtonTextResId() {
-            return R.string.security_settings_fingerprint_enroll_dialog_ok;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -339,19 +312,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
-        int msgId;
-        switch (errMsgId) {
-            case FingerprintManager.FINGERPRINT_ERROR_TIMEOUT:
-                // This message happens when the underlying crypto layer decides to revoke the
-                // enrollment auth token.
-                msgId = R.string.security_settings_fingerprint_enroll_error_timeout_dialog_message;
-                break;
-            default:
-                // There's nothing specific to tell the user about. Ask them to try again.
-                msgId = R.string.security_settings_fingerprint_enroll_error_generic_dialog_message;
-                break;
-        }
-        showErrorDialog(getText(msgId), errMsgId);
+        FingerprintErrorDialog.showErrorDialog(this, errMsgId);
         stopIconAnimation();
         if (!mCanAssumeUdfps) {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
@@ -396,11 +357,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
         int progress = Math.max(0, steps + 1 - remaining);
         return PROGRESS_BAR_MAX * progress / (steps + 1);
-    }
-
-    private void showErrorDialog(CharSequence msg, int msgId) {
-        BiometricErrorDialog dlg = FingerprintErrorDialog.newInstance(msg, msgId);
-        dlg.show(getSupportFragmentManager(), FingerprintErrorDialog.class.getName());
     }
 
     private void showIconTouchDialog() {

@@ -212,43 +212,10 @@
         android:summary="%s"
         android:order="-10"/>
 
-    <!-- TODO(b/174964721): make this category its own entry -->
-    <com.android.settings.widget.WorkOnlyCategory
-        android:key="sound_work_settings_section"
+    <Preference
+        android:key="sound_work_settings"
         android:title="@string/sound_work_settings"
-        android:order="100">
-
-        <!-- Use the same sounds of the work profile -->
-        <SwitchPreference
-            android:key="work_use_personal_sounds"
-            android:title="@string/work_use_personal_sounds_title"
-            android:summary="@string/work_use_personal_sounds_summary"
-            android:disableDependentsState="true"/>
-
-        <!-- Work phone ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-            android:key="work_ringtone"
-            android:title="@string/work_ringtone_title"
-            android:dialogTitle="@string/work_alarm_ringtone_title"
-            android:ringtoneType="ringtone"
-            android:dependency="work_use_personal_sounds"/>
-
-        <!-- Default work notification ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-            android:key="work_notification_ringtone"
-            android:title="@string/work_notification_ringtone_title"
-            android:dialogTitle="@string/work_alarm_ringtone_title"
-            android:ringtoneType="notification"
-            android:dependency="work_use_personal_sounds"/>
-
-        <!-- Default work alarm ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-            android:key="work_alarm_ringtone"
-            android:title="@string/work_alarm_ringtone_title"
-            android:dialogTitle="@string/work_alarm_ringtone_title"
-            android:persistent="false"
-            android:ringtoneType="alarm"
-            android:dependency="work_use_personal_sounds"/>
-
-    </com.android.settings.widget.WorkOnlyCategory>
+        android:fragment="com.android.settings.notification.SoundWorkSettings"
+        android:order="100"
+        settings:controller="com.android.settings.notification.WorkSoundsPreferenceController"/>
 </PreferenceScreen>
