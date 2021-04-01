@@ -49,6 +49,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
@@ -493,6 +494,13 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    private void onUserCreationFailed() {
+        Toast.makeText(getContext(),
+                com.android.settingslib.R.string.add_user_failed,
+                Toast.LENGTH_SHORT).show();
+        hideUserCreatingDialog();
+    }
+
     private void openUserDetails(UserInfo userInfo, boolean newUser) {
         Bundle extras = new Bundle();
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
@@ -791,7 +799,7 @@ public class UserSettings extends SettingsPreferenceFragment
                         mAddingUser = false;
                         mPendingUserIcon = null;
                         mPendingUserName = null;
-                        ThreadUtils.postOnMainThread(() -> hideUserCreatingDialog());
+                        ThreadUtils.postOnMainThread(() -> onUserCreationFailed());
                         return;
                     }
 
@@ -1082,6 +1090,12 @@ public class UserSettings extends SettingsPreferenceFragment
             mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
             UserInfo guest = mUserManager.createGuest(
                     getContext(), getString(com.android.settingslib.R.string.user_guest));
+            if (guest == null) {
+                Toast.makeText(getContext(),
+                        com.android.settingslib.R.string.add_user_failed,
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }
             openUserDetails(guest, true);
             return true;
         }
