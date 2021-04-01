@@ -61,7 +61,6 @@ public class LowBatteryDetector implements BatteryTipDetector {
             state = BatteryTip.StateType.NEW;
         }
 
-        return new LowBatteryTip(
-                state, powerSaveModeOn, mBatteryInfo.suggestionLabel);
+        return new LowBatteryTip(state, powerSaveModeOn);
     }
 }
