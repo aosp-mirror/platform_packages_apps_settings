@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.settings.R;
@@ -37,88 +38,95 @@ public class OneHandedSettingsUtilsTest {
     private static final int TIMEOUT_INDEX_MEDIUM = 2;
     private static final int TIMEOUT_INDEX_LONG = 3;
 
+    private static final int OFF = 0;
+    private static final int ON = 1;
+
     private Context mContext;
+
     private String[] mConfigTimeout;
+    private int mCurrentUserId;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mCurrentUserId = UserHandle.myUserId();
         mConfigTimeout = mContext.getResources().getStringArray(R.array.one_handed_timeout_values);
+        OneHandedSettingsUtils.setUserId(mCurrentUserId);
     }
 
     @Test
-    public void setSettingsOneHandedModeEnabled_setEnable_shouldReturnEnabled() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
+    public void setOneHandedModeEnabled_setEnable_shouldReturnEnabled() {
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_ENABLED, 0)).isEqualTo(1);
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.ONE_HANDED_MODE_ENABLED, OFF, mCurrentUserId)).isEqualTo(ON);
     }
 
     @Test
-    public void setSettingsOneHandedModeEnabled_setDisable_shouldReturnDisabled() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+    public void setOneHandedModeEnabled_setDisable_shouldReturnDisabled() {
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_ENABLED, 0)).isEqualTo(0);
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.ONE_HANDED_MODE_ENABLED, OFF, mCurrentUserId)).isEqualTo(OFF);
     }
 
     @Test
-    public void setSettingsTapsAppToExitEnabled_setEnable_shouldReturnEnabled() {
-        OneHandedSettingsUtils.setSettingsTapsAppToExit(mContext, true);
+    public void setTapsAppToExitEnabled_setEnable_shouldReturnEnabled() {
+        OneHandedSettingsUtils.setTapsAppToExitEnabled(mContext, true);
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.TAPS_APP_TO_EXIT, 1)).isEqualTo(1);
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.TAPS_APP_TO_EXIT, OFF, mCurrentUserId)).isEqualTo(ON);
     }
 
     @Test
-    public void setSettingsTapsAppToExitEnabled_setDisable_shouldReturnDisabled() {
-        OneHandedSettingsUtils.setSettingsTapsAppToExit(mContext, false);
+    public void setTapsAppToExitEnabled_setDisable_shouldReturnDisabled() {
+        OneHandedSettingsUtils.setTapsAppToExitEnabled(mContext, false);
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.TAPS_APP_TO_EXIT, 1)).isEqualTo(0);
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.TAPS_APP_TO_EXIT, OFF, mCurrentUserId)).isEqualTo(OFF);
     }
 
     @Test
-    public void setSettingsTimeout_setNever_shouldReturnNeverValue() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeTimeout(mContext,
+    public void setTimeout_setNever_shouldReturnNeverValue() {
+        OneHandedSettingsUtils.setTimeoutValue(mContext,
                 OneHandedSettingsUtils.OneHandedTimeout.NEVER.getValue());
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
-                OneHandedSettingsUtils.OneHandedTimeout.NEVER.getValue()))
+                OneHandedSettingsUtils.OneHandedTimeout.NEVER.getValue(), mCurrentUserId))
                 .isEqualTo(Integer.parseInt(mConfigTimeout[TIMEOUT_INDEX_NEVER]));
     }
 
     @Test
-    public void setSettingsTimeout_setShort_shouldReturnShortValue() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeTimeout(mContext,
+    public void setTimeout_setShort_shouldReturnShortValue() {
+        OneHandedSettingsUtils.setTimeoutValue(mContext,
                 OneHandedSettingsUtils.OneHandedTimeout.SHORT.getValue());
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
-                OneHandedSettingsUtils.OneHandedTimeout.SHORT.getValue()))
+                OneHandedSettingsUtils.OneHandedTimeout.SHORT.getValue(), mCurrentUserId))
                 .isEqualTo(Integer.parseInt(mConfigTimeout[TIMEOUT_INDEX_SHORT]));
     }
 
     @Test
-    public void setSettingsTimeout_setMedium_shouldReturnMediumValue() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeTimeout(mContext,
+    public void setTimeout_setMedium_shouldReturnMediumValue() {
+        OneHandedSettingsUtils.setTimeoutValue(mContext,
                 OneHandedSettingsUtils.OneHandedTimeout.MEDIUM.getValue());
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
-                OneHandedSettingsUtils.OneHandedTimeout.MEDIUM.getValue()))
+                OneHandedSettingsUtils.OneHandedTimeout.MEDIUM.getValue(), mCurrentUserId))
                 .isEqualTo(Integer.parseInt(mConfigTimeout[TIMEOUT_INDEX_MEDIUM]));
     }
 
     @Test
-    public void setSettingsTimeout_setLong_shouldReturnLongValue() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeTimeout(mContext,
+    public void setTimeout_setLong_shouldReturnLongValue() {
+        OneHandedSettingsUtils.setTimeoutValue(mContext,
                 OneHandedSettingsUtils.OneHandedTimeout.LONG.getValue());
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
-                OneHandedSettingsUtils.OneHandedTimeout.LONG.getValue()))
+                OneHandedSettingsUtils.OneHandedTimeout.LONG.getValue(), mCurrentUserId))
                 .isEqualTo(Integer.parseInt(mConfigTimeout[TIMEOUT_INDEX_LONG]));
     }
 }

@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.os.UserHandle;
 
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
@@ -37,7 +38,6 @@ public class OneHandedAppTapsExitPreferenceControllerTest {
 
     private Context mContext;
     private SwitchPreference mSwitchPreference;
-
     private OneHandedAppTapsExitPreferenceController mController;
 
     @Before
@@ -46,6 +46,7 @@ public class OneHandedAppTapsExitPreferenceControllerTest {
         mController = new OneHandedAppTapsExitPreferenceController(mContext, KEY);
         mSwitchPreference = new SwitchPreference(mContext);
         mSwitchPreference.setKey(KEY);
+        OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
     }
 
     @Test
@@ -59,7 +60,7 @@ public class OneHandedAppTapsExitPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_enabledOneHanded_shouldAvailable() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(TogglePreferenceController.AVAILABLE);
@@ -67,7 +68,7 @@ public class OneHandedAppTapsExitPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_disabledOneHanded_shouldUnavailable() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(TogglePreferenceController.DISABLED_DEPENDENT_SETTING);
@@ -75,7 +76,7 @@ public class OneHandedAppTapsExitPreferenceControllerTest {
 
     @Test
     public void updateState_enableOneHanded_switchShouldEnabled() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
 
         mController.updateState(mSwitchPreference);
 
@@ -84,7 +85,7 @@ public class OneHandedAppTapsExitPreferenceControllerTest {
 
     @Test
     public void updateState_disableOneHanded_switchShouldDisabled() {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
 
         mController.updateState(mSwitchPreference);
 
