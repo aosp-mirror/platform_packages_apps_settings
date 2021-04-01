@@ -27,6 +27,7 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.autofill.PasswordsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -66,6 +67,12 @@ public class AccountDashboardFragment extends DashboardFragment {
     @Override
     public int getHelpResource() {
         return R.string.help_url_user_and_account_dashboard;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
     }
 
     @Override
