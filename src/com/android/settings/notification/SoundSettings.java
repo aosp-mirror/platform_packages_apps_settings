@@ -25,6 +25,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
+import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
@@ -250,8 +251,11 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         controllers.add(new AlarmRingtonePreferenceController(context));
         controllers.add(new NotificationRingtonePreferenceController(context));
 
-        // === Work Sound Settings ===
-        controllers.add(new WorkSoundPreferenceController(context, fragment, lifecycle));
+        if (!FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)) {
+            // TODO(b/174964721): This should be removed when the flag is deprecated.
+            // === Work Sound Settings ===
+            controllers.add(new WorkSoundPreferenceController(context, fragment, lifecycle));
+        }
 
         // === Other Sound Settings ===
         final DialPadTonePreferenceController dialPadTonePreferenceController =
@@ -308,15 +312,27 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                     return buildPreferenceControllers(context, null /* fragment */,
                             null /* lifecycle */);
                 }
+
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)
+                            ? R.xml.sound_settings_v2 : R.xml.sound_settings;
+                    return Arrays.asList(sir);
+                }
             };
 
     // === Work Sound Settings ===
 
     void enableWorkSync() {
-        final WorkSoundPreferenceController workSoundController =
-                use(WorkSoundPreferenceController.class);
-        if (workSoundController != null) {
-            workSoundController.enableWorkSync();
+        // TODO(b/174964721): This should be refined when the flag is deprecated.
+        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
+            final WorkSoundPreferenceController workSoundController =
+                    use(WorkSoundPreferenceController.class);
+            if (workSoundController != null) {
+                workSoundController.enableWorkSync();
+            }
         }
     }
 

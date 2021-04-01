@@ -62,7 +62,8 @@
         settings:controller="com.android.settings.location.LocationServicesForWorkPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference
-        android:title="@string/location_settings_footer"
+        android:title="@string/location_settings_footer_location_on"
         android:key="location_footer"
+        settings:controller="com.android.settings.location.LocationSettingsFooterPreferenceController"
         android:selectable="false"/>
 </PreferenceScreen>
