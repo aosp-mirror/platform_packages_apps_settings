@@ -153,7 +153,7 @@ public class PowerMenuPreferenceControllerTest {
         mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, false);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
-                    .thenReturn(true);
+                    .thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
