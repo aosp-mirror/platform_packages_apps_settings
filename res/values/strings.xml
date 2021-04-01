@@ -5830,6 +5830,11 @@
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
 
+    <!-- Description of battery state and remaining time (e.g. Charging rapidly • 1hr 23 min left until full)-->
+    <string name="battery_state_and_duration" translatable="false"><xliff:g id="state">%1$s</xliff:g> • <xliff:g id="time">%2$s</xliff:g></string>
+    <!-- Summary for the low battery state [CHAR LIMIT=NONE] -->
+    <string name="low_battery_summary">Low battery</string>
+
     <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
     <string name="background_activity_title">Background restriction</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
@@ -5917,15 +5922,11 @@
     <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_summary_summary" product="device">Device has typical background battery usage</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_low_battery_title">Low battery capacity</string>
+    <string name="battery_tip_low_battery_title">Battery level low</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_low_battery_summary">Battery can\'t provide good battery life</string>
+    <string name="battery_tip_low_battery_summary">Turn on Battery Saver to extend battery life</string>
     <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="default">Improve your phone\'s battery life</string>
-    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="tablet">Improve your tablet\'s battery life</string>
-    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="device">Improve your device\'s battery life</string>
+    <string name="battery_tip_smart_battery_title">Improve battery life</string>
     <!-- Summary for the smart battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_smart_battery_summary">Turn on Battery Manager</string>
     <!-- Title for the early heads up tip [CHAR LIMIT=NONE] -->
@@ -5937,17 +5938,13 @@
     <!-- Summary when early heads up is solved [CHAR LIMIT=NONE] -->
     <string name="battery_tip_early_heads_up_done_summary">Some features may be limited</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="default">Phone used more than usual</string>
-    <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="tablet">Tablet used more than usual</string>
-    <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="device">Device used more than usual</string>
-    <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
+    <string name="battery_tip_high_usage_title">Higher battery usage</string>
+    <!-- Summary for the battery high usage tip, which presents apps with highest usage [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_high_usage_summary">See apps with highest usage</string>
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_title">Optimizing for battery health</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Tap to learn more.</string>
+    <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
