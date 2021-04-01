@@ -21,12 +21,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.ColorFilter;
 import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.text.TextUtils;
-import android.widget.ImageView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceFragmentCompat;
@@ -62,7 +60,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     private Activity mActivity;
     private PreferenceFragmentCompat mHost;
     private Lifecycle mLifecycle;
-    private ColorFilter mAccentColorFilter;
     private final PowerManager mPowerManager;
 
     public BatteryHeaderPreferenceController(Context context, String key) {
@@ -88,9 +85,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mBatteryUsageProgressBarPref = screen.findPreference(getPreferenceKey());
-        mAccentColorFilter = com.android.settings.Utils.getAlphaInvariantColorFilterForColor(
-                com.android.settings.Utils.getColorAttrDefaultColor(
-                        mContext, android.R.attr.colorAccent));
 
         if (com.android.settings.Utils.isBatteryPresent(mContext)) {
             quickUpdateHeaderPreference();
@@ -124,17 +118,15 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public void updateHeaderPreference(BatteryInfo info) {
         mBatteryUsageProgressBarPref.setUsageSummary(
                 formatBatteryPercentageText(info.batteryLevel));
-        mBatteryUsageProgressBarPref.setTotalSummary(generateLabel(info));
+        mBatteryUsageProgressBarPref.setBottomSummary(generateLabel(info));
         mBatteryUsageProgressBarPref.setPercent(info.batteryLevel, BATTERY_MAX_LEVEL);
-        mBatteryUsageProgressBarPref.setCustomContent(
-                getBatteryIcon(!info.discharging, info.batteryLevel));
     }
 
     /**
      * Callback which receives text for the summary line.
      */
     public void updateBatteryStatus(String label, BatteryInfo info) {
-        mBatteryUsageProgressBarPref.setTotalSummary(label != null ? label : generateLabel(info));
+        mBatteryUsageProgressBarPref.setBottomSummary(label != null ? label : generateLabel(info));
     }
 
     public void quickUpdateHeaderPreference() {
@@ -146,28 +138,10 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
         mBatteryUsageProgressBarPref.setUsageSummary(formatBatteryPercentageText(batteryLevel));
         mBatteryUsageProgressBarPref.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
-        mBatteryUsageProgressBarPref.setCustomContent(getBatteryIcon(!discharging, batteryLevel));
     }
 
     private CharSequence formatBatteryPercentageText(int batteryLevel) {
         return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
                 NumberFormat.getIntegerInstance().format(batteryLevel));
-    }
-
-    //TODO(b/179237746): Update the battery icon after receiving final asset
-    private ImageView getBatteryIcon(boolean isCharging, int batteryLevel) {
-        ImageView batteryIcon = new ImageView(mContext);
-
-        if (batteryLevel <= (mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_lowBatteryWarningLevel))) {
-            batteryIcon.setImageResource(R.drawable.ic_battery_low);
-        } else if (isCharging) {
-            batteryIcon.setColorFilter(mAccentColorFilter);
-            batteryIcon.setImageResource(R.drawable.ic_battery_charging_full);
-        } else {
-            batteryIcon = null;
-        }
-
-        return batteryIcon;
     }
 }
