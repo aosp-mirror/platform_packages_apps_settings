@@ -58,6 +58,16 @@
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
+    <!-- Permissions usage -->
+    <Preference
+        android:key="privacy_permissions_usage"
+        android:title="@string/permissions_usage_title"
+        android:summary="@string/permissions_usage_summary"
+        settings:searchable="false"
+        settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController">
+        <intent android:action="android.intent.action.REVIEW_PERMISSION_USAGE"/>
+    </Preference>
+
     <!-- Show passwords -->
     <SwitchPreference
         android:key="show_password"

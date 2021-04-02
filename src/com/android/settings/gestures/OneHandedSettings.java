@@ -18,6 +18,7 @@ package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.UserHandle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -40,6 +41,12 @@ public class OneHandedSettings extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    protected void updatePreferenceStates() {
+        OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
+        super.updatePreferenceStates();
     }
 
     @Override

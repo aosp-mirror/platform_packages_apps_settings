@@ -33,15 +33,17 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class OneHandedAppTapsExitPreferenceController extends TogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop, OneHandedSettingsUtils.TogglesCallback {
 
-    private Preference mPreference;
     private final OneHandedSettingsUtils mUtils;
+
+    private Preference mPreference;
 
     public OneHandedAppTapsExitPreferenceController(Context context, String key) {
         super(context, key);
+
         mUtils = new OneHandedSettingsUtils(context);
 
         // By default, app taps to stop one-handed is enabled, this will get default value once.
-        OneHandedSettingsUtils.setSettingsTapsAppToExit(mContext, isChecked());
+        OneHandedSettingsUtils.setTapsAppToExitEnabled(mContext, isChecked());
     }
 
     @Override
@@ -67,12 +69,12 @@ public class OneHandedAppTapsExitPreferenceController extends TogglePreferenceCo
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return OneHandedSettingsUtils.setSettingsTapsAppToExit(mContext, isChecked);
+        return OneHandedSettingsUtils.setTapsAppToExitEnabled(mContext, isChecked);
     }
 
     @Override
     public boolean isChecked() {
-        return OneHandedSettingsUtils.getSettingsTapsAppToExit(mContext);
+        return OneHandedSettingsUtils.isTapsAppToExitEnabled(mContext);
     }
 
     @Override

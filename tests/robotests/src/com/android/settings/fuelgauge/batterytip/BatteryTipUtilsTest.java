@@ -67,8 +67,7 @@ public class BatteryTipUtilsTest {
         mEarlyWarningTip = spy(
                 new EarlyWarningTip(BatteryTip.StateType.NEW, true /* powerSaveModeOn */));
         mLowBatteryTip = spy(
-                new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */,
-                        "" /* summary */));
+                new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */));
         mBatteryDefenderTip = spy(new BatteryDefenderTip(BatteryTip.StateType.NEW));
     }
 
