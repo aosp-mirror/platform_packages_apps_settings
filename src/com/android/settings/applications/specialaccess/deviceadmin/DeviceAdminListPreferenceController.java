@@ -207,6 +207,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
             return true;
         });
         pref.setOnPreferenceChangeListener((preference, newValue) -> false);
+        pref.setSingleLineTitle(true);
     }
 
     /**
