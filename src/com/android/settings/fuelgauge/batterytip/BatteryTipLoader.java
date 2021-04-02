@@ -89,8 +89,7 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         final List<BatteryTip> tips = new ArrayList<>();
         tips.add(new SummaryTip(BatteryTip.StateType.NEW,
                 EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
-        tips.add(new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */,
-                "Fake data"));
+        tips.add(new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */));
 
         return tips;
     }
