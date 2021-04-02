@@ -289,10 +289,15 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         } else {
             if (deviceId == MAIN_DEVICE_ID) {
                 linearLayout.setVisibility(View.VISIBLE);
-                batterySummaryView.setText(com.android.settings.Utils.formatPercentage(
-                        bluetoothDevice.getBatteryLevel()));
-                batterySummaryView.setVisibility(View.VISIBLE);
                 linearLayout.findViewById(R.id.bt_battery_icon).setVisibility(View.GONE);
+                int level = bluetoothDevice.getBatteryLevel();
+                if (level != BluetoothDevice.BATTERY_LEVEL_UNKNOWN
+                        && level != BluetoothDevice.BATTERY_LEVEL_BLUETOOTH_OFF) {
+                    batterySummaryView.setText(com.android.settings.Utils.formatPercentage(level));
+                    batterySummaryView.setVisibility(View.VISIBLE);
+                } else {
+                    batterySummaryView.setVisibility(View.GONE);
+                }
             } else {
                 // Hide it if it doesn't have battery information
                 linearLayout.setVisibility(View.GONE);
