@@ -177,7 +177,7 @@ public class NotificationAccessSettings extends EmptyTextSettings {
                 new SubSettingLauncher(getContext())
                         .setDestination(NotificationAccessDetails.class.getName())
                         .setSourceMetricsCategory(getMetricsCategory())
-                        .setTitleRes(R.string.manage_zen_access_title)
+                        .setTitleRes(R.string.manage_notification_access_title)
                         .setArguments(args)
                         .setExtras(extras)
                         .setUserHandle(UserHandle.getUserHandleForUid(service.applicationInfo.uid))
