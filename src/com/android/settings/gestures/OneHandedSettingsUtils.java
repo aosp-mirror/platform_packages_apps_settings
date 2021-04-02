@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 /**
@@ -31,6 +32,8 @@ import android.provider.Settings;
 public class OneHandedSettingsUtils {
 
     static final String SUPPORT_ONE_HANDED_MODE = "ro.support_one_handed_mode";
+    static final int OFF = 0;
+    static final int ON = 1;
 
     public enum OneHandedTimeout {
         NEVER(0), SHORT(4), MEDIUM(8), LONG(12);
@@ -49,109 +52,132 @@ public class OneHandedSettingsUtils {
     private final Context mContext;
     private final SettingsObserver mSettingsObserver;
 
+    private static int sCurrentUserId;
+
     OneHandedSettingsUtils(Context context) {
         mContext = context;
+        sCurrentUserId = UserHandle.myUserId();
         mSettingsObserver = new SettingsObserver(new Handler(Looper.getMainLooper()));
     }
 
     /**
-     * Get One-Handed mode support flag.
+     * Gets One-Handed mode support flag.
      */
     public static boolean isSupportOneHandedMode() {
         return SystemProperties.getBoolean(SUPPORT_ONE_HANDED_MODE, false);
     }
 
     /**
-     * Get one-handed mode enable or disable flag from Settings provider.
+     * Gets one-handed mode feature enable or disable flag from Settings provider.
      *
      * @param context App context
      * @return enable or disable one-handed mode flag.
      */
     public static boolean isOneHandedModeEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_ENABLED, 0) == 1;
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
+                Settings.Secure.ONE_HANDED_MODE_ENABLED, OFF, sCurrentUserId) == ON;
     }
 
     /**
-     * Set one-handed mode enable or disable flag to Settings provider.
+     * Sets one-handed mode enable or disable flag to Settings provider.
      *
      * @param context App context
-     * @param enable enable or disable one-handed mode.
+     * @param enable  enable or disable one-handed mode.
      */
-    public static void setSettingsOneHandedModeEnabled(Context context, boolean enable) {
-        Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_ENABLED, enable ? 1 : 0);
+    public static void setOneHandedModeEnabled(Context context, boolean enable) {
+        Settings.Secure.putIntForUser(context.getContentResolver(),
+                Settings.Secure.ONE_HANDED_MODE_ENABLED, enable ? ON : OFF, sCurrentUserId);
     }
 
     /**
-     * Get enabling taps app to exit one-handed mode flag from Settings provider.
+     * Gets enabling taps app to exit one-handed mode flag from Settings provider.
      *
      * @param context App context
      * @return enable or disable taps app to exit.
      */
-    public static boolean getSettingsTapsAppToExit(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.TAPS_APP_TO_EXIT, 1) == 1;
+    public static boolean isTapsAppToExitEnabled(Context context) {
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
+                Settings.Secure.TAPS_APP_TO_EXIT, OFF, sCurrentUserId) == ON;
     }
 
     /**
-     * Set enabling taps app to exit one-handed mode flag to Settings provider.
+     * Sets enabling taps app to exit one-handed mode flag to Settings provider.
      *
      * @param context App context
      * @param enable  enable or disable when taping app to exit one-handed mode.
      */
-    public static boolean setSettingsTapsAppToExit(Context context, boolean enable) {
-        return Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.TAPS_APP_TO_EXIT, enable ? 1 : 0);
+    public static boolean setTapsAppToExitEnabled(Context context, boolean enable) {
+        return Settings.Secure.putIntForUser(context.getContentResolver(),
+                Settings.Secure.TAPS_APP_TO_EXIT, enable ? ON : OFF, sCurrentUserId);
     }
 
     /**
-     * Get one-handed mode timeout value from Settings provider.
+     * Gets one-handed mode timeout value from Settings provider.
      *
      * @param context App context
      * @return timeout value in seconds.
      */
-    public static int getSettingsOneHandedModeTimeout(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(),
+    public static int getTimeoutValue(Context context) {
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
                 Settings.Secure.ONE_HANDED_MODE_TIMEOUT,
-                OneHandedTimeout.MEDIUM.getValue() /* default MEDIUM(8) by UX */);
+                OneHandedTimeout.MEDIUM.getValue() /* default MEDIUM(8) by UX */,
+                sCurrentUserId);
     }
 
     /**
-     * Set one-handed mode timeout value to Settings provider.
+     * Gets current user id from OneHandedSettingsUtils
+     *
+     * @return the current user id in OneHandedSettingsUtils
+     */
+    public static int getUserId() {
+        return sCurrentUserId;
+    }
+
+    /**
+     * Sets specific user id for OneHandedSettingsUtils
+     *
+     * @param userId the user id to be updated
+     */
+    public static void setUserId(int userId) {
+        sCurrentUserId = userId;
+    }
+
+    /**
+     * Sets one-handed mode timeout value to Settings provider.
      *
      * @param context App context
      * @param timeout timeout in seconds for exiting one-handed mode.
      */
-    public static void setSettingsOneHandedModeTimeout(Context context, int timeout) {
-        Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.ONE_HANDED_MODE_TIMEOUT, timeout);
+    public static void setTimeoutValue(Context context, int timeout) {
+        Settings.Secure.putIntForUser(context.getContentResolver(),
+                Settings.Secure.ONE_HANDED_MODE_TIMEOUT, timeout, sCurrentUserId);
     }
 
     /**
-     * Get Swipe-down-notification enable or disable flag from Settings provider.
+     * Gets Swipe-down-notification enable or disable flag from Settings provider.
      *
      * @param context App context
      * @return enable or disable Swipe-down-notification flag.
      */
     public static boolean isSwipeDownNotificationEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, 0) == 1;
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
+                Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, OFF, sCurrentUserId) == ON;
     }
 
     /**
-     * Set Swipe-down-notification enable or disable flag to Settings provider.
+     * Sets Swipe-down-notification enable or disable flag to Settings provider.
      *
      * @param context App context
      * @param enable enable or disable Swipe-down-notification.
      */
     public static void setSwipeDownNotificationEnabled(Context context, boolean enable) {
-        Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, enable ? 1 : 0);
+        Settings.Secure.putIntForUser(context.getContentResolver(),
+                Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED, enable ? ON : OFF,
+                sCurrentUserId);
     }
 
     /**
-     * Register callback for observing Settings.Secure.ONE_HANDED_MODE_ENABLED state.
+     * Registers callback for observing Settings.Secure.ONE_HANDED_MODE_ENABLED state.
      * @param callback for state changes
      */
     public void registerToggleAwareObserver(TogglesCallback callback) {
@@ -160,7 +186,7 @@ public class OneHandedSettingsUtils {
     }
 
     /**
-     * Unregister callback for observing Settings.Secure.ONE_HANDED_MODE_ENABLED state.
+     * Unregisters callback for observing Settings.Secure.ONE_HANDED_MODE_ENABLED state.
      */
     public void unregisterToggleAwareObserver() {
         final ContentResolver resolver = mContext.getContentResolver();
@@ -198,7 +224,8 @@ public class OneHandedSettingsUtils {
     public interface TogglesCallback {
         /**
          * Callback method for Settings.Secure key state changes.
-         * @param uri
+         *
+         * @param uri The Uri of the changed content.
          */
         void onChange(Uri uri);
     }

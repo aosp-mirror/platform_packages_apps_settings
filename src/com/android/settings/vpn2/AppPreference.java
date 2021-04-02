@@ -16,6 +16,7 @@
 
 package com.android.settings.vpn2;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -26,6 +27,8 @@ import androidx.preference.Preference;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * {@link androidx.preference.Preference} containing information about a VPN
@@ -43,6 +46,7 @@ public class AppPreference extends ManageablePreference {
         super.setUserId(userId);
 
         mPackageName = packageName;
+        disableIfConfiguredByAdmin();
 
         // Fetch icon and VPN label
         String label = packageName;
@@ -72,6 +76,25 @@ public class AppPreference extends ManageablePreference {
 
         setTitle(mName);
         setIcon(icon);
+    }
+
+    /**
+     * Disable this preference if VPN is set as always on by a profile or device owner.
+     * NB: it should be called after super.setUserId() otherwise admin information can be lost.
+     */
+    private void disableIfConfiguredByAdmin() {
+        if (isDisabledByAdmin()) {
+            // Already disabled due to user restriction.
+            return;
+        }
+        final DevicePolicyManager dpm = getContext()
+                .createContextAsUser(UserHandle.of(getUserId()), /* flags= */ 0)
+                .getSystemService(DevicePolicyManager.class);
+        if (mPackageName.equals(dpm.getAlwaysOnVpnPackage())) {
+            final EnforcedAdmin admin = RestrictedLockUtils.getProfileOrDeviceOwner(
+                    getContext(), UserHandle.of(mUserId));
+            setDisabledByAdmin(admin);
+        }
     }
 
     public PackageInfo getPackageInfo() {

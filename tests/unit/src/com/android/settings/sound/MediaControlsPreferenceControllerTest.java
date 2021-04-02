@@ -76,7 +76,7 @@ public class MediaControlsPreferenceControllerTest {
 
         assertThat(mController.isChecked()).isTrue();
 
-        mController.setChecked(false);
+        mController.onSwitchChanged(null /* switchView */, false);
 
         assertThat(Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.MEDIA_CONTROLS_RESUME, -1)).isEqualTo(0);
@@ -89,7 +89,7 @@ public class MediaControlsPreferenceControllerTest {
 
         assertThat(mController.isChecked()).isFalse();
 
-        mController.setChecked(true);
+        mController.onSwitchChanged(null /* switchView */, true);
 
         assertThat(Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.MEDIA_CONTROLS_RESUME, -1)).isEqualTo(1);
