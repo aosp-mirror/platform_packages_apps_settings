@@ -305,7 +305,9 @@
       <item quantity="one">已开启 - <xliff:g id="COUNT_0">%1$d</xliff:g> 个应用有权使用位置信息</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在加载…"</string>
-    <!-- no translation found for location_settings_footer (5404976765985985344) -->
+    <!-- no translation found for location_settings_footer_location_on (948868909317139885) -->
+    <skip />
+    <!-- no translation found for location_settings_footer_location_off (7196249733146238215) -->
     <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"帐号"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"安全"</string>
@@ -383,7 +385,7 @@
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5209963876503148501">"解锁手机"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"应用登录和付款"</string>
     <string name="security_settings_face_settings_require_category" msgid="3906382658164073665">"人脸解锁要求"</string>
-    <string name="security_settings_face_settings_preferences_category" msgid="1928185678544277926">"何时使用人脸解锁"</string>
+    <string name="security_settings_face_settings_preferences_category" msgid="1928185678544277926">"使用人脸解锁时"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"需要睁开双眼"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"必须睁开双眼才能解锁手机"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"一律需要确认"</string>
@@ -528,12 +530,12 @@
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"是，移除"</string>
     <string name="security_settings_biometrics_title" msgid="9156091890323967944">"人脸解锁和指纹解锁"</string>
     <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"点按即可进行设置"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"仅人脸"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"仅指纹"</string>
+    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"仅注册了人脸"</string>
+    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"仅注册了指纹"</string>
     <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"人脸和指纹"</string>
     <string name="security_settings_biometrics_description" msgid="1669340998063178097">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹"</string>
     <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"解锁方式"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"人脸或指纹的用途"</string>
+    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"将人脸或指纹用于"</string>
     <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"应用内身份验证"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"加密"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"加密平板电脑"</string>
@@ -619,7 +621,7 @@
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN 码 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"密码 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"继续，不设置人脸解锁或指纹解锁"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"您可以通过人脸或指纹解锁手机。为了安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="biometrics_unlock_title" msgid="616524056055233041">"您可以通过人脸或指纹解锁手机。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"由于管理员、加密策略或凭据存储的要求，您无法使用此选项"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"无"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑动"</string>
@@ -1797,7 +1799,8 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"位置信息服务"</string>
     <string name="location_title" msgid="5819154746934945021">"我的位置"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"工作资料位置信息"</string>
-    <string name="location_app_level_permissions" msgid="2564952469115758172">"管理位置权限"</string>
+    <!-- no translation found for location_app_level_permissions (907206607664629759) -->
+    <skip />
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"位置信息服务已关闭"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> 个应用（共 <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> 个应用）有权使用位置信息</item>
@@ -1814,6 +1817,8 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"允许应用和服务随时扫描 WLAN 网络（即使 WLAN 已关闭）。这可用于改进基于位置的功能和服务。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"蓝牙扫描"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"允许应用和服务随时扫描附近的设备（即使蓝牙已关闭）。这可用于改进基于位置的功能和服务。"</string>
+    <!-- no translation found for location_services_preference_title (8572194688820064813) -->
+    <skip />
     <string name="location_services_screen_title" msgid="9204334551361202877">"位置信息服务"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"工作用位置信息服务"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"使用位置信息设置时区"</string>
@@ -2243,7 +2248,7 @@
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"在整个屏幕和局部屏幕之间切换"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"点按切换按钮即可在两个选项之间切换"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"要改用“无障碍”按钮吗？"</string>
-    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"通过点按三次放大屏幕上的部分内容会导致输入延迟和其他延迟。\n\n“无障碍”按钮会悬浮在屏幕中其他应用的前方。点按该按钮即可放大。"</string>
+    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"通过点按三次来放大屏幕上的部分内容会导致输入延迟和其他延迟。\n\n“无障碍”按钮会悬浮在屏幕上，位于其他应用前方。点按该按钮即可放大。"</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"改用“无障碍”按钮"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"使用“点按三次”"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"放大设置"</string>
@@ -2516,6 +2521,8 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"还可用：<xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"充电剩余时间：<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
+    <!-- no translation found for low_battery_summary (4458925347316501953) -->
+    <skip />
     <string name="background_activity_title" msgid="8214332017349791380">"后台限制"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"允许应用在后台运行"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"不允许应用在后台运行"</string>
@@ -2547,8 +2554,7 @@
     <string name="advanced_battery_title" msgid="3005993394776555079">"电池用量"</string>
     <string name="history_details_title" msgid="8628584613889559355">"详细电量使用记录"</string>
     <string name="advanced_battery_preference_title" msgid="6518802648205311326">"查看电池用量"</string>
-    <!-- no translation found for advanced_battery_preference_summary (711801095682290658) -->
-    <skip />
+    <string name="advanced_battery_preference_summary" msgid="711801095682290658">"查看过去 24 小时内的使用情况"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"电池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"详细使用情况"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"省电提示"</string>
@@ -2557,22 +2563,24 @@
     <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"手机的后台耗电量正常"</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"平板电脑的后台耗电量正常"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"设备的后台耗电量正常"</string>
-    <string name="battery_tip_low_battery_title" msgid="7789690720316830767">"电池电量不足"</string>
-    <string name="battery_tip_low_battery_summary" msgid="357649681960300945">"电池的续航时间不理想"</string>
-    <string name="battery_tip_smart_battery_title" product="default" msgid="2903272443772298636">"延长手机的电池续航时间"</string>
-    <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"延长平板电脑的电池续航时间"</string>
-    <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"延长设备的电池续航时间"</string>
+    <!-- no translation found for battery_tip_low_battery_title (4155239078744100997) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (2629633757244297436) -->
+    <skip />
+    <!-- no translation found for battery_tip_smart_battery_title (8925025450214912325) -->
+    <skip />
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"开启电池管理器"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"开启省电模式"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"电池电量可能会比平时更快耗尽"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"省电模式已开启"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能会受到限制"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"手机的使用强度比平时高"</string>
-    <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板电脑的使用强度比平时高"</string>
-    <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"设备的使用强度比平时高"</string>
-    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"电池电量可能会比平时更快耗尽"</string>
+    <!-- no translation found for battery_tip_high_usage_title (9110720762506146697) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_summary (3938999581403084551) -->
+    <skip />
     <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"针对电池状况进行优化"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"暂时限用电池。点按即可了解详情。"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (4779491239398261377) -->
+    <skip />
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"您使用的手机的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"您使用平板电脑的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"您使用设备的频率比平时高。电池电量可能会比预期更快耗尽。\n\n耗电量较高的几个应用："</string>
@@ -2621,8 +2629,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"这些应用一直在后台消耗电量。受限应用可能无法正常运行，且相关通知可能也会有所延迟。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"使用电池管理器"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"检测应用何时使用电量"</string>
-    <!-- no translation found for battery_manager_summary (255708681438809287) -->
-    <skip />
+    <string name="battery_manager_summary" msgid="255708681438809287">"检测应用大量消耗电池电量的情况"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"关闭"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d 个应用受到限制</item>
@@ -2738,8 +2745,7 @@
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"自动开启"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"没有时间表"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"根据您平时充电的时间"</string>
-    <!-- no translation found for battery_saver_pref_auto_routine_summary (4739240095966241508) -->
-    <skip />
+    <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"将会按照您的日常安排启用"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"根据电量百分比"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"根据您平常的充电时间，如果电池电量可能会在下次充电之前耗尽，则开启省电模式"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"将在电量为 <xliff:g id="PERCENT">%1$s</xliff:g> 时开启"</string>
@@ -2852,6 +2858,7 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"无"</string>
     <string name="certificate_management_app_description" msgid="7257420502179110164">"当您访问以下应用和网址时，系统会通过此应用安装的证书识别您的身份"</string>
     <string name="remove_credential_management_app" msgid="6879631067380232928">"移除"</string>
+    <!-- no translation found for number_of_urls (403979258551655023) -->
     <string name="emergency_tone_title" msgid="6673118505206685168">"紧急拨号信号"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"设置进行紧急呼救时的行为"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"备份"</string>
@@ -2890,8 +2897,7 @@
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"要允许启用监管功能吗？"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"如果继续操作，您所设的用户将由您的管理员进行管理。除了您的个人数据之外，管理员可能还会存储其他相关数据。\n\n您的管理员能够监控和管理与此用户相关的设置、权限、应用以及数据（其中包括网络活动和您设备的位置信息）。"</string>
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"其他选项已被您的管理员停用"</string>
-    <!-- no translation found for admin_more_details (4928985331640193758) -->
-    <skip />
+    <string name="admin_more_details" msgid="4928985331640193758">"了解详情"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"通知日志"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"通知历史记录"</string>
     <string name="notification_history_today" msgid="5828496957208237230">"过去 24 小时的通知"</string>
@@ -3363,8 +3369,7 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的应用、默认应用"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"工作资料中的应用无法访问通知。"</string>
     <string name="account_dashboard_title" msgid="3920790213061354489">"密码和帐号"</string>
-    <!-- no translation found for account_dashboard_default_summary (1730719656099599488) -->
-    <skip />
+    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"保存的密码、自动填充、同步的帐号"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"默认应用"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"语言、手势、时间、备份"</string>
     <string name="search_results_title" msgid="3360639917793022533">"设置"</string>
@@ -3592,14 +3597,18 @@
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"要更改勿扰模式的通知设置吗？"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"工作资料提示音"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"使用个人资料提示音"</string>
-    <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"工作资料和个人资料会使用相同的提示音"</string>
+    <!-- no translation found for work_use_personal_sounds_summary (608061627969077231) -->
+    <skip />
     <string name="work_ringtone_title" msgid="4810802758746102589">"工作电话铃声"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"默认工作通知提示音"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"默认工作闹钟提示音"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"与个人资料相同"</string>
-    <string name="work_sync_dialog_title" msgid="2359563902332046231">"要替换提示音吗？"</string>
-    <string name="work_sync_dialog_yes" msgid="9161415252411868574">"替换"</string>
-    <string name="work_sync_dialog_message" msgid="1328692374812258546">"系统将为您的工作资料使用个人资料提示音。"</string>
+    <!-- no translation found for work_sync_dialog_title (7810248132303515469) -->
+    <skip />
+    <!-- no translation found for work_sync_dialog_yes (5785488304957707534) -->
+    <skip />
+    <!-- no translation found for work_sync_dialog_message (5066178064994040223) -->
+    <skip />
     <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"要添加自定义提示音吗？"</string>
     <string name="ringtones_install_custom_sound_content" msgid="5844996763705884979">"此文件将复制到“<xliff:g id="FOLDER_NAME">%s</xliff:g>”文件夹"</string>
     <string name="ringtones_category_preference_title" msgid="26680768777533727">"铃声"</string>
@@ -5237,10 +5246,8 @@
     <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"锁定状态下显示支付卡"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"锁定状态下隐藏银行卡和控件"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"需先设置屏幕锁定方式才能使用"</string>
-    <!-- no translation found for power_menu_long_press_for_assist (2016813721240777737) -->
-    <skip />
-    <!-- no translation found for power_menu_long_press_for_assist_summary (8251928804984560312) -->
-    <skip />
+    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"长按电源按钮即可启动 Google 助理"</string>
+    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"长按电源按钮即可启动 Google 助理"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"显示设备控制器"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"显示银行卡和卡券"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"按住电源按钮即可获取用于控制已关联设备的选项"</string>

@@ -305,7 +305,8 @@
       <item quantity="one">On – <xliff:g id="COUNT_0">%1$d</xliff:g> app has access to location</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Loading…"</string>
-    <string name="location_settings_footer" msgid="5404976765985985344">"Location may use sources like GPS, Wi‑Fi, mobile networks and sensors to help estimate your device’s location."</string>
+    <string name="location_settings_footer_location_on" msgid="948868909317139885">"Location may use sources like GPS, Wi‑Fi, mobile networks and sensors to help estimate your device’s location. Apps with the nearby devices permission can determine the relative position of connected devices. &lt;a href=<xliff:g id="URL"> https://support.google.com/android/answer/3467281</xliff:g>&gt;Learn more&lt;/a&gt;."</string>
+    <string name="location_settings_footer_location_off" msgid="7196249733146238215">"Location access is off for apps and services. Your device location may still be sent to emergency responders when you call or text an emergency number. &lt;br&gt;&lt;br&gt;Apps with the nearby devices permission can determine the relative position of connected devices."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Accounts"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Security"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encryption and credentials"</string>
@@ -427,37 +428,22 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Next"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Skip fingerprint?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_message_setup (6255210343107484206) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_title_1 (4360262371633254407) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (5824014348182478279) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_title_2 (2580899232734177771) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_2 (4350767334790735812) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (1871569220720675048) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (3948305045484131665) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"When you see this icon, use your fingerprint for authentication, like when you sign in to apps or approve a purchase"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Bear in mind"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Using your fingerprint to unlock your phone may be less secure than a strong pattern or PIN"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"How it works"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Fingerprint unlock creates a unique model of your fingerprint to recognise you during authentication. To create this fingerprint model during setup, you will take images of your fingerprint from different positions."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="1871569220720675048">"The phone will also use images from your interactions with fingerprint unlock to update your fingerprint model. Your fingerprint images and model are stored securely on your phone and never leave the phone. All processing occurs securely on your phone."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"You can delete your fingerprint images and model, or turn off fingerprint unlock at any time in settings. Fingerprint images and models are stored on the phone until you delete them."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_try_adjusting (3855444121278320304) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_partially_detected (8330287007361798356) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_already_enrolled (8616678833080422946) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_clean_sensor (3501453094314993113) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_too_fast (5891227328100822018) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_too_bright (769646735950329315) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_error_max_attempts (1464972470750764128) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (5893917293784293946) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Change the position of your finger slightly each time"</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Cover the icon with the centre of your fingerprint"</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled" msgid="8616678833080422946">"This fingerprint has already been added"</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor" msgid="3501453094314993113">"Clean your screen near the sensor and try again"</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Lift your finger after you feel a vibration"</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Move somewhere with gentler lighting and try again"</string>
+    <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"You’ve reached the maximum number of attempts"</string>
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="5893917293784293946">"Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Skip screen lock?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Device protection features won’t be turned on. You won’t be able to prevent others from using this tablet if it’s lost, stolen or reset."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Device protection features won’t be turned on. You won’t be able to prevent others from using this device if it’s lost, stolen or reset."</string>
@@ -520,8 +506,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Remove all fingerprints?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Remove \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Do you want to delete this fingerprint?"</string>
-    <!-- no translation found for fingerprint_v2_delete_message (4136720729608391131) -->
-    <skip />
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"This deletes the fingerprint images and model associated with \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' that are stored on your device"</string>
     <string name="fingerprint_last_delete_message" msgid="93311579320049852">"You won\'t be able to use your fingerprints to unlock your phone, authorise purchases, or sign in to apps"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"You won\'t be able to use your fingerprints to unlock your work profile, authorise purchases or sign in to work apps"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Yes, remove"</string>
@@ -798,8 +783,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Advanced"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Advanced Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (7628457523484942552) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="7628457523484942552">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in "<annotation id="link">"Bluetooth scanning settings"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"To improve location accuracy, system apps and services can still detect Bluetooth devices. You can change this in <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>scanning settings<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Couldn\'t connect. Try again."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Device details"</string>
@@ -902,10 +886,8 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"To use, select a network rating provider"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"To use, select a compatible network rating provider"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Install certificates"</string>
-    <!-- no translation found for wifi_scan_notify_text (7163137260385995873) -->
-    <skip />
-    <!-- no translation found for wifi_scan_notify_text_scanning_off (7439201783168213149) -->
-    <skip />
+    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"To improve location accuracy, apps and services can still scan for Wi‑Fi networks at any time, even when Wi‑Fi is off. This can be used, for example, to improve location-based features and services. You can change this in <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Wi‑Fi scanning settings<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"To improve location accuracy, turn on Wi-Fi scanning in <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Wi‑Fi scanning settings<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"Don\'t show again"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"Keep Wi‑Fi on during sleep"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8753852404141070878">"Wi‑Fi on during sleep"</string>
@@ -1796,7 +1778,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Location services"</string>
     <string name="location_title" msgid="5819154746934945021">"My Location"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Location for work profile"</string>
-    <string name="location_app_level_permissions" msgid="2564952469115758172">"Manage location permissions"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"App location permissions"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Location is off"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> of <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> apps have access to location</item>
@@ -1813,6 +1795,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Allow apps and services to scan for Wi‑Fi networks at any time, even when Wi‑Fi is off. This can be used, for example, to improve location-based features and services."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth scanning"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services."</string>
+    <string name="location_services_preference_title" msgid="8572194688820064813">"Manage Location Services"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"Location Services"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Location services for work"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Use location to set time zone"</string>
@@ -2515,6 +2498,7 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> remaining"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> to charge"</string>
+    <string name="low_battery_summary" msgid="4458925347316501953">"Low battery"</string>
     <string name="background_activity_title" msgid="8214332017349791380">"Background restriction"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Allow the app to run in the background"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"App not allowed to run in background"</string>
@@ -2555,22 +2539,18 @@
     <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"Phone has typical background battery usage"</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"Tablet has typical background battery usage"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"Device has typical background battery usage"</string>
-    <string name="battery_tip_low_battery_title" msgid="7789690720316830767">"Low battery capacity"</string>
-    <string name="battery_tip_low_battery_summary" msgid="357649681960300945">"Battery can\'t provide good battery life"</string>
-    <string name="battery_tip_smart_battery_title" product="default" msgid="2903272443772298636">"Improve your phone\'s battery life"</string>
-    <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"Improve your tablet\'s battery life"</string>
-    <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Improve your device\'s battery life"</string>
+    <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Battery level low"</string>
+    <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Turn on Battery Saver to extend battery life"</string>
+    <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Improve battery life"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Turn on Battery Manager"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Turn on Battery Saver"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Battery may run out earlier than usual"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Battery Saver is on"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Some features may be limited"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Phone used more than usual"</string>
-    <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet used more than usual"</string>
-    <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Device used more than usual"</string>
-    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Battery may run out earlier than usual"</string>
+    <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Higher battery usage"</string>
+    <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"See apps with highest usage"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimising for battery health"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Battery limited temporarily. Tap to learn more."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4779491239398261377">"Battery limited temporarily. Learn more."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:"</string>
@@ -2848,6 +2828,10 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"None"</string>
     <string name="certificate_management_app_description" msgid="7257420502179110164">"Certificates installed by this app identify you to the apps and URLs below"</string>
     <string name="remove_credential_management_app" msgid="6879631067380232928">"Remove"</string>
+    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> URLs</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> URL</item>
+    </plurals>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Emergency dialling signal"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Set behaviour when an emergency call is placed"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Backup"</string>
@@ -3586,14 +3570,14 @@
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Change Do Not Disturb notification settings?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Work profile sounds"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Use personal profile sounds"</string>
-    <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"Sounds are the same for work and personal profiles"</string>
+    <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Use the same sounds as your personal profile"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Work phone ringtone"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Default work notification sound"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Default work alarm sound"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Same as personal profile"</string>
-    <string name="work_sync_dialog_title" msgid="2359563902332046231">"Replace sounds?"</string>
-    <string name="work_sync_dialog_yes" msgid="9161415252411868574">"Replace"</string>
-    <string name="work_sync_dialog_message" msgid="1328692374812258546">"Your personal profile sounds will be used for your work profile"</string>
+    <string name="work_sync_dialog_title" msgid="7810248132303515469">"Use personal profile sounds?"</string>
+    <string name="work_sync_dialog_yes" msgid="5785488304957707534">"Confirm"</string>
+    <string name="work_sync_dialog_message" msgid="5066178064994040223">"Your work profile will use the same sounds as your personal profile"</string>
     <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"Add custom sound?"</string>
     <string name="ringtones_install_custom_sound_content" msgid="5844996763705884979">"This file will be copied to the <xliff:g id="FOLDER_NAME">%s</xliff:g> folder"</string>
     <string name="ringtones_category_preference_title" msgid="26680768777533727">"Ringtones"</string>
