@@ -441,7 +441,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 SystemBatteryConsumer.DRAIN_TYPE_WIFI,
         }) {
             builder.getOrCreateSystemBatteryConsumerBuilder(drainType)
-                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, use);
+                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, use);
             use += 5;
         }
 
@@ -449,26 +449,27 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         for (int i = 0; i < 100; i++) {
             builder.getOrCreateUidBatteryConsumerBuilder(
                             new FakeUid(Process.FIRST_APPLICATION_UID + i))
-                    .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 10000 + i * 1000)
-                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, use);
+                    .setTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND, 10000 + i * 1000)
+                    .setTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND, 20000 + i * 2000)
+                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, use);
             use += 1;
         }
 
         // Simulate dex2oat process.
         builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 1000.0)
+                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
         builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID + 1))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 1000.0)
+                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
         builder.getOrCreateUidBatteryConsumerBuilder(
                         new FakeUid(UserHandle.getSharedAppGid(Process.LOG_UID)))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 900.0);
+                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 900.0);
 
         return builder.build();
     }

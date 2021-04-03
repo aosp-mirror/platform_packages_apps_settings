@@ -35,7 +35,6 @@ import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -433,8 +432,10 @@ public class BatteryEntry {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
             return ((UidBatteryConsumer) mBatteryConsumer).getTimeInStateMs(
                     UidBatteryConsumer.STATE_FOREGROUND);
+        } else if (mBatteryConsumer instanceof SystemBatteryConsumer) {
+            return ((SystemBatteryConsumer) mBatteryConsumer).getUsageDurationMillis();
         } else {
-            return mBatteryConsumer.getUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_USAGE);
+            return 0;
         }
     }
 
