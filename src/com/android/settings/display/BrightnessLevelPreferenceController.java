@@ -20,13 +20,15 @@ import static com.android.settingslib.display.BrightnessUtils.convertLinearToGam
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
+import android.hardware.display.BrightnessInfo;
+import android.hardware.display.DisplayManager;
+import android.hardware.display.DisplayManager.DisplayListener;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.provider.Settings;
 import android.provider.Settings.System;
 import android.service.vr.IVrManager;
 import android.util.Log;
@@ -49,42 +51,53 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
 
     private static final String TAG = "BrightnessPrefCtrl";
     private static final String KEY_BRIGHTNESS = "brightness";
-    private static final Uri BRIGHTNESS_URI;
     private static final Uri BRIGHTNESS_FOR_VR_URI;
     private static final Uri BRIGHTNESS_ADJ_URI;
 
-    private final float mMinBrightness;
-    private final float mMaxBrightness;
     private final float mMinVrBrightness;
     private final float mMaxVrBrightness;
     private final ContentResolver mContentResolver;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final DisplayManager mDisplayManager;
 
     private Preference mPreference;
 
     static {
-        BRIGHTNESS_URI = System.getUriFor(System.SCREEN_BRIGHTNESS_FLOAT);
         BRIGHTNESS_FOR_VR_URI = System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR);
         BRIGHTNESS_ADJ_URI = System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ);
     }
 
     private ContentObserver mBrightnessObserver =
-            new ContentObserver(new Handler(Looper.getMainLooper())) {
+            new ContentObserver(mHandler) {
                 @Override
                 public void onChange(boolean selfChange) {
                     updatedSummary(mPreference);
                 }
             };
 
+    private final DisplayListener mDisplayListener = new DisplayListener() {
+        @Override
+        public void onDisplayAdded(int displayId) {}
+
+        @Override
+        public void onDisplayRemoved(int displayId) {}
+
+        @Override
+        public void onDisplayChanged(int displayId) {
+            updatedSummary(mPreference);
+        }
+    };
+
+
     public BrightnessLevelPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
+        mDisplayManager = context.getSystemService(DisplayManager.class);
+
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
-        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        mMinBrightness = powerManager.getBrightnessConstraint(
-                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MINIMUM);
-        mMaxBrightness = powerManager.getBrightnessConstraint(
-                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MAXIMUM);
+        final PowerManager powerManager = context.getSystemService(PowerManager.class);
+
         mMinVrBrightness = powerManager.getBrightnessConstraint(
                 PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MINIMUM_VR);
         mMaxVrBrightness = powerManager.getBrightnessConstraint(
@@ -115,14 +128,16 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
 
     @Override
     public void onStart() {
-        mContentResolver.registerContentObserver(BRIGHTNESS_URI, false, mBrightnessObserver);
         mContentResolver.registerContentObserver(BRIGHTNESS_FOR_VR_URI, false, mBrightnessObserver);
         mContentResolver.registerContentObserver(BRIGHTNESS_ADJ_URI, false, mBrightnessObserver);
+        mDisplayManager.registerDisplayListener(mDisplayListener, mHandler,
+                DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS);
     }
 
     @Override
     public void onStop() {
         mContentResolver.unregisterContentObserver(mBrightnessObserver);
+        mDisplayManager.unregisterDisplayListener(mDisplayListener);
     }
 
     private void updatedSummary(Preference preference) {
@@ -132,15 +147,17 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     }
 
     private double getCurrentBrightness() {
-        final int value;
+        int value = 0;
         if (isInVrMode()) {
             value = convertLinearToGammaFloat(System.getFloat(mContentResolver,
-                    System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, mMaxBrightness),
+                    System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, mMaxVrBrightness),
                     mMinVrBrightness, mMaxVrBrightness);
         } else {
-            value = convertLinearToGammaFloat(Settings.System.getFloat(mContentResolver,
-                    System.SCREEN_BRIGHTNESS_FLOAT, mMinBrightness),
-                    mMinBrightness, mMaxBrightness);
+            final BrightnessInfo info = mContext.getDisplay().getBrightnessInfo();
+            if (info != null) {
+                value = convertLinearToGammaFloat(info.brightness, info.brightnessMinimum,
+                        info.brightnessMaximum);
+            }
         }
         return getPercentage(value, GAMMA_SPACE_MIN, GAMMA_SPACE_MAX);
     }
