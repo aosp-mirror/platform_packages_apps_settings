@@ -22,6 +22,8 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.companion.ICompanionDeviceManager;
+import android.compat.annotation.ChangeId;
+import android.compat.annotation.EnabledAfter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +31,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -88,11 +91,18 @@ public class NotificationAccessDetails extends DashboardFragment {
         mPm = getPackageManager();
         retrieveAppEntry();
         loadNotificationListenerService();
+        NotificationBackend backend = new NotificationBackend();
+        int listenerTargetSdk = Build.VERSION_CODES.S;
+        try {
+            listenerTargetSdk = mPm.getTargetSdkVersion(mComponentName.getPackageName());
+        } catch (PackageManager.NameNotFoundException e){
+            // how did we get here?
+        }
         use(ApprovalPreferenceController.class)
                 .setPkgInfo(mPackageInfo)
                 .setCn(mComponentName)
                 .setNm(context.getSystemService(NotificationManager.class))
-                .setPm(context.getPackageManager())
+                .setPm(mPm)
                 .setParent(this);
         use(HeaderPreferenceController.class)
                 .setFragment(this)
@@ -104,15 +114,27 @@ public class NotificationAccessDetails extends DashboardFragment {
                         ServiceManager.getService(Context.COMPANION_DEVICE_SERVICE)))
                 .setCn(mComponentName)
                 .setUserId(mUserId);
+        use(PreUpgradePreferenceController.class)
+                .setNm(backend)
+                .setCn(mComponentName)
+                .setUserId(mUserId)
+                .setTargetSdk(listenerTargetSdk);
+        use(BridgedAppsLinkPreferenceController.class)
+                .setNm(backend)
+                .setCn(mComponentName)
+                .setUserId(mUserId)
+                .setTargetSdk(listenerTargetSdk);
+        final int finalListenerTargetSdk = listenerTargetSdk;
         getPreferenceControllers().forEach(controllers -> {
             controllers.forEach(controller -> {
                 if (controller instanceof TypeFilterPreferenceController) {
                     TypeFilterPreferenceController tfpc =
                             (TypeFilterPreferenceController) controller;
-                    tfpc.setNm(new NotificationBackend())
+                    tfpc.setNm(backend)
                             .setCn(mComponentName)
                             .setServiceInfo(mServiceInfo)
-                            .setUserId(mUserId);
+                            .setUserId(mUserId)
+                            .setTargetSdk(finalListenerTargetSdk);
                 }
             });
         });
@@ -154,7 +176,7 @@ public class NotificationAccessDetails extends DashboardFragment {
             setIntentAndFinish(true /* appChanged */);
         }
         Preference apps = getPreferenceScreen().findPreference(
-                use(BridgedAppsPreferenceController.class).getPreferenceKey());
+                use(BridgedAppsLinkPreferenceController.class).getPreferenceKey());
         if (apps != null) {
 
             apps.setOnPreferenceClickListener(preference -> {
