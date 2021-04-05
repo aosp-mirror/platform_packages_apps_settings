@@ -19,6 +19,7 @@ package com.android.settings.applications.specialaccess.notificationaccess;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
+import android.os.Build;
 import android.service.notification.NotificationListenerFilter;
 import android.service.notification.NotificationListenerService;
 import android.text.TextUtils;
@@ -41,6 +42,7 @@ public abstract class TypeFilterPreferenceController extends BasePreferenceContr
     private NotificationBackend mNm;
     private NotificationListenerFilter mNlf;
     private ServiceInfo mSi;
+    private int mTargetSdk;
 
     public TypeFilterPreferenceController(Context context, String key) {
         super(context, key);
@@ -66,15 +68,26 @@ public abstract class TypeFilterPreferenceController extends BasePreferenceContr
         return this;
     }
 
+    public TypeFilterPreferenceController setTargetSdk(int targetSdk) {
+        mTargetSdk = targetSdk;
+        return this;
+    }
+
     abstract protected int getType();
 
     @Override
     public int getAvailabilityStatus() {
         if (mNm.isNotificationListenerAccessGranted(mCn)) {
-            return AVAILABLE;
-        } else {
-            return DISABLED_DEPENDENT_SETTING;
+            if (mTargetSdk > Build.VERSION_CODES.S) {
+                return AVAILABLE;
+            }
+
+            mNlf = mNm.getListenerFilter(mCn, mUserId);
+            if (!mNlf.areAllTypesAllowed() || !mNlf.getDisallowedPackages().isEmpty()) {
+                return AVAILABLE;
+            }
         }
+        return DISABLED_DEPENDENT_SETTING;
     }
 
     private boolean hasFlag(int value, int flag) {
