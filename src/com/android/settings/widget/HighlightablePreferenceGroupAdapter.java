@@ -149,6 +149,8 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
 
         root.postDelayed(() -> {
             mHighlightRequested = true;
+            // Remove the animator to avoid a RecyclerView crash.
+            recyclerView.setItemAnimator(null);
             recyclerView.smoothScrollToPosition(position);
             mHighlightPosition = position;
             notifyItemChanged(position);
