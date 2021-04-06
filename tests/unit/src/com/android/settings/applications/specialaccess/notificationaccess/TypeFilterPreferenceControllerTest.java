@@ -20,8 +20,12 @@ import static android.service.notification.NotificationListenerService.FLAG_FILT
 import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_ONGOING;
 import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_SILENT;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,6 +33,7 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.service.notification.NotificationListenerFilter;
 import android.service.notification.NotificationListenerService;
@@ -81,6 +86,44 @@ public class TypeFilterPreferenceControllerTest {
         mController.setNm(mNm);
         mController.setServiceInfo(mSi);
         mController.setUserId(0);
+        mController.setTargetSdk(Build.VERSION_CODES.CUR_DEVELOPMENT + 1);
+    }
+
+    @Test
+    public void testAvailable_notGranted() {
+        when(mNm.isNotificationListenerAccessGranted(any())).thenReturn(false);
+        mController.setTargetSdk(Build.VERSION_CODES.CUR_DEVELOPMENT + 1);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void testAvailable_lowTargetSdk_noCustomizations() {
+        when(mNm.isNotificationListenerAccessGranted(any())).thenReturn(true);
+        mController.setTargetSdk(Build.VERSION_CODES.S);
+        when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void testAvailable_lowTargetSdk_customizations() {
+        when(mNm.isNotificationListenerAccessGranted(any())).thenReturn(true);
+        mController.setTargetSdk(Build.VERSION_CODES.S);
+        NotificationListenerFilter nlf = new NotificationListenerFilter();
+        nlf.setTypes(FLAG_FILTER_TYPE_CONVERSATIONS);
+        when(mNm.getListenerFilter(mCn, 0)).thenReturn(nlf);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void testAvailable_highTargetSdk_noCustomizations() {
+        when(mNm.isNotificationListenerAccessGranted(any())).thenReturn(true);
+        mController.setTargetSdk(Build.VERSION_CODES.CUR_DEVELOPMENT + 1);
+        when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
