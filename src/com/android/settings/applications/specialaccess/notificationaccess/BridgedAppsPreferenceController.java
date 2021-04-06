@@ -16,14 +16,11 @@ package com.android.settings.applications.specialaccess.notificationaccess;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.VersionedPackage;
-import android.os.UserHandle;
 import android.service.notification.NotificationListenerFilter;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.core.BasePreferenceController;
@@ -126,9 +123,6 @@ public class BridgedAppsPreferenceController extends BasePreferenceController im
         final int N = apps.size();
         for (int i = 0; i < N; i++) {
             final AppEntry entry = apps.get(i);
-            if (!shouldAddPreference(entry)) {
-                continue;
-            }
             final String prefKey = entry.info.packageName + "|" + entry.info.uid;
             appsKeySet.add(prefKey);
             CheckBoxPreference preference = mScreen.findPreference(prefKey);
@@ -210,10 +204,5 @@ public class BridgedAppsPreferenceController extends BasePreferenceController im
                 }
             }
         }
-    }
-
-    @VisibleForTesting
-    static boolean shouldAddPreference(AppEntry app) {
-        return app != null && UserHandle.isApp(app.info.uid);
     }
 }

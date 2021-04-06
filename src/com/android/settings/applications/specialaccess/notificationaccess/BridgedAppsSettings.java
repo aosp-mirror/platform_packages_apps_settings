@@ -69,7 +69,7 @@ public class BridgedAppsSettings extends DashboardFragment {
             case MENU_SHOW_SYSTEM:
                 mShowSystem = !mShowSystem;
                 item.setTitle(mShowSystem ? R.string.menu_hide_system : R.string.menu_show_system);
-                mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
+                mFilter = mShowSystem ? ApplicationsState.FILTER_NOT_HIDE
                         : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
 
                 use(BridgedAppsPreferenceController.class).setFilter(mFilter).rebuild();

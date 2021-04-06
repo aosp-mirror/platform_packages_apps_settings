@@ -305,10 +305,8 @@
       <item quantity="one">Включено – <xliff:g id="COUNT_0">%1$d</xliff:g> приложение има достъп до местоположението</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Зарежда се…"</string>
-    <!-- no translation found for location_settings_footer_location_on (948868909317139885) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off (7196249733146238215) -->
-    <skip />
+    <string name="location_settings_footer_location_on" msgid="948868909317139885">"Функцията за местоположението може да използва източници като GPS, Wi‑Fi, мобилни мрежи и сензори, за да определя къде се намира устройството ви. Приложенията с разрешението за устройства в близост могат да определят относителната позиция на свързаните устройства. &lt;a href=<xliff:g id="URL"> https://support.google.com/android/answer/3467281</xliff:g>&gt;Научете повече&lt;/a&gt;."</string>
+    <string name="location_settings_footer_location_off" msgid="7196249733146238215">"Достъпът до местоположението е изключен за приложенията и услугите. Местоположението на устройството ви пак може да се изпраща до органите за бързо реагиране, когато се обадите на номер за спешни случаи или изпратите SMS до такъв. &lt;br&gt;&lt;br&gt;Приложенията с разрешението за устройства в близост могат да определят относителната позиция на свързаните устройства."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Профили"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Сигурност"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифроване и идентификационни данни"</string>
@@ -1799,8 +1797,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Услуги за местоположение"</string>
     <string name="location_title" msgid="5819154746934945021">"Моето местоположение"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Местоп. за служ. потр. профил"</string>
-    <!-- no translation found for location_app_level_permissions (907206607664629759) -->
-    <skip />
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Разрешения за достъп до местоп. на прил."</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Функцията за местоположението е изключена"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> от <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> приложения имат достъп до местоположението</item>
@@ -1817,8 +1814,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Разрешете на приложенията и услугите да сканират за Wi‑Fi мрежи по всяко време дори когато функцията за Wi‑Fi e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Сканиране за устройства с Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Разрешете на приложенията и услугите да сканират за устройства в близост по всяко време дори когато функцията за Bluetooth e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
-    <!-- no translation found for location_services_preference_title (8572194688820064813) -->
-    <skip />
+    <string name="location_services_preference_title" msgid="8572194688820064813">"Управление на услугите за местоположението"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"Услуги за местоположение"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Услуги за местоположение за служебни цели"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Използване на местоположението с цел задаване на часова зона"</string>
@@ -2521,8 +2517,7 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Остава: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> до зареждане"</string>
-    <!-- no translation found for low_battery_summary (4458925347316501953) -->
-    <skip />
+    <string name="low_battery_summary" msgid="4458925347316501953">"Изтощена батерия"</string>
     <string name="background_activity_title" msgid="8214332017349791380">"Ограничение за заден план"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Разрешаване приложението да се изпълнява на заден план"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Приложението няма разрешение да се изпълнява на заден план"</string>
@@ -2563,24 +2558,18 @@
     <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"Използването на батерията на заден план е в обичайните норми за телефона"</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"Използването на батерията на заден план е в обичайните норми за таблета"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"Използването на батерията на заден план е в обичайните норми за устройството"</string>
-    <!-- no translation found for battery_tip_low_battery_title (4155239078744100997) -->
-    <skip />
-    <!-- no translation found for battery_tip_low_battery_summary (2629633757244297436) -->
-    <skip />
-    <!-- no translation found for battery_tip_smart_battery_title (8925025450214912325) -->
-    <skip />
+    <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Нивото на батерията е ниско"</string>
+    <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Включете режима за запазване на батерията, за да удължите живота ѝ"</string>
+    <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Удължаване на живота на батерията"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Включете мениджъра на батерията"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Вкл. режим за запазване на батерията"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Батерията може да се изтощи по-рано от обикновено"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Режимът за запазване на батерията е включен"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Някои функции може да са ограничени"</string>
-    <!-- no translation found for battery_tip_high_usage_title (9110720762506146697) -->
-    <skip />
-    <!-- no translation found for battery_tip_high_usage_summary (3938999581403084551) -->
-    <skip />
+    <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"По-голямо използване на батерията"</string>
+    <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Вижте приложенията с най-голямо използване"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Оптимизиране с цел състоянието на батерията"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4779491239398261377) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="4779491239398261377">"Батерията е временно ограничена. Научете повече."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Телефонът ви е използван повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nПриложения с най-висок разход на батерията:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Таблетът ви е използван повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nПриложения с най-висок разход на батерията:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Устройството ви е използвано повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nПриложения с най-висок разход на батерията:"</string>
@@ -4150,6 +4139,10 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Няма предоставени разрешения"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Няма заявени разрешения"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Управлявайте достъпа на приложенията до данните ви"</string>
+    <!-- no translation found for permissions_usage_title (7928450120500019282) -->
+    <skip />
+    <!-- no translation found for permissions_usage_summary (6784310472062516454) -->
+    <skip />
     <string name="unused_apps" msgid="4566272194756830656">"Неизползвани приложения"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> неизползвани приложения</item>

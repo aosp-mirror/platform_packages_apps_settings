@@ -62,6 +62,13 @@
         android:summary="@string/notif_listener_excluded_app_summary"
         android:fragment="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsSettings"
         settings:searchable="false"
-        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsPreferenceController" />
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsLinkPreferenceController" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="notif_listener_not_migrated"
+        android:title="@string/notif_listener_not_migrated"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.PreUpgradePreferenceController"
+        android:selectable="false"
+        settings:searchable="false"/>
 
 </PreferenceScreen>
