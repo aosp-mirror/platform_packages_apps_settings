@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tableti është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Pajisja është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Bateria mund të mbarojë më herët se zakonisht"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Po optimizohet për integritetin e baterisë"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria e kufizuar përkohësisht. Trokit për të mësuar më shumë."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefoni yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tableti yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Pajisja jote është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\nAplikacionet kryesore sipas përdorimit të baterisë:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">%1$d aplikacion i kufizuar</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Problem me leximin e matësit të baterisë"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Problem me leximin e matësit të baterisë. Trokit "<annotation id="url">"për të mësuar më shumë"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Të ndalohet aplikacioni?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Telefoni yt nuk mund ta menaxhojë baterinë në mënyrë normale pasi aplikacioni <xliff:g id="APP">%1$s</xliff:g> po e mban zgjuar telefonin.\n\nPër t\'u përpjekur të zgjidhësh këtë problem, mund ta ndalosh aplikacionin.\n\nNëse kjo vazhdon të ndodhë, mund të jetë e nevojshme ta çinstalosh aplikacionin për të përmirësuar cilësinë e funksionimit të baterisë."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Tableti yt nuk mund ta menaxhojë baterinë në mënyrë normale pasi aplikacioni <xliff:g id="APP">%1$s</xliff:g> po e mban zgjuar tabletin.\n\nPër t\'u përpjekur të zgjidhësh këtë problem, mund ta ndalosh aplikacionin.\n\nNëse kjo vazhdon të ndodhë, mund të jetë e nevojshme ta çinstalosh aplikacionin për të përmirësuar cilësinë e funksionimit të baterisë."</string>
@@ -2595,7 +2599,7 @@
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"\"Kursyesi i baterisë\" aktivizohet nëse bateria mund të mbarojë përpara karikimit të zakonshëm të radhës"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Do të aktivizohet në <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Cakto një orar"</string>
-    <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Zgjat kohëzgjatjen e baterisë"</string>
+    <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Rrit kohëzgjatjen e baterisë"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Çaktivizo kur të karikohet"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"\"Kursyesi i baterisë\" çaktivizohet kur telefoni yt është në <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"\"Kursyesi i baterisë\" çaktivizohet kur tableti yt është në <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Aktiv (i heshtur)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Joaktiv"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detajet e rrjetit"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Emri i pajisjes sate është i dukshëm për aplikacionet në telefonin tënd. Ai mund të shikohet po ashtu nga persona të tjerë kur lidhesh me pajisje me Bluetooth ose kur konfiguron një zonë të qasjes për internet me Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Emri i pajisjes sate është i dukshëm për aplikacionet në telefonin tënd. Ai mund të shikohet po ashtu nga persona të tjerë kur lidhesh me pajisje me Bluetooth, kur lidhesh me një rrjet Wi-Fi ose kur konfiguron një zonë të qasjes për internet me Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Pajisjet"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Të gjitha cilësimet"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Sugjerime"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nuk ofrohet asnjë luajtës"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth-i do të aktivizohet"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nuk ofrohet sepse modaliteti i orarit të gjumit është aktiv"</string>
 </resources>

@@ -2460,6 +2460,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet se upotrebljava više nego obično"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Uređaj se upotrebljava više nego obično"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija bi se mogla isprazniti brže nego obično"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimiziranje radi zdravlja baterije"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterija je privremeno ograničena. Dodirnite da biste saznali više."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Vaš se telefon upotrebljavao više nego obično. Baterija bi se mogla isprazniti brže nego što očekujete.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Vaš se tablet upotrebljavao više nego obično. Baterija bi se mogla isprazniti brže nego što očekujete.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Vaš se uređaj upotrebljavao više nego obično. Baterija bi se mogla isprazniti brže nego što očekujete.\n\nAplikacije koje najviše troše bateriju:"</string>
@@ -2522,6 +2524,8 @@
       <item quantity="other">Ograničeno je %1$d aplikacija</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Problem s očitavanjem mjerača baterije"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Došlo je do problema s očitavanjem mjerača baterije. Dodirnite da biste "<annotation id="url">"saznali više"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Zaustaviti aplikaciju?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Vaš telefon ne može upravljati baterijom na uobičajen način jer ga aplikacija <xliff:g id="APP">%1$s</xliff:g> zadržava u aktivnom stanju.\n\nDa biste pokušali riješiti taj problem, možete zaustaviti tu aplikaciju.\n\nAko se problem ponovi, možda biste trebali deinstalirati tu aplikaciju da biste smanjili potrošnju baterije."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Vaš tablet ne može upravljati baterijom na uobičajen način jer ga aplikacija <xliff:g id="APP">%1$s</xliff:g> zadržava u aktivnom stanju.\n\nDa biste pokušali riješiti taj problem, možete zaustaviti tu aplikaciju.\n\nAko se problem ponovi, možda biste trebali deinstalirati tu aplikaciju da biste smanjili potrošnju baterije."</string>
@@ -2632,7 +2636,7 @@
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Na temelju postotka"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Štednja baterije uključuje se ako bi se baterija mogla isprazniti prije uobičajenog vremena punjenja"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Uključit će se na <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Postavite raspored"</string>
+    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Postavi raspored"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Produljenje trajanja baterije"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Isključi nakon punjenja"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Štednja baterije isključuje se kad je telefon na <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3490,7 +3494,7 @@
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Želite li promijeniti postavke obavijesti za način Ne uznemiravaj?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Zvukovi poslovnog profila"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Upotreba zvuka osobnog profila"</string>
-    <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"Zvukovi su isti za radni i osobni profil"</string>
+    <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"Zvukovi su isti za poslovni i osobni profil"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Melodija zvona poslovnog telefona"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Zadani zvuk poslovne obavijesti"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Zadani zvuk poslovnog alarma"</string>
@@ -4788,7 +4792,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Uključi (isključi zvuk)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Isključi"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Podaci o mreži"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Naziv vašeg uređaja vidljiv je aplikacijama na vašem telefonu. Mogu ga vidjeti i drugi ljudi kada se povežete s Bluetooth uređajima ili postavite Wi-Fi žarišnu točku."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Naziv vašeg uređaja vidljiv je aplikacijama na vašem telefonu. Mogu ga vidjeti i drugi ljudi kada se povežete s Bluetooth uređajima ili Wi-Fi mrežom ili postavite Wi-Fi žarišnu točku."</string>
     <string name="devices_title" msgid="649715719278562515">"Uređaji"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Sve postavke"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Prijedlozi"</string>
@@ -5051,4 +5055,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nijedan player nije dostupan"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"mediji"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth će se uključiti"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nije dostupno jer je uključen način rada u vrijeme spavanja"</string>
 </resources>

@@ -2460,6 +2460,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Planšetdators tika izmantots vairāk nekā parasti."</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Ierīce tika izmantota vairāk nekā parasti."</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Akumulators var izlādēties ātrāk nekā parasti"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Akumulatora darbības optimizēšana"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Akumulatora uzlādes līmenis ir īslaicīgi ierobežots. Pieskarieties, lai uzzinātu vairāk."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Jūsu tālrunis tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Jūsu planšetdators tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Jūsu ierīce tika izmantota vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\nLietotnes, kas izmanto visvairāk akumulatora enerģijas:"</string>
@@ -2522,6 +2524,8 @@
       <item quantity="other">Ierobežota %1$d lietotņu darbība</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small><font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Nevar iegūt informāciju par akumulatora uzlādes līmeni."</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Nevar iegūt informāciju par akumulatora uzlādes līmeni. Pieskarieties, lai "<annotation id="url">"uzzinātu vairāk"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Vai apturēt lietotni?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Jūsu tālrunis nevar pārvaldīt akumulatora darbību kā parasti, jo lietotne <xliff:g id="APP">%1$s</xliff:g> arvien aktivizē jūsu tālruni.\n\nLai novērstu šo problēmu, varat apturēt lietotnes darbību.\n\nJa problēma atkārtojas, iespējams, būs jāatinstalē lietotne, lai uzlabotu akumulatora darbību."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Jūsu planšetdators nevar pārvaldīt akumulatora darbību kā parasti, jo lietotne <xliff:g id="APP">%1$s</xliff:g> arvien aktivizē jūsu planšetdatoru.\n\nLai novērstu šo problēmu, varat apturēt lietotnes darbību.\n\nJa problēma atkārtojas, iespējams, būs jāatinstalē lietotne, lai uzlabotu akumulatora darbību."</string>
@@ -4726,15 +4730,15 @@
     <string name="angle_enabled_app" msgid="6044941043384239076">"Atlasiet lietotni, kam ANGLE ir iespējots"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Nav iestatīta neviena lietojumprogramma, kam ANGLE ir iespējots"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"Lietojumprogramma, kam ANGLE ir iespējots: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"Grafikas dziņa preferences"</string>
-    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"Grafikas dziņa iestatījumu mainīšana"</string>
-    <string name="graphics_driver_footer_text" msgid="5123754522284046790">"Ja ir vairāki grafikas dziņi, varat izvēlēties izmantot atjaunināto grafikas dzini, kas paredzēts ierīcēs instalētajām lietotnēm."</string>
+    <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"Grafikas draivera preferences"</string>
+    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"Grafikas draivera iestatījumu mainīšana"</string>
+    <string name="graphics_driver_footer_text" msgid="5123754522284046790">"Ja ir vairāki grafikas draiveri, varat izvēlēties izmantot atjaunināto grafikas draiveri, kas paredzēts ierīcēs instalētajām lietotnēm."</string>
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Iespējot visām lietotnēm"</string>
-    <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Grafikas dziņa atlase"</string>
+    <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Grafikas draivera atlase"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Noklusējums"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Spēles dzinis"</string>
-    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Grafikas dzinis izstrādātājiem"</string>
-    <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Sistēmas grafikas dzinis"</string>
+    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Spēles draiveris"</string>
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Grafikas draiveris izstrādātājiem"</string>
+    <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Sistēmas grafikas draiveris"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:2 (8104576549429294026) -->
@@ -4788,7 +4792,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Ieslēgt (izslēgt skaņu)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Izslēgt"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Dati par tīklu"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Jūsu ierīces nosaukums ir redzams tālrunī instalētajām lietotnēm. Ja izveidosiet savienojumu ar Bluetooth ierīcēm vai iestatīsiet Wi-Fi tīklāju, tas būs redzams arī citām personām."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Jūsu ierīces nosaukums ir redzams tālrunī instalētajām lietotnēm. Tas var būt redzams arī citām personām, ja izveidosiet savienojumu ar Bluetooth ierīcēm, Wi-Fi tīklu vai iestatīsiet Wi-Fi tīklāju."</string>
     <string name="devices_title" msgid="649715719278562515">"Ierīces"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Visi iestatījumi"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Ieteikumi"</string>
@@ -5051,4 +5055,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nav pieejams neviens atskaņotājs"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multivide"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Tiks ieslēgts Bluetooth savienojums."</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Šī preference nav pieejama, jo ir ieslēgts naktsmiera režīms."</string>
 </resources>

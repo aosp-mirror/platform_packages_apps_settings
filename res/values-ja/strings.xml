@@ -27,7 +27,7 @@
       <item quantity="other">デベロッパーになるまであと<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>ステップです。</item>
       <item quantity="one">デベロッパーになるまであと<xliff:g id="STEP_COUNT_0">%1$d</xliff:g>ステップです。</item>
     </plurals>
-    <string name="show_dev_on" msgid="2840850085134853754">"これでデベロッパーになりました！"</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"開発者向けオプションが有効になりました"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"開発者向けオプションが既に有効です。"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"まず開発者向けオプションを有効にしてください。"</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"無線とネットワーク"</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"タブレットの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"デバイスの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池が通常より早くなくなる可能性があります"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"電池の状態を最適化"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"電池の使用が一時的に制限されています。タップして詳細をご確認ください。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"スマートフォンの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"タブレットの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"デバイスの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">制限されているアプリ: %1$d 個</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small></string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"電池残量の読み込み中に問題が発生しました"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"電池残量の読み込み中に問題が発生しました。タップして"<annotation id="url">"詳細をご確認ください"</annotation>"。"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"アプリを停止しますか？"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、スマートフォンで電池を正常に管理できません。\n\nアプリを停止して、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、タブレットで電池を正常に管理できません。\n\nアプリを停止して、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
@@ -2664,7 +2668,7 @@
     <string name="tts_reset" msgid="9047681050813970031">"リセット"</string>
     <string name="tts_play" msgid="2945513377250757221">"再生"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"アダプティブ接続"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"接続の自動調整"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"証明書のインストール"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"ON（ミュート）"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"OFF"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ネットワークの詳細"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"デバイス名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"デバイス名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
     <string name="devices_title" msgid="649715719278562515">"デバイス"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"すべての設定"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"おすすめの設定"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"プレーヤーなし"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth が ON になります"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
 </resources>

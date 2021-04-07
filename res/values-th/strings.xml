@@ -312,8 +312,8 @@
     <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"อุปกรณ์ไม่ได้เข้ารหัส"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"หน้าจอล็อก"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"สิ่งที่จะแสดง"</string>
-    <string name="security_settings_summary" msgid="1627059516127354233">"ตั้งค่าตำแหน่งของฉัน ปลดล็อกหน้าจอ ล็อกซิมการ์ด ล็อกที่จัดเก็บข้อมูลรับรอง"</string>
-    <string name="cdma_security_settings_summary" msgid="2455517905101186330">"ตั้งค่าตำแหน่งของฉัน การปลดล็อกหน้าจอ การล็อกที่จัดเก็บข้อมูลรับรอง"</string>
+    <string name="security_settings_summary" msgid="1627059516127354233">"ตั้งค่าตำแหน่งของฉัน ปลดล็อกหน้าจอ ล็อกซิมการ์ด ล็อกที่เก็บข้อมูลเข้าสู่ระบบ"</string>
+    <string name="cdma_security_settings_summary" msgid="2455517905101186330">"ตั้งค่าตำแหน่งของฉัน การปลดล็อกหน้าจอ การล็อกที่เก็บข้อมูลเข้าสู่ระบบ"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"ความเป็นส่วนตัว"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"ไม่พร้อมใช้งาน"</string>
     <string name="security_status_title" msgid="6958004275337618656">"สถานะความปลอดภัย"</string>
@@ -539,7 +539,7 @@
     <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"ปลดล็อกด้วยใบหน้าและรหัสผ่าน"</string>
     <string name="face_unlock_skip_face" msgid="7117201898540606846">"ดำเนินการต่อโดยไม่ใช้การปลดล็อกด้วยใบหน้า"</string>
     <string name="face_unlock_title" msgid="7344830351598247267">"คุณปลดล็อกโทรศัพท์โดยใช้ใบหน้าได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"ปิดใช้โดยผู้ดูแลระบบ นโยบายการเข้ารหัสลับ หรือที่เก็บข้อมูลที่เชื่อถือได้"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"ปิดใช้โดยผู้ดูแลระบบ นโยบายการเข้ารหัสลับ หรือที่เก็บข้อมูลเข้าสู่ระบบ"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"ไม่มี"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"เลื่อน"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"รูปแบบ"</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"ใช้งานแท็บเล็ตมากกว่าปกติ"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"ใช้งานอุปกรณ์มากกว่าปกติ"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"แบตเตอรี่อาจหมดเร็วกว่าปกติ"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"การเพิ่มประสิทธิภาพแบตเตอรี่"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"การชาร์จแบตเตอรี่จำกัดชั่วคราว แตะเพื่อดูข้อมูลเพิ่มเติม"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"มีการใช้งานโทรศัพท์มากกว่าปกติ แบตเตอรี่อาจหมดเร็วกว่าที่คาดไว้\n\nแอปที่ใช้แบตเตอรี่มากสุดมีลำดับดังนี้"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"มีการใช้งานแท็บเล็ตมากกว่าปกติ แบตเตอรี่อาจหมดเร็วกว่าที่คาดไว้\n\nแอปที่ใช้แบตเตอรี่มากสุดมีลำดับดังนี้"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"มีการใช้งานอุปกรณ์มากกว่าปกติ แบตเตอรี่อาจหมดเร็วกว่าที่คาดไว้\n\nแอปที่ใช้แบตเตอรี่มากสุดมีลำดับดังนี้"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">จำกัดแอป %1$d แอป</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"พบปัญหาในการอ่านเครื่องวัดแบตเตอรี่"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"พบปัญหาในการอ่านเครื่องวัดแบตเตอรี่ แตะเพื่อ"<annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"หยุดแอปไหม"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"โทรศัพท์ไม่สามารถจัดการแบตเตอรี่ได้ตามปกติเนื่องจาก <xliff:g id="APP">%1$s</xliff:g> ปลุกให้โทรศัพท์ตื่นอยู่ตลอด\n\nคุณสามารถหยุดแอปเพื่อลองแก้ปัญหานี้\n\nหากปัญหายังคงอยู่ คุณอาจต้องถอนการติดตั้งแอปเพื่อปรับปรุงประสิทธิภาพของแบตเตอรี่"</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"แท็บเล็ตไม่สามารถจัดการแบตเตอรี่ได้ตามปกติเนื่องจาก <xliff:g id="APP">%1$s</xliff:g> ปลุกให้แท็บเล็ตตื่นอยู่ตลอด\n\nคุณสามารถหยุดแอปเพื่อลองแก้ปัญหานี้\n\nหากปัญหายังคงอยู่ คุณอาจต้องถอนการติดตั้งแอปเพื่อปรับปรุงประสิทธิภาพของแบตเตอรี่"</string>
@@ -2684,8 +2688,8 @@
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"ติดตั้งแล้วสำหรับ VPN และแอป"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"ติดตั้งแล้วสำหรับ Wi-Fi"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"นำเนื้อหาทั้งหมดออกใช่ไหม"</string>
-    <string name="credentials_erased" msgid="9121052044566053345">"ที่จัดเก็บข้อมูลรับรองถูกลบ"</string>
-    <string name="credentials_not_erased" msgid="3611058412683184031">"ไม่สามารถลบที่เก็บข้อมูลรับรอง"</string>
+    <string name="credentials_erased" msgid="9121052044566053345">"ที่เก็บข้อมูลเข้าสู่ระบบถูกลบ"</string>
+    <string name="credentials_not_erased" msgid="3611058412683184031">"ลบที่เก็บข้อมูลเข้าระบบไม่ได้"</string>
     <string name="usage_access_title" msgid="1580006124578134850">"แอปที่มีสิทธิ์เข้าถึงการใช้งาน"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"ใบรับรอง CA"</string>
     <string name="user_certificate" msgid="6897024598058566466">"ใบรับรองผู้ใช้ VPN และแอป"</string>
@@ -2759,7 +2763,7 @@
     <string name="work_mode_on_summary" msgid="2042885311126239961">"จัดการโดยองค์กร"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"แอปและการแจ้งเตือนปิดอยู่"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"นำโปรไฟล์งานออก"</string>
-    <string name="background_data" msgid="321903213000101158">"ข้อมูลพื้นหลัง"</string>
+    <string name="background_data" msgid="321903213000101158">"อินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลัง"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"แอปพลิเคชันสามารถซิงค์ ส่ง และรับข้อมูลได้ตลอดเวลา"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"ปิดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลัง"</string>
     <string name="background_data_dialog_message" msgid="7760280837612824670">"การปิดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังจะทำให้แบตเตอรี่ใช้งานได้ยาวนานขึ้นและลดการใช้ข้อมูลลง แอปพลิเคชันบางอย่างอาจยังคงใช้การเชื่อมต่ออินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังอยู่"</string>
@@ -2788,7 +2792,7 @@
     <string name="really_remove_account_title" msgid="253097435885652310">"นำบัญชีออกหรือไม่"</string>
     <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดของบัญชีออกจากแท็บเล็ต"</string>
     <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"การนำบัญชีนี้ออกจะลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดของบัญชีออกจากโทรศัพท์"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดออกจากอุปกรณ์!"</string>
+    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดออกจากอุปกรณ์"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"ผู้ดูแลระบบไม่อนุญาตให้ทำการเปลี่ยนแปลงนี้"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"ซิงค์ด้วยตนเองไม่ได้"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"รายการนี้ปิดการซิงค์อยู่ หากต้องการเปลี่ยนการตั้งค่า ให้เปิดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังและการซิงค์อัตโนมัติชั่วคราว"</string>
@@ -2854,12 +2858,12 @@
     <string name="data_usage_forground_label" msgid="5762048187044975428">"พื้นหน้า:"</string>
     <string name="data_usage_background_label" msgid="5363718469293175279">"แบ็กกราวน์:"</string>
     <string name="data_usage_app_settings" msgid="5693524672522122485">"การตั้งค่าแอป"</string>
-    <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"ข้อมูลพื้นหลัง"</string>
+    <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"อินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลัง"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"เปิดใช้อินเทอร์เน็ตมือถือในเบื้องหลัง"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="8213268097024597864">"ก่อนอื่นให้ตั้งค่าขีดจำกัดในการใช้เน็ตมือถือก่อน เพื่อจำกัดอินเทอร์เน็ตที่แอปนี้ใช้งานอยู่เบื้องหลัง"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"ต้องการจำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังหรือไม่"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"ฟีเจอร์นี้อาจทำให้แอปพลิเคชันที่ต้องอาศัยอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังหยุดทำงานเมื่อมีแต่เครือข่ายมือถือเท่านั้นที่ใช้งานได้\n\nคุณสามารถดูการควบคุมการใช้งานข้อมูลที่เหมาะสมกว่านี้ได้ในการตั้งค่าที่มีอยู่ภายในแอปพลิเคชัน"</string>
-    <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"คุณสามารถจำกัดอินเทอร์เน็ตในพื้นหลังได้เมื่อคุณได้ตั้งค่าขีดจำกัดอินเทอร์เน็ตมือถือไว้เท่านั้น"</string>
+    <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"คุณสามารถจำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังได้เมื่อคุณได้ตั้งค่าขีดจำกัดอินเทอร์เน็ตมือถือไว้เท่านั้น"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"เปิดซิงค์ข้อมูลอัตโนมัติหรือไม่"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"การเปลี่ยนแปลงใดๆ ที่คุณทำกับบัญชีของคุณบนเว็บจะมีการคัดลอกไปยังแท็บเล็ตโดยอัตโนมัติ\n\nบางบัญชีอาจคัดลอกการเปลี่ยนแปลงที่คุณทำบนแท็บเล็ตไปยังเว็บโดยอัตโนมัติ นี่คือการทำงานของบัญชี Google"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"การเปลี่ยนแปลงใดๆ ที่คุณทำกับบัญชีของคุณบนเว็บจะมีการคัดลอกไปยังโทรศัพท์โดยอัตโนมัติ\n\nบางบัญชีอาจคัดลอกการเปลี่ยนแปลงที่คุณทำบนโทรศัพท์ไปยังเว็บโดยอัตโนมัติ นี่คือการทำงานของบัญชี Google"</string>
@@ -2886,13 +2890,13 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="45300375132284265">"<xliff:g id="RANGE">%2$s</xliff:g>: ใช้แล้วประมาณ <xliff:g id="TOTAL">%1$s</xliff:g> ตามที่แท็บเล็ตวัดได้ ผู้ให้บริการอาจมีรายละเอียดการใช้ต่างจากนี้"</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="3183594094081558193">"<xliff:g id="RANGE">%2$s</xliff:g>: ใช้แล้วประมาณ <xliff:g id="TOTAL">%1$s</xliff:g> ตามที่โทรศัพท์วัดได้ ผู้ให้บริการอาจมีรายละเอียดการใช้ต่างจากนี้"</string>
     <string name="data_usage_metered_title" msgid="6421347352444253058">"ข้อจำกัดของเครือข่าย"</string>
-    <string name="data_usage_metered_body" msgid="1206840367501998582">"ระบบจะดำเนินการกับเครือข่ายที่มีการวัดปริมาณอินเทอร์เน็ตเหมือนกับเครือข่ายมือถือเมื่อมีการจำกัดอินเทอร์เน็ตในการทำงานเบื้องหลัง แอปอาจแจ้งเตือนคุณก่อนใช้เครือข่ายเหล่านี้เพื่อดาวน์โหลดไฟล์ขนาดใหญ่"</string>
+    <string name="data_usage_metered_body" msgid="1206840367501998582">"ระบบจะดำเนินการกับเครือข่ายที่มีการวัดปริมาณอินเทอร์เน็ตเหมือนกับเครือข่ายมือถือเมื่อมีการจำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลัง แอปอาจแจ้งเตือนคุณก่อนใช้เครือข่ายเหล่านี้เพื่อดาวน์โหลดไฟล์ขนาดใหญ่"</string>
     <string name="data_usage_metered_mobile" msgid="3514227339274396401">"เครือข่ายมือถือ"</string>
-    <string name="data_usage_metered_wifi" msgid="4807465959110473407">"เครือข่าย Wi-Fi ที่วัดข้อมูล"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="4664158157415362613">"เปิด Wi‑Fi เพื่อเลือกเครือข่ายที่มีการวัดปริมาณข้อมูล"</string>
+    <string name="data_usage_metered_wifi" msgid="4807465959110473407">"เครือข่าย Wi-Fi แบบจำกัดปริมาณ"</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="4664158157415362613">"เปิด Wi‑Fi เพื่อเลือกเครือข่ายแบบจำกัดปริมาณ"</string>
     <string name="data_usage_metered_auto" msgid="1560514082131687116">"อัตโนมัติ"</string>
     <string name="wifi_metered_title" msgid="6623732965268033931">"การใช้งานเครือข่าย"</string>
-    <string name="data_usage_metered_yes" msgid="4262598072030135223">"มีการวัดปริมาณอินเทอร์เน็ต"</string>
+    <string name="data_usage_metered_yes" msgid="4262598072030135223">"มีการจำกัดปริมาณอินเทอร์เน็ต"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"ไม่มีการวัดปริมาณอินเทอร์เน็ต"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"การทำบัญชีข้อมูลผู้ให้บริการอาจแตกต่างจากอุปกรณ์ของคุณ"</string>
     <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"หมายเลขฉุกเฉิน"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"เปิด (ปิดเสียง)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"ปิด"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"รายละเอียดเครือข่าย"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"แอปในโทรศัพท์จะเห็นชื่อของอุปกรณ์ และคนอื่นก็อาจเห็นเช่นกันหากคุณเชื่อมต่อกับอุปกรณ์บลูทูธหรือตั้งค่าฮอตสปอต Wi-Fi"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"แอปในโทรศัพท์จะเห็นชื่อของอุปกรณ์ และคนอื่นก็อาจเห็นเช่นกันหากคุณเชื่อมต่อกับอุปกรณ์บลูทูธหรือเครือข่าย Wi-Fi หรือตั้งค่าฮอตสปอต Wi-Fi"</string>
     <string name="devices_title" msgid="649715719278562515">"อุปกรณ์"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"การตั้งค่าทั้งหมด"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"คำแนะนำ"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"ไม่มีโปรแกรมเล่น"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"สื่อ"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"บลูทูธจะเปิด"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"ใช้ไม่ได้เนื่องจากโหมดเวลาเข้านอนเปิดอยู่"</string>
 </resources>

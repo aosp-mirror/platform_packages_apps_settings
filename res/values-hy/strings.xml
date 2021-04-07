@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Պլանշետը սովորականից շատ է էներգիա օգտագործել"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Սարքը սովորականից շատ է էներգիա օգտագործել"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Մարտկոցի լիցքը կարող է սովորականից շուտ սպառվել"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Օպտիմալացում՝ մարտկոցի ծառայության ժամկետը երկարացնելու համար"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Մարտկոցը ժամանակավորապես սահմանափակված է։ Հպեք՝ ավելին իմանալու համար։"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Ձեր հեռախոսը սովորականից շատ է էներգիա օգտագործել։ Մարտկոցի լիցքը կարող է սպասվածից շուտ սպառվել։\n\nԱմենից շատ էներգիա սպառող հավելվածներն են՝"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Ձեր պլանշետը սովորականից շատ է էներգիա օգտագործել։ Մարտկոցի լիցքը կարող է սպասվածից շուտ սպառվել։\n\nԱմենից շատ էներգիա սպառող հավելվածներն են՝"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Ձեր սարքը սովորականից շատ է էներգիա օգտագործել։ Մարտկոցի լիցքը կարող է սպասվածից շուտ սպառվել։\n\nԱմենից շատ էներգիա սպառող հավելվածներն են՝"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">Սահմանափակված է %1$d հավելված</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Մարտկոցի ցուցիչի ցուցմունքը կարդալու հետ կապված խնդիր կա"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Մարտկոցի ցուցիչի ցուցմունքը կարդալու հետ կապված խնդիր կա։ Հպեք՝ "<annotation id="url">"ավելին իմանալու համար"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Փակե՞լ հավելվածը"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Ձեր հեռախոսը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը սարքին թույլ չի տալիս անցնել քնի ռեժիմ:։\n\nԱյս խնդիրը շտկելու համար կարող եք դադարեցնել\n\nհավելվածի աշխատանքը: Եթե խնդիրը չվերանա, ապա հնարավոր է պահանջվի ապատեղադրել հավելվածը՝ մարտկոցի աշխատանքը բարելավելու համար:"</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Ձեր պլանշետը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը պլանշետին թույլ չի տալիս անցնել քնի ռեժիմ:\n\nԱյս խնդիրը շտկելու համար կարող եք դադարեցնել\n\nհավելվածի աշխատանքը: Եթե խնդիրը չվերանա, ապա հնարավոր է պահանջվի ապատեղադրել հավելվածը՝ մարտկոցի աշխատանքը բարելավելու համար:"</string>
@@ -4185,7 +4189,7 @@
     <string name="screen_zoom_conversation_timestamp_2" msgid="472183807915497199">"Երք, 18:01"</string>
     <string name="screen_zoom_conversation_timestamp_3" msgid="1659313906250856104">"Երք, 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2046797647382623313">"Երք, 18:03"</string>
-    <string name="disconnected" msgid="3469373726996129247">"Միացված չի"</string>
+    <string name="disconnected" msgid="3469373726996129247">"Միացած չէ"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Միացված չէ"</string>
     <string name="data_usage_summary_format" msgid="6844301859713164522">"Օգտագործված տվյալներ՝ <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
     <string name="data_usage_wifi_format" msgid="7644390582649568117">"<xliff:g id="AMOUNT">^1</xliff:g>-ը փոխանցվել է Wi-Fi-ի միջոցով"</string>
@@ -4614,7 +4618,7 @@
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Առավելագույն հարցումների թիվը աշխատաշրջանի համար"</string>
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Տեսանելի տվյալակազմերի առավելագույն քանակը"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Վերականգնել կանխադրված արժեքները"</string>
-    <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Ինքնալրացման կարգավորումները վերակայվեցին"</string>
+    <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Ինքնալրացման կարգավորումները զրոյացվեցին"</string>
     <string name="device_theme" msgid="5027604586494772471">"Սարքի թեման"</string>
     <string name="default_theme" msgid="4815428567082263639">"Կանխադրված"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Ցանցի անունը"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Միացնել (անջատել ձայնը)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Անջատված է"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Ցանցի տվյալներ"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Ձեր սարքի անունը տեսանելի է հեռախոսի հավելվածներին։ Այն կարող են տեսնել օգտատերերը, երբ միանում եք Bluetooth սարքերի կամ կարգավորում եք Wi-Fi թեժ կետը։"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Ձեր սարքի անունը տեսանելի է հեռախոսում տեղադրված հավելվածներին։ Այն կարող են տեսնել օգտատերերը, երբ միանում եք Bluetooth սարքերի, Wi-Fi ցանցի, կամ կարգավորում եք Wi-Fi թեժ կետ։"</string>
     <string name="devices_title" msgid="649715719278562515">"Սարքեր"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Բոլոր կարգավորումները"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Հուշումներ"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Հասանելի նվագարկիչներ չկան"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"մեդիա"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Կմիանա Bluetooth-ը"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Անհասանելի է, քանի որ քնի ռեժիմը միացված է"</string>
 </resources>

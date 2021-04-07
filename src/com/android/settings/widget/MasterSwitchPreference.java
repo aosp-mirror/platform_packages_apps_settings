@@ -23,6 +23,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Switch;
 
+import androidx.annotation.Keep;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -99,6 +101,16 @@ public class MasterSwitchPreference extends RestrictedPreference {
 
     public boolean isChecked() {
         return mSwitch != null && mChecked;
+    }
+
+    /**
+     * Used to validate the state of mChecked and mCheckedSet when testing, without requiring
+     * that a ViewHolder be bound to the object.
+     */
+    @Keep
+    @Nullable
+    public Boolean getCheckedState() {
+        return mCheckedSet ? mChecked : null;
     }
 
     public void setChecked(boolean checked) {

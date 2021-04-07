@@ -2203,7 +2203,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Funkce pro usnadnění přístupu použijete tak, že přejedete dvěma prsty z dolního okraje obrazovky nahoru.\n\nChcete-li přepnout mezi funkcemi, přejeďte dvěma prsty nahoru a podržte je."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Funkce pro usnadnění přístupu použijete tak, že přejedete třemi prsty z dolního okraje obrazovky nahoru.\n\nChcete-li přepnout mezi funkcemi, přejeďte třemi prsty nahoru a podržte je."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Zkratka <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Zkratka pro <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Tlačítko Přístupnost"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Přejetí nahoru dvěma prsty"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Přejetí nahoru třemi prsty"</string>
@@ -2491,6 +2491,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet byl využíván víc než obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Zařízení bylo využíváno víc než obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterie se možná vybije dříve než obvykle"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimalizace pro výdrž baterie"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Baterie je dočasně omezena. Klepnutím zobrazíte další informace."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon byl využíván víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nAplikace, které nejvíce spotřebovávají baterii:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet byl využíván víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nAplikace, které nejvíce spotřebovávají baterii:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Zařízení bylo využíváno víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nAplikace, které nejvíce spotřebovávají baterii:"</string>
@@ -2560,6 +2562,8 @@
       <item quantity="one">Je omezena %1$d aplikace</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Problém s načtením měřiče baterie"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Problém s načtením měřiče baterie. Klepnutím "<annotation id="url">"zobrazíte další informace"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Zastavit aplikaci?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Telefon nemůže normálně šetřit baterii, protože mu aplikace <xliff:g id="APP">%1$s</xliff:g> znemožňuje přejít do režimu spánku.\n\nTento problém můžete zkusit vyřešit tím, že aplikaci ukončíte.\n\nPokud se to bude dít neustále, kvůli prodloužení výdrže baterie bude aplikaci možná nutné odinstalovat."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Tablet nemůže normálně šetřit baterii, protože mu aplikace <xliff:g id="APP">%1$s</xliff:g> znemožňuje přejít do režimu spánku.\n\nTento problém můžete zkusit vyřešit tím, že aplikaci ukončíte.\n\nPokud se to bude dít neustále, kvůli prodloužení výdrže baterie bude aplikaci možná nutné odinstalovat."</string>
@@ -2773,7 +2777,7 @@
     <string name="cert_not_installed" msgid="6725137773549974522">"Certifikát nebyl nainstalován"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Signál nouzového vytáčení"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Nastavit chování při tísňovém volání"</string>
-    <string name="privacy_settings_title" msgid="6437057228255974577">"Záloha"</string>
+    <string name="privacy_settings_title" msgid="6437057228255974577">"Zálohování"</string>
     <string name="backup_summary_state_on" msgid="9018954639693085240">"Zapnuto"</string>
     <string name="backup_summary_state_off" msgid="5341339397224835909">"Vypnuto"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Zálohování a obnovení"</string>
@@ -4876,7 +4880,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Zapnuto (ztlumeno)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Vypnuto"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Podrobnosti sítě"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Název vašeho zařízení je viditelný pro aplikace v telefonu. Mohou ho vidět také ostatní uživatelé, když se připojíte k zařízení Bluetooth nebo hotspotu Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Název vašeho zařízení je viditelný pro aplikace v telefonu. Mohou ho vidět také ostatní uživatelé, když se připojíte k zařízení Bluetooth nebo síti Wi-Fi, případně když vytvoříte hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Zařízení"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Všechna nastavení"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Návrhy"</string>
@@ -5142,4 +5146,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nejsou k dispozici žádné přehrávače"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Zapne se Bluetooth"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupné, protože je zapnutý režim večerky"</string>
 </resources>

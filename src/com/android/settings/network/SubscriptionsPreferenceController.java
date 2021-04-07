@@ -52,6 +52,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.SignalStrengthUtil;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -166,6 +167,12 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final int dataDefaultSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         for (SubscriptionInfo info : SubscriptionUtil.getActiveSubscriptions(mManager)) {
             final int subId = info.getSubscriptionId();
+            // Avoid from showing subscription(SIM)s which has been marked as hidden
+            // For example, only one subscription will be shown when there're multiple
+            // subscriptions with same group UUID.
+            if (!canSubscriptionBeDisplayed(mContext, subId)) {
+                continue;
+            }
             activeSubIds.add(subId);
             Preference pref = existingPrefs.remove(subId);
             if (pref == null) {
@@ -292,7 +299,17 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (mSubscriptionsListener.isAirplaneModeOn()) {
             return false;
         }
-        return SubscriptionUtil.getActiveSubscriptions(mManager).size() >= 2;
+        List<SubscriptionInfo> subInfoList = SubscriptionUtil.getActiveSubscriptions(mManager);
+        if (subInfoList == null) {
+            return false;
+        }
+        return subInfoList.stream()
+                // Avoid from showing subscription(SIM)s which has been marked as hidden
+                // For example, only one subscription will be shown when there're multiple
+                // subscriptions with same group UUID.
+                .filter(subInfo ->
+                        canSubscriptionBeDisplayed(mContext, subInfo.getSubscriptionId()))
+                .count() >= 2;
     }
 
     @Override
@@ -329,5 +346,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     @Override
     public void onSignalStrengthChanged() {
         update();
+    }
+
+    @VisibleForTesting
+    boolean canSubscriptionBeDisplayed(Context context, int subId) {
+        return (SubscriptionUtil.getAvailableSubscription(context,
+                ProxySubscriptionManager.getInstance(context), subId) != null);
     }
 }

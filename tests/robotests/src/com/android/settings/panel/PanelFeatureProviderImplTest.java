@@ -19,7 +19,6 @@ package com.android.settings.panel;
 
 import static com.android.settings.panel.SettingsPanelActivity.KEY_MEDIA_PACKAGE_NAME;
 import static com.android.settings.panel.SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT;
-import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -66,14 +65,5 @@ public class PanelFeatureProviderImplTest {
         final PanelContent panel = mProvider.getPanel(mContext, mBundle);
 
         assertThat(panel).isInstanceOf(VolumePanel.class);
-    }
-
-    @Test
-    public void getPanel_mediaOutputKey_returnsCorrectPanel() {
-        mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, ACTION_MEDIA_OUTPUT);
-
-        final PanelContent panel = mProvider.getPanel(mContext, mBundle);
-
-        assertThat(panel).isInstanceOf(MediaOutputPanel.class);
     }
 }

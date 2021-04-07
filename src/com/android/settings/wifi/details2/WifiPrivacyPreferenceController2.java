@@ -69,12 +69,13 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     public void updateState(Preference preference) {
         final DropDownPreference dropDownPreference = (DropDownPreference) preference;
         final int randomizationLevel = getRandomizationValue();
+        final boolean isSelectable = mWifiEntry.canSetPrivacy();
+        preference.setSelectable(isSelectable);
         dropDownPreference.setValue(Integer.toString(randomizationLevel));
         updateSummary(dropDownPreference, randomizationLevel);
 
-        // Makes preference not selectable, when this is a ephemeral network.
-        if (!mWifiEntry.canSetPrivacy()) {
-            preference.setSelectable(false);
+        // If the preference cannot be selectable, display a temporary network in the summary.
+        if (!isSelectable) {
             dropDownPreference.setSummary(R.string.wifi_privacy_settings_ephemeral_summary);
         }
     }

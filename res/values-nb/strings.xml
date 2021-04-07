@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Nettbrettet brukes mer enn vanlig"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Enheten brukes mer enn vanlig"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batteriet kan gå tomt raskere enn vanlig"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimaliserer batteritilstanden"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batteriet er midlertidig begrenset. Trykk for å finne ut mer."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefonen din har blitt brukt mer enn vanlig. Batteriet kan gå tomt raskere enn forventet.\n\nApper med høyest batteribruk:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Nettbrettet ditt har blitt brukt mer enn vanlig. Batteriet kan gå tomt raskere enn forventet.\n\nApper med høyest batteribruk:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Enheten din har blitt brukt mer enn vanlig. Batteriet kan gå tomt raskere enn forventet.\n\nApper med høyest batteribruk:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">%1$d app er begrenset</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Kunne ikke lese batterimåleren"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Kunne ikke lese batterimåleren. Trykk for å "<annotation id="url">"finne ut mer"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Vil du stoppe appen?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Telefonen kan ikke styre batteriet som normalt fordi <xliff:g id="APP">%1$s</xliff:g> holder telefonen aktiv.\n\nFor å forsøke å løse problemet kan du stoppe appen.\n\nHvis problemet vedvarer, må du kanskje avinstallere appen for å få bedre batteriytelse."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Nettbrettet kan ikke styre batteriet som normalt fordi <xliff:g id="APP">%1$s</xliff:g> holder nettbrettet aktivt.\n\nFor å forsøke å løse problemet kan du stoppe appen.\n\nHvis problemet vedvarer, må du kanskje avinstallere appen for å få bedre batteriytelse."</string>
@@ -2664,7 +2668,7 @@
     <string name="tts_reset" msgid="9047681050813970031">"Tilbakestill"</string>
     <string name="tts_play" msgid="2945513377250757221">"Spill av"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Selvjusterende tilkobling"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive Connectivity"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Forlenger batterilevetiden og enhetsytelsen ved å administrere nettverkstilkoblingene automatisk"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Legitimasjonslager"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installer et sertifikat"</string>
@@ -3307,7 +3311,7 @@
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Alarmvolum"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ringe- og varselvolum"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Varselvolum"</string>
-    <string name="ringtone_title" msgid="3271453110387368088">"Telefonringelyd"</string>
+    <string name="ringtone_title" msgid="3271453110387368088">"Ringetone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Standard varsellyd"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Lyd fra app"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"Standard varsellyd"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"På (kutt lyden)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Av"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Nettverksdetaljer"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Enhetsnavnet ditt er synlig for apper på telefonen. Det kan også ses av andre personer når du kobler til Bluetooth-enheter eller konfigurerer en Wi-Fi-sone."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Enhetsnavnet ditt er synlig for apper på telefonen. Det kan også ses av andre personer når du kobler til Bluetooth-enheter, kobler til et Wi-Fi-nettverk eller konfigurerer en Wi-Fi-sone."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheter"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Alle innstillinger"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Forslag"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Det finnes ingen tilgjengelige spillere"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"medier"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth slås på"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Utilgjengelig fordi sengetidsmodus er på"</string>
 </resources>

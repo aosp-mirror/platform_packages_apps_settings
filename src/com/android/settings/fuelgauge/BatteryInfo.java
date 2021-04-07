@@ -45,6 +45,7 @@ public class BatteryInfo {
     public CharSequence remainingLabel;
     public int batteryLevel;
     public boolean discharging = true;
+    public boolean isOverheated;
     public long remainingTimeUs = 0;
     public long averageTimeToDischarge = EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
     public String batteryPercentString;
@@ -232,6 +233,9 @@ public class BatteryInfo {
         info.batteryPercentString = Utils.formatPercentage(info.batteryLevel);
         info.mCharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
         info.averageTimeToDischarge = estimate.getAverageDischargeTime();
+        info.isOverheated = batteryBroadcast.getIntExtra(
+                BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN)
+                == BatteryManager.BATTERY_HEALTH_OVERHEAT;
 
         info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
         if (!info.mCharging) {
@@ -251,7 +255,12 @@ public class BatteryInfo {
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
         info.discharging = false;
         info.suggestionLabel = null;
-        if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
+        if (info.isOverheated && status != BatteryManager.BATTERY_STATUS_FULL) {
+            info.remainingLabel = null;
+            int chargingLimitedResId = R.string.power_charging_limited;
+            info.chargeLabel =
+                    context.getString(chargingLimitedResId, info.batteryPercentString);
+        } else if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
             info.remainingTimeUs = chargeTime;
             CharSequence timeString = StringUtil.formatElapsedTime(context,
                     PowerUtil.convertUsToMs(info.remainingTimeUs), false /* withSeconds */);
