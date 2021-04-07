@@ -318,7 +318,10 @@ public class DataUsageSummaryPreference extends Preference {
                     textResourceId = R.string.no_carrier_update_text;
                 }
                 updateTime = StringUtil.formatElapsedTime(
-                        getContext(), updateAgeMillis, false /* withSeconds */);
+                        getContext(),
+                        updateAgeMillis,
+                        false /* withSeconds */,
+                        false /* collapseTimeUnit */);
             }
             carrierInfo.setText(TextUtils.expandTemplate(
                     getContext().getText(textResourceId),
