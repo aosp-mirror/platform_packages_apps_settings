@@ -20,6 +20,8 @@ import android.app.settings.SettingsEnums;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricErrorDialog;
@@ -31,7 +33,10 @@ public class FingerprintErrorDialog extends BiometricErrorDialog {
     public static void showErrorDialog(BiometricEnrollBase host, int errMsgId) {
         final CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
         final FingerprintErrorDialog dialog = newInstance(errMsg, errMsgId);
-        dialog.show(host.getSupportFragmentManager(), FingerprintErrorDialog.class.getName());
+        final FragmentManager fragmentManager = host.getSupportFragmentManager();
+        if (!fragmentManager.isDestroyed()) {
+            dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
+        }
     }
 
     private static int getErrorMessage(int errMsgId) {

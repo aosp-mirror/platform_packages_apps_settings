@@ -1237,6 +1237,8 @@
                   android:label="@string/application_info_label"
                   android:exported="true">
             <intent-filter android:priority="1">
+                <action android:name="android.settings.APP_OPEN_BY_DEFAULT_SETTINGS" />
+                <!-- Also catch legacy "com." prefixed action. -->
                 <action android:name="com.android.settings.APP_OPEN_BY_DEFAULT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />

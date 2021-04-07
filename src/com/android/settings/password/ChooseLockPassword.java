@@ -567,9 +567,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     updateStage(mUiStage);
                 }
 
-                if (mCurrentCredential == null) {
-                    mCurrentCredential = savedInstanceState.getParcelable(KEY_CURRENT_CREDENTIAL);
-                }
+                mCurrentCredential = savedInstanceState.getParcelable(KEY_CURRENT_CREDENTIAL);
 
                 // Re-attach to the exiting worker if there is one.
                 mSaveAndFinishWorker = (SaveAndFinishWorker) getFragmentManager().findFragmentByTag(
@@ -646,7 +644,9 @@ public class ChooseLockPassword extends SettingsActivity {
             super.onSaveInstanceState(outState);
             outState.putString(KEY_UI_STAGE, mUiStage.name());
             outState.putParcelable(KEY_FIRST_PASSWORD, mFirstPassword);
-            outState.putParcelable(KEY_CURRENT_CREDENTIAL, mCurrentCredential);
+            if (mCurrentCredential != null) {
+                outState.putParcelable(KEY_CURRENT_CREDENTIAL, mCurrentCredential.duplicate());
+            }
         }
 
         @Override
