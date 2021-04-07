@@ -48,7 +48,8 @@ public class SubscriptionUtilTest {
     private static final int SUBID_1 = 1;
     private static final int SUBID_2 = 2;
     private static final int SUBID_3 = 3;
-    private static final CharSequence CARRIER_1 = "carrier1111111";
+    private static final CharSequence CARRIER_1 = "carrier1";
+    private static final CharSequence CARRIER_1_SPACE = " carrier1       ";
     private static final CharSequence CARRIER_2 = "carrier2";
 
     private Context mContext;
@@ -175,6 +176,35 @@ public class SubscriptionUtilTest {
         when(info2.getSubscriptionId()).thenReturn(SUBID_2);
         when(info1.getDisplayName()).thenReturn(CARRIER_1);
         when(info2.getDisplayName()).thenReturn(CARRIER_1);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        // Each subscription has a unique last 4 digits of the phone number.
+        TelephonyManager sub1Telmgr = mock(TelephonyManager.class);
+        TelephonyManager sub2Telmgr = mock(TelephonyManager.class);
+        when(sub1Telmgr.getLine1Number()).thenReturn("1112223333");
+        when(sub2Telmgr.getLine1Number()).thenReturn("2223334444");
+        when(mTelMgr.createForSubscriptionId(SUBID_1)).thenReturn(sub1Telmgr);
+        when(mTelMgr.createForSubscriptionId(SUBID_2)).thenReturn(sub2Telmgr);
+
+        final Map<Integer, CharSequence> idNames =
+                SubscriptionUtil.getUniqueSubscriptionDisplayNames(mContext);
+
+        assertThat(idNames).isNotNull();
+        assertThat(idNames).hasSize(2);
+        assertEquals(CARRIER_1 + " 3333", idNames.get(SUBID_1));
+        assertEquals(CARRIER_1 + " 4444", idNames.get(SUBID_2));
+    }
+
+    @Test
+    public void getUniqueDisplayNames_identicalCarriersAfterTrim_fourDigitsUsed() {
+        // Both subscriptoins have the same display name.
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_1_SPACE);
         when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
                 Arrays.asList(info1, info2));
 
