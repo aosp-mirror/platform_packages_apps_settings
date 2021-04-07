@@ -55,6 +55,7 @@ public class AllConversationsPreferenceController extends ConversationListPrefer
         Preference pref = new Preference(mContext);
         pref.setOrder(1);
         pref.setSummary(R.string.other_conversations_summary);
+        pref.setSelectable(false);
         return pref;
     }
 
