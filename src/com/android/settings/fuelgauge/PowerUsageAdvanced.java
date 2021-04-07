@@ -17,14 +17,9 @@ import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpd
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -44,16 +39,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
     private static final String KEY_BATTERY_GRAPH = "battery_graph";
     private static final String KEY_APP_LIST = "app_list";
-    private static final String KEY_SHOW_ALL_APPS = "show_all_apps";
-    @VisibleForTesting
-    static final int MENU_TOGGLE_APPS = Menu.FIRST + 1;
 
     @VisibleForTesting
     BatteryHistoryPreference mHistPref;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryAppListPreferenceController mBatteryAppListPreferenceController;
-    @VisibleForTesting
-    boolean mShowAllApps = false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -63,7 +53,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
         mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context);
-        restoreSavedInstance(icicle);
     }
 
     @Override
@@ -90,42 +79,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(Menu.NONE, MENU_TOGGLE_APPS, Menu.NONE,
-                mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_TOGGLE_APPS:
-                mShowAllApps = !mShowAllApps;
-                item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
-                mMetricsFeatureProvider.action(getContext(),
-                        SettingsEnums.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE,
-                        mShowAllApps);
-                restartBatteryStatsLoader(BatteryUpdateType.MANUAL);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @VisibleForTesting
-    void restoreSavedInstance(Bundle savedInstance) {
-        if (savedInstance != null) {
-            mShowAllApps = savedInstance.getBoolean(KEY_SHOW_ALL_APPS, false);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(KEY_SHOW_ALL_APPS, mShowAllApps);
-    }
-
-    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
@@ -148,7 +101,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return;
         }
         updatePreference(mHistPref);
-        mBatteryAppListPreferenceController.refreshAppListGroup(mBatteryUsageStats, mShowAllApps);
+        mBatteryAppListPreferenceController.refreshAppListGroup(mBatteryUsageStats, true);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
