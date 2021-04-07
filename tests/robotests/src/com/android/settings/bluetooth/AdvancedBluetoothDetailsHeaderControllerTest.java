@@ -473,9 +473,9 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     @Test
     public void showBatteryPredictionIfNecessary_estimateReadyIsAvailable_showCorrectValue() {
         final String leftBatteryPrediction =
-                StringUtil.formatElapsedTime(mContext, 12000000, false).toString();
+                StringUtil.formatElapsedTime(mContext, 12000000, false, false).toString();
         final String rightBatteryPrediction =
-                StringUtil.formatElapsedTime(mContext, 1200000, false).toString();
+                StringUtil.formatElapsedTime(mContext, 1200000, false, false).toString();
 
         mController.showBatteryPredictionIfNecessary(1, 12000000,
                 mLayoutPreference.findViewById(R.id.layout_left));
