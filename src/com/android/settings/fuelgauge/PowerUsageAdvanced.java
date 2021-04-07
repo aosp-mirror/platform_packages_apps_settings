@@ -63,9 +63,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
         mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context);
-
-        // init the summary so other preferences won't have unnecessary move
-        updateHistPrefSummary(context);
         restoreSavedInstance(icicle);
     }
 
@@ -151,22 +148,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return;
         }
         updatePreference(mHistPref);
-        updateHistPrefSummary(context);
-
         mBatteryAppListPreferenceController.refreshAppListGroup(mBatteryUsageStats, mShowAllApps);
-    }
-
-    private void updateHistPrefSummary(Context context) {
-        Intent batteryIntent =
-                context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        final boolean plugged = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) != 0;
-
-        if (mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context) && !plugged) {
-            mHistPref.setBottomSummary(
-                    mPowerUsageFeatureProvider.getAdvancedUsageScreenInfoString());
-        } else {
-            mHistPref.hideBottomSummary();
-        }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
