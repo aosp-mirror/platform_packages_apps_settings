@@ -45,14 +45,14 @@ public class NetworkResetRestrictionCheckerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mRestrictionChecker = spy(new NetworkResetRestrictionChecker(mContext));
     }
 
     @Test
     public void testHasRestriction_notAdmin_shouldReturnTrue() {
         final Context context = mock(Context.class);
-        when(context.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(context.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mUserManager.isAdminUser()).thenReturn(false);
 
         assertThat(mRestrictionChecker.hasRestriction()).isTrue();

@@ -64,7 +64,7 @@ public class WifiAPITest extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mWifiManager = getSystemService(WifiManager.class);
+        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
     }
 
     @Override

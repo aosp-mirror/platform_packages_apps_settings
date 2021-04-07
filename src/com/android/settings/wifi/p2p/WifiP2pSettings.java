@@ -200,7 +200,7 @@ public class WifiP2pSettings extends DashboardFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         final Activity activity = getActivity();
         if (mWifiP2pManager == null) {
-            mWifiP2pManager = getSystemService(WifiP2pManager.class);
+            mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         }
 
         if (mWifiP2pManager != null) {
