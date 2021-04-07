@@ -34,6 +34,7 @@ import com.android.settings.R;
 
 import com.google.common.collect.ImmutableList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -79,6 +80,7 @@ public class InteractAcrossProfilesDetailsTest {
     }
 
     @Test
+    @Ignore
     public void getPreferenceSummary_appOpNotAllowed_returnsNotAllowed() {
         shadowOf(mUserManager).addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
