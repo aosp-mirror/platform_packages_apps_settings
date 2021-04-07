@@ -95,6 +95,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public void setLevels(int[] levels) {
         // We should provide trapezoid count + 1 data to draw all trapezoids.
         mLevels = levels.length == mTrapezoidCount + 1 ? levels : null;
+        setClickable(mLevels != null);
         invalidate();
     }
 
