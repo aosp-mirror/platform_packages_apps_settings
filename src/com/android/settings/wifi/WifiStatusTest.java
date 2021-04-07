@@ -116,7 +116,7 @@ public class WifiStatusTest extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mWifiManager = getSystemService(WifiManager.class);
+        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 
         mWifiStateFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         mWifiStateFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
