@@ -17,10 +17,10 @@
 package com.android.settings.datetime.timezone.model;
 
 import android.util.ArraySet;
+import android.util.TimeUtils;
 
 import com.android.i18n.timezone.CountryTimeZones;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,21 +30,6 @@ import java.util.Set;
  * Wrap {@class CountryTimeZones} to filter time zone that are shown in the picker.
  */
 public class FilteredCountryTimeZones {
-
-    /**
-     * The timestamp used to determine which time zones to show to users by using the notUsedAfter
-     * metadata Android holds for each time zone.
-     *
-     * notUsedAfter exists because some time zones effectively "merge" with other time zones after
-     * a given point in time (i.e. they have identical transitions, offsets, etc.). After that
-     * point we only need to show one of the functionally identical ones.
-     *
-     * Rather than using System.currentTimeMillis(), UX folks asked for consistent behavior and so
-     * a timestamp known to be in the recent past is used. This should be updated occasionally but
-     * it doesn't have to be very often.
-     */
-    private static final Instant MIN_USE_DATE_OF_TIMEZONE =
-            Instant.ofEpochMilli(1546300800000L); // 1/1/2019 00:00 UTC
 
     private final CountryTimeZones mCountryTimeZones;
     private final List<String> mPreferredTimeZoneIds;
@@ -56,7 +41,7 @@ public class FilteredCountryTimeZones {
         Set<String> alternativeTimeZoneIds = new ArraySet<>();
         for (CountryTimeZones.TimeZoneMapping timeZoneMapping :
                 countryTimeZones.getTimeZoneMappings()) {
-            if (timeZoneMapping.isShownInPickerAt(MIN_USE_DATE_OF_TIMEZONE)) {
+            if (timeZoneMapping.isShownInPickerAt(TimeUtils.MIN_USE_DATE_OF_TIMEZONE)) {
                 String timeZoneId = timeZoneMapping.getTimeZoneId();
                 timeZoneIds.add(timeZoneId);
                 alternativeTimeZoneIds.addAll(timeZoneMapping.getAlternativeIds());
