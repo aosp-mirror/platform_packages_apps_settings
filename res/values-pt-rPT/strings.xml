@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet utilizado mais do que o habitual"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Dispositivo utilizado mais do que o habitual"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pode ficar sem bateria mais cedo do que o habitual."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"A otimizar o estado da bateria"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria limitada temporariamente. Toque para saber mais."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"O seu telemóvel tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"O seu tablet tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"O seu dispositivo tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">%1$d aplicação restrita</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small><font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Ocorreu um problema ao ler o medidor da bateria."</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Ocorreu um problema ao ler o medidor da bateria. Toque para "<annotation id="url">"saber mais"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Parar a aplicação?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"O telemóvel não consegue gerir a bateria normalmente, pois a aplicação <xliff:g id="APP">%1$s</xliff:g> mantém-no constantemente ativo.\n\nPara tentar resolver este problema, pode parar a aplicação.\n\nSe isto continuar a acontecer, pode ser necessário desinstalar a aplicação para melhorar o desempenho da bateria."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"O tablet não consegue gerir a bateria normalmente, pois a aplicação <xliff:g id="APP">%1$s</xliff:g> mantém-no constantemente ativo.\n\nPara tentar resolver este problema, pode parar a aplicação.\n\nSe isto continuar a acontecer, pode ser necessário desinstalar a aplicação para melhorar o desempenho da bateria."</string>
@@ -2993,12 +2997,12 @@
       <item quantity="one">Confiar ou remover o certificado</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="2788832560436163252">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação no seu dispositivo que podem permitir monitorizar a atividade na rede do dispositivo, incluindo emails, aplicações e Websites seguros.\n\nPara obter mais informações acerca destes certificados, contacte o gestor.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> instalou uma autoridade de certificação no seu dispositivo que pode permitir monitorizar a atividade na rede do dispositivo, incluindo emails, aplicações e Websites seguros.\n\nPara obter mais informações acerca deste certificado, contacte o gestor.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação no seu dispositivo que podem permitir monitorizar a atividade na rede do dispositivo, incluindo emails, aplicações e Websites seguros.\n\nPara mais informações acerca destes certificados, contacte o gestor.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> instalou uma autoridade de certificação no seu dispositivo que pode permitir monitorizar a atividade na rede do dispositivo, incluindo emails, aplicações e Websites seguros.\n\nPara mais informações acerca deste certificado, contacte o gestor.</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="3989916958347169622">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação para o seu perfil de trabalho que podem permitir monitorizar a atividade na rede de trabalho, incluindo emails, aplicações e Websites seguros.\n\nPara obter mais informações acerca destes certificados, contacte o gestor.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> instalou uma autoridade de certificação para o seu perfil de trabalho que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, aplicações e Websites seguros.\n\nPara obter mais informações acerca deste certificado, contacte o gestor.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação para o seu perfil de trabalho que podem permitir monitorizar a atividade na rede de trabalho, incluindo emails, aplicações e Websites seguros.\n\nPara mais informações acerca destes certificados, contacte o gestor.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> instalou uma autoridade de certificação para o seu perfil de trabalho que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, aplicações e Websites seguros.\n\nPara mais informações acerca deste certificado, contacte o gestor.</item>
     </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"A sua atividade de rede, incluindo emails, aplicações e Sites seguros, pode ser monitorizada por terceiros.\n\nIsto é possível através de uma credencial fidedigna instalada no seu dispositivo."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Ativar (desativar som)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Desativar"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalhes da rede"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"O nome do seu dispositivo é visível para as aplicações do telemóvel. Também pode ser visto por outras pessoas quando se liga a dispositivos Bluetooth ou configura uma zona Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"O nome do seu dispositivo é visível para as apps do telemóvel. Também pode ser visto por outras pessoas quando se liga a dispositivos Bluetooth ou a uma rede Wi-Fi, assim como quando configura uma zona Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivos"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Todas as definições"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Sugestões"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nenhum leitor disponível."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multimédia"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"O Bluetooth será ativado"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Não disponível porque o modo de hora de dormir está ativado."</string>
 </resources>

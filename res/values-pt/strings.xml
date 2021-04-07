@@ -1813,7 +1813,7 @@
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Levante o dedo ao terminar"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Conecte pelo menos <xliff:g id="NUMBER">%d</xliff:g> pontos. Tente novamente."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Padrão registrado"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Desenhe o padrão novamente para confirmar"</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Desenhe o padrão de novo para confirmar"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Seu novo padrão de desbloqueio"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Confirmar"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Desenhar novamente"</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet usado além do normal"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Dispositivo usado além do normal"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"A bateria pode acabar antes do esperado"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Otimizando para integridade da bateria"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Bateria limitada temporariamente. Toque para saber mais."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"O smartphone foi usado além do normal. A bateria pode acabar antes do esperado.\n\nApps que mais usam bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"O tablet foi usado além do normal. A bateria pode acabar antes do esperado.\n\nApps que mais usam bateria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"O dispositivo foi usado além do normal. A bateria pode acabar antes do esperado.\n\nApps que mais usam bateria:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">%1$d apps restritos</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Problema para ler seu medidor de bateria"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Problema para ler seu medidor de bateria. Toque para "<annotation id="url">"saber mais"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Parar o app?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Não é possível gerenciar a bateria do smartphone normalmente, porque o app <xliff:g id="APP">%1$s</xliff:g> o mantém ativado.\n\nPara tentar resolver esse problema, você pode forçar a parada do app.\n\nSe isso continuar acontecendo, talvez seja necessário desinstalá-lo para melhorar o desempenho da bateria."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Não é possível gerenciar a bateria do tablet normalmente, porque o app <xliff:g id="APP">%1$s</xliff:g> o mantém ativado.\n\nPara tentar resolver esse problema, você pode forçar a parada do app.\n\nSe isso continuar acontecendo, talvez seja necessário desinstalá-lo para melhorar o desempenho da bateria."</string>
@@ -2827,7 +2831,7 @@
     <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"Chips"</string>
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Pausa no limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Sincron. dados automaticamente"</string>
-    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sinc. autom. dados pessoais"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincronizar dados pessoais"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincronizar dados de trabalho automaticamente"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Alterar ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dia do mês para redefinir o ciclo de uso dos dados:"</string>
@@ -4341,9 +4345,9 @@
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="8651761245246411947">"Exigir senha para iniciar seu dispositivo. Enquanto desativado, este dispositivo não recebe chamadas, mensagens, notificações ou alarmes."</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Adicionar outra impressão digital"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Desbloqueie com um dedo diferente"</string>
-    <string name="battery_saver_on_summary" msgid="4605146593966255848">"Ativar"</string>
+    <string name="battery_saver_on_summary" msgid="4605146593966255848">"Ativada"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Será ativada em <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desativado"</string>
+    <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desativada"</string>
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Ativar agora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desativar agora"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Otimização de bateria desativada"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Ativado (silencioso)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Desativado"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalhes da rede"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"O nome do seu dispositivo está visível para os apps no seu smartphone. Ele também pode ser visto por outras pessoas quando você se conecta a dispositivos Bluetooth ou configura um ponto de acesso Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"O nome do seu dispositivo está visível para os apps no smartphone. Ele também pode ser visto por outras pessoas quando você se conecta a dispositivos Bluetooth ou a uma rede Wi-Fi ou quando configura um ponto de acesso Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivos"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Todas as configurações"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Sugestões"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nenhum player disponível"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"mídia"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"O Bluetooth será ativado"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Indisponível durante o Modo noite"</string>
 </resources>

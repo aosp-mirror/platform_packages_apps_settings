@@ -45,7 +45,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.preference.PreferenceScreen;
 
@@ -56,6 +55,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -72,6 +72,7 @@ import org.mockito.stubbing.Answer;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -224,6 +225,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void nonIndexableKeys_MatchPreferenceKeys() {
         final Context context = RuntimeEnvironment.application;
         final List<String> niks =

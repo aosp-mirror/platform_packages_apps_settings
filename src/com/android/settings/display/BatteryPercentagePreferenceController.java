@@ -21,9 +21,11 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 
@@ -34,12 +36,27 @@ import com.android.settings.core.PreferenceControllerMixin;
 public class BatteryPercentagePreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
+    private Preference mPreference;
+
     public BatteryPercentagePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        if (!Utils.isBatteryPresent(mContext)) {
+            // Disable battery percentage
+            onPreferenceChange(mPreference, false /* newValue */);
+        }
+    }
+
+    @Override
     public int getAvailabilityStatus() {
+        if (!Utils.isBatteryPresent(mContext)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return mContext.getResources().getBoolean(
                 R.bool.config_battery_percentage_setting_available) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;

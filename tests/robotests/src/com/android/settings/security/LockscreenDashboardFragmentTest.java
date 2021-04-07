@@ -88,7 +88,6 @@ public class LockscreenDashboardFragmentTest {
 
         mTestFragment.onAttach(mContext);
         verify(controller).setConfig(any());
-        verify(controller).setCallback(any());
     }
 
     @Test

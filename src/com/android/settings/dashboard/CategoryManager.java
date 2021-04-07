@@ -41,6 +41,7 @@ import java.util.Set;
 public class CategoryManager {
 
     private static final String TAG = "CategoryManager";
+    private static final boolean DEBUG = false;
 
     private static CategoryManager sInstance;
     private final InterestingConfigChanges mInterestingConfigChanges;
@@ -88,6 +89,7 @@ public class CategoryManager {
     public synchronized void updateCategoryFromBlacklist(Set<ComponentName> tileBlacklist) {
         if (mCategories == null) {
             Log.w(TAG, "Category is null, skipping blacklist update");
+            return;
         }
         for (int i = 0; i < mCategories.size(); i++) {
             DashboardCategory category = mCategories.get(i);
@@ -100,6 +102,31 @@ public class CategoryManager {
         }
     }
 
+    /** Return the current tile map */
+    public synchronized Map<ComponentName, Tile> getTileByComponentMap() {
+        final Map<ComponentName, Tile> result = new ArrayMap<>();
+        if (mCategories == null) {
+            Log.w(TAG, "Category is null, no tiles");
+            return result;
+        }
+        mCategories.forEach(category -> {
+            for (int i = 0; i < category.getTilesCount(); i++) {
+                final Tile tile = category.getTile(i);
+                result.put(tile.getIntent().getComponent(), tile);
+            }
+        });
+        return result;
+    }
+
+    private void logTiles(Context context) {
+        if (DEBUG) {
+            getTileByComponentMap().forEach((component, tile) -> {
+                Log.d(TAG, "Tile: " + tile.getCategory().replace("com.android.settings.", "")
+                        + ": " + tile.getTitle(context) + ", " + component.flattenToShortString());
+            });
+        }
+    }
+
     private synchronized void tryInitCategories(Context context) {
         // Keep cached tiles by default. The cache is only invalidated when InterestingConfigChange
         // happens.
@@ -108,6 +135,7 @@ public class CategoryManager {
 
     private synchronized void tryInitCategories(Context context, boolean forceClearCache) {
         if (mCategories == null) {
+            final boolean firstLoading = mCategoryByKeyMap.isEmpty();
             if (forceClearCache) {
                 mTileByComponentCache.clear();
             }
@@ -119,6 +147,9 @@ public class CategoryManager {
             backwardCompatCleanupForCategory(mTileByComponentCache, mCategoryByKeyMap);
             sortCategories(context, mCategoryByKeyMap);
             filterDuplicateTiles(mCategoryByKeyMap);
+            if (firstLoading) {
+                logTiles(context);
+            }
         }
     }
 

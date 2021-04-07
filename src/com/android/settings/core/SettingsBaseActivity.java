@@ -41,11 +41,14 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.dashboard.CategoryManager;
+import com.android.settingslib.drawer.Tile;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class SettingsBaseActivity extends FragmentActivity {
 
@@ -59,6 +62,7 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
     private final List<CategoryListener> mCategoryListeners = new ArrayList<>();
+    private int mCategoriesUpdateTaskCount;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -147,10 +151,10 @@ public class SettingsBaseActivity extends FragmentActivity {
         ((ViewGroup) findViewById(R.id.content_frame)).addView(view, params);
     }
 
-    private void onCategoriesChanged() {
+    private void onCategoriesChanged(Set<String> categories) {
         final int N = mCategoryListeners.size();
         for (int i = 0; i < N; i++) {
-            mCategoryListeners.get(i).onCategoriesChanged();
+            mCategoryListeners.get(i).onCategoriesChanged(categories);
         }
     }
 
@@ -194,38 +198,100 @@ public class SettingsBaseActivity extends FragmentActivity {
      * Updates dashboard categories. Only necessary to call this after setTileEnabled
      */
     public void updateCategories() {
-        new CategoriesUpdateTask().execute();
+        updateCategories(false /* fromBroadcast */);
+    }
+
+    private void updateCategories(boolean fromBroadcast) {
+        // Only allow at most 2 tasks existing at the same time since when the first one is
+        // executing, there may be new data from the second update request.
+        // Ignore the third update request because the second task is still waiting for the first
+        // task to complete in a serial thread, which will get the latest data.
+        if (mCategoriesUpdateTaskCount < 2) {
+            new CategoriesUpdateTask().execute(fromBroadcast);
+        }
     }
 
     public interface CategoryListener {
-        void onCategoriesChanged();
+        /**
+         * @param categories the changed categories that have to be refreshed, or null to force
+         * refreshing all.
+         */
+        void onCategoriesChanged(@Nullable Set<String> categories);
     }
 
-    private class CategoriesUpdateTask extends AsyncTask<Void, Void, Void> {
+    private class CategoriesUpdateTask extends AsyncTask<Boolean, Void, Set<String>> {
 
+        private final Context mContext;
         private final CategoryManager mCategoryManager;
+        private Map<ComponentName, Tile> mPreviousTileMap;
 
         public CategoriesUpdateTask() {
-            mCategoryManager = CategoryManager.get(SettingsBaseActivity.this);
+            mCategoriesUpdateTaskCount++;
+            mContext = SettingsBaseActivity.this;
+            mCategoryManager = CategoryManager.get(mContext);
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
-            mCategoryManager.reloadAllCategories(SettingsBaseActivity.this);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
+        protected Set<String> doInBackground(Boolean... params) {
+            mPreviousTileMap = mCategoryManager.getTileByComponentMap();
+            mCategoryManager.reloadAllCategories(mContext);
             mCategoryManager.updateCategoryFromBlacklist(sTileBlacklist);
-            onCategoriesChanged();
+            return getChangedCategories(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Set<String> categories) {
+            if (categories == null || !categories.isEmpty()) {
+                onCategoriesChanged(categories);
+            }
+            mCategoriesUpdateTaskCount--;
+        }
+
+        // Return the changed categories that have to be refreshed, or null to force refreshing all.
+        private Set<String> getChangedCategories(boolean fromBroadcast) {
+            if (!fromBroadcast) {
+                // Always refresh for non-broadcast case.
+                return null;
+            }
+
+            final Set<String> changedCategories = new ArraySet<>();
+            final Map<ComponentName, Tile> currentTileMap =
+                    mCategoryManager.getTileByComponentMap();
+            currentTileMap.forEach((component, currentTile) -> {
+                final Tile previousTile = mPreviousTileMap.get(component);
+                // Check if the tile is newly added.
+                if (previousTile == null) {
+                    Log.i(TAG, "Tile added: " + component.flattenToShortString());
+                    changedCategories.add(currentTile.getCategory());
+                    return;
+                }
+
+                // Check if the title or summary has changed.
+                if (!TextUtils.equals(currentTile.getTitle(mContext),
+                        previousTile.getTitle(mContext))
+                        || !TextUtils.equals(currentTile.getSummary(mContext),
+                        previousTile.getSummary(mContext))) {
+                    Log.i(TAG, "Tile changed: " + component.flattenToShortString());
+                    changedCategories.add(currentTile.getCategory());
+                }
+            });
+
+            // Check if any previous tile is removed.
+            final Set<ComponentName> removal = new ArraySet(mPreviousTileMap.keySet());
+            removal.removeAll(currentTileMap.keySet());
+            removal.forEach(component -> {
+                Log.i(TAG, "Tile removed: " + component.flattenToShortString());
+                changedCategories.add(mPreviousTileMap.get(component).getCategory());
+            });
+
+            return changedCategories;
         }
     }
 
     private class PackageReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateCategories();
+            updateCategories(true /* fromBroadcast */);
         }
     }
 }

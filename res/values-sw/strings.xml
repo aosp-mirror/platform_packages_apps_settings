@@ -732,7 +732,7 @@
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kamwe hakitaoanishwa na kifaa chochote kilichounganishwa kwenye akaunti hii"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Sahau kifaa"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Unganisha kwa..."</string>
-    <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> itatenganishwa kutoka kwa sauti ya media."</string>
+    <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> itatenganishwa na sauti ya maudhui."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> itatenganishwa kutoka kwa sauti ya kifaa kisichotumia mikono."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="4794752406024916925">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> itatenganishwa kutoka kwa kifaa cha kuingiza."</string>
     <string name="bluetooth_disconnect_pan_user_profile" msgid="283176886159444413">"Ufikiaji wa mtandao kupitia <xliff:g id="DEVICE_NAME">%1$s</xliff:g> utakatishwa."</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Kompyuta kibao imetumika sana kuliko kawaida"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Kifaa kimetumika sana kuliko kawaida"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Huenda chaji ikaisha haraka zaidi"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Inaboresha muda wa kutumia betri"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Betri imedhibitiwa kwa muda. Gusa ili upate maelezo zaidi."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Simu yako imetumika kuliko kawaida. Huenda chaji ikaisha haraka zaidi ya inavyotarajiwa.\n\nProgramu ambazo zimetumia betri zaidi:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Kompyuta yako kibao imetumika kuliko kawaida. Huenda chaji ikaisha haraka zaidi ya inavyotarajiwa.\n\nProgramu ambazo zimetumia betri zaidi:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Kifaa chako kimetumika kuliko kawaida. Huenda chaji ikaisha haraka zaidi ya inavyotarajiwa.\n\nProgramu ambazo zimetumia betri zaidi:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="one">Imezuia programu %1$d</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Tatizo la kusoma mita ya betri yako"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Tatizo la kusoma mita ya betri yako. Gusa ili "<annotation id="url">"upate maelezo zaidi"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Unataka kusimamisha programu?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Simu yako haiwezi kudhibiti matumizi ya chaji ipasavyo kwa sababu <xliff:g id="APP">%1$s</xliff:g> inazuia skrini ya simu kuzimika.\n\nIli kujaribu kurekebisha tatizo hili, unaweza kuzima programu.\n\nIkiwa tatizo hili litaendelea, huenda ukahitaji kuondoa programu hii ili kuboresha utendaji wa betri."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Kompyuta kibao yako haiwezi kudhibiti matumizi ya chaji ipasavyo kwa sababu <xliff:g id="APP">%1$s</xliff:g> inazuia skrini ya kompyuta kibao kuzimika.\n\nIli kujaribu kurekebisha tatizo hili, unaweza kuzima programu.\n\nIkiwa tatizo hili litaendelea, huenda ukahitaji kuondoa programu hii ili kuboresha utendaji wa betri."</string>
@@ -2788,7 +2792,7 @@
     <string name="really_remove_account_title" msgid="253097435885652310">"Je, ungependa kuondoa akaunti?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Kuondoa akaunti hii kutafuta mazungumzo yako yote, anwani na data nyingine kwenye kompyuta kibao!"</string>
     <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Kuondoa akaunti hii kutafuta mazungumzo yako yote, anwani na data nyingine kwenye simu!"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Kuondoa akaunti hii kutasabibisha kufutwa kwa ujumbe, anwani na data nyingine kwenye kifaa!"</string>
+    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"Kuondoa akaunti hii kutasababisha kufutwa kwa ujumbe, anwani na data nyingine kwenye kifaa!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Mabadiliko haya hayaruhusiwi na msimamizi wako"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Huwezi kusawazisha mwenyewe"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Kwa sasa usawazishaji wa kipengee hiki umezimwa. Kubadilisha mpangilio huu, washa kwa muda data ya usuli na usawazishaji kiotomatiki."</string>
@@ -3027,7 +3031,7 @@
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Mipangilio ya kufunga skrini"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Ongeza watumiaji skrini ikiwa imefungwa"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Ungependa kujifuta?"</string>
-    <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ungependa kumtafuta mtumiaji huyu?"</string>
+    <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ungependa kumfuta mtumiaji huyu?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Ungependa kuondoa wasifu?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Ungependa kuondoa wasifu wa kazini?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Utapoteza nafasi na data yako kwenye kompyuta hii ndogo. Huwezi kutendua kitendo hiki."</string>
@@ -4701,7 +4705,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Imewashwa (zima sauti)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Imezimwa"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Maelezo ya mtandao"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Jina la kifaa chako litaonekana kwenye programu zilizo katika simu yako. Pia linaweza kuonekana kwa watu wengine wakati unaunganisha vifaa vya Bluetooth au kuweka mtandaopepe wa Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Jina la kifaa chako litaonekana kwa programu zilizo kwenye simu yako. Pia, watu wengine wanaweza kuliona unapounganisha kwenye vifaa vya Bluetooth, unapounganisha kwenye mtandao wa Wi-Fi au kuweka mipangilio ya mtandao pepe wa Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Vifaa"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Mipangilio Yote"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Mapendekezo"</string>
@@ -4961,4 +4965,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Hakuna vichezaji vinavyopatikana"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"maudhui"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth itawaka"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Haipatikani kwa sababu umewasha hali ya wakati umelala"</string>
 </resources>

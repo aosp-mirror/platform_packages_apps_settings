@@ -154,6 +154,19 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     @Test
+    public void displayRefresh_accessoryEnabled_shouldCheckSwitches() {
+        when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
+
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_ACCESSORY, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
+        List<RadioButtonPreference> prefs = getRadioPreferences();
+
+        assertThat(prefs.get(0).getKey())
+                .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
+        assertThat(prefs.get(0).isChecked()).isTrue();
+    }
+
+    @Test
     public void onClickMtp_noneEnabled_shouldEnableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
@@ -248,6 +261,30 @@ public class UsbDetailsFunctionsControllerTest {
         verify(mUsbBackend).setCurrentFunctions(UsbManager.FUNCTION_PTP);
         assertThat(mDetailsFunctionsController.mPreviousFunction).isEqualTo(
                 UsbManager.FUNCTION_MTP);
+    }
+
+    @Test
+    public void onRadioButtonClicked_functionMtp_inAccessoryMode_doNothing() {
+        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
+        doReturn(UsbManager.FUNCTION_ACCESSORY).when(mUsbBackend).getCurrentFunctions();
+
+        mDetailsFunctionsController.mPreviousFunction = UsbManager.FUNCTION_ACCESSORY;
+        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
+
+        assertThat(mDetailsFunctionsController.mPreviousFunction).isEqualTo(
+                UsbManager.FUNCTION_ACCESSORY);
+    }
+
+    @Test
+    public void onRadioButtonClicked_functionMtp_inAccessoryCombinationsMode_doNothing() {
+        final long function = UsbManager.FUNCTION_ACCESSORY | UsbManager.FUNCTION_AUDIO_SOURCE;
+        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
+        doReturn(UsbManager.FUNCTION_ACCESSORY).when(mUsbBackend).getCurrentFunctions();
+
+        mDetailsFunctionsController.mPreviousFunction = function;
+        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
+
+        assertThat(mDetailsFunctionsController.mPreviousFunction).isEqualTo(function);
     }
 
     @Test

@@ -1460,8 +1460,8 @@
     <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"Ak odpojíte SD kartu, niektoré používané aplikácie môžu byť zastavené a nebudú k dispozícii, kým SD kartu znova nepripojíte."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"Úložisko USB sa nepodarilo odpojiť. Skúste to znova neskôr."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD kartu sa nepodarilo odpojiť. Skúste to znova neskôr."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"Úložisko USB sa nepodarilo odpojiť. Skúste to neskôr."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="2185659901137961711">"SD kartu sa nepodarilo odpojiť. Skúste to neskôr."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="5932607205977999175">"Ukladací priestor USB bude odpojený."</string>
     <string name="unmount_inform_text" product="default" msgid="716578785262713312">"SD karta bude odpojená."</string>
     <string name="sd_ejecting_title" msgid="1641122369013595273">"Odpájanie"</string>
@@ -2491,6 +2491,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet bol používaný viac ako obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Zariadenie bolo používané viac ako obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batéria sa môže vybiť skôr ako obvykle"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimalizácia na zaistenie dobrého stavu batérie"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batéria je dočasne obmedzená. Viac sa dozviete po klepnutí."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefón sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Zariadenie sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
@@ -2560,6 +2562,8 @@
       <item quantity="one">%1$d obmedzená aplikácia</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Pri čítaní meradla batérie sa vyskytol problém"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Pri čítaní meradla batérie sa vyskytol problém. "<annotation id="url">"Viac sa dozviete"</annotation>" po klepnutí."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Zastaviť aplikáciu?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Telefón nemôže normálne spravovať batériu, pretože aplikácia <xliff:g id="APP">%1$s</xliff:g> ho udržuje prebudený.\n\nTento problém môžete skúsiť vyriešiť tak, že aplikáciu zastavíte.\n\nAk sa to zopakuje, zrejme budete musieť aplikáciu odinštalovať, aby ste zlepšili výkonnosť batérie."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Tablet nemôže normálne spravovať batériu, pretože aplikácia <xliff:g id="APP">%1$s</xliff:g> ho udržuje prebudený.\n\nTento problém môžete skúsiť vyriešiť tak, že aplikáciu zastavíte.\n\nAk sa to zopakuje, zrejme budete musieť aplikáciu odinštalovať, aby ste zlepšili výkonnosť batérie."</string>
@@ -3035,7 +3039,7 @@
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Vyberte profil VPN, ku ktorému chcete mať vždy pripojenie. Sieťová premávka bude povolená len v prípade pripojenia k tejto sieti VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Žiadna"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Vždy zapnutá sieť VPN vyžaduje adresu IP pre server aj DNS."</string>
-    <string name="vpn_no_network" msgid="7187593680049843763">"Nie je k dispozícii žiadne sieťové pripojenie. Skúste to znova neskôr."</string>
+    <string name="vpn_no_network" msgid="7187593680049843763">"Nie je k dispozícii žiadne sieťové pripojenie. Skúste to neskôr."</string>
     <string name="vpn_disconnected" msgid="7694522069957717501">"Odpojiť od siete VPN"</string>
     <string name="vpn_disconnected_summary" msgid="721699709491697712">"Žiadne"</string>
     <string name="vpn_missing_cert" msgid="5397309964971068272">"Chýba certifikát. Skúste upraviť profil."</string>
@@ -4013,7 +4017,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Pred odopnutím požiadať o PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred uvoľnením požiadať o heslo"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Pri odopnutí zamknúť zariadenie"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrdenie odstránenia SIM karty"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrdiť odstránenie SIM karty"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Pred vymazaním stiahnutej SIM karty overiť, že ste to vy"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Tento pracovný profil spravuje aplikácia:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Spravované aplikáciou <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
@@ -4876,7 +4880,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Zapnuté (stlmené)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Vypnuté"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Podrobnosti siete"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Názov zariadenia je viditeľný pre aplikácie v telefóne. Môže sa zobrazovať aj ostatným používateľom po pripojení k zariadeniu Bluetooth alebo nastavení hotspotu Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Názov zariadenia uvidia aplikácie v telefóne. Keď sa pripojíte k zariadeniam s rozhraním Bluetooth alebo sieti Wi‑Fi, prípadne ak nastavíte hotspot Wi‑Fi, môžu ho uvidieť aj ostatní ľudia."</string>
     <string name="devices_title" msgid="649715719278562515">"Zariadenia"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Všetky nastavenia"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Návrhy"</string>
@@ -4939,7 +4943,7 @@
     <string name="load_networks_progress" msgid="4717874401621250401">"Hľadá sa…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"Prebieha registrácia v sieti <xliff:g id="NETWORK">%s</xliff:g>…"</string>
     <string name="not_allowed" msgid="5756935665192962915">"Vaša SIM karta nepovoľuje pripojenie k tejto sieti."</string>
-    <string name="connect_later" msgid="2330538069949281352">"V tejto chvíli sa nedá pripojiť k sieti. Skúste to znova neskôr."</string>
+    <string name="connect_later" msgid="2330538069949281352">"V tejto chvíli sa nedá pripojiť k sieti. Skúste to neskôr."</string>
     <string name="registration_done" msgid="1750434215698850123">"Prihlásenie k sieti prebehlo úspešne."</string>
     <string name="select_automatically" msgid="2419752566747259155">"Vybrať sieť automaticky"</string>
     <string name="carrier_settings_title" msgid="6959295328730560529">"Nastavenia operátora"</string>
@@ -4975,7 +4979,7 @@
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Názov"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Farba (používajú kompatibilné aplikácie)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Uložiť"</string>
-    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"Použiť SIM"</string>
+    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"Používať SIM kartu"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Vypnuté"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Ak chcete túto SIM kartu deaktivovať, odstráňte ju"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Klepnutím aktivujete operátora <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5142,4 +5146,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"K dispozícii nie sú žiadne prehrávače"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"médiá"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Zapne sa Bluetooth"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupné, pretože je zapnutý režim večierky"</string>
 </resources>

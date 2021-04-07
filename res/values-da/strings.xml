@@ -1808,7 +1808,7 @@
     <string name="lock_settings_title" msgid="665707559508132349">"Enhedssikkerhed"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"Skift oplåsningsmønster"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"Skift pinkode til oplåsning"</string>
-    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Tegn et oplåsningsmønster"</string>
+    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Tegn et mønster til at låse op"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Tryk på Menu for at få hjælp."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Slip, når du er færdig"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Forbind mindst <xliff:g id="NUMBER">%d</xliff:g> punkter. Prøv igen."</string>
@@ -2429,6 +2429,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Din tablet er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Enheden er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batteriet aflades muligvis hurtigere end normalt"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimerer på baggrund af batteritilstanden"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batteriet er midlertidigt begrænset. Tryk for at få flere oplysninger."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Din telefon er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Din tablet er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Din enhed er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
@@ -2484,6 +2486,8 @@
       <item quantity="other">%1$d apps er begrænset</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Der er problemer med at aflæse dit batteriniveau"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Der er problemer med at aflæse dit batteriniveau. Tryk for at "<annotation id="url">"få flere oplysninger"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Vil du standse appen?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Din telefon kan ikke administrere batteriet normalt, fordi <xliff:g id="APP">%1$s</xliff:g> forhindrer telefonen i at gå i dvale.\n\nDu kan prøve at løse problemet ved at stoppe appen.\n\nHvis problemet fortsætter, er du muligvis nødt til at afinstallere appen for at forbedre batteriets ydeevne."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Din tablet kan ikke administrere batteriet normalt, fordi <xliff:g id="APP">%1$s</xliff:g> forhindrer din tablet i at gå i dvale.\n\nDu kan prøve at løse problemet ved at stoppe appen.\n\nHvis problemet fortsætter, er du muligvis nødt til at afinstallere appen for at forbedre batteriets ydeevne."</string>
@@ -2597,9 +2601,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Angiv en tidsplan"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Forlæng batteritiden"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Deaktiver, når enheden er opladet"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Batterisparefunktion slås fra, når din telefon er på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Batterisparefunktion slås fra, når din tablet er på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Batterisparefunktion slås fra, når din enhed er på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Batterisparefunktionen slås fra, når din telefon er på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Batterisparefunktionen slås fra, når din tablet er på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Batterisparefunktionen slås fra, når din enhed er på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivér"</string>
@@ -3381,7 +3385,7 @@
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Undlad at bruge blinkende lys"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Undlad at vise notifikationer på skærmen"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Skjul statusbjælkeikoner øverst på skærmen"</string>
-    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Skjul notifikationscirkler på appikoner"</string>
+    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Skjul notifikationsprikker på appikoner"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Væk ikke ved notifikationer"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Skjul i panelet, der trækkes ned"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Aldrig"</string>
@@ -3479,7 +3483,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Tillad udsættelse af notifikationer"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Skjul ikoner fra diskrete notifikationer"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Ikoner fra diskrete notifikationer vises ikke på statusbjælken"</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"Notifikationscirkel på appikon"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"Notifikationsprik på appikon"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Vis linje med seneste samtaler"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bobler"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Nogle notifikationer og andet indhold kan blive vist som bobler på skærmen. Tryk på en boble for at åbne den. Træk den ned ad skærmen for at lukke den."</string>
@@ -3689,8 +3693,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Vis aldrig disse notifikationer"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Vis notifikationer"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Vis aldrig notifikationer i underretningspanelet eller på eksterne enheder"</string>
-    <string name="notification_badge_title" msgid="6854537463548411313">"Tillad notifikationscirkel"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Vis notifikationscirkel"</string>
+    <string name="notification_badge_title" msgid="6854537463548411313">"Tillad notifikationsprik"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Vis notifikationsprik"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Tilsidesæt Forstyr ikke"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Bliv ved med at få disse notifikationer, når Forstyr ikke er aktiveret"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Låseskærm"</string>
@@ -4700,7 +4704,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Til (lydløs)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Fra"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Netværksoplysninger"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Navnet på din enhed er synligt for apps på din telefon. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller konfigurerer et Wi-Fi-hotspot."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Din enheds navn er synligt for apps på din telefon. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller et Wi-Fi-netværk, eller når du konfigurerer et Wi-Fi-hotspot."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheder"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Alle indstillinger"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Forslag"</string>
@@ -4960,4 +4964,5 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Der er ingen tilgængelige afspillere"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Medier"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth aktiveres"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ikke tilgængelig, da sengetidstilstand er aktiveret"</string>
 </resources>
