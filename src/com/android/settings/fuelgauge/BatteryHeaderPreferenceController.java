@@ -136,9 +136,12 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     public void updateHeaderPreference(BatteryInfo info) {
+        if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
+            mBatteryUsageProgressBarPref.setBottomSummary(generateLabel(info));
+        }
+
         mBatteryUsageProgressBarPref.setUsageSummary(
                 formatBatteryPercentageText(info.batteryLevel));
-        mBatteryUsageProgressBarPref.setBottomSummary(generateLabel(info));
         mBatteryUsageProgressBarPref.setPercent(info.batteryLevel, BATTERY_MAX_LEVEL);
     }
 
