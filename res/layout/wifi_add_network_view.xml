@@ -15,25 +15,26 @@
      limitations under the License.
 -->
 
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="true"
-    android:clipChildren="true"
-    android:orientation="vertical">
+    android:clipChildren="true">
 
         <include
+            android:id="@+id/wifi_dialog_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/add_network_button_bar"
-            android:layout_alignParentTop="true"
+            app:layout_constraintTop_toTopOf="parent"
             layout="@layout/wifi_dialog"/>
 
         <include
             android:id="@+id/add_network_button_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            app:layout_constraintTop_toBottomOf="@id/wifi_dialog_frame"
             layout="@*android:layout/alert_dialog_button_bar_material"/>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
