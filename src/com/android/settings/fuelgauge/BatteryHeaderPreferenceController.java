@@ -91,7 +91,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         if (com.android.settings.Utils.isBatteryPresent(mContext)) {
             quickUpdateHeaderPreference();
         } else {
-            //TODO(b/179237551): Make new progress bar widget support help message
+            mBatteryUsageProgressBarPref.setVisible(false);
         }
     }
 
