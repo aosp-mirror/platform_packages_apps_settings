@@ -22,12 +22,11 @@
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="gesture_emergency_button_switch_bar"
-        app:controller="com.android.settings.emergency.EmergencyGesturePreferenceController" />
+        app:controller="com.android.settings.emergency.EmergencyGesturePreferenceController"/>
 
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/emergency_gesture_screen_summary"
-        app:allowDividerAbove="false"
-        app:allowDividerBelow="true" />
+        app:allowDividerAbove="false"/>
 
     <SwitchPreference
         android:key="emergency_gesture_sound"
@@ -35,17 +34,18 @@
         android:title="@string/emergency_gesture_sound_setting_title"
         android:summary="@string/emergency_gesture_sound_setting_summary"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.emergency.EmergencyGestureSoundPreferenceController"
-        app:allowDividerAbove="true"/>
-
-    <com.android.settings.emergency.EmergencyGestureNumberOverridePreference
-        android:key="emregency_gesture_number_override"
-        android:title="@string/emergency_gesture_call_for_help_title"
-        android:summary="@string/summary_placeholder"
-        android:icon="@drawable/ic_call_grey_24dp"
-        android:dialogTitle="@string/emergency_gesture_call_for_help_dialog_title"
-        android:dialogLayout="@layout/emergency_gesture_number_override_dialog"
-        android:positiveButtonText="@string/save"
-        app:allowDividerAbove="true"
-        app:controller="com.android.settings.emergency.EmergencyGestureNumberOverridePreferenceController"/>
+        app:controller="com.android.settings.emergency.EmergencyGestureSoundPreferenceController"/>
+    <PreferenceCategory
+        android:key="emergency_gesture_notify_for_help"
+        android:title="@string/emergency_gesture_category_call_for_help_title">
+        <com.android.settings.emergency.EmergencyGestureNumberOverridePreference
+            android:key="emregency_gesture_number_override"
+            android:title="@string/emergency_gesture_call_for_help_title"
+            android:summary="@string/summary_placeholder"
+            android:icon="@drawable/ic_call_grey_24dp"
+            android:dialogTitle="@string/emergency_gesture_call_for_help_dialog_title"
+            android:dialogLayout="@layout/emergency_gesture_number_override_dialog"
+            android:positiveButtonText="@string/save"
+            app:controller="com.android.settings.emergency.EmergencyGestureNumberOverridePreferenceController"/>
+    </PreferenceCategory>
 </PreferenceScreen>
