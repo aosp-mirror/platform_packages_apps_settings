@@ -149,9 +149,15 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     private boolean hasBackupCallingFeature(int subscriptionId) {
         PersistableBundle carrierConfig = getCarrierConfigForSubId(subscriptionId);
-        return (carrierConfig != null)
-                && carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL, false);
+        Boolean featureEnableStatus = null;
+        if (carrierConfig != null) {
+            featureEnableStatus = carrierConfig.getBoolean(
+                    CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL, false);
+        }
+        // TODO: remove log after fixing b/182326102
+        Log.d(LOG_TAG, "config " + CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL
+                + "=" + featureEnableStatus + " for subId=" + mSubId);
+        return (featureEnableStatus != null) && featureEnableStatus.booleanValue();
     }
 
     private ImsMmTelManager getImsMmTelManager(int subId) {

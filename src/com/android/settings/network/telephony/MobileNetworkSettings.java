@@ -214,6 +214,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     @Override
     public void onResume() {
         super.onResume();
+        // TODO: remove log after fixing b/182326102
+        Log.d(LOG_TAG, "onResume() subId=" + mSubId);
         if (mActiveSubsciptionsListener == null) {
             mActiveSubsciptionsListener = new ActiveSubsciptionsListener(
                     getContext().getMainLooper(), getContext(), mSubId) {
