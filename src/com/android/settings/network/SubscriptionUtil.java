@@ -256,7 +256,7 @@ public class SubscriptionUtil {
                 .map(i -> {
                     DisplayInfo info = new DisplayInfo();
                     info.subscriptionInfo = i;
-                    info.originalName = i.getDisplayName();
+                    info.originalName = i.getDisplayName().toString().trim();
                     return info;
                 });
 
