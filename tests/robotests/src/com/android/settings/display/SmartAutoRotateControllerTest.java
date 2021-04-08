@@ -39,6 +39,7 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.settings.testutils.ResolveInfoBuilder;
+import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,8 +49,10 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowSensorPrivacyManager.class)
 public class SmartAutoRotateControllerTest {
 
     private static final String PACKAGE_NAME = "package_name";
@@ -72,6 +75,7 @@ public class SmartAutoRotateControllerTest {
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
         mController = new SmartAutoRotateController(context, "test_key");
+        when(mController.isCameraLocked()).thenReturn(false);
         doReturn(mController.getPreferenceKey()).when(mPreference).getKey();
 
         final ResolveInfo resolveInfo = new ResolveInfoBuilder(PACKAGE_NAME).build();
@@ -102,6 +106,12 @@ public class SmartAutoRotateControllerTest {
     @Test
     public void getAvailabilityStatus_rotationLocked_returnDisableDependentSetting() {
         disableAutoRotation();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_cameraDisabled_returnDisableDependentSetting() {
+        when(mController.isCameraLocked()).thenReturn(true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 

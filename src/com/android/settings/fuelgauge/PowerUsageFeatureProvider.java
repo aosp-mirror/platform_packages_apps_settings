@@ -124,4 +124,9 @@ public interface PowerUsageFeatureProvider {
      * Checks whether smart battery feature is supported in this device
      */
     boolean isSmartBatterySupported();
+
+    /**
+     * Checks whether we should enable chart graph design or not
+     */
+    boolean isChartGraphEnabled(Context context);
 }

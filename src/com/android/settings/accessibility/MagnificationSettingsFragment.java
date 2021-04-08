@@ -209,15 +209,15 @@ public class MagnificationSettingsFragment extends DashboardFragment {
         mModeInfos.clear();
         mModeInfos.add(new MagnificationModeInfo(getPrefContext().getText(
                 R.string.accessibility_magnification_mode_dialog_option_full_screen), null,
-                R.drawable.accessibility_magnification_full_screen, MagnificationMode.FULLSCREEN));
+                R.drawable.ic_illustration_fullscreen, MagnificationMode.FULLSCREEN));
         mModeInfos.add(new MagnificationModeInfo(getPrefContext().getText(
                 R.string.accessibility_magnification_mode_dialog_option_window), null,
-                R.drawable.accessibility_magnification_window_screen, MagnificationMode.WINDOW));
+                R.drawable.ic_illustration_window, MagnificationMode.WINDOW));
         mModeInfos.add(new MagnificationModeInfo(getPrefContext().getText(
                 R.string.accessibility_magnification_mode_dialog_option_switch),
                 getPrefContext().getText(
                         R.string.accessibility_magnification_area_settings_mode_switch_summary),
-                R.drawable.accessibility_magnification_switch, MagnificationMode.ALL));
+                R.drawable.ic_illustration_switch, MagnificationMode.ALL));
     }
 
     @VisibleForTesting

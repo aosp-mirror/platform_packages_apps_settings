@@ -15,6 +15,7 @@
  */
 package com.android.settings.display;
 
+import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 import static android.provider.Settings.Secure.CAMERA_AUTOROTATE;
 
 import android.Manifest;
@@ -23,12 +24,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.hardware.SensorPrivacyManager;
 import android.provider.Settings;
 import android.service.rotationresolver.RotationResolverService;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -41,10 +45,14 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         Preference.OnPreferenceChangeListener {
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final SensorPrivacyManager mPrivacyManager;
+    private Preference mPreference;
 
     public SmartAutoRotateController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mPrivacyManager = SensorPrivacyManager.getInstance(context);
+        mPrivacyManager.addSensorPrivacyListener(CAMERA, enabled -> updateState(mPreference));
     }
 
     @Override
@@ -53,14 +61,37 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
             return UNSUPPORTED_ON_DEVICE;
         }
         return !RotationPolicy.isRotationLocked(mContext) && hasSufficientPermission(mContext)
-                ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+                && !isCameraLocked() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference != null) {
+            preference.setEnabled(getAvailabilityStatus() == AVAILABLE);
+        }
+    }
+
+    /**
+     * Need this because all controller tests use RoboElectric. No easy way to mock this service,
+     * so we mock the call we need
+     */
+    @VisibleForTesting
+    boolean isCameraLocked() {
+        return mPrivacyManager.isSensorPrivacyEnabled(SensorPrivacyManager.Sensors.CAMERA);
     }
 
     @Override
     public boolean isChecked() {
-        return hasSufficientPermission(mContext) && Settings.Secure.getInt(
+        return hasSufficientPermission(mContext) && !isCameraLocked() && Settings.Secure.getInt(
                 mContext.getContentResolver(),
                 CAMERA_AUTOROTATE, 0) == 1;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
