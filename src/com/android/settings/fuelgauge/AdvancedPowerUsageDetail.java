@@ -229,10 +229,18 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
         mForegroundPreference.setSummary(
                 TextUtils.expandTemplate(getText(R.string.battery_used_for),
-                        StringUtil.formatElapsedTime(context, foregroundTimeMs, false)));
+                        StringUtil.formatElapsedTime(
+                                context,
+                                foregroundTimeMs,
+                                /* withSeconds */ false,
+                                /* collapseTimeUnit */ false)));
         mBackgroundPreference.setSummary(
                 TextUtils.expandTemplate(getText(R.string.battery_active_for),
-                        StringUtil.formatElapsedTime(context, backgroundTimeMs, false)));
+                        StringUtil.formatElapsedTime(
+                                context,
+                                backgroundTimeMs,
+                                /* withSeconds */ false,
+                                /* collapseTimeUnit */ false)));
     }
 
     @Override

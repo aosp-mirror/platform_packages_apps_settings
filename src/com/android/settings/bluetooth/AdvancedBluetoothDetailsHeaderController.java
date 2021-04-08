@@ -364,7 +364,12 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             final TextView textView = linearLayout.findViewById(R.id.bt_battery_prediction);
             if (estimateReady == 1) {
                 textView.setVisibility(View.VISIBLE);
-                textView.setText(StringUtil.formatElapsedTime(mContext, batteryEstimate, false));
+                textView.setText(
+                        StringUtil.formatElapsedTime(
+                                mContext,
+                                batteryEstimate,
+                                /* withSeconds */ false,
+                                /* collapseTimeUnit */  false));
             } else {
                 textView.setVisibility(View.GONE);
             }

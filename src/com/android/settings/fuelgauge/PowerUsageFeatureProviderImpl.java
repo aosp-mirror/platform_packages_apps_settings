@@ -150,4 +150,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available);
     }
+
+    @Override
+    public boolean isChartGraphEnabled(Context context) {
+        return false;
+    }
 }

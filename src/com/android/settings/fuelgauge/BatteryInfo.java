@@ -263,8 +263,11 @@ public class BatteryInfo {
                 context.getString(chargingLimitedResId, info.batteryPercentString);
         } else if (chargeTimeMs > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
             info.remainingTimeUs = PowerUtil.convertMsToUs(chargeTimeMs);
-            CharSequence timeString = StringUtil.formatElapsedTime(context,
-                    PowerUtil.convertUsToMs(info.remainingTimeUs), false /* withSeconds */);
+            final CharSequence timeString = StringUtil.formatElapsedTime(
+                    context,
+                    PowerUtil.convertUsToMs(info.remainingTimeUs),
+                    false /* withSeconds */,
+                    true /* collapseTimeUnit */);
             int resId = R.string.power_charging_duration;
             info.remainingLabel = context.getString(
                     R.string.power_remaining_charging_duration_only, timeString);
@@ -287,7 +290,7 @@ public class BatteryInfo {
                     context,
                     PowerUtil.convertUsToMs(drainTimeUs),
                     null /* percentageString */,
-                    estimate.isBasedOnUsage() && !shortString
+                    false /* basedOnUsage */
             );
             info.chargeLabel = PowerUtil.getBatteryRemainingStringFormatted(
                     context,
