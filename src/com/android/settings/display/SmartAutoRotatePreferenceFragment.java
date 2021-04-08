@@ -19,6 +19,7 @@ import static com.android.settings.display.SmartAutoRotateController.hasSufficie
 import static com.android.settings.display.SmartAutoRotateController.isRotationResolverServiceAvailable;
 
 import android.app.settings.SettingsEnums;
+import android.hardware.SensorPrivacyManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
     private static final String TAG = "SmartAutoRotatePreferenceFragment";
 
     private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
+    private SensorPrivacyManager mPrivacyManager;
     private AutoRotateSwitchBarController mSwitchBarController;
     private static final String FACE_SWITCH_PREFERENCE_ID = "face_based_rotate";
 
@@ -66,6 +68,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
         switchBar.show();
         mSwitchBarController = new AutoRotateSwitchBarController(activity, switchBar,
                 getSettingsLifecycle());
+        mPrivacyManager = SensorPrivacyManager.getInstance(activity);
         final Preference footerPreference = findPreference(FooterPreference.KEY_FOOTER);
         if (footerPreference != null) {
             footerPreference.setTitle(Html.fromHtml(getString(R.string.smart_rotate_text_headline),
@@ -84,9 +87,11 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
                 public void onChange() {
                     mSwitchBarController.onChange();
                     final boolean isLocked = RotationPolicy.isRotationLocked(getContext());
+                    final boolean isCameraLocked = mPrivacyManager.isSensorPrivacyEnabled(
+                            SensorPrivacyManager.Sensors.CAMERA);
                     final Preference preference = findPreference(FACE_SWITCH_PREFERENCE_ID);
                     if (preference != null && hasSufficientPermission(getContext())) {
-                        preference.setEnabled(!isLocked);
+                        preference.setEnabled(!isLocked && !isCameraLocked);
                     }
                 }
             };

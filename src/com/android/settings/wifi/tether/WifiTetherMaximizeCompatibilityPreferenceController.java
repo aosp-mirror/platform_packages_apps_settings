@@ -24,6 +24,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
+
 /**
  * This controller helps to manage the state of maximize compatibility switch preference.
  */
@@ -53,6 +55,9 @@ public class WifiTetherMaximizeCompatibilityPreferenceController extends
         }
         mPreference.setEnabled(is5GhzBandSupported());
         ((SwitchPreference) mPreference).setChecked(mIsChecked);
+        mPreference.setSummary(mWifiManager.isBridgedApConcurrencySupported()
+                ? R.string.wifi_hotspot_maximize_compatibility_dual_ap_summary
+                : R.string.wifi_hotspot_maximize_compatibility_single_ap_summary);
     }
 
     @Override

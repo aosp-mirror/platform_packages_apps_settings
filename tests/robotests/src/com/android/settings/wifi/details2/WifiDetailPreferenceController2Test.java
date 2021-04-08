@@ -579,7 +579,11 @@ public class WifiDetailPreferenceController2Test {
                 ZoneId.of("Europe/London"));
         doShouldShowRemainingTimeTest(fakeNow, timeRemainingMs);
         final String expectedSummary = mContext.getString(R.string.wifi_time_remaining,
-                StringUtil.formatElapsedTime(mContext, timeRemainingMs, false /* withSeconds */));
+                StringUtil.formatElapsedTime(
+                        mContext,
+                        timeRemainingMs,
+                        false /* withSeconds */,
+                        false /* collapseTimeUnit */));
         final InOrder inOrder = inOrder(mMockHeaderController);
         inOrder.verify(mMockHeaderController).setSecondSummary(expectedSummary);
 

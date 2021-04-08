@@ -107,21 +107,20 @@ public abstract class ManageablePreference extends GearPreference {
         final Resources res = getContext().getResources();
         final String[] states = res.getStringArray(R.array.vpn_states);
         String summary = (mState == STATE_NONE ? "" : states[mState]);
-        if (mIsAlwaysOn) {
-            final String alwaysOnString = res.getString(R.string.vpn_always_on_summary_active);
-            summary = TextUtils.isEmpty(summary) ? alwaysOnString : res.getString(
-                    R.string.join_two_unrelated_items, summary, alwaysOnString);
-        }
         if (mIsInsecureVpn) {
             final String insecureString = res.getString(R.string.vpn_insecure_summary);
-            summary = TextUtils.isEmpty(summary) ? insecureString : res.getString(
-                    R.string.join_two_unrelated_items, summary, insecureString);
+            summary = TextUtils.isEmpty(summary) ? insecureString : summary + " / "
+                    + insecureString;
 
             SpannableString summarySpan = new SpannableString(summary);
             final int colorError = Utils.getColorErrorDefaultColor(getContext());
             summarySpan.setSpan(new ForegroundColorSpan(colorError), 0, summary.length(),
                     SPAN_EXCLUSIVE_INCLUSIVE);
             setSummary(summarySpan);
+        } else if (mIsAlwaysOn) {
+            final String alwaysOnString = res.getString(R.string.vpn_always_on_summary_active);
+            summary = TextUtils.isEmpty(summary) ? alwaysOnString : summary + " / "
+                    + alwaysOnString;
         } else {
             setSummary(summary);
         }

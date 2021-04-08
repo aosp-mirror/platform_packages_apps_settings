@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<!-- Copyright (C) 2021 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,36 +18,25 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="16dp"
-    android:paddingStart="@dimen/preference_no_icon_padding_start"
+    android:paddingStart="?android:attr/listPreferredItemPaddingEnd"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/charge"
+        android:id="@+id/chart_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@*android:string/config_headlineFontFamily"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="36sp"
-        android:textColor="?android:attr/colorAccent" />
+        android:layout_marginBottom="45dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        settings:textColor="?android:attr/textColorSecondary"
+        android:text="@string/battery_usage_chart_graph_hint" />
 
-    <com.android.settings.widget.UsageView
-        android:id="@+id/battery_usage"
+    <com.android.settings.fuelgauge.BatteryChartView
+        android:id="@+id/battery_chart"
         android:layout_width="match_parent"
         android:layout_height="141dp"
         android:layout_marginBottom="16dp"
-        settings:sideLabels="@array/battery_labels"
-        android:colorAccent="?android:attr/colorAccent"
-        android:gravity="end"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         settings:textColor="?android:attr/textColorSecondary" />
-
-    <TextView
-        android:id="@+id/bottom_summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

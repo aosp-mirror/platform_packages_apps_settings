@@ -611,10 +611,8 @@ public class ChooseLockPattern extends SettingsActivity {
             } else {
                 // restore from previous state
                 mChosenPattern = savedInstanceState.getParcelable(KEY_PATTERN_CHOICE);
+                mCurrentCredential = savedInstanceState.getParcelable(KEY_CURRENT_PATTERN);
 
-                if (mCurrentCredential == null) {
-                    mCurrentCredential = savedInstanceState.getParcelable(KEY_CURRENT_PATTERN);
-                }
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
 
                 // Re-attach to the exiting worker if there is one.
@@ -729,7 +727,7 @@ public class ChooseLockPattern extends SettingsActivity {
             }
 
             if (mCurrentCredential != null) {
-                outState.putParcelable(KEY_CURRENT_PATTERN, mCurrentCredential);
+                outState.putParcelable(KEY_CURRENT_PATTERN, mCurrentCredential.duplicate());
             }
         }
 

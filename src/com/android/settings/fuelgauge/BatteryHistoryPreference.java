@@ -19,8 +19,8 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.os.BatteryUsageStats;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -28,26 +28,26 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.widget.UsageView;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
- * Custom preference for displaying power consumption as a bar and an icon on the left for the
- * subsystem/app type.
+ * Custom preference for displaying the battery level as chart graph.
  */
 public class BatteryHistoryPreference extends Preference {
     private static final String TAG = "BatteryHistoryPreference";
 
-    private CharSequence mSummary;
-    private TextView mSummaryView;
-
-    @VisibleForTesting
-    boolean hideSummary;
     @VisibleForTesting
     BatteryInfo mBatteryInfo;
 
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.battery_usage_graph);
+        final boolean isChartGraphEnabled =
+            FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context)
+                   .isChartGraphEnabled(context);
+        Log.i(TAG, "isChartGraphEnabled: " + isChartGraphEnabled);
+        if (isChartGraphEnabled) {
+            setLayoutResource(R.layout.battery_chart_graph);
+        }
         setSelectable(false);
     }
 
@@ -58,22 +58,6 @@ public class BatteryHistoryPreference extends Preference {
         }, batteryUsageStats, false);
     }
 
-    public void setBottomSummary(CharSequence text) {
-        mSummary = text;
-        if (mSummaryView != null) {
-            mSummaryView.setVisibility(View.VISIBLE);
-            mSummaryView.setText(mSummary);
-        }
-        hideSummary = false;
-    }
-
-    public void hideBottomSummary() {
-        if (mSummaryView != null) {
-            mSummaryView.setVisibility(View.GONE);
-        }
-        hideSummary = true;
-    }
-
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
@@ -81,18 +65,6 @@ public class BatteryHistoryPreference extends Preference {
         if (mBatteryInfo == null) {
             return;
         }
-
-        ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
-        mSummaryView = (TextView) view.findViewById(R.id.bottom_summary);
-        if (mSummary != null) {
-            mSummaryView.setText(mSummary);
-        }
-        if (hideSummary) {
-            mSummaryView.setVisibility(View.GONE);
-        }
-        UsageView usageView = (UsageView) view.findViewById(R.id.battery_usage);
-        usageView.findViewById(R.id.label_group).setAlpha(.7f);
-        mBatteryInfo.bindHistory(usageView);
         BatteryUtils.logRuntime(TAG, "onBindViewHolder", startTime);
     }
 }

@@ -17,6 +17,7 @@
 package com.android.settings.vpn2;
 
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
@@ -48,6 +49,7 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
     private Listener mListener;
 
     private UserManager mUserManager;
+    private DevicePolicyManager mDevicePolicyManager;
     private VpnManager mVpnManager;
 
     @Override
@@ -91,7 +93,11 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPackageInfo = getArguments().getParcelable(ARG_PACKAGE);
         mUserManager = UserManager.get(getContext());
+        mDevicePolicyManager = getContext()
+                .createContextAsUser(UserHandle.of(getUserId()), /* flags= */ 0)
+                .getSystemService(DevicePolicyManager.class);
         mVpnManager = getContext().getSystemService(VpnManager.class);
     }
 
@@ -101,7 +107,6 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
         final String label = args.getString(ARG_LABEL);
         boolean managing = args.getBoolean(ARG_MANAGING);
         boolean connected = args.getBoolean(ARG_CONNECTED);
-        mPackageInfo = args.getParcelable(ARG_PACKAGE);
 
         if (managing) {
             return new AppDialog(getActivity(), this, mPackageInfo, label);
@@ -163,7 +168,10 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
 
     private boolean isUiRestricted() {
         final UserHandle userHandle = UserHandle.of(getUserId());
-        return mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN, userHandle);
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN, userHandle)) {
+            return true;
+        }
+        return mPackageInfo.packageName.equals(mDevicePolicyManager.getAlwaysOnVpnPackage());
     }
 
     private int getUserId() {

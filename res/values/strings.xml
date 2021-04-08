@@ -684,10 +684,21 @@
     </plurals>
     <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
     <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
-    <!-- Location settings footer warning text [CHAR LIMIT=NONE] -->
-    <string name="location_settings_footer">
+    <!-- Location settings footer warning text when location is on [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer_location_on">
         Location may use sources like GPS, Wi\u2011Fi, mobile networks, and sensors to help estimate
-        your device\u2019s location.
+        your device\u2019s location. Apps with the nearby devices permission can determine the
+        relative position of connected devices.
+        &lt;a href="<xliff:g example="http://www.google.com" id="url">
+        https://support.google.com/android/answer/3467281</xliff:g>">Learn more&lt;/a>.
+    </string>
+    <!-- Location settings footer warning text when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_settings_footer_location_off">
+        Location access is off for apps and services. Your device location may still be sent to
+        emergency responders when you call or text an emergency number.
+
+        &lt;br>&lt;br>Apps with the nearby devices permission can determine the relative position of
+        connected devices.
     </string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
@@ -2497,9 +2508,11 @@
     <!-- Summary for the toggle to turn off hotspot automatically [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_auto_off_summary">When no devices are connected</string>
     <!-- Title for the toggle to enable/disable the maximize compatibility [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_maximize_compatibility">Maximize compatibility</string>
-    <!-- Summary for the toggle to show the maximize compatibility warning message [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_maximize_compatibility_summary">This may reduce speed for devices connected to this hotspot and use more power</string>
+    <string name="wifi_hotspot_maximize_compatibility">Extend compatibility</string>
+    <!-- Summary for the toggle to show the maximize compatibility warning message in single AP device [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_maximize_compatibility_single_ap_summary">Helps other devices find this hotspot. Reduces hotspot connection speed.</string>
+    <!-- Summary for the toggle to show the maximize compatibility warning message in dual AP device [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary">Helps other devices find this hotspot. Increases battery usage.</string>
 
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
@@ -2931,6 +2944,10 @@
     <string name="adaptive_sleep_contextual_slice_title">Turn on screen attention</string>
     <!-- Description about the contextual adaptive sleep card [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_contextual_slice_summary">Keep screen on when looking at it</string>
+    <!-- auto_rotate settings screen, title about the camera privacy lock enabled [CHAR LIMIT=NONE]-->
+    <string name="auto_rotate_camera_lock_title">Camera is locked</string>
+    <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
+    <string name="auto_rotate_camera_lock_summary">Camera must be unlocked for Face Detection</string>
     <!-- auto_rotate settings screen, title about the required permission is missing [CHAR LIMIT=NONE]-->
     <string name="auto_rotate_summary_no_permission">Camera access is required for Face Detection. Tap to manage permissions for Device Personalization Services</string>
     <!-- auto_rotate settings screen, text for the camera permission button [CHAR LIMIT=NONE]-->
@@ -4090,7 +4107,7 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">Manage location permissions</string>
+    <string name="location_app_level_permissions">App location permissions</string>
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
     <!--
@@ -4138,6 +4155,8 @@
     <string name="location_scanning_bluetooth_always_scanning_title">Bluetooth scanning</string>
     <!-- Description text for Bluetooth always scanning -->
     <string name="location_scanning_bluetooth_always_scanning_description">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
+    <!-- [CHAR LIMIT=60] Location Services preference title -->
+    <string name="location_services_preference_title">Manage location services</string>
     <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
     <string name="location_services_screen_title">Location Services</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
@@ -5454,7 +5473,7 @@
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
-    <!-- Title for the accessibility preference of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <!-- Title for the accessibility preference of the Extra Dim/Reduce Brightness feature that dims your screen. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_title">Extra dim</string>
     <!-- Title for the activation switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_switch_title">Make screen extra dim</string>
@@ -5817,6 +5836,11 @@
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
 
+    <!-- Description of battery state and remaining time (e.g. Charging rapidly • 1hr 23 min left until full)-->
+    <string name="battery_state_and_duration" translatable="false"><xliff:g id="state">%1$s</xliff:g> • <xliff:g id="time">%2$s</xliff:g></string>
+    <!-- Summary for the low battery state [CHAR LIMIT=NONE] -->
+    <string name="low_battery_summary">Low battery</string>
+
     <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
     <string name="background_activity_title">Background restriction</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
@@ -5904,15 +5928,11 @@
     <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_summary_summary" product="device">Device has typical background battery usage</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_low_battery_title">Low battery capacity</string>
+    <string name="battery_tip_low_battery_title">Battery level low</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_low_battery_summary">Battery can\'t provide good battery life</string>
+    <string name="battery_tip_low_battery_summary">Turn on Battery Saver to extend battery life</string>
     <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="default">Improve your phone\'s battery life</string>
-    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="tablet">Improve your tablet\'s battery life</string>
-    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title" product="device">Improve your device\'s battery life</string>
+    <string name="battery_tip_smart_battery_title">Improve battery life</string>
     <!-- Summary for the smart battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_smart_battery_summary">Turn on Battery Manager</string>
     <!-- Title for the early heads up tip [CHAR LIMIT=NONE] -->
@@ -5924,17 +5944,13 @@
     <!-- Summary when early heads up is solved [CHAR LIMIT=NONE] -->
     <string name="battery_tip_early_heads_up_done_summary">Some features may be limited</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="default">Phone used more than usual</string>
-    <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="tablet">Tablet used more than usual</string>
-    <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="device">Device used more than usual</string>
-    <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
+    <string name="battery_tip_high_usage_title">Higher battery usage</string>
+    <!-- Summary for the battery high usage tip, which presents apps with highest usage [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_high_usage_summary">See apps with highest usage</string>
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_title">Optimizing for battery health</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Tap to learn more.</string>
+    <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -6338,6 +6354,21 @@
     <!-- [CHAR_LIMIT=NONE] Battery percentage: Description for preference -->
     <string name="battery_percentage_description">Show battery percentage in status bar</string>
 
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen chart graph hint -->
+    <string name="battery_usage_chart_graph_hint">Battery level for past 24 hr</string>
+    <!-- [CHAR_LIMIT=NONE] Battery app usage section header for past 24 hour -->
+    <string name="battery_app_usage_for_past_24">App usage for past 24 hr</string>
+    <!-- [CHAR_LIMIT=NONE] Battery system usage section header for past 24 hour -->
+    <string name="battery_system_usage_for_past_24">System usage for past 24 hr</string>
+    <!-- [CHAR_LIMIT=NONE] Battery system usage section header -->
+    <string name="battery_system_usage_for">System usage for</string>
+    <!-- [CHAR_LIMIT=NONE] Battery app usage section header -->
+    <string name="battery_app_usage_for">App usage for</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
+    <string name="battery_usage_time_am">am</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
+    <string name="battery_usage_time_pm">pm</string>
+
     <!-- Process Stats strings -->
     <skip />
 
@@ -6562,6 +6593,11 @@
     <string name="certificate_management_app_description">Certificates installed by this app identify you to the apps and URLs below</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
     <string name="remove_credential_management_app">Remove</string>
+    <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
+    <plurals name="number_of_urls">
+        <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
+        <item quantity="other"><xliff:g id="number">%d</xliff:g> URLs</item>
+    </plurals>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
@@ -7140,9 +7176,9 @@
     <!-- Preference summary for app not supporting always-on VPN [CHAR LIMIT=40] -->
     <string name="vpn_always_on_summary_not_supported">Not supported by this app</string>
     <!-- Preference summary for a VPN app that is set to be always-on. [CHAR LIMIT=40]  -->
-    <string name="vpn_always_on_summary_active">Always-on active</string>
+    <string name="vpn_always_on_summary_active">Always on</string>
     <!-- Preference summary for a VPN app that has an insecure type. [CHAR LIMIT=40]  -->
-    <string name="vpn_insecure_summary">not secure VPN</string>
+    <string name="vpn_insecure_summary">Not secure</string>
     <!-- Preference title for the toggle that controls whether to force all network connections to
         go through VPN. [CHAR LIMIT=40] -->
     <string name="vpn_require_connection">Block connections without VPN</string>
@@ -7865,7 +7901,7 @@
     <!-- Toast shown when an app in the work profile attempts to open notification settings. The apps in the work profile cannot access notification settings. [CHAR LIMIT=NONE] -->
     <string name="notification_settings_work_profile">Notification access is not available for apps in the work profile.</string>
     <!-- Title for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=40]-->
-    <string name="account_dashboard_title">Passwords and accounts</string>
+    <string name="account_dashboard_title">Passwords &amp; accounts</string>
     <!-- Summary for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=NONE]-->
     <string name="account_dashboard_default_summary">Saved passwords, autofill, synced accounts</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
@@ -8037,6 +8073,9 @@
 
     <!-- List of synonyms for the font size, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_font_size">text size</string>
+
+    <!-- List of synonyms used in the settings search bar to find the “Extra Dim” setting, which dims your screen. Title name is located at strings/reduce_bright_colors_preference_title. [CHAR LIMIT=NONE] -->
+    <string name="keywords_reduce_bright_colors">light sensitivity, photophobia, dark theme, migraine, headache, reading mode, night mode, reduce brightness, white point</string>
 
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
@@ -8449,7 +8488,7 @@
     <string name="work_use_personal_sounds_title">Use personal profile sounds</string>
 
     <!--  Work Sound: Summary for the switch that enables syncing of personal ringtones to work profile. [CHAR LIMIT=160] -->
-    <string name="work_use_personal_sounds_summary">Sounds are the same for work and personal profiles</string>
+    <string name="work_use_personal_sounds_summary">Use the same sounds as your personal profile</string>
 
     <!-- Work Sounds: Title for the option defining the work phone ringtone. [CHAR LIMIT=60] -->
     <string name="work_ringtone_title">Work phone ringtone</string>
@@ -8464,13 +8503,13 @@
     <string name="work_sound_same_as_personal">Same as personal profile</string>
 
     <!-- Work Sound: Title for dialog shown when enabling sync with personal sounds. [CHAR LIMIT=60] -->
-    <string name="work_sync_dialog_title">Replace sounds?</string>
+    <string name="work_sync_dialog_title">Use personal profile sounds?</string>
 
     <!-- Work Sound: Confirm action text for dialog shown when overriding work notification sounds with personal sounds. [CHAR LIMIT=30] -->
-    <string name="work_sync_dialog_yes">Replace</string>
+    <string name="work_sync_dialog_yes">Confirm</string>
 
     <!-- Work Sound: Message for dialog shown when using the same sounds for work events as for personal events (notifications / ringtones / alarms). [CHAR LIMIT=none] -->
-    <string name="work_sync_dialog_message">Your personal profile sounds will be used for your work profile</string>
+    <string name="work_sync_dialog_message">Your work profile will use the same sounds as your personal profile</string>
 
     <!-- Sound installation: Title for the dialog to confirm that a new sound will be installed to the Ringtones, Notifications, or Alarms folder. [CHAR LIMIT=50] -->
     <string name="ringtones_install_custom_sound_title">Add custom sound?</string>
@@ -9015,6 +9054,7 @@
     <string name="notif_listener_excluded_app_title">See all apps</string>
     <string name="notif_listener_excluded_app_summary">Change notification settings for each app that can send notifications</string>
     <string name="notif_listener_excluded_app_screen_title">Apps shown on device</string>
+    <string name="notif_listener_not_migrated">This app doesn\u2019t support enhanced settings</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -9858,6 +9898,8 @@
     </plurals>
     <!-- OK button for verified links dialog. [CHAR LIMIT=20] -->
     <string name="app_launch_dialog_ok">OK</string>
+    <!-- Info icon description of the verified links. [CHAR LIMIT=NONE] -->
+    <string name="app_launch_verified_links_info_description">Show verified links list</string>
 
     <!-- Title for Checking other supported links dialog. [CHAR LIMIT=50] -->
     <string name="app_launch_checking_links_title">Checking for other supported links\u2026</string>
@@ -9950,6 +9992,12 @@
 
     <!-- Runtime permissions preference summary, which describes what the permission manager does. [CHAR LIMIT=NONE] -->
     <string name="runtime_permissions_summary_control_app_access">Control app access to your data</string>
+
+    <!-- Permissions usage title [CHAR LIMIT=NONE] -->
+    <string name="permissions_usage_title">Permissions usage</string>
+
+    <!-- Permissions usage summary, which describes what the permissions usage does [CHAR LIMIT=NONE] -->
+    <string name="permissions_usage_summary">Show which apps recently used permissions</string>
 
     <!-- Label for showing apps that have not been used for months. [CHAR LIMIT=40]-->
     <string name="unused_apps">Unused apps</string>
@@ -10484,9 +10532,9 @@
     <!-- Media management apps settings title [CHAR LIMIT=40] -->
     <string name="media_management_apps_title">Media management apps</string>
     <!-- Label for a setting which controls whether an app can manage media files [CHAR LIMIT=45] -->
-    <string name="media_management_apps_toggle_label">Allow app to manage media files</string>
+    <string name="media_management_apps_toggle_label">Allow app to manage media</string>
     <!-- Description for a setting which controls whether an app can manage media files [CHAR LIMIT=NONE] -->
-    <string name="media_management_apps_description">If allowed, this app can modify or delete media files on this device or connected storage device without asking you. App must have permission to access files and media.</string>
+    <string name="media_management_apps_description">If allowed, this app can modify or delete media files created with other apps without asking you. App must have permission to access files and media.</string>
     <!-- Search keywords for media management apps settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_media_management_apps">Media, File, Management, Manager, Manage, Edit, Editor, App, Application, Program</string>
 

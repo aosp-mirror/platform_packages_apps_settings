@@ -41,6 +41,7 @@ import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
@@ -133,6 +134,32 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         assertThat(mLayoutPreference.findViewById(R.id.layout_middle).getVisibility()).isEqualTo(
                 View.VISIBLE);
         assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_middle), BATTERY_LEVEL_MAIN);
+    }
+
+    @Test
+    public void refresh_connectedWatch_unknownBatteryLevel_shouldNotShowBatteryLevel() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
+                String.valueOf(BluetoothUtils.META_INT_ERROR).getBytes());
+        when(mBluetoothDevice.getBatteryLevel()).thenReturn(BluetoothDevice.BATTERY_LEVEL_UNKNOWN);
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertThat(mLayoutPreference.findViewById(R.id.layout_left).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_right).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_middle).getVisibility()).isEqualTo(
+                View.VISIBLE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_middle)
+                .requireViewById(R.id.bt_battery_summary).getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -446,9 +473,9 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     @Test
     public void showBatteryPredictionIfNecessary_estimateReadyIsAvailable_showCorrectValue() {
         final String leftBatteryPrediction =
-                StringUtil.formatElapsedTime(mContext, 12000000, false).toString();
+                StringUtil.formatElapsedTime(mContext, 12000000, false, false).toString();
         final String rightBatteryPrediction =
-                StringUtil.formatElapsedTime(mContext, 1200000, false).toString();
+                StringUtil.formatElapsedTime(mContext, 1200000, false, false).toString();
 
         mController.showBatteryPredictionIfNecessary(1, 12000000,
                 mLayoutPreference.findViewById(R.id.layout_left));

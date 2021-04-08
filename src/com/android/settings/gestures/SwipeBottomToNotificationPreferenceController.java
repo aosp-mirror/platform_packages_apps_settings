@@ -27,8 +27,6 @@ import com.android.settings.core.TogglePreferenceController;
  **/
 public class SwipeBottomToNotificationPreferenceController extends TogglePreferenceController {
 
-    private static final String PREF_KEY = "gesture_swipe_bottom_to_notification";
-
     public SwipeBottomToNotificationPreferenceController(Context context, String key) {
         super(context, key);
     }
@@ -51,7 +49,7 @@ public class SwipeBottomToNotificationPreferenceController extends TogglePrefere
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+            OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
         }
         OneHandedSettingsUtils.setSwipeDownNotificationEnabled(mContext, isChecked);
         return true;

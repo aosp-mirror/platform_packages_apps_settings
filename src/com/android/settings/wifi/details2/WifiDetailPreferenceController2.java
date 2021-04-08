@@ -480,7 +480,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return mContext.getString(R.string.wifi_time_remaining, StringUtil.formatElapsedTime(
                     mContext,
                     Duration.between(now, expiryTime).getSeconds() * 1000,
-                    false /* withSeconds */));
+                    false /* withSeconds */, false /* collapseTimeUnit */));
         }
 
         // For more than 2 days, show the expiry date

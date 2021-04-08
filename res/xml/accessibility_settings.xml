@@ -43,6 +43,21 @@
             android:title="@string/accessibility_text_and_display_title"
             settings:searchable="true"/>
 
+        <!--TODO(b/170973645): Get icon-->
+        <com.android.settings.widget.PrimarySwitchPreference
+            android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
+            android:key="reduce_bright_colors_preference"
+            android:persistent="false"
+            android:title="@string/reduce_bright_colors_preference_title"
+            settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
+
+        <SwitchPreference
+            android:key="dark_ui_mode_accessibility"
+            android:persistent="false"
+            android:title="@string/dark_ui_mode"
+            settings:controller="com.android.settings.display.DarkUIPreferenceController"
+            settings:searchable="false"/>
+
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
             android:icon="@drawable/ic_accessibility_magnification"
@@ -50,6 +65,7 @@
             android:persistent="false"
             android:title="@string/accessibility_screen_magnification_title"
             settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory

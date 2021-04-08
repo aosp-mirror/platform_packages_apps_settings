@@ -380,7 +380,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         final long usageTimeMs = entry.getTimeInForegroundMs();
         if (shouldShowSummary(entry) && usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence =
-                    StringUtil.formatElapsedTime(mContext, usageTimeMs, false);
+                    StringUtil.formatElapsedTime(mContext, usageTimeMs, false, false);
             preference.setSummary(
                     entry.isHidden()
                             ? timeSequence

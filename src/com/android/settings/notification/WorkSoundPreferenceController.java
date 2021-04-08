@@ -54,6 +54,9 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
 
+/**
+ * TODO(b/183670633): Remove this file when silky flag deprecated.
+ */
 public class WorkSoundPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnPreferenceChangeListener, LifecycleObserver,
         OnResume, OnPause {

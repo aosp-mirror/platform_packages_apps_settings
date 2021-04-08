@@ -248,10 +248,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
                 mWaitingForConfirmation = savedInstanceState.getBoolean(WAITING_FOR_CONFIRMATION);
-                if (mUserPassword == null) {
-                    mUserPassword = savedInstanceState.getParcelable(
-                            ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-                }
+                mUserPassword = savedInstanceState.getParcelable(
+                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             }
 
             // a) If this is started from other user, use that user id.
@@ -512,7 +510,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             outState.putBoolean(PASSWORD_CONFIRMED, mPasswordConfirmed);
             outState.putBoolean(WAITING_FOR_CONFIRMATION, mWaitingForConfirmation);
             if (mUserPassword != null) {
-                outState.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mUserPassword);
+                outState.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                        mUserPassword.duplicate());
             }
         }
 

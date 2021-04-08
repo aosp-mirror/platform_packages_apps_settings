@@ -40,8 +40,7 @@ public class OneHandedEnablePreferenceController extends TogglePreferenceControl
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext,
-                isChecked);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, isChecked);
         OneHandedSettingsUtils.setSwipeDownNotificationEnabled(mContext, !isChecked);
         return true;
     }
@@ -53,8 +52,7 @@ public class OneHandedEnablePreferenceController extends TogglePreferenceControl
 
     @Override
     public CharSequence getSummary() {
-        return OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)
-                ? mContext.getText(R.string.switch_on_text)
-                : mContext.getText(R.string.switch_off_text);
+        return mContext.getText(
+                isChecked() ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
 }
