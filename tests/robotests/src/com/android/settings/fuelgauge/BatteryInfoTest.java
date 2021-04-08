@@ -150,10 +150,9 @@ public class BatteryInfoTest {
                 mBatteryUsageStats, estimate, SystemClock.elapsedRealtime() * 1000,
                 true /* shortString */);
 
-        // We only add special mention for the long string
-        assertThat(info.remainingLabel.toString()).contains(ENHANCED_STRING_SUFFIX);
+        // Both long and short strings should not have extra text
+        assertThat(info.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
         assertThat(info.suggestionLabel).contains(BATTERY_RUN_OUT_PREFIX);
-        // shortened string should not have extra text
         assertThat(info2.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
         assertThat(info2.suggestionLabel).contains(BATTERY_RUN_OUT_PREFIX);
     }
