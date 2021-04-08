@@ -317,10 +317,8 @@
       <item quantity="one">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك تطبيق واحد (<xliff:g id="COUNT_0">%1$d</xliff:g>) حق الوصول إلى بيانات الموقع الجغرافي.</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"جارٍ التحميل..."</string>
-    <!-- no translation found for location_settings_footer_location_on (948868909317139885) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off (7196249733146238215) -->
-    <skip />
+    <string name="location_settings_footer_location_on" msgid="948868909317139885">"‏يمكن لخدمة الموقع الجغرافي استخدام مصادر، مثلاً نظام تحديد المواقع العالمي (GPS) وشبكة Wi-Fi وشبكات الجوّال وأجهزة الاستشعار للمساعدة في تقدير الموقع الجغرافي لجهازك. يمكن للتطبيقات التي لديها إذن بالوصول إلى الأجهزة القريبة تحديد الموضع النسبي للأجهزة المتصلة بجهازك. &lt;a href=<xliff:g id="URL"> https://support.google.com/android/answer/3467281</xliff:g>&gt;مزيد من المعلومات&lt;/a&gt;"</string>
+    <string name="location_settings_footer_location_off" msgid="7196249733146238215">"‏ميزة وصول التطبيقات والخدمات إلى الموقع الجغرافي غير مفّعلة. قد يستمر إرسال الموقع الجغرافي لجهازك إلى مسؤولي الاستجابة لحالات الطوارئ عند الاتصال برقم طوارئ أو مراسلته نصيًا. &lt;br&gt;&lt;br&gt;يمكن للتطبيقات التي لديها إذن بالوصول إلى الأجهزة القريبة تحديد الموضع النسبي للأجهزة المتصلة بجهازك."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"الحسابات"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"الأمان"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"التشفير وبيانات الاعتماد"</string>
@@ -446,37 +444,22 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"التالي"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"هل تريد تخطّي بصمة الإصبع؟"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"لا يستغرق إعداد بصمة الإصبع أكثر من دقيقة أو دقيقتين. وعند تخطّي ذلك، يمكنك إضافة بصمة إصبع لاحقًا من الإعدادات."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_message_setup (6255210343107484206) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_title_1 (4360262371633254407) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_1 (5824014348182478279) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_title_2 (2580899232734177771) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_2 (4350767334790735812) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (1871569220720675048) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (3948305045484131665) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"عندما يظهر لك هذا الرمز، استخدِم بصمة الإصبع للمصادقة، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"تنبيه"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"استخدام بصمة الإصبع لفتح قفل الهاتف قد يكون أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"آلية العمل"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"تنشئ ميزة \"فتح القفل ببصمة الإصبع\" نموذجًا فريدًا من بصمة الإصبع للتعرّف عليك أثناء عمليات المصادقة. لإنشاء نموذج بصمة الإصبع هذا أثناء عملية الإعداد، ستلتقط صورًا لبصمة إصبعك من مواضع مختلفة."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="1871569220720675048">"سيستخدم الهاتف أيضًا صورًا من تفاعلاتك لفتح القفل ببصمة الإصبع من أجل تعديل نموذج بصمة الإصبع. يتم تخزين صور بصمة الإصبع ونموذجها بأمان على هاتفك ولا يتم نقلها خارجه مطلقًا. تتم كل عمليات المعالجة بأمان على هاتفك."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"يمكنك حذف صور بصمة الإصبع ونموذجها أو إيقاف ميزة \"فتح القفل ببصمة الإصبع\" في أي وقت في \"الإعدادات\". يتم تخزين صور بصمة الإصبع ونموذجها على الهاتف إلى أن تحذفها."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_try_adjusting (3855444121278320304) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_partially_detected (8330287007361798356) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_already_enrolled (8616678833080422946) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_clean_sensor (3501453094314993113) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_too_fast (5891227328100822018) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_acquire_too_bright (769646735950329315) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_error_max_attempts (1464972470750764128) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (5893917293784293946) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"غيِّر موضع إصبعك قليلاً في كل مرة."</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"يُرجى تغطية الرمز بالمنطقة الوسطى من بصمة الإصبع."</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled" msgid="8616678833080422946">"سبق أن تمت إضافة بصمة الإصبع هذه."</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor" msgid="3501453094314993113">"يُرجى تنظيف شاشتك بالقرب من جهاز الاستشعار ثم إعادة المحاولة."</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"ارفَع إصبعك بعد أن تشعر باهتزاز الجهاز."</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"يُرجى الانتقال إلى مكان تكون الإضاءة فيه أقل سطوعًا ثم إعادة المحاولة."</string>
+    <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"لقد وصلت إلى الحد الأقصى من عدد المحاولات المسموح بها."</string>
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="5893917293784293946">"استخدِم بصمة الإصبع لفتح قفل هاتفك أو للمصادقة، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"هل تريد تخطّي قفل الشاشة؟"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الجهاز اللوحي في حالة فقدانه أو سرقته أو إعادة ضبطه."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الجهاز في حالة فقدانه أو سرقته أو إعادة ضبطه."</string>
@@ -539,8 +522,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"هل تريد إزالة جميع بصمات الأصابع؟"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"إزالة \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"هل تريد حذف بصمة الإصبع هذه؟"</string>
-    <!-- no translation found for fingerprint_v2_delete_message (4136720729608391131) -->
-    <skip />
+    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"يؤدي هذا الإجراء إلى حذف النموذج والصور المرتبطة ببصمة الإصبع \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\"، والتي تم تخزينها على جهازك."</string>
     <string name="fingerprint_last_delete_message" msgid="93311579320049852">"لن تتمكّن من استخدام بصمات أصابعك لفتح قفل الهاتف أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"لن تتمكن من استخدام بصمات إصبعك لإلغاء تأمين الملف الشخصي للعمل، أو السماح بعمليات الشراء، أو تسجيل الدخول إلى تطبيقات العمل"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"نعم، إزالة"</string>
@@ -651,19 +633,19 @@
     <string name="unlock_disable_frp_warning_content_pattern" msgid="669384600341275312">"لن تعمل ميزات حماية الجهاز بدون النقش."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8160948976853039106">"لن تعمل ميزات حماية الجهاز بدون النقش.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>كما ستتم إزالة بصمات الإصبع المحفوظة من هذا الجهاز ولن تتمكن من فتح قفل هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات باستخدامها."</string>
+</xliff:g>ستتم إزالة بصمات الإصبع المحفوظة أيضًا من هذا الجهاز ولن تتمكن من فتح قفل هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات باستخدامها."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="3732073290049930632">"لن تعمل ميزات حماية الجهاز بدون رقم التعريف الشخصي."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="2018020861756931097">"لن تعمل ميزات حماية الجهاز بدون رقم التعريف الشخصي.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>كما ستتم إزالة بصمات الإصبع المحفوظة من هذا الجهاز ولن تتمكن من فتح قفل هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات باستخدامها."</string>
+</xliff:g>ستتم إزالة بصمات الإصبع المحفوظة أيضًا من هذا الجهاز ولن تتمكن من فتح قفل هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات باستخدامها."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="2130004168084396797">"لن تعمل ميزات حماية الجهاز بدون كلمة المرور."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8455564842615579472">"لن تعمل ميزات حماية الجهاز بدون كلمة المرور.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>كما ستتم إزالة بصمات الإصبع المحفوظة من هذا الجهاز ولن تتمكن من فتح قفل هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات باستخدامها."</string>
+</xliff:g>ستتم إزالة بصمات الإصبع المحفوظة أيضًا من هذا الجهاز ولن تتمكن من فتح قفل هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات باستخدامها."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"لن تعمل ميزات حماية الجهاز بدون قفل الشاشة."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="4985095359625056279">"لن تعمل ميزات حماية الجهاز بدون قفل الشاشة.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>كما ستتم إزالة بصمات الإصبع المحفوظة من هذا الجهاز ولن تتمكن من فتح قفل هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات باستخدامها."</string>
+</xliff:g>ستتم إزالة بصمات الإصبع المحفوظة أيضًا من هذا الجهاز ولن تتمكن من فتح قفل هاتفك أو السماح بعمليات الشراء أو تسجيل الدخول إلى التطبيقات باستخدامها."</string>
     <string name="unlock_disable_frp_warning_content_pattern_profile" msgid="6850770024037691891">"لن تعمل ميزات حماية الملف الشخصي بدون النقش."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile" msgid="313998125412427527">"لن تعمل ميزات حماية الملف الشخصي بدون النقش.<xliff:g id="EMPTY_LINE">
 
@@ -869,8 +851,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"إعدادات متقدمة"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"إعدادات بلوتوث المتقدمة"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"عند تفعيل البلوتوث، يمكن للجهاز التواصل مع أجهزة البلوتوث الأخرى القريبة."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (7628457523484942552) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="7628457523484942552">"عندما تكون تقنية البلوتوث مفعّلة، يمكن للجهاز التواصل مع الأجهزة الأخرى القريبة التي تتضمّن بلوتوث.\n\nولتحسين تجربة استخدام الجهاز، يمكن للتطبيقات والخدمات أيضًا البحث عن الأجهزة القريبة في أي وقت، حتى عندما تكون تقنية البلوتوث غير مفعّلة. ويمكن استخدام هذا الإجراء لتحسين الميزات والخدمات المستندة إلى الموقع الجغرافي مثلاً. وبإمكانك تغيير هذا الإعداد في "<annotation id="link">"إعدادات بحث البلوتوث"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"لتحسين دقة الموقع، سيظل بإمكان تطبيقات وخدمات النظام اكتشاف أجهزة بلوتوث. ويمكنك تغيير ذلك من خلال <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"تعذر الاتصال. يُرجى إعادة المحاولة."</string>
     <string name="device_details_title" msgid="1155622417516195481">"تفاصيل الجهاز"</string>
@@ -973,10 +954,8 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"لاستخدام الميزة، اختر مقدِّم خدمة تقييم شبكة"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"لاستخدام الميزة، اختر مقدِّم خدمة تقييم شبكة متوافق"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"تثبيت شهادات"</string>
-    <!-- no translation found for wifi_scan_notify_text (7163137260385995873) -->
-    <skip />
-    <!-- no translation found for wifi_scan_notify_text_scanning_off (7439201783168213149) -->
-    <skip />
+    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"‏لتحسين دقة الموقع الجغرافي، يظل بإمكان التطبيقات والخدمات البحث عن شبكات Wi‑Fi في أي وقت، حتى عند إيقاف شبكة Wi‑Fi. ويمكن استخدام هذا الإجراء لتحسين الميزات والخدمات المستندة إلى الموقع الجغرافي مثلاً. وبإمكانك تغيير هذا الإعداد في <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث عن شبكات Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"‏لتحسين دقة تحديد الموقع الجغرافي، يمكنك تفعيل ميزة \"البحث عن شبكات Wi-Fi\" من خلال <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث عن شبكات Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"عدم الإظهار مرة أخرى"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"‏احتفاظ بـ Wi-Fi في وضع السكون"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8753852404141070878">"‏تفعيل Wi-Fi أثناء وضع السكون"</string>
@@ -1218,8 +1197,12 @@
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"يمكن للتطبيقات إنشاء نقطة اتصال لمشاركة المحتوى مع الأجهزة المجاورة."</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"إيقاف نقطة الاتصال تلقائيًا"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"عندما لا يكون هناك أي أجهزة متصلة"</string>
-    <string name="wifi_hotspot_maximize_compatibility" msgid="1333911252959346886">"زيادة التوافق إلى أقصى حد"</string>
-    <string name="wifi_hotspot_maximize_compatibility_summary" msgid="4293514435238450741">"قد يؤدي هذا إلى تقليل سرعة الأجهزة المرتبطة بنقطة الاتصال هذه واستخدام المزيد من الطاقة."</string>
+    <!-- no translation found for wifi_hotspot_maximize_compatibility (6494125684420024058) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_maximize_compatibility_single_ap_summary (383355687431591441) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_maximize_compatibility_dual_ap_summary (3579549223159056533) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"جارٍ تفعيل نقطة الاتصال…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"جارٍ إيقاف نقطة الاتصال…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> نشطة"</string>
@@ -1378,6 +1361,10 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"‏يستخدم إعداد \"استعراض الشاشة\" الكاميرا الأمامية لمعرفة ما إذا كان أحد ينظر إلى الشاشة. يعمل هذا الإعداد على الجهاز ولا يتم تخزين أي صور أو إرسالها إلى Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"تفعيل ميزة \"استعراض الشاشة\""</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"إبقاء شاشتك قيد التفعيل أثناء النظر إليها"</string>
+    <!-- no translation found for auto_rotate_camera_lock_title (5369003176695105872) -->
+    <skip />
+    <!-- no translation found for auto_rotate_camera_lock_summary (5699491516271544672) -->
+    <skip />
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"يجب منح إذن الوصول إلى الكاميرا لاستخدام تقنية \"التعرّف على الوجوه\". يمكنك النقر لإدارة الأذونات في \"خدمات تخصيص الأجهزة\"."</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"إدارة الأذونات"</string>
     <string name="night_display_title" msgid="8532432776487216581">"الإضاءة الليلية"</string>
@@ -1883,8 +1870,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"خدمات الموقع الجغرافي"</string>
     <string name="location_title" msgid="5819154746934945021">"موقعي"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"الموقع الجغرافي للملف الشخصي للعمل"</string>
-    <!-- no translation found for location_app_level_permissions (907206607664629759) -->
-    <skip />
+    <string name="location_app_level_permissions" msgid="907206607664629759">"أذونات التطبيقات لتحديد الموقع الجغرافي"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"خدمة الموقع الجغرافي غير مفعّلة"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="zero"> يمتلك <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> تطبيق من إجمالي <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> تطبيق حق الوصول إلى بيانات الموقع الجغرافي.</item>
@@ -1905,8 +1891,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"‏يمكنك السماح للتطبيقات والخدمات بالبحث عن الأجهزة المجاورة في أي وقت، حتى في حال إيقاف Wi‑Fi. ويمكن استخدام هذه البيانات مثلاً لتحسين الميزات والخدمات المستندة إلى الموقع الجغرافي."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"البحث عن بلوتوث"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"يمكنك السماح للتطبيقات والخدمات بالبحث عن الأجهزة المجاورة في أي وقت، حتى في حال إيقاف البلوتوث. ويمكن استخدام هذه البيانات مثلاً لتحسين الميزات والخدمات المستندة إلى الموقع الجغرافي."</string>
-    <!-- no translation found for location_services_preference_title (8572194688820064813) -->
-    <skip />
+    <string name="location_services_preference_title" msgid="8572194688820064813">"إدارة خدمات الموقع الجغرافي"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"خدمات الموقع الجغرافي"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"خدمات الموقع الجغرافي للعمل"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"استخدام الموقع الجغرافي لضبط المنطقة الزمنية"</string>
@@ -2645,8 +2630,7 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"الوقت المتبقي: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> للشحن"</string>
-    <!-- no translation found for low_battery_summary (4458925347316501953) -->
-    <skip />
+    <string name="low_battery_summary" msgid="4458925347316501953">"طاقة البطارية منخفضة"</string>
     <string name="background_activity_title" msgid="8214332017349791380">"حظر العمل في الخلفية"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"السماح بتشغيل التطبيق في الخلفية"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"غير مسموح بتشغيل التطبيق في الخلفية"</string>
@@ -2687,24 +2671,18 @@
     <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"يتم استخدام بطارية الهاتف بشكل عادي في الخلفية."</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"يتم استخدام بطارية الجهاز اللوحي بشكل عادي في الخلفية."</string>
     <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"يتم استخدام بطارية الجهاز بشكل عادي في الخلفية."</string>
-    <!-- no translation found for battery_tip_low_battery_title (4155239078744100997) -->
-    <skip />
-    <!-- no translation found for battery_tip_low_battery_summary (2629633757244297436) -->
-    <skip />
-    <!-- no translation found for battery_tip_smart_battery_title (8925025450214912325) -->
-    <skip />
+    <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"مستوى شحن البطارية منخفض"</string>
+    <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"يمكنك تفعيل خيار \"توفير شحن البطارية\" لإطالة عمر البطارية."</string>
+    <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"إطالة عمر البطارية"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"تفعيل \"مدير البطارية\""</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"تفعيل ميزة \"توفير شحن البطارية\""</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"قد تنفد البطارية قبل الوقت المعتاد."</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"تم تفعيل ميزة \"توفير شحن البطارية\"."</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"قد تكون بعض الميزات محظورة."</string>
-    <!-- no translation found for battery_tip_high_usage_title (9110720762506146697) -->
-    <skip />
-    <!-- no translation found for battery_tip_high_usage_summary (3938999581403084551) -->
-    <skip />
+    <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"استخدام أعلى للبطارية"</string>
+    <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"عرض التطبيقات ذات أعلى معدّل استخدام للبطارية"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"التحسين لسلامة البطارية"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4779491239398261377) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="4779491239398261377">"تأثير محدود على البطارية مؤقتًا. مزيد من المعلومات"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"تم استخدام هاتفك أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"تم استخدام جهازك اللوحي أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"تم استخدام جهازك أكثر من المعتاد. قد ينفذ شحن البطارية قبل الوقت المتوقَّع.\n\nالتطبيقات الأكثر استخدامًا للبطارية:"</string>
@@ -2877,7 +2855,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"تفاصيل الاستخدام منذ آخر شحن كامل"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"آخر شحن كامل"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"يمكن استخدام البطارية المشحونة بالكامل حوالي"</string>
-    <string name="battery_footer_summary" msgid="9125397752380281832">"بيانات استخدام البطارية تقديرية ويمكن أن تتغير حسب الاستخدام"</string>
+    <string name="battery_footer_summary" msgid="9125397752380281832">"بيانات استخدام البطارية تقديرية ويمكن أن تتغير حسب الاستخدام."</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"أثناء الاستخدام النشط"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"أثناء الاستخدام في الخلفية"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"استخدام البطارية"</string>
@@ -2916,6 +2894,20 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"البطارية عند مستوى <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"نسبة شحن البطارية"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"عرض نسبة شحن البطارية في شريط الحالة"</string>
+    <!-- no translation found for battery_usage_chart_graph_hint (9182079098173323005) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for_past_24 (1234770810563940656) -->
+    <skip />
+    <!-- no translation found for battery_system_usage_for_past_24 (3341520273114616263) -->
+    <skip />
+    <!-- no translation found for battery_system_usage_for (158304136130870726) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for (929971425835809784) -->
+    <skip />
+    <!-- no translation found for battery_usage_time_am (7783773965475697655) -->
+    <skip />
+    <!-- no translation found for battery_usage_time_pm (1534468528902328570) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"إحصاءات العمليات"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"الإحصائيات التقنية حول العمليات الجارية"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"استخدام الذاكرة"</string>
@@ -3010,7 +3002,14 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"ما مِن تطبيقات لإدارة الشهادات"</string>
     <string name="certificate_management_app_description" msgid="7257420502179110164">"‏تؤدي الشهادات التي يثبتها هذا التطبيق إلى تعرّف التطبيقات وعناوين URL على بيانات اعتمادك."</string>
     <string name="remove_credential_management_app" msgid="6879631067380232928">"إزالة"</string>
-    <!-- no translation found for number_of_urls (403979258551655023) -->
+    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
+      <item quantity="zero">‏<xliff:g id="NUMBER_1">%d</xliff:g> عنوان URL</item>
+      <item quantity="two">‏عنوانا URL (<xliff:g id="NUMBER_1">%d</xliff:g>)</item>
+      <item quantity="few">‏<xliff:g id="NUMBER_1">%d</xliff:g> عناوين URL</item>
+      <item quantity="many">‏<xliff:g id="NUMBER_1">%d</xliff:g> عنوان URL</item>
+      <item quantity="other">‏<xliff:g id="NUMBER_1">%d</xliff:g> عنوان URL</item>
+      <item quantity="one">‏عنوان URL واحد (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
+    </plurals>
     <string name="emergency_tone_title" msgid="6673118505206685168">"إشارة اتصال الطوارئ"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"تعيين السلوك عند إجراء اتصال بالطوارئ"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"الاحتفاظ بنسخة احتياطية"</string>
@@ -3544,7 +3543,8 @@
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"التطبيقات والإشعارات"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"التطبيقات المُستخدِمة مؤخرًا، التطبيقات التلقائية"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"لا تتوفر إمكانية الدخول إلى الإشعارات للتطبيقات في الملف الشخصي للعمل."</string>
-    <string name="account_dashboard_title" msgid="3920790213061354489">"كلمات المرور والحسابات"</string>
+    <!-- no translation found for account_dashboard_title (8228773251948253914) -->
+    <skip />
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"الملء التلقائي والحسابات التي تتم مزامنتها وكلمات المرور المحفوظة"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"التطبيقات التلقائية"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"اللغات والإيماءات والوقت والنسخ الاحتياطي"</string>
@@ -3636,6 +3636,8 @@
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"‏خدمة volte، الاتصال المتقدم، اتصال 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"إضافة اللغة، إضافة لغة"</string>
     <string name="keywords_font_size" msgid="336803136451166298">"حجم النص"</string>
+    <!-- no translation found for keywords_reduce_bright_colors (1683190961013139183) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"الصوت التلقائي"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"تم ضبط مستوى صوت الرنين والإشعار على <xliff:g id="PERCENTAGE">%1$s</xliff:g>."</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"مستوى الصوت والاهتزاز ووضع\"عدم الإزعاج\""</string>
@@ -3773,18 +3775,14 @@
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"هل تريد تغيير إعدادات إشعار \"الرجاء عدم الإزعاج\"؟"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"أصوات الملف الشخصي للعمل"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"استخدام أصوات الملف الشخصي"</string>
-    <!-- no translation found for work_use_personal_sounds_summary (608061627969077231) -->
-    <skip />
+    <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"استخدام الأصوات نفسها التي يستخدمها ملفك الشخصي"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"نغمة رنين هاتف العمل"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"الصوت التلقائي لإشعارات العمل"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"الصوت التلقائي لمنبّه العمل"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"مثل الملف الشخصي"</string>
-    <!-- no translation found for work_sync_dialog_title (7810248132303515469) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_yes (5785488304957707534) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_message (5066178064994040223) -->
-    <skip />
+    <string name="work_sync_dialog_title" msgid="7810248132303515469">"هل تريد استخدام أصوات الملف الشخصي؟"</string>
+    <string name="work_sync_dialog_yes" msgid="5785488304957707534">"تأكيد"</string>
+    <string name="work_sync_dialog_message" msgid="5066178064994040223">"سيستخدم ملفك الشخصي للعمل الأصوات نفسها التي يستخدمها ملفك الشخصي."</string>
     <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"هل تريد إضافة صوت مخصص؟"</string>
     <string name="ringtones_install_custom_sound_content" msgid="5844996763705884979">"سيتم نسخ هذا الملف إلى مجلد <xliff:g id="FOLDER_NAME">%s</xliff:g>"</string>
     <string name="ringtones_category_preference_title" msgid="26680768777533727">"نغمات الرنين"</string>
@@ -3992,6 +3990,8 @@
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"عرض كل التطبيقات"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"تغيير إعدادات الإشعارات لكل تطبيق يمكنه إرسال إشعارات"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"التطبيقات المعروضة على الجهاز"</string>
+    <!-- no translation found for notif_listener_not_migrated (6265206376374278226) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"خدمات مساعد الواقع الافتراضي"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"لم تطلب أي تطبيقات مثبَّتة أن يتم تشغيلها كخدمات مساعد واقع افتراضي."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"هل تريد السماح لخدمة <xliff:g id="SERVICE">%1$s</xliff:g> بالوصول إلى خدمة الواقع الافتراضي؟"</string>
@@ -4003,8 +4003,8 @@
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"لا تتيح أي من التطبيقات المثبَّتة عرض صورة داخل صورة"</string>
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"صورة، شاشة، صورة داخل صورة"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"نافذة ضمن النافذة"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"السماح بنافذة صورة داخل صورة"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"يمكنك السماح لهذا التطبيق بإنشاء نافذة صورة داخل صورة أثناء فتح التطبيق أو بعد مغادرته (على سبيل المثال، لمتابعة مشاهدة فيديو)، علمًا بأن هذه النافذة تظهر أمام التطبيقات الأخرى التي تستخدمها."</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"السماح بعرض نافذة ضمن النافذة"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"يمكنك السماح لهذا التطبيق بإنشاء نافذة ضمن نافذة أثناء فتح التطبيق أو بعد مغادرته (على سبيل المثال، لمتابعة مشاهدة فيديو)، علمًا بأن هذه النافذة تظهر فوق التطبيقات الأخرى التي تستخدمها."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"الربط بين تطبيقات العمل والتطبيقات الشخصية"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"مرتبطة"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"غير مرتبطة"</string>
@@ -4328,6 +4328,8 @@
       <item quantity="one">تم التحقّق من الرابط ويتم فتحه في هذا التطبيق تلقائيًا.</item>
     </plurals>
     <string name="app_launch_dialog_ok" msgid="1446157681861409861">"حسنًا"</string>
+    <!-- no translation found for app_launch_verified_links_info_description (7514750232467132117) -->
+    <skip />
     <string name="app_launch_checking_links_title" msgid="6119228853554114201">"جارٍ البحث عن روابط أخرى متوافقة…"</string>
     <string name="app_launch_dialog_cancel" msgid="6961071841814898663">"إلغاء"</string>
     <plurals name="app_launch_supported_links_title" formatted="false" msgid="8579323750839397568">
@@ -4394,6 +4396,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"لم يتم منح أي أذونات"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"لم يتم طلب أي أذونات"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"التحكّم في وصول التطبيقات إلى بياناتك"</string>
+    <string name="permissions_usage_title" msgid="7928450120500019282">"استخدام الأذونات"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"إظهار التطبيقات التي استخدمت الأذونات مؤخرًا"</string>
     <string name="unused_apps" msgid="4566272194756830656">"التطبيقات غير المستخدمة"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> تطبيق غير مستخدم</item>
@@ -4467,7 +4471,7 @@
     <string name="permit_usage_access" msgid="179630895262172674">"السماح بالوصول إلى بيانات الاستخدام"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"الإعدادات المفضّلة لاستخدام التطبيقات"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"وقت النظر إلى الشاشة"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"يتيح الدخول إلى الاستخدام للتطبيق تتبع التطبيقات الأخرى التي تستخدمها ومدى تكرار استخدامها ومشغل شبكة الجوال وإعدادات اللغة بالإضافة إلى تفاصيل أخرى."</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"عند السماح بالوصول إلى بيانات الاستخدام، سيتمكّن التطبيق من تتبّع التطبيقات الأخرى التي تستخدمها ومدى تكرار استخدامها وكذلك تتبّع مشغّل شبكة الجوال وإعدادات اللغة بالإضافة إلى تفاصيل أخرى."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"الذاكرة"</string>
     <string name="memory_details_title" msgid="3048107441540417799">"تفاصيل الذاكرة"</string>
     <string name="always_running" msgid="9012705720688200252">"يعمل دائمًا (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4604,7 +4608,7 @@
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"التطبيقات"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"إظهار فوق التطبيقات الأخرى"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"السماح بظهور التطبيق فوق التطبيقات الأخرى"</string>
-    <string name="allow_overlay_description" msgid="1607235723669496298">"عليك السماح بعرض واجهة هذا التطبيق فوق التطبيقات الأخرى التي تستخدمها. سيتمكّن هذا التطبيق من معرفة الأماكن التي تنقر عليها أو من تغيير ما يتم عرضه على الشاشة."</string>
+    <string name="allow_overlay_description" msgid="1607235723669496298">"يمكنك السماح بعرض واجهة هذا التطبيق فوق التطبيقات الأخرى التي تستخدمها. سيتمكّن هذا التطبيق من معرفة الأماكن التي تنقر عليها أو من تغيير ما يتم عرضه على الشاشة."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"الوصول إلى كل الملفات"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"السماح بالوصول إلى كل الملفات لإدارتها"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"يسمح هذا الإعداد لهذا التطبيق بقراءة كل الملفات وتعديلها وحذفها من هذا الجهاز أو أي وحدات تخزين متصلة. في حال تفعيله، يمكن أن يصل التطبيق إلى الملفات بدون إعلامك بذلك."</string>
@@ -5265,7 +5269,7 @@
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"اسم الجهاز"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"‏التحكّم في شبكة Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"‏السماح للتطبيق بالتحكم في شبكة Wi-Fi"</string>
-    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"‏السماح لهذا التطبيق بتفعيل شبكة Wi-Fi أو إيقافها، أو البحث عن شبكات Wi-Fi والاتصال بها، أو إضافة الشبكات أو إزالتها، أو بدء نقطة اتصال للأجهزة المحلية فقط"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"‏يمكنك السماح لهذا التطبيق بتفعيل شبكة Wi-Fi أو إيقافها، أو البحث عن شبكات Wi-Fi والاتصال بها، أو إضافة الشبكات أو إزالتها، أو بدء نقطة اتصال للأجهزة المحلية فقط."</string>
     <string name="media_output_title" msgid="8283629315159510680">"تشغيل الوسائط على"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"تشغيل <xliff:g id="LABEL">%s</xliff:g> على"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"هذا الجهاز"</string>
