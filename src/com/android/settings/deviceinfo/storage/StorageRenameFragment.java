@@ -68,6 +68,7 @@ public class StorageRenameFragment extends InstrumentedDialogFragment {
         final View view = dialogInflater.inflate(R.layout.dialog_edittext, null, false);
         final EditText nickname = (EditText) view.findViewById(R.id.edittext);
         nickname.setText(rec.getNickname());
+        nickname.requestFocus();
 
         return builder.setTitle(R.string.storage_rename_title)
                 .setView(view)
