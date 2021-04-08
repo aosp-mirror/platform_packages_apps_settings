@@ -94,6 +94,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
                     mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
+                    mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
+                            mBatteryTipPreferenceController.getCurrentBatteryTip(), batteryInfo);
                     mBatteryInfo = batteryInfo;
                 }
 
@@ -115,6 +117,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 public void onLoadFinished(Loader<List<BatteryTip>> loader,
                         List<BatteryTip> data) {
                     mBatteryTipPreferenceController.updateBatteryTips(data);
+                    mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
+                            mBatteryTipPreferenceController.getCurrentBatteryTip(), mBatteryInfo);
                 }
 
                 @Override
