@@ -27,6 +27,7 @@
     <com.android.settingslib.widget.UsageProgressBarPreference
         android:key="storage_summary"
         android:order="2"
+        android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"
         settings:allowDividerBelow="true"/>
