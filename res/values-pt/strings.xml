@@ -305,10 +305,8 @@
       <item quantity="other">Ativado: <xliff:g id="COUNT_1">%1$d</xliff:g> apps têm acesso à localização</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Carregando…"</string>
-    <!-- no translation found for location_settings_footer_location_on (948868909317139885) -->
-    <skip />
-    <!-- no translation found for location_settings_footer_location_off (7196249733146238215) -->
-    <skip />
+    <string name="location_settings_footer_location_on" msgid="948868909317139885">"A localização pode usar fontes como GPS, Wi-Fi, redes móveis e sensores para ajudar a estimar o local do dispositivo. Apps com permissão para encontrar dispositivos próximos podem determinar a posição relativa dos dispositivos conectados. &lt;a href=<xliff:g id="URL"> https://support.google.com/android/answer/3467281</xliff:g>&gt;Saiba mais&lt;/a&gt;."</string>
+    <string name="location_settings_footer_location_off" msgid="7196249733146238215">"O acesso à localização está desativado para apps e serviços. O local do dispositivo ainda poderá ser enviado aos socorristas quando você ligar ou enviar uma mensagem de texto para um número de emergência. &lt;br&gt;&lt;br&gt;Apps com permissão para encontrar dispositivos próximos podem determinar a posição relativa dos dispositivos conectados."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Contas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Segurança"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Criptografia e credenciais"</string>
@@ -575,7 +573,7 @@
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Bloqueio de tela"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5799070517574360310">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / Imediatamente após a suspensão"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4572132216801894216">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> após a suspensão"</string>
-    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Bloq do perfil de trab"</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Bloqueio do perfil de trabalho"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="4746783679112447948">"Alterar tela bloqueio"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="6023813780512501969">"Alterar ou desativar o padrão, o PIN ou a segurança da senha"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"Escolha um método para bloquear a tela"</string>
@@ -1119,8 +1117,12 @@
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Os apps podem criar um ponto de acesso para compartilhamento de conteúdo com dispositivos nas proximidades."</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Desativar ponto de acesso automaticamente"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Quando nenhum dispositivo estiver conectado"</string>
-    <string name="wifi_hotspot_maximize_compatibility" msgid="1333911252959346886">"Maximizar compatibilidade"</string>
-    <string name="wifi_hotspot_maximize_compatibility_summary" msgid="4293514435238450741">"Esse recurso pode reduzir a velocidade de dispositivos conectados a este ponto de acesso e consumir mais energia"</string>
+    <!-- no translation found for wifi_hotspot_maximize_compatibility (6494125684420024058) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_maximize_compatibility_single_ap_summary (383355687431591441) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_maximize_compatibility_dual_ap_summary (3579549223159056533) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Ativando o ponto de acesso..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Desativando o ponto de acesso..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"A rede <xliff:g id="NETWORK_SSID">%1$s</xliff:g> está ativa"</string>
@@ -1279,6 +1281,10 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Usando a câmera frontal, o \"Reconhecimento de tela em uso\" detecta se alguém está olhando para a tela. Ele funciona no dispositivo, e as imagens nunca são armazenadas nem enviadas ao Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Ativar o \"reconhecimento de tela em uso\""</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Mantenha a tela ligada enquanto estiver olhando para ela"</string>
+    <!-- no translation found for auto_rotate_camera_lock_title (5369003176695105872) -->
+    <skip />
+    <!-- no translation found for auto_rotate_camera_lock_summary (5699491516271544672) -->
+    <skip />
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"A detecção facial precisa de acesso a câmera. Toque para gerenciar as permissões dos Serviços de personalização do dispositivo"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Gerenciar permissões"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Modo noturno"</string>
@@ -1780,8 +1786,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Serviços de localização"</string>
     <string name="location_title" msgid="5819154746934945021">"Meu Local"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Local do perfil de trabalho"</string>
-    <!-- no translation found for location_app_level_permissions (907206607664629759) -->
-    <skip />
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Permissões de localização do app"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Localização desativada"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> de <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> apps tem acesso à localização</item>
@@ -1798,8 +1803,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Permite que apps e serviços procurem redes Wi‑Fi a qualquer momento, mesmo quando o Wi‑Fi está desativado. Essa configuração pode ser usada, por exemplo, para melhorar recursos e serviços baseados na localização."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Busca por Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Permite que apps e serviços procurem dispositivos próximos a qualquer momento, mesmo quando o Bluetooth está desativado. Essa configuração pode ser usada, por exemplo, para melhorar recursos e serviços baseados na localização."</string>
-    <!-- no translation found for location_services_preference_title (8572194688820064813) -->
-    <skip />
+    <string name="location_services_preference_title" msgid="8572194688820064813">"Gerenciar Serviços de localização"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"Serviços de localização"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Serviços de localização para o trabalho"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Usar a localização para definir o fuso horário"</string>
@@ -1864,8 +1868,8 @@
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Informe seu padrão de trabalho"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Digite seu PIN novamente"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Digite seu PIN de trabalho"</string>
-    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"As senhas não foram iguais"</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Os PINs não são iguais"</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Senha diferente da anterior"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN diferente do anterior"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Desenhe seu padrão novamente"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Selecionar desbloqueio"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"A senha foi definida"</string>
@@ -2502,8 +2506,7 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> restantes"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> até carregar"</string>
-    <!-- no translation found for low_battery_summary (4458925347316501953) -->
-    <skip />
+    <string name="low_battery_summary" msgid="4458925347316501953">"Bateria fraca"</string>
     <string name="background_activity_title" msgid="8214332017349791380">"Restrição em segundo plano"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Permitir que o app seja executado em segundo plano"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Execução do app em segundo plano não permitida"</string>
@@ -2544,24 +2547,18 @@
     <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"O consumo de bateria em segundo plano do smartphone está normal."</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"O tablet tem um consumo normal de bateria em segundo plano"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"O dispositivo tem um consumo normal de bateria em segundo plano"</string>
-    <!-- no translation found for battery_tip_low_battery_title (4155239078744100997) -->
-    <skip />
-    <!-- no translation found for battery_tip_low_battery_summary (2629633757244297436) -->
-    <skip />
-    <!-- no translation found for battery_tip_smart_battery_title (8925025450214912325) -->
-    <skip />
+    <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nível da bateria baixo"</string>
+    <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Ativar a Economia de bateria para prolongar a duração da carga"</string>
+    <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Melhorar a duração da bateria"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Ative o Gerenciador de bateria"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Ativar a Economia de bateria"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"A bateria pode acabar antes do normal"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Economia de bateria ativada"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Alguns recursos podem ser limitados"</string>
-    <!-- no translation found for battery_tip_high_usage_title (9110720762506146697) -->
-    <skip />
-    <!-- no translation found for battery_tip_high_usage_summary (3938999581403084551) -->
-    <skip />
+    <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Maior uso da bateria"</string>
+    <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ver apps com maior uso"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Otimizando para integridade da bateria"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (4779491239398261377) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="4779491239398261377">"Bateria limitada temporariamente. Saiba mais."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"O smartphone foi usado além do normal. A bateria pode acabar antes do esperado.\n\nApps que mais usam bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"O tablet foi usado além do normal. A bateria pode acabar antes do esperado.\n\nApps que mais usam bateria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"O dispositivo foi usado além do normal. A bateria pode acabar antes do esperado.\n\nApps que mais usam bateria:"</string>
@@ -2586,7 +2583,7 @@
       <item quantity="one">Restringir app?</item>
       <item quantity="other">Restringir %1$d apps?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Para economizar bateria, não permita que <xliff:g id="APP">%1$s</xliff:g> use a bateria em segundo plano. Esse app pode não funcionar corretamente e é possível que haja atraso nas notificações."</string>
+    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Para economizar bateria, não permita que o app <xliff:g id="APP">%1$s</xliff:g> use a bateria em segundo plano. Ele pode não funcionar corretamente e é possível que haja atraso nas notificações."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Para economizar bateria, não permita que esses apps usem a bateria em segundo plano. Os apps com restrição podem não funcionar corretamente e é possível que haja atraso nas notificações.\n\nApps:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Para economizar bateria, não permita que esses apps usem a bateria em segundo plano. Os apps com restrição podem não funcionar corretamente e é possível que haja atraso nas notificações.\n\nApps:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"Restringir"</string>
@@ -2712,7 +2709,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Uso da bateria"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Desde a carga completa"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gerenciar uso da bateria"</string>
-    <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"A estimativa de carga da bateria restante baseia-se no uso que você faz do dispositivo"</string>
+    <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"A estimativa de carga da bateria restante é baseada no uso que você faz do dispositivo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Até a carga completa"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"A estimativa pode mudar conforme o uso"</string>
@@ -2745,6 +2742,20 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"com <xliff:g id="PERCENT">%1$s</xliff:g> de bateria"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Porcentagem da bateria"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Mostrar a porcentagem da bateria na barra de status"</string>
+    <!-- no translation found for battery_usage_chart_graph_hint (9182079098173323005) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for_past_24 (1234770810563940656) -->
+    <skip />
+    <!-- no translation found for battery_system_usage_for_past_24 (3341520273114616263) -->
+    <skip />
+    <!-- no translation found for battery_system_usage_for (158304136130870726) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for (929971425835809784) -->
+    <skip />
+    <!-- no translation found for battery_usage_time_am (7783773965475697655) -->
+    <skip />
+    <!-- no translation found for battery_usage_time_pm (1534468528902328570) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas de processo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas detalhadas sobre os processos em execução"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Uso da memória"</string>
@@ -2904,7 +2915,7 @@
     <string name="add_account_label" msgid="7134707140831385869">"Adicionar conta"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"Perfil de trabalho ainda indisponível"</string>
     <string name="work_mode_label" msgid="1001415270126064436">"Perfil de trabalho"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"Gerenciados pela sua organização"</string>
+    <string name="work_mode_on_summary" msgid="2042885311126239961">"Gerenciado pela sua organização"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"Os apps e as notificações estão desativados"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"Remover perfil de trabalho"</string>
     <string name="background_data" msgid="321903213000101158">"Dados de segundo plano"</string>
@@ -2935,7 +2946,7 @@
     <string name="header_add_an_account" msgid="3919151542338822661">"Adicionar uma conta"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Remover conta?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"A remoção desta conta excluirá todas as suas mensagens, contatos e outros dados do tablet."</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"A remoção desta conta excluirá todas as suas mensagens, contatos e outros dados do telefone!"</string>
+    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"A remoção desta conta excluirá todas as suas mensagens, contatos e outros dados do telefone."</string>
     <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"A remoção desta conta excluirá do dispositivo todas as mensagens, os contatos e outros dados dela."</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Esta alteração não é permitida pelo administrador"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Não é possível sincronizar manualmente"</string>
@@ -3352,7 +3363,8 @@
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps e notificações"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps padrão"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"O acesso às notificações não está disponível para apps no perfil de trabalho."</string>
-    <string name="account_dashboard_title" msgid="3920790213061354489">"Senhas e contas"</string>
+    <!-- no translation found for account_dashboard_title (8228773251948253914) -->
+    <skip />
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Senhas salvas, preenchimento automático e contas sincronizadas"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Apps padrão"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, tempo, backup"</string>
@@ -3444,6 +3456,8 @@
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, chamada avançada, chamadas por 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"adicionar idioma, adicionar um idioma"</string>
     <string name="keywords_font_size" msgid="336803136451166298">"tamanho do texto"</string>
+    <!-- no translation found for keywords_reduce_bright_colors (1683190961013139183) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"Som padrão"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Volume de toque e notificação em <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibração, Não perturbe"</string>
@@ -3674,7 +3688,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificações confidenciais do perfil de trabalho"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Mostrar conteúdo confidencial do perfil de trabalho quando estiver bloqueado"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar todo o conteúdo das notificações"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Mostrar conteúdo confidencial quando desbloqueado"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Só mostrar conteúdo confidencial quando desbloqueado"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Não mostrar notificações"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Como você quer que a tela de bloqueio seja exibida?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Tela de bloqueio"</string>
@@ -3780,6 +3794,7 @@
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Ver todos os apps"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"Mude as configurações de notificação para cada app que pode enviar notificações"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Apps exibidos no dispositivo"</string>
+    <string name="notif_listener_not_migrated" msgid="6265206376374278226">"O app não é compatível com as configurações avançadas"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serviços de ajuda para RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nenhum app instalado solicitou ser executado como serviços de ajuda para RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Permitir acesso ao serviço de RV para <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4024,14 +4039,14 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Ativado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desativado"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fixação de apps"</string>
-    <string name="app_pinning_intro" msgid="6409063008733004245">"A fixação de apps permite manter o app atual em exibição até você liberá-lo. Esse recurso pode ser usado, por exemplo, para permitir que um amigo confiável abra um jogo específico."</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"A fixação de apps permite manter o app atual em exibição até você liberá-lo. Esse recurso pode ser usado, por exemplo, para permitir que uma pessoa em que você confia abra um jogo específico."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"Quando um app está fixado, ele pode abrir outros apps e os dados pessoais podem ficar acessíveis. \n\nPara usar a fixação de apps, faça o seguinte: 	\n1.	Ative a fixação de apps 	\n2.	Abra a opção \"Visão geral\" 	\n3.	Na parte superior da tela, toque no ícone do app e depois em \"Fixar\""</string>
     <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Quando um app está fixado, ele pode abrir outros apps e os dados pessoais podem ficar acessíveis. \n\nSe você quiser compartilhar seu dispositivo com alguém de forma segura, tente fazer isso com um usuário convidado. \n\nPara usar a fixação de apps, faça o seguinte: 	\n1.	Ative a fixação de apps 	\n2.	Abra a opção \"Visão geral\" 	\n3.	Na parte superior da tela, toque no ícone do app e depois em \"Fixar\""</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Quando o app está fixado, ele pode: \n\n•		acessar dados pessoais \n		(como contatos e conteúdo de e-mail); \n•		abrir outros apps. \n\nUse a fixação de apps apenas com pessoas em quem você confia."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pedir padrão de desbloqueio antes de desafixar"</string>
-    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Pedir PIN antes de desafixar"</string>
-    <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pedir senha antes de desafixar"</string>
-    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bloquear dispositivo ao desafixar"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pedir padrão de desbloqueio antes de liberar a tela"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Pedir PIN antes de liberar a tela"</string>
+    <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pedir senha antes de liberar a tela"</string>
+    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bloquear dispositivo ao liberar a tela"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmar exclusão do chip"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Confirme sua identidade antes de apagar um chip transferido por download"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"O perfil de trabalho é gerenciado por:"</string>
@@ -4084,6 +4099,7 @@
       <item quantity="other">Os links foram verificados e serão abertos automaticamente neste app.</item>
     </plurals>
     <string name="app_launch_dialog_ok" msgid="1446157681861409861">"OK"</string>
+    <string name="app_launch_verified_links_info_description" msgid="7514750232467132117">"Mostrar lista de links verificados"</string>
     <string name="app_launch_checking_links_title" msgid="6119228853554114201">"Procurando outros links compatíveis…"</string>
     <string name="app_launch_dialog_cancel" msgid="6961071841814898663">"Cancelar"</string>
     <plurals name="app_launch_supported_links_title" formatted="false" msgid="8579323750839397568">
@@ -4130,10 +4146,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nenhuma permissão concedida"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nenhuma permissão solicitada"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Controlar acesso de apps aos seus dados"</string>
-    <!-- no translation found for permissions_usage_title (7928450120500019282) -->
-    <skip />
-    <!-- no translation found for permissions_usage_summary (6784310472062516454) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="7928450120500019282">"Uso de permissões"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"Mostrar quais apps usaram as permissões recentemente"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Apps não usados"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> app não usado</item>
@@ -4220,7 +4234,7 @@
       <item quantity="other">Apps que descarregam a bateria</item>
     </plurals>
     <string name="high_power_filter_on" msgid="447849271630431531">"Não otimizados"</string>
-    <string name="high_power_on" msgid="8778058701270819268">"Não otimizado"</string>
+    <string name="high_power_on" msgid="8778058701270819268">"Não otimizada"</string>
     <string name="high_power_off" msgid="317000444619279018">"Utilização otimizada da bateria"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Otimização de bateria não disponível"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Não aplicar a otimização de bateria. Isso pode esgotar sua bateria mais rapidamente."</string>
@@ -4784,7 +4798,7 @@
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Saiba mais"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Informações do dispositivo financiado"</string>
-    <string name="financed_privacy_exposure_category" msgid="440169672717221900">"Tipos de informação que o admin. do dispositivo pode ver"</string>
+    <string name="financed_privacy_exposure_category" msgid="440169672717221900">"Tipos de informação que o administrador do dispositivo vê"</string>
     <string name="financed_privacy_data" msgid="6931909690419946400">"Dados associados à sua conta, como e-mail e informações da agenda"</string>
     <string name="financed_privacy_exposure_changes_category" msgid="1556943765530226434">"Mudanças feitas pelo administrador do dispositivo"</string>
     <string name="financed_privacy_lock_device" msgid="8963934429658453147">"O administrador pode bloquear o dispositivo e redefinir a senha"</string>
@@ -4909,7 +4923,7 @@
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Nome do dispositivo"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Controle de Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Permitir que o app controle o Wi-Fi"</string>
-    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Permitir que este app ative ou desative o Wi-Fi, verifique redes Wi-Fi e conecte-se a elas, adicione ou remova redes ou inicie um ponto de acesso somente local"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Permitir que este app ative ou desative o Wi-Fi, verifique redes Wi-Fi e conecte-se a elas, adicione ou remova redes ou inicie um ponto de acesso somente local."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Tocar mídia"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Abrir <xliff:g id="LABEL">%s</xliff:g> em"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Neste dispositivo"</string>
