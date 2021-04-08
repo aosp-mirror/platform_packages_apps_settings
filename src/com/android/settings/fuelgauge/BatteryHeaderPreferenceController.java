@@ -33,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.Utils;
@@ -60,6 +61,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     private Activity mActivity;
     private PreferenceFragmentCompat mHost;
     private Lifecycle mLifecycle;
+    private BatteryTip mBatteryTip;
     private final PowerManager mPowerManager;
 
     public BatteryHeaderPreferenceController(Context context, String key) {
@@ -109,8 +111,26 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         if (BatteryUtils.isBatteryDefenderOn(info)) {
             return null;
         } else if (info.remainingLabel == null) {
+            // Present status independently if no remaining time
             return info.statusLabel;
+        } else if (info.statusLabel != null && !info.discharging) {
+            // Charging state
+            return mContext.getString(
+                    R.string.battery_state_and_duration, info.statusLabel, info.remainingLabel);
+        } else if (mPowerManager.isPowerSaveMode()) {
+            // Power save mode is on
+            final String powerSaverOn = mContext.getString(
+                    R.string.battery_tip_early_heads_up_done_title);
+            return mContext.getString(
+                    R.string.battery_state_and_duration, powerSaverOn, info.remainingLabel);
+        } else if (mBatteryTip != null
+                && mBatteryTip.getType() == BatteryTip.TipType.LOW_BATTERY) {
+            // Low battery state
+            final String lowBattery = mContext.getString(R.string.low_battery_summary);
+            return mContext.getString(
+                    R.string.battery_state_and_duration, lowBattery, info.remainingLabel);
         } else {
+            // Discharging state
             return info.remainingLabel;
         }
     }
@@ -138,6 +158,17 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
         mBatteryUsageProgressBarPref.setUsageSummary(formatBatteryPercentageText(batteryLevel));
         mBatteryUsageProgressBarPref.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
+    }
+
+    /**
+     * Update summary when battery tips changed.
+     */
+    public void updateHeaderByBatteryTips(BatteryTip batteryTip, BatteryInfo batteryInfo) {
+        mBatteryTip = batteryTip;
+
+        if (mBatteryTip != null && batteryInfo != null) {
+            updateHeaderPreference(batteryInfo);
+        }
     }
 
     private CharSequence formatBatteryPercentageText(int batteryLevel) {
