@@ -1311,8 +1311,17 @@
     <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="lock_settings_picker_title">Choose screen lock</string>
 
-    <!--  Title for security picker to choose the profile unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
-    <string name="lock_settings_picker_title_profile">Choose work lock</string>
+    <!--  Screen title. This title is asking the user to choose a type of screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_new_lock_title">Choose a screen lock</string>
+
+    <!--  Screen title. This title is asking the user to choose a new screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_update_lock_title">Choose a new screen lock</string>
+
+    <!--  Screen title. This title is asking the user to choose a type of screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_new_profile_lock_title">Choose a lock for work apps</string>
+
+    <!--  Screen title. This title is asking the user to choose a new screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_update_profile_lock_title">Choose a new work lock</string>
 
     <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (tablet) [CHAR LIMIT=22] -->
     <string name="setup_lock_settings_picker_title" product="tablet">Protect your tablet</string>
@@ -1333,6 +1342,12 @@
 
     <!-- Message shown in screen lock picker while setting up the backup/fallback screen lock method for biometrics. Users can choose to use this method to unlock the screen instead of biometrics, or when biometrics are not accepted. [CHAR LIMIT=80] [BACKUP_MESSAGE_ID=2799884038398627882] -->
     <string name="lock_settings_picker_biometric_message">Choose your backup screen lock method</string>
+
+    <!-- Text shown on the screen lock menu. This text is letting the user know that their IT admin can't reset their screen lock if they forget it, and they can choose to set another lock that would be specifically for their work apps. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring the user to enroll a work profile screen lock instead. [CHAR LIMIT=100] -->
+    <string name="lock_settings_picker_admin_restricted_personal_message">This lock can\u2019t be reset by your IT admin. <xliff:g id="link_begin" example="">LINK_BEGIN</xliff:g>Set a separate work lock instead<xliff:g id="link_end" example="">LINK_END</xliff:g></string>
+
+    <!-- Message shown in screen lock picker for setting up a work profile screen lock. [CHAR LIMIT=80] -->
+    <string name="lock_settings_picker_profile_message">If you forget this lock, ask your IT admin to reset it</string>
 
     <!-- Label for button in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
     <string name="setup_lock_settings_options_button_label">Screen lock options</string>
@@ -4289,10 +4304,19 @@
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
     <!-- Lock Pattern settings -->
-    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_screen_lock_header">Set screen lock</string>
-    <!-- Message on first screen of choose password flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_password_message">For security, set password</string>
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_password_header">Set a password</string>
+    <!-- Header on first screen of choose work profile password flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_password_header">Set a work password</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pin_header">Set a PIN</string>
+    <!-- Header on first screen of choose work profile PIN flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_pin_header">Set a work PIN</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pattern_header">Set a pattern</string>
+    <!-- Header on first screen of choose work profile pattern flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_pattern_header">Set a work pattern</string>
+
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
@@ -4301,10 +4325,10 @@
     <string name="lockpassword_choose_your_pin_message">For security, set PIN</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
-    <!-- Message on first screen of choose pattern flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_pattern_message">For security, set pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
+    <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_profile_password_header">Re-enter your work password</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_work_password_header">Enter your work password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
@@ -4313,6 +4337,8 @@
     <string name="lockpassword_confirm_your_work_pattern_header">Enter your work pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_pin_header">Re-enter your PIN</string>
+    <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_profile_pin_header">Re-enter your work PIN</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_work_pin_header">Enter your work PIN</string>
     <!-- Header on password confirm screen if second password doesn't match the first. [CHAR LIMIT=30] -->
