@@ -128,6 +128,25 @@ public class BatteryTipPreferenceControllerTest {
     }
 
     @Test
+    public void testGetCurrentBatteryTip_noTips_isNull() {
+        assertThat(mBatteryTipPreferenceController.getCurrentBatteryTip()).isNull();
+    }
+
+    @Test
+    public void testGetCurrentBatteryTip_tipsInvisible_isNull() {
+        mBatteryTipPreferenceController.updateBatteryTips(mNewBatteryTips);
+        assertThat(mBatteryTipPreferenceController.getCurrentBatteryTip()).isNull();
+    }
+
+    @Test
+    public void testGetCurrentBatteryTip_tipsVisible_returnTips() {
+        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
+
+        assertThat(mBatteryTipPreferenceController.getCurrentBatteryTip().getType()).isEqualTo(
+                BatteryTip.TipType.SUMMARY);
+    }
+
+    @Test
     public void testSaveAndRestore() {
         mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
         final Bundle bundle = new Bundle();

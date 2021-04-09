@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -160,6 +161,19 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
 
     public boolean needUpdate() {
         return mNeedUpdate;
+    }
+
+    /**
+     * @return current battery tips, null if unavailable.
+     */
+    @Nullable
+    public BatteryTip getCurrentBatteryTip() {
+        if (mBatteryTips == null) {
+            return null;
+        }
+
+        return mBatteryTips.stream().anyMatch(BatteryTip::isVisible)
+                ? mBatteryTips.stream().filter(BatteryTip::isVisible).findFirst().get() : null;
     }
 
     /**
