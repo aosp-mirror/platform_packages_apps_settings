@@ -20,8 +20,12 @@ import android.content.Context;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -33,26 +37,38 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
+    private static final String KEY_REFRESH_TYPE = "refresh_type";
     private static final String KEY_BATTERY_GRAPH = "battery_graph";
     private static final String KEY_APP_LIST = "app_list";
+    private static final int LOADER_BATTERY_USAGE_STATS = 2;
 
     @VisibleForTesting
     BatteryHistoryPreference mHistPref;
+    @VisibleForTesting
+    Map<Long, List<BatteryHistEntry>> mBatteryHistoryMap;
+    @VisibleForTesting
+    final BatteryHistoryLoaderCallbacks mBatteryHistoryLoaderCallbacks =
+            new BatteryHistoryLoaderCallbacks();
+
+    private boolean mIsChartGraphEnabled = false;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private BatteryChartPreferenceController mBatteryChartPreferenceController;
     private BatteryAppListPreferenceController mBatteryAppListPreferenceController;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        final Context context = getContext();
-
+        refreshFeatureFlag(getContext());
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
+        // Removes chart graph preference if the chart design is disabled.
+        if (!mIsChartGraphEnabled) {
+            removePreference(KEY_BATTERY_GRAPH);
+        }
     }
 
     @Override
@@ -80,12 +96,21 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        refreshFeatureFlag(context);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
-        mBatteryAppListPreferenceController = new BatteryAppListPreferenceController(context,
-                KEY_APP_LIST, getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
-        controllers.add(mBatteryAppListPreferenceController);
-
+        // Creates based on the chart design is enabled or not.
+        if (mIsChartGraphEnabled) {
+            mBatteryChartPreferenceController =
+                    new BatteryChartPreferenceController(context,
+                        KEY_BATTERY_GRAPH, KEY_APP_LIST,
+                        getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
+            controllers.add(mBatteryChartPreferenceController);
+        } else {
+            mBatteryAppListPreferenceController =
+                    new BatteryAppListPreferenceController(context, KEY_APP_LIST,
+                        getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
+            controllers.add(mBatteryAppListPreferenceController);
+        }
         return controllers;
     }
 
@@ -101,7 +126,34 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return;
         }
         updatePreference(mHistPref);
-        mBatteryAppListPreferenceController.refreshAppListGroup(mBatteryUsageStats, true);
+        if (mBatteryAppListPreferenceController != null && mBatteryUsageStats != null) {
+            mBatteryAppListPreferenceController.refreshAppListGroup(
+                    mBatteryUsageStats, /* showAllApps */true);
+        }
+        if (mBatteryChartPreferenceController != null && mBatteryHistoryMap != null) {
+            mBatteryChartPreferenceController.refreshUi(mBatteryHistoryMap);
+        }
+    }
+
+    @Override
+    protected void restartBatteryStatsLoader(int refreshType) {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(KEY_REFRESH_TYPE, refreshType);
+        // Uses customized battery history loader if chart design is enabled.
+        if (mIsChartGraphEnabled) {
+            getLoaderManager().restartLoader(LOADER_BATTERY_USAGE_STATS, bundle,
+                    mBatteryHistoryLoaderCallbacks);
+        } else {
+            super.restartBatteryStatsLoader(refreshType);
+        }
+    }
+
+    private void refreshFeatureFlag(Context context) {
+        if (mPowerUsageFeatureProvider == null) {
+            mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
+                    .getPowerUsageFeatureProvider(context);
+            mIsChartGraphEnabled = mPowerUsageFeatureProvider.isChartGraphEnabled(context);
+        }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -124,5 +176,28 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     return controllers;
                 }
             };
+
+    private class BatteryHistoryLoaderCallbacks
+            implements LoaderManager.LoaderCallbacks<Map<Long, List<BatteryHistEntry>>> {
+        private int mRefreshType;
+
+        @Override
+        @NonNull
+        public Loader<Map<Long, List<BatteryHistEntry>>> onCreateLoader(int id, Bundle bundle) {
+            mRefreshType = bundle.getInt(KEY_REFRESH_TYPE);
+            return new BatteryHistoryLoader(getContext());
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Map<Long, List<BatteryHistEntry>>> loader,
+                Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
+            mBatteryHistoryMap = batteryHistoryMap;
+            PowerUsageAdvanced.this.onLoadFinished(mRefreshType);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Map<Long, List<BatteryHistEntry>>> loader) {
+        }
+    }
 
 }
