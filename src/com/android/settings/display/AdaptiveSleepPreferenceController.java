@@ -16,6 +16,8 @@
 
 package com.android.settings.display;
 
+import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
@@ -25,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.hardware.SensorPrivacyManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.attention.AttentionService;
@@ -45,6 +48,7 @@ import com.google.common.annotations.VisibleForTesting;
 public class AdaptiveSleepPreferenceController {
     public static final String PREFERENCE_KEY = "adaptive_sleep";
     private static final int DEFAULT_VALUE = 0;
+    private final SensorPrivacyManager mPrivacyManager;
     private RestrictionUtils mRestrictionUtils;
     private PackageManager mPackageManager;
     private Context mContext;
@@ -57,6 +61,7 @@ public class AdaptiveSleepPreferenceController {
         mContext = context;
         mRestrictionUtils = restrictionUtils;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPreference = new RestrictedSwitchPreference(context);
         mPreference.setTitle(R.string.adaptive_sleep_title);
         mPreference.setSummary(R.string.adaptive_sleep_description);
@@ -94,15 +99,25 @@ public class AdaptiveSleepPreferenceController {
         if (enforcedAdmin != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         } else {
-            mPreference.setEnabled(hasSufficientPermission(mPackageManager));
+            mPreference.setEnabled(hasSufficientPermission(mPackageManager) && !isCameraLocked());
         }
     }
 
     @VisibleForTesting
     boolean isChecked() {
-        return hasSufficientPermission(mContext.getPackageManager()) && Settings.Secure.getInt(
-                mContext.getContentResolver(), Settings.Secure.ADAPTIVE_SLEEP, DEFAULT_VALUE)
+        return hasSufficientPermission(mContext.getPackageManager()) && !isCameraLocked()
+                && Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ADAPTIVE_SLEEP, DEFAULT_VALUE)
                 != DEFAULT_VALUE;
+    }
+
+    /**
+     * Need this because all controller tests use RoboElectric. No easy way to mock this service,
+     * so we mock the call we need
+     */
+    @VisibleForTesting
+    boolean isCameraLocked() {
+        return mPrivacyManager.isSensorPrivacyEnabled(CAMERA);
     }
 
     public static int isControllerAvailable(Context context) {
