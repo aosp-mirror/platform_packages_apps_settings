@@ -88,8 +88,6 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
 
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo));
-        when(mSubscriptionManager.getAccessibleSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mSubscriptionInfo));
 
         when(mTelephonyManager.getNetworkOperatorName()).thenReturn(OPERATOR_NAME);
 
