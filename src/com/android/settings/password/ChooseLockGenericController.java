@@ -18,6 +18,8 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
+
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
 import android.content.Context;
@@ -88,7 +90,7 @@ public class ChooseLockGenericController {
     }
 
     /**
-     * Returns the highest quality among the specified {@code quality}, the password requiremnet
+     * Returns the highest quality among the specified {@code quality}, the password requirement
      * set by device admins (legacy password quality metrics and password complexity), and the
      * min password complexity requested by the calling app.
      */
@@ -206,5 +208,10 @@ public class ChooseLockGenericController {
         return Math.max(mRequestedMinComplexity,
                 mLockPatternUtils.getRequestedPasswordComplexity(
                         mUserId, mDevicePasswordRequirementOnly));
+    }
+
+    public boolean isScreenLockRestrictedByAdmin() {
+        return getAggregatedPasswordMetrics().credType != CREDENTIAL_TYPE_NONE
+                || getAggregatedPasswordComplexity() != PASSWORD_COMPLEXITY_NONE;
     }
 }
