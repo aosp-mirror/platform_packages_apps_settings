@@ -25,11 +25,16 @@ import android.util.Log;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /** A utility class to convert data into another types. */
 public final class ConvertUtils {
     private static final String TAG = "ConvertUtils";
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT =
+        new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.ENGLISH);
     /** Invalid system battery consumer drain type. */
     public static final int INVALID_DRAIN_TYPE = -1;
 
@@ -99,6 +104,11 @@ public final class ConvertUtils {
         values.put("batteryStatus", Integer.valueOf(batteryStatus));
         values.put("batteryHealth", Integer.valueOf(batteryHealth));
         return values;
+    }
+
+    /** Converts UTC timestamp to human readable local time string. */
+    public static String utcToLocalTime(long timestamp) {
+        return SIMPLE_DATE_FORMAT.format(new Date(timestamp));
     }
 
     private ConvertUtils() {}
