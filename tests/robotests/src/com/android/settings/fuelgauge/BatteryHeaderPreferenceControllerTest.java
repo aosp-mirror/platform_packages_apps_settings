@@ -317,6 +317,14 @@ public class BatteryHeaderPreferenceControllerTest {
         assertThat(mBatteryUsageProgressBarPref.isVisible()).isFalse();
     }
 
+    @Test
+    public void displayPreference_init_showLoading() {
+        mController.displayPreference(mPreferenceScreen);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(
+                mContext.getString(R.string.settings_license_activity_loading));
+    }
+
     private CharSequence formatBatteryPercentageText() {
         return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
                 NumberFormat.getIntegerInstance().format(BATTERY_LEVEL));
