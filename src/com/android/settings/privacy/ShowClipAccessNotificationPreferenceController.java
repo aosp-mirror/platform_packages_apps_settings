@@ -16,39 +16,84 @@
 
 package com.android.settings.privacy;
 
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Controller for preference to toggle whether clipboard access notifications should be shown.
  */
-public class ShowClipAccessNotificationPreferenceController extends TogglePreferenceController {
+public class ShowClipAccessNotificationPreferenceController
+        extends TogglePreferenceController implements LifecycleObserver {
 
     private static final String KEY_SHOW_CLIP_ACCESS_NOTIFICATION = "show_clip_access_notification";
 
+    private final DeviceConfig.OnPropertiesChangedListener mDeviceConfigListener =
+            properties -> updateConfig();
+    private boolean mDefault;
+    private Preference mPreference;
+
     public ShowClipAccessNotificationPreferenceController(Context context) {
         super(context, KEY_SHOW_CLIP_ACCESS_NOTIFICATION);
+        updateConfig();
     }
 
     @Override
     public boolean isChecked() {
-        // TODO(b/182349993) Retrieve default value from DeviceConfig.
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS, 1) != 0;
+                Settings.Secure.CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS, (mDefault ? 1 : 0)) != 0;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS, isChecked ? 1 : 0);
+                Settings.Secure.CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS, (isChecked ? 1 : 0));
         return true;
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    /**
+     * Registers a DeviceConfig listener on start.
+     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onStart() {
+        DeviceConfig.addOnPropertiesChangedListener(DeviceConfig.NAMESPACE_CLIPBOARD,
+                mContext.getMainExecutor(), mDeviceConfigListener);
+    }
+
+    /**
+     * Removes the DeviceConfig listener on stop.
+     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onStop() {
+        DeviceConfig.removeOnPropertiesChangedListener(mDeviceConfigListener);
+    }
+
+    private void updateConfig() {
+        mDefault = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_CLIPBOARD,
+                ClipboardManager.DEVICE_CONFIG_SHOW_ACCESS_NOTIFICATIONS,
+                ClipboardManager.DEVICE_CONFIG_DEFAULT_SHOW_ACCESS_NOTIFICATIONS);
+        updateState(mPreference);
     }
 
 }
