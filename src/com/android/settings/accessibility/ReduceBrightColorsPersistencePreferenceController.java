@@ -17,21 +17,29 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 
 /** PreferenceController for persisting feature activation state after a restart. */
 public class ReduceBrightColorsPersistencePreferenceController extends TogglePreferenceController {
+    private final ColorDisplayManager mColorDisplayManager;
 
     public ReduceBrightColorsPersistencePreferenceController(
             Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // TODO(b/170970675): call into CDS to get availability/config status
+        if (!ColorDisplayManager.isReduceBrightColorsAvailable(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (!mColorDisplayManager.isReduceBrightColorsActivated()) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
         return AVAILABLE;
     }
 
