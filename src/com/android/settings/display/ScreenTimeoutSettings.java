@@ -16,6 +16,7 @@
 
 package com.android.settings.display;
 
+import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import android.app.admin.DevicePolicyManager;
@@ -23,6 +24,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.hardware.SensorPrivacyManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.SpannableString;
@@ -70,6 +72,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     private CharSequence[] mInitialValues;
     private FooterPreference mPrivacyPreference;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private SensorPrivacyManager mPrivacyManager;
 
     @VisibleForTesting
     RestrictedLockUtils.EnforcedAdmin mAdmin;
@@ -78,6 +81,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
     @VisibleForTesting
     AdaptiveSleepPermissionPreferenceController mAdaptiveSleepPermissionController;
+
+    @VisibleForTesting
+    AdaptiveSleepCameraStatePreferenceController mAdaptiveSleepCameraStatePreferenceController;
 
     @VisibleForTesting
     AdaptiveSleepPreferenceController mAdaptiveSleepController;
@@ -96,11 +102,18 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mAdaptiveSleepController = new AdaptiveSleepPreferenceController(context);
         mAdaptiveSleepPermissionController = new AdaptiveSleepPermissionPreferenceController(
                 context);
+        mAdaptiveSleepCameraStatePreferenceController =
+                new AdaptiveSleepCameraStatePreferenceController(context);
         mPrivacyPreference = new FooterPreference(context);
         mPrivacyPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
         mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
         mPrivacyPreference.setSelectable(false);
         mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
+        mPrivacyManager = SensorPrivacyManager.getInstance(context);
+        mPrivacyManager.addSensorPrivacyListener(CAMERA,
+                enabled -> {
+                    mAdaptiveSleepController.updatePreference();
+                });
     }
 
     @Override
@@ -124,6 +137,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     public void onStart() {
         super.onStart();
         mAdaptiveSleepPermissionController.updateVisibility();
+        mAdaptiveSleepCameraStatePreferenceController.updateVisibility();
         mAdaptiveSleepController.updatePreference();
     }
 
@@ -147,6 +161,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
         if (isScreenAttentionAvailable(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);
+            mAdaptiveSleepCameraStatePreferenceController.addToScreen(screen);
             mAdaptiveSleepController.addToScreen(screen);
             screen.addPreference(mPrivacyPreference);
         }
@@ -165,7 +180,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
         final SpannableString spannableString = new SpannableString(
                 textDisabledByAdmin + System.lineSeparator()
-                + System.lineSeparator() + textMoreDetails);
+                        + System.lineSeparator() + textMoreDetails);
         final ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
