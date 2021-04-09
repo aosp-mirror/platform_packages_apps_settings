@@ -63,6 +63,8 @@ import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetail
 import com.android.settings.backup.PrivacySettings;
 import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.backup.UserBackupSettingsActivity;
+import com.android.settings.biometrics.combination.CombinedBiometricProfileSettings;
+import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
@@ -222,6 +224,8 @@ public class SettingsGateway {
             AssistGestureSettings.class.getName(),
             FaceSettings.class.getName(),
             FingerprintSettings.FingerprintSettingsFragment.class.getName(),
+            CombinedBiometricSettings.class.getName(),
+            CombinedBiometricProfileSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
             DoubleTapPowerSettings.class.getName(),
             DoubleTapScreenSettings.class.getName(),
