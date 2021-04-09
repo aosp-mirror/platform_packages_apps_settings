@@ -56,7 +56,7 @@ public class ReduceBrightColorsIntensityPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
         doReturn(true).when(mResources).getBoolean(
-                com.android.internal.R.bool.config_setColorTransformAccelerated);
+                R.bool.config_reduceBrightColorsAvailable);
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
     @Test
@@ -64,7 +64,7 @@ public class ReduceBrightColorsIntensityPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0);
         doReturn(true).when(mResources).getBoolean(
-                com.android.internal.R.bool.config_setColorTransformAccelerated);
+                R.bool.config_reduceBrightColorsAvailable);
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
     @Test
@@ -72,7 +72,7 @@ public class ReduceBrightColorsIntensityPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
         doReturn(false).when(mResources).getBoolean(
-                com.android.internal.R.bool.config_setColorTransformAccelerated);
+                R.bool.config_reduceBrightColorsAvailable);
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
