@@ -308,6 +308,15 @@ public class BatteryHeaderPreferenceControllerTest {
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
+    @Test
+    public void displayPreference_batteryNotPresent_isInvisible() {
+        ShadowUtils.setIsBatteryPresent(false);
+
+        mController.displayPreference(mPreferenceScreen);
+
+        assertThat(mBatteryUsageProgressBarPref.isVisible()).isFalse();
+    }
+
     private CharSequence formatBatteryPercentageText() {
         return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
                 NumberFormat.getIntegerInstance().format(BATTERY_LEVEL));
