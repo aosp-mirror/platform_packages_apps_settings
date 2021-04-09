@@ -83,6 +83,22 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
     private PackageManager mPm;
     private CountDownLatch mCountdownLatch;
     private Future mCountdownFuture;
+    private final ViewOutlineProvider mOutlineProvider = new ViewOutlineProvider() {
+        @Override
+        public void getOutline(View view, Outline outline) {
+            final TypedArray ta = NotificationHistoryActivity.this.obtainStyledAttributes(
+                    new int[]{android.R.attr.dialogCornerRadius});
+            final float dialogCornerRadius = ta.getDimension(0, 0);
+            ta.recycle();
+            TypedValue v = new TypedValue();
+            NotificationHistoryActivity.this.getTheme().resolveAttribute(
+                    com.android.internal.R.attr.listDivider, v, true);
+            int bottomPadding = NotificationHistoryActivity.this.getDrawable(v.resourceId)
+                    .getIntrinsicHeight();
+            outline.setRoundRect(0, 0, view.getWidth(), (view.getHeight() - bottomPadding),
+                    dialogCornerRadius);
+        }
+    };
     private UiEventLogger mUiEventLogger = new UiEventLoggerImpl();
 
     enum NotificationHistoryEvent implements UiEventLogger.UiEventEnum {
@@ -133,22 +149,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
                 notifications.isEmpty() ? View.GONE : View.VISIBLE);
         mCountdownLatch.countDown();
         mTodayView.setClipToOutline(true);
-        mTodayView.setOutlineProvider(new ViewOutlineProvider() {
-            @Override
-            public void getOutline(View view, Outline outline) {
-                final TypedArray ta = NotificationHistoryActivity.this.obtainStyledAttributes(
-                        new int[]{android.R.attr.dialogCornerRadius});
-                final float dialogCornerRadius = ta.getDimension(0, 0);
-                ta.recycle();
-                TypedValue v = new TypedValue();
-                NotificationHistoryActivity.this.getTheme().resolveAttribute(
-                        com.android.internal.R.attr.listDivider, v, true);
-                int bottomPadding = NotificationHistoryActivity.this.getDrawable(v.resourceId)
-                        .getIntrinsicHeight();
-                outline.setRoundRect(0, 0, view.getWidth(), (view.getHeight() - bottomPadding),
-                        dialogCornerRadius);
-            }
-        });
+        mTodayView.setOutlineProvider(mOutlineProvider);
         // for each package, new header and recycler view
         for (int i = 0, notificationsSize = notifications.size(); i < notificationsSize; i++) {
             NotificationHistoryPackage nhp = notifications.get(i);
@@ -216,6 +217,8 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         mTodayView = findViewById(R.id.apps);
         mSnoozeView = findViewById(R.id.snoozed_list);
         mDismissView = findViewById(R.id.recently_dismissed_list);
+        mDismissView.setClipToOutline(true);
+        mDismissView.setOutlineProvider(mOutlineProvider);
         mHistoryOff = findViewById(R.id.history_off);
         mHistoryOn = findViewById(R.id.history_on);
         mHistoryEmpty = findViewById(R.id.history_on_empty);
