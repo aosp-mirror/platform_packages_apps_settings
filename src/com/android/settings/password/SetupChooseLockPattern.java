@@ -60,7 +60,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
 
         // Show generic pattern title when pattern lock screen launch in Setup wizard flow before
         // fingerprint and face setup.
-        setTitle(R.string.lockpassword_choose_your_screen_lock_header);
+        setTitle(R.string.lockpassword_choose_your_pattern_header);
     }
 
     public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment
