@@ -25,7 +25,6 @@
         android:layout="@layout/more_settings_button"
         android:order="0"
         android:selectable="false"
-        settings:allowDividerBelow="true"
         settings:controller="com.android.settings.emergency.MoreSettingsPreferenceController" />
     <Preference
         android:key="gesture_emergency_summary"
@@ -34,6 +33,10 @@
         android:order="100"
         android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
+    <PreferenceCategory
+        android:order="170"
+        android:layout="@layout/preference_category_no_label"
+        settings:allowDividerAbove="true"/>
     <com.android.settingslib.RestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
