@@ -54,6 +54,7 @@
         <Preference
             android:key="app_level_permissions"
             android:title="@string/location_app_level_permissions"
+            android:icon="@drawable/ic_chevron_right_24dp"
             settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
             <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
                 <extra android:name="android.intent.extra.PERMISSION_NAME"
@@ -64,6 +65,7 @@
         <Preference
             android:fragment="com.android.settings.location.LocationServices"
             android:key="location_services"
+            android:icon="@drawable/baseline_near_me"
             android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
