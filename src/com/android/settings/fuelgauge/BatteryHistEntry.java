@@ -17,11 +17,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.Date;
 import java.util.TimeZone;
-
 
 /** A container class to carry data from {@link ContentValues}. */
 public final class BatteryHistEntry {
@@ -117,8 +114,7 @@ public final class BatteryHistEntry {
 
     @Override
     public String toString() {
-        final String recordAtDateTime =
-            new SimpleDateFormat("MMM dd,yyyy HH:mm:ss").format(new Date(mTimestamp));
+        final String recordAtDateTime = ConvertUtils.utcToLocalTime(mTimestamp);
         final StringBuilder builder = new StringBuilder()
             .append("\nBatteryHistEntry{")
             .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",

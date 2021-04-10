@@ -69,6 +69,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (!mIsChartGraphEnabled) {
             removePreference(KEY_BATTERY_GRAPH);
         }
+        setBatteryChartPreferenceController();
     }
 
     @Override
@@ -101,10 +102,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         // Creates based on the chart design is enabled or not.
         if (mIsChartGraphEnabled) {
             mBatteryChartPreferenceController =
-                    new BatteryChartPreferenceController(context,
-                        KEY_BATTERY_GRAPH, KEY_APP_LIST,
+                    new BatteryChartPreferenceController(context, KEY_APP_LIST,
                         getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
             controllers.add(mBatteryChartPreferenceController);
+            setBatteryChartPreferenceController();
         } else {
             mBatteryAppListPreferenceController =
                     new BatteryAppListPreferenceController(context, KEY_APP_LIST,
@@ -131,7 +132,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     mBatteryUsageStats, /* showAllApps */true);
         }
         if (mBatteryChartPreferenceController != null && mBatteryHistoryMap != null) {
-            mBatteryChartPreferenceController.refreshUi(mBatteryHistoryMap);
+            mBatteryChartPreferenceController.setBatteryHistoryMap(mBatteryHistoryMap);
         }
     }
 
@@ -153,6 +154,12 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
                     .getPowerUsageFeatureProvider(context);
             mIsChartGraphEnabled = mPowerUsageFeatureProvider.isChartGraphEnabled(context);
+        }
+    }
+
+    private void setBatteryChartPreferenceController() {
+        if (mHistPref != null && mBatteryChartPreferenceController != null) {
+            mHistPref.setChartPreferenceController(mBatteryChartPreferenceController);
         }
     }
 

@@ -39,6 +39,9 @@ public class BatteryHistoryPreference extends Preference {
     @VisibleForTesting
     BatteryInfo mBatteryInfo;
 
+    private BatteryChartView mBatteryChartView;
+    private BatteryChartPreferenceController mChartPreferenceController;
+
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         final boolean isChartGraphEnabled =
@@ -58,12 +61,23 @@ public class BatteryHistoryPreference extends Preference {
         }, batteryUsageStats, false);
     }
 
+    void setChartPreferenceController(BatteryChartPreferenceController controller) {
+        mChartPreferenceController = controller;
+        if (mBatteryChartView != null) {
+            mChartPreferenceController.setBatteryChartView(mBatteryChartView);
+        }
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         final long startTime = System.currentTimeMillis();
         if (mBatteryInfo == null) {
             return;
+        }
+        mBatteryChartView = (BatteryChartView) view.findViewById(R.id.battery_chart);
+        if (mChartPreferenceController != null) {
+            mChartPreferenceController.setBatteryChartView(mBatteryChartView);
         }
         BatteryUtils.logRuntime(TAG, "onBindViewHolder", startTime);
     }
