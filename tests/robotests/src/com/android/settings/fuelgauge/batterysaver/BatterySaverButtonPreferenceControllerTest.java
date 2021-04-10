@@ -104,6 +104,20 @@ public class BatterySaverButtonPreferenceControllerTest {
     }
 
     @Test
+    public void onBatteryChanged_pluggedIn_preferenceDisabled() {
+        mController.onBatteryChanged(/* pluggedIn */ true);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void onBatteryChanged_unplugged_preferenceEnabled() {
+        mController.onBatteryChanged(/* pluggedIn */ false);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
     public void isPublicSlice_returnsTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
     }
