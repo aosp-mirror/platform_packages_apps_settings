@@ -469,7 +469,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Løft, og tryk igen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Én gang til"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="3927493571554716278">"Rør ved fingeraftryksikonet, mens det bevæger sig"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Bliv ved med at løfte fingeren for at få hele fingeraftrykket med"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Bliv ved med at løfte fingeren for at tilføje forskellige dele af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="5871443926818416176">"Dette hjælper med at registrere hele dit fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeraftryk tilføjet"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="8220458039597261933">"Når du ser dette ikon, kan du bruge dit fingeraftryk til identifikation eller til at godkende køb"</string>
@@ -1117,8 +1117,12 @@
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Apps kan oprette et hotspot for at dele indhold med enheder i nærheden."</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Deaktiver hotspot automatisk"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Når der ikke er forbundet nogen enheder"</string>
-    <string name="wifi_hotspot_maximize_compatibility" msgid="1333911252959346886">"Maksimér kompatibilitet"</string>
-    <string name="wifi_hotspot_maximize_compatibility_summary" msgid="4293514435238450741">"Dette kan reducere hastigheden for enheder, der har forbindelse til dette hotspot, og bruge mere strøm"</string>
+    <!-- no translation found for wifi_hotspot_maximize_compatibility (6494125684420024058) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_maximize_compatibility_single_ap_summary (383355687431591441) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_maximize_compatibility_dual_ap_summary (3579549223159056533) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Aktiverer hotspot..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Deaktiverer hotspot..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> er aktivt"</string>
@@ -1277,6 +1281,10 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Den opmærksomme skærm bruger frontkameraet til at tjekke, om der er nogen, der kigger på skærmen. Funktionen fungerer kun lokalt på enheden, og den gemmer ikke billeder eller sender billeder til Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Aktivér opmærksom skærm"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Hold skærmen tændt, så længe du kigger på den"</string>
+    <!-- no translation found for auto_rotate_camera_lock_title (5369003176695105872) -->
+    <skip />
+    <!-- no translation found for auto_rotate_camera_lock_summary (5699491516271544672) -->
+    <skip />
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Ansigtsgenkendelse kræver adgang til kameraet. Tryk for at administrere tilladelser for Personlig tilpasning på enheden"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Administrer tilladelser"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Nattelys"</string>
@@ -2734,6 +2742,20 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"ved batteriniveau på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Batteriniveau"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Vis batteriniveau på statusbjælken"</string>
+    <!-- no translation found for battery_usage_chart_graph_hint (9182079098173323005) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for_past_24 (1234770810563940656) -->
+    <skip />
+    <!-- no translation found for battery_system_usage_for_past_24 (3341520273114616263) -->
+    <skip />
+    <!-- no translation found for battery_system_usage_for (158304136130870726) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for (929971425835809784) -->
+    <skip />
+    <!-- no translation found for battery_usage_time_am (7783773965475697655) -->
+    <skip />
+    <!-- no translation found for battery_usage_time_pm (1534468528902328570) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"hukommelse brugt"</string>
@@ -2797,7 +2819,7 @@
     <string name="credentials_install" msgid="3933218407598415827">"Installer et certifikat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installer certifikater fra lager"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Installer certifikater fra SD-kortet"</string>
-    <string name="credentials_reset" msgid="4246628389366452655">"Ryd oplysninger"</string>
+    <string name="credentials_reset" msgid="4246628389366452655">"Ryd loginoplysninger"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Fjern alle certifikater"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Pålidelige loginoplysninger"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"Vis pålidelige CA-certifikater"</string>
@@ -2812,7 +2834,7 @@
     <string name="credentials_not_erased" msgid="3611058412683184031">"Loginlageret kan ikke ryddes."</string>
     <string name="usage_access_title" msgid="1580006124578134850">"Apps med adgang til telefonbrug"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"CA-certifikat"</string>
-    <string name="user_certificate" msgid="6897024598058566466">"VPN og appbrugercertifikat"</string>
+    <string name="user_certificate" msgid="6897024598058566466">"VPN- og appbrugercertifikat"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-certifikat"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Dine data er ikke private"</string>
     <string name="ca_certificate_warning_description" msgid="3386740654961466569">"CA-certifikater bruges af websites, apps og VPN-netværk til kryptering. Du bør kun installere CA-certifikater fra organisationer, du har tillid til. \n\n Hvis du installerer et CA-certifikat, kan certifikatejeren få adgang til dine data, f.eks. adgangskoder eller kreditkortoplysninger fra websites, du besøger, eller apps, du bruger – selv hvis dine data er krypterede."</string>
@@ -2860,7 +2882,7 @@
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Apps til enhedsadministration"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Der er ikke nogen tilgængelige apps til enhedsadministration"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Der er ingen tilgængelige trust agents"</string>
-    <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktiver appen til enhedsadministration?"</string>
+    <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktivér appen til enhedsadministration?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Aktivér denne app til enhedsadministration"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Enhedsadministrator"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Hvis denne administratorapp aktiveres, får appen <xliff:g id="APP_NAME">%1$s</xliff:g> tilladelse til at foretage følgende handlinger:"</string>
@@ -3341,7 +3363,8 @@
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps og notifikationer"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Seneste apps, standardapps"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Apps i arbejdsprofilen har ikke adgang til notifikationsindstillingerne."</string>
-    <string name="account_dashboard_title" msgid="3920790213061354489">"Adgangskoder og konti"</string>
+    <!-- no translation found for account_dashboard_title (8228773251948253914) -->
+    <skip />
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Gemte adgangskoder, Autofyld, synkroniserede konti"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Standardapps"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Sprog, bevægelser, klokkeslæt, backup"</string>
@@ -3433,6 +3456,8 @@
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, avancerede opkald, 4g-opkald"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"tilføj sprog, tilføj et sprog"</string>
     <string name="keywords_font_size" msgid="336803136451166298">"tekststørrelse"</string>
+    <!-- no translation found for keywords_reduce_bright_colors (1683190961013139183) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"Standardlyd"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Lydstyrken for ringetone og notifikationer er på <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Lydstyrke, vibration, Forstyr ikke"</string>
@@ -3769,6 +3794,8 @@
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Se alle apps"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"Skift indstillinger for notifikationer for hver app, der kan sende notifikationer"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Apps, der vises på enheden"</string>
+    <!-- no translation found for notif_listener_not_migrated (6265206376374278226) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-hjælpetjenester"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen installerede apps har anmodet om at blive kørt som VR-hjælpetjenester."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vil du tillade, at <xliff:g id="SERVICE">%1$s</xliff:g> får adgang til VR-tjenesten?"</string>
@@ -4073,6 +4100,8 @@
       <item quantity="other">Disse links er bekræftede og åbnes automatisk i denne app.</item>
     </plurals>
     <string name="app_launch_dialog_ok" msgid="1446157681861409861">"OK"</string>
+    <!-- no translation found for app_launch_verified_links_info_description (7514750232467132117) -->
+    <skip />
     <string name="app_launch_checking_links_title" msgid="6119228853554114201">"Søger efter andre understøttede links…"</string>
     <string name="app_launch_dialog_cancel" msgid="6961071841814898663">"Annuller"</string>
     <plurals name="app_launch_supported_links_title" formatted="false" msgid="8579323750839397568">
@@ -4119,10 +4148,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Der er ikke givet nogen tilladelser"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Der er ikke anmodet om nogen tilladelser"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Administrer dine apps\' adgang til data"</string>
-    <!-- no translation found for permissions_usage_title (7928450120500019282) -->
-    <skip />
-    <!-- no translation found for permissions_usage_summary (6784310472062516454) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="7928450120500019282">"Brug af tilladelser"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"Vis, hvilke apps der har brugt tilladelser for nylig"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Apps, du ikke bruger"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> app, du ikke bruger</item>
@@ -4826,7 +4853,7 @@
     <string name="app_info_storage_title" msgid="4076977173803093808">"Anvendt lagerplads"</string>
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(afinstalleret for brugeren <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(deaktiveret for brugeren <xliff:g id="USER">%s</xliff:g>)"</string>
-    <string name="autofill_app" msgid="7595308061826307921">"AutoFyld-tjeneste"</string>
+    <string name="autofill_app" msgid="7595308061826307921">"Autofyld-tjeneste"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Adgangskoder"</string>
     <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
       <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> adgangskode</item>

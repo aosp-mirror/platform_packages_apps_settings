@@ -17,12 +17,21 @@
 package com.android.settings.applications;
 
 import android.Manifest;
-import android.app.AppOpsManager;
+import android.app.AlarmManager;
+import android.app.AppGlobals;
 import android.content.Context;
+import android.content.pm.IPackageManager;
+import android.os.RemoteException;
+import android.os.UserHandle;
+import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
+
+import libcore.util.EmptyArray;
 
 import java.util.List;
 
@@ -31,28 +40,38 @@ import java.util.List;
  * to the semantics of {@link Manifest.permission#SCHEDULE_EXACT_ALARM}.
  * Also provides app filters that can use the info.
  */
-public class AppStateAlarmsAndRemindersBridge extends AppStateAppOpsBridge {
+public class AppStateAlarmsAndRemindersBridge extends AppStateBaseBridge {
+    private static final String PERMISSION = Manifest.permission.SCHEDULE_EXACT_ALARM;
+    private static final String TAG = "AlarmsAndRemindersBridge";
 
-    private AppOpsManager mAppOpsManager;
+    @VisibleForTesting
+    AlarmManager mAlarmManager;
+    @VisibleForTesting
+    String[] mRequesterPackages;
 
     public AppStateAlarmsAndRemindersBridge(Context context, ApplicationsState appState,
             Callback callback) {
-        super(context, appState, callback,
-                AppOpsManager.strOpToOp(AppOpsManager.OPSTR_SCHEDULE_EXACT_ALARM),
-                new String[]{Manifest.permission.SCHEDULE_EXACT_ALARM});
+        super(appState, callback);
 
-        mAppOpsManager = context.getSystemService(AppOpsManager.class);
+        mAlarmManager = context.getSystemService(AlarmManager.class);
+        final IPackageManager iPm = AppGlobals.getPackageManager();
+        try {
+            mRequesterPackages = iPm.getAppOpPermissionPackages(PERMISSION);
+        } catch (RemoteException re) {
+            Log.e(TAG, "Cannot reach package manager", re);
+            mRequesterPackages = EmptyArray.STRING;
+        }
     }
 
     /**
      * Returns information regarding {@link Manifest.permission#SCHEDULE_EXACT_ALARM} for the given
      * package and uid.
      */
-    public PermissionState createPermissionState(String packageName, int uid) {
-        final PermissionState permState = getPermissionInfo(packageName, uid);
-        permState.appOpMode = mAppOpsManager.unsafeCheckOpRawNoThrow(
-                AppOpsManager.OPSTR_SCHEDULE_EXACT_ALARM, uid, packageName);
-        return permState;
+    public AlarmsAndRemindersState createPermissionState(String packageName, int uid) {
+        final boolean permissionRequested = ArrayUtils.contains(mRequesterPackages, packageName);
+        final boolean permissionGranted = mAlarmManager.hasScheduleExactAlarm(packageName,
+                UserHandle.getUserId(uid));
+        return new AlarmsAndRemindersState(permissionRequested, permissionGranted);
     }
 
     @Override
@@ -77,12 +96,35 @@ public class AppStateAlarmsAndRemindersBridge extends AppStateAppOpsBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            if (info.extraInfo instanceof PermissionState) {
-                final PermissionState permissionState = (PermissionState) info.extraInfo;
-                return permissionState.permissionDeclared;
+            if (info.extraInfo instanceof AlarmsAndRemindersState) {
+                final AlarmsAndRemindersState state = (AlarmsAndRemindersState) info.extraInfo;
+                return state.shouldBeVisible();
             }
             return false;
         }
     };
 
+    /**
+     * Class to denote the state of an app regarding
+     * {@link Manifest.permission#SCHEDULE_EXACT_ALARM}.
+     */
+    public static class AlarmsAndRemindersState {
+        private boolean mPermissionRequested;
+        private boolean mPermissionGranted;
+
+        AlarmsAndRemindersState(boolean permissionRequested, boolean permissionGranted) {
+            mPermissionRequested = permissionRequested;
+            mPermissionGranted = permissionGranted;
+        }
+
+        /** Should the app associated with this state appear on the Settings screen */
+        public boolean shouldBeVisible() {
+            return mPermissionRequested;
+        }
+
+        /** Is the permission granted to the app associated with this state */
+        public boolean isAllowed() {
+            return mPermissionGranted;
+        }
+    }
 }

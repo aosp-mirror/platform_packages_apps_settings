@@ -47,6 +47,9 @@ import android.service.persistentdata.PersistentDataBlockManager;
 import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
@@ -62,12 +65,14 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.EncryptionInterstitial;
 import com.android.settings.EventLogTags;
+import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -154,7 +159,13 @@ public class ChooseLockGeneric extends SettingsActivity {
         private FingerprintManager mFingerprintManager;
         private FaceManager mFaceManager;
         private int mUserId;
+        private boolean mIsManagedProfile;
         private ManagedLockPasswordProvider mManagedPasswordProvider;
+        /**
+         * Whether the activity is launched by admins via
+         * {@link DevicePolicyManager#ACTION_SET_NEW_PASSWORD} or
+         * {@link DevicePolicyManager#ACTION_SET_NEW_PARENT_PROFILE_PASSWORD}
+         */
         private boolean mIsSetNewPassword = false;
         private UserManager mUserManager;
         private ChooseLockGenericController mController;
@@ -215,6 +226,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mPasswordConfirmed = !confirmCredentials;
                 mUserPassword = intent.getParcelableExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            } else if (arguments != null) {
+                mUserPassword = (LockscreenCredential) arguments.getParcelable(
+                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                mPasswordConfirmed = mUserPassword != null;
             }
 
             mRequestGatekeeperPasswordHandle = intent.getBooleanExtra(
@@ -261,6 +276,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     UserManager.get(activity),
                     arguments,
                     intent.getExtras()).getIdentifier();
+            mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
             mController = new ChooseLockGenericController(
                     getContext(), mUserId, mRequestedMinComplexity,
                     mOnlyEnforceDevicePasswordRequirement,
@@ -278,12 +294,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             mCallerAppName = isComplexityProvidedByAdmin ? null :
                     intent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME);
 
-            if (ACTION_SET_NEW_PASSWORD.equals(chooseLockAction)
-                    && UserManager.get(activity).isManagedProfile(mUserId)
-                    && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
-                activity.setTitle(R.string.lock_settings_picker_title_profile);
-            }
-
             mManagedPasswordProvider = ManagedLockPasswordProvider.get(activity, mUserId);
 
             if (mPasswordConfirmed) {
@@ -300,7 +310,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                         .setReturnCredentials(true)
                         .setUserId(mUserId);
                 boolean managedProfileWithUnifiedLock =
-                        UserManager.get(activity).isManagedProfile(mUserId)
+                        mIsManagedProfile
                         && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
                 boolean skipConfirmation = managedProfileWithUnifiedLock && !mIsSetNewPassword;
                 if (skipConfirmation || !builder.show()) {
@@ -311,6 +321,40 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             }
             addHeaderView();
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            updateActivityTitle();
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+
+        private void updateActivityTitle() {
+            if (mLockPatternUtils == null) {
+                // mLockPatternUtils will be uninitialized if ChooseLockGenericFragment.onCreate()
+                // finishes early.
+                return;
+            }
+            final boolean updateExistingLock;
+            if (mIsManagedProfile) {
+                // Going from unified challenge -> separate challenge is considered as adding
+                // a new lock to the profile, while if the profile already has a separate challenge
+                // it's an update.
+                updateExistingLock = mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
+                if (updateExistingLock) {
+                    getActivity().setTitle(R.string.lock_settings_picker_update_profile_lock_title);
+                } else {
+                    getActivity().setTitle(R.string.lock_settings_picker_new_profile_lock_title);
+                }
+            } else {
+                updateExistingLock = mLockPatternUtils.isSecure(mUserId);
+                if (updateExistingLock) {
+                    getActivity().setTitle(R.string.lock_settings_picker_update_lock_title);
+                } else {
+                    getActivity().setTitle(R.string.lock_settings_picker_new_lock_title);
+                }
+            }
         }
 
         protected boolean canRunBeforeDeviceProvisioned() {
@@ -333,14 +377,48 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (mForFingerprint) {
                 if (mIsSetNewPassword) {
                     textView.setText(R.string.fingerprint_unlock_title);
+                } else {
+                    textView.setText(R.string.lock_settings_picker_biometric_message);
                 }
             } else if (mForFace) {
                 if (mIsSetNewPassword) {
                     textView.setText(R.string.face_unlock_title);
+                } else {
+                    textView.setText(R.string.lock_settings_picker_biometric_message);
                 }
             } else if (mForBiometrics) {
                 if (mIsSetNewPassword) {
                     textView.setText(R.string.biometrics_unlock_title);
+                } else {
+                    textView.setText(R.string.lock_settings_picker_biometric_message);
+                }
+            } else {
+                if (mIsManagedProfile) {
+                    textView.setText(R.string.lock_settings_picker_profile_message);
+                } else {
+                    int profileUserId = Utils.getManagedProfileId(mUserManager, mUserId);
+                    if (mController.isScreenLockRestrictedByAdmin()
+                            && profileUserId != UserHandle.USER_NULL) {
+                        final StringBuilder description = new StringBuilder(getText(
+                                R.string.lock_settings_picker_admin_restricted_personal_message));
+                        final LinkifyUtils.OnClickListener clickListener = () -> {
+                            final Bundle extras = new Bundle();
+                            extras.putInt(Intent.EXTRA_USER_ID, profileUserId);
+                            if (mUserPassword != null) {
+                                extras.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                                        mUserPassword);
+                            }
+                            new SubSettingLauncher(getActivity())
+                                    .setDestination(ChooseLockGenericFragment.class.getName())
+                                    .setSourceMetricsCategory(getMetricsCategory())
+                                    .setArguments(extras)
+                                    .launch();
+                            finish();
+                        };
+                        LinkifyUtils.linkify(textView, description, clickListener);
+                    } else {
+                        textView.setText("");
+                    }
                 }
             }
         }
@@ -891,8 +969,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private int getResIdForFactoryResetProtectionWarningTitle() {
-            boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
-            return isProfile ? R.string.unlock_disable_frp_warning_title_profile
+            return mIsManagedProfile ? R.string.unlock_disable_frp_warning_title_profile
                     : R.string.unlock_disable_frp_warning_title;
         }
 
@@ -903,26 +980,25 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else {
                 hasFingerprints = false;
             }
-            boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    if (hasFingerprints && isProfile) {
+                    if (hasFingerprints && mIsManagedProfile) {
                         return R.string
                                 .unlock_disable_frp_warning_content_pattern_fingerprint_profile;
-                    } else if (hasFingerprints && !isProfile) {
+                    } else if (hasFingerprints && !mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_pattern_fingerprint;
-                    } else if (isProfile) {
+                    } else if (mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_pattern_profile;
                     } else {
                         return R.string.unlock_disable_frp_warning_content_pattern;
                     }
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                    if (hasFingerprints && isProfile) {
+                    if (hasFingerprints && mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_pin_fingerprint_profile;
-                    } else if (hasFingerprints && !isProfile) {
+                    } else if (hasFingerprints && !mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_pin_fingerprint;
-                    } else if (isProfile) {
+                    } else if (mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_pin_profile;
                     } else {
                         return R.string.unlock_disable_frp_warning_content_pin;
@@ -931,23 +1007,23 @@ public class ChooseLockGeneric extends SettingsActivity {
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
                 case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
-                    if (hasFingerprints && isProfile) {
+                    if (hasFingerprints && mIsManagedProfile) {
                         return R.string
                                 .unlock_disable_frp_warning_content_password_fingerprint_profile;
-                    } else if (hasFingerprints && !isProfile) {
+                    } else if (hasFingerprints && !mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_password_fingerprint;
-                    } else if (isProfile) {
+                    } else if (mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_password_profile;
                     } else {
                         return R.string.unlock_disable_frp_warning_content_password;
                     }
                 default:
-                    if (hasFingerprints && isProfile) {
+                    if (hasFingerprints && mIsManagedProfile) {
                         return R.string
                                 .unlock_disable_frp_warning_content_unknown_fingerprint_profile;
-                    } else if (hasFingerprints && !isProfile) {
+                    } else if (hasFingerprints && !mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_unknown_fingerprint;
-                    } else if (isProfile) {
+                    } else if (mIsManagedProfile) {
                         return R.string.unlock_disable_frp_warning_content_unknown_profile;
                     } else {
                         return R.string.unlock_disable_frp_warning_content_unknown;

@@ -26,6 +26,9 @@ import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
+import java.util.Map;
+
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
@@ -154,5 +157,10 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isChartGraphEnabled(Context context) {
         return false;
+    }
+
+    @Override
+    public Map<Long, List<BatteryHistEntry>> getBatteryHistory(Context context) {
+        return null;
     }
 }
