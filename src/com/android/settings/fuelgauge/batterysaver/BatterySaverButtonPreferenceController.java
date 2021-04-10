@@ -122,5 +122,8 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public void onBatteryChanged(boolean pluggedIn) {
+        if (mPreference != null) {
+            mPreference.setEnabled(!pluggedIn);
+        }
     }
 }
