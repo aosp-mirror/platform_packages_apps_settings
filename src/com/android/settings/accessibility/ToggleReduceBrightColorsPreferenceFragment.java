@@ -21,6 +21,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -175,8 +176,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
             new BaseSearchIndexProvider(R.xml.reduce_bright_colors_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    // TODO(b/170970675): call into CDS to get availability/config status
-                    return true;
+                    return ColorDisplayManager.isReduceBrightColorsAvailable(context);
                 }
             };
 }

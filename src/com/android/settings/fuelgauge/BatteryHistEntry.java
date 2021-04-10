@@ -14,10 +14,37 @@
 package com.android.settings.fuelgauge;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
+import java.util.TimeZone;
+
 
 /** A container class to carry data from {@link ContentValues}. */
 public final class BatteryHistEntry {
     private static final String TAG = "BatteryHistEntry";
+
+    /** Keys for accessing {@link ContentValues} or {@link Cursor}. */
+    public static final String KEY_UID = "uid";
+    public static final String KEY_USER_ID = "userId";
+    public static final String KEY_APP_LABEL = "appLabel";
+    public static final String KEY_PACKAGE_NAME = "packageName";
+    public static final String KEY_IS_HIDDEN = "isHidden";
+    public static final String KEY_TIMESTAMP = "timestamp";
+    public static final String KEY_ZONE_ID = "zoneId";
+    public static final String KEY_TOTAL_POWER = "totalPower";
+    public static final String KEY_CONSUME_POWER = "consumePower";
+    public static final String KEY_PERCENT_OF_TOTAL = "percentOfTotal";
+    public static final String KEY_FOREGROUND_USAGE_TIME = "foregroundUsageTimeInMs";
+    public static final String KEY_BACKGROUND_USAGE_TIME = "backgroundUsageTimeInMs";
+    public static final String KEY_DRAIN_TYPE = "drainType";
+    public static final String KEY_CONSUMER_TYPE = "consumerType";
+    public static final String KEY_BATTERY_LEVEL = "batteryLevel";
+    public static final String KEY_BATTERY_STATUS = "batteryStatus";
+    public static final String KEY_BATTERY_HEALTH = "batteryHealth";
 
     public final long mUid;
     public final long mUserId;
@@ -42,27 +69,45 @@ public final class BatteryHistEntry {
     public final int mBatteryHealth;
 
     private boolean mIsValidEntry = true;
-    private ContentValues mContentValues;
 
-    public BatteryHistEntry(ContentValues contentValues) {
-        mContentValues = contentValues;
-        mUid = getLong("uid");
-        mUserId = getLong("userId");
-        mAppLabel = getString("appLabel");
-        mPackageName = getString("packageName");
-        mIsHidden = getBoolean("isHidden");
-        mTimestamp = getLong("timestamp");
-        mZoneId = getString("zoneId");
-        mTotalPower = getDouble("totalPower");
-        mConsumePower = getDouble("consumePower");
-        mPercentOfTotal = getDouble("percentOfTotal");
-        mForegroundUsageTimeInMs = getLong("foregroundUsageTimeInMs");
-        mBackgroundUsageTimeInMs = getLong("backgroundUsageTimeInMs");
-        mDrainType = getInteger("drainType");
-        mConsumerType = getInteger("consumerType");
-        mBatteryLevel = getInteger("batteryLevel");
-        mBatteryStatus = getInteger("batteryStatus");
-        mBatteryHealth = getInteger("batteryHealth");
+    public BatteryHistEntry(ContentValues values) {
+        mUid = getLong(values, KEY_UID);
+        mUserId = getLong(values, KEY_USER_ID);
+        mAppLabel = getString(values, KEY_APP_LABEL);
+        mPackageName = getString(values, KEY_PACKAGE_NAME);
+        mIsHidden = getBoolean(values, KEY_IS_HIDDEN);
+        mTimestamp = getLong(values, KEY_TIMESTAMP);
+        mZoneId = getString(values, KEY_ZONE_ID);
+        mTotalPower = getDouble(values, KEY_TOTAL_POWER);
+        mConsumePower = getDouble(values, KEY_CONSUME_POWER);
+        mPercentOfTotal = getDouble(values, KEY_PERCENT_OF_TOTAL);
+        mForegroundUsageTimeInMs = getLong(values, KEY_FOREGROUND_USAGE_TIME);
+        mBackgroundUsageTimeInMs = getLong(values, KEY_BACKGROUND_USAGE_TIME);
+        mDrainType = getInteger(values, KEY_DRAIN_TYPE);
+        mConsumerType = getInteger(values, KEY_CONSUMER_TYPE);
+        mBatteryLevel = getInteger(values, KEY_BATTERY_LEVEL);
+        mBatteryStatus = getInteger(values, KEY_BATTERY_STATUS);
+        mBatteryHealth = getInteger(values, KEY_BATTERY_HEALTH);
+    }
+
+    public BatteryHistEntry(Cursor cursor) {
+        mUid = getLong(cursor, KEY_UID);
+        mUserId = getLong(cursor, KEY_USER_ID);
+        mAppLabel = getString(cursor, KEY_APP_LABEL);
+        mPackageName = getString(cursor, KEY_PACKAGE_NAME);
+        mIsHidden = getBoolean(cursor, KEY_IS_HIDDEN);
+        mTimestamp = getLong(cursor, KEY_TIMESTAMP);
+        mZoneId = getString(cursor, KEY_ZONE_ID);
+        mTotalPower = getDouble(cursor, KEY_TOTAL_POWER);
+        mConsumePower = getDouble(cursor, KEY_CONSUME_POWER);
+        mPercentOfTotal = getDouble(cursor, KEY_PERCENT_OF_TOTAL);
+        mForegroundUsageTimeInMs = getLong(cursor, KEY_FOREGROUND_USAGE_TIME);
+        mBackgroundUsageTimeInMs = getLong(cursor, KEY_BACKGROUND_USAGE_TIME);
+        mDrainType = getInteger(cursor, KEY_DRAIN_TYPE);
+        mConsumerType = getInteger(cursor, KEY_CONSUMER_TYPE);
+        mBatteryLevel = getInteger(cursor, KEY_BATTERY_LEVEL);
+        mBatteryStatus = getInteger(cursor, KEY_BATTERY_STATUS);
+        mBatteryHealth = getInteger(cursor, KEY_BATTERY_HEALTH);
     }
 
     /** Whether this {@link BatteryHistEntry} is valid or not? */
@@ -70,43 +115,109 @@ public final class BatteryHistEntry {
         return mIsValidEntry;
     }
 
-    private int getInteger(String key) {
-        if (mContentValues != null && mContentValues.containsKey(key)) {
-            return mContentValues.getAsInteger(key);
+    @Override
+    public String toString() {
+        final String recordAtDateTime =
+            new SimpleDateFormat("MMM dd,yyyy HH:mm:ss").format(new Date(mTimestamp));
+        final StringBuilder builder = new StringBuilder()
+            .append("\nBatteryHistEntry{")
+            .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
+                  mPackageName, mAppLabel, mUid, mUserId, mIsHidden))
+            .append(String.format("\n\ttimestamp=%s|zoneId=%s", recordAtDateTime, mZoneId))
+            .append(String.format("\n\tusage=%f|total=%f|consume=%f|elapsedTime=%d|%d",
+                  mPercentOfTotal, mTotalPower, mConsumePower,
+                  Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
+                  Duration.ofMillis(mBackgroundUsageTimeInMs).getSeconds()))
+            .append(String.format("\n\tdrain=%d|consumer=%d", mDrainType, mConsumerType))
+            .append(String.format("\n\tbattery=%d|status=%d|health=%d\n}",
+                  mBatteryLevel, mBatteryStatus, mBatteryHealth));
+        return builder.toString();
+    }
+
+    private int getInteger(ContentValues values, String key) {
+        if (values != null && values.containsKey(key)) {
+            return values.getAsInteger(key);
         };
         mIsValidEntry = false;
         return -1;
     }
 
-    private long getLong(String key) {
-        if (mContentValues != null && mContentValues.containsKey(key)) {
-            return mContentValues.getAsLong(key);
+    private int getInteger(Cursor cursor, String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getInt(columnIndex);
+        }
+        mIsValidEntry = false;
+        return -1;
+    }
+
+    private long getLong(ContentValues values, String key) {
+        if (values != null && values.containsKey(key)) {
+            return values.getAsLong(key);
         }
         mIsValidEntry = false;
         return -1L;
     }
 
-    private double getDouble(String key) {
-        if (mContentValues != null && mContentValues.containsKey(key)) {
-            return mContentValues.getAsDouble(key);
+    private long getLong(Cursor cursor, String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getLong(columnIndex);
+        }
+        mIsValidEntry = false;
+        return -1L;
+    }
+
+    private double getDouble(ContentValues values, String key) {
+        if (values != null && values.containsKey(key)) {
+            return values.getAsDouble(key);
         }
         mIsValidEntry = false;
         return 0f;
     }
 
-    private String getString(String key) {
-        if (mContentValues != null && mContentValues.containsKey(key)) {
-            return mContentValues.getAsString(key);
+    private double getDouble(Cursor cursor, String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getDouble(columnIndex);
+        }
+        mIsValidEntry = false;
+        return 0f;
+    }
+
+    private String getString(ContentValues values, String key) {
+        if (values != null && values.containsKey(key)) {
+            return values.getAsString(key);
         }
         mIsValidEntry = false;
         return null;
     }
 
-    private boolean getBoolean(String key) {
-        if (mContentValues != null && mContentValues.containsKey(key)) {
-            return mContentValues.getAsBoolean(key);
+    private String getString(Cursor cursor, String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getString(columnIndex);
+        }
+        mIsValidEntry = false;
+        return null;
+    }
+
+    private boolean getBoolean(ContentValues values, String key) {
+        if (values != null && values.containsKey(key)) {
+            return values.getAsBoolean(key);
         }
         mIsValidEntry = false;
         return false;
     }
+
+    private boolean getBoolean(Cursor cursor, String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            // Use value == 1 to represent boolean value in the database.
+            return cursor.getInt(columnIndex) == 1;
+        }
+        mIsValidEntry = false;
+        return false;
+    }
+
 }

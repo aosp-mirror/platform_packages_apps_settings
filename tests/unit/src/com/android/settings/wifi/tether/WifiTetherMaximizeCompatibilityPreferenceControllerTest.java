@@ -168,7 +168,7 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
                 .build();
         doReturn(config).when(mWifiManager).getSoftApConfiguration();
 
-        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(false);
+        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(true);
     }
 
     @Test
@@ -179,7 +179,7 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
                 .build();
         doReturn(config).when(mWifiManager).getSoftApConfiguration();
 
-        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(true);
+        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(false);
     }
 
     @Test
@@ -190,7 +190,7 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
                 .build();
         doReturn(config).when(mWifiManager).getSoftApConfiguration();
 
-        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(true);
+        assertThat(mController.isMaximizeCompatibilityEnabled()).isEqualTo(false);
     }
 
     @Test
@@ -223,7 +223,8 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
         SoftApConfiguration.Builder builder = new SoftApConfiguration.Builder();
         mController.setupMaximizeCompatibility(builder);
 
-        assertThat(builder.build().getBand()).isEqualTo(SoftApConfiguration.BAND_2GHZ);
+        assertThat(builder.build().getBand())
+                .isEqualTo(SoftApConfiguration.BAND_2GHZ | SoftApConfiguration.BAND_5GHZ);
     }
 
     @Test
@@ -234,7 +235,6 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
         SoftApConfiguration.Builder builder = new SoftApConfiguration.Builder();
         mController.setupMaximizeCompatibility(builder);
 
-        assertThat(builder.build().getBand())
-                .isEqualTo(SoftApConfiguration.BAND_2GHZ | SoftApConfiguration.BAND_5GHZ);
+        assertThat(builder.build().getBand()).isEqualTo(SoftApConfiguration.BAND_2GHZ);
     }
 }

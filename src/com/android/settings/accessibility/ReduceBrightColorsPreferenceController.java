@@ -87,7 +87,7 @@ public class ReduceBrightColorsPreferenceController extends TogglePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayManager.isColorTransformAccelerated(mContext) ? AVAILABLE
+        return ColorDisplayManager.isReduceBrightColorsAvailable(mContext) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 

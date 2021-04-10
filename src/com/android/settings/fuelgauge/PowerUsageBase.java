@@ -36,9 +36,6 @@ import com.android.settings.dashboard.DashboardFragment;
  */
 public abstract class PowerUsageBase extends DashboardFragment {
 
-    // +1 to allow ordering for PowerUsageSummary.
-    @VisibleForTesting
-    static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
     private static final String TAG = "PowerUsageBase";
     private static final String KEY_REFRESH_TYPE = "refresh_type";
     private static final String KEY_INCLUDE_HISTORY = "include_history";
@@ -49,8 +46,8 @@ public abstract class PowerUsageBase extends DashboardFragment {
     BatteryUsageStats mBatteryUsageStats;
 
     protected UserManager mUm;
-    private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     protected boolean mIsBatteryPresent = true;
+    private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
 
     @VisibleForTesting
     final BatteryUsageStatsLoaderCallbacks mBatteryUsageStatsLoaderCallbacks =
@@ -65,7 +62,6 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setHasOptionsMenu(true);
 
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(getContext());
         mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
@@ -96,7 +92,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
                 mBatteryUsageStatsLoaderCallbacks);
     }
 
-    private void onLoadFinished(@BatteryUpdateType int refreshType) {
+    protected void onLoadFinished(@BatteryUpdateType int refreshType) {
         refreshUi(refreshType);
     }
 

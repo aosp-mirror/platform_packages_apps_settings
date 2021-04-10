@@ -99,10 +99,10 @@ public class WifiTetherMaximizeCompatibilityPreferenceController extends
         }
 
         // If the BridgedAp Concurrency is not supported in early Pixel devices (e.g. Pixel 2~5),
-        // show toggle on if the band includes SoftApConfiguration.BAND_5GHZ.
+        // show toggle on when band is 2.4G only.
         final int band = config.getBand();
         Log.d(TAG, "getBand:" + band);
-        return (band & SoftApConfiguration.BAND_5GHZ) > 0;
+        return band == SoftApConfiguration.BAND_2GHZ;
     }
 
     /**
@@ -128,8 +128,8 @@ public class WifiTetherMaximizeCompatibilityPreferenceController extends
             builder.setBridgedModeOpportunisticShutdownEnabled(!enabled);
         } else {
             int band = enabled
-                    ? SoftApConfiguration.BAND_2GHZ | SoftApConfiguration.BAND_5GHZ
-                    : SoftApConfiguration.BAND_2GHZ;
+                    ? SoftApConfiguration.BAND_2GHZ
+                    : SoftApConfiguration.BAND_2GHZ | SoftApConfiguration.BAND_5GHZ;
             Log.d(TAG, "setBand:" + band);
             builder.setBand(band);
         }

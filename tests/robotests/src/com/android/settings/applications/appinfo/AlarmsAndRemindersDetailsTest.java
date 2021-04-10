@@ -27,7 +27,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
-import com.android.settings.applications.AppStateAppOpsBridge;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -48,7 +47,7 @@ public class AlarmsAndRemindersDetailsTest {
     @Mock
     private AppStateAlarmsAndRemindersBridge mAppStateBridge;
     @Mock
-    private AppStateAppOpsBridge.PermissionState mPermissionState;
+    private AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState mPermissionState;
 
     private AlarmsAndRemindersDetails mFragment = new AlarmsAndRemindersDetails();
 
@@ -96,12 +95,12 @@ public class AlarmsAndRemindersDetailsTest {
         mPackageInfo.applicationInfo = new ApplicationInfo();
         when(mAppStateBridge.createPermissionState(nullable(String.class), anyInt()))
                 .thenReturn(mPermissionState);
-        mPermissionState.permissionDeclared = false;
+        when(mPermissionState.shouldBeVisible()).thenReturn(false);
 
         mFragment.refreshUi();
         verify(mSwitchPref).setEnabled(false);
 
-        mPermissionState.permissionDeclared = true;
+        when(mPermissionState.shouldBeVisible()).thenReturn(true);
 
         mFragment.refreshUi();
         verify(mSwitchPref).setEnabled(true);
@@ -114,11 +113,11 @@ public class AlarmsAndRemindersDetailsTest {
         when(mAppStateBridge.createPermissionState(nullable(String.class), anyInt()))
                 .thenReturn(mPermissionState);
 
-        when(mPermissionState.isPermissible()).thenReturn(true);
+        when(mPermissionState.isAllowed()).thenReturn(true);
         mFragment.refreshUi();
         verify(mSwitchPref).setChecked(true);
 
-        when(mPermissionState.isPermissible()).thenReturn(false);
+        when(mPermissionState.isAllowed()).thenReturn(false);
         mFragment.refreshUi();
         verify(mSwitchPref).setChecked(false);
     }
