@@ -74,7 +74,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public BatteryChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initializeColors(context);
+        // Registers the click event listener.
         setOnClickListener(this);
+        setClickable(false);
         setSelectedIndex(SELECTED_INDEX_ALL);
         setTrapezoidCount(DEFAULT_TRAPEZOID_COUNT);
     }

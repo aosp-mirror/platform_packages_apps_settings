@@ -170,7 +170,6 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         extras.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mCurrentDevicePassword);
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitleRes(R.string.lock_settings_picker_title_profile)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .setArguments(extras)
                 .launch();

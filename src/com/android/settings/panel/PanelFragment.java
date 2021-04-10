@@ -394,7 +394,11 @@ public class PanelFragment extends Fragment {
                     .addOnGlobalLayoutListener(mOnGlobalLayoutListener);
             mPanelSlices.setVisibility(View.VISIBLE);
 
-            final DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
+            final FragmentActivity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
+            final DividerItemDecoration itemDecoration = new DividerItemDecoration(activity);
             itemDecoration
                     .setDividerCondition(DividerItemDecoration.DIVIDER_CONDITION_BOTH);
             if (mPanelSlices.getItemDecorationCount() == 0) {

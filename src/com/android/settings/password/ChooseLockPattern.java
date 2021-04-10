@@ -27,6 +27,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources.Theme;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
@@ -172,19 +173,6 @@ public class ChooseLockPattern extends SettingsActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        final boolean forFingerprint = getIntent()
-                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
-        final boolean forFace = getIntent()
-                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
-
-        int msg = R.string.lockpassword_choose_your_screen_lock_header;
-        if (forFingerprint) {
-            msg = R.string.lockpassword_choose_your_pattern_header_for_fingerprint;
-        } else if (forFace) {
-            msg = R.string.lockpassword_choose_your_pattern_header_for_face;
-        }
-
-        setTitle(msg);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
@@ -390,7 +378,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
             Introduction(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    R.string.lockpassword_choose_your_pattern_message,
+                    ID_EMPTY_MESSAGE,
                     R.string.lockpattern_recording_intro_header,
                     LeftButtonMode.Gone, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
@@ -399,13 +387,13 @@ public class ChooseLockPattern extends SettingsActivity {
                     LeftButtonMode.Gone, RightButtonMode.Ok, ID_EMPTY_MESSAGE, false),
             ChoiceTooShort(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    R.string.lockpassword_choose_your_pattern_message,
+                    ID_EMPTY_MESSAGE,
                     R.string.lockpattern_recording_incorrect_too_short,
                     LeftButtonMode.Retry, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
             FirstChoiceValid(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    R.string.lockpassword_choose_your_pattern_message,
+                    ID_EMPTY_MESSAGE,
                     R.string.lockpattern_pattern_entered_header,
                     LeftButtonMode.Retry, RightButtonMode.Continue, ID_EMPTY_MESSAGE, false),
             NeedToConfirm(
@@ -464,6 +452,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private LockPatternUtils mLockPatternUtils;
         private SaveAndFinishWorker mSaveAndFinishWorker;
         protected int mUserId;
+        protected boolean mIsManagedProfile;
         protected boolean mForFingerprint;
         protected boolean mForFace;
         protected boolean mForBiometrics;
@@ -481,6 +470,7 @@ public class ChooseLockPattern extends SettingsActivity {
             Intent intent = getActivity().getIntent();
             // Only take this argument into account if it belongs to the current profile.
             mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+            mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
 
             mLockPatternUtils = new LockPatternUtils(getActivity());
 
@@ -504,6 +494,20 @@ public class ChooseLockPattern extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
         }
 
+        private void updateActivityTitle() {
+            final int msg;
+            if (mForFingerprint) {
+                msg = R.string.lockpassword_choose_your_pattern_header_for_fingerprint;
+            } else if (mForFace) {
+                msg = R.string.lockpassword_choose_your_pattern_header_for_face;
+            } else {
+                msg = mIsManagedProfile
+                        ? R.string.lockpassword_choose_your_profile_pattern_header
+                        : R.string.lockpassword_choose_your_pattern_header;
+            }
+            getActivity().setTitle(msg);
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -515,7 +519,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     layout.setLandscapeHeaderAreaVisible(false /* visible */);
                     break;
             }
-            layout.setHeaderText(getActivity().getTitle());
+            updateActivityTitle();
             if (getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
                 View iconView = layout.findViewById(R.id.sud_layout_icon);
                 if (iconView != null) {

@@ -687,18 +687,24 @@
     <!-- Location settings footer warning text when location is on [CHAR LIMIT=NONE] -->
     <string name="location_settings_footer_location_on">
         Location may use sources like GPS, Wi\u2011Fi, mobile networks, and sensors to help estimate
-        your device\u2019s location. Apps with the nearby devices permission can determine the
+        your device\u2019s location.
+
+        &lt;br>&lt;br>Apps with the Nearby devices permission can determine the
         relative position of connected devices.
-        &lt;a href="<xliff:g example="http://www.google.com" id="url">
-        https://support.google.com/android/answer/3467281</xliff:g>">Learn more&lt;/a>.
+
+        &lt;br>&lt;br>&lt;a href="<xliff:g example="http://www.google.com" id="url">
+        https://support.google.com/android/answer/3467281</xliff:g>">Learn more&lt;/a>
     </string>
     <!-- Location settings footer warning text when location is off [CHAR LIMIT=NONE] -->
     <string name="location_settings_footer_location_off">
         Location access is off for apps and services. Your device location may still be sent to
         emergency responders when you call or text an emergency number.
 
-        &lt;br>&lt;br>Apps with the nearby devices permission can determine the relative position of
-        connected devices.
+        &lt;br>&lt;br>Apps with the Nearby devices permission can determine the relative
+        position of connected devices.
+
+        &lt;br>&lt;br>&lt;a href="<xliff:g example="http://www.google.com"
+        id="url"> https://support.google.com/android/answer/3467281</xliff:g>">Learn more&lt;/a>
     </string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
@@ -1305,8 +1311,17 @@
     <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="lock_settings_picker_title">Choose screen lock</string>
 
-    <!--  Title for security picker to choose the profile unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
-    <string name="lock_settings_picker_title_profile">Choose work lock</string>
+    <!--  Screen title. This title is asking the user to choose a type of screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_new_lock_title">Choose a screen lock</string>
+
+    <!--  Screen title. This title is asking the user to choose a new screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_update_lock_title">Choose a new screen lock</string>
+
+    <!--  Screen title. This title is asking the user to choose a type of screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_new_profile_lock_title">Choose a lock for work apps</string>
+
+    <!--  Screen title. This title is asking the user to choose a new screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=27] -->
+    <string name="lock_settings_picker_update_profile_lock_title">Choose a new work lock</string>
 
     <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (tablet) [CHAR LIMIT=22] -->
     <string name="setup_lock_settings_picker_title" product="tablet">Protect your tablet</string>
@@ -1327,6 +1342,12 @@
 
     <!-- Message shown in screen lock picker while setting up the backup/fallback screen lock method for biometrics. Users can choose to use this method to unlock the screen instead of biometrics, or when biometrics are not accepted. [CHAR LIMIT=80] [BACKUP_MESSAGE_ID=2799884038398627882] -->
     <string name="lock_settings_picker_biometric_message">Choose your backup screen lock method</string>
+
+    <!-- Text shown on the screen lock menu. This text is letting the user know that their IT admin can't reset their screen lock if they forget it, and they can choose to set another lock that would be specifically for their work apps. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring the user to enroll a work profile screen lock instead. [CHAR LIMIT=100] -->
+    <string name="lock_settings_picker_admin_restricted_personal_message">This lock can\u2019t be reset by your IT admin. <xliff:g id="link_begin" example="">LINK_BEGIN</xliff:g>Set a separate work lock instead<xliff:g id="link_end" example="">LINK_END</xliff:g></string>
+
+    <!-- Message shown in screen lock picker for setting up a work profile screen lock. [CHAR LIMIT=80] -->
+    <string name="lock_settings_picker_profile_message">If you forget this lock, ask your IT admin to reset it</string>
 
     <!-- Label for button in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
     <string name="setup_lock_settings_options_button_label">Screen lock options</string>
@@ -2948,6 +2969,8 @@
     <string name="auto_rotate_camera_lock_title">Camera is locked</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
     <string name="auto_rotate_camera_lock_summary">Camera must be unlocked for Face Detection</string>
+    <!-- screen_timeout settings screen, summary about the camera being disabled [CHAR LIMIT=NONE]-->
+    <string name="adaptive_sleep_camera_lock_summary">Camera must be unlocked for Screen Attention</string>
     <!-- auto_rotate settings screen, title about the required permission is missing [CHAR LIMIT=NONE]-->
     <string name="auto_rotate_summary_no_permission">Camera access is required for Face Detection. Tap to manage permissions for Device Personalization Services</string>
     <!-- auto_rotate settings screen, text for the camera permission button [CHAR LIMIT=NONE]-->
@@ -4283,10 +4306,19 @@
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
     <!-- Lock Pattern settings -->
-    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_screen_lock_header">Set screen lock</string>
-    <!-- Message on first screen of choose password flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_password_message">For security, set password</string>
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_password_header">Set a password</string>
+    <!-- Header on first screen of choose work profile password flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_password_header">Set a work password</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pin_header">Set a PIN</string>
+    <!-- Header on first screen of choose work profile PIN flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_pin_header">Set a work PIN</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pattern_header">Set a pattern</string>
+    <!-- Header on first screen of choose work profile pattern flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_profile_pattern_header">Set a work pattern</string>
+
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
@@ -4295,10 +4327,10 @@
     <string name="lockpassword_choose_your_pin_message">For security, set PIN</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
-    <!-- Message on first screen of choose pattern flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_pattern_message">For security, set pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
+    <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_profile_password_header">Re-enter your work password</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_work_password_header">Enter your work password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
@@ -4307,6 +4339,8 @@
     <string name="lockpassword_confirm_your_work_pattern_header">Enter your work pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_pin_header">Re-enter your PIN</string>
+    <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_profile_pin_header">Re-enter your work PIN</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_work_pin_header">Enter your work PIN</string>
     <!-- Header on password confirm screen if second password doesn't match the first. [CHAR LIMIT=30] -->
@@ -6051,9 +6085,9 @@
     <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
 
     <!-- Summary for top level battery tile if battery is not present. [CHAR LIMIT=NONE] -->
-    <string name="battery_missing_message">Problem reading your battery meter</string>
-    <!-- Summary to battery page if battery is not present. [CHAR LIMIT=NONE] -->
-    <string name="battery_missing_help_message">Problem reading your battery meter. Tap to <annotation id="url">learn more</annotation></string>
+    <string name="battery_missing_message">Can’t update battery info</string>
+    <!-- Help text if battery is not present. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_link_message"></string>
 
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
@@ -11484,19 +11518,22 @@
     <string name="emergency_gesture_screen_title">Emergency SOS</string>
 
     <!-- Preference title to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
-    <string name="emergency_gesture_switchbar_title">Use emergency SOS</string>
+    <string name="emergency_gesture_switchbar_title">Use Emergency SOS</string>
 
     <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
     <string name="emergency_gesture_entrypoint_summary">Managed by <xliff:g id="app_name" example="Emergency Info">%1$s</xliff:g></string>
 
     <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="emergency_gesture_screen_summary">Start the actions below by pressing the power button quickly 5 times or more</string>
+    <string name="emergency_gesture_screen_summary">Press the Power button quickly 5 times or more to start the actions below</string>
 
     <!-- Preference title to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
     <string name="emergency_gesture_sound_setting_title">Play countdown alarm</string>
 
     <!-- Preference summary to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="emergency_gesture_sound_setting_summary">Play a loud sound before notifying for help</string>
+    <string name="emergency_gesture_sound_setting_summary">Play a loud sound when Emergency SOS is starting</string>
+
+    <!-- Preference category title listing a phone number to call during emergency gesture [CHAR_LIMIT=60]-->
+    <string name="emergency_gesture_category_call_for_help_title">Notify for help</string>
 
     <!-- Preference title listing a phone number to call during emergency gesture [CHAR_LIMIT=60]-->
     <string name="emergency_gesture_call_for_help_title">Call for help</string>
@@ -11510,7 +11547,7 @@
     <!-- Notes explaining limitations for emergency gesture number override [CHAR_LIMIT=NONE]-->
     <string name="emergency_gesture_number_override_notes">
         If you enter a non-emergency number:\n
-        • Your device must be unlocked to use emergency SOS\n
+        • Your device must be unlocked to use Emergency SOS\n
         • Your call may not be answered
     </string>
 
