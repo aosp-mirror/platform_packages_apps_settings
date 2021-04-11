@@ -112,6 +112,29 @@ public final class ConvertUtilsTest {
     }
 
     @Test
+    public void testConvert_nullBatteryEntry_returnsExpectedContentValues() {
+        final ContentValues values =
+            ConvertUtils.convert(
+                /*entry=*/ null,
+                /*batteryUsageStats=*/ null,
+                /*batteryLevel=*/ 12,
+                /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
+                /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
+                /*timestamp=*/ 10001L);
+
+        assertThat(values.getAsLong("timestamp")).isEqualTo(10001L);
+        assertThat(values.getAsString("zoneId"))
+            .isEqualTo(TimeZone.getDefault().getID());
+        assertThat(values.getAsInteger("batteryLevel")).isEqualTo(12);
+        assertThat(values.getAsInteger("batteryStatus"))
+            .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
+        assertThat(values.getAsInteger("batteryHealth"))
+            .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
+        assertThat(values.getAsString("packageName"))
+            .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
+    }
+
+    @Test
     public void testGetDrainType_returnsExpetcedResult() {
         final int expectedType = 3;
         when(mockSystemBatteryConsumer.getDrainType())

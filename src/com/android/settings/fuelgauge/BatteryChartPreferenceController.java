@@ -50,7 +50,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
 
     @VisibleForTesting
-    PreferenceGroup mAppListGroup;
+    PreferenceGroup mAppListPrefGroup;
 
     private Context mPrefContext;
     private BatteryChartView mBatteryChartView;
@@ -90,7 +90,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPrefContext = screen.getContext();
-        mAppListGroup = screen.findPreference(mPreferenceKey);
+        mAppListPrefGroup = screen.findPreference(mPreferenceKey);
     }
 
     @Override
@@ -137,8 +137,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             if (entryList != null && !entryList.isEmpty()) {
                 // All battery levels are the same in the same timestamp snapshot.
                 mBatteryHistoryLevels[index] = entryList.get(0).mBatteryLevel;
-            } else {
-                Log.w(TAG, "abnormal entry list in the timestamp:" + timestamp);
+            } else if (entryList != null && entryList.isEmpty()) {
+                Log.e(TAG, "abnormal entry list in the timestamp:" +
+                    ConvertUtils.utcToLocalTime(timestamp));
             }
         }
         if (mBatteryChartView != null) {
