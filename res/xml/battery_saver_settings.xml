@@ -37,26 +37,14 @@
         android:key="battery_saver_sticky"
         android:title="@string/battery_saver_sticky_title_new"
         android:summary="@string/summary_placeholder"
-        settings:allowDividerBelow="true"
         settings:keywords="@string/keywords_battery_saver_sticky"
         settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverStickyPreferenceController"/>
-
-<!--    <com.android.settings.widget.TwoStateButtonPreference-->
-<!--        android:key="battery_saver"-->
-<!--        android:title="@string/battery_saver"-->
-<!--        android:selectable="false"-->
-<!--        android:summary="@string/battery_saver_turn_on_summary"-->
-<!--        settings:allowDividerBelow="true"-->
-<!--        settings:textOn="@string/battery_saver_button_turn_on"-->
-<!--        settings:textOff="@string/battery_saver_button_turn_off"-->
-<!--        settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverButtonPreferenceController"/>-->
 
     <com.android.settingslib.widget.FooterPreference
         android:order="100"
         android:key="battery_saver_footer_preference"
         android:selectable="true"
         android:title="@*android:string/battery_saver_description"
-        settings:allowDividerAbove="true"
         settings:searchable="false"/>
 
 </PreferenceScreen>

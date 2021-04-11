@@ -227,6 +227,10 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         // Draws all trapezoid shapes into the canvas.
         final Path trapezoidPath = new Path();
         for (int index = 0; index < mTrapezoidCount; index++) {
+            // Not draws the trapezoid for corner or not initialization cases.
+            if (mLevels[index] == 0 || mLevels[index + 1] == 0) {
+                continue;
+            }
             // Configures the trapezoid paint color.
             mTrapezoidPaint.setColor(
                 mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
