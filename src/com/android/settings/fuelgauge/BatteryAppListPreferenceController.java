@@ -424,7 +424,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private BatteryUsageStats getFakeStats() {
-        BatteryUsageStats.Builder builder = new BatteryUsageStats.Builder(0, 0)
+        BatteryUsageStats.Builder builder = new BatteryUsageStats.Builder(new String[0], 0)
                 .setDischargePercentage(100);
 
         float use = 500;
