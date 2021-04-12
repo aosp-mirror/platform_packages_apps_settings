@@ -278,7 +278,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"依世界標準時間的時差選取"</string>
     <string name="date_picker_title" msgid="646573308567782578">"日期"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"時間"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"螢幕自動關閉後鎖定"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"螢幕關閉多久後鎖定裝置"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"螢幕自動關閉 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"螢幕自動關閉後立即鎖定 (由「<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>」維持解鎖狀態時除外)"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"螢幕自動關閉 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後 (由「<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>」維持解鎖狀態時除外)"</string>
@@ -669,7 +669,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個使用中的應用程式</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"信任的代理程式"</string>
-    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"如要使用，請先設定螢幕鎖定"</string>
+    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"如要使用這個選項，請先設定螢幕鎖定方式"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"無"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 個信任的代理程式正在運作</item>
@@ -2447,11 +2447,11 @@
       <item quantity="other">要限制 %1$d 個應用程式嗎？</item>
       <item quantity="one">要限制應用程式嗎？</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"如要節省電量，請將「<xliff:g id="APP">%1$s</xliff:g>」設為停止在背景耗用電量。這麼做可能會導致這個應用程式無法正常運作，且相關通知可能會延遲。"</string>
-    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"如要節省電量，請將這些應用程式設為停止在背景耗用電量。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。\n\n應用程式："</string>
-    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"如要節省電量，請將這些應用程式設為停止在背景耗用電量。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。\n\n應用程式：\n<xliff:g id="APP_LIST">%1$s</xliff:g>。"</string>
+    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"如要節省電量，請禁止「<xliff:g id="APP">%1$s</xliff:g>」在背景中消耗裝置電量。這麼做可能會導致這個應用程式無法正常運作，且相關通知可能會延遲。"</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"如要節省電量，請禁止這些應用程式在背景中消耗裝置電量。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。\n\n應用程式："</string>
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"如要節省電量，請禁止這些應用程式在背景中消耗裝置電量。受限制的應用程式可能無法正常運作，且相關通知可能會延遲。\n\n應用程式：\n<xliff:g id="APP_LIST">%1$s</xliff:g>。"</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"限制"</string>
-    <string name="battery_tip_unrestrict_app_dialog_title" msgid="5501997201160532301">"要移除限制嗎？"</string>
+    <string name="battery_tip_unrestrict_app_dialog_title" msgid="5501997201160532301">"要解除限制嗎？"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"這個應用程式將會在背景耗用電量。你的電池電力可能會比預期更快耗盡。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
@@ -2550,7 +2550,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="6495519793211758353">"試著連線至其他藍牙裝置"</string>
     <string name="battery_desc_apps" msgid="4187483940383266017">"應用程式用電量"</string>
     <string name="battery_sugg_apps_info" msgid="4796917242296658454">"停止或解除安裝應用程式"</string>
-    <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"選取省電模式"</string>
+    <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"選取節約耗電量模式"</string>
     <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"應用程式可能會提供省電的設定"</string>
     <string name="battery_desc_users" msgid="1959428568888686847">"使用者用電量"</string>
     <string name="battery_desc_unaccounted" msgid="1649497860893660763">"其他電源用量"</string>
@@ -3068,7 +3068,7 @@
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"設為預設應用程式"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"更新"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"限制"</string>
-    <string name="restriction_menu_reset" msgid="92859464456364092">"移除限制"</string>
+    <string name="restriction_menu_reset" msgid="92859464456364092">"解除限制"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"變更 PIN 碼"</string>
     <string name="help_label" msgid="2896538416436125883">"說明與意見回饋"</string>
     <string name="support_summary" msgid="1034146931237148885">"說明文章、電話與即時通訊、開始使用"</string>
@@ -3351,7 +3351,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"允許發出音效的干擾"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"封鎖視覺干擾"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"允許視覺信號"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"顯示隱藏通知的選項"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"隱藏通知的顯示方式"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"開啟「零打擾」模式時"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"不發出通知音效"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"通知會顯示在畫面上"</string>
@@ -3437,8 +3437,8 @@
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"使用個人設定檔音效"</string>
     <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"工作資料夾和個人設定檔使用相同的音效"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"工作手機鈴聲"</string>
-    <string name="work_notification_ringtone_title" msgid="2955312017013255515">"預設 Work 通知音效"</string>
-    <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"預設 Work 鬧鐘音效"</string>
+    <string name="work_notification_ringtone_title" msgid="2955312017013255515">"預設工作通知音效"</string>
+    <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"預設工作鬧鐘音效"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"與個人設定檔相同"</string>
     <string name="work_sync_dialog_title" msgid="2359563902332046231">"要取代音效嗎？"</string>
     <string name="work_sync_dialog_yes" msgid="9161415252411868574">"取代"</string>
@@ -3542,7 +3542,7 @@
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"對話部分"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"允許應用程式使用對話部分"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"不是對話"</string>
-    <string name="demote_conversation_summary" msgid="4319929331165604112">"從對話部分中移除"</string>
+    <string name="demote_conversation_summary" msgid="4319929331165604112">"從對話區塊中移除"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"這是對話"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"新增至對話部分"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"管理對話"</string>
@@ -3755,7 +3755,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"來電"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通話"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"例外的通話"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"如要確認允許的通話是否會發出音效，請檢查裝置目前是否已設為響鈴"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"為了確保你在接到允許的來電時會聽到音效，請確認裝置已設為響鈴"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」啟用時封鎖來電。你可以調整設定，讓好友、家人或其他聯絡人能聯絡你。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"已加星號的聯絡人"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3767,7 +3767,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"訊息"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"訊息"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"例外的訊息"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"如要確認允許的訊息是否會發出音效，請檢查裝置目前是否已設為響鈴"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"為了確保你在收到允許的訊息時會聽到音效，請確認裝置已設為響鈴"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」排程進行時封鎖訊息。你可以調整設定，讓好友、家人或其他聯絡人可以聯絡你。"</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"你會收到所有訊息的通知"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"你會收到所有來電的通知"</string>
@@ -3990,7 +3990,7 @@
     </plurals>
     <string name="open_supported_links_footer" msgid="3188808142432787933">"應用程式要求處理以下連結："</string>
     <string name="default_apps_title" msgid="6943471331817718664">"預設"</string>
-    <string name="default_for_work" msgid="537558180548617528">"Work 預設值"</string>
+    <string name="default_for_work" msgid="537558180548617528">"工作資料夾預設應用程式"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"小幫手和語音輸入"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"數位助理應用程式"</string>
     <string name="default_digital_assistant_title" msgid="5654663086385490838">"預設的數位助理應用程式"</string>
@@ -4272,7 +4272,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> 行動數據"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi 數據"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> 乙太網路數據"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"數據警告與限制"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"數據用量警告與限制"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"行動數據用量週期"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"<xliff:g id="ID_1">^1</xliff:g> 數據用量警告"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"<xliff:g id="ID_1">^1</xliff:g> 數據用量上限"</string>
@@ -4324,7 +4324,7 @@
     <string name="data_saver_off" msgid="5891210864117269045">"已關閉"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"使用數據節省模式"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"數據用量不受限"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"允許在數據節省模式開啟時無限量存取數據"</string>
+    <string name="unrestricted_app_summary" msgid="282698963532000403">"開啟數據節省模式時，允許裝置不受限制使用數據流量"</string>
     <string name="home_app" msgid="6056850504746902747">"主畫面應用程式"</string>
     <string name="no_default_home" msgid="3588073707316139318">"沒有預設主畫面"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="4098653943835666086">"安全啟動"</string>
@@ -4514,7 +4514,7 @@
     <string name="account_sync_summary_all_off" msgid="6378301874540507884">"已停用所有項目的同步處理功能"</string>
     <string name="enterprise_privacy_settings" msgid="786350385374794180">"受管理的裝置資訊"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"由貴機構所管理的變更內容和設定"</string>
-    <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"由 <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> 所管理的變更內容和設定"</string>
+    <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"由「<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>」管理的變更內容和設定"</string>
     <string name="enterprise_privacy_header" msgid="4626225398848641603">"為提供你的工作資料存取權，貴機構可能會在你的裝置上變更設定及安裝軟體。\n\n請與貴機構的管理員聯絡以瞭解詳情。"</string>
     <string name="enterprise_privacy_exposure_category" msgid="2507761423540037308">"貴機構可查看的資訊類型"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="5459989751333816587">"貴機構管理員進行的變更"</string>
@@ -4600,7 +4600,7 @@
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(已為使用者<xliff:g id="USER">%s</xliff:g>停用)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"自動填入服務"</string>
     <string name="autofill_keywords" msgid="6260653325195017912">"自動、填入、自動填入"</string>
-    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;請確定這是你信任的應用程式&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;應用程式會根據你的畫面內容判斷要自動填入的內容。"</string>
+    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;請確定這是你信任的應用程式&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; 會根據畫面上顯示的內容判斷要自動填入哪些資訊。"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"自動填入"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"記錄層級"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"每個工作階段的要求數上限"</string>
