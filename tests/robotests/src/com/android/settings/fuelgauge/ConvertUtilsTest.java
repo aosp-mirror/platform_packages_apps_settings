@@ -37,6 +37,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
@@ -164,5 +169,79 @@ public final class ConvertUtilsTest {
     public void testGetConsumeType_invalidConsumer_returnsInvalidType() {
           assertThat(ConvertUtils.getConsumerType(mockBatteryConsumer))
               .isEqualTo(ConvertUtils.CONSUMER_TYPE_UNKNOWN);
+    }
+
+    @Test
+    public void testGetIndexedUsageMap_returnsExpectedResult() {
+        // Creates the fake testing data.
+        final int timeSlotSize = 2;
+        final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L, 104L, 105L};
+        final Map<Long, List<BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        batteryHistoryMap.put(
+            Long.valueOf(batteryHistoryKeys[0]),
+            Arrays.asList(
+                createBatteryHistEntry(
+                    "package1", "label1", 5.0, 1L, 10L, 20L)));
+        batteryHistoryMap.put(
+            Long.valueOf(batteryHistoryKeys[1]), new ArrayList<BatteryHistEntry>());
+        batteryHistoryMap.put(
+            Long.valueOf(batteryHistoryKeys[2]),
+            Arrays.asList(
+                createBatteryHistEntry(
+                    "package2", "label2", 10.0, 2L, 15L, 25L)));
+        batteryHistoryMap.put(
+            Long.valueOf(batteryHistoryKeys[3]),
+            Arrays.asList(
+                createBatteryHistEntry(
+                    "package2", "label2", 15.0, 2L, 25L, 35L),
+                createBatteryHistEntry(
+                    "package3", "label3", 5.0, 2L, 5L, 5L)));
+        batteryHistoryMap.put(
+            Long.valueOf(batteryHistoryKeys[4]),
+            Arrays.asList(
+                createBatteryHistEntry(
+                    "package2", "label2", 30.0, 2L, 30L, 40L),
+                createBatteryHistEntry(
+                    "package2", "label2", 75.0, 3L, 40L, 50L),
+                createBatteryHistEntry(
+                    "package3", "label3", 5.0, 2L, 5L, 5L)));
+
+        final Map<Integer, List<BatteryDiffEntry>> resultMap =
+            ConvertUtils.getIndexedUsageMap(
+                timeSlotSize, batteryHistoryKeys, batteryHistoryMap);
+
+        assertThat(resultMap).hasSize(2);
+        // Verifies the first timestamp result.
+        List<BatteryDiffEntry> entryList = resultMap.get(Integer.valueOf(0));
+        assertThat(entryList).hasSize(1);
+        assertBatteryDiffEntry(entryList.get(0), 100.0, 15L, 25L);
+        // Verifies the second timestamp result.
+        entryList = resultMap.get(Integer.valueOf(1));
+        assertThat(entryList).hasSize(3);
+        assertBatteryDiffEntry(entryList.get(0), 5.0, 5L, 5L);
+        assertBatteryDiffEntry(entryList.get(1), 75.0, 40L, 50L);
+        assertBatteryDiffEntry(entryList.get(2), 20.0, 15L, 15L);
+    }
+
+    private static BatteryHistEntry createBatteryHistEntry(
+            String packageName, String appLabel, double consumePower,
+            long userId, long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
+        // Only insert required fields.
+        final ContentValues values = new ContentValues();
+        values.put("packageName", packageName);
+        values.put("appLabel", appLabel);
+        values.put("userId", userId);
+        values.put("consumePower", consumePower);
+        values.put("foregroundUsageTimeInMs", foregroundUsageTimeInMs);
+        values.put("backgroundUsageTimeInMs", backgroundUsageTimeInMs);
+        return new BatteryHistEntry(values);
+    }
+
+    private static void assertBatteryDiffEntry(
+            BatteryDiffEntry entry, double percentOfTotal,
+            long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
+        assertThat(entry.getPercentOfTotal()).isEqualTo(percentOfTotal);
+        assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
+        assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
     }
 }
