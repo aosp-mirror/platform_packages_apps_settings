@@ -285,7 +285,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Блокировать после отключения"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после отключения"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Сразу по истечении времени ожидания (если блокировка экрана не контролируется функцией <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>)"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после отключения (если не управляется функцией <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>)"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, если не управляется <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Показывать данные о владельце на экране блокировки"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Текст на заблокированном экране"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Включить виджеты"</string>
@@ -518,7 +518,7 @@
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Блокировка экрана"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5799070517574360310">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>, сразу после спящего режима"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4572132216801894216">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>, через <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> после спящего режима"</string>
-    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Блокировка раб. профиля"</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Блокировка рабочего профиля"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="4746783679112447948">"Изменение блок. экрана"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="6023813780512501969">"Смена или отключение графического ключа, PIN-кода и пароля"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"Выбрать метод блокировки экрана"</string>
@@ -558,8 +558,8 @@
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8160948976853039106">"Без графического ключа защита устройства работать не будет.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Сохраненные отпечатки пальцев будут удалены, поэтому вы больше не сможете снимать блокировку, совершать покупки и входить в приложения с их помощью."</string>
-    <string name="unlock_disable_frp_warning_content_pin" msgid="3732073290049930632">"Без PIN-кода не будет работать защита устройства."</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="2018020861756931097">"Без PIN-кода не будет работать защита устройства.<xliff:g id="EMPTY_LINE">
+    <string name="unlock_disable_frp_warning_content_pin" msgid="3732073290049930632">"Защита устройства не будет работать без PIN-кода."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="2018020861756931097">"Защита устройства не будет работать без PIN-кода.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Сохраненные отпечатки пальцев будут удалены, поэтому вы больше не сможете снимать блокировку, совершать покупки и входить в приложения с их помощью."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="2130004168084396797">"Без пароля не будет работать защита устройства."</string>
@@ -574,8 +574,8 @@
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile" msgid="313998125412427527">"Без графического ключа защита профиля работать не будет.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Сохраненные отпечатки пальцев будут удалены, поэтому вы больше не сможете снимать блокировку, совершать покупки и входить в приложения с их помощью."</string>
-    <string name="unlock_disable_frp_warning_content_pin_profile" msgid="6328378875803145738">"Без PIN-кода не будет работать защита профиля."</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_profile" msgid="6844729803535310058">"Без PIN-кода не будет работать защита профиля.<xliff:g id="EMPTY_LINE">
+    <string name="unlock_disable_frp_warning_content_pin_profile" msgid="6328378875803145738">"Защита профиля не будет работать без PIN-кода."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint_profile" msgid="6844729803535310058">"Защита профиля не будет работать без PIN-кода.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Сохраненные отпечатки пальцев будут удалены, поэтому вы больше не сможете снимать блокировку, совершать покупки и входить в приложения с их помощью."</string>
     <string name="unlock_disable_frp_warning_content_password_profile" msgid="6922335143823758149">"Без пароля защита профиля работать не будет."</string>
@@ -1870,7 +1870,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Показывать графический ключ"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Виброотклик"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Блокировать кнопкой питания"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Если экран не поддерживается в разблокированном состоянии функцией <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Если не управляется <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Установить ключ"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Изменить ключ"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Как начертить графический ключ разблокировки"</string>
@@ -1885,7 +1885,7 @@
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"Текущие настройки блокировки экрана не соответствуют правилам безопасности вашей организации. Вы можете установить для устройства и рабочего профиля один способ блокировки, главное, чтобы он отвечал требованиям организации."</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Использовать один способ блокировки"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Использовать один способ блокировки"</string>
-    <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Использовать способ блокировки, как на устройстве"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Тот же способ блокировки, что и для экрана устройства"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"Управление приложениями"</string>
     <string name="manageapplications_settings_summary" msgid="848586372489062357">"Управление установленными приложениями и их удаление"</string>
     <string name="applications_settings" msgid="1941993743933425622">"Сведения о приложении"</string>
@@ -2003,7 +2003,7 @@
     <string name="app_disable_notifications_dlg_title" msgid="6686569904059411780">"Отключить уведомления?"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Магазин"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Описание приложения"</string>
-    <string name="app_install_details_summary" msgid="2013043219249992373">"Откуда скачано приложение: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_summary" msgid="2013043219249992373">"Скачано из <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Подробнее (<xliff:g id="APP_STORE">%1$s</xliff:g>)"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Выполняется"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(не использовалось)"</string>
@@ -2519,9 +2519,9 @@
       <item quantity="many">Ограничить работу %1$d приложений?</item>
       <item quantity="other">Ограничить работу %1$d приложений?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Для экономии заряда батареи остановите работу приложения \"<xliff:g id="APP">%1$s</xliff:g>\" в фоновом режиме. Это может ограничить его функциональность и вызвать задержку уведомлений."</string>
-    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Для экономии заряда батареи остановите работу указанных приложений в фоновом режиме. Это может ограничить их функциональность и вызвать задержку уведомлений.\n\nПриложения:"</string>
-    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Для экономии заряда батареи остановите работу указанных приложений в фоновом режиме. Это может ограничить их функциональность и вызвать задержку уведомлений.\n\nПриложения:\n<xliff:g id="APP_LIST">%1$s</xliff:g>"</string>
+    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Чтобы экономить заряд батареи, отключите потребление энергии приложением \"<xliff:g id="APP">%1$s</xliff:g>\" в фоновом режиме. Приложения могут работать неправильно, а уведомления могут задерживаться."</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Чтобы экономить заряд батареи, отключите потребление энергии этими приложениями в фоновом режиме. Приложения могут работать неправильно, а уведомления могут задерживаться.\n\nПриложения:"</string>
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Чтобы экономить заряд батареи, отключите потребление энергии этими приложениями в фоновом режиме. Приложения могут работать неправильно, а уведомления могут задерживаться.\n\nПриложения:\n<xliff:g id="APP_LIST">%1$s</xliff:g>"</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"Ограничить"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="5501997201160532301">"Удалить ограничение?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Это приложение будет расходовать заряд батареи в фоновом режиме. Устройство разрядится быстрее, чем обычно."</string>
@@ -2791,7 +2791,7 @@
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Приложения администратора"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Нет доступных приложений администратора устройства"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Нет агентов доверия."</string>
-    <string name="add_device_admin_msg" msgid="7730006568970042119">"Приложение администратора устройства"</string>
+    <string name="add_device_admin_msg" msgid="7730006568970042119">"Активировать приложение администратора?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Активировать приложение администратора устройства"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Администратор устройства"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"После активации приложения администратора приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" сможет выполнять следующие операции:"</string>
@@ -2826,7 +2826,7 @@
     <string name="add_account_label" msgid="7134707140831385869">"Добавить аккаунт"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"Рабочий профиль пока не доступен"</string>
     <string name="work_mode_label" msgid="1001415270126064436">"Рабочий профиль"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"Управляется вашей организацией."</string>
+    <string name="work_mode_on_summary" msgid="2042885311126239961">"Управляется вашей организацией"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"Приложения и уведомления отключены."</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"Удалить рабочий профиль"</string>
     <string name="background_data" msgid="321903213000101158">"Фоновый режим"</string>
@@ -3117,7 +3117,7 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"Удалить пользователя"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Удалить"</string>
     <string name="user_guest" msgid="4545590092001460388">"Гость"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Удалить аккаунт гостя"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"Удалить гостя"</string>
     <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Удалить аккаунт гостя?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Все приложения и данные этого профиля будут удалены."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Удалить"</string>
@@ -3266,7 +3266,7 @@
       <item quantity="many">Показать %d скрытых объектов</item>
       <item quantity="other">Показать %d скрытых объекта</item>
     </plurals>
-    <string name="network_dashboard_title" msgid="788543070557731240">"Сеть и Интернет"</string>
+    <string name="network_dashboard_title" msgid="788543070557731240">"Сеть и интернет"</string>
     <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"моб. сети"</string>
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"передача данных"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"точка доступа"</string>
@@ -3616,7 +3616,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Уведомления с конфиденциальными данными из рабочего профиля"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Показывать конфиденциальные данные из рабочего профиля на заблокированном экране"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Показывать уведомления полностью"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Показывать конфиденц. данные только на разблок. экране"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Показывать конфиденциальные данные только после разблокировки"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Не показывать уведомления"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Настройте показ уведомлений на заблокированном экране."</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Заблокированный экран"</string>
@@ -3670,7 +3670,7 @@
     <string name="notification_alert_title" msgid="1632401211722199217">"По умолчанию"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Разрешить оповещения"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Включить звуковой сигнал, вибрацию, а также показывать уведомления поверх других приложений"</string>
-    <string name="notification_priority_title" msgid="5554834239080425229">"Приоритет"</string>
+    <string name="notification_priority_title" msgid="5554834239080425229">"Важный"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Появляется в верхней части списка разговоров и как всплывающий чат, фото профиля показывается на заблок. экране"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" не поддерживает большинство функций разговоров. Вы не можете отметить разговоры как важные, и они не будут появляться в виде всплывающих чатов."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Объединять уведомления в одну строку на панели уведомлений"</string>
@@ -3706,7 +3706,7 @@
     <string name="notification_assistant_title" msgid="6983941403582134437">"Адаптивные уведомления"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Нет"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Установленные приложения не запрашивали доступ к уведомлениям"</string>
-    <string name="notification_access_detail_switch" msgid="46386786409608330">"Разрешить доступ к уведомлениям"</string>
+    <string name="notification_access_detail_switch" msgid="46386786409608330">"Доступ к уведомлениям"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Предоставить приложению \"<xliff:g id="SERVICE">%1$s</xliff:g>\" доступ к уведомлениям?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"Приложение \"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>\" сможет читать все уведомления, в том числе содержащие личную информацию (такую, как имена контактов и сообщения). Кроме того, оно получит право закрывать уведомления и нажимать кнопки в них, например отвечать на звонки. \n\nПриложение сможет включать и отключать режим \"Не беспокоить\", а также менять его настройки."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Открыть приложению \"<xliff:g id="SERVICE">%1$s</xliff:g>\" доступ к уведомлениям?"</string>
@@ -3725,8 +3725,8 @@
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"Установленные приложения не поддерживают режим \"Картинка в картинке\""</string>
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"картинка в картинке"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Картинка в картинке"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Поддержка режима \"Картинка в картинке\""</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Когда приложение открыто или когда вы выходите из него, оно может создавать окно \"Картинка в картинке\". Так вы можете, например, продолжить просмотр видео. Это окно отображается поверх остальных приложений."</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Разрешить режим \"Картинка в картинке\""</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Приложение сможет создавать окно \"Картинка в картинке\" во время работы или при переходе в другое приложение (например, чтобы продолжить смотреть видео). Это окно будет показано поверх остальных приложений."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Подключение рабочих и личных приложений"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Связь установлена"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Связь не установлена"</string>
@@ -3769,7 +3769,7 @@
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> категорий</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> категории</item>
     </plurals>
-    <string name="no_channels" msgid="4716199078612071915">"Для этого приложения нет уведомлений."</string>
+    <string name="no_channels" msgid="4716199078612071915">"Это приложение не отправляло уведомлений."</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Доп. настройки в приложении"</string>
     <string name="notification_screen_summary" msgid="5984915275134654822">"История уведомлений, всплывающие чаты, недавно отправленные"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Включено для всех приложений"</string>
@@ -3997,10 +3997,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Введите PIN-код администратора"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Включено"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Отключено"</string>
-    <string name="screen_pinning_title" msgid="6927227272780208966">"Закрепление приложения"</string>
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Закрепление приложений"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Эта функция позволяет закрепить окно определенного приложения на экране. Ее можно использовать, например, если вы хотите дать другу поиграть в игру на вашем устройстве.\n\nЗакрепленное приложение может открывать другие приложения и получать доступ к персональным данным.\n\nЧтобы использовать эту функцию, выполните следующие действия: 	\n1.	Включите функцию в настройках. 	\n2.	Нажмите \"Обзор\". 	\n3.	Нажмите на значок приложения вверху экрана и выберите \"Закрепить\"."</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Эта функция позволяет закрепить окно определенного приложения на экране. Ее можно использовать, например, если вы хотите дать другу поиграть в игру на вашем устройстве.\n\nЗакрепленное приложение может открывать другие приложения и получать доступ к персональным данным.\n\nПоэтому, если вы хотите дать устройство другому человеку и не беспокоиться о безопасности данных, рекомендуем включить гостевой режим. \n\nЧтобы закрепить приложение: 	\n1.	Включите функцию в настройках. 	\n2.	Нажмите \"Обзор\". 	\n3.	Нажмите на значок приложения вверху экрана и выберите \"Закрепить\"."</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Закрепленное приложение может:\n\n• получать доступ к персональным данным (например, контактам и содержимому писем);\n• открывать другие приложения.\n\n\nИспользуйте эту функцию, только с теми людьми, которым вы доверяете."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Закрепленное приложение может:\n\n• получать доступ к персональным данным (например, контактам и содержимому писем);\n• открывать другие приложения.\n\n\nИспользуйте эту функцию, только если вы доверяете тому, кому передаете устройство."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Запрашивать графический ключ"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Запрашивать PIN-код"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запрашивать пароль"</string>
@@ -4143,10 +4143,10 @@
     <string name="system_default_app" msgid="2647834628622214931">"(по умолчанию)"</string>
     <string name="apps_storage" msgid="643866814746927111">"Хранилище приложений"</string>
     <string name="usage_access" msgid="5487993885373893282">"Доступ к данным об использовании"</string>
-    <string name="permit_usage_access" msgid="179630895262172674">"Доступ к истории использования"</string>
+    <string name="permit_usage_access" msgid="179630895262172674">"Разрешить доступ"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"Настройки использования приложения"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Время использования"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"Доступ к истории использования позволяет отслеживать, какие приложения вы используете и как часто, а также определять оператора сети, язык и другие параметры."</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"Приложение сможет отслеживать, какие ещё приложения вы используете и как часто, а также определять оператора сети, язык и другие параметры."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Память"</string>
     <string name="memory_details_title" msgid="3048107441540417799">"Подробности"</string>
     <string name="always_running" msgid="9012705720688200252">"Постоянно (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4232,7 +4232,7 @@
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Разрешить приложению-помощнику доступ к изображению на экране"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Подсвечивать экран"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"Подсвечивать края экрана, когда приложение-помощник получает доступ к тексту или скриншоту"</string>
-    <string name="assist_footer" msgid="8248015363806299068">"Приложения-помощники работают с информацией на экране. Для большего удобства некоторые из них поддерживают панель запуска и голосовой ввод."</string>
+    <string name="assist_footer" msgid="8248015363806299068">"Приложения-помощники могут использовать информацию на экране. Для большего удобства некоторые из них поддерживают запуск других приложений и голосовой ввод."</string>
     <string name="average_memory_use" msgid="717313706368825388">"Средний объем исп. памяти"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"Макс. объем исп. памяти"</string>
     <string name="memory_usage" msgid="5594133403819880617">"Используемая память"</string>
@@ -4277,7 +4277,7 @@
     <string name="allow_overlay_description" msgid="1607235723669496298">"Элементы интерфейса будут показываться поверх других окон. Это приложение сможет получать данные о ваших нажатиях, а также менять то, что показано на экране."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Доступ ко всем файлам"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешить доступ к управлению всеми файлами"</string>
-    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Разрешает приложению просматривать, изменять и удалять все файлы на этом устройстве и на подключенных устройствах внешней памяти. Если вы предоставите это разрешение, приложение сможет получать доступ к файлам без вашего ведома."</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Приложение сможет читать, изменять и удалять все файлы на этом устройстве и любых подключенных носителях. Доступ к файлам будет осуществляться без вашего ведома."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Приложения, имеющие доступ ко всем файлам"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr виртуальная реальность режим вспомогательный сервис"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Поверх других приложений"</string>
@@ -4472,7 +4472,7 @@
     <string name="launch_mdp_app_text" msgid="8791816789749304897">"Посмотреть тарифный план"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Подробнее"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Экономия трафика"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Неограниченный мобильный Интернет"</string>
+    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Неограниченный мобильный интернет"</string>
     <string name="restrict_background_blacklisted" msgid="7953049316098373715">"Фоновый режим выключен"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Включено"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Отключено"</string>
@@ -4672,11 +4672,11 @@
     <string name="auto_sync_account_summary" msgid="7580352130028957346">"Обновлять данные приложений автоматически"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"Синхронизация аккаунта"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Синхронизация включена для некоторых элементов (<xliff:g id="ID_1">%1$d</xliff:g> из <xliff:g id="ID_2">%2$d</xliff:g>)"</string>
-    <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Включена синхронизация всех компонентов"</string>
+    <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Включена синхронизация всех элементов"</string>
     <string name="account_sync_summary_all_off" msgid="6378301874540507884">"Синхронизация отключена для всех элементов"</string>
     <string name="enterprise_privacy_settings" msgid="786350385374794180">"Информация об управляемом устройстве"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Изменения и настройки, управляемые организацией"</string>
-    <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Изменения и настройки, управляемые организацией \"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>\""</string>
+    <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Настройки, доступные организации \"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>\", и внесенные ею изменения"</string>
     <string name="enterprise_privacy_header" msgid="4626225398848641603">"Чтобы предоставить доступ к рабочим данным, ваша организация может менять настройки и устанавливать ПО на устройство.\n\nЗа дополнительной информацией обращайтесь к администратору."</string>
     <string name="enterprise_privacy_exposure_category" msgid="2507761423540037308">"Какие данные доступны вашей организации"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="5459989751333816587">"Изменения, внесенные администратором организации"</string>
@@ -4932,7 +4932,7 @@
     <string name="carrier_settings_title" msgid="6959295328730560529">"Настройки оператора"</string>
     <string name="cdma_lte_data_service" msgid="6937443423651347345">"Настройка передачи данных"</string>
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Мобильный Интернет"</string>
-    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Доступ к Интернету по мобильной сети"</string>
+    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Доступ к интернету по мобильной сети"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Телефон автоматически подключится к сети этого оператора, когда вы окажетесь в зоне ее действия."</string>
     <string name="calls_preference" msgid="2166481296066890129">"Настройки звонков"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Настройки SMS"</string>

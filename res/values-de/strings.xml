@@ -281,7 +281,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Sperren nach autom. Ausschalten des Displays"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Ablauf des Zeitlimits"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Unmittelbar nach Ablauf des Zeitlimits, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Ablauf des Zeitlimits, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Infos zum Eigentümer auf Sperrbildschirm anzeigen"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Sperrbildschirm Text hinzufügen"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Widgets aktivieren"</string>
@@ -445,7 +445,7 @@
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Weiter"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Du kannst deinen Fingerabdruck nicht nur dazu verwenden, dein Smartphone zu entsperren, sondern mit ihm auch Käufe autorisieren und dich in Apps anmelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die Option für die Displaysperre ist deaktiviert. Wende dich an den Administrator deiner Organisation, um weitere Informationen zu erhalten. "<annotation id="admin_details">"Weitere Details"</annotation>\n\n"Du kannst deinen Fingerabdruck dennoch verwenden, um Käufe zu autorisieren und dich in Apps anzumelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und tippe dann erneut auf den Sensor"</string>
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und berühre den Sensor dann noch einmal"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Es können keine Fingerabdrücke mehr hinzugefügt werden"</string>
@@ -669,7 +669,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aktive App</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Trust Agents"</string>
-    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Lege zuerst eine Displaysperre fest, damit du die Option verwenden kannst."</string>
+    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Lege zuerst eine Displaysperre fest, damit du die Option verwenden kannst"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Keine"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aktive Trust Agents</item>
@@ -865,7 +865,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID eingeben"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Sicherheit"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Verborgenes Netzwerk"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Wenn dein Router keine Netzwerk-ID sendet, du aber in Zukunft eine Verbindung herstellen möchtest, dann lege ein verborgenes Netzwerk fest.\n\nDies stellt unter Umständen ein Sicherheitsrisiko dar, weil dein Smartphone regelmäßig ein Signal sendet, um das Netzwerk zu finden.\n\nDeine Routereinstellungen ändern sich durch das verborgene Netzwerk nicht."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Wenn dein Router keine Netzwerk-ID sendet, du aber in Zukunft eine Verbindung herstellen möchtest, dann lege das Netzwerk als verborgen fest.\n\nDies stellt unter Umständen ein Sicherheitsrisiko dar, weil dein Smartphone regelmäßig ein Signal sendet, um das Netzwerk zu finden.\n\nDeine Routereinstellungen ändern sich nicht, wenn du das Netzwerk als verborgen festlegst."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Signalstärke"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Übertragungsgeschwindigkeit"</string>
@@ -899,7 +899,7 @@
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Abo ansehen oder ändern"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Zufällig festgelegte MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Gerät hinzufügen"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Wenn du das Gerät zu \"<xliff:g id="SSID">%1$s</xliff:g>\" hinzufügen möchtest, scanne den QR-Code unten"</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Wenn du das Gerät zu „<xliff:g id="SSID">%1$s</xliff:g>“ hinzufügen möchtest, scanne den QR-Code unten"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"QR-Code scannen"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Wenn du eine Verbindung zu \"<xliff:g id="SSID">%1$s</xliff:g>\" herstellen möchtest, scanne den QR-Code unten"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Scanne den QR-Code, um dein Gerät mit dem WLAN zu verbinden"</string>
@@ -1954,7 +1954,7 @@
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"App deaktivieren"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Bei Deaktivierung dieser App funktionieren Android und andere Apps möglicherweise nicht mehr ordnungsgemäß. Beachte hierbei, dass du diese App nicht löschen kannst, weil sie auf deinem Gerät vorinstalliert war. Durch die Deaktivierung schaltest du diese App ab und blendest sie auf deinem Gerät aus."</string>
     <string name="app_disable_notifications_dlg_title" msgid="6686569904059411780">"Benachrichtigungen deaktivieren?"</string>
-    <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
+    <string name="app_install_details_group_title" msgid="1172114479073704677">"App-Shop"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"App-Details"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App installiert vom <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Weitere Informationen im <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2585,7 +2585,7 @@
     <string name="battery_saver" msgid="7737147344510595864">"Energiesparmodus"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Automatisch aktivieren"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Keine Aktivierung nach Zeitplan"</string>
-    <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Anhand meiner üblichen Abläufe"</string>
+    <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Gemäß meiner Gewohnheiten"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Anhand des Ladestands"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Der Energiesparmodus wird automatisch aktiviert, wenn der Akku wahrscheinlich nicht bis zum nächsten Aufladen hält (ermittelt anhand deines üblichen Aufladezeitpunkts)."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Wird bei <xliff:g id="PERCENT">%1$s</xliff:g> aktiviert"</string>
@@ -2719,9 +2719,9 @@
     <string name="add_device_admin_msg" msgid="7730006568970042119">"App zur Geräteverwaltung aktivieren?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Diese App zur Geräteverwaltung aktivieren"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Geräteadministrator"</string>
-    <string name="device_admin_warning" msgid="1889160106787280321">"Wenn diese App zur Geräteverwaltung aktiviert ist, kann die App \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" Folgendes tun:"</string>
+    <string name="device_admin_warning" msgid="1889160106787280321">"Wenn diese App zur Geräteverwaltung aktiviert ist, kann die App „<xliff:g id="APP_NAME">%1$s</xliff:g>“ Folgendes tun:"</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Dieses Gerät wird von <xliff:g id="APP_NAME">%1$s</xliff:g> verwaltet und überwacht."</string>
-    <string name="device_admin_status" msgid="6332571781623084064">"Diese App zur Geräteverwaltung ist aktiv, sodass die App \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" Folgendes tun kann:"</string>
+    <string name="device_admin_status" msgid="6332571781623084064">"Diese App zur Geräteverwaltung ist aktiv, sodass die App „<xliff:g id="APP_NAME">%1$s</xliff:g>“ Folgendes tun kann:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Profilverwaltung aktivieren?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"Elternaufsicht zulassen?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"Der Nutzer wird vom gewählten Administrator verwaltet, wenn fortgefahren wird. Dieser kann dann möglicherweise zusätzlich zu den personenbezogenen Daten auch damit verbundene Daten speichern.\n\nDer Administrator kann die mit diesem Nutzer verbundenen Einstellungen, Zugriffsrechte, Apps und Daten überwachen und verwalten, einschließlich der Netzwerkaktivitäten und der Standortinformationen des Geräts."</string>
@@ -3533,7 +3533,7 @@
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Profilbenachrichtigungen"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Benachrichtigungen"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"App-Benachrichtigung"</string>
-    <string name="notification_channel_title" msgid="8859880871692797611">"Benachrichtigungskategorie"</string>
+    <string name="notification_channel_title" msgid="8859880871692797611">"Benachrichtigungs­kategorie"</string>
     <string name="notification_group_title" msgid="7525666535695631538">"Kategoriegruppe für Benachrichtigungen"</string>
     <string name="notification_importance_title" msgid="1545158655988342703">"Verhalten"</string>
     <string name="notification_importance_unspecified" msgid="1543165530748339700">"Akustisches Signal erlauben"</string>
@@ -3576,7 +3576,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Unterbrechungen zulassen"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Die App darf Töne sowie Vibrationen erzeugen und/oder Pop-up-Benachrichtigungen auf dem Bildschirm einblenden"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorität"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Wird oben im Bereich \"Unterhaltungen\" als unverankerte Bubble mit einem Profilbild auf dem Sperrbildschirm angezeigt"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Wird oben im Bereich „Unterhaltungen“ als unverankerte Bubble angezeigt und erscheint mit einem Profilbild auf dem Sperrbildschirm"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> unterstützt die meisten Funktionen für Unterhaltungen nicht. Du kannst keine Unterhaltung als Priorität festlegen und Unterhaltungen erscheinen nicht als unverankerte Bubbles."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Benachrichtigungen in der Benachrichtigungsleiste werden auf eine Zeile minimiert"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Kein Ton und keine Vibration"</string>
@@ -3584,7 +3584,7 @@
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Kann klingeln oder vibrieren, abhängig von den Telefoneinstellungen"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Bei entsperrtem Gerät Benachrichtigungen als Banner oben auf dem Bildschirm anzeigen"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Alle Benachrichtigungen von \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle <xliff:g id="APP_NAME">%1$s</xliff:g>-Benachrichtigungen"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle Benachrichtigungen von <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Adaptive Benachrichtigungen"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">Ungefähr <xliff:g id="NUMBER_1">%d</xliff:g> Benachrichtigungen pro Tag</item>
@@ -3610,7 +3610,7 @@
     <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> kann alle Benachrichtigungen lesen, darunter auch personenbezogene Daten wie Kontaktnamen und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen schließen oder Schaltflächen in Benachrichtigungen verwenden und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird die App in die Lage versetzt, die \"Bitte nicht stören\"-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Benachrichtigungszugriff für <xliff:g id="SERVICE">%1$s</xliff:g> zulassen?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kann alle Benachrichtigungen lesen, darunter auch personenbezogene Daten wie Kontaktnamen und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen schließen oder Schaltflächen in Benachrichtigungen verwenden und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird die App in die Lage versetzt, die \"Bitte nicht stören\"-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der \"Bitte nicht stören\"-Zugriff deaktiviert."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der „Bitte nicht stören“-Zugriff deaktiviert."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Deaktivieren"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Abbrechen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
@@ -3651,9 +3651,9 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Wenn du diese Apps verknüpfen möchtest, installiere die App \"<xliff:g id="NAME">%1$s</xliff:g>\" in deinem Arbeitsprofil"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Wenn du diese Apps verknüpfen möchtest, installiere die App \"<xliff:g id="NAME">%1$s</xliff:g>\" in deinem privaten Profil"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Zum Herunterladen der App tippen"</string>
-    <string name="manage_zen_access_title" msgid="1562322900340107269">"Zugriff während \"Bitte nicht stören\""</string>
-    <string name="zen_access_detail_switch" msgid="4183681772666138993">"\"Bitte nicht stören\" zulassen"</string>
-    <string name="zen_access_empty_text" msgid="3779921853282293080">"Keine installierte App hat während \"Bitte nicht stören\" Zugriff angefordert."</string>
+    <string name="manage_zen_access_title" msgid="1562322900340107269">"Zugriff während „Bitte nicht stören“"</string>
+    <string name="zen_access_detail_switch" msgid="4183681772666138993">"„Bitte nicht stören“ zulassen"</string>
+    <string name="zen_access_empty_text" msgid="3779921853282293080">"Keine installierte App hat während „Bitte nicht stören“ Zugriff angefordert."</string>
     <string name="loading_notification_apps" msgid="1458413761470945269">"Apps werden geladen..."</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Gemäß deinen Einstellungen unterbindet Android die Anzeige von Benachrichtigungen dieser App auf diesem Gerät."</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Gemäß deinen Einstellungen unterbindet Android die Anzeige von Benachrichtigungen dieser Kategorie auf diesem Gerät."</string>
@@ -3877,7 +3877,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Bildschirmfixierung"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Mit der Option \"Bildschirmfixierung\" kannst du festlegen, dass auf deinem Gerät vorübergehend nur eine App ausgeführt und angezeigt wird. Auf diese Weise kannst du z. B. jemanden ein Spiel auf deinem Gerät spielen lassen, ohne dass die Person sonstigen Zugriff aufs Gerät hat. \n\nDie App, die während der Bildschirmfixierung angezeigt wird, kann unter Umständen andere Apps öffnen, wodurch personenbezogene Daten zugänglich gemacht werden können. \n\nSo verwendest du die Funktion: 	\n1.	Aktiviere \"Bildschirmfixierung\"  \n2.	Tippe auf \"Übersicht\" 	\n3.	Tippe auf das App-Symbol oben auf dem Bildschirm und dann auf \"Anpinnen\""</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Mit der Option \"Bildschirmfixierung\" kannst du festlegen, dass auf deinem Gerät vorübergehend nur eine App ausgeführt und angezeigt wird. Auf diese Weise kannst du z. B. jemanden ein Spiel auf deinem Gerät spielen lassen, ohne dass die Person sonstigen Zugriff aufs Gerät hat. \n\nDie App, die während der Bildschirmfixierung angezeigt wird, kann unter Umständen andere Apps öffnen, wodurch personenbezogene Daten zugänglich gemacht werden können. \n\nWenn du dein Gerät sicher mit jemandem teilen möchtest, kannst du stattdessen ein Gastprofil verwenden. \n\nSo verwendest du die Funktion: 	\n1.	Aktiviere \"Bildschirmfixierung\" 	\n2.	Tippe auf \"Übersicht\" 	\n3.	Tippe auf das App-Symbol oben auf dem Bildschirm und dann auf \"Anpinnen\""</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Wenn eine App auf dem Bildschirm fixiert ist, gilt Folgendes: \n\n•	 Zugriff auf personenbezogene Daten ist möglich \n	z. B. auf Kontakte oder E-Mails) \n• Eine fixierte App kann andere Apps öffnen \n\nVerwende die Funktion \"Bildschirmfixierung\" nur dann, wenn du deinem Gegenüber vertraust."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Wenn eine App auf dem Bildschirm fixiert ist, gilt Folgendes: \n\n•	 Zugriff auf personenbezogene Daten ist möglich (z. B. auf Kontakte oder E-Mails) \n• Eine fixierte App kann andere Apps öffnen \n\nVerwende die Funktion „Bildschirmfixierung“ nur dann, wenn du deinem Gegenüber vertraust.\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Zum Loslösen nach Entsperrungsmuster fragen"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Vor Beenden nach PIN fragen"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Vor dem Beenden nach Passwort fragen"</string>
@@ -4115,10 +4115,10 @@
     <string name="running_frequency" msgid="7260225121706316639">"Häufigkeit"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximaler Verbrauch"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Keine Daten genutzt"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Zugriff auf \"Bitte nicht stören\" für <xliff:g id="APP">%1$s</xliff:g> zulassen?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Zugriff auf „Bitte nicht stören“ für <xliff:g id="APP">%1$s</xliff:g> zulassen?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Die App kann \"Bitte nicht stören\" aktivieren/deaktivieren und Änderungen an verwandten Einstellungen vornehmen."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Muss aktiviert bleiben, weil der Benachrichtigungszugriff aktiviert ist"</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Zugriff auf \"Bitte nicht stören\" für <xliff:g id="APP">%1$s</xliff:g> aufheben?"</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Zugriff auf „Bitte nicht stören“ für <xliff:g id="APP">%1$s</xliff:g> aufheben?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle von dieser App erstellten \"Bitte nicht stören\"-Regeln werden entfernt."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Nicht optimieren"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimieren"</string>
@@ -4142,8 +4142,8 @@
     <string name="overlay_settings" msgid="2030836934139139469">"Über anderen Apps einblenden"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> von <xliff:g id="COUNT_1">%2$d</xliff:g> Apps dürfen über anderen eingeblendet werden"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Apps mit Berechtigung"</string>
-    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Zugriff zugelassen"</string>
-    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Nicht zulässig"</string>
+    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Zugelassen"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Nicht zugelassen"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"apps installieren aus unbekannten quellen"</string>
     <string name="write_settings" msgid="6864794401614425894">"Systemeinstellungen ändern"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"systemeinstellungen schreiben ändern"</string>
@@ -4458,7 +4458,7 @@
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Nutze die Schaltflächen unten auf deinem Bildschirm, um zurückzugehen, den Startbildschirm aufzurufen und zwischen Apps zu wechseln."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"Systemsteuerung, Bedienung über 2 Schaltflächen, Bedienung über 3 Schaltflächen, Gestensteuerung, Bedienung über Gesten, wischen"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Wird von deiner Standard-Start-App, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>, nicht unterstützt"</string>
-    <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Standard-Home-App wechseln"</string>
+    <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Standardmäßige Start-App wechseln"</string>
     <string name="information_label" msgid="6939310810756569298">"Information"</string>
     <string name="low_label" msgid="6525629096999711220">"Niedrig"</string>
     <string name="high_label" msgid="357503396626018487">"Hoch"</string>
@@ -4663,7 +4663,7 @@
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Gerätename"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"WLAN-Steuerung"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"App darf WLAN steuern"</string>
-    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Erlaubt der App das WLAN zu aktivieren oder zu deaktivieren, nach WLANs zu scannen und eine Verbindung zu ihnen herstellen, Netzwerke hinzuzufügen oder zu entfernen oder einen lokal beschränkten Hotspot zu starten"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Erlaubt der App, das WLAN zu aktivieren oder zu deaktivieren, nach WLANs zu scannen und eine Verbindung zu ihnen herstellen, Netzwerke hinzuzufügen oder zu entfernen oder einen lokal beschränkten Hotspot zu starten"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Medien hier abspielen:"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> abspielen auf"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Dieses Gerät"</string>
@@ -4790,7 +4790,7 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"SIM-Karte entfernen, um sie zu deaktivieren"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Zum Aktivieren von <xliff:g id="CARRIER">%1$s</xliff:g> tippen"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Zu <xliff:g id="CARRIER">%1$s</xliff:g> wechseln?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Es kann immer nur eine heruntergeladene SIM aktiv sein.\n\nDurch Umschalten zu <xliff:g id="CARRIER1">%1$s</xliff:g> wird dein <xliff:g id="CARRIER2">%2$s</xliff:g>-Dienst nicht beendet."</string>
+    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Es kann immer nur eine heruntergeladene SIM aktiv sein.\n\nWenn du zu <xliff:g id="CARRIER1">%1$s</xliff:g> wechselst, wird dein Mobilfunkvertrag bei <xliff:g id="CARRIER2">%2$s</xliff:g> dadurch nicht gekündigt."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Zu <xliff:g id="CARRIER">%1$s</xliff:g> wechseln"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM löschen"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM kann nicht gelöscht werden"</string>
