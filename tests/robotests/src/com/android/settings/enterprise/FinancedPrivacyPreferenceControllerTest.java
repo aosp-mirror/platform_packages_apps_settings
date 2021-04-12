@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,20 +34,20 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-public class EnterprisePrivacyPreferenceControllerTest {
+public class FinancedPrivacyPreferenceControllerTest {
 
-    private static final String KEY_ENTERPRISE_PRIVACY = "enterprise_privacy";
+    private static final String PREF_KEY_FINANCED_PRIVACY = "financed_privacy";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private PrivacyPreferenceControllerHelper mPrivacyPreferenceControllerHelper;
-    private EnterprisePrivacyPreferenceController mController;
+    private FinancedPrivacyPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new EnterprisePrivacyPreferenceController(
+        mController = new FinancedPrivacyPreferenceController(
                 mContext, mPrivacyPreferenceControllerHelper);
     }
 
@@ -61,26 +61,17 @@ public class EnterprisePrivacyPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_noDeviceOwner_returnsFalse() {
-        when(mPrivacyPreferenceControllerHelper.hasDeviceOwner()).thenReturn(false);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void testIsAvailable_deviceOwner_financedDevice_returnsFalse() {
-        when(mPrivacyPreferenceControllerHelper.hasDeviceOwner()).thenReturn(true);
+    public void testIsAvailable_financedDevice_returnsTrue() {
         when(mPrivacyPreferenceControllerHelper.isFinancedDevice()).thenReturn(true);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void testIsAvailable_deviceOwner_enterpriseDevice_returnsTrue() {
-        when(mPrivacyPreferenceControllerHelper.hasDeviceOwner()).thenReturn(true);
+    public void testIsAvailable_enterpriseDevice_returnsFalse() {
         when(mPrivacyPreferenceControllerHelper.isFinancedDevice()).thenReturn(false);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -91,6 +82,6 @@ public class EnterprisePrivacyPreferenceControllerTest {
 
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo(KEY_ENTERPRISE_PRIVACY);
+        assertThat(mController.getPreferenceKey()).isEqualTo(PREF_KEY_FINANCED_PRIVACY);
     }
 }
