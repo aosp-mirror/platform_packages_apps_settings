@@ -32,6 +32,7 @@ import android.app.settings.SettingsEnums;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -111,6 +112,41 @@ public class WifiNetworkDetailsFragment2Test {
     }
 
     @Test
+    public void onCreateOptionsMenu_uiRestricted_shouldNotAddEditMenu() {
+        mFragment.mIsUiRestricted = true;
+
+        mFragment.onCreateOptionsMenu(mMenu, mock(MenuInflater.class));
+
+        verify(mMenu, never()).add(anyInt(), anyInt(), anyInt(), eq(R.string.wifi_modify));
+    }
+
+    @Test
+    public void restrictUi_shouldShowRestrictedText() {
+        final FakeFragment fragment = spy(new FakeFragment());
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        final TextView restrictedText = mock(TextView.class);
+        doReturn(screen).when(fragment).getPreferenceScreen();
+        doReturn(false).when(fragment).isUiRestrictedByOnlyAdmin();
+        doReturn(restrictedText).when(fragment).getEmptyTextView();
+
+        fragment.restrictUi();
+
+        verify(restrictedText).setText(anyInt());
+    }
+
+    @Test
+    public void restrictUi_shouldRemoveAllPreferences() {
+        final FakeFragment fragment = spy(new FakeFragment());
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        doReturn(screen).when(fragment).getPreferenceScreen();
+        doReturn(true).when(fragment).isUiRestrictedByOnlyAdmin();
+
+        fragment.restrictUi();
+
+        verify(screen).removeAll();
+    }
+
+    @Test
     public void refreshPreferences_controllerShouldUpdateStateAndDisplayPreference() {
         final FakeFragment fragment = spy(new FakeFragment());
         final PreferenceScreen screen = mock(PreferenceScreen.class);
@@ -135,6 +171,11 @@ public class WifiNetworkDetailsFragment2Test {
         @Override
         public void addPreferenceController(AbstractPreferenceController controller) {
             super.addPreferenceController(controller);
+        }
+
+        @Override
+        public boolean isUiRestrictedByOnlyAdmin() {
+            return super.isUiRestrictedByOnlyAdmin();
         }
     }
 
