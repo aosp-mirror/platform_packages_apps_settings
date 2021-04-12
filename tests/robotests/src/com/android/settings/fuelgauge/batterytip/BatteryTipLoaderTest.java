@@ -50,10 +50,10 @@ import java.util.List;
 public class BatteryTipLoaderTest {
 
     private static final int[] TIP_ORDER = {
-            BatteryTip.TipType.BATTERY_DEFENDER,
             BatteryTip.TipType.BATTERY_SAVER,
-            BatteryTip.TipType.HIGH_DEVICE_USAGE,
             BatteryTip.TipType.LOW_BATTERY,
+            BatteryTip.TipType.BATTERY_DEFENDER,
+            BatteryTip.TipType.HIGH_DEVICE_USAGE,
             BatteryTip.TipType.SMART_BATTERY_MANAGER};
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryUsageStats mBatteryUsageStats;
