@@ -294,13 +294,4 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             screen.setInitialExpandedChildrenCount(getInitialExpandedChildCount());
         }
     }
-
-    @Override
-    public int getInitialExpandedChildCount() {
-        if (mSecurityPreferenceController != null && mSecurityPreferenceController.getSecurityType()
-                == SoftApConfiguration.SECURITY_TYPE_OPEN) {
-            return (EXPANDED_CHILD_COUNT_DEFAULT - 1);
-        }
-        return EXPANDED_CHILD_COUNT_DEFAULT;
-    }
 }
