@@ -16,17 +16,25 @@
 
 package com.android.settings.notification;
 
-import static junit.framework.TestCase.assertEquals;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.os.Debug;
+import android.provider.Settings;
 
-import com.android.settingslib.widget.CandidateInfo;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +43,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class NotificationAssistantPreferenceControllerTest {
@@ -44,57 +51,86 @@ public class NotificationAssistantPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
+    private ConfigureNotificationSettings mFragment;
+    @Mock
+    private FragmentManager mFragmentManager;
+    @Mock
+    private FragmentTransaction mFragmentTransaction;
+    @Mock
     private NotificationBackend mBackend;
     private NotificationAssistantPreferenceController mPreferenceController;
+    ComponentName mNASComponent = new ComponentName("a", "b");
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mPreferenceController = new TestPreferenceController(mContext, mBackend);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        doReturn(mContext).when(mFragment).getContext();
+        when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
+        when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
+        when(mBackend.getDefaultNotificationAssistant()).thenReturn(mNASComponent);
+        mPreferenceController = new NotificationAssistantPreferenceController(mContext,
+                mBackend, mFragment, KEY);
     }
 
     @Test
-    public void testGetSummary_noAssistant() {
+    public void testIsChecked() throws Exception {
+        when(mBackend.getAllowedNotificationAssistant()).thenReturn(mNASComponent);
+        assertTrue(mPreferenceController.isChecked());
+
         when(mBackend.getAllowedNotificationAssistant()).thenReturn(null);
-        CharSequence noneLabel = new NotificationAssistantPicker.CandidateNone(mContext)
-                .loadLabel();
-        assertEquals(noneLabel, mPreferenceController.getSummary());
+        assertFalse(mPreferenceController.isChecked());
     }
 
     @Test
-    public void testGetSummary_TestAssistant() {
-        String testName = "test_pkg/test_cls";
-        when(mBackend.getAllowedNotificationAssistant()).thenReturn(
-                ComponentName.unflattenFromString(testName));
-        assertEquals(testName, mPreferenceController.getSummary());
+    public void testSetChecked() throws Exception {
+        // Verify a dialog is shown when the switch is to be enabled.
+        assertFalse(mPreferenceController.setChecked(true));
+        verify(mFragmentTransaction).add(
+                any(NotificationAssistantDialogFragment.class), anyString());
+        verify(mBackend, times(0)).setNotificationAssistantGranted(any());
+
+        // Verify no dialog is shown and NAS set to null when disabled
+        assertTrue(mPreferenceController.setChecked(false));
+        verify(mBackend, times(1)).setNotificationAssistantGranted(null);
     }
 
-    private final class TestPreferenceController extends NotificationAssistantPreferenceController {
+    @Test
+    public void testMigrationFromSetting_userEnable() throws Exception {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 0);
 
-        private TestPreferenceController(Context context, NotificationBackend backend) {
-            super(context, KEY);
-            mNotificationBackend = backend;
-        }
+        //Test user enable for the first time
+        mPreferenceController.setNotificationAssistantGranted(mNASComponent);
+        assertEquals(1, Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 0));
+        verify(mBackend, times(1))
+                .resetDefaultNotificationAssistant(eq(true));
 
-        @Override
-        public String getPreferenceKey() {
-            return KEY;
-        }
+        //Test user enable again, migration should not happen
+        mPreferenceController.setNotificationAssistantGranted(mNASComponent);
+        //Number of invocations should not increase
+        verify(mBackend, times(1))
+                .resetDefaultNotificationAssistant(eq(true));
+    }
 
-        @Override
-        protected CandidateInfo createCandidateInfo(ComponentName cn) {
-            return new CandidateInfo(true) {
-                @Override
-                public CharSequence loadLabel() { return cn.flattenToString(); }
+    @Test
+    public void testMigrationFromSetting_userDisable() throws Exception {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 0);
 
-                @Override
-                public Drawable loadIcon() { return null; }
+        //Test user disable for the first time
+        mPreferenceController.setChecked(false);
+        assertEquals(1, Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 0));
+        verify(mBackend, times(1))
+                .resetDefaultNotificationAssistant(eq(false));
 
-                @Override
-                public String getKey() { return null; }
-            };
-        }
+        //Test user disable again, migration should not happen
+        mPreferenceController.setChecked(false);
+        //Number of invocations should not increase
+        verify(mBackend, times(1))
+                .resetDefaultNotificationAssistant(eq(false));
     }
 
 }
