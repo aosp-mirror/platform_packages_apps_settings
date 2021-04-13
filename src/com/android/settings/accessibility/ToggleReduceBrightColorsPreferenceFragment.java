@@ -20,6 +20,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
@@ -61,7 +62,10 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        // TODO(b/170973645): Add banner
+        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(getPrefContext().getPackageName())
+                .appendPath(String.valueOf(R.drawable.extra_dim_banner))
+                .build();
         mComponentName = AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
         mPackageName = getText(R.string.reduce_bright_colors_preference_title);
         mHtmlDescription = getText(R.string.reduce_bright_colors_preference_subtitle);
