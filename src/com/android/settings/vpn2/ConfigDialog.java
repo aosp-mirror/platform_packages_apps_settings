@@ -153,7 +153,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mL2tpSecret.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
         mIpsecIdentifier.setText(mProfile.ipsecIdentifier);
         mIpsecSecret.setText(mProfile.ipsecSecret);
-        AndroidKeystoreAliasLoader androidKeystoreAliasLoader =
+        final AndroidKeystoreAliasLoader androidKeystoreAliasLoader =
                 new AndroidKeystoreAliasLoader(null);
         loadCertificates(mIpsecUserCert, androidKeystoreAliasLoader.getKeyCertAliases(), 0,
                 mProfile.ipsecUserCert);
