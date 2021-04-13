@@ -97,7 +97,7 @@ public class DeviceAdminAdd extends Activity {
     DevicePolicyManager mDPM;
     AppOpsManager mAppOps;
     DeviceAdminInfo mDeviceAdmin;
-    CharSequence mAddMsgText;
+    String mAddMsgText;
     String mProfileOwnerName;
 
     ImageView mAdminIcon;
@@ -276,7 +276,11 @@ public class DeviceAdminAdd extends Activity {
             return;
         }
 
-        mAddMsgText = getIntent().getCharSequenceExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION);
+        final CharSequence addMsgCharSequence = getIntent().getCharSequenceExtra(
+                DevicePolicyManager.EXTRA_ADD_EXPLANATION);
+        if (addMsgCharSequence != null) {
+            mAddMsgText = addMsgCharSequence.toString();
+        }
 
         setContentView(R.layout.device_admin_add);
 
@@ -568,7 +572,7 @@ public class DeviceAdminAdd extends Activity {
         if (mAddingProfileOwner) {
             mProfileOwnerWarning.setVisibility(View.VISIBLE);
         }
-        if (mAddMsgText != null) {
+         if (!TextUtils.isEmpty(mAddMsgText)) {
             mAddMsg.setText(mAddMsgText);
             mAddMsg.setVisibility(View.VISIBLE);
         } else {
