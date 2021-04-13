@@ -7221,7 +7221,7 @@
     <string name="vpn_require_connection_title">Require VPN connection?</string>
 
     <!-- Dialog subtitle warning for a VPN app that has an insecure type. [CHAR LIMIT=100]  -->
-    <string name="vpn_insecure_dialog_subtitle">This VPN is not secure. Update to an IKEv2 VPN</string>
+    <string name="vpn_insecure_dialog_subtitle">Not secure. Update to an IKEv2 VPN</string>
 
     <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
     <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>
@@ -9032,8 +9032,10 @@
         <item quantity="other">%d apps can read notifications</item>
     </plurals>
 
-    <!-- Title for Notification Assistant Picker screen [CHAR LIMIT=30]-->
-    <string name="notification_assistant_title">Adaptive Notifications</string>
+    <!-- Title for Notification Assistant setting  [CHAR LIMIT=30]-->
+    <string name="notification_assistant_title">Enhanced notifications</string>
+    <!-- Summary of Notification Assistant provided features [CHAR LIMIT=NONE]-->
+    <string name="notification_assistant_summary">Get suggested actions, replies, and more</string>
 
     <!-- Label for no NotificationAssistantService [CHAR_LIMIT=NONE] -->
     <string name="no_notification_assistant">None</string>
@@ -9051,10 +9053,11 @@
     <!-- Summary for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_assistant_security_warning_summary">
-        <xliff:g id="notification_assistant_name" example="Notification Assistant">%1$s</xliff:g> will be able to read all notifications,
-        including personal information such as contact names and the text of messages you receive.
-        This app will also be able to dismiss notifications or take action on buttons in notifications, including answering phone calls.
-        \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
+        Enhanced notifications can read all notification content,
+        including personal information like contact names and messages.
+        This feature can also dismiss notifications or take actions on buttons in notifications,
+        such as answering phone calls.
+        \n\nThis feature can also turn Priority mode on or off and change related settings.
     </string>
 
     <!-- Title for a warning message about security implications of enabling a notification
@@ -9769,6 +9772,11 @@
     <string name="switch_on_text">On</string>
     <string name="switch_off_text">Off</string>
 
+
+    <!-- The subtext when screen pinning feature is enabled. [CHAR LIMIT=28] -->
+    <string name="screen_pinning_switch_on_text">On</string>
+    <!-- The subtext when screen pinning feature is disabled. [CHAR LIMIT=28] -->
+    <string name="screen_pinning_switch_off_text">Off</string>
     <!-- [CHAR LIMIT=28] Screen pinning title -->
     <string name="screen_pinning_title">App pinning</string>
     <!-- [CHAR LIMIT=none] Screen pinning introduction -->

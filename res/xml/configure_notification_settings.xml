@@ -115,6 +115,11 @@
             android:title="@string/snooze_options_title"
             settings:controller="com.android.settings.notification.SnoozeNotificationPreferenceController" />
 
+        <SwitchPreference
+            android:key="notification_assistant"
+            android:title="@string/notification_assistant_title"
+            android:summary="@string/notification_assistant_summary"/>
+
         <!-- Notification badging -->
         <SwitchPreference
             android:key="notification_badging"
