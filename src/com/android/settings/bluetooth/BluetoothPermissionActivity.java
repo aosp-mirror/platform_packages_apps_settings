@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -33,8 +35,6 @@ import androidx.preference.Preference;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
-
-import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 /**
  * BluetoothPermissionActivity shows a dialog for accepting incoming
@@ -138,7 +138,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         }
         p.mPositiveButtonText = getString(R.string.allow);
         p.mPositiveButtonListener = this;
-        p.mNegativeButtonText = getString(R.string.deny);
+        p.mNegativeButtonText = getString(R.string.request_manage_bluetooth_permission_dont_allow);
         p.mNegativeButtonListener = this;
         mOkButton = mAlert.getButton(DialogInterface.BUTTON_POSITIVE);
         setupAlert();
