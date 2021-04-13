@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,6 +63,7 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     private static final int REQUEST_CODE = 200;
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final String KEY_ADVANCED_CATEGORY = "configure_notifications_advanced";
+    private static final String KEY_NAS = "notification_assistant";
 
     private RingtonePreference mRequestPreference;
 
@@ -116,6 +118,8 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
             }
 
         });
+        controllers.add(new NotificationAssistantPreferenceController(context,
+                new NotificationBackend(), host, KEY_NAS));
 
         if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)) {
             controllers.add(new EmergencyBroadcastPreferenceController(context,
@@ -199,4 +203,14 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
                     return keys;
                 }
             };
+
+    // Dialogs only have access to the parent fragment, not the controller, so pass the information
+    // along to keep business logic out of this file
+    protected void enableNAS(ComponentName cn) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        NotificationAssistantPreferenceController napc =
+                use(NotificationAssistantPreferenceController.class);
+        napc.setNotificationAssistantGranted(cn);
+        napc.updateState(screen.findPreference(napc.getPreferenceKey()));
+    }
 }

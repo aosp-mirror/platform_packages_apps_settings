@@ -19,7 +19,6 @@ import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
-import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 
 import android.app.INotificationManager;
@@ -50,7 +49,6 @@ import android.service.notification.NotificationListenerFilter;
 import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
-import android.util.Slog;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -560,6 +558,23 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return null;
+        }
+    }
+
+    public ComponentName getDefaultNotificationAssistant() {
+        try {
+            return sINM.getDefaultNotificationAssistant();
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return null;
+        }
+    }
+
+    public void resetDefaultNotificationAssistant(boolean loadFromConfig) {
+        try {
+            sINM.resetDefaultNotificationAssistant(loadFromConfig);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
         }
     }
 
