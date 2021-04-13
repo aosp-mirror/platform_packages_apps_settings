@@ -50,6 +50,7 @@ import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -80,6 +81,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
@@ -100,7 +102,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
         ConnectivitySubsystemsRecoveryManager.RecoveryStatusCallback,
-        AirplaneModeEnabler.OnAirplaneModeChangedListener {
+        AirplaneModeEnabler.OnAirplaneModeChangedListener, InternetUpdater.InternetChangeListener {
 
     public static final String ACTION_NETWORK_PROVIDER_SETTINGS =
             "android.settings.NETWORK_PROVIDER_SETTINGS";
@@ -123,7 +125,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_AIRPLANE_MODE_MSG = "airplane_mode_message";
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     // TODO(b/70983952): Rename these to use WifiEntry instead of AccessPoint.
-    private static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
+    @VisibleForTesting
+    static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
+    @VisibleForTesting
+    static final String PREF_KEY_FIRST_ACCESS_POINTS = "first_access_points";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_wifi_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
@@ -192,12 +197,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     WifiPickerTracker mWifiPickerTracker;
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+    @VisibleForTesting
+    InternetUpdater mInternetUpdater;
 
     private WifiDialog2 mDialog;
 
     private View mProgressHeader;
 
-    private PreferenceCategory mConnectedWifiEntryPreferenceCategory;
+    @VisibleForTesting
+    PreferenceCategory mConnectedWifiEntryPreferenceCategory;
+    @VisibleForTesting
+    PreferenceCategory mFirstWifiEntryPreferenceCategory;
     private PreferenceCategory mWifiEntryPreferenceCategory;
     @VisibleForTesting
     AddWifiNetworkPreference mAddWifiNetworkPreference;
@@ -262,6 +272,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mAirplaneModeMsgPreference = findPreference(PREF_KEY_AIRPLANE_MODE_MSG);
         updateAirplaneModeMsgPreference(mAirplaneModeEnabler.isAirplaneModeOn() /* visible */);
         mConnectedWifiEntryPreferenceCategory = findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
+        mFirstWifiEntryPreferenceCategory = findPreference(PREF_KEY_FIRST_ACCESS_POINTS);
         mWifiEntryPreferenceCategory = findPreference(PREF_KEY_ACCESS_POINTS);
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
@@ -318,6 +329,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mWifiPickerTrackerHelper =
                 new WifiPickerTrackerHelper(getSettingsLifecycle(), getContext(), this);
         mWifiPickerTracker = mWifiPickerTrackerHelper.getWifiPickerTracker();
+        mInternetUpdater = new InternetUpdater(getContext(), getSettingsLifecycle(), this);
 
         final Activity activity = getActivity();
 
@@ -635,6 +647,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
+    @Override
+    public void onInternetTypeChanged(@InternetUpdater.InternetType int internetType) {
+        ThreadUtils.postOnMainThread(() -> {
+            onWifiStateChanged();
+        });
+    }
+
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
@@ -738,17 +757,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mWifiEntryPreferenceCategory.setVisible(true);
 
         final WifiEntry connectedEntry = mWifiPickerTracker.getConnectedWifiEntry();
-        mConnectedWifiEntryPreferenceCategory.setVisible(connectedEntry != null);
+        PreferenceCategory connectedWifiPreferenceCategory = getConnectedWifiPreferenceCategory();
+        connectedWifiPreferenceCategory.setVisible(connectedEntry != null);
         if (connectedEntry != null) {
             final LongPressWifiEntryPreference connectedPref =
-                    mConnectedWifiEntryPreferenceCategory.findPreference(connectedEntry.getKey());
+                    connectedWifiPreferenceCategory.findPreference(connectedEntry.getKey());
             if (connectedPref == null || connectedPref.getWifiEntry() != connectedEntry) {
-                mConnectedWifiEntryPreferenceCategory.removeAll();
+                connectedWifiPreferenceCategory.removeAll();
                 final ConnectedWifiEntryPreference pref =
-                        new ConnectedWifiEntryPreference(getPrefContext(), connectedEntry, this);
+                        createConnectedWifiEntryPreference(connectedEntry);
                 pref.setKey(connectedEntry.getKey());
                 pref.refresh();
-                mConnectedWifiEntryPreferenceCategory.addPreference(pref);
+                connectedWifiPreferenceCategory.addPreference(pref);
                 pref.setOnPreferenceClickListener(preference -> {
                     if (connectedEntry.canSignIn()) {
                         connectedEntry.signIn(null /* callback */);
@@ -763,11 +783,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
                 if (mClickedConnect) {
                     mClickedConnect = false;
-                    scrollToPreference(mConnectedWifiEntryPreferenceCategory);
+                    scrollToPreference(connectedWifiPreferenceCategory);
                 }
             }
         } else {
-            mConnectedWifiEntryPreferenceCategory.removeAll();
+            connectedWifiPreferenceCategory.removeAll();
         }
 
         int index = 0;
@@ -819,6 +839,27 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mAddWifiNetworkPreference.setOrder(index++);
         mWifiEntryPreferenceCategory.addPreference(mAddWifiNetworkPreference);
         setAdditionalSettingsSummaries();
+    }
+
+    @VisibleForTesting
+    PreferenceCategory getConnectedWifiPreferenceCategory() {
+        if (mInternetUpdater.getInternetType() == InternetUpdater.INTERNET_WIFI) {
+            mFirstWifiEntryPreferenceCategory.setVisible(false);
+            mFirstWifiEntryPreferenceCategory.removeAll();
+            return mConnectedWifiEntryPreferenceCategory;
+        }
+
+        mConnectedWifiEntryPreferenceCategory.setVisible(false);
+        mConnectedWifiEntryPreferenceCategory.removeAll();
+        return mFirstWifiEntryPreferenceCategory;
+    }
+
+    @VisibleForTesting
+    ConnectedWifiEntryPreference createConnectedWifiEntryPreference(WifiEntry wifiEntry) {
+        if (mInternetUpdater.getInternetType() == InternetUpdater.INTERNET_WIFI) {
+            return new ConnectedWifiEntryPreference(getPrefContext(), wifiEntry, this);
+        }
+        return new FirstWifiEntryPreference(getPrefContext(), wifiEntry, this);
     }
 
     private void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
@@ -1216,5 +1257,23 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
         updateAirplaneModeMsgPreference(isAirplaneModeOn /* visible */);
+    }
+
+    /**
+     * A Wi-Fi preference for the connected Wi-Fi network without internet access.
+     *
+     * Override the icon color attribute by {@link ConnectedWifiEntryPreference#getIconColorAttr()}
+     * and show the icon color to android.R.attr.colorControlNormal for the preference.
+     */
+    public class FirstWifiEntryPreference extends ConnectedWifiEntryPreference {
+        public FirstWifiEntryPreference(Context context, WifiEntry wifiEntry,
+                Fragment fragment) {
+            super(context, wifiEntry, fragment);
+        }
+
+        @Override
+        protected int getIconColorAttr() {
+            return android.R.attr.colorControlNormal;
+        }
     }
 }
