@@ -304,7 +304,9 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 LegacyVpnPreference p = mSettings.findOrCreatePreference(stubProfile, false);
                 p.setState(vpn.state);
                 p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(vpn.key));
-                p.setInsecureVpn(VpnProfile.isLegacyType(stubProfile.type));
+                // (b/184921649) do not call setInsecureVpn() for connectedLegacyVpns, since the
+                // LegacyVpnInfo does not contain VPN type information, and the profile already
+                // exists within vpnProfiles.
                 updates.add(p);
             }
 
