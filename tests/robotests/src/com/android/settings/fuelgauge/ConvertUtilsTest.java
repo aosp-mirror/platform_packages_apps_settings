@@ -210,17 +210,23 @@ public final class ConvertUtilsTest {
             ConvertUtils.getIndexedUsageMap(
                 timeSlotSize, batteryHistoryKeys, batteryHistoryMap);
 
-        assertThat(resultMap).hasSize(2);
+        assertThat(resultMap).hasSize(3);
         // Verifies the first timestamp result.
         List<BatteryDiffEntry> entryList = resultMap.get(Integer.valueOf(0));
         assertThat(entryList).hasSize(1);
-        assertBatteryDiffEntry(entryList.get(0), 100.0, 15L, 25L);
+        assertBatteryDiffEntry(entryList.get(0), 100, 15L, 25L);
         // Verifies the second timestamp result.
         entryList = resultMap.get(Integer.valueOf(1));
         assertThat(entryList).hasSize(3);
-        assertBatteryDiffEntry(entryList.get(0), 5.0, 5L, 5L);
-        assertBatteryDiffEntry(entryList.get(1), 75.0, 40L, 50L);
-        assertBatteryDiffEntry(entryList.get(2), 20.0, 15L, 15L);
+        assertBatteryDiffEntry(entryList.get(0), 5, 5L, 5L);
+        assertBatteryDiffEntry(entryList.get(1), 75, 40L, 50L);
+        assertBatteryDiffEntry(entryList.get(2), 20, 15L, 15L);
+        // Verifies the last 24 hours aggregate result.
+        entryList = resultMap.get(Integer.valueOf(-1));
+        assertThat(entryList).hasSize(3);
+        assertBatteryDiffEntry(entryList.get(0), 4, 5L, 5L);
+        assertBatteryDiffEntry(entryList.get(1), 68, 40L, 50L);
+        assertBatteryDiffEntry(entryList.get(2), 27, 30L, 40L);
     }
 
     private static BatteryHistEntry createBatteryHistEntry(
@@ -238,9 +244,9 @@ public final class ConvertUtilsTest {
     }
 
     private static void assertBatteryDiffEntry(
-            BatteryDiffEntry entry, double percentOfTotal,
+            BatteryDiffEntry entry, int percentOfTotal,
             long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
-        assertThat(entry.getPercentOfTotal()).isEqualTo(percentOfTotal);
+        assertThat((int) entry.getPercentOfTotal()).isEqualTo(percentOfTotal);
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
     }

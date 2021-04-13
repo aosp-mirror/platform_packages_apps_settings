@@ -244,7 +244,40 @@ public final class ConvertUtils {
                 diffEntry.setTotalConsumePower(totalConsumePower);
             }
         }
+        insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
         return resultMap;
+    }
+
+    private static void insert24HoursData(
+            final int desiredIndex,
+            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
+        final Map<String, BatteryDiffEntry> resultMap = new HashMap<>();
+        double totalConsumePower = 0.0;
+        // Loops for all BatteryDiffEntry and aggregate them together.
+        for (List<BatteryDiffEntry> entryList : indexedUsageMap.values()) {
+            for (BatteryDiffEntry entry : entryList) {
+                final String key = entry.mBatteryHistEntry.getKey();
+                final BatteryDiffEntry oldBatteryDiffEntry = resultMap.get(key);
+                // Creates new BatteryDiffEntry if we don't have it.
+                if (oldBatteryDiffEntry == null) {
+                    resultMap.put(key, entry.clone());
+                } else {
+                    // Sums up some fields data into the existing one.
+                    oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
+                        entry.mForegroundUsageTimeInMs;
+                    oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
+                        entry.mBackgroundUsageTimeInMs;
+                    oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
+                }
+                totalConsumePower += entry.mConsumePower;
+            }
+        }
+        final List<BatteryDiffEntry> resultList = new ArrayList<>(resultMap.values());
+        // Sets total 24 hours consume power data into all BatteryDiffEntry.
+        for (BatteryDiffEntry entry : resultList) {
+            entry.setTotalConsumePower(totalConsumePower);
+        }
+        indexedUsageMap.put(Integer.valueOf(desiredIndex), resultList);
     }
 
     private static long getDiffValue(long v1, long v2, long v3) {
@@ -261,10 +294,11 @@ public final class ConvertUtils {
             BatteryHistEntry entry3) {
         if (entry1 != null && entry1 != EMPTY_BATTERY_HIST_ENTRY) {
             return entry1;
-        }
-        if (entry2 != null && entry2 != EMPTY_BATTERY_HIST_ENTRY) {
+        } else if (entry2 != null && entry2 != EMPTY_BATTERY_HIST_ENTRY) {
             return entry2;
+        } else {
+            return entry3 != null && entry3 != EMPTY_BATTERY_HIST_ENTRY
+                ? entry3 : null;
         }
-        return entry3 != null && entry3 != EMPTY_BATTERY_HIST_ENTRY ? entry3 : null;
     }
 }

@@ -36,4 +36,17 @@ public final class BatteryDiffEntryTest {
 
         assertThat(entry.getPercentOfTotal()).isEqualTo(22.0);
     }
+
+    @Test
+    public void testSetTotalConsumePower_setZeroValue_returnsZeroValue() {
+        final BatteryDiffEntry entry =
+            new BatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ 10001L,
+                /*backgroundUsageTimeInMs=*/ 20002L,
+                /*consumePower=*/ 22.0,
+                /*batteryHistEntry=*/ null);
+        entry.setTotalConsumePower(0);
+
+        assertThat(entry.getPercentOfTotal()).isEqualTo(0);
+    }
 }

@@ -19,10 +19,10 @@ import java.time.Duration;
 public final class BatteryDiffEntry {
     private static final String TAG = "BatteryDiffEntry";
 
-    public final long mForegroundUsageTimeInMs;
-    public final long mBackgroundUsageTimeInMs;
-    public final double mConsumePower;
-    // A BatteryHistEntry corresponding to this diff usage daata.
+    public long mForegroundUsageTimeInMs;
+    public long mBackgroundUsageTimeInMs;
+    public double mConsumePower;
+    // A BatteryHistEntry corresponding to this diff usage data.
     public final BatteryHistEntry mBatteryHistEntry;
 
     private double mTotalConsumePower;
@@ -49,6 +49,15 @@ public final class BatteryDiffEntry {
     /** Gets the percentage of total consumed power. */
     public double getPercentOfTotal() {
         return mPercentOfTotal;
+    }
+
+    /** Clones a new instance. */
+    public BatteryDiffEntry clone() {
+        return new BatteryDiffEntry(
+            this.mForegroundUsageTimeInMs,
+            this.mBackgroundUsageTimeInMs,
+            this.mConsumePower,
+            this.mBatteryHistEntry /*same instance*/);
     }
 
     @Override
