@@ -20,6 +20,10 @@
     android:title="@string/dark_ui_mode"
     settings:keywords="@string/keywords_dark_ui_mode">
 
+    <com.android.settingslib.widget.LayoutPreference
+       android:layout="@layout/dark_mode_preview"
+       android:selectable="false" />
+
     <com.android.settingslib.widget.TopIntroPreference
         android:key="dark_ui_top_intro"
         android:title="@string/dark_ui_text"
