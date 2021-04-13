@@ -51,6 +51,7 @@ import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,6 +62,7 @@ import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
+import com.android.settings.wifi.ConnectedWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigController2;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
@@ -109,6 +111,12 @@ public class NetworkProviderSettingsTest {
     private LayoutPreference mResetInternetPreference;
     @Mock
     private MenuItem mMenuItem;
+    @Mock
+    InternetUpdater mInternetUpdater;
+    @Mock
+    PreferenceCategory mConnectedWifiEntryPreferenceCategory;
+    @Mock
+    PreferenceCategory mFirstWifiEntryPreferenceCategory;
 
     @Before
     public void setUp() {
@@ -132,6 +140,15 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.mResetInternetPreference = mResetInternetPreference;
         mNetworkProviderSettings.mAirplaneModeMsgPreference = mAirplaneModeMsgPreference;
         mNetworkProviderSettings.mAirplaneModeEnabler = mAirplaneModeEnabler;
+        mNetworkProviderSettings.mInternetUpdater = mInternetUpdater;
+        doReturn(NetworkProviderSettings.PREF_KEY_CONNECTED_ACCESS_POINTS)
+                .when(mConnectedWifiEntryPreferenceCategory).getKey();
+        mNetworkProviderSettings.mConnectedWifiEntryPreferenceCategory =
+                mConnectedWifiEntryPreferenceCategory;
+        doReturn(NetworkProviderSettings.PREF_KEY_FIRST_ACCESS_POINTS)
+                .when(mFirstWifiEntryPreferenceCategory).getKey();
+        mNetworkProviderSettings.mFirstWifiEntryPreferenceCategory =
+                mFirstWifiEntryPreferenceCategory;
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
     }
 
@@ -452,11 +469,48 @@ public class NetworkProviderSettingsTest {
         verify(mAirplaneModeMsgPreference).setVisible(true);
     }
 
-
     @Test
     public void onAirplaneModeChanged_apmIsOff_hideApmMsg() {
         mNetworkProviderSettings.onAirplaneModeChanged(false);
 
         verify(mAirplaneModeMsgPreference).setVisible(false);
+    }
+
+    @Test
+    public void getConnectedWifiPreferenceCategory_internetWiFi_getConnectedAccessPoints() {
+        doReturn(InternetUpdater.INTERNET_WIFI).when(mInternetUpdater).getInternetType();
+
+        final PreferenceCategory pc = mNetworkProviderSettings.getConnectedWifiPreferenceCategory();
+
+        assertThat(pc.getKey()).isEqualTo(NetworkProviderSettings.PREF_KEY_CONNECTED_ACCESS_POINTS);
+    }
+
+    @Test
+    public void getConnectedWifiPreferenceCategory_internetCellular_getFirstAccessPoints() {
+        doReturn(InternetUpdater.INTERNET_CELLULAR).when(mInternetUpdater).getInternetType();
+
+        final PreferenceCategory pc = mNetworkProviderSettings.getConnectedWifiPreferenceCategory();
+
+        assertThat(pc.getKey()).isEqualTo(NetworkProviderSettings.PREF_KEY_FIRST_ACCESS_POINTS);
+    }
+
+    @Test
+    public void createConnectedWifiEntryPreference_internetWiFi_createConnectedPreference() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        doReturn(InternetUpdater.INTERNET_WIFI).when(mInternetUpdater).getInternetType();
+
+        final Preference p = mNetworkProviderSettings.createConnectedWifiEntryPreference(wifiEntry);
+
+        assertThat(p instanceof ConnectedWifiEntryPreference).isTrue();
+    }
+
+    @Test
+    public void createConnectedWifiEntryPreference_internetCellular_createFirstWifiPreference() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        doReturn(InternetUpdater.INTERNET_CELLULAR).when(mInternetUpdater).getInternetType();
+
+        final Preference p = mNetworkProviderSettings.createConnectedWifiEntryPreference(wifiEntry);
+
+        assertThat(p instanceof NetworkProviderSettings.FirstWifiEntryPreference).isTrue();
     }
 }
