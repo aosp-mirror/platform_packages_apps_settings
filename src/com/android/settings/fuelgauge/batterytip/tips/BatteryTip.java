@@ -75,11 +75,11 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     static final SparseIntArray TIP_ORDER;
     static {
         TIP_ORDER = new SparseIntArray();
-        TIP_ORDER.append(TipType.BATTERY_DEFENDER, 0);
-        TIP_ORDER.append(TipType.APP_RESTRICTION, 1);
-        TIP_ORDER.append(TipType.BATTERY_SAVER, 2);
-        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 3);
-        TIP_ORDER.append(TipType.LOW_BATTERY, 4);
+        TIP_ORDER.append(TipType.BATTERY_SAVER, 0);
+        TIP_ORDER.append(TipType.LOW_BATTERY, 1);
+        TIP_ORDER.append(TipType.BATTERY_DEFENDER, 2);
+        TIP_ORDER.append(TipType.APP_RESTRICTION, 3);
+        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 4);
         TIP_ORDER.append(TipType.SUMMARY, 5);
         TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 6);
         TIP_ORDER.append(TipType.REDUCED_BATTERY, 7);
