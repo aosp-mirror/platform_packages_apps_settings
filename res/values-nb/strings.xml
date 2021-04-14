@@ -150,7 +150,7 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Andre enheter"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Lagrede enheter"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth slås på for å koble til"</string>
-    <string name="connected_device_connections_title" msgid="4164120115341579170">"Tilkoblingsinnstillinger"</string>
+    <string name="connected_device_connections_title" msgid="4164120115341579170">"Tilkoblingsvalg"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"Enheter som har vært tilkoblet tidligere"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Tidligere tilkoblet"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth er på"</string>
@@ -784,7 +784,7 @@
     <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Tillat utveksling av data når telefonen berører en annen NFC-enhet"</string>
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Slå på NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC utveksler data mellom denne enheten og andre enheter eller mål i nærheten, for eksempel betalingsterminaler, adgangslesere og interaktive annonser eller etiketter."</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Krev opplåsing av enhet for å bruke NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Krev opplåst enhet for NFC"</string>
     <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Bare tillat NFC-betalinger og bruk av kollektivtransport når skjermen er låst opp"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Klar til å overføre appinnhold via NFC"</string>
@@ -864,11 +864,11 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Skriv inn SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Sikkerhet"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Skjult nettverk"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Hvis ruteren din ikke sender en nettverks-ID, men du vil koble til den i fremtiden, kan du sette nettverket som skjult.\n\nDette kan utgjøre en sikkerhetsrisiko fordi telefonen sender signalet sitt regelmessig for å finne nettverket.\n\nRuterinnstillingene dine endres ikke hvis du setter nettverket til å være skjult."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Hvis ruteren din ikke sender en nettverks-ID, men du vil koble til den i fremtiden, kan du angi at nettverket skal være skjult.\n\nDette kan utgjøre en sikkerhetsrisiko fordi telefonen sender signalet sitt regelmessig for å finne nettverket.\n\nRuterinnstillingene dine endres ikke hvis du setter nettverket til å være skjult."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Signalstyrke"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Overføringshastighet for sending"</string>
-    <string name="rx_wifi_speed" msgid="5167966079215111232">"Linkhastighet for mottak"</string>
+    <string name="rx_wifi_speed" msgid="5167966079215111232">"Overføringshastighet for mottak"</string>
     <string name="wifi_speed" msgid="6562147734565434513">"Koblingshastighet"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Frekvens"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"IP-adresse"</string>
@@ -898,9 +898,9 @@
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Se eller endre abonnement"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Tilfeldig valgt MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Legg til en enhet"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Sentrér QR-koden nedenfor for å legge til enheten i «<xliff:g id="SSID">%1$s</xliff:g>»"</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Midtstill QR-koden nedenfor for å legge til enheten i «<xliff:g id="SSID">%1$s</xliff:g>»"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skann QR-koden"</string>
-    <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Sentrér QR-koden nedenfor for å koble til «<xliff:g id="SSID">%1$s</xliff:g>»"</string>
+    <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Midtstill QR-koden nedenfor for å koble til «<xliff:g id="SSID">%1$s</xliff:g>»"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Koble til Wi‑Fi ved å skanne en QR-kode"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Del Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Skann denne QR-koden for å koble til «<xliff:g id="SSID">%1$s</xliff:g>» og dele passordet"</string>
@@ -1305,7 +1305,7 @@
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"De personlige kodene samsvarer ikke"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Kan ikke endre personlig kode.\nMuligens feil kode."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN-koden for SIM-kortet ble endret."</string>
-    <string name="sim_lock_failed" msgid="16360418201678317">"Kan ikke endre SIM-kortlåsens tilstand.\nMuligens feil personlig kode."</string>
+    <string name="sim_lock_failed" msgid="16360418201678317">"Kan ikke endre SIM-kortlåsens tilstand.\nMuligens feil PIN-kode."</string>
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Kan ikke slå av PIN-koden."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Kan ikke slå på PIN-koden."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
@@ -1744,7 +1744,7 @@
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Håndbok for sikkerhet og regelverk"</string>
     <string name="copyright_title" msgid="83245306827757857">"Opphavsrett"</string>
     <string name="license_title" msgid="8745742085916617540">"Lisens"</string>
-    <string name="module_license_title" msgid="8705484239826702828">"Lisenser for Google Play-systemoppdatering"</string>
+    <string name="module_license_title" msgid="8705484239826702828">"Google Play-system: oppdateringslisenser"</string>
     <string name="terms_title" msgid="2071742973672326073">"Betingelser"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"System WebView License"</string>
     <string name="wallpaper_attributions" msgid="3080339190260272255">"Bakgrunner"</string>
@@ -1856,8 +1856,8 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontakt IT-administratoren din"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"De kan hjelpe deg med å tilbakestille PIN-koden, mønsteret eller passordet"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Nettbrettet ditt og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for enhver skade på nettbrettet eller tap av data som kan oppstå, fra bruk av slike apper."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefonen din og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for enhver skade på telefonen eller tap av data som kan oppstå, fra bruk av slike apper."</string>
+    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Nettbrettet ditt og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for enhver skade på nettbrettet eller tap av data som kan oppstå fra bruk av slike apper."</string>
+    <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefonen din og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for enhver skade på telefonen eller tap av data som kan oppstå fra bruk av slike apper."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Enheten din og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for eventuelle skader på enheten eller tap av data som oppstår på grunn av bruk av dem."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Avanserte innstillinger"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Aktiver flere innstillingsalternativer"</string>
@@ -2708,7 +2708,7 @@
     <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Vil du stoppe automatisk sikkerhetskopiering av enhetsdata (for eksempel Wi-Fi-passord og anropslogg) og appdata (for eksempel innstillinger og filer lagret av apper), og i tillegg slette alle kopier på eksterne tjenere?"</string>
     <string name="fullbackup_data_summary" msgid="971587401251601473">"Sikkerhetskopiér enhetsdata (for eksempel Wi-Fi-passord og anropslogg) og appdata (for eksempel innstillinger og filer lagret av apper) automatisk fra en ekstern posisjon.\n\nNår du slår på automatisk sikkerhetskopiering, lagres app- og enhetsdata automatisk fra en ekstern posisjon. Appdata kan være alle slags data apper har lagret (basert på utviklerinnstillinger), inkludert potensielle sensitive data, for eksempel kontakter, meldinger og bilder."</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"Innstillinger for enhetsadministrator"</string>
-    <string name="active_device_admin_msg" msgid="7744106305636543184">"Administratorappen på enheten"</string>
+    <string name="active_device_admin_msg" msgid="7744106305636543184">"Administratorapp for enheten"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"Deaktiver denne administratorappen for enheten"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Avinstaller appen"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Deaktiver og avinstaller"</string>
@@ -3047,7 +3047,7 @@
     <string name="application_restrictions" msgid="276179173572729205">"Tillat apper og innhold"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Apper med begrensninger"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Utvidelsesinnstillinger for appen"</string>
-    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Kontaktløse betalinger"</string>
+    <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Kontaktløs betaling"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Slik fungerer det"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Betal med telefonen i butikker"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Standardapp for betaling"</string>
@@ -3056,15 +3056,15 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Bruk standard"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Alltid"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Unntatt når en annen betalingsapp er åpen"</string>
-    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"I en kontaktløs terminal betaler du med:"</string>
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"I kontaktløse terminaler betaler du med:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Betaling ved terminaler"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Konfigurer en betalingsapp. Deretter holder du baksiden av telefonen mot en terminal som har symbolet for kontaktløs betaling."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Skjønner"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Mr"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Angi en standardapp for betaling"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Oppdater standardappen for betaling"</string>
-    <string name="nfc_payment_set_default" msgid="4101484767872365195">"I en kontaktløs terminal betaler du med <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"I en kontaktløs terminal betaler du med <xliff:g id="APP_0">%1$s</xliff:g>.\n\nDette erstatter <xliff:g id="APP_1">%2$s</xliff:g> som standardappen din for betaling."</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"I kontaktløse terminaler betaler du med <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"I kontaktløse terminaler betaler du med <xliff:g id="APP_0">%1$s</xliff:g>.\n\nDette erstatter <xliff:g id="APP_1">%2$s</xliff:g> som standardappen din for betaling."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Angi som standard"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Oppdater"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Begrensninger"</string>
@@ -3351,14 +3351,14 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Tillat forstyrrelser som lager lyd"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokkér visuelle forstyrrelser"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Tillat visuelle signaler"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Vis alternativer for skjulte varsler"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Alternativer for visning av skjulte varsler"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Når «Ikke forstyrr» er på"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ingen lyd fra varsler"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Du ser varsler på skjermen"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Når du mottar varsler, kommer ikke telefonen til å lage lyd eller vibrere."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Ingen lyd eller visuelle elementer fra varsler"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Du kommer ikke til å se eller høre varsler"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Telefonen din kommer ikke til å vise, vibrere for eller lage lyd for nye eller eksisterende varsler. Husk at viktige varsler om telefonaktivitet og status fremdeles vises.\n\nNår du slår av «Ikke forstyrr», kan du finne varsler du gikk glipp av, ved å sveipe ned fra toppen av skjermen."</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Du verken ser eller hører varsler"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Telefonen verken viser, vibrerer for eller lager lyd for nye eller eksisterende varsler. Husk at viktige varsler om telefonaktivitet og status fremdeles vises.\n\nNår du slår av «Ikke forstyrr», kan du finne varsler du gikk glipp av, ved å sveipe ned fra toppen av skjermen."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Tilpasset"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Slå på tilpasset innstilling"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Fjern tilpasset innstilling"</string>
@@ -3430,7 +3430,7 @@
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"Innstillinger"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Ingen lyd eller visuelle elementer fra varsler"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Ingen lyd fra varsler"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Du kommer ikke til å se eller høre varsler. Anrop fra stjernemerkede kontakter og gjentatte oppringere tillates."</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Du verken ser eller hører varsler. Anrop fra stjernemerkede kontakter og gjentatte oppringere tillates."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Gjeldende innstilling)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Vil du endre innstillinger for varsler for «Ikke forstyrr»?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Lyder i jobbprofilen"</string>
@@ -3582,8 +3582,8 @@
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Ingen lyd eller vibrering, og vises lavere i samtaledelen"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Kan ringe eller vibrere basert på telefoninnstillingene"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Når enheten låses opp, vises varsler som et banner over toppen av skjermen"</string>
-    <string name="notification_switch_label" msgid="8029371325967501557">"Alle «<xliff:g id="APP_NAME">%1$s</xliff:g>»-varsler"</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle <xliff:g id="APP_NAME">%1$s</xliff:g>-varsler"</string>
+    <string name="notification_switch_label" msgid="8029371325967501557">"Alle varsler fra «<xliff:g id="APP_NAME">%1$s</xliff:g>»"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle varsler fra <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Varsler som kan tilpasses"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> varsler per dag</item>
@@ -3651,7 +3651,7 @@
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"For å knytte til disse appene, installer <xliff:g id="NAME">%1$s</xliff:g> i den personlige profilen din"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Trykk for å installere appen"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"«Ikke forstyrr»-tilgang"</string>
-    <string name="zen_access_detail_switch" msgid="4183681772666138993">"Tillat «Ikke forstyrr»"</string>
+    <string name="zen_access_detail_switch" msgid="4183681772666138993">"Kan bruke «Ikke forstyrr»"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ingen installerte apper har bedt om «Ikke forstyrr»-tilgang"</string>
     <string name="loading_notification_apps" msgid="1458413761470945269">"Laster inn apper …"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"I tråd med det du har valgt, hindrer Android at varsler fra denne appen vises på denne enheten"</string>
@@ -3732,10 +3732,10 @@
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Ingen"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Hver dag"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Alarmer kan overstyre sluttider"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Tidsplanen slås av når alarmer ringer"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Tidsplanen slås av når en alarm ringer"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Atferd for «Ikke forstyrr»"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Bruk standardinnstillinger"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Opprett tilpassede innstillinger for denne tidsplanen"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Lag egne innstillinger for denne tidsplanen"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"For «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>»"</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3755,8 +3755,8 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Anrop"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"anrop"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Anrop som kan forstyrre"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"For å kontrollere at tillatte anrop lager lyd, sjekk at enheten er satt til ringing"</string>
-    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Innkommende anrop er blokkert for «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>». Du kan justere innstillinger for å la venner, familie eller andre kontakter nå deg."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"For å forsikre deg om at tillatte anrop lager lyd, sjekk at enheten er satt til ringing"</string>
+    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Innkommende anrop er blokkert for «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>». Du kan justere innstillingene for å la venner, familie eller andre kontakter nå deg."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stjernemerkede kontakter"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> andre</item>
@@ -3768,7 +3768,7 @@
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Meldinger"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Meldinger som kan forstyrre"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"For å kontrollere at tillatte meldinger lager lyd, sjekk at enheten er satt til ringing"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Innkommende meldinger er blokkert for «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>». Du kan justere innstillinger for å la venner, familie eller andre kontakter nå deg."</string>
+    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Innkommende meldinger er blokkert for «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>». Du kan justere innstillingene for å la venner, familie eller andre kontakter nå deg."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Alle meldinger kan nå deg"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Alle anrop kan nå deg"</string>
     <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Ingen"</string>
@@ -3847,8 +3847,8 @@
     <string name="zen_mode_when_never" msgid="2537537280091840672">"Aldri"</string>
     <string name="zen_mode_when_every_night" msgid="9018738747936038166">"Hver kveld"</string>
     <string name="zen_mode_when_weeknights" msgid="531342225633264368">"Kvelder på ukedager"</string>
-    <string name="zen_mode_start_time" msgid="1252665038977523332">"Starttidspunkt"</string>
-    <string name="zen_mode_end_time" msgid="223502560367331706">"Sluttidspunkt"</string>
+    <string name="zen_mode_start_time" msgid="1252665038977523332">"Starttid"</string>
+    <string name="zen_mode_end_time" msgid="223502560367331706">"Sluttid"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> neste dag"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="910047326128154945">"Bytt til Bare alarmer på ubestemt tid"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="1900512966361163390">
@@ -3876,7 +3876,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Festing av apper"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Med festing av apper kan du holde appen du bruker for øyeblikket, synlig til du løsner den. Denne funksjonen kan for eksempel brukes til å la en venn du stoler på, spille et bestemt spill. \n\nNår en app er festet, kan den åpne andre apper, og personlige data kan være tilgjengelige. \n\nSlik bruker du festing av apper: 	\n1.	Slå på festing av apper. 	\n2.	Åpne Oversikt. 	\n3.	Trykk på appikonet øverst på skjermen, og trykk på Fest."</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Med festing av apper kan du holde appen du bruker for øyeblikket, synlig til du løsner den. Denne funksjonen kan for eksempel brukes til å la en venn du stoler på, spille et bestemt spill. \n\nNår en app er festet, kan den åpne andre apper, og personlige data kan være tilgjengelige. \n\nBruk en gjestebruker i stedet hvis du vil dele enheten med noen på en sikker måte. \n\nSlik bruker du festing av apper: 	\n1.	Slå på festing av apper. 	\n2.	Åpne Oversikt. 	\n3.	Trykk på appikonet øverst på skjermen, og trykk på Fest."</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Når en app er festet \n\n•		kan personlige data være tilgjengelige \n		(for eksempel kontakter og e-postinnhold) \n•		kan appen som er festet, åpne andre apper \n\nBare bruk festing av apper med personer du stoler på."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Når en app er festet \n\n•		kan personlige data være tilgjengelige \n		(f.eks. kontakter og e-postinnhold) \n•		kan den åpne andre apper \n\nBare bruk festing av apper med personer du stoler på."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Krev opplåsingsmønster for å løsne apper"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Krev PIN-kode for å løsne app"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Krev passord for å løsne apper"</string>
@@ -3992,7 +3992,7 @@
     <string name="default_apps_title" msgid="6943471331817718664">"Standard"</string>
     <string name="default_for_work" msgid="537558180548617528">"Jobbstandard"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Assistent og taleinndata"</string>
-    <string name="default_assist_title" msgid="1182435129627493758">"Digital assistentapp"</string>
+    <string name="default_assist_title" msgid="1182435129627493758">"Digital assistent-app"</string>
     <string name="default_digital_assistant_title" msgid="5654663086385490838">"Standard digital assistentapp"</string>
     <string name="assistant_security_warning_title" msgid="6444187332360938730">"Vil du at <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> skal være assistenten din?"</string>
     <string name="assistant_security_warning" msgid="5623237187748811070">"Assistenten kan lese informasjon om appene du bruker i systemet ditt, inkludert informasjon som er synlig på skjermen eller tilgjengelig i appene."</string>
@@ -4010,7 +4010,7 @@
     <string name="permit_usage_access" msgid="179630895262172674">"Tillat brukstilgang"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"Innstillinger for appbruk"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Skjermtid"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"Med brukstilgang kan apper spore hvilke andre apper du bruker og hvor ofte du bruker dem. Også operatør, språkinnstillinger og annen informasjon kan spores med brukstilgang."</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"Med brukstilgang kan apper spore hvilke andre apper du bruker, og hvor ofte du bruker dem. Også operatør, språkinnstillinger og annen informasjon kan spores med brukstilgang."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Minne"</string>
     <string name="memory_details_title" msgid="3048107441540417799">"Minnedetaljer"</string>
     <string name="always_running" msgid="9012705720688200252">"Kjører alltid (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4064,7 +4064,7 @@
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-internettdeling"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6464135515868405143">"Bruk denne enheten som MIDI"</string>
-    <string name="usb_use" msgid="6783183432648438528">"Bruk USB for"</string>
+    <string name="usb_use" msgid="6783183432648438528">"Bruk USB til"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Standard USB-konfigurasjon"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Disse innstillingene gjelder når en annen enhet er koblet til og telefonen din er låst opp. Du bør bare koble til godkjente enheter."</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
@@ -4086,9 +4086,9 @@
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI og forsyner strøm"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Bakgrunnssjekk"</string>
     <string name="background_check_title" msgid="225170874283229686">"Full bakgrunnstilgang"</string>
-    <string name="assist_access_context_title" msgid="5201495523514096201">"Bruk teksten fra skjermen"</string>
+    <string name="assist_access_context_title" msgid="5201495523514096201">"Bruk tekst fra skjermen"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Gi assistentappen tilgang til skjerminnholdet som tekst"</string>
-    <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Bruk skjermdumpen"</string>
+    <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Bruk skjermdump"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Gi assistentappen tilgang til et bilde av skjermen"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Uthev skjermen"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"Uthev kantene av skjermen når assistentappen bruker tekst fra skjermen eller skjermbildet"</string>
@@ -4131,10 +4131,10 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Vis over andre apper"</string>
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Apper"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Vis over andre apper"</string>
-    <string name="permit_draw_overlay" msgid="4468994037192804075">"Tillat visning over andre apper"</string>
+    <string name="permit_draw_overlay" msgid="4468994037192804075">"Kan vises over andre apper"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Tillat at denne appen vises over andre apper du bruker. Denne appen kan se hvor du trykker, eller endre det som vises på skjermen."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Tilgang til alle filer"</string>
-    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Gi tilgang til å administrere alle filer"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Kan administrere alle filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Gi denne appen tillatelse til å lese, endre og slette alle filer på denne enheten eller tilkoblede lagringsvolum. Hvis du gir appen tillatelsen, kan den få tilgang til filer uten at du er klar over det."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Har tilgang til alle filer"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr, lyttetjeneste for virtuell virkelighet, stereo, hjelpetjenester"</string>
@@ -4151,7 +4151,7 @@
     <string name="filter_write_settings_apps" msgid="4754994984909024093">"Kan endre systeminnstillingene"</string>
     <string name="write_settings_title" msgid="3011034187823288557">"Kan endre systeminnstillingene"</string>
     <string name="write_system_settings" msgid="5555707701419757421">"Endre systeminnstillingene"</string>
-    <string name="permit_write_settings" msgid="3113056800709924871">"Tillat endring av systeminnstillingene"</string>
+    <string name="permit_write_settings" msgid="3113056800709924871">"Kan endre systeminnstillingene"</string>
     <string name="write_settings_description" msgid="1474881759793261146">"Med denne tillatelsen kan apper endre systeminnstillingene."</string>
     <string name="write_settings_on" msgid="8533286548451191112">"Ja"</string>
     <string name="write_settings_off" msgid="1781103034490679144">"Nei"</string>
@@ -4413,7 +4413,7 @@
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensorene er av"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Innstillinger for jobbprofilen"</string>
     <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Kontaktsøk"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Tillat kontaktsøk for organisasjonen din for å identifisere innringere og kontakter"</string>
+    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Tillat kontaktsøk for organisasjonen din for å identifisere oppringere og kontakter"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kalender for flere profiler"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Vis jobbaktiviteter i den personlige kalenderen din"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4497,7 +4497,7 @@
     <string name="oem_lock_info_message" msgid="8843145669619429197">"Start enheten på nytt for å slå på enhetsbeskyttelsen."</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="706230592123831676">"<xliff:g id="SIZE">%1$s</xliff:g> er gjort tilgjengelig totalt\n\nSist kjørt <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="6654581786741216382">"Instant-apper"</string>
-    <string name="web_action_enable_summary" msgid="2658930257777545990">"Åpne linker i apper – selv om appene ikke er installert"</string>
+    <string name="web_action_enable_summary" msgid="2658930257777545990">"Kan åpne linker i apper – selv om appene ikke er installert"</string>
     <string name="web_action_section_title" msgid="994717569424234098">"Instant-apper"</string>
     <string name="instant_apps_settings" msgid="4280942494969957858">"Instant Apps-innstillinger"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"Installerte apper"</string>
@@ -4510,8 +4510,8 @@
     <string name="auto_sync_account_summary" msgid="7580352130028957346">"La apper oppdatere data automatisk"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"Kontosynkronisering"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Synkronisering er slått på for <xliff:g id="ID_1">%1$d</xliff:g> av <xliff:g id="ID_2">%2$d</xliff:g> elementer"</string>
-    <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Synkronisering er slått på for alle elementene"</string>
-    <string name="account_sync_summary_all_off" msgid="6378301874540507884">"Synkronisering er slått av for alle elementene"</string>
+    <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Synkronisering er slått på for alle elementer"</string>
+    <string name="account_sync_summary_all_off" msgid="6378301874540507884">"Synkronisering er slått av for alle elementer"</string>
     <string name="enterprise_privacy_settings" msgid="786350385374794180">"Informasjon om administrert enhet"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Endringer og innstillinger administreres av organisasjonen din"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Endringer og innstillinger administreres av <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
@@ -4600,7 +4600,7 @@
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(slått av for brukeren <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Autofylltjeneste"</string>
     <string name="autofill_keywords" msgid="6260653325195017912">"auto, fyll, autofyll"</string>
-    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Sørg for at appen er pålitelig&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google autofyll&gt;%1$s&lt;/xliff:g&gt; bruker det som er på skjermen til å fastslå hva som kan fylles ut automatisk."</string>
+    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Stoler du på denne appen?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google autofyll&gt;%1$s&lt;/xliff:g&gt; bruker det som er på skjermen, til å fastslå hva som kan fylles ut automatisk."</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autofyll"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Loggføringsnivå"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Maksimalt antall forespørsler per økt"</string>
@@ -4661,7 +4661,7 @@
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Konto"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Enhetsnavn"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi-kontroll"</string>
-    <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"La appen kontrollere Wi-Fi"</string>
+    <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Appen kan kontrollere Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Tillat at denne appen slår Wi-Fi på eller av, søker etter og kobler til Wi-Fi-nettverk, legger til eller fjerner nettverk eller starter en lokal Wi-Fi-sone"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Spill av på"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Spill av <xliff:g id="LABEL">%s</xliff:g> på"</string>
