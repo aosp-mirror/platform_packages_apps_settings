@@ -111,7 +111,8 @@ public class BatteryEntry {
                 }
                 final NameAndIcon nameAndIcon =
                     BatteryEntry.loadNameAndIcon(
-                        be.mContext, be.getUid(), sHandler, be, be.mDefaultPackageName);
+                        be.mContext, be.getUid(), sHandler, be,
+                        be.mDefaultPackageName, be.name, be.icon);
                 if (nameAndIcon != null) {
                     be.icon = getNonNull(be.icon, nameAndIcon.icon);
                     be.name = getNonNull(be.name, nameAndIcon.name);
@@ -274,6 +275,7 @@ public class BatteryEntry {
             icon = mContext.getPackageManager().getDefaultActivityIcon();
         }
 
+        // Avoids post the loading icon and label in the background request.
         if (sHandler != null && loadDataInBackground) {
             synchronized (sRequestQueue) {
                 sRequestQueue.add(this);
@@ -289,9 +291,9 @@ public class BatteryEntry {
             int uid,
             Handler handler,
             BatteryEntry batteryEntry,
-            String defaultPackageName) {
-        String name = null;
-        Drawable icon = null;
+            String defaultPackageName,
+            String name,
+            Drawable icon) {
         // Bail out if the current sipper is not an App sipper.
         if (uid == 0 || uid == Process.INVALID_UID) {
             return null;
