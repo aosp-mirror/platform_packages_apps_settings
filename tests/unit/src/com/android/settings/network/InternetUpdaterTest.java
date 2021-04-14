@@ -109,9 +109,10 @@ public class InternetUpdaterTest {
 
     @Test
     public void updateInternetAvailable_wifiConnectedAndNoValidated_internetUnavailable() {
-        final NetworkCapabilities networkCapabilities = new NetworkCapabilities();
-        networkCapabilities.addTransportType(TRANSPORT_WIFI);
-        networkCapabilities.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        final NetworkCapabilities networkCapabilities = new NetworkCapabilities.Builder()
+                .addTransportType(TRANSPORT_WIFI)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .build();
 
         mInternetUpdater.updateInternetAvailable(networkCapabilities);
 
@@ -120,10 +121,11 @@ public class InternetUpdaterTest {
 
     @Test
     public void updateInternetAvailable_wifiConnectedAndValidated_internetAvailable() {
-        final NetworkCapabilities networkCapabilities = new NetworkCapabilities();
-        networkCapabilities.addTransportType(TRANSPORT_WIFI);
-        networkCapabilities.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
-        networkCapabilities.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        final NetworkCapabilities networkCapabilities = new NetworkCapabilities.Builder()
+                .addTransportType(TRANSPORT_WIFI)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+                .build();
 
         mInternetUpdater.updateInternetAvailable(networkCapabilities);
 
