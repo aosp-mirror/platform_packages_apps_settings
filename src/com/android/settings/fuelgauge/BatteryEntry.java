@@ -178,6 +178,12 @@ public class BatteryEntry {
     public BatteryEntry(Context context, Handler handler, UserManager um,
             @NonNull BatteryConsumer batteryConsumer, boolean isHidden, String[] packages,
             String packageName) {
+        this(context, handler, um, batteryConsumer, isHidden, packages, packageName, true);
+    }
+
+    public BatteryEntry(Context context, Handler handler, UserManager um,
+            @NonNull BatteryConsumer batteryConsumer, boolean isHidden, String[] packages,
+            String packageName, boolean loadDataInBackground) {
         sHandler = handler;
         mContext = context;
         mBatteryConsumer = batteryConsumer;
@@ -209,7 +215,7 @@ public class BatteryEntry {
                     name = mDefaultPackageName;
                 }
             }
-            getQuickNameIconForUid(uid, packages);
+            getQuickNameIconForUid(uid, packages, loadDataInBackground);
             return;
         } else if (batteryConsumer instanceof SystemBatteryConsumer) {
             mConsumedPower = batteryConsumer.getConsumedPower()
@@ -242,7 +248,8 @@ public class BatteryEntry {
         return name;
     }
 
-    void getQuickNameIconForUid(final int uid, final String[] packages) {
+    void getQuickNameIconForUid(
+            final int uid, final String[] packages, final boolean loadDataInBackground) {
         // Locale sync to system config in Settings
         final Locale locale = Locale.getDefault();
         if (sCurrentLocale != locale) {
@@ -267,7 +274,7 @@ public class BatteryEntry {
             icon = mContext.getPackageManager().getDefaultActivityIcon();
         }
 
-        if (sHandler != null) {
+        if (sHandler != null && loadDataInBackground) {
             synchronized (sRequestQueue) {
                 sRequestQueue.add(this);
             }
