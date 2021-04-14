@@ -37,7 +37,7 @@ public class CardPreferenceTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mContext.setTheme(R.style.PreferenceTheme);
+        mContext.setTheme(R.style.SettingsPreferenceTheme);
         mCardPreference = new CardPreference(mContext);
     }
 
