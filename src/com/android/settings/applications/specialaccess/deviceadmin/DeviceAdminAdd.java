@@ -108,7 +108,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
     DevicePolicyManager mDPM;
     AppOpsManager mAppOps;
     DeviceAdminInfo mDeviceAdmin;
-    CharSequence mAddMsgText;
+    String mAddMsgText;
     String mProfileOwnerName;
 
     ImageView mAdminIcon;
@@ -280,7 +280,11 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             }
         }
 
-        mAddMsgText = getIntent().getCharSequenceExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION);
+        final CharSequence addMsgCharSequence = getIntent().getCharSequenceExtra(
+                DevicePolicyManager.EXTRA_ADD_EXPLANATION);
+        if (addMsgCharSequence != null) {
+            mAddMsgText = addMsgCharSequence.toString();
+        }
 
         if (mAddingProfileOwner) {
             // If we're trying to add a profile owner and user setup hasn't completed yet, no
@@ -634,7 +638,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
         } catch (Resources.NotFoundException e) {
             mAdminDescription.setVisibility(View.GONE);
         }
-        if (mAddMsgText != null) {
+        if (!TextUtils.isEmpty(mAddMsgText)) {
             mAddMsg.setText(mAddMsgText);
             mAddMsg.setVisibility(View.VISIBLE);
         } else {
