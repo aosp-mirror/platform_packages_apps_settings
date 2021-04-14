@@ -42,6 +42,7 @@ public class ReduceBrightColorsPreferenceController extends TogglePreferenceCont
     private ContentObserver mSettingsContentObserver;
     private PrimarySwitchPreference mPreference;
     private final Context mContext;
+    private final ColorDisplayManager mColorDisplayManager;
 
     public ReduceBrightColorsPreferenceController(Context context,
             String preferenceKey) {
@@ -56,21 +57,17 @@ public class ReduceBrightColorsPreferenceController extends TogglePreferenceCont
                 }
             }
         };
+        mColorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED,
-                0,
-                UserHandle.USER_CURRENT) == 1;
+        return mColorDisplayManager.isReduceBrightColorsActivated();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, isChecked ? 1 : 0,
-                UserHandle.USER_CURRENT);
+        return mColorDisplayManager.setReduceBrightColorsActivated(isChecked);
     }
 
     @Override
