@@ -228,7 +228,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             launchedCDC = builder.setHeader(mTitle) // Show the title in the header location
                     .setDescription(mDetails)
                     .setAlternateButton(alternateButton)
-                    .setExternal(false)
+                    .setExternal(true)
                     .setUserId(LockPatternUtils.USER_FRP)
                     .show();
         } else if (isManagedProfile && isInternalActivity()
