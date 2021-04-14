@@ -65,6 +65,7 @@ public final class BatteryHistEntry {
     public final int mBatteryStatus;
     public final int mBatteryHealth;
 
+    private String mKey = null;
     private boolean mIsValidEntry = true;
 
     public BatteryHistEntry(ContentValues values) {
@@ -114,7 +115,20 @@ public final class BatteryHistEntry {
 
     /** Gets an identifier to represent this {@link BatteryHistEntry}. */
     public String getKey() {
-        return mPackageName + "-" + mUserId;
+        if (mKey == null) {
+            switch (mConsumerType) {
+                case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
+                    mKey = Long.toString(mUid);
+                    break;
+                case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
+                    mKey = "S|" + mDrainType;
+                    break;
+                case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
+                    mKey = "U|" + mUserId;
+                    break;
+            }
+        }
+        return mKey;
     }
 
     @Override
