@@ -112,6 +112,11 @@ public final class BatteryHistEntry {
         return mIsValidEntry;
     }
 
+    /** Gets an identifier to represent this {@link BatteryHistEntry}. */
+    public String getKey() {
+        return mPackageName + "-" + mUserId;
+    }
+
     @Override
     public String toString() {
         final String recordAtDateTime = ConvertUtils.utcToLocalTime(mTimestamp);
@@ -135,7 +140,7 @@ public final class BatteryHistEntry {
             return values.getAsInteger(key);
         };
         mIsValidEntry = false;
-        return -1;
+        return 0;
     }
 
     private int getInteger(Cursor cursor, String key) {
@@ -144,7 +149,7 @@ public final class BatteryHistEntry {
             return cursor.getInt(columnIndex);
         }
         mIsValidEntry = false;
-        return -1;
+        return 0;
     }
 
     private long getLong(ContentValues values, String key) {
@@ -152,7 +157,7 @@ public final class BatteryHistEntry {
             return values.getAsLong(key);
         }
         mIsValidEntry = false;
-        return -1L;
+        return 0L;
     }
 
     private long getLong(Cursor cursor, String key) {
@@ -161,7 +166,7 @@ public final class BatteryHistEntry {
             return cursor.getLong(columnIndex);
         }
         mIsValidEntry = false;
-        return -1L;
+        return 0L;
     }
 
     private double getDouble(ContentValues values, String key) {

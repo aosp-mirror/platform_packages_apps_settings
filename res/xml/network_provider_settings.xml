@@ -53,6 +53,10 @@
         settings:controller="com.android.settings.network.NetworkMobileProviderController"/>
 
     <PreferenceCategory
+        android:key="first_access_points"
+        android:layout="@layout/preference_category_no_label"/>
+
+    <PreferenceCategory
         android:key="access_points"
         android:layout="@layout/preference_category_no_label"/>
 
