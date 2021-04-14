@@ -144,10 +144,11 @@ public class ContextualWifiSliceTest {
     }
 
     private NetworkCapabilities makeValidatedNetworkCapabilities() {
-        final NetworkCapabilities nc = new NetworkCapabilities();
-        nc.clearAll();
-        nc.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
-        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        final NetworkCapabilities nc = new NetworkCapabilities.Builder()
+                .clearAll()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+                .build();
         return nc;
     }
 
