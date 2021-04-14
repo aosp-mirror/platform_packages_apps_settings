@@ -16,9 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
-import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
@@ -56,6 +53,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     private SettingsContentObserver mSettingsContentObserver;
     private ReduceBrightColorsIntensityPreferenceController mRbcIntensityPreferenceController;
     private ReduceBrightColorsPersistencePreferenceController mRbcPersistencePreferenceController;
+    private ColorDisplayManager mColorDisplayManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +77,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
                 updateSwitchBarToggleSwitch();
             }
         };
-
+        mColorDisplayManager = getContext().getSystemService(ColorDisplayManager.class);
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         // Parent sets the title when creating the view, so set it after calling super
         mToggleServiceSwitchPreference.setTitle(R.string.reduce_bright_colors_switch_title);
@@ -137,8 +135,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         AccessibilityStatsLogUtils.logAccessibilityServiceEnabled(mComponentName, enabled);
-        Settings.Secure.putInt(getContentResolver(),
-                REDUCE_BRIGHT_COLORS_ACTIVATED_KEY, enabled ? ON : OFF);
+        mColorDisplayManager.setReduceBrightColorsActivated(enabled);
     }
 
     @Override
@@ -161,8 +158,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
 
     @Override
     protected void updateSwitchBarToggleSwitch() {
-        final boolean checked = Settings.Secure.getInt(getContentResolver(),
-                REDUCE_BRIGHT_COLORS_ACTIVATED_KEY, OFF) == ON;
+        final boolean checked = mColorDisplayManager.isReduceBrightColorsActivated();
         mRbcIntensityPreferenceController.updateState(getPreferenceScreen()
                 .findPreference(KEY_INTENSITY));
         mRbcPersistencePreferenceController.updateState(getPreferenceScreen()
