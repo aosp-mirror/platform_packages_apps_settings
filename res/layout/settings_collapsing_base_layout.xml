@@ -20,24 +20,29 @@
     android:id="@+id/content_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionGroup="true">
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:outlineAmbientShadowColor="@android:color/transparent"
+        android:outlineSpotShadowColor="@android:color/transparent"
+        android:background="?android:attr/colorPrimary"
         android:theme="@style/Theme.CollapsingToolbar.Settings">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
-            android:background="?android:attr/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="226dp"
             app:maxLines="3"
-            app:contentScrim="?android:attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:scrimAnimationDuration="150"
+            app:scrimVisibleHeightTrigger="174dp"
+            app:statusBarScrim="@empty"
+            app:titleCollapseMode="fade"
             app:collapsedTitleTextAppearance="@style/ToolbarText.Collapsed"
-            app:statusBarScrim="?android:attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleMarginStart="18dp"
             app:expandedTitleMarginEnd="16dp"
             app:toolbarId="@id/action_bar">
