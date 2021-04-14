@@ -99,7 +99,7 @@ public class ProviderModelSliceHelperTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         mBundle = new PersistableBundle();
-        mNetwork = new Network(anyInt());
+        mNetwork = mock(Network.class);
 
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
@@ -288,7 +288,8 @@ public class ProviderModelSliceHelperTest {
     }
 
     private void addNetworkTransportType(int networkType) {
-        mNetworkCapabilities = new NetworkCapabilities().addTransportType(networkType);
+        mNetworkCapabilities = new NetworkCapabilities.Builder()
+                .addTransportType(networkType).build();
         when(mConnectivityManager.getNetworkCapabilities(mNetwork)).thenReturn(
                 mNetworkCapabilities);
     }
