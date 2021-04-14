@@ -46,6 +46,8 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
             Settings.Global.POWER_BUTTON_LONG_PRESS;
     private static final Uri POWER_BUTTON_LONG_PRESS_SETTING_URI =
             Settings.Global.getUriFor(POWER_BUTTON_LONG_PRESS_SETTING);
+    private static final String KEY_CHORD_POWER_VOLUME_UP_SETTING =
+            Settings.Global.KEY_CHORD_POWER_VOLUME_UP;
 
     // Used for fallback to global actions if necessary.
     @VisibleForTesting
@@ -55,7 +57,7 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
     static final String CARDS_ENABLED_KEY = Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
 
     /**
-     * Value used for long press power button behaviour when Assist setting is enabled.
+     * Values used for long press power button behaviour when Assist setting is enabled.
      *
      * {@link com.android.server.policy.PhoneWindowManager#LONG_PRESS_POWER_GLOBAL_ACTIONS} for
      * source of the value.
@@ -66,6 +68,17 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
     static final int LONG_PRESS_POWER_SHUT_OFF = 2;
     @VisibleForTesting
     static final int LONG_PRESS_POWER_ASSISTANT_VALUE = 5; // Settings.Secure.ASSISTANT
+
+    /**
+     * Values used for volume key chord behaviour when Assist setting is enabled.
+     *
+     * Values based on config_keyChordPowerVolumeUp in
+     * frameworks/base/core/res/res/values/config.xml
+     */
+    @VisibleForTesting
+    static final int KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE = 1;
+    @VisibleForTesting
+    static final int KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS = 2;
 
     /**
      * Value used for long press power button behaviour when the Assist setting is disabled.
@@ -126,6 +139,17 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (setPowerLongPressValue(isChecked)) {
+            // The key chord value is dependant on the long press setting and it always
+            // toggled in tandem. POWER_BUTTON_LONG_PRESS_SETTING is always the source
+            // of truth for both.
+            return setPowerVolumeChordValue(isChecked);
+        }
+
+        return false;
+    }
+
+    private boolean setPowerLongPressValue(boolean isChecked) {
         if (isChecked) {
             return Settings.Global.putInt(mContext.getContentResolver(),
                     POWER_BUTTON_LONG_PRESS_SETTING, LONG_PRESS_POWER_ASSISTANT_VALUE);
@@ -145,6 +169,18 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
 
         return Settings.Global.putInt(mContext.getContentResolver(),
                 POWER_BUTTON_LONG_PRESS_SETTING, defaultPowerButtonValue);
+    }
+
+    /**
+     * Updates {@link Settings.Global.KEY_CHORD_POWER_VOLUME_UP} based on the changed value of
+     * {@link #POWER_BUTTON_LONG_PRESS_SETTING}. If power button is used for Assist, key chord
+     * should show the power menu.
+     */
+    private boolean setPowerVolumeChordValue(boolean isPowerButtonLongPressChecked) {
+        return Settings.Global.putInt(mContext.getContentResolver(),
+                KEY_CHORD_POWER_VOLUME_UP_SETTING, isPowerButtonLongPressChecked
+                        ? KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS
+                        : KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
     }
 
     /**
