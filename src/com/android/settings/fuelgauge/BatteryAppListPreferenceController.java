@@ -209,7 +209,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
         if (sConfig.shouldShowBatteryAttributionList(mContext)) {
             final int dischargePercentage = getDischargePercentage(batteryUsageStats);
-            final List<BatteryEntry> usageList = getCoalescedUsageList(showAllApps);
+            final List<BatteryEntry> usageList =
+                getCoalescedUsageList(showAllApps, /*loadDataInBackground=*/ true);
             final double totalPower = batteryUsageStats.getConsumedPower();
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
@@ -267,7 +268,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             return null;
         }
         final int dischargePercentage = getDischargePercentage(batteryUsageStats);
-        final List<BatteryEntry> usageList = getCoalescedUsageList(showAllApps);
+        final List<BatteryEntry> usageList =
+            getCoalescedUsageList(showAllApps, /*loadDataInBackground=*/ false);
         final double totalPower = batteryUsageStats.getConsumedPower();
         for (int i = 0; i < usageList.size(); i++) {
             final BatteryEntry entry = usageList.get(i);
@@ -293,7 +295,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
      *
      * @return A sorted list of apps using power.
      */
-    private List<BatteryEntry> getCoalescedUsageList(boolean showAllApps) {
+    private List<BatteryEntry> getCoalescedUsageList(
+            boolean showAllApps, boolean loadDataInBackground) {
         final SparseArray<BatteryEntry> batteryEntryList = new SparseArray<>();
 
         final ArrayList<BatteryEntry> results = new ArrayList<>();
@@ -333,7 +336,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             if (index < 0) {
                 // New entry.
                 batteryEntryList.put(realUid, new BatteryEntry(mContext, mHandler, mUserManager,
-                        consumer, isHidden, packages, null));
+                        consumer, isHidden, packages, null, loadDataInBackground));
             } else {
                 // Combine BatterySippers if we already have one with this UID.
                 final BatteryEntry existingSipper = batteryEntryList.valueAt(index);
@@ -350,7 +353,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
 
             results.add(new BatteryEntry(mContext, mHandler, mUserManager,
-                    consumer, /* isHidden */ true, null, null));
+                    consumer, /* isHidden */ true, null, null, loadDataInBackground));
         }
 
         if (showAllApps) {
@@ -359,7 +362,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             for (int i = 0, size = userBatteryConsumers.size(); i < size; i++) {
                 final UserBatteryConsumer consumer = userBatteryConsumers.get(i);
                 results.add(new BatteryEntry(mContext, mHandler, mUserManager,
-                        consumer, /* isHidden */ true, null, null));
+                        consumer, /* isHidden */ true, null, null, loadDataInBackground));
             }
         }
 
