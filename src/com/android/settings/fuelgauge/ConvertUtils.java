@@ -26,13 +26,22 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 /** A utility class to convert data into another types. */
 public final class ConvertUtils {
     private static final String TAG = "ConvertUtils";
+    private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
+    private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
+        new BatteryHistEntry(new ContentValues());
 
     /** Invalid system battery consumer drain type. */
     public static final int INVALID_DRAIN_TYPE = -1;
@@ -125,5 +134,171 @@ public final class ConvertUtils {
                 new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.ENGLISH);
         }
         return sSimpleDateFormat.format(new Date(timestamp));
+    }
+
+    /** Gets indexed battery usage data for each corresponding time slot. */
+    public static Map<Integer, List<BatteryDiffEntry>> getIndexedUsageMap(
+            final int timeSlotSize,
+            final long[] batteryHistoryKeys,
+            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
+        final Map<Integer, List<BatteryDiffEntry>> resultMap = new HashMap<>();
+        // Generates a temporary map to calculate diff usage data, which converts the inputted
+        // List<BatteryDiffEntry> into Map<String, BatteryHistEntry> with the key comes from
+        // the BatteryHistEntry.getKey() method.
+        final Map<Long, Map<String, BatteryHistEntry>> newBatteryHistoryMap = new HashMap<>();
+        for (int index = 0; index < batteryHistoryKeys.length; index++) {
+            final Long timestamp = Long.valueOf(batteryHistoryKeys[index]);
+            final List<BatteryHistEntry> entries = batteryHistoryMap.get(timestamp);
+            if (entries == null || entries.isEmpty()) {
+                continue;
+            }
+            final Map<String, BatteryHistEntry> slotBatteryHistDataMap = new HashMap<>();
+            for (BatteryHistEntry entry : entries) {
+                // Excludes auto-generated fake BatteryHistEntry data,
+                // which is used to record battery level and status purpose only.
+                if (!FAKE_PACKAGE_NAME.equals(entry.mPackageName)) {
+                    slotBatteryHistDataMap.put(entry.getKey(), entry);
+                }
+            }
+            newBatteryHistoryMap.put(timestamp, slotBatteryHistDataMap);
+        }
+
+        // Each time slot usage diff data =
+        //     Math.abs(timestamp[i+2] data - timestamp[i+1] data) +
+        //     Math.abs(timestamp[i+1] data - timestamp[i] data);
+        // since we want to aggregate every two hours data into a single time slot.
+        final int timestampStride = 2;
+        for (int index = 0; index < timeSlotSize; index++) {
+            final Long currentTimestamp =
+                Long.valueOf(batteryHistoryKeys[index * timestampStride]);
+            final Long nextTimestamp =
+                Long.valueOf(batteryHistoryKeys[index * timestampStride + 1]);
+            final Long nextTwoTimestamp =
+                Long.valueOf(batteryHistoryKeys[index * timestampStride + 2]);
+
+            // Fetches BatteryHistEntry data from corresponding time slot.
+            final Map<String, BatteryHistEntry> currentBatteryHistMap =
+                newBatteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
+            final Map<String, BatteryHistEntry> nextBatteryHistMap =
+                newBatteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
+            final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
+                newBatteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
+
+            // Collects all keys in these three time slot records as population.
+            final Set<String> allBatteryHistEntryKeys = new HashSet<>();
+            allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
+            allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
+            allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
+
+            double totalConsumePower = 0.0;
+            final List<BatteryDiffEntry> batteryDiffEntryList = new ArrayList<>();
+            // Adds a specific time slot BatteryDiffEntry list into result map.
+            resultMap.put(Integer.valueOf(index), batteryDiffEntryList);
+
+            // Calculates all packages diff usage data in a specific time slot.
+            for (String key : allBatteryHistEntryKeys) {
+                final BatteryHistEntry currentEntry =
+                    currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+                final BatteryHistEntry nextEntry =
+                    nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+                final BatteryHistEntry nextTwoEntry =
+                    nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+                // Cumulative values is a specific time slot for a specific app.
+                final long foregroundUsageTimeInMs =
+                    getDiffValue(
+                        currentEntry.mForegroundUsageTimeInMs,
+                        nextEntry.mForegroundUsageTimeInMs,
+                        nextTwoEntry.mForegroundUsageTimeInMs);
+                final long backgroundUsageTimeInMs =
+                    getDiffValue(
+                        currentEntry.mBackgroundUsageTimeInMs,
+                        nextEntry.mBackgroundUsageTimeInMs,
+                        nextTwoEntry.mBackgroundUsageTimeInMs);
+                final double consumePower =
+                    getDiffValue(
+                        currentEntry.mConsumePower,
+                        nextEntry.mConsumePower,
+                        nextTwoEntry.mConsumePower);
+                totalConsumePower += consumePower;
+
+                // Excludes entry since we don't have enough data to calculate.
+                if (foregroundUsageTimeInMs == 0
+                    && backgroundUsageTimeInMs == 0
+                    && consumePower == 0) {
+                    continue;
+                }
+                final BatteryHistEntry selectedBatteryEntry =
+                    selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
+                if (selectedBatteryEntry == null) {
+                    continue;
+                }
+                batteryDiffEntryList.add(
+                    new BatteryDiffEntry(
+                        foregroundUsageTimeInMs,
+                        backgroundUsageTimeInMs,
+                        consumePower,
+                        selectedBatteryEntry));
+            }
+            // Sets total consume power data into all BatteryDiffEntry in the same slot.
+            for (BatteryDiffEntry diffEntry : batteryDiffEntryList) {
+                diffEntry.setTotalConsumePower(totalConsumePower);
+            }
+        }
+        insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
+        return resultMap;
+    }
+
+    private static void insert24HoursData(
+            final int desiredIndex,
+            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
+        final Map<String, BatteryDiffEntry> resultMap = new HashMap<>();
+        double totalConsumePower = 0.0;
+        // Loops for all BatteryDiffEntry and aggregate them together.
+        for (List<BatteryDiffEntry> entryList : indexedUsageMap.values()) {
+            for (BatteryDiffEntry entry : entryList) {
+                final String key = entry.mBatteryHistEntry.getKey();
+                final BatteryDiffEntry oldBatteryDiffEntry = resultMap.get(key);
+                // Creates new BatteryDiffEntry if we don't have it.
+                if (oldBatteryDiffEntry == null) {
+                    resultMap.put(key, entry.clone());
+                } else {
+                    // Sums up some fields data into the existing one.
+                    oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
+                        entry.mForegroundUsageTimeInMs;
+                    oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
+                        entry.mBackgroundUsageTimeInMs;
+                    oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
+                }
+                totalConsumePower += entry.mConsumePower;
+            }
+        }
+        final List<BatteryDiffEntry> resultList = new ArrayList<>(resultMap.values());
+        // Sets total 24 hours consume power data into all BatteryDiffEntry.
+        for (BatteryDiffEntry entry : resultList) {
+            entry.setTotalConsumePower(totalConsumePower);
+        }
+        indexedUsageMap.put(Integer.valueOf(desiredIndex), resultList);
+    }
+
+    private static long getDiffValue(long v1, long v2, long v3) {
+        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
+    }
+
+    private static double getDiffValue(double v1, double v2, double v3) {
+        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
+    }
+
+    private static BatteryHistEntry selectBatteryHistEntry(
+            BatteryHistEntry entry1,
+            BatteryHistEntry entry2,
+            BatteryHistEntry entry3) {
+        if (entry1 != null && entry1 != EMPTY_BATTERY_HIST_ENTRY) {
+            return entry1;
+        } else if (entry2 != null && entry2 != EMPTY_BATTERY_HIST_ENTRY) {
+            return entry2;
+        } else {
+            return entry3 != null && entry3 != EMPTY_BATTERY_HIST_ENTRY
+                ? entry3 : null;
+        }
     }
 }

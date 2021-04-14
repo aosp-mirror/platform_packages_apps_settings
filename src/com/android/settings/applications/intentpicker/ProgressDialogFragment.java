@@ -44,6 +44,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.SortedSet;
 
 /** A customized {@link InstrumentedDialogFragment} with a progress bar. */
 public class ProgressDialogFragment extends InstrumentedDialogFragment {
@@ -146,9 +147,9 @@ public class ProgressDialogFragment extends InstrumentedDialogFragment {
         int index = 0;
         mSupportedLinkWrapperList = new ArrayList<>();
         for (String host : links) {
-            final List<DomainOwner> ownerList =
+            final SortedSet<DomainOwner> ownerSet =
                     mDomainVerificationManager.getOwnersForDomain(host);
-            mSupportedLinkWrapperList.add(new SupportedLinkWrapper(getActivity(), host, ownerList));
+            mSupportedLinkWrapperList.add(new SupportedLinkWrapper(getActivity(), host, ownerSet));
             index++;
             // The cancel was clicked while progressing to collect data.
             if (!mProgressAlertDialog.isShowing()) {
@@ -167,7 +168,7 @@ public class ProgressDialogFragment extends InstrumentedDialogFragment {
                     mProgressAlertDialog.getProgressBar().setProgress(progress);
                 }
             });
-            if (ownerList.size() == 0) {
+            if (ownerSet.size() == 0) {
                 SystemClock.sleep(PROGRESS_BAR_STEPPING_TIME);
             }
         }
