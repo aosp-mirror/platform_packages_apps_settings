@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.ComponentName;
-
 /**
  * Feature provider for battery settings usage.
  */
@@ -26,6 +24,6 @@ public interface BatterySettingsFeatureProvider {
     /**
      * Get replacement activity for a given activity or fragment path.
      */
-    ComponentName getReplacingActivity(ComponentName originalActivity);
+    String getReplacingActivityName(String originalActivity);
 
 }
