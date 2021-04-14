@@ -5890,6 +5890,21 @@
     <!-- Dialog message when app can't been restricted because it is not optimized [CHAR_LIMIT=120] -->
     <string name="background_activity_disabled_dialog_text">Since this app is not set to optimize battery, you can\u2019t restrict it.\n\nTo restrict the app, first turn on battery optimization.</string>
 
+    <!-- Title for the battery unrestricted settings [CHAR_LIMIT=40] -->
+    <string name="manager_battery_usage_unrestricted_title">Unrestricted</string>
+    <!-- Title for the battery optimized settings [CHAR_LIMIT=40] -->
+    <string name="manager_battery_usage_optimized_title">Optimized</string>
+    <!-- Summary for the battery unrestricted settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_unrestricted_summary">Allow battery usage in background without restrictions. May use more battery.</string>
+    <!-- Summary for the battery optimized settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_optimized_summary">Optimize based on your usage. Recommended for most apps.</string>
+    <!-- Summary for the battery restricted settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_restricted_summary">Restrict battery usage while in background. App may not work as expected. Notifications may be delayed.</string>
+    <!-- Footer for the manage battery usage page [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_footer">Changing how an app uses your battery can affect its performance.</string>
+    <!-- Footer for the manage battery usage page when app is limited to specific option (e.g This app requires restricted battery usage) [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_footer_limited">This app requires <xliff:g id="state" example="restricted">%1$s</xliff:g> battery usage.</string>
+
     <!-- Title for the screen usage in power use UI [CHAR_LIMIT=60] -->
     <string name="device_screen_usage">Screen usage since full charge</string>
     <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
@@ -6298,6 +6313,8 @@
     <string name ="battery_detail_info_title">Since full charge</string>
     <!-- Title for the battery management group [CHAR LIMIT=40] -->
     <string name ="battery_detail_manage_title">Manage battery usage</string>
+    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_and_background_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background for past 24 hr</string>
 
     <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
     <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
@@ -13103,17 +13120,17 @@
     <string name="apps_dashboard_title">Apps</string>
 
     <!-- Bluetooth message permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_message_access_notification_content">Untrusted device wants to access your messages. Tap for details.</string>
+    <string name="bluetooth_message_access_notification_content">A device wants to access your messages. Tap for details.</string>
     <!-- Bluetooth message permission alert for dialog title [CHAR LIMIT=none] -->
     <string name="bluetooth_message_access_dialog_title">Allow access to messages?</string>
     <!-- Bluetooth message permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_message_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <string name="bluetooth_message_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
     <!-- Bluetooth phonebook permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_access_notification_content">Untrusted device wants to access your contacts and call log. Tap for details.</string>
+    <string name="bluetooth_phonebook_access_notification_content">A device wants to access your contacts and call log. Tap for details.</string>
     <!-- Bluetooth phonebook permission alert for dialog title [CHAR LIMIT=none] -->
     <string name="bluetooth_phonebook_access_dialog_title">Allow access to contacts and call log?</string>
     <!-- Bluetooth phonebook permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <string name="bluetooth_phonebook_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
 
     <!-- Brightness category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_brightness">Brightness</string>
@@ -13211,4 +13228,7 @@
 
     <!-- All apps screen title, entry name on Apps page for the user to go to the all apps page. [CHAR LIMIT=30] -->
     <string name="all_apps">All apps</string>
+
+    <!-- Label for button to not allow grant the permission for remote devices. [CHAR_LIMIT=50] -->
+    <string name="request_manage_bluetooth_permission_dont_allow">Don\u2019t allow</string>
 </resources>

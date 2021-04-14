@@ -24,6 +24,7 @@ import android.util.Log;
 import com.android.settings.R;
 
 import java.util.List;
+import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 /**
@@ -34,14 +35,14 @@ public class SupportedLinkWrapper implements Comparable {
     private static final String TAG = "SupportedLinkWrapper";
 
     private String mHost;
-    private List<DomainOwner> mOwnerList;
+    private SortedSet<DomainOwner> mOwnerSet;
     private boolean mIsEnabled;
     private String mLastOwnerName;
     private boolean mIsChecked;
 
-    public SupportedLinkWrapper(Context context, String host, List<DomainOwner> ownerList) {
+    public SupportedLinkWrapper(Context context, String host, SortedSet<DomainOwner> ownerSet) {
         mHost = host;
-        mOwnerList = ownerList;
+        mOwnerSet = ownerSet;
         mIsEnabled = true;
         mLastOwnerName = "";
         mIsChecked = false;
@@ -49,8 +50,8 @@ public class SupportedLinkWrapper implements Comparable {
     }
 
     private void init(Context context) {
-        if (mOwnerList.size() > 0) {
-            final long nonOverirideableNo = mOwnerList.stream()
+        if (mOwnerSet.size() > 0) {
+            final long nonOverirideableNo = mOwnerSet.stream()
                     .filter(it -> !it.isOverrideable())
                     .count();
             mIsEnabled = (nonOverirideableNo == 0L);
@@ -63,7 +64,7 @@ public class SupportedLinkWrapper implements Comparable {
     }
 
     private String getLastPackageLabel(Context context, boolean isOverrideable) {
-        final List<String> labelList = mOwnerList.stream()
+        final List<String> labelList = mOwnerSet.stream()
                 .filter(it -> it.isOverrideable() == isOverrideable)
                 .map(it -> getLabel(context, it.getPackageName()))
                 .filter(label -> label != null)
