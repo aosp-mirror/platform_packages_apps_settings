@@ -161,5 +161,7 @@ public final class BatteryHistEntryTest {
             .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
         assertThat(entry.mBatteryHealth)
             .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
+        assertThat(entry.getKey())
+            .isEqualTo("com.google.android.settings.battery-" + entry.mUserId);
     }
 }
