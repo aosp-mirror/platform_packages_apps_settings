@@ -17,7 +17,6 @@
 package com.android.settings.password;
 
 import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -81,9 +80,11 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             super.onViewCreated(view, savedInstanceState);
             final Activity activity = getActivity();
             ChooseLockGenericController chooseLockGenericController =
-                    new ChooseLockGenericController(activity, mUserId);
-            boolean anyOptionsShown = chooseLockGenericController.getVisibleScreenLockTypes(
-                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false).size() > 0;
+                    new ChooseLockGenericController.Builder(activity, mUserId)
+                    .setHideInsecureScreenLockTypes(true)
+                    .build();
+            boolean anyOptionsShown = chooseLockGenericController
+                    .getVisibleAndEnabledScreenLockTypes().size() > 0;
             boolean showOptionsButton = activity.getIntent().getBooleanExtra(
                     ChooseLockGeneric.ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (!anyOptionsShown) {
