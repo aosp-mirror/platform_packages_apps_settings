@@ -55,13 +55,20 @@ public class BatteryEntry {
 
     public static final class NameAndIcon {
         public final String name;
+        public final String packageName;
         public final Drawable icon;
         public final int iconId;
 
         public NameAndIcon(String name, Drawable icon, int iconId) {
+            this(name, /*packageName=*/ null, icon, iconId);
+        }
+
+        public NameAndIcon(
+                String name, String packageName, Drawable icon, int iconId) {
             this.name = name;
             this.icon = icon;
             this.iconId = iconId;
+            this.packageName = packageName;
         }
     }
 
@@ -102,7 +109,15 @@ public class BatteryEntry {
                     }
                     be = sRequestQueue.remove(0);
                 }
-                be.loadNameAndIcon();
+                final NameAndIcon nameAndIcon =
+                    BatteryEntry.loadNameAndIcon(
+                        be.mContext, be.getUid(), sHandler, be, be.mDefaultPackageName);
+                if (nameAndIcon != null) {
+                    be.icon = getNonNull(be.icon, nameAndIcon.icon);
+                    be.name = getNonNull(be.name, nameAndIcon.name);
+                    be.mDefaultPackageName = getNonNull(
+                        be.mDefaultPackageName, nameAndIcon.packageName);
+                }
             }
         }
     }
@@ -262,27 +277,33 @@ public class BatteryEntry {
     /**
      * Loads the app label and icon image and stores into the cache.
      */
-    public void loadNameAndIcon() {
+    public static NameAndIcon loadNameAndIcon(
+            Context context,
+            int uid,
+            Handler handler,
+            BatteryEntry batteryEntry,
+            String defaultPackageName) {
+        String name = null;
+        Drawable icon = null;
         // Bail out if the current sipper is not an App sipper.
-        final int uid = getUid();
         if (uid == 0 || uid == Process.INVALID_UID) {
-            return;
+            return null;
         }
 
-        final PackageManager pm = mContext.getPackageManager();
+        final PackageManager pm = context.getPackageManager();
         final String[] packages;
         if (uid == Process.SYSTEM_UID) {
-            packages = new String[]{PACKAGE_SYSTEM};
+            packages = new String[] {PACKAGE_SYSTEM};
         } else {
             packages = pm.getPackagesForUid(uid);
         }
 
         if (packages != null) {
-            String[] packageLabels = new String[packages.length];
+            final String[] packageLabels = new String[packages.length];
             System.arraycopy(packages, 0, packageLabels, 0, packages.length);
 
             // Convert package names to user-facing labels where possible
-            IPackageManager ipm = AppGlobals.getPackageManager();
+            final IPackageManager ipm = AppGlobals.getPackageManager();
             final int userId = UserHandle.getUserId(uid);
             for (int i = 0; i < packageLabels.length; i++) {
                 try {
@@ -293,12 +314,12 @@ public class BatteryEntry {
                                 + packageLabels[i] + ", user " + userId);
                         continue;
                     }
-                    CharSequence label = ai.loadLabel(pm);
+                    final CharSequence label = ai.loadLabel(pm);
                     if (label != null) {
                         packageLabels[i] = label.toString();
                     }
                     if (ai.icon != 0) {
-                        mDefaultPackageName = packages[i];
+                        defaultPackageName = packages[i];
                         icon = ai.loadIcon(pm);
                         break;
                     }
@@ -326,7 +347,7 @@ public class BatteryEntry {
                             if (nm != null) {
                                 name = nm.toString();
                                 if (pi.applicationInfo.icon != 0) {
-                                    mDefaultPackageName = pkgName;
+                                    defaultPackageName = pkgName;
                                     icon = pi.applicationInfo.loadIcon(pm);
                                 }
                                 break;
@@ -352,12 +373,13 @@ public class BatteryEntry {
         UidToDetail utd = new UidToDetail();
         utd.name = name;
         utd.icon = icon;
-        utd.packageName = mDefaultPackageName;
+        utd.packageName = defaultPackageName;
 
         sUidCache.put(uidString, utd);
-        if (sHandler != null) {
-            sHandler.sendMessage(sHandler.obtainMessage(MSG_UPDATE_NAME_ICON, this));
+        if (handler != null) {
+            handler.sendMessage(sHandler.obtainMessage(MSG_UPDATE_NAME_ICON, batteryEntry));
         }
+        return new NameAndIcon(name, defaultPackageName, icon, /*iconId=*/ 0);
     }
 
     /**
@@ -556,5 +578,9 @@ public class BatteryEntry {
                 break;
         }
         return new NameAndIcon(name, null /* icon */, iconId);
+    }
+
+    private static <T> T getNonNull(T originalObj, T newObj) {
+        return newObj != null ? newObj : originalObj;
     }
 }
