@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.ComponentName;
 import android.content.Context;
 
 /**
@@ -31,7 +30,7 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
     }
 
     @Override
-    public ComponentName getReplacingActivity(ComponentName originalActivity) {
+    public String getReplacingActivityName(String originalActivity) {
         return null;
     }
 }
