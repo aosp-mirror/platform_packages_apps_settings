@@ -69,7 +69,7 @@ public class TranscodeNotificationPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_shouldReturn_isAvailable() {
+    public void getAvailabilityStatus_shouldReturnAVAILABLE() {
         assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
