@@ -40,9 +40,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RunWith(AndroidJUnit4.class)
 public class AllowedNetworkTypesListenerTest {
 
@@ -73,12 +70,11 @@ public class AllowedNetworkTypesListenerTest {
     @Test
     public void onChange_shouldCallListener() {
         mAllowedNetworkTypesListener.mListener = mListener;
-        Map<Integer, Long> allowedNetworkTypesList = new HashMap<>();
         long networkType = (long) RadioAccessFamily.getRafFromNetworkType(
                 TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO);
-        allowedNetworkTypesList.put(TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
-                networkType);
-        mAllowedNetworkTypesListener.onAllowedNetworkTypesChanged(allowedNetworkTypesList);
+
+        mAllowedNetworkTypesListener.onAllowedNetworkTypesChanged(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER, networkType);
 
         verify(mListener).onAllowedNetworkTypesChanged();
     }

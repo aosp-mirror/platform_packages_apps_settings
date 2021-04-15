@@ -23,7 +23,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import java.util.Map;
 import java.util.concurrent.Executor;
 
 /**
@@ -70,9 +69,10 @@ public class AllowedNetworkTypesListener extends TelephonyCallback implements
     }
 
     @Override
-    public void onAllowedNetworkTypesChanged(Map<Integer, Long> allowedNetworkTypesList) {
-        long newAllowedNetworkType = allowedNetworkTypesList.get(
-                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
+    public void onAllowedNetworkTypesChanged(int reason, long newAllowedNetworkType) {
+        if (reason != TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER) {
+            return;
+        }
         if (mListener != null && mAllowedNetworkType != newAllowedNetworkType) {
             mListener.onAllowedNetworkTypesChanged();
             Log.d(LOG_TAG, "onAllowedNetworkChanged: " + mAllowedNetworkType);
