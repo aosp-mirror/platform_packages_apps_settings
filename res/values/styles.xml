@@ -341,22 +341,13 @@
         <item name="android:padding">8dp</item>
     </style>
 
-    <style name="TextAppearance.NotificationHistory">
+    <style name="TextAppearance.NotificationHistory" parent="@android:style/Theme.DeviceDefault.DayNight">
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.NotificationHistory.AppName">
         <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
         <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="TextAppearance.NotificationHistory.Title">
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
-    </style>
-
-    <style name="TextAppearance.NotificationHistory.Text">
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="TextAppearance.ContextualCardDismissalText"

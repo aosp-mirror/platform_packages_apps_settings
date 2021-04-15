@@ -81,6 +81,9 @@ public class LongPressPowerButtonPreferenceControllerTest {
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_ASSISTANT_VALUE);
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
+                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS);
     }
 
     @Test
@@ -93,6 +96,9 @@ public class LongPressPowerButtonPreferenceControllerTest {
         mController.onPreferenceChange(null, false);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(8);
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
+                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
     }
 
     @Test
@@ -107,6 +113,9 @@ public class LongPressPowerButtonPreferenceControllerTest {
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_SHUT_OFF);
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
+                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
     }
 
     @Test
@@ -125,5 +134,8 @@ public class LongPressPowerButtonPreferenceControllerTest {
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_GLOBAL_ACTIONS);
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
+                LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
     }
 }

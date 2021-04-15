@@ -19,8 +19,10 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.os.BatteryConsumer;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
@@ -47,6 +49,7 @@ import java.util.TimeZone;
 @RunWith(RobolectricTestRunner.class)
 public final class ConvertUtilsTest {
 
+    private Context mContext;
     @Mock
     private BatteryUsageStats mBatteryUsageStats;
     @Mock
@@ -63,6 +66,7 @@ public final class ConvertUtilsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
     }
 
     @Test
@@ -208,7 +212,7 @@ public final class ConvertUtilsTest {
 
         final Map<Integer, List<BatteryDiffEntry>> resultMap =
             ConvertUtils.getIndexedUsageMap(
-                timeSlotSize, batteryHistoryKeys, batteryHistoryMap);
+                mContext, timeSlotSize, batteryHistoryKeys, batteryHistoryMap);
 
         assertThat(resultMap).hasSize(3);
         // Verifies the first timestamp result.
