@@ -169,9 +169,14 @@ public class VpnPreferenceController extends AbstractPreferenceController
                         - connectedLegacyVpnCount;
                 if (vpnCount == 1) {
                     summary = mContext.getString(R.string.vpn_settings_insecure_single);
+                } else if (insecureVpnCount == 1) {
+                    summary = mContext.getString(
+                            R.string.vpn_settings_single_insecure_multiple_total,
+                            insecureVpnCount);
                 } else {
                     summary = mContext.getString(
-                            R.string.vpn_settings_insecure_multiple, insecureVpnCount);
+                            R.string.vpn_settings_multiple_insecure_multiple_total,
+                            insecureVpnCount);
                 }
             }
         }

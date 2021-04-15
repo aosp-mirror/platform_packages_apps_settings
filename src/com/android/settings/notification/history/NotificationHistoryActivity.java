@@ -20,12 +20,15 @@ import static android.provider.Settings.Secure.NOTIFICATION_HISTORY_ENABLED;
 
 import static androidx.core.view.accessibility.AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED;
 
+import android.annotation.AttrRes;
+import android.annotation.ColorInt;
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.INotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Outline;
 import android.os.Bundle;
@@ -39,6 +42,7 @@ import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.util.Slog;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +56,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.logging.UiEvent;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.UiEventLoggerImpl;
+import com.android.internal.widget.NotificationExpandButton;
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
@@ -148,7 +153,8 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         findViewById(R.id.today_list).setVisibility(
                 notifications.isEmpty() ? View.GONE : View.VISIBLE);
         mCountdownLatch.countDown();
-        mTodayView.setClipToOutline(true);
+        View recyclerView = mTodayView.findViewById(R.id.apps);
+        recyclerView.setClipToOutline(true);
         mTodayView.setOutlineProvider(mOutlineProvider);
         // for each package, new header and recycler view
         for (int i = 0, notificationsSize = notifications.size(); i < notificationsSize; i++) {
@@ -159,7 +165,13 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
             final View container = viewForPackage.findViewById(R.id.notification_list);
             container.setVisibility(View.GONE);
             View header = viewForPackage.findViewById(R.id.app_header);
-            ImageView expand = viewForPackage.findViewById(R.id.expand);
+            NotificationExpandButton expand = viewForPackage.findViewById(
+                    com.android.internal.R.id.expand_button);
+            int textColor = obtainThemeColor(android.R.attr.textColorPrimary);
+            int backgroundColor = obtainThemeColor(android.R.attr.colorBackgroundFloating);
+            expand.setDefaultPillColor(backgroundColor);
+            expand.setDefaultTextColor(textColor);
+            expand.setExpanded(false);
             header.setStateDescription(container.getVisibility() == View.VISIBLE
                     ? getString(R.string.condition_expand_hide)
                     : getString(R.string.condition_expand_show));
@@ -167,9 +179,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
             header.setOnClickListener(v -> {
                 container.setVisibility(container.getVisibility() == View.VISIBLE
                         ? View.GONE : View.VISIBLE);
-                expand.setImageResource(container.getVisibility() == View.VISIBLE
-                        ? R.drawable.ic_expand_less
-                        : com.android.internal.R.drawable.ic_expand_more);
+                expand.setExpanded(container.getVisibility() == View.VISIBLE);
                 header.setStateDescription(container.getVisibility() == View.VISIBLE
                         ? getString(R.string.condition_expand_hide)
                         : getString(R.string.condition_expand_show));
@@ -217,8 +227,9 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         mTodayView = findViewById(R.id.apps);
         mSnoozeView = findViewById(R.id.snoozed_list);
         mDismissView = findViewById(R.id.recently_dismissed_list);
-        mDismissView.setClipToOutline(true);
-        mDismissView.setOutlineProvider(mOutlineProvider);
+        View recyclerView = mDismissView.findViewById(R.id.notification_list);
+        recyclerView.setClipToOutline(true);
+        recyclerView.setOutlineProvider(mOutlineProvider);
         mHistoryOff = findViewById(R.id.history_off);
         mHistoryOn = findViewById(R.id.history_on);
         mHistoryEmpty = findViewById(R.id.history_on_empty);
@@ -299,6 +310,14 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
     public boolean onNavigateUp() {
         finish();
         return true;
+    }
+
+    private @ColorInt int obtainThemeColor(@AttrRes int attrRes) {
+        Resources.Theme theme = new ContextThemeWrapper(this,
+                android.R.style.Theme_DeviceDefault_DayNight).getTheme();
+        try (TypedArray ta = theme.obtainStyledAttributes(new int[]{attrRes})) {
+            return ta == null ? 0 : ta.getColor(0, 0);
+        }
     }
 
     private void bindSwitch() {

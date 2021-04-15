@@ -19,7 +19,7 @@
 <!-- Things unrelated to preference framework UI customization should go to other styles files -->
 <resources>
 
-    <style name="SettingsPreferenceTheme" parent="@style/PreferenceTheme.SettingsBase">
+    <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.SettingsBase">
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
         <item name="cardPreferenceStyle">@style/CardPreference</item>
         <item name="slicePreferenceStyle">@style/SlicePreference</item>
@@ -28,7 +28,7 @@
         <item name="preferenceFragmentCompatStyle">@style/SettingsPreferenceFragmentStyle</item>
     </style>
 
-    <style name="PreferenceTheme.SetupWizard" parent="@style/SettingsPreferenceTheme">
+    <style name="PreferenceTheme.SetupWizard">
         <item name="preferenceFragmentCompatStyle">@style/SetupWizardPreferenceFragmentStyle</item>
         <item name="preferenceStyle">@style/Preference.Material</item>
     </style>

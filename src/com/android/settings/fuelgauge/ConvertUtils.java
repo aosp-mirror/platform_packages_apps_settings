@@ -17,6 +17,7 @@ import android.annotation.IntDef;
 import android.content.ContentValues;
 import android.os.BatteryConsumer;
 import android.os.BatteryUsageStats;
+import android.content.Context;
 import android.os.SystemBatteryConsumer;
 import android.os.UidBatteryConsumer;
 import android.os.UserBatteryConsumer;
@@ -138,6 +139,7 @@ public final class ConvertUtils {
 
     /** Gets indexed battery usage data for each corresponding time slot. */
     public static Map<Integer, List<BatteryDiffEntry>> getIndexedUsageMap(
+            final Context context,
             final int timeSlotSize,
             final long[] batteryHistoryKeys,
             final Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
@@ -234,6 +236,7 @@ public final class ConvertUtils {
                 }
                 batteryDiffEntryList.add(
                     new BatteryDiffEntry(
+                        context,
                         foregroundUsageTimeInMs,
                         backgroundUsageTimeInMs,
                         consumePower,
