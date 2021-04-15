@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -39,6 +40,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryDiffEntryTest {
@@ -49,6 +51,7 @@ public final class BatteryDiffEntryTest {
     @Mock private PackageManager mockPackageManager;
     @Mock private UserManager mockUserManager;
     @Mock private Drawable mockDrawable;
+    @Mock private Drawable mockDrawable2;
 
     @Before
     public void setUp() {
@@ -56,6 +59,7 @@ public final class BatteryDiffEntryTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mockUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(mockPackageManager).when(mContext).getPackageManager();
+        BatteryDiffEntry.clearCache();
     }
 
     @Test
@@ -112,6 +116,7 @@ public final class BatteryDiffEntryTest {
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
 
         assertThat(entry.getAppLabel()).isEqualTo("Ambient display");
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
     }
 
     @Test
@@ -127,6 +132,7 @@ public final class BatteryDiffEntryTest {
 
         assertThat(entry.getAppLabel()).isEqualTo("Removed user");
         assertThat(entry.getAppIcon()).isNull();
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
     }
 
     @Test
@@ -146,17 +152,28 @@ public final class BatteryDiffEntryTest {
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
 
         assertThat(entry.getAppLabel()).isEqualTo(expectedAppLabel);
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+        // Verifies the app label in the cache.
+        final BatteryEntry.NameAndIcon nameAndIcon =
+            BatteryDiffEntry.sResourceCache.get(batteryHistEntry.getKey());
+        assertThat(nameAndIcon.name).isEqualTo(expectedAppLabel);
     }
 
     @Test
     public void testGetAppLabel_loadDataFromPreDefinedNameAndUid() {
+        final String expectedAppLabel = "Android OS";
         final ContentValues values = getContentValuesWithType(
             ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
 
-        assertThat(entry.getAppLabel()).isEqualTo("Android OS");
+        assertThat(entry.getAppLabel()).isEqualTo(expectedAppLabel);
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+        // Verifies the app label in the cache.
+        final BatteryEntry.NameAndIcon nameAndIcon =
+            BatteryDiffEntry.sResourceCache.get(batteryHistEntry.getKey());
+        assertThat(nameAndIcon.name).isEqualTo(expectedAppLabel);
     }
 
     @Test
@@ -171,6 +188,7 @@ public final class BatteryDiffEntryTest {
 
         entry.mIsLoaded = true;
         assertThat(entry.getAppLabel()).isEqualTo(expectedAppLabel);
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
     }
 
     @Test
@@ -184,20 +202,39 @@ public final class BatteryDiffEntryTest {
         entry.mIsLoaded = true;
         entry.mAppIcon = mockDrawable;
         assertThat(entry.getAppIcon()).isEqualTo(mockDrawable);
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
     }
 
     @Test
-    public void testGetAppIcon_uidConsumerWithNullIcon_returnDefaultActivityIcon() {
-        final ContentValues values = getContentValuesWithType(
-            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
-        doReturn(mockDrawable).when(mockPackageManager).getDefaultActivityIcon();
+    public void testGetAppIcon_uidConsumerWithNullIcon_returnDefaultActivityIcon()
+            throws Exception {
+        final BatteryDiffEntry entry = createBatteryDiffEntry(mockDrawable);
 
-        final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
-
-        entry.mIsLoaded = true;
         entry.mAppIcon = null;
         assertThat(entry.getAppIcon()).isEqualTo(mockDrawable);
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+        // Verifies the app label in the cache.
+        final BatteryEntry.NameAndIcon nameAndIcon =
+            BatteryDiffEntry.sResourceCache.get(entry.mBatteryHistEntry.getKey());
+        assertThat(nameAndIcon.icon).isEqualTo(mockDrawable);
+    }
+
+    @Test
+    public void testClearCache_switchLocale_clearCacheIconAndLabel() throws Exception {
+        Locale.setDefault(new Locale("en_US"));
+        final BatteryDiffEntry entry1 = createBatteryDiffEntry(mockDrawable);
+        assertThat(entry1.getAppIcon()).isEqualTo(mockDrawable);
+        // Switch the locale into another one.
+        Locale.setDefault(new Locale("zh_TW"));
+
+        final BatteryDiffEntry entry2 = createBatteryDiffEntry(mockDrawable2);
+
+        // We should get new drawable without caching.
+        assertThat(entry2.getAppIcon()).isEqualTo(mockDrawable2);
+        // Verifies the cache is updated into the new drawable.
+        final BatteryEntry.NameAndIcon nameAndIcon =
+            BatteryDiffEntry.sResourceCache.get(entry2.mBatteryHistEntry.getKey());
+        assertThat(nameAndIcon.icon).isEqualTo(mockDrawable2);
     }
 
     private BatteryDiffEntry createBatteryDiffEntry(
@@ -216,5 +253,18 @@ public final class BatteryDiffEntryTest {
         final ContentValues values = new ContentValues();
         values.put("consumerType", Integer.valueOf(consumerType));
         return values;
+    }
+
+    private BatteryDiffEntry createBatteryDiffEntry(Drawable drawable) throws Exception {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put("uid", 1001);
+        values.put("packageName", "com.a.b.c");
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+        doReturn(drawable).when(mockPackageManager).getDefaultActivityIcon();
+        doReturn(null).when(mockPackageManager).getApplicationInfo("com.a.b.c", 0);
+        doReturn(new String[] {"com.a.b.c"}).when(mockPackageManager)
+            .getPackagesForUid(1001);
+        return createBatteryDiffEntry(10, batteryHistEntry);
     }
 }
