@@ -781,7 +781,7 @@
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
 
-    <style name="HomepageTitleText" parent="ToolbarText.Expanded">
+    <style name="HomepageTitleText" parent="CollapsingToolbarTitle.Expanded">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
@@ -872,8 +872,4 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
-
-    <style name="ToolbarText.Collapsed" parent="CollapsingToolbarTitle.Collapsed"/>
-    <style name="ToolbarText.Expanded" parent="CollapsingToolbarTitle"/>
-    <style name="ToolbarText.MoreThanTwoLines" parent="CollapsingToolbarTitle.MoreThanTwoLines"/>
 </resources>
