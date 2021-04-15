@@ -218,10 +218,15 @@ public class SettingsBaseActivity extends FragmentActivity {
                 v.removeOnLayoutChangeListener(this);
                 final int count = getLineCount();
                 if (count > TOOLBAR_MAX_LINE_NUMBER) {
-                    mCollapsingToolbarLayout
-                            .setExpandedTitleTextAppearance(R.style.ToolbarText_MoreThanTwoLines);
-                } else {
-                    mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ToolbarText);
+                    ViewGroup.LayoutParams lp = mCollapsingToolbarLayout.getLayoutParams();
+                    lp.height = getResources()
+                            .getDimensionPixelSize(R.dimen.toolbar_three_lines_height);
+                    mCollapsingToolbarLayout.setLayoutParams(lp);
+                } else if (count == TOOLBAR_MAX_LINE_NUMBER) {
+                    ViewGroup.LayoutParams lp = mCollapsingToolbarLayout.getLayoutParams();
+                    lp.height =
+                            getResources().getDimensionPixelSize(R.dimen.toolbar_two_lines_height);
+                    mCollapsingToolbarLayout.setLayoutParams(lp);
                 }
             }
         });
