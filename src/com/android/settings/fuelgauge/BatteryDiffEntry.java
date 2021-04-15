@@ -13,29 +13,49 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+
 import java.time.Duration;
+import java.util.Comparator;
 
 /** A container class to carry battery data in a specific time slot. */
 public final class BatteryDiffEntry {
     private static final String TAG = "BatteryDiffEntry";
+
+    /** A comparator for {@link BatteryDiffEntry} based on consumed percentage. */
+    public static final Comparator<BatteryDiffEntry> COMPARATOR =
+            (a, b) -> Double.compare(b.getPercentOfTotal(), a.getPercentOfTotal());
 
     public long mForegroundUsageTimeInMs;
     public long mBackgroundUsageTimeInMs;
     public double mConsumePower;
     // A BatteryHistEntry corresponding to this diff usage data.
     public final BatteryHistEntry mBatteryHistEntry;
-
     private double mTotalConsumePower;
     private double mPercentOfTotal;
 
+    private Context mContext;
+    private String mAppLabel = null;
+    private Drawable mAppIcon = null;
+    private boolean mIsLoaded = false;
+
     public BatteryDiffEntry(
+            Context context,
             long foregroundUsageTimeInMs,
             long backgroundUsageTimeInMs,
             double consumePower,
             BatteryHistEntry batteryHistEntry) {
+        mContext = context;
+        mConsumePower = consumePower;
         mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
-        mConsumePower = consumePower;
         mBatteryHistEntry = batteryHistEntry;
     }
 
@@ -54,10 +74,60 @@ public final class BatteryDiffEntry {
     /** Clones a new instance. */
     public BatteryDiffEntry clone() {
         return new BatteryDiffEntry(
+            this.mContext,
             this.mForegroundUsageTimeInMs,
             this.mBackgroundUsageTimeInMs,
             this.mConsumePower,
             this.mBatteryHistEntry /*same instance*/);
+    }
+
+    /** Gets the app label name for this entry. */
+    public String getAppLabel() {
+        loadLabelAndIcon();
+        return mAppLabel;
+    }
+
+    /** Gets the app icon {@link Drawable} for this entry. */
+    public Drawable getAppIcon() {
+        loadLabelAndIcon();
+        return mAppIcon;
+    }
+
+    private void loadLabelAndIcon() {
+        if (mIsLoaded) {
+            return;
+        }
+        mIsLoaded = true;
+        // Loads application icon and label based on consumer type.
+        switch (mBatteryHistEntry.mConsumerType) {
+            case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
+                final BatteryEntry.NameAndIcon nameAndIconForUser =
+                    BatteryEntry.getNameAndIconFromUserId(
+                        mContext, (int) mBatteryHistEntry.mUserId);
+                if (nameAndIconForUser != null) {
+                    mAppIcon = nameAndIconForUser.icon;
+                    mAppLabel = nameAndIconForUser.name;
+                }
+                break;
+            case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
+                final BatteryEntry.NameAndIcon nameAndIconForSystem =
+                    BatteryEntry.getNameAndIconFromDrainType(
+                        mContext, mBatteryHistEntry.mDrainType);
+                if (nameAndIconForSystem != null) {
+                    mAppLabel = nameAndIconForSystem.name;
+                    if (nameAndIconForSystem.iconId != 0) {
+                        mAppIcon = mContext.getDrawable(nameAndIconForSystem.iconId);
+                    }
+                }
+                break;
+            case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
+                loadNameAndIconForUid();
+                break;
+        }
+    }
+
+    private void loadNameAndIconForUid() {
+        // TODO(b/185187669) fetch label and icon for UID battery type
     }
 
     @Override

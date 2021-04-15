@@ -246,8 +246,9 @@ public class WifiDetailPreferenceController2Test {
 
                 final Inet4Address any4 = (Inet4Address) InetAddress.getByName("0.0.0.0");
                 IpPrefix subnet = new IpPrefix(IPV4_ADDR.getAddress(), IPV4_PREFIXLEN);
-                IPV4_SUBNET = new RouteInfo(subnet, any4);
-                IPV4_DEFAULT = new RouteInfo(new IpPrefix(any4, 0), IPV4_GATEWAY);
+                IPV4_SUBNET = new RouteInfo(subnet, any4, null /* iface */, RouteInfo.RTN_UNICAST);
+                IPV4_DEFAULT = new RouteInfo(new IpPrefix(any4, 0), IPV4_GATEWAY, null /* iface */,
+                        RouteInfo.RTN_UNICAST);
 
                 IPV6_LINKLOCAL = ipv6LinkAddress("fe80::211:25ff:fef8:7cb2%1");
                 IPV6_GLOBAL1 = ipv6LinkAddress("2001:db8:1::211:25ff:fef8:7cb2");
@@ -1047,9 +1048,10 @@ public class WifiDetailPreferenceController2Test {
     }
 
     private NetworkCapabilities makeNetworkCapabilities() {
-        NetworkCapabilities nc = new NetworkCapabilities();
-        nc.clearAll();
-        nc.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        final NetworkCapabilities nc = new NetworkCapabilities.Builder()
+                .clearAll()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .build();
         return nc;
     }
 
@@ -1141,7 +1143,8 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockHeaderController, never()).setSummary(any(CharSequence.class));
 
         // ... but that if the network validates, then we do refresh.
-        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        nc = new NetworkCapabilities.Builder(nc)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED).build();
         updateNetworkCapabilities(nc);
         inOrder.verify(mMockHeaderController).setSummary(summary);
 
@@ -1153,27 +1156,31 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockHeaderController, never()).setSummary(any(CharSequence.class));
 
         // ... but if the network is no longer validated, then we display "connected, no Internet".
-        nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        nc = new NetworkCapabilities.Builder(nc)
+                .removeCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED).build();
         updateNetworkCapabilities(nc);
         inOrder.verify(mMockHeaderController).setSummary(summary);
 
         // UI will be refreshed when private DNS is broken.
         summary = "Private DNS server cannot be accessed";
         when(mMockWifiEntry.getSummary()).thenReturn(summary);
-        nc.setPrivateDnsBroken(true);
-        updateNetworkCapabilities(nc);
+        NetworkCapabilities mockNc = mock(NetworkCapabilities.class);
+        when(mockNc.isPrivateDnsBroken()).thenReturn(true);
+        mCallbackCaptor.getValue().onCapabilitiesChanged(mMockNetwork, mockNc);
         inOrder.verify(mMockHeaderController).setSummary(summary);
 
         // UI will be refreshed when device connects to a partial connectivity network.
         summary = "Limited connection";
         when(mMockWifiEntry.getSummary()).thenReturn(summary);
-        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY);
+        nc = new NetworkCapabilities.Builder(nc)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY).build();
         updateNetworkCapabilities(nc);
         inOrder.verify(mMockHeaderController).setSummary(summary);
 
         // Although UI will be refreshed when network become validated. The Settings should
         // continue to display "Limited connection" if network still provides partial connectivity.
-        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        nc = new NetworkCapabilities.Builder(nc)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED).build();
         updateNetworkCapabilities(nc);
         inOrder.verify(mMockHeaderController).setSummary(summary);
     }
@@ -1389,14 +1396,16 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
 
         when(mMockWifiEntry.canSignIn()).thenReturn(true);
-        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
+        nc = new NetworkCapabilities.Builder(nc)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL).build();
         updateNetworkCapabilities(nc);
 
         inOrder.verify(mMockButtonsPref).setButton2Text(R.string.wifi_sign_in_button_text);
         inOrder.verify(mMockButtonsPref).setButton2Visible(true);
 
         when(mMockWifiEntry.canSignIn()).thenReturn(false);
-        nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
+        nc = new NetworkCapabilities.Builder(nc)
+                .removeCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL).build();
         updateNetworkCapabilities(nc);
 
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
@@ -1448,7 +1457,8 @@ public class WifiDetailPreferenceController2Test {
     public void testSignInButton_shouldHideSignInButtonForDisconnectedNetwork() {
         setUpForDisconnectedNetwork();
         NetworkCapabilities nc = makeNetworkCapabilities();
-        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
+        nc = new NetworkCapabilities.Builder()
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL).build();
         when(mMockConnectivityManager.getNetworkCapabilities(mMockNetwork))
                 .thenReturn(new NetworkCapabilities(nc));
 
