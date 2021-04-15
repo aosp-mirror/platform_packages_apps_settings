@@ -18,7 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/storage_settings"
-    android:orderingFromXml="false">
+    android:orderingFromXml="false"
+    settings:keywords="@string/keywords_storage">
     <com.android.settingslib.widget.SettingsSpinnerPreference
         android:key="storage_spinner"
         android:order="1"

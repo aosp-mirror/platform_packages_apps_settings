@@ -3426,11 +3426,6 @@
     <string name="sd_format_summary" product="default">Erases all data on the SD card, such as music and photos</string>
     <!-- SD card status when it is mounted as read only. Will be appended to size, starts with an unbreakable space -->
 
-    <!-- Title of dialog asking user to confirm before clearing all caches. [CHAR LIMIT=48] -->
-    <string name="memory_clear_cache_title">Clear cached data?</string>
-    <!-- Message of dialog asking user to confirm before clearing all caches. [CHAR LIMIT=48] -->
-    <string name="memory_clear_cache_message">This will clear cached data for all apps.</string>
-
     <!-- SD card & phone storage settings item summary that will result in the phone connected to PC and MTP/PTP enabled.   [CHAR LIMIT=80] -->
     <string name="mtp_ptp_mode_summary">MTP or PTP function is active</string>
 
@@ -3482,8 +3477,6 @@
     <string name="storage_menu_forget">Forget</string>
     <!-- Storage setting.  Menu option for setting up a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_set_up">Set up</string>
-    <!-- Storage setting.  Menu option for exploring a storage device [CHAR LIMIT=30]-->
-    <string name="storage_menu_explore">Explore</string>
     <!-- Storage setting. Menu option for using the deletion helper. [CHAR LIMIT=30] -->
     <string name="storage_menu_free">Free up space</string>
     <!-- Storage setting. Menu option for accessing the storage manager settings. [CHAR LIMIT=30] -->
@@ -3520,14 +3513,10 @@
     <!-- Section header above list of external storage devices [CHAR LIMIT=30]-->
     <string name="storage_external_title">Portable storage</string>
 
-    <!-- Summary of a single storage volume, constrasting available and total storage space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> used of <xliff:g id="total" example="32GB">%2$s</xliff:g></string>
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large"><xliff:g id="number" example="128">^1</xliff:g><small><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></small></string>
     <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
     <string name="storage_volume_used">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
-    <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_used_total">Total used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
 
     <!-- Toast informing that storage mount operation was successful. [CHAR LIMIT=64]-->
     <string name="storage_mount_success"><xliff:g id="name" example="SD card">%1$s</xliff:g> is mounted</string>
@@ -3555,10 +3544,6 @@
     <string name="storage_dialog_unmountable">This <xliff:g id="name" example="SD card">^1</xliff:g> is corrupted.
 \n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g>, you have to set it up first.</string>
 
-    <!-- Dialog body informing user about an unsupported storage device. [CHAR LIMIT=NONE]-->
-    <string name="storage_dialog_unsupported">This device doesn\u2019t support this <xliff:g id="name" example="SD card">^1</xliff:g>.
-\n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g> with this device, you have to set it up first.</string>
-
     <!-- Body of dialog informing user about consequences of formatting an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_format_details">After formatting, you can use this <xliff:g id="name" example="SD card">^1</xliff:g> in other devices.
 \n\nAll data on this <xliff:g id="name" example="SD card">^1</xliff:g> will be erased. Consider backing up first.
@@ -3582,33 +3567,10 @@
     <!-- Body of dialog confirming that user wants to forget an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_forget_confirm">All the apps, photos, and data stored on this <xliff:g id="name" example="SD card">^1</xliff:g> will be lost forever.</string>
 
-    <!-- Item title describing storage used by apps [CHAR LIMIT=48]-->
-    <string name="storage_detail_apps">Apps</string>
     <!-- Item title describing storage used by images [CHAR LIMIT=48]-->
     <string name="storage_detail_images">Images</string>
-    <!-- Item title describing storage used by videos [CHAR LIMIT=48]-->
-    <string name="storage_detail_videos">Videos</string>
-    <!-- Item title describing storage used by audio [CHAR LIMIT=48]-->
-    <string name="storage_detail_audio">Audio</string>
-    <!-- Item title describing storage used by cached data [CHAR LIMIT=48]-->
-    <string name="storage_detail_cached">Cached data</string>
-    <!-- Item title describing storage used by other data [CHAR LIMIT=48]-->
-    <string name="storage_detail_other">Other</string>
-    <!-- Item title describing internal storage used by the Android System [CHAR LIMIT=48]-->
-    <string name="storage_detail_system">System</string>
-    <!-- Item title that will launch a file explorer [CHAR LIMIT=48]-->
-    <string name="storage_detail_explore">Explore <xliff:g id="name" example="SD card">^1</xliff:g></string>
-
-    <!-- Body of dialog informing user about other files on a storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_detail_dialog_other">Other includes shared files saved by apps, files downloaded from the internet or Bluetooth, Android files, and so on.
-\n\nTo see the visible contents of this <xliff:g id="name" example="SD card">^1</xliff:g>, tap Explore.</string>
-
     <!-- Body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_system">System includes files used to run Android version <xliff:g id="version" example="8.0">%s</xliff:g></string>
-
-    <!-- Body of dialog informing user about other users on a storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, apps, or other data, using <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
-\n\nTo view details, switch to <xliff:g id="user" example="Guest user">^1</xliff:g>.</string>
 
     <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_title">Set up your <xliff:g id="name" example="SD card">^1</xliff:g></string>

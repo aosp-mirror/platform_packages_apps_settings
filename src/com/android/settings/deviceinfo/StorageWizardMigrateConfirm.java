@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,6 +37,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import java.util.Objects;
 
 public class StorageWizardMigrateConfirm extends StorageWizardBase {
+    private static final String TAG = "StorageWizardMigrateConfirm";
+
     private static final int REQUEST_CREDENTIAL = 100;
 
     private MigrateEstimateTask mEstimate;
