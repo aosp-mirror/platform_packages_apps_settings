@@ -207,7 +207,7 @@
                   android:label="@string/network_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MOBILE_NETWORK_LIST" />
-                <action android:name="android.settings.MANAGE_ALL_SUBSCRIPTIONS_SETTINGS" />
+                <action android:name="android.settings.MANAGE_ALL_SIM_PROFILES_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -376,12 +376,15 @@
                   android:exported="true"
                   android:permission="android.permission.NETWORK_STACK"
                   android:theme="@*android:style/Theme.DeviceDefault.Light.Dialog.Alert">
+            <!-- TODO: Consider removing below two intent filters.
+                 It seems like below two intent filters can be removed because when the notification
+                 is clicked, this activity will be launched anyway. -->
             <intent-filter>
-                <action android:name="android.net.conn.PROMPT_UNVALIDATED" />
+                <action android:name="android.net.action.PROMPT_UNVALIDATED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.net.conn.PROMPT_LOST_VALIDATION" />
+                <action android:name="android.net.action.PROMPT_LOST_VALIDATION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"

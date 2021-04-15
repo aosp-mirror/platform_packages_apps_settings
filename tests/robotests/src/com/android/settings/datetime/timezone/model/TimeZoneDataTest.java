@@ -92,4 +92,23 @@ public class TimeZoneDataTest {
                 .containsExactly("US", "GB");
         assertThat(timeZoneData.lookupCountryCodesForZoneId("Unknown/Secret_City2")).isEmpty();
     }
+
+    @Test
+    public void lookupCountryCodesForNonCanonicalZoneId_returnsCurrentZone() {
+        TimeZoneData timeZoneData = new TimeZoneData(mCountryZonesFinder);
+
+        CountryTimeZones greenland = mock(CountryTimeZones.class);
+        when(greenland.getCountryIso()).thenReturn("gl");
+        when(greenland.getTimeZoneMappings()).thenReturn(Arrays.asList(
+                TimeZoneMapping.createForTests(
+                        "America/Nuuk",
+                        true /* showInPicker */,
+                        null /* notUsedAfter */,
+                        Arrays.asList("America/Godthab"))));
+        when(mCountryZonesFinder.lookupCountryTimeZonesForZoneId("America/Godthab"))
+                .thenReturn(Arrays.asList(greenland));
+
+        assertThat(timeZoneData.lookupCountryCodesForZoneId("America/Godthab"))
+                .containsExactly("GL");
+    }
 }

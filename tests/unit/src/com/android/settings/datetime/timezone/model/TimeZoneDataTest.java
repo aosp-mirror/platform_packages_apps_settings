@@ -43,7 +43,7 @@ public class TimeZoneDataTest {
             FilteredCountryTimeZones countryTimeZones =
                     mTimeZoneData.lookupCountryTimeZones(regionId);
             assertThat(countryTimeZones).isNotNull();
-            assertThat(countryTimeZones.getTimeZoneIds().size()).isGreaterThan(0);
+            assertThat(countryTimeZones.getPreferredTimeZoneIds().size()).isGreaterThan(0);
         }
     }
 
@@ -54,11 +54,8 @@ public class TimeZoneDataTest {
         1) because we specifically exclude it with the picker attribute, and
         2) because it's the same as Moscow after Oct 2014.
         */
-        assertThat(mTimeZoneData.lookupCountryCodesForZoneId("Europe/Simferopol").isEmpty())
-                .isTrue();
-        assertThat(mTimeZoneData.lookupCountryCodesForZoneId("Europe/London").isEmpty())
-                .isFalse();
-        assertThat(mTimeZoneData.lookupCountryCodesForZoneId("America/Los_Angeles").isEmpty())
-                .isFalse();
+        assertThat(mTimeZoneData.lookupCountryCodesForZoneId("Europe/Simferopol")).isEmpty();
+        assertThat(mTimeZoneData.lookupCountryCodesForZoneId("Europe/London")).isNotEmpty();
+        assertThat(mTimeZoneData.lookupCountryCodesForZoneId("America/Los_Angeles")).isNotEmpty();
     }
 }
