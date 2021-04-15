@@ -137,6 +137,42 @@ public final class BatteryHistEntryTest {
             /*percentOfTotal=*/ 0.3);
     }
 
+    @Test
+    public void testGetKey_consumerUidType_returnExpectedString() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put("uid", 3);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        assertThat(batteryHistEntry.getKey()).isEqualTo("3");
+    }
+
+    @Test
+    public void testGetKey_consumerUserType_returnExpectedString() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_USER_BATTERY);
+        values.put("userId", 2);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        assertThat(batteryHistEntry.getKey()).isEqualTo("U|2");
+    }
+
+    @Test
+    public void testGetKey_consumerSystemType_returnExpectedString() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+        values.put("drainType", 1);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        assertThat(batteryHistEntry.getKey()).isEqualTo("S|1");
+    }
+
+    private static ContentValues getContentValuesWithType(int consumerType) {
+        final ContentValues values = new ContentValues();
+        values.put("consumerType", Integer.valueOf(consumerType));
+        return values;
+    }
+
     private void assertBatteryHistEntry(
         BatteryHistEntry entry, int drainType, double percentOfTotal) {
         assertThat(entry.isValidEntry()).isTrue();
@@ -161,7 +197,5 @@ public final class BatteryHistEntryTest {
             .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
         assertThat(entry.mBatteryHealth)
             .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
-        assertThat(entry.getKey())
-            .isEqualTo("com.google.android.settings.battery-" + entry.mUserId);
     }
 }
