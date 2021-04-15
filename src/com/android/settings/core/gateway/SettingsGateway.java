@@ -78,10 +78,8 @@ import com.android.settings.datetime.DateTimeSettings;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
-import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
-import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
@@ -215,9 +213,7 @@ public class SettingsGateway {
             ToggleDaltonizerPreferenceFragment.class.getName(),
             ToggleReduceBrightColorsPreferenceFragment.class.getName(),
             TextToSpeechSettings.class.getName(),
-            StorageSettings.class.getName(),
             PrivateVolumeForget.class.getName(),
-            PrivateVolumeSettings.class.getName(),
             PublicVolumeSettings.class.getName(),
             DevelopmentSettingsDashboardFragment.class.getName(),
             AndroidBeam.class.getName(),
