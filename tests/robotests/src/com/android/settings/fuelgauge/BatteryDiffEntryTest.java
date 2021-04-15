@@ -22,6 +22,9 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.content.ContentValues;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.SystemBatteryConsumer;
 import android.os.UserManager;
 
@@ -41,14 +44,18 @@ import java.util.List;
 public final class BatteryDiffEntryTest {
 
     private Context mContext;
-    @Mock
-    private UserManager mockUserManager;
+
+    @Mock private ApplicationInfo mockAppInfo;
+    @Mock private PackageManager mockPackageManager;
+    @Mock private UserManager mockUserManager;
+    @Mock private Drawable mockDrawable;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mockUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(mockPackageManager).when(mContext).getPackageManager();
     }
 
     @Test
@@ -96,9 +103,8 @@ public final class BatteryDiffEntryTest {
     @Test
     public void testLoadLabelAndIcon_forSystemBattery_returnExpectedResult() {
         // Generates fake testing data.
-        final ContentValues values = new ContentValues();
-        values.put("consumerType",
-            Integer.valueOf(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY));
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         values.put("drainType",
             Integer.valueOf(SystemBatteryConsumer.DRAIN_TYPE_AMBIENT_DISPLAY));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
@@ -112,9 +118,8 @@ public final class BatteryDiffEntryTest {
     public void testLoadLabelAndIcon_forUserBattery_returnExpectedResult() {
         doReturn(null).when(mockUserManager).getUserInfo(1001);
         // Generates fake testing data.
-        final ContentValues values = new ContentValues();
-        values.put("consumerType",
-            Integer.valueOf(ConvertUtils.CONSUMER_TYPE_USER_BATTERY));
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_USER_BATTERY);
         values.put("userId", Integer.valueOf(1001));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
@@ -122,6 +127,77 @@ public final class BatteryDiffEntryTest {
 
         assertThat(entry.getAppLabel()).isEqualTo("Removed user");
         assertThat(entry.getAppIcon()).isNull();
+    }
+
+    @Test
+    public void testGetAppLabel_loadDataFromApplicationInfo() throws Exception {
+        final String expectedAppLabel = "fake app label";
+        final String fakePackageName = "com.fake.google.com";
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put("uid", /*invalid uid*/ 10001);
+        values.put("packageName", fakePackageName);
+        doReturn(mockAppInfo).when(mockPackageManager)
+            .getApplicationInfo(fakePackageName, 0);
+        doReturn(expectedAppLabel).when(mockPackageManager)
+            .getApplicationLabel(mockAppInfo);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
+
+        assertThat(entry.getAppLabel()).isEqualTo(expectedAppLabel);
+    }
+
+    @Test
+    public void testGetAppLabel_loadDataFromPreDefinedNameAndUid() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
+
+        assertThat(entry.getAppLabel()).isEqualTo("Android OS");
+    }
+
+    @Test
+    public void testGetAppLabel_nullAppLabel_returnAppLabelInBatteryHistEntry() {
+        final String expectedAppLabel = "fake app label";
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put("appLabel", expectedAppLabel);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
+
+        entry.mIsLoaded = true;
+        assertThat(entry.getAppLabel()).isEqualTo(expectedAppLabel);
+    }
+
+    @Test
+    public void testGetAppIcon_nonUidConsumer_returnAppIconInBatteryDiffEntry() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
+
+        entry.mIsLoaded = true;
+        entry.mAppIcon = mockDrawable;
+        assertThat(entry.getAppIcon()).isEqualTo(mockDrawable);
+    }
+
+    @Test
+    public void testGetAppIcon_uidConsumerWithNullIcon_returnDefaultActivityIcon() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+        doReturn(mockDrawable).when(mockPackageManager).getDefaultActivityIcon();
+
+        final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
+
+        entry.mIsLoaded = true;
+        entry.mAppIcon = null;
+        assertThat(entry.getAppIcon()).isEqualTo(mockDrawable);
     }
 
     private BatteryDiffEntry createBatteryDiffEntry(
@@ -134,5 +210,11 @@ public final class BatteryDiffEntryTest {
             batteryHistEntry);
         entry.setTotalConsumePower(100.0);
         return entry;
+    }
+
+    private static ContentValues getContentValuesWithType(int consumerType) {
+        final ContentValues values = new ContentValues();
+        values.put("consumerType", Integer.valueOf(consumerType));
+        return values;
     }
 }
