@@ -209,7 +209,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
         if (sConfig.shouldShowBatteryAttributionList(mContext)) {
             final int dischargePercentage = getDischargePercentage(batteryUsageStats);
-            final List<BatteryEntry> usageList = getCoalescedUsageList(showAllApps);
+            final List<BatteryEntry> usageList =
+                getCoalescedUsageList(showAllApps, /*loadDataInBackground=*/ true);
             final double totalPower = batteryUsageStats.getConsumedPower();
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
@@ -267,7 +268,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             return null;
         }
         final int dischargePercentage = getDischargePercentage(batteryUsageStats);
-        final List<BatteryEntry> usageList = getCoalescedUsageList(showAllApps);
+        final List<BatteryEntry> usageList =
+            getCoalescedUsageList(showAllApps, /*loadDataInBackground=*/ false);
         final double totalPower = batteryUsageStats.getConsumedPower();
         for (int i = 0; i < usageList.size(); i++) {
             final BatteryEntry entry = usageList.get(i);
@@ -293,7 +295,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
      *
      * @return A sorted list of apps using power.
      */
-    private List<BatteryEntry> getCoalescedUsageList(boolean showAllApps) {
+    private List<BatteryEntry> getCoalescedUsageList(
+            boolean showAllApps, boolean loadDataInBackground) {
         final SparseArray<BatteryEntry> batteryEntryList = new SparseArray<>();
 
         final ArrayList<BatteryEntry> results = new ArrayList<>();
@@ -333,7 +336,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             if (index < 0) {
                 // New entry.
                 batteryEntryList.put(realUid, new BatteryEntry(mContext, mHandler, mUserManager,
-                        consumer, isHidden, packages, null));
+                        consumer, isHidden, packages, null, loadDataInBackground));
             } else {
                 // Combine BatterySippers if we already have one with this UID.
                 final BatteryEntry existingSipper = batteryEntryList.valueAt(index);
@@ -350,7 +353,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
 
             results.add(new BatteryEntry(mContext, mHandler, mUserManager,
-                    consumer, /* isHidden */ true, null, null));
+                    consumer, /* isHidden */ true, null, null, loadDataInBackground));
         }
 
         if (showAllApps) {
@@ -359,7 +362,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             for (int i = 0, size = userBatteryConsumers.size(); i < size; i++) {
                 final UserBatteryConsumer consumer = userBatteryConsumers.get(i);
                 results.add(new BatteryEntry(mContext, mHandler, mUserManager,
-                        consumer, /* isHidden */ true, null, null));
+                        consumer, /* isHidden */ true, null, null, loadDataInBackground));
             }
         }
 
@@ -424,7 +427,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private BatteryUsageStats getFakeStats() {
-        BatteryUsageStats.Builder builder = new BatteryUsageStats.Builder(0, 0)
+        BatteryUsageStats.Builder builder = new BatteryUsageStats.Builder(new String[0], 0)
                 .setDischargePercentage(100);
 
         float use = 500;
@@ -441,7 +444,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 SystemBatteryConsumer.DRAIN_TYPE_WIFI,
         }) {
             builder.getOrCreateSystemBatteryConsumerBuilder(drainType)
-                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, use);
+                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, use);
             use += 5;
         }
 
@@ -449,26 +452,27 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         for (int i = 0; i < 100; i++) {
             builder.getOrCreateUidBatteryConsumerBuilder(
                             new FakeUid(Process.FIRST_APPLICATION_UID + i))
-                    .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 10000 + i * 1000)
-                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, use);
+                    .setTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND, 10000 + i * 1000)
+                    .setTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND, 20000 + i * 2000)
+                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, use);
             use += 1;
         }
 
         // Simulate dex2oat process.
         builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 1000.0)
+                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
         builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID + 1))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 1000.0)
+                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
         builder.getOrCreateUidBatteryConsumerBuilder(
                         new FakeUid(UserHandle.getSharedAppGid(Process.LOG_UID)))
-                .setTimeInStateMs(BatteryConsumer.TIME_COMPONENT_USAGE, 100000)
-                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_USAGE, 900.0);
+                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 900.0);
 
         return builder.build();
     }

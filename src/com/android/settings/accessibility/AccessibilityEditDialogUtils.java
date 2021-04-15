@@ -168,6 +168,7 @@ public class AccessibilityEditDialogUtils {
                 View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM,
                 View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM);
     }
+
     private static void setEditShortcutButtonsListener(AlertDialog dialog,
             View.OnClickListener listener) {
         final View contentView = dialog.findViewById(R.id.container_layout);
@@ -215,6 +216,8 @@ public class AccessibilityEditDialogUtils {
             case DialogType.EDIT_MAGNIFICATION_SWITCH_SHORTCUT:
                 contentView = inflater.inflate(
                         R.layout.accessibility_edit_magnification_shortcut, null);
+                final ImageView image = contentView.findViewById(R.id.image);
+                image.setImageResource(retrieveSoftwareShortcutImageResId(context));
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -247,7 +250,7 @@ public class AccessibilityEditDialogUtils {
         final int lineHeight = summary.getLineHeight();
 
         setupShortcutWidget(dialogView, title, retrieveSummary(context, lineHeight),
-                retrieveImageResId(context));
+                retrieveSoftwareShortcutImageResId(context));
     }
 
     private static void initHardwareShortcut(Context context, View view) {
@@ -286,7 +289,7 @@ public class AccessibilityEditDialogUtils {
                 ? getSummaryStringWithLink(context) : getSummaryStringWithIcon(context, lineHeight);
     }
 
-    private static int retrieveImageResId(Context context) {
+    private static int retrieveSoftwareShortcutImageResId(Context context) {
         return AccessibilityUtil.isFloatingMenuEnabled(context)
                 ? R.drawable.accessibility_shortcut_type_software_floating
                 : R.drawable.accessibility_shortcut_type_software;

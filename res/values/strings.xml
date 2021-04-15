@@ -6565,8 +6565,10 @@
     <string name="vpn_settings_title">VPN</string>
     <!-- Title of preference to enter the VPN settings activity [CHAR LIMIT=30] -->
     <string name="vpn_settings_insecure_single">Not secure</string>
-    <!-- Title of preference to enter the VPN settings activity [CHAR LIMIT=30] -->
-    <string name="vpn_settings_insecure_multiple"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
+    <!-- Title of preference to enter the VPN settings activity, if there are multiple vpns but only 1 insecure vpn [CHAR LIMIT=60] -->
+    <string name="vpn_settings_single_insecure_multiple_total"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
+    <!-- Title of preference to enter the VPN settings activity, if there are multiple vpns and multiple insecure vpns [CHAR LIMIT=60] -->
+    <string name="vpn_settings_multiple_insecure_multiple_total"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
 
     <!-- Title of Adaptive connectivity. Adaptive connectivity is a feature which automatically manages network connections for better battery life and performance. [CHAR LIMIT=60] -->
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
@@ -13135,13 +13137,13 @@
     <!-- Brightness category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_brightness">Brightness</string>
     <!-- Lock screen category name in Display Settings [CHAR LIMIT=none] -->
-    <string name="category_name_lock_display">Lock Display</string>
+    <string name="category_name_lock_display">Lock display</string>
     <!-- Appearance category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_appearance">Appearance</string>
     <!-- Color category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_color">Color</string>
     <!-- Name of Other display controls category in Display Settings [CHAR LIMIT=none] -->
-    <string name="category_name_display_controls">Other Display Controls</string>
+    <string name="category_name_display_controls">Other display controls</string>
     <!-- Others category name [CHAR LIMIT=none] -->
     <string name="category_name_others">Others</string>
     <!-- General category name [CHAR LIMIT=none] -->
