@@ -1981,13 +1981,6 @@
         </activity>
 
         <activity
-            android:name="Settings$PrivateVolumeSettingsActivity"
-            android:label="@string/storage_settings_title">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.deviceinfo.PrivateVolumeSettings" />
-        </activity>
-
-        <activity
             android:name="Settings$PublicVolumeSettingsActivity"
             android:exported="true"
             android:label="@string/storage_settings_title">
