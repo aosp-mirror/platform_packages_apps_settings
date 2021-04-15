@@ -40,4 +40,9 @@
         android:key="transcode_notification"
         android:title="@string/transcode_notification"
         settings:controller="com.android.settings.development.transcode.TranscodeNotificationPreferenceController" />
+
+    <SwitchPreference
+        android:key="transcode_disable_cache"
+        android:title="@string/transcode_disable_cache"
+        settings:controller="com.android.settings.development.transcode.TranscodeDisableCachePreferenceController" />
 </PreferenceScreen>
