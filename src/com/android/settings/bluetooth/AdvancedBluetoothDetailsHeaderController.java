@@ -85,6 +85,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     private static final int RIGHT_DEVICE_ID = 2;
     private static final int CASE_DEVICE_ID = 3;
     private static final int MAIN_DEVICE_ID = 4;
+    private static final float HALF_ALPHA = 0.5f;
 
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
@@ -430,10 +431,12 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     void updateIcon(ImageView imageView, String iconUri) {
         if (mIconCache.containsKey(iconUri)) {
+            imageView.setAlpha(1f);
             imageView.setImageBitmap(mIconCache.get(iconUri));
             return;
         }
 
+        imageView.setAlpha(HALF_ALPHA);
         ThreadUtils.postOnBackgroundThread(() -> {
             final Uri uri = Uri.parse(iconUri);
             try {
@@ -444,6 +447,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         mContext.getContentResolver(), uri);
                 ThreadUtils.postOnMainThread(() -> {
                     mIconCache.put(iconUri, bitmap);
+                    imageView.setAlpha(1f);
                     imageView.setImageBitmap(bitmap);
                 });
             } catch (IOException e) {
