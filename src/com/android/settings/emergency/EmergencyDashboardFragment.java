@@ -17,11 +17,17 @@
 package com.android.settings.emergency;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,6 +37,7 @@ import com.android.settingslib.search.SearchIndexable;
 public class EmergencyDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "EmergencyDashboard";
+    private static final String WEA_PREF_KEY = "app_and_notif_cell_broadcast_settings";
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -45,6 +52,17 @@ public class EmergencyDashboardFragment extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.EMERGENCY_SETTINGS;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new EmergencyBroadcastPreferenceController(context, WEA_PREF_KEY));
+        return controllers;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

@@ -255,7 +255,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private int getTrapezoidIndex(float x) {
         for (int index = 0; index < mTrapezoidSlot.length; index++) {
             final TrapezoidSlot slot = mTrapezoidSlot[index];
-            if (x >= slot.mLeft && x <= slot.mRight) {
+            if (x >= slot.mLeft - mTrapezoidHOffset
+                    && x <= slot.mRight + mTrapezoidHOffset) {
                 return index;
             }
         }
