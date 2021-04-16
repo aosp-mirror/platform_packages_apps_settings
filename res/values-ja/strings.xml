@@ -209,8 +209,8 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"削除"</string>
     <string name="add_a_language" msgid="2126220398077503271">"言語を追加"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="other">選択した言語の削除</item>
-      <item quantity="one">選択した言語の削除</item>
+      <item quantity="other">選択した言語を削除しますか？</item>
+      <item quantity="one">選択した言語を削除しますか？</item>
     </plurals>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"テキストは別の言語で表示されるようになります。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"すべての言語を削除することはできません"</string>
@@ -256,9 +256,9 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"日付と時刻"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"日時の設定"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"日付、時刻、タイムゾーン、フォーマットを設定する"</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"時間を自動的に設定する"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"日時を自動的に設定する"</string>
     <string name="zone_auto_title" msgid="3993580453604839924">"タイムゾーンを自動的に設定する"</string>
-    <string name="date_time_24hour_auto" msgid="6583078135067804252">"言語 / 地域のデフォルトを使用する"</string>
+    <string name="date_time_24hour_auto" msgid="6583078135067804252">"言語 / 地域で一般的な形式を使用する"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24時間表示"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24時間表示"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"時刻"</string>
@@ -847,7 +847,7 @@
     <string name="wifi_ask_enable" msgid="6860056048266810769">"「<xliff:g id="REQUESTER">%s</xliff:g>」が Wi-Fi を ON にしようとしています"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"「<xliff:g id="REQUESTER">%s</xliff:g>」が Wi-Fi を OFF にしようとしています"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"デバッグ可能なアプリのバイトコードを確認"</string>
-    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ART にデバッグ可能なアプリのバイトコードの確認を許可する"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"デバッグ可能なアプリのバイトコードの確認を ART に許可する"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"リフレッシュ レートの表示"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"現在のディスプレイ リフレッシュ レートの表示"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
@@ -1264,7 +1264,7 @@
     <string name="auto_brightness_very_high_title" msgid="4935132626750630713">"非常に高い"</string>
     <string name="auto_brightness_subtitle" msgid="6839449395639517870">"優先する明るさのレベル"</string>
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"周囲に合わせて調整しない"</string>
-    <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"電池使用量が増えます"</string>
+    <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"バッテリー使用量が増えます"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"周囲に合わせて明るさを最適化します。この機能が ON の場合でも、一時的に明るさを調整できます。"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"画面の明るさは環境やアクティビティに応じて自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ディスプレイのホワイト バランス"</string>
@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"見ている間は画面が OFF になりません"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"カメラのロックを解除しました"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"顔検出を利用するにはカメラのロックを解除する必要があります"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"スクリーン アテンションを使用する場合は、カメラのロックを解除してください"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"顔検出を利用するにはカメラへのアクセス権限が必要です。タップすると、デバイス パーソナライズ サービスのアクセス権限を管理できます"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"権限を管理"</string>
     <string name="night_display_title" msgid="8532432776487216581">"夜間モード"</string>
@@ -1365,7 +1364,7 @@
     <string name="doze_title" msgid="1523090408230862316">"通知時にスリープ状態から復帰"</string>
     <string name="doze_summary" msgid="8252867381522942804">"画面が暗いときに新着の通知が届いた場合、画面を ON にします"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"時間と情報を常に表示"</string>
-    <string name="doze_always_on_summary" msgid="509097829739647852">"電池使用量が増えます"</string>
+    <string name="doze_always_on_summary" msgid="509097829739647852">"バッテリー使用量が増えます"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"テキストを太字にする"</string>
     <string name="title_font_size" msgid="570613010306330622">"フォントサイズ"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"テキストのサイズを変更します"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"SDカード内データを消去"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"内部USBストレージ内の全データ（音楽、写真など）の消去"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"SDカード内の全データ（音楽、写真など）の消去"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"キャッシュデータを削除しますか？"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"すべてのアプリのキャッシュデータが削除されます。"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTPまたはPTP機能が有効です"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"USBストレージマウント解除"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"SDカードのマウントを解除しますか？"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"データを移行"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"削除"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"セットアップ"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"外部メディア"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"空き容量を増やす"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"ストレージを管理"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"クリーン, ストレージ"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"その他のユーザー"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"デバイスのストレージ"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"外部ストレージ"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="USED">%1$s</xliff:g> / <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"/ <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"合計<xliff:g id="TOTAL">%1$s</xliff:g>を使用中"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g>をマウントしました"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"<xliff:g id="NAME">%1$s</xliff:g>をマウントできませんでした"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g>を安全に取り出しました"</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"ストレージの名前の変更"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"この<xliff:g id="NAME_0">^1</xliff:g>は安全に取り外されましたが、引き続き使用できます。\n\nこの<xliff:g id="NAME_1">^1</xliff:g>を使用するには、まずマウントする必要があります。"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"この<xliff:g id="NAME_0">^1</xliff:g>は破損しています。\n\nこの<xliff:g id="NAME_1">^1</xliff:g>を使用するには、まずセットアップする必要があります。"</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"このデバイスはこの<xliff:g id="NAME_0">^1</xliff:g>に対応していません。\n\nこのデバイスでこの<xliff:g id="NAME_1">^1</xliff:g>を使用するには、まずセットアップする必要があります。"</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"フォーマット後は、この<xliff:g id="NAME_0">^1</xliff:g>を他のデバイスで使用できます。\n\nこの<xliff:g id="NAME_1">^1</xliff:g>のすべてのデータが消去されます。フォーマットの前にバックアップを取ることを検討してください。\n\n"<b>"写真などのメディアのバックアップ"</b>\n"メディアファイルをこのデバイス上の別のストレージに移動するか、USBケーブルを使用してパソコンに転送します。\n\n"<b>"アプリのバックアップ"</b>\n"この<xliff:g id="NAME_6">^1</xliff:g>に保存されているすべてのアプリがアンインストールされ関連するデータが消去されます。アプリを引き続き使用する場合は、このデバイス上の別のストレージに移動してください。"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"この<xliff:g id="NAME_0">^1</xliff:g>を取り外すと、もう一度挿入するまでは保存されているアプリやメディアファイルを使用できなくなります。"</b>" \n\nこの<xliff:g id="NAME_1">^1</xliff:g>はこのデバイス用にフォーマットされており、他のデバイスでは使用できません。"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"この<xliff:g id="NAME">^1</xliff:g>に保存されているアプリ、写真、データを使用するには、挿入し直してください。\n\nまたは、このストレージデバイスが使用できない場合は、削除することもできます。\n\n削除した場合、このデバイスに保存されているすべてのデータは完全に失われます。\n\nアプリは後で再インストールできますが、このデバイスに保存されているアプリのデータは失われます。"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>を削除しますか？"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"この<xliff:g id="NAME">^1</xliff:g>に保存されているすべてのアプリ、写真、データが完全に失われます。"</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"アプリ"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"画像"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"動画"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"音声"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"キャッシュデータ"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"その他"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"システム"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"<xliff:g id="NAME">^1</xliff:g>の内容を見る"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"その他のファイルには、アプリが保存した共有ファイル、インターネットや Bluetooth 経由でダウンロードしたファイル、Android ファイルなどが含まれます。\n\nこの <xliff:g id="NAME">^1</xliff:g>の表示可能な内容を確認するには、[外部メディア] をタップします。"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"システムには、Android バージョン <xliff:g id="VERSION">%s</xliff:g> の実行に使用されるファイルが含まれています"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g>が保存した写真、音楽、アプリなどのデータはストレージの <xliff:g id="SIZE">^2</xliff:g> を使用しています。\n\n詳細を表示するには、<xliff:g id="USER_1">^1</xliff:g>に切り替えてください。"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g>のセットアップ"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"外部ストレージとして使用"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"写真などのメディアをデバイス間で移動するために使用します。"</string>
@@ -2220,7 +2204,7 @@
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"画面を暗くする"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"操作のコントロール"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"タップ アシスト"</string>
-    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"システム コントロール"</string>
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"システム操作"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ダウンロードしたアプリ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"試験運用機能"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"機能フラグ"</string>
@@ -2230,15 +2214,15 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"字幕の設定"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"拡大"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"拡大の種類"</string>
-    <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"画面全体または一部を拡大したり、画面全体と一部の拡大を切り替えたりできます"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"常に画面全体または画面の一部を拡大するか、画面全体と一部の拡大を切り替えるかを選択できます"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"全画面"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"画面の一部"</string>
-    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"画面全体と画面の一部を切り替えることができます"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"画面全体と画面の一部を切り替えます"</string>
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"拡大方法の選択"</string>
-    <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"画面全体を拡大します"</string>
-    <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"画面の一部を拡大します"</string>
-    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"画面全体と画面の一部を切り替えることができます"</string>
-    <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"オプションを切り替えるには切り替えボタンをタップします"</string>
+    <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"常に画面全体を拡大する"</string>
+    <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"常に画面の一部を拡大する"</string>
+    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"画面全体と画面の一部を切り替える"</string>
+    <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"切り替えボタンをタップして、画面全体と画面の一部を切り替えます"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"ユーザー補助機能ボタンに切り替えますか？"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"トリプルタップで画面の一部を拡大すると、入力などの操作が遅くなります。\n\nユーザー補助機能ボタンは画面上で他のアプリの上に表示されます。タップすると拡大します。"</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"ユーザー補助機能ボタンに切り替え"</string>
@@ -2252,8 +2236,8 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"画面を拡大します"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"ズームするには 3 回タップします"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ボタンをタップしてズームします"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8008175520087009922">"画面をすばやくズームインして、コンテンツを拡大できます。&lt;br/&gt;&lt;br/&gt; &lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; 1. ショートカットを使って拡大を開始します&lt;br/&gt; 2. 画面をタップします&lt;br/&gt; 3. 2 本の指でドラッグして画面上を移動します&lt;br/&gt; 4. 2 本の指でピンチ操作してズームを調整します&lt;br/&gt; 5. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; &lt;b&gt;一時的にズームインするには:&lt;/b&gt;&lt;br/&gt; 1. ショートカットを使って拡大を開始します&lt;br/&gt; 2. 画面を長押しします&lt;br/&gt; 3. 指をドラッグして画面上を移動します&lt;br/&gt; 4. 指を離して拡大を停止します"</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"[拡大] を ON にすると、画面で拡大操作を行えます。\n\n"<b>"ズーム"</b>"するには、[拡大] を ON にして画面をタップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作してズームを調整"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、[拡大] を ON にして画面を長押しします。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大操作は行えません。"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8008175520087009922">"画面をすばやくズームインして、コンテンツを拡大できます。&lt;br/&gt;&lt;br/&gt; &lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; 1. ショートカットを使って拡大を開始します&lt;br/&gt; 2. 画面をタップします&lt;br/&gt; 3. 2 本の指でドラッグして画面上を移動します&lt;br/&gt; 4. 2 本の指でピンチ操作して拡大率を調節します&lt;br/&gt; 5. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; &lt;b&gt;一時的にズームインするには:&lt;/b&gt;&lt;br/&gt; 1. ショートカットを使って拡大を開始します&lt;br/&gt; 2. 画面を長押しします&lt;br/&gt; 3. 指をドラッグして画面上を移動します&lt;br/&gt; 4. 指を離して拡大を停止します"</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"[拡大] を ON にすると、画面で拡大操作を行えます。\n\n"<b>"ズーム"</b>"するには、[拡大] を ON にして画面をタップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作して拡大率を調節"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、[拡大] を ON にして画面を長押しします。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大操作は行えません。"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g> ページ目"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"ユーザー補助機能ボタンで開く"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"音量大と音量小の両方ボタンを長押しして開く"</string>
@@ -2291,14 +2275,14 @@
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"ショートカット サービス"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"ショートカットの設定"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"ロック画面からのショートカット"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"音量大と音量小の両方のボタンを数秒ほど長押しすることで、ロック画面から機能を ON にできます。"</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"有効にすると、音量大と音量小の両方のボタンを数秒ほど長押しすることで、ロック画面でもショートカットを ON にできます。"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"ユーザー補助機能ボタン"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"ユーザー補助機能にすばやくアクセスできます"</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"どの画面からでもユーザー補助機能にすばやくアクセスできます。\n\n開始するには、[ユーザー補助の設定] に移動し、機能を選択します。ショートカットをタップし、ユーザー補助機能ボタンを選択します。"</string>
+    <string name="accessibility_button_description" msgid="7372405202698400339">"どの画面からでもユーザー補助機能にすばやくアクセスできます。\n\n開始するには、[ユーザー補助] の設定に移動し、機能を選択します。ショートカットをタップし、ユーザー補助機能ボタンを選択します。"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"場所"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"サイズ"</string>
-    <string name="accessibility_button_fade_title" msgid="8081993897680588829">"使用していないときのフェードの設定"</string>
-    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"画面が見やすくなるよう数秒後にフェードします"</string>
+    <string name="accessibility_button_fade_title" msgid="8081993897680588829">"使用していないときの透過表示の設定"</string>
+    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"画面が見やすくなるよう数秒後に透過表示に切り替えます"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"使用していないときの透明度"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"透明"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"非透明"</string>
@@ -2319,14 +2303,14 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1分"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2分"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"操作までの時間（ユーザー補助タイムアウト）"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"操作を行う時間"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"操作要求の表示時間"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"短い時間しか表示されない操作要求メッセージについて、表示時間を指定してください。\n\nこの設定に対応していないアプリもあります。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"長押しする時間"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"色反転"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"色反転を使用"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"色反転機能を使用すると、明るい画面が暗くなります。&lt;br/&gt;&lt;br/&gt; 注: &lt;ol&gt; &lt;li&gt; 暗い画面は逆に明るくなります。&lt;/li&gt; &lt;li&gt; メディアや画像の色が変わります。&lt;/li&gt; &lt;li&gt; ダークテーマを使って背景を暗くすることもできます。ダークテーマはアプリ側のサポートが必要ですが、色反転機能はすべてのアプリでご利用いただけます。&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"自動クリック（静止時間）"</string>
-    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"自動クリックは接続されているマウスと連動します。マウスのカーソルの動きが一定時間静止したときに自動的にクリックするよう設定できます。"</string>
+    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"自動クリックはマウスが接続されている場合に使えます。有効にすると、マウスのカーソルの動きを一定時間静止することで、自動的にクリックできます。"</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"OFF"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"短め"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2秒"</string>
@@ -2344,9 +2328,9 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"触覚フィードバック"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」の使用"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>を開く"</string>
-    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正の使用"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正を使用"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"字幕の表示"</string>
-    <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"サポートされているアプリのみ"</string>
+    <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"対応アプリでのみ利用可能です"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"字幕のサイズとスタイル"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"文字サイズ: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"その他のオプション"</string>
@@ -2357,7 +2341,7 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"画面をトリプルタップ"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"続行"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"補聴器"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"接続されている補聴器なし"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"接続されている補聴器はありません"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"補聴器を追加する"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"補聴器とペア設定するには、次の画面でデバイスを探してタップしてください。補聴器がペア設定モードであることをご確認ください。"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>（有効）"</string>
@@ -2521,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"バックグラウンド アクティビティの制限"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"アプリのバックグラウンド アクティビティを制限すると、アプリが正常に機能しないことがあります"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"このアプリは、電池の最適化が設定されていないため、制限することはできません。\n\nこのアプリを制限するには、電池の最適化を ON にしてください。"</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"制限なし"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"最適化"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"バックグラウンド時にバッテリーの使用が制限されません。バッテリーの使用量が増える可能性があります。"</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"使用状況に基づいて最適化されます。ほとんどのアプリにおすすめです。"</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"バックグラウンド時にバッテリーの使用が制限されます。アプリが正しく動作しない可能性があります。通知が遅れる可能性があります。"</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"アプリによるバッテリーの利用方法を変更すると、パフォーマンスに影響することがあります。"</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"このアプリを利用するには、バッテリーの使用を<xliff:g id="STATE">%1$s</xliff:g>に設定する必要があります。"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"最後にフル充電してからの使用時間"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"フル充電以降の電池使用量"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"フル充電以降の画面がオンの時間"</string>
@@ -2730,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"電池使用量"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"フル充電以降の電池の使用状況"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"電池使用量の管理"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンド: <xliff:g id="TIME_1">^2</xliff:g>（過去 24 時間）"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"電池残量はデバイスの使用状況に基づく推定値です"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"予測される残り時間"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"フル充電まで"</string>
@@ -2828,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"再生"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"安全ではない"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"安全ではない: <xliff:g id="VPN_COUNT">%d</xliff:g> 件"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"接続の自動調整"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
@@ -3785,16 +3764,13 @@
       <item quantity="other">%d個のアプリが通知を読み取れます</item>
       <item quantity="one">%d個のアプリが通知を読み取れます</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"拡張通知"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"操作や返信の候補などを利用する"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"なし"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"通知へのアクセスをリクエストしたインストール済みアプリはありません。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"通知へのアクセスを許可"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"通知へのアクセスを<xliff:g id="SERVICE">%1$s</xliff:g>に許可しますか？"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"拡張通知はすべての通知コンテンツにアクセスできます。これには、連絡先の名前などの個人情報やメッセージも含まれます。また、通知を非表示にしたり、電話に出るなど、通知内の操作ボタンを実行したりすることもできます。\n\nまた、この機能は、優先モードの設定を切り替えたり、関連する設定を変更したりすることもできます。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> による通知へのアクセスを許可しますか？"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> がすべての通知を読み取れるようになります。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、電話に出るなど、通知内の操作ボタンをタップしたりすることも許可されます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、サイレント モードの利用権限も OFF になります。"</string>
@@ -3835,7 +3811,7 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"接続済み"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"これらのアプリを接続"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"アプリを接続すると権限が共有され、互いのデータにアクセスできるようになります。"</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"個人データが IT 管理者と共有されないことが信頼できるアプリのみを接続してください。"</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"個人データを IT 管理者と共有しないと考えられる、信頼できるアプリのみを接続してください。"</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"アプリの接続はデバイスのプライバシー設定からいつでも解除できます。"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"仕事用の<xliff:g id="NAME">%1$s</xliff:g>に個人データの使用を許可しますか？"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"個人データが IT 管理者と共有されないことが信頼できるアプリのみを接続してください。"</string>
@@ -4056,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"管理者 PIN の入力"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"ON"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"OFF"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"ON"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"OFF"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"アプリ固定"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちに特定のゲームをプレイすることを許可できます。"</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"アプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスしたりする可能性があります。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
@@ -4168,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"権限が付与されていません"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"リクエストされた権限はありません"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"アプリのデータアクセスを管理する"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"権限の使用"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"権限を最近使用したアプリを表示する"</string>
     <string name="unused_apps" msgid="4566272194756830656">"使用していないアプリ"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -4640,7 +4615,7 @@
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"電池が長持ちします"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"クイック設定開発者用タイル"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb 承認無効のタイムアウト"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"デフォルトの期間（7 日）またはユーザー設定の期間（1 日以上）内に再接続されなかったシステムに対して adb 承認の自動取り消しを無効にします。"</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"デフォルトの期間（7 日）またはユーザー設定の期間（1 日以上）内に再接続されなかったシステムに対する adb 承認の自動取り消しを無効にします。"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"ウィンスコープ トレース"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"センサー OFF"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"仕事用プロファイルの設定"</string>
@@ -4675,7 +4650,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"カメラをすばやく起動"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"電源ボタンを 2 回押して、カメラをすばやく起動できます。どの画面からでも操作できます。"</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"カメラをすばやく起動"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"カメラを切り替えて自撮り写真"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"ひねる動作で前後のカメラを切り替え"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"自撮り写真をすばやく撮影"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"システム ナビゲーション"</string>
@@ -4720,12 +4695,12 @@
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"デバイスを持ち上げて通知をチェック"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"ディスプレイの復帰"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"スマートフォンを持ち上げることで、時刻、通知などの情報を確認できます。"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"時刻、通知などの情報を確認するには、タブレットを持ち上げます。"</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"時刻、通知などの情報を確認するには、デバイスを持ち上げます。"</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"タブレットを持ち上げることで、時刻、通知などの情報を確認できます。"</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"デバイスを持ち上げることで、時刻、通知などの情報を確認できます。"</string>
     <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"スマートフォンをタップしてチェック"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"タブレットをタップしてチェックする"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"デバイスをタップしてチェックする"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"時刻、通知などの情報を確認するには、画面をタップします。"</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"画面をタップして、時刻、通知などの情報を確認できます。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"緊急 SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"緊急 SOS の使用"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g>によって管理されています"</string>
@@ -4891,7 +4866,7 @@
     <string name="location_category" msgid="3496759112306219062">"場所"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"ステータスバーの場所インジケーター"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"ネットワークや接続を含め、すべての場所で表示されます"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GNSS 計測の完全な実行"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GNSS 計測の完全実行を強制"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"デューティ サイクリングを無効にした状態で、すべての GNSS コンステレーションと頻度をトラッキングします"</string>
     <string name="device_theme" msgid="5027604586494772471">"デバイスのテーマ"</string>
     <string name="default_theme" msgid="4815428567082263639">"デフォルト"</string>
@@ -4931,7 +4906,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"アプリの互換性の変更"</string>
-    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"アプリの互換性の変更を切り替え"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"「アプリの互換性の変更」を切り替えます"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"デフォルトで有効な変更"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"デフォルトで無効な変更"</string>
     <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"利用できるアプリはありません"</string>
@@ -5129,6 +5104,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"デバイスを再起動しますか？"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"まず、デバイスを再起動します。これで、別の SIM を追加できます。"</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"続行"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"再起動"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"いいえ"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"切り替える"</string>
@@ -5145,7 +5122,7 @@
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"他の SIM をセットアップする"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"有効な SIM を選択するか、2 枚の SIM を同時に使用します"</string>
     <string name="choose_sim_title" msgid="4804689675237716286">"使用する電話番号を選択"</string>
-    <string name="choose_sim_text" msgid="8056651794100746697">"このデバイスでは <xliff:g id="NUMBER">%1$d</xliff:g> 件の電話番号が使用可能ですが、一度に使用できるのは 1 つのみです"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"このデバイスでは <xliff:g id="NUMBER">%1$d</xliff:g> つの電話番号を使用できますが、一度に使用できるのは 1 つのみです"</string>
     <string name="choose_sim_activating" msgid="9035902671985449448">"有効にしています<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"有効にできませんでした"</string>
     <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"不明な番号"</string>
@@ -5155,7 +5132,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"モバイルデータ、電話機能、SMS を後で使用するには、ネットワークの設定に移動してください"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM カード"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"このダウンロードされた eSIM を消去しますか？"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"この SIM を消去すると、このデバイスから <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> サービスが削除されます。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> のサービスが解約されることはありません。"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"この SIM を消去すると、デバイスから <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> サービスが削除されます。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> のサービスが解約されることはありません。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"消去"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"SIM を消去しています…"</string>
     <string name="erase_sim_fail_title" msgid="2024446702985862427">"SIM を消去できません"</string>
@@ -5180,7 +5157,7 @@
     <string name="force_desktop_mode" msgid="1336913605091334238">"デスクトップ モードに強制的に切り替え"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"セカンダリ ディスプレイで試験運用版デスクトップ モードに強制的に切り替えます"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"マルチウィンドウでのサイズ変更不可を有効にする"</string>
-    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"サイズ変更できないアプリをマルチウィンドウで使用できるようにする"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"サイズ変更できないアプリをマルチウィンドウでも使用可能にします"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"フォースダークのオーバーライド"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"フォースダーク機能をオーバーライドして常に ON にする"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"ぼかしを有効にする"</string>
@@ -5271,7 +5248,7 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"電源ボタンを長押ししてアシスタントを呼び出します"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"デバイス コントロールを表示"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"カードとパスの表示"</string>
-    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"接続されているデバイスのコントロールにアクセスするには、電源ボタンを長押しします"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"ON にすると、電源ボタンを長押しすることで、インターネット接続デバイスの操作メニューを表示できます"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"電源ボタンを長押しすることで、お支払い方法や搭乗券などにアクセスできます。"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -5334,21 +5311,19 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知の重要度をリセットしました。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"アプリ"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"デバイスがメッセージにアクセスしようとしています。タップして詳細をご確認ください。"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"メッセージへのアクセスを許可しますか？"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Bluetooth デバイス <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> がメッセージにアクセスしようとしています。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"デバイスが連絡先と通話履歴にアクセスしようとしています。タップして詳細をご確認ください。"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"連絡先と通話履歴へのアクセスを許可しますか？"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth デバイス <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> が連絡先と通話履歴にアクセスしようとしています。これには着信や発信に関するデータも含まれます。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"明るさ"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"ディスプレイのロック"</string>
+    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
+    <skip />
     <string name="category_name_appearance" msgid="8287486771764166805">"デザイン"</string>
     <string name="category_name_color" msgid="937514550918977151">"カラー"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"その他のディスプレイ コントロール"</string>
+    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
+    <skip />
     <string name="category_name_others" msgid="2366006298768550310">"その他"</string>
     <string name="category_name_general" msgid="7737273712848115886">"全般"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ダークテーマを使用"</string>
@@ -5387,6 +5362,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"クリップボードへのアクセスを表示"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"コピーしたテキストや画像などのコンテンツにアプリがアクセスすると、メッセージが表示されます"</string>
     <string name="all_apps" msgid="3054120149509114789">"すべてのアプリ"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"許可しない"</string>
 </resources>

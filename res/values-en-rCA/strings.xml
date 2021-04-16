@@ -1495,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"Erase SD card"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Erases all data on the internal USB storage, such as music and photos"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Erases all data on the SD card, such as music and photos"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"Clear cached data?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"This will clear cached data for all apps."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTP or PTP function is active"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"Unmount USB storage"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"Unmount SD card?"</string>
@@ -1521,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrate data"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Forget"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Set-up"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"Explore"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Free up space"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Manage storage"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"clean, storage"</string>
@@ -1538,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"Other users"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Device storage"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"Portable storage"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="USED">%1$s</xliff:g> used of <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"Used of <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"Total used of <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> is mounted"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"Couldn\'t mount <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> is safely ejected"</string>
@@ -1551,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Rename storage"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"This <xliff:g id="NAME_0">^1</xliff:g> is safely ejected, but still available. \n\nTo use this <xliff:g id="NAME_1">^1</xliff:g>, you have to mount it first."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"This <xliff:g id="NAME_0">^1</xliff:g> is corrupted. \n\nTo use this <xliff:g id="NAME_1">^1</xliff:g>, you have to set it up first."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"This device doesn’t support this <xliff:g id="NAME_0">^1</xliff:g>. \n\nTo use this <xliff:g id="NAME_1">^1</xliff:g> with this device, you have to set it up first."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"After formatting, you can use this <xliff:g id="NAME_0">^1</xliff:g> in other devices. \n\nAll data on this <xliff:g id="NAME_1">^1</xliff:g> will be erased. Consider backing up first. \n\n"<b>"Back up photos &amp; other media"</b>" \nMove your media files to alternative storage on this device, or transfer them to a computer using a USB cable. \n\n"<b>"Back up apps"</b>" \nAll apps stored on this <xliff:g id="NAME_6">^1</xliff:g> will be uninstalled and their data will be erased. To keep these apps, move them to alternative storage on this device."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"When you eject this <xliff:g id="NAME_0">^1</xliff:g>, apps stored on it will stop working, and media files stored on it will not be available until it is reinserted."</b>" \n\nThis <xliff:g id="NAME_1">^1</xliff:g> is formatted to work on this device only. It won’t work on any others."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"To use the apps, photos or data this <xliff:g id="NAME">^1</xliff:g> contains, reinsert it. \n\nAlternatively, you can choose to forget this storage if the device isn’t available. \n\nIf you choose to forget, all the data the device contains will be lost forever. \n\nYou can reinstall the apps later, but their data stored on this device will be lost."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Forget <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"All the apps, photos and data stored on this <xliff:g id="NAME">^1</xliff:g> will be lost forever."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"Apps"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"Images"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"Videos"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"Audio"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"Cached data"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"Other"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"System"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"Explore <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"Other includes shared files saved by apps, files downloaded from the Internet or Bluetooth android files and so on. \n\nTo see the visible contents of this <xliff:g id="NAME">^1</xliff:g>, tap Explore."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"System includes files used to run Android version <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> may have saved photos, music, apps or other data, using <xliff:g id="SIZE">^2</xliff:g> of storage. \n\nTo view details, switch to <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Set up your <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Use as portable storage"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"For moving photos and other media between devices."</string>
@@ -2276,7 +2261,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch and hold the accessibility button."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Swipe up from the bottom of the screen with three fingers.\n\nTo switch between features, swipe up with three fingers and hold."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Customise Accessibility button"</annotation></string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Customise accessibility button"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Hold volume keys"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"hold volume keys"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Press and hold both volume keys"</string>
@@ -2520,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Limit background activity?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"If you limit background activity for an app, it may misbehave"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Since this app is not set to optimize battery, you can\'t restrict it.\n\nTo restrict the app, first turn on battery optimization."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Unrestricted"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimised"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Allow battery usage in background without restrictions. May use more battery."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimise based on your usage. Recommended for most apps."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Restrict battery usage while in background. App may not work as expected. Notifications may be delayed."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Changing how an app uses your battery can affect its performance."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"This app requires <xliff:g id="STATE">%1$s</xliff:g> battery usage."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Screen usage since full charge"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Battery usage since full charge"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Amount of time screen has been on since full charge"</string>
@@ -2729,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Battery usage"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Since full charge"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Manage battery usage"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> background for past 24 hr"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Battery left estimate is based on your device usage"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Estimated time left"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Until fully charged"</string>
@@ -2827,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"Play"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Not secure"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g> not secure"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive connectivity"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Extends battery life and improves device performance by automatically managing your network connections"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Credential storage"</string>
@@ -3655,7 +3635,7 @@
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbles"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubbles"</string>
-    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"All Bubble settings"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"All bubble settings"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Bubble this conversation"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Show floating icon on top of apps"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Allow <xliff:g id="APP_NAME">%1$s</xliff:g> to show some notifications as bubbles"</string>
@@ -4162,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"No permissions granted"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"No permissions requested"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Control app access to your data"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"Permissions usage"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Show which apps recently used permissions"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Unused apps"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5119,10 +5100,12 @@
     <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Can’t disable operator"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Something went wrong and your operator could not be disabled."</string>
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Use two SIMs?"</string>
-    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"This device can have two SIMs active at once. To continue using one SIM at a time, tap \'No thanks\'."</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"This device can have two SIMs active at once. To continue using one SIM at a time, tap \'No, thanks\'."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Restart device?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"To get started, restart your device. Then you can add another SIM."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Continue"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"Restart"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"No, thanks"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Switch"</string>
@@ -5328,21 +5311,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Unavailable because bedtime mode is on"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Reset notification importance completed."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"A device wants to access your messages. Tap for details."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Allow access to messages?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"A Bluetooth device, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, wants to access your messages.\n\nYou haven’t connected to <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> before."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"A device wants to access your contacts and call log. Tap for details."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Allow access to contacts and call log?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"A Bluetooth device, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven’t connected to <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> before."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Brightness"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"Lock display"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Lock display"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Appearance"</string>
     <string name="category_name_color" msgid="937514550918977151">"Colour"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"Other display controls"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Other display controls"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Others"</string>
     <string name="category_name_general" msgid="7737273712848115886">"General"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Use Dark theme"</string>
@@ -5381,6 +5360,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Show clipboard access"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Show a message when apps access text, images or other content that you’ve copied"</string>
     <string name="all_apps" msgid="3054120149509114789">"All apps"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Don\'t allow"</string>
 </resources>
