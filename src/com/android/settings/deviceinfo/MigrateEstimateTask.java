@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.app.usage.ExternalStorageStats;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
@@ -37,6 +35,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 public abstract class MigrateEstimateTask extends AsyncTask<Void, Void, Long> {
+    private static final String TAG = "MigrateEstimateTask";
+
     private static final String EXTRA_SIZE_BYTES = "size_bytes";
 
     /**

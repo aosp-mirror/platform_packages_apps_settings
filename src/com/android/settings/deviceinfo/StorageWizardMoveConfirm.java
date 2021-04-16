@@ -21,8 +21,6 @@ import static android.content.Intent.EXTRA_TITLE;
 import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -39,6 +37,8 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 public class StorageWizardMoveConfirm extends StorageWizardBase {
+    private static final String TAG = "StorageWizardMoveConfirm";
+
     private static final int REQUEST_CREDENTIAL = 100;
 
     private String mPackageName;
