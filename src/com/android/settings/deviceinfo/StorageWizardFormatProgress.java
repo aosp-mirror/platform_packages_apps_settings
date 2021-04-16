@@ -18,8 +18,6 @@ package com.android.settings.deviceinfo;
 
 import static android.os.storage.VolumeInfo.TYPE_PRIVATE;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.content.Intent;
 import android.content.pm.IPackageMoveObserver;
 import android.os.AsyncTask;
@@ -40,6 +38,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {
+    private static final String TAG = "StorageWizardFormatProgress";
+
     private static final String PROP_DEBUG_STORAGE_SLOW = "sys.debug.storage_slow";
 
     private boolean mFormatPrivate;
