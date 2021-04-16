@@ -42,12 +42,14 @@ public final class MagnificationCapabilities {
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
+            MagnificationMode.NONE,
             MagnificationMode.FULLSCREEN,
             MagnificationMode.WINDOW,
             MagnificationMode.ALL,
     })
 
     public @interface MagnificationMode {
+        int NONE = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_NONE;
         int FULLSCREEN = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN;
         int WINDOW = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW;
         int ALL = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_ALL;
