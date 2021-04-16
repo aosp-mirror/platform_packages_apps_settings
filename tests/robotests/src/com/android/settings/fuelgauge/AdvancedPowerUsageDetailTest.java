@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
@@ -125,9 +126,12 @@ public class AdvancedPowerUsageDetailTest {
     private BatteryStats.Timer mForegroundActivityTimer;
     @Mock
     private BatteryUtils mBatteryUtils;
+    @Mock
+    private BatteryOptimizeUtils mBatteryOptimizeUtils;
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
+    private Preference mFooterPreference;
     private RadioButtonPreference mRestrictedPreference;
     private RadioButtonPreference mOptimizePreference;
     private RadioButtonPreference mUnrestrictedPreference;
@@ -177,6 +181,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
         mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
+        mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());
@@ -201,11 +206,13 @@ public class AdvancedPowerUsageDetailTest {
 
         mForegroundPreference = new Preference(mContext);
         mBackgroundPreference = new Preference(mContext);
+        mFooterPreference = new Preference(mContext);
         mRestrictedPreference = new RadioButtonPreference(mContext);
         mOptimizePreference = new RadioButtonPreference(mContext);
         mUnrestrictedPreference = new RadioButtonPreference(mContext);
         mFragment.mForegroundPreference = mForegroundPreference;
         mFragment.mBackgroundPreference = mBackgroundPreference;
+        mFragment.mFooterPreference = mFooterPreference;
         mFragment.mRestrictedPreference = mRestrictedPreference;
         mFragment.mOptimizePreference = mOptimizePreference;
         mFragment.mUnrestrictedPreference = mUnrestrictedPreference;
@@ -364,6 +371,38 @@ public class AdvancedPowerUsageDetailTest {
 
         assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
         assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
+    }
+
+    @Test
+    public void testInitPreference_isValidPackageName_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
+
+        mFragment.initPreference();
+
+        assertThat(mFooterPreference.getTitle().toString())
+                .isEqualTo("This app requires Optimized battery usage.");
+    }
+
+    @Test
+    public void testInitPreference_isSystemOrDefaultApp_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
+
+        mFragment.initPreference();
+
+        assertThat(mFooterPreference.getTitle()
+                .toString()).isEqualTo("This app requires Unrestricted battery usage.");
+    }
+
+    @Test
+    public void testInitPreference_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
+
+        mFragment.initPreference();
+
+        assertThat(mFooterPreference.getTitle().toString())
+                .isEqualTo("Changing how an app uses your battery can affect its performance.");
     }
 
     @Test

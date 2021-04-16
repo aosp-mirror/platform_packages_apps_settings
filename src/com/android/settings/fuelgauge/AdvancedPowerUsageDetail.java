@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -79,6 +80,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
     private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
     private static final String KEY_PREF_RESTRICTED = "restricted_pref";
+    private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
 
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
@@ -91,11 +93,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     ApplicationsState.AppEntry mAppEntry;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    @VisibleForTesting
+    BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     @VisibleForTesting
     Preference mForegroundPreference;
     @VisibleForTesting
     Preference mBackgroundPreference;
+    @VisibleForTesting
+    Preference mFooterPreference;
     @VisibleForTesting
     RadioButtonPreference mRestrictedPreference;
     @VisibleForTesting
@@ -187,6 +193,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
         mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
         mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
+        mFooterPreference = findPreference(KEY_FOOTER_PREFERENCE);
         mHeaderPreference = (LayoutPreference) findPreference(KEY_PREF_HEADER);
 
         mUnrestrictedPreference  = findPreference(KEY_PREF_UNRESTRICTED);
@@ -195,6 +202,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mUnrestrictedPreference.setOnClickListener(this);
         mOptimizePreference.setOnClickListener(this);
         mRestrictedPreference.setOnClickListener(this);
+
+        mBatteryOptimizeUtils = new BatteryOptimizeUtils(
+                getContext(), getArguments().getInt(EXTRA_UID), mPackageName);
 
         if (mPackageName != null) {
             mAppEntry = mState.getEntry(mPackageName, UserHandle.myUserId());
@@ -261,6 +271,26 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                                 backgroundTimeMs,
                                 /* withSeconds */ false,
                                 /* collapseTimeUnit */ false)));
+
+        final String stateString;
+        final String footerString;
+        //TODO(b/178197718) Update strings
+        if (!mBatteryOptimizeUtils.isValidPackageName()) {
+            //Present optimized only string when the package name is invalid.
+            stateString = context.getString(R.string.manager_battery_usage_optimized_title);
+            footerString = context.getString(
+                    R.string.manager_battery_usage_footer_limited, stateString);
+        } else if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
+            //Present unrestricted only string when the package is system or default active app.
+            stateString = context.getString(R.string.manager_battery_usage_unrestricted_title);
+            footerString = context.getString(
+                    R.string.manager_battery_usage_footer_limited, stateString);
+        } else {
+            //Present default string to normal app.
+            footerString = context.getString(R.string.manager_battery_usage_footer);
+
+        }
+        mFooterPreference.setTitle(Html.fromHtml(footerString, Html.FROM_HTML_MODE_COMPACT));
     }
 
     @Override
