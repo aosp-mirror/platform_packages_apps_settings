@@ -35,12 +35,12 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class TranscodeDisableCachePreferenceControllerTest {
 
-    private TranscodeUserControlPreferenceController mUnderTest;
+    private TranscodeDisableCachePreferenceController mUnderTest;
 
     @Before
     public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
-        mUnderTest = new TranscodeUserControlPreferenceController(context, "some_key");
+        mUnderTest = new TranscodeDisableCachePreferenceController(context, "some_key");
     }
 
     @Test
