@@ -58,6 +58,7 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -96,6 +97,9 @@ public class AdvancedPowerUsageDetailTest {
     private static final long PROCSTATE_TOP_TIME_US = PROCSTATE_TOP_TIME_MS * 1000;
     private static final long PHONE_FOREGROUND_TIME_MS = 250 * 1000;
     private static final long PHONE_BACKGROUND_TIME_MS = 0;
+    private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
+    private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
+    private static final String KEY_PREF_RESTRICTED = "restricted_pref";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private FragmentActivity mActivity;
@@ -124,6 +128,9 @@ public class AdvancedPowerUsageDetailTest {
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
+    private RadioButtonPreference mRestrictedPreference;
+    private RadioButtonPreference mOptimizePreference;
+    private RadioButtonPreference mUnrestrictedPreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
 
@@ -194,8 +201,14 @@ public class AdvancedPowerUsageDetailTest {
 
         mForegroundPreference = new Preference(mContext);
         mBackgroundPreference = new Preference(mContext);
+        mRestrictedPreference = new RadioButtonPreference(mContext);
+        mOptimizePreference = new RadioButtonPreference(mContext);
+        mUnrestrictedPreference = new RadioButtonPreference(mContext);
         mFragment.mForegroundPreference = mForegroundPreference;
         mFragment.mBackgroundPreference = mBackgroundPreference;
+        mFragment.mRestrictedPreference = mRestrictedPreference;
+        mFragment.mOptimizePreference = mOptimizePreference;
+        mFragment.mUnrestrictedPreference = mUnrestrictedPreference;
     }
 
     @After
@@ -351,5 +364,17 @@ public class AdvancedPowerUsageDetailTest {
 
         assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
         assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
+    }
+
+    @Test
+    public void testOnRadioButtonClicked_clickOptimizePref_optimizePreferenceChecked() {
+        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
+        mRestrictedPreference.setKey(KEY_PREF_RESTRICTED);
+        mUnrestrictedPreference.setKey(KEY_PREF_UNRESTRICTED);
+        mFragment.onRadioButtonClicked(mOptimizePreference);
+
+        assertThat(mOptimizePreference.isChecked()).isTrue();
+        assertThat(mRestrictedPreference.isChecked()).isFalse();
+        assertThat(mUnrestrictedPreference.isChecked()).isFalse();
     }
 }
