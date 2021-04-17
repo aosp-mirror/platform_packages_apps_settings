@@ -1280,13 +1280,12 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"A képernyőfigyelőhöz kamera-hozzáférésre van szükség. Koppintson ide az Eszköz-személyreszabási szolgáltatások engedélyeinek kezeléséhez"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Engedélyek kezelése"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Amíg Ön a képernyőt nézi, megakadályozza annak kikapcsolását"</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"A Képernyőfigyelő az előlapi kamerát használja annak ellenőrzésére, hogy nézi-e felhasználó a képernyőt. A funkció az eszközön működik, és a fotókat sosem tárolja vagy küldi tovább a Google-nak."</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"A Képernyőfigyelő az előlapi kamerát használja annak ellenőrzésére, hogy nézi-e valaki a képernyőt. A funkció az eszközön működik, és a fotókat sosem tárolja vagy küldi tovább a Google-nak."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Képernyőfigyelő bekapcsolása"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Ne kapcsoljon ki a képernyő, amíg nézem"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Kamera zárolva"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Az arcfelismerés működéséhez a kamera zárolásának feloldása szükséges."</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"A kamerának feloldva kell lennie a képernyőfigyelő használatához"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Az arcfelismerés működéséhez kamera-hozzáférés szükséges. Koppintson ide az Eszköz-személyreszabási szolgáltatások engedélyeinek kezeléséhez"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Engedélyek kezelése"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Éjszakai fény"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"SD-kártya törlése"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Minden adat, például zenék és képek törlése a belső USB-tárról"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Törli az összes adatot (például a zenéket és fotókat) az SD-kártyáról"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"Törli a gyorsítótárban tárolt adatokat?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"Ez törli az alkalmazások gyorsítótárbeli adatait."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"aktív MTP vagy PTP funkcióval"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"Leválasztja az USB-tárat?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"SD-kártya leválasztása?"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Adatok áttelepítése"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Elfelejtés"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Beállítás"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"Felfedezés"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Tárhely felszabadítása"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Tárhely kezelése"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"törlés, tárhely"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"Egyéb felhasználók"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Eszköz tárhelye"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"Hordozható tárhely"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="TOTAL">%2$s</xliff:g>/<xliff:g id="USED">%1$s</xliff:g> foglalt"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"/ <xliff:g id="TOTAL">%1$s</xliff:g> foglalt"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"/ <xliff:g id="TOTAL">%1$s</xliff:g> foglalt"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"A(z) <xliff:g id="NAME">%1$s</xliff:g> csatlakoztatva"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"A(z) <xliff:g id="NAME">%1$s</xliff:g> csatlakoztatása sikertelen"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"A(z) <xliff:g id="NAME">%1$s</xliff:g> biztonságosan eltávolítva"</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Tárhely átnevezése"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"A(z) <xliff:g id="NAME_0">^1</xliff:g> biztonságos eltávolítása megtörtént, de még elérhető. \n\nA(z) <xliff:g id="NAME_1">^1</xliff:g> használatához először be kell helyeznie azt."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Ez a(z) <xliff:g id="NAME_0">^1</xliff:g> sérült. \n\nA(z) <xliff:g id="NAME_1">^1</xliff:g> használatához először be kell állítania."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"Az eszköz nem támogatja ezt az adathordozót (<xliff:g id="NAME_0">^1</xliff:g>). \n\nHa használni kívánja a(z) <xliff:g id="NAME_1">^1</xliff:g> adathordozót az eszközzel, először be kell állítania."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"A formázás után ez a(z) <xliff:g id="NAME_0">^1</xliff:g> használható más eszközökben. \n\nA(z) <xliff:g id="NAME_1">^1</xliff:g> összes adata törölve lesz, ezért előbb gondolja át, hogy kell-e készítenie biztonsági mentést. \n\n"<b>"Készítsen biztonsági mentést fotóiról és más médiatartalmairól"</b>" \nMédiafájljait helyezze át az eszközben lévő egyéb tárhelyre, vagy másolja át számítógépére egy USB-kábel segítségével. \n\n"<b>"Készítsen biztonsági mentést alkalmazásairól"</b>" \nA(z) <xliff:g id="NAME_6">^1</xliff:g> tárterületén lévő összes alkalmazással együtt azok adatai is törlődnek. Ha meg szeretné tartani ezeket az alkalmazásokat, helyezze át őket az eszközben lévő egyéb tárhelyre."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Ezen <xliff:g id="NAME_0">^1</xliff:g> kiadásakor a rátelepített alkalmazások működésképtelenné válnak, a rajta tárolt médiafájlok pedig nem lesznek elérhetők egészen addig, amíg Ön vissza nem helyezi a tárolót az eszközbe. "</b>\n\n"A(z) <xliff:g id="NAME_1">^1</xliff:g> úgy van formázva, hogy csak ezen az eszközön működjön, más eszközökön ne."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Az ezen <xliff:g id="NAME">^1</xliff:g> által tárolt alkalmazások, fotók vagy adatok használatához helyezze be azt újra az eszközbe. \n\nHa azonban már nem áll az Ön rendelkezésére, el is felejtheti. \n\nAmennyiben az elfelejtés lehetőséget választja, akkor a rajta tárolt összes adat örökre elveszik. \n\nAz alkalmazásokat később újratelepítheti, de a tárhelyen lévő adataik megsemmisülnek."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> elfelejtése?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Az adathordozón (<xliff:g id="NAME">^1</xliff:g>) lévő összes alkalmazás, fotó és adat örökre elvész."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"Alkalmazások"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"Képek"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"Videók"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"Hang"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"Gyorsítótárazott adatok"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"Egyéb"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"Rendszer"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"<xliff:g id="NAME">^1</xliff:g> felfedezése"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"Az Egyéb kategóriába tartoznak az alkalmazások által mentett megosztott fájlok, az internetről, illetve Bluetooth-kapcsolaton keresztül letöltött fájlok, az androidos fájlok stb. \n\nA(z) <xliff:g id="NAME">^1</xliff:g> látható tartalmainak megtekintéséhez koppintson a Felfedezés lehetőségre."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer az Android <xliff:g id="VERSION">%s</xliff:g>. verziójának futtatásához használt fájlokat tartalmaz"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"Lehetséges, hogy <xliff:g id="USER_0">^1</xliff:g> felhasználó fotókat, zenét, alkalmazásokat vagy más adatokat mentett, amihez <xliff:g id="SIZE">^2</xliff:g> tárhelyet használt fel.\n\nA részleteket megtekintheti, ha átvált a következő felhasználóra: <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> – beállítás"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Használat hordozható tárolóként"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Fotók és más médiatartalmak eszközök közötti áthelyezéséhez."</string>
@@ -2521,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Korlátozza a háttértevékenységet?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Ha korlátozza az alkalmazások háttértevékenységét, lehetséges, hogy hibásan fognak működni"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Az alkalmazás nem korlátozható, mert nincs beállítva az akkumulátor optimalizálására.\n\nA korlátozáshoz kapcsolja be az akkumulátoroptimalizálást."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Korlátlan"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimalizált"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Háttérbeli akkumulátorhasználat korlátozás nélküli engedélyezése. Így több energiát fogyaszt az eszköz."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimalizálás használat alapján. A legtöbb alkalmazás esetén ajánlott beállítás."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Akkumulátorhasználat korlátozása, miközben az app a háttérben van. Előfordulhat, hogy az alkalmazások nem az elvártnak megfelelően működnek. Az értesítések késve jelenhetnek meg."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Az adott alkalmazás akkumulátorhasználatának módosítása hatással lehet a teljesítményre."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Ennek az alkalmazásnak <xliff:g id="STATE">%1$s</xliff:g> akkumulátorhasználatra van szüksége."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Képernyőhasználat teljes feltöltés óta"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Akkumulátorhasználat a legutóbbi teljes feltöltés óta"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Képernyőidő teljes töltés óta"</string>
@@ -2730,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akkumulátorhasználat"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Teljes feltöltés óta"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Akkumulátorhasználat kezelése"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"Összesen: <xliff:g id="TIME_0">^1</xliff:g> • Háttérben az elmúlt 24 óra során: <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Az akkumulátor becsült töltöttsége az eszközhasználaton alapszik"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Becsült hátralévő idő"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"A teljes feltöltésig"</string>
@@ -2828,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"Lejátszás"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Nem biztonságos"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g> nem biztonságos"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptív kapcsolódás"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"A hálózati kapcsolatok automatikus kezelésével megnöveli az akkumulátor élettartamát és javítja az eszköz teljesítményét"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Hitelesítési adatok tárolója"</string>
@@ -3785,16 +3764,13 @@
       <item quantity="other">%d alkalmazás tudja olvasni az értesítéseket</item>
       <item quantity="one">%d alkalmazás tudja olvasni az értesítéseket</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"Bővített értesítések"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Javasolt műveleteket, válaszokat és egyebeket kaphat"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Nincs"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Egy telepített alkalmazás sem kért hozzáférést az értesítésekhez"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Értesítés-hozzáférés engedélyezése"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Engedélyezi a(z) <xliff:g id="SERVICE">%1$s</xliff:g> számára az értesítésekhez való hozzáférést?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"A bővített értesítések minden értesítéstartalmat olvashatnak (így a személyes adatokat, mint például a névjegyek nevét és az üzeneteket is). Ez a funkció emellett elvetheti az értesítéseket, valamint műveleteket végezhet az értesítésekben lévő gombokkal, például felveheti a telefonhívásokat. \n\nEz a funkció a Prioritásos módot is be- vagy kikapcsolhatja, és módosíthatja a kapcsolódó beállításokat."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Engedélyezi az értesítések elérését a(z) <xliff:g id="SERVICE">%1$s</xliff:g> számára?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"A(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> elolvashatja az összes értesítést, beleértve a személyes adatokat, például az ismerősök neveit és a fogadott üzeneteket. Ez az alkalmazás továbbá az értesítéseket is elvetheti, illetve használhatja az értesítéseken lévő gombokat (így például felveheti a bejövő hívásokat) \n\nEzzel az alkalmazás egyúttal képes lesz a „Ne zavarjanak” funkció be- és kikapcsolására, továbbá a kapcsolódó beállítások módosítására is."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ha kikapcsolja a(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> hozzáférését az értesítésekhez, azzal lehet, hogy kikapcsolja a „Ne zavarjanak” módhoz való hozzáférést is."</string>
@@ -4056,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Adja meg a rendszergazdai PIN-kódot"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Be"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Ki"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Be"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Ki"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Alkalmazáskitűzés"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Az alkalmazáskitűzés funkcióval az aktuális alkalmazás az előtérben marad egészen addig, amíg meg nem szünteti a kitűzést. Így például biztosíthatja, hogy ha valaki másnak adja át eszközét, az illető csak a kiválasztott alkalmazást használhatja."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"A kitűzött alkalmazás megnyithat más alkalmazásokat, és bizonyos személyes adatok hozzáférhetők lehetnek. \n\nAz alkalmazásokat a következőképpen tűzheti ki: 	\n1.	Kapcsolja be az alkalmazáskitűzés beállítást. 	\n2.	Nyissa meg az Áttekintés nézetet. 	\n3.	Koppintson a képernyő tetején található alkalmazásikonra, majd a Kitűzés elemre."</string>
@@ -4168,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nincsenek megadott engedélyek"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nincsenek kért engedélyek"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Az adataihoz hozzáférő alkalmazások kezelése"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"Engedélyhasználat"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Az engedélyeket a közelmúltban használó alkalmazások megjelenítése"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Nem használt alkalmazások"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5129,6 +5104,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Újraindítja az eszközt?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Kezdő lépésként indítsa újra az eszközt. Ezt követően újabb SIM-kártyát adhat hozzá."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Tovább"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"Újraindítás"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Köszönöm, nem"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Váltás"</string>
@@ -5334,21 +5311,19 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nem áll rendelkezésre, mert be van kapcsolva az alvásidő mód"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Értesítés fontosságának visszaállítása befejezve."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Alkalmazások"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Egy eszköz hozzá szeretne férni az Ön üzeneteihez. Koppintson a részletekért."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Engedélyezi az üzenetekhez való hozzáférést?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Egy Bluetooth-eszköz (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) hozzá szeretne férni az Ön üzeneteihez.\n\nEddig még nem csatlakozott a következő eszközhöz: <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Egy eszköz hozzá szeretne férni az Ön névjegyeihez és hívásnaplójához. Koppintson a részletekért."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Engedélyezi a névjegyeihez és a hívásnaplójához való hozzáférést?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Egy Bluetooth-eszköz (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) hozzá szeretne férni az Ön névjegyeihez és hívásnaplójához. Ide tartoznak a bejövő és kimenő hívások adatai is.\n\nEddig még nem csatlakozott a következő eszközhöz: <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Fényerő"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"Kijelző zárolása"</string>
+    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
+    <skip />
     <string name="category_name_appearance" msgid="8287486771764166805">"Megjelenés"</string>
     <string name="category_name_color" msgid="937514550918977151">"Szín"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"Más kijelzővezérlők"</string>
+    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
+    <skip />
     <string name="category_name_others" msgid="2366006298768550310">"Egyéb"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Általános"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Sötét téma használata"</string>
@@ -5387,6 +5362,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Vágólap-hozzáférés megjelenítése"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Üzenet megjelenítése, amikor alkalmazások férnek hozzá a vágólapra másolt szövegekhez, képekhez vagy más tartalmakhoz"</string>
     <string name="all_apps" msgid="3054120149509114789">"Összes alkalmazás"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Tiltás"</string>
 </resources>
