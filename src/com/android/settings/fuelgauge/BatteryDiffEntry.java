@@ -20,6 +20,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
+import android.os.Process;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -51,6 +54,7 @@ public final class BatteryDiffEntry {
     private double mPercentOfTotal;
 
     private Context mContext;
+    private UserManager mUserManager;
     private String mDefaultPackageName = null;
 
     @VisibleForTesting String mAppLabel = null;
@@ -68,6 +72,7 @@ public final class BatteryDiffEntry {
         mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
         mBatteryHistEntry = batteryHistEntry;
+        mUserManager = context.getSystemService(UserManager.class);
     }
 
     /** Sets the total consumed power in a specific time slot. */
@@ -112,6 +117,19 @@ public final class BatteryDiffEntry {
         return mDefaultPackageName;
     }
 
+    /** Whether the current BatteryDiffEntry is system component or not. */
+    public boolean isSystemEntry() {
+        switch (mBatteryHistEntry.mConsumerType) {
+            case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
+            case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
+                return true;
+            case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
+                return isSystemUid((int) mBatteryHistEntry.mUid)
+                    || mBatteryHistEntry.mIsHidden;
+        }
+        return false;
+    }
+
     private void loadLabelAndIcon() {
         if (mIsLoaded) {
             return;
@@ -151,7 +169,9 @@ public final class BatteryDiffEntry {
                 if (mAppIcon == null) {
                     mAppIcon = mContext.getPackageManager().getDefaultActivityIcon();
                 }
-                if (mAppLabel != null && mAppIcon != null) {
+                // Adds badge icon into app icon for work profile.
+                mAppIcon = getBadgeIconForUser(mAppIcon);
+                if (mAppLabel != null || mAppIcon != null) {
                     sResourceCache.put(
                         mBatteryHistEntry.getKey(),
                         new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /*iconId=*/ 0));
@@ -233,6 +253,17 @@ public final class BatteryDiffEntry {
 
     static void clearCache() {
         sResourceCache.clear();
+    }
+
+    private Drawable getBadgeIconForUser(Drawable icon) {
+        final int userId = UserHandle.getUserId((int) mBatteryHistEntry.mUid);
+        final UserHandle userHandle = new UserHandle(userId);
+        return mUserManager.getBadgedIconForUser(icon, userHandle);
+    }
+
+    private static boolean isSystemUid(int uid) {
+        final int appUid = UserHandle.getAppId(uid);
+        return appUid >= Process.SYSTEM_UID && appUid < Process.FIRST_APPLICATION_UID;
     }
 
     private static <T> T getNonNull(T originalObj, T newObj) {
