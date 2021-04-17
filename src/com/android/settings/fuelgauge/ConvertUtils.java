@@ -24,6 +24,8 @@ import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -43,6 +46,9 @@ public final class ConvertUtils {
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
         new BatteryHistEntry(new ContentValues());
+
+    @VisibleForTesting
+    static double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
 
     /** Invalid system battery consumer drain type. */
     public static final int INVALID_DRAIN_TYPE = -1;
@@ -142,7 +148,8 @@ public final class ConvertUtils {
             final Context context,
             final int timeSlotSize,
             final long[] batteryHistoryKeys,
-            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
+            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap,
+            final boolean purgeLowPercentageData) {
         final Map<Integer, List<BatteryDiffEntry>> resultMap = new HashMap<>();
         // Generates a temporary map to calculate diff usage data, which converts the inputted
         // List<BatteryDiffEntry> into Map<String, BatteryHistEntry> with the key comes from
@@ -248,6 +255,9 @@ public final class ConvertUtils {
             }
         }
         insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
+        if (purgeLowPercentageData) {
+            purgeLowPercentageData(resultMap);
+        }
         return resultMap;
     }
 
@@ -281,6 +291,19 @@ public final class ConvertUtils {
             entry.setTotalConsumePower(totalConsumePower);
         }
         indexedUsageMap.put(Integer.valueOf(desiredIndex), resultList);
+    }
+
+    private static void purgeLowPercentageData(
+            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
+        for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
+            final Iterator<BatteryDiffEntry> iterator = entries.iterator();
+            while (iterator.hasNext()) {
+                final BatteryDiffEntry entry = iterator.next();
+                if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD) {
+                    iterator.remove();
+                }
+            }
+        }
     }
 
     private static long getDiffValue(long v1, long v2, long v3) {
