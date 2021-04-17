@@ -50,16 +50,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
 
     @VisibleForTesting
-    PreferenceGroup mAppListPrefGroup;
+    Map<Integer, List<BatteryDiffEntry>> mBatteryIndexedMap;
 
-    private Context mPrefContext;
-    private BatteryChartView mBatteryChartView;
-    // Battery history relative data.
-    private int[] mBatteryHistoryLevels;
-    private long[] mBatteryHistoryKeys;
-    private Map<Long, List<BatteryHistEntry>> mBatteryHistoryMap;
+    @VisibleForTesting Context mPrefContext;
+    @VisibleForTesting PreferenceGroup mAppListPrefGroup;
+    @VisibleForTesting BatteryChartView mBatteryChartView;
 
-    private int mTrapezoidIndex = BatteryChartView.SELECTED_INDEX_INVALID;
+    @VisibleForTesting int[] mBatteryHistoryLevels;
+    @VisibleForTesting long[] mBatteryHistoryKeys;
+    @VisibleForTesting int mTrapezoidIndex = BatteryChartView.SELECTED_INDEX_INVALID;
 
     private final String mPreferenceKey;
     private final SettingsActivity mActivity;
@@ -84,6 +83,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     @Override
     public void onDestroy() {
+        if (mActivity.isChangingConfigurations()) {
+            BatteryDiffEntry.clearCache();
+        }
     }
 
     @Override
@@ -110,30 +112,34 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     @Override
     public void onSelect(int trapezoidIndex) {
-        Log.d(TAG, "onSelect:" + trapezoidIndex);
-        refreshUi(trapezoidIndex);
+        Log.d(TAG, "onChartSelect:" + trapezoidIndex);
+        refreshUi(trapezoidIndex, /*isForce=*/ false);
     }
 
     void setBatteryHistoryMap(Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
-        // Assumes all timestamp data is consecutive and aligns to hourly time slot.
-        mBatteryHistoryMap = batteryHistoryMap;
+        // Resets all battery history data relative variables.
+        if (batteryHistoryMap == null) {
+            mBatteryIndexedMap = null;
+            mBatteryHistoryKeys = null;
+            mBatteryHistoryLevels = null;
+            return;
+        }
         // Generates battery history keys.
         final List<Long> batteryHistoryKeyList =
-            new ArrayList<Long>(mBatteryHistoryMap.keySet());
-        // Sorts all timestamp keys ordered by ASC from the map keys.
+            new ArrayList<Long>(batteryHistoryMap.keySet());
         Collections.sort(batteryHistoryKeyList);
         mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
-        final int elementSize = Math.min(
-            batteryHistoryKeyList.size(), CHART_KEY_ARRAY_SIZE);
+        final int elementSize = Math.min(batteryHistoryKeyList.size(), CHART_KEY_ARRAY_SIZE);
         final int offset = CHART_KEY_ARRAY_SIZE - elementSize;
         for (int index = 0; index < elementSize; index++) {
             mBatteryHistoryKeys[index + offset] = batteryHistoryKeyList.get(index);
         }
+
         // Generates the battery history levels.
         mBatteryHistoryLevels = new int[CHART_LEVEL_ARRAY_SIZE];
         for (int index = 0; index < CHART_LEVEL_ARRAY_SIZE; index++) {
             final Long timestamp = Long.valueOf(mBatteryHistoryKeys[index * 2]);
-            final List<BatteryHistEntry> entryList = mBatteryHistoryMap.get(timestamp);
+            final List<BatteryHistEntry> entryList = batteryHistoryMap.get(timestamp);
             if (entryList != null && !entryList.isEmpty()) {
                 // All battery levels are the same in the same timestamp snapshot.
                 mBatteryHistoryLevels[index] = entryList.get(0).mBatteryLevel;
@@ -142,10 +148,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     ConvertUtils.utcToLocalTime(timestamp));
             }
         }
-        if (mBatteryChartView != null) {
-            mBatteryChartView.setLevels(mBatteryHistoryLevels);
-        }
-        Log.d(TAG, String.format("setBatteryHistoryMap() size=%d\nkeys=%s\nlevels=%s",
+        // Generates indexed usage map for chart.
+        mBatteryIndexedMap =
+            ConvertUtils.getIndexedUsageMap(
+                mPrefContext, /*timeSlotSize=*/ CHART_LEVEL_ARRAY_SIZE - 1,
+                mBatteryHistoryKeys, batteryHistoryMap);
+        forceRefreshUi();
+
+        Log.d(TAG, String.format(
+            "setBatteryHistoryMap() size=%d\nkeys=%s\nlevels=%s",
             batteryHistoryKeyList.size(),
             utcToLocalTime(mBatteryHistoryKeys),
             Arrays.toString(mBatteryHistoryLevels)));
@@ -154,20 +165,29 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     void setBatteryChartView(BatteryChartView batteryChartView) {
         mBatteryChartView = batteryChartView;
         mBatteryChartView.setOnSelectListener(this);
-        if (mBatteryHistoryLevels != null) {
-            mBatteryChartView.setLevels(mBatteryHistoryLevels);
-        }
+        forceRefreshUi();
     }
 
-    private void refreshUi(int trapezoidIndex) {
+    private void forceRefreshUi() {
+        final int refreshIndex =
+            mTrapezoidIndex == BatteryChartView.SELECTED_INDEX_INVALID
+                ? BatteryChartView.SELECTED_INDEX_ALL
+                : mTrapezoidIndex;
+        refreshUi(refreshIndex, /*isForce=*/ true);
+    }
+
+    @VisibleForTesting
+    boolean refreshUi(int trapezoidIndex, boolean isForce) {
         // Invalid refresh condition.
-        if (mBatteryHistoryMap == null || mBatteryChartView == null ||
-                mTrapezoidIndex == trapezoidIndex) {
-            return;
+        if (mBatteryIndexedMap == null
+                || mBatteryChartView == null
+                || (mTrapezoidIndex == trapezoidIndex && !isForce)) {
+            return false;
         }
         mTrapezoidIndex = trapezoidIndex;
-        Log.d(TAG, String.format("refreshUi: index=%d size=%d",
-            mTrapezoidIndex, mBatteryHistoryMap.size()));
+        Log.d(TAG, String.format("refreshUi: index=%d batteryIndexedMap.size=%d",
+            mTrapezoidIndex, mBatteryIndexedMap.size()));
+        return true;
     }
 
     private static String utcToLocalTime(long[] timestamps) {

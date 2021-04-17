@@ -1325,8 +1325,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Ekranas neišsijungs, kol į jį žiūrėsite"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Fotoaparatas užrakintas"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Fotoaparatas turi būti atrakintas, kad būtų galima naudoti veido aptikimo funkciją"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Fotoaparatas turi būti atrakintas, kad būtų galima naudoti žiūrėjimo į ekraną funkciją"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Veido aptikimo funkcijai reikalinga prieiga prie fotoaparato. Palieskite ir tvarkykite įrenginio suasmeninimo paslaugų leidimus"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Tvarkyti leidimus"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Nakties šviesa"</string>
@@ -1538,8 +1537,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"Ištrinti SD kortelę"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Ištrinami visi vidinės USB atmint. duomenys, pvz., muzikos failai ir nuotraukos"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Ištrinami visi SD kortelės duomenys, pvz., muzikos failai ir nuotraukos"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"Išvalyti talpykloje saugomus duomenis?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"Bus išval. visų progr. talpykl. saugomi duomen."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTP ar PTP funkcija aktyvi"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"Pašalinti USB atmintį?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"Išimti SD kortelę?"</string>
@@ -1564,7 +1561,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Perkelti duomenis"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Pamiršti"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Nustatyti"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"Naršyti"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Atlaisvinti vietos"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Tvarkyti saugyklą"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"išvalyti saugyklą"</string>
@@ -1581,10 +1577,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"Kiti naudotojai"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Įrenginio atmintinė"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"Nešiojama atmintinė"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"Naudojama: <xliff:g id="USED">%1$s</xliff:g> iš <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"Naudojama iš <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"Bendrai naudojama iš <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> įdėta"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"Nepavyko įdėti <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> saugiai pašalinta"</string>
@@ -1594,23 +1588,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Pervardyti atmintį"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Ši saugykla (<xliff:g id="NAME_0">^1</xliff:g>) saugiai pašalinta, bet vis dar yra pasiekiama. \n\nKad galėtumėte naudoti <xliff:g id="NAME_1">^1</xliff:g>, pirmiausia turite saugyklą įdėti."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Ši saugykla (<xliff:g id="NAME_0">^1</xliff:g>) sugadinta. \n\nKad galėtumėte naudoti <xliff:g id="NAME_1">^1</xliff:g>, pirmiausia turėsite atlikti sąranką."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"Šiame įrenginyje nepalaikoma ši saugykla (<xliff:g id="NAME_0">^1</xliff:g>). \n\nKad šiame įrenginyje galėtumėte naudoti <xliff:g id="NAME_1">^1</xliff:g>, pirmiausia turite atlikti sąranką."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Suformatavę šią <xliff:g id="NAME_0">^1</xliff:g> galite naudoti ją kituose įrenginiuose. \n\nVisi duomenys šioje <xliff:g id="NAME_1">^1</xliff:g> bus ištrinti. Pirmiausia apsvarstykite galimybę sukurti atsarginę kopiją. \n\n"<b>"Kurkite atsargines nuotraukų ir kitos medijos kopijas"</b>" \nPerkelkite medijos failus į alternatyvią atmintį šiame įrenginyje arba perkelkite juos į kompiuterį USB kabeliu. \n\n"<b>"Kurkite atsargines programų kopijas"</b>" \nVisos šioje <xliff:g id="NAME_6">^1</xliff:g> saugomos programos bus pašalintos, o jų duomenys bus ištrinti. Jei norite pasilikti šias programas, perkelkite jas į alternatyvią atmintį šiame įrenginyje."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kai pašalinsite šią <xliff:g id="NAME_0">^1</xliff:g>, joje saugomos programos nebeveiks, o joje saugomi medijos failai nebus pasiekiami, kol ją vėl įdėsite."</b>\n\n"Ši <xliff:g id="NAME_1">^1</xliff:g> suformatuota veikti tik šiame įrenginyje. Ji neveiks kituose įrenginiuose."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Kad galėtumėte naudoti programas, nuotraukas ar duomenis iš <xliff:g id="NAME">^1</xliff:g>, įdėkite ją iš naujo.\n\nArba galite pasirinkti pamiršti šią saugyklą, jei įrenginys nebepasiekiamas.\n\nJei pasirinksite pamiršti įrenginį, visi duomenis iš to įrenginio bus prarasti visam laikui.\n\nVėliau galėsite iš naujo įdiegti programas, bet jų duomenys, saugomi šiame įrenginyje, bus prarasti."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Pamiršti <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Visi šioje saugykloje (<xliff:g id="NAME">^1</xliff:g>) saugomi duomenys, programos ir nuotraukos bus prarasti visam laikui."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"Programos"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"Vaizdai"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"Vaizdo įrašai"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"Garso failai"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"Talpykloje saugomi duomenys"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"Kiti"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"Sistema"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"Naršyti <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"Kiti failai yra bendrinami programų išsaugoti failai, iš interneto arba per „Bluetooth“ atsisiųsti failai, „Android“ failai ir pan. \n\nKad galėtumėte peržiūrėti matomą „<xliff:g id="NAME">^1</xliff:g>“ turinį, palieskite „Naršyti“."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistema apima failus, naudojamus vykdant <xliff:g id="VERSION">%s</xliff:g> versijos „Android“"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> galėjo išsaugoti nuotraukų, muzikos, programų ar kitų duomenų. Naudojama <xliff:g id="SIZE">^2</xliff:g> saugyklos. \n\nKad peržiūrėtumėte išsamią informaciją, perjunkite į <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Nustatykite <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Naudoti kaip perkeliamą atmintį"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Norint perkelti nuotraukas ir kitą mediją iš vieno įrenginio į kitą."</string>
@@ -2217,7 +2201,7 @@
     <string name="user_dict_settings_add_shortcut_option_name" msgid="5722204336242646866">"Spartusis klavišas:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="2117468247460253346">"Kalba:"</string>
     <string name="user_dict_settings_add_word_hint" msgid="4560494723256242785">"Įveskite žodį"</string>
-    <string name="user_dict_settings_add_shortcut_hint" msgid="6209624157217434640">"Pasirenkamas spartusis klavišas"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="6209624157217434640">"Pasirenkamas spart. klavišas"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="316493656442362284">"Redaguoti žodį"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="4909198741914531509">"Redaguoti"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="651550824433043545">"Ištrinti"</string>
@@ -2583,20 +2567,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Apriboti veiklą fone?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Jei apribosite programos veiklą fone, ji gali netinkamai veikti"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Negalite apriboti progr., nes ji nenust. optimiz. akum. naud.\n\nJei norite apr. progr., pirmiausia įj. akum. naud. optimiz."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Neapribota"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimizuota"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Leiskite vartoti akumuliatoriaus energiją fone be apribojimų. Gali būti suvartojama daugiau akumuliatoriaus energijos."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimizavimas pagrįstas naudojimo duomenimis. Rekomenduojama daugumai programų."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Apribokite akumuliatoriaus energijos vartojimą fone. Programos gali neveikti, kaip numatyta. Pranešimai gali vėluoti."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Pakeitus, kaip programa vartoja akumuliatoriaus energiją, gali būti paveiktas našumas."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Šiai programai būtina nustatyti šią akumuliatoriaus energijos vartojimo parinktį: <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Ekrano naudojimas po paskutinio visiško įkrovimo"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Akumuliatoriaus naudojimas nuo paskutinio visiško įkrovimo"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Kiek laiko ekranas buvo įjungtas po visiško įkrovimo"</string>
@@ -2806,8 +2783,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akumuliatoriaus energijos vartojimas"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Nuo visiško įkrovimo"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Tvarkyti akumuliatoriaus naudojimą"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"Iš viso <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> fone per pastarąsias 24 val."</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Likęs akumuliatoriaus veikimo laikas numatytas pagal tai, kaip naudojate įrenginį"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Liko laiko (numatyta)"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Iki visiško įkrovimo"</string>
@@ -2904,7 +2880,10 @@
     <string name="tts_play" msgid="2945513377250757221">"Paleisti"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Nesaugu"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"Nesaugu: <xliff:g id="VPN_COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptyvusis ryšių tvarkymas"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Automatiškai tvarkant tinklo ryšius pailgėja akumuliatoriaus veikimo laikas ir pagerėja įrenginio našumas"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Prisijungimo duomenų saugykla"</string>
@@ -3883,16 +3862,13 @@
       <item quantity="many">%d programos gali skaityti pranešimus</item>
       <item quantity="other">%d programų gali skaityti pranešimus</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"Patobulinti pranešimai"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Gaukite siūlomus veiksmus, atsakymus ir daugiau"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Nėra"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Jokios įdiegtos programos nepateikė pranešimo prieigos užklausos."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Leisti prieigą prie pranešimų"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Leisti paslaugos „<xliff:g id="SERVICE">%1$s</xliff:g>“ prieigą prie pranešimų?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"Patobulintų pranešimų funkcija gali skaityti visų pranešimų turinį, įskaitant asmens informaciją (pvz., kontaktų vardus ir pranešimus). Ši funkcija taip pat gali atsisakyti pranešimų ar imtis veiksmų su pranešimuose esančiais mygtukais, pvz., atsakyti į telefono skambučius. \n\nBe to, ši funkcija gali įjungti arba išjungti svarbiausių pokalbių režimą ir pakeisti susijusius nustatymus."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Leisti <xliff:g id="SERVICE">%1$s</xliff:g> pranešimo prieigą?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"„<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ galės skaityti visus pranešimus, įskaitant asmens informaciją, pvz., kontaktų vardus ir gautų pranešimų tekstą. Ši programa taip pat galės praleisti pranešimus ar imtis veiksmų su pranešimuose esančiais mygtukais, įskaitant atsakymą į telefono skambučius. \n\nPrograma taip pat galės įjungti ar išjungti režimą „Netrukdyti“ ir keisti susijusius nustatymus."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Jei išjungsite „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ prieigą prie pranešimų, prieiga prie režimo „Netrukdyti“ taip pat gali būti išjungta."</string>
@@ -4166,10 +4142,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Įveskite administratoriaus PIN kodą"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Įjungta"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Išjungta"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Įjungta"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Išjungta"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Programos prisegimas"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Prisegta dabartinė programa liks rodinyje tol, kol ją atsegsite. Šią funkciją galima naudoti, pavyzdžiui, leidžiant patikimam draugui žaisti konkretų žaidimą."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"Prisegta programa gali atidaryti kitas programas ir pasiekti asmens duomenis. \n\ndami prisegti programą, atlikite toliau nurodytus veiksmus. 	\n1.	Įjunkite programos prisegimo funkciją. 	\n2.	Atidarykite „Apžvalga“. 	\n3.	Palieskite programos piktogramą ekrano viršuje, tada palieskite „Prisegti“."</string>
@@ -4292,7 +4266,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nėra suteiktų leidimų"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nėra užklausų dėl leidimų"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Valdykite programų prieigą prie duomenų"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"Leidimų naudojimas"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Rodyti, kurios programos neseniai naudojo leidimus"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Nenaudojamos programos"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -4498,7 +4473,7 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Šiai programai leidžiama nuskaityti, keisti ir ištrinti visus failus, esančius šiame įrenginyje ar bet kurioje prijungtoje saugykloje. Jei suteiksite leidimą, programa gali pasiekti failus jūsų tiksliai neinformavus."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Gali pasiekti visus failus"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Medijos valdymo programos"</string>
-    <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Leisti programai tvarkyti mediją"</string>
+    <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Leisti programai valdyti mediją"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Leidus ši programa galės keisti arba ištrinti kitomis programomis sukurtus medijos failus be jūsų sutikimo. Programai turi būti suteiktas leidimas pasiekti failus ir mediją."</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"medija, failas, valdymas, valdytojas, valdyti, redaguoti, redagavimo priemonė, programa, programėlė"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr virtualiosios realybės apdorojimo priemonė stereofoninis garsas pagalbinė paslauga"</string>
@@ -5303,6 +5278,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Paleisti įrenginį iš naujo?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Kad galėtumėte pradėti, paleiskite įrenginį iš naujo. Tada galėsite pridėti kitą SIM kortelę."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Tęsti"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"Paleisti iš naujo"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Ne, ačiū"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Perjungti"</string>
@@ -5512,21 +5489,19 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nepasiekiama, nes įjungtas laiko eiti miegoti režimas"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Pranešimų svarba nustatyta iš naujo."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Programos"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Įrenginys nori pasiekti jūsų pranešimus. Palieskite, jei reikia išsamios informacijos."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Leisti pasiekti pranešimus?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"„Bluetooth“ įrenginys „<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>“ nori pasiekti jūsų pranešimus.\n\nPrie „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ dar niekada nebuvote prisijungę."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Įrenginys nori pasiekti jūsų kontaktus ir skambučių žurnalą. Palieskite, jei reikia išsamios informacijos."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Leisti pasiekti kontaktus ir skambučių žurnalą?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"„Bluetooth“ įrenginys „<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>“ nori pasiekti jūsų kontaktus ir skambučių žurnalą. Tai apima duomenis apie gaunamuosius ir siunčiamuosius skambučius.\n\nPrie „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ dar niekada nebuvote prisijungę."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Šviesumas"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"Užrakinimo ekranas"</string>
+    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
+    <skip />
     <string name="category_name_appearance" msgid="8287486771764166805">"Išvaizda"</string>
     <string name="category_name_color" msgid="937514550918977151">"Spalva"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"Kiti pateikties valdikliai"</string>
+    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
+    <skip />
     <string name="category_name_others" msgid="2366006298768550310">"Kita"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Bendrieji"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Tamsiosios temos naudojimas"</string>
@@ -5565,6 +5540,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Rodyti iškarpinės prieigą"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Rodyti pranešimą, kai programos pasiekia nukopijuotą tekstą, vaizdus ar kitą turinį"</string>
     <string name="all_apps" msgid="3054120149509114789">"Visos programos"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Neleisti"</string>
 </resources>

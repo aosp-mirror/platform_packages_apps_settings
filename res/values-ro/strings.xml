@@ -1300,13 +1300,12 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Pentru funcția Atenție la ecran este necesar accesul la cameră. Atingeți pentru a gestiona permisiunile pentru Serviciile de personalizare a dispozitivului"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Gestionați permisiunile"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Nu lasă ecranul să se închidă dacă vă uitați la el"</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"„Atenție la ecran” folosește camera frontală pentru a vedea dacă se uită cineva la ecran. Funcționează pe dispozitiv, iar imaginile nu sunt niciodată stocate sau trimise la Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Funcția Atenție la ecran folosește camera frontală pentru a detecta dacă se uită cineva la ecran. Funcționează pe dispozitiv, iar imaginile nu sunt niciodată stocate sau trimise la Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Activați „Atenție la ecran”"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Menține activat ecranul când îl priviți"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Camera foto este blocată"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Camera foto trebuie deblocată pentru detectarea facială"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Camera trebuie să fie deblocată pentru funcția Atenție la ecran"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Pentru detectarea facială este necesar accesul la camera foto. Atingeți pentru a gestiona permisiunile pentru Serviciile de personalizare a dispozitivului"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Gestionați permisiunile"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Lumină de noapte"</string>
@@ -1517,8 +1516,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"Ștergeți cardul SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Șterge toate datele din stocarea USB internă, cum ar fi muzica și fotografiile"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Șterge toate datele de pe cardul SD, cum ar fi muzica și fotografiile"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"Ștergeți datele memorate în cache?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"Datele din cache ale aplicațiilor vor fi șterse."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"Funcția MTP sau PTP este activă"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"Demontați stocarea USB?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"Demontați cardul SD?"</string>
@@ -1543,7 +1540,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Mutați datele"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Ștergeți"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Configurați"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"Explorați"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Eliberați spațiu"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Gestionați spațiul de stocare"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"curățare, stocare"</string>
@@ -1560,10 +1556,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"Alți utilizatori"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Stocare dispozitiv"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"Spațiu de stocare portabil"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"Folosit: <xliff:g id="USED">%1$s</xliff:g> din <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"Folosiți din <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"Total folosit din <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> este montată"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"<xliff:g id="NAME">%1$s</xliff:g> nu a putut fi montată"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> este scoasă în siguranță"</string>
@@ -1573,23 +1567,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Redenumiți stocarea"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Acest <xliff:g id="NAME_0">^1</xliff:g> este eliminat în siguranță, dar încă este disponibil.\n\n Pentru a folosi acest <xliff:g id="NAME_1">^1</xliff:g>, mai întâi trebuie să îl montați."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> este deteriorat. \n\nPentru a folosi acest <xliff:g id="NAME_1">^1</xliff:g>, mai întâi trebuie să îl configurați."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"Acest dispozitiv nu este compatibil cu acest <xliff:g id="NAME_0">^1</xliff:g>. \n\nPentru a folosi acest <xliff:g id="NAME_1">^1</xliff:g> cu dispozitivul, mai întâi trebuie să îl configurați."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"După formatare, puteți folosi <xliff:g id="NAME_0">^1</xliff:g> în alte dispozitive. \n\nToate datele de pe <xliff:g id="NAME_1">^1</xliff:g> vor fi șterse. Mai întâi, faceți backup. \n\n"<b>"Faceți backup la fotografii și la alte fișiere media"</b>" \nMutați fișierele media în altă stocare de pe acest dispozitiv sau transferați-le pe un computer folosind un cablu USB. \n\n"<b>"Faceți backup la aplicații"</b>" \nToate aplicațiile stocate pe <xliff:g id="NAME_6">^1</xliff:g> vor fi dezinstalate, iar datele acestora vor fi șterse. Pentru a păstra aceste aplicații, mutați-le în altă stocare de pe acest dispozitiv."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Când scoateți <xliff:g id="NAME_0">^1</xliff:g>, aplicațiile stocate pe acesta nu vor mai funcționa, iar fișierele media stocate pe acesta nu vor mai fi disponibile până când nu este introdus din nou."</b>\n\n" Acest <xliff:g id="NAME_1">^1</xliff:g> este formatat pentru a funcționa numai pe acest dispozitiv. Nu va funcționa pe alte dispozitive."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Pentru a folosi aplicațiile, fotografiile și datele pe care le conține acest <xliff:g id="NAME">^1</xliff:g>, reintroduceți-l. \n\nSau, puteți alege să ștergeți acest spațiu de stocare, dacă dispozitivul nu este disponibil. \n\nDacă alegeți să îl ștergeți, toate datele de pe dispozitiv vor fi pierdute definitiv. \n\nPuteți reinstala aplicațiile mai târziu, dar datele acestora care au fost stocate pe dispozitiv vor fi pierdute."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Eliminați <xliff:g id="NAME">^1</xliff:g> din listă?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Toate aplicațiile, fotografiile și datele stocate pe acest <xliff:g id="NAME">^1</xliff:g> se vor pierde definitiv."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"Aplicații"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"Imagini"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"Videoclipuri"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"Audio"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"Date salvate în memoria cache"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"Altele"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"Sistem"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"Explorați <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"În „Altele” sunt incluse fișiere trimise care au fost salvate de aplicații, fișiere descărcate de pe internet sau prin Bluetooth, fișiere Android și altele. \n\nPentru a accesa conținutul vizibil al <xliff:g id="NAME">^1</xliff:g>, atingeți Explorați."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistemul include fișiere folosite pentru a rula versiunea de Android <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"Este posibil ca <xliff:g id="USER_0">^1</xliff:g> să fi salvat fotografii, muzică, aplicații sau alte date folosind <xliff:g id="SIZE">^2</xliff:g> din spațiul de stocare. \n\nPentru a vedea detalii, comutați pe <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Configurați <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Folosiți ca stocare portabilă"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Pentru a muta fotografiile și alte fișiere media de pe un dispozitiv pe altul."</string>
@@ -2262,7 +2246,7 @@
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"Măriți la ecran complet"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"Măriți o parte a ecranului"</string>
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Comutați între ecranul complet și cel parțial"</string>
-    <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Atingeți butonul de comutare pentru a alege între două opțiuni"</string>
+    <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Atingeți butonul de comutare pentru a alege între cele două opțiuni"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Comutați la butonul de accesibilitate?"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Dacă folosiți tripla atingere pentru a mări o parte a ecranului, veți întârzia tastarea și alte acțiuni.\n\nButonul de accesibilitate apare pe ecran peste alte aplicații. Atingeți-l pentru a mări."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Comutați la butonul de accesibilitate"</string>
@@ -2348,7 +2332,7 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Întârziere la atingere lungă"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversarea culorilor"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Folosiți inversarea culorilor"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Inversarea culorilor întunecă ecranele luminoase.&lt;br/&gt;&lt;br/&gt; Notă: &lt;ol&gt; &lt;li&gt; în plus, inversarea culorilor deschide ecranele întunecate.&lt;/li&gt; &lt;li&gt; Culorile conținutului media și ale imaginilor se schimbă.&lt;/li&gt; &lt;li&gt; Puteți folosi Tema întunecată pentru a afișa un fundal întunecat. Tema întunecată funcționează cu aplicațiile compatibile. Inversarea culorilor funcționează în toate aplicațiile.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Inversarea culorilor întunecă ecranele luminoase.&lt;br/&gt;&lt;br/&gt; Notă &lt;ol&gt; &lt;li&gt; Dar, prin inversarea culorilor se deschid la culoare ecranele întunecate.&lt;/li&gt; &lt;li&gt; Culorile conținutului media și ale imaginilor se schimbă.&lt;/li&gt; &lt;li&gt; Puteți folosi Tema întunecată pentru a afișa un fundal întunecat. Tema întunecată funcționează cu aplicațiile compatibile. Inversarea culorilor funcționează în toate aplicațiile.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automat (durată de staționare)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Clicul automat funcționează cu un mouse conectat. Puteți seta cursorul mouse-ului să dea clic automat când nu se mai mișcă pentru un anumit interval de timp."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Dezactivat"</string>
@@ -2552,20 +2536,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Limitați activitatea de fundal?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Dacă limitați activitatea de fundal pentru o aplicație, aceasta se poate comporta necorespunzător"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplicația nu optimizează bateria, deci nu o puteți restricționa.\n\nPentru a o restricționa, activați optimizarea bateriei."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Fără restricții"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimizată"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Permiteți utilizarea bateriei în fundal fără restricții. Poate consuma mai multă baterie."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimizați în funcție de modul de utilizare. Se recomandă pentru majoritatea aplicațiilor."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Limitați utilizarea bateriei în timpul funcționării în fundal. Este posibil ca aplicația să nu funcționeze conform așteptărilor. Este posibil ca notificările să fie amânate."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Dacă modificați modul în care o aplicație vă folosește bateria, îi puteți afecta performanța."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Această aplicație necesită utilizare <xliff:g id="STATE">%1$s</xliff:g> a bateriei."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Utilizarea ecranului de la încărcare"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Utilizarea bateriei de la încărcarea completă"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Perioada de timp de la încărcarea completă cât a fost pornit ecranul"</string>
@@ -2768,8 +2745,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizarea bateriei"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"De la încărcarea completă"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestionați utilizarea bateriei"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> fundal pentru ultimele 24 de ore"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Estimarea bateriei rămase se bazează pe utilizarea dispozitivului"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Timp estimat rămas"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Până la încărcarea completă"</string>
@@ -2866,7 +2842,10 @@
     <string name="tts_play" msgid="2945513377250757221">"Redați"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Nesecurizat"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g> nesecurizat"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conectivitate adaptabilă"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Extinde autonomia bateriei și îmbunătățește performanța dispozitivului, gestionând automat conexiunile la rețea"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Stocarea certificatelor"</string>
@@ -3834,16 +3813,13 @@
       <item quantity="other">%d de aplicații pot citi notificările</item>
       <item quantity="one">%d aplicație poate citi notificările</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"Notificări optimizate"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Primiți acțiuni sugerate, răspunsuri și altele"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Fără"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Nicio aplicație instalată nu a solicitat accesul la notificări."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permiteți accesul la notificări"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Permiteți accesul la notificări pentru <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"Notificările optimizate pot citi tot conținutul notificărilor, inclusiv informații cu caracter personal, precum mesajele și numele persoanelor de contact. În plus, funcția poate să închidă notificări sau să acționeze asupra butoanelor din notificări, inclusiv să răspundă la apeluri telefonice. \n\nÎn plus, funcția poate să activeze sau să dezactiveze modul Cu prioritate și să schimbe setările asociate."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Permiteți accesul la notificări pentru <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> va putea să citească toate notificările, inclusiv informațiile cu caracter personal, cum ar fi numele persoanelor de contact și textul mesajelor primite. În plus, va putea să închidă notificări sau să declanșeze butoane pentru acțiuni din acestea, inclusiv să răspundă la apeluri telefonice. \n\nAstfel, aplicația va putea să activeze sau să dezactiveze starea Nu deranja și să modifice setările aferente."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Dacă dezactivați accesul notificărilor pentru <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, este posibil să se dezactiveze și accesul când starea este Nu deranja."</string>
@@ -4111,10 +4087,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Introduceți codul PIN de administrator"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Activat"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Dezactivat"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Activată"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Dezactivată"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fixarea aplicației"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Cu ajutorul fixării aplicației, puteți fixa aplicația actuală pentru a rămâne vizibilă până la anularea fixării. Această funcție poate fi folosită, de exemplu, pentru a-i permite unui prieten de încredere să joace un anumit joc."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"Atunci când o aplicație este fixată, aceasta poate deschide alte aplicații și pot fi accesate date cu caracter personal. \n\nPentru a folosi fixarea aplicației: 	\n1.	activați fixarea aplicației; 	\n2.	deschideți Recente; 	\n3.	atingeți pictograma aplicației din partea de sus a ecranului, apoi atingeți Fixați."</string>
@@ -4189,8 +4163,8 @@
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Adăugați"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"Se deschide în <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilizați din <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="979243131665635278">"memorie internă"</string>
-    <string name="storage_type_external" msgid="125078274000280821">"stocare externă"</string>
+    <string name="storage_type_internal" msgid="979243131665635278">"memoria internă"</string>
+    <string name="storage_type_external" msgid="125078274000280821">"stocarea externă"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> folosiți din <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Spațiu de stocare utilizat"</string>
     <string name="change" msgid="273206077375322595">"Schimbați"</string>
@@ -4230,7 +4204,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nicio permisiune acordată"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nicio permisiune solicitată"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Controlați accesul aplicațiilor la date"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"Folosirea permisiunilor"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Arată aplicațiile care au folosit recent permisiuni"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Aplicații nefolosite"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5165,7 +5140,7 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Pentru a dezactiva acest SIM, îndepărtați cardul SIM"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Atingeți pentru a activa <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Comutați la <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Doar un SIM descărcat poate fi activ odată.\n\nCând comutați la <xliff:g id="CARRIER1">%1$s</xliff:g> nu anulați serviciul <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Doar un SIM descărcat poate fi activ odată.\n\nCând treceți la <xliff:g id="CARRIER1">%1$s</xliff:g>, nu se anulează serviciul <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Comutați la <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Ștergeți SIM-ul"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Nu se poate șterge SIM-ul"</string>
@@ -5198,9 +5173,9 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Activați SIM-ul?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Treceți la <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Folosiți cardul SIM?"</string>
-    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Doar un SIM poate fi activ odată.\n\nCând comutați la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nu anulați serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Doar un SIM descărcat poate fi activ odată.\n\nCând comutați la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nu anulați serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Doar un SIM poate fi activ odată.\n\nCând comutați, nu anulați serviciul <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Doar un SIM poate fi activ odată.\n\nCând treceți la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, nu se anulează serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Doar un SIM descărcat poate fi activ odată.\n\nCând treceți la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, nu se anulează serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Doar un SIM poate fi activ odată.\n\nDacă faceți această schimbare, nu se anulează serviciul <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Treceți la <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Se conectează la rețea…"</string>
     <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Se trece la <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5216,6 +5191,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Reporniți dispozitivul?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Pentru a începe, reporniți dispozitivul. Apoi puteți adăuga un alt SIM."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Continuați"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"Reporniți"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Nu, mulțumesc"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Schimbați"</string>
@@ -5267,7 +5244,7 @@
     <string name="force_desktop_mode" msgid="1336913605091334238">"Forțați modul desktop"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Forțați modul desktop experimental pe ecrane secundare"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Permiteți aplicații fără redimensionare în ferestre multiple"</string>
-    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permite aplicațiile fără redimensionare în ferestre multiple"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permiteți aplicațiile fără redimensionare în ferestre multiple"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Modificați funcția Force-Dark"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Modifică funcția Force-Dark să fie activată mereu"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Activați estomparea"</string>
@@ -5346,7 +5323,7 @@
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Meniul de pornire"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Meniul butonului de pornire"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Afișați cardurile și permisele"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"Afișați comenzile dispozitivelor"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Afișați comenzile dispozitivului"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Afișați cardurile, permisele și comenzile dispozitivelor"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"Ecran de blocare"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Nu afișa conținut"</string>
@@ -5358,7 +5335,7 @@
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Pentru utilizare, setați mai întâi un ecran de blocare"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Apăsați lung pentru Asistent"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Declanșați Asistentul apăsând lung butonul de pornire"</string>
-    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Afișați comenzile dispozitivelor"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Afișați comenzile dispozitivelui"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Afișați cardurile și permisele"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Pentru a accesa comenzile pentru dispozitivele conectate, țineți apăsat butonul de pornire"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Pentru a avea acces la opțiuni precum metodele de plată și biletele de îmbarcare, apăsați lung butonul de pornire."</string>
@@ -5423,21 +5400,19 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Indisponibil deoarece modul ora de culcare este activat"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"S-a finalizat resetarea importanței notificărilor."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplicații"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Un dispozitiv solicită acces la mesajele dvs. Atingeți pentru detalii."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Permiteți accesul la mesaje?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Un dispozitiv Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, solicită acces la mesajele dvs.\n\nNu v-ați mai conectat la <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Un dispozitiv solicită acces la persoanele de contact și la jurnalul dvs. de apeluri. Atingeți pentru detalii."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Permiteți accesul la agendă și la jurnalul de apeluri?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Un dispozitiv Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, solicită acces la persoanele dvs. de contact și la jurnalul de apeluri. Aici sunt incluse date despre apelurile primite și efectuate.\n\nNu v-ați mai conectat la <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Luminozitate"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"Ecran de blocare"</string>
+    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
+    <skip />
     <string name="category_name_appearance" msgid="8287486771764166805">"Aspect"</string>
     <string name="category_name_color" msgid="937514550918977151">"Culoare"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"Alte controale de afișare"</string>
+    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
+    <skip />
     <string name="category_name_others" msgid="2366006298768550310">"Altele"</string>
     <string name="category_name_general" msgid="7737273712848115886">"General"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Folosiți Tema întunecată"</string>
@@ -5476,6 +5451,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afișați accesările clipboardului"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Afișați un mesaj când aplicațiile accesează text, imagini sau alte tipuri de conținut pe care le-ați copiat"</string>
     <string name="all_apps" msgid="3054120149509114789">"Toate aplicațiile"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Nu permiteți"</string>
 </resources>

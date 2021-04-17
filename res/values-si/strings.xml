@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"එය දෙස බලන විට තිරය ක්‍රියාත්මකව තබා ගන්න"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"කැමරාව අගුලු දමා ඇත"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"මුහුණ හඳුනා ගැනීම සඳහා කැමරාව අගුලු හැරිය යුතුය"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"තිර අවධානය සඳහා කැමරාව අගුලු හැරිය යුතුය"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"මුහුණ හඳුනා ගැනීම සඳහා කැමරා ප්‍රවේශය අවශ්‍ය වේ. උපාංග පුද්ගලිකකරණ සේවා සඳහා අවසර කළමනාකරණය කිරීමට තට්ටු කරන්න"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"අවසර කළමනාකරණය කරන්න"</string>
     <string name="night_display_title" msgid="8532432776487216581">"රාත්‍රී ආලෝකය"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"SD කාඩ් පත මකන්න"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"සංගීත සහ ඡායාරූප ආදී අභ්‍යන්තර USB ආචයනයේ සියලු දත්ත මකයි"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"සංගීත සහ ජායාරුප ආදී සියලු දත්ත SD කාඩ් පතෙන් මකා දමන්න"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"හැඹිලි දත්ත ඉවත් කරන්න ද?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"මෙය සියලුම යෙදුම් සඳහා හැඹිලි දත්ත ඉවත් කෙරේ."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTP හෝ PTP කාර්ය සක්‍රීයයි"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"USB ආචයනය ඉවත් කරන්නද?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"SD කාඩ් පත ගලවන්නද?"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"දත්ත සංක්‍රමණය"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"අමතක කරන්න"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"පිහිටුවන්න"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"ගවේෂණය කරන්න"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"ඉඩ නිදහස් කර ගන්න"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"ගබඩාව කළමනාකරණය කරන්න"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"පිරිසිදු, ගබඩාව"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"වෙනත් පරිශීලකයින්"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"උපාංග ආචයනය"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"අතේ ගෙන යා හැකි ගබඩාව"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="TOTAL">%2$s</xliff:g> න් <xliff:g id="USED">%1$s</xliff:g> ක් භාවිත කළ"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"<xliff:g id="TOTAL">%1$s</xliff:g> න් භාවිත කළ"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"<xliff:g id="TOTAL">%1$s</xliff:g> වලින් මුළු භාවිතය"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> සවි කරන ලදි"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"<xliff:g id="NAME">%1$s</xliff:g> සවි කිරීමට නොහැකි විය"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> ආරක්ෂිතව ගලවන ලදි"</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"ආචයනය යළි නම් කරන්න"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"මෙම <xliff:g id="NAME_0">^1</xliff:g> ආරක්ෂිතව පිටතට ගත් නමුත් තවමත් ලබා ගත හැකිය. \n\nමෙම <xliff:g id="NAME_1">^1</xliff:g> භාවිත කිරීමට, ඔබ පළමුව එය සවි කළ යුතුය."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"මෙම <xliff:g id="NAME_0">^1</xliff:g> දූෂිතයි. \n\nමෙම <xliff:g id="NAME_1">^1</xliff:g> භාවිත කිරීමට, ඔබ පළමුව එය පිහිටුවිය යුතුය."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"මෙම උපාංගය මෙම <xliff:g id="NAME_0">^1</xliff:g> සඳහා සහාය නොදක්වයි. \n\nමෙම උපාංගය සමගින් මෙම <xliff:g id="NAME_1">^1</xliff:g> භාවිත කිරීමට, ඔබ පළමුව එය පිහිටුවිය යුතුය."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"ෆෝමැට් කිරීමෙන් පසුව, ඔබට මෙම <xliff:g id="NAME_0">^1</xliff:g> වෙනත් උපාංග වල භාවිතා කළ හැකිය. \n\n<xliff:g id="NAME_1">^1</xliff:g> හි සියලු දත්ත මකා දැමෙනු ඇත. එය මුලින්ම උපස්ථ කිරීම සලකා බලන්න. \n\n"<b>"ඡායාරූප සහ වෙනත් මාධ්‍ය උපස්ථ කරන්න"</b>" \nඔබගේ මාධ්‍ය ගොනු මෙම උපාංගයේ විකල්ප ආචයනයක් වෙත හෝ USB කේබලයක් භාවිතා කර පරිගණකයකට ගෙන යන්න. \n\n"<b>"යෙදුම් උපස්ථ කරන්න"</b>" \n<xliff:g id="NAME_6">^1</xliff:g> මත ගබඩා කර ඇති සියලු යෙදුම් අස්ථාපනය වන අතර ඒවායේ දත්ත මකා දැමෙනු ඇත. මෙම යෙදුම් තබා ගැනීමට, මෙම උපාංගයේ විකල්ප ආචයනයකට ඒවා ගෙනයන්න."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"ඔබ <xliff:g id="NAME_0">^1</xliff:g> ගලවන විට, එහි ගබඩා කළ යෙදුම් වැඩ නොකරන අතර, එහි ගබඩා කර ඇති මාධ්‍ය ගොනු එය යළි නැවත සවි කරන තුර ලබාගත නොහැක."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> එය ෆෝමැට් කර ඇත්තේ මෙම උපාංගයේ පමණක් වැඩ කරන ආකාරයටයි. එය වෙනත් ඒවා වල වැඩ නොකරනු ඇත."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"මෙම <xliff:g id="NAME">^1</xliff:g> අඩංගු යෙදුම්, ඡායාරූප හෝ දත්ත භාවිත කිරීමට, එය නැවත ඇතුළු කරන්න. \n\nවිකල්පමය වශයෙන්, උපාංගය ලබා ගත නොහැකි නම් ඔබට මෙම ගබඩාව අමතක කිරීමට තේරීමට හැකිය. \n\nඔබ අමතක කිරීමට තේරුවහොත්, උපාංගයෙහි අඩංගු සියලු දත්ත සදහටම අහිමි වනු ඇත. \n\nඔබට පසුව යෙදුම් යළි ස්ථාපනය කිරීමට හැකි නමුත්, මෙම උපාංගයෙහි ඇති දත්ත අහිමි වනු ඇත."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> අමතක කරන්නද?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"මෙම <xliff:g id="NAME">^1</xliff:g> හි ගබඩා කර ඇති සියලු යෙදුම්, ඡායාරූප, සහ දත්ත සදහටම අහිමි වනු ඇත."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"යෙදුම්"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"රූප"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"වීඩියෝ"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"ශ්‍රව්‍යය"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"හැඹිලිගත දත්ත"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"වෙනත්"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"පද්ධතිය"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"<xliff:g id="NAME">^1</xliff:g> ගවේෂණය කරන්න"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"වෙනත් ඒවාට යෙදුම් මගින් සුරකින ලද බෙදා ගත් ගොනු, අන්තර්ජාලය හෝ බ්ලූටූත් වෙතින් බාගත් ගොනු, Android ගොනු සහ තවත් දේ ඇතුළත් විය හැකිය. \n\nමෙම <xliff:g id="NAME">^1</xliff:g>හි දෘශ්‍යමාන මුළු අන්තර්ගතය බැලීමට, ගවේෂණය කරන්න තට්ටු කරන්න."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Android <xliff:g id="VERSION">%s</xliff:g> අනුවාදය ධාවනය කිරීමට භාවිතා කරන ගොනු පද්ධතිය තුළ අඩංගුයි"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> හට ගබඩාවෙන් <xliff:g id="SIZE">^2</xliff:g> ක් ගන්නා සුරැකි ඡායාරූප, සංගීතය, යෙදුම්, හෝ වෙනත් දත්ත තිබිය හැකිය. \n\nවිස්තර බැලීමට, <xliff:g id="USER_1">^1</xliff:g> වෙත මාරු වන්න."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"ඔබගේ <xliff:g id="NAME">^1</xliff:g> සකසන්න"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"අතේ ගෙන යා හැකි ආචයනයක් ලෙස භාවිතා කරන්න"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"උපාංග අතර ඡායාරූප හා අනෙකුත් මාධ්‍ය ගෙන යාම සඳහා."</string>
@@ -2521,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"පසුබිම් ක්‍රියාකාරිත්වය සීමා කරන්නද?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"ඔබ යෙදුමක පසුබිම් ක්‍රියාකාරිත්වය සීමා කළහොත්, එය වැරදි ලෙස ක්‍රියා කරනු ඇත"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"මෙම යෙදුම බැටරිය ප්‍රශස්ත කිරීමට සකසා නැති නිසා, ඔබට එය සීමා කළ නොහැකිය. \n\nයෙදුම සීමා කිරීම සඳහා, පළමුව බැටරි ප්‍රශස්තකරණය ක්‍රියාත්මක කරන්න."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"සීමා නොකළ"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"ප්‍රශස්ත කළ"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"සීමා නොමැතිව පසුබිමේ බැටරි භාවිතයට ඉඩ දෙන්න. බැටරිය වැඩියෙන් භාවිත කළ හැකිය."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"ඔබගේ භාවිතය මත පදනම්ව ප්‍රශස්ත කරන්න. බොහොමයක් යෙදුම් සඳහා නිර්දේශිතයි."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"පසුබිමේ තිබෙන අතරතුර බැටරි භාවිතය සීමා කරන්න. යෙදුම අපේක්ෂිත පරිදි ක්‍රියා නොකළ හැකිය. දැනුම්දීම් ප්‍රමාද විය හැකිය."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"යෙදුමක් ඔබගේ බැටරිය භාවිත කරන ආකාරය වෙනස් කිරීම එහි ක්‍රියාකාරිත්වයට බලපායි."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"මෙම යෙදුමට <xliff:g id="STATE">%1$s</xliff:g> බැටරි භාවිතය අවශ්‍යයි."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"පූර්ණ ආරෝපණයෙන් පසුව තිර භාවිතය"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"සම්පූර්ණ ආරෝපණයෙහි සිට බැටරිය භාවිතය"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"පූර්ණ ආරෝපණය සිට තිරය සක්‍රියව තිබූ වේලාව"</string>
@@ -2730,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"බැටරි භාවිතය"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"පූර්ණ ආරෝපණය සිට"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"බැටරි භාවිතය කළමනාකරණය"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"මුළු <xliff:g id="TIME_0">^1</xliff:g> • පසුගිය පැය 24 සඳහා <xliff:g id="TIME_1">^2</xliff:g>ක පසුබිම"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ඉතිරිව ඇති බැටරි ඇස්තමේන්තුව ඔබගේ උපාංග භාවිතය මත පදනම් වේ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"ඇස්තමේන්තුගත ඉතිරි කාලය"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"පූර්ණ ආරෝපණය වන තෙක්"</string>
@@ -2828,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"ධාවනය කරන්න"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"සුරක්ෂිත නැත"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g> සුරක්ෂිත නැත"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"අනුවර්තී සබැඳුම් හැකියාව"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ඔබගේ ජාල සම්බන්ධතා ස්වයංක්‍රීයව කළමනාකරණය කිරීමෙන් බැටරි ආයු කාලය දිගු කරන අතර උපාංගයේ ක්‍රියාකාරිත්වය වැඩි දියුණු කරයි"</string>
     <string name="credentials_title" msgid="7535942196886123656">"අක්තපත්‍ර ආචයනය"</string>
@@ -3785,16 +3764,13 @@
       <item quantity="one">යෙදුම් %d කට දැනුම්දීම් කියවිය හැක</item>
       <item quantity="other">යෙදුම් %d කට දැනුම්දීම් කියවිය හැක</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"වැඩි දියුණු කළ දැනුම්දීම්"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"යෝජිත ක්‍රියා, පිළිතුරු සහ තවත් දේ ලබා ගන්න"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"කිසිවක් නැත"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"ස්ථාපිත යෙදුම් කිසිවක් දැනුම්දීම් ප්‍රවේශය ඉල්ලා නැත."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"දැනුම්දීම් ප්‍රවේශය ඉඩ දෙන්න"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g>සඳහා දැනුම්දීම් ප්‍රවේශයට ඉඩ දෙන්න ද?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"වැඩිදියුණු කළ දැනුම්දීම්වලට සම්බන්ධතා නම් සහ පණිවිඩ වැනි පුද්ගලික තොරතුරු ඇතුළුව, සියලු දැනුම්දීම් අන්තර්ගතය කියවිය හැකිය. මෙම විශේෂාංගයට දැනුම්දීම් ඉවත දැමීමට හෝ දුරකථන ඇමතුම්වලට පිළිතුරු දීම වැනි, දැනුම්දීම්වල බොත්තම් මත ක්‍රියා සිදු කිරීමටද හැකිය. \n\nමෙම විශේෂාංගයට ප්‍රමුඛතා ප්‍රකාරය ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට සහ අදාළ සැකසීම් වෙනස් කිරීමටද හැකිය."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> සඳහා දැනුම්දීම් ප්‍රවේශය ඉඩ දෙන්නද?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> හට සම්බන්ධතා නම් සහ ඔබට ලැබෙන පණිවිඩවල පෙළ වැනි පෞද්ගලික තොරතුරු ඇතුළුව, සියලු දැනුම් දීම් කියවීමට හැකියාව ලැබෙනු ඇත. මෙම යෙදුමට දැනුම් දීම් ඉවත ලෑමට හෝ දුරකථන ඇමතුම්වලට පිළිතුරු දීම ඇතුළුව, දැනුම් දීම්වල බොත්තම් මත ක්‍රියා මාර්ග ගැනීමටද හැකියාව ලැබෙනු ඇත. \n\nමෙය යෙදුමට බාධා නොකරන්න ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට සහ අදාළ සැකසීම් වෙනස් කිරීමට හැකියාවද ලබා දෙනු ඇත."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"ඔබ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> සඳහා දැනුම්දීම් ප්‍රවේශය ක්‍රියාවිරහිත කළහොත්, බාධා නොකරන්න ප්‍රවේශයද ක්‍රියාවිරහිත කරනු ඇත."</string>
@@ -4056,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"පරිපාලක PIN එක ඇතුල් කරන්න"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"ක්‍රියාත්මකයි"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"අක්‍රියයි"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"ක්‍රියාත්මකයි"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"ක්‍රියාවිරහිතයි"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"යෙදුම ඇමිණීම"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"යෙදුම ඇමිණීම ඔබ එය ඇමිණීමෙන් ඉවත් කරන තෙක් වත්මන් යෙදුම තබා ගැනීමට ඉඩ දේ. උදාහරණයක් වශයෙන් විශ්වාසි මිතුරෙකුට විශේෂිත ගේම් එකක් ක්‍රීඩා කිරීමට ඉඩ දීමට මෙම විශේෂාංගය භාවිත කළ හැකිය."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"යෙදුමක් ඇමිණූ විට, ඇමිණූ යෙදුම වෙනත් යෙදුම් විවෘත කළ හැකි අතර පෞද්ගලික දත්තවලට ප්‍රවේශ විය හැකිය. \n\nයෙදුම ඇමිණීම භාවිත කිරීමට: 	\n1.	යෙදුම ඇමිණීම ක්‍රියාත්මක කරන්න 	\n2.	දළ විශ්ලේෂණය විවෘත කරන්න 	\n3.	තිරයේ ඉහළින් ඇති යෙදුම් නිරූපකය තට්ටු කර අනතුරුව අමුණන්න තට්ටු කරන්න"</string>
@@ -4168,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"අවසර ලබා දී නැත"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"අවසර ඉල්ලා නැත"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"ඔබේ දත්ත වෙත යෙදුම් ප්‍රවේශ පාලනය කළ හැක"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"අවසර භාවිතය"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"මෑතකදී අවසර භාවිත කළ යෙදුම් පෙන්වන්න"</string>
     <string name="unused_apps" msgid="4566272194756830656">"භාවිත නොකළ යෙදුම්"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5129,6 +5104,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"උපාංගය යළි අරඹන්නද?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"ආරම්භ කිරීමට, ඔබේ උපාංගය යළි අරඹන්න. පසුව ඔබට වෙනත් SIM එකක් එක් කළ හැකිය."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"ඉදිරියට යන්න"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"යළි අරඹන්න"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"එපා, ස්තුතියි"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"මාරු වන්න"</string>
@@ -5334,21 +5311,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"නිද්‍රා කාල ප්‍රකාරය ක්‍රියාත්මක නිසා ලබා ගත නොහැකිය"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"දැනුම්දීම්වල වැදගත්කම යළි සැකසීම සම්පූර්ණ කරන ලදි."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"යෙදුම්"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"උපාංගයකට ඔබගේ පණිවිඩ වෙත ප්‍රවේශ විමට අවශ්‍යයි. විස්තර සඳහා තට්ටු කරන්න."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"පණිවිඩවලට ප්‍රවේශ වීමට ඉඩ දෙන්නද?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"බ්ලූටූත් උපාංගයකට, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ඔබගේ පණිවිඩවලට ප්‍රවේශ වීමට අවශ්‍යයි.\n\nඔබ මීට පෙර <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> වෙත සම්බන්ධ වී නැත."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"බ්ලූටූත් උපාංගයකට, ඔබගේ සම්බන්ධතාවලට සහ ඇමතුම් ලොගයට ප්‍රවේශ වීමට අවශ්‍යයි. විස්තර සඳහා තට්ටු කරන්න."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"සම්බන්ධතා සහ ඇමතුම් ලොගය වෙත ප්‍රවේශය ඉඩ දෙන්නද?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"බ්ලූටූත් උපාංගයකට, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ඔබගේ සම්බන්ධතා සහ ඇමතුම් ලොගයකට ප්‍රවේශ වීමට අවශ්‍යයි. පැමිණෙන සහ පිටතට යන ඇමතුම් පිළිබඳ දත්ත මෙයට ඇතුළත් වේ.\n\nඔබ මීට පෙර <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> වෙත සම්බන්ධ වී නැත."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"දීප්තිය"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"සංදර්ශකය අගුලු දමන්න"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"සංදර්ශකය අගුලු දමන්න"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"පෙනුම"</string>
     <string name="category_name_color" msgid="937514550918977151">"වර්ණය"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"වෙනත් සංදර්ශන පාලන"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"වෙනත් සංදර්ශක පාලන"</string>
     <string name="category_name_others" msgid="2366006298768550310">"වෙනත්"</string>
     <string name="category_name_general" msgid="7737273712848115886">"සාමාන්‍ය"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"අඳුරු තේමාව භාවිත කරන්න"</string>
@@ -5387,6 +5360,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"පසුරු ප්‍රවේශය පෙන්වන්න"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"යෙදුම් ඔබ පිටපත් කර ඇති පෙළ, රූප හෝ වෙනත් අන්තර්ගතයට ප්‍රවේශ වන විට පණිවිඩයක් පෙන්වන්න"</string>
     <string name="all_apps" msgid="3054120149509114789">"සියලු යෙදුම්"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"ඉඩ නොදෙන්න"</string>
 </resources>

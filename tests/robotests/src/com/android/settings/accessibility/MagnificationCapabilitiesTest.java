@@ -56,4 +56,11 @@ public final class MagnificationCapabilitiesTest {
                 R.string.accessibility_magnification_area_settings_full_screen_summary);
         assertThat(actualString).isEqualTo(expectedString);
     }
+
+    @Test
+    public void getCapabilities_unset_defaultValue() {
+        final int windowCapabilities = MagnificationCapabilities.getCapabilities(mContext);
+        assertThat(windowCapabilities).isEqualTo(
+                MagnificationCapabilities.MagnificationMode.FULLSCREEN);
+    }
 }
