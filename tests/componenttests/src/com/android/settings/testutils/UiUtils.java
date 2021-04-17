@@ -17,8 +17,11 @@
 package com.android.settings.testutils;
 
 import android.app.Activity;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.fragment.app.FragmentActivity;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import androidx.test.runner.lifecycle.Stage;
 
@@ -27,6 +30,7 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 public class UiUtils {
+    private static final String TAG = "UI_UTILS";
 
     public static void waitUntilCondition(long timeoutInMillis, Supplier<Boolean> condition) {
         long start = System.nanoTime();
@@ -42,17 +46,48 @@ public class UiUtils {
                 e.printStackTrace();
             }
         }
+        if (System.nanoTime() - start >= (timeoutInMillis * 1000000)) {
+            Log.w(TAG, "Condition not match and timeout for waiting " + timeoutInMillis + "(ms).");
+        } else {
+            Log.d(TAG, "Condition matched.");
+        }
     }
 
     public static boolean waitForActivitiesInStage(long timeoutInMillis, Stage stage) {
         final Collection<Activity> activities = new ArrayList<>();
         waitUntilCondition(Constants.ACTIVITY_LAUNCH_WAIT_TIMEOUT, () -> {
-            InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> activities.addAll(
+            activities.addAll(
                     ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(
-                            Stage.RESUMED)));
+                            Stage.RESUMED));
             return activities.size() > 0;
         });
 
         return activities.size() > 0;
+    }
+
+    public static void dumpView(View view) {
+        dumpViewRecursive(view, 0, 0, 0);
+    }
+
+    public static View getFirstViewFromActivity(Activity activity) {
+        return ((FragmentActivity) activity).getSupportFragmentManager().getFragments().get(
+                0).getView();
+    }
+
+    private static void dumpViewRecursive(View view, int layer, int index, int total) {
+        if (view instanceof ViewGroup) {
+            Log.i(TAG, "L[" + layer + "] PARENT -> " + (index + 1) + "/" + total + " >> "
+                    + view.toString());
+            System.out.println(
+                    TAG + " L[" + layer + "] PARENT -> " + (index + 1) + "/" + total + " >> "
+                            + view.toString());
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                dumpViewRecursive(((ViewGroup) view).getChildAt(i), layer + 1, i + 1,
+                        ((ViewGroup) view).getChildCount());
+            }
+        } else {
+            Log.i(TAG, "L[" + layer + "] =END=  -> " + (index + 1) + "/" + total + " >> "
+                    + view.toString());
+        }
     }
 }

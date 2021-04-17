@@ -118,18 +118,19 @@ public class AccessibilityEditDialogUtils {
      *
      * @param context A valid context
      * @param dialogTitle The title of magnify edit shortcut dialog
-     * @param listener The listener to determine the action of magnify edit shortcut dialog
+     * @param positiveBtnListener The positive button listener
      * @return A magnification edit shortcut dialog in Magnification
      */
-    public static Dialog showMagnificationSwitchShortcutDialog(Context context,
-            CharSequence dialogTitle, View.OnClickListener listener) {
+    public static Dialog createMagnificationSwitchShortcutDialog(Context context,
+            CharSequence dialogTitle, CustomButtonsClickListener positiveBtnListener) {
+        final View contentView = createSwitchShortcutDialogContentView(context);
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
-                .setView(createSwitchShortcutDialogContentView(context))
+                .setView(contentView)
                 .setTitle(dialogTitle)
                 .create();
-        alertDialog.show();
-        setEditShortcutButtonsListener(alertDialog, listener);
-        setScrollIndicators(alertDialog);
+        setCustomButtonsClickListener(alertDialog, contentView,
+                positiveBtnListener, /* negativeBtnListener= */ null);
+        setScrollIndicators(contentView);
         return alertDialog;
     }
 
@@ -169,16 +170,50 @@ public class AccessibilityEditDialogUtils {
                 View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM);
     }
 
-    private static void setEditShortcutButtonsListener(AlertDialog dialog,
-            View.OnClickListener listener) {
-        final View contentView = dialog.findViewById(R.id.container_layout);
-        final Button positiveButton = contentView.findViewById(
-                R.id.switch_shortcut_positive_button);
-        final Button negativeButton = contentView.findViewById(
-                R.id.switch_shortcut_negative_button);
 
-        positiveButton.setOnClickListener(listener);
-        negativeButton.setOnClickListener(v -> dialog.dismiss());
+    interface CustomButtonsClickListener {
+        void onClick(@CustomButton int which);
+    }
+
+    /**
+     * Annotation for customized dialog button type.
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            CustomButton.POSITIVE,
+            CustomButton.NEGATIVE,
+    })
+
+    public @interface CustomButton {
+        int POSITIVE = 1;
+        int NEGATIVE = 2;
+    }
+
+    private static void setCustomButtonsClickListener(Dialog dialog, View contentView,
+            CustomButtonsClickListener positiveBtnListener,
+            CustomButtonsClickListener negativeBtnListener) {
+        final Button positiveButton = contentView.findViewById(
+                R.id.custom_positive_button);
+        final Button negativeButton = contentView.findViewById(
+                R.id.custom_negative_button);
+
+        if (positiveButton != null) {
+            positiveButton.setOnClickListener(v -> {
+                if (positiveBtnListener != null) {
+                    positiveBtnListener.onClick(CustomButton.POSITIVE);
+                }
+                dialog.dismiss();
+            });
+        }
+
+        if (negativeButton != null) {
+            negativeButton.setOnClickListener(v -> {
+                if (negativeBtnListener != null) {
+                    negativeBtnListener.onClick(CustomButton.NEGATIVE);
+                }
+                dialog.dismiss();
+            });
+        }
     }
 
     private static View createSwitchShortcutDialogContentView(Context context) {
