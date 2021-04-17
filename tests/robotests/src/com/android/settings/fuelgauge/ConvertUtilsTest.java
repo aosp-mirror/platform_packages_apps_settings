@@ -199,16 +199,16 @@ public final class ConvertUtilsTest {
                 createBatteryHistEntry(
                     "package2", "label2", 15.0, 2L, 25L, 35L),
                 createBatteryHistEntry(
-                    "package3", "label3", 5.0, 2L, 5L, 5L)));
+                    "package3", "label3", 5.0, 3L, 5L, 5L)));
         batteryHistoryMap.put(
             Long.valueOf(batteryHistoryKeys[4]),
             Arrays.asList(
                 createBatteryHistEntry(
                     "package2", "label2", 30.0, 2L, 30L, 40L),
                 createBatteryHistEntry(
-                    "package2", "label2", 75.0, 3L, 40L, 50L),
+                    "package2", "label2", 75.0, 4L, 40L, 50L),
                 createBatteryHistEntry(
-                    "package3", "label3", 5.0, 2L, 5L, 5L)));
+                    "package3", "label3", 5.0, 3L, 5L, 5L)));
 
         final Map<Integer, List<BatteryDiffEntry>> resultMap =
             ConvertUtils.getIndexedUsageMap(
@@ -222,28 +222,30 @@ public final class ConvertUtilsTest {
         // Verifies the second timestamp result.
         entryList = resultMap.get(Integer.valueOf(1));
         assertThat(entryList).hasSize(3);
-        assertBatteryDiffEntry(entryList.get(0), 5, 5L, 5L);
-        assertBatteryDiffEntry(entryList.get(1), 75, 40L, 50L);
-        assertBatteryDiffEntry(entryList.get(2), 20, 15L, 15L);
+        assertBatteryDiffEntry(entryList.get(1), 5, 5L, 5L);
+        assertBatteryDiffEntry(entryList.get(2), 75, 40L, 50L);
+        assertBatteryDiffEntry(entryList.get(0), 20, 15L, 15L);
         // Verifies the last 24 hours aggregate result.
         entryList = resultMap.get(Integer.valueOf(-1));
         assertThat(entryList).hasSize(3);
-        assertBatteryDiffEntry(entryList.get(0), 4, 5L, 5L);
-        assertBatteryDiffEntry(entryList.get(1), 68, 40L, 50L);
-        assertBatteryDiffEntry(entryList.get(2), 27, 30L, 40L);
+        assertBatteryDiffEntry(entryList.get(1), 4, 5L, 5L);
+        assertBatteryDiffEntry(entryList.get(2), 68, 40L, 50L);
+        assertBatteryDiffEntry(entryList.get(0), 27, 30L, 40L);
     }
 
     private static BatteryHistEntry createBatteryHistEntry(
             String packageName, String appLabel, double consumePower,
-            long userId, long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
+            long uid, long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
         // Only insert required fields.
         final ContentValues values = new ContentValues();
         values.put("packageName", packageName);
         values.put("appLabel", appLabel);
-        values.put("userId", userId);
+        values.put("uid", Long.valueOf(uid));
+        values.put("consumerType",
+            Integer.valueOf(ConvertUtils.CONSUMER_TYPE_UID_BATTERY));
         values.put("consumePower", consumePower);
-        values.put("foregroundUsageTimeInMs", foregroundUsageTimeInMs);
-        values.put("backgroundUsageTimeInMs", backgroundUsageTimeInMs);
+        values.put("foregroundUsageTimeInMs", Long.valueOf(foregroundUsageTimeInMs));
+        values.put("backgroundUsageTimeInMs", Long.valueOf(backgroundUsageTimeInMs));
         return new BatteryHistEntry(values);
     }
 

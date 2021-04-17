@@ -385,7 +385,7 @@ public class BatteryEntry {
 
         sUidCache.put(uidString, utd);
         if (handler != null) {
-            handler.sendMessage(sHandler.obtainMessage(MSG_UPDATE_NAME_ICON, batteryEntry));
+            handler.sendMessage(handler.obtainMessage(MSG_UPDATE_NAME_ICON, batteryEntry));
         }
         return new NameAndIcon(name, defaultPackageName, icon, /*iconId=*/ 0);
     }

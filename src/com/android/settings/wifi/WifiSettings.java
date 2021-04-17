@@ -346,6 +346,10 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
         }
+
+        // After rebooting the device, the Wi-Fi state will not be called back in the airplane
+        // mode, need to call onWifiStateChanged() to update the initial state of the UI.
+        onWifiStateChanged();
     }
 
     @Override
