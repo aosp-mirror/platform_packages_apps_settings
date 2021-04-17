@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"ማያ ገጹን ሲመለከቱት እንደበራ ይቆይ"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"ካሜራ ተቆልፏል"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"ለመልክ ማወቂያ ካሜራ መከፈት አለበት"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"ለየማያ ገጽ ትኩረት ካሜራ መከፈት አለበት"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"ለመልክ ማግኘት የካሜራ መዳረሻ ያስፈልጋል። ለመሣሪያ ግላዊነት አገልግሎቶች ፈቃዶችን ለማስተዳደር በጣት መታ ያድርጉ"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"ፍቃዶችን ያስተዳድሩ"</string>
     <string name="night_display_title" msgid="8532432776487216581">"የምሽት ብርሃን"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"የSD ካርድ አጥፋ"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"እንደ ሙዚቃ እና ፎቶዎች፣ በውስጥ USB ማከማቻ ላይ ያለ ውሂብ ሁሉ ያጠፋል"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"እንደ ሙዚቃ እና ፎቶዎች፣ በ SD ካርድ ላይ ያለን ውሂብ ሁሉ ያጠፋል"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"የተሸጎጠ ውሂብ ይጽዳ?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"ይሄ የተሸጎጡ የሁሉም መተግበሪያዎች ውሂብ ያጸዳል።"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"የMTP ወይም PTP ተግባር ገባሪ ሆኗል"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"የUSB ማከማቻ ንቀል?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"SD ካርድ ንቀል?"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"ውሂብ ስደድ"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"እርሳ"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"አዋቅር"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"ያስሱ"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"ቦታ ያስለቅቁ"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"ማከማቻን ያቀናብሩ"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ንጹሕ፣ ማከማቻ"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"ሌሎች ተጠቃሚዎች"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"የመሣሪያ ማከማቻ"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"ተንቀሳቃሽ ማከማቻ"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="USED">%1$s</xliff:g> ከ<xliff:g id="TOTAL">%2$s</xliff:g> ጥቅም ላይ የዋለ"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"ከ<xliff:g id="TOTAL">%1$s</xliff:g> ጥቅም ላይ የዋለ"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"ከ<xliff:g id="TOTAL">%1$s</xliff:g> አጠቃላይ ጥቅም ላይ የዋለ"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> ተፈናጧል"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"<xliff:g id="NAME">%1$s</xliff:g> ማፈናጠጥ አልተቻለም"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> ደህንነቱ ተጠብቆ ወጥቷል"</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"ማከማቻ ዳግም ሰይም"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"ይህ <xliff:g id="NAME_0">^1</xliff:g> ደህንነቱ ሳይነካ ተነቅሏል፣ ነገር ግን አሁንም ይገኛል። \n\nይህንን  <xliff:g id="NAME_1">^1</xliff:g> ለመጠቀም፣ መጀመሪያ ሊገጥሙት ይገባል።"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"ይህ <xliff:g id="NAME_0">^1</xliff:g> የተበላሸ ነው። \n\nይህንን <xliff:g id="NAME_1">^1</xliff:g> ለመጠቀም መጀመሪያ ሊያዘጋጁት ይገባል።"</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"ይህ መሳሪያ ይህን <xliff:g id="NAME_0">^1</xliff:g> አይደግፍም። \n\nይህንን <xliff:g id="NAME_1">^1</xliff:g> በዚህ መሳሪያ ለመጠቀም፣ መጀመሪያ ሊያዘጋጁት ይገባል።"</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"ቅርጸት ከሰሩ በኋላ ይህንን  <xliff:g id="NAME_0">^1</xliff:g> በሌሎች መሣሪያዎች ላይ መጠቀም ይችላሉ።  \n\n በዚህ <xliff:g id="NAME_1">^1</xliff:g> ውስጥ ያለ ሁሉም ውሂብ ይሰረዛል።  መጀመሪያ የእሱን ምትኬ ማስቀመጡን ያስቡበት።  \n\n"<b>"የፎቶዎች እና የሌላ ማህደረመረጃ ምትኬ ያስቀምጡ "</b>" \nየማህደረመረጃ ፋይሎችዎን በዚህ መሣሪያ ላይ ወዳለ ተለዋጭ ማከማቻ ይውሰዱ ወይም የዩኤስቢ ገመድ ተጠቅመው ወደ አንድ ኮምፒውተር ያስተላልፏቸው። \n\n"<b>"የመተግበሪያዎች ምትኬን ያስቀምጡ"</b>" \nበዚህ <xliff:g id="NAME_6">^1</xliff:g> ላይ የተቀመጡ መተግበሪያዎች ሁሉ ይራገፉና ውሂባቸው ይሰረዛል። እነዚህን መተግበሪያዎች ለማቆየት በዚህ መሣሪያ ላይ ወዳለ ተለዋጭ ማከማቻ ይውሰዷቸው።"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"ይህን <xliff:g id="NAME_0">^1</xliff:g> ሲያስወጡት በእሱ ላይ የተከማቹ መተግበሪያዎች መስራት ያቆማሉ፣ እና ዳግም እስኪገባ ድረስ በእሱ ላይ የተከማቹ የማህደረመረጃ ፋይሎች አይገኙም።"</b>" \n\nይህ <xliff:g id="NAME_1">^1</xliff:g> በዚህ መሣሪያ ላይ ብቻ እንዲሰራ ቅርጸት የተሰራለት ነው። በማናቸውም ሌሎች ላይ አይሰራም።"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"ይህ <xliff:g id="NAME">^1</xliff:g> የያዛቸውን መተግበሪያዎች፣ ፎትዎች ወይም ውሂብ ለመጠቀም ዳግም ያስገቡት። \n\nእንደ አማራጭም መሣሪያው የሚገኝ ካልሆነ ይህን ማከማቻ ለመርሳት መምረጥ ይችላሉ። \n\nለመርሳት ከመረጡ መሣሪያው የያዘው ውሂብ ሁሉ ለዘለዓለም ይጠፋል። \n\nመተግበሪያዎቹን በኋላ ላይ ዳግም መጫን ይችላሉ፣ ነገር ግን በዚህ መሣሪያ ላይ የተከማቸው ውሂባቸው ይጠፋል።"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> ረሱ?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"በዚህ <xliff:g id="NAME">^1</xliff:g> ላይ የተከማቹ ሁሉም መተግሪያዎች፣ ፎቶዎች እና ውሂብ ከናካቴው ይጠፋሉ።"</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"መተግበሪያዎች"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"ምስሎች"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"ቪዲዮዎች"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"ኦዲዮ"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"የተሸጎጠ ውሂብ"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"ሌላ"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"ሥርዓት"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"<xliff:g id="NAME">^1</xliff:g> ይመርምሩ"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"ሌላ በመተግበሪያዎች የተቀመጡ የተጋሩ ፋይሎች፣ ከበይነመረቡ ወይም ብሉቱዝ የወረዱ ፋይሎች፣ የAndroid ፋይሎች እና የመሳሰሉትን ያካትታል። \n\nመታየት የሚችሉ የዚህን <xliff:g id="NAME">^1</xliff:g> ይዘቶች ለማየት አስስን መታ ያድርጉ።"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"ስርዓቱ የAndroid ስሪት <xliff:g id="VERSION">%s</xliff:g>ን የሚያሄዱ ፋይሎችን ያካትታል"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> <xliff:g id="SIZE">^2</xliff:g> ማከማቻን በመጠቀም ፎቶዎችን፣ ሙዚቃን፣ መተግበሪያዎችን ወይም ሌላ ውሂብ አስቀምጠው ሊሆን ይችላል። \n\nዝርዝሮችን ለመመልከት ወደ <xliff:g id="USER_1">^1</xliff:g> ይቀይሩ።"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"የእርስዎን <xliff:g id="NAME">^1</xliff:g> ያዘጋጁ"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"እንደ ተንቀሳቃሽ ማከማቻ ይጠቀሙ"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"ፎቶዎችን እና ሌላ ማህደረመረጃ በመሣሪያዎች መካከል ለመውሰድ።"</string>
@@ -2521,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"የጀርባ እንቅስቃሴ ይገደብ?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"የአንድ መተግበሪያ የጀርባ እንቅስቃሴን ከገደቡ ያልተገባ ባህሪ ሊያሳይ ይችላል"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"ይህ መተግበሪያ ባትሪን ለማላቅ አልተቀናበረም፣ ሊገድቡት አይችሉም።\n\nመተግበሪያውን ለመገደብ፣ የባትሪ ማላቅን በመጀመሪያ ያብሩ።"</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"ያልተገደበ"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"እንዲተባ ተደርጓል"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"ያለምንም ገደብ የበስተጀርባ የባትሪ ኃይል አጠቃቀምን ይፍቀዱ። ተጨማሪ ባትሪ ኃይል ሊጠቀም ይችላል።"</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"በአጠቃቀምዎ ላይ ተመስርተው ያትቡ። ለአብዛኛዎቹ መተግበሪያዎች የሚመከር።"</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"ከበስተጀርባ ሆነው የባትሪ ኃይል አጠቃቀምን ይገድቡ። መተግበሪያ እንደተጠበቀው ላይሰራ ይችላል። ማሳወቂያዎች ሊዘገዩ ይችላሉ።"</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"አንድ መተግበሪያ እንዴት ባትሪዎን እንደሚጠቀምበት መቀየር በአፈጻጸሙ ላይ ተጽዕኖ ሊያሳድር ይችላል።"</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"ይህ መተግበሪያ የ<xliff:g id="STATE">%1$s</xliff:g> ባትሪ አጠቃቀም ያስፈልገዋል።"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"ኃይሉ ሙሉ ከነበረበት ጊዜ ጀምሮ ያለው የማያ ገጽ አጠቃቀም"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"ከሙሉ ኃይል መሙላት ወዲህ የባትሪ አጠቃቀም"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"ሙሉ ኃይል ከነበረበት ጊዜ ጀምሮ ማያ ገጹ በርቶ የቆየበት ጊዜ"</string>
@@ -2730,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"የባትሪ አጠቃቀም"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"የባትሪው ኃይል ሙሉ ከሆነ በኋላ"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"የባትሪ አጠቃቀምን ያቀናብሩ"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"በጠቅላላ <xliff:g id="TIME_0">^1</xliff:g> • ላለፉት 24 ሰዓታት <xliff:g id="TIME_1">^2</xliff:g> ዳራ"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"የቀረው የባትሪ ዕድሜ ግምት በእርስዎ የመሣሪያ አጠቃቀም ላይ የተመረኮዘ ነው"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"የተገመተው ቀሪ ጊዜ"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"ኃይሉ ሙሉ እስኪሞላ ድረስ"</string>
@@ -2828,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"አጫውት"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"ደህንነቱ የተጠበቀ አይደለም"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g> ደህንነቱ የተጠበቀ አይደለም"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"ተለማማጅ ግንኙነት"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"የአውታረ መረብ ግንኙነቶችዎን በራስ-ሰር በማስተዳደር የባትሪ ዕድሜን ያራዝማል እንዲሁም የመሣሪያ አፈፃፀምን ያሻሽላል"</string>
     <string name="credentials_title" msgid="7535942196886123656">"መረጃ ማከማቻ"</string>
@@ -3785,16 +3764,13 @@
       <item quantity="one">የ%d መተግበሪያዎች ማሳወቂያዎችን ማንበብ ይችላሉ</item>
       <item quantity="other">የ%d መተግበሪያዎች ማሳወቂያዎችን ማንበብ ይችላሉ</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"የተሻሻሉ ማሳወቂያዎች"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"የተጠቆሙ እርምጃዎችን፣ ምላሾችን እና ሌሎችን ያግኙ"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"ምንም"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"ምንም የተጫኑ መተግበሪያዎች የማሳወቂያ መዳረሻ አልጠየቁም።"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"የማሳወቂያ መዳረሻን ፍቀድ"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"ለ<xliff:g id="SERVICE">%1$s</xliff:g> የማሳወቂያ መዳረሻ ይፈቀድለት?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"የተሻሻሉ ማሳወቂያዎች እንደ የእውቂያ ስሞች እና መልዕክቶች ያሉ የግል መረጃዎችን ጨምሮ ሁሉንም የማሳወቂያ ይዘቶችን ማንበብ ይችላሉ። ይህ ባህሪ ማሳወቂያዎችን ማሰናበት ወይም እንደ የስልክ ጥሪዎችን ማንሳት በመሳሰሉ ማሳወቂያዎች ውስጥ ባሉ አዝራሮች ላይ እርምጃዎችን መውሰድ ይችላል። \n\nይህ ባህሪ የቅድሚያ ሁነታን ማብራት ወይም ማጥፋት እና ተዛማጅ ቅንብሮችን መለወጥ ይችላል።"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"ለ<xliff:g id="SERVICE">%1$s</xliff:g> የማሳወቂያ መዳረሻ ይፈቀድ?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> እንደ የእውቂያ ስሞች እና እርስዎ የሚቀበሏቸው የመልዕክቶች ጽሑፍ ያለ የግል መረጃ ጨምሮ ሁሉንም ማሳወቂያዎች ማንበብ ይችላል። ይህ መተግበሪያ እንዲሁም ማሳወቂያዎችን ማሰናበት ወይም የስልክ ጥሪዎችን ማንሳት ጨምሮ በማሳወቂያዎች ውስጥ ባሉ አዝራሮች ላይ እርምጃዎችን መውሰድ ይችላል። \n\nይህ እንዲሁም አትረብሽን የማብራት ወይም የማጥፋት እና ተዛማጅ ቅንብሮችን የመቀየር ችሎታ ለመተግበሪያው ይሰጣል።"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"የ<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ማሳወቂያ መዳረሻን ካጠፉ የ«አትረብሽ» መዳረሻ እንዲሁም ሊጠፋ ይችላል።"</string>
@@ -4056,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"የአስተዳዳሪ ፒን ያስገቡ"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"በርቷል"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"ጠፍቷል"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"አብራ"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"አጥፋ"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"መተግበሪያን መሰካት"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"መተግበሪያን መሰካት የአሁኑን መተግብሪያ እስኪነቅሉት ድረስ በዕይታ ውስጥ እንዲቆይ እንዲያደርጉት ያስችልዎታል። ይህ ባህሪ ለምሳሌ አንድ የታመነ ጓደኛ አንድ የተወሰነ ጨዋታን እንዲጫወት ያስችላል።"</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"አንድ መተግበሪያ ሲሰካ, የተሰካው መተግበሪያ ሌሎች መተግበሪያዎችን ሊከፍት ይችላል እና በዚህም የግል ውሂብ ተደራሽ ሊሆን ይችላል። \n\nመተግበሪያን መሰካትን ለመጠቀም፦ 	\n1።	መተግበሪያ መሰካትን ያብሩ 	\n2።	አጠቃላይ ዕይታን ይክፈቱ 	\n3።	በማያ ገጹ አናት ላይ የመተግበሪያ አዶውን መታ ያድርጉ፣ ከዚያ ሰካን መታ ያድርጉ"</string>
@@ -4168,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"ምንም ፈቃዶች አልተሰጡም"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"ምንም ፈቃዶች አልተጠየቁም"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"መተግበሪያ ያለው የውሂብዎ መዳረሻን ይቆጣጠሩ"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"የፈቃዶች አጠቃቀም"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"የትኛዎቹ መተግበሪያዎች ፈቃዶችን በቅርቡ እንደጠቀሙ አሳይ"</string>
     <string name="unused_apps" msgid="4566272194756830656">"ጥቅም ላይ ያልዋሉ መተግበሪያዎች"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5129,6 +5104,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"መሣሪያ ዳግም ይነሳ?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"ለመጀመር የእርስዎን መሣሪያ ዳግም ያስነሱት። ከዚያ ሌላ ሲም ማከል ይችላሉ።"</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"ቀጥል"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"ዳግም አስነሳ"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"አይ፣ አመሰግናለሁ"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"ማብሪያ/ማጥፊያ"</string>
@@ -5334,21 +5311,19 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"የመኝታ ሰዓት ሁነታ ስለበራ የማይገኝ"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"የማሳወቂያ አስፈላጊነት ዳግም አስጀምር ተጠናቅቋል።"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"መተግበሪያዎች"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"አንድ መሣሪያ መልዕክቶችዎን መድረስ ይፈልጋል። ዝርዝሮችን ለማግኘት መታ ያድርጉ።"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"የመልዕክቶች መዳረሻ ይፈቀድ?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"አንድ የብሉቱዝ መሣሪያ <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> መልዕክቶችዎን መድረስ ይፈልጋል።\n\nከዚህ በፊት ከ<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ጋር አልተገናኙም።"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"አንድ መሣሪያ የእርስዎን እውቂያዎች እና የጥሪ ምዝግብ ማስታወሻ መድረስ ይፈልጋል። ዝርዝሮችን ለማግኘት መታ ያድርጉ።"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"የእውቂያዎች እና የጥሪ ምዝግብ ማስታወሻ መዳረሻ ይፈቀድ?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"አንድ የብሉቱዝ መሣሪያ <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> የእርስዎን እውቂያዎች እና የጥሪ ምዝግብ ማስታወሻ መድረስ ይፈልጋል። ይህ የገቢ እና ወጪ ጥሪዎች ውሂብን ያካትታል።\n\nከዚህ በፊት ከ<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ጋር አልተገናኙም።"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"ብሩህነት"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"የቆልፍ ማሳያ"</string>
+    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
+    <skip />
     <string name="category_name_appearance" msgid="8287486771764166805">"ገጽታ"</string>
     <string name="category_name_color" msgid="937514550918977151">"ቀለም"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"ሌሎች የማሳያ መቆጣጠሪያዎች"</string>
+    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
+    <skip />
     <string name="category_name_others" msgid="2366006298768550310">"ሌሎች"</string>
     <string name="category_name_general" msgid="7737273712848115886">"ጠቅላላ"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"የመሳሪያ ገጽታ ይጠቀሙ"</string>
@@ -5387,6 +5362,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"የቅንጥብ ሰሌዳ መዳረሻን አሳይ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"መተግበሪያዎች ጽሁፍን፣ ምስሎችን ወይም እርስዎ የቀዱትን ሌላ ይዘት ሲደርሱ መልዕክት አሳይ"</string>
     <string name="all_apps" msgid="3054120149509114789">"ሁሉም መተግበሪያዎች"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"አትፍቀድ"</string>
 </resources>
