@@ -212,7 +212,8 @@ public final class ConvertUtilsTest {
 
         final Map<Integer, List<BatteryDiffEntry>> resultMap =
             ConvertUtils.getIndexedUsageMap(
-                mContext, timeSlotSize, batteryHistoryKeys, batteryHistoryMap);
+                mContext, timeSlotSize, batteryHistoryKeys, batteryHistoryMap,
+                /*purgeLowPercentageData=*/ false);
 
         assertThat(resultMap).hasSize(3);
         // Verifies the first timestamp result.
@@ -231,6 +232,26 @@ public final class ConvertUtilsTest {
         assertBatteryDiffEntry(entryList.get(1), 4, 5L, 5L);
         assertBatteryDiffEntry(entryList.get(2), 68, 40L, 50L);
         assertBatteryDiffEntry(entryList.get(0), 27, 30L, 40L);
+
+        // Test getIndexedUsageMap() with purged data.
+        ConvertUtils.PERCENTAGE_OF_TOTAL_THRESHOLD = 50;
+        final Map<Integer, List<BatteryDiffEntry>> purgedResultMap =
+            ConvertUtils.getIndexedUsageMap(
+                mContext, timeSlotSize, batteryHistoryKeys, batteryHistoryMap,
+                 /*purgeLowPercentageData=*/ true);
+
+        assertThat(purgedResultMap).hasSize(3);
+        // Verifies the first timestamp result.
+        entryList = purgedResultMap.get(Integer.valueOf(0));
+        assertThat(entryList).hasSize(1);
+        // Verifies the second timestamp result.
+        entryList = purgedResultMap.get(Integer.valueOf(1));
+        assertThat(entryList).hasSize(1);
+        assertBatteryDiffEntry(entryList.get(0), 75, 40L, 50L);
+        // Verifies the last 24 hours aggregate result.
+        entryList = purgedResultMap.get(Integer.valueOf(-1));
+        assertThat(entryList).hasSize(1);
+        assertBatteryDiffEntry(entryList.get(0), 68, 40L, 50L);
     }
 
     private static BatteryHistEntry createBatteryHistEntry(
