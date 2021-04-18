@@ -2502,7 +2502,7 @@
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Повний доступ доречний для додатків, які надають спеціальні можливості, але його не варто відкривати для більшості інших додатків."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Перегляд і контроль екрана"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Цей сервіс може переглядати всі дані на екрані й показувати вміст над іншими додатками."</string>
-    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Переглянути й виконати дії"</string>
+    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Перегляд і виконання дій"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Цей сервіс може відстежувати вашу взаємодію з додатком чи апаратним датчиком, а також взаємодіяти з додатками від вашого імені."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Дозволити"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Заборонити"</string>
@@ -3870,7 +3870,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ до сповіщень?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"Покращені сповіщення дають змогу читати весь вміст сповіщень, зокрема особисту інформацію, як-от імена контактів і повідомлення. Крім того, ви зможете відхиляти сповіщення або натискати кнопки в них, щоб виконувати певні дії, наприклад відповідати на телефонні дзвінки. \n\nЦя функція також дає змогу вмикати й вимикати режим пріоритетності та змінювати відповідні налаштування."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ для сповіщень?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема з особистою інформацією, як-от іменами контактів і текстами отриманих повідомлень. Цей додаток також зможе змінювати й відхиляти сповіщення або виконувати дії з кнопками в них, зокрема відповідати на виклики. \n\nДодаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов\'язані з ним налаштування."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема з особистою інформацією, як-от іменами контактів і текстами отриманих повідомлень. Цей додаток також зможе відхиляти сповіщення або виконувати дії з кнопками в них, зокрема відповідати на виклики. \n\nДодаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов\'язані з ним налаштування."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Якщо ви вимкнете доступ додатка <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до сповіщень, доступ до режиму \"Не турбувати\" також буде вимкнено."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Вимкнути"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Скасувати"</string>
@@ -5462,7 +5462,7 @@
     <string name="calls_sms_footnote" msgid="1003530944232362815">"Завдяки функції \"Дзвінки через Wi-Fi\" виклики можна здійснювати й отримувати через мережі Wi‑Fi, які не обслуговують оператори мобільного зв\'язку. "<annotation id="url">"Докладніше"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Дзвінки"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
-    <string name="calls_sms_preferred" msgid="6016477652522583496">"пріоритетні"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"пріоритетно"</string>
     <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"рекомендовано для викликів"</string>
     <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"рекомендовано для SMS"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"недоступно"</string>
@@ -5496,12 +5496,10 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Дозволити доступ до контактів і журналу викликів?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Пристрій із Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) хоче отримати доступ до ваших контактів і журналу викликів, зокрема даних про вхідні й вихідні дзвінки.\n\nВи ще не підключалися до пристрою \"<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>\"."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Яскравість"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Блокування екрана"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Вигляд"</string>
     <string name="category_name_color" msgid="937514550918977151">"Колір"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Інші елементи керування екраном"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Інші"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Загальні"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Використовувати темну тему"</string>

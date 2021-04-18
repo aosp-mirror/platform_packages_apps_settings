@@ -1136,11 +1136,11 @@
     </plurals>
     <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
       <item quantity="zero">‏%d شبكة واشتراك</item>
-      <item quantity="two">‏%d شبكتان واشتراكان</item>
+      <item quantity="two">‏شبكتان واشتراكان (%d)</item>
       <item quantity="few">‏%d شبكات واشتراكات</item>
       <item quantity="many">‏%d شبكةً واشتراكًا</item>
       <item quantity="other">‏%d شبكة واشتراك</item>
-      <item quantity="one">1 شبكة واشتراك</item>
+      <item quantity="one">شبكة واحدة واشتراك واحد</item>
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="1234150304285575798">"‏إعدادات Wi-Fi المتقدمة"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
@@ -1636,7 +1636,7 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"هل تريد حذف <xliff:g id="NAME">^1</xliff:g>؟"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"سيتم فقد كل التطبيقات والصور والبيانات المخزنة على <xliff:g id="NAME">^1</xliff:g> هذه للأبد."</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"الصور"</string>
-    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏يتضمّن النظام الملفات المستخدمة لتشغيل إصدار Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏يتضمّن النظام الملفات المستخدمة لتشغيل إصدار Android <xliff:g id="VERSION">%s</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"إعداد <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"الاستخدام كوحدة تخزين محمولة"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"لنقل الصور والوسائط الأخرى بين الأجهزة."</string>
@@ -3969,7 +3969,7 @@
     <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"يمكن للإشعارات المحسّنة قراءة كل محتوى الإشعارات، بما في ذلك المعلومات الشخصية، مثلاً أسماء جهات الاتصال والرسائل. يمكن لهذه الميزة أيضًا إغلاق الإشعارات أو اتخاذ إجراءات من خلال الأزرار في الإشعارات، مثلاً الردّ على مكالمات الهاتف. \n\nويمكن لهذه الميزة أيضًا تفعيل وضع \"الأولوية\" أو إيقافه وتغيير الإعدادات ذات الصلة."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"هل تسمح بوصول خدمة <xliff:g id="SERVICE">%1$s</xliff:g> إلى الإشعارات؟"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"سيكون بإمكان \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" قراءة جميع الإشعارات، بما في ذلك المعلومات الشخصية، مثلاً أسماء جهات الاتصال ونصوص الرسائل التي تتلقّاها. وسيتمكّن أيضًا من إغلاق الإشعارات أو اتخاذ إجراءات من خلال الأزرار في الإشعارات بما في ذلك الردّ على المكالمات الهاتفية. \n\nستتيح هذه الميزة أيضًا للتطبيق إمكانية تفعيل ميزة \"عدم الإزعاج\" أو إيقافها وتغيير الإعدادات ذات الصلة."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"عند إيقاف الوصول إلى الإشعار لـ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>، قد يتم إيقاف الوصول إلى \"عدم الإزعاج\" أيضًا."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"عند إيقاف الوصول إلى الإشعارات لخدمة <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>، قد يتم إيقاف الوصول إلى ميزة \"عدم الإزعاج\" أيضًا."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"إيقاف"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"إلغاء"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"أنواع الإشعارات المسموح بها"</string>
@@ -4044,7 +4044,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> فئة</item>
       <item quantity="one">فئة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
-    <string name="no_channels" msgid="4716199078612071915">"لم ينشر هذا التطبيق أي إشعارات"</string>
+    <string name="no_channels" msgid="4716199078612071915">"لم ينشر هذا التطبيق أي إشعارات."</string>
     <string name="app_settings_link" msgid="6725453466705333311">"الإعدادات الإضافية في التطبيق"</string>
     <string name="notification_screen_summary" msgid="5984915275134654822">"سجلّ الإشعارات، فقاعات المحادثات، الإشعارات المرسَلة مؤخرًا"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"مفعّلة لجميع التطبيقات"</string>
@@ -4676,7 +4676,7 @@
     <string name="display_dashboard_nowallpaper_summary" msgid="6198590533661927162">"السكون وحجم الخط"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"السكون بعد 10 دقائق من عدم النشاط"</string>
     <string name="memory_summary" msgid="8221954450951651735">"تم استخدام متوسط ذاكرة بحجم <xliff:g id="USED_MEMORY">%1$s</xliff:g> من إجمالي <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
-    <string name="users_summary" msgid="8473589474976307510">"تم تسجيل الدخول باسم <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="users_summary" msgid="8473589474976307510">"تم تسجيل الدخول باسم <xliff:g id="USER_NAME">%1$s</xliff:g>."</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> هو التطبيق التلقائي"</string>
     <string name="backup_disabled" msgid="4503062265560959320">"تم إيقاف الاحتفاظ بنسخة احتياطية"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"‏تم التحديث إلى الإصدار <xliff:g id="VERSION">%1$s</xliff:g> من Android."</string>
@@ -5350,7 +5350,7 @@
     <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="506057560516483258">"‏وضع الشبكة المُفضَّل: NR/LTE/TDSCDMA/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4337061745216872524">"‏وضع الشبكة المُفضَّل: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3396717432149544381">"‏وضع الشبكة المُفضَّل: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
-    <string name="network_recommended" msgid="4665525658003183348">" (موصى به)"</string>
+    <string name="network_recommended" msgid="4665525658003183348">" (يُنصح به)"</string>
     <string name="network_lte" msgid="2449425437381668780">"‏LTE (مُستحسَن)"</string>
     <string name="network_4G" msgid="9018841362928321047">"الجيل الرابع (مُستحسَن)"</string>
     <string name="label_available" msgid="5305726869955838606">"الشبكات المُتاحة"</string>
@@ -5657,7 +5657,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"حل مشكلة اتصال البيانات"</string>
     <string name="networks_available" msgid="3299512933684383474">"الشبكات المتوفّرة"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"للتبديل بين الشبكات، يجب فصل إيثرنت."</string>
-    <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"‏شبكة Wi-Fi مفعَّلة"</string>
+    <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"‏شبكة Wi-Fi مفعَّلة."</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"متصلة بالإنترنت"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"لا يتوفّر اتصال بالإنترنت"</string>

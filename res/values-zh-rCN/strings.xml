@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"直视屏幕时让屏幕保持开启"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"相机已锁定"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"必须解锁相机才能使用人脸检测功能"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"必须解锁相机才能使用屏幕感知功能"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"人脸检测功能需要获得相机使用权限。点按即可管理“设备个性化服务”的权限"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"管理权限"</string>
     <string name="night_display_title" msgid="8532432776487216581">"护眼模式"</string>
@@ -2192,7 +2191,7 @@
     <string name="usage_time_label" msgid="9105343335151559883">"使用时间"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"无障碍"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"无障碍设置"</string>
-    <string name="accessibility_settings_summary" msgid="2195085206729325737">"屏幕阅读器、显示、互动控件"</string>
+    <string name="accessibility_settings_summary" msgid="2195085206729325737">"屏幕阅读器、显示、互动控制"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"阅读辅助设置"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"您可以根据自己的需求对此设备进行自定义。以后，您可以在“设置”中更改这些辅助功能设置。"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"更改字体大小"</string>
@@ -2203,7 +2202,7 @@
     <string name="display_category_title" msgid="6638191682294461408">"显示"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"文字和显示"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"调暗屏幕"</string>
-    <string name="interaction_control_category_title" msgid="2696474616743882372">"互动控件"</string>
+    <string name="interaction_control_category_title" msgid="2696474616743882372">"互动控制"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"点按协助"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"系统控件"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下载的应用"</string>
@@ -3765,16 +3764,13 @@
       <item quantity="other">%d 个应用可以读取通知</item>
       <item quantity="one">%d 个应用可以读取通知</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"增强型通知"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"接收建议的操作、回复等内容"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"无"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"没有任何已安装的应用请求通知访问权限。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"授予通知使用权"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"增强型通知功能可以读取所有通知内容，包括联系人姓名和消息等个人信息。该功能也能关闭通知或触发通知中的按钮，例如接听来电。\n\n此外，该功能还能开启或关闭“优先”模式，以及更改相关设置。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>将可读取所有通知（包括联系人姓名和您收到的消息内容等个人信息），而且还能关闭通知或触发通知中的按钮（包括接听来电）。\n\n此外，该应用将因此能够开启或关闭“勿扰”模式并更改相关设置。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知访问权限，勿扰模式的访问权限可能也会遭到停用。"</string>
@@ -4036,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"输入管理员 PIN 码"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"开启"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"关闭"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"开启"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"关闭"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"固定应用"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。"</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"固定某个应用后，该应用可打开其他应用，也能访问个人数据。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能	\n2.	打开“概览”	\n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
@@ -5324,12 +5318,10 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允许访问通讯录和通话记录吗？"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"蓝牙设备“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想要访问您的通讯录和通话记录，包括有关来电和去电的数据。\n\n您之前没有连接过“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”。"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"亮度"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"锁定显示屏"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"外观"</string>
     <string name="category_name_color" msgid="937514550918977151">"颜色"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"其他显示控件"</string>
     <string name="category_name_others" msgid="2366006298768550310">"其他"</string>
     <string name="category_name_general" msgid="7737273712848115886">"常规"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"使用深色主题"</string>
