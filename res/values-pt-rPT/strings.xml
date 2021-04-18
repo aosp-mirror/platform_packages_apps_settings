@@ -571,8 +571,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Impeça terceiros de utilizar este dispositivo sem a sua autorização ao ativar as funcionalidades de proteção do dispositivo. Escolha o bloqueio de ecrã que pretende utilizar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Impeça terceiros de utilizar este telemóvel sem a sua autorização ao ativar as funcionalidades de proteção do dispositivo. Escolha o bloqueio de ecrã que pretende utilizar."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Escolha o método de bloqueio de ecrã de segurança."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"O seu Administrador de TI não consegue repor este bloqueio. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Defina um bloqueio de trabalho separado<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
-    <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Caso se esqueça deste bloqueio, peça ao seu Administrador de TI para o repor"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"O seu administrador de TI não consegue repor este bloqueio. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Defina um bloqueio de trabalho separado<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
+    <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Caso se esqueça deste bloqueio, peça ao seu administrador de TI para o repor"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opções de bloqueio de ecrã"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opções de bloqueio de ecrã"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Bloqueio de ecrã"</string>
@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Mantenha o ecrã ligado enquanto estiver a olhar para ele."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"A câmara está bloqueada"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"A câmara tem de ser desbloqueada para a deteção facial"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"A câmara tem de estar desbloqueada para utilizar a atenção ao ecrã"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"É necessário o acesso à câmara para a deteção facial. Toque para gerir as autorizações dos Serviços de personalização do dispositivo"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Gerir autorizações"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Luz noturna"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"Apagar cartão SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Apaga todos os dados do armazenamento USB interno, como músicas e fotos"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Apaga todos os dados do cartão SD, tais como música e fotos"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"Limpar dados em cache?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"Irá limpar os dados em cache de todas as app"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"A função MTP ou PTP está ativa"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"Desmontar mem. arm. USB?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"Desmontar cartão SD?"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrar dados"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Esquecer"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Configurar"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"Explorar"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Libertar espaço"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Gerir o armazenamento"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"limpar, armazenamento"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"Outros utilizadores"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Armazenamento do dispositivo"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"Armazenamento portátil"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="USED">%1$s</xliff:g> utilizados de <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"Utilizado(s) de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"Total utilizado de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> está montado"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"Não foi possível montar <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> foi ejetado com segurança"</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Mudar o nome do armazenamento"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"O <xliff:g id="NAME_0">^1</xliff:g> foi ejetado com êxito, mas continua disponível. \n\nPara utilizar este <xliff:g id="NAME_1">^1</xliff:g>, tem de o montar primeiro."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Este <xliff:g id="NAME_0">^1</xliff:g> está danificado. \n\nPara utilizar este <xliff:g id="NAME_1">^1</xliff:g>, tem de o configurar primeiro."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"O dispositivo não suporta este <xliff:g id="NAME_0">^1</xliff:g>. \n\nPara utilizar este <xliff:g id="NAME_1">^1</xliff:g> com o dispositivo, tem de o configurar primeiro."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Após a formatação, pode utilizar este <xliff:g id="NAME_0">^1</xliff:g> noutros dispositivos. \n\nTodos os dados de <xliff:g id="NAME_1">^1</xliff:g> são apagados. Considere fazer uma cópia de segurança primeiro. \n\n"<b>"Fazer uma cópia de segurança das fotos e de outros conteúdos multimédia"</b>" \nMova os seus ficheiros multimédia para um armazenamento alternativo neste dispositivo ou transfira-os para um computador com um cabo USB. \n\n"<b>"Fazer uma cópia de segurança das aplicações"</b>" \nTodas as apps armazenadas neste <xliff:g id="NAME_6">^1</xliff:g> são desinstaladas e os respetivos dados são apagados. Para manter estas aplicações, mova-as para um armazenamento alternativo neste dispositivo."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Quando ejetar este <xliff:g id="NAME_0">^1</xliff:g>, as aplicações armazenadas no mesmo deixam de funcionar e os ficheiros multimédia armazenados deixam de estar disponíveis até voltar a inseri-lo."</b>" \n\nEste <xliff:g id="NAME_1">^1</xliff:g> está formatado para funcionar apenas neste dispositivo. Não funciona em mais nenhum."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Para utilizar as aplicações, as fotos ou os dados incluídos em <xliff:g id="NAME">^1</xliff:g>, insira-o novamente. \n\nEm alternativa, pode optar por esquecer este armazenamento se o mesmo não estiver disponível. \n\nSe optar por esquecê-lo, todos os dados presentes no dispositivo são eliminados permanentemente. \n\nPode reinstalar as aplicações posteriormente, mas os dados armazenados neste dispositivo são eliminados."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Pretende esquecer <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Todas as apps, as fotos e os dados armazenados neste <xliff:g id="NAME">^1</xliff:g> são eliminados definitivamente."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"Apps"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"Imagens"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"Vídeos"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"Áudio"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"Dados em cache"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"Outros"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"Sistema"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"Explorar <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"Os outros ficheiros incluem ficheiros guardados por aplicações, ficheiros transferidos da Internet ou por Bluetooth, ficheiros do Android, entre outros. \n\nPara ver os conteúdos visíveis deste <xliff:g id="NAME">^1</xliff:g>, toque em Explorar."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"O sistema inclui ficheiros utilizados para executar a versão <xliff:g id="VERSION">%s</xliff:g> do Android"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> pode ter guardado fotos, música, aplicações ou outros dados ao utilizar <xliff:g id="SIZE">^2</xliff:g> de armazenamento. \n\nPara ver mais detalhes, mude para <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Configurar o <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Utilizar como armazenamento portátil"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Para mover fotos e outros conteúdos multimédia entre dispositivos."</string>
@@ -2521,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Pretende limitar a atividade em segundo plano?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Se limitar a atividade em segundo plano de uma aplicação, esta pode apresentar um comportamento anormal."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"A app não está def. p/ otimizar a bateria, não a pode restringir.\n\nP/ restringir a app, ative a otimiz. da bateria."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Sem restrições"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Otimizadas"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Permita a utilização da bateria em segundo plano sem restrições. Pode consumir mais bateria."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Otimize com base na sua utilização. Recomendado para a maioria das apps."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Restrinja a utilização da bateria quando estiver em segundo plano. A app pode não funcionar conforme esperado. As notificações podem sofrer atrasos."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"A alteração da forma como a sua app utiliza a bateria pode afetar o respetivo desempenho."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Esta app requer <xliff:g id="STATE">%1$s</xliff:g> de utilização da bateria."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Utilização do ecrã desde o carregamento completo"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Utilização da bateria desde o carregamento completo"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Tempo durante o qual o ecrã tem estado ativado desde o carregamento completo"</string>
@@ -2730,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilização da bateria"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Desde o carregamento completo"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gerir a utilização da bateria"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"Total de <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> em segundo plano durante as últimas 24 h"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"A estimativa de bateria restante baseia-se na utilização do dispositivo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Até ficar totalmente carregada"</string>
@@ -2828,7 +2804,8 @@
     <string name="tts_play" msgid="2945513377250757221">"Reproduzir"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Não segura"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g> não segura"</string>
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> não segura"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> não seguras"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conetividade adaptável"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prolonga a autonomia da bateria e melhora o desempenho do dispositivo ao gerir as suas ligações de rede automaticamente."</string>
     <string name="credentials_title" msgid="7535942196886123656">"Armazenamento de credenciais"</string>
@@ -2840,10 +2817,10 @@
     <string name="trusted_credentials" msgid="2522784976058244683">"Credenciais fidedignas"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"Mostrar certificados da AC fidedignos"</string>
     <string name="user_credentials" msgid="4044405430790970775">"Credenciais de utilizador"</string>
-    <string name="user_credentials_summary" msgid="686471637627271856">"Ver e modificar credenciais de utilizador"</string>
+    <string name="user_credentials_summary" msgid="686471637627271856">"Ver e modificar credenciais armazenadas"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Avançadas"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"As credenciais não estão disponíveis para este utilizador"</string>
-    <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Instalada para VPN e aplicações"</string>
+    <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Instaladas para VPN e apps"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Instalada para Wi-Fi"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Remover todo o conteúdo?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Armaz. credenciais apagado."</string>
@@ -3785,16 +3762,13 @@
       <item quantity="other">%d aplicações podem ler notificações</item>
       <item quantity="one">%d aplicação pode ler notificações</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"Notificações melhoradas"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Obtenha sugestões de ações, respostas e muito mais"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Nenhum"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Nenhuma app instalada solicitou acesso a notificações"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permitir o acesso a notificações"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Permitir o acesso a notificações do <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"As notificações melhoradas podem ler todo o conteúdo das notificações, incluindo informações pessoais como nomes de contactos e mensagens. Esta funcionalidade também pode ignorar notificações ou acionar botões em notificações, como atender chamadas telefónicas. \n\nAlém disso, esta funcionalidades pode ativar ou desativar o modo Prioridade e alterar as definições relacionadas."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Permitir o acesso a notificações do <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"O <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pode ler todas as notificações, incluindo informações pessoais como nomes de contactos e o texto das mensagens recebidas. Esta app também pode ignorar notificações ou acionar botões em notificações, incluindo atender chamadas telefónicas. \n\nDeste modo, a app também pode ativar ou desativar o modo Não incomodar e alterar as definições relacionadas."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se desativar o acesso às notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso ao modo Não incomodar seja igualmente desativado."</string>
@@ -4056,10 +4030,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Introduzir o PIN do gestor"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Ativado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desativado"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Ativada"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Desativada"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fixação de apps"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"A fixação de apps permite-lhe manter a app atual visível até a soltar. Esta funcionalidade pode ser utilizada, por exemplo, para permitir que um amigo fidedigno jogue um jogo específico."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"Quando uma app está fixada, a mesma pode abrir outras apps e os dados pessoais podem ficar acessíveis. \n\nPara utilizar a fixação de apps: 	\n1.	Ative a fixação de apps. 	\n2.	Abra a Vista geral. 	\n3.	Toque no ícone da app na parte superior do ecrã e, em seguida, toque em Fixar."</string>
@@ -4168,7 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nenhuma permissão concedida"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nenhuma permissão solicitada"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Controle o acesso de apps aos seus dados"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"Utilização de autorizações"</string>
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Painel de privacidade"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Mostrar as apps que utilizaram autorizações recentemente"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Apps não utilizadas"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5129,6 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Pretende reiniciar o dispositivo?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Para começar, reinicie o dispositivo. Em seguida, pode adicionar outro SIM."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Continuar"</string>
+    <string name="sim_action_yes" msgid="8076556020131395515">"Sim"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Reiniciar"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Não, obrigado"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Mudar"</string>
@@ -5334,21 +5307,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Não disponível porque o modo de hora de dormir está ativado."</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Reposição da importância das notificações concluída."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Um dispositivo pretende aceder às suas mensagens. Toque para obter detalhes."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Pretende permitir o acesso às mensagens?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Um dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pretende aceder às suas mensagens.\n\nNão estabeleceu ligação ao dispositivo <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> anteriormente."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Um dispositivo pretende aceder aos seus contactos e registo de chamadas. Toque para obter detalhes."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Pretende permitir o acesso aos contactos e registo de chamadas?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Um dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pretende aceder aos seus contactos e registo de chamadas. Isto inclui dados acerca de chamadas recebidas e efetuadas.\n\nNão estabeleceu ligação ao dispositivo <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> anteriormente."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Brilho"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"Ecrã de bloqueio"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Ecrã de bloqueio"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Aspeto"</string>
     <string name="category_name_color" msgid="937514550918977151">"Cor"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"Outros controlos de visualização"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Outros controlos de visualização"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Outros"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Geral"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Utilizar tema escuro"</string>
@@ -5387,6 +5356,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostrar acesso à área de transferência"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Apresente uma mensagem quando as apps acedem a texto, imagens ou outro conteúdo que copiou"</string>
     <string name="all_apps" msgid="3054120149509114789">"Todas as apps"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Não permitir"</string>
 </resources>
