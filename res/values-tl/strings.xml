@@ -1320,7 +1320,7 @@
     <string name="dark_ui_title" msgid="3373976268671557416">"Dark Mode"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Iskedyul"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Wala"</string>
-    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Ma-on sa sunset hanggang sunrise"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Ino-on sunset hanggang sunrise"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Ino-on sa custom na oras"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Hindi awtomatikong mag-o-on kailanman"</string>
@@ -1495,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"Burahin ang SD card"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Buburahin lahat ng data sa panloob na storage na USB, gaya ng musika at larawan"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"Binubura ang lahat ng data sa SD card, gaya ng mga musika at larawan"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"I-clear ang naka-cache na data?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"Iki-clear nito ang naka-cache na data para sa lahat ng apps."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"Aktibo ang paggana ng MTP o PTP"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"I-unmount USB storage?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"I-unmount ang SD card?"</string>
@@ -1521,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Mag-migrate ng data"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Kalimutan"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"I-set up"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"I-explore"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Magbakante ng espasyo"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Pamahalaan ang storage"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"linisin, storage"</string>
@@ -1538,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"Iba pang mga user"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Storage ng device"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"Portable na storage"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="USED">%1$s</xliff:g> ang nagamit sa <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"Nagamit sa <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"Kabuuang nagamit sa <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"Na-mount na ang <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"Hindi ma-mount ang <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"Na-eject na nang ligtas ang <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -1551,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Palitan ang pangalan ng storage"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Ligtas na na-eject ang <xliff:g id="NAME_0">^1</xliff:g> na ito, ngunit available pa rin ito. \n\nUpang magamit ang <xliff:g id="NAME_1">^1</xliff:g> na ito, dapat mo muna itong i-mount."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Sira ang <xliff:g id="NAME_0">^1</xliff:g>. \n\nUpang magamit ang <xliff:g id="NAME_1">^1</xliff:g> na ito, dapat mo muna itong i-set up."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"Hindi sinusuportahan ng device na ito ang <xliff:g id="NAME_0">^1</xliff:g> na ito. \n\nUpang magamit ang <xliff:g id="NAME_1">^1</xliff:g> na ito sa device na ito, dapat mo muna itong i-set up."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Pagkatapos ng pagfo-format, maaari mong gamitin ang <xliff:g id="NAME_0">^1</xliff:g> na ito sa iba pang mga device. \n\nBuburahin ang lahat ng data sa <xliff:g id="NAME_1">^1</xliff:g> na ito. Isaalang-alang muna ang pagba-back up. \n\n"<b>"I-back up ang mga larawan &amp; at iba pang media"</b>" \nIlipat ang iyong mga media file sa alternatibong storage sa device na ito, o ilipat ang mga ito sa isang computer gamit ang USB cable. \n\n"<b>"I-back up ang mga app"</b>" \nAng lahat ng app na nakaimbak sa <xliff:g id="NAME_6">^1</xliff:g> na ito ay ia-uninstall at buburahin ang data ng mga ito. Upang mapanatili ang mga app na ito, ilipat ang mga ito sa alternatibong storage sa device na ito."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kapag na-eject mo ang <xliff:g id="NAME_0">^1</xliff:g> na ito, hihinto sa paggana ang mga app na nakaimbak dito, at hindi magiging available ang mga media file na nakaimbak dito hanggang sa muli itong mailagay."</b>" \n\nAng <xliff:g id="NAME_1">^1</xliff:g> na ito ay naka-format na gumana sa device na ito lang. Hindi ito gagana sa anumang iba pang device."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Upang gamitin ang mga app, larawan o data na nilalaman ng <xliff:g id="NAME">^1</xliff:g> na ito, ilagay itong muli. \n\nO kaya naman, maaari mong piliing kalimutan ang storage na ito kung hindi available ang device. \n\nKung piliin mong kalimutan, tuluyan nang mawawala ang lahat ng data na nilalaman ng device. \n\nMaaari mong muling i-install ang mga app sa ibang pagkakataon, ngunit mawawala ang data ng mga iyon na nakaimbak sa device na ito."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Kalimutan ang <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Habambuhay mawawala ang lahat ng app, larawan at data na naka-imbak sa <xliff:g id="NAME">^1</xliff:g> na ito."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"Mga App"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"Mga Larawan"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"Mga Video"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"Audio"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"Naka-cache na data"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"Iba Pa"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"System"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"I-explore ang <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"Kasama sa iba pa ang mga nakabahaging file na na-save ng mga app, file na na-download mula sa internet o Bluetooth, file ng Android, at iba pa. \n\nUpang tingnan ang mga nakikitang content ng <xliff:g id="NAME">^1</xliff:g> na ito, i-tap ang I-explore."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Kasama sa system ang mga file na ginagamit para patakbuhin ang bersyon <xliff:g id="VERSION">%s</xliff:g> ng Android"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"Maaaring may mga na-save si <xliff:g id="USER_0">^1</xliff:g> na larawan, musika, app, o iba pang data, na gumagamit ng <xliff:g id="SIZE">^2</xliff:g> ng storage. \n\nUpang tingnan ang mga detalye, lumipat sa <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"I-set up ang iyong <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Gamitin bilang portable na storage"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Para sa paglilipat ng mga larawan at iba pang media sa pagitan ng mga device."</string>
@@ -2520,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Limitahan ang aktibidad sa background?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Kung lilimitahan mo ang aktibidad sa background ng app, maaari itong gumana nang hindi tama"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Hindi nakatakda ang app na mag-optimize ng baterya kaya hindi ito malilimitahan.\n\nPara malimitahan, i-on ang battery optimization."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Hindi pinaghihigpitan"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Naka-optimize"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Payagan ang paggamit ng baterya sa background nang walang paghihigpit. Puwedeng gumamit ng higit pang baterya."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Naka-optimize batay sa iyong paggamit. Inirerekomenda para sa karamihan ng mga app."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Paghigpitan ang paggamit ng baterya habang nasa background. Posibleng hindi gumana ang app gaya ng inaasahan. Posibleng maantala ang mga notification."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Puwedeng maapektuhan ang performance ng isang app kapag binago ang paraan ng paggamit nito sa iyong baterya."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Nangangailangan ang app na ito ng <xliff:g id="STATE">%1$s</xliff:g> na paggamit ng baterya."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Paggamit ng screen mula noong napuno ang baterya"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Paggamit ng baterya mula noong punong pag-charge"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Haba ng oras na naka-on ang screen mula noong napuno ang baterya"</string>
@@ -2729,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Paggamit ng baterya"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Mula noong napuno ang baterya"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Pamahalaan ang paggamit ng baterya"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> sa kabuuan • <xliff:g id="TIME_1">^2</xliff:g> sa background sa huling 24 na oras"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Nakabatay ang pagtatantya ng natitirang baterya sa paggamit ng iyong device"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tinatayang natitirang oras"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Hanggang mapuno ang baterya"</string>
@@ -2827,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"I-play"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Hindi secure"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"Hindi secure ang <xliff:g id="VPN_COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive na pagkakonekta"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Pinapatagal ang baterya at pinapahusay ang performance ng device sa pamamagitan ng awtomatikong pamamahala sa iyong mga koneksyon ng network"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Storage ng kredensyal"</string>
@@ -4162,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Walang ibinigay na mga pahintulot"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Walang hiniling na mga pahintulot"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontrolin ang pag-access ng app sa iyong data"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"Paggamit ng mga pahintulot"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Ipakita kung aling mga app ang gumamit kamakailan ng mga pahintulot"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Mga hindi ginagamit na app"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5123,6 +5104,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"I-restart ang device?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Para magsimula, i-restart ang iyong device. Pagkatapos, puwede kang magdagdag ng isa pang SIM."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Magpatuloy"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"I-restart"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Huwag na lang"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Lumipat"</string>
@@ -5328,21 +5311,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Hindi available dahil naka-on ang bedtime mode"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Tapos na ang pag-reset sa kahalagahan ng notification."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Mga App"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Gustong i-access ng isang device ang iyong mga mensahe. I-tap para sa mga detalye."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Payagan ang access sa mga mensahe?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Gustong i-access ng isang Bluetooth device, ang <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ang iyong mga mensahe.\n\nHindi ka pa nakakakonekta dati sa <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Gustong i-access ng isang device ang iyong mga contact at log ng tawag. I-tap para sa mga detalye."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Payagan ang access sa mga contact at log ng tawag?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Gustong i-access ng isang Bluetooth device, ang <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ang iyong mga contact at log ng tawag. Kasama rito ang data tungkol sa mga papasok at papalabas na tawag.\n\nHindi ka pa nakakakonekta dati sa <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Liwanag"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"Display ng Lock"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Display ng lock"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Hitsura"</string>
     <string name="category_name_color" msgid="937514550918977151">"Kulay"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"Iba pang Kontrol sa Display"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Iba pang kontrol sa display"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Iba pa"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Pangkalahatan"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Gumamit ng Madilim na tema"</string>
@@ -5381,6 +5360,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Ipakita ang access sa clipboard"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Magpakita ng mensahe kapag ina-access ng mga app ang text, mga larawan, o iba pang content na nakopya mo"</string>
     <string name="all_apps" msgid="3054120149509114789">"Lahat ng app"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Huwag payagan"</string>
 </resources>

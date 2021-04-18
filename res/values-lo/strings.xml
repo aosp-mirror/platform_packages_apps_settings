@@ -1495,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"ລຶບ SD card"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"ລຶບຂໍ້ມູນທັງໝົດໃນບ່ອນຈັດເກັບຂໍ້ມູນ USB ເຊັ່ນ: ເພງ ແລະຮູບພາບ"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"ລຶບຂໍ້ມູນທັງໝົດໃນ SD card ເຊັ່ນ: ເພງ ແລະຮູບພາບ"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"ລຶບຂໍ້ມູນທີ່ເກັບໄວ້?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"ນີ້ຈະເປັນການລຶບຂໍ້ມູນທີ່ເກັບໄວ້ຂອງທຸກແອັບຯ."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"ຟັງຊັນ MTP ຫຼື PTP ກຳລັງເຮັດວຽກຢູ່"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"ຖອດການຈັດເກັບຂໍ້ມູນ USB ບໍ່?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"ທ່ານຕ້ອງການຖອດການເຊື່ອມຕໍ່ SD card ຫຼືບໍ່?"</string>
@@ -1521,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"ຍ້າຍ​ຂໍ້​ມູນ​ອອກ"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"ລືມ"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"ຕິດ​ຕັ້ງ"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"ຄົ້ນຫາ"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"ເພີ່ມພື້ນທີ່ຈັດເກັບຂໍ້ມູນ"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"ຈັດ​ການ​ບ່ອນ​ຈັດ​ເກັບຂໍ້ມູນ"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ອະນາໄມ, ບ່ອນຈັດເກັບຂໍ້ມູນ"</string>
@@ -1538,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"ຜູ່ໃຊ້ອື່ນໆ"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"ບ່ອນຈັດເກັບຂໍ້ມູນອຸປະກອນ"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"ໜ່ວຍເກັບຂໍ້ມູນແບບພົກພາ"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="USED">%1$s</xliff:g> ໃຊ້ແລ້ວຈາກ <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"ໃຊ້ແລ້ວຈາກ <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"ໃຊ້ແລ້ວທັງໝົດຈາກ <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> ຖືກ​ເອົາ​ຕໍ່​ໃສ່​ແລ້ວ"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"ບໍ່​ສາ​ມາດ​ຕໍ່​ໃສ່​ໄດ້ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"ເອົາ <xliff:g id="NAME">%1$s</xliff:g> ອອກ​ໄປ​ຢ່າງ​ປອດ​ໄພ​ແລ້ວ"</string>
@@ -1551,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"ປ່ຽນ​ຊື່​ບ່ອນ​ຈັດ​ເກັບຂໍ້​ມູນ"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g> ນີ້ຖຶກຕັດເຊື່ອມຕໍ່ຢ່າງປອດໄພແລ້ວ, ແຕ່ຍັງພ້ອມໃຊ້ງານຢູ່. \n\nເພື່ອໃຊ້ <xliff:g id="NAME_1">^1</xliff:g> ນີ້, ທ່ານຈຳເປັນຕ້ອງເຊື່ອມຕໍ່ມັນກ່ອນ."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> ນີ້ເສຍຫາຍ. \n\nເພື່ອໃຊ້ <xliff:g id="NAME_1">^1</xliff:g> ນີ້, ທ່ານຈຳເປັນຕ້ອງຕັ້ງມັນກ່ອນ."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"ອຸປະກອນນີ້ບໍ່ຮອງຮັບ <xliff:g id="NAME_0">^1</xliff:g> ນີ້. \n\nເພື່ອໃຊ້ <xliff:g id="NAME_1">^1</xliff:g> ນີ້ກັບອຸປະກອນນີ້, ທ່ານຈຳເປ you have to set it up first."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"ຫຼັງ​ຈາກ​ການ​ຟໍ​ແມັດ, ທ່ານ​ສາ​ມາດ​ໃຊ້ <xliff:g id="NAME_0">^1</xliff:g> ນີ້​​ໃນ​ອຸ​ປະ​ກອນ​ອື່ນ​ໄດ້. \n\nທຸກ​ຂໍ້​ມູນ​ຢູ່​ໃນ <xliff:g id="NAME_1">^1</xliff:g> ນີ້​ຈະ​ຖືກ​ລຶບ. ໃຫ້​ພິ​ຈາ​ລະ​ນາ​ສຳ​ຮອງໄວ້​ກ່ອນ. \n\n"<b>"ສຳ​ຮອງ​ຮູບ &amp; ມີ​ເດຍ​ອື່ນໆ"</b>" \nຍ້າຍ​ໄຟ​ລ໌​ມີ​ເດຍ​ໄປ​ໄສ່ບ່​ອນ​ຈັດ​ເກັບ​ຂໍ້​ມູນ​ອື່ນ​ເທິງ​ອຸ​ປະ​ກອນ​ນີ້, ຫຼື​ໂອນ​ພວກ​ມັນ​ໄປ​ຫາ​ຄອມ​ພິວ​ເຕີ​ດ້ວຍ​ການ​ໃຊ້​ສາຍ USB. \n\n"<b>"ສຳ​ຮອງ​ແອັບ"</b>" \nທຸກ​ແອັບ​ເກັບ​ໄວ້​ຢູ່​ໃນ <xliff:g id="NAME_6">^1</xliff:g> ນີ້​ຈະ​ຖືກ​ຖອນ​ຕິດ​ຕັ້ງ ແລະ​ຂໍ້​ມູນ​ຂອງ​ພວກ​ມັນ​ຈະ​ຖືກ​ລຶບ. ເພື່ອ​ຮັກ​ສາ​ແອັບ​ເຫຼົ່າ​ນີ້​ໄວ້, ຍ້າຍ​ພວກ​ມັນ​ໄປໃສ່​ບ່ອນ​ຈັດ​ເກັບ​ຂໍ້​ມູນ​ອື່ນ​ໃນ​ອຸ​ປະ​ກອນ​ນີ້."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"ເມື່ອ​ທ່ານ​ເອົາ <xliff:g id="NAME_0">^1</xliff:g>, ນີ້​ອອກ, ແອັບ​ທີ່​ເກັບ​ໄວ້​ຢູ່​ໃນ​ຕົວ​ມັນ​ນັ້ນ​ຈະ​ຢຸດ​ເຮັດ​ວຽກ, ແລະ​ໄຟ​ລ໌​ມີ​ເດຍ​ທີ່​ເກັບ​ໄວ້​ຢູ່​ໃນ​ມັນ​ນັ້ນ​ຈະ​ບໍ່​ມີ​ໃຫ້​ຈົນ​ກ່​ວາ​ທີ່​ຈະ​ໃສ່​ມັນ​ເຂົ້າ​ໃໝ່."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> ນີ້​ຖືກ​ຟໍ​ແມັດ​ໄປ ເພື່ອ​ໃຫ້​ເຮັດ​ວຽກ​ຢູ່​ໃນ​ອຸ​​ປະ​ກອນ​ນີ້​ເທົ່າ​ນັ້ນ. ມັນ​ບໍ່​ເຮັດ​ວຽກ​ຢູ່​ໃນ​ອັນ​ອື່ນ."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"ເພື່ອ​ໃຊ້​ແອັບ, ຮູບ, ຫຼື​ຂໍ້​ມູນທີ່ <xliff:g id="NAME">^1</xliff:g> ນີ້​ມີ, ແຊກ​ມັນ​ເຂົ້າ​ໄປ​ອີກ. \n\nທາງ​ເລືອກ​ໜຶ່ງ, ທ່ານ​ສາ​ມາດ​ເລືອກ​ທີ່​ຈະ​ລືມ​ບ່ອນ​ຈັດ​ເກັບ​ຂໍ້​ມູນ​ນີ້ ຖ້າ​ບໍ່​ມີ​ອຸ​ປະ​ກອນ​ໃຫ້. \n\nຖ້າ​ທ່ານ​ເລືອກ​ທີ່​ຈະ​ລືມ, ທຸກ​ຂໍ້​ມູນ​ທີ່​ມີ​ຢູ່​ໃນ​ອຸ​ປະ​ກອນ​ຈະ​ເສຍ​ໄປ​ຖາ​ວອນ. \n\nທ່ານ​ສາ​ມາດ​ຕິດ​ຕັ້ງ​ແອັບ​ໄດ້​ພາຍ​ຫຼັງ, ແຕ່​ຂໍ້​ມູນ​ທີ່​ເກັບ​ໄວ້​ຢູ່​ໃນ​ອຸ​ປະ​ກອນ​ຈະ​ເສຍ​ໄປ."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"ລືມ <xliff:g id="NAME">^1</xliff:g> ບໍ?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"ແອັບ, ຮູບຖ່າຍ ແລະຂໍ້ມູນທັງໝົດທີ່ເກັບໄວ້ເທິງ <xliff:g id="NAME">^1</xliff:g> ອຸປະກອນນີ້ຈະເສຍໄປຕະຫຼອດການ."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"ແອັບ"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"ຮູບ"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"ວິດີໂອ"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"ສຽງ"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"ຂໍ້ມູນທີ່ເກັບໄວ້"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"ອື່ນໆ"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"ລະບົບ"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"ສຳຫຼວດ <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"ສິ່ງອື່ນຮວມມີໄຟລ໌ທີ່ໃຊ້ຮ່ວມກັນທີ່ບັນທຶກໄວ້ໂດຍແອັບ, ໄຟລ໌ທີ່ດາວໂຫຼດຈາກອິນເຕີເນັດ ຫຼື Bluetooth, ໄຟລ໌ Android ແລະ ອື່ນໆ. \n\nເພື່ອເບິ່ງເນື້ອຫາທັງໝົດຂອງ <xliff:g id="NAME">^1</xliff:g> ນີ້, ໃຫ້ແຕະທີ່ປຸ່ມສຳຫຼວດ."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"ລະບົບຮວມໄຟລ໌ທີ່ໃຊ້ເພື່ອຣັນ Android ເວີຊັນ <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> ສາມາດມີຮູບພາບ, ເພງ, ແອັບ ຫຼື ຂໍ້ມູນອື່ນໆທີ່ບັນທຶກໄວ້ໄດ້ໂດຍໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນ <xliff:g id="SIZE">^2</xliff:g>. \n\nເພື່ອເບິ່ງລາຍລະອຽດ, ໃຫ້ສະຫຼັບໄປໃຊ້ <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"ຕັ້ງ <xliff:g id="NAME">^1</xliff:g> ຂອງ​ທ່ານ"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"ໃຊ້​ເປັນບ່ອນ​ຈັດ​ເກັບຂໍ້ມູນແບບພົກພາ"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"ສຳ​ລັບ​ການຍ້າຍຮູບຖ່າຍ ແລະ​ມີ​ເດຍ​ອື່ນ​ລະ​ຫວ່າງ​ອຸ​ປະ​ກອນ."</string>
@@ -2520,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"ຈຳກັດການເຄື່ອນໄຫວໃນພື້ນຫຼັງບໍ?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"ຫາກທ່ານຈຳກັດການເຄື່ອນໄຫວໃນພື້ນຫຼັງສຳລັບແອັບໃດໜຶ່ງ, ມັນຈະເຮັດວຽກຜິດປົກກະຕິ"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"ເນື່ອງຈາກແອັບນີ້ຍັງບໍ່ໄດ້ປັບແຕ່ງໃຫ້ໃຊ້ແບັດເຕີຣີໄດ້ຢ່າງເໝາະສົມເທື່ອ, ທ່ານຈຶ່ງບໍ່ສາມາດຈຳກັດມັນໄດ້.\n\nເພື່ອຈຳກັດແອັບດັ່ງກ່າວ, ໃຫ້ເປີດການປັບແຕ່ງແບັດເຕີຣີໃຫ້ເໝາະສົມກ່ອນ."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"ບໍ່ຈຳກັດ"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"ປັບໃຫ້ເໝາະສົມ"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"ອະນຸຍາດໃຫ້ມີການໃຊ້ແບັດເຕີຣີໃນພື້ນຫຼັງໂດຍບໍ່ມີການຈຳກັດ. ອາດໃຊ້ແບັດເຕີຣີຫຼາຍຂຶ້ນ."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"ປັບໃຫ້ເໝາະໂດຍອ້າງອີງການໃຊ້ຂອງທ່ານ. ແນະນຳສຳລັບແອັບສ່ວນໃຫຍ່."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"ຈຳກັດການໃຊ້ແບັດເຕີຣີໃນຂະນະທີ່ຢູ່ໃນພື້ນຫຼັງ. ແອັບອາດບໍ່ເຮັດວຽກຕາມທີ່ຄາດໄວ້. ການແຈ້ງເຕືອນອາດຫຼ້າຊ້າ."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"ການປ່ຽນແປງວິທີທີ່ແອັບໃຊ້ແບັດເຕີຣີຂອງທ່ານສາມາດກະທົບປະສິດທິພາບຂອງມັນໄດ້."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"ແອັບນີ້ຕ້ອງການການໃຊ້ແບັດເຕີຣີແບບ <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"ການນຳໃຊ້ໜ້າຈໍຕັ້ງແຕ່ສາກເຕັມຫຼ້າສຸດ"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"ການນຳໃຊ້ແບັດເຕີຣີຕັ້ງແຕ່ສາກເຕັມຫຼ້າສຸດ"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"ໄລຍະເວລາທີ່ໜ້າຈໍເປີດຕັ້ງແຕ່ສາກເຕັມຫຼ້າສຸດ"</string>
@@ -2729,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"ການໃຊ້ແບັດເຕີຣີ"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"ນັບຈາກສາກເຕັມ"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"ຈັດການການນຳໃຊ້ແບັດເຕີຣີ"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"ຮວມ <xliff:g id="TIME_0">^1</xliff:g> • ພື້ນຫຼັງ <xliff:g id="TIME_1">^2</xliff:g> ສຳລັບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ການປະເມີນໄລຍະເວລາແບັດເຕີຣີທີ່ເຫຼືອແມ່ນອ້າງອີງຈາກການນຳໃຊ້ອຸປະກອນຂອງທ່ານ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"ເວລາທີ່ເຫຼືອໂດຍປະມານ"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"ຈົນກວ່າຈະສາກເຕັມ"</string>
@@ -2827,7 +2804,8 @@
     <string name="tts_play" msgid="2945513377250757221">"ຫຼິ້ນ"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"ບໍ່ປອດໄພ"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g> ບໍ່ປອດໄພ"</string>
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> ບໍ່ປອດໄພ"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> ບໍ່ປອດໄພ"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"ການເຊື່ອມຕໍ່ແບບປັບຕົວໄດ້"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ຍືດອາຍຸແບັດເຕີຣີ ແລະ ປັບປຸງປະສິດທິພາບອຸປະກອນໂດຍອັດຕະໂນມັດດ້ວຍການຈັດການການເຊື່ອມຕໍ່ເຄືອຂ່າຍຂອງທ່ານ"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ພື້ນທີ່ຈັດເກັບຂໍ້ມູນຮັບຮອງ"</string>
@@ -3764,7 +3742,7 @@
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"ບໍ່ມີສຽງ ຫຼື ການສັ່ນເຕືອນ ແລະ ປາກົດຢູ່ທາງລຸ່ມຂອງພາກສ່ວນການສົນທະນາ"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"ອາດສົ່ງສຽງ ຫຼື ສັ່ນເຕືອນໂດຍອ້າງອີງຈາກການຕັ້ງຄ່າໂທລະສັບ"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"ເມື່ອປົດລັອກອຸປະກອນແລ້ວ, ໃຫ້ສະແດງການແຈ້ງເຕືອນເປັນປ້າຍຢູ່ເທິງສຸດຂອງໜ້າຈໍ"</string>
-    <string name="notification_switch_label" msgid="8029371325967501557">"ການສົນທະນາ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ທັງໝົດ"</string>
+    <string name="notification_switch_label" msgid="8029371325967501557">"ການແຈ້ງເຕືອນ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ທັງໝົດ"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"ການແຈ້ງເຕືອນ <xliff:g id="APP_NAME">%1$s</xliff:g> ທັງໝົດ"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ການແຈ້ງເຕືອນແບບປັບປ່ຽນໄດ້ເອງ"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
@@ -3776,7 +3754,7 @@
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ອາທິດ</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ບໍ່ສົ່ງ"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"ອຸປະກອນ ແລະ ການແຈ້ງເຕືອນ"</string>
+    <string name="manage_notification_access_title" msgid="6481256069087219982">"ການແຈ້ງເຕືອນອຸປະກອນ ແລະ ແອັບ"</string>
     <string name="manage_notification_access_summary" msgid="8635826778429714415">"ຄວບຄຸມວ່າຈະໃຫ້ສະແດງການແຈ້ງເຕືອນໃດຢູ່ແອັບ ແລະ ອຸປະກອນຂອງທ່ານ"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"ການເຂົ້າເຖິງການແຈ້ງເຕືອນໂປຣໄຟລ໌ບ່ອນເຮັດວຽກຖືກບລັອກໄວ້"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"ແອັບຯບໍ່ສາມາດອ່ານການແຈ້ງເຕືອນໄດ້"</string>
@@ -4162,7 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"ບໍ່ໄດ້ໃຫ້ການອະນຸຍາດໃດ"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"ບໍ່ມີການຮ້ອງຂໍການອະນຸຍາດໃດ"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"ຄວບຄຸມສິດເຂົ້າເຖິງແອັບທີ່ມີຕໍ່ຂໍ້ມູນຂອງທ່ານ"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"ການໃຊ້ການອະນຸຍາດ"</string>
+    <string name="permissions_usage_title" msgid="2942741460679049132">"ແຜງໜ້າປັດຄວາມເປັນສ່ວນຕົວ"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"ສະແດງວ່າແອັບໃດໃຊ້ການອະນຸຍາດຫຼ້າສຸດ"</string>
     <string name="unused_apps" msgid="4566272194756830656">"ແອັບທີ່ບໍ່ໄດ້ໃຊ້"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -4680,7 +4658,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"ຄວາມປອດໄພ ແລະ ສຸກເສີນ"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS ສຸກເສີນ, ຂໍ້ມູນທາງການແພດ, ການແຈ້ງເຕືອນ"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ການນຳທາງແບບທ່າທາງ"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"ເພື່ອໄປທີ່ໜ້າຫຼັກ, ໃຫ້ປັດຂຶ້ນຈາກລຸ່ມສຸດຂອງໜ້າຈໍ. ເພື່ອສະຫຼັບແອັບ, ໃຫ້ປັດຂຶ້ນຈາກປຸ່ມ, ກົດຄ້າງໄວ້ແລ້ວປ່ອຍ. ເພື່ອກັບຄືນ, ໃຫ້ປັດຈາກຂອບຊ້າຍ ຫຼື ຂວາ."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"ເພື່ອໄປທີ່ໜ້າຫຼັກ, ໃຫ້ປັດຂຶ້ນຈາກລຸ່ມສຸດຂອງໜ້າຈໍ. ເພື່ອສະຫຼັບແອັບ, ໃຫ້ປັດຂຶ້ນຈາກລຸ່ມສຸດ, ກົດຄ້າງໄວ້ແລ້ວປ່ອຍ. ເພື່ອກັບຄືນ, ໃຫ້ປັດຈາກຂອບຊ້າຍ ຫຼື ຂວາ."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"ການນຳທາງແບບ 3 ປຸ່ມ"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"ກັບຄືນ, ໜ້າຫຼັກ ແລະ ສະຫຼັບແອັບດ້ວຍປຸ່ມຕ່າງໆຢູ່ລຸ່ມສຸດຂອງໜ້າຈໍທ່ານ."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"ການນຳທາງລະບົບ, ການນຳທາງແບບ 2 ປຸ່ມ, ການນຳທາງແບບ 3 ປຸ່ມ, ການນຳທາງແບບທ່າທາງ, ປັດ"</string>
@@ -5123,6 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"ຣີສະຕາດອຸປະກອນບໍ?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"ເພື່ອເລີ່ມຕົ້ນ, ໃຫ້ຣີສະຕາດອຸປະກອນຂອງທ່ານກ່ອນ. ຈາກນັ້ນທ່ານສາມາດເພີ່ມຊິມອື່ນໃສ່ໄດ້."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"ສືບຕໍ່"</string>
+    <string name="sim_action_yes" msgid="8076556020131395515">"ແມ່ນ"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"ຣີສະຕາດ"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"ບໍ່, ຂອບໃຈ"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"ສະຫຼັບ"</string>
@@ -5145,7 +5124,7 @@
     <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"ເບີໂທບໍ່ຮູ້ຈັກ"</string>
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"ໃຊ້ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ບໍ?"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ຈະຖືກໃຊ້ສຳລັບອິນເຕີເນັດມືຖື, ການໂທ ແລະ SMS."</string>
-    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"ບໍ່ມີ SIM ທີ່ສາມາດໃຊ້ໄດ້."</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"ບໍ່ມີ SIM ທີ່ສາມາດໃຊ້ໄດ້"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"ເພື່ອໃຊ້ອິນເຕີເນັດມືຖື, ຄຸນສົມບັດການໂທ ແລະ SMS ໃນພາຍຫຼັງ, ໃຫ້ໄປທີ່ການຕັ້ງຄ່າເຄືອຂ່າຍຂອງທ່ານ"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"ຊິມກາດ"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"ລຶບ SIM ທີ່ດາວໂຫລດມາແລ້ວນີ້ອອກບໍ?"</string>
@@ -5328,21 +5307,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"ບໍ່ສາມາດໃຊ້ໄດ້ເນື່ອງຈາກເປີດໂໝດເວລານອນຢູ່"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"ຣີເຊັດຄວາມສຳຄັນການແຈ້ງເຕືອນສຳເລັດແລ້ວ."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"ແອັບ"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"ມີອຸປະກອນຕ້ອງການເຂົ້າເຖິງຂໍ້ຄວາມຂອງທ່ານ. ແຕະເພື່ອເບິ່ງລາຍລະອຽດ."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"ອະນຸຍາດການເຂົ້າເຖິງຂໍ້ຄວາມບໍ?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"ມີອຸປະກອນ Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ຕ້ອງການເຂົ້າເຖິງຂໍ້ຄວາມຂອງທ່ານ.\n\nທ່ານຍັງບໍ່ເຄີຍເຊື່ອມຕໍ່ຫາ <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ມາກ່ອນ."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"ມີອຸປະກອນຕ້ອງການເຂົ້າເຖິງລາຍຊື່ຜູ້ຕິດຕໍ່ ແລະ ບັນທຶກການໂທຂອງທ່ານ. ແຕະເພື່ອເບິ່ງລາຍລະອຽດ."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"ອະນຸຍາດການເຂົ້າເຖິງລາຍຊື່ຜູ້ຕິດຕໍ່ ແລະ ບັນທຶກການໂທບໍ?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"ມີອຸປະກອນ Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ຕ້ອງການເຂົ້າເຖິງລາຍຊື່ຜູ້ຕິດຕໍ່ ແລະ ບັນທຶກການໂທຂອງທ່ານ. ນີ້ຮວມເຖິງຂໍ້ມູນກ່ຽວກັບການໂທເຂົ້າ ແລະ ໂທອອກນຳ.\n\nທ່ານຍັງບໍ່ເຄີຍເຊື່ອມຕໍ່ຫາ <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ມາກ່ອນ."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"ຄວາມສະຫວ່າງ"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"ລັອກໜ້າຈໍ"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"ລັອກໜ້າຈໍ"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"ຮູບແບບໜ້າຕາ"</string>
     <string name="category_name_color" msgid="937514550918977151">"ສີ"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"ການຄວບຄຸມການສະແດງຜົນອື່ນໆ"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"ການຄວບຄຸມການສະແດງຜົນອື່ນໆ"</string>
     <string name="category_name_others" msgid="2366006298768550310">"ອື່ນໆ"</string>
     <string name="category_name_general" msgid="7737273712848115886">"ທົ່ວໄປ"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ໃຊ້ຮູບແບບສີສັນມືດ"</string>
@@ -5381,6 +5356,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ສະແດງການເຂົ້າເຖິງຄລິບບອດ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"ສະແດງຂໍ້ຄວາມເມື່ອແອັບເຂົ້າເຖິງຂໍ້ຄວາມ, ຮູບພາບ ຫຼື ເນື້ອຫາອື່ນທີ່ທ່ານສຳເນົາໄວ້"</string>
     <string name="all_apps" msgid="3054120149509114789">"ແອັບທັງໝົດ"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"ບໍ່ອະນຸຍາດ"</string>
 </resources>
