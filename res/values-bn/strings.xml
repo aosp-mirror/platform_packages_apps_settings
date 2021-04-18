@@ -1247,7 +1247,7 @@
     <string name="brightness" msgid="6216871641021779698">"উজ্জ্বলতার স্তর"</string>
     <string name="brightness_title" msgid="5457874893085305155">"উজ্জ্বলতা"</string>
     <string name="brightness_summary" msgid="6309641759293018049">"স্ক্রীনের উজ্জ্বলতা সামঞ্জস্য করুন"</string>
-    <string name="auto_brightness_title" msgid="4239324728760986697">"অভিযোজিত উজ্জ্বলতা"</string>
+    <string name="auto_brightness_title" msgid="4239324728760986697">"পরিবেশের আলো অনুযায়ী উজ্জ্বলতা"</string>
     <string name="auto_brightness_summary" msgid="1737148869232725883">"পরিবেশের উপর নির্ভর করে স্ক্রিনের উজ্জ্বলতার পরিবর্তন হয়"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"চালু আছে"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"বন্ধ আছে"</string>
@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"স্ক্রিনের দিকে তাকিয়ে থাকলে সেটি বন্ধ হবে না"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"ক্যামেরা লক করা আছে"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"ফেস ডিটেকশনের জন্য ক্যামেরা অবশ্যই আনলক করা থাকতে হবে"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"স্ক্রিন অ্যাটেনশন ফিচারের জন্য ক্যামেরা আনলক থাকতে হবে"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"\'ফেস ডিটেকশন\' ব্যবহার করতে ক্যামেরা ব্যবহারের অ্যাক্সেস দিতে হবে। \'ডিভাইস ব্যক্তিগতকরণ পরিষেবা\' সংক্রান্ত অনুমতি ম্যানেজ করতে ট্যাপ করুন"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"অনুমতিগুলি পরিচালনা করুন"</string>
     <string name="night_display_title" msgid="8532432776487216581">"নাইট লাইট"</string>
@@ -2258,7 +2257,7 @@
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"অ্যাক্সেসিবিলিটি বোতাম"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"২টি আঙ্গুল দিয়ে উপরের দিকে সোয়াইপ করুন"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"৩টি আঙ্গুল দিয়ে উপরের দিকে সোয়াইপ করুন"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"অ্যাক্সেসিবিলিটি বোতাম ট্যাপ করুন"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"অ্যাক্সেসিবিলিটি বোতামে ট্যাপ করুন"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"স্ক্রিনের নিচের দিকের অ্যাক্সেসিবিলিটি বোতামে <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ট্যাপ করুন।\n\nএকটি ফিচার থেকে অন্যটিতে যেতে, অ্যাক্সেসিবিলিটি বোতাম টাচ করে ধরে থাকুন।"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"স্ক্রিনের নিচ থেকে উপরের দিকে দুটি আঙ্গুল দিয়ে সোয়াইপ করুন।\n\nএকটি ফিচার থেকে অন্যটিতে যেতে, দুটি আঙ্গুল দিয়ে নিচ থেকে উপরের দিকে সোয়াইপ করে ধরে থাকুন।"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"স্ক্রিনের নিচ থেকে উপরের দিকে তিনটি আঙ্গুল দিয়ে সোয়াইপ করুন।\n\nএকটি ফিচার থেকে অন্যটিতে যেতে, তিনটি আঙ্গুল দিয়ে নিচ থেকে উপরের দিকে সোয়াইপ করে ধরে থাকুন।"</string>
@@ -2506,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"ব্যাকগ্রাউন্ড অ্যাক্টিভিটি সীমিত করবেন?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"কোনও অ্যাপের ব্যাকগ্রাউন্ড অ্যাক্টিভিটি সীমিত করলে তা সঠিক ভাবে কাজ নাও করতে পারে"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"যেহেতু এই অ্যাপটিকে ব্যাটারি অপ্টিমাইজ করার জন্য সেট করা হয়নি, তাই আপনি এটির অ্যাক্টিভিটি সীমিত করতে পারবেন না।\n\nঅ্যাপের অ্যাক্টিভিটি সীমিত করতে আগে ব্যাটারি অপ্টিমাইজেশন চালু করুন।"</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"সীমিত নয়"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"অপ্টিমাইজ করা আছে"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"সীমাবদ্ধতা ছাড়াই ব্যাকগ্রাউন্ডে ব্যাটারির ব্যবহারের অনুমতি দিন। বেশি ব্যাটারি ব্যবহার করতে পারে।"</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"ব্যাটারির ব্যবহার অনুযায়ী অপ্টিমাইজ করুন। সেরা অ্যাপগুলির জন্য সাজেস্ট করা হয়েছে।"</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"ব্যাকগ্রাউন্ডে ব্যাটারির ব্যবহার সীমিত করুন। প্রত্যাশা অনুযায়ী অ্যাপ কাজ নাও করতে পারে বিজ্ঞপ্তি দেরিতে আসতে পারে।"</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"কোনও অ্যাপের জন্য আপনার ব্যাটারি কীভাবে ব্যবহৃত হবে তা পরিবর্তন করার বিষয়টি ব্যাটারির কার্যকারিতাকে প্রভাবিত করতে পারে।"</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"এই অ্যাপটি ব্যবহার করার জন্য <xliff:g id="STATE">%1$s</xliff:g> ব্যাটারির ব্যবহার প্রয়োজন।"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"সম্পূর্ণ চার্জ করার সময় থেকে স্ক্রিনের ব্যবহার"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"সম্পূর্ণ চার্জ দেওয়ার পর থেকে ব্যাটারির ব্যবহার"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"সম্পূর্ণ চার্জ হওয়ার সময় থেকে স্ক্রিন কত সময় চালু রয়েছে"</string>
@@ -2715,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"ব্যাটারির ব্যবহার"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"সম্পূর্ণ চার্জ হওয়ার সময় থেকে"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"ব্যাটারির ব্যবহার পরিচালনা করুন"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> মোট • <xliff:g id="TIME_1">^2</xliff:g> গত ২৪ ঘণ্টায় ব্যাকগ্রাউন্ডে ব্যবহার"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"আপনার ডিভাইসের ব্যবহারের উপর ভিত্তি করে ব্যাটারি কতক্ষণ চলবে তার আনুমানিক হিসাব"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"আনুমানিক কতক্ষণ বাকি"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"সম্পূর্ণ চার্জ না হওয়া পর্যন্ত"</string>
@@ -3196,7 +3187,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"কর্মস্থলের প্রোফাইল সরাবেন?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"আপনি এই ট্যাবলেটে আপনার জায়গা ও ডেটা হারিয়ে ফেলবেন। আপনি এটিকে আগের অবস্থায় ফেরাতে পারবেন না।"</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"আপনি এই ফোনে আপনার জায়গা ও ডেটা হারিয়ে ফেলবেন। আপনি এটিকে আগের অবস্থায় ফেরাতে পারবেন না।"</string>
-    <string name="user_confirm_remove_message" msgid="362545924965977597">"সব অ্যাপ্লিকেশান ও ডেটা মুছে ফেলা হবে।"</string>
+    <string name="user_confirm_remove_message" msgid="362545924965977597">"সব অ্যাপ ও ডেটা মুছে ফেলা হবে।"</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"যদি আপনি চালিয়ে যান তবে এই প্রোফাইলের সমস্ত অ্যাপ্লিকেশান ও ডেটা মুছে ফেলা হবে৷"</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"সব অ্যাপ্লিকেশান ও ডেটা মুছে ফেলা হবে।"</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"নতুন ব্যবহারকারী যোগ করা হচ্ছে..."</string>
@@ -3773,16 +3764,13 @@
       <item quantity="one">%dটি অ্যাপ্লিকেশান বিজ্ঞপ্তিগুলি পড়তে পারে</item>
       <item quantity="other">%dটি অ্যাপ্লিকেশান বিজ্ঞপ্তিগুলি পড়তে পারে</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"উন্নত নোটিফিকেশন"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"সাজেস্ট করা অ্যাকশন, উত্তর এবং আরও অনেক কিছু পান"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"কোনওটিই নয়"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"ইনস্টল করা কোনো অ্যাপের অনুরোধকৃত বিজ্ঞপ্তির অ্যাক্সেস নেই৷"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"বিজ্ঞপ্তি অ্যাক্সেস করার অনুমতি দিন"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g>-কে বিজ্ঞপ্তিতে অ্যাক্সেস দিতে চান?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"উন্নত নোটিফিকেশন পরিচিতির নাম এবং মেসেজের মতো ব্যক্তিগত তথ্য ছাড়াও নোটিফিকেশনের সবকটি কন্টেন্ট পড়তে পারবে। এছাড়াও, এই ফিচার নোটিফিকেশন বাতিল করতে পারবে এবং নোটিফিকেশনে থাকা বোতামের সাহায্যে অ্যাকশন নিতে পারবে, যেমন ফোন কলের উত্তর দেওয়া। \n\nএই ফিচার প্রায়োরিটি মোড চালু বা বন্ধ করতে এবং সেই সম্পর্কিত সেটিংস পরিবর্তনও করতে পারবে।"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেসে অনুমতি দেবেন?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> সব বিজ্ঞপ্তি পড়তে পারবে। পরিচিতির নাম, আপনি যেসব মেসেজ পান সেগুলির টেক্সট সহ সব ব্যক্তিগত তথ্য এর মধ্যে পড়ে। বিজ্ঞপ্তি বাতিল করা বা ফোন কলের উত্তর দেওয়ার মতো বিজ্ঞপ্তির বোতামের উপর অ্যাকশন নেওয়ার কাজও এই অ্যাপ করতে পারবে। \n\nএই অ্যাপ \'বিরক্ত করবে না\' মোড চালু বা বন্ধ করা সহ সম্পর্কিত সেটিংস পরিবর্তনও করতে পারবে।"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"যদি আপনি <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেস বন্ধ করেন, তাহলে \'বিরক্ত করবে না\' এর অ্যাক্সেসও বন্ধ হয়ে যেতে পারে৷"</string>
@@ -4044,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"প্রশাসকের পিন লিখুন"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"চালু করুন"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"বন্ধ আছে"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"চালু আছে"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"বন্ধ আছে"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"অ্যাপ পিন করার ফিচার"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"অ্যাপ পিন করার ফিচারটি ব্যবহার করে আপনি বর্তমান অ্যাপটিকে আনপিন না করা পর্যন্ত দেখতে পাবেন। এই ফিচারটি অনেক কিছুর জন্য ব্যবহার করা যেতে পারে, যেমন, কোনও বিশ্বস্ত বন্ধুকে ডিভাইসে কেবল একটি নির্দিষ্ট গেম খেলতে দেওয়া।"</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"যখন কোনও অ্যাপ পিন করা থাকে, তখন পিনযুক্ত অ্যাপটি অন্যান্য অ্যাপ খুলতে পারে এবং ব্যক্তিগত ডেটা অ্যাক্সেসযোগ্য হতে পারে। \n\nঅ্যাপ পিন করার ফিচারটি ব্যবহার করার জন্য: 	\n১.	অ্যাপ পিন করার ফিচারটি চালু করুন 	\n২.	ওভারভিউ বিকল্প খুলুন 	\n৩.	স্ক্রিনের একদম উপরে অ্যাপ আইকন ট্যাপ করে পিন করুন বিকল্পে ট্যাপ করুন"</string>
@@ -5325,16 +5311,12 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"বেডটাইম মোড চালু থাকায় এই সুবিধা উপলভ্য নয়"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"বিজ্ঞপ্তির দেখানোর অগ্রাধিকার রিসেট করার প্রক্রিয়া সম্পূর্ণ হয়েছে।"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"অ্যাপ"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"ডিভাইস আপনার মেসেজ অ্যাক্সেস করতে চাইছে। বিশদ বিবরণের জন্য ট্যাপ করুন।"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"মেসেজ দেখার অ্যাক্সেস দিতে চান?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"ব্লুটুথ ডিভাইস, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, আপনার মেসেজ অ্যাক্সেস করতে চাইছে।\n\nআপনি <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>-এর সাথে আগে কখনও কানেক্ট করেননি।"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"ডিভাইস আপনার পরিচিতি ও কল লগ অ্যাক্সেস করতে চাইছে। বিশদ বিবরণের জন্য ট্যাপ করুন।"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"পরিচিতি ও কল লগ দেখার অ্যাক্সেস দিতে চান?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"ব্লুটুথ ডিভাইস, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, আপনার পরিচিতি ও কল লগ অ্যাক্সেস করতে চাইছে। এর মধ্যে ইনকামিং ও আউটগোয়িং কলের ডেটাও আছে।\n\nআপনি <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>-এ আগে কখনও কানেক্ট করেননি।"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"উজ্জ্বলতা"</string>
     <!-- no translation found for category_name_lock_display (8310402558217129670) -->
     <skip />
@@ -5380,6 +5362,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ক্লিপবোর্ড অ্যাক্সেস দেখুন"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"আপনি কপি করেছেন এমন টেক্সট, ছবি বা অন্যান্য কন্টেন্ট, অ্যাপ অ্যাক্সেস করলে মেসেজ দেখুন"</string>
     <string name="all_apps" msgid="3054120149509114789">"সব অ্যাপ"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"অনুমতি দেবেন না"</string>
 </resources>
