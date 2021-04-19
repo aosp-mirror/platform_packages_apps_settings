@@ -18,14 +18,18 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 
 import androidx.preference.PreferenceGroup;
 
@@ -55,9 +59,13 @@ public final class BatteryChartPreferenceControllerTest {
     @Mock private SettingsActivity mSettingsActivity;
     @Mock private PreferenceGroup mAppListGroup;
     @Mock private PackageManager mPackageManager;
+    @Mock private Drawable mDrawable;
+    @Mock private BatteryHistEntry mBatteryHistEntry;
     @Mock private BatteryChartView mBatteryChartView;
+    @Mock private PowerGaugePreference mPowerGaugePreference;
 
     private Context mContext;
+    private BatteryDiffEntry mBatteryDiffEntry;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
 
     @Before
@@ -71,6 +79,13 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
         mBatteryChartPreferenceController.mBatteryChartView = mBatteryChartView;
+        mBatteryDiffEntry = new BatteryDiffEntry(
+            mContext,
+            /*foregroundUsageTimeInMs=*/ 1,
+            /*backgroundUsageTimeInMs=*/ 2,
+            /*consumePower=*/ 3,
+            mBatteryHistEntry);
+        mBatteryDiffEntry = spy(mBatteryDiffEntry);
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
             "fakeBatteryDiffEntryKey",
@@ -97,6 +112,19 @@ public final class BatteryChartPreferenceControllerTest {
 
         mBatteryChartPreferenceController.onDestroy();
         assertThat(BatteryDiffEntry.sResourceCache).isNotEmpty();
+    }
+
+    @Test
+    public void testOnDestroy_clearPreferenceCache() {
+        final String prefKey = "preference fake key";
+        // Ensures the testing environment is correct.
+        mBatteryChartPreferenceController.mPreferenceCache.put(
+            prefKey, mPowerGaugePreference);
+        assertThat(mBatteryChartPreferenceController.mPreferenceCache).hasSize(1);
+
+        mBatteryChartPreferenceController.onDestroy();
+        // Verifies the result after onDestroy.
+        assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
     }
 
     @Test
@@ -176,9 +204,68 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setBatteryHistoryMap(
             createBatteryHistoryMap(/*size=*/ 25));
 
-
         assertThat(mBatteryChartPreferenceController.mTrapezoidIndex)
             .isEqualTo(BatteryChartView.SELECTED_INDEX_ALL);
+    }
+
+    @Test
+    public void testRemoveAndCacheAllPrefs_emptyContent_ignoreRemoveAll() {
+        final int trapezoidIndex = 1;
+        doReturn(0).when(mAppListGroup).getPreferenceCount();
+
+        mBatteryChartPreferenceController.refreshUi(
+            trapezoidIndex, /*isForce=*/ true);
+        verify(mAppListGroup, never()).removeAll();
+    }
+
+    @Test
+    public void testRemoveAndCacheAllPrefs_buildCacheAndRemoveAllPreference() {
+        final int trapezoidIndex = 1;
+        final String prefKey = "preference fake key";
+        doReturn(1).when(mAppListGroup).getPreferenceCount();
+        doReturn(mPowerGaugePreference).when(mAppListGroup).getPreference(0);
+        doReturn(prefKey).when(mPowerGaugePreference).getKey();
+        // Ensures the testing data is correct.
+        assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
+
+        mBatteryChartPreferenceController.refreshUi(
+            trapezoidIndex, /*isForce=*/ true);
+
+        assertThat(mBatteryChartPreferenceController.mPreferenceCache.get(prefKey))
+            .isEqualTo(mPowerGaugePreference);
+        verify(mAppListGroup).removeAll();
+    }
+
+    @Test
+    public void testAddPreferenceToScreen_emptyContent_ignoreAddPreference() {
+        mBatteryChartPreferenceController.addPreferenceToScreen(
+            new ArrayList<BatteryDiffEntry>());
+        verify(mAppListGroup, never()).addPreference(any());
+    }
+
+    @Test
+    public void testAddPreferenceToScreen_addPreferenceIntoScreen() {
+        final String prefKey = "preference fake key";
+        final String appLabel = "fake app label";
+        doReturn(1).when(mAppListGroup).getPreferenceCount();
+        doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
+        doReturn(appLabel).when(mBatteryDiffEntry).getAppLabel();
+        doReturn(prefKey).when(mBatteryHistEntry).getKey();
+
+        mBatteryChartPreferenceController.addPreferenceToScreen(
+            Arrays.asList(mBatteryDiffEntry));
+
+        // Verifies the preference cache.
+        final PowerGaugePreference pref =
+            (PowerGaugePreference) mBatteryChartPreferenceController.mPreferenceCache
+                .get(prefKey);
+        assertThat(pref).isNotNull();
+        // Verifies the added preference configuration.
+        verify(mAppListGroup).addPreference(pref);
+        assertThat(pref.getKey()).isEqualTo(prefKey);
+        assertThat(pref.getTitle()).isEqualTo(appLabel);
+        assertThat(pref.getIcon()).isEqualTo(mDrawable);
+        assertThat(pref.getOrder()).isEqualTo(1);
     }
 
     private Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {
