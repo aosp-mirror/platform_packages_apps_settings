@@ -1368,16 +1368,16 @@
     <string name="force_bold_text" msgid="4620929631102086716">"Qalın mətn"</string>
     <string name="title_font_size" msgid="570613010306330622">"Şrift ölçüsü"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Mətni kiçildin və ya böyüdün"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"SİM kart kilidi parametrləri"</string>
+    <string name="sim_lock_settings" msgid="4493069398250139205">"SIM kart kilid ayarları"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SİM kart kilidi"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Deaktiv"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Kilidlənmiş"</string>
     <string name="sim_lock_settings_title" msgid="1401619059761012696">"SİM kart kilidi"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"SİM kartı kilidləyin"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Planşeti istifadə etmək üçün PIN tələb edin"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Telefonu işlətmək üçün PIN tələb et"</string>
+    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Telefonu işlətmək üçün PIN tələb olunsun"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Planşeti işlətmək üçün PIN tələb et"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Telefonu istifadə etmək üçün PIN tələb edin"</string>
+    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Telefonu işlətmək üçün PIN tələb olunsun"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"SIM PIN dəyişin"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM PIN"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"SİM kart kilidlənməsi"</string>
@@ -1693,8 +1693,8 @@
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD kartı sil"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Daxili USB yaddaşında mahnı və ya şəkil kimi bütün datanı sil"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"SD kartda musiqi və foto kimi bütün məlumatları silin."</string>
-    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Bütün datanı silin"</string>
-    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Bütün datanı silin"</string>
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Bütün məlumatlar silinsin"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Bütün məlumatlar silinsin"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Şəxsi məlumat və endirilən tətbiqlərin hamısı silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz."</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Endirilən tətbiqlər və SIM-lər daxil olmaqla şəxsi məlumatın hamısı silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Bütün data silinsin?"</string>
@@ -2804,22 +2804,20 @@
     <string name="tts_play" msgid="2945513377250757221">"Oxutma"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN (Virtual Şəxsi Şəbəkələr)"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Güvənli deyil"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> güvənli deyil"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> güvənli deyil"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptiv bağlantı"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Enerjiyə qənaət edir və şəbəkə bağlantılarını avtomatik idarə etməklə cihazın məhsuldarlığını artırır"</string>
-    <string name="credentials_title" msgid="7535942196886123656">"Etimadnamə yaddaşı"</string>
+    <string name="credentials_title" msgid="7535942196886123656">"Kimlik bilgiləri deposu"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Sertifikat quraşdırın"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Sertifikatları yaddaşdan quraşdırın"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Sertifikatları SD kartdan quraşdır"</string>
-    <string name="credentials_reset" msgid="4246628389366452655">"Etimadı silin"</string>
+    <string name="credentials_reset" msgid="4246628389366452655">"Kimlik bilgilərini silin"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Bütün sertifikatları sil"</string>
-    <string name="trusted_credentials" msgid="2522784976058244683">"İnanılmış etimadlar"</string>
-    <string name="trusted_credentials_summary" msgid="345822338358409468">"İnanılmış CA sertifikatları göstər"</string>
-    <string name="user_credentials" msgid="4044405430790970775">"İstifadəçi kredensialları"</string>
-    <string name="user_credentials_summary" msgid="686471637627271856">"Saxlanılan məlumatlara baxın və dəyişin"</string>
+    <string name="trusted_credentials" msgid="2522784976058244683">"Güvənli kimlik bilgiləri"</string>
+    <string name="trusted_credentials_summary" msgid="345822338358409468">"Güvənli CA sertifikatlarına baxın"</string>
+    <string name="user_credentials" msgid="4044405430790970775">"İstifadəçi kimlik bilgiləri"</string>
+    <string name="user_credentials_summary" msgid="686471637627271856">"Saxlanılan kimlik bilgilərinə baxın və dəyişin"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Əlavə"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Kredensiallar bu istifadəçi üçün əlçatan deyil"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN və tətbiq üçün quraşdırılıb"</string>
@@ -2841,7 +2839,7 @@
     <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"İcazə verməyin"</string>
     <string name="request_manage_credentials_allow" msgid="4910940118408348245">"İcazə verin"</string>
     <string name="request_manage_credentials_more" msgid="6101210283534101582">"Daha çoxunu göstərin"</string>
-    <string name="certificate_management_app" msgid="8086699498358080826">"Sertifikat idarəetmə tətbiqi"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Sertifikatın idarəedilməsi tətbiqi"</string>
     <string name="no_certificate_management_app" msgid="3025739370424406717">"Yoxdur"</string>
     <string name="certificate_management_app_description" msgid="7257420502179110164">"Bu tətbiq tərəfindən quraşdırılan sertifikatlar aşağıdakı tətbiqlər və URL\'lar üçün kimliyinizi doğrulayır"</string>
     <string name="remove_credential_management_app" msgid="6879631067380232928">"Silin"</string>
@@ -2877,10 +2875,10 @@
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Administrator tətbiqləri"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Əlçatan cihaz admin tətbiqi yoxdur"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Əlçatımlı əmanət agenti yoxdur"</string>
-    <string name="add_device_admin_msg" msgid="7730006568970042119">"Cihaz admin tətbiqi aktiv edilsin?"</string>
-    <string name="add_device_admin" msgid="6252128813507932519">"Bu cihazın admin tətbiqini aktiv edin"</string>
+    <string name="add_device_admin_msg" msgid="7730006568970042119">"Cihaz administratoru tətbiqi"</string>
+    <string name="add_device_admin" msgid="6252128813507932519">"Administrator tətbiqi aktiv edilsin"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Cihaz admini"</string>
-    <string name="device_admin_warning" msgid="1889160106787280321">"Bu admin tətbiqini aktiv etməklə <xliff:g id="APP_NAME">%1$s</xliff:g> tətbiqinə aşağı əməliyyatları etmək icazəsi verilir:"</string>
+    <string name="device_admin_warning" msgid="1889160106787280321">"Aktivasiyadan sonra <xliff:g id="APP_NAME">%1$s</xliff:g> tətbiqinə aşağı əməliyyatları etmək icazəsi verilir:"</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Bu cihazı <xliff:g id="APP_NAME">%1$s</xliff:g> idarə edəcək."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"Bu admin tətbiqi aktivdir və <xliff:g id="APP_NAME">%1$s</xliff:g> tətbiqinə aşağıdakı əməliyyatları etməyə icazə verir:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Profil Meneceri aktivləşsin?"</string>
@@ -3133,7 +3131,7 @@
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA sertifikatlar"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Kredensial detalları"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Etimadnamə silindi: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
-    <string name="user_credential_none_installed" msgid="918620912366836994">"İstifadəçi kredensialı quraşdırılmayıb"</string>
+    <string name="user_credential_none_installed" msgid="918620912366836994">"İstifadəçi kimlik bilgiləri qurulmayıb"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Orfoqrafik yoxlama"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"İş üçün orfoqrafiya yoxlayan"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Mövcud tam yedəkləmə parolunuzu bura daxil edin"</string>
@@ -4035,14 +4033,14 @@
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Aktiv"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Deaktiv"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Tətbiq bərkidilməsi"</string>
-    <string name="app_pinning_intro" msgid="6409063008733004245">"Tətbiq bərkidilməsi cari tətbiqin ayrılanadək ekranda qalmasına imkan verir. Məsələn, bu funksiya etibarlı dostun xüsusi oyunu oynamasına imkan vermək üçün istifadə edilə bilər."</string>
-    <string name="screen_pinning_description" msgid="7289730998890213708">"Tətbiq bərkidildikdə, bu tətbiq başqa tətbiqləri aça bilər və şəxsi dataya giriş edilə bilər. \n\nTətbiq bərkidilməsini istifadə etmək üçün: 	\n1.	Tətbiq bərkidilməsini aktiv edin \n2.	İcmalı Açın \n3.	Ekranın yuxarısında tətbiq ikonasına toxunun, sonra \"Bərkidin\" seçiminə toxunun"</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Tətbiq bərkidildikdə, bu tətbiq başqa tətbiqləri aça bilər və şəxsi dataya giriş edilə bilər. \n\nCihazınızı etibarlı şəkildə başqası ilə paylaşmaq istəyirsinizsə, qonaq istifadəçi istifadə edin. \n\nTətbiq bərkidilməsini istifadə etmək üçün: 	\n1.	Tətbiq bərkidilməsini aktiv edin \n2.	İcmalı Açın 	\n3.	Ekranın yuxarısında tətbiq ikonasına toxunun, sonra \"Bərkidin\" seçiminə toxunun"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"Bununla cari tətbiqi ekranda bərkidərək digər tətbiqlərə girişi bağlamaq olar. Bu funksiya, örnək olaraq, cihazda oyun oynamaq üçün onu digər şəxsə verdiyiniz zaman lazım olur."</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Bərkidilmiş tətbiqlər digər tətbiqləri aça və şəxsi məlumatlara girə bilər.\n\nTətbiqi bərkitmək üçün: \n1. Funksiyanı ayarlarda aktivləşdirin. \n2. İcmalı açın. \n3. Ekranın yuxarısındakı tətbiq nişanında \"Bərkidin\" əmrini seçin."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Bərkidilmiş tətbiqlər digər tətbiqləri aça və şəxsi məlumatlara girə bilər. \n\nCihazı başqasına verəndə fikrinizin telefonda qalmasını istəmirsinizsə (şəkil və mesajlara baxmasın deyə), cihazı qonaq rejiminə keçirib verin. \n\nTətbiqi bərkitmək üçün:\n1.Funksiyanı ayarlarda aktivləşdirin. \n2. İcmalı açın.\n3.Ekranın yuxarısındakı tətbiq nişanında \"Bərkidin\" əmrini seçin."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Tətbiq bərkidildikdə: \n\n•	 Şəxsi dataya giriş edilə bilər \n		(məsələn, kontaktlar və e-məktub məzmunu) \n•	 Bərkidilmiş tətbiq digər tətbiqləri aça bilər \n\nYalnız etibar etdiyiniz dostlarla tətbiq bərkidilməsini istifadə edin."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Ayırmadan öncə kilid modeli istənilsin"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Ayırmadan öncə PIN istənilsin"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Ayırmadan öncə parol istənilsin"</string>
-    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Ekranı açarkən cihazı kilidləyin"</string>
+    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bərkidilmə ləğv ediləndə cihaz kilidlənsin"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM\'in silinməsini təsdiq edin"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Endirilmiş SIM\'i silməzdən əvvəl kimliyinizi doğrulayın"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Bu iş profilini idarə edir:"</string>
@@ -4142,8 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"İcazə verilməyib"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"İcazə sorğusu göndərilməyib"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Tətbiqin datanıza girişinə nəzarət edin"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Məxfilik paneli"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Hansı tətbiqlərin bu yaxınlarda icazələri istifadə etdiyini göstərin"</string>
     <string name="unused_apps" msgid="4566272194756830656">"İstifadə olunmayan tətbiqlər"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -4776,7 +4773,7 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="8395903360175064841">"Həmişə aktiv VPN şəxsi profilinizdə yandırıldı"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="2496961514592522377">"Həmişə aktiv VPN iş profilinizdə yandırıldı"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="4350347418068037051">"Qlobal HTTP proksi ayarlandı"</string>
-    <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Etibarlı kredensiallar"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Güvənli kimlik bilgiləri"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Şəxsi profilinizdəki etibarlı kredensiallar"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"İş profilinizdəki etibarlı kredensiallar"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
@@ -5104,8 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Cihaz yenidən başladılsın?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Başlatmaq üçün cihazı yenidən başladın. Sonra başqa SIM əlavə edə bilərsiniz."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Davam edin"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"Bəli"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Yenidən başladın"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Xeyr, təşəkkür"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Keçin"</string>
@@ -5318,19 +5314,17 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Kontaktlara və zəng siyahısına girişə icazə verilsin?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth cihazı <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> kontaktlarınıza və zəng siyahınıza giriş etmək istəyir. Gələn və gedən zənglər barədə data buna daxildir.\n\nDaha öncə <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> cihazına qoşulmamısınız."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Parlaqlıq"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Kilid displeyi"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Görünüş"</string>
     <string name="category_name_color" msgid="937514550918977151">"Rəng"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Digər displey nizamlayıcıları"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Digərləri"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Ümumi"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Tünd tema istifadə edin"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth istifadə edin"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Zəng səsi söndürülsün"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi‑Fi hotspot funksiyasını istifadə edin"</string>
-    <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Tətbiq bərkidilməsini istifadə edin"</string>
+    <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Tətbiq bərkidilməsi"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Tərtibatçı seçimlərindən istifadə edin"</string>
     <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Standart çap xidmətini istifadə edin"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Bir neçə istifadəçidən istifadə edin"</string>

@@ -2432,7 +2432,7 @@
     <string name="color_cyan" msgid="4341758639597035927">"സിയാൻ"</string>
     <string name="color_yellow" msgid="5957551912912679058">"മഞ്ഞ"</string>
     <string name="color_magenta" msgid="8943538189219528423">"മജന്ത"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g>- എന്നതിന് നിങ്ങളുടെ ഉപകരണത്തിൻ്റെ പൂർണ്ണ നിയന്ത്രണം ലഭിക്കാൻ അനുവദിക്കണോ?"</string>
+    <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g> എന്നതിന് നിങ്ങളുടെ ഉപകരണത്തിൻ്റെ പൂർണ്ണ നിയന്ത്രണം ലഭിക്കാൻ അനുവദിക്കണോ?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> എന്നതിന് ഇവ ആവശ്യമാണ്:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"അനുമതി അഭ്യർത്ഥനയെ ഒരു അപ്ലിക്കേഷൻ മറയ്‌ക്കുന്നതിനാൽ, ക്രമീകരണത്തിന് നിങ്ങളുടെ പ്രതികരണം പരിശോധിച്ചുറപ്പിക്കാനാകില്ല."</string>
     <string name="enable_service_encryption_warning" msgid="931082737770453755">"<xliff:g id="SERVICE">%1$s</xliff:g> ഓണാക്കിയെങ്കിൽ, ഡാറ്റ എൻക്രിപ്‌ഷൻ മെച്ചപ്പെടുത്താനായി ഉപകരണം നിങ്ങളുടെ സ്‌ക്രീൻ ലോക്ക് ഉപയോഗിക്കില്ല."</string>
@@ -2804,10 +2804,8 @@
     <string name="tts_play" msgid="2945513377250757221">"പ്ലേ ചെയ്യുക"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"സുരക്ഷിതമല്ല"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> എണ്ണം സുരക്ഷിതമല്ല"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> എണ്ണം സുരക്ഷിതമല്ല"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"അഡാപ്റ്റീവ് കണക്റ്റിവിറ്റി"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"നിങ്ങളുടെ നെറ്റ്‌വർക്ക് കണക്ഷൻ സ്വയമേവ മാനേജ് ചെയ്യുന്നതിലൂടെ ബാറ്ററി ലൈഫ് വർദ്ധിപ്പിക്കുകയും ഉപകരണത്തിന്റെ പ്രകടനം മെച്ചപ്പെടുത്തുകയും ചെയ്യുന്നു"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ക്രെഡൻഷ്യൽ സ്റ്റോറേജ്"</string>
@@ -4142,8 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"അനുമതികളൊന്നും അനുവദിച്ചില്ല"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"അനുമതികളൊന്നും അഭ്യർത്ഥിച്ചില്ല"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"ഡാറ്റയിലേക്കുള്ള ആപ്പ് ആക്‌സസ് നിയന്ത്രിക്കുക"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"സ്വകാര്യതാ ഡാഷ്ബോർഡ്"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"ഏതെല്ലാം ആപ്പുകൾ അടുത്തിടെ അനുമതികൾ ഉപയോഗിച്ചുവെന്ന് കാണിക്കുക"</string>
     <string name="unused_apps" msgid="4566272194756830656">"ഉപയോഗിക്കാത്ത ആപ്പുകൾ"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5104,8 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"ഉപകരണം റീസ്‌റ്റാർട്ട് ചെയ്യണോ?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"ആരംഭിക്കാൻ, നിങ്ങളുടെ ഉപകരണം റീസ്‌റ്റാർട്ട് ചെയ്യുക. തുടർന്ന് നിങ്ങൾക്ക് മറ്റൊരു SIM ചേർക്കാം."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"തുടരുക"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"ഉവ്വ്"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"റീസ്‌റ്റാർട്ട് ചെയ്യുക"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"വേണ്ട"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"മാറുക"</string>
@@ -5318,12 +5314,10 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"കോൺടാക്‌റ്റുകളിലേക്കും കോൾ ചരിത്രത്തിലേക്കും ആക്‌സസ് അനുവദിക്കണോ?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth ഉപകരണമായ <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> എന്നതിന് നിങ്ങളുടെ കോൺടാക്‌റ്റുകളും കോൾ ചരിത്രവും ആക്‌സസ് ചെയ്യണം. ഇൻകമിംഗ്, ഔട്ട്‌ഗോയിംഗ് കോളുകളെക്കുറിച്ചുള്ള ഡാറ്റ ഇതിൽ ഉൾപ്പെടുന്നു.\n\n നിങ്ങൾ <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> എന്നതിലേക്ക് മുമ്പ് കണക്‌റ്റ് ചെയ്‌തിട്ടില്ല."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"തെളിച്ചം"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"ലോക്ക് ഡിസ്പ്ലേ"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"ദൃശ്യപരത"</string>
     <string name="category_name_color" msgid="937514550918977151">"നിറം"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"മറ്റ് ഡിസ്പ്ലേ നിയന്ത്രണങ്ങൾ"</string>
     <string name="category_name_others" msgid="2366006298768550310">"മറ്റുള്ളവ"</string>
     <string name="category_name_general" msgid="7737273712848115886">"പൊതുവായവ"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ഡാർക്ക് തീം ഉപയോഗിക്കുക"</string>
