@@ -57,6 +57,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     final BatteryHistoryLoaderCallbacks mBatteryHistoryLoaderCallbacks =
             new BatteryHistoryLoaderCallbacks();
 
+    private boolean mIsChartDataLoaded = false;
     private boolean mIsChartGraphEnabled = false;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
@@ -145,10 +146,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
         // Uses customized battery history loader if chart design is enabled.
-        if (mIsChartGraphEnabled) {
+        if (mIsChartGraphEnabled && !mIsChartDataLoaded) {
+            mIsChartDataLoaded = true;
             getLoaderManager().restartLoader(LOADER_BATTERY_USAGE_STATS, bundle,
-                    mBatteryHistoryLoaderCallbacks);
-        } else {
+                mBatteryHistoryLoaderCallbacks);
+        } else if (!mIsChartGraphEnabled) {
             super.restartBatteryStatsLoader(refreshType);
         }
     }
