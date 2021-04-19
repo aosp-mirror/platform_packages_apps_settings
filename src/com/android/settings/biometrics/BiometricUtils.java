@@ -30,6 +30,7 @@ import android.view.Surface;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -181,7 +182,7 @@ public class BiometricUtils {
      * @param hardwareAuthToken HardwareAuthToken from Gatekeeper
      * @param userId User to request enrollment for
      */
-    public static void launchEnrollForResult(@NonNull BiometricEnrollActivity activity,
+    public static void launchEnrollForResult(@NonNull FragmentActivity activity,
             @NonNull Intent intent, int requestCode,
             @Nullable byte[] hardwareAuthToken, @Nullable Long gkPwHandle, int userId) {
         if (hardwareAuthToken != null) {

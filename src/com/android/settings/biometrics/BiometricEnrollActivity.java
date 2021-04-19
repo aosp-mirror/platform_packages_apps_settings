@@ -33,7 +33,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 
@@ -45,10 +44,7 @@ import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
-import com.google.android.setupcompat.template.FooterBarMixin;
-import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
-import com.google.android.setupdesign.GlifLayout;
 
 import java.util.List;
 
@@ -78,9 +74,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
     private int mUserId = UserHandle.myUserId();
     private boolean mConfirmingCredentials;
+    private boolean mIsFaceEnrollable;
+    private boolean mIsFingerprintEnrollable;
     @Nullable private Long mGkPwHandle;
-    private BiometricEnrollCheckbox mCheckboxFace;
-    private BiometricEnrollCheckbox mCheckboxFingerprint;
     @Nullable private MultiBiometricEnrollHelper mMultiBiometricEnrollHelper;
 
     @Override
@@ -180,6 +176,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     mConfirmingCredentials = false;
                     if (resultCode == ChooseLockPattern.RESULT_FINISHED) {
                         mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
+                        startMultiBiometricEnroll();
                     } else {
                         Log.d(TAG, "Unknown result for chooseLock: " + resultCode);
                         setResult(resultCode);
@@ -190,6 +187,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     mConfirmingCredentials = false;
                     if (resultCode == RESULT_OK) {
                         mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
+                        startMultiBiometricEnroll();
                     } else {
                         Log.d(TAG, "Unknown result for confirmLock: " + resultCode);
                         finish();
@@ -226,14 +224,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     }
 
     private void setupForMultiBiometricEnroll() {
-        setContentView(R.layout.biometric_enroll_layout);
-
-        mCheckboxFace = findViewById(R.id.checkbox_face);
-        mCheckboxFingerprint = findViewById(R.id.checkbox_fingerprint);
-
-        mCheckboxFace.setListener(this::updateNextButton);
-        mCheckboxFingerprint.setListener(this::updateNextButton);
-
         final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
         final FaceManager faceManager = getSystemService(FaceManager.class);
         final List<FingerprintSensorPropertiesInternal> fpProperties =
@@ -242,39 +232,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 faceManager.getSensorPropertiesInternal();
 
         // This would need to be updated for devices with multiple sensors of the same modality
-        final boolean maxFacesEnrolled = faceManager.getEnrolledFaces(mUserId).size()
-                >= faceProperties.get(0).maxEnrollmentsPerUser;
-        final boolean maxFingerprintsEnrolled = fingerprintManager.getEnrolledFingerprints(mUserId)
-                .size() >= fpProperties.get(0).maxEnrollmentsPerUser;
-
-        if (maxFacesEnrolled) {
-            mCheckboxFace.setEnabled(false);
-            mCheckboxFace.setDescription(R.string.face_intro_error_max);
-        }
-
-        if (maxFingerprintsEnrolled) {
-            mCheckboxFingerprint.setEnabled(false);
-            mCheckboxFingerprint.setDescription(R.string.fingerprint_intro_error_max);
-        }
-
-        final FooterBarMixin footerBarMixin = ((GlifLayout) findViewById(R.id.setup_wizard_layout))
-                .getMixin(FooterBarMixin.class);
-        footerBarMixin.setSecondaryButton(new FooterButton.Builder(this)
-                .setText(R.string.multi_biometric_enroll_skip)
-                .setListener(this::onButtonNegative)
-                .setButtonType(FooterButton.ButtonType.SKIP)
-                .setTheme(R.style.SudGlifButton_Secondary)
-                .build());
-
-        footerBarMixin.setPrimaryButton(new FooterButton.Builder(this)
-                .setText(R.string.multi_biometric_enroll_next)
-                .setListener(this::onButtonPositive)
-                .setButtonType(FooterButton.ButtonType.NEXT)
-                .setTheme(R.style.SudGlifButton_Primary)
-                .build());
-
-        footerBarMixin.getSecondaryButton().setVisibility(View.VISIBLE);
-        footerBarMixin.getPrimaryButton().setVisibility(View.VISIBLE);
+        mIsFaceEnrollable = faceManager.getEnrolledFaces(mUserId).size()
+                < faceProperties.get(0).maxEnrollmentsPerUser;
+        mIsFingerprintEnrollable = fingerprintManager.getEnrolledFingerprints(mUserId).size()
+                < fpProperties.get(0).maxEnrollmentsPerUser;
 
         if (!mConfirmingCredentials && mGkPwHandle == null) {
             mConfirmingCredentials = true;
@@ -286,32 +247,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         }
     }
 
-    private void updateNextButton(View view) {
-        final boolean canEnrollAny = canEnrollFace() || canEnrollFingerprint();
-
-        final FooterBarMixin footerBarMixin = ((GlifLayout) findViewById(R.id.setup_wizard_layout))
-                .getMixin(FooterBarMixin.class);
-        footerBarMixin.getPrimaryButton().setEnabled(canEnrollAny);
-    }
-
-    private void onButtonPositive(View view) {
-        // Start the state machine according to checkboxes, taking max enrolled into account
+    private void startMultiBiometricEnroll() {
         mMultiBiometricEnrollHelper = new MultiBiometricEnrollHelper(this, mUserId,
-                canEnrollFace(), canEnrollFingerprint(), mGkPwHandle);
+                mIsFaceEnrollable, mIsFingerprintEnrollable, mGkPwHandle);
         mMultiBiometricEnrollHelper.startNextStep();
-    }
-
-    private void onButtonNegative(View view) {
-        setResult(RESULT_SKIP);
-        finish();
-    }
-
-    private boolean canEnrollFace() {
-        return mCheckboxFace.isEnabled() && mCheckboxFace.isChecked();
-    }
-
-    private boolean canEnrollFingerprint() {
-        return mCheckboxFingerprint.isEnabled() && mCheckboxFingerprint.isChecked();
     }
 
     private boolean userHasPassword(int userId) {
