@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -267,6 +268,17 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
+    public void testInitHeader_hasCorrectSummary() {
+        mFragment.mAppEntry = null;
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("0 min total • 0 min background for past 24 hr");
+    }
+
+    @Test
     public void testStartBatteryDetailPage_hasBasicData() {
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
                 mBatteryEntry, USAGE_PERCENT);
@@ -351,26 +363,6 @@ public class AdvancedPowerUsageDetailTest {
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment, PACKAGE_NAME[0]);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
-    }
-
-    @Test
-    public void testInitPreference_hasCorrectSummary() {
-        Bundle bundle = new Bundle(4);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, BACKGROUND_TIME_MS);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, FOREGROUND_TIME_MS);
-        bundle.putString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT, USAGE_PERCENT);
-        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, POWER_MAH);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
-                R.string.battery_used_for);
-        doReturn(mContext.getText(R.string.battery_active_for)).when(mFragment).getText(
-                R.string.battery_active_for);
-
-        mFragment.initPreference();
-
-        assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
-        assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
     }
 
     @Test
