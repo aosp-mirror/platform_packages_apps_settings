@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"화면을 보고 있는 동안 화면을 켜진 상태로 유지"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"카메라가 잠겨 있음"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"얼굴 인식을 위해 카메라를 잠금 해제해야 합니다."</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"화면 시선 감지를 위해 카메라를 잠금 해제해야 합니다."</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"얼굴 인식을 위해 카메라 액세스 권한이 필요합니다. 탭하여 기기 맞춤설정 서비스에 관한 권한을 관리하세요"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"권한 관리"</string>
     <string name="night_display_title" msgid="8532432776487216581">"야간 조명"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"SD 카드 지우기"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"내부 USB 저장소에 있는 모든 데이터(예: 음악 및 사진)를 지웁니다."</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"SD 카드에 있는 모든 데이터(예: 음악 및 사진) 지우기"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"캐시된 데이터를 지우시겠습니까?"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"모든 앱의 캐시된 데이터가 지워집니다."</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTP 또는 PTP 기능 사용 중"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"USB 저장소를 마운트 해제하시겠습니까?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"SD 카드를 마운트 해제하시겠습니까?"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"데이터 이전"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"저장 안함"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"설정"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"탐색"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"기기 여유 공간 확보"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"저장용량 관리"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"삭제, 저장용량"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"다른 사용자"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"기기 저장용량"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"휴대용 저장소"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="USED">%1$s</xliff:g> / <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"/ <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"<xliff:g id="TOTAL">%1$s</xliff:g> 중 총 사용"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g>이(가) 마운트되었습니다."</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"<xliff:g id="NAME">%1$s</xliff:g>을(를) 마운트하지 못했습니다."</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g>이(가) 안전하게 제거되었습니다."</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"저장소 이름 바꾸기"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"<xliff:g id="NAME_0">^1</xliff:g>이(가) 안전하게 제거되었지만 여전히 사용할 수 있습니다. \n\n<xliff:g id="NAME_1">^1</xliff:g>을(를) 사용하려면 먼저 마운트해야 합니다."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g>이(가) 손상되었습니다. \n\n<xliff:g id="NAME_1">^1</xliff:g>을(를) 사용하려면 먼저 설정해야 합니다."</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"기기가 <xliff:g id="NAME_0">^1</xliff:g>을(를) 지원하지 않습니다. \n\n이 기기에서 <xliff:g id="NAME_1">^1</xliff:g>을(를) 사용하려면 먼저 설정해야 합니다."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"포맷한 다음 <xliff:g id="NAME_0">^1</xliff:g>을(를) 다른 기기에서 사용할 수 있습니다. \n\n<xliff:g id="NAME_1">^1</xliff:g>에 있는 모든 데이터는 삭제됩니다. 먼저 백업하는 것이 좋습니다. \n\n"<b>"사진 및 기타 미디어 백업"</b>" \n미디어 파일을 이 기기에 있는 대체 저장소로 이동하거나 USB 케이블을 사용하여 컴퓨터로 전송합니다. \n\n"<b>"앱 백업"</b>" \n이 <xliff:g id="NAME_6">^1</xliff:g>에 저장된 모든 앱이 제거되고 데이터가 삭제됩니다. 앱을 계속 사용하려면 이 기기에 있는 대체 저장소로 이동합니다."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"<xliff:g id="NAME_0">^1</xliff:g>을(를) 제거하면 저장된 앱의 작동이 중단되며, 다시 삽입할 때까지 저장된 미디어 파일을 사용할 수 없습니다."</b>\n\n"<xliff:g id="NAME_1">^1</xliff:g>은(는) 이 기기에서만 작동하도록 형식이 지정되었으며 다른 기기에서는 작동하지 않습니다."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"<xliff:g id="NAME">^1</xliff:g>에 포함된 앱, 사진, 데이터를 사용하려면 다시 삽입하세요. \n\n또는 기기를 사용할 수 없는 경우 저장소를 저장하지 않을 수도 있습니다. \n\n저장하지 않으려는 경우 기기에 포함된 모든 데이터가 완전히 삭제됩니다. \n\n나중에 앱을 다시 설치할 수 있으나 기기에 저장된 데이터는 모두 사라집니다."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>을(를) 삭제하시겠습니까?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"<xliff:g id="NAME">^1</xliff:g>에 저장된 앱, 사진, 데이터가 모두 완전히 삭제됩니다."</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"앱"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"이미지"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"동영상"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"오디오"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"캐시된 데이터"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"기타"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"시스템"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"<xliff:g id="NAME">^1</xliff:g> 탐색"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"기타 포함되는 항목으로는 앱에서 저장한 공유 파일, 인터넷이나 블루투스에서 다운로드한 파일, Android 파일 등이 있습니다. \n\n<xliff:g id="NAME">^1</xliff:g>의 표시되는 콘텐츠를 보려면 탐색을 탭하세요."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"시스템에는 Android 버전 <xliff:g id="VERSION">%s</xliff:g> 실행에 사용되는 파일이 포함되어 있습니다."</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g>님이 사진, 음악, 앱, 기타 데이터를 저장했을 수도 있으며, 전체 저장용량의 <xliff:g id="SIZE">^2</xliff:g>을(를) 사용 중입니다. \n\n자세한 내용을 확인하려면 <xliff:g id="USER_1">^1</xliff:g>님으로 전환하세요."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> 설정"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"휴대용 저장소로 사용"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"사진과 기타 미디어를 기기 간에 이동하는 데 사용합니다."</string>
@@ -2521,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"백그라운드 활동을 제한하시겠습니까?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"앱의 백그라운드 활동을 제한하면 앱이 정상적으로 작동하지 않을 수도 있습니다."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"배터리 최적화를 설정하지 않아 이 앱을 제한할 수 없습니다.\n\n앱을 제한하려면 먼저 배터리 최적화를 사용 설정하세요."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"제한 없음"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"최적화"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"백그라운드에서 배터리 사용을 제한하지 않습니다. 배터리 사용량이 증가할 수 있습니다."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"사용량을 바탕으로 최적화합니다. 대부분의 앱에 권장됩니다."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"백그라운드에서 사용 시 배터리 사용을 제한합니다. 앱이 정상적으로 작동하지 않을 수 있습니다. 알림이 지연될 수도 있습니다."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"앱에서 배터리를 사용하는 방식을 변경하면 성능에 영향을 줄 수 있습니다."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"<xliff:g id="STATE">%1$s</xliff:g> 배터리 사용이 필요한 앱입니다."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"충전 완료 후 화면 사용 시간"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"충전 완료 후 배터리 사용량"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"충전 완료 후 화면이 켜진 시간"</string>
@@ -2730,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"배터리 사용량"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"충전 완료 후"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"배터리 사용량 관리"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"총 <xliff:g id="TIME_0">^1</xliff:g> • 지난 24시간 동안 백그라운드에서 <xliff:g id="TIME_1">^2</xliff:g> 사용"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"예상 잔여 배터리 소모 시간은 기기 사용량을 기반으로 표시됩니다."</string>
     <string name="estimated_time_left" msgid="948717045180211777">"남은 예상 시간"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"충전 완료까지 남은 시간"</string>
@@ -2828,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"재생"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"안전하지 않음"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g>개가 안전하지 않음"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"스마트 연결"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"네트워크 연결을 자동으로 관리하여 배터리 수명을 연장하고 기기 성능을 개선합니다."</string>
     <string name="credentials_title" msgid="7535942196886123656">"사용자 인증 정보 저장소"</string>
@@ -3785,16 +3764,13 @@
       <item quantity="other">%d개 앱이 알림을 읽을 수 있습니다.</item>
       <item quantity="one">%d개 앱이 알림을 읽을 수 있습니다.</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"개선된 알림 기능"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"추천 작업, 답장 등 받기"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"없음"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"설치된 앱 중에서 알림 액세스를 요청한 앱이 없습니다."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"알림 액세스 허용"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g>의 알림 액세스를 허용하시겠습니까?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"개선된 알림 기능은 연락처 이름과 메시지 등 개인 정보가 포함된 모든 알림 내용을 읽어줍니다. 알림을 닫거나 알림에 표시되는 버튼 관련 작업(예: 전화 받기)을 실행할 수도 있습니다. \n\n또한 이 기능으로 우선순위 모드가 사용 또는 사용 중지되고 관련 설정이 변경될 수 있습니다."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>의 알림 액세스를 허용하시겠습니까?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>에서 연락처 이름과 수신 메시지 텍스트 등의 개인정보를 포함한 모든 알림을 읽을 수 있게 됩니다. 또한 이 앱에서 알림을 닫거나, 전화 받기를 비롯하여 알림에 표시되는 버튼 관련 작업을 실행할 수 있습니다. \n\n앱에서 방해 금지 모드를 사용 설정 또는 사용 중지하고 관련 설정을 변경할 수도 있습니다."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>에서 알림 액세스를 사용 중지하면 방해 금지 모드 액세스도 사용 중지됩니다."</string>
@@ -4056,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"관리자 PIN 입력"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"사용"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"사용 안함"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"사용 설정"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"사용 중지"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"앱 고정"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"앱을 고정하여 고정 해제할 때까지 계속 화면에 표시되도록 할 수 있습니다. 예를 들어 신뢰할 수 있는 친구가 특정 게임을 하도록 허용할 때 이 기능을 사용해 보세요."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"고정된 앱을 통해 다른 앱이 열리고 개인 정보가 표시될 수 있습니다. \n\n앱 고정을 사용하려면 다음 단계를 따르세요. 	\n1.	앱 고정을 사용 설정합니다. 	\n2.	최근 사용을 엽니다. 	\n3.	화면 상단의 앱 아이콘을 탭한 후 고정을 탭합니다."</string>
@@ -4168,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"부여된 권한이 없습니다."</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"요청한 권한 없음"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"내 데이터에 대한 앱 액세스 권한 제어"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"권한 사용"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"최근에 권한을 사용한 앱 표시"</string>
     <string name="unused_apps" msgid="4566272194756830656">"사용하지 않는 앱"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5129,6 +5104,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"기기를 다시 시작하시겠습니까?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"시작하려면 기기를 다시 시작하세요. 그런 다음 다른 SIM을 추가할 수 있습니다."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"계속"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"다시 시작"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"사용 안함"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"전환"</string>
@@ -5334,21 +5311,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"취침 모드가 켜져 있으므로 사용할 수 없습니다."</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"알림 중요도가 재설정되었습니다."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"앱"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"기기에서 메시지에 액세스하려고 합니다. 탭하여 세부정보를 확인하세요."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"메시지 액세스를 허용하시겠습니까?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"블루투스 기기 <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>에서 메시지에 액세스하려고 합니다.\n\n전에는 <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>에 연결한 적이 없습니다."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"기기에서 연락처와 통화 기록에 액세스하려고 합니다. 탭하여 세부정보를 확인하세요."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"연락처와 통화 기록 액세스를 허용하시겠습니까?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"블루투스 기기 <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>에서 연락처와 통화 기록에 액세스하려고 합니다. 여기에는 수신 전화와 발신 전화에 관한 데이터도 포함됩니다.\n\n전에는 <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>에 연결한 적이 없습니다."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"밝기"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"잠금 화면"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"잠금 디스플레이"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"디자인"</string>
     <string name="category_name_color" msgid="937514550918977151">"색상"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"기타 디스플레이 제어"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"기타 디스플레이 제어"</string>
     <string name="category_name_others" msgid="2366006298768550310">"기타"</string>
     <string name="category_name_general" msgid="7737273712848115886">"일반"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"어두운 테마 사용"</string>
@@ -5387,6 +5360,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"클립보드 액세스 표시"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"앱이 복사된 텍스트, 이미지 또는 기타 콘텐츠에 액세스할 때 메시지를 표시합니다."</string>
     <string name="all_apps" msgid="3054120149509114789">"모든 앱"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"허용 안함"</string>
 </resources>

@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"เปิดหน้าจอค้างไว้เมื่อดูหน้าจออยู่"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"กล้องถ่ายรูปล็อกอยู่"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"ต้องปลดล็อกกล้องถ่ายรูปเพื่อใช้การตรวจจับใบหน้า"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"ต้องปลดล็อกกล้องถ่ายรูปเพื่อใช้ฟีเจอร์การจดจ่อที่หน้าจอ"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"ต้องมีสิทธิ์เข้าถึงกล้องสำหรับการตรวจจับใบหน้า แตะเพื่อจัดการสิทธิ์สำหรับบริการปรับอุปกรณ์ตามการใช้งานของผู้ใช้"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"จัดการสิทธิ์"</string>
     <string name="night_display_title" msgid="8532432776487216581">"แสงตอนกลางคืน"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"ลบการ์ด SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"ลบข้อมูลทั้งหมดบนที่เก็บข้อมูล USB ภายใน เช่น เพลงและรูปภาพ"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"ลบข้อมูลทั้งหมดบนการ์ด SD เช่น เพลงและรูปภาพ"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"ล้างข้อมูลในแคชหรือไม่"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"การทำงานนี้จะล้างข้อมูลในแคชของทุกแอปพลิเคชัน"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"เปิดใช้งานฟังก์ชัน MTP หรือ PTP อยู่"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"ถอดที่จัดเก็บ USB หรือไม่"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"ยกเลิกการต่อเชื่อมการ์ด SD หรือไม่"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"ย้ายข้อมูล"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"ไม่จำ"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"ตั้งค่า"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"สำรวจ"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"เพิ่มพื้นที่ว่าง"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"จัดการพื้นที่เก็บข้อมูล"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ล้าง, พื้นที่เก็บข้อมูล"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"ผู้ใช้รายอื่นๆ"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"ที่เก็บข้อมูลอุปกรณ์"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"ที่จัดเก็บข้อมูลแบบพกพา"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"ใช้ไป <xliff:g id="USED">%1$s</xliff:g> จากทั้งหมด <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"ใช้ไปจากทั้งหมด <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"ใช้ไปทั้งหมดจาก <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"ต่อเชื่อม<xliff:g id="NAME">%1$s</xliff:g>แล้ว"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"ไม่สามารถต่อเชื่อม<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"นำ<xliff:g id="NAME">%1$s</xliff:g>ออกได้อย่างปลอดภัยแล้ว"</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"เปลี่ยนชื่อที่เก็บข้อมูล"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"นำ <xliff:g id="NAME_0">^1</xliff:g> ออกอย่างปลอดภัยแล้ว แต่ยังคงพร้อมใช้งานอยู่ \n\nหากต้องการใช้ <xliff:g id="NAME_1">^1</xliff:g> นี้ คุณจะต้องต่อเชื่อมก่อน"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> นี้ได้รับความเสียหาย \n\nหากต้องการใช้ <xliff:g id="NAME_1">^1</xliff:g> นี้ คุณจะต้องตั้งค่าก่อน"</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"อุปกรณ์นี้ไม่สนับสนุน <xliff:g id="NAME_0">^1</xliff:g> นี้ \n\nหากต้องการใช้ <xliff:g id="NAME_1">^1</xliff:g> นี้กับอุปกรณ์นี้ คุณจะต้องตั้งค่าก่อน"</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"หลังจากการฟอร์แมต คุณสามารถใช้ <xliff:g id="NAME_0">^1</xliff:g> นี้ในอุปกรณ์อื่นๆ ได้ \n\nข้อมูลทั้งหมดใน <xliff:g id="NAME_1">^1</xliff:g> นี้จะถูกลบ ขอแนะนำให้คุณสำรองข้อมูลไว้ก่อน \n\n"<b>"สำรองข้อมูลรูปภาพและสื่ออื่นๆ"</b>" \nย้ายไฟล์สื่อของคุณไปยังที่จัดเก็บข้อมูลสำรองบนอุปกรณ์นี้ หรือโอนไปยังคอมพิวเตอร์ที่ใช้สาย USB \n\n"<b>"สำรองข้อมูลแอป"</b>" \nแอปทั้งหมดที่จัดเก็บบน <xliff:g id="NAME_6">^1</xliff:g> นี้จะถูกถอนการติดตั้งและข้อมูลของแอปจะถูกลบ หากต้องการเก็บแอปเหล่านี้ไว้ ให้ย้ายไปยังที่จัดเก็บข้อมูลสำรองบนอุปกรณ์นี้"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"เมื่อคุณนำ <xliff:g id="NAME_0">^1</xliff:g> นี้ออก แอปที่จัดเก็บไว้จะหยุดทำงาน และจะไม่พบไฟล์สื่อที่จัดเก็บไว้จนกว่าจะมีการใส่เข้าไปอีกครั้ง"</b>" \n\nโดย <xliff:g id="NAME_1">^1</xliff:g> นี้ได้รับการฟอร์แมตเพื่อให้ทำงานบนอุปกรณ์นี้เท่านั้น และจะไม่ทำงานบนอุปกรณ์อื่น"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"หากต้องการใช้แอป รูปภาพ หรือข้อมูลที่มีใน <xliff:g id="NAME">^1</xliff:g> ให้เสียบอุปกรณ์อีกครั้ง \n\nหรือคุณสามารถเลือกไม่จำที่เก็บข้อมูลนี้หากอุปกรณ์ไม่พร้อมใช้งาน \n\nหากคุณเลือกไม่จำ ข้อมูลทั้งหมดที่มีในอุปกรณ์จะสูญหายตลอดไป \n\nคุณสามารถติดตั้งแอปอีกครั้งในภายหลัง แต่ข้อมูลที่จัดเก็บไว้ในอุปกรณ์นี้จะสูญหาย"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"ไม่จำ <xliff:g id="NAME">^1</xliff:g> ใช่ไหม"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"แอป รูปภาพ และข้อมูลทั้งหมดที่เก็บไว้ใน <xliff:g id="NAME">^1</xliff:g> นี้จะหายไปอย่างถาวร"</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"แอป"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"รูปภาพ"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"วิดีโอ"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"เสียง"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"ข้อมูลในแคช"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"อื่นๆ"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"ระบบ"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"สำรวจ <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"ไฟล์อื่นๆ ได้แก่ ไฟล์ที่แชร์ซึ่งแอปบันทึกไว้ ไฟล์ที่ดาวน์โหลดจากอินเทอร์เน็ตหรือบลูทูธ ไฟล์ Android และอื่นๆ \n\nหากต้องการดูเนื้อหาที่มองเห็นได้ของ <xliff:g id="NAME">^1</xliff:g> นี้ ให้แตะ \"สำรวจ\""</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"ระบบรวมไฟล์สำหรับเรียกใช้ Android เวอร์ชัน <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g> อาจมีการบันทึกรูปภาพ เพลง แอป หรือข้อมูลอื่นๆ โดยใช้พื้นที่เก็บข้อมูลไป <xliff:g id="SIZE">^2</xliff:g> \n\nหากต้องการดูรายละเอียด ให้สลับไปที่ <xliff:g id="USER_1">^1</xliff:g>"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"ตั้งค่า <xliff:g id="NAME">^1</xliff:g> ของคุณ"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"ใช้เป็นที่จัดเก็บข้อมูลแบบพกพา"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"สำหรับการย้ายรูปภาพและสื่ออื่นๆ ระหว่างอุปกรณ์"</string>
@@ -2521,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"จำกัดกิจกรรมในพื้นหลังใช่ไหม"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"แอปอาจทำงานผิดพลาดหากคุณจำกัดกิจกรรมในพื้นหลัง"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"เนื่องจากแอปนี้ไม่ได้ตั้งค่าให้เพิ่มประสิทธิภาพแบตเตอรี่ คุณจึงจำกัดการใช้งานไม่ได้\n\nหากต้องการจำกัด ให้เปิดการเพิ่มประสิทธิภาพแบตเตอรี่ก่อน"</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"อย่างไม่จำกัด"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"ที่เพิ่มประสิทธิภาพแล้ว"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"อนุญาตให้ใช้งานแบตเตอรี่ในเบื้องหลังโดยไม่มีข้อจำกัด อาจมีการใช้แบตเตอรี่มากขึ้น"</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"เพิ่มประสิทธิภาพตามการใช้งานของคุณ แนะนำสำหรับแอปส่วนใหญ่"</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"จำกัดการใช้งานแบตเตอรี่ขณะอยู่เบื้องหลัง แอปอาจไม่ทำงานตามที่คาดไว้ การแจ้งเตือนอาจมีความล่าช้า"</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"การเปลี่ยนวิธีที่แอปใช้แบตเตอรี่อาจส่งผลต่อประสิทธิภาพของแอป"</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"แอปนี้ต้องใช้แบตเตอรี่<xliff:g id="STATE">%1$s</xliff:g>"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"การใช้งานหน้าจอตั้งแต่ชาร์จจนเต็ม"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"การใช้งานแบตเตอรี่ตั้งแต่ชาร์จเต็ม"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"ระยะเวลาที่หน้าจอเปิดตั้งแต่ชาร์จจนเต็ม"</string>
@@ -2730,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"การใช้งานแบตเตอรี่"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"ตั้งแต่ชาร์จจนเต็ม"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"จัดการการใช้งานแบตเตอรี่"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"รวม <xliff:g id="TIME_0">^1</xliff:g> • ใช้ในเบื้องหลัง <xliff:g id="TIME_1">^2</xliff:g> ในช่วง 24 ชม. ที่ผ่านมา"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ค่าประมาณแบตเตอรี่ที่เหลืออิงตามการใช้งานอุปกรณ์ของคุณ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"เวลาที่เหลือโดยประมาณ"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"จนกว่าจะชาร์จเต็ม"</string>
@@ -2828,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"เล่น"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"ไม่ปลอดภัย"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"ไม่ปลอดภัย <xliff:g id="VPN_COUNT">%d</xliff:g> รายการ"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"การเชื่อมต่อแบบปรับอัตโนมัติ"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"เพิ่มอายุการใช้งานแบตเตอรี่และปรับปรุงประสิทธิภาพของอุปกรณ์ด้วยการจัดการการเชื่อมต่อเครือข่ายโดยอัตโนมัติ"</string>
     <string name="credentials_title" msgid="7535942196886123656">"ที่เก็บข้อมูลเข้าสู่ระบบ"</string>
@@ -3785,16 +3764,13 @@
       <item quantity="other">%d แอปสามารถอ่านการแจ้งเตือนได้</item>
       <item quantity="one">%d แอปสามารถอ่านการแจ้งเตือนได้</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"การแจ้งเตือนที่เพิ่มประสิทธิภาพ"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"รับการดําเนินการ การตอบ และอื่นๆ ที่แนะนํา"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"ไม่มี"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"ไม่มีแอปใดที่ติดตั้งไว้ขอเข้าถึงการแจ้งเตือน"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"อนุญาตให้เข้าถึงการแจ้งเตือน"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"การแจ้งเตือนที่เพิ่มประสิทธิภาพจะอ่านเนื้อหาการแจ้งเตือนทั้งหมดได้ รวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความ ฟีเจอร์นี้ยังปิดการแจ้งเตือนหรือดำเนินการกับปุ่มต่างๆ ในการแจ้งเตือนได้ด้วย เช่น การรับสายเรียกเข้า \n\nรวมถึงสามารถเปิดหรือปิดโหมดลำดับความสำคัญสูงและเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้อง"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> จะอ่านการแจ้งเตือนทั้งหมดได้ รวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความที่คุณได้รับ นอกจากนี้ยังปิดการแจ้งเตือนหรือดำเนินการกับปุ่มต่างๆ ในการแจ้งเตือนได้ด้วย เช่น การรับสายเรียกเข้า \n\nการเปิดใช้ยังทำให้แอปนี้เปิดหรือปิดฟีเจอร์ห้ามรบกวนและเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"หากคุณปิดการเข้าถึงการแจ้งเตือนสำหรับ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> การเข้าถึง \"ห้ามรบกวน\" อาจปิดไปด้วย"</string>
@@ -4056,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"ป้อน PIN ผู้ดูแลระบบ"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"เปิด"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"ปิด"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"เปิด"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"ปิด"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"การปักหมุดแอป"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"การปักหมุดแอปจะทำให้คุณเห็นแอปปัจจุบันได้ตลอดจนกว่าจะเลิกปักหมุด ตัวอย่างการใช้ฟีเจอร์นี้ เช่น อนุญาตให้เพื่อนที่เชื่อถือได้เล่นเกมหนึ่งๆ"</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"เมื่อปักหมุดแอป แอปที่ปักหมุดอาจเปิดแอปอื่นๆ และอาจมีการเข้าถึงข้อมูลส่วนตัว \n\nวิธีใช้การปักหมุดแอป 	\n1.	เปิดการปักหมุดแอป 	\n2.	เปิด \"ภาพรวม\" 	\n3.	แตะไอคอนแอปที่ด้านบนหน้าจอ จากนั้นแตะ \"ปักหมุด\""</string>
@@ -4168,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"ไม่มีการมอบสิทธิ์"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"ไม่มีการขอสิทธิ์"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"ควมคุมสิทธิ์ของแอปในการเข้าถึงข้อมูล"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"การใช้สิทธิ์"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"แสดงแอปที่ใช้สิทธิ์ล่าสุด"</string>
     <string name="unused_apps" msgid="4566272194756830656">"แอปที่ไม่ได้ใช้"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5129,6 +5104,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"รีสตาร์ทอุปกรณ์ไหม"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"รีสตาร์ทอุปกรณ์เพื่อเริ่มต้นใช้งาน จากนั้นคุณจะเพิ่มซิมได้"</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"ดำเนินการต่อ"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"รีสตาร์ท"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"ไม่เป็นไร"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"เปลี่ยน"</string>
@@ -5334,21 +5311,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"ใช้ไม่ได้เนื่องจากโหมดเวลาเข้านอนเปิดอยู่"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"รีเซ็ตความสำคัญในการแจ้งเตือนแล้ว"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"แอป"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"อุปกรณ์หนึ่งต้องการเข้าถึงข้อความของคุณ แตะเพื่อดูรายละเอียด"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"อนุญาตให้เข้าถึงข้อความไหม"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"อุปกรณ์บลูทูธ <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ต้องการเข้าถึงข้อความของคุณ\n\nคุณไม่เคยเชื่อมต่อกับ <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> มาก่อน"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"อุปกรณ์หนึ่งต้องการเข้าถึงรายชื่อติดต่อและบันทึกการโทร แตะเพื่อดูรายละเอียด"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"อนุญาตให้เข้าถึงรายชื่อติดต่อและบันทึกการโทรไหม"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"อุปกรณ์บลูทูธ <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ต้องการเข้าถึงรายชื่อติดต่อและบันทึกการโทร ซึ่งรวมถึงข้อมูลเกี่ยวกับสายเรียกเข้าและโทรออก\n\nคุณไม่เคยเชื่อมต่อกับ <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> มาก่อน"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"ความสว่าง"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"หน้าจอล็อก"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"หน้าจอล็อก"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"ลักษณะที่ปรากฏ"</string>
     <string name="category_name_color" msgid="937514550918977151">"สี"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"การควบคุมการแสดงผลอื่นๆ"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"การควบคุมการแสดงผลอื่นๆ"</string>
     <string name="category_name_others" msgid="2366006298768550310">"อื่นๆ"</string>
     <string name="category_name_general" msgid="7737273712848115886">"ทั่วไป"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ใช้ธีมมืด"</string>
@@ -5387,6 +5360,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"แสดงการเข้าถึงคลิปบอร์ด"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"แสดงข้อความเมื่อแอปเข้าถึงข้อความ รูปภาพ หรือเนื้อหาอื่นๆ ที่คุณคัดลอก"</string>
     <string name="all_apps" msgid="3054120149509114789">"แอปทั้งหมด"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"ไม่อนุญาต"</string>
 </resources>

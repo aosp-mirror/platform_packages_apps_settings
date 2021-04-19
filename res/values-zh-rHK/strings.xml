@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"看著螢幕時讓螢幕保持開啟"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"「相機」已鎖定"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"必須解鎖相機才能使用「臉孔偵測」功能"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"必須解鎖相機才能使用「保持螢幕亮起」功能"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"「臉孔偵測」功能需存取相機才可使用。輕按即可管理「裝置個人化服務」權限"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"管理權限"</string>
     <string name="night_display_title" msgid="8532432776487216581">"夜燈模式"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"清除 SD 記憶卡資料"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"清除內部 USB 儲存裝置中的所有資料，例如音樂和相片"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"清除 SD 記憶卡中的所有資料，例如音樂和相片"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"清除快取資料？"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"這會清除所有應用程式的快取資料。"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTP 或 PTP 功能已啟用"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"卸載 USB 儲存裝置？"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"您要卸載 SD 記憶卡嗎？"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"轉移資料"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"忘記"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"設定"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"探索"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"釋放空間"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"管理儲存空間"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"清除, 儲存空間"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"其他使用者"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"儲存裝置"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"外置儲存空間"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"已使用 <xliff:g id="USED">%1$s</xliff:g> (共 <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"(共 <xliff:g id="TOTAL">%1$s</xliff:g>)"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"<xliff:g id="TOTAL">%1$s</xliff:g> 總共已使用"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"已連接 <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"無法連接 <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"已安全移除 <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"重新命名儲存裝置"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"已安全卸載此 <xliff:g id="NAME_0">^1</xliff:g>，但仍可使用。\n\n如要使用此 <xliff:g id="NAME_1">^1</xliff:g>，您必須先將它連接。"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"此 <xliff:g id="NAME_0">^1</xliff:g> 已受損。\n\n如要使用此 <xliff:g id="NAME_1">^1</xliff:g>，您必須先完成設定。"</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"這部裝置不支援此 <xliff:g id="NAME_0">^1</xliff:g>。 \n\n如要在這部裝置使用此 <xliff:g id="NAME_1">^1</xliff:g> ，您必須先完成設定。"</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"格式化後，您可在其他裝置使用此<xliff:g id="NAME_0">^1</xliff:g>。\n\n<xliff:g id="NAME_1">^1</xliff:g>的所有資料將被刪除，請先備份。\n\n"<b>"備份相片和其他媒體"</b>" \n將您的媒體檔案移至這部裝罝的其他儲存空間，或使用 USB 連接線轉移至電腦。\n\n"<b>"備份應用程式"</b>" \n儲存於此<xliff:g id="NAME_6">^1</xliff:g>的所有應用程式將解除安裝，其中資料也將被刪除。如要保留這些應用程式，您可以將其移至裝置的其他儲存空間。"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"當你移除此<xliff:g id="NAME_0">^1</xliff:g>時，已儲存的應用程式將停止運作，而媒體檔案在再次插入裝置前將不能播放。"</b>" \n\n此<xliff:g id="NAME_1">^1</xliff:g>經格式化後只能用於這部裝置。其他裝置將不能存取。"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"如需使用儲存在<xliff:g id="NAME">^1</xliff:g>內的應用程式、相片或資料，請重新插入。\n\n如果無法使用裝置，可選擇忘記此儲存空間。\n\n如果您選擇忘記儲存空間，裝置上的所有資料將被永久刪除。\n\n您可以稍後重新安裝應用程式，但儲存在此裝置的相關資料將被刪除。"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"要忘記 <xliff:g id="NAME">^1</xliff:g> 嗎？"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"儲存在此 <xliff:g id="NAME">^1</xliff:g> 上的所有應用程式、相片和資料將被永久刪除。"</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"應用程式"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"圖片"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"影片"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"音效"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"快取資料"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"其他"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"系統"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"探索 <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"其他檔案包括應用程式儲存的共用檔案、透過互聯網或藍牙下載的檔案以及Android 檔案等。\n\n如要查看此 <xliff:g id="NAME">^1</xliff:g> 顯示的內容，請輕按 [探索]。"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"「系統」包含用來執行 Android <xliff:g id="VERSION">%s</xliff:g> 版本的檔案"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g>可能已使用 <xliff:g id="SIZE">^2</xliff:g> 儲存空間儲存相片、音樂、應用程式或其他資料。\n\n如要查看詳情，請切換至 <xliff:g id="USER_1">^1</xliff:g>。"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"設定您的<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"作為可攜式儲存裝置使用"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"在裝置之間移動相片和其他媒體。"</string>
@@ -2446,7 +2430,7 @@
     <string name="color_red" msgid="5210756997426500693">"紅色"</string>
     <string name="color_green" msgid="4400462091250882271">"綠色"</string>
     <string name="color_blue" msgid="4997784644979140261">"藍色"</string>
-    <string name="color_cyan" msgid="4341758639597035927">"洋青色"</string>
+    <string name="color_cyan" msgid="4341758639597035927">"藍綠色"</string>
     <string name="color_yellow" msgid="5957551912912679058">"黃色"</string>
     <string name="color_magenta" msgid="8943538189219528423">"洋紅色"</string>
     <string name="enable_service_title" msgid="7231533866953706788">"要允許 <xliff:g id="SERVICE">%1$s</xliff:g> 完全控制您的裝置嗎？"</string>
@@ -2522,20 +2506,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"要限制背景活動嗎？"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"如果您限制應用程式的背景活動，應用程式可能無法正常運作"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"由於此應用程式並未設定為優化電池，您無法限制其使用。\n\n如要限制應用程式，請先開啟電池優化功能。"</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"無限制"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"已優化"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"不限制應用程式在背景執行時的電池用量。如果選擇此設定，應用程式可能會比較耗電。"</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"根據您的使用情況進行優化。適用於大部分應用程式。"</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"限制應用程式在背景執行時的電池用量。應用程式可能無法正常運作，通知可能會延遲。"</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"變更應用程式的電池使用方式可能會影響應用程式效能。"</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"此應用程式的電池用量應設定為「<xliff:g id="STATE">%1$s</xliff:g>」模式。"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"充滿電後的螢幕使用時間"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"完全充電後的電池用量"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"充滿電後的螢幕開啟時間"</string>
@@ -2731,8 +2708,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"電池用量"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"上次充滿電後"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理電池用量"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"總共使用 <xliff:g id="TIME_0">^1</xliff:g>• 過去 24 小時的背景使用時間為 <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"根據裝置的使用情況估計剩餘電量"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"估計剩餘時間"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"剩餘充電時間"</string>
@@ -2829,7 +2805,10 @@
     <string name="tts_play" msgid="2945513377250757221">"播放"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"不安全"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"有 <xliff:g id="VPN_COUNT">%d</xliff:g> 個 VPN 不安全"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"自動調節連線"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"自動管理網路連線，藉此延長電池壽命並提升裝置效能"</string>
     <string name="credentials_title" msgid="7535942196886123656">"憑證儲存空間"</string>
@@ -3786,16 +3765,13 @@
       <item quantity="other">%d 個應用程式可讀取通知</item>
       <item quantity="one">%d 個應用程式可讀取通知</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"強化通知"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"收到建議操作和回覆等內容"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"無"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"沒有已安裝的應用程式要求通知存取權。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"允許存取通知"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"強化通知功能可讀取所有通知內容 (包括聯絡人姓名和訊息等個人資料)，以及關閉通知或針對通知中的按鈕採取行動，例如接聽來電。\n\n此功能亦可開啟或關閉「優先」模式及變更相關設定。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"授權 <xliff:g id="SERVICE">%1$s</xliff:g> 存取通知 ？"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名和您收到的訊息內容等個人資料)，以及關閉通知或針對通知中的按鈕採取行動，包括接聽來電。\n\n此外，該應用程式還能開啟或關閉「請勿騷擾」模式及變更相關設定。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您關閉「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「請勿騷擾」的存取權亦可能會關閉。"</string>
@@ -4057,10 +4033,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"輸入管理員 PIN 碼"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"開啟"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"關閉"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"已開啟"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"已關閉"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"應用程式固定"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"應用程式固定功能可讓目前使用的應用程式持續在畫面上顯示，直到您取消固定為止。此功能可讓信任的朋友玩特定遊戲。"</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n使用應用程式固定功能的步驟如下：	\n1.	開啟應用程式固定功能	\n2.	開啟 [概覽]	\n3.	輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
@@ -4169,7 +4143,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"沒有授予權限"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"沒有要求權限"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"控制應用程式資料存取權"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"權限使用情況"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"顯示最近曾使用權限的應用程式"</string>
     <string name="unused_apps" msgid="4566272194756830656">"未使用的應用程式"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5065,7 +5040,7 @@
     <string name="subscription_available" msgid="2659722770210403365">"可用"</string>
     <string name="mobile_network_in_range" msgid="3528320750936028369">"位於覆蓋範圍內"</string>
     <string name="mobile_network_not_in_range" msgid="5680896182395366584">"不在覆蓋範圍內"</string>
-    <string name="mobile_network_list_add_more" msgid="4478586073355236604">"新增更多"</string>
+    <string name="mobile_network_list_add_more" msgid="4478586073355236604">"加入更多"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"已啟用/SIM 卡"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"已停用/SIM 卡"</string>
     <string name="mobile_network_active_esim" msgid="4673190244386572318">"已啟用/已下載的 SIM 卡"</string>
@@ -5130,6 +5105,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"要重新啟動裝置嗎？"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"如要開始使用，請重新啟動您的裝置。然後您就可以新增其他 SIM 卡。"</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"繼續"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"重新開始"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"不用了，謝謝"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"切換"</string>
@@ -5335,21 +5312,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"睡眠模式開啟時無法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重設完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"應用程式"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"有裝置想存取您的訊息。輕按即可瞭解詳情。"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"要允許存取訊息嗎？"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想存取您的訊息。\n\n請注意，您從未連接「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"有裝置要求存取您的聯絡人資料和通話記錄。輕按即可瞭解詳情。"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允許存取聯絡人和通話記錄嗎？"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想存取您的聯絡人資料和通話記錄，包括來電和撥出電話的資料。\n\n您從未連接「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」。"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"光暗度"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"鎖定顯示屏"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"鎖定顯示屏"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"外觀"</string>
     <string name="category_name_color" msgid="937514550918977151">"顏色"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"其他顯示控制項"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"其他顯示控制項"</string>
     <string name="category_name_others" msgid="2366006298768550310">"其他"</string>
     <string name="category_name_general" msgid="7737273712848115886">"一般"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"使用深色主題背景"</string>
@@ -5388,6 +5361,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"顯示剪貼簿存取通知"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"系統會在應用程式存取您複製的文字、圖片或其他內容時顯示訊息"</string>
     <string name="all_apps" msgid="3054120149509114789">"所有應用程式"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"不允許"</string>
 </resources>

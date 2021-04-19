@@ -1270,7 +1270,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"显示屏白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流畅画面"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自动将某些内容的刷新频率从 60 Hz 调高到 90 Hz。这么做会增加耗电量。"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自动将某些内容的刷新频率从 60 Hz 调高到 90 Hz。耗电量会因此增加。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"强制使用 90 Hz 刷新频率"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"使用最高刷新频率可提升按触操作响应和动画质量，但会增加耗电量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"屏幕感知"</string>
@@ -1285,8 +1285,7 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"直视屏幕时让屏幕保持开启"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"相机已锁定"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"必须解锁相机才能使用人脸检测功能"</string>
-    <!-- no translation found for adaptive_sleep_camera_lock_summary (8417541183603618098) -->
-    <skip />
+    <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"必须解锁相机才能使用屏幕感知功能"</string>
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"人脸检测功能需要获得相机使用权限。点按即可管理“设备个性化服务”的权限"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"管理权限"</string>
     <string name="night_display_title" msgid="8532432776487216581">"护眼模式"</string>
@@ -1496,8 +1495,6 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"格式化SD卡"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"清除内部USB存储设备中的全部数据，例如音乐和照片"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"清除SD卡中的全部数据，例如音乐和照片"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"是否清除缓存数据？"</string>
-    <string name="memory_clear_cache_message" msgid="4759561226480906588">"此操作会清除所有应用的缓存数据。"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"已开启MTP或PTP功能"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"要卸载USB存储设备吗？"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"要卸载SD卡吗？"</string>
@@ -1522,7 +1519,6 @@
     <string name="storage_menu_migrate" msgid="2196088149560070193">"迁移数据"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"取消保存"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"设置"</string>
-    <string name="storage_menu_explore" msgid="3048031115521594488">"浏览"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"释放空间"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"管理存储空间"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"清理, 存储空间"</string>
@@ -1539,10 +1535,8 @@
     <string name="storage_other_users" msgid="7017206190449510992">"其他用户"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"内部存储设备"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"便携式存储设备"</string>
-    <string name="storage_volume_summary" msgid="7087627975196777994">"已使用 <xliff:g id="USED">%1$s</xliff:g>（共 <xliff:g id="TOTAL">%2$s</xliff:g>）"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"（共 <xliff:g id="TOTAL">%1$s</xliff:g>）"</string>
-    <string name="storage_volume_used_total" msgid="283558499413754323">"共使用 <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g>已装载"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"无法装载<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g>已安全弹出"</string>
@@ -1552,23 +1546,13 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"重命名存储设备"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"此<xliff:g id="NAME_0">^1</xliff:g>已安全弹出，但仍在卡槽内。\n\n要使用此<xliff:g id="NAME_1">^1</xliff:g>，您必须先对其进行装载。"</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"此<xliff:g id="NAME_0">^1</xliff:g>已损坏。\n\n要使用此<xliff:g id="NAME_1">^1</xliff:g>，您必须先对其进行设置。"</string>
-    <string name="storage_dialog_unsupported" msgid="7787241928013470089">"此设备不支持该<xliff:g id="NAME_0">^1</xliff:g>。\n\n要在此设备上使用此<xliff:g id="NAME_1">^1</xliff:g>，您必须先对其进行设置。"</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"格式化之后，您就可以在其他设备上使用此<xliff:g id="NAME_0">^1</xliff:g>了。\n\n此<xliff:g id="NAME_1">^1</xliff:g>上的所有数据都将被清空，建议您先将数据备份。\n\n"<b>"备份照片和其他媒体文件"</b>\n"将您的媒体文件移动到此设备上的备用存储设备，或使用 USB 线传输到计算机上。\n\n"<b>"备份应用"</b>\n"存储在此<xliff:g id="NAME_6">^1</xliff:g>上的所有应用都将被卸载，且这些应用的数据也将一并被清空。要保留这些应用，请将它们移到此设备上的备用存储设备。"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"当您弹出此<xliff:g id="NAME_0">^1</xliff:g>后，存储在其中的应用将会停止运行，而且存储在其中的媒体文件也将无法使用，除非您重新插入设备。"</b>\n\n"此<xliff:g id="NAME_1">^1</xliff:g>已经过格式化，只能在这台设备上使用，因此在任何其他设备上均将无法使用。"</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"要使用此<xliff:g id="NAME">^1</xliff:g>中包含的应用、照片或数据，请将其重新插入。\n\n另外，如果该存储设备无法使用，您可以选择取消保存此设备。\n\n如果您选择取消保存，那么该设备中包含的所有数据均将永久丢失。\n\n尽管您以后可以重新安装这些应用，但存储在此设备上的这些应用数据将会丢失。"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"要取消保存<xliff:g id="NAME">^1</xliff:g>吗？"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"此<xliff:g id="NAME">^1</xliff:g>上存储的所有应用、照片和数据将会永久丢失。"</string>
-    <string name="storage_detail_apps" msgid="5055911985540355324">"应用"</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"图片"</string>
-    <string name="storage_detail_videos" msgid="9079894412680404208">"视频"</string>
-    <string name="storage_detail_audio" msgid="234272983148223114">"音频"</string>
-    <string name="storage_detail_cached" msgid="4066364341463331199">"缓存数据"</string>
-    <string name="storage_detail_other" msgid="3821329310612285961">"其他"</string>
-    <string name="storage_detail_system" msgid="3797439069473271732">"系统"</string>
-    <string name="storage_detail_explore" msgid="13782374784415466">"浏览<xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="3359851869961609901">"“其他”包括应用所保存的共享文件、通过互联网或蓝牙下载的文件、Android 文件等。\n\n要查看此<xliff:g id="NAME">^1</xliff:g>中的可见内容，请点按“浏览”。"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"“系统”中包含用于运行 Android <xliff:g id="VERSION">%s</xliff:g> 的文件"</string>
-    <string name="storage_detail_dialog_user" msgid="1691219071007313226">"<xliff:g id="USER_0">^1</xliff:g>可能保存了照片、音乐、应用或其他数据（占用了 <xliff:g id="SIZE">^2</xliff:g> 的存储空间）。\n\n要查看详情，请切换至<xliff:g id="USER_1">^1</xliff:g>。"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"设置您的<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"用作便携式存储设备"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"用于在设备之间移动照片和其他媒体文件。"</string>
@@ -1684,7 +1668,7 @@
     <string name="reset_network_desc" msgid="1112523764899788246">"此操作会重置所有网络设置，包括：\n\n"<li>"WLAN"</li>\n<li>"移动数据网络"</li>\n<li>"蓝牙"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"清除"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"清除已下载的 SIM 卡"</string>
-    <string name="reset_esim_desc" msgid="3662444090563399131">"此操作并不会取消任何移动服务套餐。如要下载备用 SIM 卡，请与您的运营商联系。"</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"此操作并不会取消任何移动服务套餐。如要下载替代 SIM 卡，请与您的运营商联系。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"重置设置"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"要重置所有网络设置吗？此操作无法撤消。"</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"要重置所有网络设置并清除已下载的 SIM 卡吗？此操作无法撤消。"</string>
@@ -2207,7 +2191,7 @@
     <string name="usage_time_label" msgid="9105343335151559883">"使用时间"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"无障碍"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"无障碍设置"</string>
-    <string name="accessibility_settings_summary" msgid="2195085206729325737">"屏幕阅读器、显示、互动控件"</string>
+    <string name="accessibility_settings_summary" msgid="2195085206729325737">"屏幕阅读器、显示、互动控制"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"阅读辅助设置"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"您可以根据自己的需求对此设备进行自定义。以后，您可以在“设置”中更改这些辅助功能设置。"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"更改字体大小"</string>
@@ -2218,7 +2202,7 @@
     <string name="display_category_title" msgid="6638191682294461408">"显示"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"文字和显示"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"调暗屏幕"</string>
-    <string name="interaction_control_category_title" msgid="2696474616743882372">"互动控件"</string>
+    <string name="interaction_control_category_title" msgid="2696474616743882372">"互动控制"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"点按协助"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"系统控件"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下载的应用"</string>
@@ -2240,7 +2224,7 @@
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"在整个屏幕和局部屏幕之间切换"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"点按切换按钮即可在两个选项之间切换"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"要改用“无障碍”按钮吗？"</string>
-    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"通过点按三次来放大屏幕上的部分内容会导致输入延迟和其他延迟。\n\n“无障碍”按钮会悬浮在屏幕上，位于其他应用前方。点按该按钮即可放大。"</string>
+    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"通过点按三次来放大屏幕上的部分内容会导致输入延迟和其他延迟。\n\n“无障碍”按钮会悬浮在屏幕上，位于其他应用上方。点按该按钮即可放大。"</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"改用“无障碍”按钮"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"使用“点按三次”"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"放大设置"</string>
@@ -2521,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"要限制后台活动吗？"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"如果您限制某个应用的后台活动，可能会导致该应用出现异常"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"由于此应用未设置为优化电池用量，因此您无法对其加以限制。\n\n要限制该应用，请先开启电池优化功能。"</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"无限制"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"优化"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"不限制应用在后台运行时的电池用量。如果选择此设置，应用可能会比较耗电。"</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"根据您的使用情况进行优化。这是适用于大多数应用的建议设置。"</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"限制应用在后台运行时的电池用量。应用可能无法正常运行。通知可能会延迟。"</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"更改应用的电池使用方式可能会影响应用性能。"</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"此应用的电池用量应设为“<xliff:g id="STATE">%1$s</xliff:g>”模式。"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"上次充满电后的屏幕使用时间"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"充满电后的电池用量"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"充满电后的屏幕使用时间"</string>
@@ -2730,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"电池用量"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"自充满电后"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理电池用量"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"总共使用 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用 <xliff:g id="TIME_1">^2</xliff:g>（过去 24 小时）"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"系统会根据设备使用情况估算电池的剩余续航时间"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"预计剩余时间"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"剩余充电时间"</string>
@@ -2828,7 +2804,10 @@
     <string name="tts_play" msgid="2945513377250757221">"播放"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"不安全"</string>
-    <string name="vpn_settings_insecure_multiple" msgid="2459334768715250678">"<xliff:g id="VPN_COUNT">%d</xliff:g> 个 VPN 不安全"</string>
+    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
+    <skip />
+    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
+    <skip />
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"自适应网络连接"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"自动管理您的网络连接，从而延长电池续航时间并提升设备性能"</string>
     <string name="credentials_title" msgid="7535942196886123656">"凭据存储"</string>
@@ -3785,16 +3764,13 @@
       <item quantity="other">%d 个应用可以读取通知</item>
       <item quantity="one">%d 个应用可以读取通知</item>
     </plurals>
-    <!-- no translation found for notification_assistant_title (5889201903272393099) -->
-    <skip />
-    <!-- no translation found for notification_assistant_summary (1957783114840908887) -->
-    <skip />
+    <string name="notification_assistant_title" msgid="5889201903272393099">"增强型通知"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"接收建议的操作、回复等内容"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"无"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"没有任何已安装的应用请求通知访问权限。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"授予通知使用权"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (6127380535875810710) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"增强型通知功能可以读取所有通知内容，包括联系人姓名和消息等个人信息。该功能也能关闭通知或触发通知中的按钮，例如接听来电。\n\n此外，该功能还能开启或关闭“优先”模式，以及更改相关设置。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>将可读取所有通知（包括联系人姓名和您收到的消息内容等个人信息），而且还能关闭通知或触发通知中的按钮（包括接听来电）。\n\n此外，该应用将因此能够开启或关闭“勿扰”模式并更改相关设置。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知访问权限，勿扰模式的访问权限可能也会遭到停用。"</string>
@@ -3974,7 +3950,7 @@
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"仅限来自重复来电者"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"无"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"无"</string>
-    <string name="zen_mode_alarms" msgid="5989343060100771099">"闹钟"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"闹钟/警报"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"来自定时器、闹钟、安防系统和其他应用"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"闹钟"</string>
     <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"闹钟"</string>
@@ -4056,10 +4032,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"输入管理员 PIN 码"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"开启"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"关闭"</string>
-    <!-- no translation found for screen_pinning_switch_on_text (6971386830247542552) -->
-    <skip />
-    <!-- no translation found for screen_pinning_switch_off_text (5032105155623003875) -->
-    <skip />
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"开启"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"关闭"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"固定应用"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。"</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"固定某个应用后，该应用可打开其他应用，也能访问个人数据。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能	\n2.	打开“概览”	\n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
@@ -4168,7 +4142,8 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"未授予任何权限"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"未请求任何权限"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"控制哪些应用可访问您的数据"</string>
-    <string name="permissions_usage_title" msgid="7928450120500019282">"权限使用情况"</string>
+    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
+    <skip />
     <string name="permissions_usage_summary" msgid="6784310472062516454">"显示最近使用过权限的应用"</string>
     <string name="unused_apps" msgid="4566272194756830656">"未使用的应用"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5129,6 +5104,8 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"要重启设备吗？"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"如要开始使用，请重启您的设备。重启后即可添加其他 SIM 卡。"</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"继续"</string>
+    <!-- no translation found for sim_action_yes (8076556020131395515) -->
+    <skip />
     <string name="sim_action_reboot" msgid="3508948833333441538">"重启"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"不用了"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"切换"</string>
@@ -5151,15 +5128,15 @@
     <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"未知号码"</string>
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"要使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"系统将通过<xliff:g id="CARRIER_NAME">%1$s</xliff:g>使用移动数据、通话和短信功能。"</string>
-    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"没有可用的已激活 SIM 卡"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"没有可用的 SIM 卡"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"如要在日后使用移动数据、通话和短信功能，请转到“网络设置”部分"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM 卡"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"要清除这个已下载的 SIM 卡吗？"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"清空此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"清除此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清除"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"正在清空 SIM 卡…"</string>
     <string name="erase_sim_fail_title" msgid="2024446702985862427">"无法清空 SIM 卡"</string>
-    <string name="erase_sim_fail_text" msgid="7870804401227483131">"发生错误，因此无法清空此 SIM 卡。\n\n请重启设备，然后重试。"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"发生错误，因此无法清除此 SIM 卡。\n\n请重启设备，然后重试。"</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"连接到设备"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"“<xliff:g id="APPNAME">%1$s</xliff:g>”应用要使用临时 WLAN 网络连接到您的设备"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"找不到设备。请确保设备已开启并可连接到网络。"</string>
@@ -5334,21 +5311,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寝模式开启时无法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重置完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"应用"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"有设备想要访问您的消息。点按可了解详情。"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"要允许访问消息吗？"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"蓝牙设备“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想要访问您的消息。\n\n您之前没有连接过“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"有设备想要访问您的通讯录和通话记录。点按可了解详情。"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允许访问通讯录和通话记录吗？"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"蓝牙设备“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想要访问您的通讯录和通话记录，包括有关来电和去电的数据。\n\n您之前没有连接过“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”。"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"亮度"</string>
-    <string name="category_name_lock_display" msgid="7478785189102882266">"锁定显示屏"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"锁定显示屏"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"外观"</string>
     <string name="category_name_color" msgid="937514550918977151">"颜色"</string>
-    <string name="category_name_display_controls" msgid="5103078208031129614">"其他显示控件"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"其他显示控件"</string>
     <string name="category_name_others" msgid="2366006298768550310">"其他"</string>
     <string name="category_name_general" msgid="7737273712848115886">"常规"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"使用深色主题"</string>
@@ -5387,6 +5360,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"显示剪贴板访问通知"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"系统会在应用访问您复制的文字、图片或其他内容时显示一条消息"</string>
     <string name="all_apps" msgid="3054120149509114789">"所有应用"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"不允许"</string>
 </resources>
