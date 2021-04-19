@@ -53,7 +53,7 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Omogućava da tekst na ekranu bude manji ili veći."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Umanji"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Uvećaj"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Koristite automatsko rotiranje"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Koristi automatsko rotiranje"</string>
     <string name="smart_rotate_text_headline" msgid="4775952278533715352">"Prepoznavanje lica koristi prednju kameru za poboljšanje preciznosti automatskog rotiranja. Slike se nikada ne čuvaju niti šalju Google-u.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Saznajte više&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Primer teksta"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čarobnjak iz Oza"</string>
@@ -1078,9 +1078,9 @@
       <item quantity="other">%d prijava</item>
     </plurals>
     <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="one">%d mreža i prijava</item>
-      <item quantity="few">%d mreže i prijave</item>
-      <item quantity="other">%d mreža i prijava</item>
+      <item quantity="one">%d mreža i pretplata</item>
+      <item quantity="few">%d mreže i pretplate</item>
+      <item quantity="other">%d mreža i pretplata</item>
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="1234150304285575798">"Napredna WiFi podešavanja"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
@@ -1375,7 +1375,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Da biste kontrolisali šta se dešava kada je telefon na baznoj stanici i/ili u stanju spavanja, uključite čuvar ekrana."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kada da počne"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Trenutni čuvar ekrana"</string>
-    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Započni odmah"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Počni odmah"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Podešavanja"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Automatski nivo osvetljenosti"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Podigni za aktivaciju"</string>
@@ -2842,10 +2842,8 @@
     <string name="tts_play" msgid="2945513377250757221">"Pusti"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Nebezbedno"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"Nebezbednih: <xliff:g id="VPN_COUNT">%d</xliff:g>"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"Nebezbednih: <xliff:g id="VPN_COUNT">%d</xliff:g>"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Prilagodljivo povezivanje"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Produžuje trajanje baterije i poboljšava učinak uređaja tako što automatski upravlja mrežnim vezama"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Skladište akreditiva"</string>
@@ -3821,8 +3819,8 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Želite li da dozvolite da <xliff:g id="SERVICE">%1$s</xliff:g> ima pristup obaveštenjima?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"Poboljšana obaveštenja mogu da čitaju sadržaj svih obaveštenja, uključujući lične podatke, poput imena kontakata i poruka. Ova funkcija može i da odbacuje obaveštenja ili aktivira dugmad u obaveštenjima, poput javljanja na telefonske pozive. \n\nOva funkcija može i da uključi ili isključi Prioritetni režim i da menja povezana podešavanja."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Želite li da omogućite pristup obaveštenjima za <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> će moći da čita sva obaveštenja, uključujući lične podatke, poput imena kontakata i teksta poruka koje primate. Ova aplikacija će moći i da odbacuje obaveštenja ili aktivira dugmad u obaveštenjeima, uključujući javljanje na telefonske pozive. \n\nOvo će aplikaciji omogućiti i da uključuje ili isključuje režim Ne uznemiravaj i menja srodna podešavanja."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ako isključite pristup obaveštenjima za korisnika <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, isključićete i pristup režimu Ne uznemiravaj."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> će moći da čita sva obaveštenja, uključujući lične podatke, poput imena kontakata i teksta poruka koje primate. Ova aplikacija će moći i da odbacuje obaveštenja ili aktivira dugmad u obaveštenjima, uključujući javljanje na telefonske pozive. \n\nOvo će aplikaciji omogućiti i da uključuje ili isključuje režim Ne uznemiravaj i menja srodna podešavanja."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ako isključite pristup obaveštenjima za <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, isključićete i pristup režimu Ne uznemiravaj."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Isključi"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Otkaži"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"Dozvoljeni tipovi obaveštenja"</string>
@@ -4204,8 +4202,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nijedna dozvola nije odobrena"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nijedna dozvola nije zahtevana"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontroliše pristup aplikacija podacima"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Kontrolna tabla za privatnost"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Prikazuje koje aplikacije su nedavno koristile dozvole"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Aplikacije koje se ne koriste"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -4266,7 +4263,7 @@
     <string name="default_app" msgid="445053777504688596">"(podrazumevano)"</string>
     <string name="system_app" msgid="1863291702508355041">"(Sistemska)"</string>
     <string name="system_default_app" msgid="2647834628622214931">"(Podrazumevana sistemska)"</string>
-    <string name="apps_storage" msgid="643866814746927111">"Memorija za aplikacije"</string>
+    <string name="apps_storage" msgid="643866814746927111">"Memorija aplikacija"</string>
     <string name="usage_access" msgid="5487993885373893282">"Pristup korišćenju"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"Dozvoli pristup korišćenju"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"Podešavanja korišćenja aplikacija"</string>
@@ -4924,7 +4921,7 @@
     <string name="storage_size_large_alternate" msgid="7555149858858591495">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">^2</xliff:g>"</font></small>""</string>
     <string name="storage_volume_total" msgid="7102720999351050601">"Iskorišćeno od ukupno <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"u upot."</string>
-    <string name="storage_usage_summary" msgid="4591121727356723463">"Iskorišćeno: <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
+    <string name="storage_usage_summary" msgid="4591121727356723463">"U upotrebi: <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
     <string name="storage_total_summary" msgid="6640850560211304573">"Ukupno <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"Obriši aplikaciju"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Želite li da uklonite ovu instant aplikaciju?"</string>
@@ -5191,8 +5188,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Želite li da restartujete uređaj?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Da biste započeli, restartujte uređaj. Zatim možete da dodate još jednu SIM karticu."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Nastavi"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"Da"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Restartuj"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Ne, hvala"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Pređi"</string>

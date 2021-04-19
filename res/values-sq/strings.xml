@@ -2510,7 +2510,7 @@
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Lejo përdorimin e baterisë në sfond pa kufizime. Mund të përdoret më shumë bateri."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimizoje bazuar në përdorimin tënd. Rekomandohet për shumicën e aplikacioneve."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Kufizo përdorimin e baterisë në sfond. Aplikacioni mund të mos funksionojë siç pritet. Njoftimet mund të vonohen."</string>
-    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Ndryshimi i mënyrës se si e përdor baterinë një aplikacion mund të ketë ndikim te cilësia e saj e funksionimit."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Ndryshimi i mënyrës se si e përdor baterinë një aplikacion mund të ketë ndikim te rendimenti i saj."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Ky aplikacion kërkon përdorimin e baterisë: <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Përdorimi i ekranit që nga karikimi i plotë"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Përdorimi i baterisë që prej karikimit të plotë"</string>
@@ -2804,10 +2804,8 @@
     <string name="tts_play" msgid="2945513377250757221">"Luaj"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Jo i sigurt"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> jo i sigurt"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> jo i sigurt"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Lidhshmëria me përshtatje"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Rrit kohëzgjatjen e baterisë dhe përmirëson cilësinë e funksionimit të pajisjes duke menaxhuar automatikisht lidhjet e rrjetit"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Ruajtja e kredencialeve"</string>
@@ -4142,8 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nuk është dhënë leje"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nuk është kërkuar leje"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontrollo qasjen e apl. te të dhënat e tua"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Paneli i privatësisë"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Trego se cilat aplikacione i kanë përdorur së fundi lejet"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Aplikacionet e papërdorura"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5104,8 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Të riniset pajisja?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Për të filluar, rinise pajisjen tënde. Më pas mund të shtosh një kartë tjetër SIM."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Vazhdo"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"Po"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Rinis"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Jo, faleminderit"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Ndërro"</string>
@@ -5318,12 +5314,10 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Të lejohet qasja te kontaktet dhe evidenca e telefonatave?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Një pajisje me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Kjo përfshin të dhënat në lidhje me telefonatat hyrëse dhe dalëse.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Ndriçimi"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Ekrani i kyçjes"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Paraqitja"</string>
     <string name="category_name_color" msgid="937514550918977151">"Ngjyra"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Kontrolle të tjera të ekranit"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Të tjera"</string>
     <string name="category_name_general" msgid="7737273712848115886">"E përgjithshme"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Përdor \"Temën e errët\""</string>
