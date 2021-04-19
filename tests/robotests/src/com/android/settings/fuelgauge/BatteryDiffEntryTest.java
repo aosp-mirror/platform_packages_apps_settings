@@ -30,6 +30,8 @@ import android.os.SystemBatteryConsumer;
 import android.os.UserManager;
 import android.os.UserHandle;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,6 +120,7 @@ public final class BatteryDiffEntryTest {
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
 
         assertThat(entry.getAppLabel()).isEqualTo("Ambient display");
+        assertThat(entry.getAppIconId()).isEqualTo(R.drawable.ic_settings_aod);
         assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
     }
 
@@ -134,6 +137,7 @@ public final class BatteryDiffEntryTest {
 
         assertThat(entry.getAppLabel()).isEqualTo("Removed user");
         assertThat(entry.getAppIcon()).isNull();
+        assertThat(entry.getAppIconId()).isEqualTo(0);
         assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
     }
 
@@ -154,6 +158,7 @@ public final class BatteryDiffEntryTest {
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
 
         assertThat(entry.getAppLabel()).isEqualTo(expectedAppLabel);
+        assertThat(entry.getAppIconId()).isEqualTo(0);
         assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
