@@ -113,6 +113,16 @@ public class BatteryHistEntry {
         return mIsValidEntry;
     }
 
+    /** Whether this {@link BatteryHistEntry} is user consumer or not. */
+    public boolean isUserEntry() {
+        return mConsumerType == ConvertUtils.CONSUMER_TYPE_USER_BATTERY;
+    }
+
+    /** Whether this {@link BatteryHistEntry} is app consumer or not. */
+    public boolean isAppEntry() {
+        return mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
+    }
+
     /** Gets an identifier to represent this {@link BatteryHistEntry}. */
     public String getKey() {
         if (mKey == null) {

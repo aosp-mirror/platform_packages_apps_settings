@@ -58,6 +58,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     Map<Integer, List<BatteryDiffEntry>> mBatteryIndexedMap;
 
     @VisibleForTesting Context mPrefContext;
+    @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting PreferenceGroup mAppListPrefGroup;
     @VisibleForTesting BatteryChartView mBatteryChartView;
 
@@ -98,6 +99,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         mHandler.removeCallbacksAndMessages(/*token=*/ null);
         mPreferenceCache.clear();
+        if (mAppListPrefGroup != null) {
+            mAppListPrefGroup.removeAll();
+        }
     }
 
     @Override
@@ -120,6 +124,28 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!(preference instanceof PowerGaugePreference)) {
+            return false;
+        }
+        final PowerGaugePreference powerPref = (PowerGaugePreference) preference;
+        final BatteryDiffEntry diffEntry = powerPref.getBatteryDiffEntry();
+        final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
+        // Checks whether the package is installed or not.
+        boolean isValidPackage = true;
+        if (histEntry.isAppEntry()) {
+            if (mBatteryUtils == null) {
+                mBatteryUtils = BatteryUtils.getInstance(mPrefContext);
+            }
+            isValidPackage = mBatteryUtils.getPackageUid(histEntry.mPackageName)
+                != BatteryUtils.UID_NULL;
+        }
+        Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b",
+            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage));
+        if (isValidPackage) {
+            AdvancedPowerUsageDetail.startBatteryDetailPage(
+                mActivity, mFragment, diffEntry, powerPref.getPercent());
+            return true;
+        }
         return false;
     }
 
@@ -273,6 +299,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             pref.setTitle(appLabel);
             pref.setOrder(prefIndex);
             pref.setPercent(entry.getPercentOfTotal());
+            // Sets the BatteryDiffEntry to preference for launching detailed page.
+            pref.setBatteryDiffEntry(entry);
             mAppListPrefGroup.addPreference(pref);
             prefIndex++;
         }
