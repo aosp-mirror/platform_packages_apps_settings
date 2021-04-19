@@ -26,6 +26,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.UsageProgressBarPreference;
@@ -101,24 +102,29 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
             if (mUsageProgressBarPreference == null) {
                 return;
             }
-            ThreadUtils.postOnMainThread(() ->
-                    updateState(mUsageProgressBarPreference)
-            );
+            ThreadUtils.postOnMainThread(() -> updateState(mUsageProgressBarPreference));
         });
     }
 
     @Override
     public void updateState(Preference preference) {
+        final Formatter.BytesResult usedResult = getBytesResult(mUsedBytes);
         mUsageProgressBarPreference.setUsageSummary(
-                getStorageSummary(R.string.storage_usage_summary, mUsedBytes));
+                mContext.getString(R.string.storage_usage_summary,
+                usedResult.value, usedResult.units));
+
+        final String percentageString = mTotalBytes == 0L
+                ? Utils.formatPercentage(0)
+                : Utils.formatPercentage((mUsedBytes * 100) / mTotalBytes, true /* round */);
+        final Formatter.BytesResult totalResult = getBytesResult(mTotalBytes);
         mUsageProgressBarPreference.setTotalSummary(
-                getStorageSummary(R.string.storage_total_summary, mTotalBytes));
+                mContext.getString(R.string.storage_total_summary, percentageString,
+                totalResult.value, totalResult.units));
+
         mUsageProgressBarPreference.setPercent(mUsedBytes, mTotalBytes);
     }
 
-    private String getStorageSummary(int resId, long bytes) {
-        final Formatter.BytesResult result = Formatter.formatBytes(mContext.getResources(),
-                bytes, 0);
-        return mContext.getString(resId, result.value, result.units);
+    private Formatter.BytesResult getBytesResult(long bytes) {
+        return Formatter.formatBytes(mContext.getResources(), bytes, Formatter.FLAG_SHORTER);
     }
 }
