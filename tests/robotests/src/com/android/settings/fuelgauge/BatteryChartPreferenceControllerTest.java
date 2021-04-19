@@ -63,6 +63,7 @@ public final class BatteryChartPreferenceControllerTest {
     @Mock private BatteryHistEntry mBatteryHistEntry;
     @Mock private BatteryChartView mBatteryChartView;
     @Mock private PowerGaugePreference mPowerGaugePreference;
+    @Mock private BatteryUtils mBatteryUtils;
 
     private Context mContext;
     private BatteryDiffEntry mBatteryDiffEntry;
@@ -125,6 +126,12 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.onDestroy();
         // Verifies the result after onDestroy.
         assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
+    }
+
+    @Test
+    public void testOnDestroy_removeAllPreferenceFromPreferenceGroup() {
+        mBatteryChartPreferenceController.onDestroy();
+        verify(mAppListGroup).removeAll();
     }
 
     @Test
@@ -266,6 +273,34 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(pref.getTitle()).isEqualTo(appLabel);
         assertThat(pref.getIcon()).isEqualTo(mDrawable);
         assertThat(pref.getOrder()).isEqualTo(1);
+        assertThat(pref.getBatteryDiffEntry()).isSameInstanceAs(mBatteryDiffEntry);
+    }
+
+    @Test
+    public void testHandlePreferenceTreeClick_notPowerGaugePreference_returnFalse() {
+        assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(mAppListGroup))
+            .isFalse();
+    }
+
+    @Test
+    public void testHandlePreferenceTreeClick_validPackageName_returnTrue() {
+        doReturn(false).when(mBatteryHistEntry).isAppEntry();
+        doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
+
+        assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
+            mPowerGaugePreference)).isTrue();
+    }
+
+    @Test
+    public void testHandlePreferenceTreeClick_appEntryWithInvalidPackage_returnFalse() {
+        mBatteryChartPreferenceController.mBatteryUtils = mBatteryUtils;
+        doReturn(true).when(mBatteryHistEntry).isAppEntry();
+        doReturn(BatteryUtils.UID_NULL).when(mBatteryUtils)
+            .getPackageUid(mBatteryHistEntry.mPackageName);
+        doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
+
+        assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
+            mPowerGaugePreference)).isFalse();
     }
 
     private Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {

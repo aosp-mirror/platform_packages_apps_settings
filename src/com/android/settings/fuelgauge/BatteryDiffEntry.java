@@ -57,6 +57,7 @@ public class BatteryDiffEntry {
     private UserManager mUserManager;
     private String mDefaultPackageName = null;
 
+    @VisibleForTesting int mAppIconId;
     @VisibleForTesting String mAppLabel = null;
     @VisibleForTesting Drawable mAppIcon = null;
     @VisibleForTesting boolean mIsLoaded = false;
@@ -112,9 +113,16 @@ public class BatteryDiffEntry {
         return mAppIcon;
     }
 
+    /** Gets the app icon id for this entry. */
+    public int getAppIconId() {
+        loadLabelAndIcon();
+        return mAppIconId;
+    }
+
     /** Gets the searching package name for UID battery type. */
     public String getPackageName() {
-        return mDefaultPackageName;
+        return mDefaultPackageName != null
+            ? mDefaultPackageName : mBatteryHistEntry.mPackageName;
     }
 
     /** Whether the current BatteryDiffEntry is system component or not. */
@@ -153,6 +161,7 @@ public class BatteryDiffEntry {
                 if (nameAndIconForSystem != null) {
                     mAppLabel = nameAndIconForSystem.name;
                     if (nameAndIconForSystem.iconId != 0) {
+                        mAppIconId = nameAndIconForSystem.iconId;
                         mAppIcon = mContext.getDrawable(nameAndIconForSystem.iconId);
                     }
                 }
@@ -225,8 +234,8 @@ public class BatteryDiffEntry {
         // Clears BatteryEntry internal cache since we will have another one.
         BatteryEntry.clearUidCache();
         if (nameAndIcon != null) {
-            mAppLabel = getNonNull(mAppLabel, nameAndIcon.name);
-            mAppIcon = getNonNull(mAppIcon, nameAndIcon.icon);
+            mAppLabel = nameAndIcon.name;
+            mAppIcon = nameAndIcon.icon;
             mDefaultPackageName = nameAndIcon.packageName;
             if (mDefaultPackageName != null
                     && !mDefaultPackageName.equals(nameAndIcon.packageName)) {
@@ -264,9 +273,5 @@ public class BatteryDiffEntry {
     private static boolean isSystemUid(int uid) {
         final int appUid = UserHandle.getAppId(uid);
         return appUid >= Process.SYSTEM_UID && appUid < Process.FIRST_APPLICATION_UID;
-    }
-
-    private static <T> T getNonNull(T originalObj, T newObj) {
-        return newObj != null ? newObj : originalObj;
     }
 }
