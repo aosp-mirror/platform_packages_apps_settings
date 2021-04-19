@@ -26,7 +26,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.UsageProgressBarPreference;
@@ -108,23 +107,16 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
 
     @Override
     public void updateState(Preference preference) {
-        final Formatter.BytesResult usedResult = getBytesResult(mUsedBytes);
         mUsageProgressBarPreference.setUsageSummary(
-                mContext.getString(R.string.storage_usage_summary,
-                usedResult.value, usedResult.units));
-
-        final String percentageString = mTotalBytes == 0L
-                ? Utils.formatPercentage(0)
-                : Utils.formatPercentage((mUsedBytes * 100) / mTotalBytes, true /* round */);
-        final Formatter.BytesResult totalResult = getBytesResult(mTotalBytes);
+                getStorageSummary(R.string.storage_usage_summary, mUsedBytes));
         mUsageProgressBarPreference.setTotalSummary(
-                mContext.getString(R.string.storage_total_summary, percentageString,
-                totalResult.value, totalResult.units));
-
+                getStorageSummary(R.string.storage_total_summary, mTotalBytes));
         mUsageProgressBarPreference.setPercent(mUsedBytes, mTotalBytes);
     }
 
-    private Formatter.BytesResult getBytesResult(long bytes) {
-        return Formatter.formatBytes(mContext.getResources(), bytes, Formatter.FLAG_SHORTER);
+    private String getStorageSummary(int resId, long bytes) {
+        final Formatter.BytesResult result = Formatter.formatBytes(mContext.getResources(),
+                bytes, Formatter.FLAG_SHORTER);
+        return mContext.getString(resId, result.value, result.units);
     }
 }
