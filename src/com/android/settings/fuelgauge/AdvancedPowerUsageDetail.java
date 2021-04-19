@@ -116,37 +116,82 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     private String mPackageName;
 
-    /**
-     * Launches battery details page for an individual battery consumer.
-     */
+    // A wrapper class to carry LaunchBatteryDetailPage required arguments.
+    private static final class LaunchBatteryDetailPageArgs {
+        private String mUsagePercent;
+        private String mPackageName;
+        private String mAppLabel;
+        private int mUid;
+        private int mIconId;
+        private int mConsumedPower;
+        private long mForegroundTimeMs;
+        private long mBackgroundTimeMs;
+        private boolean mIsUserEntry;
+    }
+
+    /** Launches battery details page for an individual battery consumer. */
+    public static void startBatteryDetailPage(
+            Activity caller, InstrumentedPreferenceFragment fragment,
+            BatteryDiffEntry diffEntry, String usagePercent) {
+        final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
+        final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
+        // configure the launch argument.
+        launchArgs.mUsagePercent = usagePercent;
+        launchArgs.mPackageName = diffEntry.getPackageName();
+        launchArgs.mAppLabel = diffEntry.getAppLabel();
+        launchArgs.mUid = (int) histEntry.mUid;
+        launchArgs.mIconId = diffEntry.getAppIconId();
+        launchArgs.mConsumedPower = (int) diffEntry.mConsumePower;
+        launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
+        launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
+        launchArgs.mIsUserEntry = histEntry.isUserEntry();
+        startBatteryDetailPage(caller, fragment, launchArgs);
+    }
+
+    /** Launches battery details page for an individual battery consumer. */
     public static void startBatteryDetailPage(Activity caller,
             InstrumentedPreferenceFragment fragment, BatteryEntry entry, String usagePercent) {
+        final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
+        // configure the launch argument.
+        launchArgs.mUsagePercent = usagePercent;
+        launchArgs.mPackageName = entry.getDefaultPackageName();
+        launchArgs.mAppLabel = entry.getLabel();
+        launchArgs.mUid = entry.getUid();
+        launchArgs.mIconId = entry.iconId;
+        launchArgs.mConsumedPower = (int) entry.getConsumedPower();
+        launchArgs.mForegroundTimeMs = entry.getTimeInForegroundMs();
+        launchArgs.mBackgroundTimeMs = entry.getTimeInBackgroundMs();
+        launchArgs.mIsUserEntry = entry.isUserEntry();
+        startBatteryDetailPage(caller, fragment, launchArgs);
+    }
+
+    private static void startBatteryDetailPage(Activity caller,
+            InstrumentedPreferenceFragment fragment, LaunchBatteryDetailPageArgs launchArgs) {
         final Bundle args = new Bundle();
-        final long foregroundTimeMs = entry.getTimeInForegroundMs();
-        final long backgroundTimeMs = entry.getTimeInBackgroundMs();
-        final String packageName = entry.getDefaultPackageName();
-        if (packageName == null) {
+        if (launchArgs.mPackageName == null) {
             // populate data for system app
-            args.putString(EXTRA_LABEL, entry.getLabel());
-            args.putInt(EXTRA_ICON_ID, entry.iconId);
+            args.putString(EXTRA_LABEL, launchArgs.mAppLabel);
+            args.putInt(EXTRA_ICON_ID, launchArgs.mIconId);
             args.putString(EXTRA_PACKAGE_NAME, null);
         } else {
             // populate data for normal app
-            args.putString(EXTRA_PACKAGE_NAME, packageName);
+            args.putString(EXTRA_PACKAGE_NAME, launchArgs.mPackageName);
         }
 
-        args.putInt(EXTRA_UID, entry.getUid());
-        args.putLong(EXTRA_BACKGROUND_TIME, backgroundTimeMs);
-        args.putLong(EXTRA_FOREGROUND_TIME, foregroundTimeMs);
-        args.putString(EXTRA_POWER_USAGE_PERCENT, usagePercent);
-        args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) entry.getConsumedPower());
+        args.putInt(EXTRA_UID, launchArgs.mUid);
+        args.putLong(EXTRA_BACKGROUND_TIME, launchArgs.mBackgroundTimeMs);
+        args.putLong(EXTRA_FOREGROUND_TIME, launchArgs.mForegroundTimeMs);
+        args.putString(EXTRA_POWER_USAGE_PERCENT, launchArgs.mUsagePercent);
+        args.putInt(EXTRA_POWER_USAGE_AMOUNT, launchArgs.mConsumedPower);
+        final int userId = launchArgs.mIsUserEntry ? ActivityManager.getCurrentUser()
+            : UserHandle.getUserId(launchArgs.mUid);
 
         new SubSettingLauncher(caller)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
-                .setUserHandle(new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(entry)))
+                .setUserHandle(new UserHandle(userId))
                 .launch();
     }
 

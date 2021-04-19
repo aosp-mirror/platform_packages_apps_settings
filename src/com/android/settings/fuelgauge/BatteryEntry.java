@@ -113,10 +113,9 @@ public class BatteryEntry {
                         be.mContext, be.getUid(), sHandler, be,
                         be.mDefaultPackageName, be.name, be.icon);
                 if (nameAndIcon != null) {
-                    be.icon = getNonNull(be.icon, nameAndIcon.icon);
-                    be.name = getNonNull(be.name, nameAndIcon.name);
-                    be.mDefaultPackageName = getNonNull(
-                        be.mDefaultPackageName, nameAndIcon.packageName);
+                    be.icon = nameAndIcon.icon;
+                    be.name = nameAndIcon.name;
+                    be.mDefaultPackageName = nameAndIcon.packageName;
                 }
             }
         }
@@ -588,9 +587,5 @@ public class BatteryEntry {
                 break;
         }
         return new NameAndIcon(name, null /* icon */, iconId);
-    }
-
-    private static <T> T getNonNull(T originalObj, T newObj) {
-        return newObj != null ? newObj : originalObj;
     }
 }
