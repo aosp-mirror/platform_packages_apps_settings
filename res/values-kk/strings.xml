@@ -947,11 +947,11 @@
     <string name="passpoint_content" msgid="5219226173518418335">"<xliff:g id="NAME">%1$s</xliff:g> тіркелгі деректері"</string>
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP әдісі"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Аутентификацияның 2-сатысы"</string>
-    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Растама мекемесінің сертификаты"</string>
+    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA сертификаты"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Онлайн сертификат күйі"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Домен"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Пайдаланушы сертификаты"</string>
-    <string name="wifi_eap_identity" msgid="3629406902174137028">"Бірлік"</string>
+    <string name="wifi_eap_identity" msgid="3629406902174137028">"Пайдаланушы"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Белгісіз"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Құпия сөз"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Құпия сөзді көрсету"</string>
@@ -1974,7 +1974,7 @@
     <string name="data_size_label" msgid="7814478940141255234">"Пайдаланушы деректері"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="1054860423004751290">"USB жады дерекқоры"</string>
     <string name="external_data_size_label" product="default" msgid="3370825186202856353">"SD картасы"</string>
-    <string name="uninstall_text" msgid="315764653029060126">"Алмау"</string>
+    <string name="uninstall_text" msgid="315764653029060126">"Жою"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"Барлық пайдаланушылар үшін алып тастаңыз"</string>
     <string name="install_text" msgid="4558333621516996473">"Орнату"</string>
     <string name="disable_text" msgid="5146002260857428005">"Өшіру"</string>
@@ -2432,7 +2432,7 @@
     <string name="color_cyan" msgid="4341758639597035927">"Көгілдір"</string>
     <string name="color_yellow" msgid="5957551912912679058">"Сары"</string>
     <string name="color_magenta" msgid="8943538189219528423">"Қызылкүрең"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметі құрылғыңызды толық басқаруына рұқсат етілсін бе?"</string>
+    <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметіне құрылғыны толық басқаруға рұқсат етілсін бе?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметіне қажет:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Бағдарлама рұқсат сұрауын жасырып тұрғандықтан, Параметрлер жауабыңызды тексере алмайды."</string>
     <string name="enable_service_encryption_warning" msgid="931082737770453755">"<xliff:g id="SERVICE">%1$s</xliff:g> қоссаңыз, құрылғыңыз деректерді шифрлау үшін экранды бекітуді пайдаланбайды."</string>
@@ -2447,7 +2447,7 @@
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Әрекеттерді көру және орындау"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Ол қолданбамен немесе жабдық датчигімен істеген тапсырмаларыңызды бақылайды және қолданбаларды сіздің атыңыздан пайдаланады."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Рұқсат ету"</string>
-    <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Қабылдамау"</string>
+    <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Тыйым салу"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Тоқтату"</string>
     <string name="accessibility_dialog_button_cancel" msgid="4813234247237851121">"Бас тарту"</string>
     <string name="disable_service_title" msgid="2909108731776956167">"<xliff:g id="SERVICE">%1$s</xliff:g> тоқтатылсын ба?"</string>
@@ -2804,10 +2804,8 @@
     <string name="tts_play" msgid="2945513377250757221">"Ойнату"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Қауіпсіз емес"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> VPN қорғалмаған"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> VPN қорғалмаған"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Байланысты бейімдеу"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Желі байланыстарын автоматты басқару арқылы батарея зарядын ұзаққа жеткізеді және құрылғы жұмысын жақсартады."</string>
     <string name="credentials_title" msgid="7535942196886123656">"Тіркелу деректерінің жады"</string>
@@ -3772,19 +3770,19 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметіне хабарландыруға кіру рұқсатын беру қажет пе?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"\"Кеңейтілген хабарландырулар\" функциясы барлық хабарландыру мазмұнын (контакт атаулары мен хабарлар сияқты жеке ақпаратты қоса алғанда) оқи алады. Сондай-ақ бұл функция арқылы хабарландыруларды жабуға немесе хабарландырулардағы түймелерді басқаруға (мысалы, телефон қоңырауларына жауап беру) болады. \n\nОл арқылы \"Маңызды\" режимін қосуға немесе өшіруге, қатысты параметрлерді өзгертуге де болады."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> үшін хабарландыруға кіру рұқсатын беру қажет пе?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> барлық хабарландыруды, соның ішінде контакт аттары, сізге келген хабарлардың мәтіні сияқты жеке ақпаратты оқи алатын болады. Бұл қолданба хабарландыруларды жаба алатын немесе хабарландырулардағы түймелер баса алатын мүмкіндігі бар. Келген қоңырауларға жауап беруі де мүмкін. \n\nСондай-ақ бұл – қолданбаға Мазаламау режимін қосуға немесе өшіруге және ұқсас параметрлерді өзгертуге мүмкіндік береді."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> барлық хабарландыруды, соның ішінде контакт аттары, келген хабарлардың мәтіні сияқты жеке ақпаратты оқи алады. Хабарландыруларды жабатын немесе ондағы түймелерді басатын, келген қоңырауларға жауап беретін мүмкіндігі де бар. \n\nСонымен қатар Мазаламау режимін қосып-өшіруге және тиісті параметрлерді өзгертуге рұқсаты болады."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Егер <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> үшін хабарландыру параметрін өшірсеңіз, Мазаламау параметрі де өшуі мүмкін."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Өшіру"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Бас тарту"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"Рұқсат етілген хабарландыру түрлері"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Нақты уақыт"</string>
-    <string name="notif_type_ongoing_summary" msgid="3412379452346027089">"Қолданыстағы қолданбалар арқылы нақты уақыттағы байланыс, навигация, қоңыраулар және т.б."</string>
+    <string name="notif_type_ongoing_summary" msgid="3412379452346027089">"Қолданыстағы қолданбалар жіберіп жатқан хабарлар, навигация, қоңыраулар және т.б."</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"Әңгімелер"</string>
     <string name="notif_type_conversation_summary" msgid="897491668422411641">"SMS және басқа да байланыс құралдары"</string>
     <string name="notif_type_alerting" msgid="4225291983925409612">"Әдепкі"</string>
-    <string name="notif_type_alerting_summary" msgid="6823969073567000728">"Параметрлерге байланысты шылдырлайтын не дірілдейтін хабарландырулар"</string>
+    <string name="notif_type_alerting_summary" msgid="6823969073567000728">"Параметрлерге байланысты дыбыс не діріл шығаратын хабарландырулар"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Үнсіз"</string>
-    <string name="notif_type_silent_summary" msgid="7820923063105060844">"Ешқашан дыбыс шығармайтын не дірілдемейтін хабарландырулар"</string>
+    <string name="notif_type_silent_summary" msgid="7820923063105060844">"Ешқашан дыбыс не діріл шығармайтын хабарландырулар"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Барлық қолданбаны қарау"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"Хабарландыру жібере алатын әр қолданбаның хабарландыру параметрлерін өзгертіңіз."</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Құрылғыда көрсетілген қолданбалар"</string>
@@ -4142,8 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Ешқандай рұқсат берілмеген"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Ешқандай рұқсат сұралмаған"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Қолданбалардың деректерге қатысты рұқсаты"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Құпиялылық тақтасы"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Жақында рұқсаттарды пайдаланған қолданбаларды көрсетеді."</string>
     <string name="unused_apps" msgid="4566272194756830656">"Пайдаланылмайтын қолданбалар"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5104,8 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Құрылғыны қайта қосасыз ба?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Бастау үшін құрылғыңызды қайта қосыңыз. Одан кейін басқа SIM картасын енгізе аласыз."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Жалғастыру"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"Иә"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Қайта қосу"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Жоқ, рақмет"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Ауысу"</string>
@@ -5284,7 +5280,7 @@
     <string name="calls_sms_footnote" msgid="1003530944232362815">"Wi-Fi қоңырауларын пайдаланған кезде, қоңыраулар оператордан тыс Wi-Fi желілерінен шалынады және қабылданады. "<annotation id="url">"Толығырақ"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Қоңыраулар"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
-    <string name="calls_sms_preferred" msgid="6016477652522583496">"таңдаулы"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"таңдалған"</string>
     <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"қоңыраулар үшін басым провайдер"</string>
     <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"SMS хабарлары үшін басым провайдер"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"қолжетімді емес"</string>
@@ -5303,7 +5299,7 @@
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Желілерді ауыстыру үшін ethernet кабелін ажыратыңыз."</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"Wi-Fi қосылды."</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
-    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Қосылды"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Жалғанды"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Байланыс жоқ"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Интернет автоматты түрде қосылмайды"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Басқа қолжетімді желі жоқ"</string>
@@ -5318,12 +5314,10 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Контактілер тізімі мен қоңыраулар журналын пайдалануға рұқсат берілсін бе?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth құрылғысы (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) контактілеріңіз бен қоңыраулар журналын пайдалануға рұқсат сұрайды. Бұған кіріс және шығыс қоңыраулар туралы деректер кіреді.\n\nСіз бұрын-соңды <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> құрылғысына қосылмағансыз."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Жарықтығы"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Дисплейді құлыптау"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Көрінісі"</string>
     <string name="category_name_color" msgid="937514550918977151">"Түсі"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Дисплейдің басқа басқару элементтері"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Басқалар"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Жалпы"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Қараңғы тақырыпты пайдалану"</string>
