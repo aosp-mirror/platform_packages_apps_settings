@@ -21,7 +21,7 @@ import java.time.Duration;
 import java.util.TimeZone;
 
 /** A container class to carry data from {@link ContentValues}. */
-public final class BatteryHistEntry {
+public class BatteryHistEntry {
     private static final String TAG = "BatteryHistEntry";
 
     /** Keys for accessing {@link ContentValues} or {@link Cursor}. */

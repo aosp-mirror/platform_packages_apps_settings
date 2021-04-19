@@ -34,7 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /** A container class to carry battery data in a specific time slot. */
-public final class BatteryDiffEntry {
+public class BatteryDiffEntry {
     private static final String TAG = "BatteryDiffEntry";
 
     static Locale sCurrentLocale = null;
