@@ -52,24 +52,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/battery_detail_manage_title"
-        settings:allowDividerAbove="true">
-
-        <com.android.settingslib.RestrictedPreference
-            android:key="background_activity"
-            android:title="@string/background_activity_title"
-            android:selectable="true"
-            settings:userRestriction="no_control_apps"/>
-
-        <Preference
-            android:key="battery_optimization"
-            android:title="@string/high_power_apps"
-            android:summary="@string/high_power_off"
-            android:selectable="true"/>
-
-    </PreferenceCategory>
-
     <com.android.settingslib.widget.FooterPreference
         android:key="app_usage_footer_preference"
         android:title="@string/manager_battery_usage_footer"

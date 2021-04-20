@@ -41,8 +41,6 @@ import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
-import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -62,7 +60,7 @@ import java.util.List;
  */
 public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
-        BatteryTipPreferenceController.BatteryTipListener, RadioButtonPreference.OnClickListener {
+        RadioButtonPreference.OnClickListener {
 
     public static final String TAG = "AdvancedPowerDetail";
     public static final String EXTRA_UID = "extra_uid";
@@ -74,8 +72,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public static final String EXTRA_POWER_USAGE_PERCENT = "extra_power_usage_percent";
     public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
 
-    private static final String KEY_PREF_FOREGROUND = "app_usage_foreground";
-    private static final String KEY_PREF_BACKGROUND = "app_usage_background";
     private static final String KEY_PREF_HEADER = "header_view";
     private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
     private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
@@ -97,10 +93,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     @VisibleForTesting
-    Preference mForegroundPreference;
-    @VisibleForTesting
-    Preference mBackgroundPreference;
-    @VisibleForTesting
     Preference mFooterPreference;
     @VisibleForTesting
     RadioButtonPreference mRestrictedPreference;
@@ -109,7 +101,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     RadioButtonPreference mUnrestrictedPreference;
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
-    private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
     private UnrestrictedPreferenceController mUnrestrictedPreferenceController;
     private OptimizedPreferenceController mOptimizedPreferenceController;
     private RestrictedPreferenceController mRestrictedPreferenceController;
@@ -236,8 +227,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onCreate(icicle);
 
         mPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
-        mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
-        mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
         mFooterPreference = findPreference(KEY_FOOTER_PREFERENCE);
         mHeaderPreference = (LayoutPreference) findPreference(KEY_PREF_HEADER);
 
@@ -288,7 +277,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             mState.ensureIcon(mAppEntry);
             controller.setLabel(mAppEntry);
             controller.setIcon(mAppEntry);
-            boolean isInstantApp = AppUtils.isInstant(mAppEntry.info);
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
         }
 
@@ -358,11 +346,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final int uid = bundle.getInt(EXTRA_UID, 0);
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
 
-        mBackgroundActivityPreferenceController = new BackgroundActivityPreferenceController(
-                context, this, uid, packageName);
-        controllers.add(mBackgroundActivityPreferenceController);
-        controllers.add(new BatteryOptimizationPreferenceController(
-                (SettingsActivity) getActivity(), this, packageName));
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
                 (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName, mState,
                 REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
@@ -393,12 +376,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (mAppButtonsPreferenceController != null) {
             mAppButtonsPreferenceController.handleDialogClick(id);
         }
-    }
-
-    @Override
-    public void onBatteryTipHandled(BatteryTip batteryTip) {
-        mBackgroundActivityPreferenceController.updateSummary(
-                findPreference(mBackgroundActivityPreferenceController.getPreferenceKey()));
     }
 
     @Override
