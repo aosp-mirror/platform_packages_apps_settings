@@ -21,7 +21,7 @@ import java.time.Duration;
 import java.util.TimeZone;
 
 /** A container class to carry data from {@link ContentValues}. */
-public final class BatteryHistEntry {
+public class BatteryHistEntry {
     private static final String TAG = "BatteryHistEntry";
 
     /** Keys for accessing {@link ContentValues} or {@link Cursor}. */
@@ -111,6 +111,16 @@ public final class BatteryHistEntry {
     /** Whether this {@link BatteryHistEntry} is valid or not? */
     public boolean isValidEntry() {
         return mIsValidEntry;
+    }
+
+    /** Whether this {@link BatteryHistEntry} is user consumer or not. */
+    public boolean isUserEntry() {
+        return mConsumerType == ConvertUtils.CONSUMER_TYPE_USER_BATTERY;
+    }
+
+    /** Whether this {@link BatteryHistEntry} is app consumer or not. */
+    public boolean isAppEntry() {
+        return mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
     }
 
     /** Gets an identifier to represent this {@link BatteryHistEntry}. */
