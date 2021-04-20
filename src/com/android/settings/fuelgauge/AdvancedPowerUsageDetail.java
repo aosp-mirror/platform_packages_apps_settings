@@ -292,31 +292,29 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
         }
 
+        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
+        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+        final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
+        //TODO(b/178197718) Refine the layout
+        controller.setSummary(TextUtils.expandTemplate(
+                getText(R.string.battery_total_and_background_usage),
+                StringUtil.formatElapsedTime(
+                        getContext(),
+                        totalTimeMs,
+                        /* withSeconds */ false,
+                        /* collapseTimeUnit */ false),
+                StringUtil.formatElapsedTime(
+                        getContext(),
+                        backgroundTimeMs,
+                        /* withSeconds */ false,
+                        /* collapseTimeUnit */ false)));
+
         controller.done(context, true /* rebindActions */);
     }
 
     @VisibleForTesting
     void initPreference() {
-        final Bundle bundle = getArguments();
         final Context context = getContext();
-
-        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
-        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        mForegroundPreference.setSummary(
-                TextUtils.expandTemplate(getText(R.string.battery_used_for),
-                        StringUtil.formatElapsedTime(
-                                context,
-                                foregroundTimeMs,
-                                /* withSeconds */ false,
-                                /* collapseTimeUnit */ false)));
-        mBackgroundPreference.setSummary(
-                TextUtils.expandTemplate(getText(R.string.battery_active_for),
-                        StringUtil.formatElapsedTime(
-                                context,
-                                backgroundTimeMs,
-                                /* withSeconds */ false,
-                                /* collapseTimeUnit */ false)));
-
         final String stateString;
         final String footerString;
         //TODO(b/178197718) Update strings
