@@ -53,11 +53,10 @@
         settings:keywords="@string/keywords_time_zone"/>
 
     <!-- This preference gets removed if location-based time zone detection is not supported -->
-    <com.android.settingslib.RestrictedSwitchPreference
+    <SwitchPreference
         android:key="location_time_zone_detection"
         android:title="@string/location_time_zone_detection_toggle_title"
         settings:controller="com.android.settings.datetime.LocationTimeZoneDetectionPreferenceController"
-        settings:userRestriction="no_config_date_time"
     />
 
     <PreferenceCategory
