@@ -21,7 +21,7 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_ALL;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_SELECTED;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
-import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_OFF;
 import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_ON;
@@ -96,7 +96,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void isAvailable_NOTIFICATION_BUBBLESisOn_shouldReturnTrue() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         mController.onResume(mAppRow, null, null, null, null, null, null);
 
         assertTrue(mController.isAvailable());
@@ -104,7 +104,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void isAvailable_NOTIFICATION_BUBBLESisOn_neverSentMsg_shouldReturnFalse() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         mController.onResume(mAppRow, null, null, null, null, null, null);
         when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(false);
 
@@ -113,7 +113,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void isAvailable_NOTIFICATION_BUBBLESisOff_shouldReturnFalse() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_OFF);
         mController.onResume(mAppRow, null, null, null, null, null, null);
 
@@ -122,7 +122,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void isAvailable_nonNullChannelNOTIFICATION_BUBBLESisOff_shouldReturnFalse() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_OFF);
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
@@ -133,7 +133,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void isAvailable_defaultChannelNOTIFICATION_BUBBLESisOn_shouldReturnTrue() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
@@ -144,7 +144,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void isAvailable_lowRam_shouldReturnFalse() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         mController.onResume(mAppRow, null, null, null, null, null, null);
 
         final ShadowActivityManager activityManager =
@@ -155,7 +155,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void isAvailable_notLowRam_shouldReturnTrue() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         mController.onResume(mAppRow, null, null, null, null, null, null);
 
         final ShadowActivityManager activityManager =
@@ -176,7 +176,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void getSummary_NOTIFICATION_BUBBLESIsOff_returnsNoneString() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_OFF);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -188,7 +188,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void getSummary_BUBBLE_PREFERENCE_NONEisSelected_returnsNoneString() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_ON);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -201,7 +201,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void getSummary_BUBBLE_PREFERENCE_ALLisSelected_returnsAllString() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_ON);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -214,7 +214,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
     @Test
     public void getSummary_BUBBLE_PREFERENCE_SELECTEDisSelected_returnsSelectedString() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_ON);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
