@@ -16,16 +16,12 @@
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <shape android:shape="oval">
-            <solid
-                android:color="@color/google_grey_700"/>
-            <size
-                android:height="@dimen/accessibility_icon_size"
-                android:width="@dimen/accessibility_icon_size"/>
-        </shape>
+        <com.android.settingslib.widget.AdaptiveIconShapeDrawable
+            android:width="@dimen/accessibility_icon_size"
+            android:height="@dimen/accessibility_icon_size"
+            android:color="@color/accessibility_feature_background"/>
     </item>
-    <item
-        android:gravity="center">
+    <item android:gravity="center">
         <vector
             android:width="@dimen/accessibility_icon_foreground_size"
             android:height="@dimen/accessibility_icon_foreground_size"
