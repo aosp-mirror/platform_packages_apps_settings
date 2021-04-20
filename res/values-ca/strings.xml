@@ -324,15 +324,6 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Bloqueig de pantalla, desbloqueig facial"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Bloqueig de pantalla, empremta digital"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Bloqueig de pantalla"</string>
-    <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"Desbloqueja el telèfon amb la cara i l\'empremta digital"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"També pots iniciar la sessió en apps i confirmar pagaments"</string>
-    <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"Configura el desbloqueig amb:"</string>
-    <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"Desbloqueig facial"</string>
-    <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"Desbloqueja el telèfon fàcilment"</string>
-    <string name="multi_biometric_enroll_fingerprint_unlock_title" msgid="3839935495273854171">"Empremta digital"</string>
-    <string name="multi_biometric_enroll_fingerprint_unlock_description" msgid="116938134430420778">"Desbloqueja el telèfon des de la butxaca"</string>
-    <string name="multi_biometric_enroll_skip" msgid="7301215196571580858">"Omet"</string>
-    <string name="multi_biometric_enroll_next" msgid="6220680618102151619">"Següent"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Cara afegida"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Configura el desbloqueig facial"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Desbloqueig facial"</string>
@@ -443,7 +434,8 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Aixeca el dit quan notis una vibració"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ves a un lloc menys il·luminat i torna-ho a provar"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Has arribat al nombre màxim d\'intents"</string>
-    <string name="security_settings_fingerprint_v2_home_screen" msgid="5893917293784293946">"Utilitza l\'empremta digital per desbloquejar el telèfon o per a l\'autenticació, com ara en iniciar la sessió en aplicacions o en aprovar una compra"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_home_screen (6677856383184441160) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ometre bloqueig de pantalla?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Les funcions de protecció del dispositiu no s\'activaran. Si perds la tauleta, te la roben o se\'n restableixen les dades de fàbrica, no podràs evitar que altres persones la utilitzin."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Les funcions de protecció del dispositiu no s\'activaran. Si perds el dispositiu, te\'l roben o se\'n restableixen les dades de fàbrica, no podràs evitar que altres persones l\'utilitzin."</string>
@@ -1059,8 +1051,8 @@
       <item quantity="one">1 subscripció</item>
     </plurals>
     <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="other">%d subscripcions i xarxes</item>
-      <item quantity="one">1 subscripció i xarxa</item>
+      <item quantity="other">%d xarxes i subscripcions</item>
+      <item quantity="one">1 xarxa i subscripció</item>
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="1234150304285575798">"Config. avançada de Wi-Fi"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
@@ -1289,7 +1281,7 @@
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Es requereix accés a la càmera per a la detecció facial. Toca per gestionar els permisos dels Serveis de personalització del dispositiu."</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Gestiona els permisos"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Llum nocturna"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"La funció Llum nocturna dona un to ambre a la pantalla. D\'aquesta manera, és més fàcil veure la pantalla amb poca llum i adormir-se."</string>
+    <string name="night_display_text" msgid="4789324042428095383">"La funció Llum nocturna dona un to ambre a la pantalla. D\'aquesta manera, és més fàcil veure la pantalla o llegir amb poca llum, i et costarà menys adormir-te."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Programació"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Cap"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"S\'activa a una hora personalitzada"</string>
@@ -1355,7 +1347,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Per controlar què passa quan el telèfon està acoblat a una base o en mode de repòs, activa l\'estalvi de pantalla."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quan comença"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Estalvi de pantalla actual"</string>
-    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Comença ara mateix"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Comença ara"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Configuració"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Brillantor adaptativa"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aixeca el dispositiu per activar-lo"</string>
@@ -4837,7 +4829,8 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"En ús de: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"utilitzat"</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"Espai utilitzat: <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
-    <string name="storage_total_summary" msgid="6640850560211304573">"Total: <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
+    <!-- no translation found for storage_total_summary (7163360249534964272) -->
+    <skip />
     <string name="clear_instant_app_data" msgid="5951258323364386357">"Esborra l\'aplicació"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Vols suprimir aquesta aplicació instantània?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Obre"</string>
