@@ -16,7 +16,7 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -54,7 +54,7 @@ public class BubbleSummaryNotificationPreferenceController extends BasePreferenc
     }
 
     private boolean areBubblesEnabled() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
+        return Settings.Secure.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON) == ON;
     }
 }
