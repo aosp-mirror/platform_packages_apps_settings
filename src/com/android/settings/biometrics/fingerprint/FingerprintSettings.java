@@ -41,6 +41,8 @@ import android.view.View;
 import android.widget.ImeAwareEditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -349,7 +351,7 @@ public class FingerprintSettings extends SubSettings {
             mFooterTitle = AnnotationSpan.linkify(getText(admin != null
                             ? R.string
                             .security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
-                            : R.string.security_settings_fingerprint_enroll_disclaimer),
+                            : R.string.security_settings_fingerprint_v2_home_screen),
                     linkInfo, adminLinkInfo);
         }
 
@@ -548,10 +550,14 @@ public class FingerprintSettings extends SubSettings {
             } else {
                 args.putParcelable("fingerprint", fp);
             }
+            renameDialog.setOnDismissListener((dialogInterface) -> {
+                retryFingerprint();
+            });
             renameDialog.setDeleteInProgress(mRemovalSidecar.inProgress());
             renameDialog.setArguments(args);
             renameDialog.setTargetFragment(this, 0);
             renameDialog.show(getFragmentManager(), RenameDialog.class.getName());
+            mAuthenticateSidecar.stopAuthentication();
         }
 
         @Override
@@ -777,10 +783,17 @@ public class FingerprintSettings extends SubSettings {
             private Fingerprint mFp;
             private ImeAwareEditText mDialogTextField;
             private AlertDialog mAlertDialog;
+            private @Nullable DialogInterface.OnDismissListener mDismissListener;
             private boolean mDeleteInProgress;
 
             public void setDeleteInProgress(boolean deleteInProgress) {
                 mDeleteInProgress = deleteInProgress;
+            }
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                super.onCancel(dialog);
+                mDismissListener.onDismiss(dialog);
             }
 
             @Override
@@ -818,6 +831,7 @@ public class FingerprintSettings extends SubSettings {
                                             parent.renameFingerPrint(mFp.getBiometricId(),
                                                     newName);
                                         }
+                                        mDismissListener.onDismiss(dialog);
                                         dialog.dismiss();
                                     }
                                 })
@@ -842,6 +856,10 @@ public class FingerprintSettings extends SubSettings {
                     }
                 });
                 return mAlertDialog;
+            }
+
+            public void setOnDismissListener(@NonNull DialogInterface.OnDismissListener listener) {
+                mDismissListener = listener;
             }
 
             public void enableDelete() {

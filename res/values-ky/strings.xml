@@ -1000,7 +1000,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi‑Fi сырсөзү: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Байланыш түйүнүнүн сырсөзү: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Авто-туташуу"</string>
-    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Тейлөө аймагына келгенде, бул тармакка туташууга уруксат берүү"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Ушул тармактын аймагына келгенде автоматтык түрдө туташасыз"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Түзмөк кошуу"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Түзмөктү бул тармакка кошуу үчүн QR кодун колдонуңуз"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR кодунун форматы жараксыз"</string>
@@ -2804,10 +2804,8 @@
     <string name="tts_play" msgid="2945513377250757221">"Угуу"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Коопсуз эмес"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> коопсуз эмес"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> коопсуз эмес"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Ыңгайлаштырылган туташуу"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Батареяны көбүрөөк убакытка жеткирип, тармакка туташуучу түзмөктөрдү автоматтык түрдө башкарып, түзмөктүн жакшыраак иштешин камсыз кылат"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Каттоо маалыматы сакталган жер"</string>
@@ -3633,7 +3631,7 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Колдонмонун сүрөтчөсүндөгү билдирменин белгиси"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Акыркы жазышуулардын тилкесин көрсөтүү"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Калкып чыкма билдирмелер"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Айрым билдирмелер экранга калкып чыкма билдирмелер түрүндө көрүнөт. Аны ачуу үчүн басып коюңуз. Ал эми жашыруу үчүн, экрандын төмөн жагына сүйрөп барыңыз."</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Айрым билдирмелер экранга калкып чыкма билдирмелер түрүндө көрүнөт. Аны ачуу үчүн басып коюңуз. Ал эми жашыруу үчүн экрандын төмөн жагына сүйрөп барыңыз."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Калкып чыкма билдирмелер"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Калкып чыкма билдирмелердин бардык жөндөөлөрү"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Калкып чыкма билдирмелерди көрсөтүү"</string>
@@ -4142,8 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Эч уруксат берилген жок"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Колдонмо уруксат сурай элек"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Колдонмолордун дайын-даректериңизди көрүү мүмкүнчүлүгүн көзөмөлдөйсүз"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Купуялык тактасы"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Уруксаттарды акыркы колдонгон колдонмолорду көрсөтөт"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Иштетилбеген колдонмолор"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -4600,8 +4597,8 @@
     <string name="page_tab_title_support" msgid="3235725053332345773">"Кеңештер жана колдоо"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Эң кууш"</string>
     <string name="premium_sms_none" msgid="8737045049886416739">"Орнотулган колдонмолор акы алынуучу SMS пайдаланууга уруксат сураган жок"</string>
-    <string name="premium_sms_warning" msgid="2192300872411073324">"Артыкчылыктуу SMS үчүн сизден акы алынып, ал операторуңуздун эсептерине кошулушу мүмкүн. Эгер кайсы бир колдонмого уруксат берсеңиз, ошол колдонмо аркылуу артыкчылыктуу SMS жөнөтө аласыз."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Артыкчылыктуу SMS жөнөтүүгө уруксат"</string>
+    <string name="premium_sms_warning" msgid="2192300872411073324">"Акы алынуучу SMS үчүн сизден акы алынып, ал операторуңуздун эсептерине кошулушу мүмкүн. Эгер кайсы бир колдонмого уруксат берсеңиз, ошол колдонмо аркылуу акы алынуучу SMS жөнөтө аласыз."</string>
+    <string name="premium_sms_access" msgid="5605970342699013212">"Акы алынуучу SMS жөнөтүүгө уруксат"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Өчүк"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> менен туташты"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Бир нече түзмөккө туташты"</string>
@@ -5104,8 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Түзмөк өчүп күйсүнбү?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Баштоо үчүн түзмөктү өчүрүп күйгүзүңүз. Андан соң башка SIM-картаны кошсоңуз болот."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Улантуу"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"Ооба"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Өчүрүп күйгүзүү"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Жок, рахмат"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Которулуу"</string>
@@ -5318,12 +5314,10 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Байланыштар менен чалуулар тизмесин көрүүгө уруксат берилсинби?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth түзмөгү (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) байланыштарыңызды жана чалуулар тизмесин көргөнү жатат. Буга кирүүчү жана чыгуучу чалуулар кирет.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> түзмөгүнө буга чейин туташкан эмессиз."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Жарыктыгы"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Экранды кулпулоо"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Тышкы көрүнүшү"</string>
     <string name="category_name_color" msgid="937514550918977151">"Түс"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Экрандын башка жөндөөлөрү"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Башкалар"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Жалпы"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Караңгы теманы колдонуу"</string>

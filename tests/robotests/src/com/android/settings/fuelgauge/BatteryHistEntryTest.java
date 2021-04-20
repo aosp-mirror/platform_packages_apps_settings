@@ -167,6 +167,30 @@ public final class BatteryHistEntryTest {
         assertThat(batteryHistEntry.getKey()).isEqualTo("S|1");
     }
 
+    @Test
+    public void testIsAppEntry_returnExpectedResult() {
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isAppEntry())
+            .isFalse();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isAppEntry())
+            .isFalse();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isAppEntry())
+            .isTrue();
+    }
+
+    @Test
+    public void testIsUserEntry_returnExpectedResult() {
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isUserEntry())
+            .isFalse();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isUserEntry())
+            .isTrue();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isUserEntry())
+            .isFalse();
+    }
+
+    private static BatteryHistEntry createEntry(int consumerType) {
+        return new BatteryHistEntry(getContentValuesWithType(consumerType));
+    }
+
     private static ContentValues getContentValuesWithType(int consumerType) {
         final ContentValues values = new ContentValues();
         values.put("consumerType", Integer.valueOf(consumerType));
