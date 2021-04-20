@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,7 @@ import com.google.common.annotations.VisibleForTesting;
 public class NotificationAssistantPreferenceController extends TogglePreferenceController {
     private static final String TAG = "NASPreferenceController";
     private static final int AVAILABLE = 1;
+    private final UserManager mUserManager;
     private Fragment mFragment;
     private int mUserId = UserHandle.myUserId();
 
@@ -41,6 +43,7 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
         super(context, preferenceKey);
         mNotificationBackend = backend;
         mFragment = fragment;
+        mUserManager = UserManager.get(context);
     }
 
     @Override
@@ -74,8 +77,10 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
     protected void setNotificationAssistantGranted(ComponentName cn) {
         if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.NAS_SETTINGS_UPDATED, 0, mUserId) == 0) {
-            Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                    Settings.Secure.NAS_SETTINGS_UPDATED, 1, mUserId);
+            for (int profileId : mUserManager.getProfileIds(mUserId, false)) {
+                Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                        Settings.Secure.NAS_SETTINGS_UPDATED, 1, profileId);
+            }
             mNotificationBackend.resetDefaultNotificationAssistant(cn != null);
         }
         mNotificationBackend.setNotificationAssistantGranted(cn);
