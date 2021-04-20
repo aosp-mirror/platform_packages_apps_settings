@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,7 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +62,7 @@ import java.util.List;
  */
 public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
-        BatteryTipPreferenceController.BatteryTipListener {
+        BatteryTipPreferenceController.BatteryTipListener, RadioButtonPreference.OnClickListener {
 
     public static final String TAG = "AdvancedPowerDetail";
     public static final String EXTRA_UID = "extra_uid";
@@ -75,6 +77,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private static final String KEY_PREF_FOREGROUND = "app_usage_foreground";
     private static final String KEY_PREF_BACKGROUND = "app_usage_background";
     private static final String KEY_PREF_HEADER = "header_view";
+    private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
+    private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
+    private static final String KEY_PREF_RESTRICTED = "restricted_pref";
+    private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
 
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
@@ -87,47 +93,105 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     ApplicationsState.AppEntry mAppEntry;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    @VisibleForTesting
+    BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     @VisibleForTesting
     Preference mForegroundPreference;
     @VisibleForTesting
     Preference mBackgroundPreference;
+    @VisibleForTesting
+    Preference mFooterPreference;
+    @VisibleForTesting
+    RadioButtonPreference mRestrictedPreference;
+    @VisibleForTesting
+    RadioButtonPreference mOptimizePreference;
+    @VisibleForTesting
+    RadioButtonPreference mUnrestrictedPreference;
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
     private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
+    private UnrestrictedPreferenceController mUnrestrictedPreferenceController;
+    private OptimizedPreferenceController mOptimizedPreferenceController;
+    private RestrictedPreferenceController mRestrictedPreferenceController;
 
     private String mPackageName;
 
-    /**
-     * Launches battery details page for an individual battery consumer.
-     */
+    // A wrapper class to carry LaunchBatteryDetailPage required arguments.
+    private static final class LaunchBatteryDetailPageArgs {
+        private String mUsagePercent;
+        private String mPackageName;
+        private String mAppLabel;
+        private int mUid;
+        private int mIconId;
+        private int mConsumedPower;
+        private long mForegroundTimeMs;
+        private long mBackgroundTimeMs;
+        private boolean mIsUserEntry;
+    }
+
+    /** Launches battery details page for an individual battery consumer. */
+    public static void startBatteryDetailPage(
+            Activity caller, InstrumentedPreferenceFragment fragment,
+            BatteryDiffEntry diffEntry, String usagePercent) {
+        final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
+        final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
+        // configure the launch argument.
+        launchArgs.mUsagePercent = usagePercent;
+        launchArgs.mPackageName = diffEntry.getPackageName();
+        launchArgs.mAppLabel = diffEntry.getAppLabel();
+        launchArgs.mUid = (int) histEntry.mUid;
+        launchArgs.mIconId = diffEntry.getAppIconId();
+        launchArgs.mConsumedPower = (int) diffEntry.mConsumePower;
+        launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
+        launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
+        launchArgs.mIsUserEntry = histEntry.isUserEntry();
+        startBatteryDetailPage(caller, fragment, launchArgs);
+    }
+
+    /** Launches battery details page for an individual battery consumer. */
     public static void startBatteryDetailPage(Activity caller,
             InstrumentedPreferenceFragment fragment, BatteryEntry entry, String usagePercent) {
+        final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
+        // configure the launch argument.
+        launchArgs.mUsagePercent = usagePercent;
+        launchArgs.mPackageName = entry.getDefaultPackageName();
+        launchArgs.mAppLabel = entry.getLabel();
+        launchArgs.mUid = entry.getUid();
+        launchArgs.mIconId = entry.iconId;
+        launchArgs.mConsumedPower = (int) entry.getConsumedPower();
+        launchArgs.mForegroundTimeMs = entry.getTimeInForegroundMs();
+        launchArgs.mBackgroundTimeMs = entry.getTimeInBackgroundMs();
+        launchArgs.mIsUserEntry = entry.isUserEntry();
+        startBatteryDetailPage(caller, fragment, launchArgs);
+    }
+
+    private static void startBatteryDetailPage(Activity caller,
+            InstrumentedPreferenceFragment fragment, LaunchBatteryDetailPageArgs launchArgs) {
         final Bundle args = new Bundle();
-        final long foregroundTimeMs = entry.getTimeInForegroundMs();
-        final long backgroundTimeMs = entry.getTimeInBackgroundMs();
-        final String packageName = entry.getDefaultPackageName();
-        if (packageName == null) {
+        if (launchArgs.mPackageName == null) {
             // populate data for system app
-            args.putString(EXTRA_LABEL, entry.getLabel());
-            args.putInt(EXTRA_ICON_ID, entry.iconId);
+            args.putString(EXTRA_LABEL, launchArgs.mAppLabel);
+            args.putInt(EXTRA_ICON_ID, launchArgs.mIconId);
             args.putString(EXTRA_PACKAGE_NAME, null);
         } else {
             // populate data for normal app
-            args.putString(EXTRA_PACKAGE_NAME, packageName);
+            args.putString(EXTRA_PACKAGE_NAME, launchArgs.mPackageName);
         }
 
-        args.putInt(EXTRA_UID, entry.getUid());
-        args.putLong(EXTRA_BACKGROUND_TIME, backgroundTimeMs);
-        args.putLong(EXTRA_FOREGROUND_TIME, foregroundTimeMs);
-        args.putString(EXTRA_POWER_USAGE_PERCENT, usagePercent);
-        args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) entry.getConsumedPower());
+        args.putInt(EXTRA_UID, launchArgs.mUid);
+        args.putLong(EXTRA_BACKGROUND_TIME, launchArgs.mBackgroundTimeMs);
+        args.putLong(EXTRA_FOREGROUND_TIME, launchArgs.mForegroundTimeMs);
+        args.putString(EXTRA_POWER_USAGE_PERCENT, launchArgs.mUsagePercent);
+        args.putInt(EXTRA_POWER_USAGE_AMOUNT, launchArgs.mConsumedPower);
+        final int userId = launchArgs.mIsUserEntry ? ActivityManager.getCurrentUser()
+            : UserHandle.getUserId(launchArgs.mUid);
 
         new SubSettingLauncher(caller)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
-                .setUserHandle(new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(entry)))
+                .setUserHandle(new UserHandle(userId))
                 .launch();
     }
 
@@ -174,7 +238,18 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
         mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
         mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
+        mFooterPreference = findPreference(KEY_FOOTER_PREFERENCE);
         mHeaderPreference = (LayoutPreference) findPreference(KEY_PREF_HEADER);
+
+        mUnrestrictedPreference  = findPreference(KEY_PREF_UNRESTRICTED);
+        mOptimizePreference  = findPreference(KEY_PREF_OPTIMIZED);
+        mRestrictedPreference  = findPreference(KEY_PREF_RESTRICTED);
+        mUnrestrictedPreference.setOnClickListener(this);
+        mOptimizePreference.setOnClickListener(this);
+        mRestrictedPreference.setOnClickListener(this);
+
+        mBatteryOptimizeUtils = new BatteryOptimizeUtils(
+                getContext(), getArguments().getInt(EXTRA_UID), mPackageName);
 
         if (mPackageName != null) {
             mAppEntry = mState.getEntry(mPackageName, UserHandle.myUserId());
@@ -241,6 +316,26 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                                 backgroundTimeMs,
                                 /* withSeconds */ false,
                                 /* collapseTimeUnit */ false)));
+
+        final String stateString;
+        final String footerString;
+        //TODO(b/178197718) Update strings
+        if (!mBatteryOptimizeUtils.isValidPackageName()) {
+            //Present optimized only string when the package name is invalid.
+            stateString = context.getString(R.string.manager_battery_usage_optimized_title);
+            footerString = context.getString(
+                    R.string.manager_battery_usage_footer_limited, stateString);
+        } else if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
+            //Present unrestricted only string when the package is system or default active app.
+            stateString = context.getString(R.string.manager_battery_usage_unrestricted_title);
+            footerString = context.getString(
+                    R.string.manager_battery_usage_footer_limited, stateString);
+        } else {
+            //Present default string to normal app.
+            footerString = context.getString(R.string.manager_battery_usage_footer);
+
+        }
+        mFooterPreference.setTitle(Html.fromHtml(footerString, Html.FROM_HTML_MODE_COMPACT));
     }
 
     @Override
@@ -274,6 +369,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName, mState,
                 REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
+        mUnrestrictedPreferenceController =
+                new UnrestrictedPreferenceController(context, uid, packageName);
+        mOptimizedPreferenceController =
+                new OptimizedPreferenceController(context, uid, packageName);
+        mRestrictedPreferenceController =
+                new RestrictedPreferenceController(context, uid, packageName);
+        controllers.add(mUnrestrictedPreferenceController);
+        controllers.add(mOptimizedPreferenceController);
+        controllers.add(mRestrictedPreferenceController);
 
         return controllers;
     }
@@ -297,5 +401,16 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public void onBatteryTipHandled(BatteryTip batteryTip) {
         mBackgroundActivityPreferenceController.updateSummary(
                 findPreference(mBackgroundActivityPreferenceController.getPreferenceKey()));
+    }
+
+    @Override
+    public void onRadioButtonClicked(RadioButtonPreference selected) {
+        updatePreferenceState(mUnrestrictedPreference, selected.getKey());
+        updatePreferenceState(mOptimizePreference, selected.getKey());
+        updatePreferenceState(mRestrictedPreference, selected.getKey());
+    }
+
+    private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
+        preference.setChecked(selectedKey.equals(preference.getKey()));
     }
 }

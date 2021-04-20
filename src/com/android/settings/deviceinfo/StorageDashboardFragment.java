@@ -336,8 +336,7 @@ public class StorageDashboardFragment extends DashboardFragment
         final Activity activity = getActivity();
         EntityHeaderController.newInstance(activity, this /*fragment*/,
                 null /* header view */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
-                .styleActionBar(activity);
+                .setRecyclerView(getListView(), getSettingsLifecycle());
     }
 
     @Override
