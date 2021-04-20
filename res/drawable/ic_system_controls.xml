@@ -19,18 +19,17 @@
         <com.android.settingslib.widget.AdaptiveIconShapeDrawable
             android:width="@dimen/accessibility_icon_size"
             android:height="@dimen/accessibility_icon_size"
-            android:color="@color/accessibility_magnification_background"/>
+            android:color="@color/accessibility_feature_background"/>
     </item>
     <item android:gravity="center">
         <vector
-            android:width="32dp"
-            android:height="32dp"
+            android:width="@dimen/accessibility_icon_foreground_size"
+            android:height="@dimen/accessibility_icon_foreground_size"
             android:viewportWidth="24"
             android:viewportHeight="24">
             <path
                 android:fillColor="#ffffff"
-                android:fillType="evenOdd"
-                android:pathData="M17.6942,16.7552L14.0831,13.1441C14.5684,12.4698 14.8646,11.6568 14.8646,10.7682C14.8646,8.5058 13.0307,6.6719 10.7682,6.6719C8.5058,6.6719 6.6719,8.5058 6.6719,10.7682C6.6719,13.0307 8.5058,14.8646 10.7682,14.8646C11.6568,14.8646 12.4698,14.5684 13.1441,14.0831L16.7552,17.6942L17.6942,16.7552ZM10.7682,13.6042C9.199,13.6042 7.9323,12.3374 7.9323,10.7682C7.9323,9.199 9.199,7.9323 10.7682,7.9323C12.3374,7.9323 13.6042,9.199 13.6042,10.7682C13.6042,12.3374 12.3374,13.6042 10.7682,13.6042ZM12.6589,10.138H11.3984V8.8776H10.138V10.138H8.8776V11.3984H10.138V12.6589H11.3984V11.3984H12.6589V10.138Z" />
+                android:pathData="M3,17v2h6v-2L3,17zM3,5v2h10L13,5L3,5zM13,21v-2h8v-2h-8v-2h-2v6h2zM7,9v2L3,11v2h4v2h2L9,9L7,9zM21,13v-2L11,11v2h10zM15,9h2L17,7h4L21,5h-4L17,3h-2v6z"/>
         </vector>
     </item>
 </layer-list>
