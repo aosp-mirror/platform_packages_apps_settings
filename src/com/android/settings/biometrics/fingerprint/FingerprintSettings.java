@@ -349,7 +349,7 @@ public class FingerprintSettings extends SubSettings {
             mFooterTitle = AnnotationSpan.linkify(getText(admin != null
                             ? R.string
                             .security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
-                            : R.string.security_settings_fingerprint_enroll_disclaimer),
+                            : R.string.security_settings_fingerprint_v2_home_screen),
                     linkInfo, adminLinkInfo);
         }
 

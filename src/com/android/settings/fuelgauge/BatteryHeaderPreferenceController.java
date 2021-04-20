@@ -105,8 +105,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @Override
     public void onStart() {
         EntityHeaderController.newInstance(mActivity, mHost, null /* header view */)
-                .setRecyclerView(mHost.getListView(), mLifecycle)
-                .styleActionBar(mActivity);
+                .setRecyclerView(mHost.getListView(), mLifecycle);
     }
 
     private CharSequence generateLabel(BatteryInfo info) {

@@ -101,9 +101,7 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
             if (mUsageProgressBarPreference == null) {
                 return;
             }
-            ThreadUtils.postOnMainThread(() ->
-                    updateState(mUsageProgressBarPreference)
-            );
+            ThreadUtils.postOnMainThread(() -> updateState(mUsageProgressBarPreference));
         });
     }
 
@@ -118,7 +116,7 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
 
     private String getStorageSummary(int resId, long bytes) {
         final Formatter.BytesResult result = Formatter.formatBytes(mContext.getResources(),
-                bytes, 0);
+                bytes, Formatter.FLAG_SHORTER);
         return mContext.getString(resId, result.value, result.units);
     }
 }
