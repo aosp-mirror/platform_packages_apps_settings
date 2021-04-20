@@ -37,6 +37,7 @@ import com.android.settingslib.widget.AppPreference;
 public class PowerGaugePreference extends AppPreference {
 
     private BatteryEntry mInfo;
+    private BatteryDiffEntry mBatteryDiffEntry;
     private CharSequence mContentDescription;
     private CharSequence mProgress;
     private boolean mShowAnomalyIcon;
@@ -98,8 +99,16 @@ public class PowerGaugePreference extends AppPreference {
         return mShowAnomalyIcon;
     }
 
+    public void setBatteryDiffEntry(BatteryDiffEntry entry) {
+        mBatteryDiffEntry = entry;
+    }
+
     BatteryEntry getInfo() {
         return mInfo;
+    }
+
+    BatteryDiffEntry getBatteryDiffEntry() {
+        return mBatteryDiffEntry;
     }
 
     @Override
