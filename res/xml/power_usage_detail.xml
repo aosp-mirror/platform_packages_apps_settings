@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2017 The Android Open Source Project
+  Copyright (C) 2021 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -23,12 +23,10 @@
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        android:order="-10000"
         settings:allowDividerBelow="true"/>
 
     <com.android.settingslib.widget.ActionButtonsPreference
-        android:key="action_buttons"
-        android:order="-9999"/>
+        android:key="action_buttons"/>
 
     <PreferenceCategory
         android:title="@string/battery_detail_manage_title"
@@ -72,23 +70,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/battery_detail_info_title">
-
-        <Preference
-            android:key="app_usage_foreground"
-            android:title="@string/battery_detail_foreground"
-            android:selectable="false"/>
-
-        <Preference
-            android:key="app_usage_background"
-            android:title="@string/battery_detail_background"
-            android:selectable="false"/>
-
-    </PreferenceCategory>
-
     <com.android.settingslib.widget.FooterPreference
-        android:order="100"
         android:key="app_usage_footer_preference"
         android:title="@string/manager_battery_usage_footer"
         android:selectable="true"
