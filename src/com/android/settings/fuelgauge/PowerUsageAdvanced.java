@@ -100,6 +100,13 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        // Resets the flag to reload usage data in onResume() callback.
+        mIsChartDataLoaded = false;
+    }
+
+    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         refreshFeatureFlag(context);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();

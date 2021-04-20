@@ -187,6 +187,16 @@ public final class BatteryHistEntryTest {
             .isFalse();
     }
 
+    @Test
+    public void testIsSystemEntry_returnExpectedResult() {
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isSystemEntry())
+            .isTrue();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isSystemEntry())
+            .isFalse();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isSystemEntry())
+            .isFalse();
+    }
+
     private static BatteryHistEntry createEntry(int consumerType) {
         return new BatteryHistEntry(getContentValuesWithType(consumerType));
     }
