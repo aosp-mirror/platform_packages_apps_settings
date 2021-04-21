@@ -37,7 +37,7 @@ public class NotificationAssistantDialogFragment extends InstrumentedDialogFragm
         final NotificationAssistantDialogFragment dialogFragment =
                 new NotificationAssistantDialogFragment();
         final Bundle args = new Bundle();
-        args.putString(KEY_COMPONENT, cn.flattenToString());
+        args.putString(KEY_COMPONENT, cn == null ? "" : cn.flattenToString());
         dialogFragment.setArguments(args);
         dialogFragment.setTargetFragment(target, 0);
 

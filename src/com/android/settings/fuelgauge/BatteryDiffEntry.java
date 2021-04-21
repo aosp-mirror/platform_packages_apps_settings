@@ -210,11 +210,16 @@ public class BatteryDiffEntry {
                     packageManager.getApplicationInfo(packageName, /*no flags*/ 0);
                 if (appInfo != null) {
                     mAppLabel = packageManager.getApplicationLabel(appInfo).toString();
+                    mAppIcon = packageManager.getApplicationIcon(appInfo);
                 }
             } catch (NameNotFoundException e) {
                 Log.e(TAG, "failed to retrieve ApplicationInfo for: " + packageName);
                 mAppLabel = packageName;
             }
+        }
+        // Early return if we found the app label and icon resource.
+        if (mAppLabel != null && mAppIcon != null) {
+            return;
         }
 
         final int uid = (int) mBatteryHistEntry.mUid;

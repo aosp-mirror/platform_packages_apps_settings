@@ -28,6 +28,7 @@ import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPrefe
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
+import com.android.settings.enterprise.FinancedPrivacyPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
@@ -103,6 +104,7 @@ public class SecuritySettings extends DashboardFragment {
             Lifecycle lifecycle, SecuritySettings host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EnterprisePrivacyPreferenceController(context));
+        controllers.add(new FinancedPrivacyPreferenceController(context));
         controllers.add(new ManageTrustAgentsPreferenceController(context));
         controllers.add(new ScreenPinningPreferenceController(context));
         controllers.add(new SimLockPreferenceController(context));
