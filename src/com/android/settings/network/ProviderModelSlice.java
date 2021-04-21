@@ -182,18 +182,18 @@ public class ProviderModelSlice extends WifiSlice {
 
         final boolean isDataEnabled =
                 isToggleAction ? newState : MobileNetworkUtils.isMobileDataEnabled(mContext);
-        doCarrierNetworkAction(isToggleAction, isDataEnabled);
+        doCarrierNetworkAction(isToggleAction, isDataEnabled, defaultSubId);
     }
 
     @VisibleForTesting
-    void doCarrierNetworkAction(boolean isToggleAction, boolean isDataEnabled) {
+    void doCarrierNetworkAction(boolean isToggleAction, boolean isDataEnabled, int subId) {
         final NetworkProviderWorker worker = getWorker();
         if (worker == null) {
             return;
         }
 
         if (isToggleAction) {
-            worker.setCarrierNetworkEnabled(isDataEnabled);
+            worker.setCarrierNetworkEnabledIfNeeded(isDataEnabled, subId);
             return;
         }
 
