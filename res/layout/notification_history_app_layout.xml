@@ -26,9 +26,9 @@
         android:layout_width="match_parent"
         android:clipChildren="true"
         android:background="@drawable/button_ripple_radius"
-        android:paddingTop="24dp"
+        android:paddingTop="20dp"
         android:orientation="horizontal"
-        android:paddingBottom="22dp"
+        android:paddingBottom="18dp"
         android:paddingStart="16dp">
         <ImageView
             android:id="@+id/icon"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"/>
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"/>
             <TextView
                 android:id="@+id/count"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:layout_gravity="start|center_vertical"
                 android:textDirection="locale"
                 android:paddingTop="4dp"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"/>
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"/>
         </LinearLayout>
 
         <include layout="@*android:layout/notification_expand_button"
