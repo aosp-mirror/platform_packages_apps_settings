@@ -54,7 +54,6 @@ public class PowerMenuPrivacyPreferenceControllerTest {
     private static final String CARDS_AVAILABLE_KEY =
             Settings.Secure.GLOBAL_ACTIONS_PANEL_AVAILABLE;
     private static final String CARDS_ENABLED_KEY = Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
-    private static final String CONTROLS_ENABLED_KEY = Settings.Secure.CONTROLS_ENABLED;
 
     private Context mContext;
     private ContentResolver mContentResolver;
@@ -171,18 +170,8 @@ public class PowerMenuPrivacyPreferenceControllerTest {
         mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, true);
         Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
         Settings.Secure.putInt(mContentResolver, CARDS_ENABLED_KEY, 1);
-        Settings.Secure.putInt(mContentResolver, CONTROLS_ENABLED_KEY, 1);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_DEPENDENT_SETTING);
-    }
-
-    @Test
-    public void getAvailabilityStatus_controlsDeletedSecure_retursAvailable() {
-        Settings.Secure.putString(mContentResolver, CONTROLS_ENABLED_KEY, null);
-        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
     }
 }
