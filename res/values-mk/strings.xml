@@ -2443,9 +2443,9 @@
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> бара целосна контрола на уредов. Услугава може да го чита екранот и да делува во име на корисниците со потреба за пристапност. Ова ниво на контрола не е соодветно за повеќето апликации."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Целосната контрола е соодветна за апликации што ви помагаат со потребите за пристапност, но не и за повеќето апликации."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Приказ и контрола на екранот"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Може да ги чита сите содржини на екранот и да прикажува содржини на други апликации."</string>
-    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Приказ и изведување дејства"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Може да ги следи вашите интеракции со апликациите или хардверскиот сензор и да комуницира со апликациите во ваше име."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Може да ги чита сите содржини на екранот и да прикажува содржини врз другите апликации."</string>
+    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Преглед и вршење на дејствата"</string>
+    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Може да ја следи вашата интеракција со апликациите или хардверскиот сензор и да врши интеракција со апликациите во ваше име."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Дозволи"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Одбиј"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Сопри"</string>
@@ -2804,10 +2804,8 @@
     <string name="tts_play" msgid="2945513377250757221">"Пушти"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Небезбедна"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"Небезбедни: <xliff:g id="VPN_COUNT">%d</xliff:g>"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"Небезбедни: <xliff:g id="VPN_COUNT">%d</xliff:g>"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Адаптивно поврзување"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Го продолжува траењето на батеријата и ја подобрува изведбата на уредот со автоматско управување со вашите мрежни врски"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Складирање акредитиви"</string>
@@ -4142,8 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Не се доделени дозволи"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Не се побарани дозволи"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Го контролира пристапот на апликациите до вашите податоци"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Контролна табла за приватност"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Прикажи кои апликации користеа дозволи неодамна"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Некористени апликации"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -4650,7 +4647,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Брзо отворање на камерата"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"За брзо отворање на камерата, притиснете го копчето за вклучување двапати. Работи од секој екран."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Брзо отворање на камерата"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Преврти ја камерата за селфи"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Превртете ја камерата за селфи"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Направете селфи-фотографии побрзо"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Навигација низ системот"</string>
@@ -4690,14 +4687,14 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 секунди"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"дофатливост"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"За да ги проверите времето, известувањата и другите информации, допрете двапати на екранот."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Подигни за проверка на телефонот"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Подигнете за проверка на телефонот"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Подигнете за да го проверите таблетот"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Подигнете за да го проверите уредот"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Екран за будење"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"За да ги проверите времето, известувањата и другите информации, земете го телефонот."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"За да ги проверите времето, известувањата и другите информации, земете го таблетот."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"За да ги проверите времето, известувањата и другите информации, земете го уредот."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Допри за проверка на телефонот"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Допрете за проверка на телефонот"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Допрете за да го проверите таблетот"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Допрете за да го проверите уредот"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"За да ги проверите времето, известувањата и другите информации, допрете го екранот."</string>
@@ -5104,8 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Да се рестартира уредот?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"За да започнете, рестартирајте го уредот. Потоа може да додадете друга SIM-картичка."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Продолжи"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"Да"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Рестартирај"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Не, фала"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Префрли"</string>
@@ -5318,12 +5314,10 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Да се дозволи пристап до контактите и евиденцијата на повици?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Уред со Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, сака да пристапи до вашите контакти и евиденција на повици. Ова ги опфаќа податоците за дојдовните и појдовните повици.\n\nДосега не сте се поврзале со <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Осветленост"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Заклучен екран"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Изглед"</string>
     <string name="category_name_color" msgid="937514550918977151">"Боја"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Други контроли за екранот"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Други"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Општо"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Користи „Темна тема“"</string>

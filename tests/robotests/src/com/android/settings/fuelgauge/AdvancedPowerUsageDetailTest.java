@@ -23,7 +23,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
@@ -48,7 +47,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
@@ -84,20 +82,12 @@ public class AdvancedPowerUsageDetailTest {
     private static final String USAGE_PERCENT = "16%";
     private static final int ICON_ID = 123;
     private static final int UID = 1;
-    private static final int POWER_MAH = 150;
     private static final long BACKGROUND_TIME_MS = 100;
     private static final long FOREGROUND_ACTIVITY_TIME_MS = 123;
     private static final long FOREGROUND_SERVICE_TIME_MS = 444;
     private static final long FOREGROUND_TIME_MS =
             FOREGROUND_ACTIVITY_TIME_MS + FOREGROUND_SERVICE_TIME_MS;
-    private static final long PROCSTATE_TOP_TIME_MS = FOREGROUND_ACTIVITY_TIME_MS;
-    private static final long BACKGROUND_TIME_US = BACKGROUND_TIME_MS * 1000;
-    private static final long FOREGROUND_ACTIVITY_TIME_US = FOREGROUND_ACTIVITY_TIME_MS * 1000;
     private static final long FOREGROUND_SERVICE_TIME_US = FOREGROUND_SERVICE_TIME_MS * 1000;
-    private static final long FOREGROUND_TIME_US = FOREGROUND_TIME_MS * 1000;
-    private static final long PROCSTATE_TOP_TIME_US = PROCSTATE_TOP_TIME_MS * 1000;
-    private static final long PHONE_FOREGROUND_TIME_MS = 250 * 1000;
-    private static final long PHONE_BACKGROUND_TIME_MS = 0;
     private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
     private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
     private static final String KEY_PREF_RESTRICTED = "restricted_pref";
@@ -123,14 +113,10 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private LoaderManager mLoaderManager;
     @Mock
-    private BatteryStats.Timer mForegroundActivityTimer;
-    @Mock
     private BatteryUtils mBatteryUtils;
     @Mock
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
     private Context mContext;
-    private Preference mForegroundPreference;
-    private Preference mBackgroundPreference;
     private Preference mFooterPreference;
     private RadioButtonPreference mRestrictedPreference;
     private RadioButtonPreference mOptimizePreference;
@@ -204,14 +190,10 @@ public class AdvancedPowerUsageDetailTest {
                 nullable(UserHandle.class));
         doAnswer(callable).when(mActivity).startActivity(captor.capture());
 
-        mForegroundPreference = new Preference(mContext);
-        mBackgroundPreference = new Preference(mContext);
         mFooterPreference = new Preference(mContext);
         mRestrictedPreference = new RadioButtonPreference(mContext);
         mOptimizePreference = new RadioButtonPreference(mContext);
         mUnrestrictedPreference = new RadioButtonPreference(mContext);
-        mFragment.mForegroundPreference = mForegroundPreference;
-        mFragment.mBackgroundPreference = mBackgroundPreference;
         mFragment.mFooterPreference = mFooterPreference;
         mFragment.mRestrictedPreference = mRestrictedPreference;
         mFragment.mOptimizePreference = mOptimizePreference;
@@ -264,6 +246,17 @@ public class AdvancedPowerUsageDetailTest {
         verify(mEntityHeaderController).setIcon(mAppEntry);
         verify(mEntityHeaderController).setLabel(mAppEntry);
         verify(mEntityHeaderController).setIsInstantApp(true);
+    }
+
+    @Test
+    public void testInitHeader_hasCorrectSummary() {
+        mFragment.mAppEntry = null;
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("0 min total • 0 min background for past 24 hr");
     }
 
     @Test
@@ -351,26 +344,6 @@ public class AdvancedPowerUsageDetailTest {
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment, PACKAGE_NAME[0]);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
-    }
-
-    @Test
-    public void testInitPreference_hasCorrectSummary() {
-        Bundle bundle = new Bundle(4);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, BACKGROUND_TIME_MS);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, FOREGROUND_TIME_MS);
-        bundle.putString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT, USAGE_PERCENT);
-        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, POWER_MAH);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
-                R.string.battery_used_for);
-        doReturn(mContext.getText(R.string.battery_active_for)).when(mFragment).getText(
-                R.string.battery_active_for);
-
-        mFragment.initPreference();
-
-        assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
-        assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
     }
 
     @Test
