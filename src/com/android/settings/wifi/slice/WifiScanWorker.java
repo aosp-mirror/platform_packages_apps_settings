@@ -21,10 +21,6 @@ import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COU
 import android.content.Context;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.os.HandlerThread;
-import android.os.Process;
-import android.os.SimpleClock;
-import android.os.SystemClock;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,16 +28,12 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SliceBackgroundWorker;
-import com.android.settingslib.utils.ThreadUtils;
-import com.android.wifitrackerlib.MergedCarrierEntry;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
-import java.time.Clock;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,40 +45,19 @@ public class WifiScanWorker extends SliceBackgroundWorker<WifiSliceItem> impleme
 
     private static final String TAG = "WifiScanWorker";
 
-    // Max age of tracked WifiEntries.
-    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
-    // Interval between initiating WifiPickerTracker scans.
-    private static final long SCAN_INTERVAL_MILLIS = 10_000;
-
     @VisibleForTesting
     final LifecycleRegistry mLifecycleRegistry;
     @VisibleForTesting
     protected WifiPickerTracker mWifiPickerTracker;
-    // Worker thread used for WifiPickerTracker work
-    private final HandlerThread mWorkerThread;
+    protected WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
     public WifiScanWorker(Context context, Uri uri) {
         super(context, uri);
 
         mLifecycleRegistry = new LifecycleRegistry(this);
 
-        mWorkerThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
-        mWorkerThread.start();
-        final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
-            @Override
-            public long millis() {
-                return SystemClock.elapsedRealtime();
-            }
-        };
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
-                .getWifiTrackerLibProvider()
-                .createWifiPickerTracker(getLifecycle(), context,
-                        ThreadUtils.getUiThreadHandler(),
-                        mWorkerThread.getThreadHandler(),
-                        elapsedRealtimeClock,
-                        MAX_SCAN_AGE_MILLIS,
-                        SCAN_INTERVAL_MILLIS,
-                        this);
+        mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(mLifecycleRegistry, context, this);
+        mWifiPickerTracker = mWifiPickerTrackerHelper.getWifiPickerTracker();
 
         mLifecycleRegistry.markState(Lifecycle.State.INITIALIZED);
         mLifecycleRegistry.markState(Lifecycle.State.CREATED);
@@ -108,7 +79,6 @@ public class WifiScanWorker extends SliceBackgroundWorker<WifiSliceItem> impleme
     @Override
     public void close() {
         mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
-        mWorkerThread.quit();
     }
 
     @Override
@@ -199,17 +169,15 @@ public class WifiScanWorker extends SliceBackgroundWorker<WifiSliceItem> impleme
         super.updateResults(resultList);
     }
 
-    public void setCarrierNetworkEnabled(boolean enable) {
-        final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
-        if (mergedCarrierEntry != null) {
-            mergedCarrierEntry.setEnabled(enable);
+    /** Enables/disables the carrier network if the carrier network provision disabled */
+    public void setCarrierNetworkEnabledIfNeeded(boolean enabled, int subId) {
+        if (!mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(subId)) {
+            mWifiPickerTrackerHelper.setCarrierNetworkEnabled(enabled);
         }
     }
 
+    /** Connect to the carrier network */
     public void connectCarrierNetwork() {
-        final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
-        if (mergedCarrierEntry != null && mergedCarrierEntry.canConnect()) {
-            mergedCarrierEntry.connect(null /* ConnectCallback */);
-        }
+        mWifiPickerTrackerHelper.connectCarrierNetwork(null /* ConnectCallback */);
     }
 }
