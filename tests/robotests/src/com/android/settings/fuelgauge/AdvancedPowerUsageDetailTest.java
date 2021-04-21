@@ -47,7 +47,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
@@ -58,6 +57,7 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -82,20 +82,15 @@ public class AdvancedPowerUsageDetailTest {
     private static final String USAGE_PERCENT = "16%";
     private static final int ICON_ID = 123;
     private static final int UID = 1;
-    private static final int POWER_MAH = 150;
     private static final long BACKGROUND_TIME_MS = 100;
     private static final long FOREGROUND_ACTIVITY_TIME_MS = 123;
     private static final long FOREGROUND_SERVICE_TIME_MS = 444;
     private static final long FOREGROUND_TIME_MS =
             FOREGROUND_ACTIVITY_TIME_MS + FOREGROUND_SERVICE_TIME_MS;
-    private static final long PROCSTATE_TOP_TIME_MS = FOREGROUND_ACTIVITY_TIME_MS;
-    private static final long BACKGROUND_TIME_US = BACKGROUND_TIME_MS * 1000;
-    private static final long FOREGROUND_ACTIVITY_TIME_US = FOREGROUND_ACTIVITY_TIME_MS * 1000;
     private static final long FOREGROUND_SERVICE_TIME_US = FOREGROUND_SERVICE_TIME_MS * 1000;
-    private static final long FOREGROUND_TIME_US = FOREGROUND_TIME_MS * 1000;
-    private static final long PROCSTATE_TOP_TIME_US = PROCSTATE_TOP_TIME_MS * 1000;
-    private static final long PHONE_FOREGROUND_TIME_MS = 250 * 1000;
-    private static final long PHONE_BACKGROUND_TIME_MS = 0;
+    private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
+    private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
+    private static final String KEY_PREF_RESTRICTED = "restricted_pref";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private FragmentActivity mActivity;
@@ -118,12 +113,14 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private LoaderManager mLoaderManager;
     @Mock
-    private BatteryStats.Timer mForegroundActivityTimer;
-    @Mock
     private BatteryUtils mBatteryUtils;
+    @Mock
+    private BatteryOptimizeUtils mBatteryOptimizeUtils;
     private Context mContext;
-    private Preference mForegroundPreference;
-    private Preference mBackgroundPreference;
+    private Preference mFooterPreference;
+    private RadioButtonPreference mRestrictedPreference;
+    private RadioButtonPreference mOptimizePreference;
+    private RadioButtonPreference mUnrestrictedPreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
 
@@ -170,6 +167,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
         mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
+        mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());
@@ -192,10 +190,14 @@ public class AdvancedPowerUsageDetailTest {
                 nullable(UserHandle.class));
         doAnswer(callable).when(mActivity).startActivity(captor.capture());
 
-        mForegroundPreference = new Preference(mContext);
-        mBackgroundPreference = new Preference(mContext);
-        mFragment.mForegroundPreference = mForegroundPreference;
-        mFragment.mBackgroundPreference = mBackgroundPreference;
+        mFooterPreference = new Preference(mContext);
+        mRestrictedPreference = new RadioButtonPreference(mContext);
+        mOptimizePreference = new RadioButtonPreference(mContext);
+        mUnrestrictedPreference = new RadioButtonPreference(mContext);
+        mFragment.mFooterPreference = mFooterPreference;
+        mFragment.mRestrictedPreference = mRestrictedPreference;
+        mFragment.mOptimizePreference = mOptimizePreference;
+        mFragment.mUnrestrictedPreference = mUnrestrictedPreference;
     }
 
     @After
@@ -244,6 +246,17 @@ public class AdvancedPowerUsageDetailTest {
         verify(mEntityHeaderController).setIcon(mAppEntry);
         verify(mEntityHeaderController).setLabel(mAppEntry);
         verify(mEntityHeaderController).setIsInstantApp(true);
+    }
+
+    @Test
+    public void testInitHeader_hasCorrectSummary() {
+        mFragment.mAppEntry = null;
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("0 min total • 0 min background for past 24 hr");
     }
 
     @Test
@@ -334,22 +347,46 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitPreference_hasCorrectSummary() {
-        Bundle bundle = new Bundle(4);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, BACKGROUND_TIME_MS);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, FOREGROUND_TIME_MS);
-        bundle.putString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT, USAGE_PERCENT);
-        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, POWER_MAH);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
-                R.string.battery_used_for);
-        doReturn(mContext.getText(R.string.battery_active_for)).when(mFragment).getText(
-                R.string.battery_active_for);
+    public void testInitPreference_isValidPackageName_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
 
         mFragment.initPreference();
 
-        assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
-        assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
+        assertThat(mFooterPreference.getTitle().toString())
+                .isEqualTo("This app requires Optimized battery usage.");
+    }
+
+    @Test
+    public void testInitPreference_isSystemOrDefaultApp_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
+
+        mFragment.initPreference();
+
+        assertThat(mFooterPreference.getTitle()
+                .toString()).isEqualTo("This app requires Unrestricted battery usage.");
+    }
+
+    @Test
+    public void testInitPreference_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
+
+        mFragment.initPreference();
+
+        assertThat(mFooterPreference.getTitle().toString())
+                .isEqualTo("Changing how an app uses your battery can affect its performance.");
+    }
+
+    @Test
+    public void testOnRadioButtonClicked_clickOptimizePref_optimizePreferenceChecked() {
+        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
+        mRestrictedPreference.setKey(KEY_PREF_RESTRICTED);
+        mUnrestrictedPreference.setKey(KEY_PREF_UNRESTRICTED);
+        mFragment.onRadioButtonClicked(mOptimizePreference);
+
+        assertThat(mOptimizePreference.isChecked()).isTrue();
+        assertThat(mRestrictedPreference.isChecked()).isFalse();
+        assertThat(mUnrestrictedPreference.isChecked()).isFalse();
     }
 }

@@ -70,6 +70,7 @@ public class ProviderModelSliceTest {
     private static final Uri PROVIDER_MODEL_SLICE_URI =
             Uri.parse("content://com.android.settings.slices/action/provider_model");
     private static final int MOCK_SLICE_LEVEL = 3;
+    private static final int SUB_ID = 2;
 
     private Context mContext;
     private MockProviderModelSlice mMockProviderModelSlice;
@@ -359,23 +360,23 @@ public class ProviderModelSliceTest {
     @Test
     public void doCarrierNetworkAction_toggleActionSetDataEnabled_setCarrierNetworkEnabledTrue() {
         mMockProviderModelSlice.doCarrierNetworkAction(true /* isToggleAction */,
-                true /* isDataEnabled */);
+                true /* isDataEnabled */, SUB_ID);
 
-        verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(true);
+        verify(mMockNetworkProviderWorker).setCarrierNetworkEnabledIfNeeded(true, SUB_ID);
     }
 
     @Test
     public void doCarrierNetworkAction_toggleActionSetDataDisabled_setCarrierNetworkEnabledFalse() {
         mMockProviderModelSlice.doCarrierNetworkAction(true /* isToggleAction */,
-                false /* isDataEnabled */);
+                false /* isDataEnabled */, SUB_ID);
 
-        verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(false);
+        verify(mMockNetworkProviderWorker).setCarrierNetworkEnabledIfNeeded(false, SUB_ID);
     }
 
     @Test
     public void doCarrierNetworkAction_primaryActionAndDataEnabled_connectCarrierNetwork() {
         mMockProviderModelSlice.doCarrierNetworkAction(false /* isToggleAction */,
-                true /* isDataEnabled */);
+                true /* isDataEnabled */, SUB_ID);
 
         verify(mMockNetworkProviderWorker).connectCarrierNetwork();
     }
@@ -383,7 +384,7 @@ public class ProviderModelSliceTest {
     @Test
     public void doCarrierNetworkAction_primaryActionAndDataDisabled_notConnectCarrierNetwork() {
         mMockProviderModelSlice.doCarrierNetworkAction(false /* isToggleAction */,
-                false /* isDataEnabled */);
+                false /* isDataEnabled */, SUB_ID);
 
         verify(mMockNetworkProviderWorker, never()).connectCarrierNetwork();
     }

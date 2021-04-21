@@ -28,4 +28,8 @@
         android:key="app_list"
         android:title="@string/power_usage_list_summary"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/battery_usage_screen_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

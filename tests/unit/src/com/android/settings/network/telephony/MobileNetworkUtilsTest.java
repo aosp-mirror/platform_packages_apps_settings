@@ -30,6 +30,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -121,7 +123,7 @@ public class MobileNetworkUtilsTest {
         mCarrierConfig = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID_1)).thenReturn(mCarrierConfig);
 
-        mNetwork = new Network(anyInt());
+        mNetwork = mock(Network.class, CALLS_REAL_METHODS);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mConnectivityManager.getActiveNetwork()).thenReturn(mNetwork);
 
@@ -131,8 +133,6 @@ public class MobileNetworkUtilsTest {
         when(mSubscriptionInfo2.getCarrierName()).thenReturn(PLMN_FROM_SUB_ID_2);
 
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
-        when(mSubscriptionManager.getAccessibleSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
 
         when(mTelephonyManager.getNetworkOperatorName()).thenReturn(
@@ -379,7 +379,8 @@ public class MobileNetworkUtilsTest {
     }
 
     private void addNetworkTransportType (int networkType) {
-        mNetworkCapabilities = new NetworkCapabilities().addTransportType(networkType);
+        mNetworkCapabilities = new NetworkCapabilities.Builder()
+                .addTransportType(networkType).build();
         when(mConnectivityManager.getNetworkCapabilities(mNetwork)).thenReturn(
                 mNetworkCapabilities);
     }

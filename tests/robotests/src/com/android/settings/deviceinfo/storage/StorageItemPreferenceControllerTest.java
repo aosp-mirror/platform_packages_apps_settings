@@ -48,7 +48,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
-import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.applications.StorageStatsSource;
@@ -329,7 +328,7 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
 
         verify(mFragment.getFragmentManager().beginTransaction())
-            .add(nullable(PrivateVolumeSettings.SystemInfoFragment.class), nullable(String.class));
+            .add(nullable(StorageUtils.SystemInfoFragment.class), nullable(String.class));
     }
 
     @Test

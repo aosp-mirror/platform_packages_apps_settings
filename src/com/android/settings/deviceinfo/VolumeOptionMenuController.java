@@ -35,11 +35,11 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.deviceinfo.StorageSettings.MountTask;
-import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 import com.android.settings.deviceinfo.storage.StorageEntry;
 import com.android.settings.deviceinfo.storage.StorageRenameFragment;
 import com.android.settings.deviceinfo.storage.StorageUtils;
+import com.android.settings.deviceinfo.storage.StorageUtils.MountTask;
+import com.android.settings.deviceinfo.storage.StorageUtils.UnmountTask;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;

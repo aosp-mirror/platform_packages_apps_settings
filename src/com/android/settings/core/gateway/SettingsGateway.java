@@ -78,10 +78,8 @@ import com.android.settings.datetime.DateTimeSettings;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
-import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
-import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
@@ -95,7 +93,6 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.gestures.AssistGestureSettings;
-import com.android.settings.gestures.DeviceControlsSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
@@ -215,9 +212,7 @@ public class SettingsGateway {
             ToggleDaltonizerPreferenceFragment.class.getName(),
             ToggleReduceBrightColorsPreferenceFragment.class.getName(),
             TextToSpeechSettings.class.getName(),
-            StorageSettings.class.getName(),
             PrivateVolumeForget.class.getName(),
-            PrivateVolumeSettings.class.getName(),
             PublicVolumeSettings.class.getName(),
             DevelopmentSettingsDashboardFragment.class.getName(),
             AndroidBeam.class.getName(),
@@ -310,7 +305,6 @@ public class SettingsGateway {
             MobileNetworkListFragment.class.getName(),
             PowerMenuSettings.class.getName(),
             GlobalActionsPanelSettings.class.getName(),
-            DeviceControlsSettings.class.getName(),
             DarkModeSettingsFragment.class.getName(),
             BugReportHandlerPicker.class.getName(),
             GestureNavigationSettingsFragment.class.getName(),

@@ -137,6 +137,76 @@ public final class BatteryHistEntryTest {
             /*percentOfTotal=*/ 0.3);
     }
 
+    @Test
+    public void testGetKey_consumerUidType_returnExpectedString() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put("uid", 3);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        assertThat(batteryHistEntry.getKey()).isEqualTo("3");
+    }
+
+    @Test
+    public void testGetKey_consumerUserType_returnExpectedString() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_USER_BATTERY);
+        values.put("userId", 2);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        assertThat(batteryHistEntry.getKey()).isEqualTo("U|2");
+    }
+
+    @Test
+    public void testGetKey_consumerSystemType_returnExpectedString() {
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+        values.put("drainType", 1);
+        final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
+
+        assertThat(batteryHistEntry.getKey()).isEqualTo("S|1");
+    }
+
+    @Test
+    public void testIsAppEntry_returnExpectedResult() {
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isAppEntry())
+            .isFalse();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isAppEntry())
+            .isFalse();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isAppEntry())
+            .isTrue();
+    }
+
+    @Test
+    public void testIsUserEntry_returnExpectedResult() {
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isUserEntry())
+            .isFalse();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isUserEntry())
+            .isTrue();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isUserEntry())
+            .isFalse();
+    }
+
+    @Test
+    public void testIsSystemEntry_returnExpectedResult() {
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isSystemEntry())
+            .isTrue();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isSystemEntry())
+            .isFalse();
+        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isSystemEntry())
+            .isFalse();
+    }
+
+    private static BatteryHistEntry createEntry(int consumerType) {
+        return new BatteryHistEntry(getContentValuesWithType(consumerType));
+    }
+
+    private static ContentValues getContentValuesWithType(int consumerType) {
+        final ContentValues values = new ContentValues();
+        values.put("consumerType", Integer.valueOf(consumerType));
+        return values;
+    }
+
     private void assertBatteryHistEntry(
         BatteryHistEntry entry, int drainType, double percentOfTotal) {
         assertThat(entry.isValidEntry()).isTrue();

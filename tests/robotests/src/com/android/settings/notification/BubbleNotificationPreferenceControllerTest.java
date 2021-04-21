@@ -16,7 +16,7 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
@@ -91,7 +91,7 @@ public class BubbleNotificationPreferenceControllerTest {
     @Test
     public void updateState_settingIsOn_preferenceSetChecked() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
         mController.updateState(preference);
 
@@ -101,8 +101,8 @@ public class BubbleNotificationPreferenceControllerTest {
     @Test
     public void updateState_settingIsOff_preferenceSetUnchecked() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON)).isEqualTo(OFF);
 
         mController.updateState(preference);
@@ -112,24 +112,24 @@ public class BubbleNotificationPreferenceControllerTest {
 
     @Test
     public void isChecked_settingIsOff_shouldReturnFalse() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isChecked_settingIsOn_shouldReturnTrue() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void setChecked_setFalse_disablesSetting() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
         mController.setChecked(false);
-        int updatedValue = Settings.Global.getInt(mContext.getContentResolver(),
+        int updatedValue = Settings.Secure.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, -1);
 
         assertThat(updatedValue).isEqualTo(OFF);
@@ -137,10 +137,10 @@ public class BubbleNotificationPreferenceControllerTest {
 
     @Test
     public void setChecked_setTrue_enablesSetting() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
 
         mController.setChecked(true);
-        int updatedValue = Settings.Global.getInt(mContext.getContentResolver(),
+        int updatedValue = Settings.Secure.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, -1);
 
         assertThat(updatedValue).isEqualTo(ON);

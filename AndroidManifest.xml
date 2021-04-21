@@ -220,7 +220,7 @@
                   android:label="@string/network_settings_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MOBILE_NETWORK_LIST" />
-                <action android:name="android.settings.MANAGE_ALL_SUBSCRIPTIONS_SETTINGS" />
+                <action android:name="android.settings.MANAGE_ALL_SIM_PROFILES_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1296,7 +1296,7 @@
         <activity
             android:name=".notification.history.NotificationHistoryActivity"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
+            android:theme="@style/Theme.NotificationHistory"
             android:label="@string/notification_history_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_HISTORY" />
@@ -1459,7 +1459,7 @@
         </activity>
 
         <activity android:name=".security.RequestManageCredentials"
-                  android:theme="@style/Theme.RequestManageCredentials"
+                  android:theme="@style/Theme.SubSettings"
                   android:exported="true">
             <intent-filter>
                 <action android:name="android.security.MANAGE_CREDENTIALS"/>
@@ -1980,13 +1980,6 @@
         </activity>
 
         <activity
-            android:name="Settings$PrivateVolumeSettingsActivity"
-            android:label="@string/storage_settings_title">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.deviceinfo.PrivateVolumeSettings" />
-        </activity>
-
-        <activity
             android:name="Settings$PublicVolumeSettingsActivity"
             android:exported="true"
             android:label="@string/storage_settings_title">
@@ -2432,6 +2425,7 @@
 
         <activity android:name="Settings$ChooseAccountActivity"
             android:label="@string/header_add_an_account"
+                  android:theme="@style/Theme.SubSettings"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.ChooseAccountFragment" />
@@ -2631,7 +2625,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.NotificationAssistantPicker" />
+                       android:value="com.android.settings.notification.ConfigureNotificationSettings" />
         </activity>
 
         <activity
@@ -3692,17 +3686,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.gestures.PowerMenuSettings" />
-        </activity>
-
-        <activity android:name="Settings$DeviceControlsSettingsActivity"
-                      android:exported="true"
-                      android:label="@string/device_controls_sentence">
-            <intent-filter>
-                <action android:name="android.settings.ACTION_DEVICE_CONTROLS_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.gestures.DeviceControlsSettings" />
         </activity>
 
         <activity

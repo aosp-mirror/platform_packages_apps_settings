@@ -50,7 +50,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         BatteryPreferenceController {
     @VisibleForTesting
     static final String KEY_BATTERY_HEADER = "battery_header";
-    private static final String ANNOTATION_URL = "url";
     private static final int BATTERY_MAX_LEVEL = 100;
 
     @VisibleForTesting
@@ -87,6 +86,9 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mBatteryUsageProgressBarPref = screen.findPreference(getPreferenceKey());
+        //Set up loading text first to prevent layout flaky before info loaded.
+        mBatteryUsageProgressBarPref.setBottomSummary(
+                mContext.getString(R.string.settings_license_activity_loading));
 
         if (com.android.settings.Utils.isBatteryPresent(mContext)) {
             quickUpdateHeaderPreference();
@@ -103,8 +105,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @Override
     public void onStart() {
         EntityHeaderController.newInstance(mActivity, mHost, null /* header view */)
-                .setRecyclerView(mHost.getListView(), mLifecycle)
-                .styleActionBar(mActivity);
+                .setRecyclerView(mHost.getListView(), mLifecycle);
     }
 
     private CharSequence generateLabel(BatteryInfo info) {

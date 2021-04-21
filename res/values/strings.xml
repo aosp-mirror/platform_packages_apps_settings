@@ -740,26 +740,6 @@
     <!-- Summary for Security settings when fingerprint is not supported [CHAR LIMIT=NONE]-->
     <string name="security_dashboard_summary_no_fingerprint">Screen lock</string>
 
-    <!-- Biometric enrollment for devices with multiple sensors --><skip />
-    <!-- Introduction title shown in biometric enrollment screen for devices that have both fingerprint and face. [CHAR LIMIT=60] -->
-    <string name="multi_biometric_enroll_title">Unlock your phone securely with your face and fingerprint</string>
-    <!-- Introduction subtitle shown in the biometric enrollment screen. [CHAR LIMIT=60] -->
-    <string name="multi_biometric_enroll_subtitle">You can also sign in to apps and confirm payments</string>
-    <!-- Section description preceding the biometric sensors available for the user to select for enrollment. [CHAR LIMIT=40] -->
-    <string name="multi_biometric_enroll_setup_with">Set up unlock with:</string>
-    <!-- Title for a preference containing a checkbox which if selected will allow the user to proceed to set up face unlock. [CHAR LIMIT=32] -->
-    <string name="multi_biometric_enroll_face_unlock_title">Face unlock</string>
-    <!-- Description for a preference containing a checkbox which if selected will allow the user to set up face unlock. [CHAR LIMIT=40] -->
-    <string name="multi_biometric_enroll_face_unlock_description">Make unlocking your phone a breeze</string>
-    <!-- Title for a preference containing a checkbox which if selected will allow the user to proceed to set up fingerprint unlock. [CHAR LIMIT=32] -->
-    <string name="multi_biometric_enroll_fingerprint_unlock_title">Fingerprint</string>
-    <!-- Description for a preference containing a checkbox which if selected will allow the user to set up fingerprint unlock. [CHAR LIMIT=40] -->
-    <string name="multi_biometric_enroll_fingerprint_unlock_description">Save time unlocking phone in your pocket</string>
-    <!-- Button for skipping biometric enrollment. [CHAR LIMIT=30] -->
-    <string name="multi_biometric_enroll_skip">Skip</string>
-    <!-- Button for starting biometric enrollment. [CHAR LIMIT=30] -->
-    <string name="multi_biometric_enroll_next">Next</string>
-
     <!-- Face enrollment and settings --><skip />
     <!-- Message shown in summary field when face unlock is set up. [CHAR LIMIT=40] -->
     <string name="security_settings_face_preference_summary">Face added</string>
@@ -985,7 +965,7 @@
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
     <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase</string>
+    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase\n\n<annotation id="url">Learn more</annotation></string>
 
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
@@ -2969,6 +2949,8 @@
     <string name="auto_rotate_camera_lock_title">Camera is locked</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
     <string name="auto_rotate_camera_lock_summary">Camera must be unlocked for Face Detection</string>
+    <!-- screen_timeout settings screen, summary about the camera being disabled [CHAR LIMIT=NONE]-->
+    <string name="adaptive_sleep_camera_lock_summary">Camera must be unlocked for Screen Attention</string>
     <!-- auto_rotate settings screen, title about the required permission is missing [CHAR LIMIT=NONE]-->
     <string name="auto_rotate_summary_no_permission">Camera access is required for Face Detection. Tap to manage permissions for Device Personalization Services</string>
     <!-- auto_rotate settings screen, text for the camera permission button [CHAR LIMIT=NONE]-->
@@ -3424,11 +3406,6 @@
     <string name="sd_format_summary" product="default">Erases all data on the SD card, such as music and photos</string>
     <!-- SD card status when it is mounted as read only. Will be appended to size, starts with an unbreakable space -->
 
-    <!-- Title of dialog asking user to confirm before clearing all caches. [CHAR LIMIT=48] -->
-    <string name="memory_clear_cache_title">Clear cached data?</string>
-    <!-- Message of dialog asking user to confirm before clearing all caches. [CHAR LIMIT=48] -->
-    <string name="memory_clear_cache_message">This will clear cached data for all apps.</string>
-
     <!-- SD card & phone storage settings item summary that will result in the phone connected to PC and MTP/PTP enabled.   [CHAR LIMIT=80] -->
     <string name="mtp_ptp_mode_summary">MTP or PTP function is active</string>
 
@@ -3480,8 +3457,6 @@
     <string name="storage_menu_forget">Forget</string>
     <!-- Storage setting.  Menu option for setting up a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_set_up">Set up</string>
-    <!-- Storage setting.  Menu option for exploring a storage device [CHAR LIMIT=30]-->
-    <string name="storage_menu_explore">Explore</string>
     <!-- Storage setting. Menu option for using the deletion helper. [CHAR LIMIT=30] -->
     <string name="storage_menu_free">Free up space</string>
     <!-- Storage setting. Menu option for accessing the storage manager settings. [CHAR LIMIT=30] -->
@@ -3518,14 +3493,10 @@
     <!-- Section header above list of external storage devices [CHAR LIMIT=30]-->
     <string name="storage_external_title">Portable storage</string>
 
-    <!-- Summary of a single storage volume, constrasting available and total storage space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> used of <xliff:g id="total" example="32GB">%2$s</xliff:g></string>
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large"><xliff:g id="number" example="128">^1</xliff:g><small><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></small></string>
     <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
     <string name="storage_volume_used">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
-    <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_used_total">Total used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
 
     <!-- Toast informing that storage mount operation was successful. [CHAR LIMIT=64]-->
     <string name="storage_mount_success"><xliff:g id="name" example="SD card">%1$s</xliff:g> is mounted</string>
@@ -3553,10 +3524,6 @@
     <string name="storage_dialog_unmountable">This <xliff:g id="name" example="SD card">^1</xliff:g> is corrupted.
 \n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g>, you have to set it up first.</string>
 
-    <!-- Dialog body informing user about an unsupported storage device. [CHAR LIMIT=NONE]-->
-    <string name="storage_dialog_unsupported">This device doesn\u2019t support this <xliff:g id="name" example="SD card">^1</xliff:g>.
-\n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g> with this device, you have to set it up first.</string>
-
     <!-- Body of dialog informing user about consequences of formatting an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_format_details">After formatting, you can use this <xliff:g id="name" example="SD card">^1</xliff:g> in other devices.
 \n\nAll data on this <xliff:g id="name" example="SD card">^1</xliff:g> will be erased. Consider backing up first.
@@ -3580,33 +3547,10 @@
     <!-- Body of dialog confirming that user wants to forget an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_forget_confirm">All the apps, photos, and data stored on this <xliff:g id="name" example="SD card">^1</xliff:g> will be lost forever.</string>
 
-    <!-- Item title describing storage used by apps [CHAR LIMIT=48]-->
-    <string name="storage_detail_apps">Apps</string>
     <!-- Item title describing storage used by images [CHAR LIMIT=48]-->
     <string name="storage_detail_images">Images</string>
-    <!-- Item title describing storage used by videos [CHAR LIMIT=48]-->
-    <string name="storage_detail_videos">Videos</string>
-    <!-- Item title describing storage used by audio [CHAR LIMIT=48]-->
-    <string name="storage_detail_audio">Audio</string>
-    <!-- Item title describing storage used by cached data [CHAR LIMIT=48]-->
-    <string name="storage_detail_cached">Cached data</string>
-    <!-- Item title describing storage used by other data [CHAR LIMIT=48]-->
-    <string name="storage_detail_other">Other</string>
-    <!-- Item title describing internal storage used by the Android System [CHAR LIMIT=48]-->
-    <string name="storage_detail_system">System</string>
-    <!-- Item title that will launch a file explorer [CHAR LIMIT=48]-->
-    <string name="storage_detail_explore">Explore <xliff:g id="name" example="SD card">^1</xliff:g></string>
-
-    <!-- Body of dialog informing user about other files on a storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_detail_dialog_other">Other includes shared files saved by apps, files downloaded from the internet or Bluetooth, Android files, and so on.
-\n\nTo see the visible contents of this <xliff:g id="name" example="SD card">^1</xliff:g>, tap Explore.</string>
-
     <!-- Body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_system">System includes files used to run Android version <xliff:g id="version" example="8.0">%s</xliff:g></string>
-
-    <!-- Body of dialog informing user about other users on a storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, apps, or other data, using <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
-\n\nTo view details, switch to <xliff:g id="user" example="Guest user">^1</xliff:g>.</string>
 
     <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_title">Set up your <xliff:g id="name" example="SD card">^1</xliff:g></string>
@@ -5888,6 +5832,21 @@
     <!-- Dialog message when app can't been restricted because it is not optimized [CHAR_LIMIT=120] -->
     <string name="background_activity_disabled_dialog_text">Since this app is not set to optimize battery, you can\u2019t restrict it.\n\nTo restrict the app, first turn on battery optimization.</string>
 
+    <!-- Title for the battery unrestricted settings [CHAR_LIMIT=40] -->
+    <string name="manager_battery_usage_unrestricted_title">Unrestricted</string>
+    <!-- Title for the battery optimized settings [CHAR_LIMIT=40] -->
+    <string name="manager_battery_usage_optimized_title">Optimized</string>
+    <!-- Summary for the battery unrestricted settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_unrestricted_summary">Allow battery usage in background without restrictions. May use more battery.</string>
+    <!-- Summary for the battery optimized settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_optimized_summary">Optimize based on your usage. Recommended for most apps.</string>
+    <!-- Summary for the battery restricted settings [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_restricted_summary">Restrict battery usage while in background. App may not work as expected. Notifications may be delayed.</string>
+    <!-- Footer for the manage battery usage page [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_footer">Changing how an app uses your battery can affect its performance.</string>
+    <!-- Footer for the manage battery usage page when app is limited to specific option (e.g This app requires restricted battery usage) [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_footer_limited">This app requires <xliff:g id="state" example="restricted">%1$s</xliff:g> battery usage.</string>
+
     <!-- Title for the screen usage in power use UI [CHAR_LIMIT=60] -->
     <string name="device_screen_usage">Screen usage since full charge</string>
     <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
@@ -6296,6 +6255,8 @@
     <string name ="battery_detail_info_title">Since full charge</string>
     <!-- Title for the battery management group [CHAR LIMIT=40] -->
     <string name ="battery_detail_manage_title">Manage battery usage</string>
+    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_and_background_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background for past 24 hr</string>
 
     <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
     <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
@@ -6400,7 +6361,16 @@
     <string name="battery_usage_time_am">am</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
     <string name="battery_usage_time_pm">pm</string>
-
+    <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time less than a minute -->
+    <string name="battery_usage_total_less_than_one_minute">Total: less than a min</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage item for total background time less than a minute -->
+    <string name="battery_usage_background_less_than_one_minute">Background: less than a min</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time -->
+    <string name="battery_usage_for_total_time">Total: <xliff:g id="time">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage item for background usage time -->
+    <string name="battery_usage_for_background_time">Background: <xliff:g id="time">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer contentt -->
+    <string name="battery_usage_screen_footer">Battery usage data is approximate</string>
     <!-- Process Stats strings -->
     <skip />
 
@@ -6546,8 +6516,10 @@
     <string name="vpn_settings_title">VPN</string>
     <!-- Title of preference to enter the VPN settings activity [CHAR LIMIT=30] -->
     <string name="vpn_settings_insecure_single">Not secure</string>
-    <!-- Title of preference to enter the VPN settings activity [CHAR LIMIT=30] -->
-    <string name="vpn_settings_insecure_multiple"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
+    <!-- Title of preference to enter the VPN settings activity, if there are multiple vpns but only 1 insecure vpn [CHAR LIMIT=60] -->
+    <string name="vpn_settings_single_insecure_multiple_total"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
+    <!-- Title of preference to enter the VPN settings activity, if there are multiple vpns and multiple insecure vpns [CHAR LIMIT=60] -->
+    <string name="vpn_settings_multiple_insecure_multiple_total"><xliff:g id="vpn_count" example="1">%d</xliff:g> not secure</string>
 
     <!-- Title of Adaptive connectivity. Adaptive connectivity is a feature which automatically manages network connections for better battery life and performance. [CHAR LIMIT=60] -->
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
@@ -7219,7 +7191,7 @@
     <string name="vpn_require_connection_title">Require VPN connection?</string>
 
     <!-- Dialog subtitle warning for a VPN app that has an insecure type. [CHAR LIMIT=100]  -->
-    <string name="vpn_insecure_dialog_subtitle">This VPN is not secure. Update to an IKEv2 VPN</string>
+    <string name="vpn_insecure_dialog_subtitle">Not secure. Update to an IKEv2 VPN</string>
 
     <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
     <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>
@@ -9030,8 +9002,10 @@
         <item quantity="other">%d apps can read notifications</item>
     </plurals>
 
-    <!-- Title for Notification Assistant Picker screen [CHAR LIMIT=30]-->
-    <string name="notification_assistant_title">Adaptive Notifications</string>
+    <!-- Title for Notification Assistant setting  [CHAR LIMIT=30]-->
+    <string name="notification_assistant_title">Enhanced notifications</string>
+    <!-- Summary of Notification Assistant provided features [CHAR LIMIT=NONE]-->
+    <string name="notification_assistant_summary">Get suggested actions, replies, and more</string>
 
     <!-- Label for no NotificationAssistantService [CHAR_LIMIT=NONE] -->
     <string name="no_notification_assistant">None</string>
@@ -9049,10 +9023,11 @@
     <!-- Summary for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_assistant_security_warning_summary">
-        <xliff:g id="notification_assistant_name" example="Notification Assistant">%1$s</xliff:g> will be able to read all notifications,
-        including personal information such as contact names and the text of messages you receive.
-        This app will also be able to dismiss notifications or take action on buttons in notifications, including answering phone calls.
-        \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
+        Enhanced notifications can read all notification content,
+        including personal information like contact names and messages.
+        This feature can also dismiss notifications or take actions on buttons in notifications,
+        such as answering phone calls.
+        \n\nThis feature can also turn Priority mode on or off and change related settings.
     </string>
 
     <!-- Title for a warning message about security implications of enabling a notification
@@ -9081,6 +9056,10 @@
     <string name="notif_type_alerting_summary">Notifications that may ring or vibrate based on settings</string>
     <string name="notif_type_silent">Silent</string>
     <string name="notif_type_silent_summary">Notifications that never make sound or vibrations</string>
+    <!-- category header for apps allowed to read notifications. [CHAR LIMIT=45] -->
+    <string name="notification_listener_allowed">Allowed</string>
+    <!-- category header for apps not allowed to read notifications. [CHAR LIMIT=45] -->
+    <string name="notification_listener_not_allowed">Not allowed</string>
 
     <!-- Per notification listener, a list of apps whose notifications this listener cannot see -->
     <string name="notif_listener_excluded_app_title">See all apps</string>
@@ -9767,6 +9746,11 @@
     <string name="switch_on_text">On</string>
     <string name="switch_off_text">Off</string>
 
+
+    <!-- The subtext when screen pinning feature is enabled. [CHAR LIMIT=28] -->
+    <string name="screen_pinning_switch_on_text">On</string>
+    <!-- The subtext when screen pinning feature is disabled. [CHAR LIMIT=28] -->
+    <string name="screen_pinning_switch_off_text">Off</string>
     <!-- [CHAR LIMIT=28] Screen pinning title -->
     <string name="screen_pinning_title">App pinning</string>
     <!-- [CHAR LIMIT=none] Screen pinning introduction -->
@@ -10026,7 +10010,7 @@
     <string name="runtime_permissions_summary_control_app_access">Control app access to your data</string>
 
     <!-- Permissions usage title [CHAR LIMIT=NONE] -->
-    <string name="permissions_usage_title">Permissions usage</string>
+    <string name="permissions_usage_title">Privacy dashboard</string>
 
     <!-- Permissions usage summary, which describes what the permissions usage does [CHAR LIMIT=NONE] -->
     <string name="permissions_usage_summary">Show which apps recently used permissions</string>
@@ -11825,7 +11809,7 @@
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_usage_summary"><xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g> used</string>
     <!-- Summary of a single storage volume total space. [CHAR LIMIT=24] -->
-    <string name="storage_total_summary">Total <xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g></string>
+    <string name="storage_total_summary"><xliff:g id="number" example="128">%1$s</xliff:g> <xliff:g id="unit" example="KB">%2$s</xliff:g> total</string>
 
     <!-- Label for button allow user to remove the instant app from the device. -->
     <string name="clear_instant_app_data">Clear app</string>
@@ -12575,6 +12559,8 @@
     <string name="sim_action_restart_text">To get started, restart your device. Then you can add another SIM.</string>
     <!-- Button on a dialog to confirm SIM operations. [CHAR LIMIT=30] -->
     <string name="sim_action_continue">Continue</string>
+    <!-- Button on a dialog to confirm SIM operations. [CHAR LIMIT=30] -->
+    <string name="sim_action_yes">Yes</string>
     <!-- User confirms reboot the phone. [CHAR LIMIT=30] -->
     <string name="sim_action_reboot">Restart</string>
     <!-- Button on a dialog to reject SIM operations. [CHAR LIMIT=30] -->
@@ -12881,9 +12867,6 @@
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
 
-    <!-- Device controls name sentence case [CHAR LIMIT=40] -->
-    <string name="device_controls_sentence">Device controls</string>
-
     <!-- Device controls name lower case [CHAR LIMIT=40] -->
     <string name="quick_controls_lower">device controls</string>
 
@@ -12901,12 +12884,6 @@
 
     <!-- Power menu setting option cards and passes [CHAR LIMIT=NONE] -->
     <string name="power_menu_cards_passes">Show cards &amp; passes</string>
-
-    <!-- Power menu setting option device controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_device_controls">Show device controls</string>
-
-    <!-- Power menu setting option cards, passes, device controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_cards_passes_device_controls">Show cards, passes, and device controls</string>
 
     <!-- Power menu setting lock screen category name [CHAR LIMIT=40] -->
     <string name="power_menu_lock_screen_category">Lock screen</string>
@@ -13065,6 +13042,12 @@
     <string name="to_switch_networks_disconnect_ethernet">To switch networks, disconnect ethernet</string>
     <!-- Panel subtitle for Wi-Fi turned on. [CHAR LIMIT=60] -->
     <string name="wifi_is_turned_on_subtitle">Wi\u2011Fi is turned on</string>
+    <!-- Title for merged carrier Wi-Fi offload toggle. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_offload_title">W+ connections</string>
+    <!-- Summary for merged carrier Wi-Fi offload toggle. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_offload_summary">Allow Google Fi to use W+ networks to improve speed and coverage</string>
+    <!-- Title for merged carrier Wi-Fi network information. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_network_title">W+ network</string>
 
     <!-- Summary text separator for preferences including a short description
          (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
@@ -13093,28 +13076,28 @@
     <string name="apps_dashboard_title">Apps</string>
 
     <!-- Bluetooth message permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_message_access_notification_content">Untrusted device wants to access your messages. Tap for details.</string>
+    <string name="bluetooth_message_access_notification_content">A device wants to access your messages. Tap for details.</string>
     <!-- Bluetooth message permission alert for dialog title [CHAR LIMIT=none] -->
     <string name="bluetooth_message_access_dialog_title">Allow access to messages?</string>
     <!-- Bluetooth message permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_message_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <string name="bluetooth_message_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
     <!-- Bluetooth phonebook permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_access_notification_content">Untrusted device wants to access your contacts and call log. Tap for details.</string>
+    <string name="bluetooth_phonebook_access_notification_content">A device wants to access your contacts and call log. Tap for details.</string>
     <!-- Bluetooth phonebook permission alert for dialog title [CHAR LIMIT=none] -->
     <string name="bluetooth_phonebook_access_dialog_title">Allow access to contacts and call log?</string>
     <!-- Bluetooth phonebook permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <string name="bluetooth_phonebook_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
 
     <!-- Brightness category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_brightness">Brightness</string>
     <!-- Lock screen category name in Display Settings [CHAR LIMIT=none] -->
-    <string name="category_name_lock_display">Lock Display</string>
+    <string name="category_name_lock_display">Lock display</string>
     <!-- Appearance category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_appearance">Appearance</string>
     <!-- Color category name in Display Settings [CHAR LIMIT=none] -->
     <string name="category_name_color">Color</string>
     <!-- Name of Other display controls category in Display Settings [CHAR LIMIT=none] -->
-    <string name="category_name_display_controls">Other Display Controls</string>
+    <string name="category_name_display_controls">Other display controls</string>
     <!-- Others category name [CHAR LIMIT=none] -->
     <string name="category_name_others">Others</string>
     <!-- General category name [CHAR LIMIT=none] -->
@@ -13201,4 +13184,7 @@
 
     <!-- All apps screen title, entry name on Apps page for the user to go to the all apps page. [CHAR LIMIT=30] -->
     <string name="all_apps">All apps</string>
+
+    <!-- Label for button to not allow grant the permission for remote devices. [CHAR_LIMIT=50] -->
+    <string name="request_manage_bluetooth_permission_dont_allow">Don\u2019t allow</string>
 </resources>

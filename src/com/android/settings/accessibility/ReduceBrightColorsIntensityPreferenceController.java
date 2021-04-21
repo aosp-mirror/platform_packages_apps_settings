@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
-import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -38,10 +37,10 @@ public class ReduceBrightColorsIntensityPreferenceController extends SliderPrefe
 
     @Override
     public int getAvailabilityStatus() {
-        if (!ColorDisplayManager.isColorTransformAccelerated(mContext)) {
+        if (!ColorDisplayManager.isReduceBrightColorsAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
-        } else if (Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0) != 1) {
+        }
+        if (!mColorDisplayManager.isReduceBrightColorsActivated()) {
             return DISABLED_DEPENDENT_SETTING;
         }
         return AVAILABLE;

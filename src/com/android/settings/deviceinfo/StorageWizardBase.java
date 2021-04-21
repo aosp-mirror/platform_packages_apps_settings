@@ -19,8 +19,6 @@ package com.android.settings.deviceinfo;
 import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.annotation.LayoutRes;
 import android.annotation.NonNull;
 import android.content.Intent;
@@ -54,6 +52,8 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class StorageWizardBase extends FragmentActivity {
+    private static final String TAG = "StorageWizardBase";
+
     protected static final String EXTRA_FORMAT_FORGET_UUID = "format_forget_uuid";
     protected static final String EXTRA_FORMAT_PRIVATE = "format_private";
     protected static final String EXTRA_FORMAT_SLOW = "format_slow";

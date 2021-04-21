@@ -648,12 +648,8 @@ public class MobileNetworkUtils {
         return getOperatorNameFromTelephonyManager(context);
     }
 
-    private static SubscriptionInfo getSubscriptionInfo(SubscriptionManager subManager,
-            int subId) {
-        List<SubscriptionInfo> subInfos = subManager.getAccessibleSubscriptionInfoList();
-        if (subInfos == null) {
-            subInfos = subManager.getActiveSubscriptionInfoList();
-        }
+    private static SubscriptionInfo getSubscriptionInfo(SubscriptionManager subManager, int subId) {
+        List<SubscriptionInfo> subInfos = subManager.getActiveSubscriptionInfoList();
         if (subInfos == null) {
             return null;
         }

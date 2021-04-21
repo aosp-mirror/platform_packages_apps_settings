@@ -17,14 +17,11 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.Date;
 import java.util.TimeZone;
 
-
 /** A container class to carry data from {@link ContentValues}. */
-public final class BatteryHistEntry {
+public class BatteryHistEntry {
     private static final String TAG = "BatteryHistEntry";
 
     /** Keys for accessing {@link ContentValues} or {@link Cursor}. */
@@ -68,6 +65,7 @@ public final class BatteryHistEntry {
     public final int mBatteryStatus;
     public final int mBatteryHealth;
 
+    private String mKey = null;
     private boolean mIsValidEntry = true;
 
     public BatteryHistEntry(ContentValues values) {
@@ -115,10 +113,42 @@ public final class BatteryHistEntry {
         return mIsValidEntry;
     }
 
+    /** Whether this {@link BatteryHistEntry} is user consumer or not. */
+    public boolean isUserEntry() {
+        return mConsumerType == ConvertUtils.CONSUMER_TYPE_USER_BATTERY;
+    }
+
+    /** Whether this {@link BatteryHistEntry} is app consumer or not. */
+    public boolean isAppEntry() {
+        return mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
+    }
+
+    /** Whether this {@link BatteryHistEntry} is system consumer or not. */
+    public boolean isSystemEntry() {
+        return mConsumerType == ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
+    }
+
+    /** Gets an identifier to represent this {@link BatteryHistEntry}. */
+    public String getKey() {
+        if (mKey == null) {
+            switch (mConsumerType) {
+                case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
+                    mKey = Long.toString(mUid);
+                    break;
+                case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
+                    mKey = "S|" + mDrainType;
+                    break;
+                case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
+                    mKey = "U|" + mUserId;
+                    break;
+            }
+        }
+        return mKey;
+    }
+
     @Override
     public String toString() {
-        final String recordAtDateTime =
-            new SimpleDateFormat("MMM dd,yyyy HH:mm:ss").format(new Date(mTimestamp));
+        final String recordAtDateTime = ConvertUtils.utcToLocalTime(mTimestamp);
         final StringBuilder builder = new StringBuilder()
             .append("\nBatteryHistEntry{")
             .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
@@ -139,7 +169,7 @@ public final class BatteryHistEntry {
             return values.getAsInteger(key);
         };
         mIsValidEntry = false;
-        return -1;
+        return 0;
     }
 
     private int getInteger(Cursor cursor, String key) {
@@ -148,7 +178,7 @@ public final class BatteryHistEntry {
             return cursor.getInt(columnIndex);
         }
         mIsValidEntry = false;
-        return -1;
+        return 0;
     }
 
     private long getLong(ContentValues values, String key) {
@@ -156,7 +186,7 @@ public final class BatteryHistEntry {
             return values.getAsLong(key);
         }
         mIsValidEntry = false;
-        return -1L;
+        return 0L;
     }
 
     private long getLong(Cursor cursor, String key) {
@@ -165,7 +195,7 @@ public final class BatteryHistEntry {
             return cursor.getLong(columnIndex);
         }
         mIsValidEntry = false;
-        return -1L;
+        return 0L;
     }
 
     private double getDouble(ContentValues values, String key) {

@@ -341,22 +341,13 @@
         <item name="android:padding">8dp</item>
     </style>
 
-    <style name="TextAppearance.NotificationHistory">
+    <style name="TextAppearance.NotificationHistory" parent="@android:style/Theme.DeviceDefault.DayNight">
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.NotificationHistory.AppName">
         <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
         <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="TextAppearance.NotificationHistory.Title">
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
-    </style>
-
-    <style name="TextAppearance.NotificationHistory.Text">
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="TextAppearance.ContextualCardDismissalText"
@@ -416,6 +407,12 @@
         <item name="android:max">10000</item>
         <item name="android:mirrorForRtl">false</item>
         <item name="android:progressDrawable">@drawable/ring_progress</item>
+    </style>
+
+    <style name="HorizontalProgressBarStyle"
+           parent="android:style/Widget.Material.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:scaleY">0.5</item>
     </style>
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
@@ -790,7 +787,7 @@
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
 
-    <style name="HomepageTitleText" parent="ToolbarText">
+    <style name="HomepageTitleText" parent="ToolbarText.Expanded">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
@@ -804,6 +801,7 @@
         <item name="android:paddingBottom">8dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">?android:colorBackground</item>
     </style>
 
     <style name="RequestManageCredentialsAllowButton" parent="@style/ActionPrimaryButton">
@@ -883,6 +881,6 @@
     </style>
 
     <style name="ToolbarText.Collapsed" parent="CollapsingToolbarTitle.Collapsed"/>
-    <style name="ToolbarText" parent="CollapsingToolbarTitle"/>
+    <style name="ToolbarText.Expanded" parent="CollapsingToolbarTitle"/>
     <style name="ToolbarText.MoreThanTwoLines" parent="CollapsingToolbarTitle.MoreThanTwoLines"/>
 </resources>

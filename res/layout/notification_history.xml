@@ -17,6 +17,7 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
+    android:background="?android:attr/colorBackgroundFloating"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -145,7 +146,6 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
-                        android:elevation="1dp"
                         android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -169,7 +169,6 @@
                     android:paddingBottom="16dp" />
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
-                        android:elevation="1dp"
                         android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -193,7 +192,6 @@
                     android:id="@+id/apps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="1dp"
                     android:orientation="vertical"
                     android:background="@drawable/rounded_bg">
                     <!-- app based recycler views added here -->

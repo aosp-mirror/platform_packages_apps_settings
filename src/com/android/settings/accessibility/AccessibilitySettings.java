@@ -111,7 +111,7 @@ public class AccessibilitySettings extends DashboardFragment {
         @Override
         public void run() {
             if (getActivity() != null) {
-                updateServicePreferences();
+                onContentChanged();
             }
         }
     };
@@ -142,7 +142,8 @@ public class AccessibilitySettings extends DashboardFragment {
         }
     };
 
-    private final SettingsContentObserver mSettingsContentObserver;
+    @VisibleForTesting
+    final SettingsContentObserver mSettingsContentObserver;
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
@@ -150,6 +151,9 @@ public class AccessibilitySettings extends DashboardFragment {
             new ArrayMap<>();
     private final Map<ComponentName, PreferenceCategory> mPreBundledServiceComponentToCategoryMap =
             new ArrayMap<>();
+
+    private boolean mNeedPreferencesUpdate = false;
+    private boolean mIsForeground = true;
 
     public AccessibilitySettings() {
         // Observe changes to anything that the shortcut can toggle, so we can reflect updates
@@ -166,7 +170,7 @@ public class AccessibilitySettings extends DashboardFragment {
         mSettingsContentObserver = new SettingsContentObserver(mHandler, shortcutFeatureKeys) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
-                updateAllPreferences();
+                onContentChanged();
             }
         };
     }
@@ -182,13 +186,6 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        initializeAllPreferences();
-        updateAllPreferences();
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         use(AccessibilityHearingAidPreferenceController.class)
@@ -196,18 +193,33 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        initializeAllPreferences();
+        updateAllPreferences();
+        registerContentMonitors();
+    }
 
-        mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
-        mSettingsContentObserver.register(getContentResolver());
+    @Override
+    public void onStart() {
+        if (mNeedPreferencesUpdate) {
+            updateAllPreferences();
+            mNeedPreferencesUpdate = false;
+        }
+        mIsForeground = true;
+        super.onStart();
     }
 
     @Override
     public void onStop() {
-        mSettingsPackageMonitor.unregister();
-        mSettingsContentObserver.unregister(getContentResolver());
+        mIsForeground = false;
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        unregisterContentMonitors();
+        super.onDestroy();
     }
 
     @Override
@@ -283,6 +295,17 @@ public class AccessibilitySettings extends DashboardFragment {
                 context.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0) == 1;
     }
 
+    @VisibleForTesting
+    void onContentChanged() {
+        // If the fragment is visible then update preferences immediately, else set the flag then
+        // wait for the fragment to show up to update preferences.
+        if (mIsForeground) {
+            updateAllPreferences();
+        } else {
+            mNeedPreferencesUpdate = true;
+        }
+    }
+
     private void initializeAllPreferences() {
         for (int i = 0; i < CATEGORIES.length; i++) {
             PreferenceCategory prefCategory = findPreference(CATEGORIES[i]);
@@ -290,9 +313,23 @@ public class AccessibilitySettings extends DashboardFragment {
         }
     }
 
-    private void updateAllPreferences() {
+    @VisibleForTesting
+    void updateAllPreferences() {
         updateSystemPreferences();
         updateServicePreferences();
+    }
+
+    private void registerContentMonitors() {
+        final Context context = getActivity();
+
+        mSettingsPackageMonitor.register(context, context.getMainLooper(), /* externalStorage= */
+                false);
+        mSettingsContentObserver.register(getContentResolver());
+    }
+
+    private void unregisterContentMonitors() {
+        mSettingsPackageMonitor.unregister();
+        mSettingsContentObserver.unregister(getContentResolver());
     }
 
     protected void updateServicePreferences() {

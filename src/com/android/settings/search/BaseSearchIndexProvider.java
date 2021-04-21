@@ -128,8 +128,13 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     }
 
     public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllersFromCode =
-                createPreferenceControllers(context);
+        List<AbstractPreferenceController> controllersFromCode = new ArrayList<>();
+        try {
+            controllersFromCode = createPreferenceControllers(context);
+        } catch (Exception e) {
+            Log.w(TAG, "Error initial controller");
+        }
+
         final List<SearchIndexableResource> res = getXmlResourcesToIndex(context, true);
         if (res == null || res.isEmpty()) {
             return controllersFromCode;

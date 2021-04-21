@@ -25,6 +25,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -38,13 +40,11 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -58,10 +58,10 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class WifiNoInternetDialogTest {
 
-    private static final String FAKE_NETWORK_ID = "13";
-    private static final String FAKE_URL = "netId:13";
-    private static final String WRONG_URL = "netId:";
     private static final String FAKE_SSID = "fake_ssid";
+
+    @Mock
+    private Network mNetwork;
 
     @Captor
     private ArgumentCaptor<ConnectivityManager.NetworkCallback> mCallbackCaptor;
@@ -88,10 +88,9 @@ public class WifiNoInternetDialogTest {
                 Robolectric.setupActivity(WifiNoInternetDialog.class);
     }
 
-    @Ignore
     @Test
     public void setupPromptUnvalidated_shouldShowNoInternetAccessRemember() {
-        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, mNetwork);
         setupNetworkComponents();
 
         mActivity.onCreate(new Bundle());
@@ -100,10 +99,9 @@ public class WifiNoInternetDialogTest {
                 mActivity.getString(R.string.no_internet_access_remember));
     }
 
-    @Ignore
     @Test
     public void setupPromptPartialConnectivity_shouldShowNoInternetAccessRemember() {
-        setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, mNetwork);
         setupNetworkComponents();
 
         mActivity.onCreate(new Bundle());
@@ -112,10 +110,9 @@ public class WifiNoInternetDialogTest {
                 mActivity.getString(R.string.no_internet_access_remember));
     }
 
-    @Ignore
     @Test
     public void setupPromptLostValidationAction_shouldShowLostInternetAccessPersist() {
-        setupActivityWithAction(ACTION_PROMPT_LOST_VALIDATION, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_LOST_VALIDATION, mNetwork);
         setupNetworkComponents();
 
         mActivity.onCreate(new Bundle());
@@ -124,10 +121,9 @@ public class WifiNoInternetDialogTest {
                 mActivity.getString(R.string.lost_internet_access_persist));
     }
 
-    @Ignore
     @Test
     public void clickPositiveButton_whenPromptUnvalidated_shouldCallSetAcceptUnvalidated() {
-        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, mNetwork);
         setupNetworkComponents();
         mActivity.onCreate(new Bundle());
 
@@ -136,10 +132,9 @@ public class WifiNoInternetDialogTest {
         verify(mConnectivityManager).setAcceptUnvalidated(any(Network.class), eq(true), eq(false));
     }
 
-    @Ignore
     @Test
     public void positiveButton_withPartialConnectivity_shouldCallSetAcceptPartialConnectivity() {
-        setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, mNetwork);
         setupNetworkComponents();
         mActivity.onCreate(new Bundle());
 
@@ -149,10 +144,9 @@ public class WifiNoInternetDialogTest {
                 eq(false));
     }
 
-    @Ignore
     @Test
     public void positiveButton_withLostValidation_shouldCallSetAvoidUnvalidated() {
-        setupActivityWithAction(ACTION_PROMPT_LOST_VALIDATION, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_LOST_VALIDATION, mNetwork);
         setupNetworkComponents();
         mActivity.onCreate(new Bundle());
 
@@ -161,10 +155,9 @@ public class WifiNoInternetDialogTest {
         verify(mConnectivityManager).setAvoidUnvalidated(any(Network.class));
     }
 
-    @Ignore
     @Test
     public void destroyWithNoClick_inPartialConnectivity_shouldCallSetAcceptPartialConnectivity() {
-        setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_PARTIAL_CONNECTIVITY, mNetwork);
         setupNetworkComponents();
         when(mActivity.isFinishing()).thenReturn(true);
         mActivity.onCreate(new Bundle());
@@ -175,10 +168,9 @@ public class WifiNoInternetDialogTest {
                 eq(false));
     }
 
-    @Ignore
     @Test
     public void destroyWithNoClick_whenUnvalidated_shouldCallSetAcceptUnvalidated() {
-        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, mNetwork);
         setupNetworkComponents();
         when(mActivity.isFinishing()).thenReturn(true);
         mActivity.onCreate(new Bundle());
@@ -188,39 +180,65 @@ public class WifiNoInternetDialogTest {
         verify(mConnectivityManager).setAcceptUnvalidated(any(Network.class), eq(false), eq(false));
     }
 
-    @Ignore
     @Test
     public void networkCallbackOnLost_shouldFinish() {
-        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, mNetwork);
         setupNetworkComponents();
         mActivity.onCreate(new Bundle());
         verify(mConnectivityManager, times(1)).registerNetworkCallback(
                 any(NetworkRequest.class), mCallbackCaptor.capture());
 
-        mCallbackCaptor.getValue().onLost(new Network(Integer.parseInt(FAKE_NETWORK_ID)));
+        mCallbackCaptor.getValue().onLost(mNetwork);
 
         verify(mActivity).finish();
     }
 
-    @Ignore
+    @Test
+    public void networkCallbackOnLost_shouldNotFinishIfNetworkIsNotTheSame() {
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, mNetwork);
+        setupNetworkComponents();
+        mActivity.onCreate(new Bundle());
+        verify(mConnectivityManager, times(1)).registerNetworkCallback(
+                any(NetworkRequest.class), mCallbackCaptor.capture());
+
+        Network unexpectedNetwork = mock(Network.class);
+        mCallbackCaptor.getValue().onLost(unexpectedNetwork);
+
+        verify(mActivity, never()).finish();
+    }
+
     @Test
     public void networkCallbackOnCapabilitiesChanged_shouldFinish() {
-        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, mNetwork);
         setupNetworkComponents();
         when(mNetworkCapabilities.hasCapability(NET_CAPABILITY_VALIDATED)).thenReturn(true);
         mActivity.onCreate(new Bundle());
         verify(mConnectivityManager, times(1)).registerNetworkCallback(
                 any(NetworkRequest.class), mCallbackCaptor.capture());
 
-        mCallbackCaptor.getValue().onCapabilitiesChanged(
-                new Network(Integer.parseInt(FAKE_NETWORK_ID)), mNetworkCapabilities);
+        mCallbackCaptor.getValue().onCapabilitiesChanged(mNetwork, mNetworkCapabilities);
 
         verify(mActivity).finish();
     }
 
     @Test
+    public void networkCallbackOnCapabilitiesChanged_shouldNotFinishIfNetworkIsNotTheSame() {
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, mNetwork);
+        setupNetworkComponents();
+        when(mNetworkCapabilities.hasCapability(NET_CAPABILITY_VALIDATED)).thenReturn(true);
+        mActivity.onCreate(new Bundle());
+        verify(mConnectivityManager, times(1)).registerNetworkCallback(
+                any(NetworkRequest.class), mCallbackCaptor.capture());
+
+        Network unexpectedNetwork = mock(Network.class);
+        mCallbackCaptor.getValue().onCapabilitiesChanged(unexpectedNetwork, mNetworkCapabilities);
+
+        verify(mActivity, never()).finish();
+    }
+
+    @Test
     public void networkNotConnectedOrConnecting_shouldFinish() {
-        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, FAKE_URL);
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, mNetwork);
         setupNetworkComponents();
         when(mNetworkInfo.isConnectedOrConnecting()).thenReturn(false);
 
@@ -230,8 +248,8 @@ public class WifiNoInternetDialogTest {
     }
 
     @Test
-    public void withWrongUrl_shouldFinish() {
-        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, WRONG_URL);
+    public void withNullNetwork_shouldFinish() {
+        setupActivityWithAction(ACTION_PROMPT_UNVALIDATED, null);
         setupNetworkComponents();
 
         mActivity.onCreate(new Bundle());
@@ -250,11 +268,11 @@ public class WifiNoInternetDialogTest {
                 .thenReturn(mNetworkCapabilities);
     }
 
-    private void setupActivityWithAction(String action, String url) {
+    private void setupActivityWithAction(String action, Network network) {
         final Intent intent = new Intent(action).setClassName(
                 RuntimeEnvironment.application.getPackageName(),
                 WifiNoInternetDialog.class.getName());
-        intent.setData(Uri.parse(url));
+        intent.putExtra(ConnectivityManager.EXTRA_NETWORK, network);
         mActivity = spy(Robolectric.buildActivity(WifiNoInternetDialog.class, intent).get());
     }
 }

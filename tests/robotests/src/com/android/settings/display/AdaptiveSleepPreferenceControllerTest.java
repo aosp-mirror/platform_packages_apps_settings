@@ -43,6 +43,7 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.bluetooth.RestrictionUtils;
+import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
@@ -51,8 +52,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowSensorPrivacyManager.class)
 public class AdaptiveSleepPreferenceControllerTest {
     private Context mContext;
     private AdaptiveSleepPreferenceController mController;
@@ -81,6 +84,7 @@ public class AdaptiveSleepPreferenceControllerTest {
                 eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(null);
 
         mController = new AdaptiveSleepPreferenceController(mContext, mRestrictionUtils);
+        when(mController.isCameraLocked()).thenReturn(false);
     }
 
     @Test
@@ -155,6 +159,15 @@ public class AdaptiveSleepPreferenceControllerTest {
 
         when(mRestrictionUtils.checkIfRestrictionEnforced(any(),
                 eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(mEnforcedAdmin);
+
+        mController.addToScreen(mScreen);
+
+        assertThat(mController.mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void addToScreen_cameraIsLocked_disablePreference() {
+        when(mController.isCameraLocked()).thenReturn(true);
 
         mController.addToScreen(mScreen);
 
