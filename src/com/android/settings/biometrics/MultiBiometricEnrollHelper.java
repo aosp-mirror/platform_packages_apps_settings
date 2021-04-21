@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
@@ -24,6 +23,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.password.ChooseLockSettingsHelper;
 
@@ -39,13 +39,13 @@ public class MultiBiometricEnrollHelper {
 
     public static final String EXTRA_ENROLL_AFTER_FACE = "enroll_after_face";
 
-    @NonNull private final BiometricEnrollActivity mActivity;
+    @NonNull private final FragmentActivity mActivity;
     private final long mGkPwHandle;
     private final int mUserId;
     private final boolean mRequestEnrollFace;
     private final boolean mRequestEnrollFingerprint;
 
-    MultiBiometricEnrollHelper(@NonNull BiometricEnrollActivity activity, int userId,
+    MultiBiometricEnrollHelper(@NonNull FragmentActivity activity, int userId,
             boolean enrollFace, boolean enrollFingerprint, long gkPwHandle) {
         mActivity = activity;
         mUserId = userId;
@@ -108,10 +108,8 @@ public class MultiBiometricEnrollHelper {
 
     void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "RequestCode: " + requestCode + " resultCode: " + resultCode);
-        if (resultCode != Activity.RESULT_CANCELED) {
-            BiometricUtils.removeGatekeeperPasswordHandle(mActivity, mGkPwHandle);
-            mActivity.setResult(resultCode);
-            mActivity.finish();
-        }
+        BiometricUtils.removeGatekeeperPasswordHandle(mActivity, mGkPwHandle);
+        mActivity.setResult(resultCode);
+        mActivity.finish();
     }
 }
