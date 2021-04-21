@@ -22,12 +22,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.android.wifitrackerlib.MergedCarrierEntry;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -44,11 +45,13 @@ import java.util.Arrays;
 @RunWith(RobolectricTestRunner.class)
 public class WifiScanWorkerTest {
 
+    private static final int SUB_ID = 2;
+
     private WifiScanWorker mWifiScanWorker;
     @Mock
     WifiPickerTracker mWifiPickerTracker;
     @Mock
-    MergedCarrierEntry mMergedCarrierEntry;
+    WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
     @Before
     public void setUp() {
@@ -56,7 +59,8 @@ public class WifiScanWorkerTest {
 
         mWifiScanWorker = new WifiScanWorker(RuntimeEnvironment.application, WIFI_SLICE_URI);
         mWifiScanWorker.mWifiPickerTracker = mWifiPickerTracker;
-        when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(mMergedCarrierEntry);
+        mWifiScanWorker.mWifiPickerTrackerHelper = mWifiPickerTrackerHelper;
+        when(mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(SUB_ID)).thenReturn(false);
     }
 
     @Test
@@ -110,22 +114,33 @@ public class WifiScanWorkerTest {
     }
 
     @Test
-    public void setCarrierNetworkEnabled_shouldCallMergedCarrierEntrySetEnabled() {
-        mWifiScanWorker.setCarrierNetworkEnabled(true);
+    public void setCarrierNetworkEnabledIfNeeded_shouldSetCarrierNetworkEnabled() {
+        mWifiScanWorker.setCarrierNetworkEnabledIfNeeded(true, SUB_ID);
 
-        verify(mMergedCarrierEntry).setEnabled(true);
+        verify(mWifiPickerTrackerHelper).setCarrierNetworkEnabled(true);
 
-        mWifiScanWorker.setCarrierNetworkEnabled(false);
+        mWifiScanWorker.setCarrierNetworkEnabledIfNeeded(false, SUB_ID);
 
-        verify(mMergedCarrierEntry).setEnabled(false);
+        verify(mWifiPickerTrackerHelper).setCarrierNetworkEnabled(false);
     }
 
     @Test
-    public void connectCarrierNetwork_shouldCallMergedCarrierEntryConnect() {
-        when(mMergedCarrierEntry.canConnect()).thenReturn(true);
+    public void setCarrierNetworkEnabledIfNeeded_enabledProvision_neverSetCarrierNetworkEnabled() {
+        when(mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(SUB_ID)).thenReturn(true);
 
+        mWifiScanWorker.setCarrierNetworkEnabledIfNeeded(true, SUB_ID);
+
+        verify(mWifiPickerTrackerHelper, never()).setCarrierNetworkEnabled(true);
+
+        mWifiScanWorker.setCarrierNetworkEnabledIfNeeded(false, SUB_ID);
+
+        verify(mWifiPickerTrackerHelper, never()).setCarrierNetworkEnabled(false);
+    }
+
+    @Test
+    public void connectCarrierNetwork_shouldConnectCarrierNetwork() {
         mWifiScanWorker.connectCarrierNetwork();
 
-        verify(mMergedCarrierEntry).connect(any());
+        verify(mWifiPickerTrackerHelper).connectCarrierNetwork(any());
     }
 }
