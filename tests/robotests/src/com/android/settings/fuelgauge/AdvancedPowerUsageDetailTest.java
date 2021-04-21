@@ -249,14 +249,122 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitHeader_hasCorrectSummary() {
-        mFragment.mAppEntry = null;
+    public void testInitHeader_noUsageTime_hasCorrectSummary() {
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
         mFragment.initHeader();
 
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("0 min total • 0 min background for past 24 hr");
+                .isEqualTo("No usage for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_backgroundTwoMinutesForegroundZero_hasCorrectSummary() {
+        final long backgroundTimeTwoMinutes = 120000;
+        final long foregroundTimeZero = 0;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("2 min background for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_backgroundLessThanAMinutesForegroundZero_hasCorrectSummary() {
+        final long backgroundTimeLessThanAMinute = 59999;
+        final long foregroundTimeZero = 0;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Background less than a minute for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_totalUsageLessThanAMinutes_hasCorrectSummary() {
+        final long backgroundTimeLessThanHalfMinute = 20000;
+        final long foregroundTimeLessThanHalfMinute = 20000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanHalfMinute);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeLessThanHalfMinute);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Total less than a minute for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinutesBackgroundLessThanAMinutes_hasCorrectSummary() {
+        final long backgroundTimeZero = 59999;
+        final long foregroundTimeTwoMinutes = 1;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total • background less than a minute for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinutesBackgroundZero_hasCorrectSummary() {
+        final long backgroundTimeZero = 0;
+        final long foregroundTimeAMinutes = 60000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeAMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_foregroundTwoMinutesBackgroundFourMinutes_hasCorrectSummary() {
+        final long backgroundTimeFourMinute = 240000;
+        final long foregroundTimeTwoMinutes = 120000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("6 min total • 4 min background for past 24 hr");
     }
 
     @Test
