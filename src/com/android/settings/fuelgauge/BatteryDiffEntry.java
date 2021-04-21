@@ -27,6 +27,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settingslib.utils.StringUtil;
+
 import java.time.Duration;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -254,14 +256,17 @@ public class BatteryDiffEntry {
     public String toString() {
         final StringBuilder builder = new StringBuilder()
             .append("BatteryDiffEntry{")
-            .append("\n\tname=" + mBatteryHistEntry.mAppLabel)
+            .append("\n\tname=" + getAppLabel())
             .append(String.format("\n\tconsume=%.2f%% %f/%f",
                   mPercentOfTotal, mConsumePower, mTotalConsumePower))
-            .append(String.format("\n\tforeground:%d background:%d",
-                  Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
-                  Duration.ofMillis(mBackgroundUsageTimeInMs).getSeconds()))
-            .append(String.format("\n\tpackage:%s uid:%s",
-                  mBatteryHistEntry.mPackageName, mBatteryHistEntry.mUid));
+            .append(String.format("\n\tforeground:%s background:%s",
+                  StringUtil.formatElapsedTime(mContext, mForegroundUsageTimeInMs,
+                      /*withSeconds=*/ true, /*collapseTimeUnit=*/ false),
+                  StringUtil.formatElapsedTime(mContext, mBackgroundUsageTimeInMs,
+                      /*withSeconds=*/ true, /*collapseTimeUnit=*/ false)))
+            .append(String.format("\n\tpackage:%s|%s uid:%d userId:%d",
+                  mBatteryHistEntry.mPackageName, getPackageName(),
+                  mBatteryHistEntry.mUid, mBatteryHistEntry.mUserId));
         return builder.toString();
     }
 

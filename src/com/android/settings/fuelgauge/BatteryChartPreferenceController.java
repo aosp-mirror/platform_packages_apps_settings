@@ -55,6 +55,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final String TAG = "BatteryChartPreferenceController";
     private static final int CHART_KEY_ARRAY_SIZE = 25;
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
+    private static final long VALID_USAGE_TIME_DURATION = DateUtils.HOUR_IN_MILLIS * 2;
+    private static final long VALID_DIFF_DURATION = DateUtils.MINUTE_IN_MILLIS * 3;
 
     @VisibleForTesting
     Map<Integer, List<BatteryDiffEntry>> mBatteryIndexedMap;
@@ -179,6 +181,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final List<Long> batteryHistoryKeyList =
             new ArrayList<Long>(batteryHistoryMap.keySet());
         Collections.sort(batteryHistoryKeyList);
+        validateSlotTimestamp(batteryHistoryKeyList);
         mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
         final int elementSize = Math.min(batteryHistoryKeyList.size(), CHART_KEY_ARRAY_SIZE);
         final int offset = CHART_KEY_ARRAY_SIZE - elementSize;
@@ -270,6 +273,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             } else {
                 appEntries.add(entry);
             }
+            // Validates the usage time if users click a specific slot.
+            if (mTrapezoidIndex >= 0) {
+                validateUsageTime(entry);
+            }
         });
         Collections.sort(appEntries, BatteryDiffEntry.COMPARATOR);
         Collections.sort(systemEntries, BatteryDiffEntry.COMPARATOR);
@@ -289,7 +296,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             final String appLabel = entry.getAppLabel();
             final Drawable appIcon = entry.getAppIcon();
             if (TextUtils.isEmpty(appLabel) || appIcon == null) {
-                Log.w(TAG, "cannot find app resource:" + entry.mBatteryHistEntry);
+                Log.w(TAG, "cannot find app resource for\n" + entry);
                 continue;
             }
             final String prefKey = entry.mBatteryHistEntry.getKey();
@@ -388,5 +395,40 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                   ConvertUtils.utcToLocalTime(timestamps[index])));
         }
         return builder.toString();
+    }
+
+    @VisibleForTesting
+    static boolean validateUsageTime(BatteryDiffEntry entry) {
+        final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
+        final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
+        final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+        if (foregroundUsageTimeInMs > VALID_USAGE_TIME_DURATION
+                || backgroundUsageTimeInMs > VALID_USAGE_TIME_DURATION
+                || totalUsageTimeInMs > VALID_USAGE_TIME_DURATION) {
+            Log.e(TAG, "validateUsageTime() fail for\n" + entry);
+            return false;
+        }
+        return true;
+    }
+
+    @VisibleForTesting
+    static boolean validateSlotTimestamp(List<Long> batteryHistoryKeys) {
+        // Whether the nearest two slot time diff is valid or not?
+        final int size = batteryHistoryKeys.size();
+        for (int index = 0; index < size - 1; index++) {
+            final long currentTime = batteryHistoryKeys.get(index);
+            final long nextTime = batteryHistoryKeys.get(index + 1);
+            final long diffTime = Math.abs(
+                DateUtils.HOUR_IN_MILLIS - Math.abs(currentTime - nextTime));
+            if (currentTime == 0) {
+                continue;
+            } else if (diffTime > VALID_DIFF_DURATION) {
+                Log.e(TAG, String.format("validateSlotTimestamp() %s > %s",
+                    ConvertUtils.utcToLocalTime(currentTime),
+                    ConvertUtils.utcToLocalTime(nextTime)));
+                return false;
+            }
+        }
+        return true;
     }
 }

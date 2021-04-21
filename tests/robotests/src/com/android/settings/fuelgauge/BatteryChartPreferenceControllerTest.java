@@ -381,6 +381,58 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(pref.getSummary()).isNull();
     }
 
+    @Test
+    public void testValidateUsageTime_returnTrueIfBatteryDiffEntryIsValid() {
+        assertThat(BatteryChartPreferenceController.validateUsageTime(
+            createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
+                /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS)))
+            .isTrue();
+    }
+
+    @Test
+    public void testValidateUsageTime_foregroundTimeExceedThreshold_returnFalse() {
+        assertThat(BatteryChartPreferenceController.validateUsageTime(
+            createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ DateUtils.HOUR_IN_MILLIS * 3,
+                /*backgroundUsageTimeInMs=*/ 0)))
+            .isFalse();
+    }
+
+    @Test
+    public void testValidateUsageTime_backgroundTimeExceedThreshold_returnFalse() {
+        assertThat(BatteryChartPreferenceController.validateUsageTime(
+            createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ DateUtils.HOUR_IN_MILLIS * 3)))
+            .isFalse();
+    }
+
+    @Test
+    public void testValidateSlotTimestamp_emptyContent_returnTrue() {
+        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(
+            new ArrayList<Long>())).isTrue();
+    }
+
+    @Test
+    public void testValidateSlotTimestamp_returnExpectedResult() {
+        final List<Long> slotTimestampList =
+            Arrays.asList(
+                Long.valueOf(0),
+                Long.valueOf(DateUtils.HOUR_IN_MILLIS),
+                Long.valueOf(DateUtils.HOUR_IN_MILLIS * 2 + DateUtils.MINUTE_IN_MILLIS),
+                Long.valueOf(DateUtils.HOUR_IN_MILLIS * 3 + DateUtils.MINUTE_IN_MILLIS * 2));
+        // Verifies the testing data is correct before we added invalid data into it.
+        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(slotTimestampList))
+            .isTrue();
+
+        // Insert invalid timestamp into the list.
+        slotTimestampList.add(
+            Long.valueOf(DateUtils.HOUR_IN_MILLIS * 4 + DateUtils.MINUTE_IN_MILLIS * 3));
+        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(slotTimestampList))
+            .isFalse();
+    }
+
     private static Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {
         final Map<Long, List<BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         for (int index = 0; index < size; index++) {
