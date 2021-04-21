@@ -2505,13 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Atzeko planoko jarduerak mugatu nahi dituzu?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Aplikazio baten atzeko planoko jarduerak mugatzen badituzu, baliteke aplikazioak behar bezala ez funtzionatzea"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplikazio hau bateria optimizatzeko konfiguratuta ez dagoenez, ezin duzu mugatu.\n\nMugatzeko, aktibatu bateriaren optimizazioa."</string>
-    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Murriztapenik gabe"</string>
-    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimizatuta"</string>
-    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Eman atzeko planoan bateria erabiltzeko baimena murriztapenik gabe. Baliteke bateria gehiago erabiltzea."</string>
-    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimizatu erabileran oinarrituta. Aplikazio gehienentzat gomendatua."</string>
-    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Murriztu bateria-erabilera atzeko planoan. Baliteke aplikazioak ez funtzionatzea behar bezala. Agian jakinarazpenak atzeratu egingo dira."</string>
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Murriztapenik gabekoak"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimizatutakoak"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Eman bateria murriztapenik gabe erabiltzeko baimena atzeko planoan. Baliteke bateria gehiago erabiltzea."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimizatu erabileran oinarrituta. Aplikazio gehienetarako gomendatua."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Murriztu bateria-erabilera atzeko planoan. Baliteke aplikazioak behar bezala ez funtzionatzea. Agian jakinarazpenak atzeratu egingo dira."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Aplikazio baten bateria erabiltzeko modua aldatzeak haren errendimenduan eragina izan dezake."</string>
-    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Aplikazio honek <xliff:g id="STATE">%1$s</xliff:g> bateria-erabilera behar du."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Aplikazio honek bateria-erabilera <xliff:g id="STATE">%1$s</xliff:g> behar du."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Pantailaren erabilera gailua guztiz kargatu zenetik"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Bateria-erabilera gailua guztiz kargatu zenetik"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Gailua guztiz kargatu zenetik pantaila piztuta egon den denbora"</string>
@@ -2804,10 +2804,8 @@
     <string name="tts_play" msgid="2945513377250757221">"Erreproduzitu"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Ez da segurua"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> ez-segurua"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> ez-seguruak"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Sareko konexio egokitua"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Bateriaren iraupena luzatzen, eta gailuaren errendimendua hobetzen du sareko konexioak automatikoki kudeatuz."</string>
     <string name="credentials_title" msgid="7535942196886123656">"Kredentzialen biltegia"</string>
@@ -4142,8 +4140,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Ez du baimenik"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Ez da baimenik eskatu"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontrolatu aplikazioek zure datuetarako duten sarbidea"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Pribatutasun-panela"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Erakutsi zer aplikaziok erabili dituzten baimenak azkenaldian"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Erabiltzen ez diren aplikazioak"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5104,8 +5101,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Gailua berrabiarazi nahi duzu?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Hasteko, berrabiarazi gailua. Gero, beste SIM txartel bat gehitu ahalko duzu."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Egin aurrera"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"Bai"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Berrabiarazi"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Ez"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Aldatu"</string>
@@ -5313,10 +5309,10 @@
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikazioak"</string>
     <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Gailu batek zure mezuak atzitu nahi ditu. Sakatu xehetasunak ikusteko."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Mezuak atzitzeko baimena eman nahi diozu?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Bluetooth gailu batek (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) zure mezuak atzitu nahi ditu.\n\nEz zara inoiz konektatu <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> gailura."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Gailu batek zure kontaktuak eta deien historia atzitu nahi ditu. Sakatu xehetasunak ikusteko."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Bluetooth bidezko gailu batek (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) zure mezuak atzitu nahi ditu.\n\nEz zara inoiz konektatu <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> gailura."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Gailu batek zure kontaktuak eta deien erregistroa atzitu nahi ditu. Sakatu xehetasunak ikusteko."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Kontaktuak eta deien historia atzitzeko baimena eman nahi diozu?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth gailu batek (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) zure kontaktuak eta deien erregistroa atzitu nahi ditu. Jasotako eta egindako deiei buruzko datuak hartzen dira barnean.\n\nEz zara inoiz konektatu <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> gailura."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth bidezko gailu batek (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) zure kontaktuak eta deien erregistroa atzitu nahi ditu. Jasotako eta egindako deiei buruzko datuak hartzen dira barnean.\n\nEz zara inoiz konektatu <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> gailura."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Distira"</string>
     <string name="category_name_lock_display" msgid="8310402558217129670">"Pantaila blokeatua"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Itxura"</string>

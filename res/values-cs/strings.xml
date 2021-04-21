@@ -2490,7 +2490,7 @@
     <string name="color_cyan" msgid="4341758639597035927">"Tyrkysová"</string>
     <string name="color_yellow" msgid="5957551912912679058">"Žlutá"</string>
     <string name="color_magenta" msgid="8943538189219528423">"Purpurová"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"Chcete službě <xliff:g id="SERVICE">%1$s</xliff:g> povolit, aby nad vaším zařízením měla plnou kontrolu?"</string>
+    <string name="enable_service_title" msgid="7231533866953706788">"Chcete službě <xliff:g id="SERVICE">%1$s</xliff:g> povolit plnou kontrolu nad vaším zařízením?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> potřebuje:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Žádost o oprávnění je blokována jinou aplikací. Nastavení proto vaši odpověď nemůže ověřit."</string>
     <string name="enable_service_encryption_warning" msgid="931082737770453755">"Pokud zapnete službu <xliff:g id="SERVICE">%1$s</xliff:g>, zařízení nebude používat zámek obrazovky k vylepšení šifrování dat."</string>
@@ -2499,11 +2499,11 @@
     <string name="enable_service_pin_reason" msgid="6040417014360237703">"Protože zapnutí služby <xliff:g id="SERVICE">%1$s</xliff:g> má vliv na šifrování dat, je třeba, abyste potvrdili svůj kód PIN."</string>
     <string name="enable_service_password_reason" msgid="6962544350351734238">"Protože zapnutí služby <xliff:g id="SERVICE">%1$s</xliff:g> má vliv na šifrování dat, je třeba, abyste potvrdili své heslo."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"Služba <xliff:g id="SERVICE">%1$s</xliff:g> požaduje plnou kontrolu nad zařízením. Služba může číst obrazovku a vykonávat akce namísto uživatelů, kteří potřebují usnadnění přístupu. Tato úroveň kontroly není u většiny aplikací vhodná."</string>
-    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Plná kontrola je vhodná u aplikací, které vám pomáhají s usnadněním přístupu, nikoli u většiny aplikací."</string>
+    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Plná kontrola je vhodná u aplikací, které vám pomáhají s usnadněním přístupu. U většiny aplikací však vhodná není."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Zobrazení a ovládání obrazovky"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Může číst veškerý obsah obrazovky a zobrazovat obsah přes ostatní aplikace."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Služba může číst veškerý obsah obrazovky a zobrazovat ho přes ostatní aplikace."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Zobrazení a provádění akcí"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Může sledovat vaše interakce s aplikací nebo hardwarovým senzorem a komunikovat s aplikacemi namísto vás."</string>
+    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Služba může sledovat vaše interakce s aplikací nebo hardwarovým senzorem a komunikovat s aplikacemi namísto vás."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Povolit"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Zakázat"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Ukončit"</string>
@@ -2880,10 +2880,8 @@
     <string name="tts_play" msgid="2945513377250757221">"Přehrát"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"Síť VPN"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Nezabezpečeno"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"Nezabezpečeno: <xliff:g id="VPN_COUNT">%d</xliff:g>"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"Nezabezpečeno: <xliff:g id="VPN_COUNT">%d</xliff:g>"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptivní připojení"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prodlužuje životnost baterie a zlepšuje výkon zařízení tím, že automaticky spravuje síťová připojení"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Úložiště pověření"</string>
@@ -4266,8 +4264,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nebyla udělena žádná oprávnění"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nevyžaduje žádná oprávnění"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Spravujte přístup aplikací k vašim datům"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Panel na ochranu soukromí"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Ukázat, které aplikace v poslední době využívaly oprávnění"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Nepoužívané aplikace"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5278,8 +5275,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Restartovat zařízení?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Nejprve restartujte zařízení. Poté budete moci přidat druhou SIM kartu."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Pokračovat"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"Ano"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Restartovat"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Ne, díky"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Přepnout"</string>

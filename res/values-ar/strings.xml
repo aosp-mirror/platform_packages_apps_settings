@@ -2629,13 +2629,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"هل تريد وضع حد لنشاط التطبيق في الخلفية؟"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"قد يتأثر أداء أحد التطبيقات سلبًا في حالة وضع حد لنشاطه في الخلفية"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"نظرًا لعدم تعيين هذا التطبيق للعمل على تحسين البطارية، فلا يمكنك تقييده.\n\nلتقييد التطبيق، فعِّل ميزة تحسين البطارية أولاً."</string>
-    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"(الإعدادات غير محظورة)"</string>
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"الإعدادات غير المحدّدة بقيود"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"الإعدادات المُحسَّنة"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"يتم السماح باستخدام البطارية في الخلفية بدون قيود. قد يؤدي هذا الخيار إلى استخدام المزيد من شحن البطارية."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"تحسين الإعدادات بناءً على الاستخدام (مقترحة لمعظم التطبيقات)"</string>
-    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"يتم حظر استخدام البطارية أثناء العمل في الخلفية. قد لا يعمل التطبيق على النحو المتوقع. وقد تتأخر الإشعارات."</string>
-    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"تغيير كيفية استخدام تطبيق للبطارية يمكن أن يؤثر في أدائها."</string>
-    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"يتطلب هذا التطبيق استخدام بطارية <xliff:g id="STATE">%1$s</xliff:g>."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"يتم حظر استخدام البطارية أثناء العمل في الخلفية. وبالتالي، قد لا يعمل التطبيق على النحو المتوقع. وقد تتأخر الإشعارات."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"يمكن لتغيير طريقة استخدام التطبيق للبطارية أن يؤثر في أدائها."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"يتطلب هذا التطبيق أن يكون استخدام بطارية <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"استخدام الشاشة منذ اكتمال الشحن"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"استخدام البطارية فور اكتمال الشحن"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"مقدار وقت تشغيل الشاشة منذ الشحن الكامل"</string>
@@ -2859,7 +2859,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"استخدام البطارية"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"منذ اكتمال الشحن"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"إدارة استخدام البطارية"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"إجمالي الاستخدام: <xliff:g id="TIME_0">^1</xliff:g> • استخدام البطارية خلال آخر 24 ساعة: <xliff:g id="TIME_1">^2</xliff:g>"</string>
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"إجمالي مدة الاستخدام: <xliff:g id="TIME_0">^1</xliff:g> • مدة الاستخدام في الخلفية خلال آخر 24 ساعة: <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"يستند تقدير شحن البطارية المتبقي على استخدام الجهاز"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"الوقت التقديري المتبقي"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"إلى أن يتم الشحن بالكامل"</string>
@@ -2956,10 +2956,8 @@
     <string name="tts_play" msgid="2945513377250757221">"تشغيل"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"الشبكة الافتراضية الخاصة"</string>
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"غير آمنة"</string>
-    <!-- no translation found for vpn_settings_single_insecure_multiple_total (6107225844641301139) -->
-    <skip />
-    <!-- no translation found for vpn_settings_multiple_insecure_multiple_total (1706236062478680488) -->
-    <skip />
+    <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> غير آمنة"</string>
+    <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> غير آمنة"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"التحكّم التلقائي بإمكانية الاتصال"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"إطالة عمر البطارية وتحسين أداء الجهاز عن طريق الإدارة التلقائية للاتصالات بالشبكات"</string>
     <string name="credentials_title" msgid="7535942196886123656">"تخزين بيانات الاعتماد"</string>
@@ -4390,8 +4388,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"لم يتم منح أي أذونات"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"لم يتم طلب أي أذونات"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"التحكّم في وصول التطبيقات إلى بياناتك"</string>
-    <!-- no translation found for permissions_usage_title (2942741460679049132) -->
-    <skip />
+    <string name="permissions_usage_title" msgid="2942741460679049132">"لوحة بيانات الخصوصية"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"إظهار التطبيقات التي استخدمت الأذونات مؤخرًا"</string>
     <string name="unused_apps" msgid="4566272194756830656">"التطبيقات غير المستخدمة"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
@@ -5452,8 +5449,7 @@
     <string name="sim_action_restart_title" msgid="7054617569121993825">"هل تريد إعادة تشغيل الجهاز؟"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"‏للبدء، أعِد تشغيل جهازك. ويمكنك بعد ذلك إضافة شريحة SIM أخرى."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"متابعة"</string>
-    <!-- no translation found for sim_action_yes (8076556020131395515) -->
-    <skip />
+    <string name="sim_action_yes" msgid="8076556020131395515">"نعم"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"إعادة التشغيل"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"لا، شكرًا"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"تبديل"</string>
@@ -5669,17 +5665,15 @@
     <string name="apps_dashboard_title" msgid="3269953499954393706">"التطبيقات"</string>
     <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"يريد جهاز الوصول إلى رسائلك. انقر للحصول على التفاصيل."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"هل تريد السماح بالوصول إلى الرسائل؟"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"يريد جهاز يتضمّن بلوتوث، <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى رسائلك.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"يريد جهاز يتضمّن بلوتوث، اسمه <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى رسائلك.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
     <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"يريد جهاز الوصول إلى جهات الاتصال وسجلّ المكالمات. انقر للحصول على التفاصيل."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"هل تريد السماح بالوصول إلى جهات الاتصال وسجلّ المكالمات؟"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"يريد جهاز يتضمّن بلوتوث، <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى جهات الاتصال وسجلّ المكالمات. يتضمن ذلك الوصول إلى بيانات عن المكالمات الواردة والصادرة.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"يريد جهاز يتضمّن بلوتوث، اسمه <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى جهات الاتصال وسجلّ المكالمات. يتضمن ذلك الوصول إلى بيانات عن المكالمات الواردة والصادرة.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"السطوع"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"قفل الشاشة"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"المظهر"</string>
     <string name="category_name_color" msgid="937514550918977151">"اللون"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"عناصر أخرى للتحكّم في العرض"</string>
     <string name="category_name_others" msgid="2366006298768550310">"غير ذلك"</string>
     <string name="category_name_general" msgid="7737273712848115886">"عام"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"استخدام \"المظهر الداكن\""</string>
