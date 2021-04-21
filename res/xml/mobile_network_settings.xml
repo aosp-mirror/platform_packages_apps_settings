@@ -16,8 +16,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="mobile_network_pref_screen"
-    settings:initialExpandedChildrenCount="8">
+    android:key="mobile_network_pref_screen">
 
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="use_sim_switch"
@@ -77,6 +76,16 @@
             android:key="billing_preference"
             android:title="@string/billing_cycle"
             settings:controller="com.android.settings.datausage.BillingCyclePreferenceController"/>
+
+        <SwitchPreference
+            android:key="carrier_wifi_toggle"
+            android:title="@string/carrier_wifi_offload_title"
+            android:summary="@string/carrier_wifi_offload_summary"
+            settings:controller="com.android.settings.network.CarrierWifiTogglePreferenceController"/>
+
+        <Preference
+            android:key="carrier_wifi_network"
+            android:title="@string/carrier_wifi_network_title"/>
 
         <SwitchPreference
             android:key="mms_message"
