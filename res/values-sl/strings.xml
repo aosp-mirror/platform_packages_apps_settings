@@ -54,7 +54,7 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Pomanjšava ali povečava besedila na zaslonu"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Pomanjšanje"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Povečanje"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Uporaba samodejnega zasuka"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Uporabi samodejni zasuk"</string>
     <string name="smart_rotate_text_headline" msgid="4775952278533715352">"Zaznavanje obraza uporablja sprednji fotoaparat za izboljšanje natančnosti samodejnega zasuka. Slike se nikoli ne shranijo in ne pošiljajo Googlu.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Več o tem&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Vzorčno besedilo"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čudoviti čarovnik iz Oza"</string>
@@ -2229,7 +2229,7 @@
     <string name="app_name_label" msgid="3809910527680143673">"Aplikacija"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Zadnjič uporabljeno"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Čas uporabe"</string>
-    <string name="accessibility_settings" msgid="4713215774904704682">"Za osebe s posebnimi potrebami"</string>
+    <string name="accessibility_settings" msgid="4713215774904704682">"Funkcije za ljudi s posebnimi potrebami"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Nastavitve pripomočkov za ljudi s posebnimi potrebami"</string>
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"Bralniki zaslona, prikaz, interakcija"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Nastavitve za slepe in slabovidne"</string>
@@ -2816,6 +2816,16 @@
     <string name="battery_app_usage_for" msgid="929971425835809784">"Uporaba aplikacij v:"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"dopoldne"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"popoldne"</string>
+    <!-- no translation found for battery_usage_total_less_than_one_minute (1035425863251685509) -->
+    <skip />
+    <!-- no translation found for battery_usage_background_less_than_one_minute (3957971442554437909) -->
+    <skip />
+    <!-- no translation found for battery_usage_for_total_time (8402254046930910905) -->
+    <skip />
+    <!-- no translation found for battery_usage_for_background_time (9109637210617095188) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (3241109085756092490) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistični podatki o procesih"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistični podatki o procesih, ki se izvajajo"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Poraba pomnilnika"</string>
@@ -3779,7 +3789,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Pogovori"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Pogovor"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Razdelek s pogovorom"</string>
-    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Aplikaciji dovoli uporabo razdelka s pogovorom"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Aplikaciji dovoli uporabo razdelka s pogovorom."</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Ni pogovor"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Odstrani iz razdelka Pogovor."</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"To je pogovor"</string>
@@ -3860,15 +3870,15 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Želite storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovoliti dostop do obvestil?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"Pametna obvestila lahko preberejo vso vsebino obvestil, vključno z osebnimi podatki, kot so imena in sporočila stikov. Ta funkcija lahko tudi opusti obvestila in izvaja dejanja z gumbi v obvestilih, kot je sprejemanje telefonskih klicev. \n\nPoleg tega lahko ta funkcija vklopi ali izklopi prednostni način ter spremeni povezane nastavitve."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Želite storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovoliti dostop do obvestil?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> lahko prebere vsa obvestila, vključno z osebnimi podatki, kot so imena stikov in besedilo prejetih sporočil. Ta aplikacija bo lahko tudi opustila obvestila in izvajala dejanja z gumbi v obvestilih, vključno s sprejemanjem telefonskih klicev. \n\nS tem lahko aplikacija tudi vklopi ali izklopi način »ne moti« in spremeni povezane nastavitve."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Če za aplikacijo <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> izklopite dostop do obvestil, bo dostop do načina »ne moti« morda tudi izklopljen."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> lahko prebere vsa obvestila, vključno z osebnimi podatki, kot so imena stikov in besedilo prejetih sporočil. Ta aplikacija bo lahko tudi opustila obvestila in izvajala dejanja z gumbi v obvestilih, vključno s sprejemanjem telefonskih klicev. \n\nS tem lahko aplikacija tudi vklopi ali izklopi način »Ne moti« in spremeni povezane nastavitve."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Če za aplikacijo <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> izklopite dostop do obvestil, bo dostop do načina »Ne moti« morda tudi izklopljen."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Izklop"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Prekliči"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"Dovoljene vrste obvestil"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"V realnem času"</string>
     <string name="notif_type_ongoing_summary" msgid="3412379452346027089">"Komunikacija v realnem času iz aplikacij v uporabi, navigacije, telefonskih klicev in od drugod."</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"Pogovori"</string>
-    <string name="notif_type_conversation_summary" msgid="897491668422411641">"Sporočila SMS in druga komunikacija"</string>
+    <string name="notif_type_conversation_summary" msgid="897491668422411641">"Sporočila SMS in druga komunikacija."</string>
     <string name="notif_type_alerting" msgid="4225291983925409612">"Privzeto"</string>
     <string name="notif_type_alerting_summary" msgid="6823969073567000728">"Obvestila, ki lahko sprožijo zvonjenje ali vibriranje (odvisno od nastavitev)."</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Tiho"</string>
@@ -5504,7 +5514,7 @@
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Uporaba varčevanja z energijo baterije"</string>
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"Izklopi zdaj"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"Vklopi zdaj"</string>
-    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Uporaba načina Nočna svetloba"</string>
+    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Uporabi način Nočna svetloba"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Uporaba tehnologije NFC"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Uporaba prilagod. varčevanja z energijo baterije"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Uporabi prilagodljivo svetlost"</string>
