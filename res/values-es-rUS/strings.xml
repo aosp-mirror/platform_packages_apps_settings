@@ -1974,7 +1974,7 @@
     <string name="data_size_label" msgid="7814478940141255234">"Datos del usuario"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="1054860423004751290">"Datos en el almacenamiento USB"</string>
     <string name="external_data_size_label" product="default" msgid="3370825186202856353">"Tarjeta SD"</string>
-    <string name="uninstall_text" msgid="315764653029060126">"Desinstalar..."</string>
+    <string name="uninstall_text" msgid="315764653029060126">"Desinstalar"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"Desinstalar en todos los usuarios"</string>
     <string name="install_text" msgid="4558333621516996473">"Instalar"</string>
     <string name="disable_text" msgid="5146002260857428005">"Inhabilitar"</string>
@@ -2505,20 +2505,13 @@
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"¿Limitar actividad en segundo plano?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Si limitas la actividad en segundo plano de una app, es posible que no funcione correctamente"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Como no se configuró la app para optimizar la batería, no puedes restringirla.\n\nPrimero, activa optimización de batería."</string>
-    <!-- no translation found for manager_battery_usage_unrestricted_title (2426486290463258032) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_title (8080765739761921817) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_unrestricted_summary (6819279865465667692) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_optimized_summary (1332545476428039900) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_restricted_summary (8324695640704416905) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer (2635906573922553766) -->
-    <skip />
-    <!-- no translation found for manager_battery_usage_footer_limited (5180776148877306780) -->
-    <skip />
+    <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Sin restricciones"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimizado"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Permite el uso de batería en segundo plano sin restricciones. Es posible que se use más batería."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimiza la batería en función del uso. Se recomienza para la mayoría de las apps."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Uso de batería restringido mientras se ejecuta en segundo plano. Es posible que la app no funcione como debería. Las notificaciones pueden funcionar con retraso."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Si cambias el modo en que una app usa la batería, puede que se vea afectado el rendimiento."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Esta app requiere uso de batería <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Uso de la pantalla desde carga completa"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Uso de la batería desde la última carga completa"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Tiempo que estuvo encendida la pantalla desde la última carga completa"</string>
@@ -2714,8 +2707,7 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Uso de la batería"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Desde la última carga completa"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Administrar el uso de la batería"</string>
-    <!-- no translation found for battery_total_and_background_usage (6418204620302474483) -->
-    <skip />
+    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano en las últimas 24 h"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"El cálculo de batería restante se basa en el uso del dispositivo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tiempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Para completar la carga"</string>
@@ -5315,23 +5307,17 @@
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"No disponible cuando el modo hora de dormir está activado"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Se restableció la prioridad de notificaciones."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
-    <!-- no translation found for bluetooth_message_access_notification_content (5111712860712823893) -->
-    <skip />
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Un dispositivo quiere acceder a tus mensajes. Presiona para ver más detalles"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"¿Quieres permitir el acceso a los mensajes?"</string>
-    <!-- no translation found for bluetooth_message_access_dialog_content (7186694737578788487) -->
-    <skip />
-    <!-- no translation found for bluetooth_phonebook_access_notification_content (9175220052703433637) -->
-    <skip />
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Un dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quiere acceder a tus mensajes.\n\nNunca antes te habías conectado a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Un dispositivo quiere acceder a tus contactos y al registro de llamadas. Presiona para ver más detalles"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"¿Quieres permitir el acceso a los contactos y al registro de llamadas?"</string>
-    <!-- no translation found for bluetooth_phonebook_access_dialog_content (959658135522249170) -->
-    <skip />
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Un dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quiere acceder a tus contactos y al registro de llamadas. Esto incluye datos sobre llamadas entrantes y salientes.\n\nNunca antes te habías conectado a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Brillo"</string>
-    <!-- no translation found for category_name_lock_display (8310402558217129670) -->
-    <skip />
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Pantalla de bloqueo"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Aspecto"</string>
     <string name="category_name_color" msgid="937514550918977151">"Color"</string>
-    <!-- no translation found for category_name_display_controls (7046581691184725216) -->
-    <skip />
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Otros controles de pantalla"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Otras opciones"</string>
     <string name="category_name_general" msgid="7737273712848115886">"General"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Usar Tema oscuro"</string>
@@ -5370,6 +5356,5 @@
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostrar acceso a portapapeles"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Mostrar un mensaje cuando las apps accedan a textos, imágenes y otro contenido que hayas copiado"</string>
     <string name="all_apps" msgid="3054120149509114789">"Todas las apps"</string>
-    <!-- no translation found for request_manage_bluetooth_permission_dont_allow (8798061333407581300) -->
-    <skip />
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"No permitir"</string>
 </resources>
