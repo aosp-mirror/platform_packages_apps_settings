@@ -123,6 +123,11 @@ public class BatteryHistEntry {
         return mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
     }
 
+    /** Whether this {@link BatteryHistEntry} is system consumer or not. */
+    public boolean isSystemEntry() {
+        return mConsumerType == ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
+    }
+
     /** Gets an identifier to represent this {@link BatteryHistEntry}. */
     public String getKey() {
         if (mKey == null) {
