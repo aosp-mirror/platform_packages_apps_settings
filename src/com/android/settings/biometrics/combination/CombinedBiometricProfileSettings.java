@@ -17,32 +17,37 @@ package com.android.settings.biometrics.combination;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.os.UserHandle;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 
 /**
  * Settings screen for multiple biometrics used in work profile.
  */
-public class CombinedBiometricProfileSettings extends DashboardFragment {
+public class CombinedBiometricProfileSettings extends BiometricsSettingsBase {
     private static final String TAG = "BiometricProfileSetting";
-
-    private int mUserId;
+    private static final String KEY_FACE_SETTINGS = "biometric_face_settings_profile";
+    private static final String KEY_FINGERPRINT_SETTINGS = "biometric_fingerprint_settings_profile";
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mUserId = getActivity().getIntent().getIntExtra(Intent.EXTRA_USER_ID,
-                UserHandle.myUserId());
         use(BiometricSettingsAppPreferenceController.class).setUserId(mUserId);
     }
 
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.security_settings_combined_biometric_profile;
+    }
+
+    @Override
+    public String getFacePreferenceKey() {
+        return KEY_FACE_SETTINGS;
+    }
+
+    @Override
+    public String getFingerprintPreferenceKey() {
+        return KEY_FINGERPRINT_SETTINGS;
     }
 
     @Override
