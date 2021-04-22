@@ -93,7 +93,6 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.gestures.AssistGestureSettings;
-import com.android.settings.gestures.DeviceControlsSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
@@ -306,7 +305,6 @@ public class SettingsGateway {
             MobileNetworkListFragment.class.getName(),
             PowerMenuSettings.class.getName(),
             GlobalActionsPanelSettings.class.getName(),
-            DeviceControlsSettings.class.getName(),
             DarkModeSettingsFragment.class.getName(),
             BugReportHandlerPicker.class.getName(),
             GestureNavigationSettingsFragment.class.getName(),

@@ -33,12 +33,6 @@
         android:fragment="com.android.settings.gestures.GlobalActionsPanelSettings"
         settings:controller="com.android.settings.gestures.GlobalActionsPanelPreferenceController" />
 
-    <Preference
-        android:key="gesture_device_controls_summary"
-        android:title="@string/device_controls_sentence"
-        android:fragment="com.android.settings.gestures.DeviceControlsSettings"
-        settings:controller="com.android.settings.gestures.DeviceControlsPreferenceController" />
-
     <PreferenceCategory
         android:title="@string/power_menu_lock_screen_category" >
 

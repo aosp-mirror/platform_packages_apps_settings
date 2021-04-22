@@ -16,7 +16,7 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import android.app.ActivityManager;
 import android.content.ContentResolver;
@@ -88,14 +88,14 @@ public class BubbleNotificationPreferenceController extends TogglePreferenceCont
 
     @Override
     public boolean isChecked() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
+        return Settings.Secure.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Global.putInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, isChecked ? ON : OFF);
+        return Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+                isChecked ? ON : OFF);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class BubbleNotificationPreferenceController extends TogglePreferenceCont
     class SettingObserver extends ContentObserver {
 
         private final Uri NOTIFICATION_BUBBLES_URI =
-                Settings.Global.getUriFor(NOTIFICATION_BUBBLES);
+                Settings.Secure.getUriFor(NOTIFICATION_BUBBLES);
 
         private final Preference mPreference;
 
