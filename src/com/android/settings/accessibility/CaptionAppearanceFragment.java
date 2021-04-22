@@ -33,8 +33,8 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
@@ -46,8 +46,10 @@ import java.util.Locale;
 
 /** Settings fragment containing font style of captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CaptionAppearanceFragment extends SettingsPreferenceFragment
+public class CaptionAppearanceFragment extends DashboardFragment
         implements OnPreferenceChangeListener, OnValueChangedListener {
+
+    private static final String TAG = "CaptionAppearanceFragment";
     private static final String PREF_CAPTION_PREVIEW = "caption_preview";
     private static final String PREF_BACKGROUND_COLOR = "captioning_background_color";
     private static final String PREF_BACKGROUND_OPACITY = "captioning_background_opacity";
@@ -107,17 +109,26 @@ public class CaptionAppearanceFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
 
         mCaptioningManager = (CaptioningManager) getSystemService(Context.CAPTIONING_SERVICE);
 
-        addPreferencesFromResource(R.xml.captioning_appearance);
         initializeAllPreferences();
         updateAllPreferences();
         refreshShowingCustom();
         installUpdateListeners();
         refreshPreviewText();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.captioning_appearance;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     private void refreshPreviewText() {
