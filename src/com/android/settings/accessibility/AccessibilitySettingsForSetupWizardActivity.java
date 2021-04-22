@@ -90,6 +90,8 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                 .setSourceMetricsCategory(caller instanceof Instrumentable
                         ? ((Instrumentable) caller).getMetricsCategory()
                         : Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setExtras(SetupWizardUtils.copyLifecycleExtra(getIntent().getExtras(),
+                        new Bundle()))
                 .launch();
         return true;
     }

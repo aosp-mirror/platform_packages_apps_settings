@@ -31,6 +31,7 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:datePickerDialogTheme">@style/PickerDialogTheme.Settings</item>
+        <item name="android:progressBarStyleHorizontal">@style/HorizontalProgressBarStyle</item>
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="face_layout_theme">@style/FaceLayoutTheme</item>
@@ -165,21 +166,6 @@
         <item name="android:colorAccent">@*android:color/white</item>
     </style>
 
-    <style name="Theme.RequestManageCredentials" parent="@style/Theme.MaterialComponents.Light">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-        <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
-        <item name="colorAccent">@*android:color/accent_device_default_light</item>
-        <item name="colorPrimaryDark">@*android:color/primary_dark_device_default_settings_light</item>
-
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
-        <item name="android:navigationBarColor">@android:color/white</item>
-    </style>
-
     <style name="FallbackHome" parent="@android:style/Theme.DeviceDefault.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -267,6 +253,7 @@
         <item name="android:navigationBarDividerColor">@*android:color/navigation_bar_divider_device_default_settings</item>
 
         <item name="android:colorPrimary">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
         <item name="android:colorPrimaryDark">@android:color/white</item>
         <item name="android:colorAccent">@color/material_blue_700</item>
     </style>

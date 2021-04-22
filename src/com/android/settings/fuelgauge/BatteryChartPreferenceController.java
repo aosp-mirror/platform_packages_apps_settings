@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -38,6 +39,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -53,6 +55,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final String TAG = "BatteryChartPreferenceController";
     private static final int CHART_KEY_ARRAY_SIZE = 25;
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
+    private static final long VALID_USAGE_TIME_DURATION = DateUtils.HOUR_IN_MILLIS * 2;
+    private static final long VALID_DIFF_DURATION = DateUtils.MINUTE_IN_MILLIS * 3;
 
     @VisibleForTesting
     Map<Integer, List<BatteryDiffEntry>> mBatteryIndexedMap;
@@ -70,6 +74,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final CharSequence[] mNotAllowShowSummaryPackages;
 
     // Preference cache to avoid create new instance each time.
     @VisibleForTesting
@@ -83,6 +88,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mActivity = activity;
         mFragment = fragment;
         mPreferenceKey = preferenceKey;
+        mNotAllowShowSummaryPackages = context.getResources()
+            .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -139,8 +146,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             isValidPackage = mBatteryUtils.getPackageUid(histEntry.mPackageName)
                 != BatteryUtils.UID_NULL;
         }
-        Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b",
-            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage));
+        Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b %s",
+            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage,
+            histEntry.mPackageName));
         if (isValidPackage) {
             AdvancedPowerUsageDetail.startBatteryDetailPage(
                 mActivity, mFragment, diffEntry, powerPref.getPercent());
@@ -173,6 +181,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final List<Long> batteryHistoryKeyList =
             new ArrayList<Long>(batteryHistoryMap.keySet());
         Collections.sort(batteryHistoryKeyList);
+        validateSlotTimestamp(batteryHistoryKeyList);
         mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
         final int elementSize = Math.min(batteryHistoryKeyList.size(), CHART_KEY_ARRAY_SIZE);
         final int offset = CHART_KEY_ARRAY_SIZE - elementSize;
@@ -264,6 +273,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             } else {
                 appEntries.add(entry);
             }
+            // Validates the usage time if users click a specific slot.
+            if (mTrapezoidIndex >= 0) {
+                validateUsageTime(entry);
+            }
         });
         Collections.sort(appEntries, BatteryDiffEntry.COMPARATOR);
         Collections.sort(systemEntries, BatteryDiffEntry.COMPARATOR);
@@ -283,7 +296,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             final String appLabel = entry.getAppLabel();
             final Drawable appIcon = entry.getAppIcon();
             if (TextUtils.isEmpty(appLabel) || appIcon == null) {
-                Log.w(TAG, "cannot find app resource:" + entry.mBatteryHistEntry);
+                Log.w(TAG, "cannot find app resource for\n" + entry);
                 continue;
             }
             final String prefKey = entry.mBatteryHistEntry.getKey();
@@ -299,8 +312,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             pref.setTitle(appLabel);
             pref.setOrder(prefIndex);
             pref.setPercent(entry.getPercentOfTotal());
+            pref.setSingleLineTitle(true);
             // Sets the BatteryDiffEntry to preference for launching detailed page.
             pref.setBatteryDiffEntry(entry);
+            setPreferenceSummary(pref, entry);
             mAppListPrefGroup.addPreference(pref);
             prefIndex++;
         }
@@ -322,6 +337,57 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mAppListPrefGroup.removeAll();
     }
 
+    @VisibleForTesting
+    void setPreferenceSummary(
+            PowerGaugePreference preference, BatteryDiffEntry entry) {
+        final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
+        final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
+        final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+        // Checks whether the package is allowed to show summary or not.
+        for (CharSequence notAllowPackageName : mNotAllowShowSummaryPackages) {
+            if (TextUtils.equals(entry.getPackageName(), notAllowPackageName)) {
+                preference.setSummary(null);
+                return;
+            }
+        }
+        String usageTimeSummary = null;
+        // Not shows summary for some system components without usage time.
+        if (totalUsageTimeInMs == 0) {
+            preference.setSummary(null);
+        // Shows background summary only if we don't have foreground usage time.
+        } else if (foregroundUsageTimeInMs == 0 && backgroundUsageTimeInMs != 0) {
+            usageTimeSummary = buildUsageTimeInfo(backgroundUsageTimeInMs, true);
+        // Shows total usage summary only if total usage time is small.
+        } else if (totalUsageTimeInMs < DateUtils.MINUTE_IN_MILLIS) {
+            usageTimeSummary = buildUsageTimeInfo(totalUsageTimeInMs, false);
+        } else {
+            usageTimeSummary = buildUsageTimeInfo(totalUsageTimeInMs, false);
+            // Shows background usage time if it is larger than a minute.
+            if (backgroundUsageTimeInMs >= DateUtils.MINUTE_IN_MILLIS) {
+                usageTimeSummary +=
+                    "\n" + buildUsageTimeInfo(backgroundUsageTimeInMs, true);
+            }
+        }
+        preference.setSummary(usageTimeSummary);
+    }
+
+    private String buildUsageTimeInfo(long usageTimeInMs, boolean isBackground) {
+        if (usageTimeInMs < DateUtils.MINUTE_IN_MILLIS) {
+            return mPrefContext.getString(
+                isBackground
+                    ? R.string.battery_usage_background_less_than_one_minute
+                    : R.string.battery_usage_total_less_than_one_minute);
+        }
+        final CharSequence timeSequence =
+            StringUtil.formatElapsedTime(mPrefContext, usageTimeInMs,
+                /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
+        final int resourceId =
+            isBackground
+                ? R.string.battery_usage_for_background_time
+                : R.string.battery_usage_for_total_time;
+        return mPrefContext.getString(resourceId, timeSequence);
+    }
+
     private static String utcToLocalTime(long[] timestamps) {
         final StringBuilder builder = new StringBuilder();
         for (int index = 0; index < timestamps.length; index++) {
@@ -329,5 +395,40 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                   ConvertUtils.utcToLocalTime(timestamps[index])));
         }
         return builder.toString();
+    }
+
+    @VisibleForTesting
+    static boolean validateUsageTime(BatteryDiffEntry entry) {
+        final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
+        final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
+        final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+        if (foregroundUsageTimeInMs > VALID_USAGE_TIME_DURATION
+                || backgroundUsageTimeInMs > VALID_USAGE_TIME_DURATION
+                || totalUsageTimeInMs > VALID_USAGE_TIME_DURATION) {
+            Log.e(TAG, "validateUsageTime() fail for\n" + entry);
+            return false;
+        }
+        return true;
+    }
+
+    @VisibleForTesting
+    static boolean validateSlotTimestamp(List<Long> batteryHistoryKeys) {
+        // Whether the nearest two slot time diff is valid or not?
+        final int size = batteryHistoryKeys.size();
+        for (int index = 0; index < size - 1; index++) {
+            final long currentTime = batteryHistoryKeys.get(index);
+            final long nextTime = batteryHistoryKeys.get(index + 1);
+            final long diffTime = Math.abs(
+                DateUtils.HOUR_IN_MILLIS - Math.abs(currentTime - nextTime));
+            if (currentTime == 0) {
+                continue;
+            } else if (diffTime > VALID_DIFF_DURATION) {
+                Log.e(TAG, String.format("validateSlotTimestamp() %s > %s",
+                    ConvertUtils.utcToLocalTime(currentTime),
+                    ConvertUtils.utcToLocalTime(nextTime)));
+                return false;
+            }
+        }
+        return true;
     }
 }
