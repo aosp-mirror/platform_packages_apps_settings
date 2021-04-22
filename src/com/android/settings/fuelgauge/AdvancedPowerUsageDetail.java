@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -282,20 +283,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
-        //TODO(b/178197718) Refine the layout
-        controller.setSummary(TextUtils.expandTemplate(
-                getText(R.string.battery_total_and_background_usage),
-                StringUtil.formatElapsedTime(
-                        getContext(),
-                        totalTimeMs,
-                        /* withSeconds */ false,
-                        /* collapseTimeUnit */ false),
-                StringUtil.formatElapsedTime(
-                        getContext(),
-                        backgroundTimeMs,
-                        /* withSeconds */ false,
-                        /* collapseTimeUnit */ false)));
+        //TODO(b/178197718) Update layout to support multiple lines
+        controller.setSummary(getAppActiveTime(foregroundTimeMs, backgroundTimeMs));
 
         controller.done(context, true /* rebindActions */);
     }
@@ -387,5 +376,54 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
         preference.setChecked(selectedKey.equals(preference.getKey()));
+    }
+
+    //TODO(b/178197718) Update method to support time period
+    private CharSequence getAppActiveTime(long foregroundTimeMs, long backgroundTimeMs) {
+        final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
+        final CharSequence usageTimeSummary;
+
+        if (totalTimeMs == 0) {
+            usageTimeSummary = getText(R.string.battery_not_usage);
+        // Shows background summary only if we don't have foreground usage time.
+        } else if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
+            usageTimeSummary = backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS ?
+                    getText(R.string.battery_background_usage_less_minute) :
+                    TextUtils.expandTemplate(getText(R.string.battery_background_usage),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            backgroundTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false));
+        // Shows total usage summary only if total usage time is small.
+        } else if (totalTimeMs < DateUtils.MINUTE_IN_MILLIS) {
+            usageTimeSummary = getText(R.string.battery_total_usage_less_minute);
+        // Shows different total usage summary when background usage time is small.
+        } else if (backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS) {
+            usageTimeSummary = TextUtils.expandTemplate(
+                    getText(backgroundTimeMs == 0 ?
+                            R.string.battery_total_usage :
+                            R.string.battery_total_usage_and_background_less_minute_usage),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            totalTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false));
+        // Shows default summary.
+        } else {
+            usageTimeSummary = TextUtils.expandTemplate(
+                    getText(R.string.battery_total_and_background_usage),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            totalTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            backgroundTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false));
+        }
+        return usageTimeSummary;
     }
 }
