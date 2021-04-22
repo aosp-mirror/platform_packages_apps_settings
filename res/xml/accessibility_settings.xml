@@ -50,7 +50,8 @@
             android:icon="@drawable/ic_reduce_bright_colors"
             android:persistent="false"
             android:title="@string/reduce_bright_colors_preference_title"
-            settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
+            settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"
+            settings:keywords="@string/keywords_reduce_bright_colors"/>
 
         <SwitchPreference
             android:key="dark_ui_mode_accessibility"

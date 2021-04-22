@@ -409,6 +409,12 @@
         <item name="android:progressDrawable">@drawable/ring_progress</item>
     </style>
 
+    <style name="HorizontalProgressBarStyle"
+           parent="android:style/Widget.Material.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:scaleY">0.5</item>
+    </style>
+
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
 
@@ -795,6 +801,7 @@
         <item name="android:paddingBottom">8dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">?android:colorBackground</item>
     </style>
 
     <style name="RequestManageCredentialsAllowButton" parent="@style/ActionPrimaryButton">

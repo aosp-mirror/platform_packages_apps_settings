@@ -59,6 +59,7 @@ import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.Utils;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.GearPreference.OnGearClickListener;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -129,7 +130,17 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.vpn, menu);
+        // Although FEATURE_IPSEC_TUNNELS should always be present in android S,
+        // keep this check here just to be safe.
+        if (Utils.isProviderModelEnabled(getContext())
+                && !getContext().getPackageManager().hasSystemFeature(
+                        PackageManager.FEATURE_IPSEC_TUNNELS)) {
+            Log.w(LOG_TAG, "FEATURE_IPSEC_TUNNELS missing from system, cannot create new VPNs");
+            return;
+        } else {
+            // By default, we should inflate this menu.
+            inflater.inflate(R.menu.vpn, menu);
+        }
     }
 
     @Override

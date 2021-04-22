@@ -327,15 +327,6 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Закључавање екрана, откључавање лицем"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Закључавање екрана, отисак прста"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Закључавање екрана"</string>
-    <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"Откључајте телефон безбедно помоћу лица и отиска прста"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"Могуће је и пријављивање у апликације и потврђивање плаћања"</string>
-    <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"Подесите откључавање помоћу:"</string>
-    <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"Откључавање лицем"</string>
-    <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"Поједноставите откључавање телефона"</string>
-    <string name="multi_biometric_enroll_fingerprint_unlock_title" msgid="3839935495273854171">"Отисак прста"</string>
-    <string name="multi_biometric_enroll_fingerprint_unlock_description" msgid="116938134430420778">"Уштедите на времену и откључајте телефон у џепу"</string>
-    <string name="multi_biometric_enroll_skip" msgid="7301215196571580858">"Прескочи"</string>
-    <string name="multi_biometric_enroll_next" msgid="6220680618102151619">"Даље"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Лице је додато"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Подесите откључавање лицем"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Откључавање лицем"</string>
@@ -447,7 +438,8 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Подигните прст када осетите вибрирање"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Померите се негде са блажим осветљењем и пробајте поново"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Достигли сте максималан број покушаја"</string>
-    <string name="security_settings_fingerprint_v2_home_screen" msgid="5893917293784293946">"Користите отисак прста за откључавање телефона или потврду идентитета као када се пријављујете у апликације или одобравате куповину"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_home_screen (6677856383184441160) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Прескачете закључавање екрана?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Функције заштите уређаја неће бити укључене. Нећете моћи да спречите друге људе да користе овај таблет ако буде изгубљен, украден или ресетован."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Функције заштите уређаја неће бити укључене. Нећете моћи да спречите друге људе да користе овај уређај ако буде изгубљен, украден или ресетован."</string>
@@ -1422,14 +1414,14 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Користи <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="7182406911552216373">"Ажурирати жељени SIM?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> је једина SIM картица у уређају. Желите ли да користите ову SIM картицу за мобилне податке, позиве и SMS поруке?"</string>
-    <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Нетачан PIN за SIM кôд. Сада морате да контактирате мобилног оператера да бисте откључали уређај."</string>
+    <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Нетачан PIN кôд за SIM. Сада морате да контактирате мобилног оператера да бисте откључали уређај."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="one">Нетачан PIN за SIM кôд. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушај.</item>
-      <item quantity="few">Нетачан PIN за SIM кôд. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушаја.</item>
-      <item quantity="other">Нетачан PIN за SIM кôд. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушаја.</item>
+      <item quantity="one">Нетачан PIN кôд за SIM. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушај.</item>
+      <item quantity="few">Нетачан PIN кôд за SIM. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушаја.</item>
+      <item quantity="other">Нетачан PIN кôд за SIM. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушаја.</item>
     </plurals>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"Нетачан PIN кôд за SIM. Имате још 1 покушај, а онда морате да контактирате мобилног оператера да бисте откључали уређај."</string>
-    <string name="pin_failed" msgid="3726505565797352255">"Радња са PIN за SIM кодом није успела!"</string>
+    <string name="pin_failed" msgid="3726505565797352255">"Радња са PIN кодом за SIM није успела!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Ажурирања система"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Android верзија"</string>
@@ -2786,6 +2778,16 @@
     <string name="battery_app_usage_for" msgid="929971425835809784">"Потрошња од стране апликација у периоду"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"пре подне"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"по подне"</string>
+    <!-- no translation found for battery_usage_total_less_than_one_minute (1035425863251685509) -->
+    <skip />
+    <!-- no translation found for battery_usage_background_less_than_one_minute (3957971442554437909) -->
+    <skip />
+    <!-- no translation found for battery_usage_for_total_time (8402254046930910905) -->
+    <skip />
+    <!-- no translation found for battery_usage_for_background_time (9109637210617095188) -->
+    <skip />
+    <!-- no translation found for battery_usage_screen_footer (3241109085756092490) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процеса"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Штреберска статистика о активним процесима"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Искоришћеност меморије"</string>
@@ -4922,7 +4924,8 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"Искоришћено од укупно <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"у упот."</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"У употреби: <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
-    <string name="storage_total_summary" msgid="6640850560211304573">"Укупно <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
+    <!-- no translation found for storage_total_summary (7163360249534964272) -->
+    <skip />
     <string name="clear_instant_app_data" msgid="5951258323364386357">"Обриши апликацију"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Желите ли да уклоните ову инстант апликацију?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Отвори"</string>
