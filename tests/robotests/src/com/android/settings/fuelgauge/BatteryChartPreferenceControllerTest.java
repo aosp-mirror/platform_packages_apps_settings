@@ -30,7 +30,9 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.text.format.DateUtils;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
@@ -274,6 +276,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(pref.getIcon()).isEqualTo(mDrawable);
         assertThat(pref.getOrder()).isEqualTo(1);
         assertThat(pref.getBatteryDiffEntry()).isSameInstanceAs(mBatteryDiffEntry);
+        assertThat(pref.isSingleLineTitle()).isTrue();
     }
 
     @Test
@@ -303,7 +306,134 @@ public final class BatteryChartPreferenceControllerTest {
             mPowerGaugePreference)).isFalse();
     }
 
-    private Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {
+    @Test
+    public void testSetPreferenceSummary_setNullContentIfTotalUsageTimeIsZero() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        pref.setSummary("fake preference summary");
+
+        mBatteryChartPreferenceController.setPreferenceSummary(
+            pref, createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0));
+        assertThat(pref.getSummary()).isNull();
+    }
+
+    @Test
+    public void testSetPreferenceSummary_setBackgroundUsageTimeOnly() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        pref.setSummary("fake preference summary");
+
+        mBatteryChartPreferenceController.setPreferenceSummary(
+            pref, createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
+        assertThat(pref.getSummary()).isEqualTo("Background: 1 min");
+    }
+
+    @Test
+    public void testSetPreferenceSummary_setTotalUsageTimeLessThanAMinute() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        pref.setSummary("fake preference summary");
+
+        mBatteryChartPreferenceController.setPreferenceSummary(
+            pref, createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ 100,
+                /*backgroundUsageTimeInMs=*/ 200));
+        assertThat(pref.getSummary()).isEqualTo("Total: less than a min");
+    }
+
+    @Test
+    public void testSetPreferenceSummary_setTotalTimeIfBackgroundTimeLessThanAMinute() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        pref.setSummary("fake preference summary");
+
+        mBatteryChartPreferenceController.setPreferenceSummary(
+            pref, createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
+                /*backgroundUsageTimeInMs=*/ 200));
+        assertThat(pref.getSummary()).isEqualTo("Total: 1 min");
+    }
+
+    @Test
+    public void testSetPreferenceSummary_setTotalAndBackgroundUsageTime() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        pref.setSummary("fake preference summary");
+
+        mBatteryChartPreferenceController.setPreferenceSummary(
+            pref, createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
+                /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
+        assertThat(pref.getSummary()).isEqualTo("Total: 2 min\nBackground: 1 min");
+    }
+
+    @Test
+    public void testSetPreferenceSummary_notAllowShownPackage_setSummayAsNull() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        pref.setSummary("fake preference summary");
+        final BatteryDiffEntry batteryDiffEntry =
+            spy(createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
+                /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
+        doReturn("com.google.android.googlequicksearchbox").when(batteryDiffEntry)
+            .getPackageName();
+
+        mBatteryChartPreferenceController.setPreferenceSummary(pref, batteryDiffEntry);
+        assertThat(pref.getSummary()).isNull();
+    }
+
+    @Test
+    public void testValidateUsageTime_returnTrueIfBatteryDiffEntryIsValid() {
+        assertThat(BatteryChartPreferenceController.validateUsageTime(
+            createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
+                /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS)))
+            .isTrue();
+    }
+
+    @Test
+    public void testValidateUsageTime_foregroundTimeExceedThreshold_returnFalse() {
+        assertThat(BatteryChartPreferenceController.validateUsageTime(
+            createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ DateUtils.HOUR_IN_MILLIS * 3,
+                /*backgroundUsageTimeInMs=*/ 0)))
+            .isFalse();
+    }
+
+    @Test
+    public void testValidateUsageTime_backgroundTimeExceedThreshold_returnFalse() {
+        assertThat(BatteryChartPreferenceController.validateUsageTime(
+            createBatteryDiffEntry(
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ DateUtils.HOUR_IN_MILLIS * 3)))
+            .isFalse();
+    }
+
+    @Test
+    public void testValidateSlotTimestamp_emptyContent_returnTrue() {
+        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(
+            new ArrayList<Long>())).isTrue();
+    }
+
+    @Test
+    public void testValidateSlotTimestamp_returnExpectedResult() {
+        final List<Long> slotTimestampList =
+            Arrays.asList(
+                Long.valueOf(0),
+                Long.valueOf(DateUtils.HOUR_IN_MILLIS),
+                Long.valueOf(DateUtils.HOUR_IN_MILLIS * 2 + DateUtils.MINUTE_IN_MILLIS),
+                Long.valueOf(DateUtils.HOUR_IN_MILLIS * 3 + DateUtils.MINUTE_IN_MILLIS * 2));
+        // Verifies the testing data is correct before we added invalid data into it.
+        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(slotTimestampList))
+            .isTrue();
+
+        // Insert invalid timestamp into the list.
+        slotTimestampList.add(
+            Long.valueOf(DateUtils.HOUR_IN_MILLIS * 4 + DateUtils.MINUTE_IN_MILLIS * 3));
+        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(slotTimestampList))
+            .isFalse();
+    }
+
+    private static Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {
         final Map<Long, List<BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         for (int index = 0; index < size; index++) {
             final ContentValues values = new ContentValues();
@@ -312,5 +442,12 @@ public final class BatteryChartPreferenceControllerTest {
             batteryHistoryMap.put(Long.valueOf(index + 1), Arrays.asList(entry));
         }
         return batteryHistoryMap;
+    }
+
+    private BatteryDiffEntry createBatteryDiffEntry(
+            long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
+        return new BatteryDiffEntry(
+            mContext, foregroundUsageTimeInMs, backgroundUsageTimeInMs,
+            /*consumePower=*/ 0, mBatteryHistEntry);
     }
 }

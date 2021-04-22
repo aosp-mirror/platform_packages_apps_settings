@@ -46,32 +46,23 @@ import java.util.Collection;
 @RunWith(ParameterizedRobolectricTestRunner.class)
 public class PowerMenuPrivacyPreferenceControllerAvailabilityTest {
 
-    private static final String CONTROLS_ENABLED = Settings.Secure.CONTROLS_ENABLED;
     private static final String CONTROLS_FEATURE = PackageManager.FEATURE_CONTROLS;
     private static final String CARDS_ENABLED = Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
     private static final String CARDS_AVAILABLE = Settings.Secure.GLOBAL_ACTIONS_PANEL_AVAILABLE;
 
     @ParameterizedRobolectricTestRunner.Parameters(
-            name = "ctrls available={0}, ctrls enabled={1}, cards available={2}, cards enabled={3}")
+            name = "ctrls available={0} cards available={1}, cards enabled={2}")
     public static Collection data() {
         return Arrays.asList(new Object[][]{
-                // controls available, controls enabled, cards available, cards enabled, available
-                {false, false, false, false, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {false, false, false, true, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {false, false, true, false, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {false, false, true, true, BasePreferenceController.AVAILABLE},
-                {false, true, false, false, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {false, true, false, true, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {false, true, true, false, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {false, true, true, true, BasePreferenceController.AVAILABLE},
-                {true, false, false, false, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {true, false, false, true, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {true, false, true, false, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
-                {true, false, true, true, BasePreferenceController.AVAILABLE},
-                {true, true, false, false, BasePreferenceController.AVAILABLE},
-                {true, true, false, true, BasePreferenceController.AVAILABLE},
-                {true, true, true, false, BasePreferenceController.AVAILABLE},
-                {true, true, true, true, BasePreferenceController.AVAILABLE}
+                // controls available, cards available, cards enabled, available
+                {false, false, false, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
+                {false, false, true, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
+                {false, true, false, BasePreferenceController.DISABLED_DEPENDENT_SETTING},
+                {false, true, true, BasePreferenceController.AVAILABLE},
+                {true, false, false, BasePreferenceController.AVAILABLE},
+                {true, false, true, BasePreferenceController.AVAILABLE},
+                {true, true, false, BasePreferenceController.AVAILABLE},
+                {true, true, true, BasePreferenceController.AVAILABLE}
         });
     }
 
@@ -83,19 +74,16 @@ public class PowerMenuPrivacyPreferenceControllerAvailabilityTest {
     private LockPatternUtils mLockPatternUtils;
 
     private boolean mControlsAvailable;
-    private boolean mControlsEnabled;
     private boolean mCardsAvailable;
     private boolean mCardsEnabled;
     private int mAvailable;
 
     public PowerMenuPrivacyPreferenceControllerAvailabilityTest(
             boolean controlsAvailable,
-            boolean controlsEnabled,
             boolean cardsAvailable,
             boolean cardsEnabled,
             int available) {
         mControlsAvailable = controlsAvailable;
-        mControlsEnabled = controlsEnabled;
         mCardsAvailable = cardsAvailable;
         mCardsEnabled = cardsEnabled;
         mAvailable = available;
@@ -120,7 +108,6 @@ public class PowerMenuPrivacyPreferenceControllerAvailabilityTest {
     public void getAvailabilityStatus_possiblyAvailableAndEnabled() {
         mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, mControlsAvailable);
         ContentResolver cr = mContext.getContentResolver();
-        Settings.Secure.putInt(cr, CONTROLS_ENABLED, mControlsEnabled ? 1 : 0);
         Settings.Secure.putInt(cr, CARDS_AVAILABLE, mCardsAvailable ? 1 : 0);
         Settings.Secure.putInt(cr, CARDS_ENABLED, mCardsEnabled ? 1 : 0);
 

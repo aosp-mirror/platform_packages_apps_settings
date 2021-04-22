@@ -131,7 +131,8 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
             case TYPE_DISABLE_DIALOG:
                 MobileNetworkUtils.setMobileDataEnabled(getContext(), mSubId, false /* enabled */,
                         false /* disableOtherSubscriptions */);
-                if (mWifiPickerTrackerHelper != null) {
+                if (mWifiPickerTrackerHelper != null
+                        && !mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(mSubId)) {
                     mWifiPickerTrackerHelper.setCarrierNetworkEnabled(false);
                 }
                 break;
@@ -139,7 +140,8 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                 mSubscriptionManager.setDefaultDataSubId(mSubId);
                 MobileNetworkUtils.setMobileDataEnabled(getContext(), mSubId, true /* enabled */,
                         true /* disableOtherSubscriptions */);
-                if (mWifiPickerTrackerHelper != null) {
+                if (mWifiPickerTrackerHelper != null
+                        && !mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(mSubId)) {
                     mWifiPickerTrackerHelper.setCarrierNetworkEnabled(true);
                 }
                 break;
