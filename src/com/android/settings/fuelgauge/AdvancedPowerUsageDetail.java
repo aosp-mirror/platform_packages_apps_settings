@@ -42,6 +42,8 @@ import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -61,7 +63,7 @@ import java.util.List;
  */
 public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
-        RadioButtonPreference.OnClickListener {
+        BatteryTipPreferenceController.BatteryTipListener, RadioButtonPreference.OnClickListener {
 
     public static final String TAG = "AdvancedPowerDetail";
     public static final String EXTRA_UID = "extra_uid";
@@ -73,6 +75,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public static final String EXTRA_POWER_USAGE_PERCENT = "extra_power_usage_percent";
     public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
 
+    private static final String KEY_PREF_FOREGROUND = "app_usage_foreground";
+    private static final String KEY_PREF_BACKGROUND = "app_usage_background";
     private static final String KEY_PREF_HEADER = "header_view";
     private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
     private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
@@ -92,7 +96,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     BatteryUtils mBatteryUtils;
     @VisibleForTesting
     BatteryOptimizeUtils mBatteryOptimizeUtils;
-
+    @VisibleForTesting
+    Preference mForegroundPreference;
+    @VisibleForTesting
+    Preference mBackgroundPreference;
     @VisibleForTesting
     Preference mFooterPreference;
     @VisibleForTesting
@@ -101,12 +108,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     RadioButtonPreference mOptimizePreference;
     @VisibleForTesting
     RadioButtonPreference mUnrestrictedPreference;
-    private AppButtonsPreferenceController mAppButtonsPreferenceController;
-    private UnrestrictedPreferenceController mUnrestrictedPreferenceController;
-    private OptimizedPreferenceController mOptimizedPreferenceController;
-    private RestrictedPreferenceController mRestrictedPreferenceController;
+    @VisibleForTesting
+    boolean enableTriState = true;
 
-    private String mPackageName;
+    private AppButtonsPreferenceController mAppButtonsPreferenceController;
+    private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
 
     // A wrapper class to carry LaunchBatteryDetailPage required arguments.
     private static final class LaunchBatteryDetailPageArgs {
@@ -227,22 +233,17 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
-        mFooterPreference = findPreference(KEY_FOOTER_PREFERENCE);
-        mHeaderPreference = (LayoutPreference) findPreference(KEY_PREF_HEADER);
+        final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
+        if (enableTriState) {
+            onCreateForTriState(packageName);
+        } else {
+            mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
+            mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
+        }
+        mHeaderPreference = findPreference(KEY_PREF_HEADER);
 
-        mUnrestrictedPreference  = findPreference(KEY_PREF_UNRESTRICTED);
-        mOptimizePreference  = findPreference(KEY_PREF_OPTIMIZED);
-        mRestrictedPreference  = findPreference(KEY_PREF_RESTRICTED);
-        mUnrestrictedPreference.setOnClickListener(this);
-        mOptimizePreference.setOnClickListener(this);
-        mRestrictedPreference.setOnClickListener(this);
-
-        mBatteryOptimizeUtils = new BatteryOptimizeUtils(
-                getContext(), getArguments().getInt(EXTRA_UID), mPackageName);
-
-        if (mPackageName != null) {
-            mAppEntry = mState.getEntry(mPackageName, UserHandle.myUserId());
+        if (packageName != null) {
+            mAppEntry = mState.getEntry(packageName, UserHandle.myUserId());
         }
     }
 
@@ -251,7 +252,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onResume();
 
         initHeader();
-        initPreference();
+        if (enableTriState) {
+            initPreferenceForTriState(getContext());
+        } else {
+            initPreference(getContext());
+        }
     }
 
     @VisibleForTesting
@@ -281,17 +286,39 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
         }
 
-        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
-        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        //TODO(b/178197718) Update layout to support multiple lines
-        controller.setSummary(getAppActiveTime(foregroundTimeMs, backgroundTimeMs));
+        if (enableTriState) {
+            final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
+            final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+            //TODO(b/178197718) Update layout to support multiple lines
+            controller.setSummary(getAppActiveTime(foregroundTimeMs, backgroundTimeMs));
+        }
 
         controller.done(context, true /* rebindActions */);
     }
 
     @VisibleForTesting
-    void initPreference() {
-        final Context context = getContext();
+    void initPreference(Context context) {
+        final Bundle bundle = getArguments();
+        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
+        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+        mForegroundPreference.setSummary(
+                TextUtils.expandTemplate(getText(R.string.battery_used_for),
+                        StringUtil.formatElapsedTime(
+                                context,
+                                foregroundTimeMs,
+                                /* withSeconds */ false,
+                                /* collapseTimeUnit */ false)));
+        mBackgroundPreference.setSummary(
+                TextUtils.expandTemplate(getText(R.string.battery_active_for),
+                        StringUtil.formatElapsedTime(
+                                context,
+                                backgroundTimeMs,
+                                /* withSeconds */ false,
+                                /* collapseTimeUnit */ false)));
+    }
+
+    @VisibleForTesting
+    void initPreferenceForTriState(Context context) {
         final String stateString;
         final String footerString;
         //TODO(b/178197718) Update strings
@@ -308,7 +335,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         } else {
             //Present default string to normal app.
             footerString = context.getString(R.string.manager_battery_usage_footer);
-
         }
         mFooterPreference.setTitle(Html.fromHtml(footerString, Html.FROM_HTML_MODE_COMPACT));
     }
@@ -325,7 +351,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.power_usage_detail;
+        return enableTriState ? R.xml.power_usage_detail : R.xml.power_usage_detail_legacy;
     }
 
     @Override
@@ -336,18 +362,20 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
 
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
-                (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName, mState,
-                REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+                (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName,
+                mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
-        mUnrestrictedPreferenceController =
-                new UnrestrictedPreferenceController(context, uid, packageName);
-        mOptimizedPreferenceController =
-                new OptimizedPreferenceController(context, uid, packageName);
-        mRestrictedPreferenceController =
-                new RestrictedPreferenceController(context, uid, packageName);
-        controllers.add(mUnrestrictedPreferenceController);
-        controllers.add(mOptimizedPreferenceController);
-        controllers.add(mRestrictedPreferenceController);
+        if (enableTriState) {
+            controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
+            controllers.add(new OptimizedPreferenceController(context, uid, packageName));
+            controllers.add(new RestrictedPreferenceController(context, uid, packageName));
+        } else {
+            mBackgroundActivityPreferenceController = new BackgroundActivityPreferenceController(
+                    context, this, uid, packageName);
+            controllers.add(mBackgroundActivityPreferenceController);
+            controllers.add(new BatteryOptimizationPreferenceController(
+                    (SettingsActivity) getActivity(), this, packageName));
+        }
 
         return controllers;
     }
@@ -368,6 +396,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @Override
+    public void onBatteryTipHandled(BatteryTip batteryTip) {
+        mBackgroundActivityPreferenceController.updateSummary(
+                findPreference(mBackgroundActivityPreferenceController.getPreferenceKey()));
+    }
+
+    @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
         updatePreferenceState(mUnrestrictedPreference, selected.getKey());
         updatePreferenceState(mOptimizePreference, selected.getKey());
@@ -376,6 +410,19 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
         preference.setChecked(selectedKey.equals(preference.getKey()));
+    }
+
+    private void onCreateForTriState(String packageName) {
+        mUnrestrictedPreference = findPreference(KEY_PREF_UNRESTRICTED);
+        mOptimizePreference = findPreference(KEY_PREF_OPTIMIZED);
+        mRestrictedPreference = findPreference(KEY_PREF_RESTRICTED);
+        mFooterPreference = findPreference(KEY_FOOTER_PREFERENCE);
+        mUnrestrictedPreference.setOnClickListener(this);
+        mOptimizePreference.setOnClickListener(this);
+        mRestrictedPreference.setOnClickListener(this);
+
+        mBatteryOptimizeUtils = new BatteryOptimizeUtils(
+                getContext(), getArguments().getInt(EXTRA_UID), packageName);
     }
 
     //TODO(b/178197718) Update method to support time period
