@@ -122,13 +122,13 @@ public class NotificationAssistantPreferenceControllerTest {
         assertEquals(1, Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.NAS_SETTINGS_UPDATED, 0, 10));
         verify(mBackend, times(1))
-                .resetDefaultNotificationAssistant(eq(true));
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(true));
 
         //Test user enable again, migration should not happen
         mPreferenceController.setNotificationAssistantGranted(mNASComponent);
         //Number of invocations should not increase
         verify(mBackend, times(1))
-                .resetDefaultNotificationAssistant(eq(true));
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(true));
     }
 
     @Test
@@ -146,13 +146,13 @@ public class NotificationAssistantPreferenceControllerTest {
         assertEquals(0, Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.NAS_SETTINGS_UPDATED, 0, 20));
         verify(mBackend, times(1))
-                .resetDefaultNotificationAssistant(eq(true));
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(true));
 
         //Test user enable again, migration should not happen
         mPreferenceController.setNotificationAssistantGranted(mNASComponent);
         //Number of invocations should not increase
         verify(mBackend, times(1))
-                .resetDefaultNotificationAssistant(eq(true));
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(true));
     }
 
     @Test
@@ -170,13 +170,13 @@ public class NotificationAssistantPreferenceControllerTest {
         assertEquals(1, Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.NAS_SETTINGS_UPDATED, 0, 10));
         verify(mBackend, times(1))
-                .resetDefaultNotificationAssistant(eq(false));
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(false));
 
         //Test user disable again, migration should not happen
         mPreferenceController.setChecked(false);
         //Number of invocations should not increase
         verify(mBackend, times(1))
-                .resetDefaultNotificationAssistant(eq(false));
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(false));
     }
 
 }

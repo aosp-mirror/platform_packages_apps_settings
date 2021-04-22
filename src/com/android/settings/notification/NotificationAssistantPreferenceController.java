@@ -77,11 +77,7 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
     protected void setNotificationAssistantGranted(ComponentName cn) {
         if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.NAS_SETTINGS_UPDATED, 0, mUserId) == 0) {
-            for (int profileId : mUserManager.getProfileIds(mUserId, false)) {
-                Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                        Settings.Secure.NAS_SETTINGS_UPDATED, 1, profileId);
-            }
-            mNotificationBackend.resetDefaultNotificationAssistant(cn != null);
+            mNotificationBackend.setNASMigrationDoneAndResetDefault(mUserId, cn != null);
         }
         mNotificationBackend.setNotificationAssistantGranted(cn);
     }
