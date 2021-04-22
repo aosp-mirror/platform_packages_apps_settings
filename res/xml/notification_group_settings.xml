@@ -31,9 +31,9 @@
         android:title="@string/app_settings_link"
         settings:allowDividerAbove="true"/>
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="desc" />
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="block_desc" />
 </PreferenceScreen>
