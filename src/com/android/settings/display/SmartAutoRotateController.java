@@ -52,7 +52,8 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         super(context, preferenceKey);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
-        mPrivacyManager.addSensorPrivacyListener(CAMERA, enabled -> updateState(mPreference));
+        mPrivacyManager
+                .addSensorPrivacyListener(CAMERA, (sensor, enabled) -> updateState(mPreference));
     }
 
     @Override
