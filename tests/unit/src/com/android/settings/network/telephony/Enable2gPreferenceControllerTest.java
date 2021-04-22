@@ -48,6 +48,8 @@ public final class Enable2gPreferenceControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
+    private TelephonyManager mInvalidTelephonyManager;
+    @Mock
     private CarrierConfigManager mCarrierConfigManager;
 
     private PersistableBundle mPersistableBundle;
@@ -65,6 +67,8 @@ public final class Enable2gPreferenceControllerTest {
               .thenReturn(mCarrierConfigManager);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
+        doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mPersistableBundle = new PersistableBundle();
         doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
@@ -118,6 +122,18 @@ public final class Enable2gPreferenceControllerTest {
                 false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void setChecked_invalidSubIdAndIsCheckedTrue_returnFalse() {
+        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        assertThat(mController.setChecked(true)).isFalse();
+    }
+
+    @Test
+    public void setChecked_invalidSubIdAndIsCheckedFalse_returnFalse() {
+        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        assertThat(mController.setChecked(false)).isFalse();
     }
 
     @Test
