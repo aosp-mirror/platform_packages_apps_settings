@@ -371,7 +371,7 @@ public abstract class DevelopmentTiles extends TileService {
             mContext = getApplicationContext();
             mSensorPrivacyManager = (SensorPrivacyManager) mContext.getSystemService(
                     Context.SENSOR_PRIVACY_SERVICE);
-            mIsEnabled = mSensorPrivacyManager.isSensorPrivacyEnabled();
+            mIsEnabled = mSensorPrivacyManager.isAllSensorPrivacyEnabled();
             mMetricsFeatureProvider = FeatureFactory.getFactory(
                     mContext).getMetricsFeatureProvider();
             mKeyguardManager = (KeyguardManager) mContext.getSystemService(
@@ -392,7 +392,7 @@ public abstract class DevelopmentTiles extends TileService {
             mMetricsFeatureProvider.action(getApplicationContext(), SettingsEnums.QS_SENSOR_PRIVACY,
                     isEnabled);
             mIsEnabled = isEnabled;
-            mSensorPrivacyManager.setSensorPrivacy(isEnabled);
+            mSensorPrivacyManager.setAllSensorPrivacy(isEnabled);
         }
     }
 

@@ -43,7 +43,7 @@ public class SmartAutoRotateCameraStateController extends BasePreferenceControll
     public SmartAutoRotateCameraStateController(Context context, String key) {
         super(context, key);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
-        mPrivacyManager.addSensorPrivacyListener(CAMERA, enabled -> {
+        mPrivacyManager.addSensorPrivacyListener(CAMERA, (sensor, enabled) -> {
             mPreference.setVisible(enabled);
             updateState(mPreference);
         });
