@@ -9056,6 +9056,10 @@
     <string name="notif_type_alerting_summary">Notifications that may ring or vibrate based on settings</string>
     <string name="notif_type_silent">Silent</string>
     <string name="notif_type_silent_summary">Notifications that never make sound or vibrations</string>
+    <!-- category header for apps allowed to read notifications. [CHAR LIMIT=45] -->
+    <string name="notification_listener_allowed">Allowed</string>
+    <!-- category header for apps not allowed to read notifications. [CHAR LIMIT=45] -->
+    <string name="notification_listener_not_allowed">Not allowed</string>
 
     <!-- Per notification listener, a list of apps whose notifications this listener cannot see -->
     <string name="notif_listener_excluded_app_title">See all apps</string>
@@ -12863,9 +12867,6 @@
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
 
-    <!-- Device controls name sentence case [CHAR LIMIT=40] -->
-    <string name="device_controls_sentence">Device controls</string>
-
     <!-- Device controls name lower case [CHAR LIMIT=40] -->
     <string name="quick_controls_lower">device controls</string>
 
@@ -12883,12 +12884,6 @@
 
     <!-- Power menu setting option cards and passes [CHAR LIMIT=NONE] -->
     <string name="power_menu_cards_passes">Show cards &amp; passes</string>
-
-    <!-- Power menu setting option device controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_device_controls">Show device controls</string>
-
-    <!-- Power menu setting option cards, passes, device controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_cards_passes_device_controls">Show cards, passes, and device controls</string>
 
     <!-- Power menu setting lock screen category name [CHAR LIMIT=40] -->
     <string name="power_menu_lock_screen_category">Lock screen</string>
@@ -13047,6 +13042,12 @@
     <string name="to_switch_networks_disconnect_ethernet">To switch networks, disconnect ethernet</string>
     <!-- Panel subtitle for Wi-Fi turned on. [CHAR LIMIT=60] -->
     <string name="wifi_is_turned_on_subtitle">Wi\u2011Fi is turned on</string>
+    <!-- Title for merged carrier Wi-Fi offload toggle. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_offload_title">W+ connections</string>
+    <!-- Summary for merged carrier Wi-Fi offload toggle. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_offload_summary">Allow Google Fi to use W+ networks to improve speed and coverage</string>
+    <!-- Title for merged carrier Wi-Fi network information. [CHAR LIMIT=NONE] -->
+    <string name="carrier_wifi_network_title">W+ network</string>
 
     <!-- Summary text separator for preferences including a short description
          (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
