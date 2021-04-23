@@ -17,11 +17,8 @@ package com.android.settings.biometrics.combination;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.os.UserHandle;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -29,16 +26,14 @@ import com.android.settingslib.search.SearchIndexable;
  * Settings screen for multiple biometrics.
  */
 @SearchIndexable
-public class CombinedBiometricSettings extends DashboardFragment {
+public class CombinedBiometricSettings extends BiometricsSettingsBase {
     private static final String TAG = "BiometricSettings";
-
-    private int mUserId;
+    private static final String KEY_FACE_SETTINGS = "biometric_face_settings";
+    private static final String KEY_FINGERPRINT_SETTINGS = "biometric_fingerprint_settings";
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mUserId = getActivity().getIntent().getIntExtra(Intent.EXTRA_USER_ID,
-                UserHandle.myUserId());
         use(BiometricSettingsKeyguardPreferenceController.class).setUserId(mUserId);
         use(BiometricSettingsAppPreferenceController.class).setUserId(mUserId);
     }
@@ -46,6 +41,16 @@ public class CombinedBiometricSettings extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.security_settings_combined_biometric;
+    }
+
+    @Override
+    public String getFacePreferenceKey() {
+        return KEY_FACE_SETTINGS;
+    }
+
+    @Override
+    public String getFingerprintPreferenceKey() {
+        return KEY_FINGERPRINT_SETTINGS;
     }
 
     @Override
