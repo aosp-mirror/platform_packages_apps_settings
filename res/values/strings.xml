@@ -969,6 +969,22 @@
     <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase\n\n<annotation id="url">Learn more</annotation></string>
 
+    <!-- Biometric settings --><skip />
+    <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_biometric_preference_title">Face &amp; fingerprint unlock</string>
+    <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_biometric_preference_summary">Face and fingerprint</string>
+    <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro">When you set up face unlock and fingerprint, your phone will ask for your fingerprint when you wear a mask or are in a dark area.</string>
+    <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_category_ways_to_unlock">Ways to unlock</string>
+    <!-- Biometric category title - configuration options for using biometric to unlock the device or authenticate in apps. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_category_ways_to_use">Use face and fingerprint to</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use biometric for unlocking the device. [CHAR LIMIT=20] -->
+    <string name="biometric_settings_use_biometric_unlock_phone">Unlocking your phone</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use biometric for authentication. [CHAR LIMIT=30] -->
+    <string name="biometric_settings_use_biometric_for_apps">Authentication in apps</string>
+
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
@@ -8062,6 +8078,7 @@
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
     <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
+    <string name="keywords_biometric_unlock">face, unlock, auth, sign in, fingerprint, biometric</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
@@ -8086,6 +8103,9 @@
 
     <!-- Search keyword for fingerprint settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_fingerprint_settings">fingerprint, add fingerprint</string>
+
+    <!-- Search keyword for biometric settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_biometric_settings">face, fingerprint, add fingerprint</string>
 
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness, Auto brightness</string>
