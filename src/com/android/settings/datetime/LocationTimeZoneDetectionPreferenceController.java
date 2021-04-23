@@ -110,6 +110,14 @@ public class LocationTimeZoneDetectionPreferenceController
     }
 
     @Override
+    public boolean isSliceable() {
+        // Prevent use in a slice, which would enable search to display a toggle in the search
+        // results: LocationToggleDisabledDialogFragment has to be shown under some circumstances
+        // which doesn't work when embedded in search. b/185906072
+        return false;
+    }
+
+    @Override
     public int getAvailabilityStatus() {
         TimeZoneCapabilities timeZoneCapabilities =
                 getTimeZoneCapabilitiesAndConfig(/* forceRefresh= */ false).getCapabilities();

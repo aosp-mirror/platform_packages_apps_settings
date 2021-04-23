@@ -87,6 +87,11 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
     }
 
     @Test
+    public void isNotSliceable() {
+        assertThat(mController.isSliceable()).isFalse();
+    }
+
+    @Test
     public void setChecked_withTrue_shouldDoNothing_whenLocationIsDisabled() {
         when(mLocationManager.isLocationEnabled()).thenReturn(false);
 
