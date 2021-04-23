@@ -272,8 +272,8 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> alkaa <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"Käytössä on <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> alkaa <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Käytössä on <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Ei kesäaikaa."</string>
+    <string name="zone_info_footer" msgid="7004693956837388129">"Käytössä <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> alkaa <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Käytössä <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Ei kesäaikaa."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Kesäaika"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Normaaliaika"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Valintaperuste: alue"</string>
@@ -434,8 +434,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Nosta sormesi, kun tunnet värähdyksen"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Siirry muualle pehmeämpään valoon ja yritä uudestaan"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Olet saavuttanut yritysten enimmäismäärän"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (6677856383184441160) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"Käytä sormenjälkeä puhelimen lukituksen avaamiseen tai tunnistautumiseen, esim. kirjautuessasi sovelluksiin tai hyväksyessäsi ostoksen.\n\n"<annotation id="url">"Lue lisää"</annotation></string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ohitetaanko näytön lukitus?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Laitteen suojausominaisuuksia ei oteta käyttöön. Et voi estää tabletin käyttöä, jos se varastetaan, katoaa tai sen tiedot pyyhitään."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Laitteen suojausominaisuuksia ei oteta käyttöön. Et voi estää laitteen käyttöä, jos se varastetaan, katoaa tai sen tiedot pyyhitään."</string>
@@ -1220,7 +1219,7 @@
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Henkilökohtainen tili – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Haku"</string>
     <string name="display_settings" msgid="7197750639709493852">"Näyttö"</string>
-    <string name="accelerometer_title" msgid="7745991950833748909">"Näytön automaattinen kierto"</string>
+    <string name="accelerometer_title" msgid="7745991950833748909">"Näytön automaattinen kääntö"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Poissa päältä"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Päällä"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Päällä – kasvojen perusteella"</string>
@@ -1700,8 +1699,8 @@
     <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Jaettu Bluetooth-yhteys"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Jaettu yhteys"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"Hotspot ja yhteyden jako"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Hotspot käytössä, jaettu yhteys"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Hotspot käytössä"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Hotspot päällä, jaettu yhteys"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Hotspot päällä"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Jaettu yhteys"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"Kun Data Saver on käytössä, puhelinta ei voi käyttää modeemina eikä kannettavien hotspotien käyttäminen onnistu."</string>
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Vain hotspot"</string>
@@ -2393,7 +2392,7 @@
     <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Voimakas"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Asetukset"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Päällä"</string>
-    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Ei käyt."</string>
+    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Ei päällä"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Esikatselu"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Vakioasetukset"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Kieli"</string>
@@ -2464,7 +2463,7 @@
     <string name="print_menu_item_settings" msgid="8202755044784599740">"Asetukset"</string>
     <string name="print_menu_item_add_printers" msgid="7958192149202584039">"Lisää tulostimia"</string>
     <string name="print_feature_state_on" msgid="7132063461008624685">"Päällä"</string>
-    <string name="print_feature_state_off" msgid="1466195699995209446">"Ei käyt."</string>
+    <string name="print_feature_state_off" msgid="1466195699995209446">"Ei päällä"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"Lisää palvelu"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"Lisää tulostin"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"Haku"</string>
@@ -2700,6 +2699,30 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Edellisen täyden latauksen jälkeen"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Hallitse akun käyttöä"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> yhteensä • <xliff:g id="TIME_1">^2</xliff:g> taustalla 24 viime tunnin sisällä"</string>
+    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
+    <skip />
+    <!-- no translation found for battery_total_usage (2662725472478185867) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
+    <skip />
+    <!-- no translation found for battery_background_usage (8375606680462132248) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
+    <skip />
+    <!-- no translation found for battery_not_usage (8417901856028909227) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Arvio akun kestosta perustuu aiempaan laitteen käyttöön."</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Arvioitu jäljellä oleva aika"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Täyteen lataukseen"</string>
@@ -2740,16 +2763,11 @@
     <string name="battery_app_usage_for" msgid="929971425835809784">"Sovelluksen käyttö:"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"ap"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"ip"</string>
-    <!-- no translation found for battery_usage_total_less_than_one_minute (1035425863251685509) -->
-    <skip />
-    <!-- no translation found for battery_usage_background_less_than_one_minute (3957971442554437909) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_total_time (8402254046930910905) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_background_time (9109637210617095188) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer (3241109085756092490) -->
-    <skip />
+    <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Yhteensä: alle minuutti"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Taustalla: alle minuutti"</string>
+    <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Yhteensä: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Taustalla: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"Akun käyttödata on likimääräistä"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Käsittelytiedot"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Käsittelyn tarkat tiedot"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Muistin käyttö"</string>
@@ -3785,6 +3803,8 @@
     <string name="notif_type_alerting_summary" msgid="6823969073567000728">"Ilmoitukset, jotka soivat tai värisevät asetuksista riippuen"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Äänetön"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Ilmoitukset, jotka eivät koskaan pidä ääntä tai värise"</string>
+    <string name="notification_listener_allowed" msgid="5536962633536318551">"Sallittu"</string>
+    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Ei sallittu"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Näytä kaikki sovellukset"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"Muuta jokaisen ilmoituksia lähettävän sovelluksen ilmoitusasetukset"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Laitteella näkyvät sovellukset"</string>
@@ -4346,13 +4366,13 @@
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Sallittu"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Ei sallittu"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"sovellusten asentaminen tuntemattomista lähteistä"</string>
-    <string name="write_settings" msgid="6864794401614425894">"Muokkaa järjestelmäasetuksia"</string>
+    <string name="write_settings" msgid="6864794401614425894">"Järjestelmäasetusten muokkaus"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"kirjoita muokkaa järjestelmäasetukset"</string>
     <string name="write_settings_summary" msgid="2085800775513476479">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g> sovelluksella on oikeus muokata järjestelmäasetuksia."</string>
     <string name="filter_install_sources_apps" msgid="6930762738519588431">"Voi asentaa muita sovelluksia"</string>
     <string name="filter_write_settings_apps" msgid="4754994984909024093">"Voi muokata järjestelmäasetuksia"</string>
     <string name="write_settings_title" msgid="3011034187823288557">"Voi muokata järjestelmäasetuksia"</string>
-    <string name="write_system_settings" msgid="5555707701419757421">"Muokkaa järjestelmäasetuksia"</string>
+    <string name="write_system_settings" msgid="5555707701419757421">"Järjestelmäasetusten muokkaus"</string>
     <string name="permit_write_settings" msgid="3113056800709924871">"Salli järjestelmäasetusten muokkaaminen"</string>
     <string name="write_settings_description" msgid="1474881759793261146">"Tämä käyttöoikeus sallii sovelluksen muokata järjestelmäasetuksia."</string>
     <string name="write_settings_on" msgid="8533286548451191112">"Kyllä"</string>
@@ -4839,8 +4859,7 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"Tallennustilasta (<xliff:g id="TOTAL">%1$s</xliff:g>) käytössä"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"käyt."</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"<xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g> käytetty"</string>
-    <!-- no translation found for storage_total_summary (7163360249534964272) -->
-    <skip />
+    <string name="storage_total_summary" msgid="7163360249534964272">"Yhteensä <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"Tyhjennä sovelluksen tiedot"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Poistetaanko tämä pikasovellus?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Avaa"</string>
@@ -5226,15 +5245,12 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Työ"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Järjestelmän oletusarvo"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Tämä valinta ei enää kelpaa. Yritä uudestaan."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"Laitteiden hallinta"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"laitteiden hallinta"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kortit"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kortit"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Virtavalikko"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Virtapainikkeen valikko"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Näytä kortit"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"Näytä laitteiden hallinta"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Näytä kortit, passit ja laitteiden hallinta"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"Lukitusnäyttö"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Älä näytä sisältöä"</string>
     <string name="power_menu_privacy" msgid="7900052501075197854">"Arkaluontoinen sisältö"</string>
@@ -5301,6 +5317,9 @@
     <string name="networks_available" msgid="3299512933684383474">"Verkkoja käytettävissä"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Vaihda verkkoa irrottamalla Ethernet-johto"</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"Wi-Fi on päällä"</string>
+    <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+ ‑yhteydet"</string>
+    <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Salli Google Fin käyttää W+ ‑verkkoja nopeuden ja kattavuuden lisäämiseksi"</string>
+    <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ ‑verkko"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Yhdistetty"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Ei yhteyttä"</string>
@@ -5360,4 +5379,10 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Näytä viesti, kun sovellukset käyttävät kopioimaasi tekstiä, kuvia tai muuta sisältöä"</string>
     <string name="all_apps" msgid="3054120149509114789">"Kaikki sovellukset"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Älä salli"</string>
+    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
+    <skip />
 </resources>
