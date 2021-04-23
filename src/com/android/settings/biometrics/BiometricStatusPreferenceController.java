@@ -122,6 +122,9 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
         final String clazz = hasEnrolledBiometrics() ? getSettingsClassName()
                 : getEnrollClassName();
         intent.setClassName(SETTINGS_PACKAGE_NAME, clazz);
+        if (!preference.getExtras().isEmpty()) {
+            intent.putExtras(preference.getExtras());
+        }
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
         context.startActivity(intent);
