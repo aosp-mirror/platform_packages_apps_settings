@@ -570,9 +570,9 @@ public class NotificationBackend {
         }
     }
 
-    public void resetDefaultNotificationAssistant(boolean loadFromConfig) {
+    public void setNASMigrationDoneAndResetDefault(int userId, boolean loadFromConfig) {
         try {
-            sINM.resetDefaultNotificationAssistant(loadFromConfig);
+            sINM.setNASMigrationDoneAndResetDefault(userId, loadFromConfig);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }
