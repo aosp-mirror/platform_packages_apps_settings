@@ -72,7 +72,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     public int getAvailabilityStatus(int subId) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         boolean visible =
-                subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                SubscriptionManager.isUsableSubscriptionId(subId)
                 && carrierConfig != null
                 && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G)
                 && mTelephonyManager.isRadioInterfaceCapabilitySupported(
@@ -89,6 +89,9 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (!SubscriptionManager.isUsableSubscriptionId(mSubId)) {
+            return false;
+        }
         long currentlyAllowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
                 mTelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G);
         boolean enabled = (currentlyAllowedNetworkTypes & BITMASK_2G) != 0;

@@ -26,6 +26,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
@@ -320,8 +321,13 @@ public class AccessibilityEditDialogUtils {
     }
 
     private static CharSequence retrieveSummary(Context context, int lineHeight) {
-        return AccessibilityUtil.isFloatingMenuEnabled(context)
-                ? getSummaryStringWithLink(context) : getSummaryStringWithIcon(context, lineHeight);
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
+        if (!AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            sb.append(getSummaryStringWithIcon(context, lineHeight));
+            sb.append("\n\n");
+        }
+        sb.append(getCustomizeAccessibilityButtonLink(context));
+        return sb;
     }
 
     private static int retrieveSoftwareShortcutImageResId(Context context) {
@@ -330,7 +336,7 @@ public class AccessibilityEditDialogUtils {
                 : R.drawable.accessibility_shortcut_type_software;
     }
 
-    private static CharSequence getSummaryStringWithLink(Context context) {
+    private static CharSequence getCustomizeAccessibilityButtonLink(Context context) {
         final View.OnClickListener linkListener = v -> new SubSettingLauncher(context)
                 .setDestination(AccessibilityButtonFragment.class.getName())
                 .setSourceMetricsCategory(

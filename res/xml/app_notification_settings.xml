@@ -26,7 +26,7 @@
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="block" />
 
-    <com.android.settings.notification.app.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="block_desc" />
 
 
@@ -96,11 +96,11 @@
 
     </PreferenceCategory>
 
-    <com.android.settings.notification.app.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="desc"
         android:order="5000" />
 
-    <com.android.settings.notification.app.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="deleted"
         android:order="8000" />
 
