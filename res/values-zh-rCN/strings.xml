@@ -434,8 +434,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"请在感觉到振动后抬起手指"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"请移到光线较柔和的地方，然后重试"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"您已达到尝试次数上限"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (6677856383184441160) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"您可以用指纹解锁手机或验证身份，例如在登录应用或批准购买交易时\n\n"<annotation id="url">"了解详情"</annotation></string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"要跳过屏幕锁定设置步骤吗？"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗或被重置，您将无法防止他人使用此平板电脑。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"系统将不会启用设备保护功能。如果您的设备丢失、被盗或被重置，您将无法防止他人使用此设备。"</string>
@@ -2700,6 +2699,30 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"自充满电后"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理电池用量"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"总共使用 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用 <xliff:g id="TIME_1">^2</xliff:g>（过去 24 小时）"</string>
+    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
+    <skip />
+    <!-- no translation found for battery_total_usage (2662725472478185867) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
+    <skip />
+    <!-- no translation found for battery_background_usage (8375606680462132248) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
+    <skip />
+    <!-- no translation found for battery_not_usage (8417901856028909227) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"系统会根据设备使用情况估算电池的剩余续航时间"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"预计剩余时间"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"剩余充电时间"</string>
@@ -3767,13 +3790,13 @@
     <string name="notification_assistant_title" msgid="5889201903272393099">"增强型通知"</string>
     <string name="notification_assistant_summary" msgid="1957783114840908887">"接收建议的操作、回复等内容"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"无"</string>
-    <string name="no_notification_listeners" msgid="2839354157349636000">"没有任何已安装的应用请求通知访问权限。"</string>
+    <string name="no_notification_listeners" msgid="2839354157349636000">"没有任何已安装的应用请求通知使用权。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"授予通知使用权"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"增强型通知功能可以读取所有通知内容，包括联系人姓名和消息等个人信息。该功能也能关闭通知或触发通知中的按钮，例如接听来电。\n\n此外，该功能还能开启或关闭“优先”模式，以及更改相关设置。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>将可读取所有通知（包括联系人姓名和您收到的消息内容等个人信息），而且还能关闭通知或触发通知中的按钮（包括接听来电）。\n\n此外，该应用将因此能够开启或关闭“勿扰”模式并更改相关设置。"</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知访问权限，勿扰模式的访问权限可能也会遭到停用。"</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知使用权，勿扰模式的使用权可能也会遭到停用。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"停用"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"允许的通知类型"</string>
@@ -3785,6 +3808,10 @@
     <string name="notif_type_alerting_summary" msgid="6823969073567000728">"可能会根据设置让设备响铃或振动的通知"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"静音"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"绝不会让设备发出提示音或振动的通知"</string>
+    <!-- no translation found for notification_listener_allowed (5536962633536318551) -->
+    <skip />
+    <!-- no translation found for notification_listener_not_allowed (3352962779597846538) -->
+    <skip />
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"查看所有应用"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"为各个可发送通知的应用更改通知设置"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"在设备上显示的应用"</string>
@@ -4839,8 +4866,7 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"已用空间（总共 <xliff:g id="TOTAL">%1$s</xliff:g>）"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"已使用"</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"已使用 <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
-    <!-- no translation found for storage_total_summary (7163360249534964272) -->
-    <skip />
+    <string name="storage_total_summary" msgid="7163360249534964272">"共 <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"清除应用"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"要移除这个免安装应用吗？"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"打开"</string>
@@ -5226,15 +5252,12 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"工作"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"系统默认"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"这项选择已失效，请重试。"</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"设备控制器"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"设备控制器"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"银行卡和卡券"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"银行卡和卡券"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"电源菜单"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"电源按钮菜单"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"显示银行卡和卡券"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"显示设备控制器"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"显示支付卡、票券和设备控件"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"锁定屏幕"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"不显示任何内容"</string>
     <string name="power_menu_privacy" msgid="7900052501075197854">"敏感内容"</string>
@@ -5243,7 +5266,7 @@
     <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"锁定状态下显示支付卡"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"锁定状态下隐藏银行卡和控件"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"需先设置屏幕锁定方式才能使用"</string>
-    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"长按电源按钮即可启动 Google 助理"</string>
+    <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"长按电源按钮启动 Google 助理"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"长按电源按钮即可启动 Google 助理"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"显示设备控制器"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"显示银行卡和卡券"</string>
@@ -5301,6 +5324,12 @@
     <string name="networks_available" msgid="3299512933684383474">"可用的网络"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"如要切换网络，请拔出以太网网线"</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"WLAN 已开启"</string>
+    <!-- no translation found for carrier_wifi_offload_title (7263365988016247722) -->
+    <skip />
+    <!-- no translation found for carrier_wifi_offload_summary (2980563718888371142) -->
+    <skip />
+    <!-- no translation found for carrier_wifi_network_title (5461382943873831770) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"已连接"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"无网络连接"</string>
@@ -5360,4 +5389,10 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"系统会在应用访问您复制的文字、图片或其他内容时显示一条消息"</string>
     <string name="all_apps" msgid="3054120149509114789">"所有应用"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"不允许"</string>
+    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
+    <skip />
 </resources>

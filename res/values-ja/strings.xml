@@ -434,8 +434,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"振動を感じるまで指を離さないでください"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"もっと明るい場所に移動してもう一度お試しください"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"試行回数の上限を超えました"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (6677856383184441160) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"指紋を使って、スマートフォンのロック解除や認証（アプリへのログインや購入の承認など）を行います\n\n"<annotation id="url">"詳細"</annotation></string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"画面ロックをスキップしますか？"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"デバイス保護機能は ON になりません。このタブレットの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"デバイス保護機能は ON になりません。このデバイスの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
@@ -992,7 +991,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi‑Fi パスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"アクセス ポイントのパスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動接続"</string>
-    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"圏内に入ると自動的にこのネットワークに接続するようになります"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"このネットワークの圏内に入ると自動的に接続します"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"デバイスを追加"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR コードを使用して、このネットワークにデバイスを追加できます"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR コードの形式が無効です"</string>
@@ -1051,14 +1050,14 @@
       <item quantity="one">1 件の登録</item>
     </plurals>
     <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="other">%d 件のネットワークと登録</item>
-      <item quantity="one">1 件のネットワークと登録</item>
+      <item quantity="other">%d 件のネットワークとサブスクリプション</item>
+      <item quantity="one">1 件のネットワークとサブスクリプション</item>
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="1234150304285575798">"Wi-Fi詳細設定"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"デバイスの MAC アドレス"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"ランダム MAC アドレス"</string>
-    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"ランダム MAC アドレス（前回使用したもの）"</string>
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"前回のランダム MAC アドレス"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP アドレス"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"ネットワークの詳細"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"サブネット マスク"</string>
@@ -1515,7 +1514,7 @@
     <string name="storage_menu_manage" msgid="7465522758801346408">"ストレージを管理"</string>
     <string name="keywords_storage_menu_free" msgid="2275406357317597106">"クリーン, ストレージ"</string>
     <string name="storage_free_up_space_title" msgid="281047807372131975">"空き容量を増やす"</string>
-    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"空き容量を管理したり増やしたりするには Files アプリに移動してください"</string>
+    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"ファイルを管理して空き容量を増やすには Files アプリをご利用ください"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USBでパソコンに接続"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"次で接続:"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"メディアデバイス（MTP）"</string>
@@ -2700,6 +2699,30 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"フル充電以降の電池の使用状況"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"電池使用量の管理"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンド: <xliff:g id="TIME_1">^2</xliff:g>（過去 24 時間）"</string>
+    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
+    <skip />
+    <!-- no translation found for battery_total_usage (2662725472478185867) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
+    <skip />
+    <!-- no translation found for battery_background_usage (8375606680462132248) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
+    <skip />
+    <!-- no translation found for battery_not_usage (8417901856028909227) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"電池残量はデバイスの使用状況に基づく推定値です"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"予測される残り時間"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"フル充電まで"</string>
@@ -2740,16 +2763,11 @@
     <string name="battery_app_usage_for" msgid="929971425835809784">"アプリのバッテリー使用量:"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"午前"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"午後"</string>
-    <!-- no translation found for battery_usage_total_less_than_one_minute (1035425863251685509) -->
-    <skip />
-    <!-- no translation found for battery_usage_background_less_than_one_minute (3957971442554437909) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_total_time (8402254046930910905) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_background_time (9109637210617095188) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer (3241109085756092490) -->
-    <skip />
+    <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"合計: 1 分未満"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"バックグラウンド: 1 分未満"</string>
+    <string name="battery_usage_for_total_time" msgid="8402254046930910905">"合計: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_for_background_time" msgid="9109637210617095188">"バックグラウンド: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"バッテリー使用量データはおおよその数値です"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"メモリ使用"</string>
@@ -3785,6 +3803,8 @@
     <string name="notif_type_alerting_summary" msgid="6823969073567000728">"設定に応じて、通知を着信音またはバイブレーションで知らせます"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"消音"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"通知があっても、着信音やバイブレーションは発生しません"</string>
+    <string name="notification_listener_allowed" msgid="5536962633536318551">"許可されたアプリ"</string>
+    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"許可されてないアプリ"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"アプリをすべて表示"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"通知を送信できる各アプリの通知設定を変更します"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"デバイスに表示されるアプリ"</string>
@@ -4839,8 +4859,7 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"/ <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"使用"</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"<xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g> 使用"</string>
-    <!-- no translation found for storage_total_summary (7163360249534964272) -->
-    <skip />
+    <string name="storage_total_summary" msgid="7163360249534964272">"合計 <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"アプリを削除"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"この Instant App を削除してもよろしいですか？"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"開く"</string>
@@ -5226,15 +5245,12 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"仕事用"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"システムのデフォルト"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"この選択は無効になりました。もう一度お試しください。"</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"ホームデバイス コントロール"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"デバイス コントロール"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"電源ボタン メニュー"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"電源ボタン メニュー"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"カードとパスを表示"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"デバイス コントロールを表示"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"カード、パス、デバイス コントロールを表示"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"ロック画面"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"どのコンテンツも表示しない"</string>
     <string name="power_menu_privacy" msgid="7900052501075197854">"プライベートな内容"</string>
@@ -5301,6 +5317,9 @@
     <string name="networks_available" msgid="3299512933684383474">"ネットワークが利用できます"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"ネットワークを切り替えるには、イーサネット接続を解除してください"</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"Wi-Fi が ON になりました"</string>
+    <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+ 接続"</string>
+    <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"速度と通信範囲を改善するために W+ ネットワークの使用を Google Fi に許可する"</string>
+    <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ ネットワーク"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"接続済み"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"接続なし"</string>
@@ -5360,4 +5379,10 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"コピーしたテキストや画像などのコンテンツにアプリがアクセスすると、メッセージが表示されます"</string>
     <string name="all_apps" msgid="3054120149509114789">"すべてのアプリ"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"許可しない"</string>
+    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
+    <skip />
 </resources>
