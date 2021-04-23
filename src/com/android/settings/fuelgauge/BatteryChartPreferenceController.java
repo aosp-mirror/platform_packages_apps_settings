@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
  */
 
 package com.android.settings.fuelgauge;
@@ -51,7 +50,7 @@ import java.util.Map;
 /** Controls the update for chart graph and the list items. */
 public class BatteryChartPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy,
-                BatteryChartView.OnSelectListener {
+                BatteryChartView.OnSelectListener, ExpandDividerPreference.OnExpandListener {
     private static final String TAG = "BatteryChartPreferenceController";
     private static final int CHART_KEY_ARRAY_SIZE = 25;
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
@@ -65,6 +64,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting PreferenceGroup mAppListPrefGroup;
     @VisibleForTesting BatteryChartView mBatteryChartView;
+    @VisibleForTesting ExpandDividerPreference mExpandDividerPreference;
 
     @VisibleForTesting int[] mBatteryHistoryLevels;
     @VisibleForTesting long[] mBatteryHistoryKeys;
@@ -76,9 +76,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final CharSequence[] mNotAllowShowSummaryPackages;
 
+    private boolean mIsExpanded = false;
+
     // Preference cache to avoid create new instance each time.
     @VisibleForTesting
     final Map<String, Preference> mPreferenceCache = new HashMap<>();
+    @VisibleForTesting
+    final List<BatteryDiffEntry> mSystemEntries = new ArrayList<>();
 
     public BatteryChartPreferenceController(
             Context context, String preferenceKey,
@@ -161,6 +165,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     public void onSelect(int trapezoidIndex) {
         Log.d(TAG, "onChartSelect:" + trapezoidIndex);
         refreshUi(trapezoidIndex, /*isForce=*/ false);
+    }
+
+    @Override
+    public void onExpand(boolean isExpanded) {
+        mIsExpanded = isExpanded;
+        refreshExpandUi();
     }
 
     void setBatteryHistoryMap(
@@ -266,10 +276,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         // Separates data into two groups and sort them individually.
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
-        final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
+        mSystemEntries.clear();
         entries.forEach(entry -> {
             if (entry.isSystemEntry()) {
-                systemEntries.add(entry);
+                mSystemEntries.add(entry);
             } else {
                 appEntries.add(entry);
             }
@@ -279,11 +289,25 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             }
         });
         Collections.sort(appEntries, BatteryDiffEntry.COMPARATOR);
-        Collections.sort(systemEntries, BatteryDiffEntry.COMPARATOR);
+        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
         Log.d(TAG, String.format("addAllPreferences() app=%d system=%d",
-            appEntries.size(), systemEntries.size()));
-        addPreferenceToScreen(appEntries);
-        addPreferenceToScreen(systemEntries);
+            appEntries.size(), mSystemEntries.size()));
+
+        // Adds app entries to the list if it is not empty.
+        if (!appEntries.isEmpty()) {
+            addPreferenceToScreen(appEntries);
+        }
+        // Adds the expabable divider if we have two sections data.
+        if (!appEntries.isEmpty() && !mSystemEntries.isEmpty()) {
+            if (mExpandDividerPreference == null) {
+                mExpandDividerPreference = new ExpandDividerPreference(mPrefContext);
+                mExpandDividerPreference.setOnExpandListener(this);
+            }
+            mExpandDividerPreference.setOrder(
+                mAppListPrefGroup.getPreferenceCount());
+            mAppListPrefGroup.addPreference(mExpandDividerPreference);
+        }
+        refreshExpandUi();
     }
 
     @VisibleForTesting
@@ -335,6 +359,22 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mPreferenceCache.put(pref.getKey(), pref);
         }
         mAppListPrefGroup.removeAll();
+    }
+
+    private void refreshExpandUi() {
+        if (mIsExpanded) {
+            addPreferenceToScreen(mSystemEntries);
+        } else {
+            // Removes and recycles all system entries to hide all of them.
+            for (BatteryDiffEntry entry : mSystemEntries) {
+                final String prefKey = entry.mBatteryHistEntry.getKey();
+                final Preference pref = mAppListPrefGroup.findPreference(prefKey);
+                if (pref != null) {
+                    mAppListPrefGroup.removePreference(pref);
+                    mPreferenceCache.put(pref.getKey(), pref);
+                }
+            }
+        }
     }
 
     @VisibleForTesting
