@@ -97,8 +97,18 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public void setLevels(int[] levels) {
         // We should provide trapezoid count + 1 data to draw all trapezoids.
         mLevels = levels.length == mTrapezoidCount + 1 ? levels : null;
-        setClickable(mLevels != null);
+        setClickable(false);
         invalidate();
+        if (mLevels == null) {
+            return;
+        }
+        // Sets the chart is clickable if there is at least one valid item in it.
+        for (int index = 0; index < mLevels.length; index++) {
+            if (mLevels[index] != 0) {
+                setClickable(true);
+                break;
+            }
+        }
     }
 
     /** Sets the selected group index to draw highlight effect. */
