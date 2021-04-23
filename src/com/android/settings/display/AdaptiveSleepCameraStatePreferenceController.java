@@ -43,7 +43,7 @@ public class AdaptiveSleepCameraStatePreferenceController {
         mPreference.setPositiveButtonText(R.string.allow);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyManager.addSensorPrivacyListener(CAMERA,
-                enabled -> updateVisibility());
+                (sensor, enabled) -> updateVisibility());
         mPreference.setPositiveButtonOnClickListener(p -> {
             mPrivacyManager.setSensorPrivacy(CAMERA, false);
         });

@@ -43,6 +43,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -416,21 +417,54 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Test
     public void testValidateSlotTimestamp_returnExpectedResult() {
-        final List<Long> slotTimestampList =
+        final ArrayList<Long> slotTimestampList = new ArrayList<Long>(
             Arrays.asList(
                 Long.valueOf(0),
                 Long.valueOf(DateUtils.HOUR_IN_MILLIS),
                 Long.valueOf(DateUtils.HOUR_IN_MILLIS * 2 + DateUtils.MINUTE_IN_MILLIS),
-                Long.valueOf(DateUtils.HOUR_IN_MILLIS * 3 + DateUtils.MINUTE_IN_MILLIS * 2));
+                Long.valueOf(DateUtils.HOUR_IN_MILLIS * 3 + DateUtils.MINUTE_IN_MILLIS * 2)));
         // Verifies the testing data is correct before we added invalid data into it.
         assertThat(BatteryChartPreferenceController.validateSlotTimestamp(slotTimestampList))
             .isTrue();
 
         // Insert invalid timestamp into the list.
         slotTimestampList.add(
-            Long.valueOf(DateUtils.HOUR_IN_MILLIS * 4 + DateUtils.MINUTE_IN_MILLIS * 3));
+            Long.valueOf(DateUtils.HOUR_IN_MILLIS * 4 + DateUtils.MINUTE_IN_MILLIS * 6));
         assertThat(BatteryChartPreferenceController.validateSlotTimestamp(slotTimestampList))
             .isFalse();
+    }
+
+    @Test
+    public void testOnExpand_expandedIsTrue_addSystemEntriesToPreferenceGroup() {
+        final String prefKey = "preference_key";
+        doReturn(1).when(mAppListGroup).getPreferenceCount();
+        mBatteryChartPreferenceController.mSystemEntries.add(mBatteryDiffEntry);
+        doReturn("label").when(mBatteryDiffEntry).getAppLabel();
+        doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
+        doReturn(prefKey).when(mBatteryHistEntry).getKey();
+
+        mBatteryChartPreferenceController.onExpand(/*isExpanded=*/ true);
+
+        final ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+        verify(mAppListGroup).addPreference(captor.capture());
+        // Verifies the added preference.
+        assertThat(captor.getValue().getKey()).isEqualTo(prefKey);
+    }
+
+    @Test
+    public void testOnExpand_expandedIsFalse_removeSystemEntriesFromPreferenceGroup() {
+        final String prefKey = "preference_key";
+        doReturn(prefKey).when(mBatteryHistEntry).getKey();
+        doReturn(mPowerGaugePreference).when(mAppListGroup).findPreference(prefKey);
+        mBatteryChartPreferenceController.mSystemEntries.add(mBatteryDiffEntry);
+        // Verifies the cache is empty first.
+        assertThat(mBatteryChartPreferenceController.mPreferenceCache).isEmpty();
+
+        mBatteryChartPreferenceController.onExpand(/*isExpanded=*/ false);
+
+        verify(mAppListGroup).findPreference(prefKey);
+        verify(mAppListGroup).removePreference(mPowerGaugePreference);
+        assertThat(mBatteryChartPreferenceController.mPreferenceCache).hasSize(1);
     }
 
     private static Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {

@@ -16,6 +16,9 @@
 
 package com.android.settings.biometrics;
 
+import static android.provider.Settings.ACTION_BIOMETRIC_ENROLL;
+import static android.provider.Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED;
+
 import android.annotation.NonNull;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -24,6 +27,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricManager.Authenticators;
+import android.hardware.biometrics.BiometricManager.BiometricError;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.fingerprint.FingerprintManager;
@@ -31,11 +35,11 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
@@ -68,12 +72,14 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     public static final String EXTRA_SKIP_INTRO = "skip_intro";
 
     private static final String SAVED_STATE_CONFIRMING_CREDENTIALS = "confirming_credentials";
+    private static final String SAVED_STATE_ENROLL_ACTION_LOGGED = "enroll_action_logged";
     private static final String SAVED_STATE_GK_PW_HANDLE = "gk_pw_handle";
 
     public static final class InternalActivity extends BiometricEnrollActivity {}
 
     private int mUserId = UserHandle.myUserId();
     private boolean mConfirmingCredentials;
+    private boolean mIsEnrollActionLogged;
     private boolean mIsFaceEnrollable;
     private boolean mIsFingerprintEnrollable;
     @Nullable private Long mGkPwHandle;
@@ -91,15 +97,44 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         }
 
         if (savedInstanceState != null) {
-            mConfirmingCredentials = savedInstanceState
-                    .getBoolean(SAVED_STATE_CONFIRMING_CREDENTIALS, false);
+            mConfirmingCredentials = savedInstanceState.getBoolean(
+                    SAVED_STATE_CONFIRMING_CREDENTIALS, false);
+            mIsEnrollActionLogged = savedInstanceState.getBoolean(
+                    SAVED_STATE_ENROLL_ACTION_LOGGED, false);
             if (savedInstanceState.containsKey(SAVED_STATE_GK_PW_HANDLE)) {
                 mGkPwHandle = savedInstanceState.getLong(SAVED_STATE_GK_PW_HANDLE);
             }
         }
 
-        // Put the theme in the intent so it gets propagated to other activities in the flow
+        // Log a framework stats event if this activity was launched via intent action.
         final Intent intent = getIntent();
+        if (!mIsEnrollActionLogged && ACTION_BIOMETRIC_ENROLL.equals(intent.getAction())) {
+            mIsEnrollActionLogged = true;
+
+            // Get the current status for each authenticator type.
+            @BiometricError final int strongBiometricStatus;
+            @BiometricError final int weakBiometricStatus;
+            @BiometricError final int deviceCredentialStatus;
+            final BiometricManager bm = getSystemService(BiometricManager.class);
+            if (bm != null) {
+                strongBiometricStatus = bm.canAuthenticate(Authenticators.BIOMETRIC_STRONG);
+                weakBiometricStatus = bm.canAuthenticate(Authenticators.BIOMETRIC_WEAK);
+                deviceCredentialStatus = bm.canAuthenticate(Authenticators.DEVICE_CREDENTIAL);
+            } else {
+                strongBiometricStatus = BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE;
+                weakBiometricStatus = BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE;
+                deviceCredentialStatus = BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE;
+            }
+
+            FrameworkStatsLog.write(FrameworkStatsLog.AUTH_ENROLL_ACTION_INVOKED,
+                    strongBiometricStatus == BiometricManager.BIOMETRIC_SUCCESS,
+                    weakBiometricStatus == BiometricManager.BIOMETRIC_SUCCESS,
+                    deviceCredentialStatus == BiometricManager.BIOMETRIC_SUCCESS,
+                    intent.hasExtra(EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED),
+                    intent.getIntExtra(EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, 0));
+        }
+
+        // Put the theme in the intent so it gets propagated to other activities in the flow
         if (intent.getStringExtra(WizardManagerHelper.EXTRA_THEME) == null) {
             intent.putExtra(
                     WizardManagerHelper.EXTRA_THEME,
@@ -108,7 +143,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         // Default behavior is to enroll BIOMETRIC_WEAK or above. See ACTION_BIOMETRIC_ENROLL.
         final int authenticators = intent.getIntExtra(
-                Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, Authenticators.BIOMETRIC_WEAK);
+                EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, Authenticators.BIOMETRIC_WEAK);
 
         Log.d(TAG, "Authenticators: " + authenticators);
 
@@ -132,7 +167,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         } else {
             // If the caller is not setup wizard, and the user has something enrolled, finish.
             final BiometricManager bm = getSystemService(BiometricManager.class);
-            final @BiometricManager.BiometricError int result = bm.canAuthenticate(authenticators);
+            final @BiometricError int result = bm.canAuthenticate(authenticators);
             if (result != BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED) {
                 Log.e(TAG, "Unexpected result: " + result);
                 finish();
@@ -159,6 +194,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVED_STATE_CONFIRMING_CREDENTIALS, mConfirmingCredentials);
+        outState.putBoolean(SAVED_STATE_ENROLL_ACTION_LOGGED, mIsEnrollActionLogged);
         if (mGkPwHandle != null) {
             outState.putLong(SAVED_STATE_GK_PW_HANDLE, mGkPwHandle);
         }
