@@ -495,6 +495,22 @@
                        android:value="com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment" />
         </activity>
 
+        <activity android:name="Settings$CombinedBiometricSettingsActivity"
+                  android:label="@string/security_settings_biometric_preference_title"
+                  android:theme="@style/Theme.SubSettings"
+                  android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
+        </activity>
+
+        <activity android:name="Settings$CombinedBiometricProfileSettingsActivity"
+                  android:label="@string/security_settings_biometric_preference_title"
+                  android:theme="@style/Theme.SubSettings"
+                  android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.combination.CombinedBiometricProfileSettings" />
+        </activity>
+
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:label="@string/device_picker"
                 android:configChanges="orientation|keyboardHidden|screenSize"

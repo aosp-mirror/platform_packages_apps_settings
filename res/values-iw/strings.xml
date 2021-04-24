@@ -20,7 +20,7 @@
     <string name="no" msgid="5541738710521607130">"לא"</string>
     <string name="create" msgid="986997212165228751">"יצירה"</string>
     <string name="allow" msgid="3763244945363657722">"כן, זה בסדר"</string>
-    <string name="deny" msgid="7326117222944479942">"דחייה"</string>
+    <string name="deny" msgid="7326117222944479942">"אני לא מרשה"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"הפעלה"</string>
     <string name="device_info_default" msgid="1406619232867343310">"לא ידוע"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
@@ -442,8 +442,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"יש להרים את האצבע לאחר שמרגישים רטט"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"כדאי לעבור למקום פחות מואר ולנסות שוב"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"הגעת למספר הניסיונות המרבי"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (6677856383184441160) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"ניתן להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או לצורך אימות, במקרים כמו כניסה לאפליקציה או אישור רכישה\n\n"<annotation id="url">"מידע נוסף"</annotation></string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"לדלג על נעילת המסך?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש בטאבלט אם הוא יאבד, ייגנב או יאופס."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"תכונות ההגנה על המכשיר לא יופעלו. לא תהיה לך אפשרות למנוע מאנשים אחרים להשתמש במכשיר אם הוא יאבד, ייגנב או יאופס."</string>
@@ -1586,7 +1585,7 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"האם לשכוח את <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"כל האפליקציות, התמונות והנתונים המאוחסנים ב-<xliff:g id="NAME">^1</xliff:g> הזה יימחקו לתמיד."</string>
     <string name="storage_detail_images" msgid="6003883845718804371">"תמונות"</string>
-    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏המערכת כוללת קבצים המשמשים להרצת גרסת Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏המערכת כוללת קבצים המשמשים להפעלת גרסת Android <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"הגדרת <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"שימוש כאחסון נייד"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"להעברת תמונות וסוגי מדיה אחרים בין מכשירים."</string>
@@ -1823,7 +1822,7 @@
     <string name="location_low_battery_use" msgid="5218950289737996431">"שימוש בסוללה חלשה"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"‏חיפוש נקודות Wi-Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"‏אפליקציות ושירותים יוכלו לסרוק רשתות Wi‑Fi בכל שלב, גם כאשר ה-Wi‑Fi כבוי. ניתן להשתמש בכך, למשל, כדי לשפר את הביצועים של תכונות ושירותים מבוססי מיקום."</string>
-    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"‏סריקת Bluetooth"</string>
+    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"‏חיפוש Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"‏אפליקציות ושירותים יוכלו לסרוק מכשירים בקרבת מקום בכל שלב, גם כאשר ה-Bluetooth כבוי. ניתן להשתמש בכך, למשל, כדי לשפר את הביצועים של תכונות ושירותים מבוססי מיקום."</string>
     <string name="location_services_preference_title" msgid="8572194688820064813">"ניהול שירותי המיקום"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"שירותי מיקום"</string>
@@ -2530,7 +2529,7 @@
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"הוספת שירות"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"הוספת מדפסת"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"חיפוש"</string>
-    <string name="print_searching_for_printers" msgid="5401413178028348800">"חיפוש מדפסות מתבצע"</string>
+    <string name="print_searching_for_printers" msgid="5401413178028348800">"מתבצע חיפוש מדפסות"</string>
     <string name="print_service_disabled" msgid="9185935228930987786">"השירות הושבת"</string>
     <string name="print_print_jobs" msgid="2605944855933091183">"עבודות הדפסה"</string>
     <string name="print_print_job" msgid="8477859161886726608">"עבודת הדפסה"</string>
@@ -2776,6 +2775,30 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"מאז הטעינה המלאה"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"ניהול השימוש בסוללה"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> סך הכול • <xliff:g id="TIME_1">^2</xliff:g> שימוש ברקע במהלך 24 השעות האחרונות"</string>
+    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
+    <skip />
+    <!-- no translation found for battery_total_usage (2662725472478185867) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
+    <skip />
+    <!-- no translation found for battery_background_usage (8375606680462132248) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
+    <skip />
+    <!-- no translation found for battery_not_usage (8417901856028909227) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"הערכת הזמן שנותר עד שתיגמר הסוללה מבוססת על השימוש שנעשה במכשיר"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"זמן משוער שנותר"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"עד לטעינה מלאה"</string>
@@ -2816,16 +2839,11 @@
     <string name="battery_app_usage_for" msgid="929971425835809784">"צריכת הסוללה של האפליקציה במשך"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"AM"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"PM"</string>
-    <!-- no translation found for battery_usage_total_less_than_one_minute (1035425863251685509) -->
-    <skip />
-    <!-- no translation found for battery_usage_background_less_than_one_minute (3957971442554437909) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_total_time (8402254046930910905) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_background_time (9109637210617095188) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer (3241109085756092490) -->
-    <skip />
+    <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"סה\"כ: פחות מדקה"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ברקע: פחות מדקה"</string>
+    <string name="battery_usage_for_total_time" msgid="8402254046930910905">"סה\"כ: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_for_background_time" msgid="9109637210617095188">"ברקע: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"הנתונים על השימוש בסוללה הם משוערים"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"סטטיסטיקה של תהליך"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"סטטיסטיקה של מומחי מחשבים על התהליכים הפועלים"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"זיכרון בשימוש"</string>
@@ -3883,6 +3901,10 @@
     <string name="notif_type_alerting_summary" msgid="6823969073567000728">"התראות שעשויות להשמיע צלצול או להפעיל רטט על סמך ההגדרות"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"שקטות"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"התראות שאף פעם לא משמיעות צלילים ולא מפעילות רטט"</string>
+    <!-- no translation found for notification_listener_allowed (5536962633536318551) -->
+    <skip />
+    <!-- no translation found for notification_listener_not_allowed (3352962779597846538) -->
+    <skip />
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"הצגת כל האפליקציות"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"שינוי של הגדרת התראות לכל אפליקציה שיכולה לשלוח התראות"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"אפליקציות שמוצגות במכשיר"</string>
@@ -5009,8 +5031,7 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"בשימוש מתוך <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"בשימוש"</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"נעשה שימוש ב-<xliff:g id="UNIT">%2$s</xliff:g><xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <!-- no translation found for storage_total_summary (7163360249534964272) -->
-    <skip />
+    <string name="storage_total_summary" msgid="7163360249534964272">"<xliff:g id="UNIT">%2$s</xliff:g><xliff:g id="NUMBER">%1$s</xliff:g> בסה\"כ"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"ניקוי אפליקציה"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"האם ברצונך להסיר את אפליקציית האינסטנט הזאת?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"פתיחה"</string>
@@ -5404,15 +5425,12 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"עבודה"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"ברירת מחדל של המערכת"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"אפשרות זו כבר לא תקפה. יש לנסות שוב."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"פקדי מכשירים"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"פקדי המכשירים"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"כרטיסים וכרטיסי אשראי"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"כרטיסים וכרטיסי אשראי"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"תפריט הפעלה"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"תפריט לחצן הפעלה"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"הצגת כרטיסים וכרטיסי אשראי"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"הצגת פקדי מכשירים"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"הצגת כרטיסים, שוברים ופקדי מכשירים"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"מסך נעילה"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"לא להציג שום תוכן"</string>
     <string name="power_menu_privacy" msgid="7900052501075197854">"תוכן רגיש"</string>
@@ -5479,6 +5497,12 @@
     <string name="networks_available" msgid="3299512933684383474">"רשתות זמינות"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"כדי לעבור בין רשתות, יש לנתק את האתרנט"</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"‏Wi-Fi מופעל"</string>
+    <!-- no translation found for carrier_wifi_offload_title (7263365988016247722) -->
+    <skip />
+    <!-- no translation found for carrier_wifi_offload_summary (2980563718888371142) -->
+    <skip />
+    <!-- no translation found for carrier_wifi_network_title (5461382943873831770) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"מחובר"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"אין חיבור"</string>
@@ -5538,4 +5562,10 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"הצגת הודעה בזמן גישה של אפליקציות לטקסט, לתמונות או לכל תוכן אחר שהעתקת"</string>
     <string name="all_apps" msgid="3054120149509114789">"כל האפליקציות"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"אין אישור"</string>
+    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
+    <skip />
 </resources>
