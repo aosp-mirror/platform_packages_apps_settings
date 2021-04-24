@@ -42,6 +42,15 @@
         android:key="recent_notifications_category"
         android:title="@string/recent_notifications">
         <!-- Placeholder for a list of recent apps -->
+        <com.android.settings.widget.PrimarySwitchPreference
+            android:key="app1"
+            android:order="5"/>
+        <com.android.settings.widget.PrimarySwitchPreference
+            android:key="app2"
+            android:order="6"/>
+        <com.android.settings.widget.PrimarySwitchPreference
+            android:key="app3"
+            android:order="7"/>
 
         <!-- See all apps button -->
         <Preference
