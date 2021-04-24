@@ -49,6 +49,7 @@ import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.ArrayList;
@@ -70,9 +71,9 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     @VisibleForTesting
     static final String KEY_SEE_ALL = "all_notifications";
+    static final String KEY_PLACEHOLDER = "app";
     private static final int SHOW_RECENT_APP_COUNT = 3;
     private static final int DAYS = 3;
-    private static final Set<String> SKIP_SYSTEM_PACKAGES = new ArraySet<>();
 
     private final Fragment mHost;
     private final PackageManager mPm;
@@ -148,13 +149,17 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     @VisibleForTesting
     void refreshUi(Context prefContext) {
-        reloadData();
-        final List<NotifyingApp> recentApps = getDisplayableRecentAppList();
-        if (recentApps != null && !recentApps.isEmpty()) {
-            displayRecentApps(prefContext, recentApps);
-        } else {
-            displayOnlyAllAppsLink();
-        }
+        ThreadUtils.postOnBackgroundThread(() -> {
+            reloadData();
+            final List<NotifyingApp> recentApps = getDisplayableRecentAppList();
+            ThreadUtils.postOnMainThread(() -> {
+                if (recentApps != null && !recentApps.isEmpty()) {
+                    displayRecentApps(prefContext, recentApps);
+                } else {
+                    displayOnlyAllAppsLink();
+                }
+            });
+        });
     }
 
     @VisibleForTesting
@@ -198,8 +203,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         }
     }
 
-    @VisibleForTesting
-    static String getKey(int userId, String pkg) {
+    private static String getKey(int userId, String pkg) {
         return userId + "|" + pkg;
     }
 
@@ -221,19 +225,9 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         mSeeAllPref.setSummary(null);
         mSeeAllPref.setIcon(R.drawable.ic_chevron_right_24dp);
 
-        // Rebind prefs/avoid adding new prefs if possible. Adding/removing prefs causes jank.
-        // Build a cached preference pool
-        final Map<String, PrimarySwitchPreference> appPreferences = new ArrayMap<>();
-        int prefCount = mCategory.getPreferenceCount();
-        for (int i = 0; i < prefCount; i++) {
-            final Preference pref = mCategory.getPreference(i);
-            final String key = pref.getKey();
-            if (!TextUtils.equals(key, KEY_SEE_ALL)) {
-                appPreferences.put(key, (PrimarySwitchPreference) pref);
-            }
-        }
+        int keyIndex = 1;
         final int recentAppsCount = recentApps.size();
-        for (int i = 0; i < recentAppsCount; i++) {
+        for (int i = 0; i < recentAppsCount; i++, keyIndex++) {
             final NotifyingApp app = recentApps.get(i);
             // Bind recent apps to existing prefs if possible, or create a new pref.
             final String pkgName = app.getPackage();
@@ -243,20 +237,12 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
                 continue;
             }
 
-            boolean rebindPref = true;
-            PrimarySwitchPreference pref = appPreferences.remove(getKey(app.getUserId(),
-                    pkgName));
-            if (pref == null) {
-                pref = new PrimarySwitchPreference(prefContext);
-                rebindPref = false;
-            }
-            pref.setKey(getKey(app.getUserId(), pkgName));
+            PrimarySwitchPreference pref = mCategory.findPreference(KEY_PLACEHOLDER + keyIndex);
             pref.setTitle(appEntry.label);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
             pref.setIconSize(TwoTargetPreference.ICON_SIZE_SMALL);
             pref.setSummary(StringUtil.formatRelativeTime(mContext,
                     System.currentTimeMillis() - app.getLastNotified(), true));
-            pref.setOrder(i);
             Bundle args = new Bundle();
             args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkgName);
             args.putInt(AppInfoBase.ARG_PACKAGE_UID, appEntry.info.uid);
@@ -280,13 +266,10 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             pref.setChecked(
                     !mNotificationBackend.getNotificationsBanned(pkgName, appEntry.info.uid));
 
-            if (!rebindPref) {
-                mCategory.addPreference(pref);
-            }
         }
-        // Remove unused prefs from pref cache pool
-        for (Preference unusedPrefs : appPreferences.values()) {
-            mCategory.removePreference(unusedPrefs);
+        // If there are less than SHOW_RECENT_APP_COUNT recent apps, remove placeholders
+        for (int i = keyIndex; i <= SHOW_RECENT_APP_COUNT; i++) {
+            mCategory.removePreferenceRecursively(KEY_PLACEHOLDER + i);
         }
     }
 
