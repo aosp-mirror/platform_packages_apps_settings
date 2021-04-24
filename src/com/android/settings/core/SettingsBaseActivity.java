@@ -48,6 +48,7 @@ import com.android.settingslib.drawer.Tile;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,9 @@ public class SettingsBaseActivity extends FragmentActivity {
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
         final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
-            setTheme(R.style.LightTheme_SubSettings_SetupWizard);
+            final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                    ? R.style.SubSettings_SetupWizard : R.style.SudThemeGlifV3_Light;
+            setTheme(appliedTheme);
         }
 
         if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)
@@ -197,6 +200,7 @@ public class SettingsBaseActivity extends FragmentActivity {
     /**
      * SubSetting page should show a toolbar by default. If the page wouldn't show a toolbar,
      * override this method and return false value.
+     *
      * @return ture by default
      */
     protected boolean isToolbarEnabled() {

@@ -434,8 +434,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Lig jou vinger nadat jy \'n vibrasie gevoel het"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Beweeg na waar die lig sagter is en probeer weer"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Jy het die maksimum aantal pogings bereik"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (6677856383184441160) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"Gebruik jou vingerafdruk om jou foon te ontsluit of vir stawing, soos wanneer jy by programme aanmeld of \'n aankoop goedkeur\n\n"<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Slaan skermslot oor?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Toestelbeskermingkenmerke sal nie aangeskakel word nie. Jy sal nie ander mense kan keer om hierdie tablet te gebruik as dit verloor, gesteel of teruggestel word nie."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Toestelbeskermingkenmerke sal nie aangeskakel word nie. Jy sal nie ander mense kan keer om hierdie toestel te gebruik as dit verloor, gesteel of teruggestel word nie."</string>
@@ -1285,7 +1284,7 @@
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Skedule"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Geen"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Skakel aan op gepasmaakte tyd"</string>
-    <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Skakel aan van sonsondergang tot -opkoms"</string>
+    <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Skakel aan van sononder tot sonop"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Begintyd"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Eindtyd"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Status"</string>
@@ -2700,6 +2699,30 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Sedert battery volgelaai is"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Bestuur batterygebruik"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> in totaal • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond in afgelope 24 uur"</string>
+    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
+    <skip />
+    <!-- no translation found for battery_total_usage (2662725472478185867) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
+    <skip />
+    <!-- no translation found for battery_background_usage (8375606680462132248) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
+    <skip />
+    <!-- no translation found for battery_not_usage (8417901856028909227) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Skatting van oorblywende batterytyd word op jou toestelgebruik gegrond"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geskatte tyd oor"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Tot battery volgelaai is"</string>
@@ -2740,16 +2763,11 @@
     <string name="battery_app_usage_for" msgid="929971425835809784">"Programgebruik vir"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"vm."</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"nm."</string>
-    <!-- no translation found for battery_usage_total_less_than_one_minute (1035425863251685509) -->
-    <skip />
-    <!-- no translation found for battery_usage_background_less_than_one_minute (3957971442554437909) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_total_time (8402254046930910905) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_background_time (9109637210617095188) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer (3241109085756092490) -->
-    <skip />
+    <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: minder as \'n min."</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Agtergrond: minder as \'n min."</string>
+    <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totaal: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Agtergrond: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"Batterygebruikdata is benaderd"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Proses-statistieke"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Bleeksiel-statistieke vir lopende prosesse"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Berginggebruik"</string>
@@ -3785,6 +3803,8 @@
     <string name="notif_type_alerting_summary" msgid="6823969073567000728">"Kennisgewings wat mag lui of vibreer gegrond op instellings"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Stil"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Kennisgewings wat nooit \'n geluid maak of vibreer nie"</string>
+    <string name="notification_listener_allowed" msgid="5536962633536318551">"Toegelaat"</string>
+    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Nie toegelaat nie"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Sien alle programme"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"Verander kennisgewingsinstellings vir elke program wat kennisgewings kan stuur"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Programme wat op toestel gewys word"</string>
@@ -4839,8 +4859,7 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"Gebruik van <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"gebruik"</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"<xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g> gebruik"</string>
-    <!-- no translation found for storage_total_summary (7163360249534964272) -->
-    <skip />
+    <string name="storage_total_summary" msgid="7163360249534964272">"Altesaam <xliff:g id="NUMBER">%1$s</xliff:g><xliff:g id="UNIT">%2$s</xliff:g>"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"Maak program skoon"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Wil jy hierdie kitsprogram verwyder?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Maak oop"</string>
@@ -5226,15 +5245,12 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Werk"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Stelselverstek"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Hierdie keuse is nie meer geldig nie. Probeer weer."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"Toestelkontroles"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"toestelkontroles"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kaarte en passe"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kaarte en passe"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Aan/af-kieslys"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Aan/af-skakelaarkieslys"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Wys kaarte en passe"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"Wys toestelkontroles"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Wys kaarte, passe en toestelkontroles"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"Sluitskerm"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Moenie enige inhoud wys nie"</string>
     <string name="power_menu_privacy" msgid="7900052501075197854">"Sensitiewe inhoud"</string>
@@ -5301,6 +5317,9 @@
     <string name="networks_available" msgid="3299512933684383474">"Netwerke beskikbaar"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Ontkoppel Ethernet om netwerke te wissel"</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"Wi-fi is aangeskakel"</string>
+    <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+-verbindings"</string>
+    <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Maak dit vir Google Fi moontlik om W+-netwerke te gebruik om spoed en dekking te verbeter"</string>
+    <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+-netwerk"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Gekoppel"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Geen verbinding nie"</string>
@@ -5360,4 +5379,10 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Wys \'n boodskap wanneer programme toegang het tot teks, prente of ander inhoud wat jy gekopieer het"</string>
     <string name="all_apps" msgid="3054120149509114789">"Alle programme"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Moenie toelaat nie"</string>
+    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
+    <skip />
 </resources>

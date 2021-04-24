@@ -317,6 +317,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         int prefIndex = mAppListPrefGroup.getPreferenceCount();
         for (BatteryDiffEntry entry : entries) {
+            boolean isAdded = false;
             final String appLabel = entry.getAppLabel();
             final Drawable appIcon = entry.getAppIcon();
             if (TextUtils.isEmpty(appLabel) || appIcon == null) {
@@ -324,8 +325,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 continue;
             }
             final String prefKey = entry.mBatteryHistEntry.getKey();
-            PowerGaugePreference pref =
-                (PowerGaugePreference) mPreferenceCache.get(prefKey);
+            PowerGaugePreference pref = mAppListPrefGroup.findPreference(prefKey);
+            if (pref != null) {
+                isAdded = true;
+                Log.w(TAG, "preference should be removed for\n" + entry);
+            } else {
+                pref = (PowerGaugePreference) mPreferenceCache.get(prefKey);
+            }
             // Creates new innstance if cached preference is not found.
             if (pref == null) {
                 pref = new PowerGaugePreference(mPrefContext);
@@ -340,7 +346,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             // Sets the BatteryDiffEntry to preference for launching detailed page.
             pref.setBatteryDiffEntry(entry);
             setPreferenceSummary(pref, entry);
-            mAppListPrefGroup.addPreference(pref);
+            if (!isAdded) {
+                mAppListPrefGroup.addPreference(pref);
+            }
             prefIndex++;
         }
     }

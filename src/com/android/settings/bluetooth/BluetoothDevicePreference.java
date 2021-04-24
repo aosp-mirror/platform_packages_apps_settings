@@ -176,17 +176,9 @@ public final class BluetoothDevicePreference extends GearPreference {
     }
 
     void onPreferenceAttributesChanged() {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            final Pair<Drawable, String> pair =
-                    BluetoothUtils.getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
-
-            ThreadUtils.postOnMainThread(() -> {
-                if (pair.first != null) {
-                    setIcon(pair.first);
-                    contentDescription = pair.second;
-                }
-            });
-        });
+        Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
+        setIcon(pair.first);
+        contentDescription = pair.second;
 
         /*
          * The preference framework takes care of making sure the value has

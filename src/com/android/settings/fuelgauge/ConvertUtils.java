@@ -71,6 +71,7 @@ public final class ConvertUtils {
 
     private static String sZoneId;
     private static SimpleDateFormat sSimpleDateFormat;
+    private static SimpleDateFormat sSimpleDateFormatForHour;
 
     private ConvertUtils() {}
 
@@ -139,8 +140,25 @@ public final class ConvertUtils {
             sZoneId = currentZoneId;
             sSimpleDateFormat =
                 new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.ENGLISH);
+            sSimpleDateFormatForHour = null;
         }
         return sSimpleDateFormat.format(new Date(timestamp));
+    }
+
+    /** Converts UTC timestamp to local time hour data. */
+    public static int utcToLocalTimeHour(long timestamp) {
+        final String currentZoneId = TimeZone.getDefault().getID();
+        if (!currentZoneId.equals(sZoneId) || sSimpleDateFormatForHour == null) {
+            sZoneId = currentZoneId;
+            sSimpleDateFormat = null;
+            sSimpleDateFormatForHour = new SimpleDateFormat("HH", Locale.ENGLISH);
+        }
+        try {
+            return Integer.parseInt(
+                sSimpleDateFormatForHour.format(new Date(timestamp)));
+        } catch (NumberFormatException e) {
+            return Integer.MIN_VALUE;
+        }
     }
 
     /** Gets indexed battery usage data for each corresponding time slot. */
