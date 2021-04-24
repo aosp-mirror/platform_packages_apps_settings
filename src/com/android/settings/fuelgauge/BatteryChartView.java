@@ -103,8 +103,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             return;
         }
         // Sets the chart is clickable if there is at least one valid item in it.
-        for (int index = 0; index < mLevels.length; index++) {
-            if (mLevels[index] != 0) {
+        for (int index = 0; index < mLevels.length - 1; index++) {
+            if (mLevels[index] != 0 && mLevels[index + 1] != 0) {
                 setClickable(true);
                 break;
             }
@@ -155,6 +155,11 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             return;
         }
         final int trapezoidIndex = getTrapezoidIndex(mTouchUpEvent.getX());
+        // Ignores the click event if the level is zero.
+        if (trapezoidIndex == SELECTED_INDEX_INVALID
+                || (trapezoidIndex >= 0 && mLevels[trapezoidIndex] == 0)) {
+            return;
+        }
         // Selects all if users click the same trapezoid item two times.
         if (trapezoidIndex == mSelectedIndex) {
             setSelectedIndex(SELECTED_INDEX_ALL);
