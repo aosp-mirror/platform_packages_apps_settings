@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
@@ -132,6 +133,7 @@ public class FingerprintSettings extends SubSettings {
         protected static final boolean DEBUG = false;
 
         private FingerprintManager mFingerprintManager;
+        private List<FingerprintSensorPropertiesInternal> mSensorProperties;
         private boolean mInFingerprintLockout;
         private byte[] mToken;
         private boolean mLaunchedConfirm;
@@ -262,6 +264,11 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void retryFingerprint() {
+            if (isUdfps()) {
+                // Do not authenticate for UDFPS devices.
+                return;
+            }
+
             if (mRemovalSidecar.inProgress()
                     || 0 == mFingerprintManager.getEnrolledFingerprints(mUserId).size()) {
                 return;
@@ -288,6 +295,7 @@ public class FingerprintSettings extends SubSettings {
 
             Activity activity = getActivity();
             mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
+            mSensorProperties = mFingerprintManager.getSensorPropertiesInternal();
 
             mToken = getIntent().getByteArrayExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
@@ -353,6 +361,15 @@ public class FingerprintSettings extends SubSettings {
                             .security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
                             : R.string.security_settings_fingerprint_v2_home_screen),
                     linkInfo, adminLinkInfo);
+        }
+
+        private boolean isUdfps() {
+            for (FingerprintSensorPropertiesInternal prop : mSensorProperties) {
+                if (prop.isAnyUdfpsType()) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         protected void removeFingerprintPreference(int fingerprintId) {

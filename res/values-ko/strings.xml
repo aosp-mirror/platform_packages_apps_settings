@@ -434,8 +434,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"진동이 느껴지면 손을 떼세요."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"조명이 좀 더 부드러운 곳으로 옮겨서 다시 시도하세요."</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"최대 시도 가능 횟수에 도달했습니다."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (6677856383184441160) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"앱 로그인 또는 구매 승인과 같이 인증이 필요하거나 휴대전화를 잠금 해제할 때 지문을 사용하세요.\n\n"<annotation id="url">"자세히 알아보기"</annotation></string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"화면 잠금 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"기기 보호 기능이 사용 설정되지 않습니다. 분실, 도난 또는 재설정되었을 때 다른 사람이 이 태블릿을 사용하는 것을 방지할 수 없습니다."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"기기 보호 기능이 사용 설정되지 않습니다. 분실, 도난 또는 재설정되었을 때 다른 사람이 이 기기를 사용하는 것을 방지할 수 없습니다."</string>
@@ -2700,6 +2699,30 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"충전 완료 후"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"배터리 사용량 관리"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"총 <xliff:g id="TIME_0">^1</xliff:g> • 지난 24시간 동안 백그라운드에서 <xliff:g id="TIME_1">^2</xliff:g> 사용"</string>
+    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
+    <skip />
+    <!-- no translation found for battery_total_usage (2662725472478185867) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
+    <skip />
+    <!-- no translation found for battery_background_usage (8375606680462132248) -->
+    <skip />
+    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
+    <skip />
+    <!-- no translation found for battery_not_usage (8417901856028909227) -->
+    <skip />
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"예상 잔여 배터리 소모 시간은 기기 사용량을 기반으로 표시됩니다."</string>
     <string name="estimated_time_left" msgid="948717045180211777">"남은 예상 시간"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"충전 완료까지 남은 시간"</string>
@@ -2740,16 +2763,11 @@
     <string name="battery_app_usage_for" msgid="929971425835809784">"앱 사용량:"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"오전"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"오후"</string>
-    <!-- no translation found for battery_usage_total_less_than_one_minute (1035425863251685509) -->
-    <skip />
-    <!-- no translation found for battery_usage_background_less_than_one_minute (3957971442554437909) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_total_time (8402254046930910905) -->
-    <skip />
-    <!-- no translation found for battery_usage_for_background_time (9109637210617095188) -->
-    <skip />
-    <!-- no translation found for battery_usage_screen_footer (3241109085756092490) -->
-    <skip />
+    <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"총 시간: 1분 미만"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"백그라운드: 1분 미만"</string>
+    <string name="battery_usage_for_total_time" msgid="8402254046930910905">"총 시간: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_for_background_time" msgid="9109637210617095188">"백그라운드: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"배터리 사용 데이터는 대략적인 값입니다."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"프로세스 통계"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"프로세스 실행에 관한 통계"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"메모리 사용량"</string>
@@ -3785,6 +3803,8 @@
     <string name="notif_type_alerting_summary" msgid="6823969073567000728">"설정에 따라 울리거나 진동할 수 있는 알림"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"무음"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"소리나 진동이 없는 알림"</string>
+    <string name="notification_listener_allowed" msgid="5536962633536318551">"허용"</string>
+    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"허용 안함"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"앱 모두 보기"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"알림을 보낼 수 있는 각 앱에 대한 알림 설정을 변경합니다."</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"기기에 표시되는 앱"</string>
@@ -4839,8 +4859,7 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"/ <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"사용됨"</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"<xliff:g id="NUMBER">%1$s</xliff:g><xliff:g id="UNIT">%2$s</xliff:g> 사용됨"</string>
-    <!-- no translation found for storage_total_summary (7163360249534964272) -->
-    <skip />
+    <string name="storage_total_summary" msgid="7163360249534964272">"총 <xliff:g id="NUMBER">%1$s</xliff:g><xliff:g id="UNIT">%2$s</xliff:g>"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"앱 삭제"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"이 인스턴트 앱을 삭제하시겠습니까?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"열기"</string>
@@ -5226,15 +5245,12 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"직장"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"시스템 기본값"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"선택이 더 이상 유효하지 않습니다. 다시 시도해 보세요."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"기기 제어"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"기기 제어"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"카드 및 패스"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"카드 및 패스"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"전원 메뉴"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"전원 버튼 메뉴"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"카드 및 패스 보기"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"기기 컨트롤 표시"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"카드, 패스 및 기기 제어 표시"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"잠금 화면"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"아무 콘텐츠도 표시 안함"</string>
     <string name="power_menu_privacy" msgid="7900052501075197854">"민감한 콘텐츠"</string>
@@ -5301,6 +5317,9 @@
     <string name="networks_available" msgid="3299512933684383474">"네트워크 사용 가능"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"네트워크를 전환하려면 이더넷을 연결 해제하세요."</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"Wi-Fi가 켜져 있음"</string>
+    <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+ 연결"</string>
+    <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"속도와 범위를 개선하기 위해 Google Fi에서 W+ 네트워크를 사용하도록 허용합니다."</string>
+    <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ 네트워크"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"연결됨"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"연결되지 않음"</string>
@@ -5360,4 +5379,10 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"앱이 복사된 텍스트, 이미지 또는 기타 콘텐츠에 액세스할 때 메시지를 표시합니다."</string>
     <string name="all_apps" msgid="3054120149509114789">"모든 앱"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"허용 안함"</string>
+    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
+    <skip />
+    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
+    <skip />
 </resources>
