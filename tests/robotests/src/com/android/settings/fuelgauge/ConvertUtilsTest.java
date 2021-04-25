@@ -263,10 +263,10 @@ public final class ConvertUtilsTest {
           // Invokes the method first to create the SimpleDateFormat.
           ConvertUtils.utcToLocalTime(/*timestamp=*/ 0);
           ConvertUtils.sSimpleDateFormat
-              .setTimeZone(TimeZone.getTimeZone("GMT"));
+              .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
           assertThat(ConvertUtils.utcToLocalTime(timestamp))
-              .isEqualTo("Apr 23,2021 16:53:06");
+              .isEqualTo("Apr 23,2021 09:53:06");
     }
 
     @Test
@@ -276,10 +276,10 @@ public final class ConvertUtilsTest {
           // Invokes the method first to create the SimpleDateFormat.
           ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0);
           ConvertUtils.sSimpleDateFormatForHour
-              .setTimeZone(TimeZone.getTimeZone("GMT"));
+              .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
           assertThat(ConvertUtils.utcToLocalTimeHour(timestamp))
-              .isEqualTo("4 pm");
+              .isEqualTo("9 am");
     }
 
     private static BatteryHistEntry createBatteryHistEntry(
