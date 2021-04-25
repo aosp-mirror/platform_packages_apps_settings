@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -35,7 +36,7 @@ import com.android.settings.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
+import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -46,13 +47,15 @@ public final class ExpandDividerPreferenceTest {
     private Context mContext;
     private ExpandDividerPreference mExpandDividerPreference;
 
-    @Mock private ImageView mImageView;
-    @Mock private TextView mTextView;
+    private ImageView mImageView;
+    private TextView mTextView;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mImageView = spy(new ImageView(mContext));
+        mTextView = spy(new TextView(mContext));
         mExpandDividerPreference = new ExpandDividerPreference(mContext);
         doReturn(R.id.expand_title).when(mTextView).getId();
         doReturn(R.id.expand_icon).when(mImageView).getId();
@@ -72,6 +75,9 @@ public final class ExpandDividerPreferenceTest {
         mExpandDividerPreference.mTextView = mTextView;
 
         mExpandDividerPreference.setTitle(titleContent);
+        final ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
+        verify(mTextView).postDelayed(captor.capture(), eq(50L));
+        captor.getValue().run();
         verify(mTextView).setText(titleContent);
     }
 
