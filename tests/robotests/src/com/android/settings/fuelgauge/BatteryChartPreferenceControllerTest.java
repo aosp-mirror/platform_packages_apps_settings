@@ -52,8 +52,10 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryChartPreferenceControllerTest {
@@ -68,6 +70,7 @@ public final class BatteryChartPreferenceControllerTest {
     @Mock private BatteryHistEntry mBatteryHistEntry;
     @Mock private BatteryChartView mBatteryChartView;
     @Mock private PowerGaugePreference mPowerGaugePreference;
+    @Mock private ExpandDividerPreference mExpandDividerPreference;
     @Mock private BatteryUtils mBatteryUtils;
 
     private Context mContext;
@@ -480,6 +483,94 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.mPreferenceCache).hasSize(1);
     }
 
+    @Test
+    public void testRefreshCategoryTitle_appComponent_setHourIntoPreferenceTitle() {
+        setUpBatteryHistoryKeys();
+        mBatteryChartPreferenceController.mCategoryTitleType =
+            BatteryChartPreferenceController.CategoryTitleType.TYPE_APP_COMPONENT;
+        mBatteryChartPreferenceController.mExpandDividerPreference =
+            mExpandDividerPreference;
+        // Simulates select the first slot.
+        mBatteryChartPreferenceController.mTrapezoidIndex = 0;
+
+        mBatteryChartPreferenceController.refreshCategoryTitle();
+
+        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        // Verifies the title in the preference group.
+        verify(mAppListGroup).setTitle(captor.capture());
+        assertThat(captor.getValue())
+            .isEqualTo("App usage for 4 pm-7 am");
+        verify(mExpandDividerPreference).setTitle(null);
+    }
+
+    @Test
+    public void testRefreshCategoryTitle_systemComponent_setHourIntoPreferenceTitle() {
+        setUpBatteryHistoryKeys();
+        mBatteryChartPreferenceController.mCategoryTitleType =
+            BatteryChartPreferenceController.CategoryTitleType.TYPE_SYSTEM_COMPONENT;
+        mBatteryChartPreferenceController.mExpandDividerPreference =
+            mExpandDividerPreference;
+        // Simulates select the first slot.
+        mBatteryChartPreferenceController.mTrapezoidIndex = 0;
+
+        mBatteryChartPreferenceController.refreshCategoryTitle();
+
+        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        // Verifies the title in the preference group.
+        verify(mAppListGroup).setTitle(captor.capture());
+        assertThat(captor.getValue())
+            .isEqualTo("System usage for 4 pm-7 am");
+        verify(mExpandDividerPreference).setTitle(null);
+    }
+
+    @Test
+    public void testRefreshCategoryTitle_allComponents_setHourIntoBothTitleTextView() {
+        setUpBatteryHistoryKeys();
+        mBatteryChartPreferenceController.mCategoryTitleType =
+            BatteryChartPreferenceController.CategoryTitleType.TYPE_ALL_COMPONENTS;
+        mBatteryChartPreferenceController.mExpandDividerPreference =
+            mExpandDividerPreference;
+        // Simulates select the first slot.
+        mBatteryChartPreferenceController.mTrapezoidIndex = 0;
+
+        mBatteryChartPreferenceController.refreshCategoryTitle();
+
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        // Verifies the title in the preference group.
+        verify(mAppListGroup).setTitle(captor.capture());
+        assertThat(captor.getValue())
+            .isEqualTo("App usage for 4 pm-7 am");
+        // Verifies the title in the expandable divider.
+        captor = ArgumentCaptor.forClass(String.class);
+        verify(mExpandDividerPreference).setTitle(captor.capture());
+        assertThat(captor.getValue())
+            .isEqualTo("System usage for 4 pm-7 am");
+    }
+
+    @Test
+    public void testRefreshCategoryTitle_allComponents_setLast24HrIntoBothTitleTextView() {
+        mBatteryChartPreferenceController.mCategoryTitleType =
+            BatteryChartPreferenceController.CategoryTitleType.TYPE_ALL_COMPONENTS;
+        mBatteryChartPreferenceController.mExpandDividerPreference =
+            mExpandDividerPreference;
+        // Simulates select all condition.
+        mBatteryChartPreferenceController.mTrapezoidIndex =
+            BatteryChartView.SELECTED_INDEX_ALL;
+
+        mBatteryChartPreferenceController.refreshCategoryTitle();
+
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        // Verifies the title in the preference group.
+        verify(mAppListGroup).setTitle(captor.capture());
+        assertThat(captor.getValue())
+            .isEqualTo("App usage for past 24 hr");
+        // Verifies the title in the expandable divider.
+        captor = ArgumentCaptor.forClass(String.class);
+        verify(mExpandDividerPreference).setTitle(captor.capture());
+        assertThat(captor.getValue())
+            .isEqualTo("System usage for past 24 hr");
+    }
+
     private static Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {
         final Map<Long, List<BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         for (int index = 0; index < size; index++) {
@@ -496,5 +587,14 @@ public final class BatteryChartPreferenceControllerTest {
         return new BatteryDiffEntry(
             mContext, foregroundUsageTimeInMs, backgroundUsageTimeInMs,
             /*consumePower=*/ 0, mBatteryHistEntry);
+    }
+
+    private void setUpBatteryHistoryKeys() {
+        mBatteryChartPreferenceController.mBatteryHistoryKeys =
+            new long[] {1619196786769L, 0L, 1619247636826L};
+        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0);
+        // Simulates the locale in GMT.
+        ConvertUtils.sSimpleDateFormatForHour
+             .setTimeZone(TimeZone.getTimeZone("GMT"));
     }
 }
