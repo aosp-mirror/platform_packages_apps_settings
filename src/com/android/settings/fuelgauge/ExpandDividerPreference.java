@@ -71,9 +71,10 @@ public class ExpandDividerPreference extends Preference {
         }
     }
 
-    void setTitle(String titleContent) {
+    void setTitle(final String titleContent) {
         if (mTextView != null) {
-            mTextView.setText(titleContent);
+            mTextView.postDelayed(
+                () -> mTextView.setText(titleContent), 50);
         }
     }
 
