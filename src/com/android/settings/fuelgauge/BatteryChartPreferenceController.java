@@ -203,10 +203,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         Collections.sort(batteryHistoryKeyList);
         validateSlotTimestamp(batteryHistoryKeyList);
         mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
-        final int elementSize = Math.min(batteryHistoryKeyList.size(), CHART_KEY_ARRAY_SIZE);
-        final int offset = CHART_KEY_ARRAY_SIZE - elementSize;
+        final int listSize = batteryHistoryKeyList.size();
+        final int elementSize = Math.min(listSize, CHART_KEY_ARRAY_SIZE);
         for (int index = 0; index < elementSize; index++) {
-            mBatteryHistoryKeys[index + offset] = batteryHistoryKeyList.get(index);
+            mBatteryHistoryKeys[CHART_KEY_ARRAY_SIZE - index - 1] =
+                batteryHistoryKeyList.get(listSize - index - 1);
         }
 
         // Generates the battery history levels.
@@ -489,7 +490,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         } else {
             usageTimeSummary = buildUsageTimeInfo(totalUsageTimeInMs, false);
             // Shows background usage time if it is larger than a minute.
-            if (backgroundUsageTimeInMs >= DateUtils.MINUTE_IN_MILLIS) {
+            if (backgroundUsageTimeInMs > 0) {
                 usageTimeSummary +=
                     "\n" + buildUsageTimeInfo(backgroundUsageTimeInMs, true);
             }

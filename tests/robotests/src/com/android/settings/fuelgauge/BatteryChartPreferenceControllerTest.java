@@ -370,7 +370,8 @@ public final class BatteryChartPreferenceControllerTest {
             pref, createBatteryDiffEntry(
                 /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
                 /*backgroundUsageTimeInMs=*/ 200));
-        assertThat(pref.getSummary()).isEqualTo("Total: 1 min");
+        assertThat(pref.getSummary())
+            .isEqualTo("Total: 1 min\nBackground: less than a min");
     }
 
     @Test
