@@ -151,21 +151,22 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final PowerGaugePreference powerPref = (PowerGaugePreference) preference;
         final BatteryDiffEntry diffEntry = powerPref.getBatteryDiffEntry();
         final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
+        final String packageName = histEntry.mPackageName;
         // Checks whether the package is installed or not.
         boolean isValidPackage = true;
         if (histEntry.isAppEntry()) {
             if (mBatteryUtils == null) {
                 mBatteryUtils = BatteryUtils.getInstance(mPrefContext);
             }
-            isValidPackage = mBatteryUtils.getPackageUid(histEntry.mPackageName)
+            isValidPackage = mBatteryUtils.getPackageUid(packageName)
                 != BatteryUtils.UID_NULL;
         }
         Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b %s",
-            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage,
-            histEntry.mPackageName));
+            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, packageName));
         if (isValidPackage) {
             AdvancedPowerUsageDetail.startBatteryDetailPage(
-                mActivity, mFragment, diffEntry, powerPref.getPercent());
+                mActivity, mFragment, diffEntry, powerPref.getPercent(),
+                isValidToShowSummary(packageName), getSlotInformation());
             return true;
         }
         return false;
@@ -267,8 +268,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 || (mTrapezoidIndex == trapezoidIndex && !isForce)) {
             return false;
         }
-        Log.d(TAG, String.format("refreshUi: index=%d batteryIndexedMap.size=%d",
-            mTrapezoidIndex, mBatteryIndexedMap.size()));
+        Log.d(TAG, String.format("refreshUi: index=%d size=%d isForce:%b",
+            trapezoidIndex, mBatteryIndexedMap.size(), isForce));
 
         mTrapezoidIndex = trapezoidIndex;
         mHandler.post(() -> {
@@ -471,11 +472,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
         final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
         // Checks whether the package is allowed to show summary or not.
-        for (CharSequence notAllowPackageName : mNotAllowShowSummaryPackages) {
-            if (TextUtils.equals(entry.getPackageName(), notAllowPackageName)) {
-                preference.setSummary(null);
-                return;
-            }
+        if (!isValidToShowSummary(entry.getPackageName())) {
+            preference.setSummary(null);
+            return;
         }
         String usageTimeSummary = null;
         // Not shows summary for some system components without usage time.
@@ -513,6 +512,17 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 ? R.string.battery_usage_for_background_time
                 : R.string.battery_usage_for_total_time;
         return mPrefContext.getString(resourceId, timeSequence);
+    }
+
+    private boolean isValidToShowSummary(String packageName) {
+        if (mNotAllowShowSummaryPackages != null) {
+            for (CharSequence notAllowPackageName : mNotAllowShowSummaryPackages) {
+                if (TextUtils.equals(packageName, notAllowPackageName)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private static String utcToLocalTime(long[] timestamps) {
