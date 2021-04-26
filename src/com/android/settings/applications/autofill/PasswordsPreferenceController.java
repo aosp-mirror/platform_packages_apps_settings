@@ -124,7 +124,7 @@ public class PasswordsPreferenceController extends BasePreferenceController
                             serviceInfo,
                             serviceInfo.applicationInfo,
                             user);
-            Utils.setSafeIcon(pref, icon);
+            pref.setIcon(Utils.getSafeIcon(icon));
             pref.setIntent(
                     new Intent(Intent.ACTION_MAIN)
                             .setClassName(serviceInfo.packageName, service.getPasswordsActivity()));
