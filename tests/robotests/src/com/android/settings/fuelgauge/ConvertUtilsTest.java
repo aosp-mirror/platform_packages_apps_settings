@@ -39,10 +39,12 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -252,6 +254,32 @@ public final class ConvertUtilsTest {
         entryList = purgedResultMap.get(Integer.valueOf(-1));
         assertThat(entryList).hasSize(1);
         assertBatteryDiffEntry(entryList.get(0), 68, 40L, 50L);
+    }
+
+    @Test
+    public void testUtcToLocalTime_returnExpectedResult() {
+          final long timestamp = 1619196786769L;
+          ConvertUtils.sSimpleDateFormat = null;
+          // Invokes the method first to create the SimpleDateFormat.
+          ConvertUtils.utcToLocalTime(/*timestamp=*/ 0);
+          ConvertUtils.sSimpleDateFormat
+              .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+
+          assertThat(ConvertUtils.utcToLocalTime(timestamp))
+              .isEqualTo("Apr 23,2021 09:53:06");
+    }
+
+    @Test
+    public void testUtcToLocalTmeHour_returnExpectedResult() {
+          final long timestamp = 1619196786769L;
+          ConvertUtils.sSimpleDateFormatForHour = null;
+          // Invokes the method first to create the SimpleDateFormat.
+          ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0);
+          ConvertUtils.sSimpleDateFormatForHour
+              .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+
+          assertThat(ConvertUtils.utcToLocalTimeHour(timestamp))
+              .isEqualTo("9 am");
     }
 
     private static BatteryHistEntry createBatteryHistEntry(

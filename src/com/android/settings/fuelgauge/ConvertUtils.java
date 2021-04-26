@@ -70,7 +70,12 @@ public final class ConvertUtils {
     public static final int CONSUMER_TYPE_SYSTEM_BATTERY = 3;
 
     private static String sZoneId;
-    private static SimpleDateFormat sSimpleDateFormat;
+    private static String sZoneIdForHour;
+
+    @VisibleForTesting
+    static SimpleDateFormat sSimpleDateFormat;
+    @VisibleForTesting
+    static SimpleDateFormat sSimpleDateFormatForHour;
 
     private ConvertUtils() {}
 
@@ -141,6 +146,17 @@ public final class ConvertUtils {
                 new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.ENGLISH);
         }
         return sSimpleDateFormat.format(new Date(timestamp));
+    }
+
+    /** Converts UTC timestamp to local time hour data. */
+    public static String utcToLocalTimeHour(long timestamp) {
+        final String currentZoneId = TimeZone.getDefault().getID();
+        if (!currentZoneId.equals(sZoneIdForHour) || sSimpleDateFormatForHour == null) {
+            sZoneIdForHour = currentZoneId;
+            sSimpleDateFormatForHour = new SimpleDateFormat("h aa", Locale.ENGLISH);
+        }
+        return sSimpleDateFormatForHour.format(new Date(timestamp))
+            .toLowerCase(Locale.getDefault());
     }
 
     /** Gets indexed battery usage data for each corresponding time slot. */

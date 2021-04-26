@@ -1339,12 +1339,13 @@ public class WifiConfigController2 implements TextWatcher,
                 mIpAddressView = (TextView) mView.findViewById(R.id.ipaddress);
                 mIpAddressView.addTextChangedListener(this);
                 mGatewayView = (TextView) mView.findViewById(R.id.gateway);
-                mGatewayView.addTextChangedListener(this);
+                mGatewayView.addTextChangedListener(getIpConfigFieldsTextWatcher(mGatewayView));
                 mNetworkPrefixLengthView = (TextView) mView.findViewById(
                         R.id.network_prefix_length);
-                mNetworkPrefixLengthView.addTextChangedListener(this);
+                mNetworkPrefixLengthView.addTextChangedListener(
+                        getIpConfigFieldsTextWatcher(mNetworkPrefixLengthView));
                 mDns1View = (TextView) mView.findViewById(R.id.dns1);
-                mDns1View.addTextChangedListener(this);
+                mDns1View.addTextChangedListener(getIpConfigFieldsTextWatcher(mDns1View));
                 mDns2View = (TextView) mView.findViewById(R.id.dns2);
                 mDns2View.addTextChangedListener(this);
             }
@@ -1560,6 +1561,47 @@ public class WifiConfigController2 implements TextWatcher,
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         // work done in afterTextChanged
+    }
+
+    /* TODO: Add more test cases for this TextWatcher b/186368002
+     * This TextWatcher is for IP config fields (Gateway/Network Prefix Length/DNS1) to prevent
+     * to rewrite the value in these columns that the user wanted to change after they saved.
+     * When afterTextChanged we will check the text is empty or not then set the Hint for user.
+     */
+    private TextWatcher getIpConfigFieldsTextWatcher(final TextView view) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // work done in afterTextChanged
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // work done in afterTextChanged
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    if (view.getId() == R.id.gateway) {
+                        mGatewayView.setHint(R.string.wifi_gateway_hint);
+                    } else if (view.getId() == R.id.network_prefix_length) {
+                        mNetworkPrefixLengthView.setHint(R.string.wifi_network_prefix_length_hint);
+                    } else if (view.getId() == R.id.dns1) {
+                        mDns1View.setHint(R.string.wifi_dns1_hint);
+                    }
+                    Button submit = mConfigUi.getSubmitButton();
+                    if (submit == null) return;
+
+                    submit.setEnabled(false);
+                } else {
+                    ThreadUtils.postOnMainThread(() -> {
+                        showWarningMessagesIfAppropriate();
+                        enableSubmitIfAppropriate();
+                    });
+                }
+            }
+        };
     }
 
     @Override

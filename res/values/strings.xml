@@ -739,6 +739,8 @@
     <string name="security_dashboard_summary">Screen lock, fingerprint</string>
     <!-- Summary for Security settings when fingerprint is not supported [CHAR LIMIT=NONE]-->
     <string name="security_dashboard_summary_no_fingerprint">Screen lock</string>
+    <!-- Summary for Security settings when biometric unlock is supported [CHAR LIMIT=NONE] -->
+    <string name="security_dashboard_summary_biometric">Screen lock, biometric unlock, app security</string>
 
     <!-- Face enrollment and settings --><skip />
     <!-- Message shown in summary field when face unlock is set up. [CHAR LIMIT=40] -->
@@ -966,6 +968,22 @@
 
     <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase\n\n<annotation id="url">Learn more</annotation></string>
+
+    <!-- Biometric settings --><skip />
+    <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_biometric_preference_title">Face &amp; fingerprint unlock</string>
+    <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_biometric_preference_summary">Face and fingerprint</string>
+    <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro">When you set up face unlock and fingerprint, your phone will ask for your fingerprint when you wear a mask or are in a dark area.</string>
+    <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_category_ways_to_unlock">Ways to unlock</string>
+    <!-- Biometric category title - configuration options for using biometric to unlock the device or authenticate in apps. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_category_ways_to_use">Use face and fingerprint to</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use biometric for unlocking the device. [CHAR LIMIT=20] -->
+    <string name="biometric_settings_use_biometric_unlock_phone">Unlocking your phone</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use biometric for authentication. [CHAR LIMIT=30] -->
+    <string name="biometric_settings_use_biometric_for_apps">Authentication in apps</string>
 
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
@@ -1797,6 +1815,10 @@
     <string name="bluetooth_device_mac_address">Device\'s Bluetooth address: <xliff:g id="address">%1$s</xliff:g></string>
     <!-- Bluetooth device details. The title of a confirmation dialog for unpairing a paired device. [CHAR LIMIT=60] -->
     <string name="bluetooth_unpair_dialog_title">Forget device?</string>
+    <!-- Content Description for companion device app associations removal button [CHAR LIMIT=28]-->
+    <string name="remove_association_button">Remove association</string>
+    <!-- Bluetooth device details companion apps. The title of a confirmation dialog for remove an app. [CHAR LIMIT=60] -->
+    <string name="bluetooth_companion_app_remove_association_dialog_title">Disconnect App?</string>
 
     <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. -->
     <string name="bluetooth_unpair_dialog_body" product="default">Your phone will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
@@ -1804,12 +1826,16 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet">Your tablet will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
     <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. -->
     <string name="bluetooth_unpair_dialog_body" product="device">Your device will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
+    <!-- Bluetooth device details companion apps. The body of confirmation dialog for remove association. [CHAR LIMIT=60] -->
+    <string name="bluetooth_companion_app_body"><xliff:g id="app_name" example="App Name">%1$s</xliff:g> app will no longer connect to your <xliff:g id="device_name" example="Device Name">%2$s</xliff:g></string>
 
     <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_untethered_unpair_dialog_body"><xliff:g id="device_name" example="Jack's headphone">%1$s</xliff:g> will no longer be paired with any device linked to this account</string>
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
+    <!-- Bluetooth device details companion apps. In the confirmation dialog for removing an associated app, this is the label on the button that will complete the disassociate action. [CHAR LIMIT=80] -->
+    <string name = "bluetooth_companion_app_remove_association_confirm_button">Disconnect app</string>
 
     <!-- Bluetooth settings.  The title of the screen to pick which profiles to connect to on the device.  For example, headphones may have both A2DP and headset, this allows the users to choose which one they want to connect to. -->
     <string name="bluetooth_connect_specific_profiles_title">Connect to\u2026</string>
@@ -4121,7 +4147,7 @@
     <!-- Description text for Bluetooth always scanning -->
     <string name="location_scanning_bluetooth_always_scanning_description">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
     <!-- [CHAR LIMIT=60] Location Services preference title -->
-    <string name="location_services_preference_title">Manage location services</string>
+    <string name="location_services_preference_title">Location services</string>
     <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
     <string name="location_services_screen_title">Location Services</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
@@ -5691,14 +5717,53 @@
     <!-- Title for the prompt shown as a placeholder if no accessibility services are installed. [CHAR LIMIT=50] -->
     <string name="accessibility_no_services_installed">No services installed</string>
 
-    <!-- Title for the acccessibility shortcut's summary if no service is selected for use with the shortcut. [CHAR LIMIT=50] -->
+    <!-- Title for the accessibility shortcut's summary if no service is selected for use with the shortcut. [CHAR LIMIT=50] -->
     <string name="accessibility_no_service_selected">No service selected</string>
 
     <!-- Default description for an accessibility service if the latter doesn't provide one. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_default_description">No description provided.</string>
 
-    <!-- Accessibility settings: button for lauching settings for an accessibility service -->
+    <!-- Accessibility settings: button for launching settings for an accessibility service -->
     <string name="settings_button">Settings</string>
+
+    <!-- List of synonyms used in the settings search bar to find the “Extra Dim” setting, which dims your screen. Title name is located at strings/reduce_bright_colors_preference_title. [CHAR LIMIT=NONE] -->
+    <string name="keywords_reduce_bright_colors">light sensitivity, photophobia, dark theme, migraine, headache, reading mode, night mode, reduce brightness, white point</string>
+    <!-- List of synonyms used in the settings search bar to find the “Accessibility”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_accessibility">Ease of use, ease of access, assistance, assistive</string>
+    <!-- List of synonyms used in the settings search bar to find the “Magnification”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_magnification">Window Magnifier, Zoom, Magnification, Low vision, Enlarge, make bigger</string>
+    <!-- List of synonyms used in the settings search bar to find the “TalkBack”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_talkback">Screen reader, Voice Over, VoiceOver, Voice Assistance, Blind, Low Vision, TTS, text to speech, spoken feedback</string>
+    <!-- List of synonyms used in the settings search bar to find the “Live Caption”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_live_caption">Captions, closed captions, CC, Live Transcribe, hard of hearing, hearing loss, CART, speech to text, subtitle</string>
+    <!-- List of synonyms used in the settings search bar to find the “Live Transcribe”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_live_transcribe">Captions, closed captions, CC, Live Caption, hard of hearing, hearing loss, CART, speech to text, subtitle</string>
+    <!-- List of synonyms used in the settings search bar to find the “Sound Notifications”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_sound_notifications">Notifications, hard of hearing, hearing loss, notify</string>
+    <!-- List of synonyms used in the settings search bar to find the “Sound Amplifier”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_sound_amplifier">PSAP, amplify, sound amplification, hard of hearing, hearing loss, amplification</string>
+    <!-- List of synonyms used in the settings search bar to find the “Display size”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_display_size">screen size, large screen</string>
+    <!-- List of synonyms used in the settings search bar to find the “Bold text”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_bold_text">High contrast, low vision, bold font, bold face</string>
+    <!-- List of synonyms used in the settings search bar to find the “Select to Speak”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_select_to_speak">Hear text, read aloud, speak screen, screen reader</string>
+    <!-- List of synonyms used in the settings search bar to find the “Color correction”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_color_correction">adjust color </string>
+    <!-- List of synonyms used in the settings search bar to find the “Color inversion”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_color_inversion">turn screen dark, turn screen light</string>
+    <!-- List of synonyms used in the settings search bar to find the “Accessibility Menu”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_accessibility_menu">motor, quick menu, assistive menu, touch, dexterity</string>
+    <!-- List of synonyms used in the settings search bar to find the “Switch Access”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_switch_access">motor, switch, hand, AT, assistive technology, paralysis, ALS, scanning, step scanning</string>
+    <!-- List of synonyms used in the settings search bar to find the “Autoclick(dwell timing)”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_auto_click">motor, mouse</string>
+    <!-- List of synonyms used in the settings search bar to find the “Hearing aids”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_hearing_aids">hard of hearing, hearing loss</string>
+    <!-- List of synonyms used in the settings search bar to find the “Real-time text (RTT)”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_rtt">hard of hearing, hearing loss, captions, Teletype, tty</string>
+    <!-- List of synonyms used in the settings search bar to find the “Voice Access”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_voice_access">voice, voice control, motor, hand, mic, microphone, dictation, talk, control</string>
 
     <!-- Printing settings -->
     <skip />
@@ -6255,8 +6320,39 @@
     <string name ="battery_detail_info_title">Since full charge</string>
     <!-- Title for the battery management group [CHAR LIMIT=40] -->
     <string name ="battery_detail_manage_title">Manage battery usage</string>
+
     <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_and_background_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background for past 24 hr</string>
+    <!-- Description for battery total and background usage time in a time period for an app, i.e. 1 hr 15 min total • 39 min background for 12 am-2 am. Note: ^1, ^2 and ^3 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_and_background_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^3</xliff:g></string>
+
+    <!-- Description for battery total usage time is less than a minute for an app [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_less_minute">Total less than a minute for past 24 hr</string>
+    <!-- Description for battery total usage time is less than a minute in a time period for an app, i.e. Total less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
+    <string name="battery_total_usage_less_minute_with_period">Total less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
+
+    <!-- Description for battery background usage time is less than a minute for an app [CHAR LIMIT=120] -->
+    <string name="battery_background_usage_less_minute">Background less than a minute for past 24 hr</string>
+    <!-- Description for battery background usage time is less than a minute in a time period for an app, i.e. Background less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
+    <string name="battery_background_usage_less_minute_with_period">Background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
+
+    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for past 24 hr</string>
+    <!-- Description for battery total usage time in a time period for an app, i.e. 1 hr 15 min total for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
+
+    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_background_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for past 24 hr</string>
+    <!-- Description for battery background usage time in a time period for an app, i.e. 1 hr 15 min background for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_background_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
+
+    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_and_background_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute for past 24 hr</string>
+    <!-- Description for battery total usage with background usage time less than a minute in a time period for an app, i.e. 1 hr 15 min total • background less than a minute for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_and_background_less_minute_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
+
+    <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
+    <string name="battery_not_usage">No usage for past 24 hr</string>
 
     <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
     <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
@@ -6354,9 +6450,9 @@
     <!-- [CHAR_LIMIT=NONE] Battery system usage section header for past 24 hour -->
     <string name="battery_system_usage_for_past_24">System usage for past 24 hr</string>
     <!-- [CHAR_LIMIT=NONE] Battery system usage section header -->
-    <string name="battery_system_usage_for">System usage for</string>
+    <string name="battery_system_usage_for">System usage for <xliff:g id="slot">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery app usage section header -->
-    <string name="battery_app_usage_for">App usage for</string>
+    <string name="battery_app_usage_for">App usage for <xliff:g id="slot">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
     <string name="battery_usage_time_am">am</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
@@ -7950,7 +8046,7 @@
     <string name="keywords_wifi_calling">wifi, wi-fi, call, calling</string>
     <string name="keywords_display">screen, touchscreen</string>
     <string name="keywords_display_brightness_level">dim screen, touchscreen, battery, bright</string>
-    <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
+    <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color, light sensitivity, photophobia, make darker, darken, dark mode, migraine</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
     <!-- Search keyword for "Cast" settings [CHAR_LIMIT=NONE]-->
@@ -7990,6 +8086,7 @@
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
     <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
+    <string name="keywords_biometric_unlock">face, unlock, auth, sign in, fingerprint, biometric</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
@@ -8014,6 +8111,9 @@
 
     <!-- Search keyword for fingerprint settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_fingerprint_settings">fingerprint, add fingerprint</string>
+
+    <!-- Search keyword for biometric settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_biometric_settings">face, fingerprint, add fingerprint</string>
 
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness, Auto brightness</string>
@@ -8076,10 +8176,7 @@
     <string name="keywords_add_language">add language, add a language</string>
 
     <!-- List of synonyms for the font size, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_font_size">text size</string>
-
-    <!-- List of synonyms used in the settings search bar to find the “Extra Dim” setting, which dims your screen. Title name is located at strings/reduce_bright_colors_preference_title. [CHAR LIMIT=NONE] -->
-    <string name="keywords_reduce_bright_colors">light sensitivity, photophobia, dark theme, migraine, headache, reading mode, night mode, reduce brightness, white point</string>
+    <string name="keywords_font_size">text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement</string>
 
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
@@ -9021,13 +9118,13 @@
     <string name="notification_assistant_security_warning_title">Allow notification access for
          <xliff:g id="service" example="NotificationAssistant">%1$s</xliff:g>?</string>
     <!-- Summary for a warning message about security implications of enabling a notification
-          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+          assistant, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_assistant_security_warning_summary">
-        Enhanced notifications can read all notification content,
-        including personal information like contact names and messages.
-        This feature can also dismiss notifications or take actions on buttons in notifications,
-        such as answering phone calls.
-        \n\nThis feature can also turn Priority mode on or off and change related settings.
+        Enhanced notifications replaced Android Adaptive Notifications in Android 12.
+        This feature shows suggested actions and replies, and organizes your notifications.
+        \n\nEnhanced notifications can access notification content, including personal information
+        like contact names and messages. This feature can also dismiss or respond to notifications,
+        such as answering phone calls and controlling Do Not Disturb.
     </string>
 
     <!-- Title for a warning message about security implications of enabling a notification
@@ -13187,4 +13284,13 @@
 
     <!-- Label for button to not allow grant the permission for remote devices. [CHAR_LIMIT=50] -->
     <string name="request_manage_bluetooth_permission_dont_allow">Don\u2019t allow</string>
+
+    <!-- Title for UWB preference [CHAR_LIMIT=60] -->
+    <string name="uwb_settings_title">Ultra-WideBand (UWB)</string>
+
+    <!-- Summary for UWB preference. [CHAR_LIMIT=NONE]-->
+    <string name="uwb_settings_summary">Helps identify the relative position of nearby devices that have UWB</string>
+
+    <!-- Summary for UWB preference when airplane mode is disabled. [CHAR_LIMIT=NONE]-->
+    <string name="uwb_settings_summary_airplane_mode">Turn off Airplane mode to use UWB. </string>
 </resources>

@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
  */
 
 package com.android.settings.fuelgauge;
@@ -51,7 +50,7 @@ import java.util.Map;
 /** Controls the update for chart graph and the list items. */
 public class BatteryChartPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy,
-                BatteryChartView.OnSelectListener {
+                BatteryChartView.OnSelectListener, ExpandDividerPreference.OnExpandListener {
     private static final String TAG = "BatteryChartPreferenceController";
     private static final int CHART_KEY_ARRAY_SIZE = 25;
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
@@ -65,6 +64,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting PreferenceGroup mAppListPrefGroup;
     @VisibleForTesting BatteryChartView mBatteryChartView;
+    @VisibleForTesting ExpandDividerPreference mExpandDividerPreference;
+    @VisibleForTesting CategoryTitleType mCategoryTitleType =
+        CategoryTitleType.TYPE_UNKNOWN;
 
     @VisibleForTesting int[] mBatteryHistoryLevels;
     @VisibleForTesting long[] mBatteryHistoryKeys;
@@ -76,9 +78,21 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final CharSequence[] mNotAllowShowSummaryPackages;
 
+    private boolean mIsExpanded = false;
+
     // Preference cache to avoid create new instance each time.
     @VisibleForTesting
     final Map<String, Preference> mPreferenceCache = new HashMap<>();
+    @VisibleForTesting
+    final List<BatteryDiffEntry> mSystemEntries = new ArrayList<>();
+
+    /** Which component data will be shown in the screen. */
+    enum CategoryTitleType {
+        TYPE_UNKNOWN,
+        TYPE_APP_COMPONENT,
+        TYPE_SYSTEM_COMPONENT,
+        TYPE_ALL_COMPONENTS
+    }
 
     public BatteryChartPreferenceController(
             Context context, String preferenceKey,
@@ -137,21 +151,22 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final PowerGaugePreference powerPref = (PowerGaugePreference) preference;
         final BatteryDiffEntry diffEntry = powerPref.getBatteryDiffEntry();
         final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
+        final String packageName = histEntry.mPackageName;
         // Checks whether the package is installed or not.
         boolean isValidPackage = true;
         if (histEntry.isAppEntry()) {
             if (mBatteryUtils == null) {
                 mBatteryUtils = BatteryUtils.getInstance(mPrefContext);
             }
-            isValidPackage = mBatteryUtils.getPackageUid(histEntry.mPackageName)
+            isValidPackage = mBatteryUtils.getPackageUid(packageName)
                 != BatteryUtils.UID_NULL;
         }
         Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b %s",
-            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage,
-            histEntry.mPackageName));
+            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, packageName));
         if (isValidPackage) {
             AdvancedPowerUsageDetail.startBatteryDetailPage(
-                mActivity, mFragment, diffEntry, powerPref.getPercent());
+                mActivity, mFragment, diffEntry, powerPref.getPercent(),
+                isValidToShowSummary(packageName), getSlotInformation());
             return true;
         }
         return false;
@@ -161,6 +176,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     public void onSelect(int trapezoidIndex) {
         Log.d(TAG, "onChartSelect:" + trapezoidIndex);
         refreshUi(trapezoidIndex, /*isForce=*/ false);
+    }
+
+    @Override
+    public void onExpand(boolean isExpanded) {
+        mIsExpanded = isExpanded;
+        refreshExpandUi();
     }
 
     void setBatteryHistoryMap(
@@ -183,10 +204,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         Collections.sort(batteryHistoryKeyList);
         validateSlotTimestamp(batteryHistoryKeyList);
         mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
-        final int elementSize = Math.min(batteryHistoryKeyList.size(), CHART_KEY_ARRAY_SIZE);
-        final int offset = CHART_KEY_ARRAY_SIZE - elementSize;
+        final int listSize = batteryHistoryKeyList.size();
+        final int elementSize = Math.min(listSize, CHART_KEY_ARRAY_SIZE);
         for (int index = 0; index < elementSize; index++) {
-            mBatteryHistoryKeys[index + offset] = batteryHistoryKeyList.get(index);
+            mBatteryHistoryKeys[CHART_KEY_ARRAY_SIZE - index - 1] =
+                batteryHistoryKeyList.get(listSize - index - 1);
         }
 
         // Generates the battery history levels.
@@ -246,18 +268,20 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 || (mTrapezoidIndex == trapezoidIndex && !isForce)) {
             return false;
         }
-        Log.d(TAG, String.format("refreshUi: index=%d batteryIndexedMap.size=%d",
-            mTrapezoidIndex, mBatteryIndexedMap.size()));
+        Log.d(TAG, String.format("refreshUi: index=%d size=%d isForce:%b",
+            trapezoidIndex, mBatteryIndexedMap.size(), isForce));
 
         mTrapezoidIndex = trapezoidIndex;
         mHandler.post(() -> {
             removeAndCacheAllPrefs();
             addAllPreferences();
+            refreshCategoryTitle();
         });
         return true;
     }
 
     private void addAllPreferences() {
+        mCategoryTitleType = CategoryTitleType.TYPE_UNKNOWN;
         final List<BatteryDiffEntry> entries =
             mBatteryIndexedMap.get(Integer.valueOf(mTrapezoidIndex));
         if (entries == null) {
@@ -266,10 +290,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         // Separates data into two groups and sort them individually.
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
-        final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
+        mSystemEntries.clear();
         entries.forEach(entry -> {
             if (entry.isSystemEntry()) {
-                systemEntries.add(entry);
+                mSystemEntries.add(entry);
             } else {
                 appEntries.add(entry);
             }
@@ -279,11 +303,29 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             }
         });
         Collections.sort(appEntries, BatteryDiffEntry.COMPARATOR);
-        Collections.sort(systemEntries, BatteryDiffEntry.COMPARATOR);
+        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
         Log.d(TAG, String.format("addAllPreferences() app=%d system=%d",
-            appEntries.size(), systemEntries.size()));
-        addPreferenceToScreen(appEntries);
-        addPreferenceToScreen(systemEntries);
+            appEntries.size(), mSystemEntries.size()));
+
+        // Adds app entries to the list if it is not empty.
+        if (!appEntries.isEmpty()) {
+            addPreferenceToScreen(appEntries);
+            mCategoryTitleType = CategoryTitleType.TYPE_APP_COMPONENT;
+        }
+        // Adds the expabable divider if we have two sections data.
+        if (!appEntries.isEmpty() && !mSystemEntries.isEmpty()) {
+            if (mExpandDividerPreference == null) {
+                mExpandDividerPreference = new ExpandDividerPreference(mPrefContext);
+                mExpandDividerPreference.setOnExpandListener(this);
+            }
+            mExpandDividerPreference.setOrder(
+                mAppListPrefGroup.getPreferenceCount());
+            mAppListPrefGroup.addPreference(mExpandDividerPreference);
+            mCategoryTitleType = CategoryTitleType.TYPE_ALL_COMPONENTS;
+        } else if (appEntries.isEmpty() && !mSystemEntries.isEmpty()) {
+            mCategoryTitleType = CategoryTitleType.TYPE_SYSTEM_COMPONENT;
+        }
+        refreshExpandUi();
     }
 
     @VisibleForTesting
@@ -293,6 +335,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         int prefIndex = mAppListPrefGroup.getPreferenceCount();
         for (BatteryDiffEntry entry : entries) {
+            boolean isAdded = false;
             final String appLabel = entry.getAppLabel();
             final Drawable appIcon = entry.getAppIcon();
             if (TextUtils.isEmpty(appLabel) || appIcon == null) {
@@ -300,8 +343,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 continue;
             }
             final String prefKey = entry.mBatteryHistEntry.getKey();
-            PowerGaugePreference pref =
-                (PowerGaugePreference) mPreferenceCache.get(prefKey);
+            PowerGaugePreference pref = mAppListPrefGroup.findPreference(prefKey);
+            if (pref != null) {
+                isAdded = true;
+                Log.w(TAG, "preference should be removed for\n" + entry);
+            } else {
+                pref = (PowerGaugePreference) mPreferenceCache.get(prefKey);
+            }
             // Creates new innstance if cached preference is not found.
             if (pref == null) {
                 pref = new PowerGaugePreference(mPrefContext);
@@ -316,7 +364,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             // Sets the BatteryDiffEntry to preference for launching detailed page.
             pref.setBatteryDiffEntry(entry);
             setPreferenceSummary(pref, entry);
-            mAppListPrefGroup.addPreference(pref);
+            if (!isAdded) {
+                mAppListPrefGroup.addPreference(pref);
+            }
             prefIndex++;
         }
     }
@@ -337,6 +387,84 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mAppListPrefGroup.removeAll();
     }
 
+    private void refreshExpandUi() {
+        if (mIsExpanded) {
+            addPreferenceToScreen(mSystemEntries);
+        } else {
+            // Removes and recycles all system entries to hide all of them.
+            for (BatteryDiffEntry entry : mSystemEntries) {
+                final String prefKey = entry.mBatteryHistEntry.getKey();
+                final Preference pref = mAppListPrefGroup.findPreference(prefKey);
+                if (pref != null) {
+                    mAppListPrefGroup.removePreference(pref);
+                    mPreferenceCache.put(pref.getKey(), pref);
+                }
+            }
+        }
+    }
+
+    @VisibleForTesting
+    void refreshCategoryTitle() {
+        final String slotInformation = getSlotInformation();
+        Log.d(TAG, String.format("refreshCategoryTitle:%s slotInfo:%s",
+            mCategoryTitleType, slotInformation));
+        refreshPreferenceCategoryTitle(slotInformation);
+        refreshExpandableDividerTitle(slotInformation);
+    }
+
+    private void refreshExpandableDividerTitle(String slotInformation) {
+        if (mExpandDividerPreference == null) {
+            return;
+        }
+        mExpandDividerPreference.setTitle(
+            mCategoryTitleType == CategoryTitleType.TYPE_ALL_COMPONENTS
+                ? getSlotInformation(/*isApp=*/ false, slotInformation)
+                : null);
+    }
+
+    private void refreshPreferenceCategoryTitle(String slotInformation) {
+        if (mAppListPrefGroup == null) {
+            return;
+        }
+        switch (mCategoryTitleType) {
+            case TYPE_APP_COMPONENT:
+            case TYPE_ALL_COMPONENTS:
+                mAppListPrefGroup.setTitle(
+                    getSlotInformation(/*isApp=*/ true, slotInformation));
+                break;
+            case TYPE_SYSTEM_COMPONENT:
+                mAppListPrefGroup.setTitle(
+                    getSlotInformation(/*isApp=*/ false, slotInformation));
+                break;
+            default:
+                mAppListPrefGroup.setTitle(R.string.battery_app_usage_for_past_24);
+        }
+    }
+
+    private String getSlotInformation(boolean isApp, String slotInformation) {
+        // Null means we show all information without a specific time slot.
+        if (slotInformation == null) {
+            return isApp
+                ? mPrefContext.getString(R.string.battery_app_usage_for_past_24)
+                : mPrefContext.getString(R.string.battery_system_usage_for_past_24);
+        } else {
+            return isApp
+                ? mPrefContext.getString(R.string.battery_app_usage_for, slotInformation)
+                : mPrefContext.getString(R.string.battery_system_usage_for ,slotInformation);
+        }
+    }
+
+    private String getSlotInformation() {
+        if (mTrapezoidIndex < 0) {
+            return null;
+        }
+        final String fromHour = ConvertUtils.utcToLocalTimeHour(
+            mBatteryHistoryKeys[mTrapezoidIndex * 2]);
+        final String toHour = ConvertUtils.utcToLocalTimeHour(
+            mBatteryHistoryKeys[(mTrapezoidIndex + 1) * 2]);
+        return String.format("%s-%s", fromHour, toHour);
+    }
+
     @VisibleForTesting
     void setPreferenceSummary(
             PowerGaugePreference preference, BatteryDiffEntry entry) {
@@ -344,11 +472,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
         final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
         // Checks whether the package is allowed to show summary or not.
-        for (CharSequence notAllowPackageName : mNotAllowShowSummaryPackages) {
-            if (TextUtils.equals(entry.getPackageName(), notAllowPackageName)) {
-                preference.setSummary(null);
-                return;
-            }
+        if (!isValidToShowSummary(entry.getPackageName())) {
+            preference.setSummary(null);
+            return;
         }
         String usageTimeSummary = null;
         // Not shows summary for some system components without usage time.
@@ -363,7 +489,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         } else {
             usageTimeSummary = buildUsageTimeInfo(totalUsageTimeInMs, false);
             // Shows background usage time if it is larger than a minute.
-            if (backgroundUsageTimeInMs >= DateUtils.MINUTE_IN_MILLIS) {
+            if (backgroundUsageTimeInMs > 0) {
                 usageTimeSummary +=
                     "\n" + buildUsageTimeInfo(backgroundUsageTimeInMs, true);
             }
@@ -386,6 +512,17 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 ? R.string.battery_usage_for_background_time
                 : R.string.battery_usage_for_total_time;
         return mPrefContext.getString(resourceId, timeSequence);
+    }
+
+    private boolean isValidToShowSummary(String packageName) {
+        if (mNotAllowShowSummaryPackages != null) {
+            for (CharSequence notAllowPackageName : mNotAllowShowSummaryPackages) {
+                if (TextUtils.equals(packageName, notAllowPackageName)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private static String utcToLocalTime(long[] timestamps) {

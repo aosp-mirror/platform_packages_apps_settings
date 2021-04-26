@@ -22,11 +22,13 @@ import android.graphics.Color;
 import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -38,6 +40,8 @@ import java.util.Locale;
 /** A widget component to draw chart graph. */
 public class BatteryChartView extends AppCompatImageView implements View.OnClickListener {
     private static final String TAG = "BatteryChartView";
+    // For drawing the percentage information.
+    private static final String[] PERCENTAGES = new String[] {"100%", "50%", "0%"};
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
     /** Selects all trapezoid shapes. */
     public static final int SELECTED_INDEX_ALL = -1;
@@ -58,8 +62,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private int mTrapezoidColor;
     private int mTrapezoidSolidColor;
     private final int mDividerColor = Color.parseColor("#CDCCC5");
+    // For drawing the percentage information.
+    private int mTextPadding;
+    private final Rect mIndent = new Rect();
+    private final Rect[] mPercentageBound =
+        new Rect[] {new Rect(), new Rect(), new Rect()};
 
     private int[] mLevels;
+    private Paint mTextPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
     private TrapezoidSlot[] mTrapezoidSlot;
@@ -97,8 +107,18 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public void setLevels(int[] levels) {
         // We should provide trapezoid count + 1 data to draw all trapezoids.
         mLevels = levels.length == mTrapezoidCount + 1 ? levels : null;
-        setClickable(mLevels != null);
+        setClickable(false);
         invalidate();
+        if (mLevels == null) {
+            return;
+        }
+        // Sets the chart is clickable if there is at least one valid item in it.
+        for (int index = 0; index < mLevels.length - 1; index++) {
+            if (mLevels[index] != 0 && mLevels[index + 1] != 0) {
+                setClickable(true);
+                break;
+            }
+        }
     }
 
     /** Sets the selected group index to draw highlight effect. */
@@ -116,6 +136,37 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     /** Sets the callback to monitor the selected group index. */
     public void setOnSelectListener(BatteryChartView.OnSelectListener listener) {
         mOnSelectListener = listener;
+    }
+
+    /** Sets the companion {@link TextView} for percentage information. */
+    public void setCompanionTextView(TextView textView) {
+        requestLayout();
+        if (textView != null) {
+            // Pre-draws the view first to load style atttributions into paint.
+            textView.draw(new Canvas());
+            mTextPaint = textView.getPaint();
+        } else {
+            mTextPaint = null;
+        }
+    }
+
+    @Override
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        // Measures text bounds and updates indent configuration.
+        if (mTextPaint != null) {
+            for (int index = 0; index < PERCENTAGES.length; index++) {
+                mTextPaint.getTextBounds(
+                    PERCENTAGES[index], 0, PERCENTAGES[index].length(),
+                    mPercentageBound[index]);
+            }
+            // Updates the indent configurations.
+            mIndent.top = mPercentageBound[0].height();
+            mIndent.right = mPercentageBound[0].width() + mTextPadding * 2;
+            Log.d(TAG, "setIndent:" + mPercentageBound[0]);
+        } else {
+            mIndent.set(0, 0, 0, 0);
+        }
     }
 
     @Override
@@ -145,6 +196,11 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             return;
         }
         final int trapezoidIndex = getTrapezoidIndex(mTouchUpEvent.getX());
+        // Ignores the click event if the level is zero.
+        if (trapezoidIndex == SELECTED_INDEX_INVALID
+                || (trapezoidIndex >= 0 && mLevels[trapezoidIndex] == 0)) {
+            return;
+        }
         // Selects all if users click the same trapezoid item two times.
         if (trapezoidIndex == mSelectedIndex) {
             setSelectedIndex(SELECTED_INDEX_ALL);
@@ -179,32 +235,56 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         mTrapezoidPaint.setPathEffect(
             new CornerPathEffect(
                 resources.getDimensionPixelSize(R.dimen.chartview_trapezoid_radius)));
+        // Initializes for drawing text information.
+        mTextPadding = resources.getDimensionPixelSize(R.dimen.chartview_text_padding);
     }
 
     private void drawHorizontalDividers(Canvas canvas) {
+        final int width = getWidth() - mIndent.right;
+        final int height = getHeight() - mIndent.top - mIndent.bottom;
         // Draws the top divider line for 100% curve.
-        float offsetY = mDividerWidth * 0.5f;
-        canvas.drawLine(0, offsetY, getWidth(), offsetY, mDividerPaint);
+        float offsetY = mIndent.top + mDividerWidth * .5f;
+        canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
+        if (mTextPaint != null) {
+            canvas.drawText(
+                PERCENTAGES[0],
+                getWidth() - mPercentageBound[0].width(),
+                offsetY + mPercentageBound[0].height() *.5f , mTextPaint);
+        }
         // Draws the center divider line for 50% curve.
         final float availableSpace =
-                getHeight() - mDividerWidth * 2 - mTrapezoidVOffset - mDividerHeight;
-        offsetY = mDividerWidth + availableSpace * 0.5f;
-        canvas.drawLine(0, offsetY, getWidth(), offsetY, mDividerPaint);
-        // Draws the center divider line for 0% curve.
-        offsetY = getHeight() - mDividerHeight - mDividerWidth * 0.5f;
-        canvas.drawLine(0, offsetY, getWidth(), offsetY, mDividerPaint);
+            height - mDividerWidth * 2 - mTrapezoidVOffset - mDividerHeight;
+        offsetY = mIndent.top + mDividerWidth + availableSpace * .5f;
+        canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
+        if (mTextPaint != null) {
+            canvas.drawText(
+                PERCENTAGES[1],
+                    getWidth() - mPercentageBound[1].width(),
+                    offsetY + mPercentageBound[1].height() *.5f , mTextPaint);
+        }
+        // Draws the bottom divider line for 0% curve.
+        offsetY = mIndent.top + (height - mDividerHeight - mDividerWidth * .5f);
+        canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
+        if (mTextPaint != null) {
+            canvas.drawText(
+                PERCENTAGES[2],
+                getWidth() - mPercentageBound[2].width(),
+                offsetY + mPercentageBound[2].height() *.5f , mTextPaint);
+        }
     }
 
     private void drawVerticalDividers(Canvas canvas) {
+        final int width = getWidth() - mIndent.right;
         final int dividerCount = mTrapezoidCount + 1;
         final float dividerSpace = dividerCount * mDividerWidth;
-        final float unitWidth = (getWidth() - dividerSpace) / (float) mTrapezoidCount;
-        final float startY = getHeight() - mDividerHeight;
-        final float trapezoidSlotOffset = mTrapezoidHOffset + mDividerWidth * 0.5f;
+        final float unitWidth = (width - dividerSpace) / (float) mTrapezoidCount;
+        final float bottomY = getHeight() - mIndent.bottom;
+        final float startY = bottomY - mDividerHeight;
+        final float trapezoidSlotOffset = mTrapezoidHOffset + mDividerWidth * .5f;
         // Draws each vertical dividers.
-        float startX = mDividerWidth * 0.5f;
+        float startX = mDividerWidth * .5f;
         for (int index = 0; index < dividerCount; index++) {
-            canvas.drawLine(startX, startY, startX, getHeight(), mDividerPaint);
+            canvas.drawLine(startX, startY, startX, bottomY, mDividerPaint);
             final float nextX = startX + mDividerWidth + unitWidth;
             // Updates the trapezoid slots for drawing.
             if (index < mTrapezoidSlot.length) {
@@ -221,8 +301,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             return;
         }
         final float trapezoidBottom =
-            getHeight() - mDividerHeight - mDividerWidth - mTrapezoidVOffset;
-        final float availableSpace = trapezoidBottom - mDividerWidth;
+            getHeight() - mIndent.bottom - mDividerHeight - mDividerWidth
+                - mTrapezoidVOffset;
+        final float availableSpace = trapezoidBottom - mDividerWidth * .5f - mIndent.top;
         final float unitHeight = availableSpace / 100f;
         // Draws all trapezoid shapes into the canvas.
         final Path trapezoidPath = new Path();
@@ -234,8 +315,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             // Configures the trapezoid paint color.
             mTrapezoidPaint.setColor(
                 mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
-                ? mTrapezoidSolidColor
-                : mTrapezoidColor);
+                    ? mTrapezoidSolidColor
+                    : mTrapezoidColor);
             final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
             final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);
             trapezoidPath.reset();

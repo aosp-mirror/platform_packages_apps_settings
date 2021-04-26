@@ -116,11 +116,11 @@
         android:title="@string/app_settings_link"
         settings:allowDividerAbove="true"/>
 
-    <com.android.settings.notification.app.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="desc"
         android:order="100"/>
 
-    <com.android.settings.notification.app.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="block_desc"
         android:order="110"
         settings:allowDividerAbove="false"/>

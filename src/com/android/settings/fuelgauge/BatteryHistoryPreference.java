@@ -100,6 +100,8 @@ public class BatteryHistoryPreference extends Preference {
         }
         if (mIsChartGraphEnabled) {
             mBatteryChartView = (BatteryChartView) view.findViewById(R.id.battery_chart);
+            mBatteryChartView.setCompanionTextView(
+                (TextView) view.findViewById(R.id.companion_text));
             if (mChartPreferenceController != null) {
                 mChartPreferenceController.setBatteryChartView(mBatteryChartView);
             }

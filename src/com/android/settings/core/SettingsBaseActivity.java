@@ -48,9 +48,8 @@ import com.android.settingslib.drawer.Tile;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +60,6 @@ public class SettingsBaseActivity extends FragmentActivity {
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
     private static final String DATA_SCHEME_PKG = "package";
-    private static final int TOOLBAR_MAX_LINE_NUMBER = 2;
 
     // Serves as a temporary list of tiles to ignore until we heard back from the PM that they
     // are disabled.
@@ -90,12 +88,14 @@ public class SettingsBaseActivity extends FragmentActivity {
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
         final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
-            setTheme(R.style.LightTheme_SubSettings_SetupWizard);
+            final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                    ? R.style.SubSettings_SetupWizard : R.style.SudThemeGlifV3_Light;
+            setTheme(appliedTheme);
         }
 
         if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)
                 && isToolbarEnabled() && !isAnySetupWizard) {
-            super.setContentView(R.layout.settings_collapsing_base_layout);
+            super.setContentView(R.layout.collapsing_toolbar_base_layout);
             mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         } else {
             super.setContentView(R.layout.settings_base_layout);
@@ -108,7 +108,6 @@ public class SettingsBaseActivity extends FragmentActivity {
             return;
         }
         setActionBar(toolbar);
-        initCollapsingToolbar();
 
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
@@ -201,55 +200,12 @@ public class SettingsBaseActivity extends FragmentActivity {
     /**
      * SubSetting page should show a toolbar by default. If the page wouldn't show a toolbar,
      * override this method and return false value.
+     *
      * @return ture by default
      */
     protected boolean isToolbarEnabled() {
         return true;
     }
-
-    private void initCollapsingToolbar() {
-        if (mCollapsingToolbarLayout == null) {
-            return;
-        }
-        mCollapsingToolbarLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom,
-                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                v.removeOnLayoutChangeListener(this);
-                final int count = getLineCount();
-                if (count > TOOLBAR_MAX_LINE_NUMBER) {
-                    ViewGroup.LayoutParams lp = mCollapsingToolbarLayout.getLayoutParams();
-                    lp.height = getResources()
-                            .getDimensionPixelSize(R.dimen.toolbar_three_lines_height);
-                    mCollapsingToolbarLayout.setLayoutParams(lp);
-                } else if (count == TOOLBAR_MAX_LINE_NUMBER) {
-                    ViewGroup.LayoutParams lp = mCollapsingToolbarLayout.getLayoutParams();
-                    lp.height =
-                            getResources().getDimensionPixelSize(R.dimen.toolbar_two_lines_height);
-                    mCollapsingToolbarLayout.setLayoutParams(lp);
-                }
-            }
-        });
-    }
-
-    private int getLineCount() {
-        try {
-            final Class<?> toolbarClazz = mCollapsingToolbarLayout.getClass();
-            final Field textHelperField = toolbarClazz.getDeclaredField("collapsingTextHelper");
-            textHelperField.setAccessible(true);
-            final Object textHelperObj = textHelperField.get(mCollapsingToolbarLayout);
-
-            final Field layoutField = textHelperObj.getClass().getDeclaredField("textLayout");
-            layoutField.setAccessible(true);
-            final Object layoutObj = layoutField.get(textHelperObj);
-
-            final Method method = layoutObj.getClass().getDeclaredMethod("getLineCount");
-            return (int) method.invoke(layoutObj);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
 
     private void onCategoriesChanged(Set<String> categories) {
         final int N = mCategoryListeners.size();

@@ -38,6 +38,7 @@ public class ExpandDividerPreference extends Preference {
     private OnExpandListener mOnExpandListener;
 
     private boolean mIsExpanded = false;
+    private String mTitleContent = null;
 
     /** A callback listener for expand state is changed by users. */
     public interface OnExpandListener {
@@ -71,9 +72,11 @@ public class ExpandDividerPreference extends Preference {
         }
     }
 
-    void setTitle(String titleContent) {
+    void setTitle(final String titleContent) {
+        mTitleContent = titleContent;
         if (mTextView != null) {
-            mTextView.setText(titleContent);
+            mTextView.postDelayed(
+                () -> mTextView.setText(titleContent), 50);
         }
     }
 
@@ -94,5 +97,6 @@ public class ExpandDividerPreference extends Preference {
         if (mImageView != null) {
             mImageView.setImageResource(iconId);
         }
+        setTitle(mTitleContent);
     }
 }

@@ -48,6 +48,7 @@ import android.service.notification.NotifyingApp;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -80,6 +81,9 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private PreferenceCategory mCategory;
+    private PrimarySwitchPreference mApp1;
+    private PrimarySwitchPreference mApp2;
+    private PrimarySwitchPreference mApp3;
     @Mock
     private Preference mSeeAllPref;
     @Mock
@@ -115,6 +119,15 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         mController = new RecentNotifyingAppsPreferenceController(
                 mContext, mBackend, mIUsageStatsManager, mUserManager, mAppState, mHost);
         when(mScreen.findPreference(anyString())).thenReturn(mCategory);
+        mApp1 = new PrimarySwitchPreference(mContext);
+        mApp1.setKey("app1");
+        mApp2 = new PrimarySwitchPreference(mContext);
+        mApp2.setKey("app2");
+        mApp3 = new PrimarySwitchPreference(mContext);
+        mApp3.setKey("app3");
+        when(mCategory.findPreference("app1")).thenReturn(mApp1);
+        when(mCategory.findPreference("app2")).thenReturn(mApp2);
+        when(mCategory.findPreference("app3")).thenReturn(mApp3);
 
         when(mScreen.findPreference(RecentNotifyingAppsPreferenceController.KEY_SEE_ALL))
                 .thenReturn(mSeeAllPref);
@@ -169,12 +182,18 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         app2.mPackage = "pkg.class2";
         app2.mTimeStamp = System.currentTimeMillis() - 1000;
         events.add(app2);
+        ApplicationsState.AppEntry app1Entry = mock(ApplicationsState.AppEntry.class);
+        ApplicationsState.AppEntry app2Entry = mock(ApplicationsState.AppEntry.class);
+        app1Entry.info = mApplicationInfo;
+        app1Entry.label = "app 1";
+        app2Entry.info = mApplicationInfo;
+        app2Entry.label = "app 2";
 
         // app1, app2 are valid apps. app3 is invalid.
         when(mAppState.getEntry(app.getPackageName(), UserHandle.myUserId()))
-                .thenReturn(mAppEntry);
+                .thenReturn(app1Entry);
         when(mAppState.getEntry(app1.getPackageName(), UserHandle.myUserId()))
-                .thenReturn(mAppEntry);
+                .thenReturn(app2Entry);
         when(mAppState.getEntry(app2.getPackageName(), UserHandle.myUserId()))
                 .thenReturn(null);
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
@@ -192,7 +211,10 @@ public class RecentNotifyingAppsPreferenceControllerTest {
 
         verify(mCategory).setTitle(R.string.recent_notifications);
         // Only add app1 & app2. app3 skipped because it's invalid app.
-        verify(mCategory, times(2)).addPreference(any(Preference.class));
+        assertThat(mApp1.getTitle()).isEqualTo(app1Entry.label);
+        assertThat(mApp2.getTitle()).isEqualTo(app2Entry.label);
+
+        verify(mCategory).removePreferenceRecursively(mApp3.getKey());
 
         verify(mSeeAllPref).setSummary(null);
         verify(mSeeAllPref).setIcon(R.drawable.ic_chevron_right_24dp);
@@ -209,22 +231,24 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         Event app1 = new Event();
         app1.mEventType = Event.NOTIFICATION_INTERRUPTION;
         app1.mPackage = "com.foo.barinstant";
-        app1.mTimeStamp = System.currentTimeMillis() + 200;
+        app1.mTimeStamp = System.currentTimeMillis() - 200;
         events.add(app1);
         UsageEvents usageEvents = getUsageEvents(
                 new String[] {"com.foo.bar", "com.foo.barinstant"}, events);
         when(mIUsageStatsManager.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
                 .thenReturn(usageEvents);
 
+        ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
         ApplicationsState.AppEntry app1Entry = mock(ApplicationsState.AppEntry.class);
-        ApplicationsState.AppEntry app2Entry = mock(ApplicationsState.AppEntry.class);
+        appEntry.info = mApplicationInfo;
+        appEntry.label = "app 1";
         app1Entry.info = mApplicationInfo;
-        app2Entry.info = mApplicationInfo;
+        app1Entry.label = "app 2";
 
         when(mAppState.getEntry(
-                app.getPackageName(), UserHandle.myUserId())).thenReturn(app1Entry);
+                app.getPackageName(), UserHandle.myUserId())).thenReturn(appEntry);
         when(mAppState.getEntry(
-                app1.getPackageName(), UserHandle.myUserId())).thenReturn(app2Entry);
+                app1.getPackageName(), UserHandle.myUserId())).thenReturn(app1Entry);
 
         // Only the regular app app1 should have its intent resolve.
         when(mPackageManager.resolveActivity(argThat(intentMatcher(app.getPackageName())),
@@ -233,7 +257,7 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         // Make sure app2 is considered an instant app.
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (ApplicationInfo info) -> {
-                    if (info == app2Entry.info) {
+                    if (info == app1Entry.info) {
                         return true;
                     } else {
                         return false;
@@ -242,15 +266,10 @@ public class RecentNotifyingAppsPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(mCategory, times(2)).addPreference(prefCaptor.capture());
-        List<Preference> prefs = prefCaptor.getAllValues();
-        assertThat(prefs.get(1).getKey()).isEqualTo(
-                RecentNotifyingAppsPreferenceController.getKey(UserHandle.myUserId(),
-                        app.getPackageName()));
-        assertThat(prefs.get(0).getKey()).isEqualTo(
-                RecentNotifyingAppsPreferenceController.getKey(UserHandle.myUserId(),
-                        app1.getPackageName()));
+        assertThat(mApp1.getTitle()).isEqualTo(appEntry.label);
+        assertThat(mApp2.getTitle()).isEqualTo(app1Entry.label);
+
+        verify(mCategory).removePreferenceRecursively(mApp3.getKey());
     }
 
     @Test
@@ -274,7 +293,7 @@ public class RecentNotifyingAppsPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mCategory).addPreference(argThat(summaryMatches("Just now")));
+        assertThat(mApp1.getSummary()).isEqualTo("Just now");
     }
 
     @Test
