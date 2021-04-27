@@ -29,6 +29,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Process;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -315,16 +317,26 @@ public class RequestPermissionActivity extends Activity implements
             }
         } else {
             Log.e(TAG, "Error: this activity may be started only with intent "
-                    + BluetoothAdapter.ACTION_REQUEST_ENABLE + " or "
+                    + BluetoothAdapter.ACTION_REQUEST_ENABLE + ", "
+                    + BluetoothAdapter.ACTION_REQUEST_DISABLE + " or "
                     + BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
             setResult(RESULT_CANCELED);
             return true;
         }
 
-        String packageName = getCallingPackage();
-        if (TextUtils.isEmpty(packageName)) {
+        String packageName = getLaunchedFromPackage();
+        int mCallingUid = getLaunchedFromUid();
+
+        if (UserHandle.isSameApp(mCallingUid, Process.SYSTEM_UID)
+                && getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME) != null) {
             packageName = getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME);
         }
+
+        if (!UserHandle.isSameApp(mCallingUid, Process.SYSTEM_UID)
+                && getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME) != null) {
+            Log.w(TAG, "Non-system Uid: " + mCallingUid + " tried to override packageName \n");
+        }
+
         if (!TextUtils.isEmpty(packageName)) {
             try {
                 ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(
