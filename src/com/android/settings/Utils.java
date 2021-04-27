@@ -48,6 +48,7 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -94,6 +95,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
@@ -111,6 +113,7 @@ import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
+import com.android.settingslib.widget.AdaptiveIcon;
 
 import java.util.Iterator;
 import java.util.List;
@@ -967,15 +970,36 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Sets the preference icon with a drawable that is scaled down to to avoid crashing Settings if
-     * it's too big.
+     * Gets the adaptive icon with a drawable that wrapped with an adaptive background using {@code
+     * backgroundColor} if it is not a {@link AdaptiveIconDrawable}
+     *
+     * If the given {@code icon} is too big, it will be auto scaled down to to avoid crashing
+     * Settings.
      */
-    public static void setSafeIcon(Preference pref, Drawable icon) {
+    public static Drawable getAdaptiveIcon(Context context, Drawable icon,
+            @ColorInt int backgroundColor) {
+        Drawable adaptiveIcon = getSafeIcon(icon);
+
+        if (!(adaptiveIcon instanceof AdaptiveIconDrawable)) {
+            adaptiveIcon = new AdaptiveIcon(context, adaptiveIcon);
+            ((AdaptiveIcon) adaptiveIcon).setBackgroundColor(backgroundColor);
+        }
+
+        return adaptiveIcon;
+    }
+
+    /**
+     * Gets the icon with a drawable that is scaled down to to avoid crashing Settings if it's too
+     * big and not a {@link VectorDrawable}.
+     */
+    public static Drawable getSafeIcon(Drawable icon) {
         Drawable safeIcon = icon;
+
         if ((icon != null) && !(icon instanceof VectorDrawable)) {
             safeIcon = getSafeDrawable(icon, 500, 500);
         }
-        pref.setIcon(safeIcon);
+
+        return safeIcon;
     }
 
     /**
@@ -985,7 +1009,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param maxWidth maximum width, in pixels.
      * @param maxHeight maximum height, in pixels.
      */
-    public static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
+    private static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
         final int actualWidth = original.getMinimumWidth();
         final int actualHeight = original.getMinimumHeight();
 

@@ -66,7 +66,7 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
         }
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             preference.setSummary(defaultAppLabel);
-            Utils.setSafeIcon(preference, getDefaultAppIcon());
+            preference.setIcon(Utils.getSafeIcon(getDefaultAppIcon()));
         } else {
             Log.d(TAG, "No default app");
             preference.setSummary(R.string.app_list_preference_none);
