@@ -43,6 +43,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     // For drawing the percentage information.
     private static final String[] PERCENTAGES = new String[] {"100%", "50%", "0%"};
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
+    private static final int DEFAULT_TIMESTAMP_COUNT = 4;
     /** Selects all trapezoid shapes. */
     public static final int SELECTED_INDEX_ALL = -1;
     public static final int SELECTED_INDEX_INVALID = -2;
@@ -65,14 +66,19 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     // For drawing the percentage information.
     private int mTextPadding;
     private final Rect mIndent = new Rect();
-    private final Rect[] mPercentageBound =
+    private final Rect[] mPercentageBounds =
         new Rect[] {new Rect(), new Rect(), new Rect()};
+    // For drawing the timestamp information.
+    private String[] mTimestamps;
+    private final Rect[] mTimestampsBounds =
+        new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
+
 
     private int[] mLevels;
     private Paint mTextPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
-    private TrapezoidSlot[] mTrapezoidSlot;
+    private TrapezoidSlot[] mTrapezoidSlots;
     // Records the location to calculate selected index.
     private MotionEvent mTouchUpEvent;
     private BatteryChartView.OnSelectListener mOnSelectListener;
@@ -95,10 +101,10 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public void setTrapezoidCount(int trapezoidCount) {
         Log.i(TAG, "trapezoidCount:" + trapezoidCount);
         mTrapezoidCount = trapezoidCount;
-        mTrapezoidSlot = new TrapezoidSlot[trapezoidCount];
+        mTrapezoidSlots = new TrapezoidSlot[trapezoidCount];
         // Allocates the trapezoid slot array.
         for (int index = 0; index < trapezoidCount; index++) {
-            mTrapezoidSlot[index] = new TrapezoidSlot();
+            mTrapezoidSlots[index] = new TrapezoidSlot();
         }
         invalidate();
     }
@@ -140,7 +146,6 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     /** Sets the companion {@link TextView} for percentage information. */
     public void setCompanionTextView(TextView textView) {
-        requestLayout();
         if (textView != null) {
             // Pre-draws the view first to load style atttributions into paint.
             textView.draw(new Canvas());
@@ -148,6 +153,17 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         } else {
             mTextPaint = null;
         }
+        requestLayout();
+    }
+
+    /** Sets timestamps for drawing into x-axis information. */
+    public void setTimestamps(String[] timestamps) {
+        mTimestamps = timestamps;
+        if (timestamps != null
+                && timestamps.length != DEFAULT_TIMESTAMP_COUNT) {
+            mTimestamps = null;
+        }
+        requestLayout();
     }
 
     @Override
@@ -158,12 +174,22 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             for (int index = 0; index < PERCENTAGES.length; index++) {
                 mTextPaint.getTextBounds(
                     PERCENTAGES[index], 0, PERCENTAGES[index].length(),
-                    mPercentageBound[index]);
+                    mPercentageBounds[index]);
             }
             // Updates the indent configurations.
-            mIndent.top = mPercentageBound[0].height();
-            mIndent.right = mPercentageBound[0].width() + mTextPadding * 2;
-            Log.d(TAG, "setIndent:" + mPercentageBound[0]);
+            mIndent.top = mPercentageBounds[0].height();
+            mIndent.right = mPercentageBounds[0].width() + mTextPadding;
+
+            if (mTimestamps != null) {
+                for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
+                    mTextPaint.getTextBounds(
+                        mTimestamps[index], 0, mTimestamps[index].length(),
+                        mTimestampsBounds[index]);
+                }
+                mIndent.bottom = mTimestampsBounds[0].height()
+                    + round(mTextPadding * 1.5f);
+            }
+            Log.d(TAG, "setIndent:" + mPercentageBounds[0]);
         } else {
             mIndent.set(0, 0, 0, 0);
         }
@@ -245,31 +271,28 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         // Draws the top divider line for 100% curve.
         float offsetY = mIndent.top + mDividerWidth * .5f;
         canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
-        if (mTextPaint != null) {
-            canvas.drawText(
-                PERCENTAGES[0],
-                getWidth() - mPercentageBound[0].width(),
-                offsetY + mPercentageBound[0].height() *.5f , mTextPaint);
-        }
+        drawPercentage(canvas, /*index=*/ 0, offsetY);
+
         // Draws the center divider line for 50% curve.
         final float availableSpace =
             height - mDividerWidth * 2 - mTrapezoidVOffset - mDividerHeight;
         offsetY = mIndent.top + mDividerWidth + availableSpace * .5f;
         canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
-        if (mTextPaint != null) {
-            canvas.drawText(
-                PERCENTAGES[1],
-                    getWidth() - mPercentageBound[1].width(),
-                    offsetY + mPercentageBound[1].height() *.5f , mTextPaint);
-        }
+        drawPercentage(canvas, /*index=*/ 1, offsetY);
+
         // Draws the bottom divider line for 0% curve.
         offsetY = mIndent.top + (height - mDividerHeight - mDividerWidth * .5f);
         canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
+        drawPercentage(canvas, /*index=*/ 2, offsetY);
+    }
+
+    private void drawPercentage(Canvas canvas, int index, float offsetY) {
         if (mTextPaint != null) {
             canvas.drawText(
-                PERCENTAGES[2],
-                getWidth() - mPercentageBound[2].width(),
-                offsetY + mPercentageBound[2].height() *.5f , mTextPaint);
+                PERCENTAGES[index],
+                getWidth() - mPercentageBounds[index].width() - mPercentageBounds[index].left,
+                offsetY + mPercentageBounds[index].height() *.5f,
+                mTextPaint);
         }
     }
 
@@ -287,12 +310,49 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             canvas.drawLine(startX, startY, startX, bottomY, mDividerPaint);
             final float nextX = startX + mDividerWidth + unitWidth;
             // Updates the trapezoid slots for drawing.
-            if (index < mTrapezoidSlot.length) {
-                mTrapezoidSlot[index].mLeft = round(startX + trapezoidSlotOffset);
-                mTrapezoidSlot[index].mRight = round(nextX - trapezoidSlotOffset);
+            if (index < mTrapezoidSlots.length) {
+                mTrapezoidSlots[index].mLeft = round(startX + trapezoidSlotOffset);
+                mTrapezoidSlots[index].mRight = round(nextX - trapezoidSlotOffset);
             }
             startX = nextX;
         }
+        // Draws the timestamp slot information.
+        if (mTimestamps != null) {
+            final float[] xOffsets = new float[DEFAULT_TIMESTAMP_COUNT];
+            final float baselineX = mDividerWidth * .5f;
+            final float offsetX = mDividerWidth + unitWidth;
+            for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
+                xOffsets[index] = baselineX + index * offsetX * 4;
+            }
+            drawTimestamp(canvas, xOffsets);
+        }
+    }
+
+    private void drawTimestamp(Canvas canvas, float[] xOffsets) {
+        // Draws the 1st timestamp info.
+        canvas.drawText(
+            mTimestamps[0],
+            xOffsets[0] - mTimestampsBounds[0].left,
+            getTimestampY(0), mTextPaint);
+        // Draws the last timestamp info.
+        canvas.drawText(
+            mTimestamps[3],
+            xOffsets[3] - mTimestampsBounds[3].width() - mTimestampsBounds[3].left,
+            getTimestampY(3), mTextPaint);
+        // Draws the rest of timestamp info since it is located in the center.
+        for (int index = 1; index <= 2; index++) {
+            canvas.drawText(
+                mTimestamps[index],
+                xOffsets[index] -
+                    (mTimestampsBounds[index].width() - mTimestampsBounds[index].left) * .5f,
+                getTimestampY(index), mTextPaint);
+
+        }
+    }
+
+    private int getTimestampY(int index) {
+        return getHeight() - mTimestampsBounds[index].height()
+                -  mTimestampsBounds[index].top;
     }
 
     private void drawTrapezoids(Canvas canvas) {
@@ -320,13 +380,13 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
             final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);
             trapezoidPath.reset();
-            trapezoidPath.moveTo(mTrapezoidSlot[index].mLeft, trapezoidBottom);
-            trapezoidPath.lineTo(mTrapezoidSlot[index].mLeft, leftTop);
-            trapezoidPath.lineTo(mTrapezoidSlot[index].mRight, rightTop);
-            trapezoidPath.lineTo(mTrapezoidSlot[index].mRight, trapezoidBottom);
+            trapezoidPath.moveTo(mTrapezoidSlots[index].mLeft, trapezoidBottom);
+            trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
+            trapezoidPath.lineTo(mTrapezoidSlots[index].mRight, rightTop);
+            trapezoidPath.lineTo(mTrapezoidSlots[index].mRight, trapezoidBottom);
             // A tricky way to make the trapezoid shape drawing the rounded corner.
-            trapezoidPath.lineTo(mTrapezoidSlot[index].mLeft, trapezoidBottom);
-            trapezoidPath.lineTo(mTrapezoidSlot[index].mLeft, leftTop);
+            trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, trapezoidBottom);
+            trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
             // Draws the trapezoid shape into canvas.
             canvas.drawPath(trapezoidPath, mTrapezoidPaint);
         }
@@ -334,8 +394,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     // Searches the corresponding trapezoid index from x location.
     private int getTrapezoidIndex(float x) {
-        for (int index = 0; index < mTrapezoidSlot.length; index++) {
-            final TrapezoidSlot slot = mTrapezoidSlot[index];
+        for (int index = 0; index < mTrapezoidSlots.length; index++) {
+            final TrapezoidSlot slot = mTrapezoidSlots[index];
             if (x >= slot.mLeft - mTrapezoidHOffset
                     && x <= slot.mRight + mTrapezoidHOffset) {
                 return index;
