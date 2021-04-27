@@ -324,6 +324,7 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Skärmlås, ansiktslås"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Skärmlås, fingeravtryck"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Skärmlås"</string>
+    <string name="security_dashboard_summary_biometric" msgid="4928445847817128025">"Skärmlås, biometriskt lås, appsäkerhet"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansikte har lagts till"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Konfigurera ansiktslås"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Ansiktslås"</string>
@@ -435,6 +436,13 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Gå någonstans med lägre belysning och försök igen"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Du har gjort det högsta tillåtna antalet försök"</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"Lås upp telefonen eller autentisera saker med ditt fingeravtryck, t.ex. när du loggar in i appar eller godkänner köp\n\n"<annotation id="url">"Läs mer"</annotation></string>
+    <string name="security_settings_biometric_preference_title" msgid="8579021470218500926">"Ansikts- och fingeravtryckslås"</string>
+    <string name="security_settings_biometric_preference_summary" msgid="3976239447833224813">"Ansikte och fingeravtryck"</string>
+    <string name="biometric_settings_intro" msgid="769040512190641961">"Om du konfigurerar ansiktslås och fingeravtryck blir du ombedd att använda fingeravtryck på telefonen när du har munskydd på dig eller om det är mörkt."</string>
+    <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Olika sätt att låsa upp"</string>
+    <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"Använd ansikte och fingeravtryck till följande"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Låsa upp telefonen"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Autentisering i appar"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vill du hoppa över skärmlås?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Enhetens skyddsfunktioner aktiveras inte. Du kan inte hindra andra från att använda surfplattan om den blir stulen, tappas bort eller återställs."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Enhetens skyddsfunktioner aktiveras inte. Du kan inte hindra andra från att använda enheten om den blir stulen, tappas bort eller återställs."</string>
@@ -1098,7 +1106,7 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="8476985132989357041">"Avvisa inbjudan?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"Vill du avvisa inbjudan att ansluta till <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"Vill du glömma den här gruppen?"</string>
-    <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Wi-Fi-surfzon"</string>
+    <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Wifi-surfzon"</string>
     <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Varken internet eller innehåll delas med andra enheter"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"Surfplattans internetanslutning delas via en surfzon"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"Mobilens internetanslutning delas via en surfzon"</string>
@@ -1119,9 +1127,9 @@
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Aktiverar surfzon ..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Surfzon inaktiveras ..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> är aktiv"</string>
-    <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"Fel på mobil Wi-Fi-surfzon"</string>
+    <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"Fel på mobil wifi-surfzon"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Konfigurera surfzon via Wi-Fi"</string>
-    <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"Installation för Wi-Fi-surfzon"</string>
+    <string name="wifi_hotspot_configure_ap_text" msgid="9027072969831022321">"Installation för wifi-surfzon"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"AndroidAP WPA2 PSK-surfzon"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"Vill du spara nätverket?"</string>
@@ -1780,7 +1788,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Tillåt att appar och tjänster söker efter Wi‑Fi-nätverk när som helst, även när Wi‑Fi är inaktiverat. Funktionen kan till exempel användas till att förbättra platsbaserade funktioner och tjänster."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-sökning"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Tillåt att appar och tjänster söker efter enheter i närheten när som helst, även när Bluetooth är inaktiverat. Funktionen kan till exempel användas till att förbättra platsbaserade funktioner och tjänster."</string>
-    <string name="location_services_preference_title" msgid="8572194688820064813">"Hantera Platstjänster"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"Platstjänster"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"Platstjänster"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Platstjänster för jobbet"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Ställ in tidszon utifrån plats"</string>
@@ -2447,6 +2455,25 @@
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Ingen tjänst har valts"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Ingen beskrivning har angetts."</string>
     <string name="settings_button" msgid="2195468788019730377">"Inställningar"</string>
+    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"ljuskänslighet, fotofobi, mörkt tema, migrän, huvudvärk, läsläge, nattläge, minska ljusstyrkan, vitpunkt"</string>
+    <string name="keywords_accessibility" msgid="4263443239404659143">"Användarvänlighet, enkel åtkomst, hjälp, stöd"</string>
+    <string name="keywords_magnification" msgid="3908145308269840862">"Fönsterförstoring, Zoom, Förstoring, Nedsatt syn, Förstora, göra större"</string>
+    <string name="keywords_talkback" msgid="5563641756576863139">"Skärmläsare, uppläsning, VoiceOver, Röstassistent, Blind, Nedsatt syn, TTS, text till tal, talad feedback"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"Textning, undertexter, undertextning, Transkribering, hörselskada, hörselnedsättning, CART, tal till text, undertext"</string>
+    <string name="keywords_live_transcribe" msgid="9139708749952089372">"Textning, undertexter, undertextning, Live Caption, hörselskada, hörselnedsättning, CART, tal till text, undertext"</string>
+    <string name="keywords_sound_notifications" msgid="4039008340786330887">"Aviseringar, hörselskada, hörselnedsättning, avisera"</string>
+    <string name="keywords_sound_amplifier" msgid="921848808218956694">"larmcentral, förstärk, ljudförstärkning, hörselskada, hörselnedsättning, förstärkning"</string>
+    <string name="keywords_display_size" msgid="5286419615221231518">"skärmstorlek, stor skärm"</string>
+    <string name="keywords_bold_text" msgid="6257418169207099589">"Hög kontrast, nedsatt syn, fetstil, fet text"</string>
+    <string name="keywords_select_to_speak" msgid="7701037476608073886">"Höra text, läsa högt, skärmuppläsning, skärmläsare"</string>
+    <string name="keywords_color_correction" msgid="8540442886990423681">"justera färg"</string>
+    <string name="keywords_color_inversion" msgid="4291058365873221962">"göra skärmen mörk, göra skärmen ljus"</string>
+    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"motorik, snabbmeny, stödmeny, pekgester, behändighet"</string>
+    <string name="keywords_switch_access" msgid="8016330125790412167">"motorik, brytare, AT, hjälpmedelsteknik, paralys, ALS, genomsökning, stegvis genomsökning"</string>
+    <string name="keywords_auto_click" msgid="7151756353013736931">"motorik, mus"</string>
+    <string name="keywords_hearing_aids" msgid="524979615168196199">"hörselskada, hörselnedsättning"</string>
+    <string name="keywords_rtt" msgid="2429130928152514402">"hörselskada, hörselnedsättning, textning, teleprinter, texttelefon"</string>
+    <string name="keywords_voice_access" msgid="4486056790014652334">"röst, röststyrning, motorik, hand, mickdiktering, mikrofon, prata, styra"</string>
     <string name="print_settings" msgid="8519810615863882491">"Utskrift"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Av"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -2699,30 +2726,18 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Sedan fulladdning"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Hantera batterianvändning"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunden under de senaste 24 timmarna"</string>
-    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
-    <skip />
-    <!-- no translation found for battery_total_usage (2662725472478185867) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
-    <skip />
-    <!-- no translation found for battery_background_usage (8375606680462132248) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
-    <skip />
-    <!-- no translation found for battery_not_usage (8417901856028909227) -->
-    <skip />
+    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> bakgrundsanvändning under perioden <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Mindre än en minuts användning totalt under de senaste 24 timmarna"</string>
+    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Mindre än en minuts användning totalt under perioden <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"Mindre än en minuts bakgrundsanvändning under de senaste 24 timmarna"</string>
+    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"Mindre än en minuts bakgrundsanvändning under perioden <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_total_usage" msgid="2662725472478185867">"<xliff:g id="TIME">^1</xliff:g> totalt under de senaste 24 timmarna"</string>
+    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> totalt under perioden <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_background_usage" msgid="8375606680462132248">"<xliff:g id="TIME">^1</xliff:g> bakgrundsanvändning under de senaste 24 timmarna"</string>
+    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_0">^1</xliff:g> bakgrundsanvändning under perioden <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"<xliff:g id="TIME">^1</xliff:g> totalt • Mindre än en minuts bakgrundsanvändning under de senaste 24 timmarna"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"<xliff:g id="TIME_0">^1</xliff:g> totalt • Mindre än en minuts bakgrundsanvändning under perioden <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_not_usage" msgid="8417901856028909227">"Ingen användning under de senaste 24 timmarna"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Uppskattad återstående batteritid baseras på enhetsanvändningen"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Beräknad återstående tid"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Tills fulladdad"</string>
@@ -2759,8 +2774,10 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Batterinivå för de senaste 24 timmarna"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Appanvändning för de senaste 24 timmarna"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Systemanvändning för de senaste 24 timmarna"</string>
-    <string name="battery_system_usage_for" msgid="158304136130870726">"Systemanvändning för"</string>
-    <string name="battery_app_usage_for" msgid="929971425835809784">"Appanvändning för"</string>
+    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
+    <skip />
     <string name="battery_usage_time_am" msgid="7783773965475697655">"am"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"pm"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Totalt: mindre än en minut"</string>
@@ -3397,7 +3414,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, samtal, ringer"</string>
     <string name="keywords_display" msgid="874738809280751745">"skärm, pekskärm"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"tona ned skärm, pekskärm, batteri, ljus"</string>
-    <string name="keywords_display_night_display" msgid="4711054330804250058">"tona ned skärm, natt, ton, nattskift, ljusstyrka, skärmfärg, färg, färger"</string>
+    <string name="keywords_display_night_display" msgid="1132588285544830670">"tona ned skärm, natt, ton, nattskift, ljusstyrka, skärmfärg, färg, färger, ljuskänslighet, fotofobi, göra mörkare, mörkare, mörkt läge, migrän"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"bakgrund, anpassa, anpassa skärm,"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"textstorlek"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"projekt, casta, skärmspegling, skärmdelning, spegling, dela skärm, casta skärmen"</string>
@@ -3435,6 +3452,7 @@
     <string name="keywords_backup" msgid="707735920706667685">"säkerhetskopia, säkerhets kopia"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"rörelse"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"ansikte, upplåsning, auktorisering, inloggning"</string>
+    <string name="keywords_biometric_unlock" msgid="8569545388717753692">"ansikte, låsa upp, auktorisera, logga in, fingeravtryck, biometri"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei-kod, meid, min, prl-version, imei-kod sv"</string>
     <string name="keywords_sim_status" msgid="8784456547742075508">"nätverk, status för mobilt nätverk, status för tjänst, signalstyrka, mobilt nätverkstyp, roaming, iccid-nummer, eid-nummer"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serienummer, maskinvaruversion"</string>
@@ -3446,6 +3464,7 @@
     <string name="keywords_lock_screen_notif" msgid="6363144436467429932">"avisering på låsskärmen, aviseringar"</string>
     <string name="keywords_face_settings" msgid="1360447094486865058">"ansikte"</string>
     <string name="keywords_fingerprint_settings" msgid="7345121109302813358">"fingeravtryck, lägg till fingeravtryck"</string>
+    <string name="keywords_biometric_settings" msgid="2173605297939326549">"ansikte, fingeravtryck, lägga till fingeravtryck"</string>
     <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"nedtonad skärm, pekskärm, batteri, intelligent ljusstyrka, dynamisk ljusstyrka, automatisk ljusstyrka"</string>
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"smart, tona ned skärmen, viloläge, batteri, tidsgräns, avkänning, skärm, inaktiv"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"kamera, smart, rotera automatiskt, automatisk rotation, rotera, vänd, rotering, stående, liggande, riktning, vertikal, horisontell"</string>
@@ -3467,8 +3486,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutin, schema, batterisparläge, energisparläge, batteri, automatiskt, procent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, avancerade samtal, 4g-samtal"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"lägg till språk, lägg till ett språk"</string>
-    <string name="keywords_font_size" msgid="336803136451166298">"textstorlek"</string>
-    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"ljuskänslighet, fotofobi, mörkt tema, migrän, huvudvärk, läsläge, nattläge, minska ljusstyrkan, vitpunkt"</string>
+    <string name="keywords_font_size" msgid="1643198841815006447">"textstorlek, stora tecken, stort teckensnitt, stor text, nedsatt syn, göra texten större, teckenförstoring, förstora teckensnitt"</string>
     <string name="default_sound" msgid="6604374495015245195">"Standardsignal"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Volymen för samtal och aviseringar är inställd på <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volym, vibrera, stör ej"</string>
@@ -3788,7 +3806,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Inga installerade appar har begärt åtkomst till aviseringar"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Tillåt åtkomst till aviseringar"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"Förbättrade aviseringar kan läsa allt innehåll i aviseringar, inklusive personliga uppgifter som namn på kontakter och meddelanden. Funktionen kan även stänga aviseringar eller använda åtgärdsknappar i aviseringar, till exempel för att svara på telefonsamtal. \n\nFunktionen kan även aktivera och inaktivera prioritetsläget och ändra tillhörande inställningar."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="1178404462834047009">"Förbättrade aviseringar har ersatt Anpassade aviseringar för Android i Android 12. Den här funktionen visar förslag på åtgärder och svar och organiserar dina aviseringar. \n\nFörbättrade aviseringar har åtkomst till allt innehåll i aviseringar, inklusive personliga uppgifter som namn på kontakter och meddelanden. Funktionen kan även ignorera aviseringar eller utföra åtgärder utifrån dem, till exempel svara på telefonsamtal och styra Stör ej."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan läsa alla aviseringar, inklusive personliga uppgifter som namn på kontaktpersoner och texten i mottagna meddelanden. Appen kan även stänga aviseringar eller använda åtgärdsknappar i aviseringar för att t.ex. svara på telefonsamtal. \n\nAppen kan också aktivera eller inaktivera Stör ej och ändra relaterade inställningar."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Om du inaktiverar aviseringsåtkomst för <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan åtkomsten till Stör ej också inaktiveras."</string>
@@ -3803,10 +3821,8 @@
     <string name="notif_type_alerting_summary" msgid="6823969073567000728">"Aviseringar som låter eller vibrerar beroende på inställningarna"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Ljudlöst"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Aviseringar som aldrig låter eller vibrerar"</string>
-    <!-- no translation found for notification_listener_allowed (5536962633536318551) -->
-    <skip />
-    <!-- no translation found for notification_listener_not_allowed (3352962779597846538) -->
-    <skip />
+    <string name="notification_listener_allowed" msgid="5536962633536318551">"Tillåts"</string>
+    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Tillåts inte"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Visa alla appar"</string>
     <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"Ändra aviseringsinställningarna för varje app som kan skicka aviseringar"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Appar som visas på enheten"</string>
@@ -4940,7 +4956,7 @@
     <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"Inställningen är inte tillgänglig"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Konto"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Enhetens namn"</string>
-    <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi-styrning"</string>
+    <string name="change_wifi_state_title" msgid="5629648102837821525">"Wifi-styrning"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Tillåt appen att styra Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Ge den här appen behörighet att aktivera och inaktivera Wi-Fi, söka efter och ansluta till Wi-Fi-nätverk, lägga till och ta bort nätverk samt starta en lokal surfzon"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Spela upp media på"</string>
@@ -4971,7 +4987,7 @@
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibration"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Ljud av"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Nätverksinformation"</string>
-    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Enhetens namn är synligt för appar i mobilen. Det kan också vara synligt för andra personer när du ansluter till Bluetooth-enheter eller ett Wi-Fi-nätverk, eller om du skapar en Wi-Fi-surfzon."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Enhetens namn är synligt för appar i mobilen. Det kan också vara synligt för andra personer när du ansluter till Bluetooth-enheter eller ett Wi-Fi-nätverk, eller om du skapar en wifi-surfzon."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheter"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Alla inställningar"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Förslag"</string>
@@ -5319,12 +5335,9 @@
     <string name="networks_available" msgid="3299512933684383474">"Nätverk är tillgängliga"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Koppla bort Ethernet för att byta nätverk"</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"Wi-Fi är aktiverat"</string>
-    <!-- no translation found for carrier_wifi_offload_title (7263365988016247722) -->
-    <skip />
-    <!-- no translation found for carrier_wifi_offload_summary (2980563718888371142) -->
-    <skip />
-    <!-- no translation found for carrier_wifi_network_title (5461382943873831770) -->
-    <skip />
+    <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+-anslutningar"</string>
+    <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Tillåt att W+-nätverk används för att förbättra hastigheten och täckningen för Google Fi"</string>
+    <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+-nätverk"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Ansluten"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Ingen anslutning"</string>
@@ -5350,7 +5363,7 @@
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Använd mörkt tema"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Använd Bluetooth"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Använd inaktivera ringsignal"</string>
-    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Använd Wi-Fi-surfzon"</string>
+    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Använd wifi-surfzon"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Använd fästa appar"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Använd utvecklaralternativ"</string>
     <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Använd standardtjänst för utskrift"</string>
@@ -5384,10 +5397,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Visa ett meddelande när appar får åtkomst till text, bilder eller annat som du har kopierat"</string>
     <string name="all_apps" msgid="3054120149509114789">"Alla appar"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Tillåt inte"</string>
-    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
-    <skip />
+    <string name="uwb_settings_title" msgid="2292158556760642919">"Ultra Wideband (UWB)"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"Hjälper till att identifiera den relativa positionen för enheter i närheten som har UWB"</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"Inaktivera flygplansläge för att använda UWB."</string>
 </resources>
