@@ -52,8 +52,6 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     @VisibleForTesting
     private final BroadcastReceiver mAirplaneModeChangedReceiver;
     private final Executor mExecutor;
-    private boolean mIsChecked = true;
-    boolean mRegisteredAdapterStateCallback = false;
     private Preference mPreference;
 
     public UwbPreferenceController(Context context, String key) {
@@ -94,26 +92,26 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
 
     @Override
     public boolean isChecked() {
-        //TODO(b/186075119): Update toggle state by assigning to the real value by default.
-        return mIsChecked;
+        int state = mUwbManager.getAdapterState();
+        return state == STATE_ENABLED_ACTIVE || state == STATE_ENABLED_INACTIVE;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mIsChecked = isChecked;
-        mUwbManager.setUwbEnabled(isChecked);
+        mAirplaneModeOn = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
+        if (isUwbSupportedOnDevice()) {
+            if (mAirplaneModeOn) {
+                mUwbManager.setUwbEnabled(false);
+            } else {
+                mUwbManager.setUwbEnabled(isChecked);
+            }
+        }
         return true;
     }
 
     @Override
     public void onStateChanged(int state, int reason) {
-        // Only update toggle state from service the first time. Otherwise toggle state is
-        // changed from controller. For example, UWB is disabled if airplane mode is on but we do
-        // not want to change the preference for the user in this case.
-        if (!mRegisteredAdapterStateCallback) {
-            mIsChecked = state == STATE_ENABLED_ACTIVE || state == STATE_ENABLED_INACTIVE;
-            mRegisteredAdapterStateCallback = true;
-        }
     }
 
     /** Called when activity starts being displayed to user. */
@@ -143,16 +141,7 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        mAirplaneModeOn = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
         preference.setEnabled(!mAirplaneModeOn);
-        if (isUwbSupportedOnDevice()) {
-            if (mAirplaneModeOn) {
-                mUwbManager.setUwbEnabled(false);
-            } else {
-                mUwbManager.setUwbEnabled(mIsChecked);
-            }
-        }
         refreshSummary(preference);
     }
 
