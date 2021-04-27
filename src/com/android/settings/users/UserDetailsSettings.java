@@ -206,7 +206,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
-                        mUserInfo.name));
+                        UserSettings.getUserName(context, mUserInfo)));
 
         if (mUserCaps.mDisallowSwitchUser) {
             mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
