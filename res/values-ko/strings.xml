@@ -324,6 +324,7 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"화면 잠금, 얼굴인식 잠금해제"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"화면 잠금, 지문"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"화면 잠금"</string>
+    <string name="security_dashboard_summary_biometric" msgid="4928445847817128025">"화면 잠금, 생체 인식 잠금 해제, 앱 보안"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"얼굴 추가 완료"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"얼굴인식 잠금해제 설정"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"얼굴인식 잠금해제"</string>
@@ -435,6 +436,13 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"조명이 좀 더 부드러운 곳으로 옮겨서 다시 시도하세요."</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"최대 시도 가능 횟수에 도달했습니다."</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"앱 로그인 또는 구매 승인과 같이 인증이 필요하거나 휴대전화를 잠금 해제할 때 지문을 사용하세요.\n\n"<annotation id="url">"자세히 알아보기"</annotation></string>
+    <string name="security_settings_biometric_preference_title" msgid="8579021470218500926">"얼굴 및 지문 잠금 해제"</string>
+    <string name="security_settings_biometric_preference_summary" msgid="3976239447833224813">"얼굴 및 지문 인식"</string>
+    <string name="biometric_settings_intro" msgid="769040512190641961">"얼굴 및 지문 인식을 통한 잠금 해제를 설정하면 마스크를 쓰고 있거나 어두운 곳에 있을 때 휴대전화가 지문을 요청합니다."</string>
+    <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"잠금 해제 방법"</string>
+    <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"얼굴 또는 지문 인식 사용"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"휴대전화 잠금 해제"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"앱 내 인증"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"화면 잠금 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"기기 보호 기능이 사용 설정되지 않습니다. 분실, 도난 또는 재설정되었을 때 다른 사람이 이 태블릿을 사용하는 것을 방지할 수 없습니다."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"기기 보호 기능이 사용 설정되지 않습니다. 분실, 도난 또는 재설정되었을 때 다른 사람이 이 기기를 사용하는 것을 방지할 수 없습니다."</string>
@@ -1780,7 +1788,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Wi‑Fi가 꺼져 있을 때도 항상 앱과 서비스에서 Wi-Fi 네트워크를 검색하도록 허용합니다. 이 설정은 위치 기반 기능 및 서비스 개선 등에 사용될 수 있습니다."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"블루투스 검색"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"블루투스가 꺼져 있을 때도 항상 앱과 서비스에서 주변 기기를 검색하도록 허용합니다. 이 설정은 위치 기반 기능 및 서비스 개선 등에 사용될 수 있습니다."</string>
-    <string name="location_services_preference_title" msgid="8572194688820064813">"위치 서비스 관리"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"위치 서비스"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"위치 서비스"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"업무용 위치 서비스"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"위치 정보를 사용하여 시간대 설정"</string>
@@ -2447,6 +2455,25 @@
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"선택된 서비스 없음"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"제공된 설명이 없습니다."</string>
     <string name="settings_button" msgid="2195468788019730377">"설정"</string>
+    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"광과민성, 광선공포증, 어두운 테마, 편두통, 두통, 읽기 모드, 야간 모드, 밝기 낮추기, 화이트 포인트"</string>
+    <string name="keywords_accessibility" msgid="4263443239404659143">"사용 편의성, 접근 편의성, 지원, 보조"</string>
+    <string name="keywords_magnification" msgid="3908145308269840862">"창 돋보기, 확대/축소, 확대, 저시력, 크게, 화면 크게"</string>
+    <string name="keywords_talkback" msgid="5563641756576863139">"스크린 리더, 보이스오버, VoiceOver, 음성 보조, 시각장애, 저시력, TTS, 텍스트 음성 변환, 음성 피드백"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"캡션, 폐쇄 자막, CC, 음성 자막 변환, 난청, 청력 손실, CART, 음성 텍스트 변환, 자막"</string>
+    <string name="keywords_live_transcribe" msgid="9139708749952089372">"캡션, 폐쇄 자막, CC, 실시간 자막, 난청, 청력 손실, CART, 음성 텍스트 변환, 자막"</string>
+    <string name="keywords_sound_notifications" msgid="4039008340786330887">"알림, 난청, 청력 손실, 알림"</string>
+    <string name="keywords_sound_amplifier" msgid="921848808218956694">"PSAP, 증폭, 청각 보조 기능, 난청, 청력 손실, 증폭"</string>
+    <string name="keywords_display_size" msgid="5286419615221231518">"화면 크기, 큰 화면"</string>
+    <string name="keywords_bold_text" msgid="6257418169207099589">"고대비, 저시력, 굵은 글꼴, 굵은 글씨"</string>
+    <string name="keywords_select_to_speak" msgid="7701037476608073886">"텍스트 듣기, 소리 내 읽기, 화면 읽기, 스크린 리더"</string>
+    <string name="keywords_color_correction" msgid="8540442886990423681">"색상 조정"</string>
+    <string name="keywords_color_inversion" msgid="4291058365873221962">"화면 어둡게, 화면 밝게"</string>
+    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"거동, 빠른 메뉴, 보조 메뉴, 터치, 수동기민성"</string>
+    <string name="keywords_switch_access" msgid="8016330125790412167">"거동, 스위치, 손, AT, 보조 기술, 마비, ALS, 스캔, 단계 스캔"</string>
+    <string name="keywords_auto_click" msgid="7151756353013736931">"거동, 마우스"</string>
+    <string name="keywords_hearing_aids" msgid="524979615168196199">"난청, 청력 손실"</string>
+    <string name="keywords_rtt" msgid="2429130928152514402">"난청, 청력 손실, 캡션, 텔레타이프, tty"</string>
+    <string name="keywords_voice_access" msgid="4486056790014652334">"음성, 음성 제어, 거동, 손, 마이크, 받아쓰기, 말하기, 제어"</string>
     <string name="print_settings" msgid="8519810615863882491">"인쇄"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"사용 안함"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -2699,30 +2726,18 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"충전 완료 후"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"배터리 사용량 관리"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"총 <xliff:g id="TIME_0">^1</xliff:g> • 지난 24시간 동안 백그라운드에서 <xliff:g id="TIME_1">^2</xliff:g> 사용"</string>
-    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
-    <skip />
-    <!-- no translation found for battery_total_usage (2662725472478185867) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
-    <skip />
-    <!-- no translation found for battery_background_usage (8375606680462132248) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
-    <skip />
-    <!-- no translation found for battery_not_usage (8417901856028909227) -->
-    <skip />
+    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"총 사용 시간: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g>의 백그라운드 사용 시간: <xliff:g id="TIME_1">^2</xliff:g>"</string>
+    <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"지난 24시간 동안의 총 사용 시간: 1분 미만"</string>
+    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g>의 총 사용 시간: 1분 미만"</string>
+    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"지난 24시간 동안의 백그라운드 사용 시간: 1분 미만"</string>
+    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"<xliff:g id="TIME_PERIOD">^1</xliff:g>의 백그라운드 사용 시간: 1분 미만"</string>
+    <string name="battery_total_usage" msgid="2662725472478185867">"지난 24시간 동안의 총 사용 시간: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>의 총 사용 시간: <xliff:g id="TIME_0">^1</xliff:g>"</string>
+    <string name="battery_background_usage" msgid="8375606680462132248">"지난 24시간 동안의 백그라운드 사용 시간: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_PERIOD">^2</xliff:g>의 백그라운드 사용 시간: <xliff:g id="TIME_0">^1</xliff:g>"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"총 사용 시간: <xliff:g id="TIME">^1</xliff:g> • 지난 24시간 동안의 백그라운드 사용 시간: 1분 미만"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"총 사용 시간: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g> 동안의 백그라운드 사용 시간: 1분 미만"</string>
+    <string name="battery_not_usage" msgid="8417901856028909227">"지난 24시간 동안 사용 안함"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"예상 잔여 배터리 소모 시간은 기기 사용량을 기반으로 표시됩니다."</string>
     <string name="estimated_time_left" msgid="948717045180211777">"남은 예상 시간"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"충전 완료까지 남은 시간"</string>
@@ -2759,8 +2774,10 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"지난 24시간 동안의 배터리 잔량"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"지난 24시간 동안의 앱 사용량"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"지난 24시간 동안의 시스템 사용량"</string>
-    <string name="battery_system_usage_for" msgid="158304136130870726">"시스템 사용량:"</string>
-    <string name="battery_app_usage_for" msgid="929971425835809784">"앱 사용량:"</string>
+    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
+    <skip />
     <string name="battery_usage_time_am" msgid="7783773965475697655">"오전"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"오후"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"총 시간: 1분 미만"</string>
@@ -3397,7 +3414,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"WiFi, Wi-Fi, 전화, 통화"</string>
     <string name="keywords_display" msgid="874738809280751745">"화면, 터치스크린"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"화면 어둡게 하기, 터치스크린, 배터리, 밝음"</string>
-    <string name="keywords_display_night_display" msgid="4711054330804250058">"화면 어둡게 하기, 밤, 톤, 밤 시간대, 밝기, 화면 색상, 색상, 색"</string>
+    <string name="keywords_display_night_display" msgid="1132588285544830670">"화면 어둡게, 밤, 색조, 야간 모드, 밝기, 화면 색상, 색상, 색, 광과민성, 광선공포증, 밝기 낮추기, 어둡게, 어두운 모드, 편두통"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"백그라운드, 맞춤설정, 디스플레이 맞춤설정"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"텍스트 크기"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"프로젝트, 전송, 화면 미러링, 화면 공유, 미러링, 공유 화면, 화면 전송"</string>
@@ -3435,6 +3452,7 @@
     <string name="keywords_backup" msgid="707735920706667685">"백업, 백 업"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"동작"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"얼굴, 잠금 해제, 승인, 로그인"</string>
+    <string name="keywords_biometric_unlock" msgid="8569545388717753692">"얼굴, 잠금 해제, 인증, 로그인, 지문, 생체 인식"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"IMEI, MEID, MIN, PRL 버전, IMEI SV"</string>
     <string name="keywords_sim_status" msgid="8784456547742075508">"네트워크, 모바일 네트워크 상태, 서비스 상태, 신호 강도, 모바일 네트워크 유형, 로밍, ICCID, EID"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"일련번호, 하드웨어 버전"</string>
@@ -3446,6 +3464,7 @@
     <string name="keywords_lock_screen_notif" msgid="6363144436467429932">"잠금 화면 알림, 알림"</string>
     <string name="keywords_face_settings" msgid="1360447094486865058">"얼굴"</string>
     <string name="keywords_fingerprint_settings" msgid="7345121109302813358">"지문, 지문 추가"</string>
+    <string name="keywords_biometric_settings" msgid="2173605297939326549">"얼굴, 지문, 지문 추가"</string>
     <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"화면 어둡게 하기, 터치스크린, 배터리, 스마트 밝기, 동적 밝기, 자동 밝기"</string>
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"스마트, 화면 어둡게, 절전 모드, 배터리, 자동 잠금 시간, 시선 감지, 디스플레이, 화면, 활동 없음"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"카메라, 스마트, 자동 회전, 회전하기, 뒤집기, 회전, 세로, 가로, 방향, 수직, 수평"</string>
@@ -3467,8 +3486,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"루틴, 일정, 절전 모드, 전력 절약 모드, 배터리, 자동, 퍼센트"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, 고급 통화, 4G 통화"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"언어 추가, 언어 한 개 추가"</string>
-    <string name="keywords_font_size" msgid="336803136451166298">"텍스트 크기"</string>
-    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"광과민성, 광선공포증, 어두운 테마, 편두통, 두통, 읽기 모드, 야간 모드, 밝기 낮추기, 화이트 포인트"</string>
+    <string name="keywords_font_size" msgid="1643198841815006447">"텍스트 크기, 큰 글자, 큰 글꼴, 큰 텍스트, 저시력, 텍스트 크게, 텍스트 확대, 글꼴 확대"</string>
     <string name="default_sound" msgid="6604374495015245195">"기본 사운드"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"벨소리 및 알림 볼륨이 <xliff:g id="PERCENTAGE">%1$s</xliff:g>로 설정되었습니다."</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"볼륨, 진동, 방해 금지 모드"</string>
@@ -3788,7 +3806,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"설치된 앱 중에서 알림 액세스를 요청한 앱이 없습니다."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"알림 액세스 허용"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g>의 알림 액세스를 허용하시겠습니까?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"개선된 알림 기능은 연락처 이름과 메시지 등 개인 정보가 포함된 모든 알림 내용을 읽어줍니다. 알림을 닫거나 알림에 표시되는 버튼 관련 작업(예: 전화 받기)을 실행할 수도 있습니다. \n\n또한 이 기능으로 우선순위 모드가 사용 또는 사용 중지되고 관련 설정이 변경될 수 있습니다."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="1178404462834047009">"Android 12에서는 Android 적응형 알림이 개선된 알림으로 대체됩니다. 이 기능은 추천 작업과 답장을 표시하고 알림을 정리해 줍니다. \n\n개선된 알림은 연락처 이름과 메시지 등 개인 정보가 포함된 알림 내용에 액세스할 수 있습니다. 이 기능은 전화 받기와 방해 금지 모드 제어와 같이 알림을 닫거나 알림을 처리할 수도 있습니다."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>의 알림 액세스를 허용하시겠습니까?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>에서 연락처 이름과 수신 메시지 텍스트 등의 개인정보를 포함한 모든 알림을 읽을 수 있게 됩니다. 또한 이 앱에서 알림을 닫거나, 전화 받기를 비롯하여 알림에 표시되는 버튼 관련 작업을 실행할 수 있습니다. \n\n앱에서 방해 금지 모드를 사용 설정 또는 사용 중지하고 관련 설정을 변경할 수도 있습니다."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>에서 알림 액세스를 사용 중지하면 방해 금지 모드 액세스도 사용 중지됩니다."</string>
@@ -5379,10 +5397,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"앱이 복사된 텍스트, 이미지 또는 기타 콘텐츠에 액세스할 때 메시지를 표시합니다."</string>
     <string name="all_apps" msgid="3054120149509114789">"모든 앱"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"허용 안함"</string>
-    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
-    <skip />
+    <string name="uwb_settings_title" msgid="2292158556760642919">"초광대역(UWB)"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"UWB를 지원하는 근처 기기의 상대적인 위치를 파악할 수 있도록 돕습니다."</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"UWB를 사용하려면 비행기 모드를 사용 중지하세요."</string>
 </resources>

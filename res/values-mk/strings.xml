@@ -324,6 +324,7 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Заклучување екран, отклучување со лик"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Заклучување екран, отпечаток"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Заклучување екран"</string>
+    <string name="security_dashboard_summary_biometric" msgid="4928445847817128025">"заклучување екран, отклучување со биометрика, безбедност на апликации"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Додаден е лик"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Поставете „Отклучување со лик“"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Отклучување со лик"</string>
@@ -435,6 +436,13 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Преместете се некаде каде што има понежно осветлување и обидете се повторно"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Го достигнавте максималниот број на обиди"</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"Користете го отпечатокот за да го отклучувате телефонот или за проверка, како кога се најавувате на апликации или одобрувате купување\n\n"<annotation id="url">"Дознајте повеќе"</annotation></string>
+    <string name="security_settings_biometric_preference_title" msgid="8579021470218500926">"Отклучување со лик и отпечаток"</string>
+    <string name="security_settings_biometric_preference_summary" msgid="3976239447833224813">"Лик и отпечаток"</string>
+    <string name="biometric_settings_intro" msgid="769040512190641961">"Кога ќе поставите отклучување со лик и отпечаток, телефонот ќе го побара вашиот отпечаток кога носите маска или сте на темно место."</string>
+    <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Начини на отклучување"</string>
+    <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"Користете лик или отпечаток за"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Отклучување телефон"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Проверка во апликации"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Прескокни заклучување екран?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Функциите за заштита на уредот нема да се вклучат. Нема да може да ги спречите другите да го користат таблетов ако го изгубите, ви го украдат или се ресетира."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Функциите за заштита на уредот нема да се вклучат. Нема да може да ги спречите другите да го користат уредов ако го изгубите, ви го украдат или се ресетира."</string>
@@ -1780,7 +1788,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Дозволете апликациите и услугите да скенираат Wi-Fi мрежи во секое време, дури и кога Wi-Fi е исклучено. Ова може да се користи, на пример, за да се подобрат функциите и услугите базирани на локација."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Скенирање на Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Дозволете апликациите и услугите да скенираат уреди во близина во секое време, дури и кога Bluetooth е исклучен. Ова може да се користи, на пример, за да се подобрат функциите и услугите базирани на локација."</string>
-    <string name="location_services_preference_title" msgid="8572194688820064813">"Управувајте со услугите за локација"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"Услуги според локација"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"Услуги според локација"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Услуги според локација за работа"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Користи ја локацијата за поставување часовна зона"</string>
@@ -2447,6 +2455,25 @@
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Нема избрана услуга"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Не е обезбеден опис."</string>
     <string name="settings_button" msgid="2195468788019730377">"Поставки"</string>
+    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"чувствителност на светлина, фотофобија, темна тема, мигрена, главоболка, режим за читање, ноќен режим, намалување осветленост, бела точка"</string>
+    <string name="keywords_accessibility" msgid="4263443239404659143">"Едноставно користење, лесен пристап, помош, помошен"</string>
+    <string name="keywords_magnification" msgid="3908145308269840862">"Лупа за прозорци, зумирање, лупа, слаб вид, зголеми, направи поголемо"</string>
+    <string name="keywords_talkback" msgid="5563641756576863139">"Читач на екран, гласовна синхронизација, Гласовна помош, слепи, слаб вид, TTS, од текст во говор, говорни повратни информации"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"Титлови, затворени титлови, CC, Транскрипција во живо, нарушување на слух, загуба на слух, CART, од говор во текст"</string>
+    <string name="keywords_live_transcribe" msgid="9139708749952089372">"Титлови, затворени титлови, CC, Автоматски титлови, нарушување на слух, загуба на слух, CART, од говор во текст"</string>
+    <string name="keywords_sound_notifications" msgid="4039008340786330887">"Известувања, нарушување на слух, загуба на слух, извести"</string>
+    <string name="keywords_sound_amplifier" msgid="921848808218956694">"PSAP, засили, засилување звук, нарушување на слух, загуба на слух, засилување"</string>
+    <string name="keywords_display_size" msgid="5286419615221231518">"големина на екран, голем екран"</string>
+    <string name="keywords_bold_text" msgid="6257418169207099589">"Висок контраст, слаб вид, болд фонт, болд текст"</string>
+    <string name="keywords_select_to_speak" msgid="7701037476608073886">"Слушај текст, читање на глас, изговор на екранот, читач на екран"</string>
+    <string name="keywords_color_correction" msgid="8540442886990423681">"приспособи боја"</string>
+    <string name="keywords_color_inversion" msgid="4291058365873221962">"вклучување темен екран, вклучување светол екран"</string>
+    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"моторна, брзо мени, помошно мени, допир, попреченост"</string>
+    <string name="keywords_switch_access" msgid="8016330125790412167">"моторна, прекинувач, рака, AT, aпомошна технологија, парализа, ALS, скенирање, скенирање чекор"</string>
+    <string name="keywords_auto_click" msgid="7151756353013736931">"моторна, глувче"</string>
+    <string name="keywords_hearing_aids" msgid="524979615168196199">"нарушување на слух, загуба на слух"</string>
+    <string name="keywords_rtt" msgid="2429130928152514402">"нарушување на слух, загуба на слух, титлови, Teletype, TTY"</string>
+    <string name="keywords_voice_access" msgid="4486056790014652334">"глас, гласовна контрола, моторна, рака, микрофон, диктирање, зборување, контрола"</string>
     <string name="print_settings" msgid="8519810615863882491">"Печатење"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Исклучено"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -2699,30 +2726,18 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Искористеност по целосно полнење"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Управување со користењето на батеријата"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"Вкупно: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> во заднина во последните 24 часа"</string>
-    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
-    <skip />
-    <!-- no translation found for battery_total_usage (2662725472478185867) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
-    <skip />
-    <!-- no translation found for battery_background_usage (8375606680462132248) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
-    <skip />
-    <!-- no translation found for battery_not_usage (8417901856028909227) -->
-    <skip />
+    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"Вкупно: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> во заднина <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Вкупно: помалку од минута во изминатите 24 часа"</string>
+    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Вкупно: помалку од минута <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"Во заднина помалку од минута во изминатите 24 часа"</string>
+    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"Во заднина помалку од минута <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_total_usage" msgid="2662725472478185867">"Вкупно: <xliff:g id="TIME">^1</xliff:g> во изминатите 24 часа"</string>
+    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Вкупно: <xliff:g id="TIME_0">^1</xliff:g>, <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_background_usage" msgid="8375606680462132248">"<xliff:g id="TIME">^1</xliff:g> во заднина во изминатите 24 часа"</string>
+    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_0">^1</xliff:g> во заднина <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"Вкупно: <xliff:g id="TIME">^1</xliff:g> • во заднина помалку од минута во изминатите 24 часа"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"Вкупно: <xliff:g id="TIME_0">^1</xliff:g> • во заднина помалку од минута <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_not_usage" msgid="8417901856028909227">"Не е користена во изминатите 24 часа"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Проценката за преостанатата батерија се базира врз користењето на уредот"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Проценето преостанато време"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"До целосно полнење"</string>
@@ -2759,8 +2774,10 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Ниво на батеријата во минатите 24 часа"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Користење на апликацијата во минатите 24 часа"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Користење на системот во минатите 24 часа"</string>
-    <string name="battery_system_usage_for" msgid="158304136130870726">"Користење на системот во"</string>
-    <string name="battery_app_usage_for" msgid="929971425835809784">"Користење на апликацијата во"</string>
+    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
+    <skip />
     <string name="battery_usage_time_am" msgid="7783773965475697655">"прет."</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"попл."</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Вкупно: помалку од една минута"</string>
@@ -3397,7 +3414,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, повикај, повикување"</string>
     <string name="keywords_display" msgid="874738809280751745">"екран, екран на допир"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"затемнет екран, екран на допир, батерија, осветлено"</string>
-    <string name="keywords_display_night_display" msgid="4711054330804250058">"затемнет екран, ноќ, нијанса, night shift, осветленост, боја на екранот, боја"</string>
+    <string name="keywords_display_night_display" msgid="1132588285544830670">"затемнет екран, ноќ, нијанса, night shift, осветленост, боја на екранот, боја, чувствителност на светлина, фотофобија, затемнување, потемно, темен режим, мигрена"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"заднина, персонализирај, приспособи екран"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"големина на текст"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"проектира, емитува, Отсликување екран, Споделување екран, отсликување, сподели екран, емитување екран"</string>
@@ -3435,6 +3452,7 @@
     <string name="keywords_backup" msgid="707735920706667685">"бекап, прави бекап"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"движење"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"лице, отклучи, проверка, најави се"</string>
+    <string name="keywords_biometric_unlock" msgid="8569545388717753692">"лик, отклучување, проверка, најавување, отпечаток, биометрика"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, верзија на prl, imei sv"</string>
     <string name="keywords_sim_status" msgid="8784456547742075508">"мрежа, состојба на мобилна мрежа, состојба на услуга, јачина на сигнал, тип мобилна мрежа, роаминг, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"сериски број, верзија на хардвер"</string>
@@ -3446,6 +3464,7 @@
     <string name="keywords_lock_screen_notif" msgid="6363144436467429932">"известувања на заклучен екран, известувања"</string>
     <string name="keywords_face_settings" msgid="1360447094486865058">"лице"</string>
     <string name="keywords_fingerprint_settings" msgid="7345121109302813358">"отпечаток, додај отпечаток"</string>
+    <string name="keywords_biometric_settings" msgid="2173605297939326549">"лик, отпечаток, додај отпечаток"</string>
     <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"затемнет екран, екран на допир, батерија, паметна осветленост, динамична осветленост, автоматска осветленост"</string>
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"паметен, затемнет екран, режим во мирување, батерија, истек на време, внимание, приказ, екран, неактивност"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"камера, паметен, автоматски ротирај, автоматско ротирање, ротирај, преврти, ротација, портрет, пејзаж, ориентација, вертикална, хоризонтална"</string>
@@ -3467,8 +3486,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"рутина, распоред, штедач на батерија, штедач на енергија, батерија, автоматски, процент"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, напредно повикување, повикување преку 4G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"додај јазик, додај некој јазик"</string>
-    <string name="keywords_font_size" msgid="336803136451166298">"големина на текст"</string>
-    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"чувствителност на светлина, фотофобија, темна тема, мигрена, главоболка, режим за читање, ноќен режим, намалување осветленост, бела точка"</string>
+    <string name="keywords_font_size" msgid="1643198841815006447">"големина на текст, големи букви, голем фонт, голем текст, слаб вид, зголемување текст, фонт, зголеми, зголеми фонт"</string>
     <string name="default_sound" msgid="6604374495015245195">"Стандарден звук"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Јачината на звук при ѕвонење и известувања е <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Јачина на звук, вибрации и „Не вознемирувај“"</string>
@@ -3788,7 +3806,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Ниедна од инсталираните апликации не побара пристап до известувања."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Дозволи пристап до известувањата"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Да му се дозволи пристап до известувања на <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"„Подобрените известувања“ може да ги читаат сите содржини од известувањата, вклучително и личните податоци, како што се имињата на контактите и пораките. Функцијава ќе може и да отфрла известувања или да ги користи копчињата во известувањата, како на пр., да одговара на телефонски повици. \n\nФункцијава може и да го вклучува или исклучува „Приоритетниот режим“ и да ги менува поврзаните поставки."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="1178404462834047009">"„Подобрените известувања“ ги заменија „Приспособливите известувања на Android“ во Android 12. Оваа функција прикажува предложени дејства и одговори и ги организира вашите известувања. \n\n„Подобрените известувања“ може да пристапат до содржините од известувањата, вклучително и личните податоци, како што се имињата на контактите и пораките. Функцијава може и да отфрла или одговара на известувања, како на пример, одговарање телефонски повици и контролирање на „Не вознемирувај“."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Да се дозволи пристап на <xliff:g id="SERVICE">%1$s</xliff:g> до известувањата?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ќе може да ги чита сите известувања, вклучувајќи ги личните податоци како што се имињата на контактите и текстот од пораките што ги примате. Ќе може и да отфрла известувања или да ги користи копчињата во известувањата, вклучително и да одговара на телефонски повици. \n\nОва ќе ѝ овозможи на апликацијата да го вклучува и исклучува „Не вознемирувај“ и да ги менува поврзаните поставки."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако го исклучите пристапот на <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до известувањата, пристапот до „Не вознемирувај“ може исто така да се исклучи."</string>
@@ -5379,10 +5397,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Нека се прикажува известување кога апликациите пристапуваат до текст, слики или други содржини што сте ги копирале"</string>
     <string name="all_apps" msgid="3054120149509114789">"Сите апликации"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Не дозволувај"</string>
-    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
-    <skip />
+    <string name="uwb_settings_title" msgid="2292158556760642919">"Ултра широк опсег (UWB)"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"Помага да се идентификува релативната положба на уредите во близина што имаат UWB"</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"Исклучете „Авионски режим“ за да користите UWB."</string>
 </resources>
