@@ -28,6 +28,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -663,7 +664,7 @@ public class AccessibilitySettings extends DashboardFragment {
             preference.setKey(key);
             preference.setTitle(title);
             preference.setSummary(summary);
-            Utils.setSafeIcon(preference, icon);
+            preference.setIcon(Utils.getAdaptiveIcon(mContext, icon, Color.WHITE));
             preference.setFragment(fragment);
             preference.setIconSize(ICON_SIZE_MEDIUM);
             preference.setPersistent(false); // Disable SharedPreferences.
