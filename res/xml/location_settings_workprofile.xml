@@ -28,6 +28,15 @@
         settings:controller=
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
 
+    <Preference
+        android:key="recent_location_access_see_all_button"
+        android:title="@string/location_recent_location_access_see_all"
+        android:icon="@drawable/ic_chevron_right_24dp"
+        android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
+        settings:forWork="true"
+        settings:searchable="false"/>
+
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="managed_profile_location_switch"
         android:title="@string/managed_profile_location_switch_title"
