@@ -324,6 +324,7 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Lock ng screen, face unlock"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Lock ng screen, fingerprint"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Lock ng screen"</string>
+    <string name="security_dashboard_summary_biometric" msgid="4928445847817128025">"Lock ng screen, pag-unlock gamit ang biometrics, seguridad ng app"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Naidagdag ang mukha"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"I-set up ang face unlock"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Face unlock"</string>
@@ -435,6 +436,13 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Lumipat sa hindi masyadong maliwanag na lugar at subukan ulit"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Naabot mo na ang maximum na bilang ng mga pagsubok"</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"Gamitin ang iyong fingerprint para i-unlock ang telepono mo o para sa pag-authenticate, halimbawa, kapag nag-sign in ka sa mga app o nag-apruba ka ng pagbili\n\n"<annotation id="url">"Matuto pa"</annotation></string>
+    <string name="security_settings_biometric_preference_title" msgid="8579021470218500926">"Pag-unlock gamit ang mukha at fingerprint"</string>
+    <string name="security_settings_biometric_preference_summary" msgid="3976239447833224813">"Mukha at fingerprint"</string>
+    <string name="biometric_settings_intro" msgid="769040512190641961">"Kapag na-set up mo ang face unlock at fingerprint, hihingin ng iyong telepono ang fingerprint mo kapag nakasuot ka ng mask o nasa madilim na lugar ka."</string>
+    <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Mga paraan para mag-unlock"</string>
+    <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"Gamitin ang mukha at fingerprint para"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Pag-unlock sa phone"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Pag-authenticate sa mga app"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Laktawan ang lock ng screen?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Hindi mao-on ang mga feature sa pagprotekta ng device. Hindi mo mapipigilan ang ibang tao na gamitin ang tablet na ito kung mawala, manakaw, o ma-reset ito."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Hindi mao-on ang mga feature sa pagprotekta ng device. Hindi mo mapipigilan ang ibang tao na gamitin ang device na ito kung mawala, manakaw, o ma-reset ito."</string>
@@ -1780,7 +1788,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Payagan ang mga app at serbisyo na mag-scan ng mga Wi-Fi network anumang oras, kahit na naka-off ang Wi-Fi. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Pag-scan ng Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Payagan ang mga app at serbisyo na mag-scan ng mga kalapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon."</string>
-    <string name="location_services_preference_title" msgid="8572194688820064813">"Pamahalaan ang mga serbisyo ng lokasyon"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"Mga serbisyo ng lokasyon"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"Mga Serbisyo ng Lokasyon"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Mga serbisyo ng lokasyon para sa trabaho"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Gamitin ang lokasyon para magtakda ng time zone"</string>
@@ -2447,6 +2455,25 @@
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Walang serbisyong napili"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Walang ibinigay na paglalarawan."</string>
     <string name="settings_button" msgid="2195468788019730377">"Mga Setting"</string>
+    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"pagkasensitibo sa ilaw, photophobia, madilim na tema, matinding pananakit ng ulo, pananakit ng ulo, reading mode, night mode, bawasan ang liwanag, white point"</string>
+    <string name="keywords_accessibility" msgid="4263443239404659143">"Dali ng paggamit, dali ng pag-access, tulong, nakakatulong"</string>
+    <string name="keywords_magnification" msgid="3908145308269840862">"Magnifier ng Window, Zoom, Pag-magnify, Malabo ang paningin, Palakihin, gawing mas malaki"</string>
+    <string name="keywords_talkback" msgid="5563641756576863139">"Screen reader, Voice Over, VoiceOver, Voice Assistance, Bulag, Malabo ang Paningin, TTS, text to speech, pasalitang feedback"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"Mga caption, mga closed caption, CC, Instant Transcribe, may problema sa pandinig, walang pandinig, CART, speech to text, subtitle"</string>
+    <string name="keywords_live_transcribe" msgid="9139708749952089372">"Mga caption, mga closed caption, CC, Instant Caption, may problema sa pandinig, walang pandinig, CART, speech to text, subtitle"</string>
+    <string name="keywords_sound_notifications" msgid="4039008340786330887">"Mga notification, may problema sa pandinig, walang pandinig, mag-abiso"</string>
+    <string name="keywords_sound_amplifier" msgid="921848808218956694">"PSAP, i-amplify, pag-amplify ng tunog, may problema sa pandinig, walang pandinig, pag-amplify"</string>
+    <string name="keywords_display_size" msgid="5286419615221231518">"laki ng screen, malaking screen"</string>
+    <string name="keywords_bold_text" msgid="6257418169207099589">"High contrast, malabo ang paningin, bold na font, bold face"</string>
+    <string name="keywords_select_to_speak" msgid="7701037476608073886">"Pakinggan ang text, basahin nang malakas, bigkasin ang nasa screen, screen reader"</string>
+    <string name="keywords_color_correction" msgid="8540442886990423681">"i-adjust ang kulay"</string>
+    <string name="keywords_color_inversion" msgid="4291058365873221962">"padilimin ang screen, paliwanagin ang screen"</string>
+    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"motor, mabilisang menu, pantulong na menu, pagpindot, kahusayan sa paggalaw"</string>
+    <string name="keywords_switch_access" msgid="8016330125790412167">"motor, switch, kamay, AT, pantulong na teknolohiya, pagkaparalisa, ALS, pag-scan, paisa-isang pag-scan"</string>
+    <string name="keywords_auto_click" msgid="7151756353013736931">"motor, mouse"</string>
+    <string name="keywords_hearing_aids" msgid="524979615168196199">"may problema sa pandinig, walang pandinig"</string>
+    <string name="keywords_rtt" msgid="2429130928152514402">"may problema sa pandinig, walang pandinig, mga caption, Teletype, tty"</string>
+    <string name="keywords_voice_access" msgid="4486056790014652334">"boses, pagkontrol gamit ang boses, motor, kamay, mic, mikropono, dictation, pagsasalita, kontrol"</string>
     <string name="print_settings" msgid="8519810615863882491">"Pag-print"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Naka-off"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -2699,30 +2726,18 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Mula noong napuno ang baterya"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Pamahalaan ang paggamit ng baterya"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> sa kabuuan • <xliff:g id="TIME_1">^2</xliff:g> sa background sa huling 24 na oras"</string>
-    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
-    <skip />
-    <!-- no translation found for battery_total_usage (2662725472478185867) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
-    <skip />
-    <!-- no translation found for battery_background_usage (8375606680462132248) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
-    <skip />
-    <!-- no translation found for battery_not_usage (8417901856028909227) -->
-    <skip />
+    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"<xliff:g id="TIME_0">^1</xliff:g> sa kabuuan • <xliff:g id="TIME_1">^2</xliff:g> sa background noong <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Sa kabuuan, wala pang isang minuto sa nakalipas na 24 na oras"</string>
+    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Sa kabuuan, wala pang isang minuto noong <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"Wala pang isang minutong nasa background sa nakalipas na 24 na oras"</string>
+    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"Wala pang isang minutong nasa background noong <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_total_usage" msgid="2662725472478185867">"<xliff:g id="TIME">^1</xliff:g> sa kabuuan sa nakalipas na 24 na oras"</string>
+    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> sa kabuuan noong <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_background_usage" msgid="8375606680462132248">"<xliff:g id="TIME">^1</xliff:g> sa background sa nakalipas na 24 na oras"</string>
+    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_0">^1</xliff:g> sa background noong <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"<xliff:g id="TIME">^1</xliff:g> sa kabuuan • wala pang isang minutong nasa background sa nakalipas na 24 na oras"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"<xliff:g id="TIME_0">^1</xliff:g> sa kabuuan • wala pang isang minutong nasa background noong <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_not_usage" msgid="8417901856028909227">"Walang paggamit sa nakalipas na 24 na oras"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Nakabatay ang pagtatantya ng natitirang baterya sa paggamit ng iyong device"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tinatayang natitirang oras"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Hanggang mapuno ang baterya"</string>
@@ -2759,8 +2774,10 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Antas ng baterya sa huling 24 na oras"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Paggamit ng app sa huling 24 na oras"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Paggamit ng system sa huling 24 na oras"</string>
-    <string name="battery_system_usage_for" msgid="158304136130870726">"Paggamit ng system sa"</string>
-    <string name="battery_app_usage_for" msgid="929971425835809784">"Paggamit ng app sa"</string>
+    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
+    <skip />
     <string name="battery_usage_time_am" msgid="7783773965475697655">"am"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"pm"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Kabuuan: wala pang isang minuto"</string>
@@ -3397,7 +3414,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, tawag, pagtawag"</string>
     <string name="keywords_display" msgid="874738809280751745">"screen, touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"i-dim ang screen, touchscreen, baterya, maliwanag"</string>
-    <string name="keywords_display_night_display" msgid="4711054330804250058">"i-dim ang screen, gabi, tint, night shift, brightness, kulay ng screen, kulay, kulay"</string>
+    <string name="keywords_display_night_display" msgid="1132588285544830670">"madilim na screen, gabi, tint, night shift, liwanag, kulay ng screen, kulay, pagkasensitibo sa ilaw, photophobia, gawing mas madilim, padilimin, dark mode, migraine"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"background, i-personalize, i-customize ang display"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"laki ng text"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"i-project, i-cast, Pag-mirror ng screen, Pagbabahagi ng screen, pag-mirror, ibahagi ang screen, pag-cast ng screen"</string>
@@ -3435,6 +3452,7 @@
     <string name="keywords_backup" msgid="707735920706667685">"backup, i-back up"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"galaw"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"mukha, i-unlock, auth, mag-sign in"</string>
+    <string name="keywords_biometric_unlock" msgid="8569545388717753692">"mukha, pag-unlock, auth, pag-sign in, fingerprint, biometric"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, bersyon ng prl, imei sv"</string>
     <string name="keywords_sim_status" msgid="8784456547742075508">"network, status ng mobile network, status ng serbisyo, lakas ng signal, uri ng mobile network, roaming, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serial number, bersyon ng hardware"</string>
@@ -3446,6 +3464,7 @@
     <string name="keywords_lock_screen_notif" msgid="6363144436467429932">"notification sa lock screen, mga notification"</string>
     <string name="keywords_face_settings" msgid="1360447094486865058">"mukha"</string>
     <string name="keywords_fingerprint_settings" msgid="7345121109302813358">"fingerprint, magdagdag ng fingerprint"</string>
+    <string name="keywords_biometric_settings" msgid="2173605297939326549">"mukha, fingerprint, magdagdag ng fingerprint"</string>
     <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"i-dim ang screen, touchscreen, baterya, smart na liwanag, dynamic na liwanag, Awtomatikong liwanag"</string>
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"smart, i-dim ang screen, mag-sleep, baterya, timeout, atensyon, display, screen, kawalan ng aktibidad"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"camera, smart, i-auto rotate, auto-rotate, i-rotate, i-flip, pag-rotate, portrait, landscape, oryentasyon, patayo, pahalang"</string>
@@ -3467,8 +3486,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"routine, iskedyul, pantipid ng baterya, pangtipid ng power, baterya, awtomatiko, porsyento"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, advanced na pagtawag, pagtawag gamit ang 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"idagdag ang wika, magdagdag ng wika"</string>
-    <string name="keywords_font_size" msgid="336803136451166298">"laki ng text"</string>
-    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"pagkasensitibo sa ilaw, photophobia, madilim na tema, matinding pananakit ng ulo, pananakit ng ulo, reading mode, night mode, bawasan ang liwanag, white point"</string>
+    <string name="keywords_font_size" msgid="1643198841815006447">"laki ng text, malaking print, malaking font, malaking text, malabong paningin, palakihin ang text, pampalaki ng font, pagpapalaki ng font"</string>
     <string name="default_sound" msgid="6604374495015245195">"Default na tunog"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Nasa <xliff:g id="PERCENTAGE">%1$s</xliff:g> ang volume ng pag-ring at notification"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, pag-vibrate, Huwag Istorbohin"</string>
@@ -3788,7 +3806,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Walang mga naka-install na app ang humiling ng access sa notification."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Payagan ang pag-access sa notification"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Payagan ang pag-access sa notification para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"Puwedeng basahin ng mga pinahusay na notification ang lahat ng notification, kabilang ang personal na impormasyon gaya ng mga pangalan ng contact at mga mensahe. Puwede ring i-dismiss ng feature na ito ang mga notification o gumawa ito ng mga pagkilos sa mga button sa mga notification, kasama na ang pagsagot sa mga tawag sa telepono. \n\nPuwede ring i-on o i-off ng feature na ito ang Priority mode at baguhin ang mga kaugnay na setting."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="1178404462834047009">"Pinalitan ng mga pinahusay na notification ang Mga Adaptive na Notification ng Android sa Android 12. Nagpapakita ng mga iminumungkahing pagkilos at tugon ang feature na ito, at isinasaayos nito ang iyong mga notification. \n\nMaa-access ng mga pinahusay na notification ang content ng notification, kabilang ang personal na impormasyon gaya ng mga pangalan ng contact at mensahe. Puwede ring i-dismiss o tugunan ng feature na ito ang mga notification, gaya ng pagsagot sa mga tawag at pagkontrol sa Huwag Istorbohin."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Payagan ang pag-access sa notification para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"Magagawa ng <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> na mabasa ang lahat ng notification, kasama na ang mga personal na impormasyon tulad ng mga pangalan ng contact at text ng mga mensaheng natatanggap mo. Magagawa rin ng app na ito na i-dismiss ang mga notification, o gumawa ng pagkilos sa mga button ng mga notification, kasama na ang pagsagot sa mga tawag sa telepono. \n\nMabibigyan din ang app ng kakayahang i-on o i-off ang Huwag Istorbohin at baguhin ang mga nauugnay na setting."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Kung io-off mo ang access sa notification para kay <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, mao-off din ang access sa Huwag Istorbohin."</string>
@@ -5379,10 +5397,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Magpakita ng mensahe kapag ina-access ng mga app ang text, mga larawan, o iba pang content na nakopya mo"</string>
     <string name="all_apps" msgid="3054120149509114789">"Lahat ng app"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Huwag payagan"</string>
-    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
-    <skip />
+    <string name="uwb_settings_title" msgid="2292158556760642919">"Ultra-WideBand (UWB)"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"Nakakatulong sa pagtukoy ng relatibong posisyon ng mga kalapit na device na may UWB"</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"I-off ang Airplane mode para magamit ang UWB."</string>
 </resources>

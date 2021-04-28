@@ -28,6 +28,14 @@
         settings:controller=
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
 
+    <Preference
+        android:key="recent_location_access_see_all_button"
+        android:title="@string/location_recent_location_access_see_all"
+        android:icon="@drawable/ic_chevron_right_24dp"
+        android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
+        settings:searchable="false"/>
+
     <!-- This preference category gets removed if new_recent_location_ui is disabled -->
     <Preference
         android:key="app_level_permissions"
