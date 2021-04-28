@@ -60,6 +60,7 @@ import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPrefe
 import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -174,6 +175,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        SearchMenuController.init(this);
         if (Utils.isMonkeyRunning()) {
             getActivity().finish();
             return;
