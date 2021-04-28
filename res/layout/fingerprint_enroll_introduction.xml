@@ -55,6 +55,56 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- How it works -->
+            <com.google.android.setupdesign.view.RichTextView
+                style="@style/SudDescription.Glif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:paddingTop="12dp"
+                android:text="@string/security_settings_fingerprint_v2_enroll_introduction_footer_title_2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_fingerprint_24dp"/>
+                <Space
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_settings_fingerprint_v2_enroll_introduction_footer_message_2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_device_locked_24dp"/>
+                <Space
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_settings_fingerprint_v2_enroll_introduction_footer_message_3" />
+            </LinearLayout>
+
+            <!-- You're in control -->
             <com.google.android.setupdesign.view.RichTextView
                 style="@style/SudDescription.Glif"
                 android:layout_width="match_parent"
@@ -73,23 +123,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_fingerprint_introduction_shield_24dp"/>
+                    android:src="@drawable/ic_trash_can"/>
                 <Space
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/security_settings_fingerprint_enroll_introduction_footer_message_1" />
+                    android:text="@string/security_settings_fingerprint_v2_enroll_introduction_footer_message_4" />
             </LinearLayout>
-
-            <TextView
-                style="@style/SudDescription.Glif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="viewStart"
-                android:paddingTop="24dp"
-                android:text="@string/security_settings_fingerprint_enroll_introduction_footer_title_2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -101,34 +143,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_info_outline_24dp"/>
+                    android:src="@drawable/ic_link_24dp"/>
                 <Space
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/security_settings_fingerprint_enroll_introduction_footer_message_2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="24dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_fingerprint_24dp"/>
-                <Space
-                    android:layout_width="24dp"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/security_settings_fingerprint_enroll_introduction_footer_message_3" />
+                    android:text="@string/security_settings_fingerprint_v2_enroll_introduction_message_learn_more" />
             </LinearLayout>
 
         </LinearLayout>
