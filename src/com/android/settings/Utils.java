@@ -77,6 +77,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
+import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
@@ -109,6 +110,7 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -158,6 +160,9 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /** Whether or not app hibernation is enabled on the device **/
     public static final String PROPERTY_APP_HIBERNATION_ENABLED = "app_hibernation_enabled";
+
+    /** Whether or not Settings Shared Axis transition is enabled */
+    public static final String SETTINGS_SHARED_AXIS_ENABLED = "settings_shared_axis_enabled";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -1195,5 +1200,13 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean isProviderModelEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
+    }
+
+    public static boolean isPageTransitionEnabled(Context context) {
+        final boolean isSilkyHome = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME);
+        final boolean isTransitionEnabled = Settings.Global.getInt(context.getContentResolver(),
+                SETTINGS_SHARED_AXIS_ENABLED, 0) == 1;
+
+        return isSilkyHome && isTransitionEnabled;
     }
 }
