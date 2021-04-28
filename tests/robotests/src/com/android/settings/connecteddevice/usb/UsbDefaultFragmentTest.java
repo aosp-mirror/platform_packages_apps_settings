@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -172,7 +173,7 @@ public class UsbDefaultFragmentTest {
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_RNDIS);
     }
 
@@ -184,7 +185,7 @@ public class UsbDefaultFragmentTest {
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_NONE);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_NONE);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_NONE);
     }
 
@@ -196,7 +197,7 @@ public class UsbDefaultFragmentTest {
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_MTP);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_MTP);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_MTP);
     }
 
@@ -208,7 +209,7 @@ public class UsbDefaultFragmentTest {
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_PTP);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_PTP);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_PTP);
     }
 
@@ -220,7 +221,7 @@ public class UsbDefaultFragmentTest {
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_MIDI);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_MIDI);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_MIDI);
     }
 
@@ -243,6 +244,21 @@ public class UsbDefaultFragmentTest {
         when(mUsbBackend.getDefaultUsbFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
 
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        verify(mTetheringManager, never()).startTethering(eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mFragment.mOnStartTetheringCallback));
+    }
+
+    @Test
+    public void usbIsPluginAndUsbTetheringIsAlreadyStarted_startTetheringIsNotInvoked() {
+        mFragment.mIsStartTethering = true;
+        when(mUsbBackend.getDefaultUsbFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
+
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
                 UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         verify(mTetheringManager, never()).startTethering(eq(TetheringManager.TETHERING_USB),
