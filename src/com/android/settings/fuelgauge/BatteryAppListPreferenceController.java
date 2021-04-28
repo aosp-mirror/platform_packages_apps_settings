@@ -427,7 +427,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private BatteryUsageStats getFakeStats() {
-        BatteryUsageStats.Builder builder = new BatteryUsageStats.Builder(new String[0], 0)
+        BatteryUsageStats.Builder builder = new BatteryUsageStats.Builder(new String[0])
                 .setDischargePercentage(100);
 
         float use = 500;
@@ -460,18 +460,18 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
         // Simulate dex2oat process.
         builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID))
-                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
         builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID + 1))
-                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
         builder.getOrCreateUidBatteryConsumerBuilder(
                         new FakeUid(UserHandle.getSharedAppGid(Process.LOG_UID)))
-                .setUsageDurationMillis(BatteryConsumer.TIME_COMPONENT_CPU, 100000)
+                .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 900.0);
 
         return builder.build();
