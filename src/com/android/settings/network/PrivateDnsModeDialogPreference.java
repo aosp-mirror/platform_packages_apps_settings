@@ -15,9 +15,9 @@
  */
 package com.android.settings.network;
 
-import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
-import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
-import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+import static android.net.ConnectivitySettingsManager.PRIVATE_DNS_MODE_OFF;
+import static android.net.ConnectivitySettingsManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
+import static android.net.ConnectivitySettingsManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -27,7 +27,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
+import android.net.ConnectivitySettingsManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -70,7 +70,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
 
     private static final String TAG = "PrivateDnsModeDialog";
     // DNS_MODE -> RadioButton id
-    private static final Map<String, Integer> PRIVATE_DNS_MAP;
+    private static final Map<Integer, Integer> PRIVATE_DNS_MAP;
 
     static {
         PRIVATE_DNS_MAP = new HashMap<>();
@@ -93,7 +93,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
     @VisibleForTesting
     RadioGroup mRadioGroup;
     @VisibleForTesting
-    String mMode;
+    int mMode;
 
     public PrivateDnsModeDialogPreference(Context context) {
         super(context);
@@ -160,7 +160,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         final Context context = getContext();
         final ContentResolver contentResolver = context.getContentResolver();
 
-        mMode = ConnectivityManager.getPrivateDnsMode(context);
+        mMode = ConnectivitySettingsManager.getPrivateDnsMode(context);
 
         mEditText = view.findViewById(R.id.private_dns_mode_provider_hostname);
         mEditText.addTextChangedListener(this);
@@ -196,15 +196,15 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             final Context context = getContext();
-            if (mMode.equals(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME)) {
+            if (mMode == PRIVATE_DNS_MODE_PROVIDER_HOSTNAME) {
                 // Only clickable if hostname is valid, so we could save it safely
-                Settings.Global.putString(context.getContentResolver(), HOSTNAME_KEY,
+                ConnectivitySettingsManager.setPrivateDnsHostname(context,
                         mEditText.getText().toString());
             }
 
             FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
                     SettingsEnums.ACTION_PRIVATE_DNS_MODE, mMode);
-            Settings.Global.putString(context.getContentResolver(), MODE_KEY, mMode);
+            ConnectivitySettingsManager.setPrivateDnsMode(context, mMode);
         }
     }
 
@@ -264,7 +264,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
     }
 
     private void updateDialogInfo() {
-        final boolean modeProvider = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME.equals(mMode);
+        final boolean modeProvider = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME == mMode;
         if (mEditText != null) {
             mEditText.setEnabled(modeProvider);
         }
