@@ -47,6 +47,7 @@ import com.android.settings.dashboard.CategoryManager;
 import com.android.settingslib.drawer.Tile;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.resources.TextAppearanceConfig;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
@@ -80,6 +81,7 @@ public class SettingsBaseActivity extends FragmentActivity {
         }
         final long startTime = System.currentTimeMillis();
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
+        TextAppearanceConfig.setShouldLoadFontSynchronously(true);
 
         final TypedArray theme = getTheme().obtainStyledAttributes(android.R.styleable.Theme);
         if (!theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
