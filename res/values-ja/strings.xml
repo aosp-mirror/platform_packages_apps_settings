@@ -324,6 +324,7 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"画面ロック、顔認証"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"画面ロック、指紋"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"画面ロック"</string>
+    <string name="security_dashboard_summary_biometric" msgid="4928445847817128025">"画面ロック、生体認証によるロック解除、アプリのセキュリティ"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"顔を追加済みです"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"顔認証を設定します"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"顔認証"</string>
@@ -435,6 +436,13 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"もっと明るい場所に移動してもう一度お試しください"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"試行回数の上限を超えました"</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"指紋を使って、スマートフォンのロック解除や認証（アプリへのログインや購入の承認など）を行います\n\n"<annotation id="url">"詳細"</annotation></string>
+    <string name="security_settings_biometric_preference_title" msgid="8579021470218500926">"顔認証と指紋認証によるロック解除"</string>
+    <string name="security_settings_biometric_preference_summary" msgid="3976239447833224813">"顔認証と指紋認証"</string>
+    <string name="biometric_settings_intro" msgid="769040512190641961">"顔認証と指紋認証を設定した場合、マスクを付けているときや暗い場所にいるときは指紋認証が求められます。"</string>
+    <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"ロック解除方法"</string>
+    <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"顔認証または指紋認証の使用目的"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"デバイスのロック解除"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"アプリでの認証"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"画面ロックをスキップしますか？"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"デバイス保護機能は ON になりません。このタブレットの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"デバイス保護機能は ON になりません。このデバイスの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
@@ -1780,7 +1788,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth のスキャン"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
-    <string name="location_services_preference_title" msgid="8572194688820064813">"位置情報サービスの管理"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"位置情報サービス"</string>
     <string name="location_services_screen_title" msgid="9204334551361202877">"位置情報サービス"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"仕事用プロファイル向けの位置情報サービス"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"タイムゾーンの設定に位置情報を使用"</string>
@@ -2277,7 +2285,7 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"使用していないときの透明度"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"透明"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"非透明"</string>
-    <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高コントラストテキスト"</string>
+    <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高コントラスト テキスト"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"画面の拡大を自動更新"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"アプリの遷移時に画面の拡大を更新"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"電源ボタンで通話を終了"</string>
@@ -2447,6 +2455,25 @@
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"サービスが選択されていません"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"説明はありません。"</string>
     <string name="settings_button" msgid="2195468788019730377">"設定"</string>
+    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"光 過敏, 羞明, ダーク テーマ, 片頭痛, 頭痛, 読書 モード, 夜間 モード, 下げる 明るさ, ホワイト ポイント"</string>
+    <string name="keywords_accessibility" msgid="4263443239404659143">"使いやすい, アクセスしやすい, アシスタント, アシスト"</string>
+    <string name="keywords_magnification" msgid="3908145308269840862">"Window Magnifier, ズーム, 拡大, ロー ビジョン, 大きくする, 切り替え 大きく"</string>
+    <string name="keywords_talkback" msgid="5563641756576863139">"スクリーン リーダー, Voice Over, VoiceOver, 音声 アシスト, 目の見えない, ロー ビジョン, TTS, テキスト 読み上げ, 音声 フィードバック"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"キャプション, クローズド キャプション, CC, 音声 文字変換, 難聴, 聴覚 障がい, CART, 音声 入力, 字幕"</string>
+    <string name="keywords_live_transcribe" msgid="9139708749952089372">"キャプション, クローズド キャプション, CC, 自動 字幕起こし, 難聴, 聴覚 障がい, CART, 音声 入力, 字幕"</string>
+    <string name="keywords_sound_notifications" msgid="4039008340786330887">"通知, 難聴, 聴覚 障がい, 知らせる"</string>
+    <string name="keywords_sound_amplifier" msgid="921848808218956694">"PSAP, 増幅, 音声 増幅, 難聴, 聴覚 障がい, 増幅機能"</string>
+    <string name="keywords_display_size" msgid="5286419615221231518">"画面 サイズ, 大きい 画面"</string>
+    <string name="keywords_bold_text" msgid="6257418169207099589">"ハイ コントラスト, ロー ビジョン, 太字 フォント, ボールド 体"</string>
+    <string name="keywords_select_to_speak" msgid="7701037476608073886">"聴く テキスト, 読み上げ, 読み上げ 画面, スクリーン リーダー"</string>
+    <string name="keywords_color_correction" msgid="8540442886990423681">"調整 色"</string>
+    <string name="keywords_color_inversion" msgid="4291058365873221962">"切り替え 画面 ダーク, 切り替え 画面 ライト"</string>
+    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"運動, クイック メニュー, アシスト メニュー, タッチ, 手の動き"</string>
+    <string name="keywords_switch_access" msgid="8016330125790412167">"運動, スイッチ, 手, AT, 支援 技術, 麻痺, ALS, スキャン, 手順 スキャン"</string>
+    <string name="keywords_auto_click" msgid="7151756353013736931">"運動, マウス"</string>
+    <string name="keywords_hearing_aids" msgid="524979615168196199">"難聴, 聴覚 障がい"</string>
+    <string name="keywords_rtt" msgid="2429130928152514402">"難聴, 聴覚 障がい, 字幕, テレタイプ, TTY"</string>
+    <string name="keywords_voice_access" msgid="4486056790014652334">"音声, 音声 操作, 運動, 手, マイク, マイクロフォン, 音声入力, 読み上げ, コントロール"</string>
     <string name="print_settings" msgid="8519810615863882491">"印刷"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"OFF"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -2699,30 +2726,18 @@
     <string name="battery_detail_info_title" msgid="5896661833554333683">"フル充電以降の電池の使用状況"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"電池使用量の管理"</string>
     <string name="battery_total_and_background_usage" msgid="6418204620302474483">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンド: <xliff:g id="TIME_1">^2</xliff:g>（過去 24 時間）"</string>
-    <!-- no translation found for battery_total_and_background_usage_with_period (4915437530577714730) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute (6665817695616836396) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_less_minute_with_period (571923652373556609) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute (6754590481242415879) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_less_minute_with_period (7195943376468806365) -->
-    <skip />
-    <!-- no translation found for battery_total_usage (2662725472478185867) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_with_period (2849061229625950626) -->
-    <skip />
-    <!-- no translation found for battery_background_usage (8375606680462132248) -->
-    <skip />
-    <!-- no translation found for battery_background_usage_with_period (7504840136463610964) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage (2541220342132484726) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_background_less_minute_usage_with_period (6223114110266577574) -->
-    <skip />
-    <!-- no translation found for battery_not_usage (8417901856028909227) -->
-    <skip />
+    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"<xliff:g id="TIME_PERIOD">^3</xliff:g> の合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンドでの使用: <xliff:g id="TIME_1">^2</xliff:g>"</string>
+    <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"過去 24 時間の合計: 1 分未満"</string>
+    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g> の合計: 1 分未満"</string>
+    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"過去 24 時間のバックグラウンドでの使用: 1 分未満"</string>
+    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"<xliff:g id="TIME_PERIOD">^1</xliff:g> のバックグラウンドでの使用: 1 分未満"</string>
+    <string name="battery_total_usage" msgid="2662725472478185867">"過去 24 時間の合計: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g> の合計: <xliff:g id="TIME_0">^1</xliff:g>"</string>
+    <string name="battery_background_usage" msgid="8375606680462132248">"過去 24 時間のバックグラウンドでの使用: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_PERIOD">^2</xliff:g> のバックグラウンドでの使用: <xliff:g id="TIME_0">^1</xliff:g>"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"過去 24 時間の合計: <xliff:g id="TIME">^1</xliff:g> • バックグラウンドでの使用: 1 分未満"</string>
+    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"<xliff:g id="TIME_PERIOD">^2</xliff:g> の合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンドでの使用: 1 分未満"</string>
+    <string name="battery_not_usage" msgid="8417901856028909227">"過去 24 時間の使用: なし"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"電池残量はデバイスの使用状況に基づく推定値です"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"予測される残り時間"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"フル充電まで"</string>
@@ -2759,8 +2774,10 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"過去 24 時間のバッテリー使用量"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"過去 24 時間のアプリのバッテリー使用量"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"過去 24 時間のシステムのバッテリー使用量"</string>
-    <string name="battery_system_usage_for" msgid="158304136130870726">"システムのバッテリー使用量:"</string>
-    <string name="battery_app_usage_for" msgid="929971425835809784">"アプリのバッテリー使用量:"</string>
+    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
+    <skip />
     <string name="battery_usage_time_am" msgid="7783773965475697655">"午前"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"午後"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"合計: 1 分未満"</string>
@@ -3397,7 +3414,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi、Wi-Fi、通話、発信"</string>
     <string name="keywords_display" msgid="874738809280751745">"画面、タッチスクリーン"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"画面を暗くする, タッチスクリーン, 電池, 明るさ"</string>
-    <string name="keywords_display_night_display" msgid="4711054330804250058">"画面を暗くする, 夜間, 色合い, 夜間切り替え, 明るさ, 画面の色, 色, カラー"</string>
+    <string name="keywords_display_night_display" msgid="1132588285544830670">"暗くする 画面, 夜間, 色合い, 夜間 切り替え, 明るさ, 画面 色, 色, カラー, 光 過敏, 羞明, 切り替え 暗く, 暗くする, ダーク モード, 片頭痛"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"背景、パーソナライズ、表示のカスタマイズ"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"文字 サイズ"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"保護, キャスト, 画面ミラーリング, 画面共有, ミラーリング, 共有画面, 画面キャスト"</string>
@@ -3435,6 +3452,7 @@
     <string name="keywords_backup" msgid="707735920706667685">"バックアップ, バック アップ"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"操作"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"顔, フェイス, ロック解除, アンロック, 認証, ログイン, 顔認証"</string>
+    <string name="keywords_biometric_unlock" msgid="8569545388717753692">"顔, ロック解除, 認証, ログイン, 指紋, 生体認証"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"IMEI, MEID, MIN, PRL バージョン, IMEI SV"</string>
     <string name="keywords_sim_status" msgid="8784456547742075508">"ネットワーク, モバイル ネットワークの状態, サービスの状態, 電波強度, モバイル ネットワークの種類, ローミング, ICCID, EID"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"シリアル番号, ハードウェア バージョン"</string>
@@ -3446,6 +3464,7 @@
     <string name="keywords_lock_screen_notif" msgid="6363144436467429932">"ロック画面の通知, 通知"</string>
     <string name="keywords_face_settings" msgid="1360447094486865058">"顔"</string>
     <string name="keywords_fingerprint_settings" msgid="7345121109302813358">"指紋, 指紋の追加"</string>
+    <string name="keywords_biometric_settings" msgid="2173605297939326549">"顔, 指紋, 追加 指紋"</string>
     <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"画面を暗くする, タッチスクリーン, 電池, スマート ブライトネス, ダイナミック ブライトネス, 明るさの自動調整"</string>
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"スマート, 暗くする 画面, スリープ, バッテリー, タイムアウト, アテンション, ディスプレイ, 画面, 操作が行われていない"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"カメラ, スマート, 自動 回転, 自動回転, 回転, フリップ, 回転, 縦向き, 横向き, 画面の向き, 縦, 横"</string>
@@ -3467,8 +3486,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ルーティン, スケジュール, バッテリー セーバー, パワーセーバー, 電池, 自動, パーセント, 繰り返し, 定型, 消費電力, 節約, パワー, バッテリー"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE、拡張モードでの通話、4G 回線による通話"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"言語を追加, 追加 言語"</string>
-    <string name="keywords_font_size" msgid="336803136451166298">"文字サイズ"</string>
-    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"光 過敏, 羞明, ダーク テーマ, 片頭痛, 頭痛, 読書 モード, 夜間 モード, 下げる 明るさ, ホワイト ポイント"</string>
+    <string name="keywords_font_size" msgid="1643198841815006447">"テキスト サイズ, 大きい 活字, 大きい フォント, 大きい テキスト, ロー ビジョン, 切り替え テキスト 大きく, フォント 大きく, フォント 拡大"</string>
     <string name="default_sound" msgid="6604374495015245195">"デフォルトの通知音"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"着信音と通知の音量: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、バイブレーション、サイレント モード"</string>
@@ -3788,7 +3806,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"通知へのアクセスをリクエストしたインストール済みアプリはありません。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"通知へのアクセスを許可"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"通知へのアクセスを<xliff:g id="SERVICE">%1$s</xliff:g>に許可しますか？"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="6127380535875810710">"拡張通知はすべての通知コンテンツにアクセスできます。これには、連絡先の名前などの個人情報やメッセージも含まれます。また、通知を非表示にしたり、電話に出るなど、通知内の操作ボタンを実行したりすることもできます。\n\nまた、この機能は、優先モードの設定を切り替えたり、関連する設定を変更したりすることもできます。"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="1178404462834047009">"Android 12 では Android 通知の自動調整が拡張通知に切り替えられました。この機能が操作や返信の候補を提示し、通知の整理を行います。\n\n拡張通知は通知コンテンツにアクセスできます。これには、連絡先の名前などの個人情報やメッセージも含まれます。また、この機能は、通知を非表示にしたり通知に応答したりすることもできます。たとえば、電話に出ることやサイレント モードを管理することができます。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> による通知へのアクセスを許可しますか？"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> がすべての通知を読み取れるようになります。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、電話に出るなど、通知内の操作ボタンをタップしたりすることも許可されます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、サイレント モードの利用権限も OFF になります。"</string>
@@ -4164,7 +4182,7 @@
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"アプリのデータアクセスを管理する"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"プライバシー ダッシュボード"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"権限を最近使用したアプリを表示する"</string>
-    <string name="unused_apps" msgid="4566272194756830656">"使用していないアプリ"</string>
+    <string name="unused_apps" msgid="4566272194756830656">"使用されていないアプリ"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="other">使用していないアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個</item>
       <item quantity="one">使用していないアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
@@ -5348,7 +5366,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi-Fi アクセス ポイントの使用"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"アプリ固定の使用"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"開発者向けオプションの使用"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"デフォルトの印刷設定サービスの使用"</string>
+    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"デフォルトの印刷設定サービスを使用"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"複数ユーザーの使用"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ワイヤレス デバッグの使用"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"グラフィックス ドライバの設定の使用"</string>
@@ -5356,7 +5374,7 @@
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"今すぐ OFF にする"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"今すぐ ON にする"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"夜間モードの使用"</string>
-    <string name="nfc_main_switch_title" msgid="6295839988954817432">"NFC の使用"</string>
+    <string name="nfc_main_switch_title" msgid="6295839988954817432">"NFC を使用"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"自動調整バッテリーの使用"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"明るさの自動調節の使用"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi-Fi 通話の使用"</string>
@@ -5379,10 +5397,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"コピーしたテキストや画像などのコンテンツにアプリがアクセスすると、メッセージが表示されます"</string>
     <string name="all_apps" msgid="3054120149509114789">"すべてのアプリ"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"許可しない"</string>
-    <!-- no translation found for uwb_settings_title (2292158556760642919) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary (3074271396764672268) -->
-    <skip />
-    <!-- no translation found for uwb_settings_summary_airplane_mode (7090727197053081796) -->
-    <skip />
+    <string name="uwb_settings_title" msgid="2292158556760642919">"超広帯域無線（UWB）"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"UWB を搭載した付近のデバイスの相対位置の特定に役立ちます"</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"UWB を使用するには機内モードを OFF にしてください。"</string>
 </resources>
