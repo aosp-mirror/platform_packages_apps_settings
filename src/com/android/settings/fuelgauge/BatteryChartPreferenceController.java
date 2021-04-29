@@ -40,6 +40,7 @@ import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.utils.StringUtil;
 
+import java.time.Clock;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -256,6 +257,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 : mTrapezoidIndex;
         if (mBatteryChartView != null) {
             mBatteryChartView.setLevels(mBatteryHistoryLevels);
+            setTimestampLabel();
         }
         refreshUi(refreshIndex, /*isForce=*/ true);
     }
@@ -523,6 +525,28 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             }
         }
         return true;
+    }
+
+    @VisibleForTesting
+    void setTimestampLabel() {
+        if (mBatteryChartView == null || mBatteryHistoryKeys == null) {
+            return;
+        }
+        long latestTimestamp =
+            mBatteryHistoryKeys[mBatteryHistoryKeys.length - 1];
+        // Uses the current time if we don't have history data.
+        if (latestTimestamp == 0) {
+            latestTimestamp = Clock.systemUTC().millis();
+        }
+        // Generates timestamp label for chart graph (every 8 hours).
+        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 8;
+        final String[] timestampLabels = new String[4];
+        for (int index = 0; index < timestampLabels.length; index++) {
+            timestampLabels[index] =
+                ConvertUtils.utcToLocalTimeHour(
+                    latestTimestamp - (3 - index) * timeSlotOffset);
+        }
+        mBatteryChartView.setTimestamps(timestampLabels);
     }
 
     private static String utcToLocalTime(long[] timestamps) {

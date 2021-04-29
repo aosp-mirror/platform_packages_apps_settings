@@ -196,6 +196,11 @@ public final class ConvertUtils {
         for (int index = 0; index < timeSlotSize; index++) {
             final Long currentTimestamp =
                 Long.valueOf(batteryHistoryKeys[index * timestampStride]);
+            // Uses empty list if the timestamp is default value.
+            if (currentTimestamp == 0) {
+                resultMap.put(Integer.valueOf(index), new ArrayList<BatteryDiffEntry>());
+                continue;
+            }
             final Long nextTimestamp =
                 Long.valueOf(batteryHistoryKeys[index * timestampStride + 1]);
             final Long nextTwoTimestamp =

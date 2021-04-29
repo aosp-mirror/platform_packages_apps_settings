@@ -24,7 +24,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -75,8 +74,79 @@ public class ProviderModelSliceHelper {
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
     }
 
-    private static void log(String s) {
-        Log.d(TAG, s);
+    /**
+     * @return whether there is the carrier item in the slice.
+     */
+    public boolean hasCarrier() {
+        if (isAirplaneModeEnabled()
+                || mSubscriptionManager == null || mTelephonyManager == null
+                || mSubscriptionManager.getDefaultDataSubscriptionId()
+                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @return whether the MobileData's is enabled.
+     */
+    public boolean isMobileDataEnabled() {
+        return mTelephonyManager.isDataEnabled();
+    }
+
+    /**
+     * To check the carrier data status.
+     *
+     * @return whether the carrier data is active.
+     */
+    public boolean isDataSimActive() {
+        return MobileNetworkUtils.activeNetworkIsCellular(mContext);
+    }
+
+    /**
+     * @return whether the ServiceState's data state is in-service.
+     */
+    public boolean isDataStateInService() {
+        return mTelephonyManager.getDataState() == mTelephonyManager.DATA_CONNECTED;
+    }
+
+    /**
+     * @return whether the ServiceState's voice state is in-service.
+     */
+    public boolean isVoiceStateInService() {
+        final ServiceState serviceState = mTelephonyManager.getServiceState();
+        return serviceState != null
+                && serviceState.getState() == serviceState.STATE_IN_SERVICE;
+    }
+
+    /**
+     * To get the signal bar icon with level.
+     *
+     * @return The Drawable which is a signal bar icon with level.
+     */
+    public Drawable getDrawableWithSignalStrength() {
+        final SignalStrength strength = mTelephonyManager.getSignalStrength();
+        int level = (strength == null) ? 0 : strength.getLevel();
+        int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
+        if (mSubscriptionManager != null && shouldInflateSignalStrength(
+                mSubscriptionManager.getDefaultDataSubscriptionId())) {
+            level += 1;
+            numLevels += 1;
+        }
+        return MobileNetworkUtils.getSignalStrengthIcon(mContext, level, numLevels,
+                NO_CELL_DATA_TYPE_ICON, false);
+    }
+
+    /**
+     * To update the telephony with subid.
+     */
+    public void updateTelephony() {
+        if (mSubscriptionManager == null || mSubscriptionManager.getDefaultDataSubscriptionId()
+                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return;
+        }
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(
+                mSubscriptionManager.getDefaultDataSubscriptionId());
     }
 
     protected ListBuilder createListBuilder(Uri uri) {
@@ -95,19 +165,6 @@ public class ProviderModelSliceHelper {
                 .filter(x -> x.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED)
                 .findFirst();
         return item.isPresent() ? item.get() : null;
-    }
-
-    /**
-     * @return whether there is the carrier item in the slice.
-     */
-    public boolean hasCarrier() {
-        if (isAirplaneModeEnabled()
-                || mSubscriptionManager == null || mTelephonyManager == null
-                || mSubscriptionManager.getDefaultDataSubscriptionId()
-                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return false;
-        }
-        return true;
     }
 
     protected ListBuilder.RowBuilder createCarrierRow(String networkTypeDescription) {
@@ -142,6 +199,18 @@ public class ProviderModelSliceHelper {
                 ListBuilder.ICON_IMAGE, mContext.getText(R.string.summary_placeholder));
     }
 
+    protected boolean isAirplaneModeEnabled() {
+        return WirelessUtils.isAirplaneModeOn(mContext);
+    }
+
+    protected SubscriptionManager getSubscriptionManager() {
+        return mSubscriptionManager;
+    }
+
+    private static void log(String s) {
+        Log.d(TAG, s);
+    }
+
     private PendingIntent getPrimaryAction(String intentAction) {
         final Intent intent = new Intent(intentAction)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -153,40 +222,6 @@ public class ProviderModelSliceHelper {
         return SignalStrengthUtil.shouldInflateSignalStrength(mContext, subId);
     }
 
-    protected boolean isAirplaneModeEnabled() {
-        return WirelessUtils.isAirplaneModeOn(mContext);
-    }
-
-    protected boolean isMobileDataEnabled() {
-        if (mTelephonyManager == null) {
-            return false;
-        }
-        return mTelephonyManager.isDataEnabled();
-    }
-
-    /**
-     * To check the carrier data status.
-     *
-     * @return whether the carrier data is active.
-     */
-    public boolean isDataSimActive() {
-        return isNoCarrierData() ? false : MobileNetworkUtils.activeNetworkIsCellular(mContext);
-    }
-
-    protected boolean isNoCarrierData() {
-        if (mTelephonyManager == null) {
-            return false;
-        }
-        boolean mobileDataOnAndNoData = isMobileDataEnabled()
-                && mTelephonyManager.getDataState() != mTelephonyManager.DATA_CONNECTED;
-        ServiceState serviceState = mTelephonyManager.getServiceState();
-        boolean mobileDataOffAndOutOfService = !isMobileDataEnabled() && serviceState != null
-                && serviceState.getState() == serviceState.STATE_OUT_OF_SERVICE;
-        log("mobileDataOnAndNoData: " + mobileDataOnAndNoData
-                + ",mobileDataOffAndOutOfService: " + mobileDataOffAndOutOfService);
-        return mobileDataOnAndNoData || mobileDataOffAndOutOfService;
-    }
-
     @VisibleForTesting
     Drawable getMobileDrawable(Drawable drawable) throws Throwable {
         // set color and drawable
@@ -194,7 +229,7 @@ public class ProviderModelSliceHelper {
             log("mTelephonyManager == null");
             return drawable;
         }
-        if (!isNoCarrierData()) {
+        if (isDataStateInService() || isVoiceStateInService()) {
             Semaphore lock = new Semaphore(0);
             AtomicReference<Drawable> shared = new AtomicReference<>();
             ThreadUtils.postOnMainThread(() -> {
@@ -213,35 +248,18 @@ public class ProviderModelSliceHelper {
         return drawable;
     }
 
-    /**
-     * To get the signal bar icon with level.
-     *
-     * @return The Drawable which is a signal bar icon with level.
-     */
-    public Drawable getDrawableWithSignalStrength() {
-        final SignalStrength strength = mTelephonyManager.getSignalStrength();
-        int level = (strength == null) ? 0 : strength.getLevel();
-        int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
-        if (mSubscriptionManager != null && shouldInflateSignalStrength(
-                mSubscriptionManager.getDefaultDataSubscriptionId())) {
-            level += 1;
-            numLevels += 1;
-        }
-        return MobileNetworkUtils.getSignalStrengthIcon(mContext, level, numLevels,
-                NO_CELL_DATA_TYPE_ICON, false);
-    }
-
     private String getMobileSummary(String networkTypeDescription) {
-        final WifiManager wifiManager = mContext.getSystemService(WifiManager.class);
+        if (!isMobileDataEnabled()) {
+            return mContext.getString(R.string.mobile_data_off_summary);
+        }
+        if (!isDataStateInService()) {
+            return mContext.getString(R.string.mobile_data_no_connection);
+        }
         String summary = networkTypeDescription;
         if (isDataSimActive()) {
             summary = mContext.getString(R.string.preference_summary_default_combination,
                     mContext.getString(R.string.mobile_data_connection_active),
                     networkTypeDescription);
-        } else if (!isMobileDataEnabled()) {
-            summary = mContext.getString(R.string.mobile_data_off_summary);
-        } else if (!wifiManager.isWifiEnabled() && !isDataSimActive()) {
-            summary = mContext.getString(R.string.mobile_data_no_connection);
         }
         return summary;
     }
@@ -260,26 +278,10 @@ public class ProviderModelSliceHelper {
         return title;
     }
 
-    protected SubscriptionManager getSubscriptionManager() {
-        return mSubscriptionManager;
-    }
-
     private Set<String> getKeywords() {
         final String keywords = mContext.getString(R.string.keywords_internet);
         return Arrays.stream(TextUtils.split(keywords, ","))
                 .map(String::trim)
                 .collect(Collectors.toSet());
-    }
-
-    /**
-     * To update the telephony with subid.
-     */
-    public void updateTelephony() {
-        if (mSubscriptionManager == null || mSubscriptionManager.getDefaultDataSubscriptionId()
-                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return;
-        }
-        mTelephonyManager = mTelephonyManager.createForSubscriptionId(
-                mSubscriptionManager.getDefaultDataSubscriptionId());
     }
 }

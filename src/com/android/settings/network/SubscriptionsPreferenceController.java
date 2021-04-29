@@ -257,15 +257,20 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     }
 
     private CharSequence getMobilePreferenceSummary(int subId) {
-        TelephonyManager tm = mTelephonyManager.createForSubscriptionId(subId);
-        String result = mSubsPrefCtrlInjector.getNetworkType(
-                mContext, mConfig, mTelephonyDisplayInfo, subId);
-        if (!tm.isDataEnabled()) {
+        final TelephonyManager tmForSubId = mTelephonyManager.createForSubscriptionId(subId);
+        if (!tmForSubId.isDataEnabled()) {
             return mContext.getString(R.string.mobile_data_off_summary);
         }
-        if (!result.isEmpty() && mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext)) {
+
+        final boolean isDataInService = tmForSubId.getDataState()
+                == TelephonyManager.DATA_CONNECTED;
+        String result = mSubsPrefCtrlInjector.getNetworkType(
+                mContext, mConfig, mTelephonyDisplayInfo, subId);
+        if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext)) {
             result = mContext.getString(R.string.preference_summary_default_combination,
                     mContext.getString(R.string.mobile_data_connection_active), result);
+        } else if (!isDataInService) {
+            result = mContext.getString(R.string.mobile_data_no_connection);
         }
         return Html.fromHtml(result, Html.FROM_HTML_MODE_LEGACY);
     }
@@ -274,31 +279,27 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final TelephonyManager tmForSubId = mTelephonyManager.createForSubscriptionId(subId);
         final SignalStrength strength = tmForSubId.getSignalStrength();
         int level = (strength == null) ? 0 : strength.getLevel();
-
         int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
         if (shouldInflateSignalStrength(subId)) {
             level += 1;
             numLevels += 1;
         }
 
-        final boolean isMobileDataOn = tmForSubId.isDataEnabled();
+        Drawable icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, false);
         final boolean isActiveCellularNetwork =
                 mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext);
-        final boolean isMobileDataAccessible = tmForSubId.getDataState()
-                == TelephonyManager.DATA_CONNECTED;
-        final ServiceState serviceState = tmForSubId.getServiceState();
-        final boolean isVoiceOutOfService = (serviceState == null)
-                ? true
-                : (serviceState.getState() == ServiceState.STATE_OUT_OF_SERVICE);
-
-        Drawable icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, false);
-
         if (isActiveCellularNetwork) {
             icon.setTint(Utils.getColorAccentDefaultColor(mContext));
             return icon;
         }
-        if ((isMobileDataOn && isMobileDataAccessible)
-                || (!isMobileDataOn && !isVoiceOutOfService)) {
+
+        final boolean isDataInService = tmForSubId.getDataState()
+                == TelephonyManager.DATA_CONNECTED;
+        final ServiceState serviceState = tmForSubId.getServiceState();
+        final boolean isVoiceInService = (serviceState == null)
+                ? false
+                : (serviceState.getState() == ServiceState.STATE_IN_SERVICE);
+        if (isDataInService || isVoiceInService) {
             return icon;
         }
 
@@ -579,7 +580,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             String iconKey = getIconKey(telephonyDisplayInfo);
             int resId = mapIconSets(config).get(iconKey).dataContentDescription;
             return resId != 0
-                ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId) : "";
+                    ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId)
+                    : "";
         }
 
         /**
