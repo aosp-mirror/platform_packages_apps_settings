@@ -425,8 +425,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Menggunakan sidik jari Anda untuk membuka kunci ponsel mungkin kurang aman dibandingkan dengan pola atau PIN yang rumit"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Cara kerjanya"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Buka Kunci dengan Sidik Jari membuat model unik dari sidik jari Anda untuk mengenali Anda selama autentikasi. Untuk membuat model sidik jari ini selama penyiapan, Anda akan mengambil gambar sidik jari dari berbagai posisi."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="1871569220720675048">"Ponsel juga akan menggunakan gambar dari interaksi Anda dengan Buka Kunci dengan Sidik Jari untuk memperbarui model sidik jari. Gambar dan model sidik jari disimpan secara aman di ponsel dan tidak pernah dikirim ke luar ponsel. Semua pemrosesan dilakukan secara aman di ponsel Anda."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Anda dapat menghapus gambar dan model sidik jari Anda, atau menonaktifkan Buka Kunci dengan Sidik Jari kapan saja di Setelan. Gambar dan model sidik jari akan disimpan di ponsel sampai Anda menghapusnya."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Ubah sedikit posisi jari di setiap percobaan"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Tutupi ikon dengan bagian tengah sidik jari"</string>
@@ -793,11 +795,15 @@
     <string name="device_details_title" msgid="1155622417516195481">"Detail perangkat"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Alamat Bluetooth perangkat: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Lupakan perangkat?"</string>
+    <string name="remove_association_button" msgid="5004208145998061135">"Hapus atribusi"</string>
+    <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Putuskan Koneksi Aplikasi?"</string>
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Ponsel Anda tidak akan disambungkan lagi dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Tablet Anda tidak akan disambungkan lagi dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Perangkat Anda tidak akan disambungkan lagi dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Aplikasi <xliff:g id="APP_NAME">%1$s</xliff:g> tidak akan lagi terhubung ke <xliff:g id="DEVICE_NAME">%2$s</xliff:g> Anda"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> tidak akan disambungkan lagi dengan perangkat yang ditautkan ke akun ini"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Lupakan perangkat"</string>
+    <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Putuskan koneksi aplikasi"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Sambungkan ke…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> akan dilepas sambungannya dari audio media."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> akan dilepas sambungannya dari audio handsfree."</string>
@@ -1335,7 +1341,7 @@
     <string name="screen_timeout_title" msgid="785134393520893049">"Layar mati"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Setelah tidak aktif selama <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Wallpaper"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"Gaya &amp; wallpaper"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Wallpaper &amp; gaya"</string>
     <string name="wallpaper_dashboard_summary" msgid="772304840285426509">"Warna, petak aplikasi"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Default"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Khusus"</string>
@@ -2774,17 +2780,16 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Tingkat daya baterai selama 24 jam terakhir"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Penggunaan aplikasi selama 24 jam terakhir"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Penggunaan sistem selama 24 jam terakhir"</string>
-    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
-    <skip />
-    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
-    <skip />
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Penggunaan sistem untuk <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Penggunaan aplikasi untuk <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"am"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"pm"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: kurang dari satu menit"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Latar belakang: kurang dari satu menit"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Latar belakang: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"Data penggunaan baterai merupakan perkiraan"</string>
+    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistik Proses"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistik teknis tentang proses yang berjalan"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Penggunaan memori"</string>
@@ -5043,7 +5048,7 @@
     <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="506057560516483258">"Mode jaringan pilihan: NR/LTE/TDSCDMA/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4337061745216872524">"Mode jaringan pilihan: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3396717432149544381">"Mode jaringan pilihan: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
-    <string name="network_recommended" msgid="4665525658003183348">" (direkomendasikan)"</string>
+    <string name="network_5G_recommended" msgid="4769018972369031538">"5G (disarankan)"</string>
     <string name="network_lte" msgid="2449425437381668780">"LTE (disarankan)"</string>
     <string name="network_4G" msgid="9018841362928321047">"4G (disarankan)"</string>
     <string name="label_available" msgid="5305726869955838606">"Jaringan yang tersedia"</string>
@@ -5374,7 +5379,7 @@
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"Nonaktifkan sekarang"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"Aktifkan sekarang"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Menggunakan Cahaya Malam"</string>
-    <string name="nfc_main_switch_title" msgid="6295839988954817432">"Menggunakan NFC"</string>
+    <string name="nfc_main_switch_title" msgid="6295839988954817432">"Gunakan NFC"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Menggunakan baterai adaptif"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Menggunakan kecerahan adaptif"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Menggunakan panggilan Wi-Fi"</string>
@@ -5397,7 +5402,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Tampilkan pesan saat aplikasi mengakses teks, gambar, atau konten lainnya yang telah Anda salin"</string>
     <string name="all_apps" msgid="3054120149509114789">"Semua aplikasi"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Jangan izinkan"</string>
-    <string name="uwb_settings_title" msgid="2292158556760642919">"Ultra-WideBand (UWB)"</string>
+    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-Wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Membantu mengidentifikasi posisi relatif perangkat di sekitar yang memiliki UWB"</string>
-    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"Menonaktifkan Mode pesawat untuk menggunakan UWB."</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Nonaktifkan mode pesawat untuk menggunakan UWB"</string>
 </resources>
