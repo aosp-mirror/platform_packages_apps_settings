@@ -301,21 +301,37 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         }
 
         final List<ScanResult> wifiList = mWifiManager.getScanResults();
-        if (wifiList != null && wifiList.size() == 0) {
-            // Sub-Title:
-            // show non_carrier_network_unavailable
-            //   - while Wi-Fi on + no Wi-Fi item
-            // show all_network_unavailable:
-            //   - while Wi-Fi on + no Wi-Fi item + no carrier
-            //   - while Wi-Fi on + no Wi-Fi item + no data capability
-            log("No Wi-Fi item.");
-            mSubtitle = SUBTITLE_TEXT_NON_CARRIER_NETWORK_UNAVAILABLE;
-            if (!mProviderModelSliceHelper.hasCarrier()
-                    || !mProviderModelSliceHelper.isDataSimActive()) {
-                log("No carrier item or no carrier data.");
-                mSubtitle = SUBTITLE_TEXT_ALL_CARRIER_NETWORK_UNAVAILABLE;
-            }
+        if (wifiList != null && wifiList.size() != 0) {
+            return;
         }
+
+        // Sub-Title:
+        // show non_carrier_network_unavailable
+        //   - while Wi-Fi on + no Wi-Fi item
+        //   - while Wi-Fi on + no Wi-Fi item + mobile data off
+        // show all_network_unavailable:
+        //   - while Wi-Fi on + no Wi-Fi item + no carrier item
+        //   - while Wi-Fi on + no Wi-Fi item + service is out of service
+        //   - while Wi-Fi on + no Wi-Fi item + mobile data on + no carrier data.
+        log("No Wi-Fi item.");
+        if (!mProviderModelSliceHelper.hasCarrier()
+                || (!mProviderModelSliceHelper.isVoiceStateInService()
+                && !mProviderModelSliceHelper.isDataStateInService())) {
+            log("no carrier or service is out of service.");
+            mSubtitle = SUBTITLE_TEXT_ALL_CARRIER_NETWORK_UNAVAILABLE;
+            return;
+        }
+        if (!mProviderModelSliceHelper.isMobileDataEnabled()) {
+            log("mobile data off");
+            mSubtitle = SUBTITLE_TEXT_NON_CARRIER_NETWORK_UNAVAILABLE;
+            return;
+        }
+        if (!mProviderModelSliceHelper.isDataSimActive()) {
+            log("no carrier data.");
+            mSubtitle = SUBTITLE_TEXT_ALL_CARRIER_NETWORK_UNAVAILABLE;
+            return;
+        }
+        mSubtitle = SUBTITLE_TEXT_NON_CARRIER_NETWORK_UNAVAILABLE;
     }
 
     private class NetworkProviderTelephonyCallback extends TelephonyCallback implements

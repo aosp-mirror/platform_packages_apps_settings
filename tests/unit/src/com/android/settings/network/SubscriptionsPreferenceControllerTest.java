@@ -544,6 +544,33 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     @UiThreadTest
+    public void onTelephonyDisplayInfoChanged_providerAndHasMultiSimAndOutOfService_noConnection() {
+        final String noConnectionSummary =
+                ResourcesUtils.getResourcesString(mContext, "mobile_data_no_connection");
+        final CharSequence expectedSummary =
+                Html.fromHtml(noConnectionSummary, Html.FROM_HTML_MODE_LEGACY);
+        final String networkType = "LTE";
+        final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
+        final TelephonyDisplayInfo telephonyDisplayInfo =
+                new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_UNKNOWN,
+                        TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
+        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
+        doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
+                TelephonyManager.DATA_DISCONNECTED, ServiceState.STATE_OUT_OF_SERVICE);
+        doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
+        doReturn(networkType)
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+
+        mController.onResume();
+        mController.displayPreference(mPreferenceScreen);
+        mController.onTelephonyDisplayInfoChanged(telephonyDisplayInfo);
+
+        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    @UiThreadTest
     public void onAirplaneModeChanged_providerAndHasSim_noPreference() {
         setupMockSubscriptions(1);
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);

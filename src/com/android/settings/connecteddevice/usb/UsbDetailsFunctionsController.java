@@ -57,7 +57,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
 
     private PreferenceCategory mProfilesContainer;
     private TetheringManager mTetheringManager;
-    private Handler mHandler = new Handler();
+    private Handler mHandler;
     @VisibleForTesting
     OnStartTetheringCallback mOnStartTetheringCallback;
     @VisibleForTesting
@@ -69,6 +69,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
         mTetheringManager = context.getSystemService(TetheringManager.class);
         mOnStartTetheringCallback = new OnStartTetheringCallback();
         mPreviousFunction = mUsbBackend.getCurrentFunctions();
+        mHandler = new Handler(context.getMainLooper());
     }
 
     @Override
