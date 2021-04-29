@@ -81,10 +81,7 @@ public final class BatteryChartPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mBatteryChartPreferenceController =
-            new BatteryChartPreferenceController(
-                mContext, "app_list", /*lifecycle=*/ null,
-                mSettingsActivity, mFragment);
+        mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
         mBatteryChartPreferenceController.mBatteryChartView = mBatteryChartView;
@@ -572,6 +569,52 @@ public final class BatteryChartPreferenceControllerTest {
             .isEqualTo("System usage for past 24 hr");
     }
 
+    @Test
+    public void testSetTimestampLabel_nullBatteryHistoryKeys_ignore() {
+        mBatteryChartPreferenceController = createController();
+        mBatteryChartPreferenceController.mBatteryHistoryKeys = null;
+        mBatteryChartPreferenceController.mBatteryChartView =
+            spy(new BatteryChartView(mContext));
+        mBatteryChartPreferenceController.setTimestampLabel();
+
+        verify(mBatteryChartPreferenceController.mBatteryChartView, never())
+            .setTimestamps(any());
+    }
+
+    @Test
+    public void testSetTimestampLabel_setExpectedTimestampData() {
+        mBatteryChartPreferenceController = createController();
+        mBatteryChartPreferenceController.mBatteryChartView =
+            spy(new BatteryChartView(mContext));
+        setUpBatteryHistoryKeys();
+        // Generates the expected result.
+        final String[] expectedResults = new String[4];
+        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 8;
+        for (int index = 0; index < expectedResults.length; index++) {
+            expectedResults[index] =
+                ConvertUtils.utcToLocalTimeHour(
+                    1619247636826L - (3 - index) * timeSlotOffset);
+        }
+
+        mBatteryChartPreferenceController.setTimestampLabel();
+
+        verify(mBatteryChartPreferenceController.mBatteryChartView)
+            .setTimestamps(expectedResults);
+    }
+
+    @Test
+    public void testSetTimestampLabel_withoutValidTimestamp_setExpectedTimestampData() {
+        mBatteryChartPreferenceController = createController();
+        mBatteryChartPreferenceController.mBatteryChartView =
+            spy(new BatteryChartView(mContext));
+        mBatteryChartPreferenceController.mBatteryHistoryKeys = new long[] {0L};
+
+        mBatteryChartPreferenceController.setTimestampLabel();
+
+        verify(mBatteryChartPreferenceController.mBatteryChartView)
+            .setTimestamps(any());
+    }
+
     private static Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {
         final Map<Long, List<BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         for (int index = 0; index < size; index++) {
@@ -597,5 +640,11 @@ public final class BatteryChartPreferenceControllerTest {
         // Simulates the locale in GMT.
         ConvertUtils.sSimpleDateFormatForHour
              .setTimeZone(TimeZone.getTimeZone("GMT"));
+    }
+
+    private BatteryChartPreferenceController createController() {
+        return new BatteryChartPreferenceController(
+            mContext, "app_list", /*lifecycle=*/ null,
+            mSettingsActivity, mFragment);
     }
 }

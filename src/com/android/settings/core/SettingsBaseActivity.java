@@ -18,6 +18,7 @@ package com.android.settings.core;
 import android.annotation.LayoutRes;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
+import android.app.ActivityOptions;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -27,6 +28,7 @@ import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
@@ -43,10 +45,13 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.CategoryManager;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.resources.TextAppearanceConfig;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
@@ -60,6 +65,7 @@ public class SettingsBaseActivity extends FragmentActivity {
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
     private static final String DATA_SCHEME_PKG = "package";
+    private static final int DEFAULT_REQUEST = -1;
 
     // Serves as a temporary list of tiles to ignore until we heard back from the PM that they
     // are disabled.
@@ -73,6 +79,13 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (Utils.isPageTransitionEnabled(this)) {
+            // Enable Activity transitions
+            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+            SettingsTransitionHelper.applyForwardTransition(this);
+            SettingsTransitionHelper.applyBackwardTransition(this);
+        }
+
         super.onCreate(savedInstanceState);
         if (isLockTaskModePinned() && !isSettingsRunOnTop()) {
             Log.w(TAG, "Devices lock task mode pinned.");
@@ -80,6 +93,7 @@ public class SettingsBaseActivity extends FragmentActivity {
         }
         final long startTime = System.currentTimeMillis();
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
+        TextAppearanceConfig.setShouldLoadFontSynchronously(true);
 
         final TypedArray theme = getTheme().obtainStyledAttributes(android.R.styleable.Theme);
         if (!theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
@@ -120,6 +134,57 @@ public class SettingsBaseActivity extends FragmentActivity {
             finish();
         }
         return true;
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        if (!Utils.isPageTransitionEnabled(this)) {
+            super.startActivity(intent);
+            return;
+        }
+        super.startActivity(intent, getActivityOptionsBundle());
+    }
+
+    @Override
+    public void startActivity(Intent intent, @androidx.annotation.Nullable Bundle options) {
+        if (!Utils.isPageTransitionEnabled(this) || options != null) {
+            super.startActivity(intent, options);
+            return;
+        }
+        super.startActivity(intent, getActivityOptionsBundle());
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        // startActivity() will eventually calls startActivityForResult() with requestCode -1.
+        // Adding this condition to avoid multiple calls.
+        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST) {
+            super.startActivityForResult(intent, requestCode);
+            return;
+        }
+        super.startActivityForResult(intent, requestCode, getActivityOptionsBundle());
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode,
+            @androidx.annotation.Nullable Bundle options) {
+        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST
+                || options != null) {
+            super.startActivityForResult(intent, requestCode, options);
+            return;
+        }
+        super.startActivityForResult(intent, requestCode, getActivityOptionsBundle());
+    }
+
+    @Override
+    public void startActivityForResultAsUser(Intent intent, int requestCode,
+            UserHandle userHandle) {
+        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST) {
+            super.startActivityForResultAsUser(intent, requestCode, userHandle);
+            return;
+        }
+        super.startActivityForResultAsUser(intent, requestCode, getActivityOptionsBundle(),
+                userHandle);
     }
 
     @Override
@@ -267,10 +332,16 @@ public class SettingsBaseActivity extends FragmentActivity {
         }
     }
 
+    private Bundle getActivityOptionsBundle() {
+        final Toolbar toolbar = findViewById(R.id.action_bar);
+        return ActivityOptions.makeSceneTransitionAnimation(this, toolbar,
+                "shared_element_view").toBundle();
+    }
+
     public interface CategoryListener {
         /**
          * @param categories the changed categories that have to be refreshed, or null to force
-         * refreshing all.
+         *                   refreshing all.
          */
         void onCategoriesChanged(@Nullable Set<String> categories);
     }
