@@ -48,15 +48,16 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     private static final int CHOOSE_LOCK_REQUEST = 2002;
 
     private static final String SAVE_STATE_CONFIRM_CREDETIAL = "confirm_credential";
-    private static final String DO_NOT_FINISH_ACTIVITY = "do_not_finish_activity";
 
     protected int mUserId;
+    protected long mFaceChallenge;
+    protected long mFingerprintChallenge;
+    protected int mFaceSensorId;
+    protected int mFingerprintSensorId;
     protected long mGkPwHandle;
     private boolean mConfirmCredential;
     @Nullable private FaceManager mFaceManager;
     @Nullable private FingerprintManager mFingerprintManager;
-    // Do not finish() if choosing/confirming credential, or showing fp/face settings
-    private boolean mDoNotFinishActivity;
 
     @Override
     public void onAttach(Context context) {
@@ -77,7 +78,6 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
 
         if (savedInstanceState != null) {
             mConfirmCredential = savedInstanceState.getBoolean(SAVE_STATE_CONFIRM_CREDETIAL);
-            mDoNotFinishActivity = savedInstanceState.getBoolean(DO_NOT_FINISH_ACTIVITY);
             if (savedInstanceState.containsKey(
                     ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE)) {
                 mGkPwHandle = savedInstanceState.getLong(
@@ -92,47 +92,31 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (!mConfirmCredential) {
-            mDoNotFinishActivity = false;
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (!getActivity().isChangingConfigurations() && !mDoNotFinishActivity) {
+    public void onDestroy() {
+        super.onDestroy();
+        if (getActivity().isFinishing()) {
+            mFaceManager.revokeChallenge(mFaceSensorId, mUserId, mFaceChallenge);
+            mFingerprintManager.revokeChallenge(mUserId, mFingerprintChallenge);
             BiometricUtils.removeGatekeeperPasswordHandle(getActivity(), mGkPwHandle);
-            getActivity().finish();
         }
     }
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         final String key = preference.getKey();
-
-        // Generate challenge (and request LSS to create a HAT) each time the preference is clicked,
-        // since FingerprintSettings and FaceSettings revoke the challenge when finishing.
         if (getFacePreferenceKey().equals(key)) {
-            mDoNotFinishActivity = true;
-            mFaceManager.generateChallenge((sensorId, challenge) -> {
-                final byte[] token = BiometricUtils.requestGatekeeperHat(getActivity(), mGkPwHandle,
-                        mUserId, challenge);
-                final Bundle extras = preference.getExtras();
-                extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                extras.putInt(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
-                extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
-            });
+            final byte[] token = BiometricUtils.requestGatekeeperHat(getActivity(), mGkPwHandle,
+                    mUserId, mFaceChallenge);
+            final Bundle extras = preference.getExtras();
+            extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+            extras.putInt(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, mFaceSensorId);
+            extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mFaceChallenge);
         } else if (getFingerprintPreferenceKey().equals(key)) {
-            mDoNotFinishActivity = true;
-            mFingerprintManager.generateChallenge(mUserId, (sensorId, challenge) -> {
-                final byte[] token = BiometricUtils.requestGatekeeperHat(getActivity(), mGkPwHandle,
-                        mUserId, challenge);
-                final Bundle extras = preference.getExtras();
-                extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
-            });
+            final byte[] token = BiometricUtils.requestGatekeeperHat(getActivity(), mGkPwHandle,
+                    mUserId, mFingerprintChallenge);
+            final Bundle extras = preference.getExtras();
+            extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+            extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mFingerprintChallenge);
         }
         return super.onPreferenceTreeClick(preference);
     }
@@ -141,7 +125,6 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVE_STATE_CONFIRM_CREDETIAL, mConfirmCredential);
-        outState.putBoolean(DO_NOT_FINISH_ACTIVITY, mDoNotFinishActivity);
         if (mGkPwHandle != 0L) {
             outState.putLong(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, mGkPwHandle);
         }
@@ -152,10 +135,17 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CONFIRM_REQUEST || requestCode == CHOOSE_LOCK_REQUEST) {
             mConfirmCredential = false;
-            mDoNotFinishActivity = false;
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
-                if (BiometricUtils.containsGatekeeperPasswordHandle(data)) {
+                if (data != null && BiometricUtils.containsGatekeeperPasswordHandle(data)) {
                     mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
+                    mFaceManager.generateChallenge((sensorId, challenge) -> {
+                        mFaceSensorId = sensorId;
+                        mFaceChallenge = challenge;
+                    });
+                    mFingerprintManager.generateChallenge(mUserId, (sensorId, challenge) -> {
+                        mFingerprintSensorId = sensorId;
+                        mFingerprintChallenge = challenge;
+                    });
                 } else {
                     Log.d(getLogTag(), "Data null or GK PW missing.");
                     finish();
@@ -188,7 +178,6 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         if (mUserId != UserHandle.USER_NULL) {
             builder.setUserId(mUserId);
         }
-        mDoNotFinishActivity = true;
         final boolean launched = builder.show();
 
         if (!launched) {

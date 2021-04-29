@@ -129,7 +129,7 @@ public class InternetConnectivityPanelTest {
     @Test
     public void getSubTitle_apmOffWifiOnNoWifiListHasCarrierData_NonCarrierNetworkUnavailable() {
         List wifiList = new ArrayList<ScanResult>();
-        mockCondition(false, true, true, true, wifiList);
+        mockCondition(false, true, true, true, true, true, wifiList);
 
         mPanel.updatePanelTitle();
 
@@ -137,9 +137,29 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getSubTitle_apmOffWifiOnNoWifiListNoCarrierData_AllNetworkUnavailable() {
+    public void getSubTitle_apmOffWifiOnNoWifiListNoCarrierItem_AllNetworkUnavailable() {
         List wifiList = new ArrayList<ScanResult>();
-        mockCondition(false, true, false, true, wifiList);
+        mockCondition(false, false, false, false, false, true, wifiList);
+
+        mPanel.updatePanelTitle();
+
+        assertThat(mPanel.getSubTitle()).isEqualTo(SUBTITLE_ALL_NETWORK_UNAVAILABLE);
+    }
+
+    @Test
+    public void getSubTitle_apmOffWifiOnNoWifiListNoDataSimActive_AllNetworkUnavailable() {
+        List wifiList = new ArrayList<ScanResult>();
+        mockCondition(false, true, false, true, true, true, wifiList);
+
+        mPanel.updatePanelTitle();
+
+        assertThat(mPanel.getSubTitle()).isEqualTo(SUBTITLE_ALL_NETWORK_UNAVAILABLE);
+    }
+
+    @Test
+    public void getSubTitle_apmOffWifiOnNoWifiListNoService_AllNetworkUnavailable() {
+        List wifiList = new ArrayList<ScanResult>();
+        mockCondition(false, true, false, true, false, true, wifiList);
 
         mPanel.updatePanelTitle();
 
@@ -151,7 +171,7 @@ public class InternetConnectivityPanelTest {
         List wifiList = new ArrayList<ScanResult>();
         wifiList.add(new ScanResult());
         wifiList.add(new ScanResult());
-        mockCondition(false, true, false, true, wifiList);
+        mockCondition(false, true, false, true, true, true, wifiList);
 
         mPanel.updatePanelTitle();
 
@@ -184,7 +204,7 @@ public class InternetConnectivityPanelTest {
     @Test
     public void getSlices_providerModelDisabled_containsNecessarySlices() {
         mPanel.mIsProviderModelEnabled = false;
-        final List<Uri> uris = mPanel.getSlices();
+        List<Uri> uris = mPanel.getSlices();
 
         assertThat(uris).containsExactly(
                 AirplaneModePreferenceController.SLICE_URI,
@@ -194,7 +214,7 @@ public class InternetConnectivityPanelTest {
 
     @Test
     public void getSlices_providerModelEnabled_containsNecessarySlices() {
-        final List<Uri> uris = mPanel.getSlices();
+        List<Uri> uris = mPanel.getSlices();
 
         assertThat(uris).containsExactly(
                 CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI,
@@ -291,10 +311,14 @@ public class InternetConnectivityPanelTest {
     }
 
     private void mockCondition(boolean airplaneMode, boolean hasCarrier,
-            boolean isDataSimActive, boolean isWifiEnabled, List<ScanResult> wifiItems) {
+            boolean isDataSimActive, boolean isMobileDataEnabled, boolean isServiceInService,
+            boolean isWifiEnabled, List<ScanResult> wifiItems) {
         doReturn(airplaneMode).when(mInternetUpdater).isAirplaneModeOn();
         when(mProviderModelSliceHelper.hasCarrier()).thenReturn(hasCarrier);
         when(mProviderModelSliceHelper.isDataSimActive()).thenReturn(isDataSimActive);
+        when(mProviderModelSliceHelper.isMobileDataEnabled()).thenReturn(isMobileDataEnabled);
+        when(mProviderModelSliceHelper.isDataStateInService()).thenReturn(isServiceInService);
+        when(mProviderModelSliceHelper.isVoiceStateInService()).thenReturn(isServiceInService);
         doReturn(isWifiEnabled).when(mInternetUpdater).isWifiEnabled();
         doReturn(wifiItems).when(mWifiManager).getScanResults();
     }

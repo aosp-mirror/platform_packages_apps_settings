@@ -17,18 +17,22 @@
 package com.android.settings.core;
 
 import android.annotation.StringRes;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
+import android.widget.Toolbar;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class SubSettingLauncher {
@@ -183,7 +187,16 @@ public class SubSettingLauncher {
         resultListener.getActivity().startActivityForResultAsUser(intent, requestCode, userHandle);
     }
 
-    private void launchForResult(Fragment listener, Intent intent, int requestCode) {
+    @VisibleForTesting
+    void launchForResult(Fragment listener, Intent intent, int requestCode) {
+        if (Utils.isPageTransitionEnabled(mContext)) {
+            final Activity activity = listener.getActivity();
+            final Toolbar toolbar = activity.findViewById(R.id.action_bar);
+            final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity, toolbar,
+                    "shared_element_view").toBundle();
+            listener.startActivityForResult(intent, requestCode, bundle);
+            return;
+        }
         listener.startActivityForResult(intent, requestCode);
     }
 
@@ -192,6 +205,7 @@ public class SubSettingLauncher {
             intent.replaceExtras(mLaunchRequest.extras);
         }
     }
+
     /**
      * Simple container that has information about how to launch a subsetting.
      */
