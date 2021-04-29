@@ -975,31 +975,38 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private int getResIdForFactoryResetProtectionWarningMessage() {
             final boolean hasFingerprints;
+            final boolean hasFace;
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
                 hasFingerprints = mFingerprintManager.hasEnrolledFingerprints(mUserId);
             } else {
                 hasFingerprints = false;
             }
+
+            if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
+                hasFace = mFaceManager.hasEnrolledTemplates(mUserId);
+            } else {
+                hasFace = false;
+            }
+
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    if (hasFingerprints && mIsManagedProfile) {
-                        return R.string
-                                .unlock_disable_frp_warning_content_pattern_fingerprint_profile;
-                    } else if (hasFingerprints && !mIsManagedProfile) {
+                    if (hasFingerprints && hasFace) {
+                        return R.string.unlock_disable_frp_warning_content_pattern_face_fingerprint;
+                    } else if (hasFingerprints) {
                         return R.string.unlock_disable_frp_warning_content_pattern_fingerprint;
-                    } else if (mIsManagedProfile) {
-                        return R.string.unlock_disable_frp_warning_content_pattern_profile;
+                    } else if (hasFace) {
+                        return R.string.unlock_disable_frp_warning_content_pattern_face;
                     } else {
                         return R.string.unlock_disable_frp_warning_content_pattern;
                     }
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                    if (hasFingerprints && mIsManagedProfile) {
-                        return R.string.unlock_disable_frp_warning_content_pin_fingerprint_profile;
-                    } else if (hasFingerprints && !mIsManagedProfile) {
+                    if (hasFingerprints && hasFace) {
+                        return R.string.unlock_disable_frp_warning_content_pin_face_fingerprint;
+                    } else if (hasFingerprints) {
                         return R.string.unlock_disable_frp_warning_content_pin_fingerprint;
-                    } else if (mIsManagedProfile) {
-                        return R.string.unlock_disable_frp_warning_content_pin_profile;
+                    } else if (hasFace) {
+                        return R.string.unlock_disable_frp_warning_content_pin_face;
                     } else {
                         return R.string.unlock_disable_frp_warning_content_pin;
                     }
@@ -1007,24 +1014,23 @@ public class ChooseLockGeneric extends SettingsActivity {
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
                 case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
-                    if (hasFingerprints && mIsManagedProfile) {
+                    if (hasFingerprints && hasFace) {
                         return R.string
-                                .unlock_disable_frp_warning_content_password_fingerprint_profile;
-                    } else if (hasFingerprints && !mIsManagedProfile) {
+                                .unlock_disable_frp_warning_content_password_face_fingerprint;
+                    } else if (hasFingerprints) {
                         return R.string.unlock_disable_frp_warning_content_password_fingerprint;
-                    } else if (mIsManagedProfile) {
-                        return R.string.unlock_disable_frp_warning_content_password_profile;
+                    } else if (hasFace) {
+                        return R.string.unlock_disable_frp_warning_content_password_face;
                     } else {
                         return R.string.unlock_disable_frp_warning_content_password;
                     }
                 default:
-                    if (hasFingerprints && mIsManagedProfile) {
-                        return R.string
-                                .unlock_disable_frp_warning_content_unknown_fingerprint_profile;
-                    } else if (hasFingerprints && !mIsManagedProfile) {
+                    if (hasFingerprints && hasFace) {
+                        return R.string.unlock_disable_frp_warning_content_unknown_face_fingerprint;
+                    } else if (hasFingerprints) {
                         return R.string.unlock_disable_frp_warning_content_unknown_fingerprint;
-                    } else if (mIsManagedProfile) {
-                        return R.string.unlock_disable_frp_warning_content_unknown_profile;
+                    } else if (hasFace) {
+                        return R.string.unlock_disable_frp_warning_content_unknown_face;
                     } else {
                         return R.string.unlock_disable_frp_warning_content_unknown;
                     }
