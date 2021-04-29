@@ -28,12 +28,14 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.UserHandle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -42,10 +44,12 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUtils.class)
 public class SubSettingLauncherTest {
 
     @Mock
@@ -109,10 +113,13 @@ public class SubSettingLauncherTest {
 
     @Test
     public void launch_hasRequestListener_shouldStartActivityForResult() {
+        ShadowUtils.setIsPageTransitionEnabled(true);
         final int requestCode = 123123;
         when(mFragment.getActivity()).thenReturn(mActivity);
 
         final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
+        doNothing().when(launcher).launchForResult(any(Fragment.class), any(Intent.class),
+                anyInt());
         launcher.setTitleText("123")
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -120,7 +127,8 @@ public class SubSettingLauncherTest {
                 .setResultListener(mFragment, requestCode)
                 .launch();
 
-        verify(mFragment).startActivityForResult(any(Intent.class), eq(requestCode));
+        verify(launcher)
+                .launchForResult(eq(mFragment), any(Intent.class), eq(requestCode));
     }
 
     @Test

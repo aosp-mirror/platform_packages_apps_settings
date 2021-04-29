@@ -219,38 +219,6 @@ public class ProviderModelSliceHelperTest {
     }
 
     @Test
-    public void isNoCarrierData_mobileDataOnAndNoData_returnTrue() {
-        mockConnections(true, ServiceState.STATE_IN_SERVICE, "",
-                mTelephonyManager.DATA_DISCONNECTED, true);
-
-        assertThat(mProviderModelSliceHelper.isNoCarrierData()).isTrue();
-    }
-
-    @Test
-    public void isNoCarrierData_mobileDataOffAndOutOfService_returnTrue() {
-        mockConnections(false, ServiceState.STATE_OUT_OF_SERVICE, "",
-                mTelephonyManager.DATA_DISCONNECTED, true);
-
-        assertThat(mProviderModelSliceHelper.isNoCarrierData()).isTrue();
-    }
-
-    @Test
-    public void isNoCarrierData_mobileDataOnAndDataConnected_returnFalse() {
-        mockConnections(true, ServiceState.STATE_IN_SERVICE, "", mTelephonyManager.DATA_CONNECTED,
-                true);
-
-        assertThat(mProviderModelSliceHelper.isNoCarrierData()).isFalse();
-    }
-
-    @Test
-    public void isNoCarrierData_mobileDataOffAndVoiceIsInService_returnFalse() {
-        mockConnections(false, ServiceState.STATE_IN_SERVICE, "",
-                mTelephonyManager.DATA_DISCONNECTED, true);
-
-        assertThat(mProviderModelSliceHelper.isNoCarrierData()).isFalse();
-    }
-
-    @Test
     public void getMobileDrawable_noCarrierData_getMobileDrawable() throws Throwable {
         mockConnections(false, ServiceState.STATE_OUT_OF_SERVICE, "",
                 mTelephonyManager.DATA_DISCONNECTED, true);
