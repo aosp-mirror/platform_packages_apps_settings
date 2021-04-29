@@ -25,6 +25,7 @@
             android:key="conversations"
             android:order="1"
             android:title="@string/conversations_category_title"
+            android:summary=" "
             settings:controller="com.android.settings.notification.ConversationListSummaryPreferenceController"
             android:fragment="com.android.settings.notification.app.ConversationListSettings"
         />
@@ -44,12 +45,18 @@
         <!-- Placeholder for a list of recent apps -->
         <com.android.settings.widget.PrimarySwitchPreference
             android:key="app1"
+            android:title=" "
+            android:summary=" "
             android:order="5"/>
         <com.android.settings.widget.PrimarySwitchPreference
             android:key="app2"
+            android:title=" "
+            android:summary=" "
             android:order="6"/>
         <com.android.settings.widget.PrimarySwitchPreference
             android:key="app3"
+            android:title=" "
+            android:summary=" "
             android:order="7"/>
 
         <!-- See all apps button -->
