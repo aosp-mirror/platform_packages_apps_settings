@@ -20,7 +20,7 @@
     <string name="no" msgid="5541738710521607130">"לא"</string>
     <string name="create" msgid="986997212165228751">"יצירה"</string>
     <string name="allow" msgid="3763244945363657722">"כן, זה בסדר"</string>
-    <string name="deny" msgid="7326117222944479942">"דחייה"</string>
+    <string name="deny" msgid="7326117222944479942">"אני לא מרשה"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"הפעלה"</string>
     <string name="device_info_default" msgid="1406619232867343310">"לא ידוע"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
@@ -1520,7 +1520,7 @@
     <string name="storage_detail_system" msgid="3797439069473271732">"מערכת"</string>
     <string name="storage_detail_explore" msgid="13782374784415466">"עיון ב-<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="3359851869961609901">"‏קבצים אחרים כוללים, בין השאר, קבצים משותפים שנשמרו על-ידי אפליקציות, קבצים שהורדו מהאינטרנט או באמצעות Bluetooth, קובצי Android וכו\'. \n\nכדי לראות את התוכן הגלוי ב-<xliff:g id="NAME">^1</xliff:g>, צריך להקיש על \'גילוי\'."</string>
-    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏המערכת כוללת קבצים המשמשים להרצת גרסת Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"‏המערכת כוללת קבצים המשמשים להפעלת גרסת Android <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_detail_dialog_user" msgid="1691219071007313226">"ייתכן שנשמרו תמונות, מוזיקה, אפליקציות או נתונים אחרים על ידי <xliff:g id="USER_0">^1</xliff:g>, בצריכת אחסון כוללת של <xliff:g id="SIZE">^2</xliff:g>. \n\nכדי לעיין בפרטים, יש לעבור אל <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"הגדרת <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"שימוש כאחסון נייד"</string>
@@ -1759,7 +1759,7 @@
     <string name="location_scanning_screen_title" msgid="2346125609614249968">"‏חיפוש נקודות Wi‑Fi ו-Bluetooth"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"‏חיפוש נקודות Wi-Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"‏אפליקציות ושירותים יוכלו לסרוק רשתות Wi‑Fi בכל שלב, גם כאשר ה-Wi‑Fi כבוי. ניתן להשתמש בכך, למשל, כדי לשפר את הביצועים של תכונות ושירותים מבוססי מיקום."</string>
-    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"‏סריקת Bluetooth"</string>
+    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"‏חיפוש Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"‏אפליקציות ושירותים יוכלו לסרוק מכשירים בקרבת מקום בכל שלב, גם כאשר ה-Bluetooth כבוי. ניתן להשתמש בכך, למשל, כדי לשפר את הביצועים של תכונות ושירותים מבוססי מיקום."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"שירותי מיקום לעבודה"</string>
     <string name="location_network_based" msgid="5247042890080021887">"‏מיקום רשת Wi-Fi ורשת סלולרית"</string>
@@ -2412,7 +2412,7 @@
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"הוספת שירות"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"הוספת מדפסת"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"חיפוש"</string>
-    <string name="print_searching_for_printers" msgid="5401413178028348800">"חיפוש מדפסות מתבצע"</string>
+    <string name="print_searching_for_printers" msgid="5401413178028348800">"מתבצע חיפוש מדפסות"</string>
     <string name="print_service_disabled" msgid="9185935228930987786">"השירות הושבת"</string>
     <string name="print_print_jobs" msgid="2605944855933091183">"עבודות הדפסה"</string>
     <string name="print_print_job" msgid="8477859161886726608">"עבודת הדפסה"</string>
@@ -3712,7 +3712,7 @@
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"לאשר לאפליקציה <xliff:g id="SERVICE">%1$s</xliff:g> לגשת אל ההתראות?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"האפליקציה <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> תוכל לקרוא את כל ההתראות, כולל מידע אישי כמו שמות של אנשי קשר והודעות טקסט שקיבלת. האפליקציה תוכל גם לבטל התראות או להפעיל לחצני פעולה בהתראות, וכן לענות לשיחות טלפון. \n\nבנוסף, האפליקציה תוכל להפעיל או לכבות את התכונה \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"אם משביתים את הגישה של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> להתראות, יכול להיות שגם הגישה לתכונה \'נא לא להפריע\' תושבת."</string>
-    <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"כיבוי"</string>
+    <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"השבתה"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ביטול"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏שירותי סיוע של VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏לא התקבלו בקשות מאפליקציות מותקנות לפעול כשירותי סיוע של VR."</string>
