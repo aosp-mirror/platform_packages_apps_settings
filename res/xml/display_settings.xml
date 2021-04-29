@@ -105,7 +105,8 @@
     <com.android.settings.display.ScreenZoomPreference
         android:key="display_settings_screen_zoom"
         android:title="@string/screen_zoom_title"
-        android:fragment="com.android.settings.display.ScreenZoomSettings"/>
+        android:fragment="com.android.settings.display.ScreenZoomSettings"
+        settings:keywords="@string/keywords_display_size"/>
 
     <SwitchPreference
         android:key="show_operator_name"
