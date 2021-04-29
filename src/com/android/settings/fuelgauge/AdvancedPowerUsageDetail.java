@@ -70,6 +70,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
     public static final String EXTRA_FOREGROUND_TIME = "extra_foreground_time";
     public static final String EXTRA_BACKGROUND_TIME = "extra_background_time";
+    public static final String EXTRA_SLOT_TIME = "extra_slot_time";
     public static final String EXTRA_LABEL = "extra_label";
     public static final String EXTRA_ICON_ID = "extra_icon_id";
     public static final String EXTRA_POWER_USAGE_PERCENT = "extra_power_usage_percent";
@@ -184,6 +185,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putInt(EXTRA_UID, launchArgs.mUid);
         args.putLong(EXTRA_BACKGROUND_TIME, launchArgs.mBackgroundTimeMs);
         args.putLong(EXTRA_FOREGROUND_TIME, launchArgs.mForegroundTimeMs);
+        args.putString(EXTRA_SLOT_TIME, launchArgs.mSlotInformation);
         args.putString(EXTRA_POWER_USAGE_PERCENT, launchArgs.mUsagePercent);
         args.putInt(EXTRA_POWER_USAGE_AMOUNT, launchArgs.mConsumedPower);
         final int userId = launchArgs.mIsUserEntry ? ActivityManager.getCurrentUser()
@@ -294,8 +296,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (enableTriState) {
             final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
             final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+            final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
             //TODO(b/178197718) Update layout to support multiple lines
-            controller.setSummary(getAppActiveTime(foregroundTimeMs, backgroundTimeMs));
+            controller.setSummary(getAppActiveTime(foregroundTimeMs, backgroundTimeMs, slotTime));
         }
 
         controller.done(context, true /* rebindActions */);
@@ -430,32 +433,46 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 getContext(), getArguments().getInt(EXTRA_UID), packageName);
     }
 
-    //TODO(b/178197718) Update method to support time period
-    private CharSequence getAppActiveTime(long foregroundTimeMs, long backgroundTimeMs) {
+    private CharSequence getAppActiveTime(
+            long foregroundTimeMs, long backgroundTimeMs, String slotTime) {
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
 
         if (totalTimeMs == 0) {
             usageTimeSummary = getText(R.string.battery_not_usage);
+        } else if (slotTime == null) {
+            // Shows summary text with past 24 hr if slot time is null.
+            usageTimeSummary =
+                    getAppPast24HrActiveSummary(foregroundTimeMs, backgroundTimeMs, totalTimeMs);
+        } else {
+            // Shows summary text with slot time.
+            usageTimeSummary = getAppActiveSummaryWithSlotTime(
+                    foregroundTimeMs, backgroundTimeMs, totalTimeMs, slotTime);
+        }
+        return usageTimeSummary;
+    }
+
+    private CharSequence getAppPast24HrActiveSummary(
+            long foregroundTimeMs, long backgroundTimeMs, long totalTimeMs) {
         // Shows background summary only if we don't have foreground usage time.
-        } else if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
-            usageTimeSummary = backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS ?
-                    getText(R.string.battery_background_usage_less_minute) :
-                    TextUtils.expandTemplate(getText(R.string.battery_background_usage),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            backgroundTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false));
+        if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
+            return backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS ?
+                    getText(R.string.battery_bg_usage_less_minute) :
+                    TextUtils.expandTemplate(getText(R.string.battery_bg_usage),
+                            StringUtil.formatElapsedTime(
+                                    getContext(),
+                                    backgroundTimeMs,
+                                    /* withSeconds */ false,
+                                    /* collapseTimeUnit */ false));
         // Shows total usage summary only if total usage time is small.
         } else if (totalTimeMs < DateUtils.MINUTE_IN_MILLIS) {
-            usageTimeSummary = getText(R.string.battery_total_usage_less_minute);
+            return getText(R.string.battery_total_usage_less_minute);
         // Shows different total usage summary when background usage time is small.
         } else if (backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS) {
-            usageTimeSummary = TextUtils.expandTemplate(
+            return TextUtils.expandTemplate(
                     getText(backgroundTimeMs == 0 ?
                             R.string.battery_total_usage :
-                            R.string.battery_total_usage_and_background_less_minute_usage),
+                            R.string.battery_total_usage_and_bg_less_minute_usage),
                     StringUtil.formatElapsedTime(
                             getContext(),
                             totalTimeMs,
@@ -463,8 +480,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                             /* collapseTimeUnit */ false));
         // Shows default summary.
         } else {
-            usageTimeSummary = TextUtils.expandTemplate(
-                    getText(R.string.battery_total_and_background_usage),
+            return TextUtils.expandTemplate(
+                    getText(R.string.battery_total_and_bg_usage),
                     StringUtil.formatElapsedTime(
                             getContext(),
                             totalTimeMs,
@@ -476,6 +493,51 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                             /* withSeconds */ false,
                             /* collapseTimeUnit */ false));
         }
-        return usageTimeSummary;
+    }
+
+    private CharSequence getAppActiveSummaryWithSlotTime(
+            long foregroundTimeMs, long backgroundTimeMs, long totalTimeMs, String slotTime) {
+        // Shows background summary only if we don't have foreground usage time.
+        if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
+            return backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS ?
+                    TextUtils.expandTemplate(
+                            getText(R.string.battery_bg_usage_less_minute_with_period),
+                            slotTime) :
+                    TextUtils.expandTemplate(getText(R.string.battery_bg_usage_with_period),
+                            StringUtil.formatElapsedTime(
+                                    getContext(),
+                                    backgroundTimeMs,
+                                    /* withSeconds */ false,
+                                    /* collapseTimeUnit */ false), slotTime);
+        // Shows total usage summary only if total usage time is small.
+        } else if (totalTimeMs < DateUtils.MINUTE_IN_MILLIS) {
+            return TextUtils.expandTemplate(
+                    getText(R.string.battery_total_usage_less_minute_with_period), slotTime);
+        // Shows different total usage summary when background usage time is small.
+        } else if (backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS) {
+            return TextUtils.expandTemplate(
+                    getText(backgroundTimeMs == 0 ?
+                            R.string.battery_total_usage_with_period :
+                            R.string.battery_total_usage_and_bg_less_minute_usage_with_period),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            totalTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false), slotTime);
+        // Shows default summary.
+        } else {
+            return TextUtils.expandTemplate(
+                    getText(R.string.battery_total_and_bg_usage_with_period),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            totalTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false),
+                    StringUtil.formatElapsedTime(
+                            getContext(),
+                            backgroundTimeMs,
+                            /* withSeconds */ false,
+                            /* collapseTimeUnit */ false), slotTime);
+        }
     }
 }
