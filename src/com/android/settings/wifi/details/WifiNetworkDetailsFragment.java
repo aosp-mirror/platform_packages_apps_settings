@@ -25,12 +25,15 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.RestrictedLockUtils;
@@ -51,14 +54,44 @@ import java.util.List;
  * future, please develop in
  * {@link com.android.settings.wifi.details2.WifiNetworkDetailsFragment2}.
  */
-public class WifiNetworkDetailsFragment extends DashboardFragment implements
+public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment implements
         WifiDialog.WifiDialogListener {
 
     private static final String TAG = "WifiNetworkDetailsFrg";
 
+    @VisibleForTesting
+    boolean mIsUiRestricted;
+
     private AccessPoint mAccessPoint;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
     private List<WifiDialog.WifiDialogListener> mWifiDialogListeners = new ArrayList<>();
+
+    public WifiNetworkDetailsFragment() {
+        super(UserManager.DISALLOW_CONFIG_WIFI);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setIfOnlyAvailableForAdmins(true);
+        mIsUiRestricted = isUiRestricted();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mIsUiRestricted) {
+            restrictUi();
+        }
+    }
+
+    @VisibleForTesting
+    void restrictUi() {
+        if (!isUiRestrictedByOnlyAdmin()) {
+            getEmptyTextView().setText(R.string.wifi_empty_list_user_restricted);
+        }
+        getPreferenceScreen().removeAll();
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -102,9 +135,11 @@ public class WifiNetworkDetailsFragment extends DashboardFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
-        item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        if (!mIsUiRestricted) {
+            MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
+            item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
