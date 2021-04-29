@@ -632,7 +632,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 checkNull(bearerMultiDescription(mBearerMulti.getValues())));
         mMvnoType.setSummary(
                 checkNull(mvnoDescription(mMvnoType.getValue())));
-        mMvnoMatchData.setSummary(checkNull(mMvnoMatchData.getText()));
+        mMvnoMatchData.setSummary(checkNullforMvnoValue(mMvnoMatchData.getText()));
         // allow user to edit carrier_enabled for some APN
         final boolean ceEditable = getResources().getBoolean(
                 R.bool.config_allow_edit_carrier_enabled);
@@ -791,7 +791,7 @@ public class ApnEditor extends SettingsPreferenceFragment
             }
             mMvnoType.setValue((String) newValue);
             mMvnoType.setSummary(mvno);
-            mMvnoMatchData.setSummary(checkNull(mMvnoMatchData.getText()));
+            mMvnoMatchData.setSummary(checkNullforMvnoValue(mMvnoMatchData.getText()));
         } else if (KEY_PASSWORD.equals(key)) {
             mPassword.setSummary(starify(newValue != null ? String.valueOf(newValue) : ""));
         } else if (KEY_CARRIER_ENABLED.equals(key)) {
@@ -1214,6 +1214,14 @@ public class ApnEditor extends SettingsPreferenceFragment
      */
     private String checkNull(String value) {
         return TextUtils.isEmpty(value) ? sNotSet : value;
+    }
+
+    /**
+     * To make traslation be diversity, use another string id for MVNO value.
+     */
+    private String checkNullforMvnoValue(String value) {
+        String notSetForMvnoValue = getResources().getString(R.string.apn_not_set_for_mvno);
+        return TextUtils.isEmpty(value) ? notSetForMvnoValue : value;
     }
 
     /**
