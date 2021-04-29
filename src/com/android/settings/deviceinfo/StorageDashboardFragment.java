@@ -85,6 +85,7 @@ public class StorageDashboardFragment extends DashboardFragment
     private static final int VOLUME_SIZE_JOB_ID = 2;
 
     private StorageManager mStorageManager;
+    private UserManager mUserManager;
     private final List<StorageEntry> mStorageEntries = new ArrayList<>();
     private StorageEntry mSelectedStorageEntry;
     private PrivateStorageInfo mStorageInfo;
@@ -96,7 +97,8 @@ public class StorageDashboardFragment extends DashboardFragment
     private StorageSelectionPreferenceController mStorageSelectionController;
     private StorageUsageProgressBarPreferenceController mStorageUsageProgressBarController;
     private List<AbstractPreferenceController> mSecondaryUsers;
-    private boolean mPersonalOnly;
+    private boolean mIsWorkProfile;
+    private int mUserId;
     private Preference mFreeUpSpacePreference;
 
     private final StorageEventListener mStorageEventListener = new StorageEventListener() {
@@ -270,8 +272,6 @@ public class StorageDashboardFragment extends DashboardFragment
 
         final Activity activity = getActivity();
         mStorageManager = activity.getSystemService(StorageManager.class);
-        mPersonalOnly = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.ProfileType.PERSONAL;
 
         if (icicle == null) {
             final VolumeInfo specifiedVolumeInfo =
@@ -288,18 +288,19 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     private void initializePreference() {
-        if (mPersonalOnly) {
-            final Preference summary = getPreferenceScreen().findPreference(SUMMARY_PREF_KEY);
-            if (summary != null) {
-                summary.setVisible(false);
-            }
-        }
         mFreeUpSpacePreference = getPreferenceScreen().findPreference(FREE_UP_SPACE_PREF_KEY);
         mFreeUpSpacePreference.setOnPreferenceClickListener(this);
     }
 
     @Override
     public void onAttach(Context context) {
+        // These member variables are initialized befoer super.onAttach for
+        // createPreferenceControllers to work correctly.
+        mUserManager = context.getSystemService(UserManager.class);
+        mIsWorkProfile = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.ProfileType.WORK;
+        mUserId = Utils.getCurrentUserId(mUserManager, mIsWorkProfile);
+
         super.onAttach(context);
         use(AutomaticStorageManagementSwitchPreferenceController.class).setFragmentManager(
                 getFragmentManager());
@@ -396,7 +397,7 @@ public class StorageDashboardFragment extends DashboardFragment
         }
 
         if (mAppsResult != null) {
-            mPreferenceController.onLoadFinished(mAppsResult, UserHandle.myUserId());
+            mPreferenceController.onLoadFinished(mAppsResult, mUserId);
             updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
             stopLoading = true;
         }
@@ -427,14 +428,13 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
         StorageManager sm = context.getSystemService(StorageManager.class);
         mPreferenceController = new StorageItemPreferenceController(context, this,
-                null /* volume */, new StorageManagerVolumeProvider(sm));
+                null /* volume */, new StorageManagerVolumeProvider(sm), mIsWorkProfile);
         controllers.add(mPreferenceController);
 
-        final UserManager userManager = context.getSystemService(UserManager.class);
-        mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context, userManager);
+        mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context,
+                mUserManager, mIsWorkProfile /* isWorkProfileOnly */);
         controllers.addAll(mSecondaryUsers);
 
         return controllers;
@@ -480,9 +480,10 @@ public class StorageDashboardFragment extends DashboardFragment
                     final UserManager userManager = context.getSystemService(UserManager.class);
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new StorageItemPreferenceController(context, null /* host */,
-                            null /* volume */, new StorageManagerVolumeProvider(sm)));
+                            null /* volume */, new StorageManagerVolumeProvider(sm),
+                            false /* isWorkProfile */));
                     controllers.addAll(SecondaryUserController.getSecondaryUserControllers(
-                            context, userManager));
+                            context, userManager, false /* isWorkProfileOnly */));
                     return controllers;
                 }
 
@@ -492,7 +493,7 @@ public class StorageDashboardFragment extends DashboardFragment
     public Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> onCreateLoader(int id,
             Bundle args) {
         final Context context = getContext();
-        return new StorageAsyncLoader(context, context.getSystemService(UserManager.class),
+        return new StorageAsyncLoader(context, mUserManager,
                 mSelectedStorageEntry.getFsUuid(),
                 new StorageStatsSource(context),
                 context.getPackageManager());
@@ -519,7 +520,7 @@ public class StorageDashboardFragment extends DashboardFragment
             metricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
             metricsFeatureProvider.action(context, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
             final Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
-            context.startActivity(intent);
+            context.startActivityAsUser(intent, new UserHandle(mUserId));
             return true;
         }
         return false;
@@ -574,16 +575,14 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     private void initializeCacheProvider() {
-        mCachedStorageValuesHelper =
-                new CachedStorageValuesHelper(getContext(), UserHandle.myUserId());
+        mCachedStorageValuesHelper = new CachedStorageValuesHelper(getContext(), mUserId);
         initializeCachedValues();
         onReceivedSizes();
     }
 
     private void maybeCacheFreshValues() {
         if (mStorageInfo != null && mAppsResult != null) {
-            mCachedStorageValuesHelper.cacheResult(
-                    mStorageInfo, mAppsResult.get(UserHandle.myUserId()));
+            mCachedStorageValuesHelper.cacheResult(mStorageInfo, mAppsResult.get(mUserId));
         }
     }
 
