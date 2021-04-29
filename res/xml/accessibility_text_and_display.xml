@@ -43,6 +43,7 @@
         android:icon="@drawable/ic_force_bold"
         android:persistent="false"
         android:title="@string/force_bold_text"
+        settings:keywords="@string/keywords_bold_text"
         settings:controller="com.android.settings.accessibility.FontWeightAdjustmentPreferenceController"/>
 
     <Preference
@@ -51,6 +52,7 @@
         android:key="daltonizer_preference"
         android:persistent="false"
         android:title="@string/accessibility_display_daltonizer_preference_title"
+        settings:keywords="@string/keywords_color_correction"
         settings:controller="com.android.settings.accessibility.DaltonizerPreferenceController"/>
 
     <Preference
@@ -59,6 +61,7 @@
         android:key="toggle_inversion_preference"
         android:persistent="false"
         android:title="@string/accessibility_display_inversion_preference_title"
+        settings:keywords="@string/keywords_color_inversion"
         settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
 
     <SwitchPreference
