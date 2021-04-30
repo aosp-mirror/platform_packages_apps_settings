@@ -60,8 +60,6 @@ public class ScreenTimeoutSettingsTest {
     private ScreenTimeoutSettings mSettings;
     private Context mContext;
     private ContentResolver mContentResolver;
-
-    @Mock
     private Resources mResources;
 
     @Mock
@@ -85,7 +83,9 @@ public class ScreenTimeoutSettingsTest {
         FakeFeatureFactory.setupForTest();
         mContext = spy(getApplicationContext());
         mSettings = spy(new ScreenTimeoutSettings());
+        mSettings.mContext = mContext;
         mContentResolver = mContext.getContentResolver();
+        mResources = spy(mContext.getResources());
 
         doReturn(TIMEOUT_ENTRIES).when(mResources).getStringArray(R.array.screen_timeout_entries);
         doReturn(TIMEOUT_VALUES).when(mResources).getStringArray(R.array.screen_timeout_entries);

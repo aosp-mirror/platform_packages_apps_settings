@@ -156,7 +156,7 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         }
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "config " + CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL
-                + "=" + featureEnableStatus + " for subId=" + mSubId);
+                + "=" + featureEnableStatus + " for subId=" + subscriptionId);
         return (featureEnableStatus != null) && featureEnableStatus.booleanValue();
     }
 
