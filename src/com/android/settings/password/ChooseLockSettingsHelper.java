@@ -359,21 +359,22 @@ public final class ChooseLockSettingsHelper {
                 requestGatekeeperPasswordHandle);
 
         intent.setClassName(SETTINGS_PACKAGE_NAME, activityClass.getName());
+
+        Intent inIntent = mFragment != null ? mFragment.getActivity().getIntent() :
+                mActivity.getIntent();
+        copyInternalExtras(inIntent, intent);
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            copyOptionalExtras(inIntent, intent);
             if (mFragment != null) {
-                copyOptionalExtras(mFragment.getActivity().getIntent(), intent);
                 mFragment.startActivity(intent);
             } else {
-                copyOptionalExtras(mActivity.getIntent(), intent);
                 mActivity.startActivity(intent);
             }
         } else {
             if (mFragment != null) {
-                copyInternalExtras(mFragment.getActivity().getIntent(), intent);
                 mFragment.startActivityForResult(intent, request);
             } else {
-                copyInternalExtras(mActivity.getIntent(), intent);
                 mActivity.startActivityForResult(intent, request);
             }
         }

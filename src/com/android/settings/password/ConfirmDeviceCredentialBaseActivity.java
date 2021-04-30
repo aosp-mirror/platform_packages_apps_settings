@@ -30,6 +30,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 
+import com.google.android.setupdesign.util.ThemeHelper;
+
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 
     private static final String STATE_IS_KEYGUARD_LOCKED = "STATE_IS_KEYGUARD_LOCKED";
@@ -74,6 +76,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.NORMAL;
         }
+        ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedState);
 
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
