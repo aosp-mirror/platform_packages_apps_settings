@@ -48,6 +48,12 @@
             settings:allowDividerAbove="true"
             settings:userRestriction="no_config_date_time"/>
 
+        <!-- This preference gets removed if location-based time zone detection is not supported -->
+        <SwitchPreference
+            android:key="location_time_zone_detection"
+            android:title="@string/location_time_zone_detection_toggle_title"
+            settings:controller="com.android.settings.datetime.LocationTimeZoneDetectionPreferenceController"/>
+
         <com.android.settingslib.RestrictedPreference
             android:key="timezone"
             android:title="@string/date_time_set_timezone_title"
@@ -56,12 +62,6 @@
             settings:userRestriction="no_config_date_time"
             settings:keywords="@string/keywords_time_zone"/>
 
-        <!-- This preference gets removed if location-based time zone detection is not supported -->
-        <SwitchPreference
-            android:key="location_time_zone_detection"
-            android:title="@string/location_time_zone_detection_toggle_title"
-            settings:controller="com.android.settings.datetime.LocationTimeZoneDetectionPreferenceController"
-        />
     </PreferenceCategory>
 
     <PreferenceCategory
