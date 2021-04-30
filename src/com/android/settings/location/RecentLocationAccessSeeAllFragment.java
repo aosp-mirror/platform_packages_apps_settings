@@ -16,6 +16,7 @@
 package com.android.settings.location;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,6 +37,7 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
 
     private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 1;
     private static final int MENU_HIDE_SYSTEM = Menu.FIRST + 2;
+    private static final String EXTRA_SHOW_SYSTEM = "show_system";
 
     private boolean mShowSystem = false;
     private MenuItem mShowSystemMenu;
@@ -57,6 +59,23 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
         if (profileType != 0) {
             mController.setProfileType(profileType);
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mShowSystem = savedInstanceState.getBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
+        }
+        if (mController != null) {
+            mController.setShowSystem(mShowSystem);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
     }
 
     @Override
