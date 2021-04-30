@@ -425,8 +425,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Om jou vingerafdruk te gebruik om jou foon te ontsluit, kan minder veilig as \'n sterk patroon of PIN wees"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Hoe dit werk"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Vingerafdrukslot skep \'n unieke model van jou vingerafdruk om jou met stawing te herken. Jy sal jou vingerafdruk uit verskillende posisies afneem om hierdie vingerafdrukmodel tydens opstelling te skep."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="1871569220720675048">"Die foon sal ook prente van jou onlangse interaksie met Vingerafdrukslot gebruik om jou vingerafdrukmodel op te dateer. Jou vingerafdrukprente en -model word veilig op jou foon geberg en verlaat nooit die foon nie. Alle verwerking vind veilig op jou foon plaas."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Jy kan enige tyd in Instellings jou vingerafdrukprente en -model uitvee of Vingerafdrukslot afskakel. Vingerafdrukprente en -modelle word veilig op jou foon geberg totdat jy hulle uitvee."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Verander elke keer die posisie van jou vinger so effens"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Maak die ikoon met die middel van jou vingerafdruk toe"</string>
@@ -793,11 +795,15 @@
     <string name="device_details_title" msgid="1155622417516195481">"Toestelbesonderhede"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Toestel se Bluetooth-adres: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vergeet toestel?"</string>
+    <string name="remove_association_button" msgid="5004208145998061135">"Verwyder assosiasie"</string>
+    <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Ontkoppel program?"</string>
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Jou foon sal nie meer met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> saamgebind wees nie"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Jou tablet sal nie meer met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> saamgebind wees nie"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Jou toestel sal nie meer met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> saamgebind wees nie"</string>
+    <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g>-program sal nie meer aan jou <xliff:g id="DEVICE_NAME">%2$s</xliff:g> koppel nie"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sal nie meer saamgebind word met enige toestel wat aan hierdie rekening gekoppel is nie"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Vergeet toestel"</string>
+    <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ontkoppel program"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Koppel aan…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sal van mediaoudio ontkoppel word."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>sal van vryhandse oudio ontkoppel word."</string>
@@ -1335,7 +1341,7 @@
     <string name="screen_timeout_title" msgid="785134393520893049">"Skerm skakel af"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> se onaktiwiteit"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Muurpapier"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"Style en muurpapiere"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Muurpapier en styl"</string>
     <string name="wallpaper_dashboard_summary" msgid="772304840285426509">"Kleure, programrooster"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Verstek"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Gepasmaak"</string>
@@ -2774,17 +2780,16 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Batteryvlak vir die afgelope 24 u."</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Programgebruik vir die afgelope 24 u."</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Stelselgebruik vir die afgelope 24 u."</string>
-    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
-    <skip />
-    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
-    <skip />
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Stelselgebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Programgebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"vm."</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"nm."</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: minder as \'n min."</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Agtergrond: minder as \'n min."</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totaal: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Agtergrond: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"Batterygebruikdata is benaderd"</string>
+    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Proses-statistieke"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Bleeksiel-statistieke vir lopende prosesse"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Berginggebruik"</string>
@@ -5043,7 +5048,7 @@
     <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="506057560516483258">"Voorkeurnetwerkmodus: NR/LTE/TDSCDMA/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4337061745216872524">"Voorkeurnetwerkmodus: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3396717432149544381">"Voorkeurnetwerkmodus: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
-    <string name="network_recommended" msgid="4665525658003183348">" (aanbeveel)"</string>
+    <string name="network_5G_recommended" msgid="4769018972369031538">"5G (aanbeveel)"</string>
     <string name="network_lte" msgid="2449425437381668780">"LTE (aanbeveel)"</string>
     <string name="network_4G" msgid="9018841362928321047">"4G (aanbeveel)"</string>
     <string name="label_available" msgid="5305726869955838606">"Beskikbare netwerke"</string>
@@ -5397,7 +5402,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Wys \'n boodskap wanneer programme toegang het tot teks, prente of ander inhoud wat jy gekopieer het"</string>
     <string name="all_apps" msgid="3054120149509114789">"Alle programme"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Moenie toelaat nie"</string>
-    <string name="uwb_settings_title" msgid="2292158556760642919">"Ultrawye band (UWB)"</string>
+    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultrawye band (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Help om die relatiewe posisie te bepaal van toestelle in die omtrek wat UWB het"</string>
-    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"Skakel vliegtuigmodus af om UWB te gebruik."</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Skakel vliegtuigmodus af om UWB te gebruik"</string>
 </resources>
