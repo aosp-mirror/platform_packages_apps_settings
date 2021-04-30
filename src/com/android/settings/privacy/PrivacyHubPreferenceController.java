@@ -35,6 +35,6 @@ public final class PrivacyHubPreferenceController extends BasePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-                PROPERTY_PRIVACY_HUB_ENABLED, false) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+                PROPERTY_PRIVACY_HUB_ENABLED, true) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
