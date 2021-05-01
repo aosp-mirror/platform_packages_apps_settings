@@ -425,8 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Oplåsning med fingeraftryk kan være mindre sikker end et stærkt mønster eller en stærk pinkode"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Sådan fungerer det"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Oplåsning med fingeraftryk opretter en unik model af dit fingeraftryk, så din telefon kan genkende dig ved godkendelse. Du opretter denne fingeraftryksmodel under konfigurationen ved at tage billeder af dit fingeraftryk fra forskellige vinkler."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="1871569220720675048">"Telefonen anvender også billeder fra dine interaktioner med oplåsning med fingeraftryk for at opdatere din fingeraftryksmodel. Dine fingeraftryksbilleder og din fingeraftryksmodel gemmes på sikker vis på din telefon, og de forlader aldrig din telefon. Al behandling sker på sikker vis på din telefon."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Du kan til enhver tid slette dine fingeraftryksbilleder og din fingeraftryksmodel eller deaktivere Oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og fingeraftryksmodellen gemmes på telefonen, indtil du sletter dem."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Telefonen anvender også billeder fra dine interaktioner med oplåsning med fingeraftryk for at opdatere din fingeraftryksmodel. De billeder, der bruges til at oprette din fingeraftryksmodel, gemmes aldrig, men fingeraftryksmodellen gemmes på sikker vis på din telefon, og den forlader aldrig telefonen. Al behandling sker på sikker vis på din telefon."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Du kan til enhver tid slette din fingeraftryksmodel eller deaktivere oplåsning med fingeraftryk i Indstillinger. Fingeraftryksmodeller gemmes på telefonen, indtil du sletter dem."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Flyt din finger en smule hver gang"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Dæk ikonet med midten af dit fingeraftryk"</string>
@@ -793,11 +793,15 @@
     <string name="device_details_title" msgid="1155622417516195481">"Enhedsoplysninger"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Enhedens Bluetooth-adresse: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vil du glemme denne enhed?"</string>
+    <string name="remove_association_button" msgid="5004208145998061135">"Fjern tilknytning"</string>
+    <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vil du fjerne tilknytningen til appen?"</string>
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Din telefon vil ikke længere være parret med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Din tablet vil ikke længere være parret med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Din enhed vil ikke længere være parret med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Appen <xliff:g id="APP_NAME">%1$s</xliff:g> opretter ikke længere forbindelse til <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vil ikke længere være parret med enheder, der er knyttet til denne konto"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Glem enhed"</string>
+    <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Fjern tilknytning til app"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Opret forbindelse til..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> afbrydes fra medielyd."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> afbrydes fra håndfri lyd."</string>
@@ -1335,7 +1339,7 @@
     <string name="screen_timeout_title" msgid="785134393520893049">"Skærmen slukker"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> med inaktivitet"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Baggrund"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"Layout og baggrunde"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Baggrund og stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="772304840285426509">"Farver, appgitter"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Standard"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Tilpasset"</string>
@@ -2774,17 +2778,15 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Batteriniveau for de seneste 24 timer"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Appforbrug for de seneste 24 timer"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Systemforbrug for de seneste 24 timer"</string>
-    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
-    <skip />
-    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
-    <skip />
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Systemforbrug for <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Appforbrug for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"om morgenen"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"om aftenen"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"I alt: Under et minut"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Baggrund: Under et minut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"I alt: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Baggrund: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"Dataene for batteriforbrug er omtrentlige"</string>
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Data om batteriforbrug er omtrentlige, og måler ikke forbrug, når telefonen oplades"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"hukommelse brugt"</string>
@@ -5043,7 +5045,7 @@
     <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="506057560516483258">"Foretrukken netværkstilstand: NR/LTE/TDSCDMA/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4337061745216872524">"Foretrukken netværkstilstand: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3396717432149544381">"Foretrukken netværkstilstand: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
-    <string name="network_recommended" msgid="4665525658003183348">" (anbefales)"</string>
+    <string name="network_5G_recommended" msgid="4769018972369031538">"5G (anbefalet)"</string>
     <string name="network_lte" msgid="2449425437381668780">"LTE (anbefalet)"</string>
     <string name="network_4G" msgid="9018841362928321047">"4G (anbefalet)"</string>
     <string name="label_available" msgid="5305726869955838606">"Tilgængelige netværk"</string>
@@ -5397,7 +5399,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Vis en meddelelse, når apps får adgang til tekst, billeder eller andet indhold, du har kopieret"</string>
     <string name="all_apps" msgid="3054120149509114789">"Alle apps"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Tillad ikke"</string>
-    <string name="uwb_settings_title" msgid="2292158556760642919">"Ultrabredbånd (UWB, Ultra-Wideband)"</string>
+    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultrabredbånd (UWB, Ultra-Wideband)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Hjælper med at identificere den relative position af enheder i nærheden, som har UWB"</string>
-    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"Deaktiver flytilstand for at bruge UWB."</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Deaktiver flytilstand for at bruge UWB"</string>
 </resources>
