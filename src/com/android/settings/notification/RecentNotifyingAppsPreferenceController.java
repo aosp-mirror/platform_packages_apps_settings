@@ -149,6 +149,9 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     @VisibleForTesting
     void refreshUi(Context prefContext) {
+        ((PrimarySwitchPreference) mCategory.findPreference(KEY_PLACEHOLDER + 1)).setChecked(true);
+        ((PrimarySwitchPreference) mCategory.findPreference(KEY_PLACEHOLDER + 2)).setChecked(true);
+        ((PrimarySwitchPreference) mCategory.findPreference(KEY_PLACEHOLDER + 3)).setChecked(true);
         ThreadUtils.postOnBackgroundThread(() -> {
             reloadData();
             final List<NotifyingApp> recentApps = getDisplayableRecentAppList();
