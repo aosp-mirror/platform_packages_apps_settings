@@ -425,8 +425,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"L\'uso dell\'impronta per sbloccare il telefono potrebbe essere meno sicuro dell\'uso di una sequenza o un PIN efficaci"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Come funziona"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Lo sblocco con l\'impronta crea un modello univoco della tua impronta per poterti riconoscere durante l\'autenticazione. Per creare il modello dell\'impronta, durante la configurazione dovrai acquisire immagini della tua impronta da diverse posizioni."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="1871569220720675048">"Il telefono userà inoltre immagini acquisite durante le tue interazioni con la funzionalità di sblocco con l\'impronta per aggiornare il modello dell\'impronta. Le immagini e il modello dell\'impronta vengono memorizzati in modo sicuro sul tuo telefono e non vengono mai trasferiti dal dispositivo. L\'intera elaborazione avviene in modo sicuro sul tuo telefono."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Puoi eliminare le immagini e il modello dell\'impronta o disattivare lo sblocco con l\'impronta in qualsiasi momento nelle Impostazioni. Le immagini e i modelli delle impronte rimangono memorizzati sul telefono finché non li elimini."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Cambia leggermente la posizione del dito ogni volta"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Appoggia il dito sull\'icona mettendo a contatto la parte centrale dell\'impronta"</string>
@@ -793,11 +795,15 @@
     <string name="device_details_title" msgid="1155622417516195481">"Dettagli dispositivo"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Indirizzo Bluetooth del dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Eliminare il dispositivo?"</string>
+    <string name="remove_association_button" msgid="5004208145998061135">"Rimuovi associazione"</string>
+    <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vuoi scollegare l\'app?"</string>
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Il telefono non sarà più accoppiato con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Il tablet non sarà più accoppiato con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Il dispositivo non sarà più accoppiato con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"L\'app <xliff:g id="APP_NAME">%1$s</xliff:g> non si collegherà più a <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Il dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> non sarà più accoppiato con alcun dispositivo collegato a questo account"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Elimina dispositivo"</string>
+    <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Scollega app"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Connessione a…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio multimediale."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio delle cuffie."</string>
@@ -1335,7 +1341,7 @@
     <string name="screen_timeout_title" msgid="785134393520893049">"Lo schermo si spegne"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Dopo <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> di inattività"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Sfondo"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"Stili e sfondi"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Sfondo e stile"</string>
     <string name="wallpaper_dashboard_summary" msgid="772304840285426509">"Colori, griglia delle app"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Predefinito"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Personalizzato"</string>
@@ -1667,7 +1673,7 @@
     <string name="reset_network_desc" msgid="1112523764899788246">"Verranno reimpostate tutte le impostazioni di rete, tra cui:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dati mobili"</li>\n<li>"Bluetooth"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"Resetta"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Resetta SIM scaricate"</string>
-    <string name="reset_esim_desc" msgid="3662444090563399131">"Gli eventuali piani di servizio mobile non verranno annullati. Per scaricare SIM sostitutive, contatta il tuo operatore."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Gli eventuali piani tariffari non verranno annullati. Per scaricare SIM sostitutive, contatta il tuo operatore."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Reimposta"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Ripristinare tutte le impostazioni della rete? Questa azione non può essere annullata."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Reimpostare tutte le impostazioni di rete e resettare tutte le SIM scaricate? Questa azione non può essere annullata."</string>
@@ -2774,17 +2780,16 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Livello della batteria nelle ultime 24 ore"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Utilizzo da parte delle app nelle ultime 24 ore"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Utilizzo da parte del sistema nelle ultime 24 ore"</string>
-    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
-    <skip />
-    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
-    <skip />
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Utilizzo da parte del sistema per <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Utilizzo da parte delle app per <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"AM"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"PM"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Totale: meno di un minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: meno di un minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totale: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Background: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="3241109085756092490">"I dati sull\'utilizzo batteria sono approssimativi"</string>
+    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiche sui processi"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiche tecniche sui processi in esecuzione"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memoria usata"</string>
@@ -5043,7 +5048,7 @@
     <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="506057560516483258">"Modalità di rete preferita: NR/LTE/TDSCDMA/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4337061745216872524">"Modalità di rete preferita: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3396717432149544381">"Modalità di rete preferita: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
-    <string name="network_recommended" msgid="4665525658003183348">" (consigliata)"</string>
+    <string name="network_5G_recommended" msgid="4769018972369031538">"5G (opzione consigliata)"</string>
     <string name="network_lte" msgid="2449425437381668780">"LTE (opzione consigliata)"</string>
     <string name="network_4G" msgid="9018841362928321047">"4G (opzione consigliata)"</string>
     <string name="label_available" msgid="5305726869955838606">"Reti disponibili"</string>
@@ -5397,7 +5402,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Viene mostrato un messaggio quando le app accedono a testo, immagini o altri contenuti che hai copiato"</string>
     <string name="all_apps" msgid="3054120149509114789">"Tutte le app"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Non consentire"</string>
-    <string name="uwb_settings_title" msgid="2292158556760642919">"UWB (Ultra-WideBand)"</string>
+    <string name="uwb_settings_title" msgid="8578498712312002231">"UWB (Ultra-WideBand)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Consente di identificare la posizione relativa dei dispositivi nelle vicinanze dotati di tecnologia UWB"</string>
-    <string name="uwb_settings_summary_airplane_mode" msgid="7090727197053081796">"Viene disattivata la modalità aereo per usare la tecnologia UWB."</string>
+    <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Viene disattivata la modalità aereo per usare la tecnologia UWB"</string>
 </resources>
