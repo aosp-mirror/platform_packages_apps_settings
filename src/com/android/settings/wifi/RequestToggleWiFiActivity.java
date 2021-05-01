@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -68,7 +70,7 @@ public class RequestToggleWiFiActivity extends AlertActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         mWiFiManager = getSystemService(WifiManager.class);
 
         setResult(Activity.RESULT_CANCELED);
