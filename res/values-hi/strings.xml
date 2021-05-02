@@ -425,10 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"फ़ोन अनलॉक करने के लिए, आपका फ़िंगरप्रिंट किसी मज़बूत पैटर्न या पिन के मुकाबले कम सुरक्षित हो सकता है"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"यह कैसे काम करता है"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"फ़िंगरप्रिंट अनलॉक सुविधा की मदद से, आपके फ़िंगरप्रिंट का एक खास मॉडल बनाया जाता है. इससे, पुष्टि करते समय आपके फ़िंगरप्रिंट की पहचान करने में मदद मिलती है. फ़िंगरप्रिंट अनलॉक को सेट अप करते समय, फ़िंगरप्रिंट का यह मॉडल बनाने के लिए, आपको अलग-अलग ऐंगल से अपनी उंगली की इमेज कैप्चर करनी होगी."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"फ़ोन, फ़िंगरप्रिंट से अनलॉक करने की सुविधा का इस्तेमाल करने पर मिले फ़िंगरप्रिंट का भी इस्तेमाल करेगा, ताकि फ़िंगरप्रिंट का मॉडल अपडेट किया जा सके. आपके फ़िंगरप्रिंट का मॉडल बनाते समय इस्तेमाल की गई इमेज कभी भी सेव नहीं की जाती हैं. हालांकि, फ़िंगरप्रिंट का मॉडल आपके फ़ोन में सुरक्षित तरीके से सेव किया जाता है और इसे किसी के साथ शेयर नहीं किया जाता. इसे पूरी तरह से आपके फ़ोन में ही सुरक्षित तरीके से प्रोसेस किया जाता है."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"आप जब चाहें, सेटिंग में जाकर अपने फ़िंगरप्रिंट का मॉडल मिटा सकते हैं या फ़िंगरप्रिंट से अनलॉक करने की सुविधा बंद कर सकते हैं. फ़िंगरप्रिंट के मॉडल, फ़ोन में तब तक सेव रहते हैं, जब तक आप उन्हें नहीं मिटाते."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"उंगली को हर बार थोड़ी अलग स्थिति में रखकर, कोशिश करें"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"अपनी उंगली से आइकॉन को पूरी तरह कवर करें"</string>
@@ -1627,6 +1625,8 @@
     <string name="apn_settings" msgid="4295467389400441299">"ऐक्सेस पॉइंट नाम"</string>
     <string name="apn_edit" msgid="2003683641840248741">"ऐक्सेस पॉइंट में बदलाव करें"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"सेट नहीं है"</string>
+    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
+    <skip />
     <string name="apn_name" msgid="6677695784108157953">"नाम"</string>
     <string name="apn_apn" msgid="5812828833797458602">"एपीएन"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"प्रॉक्सी"</string>
@@ -2731,18 +2731,26 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"बैटरी खर्च"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"पूरी तरह चार्ज होने के बाद से अब तक"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"बैटरी खर्च को मैनेज करें"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"बैटरी का कुल इस्तेमाल <xliff:g id="TIME_0">^1</xliff:g> तक हुआ • पिछले 24 घंटे में, बैकग्राउंड में बैटरी का इस्तेमाल <xliff:g id="TIME_1">^2</xliff:g> तक हुआ"</string>
-    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"<xliff:g id="TIME_PERIOD">^3</xliff:g> के बीच बैटरी के कुल <xliff:g id="TIME_0">^1</xliff:g> के इस्तेमाल में से • <xliff:g id="TIME_1">^2</xliff:g> तक बैकग्राउंड में इसका इस्तेमाल हुआ"</string>
+    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
+    <skip />
+    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
+    <skip />
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"पिछले 24 घंटे में, बैटरी का कुल इस्तेमाल एक मिनट से भी कम हुआ"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g> के बीच, बैटरी का इस्तेमाल एक मिनट से भी कम हुआ"</string>
-    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"पिछले 24 घंटे में, बैकग्राउंड में बैटरी का इस्तेमाल एक मिनट से भी कम हुआ"</string>
-    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"<xliff:g id="TIME_PERIOD">^1</xliff:g> के बीच, बैकग्राउंड में बैटरी का इस्तेमाल एक मिनट से भी कम हुआ"</string>
+    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
+    <skip />
     <string name="battery_total_usage" msgid="2662725472478185867">"पिछले 24 घंटे में, बैटरी का कुल इस्तेमाल <xliff:g id="TIME">^1</xliff:g> तक हुआ"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g> के बीच, बैटरी का इस्तेमाल <xliff:g id="TIME_0">^1</xliff:g> तक हुआ"</string>
-    <string name="battery_background_usage" msgid="8375606680462132248">"पिछले 24 घंटे में, बैकग्राउंड में बैटरी का इस्तेमाल <xliff:g id="TIME">^1</xliff:g> तक हुआ"</string>
-    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_PERIOD">^2</xliff:g> के बीच, बैकग्राउंड में बैटरी का इस्तेमाल <xliff:g id="TIME_0">^1</xliff:g> तक हुआ"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"बैटरी का कुल इस्तेमाल <xliff:g id="TIME">^1</xliff:g> तक हुआ • पिछले 24 घंटे में, बैकग्राउंड में बैटरी का इस्तेमाल एक मिनट से भी कम हुआ"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"<xliff:g id="TIME_PERIOD">^2</xliff:g> के बीच बैटरी के कुल <xliff:g id="TIME_0">^1</xliff:g> के इस्तेमाल में से • बैकग्राउंड में इसका इस्तेमाल एक मिनट से भी कम हुआ"</string>
+    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
+    <skip />
     <string name="battery_not_usage" msgid="8417901856028909227">"पिछले 24 घंटे में, बैटरी का इस्तेमाल नहीं हुआ"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"डिवाइस के इस्तेमाल के हिसाब से अनुमान लगाया गया है कि फ़ोन की बैटरी और कितनी देर चलेगी"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"अनुमानित बचा हुआ समय"</string>
@@ -2788,8 +2796,7 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"बैकग्राउंड में इस्तेमाल होने का समय: एक मिनट से कम"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"इस्तेमाल का कुल समय: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"बैकग्राउंड में इस्तेमाल होने का समय: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
-    <skip />
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"बैटरी खर्च से जुड़ा डेटा अनुमानित होता है. साथ ही, फ़ोन के चार्ज होने के दौरान, बैटरी खर्च से जुड़े डेटा का अनुमान नहीं लगाया जाता"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"प्रोसेस के आंकड़े"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"चल रही प्रक्रिया के बारे में आकंड़े"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"मेमोरी उपयोग"</string>
