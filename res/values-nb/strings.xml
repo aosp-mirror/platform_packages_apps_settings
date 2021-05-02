@@ -425,10 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Bruk av fingeravtrykket for å låse opp telefonen kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Slik fungerer det"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Opplåsing med fingeravtrykk lager en unik modell av fingeravtrykket ditt for å gjenkjenne deg under autentisering. For å opprette denne fingeravtrykkmodellen under konfigureringen tar du bilder av fingeravtrykket ditt fra forskjellige posisjoner."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Telefonen bruker også bilder fra interaksjonene dine med opplåsing med fingeravtrykk for å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage fingeravtrykkmodellen, lagres aldri, men fingeravtrykkmodellen lagres på en sikker måte på telefonen og forlater aldri telefonen. All behandling skjer på en sikker måte på telefonen."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Du kan når som helst slette fingeravtrykkmodellen din eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkmodellene lagres på telefonen til du sletter dem."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Endre posisjonen til fingeren litt hver gang"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Dekk ikonet med midten av fingeravtrykket ditt"</string>
@@ -1627,6 +1625,8 @@
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Rediger tilgangspunkt"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Ikke angitt"</string>
+    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
+    <skip />
     <string name="apn_name" msgid="6677695784108157953">"Navn"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN-navn"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Proxy-tjener"</string>
@@ -2731,18 +2731,26 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batteribruk"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Siden sist batteriet var fulladet"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Styr batteribruk"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunnen de siste 24 t"</string>
-    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunnen <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
+    <skip />
+    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
+    <skip />
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Totalt mindre enn ett minutt de siste 24 timene"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Totalt mindre enn ett minutt <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"Mindre enn ett minutt i bakgrunnen de siste 24 timene"</string>
-    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"Mindre enn ett minutt i bakgrunnen <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
+    <skip />
     <string name="battery_total_usage" msgid="2662725472478185867">"<xliff:g id="TIME">^1</xliff:g> totalt de siste 24 timene"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> totalt <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_background_usage" msgid="8375606680462132248">"<xliff:g id="TIME">^1</xliff:g> i bakgrunnen de siste 24 timene"</string>
-    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_0">^1</xliff:g> i bakgrunnen <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"<xliff:g id="TIME">^1</xliff:g> totalt • mindre enn ett minutt i bakgrunnen de siste 24 timene"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"<xliff:g id="TIME_0">^1</xliff:g> totalt • mindre enn et minutt i bakgrunnen <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
+    <skip />
     <string name="battery_not_usage" msgid="8417901856028909227">"Ingen bruk de siste 24 timene"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Beregnet gjenværende batteritid er basert på måten du bruker enheten på"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Anslått tid som er igjen"</string>
@@ -2788,8 +2796,7 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Bakgrunn: mindre enn ett minutt"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totalt: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Bakgrunn: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
-    <skip />
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Data om batteribruk er omtrentlig og måler ikke bruk når telefonen lader"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Prosess-statistikk"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nerdete statistikk om prosesser som er i gang"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Minnebruk"</string>

@@ -425,10 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"သင့်လက်ဗွေကိုသုံး၍ ဖုန်းကိုလော့ခ်ဖွင့်ခြင်းသည် ခိုင်မာသည့်ပုံစံ (သို့) ပင်နံပါတ်လောက် လုံခြုံမှုမရှိနိုင်ပါ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"အလုပ်လုပ်ပုံ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"‘လက်ဗွေသုံးသော့ဖွင့်ခြင်း’ က အထောက်အထားစိစစ်နေစဉ်တွင် သင့်ကိုမှတ်မိစေရန် သင့်လက်ဗွေ၏ သီးခြားနမူနာတစ်ခုကို ပြုလုပ်သည်။ စနစ်ထည့်သွင်းနေစဉ် ဤလက်ဗွေနမူနာကို ပြုလုပ်ရန်အတွက် သင့်လက်ဗွေကို ရှုထောင့်အမျိုးမျိုးမှ ပုံများရိုက်ကူးမည်။"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"သင့်လက်ဗွေနမူနာကို အပ်ဒိတ်လုပ်ရန် ဖုန်းသည် သင်၏ ‘လက်ဗွေသုံး သော့ဖွင့်ခြင်း’ နှင့် ပြန်လှန်တုံ့ပြန်မှုမှ ပုံများကိုလည်း သုံးပါမည်။ သင်၏လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ၊ သို့သော် လက်ဗွေနမူနာကို သင့်ဖုန်းတွင် လုံခြုံစွာသိမ်းပြီး ဖုန်းအတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး သင့်ဖုန်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"‘ဆက်တင်များ’ တွင် သင့်လက်ဗွေနမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး သော့ဖွင့်ခြင်း‘ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေနမူနာများကို သင်မဖျက်မချင်း ဖုန်းတွင်သိမ်းထားသည်။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"အကြိမ်တိုင်း သင့်လက်ချောင်း၏တည်နေရာကို အနည်းငယ်ပြောင်းပါ"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"သင့်လက်ဗွေ၏အလယ်ဖြင့် သင်္ကေတကို ဖုံးအုပ်ပါ"</string>
@@ -1627,6 +1625,8 @@
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"အဝင်ပွိုင့် ပြင်ဆင်ရန်"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"သတ်မှတ်မထားပါ"</string>
+    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
+    <skip />
     <string name="apn_name" msgid="6677695784108157953">"အမည်"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"ပရောက်စီ"</string>
@@ -2731,18 +2731,26 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"ဘက်ထရီ အသုံးပြုမှု"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"အားဖြည့်ပြီးချိန်ကတည်းက"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"ဘက်ထရီအသုံးပြုမှုကို စီမံခန့်ခွဲရန်"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"စုစုပေါင်း <xliff:g id="TIME_0">^1</xliff:g> • ပြီးခဲ့သော ၂၄ နာရီအတွက် နောက်ခံအသုံးပြုမှု <xliff:g id="TIME_1">^2</xliff:g>"</string>
-    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"စုစုပေါင်း <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g> အတွက် နောက်ခံအချိန်က <xliff:g id="TIME_1">^2</xliff:g> ရှိသည်"</string>
+    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
+    <skip />
+    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
+    <skip />
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"ပြီးခဲ့သော ၂၄ နာရီအတွက် စုစုပေါင်းက တစ်မိနစ်အောက် ရှိသည်"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g> အတွက် စုစုပေါင်းက တစ်မိနစ်အောက် ရှိသည်"</string>
-    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"ပြီးခဲ့သော ၂၄ နာရီအတွက် နောက်ခံအချိန်က တစ်မိနစ်အောက် ရှိသည်"</string>
-    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"<xliff:g id="TIME_PERIOD">^1</xliff:g> အတွက် နောက်ခံအချိန်က တစ်မိနစ်အောက် ရှိသည်"</string>
+    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
+    <skip />
     <string name="battery_total_usage" msgid="2662725472478185867">"ပြီးခဲ့သော ၂၄ နာရီအတွက် စုစုပေါင်း <xliff:g id="TIME">^1</xliff:g> ရှိသည်"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g> အတွက် စုစုပေါင်းက <xliff:g id="TIME_0">^1</xliff:g> ရှိသည်"</string>
-    <string name="battery_background_usage" msgid="8375606680462132248">"ပြီးခဲ့သော ၂၄ နာရီအတွက် နောက်ခံအချိန်က <xliff:g id="TIME">^1</xliff:g> ရှိသည်"</string>
-    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_PERIOD">^2</xliff:g> အတွက် နောက်ခံအချိန်က <xliff:g id="TIME_0">^1</xliff:g> ရှိသည်"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"စုစုပေါင်း <xliff:g id="TIME">^1</xliff:g> • ပြီးခဲ့သော ၂၄ နာရီအတွက် နောက်ခံအချိန်က တစ်မိနစ်အောက် ရှိသည်"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"စုစုပေါင်း <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g> အတွက် နောက်ခံအချိန်က တစ်မိနစ်အောက် ရှိသည်"</string>
+    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
+    <skip />
     <string name="battery_not_usage" msgid="8417901856028909227">"ပြီးခဲ့သော ၂၄ နာရီအတွက် အသုံးပြုမှု မရှိပါ"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"ဘက်ထရီလက်ကျန်ခန့်မှန်းချက်သည် သင့်စက်၏ အသုံးပြုမှုအပေါ် အခြေခံပါသည်"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"ခန့်မှန်း ကျန်ရှိချိန်"</string>
@@ -2788,8 +2796,7 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"နောက်ခံအချိန်- တစ်မိနစ်ထက် နည်းသည်"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"စုစုပေါင်း- <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"နောက်ခံအချိန်- <xliff:g id="TIME">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
-    <skip />
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"ဘက်ထရီ အသုံးပြုမှုဒေတာသည် ခန့်မှန်းခြေဖြစ်ပြီး ဖုန်းအားသွင်းနေသည့်အခါ အသုံးပြုမှုကို မတိုင်းတာပါ"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"လုပ်ငန်းစဉ်ကိန်းဂဏန်းများ"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"အလုပ်လုပ်ခြင်းလုပ်ငန်းစဉ်များအကြောင်း ပညာရှင်အဆင့်စာရင်း"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"မှတ်ဉာဏ်သုံးခြင်း"</string>
@@ -4753,7 +4760,7 @@
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"အကူအညီအတွက် ခေါ်ဆိုပါ"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"အကူအညီအတွက် ခေါ်ဆိုရန်နံပါတ်"</string>
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>။ ပြောင်းရန်တို့ပါ"</string>
-    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"အရေးပေါ်မဟုတ်သောနံပါတ်ကို ရိုက်ထည့်ပါက-\n • အရေးပေါ် SOS ကို သုံးရန် သင့်စက်ကို လော့ခ်ဖွင့်ထားရမည်\n • သင်၏ခေါ်ဆိုမှုကို ဖြေကြားမည်မဟုတ်ပါ"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"အရေးပေါ်မဟုတ်သောနံပါတ်ကို ရိုက်ထည့်ပါက-\n • အရေးပေါ် SOS ကို သုံးရန် သင့်စက်ကို လော့ခ်ဖွင့်ထားရမည်\n • သင်၏ခေါ်ဆိုမှုကို ဖြေကြားရန် မသေချာပါ"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"သတိပေးချက်အတွက် လက်ဗွေပွတ်ဆွဲပါ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"လက်ဗွေပွတ်ဆွဲခြင်း"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"အကြောင်းကြားချက်များကို ကြည့်ရန် ဖုန်း၏ နောက်ကျောဘက်ရှိ လက်ဗွေ အာရုံခံကိရိယာပေါ်တွင် အောက်သို့ ပွတ်ဆွဲပါ။"</string>

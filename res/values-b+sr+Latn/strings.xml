@@ -429,10 +429,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Korišćenje otiska prsta za otključavanje telefona može da bude manje bezbedno nego jak šablon ili PIN."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Princip rada"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Otključavanje pomoću otiska prsta pravi jedinstveni model vašeg otiska prsta da bi vas prepoznalo tokom potvrde identiteta. Da biste napravili taj model otiska prsta tokom podešavanja, morate da slikate otisak prsta iz različitih položaja."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Telefon će koristiti i slike iz vaših interakcija sa Otključavanjem pomoću otiska prsta da bi ažurirao model otiska prsta. Slike koje se koriste za pravljenje modela otiska prsta nikada se ne čuvaju, ali se model otiska prsta bezbedno čuva na telefonu i ostaje samo na njemu. Ceo proces obrade se bezbedno odvija na telefonu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Možete da izbrišete model otiska prsta ili da isključite Otključavanje pomoću otiska prsta u bilo kom trenutku u Podešavanjima. Modeli otisaka prstiju se čuvaju na telefonu dok ih ne izbrišete."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Svaki put lagano promenite položaj prsta"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Pokrijte ikonu sredinom vašeg otiska prsta"</string>
@@ -1648,6 +1646,7 @@
     <string name="apn_settings" msgid="4295467389400441299">"Nazivi pristupnih tačaka"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Izmena pristupne tačke"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nije podešeno"</string>
+    <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Nije podešeno"</string>
     <string name="apn_name" msgid="6677695784108157953">"Naziv"</string>
     <string name="apn_apn" msgid="5812828833797458602">"Naziv pristupne tačke"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Proksi"</string>
@@ -2769,18 +2768,18 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Potrošnja baterije"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Od potpunog punjenja"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Upravljanje potrošnjom baterije"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> u pozadini za prethodna 24 sata"</string>
-    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> korišćenja u pozadini u periodu <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <string name="battery_total_and_bg_usage" msgid="7808189707718974808">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> u pozadini za prethodna 24 sata"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="7938034545486503036">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> korišćenja u pozadini u periodu <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Ukupno manje od minuta u poslednja 24 sata"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Ukupno manje od minuta u periodu <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"Manje od minuta korišćenja u pozadini u poslednja 24 sata"</string>
-    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"Manje od minuta korišćenja u pozadini u periodu <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_bg_usage_less_minute" msgid="90932588167097641">"Manje od minuta korišćenja u pozadini u poslednja 24 sata"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Manje od minuta korišćenja u pozadini u periodu <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_total_usage" msgid="2662725472478185867">"Ukupno <xliff:g id="TIME">^1</xliff:g> u poslednja 24 sata"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> u periodu <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_background_usage" msgid="8375606680462132248">"<xliff:g id="TIME">^1</xliff:g> korišćenja u pozadini u poslednja 24 sata"</string>
-    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_0">^1</xliff:g> korišćenja u pozadini u periodu <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"Ukupno <xliff:g id="TIME">^1</xliff:g> • Manje od minuta korišćenja u pozadini u poslednja 24 sata"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> • Manje od minuta korišćenja u pozadini u periodu <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_bg_usage" msgid="2983050956970659511">"<xliff:g id="TIME">^1</xliff:g> korišćenja u pozadini u poslednja 24 sata"</string>
+    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> korišćenja u pozadini u periodu <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="4158686147238415647">"Ukupno <xliff:g id="TIME">^1</xliff:g> • Manje od minuta korišćenja u pozadini u poslednja 24 sata"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="8677646584258593395">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> • Manje od minuta korišćenja u pozadini u periodu <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="8417901856028909227">"Nema korišćenja u poslednja 24 sata"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Procena preostalog nivoa napunjenosti baterije je zasnovana na korišćenju uređaja"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Procenjeno preostalo vreme"</string>
@@ -2826,8 +2825,7 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Pozadina: manje od minut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Ukupno: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Pozadina: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
-    <skip />
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Podaci o potrošnji baterije su približni i ne mere potrošnju kada se telefon puni"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistika procesa"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Štreberska statistika o aktivnim procesima"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Iskorišćenost memorije"</string>
