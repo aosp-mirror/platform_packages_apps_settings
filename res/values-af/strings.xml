@@ -425,10 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Om jou vingerafdruk te gebruik om jou foon te ontsluit, kan minder veilig as \'n sterk patroon of PIN wees"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Hoe dit werk"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Vingerafdrukslot skep \'n unieke model van jou vingerafdruk om jou met stawing te herken. Jy sal jou vingerafdruk uit verskillende posisies afneem om hierdie vingerafdrukmodel tydens opstelling te skep."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Die foon sal ook prente uit jou onlangse interaksie met vingerafdrukslot gebruik om jou vingerafdrukmodel op te dateer. Prente wat gebruik word om jou vingerafdrukmodel te skep, word nooit geberg nie. Die vingerafdrukmodel word egter veilig op jou foon geberg en verlaat nooit die foon nie. Alle verwerking vind veilig op jou foon plaas."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Jy kan enige tyd in Instellings jou vingerafdrukmodel uitvee of vingerafdrukslot afskakel. Vingerafdrukmodelle word op die foon geberg totdat jy hulle uitvee."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Verander elke keer die posisie van jou vinger so effens"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Maak die ikoon met die middel van jou vingerafdruk toe"</string>
@@ -1627,6 +1625,7 @@
     <string name="apn_settings" msgid="4295467389400441299">"Toegangspuntname"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redigeer toegangspunt"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nie gestel nie"</string>
+    <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Nie gestel nie"</string>
     <string name="apn_name" msgid="6677695784108157953">"Naam"</string>
     <string name="apn_apn" msgid="5812828833797458602">"Toegangspuntnaam"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Volmag"</string>
@@ -2731,18 +2730,18 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batterygebruik"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Sedert battery volgelaai is"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Bestuur batterygebruik"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> in totaal • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond in afgelope 24 uur"</string>
-    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <string name="battery_total_and_bg_usage" msgid="7808189707718974808">"<xliff:g id="TIME_0">^1</xliff:g> in totaal • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond in afgelope 24 uur"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="7938034545486503036">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Totaal was minder as \'n minuut in afgelope 24 uur"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Totaal was minder as \'n minuut in <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"Minder as \'n minuut op agtergrond gebruik in afgelope 24 uur"</string>
-    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"Minder as \'n minuut op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_bg_usage_less_minute" msgid="90932588167097641">"Minder as \'n minuut op agtergrond gebruik in afgelope 24 uur"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Minder as \'n minuut op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_total_usage" msgid="2662725472478185867">"Altesame <xliff:g id="TIME">^1</xliff:g> in afgelope 24 uur"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Altesame <xliff:g id="TIME_0">^1</xliff:g> in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_background_usage" msgid="8375606680462132248">"<xliff:g id="TIME">^1</xliff:g> op agtergrond gebruik in afgelope 24 uur"</string>
-    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_0">^1</xliff:g> op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"Altesame <xliff:g id="TIME">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik in afgelope 24 uur"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_bg_usage" msgid="2983050956970659511">"<xliff:g id="TIME">^1</xliff:g> op agtergrond gebruik in afgelope 24 uur"</string>
+    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="4158686147238415647">"Altesame <xliff:g id="TIME">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik in afgelope 24 uur"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="8677646584258593395">"Altesame <xliff:g id="TIME_0">^1</xliff:g> • minder as \'n minuut op agtergrond gebruik in <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="8417901856028909227">"Nie in afgelope 24 uur gebruik nie"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Skatting van oorblywende batterytyd word op jou toestelgebruik gegrond"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geskatte tyd oor"</string>
@@ -2788,8 +2787,7 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Agtergrond: minder as \'n min."</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totaal: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Agtergrond: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
-    <skip />
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Battery se gebruikdata is benaderd en meet nie gebruik terwyl die foon laai nie"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Proses-statistieke"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Bleeksiel-statistieke vir lopende prosesse"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Berginggebruik"</string>
