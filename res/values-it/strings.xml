@@ -425,10 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"L\'uso dell\'impronta per sbloccare il telefono potrebbe essere meno sicuro dell\'uso di una sequenza o un PIN efficaci"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Come funziona"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Lo sblocco con l\'impronta crea un modello univoco della tua impronta per poterti riconoscere durante l\'autenticazione. Per creare il modello dell\'impronta, durante la configurazione dovrai acquisire immagini della tua impronta da diverse posizioni."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Il telefono userà inoltre immagini acquisite durante le tue interazioni con la funzionalità di sblocco con l\'impronta per aggiornare il modello dell\'impronta. Le immagini usate per creare il modello dell\'impronta non vengono mai memorizzate, ma il modello viene memorizzato in modo sicuro sul tuo telefono e non viene mai trasferito dal dispositivo. L\'intera elaborazione avviene in modo sicuro sul tuo telefono."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Puoi eliminare il modello dell\'impronta o disattivare lo sblocco con l\'impronta in qualsiasi momento nelle Impostazioni. I modelli delle impronte rimangono memorizzati sul telefono finché non li elimini."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Cambia leggermente la posizione del dito ogni volta"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Appoggia il dito sull\'icona mettendo a contatto la parte centrale dell\'impronta"</string>
@@ -1627,6 +1625,8 @@
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Modifica punto di accesso"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nessuna impostazione"</string>
+    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
+    <skip />
     <string name="apn_name" msgid="6677695784108157953">"Nome"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Proxy"</string>
@@ -2731,18 +2731,26 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizzo batteria"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Dalla ricarica completa"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestisci utilizzo batteria"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"Totale: <xliff:g id="TIME_0">^1</xliff:g> • In background: <xliff:g id="TIME_1">^2</xliff:g> nelle ultime 24 ore"</string>
-    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"Totale: <xliff:g id="TIME_0">^1</xliff:g> • In background: <xliff:g id="TIME_1">^2</xliff:g> nell\'intervallo di tempo <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
+    <skip />
+    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
+    <skip />
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Totale: meno di un minuto nelle ultime 24 ore"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Totale: meno di un minuto nell\'intervallo di tempo <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"In background: meno di un minuto nelle ultime 24 ore"</string>
-    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"In background: meno di un minuto nell\'intervallo di tempo <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
+    <skip />
     <string name="battery_total_usage" msgid="2662725472478185867">"Totale: <xliff:g id="TIME">^1</xliff:g> nelle ultime 24 ore"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Totale: <xliff:g id="TIME_0">^1</xliff:g> nell\'intervallo di tempo <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_background_usage" msgid="8375606680462132248">"In background: <xliff:g id="TIME">^1</xliff:g> nelle ultime 24 ore"</string>
-    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"In background: <xliff:g id="TIME_0">^1</xliff:g> nell\'intervallo di tempo <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"Totale: <xliff:g id="TIME">^1</xliff:g> • In background: meno di un minuto nelle ultime 24 ore"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"Totale: <xliff:g id="TIME_0">^1</xliff:g> • In background: meno di un minuto nell\'intervallo di tempo <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
+    <skip />
     <string name="battery_not_usage" msgid="8417901856028909227">"Nessun utilizzo nelle ultime 24 ore"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"La stima della batteria residua si basa sul tuo utilizzo del dispositivo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tempo residuo stimato"</string>
@@ -2788,8 +2796,7 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: meno di un minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totale: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Background: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
-    <skip />
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"I dati sull\'utilizzo della batteria sono approssimativi e l\'utilizzo non viene misurato quando il telefono è in carica"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiche sui processi"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiche tecniche sui processi in esecuzione"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memoria usata"</string>
@@ -4748,7 +4755,7 @@
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Funzionalità gestita dall\'app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Premi il tasto di accensione almeno 5 volte in rapida successione per avviare le azioni che seguono"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Attiva allarme con conto alla rovescia"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Viene riprodotto un suono forte quando viene avviata la funzionalità SOS emergenze"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"All\'avvio di SOS emergenze viene emesso un suono ad alto volume"</string>
     <string name="emergency_gesture_category_call_for_help_title" msgid="1680040129478289510">"Avvisa per chiedere aiuto"</string>
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Chiama per chiedere aiuto"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Numero da chiamare per chiedere aiuto"</string>

@@ -433,10 +433,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Отпечаток пальца может быть менее надежен, чем графический ключ или PIN-код."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Как это работает"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Функция разблокировки по отпечатку пальца создает уникальную модель вашего отпечатка, чтобы узнавать вас во время аутентификации. Для создания модели необходимо отсканировать ваш палец в разных положениях."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Для обновления модели будут использоваться изображения, получаемые во время разблокировки телефона по отпечатку пальца. Обработка снимков происходит на телефоне. Сами снимки и модель отпечатка также хранятся только на вашем устройстве и никуда не отправляются."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Вы можете в любой момент удалить модель отпечатка или отключить функцию разблокировки по отпечатку пальца в настройках. Модели отпечатка хранятся на телефоне, пока вы не удалите их."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Каждый раз немного меняйте положение пальца."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Приложите центр пальца к этому значку."</string>
@@ -1669,6 +1667,8 @@
     <string name="apn_settings" msgid="4295467389400441299">"Точки доступа"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Изменить точку доступа"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Не задано"</string>
+    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
+    <skip />
     <string name="apn_name" msgid="6677695784108157953">"Имя"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Прокси-сервер"</string>
@@ -2807,18 +2807,26 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Расход заряда"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"С момента полной зарядки"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Управление расходом заряда"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"Общее время использования: <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме: <xliff:g id="TIME_1">^2</xliff:g> за последние 24 часа"</string>
-    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"Всего <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> в фоновом режиме в период <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
+    <skip />
+    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
+    <skip />
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Всего меньше минуты за последние 24 часа"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Всего меньше минуты в период <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"В фоновом режиме меньше минуты за последние 24 часа"</string>
-    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"В фоновом режиме меньше минуты в период <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
+    <skip />
     <string name="battery_total_usage" msgid="2662725472478185867">"Всего <xliff:g id="TIME">^1</xliff:g> за последние 24 часа"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Всего <xliff:g id="TIME_0">^1</xliff:g> в период <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_background_usage" msgid="8375606680462132248">"<xliff:g id="TIME">^1</xliff:g> в фоновом режиме за последние 24 часа"</string>
-    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_0">^1</xliff:g> в фоновом режиме в период <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"Всего <xliff:g id="TIME">^1</xliff:g> • В фоновом режиме меньше минуты за последние 24 часа"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"Всего <xliff:g id="TIME_0">^1</xliff:g> • В фоновом режиме меньше минуты в период <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
+    <skip />
     <string name="battery_not_usage" msgid="8417901856028909227">"Фоновый режим не использовался за последние 24 часа"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Оставшееся время работы рассчитано с учетом того, как используется устройство."</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Расчетное время работы без подзарядки"</string>
@@ -2864,8 +2872,7 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"В фоновом режиме: меньше минуты"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Всего: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"В фоновом режиме: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
-    <skip />
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Время работы батареи указано приблизительно и не показывается во время зарядки телефона."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процессов"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика запущенных процессов"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Использование памяти"</string>
@@ -4904,12 +4911,12 @@
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Под управлением приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Быстро нажмите кнопку питания не менее пяти раз для выполнения перечисленных ниже действий"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Звуковой сигнал с обратным отсчетом"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Воспроизведение громкого звукового сигнала в начале экстренного вызова"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Включить громкий звуковой сигнал перед экстренным вызовом"</string>
     <string name="emergency_gesture_category_call_for_help_title" msgid="1680040129478289510">"Запросы о помощи"</string>
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Звонок в экстренную службу"</string>
-    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Номер экстренной службы"</string>
+    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Номер для чрезвычайных ситуаций"</string>
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Нажмите, чтобы изменить."</string>
-    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Если вместо номера экстренной службы вы ввели другой номер:\n• Чтобы совершить экстренный вызов, необходимо разблокировать устройство.\n• Ваш звонок может остаться без ответа."</string>
+    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Если вместо номера экстренной службы вы укажете другой номер:\n• Чтобы совершить экстренный вызов, будет нужно разблокировать устройство.\n• Ваш звонок может остаться без ответа."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Использовать сканер отпечатков для просмотра уведомлений"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Сканер отпечатков"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Чтобы увидеть уведомления, проведите вниз по сканеру отпечатков пальцев на задней панели телефона"</string>
