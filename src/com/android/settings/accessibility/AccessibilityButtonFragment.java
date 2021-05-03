@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -33,11 +32,6 @@ public class AccessibilityButtonFragment extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.accessibility_button_settings;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
     }
 
     @Override
