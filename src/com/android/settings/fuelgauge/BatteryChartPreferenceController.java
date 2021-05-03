@@ -66,8 +66,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting PreferenceGroup mAppListPrefGroup;
     @VisibleForTesting BatteryChartView mBatteryChartView;
     @VisibleForTesting ExpandDividerPreference mExpandDividerPreference;
-    @VisibleForTesting CategoryTitleType mCategoryTitleType =
-        CategoryTitleType.TYPE_UNKNOWN;
 
     @VisibleForTesting int[] mBatteryHistoryLevels;
     @VisibleForTesting long[] mBatteryHistoryKeys;
@@ -86,14 +84,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     final Map<String, Preference> mPreferenceCache = new HashMap<>();
     @VisibleForTesting
     final List<BatteryDiffEntry> mSystemEntries = new ArrayList<>();
-
-    /** Which component data will be shown in the screen. */
-    enum CategoryTitleType {
-        TYPE_UNKNOWN,
-        TYPE_APP_COMPONENT,
-        TYPE_SYSTEM_COMPONENT,
-        TYPE_ALL_COMPONENTS
-    }
 
     public BatteryChartPreferenceController(
             Context context, String preferenceKey,
@@ -283,7 +273,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     private void addAllPreferences() {
-        mCategoryTitleType = CategoryTitleType.TYPE_UNKNOWN;
         final List<BatteryDiffEntry> entries =
             mBatteryIndexedMap.get(Integer.valueOf(mTrapezoidIndex));
         if (entries == null) {
@@ -312,10 +301,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         // Adds app entries to the list if it is not empty.
         if (!appEntries.isEmpty()) {
             addPreferenceToScreen(appEntries);
-            mCategoryTitleType = CategoryTitleType.TYPE_APP_COMPONENT;
         }
-        // Adds the expabable divider if we have two sections data.
-        if (!appEntries.isEmpty() && !mSystemEntries.isEmpty()) {
+        // Adds the expabable divider if we have system entries data.
+        if (!mSystemEntries.isEmpty()) {
             if (mExpandDividerPreference == null) {
                 mExpandDividerPreference = new ExpandDividerPreference(mPrefContext);
                 mExpandDividerPreference.setOnExpandListener(this);
@@ -323,9 +311,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mExpandDividerPreference.setOrder(
                 mAppListPrefGroup.getPreferenceCount());
             mAppListPrefGroup.addPreference(mExpandDividerPreference);
-            mCategoryTitleType = CategoryTitleType.TYPE_ALL_COMPONENTS;
-        } else if (appEntries.isEmpty() && !mSystemEntries.isEmpty()) {
-            mCategoryTitleType = CategoryTitleType.TYPE_SYSTEM_COMPONENT;
         }
         refreshExpandUi();
     }
@@ -408,38 +393,14 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting
     void refreshCategoryTitle() {
         final String slotInformation = getSlotInformation();
-        Log.d(TAG, String.format("refreshCategoryTitle:%s slotInfo:%s",
-            mCategoryTitleType, slotInformation));
-        refreshPreferenceCategoryTitle(slotInformation);
-        refreshExpandableDividerTitle(slotInformation);
-    }
-
-    private void refreshExpandableDividerTitle(String slotInformation) {
-        if (mExpandDividerPreference == null) {
-            return;
+        Log.d(TAG, String.format("refreshCategoryTitle:%s", slotInformation));
+        if (mAppListPrefGroup != null) {
+            mAppListPrefGroup.setTitle(
+                getSlotInformation(/*isApp=*/ true, slotInformation));
         }
-        mExpandDividerPreference.setTitle(
-            mCategoryTitleType == CategoryTitleType.TYPE_ALL_COMPONENTS
-                ? getSlotInformation(/*isApp=*/ false, slotInformation)
-                : null);
-    }
-
-    private void refreshPreferenceCategoryTitle(String slotInformation) {
-        if (mAppListPrefGroup == null) {
-            return;
-        }
-        switch (mCategoryTitleType) {
-            case TYPE_APP_COMPONENT:
-            case TYPE_ALL_COMPONENTS:
-                mAppListPrefGroup.setTitle(
-                    getSlotInformation(/*isApp=*/ true, slotInformation));
-                break;
-            case TYPE_SYSTEM_COMPONENT:
-                mAppListPrefGroup.setTitle(
-                    getSlotInformation(/*isApp=*/ false, slotInformation));
-                break;
-            default:
-                mAppListPrefGroup.setTitle(R.string.battery_app_usage_for_past_24);
+        if (mExpandDividerPreference != null) {
+            mExpandDividerPreference.setTitle(
+                getSlotInformation(/*isApp=*/ false, slotInformation));
         }
     }
 
