@@ -71,15 +71,11 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     private CharSequence[] mInitialEntries;
     private CharSequence[] mInitialValues;
     private FooterPreference mPrivacyPreference;
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private SensorPrivacyManager mPrivacyManager;
 
     @VisibleForTesting
-    Context mContext;
-
-    @VisibleForTesting
     RestrictedLockUtils.EnforcedAdmin mAdmin;
-
     @VisibleForTesting
     Preference mDisableOptionsPreference;
 
@@ -101,7 +97,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = context;
         mInitialEntries = getResources().getStringArray(R.array.screen_timeout_entries);
         mInitialValues = getResources().getStringArray(R.array.screen_timeout_values);
         mAdaptiveSleepController = new AdaptiveSleepPreferenceController(context);
@@ -109,6 +104,11 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
                 context);
         mAdaptiveSleepCameraStatePreferenceController =
                 new AdaptiveSleepCameraStatePreferenceController(context);
+        mPrivacyPreference = new FooterPreference(context);
+        mPrivacyPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
+        mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
+        mPrivacyPreference.setSelectable(false);
+        mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyManager.addSensorPrivacyListener(CAMERA,
                 (sensor, enabled) -> mAdaptiveSleepController.updatePreference());
@@ -166,12 +166,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
                     (RadioButtonPreference) screen.getPreference(candidateList.size() - 1);
             preferenceWithLargestTimeout.setChecked(true);
         }
-
-        mPrivacyPreference = new FooterPreference(mContext);
-        mPrivacyPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
-        mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
-        mPrivacyPreference.setSelectable(false);
-        mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
 
         if (isScreenAttentionAvailable(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);
