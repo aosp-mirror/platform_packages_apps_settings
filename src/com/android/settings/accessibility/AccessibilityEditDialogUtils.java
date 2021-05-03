@@ -118,16 +118,16 @@ public class AccessibilityEditDialogUtils {
      * Method to show the magnification edit shortcut dialog in Magnification.
      *
      * @param context A valid context
-     * @param dialogTitle The title of magnify edit shortcut dialog
      * @param positiveBtnListener The positive button listener
      * @return A magnification edit shortcut dialog in Magnification
      */
     public static Dialog createMagnificationSwitchShortcutDialog(Context context,
-            CharSequence dialogTitle, CustomButtonsClickListener positiveBtnListener) {
+            CustomButtonsClickListener positiveBtnListener) {
         final View contentView = createSwitchShortcutDialogContentView(context);
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(contentView)
-                .setTitle(dialogTitle)
+                .setTitle(context.getString(
+                        R.string.accessibility_magnification_switch_shortcut_title))
                 .create();
         setCustomButtonsClickListener(alertDialog, contentView,
                 positiveBtnListener, /* negativeBtnListener= */ null);

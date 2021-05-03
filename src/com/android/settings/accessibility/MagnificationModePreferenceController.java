@@ -47,6 +47,7 @@ import com.android.settings.accessibility.MagnificationCapabilities.Magnificatio
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.ArrayList;
@@ -55,8 +56,9 @@ import java.util.StringJoiner;
 
 /** Controller that shows the magnification area mode summary and the preference click behavior. */
 public class MagnificationModePreferenceController extends BasePreferenceController implements
-        DialogCreatable, LifecycleObserver, OnCreate, OnSaveInstanceState {
+        DialogCreatable, LifecycleObserver, OnCreate, OnResume, OnSaveInstanceState {
 
+    static final String PREF_KEY = "screen_magnification_mode";
     private static final int DIALOG_ID_BASE = 10;
     @VisibleForTesting
     static final int DIALOG_MAGNIFICATION_MODE = DIALOG_ID_BASE + 1;
@@ -68,7 +70,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     private static final String TAG = "MagnificationModePreferenceController";
     private static final char COMPONENT_NAME_SEPARATOR = ':';
 
-    private MagnificationSettingsFragment mParentFragment;
+    private DialogHelper mDialogHelper;
     // The magnification mode in the dialog.
     private int mMode = MagnificationMode.NONE;
     private Preference mModePreference;
@@ -121,7 +123,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         mModePreference = screen.findPreference(getPreferenceKey());
         mModePreference.setOnPreferenceClickListener(preference -> {
             mMode = MagnificationCapabilities.getCapabilities(mContext);
-            mParentFragment.showDialog(DIALOG_MAGNIFICATION_MODE);
+            mDialogHelper.showDialog(DIALOG_MAGNIFICATION_MODE);
             return true;
         });
     }
@@ -131,8 +133,12 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         outState.putInt(EXTRA_MODE, mMode);
     }
 
-    public void setParentFragment(MagnificationSettingsFragment parentFragment) {
-        mParentFragment = parentFragment;
+    /**
+     * Sets {@link DialogHelper} used to show the dialog.
+     */
+    public void setDialogHelper(DialogHelper dialogHelper) {
+        mDialogHelper = dialogHelper;
+        mDialogHelper.setDialogDelegate(this);
     }
 
     @Override
@@ -207,7 +213,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         }
         mMode = modeInfo.mMagnificationMode;
         if (isTripleTapEnabled(mContext) && mMode != MagnificationMode.FULLSCREEN) {
-            mParentFragment.showDialog(DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
+            mDialogHelper.showDialog(DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
         }
     }
 
@@ -229,9 +235,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     }
 
     private Dialog createMagnificationShortCutConfirmDialog() {
-        final String title = mContext.getString(
-                R.string.accessibility_magnification_switch_shortcut_title);
-        return AccessibilityEditDialogUtils.createMagnificationSwitchShortcutDialog(mContext, title,
+        return AccessibilityEditDialogUtils.createMagnificationSwitchShortcutDialog(mContext,
                 this::onSwitchShortcutDialogButtonClicked);
     }
 
@@ -265,6 +269,21 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
 
         Settings.Secure.putString(mContext.getContentResolver(), targetKey,
                 joiner.toString());
+    }
+
+    // TODO(b/186731461): Remove it when this controller is used in DashBoardFragment only.
+    @Override
+    public void onResume() {
+        updateState(mModePreference);
+    }
+
+
+    /**
+     * An interface to help the delegate to show the dialog. It will be injected to the delegate.
+     */
+    interface DialogHelper extends DialogCreatable {
+        void showDialog(int dialogId);
+        void setDialogDelegate(DialogCreatable delegate);
     }
 
     @VisibleForTesting
