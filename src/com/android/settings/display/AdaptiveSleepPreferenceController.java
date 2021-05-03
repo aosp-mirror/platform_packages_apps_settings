@@ -49,10 +49,10 @@ public class AdaptiveSleepPreferenceController {
     public static final String PREFERENCE_KEY = "adaptive_sleep";
     private static final int DEFAULT_VALUE = 0;
     private final SensorPrivacyManager mPrivacyManager;
-    private final RestrictionUtils mRestrictionUtils;
-    private final PackageManager mPackageManager;
-    private final Context mContext;
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private RestrictionUtils mRestrictionUtils;
+    private PackageManager mPackageManager;
+    private Context mContext;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @VisibleForTesting
     RestrictedSwitchPreference mPreference;
@@ -62,6 +62,19 @@ public class AdaptiveSleepPreferenceController {
         mRestrictionUtils = restrictionUtils;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
+        mPreference = new RestrictedSwitchPreference(context);
+        mPreference.setTitle(R.string.adaptive_sleep_title);
+        mPreference.setSummary(R.string.adaptive_sleep_description);
+        mPreference.setChecked(isChecked());
+        mPreference.setKey(PREFERENCE_KEY);
+        mPreference.setOnPreferenceClickListener(preference -> {
+            final boolean isChecked = ((RestrictedSwitchPreference) preference).isChecked();
+            mMetricsFeatureProvider.action(context, SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
+                    isChecked);
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
+            return true;
+        });
         mPackageManager = context.getPackageManager();
     }
 
@@ -73,7 +86,6 @@ public class AdaptiveSleepPreferenceController {
      * Adds the controlled preference to the provided preference screen.
      */
     public void addToScreen(PreferenceScreen screen) {
-        initializePreference();
         updatePreference();
         screen.addPreference(mPreference);
     }
@@ -89,23 +101,6 @@ public class AdaptiveSleepPreferenceController {
         } else {
             mPreference.setEnabled(hasSufficientPermission(mPackageManager) && !isCameraLocked());
         }
-    }
-
-    @VisibleForTesting
-    void initializePreference() {
-        mPreference = new RestrictedSwitchPreference(mContext);
-        mPreference.setTitle(R.string.adaptive_sleep_title);
-        mPreference.setSummary(R.string.adaptive_sleep_description);
-        mPreference.setChecked(isChecked());
-        mPreference.setKey(PREFERENCE_KEY);
-        mPreference.setOnPreferenceChangeListener((preference, value) -> {
-            final boolean isChecked = (Boolean) value;
-            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
-                    isChecked);
-            Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
-            return true;
-        });
     }
 
     @VisibleForTesting
