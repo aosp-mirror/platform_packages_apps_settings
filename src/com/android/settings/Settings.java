@@ -199,10 +199,6 @@ public class Settings extends SettingsActivity {
     public static class ManageDomainUrlsActivity extends SettingsActivity { /* empty */ }
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
-    public static class MoviesStorageActivity extends SettingsActivity { /* empty */ }
-    public static class PhotosStorageActivity extends SettingsActivity {
-        /* empty */
-    }
     public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class InteractAcrossProfilesSettingsActivity extends SettingsActivity {
         /* empty */

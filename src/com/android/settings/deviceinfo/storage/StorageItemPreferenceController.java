@@ -88,10 +88,14 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     static final String TRASH_KEY = "pref_trash";
 
-    private final Uri mImagesUri;
-    private final Uri mVideosUri;
-    private final Uri mAudiosUri;
-    private final Uri mDocumentsAndOtherUri;
+    @VisibleForTesting
+    final Uri mImagesUri;
+    @VisibleForTesting
+    final Uri mVideosUri;
+    @VisibleForTesting
+    final Uri mAudiosUri;
+    @VisibleForTesting
+    final Uri mDocumentsAndOtherUri;
 
     // This value should align with the design of storage_dashboard_fragment.xml
     private static final int LAST_STORAGE_CATEGORY_PREFERENCE_ORDER = 200;
@@ -175,13 +179,13 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 launchPublicStorageIntent();
                 return true;
             case IMAGES_KEY:
-                launchImagesIntent();
+                launchActivityWithUri(mImagesUri);
                 return true;
             case VIDEOS_KEY:
-                launchVideosIntent();
+                launchActivityWithUri(mVideosUri);
                 return true;
             case AUDIOS_KEY:
-                launchAudiosIntent();
+                launchActivityWithUri(mAudiosUri);
                 return true;
             case APPS_KEY:
                 launchAppsIntent();
@@ -190,7 +194,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 launchGamesIntent();
                 return true;
             case DOCUMENTS_AND_OTHER_KEY:
-                launchDocumentsAndOtherIntent();
+                launchActivityWithUri(mDocumentsAndOtherUri);
                 return true;
             case SYSTEM_KEY:
                 final SystemInfoFragment dialog = new SystemInfoFragment();
@@ -405,29 +409,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
     }
 
-    // TODO(b/183078080): To simplify StorageItemPreferenceController, move launchxxxIntent to a
-    //                    utility object.
-    private void launchImagesIntent() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(mImagesUri);
-
-        if (intent.resolveActivity(mPackageManager) == null) {
-            final Bundle args = getWorkAnnotatedBundle(2);
-            args.putString(ManageApplications.EXTRA_CLASSNAME,
-                    Settings.PhotosStorageActivity.class.getName());
-            args.putInt(ManageApplications.EXTRA_STORAGE_TYPE,
-                    ManageApplications.STORAGE_TYPE_PHOTOS_VIDEOS);
-            intent = new SubSettingLauncher(mContext)
-                    .setDestination(ManageApplications.class.getName())
-                    .setTitleRes(R.string.storage_photos_videos)
-                    .setArguments(args)
-                    .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
-                    .toIntent();
-            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-            Utils.launchIntent(mFragment, intent);
-        } else {
-            mContext.startActivity(intent);
-        }
+    private void launchActivityWithUri(Uri dataUri) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(dataUri);
+        mContext.startActivity(intent);
     }
 
     private long getImagesSize(StorageAsyncLoader.AppsStorageResult data,
@@ -443,58 +428,12 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
     }
 
-    private void launchVideosIntent() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(mVideosUri);
-
-        if (intent.resolveActivity(mPackageManager) == null) {
-            final Bundle args = getWorkAnnotatedBundle(1);
-            args.putString(ManageApplications.EXTRA_CLASSNAME,
-                    Settings.MoviesStorageActivity.class.getName());
-            intent = new SubSettingLauncher(mContext)
-                    .setDestination(ManageApplications.class.getName())
-                    .setTitleRes(R.string.storage_movies_tv)
-                    .setArguments(args)
-                    .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
-                    .toIntent();
-            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-            Utils.launchIntent(mFragment, intent);
-        } else {
-            mContext.startActivity(intent);
-        }
-    }
-
     private long getVideosSize(StorageAsyncLoader.AppsStorageResult data,
             StorageAsyncLoader.AppsStorageResult profileData) {
         if (profileData != null) {
             return data.videoAppsSize + profileData.videoAppsSize;
         } else {
             return data.videoAppsSize;
-        }
-    }
-
-    private void launchAudiosIntent() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(mAudiosUri);
-
-        if (intent.resolveActivity(mPackageManager) == null) {
-            final Bundle args = getWorkAnnotatedBundle(4);
-            args.putString(ManageApplications.EXTRA_CLASSNAME,
-                    Settings.StorageUseActivity.class.getName());
-            args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
-            args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
-            args.putInt(ManageApplications.EXTRA_STORAGE_TYPE,
-                    ManageApplications.STORAGE_TYPE_MUSIC);
-            intent = new SubSettingLauncher(mContext)
-                    .setDestination(ManageApplications.class.getName())
-                    .setTitleRes(R.string.storage_music_audio)
-                    .setArguments(args)
-                    .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
-                    .toIntent();
-            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-            Utils.launchIntent(mFragment, intent);
-        } else {
-            mContext.startActivity(intent);
         }
     }
 
@@ -561,19 +500,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB,
                 mIsWorkProfile ? WORK_TAB : PERSONAL_TAB);
         return args;
-    }
-
-    private void launchDocumentsAndOtherIntent() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(mDocumentsAndOtherUri);
-
-        if (intent.resolveActivity(mPackageManager) == null) {
-            intent = mSvp.findEmulatedForPrivate(mVolume).buildBrowseIntent();
-            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-            Utils.launchIntent(mFragment, intent);
-        } else {
-            mContext.startActivity(intent);
-        }
     }
 
     private long getDocumentsAndOtherSize(StorageAsyncLoader.AppsStorageResult data,
