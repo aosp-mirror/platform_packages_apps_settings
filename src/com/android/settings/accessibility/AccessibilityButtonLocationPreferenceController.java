@@ -43,7 +43,7 @@ public class AccessibilityButtonLocationPreferenceController extends BasePrefere
     @Override
     public int getAvailabilityStatus() {
         return AccessibilityUtil.isGestureNavigateEnabled(mContext)
-                ? DISABLED_DEPENDENT_SETTING : AVAILABLE;
+                ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override
