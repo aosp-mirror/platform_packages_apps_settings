@@ -17,15 +17,12 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
-import android.database.MatrixCursor;
 import android.content.ContentValues;
-import android.os.BatteryConsumer;
+import android.database.MatrixCursor;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
-import android.os.SystemBatteryConsumer;
 import android.os.UserHandle;
 
 import org.junit.Before;
@@ -44,8 +41,6 @@ public final class BatteryHistEntryTest {
     private BatteryEntry mockBatteryEntry;
     @Mock
     private BatteryUsageStats mBatteryUsageStats;
-    @Mock
-    private SystemBatteryConsumer mockSystemBatteryConsumer;
 
     @Before
     public void setUp() {
@@ -65,9 +60,9 @@ public final class BatteryHistEntryTest {
         mockBatteryEntry.percent = 0.3;
         when(mockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
-        when(mockBatteryEntry.getBatteryConsumer())
-            .thenReturn(mockSystemBatteryConsumer);
-        when(mockSystemBatteryConsumer.getDrainType()).thenReturn(expectedType);
+        when(mockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
+        when(mockBatteryEntry.getConsumerType())
+                .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         final ContentValues values =
             ConvertUtils.convert(
                 mockBatteryEntry,
@@ -228,7 +223,7 @@ public final class BatteryHistEntryTest {
         assertThat(entry.mPercentOfTotal).isEqualTo(percentOfTotal);
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(1234L);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(5689L);
-        assertThat(entry.mDrainType).isEqualTo(drainType);
+        assertThat(entry.mPowerComponentId).isEqualTo(drainType);
         assertThat(entry.mConsumerType)
             .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         assertThat(entry.mBatteryLevel).isEqualTo(12);
