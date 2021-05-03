@@ -511,7 +511,7 @@ public class ManageApplications extends InstrumentedFragment
             if (storageType == STORAGE_TYPE_MUSIC) {
                 filter = new CompoundFilter(ApplicationsState.FILTER_AUDIO, filter);
             } else if (storageType == STORAGE_TYPE_DEFAULT) {
-                filter = new CompoundFilter(ApplicationsState.FILTER_OTHER_APPS, filter);
+                filter = new CompoundFilter(ApplicationsState.FILTER_APPS_EXCEPT_GAMES, filter);
             }
             return filter;
         }

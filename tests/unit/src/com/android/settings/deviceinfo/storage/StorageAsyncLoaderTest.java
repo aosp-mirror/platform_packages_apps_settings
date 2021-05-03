@@ -22,7 +22,9 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -30,20 +32,22 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.net.TrafficStats;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.SparseArray;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.android.settings.R;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -57,11 +61,11 @@ public class StorageAsyncLoaderTest {
     private static final int SECONDARY_USER_ID = 10;
     private static final String PACKAGE_NAME_1 = "com.blah.test";
     private static final String PACKAGE_NAME_2 = "com.blah.test2";
+    private static final String PACKAGE_NAME_3 = "com.blah.test3";
     private static final long DEFAULT_QUOTA = 64 * TrafficStats.MB_IN_BYTES;
 
     @Mock
     private StorageStatsSource mSource;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private PackageManager mPackageManager;
@@ -76,6 +80,7 @@ public class StorageAsyncLoaderTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mInfo = new ArrayList<>();
         mLoader = new StorageAsyncLoader(mContext, mUserManager, "id", mSource, mPackageManager);
         when(mPackageManager.getInstalledApplicationsAsUser(eq(PRIMARY_USER_ID), anyInt()))
@@ -85,6 +90,10 @@ public class StorageAsyncLoaderTest {
         mUsers.add(info);
         when(mUserManager.getUsers()).thenReturn(mUsers);
         when(mSource.getCacheQuotaBytes(anyString(), anyInt())).thenReturn(DEFAULT_QUOTA);
+        final Resources resources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(resources);
+        doReturn("content://com.android.providers.media.documents/root/videos_root")
+                .when(resources).getString(R.string.config_videos_storage_category_uri);
     }
 
     @Test
@@ -169,8 +178,8 @@ public class StorageAsyncLoaderTest {
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(11L);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(0);
+        // Code size is not included for file based video category.
+        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(10L);
     }
 
     @Test
@@ -206,7 +215,8 @@ public class StorageAsyncLoaderTest {
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(11L);
+        // Code size is not included for file based video category.
+        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(10L);
         // No code size for the second user.
         assertThat(result.get(SECONDARY_USER_ID).videoAppsSize).isEqualTo(10L);
     }
@@ -219,6 +229,18 @@ public class StorageAsyncLoaderTest {
 
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(DEFAULT_QUOTA + 11);
+    }
+
+    @Test
+    public void testAppsAreFiltered() throws Exception {
+        addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_IMAGE);
+        addPackage(PACKAGE_NAME_2, 0, 1, 10, ApplicationInfo.CATEGORY_VIDEO);
+        addPackage(PACKAGE_NAME_3, 0, 1, 10, ApplicationInfo.CATEGORY_AUDIO);
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(33L);
     }
 
     private ApplicationInfo addPackage(String packageName, long cacheSize, long codeSize,
