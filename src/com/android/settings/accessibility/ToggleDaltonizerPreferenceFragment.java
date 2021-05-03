@@ -107,7 +107,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         lists.add(KEY_PREVIEW);
         lists.add(KEY_CATEGORY_MODE);
         lists.add(KEY_GENERAL_CATEGORY);
-        lists.add(KEY_INTRODUCTION_CATEGORY);
+        lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
         return lists;
     }
 
